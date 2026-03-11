@@ -1,13 +1,46 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./NetworkInterface.tsp";
+import "./NetworkInterfaceIPConfiguration.tsp";
+import "./NetworkInterfaceTapConfiguration.tsp";
+import "./PublicIPAddress.tsp";
+import "./NetworkSecurityGroup.tsp";
+import "./ApplicationSecurityGroup.tsp";
+import "./RouteTable.tsp";
+import "./ServiceEndpointPolicy.tsp";
+import "./PrivateEndpoint.tsp";
+import "./NatGateway.tsp";
+import "./FlowLog.tsp";
+import "./VirtualNetworkTap.tsp";
+import "./PrivateLinkService.tsp";
+import "./Subnet.tsp";
+import "./BackendAddressPool.tsp";
+import "./FrontendIPConfiguration.tsp";
+import "./InboundNatRule.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Compute;
+namespace Microsoft.Network;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum Features1 {
+  applicationGateway,
+  expressRoute,
+  firewall,
+  loadBalancer,
+  networkGateway,
+  networkManager,
+  networkSecurityPerimeter,
+  networkWatcher,
+  networkingOperations,
+  virtualNetwork,
+  virtualWAN,
+}
 
 /**
  * The supported ExtendedLocation types. Currently only EdgeZone is supported in Microsoft.Network resources.
@@ -22,47 +55,47 @@ union ExtendedLocationTypes {
 }
 
 /**
- * Network protocol this rule applies to.
+ * Provisioning states of a resource.
  */
-union SecurityRuleProtocol {
+union ProvisioningState {
   string,
 
   /**
-   * Tcp
+   * Failed
    */
-  Tcp: "Tcp",
+  Failed: "Failed",
 
   /**
-   * Udp
+   * Succeeded
    */
-  Udp: "Udp",
+  Succeeded: "Succeeded",
 
   /**
-   * Icmp
+   * Canceled
    */
-  Icmp: "Icmp",
+  Canceled: "Canceled",
 
   /**
-   * Esp
+   * Creating
    */
-  Esp: "Esp",
+  Creating: "Creating",
 
   /**
-   * *
+   * Updating
    */
-  Asterisk: "*",
+  Updating: "Updating",
 
   /**
-   * Ah
+   * Deleting
    */
-  Ah: "Ah",
+  Deleting: "Deleting",
 }
 
 /**
  * The current provisioning state.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union ProvisioningState {
+union NetworkProvisioningState {
   string,
 
   /**
@@ -84,40 +117,6 @@ union ProvisioningState {
    * Failed
    */
   Failed: "Failed",
-}
-
-/**
- * Whether network traffic is allowed or denied.
- */
-union SecurityRuleAccess {
-  string,
-
-  /**
-   * Allow
-   */
-  Allow: "Allow",
-
-  /**
-   * Deny
-   */
-  Deny: "Deny",
-}
-
-/**
- * The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.
- */
-union SecurityRuleDirection {
-  string,
-
-  /**
-   * Inbound
-   */
-  Inbound: "Inbound",
-
-  /**
-   * Outbound
-   */
-  Outbound: "Outbound",
 }
 
 /**
@@ -713,6 +712,8 @@ model ExtendedLocation {
 /**
  * NetworkInterface properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model NetworkInterfacePropertiesFormat {
   /**
    * The reference to a virtual machine.
@@ -809,7 +810,7 @@ model NetworkInterfacePropertiesFormat {
    * The provisioning state of the network interface resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * WorkloadType of the NetworkInterface for BareMetal resources
@@ -852,124 +853,13 @@ model SubResource {
   id?: string;
 }
 
-
-/**
- * Network security rule.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SecurityRule extends SubResource {
-  /**
-   * Properties of the security rule.
-   */
-  properties?: SecurityRulePropertiesFormat;
-
-  /**
-   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
-   */
-  name?: string;
-
-  /**
-   * A unique read-only string that changes whenever the resource is updated.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * The type of the resource.
-   */
-  type?: string;
-}
-
-/**
- * Security rule resource.
- */
-model SecurityRulePropertiesFormat {
-  /**
-   * A description for this rule. Restricted to 140 chars.
-   */
-  description?: string;
-
-  /**
-   * Network protocol this rule applies to.
-   */
-  protocol: SecurityRuleProtocol;
-
-  /**
-   * The source port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.
-   */
-  sourcePortRange?: string;
-
-  /**
-   * The destination port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.
-   */
-  destinationPortRange?: string;
-
-  /**
-   * The CIDR or source IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from.
-   */
-  sourceAddressPrefix?: string;
-
-  /**
-   * The CIDR or source IP ranges.
-   */
-  sourceAddressPrefixes?: string[];
-
-  /**
-   * The application security group specified as source.
-   */
-  sourceApplicationSecurityGroups?: ApplicationSecurityGroup[];
-
-  /**
-   * The destination address prefix. CIDR or destination IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used.
-   */
-  destinationAddressPrefix?: string;
-
-  /**
-   * The destination address prefixes. CIDR or destination IP ranges.
-   */
-  destinationAddressPrefixes?: string[];
-
-  /**
-   * The application security group specified as destination.
-   */
-  destinationApplicationSecurityGroups?: ApplicationSecurityGroup[];
-
-  /**
-   * The source port ranges.
-   */
-  sourcePortRanges?: string[];
-
-  /**
-   * The destination port ranges.
-   */
-  destinationPortRanges?: string[];
-
-  /**
-   * The network traffic is allowed or denied.
-   */
-  access: SecurityRuleAccess;
-
-  /**
-   * The priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.
-   */
-  priority: int32;
-
-  /**
-   * The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.
-   */
-  direction: SecurityRuleDirection;
-
-  /**
-   * The provisioning state of the security rule resource.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-}
-
-
 /**
  * Common resource representation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model Resource {
   /**
    * Resource ID.
@@ -1000,71 +890,168 @@ model Resource {
   tags?: Record<string>;
 }
 
-
-
-
 /**
- * Route resource.
+ * Reference to another subresource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Route extends SubResource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model SubResourceModel {
   /**
-   * Properties of the route.
+   * Resource ID.
    */
-  properties?: RoutePropertiesFormat;
+  id?: string;
 
   /**
-   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   * Name of the resource.
    */
   name?: string;
 
   /**
-   * A unique read-only string that changes whenever the resource is updated.
+   * Type of the resource.
    */
   @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * The type of the resource.
-   */
   type?: string;
 }
 
 /**
- * Route resource.
+ * Properties of the subnet.
  */
-model RoutePropertiesFormat {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
+model SubnetPropertiesFormat {
   /**
-   * The destination CIDR to which the route applies.
+   * The address prefix for the subnet.
    */
   addressPrefix?: string;
 
   /**
-   * The type of Azure hop the packet should be sent to.
+   * List of address prefixes for the subnet.
    */
-  nextHopType: RouteNextHopType;
+  addressPrefixes?: string[];
 
   /**
-   * The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance.
+   * The reference to the NetworkSecurityGroup resource.
    */
-  nextHopIpAddress?: string;
+  networkSecurityGroup?: NetworkSecurityGroup;
 
   /**
-   * The provisioning state of the route resource.
+   * The reference to the RouteTable resource.
+   */
+  routeTable?: RouteTable;
+
+  /**
+   * Nat gateway associated with this subnet.
+   */
+  natGateway?: SubResource;
+
+  /**
+   * An array of service endpoints.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  serviceEndpoints?: ServiceEndpointPropertiesFormat[];
+
+  /**
+   * An array of service endpoint policies.
+   */
+  serviceEndpointPolicies?: ServiceEndpointPolicy[];
+
+  /**
+   * An array of references to private endpoints.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  privateEndpoints?: PrivateEndpoint[];
 
   /**
-   * A value indicating whether this route overrides overlapping BGP routes regardless of LPM.
+   * An array of references to the network interface IP configurations using subnet.
    */
   @visibility(Lifecycle.Read)
-  hasBgpOverride?: boolean;
+  ipConfigurations?: IPConfiguration[];
+
+  /**
+   * Array of IP configuration profiles which reference this subnet.
+   */
+  @visibility(Lifecycle.Read)
+  ipConfigurationProfiles?: IPConfigurationProfile[];
+
+  /**
+   * Array of IpAllocation which reference this subnet.
+   */
+  ipAllocations?: SubResource[];
+
+  /**
+   * An array of references to the external resources using subnet.
+   */
+  @visibility(Lifecycle.Read)
+  resourceNavigationLinks?: ResourceNavigationLink[];
+
+  /**
+   * An array of references to services injecting into this subnet.
+   */
+  @visibility(Lifecycle.Read)
+  serviceAssociationLinks?: ServiceAssociationLink[];
+
+  /**
+   * An array of references to the delegations on the subnet.
+   */
+  delegations?: Delegation[];
+
+  /**
+   * A read-only string identifying the intention of use for this subnet based on delegations and other user-defined properties.
+   */
+  @visibility(Lifecycle.Read)
+  purpose?: string;
+
+  /**
+   * The provisioning state of the subnet resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NetworkProvisioningState;
+
+  /**
+   * Enable or Disable apply network policies on private end point in the subnet.
+   */
+  privateEndpointNetworkPolicies?: VirtualNetworkPrivateEndpointNetworkPolicies = VirtualNetworkPrivateEndpointNetworkPolicies.Disabled;
+
+  /**
+   * Enable or Disable apply network policies on private link service in the subnet.
+   */
+  privateLinkServiceNetworkPolicies?: VirtualNetworkPrivateLinkServiceNetworkPolicies = VirtualNetworkPrivateLinkServiceNetworkPolicies.Enabled;
+
+  /**
+   * Application gateway IP configurations of virtual network resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  applicationGatewayIPConfigurations?: ApplicationGatewayIPConfiguration[];
+
+  /**
+   * Set this property to Tenant to allow sharing subnet with other subscriptions in your AAD tenant. This property can only be set if defaultOutboundAccess is set to false, both properties can only be set if subnet is empty.
+   */
+  sharingScope?: SharingScope;
+
+  /**
+   * Set this property to false to disable default outbound connectivity for all VMs in the subnet.
+   */
+  defaultOutboundAccess?: boolean;
+
+  /**
+   * A list of IPAM Pools for allocating IP address prefixes.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ipamPoolPrefixAllocations?: IpamPoolPrefixAllocation[];
+
+  /**
+   * Reference to an existing service gateway.
+   */
+  serviceGateway?: SubResource;
 }
 
 /**
  * The service endpoint properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model ServiceEndpointPropertiesFormat {
   /**
    * The type of the endpoint service.
@@ -1085,19 +1072,20 @@ model ServiceEndpointPropertiesFormat {
    * The provisioning state of the service endpoint resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
-
 /**
- * Service Endpoint policy definitions.
+ * IP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ServiceEndpointPolicyDefinition extends SubResource {
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
+model IPConfiguration extends SubResource {
   /**
-   * Properties of the service endpoint policy definition.
+   * Properties of the IP configuration.
    */
-  properties?: ServiceEndpointPolicyDefinitionPropertiesFormat;
+  properties?: IPConfigurationPropertiesFormat;
 
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
@@ -1109,188 +1097,14 @@ model ServiceEndpointPolicyDefinition extends SubResource {
    */
   @visibility(Lifecycle.Read)
   etag?: string;
-
-  /**
-   * The type of the resource.
-   */
-  type?: string;
 }
-
-/**
- * Service Endpoint policy definition resource.
- */
-model ServiceEndpointPolicyDefinitionPropertiesFormat {
-  /**
-   * A description for this rule. Restricted to 140 chars.
-   */
-  description?: string;
-
-  /**
-   * Service endpoint name.
-   */
-  service?: string;
-
-  /**
-   * A list of service resources.
-   */
-  serviceResources?: string[];
-
-  /**
-   * The provisioning state of the service endpoint policy definition resource.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-}
-
-
-/**
- * PrivateLinkServiceConnection resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PrivateLinkServiceConnection extends SubResource {
-  /**
-   * Properties of the private link service connection.
-   */
-  properties?: PrivateLinkServiceConnectionProperties;
-
-  /**
-   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
-   */
-  name?: string;
-
-  /**
-   * The resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * A unique read-only string that changes whenever the resource is updated.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-}
-
-/**
- * Properties of the PrivateLinkServiceConnection.
- */
-model PrivateLinkServiceConnectionProperties {
-  /**
-   * The provisioning state of the private link service connection resource.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /**
-   * The resource id of private link service.
-   */
-  privateLinkServiceId?: string;
-
-  /**
-   * The ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to.
-   */
-  groupIds?: string[];
-
-  /**
-   * A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars.
-   */
-  requestMessage?: string;
-
-  /**
-   * A collection of read-only information about the state of the connection to the remote resource.
-   */
-  privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
-}
-
-/**
- * A collection of information about the state of the connection between service consumer and provider.
- */
-model PrivateLinkServiceConnectionState {
-  /**
-   * Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.
-   */
-  status?: string;
-
-  /**
-   * The reason for approval/rejection of the connection.
-   */
-  description?: string;
-
-  /**
-   * A message indicating if changes on the service provider require any updates on the consumer.
-   */
-  actionsRequired?: string;
-}
-
-/**
- * Contains custom Dns resolution configuration from customer.
- */
-model CustomDnsConfigPropertiesFormat {
-  /**
-   * Fqdn that resolves to private endpoint ip address.
-   */
-  fqdn?: string;
-
-  /**
-   * A list of private ip addresses of the private endpoint.
-   */
-  ipAddresses?: string[];
-}
-
-/**
- * An IP Configuration of the private endpoint.
- */
-model PrivateEndpointIPConfiguration {
-  /**
-   * Properties of private endpoint IP configurations.
-   */
-  properties?: PrivateEndpointIPConfigurationProperties;
-
-  /**
-   * The name of the resource that is unique within a resource group.
-   */
-  name?: string;
-
-  /**
-   * The resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * A unique read-only string that changes whenever the resource is updated.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-}
-
-/**
- * Properties of an IP Configuration of the private endpoint.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PrivateEndpointIPConfigurationProperties {
-  /**
-   * The ID of a group obtained from the remote resource that this private endpoint should connect to.
-   */
-  groupId?: string;
-
-  /**
-   * The member name of a group obtained from the remote resource that this private endpoint should connect to.
-   */
-  memberName?: string;
-
-  /**
-   * A private ip address obtained from the private endpoint's subnet.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  privateIPAddress?: string;
-}
-
 
 /**
  * Properties of IP configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model IPConfigurationPropertiesFormat {
   /**
    * The private IP address of the IP configuration.
@@ -1318,13 +1132,15 @@ model IPConfigurationPropertiesFormat {
    * The provisioning state of the IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * SKU of a public IP address.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model PublicIPAddressSku {
   /**
    * Name of a public IP address SKU.
@@ -1341,6 +1157,8 @@ model PublicIPAddressSku {
  * Public IP address properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model PublicIPAddressPropertiesFormat {
   /**
    * The public IP address allocation method.
@@ -1401,7 +1219,7 @@ model PublicIPAddressPropertiesFormat {
    * The provisioning state of the public IP address resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The service public IP address of the public IP address resource.
@@ -1433,6 +1251,8 @@ model PublicIPAddressPropertiesFormat {
  * Contains FQDN of the DNS record associated with the public IP address.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model PublicIPAddressDnsSettings {
   /**
    * The domain name label. The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system.
@@ -1458,6 +1278,8 @@ model PublicIPAddressDnsSettings {
 /**
  * Contains the DDoS protection settings of the public IP.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model DdosSettings {
   /**
    * The DDoS protection mode of the public IP
@@ -1473,6 +1295,8 @@ model DdosSettings {
 /**
  * Contains the IpTag associated with the object.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model IpTag {
   /**
    * The IP tag type. Example: FirstPartyUsage.
@@ -1485,12 +1309,43 @@ model IpTag {
   tag?: string;
 }
 
+/**
+ * IP configuration profile child resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
+model IPConfigurationProfile extends SubResource {
+  /**
+   * Properties of the IP configuration profile.
+   */
+  properties?: IPConfigurationProfilePropertiesFormat;
 
+  /**
+   * The name of the resource. This name can be used to access the resource.
+   */
+  name?: string;
+
+  /**
+   * Sub Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
 
 /**
  * IP configuration profile properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model IPConfigurationProfilePropertiesFormat {
   /**
    * The reference to the subnet resource to create a container network interface ip configuration.
@@ -1501,13 +1356,50 @@ model IPConfigurationProfilePropertiesFormat {
    * The provisioning state of the IP configuration profile resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
+/**
+ * ResourceNavigationLink resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
+model ResourceNavigationLink extends SubResource {
+  /**
+   * Resource navigation link properties format.
+   */
+  properties?: ResourceNavigationLinkFormat;
+
+  /**
+   * Name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  name?: string;
+
+  /**
+   * Resource navigation link identifier.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
 
 /**
  * Properties of ResourceNavigationLink.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model ResourceNavigationLinkFormat {
   /**
    * Resource type of the linked resource.
@@ -1523,13 +1415,44 @@ model ResourceNavigationLinkFormat {
    * The provisioning state of the resource navigation link resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
+/**
+ * ServiceAssociationLink resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
+model ServiceAssociationLink extends SubResource {
+  /**
+   * Resource navigation link properties format.
+   */
+  properties?: ServiceAssociationLinkPropertiesFormat;
+
+  /**
+   * Name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  name?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
 
 /**
  * Properties of ServiceAssociationLink.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model ServiceAssociationLinkPropertiesFormat {
   /**
    * Resource type of the linked resource.
@@ -1545,7 +1468,7 @@ model ServiceAssociationLinkPropertiesFormat {
    * The provisioning state of the service association link resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * If true, the resource can be deleted.
@@ -1558,10 +1481,40 @@ model ServiceAssociationLinkPropertiesFormat {
   locations?: string[];
 }
 
+/**
+ * Details the service to which the subnet is delegated.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
+model Delegation extends SubResource {
+  /**
+   * Properties of the subnet.
+   */
+  properties?: ServiceDelegationPropertiesFormat;
+
+  /**
+   * The name of the resource that is unique within a subnet. This name can be used to access the resource.
+   */
+  name?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource type.
+   */
+  type?: string;
+}
 
 /**
  * Properties of a service delegation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model ServiceDelegationPropertiesFormat {
   /**
    * The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers).
@@ -1578,14 +1531,45 @@ model ServiceDelegationPropertiesFormat {
    * The provisioning state of the service delegation resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
+/**
+ * IP configuration of an application gateway. Currently 1 public and 1 private IP configuration is allowed.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.applicationGateway)
+model ApplicationGatewayIPConfiguration extends SubResource {
+  /**
+   * Properties of the application gateway IP configuration.
+   */
+  properties?: ApplicationGatewayIPConfigurationPropertiesFormat;
+
+  /**
+   * Name of the IP configuration that is unique within an Application Gateway.
+   */
+  name?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Type of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
 
 /**
  * Properties of IP configuration of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.applicationGateway)
 model ApplicationGatewayIPConfigurationPropertiesFormat {
   /**
    * Reference to the subnet resource. A subnet from where application gateway gets its private address.
@@ -1596,12 +1580,14 @@ model ApplicationGatewayIPConfigurationPropertiesFormat {
    * The provisioning state of the application gateway IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * IpamPool prefix allocation reference.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model IpamPoolPrefixAllocation {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   pool?: IpamPoolPrefixAllocationPool;
@@ -1619,82 +1605,13 @@ model IpamPoolPrefixAllocation {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model IpamPoolPrefixAllocationPool {
   /**
    * Resource id of the associated Azure IpamPool resource.
    */
   id?: Azure.Core.armResourceIdentifier;
-}
-
-
-/**
- * Parameters that define the retention policy for flow log.
- */
-model RetentionPolicyParameters {
-  /**
-   * Number of days to retain flow log records.
-   */
-  days?: int32 = 0;
-
-  /**
-   * Flag to enable/disable retention.
-   */
-  enabled?: boolean = false;
-}
-
-/**
- * Parameters that define the flow log format.
- */
-model FlowLogFormatParameters {
-  /**
-   * The file type of flow log.
-   */
-  type?: FlowLogFormatType;
-
-  /**
-   * The version (revision) of the flow log.
-   */
-  version?: int32;
-}
-
-/**
- * Parameters that define the configuration of traffic analytics.
- */
-model TrafficAnalyticsProperties {
-  /**
-   * Parameters that define the configuration of traffic analytics.
-   */
-  networkWatcherFlowAnalyticsConfiguration?: TrafficAnalyticsConfigurationProperties;
-}
-
-/**
- * Parameters that define the configuration of traffic analytics.
- */
-model TrafficAnalyticsConfigurationProperties {
-  /**
-   * Flag to enable/disable traffic analytics.
-   */
-  enabled?: boolean;
-
-  /**
-   * The resource guid of the attached workspace.
-   */
-  workspaceId?: string;
-
-  /**
-   * The location of the attached workspace.
-   */
-  workspaceRegion?: string;
-
-  /**
-   * Resource Id of the attached workspace.
-   */
-  workspaceResourceId?: string;
-
-  /**
-   * The interval in minutes which would decide how frequently TA service should do flow analytics.
-   */
-  trafficAnalyticsInterval?: int32;
 }
 
 /**
@@ -1744,6 +1661,8 @@ model Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidenti
  * Properties of IP configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model NetworkInterfaceIPConfigurationPropertiesFormat {
   /**
    * The reference to gateway load balancer frontend IP.
@@ -1778,9 +1697,10 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
   /**
    * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @maxValue(128)
   @minValue(1)
-  privateIPAddressPrefixLength?: int32;
+  privateIPAddressPrefixLength?: int32 | null;
 
   /**
    * The private IP address allocation method.
@@ -1816,7 +1736,7 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
    * The provisioning state of the network interface IP configuration.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * PrivateLinkConnection properties for the network interface.
@@ -1825,15 +1745,116 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
   privateLinkConnectionProperties?: NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties;
 }
 
+/**
+ * Properties of Frontend IP Configuration of the load balancer.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.loadBalancer)
+model FrontendIPConfigurationPropertiesFormat {
+  /**
+   * An array of references to inbound rules that use this frontend IP.
+   */
+  @visibility(Lifecycle.Read)
+  inboundNatRules?: SubResource[];
 
+  /**
+   * An array of references to inbound pools that use this frontend IP.
+   */
+  @visibility(Lifecycle.Read)
+  inboundNatPools?: SubResource[];
 
+  /**
+   * An array of references to outbound rules that use this frontend IP.
+   */
+  @visibility(Lifecycle.Read)
+  outboundRules?: SubResource[];
 
+  /**
+   * An array of references to load balancing rules that use this frontend IP.
+   */
+  @visibility(Lifecycle.Read)
+  loadBalancingRules?: SubResource[];
 
+  /**
+   * The private IP address of the IP configuration.
+   */
+  privateIPAddress?: string;
 
+  /**
+   * The Private IP allocation method.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  privateIPAllocationMethod?: IPAllocationMethod;
+
+  /**
+   * Whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  privateIPAddressVersion?: IPVersion;
+
+  /**
+   * The reference to the subnet resource.
+   */
+  subnet?: Subnet;
+
+  /**
+   * The reference to the Public IP resource.
+   */
+  publicIPAddress?: PublicIPAddress;
+
+  /**
+   * The reference to the Public IP Prefix resource.
+   */
+  publicIPPrefix?: SubResource;
+
+  /**
+   * The reference to gateway load balancer frontend IP.
+   */
+  gatewayLoadBalancer?: SubResource;
+
+  /**
+   * The provisioning state of the frontend IP configuration resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NetworkProvisioningState;
+}
+
+/**
+ * Backend Address Pool of an application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.applicationGateway)
+model ApplicationGatewayBackendAddressPool extends SubResource {
+  /**
+   * Properties of the application gateway backend address pool.
+   */
+  properties?: ApplicationGatewayBackendAddressPoolPropertiesFormat;
+
+  /**
+   * Name of the backend address pool that is unique within an Application Gateway.
+   */
+  name?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Type of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
 
 /**
  * Properties of Backend Address Pool of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.applicationGateway)
 model ApplicationGatewayBackendAddressPoolPropertiesFormat {
   /**
    * Collection of references to IPs defined in network interfaces.
@@ -1853,12 +1874,14 @@ model ApplicationGatewayBackendAddressPoolPropertiesFormat {
    * The provisioning state of the backend address pool resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Backend address of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.applicationGateway)
 model ApplicationGatewayBackendAddress {
   /**
    * Fully qualified domain name (FQDN).
@@ -1871,11 +1894,86 @@ model ApplicationGatewayBackendAddress {
   ipAddress?: string;
 }
 
+/**
+ * Properties of the backend address pool.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.loadBalancer)
+model BackendAddressPoolPropertiesFormat {
+  /**
+   * The location of the backend address pool.
+   */
+  location?: string;
 
+  /**
+   * An array of gateway load balancer tunnel interfaces.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tunnelInterfaces?: GatewayLoadBalancerTunnelInterface[];
+
+  /**
+   * An array of backend addresses.
+   */
+  loadBalancerBackendAddresses?: LoadBalancerBackendAddress[];
+
+  /**
+   * An array of references to IP addresses defined in network interfaces.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  backendIPConfigurations?: NetworkInterfaceIPConfiguration[];
+
+  /**
+   * An array of references to load balancing rules that use this backend address pool.
+   */
+  @visibility(Lifecycle.Read)
+  loadBalancingRules?: SubResource[];
+
+  /**
+   * A reference to an outbound rule that uses this backend address pool.
+   */
+  @visibility(Lifecycle.Read)
+  outboundRule?: SubResource;
+
+  /**
+   * An array of references to outbound rules that use this backend address pool.
+   */
+  @visibility(Lifecycle.Read)
+  outboundRules?: SubResource[];
+
+  /**
+   * An array of references to inbound NAT rules that use this backend address pool.
+   */
+  @visibility(Lifecycle.Read)
+  inboundNatRules?: SubResource[];
+
+  /**
+   * The provisioning state of the backend address pool resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NetworkProvisioningState;
+
+  /**
+   * Amount of seconds Load Balancer waits for before sending RESET to client and backend address.
+   */
+  drainPeriodInSeconds?: int32;
+
+  /**
+   * A reference to a virtual network.
+   */
+  virtualNetwork?: SubResource;
+
+  /**
+   * Backend address synchronous mode for the backend pool
+   */
+  syncMode?: SyncMode;
+}
 
 /**
  * Gateway load balancer tunnel interface of a load balancer backend address pool.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.loadBalancer)
 model GatewayLoadBalancerTunnelInterface {
   /**
    * Port of gateway load balancer tunnel interface.
@@ -1901,6 +1999,8 @@ model GatewayLoadBalancerTunnelInterface {
 /**
  * Load balancer backend addresses.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.loadBalancer)
 model LoadBalancerBackendAddress {
   /**
    * Properties of load balancer backend address pool.
@@ -1916,6 +2016,8 @@ model LoadBalancerBackendAddress {
 /**
  * Properties of the load balancer backend addresses.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.loadBalancer)
 model LoadBalancerBackendAddressPropertiesFormat {
   /**
    * Reference to an existing virtual network.
@@ -1962,6 +2064,8 @@ model LoadBalancerBackendAddressPropertiesFormat {
 /**
  * Individual port mappings for inbound NAT rule created for backend pool.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.loadBalancer)
 model NatRulePortMapping {
   /**
    * Name of inbound NAT rule.
@@ -1979,12 +2083,84 @@ model NatRulePortMapping {
   backendPort?: int32;
 }
 
+/**
+ * Properties of the inbound NAT rule.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.loadBalancer)
+model InboundNatRulePropertiesFormat {
+  /**
+   * A reference to frontend IP addresses.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  frontendIPConfiguration?: SubResource;
 
+  /**
+   * A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backend IP.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  backendIPConfiguration?: NetworkInterfaceIPConfiguration;
+
+  /**
+   * The reference to the transport protocol used by the load balancing rule.
+   */
+  protocol?: TransportProtocol;
+
+  /**
+   * The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values range from 1 to 65534.
+   */
+  frontendPort?: int32;
+
+  /**
+   * The port used for the internal endpoint. Acceptable values range from 1 to 65535.
+   */
+  backendPort?: int32;
+
+  /**
+   * The timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to TCP.
+   */
+  idleTimeoutInMinutes?: int32;
+
+  /**
+   * Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  enableFloatingIP?: boolean;
+
+  /**
+   * Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
+   */
+  enableTcpReset?: boolean;
+
+  /**
+   * The port range start for the external endpoint. This property is used together with BackendAddressPool and FrontendPortRangeEnd. Individual inbound NAT rule port mappings will be created for each backend address from BackendAddressPool. Acceptable values range from 1 to 65534.
+   */
+  frontendPortRangeStart?: int32;
+
+  /**
+   * The port range end for the external endpoint. This property is used together with BackendAddressPool and FrontendPortRangeStart. Individual inbound NAT rule port mappings will be created for each backend address from BackendAddressPool. Acceptable values range from 1 to 65534.
+   */
+  frontendPortRangeEnd?: int32;
+
+  /**
+   * A reference to backendAddressPool resource.
+   */
+  backendAddressPool?: SubResource;
+
+  /**
+   * The provisioning state of the inbound NAT rule resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NetworkProvisioningState;
+}
 
 /**
  * PrivateLinkConnection properties for the network interface.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties {
   /**
    * The group ID for current private link connection.
@@ -2008,6 +2184,8 @@ model NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties {
 /**
  * DNS settings of a network interface.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
 model NetworkInterfaceDnsSettings {
   /**
    * List of DNS servers IP addresses. Use 'AzureProvidedDNS' to switch to azure provided DNS resolution. 'AzureProvidedDNS' value cannot be combined with other IPs, it must be the only value in dnsServers collection.
@@ -2038,163 +2216,11 @@ model NetworkInterfaceDnsSettings {
   internalDomainNameSuffix?: string;
 }
 
-
-/**
- * The private link service ip configuration.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PrivateLinkServiceIpConfiguration extends SubResource {
-  /**
-   * Properties of the private link service ip configuration.
-   */
-  properties?: PrivateLinkServiceIpConfigurationProperties;
-
-  /**
-   * The name of private link service ip configuration.
-   */
-  name?: string;
-
-  /**
-   * A unique read-only string that changes whenever the resource is updated.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * The resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-}
-
-/**
- * Properties of private link service IP configuration.
- */
-model PrivateLinkServiceIpConfigurationProperties {
-  /**
-   * The private IP address of the IP configuration.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  privateIPAddress?: string;
-
-  /**
-   * The private IP address allocation method.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  privateIPAllocationMethod?: IPAllocationMethod;
-
-  /**
-   * The reference to the subnet resource.
-   */
-  subnet?: Subnet;
-
-  /**
-   * Whether the ip configuration is primary or not.
-   */
-  primary?: boolean;
-
-  /**
-   * The provisioning state of the private link service IP configuration resource.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /**
-   * Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  privateIPAddressVersion?: IPVersion;
-}
-
-/**
- * PrivateEndpointConnection resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PrivateEndpointConnection extends SubResource {
-  /**
-   * Properties of the private end point connection.
-   */
-  properties?: PrivateEndpointConnectionProperties;
-
-  /**
-   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
-   */
-  name?: string;
-
-  /**
-   * The resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * A unique read-only string that changes whenever the resource is updated.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-}
-
-/**
- * Properties of the PrivateEndpointConnectProperties.
- */
-model PrivateEndpointConnectionProperties {
-  /**
-   * The resource of private end point.
-   */
-  @visibility(Lifecycle.Read)
-  privateEndpoint?: PrivateEndpoint;
-
-  /**
-   * A collection of information about the state of the connection between service consumer and provider.
-   */
-  privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
-
-  /**
-   * The provisioning state of the private endpoint connection resource.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /**
-   * The consumer link id.
-   */
-  @visibility(Lifecycle.Read)
-  linkIdentifier?: string;
-
-  /**
-   * The location of the private endpoint.
-   */
-  @visibility(Lifecycle.Read)
-  privateEndpointLocation?: string;
-}
-
-/**
- * The visibility list of the private link service.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PrivateLinkServicePropertiesVisibility extends ResourceSet {}
-
-/**
- * The base resource set for visibility and auto-approval.
- */
-model ResourceSet {
-  /**
-   * The list of subscriptions.
-   */
-  subscriptions?: string[];
-}
-
-/**
- * The auto-approval list of the private link service.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PrivateLinkServicePropertiesAutoApproval extends ResourceSet {}
-
 /**
  * An error response from the service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 @error
 model CloudError {
   /**
@@ -2206,6 +2232,8 @@ model CloudError {
 /**
  * An error response from the service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.

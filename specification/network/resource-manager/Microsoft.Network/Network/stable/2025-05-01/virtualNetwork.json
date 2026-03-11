@@ -55,6 +55,9 @@
       "name": "NetworkInterfaces"
     },
     {
+      "name": "VirtualNetworks"
+    },
+    {
       "name": "PublicIPAddresses"
     },
     {
@@ -146,9 +149,6 @@
     },
     {
       "name": "SecurityPartnerProviders"
-    },
-    {
-      "name": "VirtualNetworks"
     },
     {
       "name": "Subnets"
@@ -15787,29 +15787,8 @@
           "description": "The private IP address of the IP configuration."
         },
         "privateIPAllocationMethod": {
-          "type": "string",
-          "description": "The private IP address allocation method.",
-          "default": "Dynamic",
-          "enum": [
-            "Static",
-            "Dynamic"
-          ],
-          "x-ms-enum": {
-            "name": "IPAllocationMethod",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Static",
-                "value": "Static",
-                "description": "Static"
-              },
-              {
-                "name": "Dynamic",
-                "value": "Dynamic",
-                "description": "Dynamic"
-              }
-            ]
-          }
+          "$ref": "./common.json#/definitions/IPAllocationMethod",
+          "description": "The private IP address allocation method."
         },
         "subnet": {
           "$ref": "#/definitions/Subnet",

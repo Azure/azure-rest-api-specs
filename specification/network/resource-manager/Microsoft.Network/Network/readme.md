@@ -49,7 +49,7 @@ input-file:
   - Network/stable/2025-05-01/networkWatcher.json
   - Network/stable/2025-05-01/virtualNetwork.json
   - Network/stable/2025-05-01/virtualWan.json
-  - Vmss/stable/2025-05-01/openapi.json
+  - Network/stable/2018-10-01/openapi.json
 suppressions:
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.

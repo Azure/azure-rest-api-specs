@@ -1,7 +1,9 @@
 import "@azure-tools/typespec-client-generator-core";
+import "../Common/main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
+using Microsoft.Network;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkSecurityGroup.properties);
@@ -99,19 +101,19 @@ using Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PublicIPAddress.properties);
 
-@@clientLocation(NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
-  NetworkInterfaces
+@@clientLocation(Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
+  Microsoft.Compute.NetworkInterfaces
 );
-@@clientLocation(NetworkInterfaceIPConfigurations.listVirtualMachineScaleSetIpConfigurations,
-  NetworkInterfaces
+@@clientLocation(Microsoft.Compute.NetworkInterfaceIPConfigurations.listVirtualMachineScaleSetIpConfigurations,
+  Microsoft.Compute.NetworkInterfaces
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkInterfaceIPConfiguration.properties);
 
-@@clientLocation(NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
-  NetworkInterfaces
+@@clientLocation(Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
+  Microsoft.Compute.NetworkInterfaces
 );
 
-@@clientLocation(PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
-  PublicIPAddresses
+@@clientLocation(Microsoft.Compute.PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
+  Microsoft.Compute.PublicIPAddresses
 );

@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VirtualNetwork.tsp";
+import "../Common/Subnet.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,36 +12,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Network;
-/**
- * Subnet in a virtual network resource.
- */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@parentResource(VirtualNetwork)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model Subnet extends SubResourceModel {
-  properties?: SubnetPropertiesFormat;
-
-  @visibility(Lifecycle.Read)
-  @path
-  @key("subnetName")
-  @segment("subnets")
-  name: string;
-
-  /**
-   * A unique read-only string that changes whenever the resource is updated.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  etag?: string;
-}
-
-@@doc(Subnet.name,
-  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
-);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
