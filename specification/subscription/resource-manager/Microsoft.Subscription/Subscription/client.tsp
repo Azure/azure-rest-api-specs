@@ -89,11 +89,3 @@ op subscriptionRename(
 
 @@override(SubscriptionOperationGroup.rename, subscriptionRename, "javascript");
 
-@@clientName(Microsoft.Subscription.SubscriptionAliasResponse,
-  "PutAliasResponse",
-  "java"
-);
-@@clientName(Microsoft.Subscription.SubscriptionAliasResponseProperties,
-  "PutAliasResponseProperties",
-  "java"
-);
