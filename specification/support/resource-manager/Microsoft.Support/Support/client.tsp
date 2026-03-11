@@ -127,3 +127,4 @@ using Microsoft.Support;
 @@usage(Service, Usage.input, "csharp");
 @@usage(MessageProperties, Usage.input, "csharp");
 @@usage(SecondaryConsentEnabled, Usage.input, "csharp");
+@@clientName(MessageProperties.contentType, "ContentTypeValue", "csharp");
