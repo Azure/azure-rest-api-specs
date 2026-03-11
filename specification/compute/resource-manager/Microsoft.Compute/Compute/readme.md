@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2025-03-03
+tag: package-2025-11-01
 
 directive:
   - where:
@@ -289,6 +289,11 @@ directive:
   - suppress: ResourceNameRestriction
     from: availabilitySet.json
     reason: there is no availability set naming requirement. It only follows ARM resource naming requirement.
+  - suppress: ArmResourcePropertiesBag
+    reason: Lifecycle Hook Event is a notification event, created by the platform. The customer does not create/delete the resource. The "type" property is a defined enum with specified possible values.
+    from: ComputeRP.json
+    where:
+      - $.definitions.VMScaleSetLifecycleHookEvent
 
 suppressions:
   - code: OperationsAPIImplementation
@@ -349,6 +354,31 @@ suppressions:
     reason: ScaleOut operation returns both 200 and 202, but 200 will not return schema. This is a common pattern for VMSS action operations. 
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/scaleOut"].post
+  - code: ParametersInPost
+    reason: forceDeallocate added as query parameter for consistency with hibernation in Deallocate POST API.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate"].post.parameters
+```
+
+### Tag: package-2025-11-01
+
+These settings apply only when `--tag=package-2025-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-11-01'
+input-file:
+  - stable/2025-11-01/ComputeRP.json
+  - stable/2025-01-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2025-03-03/GalleryRP.json
+```
+
+### Tag: package-2025-11-01-only
+
+These settings apply only when `--tag=package-2025-11-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-01-only'
+input-file:
+  - stable/2025-11-01/ComputeRP.json
 ```
 
 ### Tag: package-2025-04-01
