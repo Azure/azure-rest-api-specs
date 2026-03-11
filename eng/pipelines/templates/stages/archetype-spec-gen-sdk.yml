@@ -206,7 +206,9 @@ stages:
           versionSpec: $(NodeVersion)
         displayName: 'Install Node.js'
 
-      - template: /eng/common/pipelines/templates/steps/authenticate-temp-npmrc.yml
+      - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+        parameters:
+          npmrcPath: $(Agent.TempDirectory)/gen-sdk/.npmrc
 
       - task: UsePythonVersion@0
         inputs:
@@ -266,6 +268,8 @@ stages:
         displayName: 'Generate SDK'
         ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
           continueOnError: true
+        env:
+          NPM_CONFIG_USERCONFIG: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
