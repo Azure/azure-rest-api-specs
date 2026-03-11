@@ -99,12 +99,21 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: RegulatoryCompliance.Management
+tag: SubAssessments.Management
 ```
 
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
+
+### Tag: SubAssessments.Management
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'SubAssessments.Management'
+input-file:
+  - preview/2019-01-01-preview/subAssessments.json
+```
 
 ### Tag: Locations.Management
 
