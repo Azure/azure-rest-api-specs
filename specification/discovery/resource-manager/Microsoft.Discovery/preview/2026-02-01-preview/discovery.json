@@ -3838,6 +3838,25 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "AzureNetAppFilesStore": {
       "type": "object",
       "description": "The Azure NetApp Files properties.",
@@ -5632,26 +5651,9 @@
         "definitionContent"
       ]
     },
-    "ToolUpdate": {
+    "ToolPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Tool.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ToolUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "ToolUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Tool.",
+      "description": "Discovery Tool list item properties",
       "properties": {
         "version": {
           "type": "string",
@@ -5685,6 +5687,21 @@
           ]
         }
       }
+    },
+    "ToolUpdate": {
+      "type": "object",
+      "description": "Tool tracked resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ToolPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "VmSize": {
       "type": "string",
