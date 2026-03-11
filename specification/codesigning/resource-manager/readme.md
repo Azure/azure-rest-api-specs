@@ -1,4 +1,4 @@
-# Trusted Signing
+# Artifact Signing
 
 > see https://aka.ms/autorest
 
