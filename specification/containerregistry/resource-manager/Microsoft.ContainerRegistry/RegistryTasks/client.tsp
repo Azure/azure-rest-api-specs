@@ -53,3 +53,25 @@ using Microsoft.ContainerRegistry;
   "csharp"
 );
 @@clientName(TriggerUpdateParameters, "TriggerUpdateContent", "csharp");
+
+// C# client naming: prefix generic names with service context
+@@clientName(Credentials, "ContainerRegistryTaskCredentials", "csharp");
+@@clientName(Argument, "ContainerRegistryTaskArgument", "csharp");
+@@clientName(OS, "ContainerRegistryTaskOS", "csharp");
+@@clientName(Architecture, "ContainerRegistryTaskArchitecture", "csharp");
+@@clientName(Variant, "ContainerRegistryTaskVariant", "csharp");
+@@clientName(ProvisioningState,
+  "ContainerRegistryTaskProvisioningState",
+  "csharp"
+);
+@@clientName(SetValue, "ContainerRegistryTaskSetValue", "csharp");
+@@clientName(SecretObject, "ContainerRegistryTaskSecretObject", "csharp");
+@@clientName(SecretObjectType,
+  "ContainerRegistryTaskSecretObjectType",
+  "csharp"
+);
+@@clientName(TokenType, "ContainerRegistryTaskTokenType", "csharp");
+@@clientName(RunType, "ContainerRegistryTaskRunType", "csharp");
+@@clientName(RunStatus, "ContainerRegistryTaskRunStatus", "csharp");
+@@clientName(TaskStatus, "ContainerRegistryTaskStatus", "csharp");
+@@clientName(TriggerStatus, "ContainerRegistryTaskTriggerStatus", "csharp");
