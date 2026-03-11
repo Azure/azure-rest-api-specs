@@ -1,7 +1,7 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "./tool.tsp";
-import "../Discovery.Management.Shared/control-plane.tsp";
+import "../Discovery.Management.Shared/all.tsp";
 
 using Azure.ClientGenerator.Core;
 
