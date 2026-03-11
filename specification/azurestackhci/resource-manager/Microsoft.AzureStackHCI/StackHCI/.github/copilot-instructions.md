@@ -20,7 +20,7 @@ You are an expert assistant for the Azure Stack HCI TypeSpec API specification i
 | `Cluster.tsp` | Cluster resource (TrackedResource, top-level) |
 | `EdgeMachine.tsp` | EdgeMachine resource (TrackedResource, top-level) |
 | Other `*.tsp` | One file per ARM resource |
-| `.agents/` | Engineering docs, style guide, changelog, workflow |
+| `.github/eng/` | Engineering docs, style guide, changelog, workflow |
 
 ## Coding Rules
 
@@ -140,8 +140,8 @@ For complex tasks (adding resources, models, running the pipeline), use the **`@
 
 | Document | Purpose |
 |----------|---------|
-| `.agents/typespec-style-guide.md` | Complete style rules and code review checklist |
-| `.agents/development-workflow.md` | Full workflow, validation, troubleshooting |
-| `.agents/repo-understanding.md` | Repo structure, private vs public differences, sync process |
-| `.agents/version-creator.md` | Creating new API versions |
-| `.agents/changelog-2026-03-15-preview.md` | Changes in current preview version |
+| `.github/eng/style-guide.md` | Complete style rules and code review checklist |
+| `.github/eng/workflow.md` | Full workflow, validation, troubleshooting |
+| `.github/eng/repo-structure.md` | Repo structure, private vs public differences, sync process |
+| `.github/eng/new-api-version.md` | Creating new API versions |
+| `.github/eng/changelog-2026-03-15-preview.md` | Changes in current preview version |
