@@ -3,10 +3,7 @@
 Run the build script to generate Swagger:
 
 ```powershell
-# From repo root
-.\specification\resourcebuilder\ResourceBuilder.Management\build.ps1
-
-# Or from ResourceBuilder.Management
+# from ResourceBuilder.Management
 cd .\specification\resourcebuilder\ResourceBuilder.Management
 .\build.ps1
 ```
