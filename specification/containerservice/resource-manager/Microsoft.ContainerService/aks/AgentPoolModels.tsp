@@ -903,9 +903,13 @@ model ScaleProfile {
 
   /**
    * Specifications on how to auto-scale the VirtualMachines agent pool within a predefined size range.
+   * Each profile targets a specific VM SKU and is evaluated independently.
+   * Scaling decisions across profiles are governed by the cluster autoscaler expander,
+   * configurable via `ManagedCluster.properties.autoScalerProfile.expander`.
    */
   @added(Versions.v2026_02_02_preview)
-  autoscale?: AutoScaleProfile;
+  @identifiers(#[])
+  autoscale?: AutoScaleProfile[];
 }
 
 /**

@@ -14646,8 +14646,12 @@
           "x-ms-identifiers": []
         },
         "autoscale": {
-          "$ref": "#/definitions/AutoScaleProfile",
-          "description": "Specifications on how to auto-scale the VirtualMachines agent pool within a predefined size range."
+          "type": "array",
+          "description": "Specifications on how to auto-scale the VirtualMachines agent pool within a predefined size range.\nEach profile targets a specific VM SKU and is evaluated independently.\nScaling decisions across profiles are governed by the cluster autoscaler expander,\nconfigurable via `ManagedCluster.properties.autoScalerProfile.expander`.",
+          "items": {
+            "$ref": "#/definitions/AutoScaleProfile"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
