@@ -1186,16 +1186,21 @@ interface File {
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?comp=lease&acquire")
   @put
+  @sharedRoute
+  @route("?comp=lease")
   acquireLease is StorageOperationNoBody<
     {
+      ...TimeoutParameter;
+
       /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
       @header("x-ms-lease-duration") leaseDuration?: int32;
 
       ...ProposeLeaseIdParameter;
-      ...TimeoutParameter;
+      ...LeaseActionParameter<"acquire">;
       ...FileRequestIntentParameter;
       ...AllowTrailingDotParameter;
     },
@@ -1210,13 +1215,17 @@ interface File {
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?comp=lease&release")
   @put
+  @sharedRoute
+  @route("?comp=lease")
   releaseLease is StorageOperationNoBody<
     {
-      ...LeaseIdRequiredParameter;
       ...TimeoutParameter;
+      ...LeaseIdRequiredParameter;
+      ...LeaseActionParameter<"release">;
       ...FileRequestIntentParameter;
       ...AllowTrailingDotParameter;
     },
@@ -1229,14 +1238,18 @@ interface File {
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?comp=lease&change")
   @put
+  @sharedRoute
+  @route("?comp=lease")
   changeLease is StorageOperationNoBody<
     {
+      ...TimeoutParameter;
       ...LeaseIdRequiredParameter;
       ...ProposeLeaseIdParameter;
-      ...TimeoutParameter;
+      ...LeaseActionParameter<"change">;
       ...FileRequestIntentParameter;
       ...AllowTrailingDotParameter;
     },
@@ -1250,12 +1263,16 @@ interface File {
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
-  @route("?comp=lease&break")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
+  @sharedRoute
+  @route("?comp=lease")
   breakLease is StorageOperationNoBody<
     {
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
+      ...LeaseActionParameter<"break">;
       ...FileRequestIntentParameter;
       ...AllowTrailingDotParameter;
     },
@@ -1263,6 +1280,7 @@ interface File {
       @statusCode statusCode: 202;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
+      ...LeaseTimeResponseHeader;
       ...LeaseIdOptionalParameter;
     }
   >;

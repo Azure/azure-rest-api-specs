@@ -1931,3 +1931,10 @@ alias ProposeLeaseIdParameter = {
   /** Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats. */
   @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
 };
+
+/** The lease action parameter. */
+alias LeaseActionParameter<TAction extends string> = {
+  /** Describes what lease action to take. */
+  @header("x-ms-lease-action")
+  action: TAction;
+};
