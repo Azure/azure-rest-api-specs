@@ -97,13 +97,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Created - Returns information about the network manager.",
+            "description": "Succeeded - Returns information about the network manager.",
             "schema": {
               "$ref": "#/definitions/Commitment"
             }
           },
           "201": {
-            "description": "Succeeded - Returns information about the network manager.",
+            "description": "Created - Returns information about the network manager.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Commitment"
             }
@@ -131,11 +137,6 @@
         ],
         "operationId": "Commitments_Delete",
         "description": "Deletes a commitment.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ForceDeleteParameter"
-          }
-        ],
         "responses": {
           "202": {
             "description": "Accepted and will complete asynchronously.",
@@ -283,9 +284,10 @@
         "configurationIds": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id"
           },
-          "description": "List of configuration IDs. Each value must be a fully qualified ARM resource ID in the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/{configurationType}/{configurationName}."
+          "description": "List of configuration IDs. Each value must be a fully qualified Azure resource ID in the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/{configurationType}/{configurationName}."
         },
         "targetLocations": {
           "type": "array",
@@ -356,14 +358,6 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ForceDeleteParameter": {
-      "name": "force",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "description": "Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.",
       "x-ms-parameter-location": "method"
     }
   }

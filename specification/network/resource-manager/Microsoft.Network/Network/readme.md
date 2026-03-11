@@ -4473,6 +4473,9 @@ directive:
   - suppress: ResourceNameRestriction
     from: networkManagerCommitment.json
     reason: The resource name parameter 'networkManagerName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all AvNM APIs.
+    where:
+      - $.paths.[/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commitments/{commitmentName}]
+      - $.paths.[/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commitments]
   - suppress: DeleteResponseCodes
     from: networkManagerRoutingConfiguration.json
     reason: support response code 200 for delete operations
