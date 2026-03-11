@@ -830,3 +830,5 @@ using Azure.ClientGenerator.Core;
   "latencyThresholdInMs",
   "javascript"
 );
+
+@@clientName(VoiceLive.EouDetection.`model`, "EouDetectionModel", "java");
