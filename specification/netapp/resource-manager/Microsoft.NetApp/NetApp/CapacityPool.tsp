@@ -51,14 +51,14 @@ model PoolProperties {
   /**
    * Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiple of 1099511627776).
    */
-  @removed(Versions.v2025_12_15_preview)
-  @renamedFrom(Versions.v2025_12_15_preview, "size")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "size")
   sizeOld: int64 = 4398046511104;
 
   /**
    * Provisioned size of the pool (in bytes). Allowed values are 512GiB (549755813888 bytes) or in 1TiB chunks (value must be multiple of 1099511627776).
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_15_preview)
   size: int64 = 4398046511104;
 
   /**
@@ -155,14 +155,14 @@ model PoolPatchProperties {
   /**
    * Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiple of 1099511627776).
    */
-  @removed(Versions.v2025_12_15_preview)
-  @renamedFrom(Versions.v2025_12_15_preview, "size")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "size")
   sizeOld?: int64;
 
   /**
    * Provisioned size of the pool (in bytes). Allowed values are 512GiB (549755813888 bytes) or in 1TiB chunks (value must be multiple of 1099511627776).
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_15_preview)
   size?: int64;
 
   /**
