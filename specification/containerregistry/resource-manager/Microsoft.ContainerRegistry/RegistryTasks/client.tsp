@@ -75,3 +75,7 @@ using Microsoft.ContainerRegistry;
 @@clientName(RunStatus, "ContainerRegistryTaskRunStatus", "csharp");
 @@clientName(TaskStatus, "ContainerRegistryTaskStatus", "csharp");
 @@clientName(TriggerStatus, "ContainerRegistryTaskTriggerStatus", "csharp");
+
+// C# client naming: fix enum value casing
+@@clientName(SecretObjectType.Vaultsecret, "VaultSecret", "csharp");
+@@clientName(SourceTriggerEvent.pullrequest, "PullRequest", "csharp");
