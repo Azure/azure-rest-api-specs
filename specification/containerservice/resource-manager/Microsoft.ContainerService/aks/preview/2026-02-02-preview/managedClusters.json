@@ -10573,19 +10573,19 @@
     },
     "ManagedClusterAzureMonitorProfileAppMonitoring": {
       "type": "object",
-      "description": "Application Monitoring auto-instrumentation for AKS profile.",
+      "description": "Application Monitoring profile for AKS.",
       "properties": {
         "autoInstrumentation": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation",
-          "description": "Application Monitoring Auto Instrumentation for Kubernetes Application Container. Deploys web hook to auto-instrument Azure Monitor OpenTelemetry based SDKs to collect OpenTelemetry metrics, logs and traces of the application. See aka.ms/AzureMonitorApplicationMonitoring for an overview."
+          "description": "Application Monitoring auto-instrumentation for AKS. Deploys a webhook that auto-instruments workloads with Microsoft OpenTelemetry Distros to collect OpenTelemetry metrics, logs, and traces. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview."
         },
         "openTelemetryMetrics": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics",
-          "description": "Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Metrics. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview."
+          "description": "Application Monitoring Open Telemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview."
         },
-        "openTelemetryLogs": {
-          "$ref": "#/definitions/ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogs",
-          "description": "Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Logs and Traces. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview."
+        "openTelemetryLogsAndTraces": {
+          "$ref": "#/definitions/ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces",
+          "description": "Application Monitoring Open Telemetry Logs and Traces Profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview."
         }
       }
     },
@@ -10599,33 +10599,43 @@
         }
       }
     },
-    "ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogs": {
+    "ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces": {
       "type": "object",
-      "description": "Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Logs and Traces. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.",
+      "description": "Application Monitoring Open Telemetry Logs and Traces Profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.",
       "properties": {
         "enabled": {
           "type": "boolean",
           "description": "Indicates if Application Monitoring Open Telemetry Logs and traces is enabled or not."
         },
-        "port": {
+        "httpPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The Open Telemetry host port for Open Telemetry logs and traces. If not specified, the default port is 28331."
+          "description": "The host port for Open Telemetry HTTP/PROTOBUF logs and traces. If not specified, the default port is 28331."
+        },
+        "grpcPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The host port for Open Telemetry GRPC logs and traces. If not specified, the default port is 28332."
         }
       }
     },
     "ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics": {
       "type": "object",
-      "description": "Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Metrics. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.",
+      "description": "Application Monitoring Open Telemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.",
       "properties": {
         "enabled": {
           "type": "boolean",
           "description": "Indicates if Application Monitoring Open Telemetry Metrics is enabled or not."
         },
-        "port": {
+        "httpPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The Open Telemetry host port for Open Telemetry metrics. If not specified, the default port is 28333."
+          "description": "The host port for Open Telemetry HTTP/PROTOBUF metrics. If not specified, the default port is 28333."
+        },
+        "grpcPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The host port for Open Telemetry GRPC metrics. If not specified, the default port is 28334."
         }
       }
     },

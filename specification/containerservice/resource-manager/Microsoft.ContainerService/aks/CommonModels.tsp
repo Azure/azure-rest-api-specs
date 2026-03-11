@@ -3752,26 +3752,26 @@ union ContainerNetworkLogs {
 }
 
 /**
- * Application Monitoring auto-instrumentation for AKS profile.
+ * Application Monitoring profile for AKS.
  */
 @added(Versions.v2026_02_01)
 model ManagedClusterAzureMonitorProfileAppMonitoring {
   /**
-   * Application Monitoring Auto Instrumentation for Kubernetes Application Container. Deploys web hook to auto-instrument Azure Monitor OpenTelemetry based SDKs to collect OpenTelemetry metrics, logs and traces of the application. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+   * Application Monitoring auto-instrumentation for AKS. Deploys a webhook that auto-instruments workloads with Microsoft OpenTelemetry Distros to collect OpenTelemetry metrics, logs, and traces. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
   autoInstrumentation?: ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation;
 
   /**
-   * Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Metrics. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+   * Application Monitoring Open Telemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
   @added(Versions.v2026_02_02_preview)
   openTelemetryMetrics?: ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics;
 
   /**
-   * Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Logs and Traces. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+   * Application Monitoring Open Telemetry Logs and Traces Profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
   @added(Versions.v2026_02_02_preview)
-  openTelemetryLogs?: ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogs;
+  openTelemetryLogsAndTraces?: ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces;
 }
 
 /**
@@ -3786,7 +3786,7 @@ model ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation {
 }
 
 /**
- * Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Metrics. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+ * Application Monitoring Open Telemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
 @added(Versions.v2026_02_02_preview)
 model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics {
@@ -3796,25 +3796,35 @@ model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics {
   enabled?: boolean;
 
   /**
-   * The Open Telemetry host port for Open Telemetry metrics. If not specified, the default port is 28333.
+   * The host port for Open Telemetry HTTP/PROTOBUF metrics. If not specified, the default port is 28333.
    */
-  port?: int64;
+  httpPort?: int64;
+
+  /**
+   * The host port for Open Telemetry GRPC metrics. If not specified, the default port is 28334.
+   */
+  grpcPort?: int64;
 }
 
 /**
- * Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Logs and Traces. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+ * Application Monitoring Open Telemetry Logs and Traces Profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
 @added(Versions.v2026_02_02_preview)
-model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogs {
+model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces {
   /**
    * Indicates if Application Monitoring Open Telemetry Logs and traces is enabled or not.
    */
   enabled?: boolean;
 
   /**
-   * The Open Telemetry host port for Open Telemetry logs and traces. If not specified, the default port is 28331.
+   * The host port for Open Telemetry HTTP/PROTOBUF logs and traces. If not specified, the default port is 28331.
    */
-  port?: int64;
+  httpPort?: int64;
+
+  /**
+   * The host port for Open Telemetry GRPC logs and traces. If not specified, the default port is 28332.
+   */
+  grpcPort?: int64;
 }
 
 /**
