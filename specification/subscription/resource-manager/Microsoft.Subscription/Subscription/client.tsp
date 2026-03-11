@@ -13,16 +13,3 @@ using Azure.ClientGenerator.Core;
   "PutAliasResponseProperties",
   "java"
 );
-
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.cancel,
-  "SubscriptionOperation",
-  "java"
-);
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.rename,
-  "SubscriptionOperation",
-  "java"
-);
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.enable,
-  "SubscriptionOperation",
-  "java"
-);
