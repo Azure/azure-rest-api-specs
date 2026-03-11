@@ -13,7 +13,7 @@ namespace Placement.V1;
 
 @doc("The rollout strategy configuration.")
 model RolloutStrategy {
-  @madeOptional(Versions.v2026_04_02_preview)
+  @madeOptional(Microsoft.ContainerService.Versions.v2026_04_02_preview)
   @doc("The type of rollout strategy. Default is RollingUpdate.")
   type?: RolloutStrategyType;
 }
@@ -34,7 +34,7 @@ model ClusterResourcePlacementSpec {
   @doc("Policy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected.")
   policy?: PlacementPolicy;
 
-  @added(Versions.v2026_04_02_preview)
+  @added(Microsoft.ContainerService.Versions.v2026_04_02_preview)
   @doc("The rollout strategy configuration for the cluster resource placement. This field is added in version 2026-04-02-preview.")
   rolloutStrategy?: RolloutStrategy;
 }
@@ -80,7 +80,7 @@ model ClusterAffinity {
 
 @doc("ClusterSelector")
 model ClusterSelector {
-  @madeOptional(Versions.v2026_04_02_preview)
+  @madeOptional(Microsoft.ContainerService.Versions.v2026_04_02_preview)
   @doc("ClusterSelectorTerms is a list of cluster selector terms. The terms are `ORed`.")
   @identifiers(#[])
   clusterSelectorTerms?: ClusterSelectorTerm[];
