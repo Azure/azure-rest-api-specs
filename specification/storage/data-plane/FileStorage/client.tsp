@@ -201,3 +201,7 @@ namespace Customizations;
 @@Legacy.disablePageable(Storage.File.Directory.listFilesAndDirectoriesSegment,
   "python,javascript"
 );
+@@Legacy.disablePageable(Storage.File.Directory.listHandles,
+  "python,javascript"
+);
+@@Legacy.disablePageable(Storage.File.File.listHandles, "python,javascript");
