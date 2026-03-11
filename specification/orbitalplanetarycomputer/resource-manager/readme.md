@@ -67,5 +67,5 @@ These settings apply only when `--tag=package-2026-04-15` is specified on the co
 
 ```yaml $(tag) == 'package-2026-04-15'
 input-file:
-  - Microsoft.Orbital/preview/2026-04-15/planetarycomputer.json
+  - Microsoft.Orbital/stable/2026-04-15/planetarycomputer.json
 ```
