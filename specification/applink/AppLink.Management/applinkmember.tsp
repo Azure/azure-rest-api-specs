@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./applink.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.AppLink;
@@ -25,17 +26,14 @@ model AppLinkMemberProperties {
   @doc("AppLink Member Metadata")
   metadata: Metadata;
 
-  @doc("Upgrade mode")
-  mode?: UpgradeMode;
-
-  @doc("Fully managed upgrade profile")
-  fullyManagedUpgradeProfile?: FullyManagedUpgradeProfile;
-
-  @doc("Self managed upgrade profile")
-  selfManagedUpgradeProfile?: SelfManagedUpgradeProfile;
+  @doc("Upgrade profile.")
+  upgradeProfile?: UpgradeProfile;
 
   @doc("Observability profile")
   observabilityProfile?: ObservabilityProfile;
+
+  @doc("Connectivity profile.")
+  connectivityProfile?: ConnectivityProfile;
 
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
@@ -54,7 +52,19 @@ union ClusterType {
 model Metadata {
   @doc("Resource ID")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  resourceId: string;
+  resourceId: Azure.Core.armResourceIdentifier;
+}
+
+@doc("AppLinkMember upgrade profile.")
+model UpgradeProfile {
+  @doc("Upgrade mode.")
+  mode: UpgradeMode;
+
+  @doc("Fully managed upgrade profile.")
+  fullyManagedUpgradeProfile?: FullyManagedUpgradeProfile;
+
+  @doc("Self managed upgrade profile.")
+  selfManagedUpgradeProfile?: SelfManagedUpgradeProfile;
 }
 
 @doc("AppLinkMember upgrade release channel")
@@ -97,11 +107,44 @@ model ObservabilityProfile {
   metrics?: MetricsProfile;
 }
 
+@doc("AppLinkMember connectivity profile.")
+model ConnectivityProfile {
+  @doc("East-West gateway profile.")
+  eastWestGateway?: EastWestGatewayProfile;
+
+  @doc("Private connect profile.")
+  privateConnect?: PrivateConnectProfile;
+}
+
+@doc("AppLinkMember private connect profile.")
+model PrivateConnectProfile {
+  @doc("Delegated Subnet to AppLink.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  subnetResourceId: armResourceIdentifier;
+}
+
 @doc("AppLinkMember metrics profile")
 model MetricsProfile {
   @doc("Metrics endpoint URL")
   @visibility(Lifecycle.Read)
   metricsEndpoint?: string;
+}
+
+@doc("AppLinkMember east-west gateway profile.")
+model EastWestGatewayProfile {
+  @doc("East-West gateway visibility.")
+  visibility: EastWestGatewayVisibility;
+}
+
+@doc("East-West gateway visibility.")
+union EastWestGatewayVisibility {
+  string,
+
+  @doc("Use an internal load balancer for the east-west gateway.")
+  Internal: "Internal",
+
+  @doc("Use an external load balancer for the east-west gateway.")
+  External: "External",
 }
 
 @armResourceOperations

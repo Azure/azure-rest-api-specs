@@ -975,21 +975,17 @@
           "$ref": "#/definitions/Metadata",
           "description": "AppLink Member Metadata"
         },
-        "mode": {
-          "$ref": "#/definitions/UpgradeMode",
-          "description": "Upgrade mode"
-        },
-        "fullyManagedUpgradeProfile": {
-          "$ref": "#/definitions/FullyManagedUpgradeProfile",
-          "description": "Fully managed upgrade profile"
-        },
-        "selfManagedUpgradeProfile": {
-          "$ref": "#/definitions/SelfManagedUpgradeProfile",
-          "description": "Self managed upgrade profile"
+        "upgradeProfile": {
+          "$ref": "#/definitions/UpgradeProfile",
+          "description": "Upgrade profile."
         },
         "observabilityProfile": {
           "$ref": "#/definitions/ObservabilityProfile",
           "description": "Observability profile"
+        },
+        "connectivityProfile": {
+          "$ref": "#/definitions/ConnectivityProfile",
+          "description": "Connectivity profile."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1009,21 +1005,17 @@
           "$ref": "#/definitions/MetadataUpdate",
           "description": "AppLink Member Metadata"
         },
-        "mode": {
-          "$ref": "#/definitions/UpgradeMode",
-          "description": "Upgrade mode"
-        },
-        "fullyManagedUpgradeProfile": {
-          "$ref": "#/definitions/FullyManagedUpgradeProfileUpdate",
-          "description": "Fully managed upgrade profile"
-        },
-        "selfManagedUpgradeProfile": {
-          "$ref": "#/definitions/SelfManagedUpgradeProfileUpdate",
-          "description": "Self managed upgrade profile"
+        "upgradeProfile": {
+          "$ref": "#/definitions/UpgradeProfileUpdate",
+          "description": "Upgrade profile."
         },
         "observabilityProfile": {
           "$ref": "#/definitions/ObservabilityProfile",
           "description": "Observability profile"
+        },
+        "connectivityProfile": {
+          "$ref": "#/definitions/ConnectivityProfileUpdate",
+          "description": "Connectivity profile."
         }
       }
     },
@@ -1191,6 +1183,81 @@
         ]
       }
     },
+    "ConnectivityProfile": {
+      "type": "object",
+      "description": "AppLinkMember connectivity profile.",
+      "properties": {
+        "eastWestGateway": {
+          "$ref": "#/definitions/EastWestGatewayProfile",
+          "description": "East-West gateway profile."
+        },
+        "privateConnect": {
+          "$ref": "#/definitions/PrivateConnectProfile",
+          "description": "Private connect profile."
+        }
+      }
+    },
+    "ConnectivityProfileUpdate": {
+      "type": "object",
+      "description": "AppLinkMember connectivity profile.",
+      "properties": {
+        "eastWestGateway": {
+          "$ref": "#/definitions/EastWestGatewayProfileUpdate",
+          "description": "East-West gateway profile."
+        },
+        "privateConnect": {
+          "$ref": "#/definitions/PrivateConnectProfileUpdate",
+          "description": "Private connect profile."
+        }
+      }
+    },
+    "EastWestGatewayProfile": {
+      "type": "object",
+      "description": "AppLinkMember east-west gateway profile.",
+      "properties": {
+        "visibility": {
+          "$ref": "#/definitions/EastWestGatewayVisibility",
+          "description": "East-West gateway visibility."
+        }
+      },
+      "required": [
+        "visibility"
+      ]
+    },
+    "EastWestGatewayProfileUpdate": {
+      "type": "object",
+      "description": "AppLinkMember east-west gateway profile.",
+      "properties": {
+        "visibility": {
+          "$ref": "#/definitions/EastWestGatewayVisibility",
+          "description": "East-West gateway visibility."
+        }
+      }
+    },
+    "EastWestGatewayVisibility": {
+      "type": "string",
+      "description": "East-West gateway visibility.",
+      "enum": [
+        "Internal",
+        "External"
+      ],
+      "x-ms-enum": {
+        "name": "EastWestGatewayVisibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Internal",
+            "value": "Internal",
+            "description": "Use an internal load balancer for the east-west gateway."
+          },
+          {
+            "name": "External",
+            "value": "External",
+            "description": "Use an external load balancer for the east-west gateway."
+          }
+        ]
+      }
+    },
     "FullyManagedUpgradeProfile": {
       "type": "object",
       "description": "AppLinkMember fully managed upgrade profile",
@@ -1240,6 +1307,7 @@
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Resource ID",
           "x-ms-mutability": [
             "read",
@@ -1275,6 +1343,28 @@
           "description": "Metrics configuration"
         }
       }
+    },
+    "PrivateConnectProfile": {
+      "type": "object",
+      "description": "AppLinkMember private connect profile.",
+      "properties": {
+        "subnetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Delegated Subnet to AppLink.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "subnetResourceId"
+      ]
+    },
+    "PrivateConnectProfileUpdate": {
+      "type": "object",
+      "description": "AppLinkMember private connect profile."
     },
     "ProvisioningState": {
       "type": "string",
@@ -1489,6 +1579,45 @@
             "description": "Self managed upgrade mode"
           }
         ]
+      }
+    },
+    "UpgradeProfile": {
+      "type": "object",
+      "description": "AppLinkMember upgrade profile.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/UpgradeMode",
+          "description": "Upgrade mode."
+        },
+        "fullyManagedUpgradeProfile": {
+          "$ref": "#/definitions/FullyManagedUpgradeProfile",
+          "description": "Fully managed upgrade profile."
+        },
+        "selfManagedUpgradeProfile": {
+          "$ref": "#/definitions/SelfManagedUpgradeProfile",
+          "description": "Self managed upgrade profile."
+        }
+      },
+      "required": [
+        "mode"
+      ]
+    },
+    "UpgradeProfileUpdate": {
+      "type": "object",
+      "description": "AppLinkMember upgrade profile.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/UpgradeMode",
+          "description": "Upgrade mode."
+        },
+        "fullyManagedUpgradeProfile": {
+          "$ref": "#/definitions/FullyManagedUpgradeProfileUpdate",
+          "description": "Fully managed upgrade profile."
+        },
+        "selfManagedUpgradeProfile": {
+          "$ref": "#/definitions/SelfManagedUpgradeProfileUpdate",
+          "description": "Self managed upgrade profile."
+        }
       }
     },
     "UpgradeReleaseChannel": {
