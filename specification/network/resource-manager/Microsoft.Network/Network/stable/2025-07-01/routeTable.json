@@ -208,6 +208,9 @@
           },
           "Create route table with route": {
             "$ref": "./examples/RouteTableCreateWithRoute.json"
+          },
+          "Create route table with disable peering route": {
+            "$ref": "./examples/RouteTableCreateWithDisablePeeringRoute.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -685,6 +688,10 @@
           "type": "boolean",
           "description": "Whether to disable the routes learned by BGP on that route table. True means disable."
         },
+        "disablePeeringRoute": {
+          "$ref": "#/definitions/DisablePeeringRoute",
+          "description": "Whether to disable the routes learned by peering on the route table. 'None' means peering routes are enabled, 'All' means all peering routes are disabled."
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -762,6 +769,18 @@
       ],
       "x-ms-enum": {
         "name": "RouteNextHopType",
+        "modelAsString": true
+      }
+    },
+    "DisablePeeringRoute": {
+      "type": "string",
+      "description": "Whether to disable the routes learned by peering on the route table.",
+      "enum": [
+        "None",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "DisablePeeringRoute",
         "modelAsString": true
       }
     }
