@@ -119,3 +119,4 @@ namespace Azure.AI.Projects;
 
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
 @@clientName(OpenAI.Error, "ApiError");
+@@clientName(OpenAI.InputFileContentParam.file_url, "FileUri", "csharp");
