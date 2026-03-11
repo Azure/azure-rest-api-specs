@@ -4,6 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Subscription;
 using Azure.ResourceManager;
+using Http;
 
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
 
@@ -14,9 +15,9 @@ using Azure.ResourceManager;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op subscriptionAcceptOwnershipStatus(
   ...ApiVersionParameter,
-  ...SubscriptionActionScope,
+  name: string,
   ...Azure.ResourceManager.Legacy.Provider,
-  subscriptionId: Azure.Core.uuid,
+  @path subscriptionId: Azure.Core.uuid,
   body: void,
 ): AcceptOwnershipStatusResponse | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
@@ -34,7 +35,7 @@ op subscriptionAcceptOwnership(
   ...ApiVersionParameter,
   ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
-  subscriptionId: Azure.Core.uuid,
+  @path subscriptionId: Azure.Core.uuid,
   body: AcceptOwnershipRequest,
 ): ArmAcceptedResponse & ArmLroLocationHeader;
 
@@ -50,7 +51,7 @@ op subscriptionAcceptOwnership(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op subscriptionCancel(
   ...ApiVersionParameter,
-  subscriptionId: Azure.Core.uuid,
+  @path subscriptionId: Azure.Core.uuid,
   ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
   body: void,
@@ -65,7 +66,7 @@ op subscriptionCancel(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op subscriptionEnable(
   ...ApiVersionParameter,
-  subscriptionId: Azure.Core.uuid,
+  @path subscriptionId: Azure.Core.uuid,
   ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
   body: void,
@@ -80,7 +81,7 @@ op subscriptionEnable(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op subscriptionRename(
   ...ApiVersionParameter,
-  subscriptionId: Azure.Core.uuid,
+  @path subscriptionId: Azure.Core.uuid,
   ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
   body: SubscriptionName,
