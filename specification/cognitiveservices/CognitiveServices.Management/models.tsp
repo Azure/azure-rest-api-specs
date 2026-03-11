@@ -1960,7 +1960,6 @@ model AbusePenalty {
   /**
    * The datetime of expiration of the AbusePenalty.
    */
-  // Verified: utcDateTime is the correct type for this timestamp property.
   expiration?: utcDateTime;
 }
 
@@ -2351,7 +2350,6 @@ model ModelSku {
   /**
    * The datetime of deprecation of the model SKU.
    */
-  // Verified: utcDateTime is the correct type for this timestamp property.
   deprecationDate?: utcDateTime;
 
   /**
@@ -2449,7 +2447,6 @@ model ReplacementConfig {
   /**
    * The date when automatic upgrade should start. This applies to deployments with the OnceNewDefaultVersionAvailable upgrade option.
    */
-  // Verified: utcDateTime is the correct type for this timestamp property.
   autoUpgradeStartDate?: utcDateTime;
 
   /**
@@ -3441,13 +3438,11 @@ model RaiTopicProperties {
   /**
    * Creation time of the custom topic.
    */
-  // Verified: utcDateTime is the correct type for this timestamp property.
   createdAt?: utcDateTime;
 
   /**
    * Last modified time of the custom topic.
    */
-  // Verified: utcDateTime is the correct type for this timestamp property.
   lastModifiedAt?: utcDateTime;
 }
 
@@ -3513,14 +3508,12 @@ model RaiExternalSafetyProviderSchemaProperties {
    * Creation time of the safety provider.
    */
   @visibility(Lifecycle.Read)
-  // Verified: utcDateTime is the correct type for this timestamp property.
   createdAt?: utcDateTime;
 
   /**
    * Last modified time of the safety provider.
    */
   @visibility(Lifecycle.Read)
-  // Verified: utcDateTime is the correct type for this timestamp property.
   lastModifiedAt?: utcDateTime;
 }
 
@@ -3576,13 +3569,11 @@ model RaiExternalSafetyProviderProperties {
   /**
    * Creation time of the safety provider.
    */
-  // Verified: utcDateTime is the correct type for this timestamp property.
   createdAt?: utcDateTime;
 
   /**
    * Last modified time of the safety provider.
    */
-  // Verified: utcDateTime is the correct type for this timestamp property.
   lastModifiedAt?: utcDateTime;
 }
 
@@ -4005,7 +3996,6 @@ model ConnectionPropertiesV2 {
    */
   error?: string;
 
-  // Verified: utcDateTime is the correct type for this timestamp property.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The expiry time for ConnectionPropertiesV2"
   expiryTime?: utcDateTime;
 
@@ -4221,7 +4211,6 @@ model QuotaTierProperties {
    * The date on which the current tier was assigned to the subscription (UTC).
    */
   @visibility(Lifecycle.Read)
-  // Verified: utcDateTime is the correct type for this timestamp property.
   assignmentDate?: utcDateTime;
 
   /**
@@ -4251,7 +4240,6 @@ model QuotaTierUpgradeEligibilityInfo {
    * The date after which the current tier will be upgraded to the next tier if the TierUpgradePolicy is "OnceUpgradeIsAvailable" (UTC).
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "'upgradeApplicableDate' is nullable in 'QuotaTierUpgradeEligibilityInfo' for backward compatibility with existing API behavior"
-  // Verified: utcDateTime is the correct type for this timestamp property.
   upgradeApplicableDate?: utcDateTime | null;
 
   /**
