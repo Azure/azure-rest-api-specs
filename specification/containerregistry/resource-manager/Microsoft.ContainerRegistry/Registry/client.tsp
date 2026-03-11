@@ -35,3 +35,6 @@ using Microsoft.ContainerRegistry;
 @@clientName(LoginServerProperties, "ConnectedRegistryLoginServer", "csharp");
 @@clientName(LoggingProperties, "ConnectedRegistryLogging", "csharp");
 @@clientName(StatusDetailProperties, "ConnectedRegistryStatusDetail", "csharp");
+
+// C# type correctness: match API surface before migration to Typespec (Guid? CorrelationId)
+@@alternateType(StatusDetailProperties.correlationId, uuid, "csharp");
