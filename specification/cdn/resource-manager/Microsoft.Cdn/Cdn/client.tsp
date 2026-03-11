@@ -164,6 +164,10 @@ using Microsoft.Cdn;
 @@clientName(AFDEndpointProperties.hostName, "hostname", "java");
 @@clientName(AFDOriginUpdatePropertiesParameters.hostName, "hostname", "java");
 @@clientName(OriginProperties.hostName, "hostname", "java");
+@@clientName(Components18OrqelSchemasWafmetricsresponsePropertiesSeriesItemsPropertiesDataItems,
+  "WafMetricsResponseSeriesItemData",
+  "java"
+);
 
 @@clientName(Microsoft.Cdn, "CdnManagementClient", "javascript");
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`405`,
