@@ -106,11 +106,12 @@ model SecuritySubAssessmentList is Azure.Core.Page<SecuritySubAssessment>;
 /**
  * Describes properties of an sub-assessment.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecuritySubAssessmentProperties {
   /**
    * Vulnerability ID
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   id?: string;
 
@@ -281,12 +282,14 @@ model CloudErrorBody {
   /**
    * The error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   details?: CloudErrorBody[];
 
   /**
    * The error additional info.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
@@ -304,6 +307,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
@@ -343,7 +347,7 @@ model ContainerRegistryVulnerabilityProperties extends AdditionalData {
   /**
    * Dictionary from cvss version to cvss details object
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   cvss?: Record<CVSS>;
 
@@ -356,6 +360,7 @@ model ContainerRegistryVulnerabilityProperties extends AdditionalData {
   /**
    * List of CVEs
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   cve?: CVE[];
 
@@ -366,7 +371,8 @@ model ContainerRegistryVulnerabilityProperties extends AdditionalData {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   publishedTime?: utcDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   vendorReferences?: VendorReference[];
 
@@ -391,6 +397,7 @@ model ContainerRegistryVulnerabilityProperties extends AdditionalData {
 /**
  * CVSS details
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CVSS {
   /**
    * CVSS base
@@ -402,6 +409,7 @@ model CVSS {
 /**
  * CVE details
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CVE {
   /**
    * CVE title
@@ -446,7 +454,7 @@ model ServerVulnerabilityProperties extends AdditionalData {
   /**
    * Dictionary from cvss version to cvss details object
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   cvss?: Record<CVSS>;
 
@@ -459,6 +467,7 @@ model ServerVulnerabilityProperties extends AdditionalData {
   /**
    * List of CVEs
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   cve?: CVE[];
 
@@ -475,7 +484,8 @@ model ServerVulnerabilityProperties extends AdditionalData {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   publishedTime?: utcDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   vendorReferences?: VendorReference[];
 
