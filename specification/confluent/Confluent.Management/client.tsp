@@ -42,6 +42,7 @@ using Microsoft.Confluent;
 @@clientName(APIKeyRecord, "ConfluentApiKeyRecord", "csharp");
 @@clientName(OrganizationResource, "ConfluentOrganization", "csharp");
 @@clientName(OrganizationResources, "ConfluentOrganization", "csharp");
+@@clientName(ConnectorResource, "ConfluentConnector", "csharp");
 @@alternateType(OrganizationResourceProperties.organizationId, uuid, "csharp");
 @@clientName(ConfluentAgreementResource, "ConfluentAgreement", "csharp");
 @@clientName(ConfluentAgreementProperties.accepted, "IsAccepted", "csharp");
