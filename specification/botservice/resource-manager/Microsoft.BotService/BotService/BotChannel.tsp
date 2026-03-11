@@ -169,8 +169,7 @@ interface BotChannels {
    * Returns a BotService Channel registration specified by the parameters.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //get is ArmResourceRead<BotChannel, Error = Error>;
-  get is BotChannelOps.Read<BotChannel>;
+  get is ArmResourceRead<BotChannel, Error = Error>;
 
   /**
    * Creates a Channel registration for a Bot Service
@@ -192,8 +191,8 @@ interface BotChannels {
    * Deletes a Channel registration from a Bot Service
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //delete is ArmResourceDeleteSync<BotChannel, Error = Error>;
-  delete is BotChannelOps.DeleteSync<BotChannel>;
+  delete is ArmResourceDeleteSync<BotChannel, Error = Error>;
+
   /**
    * Returns all the Channel registrations of a particular BotService resource
    */
