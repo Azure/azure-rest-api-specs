@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "aggregationInterval": "Daily",
+    "api-version": "2025-10-01",
+    "experimentName": "MyExperiment",
+    "profileName": "MyProfile",
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "DailyLatencyScorecard",
+        "id": "/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile/Experiments/MyExperiment/LatencyScorecard",
+        "properties": {
+          "description": "This scorecard is the latency scorecard, aggregated over a day",
+          "country": "USA",
+          "endDateTimeUTC": "2019-09-21T17:32:28Z",
+          "endpointA": "https://endpointA.com",
+          "endpointB": "https://endpoingB.com",
+          "startDateTimeUTC": "2019-07-21T17:32:28Z"
+        }
+      }
+    }
+  },
+  "operationId": "Reports_GetLatencyScorecards",
+  "title": "Gets a Latency Scorecard for a given Experiment"
+}
