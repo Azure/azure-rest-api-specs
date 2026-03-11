@@ -163,7 +163,7 @@ union DeletePolicy {
 @doc("The propagation to be used for provisioning the namespace among the fleet.")
 model PropagationPolicy {
   @doc("The type of the policy to be used. Default is Placement.")
-  type: PropagationType;
+  type?: PropagationType;
 
   @doc("The profile to be used for propagation via placement.")
   placementProfile?: PlacementProfile;

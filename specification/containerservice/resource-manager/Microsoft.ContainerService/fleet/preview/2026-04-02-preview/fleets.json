@@ -5186,10 +5186,7 @@
           },
           "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "clusterSelectorTerms"
-      ]
+      }
     },
     "Placement.V1.ClusterSelectorTerm": {
       "type": "object",
@@ -5353,34 +5350,34 @@
       "description": "The rollout strategy configuration.",
       "properties": {
         "type": {
-          "type": "string",
-          "description": "The type of rollout strategy. Default is RollingUpdate.",
-          "default": "RollingUpdate",
-          "enum": [
-            "RollingUpdate",
-            "External"
-          ],
-          "x-ms-enum": {
-            "name": "RolloutStrategyType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "RollingUpdate",
-                "value": "RollingUpdate",
-                "description": "Use rolling update strategy for rollout."
-              },
-              {
-                "name": "External",
-                "value": "External",
-                "description": "Use external rollout strategy managed outside of Fleet."
-              }
-            ]
-          }
+          "$ref": "#/definitions/Placement.V1.RolloutStrategyType",
+          "description": "The type of rollout strategy. Default is RollingUpdate."
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
+    },
+    "Placement.V1.RolloutStrategyType": {
+      "type": "string",
+      "description": "The possible rollout strategy types.",
+      "enum": [
+        "RollingUpdate",
+        "External"
+      ],
+      "x-ms-enum": {
+        "name": "RolloutStrategyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RollingUpdate",
+            "value": "RollingUpdate",
+            "description": "Use rolling update strategy for rollout."
+          },
+          {
+            "name": "External",
+            "value": "External",
+            "description": "Use external rollout strategy managed outside of Fleet."
+          }
+        ]
+      }
     },
     "Placement.V1.Toleration": {
       "type": "object",
@@ -5456,10 +5453,7 @@
           "$ref": "#/definitions/PlacementProfile",
           "description": "The profile to be used for propagation via placement."
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
     "PropagationType": {
       "type": "string",

@@ -14,7 +14,7 @@ namespace Placement.V1;
 @doc("The rollout strategy configuration.")
 model RolloutStrategy {
   @doc("The type of rollout strategy. Default is RollingUpdate.")
-  type: RolloutStrategyType = RolloutStrategyType.RollingUpdate;
+  type?: RolloutStrategyType;
 }
 
 @doc("The possible rollout strategy types.")
@@ -81,7 +81,7 @@ model ClusterAffinity {
 model ClusterSelector {
   @doc("ClusterSelectorTerms is a list of cluster selector terms. The terms are `ORed`.")
   @identifiers(#[])
-  clusterSelectorTerms: ClusterSelectorTerm[];
+  clusterSelectorTerms?: ClusterSelectorTerm[];
 }
 
 @doc("ClusterSelectorTerm")
