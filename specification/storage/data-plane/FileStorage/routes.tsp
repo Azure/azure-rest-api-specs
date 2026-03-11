@@ -1507,7 +1507,7 @@ interface File {
       @header("x-ms-copy-id") copyId: string;
 
       /** State of the copy operation identified by x-ms-copy-id. */
-      @header("x-ms-copy-status") copyStatus: string;
+      @header("x-ms-copy-status") copyStatus: CopyStatus;
     }
   >;
 

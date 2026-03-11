@@ -1841,6 +1841,22 @@ alias PaidBurstingResponseHeaders = {
 // Copy Status Response Headers
 //
 
+/** The copy status. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum CopyStatus {
+  /** The copy operation is pending. */
+  Pending: "pending",
+
+  /** The copy operation succeeded. */
+  Success: "success",
+
+  /** The copy operation was aborted. */
+  Aborted: "aborted",
+
+  /** The copy operation failed. */
+  Failed: "failed",
+}
+
 /** Copy status response headers. */
 alias CopyStatusResponseHeaders = {
   /** Conclusion time of the last attempted Copy File operation. */
@@ -1859,7 +1875,7 @@ alias CopyStatusResponseHeaders = {
   @header("x-ms-copy-source") copySource?: string;
 
   /** State of the copy operation identified by x-ms-copy-id. */
-  @header("x-ms-copy-status") copyStatus?: string;
+  @header("x-ms-copy-status") copyStatus?: CopyStatus;
 };
 
 /** Lease time response header. */
