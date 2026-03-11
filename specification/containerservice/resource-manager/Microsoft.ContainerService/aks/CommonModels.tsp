@@ -1448,6 +1448,23 @@ union SchedulerConfigMode {
 }
 
 /**
+ * The scaling size of the control plane. Scaling sizes offer guaranteed capacity and predictable Kubernetes performance beyond standard tier defaults. Higher H sizes provide increased performance guarantees. See https://aka.ms/aks/hyperscale for performance metrics details for each size.
+ */
+@added(Versions.v2026_02_02_preview)
+union ControlPlaneScalingSize {
+  string,
+
+  /** H2 is the smallest scaling size with guaranteed capacity and predictable performance beyond standard tier defaults. */
+  H2: "H2",
+
+  /** H4 scaling size provides increased guaranteed performance over H2. */
+  H4: "H4",
+
+  /** H8 scaling size provides increased guaranteed performance over H4. */
+  H8: "H8",
+}
+
+/**
  * The type of identity that created the resource.
  */
 union CreatedByType {
@@ -2020,6 +2037,12 @@ model ManagedClusterProperties {
    */
   @added(Versions.v2026_02_02_preview)
   healthMonitorProfile?: ManagedClusterHealthMonitorProfile;
+
+  /**
+   * Profile for providing scaled and performance guaranteed control plane capacity to deliver consistent performance under high workload. Requires Kubernetes version 1.33.0 or later and Azure CNI Overlay networking.
+   */
+  @added(Versions.v2026_02_02_preview)
+  controlPlaneScalingProfile?: ManagedClusterControlPlaneScalingProfile;
 
   /**
    * Contains read-only information about the Managed Cluster.
@@ -4258,4 +4281,15 @@ model ManagedClusterHealthMonitorProfile {
    * Whether to enable on-demand monitor.
    */
   enableOnDemandMonitor?: boolean;
+}
+
+/**
+ * Profile for providing scaled and performance guaranteed control plane capacity to deliver consistent performance under high workload. Requires Kubernetes version 1.33.0 or later and Azure CNI Overlay networking.
+ */
+@added(Versions.v2026_02_02_preview)
+model ManagedClusterControlPlaneScalingProfile {
+  /**
+   * The scaling size of the control plane. Scaling sizes offer guaranteed capacity and predictable Kubernetes performance beyond standard tier defaults. Higher H sizes provide increased performance guarantees. See https://aka.ms/aks/hyperscale for performance metrics details for each size.
+   */
+  scalingSize: ControlPlaneScalingSize;
 }
