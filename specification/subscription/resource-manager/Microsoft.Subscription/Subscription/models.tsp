@@ -10,10 +10,45 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Subscription;
 
-model SubscriptionAliasListResult
-  is ResourceListResult<SubscriptionAliasResponse>;
+/**
+ * The list of aliases.
+ */
+model SubscriptionAliasListResult {
+  /**
+   * The list of subscription aliases.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SubscriptionAliasResponse[];
 
-model TargetDirectoryListResult is ResourceListResult<TargetDirectoryResult>;
+  /**
+   * The link (url) to the next page of results.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Subscription Response to list out Changed Target Directory.
+ */
+model TargetDirectoryListResult {
+  /**
+   * The list of subscription response to changed target directory.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @pageItems
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  value?: TargetDirectoryResult[];
+
+  /**
+   * The link (url) to the next page of results.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
 /**
  * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
  */
