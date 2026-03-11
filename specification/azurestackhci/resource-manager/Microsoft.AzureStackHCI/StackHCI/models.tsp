@@ -9001,15 +9001,10 @@ model VolumeReportedProperties {
 }
 
 /**
- * Disk Job properties.
+ * Base properties shared by all disk job types.
  */
 @added(Versions.v2026_03_15_preview)
-@discriminator("jobType")
-model EdgeMachineDiskJobProperties {
-  /** Job Type to support polymorphic resource. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  jobType: DiskJobType;
-
+model EdgeMachineDiskJobBaseProperties {
   /** Deployment mode to trigger job. */
   deploymentMode?: DeploymentMode;
 
@@ -9043,6 +9038,19 @@ model EdgeMachineDiskJobProperties {
 }
 
 /**
+ * Disk Job properties.
+ */
+@added(Versions.v2026_03_15_preview)
+@discriminator("jobType")
+model EdgeMachineDiskJobProperties {
+  /** Job Type to support polymorphic resource. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: DiskJobType;
+
+  ...EdgeMachineDiskJobBaseProperties;
+}
+
+/**
  * Job Type supported for disk operations.
  */
 @added(Versions.v2026_03_15_preview)
@@ -9051,9 +9059,6 @@ union DiskJobType {
 
   /** Job to create a volume on the disk. */
   CreateVolume: "CreateVolume",
-
-  /** Job to delete a volume from the disk. */
-  DeleteVolume: "DeleteVolume",
 
   /** Job to resolve configuration drift between desired and reported state. */
   SyncConfiguration: "SyncConfiguration",
@@ -9096,9 +9101,9 @@ model CreateVolumeJobProperties extends EdgeMachineDiskJobProperties {
  * Properties for deleting a volume from a disk.
  */
 @added(Versions.v2026_03_15_preview)
-model DeleteVolumeJobProperties extends EdgeMachineDiskJobProperties {
+model DeleteVolumeJobProperties extends EdgeMachineDiskPrivilegedJobProperties {
   /** Job type. */
-  jobType: DiskJobType.DeleteVolume;
+  jobType: PrivilegedJobType.DeleteVolume;
 
   /** The mount path of the volume to delete. */
   volumePath: string;
@@ -9177,6 +9182,41 @@ union DriftType {
   /** A property value differs between desired and reported state. */
   PropertyMismatch: "PropertyMismatch",
 }
+
+////////////////////////////////////////////////////////////////
+////////// Disk Privileged Job Models //////////////////////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * Disk Privileged Job properties.
+ */
+@added(Versions.v2026_03_15_preview)
+@discriminator("jobType")
+model EdgeMachineDiskPrivilegedJobProperties {
+  /** Privileged Job Type to support polymorphic resource. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: PrivilegedJobType;
+
+  ...EdgeMachineDiskJobBaseProperties;
+}
+
+/**
+ * Job Type supported for disk privileged operations.
+ */
+@added(Versions.v2026_03_15_preview)
+union PrivilegedJobType {
+  string,
+
+  /** Job to delete a volume from the disk. */
+  DeleteVolume: "DeleteVolume",
+}
+
+/**
+ * List of Disk Privileged Job resources.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineDiskPrivilegedJobListResult
+  is Azure.Core.Page<EdgeMachineDiskPrivilegedJob>;
 
 ////////////////////////////////////////////////////////////////
 ///// PRIVATE PREVIEW - Edge Machine Network Adapter Models ////
