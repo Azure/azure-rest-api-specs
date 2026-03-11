@@ -30,6 +30,38 @@ model ApprovalSettingProperties {
   @doc("The settings of backend storage for approval service to use as a ledger.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   secureLedgerSetting: SecureLedgerSetting;
+
+  @doc("The settings for the root workflow approval.")
+  approvalAdminSetting: ApprovalAdminSetting;
+}
+
+@doc("Settings for the root workflow approval.")
+model ApprovalAdminSetting {
+  @doc("The minimum number of admins required to be registered in the approvals service.")
+  minimumAdminCount: int32;
+
+  @doc("The approval scheme for the root workflow.")
+  rootWorkflowApprovalScheme: WorkflowApprovalScheme;
+}
+
+@doc("The approval scheme for a workflow.")
+model WorkflowApprovalScheme {
+  @doc("The type of the approval scheme.")
+  type: approvalSchemeType;
+
+  @doc("The minimum number of approvals required for the MinimumApprovalCount scheme.")
+  minimumApprovalsRequired: int32;
+}
+
+@doc("Enum of the supported approval schemes.")
+union approvalSchemeType {
+  string,
+
+  @doc("Majority approval scheme.")
+  MajorityApproval: "MajorityApproval",
+
+  @doc("Minimum approval count scheme.")
+  MinimumApprovalCount: "MinimumApprovalCount",
 }
 
 @doc("Information about a verification authority.")
@@ -40,6 +72,12 @@ model VerificationAuthority {
 
   @doc("The API endpoint of the verification authority.")
   apiEndpoint: string;
+
+  @doc("The API scope of the verification authority.")
+  apiScope: string;
+
+  @doc("The subject identifier for the verification authority.")
+  subjectIdentifier: string;
 
   @doc("The requested verifiable credentials for the verification authority.")
   requestedCredential: RequestCredentialSetting;
@@ -96,6 +134,12 @@ union secureLedgerStorageType {
   AzureConfidentialLedger: "AzureConfidentialLedger",
 }
 
+@doc("Request payload for initializing approval settings.")
+model InitializeApprovalSettingRequest {
+  @doc("The list of signed records to bootstrap the approval system.")
+  signedRecords: string[];
+}
+
 @armResourceOperations(ApprovalSetting)
 interface ApprovalSettings {
   get is ArmResourceRead<ApprovalSetting>;
@@ -103,4 +147,12 @@ interface ApprovalSettings {
   update is ArmResourcePatchSync<ApprovalSetting, ApprovalSettingProperties>;
   delete is ArmResourceDeleteSync<ApprovalSetting>;
   listBySubscription is ArmListBySubscription<ApprovalSetting>;
+
+  @doc("Initializes the approval setting with signed records.")
+  @action("initialize")
+  initialize is ArmResourceActionSync<
+    ApprovalSetting,
+    InitializeApprovalSettingRequest,
+    ApprovalSetting
+  >;
 }
