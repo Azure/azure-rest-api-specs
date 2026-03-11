@@ -453,7 +453,7 @@ op getTileCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for tile generation including asset selection, terrain algorithms, and visual rendering
@@ -476,7 +476,7 @@ op getWmtsCapabilitiesCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for WMTS capabilities including asset selection, terrain algorithms, and tile formatting
@@ -499,7 +499,7 @@ op getAssetStatisticsCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for asset statistics including asset selection and statistical calculation parameters
@@ -520,7 +520,7 @@ op getAssetStatisticsCustomizedForCsharp(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   ...AssetQueryParameters,
   ...getAssetStatisticsCustomizedCommonSignatures,
@@ -542,7 +542,7 @@ op cropGeoJsonCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for GeoJSON cropping including asset selection, terrain algorithms, and visual rendering
@@ -571,7 +571,7 @@ op cropGeoJsonWithDimensionsCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for GeoJSON cropping including asset selection, terrain algorithms, and visual rendering
@@ -600,7 +600,7 @@ op getGeoJsonStatisticsCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for GeoJSON statistics including asset selection and statistical calculation parameters
@@ -629,7 +629,7 @@ op getPartCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for part generation including asset selection, terrain algorithms, and visual rendering
@@ -652,7 +652,7 @@ op getPartWithDimensionsCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for part generation including asset selection, terrain algorithms, and visual rendering
@@ -675,7 +675,7 @@ op getPreviewCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for preview generation including asset selection, terrain algorithms, and visual rendering
@@ -698,7 +698,7 @@ op getPreviewWithFormatCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for preview generation including asset selection, terrain algorithms, and visual rendering
@@ -721,7 +721,7 @@ op listStatisticsCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for statistics including asset selection and statistical calculation parameters
@@ -744,7 +744,7 @@ op getTileJsonCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for TileJSON generation including asset selection, terrain algorithms, and tile formatting
@@ -767,7 +767,7 @@ op getMosaicsTileJsonCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for mosaic TileJSON generation including asset selection, terrain algorithms, and tile formatting
@@ -790,7 +790,7 @@ op getMosaicsTileCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for mosaic tile generation including asset selection, terrain algorithms, and visual rendering
@@ -813,7 +813,7 @@ op getMosaicsWmtsCapabilitiesCustomized(
   /**
    * API version
    */
-  @query("api-version") apiVersion: string,
+  @query apiVersion: string,
 
   /**
    * Options for mosaic WMTS capabilities including asset selection, terrain algorithms, and tile formatting
