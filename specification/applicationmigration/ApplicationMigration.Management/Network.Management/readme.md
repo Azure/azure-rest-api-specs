@@ -1290,19 +1290,19 @@ GET .../networkSites/site1/natRules/nat1
 ### 12l. NsxDistributedFirewallPolicy
 
 ```
-GET .../networkSites/site1/nsxDistributedFirewallPolicies/dfwpol1
+GET .../networkSites/site1/nsxDistributedFirewallPolicies/dfw-pol1
 ```
 
 ```json
 {
-  "id": ".../networkSites/site1/nsxDistributedFirewallPolicies/dfwpol1",
-  "name": "dfwpol1",
+  "id": ".../networkSites/site1/nsxDistributedFirewallPolicies/dfw-pol1",
+  "name": "dfw-pol1",
   "type": "Microsoft.ApplicationMigration/networkSites/nsxDistributedFirewallPolicies",
   "systemData": { "..." },
   "properties": {
     "provisioningState": "Succeeded",
     "displayName": "DFW-App-Policy",
-    "nsxOriginalPath": "/infra/domains/default/security-policies/dfwpol1",
+    "nsxOriginalPath": "/infra/domains/default/security-policies/dfw-pol1",
     "nsxManagerArmId": ".../networkSites/site1/nsxManagers/mgr1",
     "uniqueId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
     "nsxTags": [],
@@ -1329,25 +1329,25 @@ GET .../networkSites/site1/nsxDistributedFirewallPolicies/dfwpol1
 ### 12m. NsxDistributedFirewallRule
 
 ```
-GET .../networkSites/site1/nsxDistributedFirewallRules/dfwrule1
+GET .../networkSites/site1/nsxDistributedFirewallRules/dfw-rule1
 ```
 
 ```json
 {
-  "id": ".../networkSites/site1/nsxDistributedFirewallRules/dfwrule1",
-  "name": "dfwrule1",
+  "id": ".../networkSites/site1/nsxDistributedFirewallRules/dfw-rule1",
+  "name": "dfw-rule1",
   "type": "Microsoft.ApplicationMigration/networkSites/nsxDistributedFirewallRules",
   "systemData": { "..." },
   "properties": {
     "provisioningState": "Succeeded",
     "displayName": "DFW-Allow-Web",
-    "nsxOriginalPath": "/infra/domains/default/security-policies/dfwpol1/rules/dfwrule1",
+    "nsxOriginalPath": "/infra/domains/default/security-policies/dfw-pol1/rules/dfw-rule1",
     "nsxManagerArmId": ".../networkSites/site1/nsxManagers/mgr1",
     "uniqueId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
-    "parentDistributedFirewallPolicyArmId": ".../networkSites/site1/nsxDistributedFirewallPolicies/dfwpol1",
+    "parentDistributedFirewallPolicyArmId": ".../networkSites/site1/nsxDistributedFirewallPolicies/dfw-pol1",
     "action": "ALLOW",
     "direction": "IN_OUT",
     "anyScope": false,
