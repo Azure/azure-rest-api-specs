@@ -4,8 +4,8 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.11.12
- * Date: 2026-03-05T08:37:51.305Z
+ * Version: 0.11.13
+ * Date: 2026-03-11T06:02:10.445Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -13,6 +13,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
+import "./GraphQueryResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -27,8 +28,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.ResourceGraph")
 @service(#{ title: "ResourceGraphClient" })
 @versioned(Versions)
-// FIXME: Common type version not set. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace ResourceGraph;
 
 /**
@@ -36,9 +36,9 @@ namespace ResourceGraph;
  */
 enum Versions {
   /**
-   * The 2023-09-01-preview API version.
+   * The 2024-04-01 API version.
    */
-  v2023_09_01_preview: "2023-09-01-preview",
+  v2024_04_01: "2024-04-01",
 }
 
 interface Operations {
