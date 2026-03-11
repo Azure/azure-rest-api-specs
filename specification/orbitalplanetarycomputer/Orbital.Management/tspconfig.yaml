@@ -9,9 +9,12 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Microsoft.Orbital/{version-status}/{version}/planetarycomputer.json"
     use-read-only-status-schema: true
-  "@azure-typespec/http-client-csharp-mgmt":
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.PlanetaryComputer"
+    clear-output-folder: true
+    model-namespace: true
     namespace: "Azure.ResourceManager.PlanetaryComputer"
-    emitter-output-dir: "{output-dir}/sdk/planetarycomputer/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-planetarycomputer"
     namespace: "azure.mgmt.planetarycomputer"
@@ -40,6 +43,9 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/orbitalplanetarycomputer/Orbital.Management/"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
