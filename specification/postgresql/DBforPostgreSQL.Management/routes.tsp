@@ -36,9 +36,7 @@ interface CapabilitiesByLocationOperationGroup {
   list is ArmProviderActionSync<
     Response = CapabilityList,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      ...LocationParameter;
-    }
+    Parameters = LocationParameter
   >;
 }
 
@@ -64,9 +62,7 @@ interface NameAvailabilityOperationGroup {
     Request = Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
     Response = NameAvailabilityModel,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      ...LocationParameter;
-    }
+    Parameters = LocationParameter
   >;
 }
 
@@ -95,9 +91,7 @@ interface QuotaUsagesOperationGroup {
   list is ArmProviderActionSync<
     Response = QuotaUsageList,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      ...LocationParameter;
-    }
+    Parameters = LocationParameter
   >;
 }
 
@@ -112,8 +106,6 @@ interface VirtualNetworkSubnetUsageOperationGroup {
     Request = VirtualNetworkSubnetUsageParameter,
     Response = VirtualNetworkSubnetUsageModel,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      ...LocationParameter;
-    }
+    Parameters = LocationParameter
   >;
 }
