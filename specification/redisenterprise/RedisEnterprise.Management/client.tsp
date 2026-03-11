@@ -137,6 +137,7 @@ using Microsoft.Cache;
   "GetPrivateLinkResourcesByCluster",
   "csharp"
 );
+@@alternateType(MaintenanceWindow.duration, duration, "csharp");
 @@alternateType(AccessPolicyAssignmentPropertiesUser.objectId,
   Azure.Core.uuid,
   "csharp"
