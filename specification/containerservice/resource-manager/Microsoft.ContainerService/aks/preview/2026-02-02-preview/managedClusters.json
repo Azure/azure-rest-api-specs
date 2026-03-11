@@ -898,6 +898,9 @@
           "Create Managed Cluster with Azure Key Vault Secrets Provider Addon": {
             "$ref": "./examples/ManagedClustersCreate_AzureKeyvaultSecretsProvider.json"
           },
+          "Create Managed Cluster with ControlPlaneScalingProfile": {
+            "$ref": "./examples/ManagedClustersCreate_ControlPlaneScalingProfile.json"
+          },
           "Create Managed Cluster with CustomCATrustCertificates populated": {
             "$ref": "./examples/ManagedClustersCreate_CustomCATrustCertificates.json"
           },
@@ -7609,6 +7612,36 @@
         "keyData"
       ]
     },
+    "ControlPlaneScalingSize": {
+      "type": "string",
+      "description": "The scaling size of the control plane. Scaling sizes offer guaranteed capacity and predictable Kubernetes performance beyond standard tier defaults. Higher H sizes provide increased performance guarantees. See https://aka.ms/aks/hyperscale for performance metrics details for each size.",
+      "enum": [
+        "H2",
+        "H4",
+        "H8"
+      ],
+      "x-ms-enum": {
+        "name": "ControlPlaneScalingSize",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "H2",
+            "value": "H2",
+            "description": "H2 is the smallest scaling size with guaranteed capacity and predictable performance beyond standard tier defaults."
+          },
+          {
+            "name": "H4",
+            "value": "H4",
+            "description": "H4 scaling size provides increased guaranteed performance over H2."
+          },
+          {
+            "name": "H8",
+            "value": "H8",
+            "description": "H8 scaling size provides increased guaranteed performance over H4."
+          }
+        ]
+      }
+    },
     "CreationData": {
       "type": "object",
       "description": "Data used when creating a target resource from a source resource.",
@@ -10709,6 +10742,19 @@
         }
       }
     },
+    "ManagedClusterControlPlaneScalingProfile": {
+      "type": "object",
+      "description": "Profile for providing scaled and performance guaranteed control plane capacity to deliver consistent performance under high workload. Requires Kubernetes version 1.33.0 or later and Azure CNI Overlay networking.",
+      "properties": {
+        "scalingSize": {
+          "$ref": "#/definitions/ControlPlaneScalingSize",
+          "description": "The scaling size of the control plane. Scaling sizes offer guaranteed capacity and predictable Kubernetes performance beyond standard tier defaults. Higher H sizes provide increased performance guarantees. See https://aka.ms/aks/hyperscale for performance metrics details for each size."
+        }
+      },
+      "required": [
+        "scalingSize"
+      ]
+    },
     "ManagedClusterCostAnalysis": {
       "type": "object",
       "description": "The cost analysis configuration for the cluster",
@@ -11749,6 +11795,10 @@
         "healthMonitorProfile": {
           "$ref": "#/definitions/ManagedClusterHealthMonitorProfile",
           "description": "Health monitor profile for the managed cluster."
+        },
+        "controlPlaneScalingProfile": {
+          "$ref": "#/definitions/ManagedClusterControlPlaneScalingProfile",
+          "description": "Profile for providing scaled and performance guaranteed control plane capacity to deliver consistent performance under high workload. Requires Kubernetes version 1.33.0 or later and Azure CNI Overlay networking."
         },
         "status": {
           "$ref": "#/definitions/ManagedClusterStatus",
