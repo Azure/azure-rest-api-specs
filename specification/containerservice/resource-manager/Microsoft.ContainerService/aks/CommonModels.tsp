@@ -3658,7 +3658,7 @@ model ManagedClusterAzureMonitorProfile {
   /**
    * Application Monitoring Profile for Kubernetes Application Container. Collects application logs, metrics and traces through auto-instrumentation of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_02_01)
   appMonitoring?: ManagedClusterAzureMonitorProfileAppMonitoring;
 }
 
@@ -3752,9 +3752,9 @@ union ContainerNetworkLogs {
 }
 
 /**
- * Application Monitoring Profile for Kubernetes Application Container. Collects application logs, metrics and traces through auto-instrumentation of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+ * Application Monitoring auto-instrumentation for AKS profile.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_02_01)
 model ManagedClusterAzureMonitorProfileAppMonitoring {
   /**
    * Application Monitoring Auto Instrumentation for Kubernetes Application Container. Deploys web hook to auto-instrument Azure Monitor OpenTelemetry based SDKs to collect OpenTelemetry metrics, logs and traces of the application. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
@@ -3764,21 +3764,23 @@ model ManagedClusterAzureMonitorProfileAppMonitoring {
   /**
    * Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Metrics. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
+  @added(Versions.v2026_02_02_preview)
   openTelemetryMetrics?: ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics;
 
   /**
    * Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Logs and Traces. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
+  @added(Versions.v2026_02_02_preview)
   openTelemetryLogs?: ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogs;
 }
 
 /**
- * Application Monitoring Auto Instrumentation for Kubernetes Application Container. Deploys web hook to auto-instrument Azure Monitor OpenTelemetry based SDKs to collect OpenTelemetry metrics, logs and traces of the application. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+ * Application Monitoring auto-instrumentation for AKS. Deploys a webhook that auto-instruments workloads with Microsoft OpenTelemetry Distros to collect OpenTelemetry metrics, logs, and traces. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_02_01)
 model ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation {
   /**
-   * Indicates if Application Monitoring Auto Instrumentation is enabled or not.
+   * Indicates if Application Monitoring Auto-instrumentation is enabled or not.
    */
   enabled?: boolean;
 }
