@@ -46,24 +46,26 @@ alias SecuritySubAssessmentLegacyOps = Azure.ResourceManager.Legacy.LegacyOperat
     @segment("subAssessments")
     @key
     subAssessmentName: string;
-  }
+  },
+  CloudError
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SecuritySubAssessments {
   /**
    * Get a security sub-assessment on your scanned resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SubAssessments_Get")
+  @tag("SubAssessments")
   get is SecuritySubAssessmentLegacyOps.Read<SecuritySubAssessment>;
 
   /**
    * Get security sub-assessments on all your scanned resources inside a scope
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SubAssessments_List")
-  list is SecuritySubAssessmentLegacyOps.List<SecuritySubAssessment>;
+  @tag("SubAssessments")
+  list is SecuritySubAssessmentLegacyOps.List<
+    SecuritySubAssessment,
+    Response = SecuritySubAssessmentList
+  >;
 }
 
 @@doc(SecuritySubAssessment.name,

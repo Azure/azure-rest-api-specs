@@ -2,16 +2,6 @@
   "paths": {
     "/{scope}/providers/microsoft.Security/assessments/{assessmentName}/subAssessments": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "SubAssessments"
-          ],
-          [
-            "+",
-            "SecuritySubAssessments"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -34,19 +24,11 @@
           ]
         ],
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/SecuritySubAssessmentList",
-                "__new": "#/definitions/SecuritySubAssessmentListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -55,16 +37,6 @@
     },
     "/{scope}/providers/microsoft.Security/assessments/{assessmentName}/subAssessments/{subAssessmentName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "SubAssessments"
-          ],
-          [
-            "+",
-            "SecuritySubAssessments"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -94,7 +66,7 @@
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -103,12 +75,6 @@
     },
     "/{scope}/providers/microsoft.Security/subAssessments": {
       "get": {
-        "tags__deleted": [
-          "SubAssessments"
-        ],
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -127,7 +93,7 @@
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -136,17 +102,6 @@
     }
   },
   "definitions": {
-    "CVSS__deleted": {
-      "type": "object",
-      "description": "CVSS details",
-      "properties": {
-        "base": {
-          "type": "number",
-          "description": "CVSS base",
-          "readOnly": true
-        }
-      }
-    },
     "AzureResourceDetails__added": {
       "type": "object",
       "description": "Details of the Azure resource that was assessed",
@@ -164,14 +119,67 @@
       ],
       "x-ms-discriminator-value": "Azure"
     },
-    "Cvss__added": {
+    "CloudError__added": {
       "type": "object",
-      "description": "CVSS details",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
-        "base": {
-          "type": "number",
-          "format": "float",
-          "description": "CVSS base",
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody__added": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo__added": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
           "readOnly": true
         }
       }
@@ -262,36 +270,10 @@
         "source"
       ]
     },
-    "SecuritySubAssessmentListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
+    "CVSS": {
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/SecuritySubAssessment"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ContainerRegistryVulnerabilityProperties": {
-      "properties": {
-        "cvss": {
-          "additionalProperties": {
-            "$ref": {
-              "__old": "#/definitions/CVSS",
-              "__new": "#/definitions/Cvss"
-            }
-          }
+        "base": {
+          "format__added": "float"
         }
       }
     },
@@ -337,18 +319,6 @@
         },
         "additionalData": {
           "description__added": "Details of the sub-assessment"
-        }
-      }
-    },
-    "ServerVulnerabilityProperties": {
-      "properties": {
-        "cvss": {
-          "additionalProperties": {
-            "$ref": {
-              "__old": "#/definitions/CVSS",
-              "__new": "#/definitions/Cvss"
-            }
-          }
         }
       }
     }

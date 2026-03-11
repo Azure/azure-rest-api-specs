@@ -1,17 +1,5 @@
 ## Swagger Changes
 
-### Changes for `tags`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.Security/subAssessments'].get.tags__deleted` | deleted | `["SubAssessments"]` |
-
-### Changes for `x-ms-pageable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.Security/subAssessments'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-
 ### Changes for `$ref`
 
 | Path | Change Type | Value |
@@ -49,23 +37,29 @@
 |------|------------|-------|
 | `paths['/{scope}/providers/microsoft.Security/subAssessments'].get.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
 
-### Changes for `CVSS`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CVSS__deleted` | deleted | `{"type":"object","description":"CVSS details","properties":{"base":{"type":"number","description":"C...` |
-
 ### Changes for `AzureResourceDetails`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AzureResourceDetails__added` | added | `{"type":"object","description":"Details of the Azure resource that was assessed","properties":{"id":...` |
 
-### Changes for `Cvss`
+### Changes for `CloudError`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Cvss__added` | added | `{"type":"object","description":"CVSS details","properties":{"base":{"type":"number","format":"float"...` |
+| `definitions.CloudError__added` | added | `{"type":"object","description":"Common error response for all Azure Resource Manager APIs to return ...` |
+
+### Changes for `CloudErrorBody`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.CloudErrorBody__added` | added | `{"type":"object","description":"The error detail.","properties":{"code":{"type":"string","descriptio...` |
+
+### Changes for `ErrorAdditionalInfo`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ErrorAdditionalInfo__added` | added | `{"type":"object","description":"The resource management error additional info.","properties":{"type"...` |
 
 ### Changes for `OnPremiseResourceDetails`
 
@@ -85,11 +79,11 @@
 |------|------------|-------|
 | `definitions.ResourceDetails__added` | added | `{"type":"object","description":"Details of the resource that was assessed","properties":{"source":{"...` |
 
-### Changes for `SecuritySubAssessmentListResult`
+### Changes for `format`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.SecuritySubAssessmentListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+| `definitions.CVSS.properties.base.format__added` | added | `float` |
 
 ### Changes for `description`
 
@@ -110,12 +104,9 @@
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
-| `definitions.ContainerRegistryVulnerabilityProperties.properties.cvss.additionalProperties.$ref` | `#/definitions/CVSS` | `#/definitions/Cvss` |
 | `definitions.SecuritySubAssessment.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.SecuritySubAssessmentProperties.properties.resourceDetails.$ref` | `./common/v1/types.json#/definitions/ResourceDetails` | `#/definitions/ResourceDetails` |
-| `definitions.ServerVulnerabilityProperties.properties.cvss.additionalProperties.$ref` | `#/definitions/CVSS` | `#/definitions/Cvss` |
-| `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/subAssessments'].get.responses.200.schema.$ref` | `#/definitions/SecuritySubAssessmentList` | `#/definitions/SecuritySubAssessmentListResult` |
-| `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/subAssessments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/subAssessments/{subAssessmentName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/{scope}/providers/microsoft.Security/subAssessments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/subAssessments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/subAssessments/{subAssessmentName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{scope}/providers/microsoft.Security/subAssessments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 

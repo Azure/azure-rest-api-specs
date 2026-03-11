@@ -18,13 +18,14 @@ interface SubAssessmentsOperationGroup {
   /**
    * Get security sub-assessments on all your scanned resources inside a subscription scope
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SubAssessments_ListAll")
+  @tag("SubAssessments")
   @autoRoute
   @get
+  @list
   @action("subAssessments")
   listAll is ArmProviderActionSync<
     Response = SecuritySubAssessmentList,
-    Scope = ExtensionActionScope
+    Scope = ExtensionActionScope,
+    Error = CloudError
   >;
 }

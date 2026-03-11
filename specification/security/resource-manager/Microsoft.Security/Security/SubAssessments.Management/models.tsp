@@ -345,7 +345,7 @@ model ContainerRegistryVulnerabilityProperties extends AdditionalData {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  cvss?: Record<Cvss>;
+  cvss?: Record<CVSS>;
 
   /**
    * Indicates whether a patch is available or not
@@ -391,7 +391,7 @@ model ContainerRegistryVulnerabilityProperties extends AdditionalData {
 /**
  * CVSS details
  */
-model Cvss {
+model CVSS {
   /**
    * CVSS base
    */
@@ -448,7 +448,7 @@ model ServerVulnerabilityProperties extends AdditionalData {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  cvss?: Record<Cvss>;
+  cvss?: Record<CVSS>;
 
   /**
    * Indicates whether a patch is available or not
