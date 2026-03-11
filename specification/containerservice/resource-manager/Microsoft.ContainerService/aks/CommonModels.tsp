@@ -1243,7 +1243,7 @@ union ManagedGatewayType {
 /**
  * Whether to enable Istio as a Gateway API implementation for managed ingress with App Routing.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_02_01)
 union GatewayAPIIstioEnabled {
   string,
 
@@ -3506,7 +3506,7 @@ model ManagedClusterIngressProfileWebAppRouting {
    * Configurations for Gateway API providers to be used for managed ingress with App Routing. See https://aka.ms/k8s-gateway-api for more information on the Gateway API.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained to align with protos JSON field naming conventions"
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_02_01)
   gatewayAPIImplementations?: ManagedClusterWebAppRoutingGatewayAPIImplementations;
 
   /**
@@ -3542,7 +3542,7 @@ model ManagedClusterIngressProfileWebAppRouting {
 
 /** Configurations for Gateway API providers to be used for managed ingress with App Routing. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained to align with protos JSON field naming conventions"
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_02_01)
 model ManagedClusterWebAppRoutingGatewayAPIImplementations {
   /**
    * Configuration for using a sidecar-less Istio control plane for managed ingress via the Gateway API with App Routing. See https://aka.ms/gateway-on-istio for information on using Istio for ingress via the Gateway API.
@@ -3551,7 +3551,7 @@ model ManagedClusterWebAppRoutingGatewayAPIImplementations {
 }
 
 /** Configuration for using a sidecar-less Istio control plane for managed ingress via the Gateway API with App Routing. See https://aka.ms/gateway-on-istio for information on using Istio for ingress via the Gateway API. */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_02_01)
 model ManagedClusterAppRoutingIstio {
   /**
    * Whether to enable Istio as a Gateway API implementation for managed ingress with App Routing.
