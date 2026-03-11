@@ -1324,7 +1324,8 @@
           "enum": [
             "noMask",
             "characterMask",
-            "entityMask"
+            "entityMask",
+            "syntheticReplacement"
           ],
           "x-ms-enum": {
             "name": "RedactionPolicyKind",
@@ -1344,6 +1345,11 @@
                 "name": "entityMask",
                 "value": "entityMask",
                 "description": "Redact detected entities with entity type."
+              },
+              {
+                "name": "syntheticReplacement",
+                "value": "syntheticReplacement",
+                "description": "Replace detected entities with synthetic values."
               }
             ]
           }
@@ -1411,6 +1417,115 @@
           }
         ]
       }
+    },
+    "CharacterMaskPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of redacting with a redaction character",
+      "properties": {
+        "redactionCharacter": {
+          "type": "string",
+          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will bce * as before. We allow specific ascii characters for redaction.",
+          "default": "*",
+          "enum": [
+            "!",
+            "#",
+            "$",
+            "%",
+            "&",
+            "*",
+            "+",
+            "-",
+            "=",
+            "?",
+            "@",
+            "^",
+            "_",
+            "~"
+          ],
+          "x-ms-enum": {
+            "name": "redactionCharacter",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "exclamationPoint",
+                "value": "!",
+                "description": "Exclamation point character"
+              },
+              {
+                "name": "numberSign",
+                "value": "#",
+                "description": "Number sign character"
+              },
+              {
+                "name": "dollar",
+                "value": "$",
+                "description": "Dollar sign character"
+              },
+              {
+                "name": "perCent",
+                "value": "%",
+                "description": "Percent sign character"
+              },
+              {
+                "name": "ampersand",
+                "value": "&",
+                "description": "Ampersand character"
+              },
+              {
+                "name": "asterisk",
+                "value": "*",
+                "description": "Asterisk character"
+              },
+              {
+                "name": "plus",
+                "value": "+",
+                "description": "Plus sign character"
+              },
+              {
+                "name": "minus",
+                "value": "-",
+                "description": "Minus sign character"
+              },
+              {
+                "name": "equals",
+                "value": "=",
+                "description": "Equals sign character"
+              },
+              {
+                "name": "questionMark",
+                "value": "?",
+                "description": "Question mark character"
+              },
+              {
+                "name": "atSign",
+                "value": "@",
+                "description": "At sign character"
+              },
+              {
+                "name": "caret",
+                "value": "^",
+                "description": "Caret character"
+              },
+              {
+                "name": "underscore",
+                "value": "_",
+                "description": "Underscore character"
+              },
+              {
+                "name": "tilde",
+                "value": "~",
+                "description": "Tilde character"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "characterMask"
     },
     "ClassificationDocumentResult": {
       "type": "object",
@@ -2743,6 +2858,16 @@
         }
       ],
       "x-ms-discriminator-value": "EntityLinkingResults"
+    },
+    "EntityMaskPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of redacting PII with the entity type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "entityMask"
     },
     "EntityRecognitionLROResult": {
       "type": "object",
@@ -4480,6 +4605,16 @@
         "id",
         "text"
       ]
+    },
+    "NoMaskPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of not redacting found PII.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "noMask"
     },
     "NumberKind": {
       "type": "string",
@@ -8428,6 +8563,22 @@
           }
         ]
       }
+    },
+    "SyntheticReplacementPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of replacing detected PII with synthetic values.",
+      "properties": {
+        "preserveDataFormat": {
+          "type": "boolean",
+          "description": "Optional flag to indicate whether to preserve the original data format in the synthetic replacement. Default is false."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "syntheticReplacement"
     },
     "TargetConfidenceScoreLabel": {
       "type": "object",

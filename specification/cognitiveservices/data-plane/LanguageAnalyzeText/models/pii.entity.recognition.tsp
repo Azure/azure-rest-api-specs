@@ -130,7 +130,7 @@ model BaseRedactionPolicy {
 }
 
 /** Represents the policy of redacting with a redaction character */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2026_05_01)
 model CharacterMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
@@ -148,7 +148,7 @@ model CharacterMaskPolicyType extends BaseRedactionPolicy {
 }
 
 /** Represents the policy of replacing detected PII with synthetic values. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2026_05_01)
 model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.syntheticReplacement;
@@ -158,14 +158,14 @@ model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
 }
 
 /** Represents the policy of not redacting found PII. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2026_05_01)
 model NoMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.noMask;
 }
 
 /** Represents the policy of redacting PII with the entity type. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2026_05_01)
 model EntityMaskPolicyType extends BaseRedactionPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: RedactionPolicyKind.entityMask;
@@ -186,7 +186,7 @@ union RedactionPolicyKind {
   entityMask: "entityMask",
 
   /** Replace detected entities with synthetic values. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   syntheticReplacement: "syntheticReplacement",
 }
 
