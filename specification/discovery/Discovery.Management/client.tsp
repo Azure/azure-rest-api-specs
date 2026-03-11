@@ -1,5 +1,7 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "./tool.tsp";
+import "../Discovery.Management.Shared/control-plane.tsp";
 
 using Azure.ClientGenerator.Core;
 
@@ -19,7 +21,7 @@ model ToolUpdate {
   tags?: Record<string>;
 
   @doc("The resource-specific properties for this resource.")
-  properties?:ToolPropertiesUpdate;
+  properties?: ToolPropertiesUpdate;
 }
 
 @doc("Discovery Tool list item properties")
@@ -34,7 +36,4 @@ model ToolPropertiesUpdate {
   ...WithDefinitionContent;
 }
 
-@@alternateType(Tools.update::parameters.body,
-  ToolUpdate,
-  "javascript"
-);
+@@alternateType(Tools.update::parameters.body, ToolUpdate, "javascript");
