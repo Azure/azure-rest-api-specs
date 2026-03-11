@@ -437,10 +437,7 @@ interface Share {
       @statusCode statusCode: 202;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-
-      /** Approximate time remaining in the lease period, in seconds. */
-      @header("x-ms-lease-time") leaseTime?: int32;
-
+      ...LeaseTimeResponseHeader;
       ...LeaseIdOptionalParameter;
     }
   >;

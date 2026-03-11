@@ -54,6 +54,11 @@ namespace Customizations;
 
 @@clientName(Storage.File.Metrics.includeApis, "includeAPIs", "javascript");
 
+@@clientName(Storage.File.StorageServiceProperties,
+  "FileServiceProperties",
+  "javascript"
+);
+
 @@clientName(Storage.File.TimeoutParameter.timeout,
   "timeoutInSeconds",
   "javascript"
@@ -150,6 +155,11 @@ namespace Customizations;
 
 @@clientName(Storage.File.CopyStatusResponseHeaders.copyCompletionTime,
   "copyCompletedOn",
+  "javascript"
+);
+
+@@clientName(Storage.File.LeaseTimeResponseHeader.leaseTime,
+  "leaseTimeInSeconds",
   "javascript"
 );
 

@@ -1861,6 +1861,12 @@ alias CopyStatusResponseHeaders = {
   @header("x-ms-copy-status") copyStatus?: string;
 };
 
+/** Lease time response header. */
+alias LeaseTimeResponseHeader = {
+  /** Approximate time remaining in the lease period, in seconds. */
+  @header("x-ms-lease-time") leaseTime?: int32;
+};
+
 /** Lease response headers. */
 alias LeaseResponseHeaders = {
   /** The lease duration. */
