@@ -14,7 +14,7 @@ The current stable release of Language is 2026-05-01.
 
 These settings apply only when `--tag=release_2026_05_01` is specified on the command line.
 
-``` yaml $(tag) == 'release_2026_05_01'
+``` yaml $(tag) == 'release_2026-05-01'
 input-file:
   - stable/2026-05-01/analyzedocuments.json
 title:
