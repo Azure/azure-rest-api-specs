@@ -3963,10 +3963,6 @@
           "type": "string",
           "description": "The Azure Portal FQDN of the Fleet hub.",
           "readOnly": true
-        },
-        "rolloutStrategy": {
-          "$ref": "#/definitions/RolloutStrategy",
-          "description": "The rollout strategy configuration for the fleet managed namespace."
         }
       },
       "required": [
@@ -3982,9 +3978,17 @@
           "$ref": "#/definitions/ManagedNamespaceProperties",
           "description": "The namespace properties for the fleet managed namespace."
         },
-        "rolloutStrategy": {
-          "$ref": "#/definitions/RolloutStrategyPatch",
-          "description": "The rollout strategy configuration for the fleet managed namespace. Note: Can only transition from RollingUpdate to External."
+        "adoptionPolicy": {
+          "$ref": "#/definitions/AdoptionPolicy",
+          "description": "Action if the managed namespace with the same name already exists."
+        },
+        "deletePolicy": {
+          "$ref": "#/definitions/DeletePolicy",
+          "description": "Delete options of a fleet managed namespace."
+        },
+        "propagationPolicy": {
+          "$ref": "#/definitions/PropagationPolicy",
+          "description": "The profile of the propagation to create the namespace. Note: rolloutStrategy is nested within propagationPolicy.placementProfile.defaultClusterResourcePlacement."
         }
       }
     },
@@ -5163,6 +5167,10 @@
         "policy": {
           "$ref": "#/definitions/Placement.V1.PlacementPolicy",
           "description": "Policy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected."
+        },
+        "rolloutStrategy": {
+          "$ref": "#/definitions/Placement.V1.RolloutStrategy",
+          "description": "The rollout strategy configuration for the cluster resource placement. This field is added in version 2026-04-02-preview."
         }
       }
     },
@@ -5340,6 +5348,40 @@
         "values"
       ]
     },
+    "Placement.V1.RolloutStrategy": {
+      "type": "object",
+      "description": "The rollout strategy configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of rollout strategy. Default is RollingUpdate.",
+          "default": "RollingUpdate",
+          "enum": [
+            "RollingUpdate",
+            "External"
+          ],
+          "x-ms-enum": {
+            "name": "RolloutStrategyType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "RollingUpdate",
+                "value": "RollingUpdate",
+                "description": "Use rolling update strategy for rollout."
+              },
+              {
+                "name": "External",
+                "value": "External",
+                "description": "Use external rollout strategy managed outside of Fleet."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "Placement.V1.Toleration": {
       "type": "object",
       "description": "Toleration allows ClusterResourcePlacement to tolerate any taint that matches the triple <key,value,effect> using the matching operator <operator>.",
@@ -5457,68 +5499,6 @@
           "type": "string",
           "description": "The memory limit for the managed namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory"
         }
-      }
-    },
-    "RolloutStrategy": {
-      "type": "object",
-      "description": "The rollout strategy configuration for the fleet managed namespace.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of rollout strategy. Default is RollingUpdate.",
-          "default": "RollingUpdate",
-          "enum": [
-            "RollingUpdate",
-            "External"
-          ],
-          "x-ms-enum": {
-            "name": "RolloutStrategyType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "RollingUpdate",
-                "value": "RollingUpdate",
-                "description": "Use rolling update strategy for namespace rollout."
-              },
-              {
-                "name": "External",
-                "value": "External",
-                "description": "Use external rollout strategy managed outside of Fleet."
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "RolloutStrategyPatch": {
-      "type": "object",
-      "description": "The rollout strategy configuration for patch operations. Only allows transition from RollingUpdate to External.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/RolloutStrategyTypePatch",
-          "description": "The type of rollout strategy. Can only be set to External when current value is RollingUpdate. Once set to External, cannot be changed back to RollingUpdate."
-        }
-      }
-    },
-    "RolloutStrategyTypePatch": {
-      "type": "string",
-      "description": "The possible rollout strategy types for patch operations. Only External is allowed to enforce one-way transition.",
-      "enum": [
-        "External"
-      ],
-      "x-ms-enum": {
-        "name": "RolloutStrategyTypePatch",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "External",
-            "value": "External",
-            "description": "Use external rollout strategy managed outside of Fleet. This is the only value allowed in patch operations."
-          }
-        ]
       }
     },
     "SkipProperties": {

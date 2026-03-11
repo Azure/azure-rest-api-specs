@@ -1,18 +1,41 @@
 import "@azure-tools/typespec-azure-resource-manager";
 import "../../../../k8s.io/api/core/v1/types.tsp";
 import "../../../../k8s.io/apimachinery/apis/meta/v1/types.tsp";
+import "../../../../main.tsp";
 
 using TypeSpec.Versioning;
 using Core.V1;
 using Meta.V1;
 using Azure.ResourceManager;
+using Microsoft.ContainerService;
 
 namespace Placement.V1;
+
+@doc("The rollout strategy configuration.")
+model RolloutStrategy {
+  @doc("The type of rollout strategy. Default is RollingUpdate.")
+  type: RolloutStrategyType = RolloutStrategyType.RollingUpdate;
+}
+
+@doc("The possible rollout strategy types.")
+union RolloutStrategyType {
+  @doc("Use rolling update strategy for rollout.")
+  RollingUpdate: "RollingUpdate",
+
+  @doc("Use external rollout strategy managed outside of Fleet.")
+  External: "External",
+
+  string,
+}
 
 @doc("ClusterResourcePlacementSpec defines the desired state of ClusterResourcePlacement.")
 model ClusterResourcePlacementSpec {
   @doc("Policy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected.")
   policy?: PlacementPolicy;
+
+  @added(Versions.v2026_04_02_preview)
+  @doc("The rollout strategy configuration for the cluster resource placement. This field is added in version 2026-04-02-preview.")
+  rolloutStrategy?: RolloutStrategy;
 }
 
 @doc("PlacementPolicy contains the rules to select target member clusters to place the selected resources. Note that only clusters that are both joined and satisfying the rules will be selected. You can only specify at most one of the two fields: ClusterNames and Affinity. If none is specified, all the joined clusters are selected.")

@@ -30,15 +30,15 @@
               "egress": "AllowAll"
             }
           },
-          "rolloutStrategy": {
-            "type": "RollingUpdate"
-          },
           "adoptionPolicy": "Never",
           "deletePolicy": "Keep",
           "propagationPolicy": {
             "type": "Placement",
             "placementProfile": {
               "defaultClusterResourcePlacement": {
+                "rolloutStrategy": {
+                  "type": "RollingUpdate"
+                },
                 "policy": {
                   "placementType": "PickAll",
                   "affinity": {

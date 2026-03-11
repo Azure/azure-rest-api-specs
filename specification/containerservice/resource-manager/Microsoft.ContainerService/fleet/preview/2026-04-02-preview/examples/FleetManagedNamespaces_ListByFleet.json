@@ -32,15 +32,15 @@
                   "egress": "AllowAll"
                 }
               },
-              "rolloutStrategy": {
-                "type": "External"
-              },
               "adoptionPolicy": "Never",
               "deletePolicy": "Keep",
               "propagationPolicy": {
                 "type": "Placement",
                 "placementProfile": {
                   "defaultClusterResourcePlacement": {
+                    "rolloutStrategy": {
+                      "type": "External"
+                    },
                     "policy": {
                       "placementType": "PickAll",
                       "affinity": {

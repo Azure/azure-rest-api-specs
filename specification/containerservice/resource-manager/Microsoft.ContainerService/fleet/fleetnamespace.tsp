@@ -59,10 +59,6 @@ model FleetManagedNamespaceProperties {
   @visibility(Lifecycle.Read)
   @doc("The Azure Portal FQDN of the Fleet hub.")
   portalFqdn?: string;
-
-  @added(Versions.v2026_04_02_preview)
-  @doc("The rollout strategy configuration for the fleet managed namespace.")
-  rolloutStrategy?: RolloutStrategy;
 }
 
 @added(Versions.v2025_08_01_preview)
@@ -93,41 +89,6 @@ model ManagedNamespaceProperties {
 
   @doc("The default network policy for the fleet managed namespace.")
   defaultNetworkPolicy?: NetworkPolicy;
-}
-
-@doc("The rollout strategy configuration for the fleet managed namespace.")
-@added(Versions.v2026_04_02_preview)
-model RolloutStrategy {
-  @doc("The type of rollout strategy. Default is RollingUpdate.")
-  type: RolloutStrategyType = RolloutStrategyType.RollingUpdate;
-}
-
-@doc("The possible rollout strategy types for fleet managed namespace.")
-@added(Versions.v2026_04_02_preview)
-union RolloutStrategyType {
-  @doc("Use rolling update strategy for namespace rollout.")
-  RollingUpdate: "RollingUpdate",
-
-  @doc("Use external rollout strategy managed outside of Fleet.")
-  External: "External",
-
-  string,
-}
-
-@doc("The rollout strategy configuration for patch operations. Only allows transition from RollingUpdate to External.")
-@added(Versions.v2026_04_02_preview)
-model RolloutStrategyPatch {
-  @doc("The type of rollout strategy. Can only be set to External when current value is RollingUpdate. Once set to External, cannot be changed back to RollingUpdate.")
-  type?: RolloutStrategyTypePatch;
-}
-
-@doc("The possible rollout strategy types for patch operations. Only External is allowed to enforce one-way transition.")
-@added(Versions.v2026_04_02_preview)
-union RolloutStrategyTypePatch {
-  @doc("Use external rollout strategy managed outside of Fleet. This is the only value allowed in patch operations.")
-  External: "External",
-
-  string,
 }
 
 @doc("The resource quota for the managed namespace.")
@@ -273,8 +234,14 @@ model FleetManagedNamespacePropertiesPatch {
   @doc("The namespace properties for the fleet managed namespace.")
   managedNamespaceProperties?: ManagedNamespaceProperties;
 
-  @doc("The rollout strategy configuration for the fleet managed namespace. Note: Can only transition from RollingUpdate to External.")
-  rolloutStrategy?: RolloutStrategyPatch;
+  @doc("Action if the managed namespace with the same name already exists.")
+  adoptionPolicy?: AdoptionPolicy;
+
+  @doc("Delete options of a fleet managed namespace.")
+  deletePolicy?: DeletePolicy;
+
+  @doc("The profile of the propagation to create the namespace. Note: rolloutStrategy is nested within propagationPolicy.placementProfile.defaultClusterResourcePlacement.")
+  propagationPolicy?: PropagationPolicy;
 }
 
 @added(Versions.v2025_08_01_preview)
