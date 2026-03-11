@@ -1239,24 +1239,22 @@
     },
     "SubscriptionAliasListResult": {
       "type": "object",
-      "description": "The response of a SubscriptionAliasResponse list operation.",
+      "description": "The list of aliases.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SubscriptionAliasResponse items on this page",
+          "description": "The list of subscription aliases.",
           "items": {
             "$ref": "#/definitions/SubscriptionAliasResponse"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "SubscriptionAliasResponse": {
       "type": "object",
@@ -1356,24 +1354,25 @@
     },
     "TargetDirectoryListResult": {
       "type": "object",
-      "description": "The response of a TargetDirectoryResult list operation.",
+      "description": "Subscription Response to list out Changed Target Directory.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TargetDirectoryResult items on this page",
+          "description": "The list of subscription response to changed target directory.",
           "items": {
             "$ref": "#/definitions/TargetDirectoryResult"
-          }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "TargetDirectoryRequest": {
       "type": "object",
