@@ -92,7 +92,7 @@ interface Agents {
       /** The name of the agent to delete. */
       @path agent_name: string;
     },
-    DeleteAgentResponse
+    void
   >;
 
   /**
