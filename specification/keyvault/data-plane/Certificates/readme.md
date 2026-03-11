@@ -18,7 +18,6 @@ To see additional help and options, run:
 
 ---
 
-
 ## Configuration
 
 ### Basic Information
