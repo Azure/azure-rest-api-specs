@@ -1617,6 +1617,7 @@ alias ShareSnapshotParameter = {
 /** Common metadata headers. */
 alias MetadataHeaders = {
   /** Optional. User-defined metadata for the resource. */
+  @alternateType(Record<string>, "rust,javascript,python,csharp,go")
   @header("x-ms-meta")
   metadata?: string;
 };

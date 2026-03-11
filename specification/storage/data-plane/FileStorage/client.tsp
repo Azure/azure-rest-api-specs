@@ -182,6 +182,12 @@ namespace Customizations;
   "javascript"
 );
 
+@@clientOption(Storage.File.MetadataHeaders.metadata,
+  "collectionHeaderPrefix",
+  "x-ms-meta-",
+  "csharp"
+);
+
 @@clientOption(Storage.File, "includeRootSlash", false, "python,javascript");
 
 @@Legacy.disablePageable(Storage.File.Service.listSharesSegment,
