@@ -79,3 +79,15 @@ using Microsoft.ContainerRegistry;
 // C# client naming: fix enum value casing
 @@clientName(SecretObjectType.Vaultsecret, "VaultSecret", "csharp");
 @@clientName(SourceTriggerEvent.pullrequest, "PullRequest", "csharp");
+
+// C# client naming: property renames
+@@clientName(AuthInfo.expiresIn, "ExpiresInSeconds", "csharp");
+@@clientName(AuthInfoUpdateParameters.expiresIn, "ExpiresInSeconds", "csharp");
+@@clientName(DockerBuildRequest.noCache, "IsCacheDisabled", "csharp");
+@@clientName(DockerBuildStep.noCache, "IsCacheDisabled", "csharp");
+@@clientName(DockerBuildStepUpdateParameters.noCache,
+  "IsCacheDisabled",
+  "csharp"
+);
+@@clientName(RunProperties.createTime, "CreatedOn", "csharp");
+@@clientName(RunFilter.createTime, "CreatedOn", "csharp");
