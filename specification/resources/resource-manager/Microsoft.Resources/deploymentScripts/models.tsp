@@ -402,7 +402,7 @@ model ScriptStatus {
   /**
    * Error that is relayed from the script execution.
    */
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 }
 
 /**
