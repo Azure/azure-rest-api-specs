@@ -184,69 +184,6 @@
         }
       }
     },
-    "OnPremiseResourceDetails__added": {
-      "type": "object",
-      "description": "Details of the On Premise resource that was assessed",
-      "properties": {
-        "source": {
-          "type": "string",
-          "description": "Discriminator property for OnPremiseResourceDetails."
-        },
-        "workspaceId": {
-          "type": "string",
-          "description": "Azure resource Id of the workspace the machine is attached to"
-        },
-        "vmuuid": {
-          "type": "string",
-          "description": "The unique Id of the machine"
-        },
-        "sourceComputerId": {
-          "type": "string",
-          "description": "The oms agent Id installed on the machine"
-        },
-        "machineName": {
-          "type": "string",
-          "description": "The name of the machine"
-        }
-      },
-      "discriminator": "source",
-      "required": [
-        "machineName",
-        "source",
-        "sourceComputerId",
-        "vmuuid",
-        "workspaceId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceDetails"
-        }
-      ]
-    },
-    "OnPremiseSqlResourceDetails__added": {
-      "type": "object",
-      "description": "Details of the On Premise Sql resource that was assessed",
-      "properties": {
-        "serverName": {
-          "type": "string",
-          "description": "The Sql server name installed on the machine"
-        },
-        "databaseName": {
-          "type": "string",
-          "description": "The Sql database name installed on the machine"
-        }
-      },
-      "required": [
-        "databaseName",
-        "serverName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/OnPremiseResourceDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "OnPremiseSql"
-    },
     "ResourceDetails__added": {
       "type": "object",
       "description": "Details of the resource that was assessed",

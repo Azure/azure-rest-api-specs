@@ -61,18 +61,6 @@
 |------|------------|-------|
 | `definitions.ErrorAdditionalInfo__added` | added | `{"type":"object","description":"The resource management error additional info.","properties":{"type"...` |
 
-### Changes for `OnPremiseResourceDetails`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OnPremiseResourceDetails__added` | added | `{"type":"object","description":"Details of the On Premise resource that was assessed","properties":{...` |
-
-### Changes for `OnPremiseSqlResourceDetails`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OnPremiseSqlResourceDetails__added` | added | `{"type":"object","description":"Details of the On Premise Sql resource that was assessed","propertie...` |
-
 ### Changes for `ResourceDetails`
 
 | Path | Change Type | Value |
