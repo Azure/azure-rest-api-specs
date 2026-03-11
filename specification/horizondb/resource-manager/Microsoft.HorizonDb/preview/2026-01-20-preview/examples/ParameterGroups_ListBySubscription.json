@@ -19,12 +19,23 @@
               "team": "data-platform"
             },
             "properties": {
-              "parameters": {
-                "max_connections": {
+              "parameters": [
+                {
+                  "name": "max_connections",
+                  "description": "Sets the maximum number of concurrent connections",
                   "value": "200",
-                  "source": "abc"
+                  "source": "user-override",
+                  "dataType": "integer",
+                  "allowedValues": ["100", "200", "500", "1000"],
+                  "isDynamic": true,
+                  "isReadOnly": false,
+                  "documentationLink": "https://docs.example.com/max_connections",
+                  "unit": "connections",
+                  "defaultValue": "100",
+                  "categories": "Connections",
+                  "level": "cluster"
                 }
-              },
+              ],
               "description": "Parameter group for high-throughput workloads",
               "targetVersion": 12,
               "version": 22,
@@ -41,12 +52,23 @@
               "env": "test"
             },
             "properties": {
-              "parameters": {
-                "shared_buffers": {
+              "parameters": [
+                {
+                  "name": "shared_buffers",
+                  "description": "Sets the amount of memory the database server uses for shared memory buffers",
                   "value": "1000",
-                  "source": "abc"
+                  "source": "user-override",
+                  "dataType": "integer",
+                  "allowedValues": ["1000", "2000", "4000", "8000"],
+                  "isDynamic": false,
+                  "isReadOnly": false,
+                  "documentationLink": "https://docs.example.com/shared_buffers",
+                  "unit": "MB",
+                  "defaultValue": "1000",
+                  "categories": "Memory",
+                  "level": "cluster"
                 }
-              },
+              ],
               "description": "Parameter group for testing",
               "targetVersion": 11,
               "version": 20,

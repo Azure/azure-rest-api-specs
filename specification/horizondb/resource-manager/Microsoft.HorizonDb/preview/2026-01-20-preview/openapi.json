@@ -140,45 +140,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/parameterGroups": {
-      "get": {
-        "operationId": "HorizonDbParameterGroups_ListBySubscription",
-        "tags": [
-          "HorizonDbParameterGroups"
-        ],
-        "description": "Lists all HorizonDb parameter groups in a subscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroupListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List HorizonDb parameter groups in a subscription": {
-            "$ref": "./examples/ParameterGroups_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters": {
       "get": {
         "operationId": "HorizonDbClusters_ListByResourceGroup",
@@ -2179,13 +2140,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}/history": {
-      "post": {
-        "operationId": "HorizonDbParameterGroups_ListHistory",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}/versions": {
+      "get": {
+        "operationId": "HorizonDbParameterGroups_ListVersions",
         "tags": [
           "HorizonDbParameterGroups"
         ],
-        "description": "Gets the history of a parameter group",
+        "description": "Lists parameter groups filtered by version number",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2205,6 +2166,14 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The version number to filter by",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -2222,9 +2191,12 @@
           }
         },
         "x-ms-examples": {
-          "List history for a HorizonDb parameter group": {
-            "$ref": "./examples/ParameterGroups_ListHistory.json"
+          "List parameter groups filtered by version": {
+            "$ref": "./examples/ParameterGroups_ListVersions.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -2234,18 +2206,13 @@
       "type": "object",
       "description": "Connection information for a cluster or pool",
       "properties": {
-        "armId": {
+        "id": {
           "type": "string",
-          "description": "ARM resource ID of the connected resource"
+          "description": "The resource ID of the connected resource"
         },
-        "isLatestVersionReflected": {
+        "type": {
           "type": "string",
-          "description": "Whether the latest version is reflected"
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Version number"
+          "description": "The type of the resource"
         }
       }
     },
@@ -2649,10 +2616,10 @@
       "type": "object",
       "description": "Properties for parameter group connections",
       "properties": {
-        "connections": {
-          "type": "object",
+        "clusters": {
+          "type": "array",
           "description": "Connected clusters and pools",
-          "additionalProperties": {
+          "items": {
             "$ref": "#/definitions/ConnectionInfo"
           },
           "readOnly": true
@@ -2702,9 +2669,9 @@
       "description": "Properties of a HorizonDb parameter group",
       "properties": {
         "parameters": {
-          "type": "object",
+          "type": "array",
           "description": "Parameters in the parameter group",
-          "additionalProperties": {
+          "items": {
             "$ref": "#/definitions/ParameterProperties"
           },
           "x-ms-mutability": [
@@ -2762,9 +2729,9 @@
       "description": "Properties of a HorizonDb parameter group for update operations",
       "properties": {
         "parameters": {
-          "type": "object",
+          "type": "array",
           "description": "Parameters in the parameter group",
-          "additionalProperties": {
+          "items": {
             "$ref": "#/definitions/ParameterProperties"
           },
           "x-ms-mutability": [
@@ -3152,6 +3119,15 @@
       "type": "object",
       "description": "Properties of a HorizonDb parameters",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the parameter"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the parameter",
+          "readOnly": true
+        },
         "value": {
           "type": "string",
           "description": "The value of the configuration"
@@ -3159,6 +3135,54 @@
         "source": {
           "type": "string",
           "description": "The source of the configuration value"
+        },
+        "dataType": {
+          "type": "string",
+          "description": "The data type of the parameter",
+          "readOnly": true
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "The allowed values for the parameter",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "isDynamic": {
+          "type": "boolean",
+          "description": "Whether the parameter can be changed dynamically",
+          "readOnly": true
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "description": "Whether the parameter is a read-only parameter",
+          "readOnly": true
+        },
+        "documentationLink": {
+          "type": "string",
+          "description": "Link to parameter documentation",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of measurement for the parameter",
+          "readOnly": true
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "The default value of the parameter",
+          "readOnly": true
+        },
+        "categories": {
+          "type": "string",
+          "description": "The categories this parameter belongs to",
+          "readOnly": true
+        },
+        "level": {
+          "type": "string",
+          "description": "The level at which this parameter applies",
+          "readOnly": true
         }
       }
     },

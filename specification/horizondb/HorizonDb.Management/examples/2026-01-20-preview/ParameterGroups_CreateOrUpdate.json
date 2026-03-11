@@ -13,20 +13,23 @@
         "team": "data-platform"
       },
       "properties": {
-        "parameters": {
-          "max_connections": {
+        "parameters": [
+          {
+            "name": "max_connections",
             "value": "200",
-            "source": "abc"
+            "source": "user-override"
           },
-          "log_min_error_statement": {
+          {
+            "name": "log_min_error_statement",
             "value": "error",
-            "source": "abc"
+            "source": "user-override"
           },
-          "shared_buffers": {
+          {
+            "name": "shared_buffers",
             "value": "2000",
-            "source": "abc"
+            "source": "user-override"
           }
-        },
+        ],
         "description": "Parameter group for high-throughput workloads",
         "targetVersion": 12,
         "restartMode": "Immediate"
@@ -45,20 +48,53 @@
           "team": "data-platform"
         },
         "properties": {
-          "parameters": {
-            "max_connections": {
+          "parameters": [
+            {
+              "name": "max_connections",
+              "description": "Sets the maximum number of concurrent connections",
               "value": "200",
-              "source": "abc"
+              "source": "user-override",
+              "dataType": "integer",
+              "allowedValues": ["100", "200", "500", "1000"],
+              "isDynamic": true,
+              "isReadOnly": false,
+              "documentationLink": "https://docs.example.com/max_connections",
+              "unit": "connections",
+              "defaultValue": "100",
+              "categories": "Connections",
+              "level": "cluster"
             },
-            "log_min_error_statement": {
+            {
+              "name": "log_min_error_statement",
+              "description": "Controls which statements are logged",
               "value": "error",
-              "source": "abc"
+              "source": "user-override",
+              "dataType": "string",
+              "allowedValues": ["debug", "info", "notice", "warning", "error", "log", "fatal", "panic"],
+              "isDynamic": true,
+              "isReadOnly": false,
+              "documentationLink": "https://docs.example.com/log_min_error_statement",
+              "unit": null,
+              "defaultValue": "panic",
+              "categories": "Logging",
+              "level": "cluster"
             },
-            "shared_buffers": {
+            {
+              "name": "shared_buffers",
+              "description": "Sets the amount of memory the database server uses for shared memory buffers",
               "value": "2000",
-              "source": "abc"
+              "source": "user-override",
+              "dataType": "integer",
+              "allowedValues": ["1000", "2000", "4000", "8000"],
+              "isDynamic": false,
+              "isReadOnly": false,
+              "documentationLink": "https://docs.example.com/shared_buffers",
+              "unit": "MB",
+              "defaultValue": "1000",
+              "categories": "Memory",
+              "level": "cluster"
             }
-          },
+          ],
           "description": "Parameter group for high-throughput workloads",
           "targetVersion": 12,
           "version": 22,
@@ -78,20 +114,53 @@
           "team": "data-platform"
         },
         "properties": {
-          "parameters": {
-            "max_connections": {
+          "parameters": [
+            {
+              "name": "max_connections",
+              "description": "Sets the maximum number of concurrent connections",
               "value": "200",
-              "source": "abc"
+              "source": "user-override",
+              "dataType": "integer",
+              "allowedValues": ["100", "200", "500", "1000"],
+              "isDynamic": true,
+              "isReadOnly": false,
+              "documentationLink": "https://docs.example.com/max_connections",
+              "unit": "connections",
+              "defaultValue": "100",
+              "categories": "Connections",
+              "level": "cluster"
             },
-            "log_min_error_statement": {
+            {
+              "name": "log_min_error_statement",
+              "description": "Controls which statements are logged",
               "value": "error",
-              "source": "abc"
+              "source": "user-override",
+              "dataType": "string",
+              "allowedValues": ["debug", "info", "notice", "warning", "error", "log", "fatal", "panic"],
+              "isDynamic": true,
+              "isReadOnly": false,
+              "documentationLink": "https://docs.example.com/log_min_error_statement",
+              "unit": null,
+              "defaultValue": "panic",
+              "categories": "Logging",
+              "level": "cluster"
             },
-            "shared_buffers": {
+            {
+              "name": "shared_buffers",
+              "description": "Sets the amount of memory the database server uses for shared memory buffers",
               "value": "2000",
-              "source": "abc"
+              "source": "user-override",
+              "dataType": "integer",
+              "allowedValues": ["1000", "2000", "4000", "8000"],
+              "isDynamic": false,
+              "isReadOnly": false,
+              "documentationLink": "https://docs.example.com/shared_buffers",
+              "unit": "MB",
+              "defaultValue": "1000",
+              "categories": "Memory",
+              "level": "cluster"
             }
-          },
+          ],
           "description": "Parameter group for high-throughput workloads",
           "targetVersion": 12,
           "version": 22,

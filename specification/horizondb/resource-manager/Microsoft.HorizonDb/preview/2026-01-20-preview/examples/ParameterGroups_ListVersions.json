@@ -1,8 +1,11 @@
 {
-  "operationId": "HorizonDbParameterGroups_ListBySubscription",
-  "title": "List HorizonDb parameter groups in a subscription",
+  "operationId": "HorizonDbParameterGroups_ListVersions",
+  "title": "List parameter groups filtered by version",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "myResourceGroup",
+    "parameterGroupName": "pg1",
+    "version": 22,
     "api-version": "2026-01-20-preview"
   },
   "responses": {
@@ -22,18 +25,18 @@
               "parameters": [
                 {
                   "name": "max_connections",
-                  "description": "Sets the maximum number of concurrent connections",
+                  "description": "Maximum number of concurrent connections to the database",
                   "value": "200",
-                  "source": "user-override",
+                  "source": "user",
                   "dataType": "integer",
-                  "allowedValues": ["100", "200", "500", "1000"],
+                  "allowedValues": ["100", "200", "300", "400", "500"],
                   "isDynamic": true,
                   "isReadOnly": false,
-                  "documentationLink": "https://docs.example.com/max_connections",
+                  "documentationLink": "https://docs.postgresql.org/current/runtime-config-connection.html#GUC-MAX-CONNECTIONS",
                   "unit": "connections",
                   "defaultValue": "100",
                   "categories": "Connections",
-                  "level": "cluster"
+                  "level": "Cluster"
                 }
               ],
               "description": "Parameter group for high-throughput workloads",
@@ -47,32 +50,32 @@
             "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/anotherResourceGroup/providers/Microsoft.HorizonDb/parameterGroups/pg3",
             "name": "pg3",
             "type": "Microsoft.HorizonDb/parameterGroups",
-            "location": "centralus",
+            "location": "westus2",
             "tags": {
-              "env": "test"
+              "env": "prod"
             },
             "properties": {
               "parameters": [
                 {
                   "name": "shared_buffers",
-                  "description": "Sets the amount of memory the database server uses for shared memory buffers",
-                  "value": "1000",
-                  "source": "user-override",
+                  "description": "Amount of memory used for shared memory buffers",
+                  "value": "3000",
+                  "source": "user",
                   "dataType": "integer",
-                  "allowedValues": ["1000", "2000", "4000", "8000"],
+                  "allowedValues": ["128", "256", "512", "1024", "2048", "4096"],
                   "isDynamic": false,
                   "isReadOnly": false,
-                  "documentationLink": "https://docs.example.com/shared_buffers",
+                  "documentationLink": "https://docs.postgresql.org/current/runtime-config-resource.html#GUC-SHARED-BUFFERS",
                   "unit": "MB",
-                  "defaultValue": "1000",
+                  "defaultValue": "128",
                   "categories": "Memory",
-                  "level": "cluster"
+                  "level": "Cluster"
                 }
               ],
-              "description": "Parameter group for testing",
-              "targetVersion": 11,
-              "version": 20,
-              "restartMode": "Immediate",
+              "description": "Parameter group for production workloads",
+              "targetVersion": 13,
+              "version": 22,
+              "restartMode": "Maintenance",
               "provisioningState": "Succeeded"
             }
           }

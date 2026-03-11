@@ -435,10 +435,9 @@ union RestartMode {
 
 @doc("Properties of a HorizonDb parameter group")
 model HorizonDbParameterGroupProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Parameters in the parameter group")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  parameters?: Record<ParameterProperties>;
+  parameters?: ParameterProperties[];
 
   @doc("Description of the parameter group")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
@@ -463,11 +462,54 @@ model HorizonDbParameterGroupProperties {
 
 @doc("Properties of a HorizonDb parameters")
 model ParameterProperties {
+  @doc("The name of the parameter")
+  name?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The description of the parameter")
+  description?: string;
+
   @doc("The value of the configuration")
   value?: string;
 
   @doc("The source of the configuration value")
   source?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The data type of the parameter")
+  dataType?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The allowed values for the parameter")
+  allowedValues?: string[];
+
+  @visibility(Lifecycle.Read)
+  @doc("Whether the parameter can be changed dynamically")
+  isDynamic?: boolean;
+
+  @visibility(Lifecycle.Read)
+  @doc("Whether the parameter is a read-only parameter")
+  isReadOnly?: boolean;
+
+  @visibility(Lifecycle.Read)
+  @doc("Link to parameter documentation")
+  documentationLink?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The unit of measurement for the parameter")
+  unit?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The default value of the parameter")
+  defaultValue?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The categories this parameter belongs to")
+  categories?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The level at which this parameter applies")
+  level?: string;
 }
 
 @doc("Properties of a HorizonDb parameter group for update operations")
@@ -475,7 +517,7 @@ model HorizonDbParameterGroupPropertiesForPatchUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Parameters in the parameter group")
   @visibility(Lifecycle.Update)
-  parameters?: Record<ParameterProperties>;
+  parameters?: ParameterProperties[];
 
   @doc("Description of the parameter group")
   @visibility(Lifecycle.Update)
@@ -500,20 +542,16 @@ model HorizonDbParameterGroupForPatchUpdate {
 
 @doc("Properties for parameter group connections")
 model HorizonDbParameterGroupConnectionsProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Connected clusters and pools")
   @visibility(Lifecycle.Read)
-  connections?: Record<ConnectionInfo>;
+  clusters?: ConnectionInfo[];
 }
 
 @doc("Connection information for a cluster or pool")
 model ConnectionInfo {
-  @doc("ARM resource ID of the connected resource")
-  armId?: string;
+  @doc("The resource ID of the connected resource")
+  id?: string;
 
-  @doc("Whether the latest version is reflected")
-  isLatestVersionReflected?: string;
-
-  @doc("Version number")
-  version?: int32;
+  @doc("The type of the resource")
+  type?: string;
 }

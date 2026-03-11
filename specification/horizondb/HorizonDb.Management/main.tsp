@@ -266,9 +266,6 @@ interface HorizonDbParameterGroups {
   @doc("Lists all HorizonDb parameter groups in a resource group")
   listByResourceGroup is ArmResourceListByParent<HorizonDbParameterGroup>;
 
-  @doc("Lists all HorizonDb parameter groups in a subscription")
-  listBySubscription is ArmListBySubscription<HorizonDbParameterGroup>;
-
   @doc("Gets all clusters and pools connected to a parameter group")
   @action("connections")
   listConnections is ArmResourceActionSync<
@@ -278,12 +275,18 @@ interface HorizonDbParameterGroups {
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<HorizonDbParameterGroup>
   >;
 
-  @doc("Gets the history of a parameter group")
-  @action("history")
-  listHistory is ArmResourceActionSync<
+  @doc("Lists parameter groups filtered by version number")
+  @get
+  @list
+  @action("versions")
+  listVersions is ArmResourceActionSync<
     HorizonDbParameterGroup,
     void,
     ArmResponse<Azure.ResourceManager.ResourceListResult<HorizonDbParameterGroup>>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<HorizonDbParameterGroup>
+    Parameters = {
+      @doc("The version number to filter by")
+      @query
+      version?: int32;
+    }
   >;
 }
