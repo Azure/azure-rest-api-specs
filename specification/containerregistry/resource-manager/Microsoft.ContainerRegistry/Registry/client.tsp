@@ -35,4 +35,3 @@ using Microsoft.ContainerRegistry;
 @@clientName(LoginServerProperties, "ConnectedRegistryLoginServer", "csharp");
 @@clientName(LoggingProperties, "ConnectedRegistryLogging", "csharp");
 @@clientName(StatusDetailProperties, "ConnectedRegistryStatusDetail", "csharp");
-@@clientName(ImportSource, "ContainerRegistryImportSource", "csharp");
