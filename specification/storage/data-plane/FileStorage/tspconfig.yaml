@@ -20,15 +20,16 @@ options:
   #   emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   #   namespace: "Azure.Storage.Files"
   #   model-namespace: true
-  # "@azure-tools/typespec-ts":
-  #   emitter-output-dir: "{output-dir}/{service-dir}/storage-file-rest"
-  #   generate-metadata: false
-  #   generate-test: false
-  #   include-headers-in-response: true
-  #   package-details:
-  #     name: "@azure-rest/storage-file"
-  #     description: "Azure.Storage.File Service"
-  #   flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/storage-file-share"
+    generate-metadata: false
+    generate-test: false
+    include-headers-in-response: true
+    enable-storage-compat: true
+    package-details:
+      name: "@azure/storage-file-share"
+      description: "Azure.Storage.File Service"
+    flavor: azure
   # "@azure-tools/typespec-java":
   #   emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-file"
   #   namespace: com.azure.storage.file
