@@ -9,15 +9,23 @@ namespace Microsoft.ApiCenter;
 @@clientName(Azure.Core.EtagResponseEnvelope.etagHeader, "etag", "java");
 
 // Rename mapping for C# client
-@@clientName(ApiSources, "ApiCenterApiResource", "csharp");
-@@clientName(ApiImportSuccess, "ApiCenterApiImportResult", "csharp");
+@@clientName(ApiSources, "ApiCenterApiSource", "csharp");
+@@clientName(ApiImportSuccess, "ApiCenterApiImportSuccess", "csharp");
 @@clientName(ApiSourceLinkState, "ApiCenterApiSourceLinkState", "csharp");
+@@clientName(AzureApiManagementSource,
+  "ApiCenterApiAzureApiManagementSource",
+  "csharp"
+);
 @@clientName(ImportSpecificationOptions,
-  "ApiCenterImportSpecificationFormat",
+  "ApiCenterImportSpecificationModel",
   "csharp"
 );
 @@clientName(Contact, "ApiContactInformation", "csharp");
 @@clientName(DeletedServices, "ApiCenterDeletedService", "csharp");
+@@clientName(DeletedServiceProperties,
+  "ApiCenterDeletedServiceProperties",
+  "csharp"
+);
 @@clientName(License, "ApiLicenseInformation", "csharp");
 @@clientName(Onboarding, "EnvironmentOnboardingInformation", "csharp");
 @@clientName(ApiDefinitionPropertiesSpecification,
@@ -65,6 +73,7 @@ namespace Microsoft.ApiCenter;
 @@clientName(ProvisioningState, "ApiCenterProvisioningState", "csharp");
 @@clientName(WorkspaceProperties, "ApiCenterWorkspaceProperties", "csharp");
 @@clientName(ServiceProperties, "ApiCenterServiceProperties", "csharp");
+@@clientName(ServiceProperties.restore, "IsRestore", "csharp");
 @@clientName(DeploymentServer, "ApiCenterDeploymentServer", "csharp");
 @@clientName(LinkState, "ApiCenterLinkState", "csharp");
 @@clientName(EnvironmentServer.type, "EnvironmentServerType", "csharp");
