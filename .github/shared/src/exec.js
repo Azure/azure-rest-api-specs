@@ -11,6 +11,10 @@ const execFileImpl = promisify(child_process.execFile);
  */
 
 /**
+ * @typedef {ExecOptions & { prefix?: string }} ExecNpmOptions
+ */
+
+/**
  * @typedef {Object} ExecResult
  * @property {string} stdout
  * @property {string} stderr
@@ -75,11 +79,13 @@ export async function execFile(file, args, options = {}) {
  * Calls `execFile()` with appropriate arguments to run `npm` on all platforms
  *
  * @param {string[]} args
- * @param {ExecOptions} [options]
+ * @param {ExecNpmOptions} [options]
  * @returns {Promise<ExecResult>}
  * @throws {ExecError}
  */
 export async function execNpm(args, options = {}) {
+  const { prefix } = options;
+
   // Exclude platform-specific code from coverage
   /* v8 ignore start */
   const { file, defaultArgs } =
@@ -99,20 +105,32 @@ export async function execNpm(args, options = {}) {
           // example: "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js"
           defaultArgs: [
             "--",
-            join(dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js"),
+            join(
+              dirname(process.execPath),
+              "node_modules",
+              "npm",
+              "bin",
+              "npm-cli.js",
+            ),
           ],
         }
       : { file: "npm", defaultArgs: [] };
   /* v8 ignore stop */
 
-  return await execFile(file, [...defaultArgs, ...args], options);
+  const prefixArgs = prefix ? ["--prefix", prefix] : [];
+
+  return await execFile(
+    file,
+    [...defaultArgs, ...prefixArgs, ...args],
+    options,
+  );
 }
 
 /**
  * Calls `execNpm()` with arguments ["exec", "--no", "--"] prepended.
  *
  * @param {string[]} args
- * @param {ExecOptions} [options]
+ * @param {ExecNpmOptions} [options]
  * @returns {Promise<ExecResult>}
  * @throws {ExecError}
  */
