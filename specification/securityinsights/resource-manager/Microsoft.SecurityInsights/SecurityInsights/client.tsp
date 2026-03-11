@@ -58,5 +58,18 @@ using Azure.ClientGenerator.Core;
   "MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed",
   "go"
 );
-@@clientLocation(listGeodataByIp, "SecurityInsightsClient", "go");
-@@clientLocation(listWhoisByDomain, "SecurityInsightsClient", "go");
+
+// Go SDK backward compatibility - enum type renames
+@@clientName(EntityKindEnum, "EntityKind", "go");
+@@clientName(ThreatIntelligenceResourceInnerKind, "ThreatIntelligenceResourceKindEnum", "go");
+@@clientName(ThreatIntelligenceSortingOrder, "ThreatIntelligenceSortingCriteriaEnum", "go");
+
+// Go SDK backward compatibility - enum value renames
+@@clientName(ContentType.AnalyticsRule, "AnalyticRule", "go");
+@@clientName(RepoType.AzureDevOps, "DevOps", "go");
+@@clientName(SourceType.Local, "LocalFile", "go");
+@@clientName(SourceType.AzureStorage, "RemoteStorage", "go");
+
+// Go SDK backward compatibility - restore separate clients
+@@clientLocation(listGeodataByIp, "IPGeodata", "go");
+@@clientLocation(listWhoisByDomain, "DomainWhois", "go");
