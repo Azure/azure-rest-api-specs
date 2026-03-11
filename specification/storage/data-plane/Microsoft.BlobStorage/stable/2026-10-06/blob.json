@@ -3842,6 +3842,29 @@
                 "format": "date-time-rfc1123",
                 "description": "Returns the date and time the blob was last modified. Any operation that modifies the blob, including an update of the blob's metadata or properties, changes the last-modified time of the blob."
               },
+              "x-ms-blob-content-length": {
+                "type": "string",
+                "format": "int64",
+                "description": "Returns the length of the blob in bytes."
+              },
+              "x-ms-blob-content-type": {
+                "type": "string",
+                "description": "Returns the content type of the blob."
+              },
+              "x-ms-blob-content-encoding": {
+                "type": "string",
+                "description": "Returns the Content-Encoding of the blob."
+              },
+              "x-ms-blob-content-md5": {
+                "type": "string",
+                "format": "byte",
+                "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
+              },
+              "x-ms-blob-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Returns the date and time the blob was created."
+              },
               "x-ms-creation-time": {
                 "x-ms-client-name": "CreationTime",
                 "type": "string",
