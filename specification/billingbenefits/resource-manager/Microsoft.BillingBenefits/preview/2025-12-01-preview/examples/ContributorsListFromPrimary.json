@@ -1,41 +1,39 @@
 {
   "parameters": {
-    "api-version": "2025-12-01-preview",
-    "maccName": "macc_20230614",
+    "subscriptionId": "10000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resource_group_name_01",
-    "subscriptionId": "10000000-0000-0000-0000-000000000000"
+    "maccName": "macc_20230614",
+    "api-version": "2025-12-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614/contributors/{contributorCloudSubId}_{rgName}_macc_contributor_20230614",
             "name": "{contributorCloudSubId}_{rgName}_macc_contributor_20230614",
             "type": "Microsoft.BillingBenefits/maccs/contributors",
-            "id": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614/contributors/{contributorCloudSubId}_{rgName}_macc_contributor_20230614",
             "properties": {
-              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-              "commitment": {
-                "amount": 20000,
-                "currencyCode": "USD",
-                "grain": "FullTerm"
-              },
-              "displayName": "Contributor Macc 20230614",
-              "endAt": "2024-07-01T00:00:00Z",
               "entityType": "Contributor",
-              "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+              "displayName": "Contributor Macc 20230614",
               "primaryResourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614",
               "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
-              "provisioningState": "Succeeded",
+              "commitment": {
+                "grain": "FullTerm",
+                "amount": 20000,
+                "currencyCode": "USD"
+              },
               "startAt": "2023-07-01T00:00:00Z",
+              "endAt": "2024-07-01T00:00:00Z",
+              "systemId": "13810867107109237",
+              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+              "provisioningState": "Succeeded",
               "status": "Active",
-              "systemId": "13810867107109237"
+              "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "Contributors_ListFromPrimary",
-  "title": "Contributors_ListFromPrimary"
+  }
 }

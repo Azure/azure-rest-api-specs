@@ -1,0 +1,71 @@
+{
+  "title": "Basic Query",
+  "description": "A simple resources query.",
+  "parameters": {
+    "api-version": "2018-09-01-preview",
+    "query": {
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "query": "project id, name, type, location, tags | limit 3"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 3,
+        "count": 3,
+        "resultTruncated": "false",
+        "data": {
+          "columns": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "type",
+              "type": "string"
+            },
+            {
+              "name": "location",
+              "type": "string"
+            },
+            {
+              "name": "tags",
+              "type": "object"
+            }
+          ],
+          "rows": [
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG1/providers/Microsoft.Network/networkInterfaces/myNetworkInterface",
+              "myNetworkInterface",
+              "microsoft.network/networkinterfaces",
+              "centralus",
+              {
+                "tag1": "Value1"
+              }
+            ],
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Network/virtualNetworks/myVnet",
+              "myVnet",
+              "microsoft.network/virtualnetworks",
+              "westus",
+              {}
+            ],
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Network/publicIPAddresses/myPublicIp",
+              "myPublicIp",
+              "microsoft.network/publicipaddresses",
+              "westus",
+              {}
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

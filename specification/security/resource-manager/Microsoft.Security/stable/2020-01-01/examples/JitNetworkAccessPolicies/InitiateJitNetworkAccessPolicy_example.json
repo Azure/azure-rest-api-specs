@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "ascLocation": "westeurope",
+    "resourceGroupName": "myRg1",
+    "jitNetworkAccessPolicyName": "default",
+    "jitNetworkAccessPolicyInitiateType": "initiate",
+    "body": {
+      "virtualMachines": [
+        {
+          "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1",
+          "ports": [
+            {
+              "number": 3389,
+              "duration": "PT1H",
+              "allowedSourceAddressPrefix": "192.127.0.2"
+            }
+          ]
+        }
+      ],
+      "justification": "testing a new version of the product"
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "virtualMachines": [
+          {
+            "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1",
+            "ports": [
+              {
+                "number": 3389,
+                "allowedSourceAddressPrefix": "192.127.0.2",
+                "endTimeUtc": "2018-07-12T09:53:03.3658798Z",
+                "status": "Initiating",
+                "statusReason": "UserRequested"
+              }
+            ]
+          }
+        ],
+        "startTimeUtc": "2018-07-12T08:53:03.3658798Z",
+        "requestor": "barbara@contoso.com",
+        "justification": "testing a new version of the product"
+      }
+    }
+  }
+}

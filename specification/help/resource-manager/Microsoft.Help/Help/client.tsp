@@ -135,13 +135,3 @@ using Microsoft.Help;
   "DiscoverSolutionsNlp",
   "csharp"
 );
-
-// Java SDK: rename DiscoverySolutionNLPs to DiscoverySolutionNlps
-@@clientLocation(DiscoverySolutionNLPOperationGroup.discoverSolutions,
-  "DiscoverySolutionNlp",
-  "java"
-);
-@@clientLocation(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
-  "DiscoverySolutionNlp",
-  "java"
-);

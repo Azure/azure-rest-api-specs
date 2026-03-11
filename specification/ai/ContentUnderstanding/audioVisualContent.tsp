@@ -12,9 +12,9 @@ using TypeSpec.Versioning;
 namespace ContentUnderstanding;
 
 @doc("Audio visual content.  Ex. audio/wav, video/mp4.")
-model AudioVisualContent extends AnalysisContent {
+model AudioVisualContent extends MediaContent {
   @doc("Content kind.")
-  kind: AnalysisContentKind.audioVisual;
+  kind: MediaContentKind.audioVisual;
 
   @doc("Start time of the content in milliseconds.")
   startTimeMs: int64;

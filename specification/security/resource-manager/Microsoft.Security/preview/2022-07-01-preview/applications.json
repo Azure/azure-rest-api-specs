@@ -1,0 +1,542 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2022-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/applications": {
+      "get": {
+        "x-ms-examples": {
+          "List applications security by subscription level scope": {
+            "$ref": "./examples/Applications/ListBySubscriptionApplications_example.json"
+          }
+        },
+        "tags": [
+          "Applications"
+        ],
+        "description": "Get a list of all relevant applications over a subscription level scope",
+        "operationId": "Applications_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/applications/{applicationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security application by specific applicationId": {
+            "$ref": "./examples/Applications/GetApplication_example.json"
+          }
+        },
+        "tags": [
+          "Applications"
+        ],
+        "description": "Get a specific application for the requested scope by applicationId",
+        "operationId": "Application_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApplicationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create application": {
+            "$ref": "./examples/Applications/PutApplication_example.json"
+          }
+        },
+        "tags": [
+          "Applications"
+        ],
+        "description": "Creates or update a security application on the given subscription.",
+        "operationId": "Application_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "$ref": "#/parameters/ApplicationBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "200": {
+            "description": "OK - Updated",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete security Application": {
+            "$ref": "./examples/Applications/DeleteApplication_example.json"
+          }
+        },
+        "tags": [
+          "Applications"
+        ],
+        "description": "Delete an Application over a given scope",
+        "operationId": "Application_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApplicationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Application was deleted"
+          },
+          "204": {
+            "description": "No Content - Application does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/applications": {
+      "get": {
+        "x-ms-examples": {
+          "List security applications by security connector level scope": {
+            "$ref": "./examples/Applications/ListBySecurityConnectorApplications_example.json"
+          }
+        },
+        "tags": [
+          "Applications"
+        ],
+        "description": "Get a list of all relevant applications over a security connector level scope",
+        "operationId": "SecurityConnectorApplications_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/applications/{applicationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security applications by specific applicationId": {
+            "$ref": "./examples/Applications/GetSecurityConnectorApplication_example.json"
+          }
+        },
+        "tags": [
+          "Applications"
+        ],
+        "description": "Get a specific application for the requested scope by applicationId",
+        "operationId": "SecurityConnectorApplication_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/ApplicationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create Application": {
+            "$ref": "./examples/Applications/PutSecurityConnectorApplication_example.json"
+          }
+        },
+        "tags": [
+          "Applications"
+        ],
+        "description": "Creates or update a security Application on the given security connector.",
+        "operationId": "SecurityConnectorApplication_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "$ref": "#/parameters/ApplicationBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "200": {
+            "description": "OK - Updated",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete security Application": {
+            "$ref": "./examples/Applications/DeleteSecurityConnectorApplication_example.json"
+          }
+        },
+        "tags": [
+          "Applications"
+        ],
+        "description": "Delete an Application over a given scope",
+        "operationId": "SecurityConnectorApplication_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/ApplicationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Application was deleted"
+          },
+          "204": {
+            "description": "No Content - Application does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationsList": {
+      "type": "object",
+      "description": "Page of a security applications list",
+      "properties": {
+        "value": {
+          "description": "Collection of applications in this page",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page"
+        }
+      }
+    },
+    "Application": {
+      "type": "object",
+      "description": "Security Application over a given scope",
+      "properties": {
+        "properties": {
+          "description": "Properties of a security application",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApplicationProperties": {
+      "type": "object",
+      "description": "Describes properties of an application",
+      "properties": {
+        "displayName": {
+          "description": "display name of the application",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the application",
+          "type": "string"
+        },
+        "sourceResourceType": {
+          "type": "string",
+          "description": "The application source, what it affects, e.g. Assessments",
+          "enum": [
+            "Assessments"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationSourceResourceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Assessments",
+                "description": "The source of the application is assessments"
+              }
+            ]
+          }
+        },
+        "conditionSets": {
+          "type": "array",
+          "description": "The application conditionSets - see examples",
+          "items": {
+            "$ref": "#/definitions/ApplicationConditionSets"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "sourceResourceType",
+        "conditionSets"
+      ]
+    },
+    "ApplicationConditionSets": {
+      "type": "object",
+      "description": "List of application's condition sets - OR between ConditionSets, AND between conditions in a set",
+      "items": {
+        "$ref": "#/definitions/ApplicationConditions"
+      }
+    },
+    "ApplicationConditions": {
+      "type": "array",
+      "description": "Application's conditions",
+      "items": {
+        "$ref": "#/definitions/ApplicationCondition"
+      },
+      "x-ms-identifiers": []
+    },
+    "ApplicationCondition": {
+      "type": "object",
+      "description": "Application's condition",
+      "properties": {
+        "property": {
+          "description": "The application Condition's Property, e.g. ID, see examples",
+          "type": "string"
+        },
+        "value": {
+          "description": "The application Condition's Value like IDs that contain some string, see examples",
+          "type": "string"
+        },
+        "operator": {
+          "type": "string",
+          "description": "The application Condition's Operator, for example Contains for id or In for list of possible IDs, see examples",
+          "enum": [
+            "Contains",
+            "Equals",
+            "In"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationConditionOperator",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Contains",
+                "description": "Checks that the string value of the data defined in Property contains the given value"
+              },
+              {
+                "value": "Equals",
+                "description": "Checks that the string value of the data defined in Property equals the given value"
+              },
+              {
+                "value": "In",
+                "description": "Checks that the string value of the data defined in Property equals any of the given values (exact fit)"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApplicationId": {
+      "name": "applicationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The security Application key - unique key for the standard application",
+      "x-ms-parameter-location": "method"
+    },
+    "ApplicationBody": {
+      "name": "application",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Application"
+      },
+      "description": "Application over a subscription scope",
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityConnectorName": {
+      "name": "securityConnectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The security connector name.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

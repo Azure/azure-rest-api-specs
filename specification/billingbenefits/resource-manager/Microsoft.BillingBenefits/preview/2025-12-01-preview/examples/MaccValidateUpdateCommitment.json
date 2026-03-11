@@ -6,15 +6,15 @@
         {
           "benefitType": "MACC",
           "properties": {
-            "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-            "commitment": {
-              "amount": 20000,
-              "currencyCode": "USD",
-              "grain": "FullTerm"
-            },
             "entityType": "Primary",
+            "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/benefits/myBenefit",
-            "systemId": "13810867107109237"
+            "systemId": "13810867107109237",
+            "commitment": {
+              "grain": "FullTerm",
+              "amount": 20000,
+              "currencyCode": "USD"
+            }
           }
         }
       ]
@@ -31,7 +31,5 @@
         ]
       }
     }
-  },
-  "operationId": "Benefit_Validate",
-  "title": "MaccValidateUpdateCommitment"
+  }
 }

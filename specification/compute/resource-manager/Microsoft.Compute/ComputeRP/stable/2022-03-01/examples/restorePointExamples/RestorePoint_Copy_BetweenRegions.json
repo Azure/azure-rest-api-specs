@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "restorePointCollectionName": "rpcName",
+    "restorePointName": "rpName",
+    "api-version": "2022-03-01",
+    "parameters": {
+      "properties": {
+        "sourceRestorePoint": {
+          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/sourceRpcName/restorePoints/sourceRpName"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "rpName",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/rpName",
+        "properties": {
+          "sourceRestorePoint": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/sourceRpcName/restorePoints/sourceRpName"
+          },
+          "sourceMetadata": {
+            "vmId": "76d6541e-80bd-4dc1-932b-3cae4cfb80e7",
+            "hardwareProfile": {
+              "vmSize": "Standard_B1s"
+            },
+            "storageProfile": {
+              "osDisk": {
+                "osType": "Windows",
+                "name": "osDisk123",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS",
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/osDisk123"
+                },
+                "diskRestorePoint": {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/rpName/diskRestorePoints/osDisk123_22b4bdfe-6c54-4f72-84d8-85d8860f0c57"
+                }
+              },
+              "dataDisks": [
+                {
+                  "lun": 1,
+                  "name": "dataDisk123",
+                  "caching": "None",
+                  "managedDisk": {
+                    "storageAccountType": "Standard_LRS",
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/userdata/providers/Microsoft.Compute/disks/dataDisk123"
+                  },
+                  "diskRestorePoint": {
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/userdata/providers/Microsoft.Compute/restorePointCollections/mynewrpc/restorePoints/restorepointtwo/diskRestorePoints/dataDisk123_68785190-1acb-4d5e-a8ae-705b45f3dca5"
+                  }
+                }
+              ]
+            },
+            "osProfile": {
+              "computerName": "computerName",
+              "adminUsername": "admin",
+              "windowsConfiguration": {
+                "provisionVMAgent": true,
+                "enableAutomaticUpdates": true
+              },
+              "secrets": [],
+              "allowExtensionOperations": true,
+              "requireGuestProvisionSignal": true
+            },
+            "diagnosticsProfile": {
+              "bootDiagnostics": {
+                "enabled": true
+              }
+            },
+            "location": "westus"
+          },
+          "provisioningState": "Creating",
+          "consistencyMode": "ApplicationConsistent",
+          "timeCreated": "2021-10-25T23:54:29.2796325+00:00"
+        }
+      }
+    }
+  }
+}

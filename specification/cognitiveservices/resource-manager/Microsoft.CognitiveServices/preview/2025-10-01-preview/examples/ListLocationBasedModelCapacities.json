@@ -1,32 +1,30 @@
 {
-  "operationId": "LocationBasedModelCapacities_List",
   "parameters": {
     "api-version": "2025-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "location": "WestUS",
     "modelFormat": "OpenAI",
     "modelName": "ada",
-    "modelVersion": "1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "modelVersion": "1"
   },
-  "title": "ListLocationBasedModelCapacities",
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "Standard",
-            "type": "Microsoft.CognitiveServices/locations/models/skuCapacities",
             "id": "/subscriptions/{subscriptionContext.SubscriptionId}/providers/Microsoft.CognitiveServices/locations/WestUS/models/OpenAI.ada.1/skuCapacities/Standard",
+            "type": "Microsoft.CognitiveServices/locations/models/skuCapacities",
+            "name": "Standard",
             "location": "WestUS",
             "properties": {
-              "availableCapacity": 300,
-              "availableFinetuneCapacity": 20,
               "model": {
-                "name": "ada",
                 "format": "OpenAI",
+                "name": "ada",
                 "version": "1"
               },
-              "skuName": "Standard"
+              "skuName": "Standard",
+              "availableCapacity": 300,
+              "availableFinetuneCapacity": 20
             }
           }
         ]

@@ -1,0 +1,413 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}": {
+      "get": {
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Gets an instance pool.",
+        "operationId": "InstancePools_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The name of the instance pool to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified instance pool.",
+            "schema": {
+              "$ref": "#/definitions/InstancePool"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 InstancePoolNotFound - An instance pool cannot be found"
+          }
+        },
+        "x-ms-examples": {
+          "Get an instance pool": {
+            "$ref": "./examples/GetInstancePool.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Creates or updates an instance pool.",
+        "operationId": "InstancePools_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The name of the instance pool to be created or updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested instance pool resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InstancePool"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the instance pool.",
+            "schema": {
+              "$ref": "#/definitions/InstancePool"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is required.\n\n * 400 InstancePoolRequestedVcoreCountIsInvalid - Requested vcore count for instance pool is invalid\n\n * 400 InstancePoolRequestMissingSku - Instance pool request is missing sku\n\n * 400 InstancePoolRequestMissingSkuTier - Instance pool request is missing sku tier\n\n * 400 InstancePoolRequestMissingSkuFamily - Instance pool request is missing sku family\n\n * 400 InstancePoolRequestedSubnetResourceIdIsInvalid - Subnet id for instance pool is null or empty\n\n * 409 InstancePoolBusy - An instance pool is busy with another ongoing operation"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created the instance pool.",
+            "schema": {
+              "$ref": "#/definitions/InstancePool"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create an instance pool with all properties.": {
+            "$ref": "./examples/CreateOrUpdateInstancePoolMax.json"
+          },
+          "Create an instance pool with min properties.": {
+            "$ref": "./examples/CreateOrUpdateInstancePoolMin.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Deletes an instance pool",
+        "operationId": "InstancePools_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The name of the instance pool to be deleted",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the instance pool."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InstancePoolNotEmpty - An instance pool is not empty\n\n * 404 InstancePoolNotFound - An instance pool cannot be found\n\n * 404 InstancePoolNotFound - An instance pool cannot be found\n\n * 409 InstancePoolBusy - An instance pool is busy with another ongoing operation"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified instance pool does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete an instance pool": {
+            "$ref": "./examples/DeleteInstancePool.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Updates an instance pool.",
+        "operationId": "InstancePools_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The name of the instance pool to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested instance pool resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InstancePoolUpdate"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the instance pool.",
+            "schema": {
+              "$ref": "#/definitions/InstancePool"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Patch an instance pool": {
+            "$ref": "./examples/PatchInstancePool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools": {
+      "get": {
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Gets a list of instance pools in the resource group",
+        "operationId": "InstancePools_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of instance pools.",
+            "schema": {
+              "$ref": "#/definitions/InstancePoolListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List instance pools by resource group": {
+            "$ref": "./examples/ListInstancePoolsByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/instancePools": {
+      "get": {
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Gets a list of all instance pools in the subscription.",
+        "operationId": "InstancePools_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of instance pools in a subscription.",
+            "schema": {
+              "$ref": "#/definitions/InstancePoolListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List instance pools in the subscription": {
+            "$ref": "./examples/ListInstancePoolsBySubscriptionId.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InstancePoolProperties": {
+      "description": "Properties of an instance pool.",
+      "required": [
+        "subnetId",
+        "vCores",
+        "licenseType"
+      ],
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "description": "Resource ID of the subnet to place this instance pool in.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vCores": {
+          "format": "int32",
+          "description": "Count of vCores belonging to this instance pool.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "licenseType": {
+          "description": "The license type. Possible values are 'LicenseIncluded' (price for SQL license is included) and 'BasePrice' (without SQL license price).",
+          "enum": [
+            "LicenseIncluded",
+            "BasePrice"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InstancePoolLicenseType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "InstancePool": {
+      "description": "An Azure SQL instance pool.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        },
+        "properties": {
+          "$ref": "#/definitions/InstancePoolProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "InstancePoolUpdate": {
+      "description": "An update to an Instance pool.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InstancePoolListResult": {
+      "description": "A list of Azure SQL instance pools.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstancePool"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

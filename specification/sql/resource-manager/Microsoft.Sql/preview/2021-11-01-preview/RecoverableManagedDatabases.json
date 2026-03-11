@@ -1,0 +1,176 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/recoverableDatabases": {
+      "get": {
+        "tags": [
+          "RecoverableManagedDatabases"
+        ],
+        "description": "Gets a list of recoverable managed databases.",
+        "operationId": "RecoverableManagedDatabases_ListByInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of recoverable managed databases.",
+            "schema": {
+              "$ref": "#/definitions/RecoverableManagedDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 UpdatingInstanceAndBackupRedundancy - Instance zone redundancy and backup storage redundancy cannot be updated in the same request.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 AadOnlyAuthenticationIsEnabled - Azure Active Directory Only Authentication is enabled. Please contact your system administrator.\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 BackupRedundancyUpdateAndInstanceRedundancyConflict - The instance is multi-az but backup storage is being updated from zone redundant to non-zone redundant.\n\n * 409 InstanceRedundancyUpdateWhileBackupRedundancyUpdateInProgress - Cannot update instance redundancy because backup storage redundancy update is in progress.\n\n * 409 InstanceRedundancyUpdateAndBackupRedundancyConflict - The backup storage is non-zone redundant but instance redundancy is being updated to zone redundant.\n\n * 409 BackupRedundancyUpdateConflict - Cannot update backup storage redundancy because a backup storage redundancy update is already in progress.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 412 InstanceNotReadyForBackupRedundancyUpdate - Cannot update backup storage redundancy because the instance is not ready.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List recoverable databases by managed instances": {
+            "$ref": "./examples/ListRecoverableManagedDatabasesByServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/recoverableDatabases/{recoverableDatabaseName}": {
+      "get": {
+        "tags": [
+          "RecoverableManagedDatabases"
+        ],
+        "description": "Gets a recoverable managed database.",
+        "operationId": "RecoverableManagedDatabases_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "recoverableDatabaseName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified recoverable managed database.",
+            "schema": {
+              "$ref": "#/definitions/RecoverableManagedDatabase"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidRecoverableDatabaseId - Invalid recoverable database identifier.\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 UpdatingInstanceAndBackupRedundancy - Instance zone redundancy and backup storage redundancy cannot be updated in the same request.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 AadOnlyAuthenticationIsEnabled - Azure Active Directory Only Authentication is enabled. Please contact your system administrator.\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 BackupRedundancyUpdateAndInstanceRedundancyConflict - The instance is multi-az but backup storage is being updated from zone redundant to non-zone redundant.\n\n * 409 InstanceRedundancyUpdateWhileBackupRedundancyUpdateInProgress - Cannot update instance redundancy because backup storage redundancy update is in progress.\n\n * 409 InstanceRedundancyUpdateAndBackupRedundancyConflict - The backup storage is non-zone redundant but instance redundancy is being updated to zone redundant.\n\n * 409 BackupRedundancyUpdateConflict - Cannot update backup storage redundancy because a backup storage redundancy update is already in progress.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 412 InstanceNotReadyForBackupRedundancyUpdate - Cannot update backup storage redundancy because the instance is not ready.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a recoverable databases by managed instances": {
+            "$ref": "./examples/GetRecoverableManagedDatabase.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RecoverableManagedDatabase": {
+      "description": "A recoverable managed database resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoverableManagedDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RecoverableManagedDatabaseListResult": {
+      "description": "A list of recoverable managed databases.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoverableManagedDatabase"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RecoverableManagedDatabaseProperties": {
+      "description": "The recoverable managed database's properties.",
+      "type": "object",
+      "properties": {
+        "lastAvailableBackupDate": {
+          "description": "The last available backup date.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -1,18 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tsp";
 import "./HostPool.tsp";
 
 using TypeSpec.Rest;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -40,10 +35,15 @@ interface SessionHosts {
    * Update a session host.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSyncWithOptionalBody<
+  update is ArmCustomPatchSync<
     SessionHost,
     SessionHostPatch,
-    Parameters = {
+    Request = {
+      /**
+       * The resource properties to be updated
+       */
+      @bodyRoot sessionHost?: SessionHostPatch;
+
       /**
        * Force flag to update assign, unassign or reassign personal desktop.
        */
@@ -103,27 +103,9 @@ interface SessionHosts {
   >;
 
   /**
-   * create or update a sessionHost.
-   */
-  @added(Versions.v2026_01_01_preview)
-  create is ArmResourceCreateOrReplaceSync<SessionHost>;
-
-  /**
    * Retry provisioning on a SessionHost.
    */
   retryProvisioning is ArmResourceActionSync<SessionHost, void, OkResponse>;
-
-  /**
-   * Operation to list the scoped RegistrationTokens associated with the SessionHost.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SessionHosts_ListSingleRegistrationTokens")
-  @added(Versions.v2026_01_01_preview)
-  listSingleSessionHostRegistrationTokens is ArmResourceActionSync<
-    SessionHost,
-    ScopedRegistrationTokenProperties,
-    RegistrationTokenList
-  >;
 }
 
 @@maxLength(SessionHost.name, 48);
@@ -132,4 +114,3 @@ interface SessionHosts {
   "The name of the session host within the specified host pool"
 );
 @@doc(SessionHost.properties, "Detailed properties for SessionHost");
-@@clientName(SessionHosts.update::parameters.body, "sessionHost");

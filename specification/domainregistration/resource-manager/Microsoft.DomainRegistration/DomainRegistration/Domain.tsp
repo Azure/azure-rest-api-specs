@@ -61,7 +61,7 @@ interface Domains {
   update is ArmCustomPatchSync<
     Domain,
     PatchModel = DomainPatchResource,
-    Response = ArmResponse<Domain> | (AcceptedResponse & {
+    Response = ArmResponse<Domain> | (ArmAcceptedResponse & {
       @bodyRoot
       _: Domain;
     }),
@@ -113,7 +113,7 @@ interface Domains {
   renew is ArmResourceActionSync<
     Domain,
     void,
-    OkResponse | AcceptedResponse | NoContentResponse,
+    OkResponse | ArmAcceptedResponse | NoContentResponse,
     Error = DefaultErrorResponse
   >;
 

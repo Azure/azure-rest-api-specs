@@ -1,50 +1,48 @@
 {
   "parameters": {
-    "api-version": "2024-11-01-preview",
-    "clusterName": "my-cluster",
-    "clusterResourceName": "connectedClusters",
-    "clusterRp": "Microsoft.Kubernetes",
-    "extensionTypeName": "my-extension-type",
+    "subscriptionId": "subId1",
     "resourceGroupName": "rg1",
-    "subscriptionId": "subId1"
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "my-cluster",
+    "extensionTypeName": "my-extension-type",
+    "api-version": "2024-11-01-preview"
   },
   "responses": {
     "200": {
+      "headers": {},
       "description": "Details of the extension type",
       "body": {
+        "id": "aaaa",
         "name": "bbbb",
         "type": "cccc",
-        "id": "aaaa",
         "properties": {
-          "description": "My extension type!",
-          "isManagedIdentityRequired": true,
           "isSystemExtension": false,
-          "planInfo": {
-            "offerId": "3333333",
-            "planId": "222222",
-            "publisherId": "111111"
-          },
+          "isManagedIdentityRequired": true,
+          "description": "My extension type!",
           "publisher": "Microsoft",
+          "planInfo": {
+            "publisherId": "111111",
+            "planId": "222222",
+            "offerId": "3333333"
+          },
           "supportedClusterTypes": [
             "connectedClusters"
           ],
           "supportedScopes": {
+            "defaultScope": "cluster",
             "clusterScopeSettings": {
-              "name": "bbbbbbbbbbbbb",
-              "type": "ccccccccccccccccccccccccc",
-              "id": "aaaaaaaaaaaaaaaaaa",
               "properties": {
                 "allowMultipleInstances": true,
                 "defaultReleaseNamespace": "kube-system"
-              }
-            },
-            "defaultScope": "cluster"
+              },
+              "id": "aaaaaaaaaaaaaaaaaa",
+              "name": "bbbbbbbbbbbbb",
+              "type": "ccccccccccccccccccccccccc"
+            }
           }
         }
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "ExtensionTypes_Get",
-  "title": "Get Extension Types"
+  }
 }

@@ -1,36 +1,34 @@
 {
   "parameters": {
-    "api-version": "2025-07-15-preview",
-    "topicTypeName": "Microsoft.Storage.StorageAccounts"
+    "topicTypeName": "Microsoft.Storage.StorageAccounts",
+    "api-version": "2025-07-15-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "Microsoft.Storage.BlobCreated",
-            "type": "Microsoft.EventGrid/topicTypes/eventTypes",
-            "id": "providers/Microsoft.EventGrid/topicTypes/Microsoft.Storage.StorageAccounts/eventTypes/Microsoft.Storage.BlobCreated",
             "properties": {
-              "description": "Raised when a blob is created.",
               "displayName": "Blob Created",
+              "description": "Raised when a blob is created.",
               "schemaUrl": "tbd"
-            }
+            },
+            "id": "providers/Microsoft.EventGrid/topicTypes/Microsoft.Storage.StorageAccounts/eventTypes/Microsoft.Storage.BlobCreated",
+            "name": "Microsoft.Storage.BlobCreated",
+            "type": "Microsoft.EventGrid/topicTypes/eventTypes"
           },
           {
-            "name": "Microsoft.Storage.BlobDeleted",
-            "type": "Microsoft.EventGrid/topicTypes/eventTypes",
-            "id": "providers/Microsoft.EventGrid/topicTypes/Microsoft.Storage.StorageAccounts/eventTypes/Microsoft.Storage.BlobDeleted",
             "properties": {
               "description": "Raised when a blob is deleted.",
-              "displayName": "Blob Deleted",
-              "schemaUrl": "tbd"
-            }
+              "schemaUrl": "tbd",
+              "displayName": "Blob Deleted"
+            },
+            "id": "providers/Microsoft.EventGrid/topicTypes/Microsoft.Storage.StorageAccounts/eventTypes/Microsoft.Storage.BlobDeleted",
+            "name": "Microsoft.Storage.BlobDeleted",
+            "type": "Microsoft.EventGrid/topicTypes/eventTypes"
           }
         ]
       }
     }
-  },
-  "operationId": "TopicTypes_ListEventTypes",
-  "title": "TopicTypes_ListEventTypes"
+  }
 }

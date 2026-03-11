@@ -13,51 +13,6 @@ using Microsoft.Cdn;
 
 @@clientName(ValidateProbeInput.probeURL, "probeUrl", "java");
 
-@@access(Certificate, Access.public, "java");
-@@usage(Certificate,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
-  "java"
-);
-@@access(CustomerCertificate, Access.public, "java");
-@@usage(CustomerCertificate,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
-  "java"
-);
-@@access(ManagedCertificate, Access.public, "java");
-@@usage(ManagedCertificate,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
-  "java"
-);
-@@access(AzureFirstPartyManagedCertificate, Access.public, "java");
-@@usage(AzureFirstPartyManagedCertificate,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
-  "java"
-);
-
-@@alternateType(RequestSchemeMatchConditionParameters.operator,
-  "Equal",
-  "java"
-);
-
-// AfdCustomDomains client for Java
-@@clientLocation(AFDDomains.get, "AfdCustomDomains", "java");
-@@clientLocation(AFDDomains.create, "AfdCustomDomains", "java");
-@@clientLocation(AFDDomains.update, "AfdCustomDomains", "java");
-@@clientLocation(AFDDomains.delete, "AfdCustomDomains", "java");
-@@clientLocation(AFDDomains.listByProfile, "AfdCustomDomains", "java");
-@@clientLocation(AFDDomains.refreshValidationToken, "AfdCustomDomains", "java");
-
-// AfdProfiles client for Java
-@@clientLocation(Profiles.checkEndpointNameAvailability, "AfdProfiles", "java");
-@@clientLocation(Profiles.listResourceUsage, "AfdProfiles", "java");
-@@clientLocation(Profiles.checkHostNameAvailability, "AfdProfiles", "java");
-@@clientName(Profiles.checkHostNameAvailability,
-  "checkHostnameAvailability",
-  "java"
-);
-@@clientLocation(Profiles.validateSecret, "AfdProfiles", "java");
-@@clientLocation(Profiles.upgrade, "AfdProfiles", "java");
-
 @@clientName(AFDDomain, "AfdDomain", "java");
 @@clientName(AFDDomainProperties, "AfdDomainProperties", "java");
 @@clientName(AFDDomainHttpsCustomizedCipherSuiteSet,
@@ -65,7 +20,6 @@ using Microsoft.Cdn;
   "java"
 );
 @@clientName(AFDDomainHttpsParameters, "AfdDomainHttpsParameters", "java");
-@@clientName(AFDDomainMtlsParameters, "AfdDomainMtlsParameters", "java");
 @@clientName(AFDDomains, "AfdDomains", "java");
 @@clientName(AFDDomainUpdateParameters, "AfdDomainUpdateParameters", "java");
 @@clientName(AFDDomainUpdatePropertiesParameters,
@@ -88,10 +42,6 @@ using Microsoft.Cdn;
 @@clientName(AFDOrigin, "AfdOrigin", "java");
 @@clientName(AFDOriginProperties, "AfdOriginProperties", "java");
 @@clientName(AFDOrigins, "AfdOrigins", "java");
-@@clientName(AFDOriginUpdatePropertiesParameters,
-  "AfdOriginUpdatePropertiesParameters",
-  "java"
-);
 @@clientName(AFDOriginGroupUpdateParameters,
   "AfdOriginGroupUpdateParameters",
   "java"
@@ -131,15 +81,6 @@ using Microsoft.Cdn;
   "java"
 );
 @@clientName(AFDEndpointProtocols, "AfdEndpointProtocols", "java");
-@@clientName(AFDRouteGrpcState, "AfdRouteGrpcState", "java");
-@@clientName(DeploymentVersionAFDOriginChange,
-  "DeploymentVersionAfdOriginChange",
-  "java"
-);
-@@clientName(DeploymentVersionAFDOriginGroupChange,
-  "DeploymentVersionAfdOriginGroupChange",
-  "java"
-);
 @@clientName(CheckHostNameAvailabilityInput,
   "CheckHostnameAvailabilityInput",
   "java"
@@ -155,16 +96,6 @@ using Microsoft.Cdn;
 @@clientName(DeliveryRuleActionName, "DeliveryRuleActionValue", "java");
 @@clientName(AFDStateProperties, "AfdStateProperties", "java");
 @@clientName(HostNameOperator, "HostnameOperator", "java");
-@@clientName(RequestMethodMatchValue,
-  "RequestMethodMatchConditionParametersMatchValuesItem",
-  "java"
-);
-@@clientName(CheckHostNameAvailabilityInput.hostName, "hostname", "java");
-@@clientName(AFDDomainProperties.hostName, "hostname", "java");
-@@clientName(AFDEndpointProperties.hostName, "hostname", "java");
-@@clientName(AFDOriginUpdatePropertiesParameters.hostName, "hostname", "java");
-@@clientName(OriginProperties.hostName, "hostname", "java");
-
 @@clientName(Microsoft.Cdn, "CdnManagementClient", "javascript");
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`405`,
   "FourHundredFive",

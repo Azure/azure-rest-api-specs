@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "api-version": "2025-01-15-preview",
     "clusterName": "cluster1",
     "resourceGroupName": "rg1",
+    "api-version": "2025-01-15-preview",
     "subscriptionId": "subid"
   },
   "responses": {
@@ -11,16 +11,14 @@
         "value": [
           {
             "name": "app-Install",
-            "applicationName": "app",
+            "uri": "https://app.com/azure/app_install.sh",
             "roles": [
               "edgenode"
             ],
-            "uri": "https://app.com/azure/app_install.sh"
+            "applicationName": "app"
           }
         ]
       }
     }
-  },
-  "operationId": "ScriptActions_ListByCluster",
-  "title": "List all persisted script actions for the given cluster"
+  }
 }

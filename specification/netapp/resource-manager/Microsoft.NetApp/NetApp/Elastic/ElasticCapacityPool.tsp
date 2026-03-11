@@ -17,6 +17,8 @@ namespace Microsoft.NetApp;
 /**
  * NetApp Elastic Capacity Pool resource
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @parentResource(ElasticAccount)
 model ElasticCapacityPool is TrackedResource<ElasticCapacityPoolProperties> {
@@ -33,6 +35,8 @@ model ElasticCapacityPool is TrackedResource<ElasticCapacityPoolProperties> {
 /**
  * Elastic capacity pool properties
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ElasticCapacityPoolProperties {
   /**
@@ -100,6 +104,8 @@ model ElasticCapacityPoolProperties {
 }
 
 /** Service level for elastic capacity pool */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union ElasticServiceLevel {
   string,
@@ -111,6 +117,8 @@ union ElasticServiceLevel {
 /**
  * CMK Encryption Configuration
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ElasticEncryptionConfiguration {
   /**
@@ -131,6 +139,8 @@ model ElasticEncryptionConfiguration {
 /**
  * Pool Encryption Key Source.
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union ElasticPoolEncryptionKeySource {
   string,
@@ -149,6 +159,8 @@ union ElasticPoolEncryptionKeySource {
 /**
  * Current availability status of the resource.
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union ElasticResourceAvailabilityStatus {
   string,
@@ -167,6 +179,8 @@ union ElasticResourceAvailabilityStatus {
 /**
  * Availability status
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union CheckElasticResourceAvailabilityStatus {
   string,
@@ -181,6 +195,8 @@ union CheckElasticResourceAvailabilityStatus {
 /**
  * Availability reason
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union CheckElasticResourceAvailabilityReason {
   string,
@@ -193,6 +209,8 @@ union CheckElasticResourceAvailabilityReason {
 }
 
 /** Changes the zone for the Zone Redundant elastic capacity pool */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ChangeZoneRequest {
   /** Availability zone to move Zone Redundant elastic capacity pool to */
@@ -204,6 +222,8 @@ model ChangeZoneRequest {
 /**
  * File path availability request content - availability is based on the elastic volume filePath within the given elastic capacityPool.
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model CheckElasticVolumeFilePathAvailabilityRequest {
   /**
@@ -218,6 +238,8 @@ model CheckElasticVolumeFilePathAvailabilityRequest {
 /**
  * Information regarding availability of a resource.
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @clientName("CheckElasticResourceAvailabilityResult", "csharp")
 model CheckElasticResourceAvailabilityResponse {
@@ -240,14 +262,20 @@ model CheckElasticResourceAvailabilityResponse {
 @armResourceOperations
 interface ElasticCapacityPools {
   /** Get the NetApp Elastic Capacity Pool */
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   get is ArmResourceRead<ElasticCapacityPool>;
 
   /** Create or update the specified NetApp Elastic Capacity Pool within the resource group and NetApp Elastic Account */
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticCapacityPool>;
 
   /** Patch the specified NetApp Elastic Capacity Pool */
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
@@ -261,16 +289,22 @@ interface ElasticCapacityPools {
   >;
 
   /** Delete the specified NetApp Elastic Capacity Pool */
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticCapacityPool>;
 
   /** List and describe all NetApp Elastic Capacity Pools in the Elastic NetApp Account. */
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticCapacityPool>;
 
   /**
    * Moves pool to another zone
    */
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   changeZone is ArmResourceActionAsync<
     ElasticCapacityPool,
@@ -279,6 +313,8 @@ interface ElasticCapacityPools {
   >;
 
   /** Check if an Elastic Volume file path is available within the given Elastic Capacity Pool. */
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   checkVolumeFilePathAvailability is ArmResourceActionSync<
     ElasticCapacityPool,

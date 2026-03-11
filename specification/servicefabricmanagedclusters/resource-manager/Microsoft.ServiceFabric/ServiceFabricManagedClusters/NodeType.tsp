@@ -139,7 +139,6 @@ interface NodeTypes {
   /**
    * Starts a fault simulation on the node type.
    */
-  @removed(Versions.v2026_02_01)
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     NodeType,
@@ -152,7 +151,6 @@ interface NodeTypes {
   /**
    * Stops a fault simulation on the node type.
    */
-  @removed(Versions.v2026_02_01)
   @tag("FaultSimulation")
   stopFaultSimulation is ArmResourceActionAsync<
     NodeType,
@@ -165,7 +163,6 @@ interface NodeTypes {
   /**
    * Gets a fault simulation by the simulationId.
    */
-  @removed(Versions.v2026_02_01)
   @tag("FaultSimulation")
   getFaultSimulation is ArmResourceActionSync<
     NodeType,
@@ -176,7 +173,6 @@ interface NodeTypes {
   /**
    * Gets the list of recent fault simulations for the node type.
    */
-  @removed(Versions.v2026_02_01)
   @tag("FaultSimulation")
   @list
   listFaultSimulation is ArmResourceActionSync<
@@ -549,12 +545,6 @@ model NodeTypeProperties {
    */
   @added(Versions.v2025_06_01_preview)
   isOutboundOnly?: boolean;
-
-  /**
-   * Specifies whether the node type should use a resilient ephemeral OS disk when using a supported SKU size. A resilient ephemeral OS disk provides improved reliability for ephemeral OS disks by enabling full caching.
-   */
-  @added(Versions.v2026_02_01)
-  enableResilientEphemeralOsDisk?: boolean;
 }
 
 /**

@@ -1,0 +1,2008 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DiskResourceProviderClient",
+    "description": "The Disk Resource Provider Client.",
+    "version": "2019-11-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}": {
+      "put": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_CreateOrUpdate",
+        "description": "Creates or updates a disk.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "disk",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            },
+            "description": "Disk object supplied in the body of the Put disk operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an empty managed disk.": {
+            "$ref": "./examples/CreateAnEmptyManagedDisk.json"
+          },
+          "Create a managed disk from a platform image.": {
+            "$ref": "./examples/CreateAManagedDiskFromAPlatformImage.json"
+          },
+          "Create a managed disk from an existing managed disk in the same or different subscription.": {
+            "$ref": "./examples/CreateAManagedDiskFromAnExistingManagedDisk.json"
+          },
+          "Create a managed disk by importing an unmanaged blob from the same subscription.": {
+            "$ref": "./examples/CreateAManagedDiskByImportingAnUnmanagedBlobFromTheSameSubscription.json"
+          },
+          "Create a managed disk by importing an unmanaged blob from a different subscription.": {
+            "$ref": "./examples/CreateAManagedDiskByImportingAnUnmanagedBlobFromADifferentSubscription.json"
+          },
+          "Create a managed disk by copying a snapshot.": {
+            "$ref": "./examples/CreateAManagedDiskByCopyingASnapshot.json"
+          },
+          "Create a managed upload disk.": {
+            "$ref": "./examples/CreateAManagedUploadDisk.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_Update",
+        "description": "Updates (patches) a disk.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "disk",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiskUpdate"
+            },
+            "description": "Disk object supplied in the body of the Patch disk operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_Get",
+        "description": "Gets information about a disk.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a managed disk.": {
+            "$ref": "./examples/GetInformationAboutAManagedDisk.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_Delete",
+        "description": "Deletes a disk.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "If the disk is deleted, this is an expected error code."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks": {
+      "get": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_ListByResourceGroup",
+        "description": "Lists all the disks under a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all managed disks in a resource group.": {
+            "$ref": "./examples/ListManagedDisksInAResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/disks": {
+      "get": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_List",
+        "description": "Lists all the disks under a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all managed disks in a subscription.": {
+            "$ref": "./examples/ListManagedDisksInASubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/beginGetAccess": {
+      "post": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_GrantAccess",
+        "description": "Grants access to a disk.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "grantAccessData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GrantAccessData"
+            },
+            "description": "Access data object supplied in the body of the get disk access operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessUri"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/endGetAccess": {
+      "post": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_RevokeAccess",
+        "description": "Revokes access to a disk.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}": {
+      "put": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_CreateOrUpdate",
+        "description": "Creates or updates a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "snapshot",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            },
+            "description": "Snapshot object supplied in the body of the Put disk operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a snapshot from an existing snapshot in the same or a different subscription.": {
+            "$ref": "./examples/CreateASnapshotFromAnExistingSnapshot.json"
+          },
+          "Create a snapshot by importing an unmanaged blob from the same subscription.": {
+            "$ref": "./examples/CreateASnapshotByImportingAnUnmanagedBlobFromTheSameSubscription.json"
+          },
+          "Create a snapshot by importing an unmanaged blob from a different subscription.": {
+            "$ref": "./examples/CreateASnapshotByImportingAnUnmanagedBlobFromADifferentSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Update",
+        "description": "Updates (patches) a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "snapshot",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SnapshotUpdate"
+            },
+            "description": "Snapshot object supplied in the body of the Patch snapshot operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Get",
+        "description": "Gets information about a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a snapshot.": {
+            "$ref": "./examples/GetInformationAboutASnapshot.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Delete",
+        "description": "Deletes a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "If the snapshot is deleted, this is an expected error code."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_ListByResourceGroup",
+        "description": "Lists snapshots under a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all snapshots in a resource group.": {
+            "$ref": "./examples/ListSnapshotsInAResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/snapshots": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_List",
+        "description": "Lists snapshots under a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all snapshots in a subscription.": {
+            "$ref": "./examples/ListSnapshotsInASubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}/beginGetAccess": {
+      "post": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_GrantAccess",
+        "description": "Grants access to a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "grantAccessData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GrantAccessData"
+            },
+            "description": "Access data object supplied in the body of the get snapshot access operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessUri"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}/endGetAccess": {
+      "post": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_RevokeAccess",
+        "description": "Revokes access to a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}": {
+      "put": {
+        "tags": [
+          "DiskEncryptionSets"
+        ],
+        "operationId": "DiskEncryptionSets_CreateOrUpdate",
+        "description": "Creates or updates a disk encryption set",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskEncryptionSetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "diskEncryptionSet",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiskEncryptionSet"
+            },
+            "description": "disk encryption set object supplied in the body of the Put disk encryption set operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskEncryptionSet"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DiskEncryptionSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a disk encryption set.": {
+            "$ref": "./examples/CreateADiskEncryptionSet.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "DiskEncryptionSets"
+        ],
+        "operationId": "DiskEncryptionSets_Update",
+        "description": "Updates (patches) a disk encryption set.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskEncryptionSetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "diskEncryptionSet",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiskEncryptionSetUpdate"
+            },
+            "description": "disk encryption set object supplied in the body of the Patch disk encryption set operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskEncryptionSet"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DiskEncryptionSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a disk encryption set.": {
+            "$ref": "./examples/UpdateADiskEncryptionSet.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "DiskEncryptionSets"
+        ],
+        "operationId": "DiskEncryptionSets_Get",
+        "description": "Gets information about a disk encryption set.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskEncryptionSetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskEncryptionSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a disk encryption set.": {
+            "$ref": "./examples/GetInformationAboutADiskEncryptionSet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DiskEncryptionSets"
+        ],
+        "operationId": "DiskEncryptionSets_Delete",
+        "description": "Deletes a disk encryption set.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskEncryptionSetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "If the disk encryption set is already deleted, this is an expected error code."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a disk encryption set.": {
+            "$ref": "./examples/DeleteADiskEncryptionSet.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets": {
+      "get": {
+        "tags": [
+          "DiskEncryptionSets"
+        ],
+        "operationId": "DiskEncryptionSets_ListByResourceGroup",
+        "description": "Lists all the disk encryption sets under a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskEncryptionSetList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all disk encryption sets in a resource group.": {
+            "$ref": "./examples/ListDiskEncryptionSetsInAResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskEncryptionSets": {
+      "get": {
+        "tags": [
+          "DiskEncryptionSets"
+        ],
+        "operationId": "DiskEncryptionSets_List",
+        "description": "Lists all the disk encryption sets under a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskEncryptionSetList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all disk encryption sets in a subscription.": {
+            "$ref": "./examples/ListDiskEncryptionSetsInASubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "Disk": {
+      "properties": {
+        "managedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A relative URI containing the ID of the VM that has the disk attached."
+        },
+        "managedByExtended": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of relative URIs containing the IDs of the VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs."
+        },
+        "sku": {
+          "$ref": "#/definitions/DiskSku"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Logical zone list for Disk."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiskProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Disk resource."
+    },
+    "DiskUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiskUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/DiskSku"
+        }
+      },
+      "description": "Disk update resource."
+    },
+    "DiskList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          },
+          "description": "A list of disks."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of disks. Call ListNext() with this to fetch the next page of disks."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Disks operation response."
+    },
+    "DiskSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS",
+            "UltraSSD_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "DiskStorageAccountTypes",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard_LRS",
+                "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
+              },
+              {
+                "value": "Premium_LRS",
+                "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
+              },
+              {
+                "value": "StandardSSD_LRS",
+                "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
+              },
+              {
+                "value": "UltraSSD_LRS",
+                "description": "Ultra SSD locally redundant storage. Best for IO-intensive workloads such as SAP HANA, top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads."
+              }
+            ]
+          },
+          "description": "The sku name."
+        },
+        "tier": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The sku tier."
+        }
+      },
+      "description": "The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, or UltraSSD_LRS."
+    },
+    "SnapshotSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "Standard_ZRS"
+          ],
+          "x-ms-enum": {
+            "name": "SnapshotStorageAccountTypes",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard_LRS",
+                "description": "Standard HDD locally redundant storage"
+              },
+              {
+                "value": "Premium_LRS",
+                "description": "Premium SSD locally redundant storage"
+              },
+              {
+                "value": "Standard_ZRS",
+                "description": "Standard zone redundant storage"
+              }
+            ]
+          },
+          "description": "The sku name."
+        },
+        "tier": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The sku tier."
+        }
+      },
+      "description": "The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS."
+    },
+    "DiskProperties": {
+      "properties": {
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the disk was created."
+        },
+        "osType": {
+          "type": "string",
+          "description": "The Operating System type.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "hyperVGeneration": {
+          "type": "string",
+          "description": "The hypervisor generation of the Virtual Machine. Applicable to OS disks only.",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "x-ms-enum": {
+            "name": "HyperVGeneration",
+            "modelAsString": true
+          }
+        },
+        "creationData": {
+          "$ref": "#/definitions/CreationData",
+          "description": "Disk source information. CreationData information cannot be changed after the disk has been created."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
+        },
+        "diskSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The size of the disk in bytes. This field is read only."
+        },
+        "uniqueId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique Guid identifying the resource."
+        },
+        "encryptionSettingsCollection": {
+          "$ref": "#/definitions/EncryptionSettingsCollection",
+          "description": "Encryption settings collection used for Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The disk provisioning state."
+        },
+        "diskIOPSReadWrite": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes."
+        },
+        "diskMBpsReadWrite": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
+        },
+        "diskIOPSReadOnly": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes."
+        },
+        "diskMBpsReadOnly": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
+        },
+        "diskState": {
+          "type": "string",
+          "description": "The state of the disk.",
+          "readOnly": true,
+          "enum": [
+            "Unattached",
+            "Attached",
+            "Reserved",
+            "ActiveSAS",
+            "ReadyToUpload",
+            "ActiveUpload"
+          ],
+          "x-ms-enum": {
+            "name": "DiskState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unattached",
+                "description": "The disk is not being used and can be attached to a VM."
+              },
+              {
+                "value": "Attached",
+                "description": "The disk is currently mounted to a running VM."
+              },
+              {
+                "value": "Reserved",
+                "description": "The disk is mounted to a stopped-deallocated VM"
+              },
+              {
+                "value": "ActiveSAS",
+                "description": "The disk currently has an Active SAS Uri associated with it."
+              },
+              {
+                "value": "ReadyToUpload",
+                "description": "A disk is ready to be created by upload by requesting a write token."
+              },
+              {
+                "value": "ActiveUpload",
+                "description": "A disk is created for upload and a write token has been issued for uploading to it."
+              }
+            ]
+          }
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
+        },
+        "maxShares": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time."
+        },
+        "shareInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareInfoElement"
+          },
+          "description": "Details of the list of all VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs."
+        }
+      },
+      "required": [
+        "creationData"
+      ],
+      "description": "Disk resource properties."
+    },
+    "SnapshotProperties": {
+      "properties": {
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the disk was created."
+        },
+        "osType": {
+          "type": "string",
+          "description": "The Operating System type.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "hyperVGeneration": {
+          "type": "string",
+          "description": "The hypervisor generation of the Virtual Machine. Applicable to OS disks only.",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "x-ms-enum": {
+            "name": "HyperVGeneration",
+            "modelAsString": true
+          }
+        },
+        "creationData": {
+          "$ref": "#/definitions/CreationData",
+          "description": "Disk source information. CreationData information cannot be changed after the disk has been created."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
+        },
+        "diskSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The size of the disk in bytes. This field is read only."
+        },
+        "uniqueId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique Guid identifying the resource."
+        },
+        "encryptionSettingsCollection": {
+          "$ref": "#/definitions/EncryptionSettingsCollection",
+          "description": "Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The disk provisioning state."
+        },
+        "incremental": {
+          "type": "boolean",
+          "description": "Whether a snapshot is incremental. Incremental snapshots on the same disk occupy less space than full snapshots and can be diffed."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
+        }
+      },
+      "required": [
+        "creationData"
+      ],
+      "description": "Snapshot resource properties."
+    },
+    "ShareInfoElement": {
+      "properties": {
+        "vmUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A relative URI containing the ID of the VM that has the disk attached."
+        }
+      }
+    },
+    "EncryptionSetProperties": {
+      "properties": {
+        "activeKey": {
+          "$ref": "#/definitions/KeyVaultAndKeyReference",
+          "description": "The key vault key which is currently used by this disk encryption set."
+        },
+        "previousKeys": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/KeyVaultAndKeyReference"
+          },
+          "description": "A readonly collection of key vault keys previously used by this disk encryption set while a key rotation is in progress. It will be empty if there is no ongoing key rotation."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The disk encryption set provisioning state."
+        }
+      }
+    },
+    "EncryptionSettingsCollection": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Set this flag to true and provide DiskEncryptionKey and optional KeyEncryptionKey to enable encryption. Set this flag to false and remove DiskEncryptionKey and KeyEncryptionKey to disable encryption. If EncryptionSettings is null in the request object, the existing settings remain unchanged."
+        },
+        "encryptionSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EncryptionSettingsElement"
+          },
+          "description": "A collection of encryption settings, one for each disk volume."
+        },
+        "encryptionSettingsVersion": {
+          "type": "string",
+          "description": "Describes what type of encryption is used for the disks. Once this field is set, it cannot be overwritten. '1.0' corresponds to Azure Disk Encryption with AAD app.'1.1' corresponds to Azure Disk Encryption."
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "Encryption settings for disk or snapshot"
+    },
+    "EncryptionSettingsElement": {
+      "properties": {
+        "diskEncryptionKey": {
+          "$ref": "#/definitions/KeyVaultAndSecretReference",
+          "description": "Key Vault Secret Url and vault id of the disk encryption key"
+        },
+        "keyEncryptionKey": {
+          "$ref": "#/definitions/KeyVaultAndKeyReference",
+          "description": "Key Vault Key Url and vault id of the key encryption key. KeyEncryptionKey is optional and when provided is used to unwrap the disk encryption key."
+        }
+      },
+      "description": "Encryption settings for one disk volume."
+    },
+    "KeyVaultAndSecretReference": {
+      "properties": {
+        "sourceVault": {
+          "$ref": "#/definitions/SourceVault",
+          "description": "Resource id of the KeyVault containing the key or secret"
+        },
+        "secretUrl": {
+          "type": "string",
+          "description": "Url pointing to a key or secret in KeyVault"
+        }
+      },
+      "required": [
+        "secretUrl",
+        "sourceVault"
+      ],
+      "description": "Key Vault Secret Url and vault id of the encryption key "
+    },
+    "KeyVaultAndKeyReference": {
+      "properties": {
+        "sourceVault": {
+          "$ref": "#/definitions/SourceVault",
+          "description": "Resource id of the KeyVault containing the key or secret"
+        },
+        "keyUrl": {
+          "type": "string",
+          "description": "Url pointing to a key or secret in KeyVault"
+        }
+      },
+      "required": [
+        "keyUrl",
+        "sourceVault"
+      ],
+      "description": "Key Vault Key Url and vault id of KeK, KeK is optional and when provided is used to unwrap the encryptionKey"
+    },
+    "SourceVault": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "description": "The vault id is an Azure Resource Manager Resource id in the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}"
+    },
+    "Encryption": {
+      "properties": {
+        "diskEncryptionSetId": {
+          "type": "string",
+          "description": "ResourceId of the disk encryption set to use for enabling encryption at rest."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of key used to encrypt the data of the disk.",
+          "enum": [
+            "EncryptionAtRestWithPlatformKey",
+            "EncryptionAtRestWithCustomerKey"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "EncryptionAtRestWithPlatformKey",
+                "description": "Disk is encrypted with XStore managed key at rest. It is the default encryption type."
+              },
+              {
+                "value": "EncryptionAtRestWithCustomerKey",
+                "description": "Disk is encrypted with Customer managed key at rest."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Encryption at rest settings for disk or snapshot"
+    },
+    "DiskUpdateProperties": {
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "the Operating System type.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
+        },
+        "encryptionSettingsCollection": {
+          "$ref": "#/definitions/EncryptionSettingsCollection",
+          "description": "Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot."
+        },
+        "diskIOPSReadWrite": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes."
+        },
+        "diskMBpsReadWrite": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
+        },
+        "diskIOPSReadOnly": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes."
+        },
+        "diskMBpsReadOnly": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
+        },
+        "maxShares": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
+        }
+      },
+      "description": "Disk resource update properties."
+    },
+    "SnapshotUpdateProperties": {
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "the Operating System type.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
+        },
+        "encryptionSettingsCollection": {
+          "$ref": "#/definitions/EncryptionSettingsCollection",
+          "description": "Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
+        }
+      },
+      "description": "Snapshot resource update properties."
+    },
+    "DiskEncryptionSetUpdateProperties": {
+      "properties": {
+        "activeKey": {
+          "$ref": "#/definitions/KeyVaultAndKeyReference"
+        }
+      },
+      "description": "disk encryption set resource update properties."
+    },
+    "CreationData": {
+      "properties": {
+        "createOption": {
+          "type": "string",
+          "enum": [
+            "Empty",
+            "Attach",
+            "FromImage",
+            "Import",
+            "Copy",
+            "Restore",
+            "Upload"
+          ],
+          "x-ms-enum": {
+            "name": "DiskCreateOption",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Empty",
+                "description": "Create an empty data disk of a size given by diskSizeGB."
+              },
+              {
+                "value": "Attach",
+                "description": "Disk will be attached to a VM."
+              },
+              {
+                "value": "FromImage",
+                "description": "Create a new disk from a platform image specified by the given imageReference or galleryImageReference."
+              },
+              {
+                "value": "Import",
+                "description": "Create a disk by importing from a blob specified by a sourceUri in a storage account specified by storageAccountId."
+              },
+              {
+                "value": "Copy",
+                "description": "Create a new disk or snapshot by copying from a disk or snapshot specified by the given sourceResourceId."
+              },
+              {
+                "value": "Restore",
+                "description": "Create a new disk by copying from a backup recovery point."
+              },
+              {
+                "value": "Upload",
+                "description": "Create a new disk by obtaining a write token and using it to directly upload the contents of the disk."
+              }
+            ]
+          },
+          "description": "This enumerates the possible sources of a disk's creation."
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "Required if createOption is Import. The Azure Resource Manager identifier of the storage account containing the blob to import as a disk."
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageDiskReference",
+          "description": "Disk source information."
+        },
+        "galleryImageReference": {
+          "$ref": "#/definitions/ImageDiskReference",
+          "description": "Required if creating from a Gallery Image. The id of the ImageDiskReference will be the ARM id of the shared galley image version from which to create a disk."
+        },
+        "sourceUri": {
+          "type": "string",
+          "description": "If createOption is Import, this is the URI of a blob to be imported into a managed disk."
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk."
+        },
+        "sourceUniqueId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "If this field is set, this is the unique id identifying the source of this resource."
+        },
+        "uploadSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "If createOption is Upload, this is the size of the contents of the upload including the VHD footer. This value should be between 20972032 (20 MiB + 512 bytes for the VHD footer) and 35183298347520 bytes (32 TiB + 512 bytes for the VHD footer)."
+        }
+      },
+      "required": [
+        "createOption"
+      ],
+      "description": "Data used when creating a disk."
+    },
+    "ImageDiskReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A relative uri containing either a Platform Image Repository or user image reference."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the disk is created from an image's data disk, this is an index that indicates which of the data disks in the image to use. For OS disks, this field is null."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "The source image used for creating the disk."
+    },
+    "GrantAccessData": {
+      "properties": {
+        "access": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Read",
+            "Write"
+          ],
+          "x-ms-enum": {
+            "name": "AccessLevel",
+            "modelAsString": true
+          }
+        },
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time duration in seconds until the SAS access expires."
+        }
+      },
+      "required": [
+        "access",
+        "durationInSeconds"
+      ],
+      "description": "Data used for requesting a SAS."
+    },
+    "AccessUri": {
+      "properties": {
+        "accessSAS": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A SAS uri for accessing a disk."
+        }
+      },
+      "description": "A disk access SAS uri."
+    },
+    "Snapshot": {
+      "properties": {
+        "managedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Unused. Always Null."
+        },
+        "sku": {
+          "$ref": "#/definitions/SnapshotSku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnapshotProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Snapshot resource."
+    },
+    "SnapshotUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnapshotUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/SnapshotSku"
+        }
+      },
+      "description": "Snapshot update resource."
+    },
+    "SnapshotList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Snapshot"
+          },
+          "description": "A list of snapshots."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of snapshots. Call ListNext() with this to fetch the next page of snapshots."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Snapshots operation response."
+    },
+    "EncryptionSetIdentity": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "DiskEncryptionSetIdentityType",
+            "modelAsString": true
+          },
+          "description": "The type of Managed Identity used by the DiskEncryptionSet. Only SystemAssigned is supported."
+        },
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The object id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-identity-principal-id header in the PUT request if the resource has a systemAssigned(implicit) identity"
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-client-tenant-id header in the PUT request if the resource has a systemAssigned(implicit) identity"
+        }
+      },
+      "description": "The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks."
+    },
+    "DiskEncryptionSet": {
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EncryptionSetIdentity"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EncryptionSetProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "disk encryption set resource."
+    },
+    "DiskEncryptionSetUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiskEncryptionSetUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "disk encryption set update resource."
+    },
+    "DiskEncryptionSetList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskEncryptionSet"
+          },
+          "description": "A list of disk encryption sets."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of disk encryption sets. Call ListNext() with this to fetch the next page of disk encryption sets."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List disk encryption set operation response."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ApiError"
+        }
+      },
+      "description": "An error response from the Compute service."
+    },
+    "ApiError": {
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiErrorBase"
+          },
+          "description": "The Api error details"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError",
+          "description": "The Api inner error"
+        },
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "Api error."
+    },
+    "ApiErrorBase": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "Api error base."
+    },
+    "InnerError": {
+      "properties": {
+        "exceptiontype": {
+          "type": "string",
+          "description": "The exception type."
+        },
+        "errordetail": {
+          "type": "string",
+          "description": "The internal error message or exception dump."
+        }
+      },
+      "description": "Inner error details."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "DiskNameParameter": {
+      "name": "diskName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
+      "x-ms-parameter-location": "method"
+    },
+    "SnapshotNameParameter": {
+      "name": "snapshotName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The max name length is 80 characters.",
+      "x-ms-parameter-location": "method"
+    },
+    "DiskEncryptionSetNameParameter": {
+      "name": "diskEncryptionSetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

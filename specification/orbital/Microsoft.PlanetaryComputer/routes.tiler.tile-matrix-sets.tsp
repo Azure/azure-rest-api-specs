@@ -16,7 +16,7 @@ interface TileMatrixList {
   @tag("Tile Matrix Sets")
   @route("/data/tile-matrix-sets")
   @get
-  get is Azure.Core.Foundations.Operation<{}, string[]>;
+  get is Azure.Core.Foundations.Operation<{}, string[] | NoContentResponse>;
 }
 
 interface TileMatrixDefinitions {

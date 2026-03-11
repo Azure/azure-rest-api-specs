@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount",
+    "settingName": "current"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current",
+        "name": "current",
+        "type": "Microsoft.Security/defenderForStorageSettings",
+        "properties": {
+          "isEnabled": true,
+          "malwareScanning": {
+            "onUpload": {
+              "isEnabled": true,
+              "capGBPerMonth": 10000,
+              "filters": {
+                "excludeBlobsWithPrefix": [
+                  "sample-container/logs",
+                  "single-excluded-container/",
+                  "excluded-containers"
+                ],
+                "excludeBlobsWithSuffix": [
+                  ".log",
+                  ".jpg"
+                ],
+                "excludeBlobsLargerThan": 1024
+              }
+            },
+            "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic",
+            "blobScanResultsOptions": "BlobIndexTags",
+            "automatedResponse": "BlobSoftDelete"
+          },
+          "sensitiveDataDiscovery": {
+            "isEnabled": true
+          },
+          "overrideSubscriptionLevelSettings": true
+        }
+      }
+    }
+  }
+}

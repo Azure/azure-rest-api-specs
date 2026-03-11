@@ -1,0 +1,690 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "description": "Azure Application Insights client for web test based alerting.",
+    "version": "2018-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Insights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "List available operations.",
+        "description": "List the available operations supported by the Microsoft.EventGrid resource provider.",
+        "operationId": "Operations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/webtests": {
+      "get": {
+        "description": "Get all Application Insights web tests defined within a specified resource group.",
+        "operationId": "WebTests_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more web test definitions.",
+            "schema": {
+              "$ref": "#/definitions/webTestListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "webTestListByResourceGroup": {
+            "$ref": "./examples/WebTestListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/webtests/{webTestName}": {
+      "get": {
+        "description": "Get a specific Application Insights web test definition.",
+        "operationId": "WebTests_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WebTestNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ann Application Insights web test definition.",
+            "schema": {
+              "$ref": "#/definitions/WebTest"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "webTestGet": {
+            "$ref": "./examples/WebTestGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates an Application Insights web test definition.",
+        "operationId": "WebTests_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WebTestNameParameter"
+          },
+          {
+            "name": "WebTestDefinition",
+            "description": "Properties that need to be specified to create or update an Application Insights web test definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebTest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Adding the Application Insights web test was successful. Web test properties are updated and returned.",
+            "schema": {
+              "$ref": "#/definitions/WebTest"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "webTestCreate": {
+            "$ref": "./examples/WebTestCreate.json"
+          },
+          "webTestCreateBasic": {
+            "$ref": "./examples/WebTestCreateBasic.json"
+          },
+          "webTestCreateStandard": {
+            "$ref": "./examples/WebTestCreateStandard.json"
+          },
+          "webTestUpdate": {
+            "$ref": "./examples/WebTestUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Creates or updates an Application Insights web test definition.",
+        "operationId": "WebTests_UpdateTags",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WebTestNameParameter"
+          },
+          {
+            "name": "WebTestTags",
+            "description": "Updated tag information to set into the web test instance.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating the Application Insights web test tags was successful. Web test tags are updated and returned with the rest of the WebTest object properties.",
+            "schema": {
+              "$ref": "#/definitions/WebTest"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "webTestUpdateTags": {
+            "$ref": "./examples/WebTestUpdateTagsOnly.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an Application Insights web test.",
+        "operationId": "WebTests_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebTestNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content: the request was successful, but the response is empty (the request to delete failed because the specified web test does not exist)."
+          },
+          "200": {
+            "description": "Successful request to delete a web test definition."
+          }
+        },
+        "x-ms-examples": {
+          "webTestDelete": {
+            "$ref": "./examples/WebTestDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/webtests": {
+      "get": {
+        "description": "Get all Application Insights web test alerts definitions within a subscription.",
+        "operationId": "WebTests_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of 0 or more Application Insights web test definitions.",
+            "schema": {
+              "$ref": "#/definitions/webTestListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "webTestList": {
+            "$ref": "./examples/WebTestList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{componentName}/webtests": {
+      "get": {
+        "description": "Get all Application Insights web tests defined for the specified component.",
+        "operationId": "WebTests_ListByComponent",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ComponentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more web test definitions.",
+            "schema": {
+              "$ref": "#/definitions/webTestListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "webTestListByComponent": {
+            "$ref": "./examples/WebTestListByComponent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WebtestsResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "TagsResource": {
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a WebTest instance."
+    },
+    "webTestListResult": {
+      "description": "A list of 0 or more Application Insights WebTest definitions.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Set of Application Insights WebTest definitions.",
+          "items": {
+            "$ref": "#/definitions/WebTest"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to get the next part of the returned list of WebTest, should the return set be too large for a single request. May be null."
+        }
+      }
+    },
+    "WebTest": {
+      "description": "An Application Insights WebTest definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebtestsResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of WebTest that this web test watches. Choices are ping and multistep.",
+          "default": "ping",
+          "enum": [
+            "ping",
+            "multistep"
+          ],
+          "x-ms-enum": {
+            "name": "WebTestKind",
+            "modelAsString": false
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Metadata describing a web test for an Azure resource.",
+          "$ref": "#/definitions/WebTestProperties"
+        }
+      }
+    },
+    "WebTestProperties": {
+      "description": "Metadata describing a web test for an Azure resource.",
+      "required": [
+        "Name",
+        "Kind",
+        "Locations",
+        "SyntheticMonitorId"
+      ],
+      "properties": {
+        "SyntheticMonitorId": {
+          "type": "string",
+          "description": "Unique ID of this WebTest. This is typically the same value as the Name field."
+        },
+        "Name": {
+          "x-ms-client-name": "WebTestName",
+          "type": "string",
+          "description": "User defined name if this WebTest."
+        },
+        "Description": {
+          "type": "string",
+          "description": "User defined description for this WebTest."
+        },
+        "Enabled": {
+          "type": "boolean",
+          "description": "Is the test actively being monitored."
+        },
+        "Frequency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Interval in seconds between test runs for this WebTest. Default value is 300.",
+          "default": 300
+        },
+        "Timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds until this WebTest will timeout and fail. Default value is 30.",
+          "default": 30
+        },
+        "Kind": {
+          "x-ms-client-name": "WebTestKind",
+          "type": "string",
+          "description": "The kind of web test this is, valid choices are ping, multistep, basic, and standard.",
+          "default": "ping",
+          "enum": [
+            "ping",
+            "multistep",
+            "basic",
+            "standard"
+          ],
+          "x-ms-enum": {
+            "name": "WebTestKindEnum",
+            "modelAsString": false
+          }
+        },
+        "RetryEnabled": {
+          "type": "boolean",
+          "description": "Allow for retries should this WebTest fail."
+        },
+        "Locations": {
+          "type": "array",
+          "description": "A list of where to physically run the tests from to give global coverage for accessibility of your application.",
+          "items": {
+            "$ref": "#/definitions/WebTestGeolocation"
+          }
+        },
+        "Configuration": {
+          "type": "object",
+          "description": "An XML configuration specification for a WebTest.",
+          "properties": {
+            "WebTest": {
+              "type": "string",
+              "description": "The XML specification of a WebTest to run against an application."
+            }
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of this component, whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.",
+          "readOnly": true
+        },
+        "Request": {
+          "type": "object",
+          "description": "The collection of request properties",
+          "properties": {
+            "RequestUrl": {
+              "type": "string",
+              "description": "Url location to test."
+            },
+            "Headers": {
+              "type": "array",
+              "description": "List of headers and their values to add to the WebTest call.",
+              "items": {
+                "$ref": "#/definitions/HeaderField"
+              }
+            },
+            "HttpVerb": {
+              "type": "string",
+              "description": "Http verb to use for this web test."
+            },
+            "RequestBody": {
+              "type": "string",
+              "description": "Base64 encoded string body to send with this web test."
+            },
+            "ParseDependentRequests": {
+              "type": "boolean",
+              "description": "Parse Dependent request for this WebTest."
+            },
+            "FollowRedirects": {
+              "type": "boolean",
+              "description": "Follow redirects for this web test."
+            }
+          }
+        },
+        "ValidationRules": {
+          "type": "object",
+          "description": "The collection of validation rule properties",
+          "properties": {
+            "ContentValidation": {
+              "type": "object",
+              "description": "The collection of content validation properties",
+              "properties": {
+                "ContentMatch": {
+                  "type": "string",
+                  "description": "Content to look for in the return of the WebTest.  Must not be null or empty."
+                },
+                "IgnoreCase": {
+                  "type": "boolean",
+                  "description": "When set, this value makes the ContentMatch validation case insensitive."
+                },
+                "PassIfTextFound": {
+                  "type": "boolean",
+                  "description": "When true, validation will pass if there is a match for the ContentMatch string.  If false, validation will fail if there is a match"
+                }
+              }
+            },
+            "SSLCheck": {
+              "type": "boolean",
+              "description": "Checks to see if the SSL cert is still valid."
+            },
+            "SSLCertRemainingLifetimeCheck": {
+              "type": "integer",
+              "format": "int32",
+              "description": "A number of days to check still remain before the the existing SSL cert expires.  Value must be positive and the SSLCheck must be set to true."
+            },
+            "ExpectedHttpStatusCode": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Validate that the WebTest returns the http status code provided."
+            },
+            "IgnoreHttpsStatusCode": {
+              "type": "boolean",
+              "description": "When set, validation will ignore the status code."
+            }
+          }
+        }
+      }
+    },
+    "WebTestGeolocation": {
+      "description": "Geo-physical location to run a WebTest from. You must specify one or more locations for the test to run from.",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "x-ms-client-name": "location",
+          "type": "string",
+          "description": "Location ID for the WebTest to run from."
+        }
+      }
+    },
+    "HeaderField": {
+      "description": "A header to add to the WebTest.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "x-ms-client-name": "headerFieldName",
+          "type": "string",
+          "description": "The name of the header."
+        },
+        "value": {
+          "x-ms-client-name": "headerFieldValue",
+          "type": "string",
+          "description": "The value of the header."
+        }
+      }
+    },
+    "OperationsListResult": {
+      "description": "Result of the List Operations operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "Represents an operation returned by the GetOperations request",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationInfo",
+          "description": "Display name of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of the operation",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationInfo": {
+      "description": "Information about an operation",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Name of the provider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ComponentNameParameter": {
+      "name": "componentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights component resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "WebTestNameParameter": {
+      "name": "webTestName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights WebTest resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

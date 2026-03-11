@@ -26,12 +26,3 @@ using Microsoft.ContainerRegistry;
 @@usage(Webhook, Usage.input | Usage.output, "java");
 
 @@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
-
-// C# client naming: match legacy ModelFactory signatures
-@@clientName(ProvisioningState, "ContainerRegistryProvisioningState", "csharp");
-@@clientName(ConnectionState, "ConnectedRegistryConnectionState", "csharp");
-@@clientName(ActivationStatus, "ConnectedRegistryActivationStatus", "csharp");
-@@clientName(ParentProperties, "ConnectedRegistryParent", "csharp");
-@@clientName(LoginServerProperties, "ConnectedRegistryLoginServer", "csharp");
-@@clientName(LoggingProperties, "ConnectedRegistryLogging", "csharp");
-@@clientName(StatusDetailProperties, "ConnectedRegistryStatusDetail", "csharp");

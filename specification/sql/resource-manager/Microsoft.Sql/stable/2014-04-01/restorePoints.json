@@ -1,0 +1,159 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database Backup",
+    "description": "Provides read functionality for Azure SQL Database Backups",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints": {
+      "get": {
+        "tags": [
+          "DatabaseBackup"
+        ],
+        "operationId": "RestorePoints_ListByDatabase",
+        "description": "Gets a list of database restore points.",
+        "x-ms-examples": {
+          "Get a database's restore points": {
+            "$ref": "./examples/DatabaseRestorePointsList.json"
+          },
+          "Get a data warehouse's restore points": {
+            "$ref": "./examples/DataWarehouseRestorePointsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to get available restore points."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RestorePointProperties": {
+      "properties": {
+        "restorePointType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The restore point type of the database restore point.",
+          "enum": [
+            "DISCRETE",
+            "CONTINUOUS"
+          ],
+          "x-ms-enum": {
+            "name": "RestorePointType"
+          }
+        },
+        "restorePointCreationDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Restore point creation time (ISO8601 format). Populated when restorePointType = CONTINUOUS. Null otherwise."
+        },
+        "earliestRestoreDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Earliest restore time (ISO8601 format). Populated when restorePointType = DISCRETE. Null otherwise."
+        }
+      },
+      "description": "Represents the properties of a database restore point."
+    },
+    "RestorePoint": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RestorePointProperties",
+          "description": "The properties of the restore point.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "A database restore point."
+    },
+    "RestorePointListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorePoint"
+          },
+          "description": "The list of database restore points."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The response to a list database restore points request."
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

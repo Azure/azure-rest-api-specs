@@ -32,8 +32,7 @@ alias PrivateEndpointParameter = {
 interface HostPoolOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       ParentParameters = ResourceInstanceParameters<HostPool>,
-      ResourceTypeParameter = PrivateEndpointParameter,
-      ResourceName = "HostPoolPrivateEndpointConnection"
+      ResourceTypeParameter = PrivateEndpointParameter
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
@@ -41,8 +40,7 @@ interface HostPoolOps
 interface WorkspaceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       ParentParameters = ResourceInstanceParameters<Workspace>,
-      ResourceTypeParameter = PrivateEndpointParameter,
-      ResourceName = "WorkspacePrivateEndpointConnection"
+      ResourceTypeParameter = PrivateEndpointParameter
     > {}
 
 @armResourceOperations

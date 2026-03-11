@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
-import "./CommonModels.tsp";
+import "./models.tsp";
 import "./ManagedCluster.tsp";
 
 using TypeSpec.Rest;
@@ -48,7 +48,9 @@ interface AgentPools {
        */
       @header
       ifNoneMatch?: string;
-    }
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = AgentPool> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -56,13 +58,11 @@ interface AgentPools {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     AgentPool,
-    LroHeaders = ArmAsyncOperationHeaderWithLocation &
-      Azure.Core.Foundations.RetryAfterHeader,
     Parameters = {
       /**
        * ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("ignore-pod-disruption-budget")
       `ignore-pod-disruption-budget`?: boolean;
 
@@ -82,7 +82,7 @@ interface AgentPools {
   /**
    * Aborts the currently running operation on the agent pool. The Agent Pool will be moved to a Canceling state and eventually to a Canceled state when cancellation finishes. If the operation completes before cancellation can take place, a 409 error code is returned.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("abort")
   @summary("Aborts last operation running on agent pool.")
   abortLatestOperation is ArmResourceActionAsync<
@@ -96,15 +96,14 @@ interface AgentPools {
   /**
    * Completes the upgrade operation for the specified agent pool.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2025_10_02_preview)
   @summary("Completes the upgrade of an agent pool.")
-  completeUpgrade is ArmResourceActionAsync<
+  completeUpgrade is ArmResourceActionAsyncBase<
     AgentPool,
     void,
-    NoContentResponse,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AgentPool>
   >;
 
   /**
@@ -113,21 +112,21 @@ interface AgentPools {
   deleteMachines is ArmResourceActionAsyncBase<
     AgentPool,
     AgentPoolDeleteMachinesParameter,
-    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeaderWithLocation &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AgentPool>
   >;
 
   /**
    * Upgrading the node image version of an agent pool applies the newest OS and runtime updates to the nodes. AKS provides one new image per week with the latest updates. For more details on node image versions, see: https://docs.microsoft.com/azure/aks/node-image-upgrade
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Upgrades the node image version of an agent pool to the latest.")
   upgradeNodeImageVersion is ArmResourceActionAsyncBase<
     AgentPool,
     void,
     {
       ...AcceptedResponse;
-      ...ArmCombinedLroHeaders<FinalResult = void>;
+      ...ArmAsyncOperationHeader<FinalResult = void>;
       ...Azure.Core.Foundations.RetryAfterHeader;
 
       @body
@@ -140,8 +139,8 @@ interface AgentPools {
    * Get the status of a specific operation in the specified agent pool.
    */
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/operations/{operationId}")
-  @added(Versions.v2026_01_02_preview)
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/operations/{operationId}")
+  @added(Versions.v2025_10_02_preview)
   getByAgentPool is AgentPoolsOps.ActionSync<
     AgentPool,
     void,

@@ -835,7 +835,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully."
+            "description": "The request has succeeded."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -948,7 +948,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully."
+            "description": "The request has succeeded."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -1541,8 +1541,14 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "description": "Additional properties to expose performance metrics to shoebox."
+          "type": "object",
+          "description": "Additional properties to expose performance metrics to shoebox.",
+          "properties": {
+            "serviceSpecification": {
+              "$ref": "#/definitions/ServiceSpecification",
+              "description": "Service specification for exposing performance metrics to shoebox."
+            }
+          }
         }
       }
     },
@@ -1565,16 +1571,6 @@
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any.",
           "readOnly": true
-        }
-      }
-    },
-    "OperationProperties": {
-      "type": "object",
-      "description": "Additional properties to expose performance metrics to shoebox.",
-      "properties": {
-        "serviceSpecification": {
-          "$ref": "#/definitions/ServiceSpecification",
-          "description": "Service specification for exposing performance metrics to shoebox."
         }
       }
     },
@@ -1721,6 +1717,10 @@
           }
         ]
       }
+    },
+    "TypeSpec.Http.OkResponse": {
+      "type": "object",
+      "description": "The request has succeeded."
     },
     "VCoreProvisioningState": {
       "type": "string",

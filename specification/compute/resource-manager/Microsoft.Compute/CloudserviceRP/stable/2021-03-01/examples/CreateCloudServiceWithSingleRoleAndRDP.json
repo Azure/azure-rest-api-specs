@@ -1,0 +1,198 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "ConstosoRG",
+    "cloudServiceName": "{cs-name}",
+    "api-version": "2021-03-01",
+    "parameters": {
+      "properties": {
+        "extensionProfile": {
+          "extensions": [
+            {
+              "properties": {
+                "type": "RDP",
+                "autoUpgradeMinorVersion": false,
+                "protectedSettings": "<PrivateConfig><Password>{password}</Password></PrivateConfig>",
+                "publisher": "Microsoft.Windows.Azure.Extensions",
+                "settings": "<PublicConfig><UserName>UserAzure</UserName><Expiration>10/22/2021 15:05:45</Expiration></PublicConfig>",
+                "typeHandlerVersion": "1.2.1"
+              },
+              "name": "RDPExtension"
+            }
+          ]
+        },
+        "networkProfile": {
+          "loadBalancerConfigurations": [
+            {
+              "properties": {
+                "frontendIPConfigurations": [
+                  {
+                    "properties": {
+                      "publicIPAddress": {
+                        "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/contosopublicip"
+                      }
+                    },
+                    "name": "contosofe"
+                  }
+                ]
+              },
+              "name": "contosolb"
+            }
+          ]
+        },
+        "roleProfile": {
+          "roles": [
+            {
+              "sku": {
+                "name": "Standard_D1_v2",
+                "capacity": 1,
+                "tier": "Standard"
+              },
+              "name": "ContosoFrontend"
+            }
+          ]
+        },
+        "configuration": "{ServiceConfiguration}",
+        "packageUrl": "{PackageUrl}",
+        "upgradeMode": "Auto"
+      },
+      "location": "westus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{cs-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}",
+        "type": "Microsoft.Compute/cloudServices",
+        "location": "westus",
+        "properties": {
+          "configuration": "{ServiceConfiguration}",
+          "packageUrl": "{PackageUrl}",
+          "upgradeMode": "Auto",
+          "roleProfile": {
+            "roles": [
+              {
+                "name": "ContosoFrontend",
+                "sku": {
+                  "name": "Standard_D1_v2",
+                  "tier": "Standard",
+                  "capacity": 1
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "secrets": []
+          },
+          "networkProfile": {
+            "loadBalancerConfigurations": [
+              {
+                "name": "contosolb",
+                "properties": {
+                  "frontendIPConfigurations": [
+                    {
+                      "name": "contosofe",
+                      "properties": {
+                        "publicIPAddress": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/contosopublicip"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "extensionProfile": {
+            "extensions": [
+              {
+                "name": "RDPExtension",
+                "properties": {
+                  "autoUpgradeMinorVersion": false,
+                  "provisioningState": "Creating",
+                  "rolesAppliedTo": [
+                    "*"
+                  ],
+                  "publisher": "Microsoft.Windows.Azure.Extensions",
+                  "type": "RDP",
+                  "typeHandlerVersion": "1.2.1",
+                  "settings": "<PublicConfig><UserName>UserAzure</UserName><Expiration>10/22/2021 15:05:45</Expiration></PublicConfig>"
+                }
+              }
+            ]
+          },
+          "provisioningState": "Updating",
+          "uniqueId": "c948cccb-bbfa-4516-a250-c28abc4d0c15"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{cs-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}",
+        "type": "Microsoft.Compute/cloudServices",
+        "location": "westus",
+        "properties": {
+          "configuration": "{ServiceConfiguration}",
+          "packageUrl": "{PackageUrl}",
+          "upgradeMode": "Auto",
+          "roleProfile": {
+            "roles": [
+              {
+                "name": "ContosoFrontend",
+                "sku": {
+                  "name": "Standard_D1_v2",
+                  "tier": "Standard",
+                  "capacity": 1
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "secrets": []
+          },
+          "networkProfile": {
+            "loadBalancerConfigurations": [
+              {
+                "name": "contosolb",
+                "properties": {
+                  "frontendIPConfigurations": [
+                    {
+                      "name": "contosofe",
+                      "properties": {
+                        "publicIPAddress": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/contosopublicip"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "extensionProfile": {
+            "extensions": [
+              {
+                "name": "RDPExtension",
+                "properties": {
+                  "autoUpgradeMinorVersion": false,
+                  "provisioningState": "Creating",
+                  "rolesAppliedTo": [
+                    "*"
+                  ],
+                  "publisher": "Microsoft.Windows.Azure.Extensions",
+                  "type": "RDP",
+                  "typeHandlerVersion": "1.2.1",
+                  "settings": "<PublicConfig><UserName>UserAzure</UserName><Expiration>10/22/2021 15:05:45</Expiration></PublicConfig>"
+                }
+              }
+            ]
+          },
+          "provisioningState": "Creating",
+          "uniqueId": "c948cccb-bbfa-4516-a250-c28abc4d0c15"
+        }
+      }
+    }
+  }
+}

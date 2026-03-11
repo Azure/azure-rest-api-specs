@@ -3,13 +3,11 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
-import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Datadog;
 
@@ -82,23 +80,5 @@ interface CreationSupportedOperationGroup {
       @query("datadogOrganizationId")
       datadogOrganizationId: string;
     }
-  >;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
-interface SaaSOperationGroup {
-  /**
-   * Resolve the token to get the SaaS resource ID and activate the SaaS resource
-   */
-  @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
-  @autoRoute
-  @post
-  @action("activateSaaS")
-  activateResource is ArmProviderActionSync<
-    Request = ActivateSaaSParameterRequest,
-    Response = SaaSResourceDetailsResponse,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
   >;
 }

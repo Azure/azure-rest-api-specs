@@ -17,6 +17,8 @@ namespace Microsoft.NetApp;
 /**
  * NetApp Elastic Snapshot Policy under an Elastic Account
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @parentResource(ElasticAccount)
 model ElasticSnapshotPolicy
@@ -33,6 +35,8 @@ model ElasticSnapshotPolicy
 /**
  * Elastic Snapshot policy properties
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ElasticSnapshotPolicyProperties {
   /**
@@ -64,6 +68,8 @@ model ElasticSnapshotPolicyProperties {
 /**
  * Policy status
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union PolicyStatus {
   string,
@@ -76,6 +82,8 @@ union PolicyStatus {
 }
 
 /** Hourly Schedule properties used to create NetApp snapshot policy */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ElasticSnapshotPolicyHourlySchedule {
   /** Hourly snapshot count to keep */
@@ -91,6 +99,8 @@ model ElasticSnapshotPolicyHourlySchedule {
 }
 
 /** Daily Schedule properties used to create NetApp snapshot policy */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ElasticSnapshotPolicyDailySchedule {
   /** Daily snapshot count to keep */
@@ -112,6 +122,8 @@ model ElasticSnapshotPolicyDailySchedule {
 }
 
 /** Weekly Schedule properties used to create NetApp snapshot policy */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ElasticSnapshotPolicyWeeklySchedule {
   /** Weekly snapshot count to keep */
@@ -137,6 +149,8 @@ model ElasticSnapshotPolicyWeeklySchedule {
 }
 
 /** Monthly Schedule properties used to create NetApp snapshot policy */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ElasticSnapshotPolicyMonthlySchedule {
   /** Monthly snapshot count to keep */
@@ -164,6 +178,8 @@ model ElasticSnapshotPolicyMonthlySchedule {
 /**
  * Day of the week
  */
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union DayOfWeek {
   string,
@@ -196,13 +212,20 @@ model ElasticSnapshotPolicyVolumeList is Azure.Core.Page<ElasticVolume>;
 
 @armResourceOperations
 interface ElasticSnapshotPolicies {
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   get is ArmResourceRead<ElasticSnapshotPolicy>;
 
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticSnapshotPolicy>;
 
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     ElasticSnapshotPolicy,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -212,8 +235,12 @@ interface ElasticSnapshotPolicies {
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ElasticSnapshotPolicy> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticSnapshotPolicy>;
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticSnapshotPolicy>;
 
@@ -223,6 +250,8 @@ interface ElasticSnapshotPolicies {
   @list
   @get
   @action("elasticvolumes")
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   listElasticVolumes is ArmResourceActionSync<
     ElasticSnapshotPolicy,

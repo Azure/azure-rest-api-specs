@@ -8,6 +8,7 @@ options:
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/openapi.json"
+    azure-resource-provider-folder: "resource-manager"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-python":
@@ -22,7 +23,6 @@ options:
     service-name: "RecoveryServices" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    compatibility-lro: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-recoveryservices"
     flavor: azure
     experimental-extensible-enums: true

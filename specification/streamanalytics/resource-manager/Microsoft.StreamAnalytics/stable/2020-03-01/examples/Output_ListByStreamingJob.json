@@ -1,0 +1,226 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg2157",
+    "jobName": "sj6458"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg2157/providers/Microsoft.StreamAnalytics/streamingjobs/sj6458/outputs/output1755",
+            "name": "output1755",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+            "properties": {
+              "datasource": {
+                "type": "Microsoft.Sql/Server/Database",
+                "properties": {
+                  "server": "someServer",
+                  "database": "someDatabase",
+                  "table": "differentTable",
+                  "user": "someUser"
+                }
+              },
+              "etag": "f489d6f3-fcd5-4bcb-b642-81e987ee16d6"
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg2157/providers/Microsoft.StreamAnalytics/streamingjobs/sj6458/outputs/output958",
+            "name": "output958",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+            "properties": {
+              "datasource": {
+                "type": "Microsoft.Storage/Table",
+                "properties": {
+                  "accountName": "someAccountName",
+                  "table": "samples",
+                  "partitionKey": "differentPartitionKey",
+                  "rowKey": "rowKey",
+                  "columnsToRemove": [
+                    "column1",
+                    "column2"
+                  ],
+                  "batchSize": 25
+                }
+              },
+              "etag": "ea1d20bf-6cb3-40bc-bc7b-ec3a7fd5977e"
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg2157/providers/Microsoft.StreamAnalytics/streamingjobs/sj6458/outputs/output1623",
+            "name": "output1623",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+            "properties": {
+              "datasource": {
+                "type": "Microsoft.Storage/Blob",
+                "properties": {
+                  "storageAccounts": [
+                    {
+                      "accountName": "someAccountName"
+                    }
+                  ],
+                  "container": "differentContainer",
+                  "pathPattern": "{date}/{time}",
+                  "dateFormat": "yyyy/MM/dd",
+                  "timeFormat": "HH"
+                }
+              },
+              "serialization": {
+                "type": "Csv",
+                "properties": {
+                  "fieldDelimiter": "|",
+                  "encoding": "UTF8"
+                }
+              },
+              "etag": "3a1b2023-79a9-4b33-93e8-f49fc3e573fe"
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg2157/providers/Microsoft.StreamAnalytics/streamingjobs/sj6458/outputs/output3022",
+            "name": "output3022",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+            "properties": {
+              "datasource": {
+                "type": "Microsoft.Storage/DocumentDB",
+                "properties": {
+                  "accountId": "someAccountId",
+                  "database": "db01",
+                  "collectionNamePattern": "collection",
+                  "partitionKey": "differentPartitionKey",
+                  "documentId": "documentId"
+                }
+              },
+              "etag": "7849c132-e995-4631-91c3-931606eec432"
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg2157/providers/Microsoft.StreamAnalytics/streamingjobs/sj6458/outputs/output5195",
+            "name": "output5195",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+            "properties": {
+              "datasource": {
+                "type": "Microsoft.ServiceBus/EventHub",
+                "properties": {
+                  "eventHubName": "sdkeventhub",
+                  "partitionKey": "differentPartitionKey",
+                  "serviceBusNamespace": "sdktest",
+                  "sharedAccessPolicyName": "RootManageSharedAccessKey"
+                }
+              },
+              "serialization": {
+                "type": "Json",
+                "properties": {
+                  "encoding": "UTF8",
+                  "format": "LineSeparated"
+                }
+              },
+              "etag": "5020de6b-5bb3-4b88-8606-f11fb3c46185"
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg2157/providers/Microsoft.StreamAnalytics/streamingjobs/sj6458/outputs/output3456",
+            "name": "output3456",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+            "properties": {
+              "datasource": {
+                "type": "Microsoft.ServiceBus/Queue",
+                "properties": {
+                  "queueName": "differentQueueName",
+                  "propertyColumns": [
+                    "column1",
+                    "column2"
+                  ],
+                  "serviceBusNamespace": "sdktest",
+                  "sharedAccessPolicyName": "RootManageSharedAccessKey"
+                }
+              },
+              "serialization": {
+                "type": "Json",
+                "properties": {
+                  "encoding": "UTF8",
+                  "format": "LineSeparated"
+                }
+              },
+              "etag": "429adaec-a777-4750-8a39-8d0c931d801c"
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg2157/providers/Microsoft.StreamAnalytics/streamingjobs/sj6458/outputs/output7886",
+            "name": "output7886",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+            "properties": {
+              "datasource": {
+                "type": "Microsoft.ServiceBus/Topic",
+                "properties": {
+                  "topicName": "differentTopicName",
+                  "propertyColumns": [
+                    "column1",
+                    "column2"
+                  ],
+                  "serviceBusNamespace": "sdktest",
+                  "sharedAccessPolicyName": "RootManageSharedAccessKey"
+                }
+              },
+              "serialization": {
+                "type": "Csv",
+                "properties": {
+                  "fieldDelimiter": "|",
+                  "encoding": "UTF8"
+                }
+              },
+              "etag": "c1c2007f-45b2-419a-ae7d-4d2148998460"
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg2157/providers/Microsoft.StreamAnalytics/streamingjobs/sj6458/outputs/output3021",
+            "name": "output3021",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+            "properties": {
+              "datasource": {
+                "type": "PowerBI",
+                "properties": {
+                  "dataset": "differentDataset",
+                  "table": "someTable",
+                  "tokenUserPrincipalName": "bobsmith@contoso.com",
+                  "tokenUserDisplayName": "Bob Smith",
+                  "groupId": "ac40305e-3e8d-43ac-8161-c33799f43e95",
+                  "groupName": "MyPowerBIGroup"
+                }
+              },
+              "etag": "4a492191-9672-4178-be10-043b9dbd4b9f"
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg2157/providers/Microsoft.StreamAnalytics/streamingjobs/sj6458/outputs/output5196",
+            "name": "output5196",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+            "properties": {
+              "datasource": {
+                "type": "Microsoft.DataLake/Accounts",
+                "properties": {
+                  "accountName": "differentaccount",
+                  "tenantId": "cea4e98b-c798-49e7-8c40-4a2b3beb47dd",
+                  "tokenUserPrincipalName": "bobsmith@contoso.com",
+                  "tokenUserDisplayName": "Bob Smith",
+                  "filePathPrefix": "{date}/{time}",
+                  "dateFormat": "yyyy/MM/dd",
+                  "timeFormat": "HH"
+                }
+              },
+              "serialization": {
+                "type": "Json",
+                "properties": {
+                  "encoding": "UTF8",
+                  "format": "LineSeparated"
+                }
+              },
+              "etag": "39ab7642-8c1e-48ed-85eb-949068d68002"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

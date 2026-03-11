@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default",
+    "serverName": "dns-alias-new-server",
+    "dnsAliasName": "dns-alias-name-1",
+    "api-version": "2021-05-01-preview",
+    "parameters": {
+      "oldServerDnsAliasId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-old-server/dnsAliases/dns-alias-name-1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-new-server/dnsAliases/dns-alias-name-1",
+        "name": "server-dns-alias-name-1",
+        "type": "Microsoft.Sql/servers/dnsAliases",
+        "properties": {
+          "azureDnsRecord": "dns-alias-name-1.database.windows.net"
+        }
+      }
+    },
+    "202": {}
+  }
+}

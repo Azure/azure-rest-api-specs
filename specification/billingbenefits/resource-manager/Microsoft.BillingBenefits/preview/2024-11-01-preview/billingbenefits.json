@@ -3,7 +3,12 @@
   "info": {
     "title": "Billing benefits RP",
     "version": "2024-11-01-preview",
-    "description": "Azure Benefits RP let users create and manage benefits like savings plan."
+    "description": "Azure Benefits RP let users create and manage benefits like savings plan.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
   "schemes": [
     "https"
@@ -634,8 +639,7 @@
             }
           },
           "404": {
-            "description": "ARM not found response",
-            "x-ms-error-response": true
+            "description": "The Azure resource is not found"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1088,16 +1092,11 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Resource update request accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "format": "uri",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1151,16 +1150,11 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "format": "uri",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1170,7 +1164,7 @@
             }
           },
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1228,12 +1222,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "format": "uri",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1710,10 +1699,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
+                "type": "Microsoft.Billing/billingAccounts",
                 "scopes": [
                   "Tenant"
-                ],
-                "type": "Microsoft.Billing/billingAccounts"
+                ]
               }
             ]
           }
@@ -1726,10 +1715,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
+                "type": "Microsoft.Billing/billingAccounts",
                 "scopes": [
                   "Tenant"
-                ],
-                "type": "Microsoft.Billing/billingAccounts"
+                ]
               }
             ]
           }
@@ -1742,10 +1731,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
+                "type": "Microsoft.Billing/billingAccounts/customers",
                 "scopes": [
                   "Tenant"
-                ],
-                "type": "Microsoft.Billing/billingAccounts/customers"
+                ]
               }
             ]
           }
@@ -1767,10 +1756,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
+                "type": "Microsoft.BillingBenefits/discounts",
                 "scopes": [
                   "ResourceGroup"
-                ],
-                "type": "Microsoft.BillingBenefits/discounts"
+                ]
               }
             ]
           }
@@ -2076,10 +2065,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
+                "type": "Microsoft.BillingBenefits/discounts",
                 "scopes": [
                   "ResourceGroup"
-                ],
-                "type": "Microsoft.BillingBenefits/discounts"
+                ]
               }
             ]
           }
@@ -3033,10 +3022,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
+                "type": "Microsoft.Billing/billingAccounts",
                 "scopes": [
                   "Tenant"
-                ],
-                "type": "Microsoft.Billing/billingAccounts"
+                ]
               }
             ]
           }

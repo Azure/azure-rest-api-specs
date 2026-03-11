@@ -2,38 +2,25 @@
   "title": "TilerInfoOperations_Get",
   "operationId": "TilerInfoOperations_Get",
   "parameters": {
-    "collectionId": "naip-atl",
-    "itemId": "ga_m_3308421_se_16_060_20211114",
-    "api-version": "2025-04-30-preview",
-    "assets": [
-      "image"
-    ]
+    "collectionId": "{{collectionId}}",
+    "itemId": "{{itemId}}",
+    "api-version": "2025-04-30-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "image": {
+        "data": {
           "bounds": [
-            -84.44157036219231,
-            33.62185311275707,
-            -84.37089430625126,
-            33.690654419926105
+            -65.75386020444417,
+            18.252569552371305,
+            -65.75376429311993,
+            18.252661191551685
           ],
+          "minzoom": 17,
+          "maxzoom": 17,
           "band_metadata": [
             [
               "b1",
-              {}
-            ],
-            [
-              "b2",
-              {}
-            ],
-            [
-              "b3",
-              {}
-            ],
-            [
-              "b4",
               {}
             ]
           ],
@@ -41,42 +28,18 @@
             [
               "b1",
               ""
-            ],
-            [
-              "b2",
-              ""
-            ],
-            [
-              "b3",
-              ""
-            ],
-            [
-              "b4",
-              ""
             ]
           ],
-          "dtype": "uint8",
+          "dtype": "int16",
           "nodata_type": "None",
           "colorinterp": [
-            "red",
-            "green",
-            "blue",
-            "undefined"
+            "gray"
           ],
-          "minzoom": 12,
-          "maxzoom": 18,
-          "crs": "http://www.opengis.net/def/crs/EPSG/0/4326",
           "driver": "GTiff",
-          "count": 4,
-          "width": 10620,
-          "height": 12460,
-          "overviews": [
-            2,
-            4,
-            8,
-            16,
-            32
-          ]
+          "count": 1,
+          "width": 10,
+          "height": 10,
+          "overviews": []
         }
       }
     }

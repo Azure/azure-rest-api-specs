@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2020-06-01",
+    "hostGroupName": "myDedicatedHostGroup",
+    "expand": "instanceView"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "hosts": [
+            {
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/myDedicatedHostGroup/myHostGroup/Hosts/myHost1"
+            },
+            {
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/myDedicatedHostGroup/myHostGroup/Hosts/myHost2"
+            }
+          ],
+          "supportAutomaticPlacement": true,
+          "instanceView": {
+            "hosts": [
+              {
+                "name": "myHost1",
+                "assetId": "eb3f58b8-b4e8-4882-b69f-301a01812407",
+                "availableCapacity": {
+                  "allocatableVMs": [
+                    {
+                      "vmSize": "Standard_A1",
+                      "count": 10
+                    }
+                  ]
+                },
+                "statuses": [
+                  {
+                    "code": "ProvisioningState/succeeded",
+                    "level": "Info",
+                    "displayStatus": "Provisioning succeeded"
+                  },
+                  {
+                    "code": "HealthState/available",
+                    "level": "Info",
+                    "displayStatus": "Host available"
+                  }
+                ]
+              },
+              {
+                "name": "myHost2",
+                "assetId": "f293d4ac-5eea-4be2-b0c0-0fcaa09aebf8",
+                "availableCapacity": {
+                  "allocatableVMs": [
+                    {
+                      "vmSize": "Standard_A1",
+                      "count": 10
+                    }
+                  ]
+                },
+                "statuses": [
+                  {
+                    "code": "ProvisioningState/succeeded",
+                    "level": "Info",
+                    "displayStatus": "Provisioning succeeded"
+                  },
+                  {
+                    "code": "HealthState/available",
+                    "level": "Info",
+                    "displayStatus": "Host available"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "location": "westus",
+        "tags": {
+          "{tagName}": "{tagValue}"
+        },
+        "name": "myDedicatedHostGroup",
+        "zones": [
+          "3"
+        ]
+      }
+    }
+  }
+}

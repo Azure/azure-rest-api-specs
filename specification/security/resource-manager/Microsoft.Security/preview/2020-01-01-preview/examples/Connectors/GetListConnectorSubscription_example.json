@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/connectors/aws_dev1",
+            "name": "aws_dev1",
+            "type": "Microsoft.Security/connectors",
+            "properties": {
+              "hybridComputeSettings": {
+                "hybridComputeProvisioningState": "Valid",
+                "autoProvision": "On",
+                "resourceGroupName": "AwsConnectorRG",
+                "region": "West US 2",
+                "proxyServer": {
+                  "ip": "287.221.107.152",
+                  "port": "34"
+                },
+                "servicePrincipal": {
+                  "applicationId": "ad9bcd79-be9c-45ab-abd8-80ca1654a7d1"
+                }
+              },
+              "authenticationDetails": {
+                "authenticationProvisioningState": "Valid",
+                "grantedPermissions": [
+                  "AWS::AWSSecurityHubReadOnlyAccess",
+                  "AWS::SecurityAudit",
+                  "AWS::AmazonSSMAutomationRole"
+                ],
+                "authenticationType": "awsCreds",
+                "accountId": "922315681122",
+                "awsAccessKeyId": "",
+                "awsSecretAccessKey": ""
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/connectors/aws_dev2",
+            "name": "aws_dev2",
+            "type": "Microsoft.Security/connectors",
+            "properties": {
+              "hybridComputeSettings": {
+                "hybridComputeProvisioningState": "Valid",
+                "autoProvision": "On",
+                "resourceGroupName": "AwsConnectorRG",
+                "region": "West US 2",
+                "proxyServer": {
+                  "ip": "167.210.187.160",
+                  "port": "34"
+                },
+                "servicePrincipal": {
+                  "applicationId": "ad9bcd79-be9c-45ab-abd8-80ca1654a7d1"
+                }
+              },
+              "authenticationDetails": {
+                "authenticationProvisioningState": "Valid",
+                "grantedPermissions": [
+                  "AWS::AWSSecurityHubReadOnlyAccess",
+                  "AWS::SecurityAudit",
+                  "AWS::AmazonSSMAutomationRole"
+                ],
+                "authenticationType": "awsAssumeRole",
+                "accountId": "81231569658",
+                "awsAssumeRoleArn": "arn:aws:iam::81231569658:role/AscConnector",
+                "awsExternalId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/connectors/gcp_dev",
+            "name": "gcp_dev",
+            "type": "Microsoft.Security/connectors",
+            "properties": {
+              "hybridComputeSettings": {
+                "hybridComputeProvisioningState": "Invalid",
+                "autoProvision": "Off",
+                "resourceGroupName": "",
+                "region": "",
+                "proxyServer": null,
+                "servicePrincipal": null
+              },
+              "authenticationDetails": {
+                "authenticationProvisioningState": "Valid",
+                "grantedPermissions": [
+                  "GCP::Security Center Admin Viewer"
+                ],
+                "authenticationType": "gcpCredentials",
+                "organizationId": "AscDemoOrg",
+                "type": "",
+                "projectId": "",
+                "privateKeyId": "",
+                "privateKey": "",
+                "clientEmail": "",
+                "clientId": "",
+                "authUri": "",
+                "tokenUri": "",
+                "authProviderX509CertUrl": "",
+                "clientX509CertUrl": ""
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

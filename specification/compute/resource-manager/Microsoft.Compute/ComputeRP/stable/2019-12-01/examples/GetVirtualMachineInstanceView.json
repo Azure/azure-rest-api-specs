@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-12-01",
+    "vmName": "myVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "platformUpdateDomain": 1,
+        "platformFaultDomain": 1,
+        "computerName": "myVM",
+        "osName": "Windows Server 2016 Datacenter",
+        "osVersion": "Microsoft Windows NT 10.0.14393.0",
+        "vmAgent": {
+          "vmAgentVersion": "2.7.41491.949",
+          "statuses": [
+            {
+              "code": "ProvisioningState/succeeded",
+              "level": "Info",
+              "displayStatus": "Ready",
+              "message": "GuestAgent is running and accepting new configurations.",
+              "time": "2019-10-14T23:11:22+00:00"
+            }
+          ],
+          "extensionHandlers": [
+            {
+              "type": "Microsoft.Azure.Security.IaaSAntimalware",
+              "typeHandlerVersion": "1.5.5.9",
+              "status": {
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Ready"
+              }
+            }
+          ]
+        },
+        "disks": [
+          {
+            "name": "myOsDisk",
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded",
+                "time": "2019-10-14T21:29:47.477089+00:00"
+              }
+            ]
+          },
+          {
+            "name": "myDataDisk0",
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded",
+                "time": "2019-10-14T21:29:47.461517+00:00"
+              }
+            ]
+          }
+        ],
+        "bootDiagnostics": {
+          "consoleScreenshotBlobUri": "https://{myStorageAccount}.blob.core.windows.net/bootdiagnostics-myOsDisk/myOsDisk.screenshot.bmp",
+          "serialConsoleLogBlobUri": "https://{myStorageAccount}.blob.core.windows.net/bootdiagnostics-myOsDisk/myOsDisk.serialconsole.log"
+        },
+        "extensions": [
+          {
+            "name": "IaaSAntiMalware-ext0",
+            "type": "Microsoft.Azure.Security.IaaSAntimalware",
+            "typeHandlerVersion": "1.5.5.9",
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded",
+                "message": "Microsoft Antimalware enabled"
+              }
+            ]
+          }
+        ],
+        "hyperVGeneration": "V1",
+        "statuses": [
+          {
+            "code": "ProvisioningState/succeeded",
+            "level": "Info",
+            "displayStatus": "Provisioning succeeded",
+            "time": "2019-10-14T21:30:12.8051917+00:00"
+          },
+          {
+            "code": "PowerState/running",
+            "level": "Info",
+            "displayStatus": "VM running"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "location": "eastus",
+    "operationId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-10-01-preview"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-10-01-preview",
+        "Retry-After": "10"
+      }
+    },
+    "204": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "OperationNotFound",
+          "message": "The requested operation was not found.",
+          "target": "operationId",
+          "details": [
+            {
+              "code": "InvalidOperationId",
+              "message": "The operation ID '00000000-0000-0000-0000-000000000000' does not exist or has expired."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

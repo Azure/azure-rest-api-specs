@@ -1,33 +1,22 @@
 {
   "parameters": {
-    "api-version": "2024-11-01-preview",
-    "extensionTypeName": "extensionType1",
-    "location": "westus",
     "subscriptionId": "subId1",
-    "versionNumber": "1.20.0"
+    "location": "westus",
+    "extensionTypeName": "extensionType1",
+    "versionNumber": "1.20.0",
+    "api-version": "2024-11-01-preview"
   },
   "responses": {
     "200": {
+      "headers": {},
       "description": "Versions for the Extension Type",
       "body": {
+        "id": "aaaa",
         "name": "bbbb",
         "type": "cccc",
-        "id": "aaaa",
         "properties": {
-          "supportedClusterTypes": [
-            "connectedCluster"
-          ],
+          "version": "1.1.0",
           "unsupportedKubernetesVersions": {
-            "appliances": [
-              {
-                "distributions": [
-                  "AKS"
-                ],
-                "unsupportedVersions": [
-                  "1.18..1.21"
-                ]
-              }
-            ],
             "connectedCluster": [
               {
                 "distributions": [
@@ -44,12 +33,14 @@
                 ]
               }
             ],
-            "managedCluster": [
+            "appliances": [
               {
                 "distributions": [
                   "AKS"
                 ],
-                "unsupportedVersions": []
+                "unsupportedVersions": [
+                  "1.18..1.21"
+                ]
               }
             ],
             "provisionedCluster": [
@@ -59,14 +50,21 @@
                 ],
                 "unsupportedVersions": []
               }
+            ],
+            "managedCluster": [
+              {
+                "distributions": [
+                  "AKS"
+                ],
+                "unsupportedVersions": []
+              }
             ]
           },
-          "version": "1.1.0"
+          "supportedClusterTypes": [
+            "connectedCluster"
+          ]
         }
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "ExtensionTypes_GetVersion",
-  "title": "List Extension Type Versions"
+  }
 }

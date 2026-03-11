@@ -1279,48 +1279,6 @@ union DeploymentScope {
  * Day of the week. Modeled as string
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
-enum ScalingScheduleDaysOfWeekItem {
-  Monday,
-  Tuesday,
-  Wednesday,
-  Thursday,
-  Friday,
-  Saturday,
-  Sunday,
-}
-
-/**
- * Day of the week. Modeled as string
- */
-union ScalingScheduleDaysOfWeekItemUsingStruct {
-  string,
-
-  /** Monday */
-  Monday: "Monday",
-
-  /** Tuesday */
-  Tuesday: "Tuesday",
-
-  /** Wednesday */
-  Wednesday: "Wednesday",
-
-  /** Thursday */
-  Thursday: "Thursday",
-
-  /** Friday */
-  Friday: "Friday",
-
-  /** Saturday */
-  Saturday: "Saturday",
-
-  /** Sunday */
-  Sunday: "Sunday",
-}
-
-/**
- * Day of the week. Modeled as string
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
 enum DayOfWeek {
   Monday,
   Tuesday,
@@ -3031,17 +2989,6 @@ model Time {
 }
 
 /**
- * Request body for listing scoped registration tokens for a session host.
- */
-@added(Versions.v2026_01_01_preview)
-model ScopedRegistrationTokenProperties {
-  /**
-   * Expiration time of the registration token in UTC.
-   */
-  expirationTimeInUtc: utcDateTime;
-}
-
-/**
  * Scaling plan reference to hostpool.
  */
 model ScalingHostPoolReference {
@@ -3988,21 +3935,18 @@ model SessionHostProperties {
    * Number of active sessions on SessionHost.
    */
   @added(Versions.v2025_04_01_preview)
-  @visibility(Lifecycle.Read)
   activeSessions?: int32;
 
   /**
    * Number of disconnected sessions on SessionHost.
    */
   @added(Versions.v2025_04_01_preview)
-  @visibility(Lifecycle.Read)
   disconnectedSessions?: int32;
 
   /**
    * Number of pending sessions on SessionHost.
    */
   @added(Versions.v2025_04_01_preview)
-  @visibility(Lifecycle.Read)
   pendingSessions?: int32;
 
   /**
@@ -4014,19 +3958,16 @@ model SessionHostProperties {
   /**
    * Last heart beat from SessionHost.
    */
-  @visibility(Lifecycle.Read)
   lastHeartBeat?: utcDateTime;
 
   /**
    * Number of sessions on SessionHost.
    */
-  @visibility(Lifecycle.Read)
   sessions?: int32;
 
   /**
    * Version of agent on SessionHost.
    */
-  @visibility(Lifecycle.Read)
   agentVersion?: string;
 
   /**
@@ -4059,7 +4000,6 @@ model SessionHostProperties {
   /**
    * Status for a SessionHost.
    */
-  @visibility(Lifecycle.Read)
   status?: Status;
 
   /**
@@ -4071,20 +4011,17 @@ model SessionHostProperties {
   /**
    * The version of the OS on the session host.
    */
-  @visibility(Lifecycle.Read)
   osVersion?: string;
 
   /**
    * The version of the side by side stack on the session host.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SxS is a valid acronym"
-  @visibility(Lifecycle.Read)
   sxSStackVersion?: string;
 
   /**
    * Update state of a SessionHost.
    */
-  @visibility(Lifecycle.Read)
   updateState?: UpdateState;
 
   /**
@@ -4096,7 +4033,6 @@ model SessionHostProperties {
   /**
    * The error message.
    */
-  @visibility(Lifecycle.Read)
   updateErrorMessage?: string;
 
   /**

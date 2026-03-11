@@ -515,9 +515,9 @@
               "$ref": "#/definitions/ManagedCluster"
             },
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -620,7 +620,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/ManagedCluster"
         },
         "x-ms-long-running-operation": true
@@ -679,11 +679,6 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -708,7 +703,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/ManagedCluster"
         },
         "x-ms-long-running-operation": true
@@ -752,11 +747,6 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -784,7 +774,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1102,9 +1092,9 @@
               "$ref": "#/definitions/AgentPool"
             },
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1186,7 +1176,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/AgentPool"
         },
         "x-ms-long-running-operation": true
@@ -1247,11 +1237,6 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1279,7 +1264,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1415,11 +1400,6 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1444,7 +1424,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1629,12 +1609,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "format": "uri",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1656,7 +1631,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -2601,7 +2576,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3040,11 +3015,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully.",
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3069,7 +3047,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3837,9 +3815,9 @@
               "$ref": "#/definitions/TrustedAccessRoleBinding"
             },
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3861,7 +3839,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/TrustedAccessRoleBinding"
         },
         "x-ms-long-running-operation": true
@@ -3907,11 +3885,6 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3939,7 +3912,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -6407,9 +6380,7 @@
         },
         "serverAppSecret": {
           "type": "string",
-          "format": "password",
-          "description": "(DEPRECATED) The server AAD application secret. Learn more at https://aka.ms/aks/aad-legacy.",
-          "x-ms-secret": true
+          "description": "(DEPRECATED) The server AAD application secret. Learn more at https://aka.ms/aks/aad-legacy."
         },
         "tenantID": {
           "type": "string",
@@ -7564,8 +7535,7 @@
             "description": "Pod identity is being updated."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "ManagedClusterPoolUpgradeProfile": {
       "type": "object",
@@ -8120,9 +8090,7 @@
         },
         "secret": {
           "type": "string",
-          "format": "password",
-          "description": "The secret password associated with the service principal in plain text.",
-          "x-ms-secret": true
+          "description": "The secret password associated with the service principal in plain text."
         }
       },
       "required": [
@@ -8263,9 +8231,7 @@
         },
         "adminPassword": {
           "type": "string",
-          "format": "password",
-          "description": "Specifies the password of the administrator account. <br><br> **Minimum-length:** 8 characters <br><br> **Max-length:** 123 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\"",
-          "x-ms-secret": true
+          "description": "Specifies the password of the administrator account. <br><br> **Minimum-length:** 8 characters <br><br> **Max-length:** 123 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\""
         },
         "licenseType": {
           "$ref": "#/definitions/LicenseType",
@@ -8628,8 +8594,7 @@
             "description": "The namespace provisioning was canceled."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "NetworkDataplane": {
       "type": "string",
@@ -9277,8 +9242,7 @@
             "description": "Private endpoint connection provisioning succeeded."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "PrivateLinkResource": {
       "type": "object",
@@ -9290,7 +9254,10 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the private link resource. See [naming rules](https://aka.ms/search-naming-rules) for more details."
+          "description": "The name of the private link resource.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-naming-rules"
+          }
         },
         "type": {
           "type": "string",
@@ -9426,7 +9393,7 @@
       ],
       "x-ms-enum": {
         "name": "ResourceIdentityType",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "SystemAssigned",
@@ -10086,8 +10053,7 @@
             "description": "Trusted access role binding is being updated."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "TrustedAccessRoleListResult": {
       "type": "object",

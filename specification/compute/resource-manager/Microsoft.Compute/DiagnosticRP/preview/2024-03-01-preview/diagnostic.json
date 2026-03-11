@@ -1,0 +1,687 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ComputeDiagnosticResourceProviderClient",
+    "description": "The Compute Diagnostic Resource Provider Client",
+    "version": "2024-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnosticOperations/{operationId}": {
+      "get": {
+        "tags": [
+          "diagnosticOperations"
+        ],
+        "operationId": "DiagnosticOperations_Read",
+        "description": "Gets status of a Diagnostic operation issued for Disk Inspection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComputeDiagnosticsOperationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status of a scheduled disk inspection request.": {
+            "$ref": "./examples/GetDiagnosticOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection/run": {
+      "post": {
+        "tags": [
+          "diagnostics"
+        ],
+        "operationId": "DiskInspection_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Creates a request for executing disk Inspection.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "runDiskInspectionInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunDiskInspectionInput"
+            },
+            "description": "RunDiskInspection object supplied in the body of the Post run disk inspection operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the diagnostic run failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a request for disk inspection.": {
+            "$ref": "./examples/RunDiskInspection.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics": {
+      "get": {
+        "tags": [
+          "diagnostics"
+        ],
+        "operationId": "Diagnostics_List",
+        "description": "Lists all available Compute diagnostics for a subscription in a location.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComputeDiagnosticsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the listing call failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status of a scheduled disk inspection request.": {
+            "$ref": "./examples/ListDiagnostics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection": {
+      "get": {
+        "tags": [
+          "diagnostics_DiskInspection"
+        ],
+        "operationId": "DiskInspection_Get",
+        "description": "Gets a specific Compute diagnostic for a subscription in a location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComputeDiagnosticBase"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the get call failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status of a scheduled disk inspection request.": {
+            "$ref": "./examples/GetDiskInspection.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection/registerStorageConfiguration": {
+      "post": {
+        "tags": [
+          "registerStorageConfiguration"
+        ],
+        "operationId": "DiskInspectionStorageConfiguration_Register",
+        "x-ms-long-running-operation": false,
+        "description": "Register a storageAccount for a subscription used for DiskInspection",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageConfigurationInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageConfigurationInput"
+            },
+            "description": "Storage Configuration object supplied in the body of the Post to cache storageAccount for a given subscription."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded"
+          },
+          "default": {
+            "description": "Error response describing why the register operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a request for registering a storageAccount information.": {
+            "$ref": "./examples/RegisterStorageConfiguration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection/validateStorageConfiguration": {
+      "post": {
+        "tags": [
+          "validateStorageConfiguration"
+        ],
+        "operationId": "DiskInspectionStorageConfiguration_Validate",
+        "x-ms-long-running-operation": false,
+        "description": "Validate if a storageAccount configuration exists for a subscription used for DiskInspection.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/StorageConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the get call failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns storageAccount value for an existing configuration entry": {
+            "$ref": "./examples/ValidateStorageConfiguration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/spotPlacementRecommender": {
+      "get": {
+        "tags": [
+          "diagnostics_SpotPlacementRecommender"
+        ],
+        "operationId": "SpotPlacementRecommender_Get",
+        "description": "Gets Spot Placement Recommender diagnostic metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComputeDiagnosticBase"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the get call failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the metadata of Spot Placement Recommender diagnostic.": {
+            "$ref": "./examples/GetSpotPlacementRecommender.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/spotPlacementRecommender/generate": {
+      "post": {
+        "tags": [
+          "spotPlacementRecommender"
+        ],
+        "operationId": "SpotPlacementRecommender_Post",
+        "description": "Generates placement scores for Spot VM skus.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "spotPlacementRecommenderInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpotPlacementRecommenderInput"
+            },
+            "description": "SpotPlacementRecommender object supplied in the body of the Post spot placement recommender operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SpotPlacementRecommenderResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns spot VM placement scores for given configurations.": {
+            "$ref": "./examples/SpotPlacementRecommender.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ComputeDiagnosticsList": {
+      "description": "Lists all available Compute diagnostics for a subscription in a location.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputeDiagnosticBase"
+          },
+          "description": "The collection of available Compute diagnostics returned by the listing operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
+        }
+      }
+    },
+    "ComputeDiagnosticBase": {
+      "description": "Contains metadata of a diagnostic type",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiagnosticProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DiagnosticProperties": {
+      "description": "Contains additional properties of a diagnostic",
+      "type": "object",
+      "properties": {
+        "supportedResourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Describes what are the supported resource types for a diagnostic."
+        }
+      }
+    },
+    "RunDiskInspectionInput": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Qualified ID of the resource.",
+          "type": "string"
+        },
+        "manifest": {
+          "description": "Name of manifest in order to trigger Disk Inspection.",
+          "type": "string"
+        },
+        "uploadSasUri": {
+          "description": "SAS uri to the blob where results will be uploaded.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "resourceId",
+        "manifest",
+        "uploadSasUri"
+      ],
+      "description": "Data used for requesting a Disk Inspection execution."
+    },
+    "ComputeDiagnosticsOperationResult": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The result of the disk inspection operation."
+        },
+        "responseFields": {
+          "type": "string",
+          "description": "The response fields of the disk inspection operation."
+        },
+        "resultStatus": {
+          "type": "string",
+          "enum": [
+            "Success",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "resultStatus",
+            "modelAsString": true
+          },
+          "description": "Result status of the async operation."
+        },
+        "errorDetail": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "The API error details."
+        },
+        "createdUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the disk inspection was completed."
+        }
+      },
+      "description": "Api output result when Compute Diagnostic operation is completed."
+    },
+    "StorageConfigurationInput": {
+      "type": "object",
+      "properties": {
+        "storageAccountId": {
+          "description": "Fully qualified storage account Id. Example: \"/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}\"",
+          "type": "string"
+        }
+      },
+      "required": [
+        "storageAccountId"
+      ],
+      "description": "Data used for registering a Storage Account for a Subscription."
+    },
+    "StorageConfigurationResponse": {
+      "type": "object",
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "Fully qualified storage account Id. Example: \"/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}\""
+        }
+      },
+      "description": "Api output result when there is an existing storage configuration entry."
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+        }
+      },
+      "description": "An error response from the Compute Diagnostic Resource Provider service."
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "User friendly error message."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+          },
+          "description": "The Api error details"
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerError",
+          "description": "The Api inner error"
+        }
+      },
+      "description": "Error Detail message."
+    },
+    "InnerError": {
+      "type": "object",
+      "properties": {
+        "exceptiontype": {
+          "type": "string",
+          "description": "The exception type."
+        },
+        "errordetail": {
+          "type": "string",
+          "description": "The internal error message or exception dump."
+        }
+      },
+      "description": "Inner error details."
+    },
+    "SpotPlacementRecommenderInput": {
+      "type": "object",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The desired regions"
+        },
+        "desiredSizes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          },
+          "description": "The desired resource SKUs."
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        }
+      },
+      "description": "SpotPlacementRecommender API Input."
+    },
+    "SpotPlacementRecommenderResponse": {
+      "type": "object",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The desired regions"
+        },
+        "desiredSizes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          },
+          "description": "The desired resource SKUs."
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        },
+        "placementScores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlacementScore"
+          },
+          "description": "The spot placement scores."
+        }
+      },
+      "description": "SpotPlacementRecommender API response."
+    },
+    "ResourceSize": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "The resource's CRP virtual machine SKU size."
+        }
+      },
+      "description": "SpotPlacementRecommender API response."
+    },
+    "PlacementScore": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "The resource's CRP virtual machine SKU size."
+        },
+        "region": {
+          "type": "string",
+          "description": "The region."
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The availability region."
+        },
+        "score": {
+          "type": "string",
+          "description": "The placement score."
+        },
+        "isQuotaAvailable": {
+          "type": "boolean",
+          "description": "Whether the desired quota is available."
+        }
+      },
+      "description": "The spot placement score for sku/region/zone combination."
+    }
+  }
+}

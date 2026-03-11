@@ -2,10 +2,8 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/versioning";
 
 using Azure.ResourceManager;
-using TypeSpec.Versioning;
 
 namespace PaloAltoNetworks.Cloudngfw;
 
@@ -257,18 +255,6 @@ union BillingCycle {
   WEEKLY: "WEEKLY",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MONTHLY: "MONTHLY",
-}
-
-/**
- * Firewall SKU type
- */
-@added(Versions.v2026_01_26_preview)
-union FirewallSkuType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  STANDARD: "STANDARD",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  PREMIUM: "PREMIUM",
 }
 
 /**
@@ -1240,12 +1226,6 @@ model FirewallDeploymentProperties {
    * panEtag info
    */
   panEtag?: string;
-
-  /**
-   * Firewall SKU type, Default will be STANDARD.
-   */
-  @added(Versions.v2026_01_26_preview)
-  firewallSku?: string = "STANDARD";
 
   /**
    * Network settings

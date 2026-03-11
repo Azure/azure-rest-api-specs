@@ -1,0 +1,348 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "parameters": {
+      "location": "location1",
+      "properties": {
+        "addonProfiles": {
+          "azureKeyvaultSecretsProvider": {
+            "config": {
+              "enableSecretRotation": "true",
+              "rotationPollInterval": "2m"
+            },
+            "enabled": true
+          }
+        },
+        "agentPoolProfiles": [
+          {
+            "name": "nodepool1",
+            "type": "VirtualMachineScaleSets",
+            "count": 3,
+            "enableNodePublicIP": true,
+            "mode": "System",
+            "osType": "Linux",
+            "vmSize": "Standard_DS2_v2"
+          }
+        ],
+        "autoScalerProfile": {
+          "scale-down-delay-after-add": "15m",
+          "scan-interval": "20s"
+        },
+        "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
+        "dnsPrefix": "dnsprefix1",
+        "enableRBAC": true,
+        "kubernetesVersion": "",
+        "linuxProfile": {
+          "adminUsername": "azureuser",
+          "ssh": {
+            "publicKeys": [
+              {
+                "keyData": "keydata"
+              }
+            ]
+          }
+        },
+        "networkProfile": {
+          "loadBalancerProfile": {
+            "managedOutboundIPs": {
+              "count": 2
+            }
+          },
+          "loadBalancerSku": "standard",
+          "outboundType": "loadBalancer"
+        },
+        "serviceMeshProfile": {
+          "istio": {
+            "certificateAuthority": {
+              "plugin": {
+                "certChainObjectName": "cert-chain",
+                "certObjectName": "ca-cert",
+                "keyObjectName": "ca-key",
+                "keyVaultId": "/subscriptions/854c9ddb-fe9e-4aea-8d58-99ed88282881/resourceGroups/ddama-test/providers/Microsoft.KeyVault/vaults/my-akv",
+                "rootCertObjectName": "root-cert"
+              }
+            },
+            "components": {
+              "egressGateways": [
+                {
+                  "name": "istioegress1",
+                  "enabled": true
+                }
+              ],
+              "ingressGateways": [
+                {
+                  "enabled": true,
+                  "mode": "Internal"
+                }
+              ]
+            }
+          },
+          "mode": "Istio"
+        },
+        "servicePrincipalProfile": {
+          "clientId": "clientid",
+          "secret": "secret"
+        },
+        "windowsProfile": {
+          "adminPassword": "replacePassword1234$",
+          "adminUsername": "azureuser"
+        }
+      },
+      "sku": {
+        "name": "Basic",
+        "tier": "Free"
+      },
+      "tags": {
+        "archv2": "",
+        "tier": "production"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "clustername1",
+        "type": "Microsoft.ContainerService/ManagedClusters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "location": "location1",
+        "properties": {
+          "addonProfiles": {
+            "azureKeyvaultSecretsProvider": {
+              "config": {
+                "enableSecretRotation": "true",
+                "rotationPollInterval": "2m"
+              },
+              "enabled": true
+            }
+          },
+          "agentPoolProfiles": [
+            {
+              "name": "nodepool1",
+              "type": "VirtualMachineScaleSets",
+              "count": 3,
+              "enableEncryptionAtHost": true,
+              "enableNodePublicIP": true,
+              "maxPods": 110,
+              "mode": "System",
+              "nodeImageVersion": "AKSUbuntu:1604:2020.03.11",
+              "orchestratorVersion": "1.9.6",
+              "osType": "Linux",
+              "provisioningState": "Succeeded",
+              "vmSize": "Standard_DS2_v2"
+            }
+          ],
+          "autoScalerProfile": {
+            "scale-down-delay-after-add": "15m",
+            "scan-interval": "20s"
+          },
+          "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
+          "dnsPrefix": "dnsprefix1",
+          "enableRBAC": true,
+          "fqdn": "dnsprefix1-abcd1234.hcp.eastus.azmk8s.io",
+          "kubernetesVersion": "1.9.6",
+          "linuxProfile": {
+            "adminUsername": "azureuser",
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "keydata"
+                }
+              ]
+            }
+          },
+          "maxAgentPools": 1,
+          "networkProfile": {
+            "dnsServiceIP": "10.0.0.10",
+            "loadBalancerProfile": {
+              "allocatedOutboundPorts": 2000,
+              "effectiveOutboundIPs": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
+                }
+              ],
+              "idleTimeoutInMinutes": 10,
+              "managedOutboundIPs": {
+                "count": 2
+              }
+            },
+            "loadBalancerSku": "basic",
+            "networkPlugin": "kubenet",
+            "outboundType": "loadBalancer",
+            "podCidr": "10.244.0.0/16",
+            "serviceCidr": "10.0.0.0/16"
+          },
+          "nodeResourceGroup": "MC_rg1_clustername1_location1",
+          "provisioningState": "Succeeded",
+          "serviceMeshProfile": {
+            "istio": {
+              "certificateAuthority": {
+                "plugin": {
+                  "certChainObjectName": "cert-chain",
+                  "certObjectName": "ca-cert",
+                  "keyObjectName": "ca-key",
+                  "keyVaultId": "/subscriptions/854c9ddb-fe9e-4aea-8d58-99ed88282881/resourceGroups/ddama-test/providers/Microsoft.KeyVault/vaults/my-akv",
+                  "rootCertObjectName": "root-cert"
+                }
+              },
+              "components": {
+                "egressGateways": [
+                  {
+                    "name": "istioegress1",
+                    "enabled": true
+                  }
+                ],
+                "ingressGateways": [
+                  {
+                    "enabled": true,
+                    "mode": "Internal"
+                  }
+                ]
+              },
+              "revisions": [
+                "asm-1-17"
+              ]
+            },
+            "mode": "Istio"
+          },
+          "servicePrincipalProfile": {
+            "clientId": "clientid"
+          },
+          "windowsProfile": {
+            "adminUsername": "azureuser"
+          }
+        },
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "clustername1",
+        "type": "Microsoft.ContainerService/ManagedClusters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "location": "location1",
+        "properties": {
+          "addonProfiles": {
+            "azureKeyvaultSecretsProvider": {
+              "config": {
+                "enableSecretRotation": "true",
+                "rotationPollInterval": "2m"
+              },
+              "enabled": true
+            }
+          },
+          "agentPoolProfiles": [
+            {
+              "name": "nodepool1",
+              "type": "VirtualMachineScaleSets",
+              "count": 3,
+              "enableEncryptionAtHost": true,
+              "enableNodePublicIP": true,
+              "maxPods": 110,
+              "mode": "System",
+              "orchestratorVersion": "1.9.6",
+              "osType": "Linux",
+              "provisioningState": "Creating",
+              "vmSize": "Standard_DS2_v2"
+            }
+          ],
+          "autoScalerProfile": {
+            "scale-down-delay-after-add": "15m",
+            "scan-interval": "20s"
+          },
+          "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
+          "dnsPrefix": "dnsprefix1",
+          "enableRBAC": true,
+          "kubernetesVersion": "1.9.6",
+          "linuxProfile": {
+            "adminUsername": "azureuser",
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "keydata"
+                }
+              ]
+            }
+          },
+          "maxAgentPools": 1,
+          "networkProfile": {
+            "dnsServiceIP": "10.0.0.10",
+            "loadBalancerProfile": {
+              "allocatedOutboundPorts": 2000,
+              "effectiveOutboundIPs": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
+                }
+              ],
+              "idleTimeoutInMinutes": 10,
+              "managedOutboundIPs": {
+                "count": 2
+              }
+            },
+            "loadBalancerSku": "standard",
+            "networkPlugin": "kubenet",
+            "outboundType": "loadBalancer",
+            "podCidr": "10.244.0.0/16",
+            "serviceCidr": "10.0.0.0/16"
+          },
+          "nodeResourceGroup": "MC_rg1_clustername1_location1",
+          "provisioningState": "Creating",
+          "serviceMeshProfile": {
+            "istio": {
+              "certificateAuthority": {
+                "plugin": {
+                  "certChainObjectName": "cert-chain",
+                  "certObjectName": "ca-cert",
+                  "keyObjectName": "ca-key",
+                  "keyVaultId": "/subscriptions/854c9ddb-fe9e-4aea-8d58-99ed88282881/resourceGroups/ddama-test/providers/Microsoft.KeyVault/vaults/my-akv",
+                  "rootCertObjectName": "root-cert"
+                }
+              },
+              "components": {
+                "egressGateways": [
+                  {
+                    "name": "istioegress1",
+                    "enabled": true
+                  }
+                ],
+                "ingressGateways": [
+                  {
+                    "enabled": true,
+                    "mode": "Internal"
+                  }
+                ]
+              },
+              "revisions": [
+                "asm-1-17"
+              ]
+            },
+            "mode": "Istio"
+          },
+          "servicePrincipalProfile": {
+            "clientId": "clientid"
+          },
+          "windowsProfile": {
+            "adminUsername": "azureuser"
+          }
+        },
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        }
+      }
+    }
+  },
+  "operationId": "ManagedClusters_CreateOrUpdate",
+  "title": "Create/Update Managed Cluster with Azure Service Mesh"
+}

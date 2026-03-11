@@ -1,7 +1,6 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -9,7 +8,6 @@ import "./HostPool.tsp";
 import "./CustomOperations.tsp";
 
 using TypeSpec.Rest;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using Versioning;
@@ -41,9 +39,13 @@ interface InitiateSessionHostUpdate {
   @action("initiateSessionHostUpdate")
   post is ArmResourceActionSync<
     SessionHostManagement,
-    Request = UpdateSessionHostsRequestBody,
-    Response = void,
-    OptionalRequestBody = true
+    Request = {
+      /**
+       * The resource properties to be updated
+       */
+      @bodyRoot updateSessionHostsRequestBody?: UpdateSessionHostsRequestBody;
+    },
+    Response = void
   >;
 }
 
@@ -90,10 +92,15 @@ interface SessionHostManagements {
    * Update a SessionHostManagement.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSyncWithOptionalBody<
+  update is ArmCustomPatchSync<
     SessionHostManagement,
-    SessionHostManagementPatch,
-    Response = SessionHostManagement
+    Response = SessionHostManagement,
+    Request = {
+      /**
+       * The properties to be updated.
+       */
+      @bodyRoot sessionHostManagement?: SessionHostManagementPatch;
+    }
   >;
 
   /**
@@ -110,10 +117,4 @@ interface SessionHostManagements {
 @@doc(SessionHostManagement.name, "The name of the sessionHostManagement");
 @@doc(SessionHostManagement.properties,
   "Detailed properties for SessionHostManagement"
-);
-@@clientName(SessionHostManagements.update::parameters.body,
-  "sessionHostManagement"
-);
-@@doc(SessionHostManagements.update::parameters.body,
-  "The properties to be updated."
 );

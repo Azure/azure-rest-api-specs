@@ -4375,7 +4375,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ListQuotaReportResult"
+              "$ref": "#/definitions/ListQuotaReportResponse"
             }
           },
           "202": {
@@ -4410,8 +4410,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/ListQuotaReportResult"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ListQuotaReportResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -10354,23 +10354,13 @@
       "type": "object",
       "description": "Quota Report for volume",
       "properties": {
-        "quotaReportRecords": {
+        "value": {
           "type": "array",
           "description": "List of quota reports",
           "items": {
             "$ref": "#/definitions/QuotaReport"
           },
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "ListQuotaReportResult": {
-      "type": "object",
-      "description": "* Result of ListQuotaReportResponse",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ListQuotaReportResponse",
-          "description": "Represents the properties of the ListQuotaReport."
         }
       }
     },

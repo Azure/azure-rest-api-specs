@@ -23,14 +23,6 @@ model SubscriptionUnderManagementGroup
   >;
 }
 
-alias SubscriptionUnderManagementGroupsParameters = {
-  /**
-   * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-  @header("Cache-Control")
-  `Cache-Control`?: string = "no-cache";
-};
 @armResourceOperations
 interface SubscriptionUnderManagementGroups {
   /**
@@ -41,7 +33,14 @@ interface SubscriptionUnderManagementGroups {
   getSubscription is Extension.Read<
     Extension.Tenant,
     SubscriptionUnderManagementGroup,
-    Parameters = SubscriptionUnderManagementGroupsParameters
+    Parameters = {
+      /**
+       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      @header("Cache-Control")
+      `Cache-Control`?: string = "no-cache";
+    }
   >;
 
   /**
@@ -54,7 +53,14 @@ interface SubscriptionUnderManagementGroups {
     Extension.Tenant,
     SubscriptionUnderManagementGroup,
     Request = void,
-    Parameters = SubscriptionUnderManagementGroupsParameters,
+    Parameters = {
+      /**
+       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      @header("Cache-Control")
+      `Cache-Control`?: string = "no-cache";
+    },
     Response = ArmResourceUpdatedResponse<SubscriptionUnderManagementGroup>
   >;
 
@@ -66,7 +72,14 @@ interface SubscriptionUnderManagementGroups {
   delete is Extension.DeleteSync<
     Extension.Tenant,
     SubscriptionUnderManagementGroup,
-    Parameters = SubscriptionUnderManagementGroupsParameters
+    Parameters = {
+      /**
+       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      @header("Cache-Control")
+      `Cache-Control`?: string = "no-cache";
+    }
   >;
 
   /**

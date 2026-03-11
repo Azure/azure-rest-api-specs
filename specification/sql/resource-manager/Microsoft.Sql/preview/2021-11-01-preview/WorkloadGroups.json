@@ -1,0 +1,340 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups": {
+      "get": {
+        "tags": [
+          "WorkloadGroups"
+        ],
+        "description": "Gets the list of workload groups",
+        "operationId": "WorkloadGroups_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of workload groups.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get the list of workload groups for a data warehouse": {
+            "$ref": "./examples/GetWorkloadGroupList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}": {
+      "get": {
+        "tags": [
+          "WorkloadGroups"
+        ],
+        "description": "Gets a workload group",
+        "operationId": "WorkloadGroups_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specifies workload group.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a workload group for a data warehouse": {
+            "$ref": "./examples/GetWorkloadGroup.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WorkloadGroups"
+        ],
+        "description": "Creates or updates a workload group.",
+        "operationId": "WorkloadGroups_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested workload group state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroup"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the workload group.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidWorkloadGroupNameParameter - Invalid workload group name\n\n * 400 InvalidMinResourcePercentParameter - Invalid min resource percent for this workload group.\n\n * 400 InvalidMinResourcePercentPerRequestParameter - Invalid min resource percent per query for this workload group.\n\n * 400 InvalidMaxResourcePercentParameter - Invalid max resource percent to allocate for this workload group.\n\n * 400 InvalidMaxResourcePercentPerRequestParameter - Invalid max resource percent per query for this workload group.\n\n * 400 InvalidImportanceParameter - Importance must be one of the following strings: Low, Below_Normal, Normal, Above_Normal, High.\n\n * 400 InvalidQueryExecutionTimeoutParameter - Invalid query execution timeout value for this workload group.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Create or update for the workload group accepted."
+          },
+          "201": {
+            "description": "Successfully created the workload group.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroup"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a workload group with the required properties specified.": {
+            "$ref": "./examples/CreateOrUpdateWorkloadGroupMin.json"
+          },
+          "Create a workload group with all properties specified.": {
+            "$ref": "./examples/CreateOrUpdateWorkloadGroupMax.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WorkloadGroups"
+        ],
+        "description": "Deletes a workload group.",
+        "operationId": "WorkloadGroups_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group to delete.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the workload group."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Deleting the workload group is in progress."
+          },
+          "204": {
+            "description": "The specified workload group does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a workload group": {
+            "$ref": "./examples/DeleteWorkloadGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkloadGroup": {
+      "description": "Workload group operations for a data warehouse",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkloadGroupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkloadGroupListResult": {
+      "description": "A list of workload groups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkloadGroup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkloadGroupProperties": {
+      "description": "Workload group definition. For more information look at sys.workload_management_workload_groups (DMV).",
+      "required": [
+        "minResourcePercent",
+        "maxResourcePercent",
+        "minResourcePercentPerRequest"
+      ],
+      "type": "object",
+      "properties": {
+        "minResourcePercent": {
+          "format": "int32",
+          "description": "The workload group minimum percentage resource.",
+          "type": "integer"
+        },
+        "maxResourcePercent": {
+          "format": "int32",
+          "description": "The workload group cap percentage resource.",
+          "type": "integer"
+        },
+        "minResourcePercentPerRequest": {
+          "format": "double",
+          "description": "The workload group request minimum grant percentage.",
+          "type": "number"
+        },
+        "maxResourcePercentPerRequest": {
+          "format": "double",
+          "description": "The workload group request maximum grant percentage.",
+          "type": "number"
+        },
+        "importance": {
+          "description": "The workload group importance level.",
+          "type": "string"
+        },
+        "queryExecutionTimeout": {
+          "format": "int32",
+          "description": "The workload group query execution timeout.",
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -154,11 +154,7 @@ namespace Azure.ResourceManager.Models {
 
 @@clientName(PublicIPAddressConfiguration,
   "IPConfigurationPublicIPAddressConfiguration",
-  "go, javascript"
-);
-@@clientName(PublicIPAddressConfiguration,
-  "IpConfigurationPublicIPAddressConfiguration",
-  "python"
+  "go, javascript, python"
 );
 
 /**

@@ -6,31 +6,31 @@
         {
           "benefitType": "MACC",
           "properties": {
-            "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-            "commitment": {
-              "amount": 50000,
-              "currencyCode": "USD",
-              "grain": "FullTerm"
-            },
             "entityType": "Primary",
+            "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/benefits/myBenefit",
+            "systemId": "13810867107109237",
+            "commitment": {
+              "grain": "FullTerm",
+              "amount": 50000,
+              "currencyCode": "USD"
+            },
             "milestones": [
               {
+                "milestoneId": "11111111-1111-1111-1111-111111111111",
                 "commitment": {
-                  "amount": 20000,
-                  "currencyCode": "USD"
-                },
-                "milestoneId": "11111111-1111-1111-1111-111111111111"
+                  "currencyCode": "USD",
+                  "amount": 20000
+                }
               },
               {
+                "milestoneId": "22222222-2222-2222-2222-222222222222",
                 "commitment": {
-                  "amount": 40000,
-                  "currencyCode": "USD"
-                },
-                "milestoneId": "22222222-2222-2222-2222-222222222222"
+                  "currencyCode": "USD",
+                  "amount": 40000
+                }
               }
-            ],
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/benefits/myBenefit",
-            "systemId": "13810867107109237"
+            ]
           }
         }
       ]
@@ -47,7 +47,5 @@
         ]
       }
     }
-  },
-  "operationId": "Benefit_Validate",
-  "title": "MaccValidateUpdateMilestoneCommitment"
+  }
 }

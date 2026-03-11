@@ -1,0 +1,373 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/targetGroups": {
+      "get": {
+        "tags": [
+          "JobTargetGroups"
+        ],
+        "description": "Gets all target groups in an agent.",
+        "operationId": "JobTargetGroups_ListByAgent",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of target groups.",
+            "schema": {
+              "$ref": "#/definitions/JobTargetGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all target groups in an agent.": {
+            "$ref": "./examples/ListJobTargetGroups.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/targetGroups/{targetGroupName}": {
+      "get": {
+        "tags": [
+          "JobTargetGroups"
+        ],
+        "description": "Gets a target group.",
+        "operationId": "JobTargetGroups_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetGroupName",
+            "in": "path",
+            "description": "The name of the target group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the target group.",
+            "schema": {
+              "$ref": "#/definitions/JobTargetGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Get a target group.": {
+            "$ref": "./examples/GetJobTargetGroup.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "JobTargetGroups"
+        ],
+        "description": "Creates or updates a target group.",
+        "operationId": "JobTargetGroups_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetGroupName",
+            "in": "path",
+            "description": "The name of the target group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested state of the target group.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobTargetGroup"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the target group.",
+            "schema": {
+              "$ref": "#/definitions/JobTargetGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 MismatchingJobAccountNameWithUrl - The provided job account name did not match the name in the Url.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          },
+          "201": {
+            "description": "Successfully created the target group.",
+            "schema": {
+              "$ref": "#/definitions/JobTargetGroup"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a target group with minimal properties.": {
+            "$ref": "./examples/CreateOrUpdateJobTargetGroupMin.json"
+          },
+          "Create or update a target group with all properties.": {
+            "$ref": "./examples/CreateOrUpdateJobTargetGroupMax.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "JobTargetGroups"
+        ],
+        "description": "Deletes a target group.",
+        "operationId": "JobTargetGroups_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetGroupName",
+            "in": "path",
+            "description": "The name of the target group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the target group."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          },
+          "204": {
+            "description": "A target group with the specified name does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a target group.": {
+            "$ref": "./examples/DeleteJobTargetGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JobTarget": {
+      "description": "A job target, for example a specific database or a container of databases that is evaluated during job execution.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "membershipType": {
+          "description": "Whether the target is included or excluded from the group.",
+          "default": "Include",
+          "enum": [
+            "Include",
+            "Exclude"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobTargetGroupMembershipType",
+            "modelAsString": false
+          }
+        },
+        "type": {
+          "description": "The target type.",
+          "enum": [
+            "TargetGroup",
+            "SqlDatabase",
+            "SqlElasticPool",
+            "SqlShardMap",
+            "SqlServer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobTargetType",
+            "modelAsString": true
+          }
+        },
+        "serverName": {
+          "description": "The target server name.",
+          "type": "string"
+        },
+        "databaseName": {
+          "description": "The target database name.",
+          "type": "string"
+        },
+        "elasticPoolName": {
+          "description": "The target elastic pool name.",
+          "type": "string"
+        },
+        "shardMapName": {
+          "description": "The target shard map.",
+          "type": "string"
+        },
+        "refreshCredential": {
+          "description": "The resource ID of the credential that is used during job execution to connect to the target and determine the list of databases inside the target.",
+          "type": "string"
+        }
+      }
+    },
+    "JobTargetGroup": {
+      "description": "A group of job targets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobTargetGroupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "JobTargetGroupListResult": {
+      "description": "A list of target groups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobTargetGroup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "JobTargetGroupProperties": {
+      "description": "Properties of job target group.",
+      "required": [
+        "members"
+      ],
+      "type": "object",
+      "properties": {
+        "members": {
+          "description": "Members of the target group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobTarget"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "subscriptionId": "subId",
+    "api-version": "2018-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "denyAssignmentName": "Deny assignment name",
+              "description": "Deny assignment description",
+              "permissions": [
+                {
+                  "actions": [
+                    "action"
+                  ],
+                  "notActions": [],
+                  "dataActions": [
+                    "action"
+                  ],
+                  "notDataActions": []
+                }
+              ],
+              "scope": "/subscriptions/subId",
+              "doNotApplyToChildScopes": false,
+              "principals": [
+                {
+                  "id": "principalId1",
+                  "type": "principalType1"
+                }
+              ],
+              "excludePrincipals": [
+                {
+                  "id": "principalId2",
+                  "type": "principalType2"
+                }
+              ],
+              "isSystemProtected": true
+            },
+            "id": "/subscriptions/subId/providers/Microsoft.Authorization/denyAssignments/denyAssignmentId",
+            "type": "Microsoft.Authorization/denyAssignments",
+            "name": "denyAssignmentId"
+          }
+        ]
+      }
+    }
+  }
+}

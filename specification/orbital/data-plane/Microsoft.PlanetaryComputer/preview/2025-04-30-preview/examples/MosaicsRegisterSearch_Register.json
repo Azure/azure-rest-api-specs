@@ -4,6 +4,7 @@
   "parameters": {
     "api-version": "2025-04-30-preview",
     "body": {
+      "filter-lang": "cql2-json",
       "filter": {
         "op": "and",
         "args": [
@@ -13,34 +14,15 @@
               {
                 "property": "collection"
               },
-              "naip-atl"
-            ]
-          },
-          {
-            "op": ">=",
-            "args": [
-              {
-                "property": "datetime"
-              },
-              "2021-01-01T00:00:00Z"
-            ]
-          },
-          {
-            "op": "<=",
-            "args": [
-              {
-                "property": "datetime"
-              },
-              "2022-12-31T23:59:59Z"
+              "maxar"
             ]
           }
         ]
       },
-      "filter-lang": "cql2-json",
       "sortby": [
         {
-          "direction": "desc",
-          "field": "datetime"
+          "field": "datetime",
+          "direction": "desc"
         }
       ]
     }
@@ -48,22 +30,22 @@
   "responses": {
     "200": {
       "body": {
-        "searchid": "ba13fc7947b9b585690d84ee61aaa653",
+        "searchId": "e32e0b12176246816953d75e3356d613",
         "links": [
           {
-            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/data/mosaic/ba13fc7947b9b585690d84ee61aaa653/info",
+            "href": "https://stacforge.axarcnccdbcsduc4.eastus.geocatalog.spatio.azure.com/data/mosaic/e32e0b12176246816953d75e3356d613/info",
             "rel": "metadata",
             "type": "application/json",
             "title": "Mosaic metadata"
           },
           {
-            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/data/mosaic/ba13fc7947b9b585690d84ee61aaa653/tilejson.json",
+            "href": "https://stacforge.axarcnccdbcsduc4.eastus.geocatalog.spatio.azure.com/data/mosaic/e32e0b12176246816953d75e3356d613/tilejson.json",
             "rel": "tilejson",
             "type": "application/json",
             "title": "Link for TileJSON"
           },
           {
-            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/data/mosaic/ba13fc7947b9b585690d84ee61aaa653/WMTSCapabilities.xml",
+            "href": "https://stacforge.axarcnccdbcsduc4.eastus.geocatalog.spatio.azure.com/data/mosaic/e32e0b12176246816953d75e3356d613/WMTSCapabilities.xml",
             "rel": "wmts",
             "type": "application/json",
             "title": "Link for WMTS"

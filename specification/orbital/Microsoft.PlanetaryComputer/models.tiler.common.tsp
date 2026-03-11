@@ -8,6 +8,18 @@ using TypeSpec.Http;
 namespace Microsoft.PlanetaryComputer;
 
 /**
+ * Type identifying Feature Polygon objects containing rio-tiler model information
+ */
+union FeaturePolygonDictStrRioTilerModelsInfoType {
+  string,
+
+  /**
+   * Standard GeoJSON Feature type identifier
+   */
+  Feature: "Feature",
+}
+
+/**
  * Resampling algorithm to use when reading source raster data at different resolutions
  */
 union Resampling {
@@ -62,7 +74,7 @@ union Resampling {
 /**
  * Image format specifier for tile and image requests
  */
-union TilerImageFormat {
+union ImageType {
   string,
 
   /**
@@ -109,10 +121,11 @@ union TilerImageFormat {
 /**
  * Identifier selecting one of the TileMatrixSetId supported (default:
  * 'WebMercatorQuad')
- *
+ */
+/**
  * Standard identifier for a coordinate reference system and tiling scheme used for serving map tiles
  */
-union TileMatrixSetId {
+union Tilematrixsetid {
   string,
 
   /**
@@ -174,7 +187,7 @@ union TileMatrixSetId {
 /**
  * Scheme for tile addressing in TileJSON specification
  */
-union TileAddressingScheme {
+union TileJsonScheme {
   string,
 
   /**
@@ -191,7 +204,7 @@ union TileAddressingScheme {
 /**
  * Type of metadata resource in the system
  */
-union MosaicMetadataType {
+union MetadataType {
   string,
 
   /**
@@ -207,10 +220,14 @@ union MosaicMetadataType {
 
 /**
  * Identifier selecting one of the TileMatrixSetId supported (default:
- *  'WebMercatorQuad')
- *
- * Represents the method used to select or compute pixels when creating
- *  composites from multiple sources
+ * 'WebMercatorQuad')
+ */
+/**
+ * Identifier selecting one of the TileMatrixSetId supported (default:
+ * 'WebMercatorQuad')
+ */
+/**
+ * Method used to select or compute pixels when creating composites from multiple sources
  */
 union PixelSelection {
   string,
@@ -243,43 +260,60 @@ union PixelSelection {
   /**
    * Calculate standard deviation of available pixels
    */
-  standardDeviation: "stdev",
+  stdev: "stdev",
 
   /**
    * Select image with lowest value in the last band
    */
-  lastBandLow: "lastbandlow",
+  lastbandlow: "lastbandlow",
 
   /**
    * Select image with highest value in the last band
    */
-  lastBandHigh: "lastbandhigh",
+  lastbandhight: "lastbandhight",
+}
+
+/**
+ * Format specification for image request outputs
+ */
+union ImageRequestFormat {
+  string,
+
+  /**
+   * Portable Network Graphics format
+   */
+  png: "png",
+
+  /**
+   * Cloud Optimized GeoTIFF format
+   */
+  cog: "cog",
 }
 
 /**
  * Geographic extent of a dataset expressed as a bounding box
  */
-model StacItemBounds {
+model BoundsResponse {
   /**
    * Array of coordinates defining the bounding box [west, south, east, north]
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
-  bounds: float32[];
+  bounds: float64[];
 }
 
 /**
  * GeoJSON Feature object containing rio-tiler model information
  */
-model TilerInfoGeoJsonFeature {
+model FeaturePolygonDictStrRioTilerModelsInfo {
   /**
    * GeoJSON type identifier
    */
-  type: FeatureType;
+  type: FeaturePolygonDictStrRioTilerModelsInfoType;
 
   /**
    * Geometry object defining the feature's shape
    */
-  geometry: Geometry;
+  geometry: GeoJson;
 
   /**
    * Properties
@@ -294,48 +328,23 @@ model TilerInfoGeoJsonFeature {
   /**
    * Bounding box coordinates for the feature
    */
-  @encodedName("application/json", "bbox")
-  boundingBox?: float32[];
+  bbox?: float64;
 }
 
 /**
- * Represents GeoJSON with feature with an asset property
- */
-model TilerAssetGeoJson {
-  /**
-   * Unique identifier for the feature
-   */
-  id: string;
-
-  /**
-   * ID of the STAC collection this item belongs to.
-   */
-  collection?: string;
-
-  /**
-   * Bounding box coordinates for the feature
-   */
-  @encodedName("application/json", "bbox")
-  boundingBox: float32[];
-
-  /**
-   * Assets
-   */
-  assets: Record<StacAsset>;
-}
-
-/**
- * TileJSON metadata describing a tile set according to the TileJSON specification
+ * TileJSON model.
  *
  * Based on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0
  */
-model TileJsonMetadata {
+/**
+ * TileJSON metadata describing a tile set according to the TileJSON specification
+ */
+model TileJsonResponse {
   /**
-   * TileJson
+   * Tilejson
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
-  @encodedName("application/json", "tilejson")
-  tileJson?: string = "2.2.0";
+  tilejson?: string = "2.2.0";
 
   /**
    * Human-readable name of the tile set
@@ -370,7 +379,7 @@ model TileJsonMetadata {
   /**
    * Tile addressing scheme (xyz or tms)
    */
-  scheme?: TileAddressingScheme = TileAddressingScheme.xyz;
+  scheme?: TileJsonScheme = TileJsonScheme.xyz;
 
   /**
    * Array of tile URL templates
@@ -391,15 +400,13 @@ model TileJsonMetadata {
    * Minimum zoom level available in the tile set
    */
   @maxValue(30)
-  @encodedName("application/json", "minzoom")
-  minZoom?: int32;
+  minzoom?: int32;
 
   /**
    * Maximum zoom level available in the tile set
    */
   @maxValue(30)
-  @encodedName("application/json", "maxzoom")
-  maxZoom?: int32 = 30;
+  maxzoom?: int32 = 30;
 
   /**
    * Bounds
@@ -424,7 +431,7 @@ model WmtsCapabilitiesXmlResponse {
   /**
    * body for WMTSCapabilitiesXmlResponse
    */
-  @body body: bytes;
+  @bodyRoot body: string;
 
   /**
    * content type for WMTSCapabilitiesXmlResponse
@@ -450,11 +457,12 @@ model AssetQueryParameters {
   expression?: string;
 
   /**
-   * Per asset band indexes (coma separated indexes, e.g. "image|1,2,3" means use the bands 1, 2, and 3 from the asset named "image")
+   * Per asset band indexes (coma separated indexes)
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @query(#{ explode: true })
   @query("asset_bidx")
-  assetBandIndices?: string;
+  assetBidx?: string[];
 
   /**
    * Asset as Band
@@ -466,7 +474,7 @@ model AssetQueryParameters {
    * Overwrite internal Nodata value
    */
   @query("nodata")
-  noData?: float32;
+  nodata?: float32;
 
   /**
    * Apply internal Scale or Offset
@@ -478,15 +486,15 @@ model AssetQueryParameters {
 /**
  * Parameters for specifying which algorithm to apply to raster data and its configuration
  */
-model TerrainAlgorithmQueryParameters {
+model AlgorithmQueryParameters {
   /**
-   * Terrain algorithm name
+   * Algorithm name
    */
   @query("algorithm")
-  algorithm?: TerrainAlgorithm;
+  algorithm?: Algorithm;
 
   /**
-   * Terrain algorithm parameters
+   * Algorithm parameter
    */
   @query("algorithm_params")
   algorithmParams?: string;
@@ -507,13 +515,13 @@ model MiscTileQueryParameters {
    * Colormap name
    */
   @query("colormap_name")
-  colorMapName?: ColorMapNames;
+  colormapName?: ColorMapNames;
 
   /**
    * JSON encoded custom Colormap
    */
   @query("colormap")
-  colorMap?: string;
+  colormap?: string;
 
   /**
    * Add mask to the output data.
@@ -556,13 +564,13 @@ model ZoomQueryParameters {
    * Overwrite default minzoom.
    */
   @query("minzoom")
-  minZoom?: int32;
+  minzoom?: int32;
 
   /**
    * Overwrite default maxzoom.
    */
   @query("maxzoom")
-  maxZoom?: int32;
+  maxzoom?: int32;
 }
 
 alias TileResponse =

@@ -11,7 +11,7 @@
             "type": "VirtualMachineScaleSets",
             "count": 3,
             "enableNodePublicIP": true,
-            "hostGroupID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Compute/hostGroups/hostgroup1",
+            "hostGroupID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.Compute/hostGroups/hostgroup1",
             "osType": "Linux",
             "vmSize": "Standard_DS2_v2"
           }
@@ -20,7 +20,7 @@
           "scale-down-delay-after-add": "15m",
           "scan-interval": "20s"
         },
-        "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
+        "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
         "dnsPrefix": "dnsprefix1",
         "enableRBAC": true,
         "kubernetesVersion": "",
@@ -69,8 +69,8 @@
     "200": {
       "body": {
         "name": "clustername1",
-        "type": "Microsoft.ContainerService/managedClusters",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "type": "Microsoft.ContainerService/ManagedClusters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
         "location": "location1",
         "properties": {
           "agentPoolProfiles": [
@@ -79,7 +79,7 @@
               "type": "VirtualMachineScaleSets",
               "count": 3,
               "enableNodePublicIP": true,
-              "hostGroupID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Compute/hostGroups/hostgroup1",
+              "hostGroupID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.Compute/hostGroups/hostgroup1",
               "maxPods": 110,
               "nodeImageVersion": "AKSUbuntu:1604:2020.03.11",
               "orchestratorVersion": "1.9.6",
@@ -92,7 +92,7 @@
             "scale-down-delay-after-add": "15m",
             "scan-interval": "20s"
           },
-          "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
+          "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
           "dnsPrefix": "dnsprefix1",
           "enableRBAC": true,
           "fqdn": "dnsprefix1-abcd1234.hcp.eastus.azmk8s.io",
@@ -117,10 +117,10 @@
               "allocatedOutboundPorts": 2000,
               "effectiveOutboundIPs": [
                 {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
                 },
                 {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
                 }
               ],
               "idleTimeoutInMinutes": 10,
@@ -158,8 +158,8 @@
     "201": {
       "body": {
         "name": "clustername1",
-        "type": "Microsoft.ContainerService/managedClusters",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "type": "Microsoft.ContainerService/ManagedClusters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
         "location": "location1",
         "properties": {
           "agentPoolProfiles": [
@@ -168,7 +168,7 @@
               "type": "VirtualMachineScaleSets",
               "count": 3,
               "enableNodePublicIP": true,
-              "hostGroupID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Compute/hostGroups/hostgroup1",
+              "hostGroupID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.Compute/hostGroups/hostgroup1",
               "maxPods": 110,
               "orchestratorVersion": "1.9.6",
               "osType": "Linux",
@@ -180,7 +180,7 @@
             "scale-down-delay-after-add": "15m",
             "scan-interval": "20s"
           },
-          "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
+          "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
           "dnsPrefix": "dnsprefix1",
           "enableRBAC": true,
           "kubernetesVersion": "1.9.6",
@@ -204,10 +204,10 @@
               "allocatedOutboundPorts": 2000,
               "effectiveOutboundIPs": [
                 {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
                 },
                 {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
                 }
               ],
               "idleTimeoutInMinutes": 10,

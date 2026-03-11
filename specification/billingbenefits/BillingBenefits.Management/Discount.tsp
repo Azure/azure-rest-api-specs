@@ -67,6 +67,7 @@ interface Discounts {
   /**
    * Get discount at resource group level
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<Discount>;
 
   /**
@@ -77,25 +78,24 @@ interface Discounts {
   /**
    * Update discounts
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     Discount,
     PatchModel = DiscountPatchRequest,
-    Response = ArmResponse<Discount> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Discount> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Discount> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Delete discount. Clears the metadata from the user's view.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Discount,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -118,13 +118,12 @@ interface Discounts {
    * Cancel discount. Stops applying the benefit.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  cancel is ArmResourceActionAsyncBase<
+  cancel is ArmResourceActionAsync<
     Discount,
-    Request = void,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Discount>,
-    Response = ArmResponse<Discount> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Discount> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    void,
+    ArmResponse<Discount>,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Discount> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

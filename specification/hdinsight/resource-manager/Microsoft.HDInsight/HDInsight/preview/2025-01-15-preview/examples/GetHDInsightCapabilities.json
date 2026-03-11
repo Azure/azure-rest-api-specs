@@ -1,12 +1,189 @@
 {
   "parameters": {
-    "api-version": "2025-01-15-preview",
     "location": "West US",
+    "api-version": "2025-01-15-preview",
     "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
+        "versions": {
+          "paas": {
+            "available": [
+              {
+                "friendlyName": "1.6",
+                "displayName": "HdInsight version 1.6.1.0.335536",
+                "isDefault": false
+              },
+              {
+                "friendlyName": "2.1",
+                "displayName": "Version 2.1.9.406.1221105",
+                "isDefault": false,
+                "componentVersions": {
+                  "HDP": "1.3",
+                  "Hadoop": "1.2.0"
+                }
+              },
+              {
+                "friendlyName": "3.0",
+                "displayName": "Version 3.0.6.989.2441725",
+                "isDefault": false,
+                "componentVersions": {
+                  "HDP": "2.0",
+                  "Hadoop": "2.2.0"
+                }
+              },
+              {
+                "friendlyName": "3.1",
+                "displayName": "Version 3.1.4.989.2441725",
+                "isDefault": false,
+                "componentVersions": {
+                  "HDP": "2.1.7",
+                  "Hadoop": "2.4.0",
+                  "HBase": "0.98"
+                }
+              },
+              {
+                "friendlyName": "3.2",
+                "displayName": "Version 3.2.7.989.2441725",
+                "isDefault": false,
+                "componentVersions": {
+                  "HDP": "2.2",
+                  "Hadoop": "2.6.0",
+                  "HBase": "0.98.4",
+                  "Storm": "0.9.3"
+                }
+              },
+              {
+                "friendlyName": "3.3",
+                "displayName": "Version 3.3.0.989.2441725",
+                "isDefault": true,
+                "componentVersions": {
+                  "HDP": "2.3",
+                  "Hadoop": "2.7.0",
+                  "HBase": "1.1.2",
+                  "Storm": "0.10.0"
+                }
+              }
+            ]
+          },
+          "iaas": {
+            "available": [
+              {
+                "friendlyName": "3.2",
+                "displayName": "Version 3.2.1000.0.8840373",
+                "isDefault": false,
+                "componentVersions": {
+                  "HDP": "2.2",
+                  "Hadoop": "2.6.0",
+                  "HBase": "0.98.4",
+                  "Storm": "0.9.3"
+                }
+              },
+              {
+                "friendlyName": "3.3",
+                "displayName": "Version 3.3.1000.0.9776961",
+                "isDefault": false,
+                "componentVersions": {
+                  "HDP": "2.3",
+                  "Hadoop": "2.7.0",
+                  "HBase": "1.1.2",
+                  "Storm": "0.10.0",
+                  "Spark": "1.5.2"
+                }
+              },
+              {
+                "friendlyName": "3.4",
+                "displayName": "Version 3.4.1000.0.9719475",
+                "isDefault": false,
+                "componentVersions": {
+                  "HDP": "2.4",
+                  "Hadoop": "2.7.1",
+                  "HBase": "1.1.2",
+                  "Storm": "0.10.0",
+                  "Spark": "1.6.2",
+                  "RServer": "8.0"
+                }
+              },
+              {
+                "friendlyName": "3.5",
+                "displayName": "Version 3.5.1000.0.9732704",
+                "isDefault": true,
+                "componentVersions": {
+                  "HDP": "2.5",
+                  "Hadoop": "2.7.3",
+                  "InteractiveHive": "2.1.0",
+                  "HBase": "1.1.2",
+                  "Storm": "1.0.1",
+                  "Spark": "1.6.3,2.0.2",
+                  "RServer": "9.0"
+                }
+              },
+              {
+                "friendlyName": "3.6",
+                "displayName": "Version 3.6.1000.0.9503998",
+                "isDefault": false,
+                "componentVersions": {
+                  "HDP": "2.6",
+                  "Spark": "2.1.0"
+                }
+              },
+              {
+                "friendlyName": "99.152",
+                "displayName": "Version 99.152.1000.0.6943836",
+                "isDefault": false
+              }
+            ]
+          }
+        },
+        "regions": {
+          "paas": {
+            "available": [
+              "AUSTRALIA EAST",
+              "AUSTRALIA SOUTHEAST",
+              "BRAZIL SOUTH",
+              "CENTRAL INDIA",
+              "CENTRAL US",
+              "EAST ASIA",
+              "EAST US",
+              "EAST US 2",
+              "JAPAN EAST",
+              "JAPAN WEST",
+              "NORTH CENTRAL US",
+              "NORTH EUROPE",
+              "SOUTH CENTRAL US",
+              "SOUTHEAST ASIA",
+              "WEST EUROPE",
+              "WEST US",
+              "WEST US 2"
+            ]
+          },
+          "iaas": {
+            "available": [
+              "AUSTRALIA EAST",
+              "AUSTRALIA SOUTHEAST",
+              "BRAZIL SOUTH",
+              "CANADA CENTRAL",
+              "CANADA EAST",
+              "CENTRAL INDIA",
+              "CENTRAL US",
+              "CENTRAL US EUAP",
+              "EAST ASIA",
+              "EAST US",
+              "EAST US 2",
+              "JAPAN EAST",
+              "JAPAN WEST",
+              "NORTH CENTRAL US",
+              "NORTH EUROPE",
+              "SOUTH CENTRAL US",
+              "SOUTHEAST ASIA",
+              "WEST CENTRAL US",
+              "WEST EUROPE",
+              "WEST US",
+              "WEST US 2"
+            ]
+          }
+        },
         "features": [
           "ALLOW_GATEWAY_AUTH_BYPASS",
           "AUX_IAAS_FUNCTIONALITIES",
@@ -95,292 +272,113 @@
           "maxCoresAllowed": 3000,
           "regionalQuotas": [
             {
-              "coresAvailable": 1000,
+              "regionName": "Australia East",
               "coresUsed": 0,
-              "regionName": "Australia East"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "Australia Southeast",
               "coresUsed": 0,
-              "regionName": "Australia Southeast"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "Brazil South",
               "coresUsed": 0,
-              "regionName": "Brazil South"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "Canada Central",
               "coresUsed": 0,
-              "regionName": "Canada Central"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "Canada East",
               "coresUsed": 0,
-              "regionName": "Canada East"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "Central India",
               "coresUsed": 0,
-              "regionName": "Central India"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "Central US",
               "coresUsed": 24,
-              "regionName": "Central US"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "Central US EUAP",
               "coresUsed": 0,
-              "regionName": "Central US EUAP"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "East Asia",
               "coresUsed": 24,
-              "regionName": "East Asia"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "East US",
               "coresUsed": 24,
-              "regionName": "East US"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "East US 2",
               "coresUsed": 0,
-              "regionName": "East US 2"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "Japan East",
               "coresUsed": 0,
-              "regionName": "Japan East"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "Japan West",
               "coresUsed": 0,
-              "regionName": "Japan West"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "North Central US",
               "coresUsed": 0,
-              "regionName": "North Central US"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "North Europe",
               "coresUsed": 0,
-              "regionName": "North Europe"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "South Central US",
               "coresUsed": 0,
-              "regionName": "South Central US"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "Southeast Asia",
               "coresUsed": 0,
-              "regionName": "Southeast Asia"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "West Central US",
               "coresUsed": 0,
-              "regionName": "West Central US"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "West Europe",
               "coresUsed": 0,
-              "regionName": "West Europe"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "West US",
               "coresUsed": 132,
-              "regionName": "West US"
+              "coresAvailable": 1000
             },
             {
-              "coresAvailable": 1000,
+              "regionName": "West US 2",
               "coresUsed": 0,
-              "regionName": "West US 2"
+              "coresAvailable": 1000
             }
           ]
-        },
-        "regions": {
-          "iaas": {
-            "available": [
-              "AUSTRALIA EAST",
-              "AUSTRALIA SOUTHEAST",
-              "BRAZIL SOUTH",
-              "CANADA CENTRAL",
-              "CANADA EAST",
-              "CENTRAL INDIA",
-              "CENTRAL US",
-              "CENTRAL US EUAP",
-              "EAST ASIA",
-              "EAST US",
-              "EAST US 2",
-              "JAPAN EAST",
-              "JAPAN WEST",
-              "NORTH CENTRAL US",
-              "NORTH EUROPE",
-              "SOUTH CENTRAL US",
-              "SOUTHEAST ASIA",
-              "WEST CENTRAL US",
-              "WEST EUROPE",
-              "WEST US",
-              "WEST US 2"
-            ]
-          },
-          "paas": {
-            "available": [
-              "AUSTRALIA EAST",
-              "AUSTRALIA SOUTHEAST",
-              "BRAZIL SOUTH",
-              "CENTRAL INDIA",
-              "CENTRAL US",
-              "EAST ASIA",
-              "EAST US",
-              "EAST US 2",
-              "JAPAN EAST",
-              "JAPAN WEST",
-              "NORTH CENTRAL US",
-              "NORTH EUROPE",
-              "SOUTH CENTRAL US",
-              "SOUTHEAST ASIA",
-              "WEST EUROPE",
-              "WEST US",
-              "WEST US 2"
-            ]
-          }
-        },
-        "versions": {
-          "iaas": {
-            "available": [
-              {
-                "componentVersions": {
-                  "HBase": "0.98.4",
-                  "HDP": "2.2",
-                  "Hadoop": "2.6.0",
-                  "Storm": "0.9.3"
-                },
-                "displayName": "Version 3.2.1000.0.8840373",
-                "friendlyName": "3.2",
-                "isDefault": false
-              },
-              {
-                "componentVersions": {
-                  "HBase": "1.1.2",
-                  "HDP": "2.3",
-                  "Hadoop": "2.7.0",
-                  "Spark": "1.5.2",
-                  "Storm": "0.10.0"
-                },
-                "displayName": "Version 3.3.1000.0.9776961",
-                "friendlyName": "3.3",
-                "isDefault": false
-              },
-              {
-                "componentVersions": {
-                  "HBase": "1.1.2",
-                  "HDP": "2.4",
-                  "Hadoop": "2.7.1",
-                  "RServer": "8.0",
-                  "Spark": "1.6.2",
-                  "Storm": "0.10.0"
-                },
-                "displayName": "Version 3.4.1000.0.9719475",
-                "friendlyName": "3.4",
-                "isDefault": false
-              },
-              {
-                "componentVersions": {
-                  "HBase": "1.1.2",
-                  "HDP": "2.5",
-                  "Hadoop": "2.7.3",
-                  "InteractiveHive": "2.1.0",
-                  "RServer": "9.0",
-                  "Spark": "1.6.3,2.0.2",
-                  "Storm": "1.0.1"
-                },
-                "displayName": "Version 3.5.1000.0.9732704",
-                "friendlyName": "3.5",
-                "isDefault": true
-              },
-              {
-                "componentVersions": {
-                  "HDP": "2.6",
-                  "Spark": "2.1.0"
-                },
-                "displayName": "Version 3.6.1000.0.9503998",
-                "friendlyName": "3.6",
-                "isDefault": false
-              },
-              {
-                "displayName": "Version 99.152.1000.0.6943836",
-                "friendlyName": "99.152",
-                "isDefault": false
-              }
-            ]
-          },
-          "paas": {
-            "available": [
-              {
-                "displayName": "HdInsight version 1.6.1.0.335536",
-                "friendlyName": "1.6",
-                "isDefault": false
-              },
-              {
-                "componentVersions": {
-                  "HDP": "1.3",
-                  "Hadoop": "1.2.0"
-                },
-                "displayName": "Version 2.1.9.406.1221105",
-                "friendlyName": "2.1",
-                "isDefault": false
-              },
-              {
-                "componentVersions": {
-                  "HDP": "2.0",
-                  "Hadoop": "2.2.0"
-                },
-                "displayName": "Version 3.0.6.989.2441725",
-                "friendlyName": "3.0",
-                "isDefault": false
-              },
-              {
-                "componentVersions": {
-                  "HBase": "0.98",
-                  "HDP": "2.1.7",
-                  "Hadoop": "2.4.0"
-                },
-                "displayName": "Version 3.1.4.989.2441725",
-                "friendlyName": "3.1",
-                "isDefault": false
-              },
-              {
-                "componentVersions": {
-                  "HBase": "0.98.4",
-                  "HDP": "2.2",
-                  "Hadoop": "2.6.0",
-                  "Storm": "0.9.3"
-                },
-                "displayName": "Version 3.2.7.989.2441725",
-                "friendlyName": "3.2",
-                "isDefault": false
-              },
-              {
-                "componentVersions": {
-                  "HBase": "1.1.2",
-                  "HDP": "2.3",
-                  "Hadoop": "2.7.0",
-                  "Storm": "0.10.0"
-                },
-                "displayName": "Version 3.3.0.989.2441725",
-                "friendlyName": "3.3",
-                "isDefault": true
-              }
-            ]
-          }
         }
       }
     }
-  },
-  "operationId": "Locations_GetCapabilities",
-  "title": "Get the subscription capabilities for specific location"
+  }
 }

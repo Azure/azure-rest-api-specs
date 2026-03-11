@@ -7,14 +7,18 @@ options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/containerregistry_build.json"
     examples-dir: "{project-root}/examples"
 
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
-  "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.ContainerRegistryTasks"
+  "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.containerregistrytasks"
   "@azure-tools/typespec-python":
     service-dir: "sdk/containerregistry"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerregistrytasks"

@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
-import "./CommonModels.tsp";
+import "./models.tsp";
 import "./ManagedCluster.tsp";
 
 using TypeSpec.Rest;
@@ -9,11 +9,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.ContainerService;
-
-// =============================================================================
-// PrivateEndpointConnection resource and operations
-// =============================================================================
-
 /**
  * A private endpoint connection
  */
@@ -27,16 +22,6 @@ model PrivateEndpointConnection
     NamePattern = ""
   >;
 }
-
-@@doc(PrivateEndpointConnection.name,
-  "The name of the private endpoint connection."
-);
-@@doc(PrivateEndpointConnection.properties,
-  "The properties of a private endpoint connection."
-);
-@@doc(PrivateEndpointConnections.update::parameters.resource,
-  "The updated private endpoint connection."
-);
 
 @armResourceOperations
 interface PrivateEndpointConnections {
@@ -54,10 +39,11 @@ interface PrivateEndpointConnections {
   /**
    * Deletes a private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "This is actually a sync operation, but modeled as async with 200/204 to maintain backward compatibility."
-  delete is ArmResourceDeleteAsyncBase<
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    PrivateEndpointConnectionDeleteOkResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -90,115 +76,12 @@ interface PrivateEndpointConnectionsOps
       }
     > {}
 
-// =============================================================================
-// PrivateEndpointConnection models
-// =============================================================================
-
-/**
- * Async 200 OK response for delete with LRO polling headers.
- */
-@doc("Resource deleted successfully.")
-model PrivateEndpointConnectionDeleteOkResponse {
-  ...OkResponse;
-  ...ArmAsyncOperationHeader;
-  ...Azure.Core.Foundations.RetryAfterHeader;
-}
-
-/**
- * The current provisioning state.
- */
-@Azure.Core.lroStatus
-union PrivateEndpointConnectionProvisioningState {
-  string,
-
-  /** Private endpoint connection provisioning was canceled. */
-  Canceled: "Canceled",
-
-  /** Private endpoint connection is being created. */
-  Creating: "Creating",
-
-  /** Private endpoint connection is being deleted. */
-  Deleting: "Deleting",
-
-  /** Private endpoint connection provisioning failed. */
-  Failed: "Failed",
-
-  /** Private endpoint connection provisioning succeeded. */
-  Succeeded: "Succeeded",
-}
-
-/**
- * The private link service connection status.
- */
-union ConnectionStatus {
-  string,
-
-  /** Connection is pending approval. */
-  Pending: "Pending",
-
-  /** Connection is approved. */
-  Approved: "Approved",
-
-  /** Connection is rejected. */
-  Rejected: "Rejected",
-
-  /** Connection is disconnected. */
-  Disconnected: "Disconnected",
-}
-
-/**
- * Properties of a private endpoint connection.
- */
-model PrivateEndpointConnectionProperties {
-  /**
-   * The current provisioning state.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: PrivateEndpointConnectionProvisioningState;
-
-  /**
-   * The resource of private endpoint.
-   */
-  privateEndpoint?: PrivateEndpoint;
-
-  /**
-   * A collection of information about the state of the connection between service consumer and provider.
-   */
-  privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
-}
-
-/**
- * Private endpoint which a connection belongs to.
- */
-model PrivateEndpoint {
-  /**
-   * The resource ID of the private endpoint
-   */
-  id?: string;
-}
-
-/**
- * A list of private endpoint connections
- */
-model PrivateEndpointConnectionListResult {
-  /**
-   * The collection value.
-   */
-  @pageItems
-  value?: PrivateEndpointConnection[];
-}
-
-/**
- * The state of a private link service connection.
- */
-model PrivateLinkServiceConnectionState {
-  /**
-   * The private link service connection status.
-   */
-  status?: ConnectionStatus;
-
-  /**
-   * The private link service connection description.
-   */
-  description?: string;
-}
+@@doc(PrivateEndpointConnection.name,
+  "The name of the private endpoint connection."
+);
+@@doc(PrivateEndpointConnection.properties,
+  "The properties of a private endpoint connection."
+);
+@@doc(PrivateEndpointConnections.update::parameters.resource,
+  "The updated private endpoint connection."
+);

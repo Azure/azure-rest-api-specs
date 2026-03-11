@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "serverName": "testsvr",
+    "databaseName": "testdb",
+    "maintenanceWindowOptionsName": "current",
+    "api-version": "2021-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "isEnabled": true,
+          "maintenanceWindowCycles": [
+            {
+              "dayOfWeek": "Saturday",
+              "startTime": "00:00:00",
+              "duration": "PT60M"
+            }
+          ],
+          "minDurationInMinutes": 60,
+          "defaultDurationInMinutes": 120,
+          "minCycles": 2,
+          "timeGranularityInMinutes": 5,
+          "allowMultipleMaintenanceWindowsPerCycle": true
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb/maintenancewindowoptions/current",
+        "name": "current",
+        "type": "Microsoft.Sql/servers/databases/maintenancewindows"
+      }
+    }
+  }
+}

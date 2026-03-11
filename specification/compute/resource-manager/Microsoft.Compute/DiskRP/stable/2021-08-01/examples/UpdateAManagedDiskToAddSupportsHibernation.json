@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-08-01",
+    "diskName": "myDisk",
+    "disk": {
+      "properties": {
+        "supportsHibernation": true
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk?api-version=2021-04-01"
+      },
+      "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "properties": {
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "supportsHibernation": true,
+          "creationData": {
+            "createOption": "Import",
+            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+          },
+          "diskSizeGB": 127,
+          "provisioningState": "Updating"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "properties": {
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "supportsHibernation": true,
+          "creationData": {
+            "createOption": "Import",
+            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+          },
+          "diskSizeGB": 127,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

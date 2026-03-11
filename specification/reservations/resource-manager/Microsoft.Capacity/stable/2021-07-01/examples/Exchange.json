@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "api-version": "2021-07-01",
+    "body": {
+      "properties": {
+        "sessionId": "66e2ac8f-439e-4345-8235-6fef07608081"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/microsoft.capacity/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188",
+        "name": "4e2ffff7-b331-4fcb-ab11-b5fa49368188",
+        "status": "Succeeded",
+        "properties": {
+          "sessionId": "66e2ac8f-439e-4345-8235-6fef07608081",
+          "netPayable": {
+            "currencyCode": "USD",
+            "amount": 15840.0
+          },
+          "refundsTotal": {
+            "currencyCode": "USD",
+            "amount": 3960.0
+          },
+          "purchasesTotal": {
+            "currencyCode": "USD",
+            "amount": 19800.0
+          },
+          "policyResult": {
+            "policyErrors": null
+          },
+          "reservationsToPurchase": [
+            {
+              "reservationOrderId": "/providers/microsoft.capacity/reservationOrders/1e85c519-b815-4169-8d79-62fc460c608f",
+              "reservationId": "/providers/microsoft.capacity/reservationOrders/1e85c519-b815-4169-8d79-62fc460c608f/reservations/0c80fceb-305c-40a8-b5a6-11445807bbb3",
+              "properties": {
+                "sku": {
+                  "name": "Standard_B1ls"
+                },
+                "location": "westus",
+                "properties": {
+                  "reservedResourceType": "VirtualMachines",
+                  "billingScopeId": "/subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83",
+                  "term": "P1Y",
+                  "billingPlan": "Upfront",
+                  "quantity": 1,
+                  "displayName": "testDisplayName",
+                  "appliedScopeType": "Shared",
+                  "appliedScopes": null,
+                  "renew": false,
+                  "reservedResourceProperties": {
+                    "instanceFlexibility": "On"
+                  }
+                }
+              },
+              "billingCurrencyTotal": {
+                "currencyCode": "USD",
+                "amount": 19800.0
+              },
+              "status": "Succeeded"
+            }
+          ],
+          "reservationsToExchange": [
+            {
+              "reservationId": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa/reservations/c8c926bd-fc5d-4e29-9d43-b68340ac23a6",
+              "quantity": 1,
+              "billingRefundAmount": {
+                "currencyCode": "USD",
+                "amount": 3960.0
+              },
+              "billingInformation": {
+                "billingCurrencyTotalPaidAmount": {
+                  "currencyCode": "USD",
+                  "amount": 19800.0
+                },
+                "billingCurrencyProratedAmount": {
+                  "currencyCode": "USD",
+                  "amount": 15840.0
+                },
+                "billingCurrencyRemainingCommitmentAmount": {
+                  "currencyCode": "USD",
+                  "amount": 0.0
+                }
+              },
+              "status": "Succeeded"
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Microsoft.Capacity/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2021-07-01",
+        "Location": "https://management.azure.com/Microsoft.Capacity/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2021-07-01",
+        "Retry-After": 5
+      }
+    }
+  }
+}

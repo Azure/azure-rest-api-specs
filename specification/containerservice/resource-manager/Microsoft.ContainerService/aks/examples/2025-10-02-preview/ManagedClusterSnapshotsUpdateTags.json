@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "parameters": {
+      "tags": {
+        "key2": "new-val2",
+        "key3": "val3"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "snapshot1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "snapshot1",
+        "type": "Microsoft.ContainerService/ManagedClusterSnapshots",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedclustersnapshots/snapshot1",
+        "location": "westus",
+        "properties": {
+          "creationData": {
+            "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1"
+          },
+          "managedClusterPropertiesReadOnly": {
+            "enableRbac": true,
+            "kubernetesVersion": "1.20.5",
+            "networkProfile": {
+              "loadBalancerSku": "standard",
+              "networkMode": "bridge",
+              "networkPlugin": "kubenet",
+              "networkPolicy": "calico"
+            },
+            "sku": {
+              "name": "Basic",
+              "tier": "Free"
+            }
+          },
+          "snapshotType": "ManagedCluster"
+        },
+        "systemData": {
+          "createdAt": "2021-08-09T20:13:23.298420761Z",
+          "createdBy": "user1",
+          "createdByType": "User"
+        },
+        "tags": {
+          "key1": "val1",
+          "key2": "val2"
+        }
+      }
+    }
+  },
+  "operationId": "ManagedClusterSnapshots_UpdateTags",
+  "title": "Update Managed Cluster Snapshot Tags"
+}

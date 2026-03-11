@@ -1,14 +1,14 @@
 {
   "parameters": {
-    "api-version": "2025-01-15-preview",
     "clusterName": "cluster1",
-    "parameters": {
-      "keyName": "newkeyname",
-      "keyVersion": "newkeyversion",
-      "vaultUri": "https://newkeyvault.vault.azure.net/"
-    },
     "resourceGroupName": "rg1",
-    "subscriptionId": "subid"
+    "api-version": "2025-01-15-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "vaultUri": "https://newkeyvault.vault.azure.net/",
+      "keyName": "newkeyname",
+      "keyVersion": "newkeyversion"
+    }
   },
   "responses": {
     "200": {},
@@ -17,7 +17,5 @@
         "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/operationresults/operationid?api-version=2025-01-15-preview"
       }
     }
-  },
-  "operationId": "Clusters_RotateDiskEncryptionKey",
-  "title": "Rotate disk encryption key of the specified HDInsight cluster"
+  }
 }

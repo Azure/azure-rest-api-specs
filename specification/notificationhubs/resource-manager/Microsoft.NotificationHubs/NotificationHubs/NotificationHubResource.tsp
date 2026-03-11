@@ -31,20 +31,6 @@ model NotificationHubResource
   sku?: Sku;
 }
 
-alias NotificationHubResourcesListParameters = {
-  /**
-   * Continuation token.
-   */
-  @query("$skipToken")
-  $skipToken?: string;
-
-  /**
-   * Page size.
-   */
-  @query("$top")
-  $top?: int32 = 100;
-};
-
 @armResourceOperations
 interface NotificationHubResources {
   /**
@@ -76,7 +62,19 @@ interface NotificationHubResources {
    */
   list is ArmResourceListByParent<
     NotificationHubResource,
-    Parameters = NotificationHubResourcesListParameters,
+    Parameters = {
+      /**
+       * Continuation token.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+
+      /**
+       * Page size.
+       */
+      @query("$top")
+      $top?: int32 = 100;
+    },
     Response = NotificationHubListResult
   >;
 

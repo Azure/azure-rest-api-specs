@@ -604,5 +604,10 @@ model Operation {
   /**
    * Additional properties to expose performance metrics to shoebox.
    */
-  properties?: OperationProperties;
+  properties?: {
+    /**
+     * Service specification for exposing performance metrics to shoebox.
+     */
+    serviceSpecification?: ServiceSpecification;
+  };
 }

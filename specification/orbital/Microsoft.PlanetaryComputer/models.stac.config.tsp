@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "./models.stac.spec.tsp";
 
+using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Microsoft.PlanetaryComputer;
@@ -36,9 +37,9 @@ model RenderOption {
   type?: RenderOptionType = RenderOptionType.`raster-tile`;
 
   /**
-   * A URL query-string encoded string of TiTiler rendering options. Valid only for `raster-tile` types.
-   *
-   * See [Query Parameters](https://developmentseed.org/titiler/endpoints/cog/#description).
+   * A URL query-string encoded string of TiTiler rendering options. Valid only for
+   * `raster-tile` types.  See 'Query Parameters':
+   * https://developmentseed.org/titiler/endpoints/cog/#description
    */
   options?: string;
 
@@ -187,8 +188,14 @@ union RenderOptionType {
 }
 
 /**
- * Legend type to make, one of: `continuous`, `classmap`, `interval` or `none`
- * (note, `none` is a string literal).
+* Legend type to make,
+ one of: `continuous`,
+ `classmap`,
+ `interval` or `none`
+* (note, `none` is a string literal).
+*/
+/**
+ * Defines the legend configuration types for data visualization.
  */
 union LegendConfigType {
   string,
@@ -239,11 +246,11 @@ union PartitionTypeScheme {
 /**
  * Configuration for data mosaic visualization.
  */
-model StacMosaicConfiguration {
+model MosaicInfo {
   /**
    * Predefined data mosaics available for this collection.
    */
-  mosaics: StacMosaic[];
+  mosaics: Mosaic[];
 
   /**
    * Available render options for visualizing the data.
@@ -258,14 +265,13 @@ model StacMosaicConfiguration {
   /**
    * A list of CQL-JSON expressions to use as the default for  this collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
-  defaultCustomQuery?: Record<unknown>;
+  defaultCustomQuery?: Record<string>;
 }
 
 /**
  * Defines a named mosaic with filtering criteria.
  */
-model StacMosaic {
+model Mosaic {
   /**
    * Unique identifier for the mosaic.
    */
@@ -288,8 +294,7 @@ model StacMosaic {
   /**
    * A list of valid CQL2-JSON expressions used to filter the collection to moasic.
    */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
-  cql: Record<unknown>[];
+  cql: Cql[];
 }
 
 /**
@@ -304,8 +309,7 @@ model UserCollectionSettings {
   /**
    * Settings for data mosaic visualization.
    */
-  @encodedName("application/json", "mosaicInfo")
-  mosaicConfiguration: StacMosaicConfiguration;
+  mosaicInfo: MosaicInfo;
 }
 
 /**
@@ -349,9 +353,64 @@ model DefaultLocation {
 }
 
 /**
- * FormContent model for file upload.
+ * Represents an Azure Maps token for map visualization.
  */
-model StacAssetData {
+model AzMapsToken {
+  /**
+   * The authentication token for Azure Maps.
+   */
+  token: string;
+
+  /**
+   * Expiration timestamp of the token in Unix time.
+   */
+  @encodedName("application/json", "expires_on")
+  expiresOn: int32;
+}
+
+/**
+ * Represents an Azure Maps client ID for authentication.
+ */
+model AzMapsClientId {
+  /**
+   * The client ID for Azure Maps authentication.
+   */
+  @encodedName("application/json", "client_id")
+  clientId: string;
+}
+
+/**
+ * Microsoft Authentication Library (MSAL) configuration for frontend authentication.
+ */
+model AuthConfig {
+  /**
+   * Application ID for authentication.
+   */
+  @encodedName("application/json", "authn_app_id")
+  authnAppId: string;
+
+  /**
+   * Azure Active Directory tenant ID.
+   */
+  @encodedName("application/json", "tenant_id")
+  tenantId: string;
+
+  /**
+   * Azure AD instance URL.
+   */
+  instance: url;
+
+  /**
+   * Redirect URI after authentication.
+   */
+  @encodedName("application/json", "redirect_uri")
+  redirectUri?: url;
+}
+
+/**
+ * FormData model for file upload.
+ */
+model FormData {
   /**
    * Asset metadata
    */

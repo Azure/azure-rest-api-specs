@@ -35,6 +35,7 @@ interface SavingsPlanOrderModels {
   /**
    * Get a savings plan order.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<
     SavingsPlanOrderModel,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -50,6 +51,7 @@ interface SavingsPlanOrderModels {
   /**
    * List all Savings plan orders.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is ArmResourceListByParent<
     SavingsPlanOrderModel,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -59,6 +61,7 @@ interface SavingsPlanOrderModels {
   /**
    * Elevate as owner on savings plan order based on billing permissions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   elevate is ArmResourceActionSync<
     SavingsPlanOrderModel,
     void,

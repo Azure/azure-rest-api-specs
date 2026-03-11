@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "api-version": "2020-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "timeCreated": "2020-05-01T04:41:35.079872+00:00"
+            },
+            "type": "Microsoft.Compute/diskAccesses",
+            "location": "westus",
+            "tags": {
+              "department": "Development",
+              "project": "PrivateEndpoints"
+            },
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess",
+            "name": "myDiskAccess"
+          },
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "timeCreated": "2020-05-01T04:41:35.079872+00:00",
+              "privateEndpointConnections": [
+                {
+                  "name": "myDiskAccess.d4914cfa-6bc2-4049-a57c-3d1f622d8eef",
+                  "type": "Microsoft.Compute/diskAccesses/PrivateEndpointConnections",
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/mySecondResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess2/privateEndpoinConnections/myDiskAccess2.d4914cfa-6bc2-4049-a57c-3d1f622d8eef",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateEndpoint": {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/mySecondResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint2"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "actionsRequired": "None",
+                      "description": "Auto-Approved",
+                      "status": "Approved"
+                    }
+                  }
+                }
+              ]
+            },
+            "type": "Microsoft.Compute/diskAccesses",
+            "location": "westus",
+            "tags": {
+              "department": "Development",
+              "project": "PrivateEndpoints"
+            },
+            "id": "/subscriptions/{subscription-id}/resourceGroups/mySecondResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess2",
+            "name": "myDiskAccess2"
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskAccesses?$skiptoken={token}"
+      }
+    }
+  }
+}

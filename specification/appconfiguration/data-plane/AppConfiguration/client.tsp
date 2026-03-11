@@ -7,9 +7,6 @@ using AzureAppConfiguration;
 
 namespace SdkCustomizations;
 
-// Java specific customizations
-@@clientName(Azure.Core.Foundations.Error, "CommonError", "java");
-
 // Python specific customizations
 @@clientName(KeyValueFields, "ConfigurationSettingFields", "python");
 @@clientName(CompositionType, "SnapshotComposition", "python");
@@ -38,5 +35,3 @@ namespace SdkCustomizations;
 
 @@alternateType(KeyValuesRequestParams.select, string[], "csharp");
 @@alternateType(RevisionsRequestParams.select, string[], "csharp");
-
-@@clientName(Azure.Core.Foundations.Error, "CommonError", "python");

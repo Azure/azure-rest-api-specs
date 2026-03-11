@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-08-01",
+    "diskAccessName": "myDiskAccess",
+    "privateEndpointConnectionName": "myPrivateEndpointConnection"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myPrivateEndpointConnection",
+        "type": "Microsoft.Compute/diskAccesses/PrivateEndpointConnections",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess/privateEndpoinConnections/myPrivateEndpointConnection",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "actionsRequired": "None",
+            "description": "Auto-Approved",
+            "status": "Approved"
+          }
+        }
+      }
+    }
+  }
+}

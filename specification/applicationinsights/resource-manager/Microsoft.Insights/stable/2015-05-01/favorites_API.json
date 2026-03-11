@@ -1,0 +1,382 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "description": "Azure Application Insights client for favorites.",
+    "version": "2015-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/favorites": {
+      "get": {
+        "description": "Gets a list of favorites defined within an Application Insights component.",
+        "operationId": "Favorites_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FavoriteTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/CanFetchFavoriteContentParameter"
+          },
+          {
+            "$ref": "#/parameters/TagsFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more favorite definitions associated to the Application Insights component.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApplicationInsightsComponentFavorite"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FavoritesList": {
+            "$ref": "./examples/FavoritesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/favorites/{favoriteId}": {
+      "get": {
+        "description": "Get a single favorite by its FavoriteId, defined within an Application Insights component.",
+        "operationId": "Favorites_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FavoriteIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A favorite definition associated to the Application Insights component.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentFavorite"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FavoriteGet": {
+            "$ref": "./examples/FavoriteGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Adds a new favorites to an Application Insights component.",
+        "operationId": "Favorites_Add",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FavoriteIdParameter"
+          },
+          {
+            "name": "favoriteProperties",
+            "description": "Properties that need to be specified to create a new favorite and add it to an Application Insights component.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentFavorite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The newly created favorite that is associated to the Application Insights component.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentFavorite"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FavoriteAdd": {
+            "$ref": "./examples/FavoriteAdd.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates a favorite that has already been added to an Application Insights component.",
+        "operationId": "Favorites_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FavoriteIdParameter"
+          },
+          {
+            "name": "favoriteProperties",
+            "description": "Properties that need to be specified to update the existing favorite.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentFavorite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The favorite definition updated.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentFavorite"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FavoriteList": {
+            "$ref": "./examples/FavoriteUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Remove a favorite that is associated to an Application Insights component.",
+        "operationId": "Favorites_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FavoriteIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The favorite has been successfully removed from the Application Insights component."
+          }
+        },
+        "x-ms-examples": {
+          "FavoriteList": {
+            "$ref": "./examples/FavoriteDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationInsightsComponentFavorite": {
+      "description": "Properties that define a favorite that is associated to an Application Insights component.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The user-defined name of the favorite."
+        },
+        "Config": {
+          "type": "string",
+          "description": "Configuration of this particular favorite, which are driven by the Azure portal UX. Configuration data is a string containing valid JSON"
+        },
+        "Version": {
+          "type": "string",
+          "description": "This instance's version of the data model. This can change as new features are added that can be marked favorite. Current examples include MetricsExplorer (ME) and Search."
+        },
+        "FavoriteId": {
+          "type": "string",
+          "description": "Internally assigned unique id of the favorite definition.",
+          "readOnly": true
+        },
+        "FavoriteType": {
+          "description": "Enum indicating if this favorite definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
+          "type": "string",
+          "enum": [
+            "shared",
+            "user"
+          ],
+          "x-ms-enum": {
+            "name": "FavoriteType",
+            "modelAsString": false
+          }
+        },
+        "SourceType": {
+          "type": "string",
+          "description": "The source of the favorite definition."
+        },
+        "TimeModified": {
+          "type": "string",
+          "description": "Date and time in UTC of the last modification that was made to this favorite definition.",
+          "readOnly": true
+        },
+        "Tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of 0 or more tags that are associated with this favorite definition"
+        },
+        "Category": {
+          "type": "string",
+          "description": "Favorite category, as defined by the user at creation time."
+        },
+        "IsGeneratedFromTemplate": {
+          "type": "boolean",
+          "description": "Flag denoting wether or not this favorite was generated from a template."
+        },
+        "UserId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique user id of the specific user that owns this favorite."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights component resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "FavoriteTypeParameter": {
+      "name": "favoriteType",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "default": "shared",
+      "enum": [
+        "shared",
+        "user"
+      ],
+      "x-ms-enum": {
+        "name": "FavoriteType",
+        "modelAsString": false
+      },
+      "description": "The type of favorite. Value can be either shared or user.",
+      "x-ms-parameter-location": "method"
+    },
+    "FavoriteIdParameter": {
+      "name": "favoriteId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Id of a specific favorite defined in the Application Insights component",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceTypeParameter": {
+      "name": "sourceType",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "allowEmptyValue": true,
+      "enum": [
+        "retention",
+        "notebook",
+        "sessions",
+        "events",
+        "userflows",
+        "funnel",
+        "impact",
+        "segmentation"
+      ],
+      "x-ms-enum": {
+        "name": "FavoriteSourceType",
+        "modelAsString": true
+      },
+      "description": "Source type of favorite to return. When left out, the source type defaults to 'other' (not present in this enum).",
+      "x-ms-parameter-location": "method"
+    },
+    "CanFetchFavoriteContentParameter": {
+      "name": "canFetchContent",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Flag indicating whether or not to return the full content for each applicable favorite. If false, only return summary content for favorites.",
+      "x-ms-parameter-location": "method"
+    },
+    "TagsFilterParameter": {
+      "name": "tags",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "description": "Tags that must be present on each favorite returned.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

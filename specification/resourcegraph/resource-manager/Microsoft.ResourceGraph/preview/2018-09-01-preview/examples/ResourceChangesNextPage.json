@@ -1,0 +1,43 @@
+{
+  "title": "Resource Changes Query: Next Page",
+  "description": "A resource changes query requesting the next page using a skip token.",
+  "parameters": {
+    "api-version": "2018-09-01-preview",
+    "parameters": {
+      "resourceId": "/subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount",
+      "interval": {
+        "start": "2018-10-30T12:09:03.141Z",
+        "end": "2018-10-31T12:09:03.141Z"
+      },
+      "$top": 2,
+      "$skipToken": "ew0KICAiJGlkIjogIjEiLA0KICAiRW5kVGltZSI6ICJcL0RhdGUoMTU1MDc0NT"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "changes": [
+          {
+            "changeId": "55f458c4-f1c0-4963-bc6c-af275cd47702",
+            "beforeSnapshot": {
+              "timestamp": "2018-10-31T03:43:08.629Z"
+            },
+            "afterSnapshot": {
+              "timestamp": "2018-10-31T05:12:32.087Z"
+            }
+          },
+          {
+            "changeId": "0495b929-b86d-46cc-a972-939145feed90",
+            "beforeSnapshot": {
+              "timestamp": "2018-10-31T01:54:24.42Z"
+            },
+            "afterSnapshot": {
+              "timestamp": "2018-10-31T02:01:02.163Z"
+            }
+          }
+        ],
+        "$skipToken": "kVGltZSI6ICJcL0RhdGUoMTU1MDc0NTew0KICAiJGlkIjogIjEiLA0KICAiRW5"
+      }
+    }
+  }
+}

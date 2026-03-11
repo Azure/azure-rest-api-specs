@@ -1,29 +1,27 @@
 {
-  "operationId": "CheckSkuAvailability",
   "parameters": {
     "api-version": "2025-10-01-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "location": "westus",
     "parameters": {
-      "type": "Microsoft.CognitiveServices/accounts",
-      "kind": "Face",
       "skus": [
         "S0"
-      ]
-    },
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+      ],
+      "kind": "Face",
+      "type": "Microsoft.CognitiveServices/accounts"
+    }
   },
-  "title": "Check SKU Availability",
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "type": "Microsoft.CognitiveServices/accounts",
             "kind": "Face",
-            "message": null,
-            "reason": null,
+            "type": "Microsoft.CognitiveServices/accounts",
+            "skuName": "S0",
             "skuAvailable": true,
-            "skuName": "S0"
+            "reason": null,
+            "message": null
           }
         ]
       }

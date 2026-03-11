@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-08-01",
+    "diskName": "myDisk",
+    "disk": {
+      "properties": {
+        "supportedCapabilities": {
+          "acceleratedNetwork": false
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk?api-version=2021-04-01"
+      },
+      "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "properties": {
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "supportedCapabilities": {
+            "acceleratedNetwork": false
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscription-id}/Providers/Microsoft.Compute/Locations/westus/Publishers/test_test_pmc2pc1/ArtifactTypes/VMImage/Offers/marketplace_vm_test/Skus/test_sku/Versions/1.0.0"
+            }
+          },
+          "diskSizeGB": 127,
+          "provisioningState": "Updating"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "properties": {
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "supportedCapabilities": {
+            "acceleratedNetwork": false
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscription-id}/Providers/Microsoft.Compute/Locations/westus/Publishers/test_test_pmc2pc1/ArtifactTypes/VMImage/Offers/marketplace_vm_test/Skus/test_sku/Versions/1.0.0"
+            }
+          },
+          "diskSizeGB": 127,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

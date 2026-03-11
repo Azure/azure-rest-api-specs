@@ -129,14 +129,3 @@ using Microsoft.BotService;
   armResourceIdentifier,
   "csharp"
 );
-
-// Java SDK back-compat: mitigate property rename breaks
-@@clientName(TelephonyChannelProperties.premiumSKU, "premiumSku", "java");
-@@clientName(SmsChannelProperties.accountSID, "accountSid", "java");
-@@clientName(BotProperties.msaAppMSIResourceId, "msaAppMsiResourceId", "java");
-@@clientName(Site.eTag, "etag", "java");
-@@clientName(SkypeChannelProperties.callingWebHook, "callingWebhook", "java");
-@@clientName(KikChannelProperties.userName, "username", "java");
-
-// Java SDK back-compat: keep unknown as Object
-@@alternateType(OperationEntity.properties, unknown, "java");

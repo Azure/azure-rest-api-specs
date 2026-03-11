@@ -141,23 +141,3 @@
 - tool: TypeSpecRequirement
   path: ./stable/2025-03-01/*.json
   reason: Legacy API version not ready to migrate to TypeSpec
-
-# Suppressions for TypeSpec-generated swaggers from preview versions removed from TypeSpec
-- tool: TypeSpecValidation
-  rules: [Compile]
-  sub-rules: [ExtraSwagger]
-  reason: Extra swaggers left behind when versions were removed from TypeSpec
-  paths:
-    - ./preview/2025-07-01-preview/netapp.json
-- tool: TypeSpecValidation
-  rules: [Compile]
-  sub-rules: [ExtraSwagger]
-  reason: Extra swaggers left behind when versions were removed from TypeSpec
-  paths:
-    - ./preview/2025-08-01-preview/netapp.json
-- tool: TypeSpecValidation
-  rules: [Compile]
-  sub-rules: [ExtraSwagger]
-  reason: Extra swaggers left behind when versions were removed from TypeSpec
-  paths:
-    - ./preview/2025-09-01-preview/netapp.json

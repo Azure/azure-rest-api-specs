@@ -1,158 +1,162 @@
 {
   "parameters": {
-    "api-version": "2025-01-15-preview",
     "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2025-01-15-preview",
+    "subscriptionId": "subid",
     "parameters": {
+      "tags": {
+        "key1": "val1"
+      },
       "properties": {
+        "clusterVersion": "3.5",
+        "osType": "Linux",
+        "tier": "Premium",
         "clusterDefinition": {
+          "kind": "Hadoop",
           "configurations": {
             "gateway": {
               "restAuthCredential.isEnabled": true,
-              "restAuthCredential.password": "**********",
-              "restAuthCredential.username": "admin"
+              "restAuthCredential.username": "admin",
+              "restAuthCredential.password": "**********"
             }
-          },
-          "kind": "Hadoop"
-        },
-        "clusterVersion": "3.5",
-        "computeProfile": {
-          "roles": [
-            {
-              "name": "headnode",
-              "hardwareProfile": {
-                "vmSize": "Standard_D3_V2"
-              },
-              "minInstanceCount": 1,
-              "osProfile": {
-                "linuxOperatingSystemProfile": {
-                  "password": "**********",
-                  "sshProfile": {
-                    "publicKeys": [
-                      {
-                        "certificateData": "**********"
-                      }
-                    ]
-                  },
-                  "username": "sshuser"
-                }
-              },
-              "scriptActions": [],
-              "targetInstanceCount": 2,
-              "virtualNetworkProfile": {
-                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
-                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
-              }
-            },
-            {
-              "name": "workernode",
-              "hardwareProfile": {
-                "vmSize": "Standard_D3_V2"
-              },
-              "minInstanceCount": 1,
-              "osProfile": {
-                "linuxOperatingSystemProfile": {
-                  "password": "**********",
-                  "sshProfile": {
-                    "publicKeys": [
-                      {
-                        "certificateData": "**********"
-                      }
-                    ]
-                  },
-                  "username": "sshuser"
-                }
-              },
-              "scriptActions": [],
-              "targetInstanceCount": 4,
-              "virtualNetworkProfile": {
-                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
-                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
-              }
-            },
-            {
-              "name": "zookeepernode",
-              "hardwareProfile": {
-                "vmSize": "Small"
-              },
-              "minInstanceCount": 1,
-              "osProfile": {
-                "linuxOperatingSystemProfile": {
-                  "password": "**********",
-                  "sshProfile": {
-                    "publicKeys": [
-                      {
-                        "certificateData": "**********"
-                      }
-                    ]
-                  },
-                  "username": "sshuser"
-                }
-              },
-              "scriptActions": [],
-              "targetInstanceCount": 3,
-              "virtualNetworkProfile": {
-                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
-                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
-              }
-            }
-          ]
-        },
-        "osType": "Linux",
-        "securityProfile": {
-          "clusterUsersGroupDNs": [
-            "hdiusers"
-          ],
-          "directoryType": "ActiveDirectory",
-          "domain": "DomainName",
-          "domainUserPassword": "**********",
-          "domainUsername": "DomainUsername",
-          "ldapsUrls": [
-            "ldaps://10.10.0.4:636"
-          ],
-          "organizationalUnitDN": "OU=Hadoop,DC=hdinsight,DC=test"
+          }
         },
         "storageProfile": {
           "storageaccounts": [
             {
               "name": "mystorage.blob.core.windows.net",
-              "container": "containername",
-              "enableSecureChannel": true,
               "isDefault": true,
-              "key": "storage account key"
+              "container": "containername",
+              "key": "storage account key",
+              "enableSecureChannel": true
             }
           ]
         },
-        "tier": "Premium"
-      },
-      "tags": {
-        "key1": "val1"
+        "securityProfile": {
+          "directoryType": "ActiveDirectory",
+          "domain": "DomainName",
+          "organizationalUnitDN": "OU=Hadoop,DC=hdinsight,DC=test",
+          "ldapsUrls": [
+            "ldaps://10.10.0.4:636"
+          ],
+          "domainUsername": "DomainUsername",
+          "domainUserPassword": "**********",
+          "clusterUsersGroupDNs": [
+            "hdiusers"
+          ]
+        },
+        "computeProfile": {
+          "roles": [
+            {
+              "name": "headnode",
+              "minInstanceCount": 1,
+              "targetInstanceCount": 2,
+              "hardwareProfile": {
+                "vmSize": "Standard_D3_V2"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********",
+                  "sshProfile": {
+                    "publicKeys": [
+                      {
+                        "certificateData": "**********"
+                      }
+                    ]
+                  }
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+              },
+              "scriptActions": []
+            },
+            {
+              "name": "workernode",
+              "minInstanceCount": 1,
+              "targetInstanceCount": 4,
+              "hardwareProfile": {
+                "vmSize": "Standard_D3_V2"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********",
+                  "sshProfile": {
+                    "publicKeys": [
+                      {
+                        "certificateData": "**********"
+                      }
+                    ]
+                  }
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+              },
+              "scriptActions": []
+            },
+            {
+              "name": "zookeepernode",
+              "minInstanceCount": 1,
+              "targetInstanceCount": 3,
+              "hardwareProfile": {
+                "vmSize": "Small"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********",
+                  "sshProfile": {
+                    "publicKeys": [
+                      {
+                        "certificateData": "**********"
+                      }
+                    ]
+                  }
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+              },
+              "scriptActions": []
+            }
+          ]
+        }
       }
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "subid"
+    }
   },
   "responses": {
     "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/azureasyncoperations/create?api-version=2025-01-15-preview"
+      },
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
         "name": "cluster1",
         "type": "Microsoft.HDInsight/clusters",
-        "etag": "fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
         "location": "East US",
+        "etag": "fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff",
         "properties": {
+          "clusterVersion": "4.0.1000.1",
+          "osType": "Linux",
           "clusterDefinition": {
             "blueprint": "https://blueprints.azurehdinsight.net/hadoop-4.0.1000.1.1910270459.json",
+            "kind": "HADOOP",
             "componentVersion": {
               "Hadoop": "3.1"
-            },
-            "kind": "HADOOP"
+            }
           },
-          "clusterState": "Running",
-          "clusterVersion": "4.0.1000.1",
           "computeProfile": {
             "roles": [
               {
                 "name": "headnode",
+                "targetInstanceCount": 2,
                 "hardwareProfile": {
                   "vmSize": "standard_d12_v2"
                 },
@@ -160,11 +164,11 @@
                   "linuxOperatingSystemProfile": {
                     "username": "sshuser"
                   }
-                },
-                "targetInstanceCount": 2
+                }
               },
               {
                 "name": "workernode",
+                "targetInstanceCount": 4,
                 "hardwareProfile": {
                   "vmSize": "standard_d4_v2"
                 },
@@ -172,11 +176,11 @@
                   "linuxOperatingSystemProfile": {
                     "username": "sshuser"
                   }
-                },
-                "targetInstanceCount": 4
+                }
               },
               {
                 "name": "zookeepernode",
+                "targetInstanceCount": 3,
                 "hardwareProfile": {
                   "vmSize": "standard_a2_v2"
                 },
@@ -184,39 +188,33 @@
                   "linuxOperatingSystemProfile": {
                     "username": "sshuser"
                   }
-                },
-                "targetInstanceCount": 3
+                }
               }
             ]
+          },
+          "provisioningState": "Succeeded",
+          "clusterState": "Running",
+          "createdDate": "2019-11-18T12:25:43.48",
+          "quotaInfo": {
+            "coresUsed": 40
           },
           "connectivityEndpoints": [
             {
               "name": "SSH",
+              "protocol": "TCP",
               "location": "cluster1-ssh.azurehdinsight.net",
-              "port": 22,
-              "protocol": "TCP"
+              "port": 22
             },
             {
               "name": "HTTPS",
+              "protocol": "TCP",
               "location": "cluster1.azurehdinsight.net",
-              "port": 443,
-              "protocol": "TCP"
+              "port": 443
             }
           ],
-          "createdDate": "2019-11-18T12:25:43.48",
-          "osType": "Linux",
-          "provisioningState": "Succeeded",
-          "quotaInfo": {
-            "coresUsed": 40
-          },
           "tier": "Standard"
         }
-      },
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/azureasyncoperations/create?api-version=2025-01-15-preview"
       }
     }
-  },
-  "operationId": "Clusters_Create",
-  "title": "Create Secure Hadoop cluster"
+  }
 }

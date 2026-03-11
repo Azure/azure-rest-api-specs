@@ -6,40 +6,40 @@
         {
           "benefitType": "ConditionalCredits",
           "properties": {
-            "allowContributors": "Enabled",
-            "displayName": "Invalid CACO Test",
             "entityType": "Primary",
+            "displayName": "Invalid CACO Test",
+            "productCode": "b8473ce57f1d",
+            "startAt": "2023-01-01T00:00:00Z",
+            "allowContributors": "Enabled",
             "milestones": [
               {
                 "name": "Milestone 1",
+                "spendTarget": {
+                  "amount": -1000,
+                  "currencyCode": "INVALID"
+                },
                 "award": {
                   "credit": {
                     "amount": 100000,
                     "currencyCode": "USD"
                   },
-                  "endAt": "2021-12-31T00:00:00Z",
-                  "startAt": "2022-01-01T00:00:00Z"
+                  "startAt": "2022-01-01T00:00:00Z",
+                  "endAt": "2021-12-31T00:00:00Z"
                 },
-                "endAt": "2022-12-31T00:00:00Z",
-                "spendTarget": {
-                  "amount": -1000,
-                  "currencyCode": "INVALID"
-                }
+                "endAt": "2022-12-31T00:00:00Z"
               }
-            ],
-            "productCode": "b8473ce57f1d",
-            "startAt": "2023-01-01T00:00:00Z"
+            ]
           }
         },
         {
           "benefitType": "ConditionalCredits",
           "properties": {
-            "displayName": "Invalid Contributor CACO",
             "entityType": "Contributor",
-            "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/nonexistent",
-            "primaryResourceId": "/subscriptions/invalid/resourceGroups/invalid/providers/Microsoft.BillingBenefits/conditionalCredits/nonexistent",
+            "displayName": "Invalid Contributor CACO",
             "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
-            "startAt": "2023-01-01T00:00:00Z"
+            "startAt": "2023-01-01T00:00:00Z",
+            "primaryResourceId": "/subscriptions/invalid/resourceGroups/invalid/providers/Microsoft.BillingBenefits/conditionalCredits/nonexistent",
+            "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/nonexistent"
           }
         }
       ]
@@ -50,19 +50,17 @@
       "body": {
         "benefits": [
           {
+            "valid": false,
             "reason": "The billing account resource ID is missing or invalid",
-            "reasonCode": "InvalidBillingAccountId",
-            "valid": false
+            "reasonCode": "InvalidBillingAccountId"
           },
           {
+            "valid": false,
             "reason": "Start date must be the first day of the current or a future month",
-            "reasonCode": "InvalidStartAt",
-            "valid": false
+            "reasonCode": "InvalidStartAt"
           }
         ]
       }
     }
-  },
-  "operationId": "Benefit_Validate",
-  "title": "ConditionalCreditValidateCreateError"
+  }
 }

@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "blobauditingtest-4799",
+    "serverName": "blobauditingtest-6440",
+    "blobAuditingPolicyName": "default",
+    "api-version": "2020-08-01-preview",
+    "parameters": {
+      "properties": {
+        "state": "Enabled",
+        "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
+        "storageEndpoint": "https://mystorage.blob.core.windows.net",
+        "retentionDays": 6,
+        "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
+        "isStorageSecondaryKeyInUse": false,
+        "queueDelayMs": 4000,
+        "auditActionsAndGroups": [
+          "SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP",
+          "FAILED_DATABASE_AUTHENTICATION_GROUP",
+          "BATCH_COMPLETED_GROUP"
+        ],
+        "predicateExpression": "object_name = 'SensitiveData'",
+        "isAzureMonitorTargetEnabled": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-4799/providers/Microsoft.Sql/servers/blobauditingtest-6440/extendedAuditingSettings/default",
+        "name": "default",
+        "type": "Microsoft.Sql/servers/extendedAuditingSettings",
+        "properties": {
+          "state": "Enabled",
+          "storageEndpoint": "https://mystorage.blob.core.windows.net",
+          "retentionDays": 6,
+          "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
+          "isStorageSecondaryKeyInUse": false,
+          "queueDelayMs": 4000,
+          "auditActionsAndGroups": [
+            "SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP",
+            "FAILED_DATABASE_AUTHENTICATION_GROUP",
+            "BATCH_COMPLETED_GROUP"
+          ],
+          "predicateExpression": "object_name = 'SensitiveData'",
+          "isAzureMonitorTargetEnabled": true
+        }
+      }
+    },
+    "202": {
+      "startTime": "2017-11-22T09:34:54.72Z",
+      "operation": "UpsertServerEngineAuditingPolicy"
+    }
+  }
+}

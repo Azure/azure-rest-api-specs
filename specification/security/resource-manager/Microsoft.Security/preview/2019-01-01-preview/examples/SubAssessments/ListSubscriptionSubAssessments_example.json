@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "scope": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.ContainerRegistry/registries/myRegistry/providers/Microsoft.Security/assessments/dbd0cb49-b563-45e7-9724-889e799fa648/subAssessments/8c98f353-8b41-4e77-979b-6adeecd5d168",
+            "name": "8c98f353-8b41-4e77-979b-6adeecd5d168",
+            "type": "Microsoft.Security/assessments/subAssessments",
+            "properties": {
+              "displayName": "'Back Orifice' Backdoor",
+              "id": "1001",
+              "status": {
+                "code": "Unhealthy",
+                "cause": "",
+                "severity": "High",
+                "description": "The resource is unhealthy"
+              },
+              "resourceDetails": {
+                "source": "Azure",
+                "id": "repositories/asc/msi-connector/images/sha256:877a6f2a212c44021281f80cb1f4c73a09dce4e99a8cb8efcc03f7ce3c877a6f"
+              },
+              "remediation": "Use a recent anti-virus program to remove this backdoor and check your system regularly with anti-virus software.",
+              "impact": "3",
+              "category": "Backdoors and trojan horses",
+              "description": "The backdoor 'Back Orifice' was detected on this system.  The presence of this backdoor indicates that your system has already been compromised.  Unauthorized users can access your host at any time. Unauthorized users can take complete control of the host and manipulate data.  They can steal the data or even wipe out the host.",
+              "timeGenerated": "2019-06-23T12:20:08.7644808Z",
+              "additionalData": {
+                "assessedResourceType": "ContainerRegistryVulnerability",
+                "imageDigest": "c186fc44-3154-4ce2-ba18-b719d895c3b0",
+                "repositoryName": "myRepo",
+                "type": "Vulnerability",
+                "cvss": {
+                  "2.0": {
+                    "base": 10
+                  },
+                  "3.0": {
+                    "base": 10
+                  }
+                },
+                "patchable": true,
+                "cve": [
+                  {
+                    "title": "CVE-2019-12345",
+                    "link": "http://contoso.com"
+                  }
+                ],
+                "publishedTime": "2018-01-01T00:00:00.0000000Z",
+                "vendorReferences": [
+                  {
+                    "title": "Reference_1",
+                    "link": "http://contoso.com"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/ascdemoRG/providers/Microsoft.Sql/servers/sqlserver1demo/providers/Microsoft.Security/assessments/82e20e14-edc5-4373-bfc4-f13121257c37/subassessments/8fbe5054-e97c-3a7a-fda7-c8308ca8d3cf",
+            "name": "8fbe5054-e97c-3a7a-fda7-c8308ca8d3cf",
+            "type": "Microsoft.Security/assessments/subAssessments",
+            "properties": {
+              "id": "VA2064",
+              "displayName": "Database-level firewall rules should be tracked and maintained at a strict minimum",
+              "status": {
+                "code": "Healthy",
+                "severity": "High",
+                "cause": "Unknown"
+              },
+              "remediation": "Evaluate each of the database-level firewall rules. Remove any rules that grant unnecessary access and set the rest as a baseline. Deviations from the baseline will be identified and brought to your attention in subsequent scans.",
+              "impact": "Firewall rules should be strictly configured to allow access only to client computers that have a valid need to connect to the database. Any superfluous entries in the firewall may pose a threat by allowing an unauthorized source access to your database.",
+              "category": "SurfaceAreaReduction",
+              "description": "The Azure SQL Database-level firewall helps protect your data by preventing all access to your database until you specify which IP addresses have permission. Database-level firewall rules grant access to the specific database based on the originating IP address of each request.\n\nDatabase-level firewall rules for master",
+              "timeGenerated": "2019-06-23T12:20:08.7644808Z",
+              "resourceDetails": {
+                "source": "Azure",
+                "id": "/subscriptions/212f9889-769e-45ae-ab43-6da33674bd26/resourceGroups/ascdemoRG/providers/Microsoft.Sql/servers/sqlserver1demo/databases/database1"
+              },
+              "additionalData": {
+                "assessedResourceType": "SqlServerVulnerability",
+                "type": "AzureDatabase",
+                "query": "SELECT name\n    ,start_ip_address\n    ,end_ip_address\nFROM sys.database_firewall_rules",
+                "benchmarks": []
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

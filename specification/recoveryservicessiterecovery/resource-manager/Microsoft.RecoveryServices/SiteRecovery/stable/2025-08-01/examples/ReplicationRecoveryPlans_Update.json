@@ -1,23 +1,26 @@
 {
   "parameters": {
     "api-version": "2025-08-01",
+    "resourceName": "vault1",
+    "resourceGroupName": "resourceGroupPS1",
+    "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a",
+    "recoveryPlanName": "RPtest1",
     "input": {
       "properties": {
         "groups": [
           {
-            "endGroupActions": [],
             "groupType": "Shutdown",
             "replicationProtectedItems": [],
-            "startGroupActions": []
+            "startGroupActions": [],
+            "endGroupActions": []
           },
           {
-            "endGroupActions": [],
             "groupType": "Failover",
             "replicationProtectedItems": [],
-            "startGroupActions": []
+            "startGroupActions": [],
+            "endGroupActions": []
           },
           {
-            "endGroupActions": [],
             "groupType": "Boot",
             "replicationProtectedItems": [
               {
@@ -25,10 +28,10 @@
                 "virtualMachineId": "f8491e4f-817a-40dd-a90c-af773978c75b"
               }
             ],
-            "startGroupActions": []
+            "startGroupActions": [],
+            "endGroupActions": []
           },
           {
-            "endGroupActions": [],
             "groupType": "Boot",
             "replicationProtectedItems": [
               {
@@ -36,45 +39,48 @@
                 "virtualMachineId": "c0c14913-3d7a-48ea-9531-cc99e0e686e6"
               }
             ],
-            "startGroupActions": []
+            "startGroupActions": [],
+            "endGroupActions": []
           }
         ]
       }
-    },
-    "recoveryPlanName": "RPtest1",
-    "resourceGroupName": "resourceGroupPS1",
-    "resourceName": "vault1",
-    "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationRecoveryPlans/RPtest1",
         "name": "RPtest1",
         "type": "Microsoft.RecoveryServices/vaults/replicationRecoveryPlans",
-        "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationRecoveryPlans/RPtest1",
         "properties": {
+          "friendlyName": "RPtest1",
+          "primaryFabricId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1",
+          "primaryFabricFriendlyName": "cloud1",
+          "recoveryFabricId": "Microsoft Azure",
+          "recoveryFabricFriendlyName": "Microsoft Azure",
+          "failoverDeploymentModel": "ResourceManager",
+          "replicationProviders": [
+            "HyperVReplicaAzure"
+          ],
           "allowedOperations": [
             "PlannedFailover",
             "UnplannedFailover",
             "TestFailover"
           ],
-          "failoverDeploymentModel": "ResourceManager",
-          "friendlyName": "RPtest1",
           "groups": [
             {
-              "endGroupActions": [],
               "groupType": "Shutdown",
               "replicationProtectedItems": [],
-              "startGroupActions": []
+              "startGroupActions": [],
+              "endGroupActions": []
             },
             {
-              "endGroupActions": [],
               "groupType": "Failover",
               "replicationProtectedItems": [],
-              "startGroupActions": []
+              "startGroupActions": [],
+              "endGroupActions": []
             },
             {
-              "endGroupActions": [],
               "groupType": "Boot",
               "replicationProtectedItems": [
                 {
@@ -82,10 +88,10 @@
                   "virtualMachineId": "f8491e4f-817a-40dd-a90c-af773978c75b"
                 }
               ],
-              "startGroupActions": []
+              "startGroupActions": [],
+              "endGroupActions": []
             },
             {
-              "endGroupActions": [],
               "groupType": "Boot",
               "replicationProtectedItems": [
                 {
@@ -93,15 +99,9 @@
                   "virtualMachineId": "c0c14913-3d7a-48ea-9531-cc99e0e686e6"
                 }
               ],
-              "startGroupActions": []
+              "startGroupActions": [],
+              "endGroupActions": []
             }
-          ],
-          "primaryFabricFriendlyName": "cloud1",
-          "primaryFabricId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1",
-          "recoveryFabricFriendlyName": "Microsoft Azure",
-          "recoveryFabricId": "Microsoft Azure",
-          "replicationProviders": [
-            "HyperVReplicaAzure"
           ]
         }
       },
@@ -115,7 +115,5 @@
         "Retry-After": 30
       }
     }
-  },
-  "operationId": "ReplicationRecoveryPlans_Update",
-  "title": "Updates the given recovery plan."
+  }
 }

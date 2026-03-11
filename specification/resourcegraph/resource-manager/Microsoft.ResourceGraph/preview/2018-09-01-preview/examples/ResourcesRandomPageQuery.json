@@ -1,0 +1,62 @@
+{
+  "title": "Random page query",
+  "description": "A query on resources requesting the random page using skip token, top and skip overrides",
+  "parameters": {
+    "api-version": "2018-09-01-preview",
+    "query": {
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "query": "where name contains 'test' | project id, name, type, location",
+      "options": {
+        "$skipToken": "eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==",
+        "$top": 2,
+        "$skip": 10
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 386,
+        "count": 2,
+        "resultTruncated": "false",
+        "$skipToken": "eyAibm8yIjogImx1Y2syIiwgImJ1dDIiOiAibmljZTIiLCAidHJ5MiI6ICIhIiB9",
+        "data": {
+          "columns": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "type",
+              "type": "string"
+            },
+            {
+              "name": "location",
+              "type": "string"
+            }
+          ],
+          "rows": [
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG1/providers/Microsoft.Compute/disks/third_OsDisk_dddddbcb625a457bb69fe2abf5975820",
+              "third_OsDisk_dddddbcb625a457bb69fe2abf5975820",
+              "microsoft.compute/disks",
+              "eastus"
+            ],
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Automation/automationAccounts/CCTest",
+              "CCTest",
+              "microsoft.automation/automationaccounts",
+              "westcentralus"
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

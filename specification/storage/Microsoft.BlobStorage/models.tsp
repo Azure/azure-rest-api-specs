@@ -17,7 +17,7 @@ scalar base64Bytes extends bytes;
 /** The error response. */
 @error
 @mediaTypeHint("application/xml")
-model Error {
+model StorageError {
   /** The error code. */
   @header("x-ms-error-code")
   errorCode?: string;
@@ -369,14 +369,10 @@ model UserDelegationKey {
   @Xml.name("SignedTid") signedTid: uuid;
 
   /** The date-time the key is active. */
-  @encode("rfc7231")
-  @Xml.name("SignedStart")
-  signedStart: utcDateTime;
+  @Xml.name("SignedStart") signedStart: string;
 
   /** The date-time the key expires. */
-  @encode("rfc7231")
-  @Xml.name("SignedExpiry")
-  signedExpiry: utcDateTime;
+  @Xml.name("SignedExpiry") signedExpiry: string;
 
   /** Abbreviation of the Azure Storage service that accepts the key. */
   @Xml.name("SignedService") signedService: string;
@@ -1504,15 +1500,8 @@ alias ServerEncryptedResponseHeaderPrivate = {
 };
 
 /** The legal hold response header. */
-alias LegalHoldOptionalResponseHeader = {
-  /** Indicates whether the blob has a legal hold. */
-  @header("x-ms-legal-hold")
-  legalHold?: boolean;
-};
-
-/** The legal hold response header. */
 alias LegalHoldResponseHeader = {
-  /** Indicates whether the blob has a legal hold. */
+  /** Specifies the legal hold status to set on the blob. */
   @header("x-ms-legal-hold")
   legalHold: boolean;
 };
@@ -2313,6 +2302,7 @@ alias BodyParameter = {
 alias MultipartBodyParameter = {
   /** The body of the request. */
   @multipartBody body: {
+    name: HttpPart<string>;
     body: HttpPart<bytes>;
   };
 };

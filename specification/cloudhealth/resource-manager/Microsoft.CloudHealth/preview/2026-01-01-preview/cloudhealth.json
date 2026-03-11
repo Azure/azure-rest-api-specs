@@ -2310,31 +2310,7 @@
         "azureResourceId"
       ]
     },
-    "DependenciesAggregationUnit": {
-      "type": "string",
-      "description": "Unit type for dependency aggregation thresholds.",
-      "enum": [
-        "Absolute",
-        "Percentage"
-      ],
-      "x-ms-enum": {
-        "name": "DependenciesAggregationUnit",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Absolute",
-            "value": "Absolute",
-            "description": "Threshold is an absolute count of entities."
-          },
-          {
-            "name": "Percentage",
-            "value": "Percentage",
-            "description": "Threshold is a percentage of entities (0-100)."
-          }
-        ]
-      }
-    },
-    "DependenciesSignalGroupV2": {
+    "DependenciesSignalGroup": {
       "type": "object",
       "description": "Properties for dependent entities, i.e. child entities",
       "properties": {
@@ -2344,8 +2320,7 @@
           "default": "WorstOf",
           "enum": [
             "WorstOf",
-            "MinHealthy",
-            "MaxNotHealthy"
+            "Thresholds"
           ],
           "x-ms-enum": {
             "name": "DependenciesAggregationType",
@@ -2357,38 +2332,20 @@
                 "description": "Default behavior: Worst child health state is propagated."
               },
               {
-                "name": "MinHealthy",
-                "value": "MinHealthy",
-                "description": "Healthy if the count/percentage of healthy children meets the threshold."
-              },
-              {
-                "name": "MaxNotHealthy",
-                "value": "MaxNotHealthy",
-                "description": "Healthy if the count/percentage of not-healthy children stays below the threshold."
+                "name": "Thresholds",
+                "value": "Thresholds",
+                "description": "Based on configurable thresholds."
               }
             ]
           }
         },
         "degradedThreshold": {
-          "type": "number",
-          "format": "double",
-          "description": "Degraded threshold for aggregation. For MinHealthy: parent is degraded when healthy count/percentage falls to or below this value. For MaxNotHealthy: parent is degraded when not-healthy count/percentage reaches or exceeds this value. Optional — if not set, there is no degraded state (transitions directly from Healthy to Unhealthy).",
-          "minimum": 0
+          "type": "string",
+          "description": "Degraded threshold for aggregating the propagated health state of child dependencies. Can be either an absolute number that is greater than 0, or a percentage between 1-100%. The entity will be considered degraded when the number of not healthy child dependents (unhealthy, degraded, unknown) is equal to or above the threshold value. Must only be set when AggregationType is 'Thresholds'."
         },
         "unhealthyThreshold": {
-          "type": "number",
-          "format": "double",
-          "description": "Unhealthy threshold for aggregation. For MinHealthy: parent is unhealthy when healthy count/percentage falls to or below this value. For MaxNotHealthy: parent is unhealthy when not-healthy count/percentage reaches or exceeds this value. Required when aggregationType is MinHealthy or MaxNotHealthy.",
-          "minimum": 0
-        },
-        "unit": {
-          "$ref": "#/definitions/DependenciesAggregationUnit",
-          "description": "Unit type for the aggregation thresholds. Required when aggregationType is MinHealthy or MaxNotHealthy."
-        },
-        "ignoreUnknown": {
-          "type": "boolean",
-          "description": "If true, children with Unknown health state are excluded from aggregation calculations. Defaults to true.",
-          "default": true
+          "type": "string",
+          "description": "Unhealthy threshold for aggregating the propagated health state of child dependencies. Can be either an absolute number that is greater than 0, or a percentage between 1-100%. The entity will be considered unhealthy when the number of not healthy child dependents (unhealthy, degraded, unknown) is equal to or above the threshold value. Must only be set when AggregationType is 'Thresholds'."
         }
       },
       "required": [
@@ -2507,6 +2464,12 @@
         "specification": {
           "$ref": "#/definitions/DiscoveryRuleSpecification",
           "description": "Specification of the discovery rule defining how entities are discovered."
+        },
+        "deletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the discovery rule was (soft-)deleted.",
+          "readOnly": true
         },
         "error": {
           "$ref": "#/definitions/DiscoveryError",
@@ -2776,6 +2739,12 @@
           "description": "Discovered by which discovery rule. If set, the entity cannot be deleted manually.",
           "readOnly": true
         },
+        "deletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the entity was (soft-)deleted",
+          "readOnly": true
+        },
         "healthState": {
           "$ref": "#/definitions/HealthState",
           "description": "Health state of this entity",
@@ -2984,7 +2953,7 @@
           "$ref": "#/definitions/HealthReportEvaluationRule",
           "description": "Evaluation rules that were used to determine the reported health state"
         },
-        "expiresInMinutes": {
+        "expiresIn": {
           "type": "integer",
           "format": "int32",
           "description": "Number of minutes until the health report expires. Defaults to 60 (1 hour) if not specified.",
@@ -3519,6 +3488,12 @@
           "$ref": "#/definitions/discoveryRuleName",
           "description": "Discovered by which discovery rule. If set, the relationship cannot be deleted manually.",
           "readOnly": true
+        },
+        "deletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the relationship was (soft-)deleted",
+          "readOnly": true
         }
       },
       "required": [
@@ -3719,6 +3694,12 @@
         "evaluationRules": {
           "$ref": "#/definitions/EvaluationRule",
           "description": "Evaluation rules for the signal definition"
+        },
+        "deletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the signal definition was (soft-)deleted",
+          "readOnly": true
         }
       },
       "discriminator": "signalKind",
@@ -3744,7 +3725,7 @@
           "description": "Azure Monitor Workspace Signal Group"
         },
         "dependencies": {
-          "$ref": "#/definitions/DependenciesSignalGroupV2",
+          "$ref": "#/definitions/DependenciesSignalGroup",
           "description": "Settings for dependency signals to control how the health state of child entities influences the health state of the parent entity."
         },
         "external": {

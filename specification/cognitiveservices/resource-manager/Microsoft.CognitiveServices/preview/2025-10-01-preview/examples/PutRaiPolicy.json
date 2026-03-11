@@ -1,11 +1,14 @@
 {
-  "operationId": "RaiPolicies_CreateOrUpdate",
   "parameters": {
-    "accountName": "accountName",
     "api-version": "2025-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "raiPolicyName": "raiPolicyName",
     "raiPolicy": {
       "properties": {
         "basePolicyName": "Microsoft.Default",
+        "mode": "Asynchronous_filter",
         "contentFilters": [
           {
             "name": "Hate",
@@ -66,36 +69,31 @@
           {
             "name": "Jailbreak",
             "blocking": true,
-            "enabled": true,
-            "source": "Prompt"
+            "source": "Prompt",
+            "enabled": true
           },
           {
             "name": "Protected Material Text",
             "blocking": true,
-            "enabled": true,
-            "source": "Completion"
+            "source": "Completion",
+            "enabled": true
           },
           {
             "name": "Protected Material Code",
             "blocking": true,
-            "enabled": true,
-            "source": "Completion"
+            "source": "Completion",
+            "enabled": true
           },
           {
             "name": "Profanity",
             "blocking": true,
-            "enabled": true,
-            "source": "Prompt"
+            "source": "Prompt",
+            "enabled": true
           }
-        ],
-        "mode": "Asynchronous_filter"
+        ]
       }
-    },
-    "raiPolicyName": "raiPolicyName",
-    "resourceGroupName": "resourceGroupName",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
-  "title": "PutRaiPolicy",
   "responses": {
     "200": {
       "body": {
@@ -103,6 +101,7 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiPolicies/raiPolicyName",
         "properties": {
           "basePolicyName": "Microsoft.Default",
+          "mode": "Asynchronous_filter",
           "contentFilters": [
             {
               "name": "Hate",
@@ -163,29 +162,28 @@
             {
               "name": "Jailbreak",
               "blocking": true,
-              "enabled": true,
-              "source": "Prompt"
+              "source": "Prompt",
+              "enabled": true
             },
             {
               "name": "Protected Material Text",
               "blocking": true,
-              "enabled": true,
-              "source": "Completion"
+              "source": "Completion",
+              "enabled": true
             },
             {
               "name": "Protected Material Code",
               "blocking": true,
-              "enabled": true,
-              "source": "Completion"
+              "source": "Completion",
+              "enabled": true
             },
             {
               "name": "Profanity",
               "blocking": true,
-              "enabled": true,
-              "source": "Prompt"
+              "source": "Prompt",
+              "enabled": true
             }
-          ],
-          "mode": "Asynchronous_filter"
+          ]
         }
       }
     },
@@ -195,6 +193,7 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiPolicies/raiPolicyName",
         "properties": {
           "basePolicyName": "Microsoft.Default",
+          "mode": "Asynchronous_filter",
           "contentFilters": [
             {
               "name": "Hate",
@@ -255,29 +254,28 @@
             {
               "name": "Jailbreak",
               "blocking": true,
-              "enabled": true,
-              "source": "Prompt"
+              "source": "Prompt",
+              "enabled": true
             },
             {
               "name": "Protected Material Text",
               "blocking": true,
-              "enabled": true,
-              "source": "Completion"
+              "source": "Completion",
+              "enabled": true
             },
             {
               "name": "Protected Material Code",
               "blocking": true,
-              "enabled": true,
-              "source": "Completion"
+              "source": "Completion",
+              "enabled": true
             },
             {
               "name": "Profanity",
               "blocking": true,
-              "enabled": true,
-              "source": "Prompt"
+              "source": "Prompt",
+              "enabled": true
             }
-          ],
-          "mode": "Asynchronous_filter"
+          ]
         }
       }
     }

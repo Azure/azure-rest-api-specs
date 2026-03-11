@@ -1,13 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApplicationGroup.tsp";
 
 using TypeSpec.Rest;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -42,7 +40,16 @@ interface Applications {
    * Update an application.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSyncWithOptionalBody<Application, ApplicationPatch>;
+  update is ArmCustomPatchSync<
+    Application,
+    ApplicationPatch,
+    Request = {
+      /**
+       * The resource properties to be updated
+       */
+      @bodyRoot application?: ApplicationPatch;
+    }
+  >;
 
   /**
    * Remove an application.
@@ -86,4 +93,3 @@ interface Applications {
 @@doc(Applications.createOrUpdate::parameters.resource,
   "Object containing Application definitions."
 );
-@@clientName(Applications.update::parameters.body, "application");

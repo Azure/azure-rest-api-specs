@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sjName",
+    "outputName": "azureFunction1",
+    "output": {
+      "properties": {
+        "datasource": {
+          "type": "Microsoft.AzureFunction",
+          "properties": {
+            "functionName": "differentFunctionName"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "f489d6f3-fcd5-4bcb-b642-81e987ee16d6"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sjName/outputs/azureFunction1",
+        "name": "azureFunction1",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.AzureFunction",
+            "properties": {
+              "functionAppName": "functionappforasaautomation",
+              "functionName": "differentFunctionName",
+              "apiKey": null,
+              "maxBatchSize": 256,
+              "maxBatchCount": 100
+            }
+          }
+        }
+      }
+    }
+  }
+}

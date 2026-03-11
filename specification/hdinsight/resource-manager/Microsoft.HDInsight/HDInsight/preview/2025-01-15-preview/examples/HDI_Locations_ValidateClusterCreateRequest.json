@@ -1,113 +1,111 @@
 {
   "parameters": {
-    "api-version": "2025-01-15-preview",
     "location": "southcentralus",
+    "api-version": "2025-01-15-preview",
+    "subscriptionId": "subid",
     "parameters": {
       "name": "testclustername",
       "type": "Microsoft.HDInsight/clusters",
-      "fetchAaddsResource": false,
       "location": "southcentralus",
+      "tags": {},
       "properties": {
+        "clusterVersion": "4.0",
+        "osType": "Linux",
+        "tier": "Standard",
         "clusterDefinition": {
+          "kind": "spark",
           "componentVersion": {
             "Spark": "2.4"
           },
           "configurations": {
             "gateway": {
               "restAuthCredential.isEnabled": true,
-              "restAuthCredential.password": "**********",
-              "restAuthCredential.username": "admin"
+              "restAuthCredential.username": "admin",
+              "restAuthCredential.password": "**********"
             }
-          },
-          "kind": "spark"
+          }
         },
-        "clusterVersion": "4.0",
-        "computeProfile": {
-          "roles": [
-            {
-              "name": "headnode",
-              "autoscale": null,
-              "dataDisksGroups": null,
-              "hardwareProfile": {
-                "vmSize": "Standard_E8_V3"
-              },
-              "minInstanceCount": 1,
-              "osProfile": {
-                "linuxOperatingSystemProfile": {
-                  "password": "********",
-                  "username": "sshuser"
-                }
-              },
-              "scriptActions": [],
-              "targetInstanceCount": 2,
-              "virtualNetworkProfile": null
-            },
-            {
-              "name": "workernode",
-              "autoscale": null,
-              "dataDisksGroups": null,
-              "hardwareProfile": {
-                "vmSize": "Standard_E8_V3"
-              },
-              "osProfile": {
-                "linuxOperatingSystemProfile": {
-                  "password": "********",
-                  "username": "sshuser"
-                }
-              },
-              "scriptActions": [],
-              "targetInstanceCount": 4,
-              "virtualNetworkProfile": null
-            },
-            {
-              "name": "zookeepernode",
-              "autoscale": null,
-              "dataDisksGroups": null,
-              "hardwareProfile": {
-                "vmSize": "Standard_D13_V2"
-              },
-              "minInstanceCount": 1,
-              "osProfile": {
-                "linuxOperatingSystemProfile": {
-                  "password": "**********",
-                  "username": "sshuser"
-                }
-              },
-              "scriptActions": [],
-              "targetInstanceCount": 3,
-              "virtualNetworkProfile": null
-            }
-          ]
-        },
-        "minSupportedTlsVersion": "1.2",
-        "osType": "Linux",
         "storageProfile": {
           "storageaccounts": [
             {
               "name": "storagename.blob.core.windows.net",
-              "container": "contianername",
-              "enableSecureChannel": true,
               "isDefault": true,
+              "container": "contianername",
               "key": "*******",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/storagename"
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/storagename",
+              "enableSecureChannel": true
             }
           ]
         },
-        "tier": "Standard"
+        "computeProfile": {
+          "roles": [
+            {
+              "autoscale": null,
+              "name": "headnode",
+              "minInstanceCount": 1,
+              "targetInstanceCount": 2,
+              "hardwareProfile": {
+                "vmSize": "Standard_E8_V3"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "********"
+                }
+              },
+              "virtualNetworkProfile": null,
+              "scriptActions": [],
+              "dataDisksGroups": null
+            },
+            {
+              "autoscale": null,
+              "name": "workernode",
+              "targetInstanceCount": 4,
+              "hardwareProfile": {
+                "vmSize": "Standard_E8_V3"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "********"
+                }
+              },
+              "virtualNetworkProfile": null,
+              "scriptActions": [],
+              "dataDisksGroups": null
+            },
+            {
+              "autoscale": null,
+              "name": "zookeepernode",
+              "minInstanceCount": 1,
+              "targetInstanceCount": 3,
+              "hardwareProfile": {
+                "vmSize": "Standard_D13_V2"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********"
+                }
+              },
+              "virtualNetworkProfile": null,
+              "scriptActions": [],
+              "dataDisksGroups": null
+            }
+          ]
+        },
+        "minSupportedTlsVersion": "1.2"
       },
-      "tags": {},
+      "fetchAaddsResource": false,
       "tenantId": "00000000-0000-0000-0000-000000000000"
-    },
-    "subscriptionId": "subid"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "estimatedCreationDuration": "PT20M",
-        "validationErrors": []
+        "validationErrors": [],
+        "estimatedCreationDuration": "PT20M"
       }
     }
-  },
-  "operationId": "Locations_ValidateClusterCreateRequest",
-  "title": "Get the subscription usages for specific location"
+  }
 }

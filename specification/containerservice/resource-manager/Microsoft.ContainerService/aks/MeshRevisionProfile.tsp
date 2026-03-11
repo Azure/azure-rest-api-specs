@@ -1,17 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
-import "./CommonModels.tsp";
+import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Rest;
 
 namespace Microsoft.ContainerService;
-
-// =============================================================================
-// MeshRevisionProfile resource and operations
-// =============================================================================
-
 /**
  * Mesh revision profile for a mesh.
  */
@@ -24,13 +19,6 @@ model MeshRevisionProfile is ProxyResource<MeshRevisionProfileProperties> {
     NamePattern = "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
   >;
 }
-
-@@maxLength(MeshRevisionProfile.name, 24);
-@@minLength(MeshRevisionProfile.name, 1);
-@@doc(MeshRevisionProfile.name, "The mode of the mesh.");
-@@doc(MeshRevisionProfile.properties,
-  "Mesh revision profile properties for a mesh"
-);
 
 @armResourceOperations(#{ omitTags: true })
 interface MeshRevisionProfiles {
@@ -56,21 +44,9 @@ interface MeshRevisionProfiles {
   >;
 }
 
-// =============================================================================
-// MeshRevisionProfile models
-// =============================================================================
-
-/**
- * Holds an array of MeshRevisionsProfiles
- */
-model MeshRevisionProfileList is Azure.Core.Page<MeshRevisionProfile>;
-
-/**
- * Mesh revision profile properties for a mesh
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
-model MeshRevisionProfileProperties {
-  /** Available mesh revisions. */
-  @identifiers(#[])
-  meshRevisions?: MeshRevision[];
-}
+@@maxLength(MeshRevisionProfile.name, 24);
+@@minLength(MeshRevisionProfile.name, 1);
+@@doc(MeshRevisionProfile.name, "The mode of the mesh.");
+@@doc(MeshRevisionProfile.properties,
+  "Mesh revision profile properties for a mesh"
+);

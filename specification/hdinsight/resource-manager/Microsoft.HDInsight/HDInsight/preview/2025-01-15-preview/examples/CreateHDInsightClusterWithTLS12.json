@@ -1,104 +1,109 @@
 {
   "parameters": {
-    "api-version": "2025-01-15-preview",
     "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2025-01-15-preview",
+    "subscriptionId": "subid",
     "parameters": {
       "properties": {
+        "clusterVersion": "3.6",
+        "osType": "Linux",
+        "tier": "Standard",
         "clusterDefinition": {
+          "kind": "Hadoop",
           "configurations": {
             "gateway": {
               "restAuthCredential.isEnabled": true,
-              "restAuthCredential.password": "**********",
-              "restAuthCredential.username": "admin"
+              "restAuthCredential.username": "admin",
+              "restAuthCredential.password": "**********"
             }
-          },
-          "kind": "Hadoop"
+          }
         },
-        "clusterVersion": "3.6",
         "computeProfile": {
           "roles": [
             {
               "name": "headnode",
+              "targetInstanceCount": 2,
               "hardwareProfile": {
                 "vmSize": "Large"
               },
               "osProfile": {
                 "linuxOperatingSystemProfile": {
-                  "password": "**********",
-                  "username": "sshuser"
+                  "username": "sshuser",
+                  "password": "**********"
                 }
-              },
-              "targetInstanceCount": 2
+              }
             },
             {
               "name": "workernode",
+              "targetInstanceCount": 3,
               "hardwareProfile": {
                 "vmSize": "Large"
               },
               "osProfile": {
                 "linuxOperatingSystemProfile": {
-                  "password": "**********",
-                  "username": "sshuser"
+                  "username": "sshuser",
+                  "password": "**********"
                 }
-              },
-              "targetInstanceCount": 3
+              }
             },
             {
               "name": "zookeepernode",
+              "targetInstanceCount": 3,
               "hardwareProfile": {
                 "vmSize": "Small"
               },
               "osProfile": {
                 "linuxOperatingSystemProfile": {
-                  "password": "**********",
-                  "username": "sshuser"
+                  "username": "sshuser",
+                  "password": "**********"
                 }
-              },
-              "targetInstanceCount": 3
+              }
             }
           ]
         },
-        "minSupportedTlsVersion": "1.2",
-        "osType": "Linux",
         "storageProfile": {
           "storageaccounts": [
             {
               "name": "mystorage.blob.core.windows.net",
-              "container": "default8525",
-              "enableSecureChannel": true,
               "isDefault": true,
-              "key": "storagekey"
+              "container": "default8525",
+              "key": "storagekey",
+              "enableSecureChannel": true
             }
           ]
         },
-        "tier": "Standard"
+        "minSupportedTlsVersion": "1.2"
       }
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "subid"
+    }
   },
   "responses": {
     "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/azureasyncoperations/create?api-version=2025-01-15-preview"
+      },
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
         "name": "cluster1",
         "type": "Microsoft.HDInsight/clusters",
-        "etag": "3b76ce3d-892c-4036-9d8b-8ade18ba7a4b",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
         "location": "South Central US",
+        "etag": "3b76ce3d-892c-4036-9d8b-8ade18ba7a4b",
+        "tags": null,
         "properties": {
+          "clusterVersion": "3.6.1000.67",
+          "osType": "Linux",
           "clusterDefinition": {
             "blueprint": "https://blueprints.azurehdinsight.net/hadoop-3.6.1000.67.2001080246.json",
+            "kind": "Hadoop",
             "componentVersion": {
               "Hadoop": "2.7"
-            },
-            "kind": "Hadoop"
+            }
           },
-          "clusterState": "Running",
-          "clusterVersion": "3.6.1000.67",
           "computeProfile": {
             "roles": [
               {
                 "name": "headnode",
+                "targetInstanceCount": 2,
                 "hardwareProfile": {
                   "vmSize": "standard_a4_v2"
                 },
@@ -106,11 +111,11 @@
                   "linuxOperatingSystemProfile": {
                     "username": "sshuser"
                   }
-                },
-                "targetInstanceCount": 2
+                }
               },
               {
                 "name": "workernode",
+                "targetInstanceCount": 3,
                 "hardwareProfile": {
                   "vmSize": "standard_a4_v2"
                 },
@@ -118,11 +123,11 @@
                   "linuxOperatingSystemProfile": {
                     "username": "sshuser"
                   }
-                },
-                "targetInstanceCount": 3
+                }
               },
               {
                 "name": "zookeepernode",
+                "targetInstanceCount": 3,
                 "hardwareProfile": {
                   "vmSize": "standard_a2_v2"
                 },
@@ -130,41 +135,34 @@
                   "linuxOperatingSystemProfile": {
                     "username": "sshuser"
                   }
-                },
-                "targetInstanceCount": 3
+                }
               }
             ]
+          },
+          "provisioningState": "Succeeded",
+          "clusterState": "Running",
+          "createdDate": "2020-01-10T08:36:39.153",
+          "quotaInfo": {
+            "coresUsed": 20
           },
           "connectivityEndpoints": [
             {
               "name": "SSH",
+              "protocol": "TCP",
               "location": "cluster1-ssh.azurehdinsight.net",
-              "port": 22,
-              "protocol": "TCP"
+              "port": 22
             },
             {
               "name": "HTTPS",
+              "protocol": "TCP",
               "location": "cluster1.azurehdinsight.net",
-              "port": 443,
-              "protocol": "TCP"
+              "port": 443
             }
           ],
-          "createdDate": "2020-01-10T08:36:39.153",
-          "minSupportedTlsVersion": "1.2",
-          "osType": "Linux",
-          "provisioningState": "Succeeded",
-          "quotaInfo": {
-            "coresUsed": 20
-          },
-          "tier": "Standard"
-        },
-        "tags": null
-      },
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/azureasyncoperations/create?api-version=2025-01-15-preview"
+          "tier": "Standard",
+          "minSupportedTlsVersion": "1.2"
+        }
       }
     }
-  },
-  "operationId": "Clusters_Create",
-  "title": "Create cluster with TLS 1.2"
+  }
 }

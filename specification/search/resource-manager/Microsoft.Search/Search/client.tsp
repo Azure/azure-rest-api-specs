@@ -177,7 +177,7 @@ op searchCreateOrUpdateCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
-@patch(#{ implicitOptionality: false })
+@patch(#{ implicitOptionality: true })
 @action("searchUpdateCustomization")
 op searchUpdateCustomization(
   ...ApiVersionParameter,

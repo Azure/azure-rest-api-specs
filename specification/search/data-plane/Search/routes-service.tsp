@@ -495,29 +495,14 @@ interface Indexes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/indexes")
-  @sharedRoute
   @list
   @get
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
-    },
-    ListIndexesResult
-  >;
-
-  /** Lists all indexes available for a search service. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  @route("/indexes")
-  @sharedRoute
-  @list
-  @get
-  listWithSelectedProperties is SearchOperation<
-    {
-      ...acceptHeaderMinimal;
       ...selectQuery;
     },
-    ListIndexesSelectedResult
+    ListIndexesResult
   >;
 
   /** Creates a new search index or updates an index if it already exists. */

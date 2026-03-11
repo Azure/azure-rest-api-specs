@@ -1,11 +1,11 @@
 {
   "parameters": {
-    "api-version": "2025-07-15-preview",
-    "eventSubscriptionName": "exampleEventSubscriptionName",
-    "namespaceName": "exampleNamespace",
-    "resourceGroupName": "examplerg",
     "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-    "topicName": "exampleNamespaceTopic"
+    "resourceGroupName": "examplerg",
+    "namespaceName": "exampleNamespace",
+    "topicName": "exampleNamespaceTopic",
+    "eventSubscriptionName": "exampleEventSubscriptionName",
+    "api-version": "2025-07-15-preview"
   },
   "responses": {
     "200": {
@@ -15,8 +15,8 @@
             "name": "header1",
             "type": "Static",
             "properties": {
-              "isSecret": false,
-              "value": "NormalValue"
+              "value": "NormalValue",
+              "isSecret": false
             }
           },
           {
@@ -30,14 +30,12 @@
             "name": "header3",
             "type": "Static",
             "properties": {
-              "isSecret": true,
-              "value": "mySecretValue"
+              "value": "mySecretValue",
+              "isSecret": true
             }
           }
         ]
       }
     }
-  },
-  "operationId": "NamespaceTopicEventSubscriptions_GetDeliveryAttributes",
-  "title": "NamespaceTopicEventSubscriptions_GetDeliveryAttributes"
+  }
 }

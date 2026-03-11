@@ -1,0 +1,147 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "ConstosoRG",
+    "cloudServiceName": "{cs-name}",
+    "api-version": "2020-10-01-preview",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "networkProfile": {
+          "loadBalancerConfigurations": [
+            {
+              "properties": {
+                "frontendIPConfigurations": [
+                  {
+                    "properties": {
+                      "publicIPAddress": {
+                        "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/myPublicIP"
+                      }
+                    },
+                    "name": "myfe"
+                  }
+                ]
+              },
+              "name": "myLoadBalancer"
+            }
+          ]
+        },
+        "roleProfile": {
+          "roles": [
+            {
+              "sku": {
+                "name": "Standard_D1_v2",
+                "capacity": 1,
+                "tier": "Standard"
+              },
+              "name": "ContosoFrontend"
+            }
+          ]
+        },
+        "configuration": "{ServiceConfiguration}",
+        "packageUrl": "{PackageUrl}",
+        "upgradeMode": "Auto"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{cs-name}",
+        "id": "/subscriptions/5393f919-a68a-43d0-9063-4b2bda6bffdf/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}",
+        "type": "Microsoft.Compute/cloudServices",
+        "location": "westus",
+        "properties": {
+          "packageUrl": "{PackageUrl}",
+          "configuration": "{ServiceConfiguration}",
+          "upgradeMode": "Auto",
+          "roleProfile": {
+            "roles": [
+              {
+                "name": "ContosoFrontend",
+                "sku": {
+                  "name": "Standard_D1_v2",
+                  "tier": "Standard",
+                  "capacity": 1
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "secrets": []
+          },
+          "networkProfile": {
+            "loadBalancerConfigurations": [
+              {
+                "properties": {
+                  "frontendIPConfigurations": [
+                    {
+                      "properties": {
+                        "publicIPAddress": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/myPublicIP"
+                        }
+                      },
+                      "name": "myfe"
+                    }
+                  ]
+                },
+                "name": "myLoadBalancer"
+              }
+            ]
+          },
+          "provisioningState": "Updating",
+          "uniqueId": "14d10b45-ced7-42ef-a406-50a3df2cea7d"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{cs-name}",
+        "id": "/subscriptions/5393f919-a68a-43d0-9063-4b2bda6bffdf/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}",
+        "type": "Microsoft.Compute/cloudServices",
+        "location": "westus",
+        "properties": {
+          "packageUrl": "{PackageUrl}",
+          "configuration": "{ServiceConfiguration}",
+          "upgradeMode": "Auto",
+          "roleProfile": {
+            "roles": [
+              {
+                "name": "ContosoFrontend",
+                "sku": {
+                  "name": "Standard_D1_v2",
+                  "tier": "Standard",
+                  "capacity": 1
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "secrets": []
+          },
+          "networkProfile": {
+            "loadBalancerConfigurations": [
+              {
+                "properties": {
+                  "frontendIPConfigurations": [
+                    {
+                      "properties": {
+                        "publicIPAddress": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/myPublicIP"
+                        }
+                      },
+                      "name": "myfe"
+                    }
+                  ]
+                },
+                "name": "myLoadBalancer"
+              }
+            ]
+          },
+          "provisioningState": "Creating",
+          "uniqueId": "14d10b45-ced7-42ef-a406-50a3df2cea7d"
+        }
+      }
+    }
+  }
+}

@@ -362,3 +362,8 @@ using Microsoft.RecoveryServices;
 @@hierarchyBuilding(ValidateIaasVMRestoreOperationRequest,
   ValidateRestoreOperationRequest
 );
+
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "ArmErrorDetail",
+  "python,javascript"
+);

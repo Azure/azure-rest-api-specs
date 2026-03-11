@@ -2,14 +2,12 @@
   "title": "StacQueryables_Create",
   "operationId": "StacQueryables_Create",
   "parameters": {
-    "collectionId": "naip-atl",
-    "api-version": "2025-04-30-preview",
+    "collectionId": "36fcb8da-9b15-49e0-b400-0d2e751e2061",
     "body": [
       {
-        "name": "test:property",
-        "data_type": "number",
-        "create_index": false,
+        "name": "eo:clown_cover",
         "definition": {
+          "description": "Like cloud cover, but with more party tricks",
           "data_type": "number"
         }
       }
@@ -19,14 +17,16 @@
     "201": {
       "body": [
         {
-          "name": "test:property",
+          "name": "eo:clown_cover",
           "definition": {
-            "data_type": "number"
+            "data_type": "number",
+            "description": "Like cloud cover, but with more party tricks"
           },
           "create_index": false,
-          "data_type": "number"
+          "data_type": "text"
         }
       ]
-    }
+    },
+    "204": {}
   }
 }

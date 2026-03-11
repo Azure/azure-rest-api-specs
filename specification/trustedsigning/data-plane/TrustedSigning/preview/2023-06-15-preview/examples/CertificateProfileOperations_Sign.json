@@ -1,0 +1,35 @@
+{
+  "operationId": "CertificateProfileOperations_Sign",
+  "title": "Submit a codesign operation.",
+  "parameters": {
+    "accountName": "YourAccountName",
+    "certificateProfile": "YourCertificateProfileName",
+    "api-version": "2023-06-15-preview",
+    "x-correlation-id": "9797c668-5b3c-4586-8e0c-2768c8160bad",
+    "client-version": "serviceName@1.0.0.0",
+    "body": {
+      "signatureAlgorithm": "RS256",
+      "digest": "TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQ=",
+      "fileHashList": [
+        "Y29uc2VjdGV0dXIgYWRpcGlzY2luZyBlbGl0",
+        "c2VkIGRvIGVpdXNtb2QgdGVtcG9yIGluY2lkaWR1bnQ="
+      ],
+      "authenticodeHashList": [
+        "dXQgbGFib3JlIGV0IGRvbG9yZSBtYWduYSBhbGlxdWE=",
+        "IFV0IGVuaW0gYWQgbWluaW0gdmVuaWFt"
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-location": "https://localhost:5001/codesigningaccount/account/certificateprofile/profile/sign/76f60a30-d088-42e0-b16d-b76b88d3cbe1"
+      },
+      "body": {
+        "id": "76f60a30-d088-42e0-b16d-b76b88d3cbe1",
+        "status": "In Progress",
+        "result": {}
+      }
+    }
+  }
+}

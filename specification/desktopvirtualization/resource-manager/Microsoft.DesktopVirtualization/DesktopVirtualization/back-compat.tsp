@@ -129,22 +129,3 @@ using Microsoft.DesktopVirtualization;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserSession.properties,
   "autorest"
 );
-
-@@Azure.ClientGenerator.Core.clientName(AppAttachPackageInfo.`import`::parameters.body,
-  "importPackageInfoRequest"
-);
-@@doc(AppAttachPackageInfo.`import`::parameters.body,
-  "Information to import app attach package"
-);
-@@Azure.ClientGenerator.Core.clientName(MSIXImages.expand::parameters.body,
-  "msixImageURI"
-);
-@@doc(MSIXImages.expand::parameters.body,
-  "Represents URI referring to MSIX Image"
-);
-@@Azure.ClientGenerator.Core.clientName(InitiateSessionHostUpdate.post::parameters.body,
-  "updateSessionHostsRequestBody"
-);
-@@doc(InitiateSessionHostUpdate.post::parameters.body,
-  "The resource properties to be updated"
-);

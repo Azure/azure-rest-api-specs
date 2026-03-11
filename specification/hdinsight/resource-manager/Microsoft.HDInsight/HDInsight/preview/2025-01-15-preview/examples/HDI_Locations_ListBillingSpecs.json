@@ -1,28 +1,45 @@
 {
   "parameters": {
-    "api-version": "2025-01-15-preview",
     "location": "East US 2",
+    "api-version": "2025-01-15-preview",
     "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
+        "vmSizes": [
+          "A5",
+          "A6",
+          "A7"
+        ],
+        "vmSizeFilters": [
+          {
+            "filterMode": "Exclude",
+            "regions": null,
+            "clusterFlavors": null,
+            "nodeTypes": null,
+            "clusterVersions": null,
+            "osType": null,
+            "vmSizes": null
+          }
+        ],
         "billingResources": [
           {
+            "region": "East US 2",
             "billingMeters": [],
-            "diskBillingMeters": [],
-            "region": "East US 2"
+            "diskBillingMeters": []
           },
           {
+            "region": "default",
             "billingMeters": [
               {
-                "meter": "11111111-1111-1111-1111-111111111111",
                 "meterParameter": "default",
+                "meter": "11111111-1111-1111-1111-111111111111",
                 "unit": "CoreHours"
               },
               {
-                "meter": "11111111-1111-1111-1111-111111111111",
                 "meterParameter": "Kafka",
+                "meter": "11111111-1111-1111-1111-111111111111",
                 "unit": "CoreHours"
               }
             ],
@@ -37,29 +54,10 @@
                 "sku": "All",
                 "tier": "Standard"
               }
-            ],
-            "region": "default"
+            ]
           }
-        ],
-        "vmSizeFilters": [
-          {
-            "clusterFlavors": null,
-            "clusterVersions": null,
-            "filterMode": "Exclude",
-            "nodeTypes": null,
-            "osType": null,
-            "regions": null,
-            "vmSizes": null
-          }
-        ],
-        "vmSizes": [
-          "A5",
-          "A6",
-          "A7"
         ]
       }
     }
-  },
-  "operationId": "Locations_ListBillingSpecs",
-  "title": "Get the subscription billingSpecs for the specified location"
+  }
 }

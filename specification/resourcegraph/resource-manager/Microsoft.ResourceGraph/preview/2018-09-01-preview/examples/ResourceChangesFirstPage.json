@@ -1,0 +1,42 @@
+{
+  "title": "Resource Changes Query: First Page",
+  "description": "A resource changes query requesting the first page.",
+  "parameters": {
+    "api-version": "2018-09-01-preview",
+    "parameters": {
+      "resourceId": "/subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount",
+      "interval": {
+        "start": "2018-10-30T12:09:03.141Z",
+        "end": "2018-10-31T12:09:03.141Z"
+      },
+      "$top": 2
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "changes": [
+          {
+            "changeId": "2db0ad2d-f6f0-4f46-b529-5c4e8c494648",
+            "beforeSnapshot": {
+              "timestamp": "2018-10-31T01:32:05.993Z"
+            },
+            "afterSnapshot": {
+              "timestamp": "2018-10-31T01:54:24.42Z"
+            }
+          },
+          {
+            "changeId": "9dc352cb-b7c1-4198-9eda-e5e3ed66aec8",
+            "beforeSnapshot": {
+              "timestamp": "2018-10-30T10:30:19.68Z"
+            },
+            "afterSnapshot": {
+              "timestamp": "2018-10-30T21:12:31.337Z"
+            }
+          }
+        ],
+        "$skipToken": "ew0KICAiJGlkIjogIjEiLA0KICAiRW5kVGltZSI6ICJcL0RhdGUoMTU1MDc0NT"
+      }
+    }
+  }
+}

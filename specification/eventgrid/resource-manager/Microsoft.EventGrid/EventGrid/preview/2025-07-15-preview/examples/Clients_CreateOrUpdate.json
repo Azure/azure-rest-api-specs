@@ -1,77 +1,75 @@
 {
   "parameters": {
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "resourceGroupName": "examplerg",
+    "namespaceName": "exampleNamespaceName1",
+    "clientName": "exampleClientName1",
     "api-version": "2025-07-15-preview",
     "clientInfo": {
       "properties": {
-        "description": "This is a test client",
+        "state": "Enabled",
+        "clientCertificateAuthentication": {
+          "validationScheme": "SubjectMatchesAuthenticationName"
+        },
         "attributes": {
+          "room": "345",
+          "floor": 3,
           "deviceTypes": [
             "Fan",
             "Light",
             "AC"
-          ],
-          "floor": 3,
-          "room": "345"
+          ]
         },
-        "clientCertificateAuthentication": {
-          "validationScheme": "SubjectMatchesAuthenticationName"
-        },
-        "state": "Enabled"
+        "description": "This is a test client"
       }
-    },
-    "clientName": "exampleClientName1",
-    "namespaceName": "exampleNamespaceName1",
-    "resourceGroupName": "examplerg",
-    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "exampleClientName1",
-        "type": "Microsoft.EventGrid/namespaces/clients",
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1/clients/exampleClientName1",
         "properties": {
-          "description": "This is a test client",
-          "attributes": {
-            "deviceTypes": [
-              "Light",
-              "1"
-            ],
-            "floor": 3,
-            "room": "345a"
-          },
           "clientCertificateAuthentication": {
             "validationScheme": "SubjectMatchesAuthenticationName"
           },
+          "state": "Enabled",
+          "attributes": {
+            "room": "345a",
+            "floor": 3,
+            "deviceTypes": [
+              "Light",
+              "1"
+            ]
+          },
           "provisioningState": "Succeeded",
-          "state": "Enabled"
-        }
+          "description": "This is a test client"
+        },
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1/clients/exampleClientName1",
+        "name": "exampleClientName1",
+        "type": "Microsoft.EventGrid/namespaces/clients"
       }
     },
     "201": {
       "body": {
-        "name": "exampleClientName1",
-        "type": "Microsoft.EventGrid/namespaces/clients",
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1/clients/exampleClientName1",
         "properties": {
-          "description": "This is a test client",
-          "attributes": {
-            "deviceTypes": [
-              "Light",
-              "1"
-            ],
-            "floor": 3,
-            "room": "345a"
-          },
           "clientCertificateAuthentication": {
             "validationScheme": "SubjectMatchesAuthenticationName"
           },
+          "state": "Enabled",
+          "attributes": {
+            "room": "345a",
+            "floor": 3,
+            "deviceTypes": [
+              "Light",
+              "1"
+            ]
+          },
           "provisioningState": "Succeeded",
-          "state": "Enabled"
-        }
+          "description": "This is a test client"
+        },
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1/clients/exampleClientName1",
+        "name": "exampleClientName1",
+        "type": "Microsoft.EventGrid/namespaces/clients"
       }
     }
-  },
-  "operationId": "Clients_CreateOrUpdate",
-  "title": "Clients_CreateOrUpdate"
+  }
 }

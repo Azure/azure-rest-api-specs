@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "sqlcrudtest-6852",
+    "serverName": "sqlcrudtest-2080",
+    "databaseName": "sqlcrudtest-331",
+    "dataMaskingPolicyName": "Default",
+    "api-version": "2024-05-01-preview",
+    "dataMaskingRuleName": "rule1",
+    "parameters": {
+      "properties": {
+        "schemaName": "dbo",
+        "tableName": "Table_1",
+        "columnName": "test1",
+        "maskingFunction": "Number",
+        "numberFrom": "0",
+        "numberTo": "2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/",
+        "name": null,
+        "type": "Microsoft.Sql/servers/databases/dataMaskingPolicies/rules",
+        "location": "Central US",
+        "kind": null,
+        "properties": {
+          "id": "dbo_Table_1_test1",
+          "ruleState": "Enabled",
+          "schemaName": "dbo",
+          "tableName": "Table_1",
+          "columnName": "test1",
+          "aliasName": null,
+          "maskingFunction": "Number",
+          "numberFrom": "0",
+          "numberTo": "2",
+          "prefixSize": null,
+          "suffixSize": null,
+          "replacementString": null
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/",
+        "name": null,
+        "type": "Microsoft.Sql/servers/databases/dataMaskingPolicies/rules",
+        "location": "Central US",
+        "kind": null,
+        "properties": {
+          "id": "dbo_Table_1_test1",
+          "ruleState": "Enabled",
+          "schemaName": "dbo",
+          "tableName": "Table_1",
+          "columnName": "test1",
+          "aliasName": null,
+          "maskingFunction": "Number",
+          "numberFrom": "0",
+          "numberTo": "2",
+          "prefixSize": null,
+          "suffixSize": null,
+          "replacementString": null
+        }
+      }
+    }
+  }
+}

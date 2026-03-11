@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2025-08-01",
-    "resourceGroupName": "resourcegroup1",
     "resourceName": "migrationvault",
+    "resourceGroupName": "resourcegroup1",
     "subscriptionId": "cb53d0c3-bd59-4721-89bc-06916a9147ef"
   },
   "responses": {
@@ -10,10 +10,17 @@
       "body": {
         "value": [
           {
+            "id": "/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1",
             "name": "virtualmachine1",
             "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems",
-            "id": "/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1",
             "properties": {
+              "machineName": "vm-0520-2",
+              "migrationState": "Replicating",
+              "migrationStateDescription": "Ready to migrate",
+              "testMigrateState": "None",
+              "testMigrateStateDescription": "None",
+              "policyFriendlyName": "vmwarepolicy1",
+              "policyId": "/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1",
               "allowedOperations": [
                 "Migrate",
                 "DisableMigration",
@@ -21,20 +28,13 @@
                 "TestMigrateCleanup"
               ],
               "currentJob": {
-                "jobId": "/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationJobs/None",
                 "jobName": "None",
+                "jobId": "/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationJobs/None",
                 "startTime": "2017-04-26T06:37:50.8082715Z"
               },
-              "machineName": "vm-0520-2",
-              "migrationState": "Replicating",
-              "migrationStateDescription": "Ready to migrate",
-              "policyFriendlyName": "vmwarepolicy1",
-              "policyId": "/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1",
               "providerSpecificDetails": {
                 "instanceType": "VMwareCbt"
-              },
-              "testMigrateState": "None",
-              "testMigrateStateDescription": "None"
+              }
             }
           }
         ]
@@ -43,7 +43,5 @@
         "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationOperationStatus/a93f3cd5-9035-4b1e-a2c9-b16df6d5d34b?api-version=2025-08-01"
       }
     }
-  },
-  "operationId": "ReplicationMigrationItems_List",
-  "title": "Gets the list of migration items in the vault."
+  }
 }

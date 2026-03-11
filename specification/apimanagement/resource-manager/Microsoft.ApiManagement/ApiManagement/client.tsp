@@ -70,11 +70,6 @@ using Azure.ResourceManager;
   "java"
 );
 
-@@clientName(CommonTypes.PrivateEndpointConnection,
-  "ArmPrivateEndpointConnection",
-  "java"
-);
-
 @@clientName(ExportFormat.Swagger, "SWAGGER_LINK", "java");
 @@clientName(ExportFormat.Wadl, "WADL_LINK", "java");
 @@clientName(ExportFormat.Wsdl, "WSDL_LINK", "java");
@@ -95,10 +90,6 @@ using Azure.ResourceManager;
 @@clientLocation(ApiManagementServiceResources.performConnectivityCheckAsync,
   Microsoft.ApiManagement,
   "python"
-);
-@@clientName(CommonTypes.PrivateEndpointConnection,
-  "ArmPrivateEndpointConnection",
-  "python,go"
 );
 
 /**
@@ -141,9 +132,4 @@ op replacePurge(
 @@clientLocation(Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
   "Client",
   "go"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(PolicyGetParameters.format,
-  "xml",
-  "javascript"
 );

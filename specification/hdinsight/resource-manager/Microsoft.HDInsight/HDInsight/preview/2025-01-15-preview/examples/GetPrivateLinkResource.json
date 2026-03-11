@@ -1,17 +1,17 @@
 {
   "parameters": {
-    "api-version": "2025-01-15-preview",
-    "clusterName": "cluster1",
     "privateLinkResourceName": "gateway",
+    "clusterName": "cluster1",
     "resourceGroupName": "rg1",
+    "api-version": "2025-01-15-preview",
     "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/privateLinkResources/gateway",
         "name": "gateway",
         "type": "Microsoft.HDInsight/clusters/privateLinkResources",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/privateLinkResources/gateway",
         "properties": {
           "groupId": "gateway",
           "requiredMembers": [
@@ -23,7 +23,5 @@
         }
       }
     }
-  },
-  "operationId": "PrivateLinkResources_Get",
-  "title": "Get specific private link resource in a specific HDInsight cluster."
+  }
 }

@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
-import "./CommonModels.tsp";
+import "./models.tsp";
 import "./ManagedCluster.tsp";
 
 using TypeSpec.Rest;
@@ -10,16 +10,11 @@ using TypeSpec.Http;
 using Versioning;
 
 namespace Microsoft.ContainerService;
-
-// =============================================================================
-// MeshMembership resource and operations
-// =============================================================================
-
 /**
  * Mesh membership of a managed cluster.
  */
 @parentResource(ManagedCluster)
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2025_10_02_preview)
 model MeshMembership
   is Azure.ResourceManager.ProxyResource<MeshMembershipProperties> {
   ...ResourceNameParameter<
@@ -32,11 +27,42 @@ model MeshMembership
   /**
    * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This field is allowed at the top-level as per the ARM resource specification."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   managedBy?: string;
 
   ...Azure.ResourceManager.EntityTagProperty;
+}
+
+@armResourceOperations
+@added(Versions.v2025_10_02_preview)
+interface MeshMemberships {
+  /**
+   * Gets the mesh membership of a managed cluster.
+   */
+  get is ArmResourceRead<MeshMembership>;
+
+  /**
+   * Creates or updates the mesh membership of a managed cluster.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    MeshMembership,
+    LroHeaders = ArmLroLocationHeader<FinalResult = MeshMembership> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Deletes the mesh membership of a managed cluster.
+   */
+  delete is ArmResourceDeleteWithoutOkAsync<MeshMembership>;
+
+  /**
+   * Lists mesh memberships in a managed cluster.
+   */
+  listByManagedCluster is ArmResourceListByParent<
+    MeshMembership,
+    Response = ArmResponse<MeshMembershipsListResult>
+  >;
 }
 
 @@maxLength(MeshMembership.name, 63);
@@ -48,141 +74,3 @@ model MeshMembership
 @@doc(MeshMemberships.createOrUpdate::parameters.resource,
   "The mesh membership to create or update."
 );
-
-@armResourceOperations
-@added(Versions.v2026_01_02_preview)
-interface MeshMemberships {
-  /**
-   * Gets the mesh membership of a managed cluster.
-   */
-  get is ArmResourceRead<MeshMembership>;
-
-  /**
-   * Creates or updates the mesh membership of a managed cluster.
-   */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<MeshMembership>;
-
-  /**
-   * Deletes the mesh membership of a managed cluster.
-   */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    MeshMembership,
-    LroHeaders = ArmAsyncOperationHeaderWithLocation &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  /**
-   * Lists mesh memberships in a managed cluster.
-   */
-  listByManagedCluster is ArmResourceListByParent<
-    MeshMembership,
-    Response = ArmResponse<MeshMembershipsListResult>
-  >;
-}
-
-// =============================================================================
-// MeshMembership models
-// =============================================================================
-
-/**
- * The provisioning state of the last accepted operation.
- */
-@Azure.Core.lroStatus
-@added(Versions.v2026_01_02_preview)
-union MeshMembershipProvisioningState {
-  string,
-
-  /**
-   * Resource creation was canceled.
-   */
-  Canceled: "Canceled",
-
-  /**
-   * The Mesh Membership is being created.
-   */
-  Creating: "Creating",
-
-  /**
-   * The Mesh Membership is being deleted.
-   */
-  Deleting: "Deleting",
-
-  /**
-   * Resource creation failed.
-   */
-  Failed: "Failed",
-
-  /**
-   * Resource has been created.
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * The Mesh Membership is being updated.
-   */
-  Updating: "Updating",
-}
-
-/**
- * Mesh membership properties of a managed cluster.
- */
-@added(Versions.v2026_01_02_preview)
-model MeshMembershipProperties {
-  /**
-   * The current provisioning state of the Mesh Membership.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: MeshMembershipProvisioningState;
-
-  /**
-   * Profile for configuring private connectivity between the mesh control plane and member clusters. When configured, communication between the mesh control plane and this member cluster occurs over private network instead of public networks. Visit https://aka.ms/applink for more information.
-   */
-  privateConnectProfile?: MeshMembershipPrivateConnectProfile;
-
-  /**
-   * The ARM resource id for the managed mesh member. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppLink/applinks/{appLinkName}/appLinkMembers/{appLinkMemberName}'. Visit https://aka.ms/applink for more information.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  managedMeshID: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.AppLink/applinks";
-    }
-  ]>;
-}
-
-/**
- * Private connect profile for mesh membership.
- */
-@added(Versions.v2026_01_02_preview)
-model MeshMembershipPrivateConnectProfile {
-  /**
-   * The private IP address of the member cluster private FQDN. This is a read-only property populated by the service.
-   */
-  @visibility(Lifecycle.Read)
-  privateIpAddress?: string;
-
-  /**
-   * The delegated subnet resource ID. Customer can provide their own subnet, or AKS will allocate one if not specified. When providing your own subnet, the minimum required size is /28
-   */
-  subnetResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Network/virtualNetworks/subnets";
-    }
-  ]>;
-}
-
-/**
- * The result of a request to list mesh memberships in a managed cluster.
- */
-@added(Versions.v2026_01_02_preview)
-model MeshMembershipsListResult {
-  /**
-   * The list of mesh memberships.
-   */
-  @pageItems
-  value: MeshMembership[];
-
-  @doc("The URL to get the next set of mesh membership results.")
-  @nextLink
-  nextLink?: ResourceLocation<MeshMembership>;
-}

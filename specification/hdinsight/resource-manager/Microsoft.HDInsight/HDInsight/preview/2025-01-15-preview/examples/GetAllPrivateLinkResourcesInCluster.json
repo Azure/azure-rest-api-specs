@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "api-version": "2025-01-15-preview",
     "clusterName": "cluster1",
     "resourceGroupName": "rg1",
+    "api-version": "2025-01-15-preview",
     "subscriptionId": "subid"
   },
   "responses": {
@@ -10,9 +10,9 @@
       "body": {
         "value": [
           {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/privateLinkResources/gateway",
             "name": "gateway",
             "type": "Microsoft.HDInsight/clusters/privateLinkResources",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/privateLinkResources/gateway",
             "properties": {
               "groupId": "gateway",
               "requiredMembers": [
@@ -24,9 +24,9 @@
             }
           },
           {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/privateLinkResources/headnode",
             "name": "headnode",
             "type": "Microsoft.HDInsight/clusters/privateLinkResources",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/privateLinkResources/headnode",
             "properties": {
               "groupId": "headnode",
               "requiredMembers": [
@@ -40,7 +40,5 @@
         ]
       }
     }
-  },
-  "operationId": "PrivateLinkResources_ListByCluster",
-  "title": "Get all private link resources in a specific HDInsight cluster."
+  }
 }

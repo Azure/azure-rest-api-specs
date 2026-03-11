@@ -3,9 +3,8 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tiler.common.tsp";
 import "./models.common.images.tsp";
-import "@azure-tools/typespec-client-generator-core";
-import "./models.stac.spec.tsp";
 
+using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Microsoft.PlanetaryComputer;
@@ -50,7 +49,7 @@ model MosaicTileQueryParameters {
 /**
  * Supported algorithms for terrain and index-based analysis
  */
-union TerrainAlgorithm {
+union Algorithm {
   string,
 
   /**
@@ -96,25 +95,22 @@ model RegisterMosaic {
   /**
    * Geographic bounding box to filter items [west, south, east, north]
    */
-  @encodedName("application/json", "bbox")
-  boundingBox?: float32[];
+  bbox?: float64;
 
   /**
    * GeoJSON geometry to spatially filter items by intersection
    */
-  intersects?: Geometry;
+  intersects?: GeoJson;
 
   /**
    * Query
    */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC query requires union types."
-  query?: Record<unknown>;
+  query?: Record<StringRecord>;
 
   /**
    * Filter
    */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
-  filter?: Record<unknown>;
+  filter?: CqlFilter;
 
   /**
    * Temporal filter in RFC 3339 format or interval
@@ -124,29 +120,28 @@ model RegisterMosaic {
   /**
    * Criteria for ordering items in the mosaic
    */
-  @encodedName("application/json", "sortby")
-  sortBy?: StacSortExtension[];
+  sortby?: SortExtension[];
 
   /**
    * Query language format used in the filter parameter
    */
   @encodedName("application/json", "filter-lang")
-  filterLanguage?: FilterLanguage;
+  filterLang?: FilterLang;
 
   /**
    * Additional metadata to associate with the mosaic
    */
-  metadata?: MosaicMetadata;
+  metadata?: Metadata;
 }
 
 /**
  * Metadata information for mosaic or search results
  */
-model MosaicMetadata {
+model Metadata {
   /**
    * Type of metadata resource
    */
-  type?: MosaicMetadataType = MosaicMetadataType.mosaic;
+  type?: MetadataType = MetadataType.mosaic;
 
   /**
    * Geographic bounding box in [west, south, east, north] format
@@ -156,14 +151,12 @@ model MosaicMetadata {
   /**
    * Minimum zoom level supported
    */
-  @encodedName("application/json", "minzoom")
-  minZoom?: int32;
+  minzoom?: int32;
 
   /**
    * Maximum zoom level supported
    */
-  @encodedName("application/json", "maxzoom")
-  maxZoom?: int32;
+  maxzoom?: int32;
 
   /**
    * Human-readable name for the resource
@@ -184,43 +177,48 @@ model MosaicMetadata {
 /**
  * Response from a successful mosaic registration with search ID and related links
  */
-model TilerMosaicSearchRegistrationResponse {
+model RegisterResponse {
   /**
    * Unique identifier for the registered search
    */
-  @encodedName("application/json", "searchid")
   searchId: string;
 
   /**
    * Related links for the registered mosaic
    */
-  links?: StacLink[];
+  links?: Link[];
 }
 
 /**
  * Information about a registered STAC search query
  */
-model TilerStacSearchRegistration {
+model TitilerPgstacModelInfo {
   /**
-   * Details of the saved search query
+   * PgSTAC Search entry.
    *
-   * See the [PgSTAC Search table definition](https://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915).
+   * ref:
+   * https://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915
+   *
+   * Details of the saved search query
    */
-  search: TilerStacSearchDefinition;
+  search: PgStacSearch;
 
   /**
    * Related links for the search query
    */
-  links?: StacLink[];
+  links?: Link[];
 }
 
 /**
- * Stored search query
+ * PgSTAC Search entry.
  *
- * See:
+ * ref:
  * https://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915
  */
-model TilerStacSearchDefinition {
+/**
+ * Stored search query in the PgSTAC database
+ */
+model PgStacSearch {
   /**
    * Unique hash identifier for the search query
    */
@@ -230,8 +228,7 @@ model TilerStacSearchDefinition {
    * Search
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
-  search: Record<unknown>;
+  search: Cql;
 
   /**
    * SQL WHERE clause representing the search filters
@@ -242,25 +239,22 @@ model TilerStacSearchDefinition {
   /**
    * SQL ORDER BY clause for sorting results
    */
-  @encodedName("application/json", "orderby")
-  orderBy: string;
+  orderby: string;
 
   /**
    * Timestamp when the search was last accessed
    */
-  @encodedName("application/json", "lastused")
-  lastUsed: utcDateTime;
+  lastused: utcDateTime;
 
   /**
    * Number of times the search has been accessed
    */
-  @encodedName("application/json", "usecount")
-  useCount: int32;
+  usecount: int32;
 
   /**
    * Additional metadata associated with the search
    */
-  metadata: MosaicMetadata;
+  metadata: Metadata;
 }
 
 /**
@@ -275,10 +269,9 @@ model ApplicationJsonResponse {
   /**
    * body
    */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Third-party API using anonymous array type."
   @bodyRoot
   @summary("Response Assets For Point Api Mosaic  searchId   Lon   Lat  Assets Get")
-  body: unknown[];
+  body: {}[];
 }
 
 /**
@@ -307,42 +300,12 @@ model MosaicSearchQueryParameters {
    * Return as soon as the geometry is fully covered (defaults to True in PgSTAC).
    */
   @query("exitwhenfull")
-  exitWhenFull?: boolean;
+  exitwhenfull?: boolean;
 
   /**
    * Skip any items that would show up completely under the previous items (defaults
    * to True in PgSTAC).
    */
   @query("skipcovered")
-  skipCovered?: boolean;
-}
-
-/**
- * Asset information for the specified point
- */
-model StacItemPointAsset {
-  /**
-   * STAC item ID
-   */
-  id: string;
-
-  /**
-   * Bounding box coordinates for the feature
-   */
-  @encodedName("application/json", "bbox")
-  boundingBox: float32[];
-
-  /**
-   * Asset information for the specified point
-   */
-  assets: Record<StacAsset>;
-
-  /**
-   * Collection ID
-   */
-  @minLength(1)
-  @maxLength(500)
-  @pattern(".*")
-  @encodedName("application/json", "collection")
-  collectionId: string;
+  skipcovered?: boolean;
 }

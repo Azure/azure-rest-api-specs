@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myvmScaleSet",
+    "instanceId": "0",
+    "api-version": "2019-07-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "autoUpgradeMinorVersion": true,
+              "provisioningState": "Succeeded",
+              "publisher": "extPublisher",
+              "type": "extType",
+              "typeHandlerVersion": "1.2",
+              "settings": {
+                "UserName": "xyz@microsoft.com"
+              }
+            },
+            "name": "myVMExtension",
+            "location": "westus",
+            "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/extensions/myVMExtension"
+          },
+          {
+            "properties": {
+              "autoUpgradeMinorVersion": true,
+              "provisioningState": "Succeeded",
+              "publisher": "extPublisher1",
+              "type": "extType1",
+              "typeHandlerVersion": "1.0",
+              "settings": {
+                "UserName": "xyz@microsoft.com"
+              }
+            },
+            "name": "myVMExtension1",
+            "location": "westus",
+            "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/extensions/myVMExtension1"
+          }
+        ]
+      }
+    }
+  }
+}

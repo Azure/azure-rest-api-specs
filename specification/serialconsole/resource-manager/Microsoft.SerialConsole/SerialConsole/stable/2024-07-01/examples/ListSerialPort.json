@@ -1,11 +1,11 @@
 {
   "parameters": {
     "api-version": "2024-07-01",
-    "parentResource": "myVM",
-    "parentResourceType": "virtualMachines",
+    "subscriptionId": "00000000-00000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "resourceProviderNamespace": "Microsoft.Compute",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "parentResourceType": "virtualMachines",
+    "parentResource": "myVM"
   },
   "responses": {
     "200": {
@@ -13,17 +13,15 @@
         "value": [
           {
             "name": "0",
+            "id": "/subscriptions/00000000-00000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/providers/Microsoft.SerialConsole/serialPorts/0",
             "type": "Microsoft.SerialConsole/serialPorts",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/providers/Microsoft.SerialConsole/serialPorts/0",
             "properties": {
-              "connectionState": "inactive",
-              "state": "enabled"
+              "state": "enabled",
+              "connectionState": "inactive"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "SerialPorts_List",
-  "title": "List Serial Ports for parent resources"
+  }
 }
