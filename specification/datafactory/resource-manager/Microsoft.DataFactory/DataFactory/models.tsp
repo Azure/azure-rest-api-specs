@@ -6672,6 +6672,11 @@ model DataFlowSink extends Transformation {
    * Schema linked service reference.
    */
   schemaLinkedService?: LinkedServiceReference;
+
+  /**
+   * Rejected data linked service reference.
+   */
+  rejectedDataLinkedService?: LinkedServiceReference;
 }
 
 /**
