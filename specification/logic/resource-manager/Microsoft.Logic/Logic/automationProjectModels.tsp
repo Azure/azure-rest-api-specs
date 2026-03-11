@@ -41,18 +41,6 @@ model AutomationProjectProperties {
   provisioningState?: AutomationProjectProvisioningState;
 
   /**
-   * Gets the created time of the automation project.
-   */
-  @visibility(Lifecycle.Read)
-  createdTime?: utcDateTime;
-
-  /**
-   * Gets the last modified time of the automation project.
-   */
-  @visibility(Lifecycle.Read)
-  changedTime?: utcDateTime;
-
-  /**
    * A description of the automation project.
    */
   description?: string;
