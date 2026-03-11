@@ -1,4 +1,4 @@
-import { readFile } from "fs/promises";
+import { readFile, stat } from "fs/promises";
 import { resolve } from "path";
 import { inspect } from "util";
 import YAML from "js-yaml";
@@ -44,24 +44,34 @@ export const leaseSchema = z.object({
       ),
     startdate: z
       .string()
-      .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid startdate format (expected: YYYY-MM-DD)"),
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid startdate format (expected: YYYY-MM-DD)")
+      .refine(
+        (value) => {
+          try {
+            Temporal.PlainDate.from(value);
+            return true;
+          } catch {
+            return false;
+          }
+        },
+        "startdate must be a valid calendar date",
+      ),
     duration: z.string().refine(
       (v) => {
         try {
-          Temporal.Duration.from(v);
-          return true;
+          return Temporal.Duration.from(v).total({ unit: "days", relativeTo: Temporal.Now.plainDateISO() }) <= 180;
         } catch {
           return false;
         }
       },
-      "duration must be a valid ISO 8601 duration (e.g. P180D, P6M, P1Y2M3D)",
+      "duration must be a valid ISO 8601 duration not exceeding 180 days (e.g. P180D, P6M)",
     ),
     reviewer: z
       .string()
       .min(1, "Reviewer is required and cannot be empty")
       .refine(
-        (r) => r.trim().length > 0,
-        "Reviewer is required and cannot be empty",
+        (r) => r.startsWith("@") && r.trim().length > 1,
+        "Reviewer must be a GitHub alias starting with @ (e.g., @octocat)",
       ),
   }),
 });
@@ -93,16 +103,17 @@ export function validateFolderStructure(files) {
 /**
  * Validate lease file contents using Zod schema.
  * @param {string} leaseFile - Full path to lease file
- * @param {string} today - Today's date in YYYY-MM-DD format
  * @param {string} relativePath - Relative path for folder name extraction
+ * @param {string} [workspaceRoot] - Workspace root for specification folder validation
  * @returns {Promise<{file: string, errors: string[]}>} Validation result with errors array
  */
-export async function validateLeaseContent(leaseFile, today, relativePath) {
+export async function validateLeaseContent(leaseFile, relativePath, workspaceRoot) {
   const errors = [];
-  const pathForExtraction = relativePath || leaseFile;
-  // Extract rpNamespace from .github/arm-leases/<orgName>/<rpNamespace>/lease.yaml
+  // Extract orgName and rpNamespace from .github/arm-leases/<orgName>/<rpNamespace>/lease.yaml
   // or .github/arm-leases/<orgName>/<rpNamespace>/<serviceName>/lease.yaml
-  const folderRP = pathForExtraction.split("/")[3]; // rpNamespace is always at index 3
+  const pathParts = (relativePath || leaseFile).split("/");
+  const orgName = pathParts[2]; // orgName is always at index 2
+  const folderRP = pathParts[3]; // rpNamespace is always at index 3
 
   /** @type {string} */
   let content;
@@ -138,9 +149,47 @@ export async function validateLeaseContent(leaseFile, today, relativePath) {
     );
   }
 
-  // Cross-field validation: startdate must not be in the past
-  if (lease.startdate < today) {
-    errors.push(`Startdate is in the past: ${lease.startdate} (today: ${today})`);
+  // Cross-field validation: startdate must not be more than 10 days in the past
+  const today = Temporal.Now.plainDateISO();
+  if (Temporal.PlainDate.compare(Temporal.PlainDate.from(lease.startdate), today.subtract({ days: 10 })) < 0) {
+    errors.push(
+      `Startdate is in the past: ${lease.startdate} (must be within 10 days of today: ${today})`,
+    );
+  }
+
+  // Validate specification folder structure if workspace root is provided
+  if (workspaceRoot) {
+    // First check if the service folder exists in specification/
+    let serviceExists = false;
+
+    try {
+      if (!(await stat(resolve(workspaceRoot, "specification", orgName))).isDirectory()) {
+        errors.push(
+          `Service folder is not a directory: specification/${orgName}. Use a valid service name from specification/ folder.`,
+        );
+      } else {
+        serviceExists = true;
+      }
+    } catch (error) {
+      // Service folder doesn't exist
+      errors.push(
+        `Service folder not found: specification/${orgName}. The orgName in the lease path must match an existing service folder in specification/.`,
+      );
+    }
+
+    // Then check if resource-manager/<rpNamespace>/ exists (skip if new RP or service doesn't exist)
+    if (serviceExists) {
+      try {
+        if (!(await stat(resolve(workspaceRoot, "specification", orgName, "resource-manager", folderRP))).isDirectory()) {
+          errors.push(
+            `Specification path exists but is not a directory: specification/${orgName}/resource-manager/${folderRP}`,
+          );
+        }
+        // Directory exists and matches - validation passes
+      } catch (error) {
+        // Directory doesn't exist - skip validation (new RP being registered)
+      }
+    }
   }
 
   return { file: leaseFile, errors };
@@ -156,7 +205,6 @@ export async function validateLeaseContent(leaseFile, today, relativePath) {
  * @returns {Promise<{ status: string, errors: number }>} Validation result
  */
 export default async function validateArmLeases(core) {
-  const today = Temporal.Now.plainDateISO().toString();
   const cwd = process.env.GITHUB_WORKSPACE;
   let hasErrors = false;
 
@@ -266,7 +314,7 @@ export default async function validateArmLeases(core) {
 
   for (const leaseFile of validLeaseFiles) {
     const fullPath = resolve(cwd, leaseFile);
-    const result = await validateLeaseContent(fullPath, today, leaseFile);
+    const result = await validateLeaseContent(fullPath, leaseFile, cwd);
     if (result.errors.length > 0) {
       contentErrors.push({ file: leaseFile, errors: result.errors });
       hasErrors = true;
