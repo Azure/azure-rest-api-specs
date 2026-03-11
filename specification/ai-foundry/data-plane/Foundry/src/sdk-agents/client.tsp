@@ -106,6 +106,9 @@ using Azure.AI.Projects;
 @@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
 @@clientName(MemoryStores.searchMemories, "internalSearchMemories");
 
+@@access(Agents.deleteAgent, Access.internal);
+@@clientName(Agents.deleteAgent, "internalDeleteAgent");
+
 @@access(MemoryStoreSearchResponse, Access.public);
 @@usage(MemoryStoreSearchResponse, Usage.output);
 
@@ -145,4 +148,3 @@ model TimeZoneType {}
 @@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
 @@alternateType(OpenAI.WebSearchApproximateLocation.timezone, TimeZoneType, "java");
 @@alternateType(OpenAI.LocalShellExecAction.timeout_ms, duration, "java");
-@@alternateType(DeleteAgentResponse, void, "java");
