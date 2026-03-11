@@ -36,9 +36,6 @@ These settings apply only when `--tag=package-2026-04-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-04-01-preview'
 input-file:
   - preview/2026-04-01-preview/openapi.json
-suppressions:
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    reason: Removed approvalworkflowassignments from the new API version
 ```
 
 ### Tag: package-2025-05-01-preview
