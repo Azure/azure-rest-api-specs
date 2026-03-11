@@ -22,10 +22,7 @@ namespace CombineClient;
   "VmssNetworkInterface",
   "java"
 );
-@@clientName(Microsoft.Compute.NetworkInterface, "VmssNetworkInterface");
-@@friendlyName(Microsoft.Compute.NetworkInterface, "VmssNetworkInterface");
-@@friendlyName(Microsoft.Compute.PublicIPAddress, "VmssPublicIPAddress");
-@@clientName(Microsoft.Compute.PublicIPAddress, "VmssPublicIPAddress");
+@@clientName(Microsoft.Compute.PublicIPAddress, "VmssPublicIPAddress", "java");
 @@clientName(Microsoft.Compute.NetworkInterfacePropertiesFormat,
   "VmssNetworkInterfacePropertiesFormat",
   "java"
