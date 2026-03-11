@@ -87,3 +87,12 @@ op subscriptionRename(
 ): RenamedSubscriptionId | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
 @@override(SubscriptionOperationGroup.rename, subscriptionRename, "javascript");
+
+@@clientName(Microsoft.Subscription.SubscriptionAliasResponse,
+  "PutAliasResponse",
+  "java"
+);
+@@clientName(Microsoft.Subscription.SubscriptionAliasResponseProperties,
+  "PutAliasResponseProperties",
+  "java"
+);
