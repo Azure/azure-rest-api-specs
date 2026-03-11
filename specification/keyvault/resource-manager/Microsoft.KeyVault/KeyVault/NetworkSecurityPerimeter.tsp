@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.KeyVault;
 /**
@@ -23,6 +24,7 @@ alias NspConfigurationOperations = Azure.ResourceManager.NspConfigurations<Netwo
 
 @armResourceOperations
 @tag("NetworkSecurityPerimeterConfigurations")
+@added(Versions.v2026_04_01)
 interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets information about the specified NSP configuration.
