@@ -10,5 +10,5 @@ using Microsoft.ServiceFabric;
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ProxyResource,
   "ArmProxyResource",
-  "python"
+  "python,java"
 );
