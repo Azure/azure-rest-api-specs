@@ -932,6 +932,9 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "IsForceUpgradeEnabled",
   "csharp"
 );
+@@clientName(ManagedClusterIngressProfile.gatewayAPI, "GatewayApi", "csharp");
+@@clientName(MeshMembershipProperties.managedMeshID, "ManagedMeshId", "csharp");
+@@clientName(MachineStatus.creationTimestamp, "CreatedOn", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
 @@markAsPageable(PrivateEndpointConnections.list, "csharp");
