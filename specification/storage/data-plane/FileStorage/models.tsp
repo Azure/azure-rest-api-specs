@@ -1757,13 +1757,13 @@ alias NfsRequestHeaders = {
   @header("x-ms-group") group?: string;
 
   /** Optional, NFS only. The file mode of the file or directory. */
-  @header("x-ms-mode") mode?: string;
+  @header("x-ms-mode") fileMode?: string;
 };
 
 /** NFS property response headers. */
 alias NfsResponseHeaders = {
   /** NFS only. The file mode. */
-  @header("x-ms-mode") mode?: string;
+  @header("x-ms-mode") fileMode?: string;
 
   /** NFS only. The owner. */
   @header("x-ms-owner") owner?: string;

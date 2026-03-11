@@ -793,7 +793,7 @@ interface Directory {
       ...LastModifiedResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
-      @header("x-ms-mode") mode?: string;
+      @header("x-ms-mode") fileMode?: string;
       @header("x-ms-owner") owner?: string;
       @header("x-ms-group") group?: string;
     }
@@ -1154,7 +1154,7 @@ interface File {
       ...LastModifiedResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
-      @header("x-ms-mode") mode?: string;
+      @header("x-ms-mode") fileMode?: string;
       @header("x-ms-owner") owner?: string;
       @header("x-ms-group") group?: string;
 
