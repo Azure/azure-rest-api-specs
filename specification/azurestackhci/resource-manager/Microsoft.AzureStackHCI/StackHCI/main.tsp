@@ -37,7 +37,6 @@ import "./ValidatedSolutionRecipe.tsp";
 import "./EdgeMachine.tsp";
 import "./EdgeMachineJobs.tsp";
 import "./EdgeMachineGpu.tsp";
-import "./EdgeMachineGpuJobs.tsp";
 import "./EdgeMachineStorage.tsp";
 import "./EdgeMachineNetworkAdapters.tsp";
 import "./ValidateOwnershipVouchers.tsp";

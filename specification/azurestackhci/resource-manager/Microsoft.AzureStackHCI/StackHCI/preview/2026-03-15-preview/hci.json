@@ -124,6 +124,9 @@
       "name": "EdgeMachineDiskJobs"
     },
     {
+      "name": "EdgeMachineDiskPrivilegedJobs"
+    },
+    {
       "name": "EdgeMachineNetworkAdapters"
     },
     {
@@ -7246,6 +7249,294 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/disks/{diskName}/privilegedJobs": {
+      "get": {
+        "operationId": "EdgeMachineDiskPrivilegedJobs_List",
+        "tags": [
+          "EdgeMachineDiskPrivilegedJobs"
+        ],
+        "description": "List all privileged jobs for a disk.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "description": "The name of the EdgeMachineDisk",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineDiskPrivilegedJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineDiskPrivilegedJobs_List": {
+            "$ref": "./examples/EdgeMachineDiskPrivilegedJobs_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/disks/{diskName}/privilegedJobs/{privilegedJobName}": {
+      "get": {
+        "operationId": "EdgeMachineDiskPrivilegedJobs_Get",
+        "tags": [
+          "EdgeMachineDiskPrivilegedJobs"
+        ],
+        "description": "Get a specific privileged job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "description": "The name of the EdgeMachineDisk",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "privilegedJobName",
+            "in": "path",
+            "description": "The name of the EdgeMachineDiskPrivilegedJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineDiskPrivilegedJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineDiskPrivilegedJobs_Get": {
+            "$ref": "./examples/EdgeMachineDiskPrivilegedJobs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EdgeMachineDiskPrivilegedJobs_CreateOrUpdate",
+        "tags": [
+          "EdgeMachineDiskPrivilegedJobs"
+        ],
+        "description": "Create or update a privileged job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "description": "The name of the EdgeMachineDisk",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "privilegedJobName",
+            "in": "path",
+            "description": "The name of the EdgeMachineDiskPrivilegedJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineDiskPrivilegedJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EdgeMachineDiskPrivilegedJob' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineDiskPrivilegedJob"
+            }
+          },
+          "201": {
+            "description": "Resource 'EdgeMachineDiskPrivilegedJob' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineDiskPrivilegedJob"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineDiskPrivilegedJobs_CreateOrUpdate": {
+            "$ref": "./examples/EdgeMachineDiskPrivilegedJobs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeMachineDiskPrivilegedJobs_Delete",
+        "tags": [
+          "EdgeMachineDiskPrivilegedJobs"
+        ],
+        "description": "Delete a privileged job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "description": "The name of the EdgeMachineDisk",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "privilegedJobName",
+            "in": "path",
+            "description": "The name of the EdgeMachineDiskPrivilegedJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineDiskPrivilegedJobs_Delete": {
+            "$ref": "./examples/EdgeMachineDiskPrivilegedJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/gpus": {
       "get": {
         "operationId": "EdgeMachineGpus_List",
@@ -7508,7 +7799,7 @@
         "tags": [
           "EdgeMachineGpuJobs"
         ],
-        "description": "List EdgeMachineGpuJob resources by EdgeMachineGpu",
+        "description": "List EdgeMachineGpuJob resources by EdgeMachineGpu.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -10797,7 +11088,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EdgeMachineDiskJobProperties"
+          "$ref": "#/definitions/EdgeMachineDiskPrivilegedJobProperties"
         }
       ],
       "x-ms-discriminator-value": "DeleteVolume"
@@ -11778,7 +12069,6 @@
       "description": "Job Type supported for disk operations.",
       "enum": [
         "CreateVolume",
-        "DeleteVolume",
         "SyncConfiguration"
       ],
       "x-ms-enum": {
@@ -11789,11 +12079,6 @@
             "name": "CreateVolume",
             "value": "CreateVolume",
             "description": "Job to create a volume on the disk."
-          },
-          {
-            "name": "DeleteVolume",
-            "value": "DeleteVolume",
-            "description": "Job to delete a volume from the disk."
           },
           {
             "name": "SyncConfiguration",
@@ -12677,6 +12962,53 @@
         }
       ]
     },
+    "EdgeMachineDiskJobBaseProperties": {
+      "type": "object",
+      "description": "Base properties shared by all disk job types.",
+      "properties": {
+        "deploymentMode": {
+          "$ref": "#/definitions/DeploymentMode",
+          "description": "Deployment mode to trigger job."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Job provisioning state.",
+          "readOnly": true
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Unique, immutable job id.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job started.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job completed.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of disk job.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error details if job failed.",
+          "readOnly": true
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/DiskJobReportedProperties",
+          "description": "Properties reported by the job execution.",
+          "readOnly": true
+        }
+      }
+    },
     "EdgeMachineDiskJobListResult": {
       "type": "object",
       "description": "The response of a EdgeMachineDiskJob list operation.",
@@ -12776,6 +13108,101 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "EdgeMachineDiskPrivilegedJob": {
+      "type": "object",
+      "description": "Disk Privileged Job resource for managing privileged operations on disk volumes.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeMachineDiskPrivilegedJobProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EdgeMachineDiskPrivilegedJobListResult": {
+      "type": "object",
+      "description": "List of Disk Privileged Job resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeMachineDiskPrivilegedJob items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeMachineDiskPrivilegedJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EdgeMachineDiskPrivilegedJobProperties": {
+      "type": "object",
+      "description": "Disk Privileged Job properties.",
+      "properties": {
+        "jobType": {
+          "$ref": "#/definitions/PrivilegedJobType",
+          "description": "Privileged Job Type to support polymorphic resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deploymentMode": {
+          "$ref": "#/definitions/DeploymentMode",
+          "description": "Deployment mode to trigger job."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Job provisioning state.",
+          "readOnly": true
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Unique, immutable job id.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job started.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job completed.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of disk job.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error details if job failed.",
+          "readOnly": true
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/DiskJobReportedProperties",
+          "description": "Properties reported by the job execution.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "jobType",
+      "required": [
+        "jobType"
       ]
     },
     "EdgeMachineDiskProperties": {
@@ -18386,6 +18813,24 @@
         }
       }
     },
+    "PrivilegedJobType": {
+      "type": "string",
+      "description": "Job Type supported for disk privileged operations.",
+      "enum": [
+        "DeleteVolume"
+      ],
+      "x-ms-enum": {
+        "name": "PrivilegedJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DeleteVolume",
+            "value": "DeleteVolume",
+            "description": "Job to delete a volume from the disk."
+          }
+        ]
+      }
+    },
     "ProvisionOsJobProperties": {
       "type": "object",
       "description": "Represents the properties of an Azure Linux restricted operating environment Provision Os job.",
@@ -20347,17 +20792,6 @@
           "format": "int64",
           "description": "Number of storage disks in the device with $CanPool as true.",
           "readOnly": true
-        },
-        "disks": {
-          "type": "array",
-          "description": "List of storage disks on the device.",
-          "items": {
-            "$ref": "#/definitions/Disk"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "id"
-          ]
         }
       }
     },
