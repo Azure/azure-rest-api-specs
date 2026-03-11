@@ -37,10 +37,10 @@ These settings apply only when `--tag=package-2025-11` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-11'
 input-file:
-  - Microsoft.Network/stable/2025-11-01/network.json
-  - Microsoft.Network/stable/2025-11-01/webapplicationfirewall.json
-  - Microsoft.Network/stable/2025-11-01/frontdoor.json
-  - Microsoft.Network/stable/2025-11-01/networkexperiment.json
+  - stable/2025-11-01/network.json
+  - stable/2025-11-01/webapplicationfirewall.json
+  - stable/2025-11-01/frontdoor.json
+  - stable/2025-11-01/networkexperiment.json
 ```
 
 ### Tag: package-2025-10
