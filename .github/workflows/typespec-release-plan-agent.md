@@ -7,9 +7,6 @@ on:
         description: "URL for the Azure/azure-rest-api-specs pull request to process"
         required: true
         type: string
-  push:
-    branches:
-      - update_release_plan
   issue_comment:
     types: [created]
 permissions:
@@ -54,11 +51,6 @@ Determine the pull request associated with this event.
 
 - The workflow only processes pull requests in the `Azure/azure-rest-api-specs` repository. After resolving the pull request for this run, verify that its `base.repo.full_name` equals `Azure/azure-rest-api-specs`. If it differs, call `noop` with guidance ("Workflow only supports Azure/azure-rest-api-specs pull requests — skipping") and stop.
 
-### Push trigger
-
-- Identify the pull request that caused the workflow trigger.
-- Use test PR `https://github.com/Azure/azure-rest-api-specs/pull/40692` as API spec PR.
-
 ### Workflow dispatch trigger
 
 - Require a `pull-request-url` input when the workflow is invoked manually. If this input is missing, call `noop` with guidance ("Manual run requires pull-request-url input — skipping").
@@ -80,6 +72,7 @@ Verify the pull request has the `TypeSpec` label.
 
 - Inspect the labels on the pull request retrieved in Step 1.
 - If the `TypeSpec` label is **not** present, call `noop` with guidance ("PR does not have the TypeSpec label — skipping release plan update") and stop.
+- This workflow is currently piloted via the `Auto create release plan` label. If that label is **not** present on the pull request, call `noop` with guidance ("PR is not opted in via the Auto create release plan label — skipping") and stop.
 
 ## Step 3: Identify Modified TypeSpec Projects
 
