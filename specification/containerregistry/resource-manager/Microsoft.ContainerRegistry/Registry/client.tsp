@@ -36,3 +36,6 @@ using Microsoft.ContainerRegistry;
 @@clientName(LoggingProperties, "ConnectedRegistryLogging", "csharp");
 @@clientName(StatusDetailProperties, "ConnectedRegistryStatusDetail", "csharp");
 @@clientName(ImportSource, "ContainerRegistryImportSource", "csharp");
+
+// C# type correctness: match API surface before migration to Typespec (Guid? CorrelationId)
+@@alternateType(StatusDetailProperties.correlationId, uuid, "csharp");
