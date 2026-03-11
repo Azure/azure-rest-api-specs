@@ -173,10 +173,7 @@ interface DiscoveryResource<
 > {
   get is ArmResourceRead<T>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<T>;
-  update is ArmCustomPatchAsync<
-    T,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<T, P>
-  >;
+  update is ArmResourcePatchAsync<T, P>;
   delete is ArmResourceDeleteWithoutOkAsync<T>;
   listByResourceGroup is ArmResourceListByParent<T>;
   listBySubscription is ArmListBySubscription<T>;
