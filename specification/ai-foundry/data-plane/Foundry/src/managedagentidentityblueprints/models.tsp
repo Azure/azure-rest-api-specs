@@ -28,6 +28,7 @@ model CreateOrUpdateManagedAgentIdentityBlueprintRequest {
 
 @removed(Versions.v1)
 model ManagedAgentIdentityBlueprint {
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

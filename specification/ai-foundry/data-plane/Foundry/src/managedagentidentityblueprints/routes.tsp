@@ -11,7 +11,7 @@ namespace Azure.AI.Projects;
 interface ManagedAgentIdentityBlueprints {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
   @put
-  @route("/managedAgentIdentityBlueprints/{managed_agent_identity_blueprint_name}")
+  @route("/managedAgentIdentityBlueprints/{name}")
   @extension(
     "x-ms-foundry-meta",
     #{
