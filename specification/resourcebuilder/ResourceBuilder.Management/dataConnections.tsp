@@ -74,6 +74,7 @@ model DataConnectionProperties {
 /** Data connection reference. Used to link a dataset to an existing data connection resource. */
 model DataConnectionReference {
   /** ARM resource ID of the data connection. */
+  @armId
   id: string;
 }
 
