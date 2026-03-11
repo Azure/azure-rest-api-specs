@@ -2505,21 +2505,21 @@
       "type": "string",
       "description": "The priority type for VM allocation",
       "enum": [
-        "regular",
-        "spot"
+        "Regular",
+        "Spot"
       ],
       "x-ms-enum": {
         "name": "PriorityType",
         "modelAsString": true,
         "values": [
           {
-            "name": "regular",
-            "value": "regular",
+            "name": "Regular",
+            "value": "Regular",
             "description": "Regular priority VMs"
           },
           {
-            "name": "spot",
-            "value": "spot",
+            "name": "Spot",
+            "value": "Spot",
             "description": "Spot priority VMs"
           }
         ]
@@ -2728,7 +2728,7 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM resource ID of the virtual machine for this override",
+          "description": "The Azure resource ID of the virtual machine for this override",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -2767,7 +2767,7 @@
       "properties": {
         "resourceId": {
           "type": "array",
-          "description": "Unique identifier for the resource involved in the operation, eg ArmId",
+          "description": "Unique identifier for the resource involved in the operation, for example Azure resource ID",
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -2805,7 +2805,7 @@
         },
         "resourceId": {
           "type": "array",
-          "description": "Unique identifier for the resource involved in the operation, eg ArmId",
+          "description": "Unique identifier for the resource involved in the operation, for example Azure resource ID",
           "items": {
             "type": "string",
             "format": "arm-id",
