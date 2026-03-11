@@ -40,11 +40,15 @@ enum Versions {
    */
   v2018_09_01_preview: "2018-09-01-preview",
   /**
+   * The 2019-04-01 API version.
+   */
+  v2019_04_01: "2019-04-01",
+  /**
    * The 2020-04-01-preview API version.
    */
   v2020_04_01_preview: "2020-04-01-preview",
   /**
-   * The 2020-04-01-preview API version.
+   * The 2020-06-01-preview API version.
    */
   v2020_06_01_preview: "2021-06-01-preview",
   /**

@@ -140,11 +140,14 @@ model QueryRequest {
   /**
    * Azure subscriptions against which to execute the query.
    */
+  @Versioning.madeOptional(Versions.v2020_04_01_preview)
   subscriptions?: string[];
 
   /**
    * Azure management groups against which to execute the query. Example: [ 'mg1', 'mg2' ]
    */
+  
+  @Versioning.added(Versions.v2020_04_01_preview)
   managementGroups?: string[];
 
   /**

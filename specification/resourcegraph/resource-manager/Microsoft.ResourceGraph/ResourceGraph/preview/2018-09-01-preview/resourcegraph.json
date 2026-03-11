@@ -423,13 +423,6 @@
             "type": "string"
           }
         },
-        "managementGroups": {
-          "type": "array",
-          "description": "Azure management groups against which to execute the query. Example: [ 'mg1', 'mg2' ]",
-          "items": {
-            "type": "string"
-          }
-        },
         "query": {
           "type": "string",
           "description": "The resources query."
@@ -448,6 +441,7 @@
         }
       },
       "required": [
+        "subscriptions",
         "query"
       ]
     },

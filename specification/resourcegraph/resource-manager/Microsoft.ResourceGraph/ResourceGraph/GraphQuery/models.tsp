@@ -12,7 +12,6 @@ namespace GraphQuery;
 /**
  * Enum indicating a type of graph query.
  */
-@Versioning.added(Versions.v2018_09_01_preview)
 union ResultKind {
   string,
 
@@ -26,7 +25,6 @@ union ResultKind {
  * Properties that contain a graph query.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-@Versioning.added(Versions.v2018_09_01_preview)
 model GraphQueryProperties {
   /**
    * Date and time in UTC of the last modification that was made to this graph query definition.
@@ -55,7 +53,6 @@ model GraphQueryProperties {
 /**
  * The parameters that can be provided when updating workbook properties properties.
  */
-@Versioning.added(Versions.v2018_09_01_preview)
 model GraphQueryUpdateParameters {
   /**
    * Resource tags
@@ -77,7 +74,6 @@ model GraphQueryUpdateParameters {
 /**
  * Properties that contain a workbook for PATCH operation.
  */
-@Versioning.added(Versions.v2018_09_01_preview)
 model GraphQueryPropertiesUpdateParameters {
   /**
    * The description of a graph query.

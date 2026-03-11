@@ -15,5 +15,6 @@ using GraphQuery;
 @@clientName(GraphQueryResources.update::parameters.properties, "body");
 @@clientLocation(GraphQueryResources.delete, "GraphQuery");
 @@clientLocation(GraphQueryResources.list, "GraphQuery");
+@@clientLocation(GraphQueryResources.listBySubscription, "GraphQuery");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(GraphQueryResource.properties);

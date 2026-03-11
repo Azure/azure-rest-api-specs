@@ -17,14 +17,13 @@ namespace GraphQuery;
  * Graph Query entity definition.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.TrackedResourceWithOptionalLocation to make location property optional for backward compatibility"
-@Versioning.added(Versions.v2018_09_01_preview)
 model GraphQueryResource
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GraphQueryProperties> {
   ...ResourceNameParameter<
     Resource = GraphQueryResource,
     KeyName = "resourceName",
     SegmentName = "queries",
-    NamePattern = ""
+    NamePattern = "^[^<>&:\\?]*$"
   >;
 
   /**
@@ -35,7 +34,6 @@ model GraphQueryResource
 }
 
 @armResourceOperations
-@Versioning.added(Versions.v2018_09_01_preview)
 interface GraphQueryResources {
   /**
    * Get a single graph query by its resourceName.
@@ -79,6 +77,14 @@ interface GraphQueryResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GraphQuery_List")
   list is ArmResourceListByParent<GraphQueryResource>;
+
+  /**
+   * Get all graph queries defined within a specified subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GraphQuery_ListBySubscription")
+  @Versioning.added(Versions.v2019_04_01)
+  listBySubscription is ArmListBySubscription<GraphQueryResource>;
 }
 
 @@doc(GraphQueryResource.name, "The name of the Graph Query resource.");
