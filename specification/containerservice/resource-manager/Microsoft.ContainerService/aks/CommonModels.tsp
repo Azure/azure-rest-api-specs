@@ -3786,7 +3786,7 @@ model ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation {
 }
 
 /**
- * Application Monitoring Open Telemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+ * Application Monitoring Open Telemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
 @added(Versions.v2026_02_02_preview)
 model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics {
@@ -3807,7 +3807,7 @@ model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics {
 }
 
 /**
- * Application Monitoring Open Telemetry Logs and Traces Profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+ * Application Monitoring Open Telemetry Logs and Traces Profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
 @added(Versions.v2026_02_02_preview)
 model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces {
