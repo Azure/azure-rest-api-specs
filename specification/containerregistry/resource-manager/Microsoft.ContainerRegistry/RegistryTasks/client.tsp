@@ -91,3 +91,12 @@ using Microsoft.ContainerRegistry;
 );
 @@clientName(RunProperties.createTime, "CreatedOn", "csharp");
 @@clientName(RunFilter.createTime, "CreatedOn", "csharp");
+
+// C# type correctness
+@@alternateType(AgentPoolProperties.virtualNetworkSubnetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(TaskRun.location, azureLocation, "csharp");
+@@alternateType(SourceProperties.repositoryUrl, url, "csharp");
+@@alternateType(SourceTriggerDescriptor.repositoryUrl, url, "csharp");
