@@ -23,6 +23,7 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 
   /** Redaction policy to be used when redacting from documents */
   @added(Versions.v2024_11_15_preview)
+  @removed(Versions.v2026_05_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
 
   /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
@@ -36,6 +37,7 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   /** List of RedactionPolicies to be used on the input. */
   @added(Versions.v2026_05_01)
   @removed(Versions.v2024_11_15_preview)
+  @added(Versions.v2026_05_15_preview)
   redactionPolicies?: BaseRedactionPolicy[];
 
   /** Confidence score threshold configuration for PII entity recognition */
