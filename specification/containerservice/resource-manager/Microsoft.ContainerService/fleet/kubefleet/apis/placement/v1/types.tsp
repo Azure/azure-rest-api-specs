@@ -1,13 +1,11 @@
 import "@azure-tools/typespec-azure-resource-manager";
 import "../../../../k8s.io/api/core/v1/types.tsp";
 import "../../../../k8s.io/apimachinery/apis/meta/v1/types.tsp";
-import "../../../../main.tsp";
 
 using TypeSpec.Versioning;
 using Core.V1;
 using Meta.V1;
 using Azure.ResourceManager;
-using Microsoft.ContainerService;
 
 namespace Placement.V1;
 
