@@ -319,6 +319,7 @@ model OperationListResult {
   @nextLink
   @Versioning.removed(Versions.v2022_10_01)
   @Versioning.added(Versions.v2023_09_01_preview)
+  @Versioning.removed(Versions.v2024_04_01)
   nextLink?: string;
 }
 
