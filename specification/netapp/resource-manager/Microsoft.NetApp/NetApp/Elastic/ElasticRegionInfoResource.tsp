@@ -17,8 +17,6 @@ namespace Microsoft.NetApp;
  * Information regarding regionInfo Item.
  */
 @singleton("default")
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @parentResource(SubscriptionLocationResource)
 model ElasticRegionInfoResource
@@ -34,8 +32,6 @@ model ElasticRegionInfoResource
 /**
  * Contains information about the logical availability zones available within a specific Azure region for a given subscription, used to determine where elastic resources can be provisioned.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ElasticRegionInfo {
   /** Lists the logical availability zones in the specified region and indicates their current availability status for the subscription. This helps determine which zones can be used to deploy Elastic resources. */
@@ -67,14 +63,10 @@ union ZoneAvailabilityStatus {
 /**
  * List of regionInfo resources
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ElasticRegionInfosList is Azure.Core.Page<ElasticRegionInfoResource>;
 
 @armResourceOperations
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 interface ElasticRegionInfoResources {
   /**

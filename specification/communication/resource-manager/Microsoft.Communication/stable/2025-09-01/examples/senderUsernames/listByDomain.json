@@ -1,33 +1,33 @@
 {
   "parameters": {
-    "subscriptionId": "11112222-3333-4444-5555-666677778888",
-    "resourceGroupName": "contosoResourceGroup",
-    "emailServiceName": "contosoEmailService",
+    "api-version": "2025-09-01",
     "domainName": "contoso.com",
-    "api-version": "2025-09-01"
+    "emailServiceName": "contosoEmailService",
+    "resourceGroupName": "contosoResourceGroup",
+    "subscriptionId": "11112222-3333-4444-5555-666677778888"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/senderUsernames/contosoNews",
             "name": "contosoNews",
             "type": "Microsoft.Communication/EmailServices/Domains/SenderUsernames",
+            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/senderUsernames/contosoNews",
             "properties": {
               "dataLocation": "United States",
-              "username": "contosoNews",
-              "displayName": "Contoso News"
+              "displayName": "Contoso News",
+              "username": "contosoNews"
             }
           },
           {
-            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/senderUsernames/contosoAlerts",
             "name": "contosoAlerts",
             "type": "Microsoft.Communication/EmailServices/Domains/SenderUsernames",
+            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/senderUsernames/contosoAlerts",
             "properties": {
               "dataLocation": "United States",
-              "username": "contosoAlerts",
-              "displayName": "Contoso Alerts"
+              "displayName": "Contoso Alerts",
+              "username": "contosoAlerts"
             }
           }
         ]
@@ -41,5 +41,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "SenderUsernames_ListByDomains",
+  "title": "Get SenderUsernames resource"
 }

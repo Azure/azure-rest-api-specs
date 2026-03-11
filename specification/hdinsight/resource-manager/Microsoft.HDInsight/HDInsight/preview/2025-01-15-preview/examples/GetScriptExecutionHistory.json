@@ -1,47 +1,49 @@
 {
   "parameters": {
+    "api-version": "2025-01-15-preview",
     "clusterName": "cluster1",
     "resourceGroupName": "rg1",
-    "api-version": "2025-01-15-preview",
-    "subscriptionId": "subid",
-    "scriptExecutionId": "391145124054712"
+    "scriptExecutionId": "391145124054712",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "scriptExecutionId": 391145124054712,
             "name": "Test",
             "applicationName": "app1",
-            "uri": "http://testurl.com/install.ssh",
+            "endTime": "2017-03-22T21:34:39.293",
+            "executionSummary": [],
+            "operation": "PostClusterCreateScriptActionRequest",
             "roles": [
               "headnode",
               "workernode"
             ],
+            "scriptExecutionId": 391145124054712,
             "startTime": "2017-03-22T21:34:39.293",
-            "endTime": "2017-03-22T21:34:39.293",
             "status": "ValidationFailed",
-            "operation": "PostClusterCreateScriptActionRequest",
-            "executionSummary": []
+            "uri": "http://testurl.com/install.ssh"
           },
           {
-            "scriptExecutionId": 391144597342127,
             "name": "Test",
             "applicationName": "app2",
-            "uri": "http://testurl.com/install-script.ssh",
+            "endTime": "2017-03-22T21:34:39.293",
+            "executionSummary": [],
+            "operation": "PostClusterCreateScriptActionRequest",
             "roles": [
               "headnode",
               "workernode"
             ],
+            "scriptExecutionId": 391144597342127,
             "startTime": "2017-03-22T21:34:39.293",
-            "endTime": "2017-03-22T21:34:39.293",
             "status": "ValidationFailed",
-            "operation": "PostClusterCreateScriptActionRequest",
-            "executionSummary": []
+            "uri": "http://testurl.com/install-script.ssh"
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ScriptExecutionHistory_ListByCluster",
+  "title": "Get Script Execution History List"
 }

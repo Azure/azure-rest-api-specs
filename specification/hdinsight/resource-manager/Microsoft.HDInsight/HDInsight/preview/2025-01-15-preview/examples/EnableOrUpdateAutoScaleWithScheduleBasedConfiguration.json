@@ -1,29 +1,29 @@
 {
   "parameters": {
-    "clusterName": "cluster1",
-    "resourceGroupName": "rg1",
     "api-version": "2025-01-15-preview",
-    "subscriptionId": "subid",
-    "roleName": "workernode",
+    "clusterName": "cluster1",
     "parameters": {
       "autoscale": {
         "recurrence": {
-          "timeZone": "China Standard Time",
           "schedule": [
             {
               "days": [
                 "Thursday"
               ],
               "timeAndCapacity": {
-                "time": "16:00",
+                "maxInstanceCount": 4,
                 "minInstanceCount": 4,
-                "maxInstanceCount": 4
+                "time": "16:00"
               }
             }
-          ]
+          ],
+          "timeZone": "China Standard Time"
         }
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "roleName": "workernode",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {},
@@ -32,5 +32,7 @@
         "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/operationresults/operationid?api-version=2025-01-15-preview"
       }
     }
-  }
+  },
+  "operationId": "Clusters_UpdateAutoScaleConfiguration",
+  "title": "Enable or Update Autoscale with the schedule based configuration for HDInsight cluster"
 }

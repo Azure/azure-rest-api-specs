@@ -1,20 +1,22 @@
 {
+  "operationId": "RaiBlocklistItems_Get",
   "parameters": {
-    "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
+    "api-version": "2025-10-01-preview",
+    "raiBlocklistItemName": "raiBlocklistItemName",
     "raiBlocklistName": "raiBlocklistName",
-    "raiBlocklistItemName": "raiBlocklistItemName"
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
+  "title": "GetRaiBlocklistItem",
   "responses": {
     "200": {
       "body": {
         "name": "raiBlocklistItemName",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiBlocklists/raiBlocklistName/raiBlocklistItems/raiBlocklistItemName",
         "properties": {
-          "pattern": "Pattern To Block",
-          "isRegex": false
+          "isRegex": false,
+          "pattern": "Pattern To Block"
         }
       }
     }

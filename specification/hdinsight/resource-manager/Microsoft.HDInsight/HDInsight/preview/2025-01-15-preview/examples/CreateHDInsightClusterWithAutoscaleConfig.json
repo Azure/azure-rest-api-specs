@@ -1,45 +1,30 @@
 {
   "parameters": {
-    "clusterName": "cluster1",
-    "resourceGroupName": "rg1",
     "api-version": "2025-01-15-preview",
-    "subscriptionId": "subid",
+    "clusterName": "cluster1",
     "parameters": {
       "properties": {
-        "clusterVersion": "3.6",
-        "osType": "Linux",
-        "tier": "Standard",
         "clusterDefinition": {
-          "kind": "hadoop",
           "componentVersion": {
             "Hadoop": "2.7"
           },
           "configurations": {
             "gateway": {
               "restAuthCredential.isEnabled": true,
-              "restAuthCredential.username": "admin",
-              "restAuthCredential.password": "**********"
+              "restAuthCredential.password": "**********",
+              "restAuthCredential.username": "admin"
             }
-          }
+          },
+          "kind": "hadoop"
         },
-        "storageProfile": {
-          "storageaccounts": [
-            {
-              "name": "mystorage.blob.core.windows.net",
-              "isDefault": true,
-              "container": "hdinsight-autoscale-tes-2019-06-18t05-49-16-591z",
-              "key": "storagekey",
-              "enableSecureChannel": true
-            }
-          ]
-        },
+        "clusterVersion": "3.6",
         "computeProfile": {
           "roles": [
             {
+              "name": "workernode",
               "autoscale": {
                 "capacity": null,
                 "recurrence": {
-                  "timeZone": "China Standard Time",
                   "schedule": [
                     {
                       "days": [
@@ -50,9 +35,9 @@
                         "Friday"
                       ],
                       "timeAndCapacity": {
-                        "time": "09:00",
+                        "maxInstanceCount": 3,
                         "minInstanceCount": 3,
-                        "maxInstanceCount": 3
+                        "time": "09:00"
                       }
                     },
                     {
@@ -64,9 +49,9 @@
                         "Friday"
                       ],
                       "timeAndCapacity": {
-                        "time": "18:00",
+                        "maxInstanceCount": 6,
                         "minInstanceCount": 6,
-                        "maxInstanceCount": 6
+                        "time": "18:00"
                       }
                     },
                     {
@@ -75,9 +60,9 @@
                         "Sunday"
                       ],
                       "timeAndCapacity": {
-                        "time": "09:00",
+                        "maxInstanceCount": 2,
                         "minInstanceCount": 2,
-                        "maxInstanceCount": 2
+                        "time": "09:00"
                       }
                     },
                     {
@@ -86,60 +71,71 @@
                         "Sunday"
                       ],
                       "timeAndCapacity": {
-                        "time": "18:00",
+                        "maxInstanceCount": 4,
                         "minInstanceCount": 4,
-                        "maxInstanceCount": 4
+                        "time": "18:00"
                       }
                     }
-                  ]
+                  ],
+                  "timeZone": "China Standard Time"
                 }
               },
-              "name": "workernode",
-              "targetInstanceCount": 4,
+              "dataDisksGroups": null,
               "hardwareProfile": {
                 "vmSize": "Standard_D4_V2"
               },
               "osProfile": {
                 "linuxOperatingSystemProfile": {
-                  "username": "sshuser",
-                  "password": "**********"
+                  "password": "**********",
+                  "username": "sshuser"
                 }
               },
-              "virtualNetworkProfile": null,
               "scriptActions": [],
-              "dataDisksGroups": null
+              "targetInstanceCount": 4,
+              "virtualNetworkProfile": null
             }
           ]
-        }
+        },
+        "osType": "Linux",
+        "storageProfile": {
+          "storageaccounts": [
+            {
+              "name": "mystorage.blob.core.windows.net",
+              "container": "hdinsight-autoscale-tes-2019-06-18t05-49-16-591z",
+              "enableSecureChannel": true,
+              "isDefault": true,
+              "key": "storagekey"
+            }
+          ]
+        },
+        "tier": "Standard"
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/azureasyncoperations/create?api-version=2025-01-15-preview"
-      },
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
         "name": "cluster1",
         "type": "Microsoft.HDInsight/clusters",
-        "location": "East US",
         "etag": "fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
+        "location": "East US",
         "properties": {
-          "clusterVersion": "4.0.1000.1",
-          "osType": "Linux",
           "clusterDefinition": {
             "blueprint": "https://blueprints.azurehdinsight.net/hadoop-4.0.1000.1.1910270459.json",
-            "kind": "HADOOP",
             "componentVersion": {
               "Hadoop": "3.1"
-            }
+            },
+            "kind": "HADOOP"
           },
+          "clusterState": "Running",
+          "clusterVersion": "4.0.1000.1",
           "computeProfile": {
             "roles": [
               {
                 "name": "headnode",
-                "targetInstanceCount": 2,
                 "hardwareProfile": {
                   "vmSize": "standard_d12_v2"
                 },
@@ -147,11 +143,11 @@
                   "linuxOperatingSystemProfile": {
                     "username": "sshuser"
                   }
-                }
+                },
+                "targetInstanceCount": 2
               },
               {
                 "name": "workernode",
-                "targetInstanceCount": 4,
                 "hardwareProfile": {
                   "vmSize": "standard_d4_v2"
                 },
@@ -159,11 +155,11 @@
                   "linuxOperatingSystemProfile": {
                     "username": "sshuser"
                   }
-                }
+                },
+                "targetInstanceCount": 4
               },
               {
                 "name": "zookeepernode",
-                "targetInstanceCount": 3,
                 "hardwareProfile": {
                   "vmSize": "standard_a2_v2"
                 },
@@ -171,33 +167,39 @@
                   "linuxOperatingSystemProfile": {
                     "username": "sshuser"
                   }
-                }
+                },
+                "targetInstanceCount": 3
               }
             ]
-          },
-          "provisioningState": "Succeeded",
-          "clusterState": "Running",
-          "createdDate": "2019-11-18T12:25:43.48",
-          "quotaInfo": {
-            "coresUsed": 40
           },
           "connectivityEndpoints": [
             {
               "name": "SSH",
-              "protocol": "TCP",
               "location": "cluster1-ssh.azurehdinsight.net",
-              "port": 22
+              "port": 22,
+              "protocol": "TCP"
             },
             {
               "name": "HTTPS",
-              "protocol": "TCP",
               "location": "cluster1.azurehdinsight.net",
-              "port": 443
+              "port": 443,
+              "protocol": "TCP"
             }
           ],
+          "createdDate": "2019-11-18T12:25:43.48",
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "quotaInfo": {
+            "coresUsed": 40
+          },
           "tier": "Standard"
         }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/azureasyncoperations/create?api-version=2025-01-15-preview"
       }
     }
-  }
+  },
+  "operationId": "Clusters_Create",
+  "title": "Create HDInsight cluster with Autoscale configuration"
 }

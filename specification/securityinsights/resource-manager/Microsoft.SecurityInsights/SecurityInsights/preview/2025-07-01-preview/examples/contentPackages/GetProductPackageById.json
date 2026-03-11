@@ -1,40 +1,32 @@
 {
   "parameters": {
     "api-version": "2025-07-01-preview",
-    "subscriptionId": "d0cfeab2-9ae0-4464-9919-dccaee2e48f0",
+    "packageId": "str.azure-sentinel-solution-str",
     "resourceGroupName": "myRg",
-    "workspaceName": "myWorkspace",
-    "packageId": "str.azure-sentinel-solution-str"
+    "subscriptionId": "d0cfeab2-9ae0-4464-9919-dccaee2e48f0",
+    "workspaceName": "myWorkspace"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/d0cfeab2-9ae0-4464-9919-dccaee2e48f0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/contentProductPackages/str.azure-sentinel-solution-str",
         "name": "str.azure-sentinel-solution-str",
         "type": "Microsoft.SecurityInsights/contentproductpackages",
         "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "id": "/subscriptions/d0cfeab2-9ae0-4464-9919-dccaee2e48f0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/contentProductPackages/str.azure-sentinel-solution-str",
         "properties": {
-          "contentId": "str.azure-sentinel-solution-str",
-          "contentProductId": "str.azure-sentinel-solution-str-sl-igl6jawr4gwmu",
-          "contentKind": "Solution",
-          "installedVersion": "2.0.0",
-          "version": "2.0.0",
-          "displayName": "str",
-          "source": {
-            "kind": "Solution",
-            "name": "str",
-            "sourceId": "str.azure-sentinel-solution-str"
-          },
           "author": {
             "name": "Microsoft",
             "email": "support@microsoft.com"
           },
-          "support": {
-            "tier": "Microsoft",
-            "name": "Microsoft Corporation",
-            "email": "support@microsoft.com",
-            "link": "https://support.microsoft.com/"
+          "categories": {
+            "domains": [
+              "Security - Cloud Security"
+            ],
+            "verticals": null
           },
+          "contentId": "str.azure-sentinel-solution-str",
+          "contentKind": "Solution",
+          "contentProductId": "str.azure-sentinel-solution-str-sl-igl6jawr4gwmu",
           "dependencies": {
             "criteria": [
               {
@@ -50,27 +42,37 @@
             ],
             "operator": "AND"
           },
+          "displayName": "str",
+          "firstPublishDate": "2022-04-01",
+          "installedVersion": "2.0.0",
+          "packageContent": "JSON string of the package",
           "providers": [
             "Microsoft"
           ],
-          "categories": {
-            "domains": [
-              "Security - Cloud Security"
-            ],
-            "verticals": null
+          "source": {
+            "name": "str",
+            "kind": "Solution",
+            "sourceId": "str.azure-sentinel-solution-str"
           },
-          "firstPublishDate": "2022-04-01",
-          "packageContent": "JSON string of the package"
+          "support": {
+            "name": "Microsoft Corporation",
+            "email": "support@microsoft.com",
+            "link": "https://support.microsoft.com/",
+            "tier": "Microsoft"
+          },
+          "version": "2.0.0"
         },
         "systemData": {
+          "createdAt": "2020-04-27T21:53:29.0928001Z",
           "createdBy": "string",
           "createdByType": "User",
-          "createdAt": "2020-04-27T21:53:29.0928001Z",
+          "lastModifiedAt": "2020-04-27T21:53:29.0928001Z",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-04-27T21:53:29.0928001Z"
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "ProductPackage_Get",
+  "title": "Get a package."
 }

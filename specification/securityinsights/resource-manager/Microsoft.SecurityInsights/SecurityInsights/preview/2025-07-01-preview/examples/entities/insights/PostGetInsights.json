@@ -1,24 +1,64 @@
 {
   "parameters": {
     "api-version": "2025-07-01-preview",
-    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
-    "resourceGroupName": "myRg",
-    "workspaceName": "myWorkspace",
     "entityId": "e1d3d618-e11f-478b-98e3-bb381539a8e1",
     "parameters": {
       "addDefaultExtendedTimeRange": false,
-      "startTime": "2021-09-01T00:00:00.000Z",
       "endTime": "2021-10-01T00:00:00.000Z",
       "insightQueryIds": [
         "cae8d0aa-aa45-4d53-8d88-17dd64ffd4e4"
-      ]
-    }
+      ],
+      "startTime": "2021-09-01T00:00:00.000Z"
+    },
+    "resourceGroupName": "myRg",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "workspaceName": "myWorkspace"
   },
   "responses": {
     "200": {
       "body": {
+        "metaData": {
+          "errors": [
+            {
+              "errorMessage": "Internal server error",
+              "kind": "Insight",
+              "queryId": "4a70a63d-25c4-6312-b73e-4f302a90c06a"
+            }
+          ],
+          "totalCount": 7
+        },
         "value": [
           {
+            "chartQueryResults": [
+              {
+                "columns": [
+                  {
+                    "name": "TimeGenerated",
+                    "type": "datetime"
+                  },
+                  {
+                    "name": "Count",
+                    "type": "long"
+                  },
+                  {
+                    "name": "Legend",
+                    "type": "string"
+                  }
+                ],
+                "rows": [
+                  [
+                    "2021-09-01T00:00:00.000Z",
+                    "55",
+                    "SomeLegend"
+                  ]
+                ]
+              }
+            ],
+            "queryId": "e29ee1ef-7445-455e-85f1-269f2d536d61",
+            "queryTimeInterval": {
+              "endTime": "2021-09-01T23:35:20Z",
+              "startTime": "2021-09-01T23:35:20Z"
+            },
             "tableQueryResults": {
               "columns": [
                 {
@@ -51,50 +91,12 @@
                   "1"
                 ]
               ]
-            },
-            "chartQueryResults": [
-              {
-                "columns": [
-                  {
-                    "name": "TimeGenerated",
-                    "type": "datetime"
-                  },
-                  {
-                    "name": "Count",
-                    "type": "long"
-                  },
-                  {
-                    "name": "Legend",
-                    "type": "string"
-                  }
-                ],
-                "rows": [
-                  [
-                    "2021-09-01T00:00:00.000Z",
-                    "55",
-                    "SomeLegend"
-                  ]
-                ]
-              }
-            ],
-            "queryTimeInterval": {
-              "startTime": "2021-09-01T23:35:20Z",
-              "endTime": "2021-09-01T23:35:20Z"
-            },
-            "queryId": "e29ee1ef-7445-455e-85f1-269f2d536d61"
-          }
-        ],
-        "metaData": {
-          "totalCount": 7,
-          "errors": [
-            {
-              "kind": "Insight",
-              "queryId": "4a70a63d-25c4-6312-b73e-4f302a90c06a",
-              "errorMessage": "Internal server error"
             }
-          ]
-        }
+          }
+        ]
       }
     }
-  }
+  },
+  "operationId": "Entities_GetInsights",
+  "title": "Entity Insight"
 }

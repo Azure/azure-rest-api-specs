@@ -1,33 +1,35 @@
 {
   "parameters": {
-    "subscriptionId": "subId1",
-    "resourceGroupName": "rg1",
-    "clusterRp": "Microsoft.Kubernetes",
-    "clusterResourceName": "connectedClusters",
     "api-version": "2025-04-01",
-    "clusterName": "clusterName1"
+    "clusterName": "clusterName1",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId1"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/99999999-9999-9999-9999-999999999999",
             "name": "99999999-9999-9999-9999-999999999999",
-            "status": "Deleting",
+            "error": null,
+            "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/99999999-9999-9999-9999-999999999999",
             "properties": {},
-            "error": null
+            "status": "Deleting"
           },
           {
-            "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/cassandraExtension1/operations/88888888-8888-8888-8888-888888888888",
             "name": "88888888-8888-8888-8888-888888888888",
-            "status": "Creating",
+            "error": null,
+            "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/cassandraExtension1/operations/88888888-8888-8888-8888-888888888888",
             "properties": {},
-            "error": null
+            "status": "Creating"
           }
-        ],
-        "nextLink": null
+        ]
       }
     }
-  }
+  },
+  "operationId": "OperationStatus_List",
+  "title": "AsyncOperationStatus List"
 }

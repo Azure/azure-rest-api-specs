@@ -1,41 +1,43 @@
 {
   "parameters": {
     "api-version": "2025-07-01-preview",
-    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "fileImportId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
     "resourceGroupName": "myRg",
-    "workspaceName": "myWorkspace",
-    "fileImportId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5"
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "workspaceName": "myWorkspace"
   },
   "responses": {
     "202": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/FileImports/73e01a99-5cd7-4139-a149-9f2736ff2ab5"
-      },
       "body": {
-        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/FileImports/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
         "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
         "type": "Microsoft.SecurityInsights/FileImports",
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/FileImports/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
         "properties": {
-          "importFile": {
-            "fileName": "myFile.json",
-            "fileSize": 5146,
-            "fileFormat": "JSON",
-            "fileContentUri": null,
-            "deleteStatus": "NotDeleted"
-          },
-          "state": "Ingested",
           "contentType": "StixIndicator",
-          "ingestionMode": "IngestAnyValidRecords",
-          "totalRecordCount": 5,
-          "validRecordCount": 5,
-          "ingestedRecordCount": 5,
           "createdTimeUTC": "2022-03-25T21:02:38.8350631Z",
           "filesValidUntilTimeUTC": "2022-03-26T21:02:38.8350632Z",
+          "importFile": {
+            "deleteStatus": "NotDeleted",
+            "fileContentUri": null,
+            "fileFormat": "JSON",
+            "fileName": "myFile.json",
+            "fileSize": 5146
+          },
           "importValidUntilTimeUTC": "2022-04-24T21:02:38.8350636Z",
-          "source": "mySource"
+          "ingestedRecordCount": 5,
+          "ingestionMode": "IngestAnyValidRecords",
+          "source": "mySource",
+          "state": "Ingested",
+          "totalRecordCount": 5,
+          "validRecordCount": 5
         }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/FileImports/73e01a99-5cd7-4139-a149-9f2736ff2ab5"
       }
     },
     "204": {}
-  }
+  },
+  "operationId": "FileImports_Delete",
+  "title": "Delete a file import."
 }

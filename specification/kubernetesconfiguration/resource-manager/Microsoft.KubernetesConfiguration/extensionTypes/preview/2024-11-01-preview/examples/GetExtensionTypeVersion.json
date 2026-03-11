@@ -1,25 +1,36 @@
 {
   "parameters": {
-    "subscriptionId": "subId1",
-    "resourceGroupName": "rg1",
-    "clusterRp": "Microsoft.Kubernetes",
-    "clusterResourceName": "connectedClusters",
+    "api-version": "2024-11-01-preview",
     "clusterName": "my-cluster",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
     "extensionTypeName": "my-extension-type",
-    "versionNumber": "v1.3.2",
-    "api-version": "2024-11-01-preview"
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId1",
+    "versionNumber": "v1.3.2"
   },
   "responses": {
     "200": {
-      "headers": {},
       "description": "Versions for the Extension Type",
       "body": {
-        "id": "aaaa",
         "name": "bbbb",
         "type": "cccc",
+        "id": "aaaa",
         "properties": {
-          "version": "1.1.0",
+          "supportedClusterTypes": [
+            "connectedCluster"
+          ],
           "unsupportedKubernetesVersions": {
+            "appliances": [
+              {
+                "distributions": [
+                  "AKS"
+                ],
+                "unsupportedVersions": [
+                  "1.18..1.21"
+                ]
+              }
+            ],
             "connectedCluster": [
               {
                 "distributions": [
@@ -36,14 +47,12 @@
                 ]
               }
             ],
-            "appliances": [
+            "managedCluster": [
               {
                 "distributions": [
                   "AKS"
                 ],
-                "unsupportedVersions": [
-                  "1.18..1.21"
-                ]
+                "unsupportedVersions": []
               }
             ],
             "provisionedCluster": [
@@ -53,21 +62,14 @@
                 ],
                 "unsupportedVersions": []
               }
-            ],
-            "managedCluster": [
-              {
-                "distributions": [
-                  "AKS"
-                ],
-                "unsupportedVersions": []
-              }
             ]
           },
-          "supportedClusterTypes": [
-            "connectedCluster"
-          ]
+          "version": "1.1.0"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ExtensionTypes_ClusterGetVersion",
+  "title": "List Extension Type Versions"
 }

@@ -1,7 +1,7 @@
 {
   "parameters": {
-    "location": "West US",
     "api-version": "2025-01-15-preview",
+    "location": "West US",
     "subscriptionId": "subid"
   },
   "responses": {
@@ -9,16 +9,18 @@
       "body": {
         "value": [
           {
-            "unit": "Count",
+            "name": {
+              "localizedValue": "Cores",
+              "value": "cores"
+            },
             "currentValue": 0,
             "limit": 5000,
-            "name": {
-              "value": "cores",
-              "localizedValue": "Cores"
-            }
+            "unit": "Count"
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Locations_ListUsages",
+  "title": "Get the subscription usages for specific location"
 }

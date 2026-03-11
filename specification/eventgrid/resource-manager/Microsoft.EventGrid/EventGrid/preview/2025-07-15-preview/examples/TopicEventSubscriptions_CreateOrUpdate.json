@@ -1,9 +1,5 @@
 {
   "parameters": {
-    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-    "resourceGroupName": "examplerg",
-    "topicName": "exampleTopic1",
-    "eventSubscriptionName": "exampleEventSubscriptionName1",
     "api-version": "2025-07-15-preview",
     "eventSubscriptionInfo": {
       "properties": {
@@ -19,64 +15,70 @@
           "subjectEndsWith": "ExampleSuffix"
         }
       }
-    }
+    },
+    "eventSubscriptionName": "exampleEventSubscriptionName1",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "topicName": "exampleTopic1"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "exampleEventSubscriptionName1",
+        "type": "Microsoft.EventGrid/topics/eventSubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1/eventSubscriptions/exampleEventSubscriptionName1",
         "properties": {
           "destination": {
+            "endpointType": "WebHook",
             "properties": {
               "endpointBaseUrl": "https://requestb.in/15ksip71"
-            },
-            "endpointType": "WebHook"
+            }
           },
+          "eventDeliverySchema": "EventGridSchema",
           "filter": {
             "isSubjectCaseSensitive": false,
             "subjectBeginsWith": "ExamplePrefix",
             "subjectEndsWith": "ExampleSuffix"
           },
           "labels": null,
-          "eventDeliverySchema": "EventGridSchema",
-          "retryPolicy": {
-            "maxDeliveryAttempts": 30,
-            "eventTimeToLiveInMinutes": 1440
-          },
           "provisioningState": "Succeeded",
+          "retryPolicy": {
+            "eventTimeToLiveInMinutes": 1440,
+            "maxDeliveryAttempts": 30
+          },
           "topic": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1"
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1/eventSubscriptions/exampleEventSubscriptionName1",
-        "name": "exampleEventSubscriptionName1",
-        "type": "Microsoft.EventGrid/topics/eventSubscriptions"
+        }
       }
     },
     "201": {
       "body": {
+        "name": "exampleEventSubscriptionName1",
+        "type": "Microsoft.EventGrid/topics/eventSubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1/eventSubscriptions/exampleEventSubscriptionName1",
         "properties": {
           "destination": {
+            "endpointType": "WebHook",
             "properties": {
               "endpointBaseUrl": "https://requestb.in/15ksip71"
-            },
-            "endpointType": "WebHook"
+            }
           },
+          "eventDeliverySchema": "EventGridSchema",
           "filter": {
             "isSubjectCaseSensitive": false,
             "subjectBeginsWith": "ExamplePrefix",
             "subjectEndsWith": "ExampleSuffix"
           },
           "labels": null,
-          "eventDeliverySchema": "EventGridSchema",
-          "retryPolicy": {
-            "maxDeliveryAttempts": 30,
-            "eventTimeToLiveInMinutes": 1440
-          },
           "provisioningState": "Succeeded",
+          "retryPolicy": {
+            "eventTimeToLiveInMinutes": 1440,
+            "maxDeliveryAttempts": 30
+          },
           "topic": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1"
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1/eventSubscriptions/exampleEventSubscriptionName1",
-        "name": "exampleEventSubscriptionName1",
-        "type": "Microsoft.EventGrid/topics/eventSubscriptions"
+        }
       }
     }
-  }
+  },
+  "operationId": "TopicEventSubscriptions_CreateOrUpdate",
+  "title": "TopicEventSubscriptions_CreateOrUpdate"
 }

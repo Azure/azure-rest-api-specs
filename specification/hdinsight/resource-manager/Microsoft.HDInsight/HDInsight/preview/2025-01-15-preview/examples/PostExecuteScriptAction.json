@@ -1,31 +1,33 @@
 {
   "parameters": {
-    "clusterName": "cluster1",
-    "resourceGroupName": "rg1",
     "api-version": "2025-01-15-preview",
-    "subscriptionId": "subid",
+    "clusterName": "cluster1",
     "parameters": {
+      "persistOnSuccess": false,
       "scriptActions": [
         {
           "name": "Test",
-          "uri": "http://testurl.com/install.ssh",
+          "parameters": "",
           "roles": [
             "headnode",
             "workernode"
           ],
-          "parameters": ""
+          "uri": "http://testurl.com/install.ssh"
         }
-      ],
-      "persistOnSuccess": false
-    }
+      ]
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
+    "200": {},
     "202": {
       "headers": {
         "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/operationresults/operationid?api-version=2025-01-15-preview"
       }
     },
-    "200": {},
     "404": {}
-  }
+  },
+  "operationId": "Clusters_ExecuteScriptActions",
+  "title": "Execute script action on HDInsight cluster"
 }

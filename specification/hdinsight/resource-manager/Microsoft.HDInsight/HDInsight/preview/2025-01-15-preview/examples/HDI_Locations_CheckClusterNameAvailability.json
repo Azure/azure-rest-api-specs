@@ -1,20 +1,22 @@
 {
   "parameters": {
-    "location": "westus",
     "api-version": "2025-01-15-preview",
-    "subscriptionId": "subid",
+    "location": "westus",
     "parameters": {
       "name": "test123",
       "type": "clusters"
-    }
+    },
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
+        "message": "Cluster name 'test123' is unavailable",
         "nameAvailable": false,
-        "reason": "AlreadyExists",
-        "message": "Cluster name 'test123' is unavailable"
+        "reason": "AlreadyExists"
       }
     }
-  }
+  },
+  "operationId": "Locations_CheckNameAvailability",
+  "title": "Get the subscription usages for specific location"
 }

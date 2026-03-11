@@ -1,37 +1,37 @@
 {
   "parameters": {
-    "subscriptionId": "11112222-3333-4444-5555-666677778888",
-    "resourceGroupName": "contosoResourceGroup",
-    "emailServiceName": "contosoEmailService",
+    "api-version": "2025-09-01",
     "domainName": "contoso.com",
-    "api-version": "2025-09-01"
+    "emailServiceName": "contosoEmailService",
+    "resourceGroupName": "contosoResourceGroup",
+    "subscriptionId": "11112222-3333-4444-5555-666677778888"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/suppressionLists/aaaa1111-bbbb-2222-3333-aaaa11112222",
             "name": "aaaa1111-bbbb-2222-3333-aaaa11112222",
             "type": "Microsoft.Communication/EmailServices/Domains/SuppressionLists",
+            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/suppressionLists/aaaa1111-bbbb-2222-3333-aaaa11112222",
             "properties": {
-              "listName": "contosoNewsAlerts",
+              "createdTimeStamp": "2023-06-06T17:06:26.100Z",
               "lastUpdatedTimeStamp": "2023-06-06T17:06:26.100Z",
-              "createdTimeStamp": "2023-06-06T17:06:26.100Z"
+              "listName": "contosoNewsAlerts"
             }
           },
           {
-            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/suppressionLists/aaaa1111-bbbb-2222-3333-aaaa11112222",
             "name": "aaaa1111-bbbb-2222-3333-aaaa11112222",
             "type": "Microsoft.Communication/EmailServices/Domains/SuppressionLists",
+            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/suppressionLists/aaaa1111-bbbb-2222-3333-aaaa11112222",
             "properties": {
-              "listName": "contosoShopping",
+              "createdTimeStamp": "2023-06-06T17:06:26.100Z",
               "lastUpdatedTimeStamp": "2023-06-06T17:06:26.100Z",
-              "createdTimeStamp": "2023-06-06T17:06:26.100Z"
+              "listName": "contosoShopping"
             }
           }
-        ],
-        "nextLink": null
+        ]
       }
     },
     "default": {
@@ -42,5 +42,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "SuppressionLists_ListByDomain",
+  "title": "Get all SuppressionLists resources."
 }

@@ -1,27 +1,39 @@
 {
   "parameters": {
-    "subscriptionId": "subId1",
-    "location": "westus",
-    "extensionTypeName": "extensionType1",
-    "releaseTrain": "stable",
+    "api-version": "2024-11-01-preview",
     "clusterType": "connectedCluster",
+    "extensionTypeName": "extensionType1",
+    "location": "westus",
     "majorVersion": "2",
+    "releaseTrain": "stable",
     "showLatest": true,
-    "api-version": "2024-11-01-preview"
+    "subscriptionId": "subId1"
   },
   "responses": {
     "200": {
-      "headers": {},
       "description": "Versions for the Extension Type",
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "aaaa",
             "name": "bbbb",
             "type": "cccc",
+            "id": "aaaa",
             "properties": {
-              "version": "1.1.0",
+              "supportedClusterTypes": [
+                "connectedCluster"
+              ],
               "unsupportedKubernetesVersions": {
+                "appliances": [
+                  {
+                    "distributions": [
+                      "AKS"
+                    ],
+                    "unsupportedVersions": [
+                      "1.18..1.21"
+                    ]
+                  }
+                ],
                 "connectedCluster": [
                   {
                     "distributions": [
@@ -38,14 +50,12 @@
                     ]
                   }
                 ],
-                "appliances": [
+                "managedCluster": [
                   {
                     "distributions": [
                       "AKS"
                     ],
-                    "unsupportedVersions": [
-                      "1.18..1.21"
-                    ]
+                    "unsupportedVersions": []
                   }
                 ],
                 "provisionedCluster": [
@@ -55,28 +65,30 @@
                     ],
                     "unsupportedVersions": []
                   }
-                ],
-                "managedCluster": [
-                  {
-                    "distributions": [
-                      "AKS"
-                    ],
-                    "unsupportedVersions": []
-                  }
                 ]
               },
-              "supportedClusterTypes": [
-                "connectedCluster"
-              ]
+              "version": "1.1.0"
             }
           },
           {
-            "id": "aaaa",
             "name": "bbbb",
             "type": "cccc",
+            "id": "aaaa",
             "properties": {
-              "version": "1.2.0",
+              "supportedClusterTypes": [
+                "connectedCluster"
+              ],
               "unsupportedKubernetesVersions": {
+                "appliances": [
+                  {
+                    "distributions": [
+                      "AKS"
+                    ],
+                    "unsupportedVersions": [
+                      "1.18..1.21"
+                    ]
+                  }
+                ],
                 "connectedCluster": [
                   {
                     "distributions": [
@@ -93,14 +105,12 @@
                     ]
                   }
                 ],
-                "appliances": [
+                "managedCluster": [
                   {
                     "distributions": [
                       "AKS"
                     ],
-                    "unsupportedVersions": [
-                      "1.18..1.21"
-                    ]
+                    "unsupportedVersions": []
                   }
                 ],
                 "provisionedCluster": [
@@ -110,24 +120,16 @@
                     ],
                     "unsupportedVersions": []
                   }
-                ],
-                "managedCluster": [
-                  {
-                    "distributions": [
-                      "AKS"
-                    ],
-                    "unsupportedVersions": []
-                  }
                 ]
               },
-              "supportedClusterTypes": [
-                "connectedCluster"
-              ]
+              "version": "1.2.0"
             }
           }
-        ],
-        "nextLink": null
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ExtensionTypes_ListVersions",
+  "title": "List Extension Type Versions"
 }

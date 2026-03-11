@@ -1,23 +1,25 @@
 {
   "parameters": {
-    "subscriptionId": "subId1",
-    "resourceGroupName": "rg1",
-    "clusterRp": "Microsoft.Kubernetes",
-    "clusterResourceName": "connectedClusters",
-    "fluxConfigurationName": "srs-fluxconfig",
     "api-version": "2025-04-01",
-    "clusterName": "clusterName1"
+    "clusterName": "clusterName1",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
+    "fluxConfigurationName": "srs-fluxconfig",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId1"
   },
   "responses": {
-    "202": {
-      "headers": {
-        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig/operations/{operationId}",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/operationId?api-version=2025-04-01",
-        "x-ms-async-operation-timeout": "PT1H"
-      },
-      "description": "Details of the Kubernetes Flux Configuration's current status."
-    },
     "200": {},
+    "202": {
+      "description": "Details of the Kubernetes Flux Configuration's current status.",
+      "headers": {
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/operationId?api-version=2025-04-01",
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig/operations/{operationId}",
+        "x-ms-async-operation-timeout": "PT1H"
+      }
+    },
     "204": {}
-  }
+  },
+  "operationId": "FluxConfigurations_Delete",
+  "title": "Delete Flux Configuration"
 }
