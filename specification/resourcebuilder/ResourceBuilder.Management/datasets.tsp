@@ -62,6 +62,12 @@ model DatasetProperties {
 
   /** Azure regions where the dataset exists. */
   locations?: string[];
+
+  /** Reference to an existing data connection resource that provides the source connection for this dataset. */
+  connection?: DataConnectionReference;
+
+  /** Path (e.g. blob prefix) within the target specified by the connection. Applicable only for StorageAccount kind connections. */
+  path?: string;
 }
 
 /** Dataset column */

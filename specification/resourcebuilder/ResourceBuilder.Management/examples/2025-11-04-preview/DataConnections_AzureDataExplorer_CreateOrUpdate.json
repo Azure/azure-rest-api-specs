@@ -1,0 +1,46 @@
+{
+  "title": "DataConnections_AzureDataExplorer_CreateOrUpdate",
+  "operationId": "DataConnections_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-11-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "dataConnectionName": "my-adx-connection",
+    "resource": {
+      "kind": "AzureDataExplorer",
+      "properties": {
+        "clusterUri": "https://mycluster.eastus.kusto.windows.net",
+        "databaseName": "myDatabase"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "AzureDataExplorer",
+        "properties": {
+          "clusterUri": "https://mycluster.eastus.kusto.windows.net",
+          "databaseName": "myDatabase",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/dataConnections/my-adx-connection",
+        "name": "my-adx-connection",
+        "type": "Microsoft.ResourceBuilder/workspaces/dataConnections"
+      }
+    },
+    "201": {
+      "body": {
+        "kind": "AzureDataExplorer",
+        "properties": {
+          "clusterUri": "https://mycluster.eastus.kusto.windows.net",
+          "databaseName": "myDatabase",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/dataConnections/my-adx-connection",
+        "name": "my-adx-connection",
+        "type": "Microsoft.ResourceBuilder/workspaces/dataConnections"
+      }
+    }
+  }
+}
