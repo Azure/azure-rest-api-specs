@@ -16,7 +16,7 @@ op StorageOperation<
   TResponse extends TypeSpec.Reflection.Model | void,
   RequestMediaType extends string = "application/xml",
   ResponseMediaType extends string = "application/xml",
-  TError = StorageError
+  TError = Error
 >(
   /** Content-Type header */
   #suppress "@typespec/http/content-type-ignored" "Template for existing API"
@@ -43,7 +43,7 @@ op StorageOperation<
 op StorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
-  TError = StorageError
+  TError = Error
 >(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
   ...ApiVersionHeader;
   ...RequestIdResponseHeader;
@@ -57,7 +57,7 @@ op StorageOperationResponseBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   ResponseMediaType extends string = "application/xml",
-  TError = StorageError
+  TError = Error
 > is StorageOperationNoBody<
   TParams,
   {
@@ -75,7 +75,7 @@ op StorageOperationRequestBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   RequestMediaType extends string = "application/xml",
-  TError = StorageError
+  TError = Error
 > is StorageOperationNoBody<
   {
     /** Content-Type header */
