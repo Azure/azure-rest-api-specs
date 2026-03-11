@@ -3357,7 +3357,7 @@ model DeploymentSettingVirtualSwitchConfigurationOverrides {
   enableIov?: string;
 
   /**
-   * Load Balancing Algorithm for Virtual Switch
+   * Load Balancing Algorithm for Virtual Switchq
    */
   loadBalancingAlgorithm?: string;
 }
@@ -7216,13 +7216,6 @@ model StorageProfile {
    */
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
-
-  /**
-   * List of storage disks on the device.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["id"])
-  disks?: Disk[];
 }
 /**
  * details of validation failure
