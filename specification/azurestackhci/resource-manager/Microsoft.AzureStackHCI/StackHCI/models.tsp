@@ -3357,7 +3357,7 @@ model DeploymentSettingVirtualSwitchConfigurationOverrides {
   enableIov?: string;
 
   /**
-   * Load Balancing Algorithm for Virtual Switchq
+   * Load Balancing Algorithm for Virtual Switch
    */
   loadBalancingAlgorithm?: string;
 }
