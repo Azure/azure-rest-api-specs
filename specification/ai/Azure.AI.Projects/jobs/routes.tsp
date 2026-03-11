@@ -57,11 +57,9 @@ interface Jobs {
   delete is JobOperations.ResourceDelete<CommandJob>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Cancel action uses ResourceAction with no response body"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Cancel returns 200 with no body"
   @doc("Cancel a Job by name.")
   @post
-  cancel is JobOperations.ResourceAction<
-    CommandJob,
-    {},
-    Http.NoContentResponse
-  >;
+  @Rest.actionSeparator("/")
+  cancel is JobOperations.ResourceAction<CommandJob, {}, Http.OkResponse>;
 }

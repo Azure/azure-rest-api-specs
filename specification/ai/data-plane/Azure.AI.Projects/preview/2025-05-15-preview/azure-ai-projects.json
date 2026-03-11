@@ -1599,7 +1599,7 @@
         }
       }
     },
-    "/jobs/{name}:cancel": {
+    "/jobs/{name}/cancel": {
       "post": {
         "operationId": "Jobs_Cancel",
         "description": "Cancel a Job by name.",
@@ -1619,8 +1619,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
+          "200": {
+            "description": "The request has succeeded.",
             "headers": {
               "x-ms-client-request-id": {
                 "type": "string",
