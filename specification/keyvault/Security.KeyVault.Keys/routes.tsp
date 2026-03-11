@@ -6,6 +6,7 @@ import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -473,9 +474,9 @@ op secureWrapKey is KeyVaultOperation<
     /**
      * The parameters for wrap operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecureKeyWrapOperationParameters;
   },
   SecureKeyOperationResult
@@ -513,9 +514,9 @@ op secureUnwrapKey is KeyVaultOperation<
     /**
      * The parameters for unwrap operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecureKeyUnWrapOperationParameters;
   },
   SecureKeyOperationResult

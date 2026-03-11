@@ -242,7 +242,7 @@ export function logIssuesToPipeline(logPath: string, specConfigDisplayText: stri
     >;
     vsoLogs = objectToMap(logContent);
   } catch (error) {
-    throw new Error(`Runner: error reading log at ${logPath}:${inspect(error)}`);
+    throw new Error(`Runner: error reading log at ${logPath}:${inspect(error)}`, { cause: error });
   }
 
   if (vsoLogs) {

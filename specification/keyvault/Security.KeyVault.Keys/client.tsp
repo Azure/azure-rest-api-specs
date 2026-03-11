@@ -23,7 +23,7 @@ using KeyVault;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault.")
 @route("/keys/{key-name}/{key-version}")
-@patch(#{ implicitOptionality: true })
+@patch(#{ implicitOptionality: false })
 op updateKey is KeyVaultOperation<
   {
     /**
@@ -324,9 +324,9 @@ op secureWrapKey is KeyVaultOperation<
     /**
      * The parameters for wrap operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecureKeyWrapOperationParameters;
   },
   SecureKeyOperationResult
@@ -364,9 +364,9 @@ op secureUnwrapKey is KeyVaultOperation<
     /**
      * The parameters for unwrap operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecureKeyUnWrapOperationParameters;
   },
   SecureKeyOperationResult
@@ -438,16 +438,18 @@ op getKeyAttestation is KeyVaultOperation<
   KeyBundle
 >;
 
-@@override(KeyVault.updateKey, updateKey);
-@@override(KeyVault.getKey, getKey);
+@@override(KeyVault.updateKey, updateKey, "!rust");
+@@override(KeyVault.getKey, getKey, "!rust");
+// Rust follows the service definition for optional versions but will consistently promote the version for crypto operation.
+// Not using (and storing) an explicit version for crypto operations is dangerous and can lock applications out of their data.
 @@override(KeyVault.encrypt, encrypt);
 @@override(KeyVault.decrypt, decrypt);
 @@override(KeyVault.sign, sign);
 @@override(KeyVault.verify, verify);
 @@override(KeyVault.wrapKey, wrapKey);
 @@override(KeyVault.unwrapKey, unwrapKey);
-@@override(KeyVault.release, release);
-@@override(KeyVault.getKeyAttestation, getKeyAttestation);
+@@override(KeyVault.release, release, "!rust");
+@@override(KeyVault.getKeyAttestation, getKeyAttestation, "!rust");
 
 // Java configuration
 @@clientName(KeyEncryptionAlgorithm, "KeyExportEncryptionAlgorithm", "java");

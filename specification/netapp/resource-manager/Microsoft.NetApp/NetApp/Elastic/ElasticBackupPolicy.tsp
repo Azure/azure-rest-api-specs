@@ -17,8 +17,6 @@ namespace Microsoft.NetApp;
 /**
  * NetApp Elastic Backup Policy resource
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @parentResource(ElasticAccount)
 model ElasticBackupPolicy is TrackedResource<ElasticBackupPolicyProperties> {
@@ -34,8 +32,6 @@ model ElasticBackupPolicy is TrackedResource<ElasticBackupPolicyProperties> {
 /**
  * Elastic Backup Policy properties
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ElasticBackupPolicyProperties {
   /** Azure lifecycle management. */
@@ -68,8 +64,6 @@ model ElasticBackupPolicyProperties {
 /**
  * Elastic Backup Policy state
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union ElasticBackupPolicyState {
   string,
@@ -86,24 +80,18 @@ interface ElasticBackupPolicies {
   /**
    * Get the Elastic Backup Policy
    */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   get is ArmResourceRead<ElasticBackupPolicy>;
 
   /**
    * Create or update the specified Elastic Backup Policy in the NetApp account
    */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBackupPolicy>;
 
   /**
    * Patch the specified NetApp Elastic Backup Policy
    */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   update is ArmCustomPatchAsync<
     ElasticBackupPolicy,
@@ -116,15 +104,11 @@ interface ElasticBackupPolicies {
   /**
    * Delete the specified Elastic Policy
    */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticBackupPolicy>;
   /**
    * List and describe all Elastic Backup Policies in the elastic account.
    */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticBackupPolicy>;
 }
