@@ -4429,7 +4429,7 @@
           "format": "int32",
           "description": "The weight of the member."
         },
-        "vmArmId": {
+        "machineArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the virtual machine.",
@@ -4529,21 +4529,6 @@
             "description": "Application rules category."
           }
         ]
-      }
-    },
-    "EffectiveVmArmId": {
-      "type": "object",
-      "description": "A reference to an effective virtual machine.",
-      "properties": {
-        "vmArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the virtual machine."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the virtual machine."
-        }
       }
     },
     "Error": {
@@ -7001,13 +6986,14 @@
           },
           "x-ms-identifiers": []
         },
-        "effectiveVirtualMachineArmIds": {
+        "machineArmIds": {
           "type": "array",
-          "description": "Effective virtual machine references resolved by the group.",
+          "description": "ARM resource IDs of virtual machines resolved by the group.",
           "items": {
-            "$ref": "#/definitions/EffectiveVmArmId"
-          },
-          "x-ms-identifiers": []
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
         },
         "effectiveIpMembers": {
           "type": "array",
@@ -7084,13 +7070,14 @@
           },
           "x-ms-identifiers": []
         },
-        "effectiveVirtualMachineArmIds": {
+        "machineArmIds": {
           "type": "array",
-          "description": "Effective virtual machine references resolved by the group.",
+          "description": "ARM resource IDs of virtual machines resolved by the group.",
           "items": {
-            "$ref": "#/definitions/EffectiveVmArmId"
-          },
-          "x-ms-identifiers": []
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
         },
         "effectiveIpMembers": {
           "type": "array",
@@ -7204,7 +7191,7 @@
           "$ref": "#/definitions/AdminState",
           "description": "The administrative state of the segment."
         },
-        "associatedVirtualMachineArmIds": {
+        "machineArmIds": {
           "type": "array",
           "description": "ARM resource IDs of virtual machines connected to this segment.",
           "items": {
@@ -7312,7 +7299,7 @@
           "$ref": "#/definitions/AdminState",
           "description": "The administrative state of the segment."
         },
-        "associatedVirtualMachineArmIds": {
+        "machineArmIds": {
           "type": "array",
           "description": "ARM resource IDs of virtual machines connected to this segment.",
           "items": {

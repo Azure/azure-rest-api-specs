@@ -502,17 +502,6 @@ model Subnet {
 }
 
 /**
- * A reference to an effective virtual machine.
- */
-model EffectiveVmArmId {
-  /** ARM resource ID of the virtual machine. */
-  vmArmId?: Azure.Core.armResourceIdentifier;
-
-  /** Display name of the virtual machine. */
-  displayName?: string;
-}
-
-/**
  * The registration status of an appliance.
  */
 union RegistrationStatus {
@@ -592,7 +581,7 @@ model BackendPoolMember {
   weight?: int32;
 
   /** ARM resource ID of the virtual machine. */
-  vmArmId?: Azure.Core.armResourceIdentifier<[
+  machineArmId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OffAzure/vmwareSites/machines";
     }
@@ -925,7 +914,7 @@ model NsxSegmentPatchFields {
   adminState?: AdminState;
 
   /** ARM resource IDs of virtual machines connected to this segment. */
-  associatedVirtualMachineArmIds?: Azure.Core.armResourceIdentifier<[
+  machineArmIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OffAzure/vmwareSites/machines";
     }
@@ -958,9 +947,8 @@ model NsxNsGroupPatchFields {
   @identifiers(#[])
   expressions?: GroupExpression[];
 
-  /** Effective virtual machine references resolved by the group. */
-  @identifiers(#[])
-  effectiveVirtualMachineArmIds?: EffectiveVmArmId[];
+  /** ARM resource IDs of virtual machines resolved by the group. */
+  machineArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** Effective IPv4/IPv6 address members resolved by the group. */
   effectiveIpMembers?: string[];

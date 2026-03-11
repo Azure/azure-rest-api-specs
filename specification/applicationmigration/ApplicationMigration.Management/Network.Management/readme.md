@@ -223,7 +223,7 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 | `subnets` | Subnet[] | { gatewayAddress, network } |
 | `systemOwned` | boolean | Whether NSX owns this segment |
 | `adminState` | AdminState | UP / DOWN |
-| `associatedVirtualMachineArmIds` | armResourceIdentifier[] | → `Microsoft.OffAzure/vmwareSites/machines` |
+| `machineArmIds` | armResourceIdentifier[] | → `Microsoft.OffAzure/vmwareSites/machines` |
 
 ---
 
@@ -236,7 +236,7 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 | Property | Type | Notes |
 |----------|------|-------|
 | `expressions` | GroupExpression[] | Membership criteria (conditions + conjunctions) |
-| `effectiveVirtualMachineArmIds` | EffectiveVmArmId[] | Resolved VM references |
+| `machineArmIds` | armResourceIdentifier[] | → `Microsoft.OffAzure/vmwareSites/machines` |
 | `effectiveIpMembers` | string[] | Resolved IP addresses |
 
 ---
@@ -307,7 +307,7 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 | `adminState` | AdminState | UP / DOWN / ENABLED / DISABLED |
 | `parentGatewayArmId` | armResourceIdentifier | Reference to the T1 gateway this LB is on |
 | `frontend` | FrontendConfig | { vip, port, protocol } |
-| `backendConfig` | BackendConfig | { backendPool (members with vmArmId → OffAzure machines), healthProbe, snat } |
+| `backendConfig` | BackendConfig | { backendPool (members with machineArmId → OffAzure machines), healthProbe, snat } |
 
 ---
 
@@ -394,7 +394,7 @@ NsxTier1Gateway
 
 NsxSegment
   ├──▶ parentGatewayArmId              → NsxTier0Gateway or NsxTier1Gateway (single ref)
-  └──▶ associatedVirtualMachineArmIds[]→ Microsoft.OffAzure/vmwareSites/machines
+  └──▶ machineArmIds[]                → Microsoft.OffAzure/vmwareSites/machines
 
 NsxLoadBalancer
   └──▶ parentGatewayArmId              → NsxTier1Gateway (single ref)
@@ -468,7 +468,7 @@ ALL resources except NsxManager and NetworkAgent (via per-resource nsxManagerArm
     "parentGatewayArmId": ".../networkSites/site1/tier1Gateways/T1-Web",
     "segmentType": "ROUTED",
     "subnets": [{ "gatewayAddress": "10.0.1.1/24", "network": "10.0.1.0/24" }],
-    "associatedVirtualMachineArmIds": [
+    "machineArmIds": [
       ".../vmwareSites/vsphere1/machines/vm-web-01",
       ".../vmwareSites/vsphere1/machines/vm-web-02"
     ]
@@ -503,8 +503,8 @@ ALL resources except NsxManager and NetworkAgent (via per-resource nsxManagerArm
       "backendPool": {
         "algorithm": "ROUND_ROBIN",
         "members": [
-          { "ipAddress": "10.0.1.11", "port": 8443, "adminState": "ENABLED", "vmArmId": ".../vmwareSites/vs1/machines/vm1" },
-          { "ipAddress": "10.0.1.12", "port": 8443, "adminState": "ENABLED", "vmArmId": ".../vmwareSites/vs1/machines/vm2" }
+          { "ipAddress": "10.0.1.11", "port": 8443, "adminState": "ENABLED", "machineArmId": ".../vmwareSites/vs1/machines/vm1" },
+          { "ipAddress": "10.0.1.12", "port": 8443, "adminState": "ENABLED", "machineArmId": ".../vmwareSites/vs1/machines/vm2" }
         ]
       }
     }
@@ -541,7 +541,7 @@ GET .../natRules/dnat-web-ingress
 "Given a segment, find VMs connected to it"
 
 GET .../segments/web-segment
-  └── response.properties.associatedVirtualMachineArmIds[] → OffAzure VM ARM IDs
+  └── response.properties.machineArmIds[] → OffAzure VM ARM IDs
 
 "Given any resource (except Agent/Manager), find which NSX Manager discovered it"
 
@@ -993,7 +993,7 @@ GET .../networkSites/site1/segments/seg1
     ],
     "systemOwned": false,
     "adminState": "UP",
-    "associatedVirtualMachineArmIds": [
+    "machineArmIds": [
       ".../Microsoft.OffAzure/vmwareSites/vs1/machines/vm1"
     ]
   }
@@ -1002,7 +1002,7 @@ GET .../networkSites/site1/segments/seg1
 
 > **Key relationships:**
 > - `parentGatewayArmId` → the T0 or T1 gateway this segment is attached to
-> - `associatedVirtualMachineArmIds` → cross-provider refs to OffAzure VM resources
+> - `machineArmIds` → cross-provider refs to OffAzure VM resources
 
 ---
 
@@ -1047,11 +1047,8 @@ GET .../networkSites/site1/nsGroups/grp1
         "value": "app-tier"
       }
     ],
-    "effectiveVirtualMachineArmIds": [
-      {
-        "vmArmId": ".../Microsoft.OffAzure/vmwareSites/vs1/machines/vm1",
-        "displayName": "vm-01"
-      }
+    "machineArmIds": [
+      ".../Microsoft.OffAzure/vmwareSites/vs1/machines/vm1"
     ],
     "effectiveIpMembers": ["10.0.0.5"]
   }
@@ -1060,7 +1057,7 @@ GET .../networkSites/site1/nsGroups/grp1
 
 > **Key relationships:**
 > - `expressions` → group membership criteria (input)
-> - `effectiveVirtualMachineArmIds` → resolved VMs that match (output, cross-provider to OffAzure)
+> - `machineArmIds` → resolved VMs that match (output, cross-provider to OffAzure)
 > - `effectiveIpMembers` → resolved IPs
 > - Referenced **by** firewall rules via `sourceIpGroupArmIds` / `destinationIpGroupArmIds`
 
@@ -1221,7 +1218,7 @@ GET .../networkSites/site1/loadBalancers/lb1
             "port": 8443,
             "adminState": "ENABLED",
             "weight": 1,
-            "vmArmId": ".../vmwareSites/vs1/machines/vm1"
+            "machineArmId": ".../vmwareSites/vs1/machines/vm1"
           }
         ]
       },
@@ -1434,7 +1431,7 @@ GET .../networkSites/site1/nsxDistributedFirewallRules/dfw-rule1
 │ NsxTier1Gateway          │ associatedLoadBalancerArmIds[]   │ → NsxLoadBalancer                  │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
 │ NsxSegment               │ parentGatewayArmId               │ → NsxTier0Gateway/NsxTier1Gateway  │
-│ NsxSegment               │ associatedVirtualMachineArmIds[] │ → OffAzure/vmwareSites/machines     │
+│ NsxSegment               │ machineArmIds[]                  │ → OffAzure/vmwareSites/machines     │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
 │ NsxGatewayFirewallPolicy │ appliedScopeArmIds[]             │ → NsxTier0/T1 Gateway              │
 │ NsxGatewayFirewallPolicy │ effectiveScopeArmIds[]           │ → NsxTier0/T1 Gateway              │
@@ -1453,7 +1450,7 @@ GET .../networkSites/site1/nsxDistributedFirewallRules/dfw-rule1
 │ NsxDistributedFWRule     │ destinationGroupsArmIds[]        │ → NsxNsGroup                       │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
 │ NsxLoadBalancer          │ parentGatewayArmId               │ → NsxTier1Gateway                  │
-│ NsxLoadBalancer          │ backendPool.members[].vmArmId  │ → OffAzure/vmwareSites/machines     │
+│ NsxLoadBalancer          │ backendPool.members[].machineArmId │ → OffAzure/vmwareSites/machines     │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
 │ NsxNatRule               │ parentGatewayArmId               │ → NsxTier0/NsxTier1Gateway         │
 └──────────────────────────┴────────────────────────────┴────────────────────────────────────┘
