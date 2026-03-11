@@ -152,10 +152,10 @@ union OsType {
 @doc("The priority type for VM allocation")
 union PriorityType {
   @doc("Regular priority VMs")
-  regular: "regular",
+  Regular: "Regular",
 
   @doc("Spot priority VMs")
-  spot: "spot",
+  Spot: "Spot",
 
   string,
 }
@@ -336,7 +336,7 @@ model ResourceOperationDetails {
   @doc("Operation identifier for the unique operation")
   operationId: string;
 
-  @doc("Unique identifier for the resource involved in the operation, eg ArmId")
+  @doc("Unique identifier for the resource involved in the operation, for example Azure resource ID")
   resourceId?: Array<armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachines";
@@ -378,7 +378,7 @@ model ResourceOperationDetails {
 
 @doc("High level response from an operation on a resource")
 model ResourceOperation {
-  @doc("Unique identifier for the resource involved in the operation, eg ArmId")
+  @doc("Unique identifier for the resource involved in the operation, for example Azure resource ID")
   resourceId?: Array<armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachines";
@@ -542,7 +542,7 @@ model ExecuteVdiCreateRequest {
 
 @doc("Per-resource override entry for reimage requests")
 model ReimageResourceOverride {
-  @doc("The ARM resource ID of the virtual machine for this override")
+  @doc("The Azure resource ID of the virtual machine for this override")
   resourceId: armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachines";
