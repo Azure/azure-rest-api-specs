@@ -40,7 +40,10 @@ interface GraphQueryResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GraphQuery_Get")
-  get is ArmResourceRead<GraphQueryResource>;
+  get is ArmResourceRead<
+    GraphQueryResource,
+    Error = GraphQueryError
+  >;
 
   /**
    * Create a new graph query.
@@ -50,7 +53,8 @@ interface GraphQueryResources {
   @operationId("GraphQuery_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GraphQueryResource,
-    Response = ArmResourceUpdatedResponse<GraphQueryResource>
+    Response = ArmResourceUpdatedResponse<GraphQueryResource>,
+    Error = GraphQueryError
   >;
 
   /**
@@ -61,7 +65,8 @@ interface GraphQueryResources {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     GraphQueryResource,
-    PatchModel = GraphQueryUpdateParameters
+    PatchModel = GraphQueryUpdateParameters,
+    Error = GraphQueryError
   >;
 
   /**
@@ -69,14 +74,20 @@ interface GraphQueryResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GraphQuery_Delete")
-  delete is ArmResourceDeleteSync<GraphQueryResource>;
+  delete is ArmResourceDeleteSync<
+    GraphQueryResource,
+    Error = GraphQueryError
+  >;
 
   /**
    * Get all graph queries defined within a specified subscription and resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GraphQuery_List")
-  list is ArmResourceListByParent<GraphQueryResource>;
+  list is ArmResourceListByParent<
+    GraphQueryResource,
+    Error = GraphQueryError
+  >;
 
   /**
    * Get all graph queries defined within a specified subscription.
@@ -84,7 +95,10 @@ interface GraphQueryResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GraphQuery_ListBySubscription")
   @Versioning.added(Versions.v2019_04_01)
-  listBySubscription is ArmListBySubscription<GraphQueryResource>;
+  listBySubscription is ArmListBySubscription<
+    GraphQueryResource,
+    Error = GraphQueryError
+  >;
 }
 
 @@doc(GraphQueryResource.name, "The name of the Graph Query resource.");

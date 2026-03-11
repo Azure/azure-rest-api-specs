@@ -85,3 +85,55 @@ model GraphQueryPropertiesUpdateParameters {
    */
   query?: string;
 }
+
+/**
+ * Error message body that will indicate why the operation failed.
+ */
+@error
+model GraphQueryError {
+  /**
+   * The error object.
+   */
+  error?: GraphQueryErrorError;
+}
+
+/**
+ * The error object.
+ */
+model GraphQueryErrorError {
+  /**
+   * Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+   */
+  code?: string;
+
+  /**
+   * Human-readable representation of the error.
+   */
+  message?: string;
+
+  /**
+   * The list of invalid fields send in request, in case of validation error.
+   */
+  @identifiers(#[])
+  details?: ErrorFieldContract[];
+}
+
+/**
+ * Error Field contract.
+ */
+model ErrorFieldContract {
+  /**
+   * Property level error code.
+   */
+  code?: string;
+
+  /**
+   * Human-readable representation of property-level error.
+   */
+  message?: string;
+
+  /**
+   * Property name.
+   */
+  target?: string;
+}

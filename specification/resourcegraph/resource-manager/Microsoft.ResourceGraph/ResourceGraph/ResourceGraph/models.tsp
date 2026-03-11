@@ -196,7 +196,7 @@ model QueryRequestOptions {
   /**
    * Only applicable for tenant and management group level queries to decide whether to allow partial scopes for result in case the number of subscriptions exceed allowed limits.
    */
-  @Versioning.added(Versions.v2023_09_01_preview)
+  @Versioning.added(Versions.v2021_03_01)
   allowPartialScopes?: boolean;
 
   /**
