@@ -3,6 +3,8 @@ import "@azure-tools/typespec-client-generator-core";
 import "./tool.tsp";
 import "../Discovery.Management.Shared/all.tsp";
 
+using Microsoft.Discovery;
+
 using Azure.ClientGenerator.Core;
 
 // Rename DiscoveryStorage to ManagedStorage for Go SDK to avoid collision with Storage type
@@ -36,4 +38,7 @@ model ToolPropertiesUpdate {
   ...WithDefinitionContent;
 }
 
-@@alternateType(Tools.update::parameters.body, ToolUpdate, "javascript");
+@@alternateType(Microsoft.Discovery.Tools.update::parameters.properties,
+  ToolUpdate,
+  "javascript"
+);
