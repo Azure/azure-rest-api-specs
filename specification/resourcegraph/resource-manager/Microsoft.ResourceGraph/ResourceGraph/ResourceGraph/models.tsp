@@ -85,55 +85,6 @@ enum ResultTruncated {
 }
 
 /**
- * An error response from the API.
- */
-@error
-model ErrorResponse {
-  /**
-   * Error information.
-   */
-  error: Error;
-}
-
-/**
- * Error details.
- */
-model Error {
-  /**
-   * Error code identifying the specific error.
-   */
-  code: string;
-
-  /**
-   * A human readable error message.
-   */
-  message: string;
-
-  /**
-   * Error details
-   */
-  @identifiers(#[])
-  details?: ErrorDetails[];
-}
-
-/**
- * Error details.
- */
-model ErrorDetails {
-  ...Record<unknown>;
-
-  /**
-   * Error code identifying the specific error.
-   */
-  code: string;
-
-  /**
-   * A human readable error message.
-   */
-  message: string;
-}
-
-/**
  * Describes a query to be executed.
  */
 model QueryRequest {
@@ -304,6 +255,55 @@ model Facet {
 }
 
 /**
+ * An error response from the API.
+ */
+@error
+model ErrorResponse {
+  /**
+   * Error information.
+   */
+  error: Error;
+}
+
+/**
+ * Error details.
+ */
+model Error {
+  /**
+   * Error code identifying the specific error.
+   */
+  code: string;
+
+  /**
+   * A human readable error message.
+   */
+  message: string;
+
+  /**
+   * Error details
+   */
+  @identifiers(#[])
+  details?: ErrorDetails[];
+}
+
+/**
+ * Error details.
+ */
+model ErrorDetails {
+  ...Record<unknown>;
+
+  /**
+   * Error code identifying the specific error.
+   */
+  code: string;
+
+  /**
+   * A human readable error message.
+   */
+  message: string;
+}
+
+/**
  * Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.
  */
 model OperationListResult {
@@ -317,6 +317,8 @@ model OperationListResult {
    * The link to the next page of items
    */
   @nextLink
+  @Versioning.removed(Versions.v2022_10_01)
+  @Versioning.added(Versions.v2023_09_01_preview)
   nextLink?: string;
 }
 

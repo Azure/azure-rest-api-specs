@@ -59,7 +59,8 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
-  - preview/2023-09-01-preview/openapi.json
+  - preview/2023-09-01-preview/resourcecopilot.json
+  - preview/2023-09-01-preview/resourcegraph.json
   - preview/2021-06-01-preview/resourceshistory.json
   - preview/2020-09-01-preview/resourcechanges.json
 ```

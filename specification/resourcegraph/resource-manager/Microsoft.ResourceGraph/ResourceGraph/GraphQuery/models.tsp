@@ -51,42 +51,6 @@ model GraphQueryProperties {
 }
 
 /**
- * The parameters that can be provided when updating workbook properties properties.
- */
-model GraphQueryUpdateParameters {
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
-  /**
-   * This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict.
-   */
-  etag?: string;
-
-  /**
-   * Metadata describing a graph query for an Azure resource.
-   */
-  properties?: GraphQueryPropertiesUpdateParameters;
-}
-
-/**
- * Properties that contain a workbook for PATCH operation.
- */
-model GraphQueryPropertiesUpdateParameters {
-  /**
-   * The description of a graph query.
-   */
-  description?: string;
-
-  /**
-   * KQL query that will be graph.
-   */
-  query?: string;
-}
-
-/**
  * Error message body that will indicate why the operation failed.
  */
 @error
@@ -136,4 +100,40 @@ model ErrorFieldContract {
    * Property name.
    */
   target?: string;
+}
+
+/**
+ * The parameters that can be provided when updating workbook properties properties.
+ */
+model GraphQueryUpdateParameters {
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict.
+   */
+  etag?: string;
+
+  /**
+   * Metadata describing a graph query for an Azure resource.
+   */
+  properties?: GraphQueryPropertiesUpdateParameters;
+}
+
+/**
+ * Properties that contain a workbook for PATCH operation.
+ */
+model GraphQueryPropertiesUpdateParameters {
+  /**
+   * The description of a graph query.
+   */
+  description?: string;
+
+  /**
+   * KQL query that will be graph.
+   */
+  query?: string;
 }

@@ -22,11 +22,11 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Resource Graph API Reference
+ * Azure Resource Graph Query API Reference
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" ""
 @armProviderNamespace("Microsoft.ResourceGraph")
-@service(#{ title: "ResourceGraphClient" })
+@service(#{ title: "Azure Resource Graph Query" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
@@ -48,4 +48,8 @@ enum Versions {
    * The 2021-03-01 API version.
    */
   v2021_03_01: "2021-03-01",
+  /**
+   * The 2022-10-01 API version.
+   */
+  v2022_10_01: "2022-10-01",
 }

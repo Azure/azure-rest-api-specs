@@ -26,7 +26,7 @@ using TypeSpec.Versioning;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" ""
 @armProviderNamespace("Microsoft.ResourceGraph")
-@service(#{ title: "ResourceGraphClient" })
+@service(#{ title: "ARG Query Generation" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
