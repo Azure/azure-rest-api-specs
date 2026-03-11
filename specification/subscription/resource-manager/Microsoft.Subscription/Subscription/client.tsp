@@ -15,7 +15,7 @@ using Http;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op subscriptionAcceptOwnershipStatus(
   ...ApiVersionParameter,
-  name: string,
+  ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
   @path subscriptionId: Azure.Core.uuid,
   body: void,
