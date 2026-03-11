@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "KeyVaultManagementClient",
-    "version": "2026-02-01",
+    "version": "2026-04-01-preview",
     "description": "The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.",
     "x-typespec-generated": [
       {
@@ -74,6 +74,9 @@
     },
     {
       "name": "ManagedHsmKeyOperationGroup"
+    },
+    {
+      "name": "NetworkSecurityPerimeterConfigurations"
     }
   ],
   "paths": {
@@ -2167,6 +2170,162 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_ListConfigurations",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Lists all of the NSP configurations in the specified account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the vault.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the network security perimeter configurations of a vault": {
+            "$ref": "./examples/listNetworkSecurityPerimeterConfigurations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_GetConfiguration",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets information about the specified NSP configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkSecurityPerimeterConfigurationName",
+            "in": "path",
+            "description": "The name for a network security perimeter configuration",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve the network security perimeter configuration of a vault": {
+            "$ref": "./examples/getNetworkSecurityPerimeterConfiguration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
+      "post": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_ReconcileConfiguration",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Reconciles the specified NSP configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkSecurityPerimeterConfigurationName",
+            "in": "path",
+            "description": "The name for a network security perimeter configuration",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reconcile the network security perimeter configuration of a vault": {
+            "$ref": "./examples/reconcileNetworkSecurityPerimeter.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateEndpointConnections": {
       "get": {
         "operationId": "PrivateEndpointConnections_ListByResource",
@@ -2760,6 +2919,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List vaults in the specified subscription": {
+            "$ref": "./examples/listVault.json"
           }
         },
         "x-ms-pageable": {
@@ -4550,7 +4714,8 @@
           "default": "Enabled",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
@@ -4563,6 +4728,11 @@
               {
                 "name": "Disabled",
                 "value": "Disabled"
+              },
+              {
+                "name": "SecuredByPerimeter",
+                "value": "SecuredByPerimeter",
+                "description": "Property used by NetworkSecurityPerimeters for locking down the vault to only perimeter rules."
               }
             ]
           }
@@ -5662,6 +5832,80 @@
         ]
       }
     },
+    "TokenBindingMode": {
+      "type": "string",
+      "description": "This specifies whether token binding is disabled, enabled or enforced.",
+      "enum": [
+        "Enforced",
+        "NotEnforced"
+      ],
+      "x-ms-enum": {
+        "name": "TokenBindingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enforced",
+            "value": "Enforced",
+            "description": "Token binding is enforced for the vault. Only bounded tokens will be accepted. Bearer tokens will be rejected."
+          },
+          {
+            "name": "NotEnforced",
+            "value": "NotEnforced",
+            "description": "Token binding is not enforced for the vault. Bounded tokens will be rejected."
+          }
+        ]
+      }
+    },
+    "TokenBindingParameters": {
+      "type": "object",
+      "description": "Configuration for Token Binding for Entra tokens",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/TokenBindingMode",
+          "description": "This specifies whether token binding is disabled, enabled or enforced."
+        },
+        "minimumTokenBindingStrength": {
+          "$ref": "#/definitions/TokenBindingStrength",
+          "description": "Must be one of the following values \"NoValidation\", \"Unattested\", \"AttestedTrustedLaunch\", \"AttestedConfidential\". Strength of the token binding increases with each value in that order."
+        }
+      }
+    },
+    "TokenBindingStrength": {
+      "type": "string",
+      "description": "Must be one of the following values \"NoValidation\", \"Unattested\", \"AttestedTrustedLaunch\", \"AttestedConfidential\". Strength of the token binding increases with each value in that order.",
+      "enum": [
+        "NoValidation",
+        "Unattested",
+        "AttestedTrustedLaunch",
+        "AttestedConfidential"
+      ],
+      "x-ms-enum": {
+        "name": "TokenBindingStrength",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoValidation",
+            "value": "NoValidation",
+            "description": "This is default when token binding is not enabled."
+          },
+          {
+            "name": "Unattested",
+            "value": "Unattested",
+            "description": "No attestation proof is required for the bounded token."
+          },
+          {
+            "name": "AttestedTrustedLaunch",
+            "value": "AttestedTrustedLaunch",
+            "description": "Bounded Entra token must originate from a trusted launch VM with attestation proof from the attestation authority like Microsoft Azure Attestation."
+          },
+          {
+            "name": "AttestedConfidential",
+            "value": "AttestedConfidential",
+            "description": "Bounded Entra token must originate from a confidential VM with attestation proof from the attestation authority like Microsoft Azure Attestation."
+          }
+        ]
+      }
+    },
     "Trigger": {
       "type": "object",
       "properties": {
@@ -5909,6 +6153,10 @@
         "publicNetworkAccess": {
           "type": "string",
           "description": "Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules."
+        },
+        "tokenBindingParameters": {
+          "$ref": "#/definitions/TokenBindingParameters",
+          "description": "Configuration for Token Binding for Entra tokens"
         }
       }
     },
@@ -6008,6 +6256,10 @@
           "type": "string",
           "description": "Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules.",
           "default": "enabled"
+        },
+        "tokenBindingParameters": {
+          "$ref": "#/definitions/TokenBindingParameters",
+          "description": "Configuration for Token Binding for Entra tokens"
         }
       },
       "required": [
