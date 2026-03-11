@@ -1,0 +1,63 @@
+{
+  "description": "A filtering query on resources.",
+  "parameters": {
+    "api-version": "2018-09-01-preview",
+    "query": {
+      "query": "project id, name, type, location | where type =~ 'Microsoft.Compute/virtualMachines' | limit 3",
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ]
+    }
+  },
+  "title": "Filter resources",
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "data": {
+          "columns": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "type",
+              "type": "string"
+            },
+            {
+              "name": "location",
+              "type": "string"
+            }
+          ],
+          "rows": [
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG1/providers/Microsoft.Compute/virtualMachines/myVm1",
+              "myVm1",
+              "microsoft.compute/virtualmachines",
+              "centralus"
+            ],
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Compute/virtualMachines/myVirtualMachine",
+              "myVirtualMachine",
+              "microsoft.compute/virtualmachines",
+              "eastus"
+            ],
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG3/providers/Microsoft.Compute/virtualMachines/testVm",
+              "testVm",
+              "microsoft.compute/virtualmachines",
+              "eastus"
+            ]
+          ]
+        },
+        "resultTruncated": "false",
+        "totalRecords": 3
+      }
+    }
+  },
+  "operationId": "Resources"
+}

@@ -72,8 +72,16 @@ enum PropertyChangeType {
  */
 model ResourceChangesRequestParameters {
   /**
+   * Specifies the resource for a changes request.
+   */
+  @Versioning.added(Versions.v2018_09_01_preview)
+  @Versioning.removed(Versions.v2020_04_01_preview)
+  resourceId: string;
+
+  /**
    * Specifies the list of resources for a changes request.
    */
+  @Versioning.added(Versions.v2020_04_01_preview)
   resourceIds?: string[];
 
   /**
@@ -107,7 +115,8 @@ model ResourceChangesRequestParameters {
 
   /**
    * The flag if set to true will fetch property changes
-   */
+   */   
+  @Versioning.added(Versions.v2020_04_01_preview)
   fetchPropertyChanges?: boolean;
 
   /**
@@ -169,6 +178,7 @@ model ResourceChangeData {
   /**
    * The resource for a change.
    */
+  @Versioning.added(Versions.v2020_04_01_preview)
   resourceId?: string;
 
   /**
@@ -189,12 +199,14 @@ model ResourceChangeData {
   /**
    * The change type for snapshot. PropertyChanges will be provided in case of Update change type
    */
+  @Versioning.added(Versions.v2020_04_01_preview)
   changeType?: ChangeType;
 
   /**
    * An array of resource property change
    */
   @identifiers(#[])
+  @Versioning.added(Versions.v2020_04_01_preview)
   propertyChanges?: ResourcePropertyChange[];
 }
 
@@ -212,6 +224,7 @@ model ResourceSnapshotData {
   /**
    * The ID of the snapshot.
    */
+  @Versioning.added(Versions.v2020_04_01_preview)
   snapshotId?: string;
 
   /**
@@ -322,12 +335,28 @@ model ErrorDetails {
  */
 model ResourceChangeDetailsRequestParameters {
   /**
+   * Specifies the resource for a change details request.
+   */
+  @Versioning.added(Versions.v2018_09_01_preview)
+  @Versioning.removed(Versions.v2020_04_01_preview)
+  resourceId: string;
+
+  /**
+   * Specifies the change ID.
+   */
+  @Versioning.added(Versions.v2018_09_01_preview)
+  @Versioning.removed(Versions.v2020_04_01_preview)
+  changeId: string;
+
+  /**
    * Specifies the list of resources for a change details request.
    */
+  @Versioning.added(Versions.v2020_04_01_preview)
   resourceIds: string[];
 
   /**
    * Specifies the list of change IDs for a change details request.
    */
+  @Versioning.added(Versions.v2020_04_01_preview)
   changeIds: string[];
 }
