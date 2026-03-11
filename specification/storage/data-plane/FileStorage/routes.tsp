@@ -1495,11 +1495,11 @@ interface File {
 
       /** Specifies mode copy option for the file. */
       @header("x-ms-file-mode-copy-mode")
-      fileCopyModeCopyMode?: ModeCopyMode;
+      fileModeCopyMode?: ModeCopyMode;
 
       /** Specifies owner copy option for the file. */
       @header("x-ms-file-owner-copy-mode")
-      fileCopyOwnerCopyMode?: OwnerCopyMode;
+      fileOwnerCopyMode?: OwnerCopyMode;
     },
     {
       @statusCode statusCode: 202;
