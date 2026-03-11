@@ -47,10 +47,24 @@ model DataflowProfileProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  @visibility(Lifecycle.Read)
+  @doc("The status for the dataflow profile.")
+  @added(Versions.`2026-03-01`)
+  status?: DataflowProfileStatus;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
 @doc("DataflowProfile Diagnostics properties")
 model ProfileDiagnostics {
   ...MetricProperties;
+}
+
+/** DataflowProfile status. */
+@added(Versions.`2026-03-01`)
+model DataflowProfileStatus {
+  /** The health state of the DataflowProfile. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }
