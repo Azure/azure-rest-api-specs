@@ -2111,7 +2111,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroupConnectionsPropertiesListResult"
+              "$ref": "#/definitions/HorizonDbParameterGroupConnectionsProperties"
             }
           },
           "default": {
@@ -2125,9 +2125,6 @@
           "List connections for a HorizonDb parameter group": {
             "$ref": "./examples/ParameterGroups_ListConnections.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2619,27 +2616,6 @@
           ]
         }
       }
-    },
-    "HorizonDbParameterGroupConnectionsPropertiesListResult": {
-      "type": "object",
-      "description": "The response of a HorizonDbParameterGroupConnectionsProperties list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The HorizonDbParameterGroupConnectionsProperties items on this page",
-          "items": {
-            "$ref": "#/definitions/HorizonDbParameterGroupConnectionsProperties"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "HorizonDbParameterGroupForPatchUpdate": {
       "type": "object",
