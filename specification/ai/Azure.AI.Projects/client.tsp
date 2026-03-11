@@ -132,5 +132,5 @@ using Azure.ClientGenerator.Core;
   "create_or_update",
   "python"
 );
-@@clientName(Azure.AI.Projects.Jobs.delete, "begin_delete", "python");
-@@clientName(Azure.AI.Projects.Jobs.cancel, "begin_cancel", "python");
+@@clientName(Azure.AI.Projects.Jobs.delete, "delete", "python");
+@@clientName(Azure.AI.Projects.Jobs.cancel, "cancel", "python");
