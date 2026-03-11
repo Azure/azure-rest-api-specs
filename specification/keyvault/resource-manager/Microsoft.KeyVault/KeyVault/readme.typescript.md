@@ -17,10 +17,10 @@ directive:
       $.parameters = 
         [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "name",
@@ -30,7 +30,7 @@ directive:
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ]
   - where-operation: ManagedHsms_GetDeleted
@@ -38,10 +38,10 @@ directive:
       $.parameters = 
         [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "name",
@@ -51,7 +51,7 @@ directive:
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ]
   - where-operation: Vaults_PurgeDeleted
@@ -59,10 +59,10 @@ directive:
       $.parameters = 
         [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "vaultName",
@@ -72,7 +72,7 @@ directive:
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
         ]
   - where-operation: Vaults_GetDeleted
@@ -80,10 +80,10 @@ directive:
       $.parameters = 
         [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "vaultName",
@@ -93,7 +93,7 @@ directive:
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ]
 ```
