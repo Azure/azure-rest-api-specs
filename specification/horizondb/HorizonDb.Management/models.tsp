@@ -470,16 +470,13 @@ model ParameterProperties {
   @doc("The value of the configuration")
   value?: string;
 
-  @doc("The source of the configuration value")
-  source?: string;
-
   @visibility(Lifecycle.Read)
   @doc("The data type of the parameter")
   dataType?: string;
 
   @visibility(Lifecycle.Read)
   @doc("The allowed values for the parameter")
-  allowedValues?: string[];
+  allowedValues?: string;
 
   @visibility(Lifecycle.Read)
   @doc("Whether the parameter can be changed dynamically")
@@ -496,18 +493,6 @@ model ParameterProperties {
   @visibility(Lifecycle.Read)
   @doc("The unit of measurement for the parameter")
   unit?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The default value of the parameter")
-  defaultValue?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The categories this parameter belongs to")
-  categories?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The level at which this parameter applies")
-  level?: string;
 }
 
 @doc("Properties of a HorizonDb parameter group for update operations")
@@ -538,13 +523,22 @@ model HorizonDbParameterGroupForPatchUpdate {
   properties?: HorizonDbParameterGroupPropertiesForPatchUpdate;
 }
 
+@doc("Connection information for HorizonDb parameter group")
+model HorizonDbParameterGroupConnections {
+  @doc("List of clusters connected to the parameter group")
+  clusters?: ConnectionInfo[];
+
+  @doc("List of pools connected to the parameter group")
+  pools?: ConnectionInfo[];
+}
+
 @doc("Connection information for a cluster or pool")
 model ConnectionInfo {
   @doc("The name of the connected resource")
   name?: string;
 
   @doc("The resource ID of the connected resource")
-  id?: string;
+  id?: armResourceIdentifier;
 
   @doc("The type of the resource")
   type?: string;

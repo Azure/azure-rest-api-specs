@@ -266,14 +266,13 @@ interface HorizonDbParameterGroups {
   @doc("Lists all HorizonDb parameter groups in a resource group")
   listByResourceGroup is ArmResourceListByParent<HorizonDbParameterGroup>;
 
-  @doc("Lists all clusters and pools connected to a parameter group")
+  @doc("Gets all connections to a parameter group")
   @get
-  @list
   @action("connections")
-  listConnections is ArmResourceActionSync<
+  getConnections is ArmResourceActionSync<
     HorizonDbParameterGroup,
     void,
-    ArmResponse<Azure.ResourceManager.ResourceListResult<ConnectionInfo>>
+    ArmResponse<HorizonDbParameterGroupConnections>
   >;
 
   @doc("Lists parameter groups filtered by version number")

@@ -1,6 +1,6 @@
 {
-  "operationId": "HorizonDbParameterGroups_ListConnections",
-  "title": "List connections for a HorizonDb parameter group",
+  "operationId": "HorizonDbParameterGroups_GetConnections",
+  "title": "Get connections for a HorizonDb parameter group",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "myResourceGroup",
@@ -10,16 +10,19 @@
   "responses": {
     "200": {
       "body": {
-        "value": [
+        "clusters": [
           {
+            "name": "cluster1",
             "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/cluster1",
             "type": "Microsoft.HorizonDb/clusters"
           },
           {
+            "name": "cluster2",
             "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/cluster2",
             "type": "Microsoft.HorizonDb/clusters"
           },
           {
+            "name": "cluster3",
             "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/cluster3",
             "type": "Microsoft.HorizonDb/clusters"
           }

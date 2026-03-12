@@ -2081,11 +2081,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}/connections": {
       "get": {
-        "operationId": "HorizonDbParameterGroups_ListConnections",
+        "operationId": "HorizonDbParameterGroups_GetConnections",
         "tags": [
           "HorizonDbParameterGroups"
         ],
-        "description": "Lists all clusters and pools connected to a parameter group",
+        "description": "Gets all connections to a parameter group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2111,7 +2111,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionInfoListResult"
+              "$ref": "#/definitions/HorizonDbParameterGroupConnections"
             }
           },
           "default": {
@@ -2122,12 +2122,9 @@
           }
         },
         "x-ms-examples": {
-          "List connections for a HorizonDb parameter group": {
-            "$ref": "./examples/ParameterGroups_ListConnections.json"
+          "Get connections for a HorizonDb parameter group": {
+            "$ref": "./examples/ParameterGroups_GetConnections.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2203,6 +2200,7 @@
         },
         "id": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource ID of the connected resource"
         },
         "type": {
@@ -2210,27 +2208,6 @@
           "description": "The type of the resource"
         }
       }
-    },
-    "ConnectionInfoListResult": {
-      "type": "object",
-      "description": "The response of a ConnectionInfo list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ConnectionInfo items on this page",
-          "items": {
-            "$ref": "#/definitions/ConnectionInfo"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "CreateModeCluster": {
       "type": "string",
@@ -2623,6 +2600,26 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "HorizonDbParameterGroupConnections": {
+      "type": "object",
+      "description": "Connection information for HorizonDb parameter group",
+      "properties": {
+        "clusters": {
+          "type": "array",
+          "description": "List of clusters connected to the parameter group",
+          "items": {
+            "$ref": "#/definitions/ConnectionInfo"
+          }
+        },
+        "pools": {
+          "type": "array",
+          "description": "List of pools connected to the parameter group",
+          "items": {
+            "$ref": "#/definitions/ConnectionInfo"
+          }
+        }
+      }
     },
     "HorizonDbParameterGroupForPatchUpdate": {
       "type": "object",
@@ -3136,21 +3133,14 @@
           "type": "string",
           "description": "The value of the configuration"
         },
-        "source": {
-          "type": "string",
-          "description": "The source of the configuration value"
-        },
         "dataType": {
           "type": "string",
           "description": "The data type of the parameter",
           "readOnly": true
         },
         "allowedValues": {
-          "type": "array",
+          "type": "string",
           "description": "The allowed values for the parameter",
-          "items": {
-            "type": "string"
-          },
           "readOnly": true
         },
         "isDynamic": {
@@ -3172,21 +3162,6 @@
         "unit": {
           "type": "string",
           "description": "The unit of measurement for the parameter",
-          "readOnly": true
-        },
-        "defaultValue": {
-          "type": "string",
-          "description": "The default value of the parameter",
-          "readOnly": true
-        },
-        "categories": {
-          "type": "string",
-          "description": "The categories this parameter belongs to",
-          "readOnly": true
-        },
-        "level": {
-          "type": "string",
-          "description": "The level at which this parameter applies",
           "readOnly": true
         }
       }
