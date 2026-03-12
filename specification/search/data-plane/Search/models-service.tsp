@@ -818,21 +818,27 @@ union AzureOpenAIModelName {
   TextEmbedding3Small: "text-embedding-3-small",
 
   /** Gpt4o model. */
+  @removed(Versions.v2026_04_01)
   Gpt4o: "gpt-4o",
 
   /** Gpt4oMini model. */
+  @removed(Versions.v2026_04_01)
   Gpt4oMini: "gpt-4o-mini",
 
   /** Gpt41 model. */
+  @removed(Versions.v2026_04_01)
   Gpt41: "gpt-4.1",
 
   /** Gpt41Mini model. */
+  @removed(Versions.v2026_04_01)
   Gpt41Mini: "gpt-4.1-mini",
 
   /** Gpt41Nano model. */
+  @removed(Versions.v2026_04_01)
   Gpt41Nano: "gpt-4.1-nano",
 
   /** Gpt5 model. */
+  @removed(Versions.v2026_04_01)
   Gpt5: "gpt-5",
 
   /** Gpt5Mini model. */
