@@ -111,7 +111,7 @@ interface Drills {
   @route(ServiceGroupRoute)
   @armResourceAction(Drill)
   @post
-  @doc("This triggers detection of any drifts from the desired state of Target and capabilities and RBAC.")
+  @doc("This triggers detection of any drifts from the desired state of Resources and RBAC.")
   refreshReadinessState is ArmResourceActionNoResponseContentAsync<
     Drill,
     void,
@@ -125,7 +125,7 @@ interface Drills {
   @added(Versions.v2026_03_01_preview)
   @armResourceAction(Drill)
   @post
-  @doc("This triggers detection of any drifts from the desired state of Target and capabilities and RBAC.")
+  @doc("This triggers detection of any drifts from the desired state of Resources and RBAC.")
   resyncReadinessCheck is ArmResourceActionNoResponseContentAsync<
     Drill,
     void,
