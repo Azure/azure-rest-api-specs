@@ -23,7 +23,28 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 
   /** Redaction policy to be used when redacting from documents */
   @added(Versions.v2024_11_15_preview)
+  @removed(Versions.v2026_05_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
+
+  /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
+  @added(Versions.v2026_05_15_preview)
+  valueExclusionPolicy?: ValueExclusionPolicy;
+
+  /** (Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection. */
+  @added(Versions.v2026_05_15_preview)
+  entitySynonyms?: EntitySynonyms[];
+
+  /** List of RedactionPolicies to be used on the input. */
+  @added(Versions.v2026_05_15_preview)
+  redactionPolicies?: BaseRedactionPolicy[];
+
+  /** Confidence score threshold configuration for PII entity recognition */
+  @added(Versions.v2026_05_15_preview)
+  confidenceScoreThreshold?: ConfidenceScoreThreshold;
+
+  /** Disable entity validation for PII entity recognition */
+  @added(Versions.v2026_05_15_preview)
+  disableEntityValidation?: boolean = false;
 
   /** Boolean to indicate if entities should be excluded from the response json stored in the customer's storage. */
   @added(Versions.v2024_11_15_preview)
@@ -58,11 +79,248 @@ union PiiDomain {
   none: "none",
 }
 
+/** Object that allows the user to provide synonyms for context words that to enhance pii entity detection. */
+@added(Versions.v2026_05_15_preview)
+model EntitySynonyms {
+  /** The entity name */
+  entityType: EntityCategory;
+
+  /** The entity synonyms */
+  synonyms: EntitySynonym[];
+}
+
+/** Contains all the entity categories detected by entity recognition. */
+@added(Versions.v2026_05_15_preview)
+union EntityCategory {
+  string,
+
+  /** Specific street-level mentions of locations: house/building numbers, streets, avenues, highways, intersections referenced by name. */
+  Address: "Address",
+
+  /** Numeric values, including digits and number words. */
+  Numeric: "Numeric",
+
+  /** Age-related values. */
+  Age: "Age",
+
+  /** Currency-related values. */
+  Currency: "Currency",
+
+  /** Numbers without a unit */
+  Number: "Number",
+
+  /** Range of Numbers */
+  NumberRange: "NumberRange",
+
+  /** Percentage-related values. */
+  Percentage: "Percentage",
+
+  /** Ordinal numbers. */
+  Ordinal: "Ordinal",
+
+  /** Temperature-related values. */
+  Temperature: "Temperature",
+
+  /** Dimension of measurements */
+  Dimension: "Dimension",
+
+  /** Length of an object. */
+  Length: "Length",
+
+  /** Weight of an object. */
+  Weight: "Weight",
+
+  /** Height of an object. */
+  Height: "Height",
+
+  /** Speed of an object. */
+  Speed: "Speed",
+
+  /** Area of an object. */
+  Area: "Area",
+
+  /** Volume of an object. */
+  Volume: "Volume",
+
+  /** Unit of measure for digital information. */
+  Information: "Information",
+
+  /** Items relating to time. */
+  Temporal: "Temporal",
+
+  /** Calendar dates. */
+  Date: "Date",
+
+  /** Times of day. */
+  Time: "Time",
+
+  /** Calendar dates with time. */
+  DateTime: "DateTime",
+
+  /** Range of dates. */
+  DateRange: "DateRange",
+
+  /** Range of times. */
+  TimeRange: "TimeRange",
+
+  /** Range of date and time. */
+  DateTimeRange: "DateTimeRange",
+
+  /** Duration of time. */
+  Duration: "Duration",
+
+  /** Set of time-related values. */
+  SetTemporal: "SetTemporal",
+
+  /** Social, sports, business, political, educational, natural, historical, criminal, violent, legal, military events with a timed period. */
+  Event: "Event",
+
+  /** Sports event-related values. */
+  SportsEvent: "SportsEvent",
+
+  /** Cultural event-related values. */
+  CulturalEvent: "CulturalEvent",
+
+  /** Natural event-related values. */
+  NaturalEvent: "NaturalEvent",
+
+  /** Particular point or place in physical space. */
+  Location: "Location",
+
+  /** Cities, countries/regions, states. */
+  GPE: "GPE",
+
+  /** City-related values. */
+  City: "City",
+
+  /** State-related values. */
+  State: "State",
+
+  /** Country or region-related values. */
+  CountryRegion: "CountryRegion",
+
+  /** Continent-related values. */
+  Continent: "Continent",
+
+  /** Manmade structures. */
+  Structural: "Structural",
+
+  /** Airports. */
+  Airport: "Airport",
+
+  /** Geographic and natural features such as rivers, oceans, and deserts. */
+  Geological: "Geological",
+
+  /** Corporations, agencies, and other groups of people defined by some established organizational structure. These labels can include companies, political parties/movements, musical bands, sport clubs, government bodies, and public organizations. Nationalities or religions are not ORGANIZATION. */
+  Organization: "Organization",
+
+  /** Medical companies and groups. */
+  OrganizationMedical: "OrganizationMedical",
+
+  /** Stock exchange groups. */
+  OrganizationStockExchange: "OrganizationStockExchange",
+
+  /** Sports-related organizations. */
+  OrganizationSports: "OrganizationSports",
+
+  /** First, last, and middle names, names of fictional characters, and aliases. Titles, such as 'Mr.' or 'President', are not considered part of the named entity. */
+  Person: "Person",
+
+  /** Human roles classified by a group membership. */
+  PersonType: "PersonType",
+
+  /** Email addresses. */
+  Email: "Email",
+
+  /** URLs to websites. */
+  URL: "URL",
+
+  /** network IP addresses. */
+  IP: "IP",
+
+  /** Phone numbers (US and EU phone numbers only). */
+  PhoneNumber: "PhoneNumber",
+
+  /** Single or group of commercial, consumable objects, electronics, vehicles, food groups. */
+  Product: "Product",
+
+  /** Computing products. */
+  ComputingProduct: "ComputingProduct",
+
+  /** A capability, skill, or expertise. */
+  Skill: "Skill",
+}
+
+/** The entity synonyms used to enhance pii entity detection */
+@added(Versions.v2026_05_15_preview)
+model EntitySynonym {
+  /** The synonym to be used for context */
+  synonym: string;
+
+  /** The 2 letter ISO 639-1 language the synonym */
+  language?: string;
+}
+
+/** Configuration for confidence score threshold for PII entity recognition */
+@added(Versions.v2026_05_15_preview)
+model ConfidenceScoreThreshold {
+  /** Minimum confidence score threshold for the PII entities to be returned in the response. Entities with a confidence score below this threshold will be filtered out. Value should be between 0.0 and 1.0 */
+  default: float32;
+
+  /** List of confidence score threshold overrides for specific PII categories */
+  overrides?: ConfidenceScoreThresholdOverride[];
+}
+
+/** Confidence score threshold override for a specific PII category */
+@added(Versions.v2026_05_15_preview)
+model ConfidenceScoreThresholdOverride {
+  /** The PII category for which to override the confidence score threshold */
+  entity: PiiCategoriesExclude;
+
+  /** The confidence score threshold for the specified PII category */
+  value: float32;
+
+  /** The 2 letter ISO 639-1 language for which the override applies. If not specified, the override applies to all languages. */
+  language: string;
+}
+
+/** Policy for specific words and terms that should be excluded from detection by the PII detection service */
+@added(Versions.v2026_05_15_preview)
+model ValueExclusionPolicy {
+  /** Option to make the values excluded values case sensitive */
+  caseSensitive: boolean = false;
+
+  /** List of words and terms that should be excluded from detection by the PII detection service */
+  excludedValues: string[];
+}
+
 /** The abstract base class for RedactionPolicy. */
 @discriminator("policyKind")
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind;
+
+  /** (Optional) describes the PII categories to which the redaction policy will be applied. If not specified, the redaction policy will be applied to all PII categories. */
+  @added(Versions.v2026_05_15_preview)
+  entityTypes?: PiiCategoriesExclude[];
+
+  /** (Optional) name of the redaction policy for identification purposes. */
+  @added(Versions.v2026_05_15_preview)
+  policyName?: string;
+
+  /** (Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default. */
+  @added(Versions.v2026_05_15_preview)
+  isDefaultPolicy?: boolean = false;
+}
+
+/** Represents the policy of replacing detected PII with synthetic values. */
+@added(Versions.v2026_05_15_preview)
+model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.syntheticReplacement;
+
+  /** Optional flag to indicate whether to preserve the original data format in the synthetic replacement. Default is false. */
+  preserveDataFormat?: boolean;
 }
 
 /** Represents the policy of redacting with a redaction character */
@@ -78,6 +336,27 @@ model CharacterMaskPolicy extends BaseRedactionPolicy {
 model NoMaskPolicy extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.noMask;
+}
+
+/** Represents the policy of redacting PII with marker style. */
+@added(Versions.v2026_05_15_preview)
+model MarkerMaskPolicy extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.markerMask;
+}
+
+/** Represents the policy of redacting PII with blackout style. */
+@added(Versions.v2026_05_15_preview)
+model BlackoutMaskPolicy extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.blackoutMask;
+}
+
+/** Represents the policy of redacting PII with ink style. */
+@added(Versions.v2026_05_15_preview)
+model InkMaskPolicy extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.inkMask;
 }
 
 /** Represents the policy of redacting PII with the entity type. */
@@ -98,6 +377,22 @@ union RedactionPolicyKind {
 
   /** Redact detected entities with entity type. */
   entityMask: "entityMask",
+
+  /** Redact detected entities using a marker-style mask. */
+  @added(Versions.v2026_05_15_preview)
+  markerMask: "markerMask",
+
+  /** Redact detected entities using a blackout-style mask. */
+  @added(Versions.v2026_05_15_preview)
+  blackoutMask: "blackoutMask",
+
+  /** Redact detected entities using an ink-style mask. */
+  @added(Versions.v2026_05_15_preview)
+  inkMask: "inkMask",
+
+  /** Replace detected entities with synthetic values. */
+  @added(Versions.v2026_05_15_preview)
+  syntheticReplacement: "syntheticReplacement",
 }
 
 /** Contains the PII results. */
