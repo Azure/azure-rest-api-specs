@@ -145,6 +145,7 @@ These settings apply only when `--tag=package-2018-09-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-09-preview'
 input-file:
+  - preview/2018-09-01-preview/resourcechanges.json
   - preview/2018-09-01-preview/resourcegraph.json
   - preview/2018-09-01-preview/graphquery.json
 ```
