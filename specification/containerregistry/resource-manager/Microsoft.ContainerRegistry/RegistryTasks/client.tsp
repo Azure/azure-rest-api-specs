@@ -101,3 +101,21 @@ using Microsoft.ContainerRegistry;
 @@alternateType(TaskRun.location, azureLocation, "csharp");
 @@alternateType(SourceProperties.repositoryUrl, url, "csharp");
 @@alternateType(SourceTriggerDescriptor.repositoryUrl, url, "csharp");
+
+// Property rename: 2-letter acronym "OS" must be uppercase (not "Os")
+@@clientName(AgentPoolProperties.os, "OS", "csharp");
+@@clientName(PlatformProperties.os, "OS", "csharp");
+@@clientName(PlatformUpdateParameters.os, "OS", "csharp");
+
+// Property rename: integer duration properties must include units in the name
+@@clientName(TaskProperties.timeout, "TimeoutInSeconds", "csharp");
+@@clientName(TaskPropertiesUpdateParameters.timeout,
+  "TimeoutInSeconds",
+  "csharp"
+);
+@@clientName(DockerBuildRequest.timeout, "TimeoutInSeconds", "csharp");
+@@clientName(FileTaskRunRequest.timeout, "TimeoutInSeconds", "csharp");
+@@clientName(EncodedTaskRunRequest.timeout, "TimeoutInSeconds", "csharp");
+
+// Property rename: DateTimeOffset properties must end with "On"
+@@clientName(ImageUpdateTrigger.timestamp, "OccurredOn", "csharp");
