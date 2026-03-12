@@ -24,7 +24,7 @@ interface NetworkInterfacesOperationGroup {
   @list
   @action("networkInterfaces")
   listVirtualMachineScaleSetNetworkInterfaces is ArmProviderActionSync<
-    Response = ResourceListResult<NetworkInterface>,
+    Response = VmssNetworkInterfaceListResult,
     Scope = Extension.ResourceGroup,
     Parameters = {
       /**
@@ -50,7 +50,7 @@ interface PublicIPAddressesOperationGroup {
   @list
   @action("publicipaddresses")
   listVirtualMachineScaleSetPublicIPAddresses is ArmProviderActionSync<
-    Response = ResourceListResult<PublicIPAddress>,
+    Response = VmssPublicIpAddressListResult,
     Scope = Extension.ResourceGroup,
     Parameters = {
       /**

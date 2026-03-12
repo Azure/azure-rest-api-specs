@@ -40,6 +40,11 @@ model PublicIPAddress
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
+/**
+ * A pageable collection of virtual machine scale set public IP addresses.
+ */
+alias VmssPublicIpAddressListResult = ResourceListResult<PublicIPAddress>;
+
 alias PublicIPAddressOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
@@ -103,34 +108,35 @@ interface PublicIPAddresses {
    * Gets information about all public IP addresses in a virtual machine IP configuration in a virtual machine scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  listVirtualMachineScaleSetVMPublicIPAddresses is ArmResourceListByParent<
+  @get
+  @list
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses")
+  listVirtualMachineScaleSetVMPublicIPAddresses is PublicIPAddressOps.ActionSync<
     PublicIPAddress,
+    Request = void,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
-      @segment("virtualMachineScaleSets")
       @key
       virtualMachineScaleSetName: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
-      @segment("virtualMachines")
       @key
       virtualmachineIndex: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
-      @segment("networkInterfaces")
       @key
       networkInterfaceName: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
-      @segment("ipconfigurations")
       @key
       ipConfigurationName: string;
     },
-    Error = CloudError
+    Response = ArmResponse<VmssPublicIpAddressListResult>,
+    OverrideErrorType = CloudError
   >;
 }
 

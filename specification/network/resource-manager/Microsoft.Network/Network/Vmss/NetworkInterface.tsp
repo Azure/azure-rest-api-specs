@@ -33,6 +33,11 @@ model NetworkInterface
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+/**
+ * A pageable collection of virtual machine scale set network interfaces.
+ */
+alias VmssNetworkInterfaceListResult = ResourceListResult<NetworkInterface>;
+
 alias NetworkInterfaceOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
@@ -85,20 +90,25 @@ interface NetworkInterfaces {
    * Gets information about all network interfaces in a virtual machine in a virtual machine scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  listVirtualMachineScaleSetVMNetworkInterfaces is ArmResourceListByParent<
+  @get
+  @list
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces")
+  listVirtualMachineScaleSetVMNetworkInterfaces is NetworkInterfaceOps.ActionSync<
     NetworkInterface,
+    Request = void,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
-      @segment("virtualMachineScaleSets")
+      @key
       virtualMachineScaleSetName: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
-      @segment("virtualMachines")
+      @key
       virtualmachineIndex: string;
     },
-    Error = CloudError
+    Response = ArmResponse<VmssNetworkInterfaceListResult>,
+    OverrideErrorType = CloudError
   >;
 }
 
