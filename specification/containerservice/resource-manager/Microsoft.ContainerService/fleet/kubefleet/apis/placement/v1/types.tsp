@@ -1,8 +1,10 @@
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "../../../../k8s.io/api/core/v1/types.tsp";
 import "../../../../k8s.io/apimachinery/apis/meta/v1/types.tsp";
 
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Core.V1;
 using Meta.V1;
 using Azure.ResourceManager;
@@ -32,7 +34,7 @@ union RolloutStrategyType {
 model UpdateRunStrategySpec {
   @doc("Stages specifies the configuration for each update stage. Maximum of 31 stages allowed.")
   @maxItems(31)
-  stages: StageConfig[];
+  stages?: StageConfig[];
 }
 
 @added(Microsoft.ContainerService.Versions.v2026_04_02_preview)
@@ -47,6 +49,7 @@ model StageConfig {
   labelSelector?: LabelSelector;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This key is not sensitive; it's a label key identifier for sorting clusters."
+  @OpenAPI.extension("x-ms-secret", false)
   @doc("The label key used to sort the selected clusters. The clusters within the stage are updated sequentially following the rule below: 1) Ascending order based on the value of the label key, interpreted as integers if present. 2) Ascending order based on the name of the cluster if the label key is absent or the label value is the same.")
   sortingLabelKey?: string;
 
