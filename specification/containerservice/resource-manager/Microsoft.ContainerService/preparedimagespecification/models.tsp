@@ -70,6 +70,16 @@ model PreparedImageSpecificationManagedIdentityProfile {
   clientId?: string;
 }
 
+@doc("The managed identity profile used by the prepared image specification for update operations.")
+model PreparedImageSpecificationManagedIdentityProfileUpdate {
+  @doc("The resource ID of the user-assigned managed identity.")
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
 @doc("Prepared image specification script")
 model PreparedImageSpecificationScript {
   @doc("""
@@ -99,6 +109,41 @@ model PreparedImageSpecificationScript {
 
   @doc("Whether the node should reboot after successful script execution.")
   rebootAfter?: boolean;
+}
+
+@doc("Prepared image specification script for update operations")
+model PreparedImageSpecificationScriptUpdate {
+  @doc("The name for the customization script.")
+  @pattern("^[a-z0-9]([a-z0-9\\.\\-]*[a-z0-9])?$")
+  @maxLength(263)
+  name?: string;
+
+  @doc("The stage at which the script is executed.")
+  executionPoint?: ExecutionPoint;
+
+  @doc("The runtime environment for the script (e.g. Bash).")
+  @example("Bash")
+  scriptType?: ScriptType;
+
+  @doc("The script content to be executed in plain text. Do not include secrets.")
+  @example("touch /hello_world.txt")
+  script?: string;
+
+  @doc("Whether the node should reboot after successful script execution.")
+  rebootAfter?: boolean;
+}
+
+@doc("The updatable properties of the Prepared Image Specification resource.")
+model PreparedImageSpecificationPatchProperties {
+  @doc("The list of container images to cache on nodes. See https://kubernetes.io/docs/concepts/containers/images/#image-names")
+  containerImages?: string[];
+
+  @doc("The identity used to execute prepared image specification tasks during image build time and provisioning time.")
+  identityProfile?: PreparedImageSpecificationManagedIdentityProfileUpdate;
+
+  @doc("The scripts to customize the node before or after image capture.")
+  @identifiers(#[])
+  customizationScripts?: PreparedImageSpecificationScriptUpdate[];
 }
 
 @doc("The execution point for the script.")

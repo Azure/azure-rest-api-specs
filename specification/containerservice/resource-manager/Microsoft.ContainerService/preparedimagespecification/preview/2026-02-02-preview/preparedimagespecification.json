@@ -747,6 +747,49 @@
         "resourceId"
       ]
     },
+    "PreparedImageSpecificationManagedIdentityProfileUpdate": {
+      "type": "object",
+      "description": "The managed identity profile used by the prepared image specification for update operations.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "PreparedImageSpecificationPatchProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Prepared Image Specification resource.",
+      "properties": {
+        "containerImages": {
+          "type": "array",
+          "description": "The list of container images to cache on nodes. See https://kubernetes.io/docs/concepts/containers/images/#image-names",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identityProfile": {
+          "$ref": "#/definitions/PreparedImageSpecificationManagedIdentityProfileUpdate",
+          "description": "The identity used to execute prepared image specification tasks during image build time and provisioning time."
+        },
+        "customizationScripts": {
+          "type": "array",
+          "description": "The scripts to customize the node before or after image capture.",
+          "items": {
+            "$ref": "#/definitions/PreparedImageSpecificationScriptUpdate"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "PreparedImageSpecificationProperties": {
       "type": "object",
       "description": "The properties of the Prepared Image Specification resource.",
@@ -820,6 +863,34 @@
         "scriptType"
       ]
     },
+    "PreparedImageSpecificationScriptUpdate": {
+      "type": "object",
+      "description": "Prepared image specification script for update operations",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name for the customization script.",
+          "maxLength": 263,
+          "pattern": "^[a-z0-9]([a-z0-9\\.\\-]*[a-z0-9])?$"
+        },
+        "executionPoint": {
+          "$ref": "#/definitions/ExecutionPoint",
+          "description": "The stage at which the script is executed."
+        },
+        "scriptType": {
+          "$ref": "#/definitions/ScriptType",
+          "description": "The runtime environment for the script (e.g. Bash)."
+        },
+        "script": {
+          "type": "string",
+          "description": "The script content to be executed in plain text. Do not include secrets."
+        },
+        "rebootAfter": {
+          "type": "boolean",
+          "description": "Whether the node should reboot after successful script execution."
+        }
+      }
+    },
     "PreparedImageSpecificationUpdate": {
       "type": "object",
       "description": "The type used for update operations of the PreparedImageSpecification.",
@@ -849,14 +920,14 @@
           }
         },
         "identityProfile": {
-          "$ref": "#/definitions/PreparedImageSpecificationManagedIdentityProfile",
-          "description": "The identity used to execute prepared image specification tasks during image build time and provisioning time. \nIf not specified the default agentpool identity will be used.\nThis does not affect provisioned nodes."
+          "$ref": "#/definitions/PreparedImageSpecificationManagedIdentityProfileUpdate",
+          "description": "The identity used to execute prepared image specification tasks during image build time and provisioning time."
         },
         "customizationScripts": {
           "type": "array",
           "description": "The scripts to customize the node before or after image capture.",
           "items": {
-            "$ref": "#/definitions/PreparedImageSpecificationScript"
+            "$ref": "#/definitions/PreparedImageSpecificationScriptUpdate"
           },
           "x-ms-identifiers": []
         }

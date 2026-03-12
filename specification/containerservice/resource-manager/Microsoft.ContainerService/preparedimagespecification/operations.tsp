@@ -23,7 +23,7 @@ interface PreparedImageSpecifications {
     PreparedImageSpecification,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       PreparedImageSpecification,
-      PreparedImageSpecificationProperties
+      PreparedImageSpecificationPatchProperties
     >,
     Azure.ResourceManager.Foundations.BaseParameters<PreparedImageSpecification> &
       IfMatchParameters<PreparedImageSpecification>
