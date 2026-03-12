@@ -248,7 +248,9 @@ using Azure.Core;
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum KeyVaultCreateMode {
+  /** Default. */
   default,
+  /** Recover. */
   recover,
 }
 /**
@@ -256,7 +258,9 @@ enum KeyVaultCreateMode {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum KeyVaultPatchMode {
+  /** Default. */
   default,
+  /** Recover. */
   recover,
 }
 /**
@@ -264,7 +268,9 @@ enum KeyVaultPatchMode {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ManagedHsmCreateMode {
+  /** Default. */
   default,
+  /** Recover. */
   recover,
 }
 
