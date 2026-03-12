@@ -67,7 +67,6 @@ interface RecipientTransfers {
    * Validates if a subscription or a reservation can be transferred. Use this operation to validate your subscriptions or reservation before using the accept transfer operation.
    */
   @summary("Validates if a subscription or a reservation can be transferred. Use this operation to validate your subscriptions or reservation before using the accept transfer operation.")
-  @list
   validate is ArmResourceActionSync<
     RecipientTransferDetails,
     AcceptTransferRequest,
