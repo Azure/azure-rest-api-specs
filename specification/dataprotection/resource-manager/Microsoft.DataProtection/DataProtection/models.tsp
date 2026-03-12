@@ -3160,29 +3160,25 @@ model BackupPolicy extends BaseBackupPolicy {
  */
 model BackupSchedule {
   /**
-   * Repeating time interval which supports the ISO 8601 format and unsupported or partially supported formats.
+   * Repeating time intervals that define the backup schedule.
    *
-   * Supported ISO 8601 Time Formats
+   * Each value must follow the format: `R/YYYY-MM-DDThh:mm:ss[.fff][Z|(+/-)hh:mm]/Duration`
    *
-   * The following time formats were verified to be successfully parsed and supported:
-   * - T14:30:45.123 → Thh:mm:ss.sss (with milliseconds)
-   * - T14:30:45 → Thh:mm:ss (standard time format)
-   * - T14:30 → Thh:mm (hour and minute only)
+   * Only the exact formats listed below are supported. Other ISO 8601 variations are not accepted.
    *
-   * All of the above may include time zone indicators like 'Z', '+05:30', '-08:00'.
+   * Supported time formats:
+   * - `Thh:mm:ss.fff` (with milliseconds)
+   * - `Thh:mm:ss` (with seconds)
+   * - `Thh:mm` (hours and minutes only)
    *
-   * Examples of supported timestamps:
-   * - 2023-10-15T14:30:45Z
-   * - 2023-10-15T14:30:45.123+05:30
-   * - 2023-10-15T14:30Z
+   * A timezone indicator (`Z`, `+hh:mm`, or `-hh:mm`) may be appended to any of the above.
    *
-   * Unsupported or partially supported formats:
-   * - T143045.123 or T143045 (no colons)
-   * - T14.500 (decimal hours)
-   * - T14 (hour only)
-   * - T14:30.500 (minute fractions)
-   * - T24:00:00 (invalid)
-   * - T23:59:60 (leap second)
+   * Unsupported formats include compact notation such as `T1430`, `T143045`, or `T14.5`.
+   *
+   * Examples:
+   * - `R/2023-10-15T14:30:00Z/P1W`
+   * - `R/2023-10-15T14:30:45.123+05:30/P1D`
+   * - `R/2023-10-15T14:30Z/P1D`
    */
   repeatingTimeIntervals: string[];
 
