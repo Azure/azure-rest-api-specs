@@ -10,16 +10,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Subscription;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SubscriptionIdParameter {
-  /**
-   * Subscription Id.
-   */
-  @path
-  @segment("subscriptions")
-  subscriptionId: string;
-}
-
 /**
  * The list of aliases.
  */

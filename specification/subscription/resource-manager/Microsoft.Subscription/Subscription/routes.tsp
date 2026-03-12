@@ -13,6 +13,16 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Subscription;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+alias SubscriptionIdParameter = {
+  /**
+   * Subscription Id.
+   */
+  @path
+  @segment("subscriptions")
+  subscriptionId: string;
+};
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SubscriptionOperationGroup {
   /**
