@@ -138,6 +138,7 @@ model SupercomputerIdentities {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;
 }
+
 @armResourceOperations
 interface Supercomputers {
   get is ArmResourceRead<Supercomputer>;
