@@ -1100,9 +1100,9 @@
     }
   },
   "definitions": {
-    "AdditionalProperties": {
+    "AdditionalProperty": {
       "type": "object",
-      "description": "Additional Properties column",
+      "description": "Additional Property column",
       "properties": {
         "name": {
           "type": "string",
@@ -1156,7 +1156,7 @@
           "type": "string",
           "description": "The full ARM resource ID."
         },
-        "type": {
+        "resourceType": {
           "type": "string",
           "description": "The type of the ARM relationship."
         },
@@ -1186,9 +1186,9 @@
         },
         "relationshipTypeAttributes": {
           "type": "array",
-          "description": "The attributes of the relationship type.",
+          "description": "The attributes of the relationship type (optional).",
           "items": {
-            "$ref": "#/definitions/AdditionalProperties"
+            "$ref": "#/definitions/AdditionalProperty"
           }
         },
         "lastSeenTime": {
@@ -1248,14 +1248,14 @@
           "type": "array",
           "description": "The tags associated with the ARM resource (optional).",
           "items": {
-            "$ref": "#/definitions/AdditionalProperties"
+            "$ref": "#/definitions/AdditionalProperty"
           }
         },
         "resourceProperties": {
           "type": "array",
           "description": "The resource properties of the ARM resource (optional).",
           "items": {
-            "$ref": "#/definitions/AdditionalProperties"
+            "$ref": "#/definitions/AdditionalProperty"
           }
         },
         "resourceTimestamp": {

@@ -82,8 +82,8 @@ model DatasetColumn {
   description?: string;
 }
 
-/** Additional Properties column */
-model AdditionalProperties {
+/** Additional Property column */
+model AdditionalProperty {
   /** Name of the column. */
   name: string;
 
@@ -118,10 +118,10 @@ model ArmResourceDatasetSchema {
   resourceLocation?: string;
 
   /** The tags associated with the ARM resource (optional). */
-  resourceTags?: AdditionalProperties[];
+  resourceTags?: AdditionalProperty[];
 
   /** The resource properties of the ARM resource (optional). */
-  resourceProperties?: AdditionalProperties[];
+  resourceProperties?: AdditionalProperty[];
 
   /** The timestamp when the resource information was captured (optional). */
   resourceTimestamp?: utcDateTime;
@@ -133,7 +133,7 @@ model ArmRelationshipDatasetSchema {
   resourceId: string;
 
   /** The type of the ARM relationship. */
-  type: string;
+  resourceType: string;
 
   /** The tenant ID where the resource resides. */
   tenantId: string;
@@ -154,7 +154,7 @@ model ArmRelationshipDatasetSchema {
   relationshipType: string;
 
   /** The attributes of the relationship type (optional). */
-  relationshipTypeAttributes?: AdditionalProperties[];
+  relationshipTypeAttributes?: AdditionalProperty[];
 
   /** The timestamp when the relationship was last seen (optional). */
   lastSeenTime?: utcDateTime;
