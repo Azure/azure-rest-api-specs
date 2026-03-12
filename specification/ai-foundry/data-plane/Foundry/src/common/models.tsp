@@ -54,6 +54,8 @@ union AgentDefinitionOptInKeys {
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
   container_agents_v1_preview: "ContainerAgents=V1Preview",
+
+  code_agents_v1_preview: "CodeAgents=V1Preview",
 }
 
 union FoundryFeaturesOptInKeys {
