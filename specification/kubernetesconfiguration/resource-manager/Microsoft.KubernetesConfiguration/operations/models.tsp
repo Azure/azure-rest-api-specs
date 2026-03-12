@@ -78,8 +78,9 @@ model OperationStatusResult {
   /**
    * If present, details of the operation error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail | null;
 }
 
 /**
