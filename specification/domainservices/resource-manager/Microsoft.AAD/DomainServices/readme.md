@@ -35,8 +35,8 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-10-01-preview'
 input-file:
-  - Microsoft.AAD/DomainServices/preview/2025-10-01-preview/domainservices.json
-  - Microsoft.AAD/DomainServices/preview/2025-10-01-preview/oucontainer.json
+  - preview/2025-10-01-preview/domainservices.json
+  - preview/2025-10-01-preview/oucontainer.json
 ```
 
 ### Tag: package-preview-2025-06-01
