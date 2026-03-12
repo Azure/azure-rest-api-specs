@@ -342,7 +342,7 @@ union Operator {
   ServiceTagMatch: "ServiceTagMatch",
 
   /**
-   * Asn Match Operator
+   * Autonomous System Number Match Operator
    */
   @added(Versions.v2025_11_01)
   AsnMatch: "AsnMatch",
@@ -1786,7 +1786,7 @@ model ManagedRuleSetList {
   /**
    * List of rule sets.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#[])
   managedRuleSets?: ManagedRuleSet[];
 
   /**
@@ -1804,7 +1804,7 @@ model ManagedRuleSetExceptionList {
   /**
    * List of exceptions.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#[])
   exceptions?: ManagedRuleSetException[];
 }
 
