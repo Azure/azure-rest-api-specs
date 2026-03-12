@@ -5397,79 +5397,6 @@
       }
     },
     "/managedAgentIdentityBlueprints/{managed_agent_identity_blueprint_name}": {
-      "put": {
-        "operationId": "ManagedAgentIdentityBlueprints_createOrUpdateManagedAgentIdentityBlueprint",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "managed_agent_identity_blueprint_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the managed agent identity blueprint to create.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ManagedAgentIdentityBlueprint"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateOrUpdateManagedAgentIdentityBlueprintRequest"
-              }
-            }
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
       "get": {
         "operationId": "ManagedAgentIdentityBlueprints_getManagedAgentIdentityBlueprint",
         "description": "Retrieves a managed agent identity blueprint by name.",
@@ -5573,6 +5500,74 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      }
+    },
+    "/managedAgentIdentityBlueprints/{name}/{managed_agent_identity_blueprint_name}": {
+      "put": {
+        "operationId": "ManagedAgentIdentityBlueprints_createOrUpdateManagedAgentIdentityBlueprint",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "managed_agent_identity_blueprint_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the managed agent identity blueprint to create.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/CreateOrUpdateManagedAgentIdentityBlueprintRequest"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedAgentIdentityBlueprint"
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -10352,6 +10347,16 @@
           "minLength": 1
         },
         "explode": false
+      },
+      "CreateOrUpdateManagedAgentIdentityBlueprintRequest": {
+        "name": "name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name that identifies the managed agent identity blueprint.\nName can be used to retrieve/update/delete the managed agent identity blueprint.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters.",
+        "schema": {
+          "type": "string",
+          "maxLength": 63
+        }
       }
     },
     "schemas": {
@@ -13852,24 +13857,6 @@
         },
         "title": "CreateEvalRunRequest"
       },
-      "CreateOrUpdateManagedAgentIdentityBlueprintRequest": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "maxLength": 63,
-            "description": "The unique name that identifies the managed agent identity blueprint.\nName can be used to retrieve/update/delete the managed agent identity blueprint.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters."
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
       "CreatedBy": {
         "type": "object",
         "properties": {
@@ -17230,7 +17217,8 @@
         ],
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           }
         }
       },
