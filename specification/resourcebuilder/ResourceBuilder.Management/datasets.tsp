@@ -45,6 +45,9 @@ union DatasetKind {
   /** ARM (Azure Resource Manager) managed resource dataset. */
   ArmResource: "ArmResource",
 
+  /** ARM (Azure Resource Manager) relationship dataset. */
+  ArmRelationship: "ArmRelationship",
+
   string,
 }
 
@@ -59,6 +62,9 @@ model DatasetProperties {
 
   /** ArmResource ArmResourceDatasetSchema object. */
   armResourceSchema?: ArmResourceDatasetSchema;
+
+  /** ArmRelationship ArmRelationshipDatasetSchema object. */
+  armRelationshipSchema?: ArmRelationshipDatasetSchema;
 
   /** Azure regions where the dataset exists. */
   locations?: string[];
@@ -82,8 +88,8 @@ model DatasetColumn {
   description?: string;
 }
 
-/** Additional Properties column */
-model AdditionalProperties {
+/** Additional Property column */
+model AdditionalProperty {
   /** Name of the column. */
   name: string;
 
@@ -118,13 +124,46 @@ model ArmResourceDatasetSchema {
   resourceLocation?: string;
 
   /** The tags associated with the ARM resource (optional). */
-  resourceTags?: AdditionalProperties[];
+  resourceTags?: AdditionalProperty[];
 
   /** The resource properties of the ARM resource (optional). */
-  resourceProperties?: AdditionalProperties[];
+  resourceProperties?: AdditionalProperty[];
 
   /** The timestamp when the resource information was captured (optional). */
   resourceTimestamp?: utcDateTime;
+}
+
+/** ARM relationship dataset schema. */
+model ArmRelationshipDatasetSchema {
+  /** The full ARM resource ID. */
+  resourceId: string;
+
+  /** The type of the ARM relationship. */
+  resourceType: string;
+
+  /** The tenant ID where the resource resides. */
+  tenantId: string;
+
+  /** The subscription ID where the resource resides. */
+  subscriptionId: string;
+
+  /** The Azure region where the resource is located. */
+  resourceLocation: string;
+
+  /** The full ARM resource ID of the target resource. */
+  targetId: string;
+
+  /** The type of the target ARM resource. */
+  targetType: string;
+
+  /** The type of the relationship. */
+  relationshipType: string;
+
+  /** The attributes of the relationship type (optional). */
+  relationshipTypeAttributes?: AdditionalProperty[];
+
+  /** The timestamp when the relationship was last seen (optional). */
+  lastSeenTime?: utcDateTime;
 }
 
 /** Dataset column type */
