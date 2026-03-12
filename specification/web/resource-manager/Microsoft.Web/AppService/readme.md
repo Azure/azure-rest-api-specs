@@ -108,16 +108,16 @@ These settings apply only when `--tag=package-2026-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2026-03'
 input-file:
-    - stable/2026-03-01/openapi.json
+    - stable/2026-03-15/openapi.json
 ```
 
-### Tag: package-2026-03-01-preview
+### Tag: package-2026-03-15-preview
 
-These settings apply only when `--tag=package-2026-03-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-03-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-03-01-preview'
+```yaml $(tag) == 'package-2026-03-15-preview'
 input-file:
-    - preview/2026-03-01-preview/openapi.json
+    - preview/2026-03-15-preview/openapi.json
 ```
 
 ### Tag: package-2025-05
