@@ -71,7 +71,7 @@ export const leaseSchema = z.object({
       .min(1, "Reviewer is required and cannot be empty")
       .refine(
         (r) => r.startsWith("@") && r.trim().length > 1,
-        "Reviewer must be a GitHub alias starting with @ (e.g., @octocat)",
+        "Reviewer must be a GitHub alias starting with @ (e.g., @githubUser)",
       ),
   }),
 });
@@ -153,7 +153,7 @@ export async function validateLeaseContent(leaseFile, relativePath, workspaceRoo
   const today = Temporal.Now.plainDateISO();
   if (Temporal.PlainDate.compare(Temporal.PlainDate.from(lease.startdate), today.subtract({ days: 10 })) < 0) {
     errors.push(
-      `Startdate is in the past: ${lease.startdate} (must be within 10 days of today: ${today})`,
+      `Startdate is in the past: ${lease.startdate} (must be within 10 days of today: ${today.toString()})`,
     );
   }
 
@@ -170,7 +170,7 @@ export async function validateLeaseContent(leaseFile, relativePath, workspaceRoo
       } else {
         serviceExists = true;
       }
-    } catch (error) {
+    } catch {
       // Service folder doesn't exist
       errors.push(
         `Service folder not found: specification/${orgName}. The orgName in the lease path must match an existing service folder in specification/.`,
@@ -186,7 +186,7 @@ export async function validateLeaseContent(leaseFile, relativePath, workspaceRoo
           );
         }
         // Directory exists and matches - validation passes
-      } catch (error) {
+      } catch {
         // Directory doesn't exist - skip validation (new RP being registered)
       }
     }
@@ -232,6 +232,8 @@ export default async function validateArmLeases(core) {
       core.info(`  ... and ${disallowedFiles.length - 20} more files`);
     }
     hasErrors = true;
+  } else {
+    core.info("No disallowed files found");
   }
   core.endGroup();
 
@@ -248,6 +250,8 @@ export default async function validateArmLeases(core) {
     }
     core.info("Only lease.yaml files are allowed in .github/arm-leases/ directory");
     hasErrors = true;
+  } else {
+    core.info("All files are valid lease.yaml or README.md files");
   }
   core.endGroup();
 
@@ -291,6 +295,8 @@ export default async function validateArmLeases(core) {
     core.info("  - .github/arm-leases/widgetservice/Widget.Manager/lease.yaml");
     core.info("  - .github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml");
     hasErrors = true;
+  } else {
+    core.info(`All ${armLeaseFiles.length} lease file(s) have valid folder structure`);
   }
   core.endGroup();
 
@@ -328,6 +334,11 @@ export default async function validateArmLeases(core) {
       for (const error of errors) {
         core.info(`  - ${error}`);
       }
+    }
+  } else {
+    core.info(`All ${validLeaseFiles.length} lease file(s) passed content validation`);
+    for (const file of validLeaseFiles) {
+      core.info(`  - ${file}`);
     }
   }
   core.endGroup();
