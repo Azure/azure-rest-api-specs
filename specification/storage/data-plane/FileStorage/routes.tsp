@@ -958,6 +958,7 @@ interface File {
    * Creates a new file or replaces a file. Note it only initializes the file with no content.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing storage API."
+  @sharedRoute
   @route("")
   @put
   create is StorageOperationRequestBody<
@@ -1356,6 +1357,7 @@ interface File {
    * Upload a range of bytes to a file where the contents are read from a URL.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
+  @sharedRoute
   @route("?comp=range&fromURL")
   @put
   uploadRangeFromUrl is StorageOperationNoBody<
@@ -1455,7 +1457,7 @@ interface File {
   /**
    * Copies a blob or file to a destination file within the storage account.
    */
-  @route("?comp=copy")
+  @sharedRoute
   @put
   startCopy is StorageOperationNoBody<
     {
@@ -1527,6 +1529,7 @@ interface File {
   /**
    * Aborts a pending Copy File operation, and leaves a destination file with zero length and full metadata.
    */
+  @sharedRoute
   @route("?comp=copy&copyid")
   @put
   abortCopy is StorageOperationNoBody<
