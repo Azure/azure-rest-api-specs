@@ -14,6 +14,7 @@ import "./routes.tiler.items.tsp";
 import "./routes.tiler.map-legends.tsp";
 import "./routes.tiler.mosaics.tsp";
 import "./routes.tiler.mosaic.collections.tsp";
+import "./routes.tiler.mosaic.items.tsp";
 import "./routes.tiler.mosaic.searches.tsp";
 import "./routes.tiler.tile-matrix-sets.tsp";
 

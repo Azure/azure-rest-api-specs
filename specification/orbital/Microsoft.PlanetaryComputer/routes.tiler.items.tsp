@@ -21,6 +21,7 @@ model AssetStatisticsResponse is Record<BandStatisticsMap>;
 @doc("Return dataset's basic info.")
 model TilerInfoMapResponse is Record<TilerInfo>;
 
+@removed(Versions.v2026_04_15)
 interface TilerBound {
   /**
    * Return all Bounds
@@ -52,6 +53,7 @@ interface TilerBound {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerInfoOperations {
   /**
    * Return dataset's basic info.
@@ -90,6 +92,7 @@ interface TilerInfoOperations {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerInfoGeoJsonOperations {
   /**
    * Return Info Geojson
@@ -128,6 +131,7 @@ interface TilerInfoGeoJsonOperations {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerAvailableAssets {
   /**
    * Return a list of supported assets.
@@ -159,6 +163,7 @@ interface TilerAvailableAssets {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerAssetStatistics {
   /**
    * Per Asset statistics
@@ -178,6 +183,7 @@ interface TilerAssetStatistics {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerStatistics {
   /**
    * Merged assets statistics.
@@ -197,6 +203,7 @@ interface TilerStatistics {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerGeoJsonStatistics {
   /**
    * Get Statistics from a geojson feature.
@@ -229,6 +236,7 @@ interface TilerGeoJsonStatistics {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerTiles {
   /**
    * Create map tile from a dataset.
@@ -290,6 +298,7 @@ interface TilerTiles {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerTileMatrixSets {
   /**
    * Create map tile from a dataset.
@@ -312,6 +321,7 @@ interface TilerTileMatrixSets {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerTileJsonOperations {
   /**
    * Return TileJson
@@ -371,6 +381,7 @@ interface TilerTileJsonOperations {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerTileJsonTileMatrixSets {
   /**
    * Return the TileJson Tilematrixsetid As a path
@@ -408,6 +419,7 @@ interface TilerTileJsonTileMatrixSets {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerWmts {
   /**
    * OGC WMTS endpoint.
@@ -791,6 +803,7 @@ alias getTileJsonCustomizedCommonSignatures = {
   tileMatrixSetId: string;
 };
 
+@removed(Versions.v2026_04_15)
 interface TilerWmtsTileMatrixSets {
   /**
    * OGC WMTS endpoint.
@@ -827,6 +840,7 @@ interface TilerWmtsTileMatrixSets {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerPoints {
   /**
    * Get Point value for a dataset.
@@ -884,6 +898,7 @@ interface TilerPoints {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerPreviews {
   /**
    * Create preview of a dataset.
@@ -979,6 +994,7 @@ interface TilerPreviews {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerParts {
   /**
    * Create image from part of a dataset.
@@ -1079,6 +1095,7 @@ interface TilerParts {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface TilerGeoJsons {
   /**
    * Create image from a geojson feature.
@@ -1141,468 +1158,6 @@ interface TilerGeoJsons {
       ...AssetQueryParameters;
       ...TerrainAlgorithmQueryParameters;
       ...cropGeoJsonCustomizedCommonSignatures;
-
-      /**
-       * rio-color formula (info: https://github.com/mapbox/rio-color)
-       */
-      @query("color_formula")
-      colorFormula?: string;
-
-      /**
-       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
-       */
-      @query("coord-crs")
-      coordinateReferenceSystem?: string;
-
-      /**
-       * Resampling method.
-       */
-      @query("resampling")
-      resampling?: Resampling = Resampling.nearest;
-
-      /**
-       * Image output size limit if width and height limits are not set.
-       */
-      @query("max_size")
-      maxSize?: int32 = 1024;
-
-      ...DimensionsQueryParameters;
-      ...MiscTileQueryParameters;
-
-      /**
-       * Request GeoJson body.
-       */
-      @body
-      body: Feature;
-    },
-    TileResponse
-  >;
-}
-
-// =====================================================================
-// New interfaces added in stable version 2026-04-15
-// =====================================================================
-
-@added(Versions.v2026_04_15)
-interface TilerTileSetList {
-  /**
-   * Return a list of available tilesets for a STAC item.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tileset List")
-  @tag("Tiles for STAC Items")
-  @route("/data/collections/{collectionId}/items/{itemId}/tiles")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-    },
-    TileSetList
-  >;
-}
-
-@added(Versions.v2026_04_15)
-interface TilerTileSetMetadata {
-  /**
-   * Return metadata for a specific tileset of a STAC item.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tileset Metadata")
-  @tag("Tiles for STAC Items")
-  @route("/data/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
-    },
-    TileSetMetadata
-  >;
-}
-
-@added(Versions.v2026_04_15)
-interface TilerTileMatrixSetsPlain {
-  /**
-   * Create map tile from a dataset (without scale or format in path).
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tile Tilematrixsetid Plain")
-  @tag("Tiles for STAC Items")
-  @route("/data/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}")
-  @get
-  getZxy is Azure.Core.Foundations.Operation<
-    {
-      ...AssetQueryParameters;
-      ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
-
-      ...ZxyPathParameters;
-      ...TileMatrixSetQueryParameters;
-      ...MiscTileQueryParameters;
-      ...SubDatasetQueryParameters;
-    },
-    TileResponse
-  >;
-}
-
-@added(Versions.v2026_04_15)
-interface TilerTileMatrixSetsFormat {
-  /**
-   * Create map tile from a dataset (with format in path, without scale).
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tile Tilematrixsetid Format")
-  @tag("Tiles for STAC Items")
-  @route("/data/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}.{format}")
-  @get
-  getZxyByFormat is Azure.Core.Foundations.Operation<
-    {
-      ...AssetQueryParameters;
-      ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
-
-      ...ZxyPathParameters;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp)
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
-
-      ...TileMatrixSetQueryParameters;
-      ...MiscTileQueryParameters;
-      ...SubDatasetQueryParameters;
-    },
-    TileResponse
-  >;
-}
-
-@added(Versions.v2026_04_15)
-interface TilerTileMatrixSetsScale {
-  /**
-   * Create map tile from a dataset (with scale in path, without format).
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tile Tilematrixsetid Scale")
-  @tag("Tiles for STAC Items")
-  @route("/data/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x")
-  @get
-  getZxyByScale is Azure.Core.Foundations.Operation<
-    {
-      ...AssetQueryParameters;
-      ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
-
-      ...ZxyPathParameters;
-
-      /**
-       * Numeric scale factor for the tile. Higher values produce larger tiles
-       */
-      @path
-      scale: float32;
-
-      ...TileMatrixSetQueryParameters;
-      ...MiscTileQueryParameters;
-      ...SubDatasetQueryParameters;
-    },
-    TileResponse
-  >;
-}
-
-@added(Versions.v2026_04_15)
-interface TilerTilesPlain {
-  /**
-   * Create map tile from a dataset (without TileMatrixSetId, scale or format in path).
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tile Plain")
-  @tag("Tiles for STAC Items")
-  @route("/data/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}")
-  @get
-  getZxy is Azure.Core.Foundations.Operation<
-    {
-      ...AssetQueryParameters;
-      ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      ...ZxyPathParameters;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported (default:
-       * 'WebMercatorQuad')
-       */
-      @query("tileMatrixSetId")
-      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
-
-      ...TileMatrixSetQueryParameters;
-      ...MiscTileQueryParameters;
-      ...SubDatasetQueryParameters;
-    },
-    TileResponse
-  >;
-}
-
-@added(Versions.v2026_04_15)
-interface TilerTilesFormat {
-  /**
-   * Create map tile from a dataset (with format in path, without TileMatrixSetId or scale).
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tile Format")
-  @tag("Tiles for STAC Items")
-  @route("/data/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}.{format}")
-  @get
-  getZxyByFormat is Azure.Core.Foundations.Operation<
-    {
-      ...AssetQueryParameters;
-      ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      ...ZxyPathParameters;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp)
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported (default:
-       * 'WebMercatorQuad')
-       */
-      @query("tileMatrixSetId")
-      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
-
-      ...TileMatrixSetQueryParameters;
-      ...MiscTileQueryParameters;
-      ...SubDatasetQueryParameters;
-    },
-    TileResponse
-  >;
-}
-
-@added(Versions.v2026_04_15)
-interface TilerTilesScale {
-  /**
-   * Create map tile from a dataset (with scale in path, without TileMatrixSetId or format).
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tile Scale")
-  @tag("Tiles for STAC Items")
-  @route("/data/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x")
-  @get
-  getZxyByScale is Azure.Core.Foundations.Operation<
-    {
-      ...AssetQueryParameters;
-      ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      ...ZxyPathParameters;
-
-      /**
-       * Numeric scale factor for the tile. Higher values produce larger tiles
-       */
-      @path
-      scale: float32;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported (default:
-       * 'WebMercatorQuad')
-       */
-      @query("tileMatrixSetId")
-      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
-
-      ...TileMatrixSetQueryParameters;
-      ...MiscTileQueryParameters;
-      ...SubDatasetQueryParameters;
-    },
-    TileResponse
-  >;
-}
-
-@added(Versions.v2026_04_15)
-interface TilerGeoJsonsCrop {
-  /**
-   * Create image from a geojson feature (without format in path).
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Geojson Crop")
-  @tag("Tiles for STAC Items")
-  @route("/data/collections/{collectionId}/items/{itemId}/crop")
-  @post
-  crop is Azure.Core.Foundations.Operation<
-    {
-      ...AssetQueryParameters;
-      ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)

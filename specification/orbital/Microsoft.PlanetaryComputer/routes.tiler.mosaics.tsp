@@ -83,8 +83,11 @@ alias getMosaicsWmtsCapabilitiesCustomizedCommonSignatures = {
 interface MosaicsTiles {
   /**
    * Create map tile.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/tiles/ endpoints instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #deprecated "Use /data/mosaic/searches/{searchId}/tiles/ endpoints instead"
   @summary("Tile")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}@{scale}x.{format}")
@@ -135,8 +138,11 @@ interface MosaicsTiles {
 interface MosaicsTileMatrixSets {
   /**
    * Create map tile.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/ endpoints instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/ endpoints instead"
   @summary("Tile Tilematrixsetid As Path")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}")
@@ -157,8 +163,11 @@ interface MosaicsTileMatrixSets {
 interface MosaicsTileJsonOperations {
   /**
    * Return TileJSON document for a searchId.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/tilejson.json instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #deprecated "Use /data/mosaic/searches/{searchId}/tilejson.json instead"
   @summary("TileJson")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tilejson.json")
@@ -276,8 +285,11 @@ interface MosaicsTileJsonOperations {
 interface MosaicsTileMatrixSetsTileJson {
   /**
    * Return TileJSON document for a searchId.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/{tileMatrixSetId}/tilejson.json instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #deprecated "Use /data/mosaic/searches/{searchId}/{tileMatrixSetId}/tilejson.json instead"
   @summary("TileJson Tilematrixsetid As Path")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{tileMatrixSetId}/tilejson.json")
@@ -314,8 +326,11 @@ interface MosaicsTileMatrixSetsTileJson {
 interface MosaicsWmtsMosaics {
   /**
    * OGC WMTS endpoint.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/WMTSCapabilities.xml instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #deprecated "Use /data/mosaic/searches/{searchId}/WMTSCapabilities.xml instead"
   @summary("Wmts")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/WMTSCapabilities.xml")
@@ -364,8 +379,11 @@ interface MosaicsWmtsMosaics {
 interface MosaicsWmtsMosaicsTileMatrixSets {
   /**
    * OGC WMTS endpoint.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #deprecated "Use /data/mosaic/searches/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml instead"
   @summary("Wmts Tilematrixsetid As Path")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml")
@@ -400,8 +418,11 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
 interface MosaicsRegisterSearch {
   /**
    * Register a Search query
+   *
+   * Note: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/register instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #deprecated "Use /data/mosaic/searches/register instead"
   @summary("Register Search")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/register")
@@ -415,8 +436,11 @@ interface MosaicsRegisterSearch {
 interface MosaicsInfoSearch {
   /**
    * Get Search query metadata.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/info instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #deprecated "Use /data/mosaic/searches/{searchId}/info instead"
   @summary("Info Search")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/info")
@@ -438,8 +462,11 @@ interface MosaicsInfoSearch {
 interface MosaicsAssetsForTiles {
   /**
    * Return a list of assets which overlap a given tile
+   *
+   * Note: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}/assets instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}/assets instead"
   @summary("Assets For Tile")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}/assets")
@@ -471,8 +498,11 @@ interface MosaicsAssetsForTiles {
 interface MosaicsAssetsForTileMatrixSets {
   /**
    * Return a list of assets which overlap a given tile
+   *
+   * Note: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets instead"
   @summary("Assets For Tile Tilematrixsetid As Path")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets")
@@ -514,8 +544,11 @@ interface MosaicsAssetsForTileMatrixSets {
 interface MosaicsAssetsForPoints {
   /**
    * Return a list of assets for a given point.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/{longitude},{latitude}/assets instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #deprecated "Use /data/mosaic/searches/{searchId}/{longitude},{latitude}/assets instead"
   @summary("Assets For Point")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{longitude},{latitude}/assets")

@@ -250,21 +250,28 @@ interface Data {
   getLegend is MapsLegends.get;
 
   // Mosaic Assets
+  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
   getMosaicsAssetsForPoint is MosaicsAssetsForPoints.getPointAssets;
+  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
   getMosaicsAssetsForTile is MosaicsAssetsForTileMatrixSets.getZxyAssets;
   // getMosaicsAssetsForTile is MosaicsAssetsForTiles.getZxyAssets;
 
   // Mosaic Search and Registration
+  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
   getMosaicsSearchInfo is MosaicsInfoSearch.get;
+  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
   registerMosaicsSearch is MosaicsRegisterSearch.register;
 
   // Mosaic Tile JSON
+  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
   getMosaicsTileJson is MosaicsTileMatrixSetsTileJson.get;
 
   // Mosaic Tiles
+  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
   getMosaicsTile is MosaicsTileMatrixSets.getZxyScaleByFormat;
 
   // Mosaic WMTS Capabilities
+  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
   getMosaicsWmtsCapabilities is MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml;
   // getMosaicsWmtsCapabilities is MosaicsWmtsMosaics.getCapabilitiesXml;
 
@@ -273,29 +280,29 @@ interface Data {
   // Item Tileset List and Metadata
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  listTilesets is TilerTileSetList.get;
+  listTilesets is MosaicItemsTileSetList.get;
   @added(Versions.v2026_04_15)
-  getTilesetMetadata is TilerTileSetMetadata.get;
+  getTilesetMetadata is MosaicItemsTileSetMetadata.get;
 
   // Item Tile Variants (TileMatrixSetId as path)
   @added(Versions.v2026_04_15)
-  getTilePlain is TilerTileMatrixSetsPlain.getZxy;
+  getTilePlain is MosaicItemsTileMatrixSetsPlain.getZxy;
   @added(Versions.v2026_04_15)
-  getTileByFormat is TilerTileMatrixSetsFormat.getZxyByFormat;
+  getTileByFormat is MosaicItemsTileMatrixSetsFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
-  getTileByScale is TilerTileMatrixSetsScale.getZxyByScale;
+  getTileByScale is MosaicItemsTileMatrixSetsScale.getZxyByScale;
 
   // Item Tile Variants (without TileMatrixSetId in path)
   @added(Versions.v2026_04_15)
-  getTileNoTmsPlain is TilerTilesPlain.getZxy;
+  getTileNoTmsPlain is MosaicItemsTilesPlain.getZxy;
   @added(Versions.v2026_04_15)
-  getTileNoTmsByFormat is TilerTilesFormat.getZxyByFormat;
+  getTileNoTmsByFormat is MosaicItemsTilesFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
-  getTileNoTmsByScale is TilerTilesScale.getZxyByScale;
+  getTileNoTmsByScale is MosaicItemsTilesScale.getZxyByScale;
 
   // GeoJSON Crop (bare, no format)
   @added(Versions.v2026_04_15)
-  cropGeoJsonBare is TilerGeoJsonsCrop.crop;
+  cropGeoJsonBare is MosaicItemsGeoJsonsCrop.crop;
 
   // === Collection-level mosaic endpoints (stable 2026-04-15) ===
 

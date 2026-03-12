@@ -3891,7 +3891,7 @@
           "Tiles for STAC Collections Mosaics"
         ],
         "summary": "Wmts Tilematrixsetid As Path",
-        "description": "OGC WMTS endpoint.",
+        "description": "OGC WMTS endpoint.\n\nNote: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "produces": [
           "application/xml",
           "application/json"
@@ -4065,6 +4065,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsWmtsMosaicsTileMatrixSets_GetCapabilitiesXml": {
             "$ref": "./examples/MosaicsWmtsMosaicsTileMatrixSets_GetCapabilitiesXml.json"
@@ -4079,7 +4080,7 @@
           "Tiles for STAC Collections Mosaics"
         ],
         "summary": "Assets For Point",
-        "description": "Return a list of assets for a given point.",
+        "description": "Return a list of assets for a given point.\n\nNote: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/{longitude},{latitude}/assets instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4156,6 +4157,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsAssetsForPoints_GetPointAssets": {
             "$ref": "./examples/MosaicsAssetsForPoints_GetPointAssets.json"
@@ -4170,7 +4172,7 @@
           "Tiles for STAC Collections Mosaics"
         ],
         "summary": "TileJson Tilematrixsetid As Path",
-        "description": "Return TileJSON document for a searchId.",
+        "description": "Return TileJSON document for a searchId.\n\nNote: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/{tileMatrixSetId}/tilejson.json instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4359,6 +4361,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsTileMatrixSetsTileJson_Get": {
             "$ref": "./examples/MosaicsTileMatrixSetsTileJson_Get.json"
@@ -4373,7 +4376,7 @@
           "Tiles for STAC Collections Mosaics"
         ],
         "summary": "Wmts",
-        "description": "OGC WMTS endpoint.",
+        "description": "OGC WMTS endpoint.\n\nNote: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/WMTSCapabilities.xml instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "produces": [
           "application/xml",
           "application/json"
@@ -4620,6 +4623,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsWmtsMosaics_GetCapabilitiesXml": {
             "$ref": "./examples/MosaicsWmtsMosaics_GetCapabilitiesXml.json"
@@ -4634,7 +4638,7 @@
           "Tiles for STAC Collections Mosaics"
         ],
         "summary": "Info Search",
-        "description": "Get Search query metadata.",
+        "description": "Get Search query metadata.\n\nNote: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/info instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4669,6 +4673,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsInfoSearch_Get": {
             "$ref": "./examples/MosaicsInfoSearch_Get.json"
@@ -4683,7 +4688,7 @@
           "Tiles for STAC Collections Mosaics"
         ],
         "summary": "TileJson",
-        "description": "Return TileJSON document for a searchId.",
+        "description": "Return TileJSON document for a searchId.\n\nNote: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/tilejson.json instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -6463,6 +6468,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsTileJsonOperations_Get": {
             "$ref": "./examples/MosaicsTileJsonOperations_Get.json"
@@ -6477,7 +6483,7 @@
           "Tiles for STAC Collections Mosaics"
         ],
         "summary": "Tile",
-        "description": "Create map tile.",
+        "description": "Create map tile.\n\nNote: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/tiles/ endpoints instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -6696,6 +6702,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsTiles_GetZxyScaleByFormat": {
             "$ref": "./examples/MosaicsTiles_GetZxyScaleByFormat.json"
@@ -6710,7 +6717,7 @@
           "Tiles for STAC Collections Mosaics"
         ],
         "summary": "Tile Tilematrixsetid As Path",
-        "description": "Create map tile.",
+        "description": "Create map tile.\n\nNote: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/ endpoints instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -6856,6 +6863,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsTileMatrixSets_GetZxyScaleByFormat": {
             "$ref": "./examples/MosaicsTileMatrixSets_GetZxyScaleByFormat.json"
@@ -6870,7 +6878,7 @@
           "Tiles for STAC Collections Mosaics"
         ],
         "summary": "Assets For Tile Tilematrixsetid As Path",
-        "description": "Return a list of assets which overlap a given tile",
+        "description": "Return a list of assets which overlap a given tile\n\nNote: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -6951,6 +6959,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsAssetsForTileMatrixSets_GetZxyAssets": {
             "$ref": "./examples/MosaicsAssetsForTileMatrixSets_GetZxyAssets.json"
@@ -6965,7 +6974,7 @@
           "Tiles for STAC Collections Mosaics"
         ],
         "summary": "Assets For Tile",
-        "description": "Return a list of assets which overlap a given tile",
+        "description": "Return a list of assets which overlap a given tile\n\nNote: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}/assets instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -7107,6 +7116,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsAssetsForTiles_GetZxyAssets": {
             "$ref": "./examples/MosaicsAssetsForTiles_GetZxyAssets.json"
@@ -7121,7 +7131,7 @@
           "Tiles for STAC Collections Mosaics"
         ],
         "summary": "Register Search",
-        "description": "Register a Search query",
+        "description": "Register a Search query\n\nNote: If you are using stable API version 2026-04-15, please use /data/mosaic/searches/register instead. This endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -7155,6 +7165,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsRegisterSearch_Register": {
             "$ref": "./examples/MosaicsRegisterSearch_Register.json"
