@@ -78,6 +78,30 @@ suppressions:
     from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
   - code: ResourceNameRestriction
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    where: $.parameters.PricingName
+    reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
+  - code: PutRequestResponseSchemeArm
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}"].put
+    reason: The models are the same, but one is a parameter and the other is a definition! old versions of this API have the same configurations.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    where: $.definitions.PricingList
+    reason: The collection is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
+  - code: PathForResourceAction
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/batch"].post
+    reason: The pricings API uses a {scopeId} parameter instead of the standard /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/... path pattern. This is by design as the endpoint supports multiple scope types (subscription and resource-level scopes). The batch action is a POST on the pricings collection.
+  - code: ParameterNotDefinedInGlobalParameters
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}"].get.parameters[0]
+    reason: api-version parameter is referenced from common types v1, which is the recommended pattern.
+  - code: EnumInsteadOfBoolean
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    where: $.definitions.BatchPricingResult.properties.success
+    reason: The success property is a simple success/failure indicator for batch results that will not need additional states.
+  - code: ResourceNameRestriction
     from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
   - code: PatchBodyParametersSchema
@@ -133,6 +157,7 @@ input-file:
   - preview/2025-10-01-preview/operations.json
   - preview/2025-10-01-preview/operationResults.json
   - preview/2025-10-01-preview/operationStatuses.json
+  - preview/2025-10-01-preview/pricings.json
 ```
 
 ### Tag: package-preview-2025-09-01-preview
@@ -567,7 +592,6 @@ input-file:
 - preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - preview/2021-05-01-preview/softwareInventories.json
-- preview/2021-07-01-preview/customAssessmentAutomation.json
 - preview/2021-10-01-preview/mdeOnboardings.json
 - preview/2022-08-01-preview/securityConnectors.json
 
@@ -609,7 +633,6 @@ input-file:
 - preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - preview/2021-05-01-preview/softwareInventories.json
-- preview/2021-07-01-preview/customAssessmentAutomation.json
 - preview/2021-10-01-preview/mdeOnboardings.json
 - preview/2022-08-01-preview/securityConnectors.json
 - stable/2018-06-01/pricings.json
@@ -636,7 +659,6 @@ input-file:
 - preview/2019-01-01-preview/regulatoryCompliance.json
 - preview/2019-01-01-preview/subAssessments.json
 - preview/2021-05-01-preview/softwareInventories.json
-- preview/2021-07-01-preview/customAssessmentAutomation.json
 - preview/2021-10-01-preview/mdeOnboardings.json
 - preview/2022-01-01-preview/governanceAssignments.json
 - preview/2022-01-01-preview/governanceRules.json
@@ -675,7 +697,7 @@ input-file:
 - stable/2022-05-01/settings.json
 - stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - stable/2023-11-15/apiCollections.json
-- stable/2024-01-01/pricings.json
+- preview/2025-10-01-preview/pricings.json
 - stable/2024-08-01/securityStandards.json
 - stable/2024-08-01/standardAssignments.json
 - stable/2024-08-01/customRecommedations.json
@@ -719,7 +741,6 @@ input-file:
 - preview/2019-01-01-preview/subAssessments.json
 - preview/2020-01-01-preview/securityContacts.json
 - preview/2021-05-01-preview/softwareInventories.json
-- preview/2021-07-01-preview/customAssessmentAutomation.json
 - preview/2021-10-01-preview/mdeOnboardings.json
 - preview/2022-01-01-preview/governanceAssignments.json
 - preview/2022-01-01-preview/governanceRules.json
@@ -1077,7 +1098,6 @@ These settings apply only when `--tag=package-2021-07-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2021-07-preview-only'
 input-file:
-  - preview/2021-07-01-preview/customAssessmentAutomation.json
   - preview/2021-07-01-preview/securityConnectors.json
 override-info:
   title: SecurityCenter
