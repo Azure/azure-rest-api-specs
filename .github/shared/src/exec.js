@@ -11,7 +11,12 @@ const execFileImpl = promisify(child_process.execFile);
  */
 
 /**
- * @typedef {ExecOptions & { prefix?: string }} ExecNpmOptions
+ * @typedef {Object} NpmPrefixOptions
+ * @property {string} [prefix] Prefix to pass to npm via "--prefix".
+ */
+
+/**
+ * @typedef {ExecOptions & NpmPrefixOptions} ExecNpmOptions
  */
 
 /**
@@ -105,13 +110,7 @@ export async function execNpm(args, options = {}) {
           // example: "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js"
           defaultArgs: [
             "--",
-            join(
-              dirname(process.execPath),
-              "node_modules",
-              "npm",
-              "bin",
-              "npm-cli.js",
-            ),
+            join(dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js"),
           ],
         }
       : { file: "npm", defaultArgs: [] };
@@ -119,11 +118,7 @@ export async function execNpm(args, options = {}) {
 
   const prefixArgs = prefix ? ["--prefix", prefix] : [];
 
-  return await execFile(
-    file,
-    [...defaultArgs, ...prefixArgs, ...args],
-    options,
-  );
+  return await execFile(file, [...defaultArgs, ...prefixArgs, ...args], options);
 }
 
 /**
