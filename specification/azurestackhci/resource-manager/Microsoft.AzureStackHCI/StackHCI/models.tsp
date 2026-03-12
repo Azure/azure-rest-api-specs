@@ -3165,13 +3165,6 @@ model Storage {
    */
   @added(Versions.v2026_03_15_preview)
   san?: StorageSanConfig;
-
-  /**
-   * List of storage disks.
-   */
-  @added(Versions.v2026_03_15_preview)
-  @identifiers(#["id"])
-  disks?: Disk[];
 }
 
 /**
@@ -6065,14 +6058,14 @@ model HciStorageProfile {
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_03_15_preview)
   @identifiers(#["id"])
-  disks?: Disk[];
+  disks?: EdgeDeviceDisks[];
 }
 
 /**
  * Represents a storage disk on the device.
  */
 @added(Versions.v2026_03_15_preview)
-model Disk {
+model EdgeDeviceDisks {
   /**
    * The unique identifier of the disk.
    */
