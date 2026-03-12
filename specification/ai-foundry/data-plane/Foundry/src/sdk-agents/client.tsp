@@ -145,6 +145,8 @@ using Azure.AI.Projects;
 @@alternateType(OpenAI.ComparisonFilter, { identity: "com.openai.models.ComparisonFilter" }, "java");
 @@alternateType(OpenAI.CompoundFilter, { identity: "com.openai.models.CompoundFilter" }, "java");
 @@alternateType(OpenAI.Reasoning, { identity: "com.openai.models.Reasoning" }, "java");
+//   ConversationResource → com.openai.models.conversations.Conversation
+@@alternateType(OpenAI.ConversationResource, { identity: "com.openai.models.conversations.Conversation" }, "java");
 
 // TimeZone property override via model indirection
 @alternateType(
@@ -160,3 +162,16 @@ model TimeZoneType {}
   TimeZoneType,
   "java"
 );
+
+// --------------------------------------------------------------------------------
+// Conversations: only expose listConversations (Foundry-specific), suppress the rest
+// --------------------------------------------------------------------------------
+
+@@scope(Conversations.createConversation, "!(java)");
+@@scope(Conversations.updateConversation, "!(java)");
+@@scope(Conversations.getConversation, "!(java)");
+@@scope(Conversations.deleteConversation, "!(java)");
+@@scope(Conversations.createConversationItems, "!(java)");
+@@scope(Conversations.getConversationItem, "!(java)");
+@@scope(Conversations.deleteConversationItem, "!(java)");
+@@scope(Conversations.listConversationItems, "!(java)");
