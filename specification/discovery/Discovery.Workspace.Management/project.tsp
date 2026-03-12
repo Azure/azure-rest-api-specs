@@ -85,13 +85,7 @@ model ProjectProperties {
 interface Projects {
   get is ArmResourceRead<Project>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
-  update is ArmCustomPatchAsync<
-    Project,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Project,
-      ProjectProperties
-    >
-  >;
+  update is ArmResourcePatchAsync<Project, ProjectProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Project>;
   listByWorkspace is ArmResourceListByParent<Project>;
 

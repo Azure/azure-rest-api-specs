@@ -80,13 +80,7 @@ model StorageContainerProperties {
 interface StorageContainers {
   get is ArmResourceRead<StorageContainer>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<StorageContainer>;
-  update is ArmCustomPatchAsync<
-    StorageContainer,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      StorageContainer,
-      StorageContainerProperties
-    >
-  >;
+  update is ArmResourcePatchAsync<StorageContainer, StorageContainerProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<StorageContainer>;
   listByResourceGroup is ArmResourceListByParent<StorageContainer>;
   listBySubscription is ArmListBySubscription<StorageContainer>;

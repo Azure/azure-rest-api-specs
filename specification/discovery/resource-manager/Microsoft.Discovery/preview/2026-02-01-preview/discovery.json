@@ -3980,9 +3980,9 @@
         "identityClientId"
       ]
     },
-    "BookshelfKeyVaultUpdateProperties": {
+    "BookshelfKeyVaultPropertiesUpdate": {
       "type": "object",
-      "description": "Key Vault update properties for Bookshelf (all fields optional for PATCH)",
+      "description": "Key Vault Properties with clientId selection",
       "properties": {
         "keyName": {
           "type": "string",
@@ -4223,10 +4223,10 @@
     },
     "BookshelfPropertiesUpdate": {
       "type": "object",
-      "description": "The updatable properties of the Bookshelf.",
+      "description": "Bookshelf properties",
       "properties": {
         "keyVaultProperties": {
-          "$ref": "#/definitions/BookshelfKeyVaultUpdateProperties",
+          "$ref": "#/definitions/BookshelfKeyVaultPropertiesUpdate",
           "description": "The key to use for encrypting data at rest when customer managed keys are enabled. Required if Customer Managed Keys is enabled.",
           "x-ms-mutability": [
             "read",
@@ -4247,20 +4247,18 @@
     },
     "BookshelfUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Bookshelf.",
+      "description": "Bookshelf tracked resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/BookshelfPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "ChatModelDeployment": {
       "type": "object",
@@ -4329,18 +4327,24 @@
         "modelName"
       ]
     },
+    "ChatModelDeploymentPropertiesUpdate": {
+      "type": "object",
+      "description": "Defines a deployment binding a specific model family to a user-defined deployment name for chat inference."
+    },
     "ChatModelDeploymentUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the ChatModelDeployment.",
+      "description": "Represents a deployment that ties a specific model family to a user defined deployment name used when invoking the chat model.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "properties": {
+          "$ref": "#/definitions/ChatModelDeploymentPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "CustomerManagedKeys": {
       "type": "string",
@@ -4700,26 +4704,9 @@
         "maxNodeCount"
       ]
     },
-    "NodePoolUpdate": {
+    "NodePoolPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the NodePool.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/NodePoolUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "NodePoolUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the NodePool.",
+      "description": "NodePool properties",
       "properties": {
         "maxNodeCount": {
           "type": "integer",
@@ -4745,6 +4732,21 @@
           ]
         }
       }
+    },
+    "NodePoolUpdate": {
+      "type": "object",
+      "description": "NodePool tracked resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NodePoolPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "Project": {
       "type": "object",
@@ -4841,35 +4843,18 @@
     },
     "ProjectUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Project.",
+      "description": "Project tracked resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/ProjectUpdateProperties",
+          "$ref": "#/definitions/ProjectProperties",
           "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "ProjectUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Project.",
-      "properties": {
-        "settings": {
-          "$ref": "#/definitions/ProjectSettings",
-          "description": "Settings for the project.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     },
     "ProvisioningState": {
       "type": "string",
@@ -5125,26 +5110,9 @@
         "description"
       ]
     },
-    "StorageAssetUpdate": {
+    "StorageAssetPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the StorageAsset.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/StorageAssetUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "StorageAssetUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the StorageAsset.",
+      "description": "Storage Asset properties",
       "properties": {
         "description": {
           "type": "string",
@@ -5156,6 +5124,21 @@
           ]
         }
       }
+    },
+    "StorageAssetUpdate": {
+      "type": "object",
+      "description": "Storage Asset tracked resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAssetPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "StorageContainer": {
       "type": "object",
@@ -5215,18 +5198,24 @@
         "storageStore"
       ]
     },
+    "StorageContainerPropertiesUpdate": {
+      "type": "object",
+      "description": "Storage Container properties"
+    },
     "StorageContainerUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the StorageContainer.",
+      "description": "Storage Container tracked resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "properties": {
+          "$ref": "#/definitions/StorageContainerPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "StorageStore": {
       "type": "object",
@@ -6187,7 +6176,7 @@
     },
     "WorkspacePropertiesUpdate": {
       "type": "object",
-      "description": "Updatable properties for Workspace (all fields optional for PATCH)",
+      "description": "Workspace properties",
       "properties": {
         "supercomputerIds": {
           "type": "array",
@@ -6232,20 +6221,18 @@
     },
     "WorkspaceUpdate": {
       "type": "object",
-      "description": "Update model for Workspace PATCH operations",
+      "description": "Workspace tracked resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/WorkspacePropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     }
   },
   "parameters": {}

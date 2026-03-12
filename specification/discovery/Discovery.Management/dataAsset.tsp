@@ -43,13 +43,7 @@ model DataAsset is TrackedResource<DataAssetProperties> {
 interface DataAssets {
   get is ArmResourceRead<DataAsset>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DataAsset>;
-  update is ArmCustomPatchAsync<
-    DataAsset,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      DataAsset,
-      DataAssetProperties
-    >
-  >;
+  update is ArmResourcePatchAsync<DataAsset, DataAssetProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<DataAsset>;
   listByDataContainer is ArmResourceListByParent<DataAsset>;
   listBySubscription is ArmListBySubscription<DataAsset>;
