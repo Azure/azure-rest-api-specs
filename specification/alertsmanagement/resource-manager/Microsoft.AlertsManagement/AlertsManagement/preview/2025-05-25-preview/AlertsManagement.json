@@ -2869,26 +2869,6 @@
       "type": "object",
       "description": "Prometheus enrichment object.",
       "properties": {
-        "title": {
-          "type": "string",
-          "description": "The enrichment title."
-        },
-        "description": {
-          "type": "string",
-          "description": "The enrichment description."
-        },
-        "status": {
-          "$ref": "#/definitions/Status",
-          "description": "The status of the evaluation of the enrichment."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "The error message. Will be present only if the status is 'Failed'."
-        },
-        "type": {
-          "$ref": "#/definitions/Type",
-          "description": "The enrichment type."
-        },
         "linkToApi": {
           "type": "string",
           "description": "Link to Prometheus query API (Url format)."
@@ -2909,56 +2889,34 @@
           "description": "The Prometheus expression query."
         }
       },
-      "discriminator": "type",
       "required": [
-        "title",
-        "description",
-        "status",
-        "type",
         "linkToApi",
         "datasources",
         "grafanaExplorePath",
         "query"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEnrichmentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "PrometheusEnrichmentItem"
     },
     "PrometheusInstantQuery": {
       "type": "object",
       "description": "Prometheus instant query enrichment object.",
       "properties": {
-        "linkToApi": {
-          "type": "string",
-          "description": "Link to Prometheus query API (Url format)."
-        },
-        "datasources": {
-          "type": "array",
-          "description": "An array of the azure monitor workspace resource ids.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "grafanaExplorePath": {
-          "type": "string",
-          "description": "Partial link to the Grafana explore API."
-        },
-        "query": {
-          "type": "string",
-          "description": "The Prometheus expression query."
-        },
         "time": {
           "type": "string",
           "description": "The date and the time of the evaluation."
         }
       },
       "required": [
-        "linkToApi",
-        "datasources",
-        "grafanaExplorePath",
-        "query",
         "time"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AlertEnrichmentItem"
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
         }
       ],
       "x-ms-discriminator-value": "PrometheusInstantQuery"
@@ -2967,25 +2925,6 @@
       "type": "object",
       "description": "Prometheus instant query enrichment object.",
       "properties": {
-        "linkToApi": {
-          "type": "string",
-          "description": "Link to Prometheus query API (Url format)."
-        },
-        "datasources": {
-          "type": "array",
-          "description": "An array of the azure monitor workspace resource ids.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "grafanaExplorePath": {
-          "type": "string",
-          "description": "Partial link to the Grafana explore API."
-        },
-        "query": {
-          "type": "string",
-          "description": "The Prometheus expression query."
-        },
         "start": {
           "type": "string",
           "format": "date-time",
@@ -3002,17 +2941,13 @@
         }
       },
       "required": [
-        "linkToApi",
-        "datasources",
-        "grafanaExplorePath",
-        "query",
         "start",
         "end",
         "step"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AlertEnrichmentItem"
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
         }
       ],
       "x-ms-discriminator-value": "PrometheusRangeQuery"
@@ -3308,7 +3243,8 @@
       "description": "The enrichment type.",
       "enum": [
         "PrometheusInstantQuery",
-        "PrometheusRangeQuery"
+        "PrometheusRangeQuery",
+        "PrometheusEnrichmentItem"
       ],
       "x-ms-enum": {
         "name": "Type",
@@ -3323,6 +3259,11 @@
             "name": "PrometheusRangeQuery",
             "value": "PrometheusRangeQuery",
             "description": "PrometheusRangeQuery"
+          },
+          {
+            "name": "PrometheusEnrichmentItem",
+            "value": "PrometheusEnrichmentItem",
+            "description": "PrometheusEnrichmentItem"
           }
         ]
       }
