@@ -24,65 +24,34 @@
               "name": "max_connections",
               "description": "Sets the maximum number of concurrent connections",
               "value": "200",
-              "source": "user-override",
               "dataType": "integer",
-              "allowedValues": [
-                "100",
-                "200",
-                "500",
-                "1000"
-              ],
+              "allowedValues": "100,200,500,1000",
               "isDynamic": "true",
               "isReadOnly": "false",
               "documentationLink": "https://docs.example.com/max_connections",
-              "unit": "connections",
-              "defaultValue": "100",
-              "categories": "Connections",
-              "level": "cluster"
+              "unit": "connections"
             },
             {
               "name": "log_min_error_statement",
               "description": "Controls which statements are logged",
               "value": "error",
-              "source": "user-override",
               "dataType": "string",
-              "allowedValues": [
-                "debug",
-                "info",
-                "notice",
-                "warning",
-                "error",
-                "log",
-                "fatal",
-                "panic"
-              ],
+              "allowedValues": "debug,info,notice,warning,error,log,fatal,panic",
               "isDynamic": "true",
               "isReadOnly": "false",
               "documentationLink": "https://docs.example.com/log_min_error_statement",
-              "unit": null,
-              "defaultValue": "panic",
-              "categories": "Logging",
-              "level": "cluster"
+              "unit": null
             },
             {
               "name": "shared_buffers",
               "description": "Sets the amount of memory the database server uses for shared memory buffers",
               "value": "2000",
-              "source": "user-override",
               "dataType": "integer",
-              "allowedValues": [
-                "1000",
-                "2000",
-                "4000",
-                "8000"
-              ],
+              "allowedValues": "1000,2000,4000,8000",
               "isDynamic": "false",
               "isReadOnly": "false",
               "documentationLink": "https://docs.example.com/shared_buffers",
-              "unit": "MB",
-              "defaultValue": "1000",
-              "categories": "Memory",
-              "level": "cluster"
+              "unit": "MB"
             }
           ],
           "description": "Parameter group for high-throughput workloads",

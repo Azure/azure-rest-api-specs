@@ -27,22 +27,12 @@
                   "name": "max_connections",
                   "description": "Maximum number of concurrent connections to the database",
                   "value": "200",
-                  "source": "user",
                   "dataType": "integer",
-                  "allowedValues": [
-                    "100",
-                    "200",
-                    "300",
-                    "400",
-                    "500"
-                  ],
+                  "allowedValues": "100,200,300,400,500",
                   "isDynamic": "true",
                   "isReadOnly": "false",
                   "documentationLink": "https://docs.postgresql.org/current/runtime-config-connection.html#GUC-MAX-CONNECTIONS",
-                  "unit": "connections",
-                  "defaultValue": "100",
-                  "categories": "Connections",
-                  "level": "Cluster"
+                  "unit": "connections"
                 }
               ],
               "description": "Parameter group for high-throughput workloads",
@@ -66,23 +56,12 @@
                   "name": "shared_buffers",
                   "description": "Amount of memory used for shared memory buffers",
                   "value": "3000",
-                  "source": "user",
                   "dataType": "integer",
-                  "allowedValues": [
-                    "128",
-                    "256",
-                    "512",
-                    "1024",
-                    "2048",
-                    "4096"
-                  ],
+                  "allowedValues": "128,256,512,1024,2048,4096",
                   "isDynamic": "false",
                   "isReadOnly": "false",
                   "documentationLink": "https://docs.postgresql.org/current/runtime-config-resource.html#GUC-SHARED-BUFFERS",
-                  "unit": "MB",
-                  "defaultValue": "128",
-                  "categories": "Memory",
-                  "level": "Cluster"
+                  "unit": "MB"
                 }
               ],
               "description": "Parameter group for production workloads",
