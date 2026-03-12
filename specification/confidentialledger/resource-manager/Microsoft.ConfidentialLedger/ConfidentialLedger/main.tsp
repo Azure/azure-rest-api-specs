@@ -24,12 +24,11 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Microsoft Azure Confidential Compute Ledger Managed CCF Control Plane REST API version 2025-06-10-preview.
+ * Microsoft Azure Confidential Compute Ledger Managed CCF Control Plane REST API.
  */
 @armProviderNamespace
 @service(#{ title: "ConfidentialLedger" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.ConfidentialLedger;
 
 /**
@@ -39,7 +38,14 @@ enum Versions {
   /**
    * The 2025-06-10-preview API version.
    */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_06_10_preview: "2025-06-10-preview",
+
+  /**
+   * The 2026-02-23 API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2026_02_23: "2026-02-23",
 }
 
 interface Operations
