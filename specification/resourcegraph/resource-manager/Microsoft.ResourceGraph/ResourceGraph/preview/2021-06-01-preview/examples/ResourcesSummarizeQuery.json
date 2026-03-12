@@ -1,41 +1,33 @@
 {
+  "title": "Summarize Query",
   "description": "A summarizing query on resources.",
   "parameters": {
-    "api-version": "2020-04-01-preview",
+    "api-version": "2021-06-01-preview",
     "query": {
-      "query": "Resources | project id, name, type, location | summarize by location",
       "subscriptions": [
         "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
-      ]
+      ],
+      "query": "Resources | project id, name, type, location | summarize by location"
     }
   },
-  "title": "Summarize resources by location",
   "responses": {
     "200": {
       "body": {
+        "totalRecords": 3,
         "count": 3,
-        "data": {
-          "columns": [
-            {
-              "name": "location",
-              "type": "string"
-            }
-          ],
-          "rows": [
-            [
-              "centralus"
-            ],
-            [
-              "eastus"
-            ],
-            [
-              "westus"
-            ]
-          ]
-        },
-        "facets": [],
         "resultTruncated": "false",
-        "totalRecords": 3
+        "facets": [],
+        "data": [
+          {
+            "location": "centralus"
+          },
+          {
+            "location": "eastus"
+          },
+          {
+            "location": "westus"
+          }
+        ]
       }
     }
   },
