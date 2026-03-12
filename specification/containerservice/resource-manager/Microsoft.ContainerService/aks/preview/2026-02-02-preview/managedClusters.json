@@ -10523,9 +10523,9 @@
           "$ref": "#/definitions/LocalDNSProfile",
           "description": "Configures the per-node local DNS, with VnetDNS and KubeDNS overrides. LocalDNS helps improve performance and reliability of DNS resolution in an AKS cluster. For more details see aka.ms/aks/localdns."
         },
-        "nodeCustomizationProfile": {
-          "$ref": "#/definitions/NodeCustomizationProfile",
-          "description": "Settings to determine the node customization used to provision nodes in a pool."
+        "preparedImageSpecificationProfile": {
+          "$ref": "#/definitions/PreparedImageSpecificationProfile",
+          "description": "Settings to determine the prepared image specification used to provision nodes in a pool."
         }
       }
     },
@@ -13350,24 +13350,6 @@
         ]
       }
     },
-    "NodeCustomizationProfile": {
-      "type": "object",
-      "description": "Settings to determine the node customization used to provision nodes in a pool.",
-      "properties": {
-        "nodeCustomizationId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the node customization resource to use. This can be a version. Omitting the version will use the latest version of the node customization.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ContainerService/nodeCustomizations"
-              }
-            ]
-          }
-        }
-      }
-    },
     "NodeImageVersion": {
       "type": "object",
       "description": "node image version profile for given major.minor.patch release.",
@@ -13836,6 +13818,24 @@
         "code": {
           "$ref": "#/definitions/Code",
           "description": "Tells whether the cluster is Running or Stopped"
+        }
+      }
+    },
+    "PreparedImageSpecificationProfile": {
+      "type": "object",
+      "description": "Settings to determine the prepared image specification used to provision nodes in a pool.",
+      "properties": {
+        "preparedImageSpecificationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the prepared image specification resource to use. This can include a version. Omitting the version will use the latest version of the prepared image specification.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerService/preparedImageSpecifications"
+              }
+            ]
+          }
         }
       }
     },

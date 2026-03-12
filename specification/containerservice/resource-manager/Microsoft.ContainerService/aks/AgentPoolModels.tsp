@@ -391,10 +391,17 @@ model ManagedClusterAgentPoolProfileProperties {
   localDNSProfile?: LocalDNSProfile;
 
   /**
-   * Settings to determine the node customization used to provision nodes in a pool.
+   * Settings to determine the node customization used to provision nodes in a pool. In future versions this is renamed PreparedImageSpecificationProfile.
    */
   @added(Versions.v2026_02_02_preview)
+  @removed(Versions.v2026_02_02_preview)
   nodeCustomizationProfile?: NodeCustomizationProfile;
+
+  /**
+   * Settings to determine the prepared image specification used to provision nodes in a pool.
+   */
+  @added(Versions.v2026_02_02_preview)
+  preparedImageSpecificationProfile?: PreparedImageSpecificationProfile;
 }
 
 /**
@@ -1054,7 +1061,8 @@ model LocalDNSOverride {
 /**
  * Settings to determine the node customization used to provision nodes in a pool.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_02_01)
+@removed(Versions.v2026_02_02_preview)
 model NodeCustomizationProfile {
   /**
    * The resource ID of the node customization resource to use. This can be a version. Omitting the version will use the latest version of the node customization.
@@ -1062,6 +1070,21 @@ model NodeCustomizationProfile {
   nodeCustomizationId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/nodeCustomizations";
+    }
+  ]>;
+}
+
+/**
+ * Settings to determine the prepared image specification used to provision nodes in a pool.
+ */
+@added(Versions.v2026_02_02_preview)
+model PreparedImageSpecificationProfile {
+  /**
+   * The resource ID of the prepared image specification resource to use. This can include a version. Omitting the version will use the latest version of the prepared image specification.
+   */
+  preparedImageSpecificationId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/preparedImageSpecifications";
     }
   ]>;
 }
