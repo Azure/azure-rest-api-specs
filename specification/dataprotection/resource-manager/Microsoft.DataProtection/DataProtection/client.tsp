@@ -154,6 +154,11 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(AzureBackupJob, "DataProtectionBackupJobProperties", "csharp");
+@@clientName(AzureBackupJob.activityID, "ActivityId", "csharp");
+@@clientName(AzureBackupJob.sourceSubscriptionID,
+  "SourceSubscriptionId",
+  "csharp"
+);
 @@alternateType(AzureBackupJob.etag, Azure.Core.eTag, "csharp");
 @@alternateType(AzureBackupJob.backupInstanceId,
   armResourceIdentifier,
@@ -268,6 +273,7 @@ using Microsoft.DataProtection;
   "DataProtectionBackupNameAvailabilityContent",
   "csharp"
 );
+@@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");
 @@alternateType(CheckNameAvailabilityRequest.type, armResourceType, "csharp");
 @@clientName(CheckNameAvailabilityResult,
   "DataProtectionBackupNameAvailabilityResult",
@@ -317,12 +323,14 @@ using Microsoft.DataProtection;
 @@alternateType(CustomCopyOption.duration, duration, "csharp");
 @@clientName(Datasource, "DataSourceInfo", "csharp");
 @@clientName(Datasource.datasourceType, "DataSourceType", "csharp");
+@@clientName(Datasource.resourceID, "resourceId", "csharp");
 @@alternateType(Datasource.resourceID, armResourceIdentifier, "csharp");
 @@alternateType(Datasource.resourceLocation, azureLocation, "csharp");
 @@alternateType(Datasource.resourceType, armResourceType, "csharp");
 @@clientName(Datasource.resourceUri, "ResourceUriString", "csharp");
 @@clientName(DatasourceSet, "DataSourceSetInfo", "csharp");
 @@clientName(DatasourceSet.datasourceType, "DataSourceType", "csharp");
+@@clientName(DatasourceSet.resourceID, "resourceId", "csharp");
 @@alternateType(DatasourceSet.resourceID, armResourceIdentifier, "csharp");
 @@alternateType(DatasourceSet.resourceLocation, azureLocation, "csharp");
 @@alternateType(DatasourceSet.resourceType, armResourceType, "csharp");
@@ -343,12 +351,13 @@ using Microsoft.DataProtection;
 @@alternateType(DeleteOption.duration, duration, "csharp");
 @@clientName(DeletionInfo, "BackupInstanceDeletionInfo", "csharp");
 @@clientName(DeletionInfo.deleteActivityID, "DeleteActivityId", "csharp");
-@@clientName(DeletionInfo.deletionTime, "DeletedOn", "csharp");
+@@clientName(DeletionInfo.deletionTime, "DeleteOn", "csharp");
 @@alternateType(DeletionInfo.billingEndDate, utcDateTime, "csharp");
 @@alternateType(DeletionInfo.deletionTime, utcDateTime, "csharp");
 @@alternateType(DeletionInfo.scheduledPurgeTime, utcDateTime, "csharp");
 @@clientName(EncryptionSettings, "BackupVaultEncryptionSettings", "csharp");
 @@clientName(EncryptionState, "BackupVaultEncryptionState", "csharp");
+@@alternateType(CmkKeyVaultProperties.keyUri, url, "csharp");
 @@clientName(ExistingResourcePolicy,
   "KubernetesClusterRestoreExistingResourcePolicy",
   "csharp"
@@ -396,7 +405,6 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(JobExtendedInfo, "BackupJobExtendedInfo", "csharp");
-@@usage(JobSubTask, Usage.input | Usage.output, "csharp");
 @@clientName(JobSubTask, "BackupJobSubTask", "csharp");
 @@clientName(KubernetesClusterBackupDatasourceParameters,
   "KubernetesClusterBackupDataSourceSettings",
@@ -429,6 +437,10 @@ using Microsoft.DataProtection;
   "DataProtectionBackupVaultPatchProperties",
   "csharp"
 );
+@@clientName(MonitoringSettings.azureMonitorAlertSettings,
+  "AlertSettingsForAllJobFailures",
+  "csharp"
+);
 @@clientName(PolicyInfo, "BackupInstancePolicyInfo", "csharp");
 @@alternateType(PolicyInfo.policyId, armResourceIdentifier, "csharp");
 @@clientName(PolicyParameters, "BackupInstancePolicySettings", "csharp");
@@ -436,9 +448,12 @@ using Microsoft.DataProtection;
   "BackupDataSourceParametersList",
   "csharp"
 );
-@@usage(ProtectionStatusDetails, Usage.input | Usage.output, "csharp");
 @@clientName(ProtectionStatusDetails,
   "BackupInstanceProtectionStatusDetails",
+  "csharp"
+);
+@@clientName(ProtectionStatusDetails.errorDetails,
+  "ProtectionStatusErrorDetails",
   "csharp"
 );
 @@clientName(ProvisioningState,
@@ -455,6 +470,10 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(RecoveryPointDataStoreDetails.expiryTime, "ExpireOn", "csharp");
+@@clientName(RecoveryPointDataStoreDetails.id,
+  "RecoveryPointDataStoreId",
+  "csharp"
+);
 @@alternateType(RecoveryPointDataStoreDetails.id, uuid, "csharp");
 @@clientName(RecoveryPointDataStoreDetails.metaData, "Metadata", "csharp");
 @@clientName(RecoveryPointDataStoreDetails.rehydrationExpiryTime,
@@ -471,6 +490,9 @@ using Microsoft.DataProtection;
   "RecoveryPointDataStoreRehydrationStatus",
   "csharp"
 );
+@@clientName(RehydrationStatus.COMPLETED, "Completed", "csharp");
+@@clientName(RehydrationStatus.DELETED, "Deleted", "csharp");
+@@clientName(RehydrationStatus.FAILED, "Failed", "csharp");
 @@clientName(RehydrationStatus.CREATE_IN_PROGRESS,
   "CreateInProgress",
   "csharp"
@@ -491,6 +513,8 @@ using Microsoft.DataProtection;
 );
 @@clientName(ResourceGuardResource, "ResourceGuard", "csharp");
 @@clientName(ResourceMoveDetails, "BackupVaultResourceMoveDetails", "csharp");
+@@clientName(ResourceMoveDetails.completionTimeUtc, "CompleteOn", "csharp");
+@@clientName(ResourceMoveDetails.startTimeUtc, "StartOn", "csharp");
 @@alternateType(ResourceMoveDetails.completionTimeUtc, utcDateTime, "csharp");
 @@alternateType(ResourceMoveDetails.startTimeUtc, utcDateTime, "csharp");
 @@clientName(ResourceMoveState, "BackupVaultResourceMoveState", "csharp");
@@ -500,6 +524,10 @@ using Microsoft.DataProtection;
 @@alternateType(RestorableTimeRange.startTime, utcDateTime, "csharp");
 @@clientName(RestoreJobRecoveryPointDetails.recoveryPointTime,
   "RecoverOn",
+  "csharp"
+);
+@@clientName(RestoreJobRecoveryPointDetails.recoveryPointID,
+  "recoveryPointId",
   "csharp"
 );
 @@clientName(RestoreTargetInfo.datasourceAuthCredentials,
@@ -535,6 +563,7 @@ using Microsoft.DataProtection;
 @@clientName(SoftDeleteState, "BackupVaultSoftDeleteState", "csharp");
 @@clientName(Status, "BackupInstanceProtectionStatus", "csharp");
 @@clientName(StorageSetting, "DataProtectionBackupStorageSetting", "csharp");
+@@clientName(StorageSetting.type, "StorageSettingType", "csharp");
 @@clientName(StorageSetting.datastoreType, "DataStoreType", "csharp");
 @@clientName(SupportedFeature, "BackupSupportedFeature", "csharp");
 @@clientName(SyncBackupInstanceRequest, "BackupInstanceSyncContent", "csharp");
@@ -545,6 +574,7 @@ using Microsoft.DataProtection;
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(TargetDetails.url, url, "csharp");
 @@clientName(TriggerBackupRequest, "AdhocBackupTriggerContent", "csharp");
 @@clientName(TriggerBackupRequest.backupRuleOptions, "BackupRules", "csharp");
 @@clientName(TriggerContext, "DataProtectionBackupTriggerContext", "csharp");
@@ -767,6 +797,10 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@usage(UserFacingWarningDetail, Usage.input | Usage.output, "csharp");
+@@clientName(ResourceDeletionInfo,
+  "DataProtectionResourceDeletionInfo",
+  "csharp"
+);
 
 // Fix ResourceGuard operation names to match old API surface
 @@clientName(ResourceGuardResources.patch, "Update", "csharp");
