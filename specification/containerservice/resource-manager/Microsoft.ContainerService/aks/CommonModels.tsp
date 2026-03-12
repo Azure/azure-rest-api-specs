@@ -276,7 +276,7 @@ union OSSKU {
   /**
    * Use Windows2025 as the OS for node images. Unsupported for system node pools. Windows2025 supports Windows2022 and Windows 2025 containers; it cannot run Windows2019 containers and vice versa.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_02_01)
   Windows2025: "Windows2025",
 
   /**
