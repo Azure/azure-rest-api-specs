@@ -164,8 +164,8 @@ model Schedule {
   deadline?: offsetDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  #deprecated "use deadline instead."
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
-  @removed(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
   @doc("The deadline for the operation")
   deadLine?: offsetDateTime;
 
@@ -173,8 +173,8 @@ model Schedule {
   @doc("The timezone for the operation")
   timezone?: string;
 
+  #deprecated "use timezone instead."
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
-  @removed(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
   @doc("The timezone for the operation")
   timeZone?: string;
 
@@ -278,8 +278,8 @@ model ResourceOperationDetails {
   @doc("Timezone for the operation")
   timezone?: string;
 
+  #deprecated "use timezone instead."
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
-  @removed(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
   @doc("Timezone for the operation")
   timeZone?: string;
 
