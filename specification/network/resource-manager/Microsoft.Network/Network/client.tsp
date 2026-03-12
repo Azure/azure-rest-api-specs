@@ -13,7 +13,7 @@ using Microsoft.Compute;
   service: [Microsoft.Network, Microsoft.Compute],
 })
 @useDependency(
-  Microsoft.Network.Versions.v2025_05_01,
+  Microsoft.Network.Versions.v2025_07_01,
   Microsoft.Compute.Versions.v2018_10_01
 )
 namespace CombineClient;
