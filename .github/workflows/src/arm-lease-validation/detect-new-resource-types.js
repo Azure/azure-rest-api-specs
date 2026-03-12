@@ -97,12 +97,12 @@ function getResourceTypesFromSwagger(swaggerDoc) {
  * Get resource types from swagger files at a specific git ref.
  *
  * @param {import("simple-git").SimpleGit} git
- * @param {string} commitish - Git ref
+ * @param {string} gitRef - Git ref (e.g. "HEAD" or "HEAD^")
  * @param {string} namespacePath - e.g. `specification/compute/resource-manager/Microsoft.Compute`
- * @param {string} label - Label for logging (e.g. "base" or "head")
+ * @param {string} branchName - Branch name for logging (e.g. "base" or "head")
  * @returns {Promise<Map<string, Object> | null>} Map of resource type to info, or null if path doesn't exist at this ref
  */
-async function getResourceTypesAtRef(git, commitish, namespacePath, label) {
+async function getResourceTypesAtRef(git, gitRef, namespacePath, branchName) {
   /** @type {Map<string, {resourceType: string, provider: string, modelName: string|null, operations: {method: string, apiPath: string}[]}>} */
   const allTypes = new Map();
 
@@ -112,7 +112,7 @@ async function getResourceTypesAtRef(git, commitish, namespacePath, label) {
       "ls-tree",
       "-r",
       "--name-only",
-      commitish,
+      gitRef,
       namespacePath,
     ]);
   } catch {
@@ -126,7 +126,7 @@ async function getResourceTypesAtRef(git, commitish, namespacePath, label) {
 
   const total = swaggerFiles.length;
   if (total > 0) {
-    console.log(`Analyzing ${total} swagger files in ${label} (${commitish}) for comparison...`);
+    console.log(`Analyzing ${total} swagger files in ${branchName} branch (${gitRef}) for comparison...`);
   }
 
   // Iterate over files, but only log summary if it's too much
@@ -138,7 +138,7 @@ async function getResourceTypesAtRef(git, commitish, namespacePath, label) {
 
     let content;
     try {
-      content = await git.show([`${commitish}:${file.trim()}`]);
+      content = await git.show([`${gitRef}:${file.trim()}`]);
     } catch {
       // Intentionally quiet to avoid log spam during comparison
       continue;
