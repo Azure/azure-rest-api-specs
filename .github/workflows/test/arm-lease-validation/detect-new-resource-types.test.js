@@ -174,7 +174,7 @@ describe("detectNewResourceTypes", () => {
 
     expect(result).toHaveLength(1);
     expect(result[0]).toMatchObject({
-      namespace: "Microsoft.Compute",
+      rpNamespace: "Microsoft.Compute",
       orgName: "compute",
     });
     expect(result[0].newResourceTypes).toHaveLength(1);
@@ -329,7 +329,7 @@ describe("detectNewResourceTypes", () => {
 
     // Should detect the new quantumVMs resource type from preview
     expect(result).toHaveLength(1);
-    expect(result[0].namespace).toBe("Microsoft.Compute");
+    expect(result[0].rpNamespace).toBe("Microsoft.Compute");
     const quantumType = result[0].newResourceTypes.find((t) =>
       t.resourceType === "Microsoft.Compute/quantumVMs",
     );
@@ -374,7 +374,7 @@ describe("detectNewResourceTypes", () => {
     });
 
     expect(result).toHaveLength(1);
-    expect(result[0].namespace).toBe("Microsoft.Compute");
+    expect(result[0].rpNamespace).toBe("Microsoft.Compute");
     // superDisks should be detected
     const superDisksType = result[0].newResourceTypes.find((t) =>
       t.resourceType === "Microsoft.Compute/superDisks",

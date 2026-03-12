@@ -305,18 +305,18 @@ async function checkNewResourceTypes(repoRoot, rmFiles, core) {
     };
   }
 
-  core.info(`Detected new resource types in ${newRtResults.length} namespace(s)`);
+  core.info(`Detected new resource types in ${newRtResults.length} rpNamespace(s)`);
 
   let allLeasesValid = true;
   for (const ns of newRtResults) {
-    const leaseValid = await checkLease(ns.orgName, ns.namespace, "");
+    const leaseValid = await checkLease(ns.orgName, ns.rpNamespace, "");
 
     if (leaseValid) {
-      core.info(`  - ${ns.namespace}: valid ARM lease for new resource types`);
+      core.info(`  - ${ns.rpNamespace}: valid ARM lease for new resource types`);
     } else {
       allLeasesValid = false;
       core.error(
-        `${ns.namespace}: new resource types detected without a valid ARM lease`,
+        `${ns.rpNamespace}: new resource types detected without a valid ARM lease`,
       );
     }
   }

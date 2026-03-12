@@ -183,37 +183,37 @@ export async function detectNewResourceTypes({
 }) {
   const git = simpleGit(repoRoot);
 
-  // Group changed RM swagger files by service subdirectory (namespace + service group)
-  /** @type {Map<string, {orgName: string, namespacePath: string, namespace: string}>} */
+  // Group changed RM swagger files by service subdirectory (rpNamespace + serviceName)
+  /** @type {Map<string, {orgName: string, namespacePath: string, rpNamespace: string}>} */
   const namespaceMap = new Map();
 
   for (const file of rmFiles) {
-    // Use RESOURCE_MANAGER_PATTERN to ensure the file is inside a namespace directory
-    // (the trailing "/" in the pattern requires at least one path component after the namespace)
+    // Use RESOURCE_MANAGER_PATTERN to ensure the file is inside a rpNamespace directory
+    // (the trailing "/" in the pattern requires at least one path component after the rpNamespace)
     const rmMatch = file.match(RESOURCE_MANAGER_PATTERN);
     if (!rmMatch) continue;
 
     const parts = file.split("/");
     const orgName = parts[1];
-    const namespace = parts[3];
-    // Check if parts[4] is an actual service group (e.g. DiskRP) vs lifecycle folder (stable/preview)
-    // If it's stable/preview, compare at namespace root to avoid false negatives when
-    // introducing the first preview/stable folder under an existing namespace
-    const potentialServiceGroup = parts[4];
-    const isLifecycleFolder = potentialServiceGroup === "stable" || potentialServiceGroup === "preview";
+    const rpNamespace = parts[3];
+    // Check if parts[4] is an actual service name (e.g. DiskRP) vs lifecycle folder (stable/preview)
+    // If it's stable/preview, compare at rpNamespace root to avoid false negatives when
+    // introducing the first preview/stable folder under an existing rpNamespace
+    const serviceName = parts[4];
+    const isLifecycleFolder = serviceName === "stable" || serviceName === "preview";
     const namespacePath = isLifecycleFolder
-      ? `specification/${orgName}/resource-manager/${namespace}`
-      : `specification/${orgName}/resource-manager/${namespace}/${potentialServiceGroup}`;
-    const serviceKey = isLifecycleFolder ? namespace : `${namespace}/${potentialServiceGroup}`;
+      ? `specification/${orgName}/resource-manager/${rpNamespace}`
+      : `specification/${orgName}/resource-manager/${rpNamespace}/${serviceName}`;
+    const serviceKey = isLifecycleFolder ? rpNamespace : `${rpNamespace}/${serviceName}`;
 
     if (!namespaceMap.has(serviceKey)) {
-      namespaceMap.set(serviceKey, { orgName, namespacePath, namespace });
+      namespaceMap.set(serviceKey, { orgName, namespacePath, rpNamespace });
     }
   }
 
   const results = [];
 
-  for (const [serviceKey, { orgName, namespacePath, namespace }] of namespaceMap) {
+  for (const [serviceKey, { orgName, namespacePath, rpNamespace }] of namespaceMap) {
     core.info(`Checking for new resource types in ${serviceKey}...`);
 
     const baseTypes = await getResourceTypesAtRef(
@@ -223,9 +223,9 @@ export async function detectNewResourceTypes({
       "base",
     );
 
-    // Skip namespace if it doesn't exist in base (brand new RP — handled by RP-level detection)
+    // Skip rpNamespace if it doesn't exist in base (brand new RP — handled by RP-level detection)
     if (baseTypes === null) {
-      core.info(` ${namespace}: no resources in base (new namespace), skipping RT detection`);
+      core.info(` ${rpNamespace}: no resources in base (new rpNamespace), skipping RT detection`);
       continue;
     }
 
@@ -252,14 +252,14 @@ export async function detectNewResourceTypes({
 
     if (newTypes.length > 0) {
       core.info(
-        ` ${namespace}: ${newTypes.length} new resource type(s) detected`,
+        ` ${rpNamespace}: ${newTypes.length} new resource type(s) detected`,
       );
       for (const t of newTypes) {
         core.info(`  - ${t.resourceType} (${t.operations.join(", ")})`);
       }
-      results.push({ namespace, orgName, newResourceTypes: newTypes });
+      results.push({ rpNamespace, orgName, newResourceTypes: newTypes });
     } else {
-      core.info(` ${namespace}: no new resource types`);
+      core.info(` ${rpNamespace}: no new resource types`);
     }
   }
 
