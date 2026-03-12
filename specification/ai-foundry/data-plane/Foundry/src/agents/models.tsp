@@ -790,10 +790,14 @@ model AgentEndpoint {
   version_selector?: VersionSelector;
 
   @doc("The protocols that the agent supports")
-  protocols: AgentProtocol[];
+  protocols?: AgentProtocol[];
 
   @doc("The authorization schemes supported by the agent endpoint")
-  authorization_schemes: AgentEndpointAuthorizationScheme[];
+  authorization_schemes?: AgentEndpointAuthorizationScheme[];
+
+  // TODO: move this out to the agent object. This is under preview so for fast iteration putting it here
+  @doc("The agent card")
+  agent_card?: AgentCard;
 }
 
 @removed(Versions.v1)

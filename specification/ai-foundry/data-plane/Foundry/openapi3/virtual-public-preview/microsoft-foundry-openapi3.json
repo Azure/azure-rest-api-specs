@@ -10536,6 +10536,68 @@
         },
         "description": "A AI Search Index resource."
       },
+      "AgentCard": {
+        "type": "object",
+        "required": [
+          "version",
+          "skills"
+        ],
+        "properties": {
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "description": "The version of the agent card."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2048,
+            "description": "The description of the agent card."
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentSkill"
+            },
+            "maxItems": 16,
+            "description": "The set of skills that an agent can perform."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentCardUpdate": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "description": "The version of the agent card."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2048,
+            "description": "The description of the agent card."
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentSkill"
+            },
+            "maxItems": 16,
+            "description": "The set of skills that an agent can perform."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "AgentClusterInsightRequest": {
         "type": "object",
         "required": [
@@ -10840,10 +10902,6 @@
       },
       "AgentEndpoint": {
         "type": "object",
-        "required": [
-          "protocols",
-          "authorization_schemes"
-        ],
         "properties": {
           "version_selector": {
             "allOf": [
@@ -10866,6 +10924,14 @@
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
             "description": "The authorization schemes supported by the agent endpoint"
+          },
+          "agent_card": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentCard"
+              }
+            ],
+            "description": "The agent card"
           }
         },
         "x-ms-foundry-meta": {
@@ -11260,6 +11326,53 @@
             "type": "string",
             "description": "The version identifier of the agent."
           }
+        }
+      },
+      "AgentSkill": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "a unique identifier for the skill"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "The name of the skill"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2048,
+            "description": "A description of the skill"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkillTag"
+            },
+            "maxItems": 5,
+            "description": "set of tagwords describing classes of capabilities for the skill"
+          },
+          "examples": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkillExample"
+            },
+            "maxItems": 5,
+            "description": "A list of example scenarios that the skill can perform."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
         }
       },
       "AgentTaxonomyInput": {
@@ -39367,6 +39480,25 @@
         ],
         "description": "The input definition information for a sharepoint tool as used to configure an agent."
       },
+      "SkillExample": {
+        "type": "string",
+        "maxLength": 1024,
+        "description": "A skill example string with a maximum length of 1024 characters.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "SkillTag": {
+        "type": "string",
+        "maxLength": 32,
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "Sku": {
         "type": "object",
         "required": [
@@ -40232,6 +40364,14 @@
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
             "description": "The authorization schemes supported by the agent endpoint"
+          },
+          "agent_card": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentCardUpdate"
+              }
+            ],
+            "description": "The agent card"
           }
         },
         "x-ms-foundry-meta": {
