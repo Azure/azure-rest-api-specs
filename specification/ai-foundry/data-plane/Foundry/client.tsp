@@ -20,6 +20,7 @@ import "./src/insights/routes.tsp";
 import "./src/memory-stores/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
+import "./src/toolsets/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
@@ -207,6 +208,16 @@ using Azure.AI.Projects;
 @@alternateType(CronTrigger.startTime, utcDateTime, "python");
 @@alternateType(CronTrigger.endTime, utcDateTime, "python");
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
+
+// --------------------------------------------------------------------------------
+// Toolsets sub‐client
+// --------------------------------------------------------------------------------
+
+@@clientName(Toolsets.createToolset, "create");
+@@clientName(Toolsets.updateToolset, "update");
+@@clientName(Toolsets.getToolset, "get");
+@@clientName(Toolsets.listToolsets, "list");
+@@clientName(Toolsets.deleteToolset, "delete");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
