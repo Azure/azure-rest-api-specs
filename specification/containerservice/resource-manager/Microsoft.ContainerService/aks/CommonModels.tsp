@@ -1235,7 +1235,7 @@ union ManagedGatewayType {
   Disabled: "Disabled",
 
   /**
-   * The latest Gateway CRD bundle from the standard channel that is compatible with your Kubernetes version will be reconciled onto your cluster. See https://gateway-api.sigs.k8s.io/concepts/versioning/ for more details.
+   * Gateway API CRDs from the standard release channel will be reconciled onto your cluster. See https://aka.ms/gateway-api-versions to see which bundle will be installed for your Kubernetes version.
    */
   Standard: "Standard",
 }
@@ -3484,7 +3484,7 @@ model ManagedClusterIngressProfile {
   applicationLoadBalancer?: ManagedClusterIngressProfileApplicationLoadBalancer;
 }
 
-/** Settings for the managed Gateway API installation. See https://aka.ms/k8s-gateway-api for more details. */
+/** Configuration for managed Gateway API CRDs. See https://aka.ms/k8s-gateway-api for more details. */
 @added(Versions.v2026_02_01)
 model ManagedClusterIngressProfileGatewayConfiguration {
   /**
