@@ -727,6 +727,8 @@ union HighAvailabilityState {
   RemovingStandby: "RemovingStandby",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RecreatingStandby: "RecreatingStandby",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  RecreatingStandby: "ComputeUpdatingByFailover",
 }
 
 /**
