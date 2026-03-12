@@ -296,7 +296,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "The resource to create or update.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Agent"
@@ -305,7 +305,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'Agent' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "201": {
+            "description": "Resource 'Agent' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Agent"
             }
@@ -1114,7 +1120,7 @@
           "description": "A description of the agent's purpose."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the agent.",
           "readOnly": true
         }
@@ -1164,7 +1170,6 @@
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
-      "readOnly": true,
       "enum": [
         "Succeeded",
         "Failed",
@@ -1190,7 +1195,8 @@
             "description": "Resource creation was canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "HistoryContext": {
       "type": "object",
@@ -1319,6 +1325,10 @@
           }
         ]
       }
+    },
+    "ProvisioningState": {
+      "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+      "x-nullable": false
     },
     "QueryGenerationRequest": {
       "type": "object",
@@ -1604,7 +1614,8 @@
             "description": "Failed when query was not generated"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "StatusResult": {
       "type": "object",

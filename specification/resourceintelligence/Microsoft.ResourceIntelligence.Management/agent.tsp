@@ -48,7 +48,7 @@ model AgentProperties {
    * The provisioning state of the agent.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -76,15 +76,7 @@ interface Agents {
   /**
    * Creates or updates an agent.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Per API review: Agent PUT is a synchronous tracked resource operation that returns 200 only."
-  @armResourceCreateOrUpdate(Agent)
-  @put
-  createOrUpdate(
-    ...ResourceInstanceParameters<Agent>,
-
-    /** The resource to create or update. */
-    @bodyRoot resource: Agent,
-  ): ArmResponse<Agent> | ErrorResponse;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Agent>;
 
   /**
    * Updates an agent.

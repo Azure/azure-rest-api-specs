@@ -8,6 +8,18 @@ using TypeSpec.Http;
 namespace Microsoft.ResourceIntelligence;
 
 // ============================================
+// PROVISIONING STATE
+// ============================================
+
+/**
+ * The provisioning state of the resource.
+ */
+@Azure.Core.lroStatus
+union ProvisioningState {
+  ResourceProvisioningState,
+}
+
+// ============================================
 // RUN STATUS
 // ============================================
 
