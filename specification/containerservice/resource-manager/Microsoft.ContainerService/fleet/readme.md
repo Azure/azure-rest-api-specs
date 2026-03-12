@@ -92,10 +92,6 @@ suppressions:
     from: fleets.json
     where: $.definitions['Meta.V1.LabelSelector'].properties.matchLabels
     reason: MatchLabels are a key/value map that is passed through to the underlying Kubernetes model.
-  - code: XMSSecretInResponse
-    from: fleets.json
-    where: $.definitions['Placement.V1.StageConfig'].properties.sortingLabelKey
-    reason: sortingLabelKey is not a sensitive property. It contains a label key for sorting clusters, not secret data.
 ```
 
 ### Tag: package-2026-02-01-preview
