@@ -15,17 +15,17 @@ namespace ResourceChanges;
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ChangeType {
   /**
-   * Create
+   * Create change
    */
   Create,
 
   /**
-   * Update
+   * Update change
    */
   Update,
 
   /**
-   * Delete
+   * Delete change
    */
   Delete,
 }
@@ -36,12 +36,12 @@ enum ChangeType {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ChangeCategory {
   /**
-   * User
+   * User iniated change
    */
   User,
 
   /**
-   * System
+   * System initated change
    */
   System,
 }
@@ -52,17 +52,17 @@ enum ChangeCategory {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum PropertyChangeType {
   /**
-   * Insert
+   * Property insert
    */
   Insert,
 
   /**
-   * Update
+   * Property update
    */
   Update,
 
   /**
-   * Remove
+   * Property remove
    */
   Remove,
 }

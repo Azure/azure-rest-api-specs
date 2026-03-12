@@ -15,12 +15,12 @@ namespace ResourceHistory;
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ResultFormat {
   /**
-   * table
+   * table result format
    */
   table,
 
   /**
-   * objectArray
+   * object array result format
    */
   objectArray,
 }

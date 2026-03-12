@@ -15,12 +15,12 @@ namespace ResourceGraph;
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ResultFormat {
   /**
-   * table
+   * table result format
    */
   table,
 
   /**
-   * objectArray
+   * object array result format
    */
   objectArray,
 }
@@ -32,22 +32,22 @@ enum ResultFormat {
 @Versioning.added(Versions.v2021_06_01_preview)
 enum AuthorizationScopeFilter {
   /**
-   * AtScopeAndBelow
+   * At Scope And Below
    */
   AtScopeAndBelow,
 
   /**
-   * AtScopeAndAbove
+   * At Scope And Above
    */
   AtScopeAndAbove,
 
   /**
-   * AtScopeExact
+   * At Scope Exact
    */
   AtScopeExact,
 
   /**
-   * AtScopeAboveAndBelow
+   * At Scope Above And Below
    */
   AtScopeAboveAndBelow,
 }
@@ -58,12 +58,12 @@ enum AuthorizationScopeFilter {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum FacetSortOrder {
   /**
-   * asc
+   * ascending
    */
   asc,
 
   /**
-   * desc
+   * descending
    */
   desc,
 }
@@ -74,12 +74,12 @@ enum FacetSortOrder {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ResultTruncated {
   /**
-   * true
+   * results are truncated
    */
   `true`,
 
   /**
-   * false
+   * results are not truncated
    */
   `false`,
 }
@@ -459,27 +459,27 @@ model Column {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ColumnDataType {
   /**
-   * string
+   * string column
    */
   string,
 
   /**
-   * integer
+   * integer column
    */
   integer,
 
   /**
-   * number
+   * number column
    */
   number,
 
   /**
-   * boolean
+   * boolean column
    */
   boolean,
 
   /**
-   * object
+   * object column
    */
   object,
 }
