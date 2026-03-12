@@ -37,12 +37,6 @@
 |------|------------|-------|
 | `paths['/{scope}/providers/microsoft.Security/subAssessments'].get.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
 
-### Changes for `AzureResourceDetails`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureResourceDetails__added` | added | `{"type":"object","description":"Details of the Azure resource that was assessed","properties":{"id":...` |
-
 ### Changes for `CloudError`
 
 | Path | Change Type | Value |
