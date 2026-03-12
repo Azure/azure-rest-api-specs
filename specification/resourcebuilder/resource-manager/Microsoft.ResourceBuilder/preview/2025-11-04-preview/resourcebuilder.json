@@ -1148,6 +1148,67 @@
         ]
       }
     },
+    "ArmRelationshipDatasetSchema": {
+      "type": "object",
+      "description": "ARM relationship dataset schema.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The full ARM resource ID."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the ARM relationship."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID where the resource resides."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID where the resource resides."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "The Azure region where the resource is located."
+        },
+        "targetId": {
+          "type": "string",
+          "description": "The full ARM resource ID of the target resource."
+        },
+        "targetType": {
+          "type": "string",
+          "description": "The type of the target ARM resource."
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "The type of the relationship."
+        },
+        "relationshipTypeAttributes": {
+          "type": "array",
+          "description": "The attributes of the relationship type.",
+          "items": {
+            "$ref": "#/definitions/AdditionalProperties"
+          }
+        },
+        "lastSeenTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the relationship was last seen (optional)."
+        }
+      },
+      "required": [
+        "resourceId",
+        "resourceType",
+        "tenantId",
+        "subscriptionId",
+        "resourceLocation",
+        "targetId",
+        "targetType",
+        "relationshipType",
+        "relationshipTypeAttributes"
+      ]
+    },
     "ArmResourceDatasetSchema": {
       "type": "object",
       "description": "ARM resource dataset schema.",
@@ -1823,7 +1884,8 @@
       "description": "Dataset kind discriminator",
       "enum": [
         "Custom",
-        "ArmResource"
+        "ArmResource",
+        "ArmRelationship"
       ],
       "x-ms-enum": {
         "name": "DatasetKind",
@@ -1838,6 +1900,11 @@
             "name": "ArmResource",
             "value": "ArmResource",
             "description": "ARM (Azure Resource Manager) managed resource dataset."
+          },
+          {
+            "name": "ArmRelationship",
+            "value": "ArmRelationship",
+            "description": "ARM (Azure Resource Manager) relationship dataset."
           }
         ]
       }
@@ -1882,6 +1949,10 @@
         "armResourceSchema": {
           "$ref": "#/definitions/ArmResourceDatasetSchema",
           "description": "ArmResource ArmResourceDatasetSchema object."
+        },
+        "armRelationshipSchema": {
+          "$ref": "#/definitions/ArmRelationshipDatasetSchema",
+          "description": "ArmRelationship ArmRelationshipDatasetSchema object."
         },
         "locations": {
           "type": "array",
