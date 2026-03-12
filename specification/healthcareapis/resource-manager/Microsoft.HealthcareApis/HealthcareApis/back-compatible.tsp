@@ -91,3 +91,8 @@ using Microsoft.HealthcareApis;
 @@clientName(ServicesOperationGroup.checkNameAvailability::parameters.body,
   "checkNameAvailabilityInputs"
 );
+
+@@clientName(Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "ServiceManagedIdentityIdentity",
+  "go"
+);
