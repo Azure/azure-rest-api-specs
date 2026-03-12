@@ -25,23 +25,27 @@ model MdeOnboardingData
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MdeOnboardings {
   /**
    * The default configuration or data needed to onboard the machine to MDE
    */
+  @tag("MdeOnboarding")
   get is ArmResourceRead<
     MdeOnboardingData,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
    * The configuration or data needed to onboard the machine to MDE
    */
+  @tag("MdeOnboarding")
   list is ArmResourceListByParent<
     MdeOnboardingData,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<MdeOnboardingDataList>
+    Response = ArmResponse<MdeOnboardingDataList>,
+    Error = CloudError
   >;
 }
 

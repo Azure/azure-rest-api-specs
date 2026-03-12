@@ -3,71 +3,32 @@
   "info": {
     "title": "Security Center",
     "version": "2021-10-01-preview",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
   },
-  "schemes": [
-    "https"
-  ],
-  "host": "management.azure.com",
   "produces": [
     "application/json"
   ],
   "consumes": [
     "application/json"
   ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "tags": [
-    {
-      "name": "MdeOnboarding"
-    }
-  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboardings": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/mdeOnboardings": {
       "get": {
         "operationId": "MdeOnboardings_List",
         "tags": [
           "MdeOnboarding"
         ],
         "description": "The configuration or data needed to onboard the machine to MDE",
-        "parameters": [
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MdeOnboardingDataList"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -80,30 +41,23 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboardings/default": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/mdeOnboardings/default": {
       "get": {
         "operationId": "MdeOnboardings_Get",
         "tags": [
           "MdeOnboarding"
         ],
         "description": "The default configuration or data needed to onboard the machine to MDE",
-        "parameters": [
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MdeOnboardingData"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
