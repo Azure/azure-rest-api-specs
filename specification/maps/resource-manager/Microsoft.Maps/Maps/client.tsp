@@ -80,15 +80,9 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-// Suppress OperationResult/OperationStatus operations (not in previous GA SDK)
-@@access(Microsoft.Maps.OperationResultOperationGroup.get,
-  Access.internal,
-  "csharp"
-);
-@@access(Microsoft.Maps.OperationStatusOperationGroup.get,
-  Access.internal,
-  "csharp"
-);
+// Remove OperationResult/OperationStatus LRO polling operations from C# generation
+@@scope(Microsoft.Maps.OperationResultOperationGroup.get, "!csharp");
+@@scope(Microsoft.Maps.OperationStatusOperationGroup.get, "!csharp");
 
 // Override clientLocation for Operations.list to avoid C# namespace conflict
 // (back-compatible.tsp sets it to "Maps" for all languages, which conflicts with
