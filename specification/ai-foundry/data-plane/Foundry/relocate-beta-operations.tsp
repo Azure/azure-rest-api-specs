@@ -68,3 +68,12 @@ interface EvaluationTaxonomies {}
 @@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.update,
   EvaluationTaxonomies
 );
+
+interface Toolsets {}
+@@clientLocation(Azure.AI.Projects.Toolsets.createToolset, Toolsets);
+@@clientLocation(Azure.AI.Projects.Toolsets.updateToolset, Toolsets);
+@@clientLocation(Azure.AI.Projects.Toolsets.getToolset, Toolsets);
+@@clientLocation(Azure.AI.Projects.Toolsets.listToolsets, Toolsets);
+@@clientLocation(Azure.AI.Projects.Toolsets.deleteToolset, Toolsets);
+
+
