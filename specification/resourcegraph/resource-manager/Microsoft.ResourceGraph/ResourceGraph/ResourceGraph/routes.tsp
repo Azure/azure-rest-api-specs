@@ -24,5 +24,6 @@ namespace ResourceGraph;
 )
 op resources is ArmProviderActionSync<
   Request = QueryRequest,
-  Response = QueryResponse
+  Response = QueryResponse,
+  Error = ErrorResponse
 >;

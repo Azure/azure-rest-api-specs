@@ -26,7 +26,7 @@ using TypeSpec.Versioning;
  * Azure Resource Graph API Reference
  */
 @armProviderNamespace("Microsoft.ResourceGraph")
-@service(#{ title: "ResourceGraphClient" })
+@service(#{ title: "Azure Resource Graph" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace ResourceGraph;
