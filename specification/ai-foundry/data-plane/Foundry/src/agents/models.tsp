@@ -409,6 +409,10 @@ model WorkflowAgentDefinition extends AgentDefinition {
 }
 
 @doc("The type of hosted agent deployment.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+)
 union HostedAgentType {
   string,
 
@@ -488,12 +492,24 @@ model HostedAgentDefinition extends AgentDefinition {
   image?: string;
 
   @doc("The type of hosted agent deployment. Use 'image' for container-based or 'code' for code-based deployments.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
   type?: HostedAgentType;
 
   @doc("Container-based deployment configuration. Mutually exclusive with code_configuration.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
   container_configuration?: ContainerConfiguration;
 
   @doc("The protocols that the agent supports for ingress communication.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
   @example(#[
     #{ protocol: "responses", version: "v0.1.1" },
     #{ protocol: "a2a", version: "v0.3.0" }
@@ -501,6 +517,10 @@ model HostedAgentDefinition extends AgentDefinition {
   protocol_versions?: ProtocolVersionRecord[];
 
   @doc("Code-based deployment configuration. Mutually exclusive with container_configuration.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
   code_configuration?: CodeConfiguration;
 
   @removed(Versions.v1)

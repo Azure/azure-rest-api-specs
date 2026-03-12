@@ -14095,7 +14095,12 @@
                 "$ref": "#/components/schemas/HostedAgentType"
               }
             ],
-            "description": "The type of hosted agent deployment. Use 'image' for container-based or 'code' for code-based deployments."
+            "description": "The type of hosted agent deployment. Use 'image' for container-based or 'code' for code-based deployments.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "CodeAgents=V1Preview"
+              ]
+            }
           },
           "container_configuration": {
             "allOf": [
@@ -14103,7 +14108,12 @@
                 "$ref": "#/components/schemas/ContainerConfiguration"
               }
             ],
-            "description": "Container-based deployment configuration. Mutually exclusive with code_configuration."
+            "description": "Container-based deployment configuration. Mutually exclusive with code_configuration.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "CodeAgents=V1Preview"
+              ]
+            }
           },
           "protocol_versions": {
             "type": "array",
@@ -14120,7 +14130,12 @@
                 "protocol": "a2a",
                 "version": "v0.3.0"
               }
-            ]
+            ],
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "CodeAgents=V1Preview"
+              ]
+            }
           },
           "code_configuration": {
             "allOf": [
@@ -14128,7 +14143,12 @@
                 "$ref": "#/components/schemas/CodeConfiguration"
               }
             ],
-            "description": "Code-based deployment configuration. Mutually exclusive with container_configuration."
+            "description": "Code-based deployment configuration. Mutually exclusive with container_configuration.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "CodeAgents=V1Preview"
+              ]
+            }
           }
         },
         "allOf": [
@@ -14156,7 +14176,12 @@
             ]
           }
         ],
-        "description": "The type of hosted agent deployment."
+        "description": "The type of hosted agent deployment.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "CodeAgents=V1Preview"
+          ]
+        }
       },
       "HourlyRecurrenceSchedule": {
         "type": "object",
