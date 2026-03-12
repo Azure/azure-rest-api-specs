@@ -11976,6 +11976,28 @@
         ]
       }
     },
+    "DiskActionStatus": {
+      "type": "object",
+      "description": "The action plan deployment status for Disk Job.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of ECE action Disk Job.",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of steps of Disk Job.",
+          "items": {
+            "$ref": "#/definitions/DiskDeploymentStep"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "DiskConfiguration": {
       "type": "object",
       "description": "Desired configuration for a disk.",
@@ -11989,6 +12011,61 @@
           "x-ms-identifiers": [
             "path"
           ]
+        }
+      }
+    },
+    "DiskDeploymentStep": {
+      "type": "object",
+      "description": "The Step of Disk Job.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of step.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of step.",
+          "readOnly": true
+        },
+        "fullStepIndex": {
+          "type": "string",
+          "description": "FullStepIndex of step.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "description": "Start time of step.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "description": "End time of step.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of step (Error, Success, InProgress).",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of nested steps.",
+          "items": {
+            "$ref": "#/definitions/DiskDeploymentStep"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "exception": {
+          "type": "array",
+          "description": "List of exceptions.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
@@ -12036,6 +12113,16 @@
           "type": "integer",
           "format": "int32",
           "description": "Percentage of job completion.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/DiskActionStatus",
+          "description": "Validation status of Disk Job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/DiskActionStatus",
+          "description": "Deployment status of Disk Job.",
           "readOnly": true
         }
       }
@@ -16795,6 +16882,12 @@
       "type": "object",
       "description": "Reported properties for Network Adapter Job.",
       "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
         "validationStatus": {
           "$ref": "#/definitions/NetworkAdapterActionStatus",
           "description": "Validation status of Network Adapter Job.",
