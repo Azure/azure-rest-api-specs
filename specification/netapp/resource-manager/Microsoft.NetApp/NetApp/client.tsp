@@ -97,6 +97,8 @@ using Microsoft.NetApp;
 // C# backward compatibility: type renames
 // ============================================================
 // Resource types - add NetApp prefix to match old SDK names
+@@clientName(Microsoft.NetApp.Volume, "NetAppVolume", "csharp");
+@@clientName(Microsoft.NetApp.Backup, "NetAppBackupVaultBackup", "csharp");
 @@clientName(Microsoft.NetApp.BackupPolicy, "NetAppBackupPolicy", "csharp");
 @@clientName(Microsoft.NetApp.BackupVault, "NetAppBackupVault", "csharp");
 @@clientName(Microsoft.NetApp.QuotaItem, "NetAppSubscriptionQuotaItem", "csharp");
@@ -104,9 +106,13 @@ using Microsoft.NetApp;
 @@clientName(Microsoft.NetApp.VolumeGroupDetails, "NetAppVolumeGroup", "csharp");
 @@clientName(Microsoft.NetApp.VolumeQuotaRule, "NetAppVolumeQuotaRule", "csharp");
 @@clientName(Microsoft.NetApp.Snapshot, "NetAppVolumeSnapshot", "csharp");
+@@clientName(Microsoft.NetApp.CapacityPool, "CapacityPool", "csharp");
+@@clientName(Microsoft.NetApp.SnapshotPolicy, "SnapshotPolicy", "csharp");
+@@clientName(Microsoft.NetApp.NetAppAccount, "NetAppAccount", "csharp");
 
 // Model types - preserve old SDK names
 @@clientName(Microsoft.NetApp.AccountEncryption, "NetAppAccountEncryption", "csharp");
+@@clientName(Microsoft.NetApp.ActiveDirectory, "NetAppAccountActiveDirectory", "csharp");
 @@clientName(Microsoft.NetApp.ActiveDirectoryStatus, "NetAppAccountActiveDirectoryStatus", "csharp");
 @@clientName(Microsoft.NetApp.AuthorizeRequest, "NetAppVolumeAuthorizeReplicationContent", "csharp");
 @@clientName(Microsoft.NetApp.AvsDataStore, "NetAppAvsDataStore", "csharp");
