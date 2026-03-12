@@ -18,3 +18,6 @@ namespace ReservationsClient;
 @@clientName(ReservationTerm.P5Y, "P5_Y", "python");
 @@clientName(SavingsPlanTerm.P1Y, "P1_Y", "python");
 @@clientName(SavingsPlanTerm.P3Y, "P3_Y", "python");
+
+@@clientLocation(getAppliedReservationList, "AzureReservationAPIClient", "go");
+@@clientLocation(getCatalog, "AzureReservationAPIClient", "go");
