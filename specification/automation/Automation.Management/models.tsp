@@ -4692,7 +4692,6 @@ model PackageProperties {
   /**
    * Metadata pertaining to creation and last modification of the resource.
    */
-  @visibility(Lifecycle.Read)
   allOf?: SystemData;
 }
 
@@ -5202,7 +5201,6 @@ model RuntimeEnvironmentUpdateParameters {
   /**
    * Metadata pertaining to creation and last modification of the resource.
    */
-  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
