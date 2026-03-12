@@ -88,6 +88,7 @@ model BookshelfUpdate {
   "javascript"
 );
 
+@doc("Storage Asset tracked resource")
 model StorageAssetUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -97,6 +98,7 @@ model StorageAssetUpdate {
   properties?: StorageAssetUpdateProperties;
 }
 
+@doc("Storage Asset properties")
 model StorageAssetUpdateProperties {
   @doc("The description")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -107,6 +109,7 @@ model StorageAssetUpdateProperties {
   StorageAssetUpdate,
   "javascript"
 );
+@doc("Storage Container tracked resource")
 model StorageContainerUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -117,6 +120,7 @@ model StorageContainerUpdate {
   "javascript"
 );
 
+@doc("NodePool tracked resource")
 model NodePoolUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -125,6 +129,7 @@ model NodePoolUpdate {
   @doc("The resource-specific properties for this resource.")
   properties?: NodePoolUpdateProperties;
 }
+@doc("NodePool properties")
 model NodePoolUpdateProperties {
   @doc("The maximum number of nodes.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -171,6 +176,7 @@ model SupercomputerUpdate {
   "javascript"
 );
 
+@doc("Represents a deployment that ties a specific model family to a user defined deployment name used when invoking the chat model.")
 model ChatModelDeploymentUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -181,6 +187,7 @@ model ChatModelDeploymentUpdate {
   "javascript"
 );
 
+@doc("Project tracked resource")
 model ProjectUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -190,6 +197,7 @@ model ProjectUpdate {
   properties?: ProjectUpdateProperties;
 }
 
+@doc("Project properties")
 model ProjectUpdateProperties {
   @doc("Allowed AgentIds (Control plane resource references).")
   @removed(Microsoft.Discovery.Versions.v2026_02_01_preview)
