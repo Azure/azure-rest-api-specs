@@ -60,6 +60,10 @@ using Azure.ClientGenerator.Core;
   "MapsIdentityType",
   "csharp"
 );
+@@clientName(Azure.ResourceManager.CommonTypes.InfrastructureEncryption,
+  "MapsInfrastructureEncryption",
+  "csharp"
+);
 
 // Suppress OperationResult/OperationStatus operations (not in previous GA SDK)
 @@access(Microsoft.Maps.OperationResultOperationGroup.get, Access.internal, "csharp");
@@ -77,6 +81,6 @@ using Azure.ClientGenerator.Core;
 @@alternateType(Microsoft.Maps.MapsAccountKeys.primaryKeyLastUpdated, utcDateTime, "csharp");
 @@alternateType(Microsoft.Maps.MapsAccountKeys.secondaryKeyLastUpdated, utcDateTime, "csharp");
 
-// URI format for key encryption key URL
-@@alternateType(Microsoft.Maps.EncryptionCustomerManagedKeyEncryption.keyEncryptionKeyUrl, url, "csharp");
-@@clientName(Microsoft.Maps.EncryptionCustomerManagedKeyEncryption.keyEncryptionKeyUrl, "KeyEncryptionKeyUri", "csharp");
+// URI format for key encryption key URL (target common type, not local model)
+@@alternateType(Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption.keyEncryptionKeyUrl, url, "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption.keyEncryptionKeyUrl, "KeyEncryptionKeyUri", "csharp");
