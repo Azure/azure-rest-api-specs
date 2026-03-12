@@ -1,6 +1,11 @@
 # Managed centrally by the Azure SDK Team
 # Remove suppressions as specs are fixed
 
+- tool: TypeSpecRequirement
+  reason: False positive in TypeSpec-Requirement path parsing for service names containing 'specification'
+  paths:
+    - containerservice/resource-manager/Microsoft.ContainerService/preparedimagespecification/preview/2026-02-02-preview/preparedimagespecification.json
+
 - tool: TypeSpecValidation
   rules: [Compile]
   sub-rules: [ExtraSwagger]

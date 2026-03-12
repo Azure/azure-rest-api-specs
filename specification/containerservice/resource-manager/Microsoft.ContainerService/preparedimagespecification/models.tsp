@@ -11,7 +11,8 @@ namespace Microsoft.ContainerService;
 
 @doc("The Prepared Image Specification resource.")
 @resource("preparedImageSpecifications")
-model PreparedImageSpecification is TrackedResource<PreparedImageSpecificationProperties> {
+model PreparedImageSpecification
+  is TrackedResource<PreparedImageSpecificationProperties> {
   @doc("The name of the Prepared Image Specification resource.")
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
@@ -142,7 +143,8 @@ union ProvisioningState {
 
 @parentResource(PreparedImageSpecification)
 @doc("A version of the Prepared Image Specification resource.")
-model PreparedImageSpecificationVersion is ProxyResource<PreparedImageSpecificationProperties> {
+model PreparedImageSpecificationVersion
+  is ProxyResource<PreparedImageSpecificationProperties> {
   @pattern("^[\\w\\-\\.]+$")
   @minLength(1)
   @maxLength(64)
