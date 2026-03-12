@@ -102,7 +102,7 @@
             "description": "When this header is set to true and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "getContentMd5"
+            "x-ms-client-name": "rangeGetContentMD5"
           },
           {
             "name": "x-ms-lease-id",
@@ -111,6 +111,14 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
+          },
+          {
+            "name": "x-ms-allow-trailing-dot",
+            "in": "header",
+            "description": "If true, the trailing dot will not be trimmed from the target file/directory path.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "allowTrailingDot"
           },
           {
             "name": "x-ms-file-request-intent",
@@ -213,7 +221,39 @@
               },
               "x-ms-copy-status": {
                 "type": "string",
-                "description": "State of the copy operation identified by x-ms-copy-id."
+                "description": "State of the copy operation identified by x-ms-copy-id.",
+                "enum": [
+                  "pending",
+                  "success",
+                  "aborted",
+                  "failed"
+                ],
+                "x-ms-enum": {
+                  "name": "CopyStatus",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Pending",
+                      "value": "pending",
+                      "description": "The copy operation is pending."
+                    },
+                    {
+                      "name": "Success",
+                      "value": "success",
+                      "description": "The copy operation succeeded."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
+                    },
+                    {
+                      "name": "Failed",
+                      "value": "failed",
+                      "description": "The copy operation failed."
+                    }
+                  ]
+                }
               },
               "x-ms-copy-status-description": {
                 "type": "string",
@@ -405,7 +445,39 @@
               },
               "x-ms-copy-status": {
                 "type": "string",
-                "description": "State of the copy operation identified by x-ms-copy-id."
+                "description": "State of the copy operation identified by x-ms-copy-id.",
+                "enum": [
+                  "pending",
+                  "success",
+                  "aborted",
+                  "failed"
+                ],
+                "x-ms-enum": {
+                  "name": "CopyStatus",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Pending",
+                      "value": "pending",
+                      "description": "The copy operation is pending."
+                    },
+                    {
+                      "name": "Success",
+                      "value": "success",
+                      "description": "The copy operation succeeded."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
+                    },
+                    {
+                      "name": "Failed",
+                      "value": "failed",
+                      "description": "The copy operation failed."
+                    }
+                  ]
+                }
               },
               "x-ms-copy-status-description": {
                 "type": "string",
@@ -647,7 +719,7 @@
             "description": "An MD5 hash of the file content. This hash is used to verify the integrity of the file during transport.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "fileContentMd5"
+            "x-ms-client-name": "fileContentMD5"
           },
           {
             "name": "x-ms-content-disposition",
@@ -750,6 +822,14 @@
             "x-ms-client-name": "leaseId"
           },
           {
+            "name": "x-ms-allow-trailing-dot",
+            "in": "header",
+            "description": "If true, the trailing dot will not be trimmed from the target file/directory path.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "allowTrailingDot"
+          },
+          {
             "name": "x-ms-file-request-intent",
             "in": "header",
             "description": "Valid values are 'backup'.",
@@ -793,7 +873,7 @@
             "description": "Optional, NFS only. The file mode of the file or directory.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "mode"
+            "x-ms-client-name": "fileMode"
           },
           {
             "name": "x-ms-file-file-type",
@@ -1068,6 +1148,14 @@
             "x-ms-client-name": "leaseId"
           },
           {
+            "name": "x-ms-allow-trailing-dot",
+            "in": "header",
+            "description": "If true, the trailing dot will not be trimmed from the target file/directory path.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "allowTrailingDot"
+          },
+          {
             "name": "x-ms-file-request-intent",
             "in": "header",
             "description": "Valid values are 'backup'.",
@@ -1189,6 +1277,14 @@
             "x-ms-client-name": "leaseId"
           },
           {
+            "name": "x-ms-allow-trailing-dot",
+            "in": "header",
+            "description": "If true, the trailing dot will not be trimmed from the target file/directory path.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "allowTrailingDot"
+          },
+          {
             "name": "x-ms-file-request-intent",
             "in": "header",
             "description": "Valid values are 'backup'.",
@@ -1268,7 +1364,39 @@
               },
               "x-ms-copy-status": {
                 "type": "string",
-                "description": "State of the copy operation identified by x-ms-copy-id."
+                "description": "State of the copy operation identified by x-ms-copy-id.",
+                "enum": [
+                  "pending",
+                  "success",
+                  "aborted",
+                  "failed"
+                ],
+                "x-ms-enum": {
+                  "name": "CopyStatus",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Pending",
+                      "value": "pending",
+                      "description": "The copy operation is pending."
+                    },
+                    {
+                      "name": "Success",
+                      "value": "success",
+                      "description": "The copy operation succeeded."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
+                    },
+                    {
+                      "name": "Failed",
+                      "value": "failed",
+                      "description": "The copy operation failed."
+                    }
+                  ]
+                }
               },
               "x-ms-copy-status-description": {
                 "type": "string",
@@ -1545,7 +1673,7 @@
             "description": "A boolean value that specifies whether the ReadOnly attribute on a preexisting destination file should be respected or overridden.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "fileCopyIgnoreReadOnly"
+            "x-ms-client-name": "ignoreReadOnly"
           },
           {
             "name": "x-ms-file-attributes",
@@ -1585,7 +1713,7 @@
             "description": "Optional. Sets the archive attribute on the destination file.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "fileCopySetArchiveAttribute"
+            "x-ms-client-name": "setArchiveAttribute"
           },
           {
             "name": "x-ms-lease-id",
@@ -1609,7 +1737,7 @@
             "description": "If true, the trailing dot will not be trimmed from the source URI.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "sourceAllowTrailingDot"
+            "x-ms-client-name": "allowSourceTrailingDot"
           },
           {
             "name": "x-ms-file-request-intent",
@@ -1655,7 +1783,7 @@
             "description": "Optional, NFS only. The file mode of the file or directory.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "mode"
+            "x-ms-client-name": "fileMode"
           },
           {
             "name": "x-ms-file-mode-copy-mode",
@@ -1683,7 +1811,7 @@
                 }
               ]
             },
-            "x-ms-client-name": "fileCopyModeCopyMode"
+            "x-ms-client-name": "fileModeCopyMode"
           },
           {
             "name": "x-ms-file-owner-copy-mode",
@@ -1711,7 +1839,7 @@
                 }
               ]
             },
-            "x-ms-client-name": "fileCopyOwnerCopyMode"
+            "x-ms-client-name": "fileOwnerCopyMode"
           }
         ],
         "responses": {
@@ -1742,7 +1870,39 @@
               },
               "x-ms-copy-status": {
                 "type": "string",
-                "description": "State of the copy operation identified by x-ms-copy-id."
+                "description": "State of the copy operation identified by x-ms-copy-id.",
+                "enum": [
+                  "pending",
+                  "success",
+                  "aborted",
+                  "failed"
+                ],
+                "x-ms-enum": {
+                  "name": "CopyStatus",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Pending",
+                      "value": "pending",
+                      "description": "The copy operation is pending."
+                    },
+                    {
+                      "name": "Success",
+                      "value": "success",
+                      "description": "The copy operation succeeded."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
+                    },
+                    {
+                      "name": "Failed",
+                      "value": "failed",
+                      "description": "The copy operation failed."
+                    }
+                  ]
+                }
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -1814,7 +1974,7 @@
             "x-ms-enum": {
               "modelAsString": false
             },
-            "x-ms-client-name": "copyActionAbort"
+            "x-ms-client-name": "copyActionAbortConstant"
           },
           {
             "name": "copyid",
@@ -3481,7 +3641,7 @@
             "description": "An MD5 hash of the file content. This hash is used to verify the integrity of the file during transport.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "fileContentMd5"
+            "x-ms-client-name": "fileContentMD5"
           },
           {
             "name": "x-ms-content-disposition",
@@ -3627,7 +3787,7 @@
             "description": "Optional, NFS only. The file mode of the file or directory.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "mode"
+            "x-ms-client-name": "fileMode"
           }
         ],
         "responses": {
@@ -3768,7 +3928,7 @@
             "description": "Specifies the range of bytes to be written. Both the start and end of the range must be specified.",
             "required": true,
             "type": "string",
-            "x-ms-client-name": "targetRange"
+            "x-ms-client-name": "range"
           },
           {
             "name": "x-ms-write",
@@ -3859,7 +4019,7 @@
                 }
               ]
             },
-            "x-ms-client-name": "fileLastWriteTimeMode"
+            "x-ms-client-name": "fileLastWrittenMode"
           },
           {
             "name": "x-ms-allow-trailing-dot",
@@ -4022,7 +4182,7 @@
             "description": "Specifies the range of bytes to be written. Both the start and end of the range must be specified.",
             "required": true,
             "type": "string",
-            "x-ms-client-name": "targetRange"
+            "x-ms-client-name": "range"
           },
           {
             "name": "x-ms-copy-source",
@@ -4147,7 +4307,7 @@
                 }
               ]
             },
-            "x-ms-client-name": "fileLastWriteTimeMode"
+            "x-ms-client-name": "fileLastWrittenMode"
           },
           {
             "name": "x-ms-allow-trailing-dot",
@@ -4163,7 +4323,7 @@
             "description": "If true, the trailing dot will not be trimmed from the source URI.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "sourceAllowTrailingDot"
+            "x-ms-client-name": "allowSourceTrailingDot"
           },
           {
             "name": "x-ms-file-request-intent",
@@ -4216,6 +4376,7 @@
               },
               "x-ms-file-last-write-time": {
                 "type": "string",
+                "format": "date-time-rfc7231",
                 "description": "The file last write time."
               },
               "x-ms-request-id": {
@@ -4469,7 +4630,7 @@
             "description": "Boolean. Default value is false. Set to true to indicate that the destination should be overwritten.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "renameReplaceIfExists"
+            "x-ms-client-name": "replaceIfExists"
           },
           {
             "name": "x-ms-file-rename-ignore-readonly",
@@ -4477,7 +4638,7 @@
             "description": "Boolean. Default value is false. Set to true to overwrite the destination even if it has the read-only attribute set.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "renameIgnoreReadOnly"
+            "x-ms-client-name": "ignoreReadOnly"
           },
           {
             "name": "x-ms-source-lease-id",
@@ -4601,7 +4762,7 @@
             "description": "If true, the trailing dot will not be trimmed from the source URI.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "sourceAllowTrailingDot"
+            "x-ms-client-name": "allowSourceTrailingDot"
           },
           {
             "name": "x-ms-file-request-intent",
@@ -4878,7 +5039,7 @@
             "description": "Optional, NFS only. The file mode of the file or directory.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "mode"
+            "x-ms-client-name": "fileMode"
           },
           {
             "name": "x-ms-file-property-semantics",
@@ -5481,7 +5642,7 @@
             "description": "Include extended information.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "fileExtendedInfo"
+            "x-ms-client-name": "includeExtendedInfo"
           },
           {
             "name": "x-ms-allow-trailing-dot",
@@ -5852,7 +6013,7 @@
             "description": "Optional, NFS only. The file mode of the file or directory.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "mode"
+            "x-ms-client-name": "fileMode"
           }
         ],
         "responses": {
@@ -6002,7 +6163,7 @@
             "description": "Boolean. Default value is false. Set to true to indicate that the destination should be overwritten.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "renameReplaceIfExists"
+            "x-ms-client-name": "replaceIfExists"
           },
           {
             "name": "x-ms-file-rename-ignore-readonly",
@@ -6010,7 +6171,7 @@
             "description": "Boolean. Default value is false. Set to true to overwrite the destination even if it has the read-only attribute set.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "renameIgnoreReadOnly"
+            "x-ms-client-name": "ignoreReadOnly"
           },
           {
             "name": "x-ms-source-lease-id",
@@ -6126,7 +6287,7 @@
             "description": "If true, the trailing dot will not be trimmed from the source URI.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "sourceAllowTrailingDot"
+            "x-ms-client-name": "allowSourceTrailingDot"
           },
           {
             "name": "x-ms-file-request-intent",
@@ -6816,7 +6977,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "x-ms-client-name": "shareQuota"
+            "x-ms-client-name": "quota"
           },
           {
             "name": "x-ms-access-tier",
@@ -8022,6 +8183,20 @@
             "x-ms-client-name": "proposedLeaseId"
           },
           {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "acquire"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
+          },
+          {
             "name": "sharesnapshot",
             "in": "query",
             "description": "The snapshot parameter is an opaque DateTime value that specifies a share snapshot.",
@@ -8151,7 +8326,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "x-ms-client-name": "leaseBreakPeriod"
+            "x-ms-client-name": "breakPeriod"
           },
           {
             "name": "x-ms-lease-id",
@@ -8160,6 +8335,20 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
+          },
+          {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "break"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
           },
           {
             "name": "sharesnapshot",
@@ -8297,6 +8486,20 @@
             "x-ms-client-name": "proposedLeaseId"
           },
           {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "change"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds.",
@@ -8428,6 +8631,20 @@
             "x-ms-client-name": "leaseId"
           },
           {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "release"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds.",
@@ -8553,6 +8770,20 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "leaseId"
+          },
+          {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "renew"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
           },
           {
             "name": "timeout",
@@ -8821,7 +9052,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "x-ms-client-name": "shareQuota"
+            "x-ms-client-name": "quota"
           },
           {
             "name": "x-ms-access-tier",
@@ -9915,6 +10146,42 @@
         "start",
         "end"
       ]
+    },
+    "CopyStatus": {
+      "type": "string",
+      "description": "The copy status.",
+      "enum": [
+        "pending",
+        "success",
+        "aborted",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "CopyStatus",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "pending",
+            "description": "The copy operation is pending."
+          },
+          {
+            "name": "Success",
+            "value": "success",
+            "description": "The copy operation succeeded."
+          },
+          {
+            "name": "Aborted",
+            "value": "aborted",
+            "description": "The copy operation was aborted."
+          },
+          {
+            "name": "Failed",
+            "value": "failed",
+            "description": "The copy operation failed."
+          }
+        ]
+      }
     },
     "CorsRule": {
       "type": "object",

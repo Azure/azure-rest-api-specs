@@ -208,7 +208,7 @@ interface Share {
       ...LastModifiedResponseHeader;
 
       /** The share quota. */
-      @header("x-ms-share-quota") shareQuota?: int32;
+      @header("x-ms-share-quota") quota?: int32;
 
       /** The provisioned IOPS. */
       @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
@@ -244,7 +244,7 @@ interface Share {
       ...LastModifiedResponseHeader;
 
       /** The maximum quota for the share. */
-      @header("x-ms-share-quota") shareQuota: int32;
+      @header("x-ms-share-quota") quota: int32;
 
       /** The provisioned IOPS for the share. */
       @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
@@ -426,7 +426,7 @@ interface Share {
       ...TimeoutParameter;
 
       /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately. */
-      @header("x-ms-lease-break-period") leaseBreakPeriod?: int32;
+      @header("x-ms-lease-break-period") breakPeriod?: int32;
 
       ...LeaseIdOptionalParameter;
       ...LeaseActionParameter<"break">;
@@ -551,7 +551,7 @@ interface Share {
       ...LastModifiedResponseHeader;
 
       /** The current share quota. */
-      @header("x-ms-share-quota") shareQuota?: int32;
+      @header("x-ms-share-quota") quota?: int32;
 
       /** The share provisioned IOPS. */
       @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
@@ -683,7 +683,7 @@ interface Share {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      @header("x-ms-share-quota") shareQuota?: int32;
+      @header("x-ms-share-quota") quota?: int32;
       @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
 
       @header("x-ms-share-provisioned-bandwidth-mibps")
@@ -838,7 +838,7 @@ interface Directory {
       ...TimeoutParameter;
 
       /** Include extended information. */
-      @header("x-ms-file-extended-info") fileExtendedInfo?: boolean;
+      @header("x-ms-file-extended-info") includeExtendedInfo?: boolean;
 
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
@@ -1020,7 +1020,8 @@ interface File {
       ...RangeHeader;
 
       /** When this header is set to true and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
-      @header("x-ms-range-get-content-md5") getContentMd5?: boolean;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("x-ms-range-get-content-md5") rangeGetContentMD5?: boolean;
 
       ...LeaseIdOptionalParameter;
       ...AllowTrailingDotParameter;
@@ -1046,7 +1047,8 @@ interface File {
       ...CopyStatusResponseHeaders;
 
       /** The MD5 hash of the full file content. */
-      @header("x-ms-content-md5") fileContentMd5?: string;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("x-ms-content-md5") fileContentMD5?: string;
 
       /** The value of this header indicates whether the file data and application metadata are completely encrypted. */
       @header("x-ms-server-encrypted") serverEncrypted?: boolean;
@@ -1301,7 +1303,7 @@ interface File {
   uploadRange is StorageOperationRequestBody<
     {
       /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
-      @header("x-ms-range") targetRange: string;
+      @header("x-ms-range") range: string;
 
       /** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. - Clear: Clears the specified range and releases the space used in storage for that range. */
       @header("x-ms-write")
@@ -1319,7 +1321,7 @@ interface File {
 
       /** If the file last write time should be preserved or overwritten. */
       @header("x-ms-file-last-write-time")
-      fileLastWriteTimeMode?: FileLastWrittenMode;
+      fileLastWrittenMode?: FileLastWrittenMode;
 
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
@@ -1359,7 +1361,7 @@ interface File {
   uploadRangeFromUrl is StorageOperationNoBody<
     {
       /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
-      @header("x-ms-range") targetRange: string;
+      @header("x-ms-range") range: string;
 
       /** Specifies the URL of the source file or blob, up to 2 KB in length. */
       @header("x-ms-copy-source") copySource: string;
@@ -1394,7 +1396,7 @@ interface File {
 
       /** If the file last write time should be preserved or overwritten. */
       @header("x-ms-file-last-write-time")
-      fileLastWriteTimeMode?: FileLastWrittenMode;
+      fileLastWrittenMode?: FileLastWrittenMode;
 
       ...AllowTrailingDotParameter;
       ...SourceAllowTrailingDotParameter;
@@ -1477,7 +1479,7 @@ interface File {
 
       /** A boolean value that specifies whether the ReadOnly attribute on a preexisting destination file should be respected or overridden. */
       @header("x-ms-file-copy-ignore-readonly")
-      fileCopyIgnoreReadOnly?: boolean;
+      ignoreReadOnly?: boolean;
 
       /** If specified, the provided file attributes shall be set. */
       @header("x-ms-file-attributes") fileAttributes?: string;
@@ -1493,7 +1495,7 @@ interface File {
 
       /** Optional. Sets the archive attribute on the destination file. */
       @header("x-ms-file-copy-set-archive")
-      fileCopySetArchiveAttribute?: boolean;
+      setArchiveAttribute?: boolean;
 
       ...LeaseIdOptionalParameter;
       ...AllowTrailingDotParameter;
@@ -1530,7 +1532,7 @@ interface File {
   abortCopy is StorageOperationNoBody<
     {
       /** Must be the literal "abort" to abort the pending copy operation. */
-      @header("x-ms-copy-action") copyActionAbort: "abort";
+      @header("x-ms-copy-action") copyActionAbortConstant: "abort";
 
       /** The copy identifier provided in the x-ms-copy-id header of the original Copy File operation. */
       @query copyid: string;

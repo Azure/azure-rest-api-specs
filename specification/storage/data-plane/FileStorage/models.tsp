@@ -1676,7 +1676,7 @@ alias LeaseIdRequiredParameter = {
 /** Share quota optional header. */
 alias ShareQuotaOptionalHeader = {
   /** Specifies the maximum size of the share, in gigabytes. */
-  @header("x-ms-share-quota") shareQuota?: int32;
+  @header("x-ms-share-quota") quota?: int32;
 };
 
 /** Recursive parameter (header). */
@@ -1794,7 +1794,8 @@ alias FileContentRequestHeaders = {
   @header("x-ms-cache-control") fileCacheControl?: string;
 
   /** An MD5 hash of the file content. This hash is used to verify the integrity of the file during transport. */
-  @header("x-ms-content-md5") fileContentMd5?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+  @header("x-ms-content-md5") fileContentMD5?: string;
 
   /** Sets the file's Content-Disposition header. */
   @header("x-ms-content-disposition") fileContentDisposition?: string;
@@ -1922,11 +1923,11 @@ alias RenameRequestHeaders = {
 
   /** Boolean. Default value is false. Set to true to indicate that the destination should be overwritten. */
   @header("x-ms-file-rename-replace-if-exists")
-  renameReplaceIfExists?: boolean;
+  replaceIfExists?: boolean;
 
   /** Boolean. Default value is false. Set to true to overwrite the destination even if it has the read-only attribute set. */
   @header("x-ms-file-rename-ignore-readonly")
-  renameIgnoreReadOnly?: boolean;
+  ignoreReadOnly?: boolean;
 
   /** Required if the source file has an active lease. */
   @header("x-ms-source-lease-id") sourceLeaseId?: string;
