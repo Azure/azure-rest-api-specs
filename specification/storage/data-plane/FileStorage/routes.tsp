@@ -1402,7 +1402,9 @@ interface File {
       ...RequestServerEncryptedResponseHeader;
 
       /** The file last write time. */
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @encode("rfc7231")
+      @header("x-ms-file-last-write-time")
+      fileLastWriteTime?: utcDateTime;
     }
   >;
 
