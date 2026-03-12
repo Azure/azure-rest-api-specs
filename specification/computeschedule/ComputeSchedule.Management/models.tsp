@@ -183,7 +183,6 @@ model Schedule {
 @doc("The resources needed for the user request")
 model Resources {
   @doc("The resource ids used for the request")
-  @typeChangedFrom(Versions.`2026-03-01-preview`, Array<string>)
   ids: Array<armResourceIdentifier>;
 }
 
@@ -255,29 +254,22 @@ model ResourceOperationDetails {
   operationId: string;
 
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
-  @typeChangedFrom(Versions.`2026-03-01-preview`, string)
-  @madeOptional(Versions.`2026-03-01-preview`)
   resourceId?: armResourceIdentifier;
 
   @doc("Type of operation performed on the resources")
-  @madeOptional(Versions.`2026-03-01-preview`)
   opType?: ResourceOperationType = ResourceOperationType.Unknown;
 
   @doc("Subscription id attached to the request")
-  @madeOptional(Versions.`2026-03-01-preview`)
   subscriptionId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("Deadline for the operation")
-  @madeOptional(Versions.`2026-03-01-preview`)
   deadline?: offsetDateTime;
 
   @doc("Type of deadline of the operation")
-  @madeOptional(Versions.`2026-03-01-preview`)
   deadlineType?: DeadlineType = DeadlineType.Unknown;
 
   @doc("Current state of the operation")
-  @madeOptional(Versions.`2026-03-01-preview`)
   state?: OperationState = OperationState.Unknown;
 
   @added(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
@@ -306,7 +298,6 @@ model ResourceOperationDetails {
 @doc("High level response from an operation on a resource")
 model ResourceOperation {
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
-  @typeChangedFrom(Versions.`2026-03-01-preview`, string)
   resourceId?: armResourceIdentifier;
 
   @doc("Resource level error code if it exists")
