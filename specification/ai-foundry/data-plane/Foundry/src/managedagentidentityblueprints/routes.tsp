@@ -1,6 +1,7 @@
 import "../common/models.tsp";
 import "./models.tsp";
 
+using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
@@ -9,9 +10,8 @@ namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 interface ManagedAgentIdentityBlueprints {
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
   @put
-  @route("/managedAgentIdentityBlueprints/{name}")
+  @route("/managedAgentIdentityBlueprints/{blueprint_name}")
   @extension(
     "x-ms-foundry-meta",
     #{
@@ -23,7 +23,7 @@ interface ManagedAgentIdentityBlueprints {
     FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
     {
       /** The name of the managed agent identity blueprint to create. */
-      @path managed_agent_identity_blueprint_name: string;
+      @path blueprint_name: string;
 
       ...CreateOrUpdateManagedAgentIdentityBlueprintRequest;
     },
@@ -34,7 +34,7 @@ interface ManagedAgentIdentityBlueprints {
    * Retrieves a managed agent identity blueprint by name.
    */
   @get
-  @route("/managedAgentIdentityBlueprints/{managed_agent_identity_blueprint_name}")
+  @route("/managedAgentIdentityBlueprints/{blueprint_name}")
   @extension(
     "x-ms-foundry-meta",
     #{
@@ -46,7 +46,7 @@ interface ManagedAgentIdentityBlueprints {
     FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
     {
       /** The name of the managed agent identity blueprint to retrieve. */
-      @path managed_agent_identity_blueprint_name: string;
+      @path blueprint_name: string;
     },
     ManagedAgentIdentityBlueprint
   >;
@@ -55,7 +55,7 @@ interface ManagedAgentIdentityBlueprints {
    * Deletes a managed agent identity blueprint by name.
    */
   @delete
-  @route("/managedAgentIdentityBlueprints/{managed_agent_identity_blueprint_name}")
+  @route("/managedAgentIdentityBlueprints/{blueprint_name}")
   @extension(
     "x-ms-foundry-meta",
     #{
@@ -67,7 +67,7 @@ interface ManagedAgentIdentityBlueprints {
     FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
     {
       /** The name of the managed agent identity blueprint to delete. */
-      @path managed_agent_identity_blueprint_name: string;
+      @path blueprint_name: string;
     },
     Http.NoContentResponse
   >;
@@ -86,8 +86,8 @@ interface ManagedAgentIdentityBlueprints {
     {
       ...PageOrderQueryParameter;
       ...PageLimitQueryParameter;
-      @query @continuationToken token?: string;
+      @query @continuationToken continuationToken?: string;
     },
-    ManagedAgentIdentityBlueprintPagedResponse
+    Foundations.CustomPage<ManagedAgentIdentityBlueprint>
   >;
 }

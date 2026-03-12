@@ -235,8 +235,13 @@ union AgentProtocol {
 
   @removed(Versions.v1)
   invocations: "invocations",
+}
 
-  @removed(Versions.v1)
+@removed(Versions.v1)
+union AgentEndpointProtocol {
+  string,
+  activity: "activity",
+  responses: "responses",
   a2a: "a2a",
 }
 
@@ -790,7 +795,7 @@ model AgentEndpoint {
   version_selector?: VersionSelector;
 
   @doc("The protocols that the agent supports")
-  protocols?: AgentProtocol[];
+  protocols?: AgentEndpointProtocol[];
 
   @doc("The authorization schemes supported by the agent endpoint")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
