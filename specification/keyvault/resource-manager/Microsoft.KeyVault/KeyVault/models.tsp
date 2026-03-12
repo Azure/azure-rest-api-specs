@@ -36,6 +36,10 @@ union JsonWebKeyType {
   RSA: "RSA",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `RSA-HSM`: "RSA-HSM",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Versioning.added(KeyVault.Versions.v2026_04_01)
+  `oct-HSM`: "oct-HSM",
 }
 
 /**

@@ -185,6 +185,7 @@ using Azure.Core;
 
 @@clientName(JsonWebKeyType.`EC-HSM`, "EC_HSM", "python");
 @@clientName(JsonWebKeyType.`RSA-HSM`, "RSA_HSM", "python");
+@@clientName(JsonWebKeyType.`oct-HSM`, "oct_HSM", "python");
 
 // Override the order of path parameters
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
