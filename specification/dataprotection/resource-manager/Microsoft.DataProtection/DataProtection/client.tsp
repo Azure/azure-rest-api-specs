@@ -437,10 +437,6 @@ using Microsoft.DataProtection;
   "DataProtectionBackupVaultPatchProperties",
   "csharp"
 );
-@@clientName(MonitoringSettings.azureMonitorAlertSettings,
-  "AlertSettingsForAllJobFailures",
-  "csharp"
-);
 @@clientName(PolicyInfo, "BackupInstancePolicyInfo", "csharp");
 @@alternateType(PolicyInfo.policyId, armResourceIdentifier, "csharp");
 @@clientName(PolicyParameters, "BackupInstancePolicySettings", "csharp");
