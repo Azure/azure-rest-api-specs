@@ -858,7 +858,7 @@ model AccessRulePropertiesSubscriptionsItem {
 }
 @@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   AccessRulePropertiesSubscriptionsItem[],
-  "go,python,javascript"
+  "go,python,javascript,java"
 );
 
 @@clientName(SearchServiceProperties.eTag, "etag", "java");
