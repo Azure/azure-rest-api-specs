@@ -465,7 +465,7 @@ model HostedAgentDefinition extends AgentDefinition {
     #{ protocol: "responses", version: "v0.1.1" },
     #{ protocol: "a2a", version: "v0.3.0" }
   ])
-  container_protocol_versions: ProtocolVersionRecord[];
+  container_protocol_versions?: ProtocolVersionRecord[];
 
   /**
    * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
