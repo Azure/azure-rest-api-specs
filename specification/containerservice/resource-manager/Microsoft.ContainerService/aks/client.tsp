@@ -1031,6 +1031,7 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "ManagedClusterSnapshotInfo",
   "csharp"
 );
+@@clientName(ScaleProfile, "AgentPoolScaleProfile", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
 @@markAsPageable(PrivateEndpointConnections.list, "csharp");
