@@ -122,7 +122,16 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: computeschedule.json
-    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.item
+    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
+ - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionFlexPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionFlexPayload.properties.resourceOverrides.items
+
 ```
 
 ---
