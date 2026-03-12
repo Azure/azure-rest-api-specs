@@ -48,7 +48,8 @@ model StageConfig {
   @doc("LabelSelector is a label query over all the joined member clusters. Clusters matching the query are selected for this stage. There cannot be overlapping clusters between stages when the update run is created. If the label selector is empty, the stage includes all the selected clusters. If the label selector is nil, the stage does not include any selected clusters.")
   labelSelector?: LabelSelector;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This key is not sensitive; it's a label key identifier for sorting clusters."
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark this property with @secret if the contents should be kept private."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME:  If this is a real secret, mark with @secret"
   @OpenAPI.extension("x-ms-secret", false)
   @doc("The label key used to sort the selected clusters. The clusters within the stage are updated sequentially following the rule below: 1) Ascending order based on the value of the label key, interpreted as integers if present. 2) Ascending order based on the name of the cluster if the label key is absent or the label value is the same.")
   sortingLabelKey?: string;
