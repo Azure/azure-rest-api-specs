@@ -10703,11 +10703,25 @@
         "kubeStateMetrics": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfileKubeStateMetrics",
           "description": "Kube State Metrics profile for the Azure Managed Prometheus addon. These optional settings are for the kube-state-metrics pod that is deployed with the addon. See aka.ms/AzureManagedPrometheus-optional-parameters for details."
+        },
+        "controlPlane": {
+          "$ref": "#/definitions/ManagedClusterAzureMonitorProfileMetricsControlPlane",
+          "description": "Control plane metrics collection profile for the Azure Managed Prometheus addon. Configures collection of operational runtime metrics from managed control plane components (kube-apiserver, etcd, etc). See aka.ms/aks/controlplane-metrics for an overview."
         }
       },
       "required": [
         "enabled"
       ]
+    },
+    "ManagedClusterAzureMonitorProfileMetricsControlPlane": {
+      "type": "object",
+      "description": "Control plane metrics collection profile for the Azure Managed Prometheus addon. Configures collection of operational runtime metrics from managed control plane components (kube-apiserver, etcd, etc). See aka.ms/aks/controlplane-metrics for an overview.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable or disable collection of control plane metrics by the Azure Managed Prometheus addon. Defaults to disabled. See aka.ms/aks/controlplane-metrics for details."
+        }
+      }
     },
     "ManagedClusterBootstrapProfile": {
       "type": "object",
