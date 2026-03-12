@@ -164,6 +164,10 @@ using Microsoft.Cdn;
 @@clientName(AFDEndpointProperties.hostName, "hostname", "java");
 @@clientName(AFDOriginUpdatePropertiesParameters.hostName, "hostname", "java");
 @@clientName(OriginProperties.hostName, "hostname", "java");
+@@clientName(Components1Gs0LlpSchemasMetricsresponsePropertiesSeriesItemsPropertiesDataItems,
+  "MetricsResponseSeriesItemData",
+  "java"
+);
 @@clientName(Components18OrqelSchemasWafmetricsresponsePropertiesSeriesItemsPropertiesDataItems,
   "WafMetricsResponseSeriesItemData",
   "java"
