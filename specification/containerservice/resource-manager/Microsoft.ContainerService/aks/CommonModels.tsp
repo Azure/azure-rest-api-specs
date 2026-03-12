@@ -3484,7 +3484,7 @@ model ManagedClusterIngressProfile {
   applicationLoadBalancer?: ManagedClusterIngressProfileApplicationLoadBalancer;
 }
 
-/** Configuration for the ingress managed gateway. See https://aka.ms/k8s-gateway-api for more details. */
+/** Settings for the managed Gateway API installation. See https://aka.ms/k8s-gateway-api for more details. */
 @added(Versions.v2026_02_01)
 model ManagedClusterIngressProfileGatewayConfiguration {
   /**
