@@ -36,3 +36,8 @@ using Azure.ClientGenerator.Core;
   "SubscriptionOperation",
   "java"
 );
+
+@@clientName(Microsoft.Subscription.ServiceTenantResponse,
+  "TenantIdDescription",
+  "java"
+);
