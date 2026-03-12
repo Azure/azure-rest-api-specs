@@ -28,8 +28,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.ResourceGraph")
 @service(#{ title: "ARG Query Generation" })
 @versioned(Versions)
-// FIXME: Common type version not set. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace ResourceCopilot;
 
 /**
