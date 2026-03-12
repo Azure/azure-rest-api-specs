@@ -113,12 +113,24 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "rust"
 );
 
-@@clientNamespace(Storage.Blob, "Azure.Storage.Blobs", "!csharp");
-@@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs", "!csharp");
-@@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs", "!csharp");
-@@clientNamespace(Storage.Blob.AppendBlob, "Azure.Storage.Blobs", "!csharp");
-@@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs", "!csharp");
-@@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs", "!csharp");
+@@clientNamespace(Storage.Blob, "Azure.Storage.Blobs", "!csharp, !python");
+@@clientNamespace(Storage.Blob.Container,
+  "Azure.Storage.Blobs",
+  "!csharp, !python"
+);
+@@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs", "!csharp, !python");
+@@clientNamespace(Storage.Blob.AppendBlob,
+  "Azure.Storage.Blobs",
+  "!csharp, !python"
+);
+@@clientNamespace(Storage.Blob.BlockBlob,
+  "Azure.Storage.Blobs",
+  "!csharp, !python"
+);
+@@clientNamespace(Storage.Blob.PageBlob,
+  "Azure.Storage.Blobs",
+  "!csharp, !python"
+);
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
