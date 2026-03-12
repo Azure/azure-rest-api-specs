@@ -275,7 +275,7 @@ union HostedAgentType {
 @doc("Container-based deployment configuration for a hosted agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
 )
 model ContainerConfiguration {
   @doc("The container image for the hosted agent.")
