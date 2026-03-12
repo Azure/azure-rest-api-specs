@@ -37,8 +37,8 @@ Classify every request into exactly one of the two types below before proceeding
 
 | Type                  | Description                                                       | Examples                                               |
 | --------------------- | ----------------------------------------------------------------- | ------------------------------------------------------ |
-| **API Version Evolution (ARM only)** | Adding a new preview or stable API version to an existing ARM service. Data-plane API version evolution is not fully supported yet. | "add new preview version", "promote preview to stable" |
-| **General Authoring** | Any other TypeSpec authoring task that modifies `.tsp` files      | "add a resource", "add CRUD operations", "add LRO", "add a property with versioning decorator" |
+| **API Version Evolution (ARM only)** | Adding a new preview or stable API version to an existing ARM service. Data-plane API version evolution is not fully supported yet. | "Add a new preview API version 2026-01-01-preview for widget resource manager" |
+| **General Authoring** | Any other TypeSpec authoring task that modifies `.tsp` files      | "Add an ARM resource named Asset with CRUD operations" |
 
 ## Steps
 
