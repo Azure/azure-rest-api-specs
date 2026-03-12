@@ -38,14 +38,9 @@ These settings apply only when `--tag=package-preview-2026-02` is specified on t
 input-file:
   - Microsoft.ResourceIntelligence/preview/2026-02-01-preview/resourceintelligence.json
 suppressions:
-  - code: ProvisioningStateMustBeReadOnly
-    from: resourceintelligence.json
-    reason: "False positive. All provisioningState properties are marked as readOnly in their definitions."
   - code: PathForNestedResource
     from: resourceintelligence.json
     reason: "The /runs/latest endpoint is a custom singleton-like route for retrieving the latest run for an agent."
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    reason: "The generatequery API from the 2025-08-01-preview version is superseded by the new 2026-02-01-preview API."
   - code: AvoidAdditionalProperties
     from: resourceintelligence.json
     reason: "The inputOverrides property requires a flexible key-value dictionary structure for passing runtime overrides, matching the previous API version."
