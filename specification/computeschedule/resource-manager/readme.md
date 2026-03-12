@@ -114,6 +114,15 @@ These settings apply only when `--tag=package-2026-03-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-03-01-preview'
 input-file:
   - Microsoft.ComputeSchedule/preview/2026-03-01-preview/computeschedule.json
+suppressions:  
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.item
 ```
 
 ---
