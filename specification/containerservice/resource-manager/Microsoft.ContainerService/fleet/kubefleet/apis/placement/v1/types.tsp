@@ -1,10 +1,8 @@
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "../../../../k8s.io/api/core/v1/types.tsp";
 import "../../../../k8s.io/apimachinery/apis/meta/v1/types.tsp";
 
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 using Core.V1;
 using Meta.V1;
 using Azure.ResourceManager;
@@ -48,9 +46,7 @@ model StageConfig {
   @doc("LabelSelector is a label query over all the joined member clusters. Clusters matching the query are selected for this stage. There cannot be overlapping clusters between stages when the update run is created. If the label selector is empty, the stage includes all the selected clusters. If the label selector is nil, the stage does not include any selected clusters.")
   labelSelector?: LabelSelector;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark this property with @secret if the contents should be kept private."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME:  If this is a real secret, mark with @secret"
-  @OpenAPI.extension("x-ms-secret", false)
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This property contains a label key identifier for sorting clusters, not sensitive data"
   @doc("The label key used to sort the selected clusters. The clusters within the stage are updated sequentially following the rule below: 1) Ascending order based on the value of the label key, interpreted as integers if present. 2) Ascending order based on the name of the cluster if the label key is absent or the label value is the same.")
   sortingLabelKey?: string;
 
