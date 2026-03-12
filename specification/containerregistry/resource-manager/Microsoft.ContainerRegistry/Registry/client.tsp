@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Microsoft.ContainerRegistry;
 
 @@clientName(Microsoft.ContainerRegistry,
@@ -35,3 +36,7 @@ using Microsoft.ContainerRegistry;
 @@clientName(LoginServerProperties, "ConnectedRegistryLoginServer", "csharp");
 @@clientName(LoggingProperties, "ConnectedRegistryLogging", "csharp");
 @@clientName(StatusDetailProperties, "ConnectedRegistryStatusDetail", "csharp");
+@@clientName(ImportSource, "ContainerRegistryImportSource", "csharp");
+
+// C# type correctness: match API surface before migration to Typespec (Guid? CorrelationId)
+@@alternateType(StatusDetailProperties.correlationId, uuid, "csharp");
