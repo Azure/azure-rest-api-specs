@@ -51,7 +51,7 @@ describe("execNpm", () => {
     let result = await execNpm(["prefix"], { ...options, cwd: __dirname });
     expect(result.stdout.trim()).toEqual(resolve(__dirname, ".."));
 
-    // With the "--prefix" option set to this dir, returns this dir
+    // with the "--prefix" option set to this dir, returns this dir
     result = await execNpm(["prefix"], { ...options, cwd: __dirname, prefix: __dirname });
     expect(result.stdout.trim()).toEqual(__dirname);
   });
