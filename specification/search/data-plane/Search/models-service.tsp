@@ -1675,6 +1675,80 @@ union EntityCategory {
   Email: "email",
 }
 
+/** The language codes supported for input text by EntityRecognitionSkill. */
+union EntityRecognitionSkillLanguage {
+  string,
+
+  /** Arabic */
+  ar: "ar",
+
+  /** Czech */
+  cs: "cs",
+
+  /** Chinese-Simplified */
+  `zh-Hans`: "zh-Hans",
+
+  /** Chinese-Traditional */
+  `zh-Hant`: "zh-Hant",
+
+  /** Danish */
+  da: "da",
+
+  /** Dutch */
+  nl: "nl",
+
+  /** English */
+  en: "en",
+
+  /** Finnish */
+  fi: "fi",
+
+  /** French */
+  fr: "fr",
+
+  /** German */
+  de: "de",
+
+  /** Greek */
+  el: "el",
+
+  /** Hungarian */
+  hu: "hu",
+
+  /** Italian */
+  it: "it",
+
+  /** Japanese */
+  ja: "ja",
+
+  /** Korean */
+  ko: "ko",
+
+  /** Norwegian (Bokmaal) */
+  no: "no",
+
+  /** Polish */
+  pl: "pl",
+
+  /** Portuguese (Portugal) */
+  `pt-PT`: "pt-PT",
+
+  /** Portuguese (Brazil) */
+  `pt-BR`: "pt-BR",
+
+  /** Russian */
+  ru: "ru",
+
+  /** Spanish */
+  es: "es",
+
+  /** Swedish */
+  sv: "sv",
+
+  /** Turkish */
+  tr: "tr",
+}
+
 /** A string indicating what maskingMode to use to mask the personal information detected in the input text. */
 union PIIDetectionSkillMaskingMode {
   string,
@@ -1684,6 +1758,56 @@ union PIIDetectionSkillMaskingMode {
 
   /** Replaces the detected entities with the character given in the maskingCharacter parameter. The character will be repeated to the length of the detected entity so that the offsets will correctly correspond to both the input text as well as the output maskedText. */
   Replace: "replace",
+}
+
+/** The language codes supported for input text by SentimentSkill. */
+union SentimentSkillLanguage {
+  string,
+
+  /** Danish */
+  da: "da",
+
+  /** Dutch */
+  nl: "nl",
+
+  /** English */
+  en: "en",
+
+  /** Finnish */
+  fi: "fi",
+
+  /** French */
+  fr: "fr",
+
+  /** German */
+  de: "de",
+
+  /** Greek */
+  el: "el",
+
+  /** Italian */
+  it: "it",
+
+  /** Norwegian (Bokmaal) */
+  no: "no",
+
+  /** Polish */
+  pl: "pl",
+
+  /** Portuguese (Portugal) */
+  `pt-PT`: "pt-PT",
+
+  /** Russian */
+  ru: "ru",
+
+  /** Spanish */
+  es: "es",
+
+  /** Swedish */
+  sv: "sv",
+
+  /** Turkish */
+  tr: "tr",
 }
 
 /** The language codes supported for input text by SplitSkill. */
@@ -5967,7 +6091,7 @@ model MergeSkill extends SearchIndexerSkill {
 model SentimentSkillV3 extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  defaultLanguageCode?: string | null;
+  defaultLanguageCode?: SentimentSkillLanguage | null;
 
   /** If set to true, the skill output will include information from Text Analytics for opinion mining, namely targets (nouns or verbs) and their associated assessment (adjective) in the text. Default is false. */
   includeOpinionMining?: boolean = false;
@@ -6004,11 +6128,11 @@ model EntityLinkingSkill extends SearchIndexerSkill {
 /** Using the Text Analytics API, extracts entities of different types from text. */
 model EntityRecognitionSkillV3 extends SearchIndexerSkill {
   /** A list of entity categories that should be extracted. */
-  categories?: string[];
+  categories?: EntityCategory[];
 
   /** A value indicating which language code to use. Default is `en`. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  defaultLanguageCode?: string | null;
+  defaultLanguageCode?: EntityRecognitionSkillLanguage | null;
 
   /** A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included. */
   @minValue(0)
