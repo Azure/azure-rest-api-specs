@@ -1323,14 +1323,14 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualRouterPeering.properties);
 
-@@clientLocation(VirtualWANS.get, "VirtualWans");
-@@clientLocation(VirtualWANS.createOrUpdate, "VirtualWans");
+@@clientLocation(VirtualWANS.get, "VirtualWans", "!javascript");
+@@clientLocation(VirtualWANS.createOrUpdate, "VirtualWans", "!javascript");
 @@clientName(VirtualWANS.createOrUpdate::parameters.resource, "WANParameters");
-@@clientLocation(VirtualWANS.updateTags, "VirtualWans");
+@@clientLocation(VirtualWANS.updateTags, "VirtualWans", "!javascript");
 @@clientName(VirtualWANS.updateTags::parameters.properties, "WANParameters");
-@@clientLocation(VirtualWANS.delete, "VirtualWans");
-@@clientLocation(VirtualWANS.listByResourceGroup, "VirtualWans");
-@@clientLocation(VirtualWANS.list, "VirtualWans");
+@@clientLocation(VirtualWANS.delete, "VirtualWans", "!javascript");
+@@clientLocation(VirtualWANS.listByResourceGroup, "VirtualWans", "!javascript");
+@@clientLocation(VirtualWANS.list, "VirtualWans", "!javascript");
 @@clientLocation(VirtualWANS.supportedSecurityProviders, "");
 @@clientLocation(VirtualWANS.generatevirtualwanvpnserverconfigurationvpnprofile,
   ""
