@@ -18,7 +18,7 @@ namespace GraphQuery;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.TrackedResourceWithOptionalLocation to make location property optional for backward compatibility"
 model GraphQueryResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GraphQueryProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GraphQueryProperties> {  
   ...ResourceNameParameter<
     Resource = GraphQueryResource,
     KeyName = "resourceName",
@@ -51,9 +51,10 @@ interface GraphQuery {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("GraphQuery_CreateOrUpdate")
+  @Versioning.returnTypeChangedFrom(Versions.v2019_04_01, ArmResourceUpdatedResponse<GraphQueryResource> | GraphQueryError)
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GraphQueryResource,
-    Response = ArmResourceUpdatedResponse<GraphQueryResource>,
+    Response = ArmResourceUpdatedResponse<GraphQueryResource> | ArmResourceCreatedSyncResponse<GraphQueryResource>,
     Error = GraphQueryError
   >;
 

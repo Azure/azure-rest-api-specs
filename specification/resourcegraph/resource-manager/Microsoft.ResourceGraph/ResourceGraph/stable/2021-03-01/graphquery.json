@@ -73,6 +73,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get a list of Graph Queries in entire subscription": {
+            "$ref": "./examples/GraphQueryListBySubscription.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -113,9 +118,6 @@
         "x-ms-examples": {
           "Get a list of Graph Queries": {
             "$ref": "./examples/GraphQueryList.json"
-          },
-          "Get a list of Graph Queries in entire subscription": {
-            "$ref": "./examples/GraphQueryListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -206,6 +208,12 @@
         "responses": {
           "200": {
             "description": "Resource 'GraphQueryResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GraphQueryResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'GraphQueryResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/GraphQueryResource"
             }
