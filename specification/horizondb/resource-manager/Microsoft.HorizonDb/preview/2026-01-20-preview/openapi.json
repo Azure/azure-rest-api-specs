@@ -2111,7 +2111,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroupConnectionsProperties"
+              "$ref": "#/definitions/ConnectionInfoListResult"
             }
           },
           "default": {
@@ -2125,6 +2125,9 @@
           "List connections for a HorizonDb parameter group": {
             "$ref": "./examples/ParameterGroups_ListConnections.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2203,6 +2206,27 @@
           "description": "The type of the resource"
         }
       }
+    },
+    "ConnectionInfoListResult": {
+      "type": "object",
+      "description": "The response of a ConnectionInfo list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectionInfo items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectionInfo"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "CreateModeCluster": {
       "type": "string",
@@ -2598,31 +2622,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
-      ]
-    },
-    "HorizonDbParameterGroupConnectionsProperties": {
-      "type": "object",
-      "description": "Properties for parameter group connections",
-      "properties": {
-        "clusters": {
-          "type": "array",
-          "description": "Connected clusters and pools",
-          "items": {
-            "$ref": "#/definitions/ConnectionInfo"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "id"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of results.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "clusters"
       ]
     },
     "HorizonDbParameterGroupForPatchUpdate": {

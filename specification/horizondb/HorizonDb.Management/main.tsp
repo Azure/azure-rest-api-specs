@@ -273,7 +273,7 @@ interface HorizonDbParameterGroups {
   listConnections is ArmResourceActionSync<
     HorizonDbParameterGroup,
     void,
-    ArmResponse<HorizonDbParameterGroupConnectionsProperties>
+    ArmResponse<Azure.ResourceManager.ResourceListResult<ConnectionInfo>>
   >;
 
   @doc("Lists parameter groups filtered by version number")
