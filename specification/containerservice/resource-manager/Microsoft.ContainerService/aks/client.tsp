@@ -1000,6 +1000,37 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "csharp"
 );
 @@clientName(VmSkusOperationGroup.list, "GetVmSkus", "csharp");
+@@clientName(MachineHardwareProfile,
+  "ContainerServiceMachineHardwareProfile",
+  "csharp"
+);
+@@clientName(MachineKubernetesProfile,
+  "ContainerServiceMachineKubernetesProfile",
+  "csharp"
+);
+@@clientName(MachineNetworkProperties,
+  "ContainerServiceMachineNetworkProperties",
+  "csharp"
+);
+@@clientName(MachineOSProfile, "ContainerServiceMachineOSProfile", "csharp");
+@@clientName(MachineOSProfileLinuxProfile,
+  "ContainerServiceMachineLinuxProfile",
+  "csharp"
+);
+@@clientName(MachineSecurityProfile,
+  "ContainerServiceMachineSecurityProfile",
+  "csharp"
+);
+@@clientName(MachineStatus, "ContainerServiceMachineStatus", "csharp");
+@@clientName(AutoScaleProfile, "AgentPoolAutoScaleProfile", "csharp");
+@@clientName(NetworkProfileForSnapshot,
+  "ManagedClusterSnapshotNetworkProfile",
+  "csharp"
+);
+@@clientName(ManagedClusterPropertiesForSnapshot,
+  "ManagedClusterSnapshotInfo",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
 @@markAsPageable(PrivateEndpointConnections.list, "csharp");
