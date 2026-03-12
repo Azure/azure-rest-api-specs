@@ -84,7 +84,6 @@ using Microsoft.DataProtection;
 @@scope(BackupVaultResources.exportJobsOperationResultGet, "!csharp");
 @@scope(Operations.list, "!csharp");
 @@scope(BackupVaultOperationResults.get, "!csharp");
-@@scope(BackupVaultOperationResults.getInResourceGroup, "!csharp");
 @@scope(OperationStatusResourceGroupContextOperationGroup.get, "!csharp");
 @@scope(BackupVaultResources.operationStatusBackupVaultContextGet, "!csharp");
 @@scope(OperationStatusOperationGroup.get, "!csharp");
@@ -138,8 +137,16 @@ using Microsoft.DataProtection;
   utcDateTime,
   "csharp"
 );
+@@usage(AzureBackupFindRestorableTimeRangesResponse,
+  Usage.input | Usage.output,
+  "csharp"
+);
 @@clientName(AzureBackupFindRestorableTimeRangesResponse,
   "BackupFindRestorableTimeRangeResultProperties",
+  "csharp"
+);
+@@usage(AzureBackupFindRestorableTimeRangesResponseResource,
+  Usage.input | Usage.output,
   "csharp"
 );
 @@clientName(AzureBackupFindRestorableTimeRangesResponseResource,
@@ -331,9 +338,12 @@ using Microsoft.DataProtection;
   "DeletedDataProtectionBackupInstance",
   "csharp"
 );
+@@usage(DeletedBackupInstanceResource, Usage.input | Usage.output, "csharp");
 @@clientName(DeleteOption, "DataProtectionBackupDeleteSetting", "csharp");
 @@alternateType(DeleteOption.duration, duration, "csharp");
 @@clientName(DeletionInfo, "BackupInstanceDeletionInfo", "csharp");
+@@clientName(DeletionInfo.deleteActivityID, "DeleteActivityId", "csharp");
+@@clientName(DeletionInfo.deletionTime, "DeletedOn", "csharp");
 @@alternateType(DeletionInfo.billingEndDate, utcDateTime, "csharp");
 @@alternateType(DeletionInfo.deletionTime, utcDateTime, "csharp");
 @@alternateType(DeletionInfo.scheduledPurgeTime, utcDateTime, "csharp");
@@ -386,6 +396,7 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(JobExtendedInfo, "BackupJobExtendedInfo", "csharp");
+@@usage(JobSubTask, Usage.input | Usage.output, "csharp");
 @@clientName(JobSubTask, "BackupJobSubTask", "csharp");
 @@clientName(KubernetesClusterBackupDatasourceParameters,
   "KubernetesClusterBackupDataSourceSettings",
@@ -425,6 +436,7 @@ using Microsoft.DataProtection;
   "BackupDataSourceParametersList",
   "csharp"
 );
+@@usage(ProtectionStatusDetails, Usage.input | Usage.output, "csharp");
 @@clientName(ProtectionStatusDetails,
   "BackupInstanceProtectionStatusDetails",
   "csharp"
@@ -516,6 +528,7 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(SecretStoreResource, "SecretStoreResourceInfo", "csharp");
+@@alternateType(SecretStoreResource.uri, url, "csharp");
 @@clientName(SecureScoreLevel, "BackupVaultSecureScoreLevel", "csharp");
 @@clientName(SecuritySettings, "BackupVaultSecuritySettings", "csharp");
 @@clientName(SoftDeleteSettings, "BackupVaultSoftDeleteSettings", "csharp");
@@ -697,6 +710,63 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(BackupVaultResources.trigger, "TriggerExportJob", "csharp");
+@@clientName(DeletedBackupVaultResource,
+  "DataProtectionDeletedBackupVault",
+  "csharp"
+);
+@@clientName(DeletedBackupVault,
+  "DataProtectionDeletedBackupVaultProperties",
+  "csharp"
+);
+@@clientName(ResourceGuards.getDefaultDeleteResourceGuardProxyRequestsObject,
+  "GetDeleteResourceGuardProxyObject",
+  "csharp"
+);
+@@clientName(ResourceGuards.getDeleteResourceGuardProxyRequestsObjects,
+  "GetDeleteResourceGuardProxyObjects",
+  "csharp"
+);
+@@clientName(DppBaseResourceOperationGroup.getDefaultDisableSoftDeleteRequestsObject,
+  "GetDisableSoftDeleteObject",
+  "csharp"
+);
+@@clientName(DppBaseResourceOperationGroup.getDisableSoftDeleteRequestsObjects,
+  "GetDisableSoftDeleteObjects",
+  "csharp"
+);
+@@clientName(DppBaseResourceOperationGroup.getDefaultUpdateProtectedItemRequestsObject,
+  "GetUpdateProtectedItemObject",
+  "csharp"
+);
+@@clientName(DppBaseResourceOperationGroup.getUpdateProtectedItemRequestsObjects,
+  "GetUpdateProtectedItemObjects",
+  "csharp"
+);
+@@clientName(DppBaseResourceOperationGroup.getDefaultUpdateProtectionPolicyRequestsObject,
+  "GetUpdateProtectionPolicyObject",
+  "csharp"
+);
+@@clientName(DppBaseResourceOperationGroup.getUpdateProtectionPolicyRequestsObjects,
+  "GetUpdateProtectionPolicyObjects",
+  "csharp"
+);
+@@clientName(DppBaseResourceOperationGroup.getDefaultDeleteProtectedItemRequestsObject,
+  "GetDeleteProtectedItemObject",
+  "csharp"
+);
+@@clientName(DppBaseResourceOperationGroup.getDeleteProtectedItemRequestsObjects,
+  "GetDeleteProtectedItemObjects",
+  "csharp"
+);
+@@clientName(DppBaseResourceOperationGroup.getDefaultBackupSecurityPINRequestsObject,
+  "GetBackupSecurityPinObject",
+  "csharp"
+);
+@@clientName(DppBaseResourceOperationGroup.getBackupSecurityPINRequestsObjects,
+  "GetBackupSecurityPinObjects",
+  "csharp"
+);
+@@usage(UserFacingWarningDetail, Usage.input | Usage.output, "csharp");
 
 // Fix ResourceGuard operation names to match old API surface
 @@clientName(ResourceGuardResources.patch, "Update", "csharp");
