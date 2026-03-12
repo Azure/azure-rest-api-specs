@@ -64,6 +64,31 @@ namespace Azure.AI.Projects {
     "OAuthConsentRequestResponseItem"
   );
   @@clientName(OpenAI.OutputItemType, "AgentResponseItemKind");
+  @@usage(OpenAI.OutputItemType, Usage.output | Usage.json | Usage.input);
+
+  // --------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------
+  // LocalShellToolCallOutputStatus - named union to replace inline union
+  // --------------------------------------------------------------------------------
+
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Matching OpenAI spec"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Matching OpenAI spec"
+  union LocalShellToolCallOutputStatus {
+    in_progress: "in_progress",
+    completed: "completed",
+    incomplete: "incomplete",
+    null,
+  }
+
+  // Use alternateType to replace the inline union with our named union for SDK generation
+  @@alternateType(OpenAI.LocalShellToolCallOutput.status,
+    LocalShellToolCallOutputStatus
+  );
+
+  // Rename and include in typegraph
+  @@clientName(LocalShellToolCallOutputStatus,
+    "ItemLocalShellToolCallOutputStatus"
+  );
 
   // --------------------------------------------------------------------------------
   // Renames and visibility changes for targeted suppressions
@@ -342,4 +367,6 @@ namespace Azure.AI.Projects {
 
   @@usage(ApiError, Usage.output);
   @@access(ApiError, Access.public);
+
+  @@usage(StructuredOutputsOutputItem, Usage.input | Usage.output);
 }
