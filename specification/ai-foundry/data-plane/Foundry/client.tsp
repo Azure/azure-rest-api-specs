@@ -40,8 +40,6 @@ using Azure.AI.Projects;
 // To fix circular dependency in Python, remaining OpenAI types are emitted as Azure.AI.Projects
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
 
-
-
 // --------------------------------------------------------------------------------
 // Agents sub‐client
 // --------------------------------------------------------------------------------
