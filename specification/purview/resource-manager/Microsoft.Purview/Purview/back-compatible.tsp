@@ -6,12 +6,6 @@ using Microsoft.Purview;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AccountUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(Operation.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(Consent.properties);
-
 @@clientName(Accounts.createOrUpdate::parameters.resource, "account");
 @@clientName(Accounts.update::parameters.properties, "accountUpdateParameters");
 @@clientName(Accounts.addRootCollectionAdmin::parameters.body,

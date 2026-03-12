@@ -13,9 +13,8 @@ namespace Microsoft.Purview;
 /**
  * Account resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Account
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<AccountProperties> {
+  is Azure.ResourceManager.TrackedResource<AccountProperties> {
   ...ResourceNameParameter<
     Resource = Account,
     KeyName = "accountName",

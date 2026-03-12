@@ -32,7 +32,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "PurviewManagementClient" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.Purview;
 
 /**
@@ -45,11 +45,7 @@ enum Versions {
   v2024_04_01_preview: "2024-04-01-preview",
 }
 
-interface Operations
-  extends Azure.ResourceManager.Legacy.Operations<
-      ArmResponse<OperationList>,
-      ErrorResponseModel
-    > {}
+interface Operations extends Azure.ResourceManager.Operations {}
 
 @@doc(Operations.list, "List of available operations");
 @@summary(Operations.list, "Lists the available operations");
