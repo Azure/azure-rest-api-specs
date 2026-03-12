@@ -1604,7 +1604,7 @@ alias AllowTrailingDotParameter = {
 alias SourceAllowTrailingDotParameter = {
   /** If true, the trailing dot will not be trimmed from the source URI. */
   @header("x-ms-source-allow-trailing-dot")
-  sourceAllowTrailingDot?: boolean;
+  allowSourceTrailingDot?: boolean;
 };
 
 /** Share snapshot parameter. */
