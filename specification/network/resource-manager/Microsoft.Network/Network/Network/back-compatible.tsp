@@ -1323,30 +1323,21 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualRouterPeering.properties);
 
-@@clientLocation(VirtualWANS.get, "VirtualWans");
-@@clientLocation(VirtualWANS.createOrUpdate, "VirtualWans");
-@@clientName(VirtualWANS.createOrUpdate::parameters.resource, "WANParameters");
-@@clientLocation(VirtualWANS.updateTags, "VirtualWans");
-@@clientName(VirtualWANS.updateTags::parameters.properties, "WANParameters");
-@@clientLocation(VirtualWANS.delete, "VirtualWans");
-@@clientLocation(VirtualWANS.listByResourceGroup, "VirtualWans");
-@@clientLocation(VirtualWANS.list, "VirtualWans");
-@@clientLocation(VirtualWANS.supportedSecurityProviders, "");
-@@clientLocation(VirtualWANS.generatevirtualwanvpnserverconfigurationvpnprofile,
-  ""
-);
-@@clientName(VirtualWANS.generatevirtualwanvpnserverconfigurationvpnprofile,
+@@clientName(VirtualWans.createOrUpdate::parameters.resource, "WANParameters");
+@@clientName(VirtualWans.updateTags::parameters.properties, "WANParameters");
+
+@@clientName(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
   "generatevirtualwanvpnserverconfigurationvpnprofile"
 );
-@@clientName(VirtualWANS.generatevirtualwanvpnserverconfigurationvpnprofile::parameters.body,
+@@clientName(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile::parameters.body,
   "vpnClientParams"
 );
-@@clientLocation(VirtualWANS.download, "VpnSitesConfiguration");
-@@clientName(VirtualWANS.download::parameters.body, "request");
-@@clientLocation(VirtualWANS.vpnServerConfigurationsAssociatedWithVirtualWanList,
+@@clientLocation(VirtualWans.download, "VpnSitesConfiguration");
+@@clientName(VirtualWans.download::parameters.body, "request");
+@@clientLocation(VirtualWans.vpnServerConfigurationsAssociatedWithVirtualWanList,
   "VpnServerConfigurationsAssociatedWithVirtualWan"
 );
-@@clientName(VirtualWANS.vpnServerConfigurationsAssociatedWithVirtualWanList,
+@@clientName(VirtualWans.vpnServerConfigurationsAssociatedWithVirtualWanList,
   "List"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
