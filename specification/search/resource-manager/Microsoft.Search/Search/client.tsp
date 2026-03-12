@@ -755,7 +755,10 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   "!java,!python,!javascript"
 );
 
-@@clientName(Microsoft.Search, "SearchManagementClient", "python, javascript");
+@@clientName(Microsoft.Search,
+  "SearchManagementClient",
+  "python,javascript,java"
+);
 
 @@clientName(servicesCheckNameAvailabilityCustomization::parameters.params,
   "searchManagementRequestOptions",
