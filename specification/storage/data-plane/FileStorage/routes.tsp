@@ -967,6 +967,7 @@ interface File {
       ...FileSmtPropertyRequestHeaders;
       ...FilePermissionFormatParameter;
       ...LeaseIdOptionalParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
       ...NfsRequestHeaders;
 
@@ -1017,6 +1018,7 @@ interface File {
       @header("x-ms-range-get-content-md5") getContentMd5?: boolean;
 
       ...LeaseIdOptionalParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
 
       /** Optional. Used for structured get operations. */
@@ -1074,6 +1076,7 @@ interface File {
 
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
     },
     {
@@ -1115,6 +1118,7 @@ interface File {
     {
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
     },
     {
