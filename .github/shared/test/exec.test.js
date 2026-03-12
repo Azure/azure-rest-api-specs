@@ -1,3 +1,4 @@
+import os from "os";
 import semver from "semver";
 import { describe, expect, it } from "vitest";
 import { execFile, execNpm, execNpmExec, isExecError } from "../src/exec.js";
@@ -40,6 +41,12 @@ describe("execNpm", () => {
       stdout: /** @type {unknown} */ (expect.toSatisfy((v) => semver.valid(String(v)) !== null)),
       stderr: "",
     });
+  });
+
+  it("succeeds with --prefix", async () => {
+    const temp = os.tmpdir();
+    const result = await execNpm(["prefix"], { ...options, prefix: temp });
+    expect(result.stdout.trim()).toEqual(temp);
   });
 
   it("fails with --help", async () => {
