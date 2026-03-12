@@ -13,8 +13,7 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    package-name: "Azure.ResourceManager.TrafficManager"
-    namespace: "{package-name}"
+    namespace: "Azure.ResourceManager.TrafficManager"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-trafficmanager"
     namespace: "azure.mgmt.trafficmanager"
@@ -26,7 +25,8 @@ options:
     namespace: "com.azure.resourcemanager.trafficmanager"
     service-name: "TrafficManager"
     premium: true
-    enable-sync-stack: true
+    generate-tests: false
+    enable-sync-stack: false
     client-side-validations: true
     rename-model:
       EndpointType: EndpointTypes
