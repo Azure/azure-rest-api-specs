@@ -58,7 +58,7 @@ alias VirtualWanOps = Azure.ResourceManager.Legacy.LegacyOperations<
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 @armResourceOperations(#{ omitTags: true })
-interface VirtualWANS {
+interface VirtualWans {
   /**
    * Retrieves the details of a VirtualWAN.
    */
@@ -166,15 +166,15 @@ interface VirtualWANS {
 
 @@doc(VirtualWAN.name, "The name of the VirtualWAN being retrieved.");
 @@doc(VirtualWAN.properties, "Properties of the virtual WAN.");
-@@doc(VirtualWANS.createOrUpdate::parameters.resource,
+@@doc(VirtualWans.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update VirtualWAN."
 );
-@@doc(VirtualWANS.updateTags::parameters.properties,
+@@doc(VirtualWans.updateTags::parameters.properties,
   "Parameters supplied to Update VirtualWAN tags."
 );
-@@doc(VirtualWANS.generatevirtualwanvpnserverconfigurationvpnprofile::parameters.body,
+@@doc(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile::parameters.body,
   "Parameters supplied to the generate VirtualWan VPN profile generation operation."
 );
-@@doc(VirtualWANS.download::parameters.body,
+@@doc(VirtualWans.download::parameters.body,
   "Parameters supplied to download vpn-sites configuration."
 );
