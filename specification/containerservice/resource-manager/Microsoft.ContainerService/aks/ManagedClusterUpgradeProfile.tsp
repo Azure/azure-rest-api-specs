@@ -96,7 +96,7 @@ model ManagedClusterPoolUpgradeProfile {
   /**
    * List of components grouped by kubernetes major.minor version.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   @identifiers(#[])
   componentsByReleases?: ComponentsByRelease[];
 }
@@ -116,6 +116,6 @@ model ManagedClusterPoolUpgradeProfileUpgradesItem {
   /**
    * Whether the Kubernetes version is out of support.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   isOutOfSupport?: boolean;
 }

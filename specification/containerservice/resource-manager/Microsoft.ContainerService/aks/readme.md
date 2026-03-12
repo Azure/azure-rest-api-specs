@@ -34,7 +34,25 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-10
+tag: package-2026-01
+```
+
+### Tag: package-2026-01
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-01'
+input-file:
+  - stable/2026-01-01/managedClusters.json
+```
+
+### Tag: package-preview-2026-01
+
+These settings apply only when `--tag=package-preview-2026-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2026-01'
+input-file:
+  - preview/2026-01-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2025-10
@@ -1442,4 +1460,8 @@ directive:
     from: managedClusters.json
     where: $.definitions.LocalDNSOverrides
     reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.VmSkusListResult
+    reason: The List VM Skus API is a proxy for the Compute Resource Skus API. Defining a GET endpoint that follows the SKU contract (which in turn does not follow the standard ARM resource model) is allowed as previously discussed in an ARM API review email thread. (tilovell@microsoft.com, suhasrao@microsoft.com)
 ```
