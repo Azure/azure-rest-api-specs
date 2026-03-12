@@ -3,6 +3,20 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SubscriptionIdClientOptions {
+  /**
+   * The subscription Id.
+   */
+  subscriptionId: string;
+}
+
+@@clientInitialization(Microsoft.Subscription,
+  {
+    parameters: SubscriptionIdClientOptions,
+  }
+);
+
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
 
 @@clientName(Microsoft.Subscription.SubscriptionAliasResponse,
