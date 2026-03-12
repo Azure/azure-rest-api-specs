@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ConfidentialLedger;
 /**
@@ -86,14 +88,19 @@ interface ConfidentialLedgers {
   >;
 
   /**
-   * Backs up a Confidential Ledger Resource.
+   * Copies the ledger files and the service certificate to a customer's storage account of choice.
    */
-  backup is ArmResourceActionAsync<
+  @renamedFrom(Versions.v2026_02_23, "backup")
+  filesExport is ArmResourceActionAsync<
     ConfidentialLedger,
-    ConfidentialLedgerBackup,
-    ConfidentialLedgerBackupResponse
+    ConfidentialLedgerFilesExport,
+    ConfidentialLedgerFilesExportResponse
   >;
+}
 
+@removed(Versions.v2026_02_23)
+@armResourceOperations
+interface ConfidentialLedgerRestoreOps {
   /**
    * Restores a Confidential Ledger Resource.
    */
@@ -114,9 +121,9 @@ interface ConfidentialLedgers {
 @@doc(ConfidentialLedgers.update::parameters.properties,
   "Confidential Ledger request body for Updating Ledger"
 );
-@@doc(ConfidentialLedgers.backup::parameters.body,
-  "Confidential Ledger Backup Request Body"
+@@doc(ConfidentialLedgers.filesExport::parameters.body,
+  "Confidential Ledger Files Export Request Body"
 );
-@@doc(ConfidentialLedgers.restore::parameters.body,
+@@doc(ConfidentialLedgerRestoreOps.restore::parameters.body,
   "Confidential Ledger Restore Request Body"
 );
