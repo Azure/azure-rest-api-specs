@@ -47,6 +47,11 @@ suppressions:
   - code: PutRequestResponseSchemeArm
     from: resourceintelligence.json
     reason: "The Runs_CreateOrUpdate PUT operation intentionally uses RunRequest as the request body per API design review, while returning the Run resource in the response."
+  - code: PutResponseCodes
+    from: resourceintelligence.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}"].put
+    reason: "Per API review: Agent PUT is a synchronous tracked resource operation that returns 200 only."
   - code: PostResponseCodes
     from: resourceintelligence.json
     where:

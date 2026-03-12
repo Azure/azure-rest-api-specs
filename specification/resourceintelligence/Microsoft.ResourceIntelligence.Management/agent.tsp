@@ -76,7 +76,13 @@ interface Agents {
   /**
    * Creates or updates an agent.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Agent>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Per API review: Agent PUT is a synchronous tracked resource operation that returns 200 only."
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    Agent,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Agent>,
+    {},
+    ArmResponse<Agent>
+  >;
 
   /**
    * Updates an agent.
