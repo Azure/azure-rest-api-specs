@@ -1,0 +1,42 @@
+{
+  "operationId": "Containers_Get",
+  "title": "Get a Container",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-01-01-preview",
+    "accountName": "testaccount",
+    "containerName": "gpt4-prompts"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.PromptService/accounts/testaccount/containers/gpt4-prompts",
+        "name": "gpt4-prompts",
+        "type": "Microsoft.PromptService/accounts/containers",
+        "properties": {
+          "description": "Container for GPT-4 prompt caching",
+          "modelName": "gpt-4",
+          "provider": "OpenAI",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-01T00:00:00Z"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "Container gpt4-prompts not found"
+        }
+      }
+    }
+  }
+}

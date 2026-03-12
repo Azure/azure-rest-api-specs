@@ -1,0 +1,26 @@
+{
+  "operationId": "Accounts_Delete",
+  "title": "Delete a Prompt Service Account",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-01-01-preview",
+    "accountName": "testaccount"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.PromptService/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-01-01-preview"
+      }
+    },
+    "204": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "Resource testaccount not found"
+        }
+      }
+    }
+  }
+}

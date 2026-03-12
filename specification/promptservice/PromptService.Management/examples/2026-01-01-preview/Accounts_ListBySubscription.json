@@ -1,0 +1,51 @@
+{
+  "operationId": "Accounts_ListBySubscription",
+  "title": "List Prompt Service Accounts by Subscription",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.PromptService/accounts/testaccount",
+            "name": "testaccount",
+            "type": "Microsoft.PromptService/accounts",
+            "location": "eastus",
+            "tags": {
+              "environment": "test"
+            },
+            "properties": {
+              "accountKind": "Regional",
+              "description": "Test prompt service account",
+              "encryptionSettings": {
+                "keyName": "myEncryptionKey",
+                "keyVaultUri": "https://mykeyvault.vault.azure.net"
+              },
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2026-01-01T00:00:00Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-01-01T00:00:00Z"
+            }
+          }
+        ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An unexpected error occurred"
+        }
+      }
+    }
+  }
+}

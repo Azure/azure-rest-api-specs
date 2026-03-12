@@ -1,0 +1,91 @@
+{
+  "operationId": "Accounts_CreateOrUpdate",
+  "title": "Create a Prompt Service Account",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-01-01-preview",
+    "accountName": "testaccount",
+    "resource": {
+      "location": "eastus",
+      "tags": {
+        "environment": "test"
+      },
+      "properties": {
+        "accountKind": "Regional",
+        "description": "Test prompt service account",
+        "encryptionSettings": {
+          "keyName": "myEncryptionKey",
+          "keyVaultUri": "https://mykeyvault.vault.azure.net"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.PromptService/accounts/testaccount",
+        "name": "testaccount",
+        "type": "Microsoft.PromptService/accounts",
+        "location": "eastus",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "accountKind": "Regional",
+          "description": "Test prompt service account",
+          "encryptionSettings": {
+            "keyName": "myEncryptionKey",
+            "keyVaultUri": "https://mykeyvault.vault.azure.net"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-01T00:00:00Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.PromptService/accounts/testaccount",
+        "name": "testaccount",
+        "type": "Microsoft.PromptService/accounts",
+        "location": "eastus",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "accountKind": "Regional",
+          "description": "Test prompt service account",
+          "encryptionSettings": {
+            "keyName": "myEncryptionKey",
+            "keyVaultUri": "https://mykeyvault.vault.azure.net"
+          },
+          "provisioningState": "Creating"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-01T00:00:00Z"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InvalidOperation",
+          "message": "Invalid request body or parameters"
+        }
+      }
+    }
+  }
+}

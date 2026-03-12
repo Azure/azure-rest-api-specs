@@ -1,0 +1,83 @@
+{
+  "operationId": "Operations_List",
+  "title": "List Available Operations",
+  "parameters": {
+    "api-version": "2026-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.PromptService/accounts/read",
+            "display": {
+              "provider": "Microsoft Prompt Service",
+              "resource": "Prompt Service Accounts",
+              "operation": "Read Prompt Service Account",
+              "description": "Gets or lists Prompt Service accounts"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.PromptService/accounts/write",
+            "display": {
+              "provider": "Microsoft Prompt Service",
+              "resource": "Prompt Service Accounts",
+              "operation": "Create or Update Prompt Service Account",
+              "description": "Creates or updates a Prompt Service account"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.PromptService/accounts/delete",
+            "display": {
+              "provider": "Microsoft Prompt Service",
+              "resource": "Prompt Service Accounts",
+              "operation": "Delete Prompt Service Account",
+              "description": "Deletes a Prompt Service account"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.PromptService/accounts/containers/read",
+            "display": {
+              "provider": "Microsoft Prompt Service",
+              "resource": "Containers",
+              "operation": "Read Container",
+              "description": "Gets or lists containers in a Prompt Service account"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.PromptService/accounts/containers/write",
+            "display": {
+              "provider": "Microsoft Prompt Service",
+              "resource": "Containers",
+              "operation": "Create or Update Container",
+              "description": "Creates or updates a container in a Prompt Service account"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.PromptService/accounts/containers/delete",
+            "display": {
+              "provider": "Microsoft Prompt Service",
+              "resource": "Containers",
+              "operation": "Delete Container",
+              "description": "Deletes a container from a Prompt Service account"
+            },
+            "isDataAction": false
+          }
+        ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An unexpected error occurred"
+        }
+      }
+    }
+  }
+}

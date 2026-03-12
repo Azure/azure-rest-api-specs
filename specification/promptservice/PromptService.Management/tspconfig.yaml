@@ -1,0 +1,51 @@
+parameters:
+  "service-dir":
+    default: "sdk/promptservice"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/PromptService.json"
+    examples-dir: "{project-root}/examples"
+    emit-lro-options: "all"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.PromptService"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-promptservice"
+    namespace: "azure.mgmt.promptservice"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-promptservice"
+    namespace: "com.azure.resourcemanager.promptservice"
+    service-name: "Prompt Service"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-promptservice"
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    flavor: azure
+    hierarchyClient: false
+    experimental-extensible-enums: true
+    enableOperationGroup: true
+    package-details:
+      name: "@azure/arm-promptservice"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/promptservice"
+    emitter-output-dir: "{output-dir}/{service-dir}/armpromptservice"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpromptservice"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

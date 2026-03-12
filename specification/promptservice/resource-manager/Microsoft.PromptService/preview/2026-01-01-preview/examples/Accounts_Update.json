@@ -1,0 +1,62 @@
+{
+  "operationId": "Accounts_Update",
+  "title": "Update a Prompt Service Account tags",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-01-01-preview",
+    "accountName": "testaccount",
+    "properties": {
+      "tags": {
+        "environment": "production",
+        "team": "promptservice"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.PromptService/accounts/testaccount",
+        "name": "testaccount",
+        "type": "Microsoft.PromptService/accounts",
+        "location": "eastus",
+        "tags": {
+          "environment": "production",
+          "team": "promptservice"
+        },
+        "properties": {
+          "accountKind": "Regional",
+          "description": "Test prompt service account",
+          "encryptionSettings": {
+            "keyName": "myEncryptionKey",
+            "keyVaultUri": "https://mykeyvault.vault.azure.net"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-01T00:00:00Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.PromptService/accounts/testaccount?api-version=2026-01-01-preview",
+        "Retry-After": "10"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InvalidOperation",
+          "message": "Invalid request body or parameters"
+        }
+      }
+    }
+  }
+}
