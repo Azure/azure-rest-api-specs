@@ -23,9 +23,13 @@ namespace Azure.Ai.Speech.Transcription;
 @@clientName(TranscriptionOptions.phraseList, "phraseListOptions", "java");
 @@clientName(TranscriptionOptions.enhancedMode, "enhancedModeOptions", "java");
 @@clientName(EnhancedModeProperties, "EnhancedModeOptions", "java");
+@@clientName(EnhancedModeProperties, "EnhancedModeOptions", "javascript");
 @@clientName(EnhancedModeProperties.prompt, "prompts", "java");
+@@access(EnhancedModeProperties.enabled, Access.internal);
 @@clientName(PhraseListProperties, "PhraseListOptions", "java");
+@@clientName(PhraseListProperties, "PhraseListOptions", "javascript");
 @@clientName(TranscriptionResult.durationMilliseconds, "duration", "java");
+@@clientName(TranscriptionResult.durationMilliseconds, "durationInMs", "javascript");
 @@clientName(TranscribedPhrase.offsetMilliseconds, "offset", "java");
 @@clientName(TranscribedPhrase.durationMilliseconds, "duration", "java");
 @@clientName(TranscribedWord.offsetMilliseconds, "offset", "java");
@@ -33,5 +37,11 @@ namespace Azure.Ai.Speech.Transcription;
 @@access(transcribe, Access.internal, "csharp");
 @@access(TranscriptionContent, Access.internal, "java");
 @@access(TranscriptionContent, Access.internal, "csharp");
+@@access(TranscriptionContent, Access.internal, "javascript");
 @@clientName(TranscriptionContent.definition, "options", "java");
 @@clientName(TranscriptionContent.definition, "options", "csharp");
+@@clientName(TranscriptionContent.definition, "options", "javascript");
+@@clientName(Azure.Core.Foundations.ApiVersionParameter.apiVersion,
+  "serviceVersion",
+  "javascript"
+);
