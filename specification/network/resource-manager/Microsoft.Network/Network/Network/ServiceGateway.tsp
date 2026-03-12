@@ -17,6 +17,8 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ServiceGateway extends CommonTrackedResource {
   properties?: ServiceGatewayPropertiesFormat;
@@ -41,11 +43,15 @@ model ServiceGateway extends CommonTrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: ServiceGatewaySku;
 
-  /** A list of availability zones denoting where the resource needs to come from. */
+  /** A list of availability zones denoting the zone in which service gateway should be deployed.
+   *
+   * - The zone values must be provided as strings representing numeric identifiers like "1", "2", "3" etc. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   zones?: string[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 @armResourceOperations
 interface ServiceGateways {
   /**
