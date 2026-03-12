@@ -8,6 +8,7 @@ import "../Discovery.Workspace.Management/all.tsp";
 import "@typespec/versioning";
 
 using Microsoft.Discovery;
+using Microsoft.Discovery.Shared;
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
@@ -82,7 +83,7 @@ model BookshelfUpdate {
   @doc("The resource-specific properties for this resource.")
   properties?: BookshelfUpdateProperties;
 }
-@@alternateType(Microsoft.Discovery.Bookshelf.update::parameters.properties,
+@@alternateType(Microsoft.Discovery.Bookshelves.update::parameters.properties,
   BookshelfUpdate,
   "javascript"
 );
@@ -102,7 +103,7 @@ model StorageAssetUpdateProperties {
   description?: string;
 }
 
-@@alternateType(Microsoft.Discovery.storageAssets.update::parameters.properties,
+@@alternateType(Microsoft.Discovery.StorageAssets.update::parameters.properties,
   StorageAssetUpdate,
   "javascript"
 );
@@ -111,7 +112,7 @@ model StorageContainerUpdate {
   @doc("Resource tags.")
   tags?: Record<string>;
 }
-@@alternateType(Microsoft.Discovery.storageContainers.update::parameters.properties,
+@@alternateType(Microsoft.Discovery.StorageContainers.update::parameters.properties,
   StorageContainerUpdate,
   "javascript"
 );
