@@ -136,6 +136,10 @@ using Microsoft.Datadog;
   "ResubscribeOrganization",
   "csharp"
 );
+@@clientName(DatadogMonitorResources.latestLinkedSaaS,
+  "GetLatestLinkedSaaS",
+  "csharp"
+);
 @@clientName(ConnectorAction, "DatadogConnectorAction", "csharp");
 @@clientName(MarketplaceOfferDetails,
   "DatadogMarketplaceOfferDetails",
@@ -182,11 +186,10 @@ using Microsoft.Datadog;
   "csharp"
 );
 
-/**
- * Alternate model for DatadogAgreementResource used in C# SDK generation.
- * This model inherits from ARM CommonTypes.Resource so that the generated C# class
- * has a proper ARM Resource base type (with strongly-typed id, name, type, systemData).
- */
+// Alternate model for DatadogAgreementResource used in C# SDK generation.
+// This model inherits from ARM CommonTypes.Resource so that the generated C# class
+// has a proper ARM Resource base type (with strongly-typed id, name, type, systemData).
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatadogAgreement extends Azure.ResourceManager.CommonTypes.Resource {
