@@ -198,7 +198,10 @@ using Microsoft.Confluent;
 @@clientName(ConnectorClass.AZUREBLOBSOURCE, "AzureBlobSource", "csharp");
 @@clientName(ConnectorClass.AZUREBLOBSINK, "AzureBlobSink", "csharp");
 @@clientName(ConnectorClass.AZURECOSMOSV2SINK, "AzureCosmosV2Sink", "csharp");
-@@clientName(ConnectorClass.AZURECOSMOSV2SOURCE, "AzureCosmosV2Source", "csharp");
+@@clientName(ConnectorClass.AZURECOSMOSV2SOURCE,
+  "AzureCosmosV2Source",
+  "csharp"
+);
 
 // ConnectorStatus
 @@clientName(ConnectorStatus.PROVISIONING, "Provisioning", "csharp");
