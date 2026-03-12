@@ -437,7 +437,9 @@
       "properties": {
         "$skipToken": {
           "type": "string",
-          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query."
+          "format": "password",
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
+          "x-ms-secret": true
         },
         "$top": {
           "type": "integer",
@@ -499,7 +501,9 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+          "format": "password",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "x-ms-secret": true
         },
         "data": {
           "description": "Query output in JObject array or Table format."

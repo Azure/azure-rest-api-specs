@@ -389,7 +389,9 @@
           "x-ms-identifiers": []
         },
         "$skipToken": {
-          "description": "Skip token that encodes the skip information while executing the current request"
+          "format": "password",
+          "description": "Skip token that encodes the skip information while executing the current request",
+          "x-ms-secret": true
         }
       }
     },
@@ -407,7 +409,9 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "Acts as the continuation token for paged responses."
+          "format": "password",
+          "description": "Acts as the continuation token for paged responses.",
+          "x-ms-secret": true
         },
         "$top": {
           "type": "integer",

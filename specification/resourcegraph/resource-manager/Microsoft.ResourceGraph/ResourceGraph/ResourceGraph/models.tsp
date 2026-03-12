@@ -132,6 +132,7 @@ model QueryRequestOptions {
   /**
    * Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.
    */
+  @secret
   $skipToken?: string;
 
   /**
@@ -231,6 +232,7 @@ model QueryResponse {
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" ""
+  @secret
   $skipToken?: string;
 
   /**

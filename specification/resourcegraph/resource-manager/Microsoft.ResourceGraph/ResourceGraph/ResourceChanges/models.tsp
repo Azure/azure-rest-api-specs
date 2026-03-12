@@ -97,6 +97,7 @@ model ResourceChangesRequestParameters {
   /**
    * Acts as the continuation token for paged responses.
    */
+  @secret
   $skipToken?: string;
 
   /**
@@ -167,6 +168,7 @@ model ResourceChangeList {
    * Skip token that encodes the skip information while executing the current request
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  @secret
   $skipToken?: unknown;
 }
 

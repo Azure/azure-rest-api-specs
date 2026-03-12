@@ -16,7 +16,7 @@ union ResultKind {
   string,
 
   /**
-   * basic
+   * basic result kind
    */
   basic: "basic",
 }

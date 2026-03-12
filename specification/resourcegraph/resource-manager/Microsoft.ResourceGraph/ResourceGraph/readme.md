@@ -204,6 +204,12 @@ directive:
     from: resourcecopilot.json
     where: $.definitions.Error.properties.details
     reason: Adding x-ms-identifiers to Error details array results in SDK breaking changes.
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.ErrorDetails
+    reason: Defined in previous api-versions, will remove in future ones.
+  - suppress: XmsPageableForListCalls
+    from: resourcegraph.json
+    reason: Our operations list has always returned the full list in one request.
 ```
 
 ## cli

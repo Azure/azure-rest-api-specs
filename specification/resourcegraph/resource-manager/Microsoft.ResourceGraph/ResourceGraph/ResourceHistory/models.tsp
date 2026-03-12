@@ -82,6 +82,7 @@ model ResourcesHistoryRequestOptions {
   /**
    * Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.
    */
+  @secret
   $skipToken?: string;
 
   /**
