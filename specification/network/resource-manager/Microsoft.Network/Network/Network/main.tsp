@@ -175,6 +175,8 @@ enum Features {
   virtualWAN,
   firewallPolicy,
   azureWebCategory,
+  serviceGateway,
+  virtualNetworkAppliance,
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

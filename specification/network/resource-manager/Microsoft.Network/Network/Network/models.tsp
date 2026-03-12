@@ -27532,6 +27532,8 @@ model BastionHostListResult is Azure.Core.Page<BastionHost>;
 /**
  * Properties of the service gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model ServiceGatewayPropertiesFormat {
   /**
    * Reference to an existing virtual network.
@@ -27564,6 +27566,8 @@ model ServiceGatewayPropertiesFormat {
 /**
  * Properties of route target address
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model RouteTargetAddressPropertiesFormat {
   /**
    * The reference to the subnet resource.
@@ -27586,6 +27590,8 @@ model RouteTargetAddressPropertiesFormat {
 /**
  * SKU of a service gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model ServiceGatewaySku {
   /**
    * Name of a service gateway SKU.
@@ -27601,6 +27607,8 @@ model ServiceGatewaySku {
 /**
  * Properties of the service gateway update address locations request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model ServiceGatewayUpdateAddressLocationsRequest {
   /**
    * Specifies the type of update operation to perform on address locations within the service gateway.
@@ -27620,6 +27628,8 @@ model ServiceGatewayUpdateAddressLocationsRequest {
 /**
  * Properties of the service gateway address location.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model ServiceGatewayAddressLocation {
   /**
    * Location to update
@@ -27644,6 +27654,8 @@ model ServiceGatewayAddressLocation {
 /**
  * Properties of the service gateway address.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model ServiceGatewayAddress {
   /**
    * Address to update
@@ -27659,6 +27671,8 @@ model ServiceGatewayAddress {
 /**
  * Properties of the service gateway update services request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model ServiceGatewayUpdateServicesRequest {
   /**
    * Specifies the type of update operation to perform on services within the service gateway.
@@ -27678,6 +27692,8 @@ model ServiceGatewayUpdateServicesRequest {
 /**
  * Properties of the service gateway services request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model ServiceGatewayServiceRequest {
   /**
    * Set to true to mark the service for deletion.
@@ -27693,6 +27709,8 @@ model ServiceGatewayServiceRequest {
 /**
  * Properties of the service gateway service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model ServiceGatewayService {
   /**
    * Name of the service
@@ -27708,6 +27726,8 @@ model ServiceGatewayService {
 /**
  * Properties of the service gateway service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model ServiceGatewayServicePropertiesFormat {
   /**
    * Name of the service.
@@ -27733,12 +27753,16 @@ model ServiceGatewayServicePropertiesFormat {
 /**
  * Response for get service gateway address locations.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model GetServiceGatewayAddressLocationsResult
   is Azure.Core.Page<ServiceGatewayAddressLocationResponse>;
 
 /**
  * Properties of the service gateway address location.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model ServiceGatewayAddressLocationResponse {
   /**
    * Location to update
@@ -27755,11 +27779,15 @@ model ServiceGatewayAddressLocationResponse {
 /**
  * Response for get service gateway services.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model GetServiceGatewayServicesResult is Azure.Core.Page<ServiceGatewayService>;
 
 /**
  * VirtualNetworkAppliance properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model VirtualNetworkAppliancePropertiesFormat {
   /**
    * Bandwidth of the VirtualNetworkAppliance resource in Gbps.
@@ -27793,6 +27821,8 @@ model VirtualNetworkAppliancePropertiesFormat {
 /**
  * The virtual network appliance ip configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualNetworkApplianceIpConfiguration extends SubResource {
   /**
@@ -27821,6 +27851,8 @@ model VirtualNetworkApplianceIpConfiguration extends SubResource {
 /**
  * Properties of virtual network appliance IP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model VirtualNetworkApplianceIpConfigurationProperties {
   /**
    * The private IP address of the IP configuration.
