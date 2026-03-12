@@ -29,6 +29,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "Azure Traffic Collector" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
+// FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.NetworkFunction;
 

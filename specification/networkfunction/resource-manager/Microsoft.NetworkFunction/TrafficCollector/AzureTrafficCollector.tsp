@@ -14,26 +14,13 @@ namespace Microsoft.NetworkFunction;
  * Azure Traffic Collector resource.
  */
 model AzureTrafficCollector
-  is Azure.ResourceManager.ProxyResource<AzureTrafficCollectorPropertiesFormat> {
+  is Azure.ResourceManager.TrackedResource<AzureTrafficCollectorPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = AzureTrafficCollector,
     KeyName = "azureTrafficCollectorName",
     SegmentName = "azureTrafficCollectors",
     NamePattern = ""
   >;
-
-  /**
-   * Resource location.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
