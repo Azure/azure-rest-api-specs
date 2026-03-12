@@ -11976,30 +11976,6 @@
         ]
       }
     },
-    "Disk": {
-      "type": "object",
-      "description": "Represents a storage disk on the device.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the disk.",
-          "readOnly": true
-        },
-        "sizeInBytes": {
-          "type": "string",
-          "description": "The size of the disk in bytes.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the disk. For example, S2D or SAN.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
     "DiskConfiguration": {
       "type": "object",
       "description": "Desired configuration for a disk.",
@@ -12600,6 +12576,30 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "EdgeDeviceDisks": {
+      "type": "object",
+      "description": "Represents a storage disk on the device.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the disk.",
+          "readOnly": true
+        },
+        "sizeInBytes": {
+          "type": "string",
+          "description": "The size of the disk in bytes.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the disk. For example, S2D or SAN.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "EdgeDeviceJob": {
@@ -15815,7 +15815,7 @@
           "type": "array",
           "description": "List of storage disks on the device.",
           "items": {
-            "$ref": "#/definitions/Disk"
+            "$ref": "#/definitions/EdgeDeviceDisks"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -20760,16 +20760,6 @@
         "san": {
           "$ref": "#/definitions/StorageSanConfig",
           "description": "SAN (Storage Area Network) configuration. Applicable when StorageType is 'SAN' or 'SANS2D'."
-        },
-        "disks": {
-          "type": "array",
-          "description": "List of storage disks.",
-          "items": {
-            "$ref": "#/definitions/Disk"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
         }
       }
     },
