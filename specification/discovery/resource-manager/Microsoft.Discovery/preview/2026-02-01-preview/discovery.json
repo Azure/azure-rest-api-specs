@@ -5498,7 +5498,7 @@
     },
     "SupercomputerPropertiesUpdate": {
       "type": "object",
-      "description": "Updatable properties for Supercomputer (all fields optional for PATCH)",
+      "description": "Supercomputer properties",
       "properties": {
         "identities": {
           "$ref": "#/definitions/SupercomputerIdentitiesUpdate",
@@ -5513,20 +5513,18 @@
     },
     "SupercomputerUpdate": {
       "type": "object",
-      "description": "Update model for Supercomputer PATCH operations",
+      "description": "Supercomputer tracked resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/SupercomputerPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "SystemSku": {
       "type": "string",
