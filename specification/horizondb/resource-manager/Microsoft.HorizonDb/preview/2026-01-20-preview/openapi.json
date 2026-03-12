@@ -2197,6 +2197,10 @@
       "type": "object",
       "description": "Connection information for a cluster or pool",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the connected resource"
+        },
         "id": {
           "type": "string",
           "description": "The resource ID of the connected resource"
@@ -2386,10 +2390,6 @@
           "format": "date-time",
           "description": "Restore point creation time (ISO8601 format), specifying the time to restore from"
         },
-        "sourceOrionDbResourceId": {
-          "type": "string",
-          "description": "The source HorizonDb cluster resource identifier for read replica or point in time restore scenarios"
-        },
         "poolName": {
           "type": "string",
           "description": "The pool name for restore or replica operations"
@@ -2546,7 +2546,7 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "The start IP address of the firewall rule",
+          "description": "The start IP address of the firewall rule (IPv4)",
           "x-ms-mutability": [
             "read",
             "update",
@@ -2555,7 +2555,7 @@
         },
         "endIpAddress": {
           "type": "string",
-          "description": "The end IP address of the firewall rule",
+          "description": "The end IP address of the firewall rule (IPv4)",
           "x-ms-mutability": [
             "read",
             "update",
@@ -2588,14 +2588,14 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "The start IP address of the firewall rule",
+          "description": "The start IP address of the firewall rule (IPv4)",
           "x-ms-mutability": [
             "update"
           ]
         },
         "endIpAddress": {
           "type": "string",
-          "description": "The end IP address of the firewall rule",
+          "description": "The end IP address of the firewall rule (IPv4)",
           "x-ms-mutability": [
             "update"
           ]
@@ -3165,6 +3165,7 @@
         },
         "documentationLink": {
           "type": "string",
+          "format": "uri",
           "description": "Link to parameter documentation",
           "readOnly": true
         },
@@ -3196,7 +3197,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ARM resource ID of the private endpoint"
+          "description": "The Azure resource ID of the private endpoint"
         }
       }
     },

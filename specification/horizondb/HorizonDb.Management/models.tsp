@@ -29,12 +29,9 @@ model HorizonDbClusterProperties {
   @doc("The mode to create a new HorizonDb cluster")
   createMode?: CreateModeCluster;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "UTC is a well-established acronym for Coordinated Universal Time and should remain uppercase for clarity and consistency with Azure service conventions"
   @doc("Restore point creation time (ISO8601 format), specifying the time to restore from")
   pointInTimeUTC?: utcDateTime;
-
-  @doc("The source HorizonDb cluster resource identifier for read replica or point in time restore scenarios")
-  sourceOrionDbResourceId?: string;
 
   @doc("The pool name for restore or replica operations")
   poolName?: string;
@@ -196,11 +193,11 @@ model HorizonDbReplicaForPatchUpdate {
 
 @doc("Properties of a HorizonDb firewall rule")
 model HorizonDbFirewallRuleProperties {
-  @doc("The start IP address of the firewall rule")
+  @doc("The start IP address of the firewall rule (IPv4)")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   startIpAddress: string;
 
-  @doc("The end IP address of the firewall rule")
+  @doc("The end IP address of the firewall rule (IPv4)")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   endIpAddress: string;
 
@@ -216,11 +213,11 @@ model HorizonDbFirewallRuleProperties {
 @doc("Properties of a HorizonDb firewall rule for update operations")
 model HorizonDbFirewallRulePropertiesForPatchUpdate {
   @visibility(Lifecycle.Update)
-  @doc("The start IP address of the firewall rule")
+  @doc("The start IP address of the firewall rule (IPv4)")
   startIpAddress?: string;
 
   @visibility(Lifecycle.Update)
-  @doc("The end IP address of the firewall rule")
+  @doc("The end IP address of the firewall rule (IPv4)")
   endIpAddress?: string;
 
   @visibility(Lifecycle.Update)
@@ -236,7 +233,7 @@ model HorizonDbFirewallRuleForPatchUpdate {
 
 @doc("Properties of a private endpoint")
 model PrivateEndpoint {
-  @doc("The ARM resource ID of the private endpoint")
+  @doc("The Azure resource ID of the private endpoint")
   id?: string;
 }
 
@@ -494,7 +491,7 @@ model ParameterProperties {
 
   @visibility(Lifecycle.Read)
   @doc("Link to parameter documentation")
-  documentationLink?: string;
+  documentationLink?: url;
 
   @visibility(Lifecycle.Read)
   @doc("The unit of measurement for the parameter")
@@ -515,7 +512,6 @@ model ParameterProperties {
 
 @doc("Properties of a HorizonDb parameter group for update operations")
 model HorizonDbParameterGroupPropertiesForPatchUpdate {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Parameters in the parameter group")
   @identifiers(#["name"])
   @visibility(Lifecycle.Update)
@@ -544,6 +540,9 @@ model HorizonDbParameterGroupForPatchUpdate {
 
 @doc("Connection information for a cluster or pool")
 model ConnectionInfo {
+  @doc("The name of the connected resource")
+  name?: string;
+
   @doc("The resource ID of the connected resource")
   id?: string;
 
