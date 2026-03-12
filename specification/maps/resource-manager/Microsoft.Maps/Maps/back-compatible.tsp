@@ -32,5 +32,5 @@ using Microsoft.Maps;
 
 @@clientLocation(OperationStatusOperationGroup.get, "OperationStatus");
 
-@@clientLocation(Operations.list, "MapsOperations");
+@@clientLocation(Operations.list, "Maps");
 @@clientName(Operations.list, "ListOperations");

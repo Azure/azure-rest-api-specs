@@ -69,6 +69,11 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.Maps.OperationResultOperationGroup.get, Access.internal, "csharp");
 @@access(Microsoft.Maps.OperationStatusOperationGroup.get, Access.internal, "csharp");
 
+// Override clientLocation for Operations.list to avoid C# namespace conflict
+// (back-compatible.tsp sets it to "Maps" for all languages, which conflicts with
+// the C# namespace Azure.ResourceManager.Maps)
+@@clientLocation(Microsoft.Maps.Operations.list, "MapsOperations", "csharp");
+
 // Format: uniqueId should be uuid (Guid) for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-format" "uuid format required for backward compat"
 @@alternateType(Microsoft.Maps.MapsAccountProperties.uniqueId, Azure.Core.uuid, "csharp");
