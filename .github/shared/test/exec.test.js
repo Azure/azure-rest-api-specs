@@ -1,8 +1,11 @@
-import os from "os";
+import { dirname, resolve } from "path";
 import semver from "semver";
+import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 import { execFile, execNpm, execNpmExec, isExecError } from "../src/exec.js";
 import { debugLogger } from "../src/logger.js";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const options = { logger: debugLogger };
 
@@ -44,9 +47,13 @@ describe("execNpm", () => {
   });
 
   it("succeeds with --prefix", async () => {
-    const temp = os.tmpdir();
-    const result = await execNpm(["prefix"], { ...options, prefix: temp });
-    expect(result.stdout.trim()).toEqual(temp);
+    // "npm prefix" in this dir, without the "--prefix" option, returns the parent dir
+    let result = await execNpm(["prefix"], { ...options, cwd: __dirname });
+    expect(result.stdout.trim()).toEqual(resolve(__dirname, ".."));
+
+    // With the "--prefix" option set to this dir, returns this dir
+    result = await execNpm(["prefix"], { ...options, cwd: __dirname, prefix: __dirname });
+    expect(result.stdout.trim()).toEqual(__dirname);
   });
 
   it("fails with --help", async () => {
