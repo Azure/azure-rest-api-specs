@@ -5,6 +5,7 @@ using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+//using Azure.ClientGenerator.Core;
 
 /** Error response for API failures. */
 @error
@@ -67,18 +68,19 @@ union FoundryFeaturesOptInKeys {
   toolset_v1_preview: "Toolsets=V1Preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
+model WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
   @header("Foundry-Features")
   foundry_features: RequiredPreviewOptInHeader;
-};
+}
 
-alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
+model WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
+
   @header("Foundry-Features")
   foundry_features?: OptionalPreviewOptInHeader;
 };

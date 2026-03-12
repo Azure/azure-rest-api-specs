@@ -7,10 +7,15 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects.Beta;
 
+// Beta operations do not need to expose "foundry_features" as an input argument, since the Foundry-Features header
+// will be automatically set for all operations on the ".beta" sub-client.
+@@scope(Azure.AI.Projects.WithRequiredFoundryPreviewHeader.foundry_features, "!(python, javascript)");
+
 interface MemoryStores {}
 @@clientLocation(Azure.AI.Projects.MemoryStores.createMemoryStore,
   MemoryStores
 );
+
 @@clientLocation(Azure.AI.Projects.MemoryStores.updateMemoryStore,
   MemoryStores
 );
