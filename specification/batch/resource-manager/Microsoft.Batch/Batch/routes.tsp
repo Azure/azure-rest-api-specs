@@ -23,9 +23,7 @@ interface LocationOperationGroup {
   getQuotas is ArmProviderActionSync<
     Response = BatchLocationQuota,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      ...QuotasLocationParameter;
-    },
+    Parameters = QuotasLocationParameter,
     Error = CloudError
   >;
   /**
@@ -63,9 +61,7 @@ interface LocationOperationGroup {
     Request = CheckNameAvailabilityParameters,
     Response = CheckNameAvailabilityResult,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      ...CheckNameLocationParameter;
-    },
+    Parameters = CheckNameLocationParameter,
     Error = CloudError
   >;
 }
