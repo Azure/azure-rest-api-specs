@@ -190,6 +190,10 @@ using Microsoft.DataProtection;
   "BackupRecoveryTimeBasedRestoreContent",
   "csharp"
 );
+@@clientName(AzureBackupRecoveryTimeBasedRestoreRequest.recoveryPointTime,
+  "RecoverOn",
+  "csharp"
+);
 @@alternateType(AzureBackupRecoveryTimeBasedRestoreRequest.recoveryPointTime,
   utcDateTime,
   "csharp"
