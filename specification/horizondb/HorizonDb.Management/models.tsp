@@ -545,9 +545,14 @@ model HorizonDbParameterGroupForPatchUpdate {
 @doc("Properties for parameter group connections")
 model HorizonDbParameterGroupConnectionsProperties {
   @doc("Connected clusters and pools")
+  @pageItems
   @identifiers(#["id"])
   @visibility(Lifecycle.Read)
-  clusters?: ConnectionInfo[];
+  clusters: ConnectionInfo[];
+
+  @doc("The URL to get the next set of results.")
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }
 
 @doc("Connection information for a cluster or pool")

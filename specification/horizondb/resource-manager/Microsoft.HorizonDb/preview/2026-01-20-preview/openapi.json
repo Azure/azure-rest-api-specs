@@ -2081,11 +2081,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}/connections": {
       "get": {
-        "operationId": "HorizonDbParameterGroups_GetConnections",
+        "operationId": "HorizonDbParameterGroups_ListConnections",
         "tags": [
           "HorizonDbParameterGroups"
         ],
-        "description": "Gets all clusters and pools connected to a parameter group",
+        "description": "Lists all clusters and pools connected to a parameter group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2122,8 +2122,8 @@
           }
         },
         "x-ms-examples": {
-          "Get connections for a HorizonDb parameter group": {
-            "$ref": "./examples/ParameterGroups_GetConnections.json"
+          "List connections for a HorizonDb parameter group": {
+            "$ref": "./examples/ParameterGroups_ListConnections.json"
           }
         }
       }
@@ -2614,8 +2614,16 @@
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "clusters"
+      ]
     },
     "HorizonDbParameterGroupForPatchUpdate": {
       "type": "object",
