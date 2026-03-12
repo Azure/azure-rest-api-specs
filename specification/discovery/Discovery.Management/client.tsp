@@ -50,7 +50,7 @@ model ToolUpdateProperties {
 );
 
 @doc("Key Vault update properties for Bookshelf (all fields optional for PATCH)")
-@added(Versions.v2026_02_01_preview)
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model BookshelfKeyVaultUpdateProperties {
   @doc("The Key Name in Key Vault")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -65,12 +65,12 @@ model BookshelfKeyVaultUpdateProperties {
 model BookshelfUpdateProperties {
   @doc("The key to use for encrypting data at rest when customer managed keys are enabled. Required if Customer Managed Keys is enabled.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @added(Versions.v2026_02_01_preview)
+  @added(Microsoft.Discovery.Versions.v2026_02_01_preview)
   keyVaultProperties?: BookshelfKeyVaultUpdateProperties;
 
   @doc("Whether or not public network access is allowed for this resource. For security reasons, it is recommended to disable it whenever possible.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @added(Versions.v2026_02_01_preview)
+  @added(Microsoft.Discovery.Versions.v2026_02_01_preview)
   publicNetworkAccess?: PublicNetworkAccess;
 }
 
@@ -192,17 +192,17 @@ model ProjectUpdate {
 
 model ProjectUpdateProperties {
   @doc("Allowed AgentIds (Control plane resource references).")
-  @removed(Microsoft.Discovery.Versions.v2026_02_01_preview)
+  @removed(Microsoft.Discovery.Microsoft.Discovery.Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   agentIds?: AgentId[];
 
   @doc("Allowed WorkFlowIds (Control plane resource references).")
-  @removed(Microsoft.Discovery.Versions.v2026_02_01_preview)
+  @removed(Microsoft.Discovery.Microsoft.Discovery.Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   workflowIds?: WorkflowId[];
 
   @doc("ARM ID of the the starting (entry) point Agent or Workflow.")
-  @removed(Microsoft.Discovery.Versions.v2026_02_01_preview)
+  @removed(Microsoft.Discovery.Microsoft.Discovery.Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   entryReferenceId: Azure.Core.armResourceIdentifier<[
     {
@@ -214,7 +214,7 @@ model ProjectUpdateProperties {
   ]>;
 
   @doc("Settings for the project.")
-  @added(Microsoft.Discovery.Versions.v2026_02_01_preview)
+  @added(Microsoft.Discovery.Microsoft.Discovery.Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   settings?: ProjectSettings;
 }
@@ -225,7 +225,7 @@ model ProjectUpdateProperties {
 );
 
 @doc("For Key Vault Key references")
-@added(Versions.v2026_02_01_preview)
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model KeyVaultUpdateProperties {
   @doc("The Key Name in Key Vault")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -244,12 +244,12 @@ model WorkspaceUpdateProperties {
 
   @doc("The key to use for encrypting data at rest when customer managed keys are enabled.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @added(Versions.v2026_02_01_preview)
+  @added(Microsoft.Discovery.Versions.v2026_02_01_preview)
   keyVaultProperties?: KeyVaultUpdateProperties;
 
   @doc("Whether or not public network access is allowed for this resource. For security reasons, it is recommended to disable it whenever possible.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @added(Versions.v2026_02_01_preview)
+  @added(Microsoft.Discovery.Versions.v2026_02_01_preview)
   publicNetworkAccess?: PublicNetworkAccess;
 }
 
