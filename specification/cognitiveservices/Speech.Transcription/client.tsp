@@ -29,7 +29,10 @@ namespace Azure.Ai.Speech.Transcription;
 @@clientName(PhraseListProperties, "PhraseListOptions", "java");
 @@clientName(PhraseListProperties, "PhraseListOptions", "javascript");
 @@clientName(TranscriptionResult.durationMilliseconds, "duration", "java");
-@@clientName(TranscriptionResult.durationMilliseconds, "durationInMs", "javascript");
+@@clientName(TranscriptionResult.durationMilliseconds,
+  "durationInMs",
+  "javascript"
+);
 @@clientName(TranscribedPhrase.offsetMilliseconds, "offset", "java");
 @@clientName(TranscribedPhrase.durationMilliseconds, "duration", "java");
 @@clientName(TranscribedWord.offsetMilliseconds, "offset", "java");
