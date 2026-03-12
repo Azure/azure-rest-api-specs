@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
@@ -139,6 +141,7 @@ union CreatedByType {
 /**
  * Object representing LanguageRuntime for Manged CCF.
  */
+@removed(Versions.v2026_02_23)
 union LanguageRuntime {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -362,27 +365,29 @@ model CertBasedSecurityPrincipal {
 model ConfidentialLedgerList is Azure.Core.Page<ConfidentialLedger>;
 
 /**
- * Object representing Backup properties of a Confidential Ledger Resource.
+ * Object representing Files Export properties of a Confidential Ledger Resource.
  */
-model ConfidentialLedgerBackup {
+@renamedFrom(Versions.v2026_02_23, "ConfidentialLedgerBackup")
+model ConfidentialLedgerFilesExport {
   /**
-   * The region where the backup of the ledger will eventually be restored to.
+   * The region where the exported ledger files will eventually be restored to.
    */
   restoreRegion?: string;
 
   /**
-   * SAS URI used to access the backup Fileshare.
+   * SAS URI used to access the Fileshare for exporting ledger files.
    */
   @secret
   uri: string;
 }
 
 /**
- * Object representing the backup response of a Confidential Ledger Resource.
+ * Object representing the files export response of a Confidential Ledger Resource.
  */
-model ConfidentialLedgerBackupResponse {
+@renamedFrom(Versions.v2026_02_23, "ConfidentialLedgerBackupResponse")
+model ConfidentialLedgerFilesExportResponse {
   /**
-   * Response body stating if the ledger is being backed up.
+   * Response body stating if the ledger files are being exported.
    */
   @visibility(Lifecycle.Read)
   message?: string;
@@ -391,6 +396,7 @@ model ConfidentialLedgerBackupResponse {
 /**
  * Object representing Restore properties of a Confidential Ledger Resource.
  */
+@removed(Versions.v2026_02_23)
 model ConfidentialLedgerRestore {
   /**
    * Fileshare where the ledger backup is stored.
@@ -412,6 +418,7 @@ model ConfidentialLedgerRestore {
 /**
  * Object representing the restore response of a Confidential Ledger Resource.
  */
+@removed(Versions.v2026_02_23)
 model ConfidentialLedgerRestoreResponse {
   /**
    * Response body stating if the ledger is being restored.
@@ -424,6 +431,7 @@ model ConfidentialLedgerRestoreResponse {
  * Additional Managed CCF properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_02_23)
 model ManagedCCFProperties {
   /**
    * Unique name for the Managed CCF.
@@ -480,6 +488,7 @@ model ManagedCCFProperties {
 /**
  * Object representing MemberIdentityCertificate for Managed CCF.
  */
+@removed(Versions.v2026_02_23)
 model MemberIdentityCertificate {
   /**
    * Member Identity Certificate
@@ -502,6 +511,7 @@ model MemberIdentityCertificate {
 /**
  * Object representing DeploymentType for Managed CCF.
  */
+@removed(Versions.v2026_02_23)
 model DeploymentType {
   /**
    * Unique name for the Managed CCF.
@@ -518,12 +528,14 @@ model DeploymentType {
  * Object that includes an array of Managed CCF and a possible link for next set.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_02_23)
 model ManagedCCFList is Azure.Core.Page<ManagedCCF>;
 
 /**
  * Object representing Backup properties of a Managed CCF Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_02_23)
 model ManagedCCFBackup {
   /**
    * The region where the backup of the managed CCF resource will eventually be restored to.
@@ -541,6 +553,7 @@ model ManagedCCFBackup {
  * Object representing the backup response of a Managed CCF Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_02_23)
 model ManagedCCFBackupResponse {
   /**
    * Response body stating if the managed CCF resource is being backed up.
@@ -553,6 +566,7 @@ model ManagedCCFBackupResponse {
  * Object representing Restore properties of Managed CCF Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_02_23)
 model ManagedCCFRestore {
   /**
    * Fileshare where the managed CCF resource backup is stored.
@@ -575,6 +589,7 @@ model ManagedCCFRestore {
  * Object representing the restore response of a Managed CCF Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_02_23)
 model ManagedCCFRestoreResponse {
   /**
    * Response body stating if the managed CCF resource is being restored.
@@ -586,6 +601,7 @@ model ManagedCCFRestoreResponse {
 /**
  * Tags for Managed CCF Certificates
  */
+@removed(Versions.v2026_02_23)
 model CertificateTags {
   /**
    * Additional tags for Managed CCF Certificates
