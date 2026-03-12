@@ -263,8 +263,18 @@ model WorkflowAgentDefinition extends AgentDefinition {
   workflow?: string;
 }
 
+@doc("The type of hosted agent deployment.")
+union HostedAgentType {
+  string,
+
+  /** Image-based deployment using a container image. */
+  image: "image",
+
+  /** Code-based deployment using a packaged code artifact. */
+  code: "code",
+}
+
 @doc("Container-based deployment configuration for a hosted agent.")
-@added(Versions.v2_preview)
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
@@ -276,7 +286,6 @@ model ContainerConfiguration {
 }
 
 @doc("Code-based deployment configuration for a hosted agent.")
-@added(Versions.v2_preview)
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
@@ -306,21 +315,12 @@ model HostedAgentDefinition extends AgentDefinition {
     """)
   tools?: OpenAI.Tool[];
 
-  @removed(Versions.v2_preview)
   @doc("The protocols that the agent supports for ingress communication of the containers.")
   @example(#[
     #{ protocol: "responses", version: "v0.1.1" },
     #{ protocol: "a2a", version: "v0.3.0" }
   ])
   container_protocol_versions: ProtocolVersionRecord[];
-
-  @added(Versions.v2_preview)
-  @doc("The protocols that the agent supports for ingress communication.")
-  @example(#[
-    #{ protocol: "responses", version: "v0.1.1" },
-    #{ protocol: "a2a", version: "v0.3.0" }
-  ])
-  protocol_versions: ProtocolVersionRecord[];
 
   /**
    * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
@@ -338,16 +338,23 @@ model HostedAgentDefinition extends AgentDefinition {
   @example(#{ name: "LOG_LEVEL", value: "debug" })
   environment_variables?: Record<string>;
 
-  @removed(Versions.v2_preview)
   @doc("The image ID for the agent, applicable to image-based hosted agents.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
   image?: string;
 
-  @added(Versions.v2_preview)
+  @doc("The type of hosted agent deployment. Use 'image' for container-based or 'code' for code-based deployments.")
+  type?: HostedAgentType;
+
   @doc("Container-based deployment configuration. Mutually exclusive with code_configuration.")
   container_configuration?: ContainerConfiguration;
 
-  @added(Versions.v2_preview)
+  @doc("The protocols that the agent supports for ingress communication.")
+  @example(#[
+    #{ protocol: "responses", version: "v0.1.1" },
+    #{ protocol: "a2a", version: "v0.3.0" }
+  ])
+  protocol_versions?: ProtocolVersionRecord[];
+
   @doc("Code-based deployment configuration. Mutually exclusive with container_configuration.")
   code_configuration?: CodeConfiguration;
 

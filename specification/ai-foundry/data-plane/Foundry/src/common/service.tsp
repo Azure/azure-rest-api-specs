@@ -37,8 +37,5 @@ namespace Azure.AI.Projects {
 
     @doc("Microsoft Foundry API version v1.")
     v1: "v1",
-
-    @doc("Microsoft Foundry API version v2-preview.")
-    v2_preview: "v2-preview",
   }
 }
