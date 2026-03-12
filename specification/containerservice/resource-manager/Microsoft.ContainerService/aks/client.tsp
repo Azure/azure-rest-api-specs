@@ -18,6 +18,15 @@ using Microsoft.ContainerService;
   "java"
 );
 @@clientName(ManagedClusterIngressProfile.gatewayAPI, "gatewayApi", "java");
+@@clientName(ManagedClusterWebAppRoutingGatewayAPIImplementations,
+  "ManagedClusterWebAppRoutingGatewayApiImplementations",
+  "java"
+);
+@@clientName(GatewayAPIIstioEnabled, "GatewayApiIstioEnabled", "java");
+@@clientName(ManagedClusterIngressProfileWebAppRouting.gatewayAPIImplementations,
+  "gatewayApiImplementations",
+  "java"
+);
 @@clientName(ManagedClusterOIDCIssuerProfile.issuerURL, "issuerUrl", "java");
 @@clientName(TrustedAccessRoleRule.nonResourceURLs, "nonResourceUrls", "java");
 
@@ -365,6 +374,7 @@ using Microsoft.ContainerService;
 );
 @@clientName(OutboundType, "ContainerServiceOutboundType", "csharp");
 @@clientName(OutboundType.managedNATGateway, "ManagedNatGateway", "csharp");
+@@clientName(OutboundType.managedNATGatewayV2, "ManagedNatGatewayV2", "csharp");
 @@clientName(OutboundType.userAssignedNATGateway,
   "UserAssignedNatGateway",
   "csharp"
@@ -486,6 +496,10 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(ManagedClusterAgentPoolProfileProperties.osSKU, "OSSku", "csharp");
+@@clientName(ManagedClusterAgentPoolProfileProperties.enableOSDiskFullCaching,
+  "IsOSDiskFullCachingEnabled",
+  "csharp"
+);
 @@clientName(ManagedClusterPoolUpgradeProfile.osType, "OSType", "csharp");
 @@clientName(AgentPoolUpgradeProfileProperties.osType, "OSType", "csharp");
 @@clientName(MachineOSProfile.osType, "OSType", "csharp");
@@ -935,6 +949,57 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@clientName(ManagedClusterIngressProfile.gatewayAPI, "GatewayApi", "csharp");
 @@clientName(MeshMembershipProperties.managedMeshID, "ManagedMeshId", "csharp");
 @@clientName(MachineStatus.creationTimestamp, "CreatedOn", "csharp");
+@@clientName(NvidiaGPUProfile, "AgentPoolNvidiaGpuProfile", "csharp");
+@@clientName(MachineProperties.localDNSProfile, "LocalDnsProfile", "csharp");
+@@clientName(ExtendedLocationTypes,
+  "ContainerServiceExtendedLocationType",
+  "csharp"
+);
+@@clientName(GatewayAPIIstioEnabled, "GatewayApiIstioMode", "csharp");
+@@clientName(ManagedClusterAppRoutingIstio.mode, "IstioMode", "csharp");
+@@clientName(MachineHardwareProfile.ultraSsdEnabled,
+  "IsUltraSsdEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterHealthMonitorProfile.enableContinuousControlPlaneAndAddonMonitor,
+  "IsContinuousControlPlaneAndAddonMonitorEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterHealthMonitorProfile.enableOnDemandMonitor,
+  "IsOnDemandMonitorEnabled",
+  "csharp"
+);
+@@clientName(ManagementMode, "GpuManagementMode", "csharp");
+@@clientName(MigStrategy, "MultiInstanceGpuStrategy", "csharp");
+@@clientName(ResourceSku, "ContainerServiceVmSku", "csharp");
+@@clientName(ResourceSkuCapabilities,
+  "ContainerServiceVmSkuCapabilities",
+  "csharp"
+);
+@@clientName(ResourceSkuCapacity, "ContainerServiceVmSkuCapacity", "csharp");
+@@clientName(ResourceSkuCosts, "ContainerServiceVmSkuCosts", "csharp");
+@@clientName(ResourceSkuLocationInfo,
+  "ContainerServiceVmSkuLocationInfo",
+  "csharp"
+);
+@@clientName(ResourceSkuRestrictionInfo,
+  "ContainerServiceVmSkuRestrictionInfo",
+  "csharp"
+);
+@@clientName(ResourceSkuRestrictions,
+  "ContainerServiceVmSkuRestrictions",
+  "csharp"
+);
+@@clientName(ResourceSkuZoneDetails,
+  "ContainerServiceVmSkuZoneDetails",
+  "csharp"
+);
+@@clientName(ServiceAccountImagePullProfile.enabled, "IsEnabled", "csharp");
+@@clientName(TransitEncryptionType.mTLS,
+  "ClientCertificateAuthentication",
+  "csharp"
+);
+@@clientName(VmSkusOperationGroup.list, "GetVmSkus", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
 @@markAsPageable(PrivateEndpointConnections.list, "csharp");

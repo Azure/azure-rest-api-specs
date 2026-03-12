@@ -235,9 +235,7 @@ using Microsoft.ContainerService;
   "!csharp"
 );
 
+@@clientLocation(VmSkusOperationGroup.list, "VmSkus", "!csharp");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(OperationValue.display);
-@@clientLocation(TrustedAccessRolesOperationGroup.list,
-  "TrustedAccessRoles",
-  "!csharp"
-);
