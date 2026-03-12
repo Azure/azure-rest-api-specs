@@ -9,23 +9,23 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Network;
+
 /**
- * Inbound NAT rule of the load balancer.
+ * Network watcher in a resource group.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features1.loadBalancer)
-@parentResource(LoadBalancer)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model InboundNatRule extends SubResourceModel {
-  properties?: InboundNatRulePropertiesFormat;
+model NetworkWatcher extends Resource {
+  properties?: NetworkWatcherPropertiesFormat;
 
   @visibility(Lifecycle.Read)
   @path
-  @key("inboundNatRuleName")
-  @segment("inboundNatRules")
+  @key("networkWatcherName")
+  @segment("networkWatchers")
   name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
@@ -33,3 +33,6 @@ model InboundNatRule extends SubResourceModel {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+
+@@doc(NetworkWatcher.name, "The name of the network watcher.");
+@@doc(NetworkWatcher.properties, "Properties of the network watcher.");

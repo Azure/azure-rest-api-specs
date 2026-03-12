@@ -2,8 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "../Network/models.tsp";
-import "../Network/VirtualNetwork.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
