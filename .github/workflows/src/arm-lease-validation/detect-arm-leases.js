@@ -84,7 +84,7 @@ export function parseLease(content) {
   const today = Temporal.Now.plainDateISO();
 
   if (Temporal.PlainDate.compare(today, endDate) > 0) {
-    return { valid: false, reason: `Lease expired on ${endDate}` };
+    return { valid: false, reason: `Lease expired on ${endDate.toString()}` };
   }
 
   return { valid: true, reason: "Lease is valid" };

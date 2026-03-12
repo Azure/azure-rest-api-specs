@@ -29,11 +29,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0 # Fetch all history for merge-base calculation and diffing
-          sparse-checkout: |
-            .github
-            specification
-            eng
+          fetch-depth: 2
 
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
@@ -45,8 +41,7 @@ jobs:
           script: |
             const { default: armModelingReview } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/detect-new-resource-provider.js');
-            const result = await armModelingReview({ context, core });
-            return result;
+            return await armModelingReview({ context, core });
 
       - name: Upload artifact for ARMModelingReviewRequired label
         if: always() && steps.detect.outputs.result && fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] != 'none'
@@ -68,9 +63,3 @@ jobs:
         with:
           name: "ARMModelingAutoSignedOff"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingAutoSignedOff'] == 'add' }}"
-
-      - name: Upload artifact for issue_number
-        uses: ./.github/actions/add-empty-artifact
-        with:
-          name: issue-number
-          value: "${{ github.event.pull_request.number }}"

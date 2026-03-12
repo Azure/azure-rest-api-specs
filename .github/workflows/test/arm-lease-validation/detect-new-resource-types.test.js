@@ -11,52 +11,33 @@ vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({ raw: mockRaw, show: mockShow }),
 }));
 
-const mockGetAllResources = vi.hoisted(() => vi.fn().mockReturnValue([]));
-
-vi.mock(
-  "@microsoft.azure/openapi-validator-rulesets/dist/native/utilities/arm-helper.js",
-  () => ({
-    ArmHelper: vi.fn().mockImplementation(function () {
-      return { getAllResources: mockGetAllResources };
-    }),
-  }),
-);
-
-vi.mock("@microsoft.azure/openapi-validator-core", () => ({
-  SwaggerInventory: vi.fn().mockImplementation(function () {}),
-}));
-
 import { detectNewResourceTypes } from "../../src/arm-lease-validation/detect-new-resource-types.js";
 
 const core = createMockCore();
 
-const swaggerContent = JSON.stringify({ swagger: "2.0", paths: {} });
+const emptySwagger = JSON.stringify({ swagger: "2.0", paths: {} });
 
-// ── test data ───────────────────────────────────────────────────────────
+const vmSwagger = JSON.stringify({
+  swagger: "2.0",
+  paths: {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
+      get: { operationId: "VirtualMachines_Get", responses: { "200": { description: "OK" } } },
+    },
+  },
+});
 
-const vmResource = {
-  modelName: "VirtualMachine",
-  operations: [
-    {
-      httpMethod: "GET",
-      apiPath: "/subscriptions/{id}/providers/Microsoft.Compute/virtualMachines/{name}",
+const vmAndDiskSwagger = JSON.stringify({
+  swagger: "2.0",
+  paths: {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
+      get: { operationId: "VirtualMachines_Get", responses: { "200": { description: "OK" } } },
     },
-  ],
-};
-
-const diskResource = {
-  modelName: "Disk",
-  operations: [
-    {
-      httpMethod: "GET",
-      apiPath: "/subscriptions/{id}/providers/Microsoft.Compute/disks/{name}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}": {
+      get: { operationId: "Disks_Get", responses: { "200": { description: "OK" } } },
+      put: { operationId: "Disks_CreateOrUpdate", responses: { "200": { description: "OK" } } },
     },
-    {
-      httpMethod: "PUT",
-      apiPath: "/subscriptions/{id}/providers/Microsoft.Compute/disks/{name}",
-    },
-  ],
-};
+  },
+});
 
 // ── helpers ─────────────────────────────────────────────────────────────
 
@@ -73,7 +54,7 @@ function setupGit({
   headFiles = new Map(),
   fileContents = new Map(),
 } = {}) {
-  mockRaw.mockImplementation(async (args) => {
+  mockRaw.mockImplementation((args) => {
     if (args[0] === "ls-tree" && args.includes("-r")) {
       const commitish = args[3];
       const namespacePath = args[4];
@@ -86,12 +67,13 @@ function setupGit({
     return "";
   });
 
-  mockShow.mockImplementation(async (args) => {
-    const key = args[0]; // "ref:filepath"
+  mockShow.mockImplementation((args) => {
+    const key = String(args[0]); // "ref:filepath"
     if (fileContents.has(key)) {
       return fileContents.get(key);
     }
-    throw new Error(`path does not exist: ${key}`);
+    const msg = `path does not exist: ${key}`;
+    throw new Error(msg);
   });
 }
 
@@ -105,7 +87,7 @@ describe("detectNewResourceTypes", () => {
   it("returns empty when rmFiles has no version-pattern matches", async () => {
     const result = await detectNewResourceTypes({
       repoRoot: "/fake/repo",
-      mergeBase: "base123",
+      
       rmFiles: ["specification/compute/resource-manager/readme.md"],
       core,
     });
@@ -117,7 +99,7 @@ describe("detectNewResourceTypes", () => {
   it("returns empty when rmFiles is empty", async () => {
     const result = await detectNewResourceTypes({
       repoRoot: "/fake/repo",
-      mergeBase: "base123",
+      
       rmFiles: [],
       core,
     });
@@ -133,7 +115,7 @@ describe("detectNewResourceTypes", () => {
 
     const result = await detectNewResourceTypes({
       repoRoot: "/fake/repo",
-      mergeBase: "base123",
+      
       rmFiles: [rmFile],
       core,
     });
@@ -151,16 +133,14 @@ describe("detectNewResourceTypes", () => {
       baseFiles: new Map([[servicePath, [file]]]),
       headFiles: new Map([[servicePath, [file]]]),
       fileContents: new Map([
-        [`base123:${file}`, swaggerContent],
-        [`HEAD:${file}`, swaggerContent],
+        [`HEAD^:${file}`, vmSwagger],
+        [`HEAD:${file}`, vmSwagger],
       ]),
     });
 
-    mockGetAllResources.mockReturnValue([vmResource]);
-
     const result = await detectNewResourceTypes({
       repoRoot: "/fake/repo",
-      mergeBase: "base123",
+      
       rmFiles: [file],
       core,
     });
@@ -178,18 +158,14 @@ describe("detectNewResourceTypes", () => {
       baseFiles: new Map([[servicePath, [file]]]),
       headFiles: new Map([[servicePath, [file]]]),
       fileContents: new Map([
-        [`base123:${file}`, swaggerContent],
-        [`HEAD:${file}`, swaggerContent],
+        [`HEAD^:${file}`, vmSwagger], // base: VM only
+        [`HEAD:${file}`, vmAndDiskSwagger], // HEAD: VM + Disk
       ]),
     });
 
-    mockGetAllResources
-      .mockReturnValueOnce([vmResource]) // base: VM only
-      .mockReturnValueOnce([vmResource, diskResource]); // HEAD: VM + Disk
-
     const result = await detectNewResourceTypes({
       repoRoot: "/fake/repo",
-      mergeBase: "base123",
+      
       rmFiles: [file],
       core,
     });
@@ -225,18 +201,16 @@ describe("detectNewResourceTypes", () => {
         [networkServicePath, [networkFile]],
       ]),
       fileContents: new Map([
-        [`base123:${computeFile}`, swaggerContent],
-        [`HEAD:${computeFile}`, swaggerContent],
-        [`base123:${networkFile}`, swaggerContent],
-        [`HEAD:${networkFile}`, swaggerContent],
+        [`HEAD^:${computeFile}`, emptySwagger],
+        [`HEAD:${computeFile}`, emptySwagger],
+        [`HEAD^:${networkFile}`, emptySwagger],
+        [`HEAD:${networkFile}`, emptySwagger],
       ]),
     });
 
-    mockGetAllResources.mockReturnValue([]);
-
     const result = await detectNewResourceTypes({
       repoRoot: "/fake/repo",
-      mergeBase: "base123",
+      
       rmFiles: [computeFile, networkFile],
       core,
     });
@@ -256,16 +230,14 @@ describe("detectNewResourceTypes", () => {
       baseFiles: new Map([[servicePath, [file, exampleFile]]]),
       headFiles: new Map([[servicePath, [file, exampleFile]]]),
       fileContents: new Map([
-        [`base123:${file}`, swaggerContent],
-        [`HEAD:${file}`, swaggerContent],
+        [`HEAD^:${file}`, emptySwagger],
+        [`HEAD:${file}`, emptySwagger],
       ]),
     });
 
-    mockGetAllResources.mockReturnValue([]);
-
     await detectNewResourceTypes({
       repoRoot: "/fake/repo",
-      mergeBase: "base123",
+      
       rmFiles: [file],
       core,
     });
@@ -285,16 +257,14 @@ describe("detectNewResourceTypes", () => {
       baseFiles: new Map([[servicePath, [file, readme]]]),
       headFiles: new Map([[servicePath, [file, readme]]]),
       fileContents: new Map([
-        [`base123:${file}`, swaggerContent],
-        [`HEAD:${file}`, swaggerContent],
+        [`HEAD^:${file}`, emptySwagger],
+        [`HEAD:${file}`, emptySwagger],
       ]),
     });
 
-    mockGetAllResources.mockReturnValue([]);
-
     await detectNewResourceTypes({
       repoRoot: "/fake/repo",
-      mergeBase: "base123",
+      
       rmFiles: [file],
       core,
     });
@@ -304,7 +274,7 @@ describe("detectNewResourceTypes", () => {
     );
   });
 
-  it("detects new resource types via path-based fallback when ArmHelper finds nothing (inline schemas)", async () => {
+  it("detects new resource types from path-based detection", async () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const existingFile = `${ns}/DiskRP/stable/2024-01-01/disk.json`;
     const newFile = `${ns}/DiskRP/preview/2026-05-01-preview/disk.json`;
@@ -326,85 +296,35 @@ describe("detectNewResourceTypes", () => {
       baseFiles: new Map([[`${ns}/DiskRP`, [existingFile]]]),
       headFiles: new Map([[`${ns}/DiskRP`, [existingFile, newFile]]]),
       fileContents: new Map([
-        [`base123:${existingFile}`, existingSwagger],
+        [`HEAD^:${existingFile}`, existingSwagger],
         [`HEAD:${existingFile}`, existingSwagger],
         [`HEAD:${newFile}`, newSwagger],
       ]),
     });
 
-    // ArmHelper returns nothing (inline schemas, no definitions)
-    mockGetAllResources.mockReturnValue([]);
-
     const result = await detectNewResourceTypes({
       repoRoot: "/fake/repo",
-      mergeBase: "base123",
+      
       rmFiles: [newFile],
       core,
     });
 
     expect(result).toHaveLength(1);
     expect(result[0].namespace).toBe("Microsoft.Compute");
-    // superDisks should be detected via path fallback
+    // superDisks should be detected
     const superDisksType = result[0].newResourceTypes.find((t) =>
       t.resourceType === "Microsoft.Compute/superDisks",
     );
     expect(superDisksType).toBeDefined();
     expect(superDisksType.operations).toContain("GET");
-    // superDisks/metrics is also new but child of superDisks
+    // superDisks/metrics is also new
     const metricsType = result[0].newResourceTypes.find((t) =>
       t.resourceType === "Microsoft.Compute/superDisks/metrics",
     );
     expect(metricsType).toBeDefined();
   });
 
-  it("detects new resource types via path-based fallback when ArmHelper throws (e.g. empty SwaggerInventory)", async () => {
-    const ns = "specification/compute/resource-manager/Microsoft.Compute";
-    const existingFile = `${ns}/DiskRP/stable/2024-01-01/disk.json`;
-    const newFile = `${ns}/DiskRP/preview/2026-05-01-preview/disk.json`;
-
-    const existingSwagger = JSON.stringify({ swagger: "2.0", paths: {} });
-    const newSwagger = JSON.stringify({
-      swagger: "2.0",
-      paths: {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}": {
-          get: { operationId: "SuperDisks_Get", responses: { "200": { description: "OK" } } },
-        },
-      },
-    });
-
-    setupGit({
-      baseFiles: new Map([[`${ns}/DiskRP`, [existingFile]]]),
-      headFiles: new Map([[`${ns}/DiskRP`, [existingFile, newFile]]]),
-      fileContents: new Map([
-        [`base123:${existingFile}`, existingSwagger],
-        [`HEAD:${existingFile}`, existingSwagger],
-        [`HEAD:${newFile}`, newSwagger],
-      ]),
-    });
-
-    // ArmHelper throws (simulating the real "Node does not exist" error from an
-    // empty SwaggerInventory — the actual failure mode in production)
-    mockGetAllResources.mockImplementation(() => {
-      throw new Error("Node does not exist: file:///path/to/spec.json");
-    });
-
-    const result = await detectNewResourceTypes({
-      repoRoot: "/fake/repo",
-      mergeBase: "base123",
-      rmFiles: [newFile],
-      core,
-    });
-
-    expect(result).toHaveLength(1);
-    expect(result[0].namespace).toBe("Microsoft.Compute");
-    const superDisksType = result[0].newResourceTypes.find((t) =>
-      t.resourceType === "Microsoft.Compute/superDisks",
-    );
-    expect(superDisksType).toBeDefined();
-    expect(superDisksType.operations).toContain("GET");
-  });
-
-  it("path-based fallback excludes operations-only paths", async () => {
+  it("excludes operations-only paths", async () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const existingPreviewFile = `${ns}/DiskRP/stable/2024-01-01/compute.json`;
     const newFile = `${ns}/DiskRP/preview/2026-01-01-preview/compute.json`;
@@ -423,17 +343,15 @@ describe("detectNewResourceTypes", () => {
       baseFiles: new Map([[`${ns}/DiskRP`, [existingPreviewFile]]]),
       headFiles: new Map([[`${ns}/DiskRP`, [existingPreviewFile, newFile]]]),
       fileContents: new Map([
-        [`base123:${existingPreviewFile}`, existingSwagger],
+        [`HEAD^:${existingPreviewFile}`, existingSwagger],
         [`HEAD:${existingPreviewFile}`, existingSwagger],
         [`HEAD:${newFile}`, operationsOnlySwagger],
       ]),
     });
 
-    mockGetAllResources.mockReturnValue([]);
-
     const result = await detectNewResourceTypes({
       repoRoot: "/fake/repo",
-      mergeBase: "base123",
+      
       rmFiles: [newFile],
       core,
     });

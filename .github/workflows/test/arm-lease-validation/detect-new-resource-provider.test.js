@@ -99,7 +99,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
 
     // SvcA valid, SvcB invalid
-    vi.mocked(checkLease).mockImplementation(async (orgName) => orgName === "svcA");
+    vi.mocked(checkLease).mockImplementation((orgName) => orgName === "svcA");
 
     const result = await detectNewResourceProvider({ context, core });
 

@@ -22,7 +22,9 @@ function today() {
   return Temporal.Now.plainDateISO();
 }
 
-/** Subtract days from today and return YYYY-MM-DD string */
+/** Subtract days from today and return YYYY-MM-DD string
+ *  @param {number} n - Number of days to subtract
+ */
 function daysAgo(n) {
   return today().subtract({ days: n }).toString();
 }

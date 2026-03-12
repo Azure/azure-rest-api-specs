@@ -15,12 +15,13 @@ const ARM_OFFICE_HOURS_URL =
 
 // Match pattern: specification/<orgName>/resource-manager/<RPNamespace>/...
 // Trailing slash ensures the match is a directory component, not a file like readme.md
-const RESOURCE_MANAGER_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\/]+)\//;
+const RESOURCE_MANAGER_PATTERN = new RegExp(String.raw`^specification/[^/]+/resource-manager/([^/]+)/`);
 
 // Match pattern with optional service name: specification/<orgName>/resource-manager/<RPNamespace>/<ServiceName>/...
 // ServiceName folder name should not start with "stable" or "preview"
-const RESOURCE_MANAGER_WITH_GROUP_PATTERN =
-  /^specification\/[^\/]+\/resource-manager\/([^\/]+)\/(?!stable|preview)([^\/]+)\//;
+const RESOURCE_MANAGER_WITH_GROUP_PATTERN = new RegExp(
+  String.raw`^specification/[^/]+/resource-manager/([^/]+)/(?!stable|preview)([^/]+)/`,
+);
 
 /**
  * The workflow contract is intentionally a fixed set of keys.
@@ -131,31 +132,17 @@ function extractResourceProviders(files) {
  * Main detection logic for GitHub script action.
  *
  * @param {Object} params - Parameters from github-script
- * @param {import('@actions/github-script').AsyncFunctionArguments['context']} params.context
  * @param {import('@actions/github-script').AsyncFunctionArguments['core']} params.core
  * @returns {Promise<{ status: string, labelActions: ManagedLabelActions }>}
  */
-export default async function detectNewResourceProvider({ context, core }) {
-  const repoRoot = process.env.GITHUB_WORKSPACE ?? process.cwd();
+export default async function detectNewResourceProvider({ core }) {
+  const repoRoot = process.env.GITHUB_WORKSPACE;
   const git = simpleGit(repoRoot);
 
   core.info("Detecting New Resource Providers");
 
-  // Determine merge base between HEAD and the base branch (usually main)
-  // This ensures we detect all changes introduced in the PR, not just the last commit.
-  let mergeBase = "HEAD^";
-  try {
-    const baseRef = context.payload.pull_request?.base?.sha || "main";
-    mergeBase = await git.raw(["merge-base", baseRef, "HEAD"]);
-    mergeBase = mergeBase.trim();
-    core.info(`Using merge-base: ${mergeBase} (against ${baseRef})`);
-  } catch (e) {
-    core.info(`Could not determine merge-base, falling back to HEAD^. Error: ${e.message}`);
-  }
-
   const options = {
     cwd: process.env.GITHUB_WORKSPACE,
-    baseCommitish: "HEAD^",
     paths: ["specification"],
     logger: new CoreLogger(core),
   };
@@ -216,7 +203,7 @@ export default async function detectNewResourceProvider({ context, core }) {
     if (!hasAtLeastOneBrandNewRP) {
       core.info("No brand new resource providers detected, spec directories exist in base branch.");
       core.info("Checking for new resource types in existing RPs...");
-      return await checkNewResourceTypes(repoRoot, mergeBase, rmFiles, core);
+      return await checkNewResourceTypes(repoRoot, rmFiles, core);
     }
   }
 
@@ -237,7 +224,7 @@ export default async function detectNewResourceProvider({ context, core }) {
   if (newResourceProviders.length === 0) {
     core.info("No new resource providers detected.");
     core.info("Checking for new resource types in existing RPs...");
-    return await checkNewResourceTypes(repoRoot, mergeBase, rmFiles, core);
+    return await checkNewResourceTypes(repoRoot, rmFiles, core);
   }
 
   core.info(`Detected ${newResourceProviders.length} new resource provider(s)`);
@@ -275,12 +262,14 @@ export default async function detectNewResourceProvider({ context, core }) {
   }
 
   core.info("Checking for new resource types in existing RPs...");
-  const newRtResult = await checkNewResourceTypes(repoRoot, mergeBase, rmFiles, core);
+  const newRtResult = await checkNewResourceTypes(repoRoot, rmFiles, core);
 
   // Merge label actions: 'add' wins over 'remove' wins over 'none'
   /** @type {ManagedLabelActions} */
   const combinedLabelActions = { ...getLabelActions(allLeasesValid ? "auto-signed-off" : "review-required") };
-  for (const [label, action] of Object.entries(newRtResult.labelActions)) {
+  for (const [labelKey, action] of Object.entries(newRtResult.labelActions)) {
+    /** @type {keyof ManagedLabelActions} */
+    const label = /** @type {keyof ManagedLabelActions} */ (labelKey);
     const currentAction = combinedLabelActions[label];
     if (action === LabelAction.Add || (action === LabelAction.Remove && currentAction === LabelAction.None)) {
       combinedLabelActions[label] = action;
@@ -297,15 +286,13 @@ export default async function detectNewResourceProvider({ context, core }) {
  * Check for new resource types in existing RPs and validate their leases.
  *
  * @param {string} repoRoot - Repository root directory
- * @param {string} mergeBase - Git merge base SHA
  * @param {string[]} rmFiles - Resource-manager file paths changed in the PR
  * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
  * @returns {Promise<{ status: string, labelActions: ManagedLabelActions }>}
  */
-async function checkNewResourceTypes(repoRoot, mergeBase, rmFiles, core) {
+async function checkNewResourceTypes(repoRoot, rmFiles, core) {
   const newRtResults = await detectNewResourceTypes({
     repoRoot,
-    mergeBase,
     rmFiles,
     core,
   });
