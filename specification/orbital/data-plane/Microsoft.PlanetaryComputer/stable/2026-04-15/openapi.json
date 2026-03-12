@@ -43,9 +43,6 @@
       "name": "STAC Collection Configuration"
     },
     {
-      "name": "Image Exports for STAC Collections"
-    },
-    {
       "name": "Map Legends"
     },
     {
@@ -77,116 +74,6 @@
     }
   ],
   "paths": {
-    "/data/collections/{collectionId}/image/static": {
-      "post": {
-        "operationId": "TilerStaticImages_Create",
-        "tags": [
-          "Image Exports for STAC Collections"
-        ],
-        "summary": "Create Static Image",
-        "description": "Create a new image export.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "collectionId",
-            "in": "path",
-            "description": "STAC Collection ID",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Image request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ImageParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ImageResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/data/collections/{collectionId}/image/static/{id}": {
-      "get": {
-        "operationId": "TilerStaticImages_Get",
-        "tags": [
-          "Image Exports for STAC Collections"
-        ],
-        "summary": "Get Static Image",
-        "description": "Fetch an existing image export by ID",
-        "produces": [
-          "image/png",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "collectionId",
-            "in": "path",
-            "description": "STAC Collection ID",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Image export ID",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Return an image.",
-            "schema": {
-              "type": "file"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/data/legend/classmap/{classmapName}": {
       "get": {
         "operationId": "MapsClassMapLegends_Get",

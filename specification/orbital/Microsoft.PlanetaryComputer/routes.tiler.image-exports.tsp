@@ -1,12 +1,16 @@
 // Image Exports for STAC Collections interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tiler.image-exports.tsp";
 import "./models.common.images.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
+@removed(Versions.v2026_04_15)
 interface TilerStaticImages {
   /**
    * Create a new image export.
