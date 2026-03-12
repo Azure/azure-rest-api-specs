@@ -144,7 +144,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "CodeAgents=V1Preview"
           ]
         }
       },
@@ -1943,7 +1944,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "CodeAgents=V1Preview"
           ]
         }
       },
@@ -12259,7 +12261,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "CodeAgents=V1Preview"
           ]
         }
       },
@@ -12268,7 +12271,8 @@
         "enum": [
           "HostedAgents=V1Preview",
           "WorkflowAgents=V1Preview",
-          "ContainerAgents=V1Preview"
+          "ContainerAgents=V1Preview",
+          "CodeAgents=V1Preview"
         ],
         "description": "Opt-in keys for defining preview Hosted or Workflow Agents."
       },
@@ -14875,6 +14879,38 @@
         ],
         "description": "Code-based evaluator definition using python code"
       },
+      "CodeConfiguration": {
+        "type": "object",
+        "required": [
+          "code_uri",
+          "runtime",
+          "entry_point"
+        ],
+        "properties": {
+          "code_uri": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URI pointing to the packaged code artifact."
+          },
+          "runtime": {
+            "type": "string",
+            "description": "The runtime identifier for code execution (e.g., 'python_3_11', 'python_3_12', 'python_3_13')."
+          },
+          "entry_point": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The entry point command and arguments for the code execution."
+          }
+        },
+        "description": "Code-based deployment configuration for a hosted agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "CodeAgents=V1Preview"
+          ]
+        }
+      },
       "CompletionMessageToolCallChunk": {
         "type": "object",
         "required": [
@@ -15039,6 +15075,25 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "ContainerAgents=V1Preview"
+          ]
+        }
+      },
+      "ContainerConfiguration": {
+        "type": "object",
+        "required": [
+          "image"
+        ],
+        "properties": {
+          "image": {
+            "type": "string",
+            "description": "The container image for the hosted agent.",
+            "example": "my-registry.azurecr.io/my-hosted-agent:latest"
+          }
+        },
+        "description": "Container-based deployment configuration for a hosted agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
           ]
         }
       },
@@ -15274,7 +15329,8 @@
               "conditional_previews": [
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
-                "WorkflowAgents=V1Preview"
+                "WorkflowAgents=V1Preview",
+                "CodeAgents=V1Preview"
               ]
             }
           },
@@ -15322,7 +15378,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "CodeAgents=V1Preview"
           ]
         }
       },
@@ -15413,7 +15470,8 @@
               "conditional_previews": [
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
-                "WorkflowAgents=V1Preview"
+                "WorkflowAgents=V1Preview",
+                "CodeAgents=V1Preview"
               ]
             }
           },
@@ -15435,7 +15493,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "CodeAgents=V1Preview"
           ]
         }
       },
@@ -18332,6 +18391,47 @@
             "description": "The image ID for the agent, applicable to image-based hosted agents.",
             "example": "my-registry.azurecr.io/my-hosted-agent:latest"
           },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HostedAgentType"
+              }
+            ],
+            "description": "The type of hosted agent deployment. Use 'image' for container-based or 'code' for code-based deployments."
+          },
+          "container_configuration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContainerConfiguration"
+              }
+            ],
+            "description": "Container-based deployment configuration. Mutually exclusive with code_configuration."
+          },
+          "protocol_versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProtocolVersionRecord"
+            },
+            "description": "The protocols that the agent supports for ingress communication.",
+            "example": [
+              {
+                "protocol": "responses",
+                "version": "v0.1.1"
+              },
+              {
+                "protocol": "a2a",
+                "version": "v0.3.0"
+              }
+            ]
+          },
+          "code_configuration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CodeConfiguration"
+              }
+            ],
+            "description": "Code-based deployment configuration. Mutually exclusive with container_configuration."
+          },
           "telemetry_config": {
             "allOf": [
               {
@@ -18352,6 +18452,21 @@
             "HostedAgents=V1Preview"
           ]
         }
+      },
+      "HostedAgentType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "image",
+              "code"
+            ]
+          }
+        ],
+        "description": "The type of hosted agent deployment."
       },
       "HourlyRecurrenceSchedule": {
         "type": "object",
@@ -42237,7 +42352,8 @@
               "conditional_previews": [
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
-                "WorkflowAgents=V1Preview"
+                "WorkflowAgents=V1Preview",
+                "CodeAgents=V1Preview"
               ]
             }
           },

@@ -10,7 +10,8 @@ const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
     AgentDefinitionOptInKeys.container_agents_v1_preview,
-    AgentDefinitionOptInKeys.workflow_agents_v1_preview
+    AgentDefinitionOptInKeys.workflow_agents_v1_preview,
+    AgentDefinitionOptInKeys.code_agents_v1_preview
   ],
 };
 
@@ -407,6 +408,44 @@ model WorkflowAgentDefinition extends AgentDefinition {
   workflow?: string;
 }
 
+@doc("The type of hosted agent deployment.")
+union HostedAgentType {
+  string,
+
+  /** Image-based deployment using a container image. */
+  image: "image",
+
+  /** Code-based deployment using a packaged code artifact. */
+  code: "code",
+}
+
+@doc("Container-based deployment configuration for a hosted agent.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model ContainerConfiguration {
+  @doc("The container image for the hosted agent.")
+  @example("my-registry.azurecr.io/my-hosted-agent:latest")
+  image: string;
+}
+
+@doc("Code-based deployment configuration for a hosted agent.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+)
+model CodeConfiguration {
+  @doc("The URI pointing to the packaged code artifact.")
+  code_uri: url;
+
+  @doc("The runtime identifier for code execution (e.g., 'python_3_11', 'python_3_12', 'python_3_13').")
+  runtime: string;
+
+  @doc("The entry point command and arguments for the code execution.")
+  entry_point: string[];
+}
+
 @doc("The hosted agent definition.")
 @extension(
   "x-ms-foundry-meta",
@@ -447,6 +486,22 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("The image ID for the agent, applicable to image-based hosted agents.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
   image?: string;
+
+  @doc("The type of hosted agent deployment. Use 'image' for container-based or 'code' for code-based deployments.")
+  type?: HostedAgentType;
+
+  @doc("Container-based deployment configuration. Mutually exclusive with code_configuration.")
+  container_configuration?: ContainerConfiguration;
+
+  @doc("The protocols that the agent supports for ingress communication.")
+  @example(#[
+    #{ protocol: "responses", version: "v0.1.1" },
+    #{ protocol: "a2a", version: "v0.3.0" }
+  ])
+  protocol_versions?: ProtocolVersionRecord[];
+
+  @doc("Code-based deployment configuration. Mutually exclusive with container_configuration.")
+  code_configuration?: CodeConfiguration;
 
   @removed(Versions.v1)
   @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
