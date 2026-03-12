@@ -44,7 +44,7 @@ interface SoftwareUpdateConfigurations {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
@@ -60,7 +60,7 @@ interface SoftwareUpdateConfigurations {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
@@ -76,7 +76,7 @@ interface SoftwareUpdateConfigurations {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
