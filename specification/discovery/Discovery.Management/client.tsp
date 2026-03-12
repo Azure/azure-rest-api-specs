@@ -192,17 +192,17 @@ model ProjectUpdate {
 
 model ProjectUpdateProperties {
   @doc("Allowed AgentIds (Control plane resource references).")
-  @removed(Microsoft.Discovery.Microsoft.Discovery.Versions.v2026_02_01_preview)
+  @removed(Microsoft.Discovery.Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   agentIds?: AgentId[];
 
   @doc("Allowed WorkFlowIds (Control plane resource references).")
-  @removed(Microsoft.Discovery.Microsoft.Discovery.Versions.v2026_02_01_preview)
+  @removed(Microsoft.Discovery.Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   workflowIds?: WorkflowId[];
 
   @doc("ARM ID of the the starting (entry) point Agent or Workflow.")
-  @removed(Microsoft.Discovery.Microsoft.Discovery.Versions.v2026_02_01_preview)
+  @removed(Microsoft.Discovery.Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   entryReferenceId: Azure.Core.armResourceIdentifier<[
     {
@@ -214,7 +214,7 @@ model ProjectUpdateProperties {
   ]>;
 
   @doc("Settings for the project.")
-  @added(Microsoft.Discovery.Microsoft.Discovery.Versions.v2026_02_01_preview)
+  @added(Microsoft.Discovery.Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   settings?: ProjectSettings;
 }
