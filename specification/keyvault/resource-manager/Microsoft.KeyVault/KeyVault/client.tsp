@@ -250,6 +250,7 @@ using Azure.Core;
 enum KeyVaultCreateMode {
   /** Default. */
   default,
+
   /** Recover. */
   recover,
 }
@@ -260,6 +261,7 @@ enum KeyVaultCreateMode {
 enum KeyVaultPatchMode {
   /** Default. */
   default,
+
   /** Recover. */
   recover,
 }
@@ -270,6 +272,7 @@ enum KeyVaultPatchMode {
 enum ManagedHsmCreateMode {
   /** Default. */
   default,
+
   /** Recover. */
   recover,
 }
