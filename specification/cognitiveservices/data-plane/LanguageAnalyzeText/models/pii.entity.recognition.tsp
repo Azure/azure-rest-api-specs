@@ -70,7 +70,7 @@ model EntitySynonyms {
 @added(Versions.v2026_05_01)
 model ConfidenceScoreThreshold {
   /** Minimum confidence score threshold for the PII entities to be returned in the response. Entities with a confidence score below this threshold will be filtered out. Value should be between 0.0 and 1.0 */
-  default: float32 = 0.3;
+  default: float32;
 
   /** List of confidence score threshold overrides for specific PII categories */
   overrides?: ConfidenceScoreThresholdOverride[];
