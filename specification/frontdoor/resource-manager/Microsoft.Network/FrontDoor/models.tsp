@@ -1786,7 +1786,7 @@ model ManagedRuleSetList {
   /**
    * List of rule sets.
    */
-  @identifiers(#[])
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedRuleSets?: ManagedRuleSet[];
 
   /**
@@ -1804,7 +1804,7 @@ model ManagedRuleSetExceptionList {
   /**
    * List of exceptions.
    */
-  @identifiers(#[])
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exceptions?: ManagedRuleSetException[];
 }
 
