@@ -26,7 +26,7 @@ import "./BackupEngineBaseResource.tsp";
 import "./ProtectionContainerResource.tsp";
 import "./ResourceGuardProxyBaseResource.tsp";
 import "./VirtualResource.tsp";
-import "./SourceVaultMappingResource.tsp";
+import "./CrossTenantVaultMappingResource.tsp";
 import "./routes.tsp";
 
 using Azure.ResourceManager;

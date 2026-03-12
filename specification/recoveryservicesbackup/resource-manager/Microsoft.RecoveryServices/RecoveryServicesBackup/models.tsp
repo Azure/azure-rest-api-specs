@@ -8681,15 +8681,15 @@ model ClientDiscoveryResponse {
 // ============================================================
 
 /**
- * Source vault mapping properties for cross-tenant restore.
+ * Cross-tenant vault mapping properties for cross-tenant restore.
  * Represents the configuration linking a source vault to a target vault across tenants.
  */
 @added(Versions.v2026_03_01_preview)
-model SourceVaultMapping {
+model CrossTenantVaultMapping {
   /**
    * ARM resource ID of the source vault.
    */
-  sourceVaultArmId: string;
+  sourceVaultId: string;
 
   /**
    * Name of the mapping.
@@ -8707,6 +8707,12 @@ model SourceVaultMapping {
   resourceGuardOperationRequests?: string[];
 
   /**
+   * Additional properties for the mapping.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Service contract uses Dictionary<string, string> for additional properties"
+  additionalProperties?: Record<string>;
+
+  /**
    * Provisioning state of the resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Inline enum used to put readOnly on definition for ProvisioningStateMustBeReadOnly lint compliance"
@@ -8717,10 +8723,10 @@ model SourceVaultMapping {
 }
 
 /**
- * Request to remove a source vault mapping for cross-tenant restore.
+ * Request to remove a cross-tenant vault mapping for cross-tenant restore.
  */
 @added(Versions.v2026_03_01_preview)
-model RemoveSourceVaultMappingRequest {
+model RemoveCrossTenantVaultMappingRequest {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed.
    */
@@ -8746,7 +8752,7 @@ union VaultMappingState {
  * Contains information about whether a source vault is mapped to a target vault.
  */
 @added(Versions.v2026_03_01_preview)
-model SourceVaultMappingStatusResponse {
+model CrossTenantVaultMappingStatusResponse {
   /**
    * Mapping name (if mapped).
    */
