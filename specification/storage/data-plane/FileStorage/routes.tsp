@@ -1029,7 +1029,7 @@ interface File {
       ...FileRequestIntentParameter;
 
       /** Optional. Used for structured get operations. */
-      @header("x-ms-structured-body") structuredBodyGet?: string;
+      @header("x-ms-structured-body") structuredBodyType?: string;
     },
     {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying supported status codes for download operation."
@@ -1328,7 +1328,7 @@ interface File {
       ...FileRequestIntentParameter;
 
       /** Optional. Used for structured put operations. */
-      @header("x-ms-structured-body") structuredBodyPut?: string;
+      @header("x-ms-structured-body") structuredBodyType?: string;
 
       /** Optional. Used for structured put operations to specify content length. */
       @header("x-ms-structured-content-length") structuredContentLength?: int64;
