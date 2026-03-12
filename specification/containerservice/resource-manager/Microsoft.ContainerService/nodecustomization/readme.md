@@ -63,3 +63,13 @@ See configuration in [readme.python.md](./readme.python.md)
 See configuration in [readme.java.md](./readme.java.md)
 
 ## Suppression
+
+``` yaml
+directive:
+  - suppress: LatestVersionOfCommonTypesMustBeUsed
+    from: nodecustomization.json
+    reason: Existing API versions continue using previously released common-types references for compatibility.
+  - suppress: EnumInsteadOfBoolean
+    from: nodecustomization.json
+    reason: This boolean contract is established in prior preview versions and must remain stable.
+```
