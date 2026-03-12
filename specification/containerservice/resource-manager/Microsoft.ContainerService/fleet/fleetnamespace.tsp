@@ -184,6 +184,10 @@ union PropagationType {
 model PlacementProfile {
   @doc("The default ClusterResourcePlacement policy configuration.")
   defaultClusterResourcePlacement?: ClusterResourcePlacementSpec;
+
+  @added(Versions.v2026_04_02_preview)
+  @doc("The default cluster update strategy configuration.")
+  defaultClusterUpdateStrategy?: UpdateRunStrategySpec;
 }
 
 @doc("The provisioning state of the fleet managed namespace resource")

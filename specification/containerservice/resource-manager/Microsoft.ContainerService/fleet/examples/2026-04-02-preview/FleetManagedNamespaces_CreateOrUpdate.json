@@ -83,6 +83,40 @@
                   }
                 ]
               }
+            },
+            "defaultClusterUpdateStrategy": {
+              "stages": [
+                {
+                  "name": "stage1",
+                  "labelSelector": {
+                    "matchLabels": {
+                      "region": "eastus"
+                    }
+                  },
+                  "sortingLabelKey": "priority",
+                  "maxConcurrency": "25%",
+                  "beforeStageTasks": [
+                    {
+                      "type": "Approval"
+                    }
+                  ],
+                  "afterStageTasks": [
+                    {
+                      "type": "TimedWait",
+                      "waitTime": "30m"
+                    }
+                  ]
+                },
+                {
+                  "name": "stage2",
+                  "labelSelector": {
+                    "matchLabels": {
+                      "region": "westus"
+                    }
+                  },
+                  "maxConcurrency": "50%"
+                }
+              ]
             }
           }
         }
@@ -168,6 +202,40 @@
                     }
                   ]
                 }
+              },
+              "defaultClusterUpdateStrategy": {
+                "stages": [
+                  {
+                    "name": "stage1",
+                    "labelSelector": {
+                      "matchLabels": {
+                        "region": "eastus"
+                      }
+                    },
+                    "sortingLabelKey": "priority",
+                    "maxConcurrency": "25%",
+                    "beforeStageTasks": [
+                      {
+                        "type": "Approval"
+                      }
+                    ],
+                    "afterStageTasks": [
+                      {
+                        "type": "TimedWait",
+                        "waitTime": "30m"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "stage2",
+                    "labelSelector": {
+                      "matchLabels": {
+                        "region": "westus"
+                      }
+                    },
+                    "maxConcurrency": "50%"
+                  }
+                ]
               }
             }
           }
@@ -268,6 +336,40 @@
                     }
                   ]
                 }
+              },
+              "defaultClusterUpdateStrategy": {
+                "stages": [
+                  {
+                    "name": "stage1",
+                    "labelSelector": {
+                      "matchLabels": {
+                        "region": "eastus"
+                      }
+                    },
+                    "sortingLabelKey": "priority",
+                    "maxConcurrency": "25%",
+                    "beforeStageTasks": [
+                      {
+                        "type": "Approval"
+                      }
+                    ],
+                    "afterStageTasks": [
+                      {
+                        "type": "TimedWait",
+                        "waitTime": "30m"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "stage2",
+                    "labelSelector": {
+                      "matchLabels": {
+                        "region": "westus"
+                      }
+                    },
+                    "maxConcurrency": "50%"
+                  }
+                ]
               }
             }
           }

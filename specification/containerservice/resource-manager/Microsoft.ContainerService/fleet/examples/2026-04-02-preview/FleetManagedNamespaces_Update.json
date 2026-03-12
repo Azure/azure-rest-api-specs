@@ -25,6 +25,34 @@
               "rolloutStrategy": {
                 "type": "External"
               }
+            },
+            "defaultClusterUpdateStrategy": {
+              "stages": [
+                {
+                  "name": "canary",
+                  "labelSelector": {
+                    "matchLabels": {
+                      "environment": "canary"
+                    }
+                  },
+                  "maxConcurrency": "1",
+                  "afterStageTasks": [
+                    {
+                      "type": "Approval"
+                    }
+                  ]
+                },
+                {
+                  "name": "production",
+                  "labelSelector": {
+                    "matchLabels": {
+                      "environment": "production"
+                    }
+                  },
+                  "sortingLabelKey": "priority",
+                  "maxConcurrency": "10"
+                }
+              ]
             }
           }
         }
@@ -113,6 +141,34 @@
                     }
                   ]
                 }
+              },
+              "defaultClusterUpdateStrategy": {
+                "stages": [
+                  {
+                    "name": "canary",
+                    "labelSelector": {
+                      "matchLabels": {
+                        "environment": "canary"
+                      }
+                    },
+                    "maxConcurrency": "1",
+                    "afterStageTasks": [
+                      {
+                        "type": "Approval"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "production",
+                    "labelSelector": {
+                      "matchLabels": {
+                        "environment": "production"
+                      }
+                    },
+                    "sortingLabelKey": "priority",
+                    "maxConcurrency": "10"
+                  }
+                ]
               }
             }
           },

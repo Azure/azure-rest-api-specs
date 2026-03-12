@@ -88,6 +88,19 @@
                         }
                       ]
                     }
+                  },
+                  "defaultClusterUpdateStrategy": {
+                    "stages": [
+                      {
+                        "name": "eastregion",
+                        "labelSelector": {
+                          "matchLabels": {
+                            "region": "east"
+                          }
+                        },
+                        "maxConcurrency": "3"
+                      }
+                    ]
                   }
                 }
               },
