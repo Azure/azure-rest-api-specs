@@ -61,6 +61,10 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.Maps.LinkedResource, "MapsLinkedResource", "csharp");
 @@clientName(Microsoft.Maps.CorsRule, "MapsCorsRule", "csharp");
 @@clientName(Microsoft.Maps.CorsRules, "MapsCorsRules", "csharp");
+@@clientName(Microsoft.Maps.PublicNetworkAccess, "MapsPublicNetworkAccess", "csharp");
+@@clientName(Microsoft.Maps.PrivateEndpointConnection, "MapsPrivateEndpointConnection", "csharp");
+@@clientName(Microsoft.Maps.PrivateLinkResource, "MapsPrivateLinkResource", "csharp");
+@@clientName(Microsoft.Maps.LocationsItem, "MapsLocationItem", "csharp");
 
 // Common type renames for C#
 @@clientName(Azure.ResourceManager.CommonTypes.Encryption,
