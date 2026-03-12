@@ -79,52 +79,54 @@ interface AssociatedTenants {
   listByBillingAccount is ArmResourceListByParent<
     AssociatedTenant,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Parameters = {
-      /**
-       * Can be used to get revoked associated tenants.
-       */
-      @query("includeRevoked")
-      includeRevoked?: boolean = false;
-
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
-    },
+    Parameters = AssociatedTenantsListByBillingAccountParameters,
     Response = ArmResponse<AssociatedTenantListResult>
   >;
 }
+
+alias AssociatedTenantsListByBillingAccountParameters = {
+  /**
+   * Can be used to get revoked associated tenants.
+   */
+  @query("includeRevoked")
+  includeRevoked?: boolean = false;
+
+  /**
+   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
+   */
+  @query("filter")
+  filter?: string;
+
+  /**
+   * The orderby query option allows clients to request resources in a particular order.
+   */
+  @query("orderBy")
+  orderBy?: string;
+
+  /**
+   * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
+   */
+  @query("top")
+  top?: int64;
+
+  /**
+   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
+   */
+  @query("skip")
+  skip?: int64;
+
+  /**
+   * The count query option allows clients to request a count of the matching resources included with the resources in the response.
+   */
+  @query("count")
+  count?: boolean;
+
+  /**
+   * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
+   */
+  @query("search")
+  search?: string;
+};
 
 @@doc(AssociatedTenant.name, "The ID that uniquely identifies a tenant.");
 @@doc(AssociatedTenant.properties, "An associated tenant.");

@@ -83,49 +83,7 @@ interface BillingProfiles {
   listByBillingAccount is ArmResourceListByParent<
     BillingProfile,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Parameters = {
-      /**
-       * Can be used to get deleted billing profiles.
-       */
-      @query("includeDeleted")
-      includeDeleted?: boolean = false;
-
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
-    },
+    Parameters = BillingProfilesListByBillingAccountParameters,
     Response = ArmResponse<BillingProfileListResult>
   >;
 
@@ -251,19 +209,7 @@ interface BillingProfiles {
     void,
     BillingRoleAssignmentListResult,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Parameters = {
-      /**
-       * Resolves the scope display name for each of the role assignments.
-       */
-      @query("resolveScopeDisplayNames")
-      resolveScopeDisplayNames?: boolean = false;
-
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-    }
+    Parameters = BillingRoleAssignmentsResolveByBillingProfileParameters
   >;
 
   /**
@@ -330,7 +276,6 @@ interface BillingProfiles {
       search?: string;
     }
   >;
-
   /**
    * Lists the products for a billing profile. These don't include products billed based on usage. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.
    */
@@ -506,6 +451,64 @@ interface BillingProfiles {
     }
   >;
 }
+
+alias BillingProfilesListByBillingAccountParameters = {
+  /**
+   * Can be used to get deleted billing profiles.
+   */
+  @query("includeDeleted")
+  includeDeleted?: boolean = false;
+
+  /**
+   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
+   */
+  @query("filter")
+  filter?: string;
+
+  /**
+   * The orderby query option allows clients to request resources in a particular order.
+   */
+  @query("orderBy")
+  orderBy?: string;
+
+  /**
+   * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
+   */
+  @query("top")
+  top?: int64;
+
+  /**
+   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
+   */
+  @query("skip")
+  skip?: int64;
+
+  /**
+   * The count query option allows clients to request a count of the matching resources included with the resources in the response.
+   */
+  @query("count")
+  count?: boolean;
+
+  /**
+   * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
+   */
+  @query("search")
+  search?: string;
+};
+
+alias BillingRoleAssignmentsResolveByBillingProfileParameters = {
+  /**
+   * Resolves the scope display name for each of the role assignments.
+   */
+  @query("resolveScopeDisplayNames")
+  resolveScopeDisplayNames?: boolean = false;
+
+  /**
+   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
+   */
+  @query("filter")
+  filter?: string;
+};
 
 @@doc(BillingProfile.name,
   "The ID that uniquely identifies a billing profile."

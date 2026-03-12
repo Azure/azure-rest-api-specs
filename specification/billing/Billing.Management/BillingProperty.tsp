@@ -43,19 +43,7 @@ interface BillingProperties {
   get is ArmResourceRead<
     BillingProperty,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Parameters = {
-      /**
-       * A flag that specifies whether or not to include billing country.
-       */
-      @query("includeBillingCountry")
-      includeBillingCountry?: boolean = false;
-
-      /**
-       * A flag that specifies whether or not to include transition status for billing accounts with agreement type Microsoft Customer Agreement.
-       */
-      @query("includeTransitionStatus")
-      includeTransitionStatus?: boolean = false;
-    }
+    Parameters = BillingPropertyGetParameters
   >;
 
   /**
@@ -71,6 +59,20 @@ interface BillingProperties {
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 }
+
+alias BillingPropertyGetParameters = {
+  /**
+   * A flag that specifies whether or not to include billing country.
+   */
+  @query("includeBillingCountry")
+  includeBillingCountry?: boolean = false;
+
+  /**
+   * A flag that specifies whether or not to include transition status for billing accounts with agreement type Microsoft Customer Agreement.
+   */
+  @query("includeTransitionStatus")
+  includeTransitionStatus?: boolean = false;
+};
 
 @@doc(BillingProperty.name, "");
 @@doc(BillingProperty.properties, "A billing property.");

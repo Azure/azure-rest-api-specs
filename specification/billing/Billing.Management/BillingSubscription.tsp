@@ -93,55 +93,7 @@ interface BillingSubscriptions {
   listByBillingProfile is BillingSubscriptionOps.List<
     BillingSubscription,
     Response = ArmResponse<BillingSubscriptionListResult>,
-    Parameters = {
-      /**
-       * Can be used to get deleted billing subscriptions.
-       */
-      @query("includeDeleted")
-      includeDeleted?: boolean = false;
-
-      /**
-       * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
-       */
-      @query("expand")
-      expand?: string;
-
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
-    }
+    Parameters = BillingSubscriptionsListByBillingProfileParameters
   >;
 }
 alias BillingSubscriptionOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -219,67 +171,7 @@ interface BillingSubscriptionOperationGroup {
   listByBillingAccount is BillingSubscriptionOperationGroupOps.List<
     BillingSubscription,
     Response = ArmResponse<BillingSubscriptionListResult>,
-    Parameters = {
-      /**
-       * Can be used to get deleted billing subscriptions.
-       */
-      @query("includeDeleted")
-      includeDeleted?: boolean = false;
-
-      /**
-       * Can be used to get tenant-owned billing subscriptions. This field is only applies to Microsoft Online Services Program billing accounts.
-       */
-      @query("includeTenantSubscriptions")
-      includeTenantSubscriptions?: boolean = false;
-
-      /**
-       * Can be used to get failed billing subscriptions.
-       */
-      @query("includeFailed")
-      includeFailed?: boolean = false;
-
-      /**
-       * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
-       */
-      @query("expand")
-      expand?: string;
-
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
-    }
+    Parameters = BillingSubscriptionsListByBillingAccountParameters
   >;
 
   /**
@@ -343,6 +235,118 @@ interface BillingSubscriptionOperationGroup {
     ArmResponse<MoveBillingSubscriptionEligibilityResult>
   >;
 }
+
+alias BillingSubscriptionsListByBillingProfileParameters = {
+  /**
+   * Can be used to get deleted billing subscriptions.
+   */
+  @query("includeDeleted")
+  includeDeleted?: boolean = false;
+
+  /**
+   * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
+   */
+  @query("expand")
+  expand?: string;
+
+  /**
+   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
+   */
+  @query("filter")
+  filter?: string;
+
+  /**
+   * The orderby query option allows clients to request resources in a particular order.
+   */
+  @query("orderBy")
+  orderBy?: string;
+
+  /**
+   * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
+   */
+  @query("top")
+  top?: int64;
+
+  /**
+   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
+   */
+  @query("skip")
+  skip?: int64;
+
+  /**
+   * The count query option allows clients to request a count of the matching resources included with the resources in the response.
+   */
+  @query("count")
+  count?: boolean;
+
+  /**
+   * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
+   */
+  @query("search")
+  search?: string;
+};
+
+alias BillingSubscriptionsListByBillingAccountParameters = {
+  /**
+   * Can be used to get deleted billing subscriptions.
+   */
+  @query("includeDeleted")
+  includeDeleted?: boolean = false;
+
+  /**
+   * Can be used to get tenant-owned billing subscriptions. This field is only applies to Microsoft Online Services Program billing accounts.
+   */
+  @query("includeTenantSubscriptions")
+  includeTenantSubscriptions?: boolean = false;
+
+  /**
+   * Can be used to get failed billing subscriptions.
+   */
+  @query("includeFailed")
+  includeFailed?: boolean = false;
+
+  /**
+   * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
+   */
+  @query("expand")
+  expand?: string;
+
+  /**
+   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
+   */
+  @query("filter")
+  filter?: string;
+
+  /**
+   * The orderby query option allows clients to request resources in a particular order.
+   */
+  @query("orderBy")
+  orderBy?: string;
+
+  /**
+   * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
+   */
+  @query("top")
+  top?: int64;
+
+  /**
+   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
+   */
+  @query("skip")
+  skip?: int64;
+
+  /**
+   * The count query option allows clients to request a count of the matching resources included with the resources in the response.
+   */
+  @query("count")
+  count?: boolean;
+
+  /**
+   * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
+   */
+  @query("search")
+  search?: string;
+};
 
 @@doc(BillingSubscription.name,
   "The ID that uniquely identifies a subscription."

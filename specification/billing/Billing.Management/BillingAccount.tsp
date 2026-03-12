@@ -67,81 +67,7 @@ interface BillingAccounts {
   list is ArmResourceListByParent<
     BillingAccount,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Parameters = {
-      /**
-       * When true, results will include Billing Accounts that the user does not have a direct role assignment on if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.
-       */
-      @query("includeAll")
-      includeAll?: boolean = false;
-
-      /**
-       * When true, results will include Billing Accounts that are not fully created if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.
-       */
-      @query("includeAllWithoutBillingProfiles")
-      includeAllWithoutBillingProfiles?: boolean = false;
-
-      /**
-       * When true, results will include any billing accounts in a deleted state.
-       */
-      @query("includeDeleted")
-      includeDeleted?: boolean = false;
-
-      /**
-       * Includes billing accounts with agreement pending signature that the user has access to.
-       */
-      @query("includePendingAgreement")
-      includePendingAgreement?: boolean = false;
-
-      /**
-       * Includes the customer's billing account of Microsoft Partner Agreement that the user has access to.
-       */
-      @query("includeResellee")
-      includeResellee?: boolean = false;
-
-      /**
-       * Must be combined with legalOwnerOID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("legalOwnerTID")
-      legalOwnerTID?: string;
-
-      /**
-       * Must be combined with legalOwnerTID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("legalOwnerOID")
-      legalOwnerOID?: string;
-
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * Expand is allowed for SoldTo and EnrollmentDetails/PONumber.
-       */
-      @query("expand")
-      expand?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
-    },
+    Parameters = BillingAccountsListParameters,
     Response = ArmResponse<BillingAccountListResult>
   >;
 
@@ -328,19 +254,7 @@ interface BillingAccounts {
     void,
     BillingRoleAssignmentListResult,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Parameters = {
-      /**
-       * Resolves the scope display name for each of the role assignments.
-       */
-      @query("resolveScopeDisplayNames")
-      resolveScopeDisplayNames?: boolean = false;
-
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-    }
+    Parameters = BillingRoleAssignmentsResolveByBillingAccountParameters
   >;
 
   /**
@@ -463,6 +377,96 @@ interface BillingAccounts {
     }
   >;
 }
+
+alias BillingAccountsListParameters = {
+  /**
+   * When true, results will include Billing Accounts that the user does not have a direct role assignment on if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.
+   */
+  @query("includeAll")
+  includeAll?: boolean = false;
+
+  /**
+   * When true, results will include Billing Accounts that are not fully created if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.
+   */
+  @query("includeAllWithoutBillingProfiles")
+  includeAllWithoutBillingProfiles?: boolean = false;
+
+  /**
+   * When true, results will include any billing accounts in a deleted state.
+   */
+  @query("includeDeleted")
+  includeDeleted?: boolean = false;
+
+  /**
+   * Includes billing accounts with agreement pending signature that the user has access to.
+   */
+  @query("includePendingAgreement")
+  includePendingAgreement?: boolean = false;
+
+  /**
+   * Includes the customer's billing account of Microsoft Partner Agreement that the user has access to.
+   */
+  @query("includeResellee")
+  includeResellee?: boolean = false;
+
+  /**
+   * Must be combined with legalOwnerOID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @query("legalOwnerTID")
+  legalOwnerTID?: string;
+
+  /**
+   * Must be combined with legalOwnerTID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @query("legalOwnerOID")
+  legalOwnerOID?: string;
+
+  /**
+   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
+   */
+  @query("filter")
+  filter?: string;
+
+  /**
+   * Expand is allowed for SoldTo and EnrollmentDetails/PONumber.
+   */
+  @query("expand")
+  expand?: string;
+
+  /**
+   * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
+   */
+  @query("top")
+  top?: int64;
+
+  /**
+   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
+   */
+  @query("skip")
+  skip?: int64;
+
+  /**
+   * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
+   */
+  @query("search")
+  search?: string;
+};
+
+alias BillingRoleAssignmentsResolveByBillingAccountParameters = {
+  /**
+   * Resolves the scope display name for each of the role assignments.
+   */
+  @query("resolveScopeDisplayNames")
+  resolveScopeDisplayNames?: boolean = false;
+
+  /**
+   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
+   */
+  @query("filter")
+  filter?: string;
+};
 
 @@doc(BillingAccount.name,
   "The ID that uniquely identifies a billing account."
