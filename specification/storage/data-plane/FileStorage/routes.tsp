@@ -341,6 +341,7 @@ interface Share {
       @header("x-ms-lease-duration") leaseDuration?: int32;
 
       ...ProposeLeaseIdParameter;
+      ...LeaseActionParameter<"acquire">;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
@@ -361,6 +362,7 @@ interface Share {
   releaseLease is StorageOperationNoBody<
     {
       ...LeaseIdRequiredParameter;
+      ...LeaseActionParameter<"release">;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
@@ -381,6 +383,7 @@ interface Share {
     {
       ...LeaseIdRequiredParameter;
       ...ProposeLeaseIdParameter;
+      ...LeaseActionParameter<"change">;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
@@ -401,6 +404,7 @@ interface Share {
   renewLease is StorageOperationNoBody<
     {
       ...LeaseIdRequiredParameter;
+      ...LeaseActionParameter<"renew">;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
@@ -425,6 +429,7 @@ interface Share {
       @header("x-ms-lease-break-period") leaseBreakPeriod?: int32;
 
       ...LeaseIdOptionalParameter;
+      ...LeaseActionParameter<"break">;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
