@@ -1761,6 +1761,10 @@
                 "format": "byte",
                 "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
               },
+              "Content-Type": {
+                "type": "string",
+                "description": "Content-type."
+              },
               "Date": {
                 "type": "string",
                 "format": "date-time-rfc7231",
@@ -13359,7 +13363,7 @@
             "name": "containerAcl",
             "in": "body",
             "description": "The access control list for the container.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SignedIdentifiers"
             }
@@ -14705,13 +14709,13 @@
       "properties": {
         "Start": {
           "type": "string",
-          "format": "rfc3339-fixed-width",
+          "format": "date-time",
           "description": "The date-time the policy is active.",
           "x-ms-client-name": "start"
         },
         "Expiry": {
           "type": "string",
-          "format": "rfc3339-fixed-width",
+          "format": "date-time",
           "description": "The date-time the policy expires.",
           "x-ms-client-name": "expiry"
         },

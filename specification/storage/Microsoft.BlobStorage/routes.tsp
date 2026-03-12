@@ -367,12 +367,16 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @route("?restype=container&comp=acl")
-  setAccessPolicy is StorageOperationRequestBody<
+  setAccessPolicy is StorageOperationNoBody<
     {
+      /** The media type of the requestbody */
+      @header("Content-Type")
+      contentType?: "application/xml";
+
       /** The access control list for the container. */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
       @body
-      containerAcl: SignedIdentifiers;
+      containerAcl?: SignedIdentifiers;
 
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
