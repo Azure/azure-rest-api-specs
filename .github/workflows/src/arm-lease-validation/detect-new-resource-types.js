@@ -99,10 +99,10 @@ function getResourceTypesFromSwagger(swaggerDoc) {
  * @param {import("simple-git").SimpleGit} git
  * @param {string} commitish - Git ref
  * @param {string} namespacePath - e.g. `specification/compute/resource-manager/Microsoft.Compute`
- * @param {string} repoRoot - Repository root directory
+ * @param {string} label - Label for logging (e.g. "base" or "head")
  * @returns {Promise<Map<string, Object> | null>} Map of resource type to info, or null if path doesn't exist at this ref
  */
-async function getResourceTypesAtRef(git, commitish, namespacePath) {
+async function getResourceTypesAtRef(git, commitish, namespacePath, label) {
   /** @type {Map<string, {resourceType: string, provider: string, modelName: string|null, operations: {method: string, apiPath: string}[]}>} */
   const allTypes = new Map();
 
@@ -126,7 +126,7 @@ async function getResourceTypesAtRef(git, commitish, namespacePath) {
 
   const total = swaggerFiles.length;
   if (total > 0) {
-    console.log(`Analyzing ${total} swagger files in base branch for comparison...`);
+    console.log(`Analyzing ${total} swagger files in ${label} (${commitish}) for comparison...`);
   }
 
   // Iterate over files, but only log summary if it's too much
@@ -196,10 +196,15 @@ export async function detectNewResourceTypes({
     const parts = file.split("/");
     const orgName = parts[1];
     const namespace = parts[3];
-    // Scope to the service subdirectory (e.g. DiskRP) to avoid scanning the entire namespace
-    const serviceGroup = parts[4];
-    const namespacePath = `specification/${orgName}/resource-manager/${namespace}/${serviceGroup}`;
-    const serviceKey = `${namespace}/${serviceGroup}`;
+    // Check if parts[4] is an actual service group (e.g. DiskRP) vs lifecycle folder (stable/preview)
+    // If it's stable/preview, compare at namespace root to avoid false negatives when
+    // introducing the first preview/stable folder under an existing namespace
+    const potentialServiceGroup = parts[4];
+    const isLifecycleFolder = potentialServiceGroup === "stable" || potentialServiceGroup === "preview";
+    const namespacePath = isLifecycleFolder
+      ? `specification/${orgName}/resource-manager/${namespace}`
+      : `specification/${orgName}/resource-manager/${namespace}/${potentialServiceGroup}`;
+    const serviceKey = isLifecycleFolder ? namespace : `${namespace}/${potentialServiceGroup}`;
 
     if (!namespaceMap.has(serviceKey)) {
       namespaceMap.set(serviceKey, { orgName, namespacePath, namespace });
@@ -215,6 +220,7 @@ export async function detectNewResourceTypes({
       git,
       "HEAD^",
       namespacePath,
+      "base",
     );
 
     // Skip namespace if it doesn't exist in base (brand new RP — handled by RP-level detection)
@@ -227,6 +233,7 @@ export async function detectNewResourceTypes({
       git,
       "HEAD",
       namespacePath,
+      "head",
     );
 
     const newTypes = [];

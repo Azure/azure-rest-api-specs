@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import { Temporal } from "@js-temporal/polyfill";
 
 /** @type {import("vitest").MockedFunction<typeof import("fs/promises").readFile>} */
@@ -17,9 +17,13 @@ vi.mock("../../../shared/src/simple-git.js", () => ({
 
 import { checkLease, parseLease } from "../../src/arm-lease-validation/detect-arm-leases.js";
 
-/** Get today's date string using Temporal (same as source code) */
+// Use a fixed date for deterministic tests (avoids flakiness around midnight)
+const FIXED_TEST_DATE = new Date("2025-06-15T12:00:00Z");
+const FIXED_PLAIN_DATE = Temporal.PlainDate.from("2025-06-15");
+
+/** Get fixed today's date using Temporal */
 function today() {
-  return Temporal.Now.plainDateISO();
+  return FIXED_PLAIN_DATE;
 }
 
 /** Subtract days from today and return YYYY-MM-DD string
@@ -35,6 +39,17 @@ function leaseYaml(startdate, duration) {
 }
 
 describe("detect-arm-leases", () => {
+  beforeAll(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(FIXED_TEST_DATE);
+    // Stub Temporal.Now.plainDateISO since the polyfill may not respect vi.useFakeTimers()
+    vi.spyOn(Temporal.Now, "plainDateISO").mockReturnValue(FIXED_PLAIN_DATE);
+  });
+
+  afterAll(() => {
+    vi.useRealTimers();
+  });
+
   afterEach(() => {
     vi.clearAllMocks();
   });

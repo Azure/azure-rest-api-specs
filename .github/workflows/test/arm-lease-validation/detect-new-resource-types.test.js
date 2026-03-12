@@ -127,11 +127,12 @@ describe("detectNewResourceTypes", () => {
   it("returns empty when HEAD has same resource types as base", async () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const file = `${ns}/stable/2024-01-01/compute.json`;
-    const servicePath = `${ns}/stable`;
+    // When path contains stable/preview, compare at namespace root
+    const namespacePath = ns;
 
     setupGit({
-      baseFiles: new Map([[servicePath, [file]]]),
-      headFiles: new Map([[servicePath, [file]]]),
+      baseFiles: new Map([[namespacePath, [file]]]),
+      headFiles: new Map([[namespacePath, [file]]]),
       fileContents: new Map([
         [`HEAD^:${file}`, vmSwagger],
         [`HEAD:${file}`, vmSwagger],
@@ -152,11 +153,12 @@ describe("detectNewResourceTypes", () => {
   it("detects new resource types present in HEAD but absent from base", async () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const file = `${ns}/stable/2024-01-01/compute.json`;
-    const servicePath = `${ns}/stable`;
+    // When path contains stable/preview, compare at namespace root
+    const namespacePath = ns;
 
     setupGit({
-      baseFiles: new Map([[servicePath, [file]]]),
-      headFiles: new Map([[servicePath, [file]]]),
+      baseFiles: new Map([[namespacePath, [file]]]),
+      headFiles: new Map([[namespacePath, [file]]]),
       fileContents: new Map([
         [`HEAD^:${file}`, vmSwagger], // base: VM only
         [`HEAD:${file}`, vmAndDiskSwagger], // HEAD: VM + Disk
@@ -188,17 +190,18 @@ describe("detectNewResourceTypes", () => {
     const networkNs = "specification/network/resource-manager/Microsoft.Network";
     const computeFile = `${computeNs}/stable/2024-01-01/compute.json`;
     const networkFile = `${networkNs}/stable/2024-01-01/network.json`;
-    const computeServicePath = `${computeNs}/stable`;
-    const networkServicePath = `${networkNs}/stable`;
+    // When path contains stable/preview, compare at namespace root
+    const computeNamespacePath = computeNs;
+    const networkNamespacePath = networkNs;
 
     setupGit({
       baseFiles: new Map([
-        [computeServicePath, [computeFile]],
-        [networkServicePath, [networkFile]],
+        [computeNamespacePath, [computeFile]],
+        [networkNamespacePath, [networkFile]],
       ]),
       headFiles: new Map([
-        [computeServicePath, [computeFile]],
-        [networkServicePath, [networkFile]],
+        [computeNamespacePath, [computeFile]],
+        [networkNamespacePath, [networkFile]],
       ]),
       fileContents: new Map([
         [`HEAD^:${computeFile}`, emptySwagger],
@@ -224,11 +227,12 @@ describe("detectNewResourceTypes", () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const file = `${ns}/stable/2024-01-01/compute.json`;
     const exampleFile = `${ns}/stable/2024-01-01/examples/create.json`;
-    const servicePath = `${ns}/stable`;
+    // When path contains stable/preview, compare at namespace root
+    const namespacePath = ns;
 
     setupGit({
-      baseFiles: new Map([[servicePath, [file, exampleFile]]]),
-      headFiles: new Map([[servicePath, [file, exampleFile]]]),
+      baseFiles: new Map([[namespacePath, [file, exampleFile]]]),
+      headFiles: new Map([[namespacePath, [file, exampleFile]]]),
       fileContents: new Map([
         [`HEAD^:${file}`, emptySwagger],
         [`HEAD:${file}`, emptySwagger],
@@ -251,11 +255,12 @@ describe("detectNewResourceTypes", () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const file = `${ns}/stable/2024-01-01/compute.json`;
     const readme = `${ns}/stable/readme.md`;
-    const servicePath = `${ns}/stable`;
+    // When path contains stable/preview, compare at namespace root
+    const namespacePath = ns;
 
     setupGit({
-      baseFiles: new Map([[servicePath, [file, readme]]]),
-      headFiles: new Map([[servicePath, [file, readme]]]),
+      baseFiles: new Map([[namespacePath, [file, readme]]]),
+      headFiles: new Map([[namespacePath, [file, readme]]]),
       fileContents: new Map([
         [`HEAD^:${file}`, emptySwagger],
         [`HEAD:${file}`, emptySwagger],
@@ -272,6 +277,65 @@ describe("detectNewResourceTypes", () => {
     expect(mockShow).not.toHaveBeenCalledWith(
       expect.arrayContaining([expect.stringContaining("readme.md")]),
     );
+  });
+
+  it("detects new RT when introducing first preview folder under existing stable-only namespace", async () => {
+    // This tests the fix for false-negative when introducing the first preview folder
+    // under an existing namespace that only had stable. Without the fix, the code
+    // would try to compare .../Microsoft.Compute/preview which doesn't exist in base
+    // and skip detection entirely.
+    const ns = "specification/compute/resource-manager/Microsoft.Compute";
+    const stableFile = `${ns}/stable/2024-01-01/compute.json`;
+    const previewFile = `${ns}/preview/2026-01-01-preview/compute.json`;
+    // Compare at namespace root to include both stable and preview
+    const namespacePath = ns;
+
+    const stableSwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
+          get: { operationId: "VirtualMachines_Get", responses: { "200": { description: "OK" } } },
+        },
+      },
+    });
+
+    const previewSwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/quantumVMs/{vmName}": {
+          get: { operationId: "QuantumVMs_Get", responses: { "200": { description: "OK" } } },
+          put: { operationId: "QuantumVMs_CreateOrUpdate", responses: { "200": { description: "OK" } } },
+        },
+      },
+    });
+
+    setupGit({
+      // Base only has stable folder
+      baseFiles: new Map([[namespacePath, [stableFile]]]),
+      // HEAD has both stable and new preview folder
+      headFiles: new Map([[namespacePath, [stableFile, previewFile]]]),
+      fileContents: new Map([
+        [`HEAD^:${stableFile}`, stableSwagger],
+        [`HEAD:${stableFile}`, stableSwagger],
+        [`HEAD:${previewFile}`, previewSwagger],
+      ]),
+    });
+
+    const result = await detectNewResourceTypes({
+      repoRoot: "/fake/repo",
+      rmFiles: [previewFile],
+      core,
+    });
+
+    // Should detect the new quantumVMs resource type from preview
+    expect(result).toHaveLength(1);
+    expect(result[0].namespace).toBe("Microsoft.Compute");
+    const quantumType = result[0].newResourceTypes.find((t) =>
+      t.resourceType === "Microsoft.Compute/quantumVMs",
+    );
+    expect(quantumType).toBeDefined();
+    expect(quantumType.operations).toContain("GET");
+    expect(quantumType.operations).toContain("PUT");
   });
 
   it("detects new resource types from path-based detection", async () => {

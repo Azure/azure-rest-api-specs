@@ -893,7 +893,7 @@ const rulesPri0NotReadyForArmReview = [
   },
   {
     precedence: 0,
-    allPrerequisiteLabels: ["NotReadyForARMReview", "ARMModelingReviewRequired"],
+    anyPrerequisiteLabels: ["ARMModelingReviewRequired"],
     anyRequiredLabels: [],
     troubleshootingGuide: wrapInArmReviewMessage(
       "This PR has <code>ARMModelingReviewRequired</code> label. " +
