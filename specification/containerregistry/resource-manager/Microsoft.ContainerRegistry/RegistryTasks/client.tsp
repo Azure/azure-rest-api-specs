@@ -109,7 +109,10 @@ using Microsoft.ContainerRegistry;
 
 // Property rename: integer duration properties must include units in the name
 @@clientName(TaskProperties.timeout, "TimeoutInSeconds", "csharp");
-@@clientName(TaskPropertiesUpdateParameters.timeout, "TimeoutInSeconds", "csharp");
+@@clientName(TaskPropertiesUpdateParameters.timeout,
+  "TimeoutInSeconds",
+  "csharp"
+);
 @@clientName(DockerBuildRequest.timeout, "TimeoutInSeconds", "csharp");
 @@clientName(FileTaskRunRequest.timeout, "TimeoutInSeconds", "csharp");
 @@clientName(EncodedTaskRunRequest.timeout, "TimeoutInSeconds", "csharp");
