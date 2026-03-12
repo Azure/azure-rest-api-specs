@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "name": "sample-mhsm",
+    "api-version": "2026-03-01-preview",
+    "privateEndpointConnectionName": "sample-pec",
+    "properties": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "My name is Joe and I'm approving this.",
+          "status": "Approved"
+        }
+      }
+    },
+    "resourceGroupName": "sample-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sample-pec",
+        "type": "Microsoft.KeyVault/managedhsms/privateEndpointConnections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "My name is Joe and I'm approving this.",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "MHSMPrivateEndpointConnections_Put",
+  "title": "ManagedHsmPutPrivateEndpointConnection"
+}

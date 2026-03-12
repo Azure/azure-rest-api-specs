@@ -1,0 +1,30 @@
+{
+  "operationId": "SaaSOperationGroup_ActivateResource",
+  "title": "SaaS_ActivateResource",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-12-26-preview",
+    "body": {
+      "saaSGuid": "00000000-0000-0000-0000-000000000001",
+      "userInfo": {
+        "name": "Alice",
+        "emailAddress": "alice@example.com",
+        "phoneNumber": "+1234567890"
+      },
+      "datadogOrganizationProperties": {
+        "name": "myOrganization",
+        "id": "org123456"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Datadog/saasResources/saas-resource-001",
+        "name": "saas-resource-001",
+        "type": "Microsoft.Datadog/saasResources",
+        "saaSId": "saas-00000000-0000-0000-0000-000000000002"
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "$expand": "LatestDefinitionVersion, EffectiveDefinitionVersion",
+    "$filter": "atScope()",
+    "api-version": "2025-11-01",
+    "resourceGroupName": "TestResourceGroup",
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "TestCostManagement",
+            "type": "Microsoft.Authorization/policyAssignments",
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/resourceGroups/TestResourceGroup/providers/Microsoft.Authorization/policyAssignments/TestCostManagement",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "e6d23f8d-af97-4fbc-bda6-00604e4e3d0a",
+              "tenantId": "4bee2b8a-1bee-47c2-90e9-404241551135"
+            },
+            "location": "eastus",
+            "properties": {
+              "description": "Minimize the risk of accidental cost overruns",
+              "definitionVersion": "1.*.*",
+              "displayName": "Storage Cost Management",
+              "effectiveDefinitionVersion": "1.0.0",
+              "instanceId": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+              "latestDefinitionVersion": "1.0.0",
+              "metadata": {
+                "category": "Cost Management"
+              },
+              "notScopes": [],
+              "parameters": {
+                "allowedSkus": {
+                  "value": "Standard_A1"
+                }
+              },
+              "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
+              "scope": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/resourceGroups/TestResourceGroup"
+            }
+          },
+          {
+            "name": "TestTagEnforcement",
+            "type": "Microsoft.Authorization/policyAssignments",
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/resourceGroups/TestResourceGroup/providers/Microsoft.Authorization/policyAssignments/TestTagEnforcement",
+            "properties": {
+              "description": "Ensure a given tag key and value are present on all resources",
+              "definitionVersion": "1.*.*",
+              "displayName": "Enforces a tag key and value",
+              "effectiveDefinitionVersion": "1.0.0",
+              "instanceId": "f0b1c2d3-e4f5-6a7b-8c9d-0e1f2a3b4c5d",
+              "latestDefinitionVersion": "1.0.0",
+              "notScopes": [],
+              "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/TagKeyValue",
+              "scope": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/resourceGroups/TestResourceGroup"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicyAssignments_ListForResourceGroup",
+  "title": "List policy assignments that apply to a resource group"
+}
