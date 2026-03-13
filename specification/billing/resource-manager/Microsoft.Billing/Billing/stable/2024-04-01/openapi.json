@@ -22330,18 +22330,26 @@
       "type": "object",
       "description": "List of savings plans",
       "properties": {
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link (url) to the next page of items"
+        },
+        "value": {
+          "type": "array",
+          "description": "The SavingsPlanModel items on this page",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanModel"
+          }
+        },
         "summary": {
           "$ref": "#/definitions/SavingsPlanSummaryCount",
           "description": "The roll out count summary of the savings plans"
         }
       },
       "required": [
+        "value",
         "summary"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SavingsPlanModelList"
-        }
       ]
     },
     "SavingsPlanModelProperties": {
