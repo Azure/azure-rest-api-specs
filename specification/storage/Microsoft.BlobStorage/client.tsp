@@ -273,3 +273,198 @@ op setAccessPolicyRequiredAcl is StorageOperationNoBody<
 >;
 
 @@override(Container.setAccessPolicy, setAccessPolicyRequiredAcl, "rust");
+
+// TODO: Need better mechanism than full-overrides for this scenario (omitting an optional parameter)
+
+/** ----- This section overrides structured-body operations for Rust to omit the internal structured-message request parameters ----- */
+/** The Upload Pages operation writes a range of pages to a page blob (Rust: omits structured-body request params) */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+@put
+@sharedRoute
+@route("?comp=page")
+op uploadPagesRust is StorageOperationRequestBody<
+  {
+    ...BodyParameter;
+    ...ContentLengthParameter;
+    ...ContentMd5Parameter;
+    ...ContentCrc64Parameter;
+    ...TimeoutParameter;
+
+    /** Bytes of data in the specified range. */
+    @header("Range")
+    range: string;
+
+    ...LeaseIdOptionalParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...IfSequenceNumberLessThanOrEqualToParameter;
+    ...IfSequenceNumberLessThanParameter;
+    ...IfSequenceNumberEqualToParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...IfNoneMatchParameter;
+    ...IfMatchParameter;
+    ...IfTagsParameter;
+    ...PageWriteParameter<"update">;
+  },
+  {
+    @statusCode statusCode: 201;
+    ...EtagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ContentMd5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...BlobSequenceNumberResponseHeader;
+    ...RequestServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+    ...StructuredBodyTypeResponseHeader;
+  },
+  "application/octet-stream"
+>;
+
+@@override(PageBlob.uploadPages, uploadPagesRust, "rust");
+
+/** The Append Block operation commits a new block of data to the end of an append blob (Rust: omits structured-body request params) */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+@put
+@sharedRoute
+@route("?comp=appendblock")
+op appendBlockRust is StorageOperationRequestBody<
+  {
+    ...BodyParameter;
+    ...TimeoutParameter;
+    ...ContentLengthParameter;
+    ...ContentMd5Parameter;
+    ...ContentCrc64Parameter;
+    ...LeaseIdOptionalParameter;
+    ...BlobConditionMaxSizeParameter;
+    ...BlobConditionAppendPosParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...IfNoneMatchParameter;
+    ...IfMatchParameter;
+    ...IfTagsParameter;
+  },
+  {
+    @statusCode statusCode: 201;
+    ...EtagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ContentMd5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...BlobAppendOffsetResponseHeader;
+    ...BlobCommittedBlockCountResponseHeader;
+    ...RequestServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+    ...StructuredBodyTypeResponseHeader;
+  },
+  "application/octet-stream"
+>;
+
+@@override(AppendBlob.appendBlock, appendBlockRust, "rust");
+
+/** The Upload Block Blob operation updates the content of an existing block blob (Rust: omits structured-body request params) */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+@put
+@sharedRoute
+op uploadBlockBlobRust is StorageOperationRequestBody<
+  {
+    ...MetadataHeaders;
+    ...BodyParameter;
+    ...TimeoutParameter;
+    ...ContentMd5Parameter;
+    ...ContentLengthParameter;
+    ...BlobContentTypeParameter;
+    ...BlobContentEncodingParameter;
+    ...BlobContentLanguageParameter;
+    ...BlobContentMd5Parameter;
+    ...BlobCacheControlParameter;
+    ...LeaseIdOptionalParameter;
+    ...BlobContentDispositionParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...AccessTierHeader;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...IfNoneMatchParameter;
+    ...IfMatchParameter;
+    ...IfTagsParameter;
+    ...BlobTagsHeaderParameter;
+    ...ImmutabilityPolicyExpiryParameter;
+    ...ImmutabilityPolicyModeParameter;
+    ...LegalHoldOptionalParameter;
+    ...ContentCrc64Parameter;
+
+    /** The type of the blob. */
+    @header("x-ms-blob-type")
+    blobType: "BlockBlob";
+  },
+  {
+    @statusCode statusCode: 201;
+    ...EtagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ContentMd5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...VersionIdResponseHeader;
+    ...RequestServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+    ...StructuredBodyTypeResponseHeader;
+  },
+  "application/octet-stream"
+>;
+
+@@override(BlockBlob.upload, uploadBlockBlobRust, "rust");
+
+/** The Stage Block operation creates a new block to be committed as part of a blob (Rust: omits structured-body request params) */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+@put
+@sharedRoute
+@route("?comp=block")
+op stageBlockRust is StorageOperationRequestBody<
+  {
+    ...BlockIdParameter;
+    ...ContentLengthParameter;
+    ...ContentMd5Parameter;
+    ...ContentCrc64Parameter;
+    ...BodyParameter;
+    ...TimeoutParameter;
+    ...LeaseIdOptionalParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+  },
+  {
+    @statusCode statusCode: 201;
+    ...ContentMd5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...RequestServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+    ...StructuredBodyTypeResponseHeader;
+  },
+  "application/octet-stream"
+>;
+
+@@override(BlockBlob.stageBlock, stageBlockRust, "rust");
