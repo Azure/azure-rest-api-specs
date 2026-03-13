@@ -64,11 +64,46 @@ using Microsoft.ContainerService;
 @@clientName(ManagedClusters.rebalanceLoadBalancers::parameters.body,
   "parameters"
 );
+@@clientLocation(ManagedClusters.getAvailableAgentPoolVersions,
+  AgentPools,
+  "!csharp"
+);
+@@clientLocation(ManagedClusters.privateLinkResourcesList,
+  "PrivateLinkResources",
+  "!csharp"
+);
 @@clientName(ManagedClusters.privateLinkResourcesList, "List");
+@@clientLocation(ManagedClusters.post,
+  "ResolvePrivateLinkServiceId",
+  "!csharp"
+);
 @@clientName(ManagedClusters.post, "POST");
 @@clientName(ManagedClusters.post::parameters.body, "parameters");
+@@clientLocation(ManagedClusters.operationStatusResultList,
+  "OperationStatusResult",
+  "!csharp"
+);
 @@clientName(ManagedClusters.operationStatusResultList, "List");
+@@clientLocation(ManagedClusters.operationStatusResultGet,
+  "OperationStatusResult",
+  "!csharp"
+);
 @@clientName(ManagedClusters.operationStatusResultGet, "Get");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ManagedCluster.properties);
+
+@@clientLocation(ManagedClusterUpgradeProfiles.getUpgradeProfile,
+  ManagedClusters,
+  "!csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ManagedClusterUpgradeProfile.properties);
+
+@@clientName(ManagedClusters.privateLinkResourcesList, "List", "!csharp");
+@@clientName(ManagedClusters.post, "POST", "!csharp");
+@@clientName(ManagedClusters.post::parameters.body, "parameters", "!csharp");
+@@clientName(ManagedClusters.operationStatusResultList, "List", "!csharp");
+@@clientName(ManagedClusters.operationStatusResultGet, "Get", "!csharp");
 
 @@clientName(MaintenanceConfigurations.createOrUpdate::parameters.resource,
   "parameters"
@@ -81,6 +116,16 @@ using Microsoft.ContainerService;
 
 @@clientName(AgentPools.createOrUpdate::parameters.resource, "parameters");
 @@clientName(AgentPools.deleteMachines::parameters.body, "machines");
+@@clientLocation(AgentPools.getByAgentPool, "OperationStatusResult", "!csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(AgentPool.properties);
+
+@@clientLocation(AgentPoolUpgradeProfiles.getUpgradeProfile,
+  AgentPools,
+  "!csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(AgentPoolUpgradeProfile.properties);
 
 @@clientName(Machines.createOrUpdate::parameters.resource, "parameters");
 
@@ -140,35 +185,57 @@ using Microsoft.ContainerService;
 @@clientLocation(AgentPoolUpgradeProfiles.getUpgradeProfile, AgentPools);
 
 @@clientLocation(GuardrailsAvailableVersions.getGuardrailsVersions,
-  ManagedClusters
+  ManagedClusters,
+  "!csharp"
 );
 @@clientLocation(GuardrailsAvailableVersions.listGuardrailsVersions,
-  ManagedClusters
+  ManagedClusters,
+  "!csharp"
 );
 
 @@clientLocation(SafeguardsAvailableVersions.getSafeguardsVersions,
-  ManagedClusters
+  ManagedClusters,
+  "!csharp"
 );
 @@clientLocation(SafeguardsAvailableVersions.listSafeguardsVersions,
-  ManagedClusters
+  ManagedClusters,
+  "!csharp"
 );
 
-@@clientLocation(MeshRevisionProfiles.getMeshRevisionProfile, ManagedClusters);
+@@clientLocation(MeshRevisionProfiles.getMeshRevisionProfile,
+  ManagedClusters,
+  "!csharp"
+);
 @@clientLocation(MeshRevisionProfiles.listMeshRevisionProfiles,
-  ManagedClusters
+  ManagedClusters,
+  "!csharp"
 );
 
-@@clientLocation(MeshUpgradeProfiles.getMeshUpgradeProfile, ManagedClusters);
-@@clientLocation(MeshUpgradeProfiles.listMeshUpgradeProfiles, ManagedClusters);
+@@clientLocation(MeshUpgradeProfiles.getMeshUpgradeProfile,
+  ManagedClusters,
+  "!csharp"
+);
+@@clientLocation(MeshUpgradeProfiles.listMeshUpgradeProfiles,
+  ManagedClusters,
+  "!csharp"
+);
 
 @@clientLocation(ManagedClustersOperationGroup.listKubernetesVersions,
-  ManagedClusters
+  ManagedClusters,
+  "!csharp"
 );
 
 @@clientLocation(ContainerServiceOperationGroup.listNodeImageVersions,
-  "ContainerService"
+  "ContainerService",
+  "!csharp"
 );
 
-@@clientLocation(TrustedAccessRolesOperationGroup.list, "TrustedAccessRoles");
+@@clientLocation(TrustedAccessRolesOperationGroup.list,
+  "TrustedAccessRoles",
+  "!csharp"
+);
 
-@@clientLocation(VmSkusOperationGroup.list, "VmSkus");
+@@clientLocation(VmSkusOperationGroup.list, "VmSkus", "!csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(OperationValue.display);
