@@ -178,3 +178,67 @@ using Compute;
   "publicIpAllocationMethod",
   "java"
 );
+
+// C# model renames — preserve backward compatibility during TypeSpec migration
+
+// VM sub-model renames: prefix with "VirtualMachine" to match old C# names
+@@clientName(DataDisk, "VirtualMachineDataDisk", "csharp");
+@@clientName(HardwareProfile, "VirtualMachineHardwareProfile", "csharp");
+@@clientName(NetworkProfile, "VirtualMachineNetworkProfile", "csharp");
+@@clientName(OSProfile, "VirtualMachineOSProfile", "csharp");
+@@clientName(StorageProfile, "VirtualMachineStorageProfile", "csharp");
+@@clientName(ManagedDiskParameters, "VirtualMachineManagedDisk", "csharp");
+
+// VMSS sub-model renames
+@@clientName(UpgradePolicy, "VirtualMachineScaleSetUpgradePolicy", "csharp");
+@@clientName(PriorityMixPolicy,
+  "VirtualMachineScaleSetPriorityMixPolicy",
+  "csharp"
+);
+
+// Enum singular←plural renames
+@@clientName(CachingTypes, "CachingType", "csharp");
+@@clientName(DiskCreateOptionTypes, "DiskCreateOptionType", "csharp");
+@@clientName(DiskDeleteOptionTypes, "DiskDeleteOptionType", "csharp");
+@@clientName(DiskDetachOptionTypes, "DiskDetachOptionType", "csharp");
+
+// RP-prefix renames
+@@clientName(Plan, "ComputePlan", "csharp");
+@@clientName(SkuProfile, "ComputeSkuProfile", "csharp");
+@@clientName(UpdateResource, "ComputeResourcePatch", "csharp");
+
+// Base type rename
+@@clientName(VirtualMachineImageResource, "VirtualMachineImageBase", "csharp");
+
+// Long enum/type renames
+@@clientName(ExpandTypesForGetCapacityReservationGroups,
+  "CapacityReservationGroupGetExpand",
+  "csharp"
+);
+
+// VM→Vm casing renames (old C# convention used lowercase "Vm")
+@@clientName(VirtualMachineScaleSetVMInstanceIDs,
+  "VirtualMachineScaleSetVmInstanceIds",
+  "csharp"
+);
+@@clientName(ResilientVMDeletionStatus, "ResilientVmDeletionStatus", "csharp");
+@@clientName(LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
+  "LinuxVmGuestPatchAutomaticByPlatformRebootSetting",
+  "csharp"
+);
+@@clientName(WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
+  "WindowsVmGuestPatchAutomaticByPlatformRebootSetting",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetVMInstanceView,
+  "VirtualMachineScaleSetVmInstanceView",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetVMProperties,
+  "VirtualMachineScaleSetVmProperties",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetVMProtectionPolicy,
+  "VirtualMachineScaleSetVmProtectionPolicy",
+  "csharp"
+);
