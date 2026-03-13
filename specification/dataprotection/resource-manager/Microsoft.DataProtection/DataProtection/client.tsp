@@ -813,7 +813,7 @@ using Microsoft.DataProtection;
 /**
  * List Restore Ranges Response
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Composition is used here to reuse common resource model."
 model BackupFindRestorableTimeRangesResponse extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<AzureBackupFindRestorableTimeRangesResponseResource, "id" | "name" | "type" | "systemData">;
 }
