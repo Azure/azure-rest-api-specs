@@ -3,11 +3,13 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @tag("Agent Sessions")
+@removed(Versions.v1)
 interface AgentSessions {
   /**
    * Streams console logs (stdout / stderr) for a specific hosted agent session

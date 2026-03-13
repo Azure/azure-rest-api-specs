@@ -2,6 +2,7 @@ import "../common/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -9,6 +10,7 @@ namespace Azure.AI.Projects;
  * Known SSE event types emitted by the hosted agent session log stream.
  * Additional event types may be introduced in future versions.
  */
+@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
@@ -41,6 +43,7 @@ union SessionLogEventType {
  * data: {"timestamp":"2026-03-10T09:34:52.714Z","stream":"status","message":"Successfully connected to container"}
  * ```
  */
+@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
