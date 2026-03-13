@@ -56,7 +56,7 @@ op getReplace(
 @@alternateType(getReplace::parameters.heatMapType, "default", "go");
 @@clientName(Microsoft.Network,
   "TrafficManagerManagementClient",
-  "javascript, python"
+  "javascript,python,java"
 );
 
 // csharp configurations
