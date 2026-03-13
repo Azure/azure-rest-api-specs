@@ -124,7 +124,7 @@ model AccessControlListMatchConfigurationPatch {
   actions?: AccessControlListActionPatch[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common match conditions for AccesslControlList specific match conditions"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common match conditions for AccessControlList specific match conditions"
 @doc("Defines the match condition that is supported to filter the traffic.")
 model AccessControlListMatchCondition extends CommonMatchConditions {
   @doc("List of ether type values that need to be matched.")
@@ -159,7 +159,7 @@ model AccessControlListMatchCondition extends CommonMatchConditions {
   icmpConfiguration?: IcmpConfigurationProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common match conditions for AccesslControlList specific match conditions"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common match conditions for AccessControlList specific match conditions"
 @doc("Defines the match condition that is supported to filter the traffic.")
 model AccessControlListMatchConditionPatch extends CommonMatchConditionsPatch {
   @doc("List of ether type values that need to be matched.")

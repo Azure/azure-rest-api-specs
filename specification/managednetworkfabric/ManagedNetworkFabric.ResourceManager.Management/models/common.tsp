@@ -1348,7 +1348,7 @@ union NetworkDeviceRole {
 /**
  * The error message.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Extending Resoruce Manager error response"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Extending Resource Manager error response"
 @Azure.ResourceManager.CommonTypes.Private.armCommonDefinition(
   "ErrorResponse",
   Azure.ResourceManager.CommonTypes.Versions.v5
