@@ -119,3 +119,6 @@ using Microsoft.ContainerRegistry;
 
 // Property rename: DateTimeOffset properties must end with "On"
 @@clientName(ImageUpdateTrigger.timestamp, "OccurredOn", "csharp");
+
+// C# namespace fix: interface Tasks conflicts with last namespace segment "Tasks"
+@@clientName(Tasks, "ContainerRegistryTaskRestClient", "csharp");
