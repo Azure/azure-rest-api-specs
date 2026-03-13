@@ -134,3 +134,12 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Azure.AI.Projects.Jobs.delete, "delete", "python");
 @@clientName(Azure.AI.Projects.Jobs.cancel, "cancel", "python");
+
+@@clientName(Azure.AI.Projects.Models.listVersions, "list", "python");
+@@clientName(Azure.AI.Projects.Models.getVersion, "get", "python");
+@@clientName(Azure.AI.Projects.Models.deleteVersion, "delete", "python");
+@@clientName(Azure.AI.Projects.Models.createOrUpdateVersion,
+  "create_or_update",
+  "python"
+);
+@@clientName(Azure.AI.Projects.Models.publish, "publish", "python");

@@ -1,0 +1,34 @@
+{
+  "title": "Models_ListVersions_MaximumSet",
+  "operationId": "Models_ListVersions",
+  "parameters": {
+    "api-version": "2025-05-15-preview",
+    "name": "my-classification-model",
+    "listViewType": "ActiveOnly",
+    "stage": "Development"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/models/my-classification-model/versions/1",
+            "name": "my-classification-model",
+            "version": "1",
+            "description": "Fine-tuned classification model",
+            "tags": {
+              "framework": "sklearn",
+              "task": "classification"
+            },
+            "modelUri": "azureml://datastores/workspaceblobstore/paths/outputs/model/",
+            "modelType": "custom_model",
+            "stage": "Development",
+            "isArchived": false,
+            "provisioningState": "Succeeded"
+          }
+        ],
+        "nextLink": "https://eastus.api.azureml.ms/models/my-classification-model/versions?api-version=2025-05-15-preview&skip=100"
+      }
+    }
+  }
+}
