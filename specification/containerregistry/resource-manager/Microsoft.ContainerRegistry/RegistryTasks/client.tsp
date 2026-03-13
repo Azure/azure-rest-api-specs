@@ -182,10 +182,7 @@ using Microsoft.ContainerRegistry;
   "ContainerRegistryTaskBaseImageTriggerType",
   "csharp"
 );
-@@clientName(ImageDescriptor,
-  "ContainerRegistryTaskImageDescriptor",
-  "csharp"
-);
+@@clientName(ImageDescriptor, "ContainerRegistryTaskImageDescriptor", "csharp");
 @@clientName(ImageUpdateTrigger,
   "ContainerRegistryTaskImageUpdateTrigger",
   "csharp"
