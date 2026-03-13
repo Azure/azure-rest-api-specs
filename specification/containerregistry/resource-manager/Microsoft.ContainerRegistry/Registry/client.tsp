@@ -296,3 +296,21 @@ using Microsoft.ContainerRegistry;
 
 // C# property renames: Source.instanceID -> InstanceId (match old casing)
 @@clientName(Source.instanceID, "InstanceId", "csharp");
+
+// C# property renames: PrivateEndpointConnection
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+
+// C# type correctness: WebhookCreateOrUpdateContent.location -> AzureLocation
+@@alternateType(WebhookCreateParameters.location, azureLocation, "csharp");
+
+// C# operation rename: CheckNameAvailability -> CheckContainerRegistryNameAvailability
+@@clientName(Registries.checkNameAvailability,
+  "CheckContainerRegistryNameAvailability",
+  "csharp"
+);
+
+// C# type correctness: PrivateEndpointId as armResourceIdentifier
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
