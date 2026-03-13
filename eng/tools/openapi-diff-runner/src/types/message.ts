@@ -23,7 +23,7 @@ export type MessageContext = {
 };
 
 export type Extra = {
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 export type BaseMessageRecord = {

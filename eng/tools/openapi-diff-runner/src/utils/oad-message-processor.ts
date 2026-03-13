@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { logMessage, logMessageSafeAsync } from "../log.js";
 import { Context, logFileName } from "../types/breaking-change.js";
-import { JsonPath, MessageLevel, ResultMessageRecord } from "../types/message.js";
+import { JsonPath, ResultMessageRecord } from "../types/message.js";
 import { OadMessage } from "../types/oad-types.js";
 import { sourceBranchHref, specificBranchHref } from "./common-utils.js";
 
@@ -47,7 +47,7 @@ export function convertOadMessagesToResultMessageRecords(
     }
     return {
       type: "Result",
-      level: oadMessage.type as MessageLevel,
+      level: oadMessage.type,
       message: oadMessage.message,
       code: oadMessage.code,
       id: oadMessage.id,
@@ -58,7 +58,7 @@ export function convertOadMessagesToResultMessageRecords(
         mode: oadMessage.mode,
       },
       paths: paths,
-    } as ResultMessageRecord;
+    };
   });
 }
 

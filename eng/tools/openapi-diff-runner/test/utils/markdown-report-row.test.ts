@@ -57,7 +57,10 @@ describe("markdown-report-row", () => {
       paths,
     }) as ResultMessageRecord;
 
-  const createRawMessage = (message: string, extra: Record<string, any> = {}): BrChMsgRecord => ({
+  const createRawMessage = (
+    message: string,
+    extra: Record<string, unknown> = {},
+  ): BrChMsgRecord => ({
     type: "Raw",
     level: "Error",
     message,
@@ -81,8 +84,8 @@ describe("markdown-report-row", () => {
     if (expectedLength > 0) {
       expect(result[0]).toMatchObject({
         index: 1,
-        msg: expect.any(Object),
-        description: expect.any(String),
+        msg: expect.any(Object) as unknown,
+        description: expect.any(String) as unknown,
       });
     }
   };

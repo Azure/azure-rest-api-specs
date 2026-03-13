@@ -15,6 +15,19 @@ import { createOadMessageProcessor } from "./utils/oad-message-processor.js";
 import { createPullRequestProperties } from "./utils/pull-request.js";
 
 /**
+ * Minimal interface for a parsed Swagger/OpenAPI document used when creating dummy swagger files.
+ */
+interface SwaggerDocument {
+  paths: Record<string, unknown>;
+  "x-ms-paths"?: Record<string, unknown>;
+  "x-ms-parameterized-host"?: Record<string, unknown>;
+  responses: Record<string, unknown>;
+  parameters: Record<string, unknown>;
+  definitions: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
+/**
  * Interface for parsed CLI arguments
  */
 export interface ParsedCliArguments {
@@ -189,8 +202,8 @@ export async function getSwaggerDiffs(
         filteredDeletions.length +
         filteredRenames.length,
     };
-  } catch (error) {
-    logError(`Error getting categorized changed files: ${error}`);
+  } catch (error: unknown) {
+    logError(`Error getting categorized changed files: ${String(error)}`);
     // Return empty result on error
     return {
       additions: [],
@@ -266,7 +279,7 @@ export function createDummySwagger(fromSwagger: string, toSwagger: string): void
     mkdirSync(path.dirname(toSwagger), { recursive: true });
   }
   const content = readFileSync(fromSwagger).toString();
-  const swaggerJson = JSON.parse(content);
+  const swaggerJson: SwaggerDocument = JSON.parse(content) as SwaggerDocument;
   swaggerJson.paths = {};
   if (swaggerJson["x-ms-paths"]) {
     swaggerJson["x-ms-paths"] = {};

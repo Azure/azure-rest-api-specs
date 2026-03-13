@@ -364,7 +364,7 @@ describe("command-helpers", () => {
         baseCommitish: TEST_CONSTANTS.BRANCHES.MAIN,
         cwd: TEST_CONSTANTS.PATHS.TEST_PATH,
         headCommitish: TEST_CONSTANTS.COMMITS.HEAD,
-        logger: expect.anything(),
+        logger: expect.anything() as unknown,
         paths: ["specification"],
       });
     });
@@ -447,7 +447,7 @@ describe("command-helpers", () => {
         baseCommitish: undefined,
         cwd: undefined,
         headCommitish: undefined,
-        logger: expect.anything(),
+        logger: expect.anything() as unknown,
         paths: ["specification"],
       });
     });
@@ -672,7 +672,7 @@ describe("command-helpers", () => {
 
       // Verify the dummy swagger content
       const writeCall = mockWriteFileSync.mock.calls[0];
-      const writtenContent = JSON.parse(writeCall[1] as string);
+      const writtenContent = JSON.parse(writeCall[1] as string) as Record<string, unknown>;
       expect(writtenContent.paths).toEqual({});
       expect(writtenContent["x-ms-paths"]).toEqual({});
       expect(writtenContent["x-ms-parameterized-host"]).toBeUndefined();
@@ -728,7 +728,7 @@ describe("command-helpers", () => {
 
       expect(mockWriteFileSync).toHaveBeenCalled();
       const writeCall = mockWriteFileSync.mock.calls[0];
-      const writtenContent = JSON.parse(writeCall[1] as string);
+      const writtenContent = JSON.parse(writeCall[1] as string) as Record<string, unknown>;
       expect(writtenContent.paths).toEqual({});
       expect(writtenContent["x-ms-paths"]).toBeUndefined();
       expect(writtenContent["x-ms-parameterized-host"]).toBeUndefined();

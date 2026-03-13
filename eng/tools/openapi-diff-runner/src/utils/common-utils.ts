@@ -115,14 +115,16 @@ export async function getVersionFromInputFile(
     }
   }
 
-  let version = "";
+  let version: string | undefined;
   // If no regex match found, try to read version from file content
   try {
     const fileContent = await readFile(filePath, "utf8");
-    const parsedContent = JSON.parse(fileContent);
+    const parsedContent = JSON.parse(fileContent) as { info?: { version?: string } };
     version = parsedContent?.info?.version;
   } catch (error) {
-    throw new Error(`Failed to read version from file:${filePath}, cause: ${error}`);
+    throw new Error(`Failed to read version from file:${filePath}, cause: ${String(error)}`, {
+      cause: error,
+    });
   }
   if (!version) {
     throw new Error(`Version not found in file: ${filePath}`);
@@ -163,7 +165,7 @@ export function processOadRuntimeErrorMessage(
   message: string,
   stackTraceMaxLength: number,
 ): string {
-  let outputMsg: string = "";
+  let outputMsg: string;
 
   // Example "message" string, truncated with cutoffMsg():
   //
@@ -173,7 +175,7 @@ export function processOadRuntimeErrorMessage(
     message.startsWith("Command failed: node") && message.includes("autorest/dist/app.js");
 
   if (oadAutorestInvocationRuntimeError) {
-    let lines: string[] = message.split(/[\r\n]+/);
+    const lines: string[] = message.split(/[\r\n]+/);
 
     const introLine: string =
       `Breaking change detector (OAD) invoked AutoRest. AutoRest threw a runtime error. ` +

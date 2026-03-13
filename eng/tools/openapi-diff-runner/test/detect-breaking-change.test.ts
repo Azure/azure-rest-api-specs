@@ -1,17 +1,23 @@
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
-import { existsSync } from "node:fs";
+import { existsSync, type PathLike } from "node:fs";
 import * as path from "node:path";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 import {
+  type BreakingChangeDetectionContext,
   checkBreakingChangeOnSameVersion,
   doBreakingChangeDetection,
   getReadmeFolder,
   getSpecModel,
   isInDevFolder,
-  type BreakingChangeDetectionContext,
 } from "../src/detect-breaking-change.js";
 import { ApiVersionLifecycleStage, Context } from "../src/types/breaking-change.js";
-import { getExistedVersionOperations, getPrecedingSwaggers } from "../src/utils/spec.js";
+import type { OadTraceData } from "../src/types/oad-types.js";
+import {
+  getExistedVersionOperations,
+  getPrecedingSwaggers,
+  type Swagger,
+} from "../src/utils/spec.js";
 
 vi.mock("@azure-tools/specs-shared/spec-model", () => ({
   SpecModel: vi.fn(),
@@ -34,13 +40,20 @@ vi.mock("node:fs", async (importOriginal) => {
 
 // Mock specific functions but keep getSpecModel as real implementation
 vi.mock("../src/detect-breaking-change.js", async () => {
-  const original = await vi.importActual<any>("../src/detect-breaking-change.js");
+  const original = await vi.importActual<typeof import("../src/detect-breaking-change.js")>(
+    "../src/detect-breaking-change.js",
+  );
   return {
     ...original,
     createBreakingChangeDetectionContext: vi
       .fn()
       .mockImplementation(
-        (context, existingVersionSwaggers, newVersionSwaggers, newVersionChangedSwaggers) => ({
+        (
+          context: Context,
+          existingVersionSwaggers: string[],
+          newVersionSwaggers: string[],
+          newVersionChangedSwaggers: string[],
+        ) => ({
           context,
           existingVersionSwaggers,
           newVersionSwaggers,
@@ -60,7 +73,7 @@ vi.mock("../src/utils/common-utils.js", () => ({
   specIsPreview: vi.fn().mockReturnValue(false),
   blobHref: vi.fn().mockReturnValue("https://github.com/test/test.json"),
   branchHref: vi.fn().mockReturnValue("https://github.com/test/test.json"),
-  getRelativeSwaggerPathToRepo: vi.fn().mockImplementation((path) => path),
+  getRelativeSwaggerPathToRepo: vi.fn().mockImplementation((p: string) => p),
   processOadRuntimeErrorMessage: vi.fn(),
 }));
 
@@ -94,7 +107,7 @@ vi.mock("../src/utils/apply-rules.js", () => ({
 describe("detect-breaking-change", () => {
   let mockContext: Context;
   let mockDetectionContext: BreakingChangeDetectionContext;
-  let detectionModule: any;
+  let detectionModule: typeof import("../src/detect-breaking-change.js");
 
   // Test constants
   const TEST_CONSTANTS = {
@@ -122,17 +135,20 @@ describe("detect-breaking-change", () => {
 
   // Test data factories
   const TestFixtures = {
-    createMockSpecModel: (folder = TEST_CONSTANTS.FOLDERS.mockFolder, swaggers: any[] = []) => ({
+    createMockSpecModel: (
+      folder = TEST_CONSTANTS.FOLDERS.mockFolder,
+      swaggers: Swagger[] = [],
+    ) => ({
       getSwaggers: vi.fn().mockResolvedValue(swaggers || []),
       folder,
       logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn() },
-      readmes: [] as any[],
+      readmes: [] as unknown[],
     }),
 
     createSpyManager: () => {
-      const spies: Array<any> = [];
+      const spies: MockInstance[] = [];
       return {
-        add: (spy: any) => {
+        add: <T extends MockInstance>(spy: T): T => {
           spies.push(spy);
           return spy;
         },
@@ -174,7 +190,7 @@ describe("detect-breaking-change", () => {
         swaggerDirs: ["specification"],
         baseBranch: "main",
         headCommit: "abc123",
-        runType: "SAME_VERSION" as any,
+        runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test-check",
         targetRepo: "Azure/azure-rest-api-specs",
         sourceRepo: "user/azure-rest-api-specs",
@@ -212,7 +228,7 @@ describe("detect-breaking-change", () => {
         ...overrides,
       }) as Context,
 
-    createMockSwagger: (pathOverride?: string, operationsOverride?: Map<string, any>) => ({
+    createMockSwagger: (pathOverride?: string, operationsOverride?: Map<string, unknown>) => ({
       path: pathOverride || `${TEST_CONSTANTS.FOLDERS.tempRepo}/${TEST_CONSTANTS.PATHS.storage}`,
       getOperations: vi
         .fn()
@@ -231,7 +247,7 @@ describe("detect-breaking-change", () => {
       });
     },
 
-    setupSpecModelMock: (mockInstance?: any) => {
+    setupSpecModelMock: (mockInstance?: unknown) => {
       if (mockInstance) {
         // Use the provided instance
         vi.mocked(SpecModel).mockImplementation(function () {
@@ -272,7 +288,7 @@ describe("detect-breaking-change", () => {
       const testPath = TEST_CONSTANTS.PATHS.network;
 
       // Mock existsSync to return true only for the resource-manager level
-      vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+      vi.mocked(existsSync).mockImplementation((pathArg: PathLike) => {
         return pathArg
           .toString()
           .endsWith(path.join("specification", "network", "resource-manager", "readme.md"));
@@ -286,7 +302,7 @@ describe("detect-breaking-change", () => {
       const testPath =
         "specification/cognitiveservices/data-plane/TextAnalytics/preview/v3.1/textanalytics.json";
 
-      vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+      vi.mocked(existsSync).mockImplementation((pathArg: PathLike) => {
         return pathArg
           .toString()
           .endsWith(path.join("specification", "cognitiveservices", "data-plane", "readme.md"));
@@ -319,7 +335,7 @@ describe("detect-breaking-change", () => {
       const testPath =
         "dev/network/resource-manager/Microsoft.Network/stable/2019-11-01/network.json";
 
-      vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+      vi.mocked(existsSync).mockImplementation((pathArg: PathLike) => {
         return pathArg
           .toString()
           .endsWith(path.join("specification", "network", "resource-manager", "readme.md"));
@@ -339,7 +355,7 @@ describe("detect-breaking-change", () => {
       const testPath =
         "specification\\network\\resource-manager\\Microsoft.Network\\stable\\2019-11-01\\network.json";
 
-      vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+      vi.mocked(existsSync).mockImplementation((pathArg: PathLike) => {
         return pathArg
           .toString()
           .endsWith(path.join("specification", "network", "resource-manager", "readme.md"));
@@ -354,7 +370,7 @@ describe("detect-breaking-change", () => {
         "specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/network.json";
 
       // Simulate readme.md at Microsoft.Network level (within search range)
-      vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+      vi.mocked(existsSync).mockImplementation((pathArg: PathLike) => {
         const pathStr = pathArg.toString();
         return pathStr.includes(path.join("Microsoft.Network", "readme.md"));
       });
@@ -386,7 +402,7 @@ describe("detect-breaking-change", () => {
 
     // Helper function to create consistent folder existence mocks
     const createFolderExistenceMock = (existingFolders: string[], readmeFolders: string[] = []) => {
-      return vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+      return vi.mocked(existsSync).mockImplementation((pathArg: PathLike) => {
         const pathStr = pathArg.toString().replace(/\\/g, "/"); // Normalize to forward slashes for comparison
 
         // Check for readme.md files (used by getReadmeFolder)
@@ -502,7 +518,7 @@ describe("detect-breaking-change", () => {
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
 
-      vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+      vi.mocked(existsSync).mockImplementation((pathArg: PathLike) => {
         const pathStr = pathArg.toString().replace(/\\/g, "/"); // Normalize path separators
 
         // getReadmeFolder finds readme.md at resource-manager level (boundary fallback)
@@ -546,7 +562,7 @@ describe("detect-breaking-change", () => {
 
       // getReadmeFolder returns Microsoft.Network level, but that folder doesn't exist
       // However, resource-manager level has readme.md during upward search
-      vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+      vi.mocked(existsSync).mockImplementation((pathArg: PathLike) => {
         const pathStr = pathArg.toString().replace(/\\/g, "/"); // Normalize path separators
 
         // getReadmeFolder finds Microsoft.Network level
@@ -651,7 +667,7 @@ describe("detect-breaking-change", () => {
       );
 
       checkAPIsBeingMovedToANewSpecSpy.mockImplementation(
-        async (_context: any, swaggerPath: any, _availableSwaggers: any) => {
+        async (_context: Context, swaggerPath: string) => {
           await getExistedVersionOperations(swaggerPath, [], [...mockTargetOperations.values()]);
           return;
         },
@@ -691,7 +707,7 @@ describe("detect-breaking-change", () => {
       );
 
       checkAPIsBeingMovedToANewSpecSpy.mockImplementation(
-        async (_context: any, swaggerPath: any, _availableSwaggers: any) => {
+        async (_context: Context, swaggerPath: string) => {
           await getExistedVersionOperations(swaggerPath, [], [...mockTargetOperations.values()]);
           return;
         },
@@ -722,16 +738,16 @@ describe("detect-breaking-change", () => {
   });
 
   describe("checkCrossVersionBreakingChange", () => {
-    let mockSpecModelInstance: any;
+    let mockSpecModelInstance: ReturnType<typeof TestFixtures.createMockSpecModel>;
 
-    beforeEach(async () => {
+    beforeEach(() => {
       mockSpecModelInstance = TestFixtures.createMockSpecModel("/mock/folder", [
         { path: "/test/swagger1.json" },
         { path: "/test/swagger2.json" },
       ]);
 
       vi.mocked(SpecModel).mockImplementation(function () {
-        return mockSpecModelInstance;
+        return mockSpecModelInstance as unknown as SpecModel;
       });
       vi.mocked(getPrecedingSwaggers).mockResolvedValue({
         stable: "/test/previous-stable.json",
@@ -742,7 +758,7 @@ describe("detect-breaking-change", () => {
     it("should process new version swaggers", async () => {
       const detectionModule = await import("../src/detect-breaking-change.js");
       const getSpecModelSpy = vi.spyOn(detectionModule, "getSpecModel");
-      getSpecModelSpy.mockReturnValue(mockSpecModelInstance);
+      getSpecModelSpy.mockReturnValue(mockSpecModelInstance as unknown as SpecModel);
 
       mockDetectionContext.newVersionSwaggers = [TEST_CONSTANTS.PATHS.networkStable];
       mockDetectionContext.newVersionChangedSwaggers = [];
@@ -779,7 +795,7 @@ describe("detect-breaking-change", () => {
         getSwaggers: vi.fn().mockResolvedValue([mockTargetSwagger]),
         folder: "/test/working/dir/specification/storage/resource-manager",
         logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn() },
-        readmes: [] as any[],
+        readmes: [] as unknown[],
       };
 
       // Mock SpecModel constructor directly
@@ -824,19 +840,21 @@ describe("detect-breaking-change", () => {
   });
 
   describe("createBreakingChangeDetectionContext", () => {
-    it("should create context with all required properties", async () => {
+    it("should create context with all required properties", () => {
       vi.mocked(detectionModule.createBreakingChangeDetectionContext).mockImplementation(
         (
-          context: any,
-          existingVersionSwaggers: any,
-          newVersionSwaggers: any,
-          newVersionChangedSwaggers: any,
-          oadTracer: any,
+          context: Context,
+          existingVersionSwaggers: string[],
+          newVersionSwaggers: string[],
+          newVersionChangedSwaggers: string[],
+          renamedSwaggers: { from: string; to: string }[],
+          oadTracer: OadTraceData,
         ) => ({
           context,
           existingVersionSwaggers,
           newVersionSwaggers,
           newVersionChangedSwaggers,
+          renamedSwaggers,
           msgs: [],
           runtimeErrors: [],
           tempTagName: "oad-default-tag",
@@ -849,7 +867,8 @@ describe("detect-breaking-change", () => {
         ["existing1.json"],
         ["new1.json"],
         ["changed1.json"],
-        {} as any,
+        [],
+        { traces: [], baseBranch: "main", context: mockContext },
       );
 
       expect(detectionModule.createBreakingChangeDetectionContext).toHaveBeenCalled();
@@ -909,7 +928,7 @@ describe("detect-breaking-change", () => {
     const mockOldSpec = "/old/spec/path.json";
     const mockNewSpec =
       "specification/test/resource-manager/Microsoft.Test/stable/2021-05-01/test.json";
-    let mockCheckout: any;
+    let mockCheckout: MockInstance;
 
     beforeEach(() => {
       mockDetectionContext.msgs = [];
@@ -918,7 +937,7 @@ describe("detect-breaking-change", () => {
       mockDetectionContext.context = {
         ...mockContext,
         prInfo: { ...mockContext.prInfo, checkout: mockCheckout },
-      } as any;
+      } as unknown as Context;
     });
 
     it("should successfully detect breaking changes", async () => {
@@ -926,7 +945,7 @@ describe("detect-breaking-change", () => {
         mockDetectionContext,
         mockOldSpec,
         mockNewSpec,
-        "SAME_VERSION" as any,
+        BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         ApiVersionLifecycleStage.STABLE,
       );
 
@@ -942,7 +961,7 @@ describe("detect-breaking-change", () => {
         mockDetectionContext,
         mockOldSpec,
         mockNewSpec,
-        "CROSS_VERSION" as any,
+        BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
         ApiVersionLifecycleStage.PREVIEW,
       );
 
@@ -961,13 +980,13 @@ describe("detect-breaking-change", () => {
             checkout: vi.fn().mockRejectedValue(new Error("Checkout failed")),
           },
         },
-      } as any;
+      } as unknown as BreakingChangeDetectionContext;
 
       const result = await doBreakingChangeDetection(
         errorDetectionContext,
         mockOldSpec,
         mockNewSpec,
-        "SAME_VERSION" as any,
+        BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         ApiVersionLifecycleStage.STABLE,
       );
 
@@ -984,7 +1003,7 @@ describe("detect-breaking-change", () => {
         mockDetectionContext,
         mockOldSpec,
         mockNewSpec,
-        "SAME_VERSION" as any,
+        BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         ApiVersionLifecycleStage.STABLE,
       );
 
@@ -997,7 +1016,7 @@ describe("detect-breaking-change", () => {
         mockDetectionContext,
         mockOldSpec,
         mockNewSpec,
-        "SAME_VERSION" as any,
+        BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         ApiVersionLifecycleStage.STABLE,
       );
 
@@ -1007,7 +1026,7 @@ describe("detect-breaking-change", () => {
         mockDetectionContext,
         mockOldSpec,
         mockNewSpec,
-        "SAME_VERSION" as any,
+        BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         ApiVersionLifecycleStage.PREVIEW,
       );
 

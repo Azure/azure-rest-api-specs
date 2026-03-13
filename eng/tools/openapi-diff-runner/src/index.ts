@@ -113,7 +113,7 @@ function parseCliArguments(): ParsedCliArguments {
       prTargetBranch: values["pr-target-branch"] as string,
     };
   } catch (error) {
-    logError(`Error parsing arguments: ${error}`);
+    logError(`Error parsing arguments: ${String(error)}`);
     showHelp();
     exit(1);
   }
@@ -171,8 +171,7 @@ export async function main() {
   // Create context from parsed arguments
   const context = createContextFromParsedArgs(parsedArgs, workingFolder, logFileFolder);
   await buildPrInfo(context);
-  let statusCode = 0;
-  statusCode = await validateBreakingChange(context);
+  const statusCode = await validateBreakingChange(context);
 
   if (process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID) {
     logMessage(

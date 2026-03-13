@@ -1,9 +1,12 @@
 import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { simpleGit } from "simple-git";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi, type Mock } from "vitest";
 import { Context } from "../../src/types/breaking-change.js";
-import { createPullRequestProperties } from "../../src/utils/pull-request.js";
+import {
+  createPullRequestProperties,
+  type PullRequestProperties,
+} from "../../src/utils/pull-request.js";
 
 // Test constants
 const TEST_CONSTANTS = {
@@ -40,6 +43,31 @@ const TEST_CONSTANTS = {
   },
 } as const;
 
+interface MockGitRepo {
+  branch: Mock;
+  init: Mock;
+  getRemotes: Mock;
+  addRemote: Mock;
+  pull: Mock;
+  fetch: Mock;
+  checkout: Mock;
+  [key: string]: Mock;
+}
+
+interface MockPathModule {
+  join: Mock;
+  resolve: Mock;
+}
+
+interface ExpectedPullRequestProps {
+  baseBranch?: string;
+  targetBranch?: string;
+  sourceBranch?: string;
+  tempRepoFolder?: string;
+  currentBranch?: string;
+  hasCheckout?: boolean;
+}
+
 // Helper functions
 function createMockContext(overrides: Partial<Context> = {}): Context {
   return {
@@ -66,7 +94,7 @@ function createMockContext(overrides: Partial<Context> = {}): Context {
   };
 }
 
-function setupBasicGitMocks(mockGitRepo: any) {
+function setupBasicGitMocks(mockGitRepo: MockGitRepo) {
   mockGitRepo.branch.mockResolvedValue({
     all: [TEST_CONSTANTS.BRANCHES.MAIN, TEST_CONSTANTS.BRANCHES.SOURCE],
   });
@@ -78,7 +106,7 @@ function setupBasicGitMocks(mockGitRepo: any) {
   mockGitRepo.checkout.mockResolvedValue(undefined);
 }
 
-function setupCustomBranchMocks(mockGitRepo: any, branches: string[]) {
+function setupCustomBranchMocks(mockGitRepo: MockGitRepo, branches: string[]) {
   mockGitRepo.branch.mockResolvedValue({ all: branches });
   mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
   mockGitRepo.init.mockResolvedValue(undefined);
@@ -88,7 +116,7 @@ function setupCustomBranchMocks(mockGitRepo: any, branches: string[]) {
   mockGitRepo.checkout.mockResolvedValue(undefined);
 }
 
-function setupGitErrorMocks(mockGitRepo: any, errorType: string) {
+function setupGitErrorMocks(mockGitRepo: MockGitRepo, errorType: string) {
   mockGitRepo.branch.mockResolvedValue({
     all: [TEST_CONSTANTS.BRANCHES.MAIN, TEST_CONSTANTS.BRANCHES.SOURCE],
   });
@@ -99,13 +127,16 @@ function setupGitErrorMocks(mockGitRepo: any, errorType: string) {
   mockGitRepo.checkout.mockResolvedValue(undefined);
 }
 
-function setupPathMocks(mockPath: any, mockExistsSync: any, exists: boolean = true) {
+function setupPathMocks(mockPath: MockPathModule, mockExistsSync: Mock, exists: boolean = true) {
   mockExistsSync.mockReturnValue(exists);
   mockPath.resolve.mockReturnValue(TEST_CONSTANTS.PATHS.RESOLVED_WORKING_DIR);
   mockPath.join.mockImplementation((...paths: string[]) => paths.join("/"));
 }
 
-function expectPullRequestResult(result: any, expectedProps: Partial<any>) {
+function expectPullRequestResult(
+  result: PullRequestProperties | undefined,
+  expectedProps: ExpectedPullRequestProps,
+) {
   expect(result).toBeDefined();
   if (expectedProps.baseBranch) expect(result!.baseBranch).toBe(expectedProps.baseBranch);
   if (expectedProps.targetBranch) expect(result!.targetBranch).toBe(expectedProps.targetBranch);
@@ -116,13 +147,13 @@ function expectPullRequestResult(result: any, expectedProps: Partial<any>) {
   if (expectedProps.hasCheckout) expect(typeof result!.checkout).toBe("function");
 }
 
-function expectGitOperationCalls(mockGitRepo: any, operations: string[]) {
+function expectGitOperationCalls(mockGitRepo: MockGitRepo, operations: string[]) {
   operations.forEach((operation) => {
     expect(mockGitRepo[operation]).toHaveBeenCalled();
   });
 }
 
-function expectCheckoutResult(result: any, expectedBranch: string) {
+function expectCheckoutResult(result: PullRequestProperties | undefined, expectedBranch: string) {
   expect(result).toBeDefined();
   expect(result!.currentBranch).toBe(expectedBranch);
 }
@@ -135,7 +166,7 @@ vi.mock("simple-git");
 describe("pull-request", () => {
   const mockExistsSync = vi.mocked(existsSync);
   const mockMkdirSync = vi.mocked(mkdirSync);
-  const mockPath = vi.mocked(path);
+  const mockPath = vi.mocked(path) as unknown as MockPathModule;
   const mockSimpleGit = vi.mocked(simpleGit);
 
   // Mock git repository instance
@@ -153,7 +184,7 @@ describe("pull-request", () => {
     vi.clearAllMocks();
 
     // Setup default mocks
-    mockSimpleGit.mockReturnValue(mockGitRepo as any);
+    mockSimpleGit.mockReturnValue(mockGitRepo as unknown as ReturnType<typeof simpleGit>);
     mockPath.resolve.mockImplementation((...paths: string[]) => paths.join("/"));
     mockPath.join.mockImplementation((...paths: string[]) => paths.join("/"));
 
@@ -440,7 +471,7 @@ describe("pull-request", () => {
       });
 
       expect(mockSimpleGit).toHaveBeenCalledWith({
-        baseDir: expect.any(String), // working directory
+        baseDir: expect.any(String) as string, // working directory
         binary: "git",
         maxConcurrentProcesses: 1,
       });

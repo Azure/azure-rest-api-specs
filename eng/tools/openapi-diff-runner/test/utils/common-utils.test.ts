@@ -1,3 +1,4 @@
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { readFile } from "node:fs/promises";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Context } from "../../src/types/breaking-change.js";
@@ -95,7 +96,7 @@ describe("common-utils", () => {
     swaggerDirs: ["specification"],
     baseBranch: "main",
     headCommit: "abc123",
-    runType: "SameVersion" as any,
+    runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
     checkName: "test",
     targetRepo: "owner/repo",
     sourceRepo: "owner/repo",
@@ -579,7 +580,13 @@ describe("common-utils", () => {
         "TestError",
         "This is a test error message",
       );
-      const parsed = JSON.parse(result);
+      const parsed = JSON.parse(result) as {
+        type: string;
+        level: string;
+        message: string;
+        time: string;
+        extra: { details: string; location?: string };
+      };
 
       expect(parsed.type).toBe("Raw");
       expect(parsed.level).toBe("Error");
@@ -596,7 +603,12 @@ describe("common-utils", () => {
         "This is a warning",
         "Warning",
       );
-      const parsed = JSON.parse(result);
+      const parsed = JSON.parse(result) as {
+        type: string;
+        level: string;
+        message: string;
+        extra: { details: string };
+      };
 
       expect(parsed.type).toBe("Raw");
       expect(parsed.level).toBe("Warning");
@@ -612,7 +624,12 @@ describe("common-utils", () => {
         "Error",
         "specification/test/test.json",
       );
-      const parsed = JSON.parse(result);
+      const parsed = JSON.parse(result) as {
+        type: string;
+        level: string;
+        message: string;
+        extra: { details: string; location: string };
+      };
 
       expect(parsed.type).toBe("Raw");
       expect(parsed.level).toBe("Error");
@@ -625,7 +642,7 @@ describe("common-utils", () => {
 
     it("should handle empty error message", () => {
       const result = convertRawErrorToUnifiedMsg(mockContext, "EmptyError", "");
-      const parsed = JSON.parse(result);
+      const parsed = JSON.parse(result) as { extra: { details: string } };
 
       expect(parsed.extra.details).toBe("");
     });
@@ -633,7 +650,7 @@ describe("common-utils", () => {
     it("should handle special characters in error message", () => {
       const errorMsg = 'Error with "quotes" and \n newlines \t tabs';
       const result = convertRawErrorToUnifiedMsg(mockContext, "SpecialCharsError", errorMsg);
-      const parsed = JSON.parse(result);
+      const parsed = JSON.parse(result) as { extra: { details: string } };
 
       expect(parsed.extra.details).toBe(errorMsg);
     });

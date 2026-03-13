@@ -5,13 +5,12 @@ import {
   getBaseNameForSwagger,
   getExistedVersionOperations,
   getPrecedingSwaggers,
+  type Operation,
   type Swagger,
 } from "../../src/utils/spec.js";
 
-// Type definitions for tests (extending the base interfaces if needed)
-interface MockSwagger extends Swagger {
-  // Can add test-specific properties if needed
-}
+// Type alias for tests
+type MockSwagger = Swagger;
 
 describe("Helper functions for version analysis", () => {
   // Helper function to create mock operations
@@ -25,11 +24,11 @@ describe("Helper functions for version analysis", () => {
   const createMockSwagger = (
     path: string,
     versionKind?: ApiVersionLifecycleStage,
-    operations?: Map<string, any>,
+    operations?: Map<string, Operation>,
   ): MockSwagger => ({
     path,
     ...(versionKind && { versionKind }),
-    ...(operations && { getOperations: async () => operations }),
+    ...(operations && { getOperations: () => Promise.resolve(operations) }),
   });
 
   // Helper function to create operations map
@@ -44,7 +43,11 @@ describe("Helper functions for version analysis", () => {
   };
 
   // Helper function to expect standard result structure
-  const expectResultStructure = (result: any, stable?: string, preview?: string) => {
+  const expectResultStructure = (
+    result: { stable?: string; preview?: string },
+    stable?: string,
+    preview?: string,
+  ) => {
     expect(result).toHaveProperty("stable");
     expect(result).toHaveProperty("preview");
     if (stable !== undefined) expect(result.stable).toBe(stable);

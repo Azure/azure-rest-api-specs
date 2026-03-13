@@ -36,7 +36,7 @@ export async function applyRules(
   previousApiVersionLifecycleStage: ApiVersionLifecycleStage,
 ): Promise<OadMessage[]> {
   logMessage("ENTER definition applyRules");
-  let outputOadMessages: OadMessage[] = [];
+  const outputOadMessages: OadMessage[] = [];
   let outputOadMessage: OadMessage;
 
   for (const oadMessage of oadMessages) {
@@ -78,7 +78,7 @@ async function applyRule(
   previousApiVersionLifecycleStage: ApiVersionLifecycleStage,
 ): Promise<OadMessage> {
   const isSameVersionOnPreview =
-    previousApiVersionLifecycleStage === "preview" &&
+    previousApiVersionLifecycleStage === ApiVersionLifecycleStage.PREVIEW &&
     rule.scenario === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION;
 
   // Comparing against previous previews always decreases failure severity from error to warning.
@@ -88,7 +88,7 @@ async function applyRule(
   // See also:
   // https://github.com/Azure/azure-sdk-tools/issues/6396
   const isCrossVersionAgainstPreviousPreview =
-    previousApiVersionLifecycleStage === "preview" &&
+    previousApiVersionLifecycleStage === ApiVersionLifecycleStage.PREVIEW &&
     rule.scenario === BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION;
 
   const appliedSeverity =

@@ -134,7 +134,7 @@ vi.mock("../../src/utils/common-utils.js", () => ({
   ),
 }));
 vi.mock("../../src/types/breaking-change.js", async (importOriginal) => {
-  const actual = (await importOriginal()) as any;
+  const actual = await importOriginal<typeof import("../../src/types/breaking-change.js")>();
   return {
     ...actual,
     logFileName: "breaking-change.log",
@@ -185,7 +185,7 @@ describe("oad-message-processor", () => {
         code: TEST_CONSTANTS.RULES.REMOVED_PROPERTY,
         id: "test-id",
         docUrl: `https://docs.example.com/rules/${TEST_CONSTANTS.RULES.REMOVED_PROPERTY}`,
-        time: expect.any(Date),
+        time: expect.any(Date) as unknown,
         groupName: ApiVersionLifecycleStage.STABLE,
         extra: {
           mode: "test",
@@ -383,14 +383,14 @@ describe("oad-message-processor", () => {
 
       expect(mockAppendFileSync).toHaveBeenCalledTimes(2);
       const appendedContent = mockAppendFileSync.mock.calls[0][1] as string;
-      const parsedContent = JSON.parse(appendedContent);
+      const parsedContent = JSON.parse(appendedContent) as Record<string, unknown>;
 
       expect(parsedContent).toEqual({
         type: "Markdown",
         mode: "append",
         level: "Error",
         message: TEST_CONSTANTS.MESSAGES.ERROR,
-        time: expect.any(String),
+        time: expect.any(String) as unknown,
       });
     });
 
@@ -400,7 +400,7 @@ describe("oad-message-processor", () => {
       await appendMarkdownToLog(context, TEST_CONSTANTS.MESSAGES.WARNING, "Warning");
 
       const appendedContent = mockAppendFileSync.mock.calls[0][1] as string;
-      const parsedContent = JSON.parse(appendedContent);
+      const parsedContent = JSON.parse(appendedContent) as Record<string, unknown>;
 
       expect(parsedContent.level).toBe("Warning");
     });

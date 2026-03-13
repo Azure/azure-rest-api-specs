@@ -45,6 +45,7 @@ import {
   deduplicateSwaggers,
   getExistedVersionOperations,
   getPrecedingSwaggers,
+  Swagger,
 } from "./utils/spec.js";
 
 // We want to display some lines as we improved AutoRest v2 error output since March 2024 to provide multi-line error messages, e.g.:
@@ -193,10 +194,7 @@ export async function checkCrossVersionBreakingChange(
       swaggerPath,
     );
     logMessage(`checkCrossVersionBreakingChange: absoluteSwaggerPath: ${absoluteSwaggerPath}`);
-    const specModel = await getSpecModel(
-      detectionContext.context.prInfo!.tempRepoFolder,
-      swaggerPath,
-    );
+    const specModel = getSpecModel(detectionContext.context.prInfo!.tempRepoFolder, swaggerPath);
 
     // If the specModel is not found, it means the swaggerPath is a new RP
     if (!specModel) {
@@ -485,7 +483,7 @@ export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecM
 export async function checkAPIsBeingMovedToANewSpec(
   context: Context,
   swaggerPath: string,
-  availableSwaggers: any[],
+  availableSwaggers: Swagger[],
 ) {
   const absoluteSwaggerPath = path.resolve(context.localSpecRepoPath, swaggerPath);
   logMessage(`checkAPIsBeingMovedToANewSpec: absoluteSwaggerPath: ${absoluteSwaggerPath}`);
@@ -515,7 +513,7 @@ export async function checkAPIsBeingMovedToANewSpec(
       `The swagger ${swaggerPath} has no previous version being found, but its APIs were found in other swaggers. It means that you are moving some APIs to this new swagger file.`,
     );
     for (const [swaggerFile, operations] of movedApis) {
-      const operationIds = operations.map((op: any) => op.id).join(",");
+      const operationIds = operations.map((op) => op.id).join(",");
       appendFileSync(
         logFileName,
         convertRawErrorToUnifiedMsg(

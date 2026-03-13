@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { BreakingChangeLabelsToBeAdded } from "../../src/command-helpers.js";
 import { logMessage, logWarning } from "../../src/log.js";
 import { ApiVersionLifecycleStage } from "../../src/types/breaking-change.js";
-import { OadMessage } from "../../src/types/oad-types.js";
+import { OadMessage, OadRuleCode } from "../../src/types/oad-types.js";
 import { applyRules } from "../../src/utils/apply-rules.js";
 
 // Mock the command-helpers module
@@ -60,7 +60,7 @@ const createTestOadMessage = (
   id: string = "1001",
 ): OadMessage => ({
   type: "Info",
-  code: code as any,
+  code: code as OadRuleCode,
   id,
   message: `Test message for ${code}`,
   docUrl: `https://docs.example.com/rules/${code}`,
@@ -68,6 +68,13 @@ const createTestOadMessage = (
   new: { location: "specification/test.json#L10", path: "specification/test.json" },
   old: { location: "specification/test.json#L8", path: "specification/test.json" },
 });
+
+// Create typed reference to mocked BreakingChangeLabelsToBeAdded to avoid unbound-method warnings
+const mockedLabels = BreakingChangeLabelsToBeAdded as unknown as {
+  add: ReturnType<typeof vi.fn>;
+  clear: ReturnType<typeof vi.fn>;
+  values: string[];
+};
 
 describe("apply-rules", () => {
   beforeEach(() => {
@@ -83,9 +90,7 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Error");
       expect(result[0].groupName).toBe(ApiVersionLifecycleStage.STABLE);
-      expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith(
-        "BreakingChangeReviewRequired",
-      );
+      expect(mockedLabels.add).toHaveBeenCalledWith("BreakingChangeReviewRequired");
     });
 
     it("should apply matching rule for cross version scenario", async () => {
@@ -96,9 +101,7 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Error");
       expect(result[0].groupName).toBe(ApiVersionLifecycleStage.STABLE);
-      expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith(
-        "BreakingChangeReviewRequired",
-      );
+      expect(mockedLabels.add).toHaveBeenCalledWith("BreakingChangeReviewRequired");
     });
 
     it("should downgrade error to warning for cross version against previous preview", async () => {
@@ -113,7 +116,7 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Warning");
       expect(result[0].groupName).toBe(ApiVersionLifecycleStage.PREVIEW);
-      expect(BreakingChangeLabelsToBeAdded.add).not.toHaveBeenCalled();
+      expect(mockedLabels.add).not.toHaveBeenCalled();
     });
 
     it("should use VersioningReviewRequired label for same version preview", async () => {
@@ -124,7 +127,7 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Error");
       expect(result[0].groupName).toBe(ApiVersionLifecycleStage.PREVIEW);
-      expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith("VersioningReviewRequired");
+      expect(mockedLabels.add).toHaveBeenCalledWith("VersioningReviewRequired");
     });
 
     it("should not add label for warning severity", async () => {
@@ -135,7 +138,7 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Warning");
       expect(result[0].groupName).toBe(ApiVersionLifecycleStage.STABLE);
-      expect(BreakingChangeLabelsToBeAdded.add).not.toHaveBeenCalled();
+      expect(mockedLabels.add).not.toHaveBeenCalled();
     });
 
     it("should use fallback rule when no matching rule found", async () => {
@@ -164,10 +167,8 @@ describe("apply-rules", () => {
       expect(result[0].groupName).toBe(ApiVersionLifecycleStage.STABLE);
       expect(result[1].type).toBe("Warning");
       expect(result[1].groupName).toBe(ApiVersionLifecycleStage.STABLE);
-      expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledTimes(1);
-      expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith(
-        "BreakingChangeReviewRequired",
-      );
+      expect(mockedLabels.add).toHaveBeenCalledTimes(1);
+      expect(mockedLabels.add).toHaveBeenCalledWith("BreakingChangeReviewRequired");
     });
 
     it("should preserve original message properties", async () => {

@@ -75,15 +75,16 @@ export const createPullRequestProperties = async (
       } else {
         logMessage(`Branch ${branchName} already exists, skipping creation`);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       // If the error is about branch already existing, that's fine - continue
+      const errorMessage = error instanceof Error ? error.message : String(error);
       if (
-        error.message?.includes("already exists") ||
-        error.message?.includes("fatal: a branch named")
+        errorMessage.includes("already exists") ||
+        errorMessage.includes("fatal: a branch named")
       ) {
         logMessage(`Branch ${branchName} already exists (caught during creation), continuing`);
       } else {
-        logError(`Failed to create branch ${branchName}: ${error.message}`);
+        logError(`Failed to create branch ${branchName}: ${errorMessage}`);
         throw error;
       }
     }
@@ -113,17 +114,19 @@ export const createPullRequestProperties = async (
   // Check if origin remote already exists, if not add it
   try {
     const remotes = await workingGitRepository.getRemotes();
-    const originExists = remotes.some((remote: any) => remote.name === "origin");
+    const originExists = remotes.some((remote) => remote.name === "origin");
     if (!originExists) {
       await workingGitRepository.addRemote("origin", context.localSpecRepoPath);
     }
-  } catch (error) {
+  } catch {
     // If getting remotes fails, try to add origin anyway and catch the error
     try {
       await workingGitRepository.addRemote("origin", context.localSpecRepoPath);
-    } catch (addRemoteError: any) {
+    } catch (addRemoteError: unknown) {
       // Ignore the error if remote already exists
-      if (!addRemoteError?.message?.includes("remote origin already exists")) {
+      const errorMessage =
+        addRemoteError instanceof Error ? addRemoteError.message : String(addRemoteError);
+      if (!errorMessage.includes("remote origin already exists")) {
         throw addRemoteError;
       }
     }
@@ -142,7 +145,7 @@ export const createPullRequestProperties = async (
     targetBranch: context.prTargetBranch,
     sourceBranch,
     tempRepoFolder,
-    checkout: async function (this: any, branch: string) {
+    checkout: async function (this: PullRequestProperties, branch: string) {
       if (this.currentBranch !== branch) {
         await workingGitRepository.checkout([branch]);
         logMessage(

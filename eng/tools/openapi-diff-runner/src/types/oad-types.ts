@@ -21,7 +21,9 @@ import { MessageLevel } from "./message.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const packageJson = JSON.parse(readFileSync(join(__dirname, "../../../package.json"), "utf-8"));
+const packageJson: { dependencies?: Record<string, string> } = JSON.parse(
+  readFileSync(join(__dirname, "../../../package.json"), "utf-8"),
+) as { dependencies?: Record<string, string> };
 /**
  * A type that represents AutoRest.Swagger.ComparisonMessage from OAD
  * after being transformed by ComparisonMessage.GetValidationMessagesAsJson().

@@ -77,7 +77,7 @@ export async function runOad(
   // And each message is of type AutoRest.Swagger.ComparisonMessage:
   // https://github.com/Azure/openapi-diff/blob/7a3f705224e03de762689eeeb6d4f1b6820dc463/openapi-diff/src/modeler/AutoRest.Swagger/ComparisonMessage.cs#L17-L17
   // after it was transformed by ComparisonMessage.GetValidationMessagesAsJson().
-  const oadMessages: OadMessage[] = JSON.parse(oadCompareOutput);
+  const oadMessages = JSON.parse(oadCompareOutput) as OadMessage[];
 
   logMessage(
     `RETURN definition runOad. oadMessages.length: ${oadMessages.length}, ` +

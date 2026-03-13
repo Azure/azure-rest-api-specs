@@ -40,7 +40,7 @@ export async function generateBreakingChangeResultSummary(
     summaryDataSuppressionAndDetailsText,
   );
   const maxCommentDataLength = checkPaneLengthLimit - summaryData.length;
-  const commentData = await getCommentData(
+  const commentData = getCommentData(
     context.checkName,
     comparedSpecsTableContent,
     allMessageRecords,
@@ -61,18 +61,18 @@ export async function generateBreakingChangeResultSummary(
   );
 }
 
-async function getCommentData(
+function getCommentData(
   checkName: string,
   comparedSpecsTableContent: string,
   msgs: BrChMsgRecord[],
   maxCommentDataLength: number,
-): Promise<string> {
+): string {
   // Add blank line before table if table content exists to ensure proper markdown rendering
   const markdownMessageRow = comparedSpecsTableContent
     ? "\n" + comparedSpecsTableContent + "\n"
     : "";
   const textPrefixLength = markdownMessageRow.length;
-  const reportsString: string = await getReportsAsString(
+  const reportsString: string = getReportsAsString(
     checkName,
     msgs,
     textPrefixLength,
@@ -90,13 +90,13 @@ async function getCommentData(
   return commentData;
 }
 
-async function getReportsAsString(
+function getReportsAsString(
   checkName: string,
   msgs: BrChMsgRecord[],
   textPrefixLength: number,
   maxCommentDataLength: number,
-): Promise<string> {
-  let [stableReports, previewReports, maxRowCountAcrossKeys] = getReports(msgs);
+): string {
+  const [stableReports, previewReports, maxRowCountAcrossKeys] = getReports(msgs);
   let currentMaxRowCount = maxRowCountAcrossKeys;
 
   let reportsString: string = getReportsString(
@@ -135,8 +135,8 @@ function getReports(
   const msgsByKey: Record<string, BrChMsgRecord[]> = groupMsgsByKey(msgs);
 
   let maxRowCount = 0;
-  let stableReports: BreakingChangeMdReport[] = [];
-  let previewReports: BreakingChangeMdReport[] = [];
+  const stableReports: BreakingChangeMdReport[] = [];
+  const previewReports: BreakingChangeMdReport[] = [];
 
   Object.entries(msgsByKey).forEach(([, msgs]) => {
     const stableMsgs = msgs.filter(

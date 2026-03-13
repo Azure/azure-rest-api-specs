@@ -37,11 +37,7 @@ export type ValidBreakingChangeApproval =
   (typeof BREAKING_CHANGE_APPROVALS)[keyof typeof BREAKING_CHANGE_APPROVALS];
 export type ReviewApprovalPrefixLabel = "Versioning-Approved-*" | "BreakingChange-Approved-*";
 
-export type SpecsBreakingChangesLabel =
-  | ReviewRequiredLabel
-  | ReviewApprovalPrefixLabel
-  | ValidBreakingChangeApproval
-  | ValidVersioningApproval;
+export type SpecsBreakingChangesLabel = ReviewRequiredLabel;
 
 /** Corresponds to specs in "*\preview\*" or "*\stable\*" directories in the specs repos.
  * Scheduled to replace type SwaggerVersionType and type ComparedApiVersion.

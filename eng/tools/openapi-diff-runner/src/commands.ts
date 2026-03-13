@@ -59,7 +59,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   logMessage("Found PR changes:");
   logMessage(JSON.stringify(diffs, null, 2));
 
-  let swaggersToProcess = diffs.modifications?.concat(diffs.additions || []) as Array<string>;
+  const swaggersToProcess = diffs.modifications?.concat(diffs.additions || []);
 
   logMessage("Processing swaggers:");
   logMessage(JSON.stringify(swaggersToProcess, null, 2));
@@ -162,10 +162,10 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       oadTracer,
     );
 
-    let msgs: ResultMessageRecord[] = [];
-    let runtimeErrors: RawMessageRecord[] = [];
-    let oadViolationsCnt: number = 0;
-    let errorCnt: number = 0;
+    let msgs: ResultMessageRecord[];
+    let runtimeErrors: RawMessageRecord[];
+    let oadViolationsCnt: number;
+    let errorCnt: number;
 
     if (context.runType === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION) {
       ({ msgs, runtimeErrors, oadViolationsCnt, errorCnt } =
@@ -184,9 +184,9 @@ export async function validateBreakingChange(context: Context): Promise<number> 
     // output breaking change label variables only when the PR targets a production branch
     logMessage(
       `Evaluate breaking change labels: targetRepo: ${context.targetRepo}, ` +
-        `targetBranch: ${context.prInfo!.targetBranch}`,
+        `targetBranch: ${context.prInfo.targetBranch}`,
     );
-    if (checkPrTargetsProductionBranch(context.targetRepo, context.prInfo!.targetBranch)) {
+    if (checkPrTargetsProductionBranch(context.targetRepo, context.prInfo.targetBranch)) {
       outputBreakingChangeLabelVariables();
     }
 
