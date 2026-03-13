@@ -155,14 +155,14 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@alternateType(BlobContentLengthRequired.size, uint64, "rust");
 @@alternateType(ContentLengthResponseHeader.contentLength, uint64, "rust");
 @@alternateType(ContentLengthParameter.contentLength, uint64, "rust");
-@@alternateType(StructuredContentLengthParameter.structuredContentLength,
-  uint64,
-  "rust"
-);
-@@alternateType(StructuredContentLengthResponseHeader.structuredContentLength,
-  uint64,
-  "rust"
-);
+// @@alternateType(StructuredContentLengthParameter.structuredContentLength,
+//   uint64,
+//   "rust"
+// );
+// @@alternateType(StructuredContentLengthResponseHeader.structuredContentLength,
+//   uint64,
+//   "rust"
+// );
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
