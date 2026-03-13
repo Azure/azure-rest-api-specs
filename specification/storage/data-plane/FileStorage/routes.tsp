@@ -1308,6 +1308,7 @@ interface File {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing storage API."
+  @sharedRoute
   @route("?comp=range")
   @put
   uploadRange is StorageOperationRequestBody<
@@ -1369,7 +1370,7 @@ interface File {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @sharedRoute
-  @route("?comp=range&fromURL")
+  @route("?comp=range")
   @put
   uploadRangeFromUrl is StorageOperationNoBody<
     {
