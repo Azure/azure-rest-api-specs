@@ -536,7 +536,7 @@
           "type": "array",
           "description": "(Optional) describes the PII categories to which the redaction policy will be applied. If not specified, the redaction policy will be applied to all PII categories.",
           "items": {
-            "$ref": "#/definitions/PiiCategoriesExclude"
+            "$ref": "#/definitions/PiiCategories"
           }
         },
         "policyName": {
@@ -1130,7 +1130,7 @@
       ],
       "x-ms-discriminator-value": "noMask"
     },
-    "PiiCategoriesExclude": {
+    "PiiCategories": {
       "type": "string",
       "description": "(Optional) describes the PII categories to return",
       "enum": [
@@ -1307,7 +1307,7 @@
         "Address"
       ],
       "x-ms-enum": {
-        "name": "PiiCategoriesExclude",
+        "name": "PiiCategories",
         "modelAsString": true,
         "values": [
           {
@@ -2168,7 +2168,7 @@
         ]
       }
     },
-    "PiiCategory": {
+    "PiiCategoriesExtended": {
       "type": "string",
       "description": "(Optional) describes the PII categories to return",
       "enum": [
@@ -2347,7 +2347,7 @@
         "Default"
       ],
       "x-ms-enum": {
-        "name": "PiiCategory",
+        "name": "PiiCategoriesExtended",
         "modelAsString": true,
         "values": [
           {
@@ -3296,7 +3296,7 @@
           "type": "array",
           "description": "Enumeration of PII categories to be returned in the response.",
           "items": {
-            "$ref": "#/definitions/PiiCategory"
+            "$ref": "#/definitions/PiiCategoriesExtended"
           }
         },
         "stringIndexType": {
@@ -3334,7 +3334,7 @@
           "type": "array",
           "description": "Enumeration of PII categories to be excluded in the response.",
           "items": {
-            "$ref": "#/definitions/PiiCategoriesExclude"
+            "$ref": "#/definitions/PiiCategories"
           }
         },
         "redactionPolicies": {

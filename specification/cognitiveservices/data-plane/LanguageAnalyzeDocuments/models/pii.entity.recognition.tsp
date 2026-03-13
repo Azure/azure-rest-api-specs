@@ -167,6 +167,7 @@ model EntityTag {
 }
 
 /** (Optional) describes the PII categories to return */
+@renamedFrom(Versions.v2024_11_15_preview, "PiiCategoriesExtended")
 union PiiCategory {
   string,
   PiiCategoriesExclude,
@@ -189,6 +190,7 @@ model PiiEntityRecognitionLROResult extends AnalyzeDocumentsLROResult {
 }
 
 /** (Optional) describes the PII categories to return */
+@renamedFrom(Versions.v2024_11_15_preview, "PiiCategories")
 union PiiCategoriesExclude {
   string,
 
