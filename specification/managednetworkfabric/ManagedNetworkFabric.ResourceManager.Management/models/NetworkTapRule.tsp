@@ -132,7 +132,7 @@ model NetworkTapRuleMatchConfigurationPatch {
   actions?: NetworkTapRuleActionPatch[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common match conditions for Network Tap Rule match condition"
 @doc("Defines the match condition that is supported to filter the traffic.")
 model NetworkTapRuleMatchCondition extends CommonMatchConditions {
   @doc("Encapsulation Type that needs to be matched.")
@@ -142,7 +142,7 @@ model NetworkTapRuleMatchCondition extends CommonMatchConditions {
   portCondition?: PortCondition;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common match conditions for Network Tap Rule match condition"
 @doc("Defines the match condition that is supported to filter the traffic.")
 model NetworkTapRuleMatchConditionPatch extends CommonMatchConditionsPatch {
   @doc("Encapsulation Type that needs to be matched.")
@@ -191,7 +191,7 @@ model NetworkTapRuleAction {
 @doc("Action that need to performed.")
 model NetworkTapRuleActionPatch is NetworkTapRuleAction;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The NetworkTapRule resource definition.")
 model NetworkTapRulePatch extends TagsUpdate {
   @doc("Network Tap Rule Patch properties.")

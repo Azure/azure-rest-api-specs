@@ -124,7 +124,7 @@ model AccessControlListMatchConfigurationPatch {
   actions?: AccessControlListActionPatch[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common match conditions for AccesslControlList specific match conditions"
 @doc("Defines the match condition that is supported to filter the traffic.")
 model AccessControlListMatchCondition extends CommonMatchConditions {
   @doc("List of ether type values that need to be matched.")
@@ -159,7 +159,7 @@ model AccessControlListMatchCondition extends CommonMatchConditions {
   icmpConfiguration?: IcmpConfigurationProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common match conditions for AccesslControlList specific match conditions"
 @doc("Defines the match condition that is supported to filter the traffic.")
 model AccessControlListMatchConditionPatch extends CommonMatchConditionsPatch {
   @doc("List of ether type values that need to be matched.")
@@ -194,14 +194,14 @@ model AccessControlListMatchConditionPatch extends CommonMatchConditionsPatch {
   icmpConfiguration?: IcmpConfigurationPatchProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common port condition for AccessControlList specific port condition"
 @doc("Defines the port condition that needs to be matched.")
 model AccessControlListPortCondition extends PortCondition {
   @doc("List of protocol flags that need to be matched. Example: established | initial | <List-of-TCP-flags>. List of eligible TCP Flags are ack, fin, not-ack, not-fin, not-psh, not-rst, not-syn, not-urg, psh, rst, syn, urg")
   flags?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common port condition for AccessControlList specific port condition"
 @doc("Defines the port condition that needs to be matched.")
 model AccessControlListPortConditionPatch extends PortConditionPatch {
   @doc("List of protocol flags that need to be matched. Example: established | initial | <List-of-TCP-flags>. List of eligible TCP Flags are ack, fin, not-ack, not-fin, not-psh, not-rst, not-syn, not-urg, psh, rst, syn, urg")
@@ -229,7 +229,7 @@ model AccessControlListAction {
 @doc("Action that need to be performed")
 model AccessControlListActionPatch is AccessControlListAction;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The Access Control Lists patch resource definition.")
 model AccessControlListPatch extends TagsUpdate {
   @doc("Access Control Lists patch properties.")

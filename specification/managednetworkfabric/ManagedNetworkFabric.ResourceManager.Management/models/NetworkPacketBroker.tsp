@@ -60,7 +60,7 @@ model NetworkPacketBrokerProperties {
   configurationState?: ConfigurationState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The NetworkPacketBroker patch resource definition.")
 model NetworkPacketBrokerPatch extends TagsUpdate {
   @added(Versions.v2025_07_15)

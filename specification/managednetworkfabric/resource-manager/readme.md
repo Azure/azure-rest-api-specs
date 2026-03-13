@@ -46,8 +46,6 @@ suppressions:
     from: managednetworkfabric.json
     reason: Suppressing errors to conform to the existing published API
     where: $.definitions["NetworkFabricSku"]
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    reason: Removed deprecated APIs in the new API version
 ```
 
 ### Tag: package-2024-06-15-preview
@@ -66,8 +64,6 @@ suppressions:
     from: managednetworkfabric.json
     reason: Suppressing errors to conform to the existing published API
     where: $.definitions["NetworkFabricSku"]
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    reason: Removed deprecated APIs in the new API version
 ```
 
 ### Tag: package-2024-02-15-preview
