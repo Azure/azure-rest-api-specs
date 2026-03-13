@@ -165,7 +165,7 @@ export default async function detectNewResourceProvider({ core }) {
         }
         return null;
       })
-      .filter(Boolean),
+      .filter((p) => p !== null),
   );
 
   if (changedNamespacePaths.size > 0) {
@@ -309,7 +309,7 @@ async function checkNewResourceTypes(repoRoot, rmFiles, core) {
 
   let allLeasesValid = true;
   for (const ns of newRtResults) {
-    const leaseValid = await checkLease(ns.orgName, ns.rpNamespace, "");
+    const leaseValid = await checkLease(ns.orgName, ns.rpNamespace, ns.serviceName);
 
     if (leaseValid) {
       core.info(`  - ${ns.rpNamespace}: valid ARM lease for new resource types`);

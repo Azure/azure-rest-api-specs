@@ -898,7 +898,7 @@ const rulesPri0NotReadyForArmReview = [
     troubleshootingGuide: wrapInArmReviewMessage(
       "This PR has <code>ARMModelingReviewRequired</code> label. " +
         "This means it is introducing a new Resource Provider namespace or a new resource type. " +
-        "New RPs and new resource types require a discussion with the ARM Modelling Review team before merging.<br/>" +
+        "New RPs and new resource types require a discussion with the ARM Modeling Review team before merging.<br/>" +
         "Please schedule a meeting at " +
         `${href("ARM API Modeling Office Hours", "https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true")}.`,
     ),

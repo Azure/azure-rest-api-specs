@@ -176,6 +176,7 @@ describe("detectNewResourceTypes", () => {
     expect(result[0]).toMatchObject({
       rpNamespace: "Microsoft.Compute",
       orgName: "compute",
+      serviceName: "",
     });
     expect(result[0].newResourceTypes).toHaveLength(1);
     expect(result[0].newResourceTypes[0]).toMatchObject({

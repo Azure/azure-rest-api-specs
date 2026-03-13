@@ -98,11 +98,11 @@ function getResourceTypesFromSwagger(swaggerDoc) {
  *
  * @param {import("simple-git").SimpleGit} git
  * @param {string} gitRef - Git ref (e.g. "HEAD" or "HEAD^")
- * @param {string} namespacePath - e.g. `specification/compute/resource-manager/Microsoft.Compute`
+ * @param {string} specPath - e.g. `specification/compute/resource-manager/Microsoft.Compute`
  * @param {string} branchName - Branch name for logging (e.g. "base" or "head")
  * @returns {Promise<Map<string, Object> | null>} Map of resource type to info, or null if path doesn't exist at this ref
  */
-async function getResourceTypesAtRef(git, gitRef, namespacePath, branchName) {
+async function getResourceTypesAtRef(git, gitRef, specPath, branchName) {
   /** @type {Map<string, {resourceType: string, provider: string, modelName: string|null, operations: {method: string, apiPath: string}[]}>} */
   const allTypes = new Map();
 
@@ -113,7 +113,7 @@ async function getResourceTypesAtRef(git, gitRef, namespacePath, branchName) {
       "-r",
       "--name-only",
       gitRef,
-      namespacePath,
+      specPath,
     ]);
   } catch {
     return null; // path doesn't exist at this ref
@@ -174,7 +174,7 @@ async function getResourceTypesAtRef(git, gitRef, namespacePath, branchName) {
  * @param {string} params.repoRoot - Repository root directory
  * @param {string[]} params.rmFiles - Resource-manager file paths changed in the PR
  * @param {import("@actions/core")} params.core - GitHub Actions core for logging
- * @returns {Promise<Array<{namespace: string, orgName: string, newResourceTypes: Array<{resourceType: string, provider: string, modelName: string, operations: string[]}>}>>}
+ * @returns {Promise<Array<{rpNamespace: string, orgName: string, serviceName: string, newResourceTypes: Array<{resourceType: string, provider: string, modelName: string | null, operations: string[]}>}>>}
  */
 export async function detectNewResourceTypes({
   repoRoot,
@@ -184,7 +184,7 @@ export async function detectNewResourceTypes({
   const git = simpleGit(repoRoot);
 
   // Group changed RM swagger files by service subdirectory (rpNamespace + serviceName)
-  /** @type {Map<string, {orgName: string, namespacePath: string, rpNamespace: string}>} */
+  /** @type {Map<string, {orgName: string, specPath: string, rpNamespace: string, serviceName: string}>} */
   const namespaceMap = new Map();
 
   for (const file of rmFiles) {
@@ -201,25 +201,27 @@ export async function detectNewResourceTypes({
     // introducing the first preview/stable folder under an existing rpNamespace
     const serviceName = parts[4];
     const isLifecycleFolder = serviceName === "stable" || serviceName === "preview";
-    const namespacePath = isLifecycleFolder
+    const specPath = isLifecycleFolder
       ? `specification/${orgName}/resource-manager/${rpNamespace}`
       : `specification/${orgName}/resource-manager/${rpNamespace}/${serviceName}`;
     const serviceKey = isLifecycleFolder ? rpNamespace : `${rpNamespace}/${serviceName}`;
+    // Store actual serviceName (empty string if it's a lifecycle folder like stable/preview)
+    const actualServiceName = isLifecycleFolder ? "" : serviceName;
 
     if (!namespaceMap.has(serviceKey)) {
-      namespaceMap.set(serviceKey, { orgName, namespacePath, rpNamespace });
+      namespaceMap.set(serviceKey, { orgName, specPath, rpNamespace, serviceName: actualServiceName });
     }
   }
 
   const results = [];
 
-  for (const [serviceKey, { orgName, namespacePath, rpNamespace }] of namespaceMap) {
+  for (const [serviceKey, { orgName, specPath, rpNamespace, serviceName }] of namespaceMap) {
     core.info(`Checking for new resource types in ${serviceKey}...`);
 
     const baseTypes = await getResourceTypesAtRef(
       git,
       "HEAD^",
-      namespacePath,
+      specPath,
       "base",
     );
 
@@ -232,7 +234,7 @@ export async function detectNewResourceTypes({
     const headTypes = await getResourceTypesAtRef(
       git,
       "HEAD",
-      namespacePath,
+      specPath,
       "head",
     );
 
@@ -257,7 +259,7 @@ export async function detectNewResourceTypes({
       for (const t of newTypes) {
         core.info(`  - ${t.resourceType} (${t.operations.join(", ")})`);
       }
-      results.push({ rpNamespace, orgName, newResourceTypes: newTypes });
+      results.push({ rpNamespace, orgName, serviceName, newResourceTypes: newTypes });
     } else {
       core.info(` ${rpNamespace}: no new resource types`);
     }

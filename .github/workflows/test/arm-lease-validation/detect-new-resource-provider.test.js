@@ -202,7 +202,7 @@ describe("detectNewResourceProvider", () => {
 
     // detectNewResourceTypes returns new RT
     vi.mocked(detectNewResourceTypes).mockResolvedValue([
-      { namespace: "Microsoft.Compute", orgName: "compute", newResourceTypes: [{ resourceType: "Microsoft.Compute/disks" }] },
+      { rpNamespace: "Microsoft.Compute", orgName: "compute", serviceName: "", newResourceTypes: [{ resourceType: "Microsoft.Compute/disks" }] },
     ]);
     vi.mocked(checkLease).mockResolvedValue(true);
 
@@ -223,7 +223,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue(rmFile);
 
     vi.mocked(detectNewResourceTypes).mockResolvedValue([
-      { namespace: "Microsoft.Compute", orgName: "compute", newResourceTypes: [{ resourceType: "Microsoft.Compute/disks" }] },
+      { rpNamespace: "Microsoft.Compute", orgName: "compute", serviceName: "", newResourceTypes: [{ resourceType: "Microsoft.Compute/disks" }] },
     ]);
     vi.mocked(checkLease).mockResolvedValue(false);
 
