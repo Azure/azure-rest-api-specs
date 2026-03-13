@@ -11,12 +11,8 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-
-  "@azure-tools/typespec-csharp":
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
     namespace: "Azure.ResourceManager.EventHubs"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-eventhub"
@@ -45,10 +41,6 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-  "@azure-typespec/http-client-csharp-mgmt":
-    package-name: "Azure.ResourceManager.EventHub"
-    namespace: "{package-name}"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
