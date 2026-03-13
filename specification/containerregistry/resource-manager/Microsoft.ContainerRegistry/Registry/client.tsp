@@ -294,7 +294,5 @@ using Microsoft.ContainerRegistry;
 @@clientName(NetworkRuleSet.ipRules, "IPRules", "csharp");
 @@clientName(Request.useragent, "UserAgent", "csharp");
 
-// C# webhook event property renames (uuid Guid? typed)
-@@clientName(EventContent.id, "EventContentId", "csharp");
-@@clientName(EventInfo.id, "EventInfoId", "csharp");
-@@clientName(Request.id, "RequestId", "csharp");
+// C# property renames: Source.instanceID -> InstanceId (match old casing)
+@@clientName(Source.instanceID, "InstanceId", "csharp");
