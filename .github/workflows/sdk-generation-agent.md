@@ -99,6 +99,7 @@ When validation succeeds, execute the following steps in order.
 
 - Execute `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>`. Release plan and work item ID are numeric values.
 - Capture the TypeSpec project path, API version, release type, and target languages from the issue context (dispatch runs rely on the issue referenced by `issue_url`).
+- For `issue_comment` triggers, inspect the comment body for case-insensitive mentions of supported language names (`Python`, `.NET`, `JavaScript`, `Java`, `Go`). If one or more supported languages are explicitly requested, override the target language list to only those deduplicated matches. When no supported languages are mentioned, fall back to the release plan language list.
 - **Guard**: If the TypeSpec project path or release plan details (work item ID, release plan ID, API version, or release type) cannot be resolved from the issue context, do **not** proceed with SDK generation. Instead, add a comment on the issue explaining which required details are missing and call `noop`. Do not continue to step 5.
 
 5. Trigger SDK generation by calling `azsdk spec-workflow generate-sdk` with the following options:
@@ -106,7 +107,7 @@ When validation succeeds, execute the following steps in order.
 - `--typespec-project <PATH>` (required)
 - `--api-version <VERSION>` (required)
 - `--release-type <beta|stable>` (required)
-- `--language <LANGUAGE>` (required, run once per language returned in step 4; languages: Python, .NET, JavaScript, Java, go)
+- `--language <LANGUAGE>` (required, run once per language determined in step 4 after any comment-based filtering; supported languages: Python, .NET, JavaScript, Java, Go)
 - `--workitem-id <WORK_ITEM_ID>` to tie the generation back to the release plan work item
 - Capture the pipeline/run URL emitted by the CLI for status tracking.
 
@@ -115,7 +116,9 @@ When validation succeeds, execute the following steps in order.
 ## Monitoring and Status Updates
 
 1. After successful trigger, monitor the release plan and check SDK generation status, SDK pull request status and SDK pull request link.
-   - Refresh release plan data every 5 minutes via `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>` and inspect the SDK pull request references per language.
+
+- Refresh release plan data every 2 minutes via `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>` and inspect the SDK pull request references per language.
+
 2. On each poll, determine whether SDK pull request link is available for each language.
 3. If failed, add a comment indicating failure and include pipeline link and failure summary (fallback to `noop` only when comments are unavailable).
 4. Add a final status update by commenting one line per language using the exact format `sdk pr for  <language>: <Link to sdk pull request>` (fallback to `noop` only if commenting fails).
