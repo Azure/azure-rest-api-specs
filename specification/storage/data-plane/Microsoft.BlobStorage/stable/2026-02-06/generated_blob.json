@@ -1253,7 +1253,7 @@
             "required": false,
             "type": "string",
             "format": "date-time-rfc7231",
-            "x-ms-client-name": "immutabilityPolicyExpiry"
+            "x-ms-client-name": "expiry"
           },
           {
             "name": "x-ms-immutability-policy-mode",
@@ -1760,10 +1760,6 @@
                 "type": "string",
                 "format": "byte",
                 "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
-              },
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-type."
               },
               "Date": {
                 "type": "string",
@@ -2445,7 +2441,7 @@
             "required": false,
             "type": "string",
             "format": "date-time-rfc7231",
-            "x-ms-client-name": "immutabilityPolicyExpiry"
+            "x-ms-client-name": "expiry"
           },
           {
             "name": "x-ms-immutability-policy-mode",
@@ -2859,7 +2855,7 @@
             "required": false,
             "type": "string",
             "format": "date-time-rfc7231",
-            "x-ms-client-name": "immutabilityPolicyExpiry"
+            "x-ms-client-name": "expiry"
           },
           {
             "name": "x-ms-immutability-policy-mode",
@@ -3340,7 +3336,7 @@
             "required": false,
             "type": "string",
             "format": "date-time-rfc7231",
-            "x-ms-client-name": "immutabilityPolicyExpiry"
+            "x-ms-client-name": "expiry"
           },
           {
             "name": "x-ms-immutability-policy-mode",
@@ -4979,7 +4975,7 @@
             "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.",
             "required": true,
             "type": "string",
-            "format": "byte",
+            "format": "base64",
             "x-ms-client-name": "blockId"
           },
           {
@@ -5203,7 +5199,7 @@
             "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.",
             "required": true,
             "type": "string",
-            "format": "byte",
+            "format": "base64",
             "x-ms-client-name": "blockId"
           },
           {
@@ -5777,7 +5773,7 @@
             "required": false,
             "type": "string",
             "format": "date-time-rfc7231",
-            "x-ms-client-name": "immutabilityPolicyExpiry"
+            "x-ms-client-name": "expiry"
           },
           {
             "name": "x-ms-immutability-policy-mode",
@@ -6367,7 +6363,7 @@
             "required": true,
             "type": "string",
             "format": "date-time-rfc7231",
-            "x-ms-client-name": "immutabilityPolicyExpiry"
+            "x-ms-client-name": "expiry"
           },
           {
             "name": "x-ms-immutability-policy-mode",
@@ -14791,13 +14787,13 @@
       "properties": {
         "Start": {
           "type": "string",
-          "format": "date-time",
+          "format": "rfc3339-fixed-width",
           "description": "The date-time the policy is active.",
           "x-ms-client-name": "start"
         },
         "Expiry": {
           "type": "string",
-          "format": "date-time",
+          "format": "rfc3339-fixed-width",
           "description": "The date-time the policy expires.",
           "x-ms-client-name": "expiry"
         },
@@ -15040,6 +15036,13 @@
       ],
       "xml": {
         "name": "Field"
+      }
+    },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\".",
+      "xml": {
+        "name": "eTag"
       }
     },
     "Azure.Core.uuid": {
@@ -15313,7 +15316,7 @@
           "x-ms-client-name": "lastModified"
         },
         "Etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "The blob ETag.",
           "x-ms-client-name": "eTag"
         },
@@ -15479,12 +15482,12 @@
           "type": "string",
           "format": "date-time-rfc7231",
           "description": "The expire time of the blob.",
-          "x-ms-client-name": "expiryTime"
+          "x-ms-client-name": "ExpiresOn"
         },
         "Sealed": {
           "type": "boolean",
           "description": "Whether the blob is sealed.",
-          "x-ms-client-name": "sealed"
+          "x-ms-client-name": "IsSealed"
         },
         "RehydratePriority": {
           "$ref": "#/definitions/RehydratePriority",
@@ -15495,13 +15498,13 @@
           "type": "string",
           "format": "date-time-rfc7231",
           "description": "The last access time of the blob.",
-          "x-ms-client-name": "lastAccessTime"
+          "x-ms-client-name": "LastAccessedOn"
         },
         "ImmutabilityPolicyUntilDate": {
           "type": "string",
           "format": "date-time-rfc7231",
           "description": "The immutability policy until time of the blob.",
-          "x-ms-client-name": "immutabilityPolicyUntilDate"
+          "x-ms-client-name": "ImmutabilityPolicyExpiresOn"
         },
         "ImmutabilityPolicyMode": {
           "$ref": "#/definitions/ImmutabilityPolicyMode",
@@ -15843,7 +15846,7 @@
           "x-ms-client-name": "lastModified"
         },
         "Etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "The ETag of the container.",
           "x-ms-client-name": "eTag"
         },
@@ -15885,7 +15888,7 @@
         "DenyEncryptionScopeOverride": {
           "type": "boolean",
           "description": "Whether to prevent encryption scope override.",
-          "x-ms-client-name": "denyEncryptionScopeOverride"
+          "x-ms-client-name": "PreventEncryptionScopeOverride"
         },
         "DeletedTime": {
           "type": "string",
@@ -15902,7 +15905,7 @@
         "ImmutableStorageWithVersioningEnabled": {
           "type": "boolean",
           "description": "Whether immutable storage with versioning is enabled.",
-          "x-ms-client-name": "immutableStorageWithVersioningEnabled"
+          "x-ms-client-name": "IsImmutableStorageWithVersioningEnabled"
         }
       },
       "required": [
@@ -18018,7 +18021,7 @@
     },
     "base64Bytes": {
       "type": "string",
-      "format": "byte"
+      "format": "base64"
     }
   },
   "parameters": {

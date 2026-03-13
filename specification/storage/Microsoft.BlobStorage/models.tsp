@@ -660,6 +660,7 @@ model ContainerProperties {
   @Xml.name("DefaultEncryptionScope") defaultEncryptionScope?: string;
 
   /** Whether to prevent encryption scope override. */
+  @clientName("PreventEncryptionScopeOverride")
   @Xml.name("DenyEncryptionScopeOverride")
   denyEncryptionScopeOverride?: boolean;
 
@@ -673,6 +674,7 @@ model ContainerProperties {
   @Xml.name("RemainingRetentionDays") remainingRetentionDays?: int32;
 
   /** Whether immutable storage with versioning is enabled. */
+  @clientName("IsImmutableStorageWithVersioningEnabled")
   @Xml.name("ImmutableStorageWithVersioningEnabled")
   immutableStorageWithVersioningEnabled?: boolean;
 }
@@ -1065,11 +1067,13 @@ model BlobProperties {
 
   /** The expire time of the blob. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @clientName("ExpiresOn")
   @encode("rfc7231")
   @Xml.name("Expiry-Time")
   expiryTime?: utcDateTime;
 
   /** Whether the blob is sealed. */
+  @clientName("IsSealed")
   @Xml.name("Sealed")
   sealed?: boolean;
 
@@ -1078,12 +1082,14 @@ model BlobProperties {
 
   /** The last access time of the blob. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @clientName("LastAccessedOn")
   @encode("rfc7231")
   @Xml.name("LastAccessTime")
   lastAccessTime?: utcDateTime;
 
   /** The immutability policy until time of the blob. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @clientName("ImmutabilityPolicyExpiresOn")
   @encode("rfc7231")
   @Xml.name("ImmutabilityPolicyUntilDate")
   immutabilityPolicyUntilDate?: utcDateTime;
@@ -2208,6 +2214,7 @@ alias ImmutabilityPolicyModeParameter = {
 alias ImmutabilityPolicyExpiryRequiredParameter = {
   /** Specifies the date time when the blobs immutability policy is set to expire. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @clientName("expiry")
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
   immutabilityPolicyExpiry: utcDateTime;
@@ -2217,6 +2224,7 @@ alias ImmutabilityPolicyExpiryRequiredParameter = {
 alias ImmutabilityPolicyExpiryParameter = {
   /** Specifies the date time when the blobs immutability policy is set to expire. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @clientName("expiry")
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
   immutabilityPolicyExpiry?: utcDateTime;

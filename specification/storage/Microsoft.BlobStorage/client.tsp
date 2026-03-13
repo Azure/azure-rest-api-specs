@@ -123,25 +123,10 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 
-@@clientName(ContainerProperties.denyEncryptionScopeOverride,
-  "PreventEncryptionScopeOverride"
-);
-@@clientName(ContainerProperties.immutableStorageWithVersioningEnabled,
-  "IsImmutableStorageWithVersioningEnabled"
-);
-@@clientName(BlobProperties.expiryTime, "ExpiresOn");
-@@clientName(BlobProperties.sealed, "IsSealed");
-@@clientName(BlobProperties.lastAccessTime, "LastAccessedOn");
-@@clientName(BlobProperties.immutabilityPolicyUntilDate,
-  "ImmutabilityPolicyExpiresOn"
-);
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
 @@clientName(ObjectReplicationHeaders.objectReplicationRules,
   "objectReplicationRules",
   "rust"
-);
-@@clientName(ImmutabilityPolicyExpiryRequiredParameter.immutabilityPolicyExpiry,
-  "expiry"
 );
 @@alternateType(BlobProperties.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.size, uint64, "rust");
