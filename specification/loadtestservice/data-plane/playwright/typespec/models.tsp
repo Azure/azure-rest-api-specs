@@ -101,7 +101,7 @@ union EnablementStatus {
 }
 
 @doc("The operating system to configure for remote script execution.")
-union OperatingSystem {
+union OS {
   string,
 
   @doc("Linux operating system.")

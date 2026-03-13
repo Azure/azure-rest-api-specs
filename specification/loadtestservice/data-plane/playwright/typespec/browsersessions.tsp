@@ -59,7 +59,7 @@ model BrowserSession {
 
   @doc("The browser session operating system.")
   @visibility(Lifecycle.Read)
-  operatingSystem: OperatingSystem;
+  operatingSystem: OS;
 }
 
 @doc("The browser session source details.")

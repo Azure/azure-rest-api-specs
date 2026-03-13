@@ -454,7 +454,7 @@
               "Windows"
             ],
             "x-ms-enum": {
-              "name": "OperatingSystem",
+              "name": "OS",
               "modelAsString": true,
               "values": [
                 {
@@ -593,72 +593,6 @@
       }
     },
     "/playwrightworkspaces/{workspaceId}/test-runs/{runId}": {
-      "get": {
-        "operationId": "TestRuns_Get",
-        "description": "Gets a test run for the specified run and workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID or Playwright Service.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "workspaceId",
-            "in": "path",
-            "description": "The workspace ID in GUID format.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "description": "The test run ID in GUID format.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "x-ms-useragent",
-            "in": "header",
-            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TestRun"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
       "patch": {
         "operationId": "TestRuns_CreateOrUpdate",
         "description": "Creates or updates a test run for the workspace with the specified test run ID. Requires Bearer JWT access token provided by Entra ID or Playwright Service.",
