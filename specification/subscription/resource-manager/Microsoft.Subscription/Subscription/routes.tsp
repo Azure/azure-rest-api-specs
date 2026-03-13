@@ -53,14 +53,17 @@ interface SubscriptionOperationGroup {
   /**
    * Accept subscription ownership.
    */
-  @autoRoute
-  acceptOwnership is ArmProviderActionAsync<
-    Request = AcceptOwnershipRequest,
-    Parameters = {
-      ...SubscriptionIdPathParameter;
-    },
-    Response = ArmAcceptedResponse & ArmLroLocationHeader<FinalResult = void>
-  >;
+  @route("/providers/microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnership")
+  acceptOwnership(
+    ...ApiVersionParameter,
+    ...SubscriptionIdPathParameter,
+
+    /**
+     * The request body
+     */
+    @body requestbodyBody: AcceptOwnershipRequest,
+  ): ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    Azure.Core.Foundations.RetryAfterHeader>;
   /**
    * Accept subscription ownership status.
    */
