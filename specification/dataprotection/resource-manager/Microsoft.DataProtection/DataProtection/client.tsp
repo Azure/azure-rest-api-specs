@@ -155,6 +155,7 @@ using Microsoft.DataProtection;
 );
 @@clientName(AzureBackupJob, "DataProtectionBackupJobProperties", "csharp");
 @@clientName(AzureBackupJob.activityID, "ActivityId", "csharp");
+@@clientName(AzureBackupJob.errorDetails, "JobErrorDetails", "csharp");
 @@clientName(AzureBackupJob.sourceSubscriptionID,
   "SourceSubscriptionId",
   "csharp"
@@ -241,6 +242,10 @@ using Microsoft.DataProtection;
 );
 @@clientName(BackupInstance.datasourceAuthCredentials,
   "DataSourceAuthCredentials",
+  "csharp"
+);
+@@clientName(BackupInstance.protectionErrorDetails,
+  "ResourceProtectionErrorDetails",
   "csharp"
 );
 @@clientName(BackupInstanceResource, "DataProtectionBackupInstance", "csharp");
@@ -801,6 +806,9 @@ using Microsoft.DataProtection;
   "DataProtectionResourceDeletionInfo",
   "csharp"
 );
+@@clientName(UserFacingWarningDetail.warning, "WarningDetails", "csharp");
+@@clientName(InnerError, "DataProtectionBackupInnerError", "csharp");
+@@clientName(UserFacingError, "DataProtectionBackupUserFacingError", "csharp");
 
 // Fix ResourceGuard operation names to match old API surface
 @@clientName(ResourceGuardResources.patch, "Update", "csharp");
