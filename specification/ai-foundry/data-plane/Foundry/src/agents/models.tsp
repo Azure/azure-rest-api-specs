@@ -811,8 +811,11 @@ model AgentEndpoint {
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 model AgentIdentity {
-  @doc("The details of the identity")
-  details: IdentityDetails;
+  @doc("The principal ID of the agent")
+  principal_id: string;
+
+  @doc("The client ID of the agent")
+  client_id: string;
 }
 
 @removed(Versions.v1)
@@ -835,7 +838,7 @@ model IdentityDetails {
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @maxLength(1024)
-scalar SkillExample extends string;
+scalar AgentCardSkillExample extends string;
 
 @removed(Versions.v1)
 @extension(
@@ -843,14 +846,14 @@ scalar SkillExample extends string;
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @maxLength(32)
-scalar SkillTag extends string;
+scalar AgentCardSkillTag extends string;
 
 @removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
-model AgentSkill {
+model AgentCardSkill {
   @doc("a unique identifier for the skill")
   @maxLength(64)
   @minLength(1)
@@ -867,11 +870,11 @@ model AgentSkill {
 
   @doc("set of tagwords describing classes of capabilities for the skill")
   @maxItems(5)
-  tags?: SkillTag[];
+  tags?: AgentCardSkillTag[];
 
   @doc("A list of example scenarios that the skill can perform.")
   @maxItems(5)
-  examples?: SkillExample[];
+  examples?: AgentCardSkillExample[];
 }
 
 @removed(Versions.v1)
@@ -891,5 +894,5 @@ model AgentCard {
 
   @doc("The set of skills that an agent can perform.")
   @maxItems(16)
-  skills: AgentSkill[];
+  skills: AgentCardSkill[];
 }

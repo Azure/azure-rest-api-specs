@@ -10552,12 +10552,78 @@
           "skills": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/AgentSkill"
+              "$ref": "#/components/schemas/AgentCardSkill"
             },
             "maxItems": 16,
             "description": "The set of skills that an agent can perform."
           }
         },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentCardSkill": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "a unique identifier for the skill"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "The name of the skill"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2048,
+            "description": "A description of the skill"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCardSkillTag"
+            },
+            "maxItems": 5,
+            "description": "set of tagwords describing classes of capabilities for the skill"
+          },
+          "examples": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCardSkillExample"
+            },
+            "maxItems": 5,
+            "description": "A list of example scenarios that the skill can perform."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentCardSkillExample": {
+        "type": "string",
+        "maxLength": 1024,
+        "description": "A skill example string with a maximum length of 1024 characters.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentCardSkillTag": {
+        "type": "string",
+        "maxLength": 32,
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentEndpoints=V1Preview"
@@ -10581,7 +10647,7 @@
           "skills": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/AgentSkill"
+              "$ref": "#/components/schemas/AgentCardSkill"
             },
             "maxItems": 16,
             "description": "The set of skills that an agent can perform."
@@ -11189,16 +11255,17 @@
       "AgentIdentity": {
         "type": "object",
         "required": [
-          "details"
+          "principal_id",
+          "client_id"
         ],
         "properties": {
-          "details": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/IdentityDetails"
-              }
-            ],
-            "description": "The details of the identity"
+          "principal_id": {
+            "type": "string",
+            "description": "The principal ID of the agent"
+          },
+          "client_id": {
+            "type": "string",
+            "description": "The client ID of the agent"
           }
         },
         "x-ms-foundry-meta": {
@@ -11335,53 +11402,6 @@
             "type": "string",
             "description": "The version identifier of the agent."
           }
-        }
-      },
-      "AgentSkill": {
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "a unique identifier for the skill"
-          },
-          "name": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "description": "The name of the skill"
-          },
-          "description": {
-            "type": "string",
-            "maxLength": 2048,
-            "description": "A description of the skill"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SkillTag"
-            },
-            "maxItems": 5,
-            "description": "set of tagwords describing classes of capabilities for the skill"
-          },
-          "examples": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SkillExample"
-            },
-            "maxItems": 5,
-            "description": "A list of example scenarios that the skill can perform."
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "AgentTaxonomyInput": {
@@ -16787,28 +16807,6 @@
           }
         ],
         "description": "Evaluation rule action for human evaluation."
-      },
-      "IdentityDetails": {
-        "type": "object",
-        "required": [
-          "principal_id",
-          "client_id"
-        ],
-        "properties": {
-          "principal_id": {
-            "type": "string",
-            "description": "The principal ID of the agent"
-          },
-          "client_id": {
-            "type": "string",
-            "description": "The client ID of the agent"
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
       },
       "Index": {
         "type": "object",
@@ -39508,25 +39506,6 @@
           }
         ],
         "description": "The input definition information for a sharepoint tool as used to configure an agent."
-      },
-      "SkillExample": {
-        "type": "string",
-        "maxLength": 1024,
-        "description": "A skill example string with a maximum length of 1024 characters.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
-      "SkillTag": {
-        "type": "string",
-        "maxLength": 32,
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
       },
       "Sku": {
         "type": "object",
