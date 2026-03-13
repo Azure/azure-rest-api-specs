@@ -915,6 +915,7 @@
             "description": "An MD5 hash of the content. This hash is used to verify the integrity of the data during transport.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "contentMD5"
           },
           {
@@ -3983,6 +3984,7 @@
             "description": "An MD5 hash of the content. This hash is used to verify the integrity of data during transport.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "contentMD5"
           },
           {
@@ -7811,10 +7813,7 @@
             "description": "The ACL for the share.",
             "required": false,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SignedIdentifier"
-              }
+              "$ref": "#/definitions/SignedIdentifiers"
             }
           }
         ],
@@ -8132,7 +8131,7 @@
         }
       }
     },
-    "/?restype=share&comp=lease&acquire": {
+    "/?restype=share&comp=lease": {
       "put": {
         "operationId": "Share_AcquireLease",
         "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
@@ -8286,7 +8285,7 @@
         }
       }
     },
-    "/?restype=share&comp=lease&break": {
+    "/?restype=share&comp=lease&_overload=breakLease": {
       "put": {
         "operationId": "Share_BreakLease",
         "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
@@ -8445,7 +8444,7 @@
         }
       }
     },
-    "/?restype=share&comp=lease&change": {
+    "/?restype=share&comp=lease&_overload=changeLease": {
       "put": {
         "operationId": "Share_ChangeLease",
         "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
@@ -8598,7 +8597,7 @@
         }
       }
     },
-    "/?restype=share&comp=lease&release": {
+    "/?restype=share&comp=lease&_overload=releaseLease": {
       "put": {
         "operationId": "Share_ReleaseLease",
         "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
@@ -8739,7 +8738,7 @@
         }
       }
     },
-    "/?restype=share&comp=lease&renew": {
+    "/?restype=share&comp=lease&_overload=renewLease": {
       "put": {
         "operationId": "Share_RenewLease",
         "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
@@ -11801,6 +11800,26 @@
       },
       "required": [
         "id"
+      ]
+    },
+    "SignedIdentifiers": {
+      "type": "object",
+      "description": "Represents an array of signed identifiers",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The array of signed identifiers.",
+          "items": {
+            "$ref": "#/definitions/SignedIdentifier"
+          },
+          "xml": {
+            "name": "SignedIdentifier",
+            "wrapped": false
+          }
+        }
+      },
+      "required": [
+        "items"
       ]
     },
     "SmbMultichannel": {

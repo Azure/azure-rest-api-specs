@@ -331,7 +331,8 @@ interface Share {
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?restype=share&comp=lease&acquire")
+  @sharedRoute
+  @route("?restype=share&comp=lease")
   @put
   acquireLease is StorageOperationNoBody<
     {
@@ -357,7 +358,8 @@ interface Share {
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?restype=share&comp=lease&release")
+  @sharedRoute
+  @route("?restype=share&comp=lease")
   @put
   releaseLease is StorageOperationNoBody<
     {
@@ -377,7 +379,8 @@ interface Share {
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?restype=share&comp=lease&change")
+  @sharedRoute
+  @route("?restype=share&comp=lease")
   @put
   changeLease is StorageOperationNoBody<
     {
@@ -399,7 +402,8 @@ interface Share {
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?restype=share&comp=lease&renew")
+  @sharedRoute
+  @route("?restype=share&comp=lease")
   @put
   renewLease is StorageOperationNoBody<
     {
@@ -419,7 +423,8 @@ interface Share {
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
-  @route("?restype=share&comp=lease&break")
+  @sharedRoute
+  @route("?restype=share&comp=lease")
   @put
   breakLease is StorageOperationNoBody<
     {
