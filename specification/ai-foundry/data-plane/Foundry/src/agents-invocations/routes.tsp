@@ -58,7 +58,7 @@ interface AgentInvocations {
       @header contentType: string;
 
       /** The request body. */
-      @body request: bytes;
+      @body request: unknown;
     } & AgentInvocationPreviewHeader,
     {
       /** Unique identifier for this invocation. */
@@ -71,7 +71,7 @@ interface AgentInvocations {
       @header contentType: string;
 
       /** The response body. */
-      @body response: bytes;
+      @body response: unknown;
     }
   >;
 
@@ -98,7 +98,7 @@ interface AgentInvocations {
       @header contentType: string;
 
       /** The response body containing invocation status and result. */
-      @body response: bytes;
+      @body response: unknown;
     }
   >;
 
@@ -131,7 +131,7 @@ interface AgentInvocations {
       @header contentType: string;
 
       /** The response body. */
-      @body response: bytes;
+      @body response: unknown;
     }
   >;
 }
