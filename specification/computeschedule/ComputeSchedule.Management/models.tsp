@@ -654,7 +654,7 @@ model CreateFlexResourceOperationResponse {
 
   @doc("The location of the create flex request eg westus")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: string;
+  location: azureLocation;
 
   @Azure.ResourceManager.identifiers(#["resourceId"])
   @doc("The results from the create flex request if no errors exist")
