@@ -2,9 +2,41 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Microsoft.ContainerRegistry;
 
 @@clientName(Microsoft.ContainerRegistry,
   "ContainerRegistryManagementClient",
-  "javascript"
+  "javascript,python"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+  "java,python"
+);
+
+@@clientName(IPRule, "IpRule", "java");
+@@clientName(IPRule.value, "ipAddressOrRange", "java");
+@@clientName(Source.instanceID, "instanceId", "java");
+
+@@alternateType(RegistryNameCheckRequest.type,
+  "Microsoft.ContainerRegistry/registries",
+  "java,go"
+);
+
+@@usage(Webhook, Usage.input | Usage.output, "java");
+
+@@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
+
+// C# client naming: match legacy ModelFactory signatures
+@@clientName(ProvisioningState, "ContainerRegistryProvisioningState", "csharp");
+@@clientName(ConnectionState, "ConnectedRegistryConnectionState", "csharp");
+@@clientName(ActivationStatus, "ConnectedRegistryActivationStatus", "csharp");
+@@clientName(ParentProperties, "ConnectedRegistryParent", "csharp");
+@@clientName(LoginServerProperties, "ConnectedRegistryLoginServer", "csharp");
+@@clientName(LoggingProperties, "ConnectedRegistryLogging", "csharp");
+@@clientName(StatusDetailProperties, "ConnectedRegistryStatusDetail", "csharp");
+@@clientName(ImportSource, "ContainerRegistryImportSource", "csharp");
+
+// C# type correctness: match API surface before migration to Typespec (Guid? CorrelationId)
+@@alternateType(StatusDetailProperties.correlationId, uuid, "csharp");

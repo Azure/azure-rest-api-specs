@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "DefaultRuleSet_1.0",
+            "type": "Microsoft.Network/frontdoorwebapplicationfirewallmanagedrulesets",
+            "id": "/subscriptions/subid/providers/Microsoft.Network/FrontDoorWebApplicationFirewallManagedRuleSets",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "ruleGroups": [
+                {
+                  "description": "SQL injection",
+                  "ruleGroupName": "SQLI",
+                  "rules": [
+                    {
+                      "description": "SQL Injection Attack Detected via libinjection",
+                      "defaultAction": "Block",
+                      "defaultState": "Enabled",
+                      "ruleId": "942100"
+                    },
+                    {
+                      "description": "SQL Injection Attack: Common Injection Testing Detected",
+                      "defaultAction": "Block",
+                      "defaultState": "Enabled",
+                      "ruleId": "942110"
+                    }
+                  ]
+                },
+                {
+                  "description": "Cross-site scripting",
+                  "ruleGroupName": "XSS",
+                  "rules": [
+                    {
+                      "description": "XSS Attack Detected via libinjection",
+                      "defaultAction": "Block",
+                      "defaultState": "Enabled",
+                      "ruleId": "941100"
+                    },
+                    {
+                      "description": "XSS Attack Detected via libinjection",
+                      "defaultAction": "Block",
+                      "defaultState": "Enabled",
+                      "ruleId": "941101"
+                    },
+                    {
+                      "description": "XSS Filter - Category 1: Script Tag Vector",
+                      "defaultAction": "Block",
+                      "defaultState": "Enabled",
+                      "ruleId": "941110"
+                    }
+                  ]
+                }
+              ],
+              "ruleSetId": "8125d145-ddc5-4d90-9bc3-24c5f2de69a2",
+              "ruleSetType": "DefaultRuleSet",
+              "ruleSetVersion": "1.0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedRuleSets_List",
+  "title": "List Policies ManagedRuleSets in a Resource Group"
+}

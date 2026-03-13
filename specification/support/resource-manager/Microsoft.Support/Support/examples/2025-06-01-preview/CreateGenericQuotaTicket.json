@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "createSupportTicketParameters": {
+      "properties": {
+        "description": "Increase the maximum throughput per container limit to 10000 for account foo bar",
+        "advancedDiagnosticConsent": "Yes",
+        "contactDetails": {
+          "country": "usa",
+          "firstName": "abc",
+          "lastName": "xyz",
+          "preferredContactMethod": "email",
+          "preferredSupportLanguage": "en-US",
+          "preferredTimeZone": "Pacific Standard Time",
+          "primaryEmailAddress": "abc@contoso.com"
+        },
+        "problemClassificationId": "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/cosmosdb_problemClassification_guid",
+        "serviceId": "/providers/Microsoft.Support/services/quota_service_guid",
+        "severity": "moderate",
+        "title": "my title"
+      }
+    },
+    "subscriptionId": "132d901f-189d-4381-9214-fe68e27e05a1",
+    "supportTicketName": "testticket"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testticket",
+        "type": "Microsoft.Support/supportTickets",
+        "id": "/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/supportTickets/testticket",
+        "properties": {
+          "description": "Increase the maximum throughput per container limit to 10000 for account foo bar",
+          "advancedDiagnosticConsent": "Yes",
+          "contactDetails": {
+            "country": "usa",
+            "firstName": "abc",
+            "lastName": "xyz",
+            "preferredContactMethod": "email",
+            "preferredSupportLanguage": "en-US",
+            "preferredTimeZone": "Pacific Standard Time",
+            "primaryEmailAddress": "abc@contoso.com"
+          },
+          "createdDate": "2020-03-20T21:36:18Z",
+          "modifiedDate": "2020-03-20T21:36:23Z",
+          "problemClassificationDisplayName": "Cosmos DB",
+          "problemClassificationId": "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/cosmosdb_problemClassification_guid",
+          "require24X7Response": false,
+          "serviceDisplayName": "Service and subscription limits (quotas)",
+          "serviceId": "/providers/Microsoft.Support/services/quota_service_guid",
+          "serviceLevelAgreement": {
+            "expirationTime": "2020-03-21T17:36:18Z",
+            "slaMinutes": 240,
+            "startTime": "2020-03-20T21:36:18Z"
+          },
+          "severity": "moderate",
+          "status": "Open",
+          "supportEngineer": {
+            "emailAddress": null
+          },
+          "supportPlanDisplayName": "Premier",
+          "supportPlanType": "Premier",
+          "supportTicketId": "119120321001170",
+          "title": "my title"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/operationsStatus/operationid?api-version=2025-06-01-preview",
+        "location": "https://management.azure.com/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/operationResults/operationid?api-version=2025-06-01-preview"
+      }
+    }
+  },
+  "operationId": "SupportTickets_Create",
+  "title": "Create a ticket to request Quota increase for services that do not require additional details in the quotaTicketDetails object"
+}
