@@ -2991,6 +2991,18 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
+              },
+              "x-ms-download-hint": {
+                "x-ms-client-name": "DownloadHint",
+                "type": "string",
+                "enum": [
+                  "layout"
+                ],
+                "x-ms-enum": {
+                  "name": "DownloadHint",
+                  "modelAsString": true
+                },
+                "description": "Indicates the download hint for the blob."
               }
             },
             "schema": {
@@ -3278,6 +3290,18 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
+              },
+              "x-ms-download-hint": {
+                "x-ms-client-name": "DownloadHint",
+                "type": "string",
+                "enum": [
+                  "layout"
+                ],
+                "x-ms-enum": {
+                  "name": "DownloadHint",
+                  "modelAsString": true
+                },
+                "description": "Indicates the download hint for the blob."
               }
             },
             "schema": {
@@ -3843,24 +3867,29 @@
                 "description": "Returns the date and time the blob was last modified. Any operation that modifies the blob, including an update of the blob's metadata or properties, changes the last-modified time of the blob."
               },
               "x-ms-blob-content-length": {
+                "x-ms-client-name": "BlobContentLength",
                 "type": "string",
                 "format": "int64",
                 "description": "Returns the length of the blob in bytes."
               },
               "x-ms-blob-content-type": {
+                "x-ms-client-name": "BlobContentType",
                 "type": "string",
                 "description": "Returns the content type of the blob."
               },
               "x-ms-blob-content-encoding": {
+                "x-ms-client-name": "BlobContentEncoding",
                 "type": "string",
                 "description": "Returns the Content-Encoding of the blob."
               },
               "x-ms-blob-content-md5": {
+                "x-ms-client-name": "BlobContentMD5",
                 "type": "string",
                 "format": "byte",
                 "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
               },
               "x-ms-blob-creation-time": {
+                "x-ms-client-name": "BlobCreationTime",
                 "type": "string",
                 "format": "date-time-rfc1123",
                 "description": "Returns the date and time the blob was created."
