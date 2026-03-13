@@ -3,10 +3,101 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
+
+model HorizonDbCluster
+  is Azure.ResourceManager.TrackedResource<HorizonDbClusterProperties> {
+  @doc("The name of the HorizonDb cluster")
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+  @minLength(1)
+  @maxLength(63)
+  @key("clusterName")
+  @path
+  @segment("clusters")
+  name: string;
+}
+
+@parentResource(HorizonDbCluster)
+model HorizonDbPool
+  is Azure.ResourceManager.ProxyResource<HorizonDbPoolProperties> {
+  @doc("The name of the HorizonDb pool")
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+  @minLength(1)
+  @maxLength(63)
+  @key("poolName")
+  @path
+  @segment("pools")
+  name: string;
+}
+
+@parentResource(HorizonDbPool)
+model HorizonDbReplica
+  is Azure.ResourceManager.ProxyResource<HorizonDbReplicaProperties> {
+  @doc("The name of the HorizonDb replica")
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+  @minLength(1)
+  @maxLength(63)
+  @key("replicaName")
+  @path
+  @segment("replicas")
+  name: string;
+}
+
+@parentResource(HorizonDbPool)
+model HorizonDbFirewallRule
+  is Azure.ResourceManager.ProxyResource<HorizonDbFirewallRuleProperties> {
+  @doc("The name of the HorizonDb firewall rule")
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+  @minLength(1)
+  @maxLength(128)
+  @key("firewallRuleName")
+  @path
+  @segment("firewallRules")
+  name: string;
+}
+
+@parentResource(HorizonDbCluster)
+model HorizonDbPrivateEndpointConnection
+  is Azure.ResourceManager.ProxyResource<HorizonDbPrivateEndpointConnectionProperties> {
+  @doc("The name of the private endpoint connection")
+  @pattern("^.*$")
+  @minLength(1)
+  @maxLength(128)
+  @key("privateEndpointConnectionName")
+  @path
+  @segment("privateEndpointConnections")
+  name: string;
+}
+
+@parentResource(HorizonDbCluster)
+model HorizonDbPrivateLinkResource
+  is Azure.ResourceManager.ProxyResource<HorizonDbPrivateLinkResourceProperties> {
+  @doc("The name of the private link resource group")
+  @pattern("^.*$")
+  @minLength(1)
+  @maxLength(128)
+  @key("groupName")
+  @path
+  @segment("privateLinkResources")
+  name: string;
+}
+
+model HorizonDbParameterGroup
+  is Azure.ResourceManager.TrackedResource<HorizonDbParameterGroupProperties> {
+  @doc("The name of the HorizonDb parameter group")
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+  @minLength(1)
+  @maxLength(63)
+  @key("parameterGroupName")
+  @path
+  @segment("parameterGroups")
+  name: string;
+}
+
 
 @doc("Properties of a HorizonDb cluster")
 model HorizonDbClusterProperties {
