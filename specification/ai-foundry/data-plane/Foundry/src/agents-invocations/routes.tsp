@@ -20,7 +20,7 @@ interface AgentInvocations {
    * Retrieves the OpenAPI specification for an agent version's invocation contract.
    * Returns 404 if the agent does not expose an OpenAPI specification.
    */
-@get
+  @get
   @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/openapi.json")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   getAgentInvocationOpenApiSpec is FoundryDataPlaneOperation<
@@ -124,7 +124,7 @@ interface AgentInvocations {
       @header contentType?: string;
 
       /** Optional request body. */
-      @body request?: bytes;
+      @body request?: unknown;
     } & AgentInvocationPreviewHeader,
     {
       /** The content type of the response body. */
