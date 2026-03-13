@@ -7154,6 +7154,40 @@
         }
       }
     },
+    "ManagedClusterHostedSystemProfile": {
+      "type": "object",
+      "description": "Settings for hosted system addons.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable hosted system addons for the cluster."
+        },
+        "systemNodeSubnetID": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverAccessProfile.subnetId`, and all three subnet IDs must belong to the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /26 CIDR.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "nodeSubnetID": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ID of the subnet that will be joined by worker nodes managed by node auto provisioner for running workload pods in your tenant. This must be provided together with `systemNodeSubnetID` and `apiserverAccessProfile.subnetId`, and all three subnet IDs must be in the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /16 CIDR.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        }
+      }
+    },
     "ManagedClusterIdentity": {
       "type": "object",
       "description": "Identity for the managed cluster.",
@@ -7977,6 +8011,10 @@
         "aiToolchainOperatorProfile": {
           "$ref": "#/definitions/ManagedClusterAIToolchainOperatorProfile",
           "description": "AI toolchain operator settings that apply to the whole cluster."
+        },
+        "hostedSystemProfile": {
+          "$ref": "#/definitions/ManagedClusterHostedSystemProfile",
+          "description": "Settings for hosted system addons. For more information, see https://aka.ms/aks/automatic/systemcomponents."
         },
         "status": {
           "$ref": "#/definitions/ManagedClusterStatus",
