@@ -19,9 +19,12 @@ using Microsoft.ContainerRegistry;
 );
 
 // C# client naming: avoid suffixes "Request", "Parameters", "Definition" (AZC0030/AZC0031)
-@@clientName(AuthInfoUpdateParameters, "AuthInfoUpdateContent", "csharp");
+@@clientName(AuthInfoUpdateParameters,
+  "ContainerRegistryTaskAuthInfoUpdateContent",
+  "csharp"
+);
 @@clientName(BaseImageTriggerUpdateParameters,
-  "BaseImageTriggerUpdateContent",
+  "ContainerRegistryTaskBaseImageTriggerUpdateContent",
   "csharp"
 );
 @@clientName(DockerBuildRequest, "DockerBuildContent", "csharp");
@@ -39,21 +42,33 @@ using Microsoft.ContainerRegistry;
   "FileTaskStepUpdateContent",
   "csharp"
 );
-@@clientName(PlatformUpdateParameters, "PlatformUpdateContent", "csharp");
-@@clientName(RunRequest, "RunContent", "csharp");
-@@clientName(SourceTriggerUpdateParameters,
-  "SourceTriggerUpdateContent",
+@@clientName(PlatformUpdateParameters,
+  "ContainerRegistryTaskPlatformUpdateContent",
   "csharp"
 );
-@@clientName(SourceUpdateParameters, "SourceUpdateContent", "csharp");
-@@clientName(SourceUploadDefinition, "SourceUploadResult", "csharp");
+@@clientName(RunRequest, "RunContent", "csharp");
+@@clientName(SourceTriggerUpdateParameters,
+  "ContainerRegistryTaskSourceTriggerUpdateContent",
+  "csharp"
+);
+@@clientName(SourceUpdateParameters,
+  "ContainerRegistryTaskSourceUpdateContent",
+  "csharp"
+);
+@@clientName(SourceUploadDefinition,
+  "ContainerRegistryTaskSourceUploadResult",
+  "csharp"
+);
 @@clientName(TaskRunRequest, "TaskRunContent", "csharp");
 @@clientName(TaskStepUpdateParameters, "TaskStepUpdateContent", "csharp");
 @@clientName(TimerTriggerUpdateParameters,
-  "TimerTriggerUpdateContent",
+  "ContainerRegistryTaskTimerTriggerUpdateContent",
   "csharp"
 );
-@@clientName(TriggerUpdateParameters, "TriggerUpdateContent", "csharp");
+@@clientName(TriggerUpdateParameters,
+  "ContainerRegistryTaskTriggerUpdateContent",
+  "csharp"
+);
 
 // C# client naming: prefix generic names with service context
 @@clientName(Credentials, "ContainerRegistryTaskCredentials", "csharp");
