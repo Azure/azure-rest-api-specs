@@ -22,7 +22,7 @@ describe("folder-structure", function () {
       {
         tool: "TypeSpecValidation",
         paths: ["**"],
-        reason: "test suppression reason",
+        reason: "many tests use fsv1",
         rules: ["FolderStructure"],
         subRules: ["MustUseV2"],
       },
