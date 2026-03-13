@@ -2204,7 +2204,7 @@ alias ImmutabilityPolicyExpiryRequiredParameter = {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
-  expiry: utcDateTime;
+  immutabilityPolicyExpiry: utcDateTime;
 };
 
 /** The immutability policy expiration parameter. */
@@ -2213,7 +2213,7 @@ alias ImmutabilityPolicyExpiryParameter = {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
-  expiry?: utcDateTime;
+  immutabilityPolicyExpiry?: utcDateTime;
 };
 
 /** The blobs tags header parameter. */
