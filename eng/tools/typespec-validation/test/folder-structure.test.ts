@@ -18,7 +18,15 @@ describe("folder-structure", function () {
     fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
     normalizePathSpy = vi.spyOn(utils, "normalizePath");
     readTspConfigSpy = vi.spyOn(utils, "readTspConfig").mockResolvedValue(contosoTspConfig);
-    vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([
+      {
+        tool: "TypeSpecValidation",
+        paths: ["**"],
+        reason: "test suppression reason",
+        rules: ["FolderStructure"],
+        subRules: ["MustUseV2"],
+      },
+    ]);
   });
 
   afterEach(() => {
