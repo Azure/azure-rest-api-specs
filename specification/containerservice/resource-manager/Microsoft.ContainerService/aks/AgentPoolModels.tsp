@@ -391,13 +391,6 @@ model ManagedClusterAgentPoolProfileProperties {
   localDNSProfile?: LocalDNSProfile;
 
   /**
-   * Settings to determine the node customization used to provision nodes in a pool. In future versions this is renamed PreparedImageSpecificationProfile.
-   */
-  @added(Versions.v2026_02_02_preview)
-  @removed(Versions.v2026_02_02_preview)
-  nodeCustomizationProfile?: NodeCustomizationProfile;
-
-  /**
    * Settings to determine the prepared image specification used to provision nodes in a pool.
    */
   @added(Versions.v2026_02_02_preview)
@@ -1056,22 +1049,6 @@ model LocalDNSOverride {
    * Policy for serving stale data. See [cache plugin](https://coredns.io/plugins/cache) for more information.
    */
   serveStale?: LocalDNSServeStale = LocalDNSServeStale.Immediate;
-}
-
-/**
- * Settings to determine the node customization used to provision nodes in a pool.
- */
-@added(Versions.v2026_02_01)
-@removed(Versions.v2026_02_02_preview)
-model NodeCustomizationProfile {
-  /**
-   * The resource ID of the node customization resource to use. This can be a version. Omitting the version will use the latest version of the node customization.
-   */
-  nodeCustomizationId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ContainerService/nodeCustomizations";
-    }
-  ]>;
 }
 
 /**
