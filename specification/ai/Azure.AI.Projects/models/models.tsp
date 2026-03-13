@@ -60,7 +60,7 @@ model DestinationAsset {
 @Rest.resource("models")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model ModelVersion {
+model Model {
   @doc("The asset property dictionary.")
   properties?: Record<string>;
 

@@ -1652,7 +1652,7 @@
     "/models/{name}/versions": {
       "get": {
         "operationId": "Models_ListVersions",
-        "description": "List all versions of the given ModelVersion",
+        "description": "List all versions of the given Model",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1670,20 +1670,13 @@
             "description": "Specifies which view type to apply when listing model versions.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "stage",
-            "in": "query",
-            "description": "Filters model versions by lifecycle stage, e.g. \"Development\", \"Staging\", \"Production\".",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedModelVersion"
+              "$ref": "#/definitions/PagedModel"
             }
           },
           "default": {
@@ -1715,7 +1708,7 @@
     "/models/{name}/versions/{version}": {
       "get": {
         "operationId": "Models_GetVersion",
-        "description": "Get the specific version of the ModelVersion. The service returns 404 Not Found error if the ModelVersion does not exist.",
+        "description": "Get the specific version of the Model. The service returns 404 Not Found error if the Model does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1730,7 +1723,7 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The specific version id of the ModelVersion to retrieve.",
+            "description": "The specific version id of the Model to retrieve.",
             "required": true,
             "type": "string"
           }
@@ -1739,7 +1732,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ModelVersion"
+              "$ref": "#/definitions/Model"
             }
           },
           "default": {
@@ -1766,7 +1759,7 @@
       },
       "put": {
         "operationId": "Models_CreateOrUpdateVersion",
-        "description": "Create a new or update an existing ModelVersion with the given version id",
+        "description": "Create a new or update an existing Model with the given version id",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1781,17 +1774,17 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The specific version id of the ModelVersion to create or update.",
+            "description": "The specific version id of the Model to create or update.",
             "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "The model version to create or update.",
+            "description": "The model to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ModelVersion"
+              "$ref": "#/definitions/Model"
             }
           }
         ],
@@ -1799,13 +1792,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ModelVersion"
+              "$ref": "#/definitions/Model"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/ModelVersion"
+              "$ref": "#/definitions/Model"
             }
           },
           "default": {
@@ -1829,7 +1822,7 @@
       },
       "delete": {
         "operationId": "Models_DeleteVersion",
-        "description": "Delete the specific version of the ModelVersion. The service returns 204 No Content if the ModelVersion was deleted successfully or if the ModelVersion does not exist.",
+        "description": "Delete the specific version of the Model. The service returns 204 No Content if the Model was deleted successfully or if the Model does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1844,7 +1837,7 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The version of the ModelVersion to delete.",
+            "description": "The version of the Model to delete.",
             "required": true,
             "type": "string"
           }
@@ -1894,7 +1887,7 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The specific version of the model version to publish.",
+            "description": "The specific version of the model to publish.",
             "required": true,
             "type": "string"
           },
@@ -3826,59 +3819,7 @@
         "role"
       ]
     },
-    "ModelDeployment": {
-      "type": "object",
-      "description": "Model Deployment Definition",
-      "properties": {
-        "modelName": {
-          "type": "string",
-          "description": "Publisher-specific name of the deployed model",
-          "readOnly": true
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "Publisher-specific version of the deployed model",
-          "readOnly": true
-        },
-        "modelPublisher": {
-          "type": "string",
-          "description": "Name of the deployed model's publisher",
-          "readOnly": true
-        },
-        "capabilities": {
-          "type": "object",
-          "description": "Capabilities of deployed model",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "Sku of the model deployment",
-          "readOnly": true
-        },
-        "connectionName": {
-          "type": "string",
-          "description": "Name of the connection the deployment comes from",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "modelName",
-        "modelVersion",
-        "modelPublisher",
-        "capabilities",
-        "sku"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Deployment"
-        }
-      ],
-      "x-ms-discriminator-value": "ModelDeployment"
-    },
-    "ModelVersion": {
+    "Model": {
       "type": "object",
       "description": "Model details.",
       "properties": {
@@ -3957,6 +3898,58 @@
         "name",
         "version"
       ]
+    },
+    "ModelDeployment": {
+      "type": "object",
+      "description": "Model Deployment Definition",
+      "properties": {
+        "modelName": {
+          "type": "string",
+          "description": "Publisher-specific name of the deployed model",
+          "readOnly": true
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "Publisher-specific version of the deployed model",
+          "readOnly": true
+        },
+        "modelPublisher": {
+          "type": "string",
+          "description": "Name of the deployed model's publisher",
+          "readOnly": true
+        },
+        "capabilities": {
+          "type": "object",
+          "description": "Capabilities of deployed model",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the model deployment",
+          "readOnly": true
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "Name of the connection the deployment comes from",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "modelName",
+        "modelVersion",
+        "modelPublisher",
+        "capabilities",
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Deployment"
+        }
+      ],
+      "x-ms-discriminator-value": "ModelDeployment"
     },
     "MpiDistribution": {
       "type": "object",
@@ -4125,15 +4118,15 @@
         "value"
       ]
     },
-    "PagedModelVersion": {
+    "PagedModel": {
       "type": "object",
-      "description": "Paged collection of ModelVersion items",
+      "description": "Paged collection of Model items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ModelVersion items on this page",
+          "description": "The Model items on this page",
           "items": {
-            "$ref": "#/definitions/ModelVersion"
+            "$ref": "#/definitions/Model"
           }
         },
         "nextLink": {
