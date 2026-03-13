@@ -31,12 +31,3 @@ model ManagedAgentIdentityBlueprint {
   @visibility(Lifecycle.Read)
   name: string;
 }
-
-@removed(Versions.v1)
-model ManagedAgentIdentityBlueprintPagedResponse {
-  @doc("The identities returned")
-  data: ManagedAgentIdentityBlueprint[];
-
-  @doc("An optional continuation token or pagination. A null value indicates the end of the list")
-  token?: string;
-}
