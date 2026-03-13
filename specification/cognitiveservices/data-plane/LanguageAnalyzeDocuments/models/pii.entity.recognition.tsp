@@ -13,13 +13,13 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   domain?: PiiDomain = PiiDomain.none;
 
   /** Enumeration of PII categories to be returned in the response. */
-  piiCategories?: Array<PiiCategory>;
+  piiCategories?: Array<PiiCategoriesExtended>;
 
   /** StringIndexType to be used for analysis. */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** Enumeration of PII categories to be excluded in the response. */
-  excludePiiCategories?: Array<PiiCategoriesExclude>;
+  excludePiiCategories?: Array<PiiCategories>;
 
   /** Redaction policy to be used when redacting from documents */
   @added(Versions.v2024_11_15_preview)
@@ -275,7 +275,7 @@ model ConfidenceScoreThreshold {
 @added(Versions.v2026_05_15_preview)
 model ConfidenceScoreThresholdOverride {
   /** The PII category for which to override the confidence score threshold */
-  entity: PiiCategoriesExclude;
+  entity: PiiCategories;
 
   /** The confidence score threshold for the specified PII category */
   value: float32;
@@ -302,7 +302,7 @@ model BaseRedactionPolicy {
 
   /** (Optional) describes the PII categories to which the redaction policy will be applied. If not specified, the redaction policy will be applied to all PII categories. */
   @added(Versions.v2026_05_15_preview)
-  entityTypes?: PiiCategoriesExclude[];
+  entityTypes?: PiiCategories[];
 
   /** (Optional) name of the redaction policy for identification purposes. */
   @added(Versions.v2026_05_15_preview)
@@ -420,9 +420,10 @@ model EntityTag {
 }
 
 /** (Optional) describes the PII categories to return */
-union PiiCategory {
+@renamedFrom(Versions.v2026_05_15_preview, "PiiCategory")
+union PiiCategoriesExtended {
   string,
-  PiiCategoriesExclude,
+  PiiCategories,
 
   /** All PII categories. */
   All: "All",
@@ -442,7 +443,8 @@ model PiiEntityRecognitionLROResult extends AnalyzeDocumentsLROResult {
 }
 
 /** (Optional) describes the PII categories to return */
-union PiiCategoriesExclude {
+@renamedFrom(Versions.v2026_05_15_preview, "PiiCategoriesExclude")
+union PiiCategories {
   string,
 
   /** ABA Routing number */
