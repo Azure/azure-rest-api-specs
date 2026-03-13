@@ -67,15 +67,7 @@ namespace Customizations;
 );
 
 @@clientName(Storage.File.MaxResultsParameter.maxresults,
-  "maxPageSize",
-  "javascript"
-);
-@@clientName(Storage.File.ListSharesResponse.maxResults,
-  "maxPageSize",
-  "javascript"
-);
-@@clientName(Storage.File.ListFilesAndDirectoriesSegmentResponse.maxResults,
-  "maxPageSize",
+  "maxResults",
   "javascript"
 );
 
