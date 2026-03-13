@@ -526,11 +526,14 @@ model HorizonDbParameterGroupForPatchUpdate {
 @doc("Connection information for HorizonDb parameter group")
 model HorizonDbParameterGroupConnectionProperties {
   @doc("The name of the connected resource")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("The resource ID of the connected resource")
+  @visibility(Lifecycle.Read)
   id?: armResourceIdentifier;
 
   @doc("The type of the resource")
+  @visibility(Lifecycle.Read)
   type?: string;
 }
