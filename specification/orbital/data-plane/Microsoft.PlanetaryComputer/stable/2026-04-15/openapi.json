@@ -4206,6 +4206,164 @@
         }
       }
     },
+    "/data/mosaic/collections/{collectionId}/bbox": {
+      "post": {
+        "operationId": "MosaicCollectionsBboxGeoJson_Crop",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Geojson Bbox",
+        "description": "Create image from a geojson feature (without format in path).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.height"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.width"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request GeoJson body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicCollectionsBboxGeoJson_Crop": {
+            "$ref": "./examples/MosaicCollectionsBboxGeoJson_Crop.json"
+          }
+        }
+      }
+    },
     "/data/mosaic/collections/{collectionId}/bbox/{minx},{miny},{maxx},{maxy}.{format}": {
       "get": {
         "operationId": "MosaicCollectionsBbox_GetCroppedToBoundingBox",
@@ -4380,6 +4538,183 @@
         "x-ms-examples": {
           "MosaicCollectionsBbox_GetCroppedToBoundingBox": {
             "$ref": "./examples/MosaicCollectionsBbox_GetCroppedToBoundingBox.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/bbox/{width}x{height}.{format}": {
+      "post": {
+        "operationId": "MosaicCollectionsBboxGeoJsonWidthByHeight_CropWidthByHeightFormat",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Geojson Bbox Crop With Dimensions",
+        "description": "Create image from a geojson feature with dimensions.",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "width",
+            "in": "path",
+            "description": "Width in pixels for the output image.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "height",
+            "in": "path",
+            "description": "Height in pixels for the output image.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request GeoJson body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicCollectionsBboxGeoJsonWidthByHeight_CropWidthByHeightFormat": {
+            "$ref": "./examples/MosaicCollectionsBboxGeoJsonWidthByHeight_CropWidthByHeightFormat.json"
           }
         }
       }
@@ -4647,6 +4982,173 @@
         }
       }
     },
+    "/data/mosaic/collections/{collectionId}/bbox.{format}": {
+      "post": {
+        "operationId": "MosaicCollectionsBboxGeoJsonFormat_CropFormat",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Geojson Bbox Crop With Format",
+        "description": "Create image from a geojson feature with format.",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.height"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.width"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request GeoJson body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicCollectionsBboxGeoJsonFormat_CropFormat": {
+            "$ref": "./examples/MosaicCollectionsBboxGeoJsonFormat_CropFormat.json"
+          }
+        }
+      }
+    },
     "/data/mosaic/collections/{collectionId}/info": {
       "get": {
         "operationId": "MosaicCollectionsInfo_Get",
@@ -4696,13 +5198,13 @@
         }
       }
     },
-    "/data/mosaic/collections/{collectionId}/items/{itemId}/crop": {
+    "/data/mosaic/collections/{collectionId}/items/{itemId}/bbox": {
       "post": {
-        "operationId": "MosaicItemsGeoJsonsCrop_Crop",
+        "operationId": "MosaicItemsBboxGeoJson_Crop",
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Geojson Crop",
+        "summary": "Geojson Bbox",
         "description": "Create image from a geojson feature (without format in path).",
         "produces": [
           "image/png",
@@ -4905,8 +5407,936 @@
           }
         },
         "x-ms-examples": {
-          "MosaicItemsGeoJsonsCrop_Crop": {
-            "$ref": "./examples/MosaicItemsGeoJsonsCrop_Crop.json"
+          "MosaicItemsBboxGeoJson_Crop": {
+            "$ref": "./examples/MosaicItemsBboxGeoJson_Crop.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}.{format}": {
+      "get": {
+        "operationId": "MosaicItemsBbox_GetCroppedToBoundingBox",
+        "tags": [
+          "Tiles for STAC Items"
+        ],
+        "summary": "Item Bbox",
+        "description": "Create an image from part of a STAC item dataset (bounding box crop).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "STAC Item Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.minx"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.miny"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.maxx"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.maxy"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "color_formula",
+            "in": "query",
+            "description": "rio-color formula (info: https://github.com/mapbox/rio-color)",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "colorFormula"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "dst-crs",
+            "in": "query",
+            "description": "Output Coordinate Reference System.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "destinationCrs"
+          },
+          {
+            "name": "resampling",
+            "in": "query",
+            "description": "Resampling method.",
+            "required": false,
+            "type": "string",
+            "default": "nearest",
+            "enum": [
+              "nearest",
+              "bilinear",
+              "cubic",
+              "cubic_spline",
+              "lanczos",
+              "average",
+              "mode",
+              "gauss",
+              "rms"
+            ],
+            "x-ms-enum": {
+              "name": "Resampling",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "nearest",
+                  "value": "nearest",
+                  "description": "Nearest neighbor - fastest method that selects the closest pixel value"
+                },
+                {
+                  "name": "bilinear",
+                  "value": "bilinear",
+                  "description": "Bilinear interpolation - calculates output values using a weighted average of 2x2 input cells"
+                },
+                {
+                  "name": "cubic",
+                  "value": "cubic",
+                  "description": "Cubic interpolation - uses a weighted average of 4x4 input cells for smoother results"
+                },
+                {
+                  "name": "cubic_spline",
+                  "value": "cubic_spline",
+                  "description": "Cubic spline interpolation - similar to cubic but preserves edges better"
+                },
+                {
+                  "name": "lanczos",
+                  "value": "lanczos",
+                  "description": "Lanczos windowed sinc resampling - high-quality with minimal artifacts"
+                },
+                {
+                  "name": "average",
+                  "value": "average",
+                  "description": "Average resampling - calculates the mean of all contributing pixels"
+                },
+                {
+                  "name": "mode",
+                  "value": "mode",
+                  "description": "Mode resampling - selects the most common value from contributing pixels"
+                },
+                {
+                  "name": "gauss",
+                  "value": "gauss",
+                  "description": "Gaussian weighted resampling - applies a gaussian weighting to contributing pixels"
+                },
+                {
+                  "name": "rms",
+                  "value": "rms",
+                  "description": "Root mean square resampling - useful for resampling error or deviation grids"
+                }
+              ]
+            }
+          },
+          {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.height"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.width"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicItemsBbox_GetCroppedToBoundingBox": {
+            "$ref": "./examples/MosaicItemsBbox_GetCroppedToBoundingBox.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/items/{itemId}/bbox/{width}x{height}.{format}": {
+      "post": {
+        "operationId": "MosaicItemsBboxGeoJsonWidthByHeight_CropWidthByHeightFormat",
+        "tags": [
+          "Tiles for STAC Items"
+        ],
+        "summary": "Geojson Bbox Crop With Dimensions",
+        "description": "Create image from a geojson feature with dimensions.",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "STAC Item Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "width",
+            "in": "path",
+            "description": "Width in pixels for the output image.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "height",
+            "in": "path",
+            "description": "Height in pixels for the output image.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "color_formula",
+            "in": "query",
+            "description": "rio-color formula (info: https://github.com/mapbox/rio-color)",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "colorFormula"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "resampling",
+            "in": "query",
+            "description": "Resampling method.",
+            "required": false,
+            "type": "string",
+            "default": "nearest",
+            "enum": [
+              "nearest",
+              "bilinear",
+              "cubic",
+              "cubic_spline",
+              "lanczos",
+              "average",
+              "mode",
+              "gauss",
+              "rms"
+            ],
+            "x-ms-enum": {
+              "name": "Resampling",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "nearest",
+                  "value": "nearest",
+                  "description": "Nearest neighbor - fastest method that selects the closest pixel value"
+                },
+                {
+                  "name": "bilinear",
+                  "value": "bilinear",
+                  "description": "Bilinear interpolation - calculates output values using a weighted average of 2x2 input cells"
+                },
+                {
+                  "name": "cubic",
+                  "value": "cubic",
+                  "description": "Cubic interpolation - uses a weighted average of 4x4 input cells for smoother results"
+                },
+                {
+                  "name": "cubic_spline",
+                  "value": "cubic_spline",
+                  "description": "Cubic spline interpolation - similar to cubic but preserves edges better"
+                },
+                {
+                  "name": "lanczos",
+                  "value": "lanczos",
+                  "description": "Lanczos windowed sinc resampling - high-quality with minimal artifacts"
+                },
+                {
+                  "name": "average",
+                  "value": "average",
+                  "description": "Average resampling - calculates the mean of all contributing pixels"
+                },
+                {
+                  "name": "mode",
+                  "value": "mode",
+                  "description": "Mode resampling - selects the most common value from contributing pixels"
+                },
+                {
+                  "name": "gauss",
+                  "value": "gauss",
+                  "description": "Gaussian weighted resampling - applies a gaussian weighting to contributing pixels"
+                },
+                {
+                  "name": "rms",
+                  "value": "rms",
+                  "description": "Root mean square resampling - useful for resampling error or deviation grids"
+                }
+              ]
+            }
+          },
+          {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request GeoJson body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicItemsBboxGeoJsonWidthByHeight_CropWidthByHeightFormat": {
+            "$ref": "./examples/MosaicItemsBboxGeoJsonWidthByHeight_CropWidthByHeightFormat.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}": {
+      "get": {
+        "operationId": "MosaicItemsBboxWithDimensions_GetCroppedToBoundingBoxWidthByHeight",
+        "tags": [
+          "Tiles for STAC Items"
+        ],
+        "summary": "Item Bbox With Dimensions",
+        "description": "Create an image from part of a STAC item dataset (bounding box crop with dimensions).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "STAC Item Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.minx"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.miny"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.maxx"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.maxy"
+          },
+          {
+            "name": "width",
+            "in": "path",
+            "description": "Force output image width",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "height",
+            "in": "path",
+            "description": "Force output image height",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "color_formula",
+            "in": "query",
+            "description": "rio-color formula (info: https://github.com/mapbox/rio-color)",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "colorFormula"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "dst-crs",
+            "in": "query",
+            "description": "Output Coordinate Reference System.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "destinationCrs"
+          },
+          {
+            "name": "resampling",
+            "in": "query",
+            "description": "Resampling method.",
+            "required": false,
+            "type": "string",
+            "default": "nearest",
+            "enum": [
+              "nearest",
+              "bilinear",
+              "cubic",
+              "cubic_spline",
+              "lanczos",
+              "average",
+              "mode",
+              "gauss",
+              "rms"
+            ],
+            "x-ms-enum": {
+              "name": "Resampling",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "nearest",
+                  "value": "nearest",
+                  "description": "Nearest neighbor - fastest method that selects the closest pixel value"
+                },
+                {
+                  "name": "bilinear",
+                  "value": "bilinear",
+                  "description": "Bilinear interpolation - calculates output values using a weighted average of 2x2 input cells"
+                },
+                {
+                  "name": "cubic",
+                  "value": "cubic",
+                  "description": "Cubic interpolation - uses a weighted average of 4x4 input cells for smoother results"
+                },
+                {
+                  "name": "cubic_spline",
+                  "value": "cubic_spline",
+                  "description": "Cubic spline interpolation - similar to cubic but preserves edges better"
+                },
+                {
+                  "name": "lanczos",
+                  "value": "lanczos",
+                  "description": "Lanczos windowed sinc resampling - high-quality with minimal artifacts"
+                },
+                {
+                  "name": "average",
+                  "value": "average",
+                  "description": "Average resampling - calculates the mean of all contributing pixels"
+                },
+                {
+                  "name": "mode",
+                  "value": "mode",
+                  "description": "Mode resampling - selects the most common value from contributing pixels"
+                },
+                {
+                  "name": "gauss",
+                  "value": "gauss",
+                  "description": "Gaussian weighted resampling - applies a gaussian weighting to contributing pixels"
+                },
+                {
+                  "name": "rms",
+                  "value": "rms",
+                  "description": "Root mean square resampling - useful for resampling error or deviation grids"
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicItemsBboxWithDimensions_GetCroppedToBoundingBoxWidthByHeight": {
+            "$ref": "./examples/MosaicItemsBboxWithDimensions_GetCroppedToBoundingBoxWidthByHeight.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/items/{itemId}/bbox.{format}": {
+      "post": {
+        "operationId": "MosaicItemsBboxGeoJsonFormat_CropFormat",
+        "tags": [
+          "Tiles for STAC Items"
+        ],
+        "summary": "Geojson Bbox Crop With Format",
+        "description": "Create image from a geojson feature with format.",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "STAC Item Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "color_formula",
+            "in": "query",
+            "description": "rio-color formula (info: https://github.com/mapbox/rio-color)",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "colorFormula"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "resampling",
+            "in": "query",
+            "description": "Resampling method.",
+            "required": false,
+            "type": "string",
+            "default": "nearest",
+            "enum": [
+              "nearest",
+              "bilinear",
+              "cubic",
+              "cubic_spline",
+              "lanczos",
+              "average",
+              "mode",
+              "gauss",
+              "rms"
+            ],
+            "x-ms-enum": {
+              "name": "Resampling",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "nearest",
+                  "value": "nearest",
+                  "description": "Nearest neighbor - fastest method that selects the closest pixel value"
+                },
+                {
+                  "name": "bilinear",
+                  "value": "bilinear",
+                  "description": "Bilinear interpolation - calculates output values using a weighted average of 2x2 input cells"
+                },
+                {
+                  "name": "cubic",
+                  "value": "cubic",
+                  "description": "Cubic interpolation - uses a weighted average of 4x4 input cells for smoother results"
+                },
+                {
+                  "name": "cubic_spline",
+                  "value": "cubic_spline",
+                  "description": "Cubic spline interpolation - similar to cubic but preserves edges better"
+                },
+                {
+                  "name": "lanczos",
+                  "value": "lanczos",
+                  "description": "Lanczos windowed sinc resampling - high-quality with minimal artifacts"
+                },
+                {
+                  "name": "average",
+                  "value": "average",
+                  "description": "Average resampling - calculates the mean of all contributing pixels"
+                },
+                {
+                  "name": "mode",
+                  "value": "mode",
+                  "description": "Mode resampling - selects the most common value from contributing pixels"
+                },
+                {
+                  "name": "gauss",
+                  "value": "gauss",
+                  "description": "Gaussian weighted resampling - applies a gaussian weighting to contributing pixels"
+                },
+                {
+                  "name": "rms",
+                  "value": "rms",
+                  "description": "Root mean square resampling - useful for resampling error or deviation grids"
+                }
+              ]
+            }
+          },
+          {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.height"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.width"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request GeoJson body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicItemsBboxGeoJsonFormat_CropFormat": {
+            "$ref": "./examples/MosaicItemsBboxGeoJsonFormat_CropFormat.json"
           }
         }
       }
@@ -6107,6 +7537,273 @@
         "x-ms-examples": {
           "MosaicItemsTileMatrixSetsScale_GetZxyByScale": {
             "$ref": "./examples/MosaicItemsTileMatrixSetsScale_GetZxyByScale.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/point/{longitude},{latitude}": {
+      "get": {
+        "operationId": "MosaicCollectionsPoint_GetPoint",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Point",
+        "description": "Get Point value for a collection dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "description": "Longitude",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "latitude",
+            "in": "path",
+            "description": "Latitude",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "resampling",
+            "in": "query",
+            "description": "Resampling method.",
+            "required": false,
+            "type": "string",
+            "default": "nearest",
+            "enum": [
+              "nearest",
+              "bilinear",
+              "cubic",
+              "cubic_spline",
+              "lanczos",
+              "average",
+              "mode",
+              "gauss",
+              "rms"
+            ],
+            "x-ms-enum": {
+              "name": "Resampling",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "nearest",
+                  "value": "nearest",
+                  "description": "Nearest neighbor - fastest method that selects the closest pixel value"
+                },
+                {
+                  "name": "bilinear",
+                  "value": "bilinear",
+                  "description": "Bilinear interpolation - calculates output values using a weighted average of 2x2 input cells"
+                },
+                {
+                  "name": "cubic",
+                  "value": "cubic",
+                  "description": "Cubic interpolation - uses a weighted average of 4x4 input cells for smoother results"
+                },
+                {
+                  "name": "cubic_spline",
+                  "value": "cubic_spline",
+                  "description": "Cubic spline interpolation - similar to cubic but preserves edges better"
+                },
+                {
+                  "name": "lanczos",
+                  "value": "lanczos",
+                  "description": "Lanczos windowed sinc resampling - high-quality with minimal artifacts"
+                },
+                {
+                  "name": "average",
+                  "value": "average",
+                  "description": "Average resampling - calculates the mean of all contributing pixels"
+                },
+                {
+                  "name": "mode",
+                  "value": "mode",
+                  "description": "Mode resampling - selects the most common value from contributing pixels"
+                },
+                {
+                  "name": "gauss",
+                  "value": "gauss",
+                  "description": "Gaussian weighted resampling - applies a gaussian weighting to contributing pixels"
+                },
+                {
+                  "name": "rms",
+                  "value": "rms",
+                  "description": "Root mean square resampling - useful for resampling error or deviation grids"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TilerCoreModelsResponsesPoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicCollectionsPoint_GetPoint": {
+            "$ref": "./examples/MosaicCollectionsPoint_GetPoint.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/point/{longitude},{latitude}/assets": {
+      "get": {
+        "operationId": "MosaicCollectionsPointAssets_GetPointAssets",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Point Assets",
+        "description": "Return a list of assets for a given point in a collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "description": "Longitude",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "latitude",
+            "in": "path",
+            "description": "Latitude",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StacItemPointAsset"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicCollectionsPointAssets_GetPointAssets": {
+            "$ref": "./examples/MosaicCollectionsPointAssets_GetPointAssets.json"
           }
         }
       }
@@ -9032,6 +10729,164 @@
         }
       }
     },
+    "/data/mosaic/searches/{searchId}/bbox": {
+      "post": {
+        "operationId": "MosaicSearchesBboxGeoJson_Crop",
+        "tags": [
+          "Tiles for STAC Searches"
+        ],
+        "summary": "Searches Geojson Bbox",
+        "description": "Create image from a geojson feature (without format in path).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "searchId",
+            "in": "path",
+            "description": "Search Id (pgSTAC Search Hash)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.height"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.width"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request GeoJson body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicSearchesBboxGeoJson_Crop": {
+            "$ref": "./examples/MosaicSearchesBboxGeoJson_Crop.json"
+          }
+        }
+      }
+    },
     "/data/mosaic/searches/{searchId}/bbox/{minx},{miny},{maxx},{maxy}.{format}": {
       "get": {
         "operationId": "MosaicSearchesBbox_GetCroppedToBoundingBox",
@@ -9206,6 +11061,183 @@
         "x-ms-examples": {
           "MosaicSearchesBbox_GetCroppedToBoundingBox": {
             "$ref": "./examples/MosaicSearchesBbox_GetCroppedToBoundingBox.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/searches/{searchId}/bbox/{width}x{height}.{format}": {
+      "post": {
+        "operationId": "MosaicSearchesBboxGeoJsonWidthByHeight_CropWidthByHeightFormat",
+        "tags": [
+          "Tiles for STAC Searches"
+        ],
+        "summary": "Searches Geojson Bbox Crop With Dimensions",
+        "description": "Create image from a geojson feature with dimensions.",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "searchId",
+            "in": "path",
+            "description": "Search Id (pgSTAC Search Hash)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "width",
+            "in": "path",
+            "description": "Width in pixels for the output image.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "height",
+            "in": "path",
+            "description": "Height in pixels for the output image.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request GeoJson body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicSearchesBboxGeoJsonWidthByHeight_CropWidthByHeightFormat": {
+            "$ref": "./examples/MosaicSearchesBboxGeoJsonWidthByHeight_CropWidthByHeightFormat.json"
           }
         }
       }
@@ -9388,6 +11420,173 @@
         }
       }
     },
+    "/data/mosaic/searches/{searchId}/bbox.{format}": {
+      "post": {
+        "operationId": "MosaicSearchesBboxGeoJsonFormat_CropFormat",
+        "tags": [
+          "Tiles for STAC Searches"
+        ],
+        "summary": "Searches Geojson Bbox Crop With Format",
+        "description": "Create image from a geojson feature with format.",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "searchId",
+            "in": "path",
+            "description": "Search Id (pgSTAC Search Hash)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.height"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.width"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request GeoJson body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicSearchesBboxGeoJsonFormat_CropFormat": {
+            "$ref": "./examples/MosaicSearchesBboxGeoJsonFormat_CropFormat.json"
+          }
+        }
+      }
+    },
     "/data/mosaic/searches/{searchId}/info": {
       "get": {
         "operationId": "MosaicSearchesInfoSearch_Get",
@@ -9433,6 +11632,273 @@
         "x-ms-examples": {
           "MosaicSearchesInfoSearch_Get": {
             "$ref": "./examples/MosaicSearchesInfoSearch_Get.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/searches/{searchId}/point/{longitude},{latitude}": {
+      "get": {
+        "operationId": "MosaicSearchesPoint_GetPoint",
+        "tags": [
+          "Tiles for STAC Searches"
+        ],
+        "summary": "Searches Point",
+        "description": "Get Point value for a search dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "name": "searchId",
+            "in": "path",
+            "description": "Search Id (pgSTAC Search Hash)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "description": "Longitude",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "latitude",
+            "in": "path",
+            "description": "Latitude",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "resampling",
+            "in": "query",
+            "description": "Resampling method.",
+            "required": false,
+            "type": "string",
+            "default": "nearest",
+            "enum": [
+              "nearest",
+              "bilinear",
+              "cubic",
+              "cubic_spline",
+              "lanczos",
+              "average",
+              "mode",
+              "gauss",
+              "rms"
+            ],
+            "x-ms-enum": {
+              "name": "Resampling",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "nearest",
+                  "value": "nearest",
+                  "description": "Nearest neighbor - fastest method that selects the closest pixel value"
+                },
+                {
+                  "name": "bilinear",
+                  "value": "bilinear",
+                  "description": "Bilinear interpolation - calculates output values using a weighted average of 2x2 input cells"
+                },
+                {
+                  "name": "cubic",
+                  "value": "cubic",
+                  "description": "Cubic interpolation - uses a weighted average of 4x4 input cells for smoother results"
+                },
+                {
+                  "name": "cubic_spline",
+                  "value": "cubic_spline",
+                  "description": "Cubic spline interpolation - similar to cubic but preserves edges better"
+                },
+                {
+                  "name": "lanczos",
+                  "value": "lanczos",
+                  "description": "Lanczos windowed sinc resampling - high-quality with minimal artifacts"
+                },
+                {
+                  "name": "average",
+                  "value": "average",
+                  "description": "Average resampling - calculates the mean of all contributing pixels"
+                },
+                {
+                  "name": "mode",
+                  "value": "mode",
+                  "description": "Mode resampling - selects the most common value from contributing pixels"
+                },
+                {
+                  "name": "gauss",
+                  "value": "gauss",
+                  "description": "Gaussian weighted resampling - applies a gaussian weighting to contributing pixels"
+                },
+                {
+                  "name": "rms",
+                  "value": "rms",
+                  "description": "Root mean square resampling - useful for resampling error or deviation grids"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TilerCoreModelsResponsesPoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicSearchesPoint_GetPoint": {
+            "$ref": "./examples/MosaicSearchesPoint_GetPoint.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/searches/{searchId}/point/{longitude},{latitude}/assets": {
+      "get": {
+        "operationId": "MosaicSearchesPointWithAssets_GetPointAssets",
+        "tags": [
+          "Tiles for STAC Searches"
+        ],
+        "summary": "Searches Point Assets",
+        "description": "Return a list of assets for a given point in a search.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "name": "searchId",
+            "in": "path",
+            "description": "Search Id (pgSTAC Search Hash)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "description": "Longitude",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "latitude",
+            "in": "path",
+            "description": "Latitude",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StacItemPointAsset"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MosaicSearchesPointWithAssets_GetPointAssets": {
+            "$ref": "./examples/MosaicSearchesPointWithAssets_GetPointAssets.json"
           }
         }
       }

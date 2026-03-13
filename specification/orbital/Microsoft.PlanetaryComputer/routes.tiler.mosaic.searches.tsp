@@ -614,6 +614,187 @@ interface MosaicSearchesBboxWithDimensions {
 }
 
 // =====================================================================
+// Searches Mosaic Bbox GeoJson Crop (POST with Feature body)
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicSearchesBboxGeoJson {
+  /**
+   * Create image from a geojson feature (without format in path).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Searches Geojson Bbox")
+  @tag("Tiles for STAC Searches")
+  @route("/data/mosaic/searches/{searchId}/bbox")
+  @post
+  crop is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...MosaicSearchQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Image output size limit if width and height limits are not set.
+       */
+      @query("max_size")
+      maxSize?: int32 = 1024;
+
+      ...DimensionsQueryParameters;
+      ...MosaicTileQueryParameters;
+      ...MiscTileQueryParameters;
+
+      /**
+       * Request GeoJson body.
+       */
+      @body
+      body: Feature;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicSearchesBboxGeoJsonFormat {
+  /**
+   * Create image from a geojson feature with format.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Searches Geojson Bbox Crop With Format")
+  @tag("Tiles for STAC Searches")
+  @route("/data/mosaic/searches/{searchId}/bbox.{format}")
+  @post
+  cropFormat is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...MosaicSearchQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Image output size limit if width and height limits are not set.
+       */
+      @query("max_size")
+      maxSize?: int32 = 1024;
+
+      ...DimensionsQueryParameters;
+      ...MosaicTileQueryParameters;
+      ...MiscTileQueryParameters;
+
+      /**
+       * Request GeoJson body.
+       */
+      @body
+      body: Feature;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicSearchesBboxGeoJsonWidthByHeight {
+  /**
+   * Create image from a geojson feature with dimensions.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Searches Geojson Bbox Crop With Dimensions")
+  @tag("Tiles for STAC Searches")
+  @route("/data/mosaic/searches/{searchId}/bbox/{width}x{height}.{format}")
+  @post
+  cropWidthByHeightFormat is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...MosaicSearchQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      /**
+       * Width in pixels for the output image.
+       */
+      @path
+      width: int32;
+
+      /**
+       * Height in pixels for the output image.
+       */
+      @path
+      height: int32;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Image output size limit if width and height limits are not set.
+       */
+      @query("max_size")
+      maxSize?: int32 = 1024;
+
+      ...MosaicTileQueryParameters;
+      ...MiscTileQueryParameters;
+
+      /**
+       * Request GeoJson body.
+       */
+      @body
+      body: Feature;
+    },
+    TileResponse
+  >;
+}
+
+// =====================================================================
 // Remaining /searches/ equivalents for consistency
 // =====================================================================
 
@@ -957,6 +1138,106 @@ interface MosaicSearchesAssetsForTiles {
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
     },
     ApplicationJsonResponse
+  >;
+}
+
+// =====================================================================
+// Searches Mosaic Point
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicSearchesPoint {
+  /**
+   * Get Point value for a search dataset.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Searches Point")
+  @tag("Tiles for STAC Searches")
+  @route("/data/mosaic/searches/{searchId}/point/{longitude},{latitude}")
+  @get
+  getPoint is Azure.Core.Foundations.Operation<
+    {
+      ...MosaicSearchQueryParameters;
+
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      /**
+       * Longitude
+       */
+      @path
+      longitude: float32;
+
+      /**
+       * Latitude
+       */
+      @path
+      latitude: float32;
+
+      ...AssetQueryParameters;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Resampling method.
+       */
+      @query("resampling")
+      resampling?: Resampling = Resampling.nearest;
+    },
+    TilerCoreModelsResponsesPoint
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicSearchesPointWithAssets {
+  /**
+   * Return a list of assets for a given point in a search.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Searches Point Assets")
+  @tag("Tiles for STAC Searches")
+  @route("/data/mosaic/searches/{searchId}/point/{longitude},{latitude}/assets")
+  @get
+  getPointAssets is Azure.Core.Foundations.Operation<
+    {
+      ...MosaicSearchQueryParameters;
+
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      /**
+       * Longitude
+       */
+      @path
+      longitude: float32;
+
+      /**
+       * Latitude
+       */
+      @path
+      latitude: float32;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+    },
+    StacItemPointAsset[]
   >;
 }
 

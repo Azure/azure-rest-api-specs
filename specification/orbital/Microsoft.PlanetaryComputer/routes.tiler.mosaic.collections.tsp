@@ -934,3 +934,284 @@ interface MosaicCollectionsBboxWithDimensions {
     TileResponse
   >;
 }
+
+// =====================================================================
+// Collection Mosaic Bbox GeoJson Crop (POST with Feature body)
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicCollectionsBboxGeoJson {
+  /**
+   * Create image from a geojson feature (without format in path).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Collection Geojson Bbox")
+  @tag("Tiles for STAC Collections")
+  @route("/data/mosaic/collections/{collectionId}/bbox")
+  @post
+  crop is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...MosaicSearchQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Image output size limit if width and height limits are not set.
+       */
+      @query("max_size")
+      maxSize?: int32 = 1024;
+
+      ...DimensionsQueryParameters;
+      ...MosaicTileQueryParameters;
+      ...MiscTileQueryParameters;
+
+      /**
+       * Request GeoJson body.
+       */
+      @body
+      body: Feature;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicCollectionsBboxGeoJsonFormat {
+  /**
+   * Create image from a geojson feature with format.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Collection Geojson Bbox Crop With Format")
+  @tag("Tiles for STAC Collections")
+  @route("/data/mosaic/collections/{collectionId}/bbox.{format}")
+  @post
+  cropFormat is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...MosaicSearchQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Image output size limit if width and height limits are not set.
+       */
+      @query("max_size")
+      maxSize?: int32 = 1024;
+
+      ...DimensionsQueryParameters;
+      ...MosaicTileQueryParameters;
+      ...MiscTileQueryParameters;
+
+      /**
+       * Request GeoJson body.
+       */
+      @body
+      body: Feature;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicCollectionsBboxGeoJsonWidthByHeight {
+  /**
+   * Create image from a geojson feature with dimensions.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Collection Geojson Bbox Crop With Dimensions")
+  @tag("Tiles for STAC Collections")
+  @route("/data/mosaic/collections/{collectionId}/bbox/{width}x{height}.{format}")
+  @post
+  cropWidthByHeightFormat is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...MosaicSearchQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * Width in pixels for the output image.
+       */
+      @path
+      width: int32;
+
+      /**
+       * Height in pixels for the output image.
+       */
+      @path
+      height: int32;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Image output size limit if width and height limits are not set.
+       */
+      @query("max_size")
+      maxSize?: int32 = 1024;
+
+      ...MosaicTileQueryParameters;
+      ...MiscTileQueryParameters;
+
+      /**
+       * Request GeoJson body.
+       */
+      @body
+      body: Feature;
+    },
+    TileResponse
+  >;
+}
+
+// =====================================================================
+// Collection Mosaic Point
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicCollectionsPoint {
+  /**
+   * Get Point value for a collection dataset.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Collection Point")
+  @tag("Tiles for STAC Collections")
+  @route("/data/mosaic/collections/{collectionId}/point/{longitude},{latitude}")
+  @get
+  getPoint is Azure.Core.Foundations.Operation<
+    {
+      ...MosaicSearchQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * Longitude
+       */
+      @path
+      longitude: float32;
+
+      /**
+       * Latitude
+       */
+      @path
+      latitude: float32;
+
+      ...AssetQueryParameters;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Resampling method.
+       */
+      @query("resampling")
+      resampling?: Resampling = Resampling.nearest;
+    },
+    TilerCoreModelsResponsesPoint
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicCollectionsPointAssets {
+  /**
+   * Return a list of assets for a given point in a collection.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Collection Point Assets")
+  @tag("Tiles for STAC Collections")
+  @route("/data/mosaic/collections/{collectionId}/point/{longitude},{latitude}/assets")
+  @get
+  getPointAssets is Azure.Core.Foundations.Operation<
+    {
+      ...MosaicSearchQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * Longitude
+       */
+      @path
+      longitude: float32;
+
+      /**
+       * Latitude
+       */
+      @path
+      latitude: float32;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+    },
+    StacItemPointAsset[]
+  >;
+}

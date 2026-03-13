@@ -300,9 +300,23 @@ interface Data {
   @added(Versions.v2026_04_15)
   getTileNoTmsByScale is MosaicItemsTilesScale.getZxyByScale;
 
-  // GeoJSON Crop (bare, no format)
+  // GeoJSON Bbox (bare, no format)
   @added(Versions.v2026_04_15)
-  cropGeoJsonBare is MosaicItemsGeoJsonsCrop.crop;
+  cropBboxGeoJson is MosaicItemsBboxGeoJson.crop;
+
+  // GeoJSON Bbox Crop with format
+  @added(Versions.v2026_04_15)
+  cropBboxGeoJsonFormat is MosaicItemsBboxGeoJsonFormat.cropFormat;
+
+  // GeoJSON Bbox Crop with dimensions
+  @added(Versions.v2026_04_15)
+  cropBboxGeoJsonWidthByHeight is MosaicItemsBboxGeoJsonWidthByHeight.cropWidthByHeightFormat;
+
+  // Item Bbox Crop
+  @added(Versions.v2026_04_15)
+  getItemBboxCrop is MosaicItemsBbox.getCroppedToBoundingBox;
+  @added(Versions.v2026_04_15)
+  getItemBboxCropWithDimensions is MosaicItemsBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
 
   // === Collection-level mosaic endpoints (stable 2026-04-15) ===
 
@@ -362,6 +376,18 @@ interface Data {
   getCollectionBboxCrop is MosaicCollectionsBbox.getCroppedToBoundingBox;
   @added(Versions.v2026_04_15)
   getCollectionBboxCropWithDimensions is MosaicCollectionsBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
+  @added(Versions.v2026_04_15)
+  cropCollectionBboxGeoJson is MosaicCollectionsBboxGeoJson.crop;
+  @added(Versions.v2026_04_15)
+  cropCollectionBboxGeoJsonFormat is MosaicCollectionsBboxGeoJsonFormat.cropFormat;
+  @added(Versions.v2026_04_15)
+  cropCollectionBboxGeoJsonWidthByHeight is MosaicCollectionsBboxGeoJsonWidthByHeight.cropWidthByHeightFormat;
+
+  // Collection Point
+  @added(Versions.v2026_04_15)
+  getCollectionPoint is MosaicCollectionsPoint.getPoint;
+  @added(Versions.v2026_04_15)
+  getCollectionPointAssets is MosaicCollectionsPointAssets.getPointAssets;
 
   // === Search-based mosaic endpoints (stable 2026-04-15) ===
 
@@ -401,6 +427,12 @@ interface Data {
   getSearchesBboxCrop is MosaicSearchesBbox.getCroppedToBoundingBox;
   @added(Versions.v2026_04_15)
   getSearchesBboxCropWithDimensions is MosaicSearchesBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
+  @added(Versions.v2026_04_15)
+  cropSearchesBboxGeoJson is MosaicSearchesBboxGeoJson.crop;
+  @added(Versions.v2026_04_15)
+  cropSearchesBboxGeoJsonFormat is MosaicSearchesBboxGeoJsonFormat.cropFormat;
+  @added(Versions.v2026_04_15)
+  cropSearchesBboxGeoJsonWidthByHeight is MosaicSearchesBboxGeoJsonWidthByHeight.cropWidthByHeightFormat;
   // Remaining /searches/ equivalents for consistency
   @added(Versions.v2026_04_15)
   getSearchesWmtsCapabilities is MosaicSearchesWmts.getCapabilitiesXml;
@@ -418,6 +450,11 @@ interface Data {
   getSearchesAssetsForTileNoTms is MosaicSearchesAssetsForTiles.getZxyAssets;
   @added(Versions.v2026_04_15)
   getSearchesPointAssets is MosaicSearchesPointAssets.getPointAssets;
+  // Searches Point
+  @added(Versions.v2026_04_15)
+  getSearchesPoint is MosaicSearchesPoint.getPoint;
+  @added(Versions.v2026_04_15)
+  getSearchesPointWithAssets is MosaicSearchesPointWithAssets.getPointAssets;
 }
 
 // === Shared Access Signature (SAS) ===

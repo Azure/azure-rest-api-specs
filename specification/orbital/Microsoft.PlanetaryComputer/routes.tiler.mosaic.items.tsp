@@ -407,14 +407,14 @@ interface MosaicItemsTilesScale {
 }
 
 @added(Versions.v2026_04_15)
-interface MosaicItemsGeoJsonsCrop {
+interface MosaicItemsBboxGeoJson {
   /**
    * Create image from a geojson feature (without format in path).
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Geojson Crop")
+  @summary("Geojson Bbox")
   @tag("Tiles for STAC Items")
-  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/crop")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/bbox")
   @post
   crop is Azure.Core.Foundations.Operation<
     {
@@ -462,6 +462,334 @@ interface MosaicItemsGeoJsonsCrop {
       maxSize?: int32 = 1024;
 
       ...DimensionsQueryParameters;
+      ...MiscTileQueryParameters;
+
+      /**
+       * Request GeoJson body.
+       */
+      @body
+      body: Feature;
+    },
+    TileResponse
+  >;
+}
+
+// =====================================================================
+// Item Mosaic Bbox Crop
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsBbox {
+  /**
+   * Create an image from part of a STAC item dataset (bounding box crop).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Bbox")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}.{format}")
+  @get
+  getCroppedToBoundingBox is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      ...BoundingBoxPathParameters;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
+      /**
+       * rio-color formula (info: https://github.com/mapbox/rio-color)
+       */
+      @query("color_formula")
+      colorFormula?: string;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Output Coordinate Reference System.
+       */
+      @query("dst-crs")
+      destinationCrs?: string;
+
+      /**
+       * Resampling method.
+       */
+      @query("resampling")
+      resampling?: Resampling = Resampling.nearest;
+
+      /**
+       * Image output size limit if width and height limits are not set.
+       */
+      @query("max_size")
+      maxSize?: int32 = 1024;
+
+      ...DimensionsQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsBboxWithDimensions {
+  /**
+   * Create an image from part of a STAC item dataset (bounding box crop with dimensions).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Bbox With Dimensions")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}")
+  @get
+  getCroppedToBoundingBoxWidthByHeight is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      ...BoundingBoxPathParameters;
+
+      /**
+       * Force output image width
+       */
+      @path
+      width: int32;
+
+      /**
+       * Force output image height
+       */
+      @path
+      height: int32;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
+      /**
+       * rio-color formula (info: https://github.com/mapbox/rio-color)
+       */
+      @query("color_formula")
+      colorFormula?: string;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Output Coordinate Reference System.
+       */
+      @query("dst-crs")
+      destinationCrs?: string;
+
+      /**
+       * Resampling method.
+       */
+      @query("resampling")
+      resampling?: Resampling = Resampling.nearest;
+
+      ...MiscTileQueryParameters;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsBboxGeoJsonFormat {
+  /**
+   * Create image from a geojson feature with format.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Geojson Bbox Crop With Format")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/bbox.{format}")
+  @post
+  cropFormat is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
+      /**
+       * rio-color formula (info: https://github.com/mapbox/rio-color)
+       */
+      @query("color_formula")
+      colorFormula?: string;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Resampling method.
+       */
+      @query("resampling")
+      resampling?: Resampling = Resampling.nearest;
+
+      /**
+       * Image output size limit if width and height limits are not set.
+       */
+      @query("max_size")
+      maxSize?: int32 = 1024;
+
+      ...DimensionsQueryParameters;
+      ...MiscTileQueryParameters;
+
+      /**
+       * Request GeoJson body.
+       */
+      @body
+      body: Feature;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsBboxGeoJsonWidthByHeight {
+  /**
+   * Create image from a geojson feature with dimensions.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Geojson Bbox Crop With Dimensions")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/bbox/{width}x{height}.{format}")
+  @post
+  cropWidthByHeightFormat is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Width in pixels for the output image.
+       */
+      @path
+      width: int32;
+
+      /**
+       * Height in pixels for the output image.
+       */
+      @path
+      height: int32;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
+      /**
+       * rio-color formula (info: https://github.com/mapbox/rio-color)
+       */
+      @query("color_formula")
+      colorFormula?: string;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Resampling method.
+       */
+      @query("resampling")
+      resampling?: Resampling = Resampling.nearest;
+
+      /**
+       * Image output size limit if width and height limits are not set.
+       */
+      @query("max_size")
+      maxSize?: int32 = 1024;
+
       ...MiscTileQueryParameters;
 
       /**
