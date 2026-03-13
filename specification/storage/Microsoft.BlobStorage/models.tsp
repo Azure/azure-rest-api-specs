@@ -2200,13 +2200,7 @@ alias ImmutabilityPolicyModeParameter = {
 
 /** The immutability policy expiration parameter. */
 alias ImmutabilityPolicyExpiryRequiredParameter = {
-  /**
-   * Specifies the date time when the blobs immutability policy is set to expire.
-   *
-   * Note: this property is intentionally named `expiry` (rather than `immutabilityPolicyExpiry`
-   * like the optional sibling alias below) so that it surfaces simply as `expiry` in emitted
-   * languages without requiring a `@clientName` override.
-   */
+  /** Specifies the date time when the blobs immutability policy is set to expire. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
