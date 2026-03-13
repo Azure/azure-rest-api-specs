@@ -1257,12 +1257,12 @@ model ShareProtocolSettings {
   /**
    * Settings for SMB protocol.
    */
-  @Xml.name("Smb") smb?: ShareSmbSettings;
+  @Xml.name("SMB") smb?: ShareSmbSettings;
 
   /**
    * Settings for NFS protocol.
    */
-  @Xml.name("Nfs") nfs?: ShareNfsSettings;
+  @Xml.name("NFS") nfs?: ShareNfsSettings;
 }
 
 /**
@@ -1422,7 +1422,7 @@ model StorageServiceProperties {
   /**
    * Protocol settings
    */
-  @Xml.name("Protocol") protocol?: ShareProtocolSettings;
+  @Xml.name("ProtocolSettings") protocol?: ShareProtocolSettings;
 }
 
 /**
