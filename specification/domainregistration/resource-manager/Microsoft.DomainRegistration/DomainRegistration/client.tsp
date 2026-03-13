@@ -33,7 +33,7 @@ using Microsoft.DomainRegistration;
   "csharp"
 );
 @@clientName(DomainPatchResourceProperties.readyForDnsRecordManagement,
-  "IsReadyForDnsRecordManagement",
+  "IsDnsRecordManagementReady",
   "csharp"
 );
 @@clientName(TopLevelDomainProperties.privacy,
@@ -69,8 +69,18 @@ using Microsoft.DomainRegistration;
   "IsForTransfer",
   "csharp"
 );
+@@clientName(TopLevelDomainAgreementOption.includePrivacy,
+  "IsPrivacyIncluded",
+  "csharp"
+);
 @@clientName(TopLevelDomainAgreementOption,
   "TopLevelDomainAgreementContent",
+  "csharp"
+);
+@@clientName(TldLegalAgreement, "TopLevelDomainLegalAgreement", "csharp");
+@@alternateType(TldLegalAgreement.url, url, "csharp");
+@@clientName(DomainsOperationGroup.checkAvailability,
+  "CheckAppServiceDomainRegistrationAvailability",
   "csharp"
 );
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
