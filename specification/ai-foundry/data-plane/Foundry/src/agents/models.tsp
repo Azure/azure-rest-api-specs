@@ -818,19 +818,6 @@ model AgentIdentity {
   client_id: string;
 }
 
-@removed(Versions.v1)
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
-)
-model IdentityDetails {
-  @doc("The principal ID of the agent")
-  principal_id: string;
-
-  @doc("The client ID of the agent")
-  client_id: string;
-}
-
 /** A skill example string with a maximum length of 1024 characters. */
 @removed(Versions.v1)
 @extension(

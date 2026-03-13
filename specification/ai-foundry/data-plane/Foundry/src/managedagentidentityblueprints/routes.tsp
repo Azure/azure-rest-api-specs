@@ -86,7 +86,6 @@ interface ManagedAgentIdentityBlueprints {
     {
       ...PageOrderQueryParameter;
       ...PageLimitQueryParameter;
-      @query @continuationToken continuationToken?: string;
     },
     Foundations.CustomPage<ManagedAgentIdentityBlueprint>
   >;
