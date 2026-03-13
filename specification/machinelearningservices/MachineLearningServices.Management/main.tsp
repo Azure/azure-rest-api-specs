@@ -67,7 +67,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Azure Machine Learning Services" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.MachineLearningServices;
 
 /**
