@@ -1660,7 +1660,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the resource",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
@@ -1723,7 +1723,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the resource",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
@@ -1774,7 +1774,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the resource",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
@@ -1837,7 +1837,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the resource",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
@@ -1887,7 +1887,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the resource",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
@@ -2286,6 +2286,54 @@
       "required": [
         "blobReference"
       ]
+    },
+    "AssetProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state for the model version.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "AssetProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          }
+        ]
+      }
     },
     "AssistantMessage": {
       "type": "object",
@@ -3135,7 +3183,7 @@
     },
     "DestinationAsset": {
       "type": "object",
-      "description": "The destination asset for publishing a model version to a registry.",
+      "description": "The destination asset for publishing a model to a registry.",
       "properties": {
         "registryName": {
           "type": "string",
@@ -3409,11 +3457,11 @@
     },
     "FlavorData": {
       "type": "object",
-      "description": "Flavor data for a model version, containing flavor-specific key/value pairs.",
+      "description": "Flavor data for a model, containing flavor-specific key/value pairs.",
       "properties": {
         "data": {
           "type": "object",
-          "description": "Flavor-specific key/value pairs, e.g. {\"loader_module\": \"mlflow.pyfunc\", \"python_version\": \"3.9\"}.",
+          "description": "Model flavor-specific data.",
           "additionalProperties": {
             "type": "string"
           }
@@ -3832,85 +3880,77 @@
     },
     "ModelVersion": {
       "type": "object",
-      "description": "Represents a model version resource.",
+      "description": "Model details.",
       "properties": {
         "properties": {
           "type": "object",
-          "description": "Additional properties bag.",
+          "description": "The asset property dictionary.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "modelUri": {
           "type": "string",
-          "description": "URI of the model artifact, typically a dataset ID returned by datasets.upload_folder()."
+          "description": "The URI path to the model contents."
         },
         "modelType": {
           "type": "string",
-          "description": "The type of the model, e.g. \"custom_model\", \"mlflow_model\", \"triton_model\"."
+          "description": "The storage format for this entity. Used for NCD."
         },
         "flavors": {
           "type": "object",
-          "description": "Flavor data for the model version. Keys are flavor names, values contain flavor-specific properties.",
+          "description": "Mapping of model flavors to their properties.",
           "additionalProperties": {
             "$ref": "#/definitions/FlavorData"
           }
         },
         "stage": {
           "type": "string",
-          "description": "The lifecycle stage of the model version, e.g. \"Development\", \"Staging\", \"Production\", \"Archived\"."
+          "description": "Stage in the model lifecycle assigned to this model."
         },
         "isArchived": {
           "type": "boolean",
-          "description": "Whether the model version is archived."
+          "description": "Is the asset archived?"
         },
         "isAnonymous": {
           "type": "boolean",
-          "description": "Whether the model version is anonymous."
+          "description": "If the name version are system generated (anonymous registration)."
         },
         "jobName": {
           "type": "string",
-          "description": "The name of the training job that produced this model version.",
+          "description": "Name of the training job which produced this model.",
           "readOnly": true
         },
         "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state of the model version.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "description": "Provisioning state for the model version.",
           "readOnly": true
         },
         "id": {
           "type": "string",
-          "description": "Asset ID, a unique identifier for the asset",
+          "description": "Fully qualified resource ID for the resource.",
           "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the resource",
+          "description": "The name of the resource.",
           "readOnly": true
         },
         "version": {
           "type": "string",
-          "description": "The version of the resource",
+          "description": "Version identifier. This is case-sensitive.",
           "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "The asset description text.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
+          "description": "The asset description text."
         },
         "tags": {
           "type": "object",
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
+          }
         }
       },
       "required": [

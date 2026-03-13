@@ -9,15 +9,40 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@doc("Flavor data for a model version, containing flavor-specific key/value pairs.")
+@doc("Provisioning state for the model version.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+union AssetProvisioningState {
+  string,
+
+  @doc("Succeeded")
+  Succeeded: "Succeeded",
+
+  @doc("Failed")
+  Failed: "Failed",
+
+  @doc("Canceled")
+  Canceled: "Canceled",
+
+  @doc("Creating")
+  Creating: "Creating",
+
+  @doc("Updating")
+  Updating: "Updating",
+
+  @doc("Deleting")
+  Deleting: "Deleting",
+}
+
+@doc("Flavor data for a model, containing flavor-specific key/value pairs.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model FlavorData {
-  @doc("Flavor-specific key/value pairs, e.g. {\"loader_module\": \"mlflow.pyfunc\", \"python_version\": \"3.9\"}.")
+  @doc("Model flavor-specific data.")
   data?: Record<string>;
 }
 
-@doc("The destination asset for publishing a model version to a registry.")
+@doc("The destination asset for publishing a model to a registry.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model DestinationAsset {
@@ -31,39 +56,56 @@ model DestinationAsset {
   destinationVersion?: string;
 }
 
-@doc("Represents a model version resource.")
+@doc("Model details.")
 @Rest.resource("models")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model ModelVersion {
-  @doc("Additional properties bag.")
+  @doc("The asset property dictionary.")
   properties?: Record<string>;
 
-  @doc("URI of the model artifact, typically a dataset ID returned by datasets.upload_folder().")
+  @doc("The URI path to the model contents.")
   modelUri?: string;
 
-  @doc("The type of the model, e.g. \"custom_model\", \"mlflow_model\", \"triton_model\".")
+  @doc("The storage format for this entity. Used for NCD.")
   modelType?: string;
 
-  @doc("Flavor data for the model version. Keys are flavor names, values contain flavor-specific properties.")
+  @doc("Mapping of model flavors to their properties.")
   flavors?: Record<FlavorData>;
 
-  @doc("The lifecycle stage of the model version, e.g. \"Development\", \"Staging\", \"Production\", \"Archived\".")
+  @doc("Stage in the model lifecycle assigned to this model.")
   stage?: string;
 
-  @doc("Whether the model version is archived.")
+  @doc("Is the asset archived?")
   isArchived?: boolean;
 
-  @doc("Whether the model version is anonymous.")
+  @doc("If the name version are system generated (anonymous registration).")
   isAnonymous?: boolean;
 
-  @doc("The name of the training job that produced this model version.")
+  @doc("Name of the training job which produced this model.")
   @visibility(Lifecycle.Read)
   jobName?: string;
 
-  @doc("The provisioning state of the model version.")
+  @doc("Provisioning state for the model version.")
   @visibility(Lifecycle.Read)
-  provisioningState?: string;
+  provisioningState?: AssetProvisioningState;
 
-  ...AssetBase;
+  @doc("Fully qualified resource ID for the resource.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("The name of the resource.")
+  @visibility(Lifecycle.Read)
+  @key
+  name: string;
+
+  @doc("Version identifier. This is case-sensitive.")
+  @visibility(Lifecycle.Read)
+  version: string;
+
+  @doc("The asset description text.")
+  description?: string;
+
+  @doc("Tag dictionary. Tags can be added, removed, and updated.")
+  tags?: Record<string>;
 }
