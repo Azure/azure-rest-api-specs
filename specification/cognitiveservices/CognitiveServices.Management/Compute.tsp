@@ -15,10 +15,9 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services compute cluster resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Account)
 model Compute
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ComputeProperties> {
+  is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   ...ResourceNameParameter<
     Resource = Compute,
     KeyName = "computeName",
@@ -32,6 +31,18 @@ model Compute
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
+
+  /**
+   * The location of the compute resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 
   /**
    * The kind (type) of compute resource.
