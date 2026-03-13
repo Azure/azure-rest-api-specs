@@ -167,24 +167,6 @@ interface Clusters {
   >;
 
   /**
-   * The the async operation status.
-   */
-  getAzureAsyncOperationStatus is ArmResourceRead<
-    Cluster,
-    Response = ArmResponse<AsyncOperationResult>,
-    Parameters = {
-      /**
-       * The long running operation id.
-       */
-      @path
-      @segment("azureasyncoperations")
-      @key
-      operationId: string;
-    },
-    Error = ErrorResponse
-  >;
-
-  /**
    * Updates the cluster identity certificate.
    */
   @action("updateClusterIdentityCertificate")
