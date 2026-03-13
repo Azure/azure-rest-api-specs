@@ -48,6 +48,8 @@ model Resource {
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 @error
 model CloudError {
   /**
@@ -59,6 +61,8 @@ model CloudError {
 /**
  * The error detail.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * The error code.
@@ -81,12 +85,14 @@ model CloudErrorBody {
   /**
    * The error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   details?: CloudErrorBody[];
 
   /**
    * The error additional info.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
@@ -104,6 +110,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }

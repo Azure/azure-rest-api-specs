@@ -14,6 +14,8 @@ namespace Microsoft.Security;
 /**
  * Security operator under a given subscription and pricing
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
 model SecurityOperator is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
@@ -26,7 +28,7 @@ model SecurityOperator is Azure.ResourceManager.ProxyResource<{}> {
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.Identity;
 }
 
@@ -37,18 +39,20 @@ interface SecurityOperators {
    */
   get is ArmResourceRead<
     SecurityOperator,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
    * Creates Microsoft Defender for Cloud security operator on the given scope.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     SecurityOperator,
     Request = void,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResourceUpdatedResponse<SecurityOperator>
+    Response = ArmResourceUpdatedResponse<SecurityOperator>,
+    Error = CloudError
   >;
 
   /**
@@ -56,7 +60,8 @@ interface SecurityOperators {
    */
   delete is ArmResourceDeleteSync<
     SecurityOperator,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -65,7 +70,8 @@ interface SecurityOperators {
   list is ArmResourceListByParent<
     SecurityOperator,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<SecurityOperatorList>
+    Response = ArmResponse<SecurityOperatorList>,
+    Error = CloudError
   >;
 }
 
