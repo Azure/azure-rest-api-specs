@@ -469,137 +469,140 @@ op stageBlockRust is StorageOperationRequestBody<
 
 @@override(BlockBlob.stageBlock, stageBlockRust, "rust");
 
-/** The Download operation reads or downloads a blob from the system (Rust: omits structured-body request param) */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-@get
-op downloadRust(
-  ...ClientRequestIdHeader,
-  ...SnapshotParameter,
-  ...VersionIdParameter,
-  ...TimeoutParameter,
-  ...RangeParameter,
-  ...LeaseIdOptionalParameter,
+// Getting emitter error
+// azure-sdk-for-rust/sdk/storage/azure_storage_blob/TempTypeSpecFiles/Microsoft.BlobStorage/client.tsp:605:1 - error @azure-tools/typespec-client-generator-core/override-parameters-mismatch: Method "download" has different parameters definition from the override operation. Please check the parameter defined in the override operation: "version"
+// /** The Download operation reads or downloads a blob from the system (Rust: omits structured-body request param) */
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+// #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+// @get
+// op downloadRust(
+//   ...ApiVersionHeader,
+//   ...ClientRequestIdHeader,
+//   ...SnapshotParameter,
+//   ...VersionIdParameter,
+//   ...TimeoutParameter,
+//   ...RangeParameter,
+//   ...LeaseIdOptionalParameter,
 
-  /** When set to true and specified together with the Range, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
-  @header("x-ms-range-get-content-md5")
-  rangeGetContentMd5?: boolean,
+//   /** When set to true and specified together with the Range, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
+//   @header("x-ms-range-get-content-md5")
+//   rangeGetContentMd5?: boolean,
 
-  /** Optional.  When this header is set to true and specified together with the Range header, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MB in size. */
-  @header("x-ms-range-get-content-crc64")
-  rangeGetContentCrc64?: boolean,
+//   /** Optional.  When this header is set to true and specified together with the Range header, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MB in size. */
+//   @header("x-ms-range-get-content-crc64")
+//   rangeGetContentCrc64?: boolean,
 
-  ...EncryptionKeyParameter,
-  ...EncryptionKeySha256Parameter,
-  ...EncryptionAlgorithmParameter,
-  ...IfTagsParameter,
-  ...IfModifiedSinceParameter,
-  ...IfUnmodifiedSinceParameter,
-  ...IfNoneMatchParameter,
-  ...IfMatchParameter,
-): (BodyParameter & {
-  /** The media type of the body of the response. */
-  @header("Content-Type")
-  contentType: "application/octet-stream";
+//   ...EncryptionKeyParameter,
+//   ...EncryptionKeySha256Parameter,
+//   ...EncryptionAlgorithmParameter,
+//   ...IfTagsParameter,
+//   ...IfModifiedSinceParameter,
+//   ...IfUnmodifiedSinceParameter,
+//   ...IfNoneMatchParameter,
+//   ...IfMatchParameter,
+// ): (BodyParameter & {
+//   /** The media type of the body of the response. */
+//   @header("Content-Type")
+//   contentType: "application/octet-stream";
 
-  ...RequestIdResponseHeader;
-  ...ClientRequestIdHeader;
-  ...MetadataHeaders;
-  ...ObjectReplicationHeaders;
-  ...LastModifiedResponseHeader;
-  ...CreationTimeResponseHeader;
-  ...ObjectReplicationPolicyIdResponseHeader;
-  ...ContentLengthResponseHeader;
-  ...ContentRangeResponseHeader;
-  ...EtagResponseHeader;
-  ...ContentMd5ResponseHeader;
-  ...ContentEncodingResponseParameter;
-  ...CacheControlResponseHeader;
-  ...ContentDispositionResponseHeader;
-  ...ContentLanguageResponseHeader;
-  ...BlobSequenceNumberResponseHeader;
-  ...BlobTypeResponseHeader;
-  ...CopyCompletionTimeResponseHeader;
-  ...CopyStatusDescriptionResponseHeader;
-  ...CopyIdResponseHeader;
-  ...CopyProgressResponseHeader;
-  ...CopyStatusResponseHeader;
-  ...CopySourceResponseHeader;
-  ...LeaseDurationResponseHeader;
-  ...LeaseStateResponseHeader;
-  ...LeaseStatusResponseHeader;
-  ...VersionIdResponseHeader;
-  ...IsCurrentVersionResponseHeader;
-  ...AcceptRangesResponseHeaderPrivate;
-  ...DateResponseHeaderPrivate;
-  ...BlobCommittedBlockCountResponseHeader;
-  ...ServerEncryptedResponseHeader;
-  ...EncryptionKeySha256ResponseHeader;
-  ...EncryptionScopeResponseHeader;
-  ...BlobContentMd5ResponseHeader;
-  ...TagCountResponseHeader;
-  ...IsSealedResponseHeader;
-  ...LastAccessedResponseHeader;
-  ...ImmutabilityPolicyExpiresOnResponseHeader;
-  ...ImmutabilityPolicyModeResponseHeader;
-  ...LegalHoldOptionalResponseHeader;
-  ...StructuredBodyTypeResponseHeaderPrivate;
-  ...StructuredContentLengthResponseHeaderPrivate;
-  ...ApiVersionHeader;
-}) | (BodyParameter & {
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
-  @statusCode statusCode: 206;
+//   ...RequestIdResponseHeader;
+//   ...ClientRequestIdHeader;
+//   ...MetadataHeaders;
+//   ...ObjectReplicationHeaders;
+//   ...LastModifiedResponseHeader;
+//   ...CreationTimeResponseHeader;
+//   ...ObjectReplicationPolicyIdResponseHeader;
+//   ...ContentLengthResponseHeader;
+//   ...ContentRangeResponseHeader;
+//   ...EtagResponseHeader;
+//   ...ContentMd5ResponseHeader;
+//   ...ContentEncodingResponseParameter;
+//   ...CacheControlResponseHeader;
+//   ...ContentDispositionResponseHeader;
+//   ...ContentLanguageResponseHeader;
+//   ...BlobSequenceNumberResponseHeader;
+//   ...BlobTypeResponseHeader;
+//   ...CopyCompletionTimeResponseHeader;
+//   ...CopyStatusDescriptionResponseHeader;
+//   ...CopyIdResponseHeader;
+//   ...CopyProgressResponseHeader;
+//   ...CopyStatusResponseHeader;
+//   ...CopySourceResponseHeader;
+//   ...LeaseDurationResponseHeader;
+//   ...LeaseStateResponseHeader;
+//   ...LeaseStatusResponseHeader;
+//   ...VersionIdResponseHeader;
+//   ...IsCurrentVersionResponseHeader;
+//   ...AcceptRangesResponseHeaderPrivate;
+//   ...DateResponseHeaderPrivate;
+//   ...BlobCommittedBlockCountResponseHeader;
+//   ...ServerEncryptedResponseHeader;
+//   ...EncryptionKeySha256ResponseHeader;
+//   ...EncryptionScopeResponseHeader;
+//   ...BlobContentMd5ResponseHeader;
+//   ...TagCountResponseHeader;
+//   ...IsSealedResponseHeader;
+//   ...LastAccessedResponseHeader;
+//   ...ImmutabilityPolicyExpiresOnResponseHeader;
+//   ...ImmutabilityPolicyModeResponseHeader;
+//   ...LegalHoldOptionalResponseHeader;
+//   ...StructuredBodyTypeResponseHeaderPrivate;
+//   ...StructuredContentLengthResponseHeaderPrivate;
+//   ...ApiVersionHeader;
+// }) | (BodyParameter & {
+//   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
+//   @statusCode statusCode: 206;
 
-  /** The media type of the body of the response. */
-  @header("Content-Type")
-  contentType: "application/octet-stream";
+//   /** The media type of the body of the response. */
+//   @header("Content-Type")
+//   contentType: "application/octet-stream";
 
-  ...RequestIdResponseHeader;
-  ...ClientRequestIdHeader;
-  ...MetadataHeaders;
-  ...ObjectReplicationHeaders;
-  ...LastModifiedResponseHeader;
-  ...CreationTimeResponseHeader;
-  ...ObjectReplicationPolicyIdResponseHeader;
-  ...ContentLengthResponseHeader;
-  ...ContentRangeResponseHeader;
-  ...EtagResponseHeader;
-  ...ContentMd5ResponseHeader;
-  ...ContentEncodingResponseParameter;
-  ...CacheControlResponseHeader;
-  ...ContentDispositionResponseHeader;
-  ...ContentLanguageResponseHeader;
-  ...BlobSequenceNumberResponseHeader;
-  ...BlobTypeResponseHeader;
-  ...ContentCrc64ResponseHeader;
-  ...CopyCompletionTimeResponseHeader;
-  ...CopyStatusDescriptionResponseHeader;
-  ...CopyIdResponseHeader;
-  ...CopyProgressResponseHeader;
-  ...CopyStatusResponseHeader;
-  ...CopySourceResponseHeader;
-  ...LeaseDurationResponseHeader;
-  ...LeaseStateResponseHeader;
-  ...LeaseStatusResponseHeader;
-  ...VersionIdResponseHeader;
-  ...IsCurrentVersionResponseHeader;
-  ...AcceptRangesResponseHeaderPrivate;
-  ...DateResponseHeaderPrivate;
-  ...BlobCommittedBlockCountResponseHeader;
-  ...ServerEncryptedResponseHeader;
-  ...EncryptionKeySha256ResponseHeader;
-  ...EncryptionScopeResponseHeader;
-  ...BlobContentMd5ResponseHeader;
-  ...TagCountResponseHeader;
-  ...IsSealedResponseHeader;
-  ...LastAccessedResponseHeader;
-  ...ImmutabilityPolicyExpiresOnResponseHeader;
-  ...ImmutabilityPolicyModeResponseHeader;
-  ...LegalHoldOptionalResponseHeader;
-  ...StructuredBodyTypeResponseHeaderPrivate;
-  ...StructuredContentLengthResponseHeaderPrivate;
-  ...ApiVersionHeader;
-}) | Error;
+//   ...RequestIdResponseHeader;
+//   ...ClientRequestIdHeader;
+//   ...MetadataHeaders;
+//   ...ObjectReplicationHeaders;
+//   ...LastModifiedResponseHeader;
+//   ...CreationTimeResponseHeader;
+//   ...ObjectReplicationPolicyIdResponseHeader;
+//   ...ContentLengthResponseHeader;
+//   ...ContentRangeResponseHeader;
+//   ...EtagResponseHeader;
+//   ...ContentMd5ResponseHeader;
+//   ...ContentEncodingResponseParameter;
+//   ...CacheControlResponseHeader;
+//   ...ContentDispositionResponseHeader;
+//   ...ContentLanguageResponseHeader;
+//   ...BlobSequenceNumberResponseHeader;
+//   ...BlobTypeResponseHeader;
+//   ...ContentCrc64ResponseHeader;
+//   ...CopyCompletionTimeResponseHeader;
+//   ...CopyStatusDescriptionResponseHeader;
+//   ...CopyIdResponseHeader;
+//   ...CopyProgressResponseHeader;
+//   ...CopyStatusResponseHeader;
+//   ...CopySourceResponseHeader;
+//   ...LeaseDurationResponseHeader;
+//   ...LeaseStateResponseHeader;
+//   ...LeaseStatusResponseHeader;
+//   ...VersionIdResponseHeader;
+//   ...IsCurrentVersionResponseHeader;
+//   ...AcceptRangesResponseHeaderPrivate;
+//   ...DateResponseHeaderPrivate;
+//   ...BlobCommittedBlockCountResponseHeader;
+//   ...ServerEncryptedResponseHeader;
+//   ...EncryptionKeySha256ResponseHeader;
+//   ...EncryptionScopeResponseHeader;
+//   ...BlobContentMd5ResponseHeader;
+//   ...TagCountResponseHeader;
+//   ...IsSealedResponseHeader;
+//   ...LastAccessedResponseHeader;
+//   ...ImmutabilityPolicyExpiresOnResponseHeader;
+//   ...ImmutabilityPolicyModeResponseHeader;
+//   ...LegalHoldOptionalResponseHeader;
+//   ...StructuredBodyTypeResponseHeaderPrivate;
+//   ...StructuredContentLengthResponseHeaderPrivate;
+//   ...ApiVersionHeader;
+// }) | Error;
 
-@@override(Blob.download, downloadRust, "rust");
+// @@override(Blob.download, downloadRust, "rust");
