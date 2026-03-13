@@ -207,16 +207,16 @@ using Microsoft.ContainerRegistry;
   "IsNetworkRuleBypassAllowedForTasks",
   "csharp"
 );
-@@clientName(RegistryPatch.adminUserEnabled, "IsAdminUserEnabled", "csharp");
-@@clientName(RegistryPatch.anonymousPullEnabled,
+@@clientName(RegistryUpdateParameters.adminUserEnabled, "IsAdminUserEnabled", "csharp");
+@@clientName(RegistryUpdateParameters.anonymousPullEnabled,
   "IsAnonymousPullEnabled",
   "csharp"
 );
-@@clientName(RegistryPatch.dataEndpointEnabled,
+@@clientName(RegistryUpdateParameters.dataEndpointEnabled,
   "IsDataEndpointEnabled",
   "csharp"
 );
-@@clientName(RegistryPatch.networkRuleBypassAllowedForTasks,
+@@clientName(RegistryUpdateParameters.networkRuleBypassAllowedForTasks,
   "IsNetworkRuleBypassAllowedForTasks",
   "csharp"
 );
@@ -224,7 +224,7 @@ using Microsoft.ContainerRegistry;
   "IsRegionEndpointEnabled",
   "csharp"
 );
-@@clientName(ReplicationPatch.regionEndpointEnabled,
+@@clientName(ReplicationUpdateParameters.regionEndpointEnabled,
   "IsRegionEndpointEnabled",
   "csharp"
 );
@@ -236,7 +236,7 @@ using Microsoft.ContainerRegistry;
 @@clientName(StatusDetailProperties.type, "StatusDetailType", "csharp");
 @@clientName(TlsCertificateProperties.location, "CertificateLocation", "csharp");
 @@clientName(ConnectedRegistryProperties.clientTokenIds, "ClientTokenIds", "csharp");
-@@clientName(ConnectedRegistryPatch.clientTokenIds, "ClientTokenIds", "csharp");
+@@clientName(ConnectedRegistryUpdateParameters.clientTokenIds, "ClientTokenIds", "csharp");
 
 // C# type correctness: match API surface before migration to Typespec (Guid? CorrelationId)
 @@alternateType(StatusDetailProperties.correlationId, uuid, "csharp");
@@ -246,7 +246,7 @@ using Microsoft.ContainerRegistry;
   armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(ConnectedRegistryPatch.clientTokenIds,
+@@alternateType(ConnectedRegistryUpdateParameters.clientTokenIds,
   armResourceIdentifier[],
   "csharp"
 );
