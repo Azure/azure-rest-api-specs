@@ -15,9 +15,16 @@ export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
   readonly description = "Verify spec directory's folder structure and naming conventions.";
   async execute(folder: string): Promise<RuleResult> {
-    const suppression = (await getSuppressions(folder)).find((s) => s.rules?.includes(this.name));
-    if (suppression) {
-      return { success: true, stdOutput: `suppressed: ${suppression.reason}` };
+    const suppressions = (await getSuppressions(folder)).filter((s) =>
+      s.rules?.includes(this.name),
+    );
+
+    const suppressAll = suppressions.find(
+      (s) => s.subRules === undefined || s.subRules.length === 0,
+    );
+
+    if (suppressAll) {
+      return { success: true, stdOutput: `suppressed: ${suppressAll.reason}` };
     }
 
     let success = true;
@@ -32,20 +39,16 @@ export class FolderStructureRule implements Rule {
       relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
 
     if (structureVersion === 1) {
-      const suppressions = await getSuppressions(folder);
+      const suppressMustUseV2 = suppressions.find((s) => s.subRules?.includes("MustUseV2"));
 
-      const mustUseV2Suppressions = suppressions.filter(
-        (s) => s.rules?.includes(this.name) && s.subRules?.includes("MustUseV2"),
-      );
-
-      if (mustUseV2Suppressions.length === 0) {
+      if (suppressMustUseV2) {
+        stdOutput += `Folder '${folder}' is not using "folder structure v2", but was suppressed.\n`;
+      } else {
         return {
           success: false,
           stdOutput: stdOutput,
           errorOutput: `Folder '${folder}' must use "folder structure v2".  See https://aka.ms/azsdk/fsv2.\n`,
         };
-      } else {
-        stdOutput += `Folder '${folder}' is not using "folder structure v2", but was suppressed.\n`;
       }
     }
 
