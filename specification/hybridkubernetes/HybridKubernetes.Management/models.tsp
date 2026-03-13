@@ -69,7 +69,7 @@ union ConnectivityStatus {
  * Represents the inbound connectivity status of the connected cluster.
  */
 @added(Versions.v2026_02_01_preview)
-union InboundConnectivityStatus {
+union InboundConnectivityState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Connected: "Connected",
@@ -256,7 +256,7 @@ model ConnectedClusterProperties {
    */
   @added(Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read)
-  inboundConnectivityStatus?: InboundConnectivityStatus;
+  inboundConnectivityState?: InboundConnectivityState;
 
   /**
    * Property which describes the state of private link on a connected cluster resource.

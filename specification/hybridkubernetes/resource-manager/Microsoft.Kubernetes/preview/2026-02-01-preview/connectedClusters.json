@@ -899,8 +899,8 @@
           "description": "Represents the connectivity status of the connected cluster.",
           "readOnly": true
         },
-        "inboundConnectivityStatus": {
-          "$ref": "#/definitions/InboundConnectivityStatus",
+        "inboundConnectivityState": {
+          "$ref": "#/definitions/InboundConnectivityState",
           "description": "Represents the health status inbound connectivity (relay connection and Kubernetes API).",
           "readOnly": true
         },
@@ -1123,7 +1123,7 @@
         }
       }
     },
-    "InboundConnectivityStatus": {
+    "InboundConnectivityState": {
       "type": "string",
       "description": "Represents the inbound connectivity status of the connected cluster.",
       "enum": [
@@ -1132,7 +1132,7 @@
         "Unknown"
       ],
       "x-ms-enum": {
-        "name": "InboundConnectivityStatus",
+        "name": "InboundConnectivityState",
         "modelAsString": true,
         "values": [
           {
