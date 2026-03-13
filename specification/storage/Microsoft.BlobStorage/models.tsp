@@ -2707,6 +2707,7 @@ alias StructuredBodyTypeResponseHeader = {
 
 alias StructuredContentLengthParameter = {
   /** Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length. */
+  @access(Access.internal)
   @header("x-ms-structured-content-length")
   structuredContentLength?: int64;
 };
