@@ -163,14 +163,6 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   uint64,
   "rust"
 );
-@@access(StructuredContentLengthParameter.structuredContentLength,
-  Access.internal,
-  "rust"
-);
-@@access(StructuredContentLengthResponseHeader.structuredContentLength,
-  Access.internal,
-  "rust"
-);
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
