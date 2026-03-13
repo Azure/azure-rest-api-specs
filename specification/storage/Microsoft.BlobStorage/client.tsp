@@ -119,6 +119,12 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientNamespace(Storage.Blob.AppendBlob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs");
+@@clientNamespace(BlobServiceClient, "Azure.Storage.Blobs");
+@@clientNamespace(BlobContainerClient, "Azure.Storage.Blobs");
+@@clientNamespace(BlobClient, "Azure.Storage.Blobs");
+@@clientNamespace(AppendBlobClient, "Azure.Storage.Blobs");
+@@clientNamespace(BlockBlobClient, "Azure.Storage.Blobs");
+@@clientNamespace(PageBlobClient, "Azure.Storage.Blobs");
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
