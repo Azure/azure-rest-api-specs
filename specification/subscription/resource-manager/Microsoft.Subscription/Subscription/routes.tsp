@@ -31,10 +31,7 @@ interface SubscriptionOperationGroup {
   @autoRoute
   cancel is ArmProviderActionSync<
     Response = CanceledSubscriptionId,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      ...SubscriptionIdPathParameter;
-    }
+    Scope = SubscriptionActionScope
   >;
   /**
    * The operation to rename a subscription
@@ -43,10 +40,7 @@ interface SubscriptionOperationGroup {
   rename is ArmProviderActionSync<
     Request = SubscriptionName,
     Response = RenamedSubscriptionId,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      ...SubscriptionIdPathParameter;
-    }
+    Scope = SubscriptionActionScope
   >;
   /**
    * The operation to enable a subscription
@@ -54,10 +48,7 @@ interface SubscriptionOperationGroup {
   @autoRoute
   enable is ArmProviderActionSync<
     Response = EnabledSubscriptionId,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      ...SubscriptionIdPathParameter;
-    }
+    Scope = SubscriptionActionScope
   >;
   /**
    * Accept subscription ownership.

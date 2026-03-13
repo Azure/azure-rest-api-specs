@@ -478,7 +478,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdPathParameter"
           },
           {
             "name": "body",
@@ -532,7 +532,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdPathParameter"
           }
         ],
         "responses": {
@@ -1529,5 +1529,14 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "SubscriptionIdPathParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
