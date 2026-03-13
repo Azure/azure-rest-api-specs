@@ -621,8 +621,7 @@ interface Share {
       ...LastModifiedResponseHeader;
 
       @body
-      @Xml.name("SignedIdentifiers")
-      signedIdentifiers: SignedIdentifier[];
+      signedIdentifiers: SignedIdentifiers;
     }
   >;
 
