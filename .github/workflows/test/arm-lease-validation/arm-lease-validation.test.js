@@ -24,14 +24,20 @@ describe("validate-arm-leases", () => {
 
   describe("isFileAllowed", () => {
     it("allows valid lease files and README.md", () => {
-      expect(isFileAllowed(".github/arm-leases/testservice/Microsoft.Test/lease.yaml")).toBe(true);
-      expect(isFileAllowed(".github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml")).toBe(true);
+      expect(
+        isFileAllowed(".github/arm-leases/testservice/Microsoft.Test/lease.yaml"),
+      ).toBe(true);
+      expect(
+        isFileAllowed(".github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml"),
+      ).toBe(true);
       expect(isFileAllowed(".github/arm-leases/README.md")).toBe(true);
     });
 
     it("rejects invalid files", () => {
       expect(isFileAllowed(".github/arm-leases/anything/here")).toBe(false);
-      expect(isFileAllowed(".github/arm-leases/testservice/Microsoft.Test/other.yaml")).toBe(false);
+      expect(
+        isFileAllowed(".github/arm-leases/testservice/Microsoft.Test/other.yaml"),
+      ).toBe(false);
       expect(isFileAllowed(".github/arm-leases/badtest/No.Yaml/no.md")).toBe(false);
     });
   });
@@ -62,27 +68,65 @@ describe("validate-arm-leases", () => {
 
     it("accepts valid lease data", () => {
       expect(leaseSchema.safeParse(validLease).success).toBe(true);
-      expect(leaseSchema.safeParse({ ...validLease, lease: { ...validLease.lease, duration: "P5M" } }).success).toBe(true);
-      expect(leaseSchema.safeParse({ ...validLease, lease: { ...validLease.lease, duration: "P180D" } }).success).toBe(true);
+      expect(
+        leaseSchema.safeParse({
+          ...validLease,
+          lease: { ...validLease.lease, duration: "P5M" },
+        }).success,
+      ).toBe(true);
+      expect(
+        leaseSchema.safeParse({
+          ...validLease,
+          lease: { ...validLease.lease, duration: "P180D" },
+        }).success,
+      ).toBe(true);
     });
 
     it("rejects invalid resource-provider", () => {
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, "resource-provider": "microsoft.Test" } }).success).toBe(false);
+      expect(
+        leaseSchema.safeParse({
+          lease: { ...validLease.lease, "resource-provider": "microsoft.Test" },
+        }).success,
+      ).toBe(false);
     });
 
     it("rejects invalid startdate", () => {
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, startdate: "01-15-2026" } }).success).toBe(false);
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, startdate: "2026-99-99" } }).success).toBe(false);
+      expect(
+        leaseSchema.safeParse({
+          lease: { ...validLease.lease, startdate: "01-15-2026" },
+        }).success,
+      ).toBe(false);
+      expect(
+        leaseSchema.safeParse({
+          lease: { ...validLease.lease, startdate: "2026-99-99" },
+        }).success,
+      ).toBe(false);
     });
 
     it("rejects invalid duration", () => {
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, duration: "90 days" } }).success).toBe(false);
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, duration: "P1Y" } }).success).toBe(false); // exceeds 180 days
+      expect(
+        leaseSchema.safeParse({
+          lease: { ...validLease.lease, duration: "90 days" },
+        }).success,
+      ).toBe(false);
+      expect(
+        leaseSchema.safeParse({
+          lease: { ...validLease.lease, duration: "P1Y" },
+        }).success,
+      ).toBe(false); // exceeds 180 days
     });
 
     it("rejects invalid reviewer", () => {
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, reviewer: "" } }).success).toBe(false);
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, reviewer: "johndoe" } }).success).toBe(false); // no @
+      expect(
+        leaseSchema.safeParse({
+          lease: { ...validLease.lease, reviewer: "" },
+        }).success,
+      ).toBe(false);
+      expect(
+        leaseSchema.safeParse({
+          lease: { ...validLease.lease, reviewer: "johndoe" },
+        }).success,
+      ).toBe(false); // no @
     });
 
     it("rejects missing lease key", () => {
