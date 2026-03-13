@@ -37,31 +37,24 @@ model DestinationAsset {
 @removed(Versions.v1)
 model ModelVersion {
   @doc("Additional properties bag.")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   properties?: Record<string>;
 
   @doc("URI of the model artifact, typically a dataset ID returned by datasets.upload_folder().")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   modelUri?: string;
 
   @doc("The type of the model, e.g. \"custom_model\", \"mlflow_model\", \"triton_model\".")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   modelType?: string;
 
   @doc("Flavor data for the model version. Keys are flavor names, values contain flavor-specific properties.")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   flavors?: Record<FlavorData>;
 
   @doc("The lifecycle stage of the model version, e.g. \"Development\", \"Staging\", \"Production\", \"Archived\".")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   stage?: string;
 
   @doc("Whether the model version is archived.")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   isArchived?: boolean;
 
   @doc("Whether the model version is anonymous.")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   isAnonymous?: boolean;
 
   @doc("The name of the training job that produced this model version.")
