@@ -7195,6 +7195,20 @@
         "webAppRouting": {
           "$ref": "#/definitions/ManagedClusterIngressProfileWebAppRouting",
           "description": "App Routing settings for the ingress profile. You can find an overview and onboarding guide for this feature at https://learn.microsoft.com/en-us/azure/aks/app-routing?tabs=default%2Cdeploy-app-default."
+        },
+        "gatewayAPI": {
+          "$ref": "#/definitions/ManagedClusterIngressProfileGatewayConfiguration",
+          "description": "Settings for the managed Gateway API installation"
+        }
+      }
+    },
+    "ManagedClusterIngressProfileGatewayConfiguration": {
+      "type": "object",
+      "description": "Configuration for managed Gateway API CRDs. See https://aka.ms/k8s-gateway-api for more details.",
+      "properties": {
+        "installation": {
+          "$ref": "#/definitions/ManagedGatewayType",
+          "description": "Configuration for the managed Gateway API installation. If not specified, the default is 'Disabled'. See https://aka.ms/k8s-gateway-api for more details."
         }
       }
     },
@@ -8456,6 +8470,30 @@
       "required": [
         "enabled"
       ]
+    },
+    "ManagedGatewayType": {
+      "type": "string",
+      "description": "Configuration for the managed Gateway API installation. If not specified, the default is 'Disabled'. See https://aka.ms/k8s-gateway-api for more details.",
+      "enum": [
+        "Disabled",
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedGatewayType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Gateway API CRDs will not be reconciled on your cluster."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Gateway API CRDs from the standard release channel will be reconciled onto your cluster. See https://aka.ms/gateway-api-versions to see which bundle will be installed for your Kubernetes version."
+          }
+        ]
+      }
     },
     "ManagedNamespace": {
       "type": "object",
