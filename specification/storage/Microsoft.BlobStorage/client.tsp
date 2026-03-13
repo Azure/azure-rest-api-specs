@@ -123,25 +123,10 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 
-@@clientName(ContainerProperties.denyEncryptionScopeOverride,
-  "PreventEncryptionScopeOverride"
-);
-@@clientName(ContainerProperties.immutableStorageWithVersioningEnabled,
-  "IsImmutableStorageWithVersioningEnabled"
-);
-@@clientName(BlobProperties.expiryTime, "ExpiresOn");
-@@clientName(BlobProperties.sealed, "IsSealed");
-@@clientName(BlobProperties.lastAccessTime, "LastAccessedOn");
-@@clientName(BlobProperties.immutabilityPolicyUntilDate,
-  "ImmutabilityPolicyExpiresOn"
-);
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
 @@clientName(ObjectReplicationHeaders.objectReplicationRules,
   "objectReplicationRules",
   "rust"
-);
-@@clientName(ImmutabilityPolicyExpiryRequiredParameter.immutabilityPolicyExpiry,
-  "expiry"
 );
 @@alternateType(BlobProperties.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.size, uint64, "rust");
@@ -232,3 +217,38 @@ op setMetadataRequiredMetadataBlob is StorageOperationNoBody<
 >;
 
 @@override(Blob.setMetadata, setMetadataRequiredMetadataBlob, "rust");
+
+/** ----- This section overrides the setAccessPolicy operation for Rust to require the containerAcl body ----- */
+/** Sets the permissions for the specified container. The permissions indicate whether blobs in a container may be accessed publicly. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@put
+@route("?restype=container&comp=acl")
+op setAccessPolicyRequiredContainerAcl is StorageOperationNoBody<
+  {
+    /** The media type of the requestbody */
+    @header("Content-Type")
+    contentType?: "application/xml";
+
+    /** The access control list for the container. */
+    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
+    @body
+    containerAcl: SignedIdentifiers;
+
+    ...TimeoutParameter;
+    ...LeaseIdOptionalParameter;
+    ...BlobPublicAccess;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+  },
+  {
+    ...EtagResponseHeaderPrivate;
+    ...LastModifiedResponseHeaderPrivate;
+  }
+>;
+
+@@override(Container.setAccessPolicy,
+  setAccessPolicyRequiredContainerAcl,
+  "rust"
+);

@@ -998,7 +998,12 @@ interface Blob {
     {
       ...TimeoutParameter;
       ...IfUnmodifiedSinceParameter;
+
+      // Note: this property is intentionally named `expiry` (rather than `immutabilityPolicyExpiry`
+      // like the optional sibling alias) so that it surfaces simply as `expiry` in emitted
+      // languages without requiring a `@clientName` override.
       ...ImmutabilityPolicyExpiryRequiredParameter;
+
       ...ImmutabilityPolicyModeParameter;
       ...SnapshotParameter;
       ...VersionIdParameter;
@@ -2039,6 +2044,7 @@ interface BlockBlob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
+      ...ContentCrc64ResponseHeader;
       ...VersionIdResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
