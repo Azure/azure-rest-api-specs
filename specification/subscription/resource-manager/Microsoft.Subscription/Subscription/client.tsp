@@ -4,10 +4,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 namespace Microsoft.Subscription;
 
-@@clientLocation(SubscriptionIdParameter.subscriptionId,
+@@clientLocation(Azure.ResourceManager.SubscriptionIdParameter.subscriptionId,
   SubscriptionOperationGroup.acceptOwnership
 );
-@@clientLocation(SubscriptionIdParameter.subscriptionId,
+@@clientLocation(Azure.ResourceManager.SubscriptionIdParameter.subscriptionId,
   SubscriptionOperationGroup.acceptOwnershipStatus
 );
 
