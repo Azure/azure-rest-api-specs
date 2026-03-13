@@ -59,7 +59,7 @@ interface SubscriptionOperationGroup {
     Parameters = {
       ...SubscriptionIdPathParameter;
     },
-    Response = ArmAcceptedResponse & ArmLroLocationHeader
+    Response = ArmAcceptedResponse & ArmLroLocationHeader<FinalResult = void>
   >;
   /**
    * Accept subscription ownership status.
