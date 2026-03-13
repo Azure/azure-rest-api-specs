@@ -475,7 +475,6 @@ op stageBlockRust is StorageOperationRequestBody<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
 @get
 op downloadRust(
-  ...ApiVersionHeader,
   ...ClientRequestIdHeader,
   ...SnapshotParameter,
   ...VersionIdParameter,
