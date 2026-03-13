@@ -2,6 +2,9 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -659,6 +662,7 @@ model ActionStatus {
 /**
  * An azure resource object
  */
+@clientName("AlertsManagementProxyResource", "csharp")
 model ProxyResource {
   /**
    * Azure resource Id
@@ -1178,9 +1182,6 @@ alias PrometheusEnrichmentItemProperties = {
 /**
  * Prometheus instant query enrichment object.
  */
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PrometheusEnrichmentItem)
 model PrometheusInstantQuery extends AlertEnrichmentItem {
   ...PrometheusEnrichmentItemProperties;
 
@@ -1198,9 +1199,6 @@ model PrometheusInstantQuery extends AlertEnrichmentItem {
 /**
  * Prometheus instant query enrichment object.
  */
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PrometheusEnrichmentItem)
 model PrometheusRangeQuery extends AlertEnrichmentItem {
   ...PrometheusEnrichmentItemProperties;
 
