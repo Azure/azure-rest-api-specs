@@ -251,8 +251,50 @@ using Microsoft.ContainerRegistry;
   "csharp"
 );
 @@alternateType(ParentProperties.id, armResourceIdentifier, "csharp");
+@@alternateType(CacheRuleProperties.credentialSetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(CacheRuleUpdateProperties.credentialSetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(TokenProperties.scopeMapId, armResourceIdentifier, "csharp");
+@@alternateType(TokenUpdateProperties.scopeMapId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SyncProperties.tokenId, armResourceIdentifier, "csharp");
+@@alternateType(GenerateCredentialsParameters.tokenId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ImportSource.resourceId, armResourceIdentifier, "csharp");
 
-// C# webhook event property renames
+// C# type correctness: Uri properties
+@@alternateType(WebhookPropertiesCreateParameters.serviceUri, url, "csharp");
+@@alternateType(WebhookPropertiesUpdateParameters.serviceUri, url, "csharp");
+@@alternateType(CallbackConfig.serviceUri, url, "csharp");
+@@alternateType(EventRequestMessage.requestUri, url, "csharp");
+@@alternateType(Target.url, url, "csharp");
+
+// C# type correctness: Guid properties
+@@alternateType(EventContent.id, uuid, "csharp");
+@@alternateType(EventInfo.id, uuid, "csharp");
+@@alternateType(Request.id, uuid, "csharp");
+
+// C# property renames: expiry -> ExpireOn
+@@clientName(TokenCertificate.expiry, "ExpireOn", "csharp");
+@@clientName(TokenPassword.expiry, "ExpireOn", "csharp");
+@@clientName(GenerateCredentialsParameters.expiry, "ExpireOn", "csharp");
+
+// C# property renames: disambiguation
+@@clientName(TrustPolicy.type, "PolicyType", "csharp");
+@@clientName(TlsCertificateProperties.type, "CertificateType", "csharp");
+@@clientName(NetworkRuleSet.ipRules, "IPRules", "csharp");
+@@clientName(Request.useragent, "UserAgent", "csharp");
+
+// C# webhook event property renames (uuid Guid? typed)
 @@clientName(EventContent.id, "EventContentId", "csharp");
 @@clientName(EventInfo.id, "EventInfoId", "csharp");
 @@clientName(Request.id, "RequestId", "csharp");
