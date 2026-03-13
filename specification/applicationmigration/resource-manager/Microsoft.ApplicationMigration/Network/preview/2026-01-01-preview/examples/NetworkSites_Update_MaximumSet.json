@@ -1,0 +1,46 @@
+{
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d",
+        "name": "d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d",
+        "type": "Microsoft.ApplicationMigration/networkSites",
+        "location": "eastus",
+        "tags": {
+          "env": "test"
+        },
+        "systemData": {
+          "lastModifiedAt": "2024-01-01T00:00:00Z",
+          "createdBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "masterSiteId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.OffAzure/masterSites/ms1",
+          "migrateProjectId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Migrate/migrateProjects/mp1"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus"
+      }
+    }
+  },
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "properties": {
+      "tags": {
+        "env": "prod"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "siteName": "d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d"
+  },
+  "operationId": "NetworkSites_Update",
+  "title": "NetworkSites_Update_MaximumSet"
+}
