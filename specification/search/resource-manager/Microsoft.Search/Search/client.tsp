@@ -865,3 +865,129 @@ model AccessRulePropertiesSubscriptionsItem {
 );
 
 @@clientName(SearchServiceProperties.eTag, "etag", "java");
+
+// C# backward-compatible: flatten sku for property access pattern
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flatten sku for backward compat with C# SDK"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchServiceUpdate.sku);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flatten sku for backward compat with C# SDK"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchService.sku);
+
+// C# backward-compatible type renames (migration from AutoRest to TypeSpec)
+@@clientName(HostingMode, "SearchServiceHostingMode", "csharp");
+@@clientName(ComputeType, "SearchServiceComputeType", "csharp");
+@@clientName(ProvisioningState, "SearchServiceProvisioningState", "csharp");
+@@clientName(IpRule, "SearchServiceIPRule", "csharp");
+@@clientName(DataPlaneAuthOptions,
+  "SearchAadAuthDataPlaneAuthOptions",
+  "csharp"
+);
+@@clientName(NetworkRuleSet, "SearchServiceNetworkRuleSet", "csharp");
+@@clientName(PublicNetworkAccess,
+  "SearchServicePublicInternetAccess",
+  "csharp"
+);
+@@access(PublicNetworkAccess, Access.public, "csharp");
+@@clientName(SkuName, "SearchServiceSkuName", "csharp");
+@@clientName(AdminKeyKind, "SearchServiceAdminKeyKind", "csharp");
+@@clientName(AdminKeyResult, "SearchServiceAdminKeyResult", "csharp");
+@@clientName(QueryKey, "SearchServiceQueryKey", "csharp");
+@@clientName(CheckNameAvailabilityInput,
+  "SearchServiceNameAvailabilityContent",
+  "csharp"
+);
+@@clientName(CheckNameAvailabilityOutput,
+  "SearchServiceNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(UpgradeAvailable, "SearchServiceUpgradeAvailable", "csharp");
+@@clientName(SharedPrivateLinkResource,
+  "SharedSearchServicePrivateLinkResource",
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResourceProperties,
+  "SharedSearchServicePrivateLinkResourceProperties",
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResourceStatus,
+  "SearchServiceSharedPrivateLinkResourceStatus",
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResourceProvisioningState,
+  "SearchServiceSharedPrivateLinkResourceProvisioningState",
+  "csharp"
+);
+@@clientName(ShareablePrivateLinkResourceProperties,
+  "ShareableSearchServicePrivateLinkResourceProperties",
+  "csharp"
+);
+@@clientName(ShareablePrivateLinkResourceType,
+  "ShareableSearchServicePrivateLinkResourceType",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnectionProperties,
+  "SearchServicePrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnectionPropertiesPrivateLinkServiceConnectionState,
+  "SearchServicePrivateLinkServiceConnectionState",
+  "csharp"
+);
+@@clientName(NetworkSecurityPerimeterConfiguration,
+  "SearchServiceNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+
+// C# backward-compatible property renames
+@@clientName(SearchServiceProperties.disableLocalAuth,
+  "IsLocalAuthDisabled",
+  "csharp"
+);
+@@clientName(SearchServiceProperties.publicNetworkAccess,
+  "PublicInternetAccess",
+  "csharp"
+);
+@@clientName(SearchServiceProperties.upgradeAvailable,
+  "IsUpgradeAvailable",
+  "csharp"
+);
+@@clientName(NetworkRuleSet.ipRules, "IPRules", "csharp");
+@@clientName(Sku.name, "SearchSkuName", "csharp");
+
+// C# backward-compatible operation renames
+@@clientName(SearchServices.adminKeysGet, "GetAdminKey", "csharp");
+@@clientName(SearchServices.regenerate, "RegenerateAdminKey", "csharp");
+@@clientName(SearchServices.create, "CreateQueryKey", "csharp");
+@@clientName(SearchServices.listBySearchService,
+  "GetQueryKeysBySearchService",
+  "csharp"
+);
+@@clientName(SearchServices.queryKeysDelete, "DeleteQueryKey", "csharp");
+@@clientName(SearchServices.listSupported,
+  "GetSupportedPrivateLinkResources",
+  "csharp"
+);
+
+// C# backward-compatible type renames (additional for migration)
+@@clientName(AadAuthFailureMode, "SearchAadAuthFailureMode", "csharp");
+@@clientName(SearchEncryptionWithCmk,
+  "SearchEncryptionWithCmkEnforcement",
+  "csharp"
+);
+@@clientName(UnavailableNameReason,
+  "SearchServiceNameUnavailableReason",
+  "csharp"
+);
+@@clientName(PrivateLinkServiceConnectionProvisioningState,
+  "SearchPrivateLinkServiceConnectionProvisioningState",
+  "csharp"
+);
+@@clientName(PrivateLinkServiceConnectionStatus,
+  "SearchServicePrivateLinkServiceConnectionStatus",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnection,
+  "SearchPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(EncryptionWithCmk, "SearchEncryptionWithCmk", "csharp");
