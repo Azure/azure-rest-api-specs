@@ -485,6 +485,27 @@ interface DevBoxes {
     }
   >;
 
+  /** Gets the log for a dev center catalog image definition imaging build task. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No model for this."
+  @route("/imageBuildLogs/{imageBuildLogId}")
+  @get
+  @added(APIVersions.v2026_01_01_preview)
+  getDevCenterImagingTaskLog is Azure.Core.Foundations.Operation<
+    {
+      @doc("An imaging build log id.")
+      @path
+      imageBuildLogId: uuid;
+    },
+    {
+      @doc("Set producer to text/plain")
+      @header
+      contentType: "text/plain";
+
+      @body
+      body: string;
+    }
+  >;
+
   @doc("Lists snapshots for this Dev Box.")
   @added(APIVersions.v2024_09_01_preview)
   listSnapshots is StandardResourceOperations.ResourceList<DevBoxSnapshot>;

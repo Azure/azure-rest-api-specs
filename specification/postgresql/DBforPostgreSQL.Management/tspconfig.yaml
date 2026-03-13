@@ -11,13 +11,10 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
-  "@azure-typespec/http-client-csharp-mgmt":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    package-name: "Azure.ResourceManager.PostgreSql"
-    namespace: "{package-name}"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-postgresql"
-    namespace: "azure.mgmt.postgresql"
+    service-dir: "sdk/postgresqlflexibleservers"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-postgresqlflexibleservers"
+    namespace: "azure.mgmt.postgresqlflexibleservers"
     generate-test: true
     generate-sample: true
     flavor: "azure"
@@ -33,18 +30,52 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-postgresql-flexible"
     flavor: "azure"
     experimental-extensible-enums: true
+    compatibility-lro: true
     package-details:
       name: "@azure/arm-postgresql-flexible"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/postgresql"
-    emitter-output-dir: "{output-dir}/{service-dir}/armpostgresql"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpostgresql"
+    emitter-output-dir: "{output-dir}/{service-dir}/armpostgresqlflexibleservers"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpostgresqlflexibleservers"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-powershell":
+    service-dir: "src"
+    emitter-output-dir: "{output-dir}/{service-dir}/PostgreSQLFlexibleServer/PostgreSQLFlexibleServer.Autorest"
+    clear-output-folder: true
+    debug: true
+    azure: true
+    module-version: 0.1.0
+    prefix: "Az"
+    subject-prefix: "PostgreSQLFlexibleServer"
+    service-name: PostgreSQLFlexibleServer
+    module-name: "{prefix}.{service-name}"
+    output-folder: "{output-dir}"
+    exclude-tableview-properties:
+      - Id
+      - Type
+    directive:
+      - where:
+          subject: Operation
+        hide: true
+      - where:
+          parameter-name: SubscriptionId
+        set:
+          default:
+            script: "(Get-AzContext).Subscription.Id"
+      - where:
+          variant: ^(Create|Update)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
+        remove: true
+      - where:
+          variant: ^CreateViaIdentity$|^CreateViaIdentityExpanded$
+        remove: true
+      - where:
+          verb: Set
+        remove: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

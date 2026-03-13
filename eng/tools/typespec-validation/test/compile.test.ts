@@ -48,7 +48,7 @@ describe("compile", function () {
       // ensure paths are trimmed
       `\t${swaggerPath} \n` +
       // ensure paths are normalized
-      `${path.win32.normalize(swaggerPath)}\n` +
+      `${path.normalize(swaggerPath)}\n` +
       // ensure filtered to JSON files
       "data-plane/readme.md\n" +
       // ensure examples are skipped
@@ -129,6 +129,127 @@ describe("compile", function () {
         ? Promise.resolve('{"info": {"x-typespec-generated": true}}')
         : Promise.resolve('{"info": {"x-cadl-generated": true}}');
     });
+
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+      success: false,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+    });
+  });
+
+  it("should succeed if extra swaggers are only older preview versions", async function () {
+    // Latest preview is 2024-03-01-preview, extra swagger is from 2022-11-01-preview
+    const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+
+    runNpmSpy.mockImplementation(
+      async (): Promise<[Error | null, string, string]> =>
+        Promise.resolve([null, latestPreviewPath, ""]),
+    );
+
+    // Simulate extra older preview swagger (globby always returns posix paths)
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve([latestPreviewPath, olderPreviewPath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    const result = await new CompileRule().execute(mockFolder);
+    expect(result).toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("older versions") as unknown,
+    });
+  });
+
+  it("should fail if extra swaggers include latest preview version", async function () {
+    const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const anotherLatestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/bar.json";
+
+    runNpmSpy.mockImplementation(
+      async (): Promise<[Error | null, string, string]> =>
+        Promise.resolve([null, latestPreviewPath, ""]),
+    );
+
+    // Simulate extra swagger from the latest preview (globby always returns posix paths)
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve([latestPreviewPath, anotherLatestPreviewPath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+      success: false,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+    });
+  });
+
+  it("should fail if extra swaggers include stable versions", async function () {
+    const previewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
+
+    runNpmSpy.mockImplementation(
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, previewPath, ""]),
+    );
+
+    // Simulate extra stable swagger (globby always returns posix paths)
+    vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([previewPath, stablePath]));
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+      success: false,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+    });
+  });
+
+  it("should succeed with multiple older preview versions", async function () {
+    const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const olderPreview1Path = "data-plane/Azure.Foo/preview/2023-01-01-preview/foo.json";
+    const olderPreview2Path = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+
+    runNpmSpy.mockImplementation(
+      async (): Promise<[Error | null, string, string]> =>
+        Promise.resolve([null, latestPreviewPath, ""]),
+    );
+
+    // Simulate multiple extra older preview swaggers (globby always returns posix paths)
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve([latestPreviewPath, olderPreview1Path, olderPreview2Path]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    const result = await new CompileRule().execute(mockFolder);
+    expect(result).toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("older versions") as unknown,
+    });
+  });
+
+  it("should fail if extra swaggers mix preview and stable versions", async function () {
+    const previewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+    const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
+
+    runNpmSpy.mockImplementation(
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, previewPath, ""]),
+    );
+
+    // Simulate extra swaggers with mix of preview and stable (globby always returns posix paths)
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve([previewPath, olderPreviewPath, stablePath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,

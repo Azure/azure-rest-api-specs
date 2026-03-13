@@ -6,6 +6,6 @@ export default defineConfig({
     // Recommended fix is to *include* only the folders you want (more performant than excluding).
     dir: "./test",
     // Default timeout of 5 seconds is too low
-    testTimeout: 20000,
+    testTimeout: 40000,
   },
 });

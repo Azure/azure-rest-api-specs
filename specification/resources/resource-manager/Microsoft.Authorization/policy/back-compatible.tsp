@@ -72,3 +72,33 @@ using Microsoft.Authorization;
   "PolicyTokens"
 );
 @@clientName(PolicyTokensOperationGroup.acquire::parameters.body, "parameters");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PolicyExemptionUpdate.properties);
+
+@@clientName(PolicyExemptions.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(PolicyExemptions.update::parameters.properties, "parameters");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PolicyExemption.properties);
+
+@@clientName(Variables.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Variables.createOrUpdateAtManagementGroup::parameters.resource,
+  "parameters"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(Variable.properties);
+
+@@clientName(VariableValues.createOrUpdate::parameters.resource, "parameters");
+@@clientName(VariableValues.createOrUpdateAtManagementGroup::parameters.resource,
+  "parameters"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VariableValue.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DataPolicyManifest.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DataPolicyManifestProperties.resourceFunctions);
