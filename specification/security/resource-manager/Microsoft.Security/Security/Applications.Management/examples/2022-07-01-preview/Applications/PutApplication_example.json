@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2022-07-01-preview",
+    "application": {
+      "properties": {
+        "description": "An application on critical recommendations",
+        "conditionSets": [
+          {
+            "conditions": [
+              {
+                "operator": "contains",
+                "property": "$.Id",
+                "value": "-bil-"
+              }
+            ]
+          }
+        ],
+        "displayName": "Admin's application",
+        "sourceResourceType": "Assessments"
+      }
+    },
+    "applicationId": "ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "1f3afdf9-d0c9-4c3d-847f-89da613e70a8",
+        "type": "Microsoft.Security/applications",
+        "id": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/applications/ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+        "properties": {
+          "description": "An application on critical recommendations",
+          "conditionSets": [
+            {
+              "conditions": [
+                {
+                  "operator": "contains",
+                  "property": "$.Id",
+                  "value": "-dev-"
+                }
+              ]
+            }
+          ],
+          "displayName": "Admin's application",
+          "sourceResourceType": "Assessments"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "1f3afdf9-d0c9-4c3d-847f-89da613e70a8",
+        "type": "Microsoft.Security/applications",
+        "id": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/applications/ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+        "properties": {
+          "description": "An application on critical recommendations",
+          "conditionSets": [
+            {
+              "conditions": [
+                {
+                  "operator": "contains",
+                  "property": "$.Id",
+                  "value": "-stg-"
+                }
+              ]
+            }
+          ],
+          "displayName": "Admin's application",
+          "sourceResourceType": "Assessments"
+        }
+      }
+    }
+  },
+  "operationId": "Application_CreateOrUpdate",
+  "title": "Create application"
+}

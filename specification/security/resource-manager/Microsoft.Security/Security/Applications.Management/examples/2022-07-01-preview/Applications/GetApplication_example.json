@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2022-07-01-preview",
+    "applicationId": "ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+        "type": "Microsoft.Security/applications",
+        "id": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/applications/ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+        "properties": {
+          "description": "An application on critical recommendations",
+          "conditionSets": [
+            {
+              "conditions": [
+                {
+                  "operator": "contains",
+                  "property": "$.Id",
+                  "value": "-bil-"
+                }
+              ]
+            }
+          ],
+          "displayName": "Admin's application",
+          "sourceResourceType": "Assessments"
+        }
+      }
+    }
+  },
+  "operationId": "Application_Get",
+  "title": "Get security application by specific applicationId"
+}
