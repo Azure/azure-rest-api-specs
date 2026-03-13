@@ -5539,22 +5539,6 @@ model ComputeProperties {
 }
 
 /**
- * Patch model for compute resource updates.
- */
-model ComputePatch {
-  /**
-   * Updated tags for the compute resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  /**
-   * Partial update of compute properties.
-   */
-  properties?: ComputeProperties;
-}
-
-/**
  * The list of cognitive services computes operation response.
  */
 model ComputeListResult {

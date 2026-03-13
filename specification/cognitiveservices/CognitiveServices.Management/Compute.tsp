@@ -21,7 +21,7 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
     Resource = Compute,
     KeyName = "computeName",
     SegmentName = "computes",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+    NamePattern = "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
   >;
 
   /**
@@ -59,7 +59,7 @@ interface Computes {
    */
   @tag("CognitiveServicesComputes")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Compute, PatchModel = ComputePatch>;
+  update is ArmCustomPatchAsync<Compute, PatchModel = Compute>;
 
   /**
    * Deletes the specified compute associated with the Cognitive Services account.
@@ -74,8 +74,8 @@ interface Computes {
   list is ArmResourceListByParent<Compute, Response = ComputeListResult>;
 }
 
-@@maxLength(Compute.name, 64);
-@@minLength(Compute.name, 2);
+@@maxLength(Compute.name, 63);
+@@minLength(Compute.name, 1);
 @@doc(Compute.name, "The name of the compute associated with the Cognitive Services Account.");
 @@doc(Compute.properties, "Properties of Cognitive Services compute.");
 @@doc(Computes.createOrUpdate::parameters.resource, "The compute properties.");
