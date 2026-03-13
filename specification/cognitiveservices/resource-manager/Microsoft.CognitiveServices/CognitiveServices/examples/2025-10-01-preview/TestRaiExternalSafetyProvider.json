@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "accountName": "myCognitiveAccount",
+    "api-version": "2025-10-01-preview",
+    "resourceGroupName": "myResourceGroup",
+    "safetyProvider": {
+      "properties": {
+        "keyVaultUri": "https://contoso-vault.vault.azure.net/",
+        "managedIdentity": "f3b9c2e7-4aad-4b1f-9d9c-9e9b1e9b1f9b",
+        "mode": "sync",
+        "providerId": "00000000-0000-0000-0000-000000000000",
+        "providerName": "safetyProviderName",
+        "secretName": "safety-provider-secret",
+        "url": "https://example-safety-provider.contoso.com/webhook"
+      }
+    },
+    "safetyProviderName": "mySafetyProvider",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mySafetyProvider",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/raiExternalSafetyProviders/mySafetyProvider",
+        "properties": {
+          "keyVaultUri": "https://contoso-vault.vault.azure.net/",
+          "managedIdentity": "f3b9c2e7-4aad-4b1f-9d9c-9e9b1e9b1f9b",
+          "mode": "sync",
+          "providerId": "00000000-0000-0000-0000-000000000000",
+          "providerName": "safetyProviderName",
+          "secretName": "safety-provider-secret",
+          "url": "https://example-safety-provider.contoso.com/webhook"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "mySafetyProvider",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/raiExternalSafetyProviders/mySafetyProvider",
+        "properties": {
+          "keyVaultUri": "https://contoso-vault.vault.azure.net/",
+          "managedIdentity": "f3b9c2e7-4aad-4b1f-9d9c-9e9b1e9b1f9b",
+          "mode": "sync",
+          "providerId": "00000000-0000-0000-0000-000000000000",
+          "providerName": "safetyProviderName",
+          "secretName": "safety-provider-secret",
+          "url": "https://example-safety-provider.contoso.com/webhook"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "The request is invalid."
+        }
+      }
+    }
+  },
+  "operationId": "TestRaiExternalSafetyProvider_CreateOrUpdate",
+  "title": "TestRaiExternalSafetyProvider"
+}

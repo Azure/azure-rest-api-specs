@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "accountName": "accountName",
+    "api-version": "2025-10-01-preview",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "commitmentPlanName",
+            "type": "Microsoft.CognitiveServices/accounts/commitmentPlans",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/commitmentPlans/commitmentPlanName",
+            "properties": {
+              "autoRenew": true,
+              "current": {
+                "tier": "T1"
+              },
+              "hostingModel": "Web",
+              "planType": "Speech2Text"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CommitmentPlans_List",
+  "title": "ListCommitmentPlans"
+}
