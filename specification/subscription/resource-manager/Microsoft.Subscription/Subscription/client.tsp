@@ -2,15 +2,45 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+namespace Microsoft.Subscription;
+
+@@clientLocation(Azure.ResourceManager.SubscriptionIdParameter.subscriptionId,
+  SubscriptionOperationGroup.acceptOwnership
+);
+@@clientLocation(Azure.ResourceManager.SubscriptionIdParameter.subscriptionId,
+  SubscriptionOperationGroup.acceptOwnershipStatus
+);
+
+@@clientLocation(CanceledSubscriptionId.subscriptionId,
+  SubscriptionOperationGroup.rename
+);
+@@clientLocation(CanceledSubscriptionId.subscriptionId,
+  SubscriptionOperationGroup.enable
+);
+@@clientLocation(CanceledSubscriptionId.subscriptionId,
+  SubscriptionOperationGroup.cancel
+);
 
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
 
-@@clientName(Microsoft.Subscription.SubscriptionAliasResponse,
-  "PutAliasResponse",
+@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.cancel,
+  "SubscriptionOperation",
   "java"
 );
-@@clientName(Microsoft.Subscription.SubscriptionAliasResponseProperties,
-  "PutAliasResponseProperties",
+@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.rename,
+  "SubscriptionOperation",
+  "java"
+);
+@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.enable,
+  "SubscriptionOperation",
+  "java"
+);
+@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnership,
+  "Subscriptions",
+  "java"
+);
+@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnershipStatus,
+  "Subscriptions",
   "java"
 );
 
