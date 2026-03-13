@@ -242,15 +242,15 @@ model PiiEntityWithTags is Entity {
   tags?: EntityTag[];
 
   /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   mask?: string;
 
   /** Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   maskOffset?: int32;
 
   /** The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   maskLength?: int32;
 }
 
