@@ -4,8 +4,8 @@
 
 ### Step 2.1: Identify the Case
 
-| Case | Name                    | Description                              | Service Type |
-| ---- | ----------------------- | ---------------------------------------- | ------------ |
+| Case | Name                    | Description                               | Service Type |
+| ---- | ----------------------- | ----------------------------------------- | ------------ |
 | 1    | Add Resource Type       | Define a new ARM resource with operations | ARM          |
 | 2    | Add Resource Operations | Add CRUD or custom actions on a resource  | ARM          |
 
@@ -14,7 +14,7 @@
 
 ### Step 2.2: Collect Inputs
 
-**Case 1 — Add Resource Type (For ARM service only)** 
+**Case 1 — Add Resource Type (For ARM service only)**
 Collect: target API version, resource name (PascalCase), hierarchy (top-level or nested + parent), properties (name, type, required/optional).
 Defaults: top-level → `TrackedResource`, child → `ProxyResource`. Operations: `createOrReplace` (PUT/async), `get`, `update/patch`, `delete` (async), list by parent. Top-level adds list by subscription. Use `createOrReplace` (not `createOrUpdate`), `ArmCustomPatch` for PATCH.
 
@@ -35,4 +35,3 @@ Case:              [Name]
 Target Version:    [version]
 Requested Changes: [summary]
 ```
-

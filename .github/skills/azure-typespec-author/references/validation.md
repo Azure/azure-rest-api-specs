@@ -2,12 +2,12 @@
 
 After applying changes (Step 4), run through all sub-steps below in order.
 
-| Sub-step | Action                     | When            |
-| -------- | -------------------------- | --------------- |
-| 5.1      | TypeSpec Validation        | Always          |
-| 5.2      | Output Path Verification   | Always          |
-| 5.3      | Example Verification       | Always          |
-| 5.4      | Breaking Change Check      | Stable API only |
+| Sub-step | Action                   | When            |
+| -------- | ------------------------ | --------------- |
+| 5.1      | TypeSpec Validation      | Always          |
+| 5.2      | Output Path Verification | Always          |
+| 5.3      | Example Verification     | Always          |
+| 5.4      | Breaking Change Check    | Stable API only |
 
 ### Step 5.1: TypeSpec Validation
 
@@ -54,9 +54,10 @@ Compare changes against the **latest published stable version** and flag:
 | Changed property type         | `string` → `int32`                           |
 | Changed required ↔ optional   | optional `location` becomes required         |
 | Removed resource or operation | `DELETE /widgets/{id}` no longer exists      |
-| Changed response status code  | `200 OK` → `202 Accepted`                   |
+| Changed response status code  | `200 OK` → `202 Accepted`                    |
 | Removed enum member           | `"Running"` removed from `ProvisioningState` |
 
 If breaking changes are detected:
+
 1. List each with before/after comparison.
 2. Require explicit user confirmation before proceeding.
