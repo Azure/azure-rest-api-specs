@@ -98,7 +98,7 @@ namespace Microsoft.ApiCenter;
   "csharp"
 );
 @@clientName(ApiDefinitions.importSpecification,
-  "ImportSpecificationWithResult",
+  "ImportSpecification",
   "csharp"
 );
 @@alternateType(ApiProperties.customProperties, unknown, "csharp");
