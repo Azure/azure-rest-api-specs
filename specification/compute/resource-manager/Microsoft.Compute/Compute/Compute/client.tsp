@@ -179,6 +179,98 @@ using Compute;
   "java"
 );
 
+// C# operation location fixes — resolve collection result name collisions
+// Both "list" and "listAll" on the same interface get mapped to "GetAll",
+// causing duplicate CollectionResult type names. Move "listAll" to a separate
+// interface so each gets a unique collection result type name.
+@@clientLocation(VirtualMachineScaleSets.listAll,
+  "VirtualMachineScaleSetsSubscription",
+  "csharp"
+);
+@@clientLocation(VirtualMachines.listAll,
+  "VirtualMachinesSubscription",
+  "csharp"
+);
+@@clientLocation(RestorePointCollections.listAll,
+  "RestorePointCollectionsSubscription",
+  "csharp"
+);
+
+// C# operation renames — OperationGroup operations with colliding names on the
+// same mockable resource scope need unique C# method names.
+// VirtualMachineImagesEdgeZoneOperationGroup ops renamed to old API names.
+@@clientName(VirtualMachineImagesEdgeZoneOperationGroup.listPublishers,
+  "GetPublishersVirtualMachineImagesEdgeZones",
+  "csharp"
+);
+@@clientName(VirtualMachineImagesEdgeZoneOperationGroup.listOffers,
+  "GetOffersVirtualMachineImagesEdgeZones",
+  "csharp"
+);
+@@clientName(VirtualMachineImagesEdgeZoneOperationGroup.listSkus,
+  "GetVirtualMachineImageEdgeZoneSkus",
+  "csharp"
+);
+@@clientName(VirtualMachineImagesEdgeZoneOperationGroup.list,
+  "GetVirtualMachineImagesEdgeZones",
+  "csharp"
+);
+@@clientName(VirtualMachineImagesEdgeZoneOperationGroup.get,
+  "GetVirtualMachineImagesEdgeZone",
+  "csharp"
+);
+// VirtualMachineImagesOperationGroup ops renamed to old API names.
+@@clientName(VirtualMachineImagesOperationGroup.listPublishers,
+  "GetVirtualMachineImagePublishers",
+  "csharp"
+);
+@@clientName(VirtualMachineImagesOperationGroup.listOffers,
+  "GetVirtualMachineImageOffers",
+  "csharp"
+);
+@@clientName(VirtualMachineImagesOperationGroup.listSkus,
+  "GetVirtualMachineImageSkus",
+  "csharp"
+);
+@@clientName(VirtualMachineImagesOperationGroup.list,
+  "GetVirtualMachineImages",
+  "csharp"
+);
+@@clientName(VirtualMachineImagesOperationGroup.get,
+  "GetVirtualMachineImage",
+  "csharp"
+);
+@@clientName(VirtualMachineImagesOperationGroup.listByEdgeZone,
+  "GetVirtualMachineImagesByEdgeZone",
+  "csharp"
+);
+@@clientName(VirtualMachineImagesOperationGroup.listWithProperties,
+  "GetVirtualMachineImagesWithProperties",
+  "csharp"
+);
+// Other OperationGroup ops renamed to old API names.
+@@clientName(UsageOperationGroup.list, "GetUsages", "csharp");
+@@clientName(VirtualMachineSizesOperationGroup.list,
+  "GetVirtualMachineSizes",
+  "csharp"
+);
+@@clientName(VirtualMachineRunCommandsOperationGroup.list,
+  "GetVirtualMachineRunCommands",
+  "csharp"
+);
+@@clientName(VirtualMachineRunCommandsOperationGroup.get,
+  "GetVirtualMachineRunCommand",
+  "csharp"
+);
+@@clientName(LogAnalyticsOperationGroup.exportThrottledRequests,
+  "ExportLogAnalyticsThrottledRequests",
+  "csharp"
+);
+@@clientName(LogAnalyticsOperationGroup.exportRequestRateByInterval,
+  "ExportLogAnalyticsRequestRateByInterval",
+  "csharp"
+);
+
 // C# model renames — preserve backward compatibility during TypeSpec migration
 
 // VM sub-model renames: prefix with "VirtualMachine" to match old C# names
