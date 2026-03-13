@@ -4132,7 +4132,6 @@ model EndpointProperties extends EndpointPropertiesUpdateParameters {
   /**
    * The custom domains under the endpoint.
    */
-  @visibility(Lifecycle.Read)
   @identifiers(#["name"])
   customDomains?: DeepCreatedCustomDomain[];
 
