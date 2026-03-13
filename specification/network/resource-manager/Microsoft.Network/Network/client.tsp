@@ -721,3 +721,5 @@ namespace CombineClient;
   "loadBalancerFrontendIpConfigurations",
   "java"
 );
+
+@@clientName(CombineClient, "NetworkManagementClient", "javascript");

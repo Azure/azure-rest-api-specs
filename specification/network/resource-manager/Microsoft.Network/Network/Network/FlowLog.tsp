@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./NetworkWatcher.tsp";
+import "../Common/FlowLog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,36 +12,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Network;
-/**
- * A flow log resource.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
-@parentResource(NetworkWatcher)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model FlowLog extends Resource {
-  properties?: FlowLogPropertiesFormat;
-
-  @visibility(Lifecycle.Read)
-  @path
-  @key("flowLogName")
-  @segment("flowLogs")
-  name: string;
-
-  /** A unique read-only string that changes whenever the resource is updated. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * FlowLog resource Managed Identity
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: ManagedServiceIdentity;
-}
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)

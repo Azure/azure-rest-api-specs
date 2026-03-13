@@ -2,43 +2,15 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Microsoft.Network;
 
 namespace Microsoft.Compute;
-/**
- * Public IP address resource.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PublicIPAddress
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PublicIPAddressPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = PublicIPAddress,
-    KeyName = "publicIpAddressName",
-    SegmentName = "publicipaddresses",
-    NamePattern = ""
-  >;
-
-  /**
-   * The extended location of the public ip address.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  extendedLocation?: ExtendedLocation;
-
-  /**
-   * The public IP address SKU.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  sku?: PublicIPAddressSku;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
-}
 
 /**
  * A pageable collection of virtual machine scale set public IP addresses.
@@ -135,7 +107,11 @@ interface PublicIPAddresses {
       @key
       ipConfigurationName: string;
     },
+<<<<<<< HEAD
     Response = ArmResponse<VmssPublicIpAddressListResult>,
+=======
+    Response = ArmResponse<ResourceListResult<PublicIPAddress>>,
+>>>>>>> Convert-Network-2025-05
     OverrideErrorType = CloudError
   >;
 }

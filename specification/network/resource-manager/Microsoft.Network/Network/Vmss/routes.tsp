@@ -1,8 +1,8 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
-
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "./models.tsp";
+import "../Common/main.tsp";
+import "../Common/NetworkInterface.tsp";
+import "../Common/PublicIPAddress.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
@@ -10,8 +10,33 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using Microsoft.Network;
 
 namespace Microsoft.Compute;
+
+alias NetworkInterfaceListOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {},
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute",
+  }
+>;
+
+alias PublicIPAddressListOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {},
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute",
+  }
+>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface NetworkInterfacesOperationGroup {
@@ -19,47 +44,61 @@ interface NetworkInterfacesOperationGroup {
    * Gets all network interfaces in a virtual machine scale set.
    */
   @tag("NetworkInterfaces")
-  @autoRoute
   @get
   @list
+<<<<<<< HEAD
   @action("networkInterfaces")
   listVirtualMachineScaleSetNetworkInterfaces is ArmProviderActionSync<
     Response = VmssNetworkInterfaceListResult,
     Scope = Extension.ResourceGroup,
+=======
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/networkInterfaces")
+  listVirtualMachineScaleSetNetworkInterfaces is NetworkInterfaceListOps.ActionSync<
+    NetworkInterface,
+    Request = void,
+>>>>>>> Convert-Network-2025-05
     Parameters = {
       /**
        * The name of the virtual machine scale set.
        */
       @path
-      @segment("virtualMachineScaleSets")
+      @key
       virtualMachineScaleSetName: string;
     },
-    Error = CloudError
+    Response = ArmResponse<ResourceListResult<NetworkInterface>>,
+    OverrideErrorType = CloudError
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PublicIPAddressesOperationGroup {
   /**
    * Gets information about all public IP addresses on a virtual machine scale set level.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @autoRoute
   @get
   @list
+<<<<<<< HEAD
   @action("publicipaddresses")
   listVirtualMachineScaleSetPublicIPAddresses is ArmProviderActionSync<
     Response = VmssPublicIpAddressListResult,
     Scope = Extension.ResourceGroup,
+=======
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/publicipaddresses")
+  listVirtualMachineScaleSetPublicIPAddresses is PublicIPAddressListOps.ActionSync<
+    PublicIPAddress,
+    Request = void,
+>>>>>>> Convert-Network-2025-05
     Parameters = {
       /**
        * The name of the virtual machine scale set.
        */
       @path
-      @segment("virtualMachineScaleSets")
+      @key
       virtualMachineScaleSetName: string;
     },
-    Error = CloudError
+    Response = ArmResponse<ResourceListResult<PublicIPAddress>>,
+    OverrideErrorType = CloudError
   >;
 }

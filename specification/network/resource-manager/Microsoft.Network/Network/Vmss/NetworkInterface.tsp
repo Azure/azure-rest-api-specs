@@ -2,36 +2,16 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "../Common/main.tsp";
+import "../Common/NetworkInterface.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Microsoft.Network;
 
 namespace Microsoft.Compute;
-/**
- * A network interface in a resource group.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model NetworkInterface
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NetworkInterfacePropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = NetworkInterface,
-    KeyName = "networkInterfaceName",
-    SegmentName = "networkInterfaces",
-    NamePattern = ""
-  >;
-
-  /**
-   * The extended location of the network interface.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  extendedLocation?: ExtendedLocation;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
-}
 
 /**
  * A pageable collection of virtual machine scale set network interfaces.
@@ -107,7 +87,11 @@ interface NetworkInterfaces {
       @key
       virtualmachineIndex: string;
     },
+<<<<<<< HEAD
     Response = ArmResponse<VmssNetworkInterfaceListResult>,
+=======
+    Response = ArmResponse<ResourceListResult<NetworkInterface>>,
+>>>>>>> Convert-Network-2025-05
     OverrideErrorType = CloudError
   >;
 }

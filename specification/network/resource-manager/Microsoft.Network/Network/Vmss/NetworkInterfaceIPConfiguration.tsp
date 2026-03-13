@@ -2,30 +2,17 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
-import "./NetworkInterface.tsp";
+import "../Common/main.tsp";
+import "../Common/NetworkInterface.tsp";
+import "../Common/NetworkInterfaceTapConfiguration.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Microsoft.Network;
 
 namespace Microsoft.Compute;
-/**
- * IPConfiguration in a network interface.
- */
-@parentResource(NetworkInterface)
-model NetworkInterfaceIPConfiguration
-  is Azure.ResourceManager.ProxyResource<NetworkInterfaceIPConfigurationPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = NetworkInterfaceIPConfiguration,
-    KeyName = "ipConfigurationName",
-    SegmentName = "ipConfigurations",
-    NamePattern = ""
-  >;
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
-}
 
 alias NetworkInterfaceIPConfigurationOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
