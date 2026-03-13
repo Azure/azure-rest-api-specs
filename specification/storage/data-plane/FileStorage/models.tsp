@@ -1376,9 +1376,18 @@ model ShareStats {
   @Xml.name("ShareUsageBytes") shareUsageBytes: int32;
 }
 
+/** Represents an array of signed identifiers */
+model SignedIdentifiers {
+  /** The array of signed identifiers. */
+  @Xml.unwrapped
+  @Xml.name("SignedIdentifier")
+  items: Array<SignedIdentifier>;
+}
+
 /**
  * Signed identifier.
  */
+@Xml.name("SignedIdentifier")
 model SignedIdentifier {
   /**
    * A unique id.

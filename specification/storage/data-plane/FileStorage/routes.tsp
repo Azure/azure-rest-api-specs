@@ -635,7 +635,7 @@ interface Share {
 
       /** The ACL for the share. */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing storage API."
-      @body shareAcl?: SignedIdentifier[];
+      @body shareAcl?: SignedIdentifiers;
     },
     {
       ...EtagResponseHeader;
