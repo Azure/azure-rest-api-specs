@@ -33,7 +33,9 @@ describe("validate-arm-leases", () => {
 
     it("rejects invalid files", () => {
       expect(isFileAllowed(".github/arm-leases/anything/here")).toBe(false);
-      expect(isFileAllowed(".github/arm-leases/testservice/Microsoft.Test/other.yaml")).toBe(false);
+      expect(
+        isFileAllowed(".github/arm-leases/testservice/Microsoft.Test/other.yaml"),
+      ).toBe(false);
       expect(isFileAllowed(".github/arm-leases/badtest/No.Yaml/no.md")).toBe(false);
     });
   });
@@ -79,6 +81,11 @@ describe("validate-arm-leases", () => {
     });
 
     it("rejects invalid resource-provider", () => {
+      expect(
+        leaseSchema.safeParse({
+          lease: { ...validLease.lease, "resource-provider": "microsoft.Test" },
+        }).success,
+      ).toBe(false);
       expect(
         leaseSchema.safeParse({
           lease: { ...validLease.lease, "resource-provider": "microsoft.Test" },
