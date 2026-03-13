@@ -524,16 +524,7 @@ model HorizonDbParameterGroupForPatchUpdate {
 }
 
 @doc("Connection information for HorizonDb parameter group")
-model HorizonDbParameterGroupConnections {
-  @doc("List of clusters connected to the parameter group")
-  clusters?: ConnectionInfo[];
-
-  @doc("List of pools connected to the parameter group")
-  pools?: ConnectionInfo[];
-}
-
-@doc("Connection information for a cluster or pool")
-model ConnectionInfo {
+model HorizonDbParameterGroupConnectionProperties {
   @doc("The name of the connected resource")
   name?: string;
 

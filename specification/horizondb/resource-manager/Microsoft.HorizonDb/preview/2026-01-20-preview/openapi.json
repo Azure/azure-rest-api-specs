@@ -2081,7 +2081,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}/connections": {
       "get": {
-        "operationId": "HorizonDbParameterGroups_GetConnections",
+        "operationId": "HorizonDbParameterGroups_ListConnections",
         "tags": [
           "HorizonDbParameterGroups"
         ],
@@ -2111,7 +2111,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroupConnections"
+              "$ref": "#/definitions/HorizonDbParameterGroupConnectionPropertiesListResult"
             }
           },
           "default": {
@@ -2122,9 +2122,12 @@
           }
         },
         "x-ms-examples": {
-          "Get connections for a HorizonDb parameter group": {
-            "$ref": "./examples/ParameterGroups_GetConnections.json"
+          "List connections for a HorizonDb parameter group": {
+            "$ref": "./examples/ParameterGroups_ListConnections.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2190,25 +2193,6 @@
     }
   },
   "definitions": {
-    "ConnectionInfo": {
-      "type": "object",
-      "description": "Connection information for a cluster or pool",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the connected resource"
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the connected resource"
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource"
-        }
-      }
-    },
     "CreateModeCluster": {
       "type": "string",
       "description": "The mode to create a new HorizonDb cluster",
@@ -2601,25 +2585,45 @@
         }
       ]
     },
-    "HorizonDbParameterGroupConnections": {
+    "HorizonDbParameterGroupConnectionProperties": {
       "type": "object",
       "description": "Connection information for HorizonDb parameter group",
       "properties": {
-        "clusters": {
-          "type": "array",
-          "description": "List of clusters connected to the parameter group",
-          "items": {
-            "$ref": "#/definitions/ConnectionInfo"
-          }
+        "name": {
+          "type": "string",
+          "description": "The name of the connected resource"
         },
-        "pools": {
-          "type": "array",
-          "description": "List of pools connected to the parameter group",
-          "items": {
-            "$ref": "#/definitions/ConnectionInfo"
-          }
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the connected resource"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource"
         }
       }
+    },
+    "HorizonDbParameterGroupConnectionPropertiesListResult": {
+      "type": "object",
+      "description": "The response of a HorizonDbParameterGroupConnectionProperties list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HorizonDbParameterGroupConnectionProperties items on this page",
+          "items": {
+            "$ref": "#/definitions/HorizonDbParameterGroupConnectionProperties"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "HorizonDbParameterGroupForPatchUpdate": {
       "type": "object",
