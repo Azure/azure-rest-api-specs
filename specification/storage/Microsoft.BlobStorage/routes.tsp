@@ -794,8 +794,8 @@ interface Blob {
     ...ImmutabilityPolicyExpiresOnResponseHeader;
     ...ImmutabilityPolicyModeResponseHeader;
     ...LegalHoldOptionalResponseHeader;
-    ...StructuredBodyTypeResponseHeader;
-    ...StructuredContentLengthResponseHeader;
+    ...StructuredBodyTypeResponseHeaderPrivate;
+    ...StructuredContentLengthResponseHeaderPrivate;
     ...ApiVersionHeader;
   }) | Error;
 
@@ -1558,7 +1558,7 @@ interface PageBlob {
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
-      ...StructuredBodyTypeResponseHeader;
+      ...StructuredBodyTypeResponseHeaderPrivate;
     },
     "application/octet-stream"
   >;
@@ -1907,7 +1907,7 @@ interface AppendBlob {
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
-      ...StructuredBodyTypeResponseHeader;
+      ...StructuredBodyTypeResponseHeaderPrivate;
     },
     "application/octet-stream"
   >;
@@ -2044,7 +2044,7 @@ interface BlockBlob {
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
-      ...StructuredBodyTypeResponseHeader;
+      ...StructuredBodyTypeResponseHeaderPrivate;
     },
     "application/octet-stream"
   >;
@@ -2147,7 +2147,7 @@ interface BlockBlob {
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
-      ...StructuredBodyTypeResponseHeader;
+      ...StructuredBodyTypeResponseHeaderPrivate;
     },
     "application/octet-stream"
   >;
