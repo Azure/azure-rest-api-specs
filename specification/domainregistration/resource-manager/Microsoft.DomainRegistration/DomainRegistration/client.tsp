@@ -73,3 +73,18 @@ using Microsoft.DomainRegistration;
   armResourceIdentifier,
   "csharp"
 );
+
+// Below is the workaround for C# code generation to produce the correct class inheritance hierarchy for DomainPatchResource.
+/**
+ * ARM resource for a domain patch operation.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Composition is used here to reuse common resource model."
+model DomainPatch extends Azure.ResourceManager.CommonTypes.Resource {
+  ...OmitProperties<DomainPatchResource, "id" | "name" | "type">;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The tags property is intentionally included because the domain is TrackedResource, which supports updating tags."
+  tags?: Record<string>;
+}
+@@alternateType(DomainPatchResource, DomainPatch, "csharp");
+@@clientName(DomainPatch, "AppServiceDomainPatch", "csharp");
