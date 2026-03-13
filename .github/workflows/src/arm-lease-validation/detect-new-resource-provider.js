@@ -136,16 +136,15 @@ function extractResourceProviders(files) {
  * @returns {Promise<{ status: string, labelActions: ManagedLabelActions }>}
  */
 export default async function detectNewResourceProvider({ core }) {
-  const repoRoot = process.env.GITHUB_WORKSPACE;
-  const git = simpleGit(repoRoot);
-
-  core.info("Detecting New Resource Providers");
-
   const options = {
     cwd: process.env.GITHUB_WORKSPACE,
     paths: ["specification"],
     logger: new CoreLogger(core),
   };
+
+  const git = simpleGit(options.cwd);
+
+  core.info("Detecting New Resource Providers");
 
   const changedFiles = await getChangedFiles(options);
   const rmFiles = changedFiles.filter(resourceManager);
@@ -161,7 +160,7 @@ export default async function detectNewResourceProvider({ core }) {
         if (match) {
           // Extract path up to and including the namespace: specification/<orgName>/resource-manager/<namespace>
           // match[0] includes trailing slash, so strip it
-          return f.substring(0, match.index + match[0].length - 1);
+          return f.substring(0, /** @type {number} */ (match.index) + match[0].length - 1);
         }
         return null;
       })
@@ -203,7 +202,7 @@ export default async function detectNewResourceProvider({ core }) {
     if (!hasAtLeastOneBrandNewRP) {
       core.info("No brand new resource providers detected, spec directories exist in base branch.");
       core.info("Checking for new resource types in existing RPs...");
-      return await checkNewResourceTypes(repoRoot, rmFiles, core);
+      return await checkNewResourceTypes(rmFiles, core);
     }
   }
 
@@ -224,7 +223,7 @@ export default async function detectNewResourceProvider({ core }) {
   if (newResourceProviders.length === 0) {
     core.info("No new resource providers detected.");
     core.info("Checking for new resource types in existing RPs...");
-    return await checkNewResourceTypes(repoRoot, rmFiles, core);
+    return await checkNewResourceTypes(rmFiles, core);
   }
 
   core.info(`Detected ${newResourceProviders.length} new resource provider(s)`);
@@ -262,7 +261,7 @@ export default async function detectNewResourceProvider({ core }) {
   }
 
   core.info("Checking for new resource types in existing RPs...");
-  const newRtResult = await checkNewResourceTypes(repoRoot, rmFiles, core);
+  const newRtResult = await checkNewResourceTypes(rmFiles, core);
 
   // Merge label actions: 'add' wins over 'remove' wins over 'none'
   /** @type {ManagedLabelActions} */
@@ -285,14 +284,12 @@ export default async function detectNewResourceProvider({ core }) {
 /**
  * Check for new resource types in existing RPs and validate their leases.
  *
- * @param {string} repoRoot - Repository root directory
  * @param {string[]} rmFiles - Resource-manager file paths changed in the PR
  * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
  * @returns {Promise<{ status: string, labelActions: ManagedLabelActions }>}
  */
-async function checkNewResourceTypes(repoRoot, rmFiles, core) {
+async function checkNewResourceTypes(rmFiles, core) {
   const newRtResults = await detectNewResourceTypes({
-    repoRoot,
     rmFiles,
     core,
   });

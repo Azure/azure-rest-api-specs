@@ -54,27 +54,29 @@ function setupGit({
   headFiles = new Map(),
   fileContents = new Map(),
 } = {}) {
-  mockRaw.mockImplementation((args) => {
+  mockRaw.mockImplementation(/** @type {any} */ (/** @param {string[]} args */ (args) => {
     if (args[0] === "ls-tree" && args.includes("-r")) {
       const commitish = args[3];
       const namespacePath = args[4];
       const filesMap = commitish === "HEAD" ? headFiles : baseFiles;
-      if (filesMap.has(namespacePath)) {
-        return filesMap.get(namespacePath).join("\n");
+      const files = filesMap.get(namespacePath);
+      if (files) {
+        return files.join("\n");
       }
       throw new Error(`path '${namespacePath}' does not exist`);
     }
     return "";
-  });
+  }));
 
-  mockShow.mockImplementation((args) => {
-    const key = String(args[0]); // "ref:filepath"
-    if (fileContents.has(key)) {
-      return fileContents.get(key);
+  mockShow.mockImplementation(/** @type {any} */ (/** @param {string[]=} args */ (args) => {
+    const key = String(args?.[0]); // "ref:filepath"
+    const content = fileContents.get(key);
+    if (content !== undefined) {
+      return content;
     }
     const msg = `path does not exist: ${key}`;
     throw new Error(msg);
-  });
+  }));
 }
 
 // ── tests ───────────────────────────────────────────────────────────────
@@ -86,8 +88,6 @@ describe("detectNewResourceTypes", () => {
 
   it("returns empty when rmFiles has no version-pattern matches", async () => {
     const result = await detectNewResourceTypes({
-      repoRoot: "/fake/repo",
-      
       rmFiles: ["specification/compute/resource-manager/readme.md"],
       core,
     });
@@ -98,8 +98,6 @@ describe("detectNewResourceTypes", () => {
 
   it("returns empty when rmFiles is empty", async () => {
     const result = await detectNewResourceTypes({
-      repoRoot: "/fake/repo",
-      
       rmFiles: [],
       core,
     });
@@ -114,8 +112,6 @@ describe("detectNewResourceTypes", () => {
     setupGit({ baseFiles: new Map() }); // ls-tree throws → no base
 
     const result = await detectNewResourceTypes({
-      repoRoot: "/fake/repo",
-      
       rmFiles: [rmFile],
       core,
     });
@@ -140,8 +136,6 @@ describe("detectNewResourceTypes", () => {
     });
 
     const result = await detectNewResourceTypes({
-      repoRoot: "/fake/repo",
-      
       rmFiles: [file],
       core,
     });
@@ -166,8 +160,6 @@ describe("detectNewResourceTypes", () => {
     });
 
     const result = await detectNewResourceTypes({
-      repoRoot: "/fake/repo",
-      
       rmFiles: [file],
       core,
     });
@@ -213,8 +205,6 @@ describe("detectNewResourceTypes", () => {
     });
 
     const result = await detectNewResourceTypes({
-      repoRoot: "/fake/repo",
-      
       rmFiles: [computeFile, networkFile],
       core,
     });
@@ -241,8 +231,6 @@ describe("detectNewResourceTypes", () => {
     });
 
     await detectNewResourceTypes({
-      repoRoot: "/fake/repo",
-      
       rmFiles: [file],
       core,
     });
@@ -269,8 +257,6 @@ describe("detectNewResourceTypes", () => {
     });
 
     await detectNewResourceTypes({
-      repoRoot: "/fake/repo",
-      
       rmFiles: [file],
       core,
     });
@@ -323,7 +309,6 @@ describe("detectNewResourceTypes", () => {
     });
 
     const result = await detectNewResourceTypes({
-      repoRoot: "/fake/repo",
       rmFiles: [previewFile],
       core,
     });
@@ -335,8 +320,8 @@ describe("detectNewResourceTypes", () => {
       t.resourceType === "Microsoft.Compute/quantumVMs",
     );
     expect(quantumType).toBeDefined();
-    expect(quantumType.operations).toContain("GET");
-    expect(quantumType.operations).toContain("PUT");
+    expect(quantumType?.operations).toContain("GET");
+    expect(quantumType?.operations).toContain("PUT");
   });
 
   it("detects new resource types from path-based detection", async () => {
@@ -368,8 +353,6 @@ describe("detectNewResourceTypes", () => {
     });
 
     const result = await detectNewResourceTypes({
-      repoRoot: "/fake/repo",
-      
       rmFiles: [newFile],
       core,
     });
@@ -381,7 +364,7 @@ describe("detectNewResourceTypes", () => {
       t.resourceType === "Microsoft.Compute/superDisks",
     );
     expect(superDisksType).toBeDefined();
-    expect(superDisksType.operations).toContain("GET");
+    expect(superDisksType?.operations).toContain("GET");
     // superDisks/metrics is also new
     const metricsType = result[0].newResourceTypes.find((t) =>
       t.resourceType === "Microsoft.Compute/superDisks/metrics",
@@ -415,8 +398,6 @@ describe("detectNewResourceTypes", () => {
     });
 
     const result = await detectNewResourceTypes({
-      repoRoot: "/fake/repo",
-      
       rmFiles: [newFile],
       core,
     });

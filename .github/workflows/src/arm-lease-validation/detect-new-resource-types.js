@@ -171,17 +171,15 @@ async function getResourceTypesAtRef(git, gitRef, specPath, branchName) {
  * present in HEAD but absent from base is new.
  *
  * @param {Object} params
- * @param {string} params.repoRoot - Repository root directory
  * @param {string[]} params.rmFiles - Resource-manager file paths changed in the PR
  * @param {import("@actions/core")} params.core - GitHub Actions core for logging
  * @returns {Promise<Array<{rpNamespace: string, orgName: string, serviceName: string, newResourceTypes: Array<{resourceType: string, provider: string, modelName: string | null, operations: string[]}>}>>}
  */
 export async function detectNewResourceTypes({
-  repoRoot,
   rmFiles,
   core,
 }) {
-  const git = simpleGit(repoRoot);
+  const git = simpleGit(process.env.GITHUB_WORKSPACE);
 
   // Group changed RM swagger files by service subdirectory (rpNamespace + serviceName)
   /** @type {Map<string, {orgName: string, specPath: string, rpNamespace: string, serviceName: string}>} */

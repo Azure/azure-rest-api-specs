@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { createMockCore, createMockContext } from "../mocks.js";
+import { createMockCore } from "../mocks.js";
 
 /** @type {import("vitest").MockedFunction<import("simple-git").SimpleGit["raw"]>} */
 const mockRaw = vi.hoisted(() => vi.fn().mockResolvedValue(""));
@@ -22,7 +22,6 @@ import { detectNewResourceTypes } from "../../src/arm-lease-validation/detect-ne
 import detectNewResourceProvider from "../../src/arm-lease-validation/detect-new-resource-provider.js";
 
 const core = createMockCore();
-const context = createMockContext();
 
 describe("detectNewResourceProvider", () => {
   afterEach(() => {
@@ -40,7 +39,7 @@ describe("detectNewResourceProvider", () => {
     // Pre-check: file exists in base → not brand new
     vi.mocked(mockRaw).mockResolvedValue(rmFile);
 
-    const result = await detectNewResourceProvider({ context, core });
+    const result = await detectNewResourceProvider({ core });
 
     expect(result.status).toBe("no-new-rp");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("remove");
@@ -58,7 +57,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
     vi.mocked(checkLease).mockResolvedValue(true);
 
-    const result = await detectNewResourceProvider({ context, core });
+    const result = await detectNewResourceProvider({ core });
 
     expect(result.status).toBe("new-rp-all-leases-valid");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("remove");
@@ -77,7 +76,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
     vi.mocked(checkLease).mockResolvedValue(false);
 
-    const result = await detectNewResourceProvider({ context, core });
+    const result = await detectNewResourceProvider({ core });
 
     expect(result.status).toBe("new-rp-invalid-lease");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("add");
@@ -99,9 +98,9 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
 
     // SvcA valid, SvcB invalid
-    vi.mocked(checkLease).mockImplementation((orgName) => orgName === "svcA");
+    vi.mocked(checkLease).mockImplementation((orgName) => Promise.resolve(orgName === "svcA"));
 
-    const result = await detectNewResourceProvider({ context, core });
+    const result = await detectNewResourceProvider({ core });
 
     expect(result.status).toBe("new-rp-invalid-lease");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("add");
@@ -121,7 +120,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
     vi.mocked(checkLease).mockResolvedValue(true);
 
-    const result = await detectNewResourceProvider({ context, core });
+    const result = await detectNewResourceProvider({ core });
 
     expect(result.status).toBe("new-rp-all-leases-valid");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("remove");
@@ -138,7 +137,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
     vi.mocked(checkLease).mockResolvedValue(true);
 
-    await detectNewResourceProvider({ context, core });
+    await detectNewResourceProvider({ core });
 
     expect(checkLease).toHaveBeenCalledWith("svc", "Microsoft.Svc", "ComputeRP");
   });
@@ -151,7 +150,7 @@ describe("detectNewResourceProvider", () => {
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([rmFile]);
     vi.mocked(mockRaw).mockResolvedValue(rmFile);
 
-    const result = await detectNewResourceProvider({ context, core });
+    const result = await detectNewResourceProvider({ core });
 
     expect(result.labelActions.ARMModelingReviewRequired).toBe("remove");
     expect(result.labelActions.ARMModelingSignedOff).toBe("remove");
@@ -167,7 +166,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
     vi.mocked(checkLease).mockResolvedValue(false);
 
-    const result = await detectNewResourceProvider({ context, core });
+    const result = await detectNewResourceProvider({ core });
 
     expect(result.labelActions.ARMModelingReviewRequired).toBe("add");
     expect(result.labelActions.ARMModelingSignedOff).toBe("remove");
@@ -183,7 +182,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
     vi.mocked(checkLease).mockResolvedValue(true);
 
-    const result = await detectNewResourceProvider({ context, core });
+    const result = await detectNewResourceProvider({ core });
 
     expect(result.labelActions.ARMModelingReviewRequired).toBe("remove");
     expect(result.labelActions.ARMModelingSignedOff).toBe("remove");
@@ -202,11 +201,11 @@ describe("detectNewResourceProvider", () => {
 
     // detectNewResourceTypes returns new RT
     vi.mocked(detectNewResourceTypes).mockResolvedValue([
-      { rpNamespace: "Microsoft.Compute", orgName: "compute", serviceName: "", newResourceTypes: [{ resourceType: "Microsoft.Compute/disks" }] },
+      { rpNamespace: "Microsoft.Compute", orgName: "compute", serviceName: "", newResourceTypes: [{ resourceType: "Microsoft.Compute/disks", provider: "Microsoft.Compute", modelName: null, operations: ["GET"] }] },
     ]);
     vi.mocked(checkLease).mockResolvedValue(true);
 
-    const result = await detectNewResourceProvider({ context, core });
+    const result = await detectNewResourceProvider({ core });
 
     expect(result.status).toBe("new-rt-all-leases-valid");
     expect(result.labelActions.ARMModelingAutoSignedOff).toBe("add");
@@ -223,11 +222,11 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue(rmFile);
 
     vi.mocked(detectNewResourceTypes).mockResolvedValue([
-      { rpNamespace: "Microsoft.Compute", orgName: "compute", serviceName: "", newResourceTypes: [{ resourceType: "Microsoft.Compute/disks" }] },
+      { rpNamespace: "Microsoft.Compute", orgName: "compute", serviceName: "", newResourceTypes: [{ resourceType: "Microsoft.Compute/disks", provider: "Microsoft.Compute", modelName: null, operations: ["GET"] }] },
     ]);
     vi.mocked(checkLease).mockResolvedValue(false);
 
-    const result = await detectNewResourceProvider({ context, core });
+    const result = await detectNewResourceProvider({ core });
 
     expect(result.status).toBe("new-rt-invalid-lease");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("add");
@@ -244,7 +243,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue(rmFile);
     vi.mocked(detectNewResourceTypes).mockResolvedValue([]);
 
-    const result = await detectNewResourceProvider({ context, core });
+    const result = await detectNewResourceProvider({ core });
 
     expect(result.status).toBe("no-new-rp");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("remove");

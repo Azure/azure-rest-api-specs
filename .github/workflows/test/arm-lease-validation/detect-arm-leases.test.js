@@ -33,7 +33,10 @@ function daysAgo(n) {
   return today().subtract({ days: n }).toString();
 }
 
-/** Build a valid lease YAML string */
+/** Build a valid lease YAML string
+ * @param {string} startdate
+ * @param {string} duration
+ */
 function leaseYaml(startdate, duration) {
   return `lease:\n  startdate: "${startdate}"\n  duration: "${duration}"\n`;
 }
