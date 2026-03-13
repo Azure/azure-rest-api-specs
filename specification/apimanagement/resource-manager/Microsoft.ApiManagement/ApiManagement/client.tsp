@@ -297,3 +297,30 @@ op replacePurge(
 @@clientLocation(TagContractOperationGroup.update, "ApiManagementTag", "csharp");
 @@clientLocation(TagContractOperationGroup.delete, "ApiManagementTag", "csharp");
 @@clientLocation(TagContractOperationGroup.listByService, "ApiManagementTag", "csharp");
+
+// C#-specific: Override ARM base Resource.id type from string to ResourceIdentifier
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// C#-specific: Rename properties that shadow ResourceData base class members
+@@clientName(AccessInformationContractProperties.id, "AccessInfoType", "csharp");
+@@clientName(ContentTypeContractProperties.id, "ContentTypeIdentifier", "csharp");
+@@clientName(ContentTypeContractProperties.name, "ContentTypeName", "csharp");
+@@clientName(OperationResultContractProperties.id, "OperationResultIdentifier", "csharp");
+
+// C#-specific: Format conversions (alternateType) for backward-compat type matching
+@@alternateType(ConnectivityStatusContract.lastUpdated, utcDateTime, "csharp");
+@@alternateType(ConnectivityStatusContract.lastStatusChange, utcDateTime, "csharp");
+@@alternateType(ApiEntityBaseContract.termsOfServiceUrl, url, "csharp");
+@@alternateType(ConnectivityHop.address, Azure.Core.ipV4Address, "csharp");
+@@alternateType(ConnectivityHop.resourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(ApiManagementServiceBaseProperties.publicIPAddresses, Azure.Core.ipV4Address[], "csharp");
+@@alternateType(ApiManagementServiceBaseProperties.privateIPAddresses, Azure.Core.ipV4Address[], "csharp");
+@@alternateType(ApiManagementServiceBaseProperties.gatewayRegionalUrl, url, "csharp");
+@@alternateType(AdditionalLocation.publicIPAddresses, Azure.Core.ipV4Address[], "csharp");
+@@alternateType(AdditionalLocation.privateIPAddresses, Azure.Core.ipV4Address[], "csharp");
+@@alternateType(AdditionalLocation.gatewayRegionalUrl, url, "csharp");
+@@alternateType(RequestReportRecordContract.url, url, "csharp");
+@@alternateType(RequestReportRecordContract.ipAddress, Azure.Core.ipV4Address, "csharp");
