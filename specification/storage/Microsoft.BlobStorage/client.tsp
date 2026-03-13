@@ -99,6 +99,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 
 @@usage(BlobName, Usage.output, "rust");
 
+@@access(Error, Access.internal, "rust");
+
 @@alternateType(BlobItem.name, string, "rust");
 @@alternateType(BlobPrefix.name, string, "rust");
 
@@ -159,6 +161,14 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 );
 @@alternateType(StructuredContentLengthResponseHeader.structuredContentLength,
   uint64,
+  "rust"
+);
+@@access(StructuredContentLengthParameter.structuredContentLength,
+  Access.internal,
+  "rust"
+);
+@@access(StructuredContentLengthResponseHeader.structuredContentLength,
+  Access.internal,
   "rust"
 );
 
