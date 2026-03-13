@@ -220,6 +220,7 @@ using Microsoft.EventHub;
 @@clientName(AccessRights, "EventHubsAccessRight", "csharp");
 @@clientName(ConsumerGroup, "EventHubsConsumerGroup", "csharp");
 @@clientName(SchemaGroup, "EventHubsSchemaGroup", "csharp");
+@@clientName(FailOverProperties.force, "IsForced", "csharp");
 @@usage(ClusterQuotaConfigurationProperties, Usage.input, "csharp");
 @@usage(CheckNameAvailabilityParameter, Usage.input | Usage.output, "csharp");
 @@usage(FailOver, Usage.input | Usage.output, "csharp");
