@@ -1,322 +1,53 @@
 {
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators__deleted": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators": {
       "get": {
-        "operationId": "SecurityOperators_List",
-        "tags": [
-          "SecurityOperators"
-        ],
-        "description": "Lists Microsoft Defender for Cloud securityOperators in the subscription.",
-        "parameters": [
-          {
-            "name": "pricingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$"
-          }
-        ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SecurityOperatorList"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "List SecurityOperators": {
-            "$ref": "./examples/SecurityOperators/ListSecurityOperators_example.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators/{securityOperatorName}__deleted": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators/{securityOperatorName}": {
       "get": {
-        "operationId": "SecurityOperators_Get",
-        "tags": [
-          "SecurityOperators"
-        ],
-        "description": "Get a specific security operator for the requested scope.",
-        "parameters": [
-          {
-            "name": "pricingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$"
-          },
-          {
-            "name": "securityOperatorName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$"
-          }
-        ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SecurityOperator"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get a specific security operator by scope and securityOperatorName": {
-            "$ref": "./examples/SecurityOperators/GetSecurityOperatorByName_example.json"
           }
         }
       },
       "put": {
-        "operationId": "SecurityOperators_CreateOrUpdate",
-        "tags": [
-          "SecurityOperators"
-        ],
-        "description": "Creates Microsoft Defender for Cloud security operator on the given scope.",
-        "parameters": [
-          {
-            "name": "pricingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$"
-          },
-          {
-            "name": "securityOperatorName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$"
-          }
-        ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SecurityOperator"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create a security operator on the given scope": {
-            "$ref": "./examples/SecurityOperators/PutSecurityOperatorByName_example.json"
           }
         }
       },
       "delete": {
-        "operationId": "SecurityOperators_Delete",
-        "tags": [
-          "SecurityOperators"
-        ],
-        "description": "Delete Microsoft Defender for Cloud securityOperator in the subscription.",
-        "parameters": [
-          {
-            "name": "pricingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$"
-          },
-          {
-            "name": "securityOperatorName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$"
-          }
-        ],
         "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete SecurityOperator on subscription": {
-            "$ref": "./examples/SecurityOperators/DeleteSecurityOperatorByName_example.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.Security/securityOperators__added": {
-      "get": {
-        "operationId": "SecurityOperators_List",
-        "tags": [
-          "SecurityOperators"
-        ],
-        "description": "Lists Microsoft Defender for Cloud securityOperators in the subscription.",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SecurityOperatorList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List SecurityOperators": {
-            "$ref": "./examples/SecurityOperators/ListSecurityOperators_example.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.Security/securityOperators/{securityOperatorName}__added": {
-      "get": {
-        "operationId": "SecurityOperators_Get",
-        "tags": [
-          "SecurityOperators"
-        ],
-        "description": "Get a specific security operator for the requested scope.",
-        "parameters": [
-          {
-            "name": "securityOperatorName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SecurityOperator"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a specific security operator by scope and securityOperatorName": {
-            "$ref": "./examples/SecurityOperators/GetSecurityOperatorByName_example.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "SecurityOperators_CreateOrUpdate",
-        "tags": [
-          "SecurityOperators"
-        ],
-        "description": "Creates Microsoft Defender for Cloud security operator on the given scope.",
-        "parameters": [
-          {
-            "name": "securityOperatorName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SecurityOperator"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a security operator on the given scope": {
-            "$ref": "./examples/SecurityOperators/PutSecurityOperatorByName_example.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "SecurityOperators_Delete",
-        "tags": [
-          "SecurityOperators"
-        ],
-        "description": "Delete Microsoft Defender for Cloud securityOperator in the subscription.",
-        "parameters": [
-          {
-            "name": "securityOperatorName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete SecurityOperator on subscription": {
-            "$ref": "./examples/SecurityOperators/DeleteSecurityOperatorByName_example.json"
           }
         }
       }

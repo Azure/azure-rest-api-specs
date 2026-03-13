@@ -32,46 +32,66 @@ model SecurityOperator is Azure.ResourceManager.ProxyResource<{}> {
   identity?: Azure.ResourceManager.CommonTypes.Identity;
 }
 
+alias SecurityOperatorOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the pricing configuration. */
+    @path
+    @segment("pricings")
+    @key
+    @minLength(3)
+    @maxLength(63)
+    @pattern("^[a-zA-Z][a-zA-Z0-9_]+$")
+    pricingName: string;
+  },
+  {
+    /** Name of the security operator. */
+    @path
+    @segment("securityOperators")
+    @key
+    @minLength(3)
+    @maxLength(63)
+    @pattern("^[a-zA-Z][a-zA-Z0-9_]+$")
+    securityOperatorName: string;
+  },
+  ErrorType = CloudError
+>;
+
 @armResourceOperations
 interface SecurityOperators {
   /**
    * Get a specific security operator for the requested scope.
    */
-  get is ArmResourceRead<
+  get is SecurityOperatorOps.Read<
     SecurityOperator,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Error = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
    * Creates Microsoft Defender for Cloud security operator on the given scope.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
+  createOrUpdate is SecurityOperatorOps.CreateOrUpdateSync<
     SecurityOperator,
     Request = void,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResourceUpdatedResponse<SecurityOperator>,
-    Error = CloudError
+    Response = ArmResourceUpdatedResponse<SecurityOperator>
   >;
 
   /**
    * Delete Microsoft Defender for Cloud securityOperator in the subscription.
    */
-  delete is ArmResourceDeleteSync<
-    SecurityOperator,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Error = CloudError
-  >;
+  delete is SecurityOperatorOps.DeleteSync<SecurityOperator>;
 
   /**
    * Lists Microsoft Defender for Cloud securityOperators in the subscription.
    */
-  list is ArmResourceListByParent<
+  list is SecurityOperatorOps.List<
     SecurityOperator,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmResponse<SecurityOperatorList>,
-    Error = CloudError
+    OverrideErrorType = CloudError
   >;
 }
 

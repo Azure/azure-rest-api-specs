@@ -1,42 +1,4 @@
-## Changed Paths
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators/{securityOperatorName}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.Security/securityOperators
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.Security/securityOperators/{securityOperatorName}
-Change Type: added
-
 ## Swagger Changes
-
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators__deleted']` | deleted | `{"get":{"operationId":"SecurityOperators_List","tags":["SecurityOperators"],"description":"Lists Mic...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators/{securityOperatorName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators/{securityOperatorName}__deleted']` | deleted | `{"get":{"operationId":"SecurityOperators_Get","tags":["SecurityOperators"],"description":"Get a spec...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Security/securityOperators`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityOperators__added']` | added | `{"get":{"operationId":"SecurityOperators_List","tags":["SecurityOperators"],"description":"Lists Mic...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Security/securityOperators/{securityOperatorName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityOperators/{securityOperatorName}__added']` | added | `{"get":{"operationId":"SecurityOperators_Get","tags":["SecurityOperators"],"description":"Get a spec...` |
 
 ### Changes for `CloudError`
 
@@ -74,4 +36,8 @@ Change Type: added
 |------|-----------|----------|
 | `definitions.SecurityOperator.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.SecurityOperator.properties.identity.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/Identity` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/Identity` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators/{securityOperatorName}'].delete.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators/{securityOperatorName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/pricings/{pricingName}/securityOperators/{securityOperatorName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 
