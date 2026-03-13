@@ -2029,7 +2029,7 @@ model ManagedClusterProperties {
   /**
    * Settings for hosted system addons. For more information, see https://aka.ms/aks/automatic/systemcomponents.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_02_01)
   hostedSystemProfile?: ManagedClusterHostedSystemProfile;
 
   /**
@@ -4088,12 +4088,32 @@ model SchedulerInstanceProfile {
 /**
  * Settings for hosted system addons.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_02_01)
 model ManagedClusterHostedSystemProfile {
   /**
    * Whether to enable hosted system addons for the cluster.
    */
   enabled?: boolean;
+
+  /**
+   * The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverAccessProfile.subnetId`, and all three subnet IDs must belong to the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /26 CIDR.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  systemNodeSubnetID?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+
+  /**
+   * The ID of the subnet that will be joined by worker nodes managed by node auto provisioner for running workload pods in your tenant. This must be provided together with `systemNodeSubnetID` and `apiserverAccessProfile.subnetId`, and all three subnet IDs must be in the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /16 CIDR.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  nodeSubnetID?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
 }
 
 /**
