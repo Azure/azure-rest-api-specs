@@ -981,7 +981,8 @@ interface File {
       @header("x-ms-file-file-type") nfsFileType?: NfsFileType;
 
       /** An MD5 hash of the content. This hash is used to verify the integrity of the data during transport. */
-      @header("Content-MD5") contentMd5?: string;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("Content-MD5") contentMD5?: bytes;
 
       /** SMB only. Default value is New. */
       @header("x-ms-file-property-semantics")
@@ -1001,7 +1002,8 @@ interface File {
       ...NfsResponseHeaders;
 
       /** An MD5 hash returned for the content. */
-      @header("Content-MD5") contentMd5?: bytes;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("Content-MD5") contentMD5?: bytes;
 
       /** Content length of the file. */
       @header("Content-Length") contentLength?: int64;
@@ -1039,7 +1041,8 @@ interface File {
       @header("Content-Length") contentLength: int64;
       @header("Content-Range") contentRange?: string;
       @header("ETag") etag: string;
-      @header("Content-MD5") contentMd5?: bytes;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("Content-MD5") contentMD5?: bytes;
       @header("Content-Encoding") contentEncoding?: string;
       @header("Cache-Control") cacheControl?: string;
       @header("Content-Disposition") contentDisposition?: string;
@@ -1098,7 +1101,8 @@ interface File {
       #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation"
       @header("Content-Type") contentType?: string;
       @header("ETag") etag: string;
-      @header("Content-MD5") contentMd5?: bytes;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("Content-MD5") contentMD5?: bytes;
       @header("Content-Encoding") contentEncoding?: string;
       @header("Cache-Control") cacheControl?: string;
       @header("Content-Disposition") contentDisposition?: string;
@@ -1316,7 +1320,8 @@ interface File {
       ...TimeoutParameter;
 
       /** An MD5 hash of the content. This hash is used to verify the integrity of data during transport. */
-      @header("Content-MD5") contentMd5?: string;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("Content-MD5") contentMD5?: bytes;
 
       ...LeaseIdOptionalParameter;
 
@@ -1339,7 +1344,8 @@ interface File {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      @header("Content-MD5") contentMd5?: bytes;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("Content-MD5") contentMD5?: bytes;
       ...RequestServerEncryptedResponseHeader;
 
       /** The file last write time. */
