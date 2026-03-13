@@ -37,6 +37,10 @@ using Microsoft.ContainerRegistry;
 @@clientName(LoggingProperties, "ConnectedRegistryLogging", "csharp");
 @@clientName(StatusDetailProperties, "ConnectedRegistryStatusDetail", "csharp");
 @@clientName(ImportSource, "ContainerRegistryImportSource", "csharp");
+@@clientName(ImportSourceCredentials, "ContainerRegistryImportSourceCredentials", "csharp");
+@@clientName(ImportSource.registryUri, "RegistryAddress", "csharp");
 
 // C# type correctness: match API surface before migration to Typespec (Guid? CorrelationId)
 @@alternateType(StatusDetailProperties.correlationId, uuid, "csharp");
+// C# type correctness: match API surface before migration to Typespec (ResourceIdentifier resourceId)
+@@alternateType(ImportSource.resourceId, armResourceIdentifier, "csharp");
