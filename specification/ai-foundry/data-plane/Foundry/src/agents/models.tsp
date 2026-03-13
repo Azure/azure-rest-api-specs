@@ -315,6 +315,7 @@ model HostedAgentDefinition extends AgentDefinition {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 union TelemetryEndpointKind {
   string,
 
@@ -327,6 +328,7 @@ union TelemetryEndpointKind {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 union TelemetryDataKind {
   string,
 
@@ -345,6 +347,7 @@ union TelemetryDataKind {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 union TelemetryTransportProtocol {
   string,
 
@@ -362,6 +365,7 @@ union TelemetryTransportProtocol {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 union TelemetryEndpointAuthType {
   string,
 
@@ -375,6 +379,7 @@ union TelemetryEndpointAuthType {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 model TelemetryEndpointAuth {
   @doc("The authentication type.")
   type: TelemetryEndpointAuthType;
@@ -385,6 +390,7 @@ model TelemetryEndpointAuth {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 model HeaderTelemetryEndpointAuth extends TelemetryEndpointAuth {
   @doc("The authentication type, always 'header' for header-based secret authentication.")
   type: TelemetryEndpointAuthType.header;
@@ -409,6 +415,7 @@ model HeaderTelemetryEndpointAuth extends TelemetryEndpointAuth {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 model TelemetryConfig {
   @doc("Customer-supplied telemetry export endpoint configurations.")
   @minItems(1)
@@ -422,6 +429,7 @@ model TelemetryConfig {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 model TelemetryEndpoint {
   @doc("The telemetry export endpoint kind.")
   kind: TelemetryEndpointKind;
@@ -439,6 +447,7 @@ model TelemetryEndpoint {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 model OtlpTelemetryEndpoint extends TelemetryEndpoint {
   @doc("The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints.")
   kind: TelemetryEndpointKind.OTLP;
