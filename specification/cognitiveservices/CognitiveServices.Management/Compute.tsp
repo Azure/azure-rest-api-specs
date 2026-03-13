@@ -15,8 +15,10 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services compute cluster resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Account)
-model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
+model Compute
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ComputeProperties> {
   ...ResourceNameParameter<
     Resource = Compute,
     KeyName = "computeName",
@@ -32,12 +34,17 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   etag?: string;
 
   /**
-   * Resource tags.
+   * The kind (type) of compute resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Record<string>;
+  kind?: string;
+
+  /**
+   * Identity for the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  identity?: Identity;
+
 }
 
 @armResourceOperations
@@ -51,15 +58,13 @@ interface Computes {
   /**
    * Creates or updates a compute associated with the Cognitive Services account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("CognitiveServicesComputes")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Compute>;
-
-  /**
-   * Updates a compute associated with the Cognitive Services account.
-   */
-  @tag("CognitiveServicesComputes")
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Compute, PatchModel = Compute>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Compute,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Compute> &
+      Azure.Core.Foundations.RetryAfterHeader>
+  >;
 
   /**
    * Deletes the specified compute associated with the Cognitive Services account.
@@ -79,4 +84,3 @@ interface Computes {
 @@doc(Compute.name, "The name of the compute associated with the Cognitive Services Account.");
 @@doc(Compute.properties, "Properties of Cognitive Services compute.");
 @@doc(Computes.createOrUpdate::parameters.resource, "The compute properties.");
-@@doc(Computes.update::parameters.properties, "The compute properties.");
