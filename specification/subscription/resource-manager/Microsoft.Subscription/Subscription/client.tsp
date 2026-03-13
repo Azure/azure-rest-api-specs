@@ -31,21 +31,21 @@ model SubscriptionIdOptionalClientOptions {
 
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.cancel,
   "SubscriptionOperation",
-  "java,javascript"
+  "java"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.rename,
   "SubscriptionOperation",
-  "java,javascript"
+  "java"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.enable,
   "SubscriptionOperation",
-  "java,javascript"
+  "java"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnership,
   "Subscriptions",
-  "java,javascript"
+  "java"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnershipStatus,
   "Subscriptions",
-  "java,javascript"
+  "java"
 );
