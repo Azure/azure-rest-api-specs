@@ -3,6 +3,7 @@ import "../agents/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Azure.AI.Projects;
 
@@ -207,6 +208,7 @@ model AcceptedAgentContainerOperation {
   @statusCode
   code: 202;
 
+  @pollingLocation
   @header("Operation-Location")
   location: url;
 
