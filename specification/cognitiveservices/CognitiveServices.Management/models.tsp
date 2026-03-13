@@ -2314,7 +2314,7 @@ model DeploymentModel {
   version?: string;
 
   /**
-   * Optional. Deployment model source ARM resource ID.
+   * Optional. Deployment model source ARM resource ID or azureml:// URI pointing to a model in the model catalog (e.g., azureml://registries/reg1/models/model1/versions/1).
    */
   source?: string;
 
@@ -2980,6 +2980,16 @@ model DeploymentProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deploymentState?: DeploymentState | null;
+
+  /**
+   * Optional. The deployment template to use for this deployment, specified as an azureml:// URI pointing to a deployment template asset (e.g., azureml://registries/reg1/deploymenttemplates/dt1).
+   */
+  deploymentTemplate?: string;
+
+  /**
+   * Optional. The type of GPU accelerator hardware to use for the deployment (e.g., A100_80GB, H100_80GB). If not specified, a default accelerator type will be assigned.
+   */
+  acceleratorType?: string;
 }
 
 /**
