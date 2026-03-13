@@ -142,11 +142,31 @@ using Azure.AI.Projects;
 //   ComparisonFilter + ComparisonFilterType  → com.openai.models.ComparisonFilter
 //   CompoundFilter + CompoundFilterType      → com.openai.models.CompoundFilter
 //   Reasoning + ReasoningSummary/GenerateSummary/Effort → com.openai.models.Reasoning
-@@alternateType(OpenAI.ComparisonFilter, { identity: "com.openai.models.ComparisonFilter" }, "java");
-@@alternateType(OpenAI.CompoundFilter, { identity: "com.openai.models.CompoundFilter" }, "java");
-@@alternateType(OpenAI.Reasoning, { identity: "com.openai.models.Reasoning" }, "java");
+@@alternateType(OpenAI.ComparisonFilter,
+  {
+    identity: "com.openai.models.ComparisonFilter",
+  },
+  "java"
+);
+@@alternateType(OpenAI.CompoundFilter,
+  {
+    identity: "com.openai.models.CompoundFilter",
+  },
+  "java"
+);
+@@alternateType(OpenAI.Reasoning,
+  {
+    identity: "com.openai.models.Reasoning",
+  },
+  "java"
+);
 //   ConversationResource → com.openai.models.conversations.Conversation
-@@alternateType(OpenAI.ConversationResource, { identity: "com.openai.models.conversations.Conversation" }, "java");
+@@alternateType(OpenAI.ConversationResource,
+  {
+    identity: "com.openai.models.conversations.Conversation",
+  },
+  "java"
+);
 
 // TimeZone property override via model indirection
 @alternateType(
