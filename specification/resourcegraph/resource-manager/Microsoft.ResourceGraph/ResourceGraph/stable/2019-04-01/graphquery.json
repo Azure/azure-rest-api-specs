@@ -61,9 +61,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryResourceListResult"
+              "$ref": "#/definitions/GraphQueryListResult"
             }
           },
           "default": {
@@ -103,9 +103,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryResourceListResult"
+              "$ref": "#/definitions/GraphQueryListResult"
             }
           },
           "default": {
@@ -383,6 +383,27 @@
         }
       }
     },
+    "GraphQueryListResult": {
+      "type": "object",
+      "description": "Paged collection of GraphQueryResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GraphQueryResource items on this page",
+          "items": {
+            "$ref": "#/definitions/GraphQueryResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "GraphQueryProperties": {
       "type": "object",
       "description": "Properties that contain a graph query.",
@@ -458,27 +479,6 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
-      ]
-    },
-    "GraphQueryResourceListResult": {
-      "type": "object",
-      "description": "The response of a GraphQueryResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The GraphQueryResource items on this page",
-          "items": {
-            "$ref": "#/definitions/GraphQueryResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "GraphQueryUpdateParameters": {

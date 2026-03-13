@@ -9,6 +9,7 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
 
 namespace GraphQuery;
@@ -32,6 +33,8 @@ model GraphQueryResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   etag?: string;
 }
+
+model GraphQueryListResult is Azure.Core.Page<GraphQueryResource>;
 
 @armResourceOperations
 interface GraphQuery {
@@ -83,22 +86,38 @@ interface GraphQuery {
   /**
    * Get all graph queries defined within a specified subscription and resource group.
    */
+  @get
+  @autoRoute
+  @doc("Get all graph queries defined within a specified subscription and resource group.")
+  @list
+  @listsResource(GraphQueryResource)
+  @segmentOf(GraphQueryResource)
+  @armResourceList(GraphQueryResource)
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GraphQuery_List")
-  list is ArmResourceListByParent<
-    GraphQueryResource,
-    Error = GraphQueryError
+  op list is ArmReadOperation<
+    ResourceParentParameters<GraphQueryResource, DefaultBaseParameters<GraphQueryResource>>,
+    GraphQueryListResult,
+    GraphQueryError
   >;
 
   /**
    * Get all graph queries defined within a specified subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @autoRoute
+  @doc("Get all graph queries defined within a specified subscription.")
+  @list
+  @listsResource(GraphQueryResource)
+  @segmentOf(GraphQueryResource)
+  @armResourceList(GraphQueryResource)
+  @get
   @operationId("GraphQuery_ListBySubscription")
   @Versioning.added(Versions.v2019_04_01)
-  listBySubscription is ArmListBySubscription<
-    GraphQueryResource,
-    Error = GraphQueryError
+  op listBySubscription is ArmReadOperation<
+    SubscriptionScope<GraphQueryResource>,
+    GraphQueryListResult,
+    GraphQueryError
   >;
 }
 

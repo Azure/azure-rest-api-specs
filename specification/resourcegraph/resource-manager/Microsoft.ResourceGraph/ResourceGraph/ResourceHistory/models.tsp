@@ -160,4 +160,9 @@ model ErrorDetails {
   message: string;
 }
 
-alias ResourcesHistoryResult = Record<unknown>;
+/**
+ * Resources History call result
+ */
+model ResourcesHistoryResult {
+  ...Record<unknown>;
+}

@@ -69,8 +69,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/ResourcesHistoryResult"
             }
           },
           "default": {
@@ -233,6 +232,11 @@
           "description": "Defines in which format query result returned."
         }
       }
+    },
+    "ResourcesHistoryResult": {
+      "type": "object",
+      "description": "Resources History call result",
+      "additionalProperties": {}
     },
     "ResultFormat": {
       "type": "string",
