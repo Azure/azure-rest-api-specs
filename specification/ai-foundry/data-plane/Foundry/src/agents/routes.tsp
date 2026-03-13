@@ -224,6 +224,7 @@ interface Agents {
       /** The name of the agent to retrieve. */
       @path agent_name: string;
 
+      @header("Content-Type") contentType: "application/merge-patch+json";
       ...UpdateAgentEndpointRequest;
     },
     AgentObject
