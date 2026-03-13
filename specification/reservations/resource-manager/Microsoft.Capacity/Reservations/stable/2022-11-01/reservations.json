@@ -627,7 +627,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ReservationResponseArray"
         },
         "x-ms-long-running-operation": true
       }
@@ -1163,7 +1164,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ReservationResponseArray"
         },
         "x-ms-long-running-operation": true
       }
@@ -3582,6 +3584,12 @@
           "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "ReservationResponseArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ReservationResponse"
+      }
     },
     "ReservationSplitProperties": {
       "type": "object",
