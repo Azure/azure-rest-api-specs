@@ -1753,7 +1753,8 @@ alias SourceUrlParameter = {
 alias BlockIdParameter = {
   /** A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block. */
   @query
-  blockId: base64Bytes;
+  @clientName("blockId")
+  blockid: base64Bytes;
 };
 
 /** The account kind response header. */
@@ -2441,7 +2442,8 @@ alias RangeParameter = {
 alias VersionIdParameter = {
   /** The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer. */
   @query
-  versionId?: string;
+  @clientName("versionId")
+  versionid?: string;
 };
 
 /** The snapshot parameter. */
@@ -2617,7 +2619,8 @@ alias FilterBlobsIncludeParameter = {
 alias FilterBlobsWhereParameter = {
   /** Filters the results to return only to return only blobs whose tags match the specified expression. */
   @query
-  filterExpression: string;
+  @clientName("filterExpression")
+  where: string;
 };
 
 /** The Content-Length header. */
