@@ -633,16 +633,6 @@
         "policyKind"
       ]
     },
-    "BlackoutMaskPolicy": {
-      "type": "object",
-      "description": "Represents the policy of redacting PII with blackout style.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "blackoutMask"
-    },
     "CharacterMaskPolicy": {
       "type": "object",
       "description": "Represents the policy of redacting with a redaction character",
@@ -1563,16 +1553,6 @@
           "description": "(Optional) If provided, the query will be used to extract most relevant sentences from the document."
         }
       }
-    },
-    "InkMaskPolicy": {
-      "type": "object",
-      "description": "Represents the policy of redacting PII with ink style.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "inkMask"
     },
     "InnerErrorCode": {
       "type": "string",
@@ -4011,8 +3991,6 @@
         "characterMask",
         "entityMask",
         "markerMask",
-        "blackoutMask",
-        "inkMask",
         "syntheticReplacement"
       ],
       "x-ms-enum": {
@@ -4038,16 +4016,6 @@
             "name": "markerMask",
             "value": "markerMask",
             "description": "Redact detected entities using a marker-style mask."
-          },
-          {
-            "name": "blackoutMask",
-            "value": "blackoutMask",
-            "description": "Redact detected entities using a blackout-style mask."
-          },
-          {
-            "name": "inkMask",
-            "value": "inkMask",
-            "description": "Redact detected entities using an ink-style mask."
           },
           {
             "name": "syntheticReplacement",

@@ -345,20 +345,6 @@ model MarkerMaskPolicy extends BaseRedactionPolicy {
   policyKind: RedactionPolicyKind.markerMask;
 }
 
-/** Represents the policy of redacting PII with blackout style. */
-@added(Versions.v2026_05_15_preview)
-model BlackoutMaskPolicy extends BaseRedactionPolicy {
-  /** The entity RedactionPolicy object kind. */
-  policyKind: RedactionPolicyKind.blackoutMask;
-}
-
-/** Represents the policy of redacting PII with ink style. */
-@added(Versions.v2026_05_15_preview)
-model InkMaskPolicy extends BaseRedactionPolicy {
-  /** The entity RedactionPolicy object kind. */
-  policyKind: RedactionPolicyKind.inkMask;
-}
-
 /** Represents the policy of redacting PII with the entity type. */
 model EntityMaskPolicy extends BaseRedactionPolicy {
   /** The entity OverlapPolicy object kind. */
@@ -381,14 +367,6 @@ union RedactionPolicyKind {
   /** Redact detected entities using a marker-style mask. */
   @added(Versions.v2026_05_15_preview)
   markerMask: "markerMask",
-
-  /** Redact detected entities using a blackout-style mask. */
-  @added(Versions.v2026_05_15_preview)
-  blackoutMask: "blackoutMask",
-
-  /** Redact detected entities using an ink-style mask. */
-  @added(Versions.v2026_05_15_preview)
-  inkMask: "inkMask",
 
   /** Replace detected entities with synthetic values. */
   @added(Versions.v2026_05_15_preview)
