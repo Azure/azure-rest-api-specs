@@ -122,3 +122,42 @@ interface EdgeMachineDiskJobs {
   /** Delete a disk job. */
   delete is ArmResourceDeleteWithoutOkAsync<EdgeMachineDiskJob>;
 }
+
+// ==================== DiskPrivilegedJobs Resource ====================
+
+/**
+ * Disk Privileged Job resource for managing privileged operations on disk volumes.
+ */
+@added(Versions.v2026_03_15_preview)
+@parentResource(EdgeMachineDisk)
+model EdgeMachineDiskPrivilegedJob
+  is Azure.ResourceManager.ProxyResource<EdgeMachineDiskPrivilegedJobProperties> {
+  ...ResourceNameParameter<
+    Resource = EdgeMachineDiskPrivilegedJob,
+    KeyName = "privilegedJobName",
+    SegmentName = "privilegedJobs",
+    NamePattern = "^[a-zA-Z0-9-_]{3,63}$"
+  >;
+}
+
+/**
+ * Operations for Edge Machine Disk Privileged Jobs.
+ */
+@added(Versions.v2026_03_15_preview)
+@armResourceOperations
+interface EdgeMachineDiskPrivilegedJobs {
+  /** Get a specific privileged job. */
+  get is ArmResourceRead<EdgeMachineDiskPrivilegedJob>;
+
+  /** List all privileged jobs for a disk. */
+  list is ArmResourceListByParent<
+    EdgeMachineDiskPrivilegedJob,
+    Response = ArmResponse<EdgeMachineDiskPrivilegedJobListResult>
+  >;
+
+  /** Create or update a privileged job. */
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<EdgeMachineDiskPrivilegedJob>;
+
+  /** Delete a privileged job. */
+  delete is ArmResourceDeleteWithoutOkAsync<EdgeMachineDiskPrivilegedJob>;
+}

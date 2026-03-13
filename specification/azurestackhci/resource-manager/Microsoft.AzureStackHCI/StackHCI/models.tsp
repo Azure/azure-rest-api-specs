@@ -3165,13 +3165,6 @@ model Storage {
    */
   @added(Versions.v2026_03_15_preview)
   san?: StorageSanConfig;
-
-  /**
-   * List of storage disks.
-   */
-  @added(Versions.v2026_03_15_preview)
-  @identifiers(#["id"])
-  disks?: Disk[];
 }
 
 /**
@@ -6065,14 +6058,14 @@ model HciStorageProfile {
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_03_15_preview)
   @identifiers(#["id"])
-  disks?: Disk[];
+  disks?: EdgeDeviceDisks[];
 }
 
 /**
  * Represents a storage disk on the device.
  */
 @added(Versions.v2026_03_15_preview)
-model Disk {
+model EdgeDeviceDisks {
   /**
    * The unique identifier of the disk.
    */
@@ -7216,13 +7209,6 @@ model StorageProfile {
    */
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
-
-  /**
-   * List of storage disks on the device.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["id"])
-  disks?: Disk[];
 }
 /**
  * details of validation failure
@@ -9008,15 +8994,10 @@ model VolumeReportedProperties {
 }
 
 /**
- * Disk Job properties.
+ * Base properties shared by all disk job types.
  */
 @added(Versions.v2026_03_15_preview)
-@discriminator("jobType")
-model EdgeMachineDiskJobProperties {
-  /** Job Type to support polymorphic resource. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  jobType: DiskJobType;
-
+model EdgeMachineDiskJobBaseProperties {
   /** Deployment mode to trigger job. */
   deploymentMode?: DeploymentMode;
 
@@ -9050,6 +9031,19 @@ model EdgeMachineDiskJobProperties {
 }
 
 /**
+ * Disk Job properties.
+ */
+@added(Versions.v2026_03_15_preview)
+@discriminator("jobType")
+model EdgeMachineDiskJobProperties {
+  /** Job Type to support polymorphic resource. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: DiskJobType;
+
+  ...EdgeMachineDiskJobBaseProperties;
+}
+
+/**
  * Job Type supported for disk operations.
  */
 @added(Versions.v2026_03_15_preview)
@@ -9058,9 +9052,6 @@ union DiskJobType {
 
   /** Job to create a volume on the disk. */
   CreateVolume: "CreateVolume",
-
-  /** Job to delete a volume from the disk. */
-  DeleteVolume: "DeleteVolume",
 
   /** Job to resolve configuration drift between desired and reported state. */
   SyncConfiguration: "SyncConfiguration",
@@ -9074,6 +9065,68 @@ model DiskJobReportedProperties {
   /** Percentage of job completion. */
   @visibility(Lifecycle.Read)
   percentComplete?: int32;
+
+  /** Validation status of Disk Job. */
+  @visibility(Lifecycle.Read)
+  validationStatus?: DiskActionStatus;
+
+  /** Deployment status of Disk Job. */
+  @visibility(Lifecycle.Read)
+  deploymentStatus?: DiskActionStatus;
+}
+
+/**
+ * The action plan deployment status for Disk Job.
+ */
+@added(Versions.v2026_03_15_preview)
+model DiskActionStatus {
+  /** Status of ECE action Disk Job. */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /** List of steps of Disk Job. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  steps?: DiskDeploymentStep[];
+}
+
+/**
+ * The Step of Disk Job.
+ */
+@added(Versions.v2026_03_15_preview)
+model DiskDeploymentStep {
+  /** Name of step. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Description of step. */
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  /** FullStepIndex of step. */
+  @visibility(Lifecycle.Read)
+  fullStepIndex?: string;
+
+  /** Start time of step. */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: string;
+
+  /** End time of step. */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: string;
+
+  /** Status of step (Error, Success, InProgress). */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /** List of nested steps. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  steps?: DiskDeploymentStep[];
+
+  /** List of exceptions. */
+  @visibility(Lifecycle.Read)
+  exception?: string[];
 }
 
 /**
@@ -9103,9 +9156,9 @@ model CreateVolumeJobProperties extends EdgeMachineDiskJobProperties {
  * Properties for deleting a volume from a disk.
  */
 @added(Versions.v2026_03_15_preview)
-model DeleteVolumeJobProperties extends EdgeMachineDiskJobProperties {
+model DeleteVolumeJobProperties extends EdgeMachineDiskPrivilegedJobProperties {
   /** Job type. */
-  jobType: DiskJobType.DeleteVolume;
+  jobType: PrivilegedJobType.DeleteVolume;
 
   /** The mount path of the volume to delete. */
   volumePath: string;
@@ -9184,6 +9237,41 @@ union DriftType {
   /** A property value differs between desired and reported state. */
   PropertyMismatch: "PropertyMismatch",
 }
+
+////////////////////////////////////////////////////////////////
+////////// Disk Privileged Job Models //////////////////////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * Disk Privileged Job properties.
+ */
+@added(Versions.v2026_03_15_preview)
+@discriminator("jobType")
+model EdgeMachineDiskPrivilegedJobProperties {
+  /** Privileged Job Type to support polymorphic resource. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: PrivilegedJobType;
+
+  ...EdgeMachineDiskJobBaseProperties;
+}
+
+/**
+ * Job Type supported for disk privileged operations.
+ */
+@added(Versions.v2026_03_15_preview)
+union PrivilegedJobType {
+  string,
+
+  /** Job to delete a volume from the disk. */
+  DeleteVolume: "DeleteVolume",
+}
+
+/**
+ * List of Disk Privileged Job resources.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineDiskPrivilegedJobListResult
+  is Azure.Core.Page<EdgeMachineDiskPrivilegedJob>;
 
 ////////////////////////////////////////////////////////////////
 ///// PRIVATE PREVIEW - Edge Machine Network Adapter Models ////
@@ -9459,6 +9547,12 @@ union NetworkAdapterJobType {
  */
 @added(Versions.v2026_03_15_preview)
 model NetworkAdapterJobReportedProperties {
+  /**
+   * The percentage of the job that is complete.
+   */
+  @visibility(Lifecycle.Read)
+  percentComplete?: int32;
+
   /** Validation status of Network Adapter Job. */
   @visibility(Lifecycle.Read)
   validationStatus?: NetworkAdapterActionStatus;

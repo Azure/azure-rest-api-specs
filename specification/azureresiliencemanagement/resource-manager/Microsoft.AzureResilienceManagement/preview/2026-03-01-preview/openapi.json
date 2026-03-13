@@ -2032,7 +2032,7 @@
         "tags": [
           "Drills"
         ],
-        "description": "This triggers detection of any drifts from the desired state of Target and capabilities and RBAC.",
+        "description": "This triggers detection of any drifts from the desired state of Resources and RBAC.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -2095,7 +2095,7 @@
         "tags": [
           "Drills"
         ],
-        "description": "This triggers detection of any drifts from the desired state of Target and capabilities and RBAC.",
+        "description": "This triggers detection of any drifts from the desired state of Resources and RBAC.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -5851,6 +5851,20 @@
         "region"
       ]
     },
+    "AssetPropertiesOfDrillUpdate": {
+      "type": "object",
+      "description": "Drill asset properties.",
+      "properties": {
+        "subscription": {
+          "type": "string",
+          "description": "Subscription where Drill's internal resources will be created."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region where Drill's internal resources will be created."
+        }
+      }
+    },
     "AssociatedIdentity": {
       "type": "object",
       "description": "Definition of associated identity linked with the various resources.",
@@ -5913,6 +5927,17 @@
             "type": "string"
           }
         },
+        "drillRbacOnChaosResource": {
+          "$ref": "#/definitions/RBACState",
+          "description": "Drill object does not have the necessary RBAC to run the chaos resource."
+        },
+        "rbacNeededForDrillOnChaosResource": {
+          "type": "array",
+          "description": "Permissions needed by the Drill MSI to run the chaos resource.",
+          "items": {
+            "type": "string"
+          }
+        },
         "drillRbacOnRecoveryPlan": {
           "$ref": "#/definitions/RBACState",
           "description": "Drill object does not have the necessary RBAC to run the Recovery Plan."
@@ -5965,6 +5990,10 @@
           "$ref": "#/definitions/RBACState",
           "description": "RBAC required by Experiment MSI not setup on the target resources."
         },
+        "faultRbacOnTargetResources": {
+          "$ref": "#/definitions/RBACState",
+          "description": "RBAC required by Chaos Resource MSI not setup on the target resources."
+        },
         "runbookFaultRbacOnTargets": {
           "$ref": "#/definitions/RBACState",
           "description": "RBAC required by AutomationAccount for runbook MSI not setup on the target resources."
@@ -5972,6 +6001,17 @@
         "targets": {
           "$ref": "#/definitions/ExtensionObjectState",
           "description": "One or more Target or Capability object is deleted."
+        },
+        "chaosResource": {
+          "$ref": "#/definitions/ExtensionObjectState",
+          "description": "Chaos resource for faulting exists or not."
+        },
+        "chaosResourceCreationFailureReasons": {
+          "type": "array",
+          "description": "Reason for Chaos Resource Creation failure",
+          "items": {
+            "type": "string"
+          }
         },
         "recoveryPlanAndDrillResourcesState": {
           "$ref": "#/definitions/RelativeResourceCompositionState",
@@ -5988,6 +6028,10 @@
         "chaosExperimentUserMsi": {
           "$ref": "#/definitions/ExtensionObjectState",
           "description": "User MSI associated with chaos experiment object is deleted."
+        },
+        "chaosResourceUserMsi": {
+          "$ref": "#/definitions/ExtensionObjectState",
+          "description": "User MSI associated with chaos resource object is deleted."
         },
         "includedResourceInDrill": {
           "$ref": "#/definitions/ExtensionObjectState",
@@ -6030,7 +6074,7 @@
         },
         "missingRequiredResourceProviders": {
           "type": "array",
-          "description": "List of required required Azure resource providers that are not registered in the subscription specified for chaos experiment.",
+          "description": "List of required required Azure resource providers that are not registered in the subscription specified for chaos resource.",
           "items": {
             "type": "string"
           }
@@ -6778,6 +6822,10 @@
           "$ref": "#/definitions/RecoveryPlanPropertiesOfDrill",
           "description": "Recovery Plan properties."
         },
+        "drillAssetProperties": {
+          "$ref": "#/definitions/AssetPropertiesOfDrill",
+          "description": "Properties for internal resources that are created for the Drill."
+        },
         "chaosExperimentProperties": {
           "$ref": "#/definitions/ChaosExperimentPropertiesOfDrill",
           "description": "Chaos Experiment properties."
@@ -6798,10 +6846,7 @@
           "$ref": "#/definitions/MonitoringPropertiesOfDrill",
           "description": "Monitoring properties of the Drill."
         }
-      },
-      "required": [
-        "chaosResourceProperties"
-      ]
+      }
     },
     "DrillProperties": {
       "type": "object",
@@ -6935,6 +6980,10 @@
         "faultRbacOnTarget": {
           "$ref": "#/definitions/RBACState",
           "description": "Experiment MSI does not have the desired RBAC on the resource."
+        },
+        "faultRbacOnTargetResource": {
+          "$ref": "#/definitions/RBACState",
+          "description": "Chaos Resource MSI does not have the desired RBAC on the resource."
         },
         "runbookFaultRbacOnTargets": {
           "$ref": "#/definitions/RBACState",
@@ -7186,6 +7235,11 @@
         "targetAndCapabilityAssignmentError": {
           "$ref": "#/definitions/ErrorDetails",
           "description": "Last Target and Capability assignment error, if any.",
+          "readOnly": true
+        },
+        "targetResourceAssignmentError": {
+          "$ref": "#/definitions/ErrorDetails",
+          "description": "Last Target Resource RBAC assignment error, if any.",
           "readOnly": true
         },
         "rbacAssignmentError": {
@@ -7800,6 +7854,10 @@
           "$ref": "#/definitions/RecoveryPlanPropertiesOfDrillUpdate",
           "description": "Recovery Plan properties."
         },
+        "drillAssetProperties": {
+          "$ref": "#/definitions/AssetPropertiesOfDrillUpdate",
+          "description": "Properties for internal resources that are created for the Drill."
+        },
         "chaosExperimentProperties": {
           "$ref": "#/definitions/ChaosExperimentPropertiesOfDrillUpdate",
           "description": "Chaos Experiment properties."
@@ -8181,6 +8239,11 @@
         "targetAndCapabilityAssignmentError": {
           "$ref": "#/definitions/ErrorDetails",
           "description": "Target and Capability assignment error.",
+          "readOnly": true
+        },
+        "targetResourceAssignmentError": {
+          "$ref": "#/definitions/ErrorDetails",
+          "description": "Target resource RBAC assignment error.",
           "readOnly": true
         },
         "rbacAssignmentError": {
