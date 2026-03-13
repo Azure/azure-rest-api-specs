@@ -190,7 +190,6 @@ union RedactionPolicyKind {
   entityMask: "entityMask",
 
   /** Replace detected entities with synthetic values. */
-  @added(Versions.v2026_05_01)
   syntheticReplacement: "syntheticReplacement",
 }
 
