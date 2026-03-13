@@ -25,21 +25,21 @@ namespace Microsoft.Subscription;
 
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.cancel,
   "SubscriptionOperation",
-  "java"
+  "java,javascript"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.rename,
   "SubscriptionOperation",
-  "java"
+  "java,javascript"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.enable,
   "SubscriptionOperation",
-  "java"
+  "java,javascript"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnership,
   "Subscriptions",
-  "java"
+  "java,javascript"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnershipStatus,
   "Subscriptions",
-  "java"
+  "java,javascript"
 );
