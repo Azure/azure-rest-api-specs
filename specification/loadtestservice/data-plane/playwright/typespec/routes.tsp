@@ -34,7 +34,7 @@ alias GetBrowsersParams = {
 
   @query
   @doc("The operating system for remote script execution.")
-  os: OS;
+  os: OperatingSystem;
 
   @query
   @maxLength(36)

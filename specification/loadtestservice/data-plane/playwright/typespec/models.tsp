@@ -101,12 +101,26 @@ union EnablementStatus {
 }
 
 @doc("The operating system to configure for remote script execution.")
-union OS {
+union OperatingSystem {
   string,
 
   @doc("Linux operating system.")
-  Linux: "Linux",
+  linux: "linux",
 
   @doc("Windows operating system.")
-  Windows: "Windows",
+  windows: "windows",
+}
+
+@doc("The browser type to configure for remote script execution.")
+union BrowserType {
+  string,
+
+  @doc("Chromium browser type.")
+  chromium: "chromium",
+
+  @doc("Firefox browser type.")
+  firefox: "firefox",
+
+  @doc("WebKit browser type.")
+  webkit: "webkit",
 }
