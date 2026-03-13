@@ -6,7 +6,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ```yaml $(java)
 azure-arm: true
 fluent: true
-namespace: com.azure.resourcemanager.containerservice.preparedimagespecification
+namespace: com.azure.resourcemanager.containerservice.preparedimgspec
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerservice-preparedimagespecification
@@ -28,7 +28,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ```yaml $(tag) == 'package-2026-02-02-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.azure.resourcemanager.containerservice.preparedimagespecification.v2026_02_02_preview
+  namespace: com.azure.resourcemanager.containerservice.preparedimgspec.v2026_02_02_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2026_02_02_preview
 regenerate-manager: true
 generate-interface: true
