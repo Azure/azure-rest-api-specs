@@ -391,3 +391,87 @@ export function getRequiredSettingValue(
     return SpecGenSdkRequiredSettings[sdkName].dataPlane;
   }
 }
+
+/**
+ * Indicates which generation tool should be used for a given spec.
+ */
+export type GenerationTool = "azsdk-cli" | "spec-gen-sdk";
+
+/**
+ * Determines whether to use azsdk-cli based on the feature flag and spec type.
+ * When USE_AZSDK_CLI=true and the spec is TypeSpec (has tspConfigPath), uses azsdk-cli.
+ * OpenAPI-only specs always fall back to spec-gen-sdk.
+ */
+export function selectGenerationTool(tspConfigPath?: string, _readmePath?: string): GenerationTool {
+  const useAzsdkCli = process.env.USE_AZSDK_CLI === "true";
+  if (useAzsdkCli && tspConfigPath) {
+    return "azsdk-cli";
+  }
+  return "spec-gen-sdk";
+}
+
+/**
+ * Prepare the azsdk pkg generate command arguments.
+ *
+ * @param commandInput - The spec-gen-sdk command input.
+ * @param tspConfigRelativePath - Relative path to tspconfig.yaml within the spec repo.
+ * @returns Array of arguments for the azsdk command.
+ */
+export function prepareAzsdkGenerateCommand(
+  commandInput: SpecGenSdkCmdInput,
+  tspConfigRelativePath: string,
+): string[] {
+  const tspConfigFullPath = path.join(commandInput.localSpecRepoPath, tspConfigRelativePath);
+  return [
+    "pkg",
+    "generate",
+    "-r",
+    commandInput.localSdkRepoPath,
+    "-t",
+    tspConfigFullPath,
+    "--output",
+    "json",
+  ];
+}
+
+/**
+ * Prepare the azsdk pkg build command arguments.
+ *
+ * @param packagePath - Absolute path to the generated SDK package directory.
+ * @returns Array of arguments for the azsdk build command.
+ */
+export function prepareAzsdkBuildCommand(packagePath: string): string[] {
+  return ["pkg", "build", "--package-path", packagePath, "--output", "json"];
+}
+
+/**
+ * Prepare the azsdk pkg pack command arguments.
+ *
+ * @param packagePath - Absolute path to the generated SDK package directory.
+ * @param outputPath - Optional output directory for artifacts.
+ * @returns Array of arguments for the azsdk pack command.
+ */
+export function prepareAzsdkPackCommand(
+  packagePath: string,
+  outputPath?: string,
+): string[] {
+  const args = ["pkg", "pack", "--package-path", packagePath, "--output", "json"];
+  if (outputPath) {
+    args.push("--output-path", outputPath);
+  }
+  return args;
+}
+
+/**
+ * Resolves the generated package directory path from typespec-metadata output.
+ * The outputDir in metadata uses `{output-dir}` placeholder which resolves to the SDK repo root.
+ *
+ * @param outputDir - The outputDir from typespec-metadata (e.g., "{output-dir}/sdk/keyvault/azure-keyvault-keys")
+ * @param sdkRepoPath - Absolute path to the SDK repository root.
+ * @returns Absolute path to the generated package directory.
+ */
+export function resolvePackagePath(outputDir: string, sdkRepoPath: string): string {
+  // Replace {output-dir} placeholder with the SDK repo path
+  const resolved = outputDir.replace("{output-dir}", sdkRepoPath);
+  return path.resolve(resolved);
+}
