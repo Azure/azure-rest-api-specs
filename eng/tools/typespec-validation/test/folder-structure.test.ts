@@ -364,5 +364,11 @@ options:
     assert(result.success);
   });
 
-  // TODO: test fail with fsv1 and no suppress
+  it("v1: should fail if MustUseV2 not suppressed", async function () {
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
+
+    const result = await new FolderStructureRule().execute(mockFolder);
+    assert(result.errorOutput);
+    assert(result.errorOutput.includes('must use "folder structure v2'));
+  });
 });
