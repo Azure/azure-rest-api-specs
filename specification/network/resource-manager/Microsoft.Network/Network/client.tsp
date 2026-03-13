@@ -17,3 +17,5 @@ using Microsoft.Compute;
   Microsoft.Compute.Versions.v2018_10_01
 )
 namespace CombineClient;
+
+@@clientName(CombineClient, "NetworkManagementClient", "javascript");
