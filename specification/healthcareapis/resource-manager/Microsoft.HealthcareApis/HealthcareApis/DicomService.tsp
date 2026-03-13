@@ -34,6 +34,7 @@ model DicomService
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface DicomServices {
   /**
@@ -60,35 +61,6 @@ interface DicomServices {
   >;
 
   /**
-   * Patch DICOM Service details.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    DicomService,
-    PatchModel = DicomServicePatchResource,
-    Response = ArmResponse<DicomService> | (ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = DicomService> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      @bodyRoot
-      _: DicomService;
-    }),
-    Error = ErrorDetails
-  >;
-
-  /**
-   * Deletes a DICOM Service.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    DicomService,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
-    Error = Error
-  >;
-
-  /**
    * Lists all DICOM Services for the given workspace
    */
   listByWorkspace is ArmResourceListByParent<
@@ -98,13 +70,78 @@ interface DicomServices {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface DicomServiceOperationGroup {
+  /**
+   * Patch DICOM Service details.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}")
+  @patch(#{ implicitOptionality: false })
+  @tag("DicomServices")
+  update(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /** The name of DICOM Service resource. */
+    @path
+    @minLength(3)
+    @maxLength(24)
+    dicomServiceName: string,
+
+    /** The name of workspace resource. */
+    @path
+    @minLength(3)
+    @maxLength(24)
+    workspaceName: string,
+
+    /** The parameters for updating a Dicom Service. */
+    @body
+    dicomservicePatchResource: DicomServicePatchResource,
+  ): ArmResponse<DicomService> | (ArmAcceptedLroResponse<
+    "Resource update request accepted.",
+    LroHeaders = ArmLroLocationHeader<FinalResult = DicomService> &
+      Azure.Core.Foundations.RetryAfterHeader
+  > & {
+    @bodyRoot
+    _: DicomService;
+  }) | ErrorDetails;
+
+  /**
+   * Deletes a DICOM Service.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}")
+  @delete
+  @tag("DicomServices")
+  delete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /** The name of DICOM Service resource. */
+    @path
+    @minLength(3)
+    @maxLength(24)
+    dicomServiceName: string,
+
+    /** The name of workspace resource. */
+    @path
+    @minLength(3)
+    @maxLength(24)
+    workspaceName: string,
+  ):
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
+    | Error;
+}
+
 @@maxLength(DicomService.name, 24);
 @@minLength(DicomService.name, 3);
 @@doc(DicomService.name, "The name of DICOM Service resource.");
 @@doc(DicomService.properties, "Dicom Service configuration.");
 @@doc(DicomServices.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a Dicom Service resource."
-);
-@@doc(DicomServices.update::parameters.properties,
-  "The parameters for updating a Dicom Service."
 );

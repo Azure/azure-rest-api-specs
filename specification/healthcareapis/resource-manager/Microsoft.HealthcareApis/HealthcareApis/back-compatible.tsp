@@ -52,16 +52,10 @@ using Microsoft.HealthcareApis;
 );
 
 @@clientName(DicomServices.createOrUpdate::parameters.resource, "dicomservice");
-@@clientName(DicomServices.update::parameters.properties,
-  "dicomservicePatchResource"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DicomService.properties);
 
 @@clientName(IotConnectors.createOrUpdate::parameters.resource, "iotConnector");
-@@clientName(IotConnectors.update::parameters.properties,
-  "iotConnectorPatchResource"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IotConnector.properties);
 
@@ -78,9 +72,6 @@ using Microsoft.HealthcareApis;
 @@Legacy.flattenProperty(IotFhirDestination.properties);
 
 @@clientName(FhirServices.createOrUpdate::parameters.resource, "fhirservice");
-@@clientName(FhirServices.update::parameters.properties,
-  "fhirservicePatchResource"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FhirService.properties);
 
@@ -96,3 +87,10 @@ using Microsoft.HealthcareApis;
   "ServiceManagedIdentityIdentity",
   "go"
 );
+
+@@clientLocation(DicomServiceOperationGroup.delete, "DicomServices");
+@@clientLocation(DicomServiceOperationGroup.update, "DicomServices");
+@@clientLocation(FhirServiceOperationGroup.delete, "FhirServices");
+@@clientLocation(FhirServiceOperationGroup.update, "FhirServices");
+@@clientLocation(IotConnectorOperationGroup.delete, "IotConnectors");
+@@clientLocation(IotConnectorOperationGroup.update, "IotConnectors");
