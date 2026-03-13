@@ -2,6 +2,7 @@ import { mockAll, mockFolder } from "./mocks.js";
 mockAll();
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
+import { readFile } from "fs/promises";
 import * as globby from "globby";
 import { strict as assert } from "node:assert";
 import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
@@ -354,5 +355,38 @@ options:
     );
 
     assert(result.success);
+  });
+
+  it("should succeed when tsp files have valid relative imports", async function () {
+    vi.mocked(globby.globby).mockImplementation((patterns) =>
+      patterns[0].includes("tspconfig")
+        ? Promise.resolve(["tspconfig.yaml"])
+        : Promise.resolve(["models.tsp"]),
+    );
+    normalizePathSpy.mockReturnValue("/gitroot");
+    vi.mocked(readFile).mockResolvedValue('import "./other.tsp";\n');
+
+    const result = await new FolderStructureRule().execute(
+      "/gitroot/specification/foo/data-plane/Foo",
+    );
+
+    assert(result.success);
+  });
+
+  it("should fail when tsp files import outside the allowed root", async function () {
+    vi.mocked(globby.globby).mockImplementation((patterns) =>
+      patterns[0].includes("tspconfig")
+        ? Promise.resolve(["tspconfig.yaml"])
+        : Promise.resolve(["models.tsp"]),
+    );
+    normalizePathSpy.mockReturnValue("/gitroot");
+    vi.mocked(readFile).mockResolvedValue('import "../../other.tsp";\n');
+
+    const result = await new FolderStructureRule().execute(
+      "/gitroot/specification/foo/data-plane/Foo",
+    );
+
+    assert(!result.success);
+    assert(result.errorOutput?.includes("outside"));
   });
 });
