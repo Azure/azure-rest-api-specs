@@ -243,9 +243,15 @@ using Microsoft.DataProtection;
   "!csharp"
 );
 
-@@clientName(BackupVaultResources.exportJobsOperationResultGet, "Get");
+@@clientName(BackupVaultResources.exportJobsOperationResultGet,
+  "Get",
+  "!csharp"
+);
 
-@@clientName(BackupVaultResources.operationStatusBackupVaultContextGet, "Get");
+@@clientName(BackupVaultResources.operationStatusBackupVaultContextGet,
+  "Get",
+  "!csharp"
+);
 
 @@clientName(BackupVaultResources.createOrUpdate::parameters.resource,
   "parameters"
