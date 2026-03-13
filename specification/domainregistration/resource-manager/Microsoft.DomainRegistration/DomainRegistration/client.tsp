@@ -69,6 +69,10 @@ using Microsoft.DomainRegistration;
   "IsForTransfer",
   "csharp"
 );
+@@clientName(TopLevelDomainAgreementOption,
+  "TopLevelDomainAgreementContent",
+  "csharp"
+);
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
