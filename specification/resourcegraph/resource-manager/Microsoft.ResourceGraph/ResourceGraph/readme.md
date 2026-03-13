@@ -207,6 +207,10 @@ directive:
   - suppress: AvoidAdditionalProperties
     where: $.definitions.ErrorDetails
     reason: Defined in previous api-versions, will remove in future ones.
+  - suppress: AvoidAdditionalProperties
+    from: resourceshistory.json
+    where: $.definitions.ResourcesHistoryResult
+    reason: Defined in existing contracts
   - suppress: XmsPageableForListCalls
     from: resourcegraph.json
     reason: Our operations list has always returned the full list in one request.
