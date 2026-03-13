@@ -69,7 +69,17 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "AgentEndpoints=V1Preview"
+                  ]
+                }
+              ]
             }
           },
           {
@@ -490,7 +500,17 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "AgentEndpoints=V1Preview"
+                  ]
+                }
+              ]
             }
           },
           {
