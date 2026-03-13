@@ -480,11 +480,11 @@ model ParameterProperties {
 
   @visibility(Lifecycle.Read)
   @doc("Whether the parameter can be changed dynamically")
-  isDynamic?: string;
+  isDynamic?: boolean;
 
   @visibility(Lifecycle.Read)
   @doc("Whether the parameter is a read-only parameter")
-  isReadOnly?: string;
+  isReadOnly?: boolean;
 
   @visibility(Lifecycle.Read)
   @doc("Link to parameter documentation")
