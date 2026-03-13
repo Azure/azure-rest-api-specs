@@ -2700,6 +2700,12 @@ alias IsHierarchicalNamespaceEnabled = {
 
 alias StructuredBodyTypeResponseHeader = {
   /** Indicates the response body contains a structured message and specifies the message schema version and properties. */
+  @header("x-ms-structured-body")
+  structuredBodyType?: string;
+};
+
+alias StructuredBodyTypeResponseHeaderPrivate = {
+  /** Indicates the response body contains a structured message and specifies the message schema version and properties. */
   @access(Access.internal)
   @header("x-ms-structured-body")
   structuredBodyType?: string;
@@ -2713,6 +2719,12 @@ alias StructuredContentLengthParameter = {
 };
 
 alias StructuredContentLengthResponseHeader = {
+  /** The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length. */
+  @header("x-ms-structured-content-length")
+  structuredContentLength?: int64;
+};
+
+alias StructuredContentLengthResponseHeaderPrivate = {
   /** The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length. */
   @access(Access.internal)
   @header("x-ms-structured-content-length")

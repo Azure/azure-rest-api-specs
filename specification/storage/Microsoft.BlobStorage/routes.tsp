@@ -741,8 +741,8 @@ interface Blob {
     ...ImmutabilityPolicyExpiresOnResponseHeader;
     ...ImmutabilityPolicyModeResponseHeader;
     ...LegalHoldOptionalResponseHeader;
-    ...StructuredBodyTypeResponseHeader;
-    ...StructuredContentLengthResponseHeader;
+    ...StructuredBodyTypeResponseHeaderPrivate;
+    ...StructuredContentLengthResponseHeaderPrivate;
     ...ApiVersionHeader;
   }) | (BodyParameter & {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"

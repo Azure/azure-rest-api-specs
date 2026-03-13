@@ -322,7 +322,7 @@ op uploadPagesRust is StorageOperationRequestBody<
     ...RequestServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
     ...EncryptionScopeResponseHeader;
-    ...StructuredBodyTypeResponseHeader;
+    ...StructuredBodyTypeResponseHeaderPrivate;
   },
   "application/octet-stream"
 >;
@@ -368,7 +368,7 @@ op appendBlockRust is StorageOperationRequestBody<
     ...RequestServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
     ...EncryptionScopeResponseHeader;
-    ...StructuredBodyTypeResponseHeader;
+    ...StructuredBodyTypeResponseHeaderPrivate;
   },
   "application/octet-stream"
 >;
@@ -426,7 +426,7 @@ op uploadBlockBlobRust is StorageOperationRequestBody<
     ...RequestServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
     ...EncryptionScopeResponseHeader;
-    ...StructuredBodyTypeResponseHeader;
+    ...StructuredBodyTypeResponseHeaderPrivate;
   },
   "application/octet-stream"
 >;
@@ -462,7 +462,7 @@ op stageBlockRust is StorageOperationRequestBody<
     ...RequestServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
     ...EncryptionScopeResponseHeader;
-    ...StructuredBodyTypeResponseHeader;
+    ...StructuredBodyTypeResponseHeaderPrivate;
   },
   "application/octet-stream"
 >;
