@@ -1,6 +1,6 @@
 import { vi } from "vitest";
 
-export const mockFolder = "specification/foo/Foo";
+export const mockFolder = "specification/foo/data-plane/Foo";
 
 export function mockFsPromises() {
   vi.mock("fs/promises", () => ({
