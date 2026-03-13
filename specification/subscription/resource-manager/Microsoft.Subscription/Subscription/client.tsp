@@ -26,3 +26,13 @@ namespace Microsoft.Subscription;
   "Subscriptions",
   "java"
 );
+
+@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.cancel::parameters.subscriptionId,
+  SubscriptionOperationGroup.cancel
+);
+@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.rename::parameters.subscriptionId,
+  SubscriptionOperationGroup.rename
+);
+@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.enable::parameters.subscriptionId,
+  SubscriptionOperationGroup.enable
+);
