@@ -103,8 +103,9 @@ interface Clients {
   "python"
 );
 
-// csharp configuration
-@@clientName(Channel, "PartnerNamespaceChannel", "csharp");
+// csharp configuration — unique additions (type-level renames already in back-compatible.tsp are not repeated)
+
+// Property renames
 @@clientName(ChannelProperties.expirationTimeIfNotActivatedUtc,
   "ExpireOnIfNotActivated",
   "csharp"
@@ -113,30 +114,43 @@ interface Clients {
   "ExpireOnIfNotActivated",
   "csharp"
 );
-@@clientName(ChannelType, "PartnerNamespaceChannelType", "csharp");
-@@clientName(ChannelProvisioningState,
-  "PartnerNamespaceChannelProvisioningState",
-  "csharp"
-);
-@@clientName(ReadinessState, "PartnerTopicReadinessState", "csharp");
-@@clientName(Domain, "EventGridDomain", "csharp");
-@@clientName(DomainProperties.disableLocalAuth,
-  "IsLocalAuthDisabled",
-  "csharp"
-);
+@@clientName(DomainProperties.disableLocalAuth, "IsLocalAuthDisabled", "csharp");
 @@clientName(DomainProperties.endpoint, "Endpoint", "csharp");
-@@alternateType(DomainProperties.endpoint, url, "csharp");
 @@clientName(DomainUpdateParameterProperties.disableLocalAuth,
   "IsLocalAuthDisabled",
   "csharp"
 );
-@@clientName(EventSubscription, "EventGridSubscription", "csharp");
-@@clientName(EventSubscriptionUpdateParameters,
-  "EventGridSubscriptionPatch",
-  "csharp"
-);
 @@clientName(EventSubscriptionUpdateParameters.expirationTimeUtc,
   "ExpireOn",
+  "csharp"
+);
+@@clientName(EventSubscriptionProperties.expirationTimeUtc, "ExpireOn", "csharp");
+@@clientName(Partner.authorizationExpirationTimeInUtc,
+  "AuthorizationExpireOn",
+  "csharp"
+);
+@@clientName(PartnerNamespaceProperties.disableLocalAuth,
+  "IsLocalAuthDisabled",
+  "csharp"
+);
+@@clientName(PartnerNamespaceProperties.endpoint, "Endpoint", "csharp");
+@@clientName(PartnerNamespaceUpdateParameterProperties.disableLocalAuth,
+  "IsLocalAuthDisabled",
+  "csharp"
+);
+@@clientName(PartnerTopicProperties.expirationTimeIfNotActivatedUtc,
+  "ExpireOnIfNotActivated",
+  "csharp"
+);
+@@clientName(TopicProperties.disableLocalAuth, "IsLocalAuthDisabled", "csharp");
+@@clientName(TopicProperties.endpoint, "Endpoint", "csharp");
+@@clientName(TopicUpdateParameterProperties.disableLocalAuth,
+  "IsLocalAuthDisabled",
+  "csharp"
+);
+// Type renames not in back-compatible.tsp
+@@clientName(EventSubscriptionUpdateParameters,
+  "EventGridSubscriptionPatch",
   "csharp"
 );
 @@clientName(DomainRegenerateKeyRequest,
@@ -151,49 +165,29 @@ interface Clients {
   "EventGridPrivateEndpointPersistedConnectionStatus",
   "csharp"
 );
-@@clientName(EventSubscriptionProperties.expirationTimeUtc,
-  "ExpireOn",
-  "csharp"
-);
-@@clientName(RetryPolicy, "EventSubscriptionRetryPolicy", "csharp");
-@@clientName(InboundIpRule, "EventGridInboundIPRule", "csharp");
 @@clientName(IpActionType, "EventGridIPActionType", "csharp");
-@@clientName(InputSchema, "EventGridInputSchema", "csharp");
-@@clientName(InputSchemaMapping, "EventGridInputSchemaMapping", "csharp");
 @@clientName(JsonInputSchemaMapping,
   "EventGridJsonInputSchemaMapping",
   "csharp"
 );
-@@clientName(DomainProvisioningState,
-  "EventGridDomainProvisioningState",
-  "csharp"
-);
-@@clientName(PublicNetworkAccess, "EventGridPublicNetworkAccess", "csharp");
 @@clientName(DomainSharedAccessKeys,
   "EventGridDomainSharedAccessKeys",
   "csharp"
 );
-@@clientName(ResourceProvisioningState,
-  "EventGridResourceProvisioningState",
+@@clientName(ClientProvisioningState,
+  "EventGridNamespaceClientProvisioningState",
   "csharp"
 );
-@@clientName(Partner, "EventGridPartnerContent", "csharp");
-@@clientName(Partner.authorizationExpirationTimeInUtc,
-  "AuthorizationExpireOn",
-  "csharp"
-);
-@@clientName(PartnerNamespaceProperties.disableLocalAuth,
-  "IsLocalAuthDisabled",
-  "csharp"
-);
-@@clientName(PartnerNamespaceProperties.endpoint, "Endpoint", "csharp");
+@@clientName(ClientState, "EventGridNamespaceClientState", "csharp");
+@@clientName(ResourceRegionType, "EventGridResourceRegionType", "csharp");
+@@clientName(TopicRegenerateKeyRequest, "TopicRegenerateKeyContent", "csharp");
+
+// Endpoint and resource ID type overrides
+@@alternateType(DomainProperties.endpoint, url, "csharp");
+@@alternateType(TopicProperties.endpoint, url, "csharp");
 @@alternateType(PartnerNamespaceProperties.endpoint, url, "csharp");
 @@alternateType(PartnerNamespaceProperties.partnerRegistrationFullyQualifiedId,
   Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@clientName(PartnerTopicProperties.expirationTimeIfNotActivatedUtc,
-  "ExpireOnIfNotActivated",
   "csharp"
 );
 @@alternateType(SystemTopicProperties.source,
@@ -204,29 +198,6 @@ interface Clients {
   Azure.Core.uuid,
   "csharp"
 );
-@@clientName(Topic, "EventGridTopic", "csharp");
-@@clientName(TopicRegenerateKeyRequest, "TopicRegenerateKeyContent", "csharp");
-@@clientName(Client, "EventGridNamespaceClient", "csharp");
-@@clientName(Namespace, "EventGridNamespace", "csharp");
-@@clientName(ClientProvisioningState,
-  "EventGridNamespaceClientProvisioningState",
-  "csharp"
-);
-@@clientName(ClientState, "EventGridNamespaceClientState", "csharp");
-@@clientName(Filter, "EventGridFilter", "csharp");
-@@clientName(TopicProperties.disableLocalAuth, "IsLocalAuthDisabled", "csharp");
-@@clientName(TopicProperties.endpoint, "Endpoint", "csharp");
-@@alternateType(TopicProperties.endpoint, url, "csharp");
-@@clientName(TopicUpdateParameterProperties.disableLocalAuth,
-  "IsLocalAuthDisabled",
-  "csharp"
-);
-@@clientName(TopicProvisioningState,
-  "EventGridTopicProvisioningState",
-  "csharp"
-);
-@@clientName(ResourceRegionType, "EventGridResourceRegionType", "csharp");
-@@clientName(EventTypeInfo, "PartnerTopicEventTypeInfo", "csharp");
 @@alternateType(EventHubEventSubscriptionDestinationProperties.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -312,3 +283,127 @@ interface Clients {
 );
 
 @@usage(TopicTypeAdditionalEnforcedPermission, Usage.input, "csharp");
+
+// Additional resource/model renames for C# backward compatibility
+@@clientName(ClientGroup, "EventGridNamespaceClientGroup", "csharp");
+@@clientName(PermissionBinding, "EventGridNamespacePermissionBinding", "csharp");
+@@clientName(TopicTypeInfo, "TopicType", "csharp");
+@@clientName(Subscription, "NamespaceTopicEventSubscription", "csharp");
+@@clientName(SubscriptionUpdateParameters,
+  "NamespaceTopicEventSubscriptionPatch",
+  "csharp"
+);
+@@clientName(SubscriptionFullUrl, "SubscriptionFullUri", "csharp");
+@@clientName(SubscriptionFullUrl.endpointUrl, "EndpointUri", "csharp");
+@@alternateType(SubscriptionFullUrl.endpointUrl, url, "csharp");
+
+// Identity type mapping - map EventGrid's IdentityInfo to ARM ManagedServiceIdentity
+@@alternateType(Domain.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(Topic.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(Namespace.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(PartnerTopic.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(SystemTopic.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(DomainUpdateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(TopicUpdateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(NamespaceUpdateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(PartnerTopicUpdateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(SystemTopicUpdateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+// Property renames for C# backward compatibility
+@@clientName(DomainProperties.inboundIpRules, "InboundIPRules", "csharp");
+@@clientName(TopicProperties.inboundIpRules, "InboundIPRules", "csharp");
+@@clientName(NamespaceProperties.inboundIpRules, "InboundIPRules", "csharp");
+@@clientName(PartnerNamespaceProperties.inboundIpRules, "InboundIPRules", "csharp");
+@@clientName(DomainUpdateParameterProperties.inboundIpRules, "InboundIPRules", "csharp");
+@@clientName(TopicUpdateParameterProperties.inboundIpRules, "InboundIPRules", "csharp");
+@@clientName(NamespaceUpdateParameterProperties.inboundIpRules,
+  "InboundIPRules",
+  "csharp"
+);
+@@clientName(PartnerNamespaceUpdateParameterProperties.inboundIpRules,
+  "InboundIPRules",
+  "csharp"
+);
+@@clientName(RoutingIdentityInfo.type, "IdentityType", "csharp");
+@@clientName(CustomDomainIdentity.type, "IdentityType", "csharp");
+@@clientName(EventSubscriptionIdentity.type, "IdentityType", "csharp");
+@@clientName(ClientCertificateValidationScheme.IpMatchesAuthenticationName,
+  "IPMatchesAuthenticationName",
+  "csharp"
+);
+@@clientName(InboundIpRule.ipMask, "IPMask", "csharp");
+
+// Url→Uri type mappings (generator auto-renames name but type stays string)
+@@alternateType(CustomDomainConfiguration.certificateUrl, url, "csharp");
+@@alternateType(EventTypeProperties.schemaUrl, url, "csharp");
+@@alternateType(InlineEventProperties.dataSchemaUrl, url, "csharp");
+@@alternateType(InlineEventProperties.documentationUrl, url, "csharp");
+@@alternateType(PartnerDetails.setupUri, url, "csharp");
+
+// PartnerRegistrationImmutableId: string(@format("uuid")) → Guid
+@@alternateType(Partner.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
+@@alternateType(PartnerRegistrationProperties.partnerRegistrationImmutableId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(PartnerTopicProperties.partnerRegistrationImmutableId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(PartnerDestinationProperties.partnerRegistrationImmutableId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(VerifiedPartnerProperties.partnerRegistrationImmutableId,
+  Azure.Core.uuid,
+  "csharp"
+);
+
+// Usage for models that need public constructor/setters
+@@usage(PartnerDetails, Usage.input, "csharp");
+@@usage(EventType, Usage.input, "csharp");
+@@usage(TopicTypeProperties, Usage.input, "csharp");
+@@usage(VerifiedPartnerProperties, Usage.input, "csharp");
+@@usage(ExtensionTopic, Usage.input, "csharp");
+@@usage(DomainTopic, Usage.input, "csharp");
+@@usage(PartnerConfiguration, Usage.input, "csharp");
+
+// GetFullUrl → GetFullUri (preserve old C# method name)
+@@clientName(EventSubscriptions.getFullUrl, "GetFullUri", "csharp");
+@@clientName(TopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
+@@clientName(DomainEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
+@@clientName(EventSubscriptionOperationGroup.getFullUrl, "GetFullUri", "csharp");
+@@clientName(SystemTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
+@@clientName(PartnerTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
+@@clientName(Subscriptions.getFullUrl, "GetFullUri", "csharp");
+@@clientName(Channels.getFullUrl, "GetFullUri", "csharp");
