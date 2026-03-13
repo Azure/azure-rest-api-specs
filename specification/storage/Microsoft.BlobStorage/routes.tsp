@@ -667,6 +667,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @route("/")
   @get
   download(
     ...ApiVersionHeader,
@@ -802,6 +803,7 @@ interface Blob {
   /** The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  @route("/")
   @head
   getProperties is StorageOperationNoBody<
     {
@@ -896,6 +898,7 @@ interface Blob {
   /** If the storage account's soft delete feature is disabled then, when a blob is deleted, it is permanently removed from the storage account. If the storage account's soft delete feature is enabled, then, when a blob is deleted, it is marked for deletion and becomes inaccessible immediately. However, the blob service retains the blob or snapshot for the number of days specified by the DeleteRetentionPolicy section of [Storage service properties] (Set-Blob-Service-Properties.md). After the specified number of days has passed, the blob's data is permanently removed from the storage account. Note that you continue to be charged for the soft-deleted blob's storage until it is permanently removed. Use the List Blobs API and specify the \"include=deleted\" query parameter to discover which blobs and snapshots have been soft deleted. You can then use the Undelete Blob API to restore a soft-deleted blob. All other operations on a soft-deleted blob or snapshot causes the service to return an HTTP status code of 404 (ResourceNotFound). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  @route("/")
   @delete
   delete is StorageOperationNoBody<
     {
@@ -1237,6 +1240,7 @@ interface Blob {
   /** The Start Copy From URL operation copies a blob or an internet resource to a new blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  @route("/")
   @put
   @sharedRoute
   startCopyFromUrl is StorageOperationNoBody<
@@ -1280,6 +1284,7 @@ interface Blob {
   /** The Copy From URL operation copies a blob or an internet resource to a new blob. It will not return a response until the copy is complete. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  @route("/")
   @put
   @sharedRoute
   copyFromUrl is StorageOperationNoBody<
@@ -1455,6 +1460,7 @@ interface PageBlob {
   /** The Create operation creates a new page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  @route("/")
   @put
   @sharedRoute
   create is StorageOperationNoBody<
@@ -1817,6 +1823,7 @@ interface AppendBlob {
   /** The Create operation creates a new append blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  @route("/")
   @put
   @sharedRoute
   create is StorageOperationNoBody<
@@ -1996,6 +2003,7 @@ interface BlockBlob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+  @route("/")
   @put
   @sharedRoute
   upload is StorageOperationRequestBody<
@@ -2052,6 +2060,7 @@ interface BlockBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @route("/")
   @put
   @sharedRoute
   uploadBlobFromUrl is StorageOperationNoBody<

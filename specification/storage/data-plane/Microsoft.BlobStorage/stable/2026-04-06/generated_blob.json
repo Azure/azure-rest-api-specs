@@ -15248,6 +15248,13 @@
         "name": "Field"
       }
     },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\".",
+      "xml": {
+        "name": "eTag"
+      }
+    },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
@@ -15519,7 +15526,7 @@
           "x-ms-client-name": "lastModified"
         },
         "Etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "The blob ETag.",
           "x-ms-client-name": "eTag"
         },
@@ -16049,7 +16056,7 @@
           "x-ms-client-name": "lastModified"
         },
         "Etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "The ETag of the container.",
           "x-ms-client-name": "eTag"
         },
