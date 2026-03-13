@@ -36,12 +36,12 @@ enum ChangeType {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ChangeCategory {
   /**
-   * User iniated change
+   * User initiated change
    */
   User,
 
   /**
-   * System initated change
+   * System initiated change
    */
   System,
 }
