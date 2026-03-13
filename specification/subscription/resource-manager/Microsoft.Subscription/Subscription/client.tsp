@@ -4,23 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 namespace Microsoft.Subscription;
 
-@@clientLocation(Azure.ResourceManager.SubscriptionIdParameter.subscriptionId,
-  SubscriptionOperationGroup.acceptOwnership
-);
-@@clientLocation(Azure.ResourceManager.SubscriptionIdParameter.subscriptionId,
-  SubscriptionOperationGroup.acceptOwnershipStatus
-);
-
-@@clientLocation(CanceledSubscriptionId.subscriptionId,
-  SubscriptionOperationGroup.rename
-);
-@@clientLocation(CanceledSubscriptionId.subscriptionId,
-  SubscriptionOperationGroup.enable
-);
-@@clientLocation(CanceledSubscriptionId.subscriptionId,
-  SubscriptionOperationGroup.cancel
-);
-
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
 
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.cancel,
