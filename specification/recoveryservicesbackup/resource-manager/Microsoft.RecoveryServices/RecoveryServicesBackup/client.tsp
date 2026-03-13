@@ -8,6 +8,48 @@ using Microsoft.RecoveryServices;
 using Azure.ResourceManager;
 using Http;
 
+// C# rename mappings to maintain backward compatibility with existing SDK
+// Enum/Union renames
+@@clientName(Microsoft.RecoveryServices.DayOfWeek, "BackupDayOfWeek", "csharp");
+@@clientName(Microsoft.RecoveryServices.WeekOfMonth, "BackupWeekOfMonth", "csharp");
+@@clientName(Microsoft.RecoveryServices.MonthOfYear, "BackupMonthOfYear", "csharp");
+@@clientName(Microsoft.RecoveryServices.CreateMode, "BackupCreateMode", "csharp");
+@@clientName(Microsoft.RecoveryServices.DataSourceType, "BackupDataSourceType", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectionState, "BackupProtectionState", "csharp");
+@@clientName(Microsoft.RecoveryServices.FabricName, "BackupFabricName", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectionStatus, "BackupProtectionStatus", "csharp");
+@@clientName(Microsoft.RecoveryServices.HealthStatus, "IaasVmProtectedItemHealthStatus", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectedItemHealthStatus, "VmWorkloadProtectedItemHealthStatus", "csharp");
+@@clientName(Microsoft.RecoveryServices.TieringPolicy, "BackupTieringPolicy", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupStatusResponse, "BackupStatusResult", "csharp");
+@@clientName(Microsoft.RecoveryServices.ErrorDetail, "BackupErrorDetail", "csharp");
+@@clientName(Microsoft.RecoveryServices.SecurityPinBase, "SecurityPinContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.ExtendedProperties, "IaasVmBackupExtendedProperties", "csharp");
+@@clientName(Microsoft.RecoveryServices.RestoreRequestResource, "TriggerRestoreContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.RestoreRequest, "RestoreContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupRequest, "BackupContent", "csharp");
+// Protected item type renames
+@@clientName(Microsoft.RecoveryServices.AzureFileshareProtectedItem, "FileshareProtectedItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureFileshareProtectedItemExtendedInfo, "FileshareProtectedItemExtendedInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSClassicComputeVMProtectedItem, "IaasClassicComputeVmProtectedItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSComputeVMProtectedItem, "IaasComputeVmProtectedItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMProtectedItem, "IaasVmProtectedItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMProtectedItemExtendedInfo, "IaasVmProtectedItemExtendedInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMHealthDetails, "IaasVmHealthDetails", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureSqlProtectedItem, "SqlProtectedItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureSqlProtectedItemExtendedInfo, "SqlProtectedItemExtendedInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.DPMProtectedItem, "DpmProtectedItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.DPMProtectedItemExtendedInfo, "DpmProtectedItemExtendedInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectableItem, "VmWorkloadProtectableItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectedItem, "VmWorkloadProtectedItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectedItemExtendedInfo, "VmWorkloadProtectedItemExtendedInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPAseDatabaseProtectedItem, "VmWorkloadSapAseDatabaseProtectedItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPHanaDatabaseProtectedItem, "VmWorkloadSapHanaDatabaseProtectedItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPHanaDBInstanceProtectedItem, "VmWorkloadSapHanaDBInstanceProtectedItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSQLDatabaseProtectedItem, "VmWorkloadSqlDatabaseProtectedItem", "csharp");
+// KPI health details
+@@clientName(Microsoft.RecoveryServices.KPIResourceHealthDetails, "KpiResourceHealthDetails", "csharp");
+
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   "Client",
   "go"
