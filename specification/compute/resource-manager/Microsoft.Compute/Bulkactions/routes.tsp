@@ -49,10 +49,10 @@ alias LocationParameter = {
 @@doc(VirtualMachineBulkOperations.virtualMachinesBulkCreate::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesVdiCreate::parameters.body,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesVdiFlexCreate::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.virtualMachinesVdiCreate::parameters.body,
+@@doc(VirtualMachineBulkOperations.virtualMachinesVdiFlexCreate::parameters.body,
   "The request body"
 );
 @@clientName(VirtualMachineBulkOperations.virtualMachinesBulkDelete::parameters.body,
@@ -67,16 +67,16 @@ alias LocationParameter = {
 @@doc(VirtualMachineBulkOperations.virtualMachinesBulkReimage::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesGetOperationStatus::parameters.body,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkGetOperationStatus::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.virtualMachinesGetOperationStatus::parameters.body,
+@@doc(VirtualMachineBulkOperations.virtualMachinesBulkGetOperationStatus::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesCancelOperations::parameters.body,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkCancelOperations::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.virtualMachinesCancelOperations::parameters.body,
+@@doc(VirtualMachineBulkOperations.virtualMachinesBulkCancelOperations::parameters.body,
   "The request body"
 );
 
@@ -115,8 +115,8 @@ interface VirtualMachineBulkOperations {
     Parameters = LocationParameter
   >;
 
-  /** VirtualMachinesVdiCreate: Bulk create  operation for a batch of virtual machines, this operation supports flex properties to give options on Sku and zone selection. */
-  virtualMachinesVdiCreate is ArmProviderActionSync<
+  /** VirtualMachinesVdiFlexCreate: Bulk create  operation for a batch of virtual machines, this operation supports flex properties to give options on Sku and zone selection. */
+  virtualMachinesVdiFlexCreate is ArmProviderActionSync<
     Request = ExecuteVdiCreateRequest,
     Response = ArmResponse<CreateResourceOperationResponse>,
     Scope = Extension.Subscription,
@@ -131,16 +131,16 @@ interface VirtualMachineBulkOperations {
     Parameters = LocationParameter
   >;
 
-  /** VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines */
-  virtualMachinesGetOperationStatus is ArmProviderActionSync<
+  /** VirtualMachinesBulkGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines */
+  virtualMachinesBulkGetOperationStatus is ArmProviderActionSync<
     Request = GetOperationStatusRequest,
     Response = ArmResponse<GetOperationStatusResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
   >;
 
-  /** VirtualMachinesCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request */
-  virtualMachinesCancelOperations is ArmProviderActionSync<
+  /** VirtualMachinesBulkCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request */
+  virtualMachinesBulkCancelOperations is ArmProviderActionSync<
     Request = CancelOperationsRequest,
     Response = ArmResponse<CancelOperationsResponse>,
     Scope = Extension.Subscription,

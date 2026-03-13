@@ -17,11 +17,11 @@ namespace Microsoft.Compute;
   "ExecuteVirtualMachineStart",
   "csharp"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesGetOperationStatus,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkGetOperationStatus,
   "GetVirtualMachineOperationStatus",
   "csharp"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesCancelOperations,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkCancelOperations,
   "CancelVirtualMachineOperations",
   "csharp"
 );
