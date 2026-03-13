@@ -394,3 +394,80 @@ using Microsoft.NetworkCloud;
 @@usage(RackSku, Usage.input, "csharp");
 @@usage(BareMetalMachine, Usage.input, "csharp");
 @@usage(StorageAppliance, Usage.input, "csharp");
+
+// prepend-rp-prefix renames (types that need NetworkCloud prefix)
+@@clientName(ActionState, "NetworkCloudActionState", "csharp");
+@@clientName(ActionStateStatus, "NetworkCloudActionStateStatus", "csharp");
+@@clientName(CertificateInfo, "NetworkCloudCertificateInfo", "csharp");
+@@clientName(StepState, "NetworkCloudStepState", "csharp");
+@@clientName(StepStateStatus, "NetworkCloudStepStateStatus", "csharp");
+
+// Parameters → Content renames (autorest rename-mapping equivalents)
+@@clientName(BareMetalMachineCordonParameters,
+  "BareMetalMachineCordonContent",
+  "csharp"
+);
+@@clientName(BareMetalMachinePowerOffParameters,
+  "BareMetalMachinePowerOffContent",
+  "csharp"
+);
+@@clientName(BareMetalMachineReplaceParameters,
+  "BareMetalMachineReplaceContent",
+  "csharp"
+);
+@@clientName(BareMetalMachineRunCommandParameters,
+  "BareMetalMachineRunCommandContent",
+  "csharp"
+);
+@@clientName(BareMetalMachineRunDataExtractsParameters,
+  "BareMetalMachineRunDataExtractsContent",
+  "csharp"
+);
+@@clientName(BareMetalMachineRunReadCommandsParameters,
+  "BareMetalMachineRunReadCommandsContent",
+  "csharp"
+);
+@@clientName(ClusterContinueUpdateVersionParameters,
+  "ClusterContinueUpdateVersionContent",
+  "csharp"
+);
+@@clientName(ClusterDeployParameters, "ClusterDeployContent", "csharp");
+@@clientName(ClusterScanRuntimeParameters,
+  "ClusterScanRuntimeContent",
+  "csharp"
+);
+@@clientName(ClusterUpdateVersionParameters,
+  "ClusterUpdateVersionContent",
+  "csharp"
+);
+@@clientName(KubernetesClusterRestartNodeParameters,
+  "KubernetesClusterRestartNodeContent",
+  "csharp"
+);
+@@clientName(StorageApplianceEnableRemoteVendorManagementParameters,
+  "StorageApplianceEnableRemoteVendorManagementContent",
+  "csharp"
+);
+@@clientName(StorageApplianceRunReadCommandsParameters,
+  "StorageApplianceRunReadCommandsContent",
+  "csharp"
+);
+@@clientName(VirtualMachineAssignRelayParameters,
+  "VirtualMachineAssignRelayContent",
+  "csharp"
+);
+@@clientName(VirtualMachinePowerOffParameters,
+  "VirtualMachinePowerOffContent",
+  "csharp"
+);
+
+// Casing renames (acronym-mapping equivalents)
+@@clientName(IpAddressPool, "IPAddressPool", "csharp");
+@@clientName(IpAllocationType, "IPAllocationType", "csharp");
+@@clientName(OsDiskCreateOption, "OSDiskCreateOption", "csharp");
+@@clientName(OsDiskDeleteOption, "OSDiskDeleteOption", "csharp");
+@@clientName(CloudServicesNetworkEnableDefaultEgressEndpoints,
+  "CloudServicesNetworkEnableDefaultEgressEndpoint",
+  "csharp"
+);
+@@clientName(RelayType, "VirtualMachineAssignRelayType", "csharp");
