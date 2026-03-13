@@ -68,6 +68,21 @@ union PiiDomain {
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind;
+
+  /** (Optional) describes the PII categories to which the redaction policy will be applied. If not specified, the redaction policy will be applied to all PII categories. */
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2024_11_15_preview)
+  entityTypes?: PiiCategoriesExclude[];
+
+  /** (Optional) name of the redaction policy for identification purposes. */
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2024_11_15_preview)
+  policyName?: string;
+
+  /** (Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default. */
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2024_11_15_preview)
+  isDefaultPolicy?: boolean = false;
 }
 
 /** Represents the policy of redacting with a redaction character */
