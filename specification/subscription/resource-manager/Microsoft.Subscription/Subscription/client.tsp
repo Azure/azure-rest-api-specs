@@ -42,10 +42,10 @@ model SubscriptionIdOptionalClientOptions {
   "java"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnership,
-  "SubscriptionOperation",
+  "Subscriptions",
   "java"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnershipStatus,
-  "SubscriptionOperation",
+  "Subscriptions",
   "java"
 );
