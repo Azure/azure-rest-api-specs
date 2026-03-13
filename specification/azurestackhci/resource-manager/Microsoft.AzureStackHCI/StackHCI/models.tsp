@@ -2801,6 +2801,47 @@ model DeploymentSettingsProperties {
    */
   @visibility(Lifecycle.Read)
   reportedProperties?: EceReportedProperties;
+
+  /**
+   * Summary of the deployment.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @visibility(Lifecycle.Read)
+  deploymentSummary?: DeploymentSummary;
+}
+
+/**
+ * Summary of the deployment error.
+ */
+@added(Versions.v2026_03_15_preview)
+model DeploymentSummary {
+  /** Title for the error summary. */
+  title?: string;
+
+  /** Detailed description of the error. */
+  description?: string;
+
+  /** Recommendation for fixing the error. */
+  recommendation?: string;
+
+  /** URL references related to the summary. */
+  @identifiers(#[])
+  references?: DeploymentSummaryReference[];
+
+  /** Confidence rating for the error recommendation. */
+  confidence?: string;
+}
+
+/**
+ * References from the AI Generated summary.
+ */
+@added(Versions.v2026_03_15_preview)
+model DeploymentSummaryReference {
+  /** Title for the reference. */
+  title: string;
+
+  /** Hyperlink to the reference. */
+  link: string;
 }
 
 /**
