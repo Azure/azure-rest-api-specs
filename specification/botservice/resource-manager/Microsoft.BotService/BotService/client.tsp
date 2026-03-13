@@ -223,7 +223,7 @@ using Microsoft.BotService;
   "csharp"
 );
 @@clientName(BotChannels.regenerateKeys,
-  "GetBotChannelWithRegenerateKeysAsync",
+  "GetBotChannelWithRegenerateKeys",
   "csharp"
 );
 @@clientName(BotsOperationGroup.getCheckNameAvailability,
