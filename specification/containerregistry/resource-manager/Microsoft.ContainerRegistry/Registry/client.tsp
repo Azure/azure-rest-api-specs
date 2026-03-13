@@ -134,7 +134,7 @@ using Microsoft.ContainerRegistry;
   "ContainerRegistryNameAvailableResult",
   "csharp"
 );
-@@clientName(RegistryPatch, "ContainerRegistryPatch", "csharp");
+@@clientName(RegistryUpdateParameters, "ContainerRegistryPatch", "csharp");
 @@clientName(ImportImageParameters,
   "ContainerRegistryImportImageContent",
   "csharp"
@@ -207,16 +207,16 @@ using Microsoft.ContainerRegistry;
   "IsNetworkRuleBypassAllowedForTasks",
   "csharp"
 );
-@@clientName(RegistryUpdateParameters.adminUserEnabled, "IsAdminUserEnabled", "csharp");
-@@clientName(RegistryUpdateParameters.anonymousPullEnabled,
+@@clientName(RegistryPropertiesUpdateParameters.adminUserEnabled, "IsAdminUserEnabled", "csharp");
+@@clientName(RegistryPropertiesUpdateParameters.anonymousPullEnabled,
   "IsAnonymousPullEnabled",
   "csharp"
 );
-@@clientName(RegistryUpdateParameters.dataEndpointEnabled,
+@@clientName(RegistryPropertiesUpdateParameters.dataEndpointEnabled,
   "IsDataEndpointEnabled",
   "csharp"
 );
-@@clientName(RegistryUpdateParameters.networkRuleBypassAllowedForTasks,
+@@clientName(RegistryPropertiesUpdateParameters.networkRuleBypassAllowedForTasks,
   "IsNetworkRuleBypassAllowedForTasks",
   "csharp"
 );
@@ -224,7 +224,7 @@ using Microsoft.ContainerRegistry;
   "IsRegionEndpointEnabled",
   "csharp"
 );
-@@clientName(ReplicationUpdateParameters.regionEndpointEnabled,
+@@clientName(ReplicationUpdateParametersProperties.regionEndpointEnabled,
   "IsRegionEndpointEnabled",
   "csharp"
 );
@@ -236,7 +236,7 @@ using Microsoft.ContainerRegistry;
 @@clientName(StatusDetailProperties.type, "StatusDetailType", "csharp");
 @@clientName(TlsCertificateProperties.location, "CertificateLocation", "csharp");
 @@clientName(ConnectedRegistryProperties.clientTokenIds, "ClientTokenIds", "csharp");
-@@clientName(ConnectedRegistryUpdateParameters.clientTokenIds, "ClientTokenIds", "csharp");
+@@clientName(ConnectedRegistryUpdateProperties.clientTokenIds, "ClientTokenIds", "csharp");
 
 // C# type correctness: match API surface before migration to Typespec (Guid? CorrelationId)
 @@alternateType(StatusDetailProperties.correlationId, uuid, "csharp");
@@ -246,7 +246,7 @@ using Microsoft.ContainerRegistry;
   armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(ConnectedRegistryUpdateParameters.clientTokenIds,
+@@alternateType(ConnectedRegistryUpdateProperties.clientTokenIds,
   armResourceIdentifier[],
   "csharp"
 );
