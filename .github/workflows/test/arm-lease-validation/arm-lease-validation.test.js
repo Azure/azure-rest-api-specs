@@ -12,9 +12,9 @@ vi.mock("fs/promises", () => ({
 
 import {
   isFileAllowed,
+  leaseSchema,
   validateFolderStructure,
   validateLeaseContent,
-  leaseSchema,
 } from "../../src/arm-lease-validation/arm-lease-validation.js";
 
 describe("validate-arm-leases", () => {
@@ -25,7 +25,9 @@ describe("validate-arm-leases", () => {
   describe("isFileAllowed", () => {
     it("allows valid lease files and README.md", () => {
       expect(isFileAllowed(".github/arm-leases/testservice/Microsoft.Test/lease.yaml")).toBe(true);
-      expect(isFileAllowed(".github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml")).toBe(true);
+      expect(isFileAllowed(".github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml")).toBe(
+        true,
+      );
       expect(isFileAllowed(".github/arm-leases/README.md")).toBe(true);
     });
 
@@ -38,15 +40,19 @@ describe("validate-arm-leases", () => {
 
   describe("validateFolderStructure", () => {
     it("accepts valid paths and rejects invalid ones", () => {
-      expect(validateFolderStructure([
-        ".github/arm-leases/testservice/Microsoft.Test/lease.yaml",
-        ".github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml",
-      ])).toHaveLength(0);
+      expect(
+        validateFolderStructure([
+          ".github/arm-leases/testservice/Microsoft.Test/lease.yaml",
+          ".github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml",
+        ]),
+      ).toHaveLength(0);
 
-      expect(validateFolderStructure([
-        ".github/arm-leases/TestService/Microsoft.Test/lease.yaml", // uppercase org
-        ".github/arm-leases/compute/Microsoft.Compute/stable/lease.yaml", // stable not allowed
-      ])).toHaveLength(2);
+      expect(
+        validateFolderStructure([
+          ".github/arm-leases/TestService/Microsoft.Test/lease.yaml", // uppercase org
+          ".github/arm-leases/compute/Microsoft.Compute/stable/lease.yaml", // stable not allowed
+        ]),
+      ).toHaveLength(2);
     });
   });
 
@@ -62,27 +68,49 @@ describe("validate-arm-leases", () => {
 
     it("accepts valid lease data", () => {
       expect(leaseSchema.safeParse(validLease).success).toBe(true);
-      expect(leaseSchema.safeParse({ ...validLease, lease: { ...validLease.lease, duration: "P5M" } }).success).toBe(true);
-      expect(leaseSchema.safeParse({ ...validLease, lease: { ...validLease.lease, duration: "P180D" } }).success).toBe(true);
+      expect(
+        leaseSchema.safeParse({ ...validLease, lease: { ...validLease.lease, duration: "P5M" } })
+          .success,
+      ).toBe(true);
+      expect(
+        leaseSchema.safeParse({ ...validLease, lease: { ...validLease.lease, duration: "P180D" } })
+          .success,
+      ).toBe(true);
     });
 
     it("rejects invalid resource-provider", () => {
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, "resource-provider": "microsoft.Test" } }).success).toBe(false);
+      expect(
+        leaseSchema.safeParse({
+          lease: { ...validLease.lease, "resource-provider": "microsoft.Test" },
+        }).success,
+      ).toBe(false);
     });
 
     it("rejects invalid startdate", () => {
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, startdate: "01-15-2026" } }).success).toBe(false);
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, startdate: "2026-99-99" } }).success).toBe(false);
+      expect(
+        leaseSchema.safeParse({ lease: { ...validLease.lease, startdate: "01-15-2026" } }).success,
+      ).toBe(false);
+      expect(
+        leaseSchema.safeParse({ lease: { ...validLease.lease, startdate: "2026-99-99" } }).success,
+      ).toBe(false);
     });
 
     it("rejects invalid duration", () => {
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, duration: "90 days" } }).success).toBe(false);
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, duration: "P1Y" } }).success).toBe(false); // exceeds 180 days
+      expect(
+        leaseSchema.safeParse({ lease: { ...validLease.lease, duration: "90 days" } }).success,
+      ).toBe(false);
+      expect(
+        leaseSchema.safeParse({ lease: { ...validLease.lease, duration: "P1Y" } }).success,
+      ).toBe(false); // exceeds 180 days
     });
 
     it("rejects invalid reviewer", () => {
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, reviewer: "" } }).success).toBe(false);
-      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, reviewer: "johndoe" } }).success).toBe(false); // no @
+      expect(leaseSchema.safeParse({ lease: { ...validLease.lease, reviewer: "" } }).success).toBe(
+        false,
+      );
+      expect(
+        leaseSchema.safeParse({ lease: { ...validLease.lease, reviewer: "johndoe" } }).success,
+      ).toBe(false); // no @
     });
 
     it("rejects missing lease key", () => {
@@ -118,7 +146,10 @@ describe("validate-arm-leases", () => {
 
     it("returns error for non-existent file", async () => {
       mockReadFile.mockRejectedValue(new Error("ENOENT"));
-      const result = await validateLeaseContent("/nonexistent/lease.yaml", ".github/arm-leases/svc/NS/lease.yaml");
+      const result = await validateLeaseContent(
+        "/nonexistent/lease.yaml",
+        ".github/arm-leases/svc/NS/lease.yaml",
+      );
       expect(result.errors.some((e) => e.includes("Error reading file"))).toBe(true);
     });
 
@@ -126,19 +157,27 @@ describe("validate-arm-leases", () => {
       // 5 days ago - should pass
       const recentDate = new Date();
       recentDate.setDate(recentDate.getDate() - 5);
-      mockReadFile.mockResolvedValue(validYaml.replace("2027-06-01", recentDate.toISOString().split("T")[0]));
-      let result = await validateLeaseContent("/repo/lease.yaml", ".github/arm-leases/testservice/Microsoft.Test/lease.yaml");
+      mockReadFile.mockResolvedValue(
+        validYaml.replace("2027-06-01", recentDate.toISOString().split("T")[0]),
+      );
+      let result = await validateLeaseContent(
+        "/repo/lease.yaml",
+        ".github/arm-leases/testservice/Microsoft.Test/lease.yaml",
+      );
       expect(result.errors).toHaveLength(0);
 
       // Old date - should fail
       mockReadFile.mockResolvedValue(validYaml.replace("2027-06-01", "2025-01-01"));
-      result = await validateLeaseContent("/repo/lease.yaml", ".github/arm-leases/testservice/Microsoft.Test/lease.yaml");
+      result = await validateLeaseContent(
+        "/repo/lease.yaml",
+        ".github/arm-leases/testservice/Microsoft.Test/lease.yaml",
+      );
       expect(result.errors.some((e) => e.includes("Startdate is in the past"))).toBe(true);
     });
 
     it("validates specification folder structure", async () => {
       mockReadFile.mockResolvedValue(validYaml);
-      mockStat.mockResolvedValue({ isDirectory: () => true });
+      mockStat.mockResolvedValue(/** @type {any} */ ({ isDirectory: () => true }));
 
       const result = await validateLeaseContent(
         "/repo/.github/arm-leases/testservice/Microsoft.Test/lease.yaml",
@@ -163,7 +202,9 @@ describe("validate-arm-leases", () => {
 
     it("allows new RP when service exists but RP folder does not", async () => {
       mockReadFile.mockResolvedValue(validYaml);
-      mockStat.mockResolvedValueOnce({ isDirectory: () => true }).mockRejectedValueOnce(new Error("ENOENT"));
+      mockStat
+        .mockResolvedValueOnce(/** @type {any} */ ({ isDirectory: () => true }))
+        .mockRejectedValueOnce(new Error("ENOENT"));
 
       const result = await validateLeaseContent(
         "/repo/.github/arm-leases/testservice/Microsoft.Test/lease.yaml",

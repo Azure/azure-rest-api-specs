@@ -1,9 +1,9 @@
+import { Temporal } from "@js-temporal/polyfill";
 import { readFile, stat } from "fs/promises";
+import YAML from "js-yaml";
 import { resolve } from "path";
 import { inspect } from "util";
-import YAML from "js-yaml";
 import * as z from "zod";
-import { Temporal } from "@js-temporal/polyfill";
 import { getChangedFiles } from "../../../shared/src/changed-files.js";
 import { CoreLogger } from "../core-logger.js";
 
@@ -11,9 +11,9 @@ import { CoreLogger } from "../core-logger.js";
 // Configuration
 // ============================================
 
-export const LEASE_FILE_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/lease\.yaml$/;
+export const LEASE_FILE_PATTERN = /^\.github\/arm-leases\/[a-z0-9-]+\/[a-zA-Z0-9.]+\/lease\.yaml$/;
 export const LEASE_FILE_WITH_GROUP_PATTERN =
-  /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/(?!stable|preview)([^/]+)\/lease\.yaml$/;
+  /^\.github\/arm-leases\/[a-z0-9-]+\/[a-zA-Z0-9.]+\/(?!stable|preview)([^/]+)\/lease\.yaml$/;
 
 export const ALLOWED_FILE_PATTERNS = [
   LEASE_FILE_PATTERN,
@@ -30,50 +30,62 @@ export const ALLOWED_FILE_PATTERNS = [
  *   resource-provider: Microsoft.Compute
  *   startdate: "2025-06-01"
  *   duration: "P180D"
- *   reviewer: alias
+ *   reviewer: "@githubUser"
  * ```
  */
 export const leaseSchema = z.object({
-  lease: z.object({
-    "resource-provider": z
-      .string()
-      .min(1, "resource-provider is required")
-      .refine(
-        (rp) => rp.split(".").every((part) => /^[A-Z]/.test(part)),
-        "Resource provider parts must start with a capital letter (e.g., Microsoft.Test, Azure.Widget)",
-      ),
-    startdate: z
-      .string()
-      .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid startdate format (expected: YYYY-MM-DD)")
-      .refine(
-        (value) => {
+  lease: z
+    .object({
+      "resource-provider": z
+        .string()
+        .min(1, "resource-provider is required")
+        .refine(
+          (rp) => rp.split(".").every((part) => /^[A-Z]/.test(part)),
+          "Resource provider parts must start with a capital letter (e.g., Microsoft.Test, Azure.Widget)",
+        ),
+      startdate: z
+        .string()
+        .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid startdate format (expected: YYYY-MM-DD)")
+        .refine((value) => {
           try {
             Temporal.PlainDate.from(value);
             return true;
           } catch {
             return false;
           }
-        },
-        "startdate must be a valid calendar date",
-      ),
-    duration: z.string().refine(
-      (v) => {
+        }, "startdate must be a valid calendar date"),
+      duration: z.string().refine((v) => {
         try {
-          return Temporal.Duration.from(v).total({ unit: "days", relativeTo: Temporal.Now.plainDateISO() }) <= 180;
+          Temporal.Duration.from(v);
+          return true;
         } catch {
           return false;
         }
-      },
-      "duration must be a valid ISO 8601 duration not exceeding 180 days (e.g. P180D, P6M)",
-    ),
-    reviewer: z
-      .string()
-      .min(1, "Reviewer is required and cannot be empty")
-      .refine(
-        (r) => r.startsWith("@") && r.trim().length > 1,
-        "Reviewer must be a GitHub alias starting with @ (e.g., @githubUser)",
-      ),
-  }),
+      }, "duration must be a valid ISO 8601 duration (e.g. P180D, P6M)"),
+      reviewer: z
+        .string()
+        .min(1, "Reviewer is required and cannot be empty")
+        .refine(
+          (r) => r.startsWith("@") && r.trim().length > 1,
+          "Reviewer must be a GitHub alias starting with @ (e.g., @githubUser)",
+        ),
+    })
+    .superRefine((lease, ctx) => {
+      try {
+        const start = Temporal.PlainDate.from(lease.startdate);
+        const duration = Temporal.Duration.from(lease.duration);
+        const totalDays = duration.total({ unit: "days", relativeTo: start });
+        if (totalDays > 180) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ["duration"],
+            message: "duration must not exceed 180 days relative to startdate (e.g. P180D, P6M)",
+          });
+        }
+      } catch {
+        // If parsing fails, field-level validators will report errors.
+      }
+    }),
 });
 
 // ============================================
@@ -151,7 +163,12 @@ export async function validateLeaseContent(leaseFile, relativePath, workspaceRoo
 
   // Cross-field validation: startdate must not be more than 10 days in the past
   const today = Temporal.Now.plainDateISO();
-  if (Temporal.PlainDate.compare(Temporal.PlainDate.from(lease.startdate), today.subtract({ days: 10 })) < 0) {
+  if (
+    Temporal.PlainDate.compare(
+      Temporal.PlainDate.from(lease.startdate),
+      today.subtract({ days: 10 }),
+    ) < 0
+  ) {
     errors.push(
       `Startdate is in the past: ${lease.startdate} (must be within 10 days of today: ${today.toString()})`,
     );
@@ -180,7 +197,13 @@ export async function validateLeaseContent(leaseFile, relativePath, workspaceRoo
     // Then check if resource-manager/<rpNamespace>/ exists (skip if new RP or service doesn't exist)
     if (serviceExists) {
       try {
-        if (!(await stat(resolve(workspaceRoot, "specification", orgName, "resource-manager", folderRP))).isDirectory()) {
+        if (
+          !(
+            await stat(
+              resolve(workspaceRoot, "specification", orgName, "resource-manager", folderRP),
+            )
+          ).isDirectory()
+        ) {
           errors.push(
             `Specification path exists but is not a directory: specification/${orgName}/resource-manager/${folderRP}`,
           );
@@ -205,7 +228,7 @@ export async function validateLeaseContent(leaseFile, relativePath, workspaceRoo
  * @returns {Promise<{ status: string, errors: number }>} Validation result
  */
 export default async function validateArmLeases(core) {
-  const cwd = process.env.GITHUB_WORKSPACE;
+  const cwd = process.env.GITHUB_WORKSPACE || process.cwd();
   let hasErrors = false;
 
   core.info("Running ARM Lease File Validation");

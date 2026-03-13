@@ -77,7 +77,7 @@ All lease files are automatically validated with the following requirements:
 
 ### 5. Reviewer
 - Required field that cannot be empty
-- Must be a GitHub alias starting with `@` (e.g., `@octocat`)
+- Must be a GitHub alias starting with `@` (e.g., `@githubUsername`)
 
 ## Troubleshooting
 
