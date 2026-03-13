@@ -122,3 +122,96 @@ using Microsoft.ContainerRegistry;
 
 // C# namespace fix: interface Tasks conflicts with last namespace segment "Tasks"
 @@clientName(Tasks, "ContainerRegistryTaskRestClient", "csharp");
+
+// C# client naming: prefix generic names with service context
+@@clientName(AuthInfo, "ContainerRegistryTaskAuthInfo", "csharp");
+@@clientName(IdentityProperties,
+  "ContainerRegistryTaskIdentityProperties",
+  "csharp"
+);
+@@clientName(UserIdentityProperties,
+  "ContainerRegistryTaskUserIdentityProperties",
+  "csharp"
+);
+@@clientName(PlatformProperties,
+  "ContainerRegistryTaskPlatformProperties",
+  "csharp"
+);
+@@clientName(SourceControlType,
+  "ContainerRegistryTaskSourceControlType",
+  "csharp"
+);
+@@clientName(SourceRegistryLoginMode,
+  "ContainerRegistryTaskSourceRegistryLoginMode",
+  "csharp"
+);
+@@clientName(SourceRegistryCredentials,
+  "ContainerRegistryTaskSourceRegistryCredentials",
+  "csharp"
+);
+@@clientName(SourceProperties,
+  "ContainerRegistryTaskSourceProperties",
+  "csharp"
+);
+@@clientName(SourceTrigger, "ContainerRegistryTaskSourceTrigger", "csharp");
+@@clientName(SourceTriggerDescriptor,
+  "ContainerRegistryTaskSourceTriggerDescriptor",
+  "csharp"
+);
+@@clientName(SourceTriggerEvent,
+  "ContainerRegistryTaskSourceTriggerEvent",
+  "csharp"
+);
+@@clientName(CustomRegistryCredentials,
+  "ContainerRegistryTaskCustomRegistryCredentials",
+  "csharp"
+);
+@@clientName(BaseImageDependency,
+  "ContainerRegistryTaskBaseImageDependency",
+  "csharp"
+);
+@@clientName(BaseImageDependencyType,
+  "ContainerRegistryTaskBaseImageDependencyType",
+  "csharp"
+);
+@@clientName(BaseImageTrigger,
+  "ContainerRegistryTaskBaseImageTrigger",
+  "csharp"
+);
+@@clientName(BaseImageTriggerType,
+  "ContainerRegistryTaskBaseImageTriggerType",
+  "csharp"
+);
+@@clientName(ImageDescriptor,
+  "ContainerRegistryTaskImageDescriptor",
+  "csharp"
+);
+@@clientName(ImageUpdateTrigger,
+  "ContainerRegistryTaskImageUpdateTrigger",
+  "csharp"
+);
+@@clientName(TriggerProperties,
+  "ContainerRegistryTaskTriggerProperties",
+  "csharp"
+);
+@@clientName(TimerTrigger, "ContainerRegistryTaskTimerTrigger", "csharp");
+@@clientName(TimerTriggerDescriptor,
+  "ContainerRegistryTaskTimerTriggerDescriptor",
+  "csharp"
+);
+@@clientName(OverrideTaskStepProperties,
+  "ContainerRegistryTaskOverrideStepProperties",
+  "csharp"
+);
+@@clientName(UpdateTriggerPayloadType,
+  "ContainerRegistryTaskUpdateTriggerPayloadType",
+  "csharp"
+);
+@@clientName(RunGetLogResult, "ContainerRegistryTaskRunLogResult", "csharp");
+@@clientName(ResourceIdentityType,
+  "ContainerRegistryTaskResourceIdentityType",
+  "csharp"
+);
+
+// C# enum member rename: identifiers cannot start with a digit
+@@clientName(Architecture.`386`, "X386", "csharp");
