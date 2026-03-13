@@ -145,14 +145,6 @@ using Microsoft.DataProtection;
   "BackupFindRestorableTimeRangeResultProperties",
   "csharp"
 );
-@@usage(AzureBackupFindRestorableTimeRangesResponseResource,
-  Usage.input | Usage.output,
-  "csharp"
-);
-@@clientName(AzureBackupFindRestorableTimeRangesResponseResource,
-  "BackupFindRestorableTimeRangeResult",
-  "csharp"
-);
 @@clientName(AzureBackupJob, "DataProtectionBackupJobProperties", "csharp");
 @@clientName(AzureBackupJob.activityID, "ActivityId", "csharp");
 @@clientName(AzureBackupJob.errorDetails, "JobErrorDetails", "csharp");
@@ -816,3 +808,22 @@ using Microsoft.DataProtection;
   "patch",
   "csharp"
 );
+
+// Below is the workaround for C# code generation to produce the correct class inheritance hierarchy for BackupFindRestorableTimeRangeResult.
+/**
+ * List Restore Ranges Response
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model BackupFindRestorableTimeRangesResponse extends Azure.ResourceManager.CommonTypes.Resource {
+  ...OmitProperties<AzureBackupFindRestorableTimeRangesResponseResource, "id" | "name" | "type" | "systemData">;
+}
+@@usage(BackupFindRestorableTimeRangesResponse,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@alternateType(AzureBackupFindRestorableTimeRangesResponseResource, BackupFindRestorableTimeRangesResponse, "csharp");
+@@clientName(BackupFindRestorableTimeRangesResponse,
+  "BackupFindRestorableTimeRangeResult",
+  "csharp"
+);
+

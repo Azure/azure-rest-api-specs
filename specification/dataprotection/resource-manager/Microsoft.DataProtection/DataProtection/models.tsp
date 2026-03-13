@@ -2338,7 +2338,8 @@ model AzureBackupFindRestorableTimeRangesRequest {
 /**
  * List Restore Ranges Response
  */
-model AzureBackupFindRestorableTimeRangesResponseResource is DppResource {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AzureBackupFindRestorableTimeRangesResponseResource extends DppResource {
   /**
    * AzureBackupFindRestorableTimeRangesResponseResource properties
    */

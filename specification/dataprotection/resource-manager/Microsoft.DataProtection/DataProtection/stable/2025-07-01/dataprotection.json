@@ -4680,31 +4680,16 @@
       "type": "object",
       "description": "List Restore Ranges Response",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id represents the complete path to the resource.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name associated with the resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesResponse",
           "description": "AzureBackupFindRestorableTimeRangesResponseResource properties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResource"
+        }
+      ]
     },
     "AzureBackupJob": {
       "type": "object",
@@ -6303,6 +6288,32 @@
           "additionalProperties": {
             "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
           }
+        }
+      }
+    },
+    "DppResource": {
+      "type": "object",
+      "description": "Resource class",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id represents the complete path to the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name associated with the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
         }
       }
     },
