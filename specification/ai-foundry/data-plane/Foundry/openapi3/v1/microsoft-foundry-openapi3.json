@@ -3115,12 +3115,9 @@
         "description": "Generate Insights",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
-            "required": true,
+            "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -3147,6 +3144,16 @@
               "type": "string",
               "format": "http-date"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -3162,19 +3169,10 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -3200,7 +3198,16 @@
         "description": "List all insights in reverse chronological order (newest first).",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Insights=V1Preview"
+              ]
+            }
           },
           {
             "name": "type",
@@ -3253,16 +3260,14 @@
             "explode": false
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "Insights=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -3278,19 +3283,10 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -3307,21 +3303,9 @@
         "description": "Get a specific insight by Id.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "The unique identifier for the insights report.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
-            "required": true,
+            "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -3339,6 +3323,25 @@
               "type": "boolean"
             },
             "explode": false
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the Insight to get",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -3354,19 +3357,10 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
