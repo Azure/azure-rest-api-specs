@@ -529,6 +529,15 @@
         "x-ms-examples": {
           "ListLocationBasedModelCapacities": {
             "$ref": "./examples/ListLocationBasedModelCapacities.json"
+          },
+          "ListLocationBasedModelCapacities Classic Scope": {
+            "$ref": "./examples/ListLocationBasedModelCapacitiesClassicScope.json"
+          },
+          "ListLocationBasedModelCapacities DataZone Scope": {
+            "$ref": "./examples/ListLocationBasedModelCapacitiesDataZoneScope.json"
+          },
+          "ListLocationBasedModelCapacities Global Scope": {
+            "$ref": "./examples/ListLocationBasedModelCapacitiesGlobalScope.json"
           }
         },
         "x-ms-pageable": {
@@ -829,6 +838,15 @@
         "x-ms-examples": {
           "Get Usages": {
             "$ref": "./examples/ListUsages.json"
+          },
+          "Get Usages Classic Scope": {
+            "$ref": "./examples/ListUsagesClassicScope.json"
+          },
+          "Get Usages DataZone Scope": {
+            "$ref": "./examples/ListUsagesDataZoneScope.json"
+          },
+          "Get Usages Global Scope": {
+            "$ref": "./examples/ListUsagesGlobalScope.json"
           }
         },
         "x-ms-pageable": {
@@ -892,6 +910,15 @@
         "x-ms-examples": {
           "ListModelCapacities": {
             "$ref": "./examples/ListModelCapacities.json"
+          },
+          "ListModelCapacities Classic Scope": {
+            "$ref": "./examples/ListModelCapacitiesClassicScope.json"
+          },
+          "ListModelCapacities DataZone Scope": {
+            "$ref": "./examples/ListModelCapacitiesDataZoneScope.json"
+          },
+          "ListModelCapacities Global Scope": {
+            "$ref": "./examples/ListModelCapacitiesGlobalScope.json"
           }
         },
         "x-ms-pageable": {
@@ -8847,6 +8874,15 @@
         "x-ms-examples": {
           "Get Usages": {
             "$ref": "./examples/GetUsages.json"
+          },
+          "Get Usages Classic Scope": {
+            "$ref": "./examples/GetUsagesClassicScope.json"
+          },
+          "Get Usages DataZone Scope": {
+            "$ref": "./examples/GetUsagesDataZoneScope.json"
+          },
+          "Get Usages Global Scope": {
+            "$ref": "./examples/GetUsagesGlobalScope.json"
           }
         }
       }
@@ -14086,6 +14122,16 @@
         "skuName": {
           "type": "string"
         },
+        "scopeId": {
+          "type": "string",
+          "description": "The scope identifier for the capacity (e.g., US, EUR, Global, or a region name like eastus).",
+          "x-nullable": true
+        },
+        "scopeType": {
+          "$ref": "#/definitions/QuotaScopeType",
+          "description": "The scope type for the capacity (e.g., Global, DataZone, Regional).",
+          "x-nullable": true
+        },
         "availableCapacity": {
           "type": "number",
           "format": "float",
@@ -15044,6 +15090,38 @@
             "key"
           ]
         }
+      }
+    },
+    "QuotaScopeType": {
+      "type": "string",
+      "description": "The quota scope that determines the level at which the quota is applied.",
+      "enum": [
+        "Regional",
+        "Global",
+        "DataZone",
+        "Classic"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Regional",
+            "value": "Regional"
+          },
+          {
+            "name": "Global",
+            "value": "Global"
+          },
+          {
+            "name": "DataZone",
+            "value": "DataZone"
+          },
+          {
+            "name": "Classic",
+            "value": "Classic"
+          }
+        ]
       }
     },
     "QuotaTier": {
@@ -16939,6 +17017,16 @@
         "status": {
           "$ref": "#/definitions/QuotaUsageStatus",
           "description": "Cognitive Services account quota usage status."
+        },
+        "scopeType": {
+          "$ref": "#/definitions/QuotaScopeType",
+          "description": "The scope type for the quota (e.g., Global, DataZone, Regional).",
+          "x-nullable": true
+        },
+        "scopeId": {
+          "type": "string",
+          "description": "The scope identifier for the quota (e.g., US, EUR, Global, or a region name like eastus).",
+          "x-nullable": true
         }
       }
     },
