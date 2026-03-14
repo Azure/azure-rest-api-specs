@@ -62,12 +62,12 @@ model HealthReportsList is Azure.Core.Page<HealthReport>;
 /**
  * Describes properties of the health report
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HealthReportProperties {
   /**
    * The resource details of the health report
    */
-  resourceDetails?: ResourceDetails;
+  resourceDetails?: resourceDetails;
 
   /**
    * The environment details of the resource
@@ -82,7 +82,7 @@ model HealthReportProperties {
   /**
    * The status of the health report
    */
-  status?: Status;
+  status?: status;
 
   /**
    * The affected defenders plans by unhealthy report
@@ -111,7 +111,8 @@ model HealthReportProperties {
 /**
  * The resource details of the health report
  */
-model ResourceDetails {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model resourceDetails {
   /**
    * The status of the health report
    */
@@ -183,7 +184,8 @@ model HealthDataClassification {
 /**
  * The status of the health report
  */
-model Status {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model status {
   /**
    * The status of the health report
    */
@@ -224,6 +226,7 @@ model Issue {
   /**
    * The unique issue key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   issueKey: string;
 
   /**
@@ -254,7 +257,7 @@ model Issue {
   /**
    * Additional data for the given issue. The additional data depends on the issue type
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   issueAdditionalData?: Record<string>;
 }
 
