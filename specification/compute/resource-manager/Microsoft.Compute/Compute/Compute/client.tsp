@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Common;
 using Compute;
 
 @@clientName(NetworkApiVersion.`2020-11-01`, "TwoThousandTwenty1101", "go");
@@ -332,5 +333,152 @@ using Compute;
 );
 @@clientName(VirtualMachineScaleSetVMProtectionPolicy,
   "VirtualMachineScaleSetVmProtectionPolicy",
+  "csharp"
+);
+
+// ── Type renames for backward compatibility (migration from AutoRest) ──
+
+// Enum/union plural→singular renames
+@@clientName(ArchitectureTypes, "ArchitectureType", "csharp");
+@@clientName(ConsistencyModeTypes, "ConsistencyModeType", "csharp");
+@@clientName(DedicatedHostLicenseTypes, "DedicatedHostLicenseType", "csharp");
+@@clientName(OperatingSystemStateTypes, "OperatingSystemStateType", "csharp");
+@@clientName(OrchestrationServiceNames, "OrchestrationServiceName", "csharp");
+@@clientName(VirtualMachineEvictionPolicyTypes,
+  "VirtualMachineEvictionPolicyType",
+  "csharp"
+);
+@@clientName(VirtualMachinePriorityTypes,
+  "VirtualMachinePriorityType",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetScaleInRules,
+  "VirtualMachineScaleSetScaleInRule",
+  "csharp"
+);
+@@clientName(VMGuestPatchClassificationLinux,
+  "VmGuestPatchClassificationForLinux",
+  "csharp"
+);
+@@clientName(VMGuestPatchClassificationWindows,
+  "VmGuestPatchClassificationForWindows",
+  "csharp"
+);
+
+// Model casing renames
+@@clientName(DedicatedHostAllocatableVM,
+  "DedicatedHostAllocatableVm",
+  "csharp"
+);
+
+// Resource type VM→Vm casing renames (backward compat with AutoRest output)
+@@clientName(VirtualMachineScaleSetVM, "VirtualMachineScaleSetVm", "csharp");
+@@clientName(VirtualMachineScaleSetVMExtension,
+  "VirtualMachineScaleSetVmExtension",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetVMNetworkProfileConfiguration,
+  "VirtualMachineScaleSetVmNetworkProfileConfiguration",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetVMInstanceRequiredIDs,
+  "VirtualMachineScaleSetVmInstanceRequiredIds",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetVMExtensionsSummary,
+  "VirtualMachineScaleSetVmExtensionsSummary",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetVMReimageParameters,
+  "VirtualMachineScaleSetVmReimageContent",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetVMExtensionUpdate,
+  "VirtualMachineScaleSetVmExtensionPatch",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetVMExtensionsListResult,
+  "VirtualMachineScaleSetVmExtensionsListResult",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetVMListResult,
+  "VirtualMachineScaleSetVmListResult",
+  "csharp"
+);
+
+// RP-prefix renames (old AutoRest prepend-rp-prefix convention)
+@@clientName(ApiError, "ComputeApiError", "csharp");
+@@clientName(Placement, "VirtualMachinePlacement", "csharp");
+@@clientName(ScheduledEventsProfile, "ComputeScheduledEventsProfile", "csharp");
+@@clientName(SubResourceWithColocationStatus,
+  "ComputeSubResourceDataWithColocationStatus",
+  "csharp"
+);
+@@clientName(UsageName, "ComputeUsageName", "csharp");
+@@clientName(OperatingSystemType, "SupportedOperatingSystemType", "csharp");
+@@clientName(ReservationType, "CapacityReservationType", "csharp");
+@@clientName(ApiErrorBase, "ComputeApiErrorBase", "csharp");
+@@clientName(VMGalleryApplication,
+  "VirtualMachineGalleryApplication",
+  "csharp"
+);
+@@clientName(NetworkInterfaceReference,
+  "VirtualMachineNetworkInterfaceReference",
+  "csharp"
+);
+@@clientName(SkuProfileVMSize, "ComputeSkuProfileVmSize", "csharp");
+@@clientName(VirtualMachineScaleSetVMProfile,
+  "VirtualMachineScaleSetVmProfile",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetUpdateVMProfile,
+  "VirtualMachineScaleSetUpdateVmProfile",
+  "csharp"
+);
+
+// Accessibility overrides (types generated as internal that should be public)
+@@access(VirtualMachineScaleSetVMProfile, Access.public, "csharp");
+@@access(VirtualMachineScaleSetProperties, Access.public, "csharp");
+@@access(VirtualMachineScaleSetUpdateVMProfile, Access.public, "csharp");
+@@access(VirtualMachineScaleSetVMProperties, Access.public, "csharp");
+
+// Rename listByLocation operations to avoid name collision (both map to GetByLocation)
+@@clientName(VirtualMachinesOperationGroup.listByLocation,
+  "GetVirtualMachinesByLocation",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetsOperationGroup.listByLocation,
+  "GetVirtualMachineScaleSetsByLocation",
+  "csharp"
+);
+
+// Rename extension property "type" to avoid conflict with base class "Type" property
+@@clientName(VirtualMachineScaleSetExtensionProperties.type,
+  "ExtensionType",
+  "csharp"
+);
+@@clientName(VirtualMachineExtensionProperties.type, "ExtensionType", "csharp");
+@@clientName(VirtualMachineExtensionUpdateProperties.type,
+  "ExtensionType",
+  "csharp"
+);
+
+// Rename duplicate automaticallyApprove in sub-models to avoid flattening collision
+@@clientName(UserInitiatedRedeploy.automaticallyApprove,
+  "AutomaticallyApproveRedeploy",
+  "csharp"
+);
+@@clientName(AllInstancesDown.automaticallyApprove,
+  "AutomaticallyApproveAllDown",
+  "csharp"
+);
+
+// Resource type rename for backward compatibility - RollingUpgradeStatusInfo → VirtualMachineScaleSetRollingUpgrade
+@@clientName(RollingUpgradeStatusInfo,
+  "VirtualMachineScaleSetRollingUpgrade",
+  "csharp"
+);
+@@clientName(RollingUpgradeStatusInfoProperties,
+  "VirtualMachineScaleSetRollingUpgradeProperties",
   "csharp"
 );

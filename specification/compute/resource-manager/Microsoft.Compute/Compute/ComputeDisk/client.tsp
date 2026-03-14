@@ -31,3 +31,10 @@ using ComputeDisk;
   "getSecureVMGuestStateSas",
   "java"
 );
+
+// C# renames for backward compatibility (migration from AutoRest)
+@@clientName(CreationData, "DiskCreationData", "csharp");
+@@clientName(FileFormat, "DiskImageFileFormat", "csharp");
+@@clientName(PublicNetworkAccess, "DiskPublicNetworkAccess", "csharp");
+@@clientName(EncryptionSettingsCollection, "EncryptionSettingsGroup", "csharp");
+@@clientName(Encryption, "DiskEncryption", "csharp");
