@@ -25,40 +25,40 @@ model GetSensitivitySettingsResponse
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations(#{ omitTags: true })
 interface GetSensitivitySettingsResponses {
   /**
    * Gets data sensitivity settings for sensitive data discovery
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SensitivitySettings_Get")
+  @tag("sensitivitySettings")
   get is ArmResourceRead<
     GetSensitivitySettingsResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = CloudError
   >;
 
   /**
    * Create or update data sensitivity settings for sensitive data discovery
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("SensitivitySettings_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("sensitivitySettings")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     GetSensitivitySettingsResponse,
     Request = UpdateSensitivitySettingsRequest,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = ArmResourceUpdatedResponse<GetSensitivitySettingsResponse>
+    Response = ArmResourceUpdatedResponse<GetSensitivitySettingsResponse>,
+    Error = CloudError
   >;
 
   /**
    * Gets a list with a single sensitivity settings resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SensitivitySettings_List")
   list is ArmResourceListByParent<
     GetSensitivitySettingsResponse,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = ArmResponse<GetSensitivitySettingsListResponse>
+    Response = ArmResponse<GetSensitivitySettingsListResponse>,
+    Error = CloudError
   >;
 }
 

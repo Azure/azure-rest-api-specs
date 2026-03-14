@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Data Sensitivity Settings",
     "version": "2023-02-15-preview",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "description": "API spec for Microsoft.Security Data Sensitivity Settings",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -40,16 +40,13 @@
   },
   "tags": [
     {
-      "name": "GetSensitivitySettingsResponses"
+      "name": "sensitivitySettings"
     }
   ],
   "paths": {
     "/providers/Microsoft.Security/sensitivitySettings": {
       "get": {
         "operationId": "SensitivitySettings_List",
-        "tags": [
-          "GetSensitivitySettingsResponses"
-        ],
         "description": "Gets a list with a single sensitivity settings resource",
         "parameters": [
           {
@@ -66,7 +63,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -81,7 +78,7 @@
       "get": {
         "operationId": "SensitivitySettings_Get",
         "tags": [
-          "GetSensitivitySettingsResponses"
+          "sensitivitySettings"
         ],
         "description": "Gets data sensitivity settings for sensitive data discovery",
         "parameters": [
@@ -99,7 +96,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -112,7 +109,7 @@
       "put": {
         "operationId": "SensitivitySettings_CreateOrUpdate",
         "tags": [
-          "GetSensitivitySettingsResponses"
+          "sensitivitySettings"
         ],
         "description": "Create or update data sensitivity settings for sensitive data discovery",
         "parameters": [
@@ -139,7 +136,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -152,6 +149,11 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "BuiltInInfoType": {
       "type": "object",
       "description": "Pre-configured sensitive information type",
@@ -168,6 +170,71 @@
         "type": {
           "type": "string",
           "description": "Category of the built-in info type"
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
         }
       }
     },
@@ -206,7 +273,7 @@
           "type": "array",
           "description": "List of selected sensitive info types' IDs.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         },
         "sensitivityThresholdLabelOrder": {
@@ -339,7 +406,7 @@
           "type": "array",
           "description": "List of selected sensitive info types' IDs.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         },
         "sensitivityThresholdLabelOrder": {

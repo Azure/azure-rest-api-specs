@@ -1,11 +1,5 @@
 ## Swagger Changes
 
-### Changes for `tags`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/providers/microsoft.Security/sensitivitySettings'].get.tags__added` | added | `["GetSensitivitySettingsResponses"]` |
-
 ### Changes for `Labels`
 
 | Path | Change Type | Value |
@@ -17,6 +11,30 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.SensitiveInfoTypesIds__deleted` | deleted | `{"type":"array","description":"List of selected sensitive info types' IDs.","items":{"type":"string"...` |
+
+### Changes for `Azure.Core.uuid`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions['Azure.Core.uuid__added']` | added | `{"type":"string","format":"uuid","description":"Universally Unique Identifier"}` |
+
+### Changes for `CloudError`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.CloudError__added` | added | `{"type":"object","description":"Common error response for all Azure Resource Manager APIs to return ...` |
+
+### Changes for `CloudErrorBody`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.CloudErrorBody__added` | added | `{"type":"object","description":"The error detail.","properties":{"code":{"type":"string","descriptio...` |
+
+### Changes for `ErrorAdditionalInfo`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ErrorAdditionalInfo__added` | added | `{"type":"object","description":"The resource management error additional info.","properties":{"type"...` |
 
 ### Changes for `GetSensitivitySettingsResponseProperties`
 
@@ -86,15 +104,13 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.UpdateSensitivitySettingsRequest.properties.sensitiveInfoTypesIds.items__added` | added | `{"type":"string"}` |
+| `definitions.UpdateSensitivitySettingsRequest.properties.sensitiveInfoTypesIds.items__added` | added | `{"$ref":"#/definitions/Azure.Core.uuid"}` |
 
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
-| `info.description` | `API spec for Microsoft.Security Data Sensitivity Settings` | `API spec for Microsoft.Security (Azure Security Center) resource provider` |
-| `info.title` | `Data Sensitivity Settings` | `SecurityCenter` |
-| `paths['/providers/microsoft.Security/sensitivitySettings'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/providers/microsoft.Security/sensitivitySettings/current'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/providers/microsoft.Security/sensitivitySettings/current'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/providers/microsoft.Security/sensitivitySettings'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/providers/microsoft.Security/sensitivitySettings/current'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/providers/microsoft.Security/sensitivitySettings/current'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 
