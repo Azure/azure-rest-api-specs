@@ -5479,7 +5479,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Account Agent Application.": {
+          "Get Account Agentic Application.": {
             "$ref": "./examples/AgenticApplication/get.json"
           }
         }
@@ -5574,7 +5574,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or Update Account Agent Application.": {
+          "Create or Update Account Agentic Application.": {
             "$ref": "./examples/AgenticApplication/createOrUpdate.json"
           }
         },
@@ -5655,7 +5655,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete Account Agent Application.": {
+          "Delete Account Agentic Application.": {
             "$ref": "./examples/AgenticApplication/delete.json"
           }
         },
@@ -6251,7 +6251,7 @@
           }
         },
         "x-ms-examples": {
-          "Disable Agent Application.": {
+          "Disable Agentic Application.": {
             "$ref": "./examples/AgenticApplication/disable.json"
           }
         }
@@ -6315,7 +6315,7 @@
           }
         },
         "x-ms-examples": {
-          "Enable Agent Application.": {
+          "Enable Agentic Application.": {
             "$ref": "./examples/AgenticApplication/enable.json"
           }
         }
@@ -6382,7 +6382,7 @@
           }
         },
         "x-ms-examples": {
-          "List Agents for Agent Application.": {
+          "List Agents for Agentic Application.": {
             "$ref": "./examples/AgenticApplication/listAgents.json"
           }
         }
@@ -9826,6 +9826,42 @@
         ]
       }
     },
+    "AgenticApplication": {
+      "type": "object",
+      "description": "Agentic Application resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgenticApplicationProperties",
+          "description": "[Required] Additional attributes of the entity."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AgenticApplicationResourceArmPaginatedResult": {
+      "type": "object",
+      "description": "A paginated list of Agentic Application entities.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of Agentic Application objects. If null, there are no additional pages.",
+          "x-nullable": true
+        },
+        "value": {
+          "type": "array",
+          "description": "An array of objects of type Agentic Application.",
+          "items": {
+            "$ref": "#/definitions/AgenticApplication"
+          }
+        }
+      }
+    },
     "AgentCard": {
       "type": "object",
       "description": "Represents a detailed description of an agent, including its name, functionality, hosting information, supported interaction modes, and available skills.",
@@ -10005,7 +10041,8 @@
             "description": "The deployment is being deleted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "AgentDeploymentResourceArmPaginatedResult": {
       "type": "object",
@@ -10213,24 +10250,6 @@
         }
       }
     },
-    "AgenticApplication": {
-      "type": "object",
-      "description": "Agentic Application resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AgenticApplicationProperties",
-          "description": "[Required] Additional attributes of the entity."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "AgenticApplicationProperties": {
       "type": "object",
       "description": "Resource type representing an agentic application as a management construct.",
@@ -10336,25 +10355,8 @@
             "description": "The application is being deleted."
           }
         ]
-      }
-    },
-    "AgenticApplicationResourceArmPaginatedResult": {
-      "type": "object",
-      "description": "A paginated list of Agent Application entities.",
-      "properties": {
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of Agentic Application objects. If null, there are no additional pages.",
-          "x-nullable": true
-        },
-        "value": {
-          "type": "array",
-          "description": "An array of objects of type Agentic Application.",
-          "items": {
-            "$ref": "#/definitions/AgenticApplication"
-          }
-        }
-      }
+      },
+      "readOnly": true
     },
     "ApiKeyAuthConnectionProperties": {
       "type": "object",
@@ -10805,7 +10807,8 @@
             "value": "Deleting"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "CapabilityHostResourceArmPaginatedResult": {
       "type": "object",
@@ -11198,7 +11201,8 @@
             "value": "Canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "CommitmentQuota": {
       "type": "object",
@@ -12778,7 +12782,8 @@
             "value": "Canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "DeploymentScaleSettings": {
       "type": "object",
@@ -13066,7 +13071,8 @@
             "value": "Canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "EncryptionScopeState": {
       "type": "string",
@@ -13328,7 +13334,8 @@
             "description": "Identity is being deleted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "IpRule": {
       "type": "object",
@@ -13541,7 +13548,8 @@
             "value": "Deleted"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ManagedNetworkSettings": {
       "type": "object",
@@ -14878,7 +14886,8 @@
             "value": "ResolvingDNS"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "PublicNetworkAccess": {
       "type": "string",
