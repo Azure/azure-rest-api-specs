@@ -100,7 +100,21 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: SensitivitySettings.Management
+tag: HealthReports.Management
+```
+
+### Composite packages
+
+The following packages may be composed from multiple api-versions.
+
+
+### Tag: HealthReports.Management
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'HealthReports.Management'
+input-file:
+  - preview/2023-05-01-preview/healthReports.json
 ```
 
 ### Composite packages
