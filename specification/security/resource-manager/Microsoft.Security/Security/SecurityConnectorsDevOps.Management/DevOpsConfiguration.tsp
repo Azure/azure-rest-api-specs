@@ -52,7 +52,7 @@ interface DevOpsConfigurations {
   update is ArmCustomPatchAsync<
     DevOpsConfiguration,
     PatchModel = DevOpsConfiguration,
-    Response = ArmResponse<DevOpsConfiguration> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = DevOpsConfiguration> &
+    Response = ArmResponse<DevOpsConfiguration> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DevOpsConfiguration> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: DevOpsConfiguration;

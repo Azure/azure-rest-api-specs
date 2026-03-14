@@ -53,7 +53,7 @@ interface GitHubRepositories {
   create is ArmResourceActionAsyncBase<
     GitHubRepository,
     IssueCreationRequest,
-    ArmAcceptedLroResponse<ArmAsyncOperationHeader &
+    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<GitHubRepository>,
     OptionalRequestBody = true

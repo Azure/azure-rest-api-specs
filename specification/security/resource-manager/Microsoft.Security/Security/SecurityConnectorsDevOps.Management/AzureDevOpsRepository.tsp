@@ -51,7 +51,7 @@ interface AzureDevOpsRepositories {
   update is ArmCustomPatchAsync<
     AzureDevOpsRepository,
     PatchModel = AzureDevOpsRepository,
-    Response = ArmResponse<AzureDevOpsRepository> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = AzureDevOpsRepository> &
+    Response = ArmResponse<AzureDevOpsRepository> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AzureDevOpsRepository> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AzureDevOpsRepository;

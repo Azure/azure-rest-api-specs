@@ -45,7 +45,7 @@ interface AzureDevOpsOrgs {
   update is ArmCustomPatchAsync<
     AzureDevOpsOrg,
     PatchModel = AzureDevOpsOrg,
-    Response = ArmResponse<AzureDevOpsOrg> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = AzureDevOpsOrg> &
+    Response = ArmResponse<AzureDevOpsOrg> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AzureDevOpsOrg> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AzureDevOpsOrg;

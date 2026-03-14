@@ -45,7 +45,7 @@ interface AzureDevOpsProjects {
   update is ArmCustomPatchAsync<
     AzureDevOpsProject,
     PatchModel = AzureDevOpsProject,
-    Response = ArmResponse<AzureDevOpsProject> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = AzureDevOpsProject> &
+    Response = ArmResponse<AzureDevOpsProject> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AzureDevOpsProject> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AzureDevOpsProject;

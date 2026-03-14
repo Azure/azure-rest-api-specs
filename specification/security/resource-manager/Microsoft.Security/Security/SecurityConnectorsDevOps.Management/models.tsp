@@ -449,7 +449,6 @@ model TargetBranchConfiguration {
   /**
    * Gets or sets branches that should have annotations.
    */
-  @identifiers(#[])
   branchNames?: string[];
 
   /**
