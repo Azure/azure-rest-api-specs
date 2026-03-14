@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./common/common.tsp";
 
 using TypeSpec.Http;
 using Azure.Core;
@@ -1754,60 +1755,7 @@ model DirectionsBatchResponseItem {
   /**
    * The error detail.
    */
-  error?: ErrorDetail;
-}
-
-/**
- * The error detail.
- */
-model ErrorDetail {
-  /**
-   * The error code.
-   */
-  @visibility(Lifecycle.Read)
-  code?: string;
-
-  /**
-   * The error message.
-   */
-  @visibility(Lifecycle.Read)
-  message?: string;
-
-  /**
-   * The error target.
-   */
-  @visibility(Lifecycle.Read)
-  target?: string;
-
-  /**
-   * The error details.
-   */
-  @visibility(Lifecycle.Read)
-  details?: ErrorDetail[];
-
-  /**
-   * The error additional info.
-   */
-  @visibility(Lifecycle.Read)
-  additionalInfo?: ErrorAdditionalInfo[];
-}
-
-/**
- * The resource management error additional info.
- */
-model ErrorAdditionalInfo {
-  /**
-   * The additional info type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The additional info.
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract"
-  @visibility(Lifecycle.Read)
-  info?: Record<unknown>;
+  error?: CommonErrorDetail;
 }
 
 /**
@@ -2022,7 +1970,7 @@ model SnapToRoadsBatchResponseItem {
   /**
    * The error detail.
    */
-  error?: ErrorDetail;
+  error?: CommonErrorDetail;
 }
 
 /**
@@ -2297,7 +2245,7 @@ model RouteRangeBatchResponseItem {
   /**
    * The error detail.
    */
-  error?: ErrorDetail;
+  error?: CommonErrorDetail;
 }
 
 /**
@@ -2595,7 +2543,7 @@ model RouteMatrixItemResult {
   /**
    * The error detail.
    */
-  error?: ErrorDetail;
+  error?: CommonErrorDetail;
 }
 
 /**
@@ -2745,7 +2693,7 @@ model RouteOperation {
   /**
    * The error detail.
    */
-  error?: ErrorDetail;
+  error?: CommonErrorDetail;
 }
 
 /**
@@ -2774,7 +2722,7 @@ model ErrorResponse {
   /**
    * The error object.
    */
-  error?: ErrorDetail;
+  error?: CommonErrorDetail;
 }
 
 /**

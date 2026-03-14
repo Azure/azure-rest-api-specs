@@ -738,6 +738,45 @@
         ]
       }
     },
+    "CommonErrorDetail": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CommonErrorDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "CountryRegion": {
       "type": "object",
       "description": "Represents a country or region, containing related details.",
@@ -953,7 +992,7 @@
           }
         },
         "error": {
-          "$ref": "#/definitions/ErrorDetail",
+          "$ref": "#/definitions/CommonErrorDetail",
           "description": "The error detail."
         }
       }
@@ -1148,46 +1187,7 @@
           "readOnly": true
         },
         "info": {
-          "type": "object",
           "description": "The additional info.",
-          "additionalProperties": {},
-          "readOnly": true
-        }
-      }
-    },
-    "ErrorDetail": {
-      "type": "object",
-      "description": "The error detail.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message.",
-          "readOnly": true
-        },
-        "target": {
-          "type": "string",
-          "description": "The error target.",
-          "readOnly": true
-        },
-        "details": {
-          "type": "array",
-          "description": "The error details.",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "readOnly": true
-        },
-        "additionalInfo": {
-          "type": "array",
-          "description": "The error additional info.",
-          "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
-          },
           "readOnly": true
         }
       }
@@ -1197,7 +1197,7 @@
       "description": "Common error response for all Azure Resource Manager APIs to return error\ndetails for failed operations. (This also follows the OData error response\nformat.).",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorDetail",
+          "$ref": "#/definitions/CommonErrorDetail",
           "description": "The error object."
         }
       }
@@ -3437,7 +3437,7 @@
           "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance`\nwith current traffic conditions. This value is provided if `optimizeRoute`\nincludes traffic considerations."
         },
         "error": {
-          "$ref": "#/definitions/ErrorDetail",
+          "$ref": "#/definitions/CommonErrorDetail",
           "description": "The error detail."
         }
       }
@@ -3738,7 +3738,7 @@
           "description": "Timestamp when the operation status was updated."
         },
         "error": {
-          "$ref": "#/definitions/ErrorDetail",
+          "$ref": "#/definitions/CommonErrorDetail",
           "description": "The error detail."
         }
       }
@@ -4085,7 +4085,7 @@
           }
         },
         "error": {
-          "$ref": "#/definitions/ErrorDetail",
+          "$ref": "#/definitions/CommonErrorDetail",
           "description": "The error detail."
         }
       }
@@ -4590,7 +4590,7 @@
           }
         },
         "error": {
-          "$ref": "#/definitions/ErrorDetail",
+          "$ref": "#/definitions/CommonErrorDetail",
           "description": "The error detail."
         }
       }
