@@ -179,6 +179,9 @@ using Microsoft.CognitiveServices;
 @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.list,
   "ManagedNetworkSettings"
 );
+@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.delete,
+  "ManagedNetworkSettings"
+);
 @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.post,
   "OutboundRules"
 );
