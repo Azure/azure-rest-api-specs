@@ -3991,6 +3991,77 @@
           "final-state-schema": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ManagedNetworkSettings_Delete",
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "Delete API for managed network settings of a cognitive services account.",
+        "description": "Delete API for managed network settings of a cognitive services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "managedNetworkName",
+            "in": "path",
+            "description": "Name of the managedNetwork associated with the cognitive services account. Only 'default' is supported.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ManagedNetworkSettings": {
+            "$ref": "./examples/ManagedNetwork/deleteManagedNetworkV2.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/batchOutboundRules": {
@@ -5479,7 +5550,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Account Agentic Application.": {
+          "Get Account Agent Application.": {
             "$ref": "./examples/AgenticApplication/get.json"
           }
         }
@@ -5574,7 +5645,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or Update Account Agentic Application.": {
+          "Create or Update Account Agent Application.": {
             "$ref": "./examples/AgenticApplication/createOrUpdate.json"
           }
         },
@@ -5655,7 +5726,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete Account Agentic Application.": {
+          "Delete Account Agent Application.": {
             "$ref": "./examples/AgenticApplication/delete.json"
           }
         },
@@ -6251,7 +6322,7 @@
           }
         },
         "x-ms-examples": {
-          "Disable Agentic Application.": {
+          "Disable Agent Application.": {
             "$ref": "./examples/AgenticApplication/disable.json"
           }
         }
@@ -6315,7 +6386,7 @@
           }
         },
         "x-ms-examples": {
-          "Enable Agentic Application.": {
+          "Enable Agent Application.": {
             "$ref": "./examples/AgenticApplication/enable.json"
           }
         }
@@ -6382,7 +6453,7 @@
           }
         },
         "x-ms-examples": {
-          "List Agents for Agentic Application.": {
+          "List Agents for Agent Application.": {
             "$ref": "./examples/AgenticApplication/listAgents.json"
           }
         }
@@ -9826,42 +9897,6 @@
         ]
       }
     },
-    "AgenticApplication": {
-      "type": "object",
-      "description": "Agentic Application resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AgenticApplicationProperties",
-          "description": "[Required] Additional attributes of the entity."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "AgenticApplicationResourceArmPaginatedResult": {
-      "type": "object",
-      "description": "A paginated list of Agentic Application entities.",
-      "properties": {
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of Agentic Application objects. If null, there are no additional pages.",
-          "x-nullable": true
-        },
-        "value": {
-          "type": "array",
-          "description": "An array of objects of type Agentic Application.",
-          "items": {
-            "$ref": "#/definitions/AgenticApplication"
-          }
-        }
-      }
-    },
     "AgentCard": {
       "type": "object",
       "description": "Represents a detailed description of an agent, including its name, functionality, hosting information, supported interaction modes, and available skills.",
@@ -10250,6 +10285,24 @@
         }
       }
     },
+    "AgenticApplication": {
+      "type": "object",
+      "description": "Agentic Application resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgenticApplicationProperties",
+          "description": "[Required] Additional attributes of the entity."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "AgenticApplicationProperties": {
       "type": "object",
       "description": "Resource type representing an agentic application as a management construct.",
@@ -10357,6 +10410,24 @@
         ]
       },
       "readOnly": true
+    },
+    "AgenticApplicationResourceArmPaginatedResult": {
+      "type": "object",
+      "description": "A paginated list of Agent Application entities.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of Agentic Application objects. If null, there are no additional pages.",
+          "x-nullable": true
+        },
+        "value": {
+          "type": "array",
+          "description": "An array of objects of type Agentic Application.",
+          "items": {
+            "$ref": "#/definitions/AgenticApplication"
+          }
+        }
+      }
     },
     "ApiKeyAuthConnectionProperties": {
       "type": "object",
