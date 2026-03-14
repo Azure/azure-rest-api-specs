@@ -244,7 +244,7 @@ union SecurityContactRole {
   Contributor: "Contributor",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union SecurityContactName {
   string,
 
@@ -311,7 +311,7 @@ model AutomationList is Azure.Core.Page<Automation>;
 /**
  * A set of properties that defines the behavior of the automation configuration. To learn more about the supported security events data models schemas - please visit https://aka.ms/ASCAutomationSchemas.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AutomationProperties {
   /**
    * The security automation description.
@@ -377,7 +377,7 @@ model AutomationSource {
  * A rule set which evaluates all its rules upon an event interception. Only when all the included rules in the rule set will be evaluated as 'true', will the event trigger the defined actions.
  */
 model AutomationRuleSet {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   rules?: AutomationTriggeringRule[];
 }
@@ -389,6 +389,7 @@ model AutomationTriggeringRule {
   /**
    * The JPath of the entity model property that should be checked.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   propertyJPath?: string;
 
   /**
@@ -469,16 +470,19 @@ model Kind {
   /**
    * Kind of the resource
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 }
 
 /**
  * Entity tag is used for comparing two or more entities from the same requested resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ETag {
   /**
    * Entity tag is used for comparing two or more entities from the same requested resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -489,14 +493,17 @@ model Tags {
   /**
    * A list of key value pairs that describe the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * The error object.
@@ -507,6 +514,8 @@ model CloudError {
 /**
  * The error detail.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * The error code.
@@ -529,12 +538,14 @@ model CloudErrorBody {
   /**
    * The error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   details?: CloudErrorBody[];
 
   /**
    * The error additional info.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
@@ -552,6 +563,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
@@ -559,7 +571,7 @@ model ErrorAdditionalInfo {
 /**
  * The update model of security automation resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AutomationUpdateModel extends Tags {
   /**
    * Security automation data
@@ -590,7 +602,7 @@ model SecurityContactList is Azure.Core.Page<SecurityContact>;
 /**
  * Describes security contact properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityContactProperties {
   /**
    * List of email addresses which will get notifications from Microsoft Defender for Cloud by the configurations defined in this security contact.

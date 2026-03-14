@@ -1,28 +1,22 @@
 ## Swagger Changes
 
-### Changes for `minLength`
+### Changes for `CloudError`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].delete.parameters[0].minLength__deleted` | deleted | `7` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].get.parameters[0].minLength__deleted` | deleted | `7` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].put.parameters[0].minLength__deleted` | deleted | `7` |
+| `definitions.CloudError__added` | added | `{"type":"object","description":"Common error response for all Azure Resource Manager APIs to return ...` |
 
-### Changes for `maxLength`
+### Changes for `CloudErrorBody`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].delete.parameters[0].maxLength__deleted` | deleted | `7` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].get.parameters[0].maxLength__deleted` | deleted | `7` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].put.parameters[0].maxLength__deleted` | deleted | `7` |
+| `definitions.CloudErrorBody__added` | added | `{"type":"object","description":"The error detail.","properties":{"code":{"type":"string","descriptio...` |
 
-### Changes for `pattern`
+### Changes for `ErrorAdditionalInfo`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].delete.parameters[0].pattern__deleted` | deleted | `^(default)$` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].get.parameters[0].pattern__deleted` | deleted | `^(default)$` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].put.parameters[0].pattern__deleted` | deleted | `^(default)$` |
+| `definitions.ErrorAdditionalInfo__added` | added | `{"type":"object","description":"The resource management error additional info.","properties":{"type"...` |
 
 ### Changes for `SecurityContactPropertiesNotificationsByRole`
 
@@ -92,17 +86,15 @@
 | `definitions.AutomationRuleSet.description` | `A rule set which evaluates all its rules upon an event interception. Only when all the included rules in the rule set will be evaluated as 'true', will the event trigger the defined actions. ` | `A rule set which evaluates all its rules upon an event interception. Only when all the included rules in the rule set will be evaluated as 'true', will the event trigger the defined actions.` |
 | `definitions.AutomationUpdateModel.allOf[0].$ref` | `./common/v1/types.json#/definitions/Tags` | `#/definitions/Tags` |
 | `definitions.SecurityContact.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `info.description` | `API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider` | `API spec for Microsoft.Security (Azure Security Center) resource provider` |
-| `info.title` | `Microsoft Defender for Cloud` | `SecurityCenter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/automations'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].delete.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/automations'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/automations/{automationName}'].delete.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/automations/{automationName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/automations/{automationName}'].patch.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/automations/{automationName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/automations/{automationName}/validate'].post.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/automations'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].delete.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securityContacts/{securityContactName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/automations'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/automations/{automationName}'].delete.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/automations/{automationName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/automations/{automationName}'].patch.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/automations/{automationName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/automations/{automationName}/validate'].post.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 

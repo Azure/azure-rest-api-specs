@@ -26,13 +26,15 @@ model SecurityContact
 }
 
 @armResourceOperations
+@tag("Security Contacts")
 interface SecurityContacts {
   /**
    * Get Default Security contact configurations for the subscription
    */
   get is ArmResourceRead<
     SecurityContact,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -40,7 +42,8 @@ interface SecurityContacts {
    */
   create is ArmResourceCreateOrReplaceSync<
     SecurityContact,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -48,7 +51,8 @@ interface SecurityContacts {
    */
   delete is ArmResourceDeleteSync<
     SecurityContact,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -57,10 +61,14 @@ interface SecurityContacts {
   list is ArmResourceListByParent<
     SecurityContact,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<SecurityContactList>
+    Response = ArmResponse<SecurityContactList>,
+    Error = CloudError
   >;
 }
 
 @@doc(SecurityContact.name, "Name of the security contact object");
+@@minLength(SecurityContact.name, 7);
+@@maxLength(SecurityContact.name, 7);
+@@pattern(SecurityContact.name, "^(default)$");
 @@doc(SecurityContact.properties, "Security contact data");
 @@doc(SecurityContacts.create::parameters.resource, "Security contact object");

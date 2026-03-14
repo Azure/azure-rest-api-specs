@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2023-12-01-preview",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider"
   },
   "produces": [
     "application/json"
@@ -30,7 +30,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -48,7 +48,7 @@
       "get": {
         "operationId": "SecurityContacts_List",
         "tags": [
-          "SecurityContacts"
+          "Security Contacts"
         ],
         "description": "List all security contact configurations for the subscription",
         "parameters": [],
@@ -62,7 +62,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -80,7 +80,7 @@
       "get": {
         "operationId": "SecurityContacts_Get",
         "tags": [
-          "SecurityContacts"
+          "Security Contacts"
         ],
         "description": "Get Default Security contact configurations for the subscription",
         "parameters": [
@@ -89,6 +89,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 7,
+            "maxLength": 7,
+            "pattern": "^(default)$",
             "enum": [
               "default"
             ],
@@ -108,7 +111,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -121,7 +124,7 @@
       "put": {
         "operationId": "SecurityContacts_Create",
         "tags": [
-          "SecurityContacts"
+          "Security Contacts"
         ],
         "description": "Create security contact configurations for the subscription",
         "parameters": [
@@ -130,6 +133,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 7,
+            "maxLength": 7,
+            "pattern": "^(default)$",
             "enum": [
               "default"
             ],
@@ -163,7 +169,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -176,7 +182,7 @@
       "delete": {
         "operationId": "SecurityContacts_Delete",
         "tags": [
-          "SecurityContacts"
+          "Security Contacts"
         ],
         "description": "Delete security contact configurations for the subscription",
         "parameters": [
@@ -185,6 +191,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 7,
+            "maxLength": 7,
+            "pattern": "^(default)$",
             "enum": [
               "default"
             ],
@@ -204,7 +213,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -233,7 +242,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -272,7 +281,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -320,7 +329,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -368,7 +377,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -402,7 +411,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -446,7 +455,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -779,6 +788,71 @@
         "message": {
           "type": "string",
           "description": "The validation message."
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
         }
       }
     },

@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * The security automation resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Automation
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<AutomationProperties> {
   ...ResourceNameParameter<
@@ -25,13 +26,13 @@ model Automation
   /**
    * Kind of the resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   /**
    * Entity tag is used for comparing two or more entities from the same requested resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -40,30 +41,39 @@ interface Automations {
   /**
    * Retrieves information about the model of a security automation.
    */
-  get is ArmResourceRead<Automation>;
+  get is ArmResourceRead<Automation, Error = CloudError>;
 
   /**
    * Creates or updates a security automation. If a security automation is already created and a subsequent request is issued for the same automation id, then it will be updated.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Automation>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    Automation,
+    Error = CloudError
+  >;
 
   /**
    * Updates a security automation
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Automation, PatchModel = AutomationUpdateModel>;
+  update is ArmCustomPatchSync<
+    Automation,
+    PatchModel = AutomationUpdateModel,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a security automation.
    */
-  delete is ArmResourceDeleteSync<Automation>;
+  delete is ArmResourceDeleteSync<Automation, Error = CloudError>;
 
   /**
    * Lists all the security automations in the specified resource group. Use the 'nextLink' property in the response to get the next page of security automations for the specified resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     Automation,
-    Response = ArmResponse<AutomationList>
+    Response = ArmResponse<AutomationList>,
+    Error = CloudError
   >;
 
   /**
@@ -71,7 +81,8 @@ interface Automations {
    */
   list is ArmListBySubscription<
     Automation,
-    Response = ArmResponse<AutomationList>
+    Response = ArmResponse<AutomationList>,
+    Error = CloudError
   >;
 
   /**
@@ -80,7 +91,8 @@ interface Automations {
   validate is ArmResourceActionSync<
     Automation,
     Automation,
-    ArmResponse<AutomationValidationStatus>
+    ArmResponse<AutomationValidationStatus>,
+    Error = CloudError
   >;
 }
 
