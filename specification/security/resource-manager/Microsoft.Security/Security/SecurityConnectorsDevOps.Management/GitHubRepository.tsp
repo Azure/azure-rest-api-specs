@@ -25,6 +25,42 @@ model GitHubRepository
   >;
 }
 
+alias GitHubRepositoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+
+    /** The security connector name. */
+    @path
+    @segment("securityConnectors")
+    @key
+    securityConnectorName: string;
+
+    @path
+    @segment("devops")
+    @key
+    devop: "default";
+
+    @path
+    @segment("gitHubOwners")
+    @key
+    ownerName: string;
+  },
+  {
+    @path
+    @segment("repos")
+    @key
+    repoName: string;
+  }
+>;
+
 @armResourceOperations
 interface GitHubRepositories {
   /**
@@ -32,14 +68,14 @@ interface GitHubRepositories {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GitHubRepos_Get")
-  get is ArmResourceRead<GitHubRepository>;
+  get is GitHubRepositoryOps.Read<GitHubRepository>;
 
   /**
    * Returns a list of GitHub repositories onboarded to the connector.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GitHubRepos_List")
-  list is ArmResourceListByParent<
+  list is GitHubRepositoryOps.List<
     GitHubRepository,
     Response = ArmResponse<GitHubRepositoryListResponse>
   >;
@@ -50,12 +86,11 @@ interface GitHubRepositories {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GitHubIssues_Create")
   @action("issues")
-  create is ArmResourceActionAsyncBase<
+  create is GitHubRepositoryOps.ActionAsync<
     GitHubRepository,
     IssueCreationRequest,
     ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<GitHubRepository>,
     OptionalRequestBody = true
   >;
 }

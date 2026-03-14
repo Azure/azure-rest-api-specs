@@ -25,6 +25,47 @@ model AzureDevOpsRepository
   >;
 }
 
+alias AzureDevOpsRepositoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+
+    /** The security connector name. */
+    @path
+    @segment("securityConnectors")
+    @key
+    securityConnectorName: string;
+
+    @path
+    @segment("devops")
+    @key
+    devop: "default";
+
+    @path
+    @segment("azureDevOpsOrgs")
+    @key
+    orgName: string;
+
+    @path
+    @segment("projects")
+    @key
+    projectName: string;
+  },
+  {
+    @path
+    @segment("repos")
+    @key
+    repoName: string;
+  }
+>;
+
 @armResourceOperations
 interface AzureDevOpsRepositories {
   /**
@@ -32,14 +73,14 @@ interface AzureDevOpsRepositories {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AzureDevOpsRepos_Get")
-  get is ArmResourceRead<AzureDevOpsRepository>;
+  get is AzureDevOpsRepositoryOps.Read<AzureDevOpsRepository>;
 
   /**
    * Creates or updates a monitored Azure DevOps repository resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AzureDevOpsRepos_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AzureDevOpsRepository>;
+  createOrUpdate is AzureDevOpsRepositoryOps.CreateOrUpdateAsync<AzureDevOpsRepository>;
 
   /**
    * Updates a monitored Azure DevOps repository resource.
@@ -48,7 +89,7 @@ interface AzureDevOpsRepositories {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("AzureDevOpsRepos_Update")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is AzureDevOpsRepositoryOps.CustomPatchAsync<
     AzureDevOpsRepository,
     PatchModel = AzureDevOpsRepository,
     Response = ArmResponse<AzureDevOpsRepository> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AzureDevOpsRepository> &
@@ -63,7 +104,7 @@ interface AzureDevOpsRepositories {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AzureDevOpsRepos_List")
-  list is ArmResourceListByParent<
+  list is AzureDevOpsRepositoryOps.List<
     AzureDevOpsRepository,
     Response = ArmResponse<AzureDevOpsRepositoryListResponse>
   >;

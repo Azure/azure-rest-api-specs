@@ -25,24 +25,60 @@ model AzureDevOpsProject
   >;
 }
 
+alias AzureDevOpsProjectOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+
+    /** The security connector name. */
+    @path
+    @segment("securityConnectors")
+    @key
+    securityConnectorName: string;
+
+    @path
+    @segment("devops")
+    @key
+    devop: "default";
+
+    @path
+    @segment("azureDevOpsOrgs")
+    @key
+    orgName: string;
+  },
+  {
+    @path
+    @segment("projects")
+    @key
+    projectName: string;
+  }
+>;
+
 @armResourceOperations
 interface AzureDevOpsProjects {
   /**
    * Returns a monitored Azure DevOps project resource.
    */
-  get is ArmResourceRead<AzureDevOpsProject>;
+  get is AzureDevOpsProjectOps.Read<AzureDevOpsProject>;
 
   /**
    * Creates or updates a monitored Azure DevOps project resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AzureDevOpsProject>;
+  createOrUpdate is AzureDevOpsProjectOps.CreateOrUpdateAsync<AzureDevOpsProject>;
 
   /**
    * Updates a monitored Azure DevOps project resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is AzureDevOpsProjectOps.CustomPatchAsync<
     AzureDevOpsProject,
     PatchModel = AzureDevOpsProject,
     Response = ArmResponse<AzureDevOpsProject> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AzureDevOpsProject> &
@@ -55,7 +91,7 @@ interface AzureDevOpsProjects {
   /**
    * Returns a list of Azure DevOps projects onboarded to the connector.
    */
-  list is ArmResourceListByParent<
+  list is AzureDevOpsProjectOps.List<
     AzureDevOpsProject,
     Response = ArmResponse<AzureDevOpsProjectListResponse>
   >;

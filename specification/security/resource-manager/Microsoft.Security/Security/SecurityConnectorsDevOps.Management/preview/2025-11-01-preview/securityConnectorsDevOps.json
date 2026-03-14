@@ -65,7 +65,7 @@
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops": {
       "get": {
         "operationId": "DevOpsConfigurations_List",
         "tags": [
@@ -81,6 +81,13 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -107,7 +114,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default": {
       "get": {
         "operationId": "DevOpsConfigurations_Get",
         "tags": [
@@ -123,6 +130,13 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -166,6 +180,13 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "devOpsConfiguration",
@@ -257,6 +278,13 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "devOpsConfiguration",
             "in": "body",
             "description": "The DevOps configuration resource payload.",
@@ -323,6 +351,13 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -364,56 +399,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/{operationResultId}/{operationResultId}": {
-      "get": {
-        "operationId": "DevOpsOperationResults_Get",
-        "tags": [
-          "DevOpsConfigurations"
-        ],
-        "description": "Get devops long running operation result.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "operationResultId",
-            "in": "path",
-            "description": "The operation result Id.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get_DevOpsOperationResults_Failed": {
-            "$ref": "./examples/SecurityConnectorsDevOps/GetDevOpsOperationResultsFailed_example.json"
-          },
-          "Get_DevOpsOperationResults_Succeeded": {
-            "$ref": "./examples/SecurityConnectorsDevOps/GetDevOpsOperationResultsSucceeded_example.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/azureDevOpsOrgs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs": {
       "get": {
         "operationId": "AzureDevOpsOrgs_List",
         "tags": [
@@ -429,6 +415,13 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -455,7 +448,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/azureDevOpsOrgs/{orgName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}": {
       "get": {
         "operationId": "AzureDevOpsOrgs_Get",
         "tags": [
@@ -473,9 +466,15 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "orgName",
             "in": "path",
-            "description": "The Azure DevOps organization name.",
             "required": true,
             "type": "string"
           }
@@ -517,9 +516,15 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "orgName",
             "in": "path",
-            "description": "The Azure DevOps organization name.",
             "required": true,
             "type": "string"
           },
@@ -592,9 +597,15 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "orgName",
             "in": "path",
-            "description": "The Azure DevOps organization name.",
             "required": true,
             "type": "string"
           },
@@ -651,7 +662,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/azureDevOpsOrgs/{orgName}/projects": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects": {
       "get": {
         "operationId": "AzureDevOpsProjects_List",
         "tags": [
@@ -669,9 +680,15 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "orgName",
             "in": "path",
-            "description": "The Azure DevOps organization name.",
             "required": true,
             "type": "string"
           }
@@ -700,7 +717,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}": {
       "get": {
         "operationId": "AzureDevOpsProjects_Get",
         "tags": [
@@ -718,16 +735,21 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "orgName",
             "in": "path",
-            "description": "The Azure DevOps organization name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "projectName",
             "in": "path",
-            "description": "The project name.",
             "required": true,
             "type": "string"
           }
@@ -769,16 +791,21 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "orgName",
             "in": "path",
-            "description": "The Azure DevOps organization name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "projectName",
             "in": "path",
-            "description": "The project name.",
             "required": true,
             "type": "string"
           },
@@ -851,16 +878,21 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "orgName",
             "in": "path",
-            "description": "The Azure DevOps organization name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "projectName",
             "in": "path",
-            "description": "The project name.",
             "required": true,
             "type": "string"
           },
@@ -917,7 +949,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos": {
       "get": {
         "operationId": "AzureDevOpsRepos_List",
         "tags": [
@@ -935,16 +967,21 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "orgName",
             "in": "path",
-            "description": "The Azure DevOps organization name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "projectName",
             "in": "path",
-            "description": "The project name.",
             "required": true,
             "type": "string"
           }
@@ -973,7 +1010,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos/{repoName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos/{repoName}": {
       "get": {
         "operationId": "AzureDevOpsRepos_Get",
         "tags": [
@@ -991,23 +1028,27 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "orgName",
             "in": "path",
-            "description": "The Azure DevOps organization name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "projectName",
             "in": "path",
-            "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "repoName",
             "in": "path",
-            "description": "The repository name.",
             "required": true,
             "type": "string"
           }
@@ -1049,23 +1090,27 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "orgName",
             "in": "path",
-            "description": "The Azure DevOps organization name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "projectName",
             "in": "path",
-            "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "repoName",
             "in": "path",
-            "description": "The repository name.",
             "required": true,
             "type": "string"
           },
@@ -1138,23 +1183,27 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "orgName",
             "in": "path",
-            "description": "The Azure DevOps organization name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "projectName",
             "in": "path",
-            "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "repoName",
             "in": "path",
-            "description": "The repository name.",
             "required": true,
             "type": "string"
           },
@@ -1211,7 +1260,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/gitHubOwners": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners": {
       "get": {
         "operationId": "GitHubOwners_List",
         "tags": [
@@ -1227,6 +1276,13 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1253,7 +1309,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/gitHubOwners/{ownerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}": {
       "get": {
         "operationId": "GitHubOwners_Get",
         "tags": [
@@ -1271,9 +1327,15 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ownerName",
             "in": "path",
-            "description": "The GitHub owner name.",
             "required": true,
             "type": "string"
           }
@@ -1299,7 +1361,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/gitHubOwners/{ownerName}/repos": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos": {
       "get": {
         "operationId": "GitHubRepos_List",
         "tags": [
@@ -1317,9 +1379,15 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ownerName",
             "in": "path",
-            "description": "The GitHub owner name.",
             "required": true,
             "type": "string"
           }
@@ -1348,7 +1416,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/gitHubOwners/{ownerName}/repos/{repoName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}": {
       "get": {
         "operationId": "GitHubRepos_Get",
         "tags": [
@@ -1366,16 +1434,21 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ownerName",
             "in": "path",
-            "description": "The GitHub owner name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "repoName",
             "in": "path",
-            "description": "The repository name.",
             "required": true,
             "type": "string"
           }
@@ -1401,7 +1474,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/gitHubOwners/{ownerName}/repos/{repoName}/issues": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}/issues": {
       "post": {
         "operationId": "GitHubIssues_Create",
         "tags": [
@@ -1419,16 +1492,21 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ownerName",
             "in": "path",
-            "description": "The GitHub owner name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "repoName",
             "in": "path",
-            "description": "The repository name.",
             "required": true,
             "type": "string"
           },
@@ -1450,6 +1528,10 @@
                 "type": "string",
                 "description": "A link to the status monitor"
               },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1470,12 +1552,13 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20%7B%20azureAsyncOperation%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/gitLabGroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups": {
       "get": {
         "operationId": "GitLabGroups_List",
         "tags": [
@@ -1491,6 +1574,13 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1517,7 +1607,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/gitLabGroups/{groupFQName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}": {
       "get": {
         "operationId": "GitLabGroups_Get",
         "tags": [
@@ -1535,9 +1625,15 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "groupFQName",
             "in": "path",
-            "description": "The GitLab group fully-qualified name.",
             "required": true,
             "type": "string"
           }
@@ -1563,7 +1659,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/gitLabGroups/{groupFQName}/listSubgroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/listSubgroups": {
       "post": {
         "operationId": "GitLabSubgroups_List",
         "tags": [
@@ -1581,9 +1677,15 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "groupFQName",
             "in": "path",
-            "description": "The GitLab group fully-qualified name.",
             "required": true,
             "type": "string"
           }
@@ -1612,7 +1714,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/gitLabGroups/{groupFQName}/projects": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/projects": {
       "get": {
         "operationId": "GitLabProjects_List",
         "tags": [
@@ -1630,9 +1732,15 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "groupFQName",
             "in": "path",
-            "description": "The GitLab group fully-qualified name.",
             "required": true,
             "type": "string"
           }
@@ -1661,7 +1769,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/gitLabGroups/{groupFQName}/projects/{projectName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/projects/{projectName}": {
       "get": {
         "operationId": "GitLabProjects_Get",
         "tags": [
@@ -1679,16 +1787,21 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "groupFQName",
             "in": "path",
-            "description": "The GitLab group fully-qualified name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "projectName",
             "in": "path",
-            "description": "The project name.",
             "required": true,
             "type": "string"
           }
@@ -1714,7 +1827,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/listAvailableAzureDevOpsOrgs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableAzureDevOpsOrgs": {
       "post": {
         "operationId": "AzureDevOpsOrgs_ListAvailable",
         "tags": [
@@ -1730,6 +1843,13 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1756,7 +1876,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/listAvailableGitHubOwners": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableGitHubOwners": {
       "post": {
         "operationId": "GitHubOwners_ListAvailable",
         "tags": [
@@ -1772,6 +1892,13 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1798,7 +1925,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/devops/default/listAvailableGitLabGroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableGitLabGroups": {
       "post": {
         "operationId": "GitLabGroups_ListAvailable",
         "tags": [
@@ -1814,6 +1941,13 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1837,6 +1971,61 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/operationResults/{operationResultId}": {
+      "get": {
+        "operationId": "DevOpsOperationResults_Get",
+        "tags": [
+          "DevOpsConfigurations"
+        ],
+        "description": "Get devops long running operation result.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "securityConnectorName",
+            "in": "path",
+            "description": "The security connector name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationResultId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_DevOpsOperationResults_Failed": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetDevOpsOperationResultsFailed_example.json"
+          },
+          "Get_DevOpsOperationResults_Succeeded": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetDevOpsOperationResultsSucceeded_example.json"
+          }
         }
       }
     }
@@ -2023,6 +2212,10 @@
           }
         ]
       }
+    },
+    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", { azureAsyncOperation: string, retryAfter: int32 }>": {
+      "type": "object",
+      "description": "Resource operation accepted."
     },
     "AzureDevOpsOrg": {
       "type": "object",

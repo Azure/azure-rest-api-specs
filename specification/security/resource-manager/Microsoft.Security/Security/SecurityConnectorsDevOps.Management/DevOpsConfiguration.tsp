@@ -10,6 +10,63 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Security;
+
+alias DevOpsConfigurationOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+
+    /** The security connector name. */
+    @path
+    @segment("securityConnectors")
+    @key
+    securityConnectorName: string;
+  },
+  {
+    @path
+    @segment("devops")
+    @key
+    devop: "default";
+  }
+>;
+
+alias DevOpsOperationResultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+
+    /** The security connector name. */
+    @path
+    @segment("securityConnectors")
+    @key
+    securityConnectorName: string;
+
+    @path
+    @segment("devops")
+    @key
+    devop: "default";
+  },
+  {
+    @path
+    @segment("operationResults")
+    @key
+    operationResultId: string;
+  }
+>;
 /**
  * DevOps Configuration resource.
  */
@@ -29,14 +86,14 @@ interface DevOpsConfigurations {
   /**
    * Gets a DevOps Configuration.
    */
-  get is ArmResourceRead<DevOpsConfiguration>;
+  get is DevOpsConfigurationOps.Read<DevOpsConfiguration>;
 
   /**
    * Creates or updates a DevOps Configuration.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is DevOpsConfigurationOps.CreateOrUpdateAsync<
     DevOpsConfiguration,
     Response = ArmResourceUpdatedResponse<DevOpsConfiguration> | ArmResourceCreatedResponse<DevOpsConfiguration> | (ArmAcceptedLroResponse & {
       @bodyRoot
@@ -49,7 +106,7 @@ interface DevOpsConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is DevOpsConfigurationOps.CustomPatchAsync<
     DevOpsConfiguration,
     PatchModel = DevOpsConfiguration,
     Response = ArmResponse<DevOpsConfiguration> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DevOpsConfiguration> &
@@ -63,7 +120,7 @@ interface DevOpsConfigurations {
    * Deletes a DevOps Connector.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is DevOpsConfigurationOps.DeleteWithoutOkAsync<
     DevOpsConfiguration,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -71,7 +128,7 @@ interface DevOpsConfigurations {
   /**
    * List DevOps Configurations.
    */
-  list is ArmResourceListByParent<
+  list is DevOpsConfigurationOps.List<
     DevOpsConfiguration,
     Response = ArmResponse<DevOpsConfigurationListResponse>
   >;
@@ -83,7 +140,7 @@ interface DevOpsConfigurations {
   @operationId("AzureDevOpsOrgs_ListAvailable")
   @list
   @action("listAvailableAzureDevOpsOrgs")
-  listAvailable is ArmResourceActionSync<
+  listAvailable is DevOpsConfigurationOps.ActionSync<
     DevOpsConfiguration,
     void,
     ArmResponse<AzureDevOpsOrgListResponse>
@@ -96,7 +153,7 @@ interface DevOpsConfigurations {
   @operationId("GitHubOwners_ListAvailable")
   @list
   @action("listAvailableGitHubOwners")
-  gitHubOwnersListAvailable is ArmResourceActionSync<
+  gitHubOwnersListAvailable is DevOpsConfigurationOps.ActionSync<
     DevOpsConfiguration,
     void,
     ArmResponse<GitHubOwnerListResponse>
@@ -109,7 +166,7 @@ interface DevOpsConfigurations {
   @operationId("GitLabGroups_ListAvailable")
   @list
   @action("listAvailableGitLabGroups")
-  gitLabGroupsListAvailable is ArmResourceActionSync<
+  gitLabGroupsListAvailable is DevOpsConfigurationOps.ActionSync<
     DevOpsConfiguration,
     void,
     ArmResponse<GitLabGroupListResponse>
@@ -121,19 +178,7 @@ interface DevOpsConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DevOpsOperationResults_Get")
   @get
-  @action("{operationResultId}")
-  devOpsOperationResultsGet is ArmResourceActionSync<
-    DevOpsConfiguration,
-    void,
-    ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>,
-    Parameters = {
-      /**
-       * The operation result Id.
-       */
-      @path
-      operationResultId: string;
-    }
-  >;
+  devOpsOperationResultsGet is DevOpsOperationResultOps.Read<Azure.ResourceManager.CommonTypes.OperationStatusResult>;
 }
 
 @@doc(DevOpsConfiguration.name, "");

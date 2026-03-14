@@ -25,17 +25,53 @@ model GitLabProject
   >;
 }
 
+alias GitLabProjectOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+
+    /** The security connector name. */
+    @path
+    @segment("securityConnectors")
+    @key
+    securityConnectorName: string;
+
+    @path
+    @segment("devops")
+    @key
+    devop: "default";
+
+    @path
+    @segment("gitLabGroups")
+    @key
+    groupFQName: string;
+  },
+  {
+    @path
+    @segment("projects")
+    @key
+    projectName: string;
+  }
+>;
+
 @armResourceOperations
 interface GitLabProjects {
   /**
    * Returns a monitored GitLab Project resource for a given fully-qualified group name and project name.
    */
-  get is ArmResourceRead<GitLabProject>;
+  get is GitLabProjectOps.Read<GitLabProject>;
 
   /**
    * Gets a list of GitLab projects that are directly owned by given group and onboarded to the connector.
    */
-  list is ArmResourceListByParent<
+  list is GitLabProjectOps.List<
     GitLabProject,
     Response = ArmResponse<GitLabProjectListResponse>
   >;

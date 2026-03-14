@@ -25,17 +25,48 @@ model GitHubOwner
   >;
 }
 
+alias GitHubOwnerOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+
+    /** The security connector name. */
+    @path
+    @segment("securityConnectors")
+    @key
+    securityConnectorName: string;
+
+    @path
+    @segment("devops")
+    @key
+    devop: "default";
+  },
+  {
+    @path
+    @segment("gitHubOwners")
+    @key
+    ownerName: string;
+  }
+>;
+
 @armResourceOperations
 interface GitHubOwners {
   /**
    * Returns a monitored GitHub owner.
    */
-  get is ArmResourceRead<GitHubOwner>;
+  get is GitHubOwnerOps.Read<GitHubOwner>;
 
   /**
    * Returns a list of GitHub owners onboarded to the connector.
    */
-  list is ArmResourceListByParent<
+  list is GitHubOwnerOps.List<
     GitHubOwner,
     Response = ArmResponse<GitHubOwnerListResponse>
   >;

@@ -25,24 +25,55 @@ model AzureDevOpsOrg
   >;
 }
 
+alias AzureDevOpsOrgOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+
+    /** The security connector name. */
+    @path
+    @segment("securityConnectors")
+    @key
+    securityConnectorName: string;
+
+    @path
+    @segment("devops")
+    @key
+    devop: "default";
+  },
+  {
+    @path
+    @segment("azureDevOpsOrgs")
+    @key
+    orgName: string;
+  }
+>;
+
 @armResourceOperations
 interface AzureDevOpsOrgs {
   /**
    * Returns a monitored Azure DevOps organization resource.
    */
-  get is ArmResourceRead<AzureDevOpsOrg>;
+  get is AzureDevOpsOrgOps.Read<AzureDevOpsOrg>;
 
   /**
    * Creates or updates monitored Azure DevOps organization details.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AzureDevOpsOrg>;
+  createOrUpdate is AzureDevOpsOrgOps.CreateOrUpdateAsync<AzureDevOpsOrg>;
 
   /**
    * Updates monitored Azure DevOps organization details.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is AzureDevOpsOrgOps.CustomPatchAsync<
     AzureDevOpsOrg,
     PatchModel = AzureDevOpsOrg,
     Response = ArmResponse<AzureDevOpsOrg> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AzureDevOpsOrg> &
@@ -55,7 +86,7 @@ interface AzureDevOpsOrgs {
   /**
    * Returns a list of Azure DevOps organizations onboarded to the connector.
    */
-  list is ArmResourceListByParent<
+  list is AzureDevOpsOrgOps.List<
     AzureDevOpsOrg,
     Response = ArmResponse<AzureDevOpsOrgListResponse>
   >;

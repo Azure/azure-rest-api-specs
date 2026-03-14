@@ -25,17 +25,48 @@ model GitLabGroup
   >;
 }
 
+alias GitLabGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+
+    /** The security connector name. */
+    @path
+    @segment("securityConnectors")
+    @key
+    securityConnectorName: string;
+
+    @path
+    @segment("devops")
+    @key
+    devop: "default";
+  },
+  {
+    @path
+    @segment("gitLabGroups")
+    @key
+    groupFQName: string;
+  }
+>;
+
 @armResourceOperations
 interface GitLabGroups {
   /**
    * Returns a monitored GitLab Group resource for a given fully-qualified name.
    */
-  get is ArmResourceRead<GitLabGroup>;
+  get is GitLabGroupOps.Read<GitLabGroup>;
 
   /**
    * Returns a list of GitLab groups onboarded to the connector.
    */
-  list is ArmResourceListByParent<
+  list is GitLabGroupOps.List<
     GitLabGroup,
     Response = ArmResponse<GitLabGroupListResponse>
   >;
@@ -47,7 +78,7 @@ interface GitLabGroups {
   @operationId("GitLabSubgroups_List")
   @list
   @action("listSubgroups")
-  gitLabSubgroupsList is ArmResourceActionSync<
+  gitLabSubgroupsList is GitLabGroupOps.ActionSync<
     GitLabGroup,
     void,
     ArmResponse<GitLabGroupListResponse>
