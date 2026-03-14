@@ -10,6 +10,8 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 /**
  * Azure DevOps Project resource.
@@ -25,6 +27,7 @@ model AzureDevOpsProject
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 alias AzureDevOpsProjectOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -61,22 +64,29 @@ alias AzureDevOpsProjectOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AzureDevOpsProjects {
   /**
    * Returns a monitored Azure DevOps project resource.
    */
+  @summary("Returns a monitored Azure DevOps project resource.")
+  @tag("DevOps")
   get is AzureDevOpsProjectOps.Read<AzureDevOpsProject>;
 
   /**
    * Creates or updates a monitored Azure DevOps project resource.
    */
+  @summary("Creates or updates a monitored Azure DevOps project resource.")
+  @tag("DevOps")
   createOrUpdate is AzureDevOpsProjectOps.CreateOrUpdateAsync<AzureDevOpsProject>;
 
   /**
    * Updates a monitored Azure DevOps project resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates a monitored Azure DevOps project resource.")
+  @tag("DevOps")
   @patch(#{ implicitOptionality: false })
   update is AzureDevOpsProjectOps.CustomPatchAsync<
     AzureDevOpsProject,
@@ -91,6 +101,8 @@ interface AzureDevOpsProjects {
   /**
    * Returns a list of Azure DevOps projects onboarded to the connector.
    */
+  @summary("Returns a list of Azure DevOps projects onboarded to the connector.")
+  @tag("DevOps")
   list is AzureDevOpsProjectOps.List<
     AzureDevOpsProject,
     Response = ArmResponse<AzureDevOpsProjectListResponse>

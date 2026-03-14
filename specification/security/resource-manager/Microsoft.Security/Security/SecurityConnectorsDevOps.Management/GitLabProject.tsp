@@ -10,6 +10,8 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 /**
  * GitLab Project resource.
@@ -25,6 +27,8 @@ model GitLabProject
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 alias GitLabProjectOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -61,16 +65,20 @@ alias GitLabProjectOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface GitLabProjects {
   /**
    * Returns a monitored GitLab Project resource for a given fully-qualified group name and project name.
    */
+  @summary("Returns a monitored GitLab Project resource for a given fully-qualified group name and project name.")
+  @tag("DevOps")
   get is GitLabProjectOps.Read<GitLabProject>;
 
   /**
    * Gets a list of GitLab projects that are directly owned by given group and onboarded to the connector.
    */
+  @summary("Gets a list of GitLab projects that are directly owned by given group and onboarded to the connector.")
+  @tag("DevOps")
   list is GitLabProjectOps.List<
     GitLabProject,
     Response = ArmResponse<GitLabProjectListResponse>

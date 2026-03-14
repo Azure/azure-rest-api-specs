@@ -10,6 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 /**
  * GitHub Owner resource.
@@ -25,6 +26,7 @@ model GitHubOwner
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 alias GitHubOwnerOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -56,16 +58,20 @@ alias GitHubOwnerOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface GitHubOwners {
   /**
    * Returns a monitored GitHub owner.
    */
+  @summary("Returns a monitored GitHub owner.")
+  @tag("DevOps")
   get is GitHubOwnerOps.Read<GitHubOwner>;
 
   /**
    * Returns a list of GitHub owners onboarded to the connector.
    */
+  @summary("Returns a list of GitHub owners onboarded to the connector.")
+  @tag("DevOps")
   list is GitHubOwnerOps.List<
     GitHubOwner,
     Response = ArmResponse<GitHubOwnerListResponse>

@@ -10,6 +10,8 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 /**
  * GitHub Repository resource.
@@ -25,6 +27,7 @@ model GitHubRepository
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 alias GitHubRepositoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -61,20 +64,20 @@ alias GitHubRepositoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface GitHubRepositories {
   /**
    * Returns a monitored GitHub repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GitHubRepos_Get")
+  @summary("Returns a monitored GitHub repository.")
+  @tag("DevOps")
   get is GitHubRepositoryOps.Read<GitHubRepository>;
 
   /**
    * Returns a list of GitHub repositories onboarded to the connector.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GitHubRepos_List")
+  @summary("Returns a list of GitHub repositories onboarded to the connector.")
+  @tag("DevOps")
   list is GitHubRepositoryOps.List<
     GitHubRepository,
     Response = ArmResponse<GitHubRepositoryListResponse>
@@ -83,14 +86,17 @@ interface GitHubRepositories {
   /**
    * Creates a GitHub issue for the specified repository and assessment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GitHubIssues_Create")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a GitHub issue for the specified repository and assessment.")
+  @tag("DevOps")
   @action("issues")
   create is GitHubRepositoryOps.ActionAsync<
     GitHubRepository,
     IssueCreationRequest,
     ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader>,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 }

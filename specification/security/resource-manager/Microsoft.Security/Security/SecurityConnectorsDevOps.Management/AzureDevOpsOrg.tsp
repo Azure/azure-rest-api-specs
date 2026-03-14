@@ -10,6 +10,8 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 /**
  * Azure DevOps Organization resource.
@@ -25,6 +27,7 @@ model AzureDevOpsOrg
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 alias AzureDevOpsOrgOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -56,22 +59,29 @@ alias AzureDevOpsOrgOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AzureDevOpsOrgs {
   /**
    * Returns a monitored Azure DevOps organization resource.
    */
+  @summary("Returns a monitored Azure DevOps organization resource.")
+  @tag("DevOps")
   get is AzureDevOpsOrgOps.Read<AzureDevOpsOrg>;
 
   /**
    * Creates or updates monitored Azure DevOps organization details.
    */
+  @summary("Creates or updates monitored Azure DevOps organization details.")
+  @tag("DevOps")
   createOrUpdate is AzureDevOpsOrgOps.CreateOrUpdateAsync<AzureDevOpsOrg>;
 
   /**
    * Updates monitored Azure DevOps organization details.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates monitored Azure DevOps organization details.")
+  @tag("DevOps")
   @patch(#{ implicitOptionality: false })
   update is AzureDevOpsOrgOps.CustomPatchAsync<
     AzureDevOpsOrg,
@@ -86,6 +96,8 @@ interface AzureDevOpsOrgs {
   /**
    * Returns a list of Azure DevOps organizations onboarded to the connector.
    */
+  @summary("Returns a list of Azure DevOps organizations onboarded to the connector.")
+  @tag("DevOps")
   list is AzureDevOpsOrgOps.List<
     AzureDevOpsOrg,
     Response = ArmResponse<AzureDevOpsOrgListResponse>

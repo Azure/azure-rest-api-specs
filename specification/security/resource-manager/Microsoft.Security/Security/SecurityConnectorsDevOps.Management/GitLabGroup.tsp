@@ -10,6 +10,8 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 /**
  * GitLab Group resource.
@@ -25,6 +27,8 @@ model GitLabGroup
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 alias GitLabGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -56,16 +60,20 @@ alias GitLabGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface GitLabGroups {
   /**
    * Returns a monitored GitLab Group resource for a given fully-qualified name.
    */
+  @summary("Returns a monitored GitLab Group resource for a given fully-qualified name.")
+  @tag("DevOps")
   get is GitLabGroupOps.Read<GitLabGroup>;
 
   /**
    * Returns a list of GitLab groups onboarded to the connector.
    */
+  @summary("Returns a list of GitLab groups onboarded to the connector.")
+  @tag("DevOps")
   list is GitLabGroupOps.List<
     GitLabGroup,
     Response = ArmResponse<GitLabGroupListResponse>
@@ -74,9 +82,8 @@ interface GitLabGroups {
   /**
    * Gets nested subgroups of given GitLab Group which are onboarded to the connector.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GitLabSubgroups_List")
-  @list
+  @summary("Gets nested subgroups of given GitLab Group which are onboarded to the connector.")
+  @tag("DevOps")
   @action("listSubgroups")
   gitLabSubgroupsList is GitLabGroupOps.ActionSync<
     GitLabGroup,

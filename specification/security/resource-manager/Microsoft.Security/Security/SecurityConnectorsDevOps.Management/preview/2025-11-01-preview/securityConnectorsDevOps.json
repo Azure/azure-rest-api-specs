@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft.Security",
     "version": "2025-11-01-preview",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "description": "REST APIs for Defender for DevOps",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -40,28 +40,7 @@
   },
   "tags": [
     {
-      "name": "AzureDevOpsOrgs"
-    },
-    {
-      "name": "GitHubOwners"
-    },
-    {
-      "name": "GitLabGroups"
-    },
-    {
-      "name": "DevOpsConfigurations"
-    },
-    {
-      "name": "AzureDevOpsProjects"
-    },
-    {
-      "name": "AzureDevOpsRepositories"
-    },
-    {
-      "name": "GitHubRepositories"
-    },
-    {
-      "name": "GitLabProjects"
+      "name": "DevOps"
     }
   ],
   "paths": {
@@ -69,8 +48,9 @@
       "get": {
         "operationId": "DevOpsConfigurations_List",
         "tags": [
-          "DevOpsConfigurations"
+          "DevOps"
         ],
+        "summary": "List DevOps Configurations.",
         "description": "List DevOps Configurations.",
         "parameters": [
           {
@@ -118,8 +98,9 @@
       "get": {
         "operationId": "DevOpsConfigurations_Get",
         "tags": [
-          "DevOpsConfigurations"
+          "DevOps"
         ],
+        "summary": "Gets a DevOps Configuration.",
         "description": "Gets a DevOps Configuration.",
         "parameters": [
           {
@@ -168,8 +149,9 @@
       "put": {
         "operationId": "DevOpsConfigurations_CreateOrUpdate",
         "tags": [
-          "DevOpsConfigurations"
+          "DevOps"
         ],
+        "summary": "Creates or updates a DevOps Configuration.",
         "description": "Creates or updates a DevOps Configuration.",
         "parameters": [
           {
@@ -224,14 +206,9 @@
               "$ref": "#/definitions/DevOpsConfiguration"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -257,15 +234,17 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/DevOpsConfiguration"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "DevOpsConfigurations_Update",
         "tags": [
-          "DevOpsConfigurations"
+          "DevOps"
         ],
+        "summary": "Updates a DevOps Configuration.",
         "description": "Updates a DevOps Configuration.",
         "parameters": [
           {
@@ -339,8 +318,9 @@
       "delete": {
         "operationId": "DevOpsConfigurations_Delete",
         "tags": [
-          "DevOpsConfigurations"
+          "DevOps"
         ],
+        "summary": "Deletes a DevOps Connector.",
         "description": "Deletes a DevOps Connector.",
         "parameters": [
           {
@@ -403,8 +383,9 @@
       "get": {
         "operationId": "AzureDevOpsOrgs_List",
         "tags": [
-          "AzureDevOpsOrgs"
+          "DevOps"
         ],
+        "summary": "Returns a list of Azure DevOps organizations onboarded to the connector.",
         "description": "Returns a list of Azure DevOps organizations onboarded to the connector.",
         "parameters": [
           {
@@ -452,8 +433,9 @@
       "get": {
         "operationId": "AzureDevOpsOrgs_Get",
         "tags": [
-          "AzureDevOpsOrgs"
+          "DevOps"
         ],
+        "summary": "Returns a monitored Azure DevOps organization resource.",
         "description": "Returns a monitored Azure DevOps organization resource.",
         "parameters": [
           {
@@ -502,8 +484,9 @@
       "put": {
         "operationId": "AzureDevOpsOrgs_CreateOrUpdate",
         "tags": [
-          "AzureDevOpsOrgs"
+          "DevOps"
         ],
+        "summary": "Creates or updates monitored Azure DevOps organization details.",
         "description": "Creates or updates monitored Azure DevOps organization details.",
         "parameters": [
           {
@@ -583,8 +566,9 @@
       "patch": {
         "operationId": "AzureDevOpsOrgs_Update",
         "tags": [
-          "AzureDevOpsOrgs"
+          "DevOps"
         ],
+        "summary": "Updates monitored Azure DevOps organization details.",
         "description": "Updates monitored Azure DevOps organization details.",
         "parameters": [
           {
@@ -666,8 +650,9 @@
       "get": {
         "operationId": "AzureDevOpsProjects_List",
         "tags": [
-          "AzureDevOpsProjects"
+          "DevOps"
         ],
+        "summary": "Returns a list of Azure DevOps projects onboarded to the connector.",
         "description": "Returns a list of Azure DevOps projects onboarded to the connector.",
         "parameters": [
           {
@@ -721,8 +706,9 @@
       "get": {
         "operationId": "AzureDevOpsProjects_Get",
         "tags": [
-          "AzureDevOpsProjects"
+          "DevOps"
         ],
+        "summary": "Returns a monitored Azure DevOps project resource.",
         "description": "Returns a monitored Azure DevOps project resource.",
         "parameters": [
           {
@@ -777,8 +763,9 @@
       "put": {
         "operationId": "AzureDevOpsProjects_CreateOrUpdate",
         "tags": [
-          "AzureDevOpsProjects"
+          "DevOps"
         ],
+        "summary": "Creates or updates a monitored Azure DevOps project resource.",
         "description": "Creates or updates a monitored Azure DevOps project resource.",
         "parameters": [
           {
@@ -864,8 +851,9 @@
       "patch": {
         "operationId": "AzureDevOpsProjects_Update",
         "tags": [
-          "AzureDevOpsProjects"
+          "DevOps"
         ],
+        "summary": "Updates a monitored Azure DevOps project resource.",
         "description": "Updates a monitored Azure DevOps project resource.",
         "parameters": [
           {
@@ -953,8 +941,9 @@
       "get": {
         "operationId": "AzureDevOpsRepos_List",
         "tags": [
-          "AzureDevOpsRepositories"
+          "DevOps"
         ],
+        "summary": "Returns a list of Azure DevOps repositories onboarded to the connector.",
         "description": "Returns a list of Azure DevOps repositories onboarded to the connector.",
         "parameters": [
           {
@@ -1014,8 +1003,9 @@
       "get": {
         "operationId": "AzureDevOpsRepos_Get",
         "tags": [
-          "AzureDevOpsRepositories"
+          "DevOps"
         ],
+        "summary": "Returns a monitored Azure DevOps repository resource.",
         "description": "Returns a monitored Azure DevOps repository resource.",
         "parameters": [
           {
@@ -1076,8 +1066,9 @@
       "put": {
         "operationId": "AzureDevOpsRepos_CreateOrUpdate",
         "tags": [
-          "AzureDevOpsRepositories"
+          "DevOps"
         ],
+        "summary": "Creates or updates a monitored Azure DevOps repository resource.",
         "description": "Creates or updates a monitored Azure DevOps repository resource.",
         "parameters": [
           {
@@ -1169,8 +1160,9 @@
       "patch": {
         "operationId": "AzureDevOpsRepos_Update",
         "tags": [
-          "AzureDevOpsRepositories"
+          "DevOps"
         ],
+        "summary": "Updates a monitored Azure DevOps repository resource.",
         "description": "Updates a monitored Azure DevOps repository resource.",
         "parameters": [
           {
@@ -1264,8 +1256,9 @@
       "get": {
         "operationId": "GitHubOwners_List",
         "tags": [
-          "GitHubOwners"
+          "DevOps"
         ],
+        "summary": "Returns a list of GitHub owners onboarded to the connector.",
         "description": "Returns a list of GitHub owners onboarded to the connector.",
         "parameters": [
           {
@@ -1313,8 +1306,9 @@
       "get": {
         "operationId": "GitHubOwners_Get",
         "tags": [
-          "GitHubOwners"
+          "DevOps"
         ],
+        "summary": "Returns a monitored GitHub owner.",
         "description": "Returns a monitored GitHub owner.",
         "parameters": [
           {
@@ -1365,8 +1359,9 @@
       "get": {
         "operationId": "GitHubRepos_List",
         "tags": [
-          "GitHubRepositories"
+          "DevOps"
         ],
+        "summary": "Returns a list of GitHub repositories onboarded to the connector.",
         "description": "Returns a list of GitHub repositories onboarded to the connector.",
         "parameters": [
           {
@@ -1420,8 +1415,9 @@
       "get": {
         "operationId": "GitHubRepos_Get",
         "tags": [
-          "GitHubRepositories"
+          "DevOps"
         ],
+        "summary": "Returns a monitored GitHub repository.",
         "description": "Returns a monitored GitHub repository.",
         "parameters": [
           {
@@ -1478,8 +1474,9 @@
       "post": {
         "operationId": "GitHubIssues_Create",
         "tags": [
-          "GitHubRepositories"
+          "DevOps"
         ],
+        "summary": "Creates a GitHub issue for the specified repository and assessment.",
         "description": "Creates a GitHub issue for the specified repository and assessment.",
         "parameters": [
           {
@@ -1528,10 +1525,6 @@
                 "type": "string",
                 "description": "A link to the status monitor"
               },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1552,8 +1545,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20%7B%20azureAsyncOperation%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1562,8 +1554,9 @@
       "get": {
         "operationId": "GitLabGroups_List",
         "tags": [
-          "GitLabGroups"
+          "DevOps"
         ],
+        "summary": "Returns a list of GitLab groups onboarded to the connector.",
         "description": "Returns a list of GitLab groups onboarded to the connector.",
         "parameters": [
           {
@@ -1611,8 +1604,9 @@
       "get": {
         "operationId": "GitLabGroups_Get",
         "tags": [
-          "GitLabGroups"
+          "DevOps"
         ],
+        "summary": "Returns a monitored GitLab Group resource for a given fully-qualified name.",
         "description": "Returns a monitored GitLab Group resource for a given fully-qualified name.",
         "parameters": [
           {
@@ -1663,8 +1657,9 @@
       "post": {
         "operationId": "GitLabSubgroups_List",
         "tags": [
-          "GitLabGroups"
+          "DevOps"
         ],
+        "summary": "Gets nested subgroups of given GitLab Group which are onboarded to the connector.",
         "description": "Gets nested subgroups of given GitLab Group which are onboarded to the connector.",
         "parameters": [
           {
@@ -1708,9 +1703,6 @@
           "List_GitLabSubgroups": {
             "$ref": "./examples/SecurityConnectorsDevOps/ListGitLabSubgroups_example.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1718,8 +1710,9 @@
       "get": {
         "operationId": "GitLabProjects_List",
         "tags": [
-          "GitLabProjects"
+          "DevOps"
         ],
+        "summary": "Gets a list of GitLab projects that are directly owned by given group and onboarded to the connector.",
         "description": "Gets a list of GitLab projects that are directly owned by given group and onboarded to the connector.",
         "parameters": [
           {
@@ -1773,8 +1766,9 @@
       "get": {
         "operationId": "GitLabProjects_Get",
         "tags": [
-          "GitLabProjects"
+          "DevOps"
         ],
+        "summary": "Returns a monitored GitLab Project resource for a given fully-qualified group name and project name.",
         "description": "Returns a monitored GitLab Project resource for a given fully-qualified group name and project name.",
         "parameters": [
           {
@@ -1831,8 +1825,9 @@
       "post": {
         "operationId": "AzureDevOpsOrgs_ListAvailable",
         "tags": [
-          "DevOpsConfigurations"
+          "DevOps"
         ],
+        "summary": "Returns a list of all Azure DevOps organizations accessible by the user token consumed by the connector.",
         "description": "Returns a list of all Azure DevOps organizations accessible by the user token consumed by the connector.",
         "parameters": [
           {
@@ -1870,9 +1865,6 @@
           "ListAvailable_AzureDevOpsOrgs": {
             "$ref": "./examples/SecurityConnectorsDevOps/ListAvailableAzureDevOpsOrgs_example.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1880,8 +1872,9 @@
       "post": {
         "operationId": "GitHubOwners_ListAvailable",
         "tags": [
-          "DevOpsConfigurations"
+          "DevOps"
         ],
+        "summary": "Returns a list of all GitHub owners accessible by the user token consumed by the connector.",
         "description": "Returns a list of all GitHub owners accessible by the user token consumed by the connector.",
         "parameters": [
           {
@@ -1919,9 +1912,6 @@
           "ListAvailable_GitHubOwners": {
             "$ref": "./examples/SecurityConnectorsDevOps/ListAvailableGitHubOwners_example.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1929,8 +1919,9 @@
       "post": {
         "operationId": "GitLabGroups_ListAvailable",
         "tags": [
-          "DevOpsConfigurations"
+          "DevOps"
         ],
+        "summary": "Returns a list of all GitLab groups accessible by the user token consumed by the connector.",
         "description": "Returns a list of all GitLab groups accessible by the user token consumed by the connector.",
         "parameters": [
           {
@@ -1968,9 +1959,6 @@
           "ListAvailable_GitLabGroups": {
             "$ref": "./examples/SecurityConnectorsDevOps/ListAvailableGitLabGroups_example.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1978,8 +1966,9 @@
       "get": {
         "operationId": "DevOpsOperationResults_Get",
         "tags": [
-          "DevOpsConfigurations"
+          "DevOps"
         ],
+        "summary": "Get devops long running operation result.",
         "description": "Get devops long running operation result.",
         "parameters": [
           {
@@ -2179,7 +2168,9 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets one-time OAuth code to exchange for refresh and access tokens.\n\nOnly used during PUT/PATCH operations. The secret is cleared during GET."
+          "format": "password",
+          "description": "Gets or sets one-time OAuth code to exchange for refresh and access tokens.\n\nOnly used during PUT/PATCH operations. The secret is cleared during GET.",
+          "x-ms-secret": true
         }
       }
     },
@@ -2212,10 +2203,6 @@
           }
         ]
       }
-    },
-    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", { azureAsyncOperation: string, retryAfter: int32 }>": {
-      "type": "object",
-      "description": "Resource operation accepted."
     },
     "AzureDevOpsOrg": {
       "type": "object",

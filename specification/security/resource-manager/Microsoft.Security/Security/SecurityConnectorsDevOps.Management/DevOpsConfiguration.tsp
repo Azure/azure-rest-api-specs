@@ -9,8 +9,11 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 alias DevOpsConfigurationOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -37,6 +40,7 @@ alias DevOpsConfigurationOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 alias DevOpsOperationResultOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -81,21 +85,26 @@ model DevOpsConfiguration
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DevOpsConfigurations {
   /**
    * Gets a DevOps Configuration.
    */
+  @summary("Gets a DevOps Configuration.")
+  @tag("DevOps")
   get is DevOpsConfigurationOps.Read<DevOpsConfiguration>;
 
   /**
    * Creates or updates a DevOps Configuration.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates or updates a DevOps Configuration.")
+  @tag("DevOps")
   createOrUpdate is DevOpsConfigurationOps.CreateOrUpdateAsync<
     DevOpsConfiguration,
-    Response = ArmResourceUpdatedResponse<DevOpsConfiguration> | ArmResourceCreatedResponse<DevOpsConfiguration> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<DevOpsConfiguration> | ArmResourceCreatedResponse<DevOpsConfiguration> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> & {
       @bodyRoot
       _: DevOpsConfiguration;
     })
@@ -104,7 +113,10 @@ interface DevOpsConfigurations {
   /**
    * Updates a DevOps Configuration.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates a DevOps Configuration.")
+  @tag("DevOps")
   @patch(#{ implicitOptionality: false })
   update is DevOpsConfigurationOps.CustomPatchAsync<
     DevOpsConfiguration,
@@ -119,7 +131,9 @@ interface DevOpsConfigurations {
   /**
    * Deletes a DevOps Connector.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a DevOps Connector.")
+  @tag("DevOps")
   delete is DevOpsConfigurationOps.DeleteWithoutOkAsync<
     DevOpsConfiguration,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -128,6 +142,8 @@ interface DevOpsConfigurations {
   /**
    * List DevOps Configurations.
    */
+  @summary("List DevOps Configurations.")
+  @tag("DevOps")
   list is DevOpsConfigurationOps.List<
     DevOpsConfiguration,
     Response = ArmResponse<DevOpsConfigurationListResponse>
@@ -136,9 +152,8 @@ interface DevOpsConfigurations {
   /**
    * Returns a list of all Azure DevOps organizations accessible by the user token consumed by the connector.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AzureDevOpsOrgs_ListAvailable")
-  @list
+  @summary("Returns a list of all Azure DevOps organizations accessible by the user token consumed by the connector.")
+  @tag("DevOps")
   @action("listAvailableAzureDevOpsOrgs")
   listAvailable is DevOpsConfigurationOps.ActionSync<
     DevOpsConfiguration,
@@ -149,9 +164,8 @@ interface DevOpsConfigurations {
   /**
    * Returns a list of all GitHub owners accessible by the user token consumed by the connector.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GitHubOwners_ListAvailable")
-  @list
+  @summary("Returns a list of all GitHub owners accessible by the user token consumed by the connector.")
+  @tag("DevOps")
   @action("listAvailableGitHubOwners")
   gitHubOwnersListAvailable is DevOpsConfigurationOps.ActionSync<
     DevOpsConfiguration,
@@ -162,9 +176,8 @@ interface DevOpsConfigurations {
   /**
    * Returns a list of all GitLab groups accessible by the user token consumed by the connector.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GitLabGroups_ListAvailable")
-  @list
+  @summary("Returns a list of all GitLab groups accessible by the user token consumed by the connector.")
+  @tag("DevOps")
   @action("listAvailableGitLabGroups")
   gitLabGroupsListAvailable is DevOpsConfigurationOps.ActionSync<
     DevOpsConfiguration,
@@ -175,8 +188,8 @@ interface DevOpsConfigurations {
   /**
    * Get devops long running operation result.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DevOpsOperationResults_Get")
+  @summary("Get devops long running operation result.")
+  @tag("DevOps")
   @get
   devOpsOperationResultsGet is DevOpsOperationResultOps.Read<Azure.ResourceManager.CommonTypes.OperationStatusResult>;
 }

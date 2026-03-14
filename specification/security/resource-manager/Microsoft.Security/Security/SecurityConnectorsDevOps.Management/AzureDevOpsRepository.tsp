@@ -10,6 +10,8 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 /**
  * Azure DevOps Repository resource.
@@ -25,6 +27,7 @@ model AzureDevOpsRepository
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 alias AzureDevOpsRepositoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -66,28 +69,29 @@ alias AzureDevOpsRepositoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AzureDevOpsRepositories {
   /**
    * Returns a monitored Azure DevOps repository resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AzureDevOpsRepos_Get")
+  @summary("Returns a monitored Azure DevOps repository resource.")
+  @tag("DevOps")
   get is AzureDevOpsRepositoryOps.Read<AzureDevOpsRepository>;
 
   /**
    * Creates or updates a monitored Azure DevOps repository resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AzureDevOpsRepos_CreateOrUpdate")
+  @summary("Creates or updates a monitored Azure DevOps repository resource.")
+  @tag("DevOps")
   createOrUpdate is AzureDevOpsRepositoryOps.CreateOrUpdateAsync<AzureDevOpsRepository>;
 
   /**
    * Updates a monitored Azure DevOps repository resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("AzureDevOpsRepos_Update")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates a monitored Azure DevOps repository resource.")
+  @tag("DevOps")
   @patch(#{ implicitOptionality: false })
   update is AzureDevOpsRepositoryOps.CustomPatchAsync<
     AzureDevOpsRepository,
@@ -102,8 +106,8 @@ interface AzureDevOpsRepositories {
   /**
    * Returns a list of Azure DevOps repositories onboarded to the connector.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AzureDevOpsRepos_List")
+  @summary("Returns a list of Azure DevOps repositories onboarded to the connector.")
+  @tag("DevOps")
   list is AzureDevOpsRepositoryOps.List<
     AzureDevOpsRepository,
     Response = ArmResponse<AzureDevOpsRepositoryListResponse>

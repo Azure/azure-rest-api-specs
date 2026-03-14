@@ -678,6 +678,7 @@ model Authorization {
    *
    * Only used during PUT/PATCH operations. The secret is cleared during GET.
    */
+  @secret
   code?: string;
 }
 
@@ -726,6 +727,7 @@ model AgentlessConfiguration {
    * Gets or sets the inventory list for inclusion or exclusion from Agentless.
    * Will be ignored if agentless auto-discovery is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   inventoryList?: InventoryList[];
 }
 
@@ -1055,7 +1057,7 @@ model AzureDevOpsOrganizationConfiguration {
    * Dictionary of AzureDevOps project name to desired project configuration.
    * If AutoDiscovery is Enabled, this field should be empty or null.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   projectConfigs?: Record<AzureDevOpsProjectConfiguration>;
 }
 
@@ -1073,7 +1075,7 @@ model AzureDevOpsProjectConfiguration {
    * Dictionary of AzureDevOps repository name to desired repository configuration.
    * If AutoDiscovery is Enabled, this field should be null or empty.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   repositoryConfigs?: Record<BaseResourceConfiguration>;
 }
 
@@ -1101,7 +1103,7 @@ model GitHubOwnerConfiguration {
    * Dictionary of GitHub repository name to desired repository configuration.
    * If AutoDiscovery is Enabled, this field should be null or empty.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   repositoryConfigs?: Record<BaseResourceConfiguration>;
 }
 
@@ -1119,6 +1121,76 @@ model GitLabGroupConfiguration {
    * Dictionary of GitLab fully-qualified project name to desired project configuration.
    * If AutoDiscovery is Enabled, this field should be null or empty.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   projectConfigs?: Record<BaseResourceConfiguration>;
+}
+
+/**
+ * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
+@error
+model CloudError {
+  /**
+   * The error object.
+   */
+  error?: CloudErrorBody;
+}
+
+/**
+ * The error detail.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
+model CloudErrorBody {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The error target.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * The error details.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  details?: CloudErrorBody[];
+
+  /**
+   * The error additional info.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  additionalInfo?: ErrorAdditionalInfo[];
+}
+
+/**
+ * The resource management error additional info.
+ */
+model ErrorAdditionalInfo {
+  /**
+   * The additional info type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The additional info.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  info?: Record<unknown>;
 }

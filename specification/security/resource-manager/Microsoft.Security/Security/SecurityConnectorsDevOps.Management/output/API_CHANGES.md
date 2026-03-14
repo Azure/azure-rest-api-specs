@@ -12,42 +12,6 @@
 |------|------------|-------|
 | `consumes__added` | added | `["application/json"]` |
 
-### Changes for `summary`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops'].get.summary__deleted` | deleted | `List DevOps Configurations.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].delete.summary__deleted` | deleted | `Deletes a DevOps Connector.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].get.summary__deleted` | deleted | `Gets a DevOps Configuration.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].patch.summary__deleted` | deleted | `Updates a DevOps Configuration.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].put.summary__deleted` | deleted | `Creates or updates a DevOps Configuration.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs'].get.summary__deleted` | deleted | `Returns a list of Azure DevOps organizations onboarded to the connector.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}'].get.summary__deleted` | deleted | `Returns a monitored Azure DevOps organization resource.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}'].patch.summary__deleted` | deleted | `Updates monitored Azure DevOps organization details.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}'].put.summary__deleted` | deleted | `Creates or updates monitored Azure DevOps organization details.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects'].get.summary__deleted` | deleted | `Returns a list of Azure DevOps projects onboarded to the connector.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}'].get.summary__deleted` | deleted | `Returns a monitored Azure DevOps project resource.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}'].patch.summary__deleted` | deleted | `Updates a monitored Azure DevOps project resource.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}'].put.summary__deleted` | deleted | `Creates or updates a monitored Azure DevOps project resource.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos'].get.summary__deleted` | deleted | `Returns a list of Azure DevOps repositories onboarded to the connector.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos/{repoName}'].get.summary__deleted` | deleted | `Returns a monitored Azure DevOps repository resource.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos/{repoName}'].patch.summary__deleted` | deleted | `Updates a monitored Azure DevOps repository resource.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos/{repoName}'].put.summary__deleted` | deleted | `Creates or updates a monitored Azure DevOps repository resource.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners'].get.summary__deleted` | deleted | `Returns a list of GitHub owners onboarded to the connector.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}'].get.summary__deleted` | deleted | `Returns a monitored GitHub owner.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos'].get.summary__deleted` | deleted | `Returns a list of GitHub repositories onboarded to the connector.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}'].get.summary__deleted` | deleted | `Returns a monitored GitHub repository.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}/issues'].post.summary__deleted` | deleted | `Creates a GitHub issue for the specified repository and assessment.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups'].get.summary__deleted` | deleted | `Returns a list of GitLab groups onboarded to the connector.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}'].get.summary__deleted` | deleted | `Returns a monitored GitLab Group resource for a given fully-qualified name.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/listSubgroups'].post.summary__deleted` | deleted | `Gets nested subgroups of given GitLab Group which are onboarded to the connector.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/projects'].get.summary__deleted` | deleted | `Gets a list of GitLab projects that are directly owned by given group and onboarded to the connector.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/projects/{projectName}'].get.summary__deleted` | deleted | `Returns a monitored GitLab Project resource for a given fully-qualified group name and project name.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableAzureDevOpsOrgs'].post.summary__deleted` | deleted | `Returns a list of all Azure DevOps organizations accessible by the user token consumed by the connector.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableGitHubOwners'].post.summary__deleted` | deleted | `Returns a list of all GitHub owners accessible by the user token consumed by the connector.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableGitLabGroups'].post.summary__deleted` | deleted | `Returns a list of all GitLab groups accessible by the user token consumed by the connector.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/operationResults/{operationResultId}'].get.summary__deleted` | deleted | `Get devops long running operation result.` |
-
 ### Changes for `description`
 
 | Path | Change Type | Value |
@@ -98,33 +62,27 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableGitLabGroups'].post.description__added` | added | `Returns a list of all GitLab groups accessible by the user token consumed by the connector.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/operationResults/{operationResultId}'].get.description__added` | added | `Get devops long running operation result.` |
 
-### Changes for `x-ms-long-running-operation-options`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}/issues'].post['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-
 ### Changes for `headers`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].patch.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].put.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].put.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}'].patch.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}'].patch.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos/{repoName}'].patch.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos/{repoName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}/issues'].post.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}/issues'].post.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 
 ### Changes for `final-state-schema`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/DevOpsConfiguration` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/DevOpsConfiguration` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/AzureDevOpsOrg` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/AzureDevOpsOrg` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/AzureDevOpsProject` |
@@ -136,16 +94,8 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.Authorization.properties.code.format__added` | added | `password` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}/issues'].post.parameters[3].schema.format__deleted` | deleted | `arm-id` |
-
-### Changes for `x-ms-pageable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/listSubgroups'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableAzureDevOpsOrgs'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableGitHubOwners'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableGitLabGroups'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
 
 ### Changes for `AzureDevOpsOrganizationConfiguration`
 
@@ -176,12 +126,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.GitLabGroupConfiguration__deleted` | deleted | `{"type":"object","description":"GitLab Group Inventory Configuration.","properties":{"autoDiscovery"...` |
-
-### Changes for `Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", { azureAsyncOperation: string, retryAfter: int32 }>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", { azureAsyncOperation: string, retryAfter: int32 }>__added']` | added | `{"type":"object","description":"Resource operation accepted."}` |
 
 ### Changes for `modelAsExtensible`
 
@@ -225,12 +169,6 @@
 | `definitions.GitHubRepositoryProperties.properties.provisioningStatusMessage.example__deleted` | deleted | `Resource onboarded successful.` |
 | `definitions.GitLabGroupProperties.properties.provisioningStatusMessage.example__deleted` | deleted | `Resource onboarded successful.` |
 | `definitions.GitLabProjectProperties.properties.provisioningStatusMessage.example__deleted` | deleted | `Resource onboarded successful.` |
-
-### Changes for `x-ms-secret`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Authorization.properties.code['x-ms-secret__deleted']` | deleted | `true` |
 
 ### Changes for `systemData`
 
@@ -568,8 +506,6 @@ Disabled - PR Annotations are disabled on the resource's default branch.` | `Con
 
 Enabled - PR Annotations are enabled on the resource's default branch.
 Disabled - PR Annotations are disabled on the resource's default branch.` |
-| `info.description` | `REST APIs for Defender for DevOps` | `API spec for Microsoft.Security (Azure Security Center) resource provider` |
-| `info.title` | `Microsoft.Security` | `SecurityCenter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].delete.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |

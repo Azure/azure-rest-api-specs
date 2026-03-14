@@ -5,31 +5,10 @@
   "consumes__added": [
     "application/json"
   ],
-  "info": {
-    "title": {
-      "__old": "Microsoft.Security",
-      "__new": "SecurityCenter"
-    },
-    "description": {
-      "__old": "REST APIs for Defender for DevOps",
-      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
-    }
-  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops": {
       "get": {
-        "summary__deleted": "List DevOps Configurations.",
         "description__added": "List DevOps Configurations.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "DevOpsConfigurations"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -44,18 +23,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default": {
       "get": {
-        "summary__deleted": "Gets a DevOps Configuration.",
         "description__added": "Gets a DevOps Configuration.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "DevOpsConfigurations"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -68,27 +36,13 @@
         }
       },
       "put": {
-        "summary__deleted": "Creates or updates a DevOps Configuration.",
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "description__added": "Creates or updates a DevOps Configuration.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "DevOpsConfigurations"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -100,21 +54,13 @@
               }
             }
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/DevOpsConfiguration"
         }
       },
       "patch": {
-        "summary__deleted": "Updates a DevOps Configuration.",
         "description__added": "Updates a DevOps Configuration.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "DevOpsConfigurations"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -138,18 +84,7 @@
         }
       },
       "delete": {
-        "summary__deleted": "Deletes a DevOps Connector.",
         "description__added": "Deletes a DevOps Connector.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "DevOpsConfigurations"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -172,18 +107,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs": {
       "get": {
-        "summary__deleted": "Returns a list of Azure DevOps organizations onboarded to the connector.",
         "description__added": "Returns a list of Azure DevOps organizations onboarded to the connector.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "AzureDevOpsOrgs"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -198,18 +122,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}": {
       "get": {
-        "summary__deleted": "Returns a monitored Azure DevOps organization resource.",
         "description__added": "Returns a monitored Azure DevOps organization resource.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "AzureDevOpsOrgs"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -222,18 +135,7 @@
         }
       },
       "put": {
-        "summary__deleted": "Creates or updates monitored Azure DevOps organization details.",
         "description__added": "Creates or updates monitored Azure DevOps organization details.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "AzureDevOpsOrgs"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -257,18 +159,7 @@
         }
       },
       "patch": {
-        "summary__deleted": "Updates monitored Azure DevOps organization details.",
         "description__added": "Updates monitored Azure DevOps organization details.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "AzureDevOpsOrgs"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -294,18 +185,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects": {
       "get": {
-        "summary__deleted": "Returns a list of Azure DevOps projects onboarded to the connector.",
         "description__added": "Returns a list of Azure DevOps projects onboarded to the connector.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "AzureDevOpsProjects"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -320,18 +200,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}": {
       "get": {
-        "summary__deleted": "Returns a monitored Azure DevOps project resource.",
         "description__added": "Returns a monitored Azure DevOps project resource.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "AzureDevOpsProjects"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -344,18 +213,7 @@
         }
       },
       "put": {
-        "summary__deleted": "Creates or updates a monitored Azure DevOps project resource.",
         "description__added": "Creates or updates a monitored Azure DevOps project resource.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "AzureDevOpsProjects"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -379,18 +237,7 @@
         }
       },
       "patch": {
-        "summary__deleted": "Updates a monitored Azure DevOps project resource.",
         "description__added": "Updates a monitored Azure DevOps project resource.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "AzureDevOpsProjects"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -416,18 +263,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos": {
       "get": {
-        "summary__deleted": "Returns a list of Azure DevOps repositories onboarded to the connector.",
         "description__added": "Returns a list of Azure DevOps repositories onboarded to the connector.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "AzureDevOpsRepositories"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -442,18 +278,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos/{repoName}": {
       "get": {
-        "summary__deleted": "Returns a monitored Azure DevOps repository resource.",
         "description__added": "Returns a monitored Azure DevOps repository resource.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "AzureDevOpsRepositories"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -466,18 +291,7 @@
         }
       },
       "put": {
-        "summary__deleted": "Creates or updates a monitored Azure DevOps repository resource.",
         "description__added": "Creates or updates a monitored Azure DevOps repository resource.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "AzureDevOpsRepositories"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -501,18 +315,7 @@
         }
       },
       "patch": {
-        "summary__deleted": "Updates a monitored Azure DevOps repository resource.",
         "description__added": "Updates a monitored Azure DevOps repository resource.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "AzureDevOpsRepositories"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -538,18 +341,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners": {
       "get": {
-        "summary__deleted": "Returns a list of GitHub owners onboarded to the connector.",
         "description__added": "Returns a list of GitHub owners onboarded to the connector.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "GitHubOwners"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -564,18 +356,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}": {
       "get": {
-        "summary__deleted": "Returns a monitored GitHub owner.",
         "description__added": "Returns a monitored GitHub owner.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "GitHubOwners"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -590,18 +371,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos": {
       "get": {
-        "summary__deleted": "Returns a list of GitHub repositories onboarded to the connector.",
         "description__added": "Returns a list of GitHub repositories onboarded to the connector.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "GitHubRepositories"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -616,18 +386,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}": {
       "get": {
-        "summary__deleted": "Returns a monitored GitHub repository.",
         "description__added": "Returns a monitored GitHub repository.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "GitHubRepositories"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -642,21 +401,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}/issues": {
       "post": {
-        "summary__deleted": "Creates a GitHub issue for the specified repository and assessment.",
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "description__added": "Creates a GitHub issue for the specified repository and assessment.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "GitHubRepositories"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -682,10 +427,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -702,18 +443,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups": {
       "get": {
-        "summary__deleted": "Returns a list of GitLab groups onboarded to the connector.",
         "description__added": "Returns a list of GitLab groups onboarded to the connector.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "GitLabGroups"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -728,18 +458,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}": {
       "get": {
-        "summary__deleted": "Returns a monitored GitLab Group resource for a given fully-qualified name.",
         "description__added": "Returns a monitored GitLab Group resource for a given fully-qualified name.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "GitLabGroups"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -754,21 +473,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/listSubgroups": {
       "post": {
-        "summary__deleted": "Gets nested subgroups of given GitLab Group which are onboarded to the connector.",
         "description__added": "Gets nested subgroups of given GitLab Group which are onboarded to the connector.",
-        "x-ms-pageable__added": {
-          "nextLinkName": "nextLink"
-        },
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "GitLabGroups"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -783,18 +488,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/projects": {
       "get": {
-        "summary__deleted": "Gets a list of GitLab projects that are directly owned by given group and onboarded to the connector.",
         "description__added": "Gets a list of GitLab projects that are directly owned by given group and onboarded to the connector.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "GitLabProjects"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -809,18 +503,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/projects/{projectName}": {
       "get": {
-        "summary__deleted": "Returns a monitored GitLab Project resource for a given fully-qualified group name and project name.",
         "description__added": "Returns a monitored GitLab Project resource for a given fully-qualified group name and project name.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "GitLabProjects"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -835,21 +518,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableAzureDevOpsOrgs": {
       "post": {
-        "summary__deleted": "Returns a list of all Azure DevOps organizations accessible by the user token consumed by the connector.",
         "description__added": "Returns a list of all Azure DevOps organizations accessible by the user token consumed by the connector.",
-        "x-ms-pageable__added": {
-          "nextLinkName": "nextLink"
-        },
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "DevOpsConfigurations"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -864,21 +533,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableGitHubOwners": {
       "post": {
-        "summary__deleted": "Returns a list of all GitHub owners accessible by the user token consumed by the connector.",
         "description__added": "Returns a list of all GitHub owners accessible by the user token consumed by the connector.",
-        "x-ms-pageable__added": {
-          "nextLinkName": "nextLink"
-        },
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "DevOpsConfigurations"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -893,21 +548,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableGitLabGroups": {
       "post": {
-        "summary__deleted": "Returns a list of all GitLab groups accessible by the user token consumed by the connector.",
         "description__added": "Returns a list of all GitLab groups accessible by the user token consumed by the connector.",
-        "x-ms-pageable__added": {
-          "nextLinkName": "nextLink"
-        },
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "DevOpsConfigurations"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -922,18 +563,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/operationResults/{operationResultId}": {
       "get": {
-        "summary__deleted": "Get devops long running operation result.",
         "description__added": "Get devops long running operation result.",
-        "tags": [
-          [
-            "-",
-            "DevOps"
-          ],
-          [
-            "+",
-            "DevOpsConfigurations"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -1087,10 +717,6 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", { azureAsyncOperation: string, retryAfter: int32 }>__added": {
-      "type": "object",
-      "description": "Resource operation accepted."
-    },
     "ActionableRemediation": {
       "properties": {
         "state": {
@@ -1145,7 +771,7 @@
       "properties": {
         "code": {
           "example__deleted": "00000000000000000000.",
-          "x-ms-secret__deleted": true,
+          "format__added": "password",
           "description": {
             "__old": "Gets or sets one-time OAuth code to exchange for refresh and access tokens.\r\n\r\nOnly used during PUT/PATCH operations. The secret is cleared during GET.",
             "__new": "Gets or sets one-time OAuth code to exchange for refresh and access tokens.\n\nOnly used during PUT/PATCH operations. The secret is cleared during GET."
