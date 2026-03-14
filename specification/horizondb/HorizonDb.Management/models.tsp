@@ -98,7 +98,6 @@ model HorizonDbParameterGroup
   name: string;
 }
 
-
 @doc("Properties of a HorizonDb cluster")
 model HorizonDbClusterProperties {
   @doc("The administrator login name")
