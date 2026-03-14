@@ -81,6 +81,18 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
     Request = ManagedNetworkSettingsBasicResource,
     Response = OutboundRuleListResult
   >;
+
+  /**
+   * Provisions the managed network of a cognitive services account.
+   */
+  @tag("ManagedNetwork")
+  provision is ArmResourceActionAsync<
+    ManagedNetworkSettingsPropertiesBasicResource,
+    ManagedNetworkProvisionOptions,
+    ManagedNetworkProvisionStatus,
+    LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkProvisionStatus> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@doc(ManagedNetworkSettingsPropertiesBasicResource.name,
@@ -115,4 +127,10 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
 );
 @@summary(ManagedNetworkSettingsPropertiesBasicResources.post,
   "The POST API for updating the outbound rules of the managed network associated with the cognitive services account."
+);
+@@doc(ManagedNetworkSettingsPropertiesBasicResources.provision::parameters.body,
+  "Managed Network Provisioning Options for a cognitive services account."
+);
+@@summary(ManagedNetworkSettingsPropertiesBasicResources.provision,
+  "Provisions the managed network of a cognitive services account."
 );
