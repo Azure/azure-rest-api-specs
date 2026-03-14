@@ -289,6 +289,8 @@ namespace Azure.AI.Projects {
     "InternalOutputItemReasoningItem"
   );
 
+  @@clientName(MemoryItem, "MemoryOutputItem");
+
   @@access(OpenAI.SummaryTextContent, Access.internal);
   @@clientName(OpenAI.SummaryTextContent, "InternalSummaryTextObject");
 
@@ -301,6 +303,9 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.OutputItemCustomToolCall,
     "InternalOutputItemCustomToolCall"
   );
+
+  @@clientName(_AgentItemType.a2a_preview_call, "A2APreviewCall ");
+  @@clientName(_AgentItemType.a2a_preview_call_output, "A2APreviewCallOutput");
 
   @@access(OpenAI.WebSearchActionFind, Access.internal);
   @@clientName(OpenAI.WebSearchActionFind, "InternalWebSearchActionFind");
