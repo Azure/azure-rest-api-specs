@@ -42,3 +42,9 @@ namespace Microsoft.Subscription;
 @@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus::parameters.subscriptionId,
   SubscriptionOperationGroup.acceptOwnershipStatus
 );
+@@Azure.ClientGenerator.Core.clientLocation(SubscriptionsOperationGroup.acceptTargetDirectory::parameters.subscriptionId,
+  SubscriptionsOperationGroup.acceptTargetDirectory
+);
+@@Azure.ClientGenerator.Core.clientLocation(SubscriptionsOperationGroup.targetDirectoryStatus::parameters.subscriptionId,
+  SubscriptionsOperationGroup.targetDirectoryStatus
+);
