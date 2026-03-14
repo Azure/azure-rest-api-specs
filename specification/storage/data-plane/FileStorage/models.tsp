@@ -1546,8 +1546,9 @@ alias FileNamePathParameter = {
 alias ApiVersionHeader = {
   /** Specifies the version of the operation to use for this request. */
   @apiVersion
+  @access(Access.internal)
   @header("x-ms-version")
-  apiVersion: string;
+  version: string;
 };
 
 /** The timeout parameter. */

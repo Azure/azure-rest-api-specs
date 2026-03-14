@@ -7,6 +7,7 @@ using TypeSpec.Http;
 namespace Storage.File;
 
 /** Azure Storage File basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperation<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -35,6 +36,7 @@ op StorageOperation<
 }) | TError;
 
 /** Azure Storage File basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -47,6 +49,7 @@ op StorageOperationNoBody<
 }) | TError;
 
 /** Azure Storage File basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperationResponseBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -64,6 +67,7 @@ op StorageOperationResponseBody<
 >;
 
 /** Azure Storage File basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperationRequestBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -84,6 +88,7 @@ op StorageOperationRequestBody<
  * Service operations
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Service {
   /**
    * Sets properties for a storage account's File service endpoint, including properties for Storage Analytics metrics and CORS (Cross-Origin Resource Sharing) rules.
@@ -163,6 +168,7 @@ interface Service {
  * Share operations
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Share {
   /**
    * Creates a new share under the specified account. If the share with the same name already exists, the operation fails.
@@ -705,6 +711,7 @@ interface Share {
  * Directory operations
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Directory {
   /**
    * Creates a new directory under the specified share or parent directory.
@@ -957,6 +964,7 @@ interface Directory {
  * File operations
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface File {
   /**
    * Creates a new file or replaces a file. Note it only initializes the file with no content.
@@ -1065,7 +1073,7 @@ interface File {
       ...LeaseResponseHeaders;
 
       /** Structured body response header. */
-      @header("x-ms-structured-body") structuredBody?: string;
+      @header("x-ms-structured-body") structuredBodyType?: string;
 
       /** Structured content length. */
       @header("x-ms-structured-content-length") structuredContentLength?: int64;
@@ -1359,7 +1367,7 @@ interface File {
       fileLastWriteTime?: utcDateTime;
 
       /** Structured body response header. */
-      @header("x-ms-structured-body") structuredBody?: string;
+      @header("x-ms-structured-body") structuredBodyType?: string;
     },
     "application/octet-stream"
   >;
