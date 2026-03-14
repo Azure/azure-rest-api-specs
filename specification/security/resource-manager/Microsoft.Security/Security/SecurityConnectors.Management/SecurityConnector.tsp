@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * The security connector resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityConnector
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SecurityConnectorProperties> {
   ...ResourceNameParameter<
@@ -25,13 +26,13 @@ model SecurityConnector
   /**
    * Kind of the resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   /**
    * Entity tag is used for comparing two or more entities from the same requested resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -40,12 +41,15 @@ interface SecurityConnectors {
   /**
    * Retrieves details of a specific security connector
    */
-  get is ArmResourceRead<SecurityConnector>;
+  get is ArmResourceRead<SecurityConnector, Error = CloudError>;
 
   /**
    * Creates or updates a security connector. If a security connector is already created and a subsequent request is issued for the same security connector id, then it will be updated.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<SecurityConnector>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    SecurityConnector,
+    Error = CloudError
+  >;
 
   /**
    * Updates a security connector
@@ -53,20 +57,22 @@ interface SecurityConnectors {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     SecurityConnector,
-    PatchModel = SecurityConnector
+    PatchModel = SecurityConnector,
+    Error = CloudError
   >;
 
   /**
    * Deletes a security connector.
    */
-  delete is ArmResourceDeleteSync<SecurityConnector>;
+  delete is ArmResourceDeleteSync<SecurityConnector, Error = CloudError>;
 
   /**
    * Lists all the security connectors in the specified resource group. Use the 'nextLink' property in the response to get the next page of security connectors for the specified resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     SecurityConnector,
-    Response = ArmResponse<SecurityConnectorsList>
+    Response = ArmResponse<SecurityConnectorsList>,
+    Error = CloudError
   >;
 
   /**
@@ -74,7 +80,8 @@ interface SecurityConnectors {
    */
   list is ArmListBySubscription<
     SecurityConnector,
-    Response = ArmResponse<SecurityConnectorsList>
+    Response = ArmResponse<SecurityConnectorsList>,
+    Error = CloudError
   >;
 }
 

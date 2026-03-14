@@ -3,22 +3,22 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Security;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CloudError.error);
 
-@@clientName(DefenderForContainersAwsOffering.mdcContainersAgentlessDiscoveryK8s,
+@@clientName(defenderForContainersAwsOffering.mdcContainersAgentlessDiscoveryK8s,
   "mdcContainersAgentlessDiscoveryK8S"
 );
 
-@@clientName(DefenderForContainersGcpOffering.mdcContainersAgentlessDiscoveryK8s,
+@@clientName(defenderForContainersGcpOffering.mdcContainersAgentlessDiscoveryK8s,
   "mdcContainersAgentlessDiscoveryK8S"
 );
 
-@@clientName(DefenderCspmAwsOffering.mdcContainersAgentlessDiscoveryK8s,
+@@clientName(defenderCspmAwsOffering.mdcContainersAgentlessDiscoveryK8s,
   "mdcContainersAgentlessDiscoveryK8S"
 );
 
-@@clientName(DefenderCspmGcpOffering.mdcContainersAgentlessDiscoveryK8s,
+@@clientName(defenderCspmGcpOffering.mdcContainersAgentlessDiscoveryK8s,
   "mdcContainersAgentlessDiscoveryK8S"
 );
 
@@ -28,5 +28,5 @@ using Microsoft.Security;
 @@clientName(SecurityConnectors.update::parameters.properties,
   "securityConnector"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SecurityConnector.properties);

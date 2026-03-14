@@ -8,6 +8,12 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 
 /**
@@ -311,7 +317,7 @@ model SecurityConnectorsList is Azure.Core.Page<SecurityConnector>;
 /**
  * A set of properties that defines the security connector configuration.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityConnectorProperties {
   /**
    * The multi cloud resource identifier (account id in case of AWS connector, project number in case of GCP connector).
@@ -334,7 +340,7 @@ model SecurityConnectorProperties {
    * A collection of offerings for the security connector.
    */
   @identifiers(#[])
-  offerings?: CloudOffering[];
+  offerings?: cloudOffering[];
 
   /**
    * The security connector environment data.
@@ -345,8 +351,9 @@ model SecurityConnectorProperties {
 /**
  * The security offering details
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("offeringType")
-model CloudOffering {
+model cloudOffering {
   /**
    * The type of the security offering.
    */
@@ -421,16 +428,19 @@ model Kind {
   /**
    * Kind of the resource
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 }
 
 /**
  * Entity tag is used for comparing two or more entities from the same requested resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ETag {
   /**
    * Entity tag is used for comparing two or more entities from the same requested resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -441,14 +451,17 @@ model Tags {
   /**
    * A list of key value pairs that describe the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * The error object.
@@ -459,6 +472,8 @@ model CloudError {
 /**
  * The error detail.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * The error code.
@@ -481,12 +496,14 @@ model CloudErrorBody {
   /**
    * The error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   details?: CloudErrorBody[];
 
   /**
    * The error additional info.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
@@ -504,6 +521,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
@@ -772,6 +790,7 @@ model AccessTokenAuthentication extends Authentication {
   /**
    * The access token that will be used while authenticating with the onboarded environment
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accessToken?: string;
 
   /**
@@ -783,6 +802,7 @@ model AccessTokenAuthentication extends Authentication {
 /**
  * The JFrog Artifactory connector environment data
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JFrogEnvironmentData extends EnvironmentData {
   /**
    * Scan interval in hours (value should be between 1-hour to 24-hours)
@@ -800,7 +820,8 @@ model JFrogEnvironmentData extends EnvironmentData {
 /**
  * The CSPM monitoring for AWS offering
  */
-model CspmMonitorAwsOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model cspmMonitorAwsOffering extends cloudOffering {
   /**
    * The native cloud connection configuration
    */
@@ -825,7 +846,8 @@ model CspmMonitorAwsOfferingNativeCloudConnection {
 /**
  * The Defender for Containers AWS offering
  */
-model DefenderForContainersAwsOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderForContainersAwsOffering extends cloudOffering {
   /**
    * The kubernetes service connection configuration
    */
@@ -884,7 +906,7 @@ model DefenderForContainersAwsOffering extends CloudOffering {
   /**
    * The Microsoft Defender for Container K8s VM host scanning configuration
    */
-  vmScanners?: DefenderForContainersAwsOfferingVmScanners;
+  vmScanners?: defenderForContainersAwsOfferingVmScanners;
 
   /**
    * The type of the security offering.
@@ -965,14 +987,17 @@ model DefenderForContainersAwsOfferingMdcContainersAgentlessDiscoveryK8S {
 /**
  * The Microsoft Defender for Container K8s VM host scanning configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model DefenderForContainersAwsOfferingVmScanners extends VmScannersAws {}
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderForContainersAwsOfferingVmScanners extends vmScannersAws {}
 
 /**
  * A VM scanning configuration for a security offering of a Aws environment
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model VmScannersAws extends VmScannersBase {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model vmScannersAws extends vmScannersBase {
   /**
    * The cloud role ARN in AWS for this feature
    */
@@ -982,7 +1007,8 @@ model VmScannersAws extends VmScannersBase {
 /**
  * A VM scanning configuration for a security offering of a given environment
  */
-model VmScannersBase {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model vmScannersBase {
   /**
    * Is VM scanning enabled
    */
@@ -1006,14 +1032,15 @@ model VmScannersBaseConfiguration {
   /**
    * Tags that indicates that a resource should not be scanned
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exclusionTags?: Record<string>;
 }
 
 /**
  * The Defender for Servers AWS offering
  */
-model DefenderForServersAwsOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderForServersAwsOffering extends cloudOffering {
   /**
    * The Defender for servers connection configuration
    */
@@ -1042,7 +1069,7 @@ model DefenderForServersAwsOffering extends CloudOffering {
   /**
    * The Microsoft Defender for Server VM scanning configuration
    */
-  vmScanners?: DefenderForServersAwsOfferingVmScanners;
+  vmScanners?: defenderForServersAwsOfferingVmScanners;
 
   /**
    * The type of the security offering.
@@ -1063,15 +1090,17 @@ model DefenderForServersAwsOfferingDefenderForServers {
 /**
  * The ARC autoprovisioning configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefenderForServersAwsOfferingArcAutoProvisioning
-  extends ArcAutoProvisioningAws {}
+  extends arcAutoProvisioningAws {}
 
 /**
  * The ARC autoprovisioning configuration for an AWS environment
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ArcAutoProvisioningAws extends ArcAutoProvisioning {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model arcAutoProvisioningAws extends arcAutoProvisioning {
   /**
    * The cloud role ARN in AWS for this feature
    */
@@ -1081,7 +1110,8 @@ model ArcAutoProvisioningAws extends ArcAutoProvisioning {
 /**
  * The ARC autoprovisioning configuration
  */
-model ArcAutoProvisioning {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model arcAutoProvisioning {
   /**
    * Is arc auto provisioning enabled
    */
@@ -1145,6 +1175,7 @@ model DefenderForServersAwsOfferingMdeAutoProvisioning {
   /**
    * configuration for Microsoft Defender for Endpoint autoprovisioning
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   configuration?: unknown;
 }
 
@@ -1161,13 +1192,16 @@ model DefenderForServersAwsOfferingSubPlan {
 /**
  * The Microsoft Defender for Server VM scanning configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model DefenderForServersAwsOfferingVmScanners extends VmScannersAws {}
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderForServersAwsOfferingVmScanners extends vmScannersAws {}
 
 /**
  * The Defender for Databases AWS offering
  */
-model DefenderFoDatabasesAwsOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderFoDatabasesAwsOffering extends cloudOffering {
   /**
    * The ARC autoprovisioning configuration
    */
@@ -1192,9 +1226,10 @@ model DefenderFoDatabasesAwsOffering extends CloudOffering {
 /**
  * The ARC autoprovisioning configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefenderFoDatabasesAwsOfferingArcAutoProvisioning
-  extends ArcAutoProvisioningAws {}
+  extends arcAutoProvisioningAws {}
 
 /**
  * The RDS configuration
@@ -1229,7 +1264,8 @@ model DefenderFoDatabasesAwsOfferingDatabasesDspm {
 /**
  * The CSPM monitoring for GCP offering
  */
-model CspmMonitorGcpOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model cspmMonitorGcpOffering extends cloudOffering {
   /**
    * The native cloud connection configuration
    */
@@ -1259,7 +1295,8 @@ model CspmMonitorGcpOfferingNativeCloudConnection {
 /**
  * The Defender for Servers GCP offering configurations
  */
-model DefenderForServersGcpOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderForServersGcpOffering extends cloudOffering {
   /**
    * The Defender for servers connection configuration
    */
@@ -1288,7 +1325,7 @@ model DefenderForServersGcpOffering extends CloudOffering {
   /**
    * The Microsoft Defender for Server VM scanning configuration
    */
-  vmScanners?: DefenderForServersGcpOfferingVmScanners;
+  vmScanners?: defenderForServersGcpOfferingVmScanners;
 
   /**
    * The type of the security offering.
@@ -1314,15 +1351,18 @@ model DefenderForServersGcpOfferingDefenderForServers {
 /**
  * The ARC autoprovisioning configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefenderForServersGcpOfferingArcAutoProvisioning
-  extends ArcAutoProvisioningGcp {}
+  extends arcAutoProvisioningGcp {}
 
 /**
  * The ARC autoprovisioning configuration for an GCP environment
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ArcAutoProvisioningGcp extends ArcAutoProvisioning {}
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model arcAutoProvisioningGcp extends arcAutoProvisioning {}
 
 /**
  * The Vulnerability Assessment autoprovisioning configuration
@@ -1361,6 +1401,7 @@ model DefenderForServersGcpOfferingMdeAutoProvisioning {
   /**
    * configuration for Microsoft Defender for Endpoint autoprovisioning
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   configuration?: unknown;
 }
 
@@ -1377,19 +1418,24 @@ model DefenderForServersGcpOfferingSubPlan {
 /**
  * The Microsoft Defender for Server VM scanning configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model DefenderForServersGcpOfferingVmScanners extends VmScannersGcp {}
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderForServersGcpOfferingVmScanners extends vmScannersGcp {}
 
 /**
  * A VM scanning configuration for a security offering of a GCP environment
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model VmScannersGcp extends VmScannersBase {}
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model vmScannersGcp extends vmScannersBase {}
 
 /**
  * The Defender for Databases GCP offering configurations
  */
-model DefenderForDatabasesGcpOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderForDatabasesGcpOffering extends cloudOffering {
   /**
    * The ARC autoprovisioning configuration
    */
@@ -1409,9 +1455,10 @@ model DefenderForDatabasesGcpOffering extends CloudOffering {
 /**
  * The ARC autoprovisioning configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefenderForDatabasesGcpOfferingArcAutoProvisioning
-  extends ArcAutoProvisioningGcp {}
+  extends arcAutoProvisioningGcp {}
 
 /**
  * The native cloud connection configuration
@@ -1431,7 +1478,8 @@ model DefenderForDatabasesGcpOfferingDefenderForDatabasesArcAutoProvisioning {
 /**
  * The containers GCP offering
  */
-model DefenderForContainersGcpOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderForContainersGcpOffering extends cloudOffering {
   /**
    * The native cloud connection configuration
    */
@@ -1470,7 +1518,7 @@ model DefenderForContainersGcpOffering extends CloudOffering {
   /**
    * The Microsoft Defender for Container K8s VM host scanning configuration
    */
-  vmScanners?: DefenderForContainersGcpOfferingVmScanners;
+  vmScanners?: defenderForContainersGcpOfferingVmScanners;
 
   /**
    * The type of the security offering.
@@ -1551,13 +1599,16 @@ model DefenderForContainersGcpOfferingMdcContainersAgentlessDiscoveryK8S {
 /**
  * The Microsoft Defender for Container K8s VM host scanning configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model DefenderForContainersGcpOfferingVmScanners extends VmScannersGcp {}
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderForContainersGcpOfferingVmScanners extends vmScannersGcp {}
 
 /**
  * The CSPM monitoring for github offering
  */
-model CspmMonitorGithubOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model cspmMonitorGithubOffering extends cloudOffering {
   /**
    * The type of the security offering.
    */
@@ -1567,7 +1618,8 @@ model CspmMonitorGithubOffering extends CloudOffering {
 /**
  * The CSPM monitoring for AzureDevOps offering
  */
-model CspmMonitorAzureDevOpsOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model cspmMonitorAzureDevOpsOffering extends cloudOffering {
   /**
    * The type of the security offering.
    */
@@ -1577,11 +1629,12 @@ model CspmMonitorAzureDevOpsOffering extends CloudOffering {
 /**
  * The CSPM P1 for AWS offering
  */
-model DefenderCspmAwsOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderCspmAwsOffering extends cloudOffering {
   /**
    * The Microsoft Defender for CSPM offering VM scanning configuration
    */
-  vmScanners?: DefenderCspmAwsOfferingVmScanners;
+  vmScanners?: defenderCspmAwsOfferingVmScanners;
 
   /**
    * The Microsoft Defender Data Sensitivity discovery configuration
@@ -1617,8 +1670,10 @@ model DefenderCspmAwsOffering extends CloudOffering {
 /**
  * The Microsoft Defender for CSPM offering VM scanning configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model DefenderCspmAwsOfferingVmScanners extends VmScannersAws {}
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderCspmAwsOfferingVmScanners extends vmScannersAws {}
 
 /**
  * The Microsoft Defender Data Sensitivity discovery configuration
@@ -1723,7 +1778,8 @@ model DefenderCspmAwsOfferingMdcContainersAgentlessDiscoveryK8S {
 /**
  * The CSPM P1 for GCP offering
  */
-model DefenderCspmGcpOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderCspmGcpOffering extends cloudOffering {
   /**
    * GCP Defenders CSPM Permissions Management OIDC (Open ID connect) connection configurations
    */
@@ -1732,7 +1788,7 @@ model DefenderCspmGcpOffering extends CloudOffering {
   /**
    * The Microsoft Defender for CSPM VM scanning configuration
    */
-  vmScanners?: DefenderCspmGcpOfferingVmScanners;
+  vmScanners?: defenderCspmGcpOfferingVmScanners;
 
   /**
    * The Microsoft Defender Data Sensitivity discovery configuration
@@ -1778,8 +1834,10 @@ model DefenderCspmGcpOfferingCiemDiscovery {
 /**
  * The Microsoft Defender for CSPM VM scanning configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model DefenderCspmGcpOfferingVmScanners extends VmScannersGcp {}
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderCspmGcpOfferingVmScanners extends vmScannersGcp {}
 
 /**
  * The Microsoft Defender Data Sensitivity discovery configuration
@@ -1844,7 +1902,8 @@ model DefenderCspmGcpOfferingMdcContainersAgentlessDiscoveryK8S {
 /**
  * The CSPM (Cloud security posture management) monitoring for gitlab offering
  */
-model CspmMonitorGitLabOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model cspmMonitorGitLabOffering extends cloudOffering {
   /**
    * The type of the security offering.
    */
@@ -1854,7 +1913,8 @@ model CspmMonitorGitLabOffering extends CloudOffering {
 /**
  * The CSPM (Cloud security posture management) monitoring for Docker Hub offering
  */
-model CspmMonitorDockerHubOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model cspmMonitorDockerHubOffering extends cloudOffering {
   /**
    * The type of the security offering.
    */
@@ -1864,7 +1924,8 @@ model CspmMonitorDockerHubOffering extends CloudOffering {
 /**
  * The Defender for containers Docker Hub offering configurations
  */
-model DefenderForContainersDockerHubOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderForContainersDockerHubOffering extends cloudOffering {
   /**
    * The type of the security offering.
    */
@@ -1874,7 +1935,8 @@ model DefenderForContainersDockerHubOffering extends CloudOffering {
 /**
  * The Defender for CSPM Docker Hub offering configurations
  */
-model DefenderCspmDockerHubOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderCspmDockerHubOffering extends cloudOffering {
   /**
    * The type of the security offering.
    */
@@ -1884,7 +1946,8 @@ model DefenderCspmDockerHubOffering extends CloudOffering {
 /**
  * The CSPM (Cloud security posture management) monitoring for JFrog Artifactory offering
  */
-model CspmMonitorJFrogOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model cspmMonitorJFrogOffering extends cloudOffering {
   /**
    * The type of the security offering.
    */
@@ -1894,7 +1957,8 @@ model CspmMonitorJFrogOffering extends CloudOffering {
 /**
  * The Defender for Containers for JFrog Artifactory offering
  */
-model DefenderForContainersJFrogOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderForContainersJFrogOffering extends cloudOffering {
   /**
    * The type of the security offering.
    */
@@ -1904,7 +1968,8 @@ model DefenderForContainersJFrogOffering extends CloudOffering {
 /**
  * The CSPM P1 for JFrog Artifactory offering
  */
-model DefenderCspmJFrogOffering extends CloudOffering {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model defenderCspmJFrogOffering extends cloudOffering {
   /**
    * The Microsoft Defender Container image assessment configuration
    */
@@ -1919,6 +1984,7 @@ model DefenderCspmJFrogOffering extends CloudOffering {
 /**
  * The Microsoft Defender Container image assessment configuration
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefenderCspmJFrogOfferingMdcContainersImageAssessment {
   /**
    * Is Microsoft Defender container image assessment enabled
