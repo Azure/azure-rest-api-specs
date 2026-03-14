@@ -100,7 +100,35 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: SqlVulnerabilityAssessments.Management
+tag: SensitivitySettings.Management
+```
+
+### Composite packages
+
+The following packages may be composed from multiple api-versions.
+
+
+### Tag: SensitivitySettings.Management
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'SensitivitySettings.Management'
+input-file:
+  - preview/2023-02-15-preview/sensitivitySettings.json
+```
+
+### Composite packages
+
+The following packages may be composed from multiple api-versions.
+
+
+### Tag: SensitivitySettings.Management
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'SensitivitySettings.Management'
+input-file:
+  - preview/2023-02-15-preview/sensitivitySettings.json
 ```
 
 ### Composite packages
