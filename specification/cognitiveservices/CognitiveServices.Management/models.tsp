@@ -1589,15 +1589,15 @@ model AccountProperties {
   networkInjections?: NetworkInjection[];
 
   /**
-   * Specifies whether this resource support project management as child resources, used as containers for access management, data isolation and cost in AI Foundry.
-   */
-  allowProjectManagement?: boolean;
-
-  /**
    * Represents the foundry auto-upgrade configuration for a Cognitive Services account.
    */
   @added(Versions.v2026_01_15_preview)
   foundryAutoUpgrade?: FoundryAutoUpgrade;
+
+  /**
+   * Specifies whether this resource support project management as child resources, used as containers for access management, data isolation and cost in AI Foundry.
+   */
+  allowProjectManagement?: boolean;
 
   /**
    * Specifies the project, by project name, that is targeted when data plane endpoints are called without a project parameter.
@@ -2259,16 +2259,16 @@ model Usage {
   status?: QuotaUsageStatus;
 
   /**
-   * The scope type for the quota (e.g., Global, DataZone, Regional).
+   * The scope type of the quota usage.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'scopeType' is nullable in 'Usage' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
   scopeType?: QuotaScopeType | null;
 
   /**
-   * The scope identifier for the quota (e.g., US, EUR, Global, or a region name like eastus).
+   * The scope identifier of the quota usage.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'scopeId' is nullable in 'Usage' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
   scopeId?: string | null;
 }
@@ -2776,20 +2776,6 @@ model ModelSkuCapacityProperties {
   skuName?: string;
 
   /**
-   * The scope identifier for the capacity (e.g., US, EUR, Global, or a region name like eastus).
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'scopeId' is nullable in 'ModelSkuCapacityProperties' for backward compatibility with existing API behavior"
-  @added(Versions.v2026_01_15_preview)
-  scopeId?: string | null;
-
-  /**
-   * The scope type for the capacity (e.g., Global, DataZone, Regional).
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'scopeType' is nullable in 'ModelSkuCapacityProperties' for backward compatibility with existing API behavior"
-  @added(Versions.v2026_01_15_preview)
-  scopeType?: QuotaScopeType | null;
-
-  /**
    * The available capacity for deployment with this model and sku.
    */
   availableCapacity?: float32;
@@ -2798,6 +2784,20 @@ model ModelSkuCapacityProperties {
    * The available capacity for deployment with a fine-tune version of this model and sku.
    */
   availableFinetuneCapacity?: float32;
+
+  /**
+   * The scope identifier for model SKU capacity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
+  @added(Versions.v2026_01_15_preview)
+  scopeId?: string | null;
+
+  /**
+   * The scope type for model SKU capacity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
+  @added(Versions.v2026_01_15_preview)
+  scopeType?: QuotaScopeType | null;
 }
 
 /**
@@ -4469,19 +4469,19 @@ model ManagedNetworkSettingsEx extends ManagedNetworkSettings {
 /**
  * A paginated list of Agent Application entities.
  */
-model AgenticApplicationResourceArmPaginatedResult {
+model AgentApplicationResourceArmPaginatedResult {
   /**
-   * The link to the next page of Agentic Application objects. If null, there are no additional pages.
+   * The link to the next page of Agent Application objects. If null, there are no additional pages.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "'nextLink' is nullable in 'AgentApplicationResourceArmPaginatedResult' for backward compatibility with existing API behavior"
   @nextLink
   nextLink?: string | null;
 
   /**
-   * An array of objects of type Agentic Application.
+   * An array of objects of type Agent Application.
    */
   @pageItems
-  value?: AgenticApplication[];
+  value?: AgentApplication[];
 }
 
 /**

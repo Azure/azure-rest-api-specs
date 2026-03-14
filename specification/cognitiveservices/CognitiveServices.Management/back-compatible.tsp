@@ -173,9 +173,6 @@ using Microsoft.CognitiveServices;
 @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.patch,
   "ManagedNetworkSettings"
 );
-@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.delete,
-  "ManagedNetworkSettings"
-);
 @@clientName(ManagedNetworkSettingsPropertiesBasicResources.patch::parameters.properties,
   "body"
 );
@@ -186,7 +183,7 @@ using Microsoft.CognitiveServices;
   "OutboundRules"
 );
 
-@@clientName(AgenticApplications.createOrUpdate::parameters.resource, "body");
+@@clientName(AgentApplications.createOrUpdate::parameters.resource, "body");
 
 @@clientLocation(AgentDeploymentResources.get, "AgentDeployments");
 @@clientLocation(AgentDeploymentResources.createOrUpdate, "AgentDeployments");
