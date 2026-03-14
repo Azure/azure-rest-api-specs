@@ -19,6 +19,14 @@ op MapsRenderOperation<
   TError
 >;
 
+alias ResponseFormatParameters = {
+  /**
+   * Desired format of the response. Value can be either _json_ or _xml_.
+   */
+  @path
+  format: ResponseFormat;
+};
+
 interface Render {
   /**
    *
@@ -301,13 +309,7 @@ interface Render {
   @route("/map/copyright/caption/{format}")
   @get
   getCopyrightCaption is MapsRenderOperation<
-    {
-      /**
-       * Desired format of the response. Value can be either _json_ or _xml_.
-       */
-      @path
-      format: ResponseFormat;
-    },
+    ResponseFormatParameters,
     CopyrightCaption
   >;
 
@@ -765,7 +767,7 @@ interface Render {
   @route("/map/copyright/bounding/{format}")
   @get
   getCopyrightFromBoundingBox is MapsRenderOperation<
-    {
+    ResponseFormatParameters & {
       /**
        * Minimum coordinates (south-west point) of bounding box in latitude longitude
        * coordinate system. E.g. 52.41064,4.84228
@@ -779,12 +781,6 @@ interface Render {
        */
       @query("maxcoordinates")
       northEast: float64[];
-
-      /**
-       * Desired format of the response. Value can be either _json_ or _xml_.
-       */
-      @path
-      format: ResponseFormat;
 
       /**
        * Yes/no value to exclude textual data from response. Only images and
@@ -812,7 +808,7 @@ interface Render {
   @route("/map/copyright/tile/{format}")
   @get
   getCopyrightForTile is MapsRenderOperation<
-    {
+    ResponseFormatParameters & {
       /**
        * Zoom level for the desired tile.
        *
@@ -846,12 +842,6 @@ interface Render {
       y: int32;
 
       /**
-       * Desired format of the response. Value can be either _json_ or _xml_.
-       */
-      @path
-      format: ResponseFormat;
-
-      /**
        * Yes/no value to exclude textual data from response. Only images and
        * country/region names will be in response.
        */
@@ -877,13 +867,7 @@ interface Render {
   @route("/map/copyright/world/{format}")
   @get
   getCopyrightForWorld is MapsRenderOperation<
-    {
-      /**
-       * Desired format of the response. Value can be either _json_ or _xml_.
-       */
-      @path
-      format: ResponseFormat;
-
+    ResponseFormatParameters & {
       /**
        * Yes/no value to exclude textual data from response. Only images and
        * country/region names will be in response.
