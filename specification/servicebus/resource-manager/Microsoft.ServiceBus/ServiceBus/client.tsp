@@ -51,7 +51,7 @@ using Microsoft.ServiceBus;
 @@clientName(KeyVaultProperties, "ServiceBusKeyVaultProperties", "csharp");
 @@clientName(SBNamespace, "ServiceBusNamespace", "csharp");
 @@clientName(SBSku, "ServiceBusSku", "csharp");
-@@clientName(SBAuthorizationRule, "ServiceBusAuthorizationRules", "csharp");
+@@clientName(SBAuthorizationRule, "ServiceBusAuthorizationRule", "csharp");
 @@clientName(CheckNameAvailability, "ServiceBusNameAvailabilityContent", "csharp");
 @@clientName(CheckNameAvailabilityResult, "ServiceBusNameAvailabilityResult", "csharp");
 @@clientName(NetworkRuleSet, "ServiceBusNetworkRuleSet", "csharp");
@@ -83,3 +83,34 @@ using Microsoft.ServiceBus;
 @@alternateType(KeyVaultProperties.keyVaultUri, url, "csharp");
 @@alternateType(SBNamespace.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
 @@alternateType(SBNamespaceUpdateParameters.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
+
+// Step 6: Fix TLS version member names (MembersMustExist)
+@@clientName(TlsVersion.`1.0`, "Tls1_0", "csharp");
+@@clientName(TlsVersion.`1.1`, "Tls1_1", "csharp");
+@@clientName(TlsVersion.`1.2`, "Tls1_2", "csharp");
+
+// Step 6: Avoid Windows filename collision between FailOverProperties.cs and FailoverProperties.cs
+@@clientName(FailOverProperties, "ServiceBusFailOverDetail", "csharp");
+
+// Step 6: Fix property names (MembersMustExist)
+@@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState, "ConnectionState", "csharp");
+
+// Step 6: Fix property types to ResourceIdentifier (MembersMustExist)
+@@alternateType(Subnet.id, armResourceIdentifier, "csharp");
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
+
+// Step 6: Fix location types on resource models to AzureLocation (MembersMustExist)
+@@alternateType(MigrationConfigProperties.location, azureLocation, "csharp");
+@@alternateType(ArmDisasterRecovery.location, azureLocation, "csharp");
+@@alternateType(NetworkRuleSet.location, azureLocation, "csharp");
+@@alternateType(PrivateEndpointConnection.location, azureLocation, "csharp");
+@@alternateType(SBQueue.location, azureLocation, "csharp");
+@@alternateType(Rule.location, azureLocation, "csharp");
+@@alternateType(SBSubscription.location, azureLocation, "csharp");
+@@alternateType(SBTopic.location, azureLocation, "csharp");
+@@alternateType(SBAuthorizationRule.location, azureLocation, "csharp");
+
+// Step 6: Fix operation names (MembersMustExist)
+@@clientName(NamespacesOperationGroup.checkNameAvailability, "CheckServiceBusNamespaceNameAvailability", "csharp");
+@@clientName(SBNamespaces.checkNameAvailability, "CheckServiceBusDisasterRecoveryNameAvailability", "csharp");
