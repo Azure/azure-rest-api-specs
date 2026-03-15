@@ -81,3 +81,5 @@ using Microsoft.ServiceBus;
 @@alternateType(MigrationConfigPropertiesProperties.targetNamespace, armResourceIdentifier, "csharp");
 @@alternateType(Identity.tenantId, uuid, "csharp");
 @@alternateType(KeyVaultProperties.keyVaultUri, url, "csharp");
+@@alternateType(SBNamespace.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
+@@alternateType(SBNamespaceUpdateParameters.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
