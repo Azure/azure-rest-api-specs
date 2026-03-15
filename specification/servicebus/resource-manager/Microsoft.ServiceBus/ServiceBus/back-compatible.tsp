@@ -37,7 +37,7 @@ using Microsoft.ServiceBus;
 @@clientLocation(SBNamespaces.failover, "Namespaces");
 @@clientName(SBNamespaces.failover::parameters.body, "parameters");
 @@clientLocation(SBNamespaces.privateLinkResourcesGet, "PrivateLinkResources");
-@@clientName(SBNamespaces.privateLinkResourcesGet, "Get");
+@@clientName(SBNamespaces.privateLinkResourcesGet, "Get", "!csharp");
 @@clientLocation(SBNamespaces.checkNameAvailability, DisasterRecoveryConfigs);
 @@clientName(SBNamespaces.checkNameAvailability::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
