@@ -63,6 +63,11 @@ using Microsoft.DBforPostgreSQL;
 @@clientName(ServerNameItem, "CosmosDBForPostgreSqlServerNameItem", "csharp");
 @@clientName(ProvisioningState, "CosmosDBForPostgreSqlProvisioningState", "csharp");
 @@clientName(ClusterConfigurationListResult, "CosmosDBForPostgreSqlClusterConfigurationListResult", "csharp");
+@@clientName(PrivateEndpointConnection, "CosmosDBForPostgreSqlPrivateEndpointConnection", "csharp");
+@@clientName(PrivateLinkResource, "CosmosDBForPostgreSqlPrivateLinkResource", "csharp");
 
 // override-operation-name
 @@clientName(ClustersOperationGroup.checkNameAvailability, "CheckCosmosDBForPostgreSqlClusterNameAvailability", "csharp");
+
+// AZC0030: forbidden suffix fix
+@@clientName(PromoteRequest, "CosmosDBForPostgreSqlPromoteRequestContent", "csharp");
