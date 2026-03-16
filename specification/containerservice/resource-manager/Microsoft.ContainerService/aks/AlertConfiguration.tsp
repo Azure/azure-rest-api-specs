@@ -1,14 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
-import "@azure-tools/typespec-autorest";
 import "./ManagedCluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using Versioning;
-using Autorest;
 
 namespace Microsoft.ContainerService;
 
@@ -162,23 +160,4 @@ interface AlertConfigurations {
   "The alert configuration to create or update."
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Needed to attach x-ms-examples to operations"
-@@Autorest.example(AlertConfigurations.get,
-  "./examples/2026-01-02-preview/AlertConfigurations_Get.json",
-  "Get Alert Configuration"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Needed to attach x-ms-examples to operations"
-@@Autorest.example(AlertConfigurations.createOrUpdate,
-  "./examples/2026-01-02-preview/AlertConfigurations_CreateOrUpdate.json",
-  "Create or Update Alert Configuration"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Needed to attach x-ms-examples to operations"
-@@Autorest.example(AlertConfigurations.delete,
-  "./examples/2026-01-02-preview/AlertConfigurations_Delete.json",
-  "Delete Alert Configuration"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Needed to attach x-ms-examples to operations"
-@@Autorest.example(AlertConfigurations.listByManagedCluster,
-  "./examples/2026-01-02-preview/AlertConfigurations_ListByManagedCluster.json",
-  "List Alert Configurations by Managed Cluster"
-);
+
