@@ -18,3 +18,17 @@ using Azure.ClientGenerator.Core;
   service: [ResourceChanges, ResourceGraph, ResourceHistory],
 })
 namespace Microsoft.ResourceGraph;
+
+@@clientName(ResourceHistory.DateTimeInterval,
+  "ResourceHistoryDateTimeInterval",
+  "java"
+);
+@@clientName(ResourceHistory.ErrorResponse,
+  "ResourceHistoryErrorResponse",
+  "java"
+);
+@@clientName(ResourceHistory.Error, "ResourceHistoryError", "java");
+@@clientName(ResourceHistory.ErrorDetails,
+  "ResourceHistoryErrorDetails",
+  "java"
+);
