@@ -70,6 +70,7 @@ interface Insights {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Following pattern from rest of foundry."
   @doc("List all insights in reverse chronological order (newest first).")
+  @list
   list is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.insights_v1_preview,
     FilterQueryParamsTraits,
