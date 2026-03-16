@@ -259,6 +259,16 @@ model UpdateStageStatus {
   name?: string;
 
   @visibility(Lifecycle.Read)
+  @doc("The total member upgrade failures within the stage.")
+  @added(Versions.v2026_05_01_preview)
+  failureCount?: int32;
+
+  @visibility(Lifecycle.Read)
+  @doc("The max number of member upgrade failures allowed within this stage, resolved from the UpdateStrategy.UpdateStage.maxAllowedFailures value.")
+  @added(Versions.v2026_05_01_preview)
+  maxAllowedFailures?: int32;
+
+  @visibility(Lifecycle.Read)
   @doc("The max number of upgrades that can run concurrently across all groups in this stage, resolved from the UpdateStrategy.UpdateStage.maxConcurrency value.")
   @added(Versions.v2026_02_01_preview)
   maxConcurrency?: int32;
@@ -294,6 +304,16 @@ model UpdateGroupStatus {
   @visibility(Lifecycle.Read)
   @doc("The name of the UpdateGroup.")
   name?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The total member upgrade failures within the group.")
+  @added(Versions.v2026_05_01_preview)
+  failureCount?: int32;
+
+  @visibility(Lifecycle.Read)
+  @doc("The max number of member upgrade failures allowed within this group, resolved from the UpdateStrategy.UpdateGroup.maxAllowedFailures value.")
+  @added(Versions.v2026_05_01_preview)
+  maxAllowedFailures?: int32;
 
   @visibility(Lifecycle.Read)
   @doc("""
