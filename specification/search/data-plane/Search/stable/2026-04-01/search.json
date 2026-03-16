@@ -4200,22 +4200,6 @@
         "resourceUri"
       ]
     },
-    "AIServicesVisionVectorizer": {
-      "type": "object",
-      "description": "Clears the identity property of a datasource.",
-      "properties": {
-        "aiServicesVisionParameters": {
-          "$ref": "#/definitions/AIServicesVisionParameters",
-          "description": "Contains the parameters specific to AI Services Vision embedding vectorization."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/VectorSearchVectorizer"
-        }
-      ],
-      "x-ms-discriminator-value": "aiServicesVision"
-    },
     "AMLParameters": {
       "type": "object",
       "description": "Specifies the properties for connecting to an AML vectorizer.",
@@ -4588,51 +4572,6 @@
         }
       ],
       "x-ms-discriminator-value": "azureBlob"
-    },
-    "AzureMachineLearningSkill": {
-      "type": "object",
-      "description": "The AML skill allows you to extend AI enrichment with a custom Azure Machine Learning (AML) model. Once an AML model is trained and deployed, an AML skill integrates it into AI enrichment.",
-      "properties": {
-        "uri": {
-          "type": "string",
-          "format": "uri",
-          "description": "(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed.",
-          "x-nullable": true
-        },
-        "key": {
-          "type": "string",
-          "description": "(Required for key authentication) The key for the AML service.",
-          "x-nullable": true
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "(Required for token authentication). The Azure Resource Manager resource ID of the AML service. It should be in the format subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}.",
-          "x-nullable": true
-        },
-        "timeout": {
-          "type": "string",
-          "format": "duration",
-          "description": "(Optional) When specified, indicates the timeout for the http client making the API call.",
-          "x-nullable": true
-        },
-        "region": {
-          "type": "string",
-          "description": "(Optional for token authentication). The region the AML service is deployed in.",
-          "x-nullable": true
-        },
-        "degreeOfParallelism": {
-          "type": "integer",
-          "format": "int32",
-          "description": "(Optional) When specified, indicates the number of calls the indexer will make in parallel to the endpoint you have provided. You can decrease this value if your endpoint is failing under too high of a request load, or raise it if your endpoint is able to accept more requests and you would like an increase in the performance of the indexer. If not set, a default value of 5 is used. The degreeOfParallelism can be set to a maximum of 10 and a minimum of 1.",
-          "x-nullable": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SearchIndexerSkill"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Skills.Custom.AmlSkill"
     },
     "AzureOpenAIEmbeddingSkill": {
       "type": "object",
@@ -6052,17 +5991,6 @@
           "$ref": "#/definitions/VectorsDebugInfo",
           "description": "Contains debugging information specific to vector and hybrid search.",
           "readOnly": true
-        },
-        "innerHits": {
-          "type": "object",
-          "description": "Contains debugging information specific to vectors matched within a collection of complex types.",
-          "additionalProperties": {
-            "items": {
-              "$ref": "#/definitions/QueryResultDocumentInnerHit"
-            },
-            "type": "array"
-          },
-          "readOnly": true
         }
       }
     },
@@ -6946,48 +6874,6 @@
           "format": "int64",
           "description": "The approximate count of documents falling within the bucket described by this facet.",
           "readOnly": true
-        },
-        "avg": {
-          "type": "number",
-          "format": "double",
-          "description": "The resulting total avg for the facet when a avg metric is requested.",
-          "readOnly": true
-        },
-        "min": {
-          "type": "number",
-          "format": "double",
-          "description": "The resulting total min for the facet when a min metric is requested.",
-          "readOnly": true
-        },
-        "max": {
-          "type": "number",
-          "format": "double",
-          "description": "The resulting total max for the facet when a max metric is requested.",
-          "readOnly": true
-        },
-        "sum": {
-          "type": "number",
-          "format": "double",
-          "description": "The resulting total sum for the facet when a sum metric is requested.",
-          "readOnly": true
-        },
-        "cardinality": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The resulting total cardinality for the facet when a cardinality metric is requested.",
-          "readOnly": true
-        },
-        "@search.facets": {
-          "type": "object",
-          "description": "The nested facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not contain any nested facets.",
-          "additionalProperties": {
-            "items": {
-              "$ref": "#/definitions/FacetResult"
-            },
-            "type": "array"
-          },
-          "readOnly": true,
-          "x-ms-client-name": "facets"
         }
       },
       "additionalProperties": {}
@@ -7885,16 +7771,6 @@
         "status": {
           "$ref": "#/definitions/IndexerExecutionStatus",
           "description": "The outcome of this indexer execution.",
-          "readOnly": true
-        },
-        "statusDetail": {
-          "$ref": "#/definitions/IndexerExecutionStatusDetail",
-          "description": "The outcome of this indexer execution.",
-          "readOnly": true
-        },
-        "mode": {
-          "$ref": "#/definitions/IndexingMode",
-          "description": "The mode the indexer is running in.",
           "readOnly": true
         },
         "errorMessage": {
@@ -14210,13 +14086,6 @@
           "readOnly": true,
           "x-ms-client-name": "answers"
         },
-        "@search.debug": {
-          "$ref": "#/definitions/DebugInfo",
-          "description": "Debug information that applies to the search results as a whole.",
-          "x-nullable": true,
-          "readOnly": true,
-          "x-ms-client-name": "debugInfo"
-        },
         "@search.nextPageParameters": {
           "$ref": "#/definitions/SearchRequest",
           "description": "Continuation JSON payload returned when the query can't return all the requested results in a single response. You can use this JSON along with",
@@ -14293,16 +14162,6 @@
         "facetable": {
           "type": "boolean",
           "description": "A value indicating whether to enable the field to be referenced in facet queries. Typically used in a presentation of search results that includes hit count by category (for example, search for digital cameras and see hits by brand, by megapixels, by price, and so on). This property must be null for complex fields. Fields of type Edm.GeographyPoint or Collection(Edm.GeographyPoint) cannot be facetable. Default is true for all other simple fields."
-        },
-        "permissionFilter": {
-          "$ref": "#/definitions/PermissionFilter",
-          "description": "A value indicating whether the field should be used as a permission filter.",
-          "x-nullable": true
-        },
-        "sensitivityLabel": {
-          "type": "boolean",
-          "description": "A value indicating whether the field contains sensitivity label information.",
-          "x-nullable": true
         },
         "analyzer": {
           "$ref": "#/definitions/LexicalAnalyzerName",
@@ -15432,11 +15291,6 @@
         "limits": {
           "$ref": "#/definitions/SearchIndexerLimits",
           "description": "The execution limits for the indexer.",
-          "readOnly": true
-        },
-        "currentState": {
-          "$ref": "#/definitions/IndexerCurrentState",
-          "description": "All of the state that defines and dictates the indexer's current execution.",
           "readOnly": true
         }
       },
@@ -16585,16 +16439,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Only applicable when textSplitMode is set to 'pages'. If specified, the SplitSkill will discontinue splitting after processing the first 'maximumPagesToTake' pages, in order to improve performance when only a few initial pages are needed from each document.",
-          "x-nullable": true
-        },
-        "unit": {
-          "$ref": "#/definitions/SplitSkillUnit",
-          "description": "Only applies if textSplitMode is set to pages. There are two possible values. The choice of the values will decide the length (maximumPageLength and pageOverlapLength) measurement. The default is 'characters', which means the length will be measured by character.",
-          "x-nullable": true
-        },
-        "azureOpenAITokenizerParameters": {
-          "$ref": "#/definitions/AzureOpenAITokenizerParameters",
-          "description": "Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property.",
           "x-nullable": true
         }
       },
@@ -18877,19 +18721,6 @@
           "format": "float",
           "description": "Relative weight of the vector query when compared to other vector query and/or the text query within the same search request. This value is used when combining the results of multiple ranking lists produced by the different vector queries and/or the results retrieved through the text query. The higher the weight, the higher the documents that matched that query will be in the final ranking. Default is 1.0 and the value needs to be a positive number larger than zero."
         },
-        "threshold": {
-          "$ref": "#/definitions/VectorThreshold",
-          "description": "The threshold used for vector queries. Note this can only be set if all 'fields' use the same similarity metric."
-        },
-        "filterOverride": {
-          "type": "string",
-          "description": "The OData filter expression to apply to this specific vector query. If no filter expression is defined at the vector level, the expression defined in the top level filter parameter is used instead."
-        },
-        "perDocumentVectorLimit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Controls how many vectors can be matched from each document in a vector search query. Setting it to 1 ensures at most one vector per document is matched, guaranteeing results come from distinct documents. Setting it to 0 (unlimited) allows multiple relevant vectors from the same document to be matched. Default is 0."
-        },
         "kind": {
           "$ref": "#/definitions/VectorQueryKind",
           "description": "Type of query."
@@ -19368,26 +19199,6 @@
           "readOnly": true
         }
       }
-    },
-    "VisionVectorizeSkill": {
-      "type": "object",
-      "description": "Allows you to generate a vector embedding for a given image or text input using the Azure AI Services Vision Vectorize API.",
-      "properties": {
-        "modelVersion": {
-          "type": "string",
-          "description": "The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified.",
-          "x-nullable": true
-        }
-      },
-      "required": [
-        "modelVersion"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SearchIndexerSkill"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Skills.Vision.VectorizeSkill"
     },
     "VisualFeature": {
       "type": "string",
