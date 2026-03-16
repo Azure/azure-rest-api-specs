@@ -117,10 +117,9 @@ interface DscConfigurations {
     void,
     {
       @header("Content-Type")
-      contentType: "application/xml";
+      contentType: "text/powershell";
 
       #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-      @doc("Receipt body in COSE format")
       @bodyRoot
       @encode("bytes")
       body: bytes;

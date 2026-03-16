@@ -103,10 +103,9 @@ interface Runbooks {
     void,
     {
       @header("Content-Type")
-      contentType: "application/xml";
+      contentType: "text/powershell";
 
       #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-      @doc("Receipt body in COSE format")
       @bodyRoot
       @encode("bytes")
       body: bytes;
@@ -127,20 +126,19 @@ interface Runbooks {
     Runbook,
     {
       @header("Content-Type")
-      contentType: "application/xml";
+      contentType: "text/powershell";
 
       #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-      @doc("Receipt body in COSE format")
+      @doc("The runbook draft content.")
       @bodyRoot
       @encode("bytes")
       body: bytes;
     },
     {
       @header("Content-Type")
-      contentType: "application/xml";
+      contentType: "text/powershell";
 
       #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-      @doc("Receipt body in COSE format")
       @bodyRoot
       @encode("bytes")
       body: bytes;
@@ -201,10 +199,9 @@ interface Runbooks {
     void,
     {
       @header("Content-Type")
-      contentType: "application/xml";
+      contentType: "text/powershell";
 
       #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-      @doc("Receipt body in COSE format")
       @bodyRoot
       @encode("bytes")
       body: bytes;
