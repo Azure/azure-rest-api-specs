@@ -109,7 +109,7 @@ alias JobStepOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("versions")
     @key
-    jobVersion: string;
+    jobVersion: int32;
   },
   {
     /** The name of the job step. */

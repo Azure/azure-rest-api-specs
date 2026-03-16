@@ -24,6 +24,28 @@ model ManagedDatabaseMoveOperationResult
   >;
 }
 
+alias ManagedDatabaseMoveOperationResultsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the region where the resource is located. */
+    @path
+    @segment("locations")
+    @key
+    locationName: string;
+  },
+  {
+    /** The ID of the managed database move operation. */
+    @path
+    @segment("managedDatabaseMoveOperationResults")
+    @key
+    operationId: Azure.Core.uuid;
+  }
+>;
+
 @armResourceOperations
 interface ManagedDatabaseMoveOperationResults {
   /**
@@ -31,14 +53,14 @@ interface ManagedDatabaseMoveOperationResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedDatabaseMoveOperations_Get")
-  get is ArmResourceRead<ManagedDatabaseMoveOperationResult>;
+  get is ManagedDatabaseMoveOperationResultsOps.Read<ManagedDatabaseMoveOperationResult>;
 
   /**
    * Lists managed database move operations.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedDatabaseMoveOperations_ListByLocation")
-  listByLocation is ArmResourceListByParent<
+  listByLocation is ManagedDatabaseMoveOperationResultsOps.List<
     ManagedDatabaseMoveOperationResult,
     Parameters = {
       /**
@@ -52,7 +74,8 @@ interface ManagedDatabaseMoveOperationResults {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = ManagedDatabaseMoveOperationListResult
   >;
 }
 

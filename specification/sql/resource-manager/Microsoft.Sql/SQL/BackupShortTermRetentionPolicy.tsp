@@ -39,9 +39,8 @@ interface BackupShortTermRetentionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BackupShortTermRetentionPolicy,
-    Response = ArmResourceUpdatedResponse<BackupShortTermRetentionPolicy> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = BackupShortTermRetentionPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<BackupShortTermRetentionPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackupShortTermRetentionPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -60,9 +59,7 @@ interface BackupShortTermRetentionPolicies {
 }
 
 @@doc(BackupShortTermRetentionPolicy.name,
-  "The policy name. Should always be ",
-  default,
-  "."
+  "The policy name. Should always be default."
 );
 @@doc(BackupShortTermRetentionPolicy.properties, "Resource properties.");
 @@doc(BackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,

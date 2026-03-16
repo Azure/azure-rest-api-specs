@@ -1,45 +1,47 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "securityalert-4799",
-    "serverName": "securityalert-6440",
-    "securityAlertPolicyName": "Default",
     "api-version": "2024-11-01-preview",
     "parameters": {
       "properties": {
         "state": "Enabled"
       }
-    }
+    },
+    "resourceGroupName": "securityalert-4799",
+    "securityAlertPolicyName": "Default",
+    "serverName": "securityalert-6440",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.Sql/servers/securityalert-6440/securityAlertPolicies/default",
         "name": "Default",
         "type": "Microsoft.Sql/servers/securityAlertPolicies",
-        "systemData": {
-          "createdBy": "string",
-          "createdByType": "User",
-          "createdAt": "2020-04-03T04:41:33.937Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-04-03T04:41:33.937Z"
-        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.Sql/servers/securityalert-6440/securityAlertPolicies/default",
         "properties": {
-          "state": "Enabled",
+          "disabledAlerts": [
+            ""
+          ],
           "emailAccountAdmins": false,
           "emailAddresses": [
             ""
           ],
-          "disabledAlerts": [
-            ""
-          ],
           "retentionDays": 0,
+          "state": "Enabled",
           "storageAccountAccessKey": "",
           "storageEndpoint": "https://mystorage.blob.core.windows.net"
+        },
+        "systemData": {
+          "createdAt": "2020-04-03T04:41:33.937Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-04-03T04:41:33.937Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
         }
       }
     },
     "202": {}
-  }
+  },
+  "operationId": "ServerSecurityAlertPolicies_CreateOrUpdate",
+  "title": "Update a server's threat detection policy with minimal parameters"
 }

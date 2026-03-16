@@ -64,9 +64,9 @@ interface RecommendedActions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseRecommendedActions_ListByDatabaseAdvisor")
-  listByDatabaseAdvisor is ArmResourceListByParent<
+  listByDatabaseAdvisor is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     RecommendedAction,
-    Response = ArmResponse<RecommendedAction[]>
+    Response = RecommendedActionListResult
   >;
 }
 

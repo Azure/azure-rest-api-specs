@@ -63,7 +63,7 @@ interface LedgerDigestUploadsOperationGroup {
   disable is ArmResourceActionAsync<
     LedgerDigestUploads,
     void,
-    ArmResponse<LedgerDigestUploads>
+    Response = LedgerDigestUploads
   >;
 }
 

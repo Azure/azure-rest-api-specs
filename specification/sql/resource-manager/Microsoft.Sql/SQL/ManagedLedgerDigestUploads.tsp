@@ -63,7 +63,7 @@ interface ManagedLedgerDigestUploadsOperationGroup {
   disable is ArmResourceActionAsync<
     ManagedLedgerDigestUploads,
     void,
-    ArmResponse<ManagedLedgerDigestUploads>
+    Response = ManagedLedgerDigestUploads
   >;
 }
 

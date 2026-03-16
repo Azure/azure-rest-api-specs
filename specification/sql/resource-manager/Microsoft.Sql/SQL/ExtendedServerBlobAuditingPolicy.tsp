@@ -14,30 +14,51 @@ namespace Microsoft.Sql;
 /**
  * An extended server blob auditing policy.
  */
-@singleton("default")
 @parentResource(Server)
 model ExtendedServerBlobAuditingPolicy
   is Azure.ResourceManager.ProxyResource<ExtendedServerBlobAuditingPolicyProperties> {
   ...ResourceNameParameter<
     Resource = ExtendedServerBlobAuditingPolicy,
-    KeyName = "extendedAuditingSetting",
+    KeyName = "blobAuditingPolicyName",
     SegmentName = "extendedAuditingSettings",
     NamePattern = ""
   >;
 }
+
+alias ExtendedServerBlobAuditingPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the server. */
+    @path
+    @segment("servers")
+    @key
+    serverName: string;
+  },
+  {
+    /** The name of the blob auditing policy. */
+    @path
+    @segment("extendedAuditingSettings")
+    @key
+    blobAuditingPolicyName: BlobAuditingPolicyName;
+  }
+>;
 
 @armResourceOperations
 interface ExtendedServerBlobAuditingPolicies {
   /**
    * Gets an extended server's blob auditing policy.
    */
-  get is ArmResourceRead<ExtendedServerBlobAuditingPolicy>;
+  get is ExtendedServerBlobAuditingPolicyOps.Read<ExtendedServerBlobAuditingPolicy>;
 
   /**
    * Creates or updates an extended server's blob auditing policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ExtendedServerBlobAuditingPolicyOps.CreateOrUpdateAsync<
     ExtendedServerBlobAuditingPolicy,
     Response = ArmResourceUpdatedResponse<ExtendedServerBlobAuditingPolicy> | ArmAcceptedLroResponse,
     LroHeaders = ArmLroLocationHeader<FinalResult = ExtendedServerBlobAuditingPolicy> &
@@ -47,7 +68,7 @@ interface ExtendedServerBlobAuditingPolicies {
   /**
    * Lists extended auditing settings of a server.
    */
-  listByServer is ArmResourceListByParent<ExtendedServerBlobAuditingPolicy>;
+  listByServer is ExtendedServerBlobAuditingPolicyOps.List<ExtendedServerBlobAuditingPolicy>;
 }
 
 @@doc(ExtendedServerBlobAuditingPolicy.name, "");

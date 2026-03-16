@@ -14,34 +14,61 @@ namespace Microsoft.Sql;
 /**
  * An extended database blob auditing policy.
  */
-@singleton("default")
 @parentResource(Database)
 model ExtendedDatabaseBlobAuditingPolicy
   is Azure.ResourceManager.ProxyResource<ExtendedDatabaseBlobAuditingPolicyProperties> {
   ...ResourceNameParameter<
     Resource = ExtendedDatabaseBlobAuditingPolicy,
-    KeyName = "extendedAuditingSetting",
+    KeyName = "blobAuditingPolicyName",
     SegmentName = "extendedAuditingSettings",
     NamePattern = ""
   >;
 }
+
+alias ExtendedDatabaseBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the server. */
+    @path
+    @segment("servers")
+    @key
+    serverName: string;
+
+    /** The name of the database. */
+    @path
+    @segment("databases")
+    @key
+    databaseName: string;
+  },
+  {
+    /** The name of the blob auditing policy. */
+    @path
+    @segment("extendedAuditingSettings")
+    @key
+    blobAuditingPolicyName: BlobAuditingPolicyName;
+  }
+>;
 
 @armResourceOperations
 interface ExtendedDatabaseBlobAuditingPolicies {
   /**
    * Gets an extended database's blob auditing policy.
    */
-  get is ArmResourceRead<ExtendedDatabaseBlobAuditingPolicy>;
+  get is ExtendedDatabaseBlobAuditingPoliciesOps.Read<ExtendedDatabaseBlobAuditingPolicy>;
 
   /**
    * Creates or updates an extended database's blob auditing policy.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ExtendedDatabaseBlobAuditingPolicy>;
+  createOrUpdate is ExtendedDatabaseBlobAuditingPoliciesOps.CreateOrUpdateSync<ExtendedDatabaseBlobAuditingPolicy>;
 
   /**
    * Lists extended auditing settings of a database.
    */
-  listByDatabase is ArmResourceListByParent<ExtendedDatabaseBlobAuditingPolicy>;
+  listByDatabase is ExtendedDatabaseBlobAuditingPoliciesOps.List<ExtendedDatabaseBlobAuditingPolicy>;
 }
 
 @@doc(ExtendedDatabaseBlobAuditingPolicy.name, "");

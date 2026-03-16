@@ -66,7 +66,7 @@ interface ServerDnsAliases {
   acquire is ArmResourceActionAsync<
     ServerDnsAlias,
     ServerDnsAliasAcquisition,
-    ArmResponse<ServerDnsAlias>
+    Response = ServerDnsAlias
   >;
 }
 

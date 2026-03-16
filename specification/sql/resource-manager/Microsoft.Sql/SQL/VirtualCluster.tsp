@@ -78,7 +78,7 @@ interface VirtualClusters {
   updateDnsServers is ArmResourceActionAsync<
     VirtualCluster,
     void,
-    ArmResponse<UpdateVirtualClusterDnsServersOperation>
+    Response = UpdateVirtualClusterDnsServersOperation
   >;
 }
 

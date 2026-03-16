@@ -50,7 +50,7 @@ alias ManagedBackupShortTermRetentionPolicyOps = Azure.ResourceManager.Legacy.Le
     @path
     @segment("backupShortTermRetentionPolicies")
     @key
-    policyName: string;
+    policyName: ManagedShortTermRetentionPolicyName;
   }
 >;
 
@@ -110,7 +110,7 @@ alias ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicyOps = Azure.
     @path
     @segment("backupShortTermRetentionPolicies")
     @key
-    policyName: string;
+    policyName: ManagedShortTermRetentionPolicyName;
   }
 >;
 

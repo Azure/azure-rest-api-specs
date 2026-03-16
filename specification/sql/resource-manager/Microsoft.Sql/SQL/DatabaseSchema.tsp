@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  * A database schema resource.
  */
 @parentResource(Database)
-model DatabaseSchema is Azure.ResourceManager.ProxyResource<{}> {
+model DatabaseSchema is Azure.ResourceManager.ProxyResource<never> {
   ...ResourceNameParameter<
     Resource = DatabaseSchema,
     KeyName = "schemaName",

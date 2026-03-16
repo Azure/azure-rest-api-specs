@@ -142,7 +142,7 @@ interface ManagedDatabases {
   reevaluateInaccessibleDatabaseState is ArmResourceActionAsync<
     ManagedDatabase,
     void,
-    ArmResponse<ManagedDatabase>
+    Response = ManagedDatabase
   >;
 
   /**

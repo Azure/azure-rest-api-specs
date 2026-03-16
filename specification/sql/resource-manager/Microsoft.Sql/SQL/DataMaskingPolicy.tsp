@@ -40,7 +40,55 @@ model DataMaskingPolicy
   kind?: string;
 }
 
-@armResourceOperations
+alias DataMaskingPoliciesParentParameters = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+
+  /**
+   * The name of the server.
+   */
+  @path
+  @segment("servers")
+  @key
+  serverName: string;
+
+  /**
+   * The name of the database.
+   */
+  @path
+  @segment("databases")
+  @key
+  databaseName: string;
+
+  /**
+   *  The name of the database for which the data masking policy applies.
+   */
+  @path
+  @segment("dataMaskingPolicies")
+  @key
+  dataMaskingPolicyName: DataMaskingPolicyName;
+};
+
+alias DataMaskingPoliciesParameters = {
+  /**
+   * The name of the data masking rule.
+   */
+  @path
+  @key
+  @segment("rules")
+  dataMaskingRuleName: string;
+};
+
+alias DataMaskingPoliciesOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  DataMaskingPoliciesParentParameters,
+  DataMaskingPoliciesParameters,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface DataMaskingPolicies {
   /**
    * Gets the database data masking policy.
@@ -72,18 +120,11 @@ interface DataMaskingPolicies {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DataMaskingRules_CreateOrUpdate")
   @put
-  @action("{dataMaskingRuleName}")
-  dataMaskingRulesCreateOrUpdate is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}")
+  dataMaskingRulesCreateOrUpdate is DataMaskingPoliciesOps.ActionSync<
     DataMaskingPolicy,
     DataMaskingRule,
-    ArmResponse<DataMaskingRule> | ArmResourceCreatedSyncResponse<DataMaskingRule>,
-    Parameters = {
-      /**
-       * The name of the data masking rule.
-       */
-      @path
-      dataMaskingRuleName: string;
-    }
+    Response = ArmResponse<DataMaskingRule> | ArmResourceCreatedSyncResponse<DataMaskingRule>
   >;
 }
 

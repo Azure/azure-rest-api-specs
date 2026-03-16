@@ -16,22 +16,55 @@ namespace Microsoft.Sql;
  * A job version.
  */
 @parentResource(Job)
-model JobVersion is Azure.ResourceManager.ProxyResource<{}> {
+model JobVersion is Azure.ResourceManager.ProxyResource<never> {
   ...ResourceNameParameter<
     Resource = JobVersion,
     KeyName = "jobVersion",
     SegmentName = "versions",
-    NamePattern = "",
-    Type = int32
+    NamePattern = ""
   >;
 }
+
+alias JobVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the server. */
+    @path
+    @segment("servers")
+    @key
+    serverName: string;
+
+    /** The name of the job agent. */
+    @path
+    @segment("jobAgents")
+    @key
+    jobAgentName: string;
+
+    /** The name of the job. */
+    @path
+    @segment("jobs")
+    @key
+    jobName: string;
+  },
+  {
+    /** The version of the job to get. */
+    @path
+    @segment("versions")
+    @key
+    jobVersion: int32;
+  }
+>;
 
 @armResourceOperations
 interface JobVersions {
   /**
    * Gets a job version.
    */
-  get is ArmResourceRead<JobVersion>;
+  get is JobVersionOps.Read<JobVersion>;
 
   /**
    * Gets all versions of a job.

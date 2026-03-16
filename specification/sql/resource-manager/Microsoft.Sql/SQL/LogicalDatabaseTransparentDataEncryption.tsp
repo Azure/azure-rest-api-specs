@@ -41,9 +41,13 @@ interface LogicalDatabaseTransparentDataEncryptions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("TransparentDataEncryptions_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     LogicalDatabaseTransparentDataEncryption,
-    Response = ArmResourceUpdatedResponse<LogicalDatabaseTransparentDataEncryption> | ArmResourceCreatedResponse<LogicalDatabaseTransparentDataEncryption> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<LogicalDatabaseTransparentDataEncryption> | ArmResourceCreatedResponse<
+      LogicalDatabaseTransparentDataEncryption,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = LogicalDatabaseTransparentDataEncryption>
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -61,7 +65,7 @@ interface LogicalDatabaseTransparentDataEncryptions {
   resume is ArmResourceActionAsync<
     LogicalDatabaseTransparentDataEncryption,
     void,
-    ArmResponse<LogicalDatabaseTransparentDataEncryption>
+    Response = LogicalDatabaseTransparentDataEncryption
   >;
 
   /**
@@ -72,7 +76,7 @@ interface LogicalDatabaseTransparentDataEncryptions {
   suspend is ArmResourceActionAsync<
     LogicalDatabaseTransparentDataEncryption,
     void,
-    ArmResponse<LogicalDatabaseTransparentDataEncryption>
+    Response = LogicalDatabaseTransparentDataEncryption
   >;
 }
 

@@ -1,207 +1,207 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "workloadinsight-demos",
-    "serverName": "misosisvr",
-    "databaseName": "IndexAdvisor_test_3",
+    "$expand": "recommendedActions",
     "advisorName": "CreateIndex",
     "api-version": "2024-11-01-preview",
-    "$expand": "recommendedActions"
+    "databaseName": "IndexAdvisor_test_3",
+    "resourceGroupName": "workloadinsight-demos",
+    "serverName": "misosisvr",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": [
         {
-          "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex",
           "name": "CreateIndex",
           "type": "Microsoft.Sql/servers/databases/advisors",
-          "location": "East Asia",
+          "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex",
           "kind": "",
+          "location": "East Asia",
           "properties": {
             "advisorStatus": "GA",
             "autoExecuteStatus": "Disabled",
             "autoExecuteStatusInheritedFrom": "Database",
-            "recommendationsStatus": "Ok",
             "lastChecked": "2017-06-20T16:39:16Z",
+            "recommendationsStatus": "Ok",
             "recommendedActions": [
               {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex/recommendedActions/IR_[CRM]_[DataPoints]_4821CD2F9510D98184BB",
                 "name": "IR_[CRM]_[DataPoints]_4821CD2F9510D98184BB",
                 "type": "Microsoft.Sql/servers/databases/advisors/recommendedActions",
-                "location": "East Asia",
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex/recommendedActions/IR_[CRM]_[DataPoints]_4821CD2F9510D98184BB",
                 "kind": "",
+                "location": "East Asia",
                 "properties": {
-                  "recommendationReason": "",
-                  "validSince": "2017-03-01T14:38:04Z",
-                  "lastRefresh": "2017-03-01T14:38:04Z",
-                  "state": {
-                    "currentValue": "Active",
-                    "lastModified": "2017-06-20T15:15:40Z"
-                  },
-                  "isExecutableAction": true,
-                  "isRevertableAction": true,
-                  "isArchivedAction": false,
-                  "score": 1,
+                  "errorDetails": {},
+                  "estimatedImpact": [
+                    {
+                      "absoluteValue": 1440,
+                      "dimensionName": "ActionDuration",
+                      "unit": "Seconds"
+                    },
+                    {
+                      "absoluteValue": 209.3125,
+                      "dimensionName": "SpaceChange",
+                      "unit": "Megabytes"
+                    }
+                  ],
                   "implementationDetails": {
                     "method": "TSql",
                     "script": "CREATE NONCLUSTERED INDEX [nci_wi_DataPoints_B892614093BAC56295EF6018BD4CB51B] ON [CRM].[DataPoints] ([Name],[Money],[Power]) INCLUDE ([Hour], [System], [LastChanged]) WITH (ONLINE = ON)"
                   },
-                  "errorDetails": {},
-                  "estimatedImpact": [
-                    {
-                      "dimensionName": "ActionDuration",
-                      "unit": "Seconds",
-                      "absoluteValue": 1440.0
-                    },
-                    {
-                      "dimensionName": "SpaceChange",
-                      "unit": "Megabytes",
-                      "absoluteValue": 209.3125
-                    }
-                  ],
+                  "isArchivedAction": false,
+                  "isExecutableAction": true,
+                  "isRevertableAction": true,
+                  "lastRefresh": "2017-03-01T14:38:04Z",
                   "observedImpact": [],
+                  "recommendationReason": "",
+                  "score": 1,
+                  "state": {
+                    "currentValue": "Active",
+                    "lastModified": "2017-06-20T15:15:40Z"
+                  },
                   "timeSeries": [],
+                  "validSince": "2017-03-01T14:38:04Z",
                   "details": {
+                    "schema": "[CRM]",
+                    "includedColumns": "[Hour], [System], [LastChanged]",
+                    "indexColumns": "[Name],[Money],[Power]",
                     "indexName": "nci_wi_DataPoints_B892614093BAC56295EF6018BD4CB51B",
                     "indexType": "NONCLUSTERED",
-                    "schema": "[CRM]",
-                    "table": "[DataPoints]",
-                    "indexColumns": "[Name],[Money],[Power]",
-                    "includedColumns": "[Hour], [System], [LastChanged]"
+                    "table": "[DataPoints]"
                   }
                 }
               },
               {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex/recommendedActions/IR_[dbo]_[DataPoints]_F5D2F347AA22DB46E4CC",
                 "name": "IR_[dbo]_[DataPoints]_F5D2F347AA22DB46E4CC",
                 "type": "Microsoft.Sql/servers/databases/advisors/recommendedActions",
-                "location": "East Asia",
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex/recommendedActions/IR_[dbo]_[DataPoints]_F5D2F347AA22DB46E4CC",
                 "kind": "",
+                "location": "East Asia",
                 "properties": {
-                  "recommendationReason": "",
-                  "validSince": "2017-03-01T14:38:05Z",
-                  "lastRefresh": "2017-03-01T14:38:05Z",
-                  "state": {
-                    "currentValue": "Success",
-                    "actionInitiatedBy": "User",
-                    "lastModified": "2017-03-01T14:38:05Z"
-                  },
-                  "isExecutableAction": true,
-                  "isRevertableAction": true,
-                  "isArchivedAction": false,
-                  "executeActionStartTime": "2017-03-01T14:38:05Z",
+                  "errorDetails": {},
+                  "estimatedImpact": [
+                    {
+                      "absoluteValue": 5040,
+                      "dimensionName": "ActionDuration",
+                      "unit": "Seconds"
+                    },
+                    {
+                      "absoluteValue": 120,
+                      "dimensionName": "SpaceChange",
+                      "unit": "Megabytes"
+                    }
+                  ],
                   "executeActionDuration": "PT1M",
                   "executeActionInitiatedBy": "User",
                   "executeActionInitiatedTime": "2017-03-01T14:38:05Z",
-                  "score": 3,
+                  "executeActionStartTime": "2017-03-01T14:38:05Z",
                   "implementationDetails": {
                     "method": "TSql",
                     "script": "DROP INDEX [nci_wi_DataPoints_609E4B7D6A3813990ED44B28B340C8FC] ON [dbo].[DataPoints]"
                   },
-                  "errorDetails": {},
-                  "estimatedImpact": [
-                    {
-                      "dimensionName": "ActionDuration",
-                      "unit": "Seconds",
-                      "absoluteValue": 5040.0
-                    },
-                    {
-                      "dimensionName": "SpaceChange",
-                      "unit": "Megabytes",
-                      "absoluteValue": 120.0
-                    }
-                  ],
+                  "isArchivedAction": false,
+                  "isExecutableAction": true,
+                  "isRevertableAction": true,
+                  "lastRefresh": "2017-03-01T14:38:05Z",
                   "observedImpact": [
                     {
+                      "changeValueAbsolute": -12.7,
+                      "changeValueRelative": -0.9,
                       "dimensionName": "AffectedQueriesCpuUtilization",
-                      "unit": "CpuCores",
-                      "changeValueAbsolute": -12.7,
-                      "changeValueRelative": -0.9
+                      "unit": "CpuCores"
                     },
                     {
+                      "changeValueAbsolute": -12.7,
+                      "changeValueRelative": -0.3175,
                       "dimensionName": "CpuUtilization",
-                      "unit": "CpuCores",
-                      "changeValueAbsolute": -12.7,
-                      "changeValueRelative": -0.3175
+                      "unit": "CpuCores"
                     },
                     {
+                      "absoluteValue": 12,
                       "dimensionName": "QueriesWithImprovedPerformance",
-                      "unit": "Count",
-                      "absoluteValue": 12.0
+                      "unit": "Count"
                     },
                     {
+                      "absoluteValue": 1,
                       "dimensionName": "QueriesWithRegressedPerformance",
-                      "unit": "Count",
-                      "absoluteValue": 1.0
+                      "unit": "Count"
                     },
                     {
+                      "absoluteValue": 130.742187,
                       "dimensionName": "SpaceChange",
-                      "unit": "Megabytes",
-                      "absoluteValue": 130.742187
+                      "unit": "Megabytes"
                     },
                     {
+                      "absoluteValue": 0,
                       "dimensionName": "VerificationProgress",
-                      "unit": "Percent",
-                      "absoluteValue": 0.0
+                      "unit": "Percent"
                     }
                   ],
+                  "recommendationReason": "",
+                  "score": 3,
+                  "state": {
+                    "actionInitiatedBy": "User",
+                    "currentValue": "Success",
+                    "lastModified": "2017-03-01T14:38:05Z"
+                  },
                   "timeSeries": [],
+                  "validSince": "2017-03-01T14:38:05Z",
                   "details": {
+                    "schema": "[dbo]",
+                    "includedColumns": "[Power],[Pineapple]",
+                    "indexActionDuration": "00:01:00",
+                    "indexActionStartTime": "2017-03-01T14:38:05.337",
+                    "indexColumns": "[Name],[Money]",
                     "indexName": "nci_wi_DataPoints_609E4B7D6A3813990ED44B28B340C8FC",
                     "indexType": "NONCLUSTERED",
-                    "schema": "[dbo]",
-                    "table": "[DataPoints]",
-                    "indexColumns": "[Name],[Money]",
-                    "includedColumns": "[Power],[Pineapple]",
-                    "indexActionStartTime": "2017-03-01T14:38:05.337",
-                    "indexActionDuration": "00:01:00"
+                    "table": "[DataPoints]"
                   }
                 }
               },
               {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex/recommendedActions/IR_[dbo]_[Employees]_560E15A98D14CA09BDFB",
                 "name": "IR_[dbo]_[Employees]_560E15A98D14CA09BDFB",
                 "type": "Microsoft.Sql/servers/databases/advisors/recommendedActions",
-                "location": "East Asia",
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex/recommendedActions/IR_[dbo]_[Employees]_560E15A98D14CA09BDFB",
                 "kind": "",
+                "location": "East Asia",
                 "properties": {
-                  "recommendationReason": "",
-                  "validSince": "2017-03-01T14:38:05Z",
-                  "lastRefresh": "2017-03-01T14:38:05Z",
-                  "state": {
-                    "currentValue": "Active",
-                    "lastModified": "2017-03-01T14:38:05Z"
-                  },
-                  "isExecutableAction": true,
-                  "isRevertableAction": true,
-                  "isArchivedAction": false,
-                  "score": 3,
+                  "errorDetails": {},
+                  "estimatedImpact": [
+                    {
+                      "absoluteValue": 17,
+                      "dimensionName": "ActionDuration",
+                      "unit": "Seconds"
+                    },
+                    {
+                      "absoluteValue": 128,
+                      "dimensionName": "SpaceChange",
+                      "unit": "Megabytes"
+                    }
+                  ],
                   "implementationDetails": {
                     "method": "TSql",
                     "script": "CREATE NONCLUSTERED INDEX [nci_wi_Employees_8C18C2AF4267DC77793040782641CCDE] ON [dbo].[Employees] ([City], [State]) INCLUDE ([Postal]) WITH (ONLINE = ON)"
                   },
-                  "errorDetails": {},
-                  "estimatedImpact": [
-                    {
-                      "dimensionName": "ActionDuration",
-                      "unit": "Seconds",
-                      "absoluteValue": 17.0
-                    },
-                    {
-                      "dimensionName": "SpaceChange",
-                      "unit": "Megabytes",
-                      "absoluteValue": 128.0
-                    }
-                  ],
+                  "isArchivedAction": false,
+                  "isExecutableAction": true,
+                  "isRevertableAction": true,
+                  "lastRefresh": "2017-03-01T14:38:05Z",
                   "observedImpact": [],
+                  "recommendationReason": "",
+                  "score": 3,
+                  "state": {
+                    "currentValue": "Active",
+                    "lastModified": "2017-03-01T14:38:05Z"
+                  },
                   "timeSeries": [],
+                  "validSince": "2017-03-01T14:38:05Z",
                   "details": {
+                    "schema": "[dbo]",
+                    "includedColumns": "[Postal]",
+                    "indexColumns": "[City], [State]",
                     "indexName": "nci_wi_Employees_8C18C2AF4267DC77793040782641CCDE",
                     "indexType": "NONCLUSTERED",
-                    "schema": "[dbo]",
-                    "table": "[Employees]",
-                    "indexColumns": "[City], [State]",
-                    "includedColumns": "[Postal]"
+                    "table": "[Employees]"
                   }
                 }
               }
@@ -209,293 +209,293 @@
           }
         },
         {
-          "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DropIndex",
           "name": "DropIndex",
           "type": "Microsoft.Sql/servers/databases/advisors",
-          "location": "East Asia",
+          "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DropIndex",
           "kind": "",
+          "location": "East Asia",
           "properties": {
             "advisorStatus": "GA",
             "autoExecuteStatus": "Disabled",
             "autoExecuteStatusInheritedFrom": "Database",
-            "recommendationsStatus": "DbSeemsTuned",
             "lastChecked": "2017-06-19T20:42:43Z",
+            "recommendationsStatus": "DbSeemsTuned",
             "recommendedActions": [
               {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DropIndex/recommendedActions/IR_[CRM]_[DataPoints1]_13ADA5F354E9E14A983B",
                 "name": "IR_[CRM]_[DataPoints1]_13ADA5F354E9E14A983B",
                 "type": "Microsoft.Sql/servers/databases/advisors/recommendedActions",
-                "location": "East Asia",
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DropIndex/recommendedActions/IR_[CRM]_[DataPoints1]_13ADA5F354E9E14A983B",
                 "kind": "",
+                "location": "East Asia",
                 "properties": {
-                  "recommendationReason": "Unused",
-                  "validSince": "2017-03-01T14:38:05Z",
-                  "lastRefresh": "2017-03-01T14:38:05Z",
-                  "state": {
-                    "currentValue": "Pending",
-                    "actionInitiatedBy": "System",
-                    "lastModified": "2017-03-23T14:14:35Z"
-                  },
-                  "isExecutableAction": true,
-                  "isRevertableAction": true,
-                  "isArchivedAction": false,
+                  "errorDetails": {},
+                  "estimatedImpact": [
+                    {
+                      "absoluteValue": 645,
+                      "dimensionName": "ActionDuration",
+                      "unit": "Seconds"
+                    },
+                    {
+                      "absoluteValue": 342,
+                      "dimensionName": "SpaceChange",
+                      "unit": "Megabytes"
+                    }
+                  ],
                   "executeActionInitiatedBy": "System",
                   "executeActionInitiatedTime": "2017-03-23T14:14:35Z",
-                  "score": 1,
                   "implementationDetails": {
                     "method": "TSql",
                     "script": "DROP INDEX [IX_FF] ON [CRM].[DataPoints1]"
                   },
-                  "errorDetails": {},
-                  "estimatedImpact": [
-                    {
-                      "dimensionName": "ActionDuration",
-                      "unit": "Seconds",
-                      "absoluteValue": 645.0
-                    },
-                    {
-                      "dimensionName": "SpaceChange",
-                      "unit": "Megabytes",
-                      "absoluteValue": 342.0
-                    }
-                  ],
+                  "isArchivedAction": false,
+                  "isExecutableAction": true,
+                  "isRevertableAction": true,
+                  "lastRefresh": "2017-03-01T14:38:05Z",
                   "observedImpact": [],
+                  "recommendationReason": "Unused",
+                  "score": 1,
+                  "state": {
+                    "actionInitiatedBy": "System",
+                    "currentValue": "Pending",
+                    "lastModified": "2017-03-23T14:14:35Z"
+                  },
                   "timeSeries": [],
+                  "validSince": "2017-03-01T14:38:05Z",
                   "details": {
-                    "indexName": "IX_FF",
-                    "originalIndexName": "IX_COM_SKU_SKUDepartmentID",
-                    "indexType": "NONCLUSTERED",
                     "schema": "[CRM]",
-                    "table": "[DataPoints1]",
+                    "includedColumns": "[Apple]",
                     "indexColumns": "[Protocol],[SessionId]",
-                    "includedColumns": "[Apple]"
+                    "indexName": "IX_FF",
+                    "indexType": "NONCLUSTERED",
+                    "originalIndexName": "IX_COM_SKU_SKUDepartmentID",
+                    "table": "[DataPoints1]"
                   }
                 }
               },
               {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DropIndex/recommendedActions/IR_[CRM]_[DataPoints1]_29AEA82685D24704DE1A",
                 "name": "IR_[CRM]_[DataPoints1]_29AEA82685D24704DE1A",
                 "type": "Microsoft.Sql/servers/databases/advisors/recommendedActions",
-                "location": "East Asia",
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DropIndex/recommendedActions/IR_[CRM]_[DataPoints1]_29AEA82685D24704DE1A",
                 "kind": "",
+                "location": "East Asia",
                 "properties": {
-                  "recommendationReason": "Duplicate",
-                  "validSince": "2017-03-01T14:38:05Z",
-                  "lastRefresh": "2017-03-01T14:38:05Z",
-                  "state": {
-                    "currentValue": "Pending",
-                    "actionInitiatedBy": "System",
-                    "lastModified": "2017-03-01T14:38:05Z"
-                  },
-                  "isExecutableAction": true,
-                  "isRevertableAction": true,
-                  "isArchivedAction": false,
+                  "errorDetails": {},
+                  "estimatedImpact": [
+                    {
+                      "absoluteValue": 803,
+                      "dimensionName": "ActionDuration",
+                      "unit": "Seconds"
+                    },
+                    {
+                      "absoluteValue": 144.6875,
+                      "dimensionName": "SpaceChange",
+                      "unit": "Megabytes"
+                    }
+                  ],
                   "executeActionInitiatedBy": "System",
                   "executeActionInitiatedTime": "2017-03-01T14:38:05Z",
-                  "score": 1,
                   "implementationDetails": {
                     "method": "TSql",
                     "script": "DROP INDEX [MyIndex123] ON [CRM].[DataPoints1]"
                   },
-                  "errorDetails": {},
-                  "estimatedImpact": [
-                    {
-                      "dimensionName": "ActionDuration",
-                      "unit": "Seconds",
-                      "absoluteValue": 803.0
-                    },
-                    {
-                      "dimensionName": "SpaceChange",
-                      "unit": "Megabytes",
-                      "absoluteValue": 144.6875
-                    }
-                  ],
+                  "isArchivedAction": false,
+                  "isExecutableAction": true,
+                  "isRevertableAction": true,
+                  "lastRefresh": "2017-03-01T14:38:05Z",
                   "observedImpact": [],
+                  "recommendationReason": "Duplicate",
+                  "score": 1,
+                  "state": {
+                    "actionInitiatedBy": "System",
+                    "currentValue": "Pending",
+                    "lastModified": "2017-03-01T14:38:05Z"
+                  },
                   "timeSeries": [],
+                  "validSince": "2017-03-01T14:38:05Z",
                   "details": {
-                    "indexName": "MyIndex123",
-                    "originalIndexName": "IX_COM_SKU_SKUDepartmentID",
-                    "indexType": "NONCLUSTERED",
                     "schema": "[CRM]",
-                    "table": "[DataPoints1]",
+                    "includedColumns": "[Apple]",
                     "indexColumns": "[Cookies],[SessionId]",
-                    "includedColumns": "[Apple]"
+                    "indexName": "MyIndex123",
+                    "indexType": "NONCLUSTERED",
+                    "originalIndexName": "IX_COM_SKU_SKUDepartmentID",
+                    "table": "[DataPoints1]"
                   }
                 }
               },
               {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DropIndex/recommendedActions/IR_[CRM]_[DataPoints2]_E4B21F229379807E531A",
                 "name": "IR_[CRM]_[DataPoints2]_E4B21F229379807E531A",
                 "type": "Microsoft.Sql/servers/databases/advisors/recommendedActions",
-                "location": "East Asia",
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DropIndex/recommendedActions/IR_[CRM]_[DataPoints2]_E4B21F229379807E531A",
                 "kind": "",
+                "location": "East Asia",
                 "properties": {
-                  "recommendationReason": "Duplicate",
-                  "validSince": "2017-03-01T14:38:05Z",
-                  "lastRefresh": "2017-03-01T14:38:05Z",
-                  "state": {
-                    "currentValue": "Success",
-                    "actionInitiatedBy": "User",
-                    "lastModified": "2017-03-01T14:38:05Z"
-                  },
-                  "isExecutableAction": true,
-                  "isRevertableAction": true,
-                  "isArchivedAction": false,
-                  "executeActionStartTime": "2017-03-01T14:38:05Z",
+                  "errorDetails": {},
+                  "estimatedImpact": [
+                    {
+                      "absoluteValue": 705,
+                      "dimensionName": "ActionDuration",
+                      "unit": "Seconds"
+                    },
+                    {
+                      "absoluteValue": 342,
+                      "dimensionName": "SpaceChange",
+                      "unit": "Megabytes"
+                    }
+                  ],
                   "executeActionDuration": "PT1M",
                   "executeActionInitiatedBy": "User",
                   "executeActionInitiatedTime": "2017-03-01T14:38:05Z",
-                  "score": 1,
+                  "executeActionStartTime": "2017-03-01T14:38:05Z",
                   "implementationDetails": {
                     "method": "TSql",
                     "script": "CREATE NONCLUSTERED INDEX [MyIndex321] ON [CRM].[DataPoints2] ([Cookies],[SessionId],[Protocol]) INCLUDE ([Apple]) WITH (ONLINE = ON)"
                   },
-                  "errorDetails": {},
-                  "estimatedImpact": [
-                    {
-                      "dimensionName": "ActionDuration",
-                      "unit": "Seconds",
-                      "absoluteValue": 705.0
-                    },
-                    {
-                      "dimensionName": "SpaceChange",
-                      "unit": "Megabytes",
-                      "absoluteValue": 342.0
-                    }
-                  ],
+                  "isArchivedAction": false,
+                  "isExecutableAction": true,
+                  "isRevertableAction": true,
+                  "lastRefresh": "2017-03-01T14:38:05Z",
                   "observedImpact": [
                     {
+                      "changeValueAbsolute": 0,
+                      "changeValueRelative": 0,
                       "dimensionName": "AffectedQueriesCpuUtilization",
-                      "unit": "CpuCores",
-                      "changeValueAbsolute": 0.0,
-                      "changeValueRelative": 0.0
+                      "unit": "CpuCores"
                     },
                     {
+                      "changeValueAbsolute": 0,
+                      "changeValueRelative": 0,
                       "dimensionName": "CpuUtilization",
-                      "unit": "CpuCores",
-                      "changeValueAbsolute": 0.0,
-                      "changeValueRelative": 0.0
+                      "unit": "CpuCores"
                     },
                     {
+                      "absoluteValue": 0,
                       "dimensionName": "QueriesWithImprovedPerformance",
-                      "unit": "Count",
-                      "absoluteValue": 0.0
+                      "unit": "Count"
                     },
                     {
+                      "absoluteValue": 0,
                       "dimensionName": "QueriesWithRegressedPerformance",
-                      "unit": "Count",
-                      "absoluteValue": 0.0
+                      "unit": "Count"
                     },
                     {
+                      "absoluteValue": -342,
                       "dimensionName": "SpaceChange",
-                      "unit": "Megabytes",
-                      "absoluteValue": -342.0
+                      "unit": "Megabytes"
                     },
                     {
+                      "absoluteValue": 0,
                       "dimensionName": "VerificationProgress",
-                      "unit": "Percent",
-                      "absoluteValue": 0.0
+                      "unit": "Percent"
                     }
                   ],
+                  "recommendationReason": "Duplicate",
+                  "score": 1,
+                  "state": {
+                    "actionInitiatedBy": "User",
+                    "currentValue": "Success",
+                    "lastModified": "2017-03-01T14:38:05Z"
+                  },
                   "timeSeries": [],
+                  "validSince": "2017-03-01T14:38:05Z",
                   "details": {
-                    "indexName": "MyIndex321",
-                    "originalIndexName": "IX_COM_SKU_SKUDepartmentID",
-                    "indexType": "NONCLUSTERED",
                     "schema": "[CRM]",
-                    "table": "[DataPoints2]",
-                    "indexColumns": "[Cookies],[SessionId],[Protocol]",
                     "includedColumns": "[Apple]",
+                    "indexActionDuration": "00:01:00",
                     "indexActionStartTime": "2017-03-01T14:38:05.697",
-                    "indexActionDuration": "00:01:00"
+                    "indexColumns": "[Cookies],[SessionId],[Protocol]",
+                    "indexName": "MyIndex321",
+                    "indexType": "NONCLUSTERED",
+                    "originalIndexName": "IX_COM_SKU_SKUDepartmentID",
+                    "table": "[DataPoints2]"
                   }
                 }
               },
               {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DropIndex/recommendedActions/IR_[dbo]_[FactFinance]_13ADA5F354E9E14A983B",
                 "name": "IR_[dbo]_[FactFinance]_13ADA5F354E9E14A983B",
                 "type": "Microsoft.Sql/servers/databases/advisors/recommendedActions",
-                "location": "East Asia",
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DropIndex/recommendedActions/IR_[dbo]_[FactFinance]_13ADA5F354E9E14A983B",
                 "kind": "",
+                "location": "East Asia",
                 "properties": {
-                  "recommendationReason": "Duplicate",
-                  "validSince": "2017-03-01T14:38:05Z",
-                  "lastRefresh": "2017-03-01T14:38:05Z",
-                  "state": {
-                    "currentValue": "Success",
-                    "actionInitiatedBy": "System",
-                    "lastModified": "2017-02-28T14:38:05Z"
-                  },
-                  "isExecutableAction": true,
-                  "isRevertableAction": true,
-                  "isArchivedAction": false,
-                  "executeActionStartTime": "2017-03-01T14:38:05Z",
+                  "errorDetails": {},
+                  "estimatedImpact": [
+                    {
+                      "absoluteValue": 705,
+                      "dimensionName": "ActionDuration",
+                      "unit": "Seconds"
+                    },
+                    {
+                      "absoluteValue": 342,
+                      "dimensionName": "SpaceChange",
+                      "unit": "Megabytes"
+                    }
+                  ],
                   "executeActionDuration": "PT1M",
                   "executeActionInitiatedBy": "System",
                   "executeActionInitiatedTime": "2017-03-01T14:38:05Z",
-                  "score": 1,
+                  "executeActionStartTime": "2017-03-01T14:38:05Z",
                   "implementationDetails": {
                     "method": "TSql",
                     "script": "CREATE NONCLUSTERED INDEX [IX_FF] ON [dbo].[FactFinance] ([FinanceKey],[DateKey]) INCLUDE ([OrganizationKey]) WITH (ONLINE = ON)"
                   },
-                  "errorDetails": {},
-                  "estimatedImpact": [
-                    {
-                      "dimensionName": "ActionDuration",
-                      "unit": "Seconds",
-                      "absoluteValue": 705.0
-                    },
-                    {
-                      "dimensionName": "SpaceChange",
-                      "unit": "Megabytes",
-                      "absoluteValue": 342.0
-                    }
-                  ],
+                  "isArchivedAction": false,
+                  "isExecutableAction": true,
+                  "isRevertableAction": true,
+                  "lastRefresh": "2017-03-01T14:38:05Z",
                   "observedImpact": [
                     {
+                      "changeValueAbsolute": 0,
+                      "changeValueRelative": 0,
                       "dimensionName": "AffectedQueriesCpuUtilization",
-                      "unit": "CpuCores",
-                      "changeValueAbsolute": 0.0,
-                      "changeValueRelative": 0.0
+                      "unit": "CpuCores"
                     },
                     {
+                      "changeValueAbsolute": 0,
+                      "changeValueRelative": 0,
                       "dimensionName": "CpuUtilization",
-                      "unit": "CpuCores",
-                      "changeValueAbsolute": 0.0,
-                      "changeValueRelative": 0.0
+                      "unit": "CpuCores"
                     },
                     {
+                      "absoluteValue": 0,
                       "dimensionName": "QueriesWithImprovedPerformance",
-                      "unit": "Count",
-                      "absoluteValue": 0.0
+                      "unit": "Count"
                     },
                     {
+                      "absoluteValue": 0,
                       "dimensionName": "QueriesWithRegressedPerformance",
-                      "unit": "Count",
-                      "absoluteValue": 0.0
+                      "unit": "Count"
                     },
                     {
+                      "absoluteValue": -342,
                       "dimensionName": "SpaceChange",
-                      "unit": "Megabytes",
-                      "absoluteValue": -342.0
+                      "unit": "Megabytes"
                     },
                     {
+                      "absoluteValue": 0,
                       "dimensionName": "VerificationProgress",
-                      "unit": "Percent",
-                      "absoluteValue": 0.0
+                      "unit": "Percent"
                     }
                   ],
+                  "recommendationReason": "Duplicate",
+                  "score": 1,
+                  "state": {
+                    "actionInitiatedBy": "System",
+                    "currentValue": "Success",
+                    "lastModified": "2017-02-28T14:38:05Z"
+                  },
                   "timeSeries": [],
+                  "validSince": "2017-03-01T14:38:05Z",
                   "details": {
-                    "indexName": "IX_FF",
-                    "originalIndexName": "IX_COM_SKU_SKUDepartmentID",
-                    "indexType": "NONCLUSTERED",
                     "schema": "[dbo]",
-                    "table": "[FactFinance]",
-                    "indexColumns": "[FinanceKey],[DateKey]",
                     "includedColumns": "[OrganizationKey]",
+                    "indexActionDuration": "00:01:00",
                     "indexActionStartTime": "2017-03-01T14:38:05.837",
-                    "indexActionDuration": "00:01:00"
+                    "indexColumns": "[FinanceKey],[DateKey]",
+                    "indexName": "IX_FF",
+                    "indexType": "NONCLUSTERED",
+                    "originalIndexName": "IX_COM_SKU_SKUDepartmentID",
+                    "table": "[FactFinance]"
                   }
                 }
               }
@@ -503,103 +503,103 @@
           }
         },
         {
-          "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DbParameterization",
           "name": "DbParameterization",
           "type": "Microsoft.Sql/servers/databases/advisors",
-          "location": "East Asia",
+          "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DbParameterization",
           "kind": "",
+          "location": "East Asia",
           "properties": {
             "advisorStatus": "GA",
             "autoExecuteStatus": "Enabled",
             "autoExecuteStatusInheritedFrom": "Database",
-            "recommendationsStatus": "DbParameterizationIssue",
             "lastChecked": "2017-06-19T19:13:03Z",
+            "recommendationsStatus": "DbParameterizationIssue",
             "recommendedActions": [
               {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DbParameterization/recommendedActions/ForceDbParameterization",
                 "name": "ForceDbParameterization",
                 "type": "Microsoft.Sql/servers/databases/advisors/recommendedActions",
-                "location": "East Asia",
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DbParameterization/recommendedActions/ForceDbParameterization",
                 "kind": "",
+                "location": "East Asia",
                 "properties": {
-                  "recommendationReason": "",
-                  "validSince": "2017-03-01T14:37:44Z",
-                  "lastRefresh": "2017-03-01T14:37:44Z",
-                  "state": {
-                    "currentValue": "Pending",
-                    "actionInitiatedBy": "System",
-                    "lastModified": "2017-05-11T15:08:31Z"
-                  },
-                  "isExecutableAction": true,
-                  "isRevertableAction": true,
-                  "isArchivedAction": false,
+                  "errorDetails": {},
+                  "estimatedImpact": [
+                    {
+                      "changeValueAbsolute": 22.5613696939135,
+                      "dimensionName": "CpuSavings",
+                      "unit": "Percent"
+                    },
+                    {
+                      "changeValueAbsolute": 0.701823681806341,
+                      "dimensionName": "QueryDurationDecrease",
+                      "unit": "secs"
+                    }
+                  ],
                   "executeActionInitiatedBy": "System",
                   "executeActionInitiatedTime": "2017-05-11T15:08:31Z",
-                  "score": 3,
                   "implementationDetails": {
                     "method": "TSql",
                     "script": "ALTER DATABASE [IndexAdvisor_test_3] SET PARAMETERIZATION FORCED"
                   },
-                  "errorDetails": {},
-                  "estimatedImpact": [
-                    {
-                      "dimensionName": "CpuSavings",
-                      "unit": "Percent",
-                      "changeValueAbsolute": 22.5613696939135
-                    },
-                    {
-                      "dimensionName": "QueryDurationDecrease",
-                      "unit": "secs",
-                      "changeValueAbsolute": 0.701823681806341
-                    }
-                  ],
+                  "isArchivedAction": false,
+                  "isExecutableAction": true,
+                  "isRevertableAction": true,
+                  "lastRefresh": "2017-03-01T14:37:44Z",
                   "observedImpact": [],
-                  "timeSeries": []
+                  "recommendationReason": "",
+                  "score": 3,
+                  "state": {
+                    "actionInitiatedBy": "System",
+                    "currentValue": "Pending",
+                    "lastModified": "2017-05-11T15:08:31Z"
+                  },
+                  "timeSeries": [],
+                  "validSince": "2017-03-01T14:37:44Z"
                 }
               }
             ]
           }
         },
         {
-          "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/SchemaIssue",
           "name": "SchemaIssue",
           "type": "Microsoft.Sql/servers/databases/advisors",
-          "location": "East Asia",
+          "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/SchemaIssue",
           "kind": "",
+          "location": "East Asia",
           "properties": {
             "advisorStatus": "PublicPreview",
             "autoExecuteStatus": "Disabled",
             "autoExecuteStatusInheritedFrom": "Default",
-            "recommendationsStatus": "SchemaIsNotConsistent",
             "lastChecked": "2017-06-20T18:50:21Z",
+            "recommendationsStatus": "SchemaIsNotConsistent",
             "recommendedActions": [
               {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/SchemaIssue/recommendedActions/SchemaProblem_1A258C5714A7410C9D23",
                 "name": "SchemaProblem_1A258C5714A7410C9D23",
                 "type": "Microsoft.Sql/servers/databases/advisors/recommendedActions",
-                "location": "East Asia",
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/SchemaIssue/recommendedActions/SchemaProblem_1A258C5714A7410C9D23",
                 "kind": "",
+                "location": "East Asia",
                 "properties": {
-                  "recommendationReason": "SchemaProblem",
-                  "validSince": "2017-03-01T14:37:48Z",
+                  "errorDetails": {},
+                  "estimatedImpact": [],
+                  "implementationDetails": {},
+                  "isArchivedAction": false,
+                  "isExecutableAction": false,
+                  "isRevertableAction": false,
                   "lastRefresh": "2017-06-07T22:19:53Z",
+                  "observedImpact": [],
+                  "recommendationReason": "SchemaProblem",
+                  "score": 3,
                   "state": {
                     "currentValue": "Active",
                     "lastModified": "2017-03-01T14:37:48Z"
                   },
-                  "isExecutableAction": false,
-                  "isRevertableAction": false,
-                  "isArchivedAction": false,
-                  "score": 3,
-                  "implementationDetails": {},
-                  "errorDetails": {},
-                  "estimatedImpact": [],
-                  "observedImpact": [],
                   "timeSeries": [],
+                  "validSince": "2017-03-01T14:37:48Z",
                   "details": {
-                    "sqlErrorNumber": "208",
+                    "sqlErrorCount": "342482",
                     "sqlErrorMessage": "Invalid object name 'dbo.Companies'.",
-                    "sqlErrorCount": "342482"
+                    "sqlErrorNumber": "208"
                   }
                 }
               }
@@ -607,11 +607,11 @@
           }
         },
         {
-          "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/ForceLastGoodPlan",
           "name": "ForceLastGoodPlan",
           "type": "Microsoft.Sql/servers/databases/advisors",
-          "location": "East Asia",
+          "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/ForceLastGoodPlan",
           "kind": "",
+          "location": "East Asia",
           "properties": {
             "advisorStatus": "PrivatePreview",
             "autoExecuteStatus": "Disabled",
@@ -621,5 +621,7 @@
         }
       ]
     }
-  }
+  },
+  "operationId": "DatabaseAdvisors_ListByDatabase",
+  "title": "List of database recommended actions for all advisors"
 }

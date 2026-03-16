@@ -24,23 +24,38 @@ model SubscriptionUsage
   >;
 }
 
+alias SubscriptionUsagesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the region where the resource is located. */
+    @path
+    @segment("locations")
+    @key
+    locationName: string;
+  },
+  {
+    /** Name of usage metric to return. */
+    @path
+    @segment("usages")
+    @key
+    usageName: string;
+  }
+>;
+
 @armResourceOperations
 interface SubscriptionUsages {
   /**
    * Gets a subscription usage metric.
    */
-  get is ArmResourceRead<
-    SubscriptionUsage,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  get is SubscriptionUsagesOps.Read<SubscriptionUsage>;
 
   /**
    * Gets all subscription usage metrics in a given location.
    */
-  listByLocation is ArmResourceListByParent<
-    SubscriptionUsage,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  listByLocation is SubscriptionUsagesOps.List<SubscriptionUsage>;
 }
 
 @@doc(SubscriptionUsage.name, "Name of usage metric to return.");

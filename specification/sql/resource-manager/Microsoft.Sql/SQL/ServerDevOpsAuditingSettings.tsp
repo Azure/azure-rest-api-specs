@@ -37,15 +37,19 @@ interface ServerDevOpsAuditSettings {
    * Creates or updates a server's DevOps audit settings.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerDevOpsAuditingSettings,
-    Response = ArmResourceUpdatedResponse<ServerDevOpsAuditingSettings> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<ServerDevOpsAuditingSettings> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerDevOpsAuditingSettings>>
   >;
 
   /**
    * Lists DevOps audit settings of a server.
    */
-  listByServer is ArmResourceListByParent<ServerDevOpsAuditingSettings>;
+  listByServer is ArmResourceListByParent<
+    ServerDevOpsAuditingSettings,
+    Response = ServerDevOpsAuditSettingsListResult
+  >;
 }
 
 @@doc(ServerDevOpsAuditingSettings.name, "");

@@ -55,7 +55,7 @@ alias JobExecutionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("executions")
     @key
-    jobExecutionId: string;
+    jobExecutionId: Azure.Core.uuid;
   }
 >;
 
@@ -83,20 +83,17 @@ interface JobExecutions {
   /**
    * Requests cancellation of a job execution.
    */
-  cancel is JobExecutionOps.ActionSync<JobExecution, void, OkResponse>;
-
-  /**
-   * Lists target executions for all steps of a job execution.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("JobTargetExecutions_ListByJobExecution")
-  @list
-  @get
-  @action("targets")
-  listByJobExecution is JobExecutionOps.ActionSync<
+  cancel is JobExecutionOps.ActionSync<
     JobExecution,
     void,
-    ArmResponse<ResourceListResult<JobExecution>>,
+    Response = OkResponse
+  >;
+
+  /**
+   * Lists a job's executions.
+   */
+  listByJob is JobExecutionOps.List<
+    JobExecution,
     Parameters = {
       /**
        * If specified, only job executions created at or after the specified time are included.
@@ -142,6 +139,7 @@ interface JobExecutions {
     }
   >;
 }
+
 alias JobStepExecutionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -171,7 +169,7 @@ alias JobStepExecutionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("executions")
     @key
-    jobExecutionId: string;
+    jobExecutionId: Azure.Core.uuid;
   },
   {
     /** The name of the step. */
@@ -188,7 +186,58 @@ interface JobStepExecutions {
    * Gets a step execution of a job execution.
    */
   get is JobStepExecutionOps.Read<JobExecution>;
+
+  /**
+   * Lists the step executions of a job execution.
+   */
+  ListByJobExecution is JobStepExecutionOps.List<
+    JobExecution,
+    Parameters = {
+      /**
+       * If specified, only job executions created at or after the specified time are included.
+       */
+      @query("createTimeMin")
+      createTimeMin?: utcDateTime;
+
+      /**
+       * If specified, only job executions created before the specified time are included.
+       */
+      @query("createTimeMax")
+      createTimeMax?: utcDateTime;
+
+      /**
+       * If specified, only job executions completed at or after the specified time are included.
+       */
+      @query("endTimeMin")
+      endTimeMin?: utcDateTime;
+
+      /**
+       * If specified, only job executions completed before the specified time are included.
+       */
+      @query("endTimeMax")
+      endTimeMax?: utcDateTime;
+
+      /**
+       * If specified, only active or only completed job executions are included.
+       */
+      @query("isActive")
+      isActive?: boolean;
+
+      /**
+       * The number of elements in the collection to skip.
+       */
+      @query("$skip")
+      $skip?: int64;
+
+      /**
+       * The number of elements to return from the collection.
+       */
+      @query("$top")
+      $top?: int64;
+    }
+  >;
 }
+
 alias JobTargetExecutionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -218,7 +267,7 @@ alias JobTargetExecutionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("executions")
     @key
-    jobExecutionId: string;
+    jobExecutionId: Azure.Core.uuid;
 
     /** The name of the step. */
     @path
@@ -231,7 +280,7 @@ alias JobTargetExecutionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("targets")
     @key
-    targetId: string;
+    targetId: Azure.Core.uuid;
   }
 >;
 
@@ -243,12 +292,65 @@ interface JobTargetExecutions {
   get is JobTargetExecutionOps.Read<JobExecution>;
 
   /**
-   * Lists a job's executions.
+   * Lists the target executions of a job step execution.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("JobExecutions_ListByJob")
-  listByJob is JobTargetExecutionOps.List<
+  ListByStep is JobTargetExecutionOps.List<
     JobExecution,
+    Parameters = {
+      /**
+       * If specified, only job executions created at or after the specified time are included.
+       */
+      @query("createTimeMin")
+      createTimeMin?: utcDateTime;
+
+      /**
+       * If specified, only job executions created before the specified time are included.
+       */
+      @query("createTimeMax")
+      createTimeMax?: utcDateTime;
+
+      /**
+       * If specified, only job executions completed at or after the specified time are included.
+       */
+      @query("endTimeMin")
+      endTimeMin?: utcDateTime;
+
+      /**
+       * If specified, only job executions completed before the specified time are included.
+       */
+      @query("endTimeMax")
+      endTimeMax?: utcDateTime;
+
+      /**
+       * If specified, only active or only completed job executions are included.
+       */
+      @query("isActive")
+      isActive?: boolean;
+
+      /**
+       * The number of elements in the collection to skip.
+       */
+      @query("$skip")
+      $skip?: int64;
+
+      /**
+       * The number of elements to return from the collection.
+       */
+      @query("$top")
+      $top?: int64;
+    }
+  >;
+
+  /**
+   * Lists target executions for all steps of a job execution.
+   */
+  @list
+  @get
+  @action("targets")
+  listByJobExecution is JobExecutionOps.ActionSync<
+    JobExecution,
+    void,
+    ArmResponse<ResourceListResult<JobExecution>>,
     Parameters = {
       /**
        * If specified, only job executions created at or after the specified time are included.

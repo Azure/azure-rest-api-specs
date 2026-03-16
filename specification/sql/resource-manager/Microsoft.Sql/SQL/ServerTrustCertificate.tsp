@@ -57,7 +57,10 @@ interface ServerTrustCertificates {
   /**
    * Gets a list of the server trust certificates used to secure communication between SQL Server and the specified SQL Managed Instance
    */
-  listByInstance is ArmResourceListByParent<ServerTrustCertificate>;
+  listByInstance is ArmResourceListByParent<
+    ServerTrustCertificate,
+    Response = ServerTrustCertificatesListResult
+  >;
 }
 
 @@doc(ServerTrustCertificate.name, "Name of of the certificate to get.");

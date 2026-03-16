@@ -43,9 +43,8 @@ interface ServerAdvancedThreatProtections {
   @operationId("ServerAdvancedThreatProtectionSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerAdvancedThreatProtection,
-    Response = ArmResourceUpdatedResponse<ServerAdvancedThreatProtection> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ServerAdvancedThreatProtection> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ServerAdvancedThreatProtection> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerAdvancedThreatProtection> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -53,7 +52,10 @@ interface ServerAdvancedThreatProtections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ServerAdvancedThreatProtectionSettings_ListByServer")
-  listByServer is ArmResourceListByParent<ServerAdvancedThreatProtection>;
+  listByServer is ArmResourceListByParent<
+    ServerAdvancedThreatProtection,
+    Response = LogicalServerAdvancedThreatProtectionListResult
+  >;
 }
 
 @@doc(ServerAdvancedThreatProtection.name,

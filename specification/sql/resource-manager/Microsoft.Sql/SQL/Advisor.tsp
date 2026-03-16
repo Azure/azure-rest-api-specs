@@ -97,7 +97,7 @@ interface Advisors {
       @query("$expand")
       $expand?: string;
     },
-    Response = ArmResponse<Advisor[]>
+    Response = AdvisorListResult
   >;
 }
 alias ServerAdvisorOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -138,7 +138,7 @@ interface ServerAdvisors {
   /**
    * Gets a list of server advisors.
    */
-  listByServer is ServerAdvisorOps.List<
+  listByServer is ServerAdvisorOps.ListSinglePage<
     Advisor,
     Parameters = {
       /**
@@ -147,7 +147,7 @@ interface ServerAdvisors {
       @query("$expand")
       $expand?: string;
     },
-    Response = ArmResponse<Advisor[]>
+    Response = AdvisorListResult
   >;
 }
 

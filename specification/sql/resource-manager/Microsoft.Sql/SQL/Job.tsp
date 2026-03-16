@@ -52,7 +52,7 @@ interface Jobs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("JobExecutions_Create")
   @action("start")
-  create is ArmResourceActionAsync<Job, void, ArmResponse<JobExecution>>;
+  create is ArmResourceActionAsync<Job, void, Response = JobExecution>;
 }
 
 @@doc(Job.name, "The name of the job to get.");

@@ -39,9 +39,8 @@ interface ManagedInstanceDtcs {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstanceDtc,
-    Response = ArmResourceUpdatedResponse<ManagedInstanceDtc>,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceDtc> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ManagedInstanceDtc> &
+      ArmLroLocationHeader<FinalResult = ManagedInstanceDtc>
   >;
 
   /**

@@ -39,9 +39,8 @@ interface ServerConfigurationOptions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerConfigurationOption,
-    Response = ArmResourceUpdatedResponse<ServerConfigurationOption>,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ServerConfigurationOption> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ServerConfigurationOption> &
+      ArmLroLocationHeader<FinalResult = ServerConfigurationOption>
   >;
 
   /**

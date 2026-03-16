@@ -21,8 +21,7 @@ model SensitivityLabel
     Resource = SensitivityLabel,
     KeyName = "sensitivityLabelSource",
     SegmentName = "sensitivityLabels",
-    NamePattern = "",
-    Type = SensitivityLabelSource
+    NamePattern = ""
   >;
 
   /**
@@ -70,13 +69,7 @@ alias SensitivityLabelOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     columnName: string;
   },
-  {
-    /** The source of the sensitivity label. */
-    @path
-    @segment("sensitivityLabels")
-    @key
-    sensitivityLabelSource: string;
-  }
+  {}
 >;
 
 @armResourceOperations
@@ -86,14 +79,32 @@ interface SensitivityLabels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedDatabaseSensitivityLabels_Get")
-  get is SensitivityLabelOps.Read<SensitivityLabel>;
+  get is SensitivityLabelOps.Read<
+    SensitivityLabel,
+    Parameters = {
+      /** The source of the sensitivity label. */
+      @path
+      @segment("sensitivityLabels")
+      @key
+      sensitivityLabelSource: SensitivityLabelSource;
+    }
+  >;
 
   /**
    * Creates or updates the sensitivity label of a given column
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedDatabaseSensitivityLabels_CreateOrUpdate")
-  createOrUpdate is SensitivityLabelOps.CreateOrUpdateSync<SensitivityLabel>;
+  createOrUpdate is SensitivityLabelOps.CreateOrUpdateSync<
+    SensitivityLabel,
+    Parameters = {
+      /** The source of the sensitivity label. */
+      @path
+      @segment("sensitivityLabels")
+      @key
+      sensitivityLabelSource: CurrentSensitivityLabelSource;
+    }
+  >;
 
   /**
    * Deletes the sensitivity label of a given column
@@ -103,7 +114,14 @@ interface SensitivityLabels {
   @operationId("ManagedDatabaseSensitivityLabels_Delete")
   delete is SensitivityLabelOps.DeleteSync<
     SensitivityLabel,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse,
+    Parameters = {
+      /** The source of the sensitivity label. */
+      @path
+      @segment("sensitivityLabels")
+      @key
+      sensitivityLabelSource: CurrentSensitivityLabelSource;
+    }
   >;
 
   /**
@@ -115,7 +133,14 @@ interface SensitivityLabels {
   disableRecommendation is SensitivityLabelOps.ActionSync<
     SensitivityLabel,
     void,
-    OkResponse
+    Response = OkResponse,
+    Parameters = {
+      /** The source of the sensitivity label. */
+      @path
+      @segment("sensitivityLabels")
+      @key
+      sensitivityLabelSource: RecommendedSensitivityLabelSource;
+    }
   >;
 
   /**
@@ -127,7 +152,14 @@ interface SensitivityLabels {
   enableRecommendation is SensitivityLabelOps.ActionSync<
     SensitivityLabel,
     void,
-    OkResponse
+    Response = OkResponse,
+    Parameters = {
+      /** The source of the sensitivity label. */
+      @path
+      @segment("sensitivityLabels")
+      @key
+      sensitivityLabelSource: RecommendedSensitivityLabelSource;
+    }
   >;
 }
 alias SensitivityLabelOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -167,13 +199,7 @@ alias SensitivityLabelOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOpe
     @key
     columnName: string;
   },
-  {
-    /** The source of the sensitivity label. */
-    @path
-    @segment("sensitivityLabels")
-    @key
-    sensitivityLabelSource: string;
-  }
+  {}
 >;
 
 @armResourceOperations
@@ -183,14 +209,32 @@ interface SensitivityLabelOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SensitivityLabels_Get")
-  get is SensitivityLabelOperationGroupOps.Read<SensitivityLabel>;
+  get is SensitivityLabelOperationGroupOps.Read<
+    SensitivityLabel,
+    Parameters = {
+      /** The source of the sensitivity label. */
+      @path
+      @segment("sensitivityLabels")
+      @key
+      sensitivityLabelSource: SensitivityLabelSource;
+    }
+  >;
 
   /**
    * Creates or updates the sensitivity label of a given column
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SensitivityLabels_CreateOrUpdate")
-  createOrUpdate is SensitivityLabelOperationGroupOps.CreateOrUpdateSync<SensitivityLabel>;
+  createOrUpdate is SensitivityLabelOperationGroupOps.CreateOrUpdateSync<
+    SensitivityLabel,
+    Parameters = {
+      /** The source of the sensitivity label. */
+      @path
+      @segment("sensitivityLabels")
+      @key
+      sensitivityLabelSource: CurrentSensitivityLabelSource;
+    }
+  >;
 
   /**
    * Deletes the sensitivity label of a given column
@@ -200,7 +244,14 @@ interface SensitivityLabelOperationGroup {
   @operationId("SensitivityLabels_Delete")
   delete is SensitivityLabelOperationGroupOps.DeleteSync<
     SensitivityLabel,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse,
+    Parameters = {
+      /** The source of the sensitivity label. */
+      @path
+      @segment("sensitivityLabels")
+      @key
+      sensitivityLabelSource: CurrentSensitivityLabelSource;
+    }
   >;
 
   /**
@@ -212,7 +263,14 @@ interface SensitivityLabelOperationGroup {
   disableRecommendation is SensitivityLabelOperationGroupOps.ActionSync<
     SensitivityLabel,
     void,
-    OkResponse
+    Response = OkResponse,
+    Parameters = {
+      /** The source of the sensitivity label. */
+      @path
+      @segment("sensitivityLabels")
+      @key
+      sensitivityLabelSource: RecommendedSensitivityLabelSource;
+    }
   >;
 
   /**
@@ -224,7 +282,14 @@ interface SensitivityLabelOperationGroup {
   enableRecommendation is SensitivityLabelOperationGroupOps.ActionSync<
     SensitivityLabel,
     void,
-    OkResponse
+    Response = OkResponse,
+    Parameters = {
+      /** The source of the sensitivity label. */
+      @path
+      @segment("sensitivityLabels")
+      @key
+      sensitivityLabelSource: RecommendedSensitivityLabelSource;
+    }
   >;
 }
 

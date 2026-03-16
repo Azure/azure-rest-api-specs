@@ -24,32 +24,47 @@ model DeletedServer
   >;
 }
 
+alias DeletedServersOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the region where the resource is located. */
+    @path
+    @segment("locations")
+    @key
+    locationName: string;
+  },
+  {
+    /** The name of the deleted server. */
+    @path
+    @segment("deletedServers")
+    @key
+    deletedServerName: string;
+  }
+>;
+
 @armResourceOperations
 interface DeletedServers {
   /**
    * Gets a deleted server.
    */
-  get is ArmResourceRead<
-    DeletedServer,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  get is DeletedServersOps.Read<DeletedServer>;
 
   /**
    * Gets a list of deleted servers for a location.
    */
-  listByLocation is ArmResourceListByParent<
-    DeletedServer,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  listByLocation is DeletedServersOps.List<DeletedServer>;
 
   /**
    * Recovers a deleted server.
    */
-  recover is ArmResourceActionAsync<
+  recover is DeletedServersOps.ActionAsync<
     DeletedServer,
     void,
-    ArmResponse<DeletedServer>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    void,
+    Response = ArmResponse<DeletedServer> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DeletedServer>>
   >;
 }
 

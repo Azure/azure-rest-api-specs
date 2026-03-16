@@ -56,7 +56,10 @@ interface ImportExportExtensionsOperationResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseExtensions_ListByDatabase")
-  listByDatabase is ArmResourceListByParent<ImportExportExtensionsOperationResult>;
+  listByDatabase is ArmResourceListByParent<
+    ImportExportExtensionsOperationResult,
+    Response = ImportExportExtensionsOperationListResult
+  >;
 }
 
 @@doc(ImportExportExtensionsOperationResult.name, "");

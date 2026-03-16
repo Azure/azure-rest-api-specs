@@ -22,7 +22,7 @@ model ManagedDatabaseSecurityAlertPolicy
     KeyName = "securityAlertPolicyName",
     SegmentName = "securityAlertPolicies",
     NamePattern = "",
-    Type = ManagedDatabaseSecurityAlertPolicyName
+    Type = SecurityAlertPolicyName
   >;
 }
 

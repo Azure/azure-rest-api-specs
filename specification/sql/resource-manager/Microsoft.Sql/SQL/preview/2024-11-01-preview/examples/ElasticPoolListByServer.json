@@ -1,81 +1,83 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2024-11-01-preview",
     "resourceGroupName": "sqlcrudtest-2369",
     "serverName": "sqlcrudtest-8069",
-    "api-version": "2024-11-01-preview"
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-2729",
             "name": "sqlcrudtest-2729",
             "type": "Microsoft.Sql/servers/elasticPools",
-            "location": "Japan East",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-2729",
             "kind": null,
-            "sku": {
-              "name": "GP_Gen4_2",
-              "tier": "GeneralPurpose",
-              "capacity": 2
-            },
+            "location": "Japan East",
             "properties": {
               "creationDate": "2017-02-10T01:27:21.32Z",
-              "state": "Ready",
+              "licenseType": "LicenseIncluded",
               "maxSizeBytes": 5242880000,
               "perDatabaseSettings": {
-                "minCapacity": 0.25,
-                "maxCapacity": 1.0
+                "maxCapacity": 1,
+                "minCapacity": 0.25
               },
-              "zoneRedundant": true,
-              "licenseType": "LicenseIncluded"
+              "state": "Ready",
+              "zoneRedundant": true
+            },
+            "sku": {
+              "name": "GP_Gen4_2",
+              "capacity": 2,
+              "tier": "GeneralPurpose"
             }
           },
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-3191",
             "name": "sqlcrudtest-3191",
             "type": "Microsoft.Sql/servers/elasticPools",
-            "location": "Japan East",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-3191",
             "kind": null,
-            "sku": {
-              "name": "BasicPool",
-              "tier": "Basic",
-              "capacity": 50
-            },
+            "location": "Japan East",
             "properties": {
               "creationDate": "2017-02-10T01:26:26.45Z",
-              "state": "Ready",
               "maxSizeBytes": 5242880000,
               "perDatabaseSettings": {
-                "minCapacity": 0,
-                "maxCapacity": 5
-              }
+                "maxCapacity": 5,
+                "minCapacity": 0
+              },
+              "state": "Ready"
+            },
+            "sku": {
+              "name": "BasicPool",
+              "capacity": 50,
+              "tier": "Basic"
             }
           },
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102",
             "name": "sqlcrudtest-8102",
             "type": "Microsoft.Sql/servers/elasticPools",
-            "location": "Japan East",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102",
             "kind": null,
-            "sku": {
-              "name": "BasicPool",
-              "tier": "Basic",
-              "capacity": 50
-            },
+            "location": "Japan East",
             "properties": {
               "creationDate": "2017-02-10T01:25:25.033Z",
-              "state": "Ready",
               "maxSizeBytes": 5242880000,
               "perDatabaseSettings": {
-                "minCapacity": 0,
-                "maxCapacity": 5
-              }
+                "maxCapacity": 5,
+                "minCapacity": 0
+              },
+              "state": "Ready"
+            },
+            "sku": {
+              "name": "BasicPool",
+              "capacity": 50,
+              "tier": "Basic"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ElasticPools_ListByServer",
+  "title": "Get all elastic pools in a server"
 }

@@ -23,23 +23,38 @@ model TimeZone is Azure.ResourceManager.ProxyResource<TimeZoneProperties> {
   >;
 }
 
+alias TimeZonesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The location of the database. */
+    @path
+    @segment("locations")
+    @key
+    locationName: string;
+  },
+  {
+    /** The time zone ID. */
+    @path
+    @segment("timeZones")
+    @key
+    timeZoneId: string;
+  }
+>;
+
 @armResourceOperations
 interface TimeZones {
   /**
    * Gets a managed instance time zone.
    */
-  get is ArmResourceRead<
-    TimeZone,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  get is TimeZonesOps.Read<TimeZone>;
 
   /**
    * Gets a list of managed instance time zones by location.
    */
-  listByLocation is ArmResourceListByParent<
-    TimeZone,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  listByLocation is TimeZonesOps.List<TimeZone>;
 }
 
 @@doc(TimeZone.name, "");

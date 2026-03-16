@@ -1,27 +1,29 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2024-11-01-preview",
+    "databaseName": "myDatabase",
     "resourceGroupName": "myRG",
     "serverName": "serverName",
-    "databaseName": "myDatabase",
-    "api-version": "2024-11-01-preview"
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/servers/serverName/databases/myDatabase/schemas/dbo",
             "name": "dbo",
-            "type": "Microsoft.Sql/servers/databases/schemas"
+            "type": "Microsoft.Sql/servers/databases/schemas",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/servers/serverName/databases/myDatabase/schemas/dbo"
           },
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/servers/serverName/databases/myDatabase/schemas/schema2",
             "name": "schema2",
-            "type": "Microsoft.Sql/servers/databases/schemas"
+            "type": "Microsoft.Sql/servers/databases/schemas",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/servers/serverName/databases/myDatabase/schemas/schema2"
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "DatabaseSchemas_ListByDatabase",
+  "title": "List database schemas"
 }

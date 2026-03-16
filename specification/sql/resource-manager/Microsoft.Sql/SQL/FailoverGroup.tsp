@@ -74,7 +74,7 @@ interface FailoverGroups {
   failover is ArmResourceActionAsync<
     FailoverGroup,
     void,
-    ArmResponse<FailoverGroup>
+    Response = FailoverGroup
   >;
 
   /**
@@ -83,7 +83,7 @@ interface FailoverGroups {
   forceFailoverAllowDataLoss is ArmResourceActionAsync<
     FailoverGroup,
     void,
-    ArmResponse<FailoverGroup>
+    Response = FailoverGroup
   >;
 
   /**
@@ -92,7 +92,7 @@ interface FailoverGroups {
   tryPlannedBeforeForcedFailover is ArmResourceActionAsync<
     FailoverGroup,
     void,
-    ArmResponse<FailoverGroup>
+    Response = FailoverGroup
   >;
 }
 

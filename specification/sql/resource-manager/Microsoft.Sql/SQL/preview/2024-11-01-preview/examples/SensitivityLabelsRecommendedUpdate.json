@@ -1,40 +1,42 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "myRG",
-    "serverName": "myServer",
-    "databaseName": "myDatabase",
     "api-version": "2024-11-01-preview",
+    "databaseName": "myDatabase",
     "parameters": {
       "operations": [
         {
           "properties": {
-            "op": "enable",
             "schema": "dbo",
-            "table": "table1",
-            "column": "column1"
+            "column": "column1",
+            "op": "enable",
+            "table": "table1"
           }
         },
         {
           "properties": {
-            "op": "enable",
             "schema": "dbo",
-            "table": "table2",
-            "column": "column2"
+            "column": "column2",
+            "op": "enable",
+            "table": "table2"
           }
         },
         {
           "properties": {
+            "schema": "dbo",
+            "column": "column3",
             "op": "disable",
-            "schema": "dbo",
-            "table": "table1",
-            "column": "column3"
+            "table": "table1"
           }
         }
       ]
-    }
+    },
+    "resourceGroupName": "myRG",
+    "serverName": "myServer",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {}
-  }
+  },
+  "operationId": "RecommendedSensitivityLabels_Update",
+  "title": "Update recommended sensitivity labels of a given database using an operations batch."
 }

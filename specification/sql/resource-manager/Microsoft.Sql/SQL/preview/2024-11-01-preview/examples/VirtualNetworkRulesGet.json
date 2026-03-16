@@ -1,17 +1,17 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2024-11-01-preview",
     "resourceGroupName": "Default",
     "serverName": "vnet-test-svr",
-    "virtualNetworkRuleName": "vnet-firewall-rule",
-    "api-version": "2024-11-01-preview"
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "virtualNetworkRuleName": "vnet-firewall-rule"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/vnet-test-svr/virtualNetworkRules/vnet-firewall-rule",
         "name": "vnet-firewall-rule",
         "type": "Microsoft.Sql/servers/virtualNetworkRules",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/vnet-test-svr/virtualNetworkRules/vnet-firewall-rule",
         "properties": {
           "ignoreMissingVnetServiceEndpoint": false,
           "state": "Ready",
@@ -19,5 +19,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "VirtualNetworkRules_Get",
+  "title": "Gets a virtual network rule"
 }

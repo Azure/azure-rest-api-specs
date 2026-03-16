@@ -22,7 +22,7 @@ model DatabaseSecurityAlertPolicy
     KeyName = "securityAlertPolicyName",
     SegmentName = "securityAlertPolicies",
     NamePattern = "",
-    Type = DatabaseSecurityAlertPolicyName
+    Type = SecurityAlertPolicyName
   >;
 }
 
@@ -41,7 +41,10 @@ interface DatabaseSecurityAlertPolicies {
   /**
    * Gets a list of database's security alert policies.
    */
-  listByDatabase is ArmResourceListByParent<DatabaseSecurityAlertPolicy>;
+  listByDatabase is ArmResourceListByParent<
+    DatabaseSecurityAlertPolicy,
+    Response = DatabaseSecurityAlertListResult
+  >;
 }
 
 @@doc(DatabaseSecurityAlertPolicy.name,

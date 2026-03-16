@@ -1,35 +1,31 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "myRG",
-    "serverName": "myServer",
-    "databaseName": "myDatabase",
     "api-version": "2024-11-01-preview",
+    "databaseName": "myDatabase",
     "parameters": {
       "operations": [
         {
           "properties": {
-            "op": "set",
             "schema": "dbo",
-            "table": "table1",
             "column": "column1",
+            "op": "set",
             "sensitivityLabel": {
               "properties": {
-                "labelName": "Highly Confidential",
-                "labelId": "3A477B16-9423-432B-AA97-6069B481CEC3",
                 "informationType": "Financial",
                 "informationTypeId": "1D3652D6-422C-4115-82F1-65DAEBC665C8",
+                "labelId": "3A477B16-9423-432B-AA97-6069B481CEC3",
+                "labelName": "Highly Confidential",
                 "rank": "Low"
               }
-            }
+            },
+            "table": "table1"
           }
         },
         {
           "properties": {
-            "op": "set",
             "schema": "dbo",
-            "table": "table2",
             "column": "column2",
+            "op": "set",
             "sensitivityLabel": {
               "properties": {
                 "informationType": "PhoneNumber",
@@ -38,21 +34,27 @@
                 "labelName": "PII",
                 "rank": "Critical"
               }
-            }
+            },
+            "table": "table2"
           }
         },
         {
           "properties": {
-            "op": "remove",
             "schema": "dbo",
-            "table": "Table1",
-            "column": "Column3"
+            "column": "Column3",
+            "op": "remove",
+            "table": "Table1"
           }
         }
       ]
-    }
+    },
+    "resourceGroupName": "myRG",
+    "serverName": "myServer",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {}
-  }
+  },
+  "operationId": "SensitivityLabels_Update",
+  "title": "Update sensitivity labels of a given database using an operations batch."
 }

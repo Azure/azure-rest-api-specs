@@ -3937,6 +3937,42 @@ enum SensitivityLabelSource {
   recommended,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum CurrentSensitivityLabelSource {
+  /**
+   * current
+   */
+  current,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum RecommendedSensitivityLabelSource {
+  /**
+   * recommended
+   */
+  recommended,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum BlobAuditingPolicyName {
+  /**
+   * default
+   */
+  default,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum VulnerabilityAssessmentSystemDatabaseName {
+  /**
+   * master
+   */
+  master,
+}
+
 /**
  * Specifies the state of the transparent data encryption.
  */
@@ -4244,6 +4280,7 @@ model ServerBlobAuditingPolicyProperties {
    * For more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   storageAccountAccessKey?: string;
 
   /**
@@ -4380,6 +4417,7 @@ model DatabaseBlobAuditingPolicyProperties {
    * For more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   storageAccountAccessKey?: string;
 
   /**
@@ -4521,6 +4559,7 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
    * For more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   storageAccountAccessKey?: string;
 
   /**
@@ -4690,7 +4729,7 @@ model ExtendedServerBlobAuditingPolicyProperties {
 /**
  * Metadata pertaining to creation and last modification of the resource.
  */
-model SystemData {
+model systemData {
   /**
    * The identity that created the resource.
    */
@@ -5280,6 +5319,7 @@ model DatabaseExtensionsProperties {
    * Administrator login password. If AuthenticationType is ManagedIdentity, this field should not be specified.
    */
   @visibility(Lifecycle.Create)
+  @secret
   administratorLoginPassword?: string;
 
   /**
@@ -5321,21 +5361,13 @@ model NetworkIsolationSettings {
    * The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for StorageUri parameter.
    */
   @visibility(Lifecycle.Create)
-  storageAccountResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "undefined";
-    }
-  ]>;
+  storageAccountResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
    * The resource id for the SQL server which is the target of this request. If set, private endpoint connection will be created for the SQL server. Must match server which is target of the operation.
    */
   @visibility(Lifecycle.Create)
-  sqlServerResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "undefined";
-    }
-  ]>;
+  sqlServerResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -6299,6 +6331,7 @@ model ExportDatabaseDefinition {
    * Administrator login password. If AuthenticationType is ManagedIdentity, this field should not be specified.
    */
   @visibility(Lifecycle.Create)
+  @secret
   administratorLoginPassword?: string;
 
   /**
@@ -6424,6 +6457,7 @@ model ImportExistingDatabaseDefinition {
    * Administrator login password. If AuthenticationType is ManagedIdentity, this field should not be specified.
    */
   @visibility(Lifecycle.Create)
+  @secret
   administratorLoginPassword?: string;
 
   /**
@@ -6519,7 +6553,7 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineListInput
    * SystemData of DatabaseSqlVulnerabilityAssessmentRuleBaselineListInputResource.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SystemData;
+  systemData?: systemData;
 
   /**
    * Resource properties.
@@ -6564,7 +6598,7 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineInput
    * SystemData of DatabaseSqlVulnerabilityAssessmentRuleBaselineInputResource.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SystemData;
+  systemData?: systemData;
 
   /**
    * Resource properties.
@@ -8658,13 +8692,13 @@ model JobSchedule {
    * Schedule start time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime = "0001-01-01T16:00:00-08:00";
+  startTime?: utcDateTime = utcDateTime.fromISO("0001-01-01T16:00:00-08:00");
 
   /**
    * Schedule end time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime = "9999-12-31T03:59:59-08:00";
+  endTime?: utcDateTime = utcDateTime.fromISO("9999-12-31T03:59:59-08:00");
 
   /**
    * Schedule interval type
@@ -11201,7 +11235,7 @@ model ManagedDatabaseStartMoveDefinition {
   /**
    * The move operation mode.
    */
-  operationMode?: MoveOperationMode;
+  operationMode?: MoveOperationMode = MoveOperationMode.Move;
 }
 
 /**
@@ -12091,6 +12125,7 @@ model ManagedInstanceProperties {
    * The administrator login password (required for managed instance creation).
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   administratorLoginPassword?: string;
 
   /**
@@ -13394,6 +13429,7 @@ model ServerDevOpsAuditSettingsProperties {
    * For more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   storageAccountAccessKey?: string;
 
   /**
@@ -13625,6 +13661,7 @@ model ServerProperties {
    * The administrator login password (required for server creation).
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   administratorLoginPassword?: string;
 
   /**
@@ -13850,6 +13887,7 @@ model ImportNewDatabaseDefinition {
    * Administrator login password. If AuthenticationType is ManagedIdentity, this field should not be specified.
    */
   @visibility(Lifecycle.Create)
+  @secret
   administratorLoginPassword?: string;
 
   /**
@@ -14338,6 +14376,7 @@ model SyncGroupProperties {
    * Password for the sync group hub database credential.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   hubDatabasePassword?: string;
 
   /**
@@ -14919,4 +14958,273 @@ model SecurityEventsFilterParameters {
    * Whether to show server records or not.
    */
   showServerRecords?: boolean;
+}
+
+/**
+ * A list of long term retention backups.
+ */
+model LongTermRetentionBackupListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: LongTermRetentionBackup[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * List of managed database move operations.
+ */
+model ManagedDatabaseMoveOperationListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ManagedDatabaseMoveOperationResult[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * List of managed database move operations.
+ */
+model ManagedInstanceAzureADOnlyAuthListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ManagedInstanceAzureADOnlyAuthentication[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of distributed availability groups in instance.
+ */
+model DistributedAvailabilityGroupsListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: DistributedAvailabilityGroup[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of server trust certificates in instance.
+ */
+model ServerTrustCertificatesListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ServerTrustCertificate[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of active directory administrators.
+ */
+model AdministratorListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ServerAzureADAdministrator[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of the server's Advanced Threat Protection configurations.
+ */
+model LogicalServerAdvancedThreatProtectionListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ServerAdvancedThreatProtection[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of the advisors.
+ */
+model AdvisorListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  value: Advisor[];
+}
+
+/**
+ * A list of active directory only authentications.
+ */
+model AzureADOnlyAuthListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ServerAzureADOnlyAuthentication[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of the recommended actions.
+ */
+model RecommendedActionListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  value: RecommendedAction[];
+}
+
+/**
+ * Import export operation extensions list.
+ */
+model ImportExportExtensionsOperationListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ImportExportExtensionsOperationResult[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of the database's security alert policies.
+ */
+model DatabaseSecurityAlertListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: DatabaseSecurityAlertPolicy[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of vulnerability assessment scan results.
+ */
+model SQLVulnerabilityAssessmentScanListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SqlVulnerabilityAssessmentScanResults[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of server DevOps audit settings.
+ */
+model ServerDevOpsAuditSettingsListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ServerDevOpsAuditingSettings[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of the server's security alert policies.
+ */
+model LogicalServerSecurityAlertPolicyListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ServerSecurityAlertPolicy[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }

@@ -1,27 +1,29 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "myRG",
-    "serverName": "serverName",
-    "databaseName": "myDatabase",
-    "schemaName": "dbo",
-    "tableName": "table1",
+    "api-version": "2024-11-01-preview",
     "columnName": "column1",
-    "api-version": "2024-11-01-preview"
+    "databaseName": "myDatabase",
+    "resourceGroupName": "myRG",
+    "schemaName": "dbo",
+    "serverName": "serverName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "tableName": "table1"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/servers/serverName/databases/myDatabase/schemas/dbo/tables/table1/columns/column1",
         "name": "column1",
         "type": "Microsoft.Sql/servers/databases/schemas/tables/columns",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/servers/serverName/databases/myDatabase/schemas/dbo/tables/table1/columns/column1",
         "properties": {
           "columnType": "bit",
-          "temporalType": "SystemVersionedTemporalTable",
+          "isComputed": false,
           "memoryOptimized": false,
-          "isComputed": false
+          "temporalType": "SystemVersionedTemporalTable"
         }
       }
     }
-  }
+  },
+  "operationId": "DatabaseColumns_Get",
+  "title": "Get database column"
 }

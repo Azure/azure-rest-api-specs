@@ -38,9 +38,8 @@ interface ReplicationLinks {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ReplicationLink,
-    Response = ArmResourceUpdatedResponse<ReplicationLink> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationLink> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ReplicationLink> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationLink> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -72,7 +71,7 @@ interface ReplicationLinks {
   failover is ArmResourceActionAsync<
     ReplicationLink,
     void,
-    ArmResponse<ReplicationLink>
+    Response = ReplicationLink
   >;
 
   /**
@@ -82,7 +81,7 @@ interface ReplicationLinks {
   failoverAllowDataLoss is ArmResourceActionAsync<
     ReplicationLink,
     void,
-    ArmResponse<ReplicationLink>
+    Response = ReplicationLink
   >;
 }
 

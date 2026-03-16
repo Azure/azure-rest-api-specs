@@ -58,7 +58,10 @@ interface ServerAzureADOnlyAuthentications {
   /**
    * Gets a list of server Azure Active Directory only authentications.
    */
-  listByServer is ArmResourceListByParent<ServerAzureADOnlyAuthentication>;
+  listByServer is ArmResourceListByParent<
+    ServerAzureADOnlyAuthentication,
+    Response = AzureADOnlyAuthListResult
+  >;
 }
 
 @@doc(ServerAzureADOnlyAuthentication.name,

@@ -66,7 +66,10 @@ interface DistributedAvailabilityGroups {
   /**
    * Gets a list of a distributed availability groups in instance.
    */
-  listByInstance is ArmResourceListByParent<DistributedAvailabilityGroup>;
+  listByInstance is ArmResourceListByParent<
+    DistributedAvailabilityGroup,
+    Response = DistributedAvailabilityGroupsListResult
+  >;
 
   /**
    * Performs requested failover type in this distributed availability group.
@@ -74,7 +77,7 @@ interface DistributedAvailabilityGroups {
   failover is ArmResourceActionAsync<
     DistributedAvailabilityGroup,
     DistributedAvailabilityGroupsFailoverRequest,
-    ArmResponse<DistributedAvailabilityGroup>
+    Response = DistributedAvailabilityGroup
   >;
 
   /**
@@ -83,7 +86,7 @@ interface DistributedAvailabilityGroups {
   setRole is ArmResourceActionAsync<
     DistributedAvailabilityGroup,
     DistributedAvailabilityGroupSetRole,
-    ArmResponse<DistributedAvailabilityGroup>
+    Response = DistributedAvailabilityGroup
   >;
 }
 

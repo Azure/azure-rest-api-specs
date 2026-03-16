@@ -1,14 +1,17 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "rg1",
-    "locationName": "westeurope",
     "operationId": "15961324-d809-46ed-86b9-d786953140e2",
-    "api-version": "2024-11-01-preview"
+    "api-version": "2024-11-01-preview",
+    "locationName": "westeurope",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "15961324-d809-46ed-86b9-d786953140e2",
+        "type": "Microsoft.Sql/locations/managedDatabaseMoveOperationResults",
+        "id": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.Sql/locations/westeurope/managedDatabaseMoveOperationResults/15961324-d809-46ed-86b9-d786953140e2",
         "properties": {
           "isCancellable": true,
           "operation": "StartManagedInstanceDatabaseMove",
@@ -22,11 +25,10 @@
           "targetDatabaseName": "db1",
           "targetManagedInstanceId": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg2/providers/Microsoft.Sql/managedInstances/mi2",
           "targetManagedInstanceName": "mi2"
-        },
-        "id": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.Sql/locations/westeurope/managedDatabaseMoveOperationResults/15961324-d809-46ed-86b9-d786953140e2",
-        "name": "15961324-d809-46ed-86b9-d786953140e2",
-        "type": "Microsoft.Sql/locations/managedDatabaseMoveOperationResults"
+        }
       }
     }
-  }
+  },
+  "operationId": "ManagedDatabaseMoveOperations_Get",
+  "title": "Gets a managed database move operation."
 }

@@ -14,34 +14,54 @@ namespace Microsoft.Sql;
 /**
  * A server blob auditing policy.
  */
-@singleton("default")
 @parentResource(Server)
 model ServerBlobAuditingPolicy
   is Azure.ResourceManager.ProxyResource<ServerBlobAuditingPolicyProperties> {
   ...ResourceNameParameter<
     Resource = ServerBlobAuditingPolicy,
-    KeyName = "auditingSetting",
+    KeyName = "blobAuditingPolicyName",
     SegmentName = "auditingSettings",
     NamePattern = ""
   >;
 }
+
+alias ServerBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the server. */
+    @path
+    @segment("servers")
+    @key
+    serverName: string;
+  },
+  {
+    /** The name of the blob auditing policy. */
+    @path
+    @segment("auditingSettings")
+    @key
+    blobAuditingPolicyName: BlobAuditingPolicyName;
+  }
+>;
 
 @armResourceOperations
 interface ServerBlobAuditingPolicies {
   /**
    * Gets a server's blob auditing policy.
    */
-  get is ArmResourceRead<ServerBlobAuditingPolicy>;
+  get is ServerBlobAuditingPoliciesOps.Read<ServerBlobAuditingPolicy>;
 
   /**
    * Creates or updates a server's blob auditing policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ServerBlobAuditingPoliciesOps.CreateOrUpdateAsync<
     ServerBlobAuditingPolicy,
-    Response = ArmResourceUpdatedResponse<ServerBlobAuditingPolicy> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ServerBlobAuditingPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ServerBlobAuditingPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerBlobAuditingPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

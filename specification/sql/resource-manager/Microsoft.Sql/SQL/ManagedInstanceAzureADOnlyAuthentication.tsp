@@ -58,7 +58,10 @@ interface ManagedInstanceAzureADOnlyAuthentications {
   /**
    * Gets a list of server Azure Active Directory only authentications.
    */
-  listByInstance is ArmResourceListByParent<ManagedInstanceAzureADOnlyAuthentication>;
+  listByInstance is ArmResourceListByParent<
+    ManagedInstanceAzureADOnlyAuthentication,
+    Response = ManagedInstanceAzureADOnlyAuthListResult
+  >;
 }
 
 @@doc(ManagedInstanceAzureADOnlyAuthentication.name,

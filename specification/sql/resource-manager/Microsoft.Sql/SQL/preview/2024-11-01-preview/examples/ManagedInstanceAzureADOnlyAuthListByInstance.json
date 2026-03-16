@@ -1,19 +1,19 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "Default-SQL-SouthEastAsia",
-    "managedInstanceName": "managedInstance",
+    "api-version": "2024-11-01-preview",
     "authenticationName": "Default",
-    "api-version": "2024-11-01-preview"
+    "managedInstanceName": "managedInstance",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/azureADOnlyAuthentications/providers/Microsoft.Sql/managedInstances/managedInstance/azureadonlyauthentications/default",
             "name": "Default",
             "type": "Microsoft.Sql/managedInstances/azureadonlyauthentications",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/azureADOnlyAuthentications/providers/Microsoft.Sql/managedInstances/managedInstance/azureadonlyauthentications/default",
             "properties": {
               "azureADOnlyAuthentication": true
             }
@@ -21,5 +21,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "ManagedInstanceAzureADOnlyAuthentications_ListByInstance",
+  "title": "Gets a list of Azure Active Directory only authentication object."
 }

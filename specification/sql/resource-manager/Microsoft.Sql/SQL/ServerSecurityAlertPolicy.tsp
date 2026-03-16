@@ -39,15 +39,17 @@ interface ServerSecurityAlertPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerSecurityAlertPolicy,
-    Response = ArmResourceUpdatedResponse<ServerSecurityAlertPolicy> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ServerSecurityAlertPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ServerSecurityAlertPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerSecurityAlertPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Get the server's threat detection policies.
    */
-  listByServer is ArmResourceListByParent<ServerSecurityAlertPolicy>;
+  listByServer is ArmResourceListByParent<
+    ServerSecurityAlertPolicy,
+    Response = LogicalServerSecurityAlertPolicyListResult
+  >;
 }
 
 @@doc(ServerSecurityAlertPolicy.name, "The name of the security alert policy.");

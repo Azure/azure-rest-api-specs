@@ -46,9 +46,8 @@ interface ManagedInstanceEncryptionProtectors {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstanceEncryptionProtector,
-    Response = ArmResourceUpdatedResponse<ManagedInstanceEncryptionProtector> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceEncryptionProtector> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ManagedInstanceEncryptionProtector> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceEncryptionProtector> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

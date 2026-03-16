@@ -22,7 +22,7 @@ model ManagedServerSecurityAlertPolicy
     KeyName = "securityAlertPolicyName",
     SegmentName = "securityAlertPolicies",
     NamePattern = "",
-    Type = ManagedServerSecurityAlertPolicyName
+    Type = SecurityAlertPolicyName
   >;
 }
 
@@ -39,9 +39,8 @@ interface ManagedServerSecurityAlertPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedServerSecurityAlertPolicy,
-    Response = ArmResourceUpdatedResponse<ManagedServerSecurityAlertPolicy> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ManagedServerSecurityAlertPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ManagedServerSecurityAlertPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedServerSecurityAlertPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

@@ -169,7 +169,7 @@ interface Servers {
   importDatabase is ArmResourceActionAsync<
     Server,
     ImportNewDatabaseDefinition,
-    ArmResponse<ImportExportOperationResult>
+    Response = ImportExportOperationResult
   >;
 
   /**
@@ -179,7 +179,7 @@ interface Servers {
   refreshStatus is ArmResourceActionAsync<
     Server,
     void,
-    ArmResponse<RefreshExternalGovernanceStatusOperationResult>
+    Response = RefreshExternalGovernanceStatusOperationResult
   >;
 
   /**

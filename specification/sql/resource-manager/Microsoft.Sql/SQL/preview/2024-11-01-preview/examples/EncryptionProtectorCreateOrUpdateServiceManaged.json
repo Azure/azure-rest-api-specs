@@ -1,25 +1,25 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "sqlcrudtest-7398",
-    "serverName": "sqlcrudtest-4645",
-    "encryptionProtectorName": "current",
     "api-version": "2024-11-01-preview",
+    "encryptionProtectorName": "current",
     "parameters": {
       "properties": {
-        "serverKeyType": "ServiceManaged",
-        "serverKeyName": "ServiceManaged"
+        "serverKeyName": "ServiceManaged",
+        "serverKeyType": "ServiceManaged"
       }
-    }
+    },
+    "resourceGroupName": "sqlcrudtest-7398",
+    "serverName": "sqlcrudtest-4645",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645/encryptionProtector/current",
         "name": "current",
         "type": "Microsoft.Sql/servers/encryptionProtector",
-        "location": "West US",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645/encryptionProtector/current",
         "kind": "servicemanaged",
+        "location": "West US",
         "properties": {
           "serverKeyName": "ServiceManaged",
           "serverKeyType": "ServiceManaged"
@@ -27,5 +27,7 @@
       }
     },
     "202": {}
-  }
+  },
+  "operationId": "EncryptionProtectors_CreateOrUpdate",
+  "title": "Update the encryption protector to service managed"
 }

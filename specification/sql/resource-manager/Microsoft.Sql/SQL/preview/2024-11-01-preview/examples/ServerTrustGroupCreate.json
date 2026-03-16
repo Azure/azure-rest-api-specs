@@ -1,10 +1,7 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "Default",
-    "locationName": "Japan East",
-    "serverTrustGroupName": "server-trust-group-test",
     "api-version": "2024-11-01-preview",
+    "locationName": "Japan East",
     "parameters": {
       "properties": {
         "groupMembers": [
@@ -20,13 +17,17 @@
           "ServiceBroker"
         ]
       }
-    }
+    },
+    "resourceGroupName": "Default",
+    "serverTrustGroupName": "server-trust-group-test",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/Japan East/serverTrustGroups/server-trust-group-test",
         "name": "server-trust-group-test",
+        "type": "Microsoft.Sql/locations/serverTrustGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/Japan East/serverTrustGroups/server-trust-group-test",
         "properties": {
           "groupMembers": [
             {
@@ -40,14 +41,14 @@
             "GlobalTransactions",
             "ServiceBroker"
           ]
-        },
-        "type": "Microsoft.Sql/locations/serverTrustGroups"
+        }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/Japan East/serverTrustGroups/server-trust-group-test",
         "name": "server-trust-group-test",
+        "type": "Microsoft.Sql/locations/serverTrustGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/Japan East/serverTrustGroups/server-trust-group-test",
         "properties": {
           "groupMembers": [
             {
@@ -61,10 +62,11 @@
             "GlobalTransactions",
             "ServiceBroker"
           ]
-        },
-        "type": "Microsoft.Sql/locations/serverTrustGroups"
+        }
       }
     },
     "202": {}
-  }
+  },
+  "operationId": "ServerTrustGroups_CreateOrUpdate",
+  "title": "Create server trust group"
 }

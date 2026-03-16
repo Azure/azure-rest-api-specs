@@ -1,39 +1,39 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "Default",
-    "locationName": "Japan West",
+    "api-version": "2024-11-01-preview",
     "failoverGroupName": "failover-group-test-3",
-    "api-version": "2024-11-01-preview"
+    "locationName": "Japan West",
+    "resourceGroupName": "Default",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/JapanWest/instanceFailoverGroups/failover-group-test-3",
         "name": "failover-group-test-3",
         "type": "Microsoft.Sql/locations/instanceFailoverGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/JapanWest/instanceFailoverGroups/failover-group-test-3",
         "properties": {
-          "readWriteEndpoint": {
-            "failoverPolicy": "Automatic",
-            "failoverWithDataLossGracePeriodMinutes": 480
-          },
-          "readOnlyEndpoint": {
-            "failoverPolicy": "Disabled"
-          },
-          "replicationRole": "Primary",
-          "replicationState": "CATCH_UP",
+          "managedInstancePairs": [
+            {
+              "partnerManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-primary-mngdInstance",
+              "primaryManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-secondary-mngdInstance"
+            }
+          ],
           "partnerRegions": [
             {
               "location": "Japan East",
               "replicationRole": "Secondary"
             }
           ],
-          "managedInstancePairs": [
-            {
-              "primaryManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-secondary-mngdInstance",
-              "partnerManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-primary-mngdInstance"
-            }
-          ],
+          "readOnlyEndpoint": {
+            "failoverPolicy": "Disabled"
+          },
+          "readWriteEndpoint": {
+            "failoverPolicy": "Automatic",
+            "failoverWithDataLossGracePeriodMinutes": 480
+          },
+          "replicationRole": "Primary",
+          "replicationState": "CATCH_UP",
           "secondaryType": "Geo"
         }
       }
@@ -43,5 +43,7 @@
         "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/JapanWest/instanceFailoverGroupOperationResults/failover-group-test-3?api-version=2022-05-01-preview"
       }
     }
-  }
+  },
+  "operationId": "InstanceFailoverGroups_ForceFailoverAllowDataLoss",
+  "title": "Forced failover of a failover group allowing data loss"
 }

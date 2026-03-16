@@ -69,8 +69,9 @@ interface LongTermRetentionBackupsOperationGroup {
   @autoRoute
   @get
   @action("longTermRetentionBackups")
+  @list
   listByLocation is ArmProviderActionSync<
-    Response = ResourceListResult<LongTermRetentionBackup>,
+    Response = LongTermRetentionBackupListResult,
     Scope = SubscriptionActionScope,
     Parameters = {
       /**
@@ -101,8 +102,9 @@ interface LongTermRetentionBackupsOperationGroup {
   @autoRoute
   @get
   @action("longTermRetentionBackups")
+  @list
   listByServer is ArmProviderActionSync<
-    Response = ResourceListResult<LongTermRetentionBackup>,
+    Response = LongTermRetentionBackupListResult,
     Scope = SubscriptionActionScope,
     Parameters = {
       /**
@@ -140,8 +142,9 @@ interface LongTermRetentionBackupsOperationGroup {
   @autoRoute
   @get
   @action("longTermRetentionBackups")
+  @list
   listByResourceGroupLocation is ArmProviderActionSync<
-    Response = ResourceListResult<LongTermRetentionBackup>,
+    Response = LongTermRetentionBackupListResult,
     Scope = Extension.ResourceGroup,
     Parameters = {
       /**
@@ -172,8 +175,9 @@ interface LongTermRetentionBackupsOperationGroup {
   @autoRoute
   @get
   @action("longTermRetentionBackups")
+  @list
   listByResourceGroupServer is ArmProviderActionSync<
-    Response = ResourceListResult<LongTermRetentionBackup>,
+    Response = LongTermRetentionBackupListResult,
     Scope = Extension.ResourceGroup,
     Parameters = {
       /**
@@ -215,6 +219,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
   @autoRoute
   @get
   @action("longTermRetentionManagedInstanceBackups")
+  @list
   listByLocation is ArmProviderActionSync<
     Response = ResourceListResult<ManagedInstanceLongTermRetentionBackup>,
     Scope = SubscriptionActionScope,
@@ -265,6 +270,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
   @autoRoute
   @get
   @action("longTermRetentionManagedInstanceBackups")
+  @list
   listByInstance is ArmProviderActionSync<
     Response = ResourceListResult<ManagedInstanceLongTermRetentionBackup>,
     Scope = SubscriptionActionScope,
@@ -304,6 +310,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
   @autoRoute
   @get
   @action("longTermRetentionManagedInstanceBackups")
+  @list
   listByResourceGroupLocation is ArmProviderActionSync<
     Response = ResourceListResult<ManagedInstanceLongTermRetentionBackup>,
     Scope = Extension.ResourceGroup,
@@ -354,6 +361,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
   @autoRoute
   @get
   @action("longTermRetentionManagedInstanceBackups")
+  @list
   listByResourceGroupInstance is ArmProviderActionSync<
     Response = ResourceListResult<ManagedInstanceLongTermRetentionBackup>,
     Scope = Extension.ResourceGroup,
@@ -412,6 +420,7 @@ interface SyncGroupsOperationGroup {
   @autoRoute
   @get
   @action("syncDatabaseIds")
+  @list
   listSyncDatabaseIds is ArmProviderActionSync<
     Response = SyncDatabaseIdListResult,
     Scope = SubscriptionActionScope,

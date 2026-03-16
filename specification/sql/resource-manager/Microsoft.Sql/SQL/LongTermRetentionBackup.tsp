@@ -96,7 +96,8 @@ interface LongTermRetentionBackups {
        */
       @query("databaseState")
       databaseState?: DatabaseState;
-    }
+    },
+    Response = LongTermRetentionBackupListResult
   >;
 
   /**
@@ -105,7 +106,8 @@ interface LongTermRetentionBackups {
   changeAccessTier is LongTermRetentionBackupOps.ActionAsync<
     LongTermRetentionBackup,
     ChangeLongTermRetentionBackupAccessTierParameters,
-    ArmResponse<LongTermRetentionBackup>
+    Result = void,
+    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -114,7 +116,8 @@ interface LongTermRetentionBackups {
   copy is LongTermRetentionBackupOps.ActionAsync<
     LongTermRetentionBackup,
     CopyLongTermRetentionBackupParameters,
-    ArmResponse<LongTermRetentionBackupOperationResult>
+    void,
+    Response = ArmResponse<LongTermRetentionBackupOperationResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackupOperationResult>>
   >;
 
   /**
@@ -123,7 +126,8 @@ interface LongTermRetentionBackups {
   lockTimeBasedImmutability is LongTermRetentionBackupOps.ActionAsync<
     LongTermRetentionBackup,
     void,
-    ArmResponse<LongTermRetentionBackup>
+    void,
+    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -132,7 +136,8 @@ interface LongTermRetentionBackups {
   removeLegalHoldImmutability is LongTermRetentionBackupOps.ActionAsync<
     LongTermRetentionBackup,
     void,
-    ArmResponse<LongTermRetentionBackup>
+    void,
+    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -141,7 +146,8 @@ interface LongTermRetentionBackups {
   removeTimeBasedImmutability is LongTermRetentionBackupOps.ActionAsync<
     LongTermRetentionBackup,
     void,
-    ArmResponse<LongTermRetentionBackup>
+    void,
+    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -150,7 +156,8 @@ interface LongTermRetentionBackups {
   setLegalHoldImmutability is LongTermRetentionBackupOps.ActionAsync<
     LongTermRetentionBackup,
     void,
-    ArmResponse<LongTermRetentionBackup>
+    void,
+    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -159,7 +166,8 @@ interface LongTermRetentionBackups {
   update is LongTermRetentionBackupOps.ActionAsync<
     LongTermRetentionBackup,
     UpdateLongTermRetentionBackupParameters,
-    ArmResponse<LongTermRetentionBackupOperationResult>
+    void,
+    Response = ArmResponse<LongTermRetentionBackupOperationResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackupOperationResult>>
   >;
 }
 alias LongTermRetentionBackupOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -235,7 +243,8 @@ interface LongTermRetentionBackupOperationGroup {
        */
       @query("databaseState")
       databaseState?: DatabaseState;
-    }
+    },
+    Response = LongTermRetentionBackupListResult
   >;
 
   /**
@@ -247,7 +256,8 @@ interface LongTermRetentionBackupOperationGroup {
   changeAccessTierByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
     ChangeLongTermRetentionBackupAccessTierParameters,
-    ArmResponse<LongTermRetentionBackup>
+    void,
+    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -259,7 +269,8 @@ interface LongTermRetentionBackupOperationGroup {
   copyByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
     CopyLongTermRetentionBackupParameters,
-    ArmResponse<LongTermRetentionBackupOperationResult>
+    void,
+    Response = ArmResponse<LongTermRetentionBackupOperationResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackupOperationResult>>
   >;
 
   /**
@@ -271,7 +282,8 @@ interface LongTermRetentionBackupOperationGroup {
   lockTimeBasedImmutabilityByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
     void,
-    ArmResponse<LongTermRetentionBackup>
+    void,
+    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -283,7 +295,8 @@ interface LongTermRetentionBackupOperationGroup {
   removeLegalHoldImmutabilityByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
     void,
-    ArmResponse<LongTermRetentionBackup>
+    void,
+    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -295,7 +308,8 @@ interface LongTermRetentionBackupOperationGroup {
   removeTimeBasedImmutabilityByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
     void,
-    ArmResponse<LongTermRetentionBackup>
+    void,
+    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -307,7 +321,8 @@ interface LongTermRetentionBackupOperationGroup {
   setLegalHoldImmutabilityByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
     void,
-    ArmResponse<LongTermRetentionBackup>
+    void,
+    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -319,7 +334,8 @@ interface LongTermRetentionBackupOperationGroup {
   updateByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
     UpdateLongTermRetentionBackupParameters,
-    ArmResponse<LongTermRetentionBackupOperationResult>
+    void,
+    Response = ArmResponse<LongTermRetentionBackupOperationResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackupOperationResult>>
   >;
 }
 

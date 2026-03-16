@@ -24,18 +24,40 @@ model InstanceFailoverGroup
   >;
 }
 
+alias InstanceFailoverGroupsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the region where the resource is located. */
+    @path
+    @segment("locations")
+    @key
+    locationName: string;
+  },
+  {
+    /** The name of the failover group. */
+    @path
+    @segment("instanceFailoverGroups")
+    @key
+    failoverGroupName: string;
+  }
+>;
+
 @armResourceOperations
 interface InstanceFailoverGroups {
   /**
    * Gets a failover group.
    */
-  get is ArmResourceRead<InstanceFailoverGroup>;
+  get is InstanceFailoverGroupsOps.Read<InstanceFailoverGroup>;
 
   /**
    * Creates or updates a failover group.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is InstanceFailoverGroupsOps.CreateOrUpdateAsync<
     InstanceFailoverGroup,
     Response = ArmResourceUpdatedResponse<InstanceFailoverGroup> | ArmResourceCreatedResponse<
       InstanceFailoverGroup,
@@ -48,7 +70,7 @@ interface InstanceFailoverGroups {
    * Deletes a failover group.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is InstanceFailoverGroupsOps.DeleteWithoutOkAsync<
     InstanceFailoverGroup,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -56,24 +78,26 @@ interface InstanceFailoverGroups {
   /**
    * Lists the failover groups in a location.
    */
-  listByLocation is ArmResourceListByParent<InstanceFailoverGroup>;
+  listByLocation is InstanceFailoverGroupsOps.List<InstanceFailoverGroup>;
 
   /**
    * Fails over from the current primary managed instance to this managed instance.
    */
-  failover is ArmResourceActionAsync<
+  failover is InstanceFailoverGroupsOps.ActionAsync<
     InstanceFailoverGroup,
     void,
-    ArmResponse<InstanceFailoverGroup>
+    void,
+    Response = InstanceFailoverGroup
   >;
 
   /**
    * Fails over from the current primary managed instance to this managed instance. This operation might result in data loss.
    */
-  forceFailoverAllowDataLoss is ArmResourceActionAsync<
+  forceFailoverAllowDataLoss is InstanceFailoverGroupsOps.ActionAsync<
     InstanceFailoverGroup,
     void,
-    ArmResponse<InstanceFailoverGroup>
+    void,
+    Response = InstanceFailoverGroup
   >;
 }
 

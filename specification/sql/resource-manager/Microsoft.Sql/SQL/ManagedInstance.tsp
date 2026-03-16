@@ -169,7 +169,7 @@ interface ManagedInstances {
   refreshStatus is ArmResourceActionAsync<
     ManagedInstance,
     void,
-    ArmResponse<RefreshExternalGovernanceStatusOperationResultMI>
+    Response = RefreshExternalGovernanceStatusOperationResultMI
   >;
 
   /**
@@ -178,7 +178,7 @@ interface ManagedInstances {
   start is ArmResourceActionAsync<
     ManagedInstance,
     void,
-    ArmResponse<ManagedInstance>
+    Response = ManagedInstance
   >;
 
   /**
@@ -187,7 +187,7 @@ interface ManagedInstances {
   stop is ArmResourceActionAsync<
     ManagedInstance,
     void,
-    ArmResponse<ManagedInstance>
+    Response = ManagedInstance
   >;
 
   /**

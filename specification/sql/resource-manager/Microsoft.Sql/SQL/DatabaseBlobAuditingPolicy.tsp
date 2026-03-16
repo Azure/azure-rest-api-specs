@@ -14,13 +14,12 @@ namespace Microsoft.Sql;
 /**
  * A database blob auditing policy.
  */
-@singleton("default")
 @parentResource(Database)
 model DatabaseBlobAuditingPolicy
   is Azure.ResourceManager.ProxyResource<DatabaseBlobAuditingPolicyProperties> {
   ...ResourceNameParameter<
     Resource = DatabaseBlobAuditingPolicy,
-    KeyName = "auditingSetting",
+    KeyName = "blobAuditingPolicyName",
     SegmentName = "auditingSettings",
     NamePattern = ""
   >;
@@ -33,22 +32,50 @@ model DatabaseBlobAuditingPolicy
   kind?: string;
 }
 
+alias DatabaseBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the server. */
+    @path
+    @segment("servers")
+    @key
+    serverName: string;
+
+    /** The name of the database. */
+    @path
+    @segment("databases")
+    @key
+    databaseName: string;
+  },
+  {
+    /** The name of the blob auditing policy. */
+    @path
+    @segment("auditingSettings")
+    @key
+    blobAuditingPolicyName: BlobAuditingPolicyName;
+  }
+>;
+
 @armResourceOperations
 interface DatabaseBlobAuditingPolicies {
   /**
    * Gets a database's blob auditing policy.
    */
-  get is ArmResourceRead<DatabaseBlobAuditingPolicy>;
+  get is DatabaseBlobAuditingPoliciesOps.Read<DatabaseBlobAuditingPolicy>;
 
   /**
    * Creates or updates a database's blob auditing policy.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<DatabaseBlobAuditingPolicy>;
+  createOrUpdate is DatabaseBlobAuditingPoliciesOps.CreateOrUpdateSync<DatabaseBlobAuditingPolicy>;
 
   /**
    * Lists auditing settings of a database.
    */
-  listByDatabase is ArmResourceListByParent<DatabaseBlobAuditingPolicy>;
+  listByDatabase is DatabaseBlobAuditingPoliciesOps.List<DatabaseBlobAuditingPolicy>;
 }
 
 @@doc(DatabaseBlobAuditingPolicy.name, "");

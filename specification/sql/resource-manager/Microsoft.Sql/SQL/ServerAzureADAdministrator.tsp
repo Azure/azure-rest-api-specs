@@ -58,7 +58,10 @@ interface ServerAzureADAdministrators {
   /**
    * Gets a list of Azure Active Directory administrators in a server.
    */
-  listByServer is ArmResourceListByParent<ServerAzureADAdministrator>;
+  listByServer is ArmResourceListByParent<
+    ServerAzureADAdministrator,
+    Response = AdministratorListResult
+  >;
 }
 
 @@doc(ServerAzureADAdministrator.name,

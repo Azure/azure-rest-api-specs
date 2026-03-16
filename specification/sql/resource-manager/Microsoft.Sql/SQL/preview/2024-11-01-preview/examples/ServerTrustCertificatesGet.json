@@ -1,23 +1,25 @@
 {
   "parameters": {
-    "subscriptionId": "38e0dc56-907f-45ba-a97c-74233baad471",
-    "resourceGroupName": "testrg",
-    "managedInstanceName": "testcl",
+    "api-version": "2024-11-01-preview",
     "certificateName": "customerCertificateName",
-    "api-version": "2024-11-01-preview"
+    "managedInstanceName": "testcl",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "38e0dc56-907f-45ba-a97c-74233baad471"
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "publicBlob": "308203B23082021AA003020102021034C597BA",
-          "thumbprint": "57CFA9CF16F2FB2775AF059A95C6D5B897DA2C05",
-          "certificateName": "customerCertificateName"
-        },
-        "id": "/subscriptions/38e0dc56-907f-45ba-a97c-74233baad471/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/serverTrustCertificates/customerCertificateName",
         "name": "customerCertificateName",
-        "type": "Microsoft.Sql/managedInstances/serverTrustCertificates"
+        "type": "Microsoft.Sql/managedInstances/serverTrustCertificates",
+        "id": "/subscriptions/38e0dc56-907f-45ba-a97c-74233baad471/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/serverTrustCertificates/customerCertificateName",
+        "properties": {
+          "certificateName": "customerCertificateName",
+          "publicBlob": "308203B23082021AA003020102021034C597BA",
+          "thumbprint": "57CFA9CF16F2FB2775AF059A95C6D5B897DA2C05"
+        }
       }
     }
-  }
+  },
+  "operationId": "ServerTrustCertificates_Get",
+  "title": "Gets server trust certificate."
 }

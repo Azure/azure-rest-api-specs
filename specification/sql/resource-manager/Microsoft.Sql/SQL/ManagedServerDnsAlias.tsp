@@ -66,7 +66,7 @@ interface ManagedServerDnsAliases {
   acquire is ArmResourceActionAsync<
     ManagedServerDnsAlias,
     ManagedServerDnsAliasAcquisition,
-    ArmResponse<ManagedServerDnsAlias>
+    Response = ManagedServerDnsAlias
   >;
 }
 

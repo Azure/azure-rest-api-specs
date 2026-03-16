@@ -1,10 +1,7 @@
 {
   "parameters": {
-    "subscriptionId": "c3aa9078-0000-0000-0000-e36f151182d7",
-    "resourceGroupName": "default-sql-onebox",
-    "serverName": "testsvr11",
-    "databaseName": "db1",
     "api-version": "2024-11-01-preview",
+    "databaseName": "db1",
     "parameters": {
       "properties": {
         "desiredState": "Auto",
@@ -20,35 +17,38 @@
           }
         }
       }
-    }
+    },
+    "resourceGroupName": "default-sql-onebox",
+    "serverName": "testsvr11",
+    "subscriptionId": "c3aa9078-0000-0000-0000-e36f151182d7"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/c3aa9078-0000-0000-0000-e36f151182d7/resourceGroups/default-sql-onebox/providers/Microsoft.Sql/servers/testsvr11/databases/db1/automaticTuning/current",
         "name": "current",
         "type": "Microsoft.Sql/servers/databases/automaticTuning",
+        "id": "/subscriptions/c3aa9078-0000-0000-0000-e36f151182d7/resourceGroups/default-sql-onebox/providers/Microsoft.Sql/servers/testsvr11/databases/db1/automaticTuning/current",
         "properties": {
-          "desiredState": "Auto",
           "actualState": "Auto",
+          "desiredState": "Auto",
           "options": {
-            "forceLastGoodPlan": {
-              "desiredState": "Default",
+            "createIndex": {
+              "actualState": "Off",
+              "desiredState": "Off"
+            },
+            "dropIndex": {
               "actualState": "On",
+              "desiredState": "On"
+            },
+            "forceLastGoodPlan": {
+              "actualState": "On",
+              "desiredState": "Default",
               "reasonCode": 2,
               "reasonDesc": "AutoConfigured"
             },
-            "createIndex": {
-              "desiredState": "Off",
-              "actualState": "Off"
-            },
-            "dropIndex": {
-              "desiredState": "On",
-              "actualState": "On"
-            },
             "maintainIndex": {
-              "desiredState": "Default",
               "actualState": "Off",
+              "desiredState": "Default",
               "reasonCode": 2,
               "reasonDesc": "AutoConfigured"
             }
@@ -56,5 +56,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "DatabaseAutomaticTuning_Update",
+  "title": "Updates database automatic tuning settings with all properties"
 }

@@ -24,18 +24,40 @@ model ServerTrustGroup
   >;
 }
 
+alias ServerTrustGroupsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the region where the resource is located. */
+    @path
+    @segment("locations")
+    @key
+    locationName: string;
+  },
+  {
+    /** The name of the server trust group. */
+    @path
+    @segment("serverTrustGroups")
+    @key
+    serverTrustGroupName: string;
+  }
+>;
+
 @armResourceOperations
 interface ServerTrustGroups {
   /**
    * Gets a server trust group.
    */
-  get is ArmResourceRead<ServerTrustGroup>;
+  get is ServerTrustGroupsOps.Read<ServerTrustGroup>;
 
   /**
    * Creates or updates a server trust group.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ServerTrustGroupsOps.CreateOrUpdateAsync<
     ServerTrustGroup,
     Response = ArmResourceUpdatedResponse<ServerTrustGroup> | ArmResourceCreatedResponse<
       ServerTrustGroup,
@@ -48,7 +70,7 @@ interface ServerTrustGroups {
    * Deletes a server trust group.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ServerTrustGroupsOps.DeleteWithoutOkAsync<
     ServerTrustGroup,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -56,7 +78,7 @@ interface ServerTrustGroups {
   /**
    * Lists a server trust group.
    */
-  listByLocation is ArmResourceListByParent<ServerTrustGroup>;
+  listByLocation is ServerTrustGroupsOps.List<ServerTrustGroup>;
 }
 
 @@doc(ServerTrustGroup.name, "The name of the server trust group.");
