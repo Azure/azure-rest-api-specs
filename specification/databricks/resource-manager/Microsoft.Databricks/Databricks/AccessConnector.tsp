@@ -24,16 +24,18 @@ model AccessConnector
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AccessConnectors {
   /**
    * Gets an Azure Databricks Access Connector.
    */
+  @tag("AccessConnector")
   get is ArmResourceRead<AccessConnector>;
 
   /**
    * Creates or updates Azure Databricks Access Connector.
    */
+  @tag("AccessConnector")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AccessConnector,
     LroHeaders = ArmLroLocationHeader<FinalResult = AccessConnector> &
@@ -43,6 +45,7 @@ interface AccessConnectors {
   /**
    * Updates an Azure Databricks Access Connector.
    */
+  @tag("AccessConnector")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AccessConnector,
@@ -53,6 +56,7 @@ interface AccessConnectors {
    * Deletes the Azure Databricks Access Connector.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("AccessConnector")
   delete is ArmResourceDeleteWithoutOkAsync<
     AccessConnector,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -61,11 +65,13 @@ interface AccessConnectors {
   /**
    * Gets all the Azure Databricks Access Connectors within a resource group.
    */
+  @tag("AccessConnector")
   listByResourceGroup is ArmResourceListByParent<AccessConnector>;
 
   /**
    * Gets all the Azure Databricks Access Connectors within a subscription.
    */
+  @tag("AccessConnector")
   listBySubscription is ArmListBySubscription<AccessConnector>;
 }
 

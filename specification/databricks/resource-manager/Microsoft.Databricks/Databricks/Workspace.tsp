@@ -29,16 +29,18 @@ model Workspace
   sku?: Sku;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Workspaces {
   /**
    * Gets the workspace.
    */
+  @tag("Workspaces")
   get is ArmResourceRead<Workspace>;
 
   /**
    * Creates a new workspace.
    */
+  @tag("Workspaces")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
     LroHeaders = ArmLroLocationHeader<FinalResult = Workspace> &
@@ -48,6 +50,7 @@ interface Workspaces {
   /**
    * Updates a workspace.
    */
+  @tag("Workspaces")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Workspace, PatchModel = WorkspaceUpdate>;
 
@@ -55,6 +58,7 @@ interface Workspaces {
    * Deletes the workspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("Workspaces")
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = {
@@ -62,7 +66,7 @@ interface Workspaces {
        * Optional parameter to retain default unity catalog data. By default the data will retained if Uc is enabled on the workspace.
        */
       @query("forceDeletion")
-      forceDeletion?: boolean;
+      forceDeletion?: boolean = false;
     },
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -70,24 +74,28 @@ interface Workspaces {
   /**
    * Gets all the workspaces within a resource group.
    */
+  @tag("Workspaces")
   listByResourceGroup is ArmResourceListByParent<Workspace>;
 
   /**
    * Gets all the workspaces within a subscription.
    */
+  @tag("Workspaces")
   listBySubscription is ArmListBySubscription<Workspace>;
 
   /**
    * Gets the list of endpoints that VNET Injected Workspace calls Azure Databricks Control Plane. You must configure outbound access with these endpoints. For more information, see https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("OutboundNetworkDependenciesEndpoints")
+  @summary("Gets a list of egress endpoints (network endpoints of all outbound dependencies) in the specified Workspace.")
   @operationId("OutboundNetworkDependenciesEndpoints_List")
   @get
   @action("outboundNetworkDependenciesEndpoints")
   list is ArmResourceActionSync<
     Workspace,
     void,
-    ArmResponse<OutboundEnvironmentEndpoint[]>
+    ArmResponse<OutboundEnvironmentEndpointCollection>
   >;
 }
 

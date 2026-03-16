@@ -28,11 +28,13 @@ model PrivateEndpointConnection
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface PrivateEndpointConnections {
   /**
    * Get a private endpoint connection properties for a workspace
    */
+  @tag("PrivateEndpointConnections")
+  @summary("Get private endpoint connection")
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
@@ -40,20 +42,25 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @tag("PUT")
+  @tag("PrivateEndpointConnections")
+  @summary("Update private endpoint connection status")
   create is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: PrivateEndpointConnection;
-    }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader
+    })
   >;
 
   /**
    * Remove private endpoint connection with the specified name
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("DELETE")
+  @tag("PrivateEndpointConnections")
+  @summary("Remove private endpoint connection")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -62,6 +69,8 @@ interface PrivateEndpointConnections {
   /**
    * List private endpoint connections of the workspace
    */
+  @tag("PrivateEndpointConnections")
+  @summary("List private endpoint connections")
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionsList>

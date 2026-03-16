@@ -46,16 +46,25 @@
       "name": "Workspaces"
     },
     {
-      "name": "GroupIdInformations"
+      "name": "OutboundNetworkDependenciesEndpoints"
+    },
+    {
+      "name": "PrivateLinkResources"
     },
     {
       "name": "PrivateEndpointConnections"
     },
     {
-      "name": "VirtualNetworkPeerings"
+      "name": "PUT"
     },
     {
-      "name": "AccessConnectors"
+      "name": "DELETE"
+    },
+    {
+      "name": "vNetPeering"
+    },
+    {
+      "name": "AccessConnector"
     }
   ],
   "paths": {
@@ -99,7 +108,7 @@
       "get": {
         "operationId": "AccessConnectors_ListBySubscription",
         "tags": [
-          "AccessConnectors"
+          "AccessConnector"
         ],
         "description": "Gets all the Azure Databricks Access Connectors within a subscription.",
         "parameters": [
@@ -177,7 +186,7 @@
       "get": {
         "operationId": "AccessConnectors_ListByResourceGroup",
         "tags": [
-          "AccessConnectors"
+          "AccessConnector"
         ],
         "description": "Gets all the Azure Databricks Access Connectors within a resource group.",
         "parameters": [
@@ -219,7 +228,7 @@
       "get": {
         "operationId": "AccessConnectors_Get",
         "tags": [
-          "AccessConnectors"
+          "AccessConnector"
         ],
         "description": "Gets an Azure Databricks Access Connector.",
         "parameters": [
@@ -265,7 +274,7 @@
       "put": {
         "operationId": "AccessConnectors_CreateOrUpdate",
         "tags": [
-          "AccessConnectors"
+          "AccessConnector"
         ],
         "description": "Creates or updates Azure Databricks Access Connector.",
         "parameters": [
@@ -345,7 +354,7 @@
       "patch": {
         "operationId": "AccessConnectors_Update",
         "tags": [
-          "AccessConnectors"
+          "AccessConnector"
         ],
         "description": "Updates an Azure Databricks Access Connector.",
         "parameters": [
@@ -419,7 +428,7 @@
       "delete": {
         "operationId": "AccessConnectors_Delete",
         "tags": [
-          "AccessConnectors"
+          "AccessConnector"
         ],
         "description": "Deletes the Azure Databricks Access Connector.",
         "parameters": [
@@ -784,7 +793,8 @@
             "in": "query",
             "description": "Optional parameter to retain default unity catalog data. By default the data will retained if Uc is enabled on the workspace.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -833,8 +843,9 @@
       "get": {
         "operationId": "OutboundNetworkDependenciesEndpoints_List",
         "tags": [
-          "Workspaces"
+          "OutboundNetworkDependenciesEndpoints"
         ],
+        "summary": "Gets a list of egress endpoints (network endpoints of all outbound dependencies) in the specified Workspace.",
         "description": "Gets the list of endpoints that VNET Injected Workspace calls Azure Databricks Control Plane. You must configure outbound access with these endpoints. For more information, see https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr",
         "parameters": [
           {
@@ -860,10 +871,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-              }
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
             }
           },
           "default": {
@@ -886,6 +894,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
+        "summary": "List private endpoint connections",
         "description": "List private endpoint connections of the workspace",
         "parameters": [
           {
@@ -937,6 +946,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
+        "summary": "Get private endpoint connection",
         "description": "Get a private endpoint connection properties for a workspace",
         "parameters": [
           {
@@ -988,8 +998,10 @@
       "put": {
         "operationId": "PrivateEndpointConnections_Create",
         "tags": [
+          "PUT",
           "PrivateEndpointConnections"
         ],
+        "summary": "Update private endpoint connection status",
         "description": "Update the status of a private endpoint connection with the specified name",
         "parameters": [
           {
@@ -1064,15 +1076,18 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/PrivateEndpointConnection"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "PrivateEndpointConnections_Delete",
         "tags": [
+          "DELETE",
           "PrivateEndpointConnections"
         ],
+        "summary": "Remove private endpoint connection",
         "description": "Remove private endpoint connection with the specified name",
         "parameters": [
           {
@@ -1144,8 +1159,9 @@
       "get": {
         "operationId": "PrivateLinkResources_List",
         "tags": [
-          "GroupIdInformations"
+          "PrivateLinkResources"
         ],
+        "summary": "List private link resources",
         "description": "List private link resources for a given workspace",
         "parameters": [
           {
@@ -1195,8 +1211,9 @@
       "get": {
         "operationId": "PrivateLinkResources_Get",
         "tags": [
-          "GroupIdInformations"
+          "PrivateLinkResources"
         ],
+        "summary": "Get the specified private link resource",
         "description": "Get the specified private link resource for the given group id (sub-resource)",
         "parameters": [
           {
@@ -1250,7 +1267,7 @@
       "get": {
         "operationId": "vNetPeering_ListByWorkspace",
         "tags": [
-          "VirtualNetworkPeerings"
+          "vNetPeering"
         ],
         "description": "Lists the workspace vNet Peerings.",
         "parameters": [
@@ -1301,7 +1318,7 @@
       "get": {
         "operationId": "vNetPeering_Get",
         "tags": [
-          "VirtualNetworkPeerings"
+          "vNetPeering"
         ],
         "description": "Gets the workspace vNet Peering.",
         "parameters": [
@@ -1357,7 +1374,7 @@
       "put": {
         "operationId": "vNetPeering_CreateOrUpdate",
         "tags": [
-          "VirtualNetworkPeerings"
+          "vNetPeering"
         ],
         "description": "Creates vNet Peering for workspace.",
         "parameters": [
@@ -1441,7 +1458,7 @@
       "delete": {
         "operationId": "vNetPeering_Delete",
         "tags": [
-          "VirtualNetworkPeerings"
+          "vNetPeering"
         ],
         "description": "Deletes the workspace vNetPeering.",
         "parameters": [
@@ -2167,6 +2184,13 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "type": "array",
+      "description": "Collection of outbound network dependency endpoints",
+      "items": {
+        "$ref": "#/definitions/OutboundEnvironmentEndpoint"
       }
     },
     "PeeringProvisioningState": {

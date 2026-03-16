@@ -645,6 +645,7 @@ model WorkspaceCustomStringParameter {
 /**
  * The value which should be used for this field.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing model from original swagger"
 model WorkspaceNoPublicIPBooleanParameter {
   /**
    * The type of variable that this is
@@ -699,6 +700,7 @@ model Encryption {
   /**
    * The name of KeyVault key.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
   KeyName?: string;
 
   /**
@@ -724,6 +726,7 @@ model WorkspaceCustomObjectParameter {
   /**
    * The value which should be used for this field.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing property from original swagger"
   value: unknown;
 }
 
@@ -1134,6 +1137,7 @@ model ErrorInfo {
   /**
    * error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Existing property from original swagger"
   details?: ErrorDetail[];
 
   /**
@@ -1165,6 +1169,7 @@ model ErrorDetail {
 /**
  * An update to a workspace.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Existing model from original swagger"
 model WorkspaceUpdate {
   /**
    * Resource tags.
@@ -1260,6 +1265,13 @@ model OutboundEnvironmentEndpoint {
   @identifiers(#[])
   endpoints?: EndpointDependency[];
 }
+
+/**
+ * Collection of outbound network dependency endpoints
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing model from original swagger"
+@identifiers(#[])
+model OutboundEnvironmentEndpointCollection is OutboundEnvironmentEndpoint[];
 
 /**
  * A domain name or IP address the Workspace is reaching at.

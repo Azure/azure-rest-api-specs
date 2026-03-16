@@ -28,12 +28,13 @@ model VirtualNetworkPeering
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface VirtualNetworkPeerings {
   /**
    * Gets the workspace vNet Peering.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("vNetPeering")
   @operationId("vNetPeering_Get")
   get is ArmResourceRead<
     VirtualNetworkPeering,
@@ -44,6 +45,7 @@ interface VirtualNetworkPeerings {
    * Creates vNet Peering for workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("vNetPeering")
   @operationId("vNetPeering_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualNetworkPeering,
@@ -56,6 +58,7 @@ interface VirtualNetworkPeerings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("vNetPeering")
   @operationId("vNetPeering_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkPeering,
@@ -66,6 +69,7 @@ interface VirtualNetworkPeerings {
    * Lists the workspace vNet Peerings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("vNetPeering")
   @operationId("vNetPeering_ListByWorkspace")
   listByWorkspace is ArmResourceListByParent<
     VirtualNetworkPeering,
