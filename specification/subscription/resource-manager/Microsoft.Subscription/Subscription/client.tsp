@@ -7,15 +7,15 @@ namespace Microsoft.Subscription;
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
 
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.cancel,
-  "SubscriptionOperation",
+  "Subscriptions",
   "java"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.rename,
-  "SubscriptionOperation",
+  "Subscriptions",
   "java"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.enable,
-  "SubscriptionOperation",
+  "Subscriptions",
   "java"
 );
 @@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnership,
