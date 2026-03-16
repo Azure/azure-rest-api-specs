@@ -162,6 +162,10 @@ using Microsoft.EventHub;
 @@clientName(ErrorAdditionalInfo, "EventHubsErrorAdditionalInfo", "csharp");
 @@clientName(ErrorResponse, "EventHubsErrorResponse", "csharp");
 @@clientName(TlsVersion, "EventHubsTlsVersion", "csharp");
+@@clientName(TlsVersion.`1.0`, "Tls1_0", "csharp");
+@@clientName(TlsVersion.`1.1`, "Tls1_1", "csharp");
+@@clientName(TlsVersion.`1.2`, "Tls1_2", "csharp");
+@@clientName(TlsVersion.`1.3`, "Tls1_3", "csharp");
 @@clientName(PublicNetworkAccess, "EventHubsPublicNetworkAccess", "csharp");
 @@clientName(ProvisioningIssueProperties,
   "EventHubsProvisioningIssueProperties",
