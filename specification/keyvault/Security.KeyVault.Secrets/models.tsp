@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace KeyVault;
 
@@ -343,6 +345,20 @@ model SecretRestoreParameters {
   @encodedName("application/json", "value")
   @encode("base64url")
   secretBundleBackup: bytes;
+}
+
+/**
+ * The media type (MIME type).
+ */
+@added(KeyVault.Versions.v2025_06_01_preview)
+union ContentType {
+  string,
+
+  /** The PKCS#12 file format. */
+  PFX: "application/x-pkcs12",
+
+  /** The PEM file format. */
+  PEM: "application/x-pem-file",
 }
 
 /**
