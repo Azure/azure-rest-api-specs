@@ -127,6 +127,5 @@ interface Applications {
 /** The resource provisioning state. */
 union ProvisioningState {
   ResourceProvisioningState,
-
   string,
 }
