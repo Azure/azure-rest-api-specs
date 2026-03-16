@@ -6,7 +6,7 @@ This is the AutoRest configuration file for Azure Prompt Service.
 
 ## Getting Started
 
-To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+To build the SDKs for Azure Prompt Service (Prompt Service RP), simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
 
