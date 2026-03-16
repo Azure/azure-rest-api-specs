@@ -48,7 +48,7 @@ model AgentProperties {
    * The provisioning state of the agent.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: ResourceProvisioningState;
 }
 
 /**
