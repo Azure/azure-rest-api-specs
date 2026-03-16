@@ -9,10 +9,6 @@ namespace Microsoft.HealthcareApis;
   "HealthcareApisManagementClient",
   "python,javascript"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
-  "ArmUserAssignedIdentity",
-  "python"
-);
 @@clientName(ServiceManagedIdentityIdentity,
   "ServiceManagedIdentity",
   "python"
