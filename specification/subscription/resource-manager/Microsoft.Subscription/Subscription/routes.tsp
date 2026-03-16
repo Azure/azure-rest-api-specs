@@ -108,7 +108,7 @@ interface SubscriptionsOperationGroup {
   @autoRoute
   @action("acceptChangeTenant")
   acceptTargetDirectory is ArmProviderActionSync<Parameters = {
-    ...SubscriptionIdParameter;
+    ...SubscriptionIdPathParameter;
   }>;
   /**
    * The operation for Acceptor to view the accepted request
@@ -118,7 +118,7 @@ interface SubscriptionsOperationGroup {
   targetDirectoryStatus is ArmProviderActionSync<
     Response = TargetDirectoryResultProperties,
     Parameters = {
-      ...SubscriptionIdParameter;
+      ...SubscriptionIdPathParameter;
     }
   >;
 }
