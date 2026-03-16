@@ -24,10 +24,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(AnalyzeDocumentsLROTask.taskName, "Name", "csharp");
 
-@@clientName(PiiCategories.ABARoutingNumber,
-  "AbaRoutingNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.ABARoutingNumber, "AbaRoutingNumber", "csharp");
 @@clientName(PiiCategories.ARNationalIdentityNumber,
   "ArNationalIdentityNumber",
   "csharp"
@@ -44,15 +41,9 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AuMedicalAccountNumber",
   "csharp"
 );
-@@clientName(PiiCategories.AUPassportNumber,
-  "AuPassportNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.AUPassportNumber, "AuPassportNumber", "csharp");
 @@clientName(PiiCategories.AUTaxFileNumber, "AuTaxFileNumber", "csharp");
-@@clientName(PiiCategories.AUBusinessNumber,
-  "AuBusinessNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.AUBusinessNumber, "AuBusinessNumber", "csharp");
 @@clientName(PiiCategories.AUCompanyNumber, "AuCompanyNumber", "csharp");
 @@clientName(PiiCategories.ATIdentityCard, "AtIdentityCard", "csharp");
 @@clientName(PiiCategories.ATTaxIdentificationNumber,
@@ -72,14 +63,8 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(PiiCategories.AzureSAS, "AzureSas", "csharp");
-@@clientName(PiiCategories.BENationalNumber,
-  "BeNationalNumber",
-  "csharp"
-);
-@@clientName(PiiCategories.BENationalNumberV2,
-  "BeNationalNumberV2",
-  "csharp"
-);
+@@clientName(PiiCategories.BENationalNumber, "BeNationalNumber", "csharp");
+@@clientName(PiiCategories.BENationalNumberV2, "BeNationalNumberV2", "csharp");
 @@clientName(PiiCategories.BEValueAddedTaxNumber,
   "BeValueAddedTaxNumber",
   "csharp"
@@ -106,10 +91,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "CaHealthServiceNumber",
   "csharp"
 );
-@@clientName(PiiCategories.CAPassportNumber,
-  "CaPassportNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.CAPassportNumber, "CaPassportNumber", "csharp");
 @@clientName(PiiCategories.CAPersonalHealthIdentification,
   "CaPersonalHealthIdentification",
   "csharp"
@@ -130,10 +112,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "HrIdentityCardNumber",
   "csharp"
 );
-@@clientName(PiiCategories.HRNationalIDNumber,
-  "HrNationalIdNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.HRNationalIDNumber, "HrNationalIdNumber", "csharp");
 @@clientName(PiiCategories.HRPersonalIdentificationNumber,
   "HrPersonalIdentificationNumber",
   "csharp"
@@ -167,26 +146,17 @@ namespace Language.AnalyzeTextClientCustomizations;
   "EePersonalIdentificationCode",
   "csharp"
 );
-@@clientName(PiiCategories.EUDebitCardNumber,
-  "EuDebitCardNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.EUDebitCardNumber, "EuDebitCardNumber", "csharp");
 @@clientName(PiiCategories.EUDriversLicenseNumber,
   "EuDriversLicenseNumber",
   "csharp"
 );
-@@clientName(PiiCategories.EUGPSCoordinates,
-  "EuGpsCoordinates",
-  "csharp"
-);
+@@clientName(PiiCategories.EUGPSCoordinates, "EuGpsCoordinates", "csharp");
 @@clientName(PiiCategories.EUNationalIdentificationNumber,
   "EuNationalIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.EUPassportNumber,
-  "EuPassportNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.EUPassportNumber, "EuPassportNumber", "csharp");
 @@clientName(PiiCategories.EUSocialSecurityNumber,
   "EuSocialSecurityNumber",
   "csharp"
@@ -201,10 +171,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 @@clientName(PiiCategories.FINationalID, "FiNationalId", "csharp");
 @@clientName(PiiCategories.FINationalIDV2, "FiNationalIdV2", "csharp");
-@@clientName(PiiCategories.FIPassportNumber,
-  "FiPassportNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.FIPassportNumber, "FiPassportNumber", "csharp");
 @@clientName(PiiCategories.FRDriversLicenseNumber,
   "FrDriversLicenseNumber",
   "csharp"
@@ -214,10 +181,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(PiiCategories.FRNationalID, "FrNationalId", "csharp");
-@@clientName(PiiCategories.FRPassportNumber,
-  "FrPassportNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.FRPassportNumber, "FrPassportNumber", "csharp");
 @@clientName(PiiCategories.FRSocialSecurityNumber,
   "FrSocialSecurityNumber",
   "csharp"
@@ -234,10 +198,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "DeDriversLicenseNumber",
   "csharp"
 );
-@@clientName(PiiCategories.DEPassportNumber,
-  "DePassportNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.DEPassportNumber, "DePassportNumber", "csharp");
 @@clientName(PiiCategories.DEIdentityCardNumber,
   "DeIdentityCardNumber",
   "csharp"
@@ -246,14 +207,8 @@ namespace Language.AnalyzeTextClientCustomizations;
   "DeTaxIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.DEValueAddedNumber,
-  "DeValueAddedNumber",
-  "csharp"
-);
-@@clientName(PiiCategories.GRNationalIDCard,
-  "GrNationalIdCard",
-  "csharp"
-);
+@@clientName(PiiCategories.DEValueAddedNumber, "DeValueAddedNumber", "csharp");
+@@clientName(PiiCategories.GRNationalIDCard, "GrNationalIdCard", "csharp");
 @@clientName(PiiCategories.GRNationalIDV2, "GrNationalIdV2", "csharp");
 @@clientName(PiiCategories.GRTaxIdentificationNumber,
   "GrTaxIdentificationNumber",
@@ -263,10 +218,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "HkIdentityCardNumber",
   "csharp"
 );
-@@clientName(PiiCategories.HUValueAddedNumber,
-  "HuValueAddedNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.HUValueAddedNumber, "HuValueAddedNumber", "csharp");
 @@clientName(PiiCategories.HUPersonalIdentificationNumber,
   "HuPersonalIdentificationNumber",
   "csharp"
@@ -275,10 +227,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "HuTaxIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.INPermanentAccount,
-  "InPermanentAccount",
-  "csharp"
-);
+@@clientName(PiiCategories.INPermanentAccount, "InPermanentAccount", "csharp");
 @@clientName(PiiCategories.INUniqueIdentificationNumber,
   "InUniqueIdentificationNumber",
   "csharp"
@@ -317,10 +266,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "JpDriversLicenseNumber",
   "csharp"
 );
-@@clientName(PiiCategories.JPPassportNumber,
-  "JpPassportNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.JPPassportNumber, "JpPassportNumber", "csharp");
 @@clientName(PiiCategories.JPResidentRegistrationNumber,
   "JpResidentRegistrationNumber",
   "csharp"
@@ -333,10 +279,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "JpMyNumberCorporate",
   "csharp"
 );
-@@clientName(PiiCategories.JPMyNumberPersonal,
-  "JpMyNumberPersonal",
-  "csharp"
-);
+@@clientName(PiiCategories.JPMyNumberPersonal, "JpMyNumberPersonal", "csharp");
 @@clientName(PiiCategories.JPResidenceCardNumber,
   "JpResidenceCardNumber",
   "csharp"
@@ -396,10 +339,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "NzSocialWelfareNumber",
   "csharp"
 );
-@@clientName(PiiCategories.NOIdentityNumber,
-  "NoIdentityNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.NOIdentityNumber, "NoIdentityNumber", "csharp");
 @@clientName(PiiCategories.PHUnifiedMultiPurposeIDNumber,
   "PhUnifiedMultiPurposeIdNumber",
   "csharp"
@@ -407,10 +347,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(PiiCategories.PLIdentityCard, "PlIdentityCard", "csharp");
 @@clientName(PiiCategories.PLNationalID, "PlNationalId", "csharp");
 @@clientName(PiiCategories.PLNationalIDV2, "PlNationalIdV2", "csharp");
-@@clientName(PiiCategories.PLPassportNumber,
-  "PlPassportNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.PLPassportNumber, "PlPassportNumber", "csharp");
 @@clientName(PiiCategories.PLTaxIdentificationNumber,
   "PlTaxIdentificationNumber",
   "csharp"
@@ -445,10 +382,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "SgNationalRegistrationIdentityCardNumber",
   "csharp"
 );
-@@clientName(PiiCategories.SKPersonalNumber,
-  "SkPersonalNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.SKPersonalNumber, "SkPersonalNumber", "csharp");
 @@clientName(PiiCategories.SITaxIdentificationNumber,
   "SiTaxIdentificationNumber",
   "csharp"
@@ -480,10 +414,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 @@clientName(PiiCategories.SENationalID, "SeNationalId", "csharp");
 @@clientName(PiiCategories.SENationalIDV2, "SeNationalIdV2", "csharp");
-@@clientName(PiiCategories.SEPassportNumber,
-  "SePassportNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.SEPassportNumber, "SePassportNumber", "csharp");
 @@clientName(PiiCategories.SETaxIdentificationNumber,
   "SeTaxIdentificationNumber",
   "csharp"
@@ -494,10 +425,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(PiiCategories.TWNationalID, "TwNationalId", "csharp");
-@@clientName(PiiCategories.TWPassportNumber,
-  "TwPassportNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.TWPassportNumber, "TwPassportNumber", "csharp");
 @@clientName(PiiCategories.TWResidentCertificate,
   "TwResidentCertificate",
   "csharp"
@@ -530,10 +458,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "UkUniqueTaxpayerNumber",
   "csharp"
 );
-@@clientName(PiiCategories.USUKPassportNumber,
-  "UsUkPassportNumber",
-  "csharp"
-);
+@@clientName(PiiCategories.USUKPassportNumber, "UsUkPassportNumber", "csharp");
 @@clientName(PiiCategories.USBankAccountNumber,
   "UsBankAccountNumber",
   "csharp"
