@@ -42,22 +42,15 @@ namespace Microsoft.Subscription;
 @@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus::parameters.subscriptionId,
   SubscriptionOperationGroup.acceptOwnershipStatus
 );
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionsOperationGroup.acceptTargetDirectory::parameters.subscriptionId,
-  SubscriptionsOperationGroup.acceptTargetDirectory
-);
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionsOperationGroup.targetDirectoryStatus::parameters.subscriptionId,
-  SubscriptionsOperationGroup.targetDirectoryStatus
+
+@@Azure.ClientGenerator.Core.clientInitialization(SubscriptionsOperationGroup,
+  {
+    parameters: Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+  }
 );
 
-@@Azure.ClientGenerator.Core.clientLocation(Azure.ResourceManager.Foundations.SubscriptionBaseParameters.subscriptionId,
-  TargetDirectoryResults.deleteTargetDirectory
-);
-@@Azure.ClientGenerator.Core.clientLocation(Azure.ResourceManager.Foundations.SubscriptionBaseParameters.subscriptionId,
-  TargetDirectoryResults.getTargetDirectory
-);
-@@Azure.ClientGenerator.Core.clientLocation(Azure.ResourceManager.Foundations.SubscriptionBaseParameters.subscriptionId,
-  TargetDirectoryResults.listTargetDirectory
-);
-@@Azure.ClientGenerator.Core.clientLocation(Azure.ResourceManager.Foundations.SubscriptionBaseParameters.subscriptionId,
-  TargetDirectoryResults.putTargetDirectory
+@@Azure.ClientGenerator.Core.clientInitialization(TargetDirectoryResults,
+  {
+    parameters: Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+  }
 );
