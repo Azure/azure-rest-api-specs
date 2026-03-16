@@ -41,6 +41,9 @@ union ImageCategory {
 
   @doc("The harm category for Image - Violence.")
   "Violence",
+
+  @doc("The harm category for Image - ChildAbuse.")
+  "ChildAbuse",
 }
 
 @doc("The type of text analysis output.")
@@ -60,6 +63,9 @@ union AnalyzeImageOutputType {
 
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
   FourSeverityLevels: "FourSeverityLevels",
+
+  @doc("Output a boolean value indicating whether the content is harmful.")
+  Boolean: "Boolean",
 }
 
 @doc("The text analysis request.")
@@ -149,8 +155,11 @@ model ImageCategoriesAnalysis {
   @doc("The image analysis category.")
   category: ImageCategory;
 
-  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’, and the output value can be 0, 2, 4, 6.")
+  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be 'FourSeverityLevels', and the output value can be 0, 2, 4, 6. Not applicable to ChildAbuse category.")
   severity?: int32;
+
+  @doc("Whether the content is detected as harmful or not. The value of this field is determined by the output type specified in the request. The output type could be 'Boolean'. Always returned for ChildAbuse category.")
+  detected?: boolean;
 }
 
 @doc("Text Blocklist.")
