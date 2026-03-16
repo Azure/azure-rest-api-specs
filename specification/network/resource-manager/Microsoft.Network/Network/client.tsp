@@ -23,3 +23,7 @@ namespace CombineClient;
   "NetworkWatcherErrorResponse",
   "java"
 );
+@@clientName(Microsoft.Network.Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
+  "UserAssignedIdentity",
+  "java"
+);
