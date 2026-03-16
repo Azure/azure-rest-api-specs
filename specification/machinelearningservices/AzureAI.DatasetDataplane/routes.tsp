@@ -10,6 +10,18 @@ using Azure.Core.Foundations;
 
 namespace Microsoft.MachineLearningServices.DatasetDataplane;
 
+/** Common workspace path parameters. */
+model WorkspacePathParameters {
+  /** The Azure Subscription ID. */
+  @path subscriptionId: string;
+
+  /** The Name of the resource group in which the workspace is located. */
+  @path resourceGroupName: string;
+
+  /** The name of the workspace. */
+  @path workspaceName: string;
+}
+
 // ─── DataCall Interface (data/v2.0) ───
 
 interface DataCall {
@@ -20,14 +32,7 @@ interface DataCall {
   @post
   getPreviewForMLTable is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data call request. */
       @bodyRoot body: DataCallRequest;
@@ -42,14 +47,7 @@ interface DataCall {
   @post
   getQuickProfileForMLTable is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data call request. */
       @bodyRoot body: DataCallRequest;
@@ -64,14 +62,7 @@ interface DataCall {
   @post
   getSchemaForMLTable is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data call request. */
       @bodyRoot body: DataCallRequest;
@@ -89,14 +80,7 @@ interface DataContainerOps {
   @post
   createDataContainer is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data container to create. */
       @bodyRoot body: DataContainer;
@@ -108,17 +92,11 @@ interface DataContainerOps {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacontainer")
+  @list
   @get
   listDataContainer is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
     },
     PaginatedDataContainerEntityList
   >;
@@ -129,14 +107,7 @@ interface DataContainerOps {
   @get
   getDataContainer is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data container name. */
       @path name: string;
@@ -150,20 +121,10 @@ interface DataContainerOps {
   @patch(#{ implicitOptionality: true })
   modifyDataContainer is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data container name. */
       @path name: string;
-
-      /** The mutable properties to update. */
-      @header contentType: "application/json";
 
       /** Request body. */
       @bodyRoot body: DataContainerMutable;
@@ -177,14 +138,7 @@ interface DataContainerOps {
   @delete
   deleteDataContainer is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data container name. */
       @path name: string;
@@ -202,14 +156,7 @@ interface DataVersionOps {
   @post
   batchGetResolvedUris is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The batch request. */
       @bodyRoot body: BatchGetResolvedURIs;
@@ -223,14 +170,7 @@ interface DataVersionOps {
   @post
   createUnregisteredInputData is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The unregistered input data to create. */
       @bodyRoot body: CreateUnregisteredInputData;
@@ -244,14 +184,7 @@ interface DataVersionOps {
   @post
   createUnregisteredOutputData is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The unregistered output data to create. */
       @bodyRoot body: CreateUnregisteredOutputData;
@@ -265,14 +198,7 @@ interface DataVersionOps {
   @post
   getByAssetId is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The asset ID. */
       @bodyRoot body: AssetId;
@@ -286,14 +212,7 @@ interface DataVersionOps {
   @post
   registerExistingData is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The register existing data request. */
       @bodyRoot body: RegisterExistingData;
@@ -307,14 +226,7 @@ interface DataVersionOps {
   @post
   create is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data container name. */
       @path name: string;
@@ -329,17 +241,11 @@ interface DataVersionOps {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/{name}/versions")
+  @list
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data container name. */
       @path name: string;
@@ -359,14 +265,7 @@ interface DataVersionOps {
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data container name. */
       @path name: string;
@@ -383,23 +282,13 @@ interface DataVersionOps {
   @patch(#{ implicitOptionality: true })
   modify is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data container name. */
       @path name: string;
 
       /** The data version. */
       @path version: string;
-
-      /** The mutable properties to update. */
-      @header contentType: "application/json";
 
       /** Request body. */
       @bodyRoot body: DataVersionMutable;
@@ -413,14 +302,7 @@ interface DataVersionOps {
   @delete
   deleteVersion is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data container name. */
       @path name: string;
@@ -438,14 +320,7 @@ interface DataVersionOps {
   @get
   exists is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The data container name. */
       @path name: string;
@@ -464,17 +339,11 @@ interface DatasetsV1 {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets")
+  @list
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** Dataset names to filter by. */
       @query datasetNames?: string[];
@@ -489,7 +358,10 @@ interface DatasetsV1 {
       @query status?: string;
 
       /** Continuation token for pagination. */
-      @query continuationToken?: string;
+      @continuationToken
+      @continuationToken
+      @query
+      continuationToken?: string;
 
       /** Page size. */
       @query pageSize?: int32;
@@ -515,14 +387,7 @@ interface DatasetsV1 {
   @post
   register is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** Register as pending. */
       @query registerAsPending?: boolean;
@@ -551,14 +416,7 @@ interface DatasetsV1 {
   @delete
   deleteAllDatasets is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
     },
     void
   >;
@@ -569,14 +427,7 @@ interface DatasetsV1 {
   @get
   getDatasetByName is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset name. */
       @path datasetName: string;
@@ -597,14 +448,7 @@ interface DatasetsV1 {
   @put
   updateDataset is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset ID. */
       @path datasetId: string;
@@ -621,23 +465,20 @@ interface DatasetsV1 {
   /** Get all dataset definitions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/definitions")
+  @list
   @get
   getAllDatasetDefinitions is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset ID. */
       @path datasetId: string;
 
       /** Continuation token for pagination. */
-      @query continuationToken?: string;
+      @continuationToken
+      @continuationToken
+      @query
+      continuationToken?: string;
 
       /** Page size. */
       @query pageSize?: int32;
@@ -651,14 +492,7 @@ interface DatasetsV1 {
   @post
   updateDefinition is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset ID. */
       @path datasetId: string;
@@ -687,14 +521,7 @@ interface DatasetsV1 {
   @get
   getDatasetDefinition is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset ID. */
       @path datasetId: string;
@@ -708,23 +535,20 @@ interface DatasetsV1 {
   /** Get all dataset versions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/versions")
+  @list
   @get
   getAllDatasetVersions is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset ID. */
       @path datasetId: string;
 
       /** Continuation token for pagination. */
-      @query continuationToken?: string;
+      @continuationToken
+      @continuationToken
+      @query
+      continuationToken?: string;
 
       /** Page size. */
       @query pageSize?: int32;
@@ -739,14 +563,7 @@ interface DatasetsV1 {
   @delete
   unregisterDataset is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset name. */
       @path name: string;
@@ -762,17 +579,11 @@ interface DatasetControllerV2 {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets")
+  @list
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** Dataset names to filter by. */
       @query datasetNames?: string[];
@@ -787,7 +598,10 @@ interface DatasetControllerV2 {
       @query status?: string;
 
       /** Continuation token for pagination. */
-      @query continuationToken?: string;
+      @continuationToken
+      @continuationToken
+      @query
+      continuationToken?: string;
 
       /** Page size. */
       @query pageSize?: int32;
@@ -813,14 +627,7 @@ interface DatasetControllerV2 {
   @post
   register is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** Register as pending. */
       @query registerAsPending?: boolean;
@@ -849,14 +656,7 @@ interface DatasetControllerV2 {
   @delete
   deleteAllDatasets is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
     },
     void
   >;
@@ -867,14 +667,7 @@ interface DatasetControllerV2 {
   @get
   getDatasetByName is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset name. */
       @path datasetName: string;
@@ -895,14 +688,7 @@ interface DatasetControllerV2 {
   @put
   updateDataset is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset ID. */
       @path datasetId: string;
@@ -919,23 +705,20 @@ interface DatasetControllerV2 {
   /** Get all dataset definitions (v1.2). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/definitions")
+  @list
   @get
   getAllDatasetDefinitions is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset ID. */
       @path datasetId: string;
 
       /** Continuation token for pagination. */
-      @query continuationToken?: string;
+      @continuationToken
+      @continuationToken
+      @query
+      continuationToken?: string;
 
       /** Page size. */
       @query pageSize?: int32;
@@ -949,14 +732,7 @@ interface DatasetControllerV2 {
   @post
   updateDefinition is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset ID. */
       @path datasetId: string;
@@ -985,14 +761,7 @@ interface DatasetControllerV2 {
   @get
   getDatasetDefinition is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset ID. */
       @path datasetId: string;
@@ -1006,23 +775,20 @@ interface DatasetControllerV2 {
   /** Get all dataset versions (v1.2). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/versions")
+  @list
   @get
   getAllDatasetVersions is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset ID. */
       @path datasetId: string;
 
       /** Continuation token for pagination. */
-      @query continuationToken?: string;
+      @continuationToken
+      @continuationToken
+      @query
+      continuationToken?: string;
 
       /** Page size. */
       @query pageSize?: int32;
@@ -1037,14 +803,7 @@ interface DatasetControllerV2 {
   @delete
   unregisterDataset is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset name. */
       @path name: string;
@@ -1062,14 +821,7 @@ interface DatasetV2Operations {
   @post
   create is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** If exists, update. */
       @query ifExistsUpdate?: boolean;
@@ -1086,14 +838,7 @@ interface DatasetV2Operations {
   @delete
   deleteAllDatasets is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
     },
     void
   >;
@@ -1102,17 +847,11 @@ interface DatasetV2Operations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets")
+  @list
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** Dataset names to filter by. */
       @query names?: string[];
@@ -1121,7 +860,10 @@ interface DatasetV2Operations {
       @query searchText?: string;
 
       /** Continuation token for pagination. */
-      @query continuationToken?: string;
+      @continuationToken
+      @continuationToken
+      @query
+      continuationToken?: string;
 
       /** Page size. */
       @query pageSize?: int32;
@@ -1135,14 +877,7 @@ interface DatasetV2Operations {
   @get
   getDatasetByName is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset name. */
       @path datasetName: string;
@@ -1159,14 +894,7 @@ interface DatasetV2Operations {
   @get
   getDatasetById is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset ID. */
       @path datasetId: string;
@@ -1181,14 +909,7 @@ interface DatasetV2Operations {
   @put
   updateDataset is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset ID. */
       @path datasetId: string;
@@ -1205,14 +926,7 @@ interface DatasetV2Operations {
   @delete
   deleteDatasetByName is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset name. */
       @path name: string;
@@ -1230,14 +944,7 @@ interface DatasetV2Operations {
   @put
   updateDatasetByNameAndVersion is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The dataset name. */
       @path name: string;
@@ -1261,14 +968,7 @@ interface GetOperationStatus {
   @get
   getDatasetOperationStatus is Azure.Core.Foundations.Operation<
     {
-      /** The Azure Subscription ID. */
-      @path subscriptionId: string;
-
-      /** The Name of the resource group in which the workspace is located. */
-      @path resourceGroupName: string;
-
-      /** The name of the workspace. */
-      @path workspaceName: string;
+      ...WorkspacePathParameters;
 
       /** The operation ID. */
       @path operationId: string;

@@ -193,7 +193,7 @@ model Artifact {
   path?: string;
 
   /** The Etag of the Artifact. */
-  etag?: string;
+  etag?: Azure.Core.eTag;
 
   /** The Date and Time at which the Artifact is created. The DateTime is in UTC. */
   createdTime?: utcDateTime;
@@ -1030,6 +1030,7 @@ model OutputDatasetLineage {
 /** A paginated list of ArtifactContentInformations. */
 model PaginatedArtifactContentInformationList {
   /** An array of objects of type ArtifactContentInformation. */
+  @pageItems
   value?: ArtifactContentInformation[];
 
   /** The token used in retrieving the next page. If null, there are no additional pages. */
@@ -1042,6 +1043,7 @@ model PaginatedArtifactContentInformationList {
 /** A paginated list of Artifacts. */
 model PaginatedArtifactList {
   /** An array of objects of type Artifact. */
+  @pageItems
   value?: Artifact[];
 
   /** The token used in retrieving the next page. If null, there are no additional pages. */
@@ -1054,6 +1056,7 @@ model PaginatedArtifactList {
 /** A paginated list of Experiments. */
 model PaginatedExperimentList {
   /** An array of objects of type Experiment. */
+  @pageItems
   value?: Experiment[];
 
   /** The token used in retrieving the next page. If null, there are no additional pages. */
@@ -1066,6 +1069,7 @@ model PaginatedExperimentList {
 /** A paginated list of MetricDefinitions. */
 model PaginatedMetricDefinitionList {
   /** An array of objects of type MetricDefinition. */
+  @pageItems
   value?: MetricDefinition[];
 
   /** The token used in retrieving the next page. If null, there are no additional pages. */
@@ -1078,6 +1082,7 @@ model PaginatedMetricDefinitionList {
 /** A paginated list of Runs. */
 model PaginatedRunList {
   /** An array of objects of type Run. */
+  @pageItems
   value?: Run[];
 
   /** The token used in retrieving the next page. If null, there are no additional pages. */
@@ -1090,6 +1095,7 @@ model PaginatedRunList {
 /** A paginated list of SpanDefinitions. */
 model PaginatedSpanDefinitionList {
   /** An array of objects of type SpanDefinition. */
+  @pageItems
   value?: SpanDefinition[];
 
   /** The token used in retrieving the next page. If null, there are no additional pages. */

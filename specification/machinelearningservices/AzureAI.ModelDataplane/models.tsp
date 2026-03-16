@@ -263,6 +263,7 @@ model Asset {
 /** Paginated result of assets. */
 model AssetPaginatedResult {
   /** The list of assets. */
+  @pageItems
   value?: Asset[];
 
   /** The continuation token for the next page. */
@@ -964,6 +965,7 @@ model ListModelsRequest {
 /** Paginated response of models. */
 model ModelPagedResponse {
   /** The list of models. */
+  @pageItems
   value?: Model[];
 
   /** The continuation token for the next page. */
@@ -976,6 +978,7 @@ model ModelPagedResponse {
 /** Paginated response of models with next request. */
 model ModelListModelsRequestPagedResponse {
   /** The list of models. */
+  @pageItems
   value?: Model[];
 
   /** The link to the next page. */

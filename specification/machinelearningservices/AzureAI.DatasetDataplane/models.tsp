@@ -553,7 +553,7 @@ model Dataset {
   modifiedTime?: utcDateTime;
 
   /** The ETag. */
-  etag?: string;
+  etag?: Azure.Core.eTag;
 
   /** The dataset name. */
   name?: string;
@@ -604,7 +604,7 @@ model DatasetDefinition {
   notes?: string;
 
   /** The ETag. */
-  etag?: string;
+  etag?: Azure.Core.eTag;
 
   /** The created time. */
   createdTime?: utcDateTime;
@@ -691,7 +691,7 @@ model DatasetState {
   deprecatedBy?: DatasetDefinitionReference;
 
   /** The ETag. */
-  etag?: string;
+  etag?: Azure.Core.eTag;
 }
 
 /** A dataset (v2). */
@@ -748,7 +748,7 @@ model DatasetV2 {
 /** Entity metadata. */
 model EntityMetadata {
   /** The ETag. */
-  etag?: string;
+  etag?: Azure.Core.eTag;
 
   /** The created time. */
   createdTime?: utcDateTime;
@@ -927,6 +927,7 @@ model Moments {
 /** A paginated list of DataContainerEntity objects. */
 model PaginatedDataContainerEntityList {
   /** An array of objects of type DataContainerEntity. */
+  @pageItems
   value?: DataContainerEntity[];
 
   /** The token used in retrieving the next page. If null, there are no additional pages. */
@@ -939,6 +940,7 @@ model PaginatedDataContainerEntityList {
 /** A paginated list of DataVersionEntity objects. */
 model PaginatedDataVersionEntityList {
   /** An array of objects of type DataVersionEntity. */
+  @pageItems
   value?: DataVersionEntity[];
 
   /** The token used in retrieving the next page. If null, there are no additional pages. */
@@ -951,6 +953,7 @@ model PaginatedDataVersionEntityList {
 /** A paginated list of DatasetDefinition objects. */
 model PaginatedDatasetDefinitionList {
   /** An array of objects of type DatasetDefinition. */
+  @pageItems
   value?: DatasetDefinition[];
 
   /** The token used in retrieving the next page. If null, there are no additional pages. */
@@ -963,6 +966,7 @@ model PaginatedDatasetDefinitionList {
 /** A paginated list of Dataset objects. */
 model PaginatedDatasetList {
   /** An array of objects of type Dataset. */
+  @pageItems
   value?: Dataset[];
 
   /** The token used in retrieving the next page. If null, there are no additional pages. */
@@ -975,6 +979,7 @@ model PaginatedDatasetList {
 /** A paginated list of DatasetV2 objects. */
 model PaginatedDatasetV2List {
   /** An array of objects of type DatasetV2. */
+  @pageItems
   value?: DatasetV2[];
 
   /** The token used in retrieving the next page. If null, there are no additional pages. */
@@ -987,6 +992,7 @@ model PaginatedDatasetV2List {
 /** A paginated list of String objects. */
 model PaginatedStringList {
   /** An array of objects of type String. */
+  @pageItems
   value?: string[];
 
   /** The token used in retrieving the next page. If null, there are no additional pages. */

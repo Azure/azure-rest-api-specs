@@ -20,6 +20,7 @@ interface RunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/runs/{runId}/artifacts")
+  @list
   @get
   listInContainerByExperimentId is Operation<
     {
@@ -32,7 +33,7 @@ interface RunArtifacts {
       @path runId: string;
 
       /** The continuation token. */
-      @query continuationToken?: string;
+      @continuationToken @query continuationToken?: string;
     },
     PaginatedArtifactList
   >;
@@ -121,6 +122,7 @@ interface RunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/runs/{runId}/artifacts/path")
+  @list
   @get
   listInPathByExperimentId is Operation<
     {
@@ -136,7 +138,7 @@ interface RunArtifacts {
       @query path?: string;
 
       /** The continuation token. */
-      @query continuationToken?: string;
+      @continuationToken @query continuationToken?: string;
     },
     PaginatedArtifactList
   >;
@@ -145,6 +147,7 @@ interface RunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/runs/{runId}/artifacts/prefix/contentinfo")
+  @list
   @get
   listSasByPrefixByExperimentId is Operation<
     {
@@ -160,7 +163,7 @@ interface RunArtifacts {
       @query path?: string;
 
       /** The continuation token. */
-      @query continuationToken?: string;
+      @continuationToken @query continuationToken?: string;
     },
     PaginatedArtifactContentInformationList
   >;
@@ -173,6 +176,7 @@ interface RunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts")
+  @list
   @get
   listInContainerByExperimentName is Operation<
     {
@@ -185,7 +189,7 @@ interface RunArtifacts {
       @path runId: string;
 
       /** The continuation token. */
-      @query continuationToken?: string;
+      @continuationToken @query continuationToken?: string;
     },
     PaginatedArtifactList
   >;
@@ -274,6 +278,7 @@ interface RunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts/path")
+  @list
   @get
   listInPathByExperimentName is Operation<
     {
@@ -289,7 +294,7 @@ interface RunArtifacts {
       @query path?: string;
 
       /** The continuation token. */
-      @query continuationToken?: string;
+      @continuationToken @query continuationToken?: string;
     },
     PaginatedArtifactList
   >;
@@ -298,6 +303,7 @@ interface RunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts/prefix/contentinfo")
+  @list
   @get
   listSasByPrefixByExperimentName is Operation<
     {
@@ -313,7 +319,7 @@ interface RunArtifacts {
       @query path?: string;
 
       /** The continuation token. */
-      @query continuationToken?: string;
+      @continuationToken @query continuationToken?: string;
     },
     PaginatedArtifactContentInformationList
   >;

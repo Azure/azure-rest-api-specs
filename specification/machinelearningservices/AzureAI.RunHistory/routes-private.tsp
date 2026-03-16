@@ -63,6 +63,7 @@ interface Spans {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/history/v1.0/private/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/runs/{runId}/spans")
+  @list
   @get
   list is Operation<
     {
@@ -72,7 +73,7 @@ interface Spans {
       @path runId: string;
 
       /** The continuation token. */
-      @query continuationToken?: string;
+      @continuationToken @query continuationToken?: string;
     },
     PaginatedSpanDefinitionList
   >;
@@ -80,6 +81,7 @@ interface Spans {
   /** Get active run status spans. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/private/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/runs/{runId}/spans/active")
+  @list
   @get
   getActive is Operation<
     {
@@ -89,7 +91,7 @@ interface Spans {
       @path runId: string;
 
       /** The continuation token. */
-      @query continuationToken?: string;
+      @continuationToken @query continuationToken?: string;
     },
     PaginatedSpanDefinitionList
   >;
