@@ -85,7 +85,7 @@ interface ConnectionPropertiesV2BasicResources {
   /**
    * Create or update Cognitive Services account connection under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "PUT response codes for 'get' match existing service endpoint behavior"
   @tag("AccountConnectionResource")
   create is ConnectionPropertiesV2BasicResourceOps.CreateOrUpdateSync<
     ConnectionPropertiesV2BasicResource,
@@ -168,7 +168,7 @@ interface ProjectConnections {
   /**
    * Create or update Cognitive Services project connection under the specified project.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "PUT response codes for 'get' match existing service endpoint behavior"
   @tag("ProjectConnectionResource")
   create is ProjectConnectionOps.CreateOrUpdateSync<
     ConnectionPropertiesV2BasicResource,
