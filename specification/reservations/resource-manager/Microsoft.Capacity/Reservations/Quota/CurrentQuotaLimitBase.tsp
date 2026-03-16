@@ -24,6 +24,18 @@ model CurrentQuotaLimitBase
   >;
 }
 
+model QuotaGetBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model QuotaPutBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model QuotaPatchBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model QuotaListBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations(#{ omitTags: true })
 interface CurrentQuotaLimitBases {
@@ -33,6 +45,7 @@ interface CurrentQuotaLimitBases {
   @tag("QuotaInformation")
   get is ArmResourceRead<
     CurrentQuotaLimitBase,
+    QuotaGetBaseParam,
     Response = ArmResponse<CurrentQuotaLimitBase> & {
       /**
        * Current entity state version. It should be treated as opaque and used to make conditional HTTP requests.
@@ -57,6 +70,7 @@ interface CurrentQuotaLimitBases {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CurrentQuotaLimitBase,
+    QuotaPutBaseParam,
     Response = ArmResourceUpdatedResponse<CurrentQuotaLimitBase> | ArmCreatedResponse<
       QuotaRequestSubmitResponse201,
       ExtraHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
@@ -79,6 +93,7 @@ interface CurrentQuotaLimitBases {
   update is ArmCustomPatchAsync<
     CurrentQuotaLimitBase,
     PatchModel = CurrentQuotaLimitBase,
+    BaseParameters = QuotaPatchBaseParam,
     Response = ArmResponse<CurrentQuotaLimitBase> | ArmCreatedResponse<
       QuotaRequestSubmitResponse201,
       ExtraHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
@@ -93,6 +108,7 @@ interface CurrentQuotaLimitBases {
   @tag("QuotaInformation")
   list is ArmResourceListByParent<
     CurrentQuotaLimitBase,
+    BaseParameters = QuotaListBaseParam,
     Response = ArmResponse<QuotaLimits> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
