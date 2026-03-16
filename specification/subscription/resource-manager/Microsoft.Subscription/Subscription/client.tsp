@@ -48,3 +48,16 @@ namespace Microsoft.Subscription;
 @@Azure.ClientGenerator.Core.clientLocation(SubscriptionsOperationGroup.targetDirectoryStatus::parameters.subscriptionId,
   SubscriptionsOperationGroup.targetDirectoryStatus
 );
+
+@@Azure.ClientGenerator.Core.clientLocation(Azure.ResourceManager.Foundations.SubscriptionBaseParameters.subscriptionId,
+  TargetDirectoryResults.deleteTargetDirectory
+);
+@@Azure.ClientGenerator.Core.clientLocation(Azure.ResourceManager.Foundations.SubscriptionBaseParameters.subscriptionId,
+  TargetDirectoryResults.getTargetDirectory
+);
+@@Azure.ClientGenerator.Core.clientLocation(Azure.ResourceManager.Foundations.SubscriptionBaseParameters.subscriptionId,
+  TargetDirectoryResults.listTargetDirectory
+);
+@@Azure.ClientGenerator.Core.clientLocation(Azure.ResourceManager.Foundations.SubscriptionBaseParameters.subscriptionId,
+  TargetDirectoryResults.putTargetDirectory
+);
