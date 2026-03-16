@@ -17,8 +17,6 @@ namespace Microsoft.NetApp;
 /**
  * NetApp Elastic Backup under an elastic Backup Vault
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @parentResource(ElasticBackupVault)
 model ElasticBackup is ProxyResource<ElasticBackupProperties> {
@@ -33,8 +31,6 @@ model ElasticBackup is ProxyResource<ElasticBackupProperties> {
 /**
  * Elastic Backup properties
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ElasticBackupProperties {
   /** The creation date of the backup */
@@ -104,8 +100,6 @@ model ElasticBackupProperties {
 /**
  * Type of backup
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union ElasticBackupType {
   string,
@@ -120,8 +114,6 @@ union ElasticBackupType {
 /**
  * Snapshot usage for backup
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union SnapshotUsage {
   string,
@@ -136,8 +128,6 @@ union SnapshotUsage {
 /**
  * Volume size for backup
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union VolumeSize {
   string,
@@ -152,20 +142,14 @@ union VolumeSize {
 @armResourceOperations
 interface ElasticBackups {
   /** Get the specified Elastic Backup under Elastic Backup Vault. */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   get is ArmResourceRead<ElasticBackup>;
 
   /** Create an elastic backup under the elastic Backup Vault */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBackup>;
 
   /** Patch an elastic Backup under the Elastic Backup Vault */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   update is ArmResourcePatchAsync<
     ElasticBackup,
@@ -177,16 +161,12 @@ interface ElasticBackups {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticBackup>;
 
   /**
    * List all elastic backups Under an elastic Backup Vault
    */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   listByVault is ArmResourceListByParent<ElasticBackup>;
 }
