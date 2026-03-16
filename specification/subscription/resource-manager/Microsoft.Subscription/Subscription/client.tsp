@@ -6,15 +6,6 @@ namespace Microsoft.Subscription;
 
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
 
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.cancel::parameters.subscriptionId,
-  SubscriptionOperationGroup.cancel
-);
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.rename::parameters.subscriptionId,
-  SubscriptionOperationGroup.rename
-);
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.enable::parameters.subscriptionId,
-  SubscriptionOperationGroup.enable
-);
 @@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.acceptOwnership::parameters.subscriptionId,
   SubscriptionOperationGroup.acceptOwnership
 );
