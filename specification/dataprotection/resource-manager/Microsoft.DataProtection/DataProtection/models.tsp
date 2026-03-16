@@ -3166,7 +3166,7 @@ model BlobBackupDatasourceCommonParametersForAutoProtection {
    * AutoProtection settings
    */
   @added(Versions.v2026_03_01)
-  autoProtectionSettings: BlobBackupAutoProtectionSettings;
+  autoProtectionSettings: BlobBackupRuleBasedAutoProtectionSettings;
 }
 
 /**
