@@ -34,6 +34,8 @@ If misplaced files are found → check `tspconfig.yaml` emitter output settings 
 
 ### Step 5.3: Example Verification
 
+> Applies only for API Version Evolution Tasks
+
 Verify that files under `examples/` are consistent with the current API version:
 
 1. Each operation should have a corresponding example file.
