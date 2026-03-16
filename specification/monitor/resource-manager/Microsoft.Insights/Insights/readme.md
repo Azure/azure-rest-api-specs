@@ -1702,7 +1702,7 @@ directive:
   - suppress: R3018
     from: privateLinkScopes_API.json
     where: $.definitions.PrivateEndpointConnectionProperties.properties.queryOnlyPrivateLinkResources
-    reason: "This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''true'' or ''false'' options, so it fits boolean type."s
+    reason: "This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''true'' or ''false'' options, so it fits boolean type."
   - suppress: R3018
     from: privateLinkScopes_API.json
     where: $.definitions.PrivateEndpointConnectionProperties.properties.ingestOnlyToPrivateLinkResources
@@ -1728,13 +1728,13 @@ directive:
   - suppress: OperationsAPIImplementation
     where: $.paths
     from: privateLinkScopes_API.json
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/Insights/stable/2015-04-01/operations_API.json)'
   - suppress: ResourceNameRestriction
     from: privateLinkScopes_API.json
     reason: 'Updating the resource name restriction would be a breaking change.'
   - suppress: OperationsAPIImplementation
     from: privateLinkScopes_API.json
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/Insights/stable/2015-04-01/operations_API.json)'
 ```
 
 ### Tag: profile-hybrid-2019-03-01
