@@ -57,7 +57,7 @@ union MessageType {
 
   /** A system-generated message */
   SystemMessage: "system_message",
-
+\
   /** A tool invocation request */
   ToolCall: "tool_call",
 

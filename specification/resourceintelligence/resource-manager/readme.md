@@ -41,6 +41,11 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: resourceintelligence.json
     reason: "The inputOverrides property requires a flexible key-value dictionary structure for passing runtime overrides, matching the previous API version."
+  - code: PutRequestResponseSchemeArm
+    from: resourceintelligence.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/threads/{threadId}"].put
+    reason: "Per API review: Threads_CreateOrUpdate PUT intentionally uses RunRequest as the request body while returning Thread in the response."
   - code: PutResponseCodes
     from: resourceintelligence.json
     where:
