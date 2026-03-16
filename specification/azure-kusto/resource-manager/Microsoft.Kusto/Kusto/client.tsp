@@ -15,3 +15,15 @@ using Azure.ClientGenerator.Core;
   "publicIpType",
   "java"
 );
+
+// Ensure models used in public API are generated as public models
+@@access(Microsoft.Kusto.CalloutPoliciesList, Access.public, "java");
+@@usage(Microsoft.Kusto.CalloutPoliciesList,
+  Usage.input | Usage.output,
+  "java"
+);
+@@access(Microsoft.Kusto.LanguageExtensionsList, Access.public, "java");
+@@usage(Microsoft.Kusto.LanguageExtensionsList,
+  Usage.input | Usage.output,
+  "java"
+);
