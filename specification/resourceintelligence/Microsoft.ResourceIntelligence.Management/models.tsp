@@ -56,19 +56,19 @@ union MessageType {
   string,
 
   /** A system-generated message */
-  system_message: "system_message",
+  SystemMessage: "system_message",
 
   /** A tool invocation request */
-  tool_call: "tool_call",
+  ToolCall: "tool_call",
 
   /** A tool invocation response */
-  tool_return: "tool_return",
+  ToolReturn: "tool_return",
 
   /** A message from the assistant */
-  assistant_message: "assistant_message",
+  AssistantMessage: "assistant_message",
 
   /** A message from the user */
-  user_message: "user_message",
+  UserMessage: "user_message",
 }
 
 // ============================================

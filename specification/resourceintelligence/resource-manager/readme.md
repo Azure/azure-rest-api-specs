@@ -38,15 +38,9 @@ These settings apply only when `--tag=package-preview-2026-02` is specified on t
 input-file:
   - Microsoft.ResourceIntelligence/preview/2026-02-01-preview/resourceintelligence.json
 suppressions:
-  - code: PathForNestedResource
-    from: resourceintelligence.json
-    reason: "The /runs/latest endpoint is a custom singleton-like route for retrieving the latest run for an agent."
   - code: AvoidAdditionalProperties
     from: resourceintelligence.json
     reason: "The inputOverrides property requires a flexible key-value dictionary structure for passing runtime overrides, matching the previous API version."
-  - code: PutRequestResponseSchemeArm
-    from: resourceintelligence.json
-    reason: "The Runs_CreateOrUpdate PUT operation intentionally uses RunRequest as the request body per API design review, while returning the Run resource in the response."
   - code: PutResponseCodes
     from: resourceintelligence.json
     where:
