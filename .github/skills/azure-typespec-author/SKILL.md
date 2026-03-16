@@ -30,21 +30,30 @@ Requires `azure-sdk-mcp` server with TypeSpec authoring and validation tools.
 
 ## Task Classification
 
-Classify every request into exactly one of the two types below before proceeding.
+**CRITICAL: You MUST classify the request into exactly one task type below and explicitly state your classification BEFORE proceeding to Step 2. The classification determines which tools are allowed in Step 3.**
 
-- **API Version Evolution** = adding a brand-new API version string (e.g. `2025-06-01-preview`) to the service. This is _only_ about creating a new version entry and carrying over / excluding features. It is **not** about adding `@added`/`@removed` decorators to individual properties or operations within an existing version — that falls under General Authoring.
-- **General Authoring** = everything else that modifies `.tsp` files.
+- **API Version Evolution** = adding, introducing, or bumping to a new preview or stable API version (e.g. `2025-06-01-preview`, `2026-01-01`) for a service. Any request whose **primary intent** is to introduce a new API version string falls here.
+- **General Authoring** = everything else that modifies `.tsp` files (adding/updating resources, operations, models, properties, etc.) **without** introducing a new API version.
 
-| Type                                 | Description                                                                                                                         | Examples                                                                       |
-| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| **API Version Evolution (ARM only)** | Adding a new preview or stable API version to an existing ARM service. Data-plane API version evolution is not fully supported yet. | "Add a new preview API version 2026-01-01-preview for widget resource manager" |
-| **General Authoring**                | Any other TypeSpec authoring task that modifies `.tsp` files                                                                        | "Add an ARM resource named Asset with CRUD operations"                         |
+**Classification keywords:**
+- _"add a new … API version"_, _"new preview version"_, _"new stable version"_, _"bump API version"_, _"introduce version"_, _"add … preview"_, _"add … stable"_ → **API Version Evolution**
+- Everything else that modifies `.tsp` → **General Authoring**
+
+| Type                      | Description                                                                                                                         | Tool Restriction                                                                      | Examples                                                                                                                                                                                                                          |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **API Version Evolution** | Adding a new preview or stable API version to an existing ARM service. Data-plane API version evolution is not fully supported yet. | **MUST NOT** call `azsdk_typespec_generate_authoring_plan`. Uses web-fetched docs only. | "Add a new preview API version 2026-01-01-preview for widget resource manager", "Add preview version 2025-06-01-preview", "Bump to stable version 2026-01-01 for Microsoft.Widget", "Introduce a new preview API version for Foo" |
+| **General Authoring**     | Any other TypeSpec authoring task that modifies `.tsp` files                                                                        | **MUST** call `azsdk_typespec_generate_authoring_plan` in Step 3.                      | "Add an ARM resource named Asset with CRUD operations"                                                                                                                                                                            |
+
+After Step 1 (Analyze Project), output your classification:
+```
+Task Type: [API Version Evolution | General Authoring]
+```
 
 ## Steps
 
 All tasks follow a 5-step workflow. Steps 2–3 branch by task type; the rest are shared.
 
-1. **Analyze Project** — Follow the [project analysis guide](references/analyze-project.md) to collect project context and determine task type.
+1. **Analyze Project & Classify Task** — Follow the [project analysis guide](references/analyze-project.md) to collect project context. Then **classify the task type** per the table above and state it explicitly before continuing. 
 
 2. **Intake & Clarification**
    - _API Version Evolution:_ determine the versioning scenario from Step 1, use [agentic search](references/agentic-search.md) in the document with the scenario URL below to collect information from user. Be sure to use a user-friendly way to collect required inputs from user. e.g., list the existing features (resources, operations, properties) from the latest version and then ask the user which to carry over or exclude, instead of asking for raw input.
@@ -55,11 +64,10 @@ All tasks follow a 5-step workflow. Steps 2–3 branch by task type; the rest ar
      | preview | stable  | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/03-stable-after-preview/`  |
      | stable  | preview | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/04-preview-after-stable/`  |
      | stable  | stable  | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/05-stable-after-stable/`   |
-
    - _General Authoring:_ follow [intake guide](references/general-authoring-intake.md).
 
-3. **Retrieve Solution**
-   - _API Version Evolution:_ search the downloaded guide content for implementation steps via [agentic search](references/agentic-search.md) and generate solution. No MCP tool call needed.
+3. **Retrieve Solution** — check the task type from Step 1 before choosing a path.
+   - _API Version Evolution:_ search the downloaded guide content for implementation steps via [agentic search](references/agentic-search.md) and generate solution. **MUST NOT call `azsdk_typespec_generate_authoring_plan`.** The versioning guides fetched in Step 2 contain all needed instructions.
    - _General Authoring:_ invoke `azure-sdk-mcp:azsdk_typespec_generate_authoring_plan` MCP tool with the following parameters:
 
      | Parameter                 | Value                                                                                                           |
