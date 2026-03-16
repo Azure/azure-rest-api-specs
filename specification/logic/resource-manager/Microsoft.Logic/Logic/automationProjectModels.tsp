@@ -14,8 +14,14 @@ namespace Microsoft.Logic;
 union AutomationProjectProvisioningState {
   string,
 
-  /** The automation project is being created or updated. */
-  InProgress: "InProgress",
+  /** The automation project is being provisioned. */
+  Provisioning: "Provisioning",
+
+  /** The automation project is being updated. */
+  Updating: "Updating",
+
+  /** The automation project is being deleted. */
+  Deleting: "Deleting",
 
   /** The automation project has been successfully provisioned. */
   Succeeded: "Succeeded",
@@ -25,9 +31,6 @@ union AutomationProjectProvisioningState {
 
   /** The automation project provisioning was canceled. */
   Canceled: "Canceled",
-
-  /** The automation project is being deleted. */
-  Deleting: "Deleting",
 }
 
 /**

@@ -481,20 +481,31 @@
       "type": "string",
       "description": "The provisioning state of the automation project resource.",
       "enum": [
-        "InProgress",
+        "Provisioning",
+        "Updating",
+        "Deleting",
         "Succeeded",
         "Failed",
-        "Canceled",
-        "Deleting"
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "AutomationProjectProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The automation project is being created or updated."
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The automation project is being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The automation project is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The automation project is being deleted."
           },
           {
             "name": "Succeeded",
@@ -510,11 +521,6 @@
             "name": "Canceled",
             "value": "Canceled",
             "description": "The automation project provisioning was canceled."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The automation project is being deleted."
           }
         ]
       }
