@@ -10,6 +10,19 @@ The current preview release of Language is 2024-11-15-preview.
 
 The current stable release of Language is 2026-05-01.
 
+```yaml
+tag: release_2026-05-01
+add-credentials: true
+clear-output-folder: true
+openapi-type: data-plane
+directive:
+  - suppress: LongRunningResponseStatusCode
+    reason: The validation tools do not properly recognize 202 as a supported response code.
+  - suppress: R3016
+    where: $.definitions.CurrencyResolution.properties.ISO4217
+    reason: ISO should be upper case.
+```
+
 ### Release 2026-05-01
 
 These settings apply only when `--tag=release_2026-05-01` is specified on the command line.
