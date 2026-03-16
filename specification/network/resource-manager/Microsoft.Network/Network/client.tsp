@@ -27,3 +27,27 @@ namespace CombineClient;
   "UserAssignedIdentity",
   "java"
 );
+
+// Fix IP -> Ip naming for Java backward compatibility (Swagger -> TypeSpec migration)
+@@clientName(Microsoft.Network.PublicIPAddress, "PublicIpAddress", "java");
+@@clientName(Microsoft.Network.FrontendIPConfiguration,
+  "FrontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.NetworkInterfaceIPConfiguration,
+  "NetworkInterfaceIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.IPVersion, "IpVersion", "java");
+@@clientName(Microsoft.Network.IPAllocationMethod,
+  "IpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressSku,
+  "PublicIpAddressSku",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressSkuName,
+  "PublicIpAddressSkuName",
+  "java"
+);
