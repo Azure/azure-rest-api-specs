@@ -9,7 +9,7 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 @TypeSpec.Versioning.useDependency(
-  DocumentTranslation.Versions.v2025_12_01_preview
+  DocumentTranslation.Versions.v2026_03_01
 )
 namespace ClientCustomizations;
 
@@ -211,7 +211,7 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslation.TargetInput.category, "category_id", "python");
+@@clientName(DocumentTranslation.TargetInput.deploymentName, "deployment_name", "python");
 
 @@clientName(DocumentTranslation.TargetInput, "TranslationTarget", "python");
 

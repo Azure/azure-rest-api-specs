@@ -207,7 +207,12 @@ model TargetInput {
   targetUrl: string;
 
   @doc("Category / custom system for translation request")
+  @removed(Versions.v2026_03_01)
   category?: string;
+
+  @doc("Deployment name of the custom translation model for the translation request")
+  @added(Versions.v2026_03_01)
+  deploymentName?: string;
 
   @doc("Target Language")
   language: string;
@@ -448,6 +453,10 @@ model DocumentStatus {
   @doc("Characters detected within images")
   @added(Versions.v2025_12_01_preview)
   imageCharacterDetected?: int32;
+
+  @doc("Deployment name of the custom translation model or LLM model used for the translation")
+  @added(Versions.v2026_03_01)
+  deploymentName?: string;
 }
 
 @doc("Documents Status Response")
