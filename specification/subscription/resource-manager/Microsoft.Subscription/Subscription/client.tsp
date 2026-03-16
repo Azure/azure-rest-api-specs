@@ -27,21 +27,21 @@ namespace Microsoft.Subscription;
   "java"
 );
 
-// @@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.cancel::parameters.subscriptionId,
-//   SubscriptionOperationGroup.cancel
-// );
-// @@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.rename::parameters.subscriptionId,
-//   SubscriptionOperationGroup.rename
-// );
-// @@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.enable::parameters.subscriptionId,
-//   SubscriptionOperationGroup.enable
-// );
-// @@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.acceptOwnership::parameters.subscriptionId,
-//   SubscriptionOperationGroup.acceptOwnership
-// );
-// @@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus::parameters.subscriptionId,
-//   SubscriptionOperationGroup.acceptOwnershipStatus
-// );
+@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.cancel::parameters.subscriptionId,
+  SubscriptionOperationGroup.cancel
+);
+@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.rename::parameters.subscriptionId,
+  SubscriptionOperationGroup.rename
+);
+@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.enable::parameters.subscriptionId,
+  SubscriptionOperationGroup.enable
+);
+@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.acceptOwnership::parameters.subscriptionId,
+  SubscriptionOperationGroup.acceptOwnership
+);
+@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus::parameters.subscriptionId,
+  SubscriptionOperationGroup.acceptOwnershipStatus
+);
 
 @@Azure.ClientGenerator.Core.clientLocation(SubscriptionsOperationGroup.acceptTargetDirectory::parameters.subscriptionId,
   SubscriptionsOperationGroup.acceptTargetDirectory
