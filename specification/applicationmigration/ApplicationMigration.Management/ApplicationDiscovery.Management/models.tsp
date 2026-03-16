@@ -132,7 +132,7 @@ model CodeScanDetail {
 @added(Microsoft.ApplicationMigration.Versions.v2026_02_02_preview)
 union CodeScanTool {
   @doc("Application Containerization and Assessment Tool.")
-  APPCAT: "APPCAT",
+  AppCAT: "AppCAT",
 
   @doc("CAST code analysis tool.")
   CAST: "CAST",

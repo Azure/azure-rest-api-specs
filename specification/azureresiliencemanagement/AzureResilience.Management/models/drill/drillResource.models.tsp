@@ -113,6 +113,11 @@ model DrillResourceProperties {
   @visibility(Lifecycle.Read)
   targetAndCapabilityAssignmentError?: ErrorDetails;
 
+  @doc("Last Target Resource RBAC assignment error, if any.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  targetResourceAssignmentError?: ErrorDetails;
+
   @doc("Last RBAC assignment error, if any.")
   @visibility(Lifecycle.Read)
   rbacAssignmentError?: ErrorDetails;
@@ -131,6 +136,10 @@ model DrillResourceProperties {
 model DrillResourceAttentionReason {
   @doc("Experiment MSI does not have the desired RBAC on the resource.")
   faultRbacOnTarget?: RBACState;
+
+  @doc("Chaos Resource MSI does not have the desired RBAC on the resource.")
+  @added(Versions.v2026_03_01_preview)
+  faultRbacOnTargetResource?: RBACState;
 
   @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
   runbookFaultRbacOnTargets?: RBACState;

@@ -27,7 +27,16 @@ These are the global settings for the Storage Gateway.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-02-01-preview
+tag: package-2026-03-01-preview
+```
+
+### Tag: package-2026-03-01-preview
+
+These settings apply only when `--tag=package-2026-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01-preview'
+input-file:
+  - Microsoft.Validate/preview/2026-03-01-preview/validate.json
 ```
 
 ### Tag: package-2026-02-01-preview
@@ -55,4 +64,13 @@ These settings apply only when `--tag=package-2025-10-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-10-01-preview'
 input-file:
   - Microsoft.Validate/preview/2025-10-01-preview/validate.json
+```
+
+### Tag: default
+
+These settings apply when no tag is specified on the command line.
+
+```yaml $(tag) == 'default'
+input-file:
+  - Microsoft.Validate/preview/2026-03-01-preview/validate.json
 ```

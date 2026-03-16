@@ -238,10 +238,10 @@ model GpuPartitionDetails {
   partitionableGpuName?: string;
 
   /**
-   * Reported partition size (default: 0 for DDA) For e.g. 2, 4, etc.
+   * Reported partition size in MB (default: 0 for DDA) For e.g. 2, 4, etc.
    */
   @visibility(Lifecycle.Read)
-  partitionSizeGb?: string;
+  partitionSizeMb?: string;
 
   /**
    * This is the count of total partitions.
