@@ -74,6 +74,6 @@ interface Insights {
   list is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.insights_v1_preview,
     FilterQueryParamsTraits,
-    AgentsPagedResult<Insight>
+    Azure.Core.Page<Insight>
   >;
 }
