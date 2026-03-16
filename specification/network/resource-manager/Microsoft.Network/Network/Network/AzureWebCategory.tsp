@@ -64,7 +64,7 @@ interface AzureWebCategories {
   listBySubscription is ArmResourceListByParent<
     AzureWebCategory,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response= AzureWebCategoryListResult,
+    Response = AzureWebCategoryListResult,
     Error = CloudError
   >;
 }

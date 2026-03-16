@@ -107,11 +107,7 @@ interface PublicIPAddresses {
       @key
       ipConfigurationName: string;
     },
-<<<<<<< HEAD
     Response = ArmResponse<VmssPublicIpAddressListResult>,
-=======
-    Response = ArmResponse<ResourceListResult<PublicIPAddress>>,
->>>>>>> Convert-Network-2025-05
     OverrideErrorType = CloudError
   >;
 }

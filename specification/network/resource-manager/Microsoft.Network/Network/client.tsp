@@ -1,4 +1,4 @@
-import "./Network/main.tsp";
+﻿import "./Network/main.tsp";
 import "./Vmss/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
@@ -18,424 +18,424 @@ using Microsoft.Compute;
 )
 namespace CombineClient;
 
-@@clientName(Microsoft.Compute.NetworkInterface,
+@@clientName(Microsoft.Network.NetworkInterface,
   "VmssNetworkInterface",
   "java"
 );
-@@clientName(Microsoft.Compute.PublicIPAddress, "VmssPublicIPAddress", "java");
-@@clientName(Microsoft.Compute.NetworkInterfacePropertiesFormat,
+@@clientName(Microsoft.Network.PublicIPAddress, "VmssPublicIPAddress", "java");
+@@clientName(Microsoft.Network.NetworkInterfacePropertiesFormat,
   "VmssNetworkInterfacePropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.SubResource, "VmssSubResource", "java");
-@@clientName(Microsoft.Compute.NetworkSecurityGroup,
+@@clientName(Microsoft.Network.SubResource, "VmssSubResource", "java");
+@@clientName(Microsoft.Network.NetworkSecurityGroup,
   "VmssNetworkSecurityGroup",
   "java"
 );
-@@clientName(Microsoft.Compute.NetworkSecurityGroupPropertiesFormat,
+@@clientName(Microsoft.Network.NetworkSecurityGroupPropertiesFormat,
   "VmssNetworkSecurityGroupPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.SecurityRule, "VmssSecurityRule", "java");
-@@clientName(Microsoft.Compute.SecurityRulePropertiesFormat,
+@@clientName(Microsoft.Network.SecurityRule, "VmssSecurityRule", "java");
+@@clientName(Microsoft.Network.SecurityRulePropertiesFormat,
   "VmssSecurityRulePropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.ApplicationSecurityGroup,
+@@clientName(Microsoft.Network.ApplicationSecurityGroup,
   "VmssApplicationSecurityGroup",
   "java"
 );
-@@clientName(Microsoft.Compute.ApplicationSecurityGroupPropertiesFormat,
+@@clientName(Microsoft.Network.ApplicationSecurityGroupPropertiesFormat,
   "VmssApplicationSecurityGroupPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.Resource, "VmssResource", "java");
-@@clientName(Microsoft.Compute.Subnet, "VmssSubnet", "java");
-@@clientName(Microsoft.Compute.SubnetPropertiesFormat,
+@@clientName(Microsoft.Network.Resource, "VmssResource", "java");
+@@clientName(Microsoft.Network.Subnet, "VmssSubnet", "java");
+@@clientName(Microsoft.Network.SubnetPropertiesFormat,
   "VmssSubnetPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.RouteTable, "VmssRouteTable", "java");
-@@clientName(Microsoft.Compute.RouteTablePropertiesFormat,
+@@clientName(Microsoft.Network.RouteTable, "VmssRouteTable", "java");
+@@clientName(Microsoft.Network.RouteTablePropertiesFormat,
   "VmssRouteTablePropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.Route, "VmssRoute", "java");
+@@clientName(Microsoft.Network.Route, "VmssRoute", "java");
 
-@@clientName(Microsoft.Compute.AccessMode, "VmssAccessMode", "java");
-@@clientName(Microsoft.Compute.ApplicationGatewayBackendAddress,
+@@clientName(Microsoft.Network.AccessMode, "VmssAccessMode", "java");
+@@clientName(Microsoft.Network.ApplicationGatewayBackendAddress,
   "VmssApplicationGatewayBackendAddress",
   "java"
 );
-@@clientName(Microsoft.Compute.ApplicationGatewayBackendAddressPool,
+@@clientName(Microsoft.Network.ApplicationGatewayBackendAddressPool,
   "VmssApplicationGatewayBackendAddressPool",
   "java"
 );
-@@clientName(Microsoft.Compute.ApplicationGatewayBackendAddressPoolPropertiesFormat,
+@@clientName(Microsoft.Network.ApplicationGatewayBackendAddressPoolPropertiesFormat,
   "VmssApplicationGatewayBackendAddressPoolPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.ApplicationGatewayIPConfiguration,
+@@clientName(Microsoft.Network.ApplicationGatewayIPConfiguration,
   "VmssApplicationGatewayIPConfiguration",
   "java"
 );
-@@clientName(Microsoft.Compute.ApplicationGatewayIPConfigurationPropertiesFormat,
+@@clientName(Microsoft.Network.ApplicationGatewayIPConfigurationPropertiesFormat,
   "VmssApplicationGatewayIPConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.BackendAddressPool,
+@@clientName(Microsoft.Network.BackendAddressPool,
   "VmssBackendAddressPool",
   "java"
 );
-@@clientName(Microsoft.Compute.BackendAddressPoolPropertiesFormat,
+@@clientName(Microsoft.Network.BackendAddressPoolPropertiesFormat,
   "VmssBackendAddressPoolPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.CloudError, "VmssCloudError", "java");
-@@clientName(Microsoft.Compute.CloudErrorBody, "VmssCloudErrorBody", "java");
-@@clientName(Microsoft.Compute.Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
+@@clientName(Microsoft.Network.CloudError, "VmssCloudError", "java");
+@@clientName(Microsoft.Network.CloudErrorBody, "VmssCloudErrorBody", "java");
+@@clientName(Microsoft.Network.Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
   "VmssComponents1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties",
   "java"
 );
-@@clientName(Microsoft.Compute.CustomDnsConfigPropertiesFormat,
+@@clientName(Microsoft.Network.CustomDnsConfigPropertiesFormat,
   "VmssCustomDnsConfigPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.DdosSettings, "VmssDdosSettings", "java");
-@@clientName(Microsoft.Compute.DdosSettingsProtectionMode,
+@@clientName(Microsoft.Network.DdosSettings, "VmssDdosSettings", "java");
+@@clientName(Microsoft.Network.DdosSettingsProtectionMode,
   "VmssDdosSettingsProtectionMode",
   "java"
 );
-@@clientName(Microsoft.Compute.Delegation, "VmssDelegation", "java");
-@@clientName(Microsoft.Compute.DeleteOptions, "VmssDeleteOptions", "java");
-@@clientName(Microsoft.Compute.ExtendedLocation,
+@@clientName(Microsoft.Network.Delegation, "VmssDelegation", "java");
+@@clientName(Microsoft.Network.DeleteOptions, "VmssDeleteOptions", "java");
+@@clientName(Microsoft.Network.ExtendedLocation,
   "VmssExtendedLocation",
   "java"
 );
-@@clientName(Microsoft.Compute.ExtendedLocationTypes,
+@@clientName(Microsoft.Network.ExtendedLocationTypes,
   "VmssExtendedLocationTypes",
   "java"
 );
-@@clientName(Microsoft.Compute.FlowLog, "VmssFlowLog", "java");
-@@clientName(Microsoft.Compute.FlowLogFormatParameters,
+@@clientName(Microsoft.Network.FlowLog, "VmssFlowLog", "java");
+@@clientName(Microsoft.Network.FlowLogFormatParameters,
   "VmssFlowLogFormatParameters",
   "java"
 );
-@@clientName(Microsoft.Compute.FlowLogFormatType,
+@@clientName(Microsoft.Network.FlowLogFormatType,
   "VmssFlowLogFormatType",
   "java"
 );
-@@clientName(Microsoft.Compute.FlowLogPropertiesFormat,
+@@clientName(Microsoft.Network.FlowLogPropertiesFormat,
   "VmssFlowLogPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.FrontendIPConfiguration,
+@@clientName(Microsoft.Network.FrontendIPConfiguration,
   "VmssFrontendIPConfiguration",
   "java"
 );
-@@clientName(Microsoft.Compute.FrontendIPConfigurationPropertiesFormat,
+@@clientName(Microsoft.Network.FrontendIPConfigurationPropertiesFormat,
   "VmssFrontendIPConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.GatewayLoadBalancerTunnelInterface,
+@@clientName(Microsoft.Network.GatewayLoadBalancerTunnelInterface,
   "VmssGatewayLoadBalancerTunnelInterface",
   "java"
 );
-@@clientName(Microsoft.Compute.GatewayLoadBalancerTunnelInterfaceType,
+@@clientName(Microsoft.Network.GatewayLoadBalancerTunnelInterfaceType,
   "VmssGatewayLoadBalancerTunnelInterfaceType",
   "java"
 );
-@@clientName(Microsoft.Compute.GatewayLoadBalancerTunnelProtocol,
+@@clientName(Microsoft.Network.GatewayLoadBalancerTunnelProtocol,
   "VmssGatewayLoadBalancerTunnelProtocol",
   "java"
 );
-@@clientName(Microsoft.Compute.InboundNatRule, "VmssInboundNatRule", "java");
-@@clientName(Microsoft.Compute.InboundNatRulePropertiesFormat,
+@@clientName(Microsoft.Network.InboundNatRule, "VmssInboundNatRule", "java");
+@@clientName(Microsoft.Network.InboundNatRulePropertiesFormat,
   "VmssInboundNatRulePropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.IPAllocationMethod,
+@@clientName(Microsoft.Network.IPAllocationMethod,
   "VmssIPAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Compute.IpamPoolPrefixAllocation,
+@@clientName(Microsoft.Network.IpamPoolPrefixAllocation,
   "VmssIpamPoolPrefixAllocation",
   "java"
 );
-@@clientName(Microsoft.Compute.IpamPoolPrefixAllocationPool,
+@@clientName(Microsoft.Network.IpamPoolPrefixAllocationPool,
   "VmssIpamPoolPrefixAllocationPool",
   "java"
 );
-@@clientName(Microsoft.Compute.IPConfiguration, "VmssIPConfiguration", "java");
-@@clientName(Microsoft.Compute.IPConfigurationProfile,
+@@clientName(Microsoft.Network.IPConfiguration, "VmssIPConfiguration", "java");
+@@clientName(Microsoft.Network.IPConfigurationProfile,
   "VmssIPConfigurationProfile",
   "java"
 );
-@@clientName(Microsoft.Compute.IPConfigurationProfilePropertiesFormat,
+@@clientName(Microsoft.Network.IPConfigurationProfilePropertiesFormat,
   "VmssIPConfigurationProfilePropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.IPConfigurationPropertiesFormat,
+@@clientName(Microsoft.Network.IPConfigurationPropertiesFormat,
   "VmssIPConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.IpTag, "VmssIpTag", "java");
-@@clientName(Microsoft.Compute.IPVersion, "VmssIPVersion", "java");
-@@clientName(Microsoft.Compute.LoadBalancerBackendAddress,
+@@clientName(Microsoft.Network.IpTag, "VmssIpTag", "java");
+@@clientName(Microsoft.Network.IPVersion, "VmssIPVersion", "java");
+@@clientName(Microsoft.Network.LoadBalancerBackendAddress,
   "VmssLoadBalancerBackendAddress",
   "java"
 );
-@@clientName(Microsoft.Compute.LoadBalancerBackendAddressAdminState,
+@@clientName(Microsoft.Network.LoadBalancerBackendAddressAdminState,
   "VmssLoadBalancerBackendAddressAdminState",
   "java"
 );
-@@clientName(Microsoft.Compute.LoadBalancerBackendAddressPropertiesFormat,
+@@clientName(Microsoft.Network.LoadBalancerBackendAddressPropertiesFormat,
   "VmssLoadBalancerBackendAddressPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.ManagedServiceIdentity,
+@@clientName(Microsoft.Network.ManagedServiceIdentity,
   "VmssManagedServiceIdentity",
   "java"
 );
-@@clientName(Microsoft.Compute.NatGateway, "VmssNatGateway", "java");
-@@clientName(Microsoft.Compute.NatGatewayPropertiesFormat,
+@@clientName(Microsoft.Network.NatGateway, "VmssNatGateway", "java");
+@@clientName(Microsoft.Network.NatGatewayPropertiesFormat,
   "VmssNatGatewayPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.NatGatewaySku, "VmssNatGatewaySku", "java");
-@@clientName(Microsoft.Compute.NatGatewaySkuName,
+@@clientName(Microsoft.Network.NatGatewaySku, "VmssNatGatewaySku", "java");
+@@clientName(Microsoft.Network.NatGatewaySkuName,
   "VmssNatGatewaySkuName",
   "java"
 );
-@@clientName(Microsoft.Compute.NatRulePortMapping,
+@@clientName(Microsoft.Network.NatRulePortMapping,
   "VmssNatRulePortMapping",
   "java"
 );
-@@clientName(Microsoft.Compute.NetworkInterfaceAuxiliaryMode,
+@@clientName(Microsoft.Network.NetworkInterfaceAuxiliaryMode,
   "VmssNetworkInterfaceAuxiliaryMode",
   "java"
 );
-@@clientName(Microsoft.Compute.NetworkInterfaceAuxiliarySku,
+@@clientName(Microsoft.Network.NetworkInterfaceAuxiliarySku,
   "VmssNetworkInterfaceAuxiliarySku",
   "java"
 );
-@@clientName(Microsoft.Compute.NetworkInterfaceDnsSettings,
+@@clientName(Microsoft.Network.NetworkInterfaceDnsSettings,
   "VmssNetworkInterfaceDnsSettings",
   "java"
 );
-@@clientName(Microsoft.Compute.NetworkInterfaceIPConfiguration,
+@@clientName(Microsoft.Network.NetworkInterfaceIPConfiguration,
   "VmssNetworkInterfaceIPConfiguration",
   "java"
 );
-@@clientName(Microsoft.Compute.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties,
+@@clientName(Microsoft.Network.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties,
   "VmssNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties",
   "java"
 );
-@@clientName(Microsoft.Compute.NetworkInterfaceIPConfigurationPropertiesFormat,
+@@clientName(Microsoft.Network.NetworkInterfaceIPConfigurationPropertiesFormat,
   "VmssNetworkInterfaceIPConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.NetworkInterfaceMigrationPhase,
+@@clientName(Microsoft.Network.NetworkInterfaceMigrationPhase,
   "VmssNetworkInterfaceMigrationPhase",
   "java"
 );
-@@clientName(Microsoft.Compute.NetworkInterfaceNicType,
+@@clientName(Microsoft.Network.NetworkInterfaceNicType,
   "VmssNetworkInterfaceNicType",
   "java"
 );
-@@clientName(Microsoft.Compute.NetworkInterfaceTapConfiguration,
+@@clientName(Microsoft.Network.NetworkInterfaceTapConfiguration,
   "VmssNetworkInterfaceTapConfiguration",
   "java"
 );
-@@clientName(Microsoft.Compute.NetworkInterfaceTapConfigurationPropertiesFormat,
+@@clientName(Microsoft.Network.NetworkInterfaceTapConfigurationPropertiesFormat,
   "VmssNetworkInterfaceTapConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateEndpoint, "VmssPrivateEndpoint", "java");
-@@clientName(Microsoft.Compute.PrivateEndpointConnection,
+@@clientName(Microsoft.Network.PrivateEndpoint, "VmssPrivateEndpoint", "java");
+@@clientName(Microsoft.Network.PrivateEndpointConnection,
   "VmssPrivateEndpointConnection",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateEndpointConnectionProperties,
+@@clientName(Microsoft.Network.PrivateEndpointConnectionProperties,
   "VmssPrivateEndpointConnectionProperties",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateEndpointIPConfiguration,
+@@clientName(Microsoft.Network.PrivateEndpointIPConfiguration,
   "VmssPrivateEndpointIPConfiguration",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateEndpointIPConfigurationProperties,
+@@clientName(Microsoft.Network.PrivateEndpointIPConfigurationProperties,
   "VmssPrivateEndpointIPConfigurationProperties",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateEndpointIPVersionType,
+@@clientName(Microsoft.Network.PrivateEndpointIPVersionType,
   "VmssPrivateEndpointIPVersionType",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateEndpointProperties,
+@@clientName(Microsoft.Network.PrivateEndpointProperties,
   "VmssPrivateEndpointProperties",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateLinkService,
+@@clientName(Microsoft.Network.PrivateLinkService,
   "VmssPrivateLinkService",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateLinkServiceConnection,
+@@clientName(Microsoft.Network.PrivateLinkServiceConnection,
   "VmssPrivateLinkServiceConnection",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateLinkServiceConnectionProperties,
+@@clientName(Microsoft.Network.PrivateLinkServiceConnectionProperties,
   "VmssPrivateLinkServiceConnectionProperties",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateLinkServiceConnectionState,
+@@clientName(Microsoft.Network.PrivateLinkServiceConnectionState,
   "VmssPrivateLinkServiceConnectionState",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateLinkServiceIpConfiguration,
+@@clientName(Microsoft.Network.PrivateLinkServiceIpConfiguration,
   "VmssPrivateLinkServiceIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateLinkServiceIpConfigurationProperties,
+@@clientName(Microsoft.Network.PrivateLinkServiceIpConfigurationProperties,
   "VmssPrivateLinkServiceIpConfigurationProperties",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateLinkServiceProperties,
+@@clientName(Microsoft.Network.PrivateLinkServiceProperties,
   "VmssPrivateLinkServiceProperties",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateLinkServicePropertiesAutoApproval,
+@@clientName(Microsoft.Network.PrivateLinkServicePropertiesAutoApproval,
   "VmssPrivateLinkServicePropertiesAutoApproval",
   "java"
 );
-@@clientName(Microsoft.Compute.PrivateLinkServicePropertiesVisibility,
+@@clientName(Microsoft.Network.PrivateLinkServicePropertiesVisibility,
   "VmssPrivateLinkServicePropertiesVisibility",
   "java"
 );
-@@clientName(Microsoft.Compute.PublicIPAddressDnsSettings,
+@@clientName(Microsoft.Network.PublicIPAddressDnsSettings,
   "VmssPublicIPAddressDnsSettings",
   "java"
 );
-@@clientName(Microsoft.Compute.PublicIpAddressDnsSettingsDomainNameLabelScope,
+@@clientName(Microsoft.Network.PublicIpAddressDnsSettingsDomainNameLabelScope,
   "VmssPublicIpAddressDnsSettingsDomainNameLabelScope",
   "java"
 );
-@@clientName(Microsoft.Compute.PublicIPAddressMigrationPhase,
+@@clientName(Microsoft.Network.PublicIPAddressMigrationPhase,
   "VmssPublicIPAddressMigrationPhase",
   "java"
 );
-@@clientName(Microsoft.Compute.PublicIPAddressPropertiesFormat,
+@@clientName(Microsoft.Network.PublicIPAddressPropertiesFormat,
   "VmssPublicIPAddressPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.PublicIPAddressSku,
+@@clientName(Microsoft.Network.PublicIPAddressSku,
   "VmssPublicIPAddressSku",
   "java"
 );
-@@clientName(Microsoft.Compute.PublicIPAddressSkuName,
+@@clientName(Microsoft.Network.PublicIPAddressSkuName,
   "VmssPublicIPAddressSkuName",
   "java"
 );
-@@clientName(Microsoft.Compute.PublicIPAddressSkuTier,
+@@clientName(Microsoft.Network.PublicIPAddressSkuTier,
   "VmssPublicIPAddressSkuTier",
   "java"
 );
-@@clientName(Microsoft.Compute.ResourceIdentityType,
+@@clientName(Microsoft.Network.ResourceIdentityType,
   "VmssResourceIdentityType",
   "java"
 );
-@@clientName(Microsoft.Compute.ResourceNavigationLink,
+@@clientName(Microsoft.Network.ResourceNavigationLink,
   "VmssResourceNavigationLink",
   "java"
 );
-@@clientName(Microsoft.Compute.ResourceNavigationLinkFormat,
+@@clientName(Microsoft.Network.ResourceNavigationLinkFormat,
   "VmssResourceNavigationLinkFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.ResourceSet, "VmssResourceSet", "java");
-@@clientName(Microsoft.Compute.RetentionPolicyParameters,
+@@clientName(Microsoft.Network.ResourceSet, "VmssResourceSet", "java");
+@@clientName(Microsoft.Network.RetentionPolicyParameters,
   "VmssRetentionPolicyParameters",
   "java"
 );
-@@clientName(Microsoft.Compute.RouteNextHopType,
+@@clientName(Microsoft.Network.RouteNextHopType,
   "VmssRouteNextHopType",
   "java"
 );
-@@clientName(Microsoft.Compute.RoutePropertiesFormat,
+@@clientName(Microsoft.Network.RoutePropertiesFormat,
   "VmssRoutePropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.SecurityRuleAccess,
+@@clientName(Microsoft.Network.SecurityRuleAccess,
   "VmssSecurityRuleAccess",
   "java"
 );
-@@clientName(Microsoft.Compute.SecurityRuleDirection,
+@@clientName(Microsoft.Network.SecurityRuleDirection,
   "VmssSecurityRuleDirection",
   "java"
 );
-@@clientName(Microsoft.Compute.SecurityRuleProtocol,
+@@clientName(Microsoft.Network.SecurityRuleProtocol,
   "VmssSecurityRuleProtocol",
   "java"
 );
-@@clientName(Microsoft.Compute.ServiceAssociationLink,
+@@clientName(Microsoft.Network.ServiceAssociationLink,
   "VmssServiceAssociationLink",
   "java"
 );
-@@clientName(Microsoft.Compute.ServiceAssociationLinkPropertiesFormat,
+@@clientName(Microsoft.Network.ServiceAssociationLinkPropertiesFormat,
   "VmssServiceAssociationLinkPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.ServiceDelegationPropertiesFormat,
+@@clientName(Microsoft.Network.ServiceDelegationPropertiesFormat,
   "VmssServiceDelegationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.ServiceEndpointPolicy,
+@@clientName(Microsoft.Network.ServiceEndpointPolicy,
   "VmssServiceEndpointPolicy",
   "java"
 );
-@@clientName(Microsoft.Compute.ServiceEndpointPolicyDefinition,
+@@clientName(Microsoft.Network.ServiceEndpointPolicyDefinition,
   "VmssServiceEndpointPolicyDefinition",
   "java"
 );
-@@clientName(Microsoft.Compute.ServiceEndpointPolicyDefinitionPropertiesFormat,
+@@clientName(Microsoft.Network.ServiceEndpointPolicyDefinitionPropertiesFormat,
   "VmssServiceEndpointPolicyDefinitionPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.ServiceEndpointPolicyPropertiesFormat,
+@@clientName(Microsoft.Network.ServiceEndpointPolicyPropertiesFormat,
   "VmssServiceEndpointPolicyPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.ServiceEndpointPropertiesFormat,
+@@clientName(Microsoft.Network.ServiceEndpointPropertiesFormat,
   "VmssServiceEndpointPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Compute.SharingScope, "VmssSharingScope", "java");
-@@clientName(Microsoft.Compute.SyncMode, "VmssSyncMode", "java");
-@@clientName(Microsoft.Compute.TrafficAnalyticsConfigurationProperties,
+@@clientName(Microsoft.Network.SharingScope, "VmssSharingScope", "java");
+@@clientName(Microsoft.Network.SyncMode, "VmssSyncMode", "java");
+@@clientName(Microsoft.Network.TrafficAnalyticsConfigurationProperties,
   "VmssTrafficAnalyticsConfigurationProperties",
   "java"
 );
-@@clientName(Microsoft.Compute.TrafficAnalyticsProperties,
+@@clientName(Microsoft.Network.TrafficAnalyticsProperties,
   "VmssTrafficAnalyticsProperties",
   "java"
 );
-@@clientName(Microsoft.Compute.TransportProtocol,
+@@clientName(Microsoft.Network.TransportProtocol,
   "VmssTransportProtocol",
   "java"
 );
-@@clientName(Microsoft.Compute.VirtualNetworkPrivateEndpointNetworkPolicies,
+@@clientName(Microsoft.Network.VirtualNetworkPrivateEndpointNetworkPolicies,
   "VmssVirtualNetworkPrivateEndpointNetworkPolicies",
   "java"
 );
-@@clientName(Microsoft.Compute.VirtualNetworkPrivateLinkServiceNetworkPolicies,
+@@clientName(Microsoft.Network.VirtualNetworkPrivateLinkServiceNetworkPolicies,
   "VmssVirtualNetworkPrivateLinkServiceNetworkPolicies",
   "java"
 );
-@@clientName(Microsoft.Compute.VirtualNetworkTap,
+@@clientName(Microsoft.Network.VirtualNetworkTap,
   "VmssVirtualNetworkTap",
   "java"
 );
-@@clientName(Microsoft.Compute.VirtualNetworkTapPropertiesFormat,
+@@clientName(Microsoft.Network.VirtualNetworkTapPropertiesFormat,
   "VmssVirtualNetworkTapPropertiesFormat",
   "java"
 );

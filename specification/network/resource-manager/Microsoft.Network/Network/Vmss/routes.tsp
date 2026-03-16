@@ -46,17 +46,10 @@ interface NetworkInterfacesOperationGroup {
   @tag("NetworkInterfaces")
   @get
   @list
-<<<<<<< HEAD
-  @action("networkInterfaces")
-  listVirtualMachineScaleSetNetworkInterfaces is ArmProviderActionSync<
-    Response = VmssNetworkInterfaceListResult,
-    Scope = Extension.ResourceGroup,
-=======
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/networkInterfaces")
   listVirtualMachineScaleSetNetworkInterfaces is NetworkInterfaceListOps.ActionSync<
     NetworkInterface,
     Request = void,
->>>>>>> Convert-Network-2025-05
     Parameters = {
       /**
        * The name of the virtual machine scale set.
@@ -65,7 +58,7 @@ interface NetworkInterfacesOperationGroup {
       @key
       virtualMachineScaleSetName: string;
     },
-    Response = ArmResponse<ResourceListResult<NetworkInterface>>,
+    Response = ArmResponse<VmssNetworkInterfaceListResult>,
     OverrideErrorType = CloudError
   >;
 }
@@ -79,17 +72,10 @@ interface PublicIPAddressesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @list
-<<<<<<< HEAD
-  @action("publicipaddresses")
-  listVirtualMachineScaleSetPublicIPAddresses is ArmProviderActionSync<
-    Response = VmssPublicIpAddressListResult,
-    Scope = Extension.ResourceGroup,
-=======
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/publicipaddresses")
   listVirtualMachineScaleSetPublicIPAddresses is PublicIPAddressListOps.ActionSync<
     PublicIPAddress,
     Request = void,
->>>>>>> Convert-Network-2025-05
     Parameters = {
       /**
        * The name of the virtual machine scale set.
@@ -98,7 +84,7 @@ interface PublicIPAddressesOperationGroup {
       @key
       virtualMachineScaleSetName: string;
     },
-    Response = ArmResponse<ResourceListResult<PublicIPAddress>>,
+    Response = ArmResponse<VmssPublicIpAddressListResult>,
     OverrideErrorType = CloudError
   >;
 }

@@ -26051,8 +26051,8 @@ model VirtualNetworkAppliancePropertiesFormat {
  * The virtual network appliance ip configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model VirtualNetworkApplianceIpConfiguration extends SubResource {
   /**
    * Properties of the virtual network appliance ip configuration.

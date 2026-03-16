@@ -87,11 +87,7 @@ interface NetworkInterfaces {
       @key
       virtualmachineIndex: string;
     },
-<<<<<<< HEAD
     Response = ArmResponse<VmssNetworkInterfaceListResult>,
-=======
-    Response = ArmResponse<ResourceListResult<NetworkInterface>>,
->>>>>>> Convert-Network-2025-05
     OverrideErrorType = CloudError
   >;
 }
