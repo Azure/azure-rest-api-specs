@@ -12,7 +12,7 @@ The current stable release of Language is 2026-05-01.
 
 ### Release 2026-05-01
 
-These settings apply only when `--tag=release_2026_05_01` is specified on the command line.
+These settings apply only when `--tag=release_2026-05-01` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2026-05-01'
 input-file:
@@ -25,7 +25,7 @@ modelerfour:
 
 ### Release 2024-11-15-preview
 
-These settings apply only when `--tag=release_2024_11_15_preview` is specified on the command line.
+These settings apply only when `--tag=release_2024-11-15-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2024-11-15-preview'
 input-file:
@@ -38,7 +38,7 @@ modelerfour:
 
 ### Release 2023-11-15-preview
 
-These settings apply only when `--tag=release_2023_11_15_preview` is specified on the command line.
+These settings apply only when `--tag=release_2023-11-15-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2023-11-15-preview'
 input-file:
