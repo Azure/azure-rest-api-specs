@@ -14,14 +14,14 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
 openapi-type: arm
-tag: package-2024-04-05
+tag: package-2026-03-01
 ```
 
-### Tag: package-2024-04-05
+### Tag: package-2026-03-01
 
-These settings apply only when `--tag=package-2024-04-05` is specified on the command line.
+These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-04-05'
+```yaml $(tag) == 'package-2026-03-01'
 input-file:
-  - stable/2024-04-05/guestresources.json
+  - stable/2026-03-01/guestresources.json
 ```

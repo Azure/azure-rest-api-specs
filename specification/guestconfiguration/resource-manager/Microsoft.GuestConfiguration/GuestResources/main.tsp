@@ -22,10 +22,10 @@ namespace Microsoft.GuestConfiguration;
  */
 enum Versions {
   /**
-   * The 2024-04-05 API version.
+   * The 2026-03-01 API version.
    */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-  v2024_04_05: "2024-04-05",
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_03_01: "2026-03-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
