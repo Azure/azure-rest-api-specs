@@ -765,12 +765,6 @@
           "$ref": "#/definitions/EncryptionSettings",
           "description": "Encryption settings for the account."
         },
-        "tenantId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The Azure AD tenant ID associated with this account.",
-          "readOnly": true
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -853,7 +847,11 @@
           "description": "The status of the last operation.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "modelName",
+        "provider"
+      ]
     },
     "EncryptionSettings": {
       "type": "object",

@@ -9,7 +9,6 @@ import "../common.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.PromptService;
@@ -25,10 +24,6 @@ model AccountProperties {
 
   /** Encryption settings for the account. */
   encryptionSettings?: EncryptionSettings;
-
-  /** The Azure AD tenant ID associated with this account. */
-  @visibility(Lifecycle.Read)
-  tenantId?: uuid;
 
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)

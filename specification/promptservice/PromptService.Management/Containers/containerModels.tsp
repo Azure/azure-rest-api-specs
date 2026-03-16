@@ -20,10 +20,11 @@ model ContainerProperties {
   description?: string;
 
   /** The model name associated with this container (e.g., gpt-4, claude-3). */
-  modelName?: string;
+  modelName: string;
 
-  /** The AI provider associated with this container (e.g., OpenAI, Anthropic). */
-  provider?: string = "OpenAI";
+  /** The AI provider associated with this container (e.g., OpenAI, Anthropic). 
+  This is a free-form string used as blob metadata to avoid maintenance overhead as new providers are onboarded. */
+  provider: string = "OpenAI";
 
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
