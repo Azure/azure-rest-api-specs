@@ -39,6 +39,7 @@ using Microsoft.ConfidentialLedger;
 @@clientName(LedgerType, "ConfidentialLedgerType", "csharp");
 @@clientName(ProvisioningState, "ConfidentialLedgerProvisioningState", "csharp");
 @@clientName(LedgerSku, "ConfidentialLedgerSku", "csharp");
+@@clientName(ConfidentialLedgerFilesExport, "ConfidentialLedgerFilesExportContent", "csharp");
 @@clientName(ConfidentialLedgerFilesExportResponse, "ConfidentialLedgerFilesExportResult", "csharp");
 @@alternateType(AADBasedSecurityPrincipal.tenantId, Azure.Core.uuid, "csharp");
 @@alternateType(AADBasedSecurityPrincipal.principalId, Azure.Core.uuid, "csharp");
