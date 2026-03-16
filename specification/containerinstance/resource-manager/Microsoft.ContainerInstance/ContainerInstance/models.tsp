@@ -871,6 +871,7 @@ model EnvironmentVariable {
   /**
    * The value of the secure environment variable.
    */
+  @secret
   secureValue?: string;
 
   /**
@@ -1248,6 +1249,7 @@ model ImageRegistryCredential {
   /**
    * The password for the private registry.
    */
+  @secret
   password?: string;
 
   /**
@@ -1427,6 +1429,7 @@ model LogAnalytics {
   /**
    * The workspace key for log analytics
    */
+  @secret
   workspaceKey: string;
 
   /**
@@ -1443,6 +1446,7 @@ model LogAnalytics {
   /**
    * The workspace resource id for log analytics
    */
+  @secret
   workspaceResourceId?: string;
 }
 
@@ -1704,6 +1708,7 @@ model StandbyPoolProfileDefinition {
  * An error response from the Container Instance service.
  */
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * An error response from the Container Instance service.
@@ -1714,6 +1719,7 @@ model CloudError {
 /**
  * An error response from the Container Instance service.
  */
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
@@ -2070,6 +2076,7 @@ model ContainerExecResponse {
   /**
    * The password to start the exec command.
    */
+  @secret
   password?: string;
 }
 
@@ -2085,13 +2092,27 @@ model ContainerAttachResponse {
   /**
    * The password to the output stream from the attach. Send as an Authorization header value when connecting to the websocketUri.
    */
+  @secret
   password?: string;
 }
 
 /**
  * The response containing cached images.
  */
-model CachedImagesListResult is Azure.Core.Page<CachedImages>;
+model CachedImagesListResult {
+  /**
+   * The cached images.
+   */
+  @pageItems
+  @identifiers(#["image"])
+  value?: CachedImages[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * The cached image and OS type.
@@ -2111,7 +2132,20 @@ model CachedImages {
 /**
  * The response containing list of capabilities.
  */
-model CapabilitiesListResult is Azure.Core.Page<Capabilities>;
+model CapabilitiesListResult {
+  /**
+   * The list of capabilities.
+   */
+  @pageItems
+  @identifiers(#["resourceType", "location"])
+  value?: Capabilities[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * The regional capabilities.

@@ -42,7 +42,17 @@ interface NGroups {
    * Create or update a NGroups resource.
    */
   @summary("NGroup PUT REST API")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NGroup>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    NGroup,
+    Response = (ArmResourceUpdatedResponse<NGroup> & {
+      @header("Azure-AsyncOperation")
+      `Azure-AsyncOperation`: string;
+    }) | ArmResourceCreatedResponse<
+      NGroup,
+      ArmAsyncOperationHeader<FinalResult = NGroup> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  >;
 
   /**
    * Update a specified NGroups resource.
@@ -52,8 +62,17 @@ interface NGroups {
   update is ArmCustomPatchAsync<
     NGroup,
     PatchModel = NGroupPatch,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = NGroup> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = (ArmResponse<NGroup> & {
+      @header("Azure-AsyncOperation")
+      `Azure-AsyncOperation`: string;
+    }) | ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      ArmAsyncOperationHeader<FinalResult = NGroup> &
+        Azure.Core.Foundations.RetryAfterHeader & {
+          @header("Location")
+          Location: string;
+        }
+    >
   >;
 
   /**
@@ -63,8 +82,11 @@ interface NGroups {
   @summary("NGroups Delete REST API")
   delete is ArmResourceDeleteWithoutOkAsync<
     NGroup,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = (ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("Location")
+      Location: string;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -95,7 +117,10 @@ interface NGroups {
     NGroup,
     void,
     ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("Location")
+      Location: string;
+    },
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NGroup>
   >;
 
@@ -117,9 +142,12 @@ interface NGroups {
   restart is ArmResourceActionAsyncBase<
     NGroup,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NGroup>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NGroup>,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("Location")
+      Location: string;
+    }
   >;
 }
 

@@ -1448,9 +1448,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'NGroup' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/NGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           },
           "201": {
@@ -1519,9 +1524,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/NGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           },
           "202": {
@@ -1530,6 +1540,9 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string"
               },
               "Retry-After": {
                 "type": "integer",
@@ -1578,11 +1591,14 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string"
               },
               "Retry-After": {
                 "type": "integer",
@@ -1635,11 +1651,14 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string"
               },
               "Retry-After": {
                 "type": "integer",
@@ -1689,11 +1708,14 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string"
               },
               "Retry-After": {
                 "type": "integer",
@@ -1943,20 +1965,19 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The CachedImages items on this page",
+          "description": "The cached images.",
           "items": {
             "$ref": "#/definitions/CachedImages"
-          }
+          },
+          "x-ms-identifiers": [
+            "image"
+          ]
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URL to get the next set of results."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "Capabilities": {
       "type": "object",
@@ -2024,20 +2045,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Capabilities items on this page",
+          "description": "The list of capabilities.",
           "items": {
             "$ref": "#/definitions/Capabilities"
-          }
+          },
+          "x-ms-identifiers": [
+            "resourceType",
+            "location"
+          ]
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URL to get the next set of results."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "CloudError": {
       "type": "object",
@@ -2047,7 +2068,8 @@
           "$ref": "#/definitions/CloudErrorBody",
           "description": "An error response from the Container Instance service."
         }
-      }
+      },
+      "x-ms-external": true
     },
     "CloudErrorBody": {
       "type": "object",
@@ -2076,7 +2098,8 @@
             "target"
           ]
         }
-      }
+      },
+      "x-ms-external": true
     },
     "ConfidentialComputeProperties": {
       "type": "object",
@@ -2130,7 +2153,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The password to the output stream from the attach. Send as an Authorization header value when connecting to the websocketUri."
+          "format": "password",
+          "description": "The password to the output stream from the attach. Send as an Authorization header value when connecting to the websocketUri.",
+          "x-ms-secret": true
         }
       }
     },
@@ -2187,7 +2212,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The password to start the exec command."
+          "format": "password",
+          "description": "The password to start the exec command.",
+          "x-ms-secret": true
         }
       }
     },
@@ -3352,7 +3379,9 @@
         },
         "secureValue": {
           "type": "string",
-          "description": "The value of the secure environment variable."
+          "format": "password",
+          "description": "The value of the secure environment variable.",
+          "x-ms-secret": true
         },
         "secureValueReference": {
           "type": "string",
@@ -3629,7 +3658,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The password for the private registry."
+          "format": "password",
+          "description": "The password for the private registry.",
+          "x-ms-secret": true
         },
         "passwordReference": {
           "type": "string",
@@ -4049,7 +4080,9 @@
         },
         "workspaceKey": {
           "type": "string",
-          "description": "The workspace key for log analytics"
+          "format": "password",
+          "description": "The workspace key for log analytics",
+          "x-ms-secret": true
         },
         "logType": {
           "$ref": "#/definitions/LogAnalyticsLogType",
@@ -4064,7 +4097,9 @@
         },
         "workspaceResourceId": {
           "type": "string",
-          "description": "The workspace resource id for log analytics"
+          "format": "password",
+          "description": "The workspace resource id for log analytics",
+          "x-ms-secret": true
         }
       },
       "required": [
