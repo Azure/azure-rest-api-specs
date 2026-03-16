@@ -27,6 +27,10 @@ using Microsoft.NetworkCloud;
   Azure.Core.ipV4Address,
   "csharp"
 );
+@@clientName(BareMetalMachineProperties.caCertificate,
+  "CACertificate",
+  "csharp"
+);
 @@clientName(BareMetalMachineConfigurationData,
   "BareMetalMachineConfiguration",
   "csharp"
@@ -144,6 +148,10 @@ using Microsoft.NetworkCloud;
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
+@@alternateType(L2NetworkProperties.l2IsolationDomainId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(L2NetworkProperties.virtualMachinesAssociatedIds,
   Azure.Core.armResourceIdentifier[],
   "csharp"
@@ -217,6 +225,10 @@ using Microsoft.NetworkCloud;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@clientName(StorageApplianceProperties.caCertificate,
+  "CACertificate",
+  "csharp"
+);
 @@alternateType(StorageApplianceProperties.clusterId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -275,6 +287,7 @@ using Microsoft.NetworkCloud;
   "csharp"
 );
 @@clientName(VolumeProperties.sizeMiB, "SizeInMiB", "csharp");
+@@clientName(VolumeProperties.allocatedSizeMiB, "AllocatedInSizeMiB", "csharp");
 @@clientName(AadConfiguration, "NetworkCloudAadConfiguration", "csharp");
 @@clientName(AgentPoolMode, "NetworkCloudAgentPoolMode", "csharp");
 @@clientName(AgentPoolPatchParameters, "NetworkCloudAgentPoolPatch", "csharp");
@@ -300,7 +313,6 @@ using Microsoft.NetworkCloud;
   "NetworkCloudKubernetesClusterFeaturePatch",
   "csharp"
 );
-@@clientName(AgentPoolPatchParameters, "NetworkCloudAgentPoolPatch", "csharp");
 @@clientName(AgentPool, "NetworkCloudAgentPool", "csharp");
 @@clientName(KubernetesCluster, "NetworkCloudKubernetesCluster", "csharp");
 @@clientName(BareMetalMachine, "NetworkCloudBareMetalMachine", "csharp");
@@ -341,10 +353,6 @@ using Microsoft.NetworkCloud;
 @@clientName(RackDefinition, "NetworkCloudRackDefinition", "csharp");
 @@clientName(SshPublicKey, "NetworkCloudSshPublicKey", "csharp");
 @@clientName(StorageProfile, "NetworkCloudStorageProfile", "csharp");
-@@clientName(ClusterAvailableUpgradeVersion,
-  "ClusterAvailableUpgradeVersion",
-  "csharp"
-);
 @@clientName(OperationStatusResult,
   "NetworkCloudOperationStatusResult",
   "csharp"
@@ -397,9 +405,17 @@ using Microsoft.NetworkCloud;
 
 // prepend-rp-prefix renames (types that need NetworkCloud prefix)
 @@clientName(ActionState, "NetworkCloudActionState", "csharp");
+@@clientName(ActionState.endTime, "EndOn", "csharp");
+@@alternateType(ActionState.endTime, utcDateTime, "csharp");
+@@clientName(ActionState.startTime, "StartOn", "csharp");
+@@alternateType(ActionState.startTime, utcDateTime, "csharp");
 @@clientName(ActionStateStatus, "NetworkCloudActionStateStatus", "csharp");
 @@clientName(CertificateInfo, "NetworkCloudCertificateInfo", "csharp");
 @@clientName(StepState, "NetworkCloudStepState", "csharp");
+@@clientName(StepState.endTime, "EndOn", "csharp");
+@@alternateType(StepState.endTime, utcDateTime, "csharp");
+@@clientName(StepState.startTime, "StartOn", "csharp");
+@@alternateType(StepState.startTime, utcDateTime, "csharp");
 @@clientName(StepStateStatus, "NetworkCloudStepStateStatus", "csharp");
 
 // Parameters → Content renames (autorest rename-mapping equivalents)
