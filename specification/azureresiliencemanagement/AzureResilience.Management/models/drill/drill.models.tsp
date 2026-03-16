@@ -381,6 +381,14 @@ model AttentionReason {
   @doc("Permissions needed by the Drill MSI to run the chaos experiment.")
   rbacNeededForDrillOnExperiment?: string[];
 
+  @doc("Drill object does not have the necessary RBAC to run the chaos resource.")
+  @added(Versions.v2026_03_01_preview)
+  drillRbacOnChaosResource?: RBACState;
+
+  @doc("Permissions needed by the Drill MSI to run the chaos resource.")
+  @added(Versions.v2026_03_01_preview)
+  rbacNeededForDrillOnChaosResource?: string[];
+
   @doc("Drill object does not have the necessary RBAC to run the Recovery Plan.")
   drillRbacOnRecoveryPlan?: RBACState;
 
@@ -411,11 +419,23 @@ model AttentionReason {
   @doc("RBAC required by Experiment MSI not setup on the target resources.")
   faultRbacOnTargets?: RBACState;
 
+  @doc("RBAC required by Chaos Resource MSI not setup on the target resources.")
+  @added(Versions.v2026_03_01_preview)
+  faultRbacOnTargetResources?: RBACState;
+
   @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
   runbookFaultRbacOnTargets?: RBACState;
 
   @doc("One or more Target or Capability object is deleted.")
   targets?: ExtensionObjectState;
+
+  @doc("Chaos resource for faulting exists or not.")
+  @added(Versions.v2026_03_01_preview)
+  chaosResource?: ExtensionObjectState;
+
+  @doc("Reason for Chaos Resource Creation failure")
+  @added(Versions.v2026_03_01_preview)
+  chaosResourceCreationFailureReasons?: string[];
 
   @doc("Resources associated in Recovery Plan and Drill are out of sync.")
   recoveryPlanAndDrillResourcesState?: RelativeResourceCompositionState;
@@ -428,6 +448,10 @@ model AttentionReason {
 
   @doc("User MSI associated with chaos experiment object is deleted.")
   chaosExperimentUserMsi?: ExtensionObjectState;
+
+  @doc("User MSI associated with chaos resource object is deleted.")
+  @added(Versions.v2026_03_01_preview)
+  chaosResourceUserMsi?: ExtensionObjectState;
 
   @doc("Included resource in Drill.")
   includedResourceInDrill?: ExtensionObjectState;
@@ -458,7 +482,7 @@ model AttentionReason {
   @added(Versions.v2026_03_01_preview)
   rbacNeededForDrillOnDrillResources?: string[];
 
-  @doc("List of required required Azure resource providers that are not registered in the subscription specified for chaos experiment.")
+  @doc("List of required required Azure resource providers that are not registered in the subscription specified for chaos resource.")
   @added(Versions.v2026_03_01_preview)
   missingRequiredResourceProviders?: string[];
 }
@@ -581,6 +605,11 @@ model FailedDrillResource {
   @visibility(Lifecycle.Read)
   targetAndCapabilityAssignmentError?: ErrorDetails;
 
+  @doc("Target resource RBAC assignment error.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  targetResourceAssignmentError?: ErrorDetails;
+
   @doc("RBAC assignment error.")
   @visibility(Lifecycle.Read)
   rbacAssignmentError?: ErrorDetails;
@@ -594,12 +623,16 @@ model DrillPatchProperties {
   @doc("Recovery Plan properties.")
   recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
 
+  @doc("Properties for internal resources that are created for the Drill.")
+  @added(Versions.v2026_03_01_preview)
+  drillAssetProperties?: AssetPropertiesOfDrill;
+
   @doc("Chaos Experiment properties.")
   chaosExperimentProperties?: ChaosExperimentPropertiesOfDrill;
 
   @doc("Chaos Resource properties.")
   @added(Versions.v2026_03_01_preview)
-  chaosResourceProperties: ChaosResourcePropertiesOfDrill;
+  chaosResourceProperties?: ChaosResourcePropertiesOfDrill;
 
   @doc("HealthModel properties.")
   healthModelProperties?: HealthModelPropertiesOfDrill;

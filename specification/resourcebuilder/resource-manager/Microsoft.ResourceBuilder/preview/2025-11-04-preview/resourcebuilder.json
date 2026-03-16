@@ -46,6 +46,9 @@
       "name": "Datasets"
     },
     {
+      "name": "DataConnections"
+    },
+    {
       "name": "Pipelines"
     },
     {
@@ -379,6 +382,235 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceBuilder/workspaces/{workspaceName}/dataConnections": {
+      "get": {
+        "operationId": "DataConnections_List",
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "List DataConnection resources by Workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnections_List": {
+            "$ref": "./examples/DataConnections_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceBuilder/workspaces/{workspaceName}/dataConnections/{dataConnectionName}": {
+      "get": {
+        "operationId": "DataConnections_Get",
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Get a DataConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "dataConnectionName",
+            "in": "path",
+            "description": "The name of the data connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnections_Get": {
+            "$ref": "./examples/DataConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataConnections_CreateOrUpdate",
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Create a DataConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "dataConnectionName",
+            "in": "path",
+            "description": "The name of the data connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DataConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'DataConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnections_AzureDataExplorer_CreateOrUpdate": {
+            "$ref": "./examples/DataConnections_AzureDataExplorer_CreateOrUpdate.json"
+          },
+          "DataConnections_StorageAccount_CreateOrUpdate": {
+            "$ref": "./examples/DataConnections_StorageAccount_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DataConnections_Delete",
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Delete a DataConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "dataConnectionName",
+            "in": "path",
+            "description": "The name of the data connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnections_Delete": {
+            "$ref": "./examples/DataConnections_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceBuilder/workspaces/{workspaceName}/datasets": {
       "get": {
         "operationId": "Datasets_List",
@@ -551,6 +783,12 @@
           },
           "Datasets_CreateOrUpdate": {
             "$ref": "./examples/Datasets_CreateOrUpdate.json"
+          },
+          "Datasets_WithAdxConnection_CreateOrUpdate": {
+            "$ref": "./examples/Datasets_WithAdxConnection_CreateOrUpdate.json"
+          },
+          "Datasets_WithStorageConnection_CreateOrUpdate": {
+            "$ref": "./examples/Datasets_WithStorageConnection_CreateOrUpdate.json"
           }
         }
       },
@@ -1025,8 +1263,14 @@
           }
         },
         "x-ms-examples": {
+          "Jobs_AzureDataExplorerIngestion_CreateOrUpdate": {
+            "$ref": "./examples/Jobs_AzureDataExplorerIngestion_CreateOrUpdate.json"
+          },
           "Jobs_AzureDataExplorerPublish_CreateOrUpdate": {
             "$ref": "./examples/Jobs_AzureDataExplorerPublish_CreateOrUpdate.json"
+          },
+          "Jobs_AzureStorageAccountIngestion_CreateOrUpdate": {
+            "$ref": "./examples/Jobs_AzureStorageAccountIngestion_CreateOrUpdate.json"
           },
           "Jobs_Batch_CreateOrUpdate": {
             "$ref": "./examples/Jobs_Batch_CreateOrUpdate.json"
@@ -1100,9 +1344,9 @@
     }
   },
   "definitions": {
-    "AdditionalProperties": {
+    "AdditionalProperty": {
       "type": "object",
-      "description": "Additional Properties column",
+      "description": "Additional Property column",
       "properties": {
         "name": {
           "type": "string",
@@ -1148,6 +1392,66 @@
         ]
       }
     },
+    "ArmRelationshipDatasetSchema": {
+      "type": "object",
+      "description": "ARM relationship dataset schema.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The full ARM resource ID."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the ARM relationship."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID where the resource resides."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID where the resource resides."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "The Azure region where the resource is located."
+        },
+        "targetId": {
+          "type": "string",
+          "description": "The full ARM resource ID of the target resource."
+        },
+        "targetType": {
+          "type": "string",
+          "description": "The type of the target ARM resource."
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "The type of the relationship."
+        },
+        "relationshipTypeAttributes": {
+          "type": "array",
+          "description": "The attributes of the relationship type (optional).",
+          "items": {
+            "$ref": "#/definitions/AdditionalProperty"
+          }
+        },
+        "lastSeenTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the relationship was last seen (optional)."
+        }
+      },
+      "required": [
+        "resourceId",
+        "resourceType",
+        "tenantId",
+        "subscriptionId",
+        "resourceLocation",
+        "targetId",
+        "targetType",
+        "relationshipType"
+      ]
+    },
     "ArmResourceDatasetSchema": {
       "type": "object",
       "description": "ARM resource dataset schema.",
@@ -1188,14 +1492,14 @@
           "type": "array",
           "description": "The tags associated with the ARM resource (optional).",
           "items": {
-            "$ref": "#/definitions/AdditionalProperties"
+            "$ref": "#/definitions/AdditionalProperty"
           }
         },
         "resourceProperties": {
           "type": "array",
           "description": "The resource properties of the ARM resource (optional).",
           "items": {
-            "$ref": "#/definitions/AdditionalProperties"
+            "$ref": "#/definitions/AdditionalProperty"
           }
         },
         "resourceTimestamp": {
@@ -1338,6 +1642,120 @@
         }
       ],
       "x-ms-discriminator-value": "AzureDataExplorerSink"
+    },
+    "DataConnection": {
+      "type": "object",
+      "description": "Data connection resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataConnectionProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/DataConnectionKind",
+          "description": "Data connection kind discriminator. Determines which properties are valid for this data connection."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets tags of the resource",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataConnectionKind": {
+      "type": "string",
+      "description": "Data connection kind discriminator",
+      "enum": [
+        "AzureDataExplorer",
+        "StorageAccount"
+      ],
+      "x-ms-enum": {
+        "name": "DataConnectionKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureDataExplorer",
+            "value": "AzureDataExplorer",
+            "description": "Azure Data Explorer data connection."
+          },
+          {
+            "name": "StorageAccount",
+            "value": "StorageAccount",
+            "description": "Storage Account data connection."
+          }
+        ]
+      }
+    },
+    "DataConnectionListResult": {
+      "type": "object",
+      "description": "The response of a DataConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/DataConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataConnectionProperties": {
+      "type": "object",
+      "description": "Data connection properties - properties vary by kind.\nEach data connection kind has specific required and optional properties as documented below.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the data connection.",
+          "readOnly": true
+        },
+        "clusterUri": {
+          "type": "string",
+          "description": "URI of the Azure Data Explorer cluster. Required for AzureDataExplorer data connections."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database within the Azure Data Explorer cluster. Required for AzureDataExplorer data connections."
+        },
+        "storageAccountUri": {
+          "type": "string",
+          "description": "URI of the Azure Storage Account. Required for StorageAccount data connections."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Name of the container within the Azure Storage Account. Required for StorageAccount data connections."
+        }
+      }
+    },
+    "DataConnectionReference": {
+      "type": "object",
+      "description": "Data connection reference. Used to link a dataset to an existing data connection resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ARM resource ID of the data connection."
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "DataQualityMetricEvaluation": {
       "type": "object",
@@ -1823,7 +2241,8 @@
       "description": "Dataset kind discriminator",
       "enum": [
         "Custom",
-        "ArmResource"
+        "ArmResource",
+        "ArmRelationship"
       ],
       "x-ms-enum": {
         "name": "DatasetKind",
@@ -1838,6 +2257,11 @@
             "name": "ArmResource",
             "value": "ArmResource",
             "description": "ARM (Azure Resource Manager) managed resource dataset."
+          },
+          {
+            "name": "ArmRelationship",
+            "value": "ArmRelationship",
+            "description": "ARM (Azure Resource Manager) relationship dataset."
           }
         ]
       }
@@ -1883,12 +2307,24 @@
           "$ref": "#/definitions/ArmResourceDatasetSchema",
           "description": "ArmResource ArmResourceDatasetSchema object."
         },
+        "armRelationshipSchema": {
+          "$ref": "#/definitions/ArmRelationshipDatasetSchema",
+          "description": "ArmRelationship ArmRelationshipDatasetSchema object."
+        },
         "locations": {
           "type": "array",
           "description": "Azure regions where the dataset exists.",
           "items": {
             "type": "string"
           }
+        },
+        "connection": {
+          "$ref": "#/definitions/DataConnectionReference",
+          "description": "Reference to an existing data connection resource that provides the source connection for this dataset."
+        },
+        "path": {
+          "type": "string",
+          "description": "Path (e.g. blob prefix) within the target specified by the connection. Applicable only for StorageAccount kind connections."
         }
       }
     },
@@ -2125,21 +2561,21 @@
         },
         "inputs": {
           "type": "array",
-          "description": "Input datasets for the job. Required for AzureDataExplorerPublish and DataQualityValidation jobs.",
+          "description": "Input datasets for the job. Required for Batch, AzureDataExplorerPublish, DataQualityValidation, and AzureResourceGraph_Galaxy jobs.",
           "items": {
             "$ref": "#/definitions/JobDataset"
           }
         },
         "outputs": {
           "type": "array",
-          "description": "Output datasets for the job.",
+          "description": "Output datasets for the job. Required for Batch, AzureStorageAccountIngestion (exactly 1), AzureDataExplorerIngestion (exactly 1), and AzureResourceGraph_Galaxy jobs.",
           "items": {
             "$ref": "#/definitions/JobDataset"
           }
         },
         "processingLogic": {
           "$ref": "#/definitions/ProcessingLogic",
-          "description": "Processing logic for the job. Required for Batch jobs."
+          "description": "Processing logic for the job. Required for Batch, AzureDataExplorerIngestion, and AzureResourceGraph_Galaxy jobs."
         },
         "primaryKeyAttributes": {
           "type": "array",
@@ -2163,17 +2599,13 @@
           "type": "string",
           "description": "Retention window to evict latest records. Used by Batch jobs."
         },
-        "outputDatasetName": {
-          "type": "string",
-          "description": "Name of the output dataset for the job. Required for AzureStorageAccountIngestion and AzureDataExplorerIngestion jobs."
-        },
         "blobPartitionPath": {
           "type": "string",
           "description": "Path to the blob partition used for data ingestion. Required for AzureStorageAccountIngestion jobs."
         },
         "timeOffset": {
           "type": "string",
-          "description": "Time offset for the job execution. Used by AzureStorageAccountIngestion jobs."
+          "description": "Time offset between DateTime.UtcNow and the timestamp of the blob available in source, used for the blob partition path. Used by AzureStorageAccountIngestion jobs. Defaults to 00:00:00."
         },
         "sink": {
           "$ref": "#/definitions/AzureDataExplorerSink",
