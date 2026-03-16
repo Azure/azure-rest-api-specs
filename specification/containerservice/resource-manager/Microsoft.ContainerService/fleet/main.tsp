@@ -1,5 +1,6 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./clustermeshprofile.tsp";
 import "./fleet.tsp";
 import "./fleetmember.tsp";
 import "./fleetnamespace.tsp";
@@ -60,4 +61,16 @@ enum Versions {
   @doc("Azure Kubernetes Fleet Manager api version 2025-08-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_08_01_preview: "2025-08-01-preview",
+
+  @doc("Azure Kubernetes Fleet Manager api version 2026-02-01-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_02_01_preview: "2026-02-01-preview",
+
+  @doc("Azure Kubernetes Fleet Manager api version 2026-03-02-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_03_02_preview: "2026-03-02-preview",
+
+  @doc("Azure Kubernetes Fleet Manager api version 2026-04-01-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_04_01_preview: "2026-04-01-preview",
 }

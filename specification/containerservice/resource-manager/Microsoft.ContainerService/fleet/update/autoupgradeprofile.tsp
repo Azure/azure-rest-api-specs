@@ -112,6 +112,10 @@ union UpgradeChannel {
     """)
   @added(Versions.v2025_04_01_preview)
   TargetKubernetesVersion: "TargetKubernetesVersion",
+
+  @doc("Upgrades AKS platform components of eligible member clusters to the latest version available across all member cluster regions.")
+  @added(Versions.v2026_04_01_preview)
+  PlatformComponent: "PlatformComponent"
 }
 
 @doc("The node image upgrade to be applied to the target clusters in auto upgrade.")

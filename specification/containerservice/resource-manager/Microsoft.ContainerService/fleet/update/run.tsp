@@ -108,6 +108,11 @@ model ManagedClusterUpdate {
   @doc("The node image upgrade to be applied to the target nodes in update run.")
   @added(Versions.v2023_06_15_preview)
   nodeImageSelection?: NodeImageSelection;
+
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The platform component upgrade to be applied to the target clusters in update run.")
+  @added(Versions.v2026_04_01_preview)
+  platformComponent?: PlatformComponent;
 }
 
 @doc("The node image upgrade to be applied to the target nodes in update run.")
@@ -139,6 +144,16 @@ union NodeImageSelectionType {
   "Custom",
 }
 
+@doc("The platform component upgrade type.")
+@added(Versions.v2026_04_01_preview)
+model PlatformComponent {
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The platform component version identifier. (e.g., pcv20260307-CKcSEO8SELsSGO8S)")
+  platformComponentVersion: PlatformComponentVersion;
+}
+
+scalar PlatformComponentVersion extends string;
+
 scalar KubernetesVersion extends string;
 
 @doc("The upgrade to apply to a ManagedCluster.")
@@ -163,6 +178,10 @@ union ManagedClusterUpgradeType {
   @doc("ControlPlaneOnly upgrades only targets the KubernetesVersion of the ManagedClusters and will not be applied to the AgentPool. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set.")
   @added(Versions.v2024_02_02_preview)
   "ControlPlaneOnly",
+
+  @doc("PlatformComponent upgrades AKS platform components of the ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to NOT be set.")
+  @added(Versions.v2026_04_01_preview)
+  "PlatformComponent",
 }
 
 @doc("The state of the UpdateRun, UpdateStage, UpdateGroup, or MemberUpdate.")
@@ -259,6 +278,11 @@ model UpdateStageStatus {
   name?: string;
 
   @visibility(Lifecycle.Read)
+  @doc("The max number of upgrades that can run concurrently across all groups in this stage, resolved from the UpdateStrategy.UpdateStage.maxConcurrency value.")
+  @added(Versions.v2026_02_01_preview)
+  maxConcurrency?: int32;
+
+  @visibility(Lifecycle.Read)
   @identifiers(#["name"])
   @doc("The list of groups to be updated as part of this UpdateStage.")
   groups?: UpdateGroupStatus[];
@@ -289,6 +313,13 @@ model UpdateGroupStatus {
   @visibility(Lifecycle.Read)
   @doc("The name of the UpdateGroup.")
   name?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("""
+      The max number of upgrades that can run concurrently in this group, resolved from the UpdateStrategy.UpdateGroup.maxConcurrency value. If no value was provided, this value defaults to "${GroupMaxConcurrencyDefault}".
+    """)
+  @added(Versions.v2026_02_01_preview)
+  maxConcurrency?: int32;
 
   @visibility(Lifecycle.Read)
   @identifiers(#["name"])
