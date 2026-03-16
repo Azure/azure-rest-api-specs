@@ -37,41 +37,60 @@ alias ContainerGroupProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("containerGroupProfiles")
     @key
     @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$")
+    @minLength(1)
+    @maxLength(63)
     containerGroupProfileName: string;
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ContainerGroupProfiles {
   /**
    * Get the properties of the specified container group profile.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Display information about a specified ContainerGroupProfile.")
   @operationId("CGProfile_Get")
-  get is ContainerGroupProfileOps.Read<ContainerGroupProfile>;
+  get is ArmResourceRead<ContainerGroupProfile, Error = CloudError>;
 
   /**
    * Create a CGProfile if it doesn't exist or update an existing CGProfile.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Create or Update a ContainerGroupProfile")
   @operationId("CGProfile_CreateOrUpdate")
-  createOrUpdate is ContainerGroupProfileOps.CreateOrUpdateSync<ContainerGroupProfile>;
+  createOrUpdate is ContainerGroupProfileOps.CreateOrUpdateSync<
+    ContainerGroupProfile,
+    Response = (ArmResourceUpdatedResponse<ContainerGroupProfile> & {
+      @header("x-ms-correlation-request-id")
+      `x-ms-correlation-request-id`: string;
+    }) | (ArmResourceCreatedSyncResponse<ContainerGroupProfile> & {
+      @header("x-ms-correlation-request-id")
+      `x-ms-correlation-request-id`: string;
+    })
+  >;
 
   /**
    * Update a specified container group profile.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Container group profile PATCH REST API.")
   @operationId("CGProfile_Update")
   @patch(#{ implicitOptionality: false })
   update is ContainerGroupProfileOps.CustomPatchSync<
     ContainerGroupProfile,
-    PatchModel = ContainerGroupProfilePatch
+    PatchModel = ContainerGroupProfilePatch,
+    Response = ArmResponse<ContainerGroupProfile> & {
+      @header("x-ms-correlation-request-id")
+      `x-ms-correlation-request-id`: string;
+    }
   >;
 
   /**
    * Deletes a container group profile.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Container group profile DELETE REST API.")
   @operationId("CGProfile_Delete")
   delete is ContainerGroupProfileOps.DeleteSync<ContainerGroupProfile>;
 
@@ -79,15 +98,23 @@ interface ContainerGroupProfiles {
    * Gets a list of all container group profiles under a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("List container group profiles in a subscription.")
   @operationId("CGProfiles_ListBySubscription")
-  listBySubscription is ArmListBySubscription<ContainerGroupProfile>;
+  listBySubscription is ArmListBySubscription<
+    ContainerGroupProfile,
+    Error = CloudError
+  >;
 
   /**
    * Gets a list of all container group profiles under a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("List container group profiles in a resource group.")
   @operationId("CGProfiles_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<ContainerGroupProfile>;
+  listByResourceGroup is ArmResourceListByParent<
+    ContainerGroupProfile,
+    Error = CloudError
+  >;
 }
 alias CGProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -101,6 +128,8 @@ alias CGProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("containerGroupProfiles")
     @key
     @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$")
+    @minLength(1)
+    @maxLength(63)
     containerGroupProfileName: string;
   },
   {
@@ -109,19 +138,26 @@ alias CGProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("revisions")
     @key
     revisionNumber: string;
-  }
+  },
+  CloudError
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface CGProfile {
   /**
    * Gets the properties of the specified revision of the container group profile in the given subscription and resource group. The operation returns the properties of container group profile including containers, image registry credentials, restart policy, IP address type, OS type, volumes, current revision number, etc.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get the properties of the specified revision of the container group profile.")
+  @operationId("CGProfile_GetByRevisionNumber")
   getByRevisionNumber is CGProfileOps.Read<ContainerGroupProfile>;
 
   /**
    * Get a list of all the revisions of the specified container group profile in the given subscription and resource group. This operation returns properties of each revision of the specified container group profile including containers, image registry credentials, restart policy, IP address type, OS type volumes, revision number, etc.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get a list of all the revisions of the specified container group profile in the given subscription and resource group.")
+  @operationId("CGProfile_ListAllRevisions")
   listAllRevisions is CGProfileOps.List<ContainerGroupProfile>;
 }
 

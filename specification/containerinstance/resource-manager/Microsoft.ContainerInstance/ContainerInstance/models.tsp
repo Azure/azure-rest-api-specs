@@ -515,6 +515,11 @@ model ListResultContainerGroup {
 }
 
 /**
+ * The response of a container group list operation.
+ */
+model ContainerGroupListResult is Azure.Core.Page<ListResultContainerGroup>;
+
+/**
  * The Resource model definition.
  */
 model Resource {
@@ -1955,6 +1960,11 @@ model UsageListResult {
   @identifiers(#["name"])
   value?: Usage[];
 }
+
+/**
+ * The response of a NGroups list operation.
+ */
+model NGroupsListResult is Azure.Core.Page<NGroup>;
 
 /**
  * A single usage result

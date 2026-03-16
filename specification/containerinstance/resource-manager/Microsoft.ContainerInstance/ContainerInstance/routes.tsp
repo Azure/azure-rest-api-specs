@@ -23,10 +23,12 @@ interface ContainerGroupsOperationGroup {
   @operationId("ContainerGroups_List")
   @autoRoute
   @get
+  @list
   @action("containerGroups")
   list is ArmProviderActionSync<
-    Response = ResourceListResult<ListResultContainerGroup>,
-    Scope = SubscriptionActionScope
+    Response = ContainerGroupListResult,
+    Scope = SubscriptionActionScope,
+    Error = CloudError
   >;
   /**
    * Get a list of container groups in a specified subscription and resource group. This operation returns properties of each container group including containers, image registry credentials, restart policy, IP address type, OS type, state, and volumes.
@@ -36,10 +38,12 @@ interface ContainerGroupsOperationGroup {
   @operationId("ContainerGroups_ListByResourceGroup")
   @autoRoute
   @get
+  @list
   @action("containerGroups")
   listByResourceGroup is ArmProviderActionSync<
-    Response = ResourceListResult<ListResultContainerGroup>,
-    Scope = Extension.ResourceGroup
+    Response = ContainerGroupListResult,
+    Scope = Extension.ResourceGroup,
+    Error = CloudError
   >;
 }
 
@@ -50,12 +54,15 @@ interface LocationOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Location_ListUsage")
+  @extension("x-ms-pageable", #{ nextLinkName: null })
   @autoRoute
   @get
+  @list
   @action("usages")
   listUsage is ArmProviderActionSync<
     Response = UsageListResult,
     Scope = SubscriptionActionScope,
+    Error = CloudError,
     Parameters = LocationParameter
   >;
   /**
@@ -66,10 +73,12 @@ interface LocationOperationGroup {
   @operationId("Location_ListCachedImages")
   @autoRoute
   @get
+  @list
   @action("cachedImages")
   listCachedImages is ArmProviderActionSync<
     Response = CachedImagesListResult,
     Scope = SubscriptionActionScope,
+    Error = CloudError,
     Parameters = LocationParameter
   >;
   /**
@@ -80,10 +89,12 @@ interface LocationOperationGroup {
   @operationId("Location_ListCapabilities")
   @autoRoute
   @get
+  @list
   @action("capabilities")
   listCapabilities is ArmProviderActionSync<
     Response = CapabilitiesListResult,
     Scope = SubscriptionActionScope,
+    Error = CloudError,
     Parameters = LocationParameter
   >;
 }
@@ -128,5 +139,5 @@ interface SubnetServiceAssociationLinkOperationGroup {
      */
     @segment("subnets")
     subnetName: string,
-  ): OkResponse | ArmAcceptedLroResponse | NoContentResponse;
+  ): OkResponse | ArmAcceptedLroResponse | NoContentResponse | CloudError;
 }

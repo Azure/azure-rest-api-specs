@@ -30,22 +30,25 @@ model NGroup
   identity?: NGroupIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface NGroups {
   /**
    * Get the properties of the specified NGroups resource.
    */
-  get is ArmResourceRead<NGroup>;
+  @summary("NGroups GET REST API")
+  get is ArmResourceRead<NGroup, Error = CloudError>;
 
   /**
    * Create or update a NGroups resource.
    */
+  @summary("NGroup PUT REST API")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NGroup>;
 
   /**
    * Update a specified NGroups resource.
    */
   @patch(#{ implicitOptionality: false })
+  @summary("NGroups PATCH REST API")
   update is ArmCustomPatchAsync<
     NGroup,
     PatchModel = NGroupPatch,
@@ -57,6 +60,7 @@ interface NGroups {
    * Deletes the NGroups resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  @summary("NGroups Delete REST API")
   delete is ArmResourceDeleteWithoutOkAsync<
     NGroup,
     LroHeaders = ArmAsyncOperationHeader &
@@ -66,16 +70,27 @@ interface NGroups {
   /**
    * Gets a list of all NGroups resources under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<NGroup>;
+  @summary("GET NGroups under a resource group REST API.")
+  listByResourceGroup is ArmResourceListByParent<
+    NGroup,
+    Response = ArmResponse<NGroupsListResult>,
+    Error = CloudError
+  >;
 
   /**
    * Gets a list of all NGroups resources under a subscription.
    */
-  list is ArmListBySubscription<NGroup>;
+  @summary("List NGroups in a subscription.")
+  list is ArmListBySubscription<
+    NGroup,
+    Response = ArmResponse<NGroupsListResult>,
+    Error = CloudError
+  >;
 
   /**
    * Starts all container groups in the specified NGroups resource. Compute resources will be allocated and billing will start.
    */
+  @summary("Starts all container groups in the specified NGroups resource.")
   start is ArmResourceActionAsyncBase<
     NGroup,
     void,
@@ -87,11 +102,18 @@ interface NGroups {
   /**
    * Stops all container groups in the specified NGroups resource. Compute resources will be deallocated and billing will stop.
    */
-  stop is ArmResourceActionSync<NGroup, void, NoContentResponse>;
+  @summary("Stops all container groups in the specified NGroups resource.")
+  stop is ArmResourceActionSync<
+    NGroup,
+    void,
+    NoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Restarts all container groups in the specified NGroups resource in place. If container image has updates, new image will be downloaded.
    */
+  @summary("Restarts all container groups in the specified NGroups resource.")
   restart is ArmResourceActionAsyncBase<
     NGroup,
     void,

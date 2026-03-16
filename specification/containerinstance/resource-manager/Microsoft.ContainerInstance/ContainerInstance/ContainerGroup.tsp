@@ -10,12 +10,11 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerInstance;
-// FIXME: ContainerGroup has no properties property
 /**
  * A container group.
  */
 model ContainerGroup
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<{}> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ContainerGroupProperties> {
   ...ResourceNameParameter<
     Resource = ContainerGroup,
     KeyName = "containerGroupName",
@@ -31,71 +30,102 @@ model ContainerGroup
   identity?: ContainerGroupIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ContainerGroups {
   /**
    * Gets the properties of the specified container group in the specified subscription and resource group. The operation returns the properties of each container group including containers, image registry credentials, restart policy, IP address type, OS type, state, and volumes.
    */
-  get is ArmResourceRead<ContainerGroup>;
+  @summary("Get the properties of the specified container group.")
+  get is ArmResourceRead<ContainerGroup, Error = CloudError>;
 
   /**
    * Create or update container groups with specified configurations.
    */
+  @summary("Create or update container groups.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ContainerGroup,
     LroHeaders = ArmLroLocationHeader<FinalResult = ContainerGroup> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
    * Updates container group tags with specified values.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<ContainerGroup, PatchModel = Resource>;
+  @summary("Update container groups.")
+  update is ArmCustomPatchSync<
+    ContainerGroup,
+    PatchModel = Resource,
+    Error = CloudError
+  >;
 
   /**
    * Delete the specified container group in the specified subscription and resource group. The operation does not delete other resources provided by the user, such as volumes.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
+  @summary("Delete the specified container group.")
+  delete is ArmResourceDeleteAsyncBase<
     ContainerGroup,
-    Response = ArmResponse<ContainerGroup> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    ArmResponse<ContainerGroup> | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = ContainerGroup> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
    * Restarts all containers in a container group in place. If container image has updates, new image will be downloaded.
    */
+  @summary("Restarts all containers in a container group.")
+  @extension("x-ms-long-running-operation", true)
   restart is ArmResourceActionAsyncBase<
     ContainerGroup,
     void,
     NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ContainerGroup>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ContainerGroup>,
+    Error = CloudError
   >;
 
   /**
    * Stops all containers in a container group. Compute resources will be deallocated and billing will stop.
    */
-  stop is ArmResourceActionSync<ContainerGroup, void, NoContentResponse>;
+  @summary("Stops all containers in a container group.")
+  stop is ArmResourceActionSync<
+    ContainerGroup,
+    void,
+    NoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Starts all containers in a container group. Compute resources will be allocated and billing will start.
    */
-  start is ArmResourceActionAsync<ContainerGroup, void, NoContentResponse>;
+  @summary("Starts all containers in a container group.")
+  start is ArmResourceActionAsync<
+    ContainerGroup,
+    void,
+    NoContentResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
 
   /**
    * Gets all the network dependencies for this container group to allow complete control of network setting and configuration. For container groups, this will always be an empty list.
    */
+  @summary("Get all network dependencies for container group.")
   @get
   @action("outboundNetworkDependenciesEndpoints")
   getOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     ContainerGroup,
     void,
-    ArmResponse<NetworkDependenciesResponse>
+    ArmResponse<NetworkDependenciesResponse>,
+    Error = CloudError
   >;
 
   /**
    * Get the logs for a specified container instance in a specified resource group and container group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get the logs for a specified container instance.")
   @operationId("Containers_ListLogs")
   @get
   @action("logs")
@@ -103,6 +133,7 @@ interface ContainerGroups {
     ContainerGroup,
     void,
     ArmResponse<Logs>,
+    Error = CloudError,
     Parameters = {
       /**
        * The name of the container instance.
@@ -129,12 +160,14 @@ interface ContainerGroups {
    * Executes a command for a specific container instance in a specified resource group and container group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Executes a command in a specific container instance.")
   @operationId("Containers_ExecuteCommand")
   @action("exec")
   executeCommand is ArmResourceActionSync<
     ContainerGroup,
     ContainerExecRequest,
     ArmResponse<ContainerExecResponse>,
+    Error = CloudError,
     Parameters = {
       /**
        * The name of the container instance.
@@ -149,11 +182,13 @@ interface ContainerGroups {
    * Attach to the output stream of a specific container instance in a specified resource group and container group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Attach to the output of a specific container instance.")
   @operationId("Containers_Attach")
   attach is ArmResourceActionSync<
     ContainerGroup,
     void,
     ArmResponse<ContainerAttachResponse>,
+    Error = CloudError,
     Parameters = {
       /**
        * The name of the container instance.

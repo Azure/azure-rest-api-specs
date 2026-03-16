@@ -9,6 +9,7 @@
  */
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
@@ -20,9 +21,9 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 /**
  * // (missing-service-description) Add service description
@@ -43,4 +44,16 @@ enum Versions {
   v2025_09_01: "2025-09-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  /**
+   * List the operations for Azure Container Instance service.
+   */
+  @tag("Operations")
+  @operationId("Operations_List")
+  @route("/providers/Microsoft.ContainerInstance/operations")
+  @get
+  @list
+  list(
+    ...ApiVersionParameter,
+  ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | CloudError;
+}
