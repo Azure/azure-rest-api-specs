@@ -6,6 +6,7 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
+    use-read-only-status-schema: true
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/managedClusters.json"
     examples-dir: "{project-root}/examples"
@@ -40,6 +41,10 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-containerservice"
     package-details:
       name: "@azure/arm-containerservice"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ContainerService"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
 
 linter:
   extends:
