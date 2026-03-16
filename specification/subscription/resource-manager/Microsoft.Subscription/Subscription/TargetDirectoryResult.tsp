@@ -25,6 +25,15 @@ model TargetDirectoryResult
   >;
 }
 
+model GetTargetDirectoryBaseParameters
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+model PutTargetDirectoryBaseParameters
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+model DeleteTargetDirectoryBaseParameters
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+model ListTargetDirectoryBaseParameters
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
 @armResourceOperations(#{ omitTags: true })
 interface TargetDirectoryResults {
   /**
@@ -32,7 +41,7 @@ interface TargetDirectoryResults {
    */
   getTargetDirectory is ArmResourceRead<
     TargetDirectoryResult,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = GetTargetDirectoryBaseParameters
   >;
 
   /**
@@ -42,7 +51,7 @@ interface TargetDirectoryResults {
   putTargetDirectory is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     TargetDirectoryResult,
     Request = TargetDirectoryRequest,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    BaseParameters = PutTargetDirectoryBaseParameters,
     Response = ArmResourceUpdatedResponse<TargetDirectoryResult>
   >;
 
@@ -52,7 +61,7 @@ interface TargetDirectoryResults {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteTargetDirectory is ArmResourceDeleteSync<
     TargetDirectoryResult,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    BaseParameters = DeleteTargetDirectoryBaseParameters,
     Response = ArmDeletedResponse
   >;
 
@@ -61,7 +70,7 @@ interface TargetDirectoryResults {
    */
   listTargetDirectory is ArmResourceListByParent<
     TargetDirectoryResult,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    BaseParameters = ListTargetDirectoryBaseParameters,
     Response = ArmResponse<TargetDirectoryListResult>
   >;
 }
