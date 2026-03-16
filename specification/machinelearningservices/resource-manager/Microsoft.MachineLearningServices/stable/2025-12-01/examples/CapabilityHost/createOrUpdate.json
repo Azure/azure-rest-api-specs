@@ -1,0 +1,113 @@
+{
+  "parameters": {
+    "name": "capabilityHostName",
+    "api-version": "2025-12-01",
+    "body": {
+      "properties": {
+        "acaEnvironmentConnections": [
+          "sampleAcaEnvironmentConnection"
+        ],
+        "aiServicesConnections": [
+          "sampleAIServiceConnection"
+        ],
+        "customerSubnet": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroups/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+        "storageConnections": [
+          "sampleStorageConnection"
+        ],
+        "threadStorageConnections": [
+          "sampleThreadStorageConnection"
+        ],
+        "vectorStoreConnections": [
+          "sampleVectorStoreConnection"
+        ]
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "capabilityHostName",
+        "type": "Microsoft.MachineLearningServices/workspaces/capabilityHosts",
+        "id": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/my-aml-workspace/capabilityHosts/capabilityHostName",
+        "properties": {
+          "description": "string",
+          "acaEnvironmentConnections": [
+            "sampleAcaEnvironmentConnection"
+          ],
+          "aiServicesConnections": [
+            "sampleAIServiceConnection"
+          ],
+          "customerSubnet": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroups/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubne",
+          "provisioningState": "Succeeded",
+          "storageConnections": [
+            "sampleStorageConnection"
+          ],
+          "tags": {
+            "string": "string"
+          },
+          "threadStorageConnections": [
+            "sampleThreadStorageConnection"
+          ],
+          "vectorStoreConnections": [
+            "sampleVectoStoreConnection"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:22",
+          "createdBy": "string",
+          "createdByType": "ManagedIdentity",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:22",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "ManagedIdentity"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "capabilityHostName",
+        "type": "Microsoft.MachineLearningServices/workspaces/capabilityHosts",
+        "id": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/my-aml-workspace/capabilityHosts/capabilityHostName",
+        "properties": {
+          "description": "string",
+          "acaEnvironmentConnections": [
+            "sampleAcaEnvironmentConnection"
+          ],
+          "aiServicesConnections": [
+            "sampleAIServiceConnection"
+          ],
+          "customerSubnet": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroups/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubne",
+          "provisioningState": "Succeeded",
+          "storageConnections": [
+            "sampleStorageConnection"
+          ],
+          "tags": {
+            "string": "string"
+          },
+          "threadStorageConnections": [
+            "sampleThreadStorageConnection"
+          ],
+          "vectorStoreConnections": [
+            "sampleVectoStoreConnection"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:22",
+          "createdBy": "string",
+          "createdByType": "ManagedIdentity",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:22",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "ManagedIdentity"
+        }
+      },
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "CapabilityHosts_CreateOrUpdate",
+  "title": "CreateOrUpdate CapabilityHost."
+}

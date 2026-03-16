@@ -21,6 +21,7 @@ model RegisteredServer
     Resource = RegisteredServer,
     KeyName = "serverId",
     SegmentName = "registeredServers",
+    Type = Azure.Core.uuid,
     NamePattern = ""
   >;
 }
@@ -50,11 +51,8 @@ interface RegisteredServers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @Azure.Core.useFinalStateVia("location")
-  create is ArmCreateOperation<
-    ResourceInstanceParameters<
-      RegisteredServer,
-      DefaultBaseParameters<RegisteredServer>
-    >,
+  create is Legacy.CreateOrReplaceAsync<
+    RegisteredServer,
     RegisteredServerCreateParameters,
     Response = (ArmResourceUpdatedResponse<RegisteredServer> & {
       @header("x-ms-correlation-request-id")
@@ -74,7 +72,7 @@ interface RegisteredServers {
       @doc("request id.")
       requestId?: string;
     }),
-    ErrorResponse = StorageSyncError
+    Error = StorageSyncError
   >;
 
   /**

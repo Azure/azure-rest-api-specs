@@ -15,6 +15,7 @@ namespace Microsoft.DataBoxEdge;
 /**
  * Trigger details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy DiscriminatedProxyResource for back compatibility"
 @discriminator("kind")
 @parentResource(DataBoxEdgeDevice)
 model Trigger

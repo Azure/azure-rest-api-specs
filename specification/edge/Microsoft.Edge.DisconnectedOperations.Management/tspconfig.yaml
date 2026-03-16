@@ -7,11 +7,6 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-disconnectedoperations"
     package-details:
       name: "@azure/arm-disconnectedoperations"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: Azure.ResourceManager.DisconnectedOperations
-    clear-output-folder: true
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
     emitter-output-dir: "{project-root}/.."
@@ -52,15 +47,17 @@ options:
 
   "@azure-tools/typespec-powershell":
     service-dir: "src"
-    package-dir: "DisconnectedOperations/DisconnectedOperations.Autorest"
+    emitter-output-dir: "{output-dir}/{service-dir}/DisconnectedOperations/DisconnectedOperations.Autorest"
     clear-output-folder: true
     azure: true
-    module-version: 0.1.0
+    module-version: 1.0.0
     prefix: "Az"
     subject-prefix: "DisconnectedOperations"
     service-name: "DisconnectedOperations"
     module-name: "{prefix}.{service-name}"
     output-folder: "{output-dir}"
+    additionalDirectories:
+      - "specification/edge/Microsoft.Edge.Shared"
     exclude-tableview-properties:
       - Id
       - Type
@@ -100,6 +97,19 @@ options:
       - where:
           parameter-name: ImageName
         clear-alias: true
+      - where:
+          subject: HardwareSetting
+          variant: GetViaIdentityDisconnectedOperation|CreateViaIdentityDisconnectedOperation|UpdateViaIdentityDisconnectedOperation|DeleteViaIdentityDisconnectedOperation
+          parameter-name: Name
+        set:
+          parameter-name: HardwareSettingName
+      - where:
+          parameter-name: HardwareSettingName
+        clear-alias: true
+
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.DisconnectedOperations"
+    emitter-output-dir: "{output-dir}/sdk/disconnectedoperations/{namespace}"
 
 linter:
   extends:

@@ -89,6 +89,15 @@ input-file:
   - Microsoft.Quantum/preview/2025-11-01-preview/quantum.json
 ```
 
+### Tag: package-2025-12-15-preview
+
+These settings apply only when `--tag=package-2025-12-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-12-15-preview'
+input-file:
+  - Microsoft.Quantum/preview/2025-12-15-preview/quantum.json
+```
+
 ---
 
 # Code Generation

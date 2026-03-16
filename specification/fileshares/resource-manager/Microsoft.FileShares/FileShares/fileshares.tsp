@@ -3,6 +3,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "./PrivateEndpointConnection.tsp";
+import "./PrivateLinkResource.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -23,6 +25,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("Version 2025-06-01-preview")
   v2025_06_01_preview: "2025-06-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("Version 2025-09-01-preview")
+  v2025_09_01_preview: "2025-09-01-preview",
 }
 
 @doc("File share resource")
@@ -344,11 +350,7 @@ interface Operations {
   @list
   list(
     ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
+    ...Azure.ResourceManager.Legacy.Provider,
   ): ArmResponse<OperationListResult> | ErrorResponse;
 }
 
@@ -460,6 +462,16 @@ model FileShareProvisioningConstants {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("Scalar throughput in MiB per second.")
   scalarThroughputMiBPerSec: float64;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
+  @doc("Guardrail scalar IO per second.")
+  @added(Versions.v2025_09_01_preview)
+  guardrailIOPerSecScalar: float64;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
+  @doc("Guardrail scalar throughput in MiB per second.")
+  @added(Versions.v2025_09_01_preview)
+  guardrailThroughputScalar: float64;
 }
 
 @doc("Response structure for file share limits API.")
@@ -508,6 +520,37 @@ model FileShareProvisioningRecommendationOutput {
 
   @doc("Redundancy options for the share.")
   availableRedundancyOptions: Redundancy[];
+}
+
+/**
+ * A list of private link resources.
+ */
+@added(Versions.v2025_09_01_preview)
+model PrivateLinkResourceListResult is Azure.Core.Page<PrivateLinkResource>;
+
+/**
+ * Properties of a private link resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "PrivateLinkResource is a read-only resource and does not require provisioning state"
+@added(Versions.v2025_09_01_preview)
+model PrivateLinkResourceProperties {
+  /**
+   * The private link resource group id.
+   */
+  @visibility(Lifecycle.Read)
+  groupId?: string;
+
+  /**
+   * The private link resource required member names.
+   */
+  @visibility(Lifecycle.Read)
+  requiredMembers?: string[];
+
+  /**
+   * The private link resource private link DNS zone name.
+   */
+  @visibility(Lifecycle.Read)
+  requiredZoneNames?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."

@@ -66,7 +66,7 @@ alias JobOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+    ...Azure.ResourceManager.ProviderNamespace<Job>;
 
     /** The device name. */
     @path
@@ -96,7 +96,7 @@ alias OperationsStatusOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+    ...Azure.ResourceManager.ProviderNamespace<Job>;
 
     /** The device name. */
     @path

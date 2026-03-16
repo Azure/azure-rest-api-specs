@@ -18,11 +18,6 @@ options:
     flavor: azure
     package-details:
       name: "@azure/arm-qumulo"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    namespace: "Azure.ResourceManager.Qumulo"
   "@azure-tools/typespec-python":
     package-name: "azure-mgmt-qumulo"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-qumulo"
@@ -46,6 +41,9 @@ options:
     namespace: "com.azure.resourcemanager.qumulo"
     service-name: "Qumulo"
     flavor: azure
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Qumulo"
+    emitter-output-dir: "{output-dir}/sdk/qumulo/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

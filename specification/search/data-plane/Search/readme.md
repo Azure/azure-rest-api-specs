@@ -1,14 +1,15 @@
-# SearchServiceClient and SearchIndexClient
+# AI Search
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for SearchServiceClient and SearchIndexClient.
+This is the AutoRest configuration file for AI Search.
 
 
 ---
+
 ## Getting Started
 
-To build the SDK for SearchServiceClient and SearchIndexClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for AI Search, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,9 +23,10 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for SearchServiceClient and SearchIndexClient.
 
+These are the global settings for the AI Search API.
+
 ``` yaml
-title: SearchClient
-opt-in-extensible-enums: true
+# common
 openapi-type: data-plane
 tag: package-2025-11-01-preview
 
@@ -173,36 +175,11 @@ These settings apply only when `--tag=package-2025-11-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-11-01-preview'
 input-file:
-- preview/2025-11-01-preview/knowledgebase.json
-- preview/2025-11-01-preview/searchservice.json
-- preview/2025-11-01-preview/searchindex.json
-```
-
-### Tag: package-2025-11-knowledgebase-preview
-
-These settings apply only when `--tag=package-2025-11-knowledgebase-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-11-knowledgebase-preview'
-input-file:
-- preview/2025-11-01-preview/knowledgebase.json
-```
-
-### Tag: package-2025-11-searchservice-preview
-
-These settings apply only when `--tag=package-2025-11-searchservice-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-11-searchservice-preview'
-input-file:
-- preview/2025-11-01-preview/searchservice.json
-```
-
-### Tag: package-2025-11-searchindex-preview
-
-These settings apply only when `--tag=package-2025-11-searchindex-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-11-searchindex-preview'
-input-file:
-- preview/2025-11-01-preview/searchindex.json
+  - preview/2025-11-01-preview/search.json
+suppressions:
+  - code: LroExtension
+    from: search.json
+    reason: Legacy swagger file
 ```
 
 ### Tag: package-2025-09-01
@@ -684,6 +661,66 @@ input-file:
 - stable/2019-05-06/searchindex.json
 ```
 
+### Tag: package-2017-11-preview
+
+These settings apply only when `--tag=package-2017-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11-preview'
+input-file:
+- preview/2017-11-11-preview/searchindex.json
+- preview/2017-11-11-preview/searchservice.json
+```
+
+### Tag: package-2017-11
+
+These settings apply only when `--tag=package-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11'
+input-file:
+- stable/2017-11-11/searchindex.json
+- stable/2017-11-11/searchservice.json
+```
+
+### Tag: package-2016-09-preview
+
+These settings apply only when `--tag=package-2016-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09-preview'
+input-file:
+- preview/2016-09-01-preview/searchindex.json
+- preview/2016-09-01-preview/searchservice.json
+```
+
+### Tag: package-2016-09
+
+These settings apply only when `--tag=package-2016-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09'
+input-file:
+- stable/2016-09-01/searchindex.json
+- stable/2016-09-01/searchservice.json
+```
+
+### Tag: package-2015-02-preview
+
+These settings apply only when `--tag=package-2015-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-02-preview'
+input-file:
+- preview/2015-02-28-preview/searchindex.json
+- preview/2015-02-28-preview/searchservice.json
+```
+
+### Tag: package-2015-02
+
+These settings apply only when `--tag=package-2015-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-02'
+input-file:
+- stable/2015-02-28/searchindex.json
+- stable/2015-02-28/searchservice.json
+```
+
 ---
 # Code Generation
 
@@ -1131,7 +1168,7 @@ directive:
           replace( /this.SearchDnsSuffix/g, "Client.SearchDnsSuffix" ).
           replace( /\"Client.SearchServiceName\"/g, "\"this.Client.SearchServiceName\"" ).
           replace( /\"Client.SearchDnsSuffix\"/g, "\"this.Client.SearchDnsSuffix\"" );
-      return $;  
+      return $;
 ####
   # The following regex are required to make the generated Field class conform to the needs of the custom implementation
   # that we've had in the Azure Search .NET SDK since it was first released. We've decided to keep the custom behavior of
@@ -1177,10 +1214,10 @@ input-file:
   - $(this-folder)/preview/2021-04-30-Preview/searchindex.json
   - $(this-folder)/preview/2020-06-30-Preview/searchservice.json
   - $(this-folder)/preview/2020-06-30-Preview/searchindex.json
-  - $(this-folder)/preview/2020-06-30/searchservice.json
-  - $(this-folder)/preview/2020-06-30/searchindex.json
-  - $(this-folder)/preview/2019-05-06-preview/searchservice.json
-  - $(this-folder)/preview/2019-05-06-preview/searchindex.json
+  - $(this-folder)/stable/2020-06-30/searchservice.json
+  - $(this-folder)/stable/2020-06-30/searchindex.json
+  - $(this-folder)/preview/2019-05-06-Preview/searchservice.json
+  - $(this-folder)/preview/2019-05-06-Preview/searchindex.json
   - $(this-folder)/stable/2019-05-06/searchservice.json
   - $(this-folder)/stable/2019-05-06/searchindex.json
 
@@ -1204,4 +1241,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
+```
+
+### Suppression
+``` yaml
+directive:
+  - suppress: INVALID_TYPE
+  - suppress: DISCRIMINATOR_VALUE_NOT_FOUND
 ```

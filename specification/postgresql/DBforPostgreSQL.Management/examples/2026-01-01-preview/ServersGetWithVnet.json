@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleserver",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "location": "eastus",
+        "properties": {
+          "administratorLogin": "exampleadministratorlogin",
+          "authConfig": {
+            "activeDirectoryAuth": "Disabled",
+            "passwordAuth": "Enabled"
+          },
+          "availabilityZone": "1",
+          "backup": {
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2025-06-01T18:35:22.123456Z",
+            "geoRedundantBackup": "Enabled"
+          },
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "fullyQualifiedDomainName": "exampleserver.postgres.database.azure.com",
+          "highAvailability": {
+            "mode": "ZoneRedundant",
+            "standbyAvailabilityZone": "2",
+            "state": "Healthy"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "minorVersion": "5",
+          "network": {
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleserver.private.postgres.database.azure.com",
+            "publicNetworkAccess": "Disabled"
+          },
+          "replica": {
+            "capacity": 5,
+            "role": "Primary"
+          },
+          "replicaCapacity": 5,
+          "replicationRole": "Primary",
+          "state": "Ready",
+          "storage": {
+            "type": "",
+            "autoGrow": "Disabled",
+            "iops": 2300,
+            "storageSizeGB": 512,
+            "tier": "P20"
+          },
+          "version": "17"
+        },
+        "sku": {
+          "name": "Standard_D4ds_v5",
+          "tier": "GeneralPurpose"
+        },
+        "systemData": {
+          "createdAt": "2025-06-01T18:30:22.123456Z"
+        },
+        "tags": {
+          "VnetServer": "1"
+        }
+      }
+    }
+  },
+  "operationId": "Servers_Get",
+  "title": "Get information about an existing server that is integrated into a virtual network provided by customer."
+}

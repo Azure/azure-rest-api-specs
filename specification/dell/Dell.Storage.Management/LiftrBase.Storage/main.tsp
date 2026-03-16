@@ -15,9 +15,13 @@ namespace LiftrBase.Storage;
  * The available API versions.
  */
 enum Versions {
-  @useDependency(LiftrBase.Versions.v2_preview)
+  @useDependency(LiftrBase.Versions.v2025_03_21_preview)
+  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_03_21_preview: "2025-03-21-preview",
+
+  @useDependency(LiftrBase.Versions.v2025_03_21)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2_preview: "2025-03-21-preview",
+  v2025_03_21: "2025-03-21",
 }
 
 /**

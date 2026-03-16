@@ -1,0 +1,21 @@
+- tool: TypeSpecRequirement
+  path: ./preview/2020-09-15_Preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/v2.1/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  reason: Suppress until Go needs to generate SDK
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+  paths:
+    - tspconfig.yaml
+- tool: TypeSpecValidation
+  reason: 'Emitter path needs to deviate from formatting convention due to nested structure.'
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    - options.@azure-tools/typespec-python.emitter-output-dir
+  paths:
+    - tspconfig.yaml

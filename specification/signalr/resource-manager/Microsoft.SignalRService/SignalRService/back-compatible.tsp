@@ -4,6 +4,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.SignalRService;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
 );
 
@@ -13,12 +14,14 @@ using Microsoft.SignalRService;
 @@clientName(SignalRResources.update::parameters.properties, "parameters");
 @@clientName(SignalRResources.regenerateKey::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SignalRResource.properties);
 
 @@clientName(PrivateEndpointConnections.update::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
 );
 
@@ -29,6 +32,7 @@ using Microsoft.SignalRService;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedPrivateLinkResource.properties
 );
 
@@ -36,16 +40,19 @@ using Microsoft.SignalRService;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CustomCertificate.properties
 );
 
 @@clientName(CustomDomains.createOrUpdate::parameters.resource, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CustomDomain.properties);
 
 @@clientName(Replicas.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Replicas.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Replica.properties);
 
 @@clientName(SignalROperationGroup.checkNameAvailability::parameters.body,
@@ -94,10 +101,10 @@ using Microsoft.SignalRService;
 @@clientLocation(Replicas.get, "SignalRReplicas", "!csharp");
 @@clientLocation(Replicas.createOrUpdate, "SignalRReplicas", "!csharp");
 @@clientLocation(Replicas.update, "SignalRReplicas", "!csharp");
-@@clientLocation(Replicas.delete, "SignalRReplicas");
-@@clientLocation(Replicas.list, "SignalRReplicas");
-@@clientLocation(Replicas.restart, "SignalRReplicas");
-@@clientLocation(Replicas.listReplicaSkus, "SignalR");
+@@clientLocation(Replicas.delete, "SignalRReplicas", "!csharp");
+@@clientLocation(Replicas.list, "SignalRReplicas", "!csharp");
+@@clientLocation(Replicas.restart, "SignalRReplicas", "!csharp");
+@@clientLocation(Replicas.listReplicaSkus, "SignalR", "!csharp");
 @@clientLocation(SharedPrivateLinkResources.get,
   "SignalRReplicaSharedPrivateLinkResources",
   "!csharp"
@@ -110,7 +117,10 @@ using Microsoft.SignalRService;
   "SignalRReplicaSharedPrivateLinkResources",
   "!csharp"
 );
-@@clientLocation(SignalROperationGroup.checkNameAvailability, "SignalR");
+@@clientLocation(SignalROperationGroup.checkNameAvailability,
+  "SignalR",
+  "!csharp"
+);
 @@clientLocation(SignalRResources.get, "SignalR", "!csharp");
 @@clientLocation(SignalRResources.createOrUpdate, "SignalR", "!csharp");
 @@clientLocation(SignalRResources.update, "SignalR", "!csharp");
@@ -125,4 +135,4 @@ using Microsoft.SignalRService;
   "SignalRPrivateLinkResources",
   "!csharp"
 );
-@@clientLocation(UsagesOperationGroup.list, "Usages");
+@@clientLocation(UsagesOperationGroup.list, "Usages", "!csharp");

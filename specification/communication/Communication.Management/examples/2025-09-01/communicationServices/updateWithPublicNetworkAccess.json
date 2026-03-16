@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "communicationServiceName": "MyCommunicationResource",
+    "parameters": {
+      "properties": {
+        "publicNetworkAccess": "Enabled"
+      },
+      "tags": {
+        "newTag": "newVal"
+      }
+    },
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "11112222-3333-4444-5555-666677778888"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MyCommunicationResource",
+        "type": "Microsoft.Communication/CommunicationServices",
+        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/CommunicationServices/MyCommunicationResource",
+        "location": "Global",
+        "properties": {
+          "dataLocation": "United States",
+          "hostName": "mycommunicationresource.communications.azure.com",
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Enabled",
+          "version": "0.2.0"
+        },
+        "tags": {
+          "newTag": "newVal"
+        }
+      }
+    }
+  },
+  "operationId": "CommunicationServices_Update",
+  "title": "Update resource to add PublicNetworkAccess"
+}

@@ -4,16 +4,20 @@ using Azure.ClientGenerator.Core;
 using Microsoft.EventHub;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(FailOver.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Destination.properties);
 
 @@clientName(Clusters.createOrUpdate::parameters.resource, "parameters");
@@ -22,6 +26,7 @@ using Microsoft.EventHub;
 @@clientName(Clusters.patch::parameters.body, "parameters");
 @@clientLocation(Clusters.configurationGet, "Configuration");
 @@clientName(Clusters.configurationGet, "Get");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Cluster.properties);
 
 @@clientLocation(EHNamespaces.get, "Namespaces");
@@ -38,17 +43,20 @@ using Microsoft.EventHub;
 @@clientName(EHNamespaces.privateLinkResourcesGet, "Get");
 @@clientLocation(EHNamespaces.checkNameAvailability, DisasterRecoveryConfigs);
 @@clientName(EHNamespaces.checkNameAvailability::parameters.body, "parameters");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(EHNamespace.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
 );
 
 @@clientLocation(NetworkSecurityPerimeterConfigurations.list,
   "NetworkSecurityPerimeterConfiguration"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkSecurityPerimeterConfiguration.properties
 );
 
@@ -58,6 +66,7 @@ using Microsoft.EventHub;
   "parameters"
 );
 @@clientLocation(NetworkRuleSets.listNetworkRuleSet, "Namespaces");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkRuleSet.properties);
 
 @@clientLocation(AuthorizationRules.getAuthorizationRule, "Namespaces");
@@ -76,10 +85,12 @@ using Microsoft.EventHub;
   "parameters"
 );
 @@clientName(EventHubs.regenerateKeys::parameters.body, "parameters");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationRule.properties
 );
 
 @@clientName(ConsumerGroups.createOrUpdate::parameters.resource, "parameters");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConsumerGroup.properties);
 
 @@clientLocation(ArmDisasterRecoveries.get, DisasterRecoveryConfigs);
@@ -91,6 +102,7 @@ using Microsoft.EventHub;
 @@clientLocation(ArmDisasterRecoveries.list, DisasterRecoveryConfigs);
 @@clientLocation(ArmDisasterRecoveries.breakPairing, DisasterRecoveryConfigs);
 @@clientLocation(ArmDisasterRecoveries.failOver, DisasterRecoveryConfigs);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ArmDisasterRecovery.properties
 );
 
@@ -99,6 +111,7 @@ using Microsoft.EventHub;
 @@clientName(Eventhubs.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(Eventhubs.delete, EventHubs);
 @@clientLocation(Eventhubs.listByNamespace, EventHubs);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Eventhub.properties);
 
 @@clientLocation(SchemaGroups.get, "SchemaRegistry");
@@ -106,6 +119,7 @@ using Microsoft.EventHub;
 @@clientName(SchemaGroups.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(SchemaGroups.delete, "SchemaRegistry");
 @@clientLocation(SchemaGroups.listByNamespace, "SchemaRegistry");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SchemaGroup.properties);
 
 @@clientLocation(ApplicationGroups.get, "ApplicationGroup");
@@ -117,6 +131,7 @@ using Microsoft.EventHub;
 );
 @@clientLocation(ApplicationGroups.delete, "ApplicationGroup");
 @@clientLocation(ApplicationGroups.listByNamespace, "ApplicationGroup");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationGroup.properties
 );
 

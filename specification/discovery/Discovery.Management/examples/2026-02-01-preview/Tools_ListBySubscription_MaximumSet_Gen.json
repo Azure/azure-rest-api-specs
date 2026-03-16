@@ -1,0 +1,85 @@
+{
+  "title": "Tools_ListBySubscription_MaximumSet",
+  "operationId": "Tools_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "C058B75F-64D2-4E9D-8B66-65339DCB22C7"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/31735C59-6307-4464-8B80-3675223F23D2/resourceGroups/rgdiscovery/providers/Microsoft.Discovery/Tools/rqqhprxwdzyxgijlokxxj",
+            "name": "rqqhprxwdzyxgijlokxxj",
+            "tags": {
+              "key2611": "cgsblxvyzevbd"
+            },
+            "location": "uksouth",
+            "type": "Microsoft.Discovery/Tools",
+            "systemData": {
+              "createdBy": "ly",
+              "createdByType": "User",
+              "createdAt": "2026-02-10T17:26:12.585Z",
+              "lastModifiedBy": "xxc",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-02-10T17:26:12.586Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "version": "sjepxewtq",
+              "environmentVariables": {
+                "key5460": "xtjzjghbist"
+              },
+              "definitionContent": {
+                "tool_id": "discovery-m1",
+                "name": "discovery",
+                "description": "Advanced DFT computational tools for molecular geometry optimization and property calculations",
+                "actions": [
+                  {
+                    "name": "GeometryOptimization",
+                    "description": "Optimize geometry of 'xyz's from the input data asset. This is a prerequisite for all other discovery computations.",
+                    "input_schema": {
+                      "type": "object",
+                      "properties": {
+                        "inputDataAssetId": {
+                          "type": "string",
+                          "description": "Identifier of the input data asset"
+                        },
+                        "xyzColumnName": {
+                          "type": "string",
+                          "description": "Column containing xyz data within the input data table asset"
+                        },
+                        "outputDataAssetId": {
+                          "type": "string",
+                          "description": "Identifier to use for the new output data asset which will be created."
+                        },
+                        "basisSet": {
+                          "type": "string",
+                          "description": "Basis set. Must be one of the supported basis sets (e.g., def2-svp, def2-tzvp)."
+                        }
+                      },
+                      "required": [
+                        "inputDataAssetId",
+                        "xyzColumnName"
+                      ]
+                    },
+                    "command": "python3 submit_dft.py ",
+                    "environment_variables": [
+                      {
+                        "name": "OUTPUT_DIRECTORY_PATH",
+                        "value": "{{ outputDataAssetId }}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/adijo"
+      }
+    }
+  }
+}

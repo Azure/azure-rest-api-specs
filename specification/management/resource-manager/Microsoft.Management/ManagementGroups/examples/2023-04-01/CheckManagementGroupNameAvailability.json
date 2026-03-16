@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "Cache-Control": "no-cache",
+    "api-version": "2023-04-01",
+    "checkNameAvailabilityRequest": {
+      "name": "nameTocheck",
+      "type": "Microsoft.Management/managementGroups"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "message": "Error message",
+        "nameAvailable": false,
+        "reason": "AlreadyExists"
+      }
+    }
+  },
+  "operationId": "CheckNameAvailability",
+  "title": "CheckManagementGroupNameAvailability"
+}

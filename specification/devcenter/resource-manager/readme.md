@@ -27,7 +27,7 @@ These are the global settings for devcenter.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-10-01-preview
+tag: package-preview-2026-01-01-preview
 
 directive:
   - where:
@@ -154,6 +154,15 @@ directive:
     - $.definitions["Azure.Core.uuid"].format
     suppress: 
       - GuidUsage
+```
+
+### Tag: package-preview-2026-01-01-preview
+
+These settings apply only when `--tag=package-preview-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-01-01-preview'
+input-file:
+  - Microsoft.DevCenter/preview/2026-01-01-preview/DevCenterRP.json
 ```
 
 ### Tag: package-preview-2025-10-01-preview

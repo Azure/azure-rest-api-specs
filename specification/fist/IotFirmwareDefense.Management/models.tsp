@@ -3,8 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using OpenAPI;
 using Versioning;
-using Azure.ResourceManager;
 
 @versioned(Versions)
 namespace Microsoft.IoTFirmwareDefense;
@@ -59,7 +59,7 @@ union SummaryType {
   @doc("The summary contains information about the submitted firmware")
   Firmware: "Firmware",
 
-  @doc("The summary contains information about the Common Vulnerabilities and Exposures analysis results")
+  @doc("The summary contains information about the CVE (Common Vulnerabilities and Exposures) analysis results (deprecated)")
   CommonVulnerabilitiesAndExposures: "CommonVulnerabilitiesAndExposures",
 
   @doc("The summary contains information about the binary hardening analysis results")
@@ -70,6 +70,18 @@ union SummaryType {
 
   @doc("The summary contains information about the cryptographic key analysis results")
   CryptoKey: "CryptoKey",
+
+  @doc("The summary contains information about the CVE analysis results")
+  @added(Versions.v2025_12_01_preview)
+  Cve: "CVE",
+
+  @doc("The summary contains information about the SBOM (Software Bill of Materials) analysis results")
+  @added(Versions.v2025_12_01_preview)
+  Sbom: "SBOM",
+
+  @doc("The summary contains information about the password hash analysis results")
+  @added(Versions.v2025_12_01_preview)
+  PasswordHash: "PasswordHash",
 
   string,
 }
@@ -329,6 +341,14 @@ model CvssScore {
 
   @doc("The score of the CVE according to the CVSS specified.")
   score?: float32;
+
+  @added(Versions.v2025_12_01_preview)
+  @doc("The CVSS vector for the specified score")
+  vectorString?: string;
+
+  @added(Versions.v2025_12_01_preview)
+  @doc("The likelihood of the vulnerability being attacked based on information regarding the availability of exploitation code/processes and the state of exploitation techniques.")
+  exploitMaturity?: ExploitMaturityLevel;
 }
 
 @doc("Legacy component of a CVE result.")
@@ -369,19 +389,19 @@ model CveResult {
   component?: CveComponent;
 
   @added(Versions.v2025_08_02)
-  @doc("Legacy property for the effective CVE score.")
+  @doc("Legacy property for the effective CVE score (deprecated).")
   cvssScore?: string;
 
   @added(Versions.v2025_08_02)
-  @doc("Legacy property for the CVE CVSS version 2 score, if one existed.")
+  @doc("Legacy property for the CVE CVSS version 2 score, if one existed. (deprecated)")
   cvssV2Score?: string;
 
   @added(Versions.v2025_08_02)
-  @doc("Legacy property for the CVE CVSS version 3 score, if one existed.")
+  @doc("Legacy property for the CVE CVSS version 3 score, if one existed. (deprecated)")
   cvssV3Score?: string;
 
   @added(Versions.v2025_08_02)
-  @doc("Legacy property for the what CVSS version score was stored in the cvssScore property")
+  @doc("Legacy property for the what CVSS version score was stored in the cvssScore property (deprecated).")
   cvssVersion?: string;
 
   @doc("The most recent CVSS score of the CVE.")
@@ -390,17 +410,42 @@ model CveResult {
   @doc("The version of the effectiveCvssScore property.")
   effectiveCvssVersion?: int32;
 
+  @added(Versions.v2025_12_01_preview)
+  @doc("The CVSS vector string for the effectiveCvssVersion.")
+  effectiveVectorString?: string;
+
+  @added(Versions.v2025_12_01_preview)
+  @doc("The CVSS exploit maturity value for the effectiveCvssVersion.")
+  effectiveExploitMaturity?: ExploitMaturityLevel;
+
   @doc("All known CVSS scores for the CVE.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   cvssScores?: CvssScore[];
 
   @doc("The list of reference links for the CVE.")
   @visibility(Lifecycle.Read)
-  @identifiers(#["href"])
+  @Azure.ResourceManager.identifiers(#["href"])
   links?: CveLink[];
 
   @doc("The CVE description.")
   description?: string;
+
+  @added(Versions.v2025_12_01_preview)
+  @doc("EPSS (Exploit Prediction Scoring System) information related to this CVE.")
+  epss?: EpssProperties;
+
+  @added(Versions.v2025_12_01_preview)
+  @doc("CWE (Common Weakness Enumeration) information related to this CVE.")
+  @Azure.ResourceManager.identifiers(#["cweId"])
+  cwes?: CweProperties[];
+
+  @added(Versions.v2025_12_01_preview)
+  @doc("KEV (Known Exploited Vulnerabilities) information related to this CVE.")
+  kev?: KevProperties;
+
+  @added(Versions.v2025_12_01_preview)
+  @doc("The component versions in which this weakness was fixed, if any.")
+  fixedInVersions?: string[];
 
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
@@ -414,6 +459,75 @@ model CveLink {
 
   @doc("The label of the reference link.")
   label?: string;
+}
+
+@doc("EPSS (Exploit Prediction Scoring System) data related to a CVE.")
+@added(Versions.v2025_12_01_preview)
+model EpssProperties {
+  @doc("The probability of observing exploitation activity in the next 30 days.")
+  score?: float32;
+
+  @doc("The rank ordering of probabilities from high to low.")
+  percentile?: float32;
+}
+
+@doc("CWE (Common Weakness Enumeration) data related to a CVE.")
+@added(Versions.v2025_12_01_preview)
+model CweProperties {
+  @doc("The id of the CWE.")
+  cweId?: string;
+
+  @doc("The name of the CWE.")
+  cweName?: string;
+
+  @doc("The description of the CWE.")
+  description?: string;
+}
+
+@doc("KEV (Known Exploited Vulnerabilities) data related to a CVE, published by CISA.")
+@added(Versions.v2025_12_01_preview)
+model KevProperties {
+  @doc("Indication if the vulnerability is known to have been leveraged as part of a ransomware campaign.")
+  knownRansomwareCampaignUse?: RansomwareCampaignUse;
+
+  @doc("The date the vulnerability was added to the KEV catalog.")
+  dateAdded?: utcDateTime;
+
+  @doc("The date the required action is due.")
+  remediationDueDate?: utcDateTime;
+
+  @doc("The required action to address the vulnerability.")
+  requiredAction?: string;
+}
+
+@doc("String to indicate if a vulnerability is known to have been leveraged as part of a ransomware campaign.")
+@added(Versions.v2025_12_01_preview)
+union RansomwareCampaignUse {
+  @doc("CISA knows the vulnerability to have been leveraged in a ransomware campaign.")
+  Known: "Known",
+
+  @doc("CISA lacks confirmation the vulnerability has been utilized for ransomware.")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@doc("String to indicate the exploit maturity of a CVE for the given CVSS score.")
+@added(Versions.v2025_12_01_preview)
+union ExploitMaturityLevel {
+  @doc("Reliable threat intelligence is not available to determine Exploit Maturity characteristics. This is the default value and is equivalent to Attacked (A) for the purposes of the calculation of the score by assuming the worst case.")
+  NotDefined: "NOT_DEFINED",
+
+  @doc("Based on available threat intelligence either of the following must apply: attacks targeting this vulnerability (attempted or successful) have been reported, or solutions to simplify attempts to exploit the vulnerability are publicly or privately available.")
+  Attacked: "ATTACKED",
+
+  @doc("Based on available threat intelligence each of the following must apply: proof-of-concept exploit code is publicly available, no knowledge of reported attempts to exploit this vulnerability, and no knowledge of publicly available solutions used to simplify attempts to exploit the vulnerability")
+  ProofOfConcept: "PROOF_OF_CONCEPT",
+
+  @doc("Based on available threat intelligence each of the following must apply: no knowledge of publicly available proof-of-concept exploit code, no knowledge of reported attempts to exploit this vulnerability, and no knowledge of publicly available solutions used to simplify attempts to exploit the vulnerability.")
+  Unreported: "UNREPORTED",
+
+  string,
 }
 
 @doc("Firmware properties.")
@@ -461,7 +575,7 @@ model FirmwareProperties {
   status?: Status;
 
   @doc("A list of errors or other messages generated during firmware analysis")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   statusMessages?: StatusMessage[];
 
   @doc("Provisioning state of the resource.")
@@ -601,10 +715,10 @@ model FirmwareSummary extends SummaryResourceProperties {
   rootFileSystems?: int64;
 
   @doc("Describes the type of summary.")
-  summaryType: "Firmware";
+  summaryType: SummaryType.Firmware;
 }
 
-@doc("Properties for a CVE analysis summary.")
+@doc("Properties for a CVE (Common Vulnerabilities and Exposures) analysis summary (deprecated).")
 model CveSummary extends SummaryResourceProperties {
   @doc("The total number of critical severity CVEs detected")
   criticalCveCount?: int64;
@@ -622,7 +736,7 @@ model CveSummary extends SummaryResourceProperties {
   unknownCveCount?: int64;
 
   @doc("Describes the type of summary object.")
-  summaryType: "CommonVulnerabilitiesAndExposures";
+  summaryType: SummaryType.CommonVulnerabilitiesAndExposures;
 }
 
 @doc("Properties for a binary hardening analysis summary.")
@@ -646,7 +760,7 @@ model BinaryHardeningSummaryResource extends SummaryResourceProperties {
   strippedBinaryCount?: int64;
 
   @doc("Describes the type of summary object.")
-  summaryType: "BinaryHardening";
+  summaryType: SummaryType.BinaryHardening;
 }
 
 @doc("Properties for cryptographic certificate summary.")
@@ -673,7 +787,7 @@ model CryptoCertificateSummaryResource extends SummaryResourceProperties {
   shortKeySizeCount?: int64;
 
   @doc("Describes the type of summary.")
-  summaryType: "CryptoCertificate";
+  summaryType: SummaryType.CryptoCertificate;
 }
 
 @doc("Properties for cryptographic key summary.")
@@ -694,7 +808,56 @@ model CryptoKeySummaryResource extends SummaryResourceProperties {
   shortKeySizeCount?: int64;
 
   @doc("Describes the type of summary.")
-  summaryType: "CryptoKey";
+  summaryType: SummaryType.CryptoKey;
+}
+
+@doc("Properties for a CVE analysis summary.")
+@added(Versions.v2025_12_01_preview)
+model CveSummaryResource extends SummaryResourceProperties {
+  @doc("Total number of CVEs found.")
+  totalCveCount?: int64;
+
+  @doc("The total number of critical severity CVEs detected")
+  criticalCveCount?: int64;
+
+  @doc("The total number of high severity CVEs detected")
+  highCveCount?: int64;
+
+  @doc("The total number of medium severity CVEs detected")
+  mediumCveCount?: int64;
+
+  @doc("The total number of low severity CVEs detected")
+  lowCveCount?: int64;
+
+  @doc("The total number of unknown severity CVEs detected")
+  unknownCveCount?: int64;
+
+  @doc("Describes the type of summary object.")
+  summaryType: SummaryType.Cve;
+
+  @added(Versions.v2025_12_01_preview)
+  @doc("Schema version of the CVE data for this firmware.")
+  schemaVersion?: string;
+}
+
+@doc("Properties for SBOM analysis summary.")
+@added(Versions.v2025_12_01_preview)
+model SbomSummaryResource extends SummaryResourceProperties {
+  @doc("Total number of SBOM components found.")
+  totalComponentCount?: int64;
+
+  @doc("Describes the type of summary object.")
+  summaryType: SummaryType.Sbom;
+}
+
+@doc("Properties for Password hash analysis summary.")
+@added(Versions.v2025_12_01_preview)
+model PasswordHashSummaryResource extends SummaryResourceProperties {
+  @doc("Total number of password hashes found.")
+  totalPasswordHashCount?: int64;
+
+  @doc("Describes the type of summary object.")
+  summaryType: SummaryType.PasswordHash;
 }
 
 @doc("Properties of a workspaces usage metrics.")

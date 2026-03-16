@@ -14,6 +14,7 @@ namespace Microsoft.CostManagement;
 /**
  * Setting definition.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @discriminator("kind")
 model Setting
   is Azure.ResourceManager.Legacy.DiscriminatedProxyResource<SettingsKind> {
