@@ -100,7 +100,7 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
-  @route("?restype=service&comp=properties")
+  @route("/?restype=service&comp=properties")
   setProperties is StorageOperationRequestBody<
     {
       ...TimeoutParameter;
@@ -117,7 +117,7 @@ interface Service {
   /** Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
-  @route("?restype=service&comp=properties")
+  @route("/?restype=service&comp=properties")
   getProperties is StorageOperationResponseBody<
     TimeoutParameter,
     BlobServiceProperties
@@ -126,7 +126,7 @@ interface Service {
   /** Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
-  @route("?restype=service&comp=stats")
+  @route("/?restype=service&comp=stats")
   getStatistics is StorageOperationResponseBody<
     TimeoutParameter,
     {
@@ -141,7 +141,7 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @list
-  @route("?comp=list")
+  @route("/?comp=list")
   listContainers is StorageOperationResponseBody<
     {
       ...PrefixParameter;
@@ -158,7 +158,7 @@ interface Service {
   /** Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @post
-  @route("?restype=service&comp=userdelegationkey")
+  @route("/?restype=service&comp=userdelegationkey")
   getUserDelegationKey is StorageOperation<
     {
       /** Key information provided in the request */
@@ -178,7 +178,7 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
-  @route("?restype=account&comp=properties")
+  @route("/?restype=account&comp=properties")
   @sharedRoute
   getAccountInfo is StorageOperationNoBody<
     TimeoutParameter,
@@ -196,7 +196,7 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
-  @route("?comp=batch")
+  @route("/?comp=batch")
   submitBatch(
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
@@ -224,7 +224,7 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
-  @route("?comp=blobs")
+  @route("/?comp=blobs")
   findBlobsByTags is StorageOperationResponseBody<
     {
       ...TimeoutParameter;
