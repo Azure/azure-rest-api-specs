@@ -1062,27 +1062,6 @@ model ServiceManagedIdentityIdentity {
 }
 
 /**
- * User assigned identity properties
- */
-model UserAssignedIdentity {
-  /**
-   * The principal ID of the assigned identity.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  principalId?: string;
-
-  /**
-   * The client ID of the assigned identity.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  clientId?: string;
-}
-
-/**
  * Dicom Service patch properties
  */
 model DicomServicePatchResource {
