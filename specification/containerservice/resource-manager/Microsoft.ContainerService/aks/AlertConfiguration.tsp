@@ -159,5 +159,3 @@ interface AlertConfigurations {
 @@doc(AlertConfigurations.createOrUpdate::parameters.resource,
   "The alert configuration to create or update."
 );
-
-
