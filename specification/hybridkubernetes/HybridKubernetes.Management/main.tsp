@@ -62,6 +62,3 @@ interface Operations
       ArmResponse<OperationList>,
       Error = ErrorResponse
     > {}
-@@segment(Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter.resourceGroupName,
-  "resourcegroups"
-);
