@@ -162,10 +162,6 @@ using Microsoft.EventHub;
 @@clientName(ErrorAdditionalInfo, "EventHubsErrorAdditionalInfo", "csharp");
 @@clientName(ErrorResponse, "EventHubsErrorResponse", "csharp");
 @@clientName(TlsVersion, "EventHubsTlsVersion", "csharp");
-@@clientName(TlsVersion.`1.0`, "Tls1_0", "csharp");
-@@clientName(TlsVersion.`1.1`, "Tls1_1", "csharp");
-@@clientName(TlsVersion.`1.2`, "Tls1_2", "csharp");
-@@clientName(TlsVersion.`1.3`, "Tls1_3", "csharp");
 @@clientName(PublicNetworkAccess, "EventHubsPublicNetworkAccess", "csharp");
 @@clientName(ProvisioningIssueProperties,
   "EventHubsProvisioningIssueProperties",
@@ -335,6 +331,7 @@ using Microsoft.EventHub;
   EventHubsPrivateLinkResourceData,
   "csharp"
 );
+@@alternateType(Encryption.keySource, EventHubsKeySource, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(EventHubsCluster.properties,
@@ -460,6 +457,15 @@ namespace Microsoft.EventHub {
      * Renaming
      */
     Renaming,
+  }
+
+  /**
+   * Enumerates the possible value of keySource for Encryption
+   */
+  union EventHubsKeySource {
+    string,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    `Microsoft.KeyVault`: "Microsoft.KeyVault",
   }
 }
 
