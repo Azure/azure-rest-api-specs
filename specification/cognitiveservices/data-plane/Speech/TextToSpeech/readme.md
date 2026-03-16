@@ -32,4 +32,4 @@ These settings apply only when `--tag=release_2024_02_01_preview` is specified o
 ```yaml $(tag) == 'release_2024_02_01_preview'
 input-file:
   - preview/2024-02-01-preview/texttospeech.json
-- ```
+```
