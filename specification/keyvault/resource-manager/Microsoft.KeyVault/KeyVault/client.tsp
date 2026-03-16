@@ -242,6 +242,41 @@ using Azure.Core;
   KeyVaultActionsRequiredMessage,
   "csharp"
 );
+// these enums are used in csharp customization only.
+/**
+ * The vault's create mode to indicate whether the vault need to be recovered or not.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum KeyVaultCreateMode {
+  /** Default. */
+  default,
+
+  /** Recover. */
+  recover,
+}
+/**
+ * The vault's create mode to indicate whether the vault need to be recovered or not.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum KeyVaultPatchMode {
+  /** Default. */
+  default,
+
+  /** Recover. */
+  recover,
+}
+/**
+ * The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum ManagedHsmCreateMode {
+  /** Default. */
+  default,
+
+  /** Recover. */
+  recover,
+}
+
 @@alternateType(VaultProperties.createMode, KeyVaultCreateMode, "csharp");
 @@alternateType(ManagedHsmProperties.createMode,
   ManagedHsmCreateMode,
