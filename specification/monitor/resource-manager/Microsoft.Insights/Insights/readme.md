@@ -47,7 +47,7 @@ input-file:
   - stable/2024-03-11/dataCollectionEndpoints_API.json
   - stable/2024-03-11/dataCollectionRuleAssociations_API.json
   - stable/2024-03-11/dataCollectionRules_API.json
-  - PrivateLinkScopes/preview/2023-06-01-preview/privateLinkScopes_API.json
+  - preview/2023-06-01-preview/privateLinkScopes_API.json
   - stable/2022-10-01/autoscale_API.json
   - stable/2015-04-01/activityLogs_API.json
   - stable/2015-04-01/eventCategories_API.json
@@ -366,7 +366,7 @@ These settings apply only when `--tag=package-2023-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
-- PrivateLinkScopes/preview/2023-06-01-preview/privateLinkScopes_API.json
+- preview/2023-06-01-preview/privateLinkScopes_API.json
 ```
 
 ### Tag: package-2023-05-01-preview-only
@@ -710,15 +710,6 @@ input-file:
   - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 ```
 
-### Tag: package-2021-09-01
-
-These settings apply only when `--tag=package-2021-09-01` is specified on the command line
-
-``` yaml $(tag) == 'package-2021-09-01'
-input-file:
-- PrivateLinkScopes/stable/2021-09-01/privateLinkScopes_API.json
-```
-
 ### Tag: package-2021-05-preview-diagnostics
 
 These settings apply only when `--tag=package-2021-05-preview-diagnostics` is specified on the command line
@@ -812,6 +803,7 @@ input-file:
   - stable/2021-04-01/dataCollectionEndpoints_API.json
   - stable/2021-04-01/dataCollectionRuleAssociations_API.json
   - stable/2021-04-01/dataCollectionRules_API.json
+  - stable/2021-09-01/privateLinkScopes_API.json
 ```
 
 ### Tag: package-2021-09-01-only
