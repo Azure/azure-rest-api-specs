@@ -27,6 +27,13 @@ namespace Azure.AI.Projects {
   // Root client
   // --------------------------------------------------------------------------------
   @@clientName(Agents, "AgentsClient", "csharp");
+  @@clientInitialization(Azure.AI.Projects.Agents,
+    {
+      // parameters: AgentsClientOptions,
+      initializedBy: InitializedBy.parent | InitializedBy.individually,
+    }
+  );
+
   @@clientName(AgentObject, "AgentRecord");
 
   @@clientName(BingGroundingSearchToolParameters,
