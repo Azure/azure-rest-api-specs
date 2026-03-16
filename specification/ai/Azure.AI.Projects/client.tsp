@@ -124,3 +124,12 @@ using Azure.ClientGenerator.Core;
 // input parameter that calls either on these two.
 @@access(Azure.AI.Projects.Connections.get, Access.internal);
 @@access(Azure.AI.Projects.Connections.getWithCredentials, Access.internal);
+
+@@clientName(Azure.AI.Projects.Models.listVersions, "list", "python");
+@@clientName(Azure.AI.Projects.Models.getVersion, "get", "python");
+@@clientName(Azure.AI.Projects.Models.deleteVersion, "delete", "python");
+@@clientName(Azure.AI.Projects.Models.createOrUpdateVersion,
+  "create_or_update",
+  "python"
+);
+@@clientName(Azure.AI.Projects.Models.publish, "publish", "python");

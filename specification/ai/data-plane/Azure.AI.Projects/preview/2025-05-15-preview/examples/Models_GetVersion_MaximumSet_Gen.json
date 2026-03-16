@@ -1,0 +1,46 @@
+{
+  "title": "Models_GetVersion_MaximumSet",
+  "operationId": "Models_GetVersion",
+  "parameters": {
+    "api-version": "2025-05-15-preview",
+    "name": "my-classification-model",
+    "version": "1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/models/my-classification-model/versions/1",
+        "name": "my-classification-model",
+        "version": "1",
+        "description": "Fine-tuned classification model",
+        "tags": {
+          "framework": "sklearn",
+          "task": "classification"
+        },
+        "properties": {
+          "custom_key": "custom_value"
+        },
+        "modelUri": "azureml://datastores/workspaceblobstore/paths/outputs/model/",
+        "modelType": "custom_model",
+        "flavors": {
+          "python_function": {
+            "data": {
+              "loader_module": "mlflow.pyfunc",
+              "python_version": "3.9"
+            }
+          },
+          "sklearn": {
+            "data": {
+              "sklearn_version": "1.3.0"
+            }
+          }
+        },
+        "stage": "Development",
+        "isArchived": false,
+        "isAnonymous": false,
+        "jobName": "my_training_job_01",
+        "provisioningState": "Succeeded"
+      }
+    }
+  }
+}

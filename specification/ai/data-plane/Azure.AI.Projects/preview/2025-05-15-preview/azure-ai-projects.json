@@ -1353,6 +1353,285 @@
         }
       }
     },
+    "/models/{name}/versions": {
+      "get": {
+        "operationId": "Models_ListVersions",
+        "description": "List all versions of the given Model",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "listViewType",
+            "in": "query",
+            "description": "Specifies which view type to apply when listing model versions.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Models_ListVersions_MaximumSet": {
+            "$ref": "./examples/Models_ListVersions_MaximumSet_Gen.json"
+          },
+          "Models_ListVersions_MinimumSet": {
+            "$ref": "./examples/Models_ListVersions_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/models/{name}/versions/{version}": {
+      "get": {
+        "operationId": "Models_GetVersion",
+        "description": "Get the specific version of the Model. The service returns 404 Not Found error if the Model does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the Model to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Models_GetVersion_MaximumSet": {
+            "$ref": "./examples/Models_GetVersion_MaximumSet_Gen.json"
+          },
+          "Models_GetVersion_MinimumSet": {
+            "$ref": "./examples/Models_GetVersion_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Models_CreateOrUpdateVersion",
+        "description": "Create a new or update an existing Model with the given version id",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the Model to create or update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The model to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Models_CreateOrUpdateVersion_MaximumSet": {
+            "$ref": "./examples/Models_CreateOrUpdateVersion_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Models_DeleteVersion",
+        "description": "Delete the specific version of the Model. The service returns 204 No Content if the Model was deleted successfully or if the Model does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The version of the Model to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Models_DeleteVersion_MaximumSet": {
+            "$ref": "./examples/Models_DeleteVersion_MaximumSet_Gen.json"
+          },
+          "Models_DeleteVersion_MinimumSet": {
+            "$ref": "./examples/Models_DeleteVersion_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/models/{name}/versions/{version}/publish": {
+      "post": {
+        "operationId": "Models_Publish",
+        "description": "Publish a model version to a registry.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version of the model to publish.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "destinationAsset",
+            "in": "body",
+            "description": "The destination asset parameters for publishing.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DestinationAsset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Models_Publish_MaximumSet": {
+            "$ref": "./examples/Models_Publish_MaximumSet_Gen.json"
+          },
+          "Models_Publish_MinimumSet": {
+            "$ref": "./examples/Models_Publish_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/redTeams/runs": {
       "get": {
         "operationId": "RedTeams_List",
@@ -1694,6 +1973,54 @@
       "required": [
         "blobReference"
       ]
+    },
+    "AssetProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state for the model version.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "AssetProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          }
+        ]
+      }
     },
     "AssistantMessage": {
       "type": "object",
@@ -2387,6 +2714,27 @@
         ]
       }
     },
+    "DestinationAsset": {
+      "type": "object",
+      "description": "The destination asset for publishing a model to a registry.",
+      "properties": {
+        "registryName": {
+          "type": "string",
+          "description": "Target registry name to publish the model to."
+        },
+        "destinationName": {
+          "type": "string",
+          "description": "Asset name in the destination registry. Defaults to the source asset name if not provided."
+        },
+        "destinationVersion": {
+          "type": "string",
+          "description": "Version to assign in the destination registry. Defaults to the source version if not provided."
+        }
+      },
+      "required": [
+        "registryName"
+      ]
+    },
     "DeveloperMessage": {
       "type": "object",
       "description": "A message authored by a developer to guide the model during evaluation.",
@@ -2626,6 +2974,19 @@
       ],
       "x-ms-discriminator-value": "uri_file"
     },
+    "FlavorData": {
+      "type": "object",
+      "description": "Flavor data for a model, containing flavor-specific key/value pairs.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "description": "Model flavor-specific data.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "FolderDatasetVersion": {
       "type": "object",
       "description": "FileDatasetVersion Definition",
@@ -2793,6 +3154,86 @@
         "role"
       ]
     },
+    "Model": {
+      "type": "object",
+      "description": "Model details.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The asset property dictionary.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "modelUri": {
+          "type": "string",
+          "description": "The URI path to the model contents."
+        },
+        "modelType": {
+          "type": "string",
+          "description": "The storage format for this entity. Used for NCD."
+        },
+        "flavors": {
+          "type": "object",
+          "description": "Mapping of model flavors to their properties.",
+          "additionalProperties": {
+            "$ref": "#/definitions/FlavorData"
+          }
+        },
+        "stage": {
+          "type": "string",
+          "description": "Stage in the model lifecycle assigned to this model."
+        },
+        "isArchived": {
+          "type": "boolean",
+          "description": "Is the asset archived?"
+        },
+        "isAnonymous": {
+          "type": "boolean",
+          "description": "If the name version are system generated (anonymous registration)."
+        },
+        "jobName": {
+          "type": "string",
+          "description": "Name of the training job which produced this model.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AssetProvisioningState",
+          "description": "Provisioning state for the model version.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Version identifier. This is case-sensitive.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ]
+    },
     "ModelDeployment": {
       "type": "object",
       "description": "Model Deployment Definition",
@@ -2948,6 +3389,27 @@
           "description": "The Index items on this page",
           "items": {
             "$ref": "#/definitions/Index"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedModel": {
+      "type": "object",
+      "description": "Paged collection of Model items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Model items on this page",
+          "items": {
+            "$ref": "#/definitions/Model"
           }
         },
         "nextLink": {
