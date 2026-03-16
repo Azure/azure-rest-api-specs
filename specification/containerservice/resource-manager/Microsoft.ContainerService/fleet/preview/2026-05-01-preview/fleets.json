@@ -5594,6 +5594,18 @@
           "description": "The name of the UpdateGroup.",
           "readOnly": true
         },
+        "failureCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total member upgrade failures within the group.",
+          "readOnly": true
+        },
+        "maxAllowedFailures": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of member upgrade failures allowed within this group, resolved from the UpdateStrategy.UpdateGroup.maxAllowedFailures value.",
+          "readOnly": true
+        },
         "maxConcurrency": {
           "type": "integer",
           "format": "int32",
@@ -5927,6 +5939,18 @@
         "name": {
           "type": "string",
           "description": "The name of the UpdateStage.",
+          "readOnly": true
+        },
+        "failureCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total member upgrade failures within the stage.",
+          "readOnly": true
+        },
+        "maxAllowedFailures": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of member upgrade failures allowed within this stage, resolved from the UpdateStrategy.UpdateStage.maxAllowedFailures value.",
           "readOnly": true
         },
         "maxConcurrency": {
