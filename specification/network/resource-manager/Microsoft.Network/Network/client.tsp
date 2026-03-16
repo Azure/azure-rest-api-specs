@@ -19,3 +19,7 @@ using Microsoft.Compute;
 namespace CombineClient;
 
 @@clientName(CombineClient, "NetworkManagementClient", "javascript");
+@@clientName(Microsoft.Network.ErrorResponse,
+  "NetworkWatcherErrorResponse",
+  "java"
+);
