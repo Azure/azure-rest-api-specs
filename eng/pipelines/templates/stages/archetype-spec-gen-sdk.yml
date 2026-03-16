@@ -279,10 +279,10 @@ stages:
 
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
         - pwsh: |
+            $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
             # use the user provided branch name
-            $sdkPrBranchName = '${{ parameters.SdkRepoBranch }}'
-            if (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch)) {
-              $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
+            if (($sdkRepoBranch -ne 'main') -and (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch))) {
+              $sdkPrBranchName = '${{ parameters.SdkRepoBranch }}'
             }
             Write-Host "Branch name is set to: $sdkPrBranchName"
             Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
