@@ -15,7 +15,7 @@ namespace Microsoft.ContainerService;
 /**
  * The mode of the alert configuration.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union AlertConfigurationMode {
   string,
 
@@ -34,7 +34,7 @@ union AlertConfigurationMode {
 /**
  * The current provisioning state of the alert configuration.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union AlertConfigurationProvisioningState {
   string,
 
@@ -72,7 +72,7 @@ union AlertConfigurationProvisioningState {
 /**
  * Notification settings for the alert configuration.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model AlertNotification {
   /**
    * The resource ID of the Azure Monitor action group to send notifications to.
@@ -87,7 +87,7 @@ model AlertNotification {
 /**
  * Properties of the alert configuration.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model AlertConfigurationProperties {
   /**
    * The mode of the alert configuration. Specifies how AKS manages the alerts.
@@ -110,7 +110,7 @@ model AlertConfigurationProperties {
  * Alert configuration for a managed cluster. Allows configuring AKS-managed alerts
  * that notify users of important cluster events and conditions.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 @parentResource(ManagedCluster)
 model AlertConfiguration
   is Azure.ResourceManager.ProxyResource<AlertConfigurationProperties> {
@@ -123,7 +123,7 @@ model AlertConfiguration
 }
 
 @armResourceOperations
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 interface AlertConfigurations {
   /**
    * Gets the specified alert configuration of a managed cluster.
@@ -154,9 +154,7 @@ interface AlertConfigurations {
   listByManagedCluster is ArmResourceListByParent<AlertConfiguration>;
 }
 
-@@doc(AlertConfiguration.name,
-  "The name of the alert configuration."
-);
+@@doc(AlertConfiguration.name, "The name of the alert configuration.");
 @@doc(AlertConfiguration.properties,
   "The resource-specific properties for this resource."
 );
@@ -165,26 +163,22 @@ interface AlertConfigurations {
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Needed to attach x-ms-examples to operations"
-@@Autorest.example(
-  AlertConfigurations.get,
-  "./examples/2025-10-02-preview/AlertConfigurations_Get.json",
+@@Autorest.example(AlertConfigurations.get,
+  "./examples/2026-01-02-preview/AlertConfigurations_Get.json",
   "Get Alert Configuration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Needed to attach x-ms-examples to operations"
-@@Autorest.example(
-  AlertConfigurations.createOrUpdate,
-  "./examples/2025-10-02-preview/AlertConfigurations_CreateOrUpdate.json",
+@@Autorest.example(AlertConfigurations.createOrUpdate,
+  "./examples/2026-01-02-preview/AlertConfigurations_CreateOrUpdate.json",
   "Create or Update Alert Configuration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Needed to attach x-ms-examples to operations"
-@@Autorest.example(
-  AlertConfigurations.delete,
-  "./examples/2025-10-02-preview/AlertConfigurations_Delete.json",
+@@Autorest.example(AlertConfigurations.delete,
+  "./examples/2026-01-02-preview/AlertConfigurations_Delete.json",
   "Delete Alert Configuration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Needed to attach x-ms-examples to operations"
-@@Autorest.example(
-  AlertConfigurations.listByManagedCluster,
-  "./examples/2025-10-02-preview/AlertConfigurations_ListByManagedCluster.json",
+@@Autorest.example(AlertConfigurations.listByManagedCluster,
+  "./examples/2026-01-02-preview/AlertConfigurations_ListByManagedCluster.json",
   "List Alert Configurations by Managed Cluster"
 );
