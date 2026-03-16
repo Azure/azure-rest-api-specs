@@ -23,13 +23,11 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu, windows]
-        node-version: [20, 24]
-        exclude:
+        include:
           - os: ubuntu
-            node-version: 24
-          - os: windows
             node-version: 20
+          - os: windows
+            node-version: 24
 
     runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
@@ -53,6 +51,10 @@ jobs:
         run: npm run build
         working-directory: ./eng/tools/${{ inputs.package }}
 
+      - name: Test
+        run: npm run test:ci
+        working-directory: ./eng/tools/${{ inputs.package }}
+
       - name: Lint
         run: npm run lint
         if: inputs.lint == true
@@ -60,8 +62,4 @@ jobs:
 
       - name: Check Formatting
         run: npm run format:check:ci
-        working-directory: ./eng/tools/${{ inputs.package }}
-
-      - name: Test
-        run: npm run test:ci
         working-directory: ./eng/tools/${{ inputs.package }}
