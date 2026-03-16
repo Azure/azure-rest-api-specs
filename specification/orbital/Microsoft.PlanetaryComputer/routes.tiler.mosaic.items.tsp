@@ -407,14 +407,14 @@ interface MosaicItemsTilesScale {
 }
 
 @added(Versions.v2026_04_15)
-interface MosaicItemsBboxGeoJson {
+interface MosaicItemsFeatureGeoJson {
   /**
    * Create image from a geojson feature (without format in path).
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Geojson Bbox")
+  @summary("Geojson Feature")
   @tag("Tiles for STAC Items")
-  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/bbox")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/feature")
   @post
   crop is Azure.Core.Foundations.Operation<
     {
@@ -640,14 +640,14 @@ interface MosaicItemsBboxWithDimensions {
 }
 
 @added(Versions.v2026_04_15)
-interface MosaicItemsBboxGeoJsonFormat {
+interface MosaicItemsFeatureGeoJsonFormat {
   /**
    * Create image from a geojson feature with format.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Geojson Bbox Crop With Format")
+  @summary("Geojson Feature Crop With Format")
   @tag("Tiles for STAC Items")
-  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/bbox.{format}")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/feature.{format}")
   @post
   cropFormat is Azure.Core.Foundations.Operation<
     {
@@ -716,14 +716,14 @@ interface MosaicItemsBboxGeoJsonFormat {
 }
 
 @added(Versions.v2026_04_15)
-interface MosaicItemsBboxGeoJsonWidthByHeight {
+interface MosaicItemsFeatureGeoJsonWidthByHeight {
   /**
    * Create image from a geojson feature with dimensions.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Geojson Bbox Crop With Dimensions")
+  @summary("Geojson Feature Crop With Dimensions")
   @tag("Tiles for STAC Items")
-  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/bbox/{width}x{height}.{format}")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/feature/{width}x{height}.{format}")
   @post
   cropWidthByHeightFormat is Azure.Core.Foundations.Operation<
     {

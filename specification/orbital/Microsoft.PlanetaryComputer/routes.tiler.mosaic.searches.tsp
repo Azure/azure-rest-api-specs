@@ -465,26 +465,6 @@ interface MosaicSearchesInfoSearch {
 }
 
 // =====================================================================
-// #14 - Register Search
-// =====================================================================
-
-@added(Versions.v2026_04_15)
-interface MosaicSearchesRegisterSearch {
-  /**
-   * Register a Search query.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Searches Register")
-  @tag("Tiles for STAC Searches")
-  @route("/data/mosaic/searches/register")
-  @post
-  register is Azure.Core.Foundations.Operation<
-    RegisterMosaic,
-    TilerMosaicSearchRegistrationResponse
-  >;
-}
-
-// =====================================================================
 // #10 - Bbox Crop (NEW - 2 variants)
 // =====================================================================
 
@@ -614,18 +594,18 @@ interface MosaicSearchesBboxWithDimensions {
 }
 
 // =====================================================================
-// Searches Mosaic Bbox GeoJson Crop (POST with Feature body)
+// Searches Mosaic Feature GeoJson Crop (POST with Feature body)
 // =====================================================================
 
 @added(Versions.v2026_04_15)
-interface MosaicSearchesBboxGeoJson {
+interface MosaicSearchesFeatureGeoJson {
   /**
    * Create image from a geojson feature (without format in path).
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Searches Geojson Bbox")
+  @summary("Searches Geojson Feature")
   @tag("Tiles for STAC Searches")
-  @route("/data/mosaic/searches/{searchId}/bbox")
+  @route("/data/mosaic/searches/{searchId}/feature")
   @post
   crop is Azure.Core.Foundations.Operation<
     {
@@ -668,14 +648,14 @@ interface MosaicSearchesBboxGeoJson {
 }
 
 @added(Versions.v2026_04_15)
-interface MosaicSearchesBboxGeoJsonFormat {
+interface MosaicSearchesFeatureGeoJsonFormat {
   /**
    * Create image from a geojson feature with format.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Searches Geojson Bbox Crop With Format")
+  @summary("Searches Geojson Feature Crop With Format")
   @tag("Tiles for STAC Searches")
-  @route("/data/mosaic/searches/{searchId}/bbox.{format}")
+  @route("/data/mosaic/searches/{searchId}/feature.{format}")
   @post
   cropFormat is Azure.Core.Foundations.Operation<
     {
@@ -726,14 +706,14 @@ interface MosaicSearchesBboxGeoJsonFormat {
 }
 
 @added(Versions.v2026_04_15)
-interface MosaicSearchesBboxGeoJsonWidthByHeight {
+interface MosaicSearchesFeatureGeoJsonWidthByHeight {
   /**
    * Create image from a geojson feature with dimensions.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Searches Geojson Bbox Crop With Dimensions")
+  @summary("Searches Geojson Feature Crop With Dimensions")
   @tag("Tiles for STAC Searches")
-  @route("/data/mosaic/searches/{searchId}/bbox/{width}x{height}.{format}")
+  @route("/data/mosaic/searches/{searchId}/feature/{width}x{height}.{format}")
   @post
   cropWidthByHeightFormat is Azure.Core.Foundations.Operation<
     {

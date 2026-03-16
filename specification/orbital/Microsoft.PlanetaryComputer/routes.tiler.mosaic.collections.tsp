@@ -936,18 +936,18 @@ interface MosaicCollectionsBboxWithDimensions {
 }
 
 // =====================================================================
-// Collection Mosaic Bbox GeoJson Crop (POST with Feature body)
+// Collection Mosaic Feature GeoJson Crop (POST with Feature body)
 // =====================================================================
 
 @added(Versions.v2026_04_15)
-interface MosaicCollectionsBboxGeoJson {
+interface MosaicCollectionsFeatureGeoJson {
   /**
    * Create image from a geojson feature (without format in path).
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Collection Geojson Bbox")
+  @summary("Collection Geojson Feature")
   @tag("Tiles for STAC Collections")
-  @route("/data/mosaic/collections/{collectionId}/bbox")
+  @route("/data/mosaic/collections/{collectionId}/feature")
   @post
   crop is Azure.Core.Foundations.Operation<
     {
@@ -990,14 +990,14 @@ interface MosaicCollectionsBboxGeoJson {
 }
 
 @added(Versions.v2026_04_15)
-interface MosaicCollectionsBboxGeoJsonFormat {
+interface MosaicCollectionsFeatureGeoJsonFormat {
   /**
    * Create image from a geojson feature with format.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Collection Geojson Bbox Crop With Format")
+  @summary("Collection Geojson Feature Crop With Format")
   @tag("Tiles for STAC Collections")
-  @route("/data/mosaic/collections/{collectionId}/bbox.{format}")
+  @route("/data/mosaic/collections/{collectionId}/feature.{format}")
   @post
   cropFormat is Azure.Core.Foundations.Operation<
     {
@@ -1048,14 +1048,14 @@ interface MosaicCollectionsBboxGeoJsonFormat {
 }
 
 @added(Versions.v2026_04_15)
-interface MosaicCollectionsBboxGeoJsonWidthByHeight {
+interface MosaicCollectionsFeatureGeoJsonWidthByHeight {
   /**
    * Create image from a geojson feature with dimensions.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Collection Geojson Bbox Crop With Dimensions")
+  @summary("Collection Geojson Feature Crop With Dimensions")
   @tag("Tiles for STAC Collections")
-  @route("/data/mosaic/collections/{collectionId}/bbox/{width}x{height}.{format}")
+  @route("/data/mosaic/collections/{collectionId}/feature/{width}x{height}.{format}")
   @post
   cropWidthByHeightFormat is Azure.Core.Foundations.Operation<
     {

@@ -251,27 +251,32 @@ interface Data {
 
   // Mosaic Assets
   #suppress "deprecated" "Preview-era operation kept for backward compatibility"
+  @removed(Versions.v2026_04_15)
   getMosaicsAssetsForPoint is MosaicsAssetsForPoints.getPointAssets;
   #suppress "deprecated" "Preview-era operation kept for backward compatibility"
+  @removed(Versions.v2026_04_15)
   getMosaicsAssetsForTile is MosaicsAssetsForTileMatrixSets.getZxyAssets;
   // getMosaicsAssetsForTile is MosaicsAssetsForTiles.getZxyAssets;
 
   // Mosaic Search and Registration
   #suppress "deprecated" "Preview-era operation kept for backward compatibility"
+  @removed(Versions.v2026_04_15)
   getMosaicsSearchInfo is MosaicsInfoSearch.get;
-  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
   registerMosaicsSearch is MosaicsRegisterSearch.register;
 
   // Mosaic Tile JSON
   #suppress "deprecated" "Preview-era operation kept for backward compatibility"
+  @removed(Versions.v2026_04_15)
   getMosaicsTileJson is MosaicsTileMatrixSetsTileJson.get;
 
   // Mosaic Tiles
   #suppress "deprecated" "Preview-era operation kept for backward compatibility"
+  @removed(Versions.v2026_04_15)
   getMosaicsTile is MosaicsTileMatrixSets.getZxyScaleByFormat;
 
   // Mosaic WMTS Capabilities
   #suppress "deprecated" "Preview-era operation kept for backward compatibility"
+  @removed(Versions.v2026_04_15)
   getMosaicsWmtsCapabilities is MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml;
   // getMosaicsWmtsCapabilities is MosaicsWmtsMosaics.getCapabilitiesXml;
 
@@ -300,17 +305,17 @@ interface Data {
   @added(Versions.v2026_04_15)
   getTileNoTmsByScale is MosaicItemsTilesScale.getZxyByScale;
 
-  // GeoJSON Bbox (bare, no format)
+  // GeoJSON Feature (bare, no format)
   @added(Versions.v2026_04_15)
-  cropBboxGeoJson is MosaicItemsBboxGeoJson.crop;
+  cropFeatureGeoJson is MosaicItemsFeatureGeoJson.crop;
 
-  // GeoJSON Bbox Crop with format
+  // GeoJSON Feature Crop with format
   @added(Versions.v2026_04_15)
-  cropBboxGeoJsonFormat is MosaicItemsBboxGeoJsonFormat.cropFormat;
+  cropFeatureGeoJsonFormat is MosaicItemsFeatureGeoJsonFormat.cropFormat;
 
-  // GeoJSON Bbox Crop with dimensions
+  // GeoJSON Feature Crop with dimensions
   @added(Versions.v2026_04_15)
-  cropBboxGeoJsonWidthByHeight is MosaicItemsBboxGeoJsonWidthByHeight.cropWidthByHeightFormat;
+  cropFeatureGeoJsonWidthByHeight is MosaicItemsFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
 
   // Item Bbox Crop
   @added(Versions.v2026_04_15)
@@ -377,11 +382,11 @@ interface Data {
   @added(Versions.v2026_04_15)
   getCollectionBboxCropWithDimensions is MosaicCollectionsBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
   @added(Versions.v2026_04_15)
-  cropCollectionBboxGeoJson is MosaicCollectionsBboxGeoJson.crop;
+  cropCollectionFeatureGeoJson is MosaicCollectionsFeatureGeoJson.crop;
   @added(Versions.v2026_04_15)
-  cropCollectionBboxGeoJsonFormat is MosaicCollectionsBboxGeoJsonFormat.cropFormat;
+  cropCollectionFeatureGeoJsonFormat is MosaicCollectionsFeatureGeoJsonFormat.cropFormat;
   @added(Versions.v2026_04_15)
-  cropCollectionBboxGeoJsonWidthByHeight is MosaicCollectionsBboxGeoJsonWidthByHeight.cropWidthByHeightFormat;
+  cropCollectionFeatureGeoJsonWidthByHeight is MosaicCollectionsFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
 
   // Collection Point
   @added(Versions.v2026_04_15)
@@ -419,20 +424,17 @@ interface Data {
   // #13 - Searches Info
   @added(Versions.v2026_04_15)
   getSearchesInfo is MosaicSearchesInfoSearch.get;
-  // #14 - Searches Register
-  @added(Versions.v2026_04_15)
-  searchesRegister is MosaicSearchesRegisterSearch.register;
   // #10 - Searches Bbox Crop (NEW)
   @added(Versions.v2026_04_15)
   getSearchesBboxCrop is MosaicSearchesBbox.getCroppedToBoundingBox;
   @added(Versions.v2026_04_15)
   getSearchesBboxCropWithDimensions is MosaicSearchesBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
   @added(Versions.v2026_04_15)
-  cropSearchesBboxGeoJson is MosaicSearchesBboxGeoJson.crop;
+  cropSearchesFeatureGeoJson is MosaicSearchesFeatureGeoJson.crop;
   @added(Versions.v2026_04_15)
-  cropSearchesBboxGeoJsonFormat is MosaicSearchesBboxGeoJsonFormat.cropFormat;
+  cropSearchesFeatureGeoJsonFormat is MosaicSearchesFeatureGeoJsonFormat.cropFormat;
   @added(Versions.v2026_04_15)
-  cropSearchesBboxGeoJsonWidthByHeight is MosaicSearchesBboxGeoJsonWidthByHeight.cropWidthByHeightFormat;
+  cropSearchesFeatureGeoJsonWidthByHeight is MosaicSearchesFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
   // Remaining /searches/ equivalents for consistency
   @added(Versions.v2026_04_15)
   getSearchesWmtsCapabilities is MosaicSearchesWmts.getCapabilitiesXml;
