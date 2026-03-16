@@ -52,16 +52,12 @@ interface ComponentLinkedStorageAccountsOperationGroup {
   /**
    * Returns the current linked storage settings for an Application Insights component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentLinkedStorageAccounts_Get")
   get is ComponentLinkedStorageAccountsOps.Read<ComponentLinkedStorageAccounts>;
 
   /**
    * Replace current linked storage account for an Application Insights component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ComponentLinkedStorageAccounts_CreateAndUpdate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createAndUpdate is ComponentLinkedStorageAccountsOps.CreateOrUpdateAsync<
     ComponentLinkedStorageAccounts,
     Response = ArmResourceUpdatedResponse<ComponentLinkedStorageAccounts>
@@ -70,8 +66,6 @@ interface ComponentLinkedStorageAccountsOperationGroup {
   /**
    * Update linked storage accounts for an Application Insights component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentLinkedStorageAccounts_Update")
   @patch(#{ implicitOptionality: false })
   update is ComponentLinkedStorageAccountsOps.CustomPatchSync<
     ComponentLinkedStorageAccounts,
@@ -81,8 +75,6 @@ interface ComponentLinkedStorageAccountsOperationGroup {
   /**
    * Delete linked storage accounts for an Application Insights component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentLinkedStorageAccounts_Delete")
   delete is ComponentLinkedStorageAccountsOps.DeleteSync<ComponentLinkedStorageAccounts>;
 }
 

@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 
 namespace AnalyticsItems;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AnalyticsItemsOperationGroup {
   /**
    * Gets a list of Analytics Items defined within an Application Insights component.

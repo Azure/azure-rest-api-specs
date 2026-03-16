@@ -9,7 +9,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace DeletedWorkbookApi;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union CategoryType {
   string,
 
@@ -76,7 +76,7 @@ union CreatedByType {
 /**
  * A workbook definition.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DeletedWorkbook extends DeletedWorkbookResource {
   /**
    * Metadata describing a workbook for an Azure resource.
@@ -96,7 +96,7 @@ model DeletedWorkbookProperties {
   /**
    * Configuration of this particular workbook. Configuration data is a string containing valid JSON
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serializedData: string | null;
 
   /**
@@ -135,19 +135,19 @@ model DeletedWorkbookProperties {
   /**
    * The resourceId to the storage account when bring your own storage is used
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageUri?: string | null;
 
   /**
    * The description of the workbook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
    * The unique revision id for this workbook definition
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   revision?: string | null;
 }
@@ -155,7 +155,7 @@ model DeletedWorkbookProperties {
 /**
  * An azure resource object
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DeletedWorkbookResource
   extends Azure.ResourceManager.CommonTypes.TrackedResource {
   /**

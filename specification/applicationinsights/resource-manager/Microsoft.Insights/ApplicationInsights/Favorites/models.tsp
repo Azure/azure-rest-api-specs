@@ -9,7 +9,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace Favorites;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union FavoriteSourceType {
   string,
 
@@ -57,7 +57,7 @@ union FavoriteSourceType {
 /**
  * Enum indicating if this favorite definition is owned by a specific user or is shared between all users with access to the Application Insights component.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum FavoriteType {
   /**
    * shared

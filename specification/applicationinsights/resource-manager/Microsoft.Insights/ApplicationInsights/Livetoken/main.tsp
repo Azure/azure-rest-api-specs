@@ -24,7 +24,7 @@ using TypeSpec.Versioning;
 /**
  * Composite Swagger for Application Insights Management Client
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace("Microsoft.Insights")
 @service(#{ title: "ApplicationInsightsManagementClient" })
 @versioned(Versions)

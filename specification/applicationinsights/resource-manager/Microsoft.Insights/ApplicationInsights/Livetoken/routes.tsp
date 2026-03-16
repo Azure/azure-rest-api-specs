@@ -13,13 +13,11 @@ using TypeSpec.OpenAPI;
 
 namespace LiveTokenApi;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface LiveTokenOperationGroup {
   /**
    * **Gets an access token for live metrics stream data.**
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LiveToken_Get")
   @tag("LiveToken")
   @autoRoute
   @action("generatelivetoken")

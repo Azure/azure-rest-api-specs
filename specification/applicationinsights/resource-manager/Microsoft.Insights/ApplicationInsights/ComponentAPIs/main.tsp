@@ -24,12 +24,13 @@ using TypeSpec.Versioning;
 /**
  * Composite Swagger for Application Insights Management Client
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace("Microsoft.Insights")
 @service(#{ title: "ApplicationInsightsManagementClient" })
 @versioned(Versions)
 // FIXME: Common type version v1 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
 namespace ComponentAPIs;
 
 /**

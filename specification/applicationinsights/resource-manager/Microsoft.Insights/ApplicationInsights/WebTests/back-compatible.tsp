@@ -54,7 +54,7 @@ using Microsoft.Insights;
 
 @@clientName(WebTests.createOrUpdate::parameters.resource, "WebTestDefinition");
 @@clientName(WebTests.updateTags::parameters.properties, "WebTestTags");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebTest.properties);
 
 @@clientLocation(WebTestsOperationGroup.listByComponent, WebTests);

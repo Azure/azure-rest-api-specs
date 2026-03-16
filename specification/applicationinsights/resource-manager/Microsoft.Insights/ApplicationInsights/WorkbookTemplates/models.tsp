@@ -58,7 +58,7 @@ model WorkbookTemplatesListResult {
 /**
  * Properties that contain a workbook template.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkbookTemplateProperties {
   /**
    * Priority of the template. Determines which template to open when a workbook gallery is opened in viewer mode.
@@ -73,7 +73,7 @@ model WorkbookTemplateProperties {
   /**
    * Valid JSON object containing workbook template payload.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   templateData: unknown;
 
   /**
@@ -85,7 +85,7 @@ model WorkbookTemplateProperties {
   /**
    * Key value pair of localized gallery. Each key is the locale code of languages supported by the Azure portal.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localized?: Record<WorkbookTemplateLocalizedGallery[]>;
 }
 
@@ -126,7 +126,7 @@ model WorkbookTemplateLocalizedGallery {
   /**
    * Valid JSON object containing workbook template payload.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   templateData?: unknown;
 
   /**
@@ -195,7 +195,7 @@ model WorkbookTemplateUpdateParameters {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**

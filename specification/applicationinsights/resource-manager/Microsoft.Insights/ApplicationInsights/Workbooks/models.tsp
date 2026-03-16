@@ -9,7 +9,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace WorkbooksApi;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union CategoryType {
   string,
 
@@ -88,7 +88,7 @@ union WorkbookUpdateSharedTypeKind {
 /**
  * Properties that contain a workbook.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkbookProperties {
   /**
    * The user-defined name (display name) of the workbook.
@@ -98,7 +98,7 @@ model WorkbookProperties {
   /**
    * Configuration of this particular workbook. Configuration data is a string containing valid JSON
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serializedData: string | null;
 
   /**
@@ -121,7 +121,7 @@ model WorkbookProperties {
   /**
    * Being deprecated, please use the other tags field
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: string[];
 
   /**
@@ -138,19 +138,19 @@ model WorkbookProperties {
   /**
    * The resourceId to the storage account when bring your own storage is used
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageUri?: string | null;
 
   /**
    * The description of the workbook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
    * The unique revision id for this workbook definition
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   revision?: string | null;
 }
@@ -158,7 +158,7 @@ model WorkbookProperties {
 /**
  * An azure resource object
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkbookResource
   extends Azure.ResourceManager.CommonTypes.TrackedResource {
   /**
@@ -180,8 +180,8 @@ model WorkbookResource
 /**
  * Identity used for BYOS
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkbookResourceIdentity
   extends Azure.ResourceManager.CommonTypes.ManagedServiceIdentity {}
 
@@ -242,7 +242,7 @@ model WorkbookUpdateParameters {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -279,13 +279,13 @@ model WorkbookPropertiesUpdateParameters {
   /**
    * The description of the workbook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
    * The unique revision id for this workbook definition
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   revision?: string | null;
 }
 

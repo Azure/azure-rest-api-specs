@@ -25,7 +25,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Application Insights client for web tests.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "ApplicationInsightsManagementClient" })
 @versioned(Versions)

@@ -13,14 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace WebTestLocation;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface webTestLocationsOperationGroup {
   /**
    * Gets a list of web test locations available to this Application Insights component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("webTestLocations_List")
   @autoRoute
   @get
   @list

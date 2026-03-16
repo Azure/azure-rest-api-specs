@@ -9,7 +9,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace ComponentLinkedStorageAccountApi;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StorageType {
   string,
 
@@ -22,7 +22,7 @@ union StorageType {
 /**
  * An Application Insights component linked storage account
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LinkedStorageAccountsProperties {
   /**
    * Linked storage account resource ID
@@ -30,7 +30,7 @@ model LinkedStorageAccountsProperties {
   linkedStorageAccount?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 model ErrorResponseLinkedStorage {
   /**

@@ -13,13 +13,11 @@ using TypeSpec.OpenAPI;
 
 namespace DeletedWorkbookApi;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DeletedWorkbooksOperationGroup {
   /**
    * Get all recently deleted Workbooks in a specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeletedWorkbooks_ListBySubscription")
   @autoRoute
   @get
   @list

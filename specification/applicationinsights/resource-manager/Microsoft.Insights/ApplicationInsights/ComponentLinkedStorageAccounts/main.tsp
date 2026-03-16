@@ -24,7 +24,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Application Insights client for setting linked storage account.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace("Microsoft.Insights")
 @service(#{ title: "ApplicationInsightsComponentLinkedStorageAccountsClient" })
 @versioned(Versions)

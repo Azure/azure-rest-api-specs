@@ -13,19 +13,17 @@ using TypeSpec.OpenAPI;
 
 namespace Favorites;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface FavoritesOperationGroup {
   /**
    * Gets a list of favorites defined within an Application Insights component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Favorites_List")
   @autoRoute
   @get
   @action("favorites")
   list is ArmProviderActionSync<
     Response = {
-      @bodyRoot _: ApplicationInsightsComponentFavorite[];
+      @bodyRoot @identifiers(#[]) _: ApplicationInsightsComponentFavorite[];
     },
     Scope = Extension.ResourceGroup,
     Parameters = {
@@ -65,8 +63,6 @@ interface FavoritesOperationGroup {
   /**
    * Get a single favorite by its FavoriteId, defined within an Application Insights component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Favorites_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/favorites/{favoriteId}")
   @get
   get(
@@ -90,8 +86,6 @@ interface FavoritesOperationGroup {
   /**
    * Adds a new favorites to an Application Insights component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Favorites_Add")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/favorites/{favoriteId}")
   @put
   add(
@@ -121,8 +115,6 @@ interface FavoritesOperationGroup {
   /**
    * Updates a favorite that has already been added to an Application Insights component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Favorites_Update")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/favorites/{favoriteId}")
   @patch(#{ implicitOptionality: true })
   update(
@@ -152,8 +144,6 @@ interface FavoritesOperationGroup {
   /**
    * Remove a favorite that is associated to an Application Insights component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Favorites_Delete")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/favorites/{favoriteId}")
   @delete
   delete(

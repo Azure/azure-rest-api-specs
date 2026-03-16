@@ -9,7 +9,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace AnalyticsItems;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ItemScopePath {
   string,
 
@@ -41,7 +41,7 @@ union ItemScope {
   user: "user",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ItemTypeParameter {
   string,
 

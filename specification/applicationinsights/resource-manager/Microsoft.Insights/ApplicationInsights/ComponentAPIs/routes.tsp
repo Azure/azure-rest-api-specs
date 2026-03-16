@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace ComponentAPIs;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AnnotationsOperationGroup {
   /**
    * Gets the list of annotations for a component for given time range
@@ -91,7 +91,7 @@ interface AnnotationsOperationGroup {
     @bodyRoot
     body: Annotation,
   ): {
-    #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+    #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @bodyRoot _: Annotation[];
   } | AnnotationError;
 
@@ -142,8 +142,8 @@ interface AnnotationsOperationGroup {
   ): ArmResponse<Annotation[]> | AnnotationError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface APIKeysOperationGroup {
   /**
    * Gets a list of API keys of an Application Insights component.
@@ -230,7 +230,7 @@ interface APIKeysOperationGroup {
   ): ArmResponse<ApplicationInsightsComponentAPIKey> | never;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ExportConfigurationsOperationGroup {
   /**
    * Gets a list of Continuous Export configuration of an Application Insights component.
@@ -263,7 +263,7 @@ interface ExportConfigurationsOperationGroup {
   create is ArmProviderActionSync<
     Request = ApplicationInsightsComponentExportRequest,
     Response = {
-      #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+      #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @bodyRoot _: ApplicationInsightsComponentExportConfiguration[];
     },
     Scope = Extension.ResourceGroup,
@@ -348,13 +348,13 @@ interface ExportConfigurationsOperationGroup {
     /**
      * Properties that need to be specified to update the Continuous Export configuration.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @bodyRoot
     ExportProperties: ApplicationInsightsComponentExportRequest,
   ): ArmResponse<ApplicationInsightsComponentExportConfiguration> | never;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ComponentCurrentBillingFeaturesOperationGroup {
   /**
    * Returns current billing features for an Application Insights component.
@@ -397,7 +397,7 @@ interface ComponentCurrentBillingFeaturesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ComponentQuotaStatusOperationGroup {
   /**
    * Returns daily data volume cap (quota) status for an Application Insights component.
@@ -420,7 +420,7 @@ interface ComponentQuotaStatusOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ComponentFeatureCapabilitiesOperationGroup {
   /**
    * Returns feature capabilities of the application insights component.
@@ -443,7 +443,7 @@ interface ComponentFeatureCapabilitiesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ComponentAvailableFeaturesOperationGroup {
   /**
    * Returns all available features of the application insights component.
@@ -466,7 +466,7 @@ interface ComponentAvailableFeaturesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ProactiveDetectionConfigurationsOperationGroup {
   /**
    * Gets a list of ProactiveDetection configurations of an Application Insights component.
@@ -507,7 +507,7 @@ interface ProactiveDetectionConfigurationsOperationGroup {
     /**
      * The ProactiveDetection configuration ID. This is unique within a Application Insights component.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     ConfigurationId: string,
   ): ArmResponse<ApplicationInsightsComponentProactiveDetectionConfiguration> | never;
@@ -531,20 +531,20 @@ interface ProactiveDetectionConfigurationsOperationGroup {
     /**
      * The ProactiveDetection configuration ID. This is unique within a Application Insights component.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     ConfigurationId: string,
 
     /**
      * Properties that need to be specified to update the ProactiveDetection configuration.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @bodyRoot
     ProactiveDetectionProperties: ApplicationInsightsComponentProactiveDetectionConfiguration,
   ): ArmResponse<ApplicationInsightsComponentProactiveDetectionConfiguration> | never;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface WorkItemConfigurationsOperationGroup {
   /**
    * Gets the list work item configurations that exist for the application
@@ -672,7 +672,7 @@ interface WorkItemConfigurationsOperationGroup {
     /**
      * Properties that need to be specified to update a work item configuration for this Application Insights component.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @bodyRoot
     WorkItemConfigurationProperties: WorkItemCreateConfiguration,
   ): ArmResponse<WorkItemConfiguration> | never;

@@ -13,13 +13,11 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Insights;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface WebTestsOperationGroup {
   /**
    * Get all Application Insights web tests defined for the specified component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WebTests_ListByComponent")
   @autoRoute
   @get
   @list
