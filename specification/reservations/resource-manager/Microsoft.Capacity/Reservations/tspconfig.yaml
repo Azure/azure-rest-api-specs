@@ -1,0 +1,41 @@
+parameters:
+  service-dir:
+    default: "sdk/reservations"
+options:
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-reservations"
+    namespace: "azure.mgmt.reservations"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-reservations"
+    namespace: "com.azure.resourcemanager.reservations"
+    service-name: "Reservations"
+    enable-sync-stack: true
+    use-object-for-unknown: true
+    float32-as-double: false
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-reservations"
+    compatibility-lro: true
+    typespec-title-map:
+      ReservationsClient: AzureReservationAPI
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-reservations"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/reservations"
+    emitter-output-dir: "{output-dir}/{service-dir}/armreservations"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armreservations"
+    fix-const-stuttering: true
+    factory-gather-all-params: true
+    flavor: azure
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

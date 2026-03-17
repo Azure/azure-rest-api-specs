@@ -15,7 +15,7 @@ model AlertsClientOptions {
   {
     parameters: AlertsClientOptions,
   },
-  "!(python,java)"
+  "!(python,java,javascript)"
 );
 
 @@clientName(Microsoft.AlertsManagement, "AlertsManagementClient", "python");
