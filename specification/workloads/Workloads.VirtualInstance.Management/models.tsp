@@ -570,7 +570,7 @@ model LinkedResource {
 /**
  * Defines the request body for updating the Virtual Instance resource.
  */
-model UpdateVirtualInstanceRequest {
+model VirtualInstanceUpdate {
   /**
    * Gets or sets the Resource tags.
    */
@@ -698,7 +698,7 @@ model ComponentProfile {
 /**
  * Defines the request body for updating the workload component resource.
  */
-model UpdateWorkloadComponentRequest {
+model WorkloadComponentUpdate {
   /**
    * Gets or sets the Resource tags.
    */

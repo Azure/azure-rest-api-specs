@@ -282,7 +282,7 @@
             "description": "Request body to update the Virtual Instance resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateVirtualInstanceRequest"
+              "$ref": "#/definitions/VirtualInstanceUpdate"
             }
           }
         ],
@@ -613,7 +613,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateWorkloadComponentRequest"
+              "$ref": "#/definitions/WorkloadComponentUpdate"
             }
           }
         ],
@@ -1506,27 +1506,6 @@
         }
       }
     },
-    "UpdateVirtualInstanceRequest": {
-      "type": "object",
-      "description": "Defines the request body for updating the Virtual Instance resource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Gets or sets the Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed service identity (user assigned identities)"
-        },
-        "properties": {
-          "$ref": "#/definitions/UpdateVirtualInstanceProperties",
-          "description": "The properties to be updated."
-        }
-      }
-    },
     "UpdateWorkloadComponentProperties": {
       "type": "object",
       "description": "Defines the update request body properties for updating the workload component resource.",
@@ -1549,23 +1528,6 @@
         "componentProfile": {
           "$ref": "#/definitions/ComponentProfile",
           "description": "The component profile containing workload-specific configuration details.\nThe profile type varies based on the workload and component type."
-        }
-      }
-    },
-    "UpdateWorkloadComponentRequest": {
-      "type": "object",
-      "description": "Defines the request body for updating the workload component resource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Gets or sets the Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/UpdateWorkloadComponentProperties",
-          "description": "The properties to be updated."
         }
       }
     },
@@ -1718,6 +1680,27 @@
         "systemLifecycleStage"
       ]
     },
+    "VirtualInstanceUpdate": {
+      "type": "object",
+      "description": "Defines the request body for updating the Virtual Instance resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets the Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity (user assigned identities)"
+        },
+        "properties": {
+          "$ref": "#/definitions/UpdateVirtualInstanceProperties",
+          "description": "The properties to be updated."
+        }
+      }
+    },
     "WorkloadComplianceState": {
       "type": "string",
       "description": "Defines the Virtual Instance compliance state.",
@@ -1838,6 +1821,23 @@
       "required": [
         "componentType"
       ]
+    },
+    "WorkloadComponentUpdate": {
+      "type": "object",
+      "description": "Defines the request body for updating the workload component resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets the Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/UpdateWorkloadComponentProperties",
+          "description": "The properties to be updated."
+        }
+      }
     },
     "WorkloadEnrollmentState": {
       "type": "string",

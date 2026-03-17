@@ -36,7 +36,7 @@ interface VirtualInstances {
    * Updates a Virtual Instance resource
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<VirtualInstance, UpdateVirtualInstanceRequest>;
+  update is ArmCustomPatchAsync<VirtualInstance, VirtualInstanceUpdate>;
 
   /**
    * Deletes a Virtual Instance resource.
