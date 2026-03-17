@@ -29,3 +29,23 @@ using Azure.ClientGenerator.Core;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+// Fix enum member naming for backward compatibility (IPFIX → Ipfix)
+@@clientName(Microsoft.NetworkFunction.EmissionType.IPFIX, "Ipfix", "csharp");
+@@clientName(Microsoft.NetworkFunction.IngestionType.IPFIX, "Ipfix", "csharp");
+
+// Fix ETag type for backward compatibility (string → Azure.ETag?)
+@@alternateType(Microsoft.NetworkFunction.AzureTrafficCollector.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.NetworkFunction.CollectorPolicy.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+
+// Fix ResourceReference.id type for backward compatibility (string → ResourceIdentifier)
+@@alternateType(Microsoft.NetworkFunction.ResourceReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
