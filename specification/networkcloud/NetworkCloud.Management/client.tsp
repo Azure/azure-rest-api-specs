@@ -397,4 +397,4 @@ using Microsoft.NetworkCloud;
 
 @@clientName(HugepagesSize.`1G`, "OneG", "go");
 @@clientName(HugepagesSize.`2M`, "TwoM", "go");
-@@alternateType(Foundations.ExtendedLocation.type, string, "go");
+@@alternateType(Foundations.ExtendedLocationType, string, "go");
