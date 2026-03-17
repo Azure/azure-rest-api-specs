@@ -45,13 +45,13 @@ model RunProperties {
    * The timestamp when the run started.
    */
   @visibility(Lifecycle.Read)
-  startTimeUtc?: utcDateTime;
+  startTime?: utcDateTime;
 
   /**
    * The timestamp when the run completed.
    */
   @visibility(Lifecycle.Read)
-  endTimeUtc?: utcDateTime;
+  endTime?: utcDateTime;
 
   /**
    * Error details if the run failed.
