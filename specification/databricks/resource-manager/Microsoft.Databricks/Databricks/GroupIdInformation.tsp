@@ -30,19 +30,15 @@ interface GroupIdInformations {
   /**
    * Get the specified private link resource for the given group id (sub-resource)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("PrivateLinkResources")
   @summary("Get the specified private link resource")
-  @operationId("PrivateLinkResources_Get")
   get is ArmResourceRead<GroupIdInformation, Error = ErrorResponse>;
 
   /**
    * List private link resources for a given workspace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("PrivateLinkResources")
   @summary("List private link resources")
-  @operationId("PrivateLinkResources_List")
   list is ArmResourceListByParent<
     GroupIdInformation,
     Response = ArmResponse<PrivateLinkResourcesList>,

@@ -95,10 +95,8 @@ interface Workspaces {
   /**
    * Gets the list of endpoints that VNET Injected Workspace calls Azure Databricks Control Plane. You must configure outbound access with these endpoints. For more information, see https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("OutboundNetworkDependenciesEndpoints")
   @summary("Gets a list of egress endpoints (network endpoints of all outbound dependencies) in the specified Workspace.")
-  @operationId("OutboundNetworkDependenciesEndpoints_List")
   @get
   @action("outboundNetworkDependenciesEndpoints")
   list is ArmResourceActionSync<
