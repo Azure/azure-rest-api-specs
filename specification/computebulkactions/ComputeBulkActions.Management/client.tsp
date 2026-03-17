@@ -19,7 +19,10 @@ namespace Microsoft.ComputeBulkActions;
 // =====================================================================
 @@clientName(ExecuteTypeRequest.correlationid, "CorrelationId", "csharp");
 @@clientName(ExecuteCreateRequest.correlationid, "CorrelationId", "csharp");
-@@clientName(GetOperationStatusRequest.correlationid, "CorrelationId", "csharp");
+@@clientName(GetOperationStatusRequest.correlationid,
+  "CorrelationId",
+  "csharp"
+);
 @@clientName(CancelOperationsRequest.correlationid, "CorrelationId", "csharp");
 
 // =====================================================================
@@ -38,12 +41,27 @@ namespace Microsoft.ComputeBulkActions;
 // Critical: Response suffix → Result suffix
 // =====================================================================
 @@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
-@@clientName(CreateResourceOperationResponse, "CreateResourceOperationResult", "csharp");
-@@clientName(DeallocateResourceOperationResponse, "DeallocateResourceOperationResult", "csharp");
-@@clientName(DeleteResourceOperationResponse, "DeleteResourceOperationResult", "csharp");
+@@clientName(CreateResourceOperationResponse,
+  "CreateResourceOperationResult",
+  "csharp"
+);
+@@clientName(DeallocateResourceOperationResponse,
+  "DeallocateResourceOperationResult",
+  "csharp"
+);
+@@clientName(DeleteResourceOperationResponse,
+  "DeleteResourceOperationResult",
+  "csharp"
+);
 @@clientName(GetOperationStatusResponse, "GetOperationStatusResult", "csharp");
-@@clientName(HibernateResourceOperationResponse, "HibernateResourceOperationResult", "csharp");
-@@clientName(StartResourceOperationResponse, "StartResourceOperationResult", "csharp");
+@@clientName(HibernateResourceOperationResponse,
+  "HibernateResourceOperationResult",
+  "csharp"
+);
+@@clientName(StartResourceOperationResponse,
+  "StartResourceOperationResult",
+  "csharp"
+);
 
 // =====================================================================
 // Critical: Parameters suffix
@@ -88,8 +106,14 @@ namespace Microsoft.ComputeBulkActions;
 // Warning: Boolean property naming (verb prefix)
 // =====================================================================
 // AdditionalCapabilities
-@@clientName(AdditionalCapabilities.ultraSSDEnabled, "IsUltraSsdEnabled", "csharp");
-@@clientName(AdditionalCapabilities.hibernationEnabled, "IsHibernationEnabled", "csharp");
+@@clientName(AdditionalCapabilities.ultraSSDEnabled,
+  "IsUltraSsdEnabled",
+  "csharp"
+);
+@@clientName(AdditionalCapabilities.hibernationEnabled,
+  "IsHibernationEnabled",
+  "csharp"
+);
 
 // BootDiagnostics
 @@clientName(BootDiagnostics.enabled, "IsEnabled", "csharp");
@@ -107,32 +131,59 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
 
 // LinuxConfiguration
-@@clientName(LinuxConfiguration.disablePasswordAuthentication, "IsPasswordAuthenticationDisabled", "csharp");
-@@clientName(LinuxConfiguration.provisionVMAgent, "IsVMAgentProvisioned", "csharp");
-@@clientName(LinuxConfiguration.enableVMAgentPlatformUpdates, "IsVMAgentPlatformUpdatesEnabled", "csharp");
+@@clientName(LinuxConfiguration.disablePasswordAuthentication,
+  "IsPasswordAuthenticationDisabled",
+  "csharp"
+);
+@@clientName(LinuxConfiguration.provisionVMAgent,
+  "IsVMAgentProvisioned",
+  "csharp"
+);
+@@clientName(LinuxConfiguration.enableVMAgentPlatformUpdates,
+  "IsVMAgentPlatformUpdatesEnabled",
+  "csharp"
+);
 
 // LinuxVMGuestPatchAutomaticByPlatformSettings
-@@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule, "IsBypassPlatformSafetyChecksOnUserSchedule", "csharp");
+@@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+  "IsBypassPlatformSafetyChecksOnUserSchedule",
+  "csharp"
+);
 
 // NetworkInterfaceReferenceProperties
-@@clientName(NetworkInterfaceReferenceProperties.primary, "IsPrimary", "csharp");
+@@clientName(NetworkInterfaceReferenceProperties.primary,
+  "IsPrimary",
+  "csharp"
+);
 
 // OSImageNotificationProfile
 @@clientName(OSImageNotificationProfile.enable, "IsEnabled", "csharp");
 
 // OSProfile
-@@clientName(OSProfile.allowExtensionOperations, "IsExtensionOperationsAllowed", "csharp");
-@@clientName(OSProfile.requireGuestProvisionSignal, "IsGuestProvisionSignalRequired", "csharp");
+@@clientName(OSProfile.allowExtensionOperations,
+  "IsExtensionOperationsAllowed",
+  "csharp"
+);
+@@clientName(OSProfile.requireGuestProvisionSignal,
+  "IsGuestProvisionSignalRequired",
+  "csharp"
+);
 
 // PatchSettings
 @@clientName(PatchSettings.enableHotpatching, "IsHotpatchingEnabled", "csharp");
 
 // ProxyAgentSettings
 @@clientName(ProxyAgentSettings.enabled, "IsEnabled", "csharp");
-@@clientName(ProxyAgentSettings.addProxyAgentExtension, "ShouldAddProxyAgentExtension", "csharp");
+@@clientName(ProxyAgentSettings.addProxyAgentExtension,
+  "ShouldAddProxyAgentExtension",
+  "csharp"
+);
 
 // SecurityProfile
-@@clientName(SecurityProfile.encryptionAtHost, "IsEncryptionAtHostEnabled", "csharp");
+@@clientName(SecurityProfile.encryptionAtHost,
+  "IsEncryptionAtHostEnabled",
+  "csharp"
+);
 
 // TerminateNotificationProfile
 @@clientName(TerminateNotificationProfile.enable, "IsEnabled", "csharp");
@@ -142,25 +193,61 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(UefiSettings.vTpmEnabled, "IsVTpmEnabled", "csharp");
 
 // VMGalleryApplication
-@@clientName(VMGalleryApplication.enableAutomaticUpgrade, "IsAutomaticUpgradeEnabled", "csharp");
+@@clientName(VMGalleryApplication.enableAutomaticUpgrade,
+  "IsAutomaticUpgradeEnabled",
+  "csharp"
+);
 
 // VirtualMachineExtensionProperties
-@@clientName(VirtualMachineExtensionProperties.autoUpgradeMinorVersion, "IsAutoUpgradeMinorVersionEnabled", "csharp");
-@@clientName(VirtualMachineExtensionProperties.enableAutomaticUpgrade, "IsAutomaticUpgradeEnabled", "csharp");
-@@clientName(VirtualMachineExtensionProperties.suppressFailures, "IsSuppressFailures", "csharp");
+@@clientName(VirtualMachineExtensionProperties.autoUpgradeMinorVersion,
+  "IsAutoUpgradeMinorVersionEnabled",
+  "csharp"
+);
+@@clientName(VirtualMachineExtensionProperties.enableAutomaticUpgrade,
+  "IsAutomaticUpgradeEnabled",
+  "csharp"
+);
+@@clientName(VirtualMachineExtensionProperties.suppressFailures,
+  "IsSuppressFailures",
+  "csharp"
+);
 
 // VirtualMachineNetworkInterfaceConfigurationProperties
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.primary, "IsPrimary", "csharp");
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableAcceleratedNetworking, "IsAcceleratedNetworkingEnabled", "csharp");
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.disableTcpStateTracking, "IsTcpStateTrackingDisabled", "csharp");
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableFpga, "IsFpgaEnabled", "csharp");
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableIPForwarding, "IsIPForwardingEnabled", "csharp");
+@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.primary,
+  "IsPrimary",
+  "csharp"
+);
+@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableAcceleratedNetworking,
+  "IsAcceleratedNetworkingEnabled",
+  "csharp"
+);
+@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.disableTcpStateTracking,
+  "IsTcpStateTrackingDisabled",
+  "csharp"
+);
+@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableFpga,
+  "IsFpgaEnabled",
+  "csharp"
+);
+@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableIPForwarding,
+  "IsIPForwardingEnabled",
+  "csharp"
+);
 
 // VirtualMachineNetworkInterfaceIPConfigurationProperties
-@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.primary, "IsPrimary", "csharp");
+@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.primary,
+  "IsPrimary",
+  "csharp"
+);
 
 // WindowsConfiguration
-@@clientName(WindowsConfiguration.provisionVMAgent, "IsVMAgentProvisioned", "csharp");
+@@clientName(WindowsConfiguration.provisionVMAgent,
+  "IsVMAgentProvisioned",
+  "csharp"
+);
 
 // WindowsVMGuestPatchAutomaticByPlatformSettings
-@@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule, "IsBypassPlatformSafetyChecksOnUserSchedule", "csharp");
+@@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+  "IsBypassPlatformSafetyChecksOnUserSchedule",
+  "csharp"
+);
