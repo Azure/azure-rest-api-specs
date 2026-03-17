@@ -847,32 +847,6 @@ op backupResourceEncryptionConfigsGet(
   "java,go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupResourceEncryptionConfigsUpdate(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: BackupResourceEncryptionConfigExtendedResource,
-): ArmResponse<BackupResourceEncryptionConfigExtended>;
-
-@@override(BackupResourceEncryptionConfigs.update,
-  backupResourceEncryptionConfigsUpdate,
-  "java,go,python,javascript"
-);
-
 // BackupResourceStorageConfigsNonCRR operations
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
