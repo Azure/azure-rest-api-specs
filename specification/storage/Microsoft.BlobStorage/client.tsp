@@ -471,6 +471,36 @@ op setImmutabilityPolicyOptionalExpiry is StorageOperationNoBody<
 );
 
 // C# customizations
+
+// Defining an override for backward compatibility for C# since the XML payload was serialized with the
+// elements/properties in a different order than defined in the swagger.
+
+/** The service properties. */
+@Xml.name("StorageServiceProperties")
+model BlobServicePropertiesCsharp {
+  /** The logging properties. */
+  @Xml.name("Logging") logging?: BlobServiceProperties.logging;
+
+  /** The hour metrics properties. */
+  @Xml.name("HourMetrics") hourMetrics?: BlobServiceProperties.hourMetrics;
+
+  /** The minute metrics properties. */
+  @Xml.name("MinuteMetrics") minuteMetrics?: BlobServiceProperties.minuteMetrics;
+
+    /** The default service version. */
+  @Xml.name("DefaultServiceVersion") defaultServiceVersion?: BlobServiceProperties.defaultServiceVersion;
+
+  /** The delete retention policy. */
+  @Xml.name("DeleteRetentionPolicy") deleteRetentionPolicy?: BlobServiceProperties.deleteRetentionPolicy;
+  
+  /** The static website properties. */
+  @Xml.name("StaticWebsite") staticWebsite?: BlobServiceProperties.staticWebsite;
+
+  /** The CORS properties. */
+  @Xml.name("Cors") cors?: CorsRule[];
+}
+
+@@alternateType(BlobServiceProperties, BlobServicePropertiesCsharp, "csharp");
 @@alternateType(AccessPolicy.start, utcDateTime, "csharp");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "csharp");
 @@alternateType(LeaseBreakPeriodParameter.breakPeriod, int64, "csharp");
@@ -478,7 +508,17 @@ op setImmutabilityPolicyOptionalExpiry is StorageOperationNoBody<
 @@alternateType(BlobItem.metadata, Record<string>, "csharp");
 @@alternateType(BlobItem.objectReplicationMetadata, Record<string>, "csharp");
 @@alternateType(KeyInfo.delegatedUserTid, string, "csharp");
+@@alternateType(IfMatchParameter.ifMatch, string, "csharp");
+@@alternateType(IfNoneMatchParameter.ifNoneMatch, string, "csharp");
+@@alternateType(ContainerProperties.eTag, string, "csharp");
+@@alternateType(BlobProperties.eTag, string, "csharp");
+@@alternateType(SourceIfMatchParameter.sourceIfMatch, string, "csharp");
+@@alternateType(SourceIfNoneMatchParameter.sourceIfNoneMatch, string, "csharp");
+@@alternateType(IfBlobMatchHeader.ifMatch, string, "csharp");
+@@alternateType(IfBlobNoneMatchHeader.ifNoneMatch, string, "csharp");
+@@alternateType(BlockIdParameter.blockid, string, "csharp");
 
+@@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "csharp");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "csharp");
 @@clientName(StorageErrorCode, "BlobErrorCode", "csharp");
 @@clientName(Blob, "BlobRestClient", "csharp");
@@ -523,6 +563,7 @@ op setImmutabilityPolicyOptionalExpiry is StorageOperationNoBody<
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Service.listContainers,
   "csharp"
 );
+
 /** ----- This section overrides the setMetadata operations for Rust to require the metadata headers ----- */
 alias MetadataHeadersRequired = {
   /** The metadata headers. */
