@@ -159,7 +159,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       // Read the execution report to aggreate the generation results
       executionReport = getExecutionReport(commandInput);
       currentExecutionResult = executionReport.executionResult;
-      if (executionReport.generateFromTypeSpec) {
+      if (executionReport.generateFromTypeSpec && executionReport.executionResult !== "notEnabled") {
         hasTypeSpecProjects = true;
       }
 
