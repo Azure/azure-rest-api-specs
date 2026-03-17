@@ -413,7 +413,7 @@ enum ImmutabilityPolicySetting {
   "python"
 );
 
-@@clientOption(Storage.Blob, "includeRootSlash", false, "python,javascript");
+@@clientOption(Storage.Blob, "includeRootSlash", false, "javascript");
 
 @@clientOption(Error, "header", "x-ms-error-code:errorCode", "javascript");
 @@clientOption(Error, "restErrorCodeHeader", "x-ms-error-code", "javascript");
@@ -485,16 +485,20 @@ model BlobServicePropertiesCsharp {
   @Xml.name("HourMetrics") hourMetrics?: BlobServiceProperties.hourMetrics;
 
   /** The minute metrics properties. */
-  @Xml.name("MinuteMetrics") minuteMetrics?: BlobServiceProperties.minuteMetrics;
+  @Xml.name("MinuteMetrics")
+  minuteMetrics?: BlobServiceProperties.minuteMetrics;
 
-    /** The default service version. */
-  @Xml.name("DefaultServiceVersion") defaultServiceVersion?: BlobServiceProperties.defaultServiceVersion;
+  /** The default service version. */
+  @Xml.name("DefaultServiceVersion")
+  defaultServiceVersion?: BlobServiceProperties.defaultServiceVersion;
 
   /** The delete retention policy. */
-  @Xml.name("DeleteRetentionPolicy") deleteRetentionPolicy?: BlobServiceProperties.deleteRetentionPolicy;
-  
+  @Xml.name("DeleteRetentionPolicy")
+  deleteRetentionPolicy?: BlobServiceProperties.deleteRetentionPolicy;
+
   /** The static website properties. */
-  @Xml.name("StaticWebsite") staticWebsite?: BlobServiceProperties.staticWebsite;
+  @Xml.name("StaticWebsite")
+  staticWebsite?: BlobServiceProperties.staticWebsite;
 
   /** The CORS properties. */
   @Xml.name("Cors") cors?: CorsRule[];
