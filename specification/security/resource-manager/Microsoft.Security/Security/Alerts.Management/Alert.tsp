@@ -50,16 +50,18 @@ alias AlertOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Alerts {
   /**
    * Get an alert that is associated with a subscription
    */
+  @tag("Alerts")
   getSubscriptionLevel is AlertOps.Read<Alert>;
 
   /**
    * List all the alerts that are associated with the subscription that are stored in a specific location
    */
+  @tag("Alerts")
   listSubscriptionLevelByRegion is AlertOps.List<
     Alert,
     Response = ArmResponse<AlertList>
@@ -69,6 +71,7 @@ interface Alerts {
    * Update the alert's state
    */
   @action("dismiss")
+  @tag("Alerts")
   updateSubscriptionLevelStateToDismiss is AlertOps.ActionSync<
     Alert,
     void,
@@ -79,6 +82,7 @@ interface Alerts {
    * Update the alert's state
    */
   @action("resolve")
+  @tag("Alerts")
   updateSubscriptionLevelStateToResolve is AlertOps.ActionSync<
     Alert,
     void,
@@ -89,6 +93,7 @@ interface Alerts {
    * Update the alert's state
    */
   @action("activate")
+  @tag("Alerts")
   updateSubscriptionLevelStateToActivate is AlertOps.ActionSync<
     Alert,
     void,
@@ -99,6 +104,7 @@ interface Alerts {
    * Update the alert's state
    */
   @action("inProgress")
+  @tag("Alerts")
   updateSubscriptionLevelStateToInProgress is AlertOps.ActionSync<
     Alert,
     void,
@@ -127,20 +133,18 @@ alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AlertOperationGroup {
   /**
    * Get an alert that is associated a resource group or a resource in a resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_GetResourceGroupLevel")
+  @tag("Alerts")
   getResourceGroupLevel is AlertOperationGroupOps.Read<Alert>;
 
   /**
    * List all the alerts that are associated with the resource group that are stored in a specific location
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_ListResourceGroupLevelByRegion")
+  @tag("Alerts")
   listResourceGroupLevelByRegion is AlertOperationGroupOps.List<
     Alert,
     Response = ArmResponse<AlertList>
@@ -149,9 +153,8 @@ interface AlertOperationGroup {
   /**
    * Update the alert's state
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_UpdateResourceGroupLevelStateToResolve")
   @action("resolve")
+  @tag("Alerts")
   updateResourceGroupLevelStateToResolve is AlertOperationGroupOps.ActionSync<
     Alert,
     void,
@@ -161,9 +164,8 @@ interface AlertOperationGroup {
   /**
    * Update the alert's state
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_UpdateResourceGroupLevelStateToDismiss")
   @action("dismiss")
+  @tag("Alerts")
   updateResourceGroupLevelStateToDismiss is AlertOperationGroupOps.ActionSync<
     Alert,
     void,
@@ -173,9 +175,8 @@ interface AlertOperationGroup {
   /**
    * Update the alert's state
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_UpdateResourceGroupLevelStateToActivate")
   @action("activate")
+  @tag("Alerts")
   updateResourceGroupLevelStateToActivate is AlertOperationGroupOps.ActionSync<
     Alert,
     void,
@@ -185,9 +186,8 @@ interface AlertOperationGroup {
   /**
    * Update the alert's state
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_UpdateResourceGroupLevelStateToInProgress")
   @action("inProgress")
+  @tag("Alerts")
   updateResourceGroupLevelStateToInProgress is AlertOperationGroupOps.ActionSync<
     Alert,
     void,

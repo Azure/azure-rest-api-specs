@@ -13,49 +13,56 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Security;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AlertsOperationGroup {
   /**
    * List all the alerts that are associated with the subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_List")
+  @tag("Alerts")
   @autoRoute
   @get
+  @list
   @action("alerts")
   list is ArmProviderActionSync<
     Response = AlertList,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = CloudError
   >;
   /**
    * List all the alerts that are associated with the resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_ListByResourceGroup")
+  @tag("Alerts")
   @autoRoute
   @get
   @action("alerts")
+  @list
   listByResourceGroup is ArmProviderActionSync<
     Response = AlertList,
-    Scope = Extension.ResourceGroup
+    Scope = Extension.ResourceGroup,
+    Error = CloudError
   >;
   /**
    * Simulate security alerts
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_Simulate")
-  @autoRoute
-  @action("alerts/default/simulate")
-  simulate is ArmProviderActionAsync<
-    Request = AlertSimulatorRequestBody,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * The location where ASC stores the data of the subscription. can be retrieved from Get locations
-       */
-      @path
-      @segment("locations")
-      ascLocation: string;
-    }
-  >;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Alerts")
+  @post
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/default/simulate")
+  @Azure.Core.useFinalStateVia("original-uri")
+  simulate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    /**
+     * The location where ASC stores the data of the subscription. can be retrieved from Get locations
+     */
+    @path
+    ascLocation: string,
+
+    /**
+     * The request body
+     */
+    @bodyRoot
+    alertSimulatorRequestBody: AlertSimulatorRequestBody,
+  ): ArmAcceptedLroResponse | CloudError;
 }
