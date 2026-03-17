@@ -47,3 +47,4 @@ namespace ReservationsClient;
 @@clientLocation(Quota.QuotaRequestListBaseParam.subscriptionId,
   Quota.QuotaRequestStatus.list
 );
+@@clientName(Quota.QuotaETagHeader.ETag, "etag", "java");

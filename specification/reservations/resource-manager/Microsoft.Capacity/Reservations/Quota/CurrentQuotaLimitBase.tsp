@@ -36,6 +36,15 @@ model QuotaPatchBaseParam
 model QuotaListBaseParam
   is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
+/**
+ * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+ */
+alias QuotaETagHeader = {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @header("ETag")
+  ETag?: string;
+};
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations(#{ omitTags: true })
 interface CurrentQuotaLimitBases {
@@ -46,14 +55,7 @@ interface CurrentQuotaLimitBases {
   get is ArmResourceRead<
     CurrentQuotaLimitBase,
     QuotaGetBaseParam,
-    Response = ArmResponse<CurrentQuotaLimitBase> & {
-      /**
-       * Current entity state version. It should be treated as opaque and used to make conditional HTTP requests.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-      @header("ETag")
-      ETag?: string;
-    },
+    Response = ArmResponse<CurrentQuotaLimitBase> & QuotaETagHeader,
     Error = ExceptionResponse
   >;
 
@@ -109,14 +111,7 @@ interface CurrentQuotaLimitBases {
   list is ArmResourceListByParent<
     CurrentQuotaLimitBase,
     BaseParameters = QuotaListBaseParam,
-    Response = ArmResponse<QuotaLimits> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-      @header("ETag")
-      ETag?: string;
-    },
+    Response = ArmResponse<QuotaLimits> & QuotaETagHeader,
     Error = ExceptionResponse
   >;
 }
