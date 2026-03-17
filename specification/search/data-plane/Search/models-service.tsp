@@ -3466,6 +3466,7 @@ model SearchIndexerStatus {
   limits: SearchIndexerLimits;
 
   /** All of the state that defines and dictates the indexer's current execution. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   currentState?: IndexerCurrentState;
 }
@@ -3477,10 +3478,12 @@ model IndexerExecutionResult {
   status: IndexerExecutionStatus;
 
   /** The outcome of this indexer execution. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   statusDetail?: IndexerExecutionStatusDetail;
 
   /** The mode the indexer is running in. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   mode?: IndexingMode;
 
@@ -4058,10 +4061,12 @@ model SearchField {
 
   /** A value indicating whether the field should be used as a permission filter. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   permissionFilter?: PermissionFilter | null;
 
   /** A value indicating whether the field contains sensitivity label information. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   sensitivityLabel?: boolean | null;
 
   /** The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields. */
@@ -5714,6 +5719,7 @@ model WebApiVectorizerParameters {
 
 /** Clears the identity property of a datasource. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@removed(Versions.v2026_04_01)
 model AIServicesVisionVectorizer extends VectorSearchVectorizer {
   /** Contains the parameters specific to AI Services Vision embedding vectorization. */
   aiServicesVisionParameters?: AIServicesVisionParameters;
@@ -6239,11 +6245,13 @@ model SplitSkill extends SearchIndexerSkill {
 
   /** Only applies if textSplitMode is set to pages. There are two possible values. The choice of the values will decide the length (maximumPageLength and pageOverlapLength) measurement. The default is 'characters', which means the length will be measured by character. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   unit?: SplitSkillUnit | null;
 
   /** Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @removed(Versions.v2026_04_01)
   azureOpenAITokenizerParameters?: AzureOpenAITokenizerParameters | null;
 
   /** A URI fragment specifying the type of skill. */
@@ -6393,6 +6401,7 @@ model WebApiSkill extends SearchIndexerSkill {
 }
 
 /** The AML skill allows you to extend AI enrichment with a custom Azure Machine Learning (AML) model. Once an AML model is trained and deployed, an AML skill integrates it into AI enrichment. */
+@removed(Versions.v2026_04_01)
 model AzureMachineLearningSkill extends SearchIndexerSkill {
   /** (Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -6438,6 +6447,7 @@ model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
 }
 
 /** Allows you to generate a vector embedding for a given image or text input using the Azure AI Services Vision Vectorize API. */
+@removed(Versions.v2026_04_01)
 model VisionVectorizeSkill extends SearchIndexerSkill {
   /** The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"

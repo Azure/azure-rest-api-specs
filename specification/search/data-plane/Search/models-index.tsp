@@ -666,6 +666,7 @@ model SearchDocumentsResult {
 
   /** Debug information that applies to the search results as a whole. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.debug")
   debugInfo?: DebugInfo | null;
@@ -711,26 +712,32 @@ model FacetResult is Record<unknown> {
   count?: int64;
 
   /** The resulting total avg for the facet when a avg metric is requested. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   avg?: float64;
 
   /** The resulting total min for the facet when a min metric is requested. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   min?: float64;
 
   /** The resulting total max for the facet when a max metric is requested. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   max?: float64;
 
   /** The resulting total sum for the facet when a sum metric is requested. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   sum?: float64;
 
   /** The resulting total cardinality for the facet when a cardinality metric is requested. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   cardinality?: int64;
 
   /** The nested facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not contain any nested facets. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.facets")
   facets?: Record<FacetResult[]>;
@@ -931,12 +938,15 @@ model VectorQuery {
   weight?: float32;
 
   /** The threshold used for vector queries. Note this can only be set if all 'fields' use the same similarity metric. */
+  @removed(Versions.v2026_04_01)
   threshold?: VectorThreshold;
 
   /** The OData filter expression to apply to this specific vector query. If no filter expression is defined at the vector level, the expression defined in the top level filter parameter is used instead. */
+  @removed(Versions.v2026_04_01)
   filterOverride?: string;
 
   /** Controls how many vectors can be matched from each document in a vector search query. Setting it to 1 ensures at most one vector per document is matched, guaranteeing results come from distinct documents. Setting it to 0 (unlimited) allows multiple relevant vectors from the same document to be matched. Default is 0. */
+  @removed(Versions.v2026_04_01)
   perDocumentVectorLimit?: int32;
 
   /** Type of query. */
@@ -1027,6 +1037,7 @@ model DocumentDebugInfo {
   vectors?: VectorsDebugInfo;
 
   /** Contains debugging information specific to vectors matched within a collection of complex types. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   innerHits?: Record<QueryResultDocumentInnerHit[]>;
 }
