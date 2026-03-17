@@ -19,11 +19,13 @@ This directory is intended to be governed via CODEOWNERS to ensure proper govern
 ## Lease File Structure
 
 Each lease must be placed in the following directory structure:
+
 ```
 .github/arm-leases/<orgName>/<rpNamespace>/[<serviceName> (optional)]/lease.yaml
 ```
 
 ### Path Requirements:
+
 - `<orgName>`: lowercase alphanumeric only (e.g., testservice, widgetservice)
 - `<rpNamespace>`: alphanumeric with dots, case-sensitive (e.g., Microsoft.TestRP, Azure.Widget)
 - `<serviceName>`: (optional) customer-facing service name within an RP (e.g., DiskRP, ComputeRP). Must not start with "stable" or "preview"
@@ -34,10 +36,10 @@ The `lease.yaml` file must follow this format:
 
 ```yaml
 lease:
-  resource-provider: Microsoft.TestRP    # Must match the rpNamespace folder name
-  startdate: 2026-01-07                  # ISO 8601 format (YYYY-MM-DD)
-  duration: P180D                        # ISO 8601 duration (max 180 days, e.g., P180D, P90D, P5M)
-  reviewer: "@evanhissey"                # GitHub alias of the approving reviewer
+  resource-provider: Microsoft.TestRP # Must match the rpNamespace folder name
+  startdate: 2026-01-07 # ISO 8601 format (YYYY-MM-DD)
+  duration: P180D # ISO 8601 duration (max 180 days, e.g., P180D, P90D, P5M)
+  reviewer: "@evanhissey" # GitHub alias of the approving reviewer
 ```
 
 ### Copy-Paste Template
@@ -50,7 +52,6 @@ lease:
   startdate: <YYYY-MM-DD>
   duration: P180D
   reviewer: "@your-github-alias"
-
 ```
 
 ## Validation Rules
@@ -58,24 +59,29 @@ lease:
 All lease files are automatically validated with the following requirements:
 
 ### 1. File Location
+
 - Only `lease.yaml` files are allowed in the `.github/arm-leases/` directory
 - Must follow the folder structure: `<orgName>/<rpNamespace>/[<serviceName> (optional)]/lease.yaml`
 
 ### 2. Resource Provider Name
+
 - Must match the `<rpNamespace>` folder name exactly
 - Example: If folder is `Microsoft.TestRP`, then `resource-provider` must be `Microsoft.TestRP`
 
 ### 3. Start Date
+
 - Must be in ISO 8601 format: `YYYY-MM-DD`
 - Must be a valid calendar date
 
 ### 4. Duration
+
 - Required field that cannot be empty
 - Must be a valid ISO 8601 duration (e.g., `P180D`, `P90D`, `P5M`)
 - **Maximum duration is 180 days**
 - Supports day-based (`P90D`), month-based (`P5M`), and combined formats
 
 ### 5. Reviewer
+
 - Required field that cannot be empty
 - Must be a GitHub alias starting with `@` (e.g., `@githubUsername`)
 
@@ -89,4 +95,3 @@ If your PR check **"ARM Lease Validation"** is failing, review the error message
 - **Invalid duration**: Use a valid ISO 8601 duration that does not exceed 180 days (e.g., `P180D`, `P90D`, `P5M`)
 - **Missing or empty fields**: All fields (`resource-provider`, `startdate`, `duration`, `reviewer`) are required
 - **Disallowed files**: Only `lease.yaml` and `README.md` files are permitted in `.github/arm-leases/`
-
