@@ -47,7 +47,7 @@ alias AdvancedThreatProtectionSettingOps = Azure.ResourceManager.Legacy.Extensio
     @path
     @segment("advancedThreatProtectionSettings")
     @key
-    settingName: string;
+    settingName: "current";
   }
 >;
 
