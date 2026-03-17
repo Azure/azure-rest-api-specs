@@ -23,7 +23,11 @@ import "./SecurityRule.tsp";
 import "./ServiceEndpointPolicyDefinition.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./LoadBalancer.tsp";
+import "./LoadBalancingRule.tsp";
+import "./OutboundRule.tsp";
+import "./Probe.tsp";
 import "./VirtualNetwork.tsp";
+import "./VirtualNetworkPeering.tsp";
 import "./NetworkWatcher.tsp";
 
 using TypeSpec.Rest;
@@ -220,7 +224,7 @@ union LoadBalancerSkuTier {
 }
 
 /**
- * Scope of a load balancer.
+ * Indicates the scope of the load balancer: external (Public) or internal (Private).
  */
 union LoadBalancerScope {
   string,
@@ -237,7 +241,7 @@ union LoadBalancerScope {
 }
 
 /**
- * Virtual network encryption enforcement.
+ * If the encrypted VNet allows VM that does not support encryption. This field is for future support, AllowUnencrypted is the only supported value at general availability.
  */
 union VirtualNetworkEncryptionEnforcement {
   string,
@@ -254,7 +258,7 @@ union VirtualNetworkEncryptionEnforcement {
 }
 
 /**
- * Private endpoint VNet policies.
+ * Private Endpoint VNet Policies.
  */
 union PrivateEndpointVNetPolicies {
   string,
@@ -4034,4 +4038,136 @@ model VirtualNetworkEncryption {
    * If the encrypted VNet allows VM that does not support encryption. This field is for future support, AllowUnencrypted is the only supported value at general availability.
    */
   enforcement?: VirtualNetworkEncryptionEnforcement;
+}
+
+/**
+ * The load distribution policy for this rule.
+ */
+union LoadDistribution {
+  string,
+
+  /**
+   * Default
+   */
+  Default: "Default",
+
+  /**
+   * SourceIP
+   */
+  SourceIP: "SourceIP",
+
+  /**
+   * SourceIPProtocol
+   */
+  SourceIPProtocol: "SourceIPProtocol",
+}
+
+/**
+ * The protocol of the end point. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be successful.
+ */
+union ProbeProtocol {
+  string,
+
+  /**
+   * Http
+   */
+  Http: "Http",
+
+  /**
+   * Tcp
+   */
+  Tcp: "Tcp",
+
+  /**
+   * Https
+   */
+  Https: "Https",
+}
+
+/**
+ * Determines how new connections are handled by the load balancer when all backend instances are probed down.
+ */
+union ProbeNoHealthyBackendsBehavior {
+  string,
+
+  /**
+   * No new flows will be sent to the backend pool.
+   */
+  AllProbedDown: "AllProbedDown",
+
+  /**
+   * When all backend instances are probed down, incoming packets will be sent to all instances.
+   */
+  AllProbedUp: "AllProbedUp",
+}
+
+/**
+ * The protocol for the outbound rule in load balancer.
+ */
+union LoadBalancerOutboundRuleProtocol {
+  string,
+
+  /**
+   * Tcp
+   */
+  Tcp: "Tcp",
+
+  /**
+   * Udp
+   */
+  Udp: "Udp",
+
+  /**
+   * All
+   */
+  All: "All",
+}
+
+/**
+ * The status of the virtual network peering.
+ */
+union VirtualNetworkPeeringState {
+  string,
+
+  /**
+   * Initiated
+   */
+  Initiated: "Initiated",
+
+  /**
+   * Connected
+   */
+  Connected: "Connected",
+
+  /**
+   * Disconnected
+   */
+  Disconnected: "Disconnected",
+}
+
+/**
+ * The peering sync status of the virtual network peering.
+ */
+union VirtualNetworkPeeringLevel {
+  string,
+
+  /**
+   * FullyInSync
+   */
+  FullyInSync: "FullyInSync",
+
+  /**
+   * RemoteNotInSync
+   */
+  RemoteNotInSync: "RemoteNotInSync",
+
+  /**
+   * LocalNotInSync
+   */
+  LocalNotInSync: "LocalNotInSync",
+
+  /**
+   * LocalAndRemoteNotInSync
+   */
+  LocalAndRemoteNotInSync: "LocalAndRemoteNotInSync",
 }
