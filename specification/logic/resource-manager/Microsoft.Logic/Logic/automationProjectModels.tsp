@@ -46,6 +46,7 @@ model AutomationProjectProperties {
   /**
    * A description of the automation project.
    */
+  @maxLength(1024)
   description?: string;
 }
 
@@ -56,6 +57,7 @@ model AutomationProjectUpdateProperties {
   /**
    * A description of the automation project.
    */
+  @maxLength(1024)
   description?: string;
 }
 
