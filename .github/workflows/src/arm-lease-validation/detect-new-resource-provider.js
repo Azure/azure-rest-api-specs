@@ -1,21 +1,19 @@
 import { simpleGit } from "simple-git";
-import {
-  getChangedFiles,
-  resourceManager,
-  swagger,
-} from "../../../shared/src/changed-files.js";
-import { checkLease } from "./detect-arm-leases.js";
-import { detectNewResourceTypes } from "./detect-new-resource-types.js";
+import { getChangedFiles, resourceManager, swagger } from "../../../shared/src/changed-files.js";
 import { CoreLogger } from "../core-logger.js";
 import { LabelAction } from "../label.js";
 import { ArmLeaseValidationLabel } from "./arm-lease-validation-labels.js";
+import { checkLease } from "./detect-arm-leases.js";
+import { detectNewResourceTypes } from "./detect-new-resource-types.js";
 
 const ARM_OFFICE_HOURS_URL =
   "https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true";
 
 // Match pattern: specification/<orgName>/resource-manager/<RPNamespace>/...
 // Trailing slash ensures the match is a directory component, not a file like readme.md
-const RESOURCE_MANAGER_PATTERN = new RegExp(String.raw`^specification/[^/]+/resource-manager/([^/]+)/`);
+const RESOURCE_MANAGER_PATTERN = new RegExp(
+  String.raw`^specification/[^/]+/resource-manager/([^/]+)/`,
+);
 
 // Match pattern with optional service name: specification/<orgName>/resource-manager/<RPNamespace>/<ServiceName>/...
 // ServiceName folder name should not start with "stable" or "preview"
@@ -47,14 +45,7 @@ async function resourceProviderExistsInCommit(git, commitish, namespace, core) {
   /** @type {string} */
   let output;
   try {
-    output = await git.raw([
-      "ls-tree",
-      "-d",
-      "--name-only",
-      "-r",
-      commitish,
-      "specification/",
-    ]);
+    output = await git.raw(["ls-tree", "-d", "--name-only", "-r", commitish, "specification/"]);
   } catch (e) {
     if (e instanceof Error && e.message.includes("does not exist")) {
       core.info(`Commit "${commitish}" does not exist in git history`);
@@ -265,12 +256,17 @@ export default async function detectNewResourceProvider({ core }) {
 
   // Merge label actions: 'add' wins over 'remove' wins over 'none'
   /** @type {ManagedLabelActions} */
-  const combinedLabelActions = { ...getLabelActions(allLeasesValid ? "auto-signed-off" : "review-required") };
+  const combinedLabelActions = {
+    ...getLabelActions(allLeasesValid ? "auto-signed-off" : "review-required"),
+  };
   for (const [labelKey, action] of Object.entries(newRtResult.labelActions)) {
     /** @type {keyof ManagedLabelActions} */
     const label = /** @type {keyof ManagedLabelActions} */ (labelKey);
     const currentAction = combinedLabelActions[label];
-    if (action === LabelAction.Add || (action === LabelAction.Remove && currentAction === LabelAction.None)) {
+    if (
+      action === LabelAction.Add ||
+      (action === LabelAction.Remove && currentAction === LabelAction.None)
+    ) {
       combinedLabelActions[label] = action;
     }
   }
@@ -312,9 +308,7 @@ async function checkNewResourceTypes(rmFiles, core) {
       core.info(`  - ${ns.rpNamespace}: valid ARM lease for new resource types`);
     } else {
       allLeasesValid = false;
-      core.error(
-        `${ns.rpNamespace}: new resource types detected without a valid ARM lease`,
-      );
+      core.error(`${ns.rpNamespace}: new resource types detected without a valid ARM lease`);
     }
   }
 

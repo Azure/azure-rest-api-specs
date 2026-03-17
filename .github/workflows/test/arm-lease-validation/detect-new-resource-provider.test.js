@@ -18,8 +18,8 @@ vi.mock("../../src/arm-lease-validation/detect-new-resource-types.js", () => ({
 
 import * as changedFiles from "../../../shared/src/changed-files.js";
 import { checkLease } from "../../src/arm-lease-validation/detect-arm-leases.js";
-import { detectNewResourceTypes } from "../../src/arm-lease-validation/detect-new-resource-types.js";
 import detectNewResourceProvider from "../../src/arm-lease-validation/detect-new-resource-provider.js";
+import { detectNewResourceTypes } from "../../src/arm-lease-validation/detect-new-resource-types.js";
 
 const core = createMockCore();
 
@@ -201,7 +201,19 @@ describe("detectNewResourceProvider", () => {
 
     // detectNewResourceTypes returns new RT
     vi.mocked(detectNewResourceTypes).mockResolvedValue([
-      { rpNamespace: "Microsoft.Compute", orgName: "compute", serviceName: "", newResourceTypes: [{ resourceType: "Microsoft.Compute/disks", provider: "Microsoft.Compute", modelName: null, operations: ["GET"] }] },
+      {
+        rpNamespace: "Microsoft.Compute",
+        orgName: "compute",
+        serviceName: "",
+        newResourceTypes: [
+          {
+            resourceType: "Microsoft.Compute/disks",
+            provider: "Microsoft.Compute",
+            modelName: null,
+            operations: ["GET"],
+          },
+        ],
+      },
     ]);
     vi.mocked(checkLease).mockResolvedValue(true);
 
@@ -222,7 +234,19 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue(rmFile);
 
     vi.mocked(detectNewResourceTypes).mockResolvedValue([
-      { rpNamespace: "Microsoft.Compute", orgName: "compute", serviceName: "", newResourceTypes: [{ resourceType: "Microsoft.Compute/disks", provider: "Microsoft.Compute", modelName: null, operations: ["GET"] }] },
+      {
+        rpNamespace: "Microsoft.Compute",
+        orgName: "compute",
+        serviceName: "",
+        newResourceTypes: [
+          {
+            resourceType: "Microsoft.Compute/disks",
+            provider: "Microsoft.Compute",
+            modelName: null,
+            operations: ["GET"],
+          },
+        ],
+      },
     ]);
     vi.mocked(checkLease).mockResolvedValue(false);
 

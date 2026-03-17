@@ -1,5 +1,5 @@
-import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import { Temporal } from "@js-temporal/polyfill";
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 
 /** @type {import("vitest").MockedFunction<typeof import("fs/promises").readFile>} */
 const mockReadFile = vi.hoisted(() => vi.fn());

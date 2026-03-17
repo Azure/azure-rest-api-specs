@@ -20,22 +20,25 @@ const emptySwagger = JSON.stringify({ swagger: "2.0", paths: {} });
 const vmSwagger = JSON.stringify({
   swagger: "2.0",
   paths: {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
-      get: { operationId: "VirtualMachines_Get", responses: { "200": { description: "OK" } } },
-    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}":
+      {
+        get: { operationId: "VirtualMachines_Get", responses: { 200: { description: "OK" } } },
+      },
   },
 });
 
 const vmAndDiskSwagger = JSON.stringify({
   swagger: "2.0",
   paths: {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
-      get: { operationId: "VirtualMachines_Get", responses: { "200": { description: "OK" } } },
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}": {
-      get: { operationId: "Disks_Get", responses: { "200": { description: "OK" } } },
-      put: { operationId: "Disks_CreateOrUpdate", responses: { "200": { description: "OK" } } },
-    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}":
+      {
+        get: { operationId: "VirtualMachines_Get", responses: { 200: { description: "OK" } } },
+      },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}":
+      {
+        get: { operationId: "Disks_Get", responses: { 200: { description: "OK" } } },
+        put: { operationId: "Disks_CreateOrUpdate", responses: { 200: { description: "OK" } } },
+      },
   },
 });
 
@@ -49,34 +52,38 @@ const vmAndDiskSwagger = JSON.stringify({
  * @param {Map<string, string[]>} [opts.headFiles] - namespace path → file list at HEAD
  * @param {Map<string, string>} [opts.fileContents] - "ref:file" → JSON string
  */
-function setupGit({
-  baseFiles = new Map(),
-  headFiles = new Map(),
-  fileContents = new Map(),
-} = {}) {
-  mockRaw.mockImplementation(/** @type {any} */ (/** @param {string[]} args */ (args) => {
-    if (args[0] === "ls-tree" && args.includes("-r")) {
-      const commitish = args[3];
-      const namespacePath = args[4];
-      const filesMap = commitish === "HEAD" ? headFiles : baseFiles;
-      const files = filesMap.get(namespacePath);
-      if (files) {
-        return files.join("\n");
+function setupGit({ baseFiles = new Map(), headFiles = new Map(), fileContents = new Map() } = {}) {
+  mockRaw.mockImplementation(
+    /** @type {any} */ (
+      /** @param {string[]} args */ (args) => {
+        if (args[0] === "ls-tree" && args.includes("-r")) {
+          const commitish = args[3];
+          const namespacePath = args[4];
+          const filesMap = commitish === "HEAD" ? headFiles : baseFiles;
+          const files = filesMap.get(namespacePath);
+          if (files) {
+            return files.join("\n");
+          }
+          throw new Error(`path '${namespacePath}' does not exist`);
+        }
+        return "";
       }
-      throw new Error(`path '${namespacePath}' does not exist`);
-    }
-    return "";
-  }));
+    ),
+  );
 
-  mockShow.mockImplementation(/** @type {any} */ (/** @param {string[]=} args */ (args) => {
-    const key = String(args?.[0]); // "ref:filepath"
-    const content = fileContents.get(key);
-    if (content !== undefined) {
-      return content;
-    }
-    const msg = `path does not exist: ${key}`;
-    throw new Error(msg);
-  }));
+  mockShow.mockImplementation(
+    /** @type {any} */ (
+      /** @param {string[]=} args */ (args) => {
+        const key = String(args?.[0]); // "ref:filepath"
+        const content = fileContents.get(key);
+        if (content !== undefined) {
+          return content;
+        }
+        const msg = `path does not exist: ${key}`;
+        throw new Error(msg);
+      }
+    ),
+  );
 }
 
 // ── tests ───────────────────────────────────────────────────────────────
@@ -280,19 +287,24 @@ describe("detectNewResourceTypes", () => {
     const stableSwagger = JSON.stringify({
       swagger: "2.0",
       paths: {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
-          get: { operationId: "VirtualMachines_Get", responses: { "200": { description: "OK" } } },
-        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}":
+          {
+            get: { operationId: "VirtualMachines_Get", responses: { 200: { description: "OK" } } },
+          },
       },
     });
 
     const previewSwagger = JSON.stringify({
       swagger: "2.0",
       paths: {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/quantumVMs/{vmName}": {
-          get: { operationId: "QuantumVMs_Get", responses: { "200": { description: "OK" } } },
-          put: { operationId: "QuantumVMs_CreateOrUpdate", responses: { "200": { description: "OK" } } },
-        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/quantumVMs/{vmName}":
+          {
+            get: { operationId: "QuantumVMs_Get", responses: { 200: { description: "OK" } } },
+            put: {
+              operationId: "QuantumVMs_CreateOrUpdate",
+              responses: { 200: { description: "OK" } },
+            },
+          },
       },
     });
 
@@ -316,8 +328,8 @@ describe("detectNewResourceTypes", () => {
     // Should detect the new quantumVMs resource type from preview
     expect(result).toHaveLength(1);
     expect(result[0].rpNamespace).toBe("Microsoft.Compute");
-    const quantumType = result[0].newResourceTypes.find((t) =>
-      t.resourceType === "Microsoft.Compute/quantumVMs",
+    const quantumType = result[0].newResourceTypes.find(
+      (t) => t.resourceType === "Microsoft.Compute/quantumVMs",
     );
     expect(quantumType).toBeDefined();
     expect(quantumType?.operations).toContain("GET");
@@ -333,12 +345,14 @@ describe("detectNewResourceTypes", () => {
     const newSwagger = JSON.stringify({
       swagger: "2.0",
       paths: {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}": {
-          get: { operationId: "SuperDisks_Get", responses: { "200": { description: "OK" } } },
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}/metrics/{metricName}": {
-          get: { operationId: "SuperDiskMetrics_Get", responses: { "200": { description: "OK" } } },
-        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}":
+          {
+            get: { operationId: "SuperDisks_Get", responses: { 200: { description: "OK" } } },
+          },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}/metrics/{metricName}":
+          {
+            get: { operationId: "SuperDiskMetrics_Get", responses: { 200: { description: "OK" } } },
+          },
       },
     });
 
@@ -360,14 +374,14 @@ describe("detectNewResourceTypes", () => {
     expect(result).toHaveLength(1);
     expect(result[0].rpNamespace).toBe("Microsoft.Compute");
     // superDisks should be detected
-    const superDisksType = result[0].newResourceTypes.find((t) =>
-      t.resourceType === "Microsoft.Compute/superDisks",
+    const superDisksType = result[0].newResourceTypes.find(
+      (t) => t.resourceType === "Microsoft.Compute/superDisks",
     );
     expect(superDisksType).toBeDefined();
     expect(superDisksType?.operations).toContain("GET");
     // superDisks/metrics is also new
-    const metricsType = result[0].newResourceTypes.find((t) =>
-      t.resourceType === "Microsoft.Compute/superDisks/metrics",
+    const metricsType = result[0].newResourceTypes.find(
+      (t) => t.resourceType === "Microsoft.Compute/superDisks/metrics",
     );
     expect(metricsType).toBeDefined();
   });
@@ -382,7 +396,7 @@ describe("detectNewResourceTypes", () => {
       swagger: "2.0",
       paths: {
         "/providers/Microsoft.Compute/operations": {
-          get: { operationId: "Operations_List", responses: { "200": { description: "OK" } } },
+          get: { operationId: "Operations_List", responses: { 200: { description: "OK" } } },
         },
       },
     });
@@ -404,5 +418,4 @@ describe("detectNewResourceTypes", () => {
 
     expect(result).toEqual([]);
   });
-
 });

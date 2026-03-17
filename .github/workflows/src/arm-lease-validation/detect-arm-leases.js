@@ -1,8 +1,8 @@
-import { readFile } from "fs/promises";
-import { resolve } from "path";
-import yaml from "js-yaml";
-import * as z from "zod";
 import { Temporal } from "@js-temporal/polyfill";
+import { readFile } from "fs/promises";
+import yaml from "js-yaml";
+import { resolve } from "path";
+import * as z from "zod";
 import { getRootFolder } from "../../../shared/src/simple-git.js";
 
 /**
@@ -18,17 +18,14 @@ import { getRootFolder } from "../../../shared/src/simple-git.js";
 const leaseSchema = z.object({
   lease: z.object({
     startdate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "startdate must be in YYYY-MM-DD format"),
-    duration: z.string().refine(
-      (v) => {
-        try {
-          Temporal.Duration.from(v);
-          return true;
-        } catch {
-          return false;
-        }
-      },
-      "duration must be a valid ISO 8601 duration (e.g. P180D, P6M, P1Y2M3D)",
-    ),
+    duration: z.string().refine((v) => {
+      try {
+        Temporal.Duration.from(v);
+        return true;
+      } catch {
+        return false;
+      }
+    }, "duration must be a valid ISO 8601 duration (e.g. P180D, P6M, P1Y2M3D)"),
   }),
 });
 

@@ -8,7 +8,9 @@
 import { simpleGit } from "simple-git";
 
 // Match pattern: specification/<orgName>/resource-manager/<RPNamespace>/...
-const RESOURCE_MANAGER_PATTERN = new RegExp(String.raw`^specification/[^/]+/resource-manager/([^/]+)/`);
+const RESOURCE_MANAGER_PATTERN = new RegExp(
+  String.raw`^specification/[^/]+/resource-manager/([^/]+)/`,
+);
 
 const RESOURCE_TYPE_REGEX = new RegExp(String.raw`/providers/([^/?#]+)(/[^?#]*)?`);
 
@@ -108,13 +110,7 @@ async function getResourceTypesAtRef(git, gitRef, specPath, branchName) {
 
   let output;
   try {
-    output = await git.raw([
-      "ls-tree",
-      "-r",
-      "--name-only",
-      gitRef,
-      specPath,
-    ]);
+    output = await git.raw(["ls-tree", "-r", "--name-only", gitRef, specPath]);
   } catch {
     return null; // path doesn't exist at this ref
   }
@@ -126,7 +122,9 @@ async function getResourceTypesAtRef(git, gitRef, specPath, branchName) {
 
   const total = swaggerFiles.length;
   if (total > 0) {
-    console.log(`Analyzing ${total} swagger files in ${branchName} branch (${gitRef}) for comparison...`);
+    console.log(
+      `Analyzing ${total} swagger files in ${branchName} branch (${gitRef}) for comparison...`,
+    );
   }
 
   // Iterate over files, but only log summary if it's too much
@@ -175,10 +173,7 @@ async function getResourceTypesAtRef(git, gitRef, specPath, branchName) {
  * @param {import("@actions/core")} params.core - GitHub Actions core for logging
  * @returns {Promise<Array<{rpNamespace: string, orgName: string, serviceName: string, newResourceTypes: Array<{resourceType: string, provider: string, modelName: string | null, operations: string[]}>}>>}
  */
-export async function detectNewResourceTypes({
-  rmFiles,
-  core,
-}) {
+export async function detectNewResourceTypes({ rmFiles, core }) {
   const git = simpleGit(process.env.GITHUB_WORKSPACE);
 
   // Group changed RM swagger files by service subdirectory (rpNamespace + serviceName)
@@ -207,7 +202,12 @@ export async function detectNewResourceTypes({
     const actualServiceName = isLifecycleFolder ? "" : serviceName;
 
     if (!namespaceMap.has(serviceKey)) {
-      namespaceMap.set(serviceKey, { orgName, specPath, rpNamespace, serviceName: actualServiceName });
+      namespaceMap.set(serviceKey, {
+        orgName,
+        specPath,
+        rpNamespace,
+        serviceName: actualServiceName,
+      });
     }
   }
 
@@ -216,12 +216,7 @@ export async function detectNewResourceTypes({
   for (const [serviceKey, { orgName, specPath, rpNamespace, serviceName }] of namespaceMap) {
     core.info(`Checking for new resource types in ${serviceKey}...`);
 
-    const baseTypes = await getResourceTypesAtRef(
-      git,
-      "HEAD^",
-      specPath,
-      "base",
-    );
+    const baseTypes = await getResourceTypesAtRef(git, "HEAD^", specPath, "base");
 
     // Skip rpNamespace if it doesn't exist in base (brand new RP — handled by RP-level detection)
     if (baseTypes === null) {
@@ -229,12 +224,7 @@ export async function detectNewResourceTypes({
       continue;
     }
 
-    const headTypes = await getResourceTypesAtRef(
-      git,
-      "HEAD",
-      specPath,
-      "head",
-    );
+    const headTypes = await getResourceTypesAtRef(git, "HEAD", specPath, "head");
 
     const newTypes = [];
     /** @type {Map<string, {resourceType: string, provider: string, modelName: string|null, operations: {method: string, apiPath: string}[]}>} */
@@ -251,9 +241,7 @@ export async function detectNewResourceTypes({
     }
 
     if (newTypes.length > 0) {
-      core.info(
-        ` ${rpNamespace}: ${newTypes.length} new resource type(s) detected`,
-      );
+      core.info(` ${rpNamespace}: ${newTypes.length} new resource type(s) detected`);
       for (const t of newTypes) {
         core.info(`  - ${t.resourceType} (${t.operations.join(", ")})`);
       }
