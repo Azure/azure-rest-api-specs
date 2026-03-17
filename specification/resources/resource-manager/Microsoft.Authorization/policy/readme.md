@@ -42,6 +42,19 @@ override-info:
   title: PolicyClient
 ```
 
+### Tag: package-policy-2026-01-preview
+
+These settings apply only when `--tag=package-policy-2026-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2026-01-preview'
+input-file:
+- preview/2026-01-01-preview/openapi.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-policy-2025-11-stable
 
 These settings apply only when `--tag=package-policy-2025-11-stable` is specified on the command line.

@@ -45,9 +45,9 @@ namespace Microsoft.Authorization;
 /**
  * The available API versions.
  *
- * The preview version (v2025_12_01_preview) includes everything from the latest
+ * The preview version (v2026_01_01_preview) includes everything from the latest
  * stable version plus new preview-only resource types:
- * - PolicyEnrollment, PolicyExemption, Variable, VariableValue (marked with @added(Versions.v2025_12_01_preview))
+ * - PolicyEnrollment, PolicyExemption, Variable, VariableValue (marked with @added(Versions.v2026_01_01_preview))
  *
  * See https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/04-preview-after-stable/
  */
@@ -65,6 +65,11 @@ enum Versions {
   /**
    * The 2025-12-01-preview API version.
    */
-  @previewVersion
   v2025_12_01_preview: "2025-12-01-preview",
+
+  /**
+   * The 2026-01-01-preview API version.
+   */
+  @previewVersion
+  v2026_01_01_preview: "2026-01-01-preview",
 }

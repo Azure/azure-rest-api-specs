@@ -16,7 +16,7 @@ namespace Microsoft.Authorization;
  * The variable.
  */
 // Preview-only resource type: added in the preview API version.
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @subscriptionResource
 model Variable
   is Azure.ResourceManager.ProxyResource<PolicyVariableProperties> {
@@ -81,7 +81,7 @@ alias VariableManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOperati
   }
 >;
 
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @armResourceOperations
 interface Variables {
   /**

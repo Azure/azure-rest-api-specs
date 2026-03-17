@@ -62,13 +62,13 @@ union SelectorKind {
   /**
    * The selector kind to filter policies by the user principal ID.
    */
-  @added(Versions.v2025_12_01_preview)
+  @added(Versions.v2026_01_01_preview)
   userPrincipalId: "userPrincipalId",
 
   /**
    * The selector kind to filter policies by the security group membership ID.
    */
-  @added(Versions.v2025_12_01_preview)
+  @added(Versions.v2026_01_01_preview)
   groupPrincipalId: "groupPrincipalId",
 }
 
@@ -1277,7 +1277,7 @@ model PolicyLogInfo {
 /**
  * The policy exemption category. Possible values are Waiver and Mitigated.
  */
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 union ExemptionCategory {
   string,
 
@@ -1293,9 +1293,9 @@ union ExemptionCategory {
 }
 
 /**
- * The option whether validate the exemption is at or under the assignment scope.
+ * The option whether validate the exemption or PolicyEnrollment is at or under the assignment scope.
  */
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 union AssignmentScopeValidation {
   string,
 
@@ -1314,7 +1314,7 @@ union AssignmentScopeValidation {
  * The policy exemption properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyExemptionProperties {
   /**
    * The ID of the policy assignment that is being exempted.
@@ -1367,7 +1367,7 @@ model PolicyExemptionProperties {
 /**
  * The policy exemption for Patch request.
  */
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyExemptionUpdate {
   /**
    * The policy exemption properties for Patch request.
@@ -1378,7 +1378,7 @@ model PolicyExemptionUpdate {
 /**
  * The policy exemption properties for Patch request.
  */
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyExemptionUpdateProperties {
   /**
    * The resource selector list to filter policies by resource properties.
@@ -1396,7 +1396,7 @@ model PolicyExemptionUpdateProperties {
  * The policy enrollment properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyEnrollmentProperties {
   /**
    * The ID of the policy assignment that is being enrolled.
@@ -1445,7 +1445,7 @@ model PolicyEnrollmentProperties {
 /**
  * The policy enrollment for Patch request.
  */
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyEnrollmentUpdate {
   /**
    * The policy enrollment properties for Patch request.
@@ -1456,7 +1456,7 @@ model PolicyEnrollmentUpdate {
 /**
  * The policy enrollment properties for Patch request.
  */
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyEnrollmentUpdateProperties {
   /**
    * The option whether validate the enrollment is at or under the assignment scope.
@@ -1474,7 +1474,7 @@ model PolicyEnrollmentUpdateProperties {
  * The variable properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyVariableProperties {
   /**
    * Variable column definitions.
@@ -1486,7 +1486,7 @@ model PolicyVariableProperties {
 /**
  * The variable column.
  */
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyVariableColumn {
   /**
    * The name of this policy variable column.
@@ -1498,7 +1498,7 @@ model PolicyVariableColumn {
  * The variable value properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyVariableValueProperties {
   /**
    * Variable value column value array.
@@ -1510,7 +1510,7 @@ model PolicyVariableValueProperties {
 /**
  * The name value tuple for this variable value column.
  */
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyVariableValueColumnValue {
   /**
    * Column name for the variable value
