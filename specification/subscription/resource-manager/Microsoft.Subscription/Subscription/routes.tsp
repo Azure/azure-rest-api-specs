@@ -63,7 +63,7 @@ interface SubscriptionOperationGroup {
      */
     @body body: AcceptOwnershipRequest,
   ): ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-    Azure.Core.Foundations.RetryAfterHeader>;
+    Azure.Core.Foundations.RetryAfterHeader> | ErrorResponse;
   /**
    * Accept subscription ownership status.
    */
