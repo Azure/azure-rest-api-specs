@@ -104,8 +104,8 @@ model JobProperties {
   // ============================================
   // AzureResourceNotificationPublish job specific properties (kind: "AzureResourceNotificationPublish")
   // ============================================
-  /** Resource type (resource or relationship). Required for AzureResourceNotificationPublish jobs. */
-  resourceType?: ResourceNotificationResourceType;
+  /** Publish environment for AzureResourceNotificationPublish jobs. */
+  environment?: ResourceNotificationPublishEnvironment;
 
   // ============================================
   // AzureResourceGraph_Galaxy job specific properties (kind: "AzureResourceGraph_Galaxy")
@@ -297,16 +297,13 @@ union PublishMode {
   string,
 }
 
-/** Resource notification resource type */
-union ResourceNotificationResourceType {
-  /** Default resource notification type. */
-  Default: "Default",
+/** Resource notification publish environment */
+union ResourceNotificationPublishEnvironment {
+  /** The preview/experimental environment. */
+  Preview: "Preview",
 
-  /** Resource notification for a resource. */
-  Resource: "Resource",
-
-  /** Resource notification for a relationship. */
-  Relationship: "Relationship",
+  /** The production environment. */
+  Production: "Production",
 
   string,
 }
