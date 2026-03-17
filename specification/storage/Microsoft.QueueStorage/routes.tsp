@@ -185,7 +185,7 @@ interface Service {
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Queue {
-  /** Creates a new queue under the specified account. If the queue with the same name already exists, the operation fails. */
+  /** Creates a new queue under the specified account. If a queue with the same name already exists, the operation succeeds when the metadata is identical and returns 204; if the metadata differs, the operation returns 409. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @put
@@ -195,7 +195,8 @@ interface Queue {
       ...MetadataHeaders;
     },
     {
-      @statusCode statusCode: 201;
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
+      @statusCode statusCode: 201 | 204;
     }
   >;
 
