@@ -297,7 +297,6 @@ union PublishMode {
   string,
 }
 
-
 /** Resource notification publish environment */
 union ResourceNotificationPublishEnvironment {
   /** The preview/experimental environment. */
