@@ -100,7 +100,23 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: ATPSettings.Management
+tag: IoTSecurity.Management
+```
+
+### Composite packages
+
+The following packages may be composed from multiple api-versions.
+
+
+### Tag: IoTSecurity.Management
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'IoTSecurity.Management'
+input-file:
+  - stable/2019-08-01/deviceSecurityGroups.json
+  - stable/2019-08-01/iotSecuritySolutionAnalytics.json
+  - stable/2019-08-01/iotSecuritySolutions.json
 ```
 
 ### Composite packages
