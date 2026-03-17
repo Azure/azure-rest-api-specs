@@ -493,8 +493,6 @@ interface Data {
   getSearchesTileNoTms is MosaicSearchesTiles.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
   getSearchesAssetsForTileNoTms is MosaicSearchesAssetsForTiles.getZxyAssets;
-  @added(Versions.v2026_04_15)
-  getSearchesPointAssets is MosaicSearchesPointAssets.getPointAssets;
   // Searches Point
   @added(Versions.v2026_04_15)
   getSearchesPoint is MosaicSearchesPoint.getPoint;

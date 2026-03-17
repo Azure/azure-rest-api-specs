@@ -1221,33 +1221,4 @@ interface MosaicSearchesPointWithAssets {
   >;
 }
 
-// Point Assets (old-style path equivalent)
-@added(Versions.v2026_04_15)
-interface MosaicSearchesPointAssets {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Searches Point Assets")
-  @tag("Tiles for STAC Searches")
-  @route("/data/mosaic/searches/{searchId}/{longitude},{latitude}/assets")
-  @get
-  getPointAssets is Azure.Core.Foundations.Operation<
-    {
-      /** Search Id (pgSTAC Search Hash) */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      searchId: string;
 
-      ...MosaicSearchQueryParameters;
-
-      /** Longitude */
-      @path longitude: float32;
-
-      /** Latitude */
-      @path latitude: float32;
-
-      /** Coordinate Reference System of the input coords. Default to `epsg:4326`. */
-      @query("coord-crs") coordinateReferenceSystem?: string;
-    },
-    StacItemPointAsset[]
-  >;
-}
