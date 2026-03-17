@@ -317,6 +317,7 @@ model OpenShiftClusterProperties {
   /**
    * The cluster provisioning state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing property from original swagger"
   provisioningState?: ProvisioningState;
 
   /**
@@ -381,6 +382,7 @@ model ClusterProfile {
   /**
    * The pull secret for the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Existing property from original swagger"
   pullSecret?: string;
 
   /**
@@ -433,6 +435,7 @@ model ServicePrincipalProfile {
   /**
    * The client secret used for the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Existing property from original swagger"
   clientSecret?: string;
 }
 
@@ -501,6 +504,7 @@ model NetworkProfile {
   /**
    * Specifies whether subnets are pre-attached with an NSG
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
   preconfiguredNSG?: PreconfiguredNSG;
 }
 
@@ -524,6 +528,7 @@ model LoadBalancerProfile {
 /**
  * ManagedOutboundIPs represents the desired managed outbound IPs for the cluster public load balancer.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing model from original swagger"
 model ManagedOutboundIPs {
   /**
    * Count represents the desired number of IPv4 outbound IPs created and managed by Azure for the cluster public load balancer.  Allowed values are in the range of 1 - 20.  The default value is 1.
@@ -583,6 +588,7 @@ model WorkerProfile {
   /**
    * The disk size of the worker VMs.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
   diskSizeGB?: int32;
 
   /**
@@ -609,6 +615,7 @@ model WorkerProfile {
 /**
  * APIServerProfile represents an API server profile.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing model from original swagger"
 model APIServerProfile {
   /**
    * API server visibility.

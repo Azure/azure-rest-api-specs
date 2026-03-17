@@ -49,9 +49,7 @@ interface PlatformWorkloadIdentityRoleSets {
   /**
    * This operation returns Platform Workload Identity Role Set as a string
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Gets a mapping of an OpenShift version to identity requirements, which includes operatorName, roleDefinitionName, roleDefinitionId, and serviceAccounts.")
-  @operationId("PlatformWorkloadIdentityRoleSet_Get")
   get is PlatformWorkloadIdentityRoleSetsOps.Read<PlatformWorkloadIdentityRoleSet>;
 
   /**
