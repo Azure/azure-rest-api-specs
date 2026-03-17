@@ -60,7 +60,7 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
 @added(Versions.v2026_05_01)
 model EntitySynonyms {
   /** The entity name */
-  entityType: EntityCategory;
+  entityType: PiiCategoriesExclude;
 
   /** The entity synonyms */
   synonyms: EntitySynonym[];
