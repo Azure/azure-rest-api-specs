@@ -479,6 +479,14 @@ union DocumentLocationKind {
 
   /** The document is a URL. */
   AzureBlob: "AzureBlob",
+
+  @added(Versions.v2026_05_01)
+  /** The document location is an Azure Blob Storage container. */
+  AzureContainer: "AzureContainer",
+
+  @added(Versions.v2026_05_01)
+  /** The document location is a folder within an Azure Blob Storage container. */
+  AzureContainerFolder: "AzureContainerFolder",
 }
 
 /** Document location for azure blobs. */

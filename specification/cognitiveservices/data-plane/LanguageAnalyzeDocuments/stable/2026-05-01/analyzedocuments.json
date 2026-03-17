@@ -719,7 +719,9 @@
       "type": "string",
       "description": "Enumeration of supported document locations.",
       "enum": [
-        "AzureBlob"
+        "AzureBlob",
+        "AzureContainer",
+        "AzureContainerFolder"
       ],
       "x-ms-enum": {
         "name": "DocumentLocationKind",
@@ -729,6 +731,16 @@
             "name": "AzureBlob",
             "value": "AzureBlob",
             "description": "The document is a URL."
+          },
+          {
+            "name": "AzureContainer",
+            "value": "AzureContainer",
+            "description": "The document location is an Azure Blob Storage container."
+          },
+          {
+            "name": "AzureContainerFolder",
+            "value": "AzureContainerFolder",
+            "description": "The document location is a folder within an Azure Blob Storage container."
           }
         ]
       }
