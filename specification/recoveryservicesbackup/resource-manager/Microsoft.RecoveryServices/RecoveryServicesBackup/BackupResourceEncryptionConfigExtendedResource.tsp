@@ -62,17 +62,9 @@ interface BackupResourceEncryptionConfigs {
 // Keep BackupResourceEncryptionConfigResource as a non-ARM model for Java/Go/Python override compatibility
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "non-ARM body model for update override"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-missing-name-key-decorator" "non-ARM model"
 @doc("")
 model BackupResourceEncryptionConfigResource
   is TrackedResourceWithOptionalLocation<BackupResourceEncryptionConfig> {
-  ...ResourceNameParameter<
-    Resource = BackupResourceEncryptionConfigResource,
-    KeyName = "backupEncryptionConfig",
-    SegmentName = "backupEncryptionConfigs",
-    NamePattern = ""
-  >;
-
   /**
    * Optional ETag.
    */
