@@ -24,6 +24,18 @@
               "disasterRecoveryAttestationStatus": "ManuallyAttested",
               "exclusionReasonForHighAvailabilityGoals": "UserSelectedExclusion",
               "exclusionReasonForDisasterRecoveryGoals": "UnsupportedResource",
+              "userConfirmationForHighAvailability": [
+                {
+                  "solutionProviderName": "ZonePinnedVmWithZrsDisk",
+                  "confirmationStatus": "ApprovedByUser",
+                  "reasonForRequestingConfirmation": "ZonePinnedZrsDataDisksConditional"
+                },
+                {
+                  "solutionProviderName": "VmInMultiZoneVmss",
+                  "confirmationStatus": "ApprovalPending",
+                  "reasonForRequestingConfirmation": "VmInMultiZoneScaleSetStatelessOnly"
+                }
+              ],
               "serviceGroupMemberships": [
                 {
                   "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sg1",

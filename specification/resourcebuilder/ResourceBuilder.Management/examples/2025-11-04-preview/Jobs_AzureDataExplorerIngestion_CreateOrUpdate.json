@@ -1,0 +1,80 @@
+{
+  "title": "Jobs_AzureDataExplorerIngestion_CreateOrUpdate",
+  "operationId": "Jobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-11-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "pipelineName": "data-processing-pipeline",
+    "jobName": "adx-ingestion-job",
+    "resource": {
+      "kind": "AzureDataExplorerIngestion",
+      "properties": {
+        "outputs": [
+          {
+            "dataset": {
+              "type": "ResourceId",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+            },
+            "name": "output-dataset"
+          }
+        ],
+        "processingLogic": {
+          "type": "KQL",
+          "value": "SourceTable | where Timestamp > ago(1h) | project ResourceId, ResourceName, ResourceType"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "AzureDataExplorerIngestion",
+        "properties": {
+          "outputs": [
+            {
+              "dataset": {
+                "type": "ResourceId",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+              },
+              "name": "output-dataset"
+            }
+          ],
+          "processingLogic": {
+            "type": "KQL",
+            "value": "SourceTable | where Timestamp > ago(1h) | project ResourceId, ResourceName, ResourceType"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/adx-ingestion-job",
+        "name": "adx-ingestion-job",
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs"
+      }
+    },
+    "201": {
+      "body": {
+        "kind": "AzureDataExplorerIngestion",
+        "properties": {
+          "outputs": [
+            {
+              "dataset": {
+                "type": "ResourceId",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+              },
+              "name": "output-dataset"
+            }
+          ],
+          "processingLogic": {
+            "type": "KQL",
+            "value": "SourceTable | where Timestamp > ago(1h) | project ResourceId, ResourceName, ResourceType"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/adx-ingestion-job",
+        "name": "adx-ingestion-job",
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs"
+      }
+    }
+  }
+}
