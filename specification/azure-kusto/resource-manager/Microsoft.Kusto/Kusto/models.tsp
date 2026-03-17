@@ -1750,7 +1750,6 @@ model LanguageExtensionsList {
   /**
    * The list of language extensions.
    */
-  @pageItems
   @identifiers(#[])
   value?: LanguageExtension[];
 
@@ -3165,7 +3164,18 @@ model OperationDisplay {
 /**
  * A list of the service's callout policy objects.
  */
-model CalloutPoliciesList is Azure.Core.Page<CalloutPolicy>;
+model CalloutPoliciesList {
+  /**
+   * The CalloutPolicy items on this page
+   */
+  value: CalloutPolicy[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * Configuration for an external callout policy to remove.
