@@ -39,7 +39,7 @@ interface Jobs {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
@@ -58,7 +58,7 @@ interface Jobs {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     },
     Response = ArmResourceCreatedSyncResponse<Job>
@@ -80,7 +80,7 @@ interface Jobs {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
@@ -101,7 +101,7 @@ interface Jobs {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
@@ -120,7 +120,7 @@ interface Jobs {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
@@ -139,7 +139,7 @@ interface Jobs {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
@@ -158,7 +158,7 @@ interface Jobs {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
@@ -185,7 +185,7 @@ interface Jobs {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
@@ -213,7 +213,7 @@ interface Jobs {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;

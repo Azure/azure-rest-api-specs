@@ -98,7 +98,19 @@ interface Runbooks {
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookdraftoperations")
   @get
   @action("draft/content")
-  getContent is ArmResourceActionSync<Runbook, void, ArmResponse<File>>;
+  getContent is ArmResourceActionSync<
+    Runbook,
+    void,
+    {
+      @header("Content-Type")
+      contentType: "text/powershell";
+
+      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
+      @bodyRoot
+      @encode("bytes")
+      body: bytes;
+    }
+  >;
 
   /**
    * Replaces the runbook draft content.
@@ -112,8 +124,25 @@ interface Runbooks {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   replaceContent is ArmResourceActionAsync<
     Runbook,
-    File<"text/powershell">,
-    ArmResponse<File>,
+    {
+      @header("Content-Type")
+      contentType: "text/powershell";
+
+      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
+      @doc("The runbook draft content.")
+      @bodyRoot
+      @encode("bytes")
+      body: bytes;
+    },
+    {
+      @header("Content-Type")
+      contentType: "text/powershell";
+
+      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
+      @bodyRoot
+      @encode("bytes")
+      body: bytes;
+    },
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -168,7 +197,15 @@ interface Runbooks {
   runbookGetContent is ArmResourceActionSync<
     Runbook,
     void,
-    ArmResponse<File<"text/powershell">>
+    {
+      @header("Content-Type")
+      contentType: "text/powershell";
+
+      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
+      @bodyRoot
+      @encode("bytes")
+      body: bytes;
+    }
   >;
 
   /**

@@ -115,7 +115,15 @@ interface DscConfigurations {
   getContent is ArmResourceActionSync<
     DscConfiguration,
     void,
-    ArmResponse<File<"text/powershell">>
+    {
+      @header("Content-Type")
+      contentType: "text/powershell";
+
+      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
+      @bodyRoot
+      @encode("bytes")
+      body: bytes;
+    }
   >;
 }
 

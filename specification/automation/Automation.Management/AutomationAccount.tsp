@@ -130,7 +130,7 @@ interface AutomationAccounts {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
 
       /**
@@ -263,7 +263,7 @@ interface AutomationAccounts {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
@@ -341,7 +341,7 @@ interface AutomationAccounts {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
@@ -362,7 +362,7 @@ interface AutomationAccounts {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
 
       /**
@@ -409,7 +409,7 @@ interface AutomationAccounts {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
     }
   >;
@@ -430,7 +430,7 @@ interface AutomationAccounts {
       /**
        * Identifies this specific client request.
        */
-      @header
+      @header("clientRequestId")
       clientRequestId?: string;
 
       /**

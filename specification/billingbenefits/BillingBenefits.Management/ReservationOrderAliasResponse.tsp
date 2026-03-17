@@ -42,7 +42,6 @@ interface ReservationOrderAliasResponses {
   /**
    * Get a reservation order alias.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<
     ReservationOrderAliasResponse,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
@@ -51,7 +50,6 @@ interface ReservationOrderAliasResponses {
   /**
    * Create a reservation order alias.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @armResourceCreateOrUpdate(ReservationOrderAliasResponse)
   create is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<
