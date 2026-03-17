@@ -17,8 +17,7 @@ namespace Microsoft.Storage;
  * The storage task assignment.
  */
 @parentResource(StorageAccount)
-model StorageTaskAssignment
-  is ProxyResource<StorageTaskAssignmentProperties> {
+model StorageTaskAssignment is ProxyResource<StorageTaskAssignmentProperties> {
   ...ResourceNameParameter<
     Resource = StorageTaskAssignment,
     KeyName = "storageTaskAssignmentName",

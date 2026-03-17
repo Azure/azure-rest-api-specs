@@ -762,36 +762,41 @@ namespace Azure.ResourceManager.Models {
 
 // Fix IOPS casing: IOPS → Iops for backward compat
 @@clientName(AccountLimits.maxProvisionedIOPS, "MaxProvisionedIops", "csharp");
-@@clientName(FileShareLimits.maxProvisionedIOPS, "MaxProvisionedIops", "csharp");
-@@clientName(FileShareLimits.minProvisionedIOPS, "MinProvisionedIops", "csharp");
+@@clientName(FileShareLimits.maxProvisionedIOPS,
+  "MaxProvisionedIops",
+  "csharp"
+);
+@@clientName(FileShareLimits.minProvisionedIOPS,
+  "MinProvisionedIops",
+  "csharp"
+);
 @@clientName(AccountUsageElements.provisionedIOPS, "ProvisionedIops", "csharp");
 
 // Fix UpdateHistoryProperty.update → UpdateType for backward compat
 @@clientName(UpdateHistoryProperty.update, "UpdateType", "csharp");
 
 // Fix Location type on create parameters
-@@alternateType(
-  StorageAccountCreateParameters.location,
+@@alternateType(StorageAccountCreateParameters.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 
 // Fix CheckNameAvailabilityParameters.type → ResourceType with proper type
-@@clientName(
-  StorageAccountCheckNameAvailabilityParameters.type,
+@@clientName(StorageAccountCheckNameAvailabilityParameters.type,
   "ResourceType",
   "csharp"
 );
-@@access(StorageAccountCheckNameAvailabilityParameters.type, Access.public, "csharp");
+@@access(StorageAccountCheckNameAvailabilityParameters.type,
+  Access.public,
+  "csharp"
+);
 
 // Fix location types to AzureLocation
-@@alternateType(
-  SkuInformationLocationInfoItem.location,
+@@alternateType(SkuInformationLocationInfoItem.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(
-  DeletedAccountProperties.location,
+@@alternateType(DeletedAccountProperties.location,
   Azure.Core.azureLocation,
   "csharp"
 );
@@ -799,10 +804,10 @@ namespace Azure.ResourceManager.Models {
 // ===== C# backward-compat fixes for MPG migration =====
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(StorageTaskAssignment, Azure.ResourceManager.CommonTypes.ProxyResource, "csharp");
-
-
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(StorageTaskAssignment,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
 
 // Fix ETag type on resource envelope properties (old SDK had ETag?)
 @@alternateType(BlobContainer.etag, Azure.Core.eTag, "csharp");
@@ -812,30 +817,25 @@ namespace Azure.ResourceManager.Models {
 @@alternateType(ImmutabilityPolicyProperties.etag, Azure.Core.eTag, "csharp");
 
 // Fix Identity type: old SDK used ManagedServiceIdentity from ARM common types
-@@alternateType(
-  StorageAccount.identity,
+@@alternateType(StorageAccount.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(
-  StorageAccountCreateParameters.identity,
+@@alternateType(StorageAccountCreateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(
-  StorageAccountUpdateParameters.identity,
+@@alternateType(StorageAccountUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 
 // Fix ExtendedLocation type: old SDK used ExtendedLocation from ARM common types
-@@alternateType(
-  StorageAccount.extendedLocation,
+@@alternateType(StorageAccount.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
-@@alternateType(
-  StorageAccountCreateParameters.extendedLocation,
+@@alternateType(StorageAccountCreateParameters.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
@@ -889,9 +889,18 @@ namespace Azure.ResourceManager.Models {
 @@clientName(SkuName.PremiumV2_ZRS, "PremiumV2Zrs", "csharp");
 
 // DefaultSharePermission: Shorten verbose names
-@@clientName(DefaultSharePermission.StorageFileDataSmbShareContributor, "Contributor", "csharp");
-@@clientName(DefaultSharePermission.StorageFileDataSmbShareElevatedContributor, "ElevatedContributor", "csharp");
-@@clientName(DefaultSharePermission.StorageFileDataSmbShareReader, "Reader", "csharp");
+@@clientName(DefaultSharePermission.StorageFileDataSmbShareContributor,
+  "Contributor",
+  "csharp"
+);
+@@clientName(DefaultSharePermission.StorageFileDataSmbShareElevatedContributor,
+  "ElevatedContributor",
+  "csharp"
+);
+@@clientName(DefaultSharePermission.StorageFileDataSmbShareReader,
+  "Reader",
+  "csharp"
+);
 
 // DirectoryServiceOptions: Fix acronym casing
 @@clientName(DirectoryServiceOptions.AADDS, "Aadds", "csharp");
@@ -910,10 +919,22 @@ namespace Azure.ResourceManager.Models {
 @@clientName(PostFailoverRedundancy.Standard_ZRS, "StandardZrs", "csharp");
 
 // PostPlannedFailoverRedundancy: Remove underscores
-@@clientName(PostPlannedFailoverRedundancy.Standard_GRS, "StandardGrs", "csharp");
-@@clientName(PostPlannedFailoverRedundancy.Standard_GZRS, "StandardGzrs", "csharp");
-@@clientName(PostPlannedFailoverRedundancy.Standard_RAGRS, "StandardRagrs", "csharp");
-@@clientName(PostPlannedFailoverRedundancy.Standard_RAGZRS, "StandardRagzrs", "csharp");
+@@clientName(PostPlannedFailoverRedundancy.Standard_GRS,
+  "StandardGrs",
+  "csharp"
+);
+@@clientName(PostPlannedFailoverRedundancy.Standard_GZRS,
+  "StandardGzrs",
+  "csharp"
+);
+@@clientName(PostPlannedFailoverRedundancy.Standard_RAGRS,
+  "StandardRagrs",
+  "csharp"
+);
+@@clientName(PostPlannedFailoverRedundancy.Standard_RAGZRS,
+  "StandardRagzrs",
+  "csharp"
+);
 
 // SignedResource (ServiceSasSignedResourceType): Single-letter -> descriptive names
 @@clientName(SignedResource.b, "Blob", "csharp");
@@ -932,8 +953,7 @@ namespace Azure.ResourceManager.Models {
 @@clientName(Action.ALLOW, "Allow", "csharp");
 
 // Fix CheckNameAvailabilityParameters.type to Azure.Core.ResourceType
-@@alternateType(
-  StorageAccountCheckNameAvailabilityParameters.type,
+@@alternateType(StorageAccountCheckNameAvailabilityParameters.type,
   Azure.Core.ResourceType,
   "csharp"
 );
