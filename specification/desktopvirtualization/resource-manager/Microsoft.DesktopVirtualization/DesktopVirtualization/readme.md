@@ -138,12 +138,6 @@ These settings apply only when `--tag=package-2025-10-10` is specified on the co
 input-file:
   - stable/2025-10-10/desktopvirtualization.json
 suppressions:
-  - code: PutRequestResponseSchemeArm
-    from: desktopvirtualization.json
-    reason: The system metadata are not the input parameters, and our service doesn't support patch operation fot this resource, this is already in the stable version.
-    where:
-      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
-      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
   - code: PutResponseCodes
     from: desktopvirtualization.json
     reason: |
