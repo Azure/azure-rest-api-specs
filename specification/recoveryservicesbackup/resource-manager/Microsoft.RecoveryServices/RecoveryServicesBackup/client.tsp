@@ -865,9 +865,7 @@ op backupResourceEncryptionConfigsUpdate(
   ...ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @TypeSpec.Rest.segment("backupEncryptionConfigs")
   @path
-  @key("backupEncryptionConfig")
   name: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
