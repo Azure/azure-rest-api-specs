@@ -7,26 +7,41 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
+alias JobsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.jobs_v1_preview>;
+
+alias JobsFilterQueryParams = {
+  @doc("Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').")
+  @query
+  tag?: string;
+
+  @doc("Specifies which view type to apply when listing jobs.")
+  @query
+  listViewType?: ListViewType;
+};
+
 alias JobOperations = FoundryAzureOperations<{}>;
 
 @tag("Jobs")
 interface Jobs {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("List Jobs.")
-  list is JobOperations.ResourceList<
+  @Rest.listsResource(CommandJob)
+  list is Azure.Core.Foundations.ResourceList<
     CommandJob,
-    ListQueryParametersTrait<{
-      @doc("Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').")
-      @query
-      tag?: string;
-
-      @doc("Specifies which view type to apply when listing jobs.")
-      @query
-      listViewType?: ListViewType;
-    }>
+    JobsFilterQueryParams & JobsPreviewHeader,
+    Azure.Core.Page<CommandJob>
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("Get a Job by name.")
-  get is JobOperations.ResourceRead<CommandJob>;
+  @get
+  get is Azure.Core.Foundations.ResourceOperation<
+    CommandJob,
+    {
+      ...JobsPreviewHeader;
+    },
+    Azure.Core.Foundations.ResourceOkResponse<CommandJob>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT create-or-update pattern required by the Job API wire format"
   @doc("Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.")
@@ -34,6 +49,8 @@ interface Jobs {
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
     CommandJob,
     {
+      ...JobsPreviewHeader;
+
       @doc("The command job to create or update.")
       @bodyRoot
       body: CommandJob;
@@ -41,13 +58,27 @@ interface Jobs {
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<CommandJob>
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("Delete a Job by name.")
-  delete is JobOperations.ResourceDelete<CommandJob>;
+  @delete
+  delete is Azure.Core.Foundations.ResourceOperation<
+    CommandJob,
+    {
+      ...JobsPreviewHeader;
+    },
+    Http.NoContentResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Cancel action uses ResourceAction with no response body"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Cancel returns 200 with no body"
   @doc("Cancel a Job by name.")
   @post
   @actionSeparator("/")
-  cancel is JobOperations.ResourceAction<CommandJob, {}, Http.OkResponse>;
+  cancel is Azure.Core.Foundations.ResourceOperation<
+    CommandJob,
+    {
+      ...JobsPreviewHeader;
+    },
+    Http.OkResponse
+  >;
 }
