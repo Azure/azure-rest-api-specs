@@ -714,7 +714,735 @@ interface MosaicItemsFeatureGeoJsonFormat {
     TileResponse
   >;
 }
+// =====================================================================
+// Item Mosaic Bounds
+// =====================================================================
 
+@added(Versions.v2026_04_15)
+interface MosaicItemsBounds {
+  /**
+   * Return the bounds for a STAC item.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Bounds")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/bounds")
+  @get
+  getAll is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+    },
+    StacItemBounds
+  >;
+}
+
+// =====================================================================
+// Item Mosaic Info
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsInfo {
+  /**
+   * Return dataset's basic info for a STAC item.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Info")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/info")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Asset's names.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+      @query(#{ explode: true })
+      assets?: string[];
+    },
+    TilerInfoMapResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsInfoGeoJson {
+  /**
+   * Return info as GeoJSON for a STAC item.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Info Geojson")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/info.geojson")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Asset's names.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+      @query(#{ explode: true })
+      assets?: string[];
+    },
+    TilerInfoGeoJsonFeature
+  >;
+}
+
+// =====================================================================
+// Item Mosaic Available Assets
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsAvailableAssets {
+  /**
+   * Return a list of supported assets for a STAC item.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Available Assets")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/assets")
+  @get
+  getAll is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+    },
+    AvailableAssets
+  >;
+}
+
+// =====================================================================
+// Item Mosaic Statistics
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsAssetStatistics {
+  /**
+   * Per asset statistics for a STAC item.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Asset Statistics")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/asset_statistics")
+  @get
+  getAll is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      ...StatisticsQueryParameters;
+    },
+    AssetStatisticsResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsStatistics {
+  /**
+   * Merged assets statistics for a STAC item.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Statistics")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/statistics")
+  @get
+  getAll is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      ...StatisticsQueryParameters;
+    },
+    TilerStacItemStatistics
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsGeoJsonStatistics {
+  /**
+   * Get statistics from a GeoJSON feature for a STAC item.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Geojson Statistics")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/statistics")
+  @post
+  get is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      ...StatisticsQueryParameters;
+
+      /**
+       * Request GeoJson body
+       */
+      @body
+      body: Feature;
+    },
+    StacItemStatisticsGeoJson
+  >;
+}
+
+// =====================================================================
+// Item Mosaic TileJson
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsTileJson {
+  /**
+   * Return TileJSON document for a STAC item.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item TileJson")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/tilejson.json")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported (default:
+       * 'WebMercatorQuad')
+       */
+      @query("tileMatrixSetId")
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+      /**
+       * Default will be automatically defined if the output image needs a mask (png) or
+       * not (jpeg).
+       */
+      @query("tile_format")
+      tileFormat?: TilerImageFormat;
+
+      /**
+       * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+       */
+      @query("tile_scale")
+      tileScale?: int32 = 1;
+
+      ...ZoomQueryParameters;
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    TileJsonMetadata
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsTileMatrixSetsTileJson {
+  /**
+   * Return TileJSON document for a STAC item with TileMatrixSetId as path.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item TileJson Tilematrixsetid As Path")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/tilejson.json")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      tileMatrixSetId: string;
+
+      /**
+       * Default will be automatically defined if the output image needs a mask (png) or
+       * not (jpeg).
+       */
+      @query("tile_format")
+      tileFormat?: TilerImageFormat;
+
+      /**
+       * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+       */
+      @query("tile_scale")
+      tileScale?: int32 = 1;
+
+      ...ZoomQueryParameters;
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    TileJsonMetadata
+  >;
+}
+
+// =====================================================================
+// Item Mosaic WMTS
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsWmts {
+  /**
+   * OGC WMTS endpoint for a STAC item.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Wmts")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/WMTSCapabilities.xml")
+  @get
+  getCapabilitiesXml is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported (default:
+       * 'WebMercatorQuad')
+       */
+      @query("tileMatrixSetId")
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+      /**
+       * Output image type. Default is png.
+       */
+      @query("tile_format")
+      tileFormat?: TilerImageFormat = TilerImageFormat.png;
+
+      /**
+       * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+       */
+      @query("tile_scale")
+      tileScale?: int32 = 1;
+
+      ...ZoomQueryParameters;
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    WmtsCapabilitiesXmlResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsWmtsTileMatrixSets {
+  /**
+   * OGC WMTS endpoint for a STAC item with TileMatrixSetId as path.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Wmts Tilematrixsetid As Path")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/WMTSCapabilities.xml")
+  @get
+  getCapabilitiesXml is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      tileMatrixSetId: string;
+
+      /**
+       * Output image type. Default is png.
+       */
+      @query("tile_format")
+      tileFormat?: TilerImageFormat = TilerImageFormat.png;
+
+      /**
+       * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+       */
+      @query("tile_scale")
+      tileScale?: int32 = 1;
+
+      ...ZoomQueryParameters;
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    WmtsCapabilitiesXmlResponse
+  >;
+}
+
+// =====================================================================
+// Item Mosaic Point
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsPoint {
+  /**
+   * Get point value for a STAC item dataset.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Point")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/point/{longitude},{latitude}")
+  @get
+  getPoint is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Longitude
+       */
+      @path
+      longitude: float32;
+
+      /**
+       * Latitude
+       */
+      @path
+      latitude: float32;
+
+      ...AssetQueryParameters;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord-crs")
+      coordinateReferenceSystem?: string;
+
+      /**
+       * Resampling method.
+       */
+      @query("resampling")
+      resampling?: Resampling = Resampling.nearest;
+    },
+    TilerCoreModelsResponsesPoint
+  >;
+}
+
+// =====================================================================
+// Item Mosaic Preview
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsPreviewFormat {
+  /**
+   * Create preview of a STAC item dataset with format.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Preview With Format")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/preview.{format}")
+  @get
+  getFormat is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
+      /**
+       * rio-color formula (info: https://github.com/mapbox/rio-color)
+       */
+      @query("color_formula")
+      colorFormula?: string;
+
+      /**
+       * Output Coordinate Reference System.
+       */
+      @query("dst-crs")
+      dstCrs?: string;
+
+      /**
+       * Resampling method.
+       */
+      @query("resampling")
+      resampling?: Resampling = Resampling.nearest;
+
+      /**
+       * Image output size limit if width and height limits are not set.
+       */
+      @query("max_size")
+      maxSize?: int32 = 1024;
+
+      ...DimensionsQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsPreview {
+  /**
+   * Create preview of a STAC item dataset.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Item Preview")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/preview")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp).
+       */
+      @query("format")
+      format?: TilerImageFormat;
+
+      /**
+       * rio-color formula (info: https://github.com/mapbox/rio-color)
+       */
+      @query("color_formula")
+      colorFormula?: string;
+
+      /**
+       * Output Coordinate Reference System.
+       */
+      @query("dst-crs")
+      dstCrs?: string;
+
+      /**
+       * Resampling method.
+       */
+      @query("resampling")
+      resampling?: Resampling = Resampling.nearest;
+
+      /**
+       * Image output size limit if width and height limits are not set.
+       */
+      @query("max_size")
+      maxSize?: int32 = 1024;
+
+      ...DimensionsQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    TileResponse
+  >;
+}
+
+// =====================================================================
+// Item Mosaic Bbox Crop
+// =====================================================================
 @added(Versions.v2026_04_15)
 interface MosaicItemsFeatureGeoJsonWidthByHeight {
   /**

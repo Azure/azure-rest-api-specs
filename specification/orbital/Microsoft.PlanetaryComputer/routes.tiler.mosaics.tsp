@@ -92,7 +92,7 @@ interface MosaicsTiles {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}@{scale}x.{format} endpoints instead"
-  @summary("Tile")
+  @summary("Tile (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}@{scale}x.{format}")
   @get
@@ -148,7 +148,7 @@ interface MosaicsTileMatrixSets {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/ endpoints instead"
-  @summary("Tile Tilematrixsetid As Path")
+  @summary("Tile Tilematrixsetid As Path (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}")
   @get
@@ -174,7 +174,7 @@ interface MosaicsTileJsonOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "Use /data/mosaic/searches/{searchId}/tilejson.json instead"
-  @summary("TileJson")
+  @summary("TileJson (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tilejson.json")
   @get
@@ -297,7 +297,7 @@ interface MosaicsTileMatrixSetsTileJson {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "Use /data/mosaic/searches/{searchId}/{tileMatrixSetId}/tilejson.json instead"
-  @summary("TileJson Tilematrixsetid As Path")
+  @summary("TileJson Tilematrixsetid As Path (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{tileMatrixSetId}/tilejson.json")
   @get
@@ -339,7 +339,7 @@ interface MosaicsWmtsMosaics {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "Use /data/mosaic/searches/{searchId}/WMTSCapabilities.xml instead"
-  @summary("Wmts")
+  @summary("Wmts (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/WMTSCapabilities.xml")
   @get
@@ -393,7 +393,7 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "Use /data/mosaic/searches/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml instead"
-  @summary("Wmts Tilematrixsetid As Path")
+  @summary("Wmts Tilematrixsetid As Path (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml")
   @get
@@ -448,7 +448,7 @@ interface MosaicsInfoSearch {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "Use /data/mosaic/searches/{searchId}/info instead"
-  @summary("Info Search")
+  @summary("Info Search (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/info")
   @get
@@ -475,7 +475,7 @@ interface MosaicsAssetsForTiles {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}/assets instead"
-  @summary("Assets For Tile")
+  @summary("Assets For Tile (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}/assets")
   @get
@@ -512,7 +512,7 @@ interface MosaicsAssetsForTileMatrixSets {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets instead"
-  @summary("Assets For Tile Tilematrixsetid As Path")
+  @summary("Assets For Tile Tilematrixsetid As Path (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets")
   @get
@@ -559,7 +559,7 @@ interface MosaicsAssetsForPoints {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "Use /data/mosaic/searches/{searchId}/{longitude},{latitude}/assets instead"
-  @summary("Assets For Point")
+  @summary("Assets For Point (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{longitude},{latitude}/assets")
   @get

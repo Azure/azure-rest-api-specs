@@ -14,9 +14,13 @@ namespace Microsoft.PlanetaryComputer;
 interface TilerStaticImages {
   /**
    * Create a new image export.
+   *
+   * @deprecated This endpoint has been deprecated and will be removed in a future API version.
+   * Please use `/data/collections/{collectionId}/bbox` for image generation instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Create Static Image")
+  #deprecated "The Image Exports endpoints have been deprecated and will be removed in a future API version. Please use `/data/collections/{collectionId}/bbox` for image generation instead."
+  @summary("Create Static Image (Deprecated)")
   @tag("Image Exports for STAC Collections")
   @route("/data/collections/{collectionId}/image/static")
   @post
@@ -39,10 +43,14 @@ interface TilerStaticImages {
     ImageResponse
   >;
   /**
-   * Fetch an existing image export by ID
+   * Fetch an existing image export by ID.
+   *
+   * @deprecated This endpoint has been deprecated and will be removed in a future API version.
+   * Please use `/data/collections/{collectionId}/bbox` for image generation instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Get Static Image")
+  #deprecated "The Image Exports endpoints have been deprecated and will be removed in a future API version. Please use `/data/collections/{collectionId}/bbox` for image generation instead."
+  @summary("Get Static Image (Deprecated)")
   @tag("Image Exports for STAC Collections")
   @route("/data/collections/{collectionId}/image/static/{id}")
   @get
