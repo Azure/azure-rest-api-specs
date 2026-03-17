@@ -1,7 +1,9 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
-using Azure.ClientGenerator.Core;
 
+using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
+using Azure.Core;
 using Microsoft.SignalRService;
 
 @@clientName(Microsoft.SignalRService,
@@ -27,78 +29,38 @@ using Microsoft.SignalRService;
 @@clientName(NetworkACL, "NetworkAcl", "java");
 @@clientName(IPRule, "IpRule", "java");
 @@clientName(PrivateEndpointACL, "PrivateEndpointAcl", "java");
-
-// Resolve breaking changes for Go SDK compatibility
 @@clientName(Microsoft.SignalRService.WebPubSubResource, "ResourceInfo", "go");
 @@clientName(Microsoft.SignalRService.WebPubSubResourceList,
   "ResourceInfoList",
   "go"
 );
-
-// C# mgmt SDK: Override @@clientLocation entries from back-compatible.tsp
-// to avoid namespace conflict. The client named "WebPubSub" conflicts with
-// the namespace segment "WebPubSub" in Azure.ResourceManager.WebPubSub,
-// causing the generator to produce _WebPubSub as a prefix.
-// Renaming the client to "WebPubSubService" for csharp avoids this.
-@@clientLocation(WebPubSubResources.get, "WebPubSubService", "csharp");
-@@clientLocation(WebPubSubResources.createOrUpdate,
-  "WebPubSubService",
-  "csharp"
-);
-@@clientLocation(WebPubSubResources.update, "WebPubSubService", "csharp");
-@@clientLocation(WebPubSubResources.delete, "WebPubSubService", "csharp");
-@@clientLocation(WebPubSubResources.listByResourceGroup,
-  "WebPubSubService",
-  "csharp"
-);
-@@clientLocation(WebPubSubResources.listBySubscription,
-  "WebPubSubService",
-  "csharp"
-);
-@@clientLocation(WebPubSubResources.listKeys, "WebPubSubService", "csharp");
-@@clientLocation(WebPubSubResources.regenerateKey,
-  "WebPubSubService",
-  "csharp"
-);
-@@clientLocation(WebPubSubResources.restart, "WebPubSubService", "csharp");
-@@clientLocation(WebPubSubResources.listSkus, "WebPubSubService", "csharp");
-@@clientLocation(Replicas.listReplicaSkus, "WebPubSubService", "csharp");
-@@clientLocation(WebPubSubOperationGroup.checkNameAvailability,
-  "WebPubSubService",
-  "csharp"
-);
-
-// C# SDK: Rename EventHandler to avoid conflict with System.EventHandler
 @@clientName(EventHandler, "WebPubSubEventHandler", "csharp");
-
-// C# SDK: Rename RESTAPI to RestApi for consistent casing
 @@clientName(WebPubSubRequestType.RESTAPI, "RestApi", "csharp");
-
-// C# SDK: Rename ProvisioningState to include service prefix
 @@clientName(ProvisioningState, "WebPubSubProvisioningState", "csharp");
-
-// C# SDK: Rename Parameters models to Content (matches old API surface)
 @@clientName(NameAvailabilityParameters,
   "WebPubSubNameAvailabilityContent",
   "csharp"
 );
+@@clientName(NameAvailabilityParameters.type, "ResourceType", "csharp");
 @@clientName(RegenerateKeyParameters,
   "WebPubSubRegenerateKeyContent",
   "csharp"
 );
 
-// C# SDK: Rename Operation to avoid AZC0033 forbidden suffix
-@@clientName(Operation, "WebPubSubOperationDetail", "csharp");
+@@scope(Operations.list, "!csharp");
 
-// C# SDK: Model renames for backward compatibility with old API surface
 @@clientName(ACLAction, "AclAction", "csharp");
-@@clientName(ResourceSku, "BillingInfoSku", "csharp");
 @@clientName(PrivateEndpointACL, "PrivateEndpointAcl", "csharp");
 @@clientName(NetworkACL, "PublicNetworkAcls", "csharp");
+@@usage(ShareablePrivateLinkResourceProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
 @@clientName(ShareablePrivateLinkResourceProperties,
   "ShareablePrivateLinkProperties",
   "csharp"
 );
+@@usage(ShareablePrivateLinkResourceType, Usage.input | Usage.output, "csharp");
 @@clientName(ShareablePrivateLinkResourceType,
   "ShareablePrivateLinkType",
   "csharp"
@@ -107,22 +69,20 @@ using Microsoft.SignalRService;
 @@clientName(NameAvailability, "WebPubSubNameAvailability", "csharp");
 @@clientName(WebPubSubNetworkACLs, "WebPubSubNetworkAcls", "csharp");
 @@clientName(PrivateLinkResource, "WebPubSubPrivateLink", "csharp");
+@@clientName(PrivateLinkResourceProperties.shareablePrivateLinkResourceTypes,
+  "ShareablePrivateLinkTypes",
+  "csharp"
+);
 @@clientName(PrivateLinkServiceConnectionStatus,
   "WebPubSubPrivateLinkServiceConnectionStatus",
   "csharp"
 );
-@@clientName(ScaleType, "WebPubSubScaleType", "csharp");
 @@clientName(SharedPrivateLinkResourceStatus,
   "WebPubSubSharedPrivateLinkStatus",
   "csharp"
 );
-@@clientName(SkuCapacity, "WebPubSubSkuCapacity", "csharp");
 
-// C# SDK: Resource model renames for backward compatibility
 @@clientName(WebPubSubResource, "WebPubSub", "csharp");
-@@clientName(SharedPrivateLinkResource, "WebPubSubSharedPrivateLink", "csharp");
-
-// C# SDK: Property renames for backward compatibility
 @@clientName(WebPubSubProperties.disableAadAuth, "IsAadAuthDisabled", "csharp");
 @@clientName(WebPubSubTlsSettings.clientCertEnabled,
   "IsClientCertEnabled",
@@ -137,3 +97,120 @@ using Microsoft.SignalRService;
   "ConnectionState",
   "csharp"
 );
+@@clientName(CustomCertificate, "WebPubSubCustomCertificate", "csharp");
+@@alternateType(CustomCertificateProperties.keyVaultBaseUri, url, "csharp");
+@@clientName(CustomDomain, "WebPubSubCustomDomain", "csharp");
+@@alternateType(ResourceReference.id, armResourceIdentifier, "csharp");
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
+@@clientName(PrivateEndpointConnection,
+  "WebPubSubPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(PrivateLinkServiceConnectionState,
+  "WebPubSubPrivateLinkServiceConnectionState",
+  "csharp"
+);
+@@clientName(PrivateLinkServiceConnectionStatus,
+  "WebPubSubPrivateLinkServiceConnectionStatus",
+  "csharp"
+);
+@@alternateType(SharedPrivateLinkResourceProperties.privateLinkResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(Replica, "WebPubSubReplica", "csharp");
+@@clientName(ReplicaProperties.regionEndpointEnabled,
+  "IsRegionEndpointEnabled",
+  "csharp"
+);
+@@clientName(WebPubSubProperties.regionEndpointEnabled,
+  "IsRegionEndpointEnabled",
+  "csharp"
+);
+@@alternateType(WebPubSubResource.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.LocationParameter.location,
+  azureLocation,
+  "csharp"
+);
+@@clientName(WebPubSubOperationGroup.checkNameAvailability,
+  "CheckWebPubSubNameAvailability",
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResource, "WebPubSubSharedPrivateLink", "csharp");
+@@clientName(SharedPrivateLinkResourceStatus,
+  "WebPubSubSharedPrivateLinkStatus",
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResources,
+  "WebPubSubReplicaSharedPrivateLinkResources",
+  "csharp"
+);
+@@clientName(UsagesOperationGroup.list, "GetUsages", "csharp");
+@@clientName(Sku, "WebPubSubSku", "csharp");
+@@alternateType(Sku.resourceType, armResourceType, "csharp");
+@@clientName(ResourceSku, "BillingInfoSku", "csharp");
+@@clientName(SkuCapacity, "WebPubSubSkuCapacity", "csharp");
+@@clientName(ScaleType, "WebPubSubScaleType", "csharp");
+@@clientName(ApplicationFirewallSettings,
+  "WebPubSubApplicationFirewallSettings",
+  "csharp"
+);
+@@clientName(ClientConnectionCountRule,
+  "WebPubSubClientConnectionCountRule",
+  "csharp"
+);
+@@clientName(ClientTrafficControlRule,
+  "WebPubSubClientTrafficControlRule",
+  "csharp"
+);
+@@clientName(EventHubEndpoint, "WebPubSubEventHubEndpoint", "csharp");
+@@clientName(EventListener, "WebPubSubEventListener", "csharp");
+@@clientName(EventListenerEndpoint, "WebPubSubEventListenerEndpoint", "csharp");
+@@clientName(EventListenerFilter, "WebPubSubEventListenerFilter", "csharp");
+@@clientName(EventNameFilter, "WebPubSubEventNameFilter", "csharp");
+@@clientName(GroupPresenceEventFilters,
+  "WebPubSubGroupPresenceEventFilters",
+  "csharp"
+);
+@@clientName(GroupPresenceEventName,
+  "WebPubSubGroupPresenceEventName",
+  "csharp"
+);
+@@clientName(IPRule, "WebPubSubIPRule", "csharp");
+@@clientName(ServiceKind, "WebPubSubServiceKind", "csharp");
+@@clientName(ThrottleByJwtCustomClaimRule,
+  "WebPubSubThrottleByJwtCustomClaimRule",
+  "csharp"
+);
+@@clientName(ThrottleByJwtSignatureRule,
+  "WebPubSubThrottleByJwtSignatureRule",
+  "csharp"
+);
+@@clientName(ThrottleByUserIdRule, "WebPubSubThrottleByUserIdRule", "csharp");
+@@clientName(TrafficThrottleByJwtCustomClaimRule,
+  "WebPubSubTrafficThrottleByJwtCustomClaimRule",
+  "csharp"
+);
+@@clientName(TrafficThrottleByJwtSignatureRule,
+  "WebPubSubTrafficThrottleByJwtSignatureRule",
+  "csharp"
+);
+@@clientName(TrafficThrottleByUserIdRule,
+  "WebPubSubTrafficThrottleByUserIdRule",
+  "csharp"
+);
+@@clientName(UpstreamAuthSettings.type, "AuthType", "csharp");
+@@alternateType(SignalRServiceUsage.id, armResourceIdentifier, "csharp");
+@@clientName(LiveTraceCategory.enabled, "IsEnabled", "csharp");
+@@alternateType(LiveTraceCategory.enabled, boolean, "csharp");
+@@clientName(LiveTraceConfiguration.enabled, "IsEnabled", "csharp");
+@@alternateType(LiveTraceConfiguration.enabled, boolean, "csharp");
+@@clientName(WebPubSubResources.list, "GetWebPubSubPrivateLinks", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(Replicas.listReplicaSkus, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(WebPubSubResources.listSkus, "csharp");
