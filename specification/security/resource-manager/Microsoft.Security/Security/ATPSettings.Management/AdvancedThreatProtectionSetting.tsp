@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * The Advanced Threat Protection resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @extensionResource
 model AdvancedThreatProtectionSetting
@@ -25,28 +26,52 @@ model AdvancedThreatProtectionSetting
   >;
 }
 
-@armResourceOperations
+alias AdvancedThreatProtectionSettingOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The fully qualified Azure Resource manager identifier of the resource. */
+    @path
+    @key
+    resourceId: string;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+  },
+  {},
+  {
+    /** Advanced Threat Protection setting name. */
+    @path
+    @segment("advancedThreatProtectionSettings")
+    @key
+    settingName: string;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations(#{ omitTags: true })
 interface AdvancedThreatProtectionSettings {
   /**
    * Gets the Advanced Threat Protection settings for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AdvancedThreatProtection_Get")
-  get is Extension.Read<
-    Extension.ScopeParameter,
-    AdvancedThreatProtectionSetting
+  @tag("AdvancedThreatProtection")
+  get is AdvancedThreatProtectionSettingOps.Read<
+    AdvancedThreatProtectionSetting,
+    ErrorType = CloudError
   >;
 
   /**
    * Creates or updates the Advanced Threat Protection settings on a specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("AdvancedThreatProtection_Create")
-  create is Extension.CreateOrReplaceSync<
-    Extension.ScopeParameter,
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("AdvancedThreatProtection")
+  create is AdvancedThreatProtectionSettingOps.CreateOrUpdateSync<
     AdvancedThreatProtectionSetting,
-    Response = ArmResourceUpdatedResponse<AdvancedThreatProtectionSetting>
+    Response = ArmResponse<AdvancedThreatProtectionSetting>,
+    ErrorType = CloudError
   >;
 }
 

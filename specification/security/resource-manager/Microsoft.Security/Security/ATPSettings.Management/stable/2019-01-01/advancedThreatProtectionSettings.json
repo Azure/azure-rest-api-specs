@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Security Center",
     "version": "2019-01-01",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
     "x-typespec-generated": [
@@ -40,15 +40,15 @@
   },
   "tags": [
     {
-      "name": "AdvancedThreatProtectionSettings"
+      "name": "AdvancedThreatProtection"
     }
   ],
   "paths": {
-    "/{scope}/providers/Microsoft.Security/advancedThreatProtectionSettings/default": {
+    "/{resourceId}/providers/Microsoft.Security/advancedThreatProtectionSettings/current": {
       "get": {
         "operationId": "AdvancedThreatProtection_Get",
         "tags": [
-          "AdvancedThreatProtectionSettings"
+          "AdvancedThreatProtection"
         ],
         "description": "Gets the Advanced Threat Protection settings for the specified resource.",
         "parameters": [
@@ -56,12 +56,11 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "type": "string"
           }
         ],
         "responses": {
@@ -74,7 +73,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -87,7 +86,7 @@
       "put": {
         "operationId": "AdvancedThreatProtection_Create",
         "tags": [
-          "AdvancedThreatProtectionSettings"
+          "AdvancedThreatProtection"
         ],
         "description": "Creates or updates the Advanced Threat Protection settings on a specified resource.",
         "parameters": [
@@ -95,12 +94,11 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "type": "string"
           },
           {
             "name": "advancedThreatProtectionSetting",
@@ -114,7 +112,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AdvancedThreatProtectionSetting' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AdvancedThreatProtectionSetting"
             }
@@ -122,7 +120,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -160,6 +158,71 @@
           "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {}
