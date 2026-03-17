@@ -4368,10 +4368,43 @@
       "description": "Represents a Workspace definition.",
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
+        "managedBy": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. ",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Sku"
+        },
+        "plan": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Plan"
+        },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of the resource."
@@ -4381,7 +4414,8 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WorkspaceProperties"
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "WorkspaceProperties": {
       "description": "Schema for Workspace properties.",
@@ -4516,13 +4550,46 @@
       "description": "Represents a ApplicationGroup definition.",
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "required": [
         "properties"
       ],
       "properties": {
+        "managedBy": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. ",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Sku"
+        },
+        "plan": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Plan"
+        },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of the resource."
@@ -4533,7 +4600,8 @@
           "$ref": "#/definitions/ApplicationGroupProperties",
           "x-nullable": false
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "ApplicationGroupProperties": {
       "description": "Schema for ApplicationGroup properties.",
@@ -4657,13 +4725,46 @@
       "description": "Represents a HostPool definition.",
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "required": [
         "properties"
       ],
       "properties": {
+        "managedBy": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. ",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Sku"
+        },
+        "plan": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Plan"
+        },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of the resource."
@@ -4674,7 +4775,8 @@
           "$ref": "#/definitions/HostPoolProperties",
           "x-nullable": false
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "HostPoolProperties": {
       "description": "Properties of HostPool.",
@@ -4927,6 +5029,11 @@
           "description": "HostPool properties that can be patched.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/HostPoolPatchProperties"
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource.",
+          "x-nullable": true
         }
       }
     },
@@ -6826,10 +6933,43 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
+        "managedBy": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. ",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Sku"
+        },
+        "plan": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Plan"
+        },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of the resource."
@@ -6840,7 +6980,8 @@
           "$ref": "#/definitions/ScalingPlanProperties",
           "x-nullable": false
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "ScalingPlanProperties": {
       "type": "object",
