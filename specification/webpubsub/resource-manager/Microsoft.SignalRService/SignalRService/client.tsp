@@ -208,7 +208,10 @@ using Microsoft.SignalRService;
 @@alternateType(LiveTraceCategory.enabled, boolean, "csharp");
 @@clientName(LiveTraceConfiguration.enabled, "IsEnabled", "csharp");
 @@alternateType(LiveTraceConfiguration.enabled, boolean, "csharp");
-@@clientName(WebPubSubResources.list, "GetWebPubSubPrivateLinks", "csharp");
+@@clientName(WebPubSubResources.list,
+  "GetWebPubSubPrivateLinkResources",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
 @@markAsPageable(Replicas.listReplicaSkus, "csharp");
