@@ -26,7 +26,7 @@ interface TilerBound {
   /**
    * Return all Bounds
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/bounds` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/bounds` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/bounds` instead."
@@ -61,7 +61,7 @@ interface TilerInfoOperations {
   /**
    * Return dataset's basic info.
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info` instead."
@@ -103,7 +103,7 @@ interface TilerInfoGeoJsonOperations {
   /**
    * Return Info Geojson
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info.geojson` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info.geojson` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info.geojson` instead."
@@ -145,7 +145,7 @@ interface TilerAvailableAssets {
   /**
    * Return a list of supported assets.
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/assets` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/assets` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/assets` instead."
@@ -180,7 +180,7 @@ interface TilerAssetStatistics {
   /**
    * Per Asset statistics
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/asset_statistics` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/asset_statistics` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/asset_statistics` instead."
@@ -203,7 +203,7 @@ interface TilerStatistics {
   /**
    * Merged assets statistics.
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (GET) instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (GET) instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (GET) instead."
@@ -226,7 +226,7 @@ interface TilerGeoJsonStatistics {
   /**
    * Get Statistics from a geojson feature.
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (POST) instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (POST) instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (POST) instead."
@@ -262,7 +262,7 @@ interface TilerTiles {
   /**
    * Create map tile from a dataset.
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x.{format}` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x.{format}` instead."
@@ -327,7 +327,7 @@ interface TilerTileMatrixSets {
   /**
    * Create map tile from a dataset.
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}` instead."
@@ -353,7 +353,7 @@ interface TilerTileJsonOperations {
   /**
    * Return TileJson
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tilejson.json` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tilejson.json` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tilejson.json` instead."
@@ -416,7 +416,7 @@ interface TilerTileJsonTileMatrixSets {
   /**
    * Return the TileJson Tilematrixsetid As a path
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/tilejson.json` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/tilejson.json` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/tilejson.json` instead."
@@ -457,7 +457,7 @@ interface TilerWmts {
   /**
    * OGC WMTS endpoint.
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/WMTSCapabilities.xml` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/WMTSCapabilities.xml` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/WMTSCapabilities.xml` instead."
@@ -844,7 +844,7 @@ interface TilerWmtsTileMatrixSets {
   /**
    * OGC WMTS endpoint.
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/WMTSCapabilities.xml` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/WMTSCapabilities.xml` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/WMTSCapabilities.xml` instead."
@@ -884,7 +884,7 @@ interface TilerPoints {
   /**
    * Get Point value for a dataset.
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/point/{longitude},{latitude}` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/point/{longitude},{latitude}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/point/{longitude},{latitude}` instead."
@@ -945,7 +945,7 @@ interface TilerPreviews {
   /**
    * Create preview of a dataset.
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview.{format}` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "These endpoints have been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview[.{format}]` instead."
@@ -991,7 +991,7 @@ interface TilerPreviews {
   /**
    * Create preview of a dataset.
    *
-   * @deprecated This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview` instead.
+   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "These endpoints have been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview[.{format}]` instead."
@@ -1047,7 +1047,7 @@ interface TilerParts {
   /**
    * Create image from part of a dataset.
    *
-   * @deprecated The old endpoint using `/crop/` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}` instead.
+   * Note: The old endpoint using `/crop/` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "The crop endpoints (GET) have been deprecated and will be removed in a future API version. Please use the equivalent `bbox` endpoints instead: `/data/collections/{collectionId}/items/{itemId}/bbox/...`."
@@ -1098,7 +1098,7 @@ interface TilerParts {
   /**
    * Create image from part of a dataset.
    *
-   * @deprecated The old endpoint using `/crop/` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}.{format}` instead.
+   * Note: The old endpoint using `/crop/` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "The crop endpoints (GET) have been deprecated and will be removed in a future API version. Please use the equivalent `bbox` endpoints instead: `/data/collections/{collectionId}/items/{itemId}/bbox/...`."
@@ -1154,7 +1154,7 @@ interface TilerGeoJsons {
   /**
    * Create image from a geojson feature.
    *
-   * @deprecated The old endpoint using `/crop` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/feature/{width}x{height}.{format}` instead.
+   * Note: The old endpoint using `/crop` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/feature/{width}x{height}.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "The crop endpoints (POST) have been deprecated and will be removed in a future API version. Please use the equivalent `feature` endpoints instead: `/data/collections/{collectionId}/items/{itemId}/feature/...`."
@@ -1205,7 +1205,7 @@ interface TilerGeoJsons {
   /**
    * Create image from a geojson feature.
    *
-   * @deprecated The old endpoint using `/crop` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/feature.{format}` instead.
+   * Note: The old endpoint using `/crop` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/feature.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #deprecated "The crop endpoints (POST) have been deprecated and will be removed in a future API version. Please use the equivalent `feature` endpoints instead: `/data/collections/{collectionId}/items/{itemId}/feature/...`."

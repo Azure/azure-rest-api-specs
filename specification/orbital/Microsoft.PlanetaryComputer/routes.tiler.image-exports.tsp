@@ -15,7 +15,7 @@ interface TilerStaticImages {
   /**
    * Create a new image export.
    *
-   * @deprecated This endpoint has been deprecated and will be removed in a future API version.
+   * Note: This endpoint has been deprecated and will be removed in a future API version.
    * Please use `/data/collections/{collectionId}/bbox` for image generation instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -45,7 +45,7 @@ interface TilerStaticImages {
   /**
    * Fetch an existing image export by ID.
    *
-   * @deprecated This endpoint has been deprecated and will be removed in a future API version.
+   * Note: This endpoint has been deprecated and will be removed in a future API version.
    * Please use `/data/collections/{collectionId}/bbox` for image generation instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."

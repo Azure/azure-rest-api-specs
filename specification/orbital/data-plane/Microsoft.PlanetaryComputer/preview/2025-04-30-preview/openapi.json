@@ -78,7 +78,7 @@
           "Image Exports for STAC Collections"
         ],
         "summary": "Create Static Image (Deprecated)",
-        "description": "Create a new image export.",
+        "description": "Create a new image export.\n\nNote: This endpoint has been deprecated and will be removed in a future API version.\nPlease use `/data/collections/{collectionId}/bbox` for image generation instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -137,7 +137,7 @@
           "Image Exports for STAC Collections"
         ],
         "summary": "Get Static Image (Deprecated)",
-        "description": "Fetch an existing image export by ID.",
+        "description": "Fetch an existing image export by ID.\n\nNote: This endpoint has been deprecated and will be removed in a future API version.\nPlease use `/data/collections/{collectionId}/bbox` for image generation instead.",
         "produces": [
           "image/png",
           "application/json"
@@ -200,7 +200,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Wmts Tilematrixsetid As Path (Deprecated)",
-        "description": "OGC WMTS endpoint.",
+        "description": "OGC WMTS endpoint.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/WMTSCapabilities.xml` instead.",
         "produces": [
           "application/xml",
           "application/json"
@@ -398,7 +398,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "TileJson Tilematrixsetid As Path (Deprecated)",
-        "description": "Return the TileJson Tilematrixsetid As a path",
+        "description": "Return the TileJson Tilematrixsetid As a path\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/tilejson.json` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -591,7 +591,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Wmts (Deprecated)",
-        "description": "OGC WMTS endpoint.",
+        "description": "OGC WMTS endpoint.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/WMTSCapabilities.xml` instead.",
         "produces": [
           "application/xml",
           "application/json"
@@ -862,7 +862,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Asset Statistics (Deprecated)",
-        "description": "Per Asset statistics",
+        "description": "Per Asset statistics\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/asset_statistics` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -960,7 +960,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Available Assets (Deprecated)",
-        "description": "Return a list of supported assets.",
+        "description": "Return a list of supported assets.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/assets` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1022,7 +1022,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Bounds (Deprecated)",
-        "description": "Return all Bounds",
+        "description": "Return all Bounds\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/bounds` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1081,7 +1081,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Part (Deprecated)",
-        "description": "Create image from part of a dataset.",
+        "description": "Create image from part of a dataset.\n\nNote: The old endpoint using `/crop/` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -1317,7 +1317,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Geojson Crop (Deprecated)",
-        "description": "Create image from a geojson feature.",
+        "description": "Create image from a geojson feature.\n\nNote: The old endpoint using `/crop` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/feature/{width}x{height}.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -1552,7 +1552,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Part (Deprecated)",
-        "description": "Create image from part of a dataset.",
+        "description": "Create image from part of a dataset.\n\nNote: The old endpoint using `/crop/` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -1798,7 +1798,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Geojson Crop (Deprecated)",
-        "description": "Create image from a geojson feature.",
+        "description": "Create image from a geojson feature.\n\nNote: The old endpoint using `/crop` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/feature.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -2023,7 +2023,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Info (Deprecated)",
-        "description": "Return dataset's basic info.",
+        "description": "Return dataset's basic info.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2093,7 +2093,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Info Geojson (Deprecated)",
-        "description": "Return Info Geojson",
+        "description": "Return Info Geojson\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info.geojson` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2163,7 +2163,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Point (Deprecated)",
-        "description": "Get Point value for a dataset.",
+        "description": "Get Point value for a dataset.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/point/{longitude},{latitude}` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2334,7 +2334,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Preview (Deprecated)",
-        "description": "Create preview of a dataset.",
+        "description": "Create preview of a dataset.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -2604,7 +2604,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Preview (Deprecated)",
-        "description": "Create preview of a dataset.",
+        "description": "Create preview of a dataset.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -2820,7 +2820,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Statistics (Deprecated)",
-        "description": "Merged assets statistics.",
+        "description": "Merged assets statistics.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (GET) instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2916,7 +2916,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Geojson Statistics (Deprecated)",
-        "description": "Get Statistics from a geojson feature.",
+        "description": "Get Statistics from a geojson feature.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (POST) instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3031,7 +3031,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "TileJson (Deprecated)",
-        "description": "Return TileJson",
+        "description": "Return TileJson\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tilejson.json` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3297,7 +3297,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Tile (Deprecated)",
-        "description": "Create map tile from a dataset.",
+        "description": "Create map tile from a dataset.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -3525,7 +3525,7 @@
           "Tiles for STAC Items"
         ],
         "summary": "Tile Tilematrixsetid As Path (Deprecated)",
-        "description": "Create map tile from a dataset.",
+        "description": "Create map tile from a dataset.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
