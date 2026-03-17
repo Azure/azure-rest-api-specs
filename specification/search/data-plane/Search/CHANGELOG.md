@@ -31,7 +31,7 @@ It is maintained for internal engineering reference and API Stewardship Board re
   - **URL path consolidation** (host templates → explicit paths; resolved URLs identical)
   - **Schema restructuring** (inline ↔ `$ref` conversions with equivalent schemas)
   - **Shared route operations**: `Indexes_ListWithSelectedProperties` added as separate operation sharing `GET /indexes` route with `Indexes_List` via TypeSpec `@sharedRoute` decorator. Wire-compatible: both map to the same endpoint with optional `$select` parameter. Improves SDK generation by providing distinct methods for listing all index properties vs. selected properties.
-  - **Security definitions**: `ApiKeyAuth` (header `api-key`) and `OAuth2Auth` (implicit flow, `https://search.azure.com/.default`) formally declared; documents existing authentication without changing client behaviour.
+  - **Security definitions**: `ApiKeyAuth` (header `api-key`) and `OAuth2Auth` (implicit flow, `https://search.azure.com/.default`) formally declared; documents existing authentication without changing client behavior.
 
 #### Non-Breaking Changes
 
