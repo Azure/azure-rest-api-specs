@@ -3,7 +3,6 @@
   "info": {
     "title": "Azure Traffic Collector",
     "version": "2022-11-01",
-    "description": "Azure Traffic Collector service",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -52,7 +51,7 @@
   "paths": {
     "/providers/Microsoft.NetworkFunction/operations": {
       "get": {
-        "operationId": "NetworkFunctionOperations_ListOperations",
+        "operationId": "NetworkFunction_ListOperations",
         "tags": [
           "Operations"
         ],
@@ -74,6 +73,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
           }
         },
         "x-ms-pageable": {
@@ -722,15 +726,29 @@
           "description": "Properties of the Azure Traffic Collector.",
           "x-ms-client-flatten": true
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -825,15 +843,29 @@
           "description": "Properties of the Collector Policy.",
           "x-ms-client-flatten": true
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },

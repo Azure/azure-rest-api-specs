@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.NetworkFunction;
 
 @@clientName(Microsoft.NetworkFunction,
   "AzureTrafficCollectorClient",
@@ -11,41 +12,77 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.NetworkFunction, "TrafficCollectorMgmtClient", "python");
 
 // C# renames to preserve backward compatibility with the existing SDK
-@@clientName(Microsoft.NetworkFunction.ProvisioningState,
-  "CollectorProvisioningState",
-  "csharp"
-);
-@@clientName(Microsoft.NetworkFunction.DestinationType,
-  "EmissionDestinationType",
-  "csharp"
-);
-@@clientName(Microsoft.NetworkFunction.SourceType,
-  "IngestionSourceType",
-  "csharp"
-);
+@@clientName(ProvisioningState, "CollectorProvisioningState", "csharp");
+@@clientName(DestinationType, "EmissionDestinationType", "csharp");
+@@clientName(SourceType, "IngestionSourceType", "csharp");
+@@clientName(EmissionType.IPFIX, "Ipfix", "csharp");
+@@clientName(IngestionType.IPFIX, "Ipfix", "csharp");
 
-// Fix ARM common type id to use ResourceIdentifier instead of string
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-
-// Fix enum member naming for backward compatibility (IPFIX → Ipfix)
-@@clientName(Microsoft.NetworkFunction.EmissionType.IPFIX, "Ipfix", "csharp");
-@@clientName(Microsoft.NetworkFunction.IngestionType.IPFIX, "Ipfix", "csharp");
-
-// Fix ETag type for backward compatibility (string → Azure.ETag?)
-@@alternateType(Microsoft.NetworkFunction.AzureTrafficCollector.etag,
-  Azure.Core.eTag,
-  "csharp"
-);
-@@alternateType(Microsoft.NetworkFunction.CollectorPolicy.etag,
-  Azure.Core.eTag,
-  "csharp"
-);
-
-// Fix ResourceReference.id type for backward compatibility (string → ResourceIdentifier)
-@@alternateType(Microsoft.NetworkFunction.ResourceReference.id,
+@@alternateType(ResourceReference.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(AzureTrafficCollector, AzureTrafficCollectorData, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(AzureTrafficCollectorData.properties);
+@@alternateType(CollectorPolicy, CollectorPolicyData, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(CollectorPolicyData.properties);
+
+@@clientLocation(Operations.list, "NetworkFunctionOperations", "csharp");
+
+// added to solve the problem that the c# resource class can inherit the `tracked resource data` class
+namespace Microsoft.NetworkFunction {
+  /**
+   * Azure Traffic Collector resource.
+   */
+  model AzureTrafficCollectorData
+    is Azure.ResourceManager.TrackedResource<AzureTrafficCollectorPropertiesFormat> {
+    ...Azure.ResourceManager.ResourceNameParameter<
+      Resource = AzureTrafficCollector,
+      KeyName = "azureTrafficCollectorName",
+      SegmentName = "azureTrafficCollectors",
+      NamePattern = ""
+    >;
+    ...OmitProperties<
+      AzureTrafficCollector,
+      "id" | "name" | "type" | "properties" | "location" | "tags" | "etag"
+    >;
+
+    /**
+     * A unique read-only string that changes whenever the resource is updated.
+     */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @visibility(Lifecycle.Read)
+    etag?: Azure.Core.eTag;
+  }
+
+  /**
+   * Collector policy resource.
+   */
+  @TypeSpec.Rest.parentResource(AzureTrafficCollector)
+  model CollectorPolicyData
+    is Azure.ResourceManager.TrackedResource<CollectorPolicyPropertiesFormat> {
+    ...Azure.ResourceManager.ResourceNameParameter<
+      Resource = CollectorPolicy,
+      KeyName = "collectorPolicyName",
+      SegmentName = "collectorPolicies",
+      NamePattern = ""
+    >;
+    ...OmitProperties<
+      CollectorPolicy,
+      "id" | "name" | "type" | "properties" | "location" | "tags" | "etag"
+    >;
+
+    /**
+     * A unique read-only string that changes whenever the resource is updated.
+     */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @visibility(Lifecycle.Read)
+    etag?: Azure.Core.eTag;
+  }
+}
