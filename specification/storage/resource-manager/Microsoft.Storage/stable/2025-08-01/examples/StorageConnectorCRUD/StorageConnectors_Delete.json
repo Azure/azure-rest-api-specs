@@ -1,0 +1,22 @@
+{
+  "operationId": "Connectors_Delete",
+  "title": "DeleteConnector",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "accountName": "teststorageaccount",
+    "connectorName": "testconnector",
+    "api-version": "2025-08-01"
+  },
+  "responses": {
+    "204": {},
+    "202": {
+      "status": "Accepted",
+      "message": "The resource operation has been received and is being processed.",
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/xxxx/resourceGroups/rg-name/providers/Microsoft.Storage/operations/operation-98765",
+        "Retry-After": 30
+      }
+    }
+  }
+}
