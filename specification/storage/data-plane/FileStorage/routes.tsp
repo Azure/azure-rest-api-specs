@@ -228,7 +228,7 @@ interface Share {
 
       /** The maximum burst credits for IOPS. */
       @header("x-ms-share-max-burst-credits-for-iops")
-      shareMaxBurstCreditsForIops?: int64;
+      maxBurstCreditsForIops?: int64;
     }
   >;
 
@@ -253,23 +253,25 @@ interface Share {
       @header("x-ms-share-quota") quota: int32;
 
       /** The provisioned IOPS for the share. */
-      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
+      @header("x-ms-share-provisioned-iops") provisionedIops?: int32;
 
       /** The provisioned ingress for the share. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
       @header("x-ms-share-provisioned-ingress-mbps")
-      shareProvisionedIngressMbps?: int32;
+      provisionedIngressMBps?: int32;
 
       /** The provisioned egress for the share. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
       @header("x-ms-share-provisioned-egress-mbps")
-      shareProvisionedEgressMbps?: int32;
+      provisionedEgressMBps?: int32;
 
       /** The next allowed quota downgrade time. */
       @header("x-ms-share-next-allowed-quota-downgrade-time")
-      shareNextAllowedQuotaDowngradeTime?: string;
+      nextAllowedQuotaDowngradeTime?: string;
 
       /** The provisioned bandwidth for the share. */
       @header("x-ms-share-provisioned-bandwidth-mibps")
-      shareProvisionedBandwidthMibps?: int32;
+      provisionedBandwidthMibps?: int32;
 
       ...LeaseResponseHeaders;
 
@@ -297,11 +299,11 @@ interface Share {
 
       /** The next allowed provisioned IOPS downgrade time. */
       @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
-      shareNextAllowedProvisionedIopsDowngradeTime?: string;
+      nextAllowedProvisionedIopsDowngradeTime?: string;
 
       /** The next allowed provisioned bandwidth downgrade time. */
       @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time")
-      shareNextAllowedProvisionedBandwidthDowngradeTime?: string;
+      nextAllowedProvisionedBandwidthDowngradeTime?: string;
 
       /** Whether SMB directory lease is enabled. */
       @header("x-ms-enable-smb-directory-lease")
@@ -565,30 +567,30 @@ interface Share {
       @header("x-ms-share-quota") quota?: int32;
 
       /** The share provisioned IOPS. */
-      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
+      @header("x-ms-share-provisioned-iops") provisionedIops?: int32;
 
       /** The share provisioned bandwidth in mebibytes per second. */
       @header("x-ms-share-provisioned-bandwidth-mibps")
-      shareProvisionedBandwidthMibps?: int32;
+      provisionedBandwidthMibps?: int32;
 
       /** The share included burst IOPS. */
-      @header("x-ms-share-included-burst-iops") shareIncludedBurstIops?: int32;
+      @header("x-ms-share-included-burst-iops") includedBurstIops?: int32;
 
       /** The share max burst credits for IOPS. */
       @header("x-ms-share-max-burst-credits-for-iops")
-      shareMaxBurstCreditsForIops?: int64;
+      maxBurstCreditsForIops?: int64;
 
       /** Approximate time remaining in the share's existing downgrade request. */
       @header("x-ms-share-next-allowed-quota-downgrade-time")
-      shareNextAllowedQuotaDowngradeTime?: string;
+      nextAllowedQuotaDowngradeTime?: string;
 
       /** Approximate time remaining in the share's existing provisioned IOPS downgrade request. */
       @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
-      shareNextAllowedProvisionedIopsDowngradeTime?: string;
+      nextAllowedProvisionedIopsDowngradeTime?: string;
 
       /** Approximate time remaining in the share's existing provisioned bandwidth downgrade request. */
       @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time")
-      shareNextAllowedProvisionedBandwidthDowngradeTime?: string;
+      nextAllowedProvisionedBandwidthDowngradeTime?: string;
     }
   >;
 
@@ -694,15 +696,15 @@ interface Share {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       @header("x-ms-share-quota") quota?: int32;
-      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
+      @header("x-ms-share-provisioned-iops") provisionedIops?: int32;
 
       @header("x-ms-share-provisioned-bandwidth-mibps")
-      shareProvisionedBandwidthMibps?: int32;
+      provisionedBandwidthMibps?: int32;
 
-      @header("x-ms-share-included-burst-iops") shareIncludedBurstIops?: int32;
+      @header("x-ms-share-included-burst-iops") includedBurstIops?: int32;
 
       @header("x-ms-share-max-burst-credits-for-iops")
-      shareMaxBurstCreditsForIops?: int64;
+      maxBurstCreditsForIops?: int64;
     }
   >;
 }
