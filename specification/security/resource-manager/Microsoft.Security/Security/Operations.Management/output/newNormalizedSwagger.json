@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2025-10-01-preview",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    "description": "API spec for Microsoft Defender for Cloud operation statuses."
   },
   "produces": [
     "application/json"
@@ -12,13 +12,13 @@
     "application/json"
   ],
   "paths": {
-    "/providers/securityCenter/operations": {
+    "/providers/microsoft.Security/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Exposes all available operations for discovery purposes.",
         "parameters": [],
         "responses": {
           "200": {
@@ -47,6 +47,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{location}/operationResults/{operationId}": {
       "get": {
         "operationId": "OperationResults_Get",
+        "tags": [
+          "OperationResults"
+        ],
         "description": "Returns operation results for long running operations.",
         "parameters": [
           {
@@ -65,6 +68,15 @@
             "description": "ignore"
           },
           "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to query for status of the operation."
+              }
+            }
+          },
+          "204": {
             "description": "ignore"
           },
           "default": {
@@ -84,6 +96,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{location}/operationStatuses/{operationId}": {
       "get": {
         "operationId": "OperationStatuses_Get",
+        "tags": [
+          "OperationStatuses"
+        ],
         "description": "Get the status of a long running azure asynchronous operation.",
         "parameters": [
           {

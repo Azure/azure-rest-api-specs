@@ -9,17 +9,19 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.Core;
 using TypeSpec.OpenAPI;
 
 namespace SecurityCenter;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationResultsOperationGroup {
   /**
    * Returns operation results for long running operations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OperationResults_Get")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("OperationResults")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationResults/{operationId}")
   @get
   get(
@@ -33,16 +35,25 @@ interface OperationResultsOperationGroup {
     @minLength(1)
     @path
     operationId: string,
-  ): OkResponse | ArmAcceptedResponse | ErrorResponse;
+  ):
+    | OkResponse
+    | (ArmAcceptedResponse & {
+        /**
+         * URL to query for status of the operation.
+         */
+        #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+        @header("Location") Location: string;
+      })
+    | NoContentResponse
+    | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationStatusesOperationGroup {
   /**
    * Get the status of a long running azure asynchronous operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OperationStatuses_Get")
+  @tag("OperationStatuses")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationStatuses/{operationId}")
   @get
   get(

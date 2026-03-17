@@ -1,85 +1,30 @@
 {
   "definitions__added": {},
-  "info": {
-    "title": {
-      "__old": "Microsoft Defender for Cloud",
-      "__new": "SecurityCenter"
-    },
-    "description": {
-      "__old": "API spec for Microsoft Defender for Cloud operation statuses.",
-      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
-    }
-  },
   "paths": {
-    "/providers/microsoft.Security/operations__deleted": {
+    "/providers/microsoft.Security/operations": {
       "get": {
-        "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "Exposes all available operations for discovery purposes.",
-        "parameters": [],
         "responses": {
           "200": {
-            "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult",
+                "__new": "../../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              }
             }
           },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "List the operations for the Microsoft.Security (Microsoft Defender for Cloud) resource provider": {
-            "$ref": "./examples/Operations/ListOperations_example.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/securityCenter/operations__added": {
-      "get": {
-        "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "List the operations for the provider",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List the operations for the Microsoft.Security (Microsoft Defender for Cloud) resource provider": {
-            "$ref": "./examples/Operations/ListOperations_example.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{location}/operationResults/{operationId}": {
       "get": {
-        "tags__deleted": [
-          "OperationResults"
-        ],
         "parameters": [
           [
             "~",
@@ -103,17 +48,6 @@
           ]
         ],
         "responses": {
-          "202": {
-            "headers__deleted": {
-              "Location": {
-                "type": "string",
-                "description": "URL to query for status of the operation."
-              }
-            }
-          },
-          "204__deleted": {
-            "description": "ignore"
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -127,9 +61,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{location}/operationStatuses/{operationId}": {
       "get": {
-        "tags__deleted": [
-          "OperationStatuses"
-        ],
         "parameters": [
           [
             "~",

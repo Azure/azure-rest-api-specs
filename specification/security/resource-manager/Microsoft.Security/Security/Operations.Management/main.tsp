@@ -22,10 +22,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * API spec for Microsoft.Security (Azure Security Center) resource provider
+ * API spec for Microsoft Defender for Cloud operation statuses.
  */
-@armProviderNamespace
-@service(#{ title: "SecurityCenter" })
+@armProviderNamespace("Microsoft.Security")
+@service(#{ title: "Microsoft Defender for Cloud" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace SecurityCenter;
@@ -41,3 +41,7 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@@doc(Operations.list,
+  "Exposes all available operations for discovery purposes."
+);
