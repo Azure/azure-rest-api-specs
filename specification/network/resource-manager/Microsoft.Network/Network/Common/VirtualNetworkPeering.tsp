@@ -21,8 +21,10 @@ namespace Microsoft.Network;
 @parentResource(VirtualNetwork)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model VirtualNetworkPeering extends SubResourceModel {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: VirtualNetworkPeeringPropertiesFormat;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @path
   @key("virtualNetworkPeeringName")

@@ -21,6 +21,7 @@ namespace Microsoft.Network;
 @parentResource(RouteTable)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model Route extends SubResourceModel {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: RoutePropertiesFormat;
 
   @visibility(Lifecycle.Read)

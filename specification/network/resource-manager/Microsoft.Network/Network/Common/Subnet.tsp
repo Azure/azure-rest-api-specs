@@ -20,8 +20,10 @@ namespace Microsoft.Network;
 @parentResource(VirtualNetwork)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model Subnet extends SubResourceModel {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: SubnetPropertiesFormat;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @path
   @key("subnetName")

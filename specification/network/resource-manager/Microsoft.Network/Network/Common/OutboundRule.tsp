@@ -21,8 +21,10 @@ namespace Microsoft.Network;
 @parentResource(LoadBalancer)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model OutboundRule extends SubResourceModel {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: OutboundRulePropertiesFormat;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @path
   @key("outboundRuleName")

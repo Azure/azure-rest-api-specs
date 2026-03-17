@@ -21,8 +21,10 @@ namespace Microsoft.Network;
 @parentResource(LoadBalancer)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model BackendAddressPool extends SubResourceModel {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: BackendAddressPoolPropertiesFormat;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @path
   @key("backendAddressPoolName")

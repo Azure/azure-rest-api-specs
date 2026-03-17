@@ -21,6 +21,7 @@ namespace Microsoft.Network;
 @parentResource(NetworkSecurityGroup)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model SecurityRule extends SubResourceModel {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: SecurityRulePropertiesFormat;
 
   @visibility(Lifecycle.Read)
