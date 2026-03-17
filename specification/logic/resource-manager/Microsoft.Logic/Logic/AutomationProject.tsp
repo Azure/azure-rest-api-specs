@@ -66,6 +66,8 @@ interface AutomationProjects {
 }
 
 @@doc(AutomationProject.name, "The automation project name.");
+@@minLength(AutomationProject.name, 2);
+@@maxLength(AutomationProject.name, 64);
 @@doc(AutomationProject.properties, "The automation project properties.");
 @@doc(AutomationProjects.createOrUpdate::parameters.resource,
   "The automation project definition."
