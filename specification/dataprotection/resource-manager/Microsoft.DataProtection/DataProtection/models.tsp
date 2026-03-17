@@ -3085,7 +3085,7 @@ model BlobBackupAutoProtectionRule {
    * Type of the specific object - used for deserializing
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  objectType: "BlobBackupAutoProtectionRule";
+  objectType: string;
 
   /**
    * Exclude removes candidates (after inclusion)
