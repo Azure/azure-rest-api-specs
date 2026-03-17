@@ -21,3 +21,22 @@ using Azure.ClientGenerator.Core;
 @@usage(Microsoft.Kusto.CalloutPoliciesList, Usage.output, "java");
 @@access(Microsoft.Kusto.LanguageExtensionsList, Access.public, "java");
 @@usage(Microsoft.Kusto.LanguageExtensionsList, Usage.output, "java");
+
+// Java breaking change mitigations - model renames from swagger to TypeSpec
+// Rename paging models to avoid name collision with request models
+@@clientName(Microsoft.Kusto.LanguageExtensionsList,
+  "LanguageExtensionsListResult",
+  "java"
+);
+@@clientName(Microsoft.Kusto.CalloutPoliciesList,
+  "CalloutPoliciesListResult",
+  "java"
+);
+@@clientName(Microsoft.Kusto.LanguageExtensionsListRequest,
+  "LanguageExtensionsList",
+  "java"
+);
+@@clientName(Microsoft.Kusto.CalloutPoliciesListRequest,
+  "CalloutPoliciesList",
+  "java"
+);
