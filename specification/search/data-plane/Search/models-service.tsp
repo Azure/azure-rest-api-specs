@@ -3041,6 +3041,7 @@ union IndexerPermissionOption {
 }
 
 /** A value indicating whether the field should be used as a permission filter. */
+@removed(Versions.v2026_04_01)
 union PermissionFilter {
   string,
 
@@ -3055,6 +3056,7 @@ union PermissionFilter {
 }
 
 /** A value indicating whether permission filtering is enabled for the index. */
+@removed(Versions.v2026_04_01)
 union SearchIndexPermissionFilterOption {
   string,
 

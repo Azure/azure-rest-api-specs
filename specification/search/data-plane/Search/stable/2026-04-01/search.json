@@ -13230,36 +13230,6 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PatternTokenizer"
     },
-    "PermissionFilter": {
-      "type": "string",
-      "description": "A value indicating whether the field should be used as a permission filter.",
-      "enum": [
-        "userIds",
-        "groupIds",
-        "rbacScope"
-      ],
-      "x-ms-enum": {
-        "name": "PermissionFilter",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "UserIds",
-            "value": "userIds",
-            "description": "Field represents user IDs that should be used to filter document access on queries."
-          },
-          {
-            "name": "GroupIds",
-            "value": "groupIds",
-            "description": "Field represents group IDs that should be used to filter document access on queries."
-          },
-          {
-            "name": "RbacScope",
-            "value": "rbacScope",
-            "description": "Field represents an RBAC scope that should be used to filter document access on queries."
-          }
-        ]
-      }
-    },
     "PhoneticEncoder": {
       "type": "string",
       "description": "Identifies the type of phonetic encoder to use with a PhoneticTokenFilter.",
@@ -14523,30 +14493,6 @@
         }
       ],
       "x-ms-discriminator-value": "searchIndex"
-    },
-    "SearchIndexPermissionFilterOption": {
-      "type": "string",
-      "description": "A value indicating whether permission filtering is enabled for the index.",
-      "enum": [
-        "enabled",
-        "disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SearchIndexPermissionFilterOption",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "enabled",
-            "description": "Permission filtering is enabled for the index."
-          },
-          {
-            "name": "Disabled",
-            "value": "disabled",
-            "description": "Permission filtering is disabled for the index."
-          }
-        ]
-      }
     },
     "SearchIndexResponse": {
       "type": "object",

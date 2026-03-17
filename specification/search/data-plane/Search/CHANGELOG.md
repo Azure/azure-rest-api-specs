@@ -108,6 +108,7 @@ The following preview features were not promoted to the GA release.
   - `SearchIndex` / `SearchIndexResponse`: `permissionFilterOption`, `purviewEnabled`
   - `SearchIndexerDataSource`: `indexerPermissionOptions` (array), `subType` (read-only)
   - `SearchField`: `permissionFilter`, `sensitivityLabel`
+  - `SearchIndexPermissionFilterOption`, `PermissionFilter`
 
 - **Skill configuration removed**:
   - `SplitSkill`: `unit`, `azureOpenAITokenizerParameters`
