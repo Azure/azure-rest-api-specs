@@ -19,6 +19,8 @@ options:
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-reservations"
     compatibility-lro: true
+    typespec-title-map:
+      ReservationsClient: AzureReservationAPI
     flavor: azure
     experimental-extensible-enums: true
     package-details:
@@ -28,6 +30,7 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/armreservations"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armreservations"
     fix-const-stuttering: true
+    factory-gather-all-params: true
     flavor: azure
     generate-samples: true
     generate-fakes: true
