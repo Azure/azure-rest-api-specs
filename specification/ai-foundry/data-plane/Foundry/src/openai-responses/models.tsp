@@ -22,24 +22,12 @@ namespace Azure.AI.Projects {
 
   @@copyProperties(OpenAI.CreateResponse,
     {
-      ...AzureCreateResponse;
-    }
-  );
-
-  /** intermediate model */
-  model AzureCreateResponse {
       /**
        * (Deprecated) Use agent_reference instead.
        *  The agent to use for generating the response.
        */
       @removed(Versions.v1)
       agent?: AgentReference,
-
-      /** The agent to use for generating the response. */
-      agent_reference?: AgentReference,
-
-      /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
-      structured_inputs?: Record<unknown>,
 
       /**
        * Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
@@ -48,6 +36,18 @@ namespace Azure.AI.Projects {
        */
       @removed(Versions.v1)
       agent_session_id?: string,
+
+      ...AzureCreateResponse;
+    }
+  );
+
+  /** intermediate model */
+  model AzureCreateResponse {
+      /** The agent to use for generating the response. */
+      agent_reference?: AgentReference,
+
+      /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
+      structured_inputs?: Record<unknown>,
   }
 
   @@copyProperties(OpenAI.Response,
