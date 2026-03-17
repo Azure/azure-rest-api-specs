@@ -606,6 +606,23 @@ model ZonePreference {
 }
 
 @armResourceOperations
+interface FleetOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Fleet,
+        KeyName = "name",
+        SegmentName = "fleets",
+        NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+      >>
+    > {}
+
+@armResourceOperations
 interface Fleets {
   get is ArmResourceRead<Fleet>;
 
@@ -625,51 +642,40 @@ interface Fleets {
 
   listBySubscription is ArmListBySubscription<Fleet>;
 
-  @autoRoute
-  @listsResource(VirtualMachineScaleSet)
-  @armResourceList(VirtualMachineScaleSet)
+  /** List VirtualMachineScaleSet resources by Fleet */
+  @action("virtualMachineScaleSets")
   @get
   @list
-  @doc("List VirtualMachineScaleSet resources by Fleet")
-  listVirtualMachineScaleSets(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...ProviderNamespace<Fleet>,
-    ...ResourceNameParameter<
-      Fleet,
-      NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
-    >,
-  ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
+  listVirtualMachineScaleSets is FleetOps.ActionSync<
+    Fleet,
+    void,
+    Response = VirtualMachineScaleSetListResult
+  >;
 
   /** List VirtualMachine resources of an instance Fleet. */
   @added(Versions.v2025_07_01_preview)
-  @autoRoute
-  @listsResource(VirtualMachine)
-  @armResourceList(VirtualMachine)
+  @action("virtualMachines")
   @list
   @get
-  listVirtualMachines(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...ProviderNamespace<Fleet>,
-    ...ResourceNameParameter<
-      Fleet,
-      NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
-    >,
-
-    /** Filter expression to filter the virtual machines. */
-    @query
-    $filter?: string,
-
-    /** Skip token for pagination. Uses the token from a previous response to fetch the next page of results. */
-    @query
-    $skiptoken?: string,
-  ): ArmResponse<VirtualMachineListResult> | ErrorResponse;
+  listVirtualMachines is FleetOps.ActionSync<
+    Fleet,
+    void,
+    Response = VirtualMachineListResult,
+    Parameters = ListVirtualMachinesParameters
+  >;
 
   /** Cancels an instance Fleet creation that is in progress. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @added(Versions.v2025_07_01_preview)
   cancel is ArmResourceActionNoResponseContentAsync<Fleet, void>;
 }
+
+alias ListVirtualMachinesParameters = {
+  @doc("Filter expression to filter the virtual machines.")
+  @query
+  $filter?: string;
+
+  @doc("Skip token for pagination. Uses the token from a previous response to fetch the next page of results.")
+  @query
+  $skiptoken?: string;
+};

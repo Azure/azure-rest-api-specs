@@ -44,6 +44,7 @@ import "./StaticSiteBasicAuthPropertiesARMResource.tsp";
 import "./StaticSiteCustomDomainOverviewARMResource.tsp";
 import "./StaticSiteLinkedBackendARMResource.tsp";
 import "./Site.tsp";
+import "./AIGateway.tsp";
 import "./BackupItem.tsp";
 import "./CsmPublishingCredentialsPoliciesEntity.tsp";
 import "./SiteAuthSettingsV2.tsp";
@@ -105,6 +106,16 @@ enum Versions {
    * The 2025-03-01 API version.
    */
   v2025_03_01: "2025-03-01",
+
+  /**
+   * The 2025-05-01 API version.
+   */
+  v2025_05_01: "2025-05-01",
+
+  /**
+   * The 2026-03-01-preview API version.
+   */
+  v2026_03_01_preview: "2026-03-01-preview",
 }
 
 interface Operations

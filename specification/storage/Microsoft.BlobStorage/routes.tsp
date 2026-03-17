@@ -23,7 +23,7 @@ namespace Storage.Blob {
     TResponse extends TypeSpec.Reflection.Model | void,
     RequestMediaType extends string = "application/xml",
     ResponseMediaType extends string = "application/xml",
-    TError = StorageError
+    TError = Error
   >(
     /** Content-Type header */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
@@ -49,19 +49,55 @@ namespace Storage.Blob {
   op StorageOperationNoBody<
     TParams extends TypeSpec.Reflection.Model | void,
     TResponse extends TypeSpec.Reflection.Model | void,
-    TError = StorageError
+    TError = Error
   >(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
   }) | TError;
 
+  /** Azure Storage Blob basic operation template */
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  op StorageOperationResponseBody<
+    TParams extends TypeSpec.Reflection.Model | void,
+    TResponse extends TypeSpec.Reflection.Model | void,
+    ResponseMediaType extends string = "application/xml",
+    TError = Error
+  > is StorageOperationNoBody<
+    TParams,
+    {
+      /** Content-Type header */
+      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+      @header("Content-Type")
+      contentType: ResponseMediaType;
+    } & TResponse,
+    TError
+  >;
+
+  /** Azure Storage Blob basic operation template */
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  op StorageOperationRequestBody<
+    TParams extends TypeSpec.Reflection.Model | void,
+    TResponse extends TypeSpec.Reflection.Model | void,
+    RequestMediaType extends string = "application/xml",
+    TError = Error
+  > is StorageOperationNoBody<
+    {
+      /** Content-Type header */
+      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+      @header("Content-Type")
+      contentType: RequestMediaType;
+    } & TParams,
+    TResponse,
+    TError
+  >;
+
   /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("?restype=service&comp=properties")
-  op setProperties is StorageOperation<
+  op setProperties is StorageOperationRequestBody<
     {
       ...TimeoutParameter;
 
@@ -78,7 +114,7 @@ namespace Storage.Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
   @route("?restype=service&comp=properties")
-  op getProperties is StorageOperation<
+  op getProperties is StorageOperationResponseBody<
     TimeoutParameter,
     StorageServiceProperties
   >;
@@ -87,7 +123,7 @@ namespace Storage.Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
   @route("?restype=service&comp=stats")
-  op getStatistics is StorageOperation<
+  op getStatistics is StorageOperationResponseBody<
     TimeoutParameter,
     {
       ...DateResponseHeader;
@@ -104,7 +140,7 @@ namespace Storage.Blob {
   @get
   @list
   @route("?comp=list")
-  op listContainersSegment is StorageOperation<
+  op listContainersSegment is StorageOperationResponseBody<
     {
       ...PrefixParameter;
       ...MarkerParameter;
@@ -143,7 +179,7 @@ namespace Storage.Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
   @route("?restype=account&comp=properties")
-  op getAccountInfo is StorageOperation<
+  op getAccountInfo is StorageOperationNoBody<
     TimeoutParameter,
     {
       ...DateResponseHeader;
@@ -180,14 +216,14 @@ namespace Storage.Blob {
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
-  }) | StorageError;
+  }) | Error;
 
   /** The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("?comp=blobs")
-  op filterBlobs is StorageOperation<
+  op filterBlobs is StorageOperationResponseBody<
     {
       ...TimeoutParameter;
       ...FilterBlobsWhereParameter;
@@ -211,7 +247,7 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
     @put
     @route("{containerName}?restype=container")
-    op create is StorageOperation<
+    op create is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
         ...TimeoutParameter;
@@ -237,7 +273,7 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
     @get
     @route("{containerName}?restype=container")
-    op getProperties is StorageOperation<
+    op getProperties is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
         ...TimeoutParameter;
@@ -278,7 +314,7 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
     @delete
     @route("{containerName}?restype=container")
-    op delete is StorageOperation<
+    op delete is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
         ...TimeoutParameter;
@@ -297,7 +333,7 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @put
     @route("{containerName}?restype=container&comp=metadata")
-    op setMetadata is StorageOperation<
+    op setMetadata is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
         ...TimeoutParameter;
@@ -316,7 +352,7 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @get
     @route("{containerName}?restype=container&comp=acl")
-    op getAccessPolicy is StorageOperation<
+    op getAccessPolicy is StorageOperationResponseBody<
       {
         ...ContainerNamePathParameter;
         ...TimeoutParameter;
@@ -339,7 +375,7 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @put
     @route("{containerName}?restype=container&comp=acl")
-    op setAccessPolicy is StorageOperation<
+    op setAccessPolicy is StorageOperationRequestBody<
       {
         ...ContainerNamePathParameter;
 
@@ -367,7 +403,7 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @put
     @route("{containerName}?restype=container&comp=undelete")
-    op restore is StorageOperation<
+    op restore is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
 
@@ -393,7 +429,7 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @put
     @route("{containerName}?restype=container&comp=rename")
-    op rename is StorageOperation<
+    op rename is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
 
@@ -438,14 +474,14 @@ namespace Storage.Blob {
 
       ...RequestIdResponseHeader;
       ...ApiVersionHeader;
-    } & MultipartBodyParameter) | StorageError;
+    } & MultipartBodyParameter) | Error;
 
     /** The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
     @route("{containerName}?restype=container&comp=blobs")
-    op filterBlobs is StorageOperation<
+    op filterBlobs is StorageOperationResponseBody<
       {
         ...ContainerNamePathParameter;
         ...TimeoutParameter;
@@ -468,7 +504,8 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @put
-    @route("{containerName}?comp=lease&restype=container&acquire")
+    @sharedRoute
+    @route("{containerName}?comp=lease&restype=container")
     op acquireLease is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
@@ -493,8 +530,9 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @put
-    @route("{containerName}?comp=lease&restype=container&release")
-    op releaseLease is StorageOperation<
+    @sharedRoute
+    @route("{containerName}?comp=lease&restype=container")
+    op releaseLease is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
         ...LeaseIdRequiredParameter;
@@ -515,8 +553,9 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @put
-    @route("{containerName}?comp=lease&restype=container&renew")
-    op renewLease is StorageOperation<
+    @sharedRoute
+    @route("{containerName}?comp=lease&restype=container")
+    op renewLease is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
         ...LeaseIdRequiredParameter;
@@ -537,8 +576,9 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
     @put
-    @route("{containerName}?comp=lease&restype=container&break")
-    op breakLease is StorageOperation<
+    @sharedRoute
+    @route("{containerName}?comp=lease&restype=container")
+    op breakLease is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
         ...TimeoutParameter;
@@ -561,8 +601,9 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @put
-    @route("{containerName}?comp=lease&restype=container&change")
-    op changeLease is StorageOperation<
+    @sharedRoute
+    @route("{containerName}?comp=lease&restype=container")
+    op changeLease is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
         ...LeaseIdRequiredParameter;
@@ -585,8 +626,9 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
     @list
-    @route("{containerName}?restype=container&comp=list&flat")
-    op listBlobFlatSegment is StorageOperation<
+    @sharedRoute
+    @route("{containerName}?restype=container&comp=list")
+    op listBlobFlatSegment is StorageOperationResponseBody<
       {
         ...ContainerNamePathParameter;
         ...PrefixParameter;
@@ -610,8 +652,9 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
     @list
-    @route("{containerName}?restype=container&comp=list&hierarchy")
-    op listBlobHierarchySegment is StorageOperation<
+    @sharedRoute
+    @route("{containerName}?restype=container&comp=list")
+    op listBlobHierarchySegment is StorageOperationResponseBody<
       {
         ...ContainerNamePathParameter;
 
@@ -639,7 +682,7 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
     @get
     @route("{containerName}?restype=account&comp=properties")
-    op getAccountInfo is StorageOperation<
+    op getAccountInfo is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
         ...TimeoutParameter;
@@ -735,7 +778,7 @@ namespace Storage.Blob {
         ...LastAccessedResponseHeader;
         ...ImmutabilityPolicyExpiresOnResponseHeader;
         ...ImmutabilityPolicyModeResponseHeader;
-        ...LegalHoldResponseHeader;
+        ...LegalHoldOptionalResponseHeader;
         ...StructuredBodyTypeResponseHeader;
         ...StructuredContentLengthResponseHeader;
         ...ApiVersionHeader;
@@ -788,11 +831,11 @@ namespace Storage.Blob {
         ...LastAccessedResponseHeader;
         ...ImmutabilityPolicyExpiresOnResponseHeader;
         ...ImmutabilityPolicyModeResponseHeader;
-        ...LegalHoldResponseHeader;
+        ...LegalHoldOptionalResponseHeader;
         ...StructuredBodyTypeResponseHeader;
         ...StructuredContentLengthResponseHeader;
         ...ApiVersionHeader;
-      }) | StorageError;
+      }) | Error;
 
       /** The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob. */
       #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -883,7 +926,7 @@ namespace Storage.Blob {
           ...LastAccessedResponseHeader;
           ...ImmutabilityPolicyExpiresOnResponseHeader;
           ...ImmutabilityPolicyModeResponseHeader;
-          ...LegalHoldResponseHeader;
+          ...LegalHoldOptionalResponseHeader;
         }
       >;
 
@@ -892,7 +935,7 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       @delete
       @route("{blobName}")
-      op delete is StorageOperation<
+      op delete is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -931,7 +974,7 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       @put
       @route("{blobName}?comp=undelete")
-      op undelete is StorageOperation<
+      op undelete is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -946,7 +989,7 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       @put
       @route("{blobName}?comp=expiry")
-      op setExpiry is StorageOperation<
+      op setExpiry is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -966,8 +1009,9 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
       @put
-      @route("{blobName}?comp=properties&SetHTTPHeaders")
-      op setProperties is StorageOperation<
+      @sharedRoute
+      @route("{blobName}?comp=properties")
+      op setProperties is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -999,7 +1043,7 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
       @put
       @route("{blobName}?comp=immutabilityPolicies")
-      op setImmutabilityPolicy is StorageOperation<
+      op setImmutabilityPolicy is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1022,7 +1066,7 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       @delete
       @route("{blobName}?comp=immutabilityPolicies")
-      op deleteImmutabilityPolicy is StorageOperation<
+      op deleteImmutabilityPolicy is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1039,7 +1083,7 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
       @put
       @route("{blobName}?comp=legalhold")
-      op setLegalHold is StorageOperation<
+      op setLegalHold is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1060,7 +1104,7 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
       @put
       @route("{blobName}?comp=metadata")
-      op setMetadata is StorageOperation<
+      op setMetadata is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1093,7 +1137,8 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
       @put
-      @route("{blobName}?comp=lease&acquire")
+      @sharedRoute
+      @route("{blobName}?comp=lease")
       op acquireLease is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
@@ -1122,8 +1167,9 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
       @put
-      @route("{blobName}?comp=lease&release")
-      op releaseLease is StorageOperation<
+      @sharedRoute
+      @route("{blobName}?comp=lease")
+      op releaseLease is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1148,8 +1194,9 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
       @put
-      @route("{blobName}?comp=lease&renew")
-      op renewLease is StorageOperation<
+      @sharedRoute
+      @route("{blobName}?comp=lease")
+      op renewLease is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1175,8 +1222,9 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
       @put
-      @route("{blobName}?comp=lease&change")
-      op changeLease is StorageOperation<
+      @sharedRoute
+      @route("{blobName}?comp=lease")
+      op changeLease is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1203,8 +1251,8 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       @put
       @sharedRoute
-      @route("{blobName}?comp=lease&break")
-      op breakLease is StorageOperation<
+      @route("{blobName}?comp=lease")
+      op breakLease is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1232,7 +1280,7 @@ namespace Storage.Blob {
       @put
       @sharedRoute
       @route("{blobName}?comp=snapshot")
-      op createSnapshot is StorageOperation<
+      op createSnapshot is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1270,7 +1318,7 @@ namespace Storage.Blob {
       @put
       @sharedRoute
       @route("{blobName}")
-      op startCopyFromUrl is StorageOperation<
+      op startCopyFromUrl is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1299,10 +1347,6 @@ namespace Storage.Blob {
           ...ImmutabilityPolicyExpiryParameter;
           ...ImmutabilityPolicyModeParameter;
           ...LegalHoldOptionalParameter;
-
-          /** This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob. */
-          @header("x-ms-requires-sync")
-          requiresSync: true;
         },
         {
           @statusCode statusCode: 202;
@@ -1321,7 +1365,7 @@ namespace Storage.Blob {
       @put
       @sharedRoute
       @route("{blobName}?comp=copy&sync")
-      op copyFromUrl is StorageOperation<
+      op copyFromUrl is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1375,8 +1419,8 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
       @put
       @sharedRoute
-      @route("{blobName}?comp=copy&copyid")
-      op abortCopyFromUrl is StorageOperation<
+      @route("{blobName}?comp=copy")
+      op abortCopyFromUrl is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1406,7 +1450,7 @@ namespace Storage.Blob {
       @put
       @sharedRoute
       @route("{blobName}?comp=tier")
-      op setTier is StorageOperation<
+      op setTier is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1433,8 +1477,8 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
       @get
       @sharedRoute
-      @route("{blobName}?restype=account&comp=properties&blob")
-      op getAccountInfo is StorageOperation<
+      @route("{blobName}?restype=account&comp=properties")
+      op getAccountInfo is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1453,7 +1497,7 @@ namespace Storage.Blob {
       @get
       @sharedRoute
       @route("{blobName}?comp=tags")
-      op getTags is StorageOperation<
+      op getTags is StorageOperationResponseBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1480,7 +1524,7 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
       @put
       @route("{blobName}?comp=tags")
-      op setTags is StorageOperation<
+      op setTags is StorageOperationRequestBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1576,8 +1620,8 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
         @put
         @sharedRoute
-        @route("{blobName}?comp=page&update")
-        op uploadPages is StorageOperation<
+        @route("{blobName}?comp=page")
+        op uploadPages is StorageOperationRequestBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -1633,7 +1677,7 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
         @put
         @sharedRoute
-        @route("{blobName}?comp=page&clear")
+        @route("{blobName}?comp=page")
         op clearPages is StorageOperationNoBody<
           {
             ...ContainerNamePathParameter;
@@ -1681,7 +1725,7 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
         @put
         @sharedRoute
-        @route("{blobName}?comp=page&update&fromUrl")
+        @route("{blobName}?comp=page")
         op uploadPagesFromUrl is StorageOperationNoBody<
           {
             ...ContainerNamePathParameter;
@@ -1743,8 +1787,9 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
         #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
         @get
+        @sharedRoute
         @route("{blobName}?comp=pagelist")
-        op getPageRanges is StorageOperation<
+        op getPageRanges is StorageOperationResponseBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -1772,8 +1817,9 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
         #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
         @get
-        @route("{blobName}?comp=pagelist&diff")
-        op getPageRangesDiff is StorageOperation<
+        @sharedRoute
+        @route("{blobName}?comp=pagelist")
+        op getPageRangesDiff is StorageOperationResponseBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -1812,8 +1858,8 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
         @put
         @sharedRoute
-        @route("{blobName}?comp=properties&Resize")
-        op resize is StorageOperation<
+        @route("{blobName}?comp=properties")
+        op resize is StorageOperationNoBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -1844,8 +1890,8 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
         @put
         @sharedRoute
-        @route("{blobName}?comp=properties&UpdateSequenceNumber")
-        op setSequenceNumber is StorageOperation<
+        @route("{blobName}?comp=properties")
+        op setSequenceNumber is StorageOperationNoBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -1873,7 +1919,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?comp=incrementalcopy")
-        op copyIncremental is StorageOperation<
+        op copyIncremental is StorageOperationNoBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -1960,7 +2006,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?comp=appendblock")
-        op appendBlock is StorageOperation<
+        op appendBlock is StorageOperationRequestBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -2010,8 +2056,8 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
         @put
         @sharedRoute
-        @route("{blobName}?comp=appendblock&fromUrl")
-        op appendBlockFromUrl is StorageOperation<
+        @route("{blobName}?comp=appendblock")
+        op appendBlockFromUrl is StorageOperationNoBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -2066,7 +2112,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?comp=seal")
-        op seal is StorageOperation<
+        op seal is StorageOperationNoBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -2097,7 +2143,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}")
-        op upload is StorageOperation<
+        op upload is StorageOperationRequestBody<
           {
             ...MetadataHeaders;
             ...ContainerNamePathParameter;
@@ -2156,7 +2202,7 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
         @put
         @sharedRoute
-        @route("{blobName}?BlockBlob&fromUrl")
+        @route("{blobName}")
         op putBlobFromUrl is StorageOperationNoBody<
           {
             ...MetadataHeaders;
@@ -2224,7 +2270,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?comp=block")
-        op stageBlock is StorageOperation<
+        op stageBlock is StorageOperationRequestBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -2261,8 +2307,8 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
         @put
         @sharedRoute
-        @route("{blobName}?comp=block&fromURL")
-        op stageBlockFromUrl is StorageOperation<
+        @route("{blobName}?comp=block")
+        op stageBlockFromUrl is StorageOperationNoBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -2306,7 +2352,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?comp=blocklist")
-        op commitBlockList is StorageOperation<
+        op commitBlockList is StorageOperationRequestBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -2358,7 +2404,7 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
         @get
         @route("{blobName}?comp=blocklist")
-        op getBlockList is StorageOperation<
+        op getBlockList is StorageOperationResponseBody<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
