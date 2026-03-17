@@ -1316,15 +1316,16 @@ model ShareNfsSettingsEncryptionInTransit {
 /**
  * The list of file ranges
  */
+@Xml.name("Ranges")
 model ShareFileRangeList {
   /** The file ranges. */
   @Xml.unwrapped
-  @Xml.name("Ranges")
+  @Xml.name("Range")
   ranges?: FileRange[];
 
   /** The clear ranges. */
   @Xml.unwrapped
-  @Xml.name("ClearRanges")
+  @Xml.name("ClearRange")
   clearRanges?: ClearRange[];
 }
 
