@@ -2619,9 +2619,9 @@
           "$ref": "#/definitions/DataQualityValidationPolicy",
           "description": "Data quality dataset validation. Required for DataQualityValidation jobs."
         },
-        "resourceType": {
-          "$ref": "#/definitions/ResourceNotificationResourceType",
-          "description": "Resource type (resource or relationship). Required for AzureResourceNotificationPublish jobs."
+        "environment": {
+          "$ref": "#/definitions/ResourceNotificationPublishEnvironment",
+          "description": "Publish environment for AzureResourceNotificationPublish jobs."
         }
       }
     },
@@ -2992,6 +2992,30 @@
         }
       ],
       "x-ms-discriminator-value": "Reference"
+    },
+    "ResourceNotificationPublishEnvironment": {
+      "type": "string",
+      "description": "Resource notification publish environment",
+      "enum": [
+        "Preview",
+        "Production"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceNotificationPublishEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Preview",
+            "value": "Preview",
+            "description": "The preview/experimental environment."
+          },
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "The production environment."
+          }
+        ]
+      }
     },
     "ResourceNotificationResourceType": {
       "type": "string",
