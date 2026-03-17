@@ -31765,6 +31765,10 @@
             ],
             "description": "(Deprecated) Use agent_reference instead.\nThe agent used for this response"
           },
+          "agent_session_id": {
+            "type": "string",
+            "description": "The session identifier for this response. Currently only relevant for hosted agents.\nAlways returned for hosted agents — either the caller-provided value, the auto-derived value,\nor an auto-generated UUID. Use for session-scoped operations and to maintain sandbox\naffinity in follow-up calls."
+          },
           "agent_reference": {
             "type": "object",
             "allOf": [
@@ -31774,10 +31778,6 @@
             ],
             "nullable": true,
             "description": "The agent used for this response"
-          },
-          "agent_session_id": {
-            "type": "string",
-            "description": "The session identifier for this response. Currently only relevant for hosted agents.\nAlways returned for hosted agents — either the caller-provided value, the auto-derived value,\nor an auto-generated UUID. Use for session-scoped operations and to maintain sandbox\naffinity in follow-up calls."
           }
         },
         "title": "The response object"

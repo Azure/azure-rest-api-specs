@@ -41,6 +41,7 @@ namespace Azure.AI.Projects {
     }
   );
 
+  // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
   /** intermediate model */
   model AzureCreateResponse {
       /** The agent to use for generating the response. */
@@ -59,9 +60,6 @@ namespace Azure.AI.Projects {
       @removed(Versions.v1)
       agent?: AgentId,
 
-      /** The agent used for this response */
-      agent_reference: AgentReference | null,
-
       /**
        * The session identifier for this response. Currently only relevant for hosted agents.
        * Always returned for hosted agents — either the caller-provided value, the auto-derived value,
@@ -70,8 +68,18 @@ namespace Azure.AI.Projects {
        */
       @removed(Versions.v1)
       agent_session_id?: string,
+
+      ...AzureCreateResponseResult,
     }
   );
+
+
+  // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
+  /** intermediate model */
+  model AzureCreateResponseResult {
+          /** The agent used for this response */
+      agent_reference: AgentReference | null,
+  }
 
   @@withoutOmittedProperties(OpenAI.CodeInterpreterTool, "container");
   @@copyProperties(OpenAI.CodeInterpreterTool,
