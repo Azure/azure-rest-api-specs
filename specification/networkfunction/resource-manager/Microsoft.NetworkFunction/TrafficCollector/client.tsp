@@ -30,69 +30,25 @@ using Microsoft.NetworkFunction;
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(AzureTrafficCollector,
-  NetworkFunctionAzureTrafficCollector,
+
+// Change resource model inheritance from ProxyResource to TrackedResource for C#
+// These resources have location and tags properties, making them tracked resources in the existing SDK
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AzureTrafficCollector,
+  Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(NetworkFunctionAzureTrafficCollector.properties);
-@@alternateType(CollectorPolicy, NetworkFunctionCollectorPolicy, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(NetworkFunctionCollectorPolicy.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(CollectorPolicy,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+// Change etag type from string to Azure.Core.eTag for C#
+@@alternateType(AzureTrafficCollector.etag, Azure.Core.eTag, "csharp");
+@@alternateType(CollectorPolicy.etag, Azure.Core.eTag, "csharp");
 
 @@clientLocation(Operations.list, "NetworkFunctionOperations", "csharp");
-
-// added to solve the problem that the c# resource class can inherit the `tracked resource data` class
-namespace Microsoft.NetworkFunction {
-  /**
-   * Azure Traffic Collector resource.
-   */
-  model NetworkFunctionAzureTrafficCollector
-    is Azure.ResourceManager.TrackedResource<AzureTrafficCollectorPropertiesFormat> {
-    ...Azure.ResourceManager.ResourceNameParameter<
-      Resource = AzureTrafficCollector,
-      KeyName = "azureTrafficCollectorName",
-      SegmentName = "azureTrafficCollectors",
-      NamePattern = ""
-    >;
-    ...OmitProperties<
-      AzureTrafficCollector,
-      "id" | "name" | "type" | "properties" | "location" | "tags" | "etag"
-    >;
-
-    /**
-     * A unique read-only string that changes whenever the resource is updated.
-     */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @visibility(Lifecycle.Read)
-    etag?: Azure.Core.eTag;
-  }
-
-  /**
-   * Collector policy resource.
-   */
-  @TypeSpec.Rest.parentResource(AzureTrafficCollector)
-  model NetworkFunctionCollectorPolicy
-    is Azure.ResourceManager.TrackedResource<CollectorPolicyPropertiesFormat> {
-    ...Azure.ResourceManager.ResourceNameParameter<
-      Resource = CollectorPolicy,
-      KeyName = "collectorPolicyName",
-      SegmentName = "collectorPolicies",
-      NamePattern = ""
-    >;
-    ...OmitProperties<
-      CollectorPolicy,
-      "id" | "name" | "type" | "properties" | "location" | "tags" | "etag"
-    >;
-
-    /**
-     * A unique read-only string that changes whenever the resource is updated.
-     */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @visibility(Lifecycle.Read)
-    etag?: Azure.Core.eTag;
-  }
-}
 
 // We add this model in this namespace in order to replace some models with this model via alternateType decorator
 namespace Azure.ResourceManager.Models {
