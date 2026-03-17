@@ -29,64 +29,85 @@ interface OpenShiftClusters {
   /**
    * The operation returns properties of a OpenShift cluster.
    */
-  get is ArmResourceRead<OpenShiftCluster>;
+  @summary("Gets a OpenShift cluster with the specified subscription, resource group and resource name.")
+  get is ArmResourceRead<OpenShiftCluster, Error = CloudError>;
 
   /**
    * The operation returns properties of a OpenShift cluster.
    */
+  @summary("Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OpenShiftCluster,
     LroHeaders = ArmLroLocationHeader<FinalResult = OpenShiftCluster> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
    * The operation returns properties of a OpenShift cluster.
    */
+  @summary("Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     OpenShiftCluster,
     PatchModel = OpenShiftClusterUpdate,
-    Response = ArmResponse<OpenShiftCluster> | ArmResourceCreatedResponse<OpenShiftCluster>
+    Response = ArmResponse<OpenShiftCluster> | ArmResourceCreatedResponse<
+      OpenShiftCluster,
+      LroHeaders = ArmLroLocationHeader<FinalResult = OpenShiftCluster> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
+    Error = CloudError
   >;
 
   /**
    * The operation returns nothing.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<OpenShiftCluster>;
-
-  /**
-   * The operation returns properties of each OpenShift cluster.
-   */
-  listByResourceGroup is ArmResourceListByParent<
+  @summary("Deletes a OpenShift cluster with the specified subscription, resource group and resource name.")
+  delete is ArmResourceDeleteWithoutOkAsync<
     OpenShiftCluster,
-    Response = ArmResponse<OpenShiftClusterList>
+    Error = CloudError
   >;
 
   /**
    * The operation returns properties of each OpenShift cluster.
    */
+  @summary("Lists OpenShift clusters in the specified subscription and resource group.")
+  listByResourceGroup is ArmResourceListByParent<
+    OpenShiftCluster,
+    Response = ArmResponse<OpenShiftClusterList>,
+    Error = CloudError
+  >;
+
+  /**
+   * The operation returns properties of each OpenShift cluster.
+   */
+  @summary("Lists OpenShift clusters in the specified subscription.")
   list is ArmListBySubscription<
     OpenShiftCluster,
-    Response = ArmResponse<OpenShiftClusterList>
+    Response = ArmResponse<OpenShiftClusterList>,
+    Error = CloudError
   >;
 
   /**
    * The operation returns the admin kubeconfig.
    */
+  @summary("Lists admin kubeconfig of an OpenShift cluster with the specified subscription, resource group and resource name.")
   listAdminCredentials is ArmResourceActionSync<
     OpenShiftCluster,
     void,
-    ArmResponse<OpenShiftClusterAdminKubeconfig>
+    OpenShiftClusterAdminKubeconfig,
+    Error = CloudError
   >;
 
   /**
    * The operation returns the credentials.
    */
+  @summary("Lists credentials of an OpenShift cluster with the specified subscription, resource group and resource name.")
   listCredentials is ArmResourceActionSync<
     OpenShiftCluster,
     void,
-    ArmResponse<OpenShiftClusterCredentials>
+    OpenShiftClusterCredentials,
+    Error = CloudError
   >;
 }
 

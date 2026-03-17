@@ -40,7 +40,8 @@ alias OpenShiftVersionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @minLength(1)
     @maxLength(63)
     openShiftVersion: string;
-  }
+  },
+  ErrorType = CloudError
 >;
 
 @armResourceOperations
@@ -48,11 +49,13 @@ interface OpenShiftVersions {
   /**
    * This operation returns installable OpenShift version as a string.
    */
+  @summary("Gets an available OpenShift version to install in the specified location.")
   get is OpenShiftVersionsOps.Read<OpenShiftVersion>;
 
   /**
    * The operation returns the installable OpenShift versions as a string.
    */
+  @summary("Lists all OpenShift versions available to install in the specified location.")
   list is OpenShiftVersionsOps.List<
     OpenShiftVersion,
     Response = ArmResponse<OpenShiftVersionList>

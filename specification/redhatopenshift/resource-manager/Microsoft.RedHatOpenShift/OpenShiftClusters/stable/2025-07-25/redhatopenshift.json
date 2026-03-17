@@ -95,6 +95,7 @@
         "tags": [
           "OpenShiftVersions"
         ],
+        "summary": "Lists all OpenShift versions available to install in the specified location.",
         "description": "The operation returns the installable OpenShift versions as a string.",
         "parameters": [
           {
@@ -117,7 +118,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -137,6 +138,7 @@
         "tags": [
           "OpenShiftVersions"
         ],
+        "summary": "Gets an available OpenShift version to install in the specified location.",
         "description": "This operation returns installable OpenShift version as a string.",
         "parameters": [
           {
@@ -169,7 +171,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -186,6 +188,7 @@
         "tags": [
           "PlatformWorkloadIdentityRoleSets"
         ],
+        "summary": "Lists a mapping of OpenShift versions to identity requirements, which include operatorName, roleDefinitionName, roleDefinitionId, and serviceAccounts.",
         "description": "This operation returns a list of Platform Workload Identity Role Sets as a string",
         "parameters": [
           {
@@ -208,7 +211,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -228,6 +231,7 @@
         "tags": [
           "PlatformWorkloadIdentityRoleSets"
         ],
+        "summary": "Gets a mapping of an OpenShift version to identity requirements, which includes operatorName, roleDefinitionName, roleDefinitionId, and serviceAccounts.",
         "description": "This operation returns Platform Workload Identity Role Set as a string",
         "parameters": [
           {
@@ -260,7 +264,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -277,6 +281,7 @@
         "tags": [
           "OpenShiftClusters"
         ],
+        "summary": "Lists OpenShift clusters in the specified subscription.",
         "description": "The operation returns properties of each OpenShift cluster.",
         "parameters": [
           {
@@ -296,7 +301,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -316,6 +321,7 @@
         "tags": [
           "OpenShiftClusters"
         ],
+        "summary": "Lists OpenShift clusters in the specified subscription and resource group.",
         "description": "The operation returns properties of each OpenShift cluster.",
         "parameters": [
           {
@@ -338,7 +344,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -358,6 +364,7 @@
         "tags": [
           "OpenShiftClusters"
         ],
+        "summary": "Gets a OpenShift cluster with the specified subscription, resource group and resource name.",
         "description": "The operation returns properties of a OpenShift cluster.",
         "parameters": [
           {
@@ -387,7 +394,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -402,6 +409,7 @@
         "tags": [
           "OpenShiftClusters"
         ],
+        "summary": "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.",
         "description": "The operation returns properties of a OpenShift cluster.",
         "parameters": [
           {
@@ -457,7 +465,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -477,6 +485,7 @@
         "tags": [
           "OpenShiftClusters"
         ],
+        "summary": "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.",
         "description": "The operation returns properties of a OpenShift cluster.",
         "parameters": [
           {
@@ -518,6 +527,10 @@
               "$ref": "#/definitions/OpenShiftCluster"
             },
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -528,7 +541,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -538,8 +551,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3COpenShiftCluster%3E"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OpenShiftCluster"
         },
         "x-ms-long-running-operation": true
       },
@@ -548,6 +561,7 @@
         "tags": [
           "OpenShiftClusters"
         ],
+        "summary": "Deletes a OpenShift cluster with the specified subscription, resource group and resource name.",
         "description": "The operation returns nothing.",
         "parameters": [
           {
@@ -588,7 +602,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -609,6 +623,7 @@
         "tags": [
           "OpenShiftClusters"
         ],
+        "summary": "Lists admin kubeconfig of an OpenShift cluster with the specified subscription, resource group and resource name.",
         "description": "The operation returns the admin kubeconfig.",
         "parameters": [
           {
@@ -638,7 +653,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -655,6 +670,7 @@
         "tags": [
           "OpenShiftClusters"
         ],
+        "summary": "Lists credentials of an OpenShift cluster with the specified subscription, resource group and resource name.",
         "description": "The operation returns the credentials.",
         "parameters": [
           {
@@ -684,7 +700,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -717,18 +733,41 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmResponse<OpenShiftCluster>": {
+    "CloudError": {
       "type": "object",
-      "description": "Azure operation completed successfully.",
+      "description": "CloudError represents a cloud error.",
       "properties": {
-        "body": {
-          "$ref": "#/definitions/OpenShiftCluster",
-          "description": "The body type of the operation request or response."
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from the service."
         }
-      },
-      "required": [
-        "body"
-      ]
+      }
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "CloudErrorBody represents the body of a cloud error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "ClusterProfile": {
       "type": "object",
@@ -953,7 +992,9 @@
       "properties": {
         "kubeconfig": {
           "type": "string",
-          "description": "The base64-encoded kubeconfig file."
+          "format": "password",
+          "description": "The base64-encoded kubeconfig file.",
+          "x-ms-secret": true
         }
       }
     },
@@ -967,7 +1008,9 @@
         },
         "kubeadminPassword": {
           "type": "string",
-          "description": "The password for the kubeadmin user."
+          "format": "password",
+          "description": "The password for the kubeadmin user.",
+          "x-ms-secret": true
         }
       }
     },

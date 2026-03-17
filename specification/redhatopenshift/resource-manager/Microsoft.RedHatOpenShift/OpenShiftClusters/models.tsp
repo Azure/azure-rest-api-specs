@@ -677,6 +677,7 @@ model OpenShiftClusterAdminKubeconfig {
   /**
    * The base64-encoded kubeconfig file.
    */
+  @secret
   kubeconfig?: string;
 }
 
@@ -692,5 +693,6 @@ model OpenShiftClusterCredentials {
   /**
    * The password for the kubeadmin user.
    */
+  @secret
   kubeadminPassword?: string;
 }
