@@ -21,6 +21,7 @@ import "./src/memory-stores/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/toolsets/routes.tsp";
+import "./src/jobs/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
@@ -218,6 +219,16 @@ using Azure.AI.Projects;
 @@clientName(Toolsets.getToolset, "get");
 @@clientName(Toolsets.listToolsets, "list");
 @@clientName(Toolsets.deleteToolset, "delete");
+
+// --------------------------------------------------------------------------------
+// Jobs sub-client (beta)
+// --------------------------------------------------------------------------------
+
+@@clientName(Jobs.get, "get", "python");
+@@clientName(Jobs.list, "list", "python");
+@@clientName(Jobs.createOrUpdate, "create_or_update", "python");
+@@clientName(Jobs.delete, "delete", "python");
+@@clientName(Jobs.cancel, "cancel", "python");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
