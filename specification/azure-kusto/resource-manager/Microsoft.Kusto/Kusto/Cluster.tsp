@@ -271,7 +271,7 @@ interface Clusters {
   @tag("Clusters")
   addCalloutPolicies is ArmResourceActionAsyncBase<
     Cluster,
-    CalloutPoliciesList,
+    CalloutPoliciesListRequest,
     ArmAcceptedLroResponse<
       "Resource operation accepted.",
       LroHeaders = ArmLroLocationHeader &
@@ -325,7 +325,7 @@ interface Clusters {
   @tag("Clusters")
   addLanguageExtensions is ArmResourceActionAsyncBase<
     Cluster,
-    LanguageExtensionsList,
+    LanguageExtensionsListRequest,
     ArmAcceptedLroResponse<
       "Resource operation accepted.",
       LroHeaders = ArmLroLocationHeader &
@@ -341,7 +341,7 @@ interface Clusters {
   @tag("Clusters")
   removeLanguageExtensions is ArmResourceActionAsyncBase<
     Cluster,
-    LanguageExtensionsList,
+    LanguageExtensionsListRequest,
     ArmAcceptedLroResponse<
       "Resource operation accepted.",
       LroHeaders = ArmLroLocationHeader &

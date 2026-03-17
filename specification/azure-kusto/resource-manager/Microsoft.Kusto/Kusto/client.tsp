@@ -16,14 +16,8 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
-// Ensure models used in public API are generated as public models
+// Ensure paging models used only as list responses are correctly classified
 @@access(Microsoft.Kusto.CalloutPoliciesList, Access.public, "java");
-@@usage(Microsoft.Kusto.CalloutPoliciesList,
-  Usage.input | Usage.output,
-  "java"
-);
+@@usage(Microsoft.Kusto.CalloutPoliciesList, Usage.output, "java");
 @@access(Microsoft.Kusto.LanguageExtensionsList, Access.public, "java");
-@@usage(Microsoft.Kusto.LanguageExtensionsList,
-  Usage.input | Usage.output,
-  "java"
-);
+@@usage(Microsoft.Kusto.LanguageExtensionsList, Usage.output, "java");

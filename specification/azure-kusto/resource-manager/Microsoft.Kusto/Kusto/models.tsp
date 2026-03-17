@@ -1750,6 +1750,7 @@ model LanguageExtensionsList {
   /**
    * The list of language extensions.
    */
+  @pageItems
   @identifiers(#[])
   value?: LanguageExtension[];
 
@@ -1757,6 +1758,22 @@ model LanguageExtensionsList {
    * Link to the next page of results.
    */
   @nextLink
+  nextLink?: string;
+}
+
+/**
+ * The list of language extension objects for request operations.
+ */
+model LanguageExtensionsListRequest {
+  /**
+   * The list of language extensions.
+   */
+  @identifiers(#[])
+  value?: LanguageExtension[];
+
+  /**
+   * Link to the next page of results.
+   */
   nextLink?: string;
 }
 
@@ -3164,16 +3181,21 @@ model OperationDisplay {
 /**
  * A list of the service's callout policy objects.
  */
-model CalloutPoliciesList {
+model CalloutPoliciesList is Azure.Core.Page<CalloutPolicy>;
+
+/**
+ * A list of the service's callout policy objects for request operations.
+ */
+model CalloutPoliciesListRequest {
   /**
-   * The CalloutPolicy items on this page
+   * The CalloutPolicy items to add.
    */
+  @identifiers(#[])
   value: CalloutPolicy[];
 
   /**
-   * The link to the next page of items
+   * The link to the next page of items.
    */
-  @nextLink
   nextLink?: url;
 }
 
