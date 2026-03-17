@@ -53,7 +53,7 @@ interface SubscriptionOperationGroup {
   /**
    * Accept subscription ownership.
    */
-  @route("/providers/microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnership")
+  @route("/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnership")
   acceptOwnership(
     ...ApiVersionParameter,
     ...SubscriptionIdPathParameter,
