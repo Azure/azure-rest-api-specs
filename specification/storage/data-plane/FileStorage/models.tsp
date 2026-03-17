@@ -768,18 +768,17 @@ model CorsRule {
 /**
  * Abstract for entries that can be listed from Directory.
  */
-@Xml.name("Entries")
 model FilesAndDirectoriesListSegment {
   /** The directory items. */
   // FIXME: update this definition since paging is on the entries property
   @pageItems
   @Xml.unwrapped
-  @Xml.name("DirectoryItems")
+  @Xml.name("Directory")
   directoryItems: DirectoryItem[];
 
   /** The file items. */
   @Xml.unwrapped
-  @Xml.name("FileItems")
+  @Xml.name("File")
   fileItems: FileItem[];
 }
 
@@ -973,7 +972,7 @@ model ListFilesAndDirectoriesSegmentResponse {
   /**
    * Abstract for entries that can be listed from Directory.
    */
-  @Xml.name("Segment")
+  @Xml.name("Entries")
   segment: FilesAndDirectoriesListSegment;
 
   /** The next marker. */
