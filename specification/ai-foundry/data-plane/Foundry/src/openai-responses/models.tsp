@@ -22,6 +22,12 @@ namespace Azure.AI.Projects {
 
   @@copyProperties(OpenAI.CreateResponse,
     {
+      ...AzureCreateResponse;
+    }
+  );
+
+  /** intermediate model */
+  model AzureCreateResponse {
       /**
        * (Deprecated) Use agent_reference instead.
        *  The agent to use for generating the response.
@@ -42,8 +48,7 @@ namespace Azure.AI.Projects {
        */
       @removed(Versions.v1)
       agent_session_id?: string,
-    }
-  );
+  }
 
   @@copyProperties(OpenAI.Response,
     {
