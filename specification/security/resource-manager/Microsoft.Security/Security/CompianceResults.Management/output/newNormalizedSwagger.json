@@ -1,0 +1,160 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SecurityCenter",
+    "version": "2017-08-01",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/{scope}/providers/microsoft.Security/complianceResults": {
+      "get": {
+        "operationId": "ComplianceResults_List",
+        "tags": [
+          "ComplianceResults"
+        ],
+        "description": "Security compliance results in the subscription",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ComplianceResultList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get compliance results on subscription": {
+            "$ref": "./examples/ComplianceResults/ListComplianceResults_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Security/complianceResults/{complianceResultName}": {
+      "get": {
+        "operationId": "ComplianceResults_Get",
+        "tags": [
+          "ComplianceResults"
+        ],
+        "description": "Security Compliance Result",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "complianceResultName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ComplianceResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get compliance results on subscription": {
+            "$ref": "./examples/ComplianceResults/GetComplianceResults_example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ComplianceResult": {
+      "type": "object",
+      "description": "a compliance result",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ComplianceResultProperties",
+          "description": "Compliance result data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ComplianceResultList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ComplianceResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ComplianceResultProperties": {
+      "type": "object",
+      "description": "Compliance result data",
+      "properties": {
+        "resourceStatus": {
+          "type": "string",
+          "description": "The status of the resource regarding a single assessment",
+          "enum": [
+            "Healthy",
+            "NotApplicable",
+            "OffByPolicy",
+            "NotHealthy"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
