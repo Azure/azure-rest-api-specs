@@ -1393,6 +1393,84 @@ model PolicyExemptionUpdateProperties {
 }
 
 /**
+ * The policy enrollment properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_12_01_preview)
+model PolicyEnrollmentProperties {
+  /**
+   * The ID of the policy assignment that is being enrolled.
+   */
+  policyAssignmentId: string;
+
+  /**
+   * The policy assignment instance ID associated with this enrollment.
+   */
+  @visibility(Lifecycle.Read)
+  policyAssignmentInstanceId?: string;
+
+  /**
+   * The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
+   */
+  policyDefinitionReferenceIds?: string[];
+
+  /**
+   * The display name of the policy enrollment.
+   */
+  displayName?: string;
+
+  /**
+   * The description of the policy enrollment.
+   */
+  description?: string;
+
+  /**
+   * The policy enrollment metadata. Metadata is an open ended object and is typically a collection of key value pairs.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  metadata?: unknown;
+
+  /**
+   * The option whether validate the enrollment is at or under the assignment scope.
+   */
+  assignmentScopeValidation?: AssignmentScopeValidation;
+
+  /**
+   * The resource selector list to filter policies by resource properties.
+   */
+  @identifiers(#[])
+  resourceSelectors?: ResourceSelector[];
+}
+
+/**
+ * The policy enrollment for Patch request.
+ */
+@added(Versions.v2025_12_01_preview)
+model PolicyEnrollmentUpdate {
+  /**
+   * The policy enrollment properties for Patch request.
+   */
+  properties?: PolicyEnrollmentUpdateProperties;
+}
+
+/**
+ * The policy enrollment properties for Patch request.
+ */
+@added(Versions.v2025_12_01_preview)
+model PolicyEnrollmentUpdateProperties {
+  /**
+   * The option whether validate the enrollment is at or under the assignment scope.
+   */
+  assignmentScopeValidation?: AssignmentScopeValidation;
+
+  /**
+   * The resource selector list to filter policies by resource properties.
+   */
+  @identifiers(#[])
+  resourceSelectors?: ResourceSelector[];
+}
+
+/**
  * The variable properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"

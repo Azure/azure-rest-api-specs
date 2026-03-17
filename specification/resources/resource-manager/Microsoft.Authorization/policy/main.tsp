@@ -17,6 +17,7 @@ import "./models.tsp";
 import "./PolicyAssignment.tsp";
 import "./PolicyDefinition.tsp";
 import "./PolicyDefinitionVersion.tsp";
+import "./PolicyEnrollment.tsp";
 import "./PolicyExemption.tsp";
 import "./PolicySetDefinition.tsp";
 import "./PolicySetDefinitionVersion.tsp";
