@@ -15,7 +15,7 @@ namespace Microsoft.NetApp;
 /**
  * Information regarding Quota Item.
  */
-@renamedFrom(Versions.v2025_07_01_preview, "SubscriptionQuotaItem")
+@renamedFrom(Versions.v2025_08_01, "SubscriptionQuotaItem")
 @clientName("NetAppSubscriptionQuotaItem", "csharp")
 @parentResource(SubscriptionLocationResource)
 model QuotaItem is Azure.ResourceManager.ProxyResource<QuotaItemProperties> {
@@ -30,14 +30,14 @@ model QuotaItem is Azure.ResourceManager.ProxyResource<QuotaItemProperties> {
 /**
  * List of Quota Items
  */
-@renamedFrom(Versions.v2025_07_01_preview, "SubscriptionQuotaItemList")
+@renamedFrom(Versions.v2025_08_01, "SubscriptionQuotaItemList")
 model QuotaItemList is Azure.Core.Page<QuotaItem>;
 
 /**
  * QuotaItem Properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-@renamedFrom(Versions.v2025_07_01_preview, "SubscriptionQuotaItemProperties")
+@renamedFrom(Versions.v2025_08_01, "SubscriptionQuotaItemProperties")
 model QuotaItemProperties {
   /**
    * The current quota value.
@@ -55,7 +55,7 @@ model QuotaItemProperties {
    * The usage quota value.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2025_08_01)
   @visibility(Lifecycle.Read)
   usage?: int32 | null;
 }
@@ -104,7 +104,7 @@ alias NetAppResourceQuotaLimitsAccountOps = Azure.ResourceManager.Legacy.LegacyO
   }
 >;
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_08_01)
 @armResourceOperations
 interface NetAppResourceQuotaLimitsAccount {
   /**
