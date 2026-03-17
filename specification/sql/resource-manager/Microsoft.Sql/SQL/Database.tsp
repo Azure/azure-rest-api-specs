@@ -62,11 +62,12 @@ model Database is Azure.ResourceManager.TrackedResource<DatabaseProperties> {
   identity?: DatabaseIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Databases {
   /**
    * Gets a database.
    */
+  @tag("Databases")
   get is ArmResourceRead<
     Database,
     Parameters = {
@@ -89,6 +90,7 @@ interface Databases {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @tag("Databases")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Database,
     Response = ArmResourceUpdatedResponse<Database> | ArmResourceCreatedResponse<
@@ -101,12 +103,14 @@ interface Databases {
    * Updates an existing database.
    */
   @patch(#{ implicitOptionality: false })
+  @tag("Databases")
   update is ArmCustomPatchAsync<Database, PatchModel = DatabaseUpdate>;
 
   /**
    * Deletes the database.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("Databases")
   delete is ArmResourceDeleteWithoutOkAsync<
     Database,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -115,6 +119,7 @@ interface Databases {
   /**
    * Gets a list of databases.
    */
+  @tag("Databases")
   listByServer is ArmResourceListByParent<
     Database,
     Parameters = {
@@ -128,6 +133,7 @@ interface Databases {
    * List database columns
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseColumns")
   @operationId("DatabaseColumns_ListByDatabase")
   @list
   @get
@@ -169,6 +175,7 @@ interface Databases {
    * Revalidates an existing encryption protector for a particular database.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseEncryptionProtectorRevalidate")
   @operationId("DatabaseEncryptionProtectors_Revalidate")
   revalidate is ArmResourceActionAsync<
     Database,
@@ -188,6 +195,7 @@ interface Databases {
    * Reverts an existing encryption protector for a particular database.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseEncryptionProtectorRevert")
   @operationId("DatabaseEncryptionProtectors_Revert")
   revert is ArmResourceActionAsync<
     Database,
@@ -207,6 +215,7 @@ interface Databases {
    * Gets a list of operations performed on the database.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseOperations")
   @operationId("DatabaseOperations_ListByDatabase")
   @list
   @get
@@ -221,6 +230,7 @@ interface Databases {
    * Cancels the asynchronous operation on the database.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseOperations")
   @operationId("DatabaseOperations_Cancel")
   cancel is ArmResourceActionSync<
     Database,
@@ -241,6 +251,7 @@ interface Databases {
   /**
    * Exports a database.
    */
+  @tag("Databases")
   export is ArmResourceActionAsync<
     Database,
     ExportDatabaseDefinition,
@@ -250,6 +261,7 @@ interface Databases {
   /**
    * Failovers a database.
    */
+  @tag("Databases")
   failover is ArmResourceActionAsync<
     Database,
     void,
@@ -267,6 +279,7 @@ interface Databases {
    * Imports a bacpac into a new database.
    */
   @action("import")
+  @tag("Databases")
   importDatabase is ArmResourceActionAsync<
     Database,
     ImportExistingDatabaseDefinition,
@@ -277,21 +290,25 @@ interface Databases {
    * Renames a database.
    */
   @action("move")
+  @tag("Databases")
   rename is ArmResourceActionSync<Database, ResourceMoveDefinition, OkResponse>;
 
   /**
    * Pauses a database.
    */
+  @tag("Databases")
   pause is ArmResourceActionAsync<Database, void, Response = Database>;
 
   /**
    * Resumes a database.
    */
+  @tag("Databases")
   resume is ArmResourceActionAsync<Database, void, Response = Database>;
 
   /**
    * Upgrades a data warehouse.
    */
+  @tag("Databases")
   upgradeDataWarehouse is ArmResourceActionAsync<
     Database,
     void,
@@ -302,6 +319,7 @@ interface Databases {
    * Gets database usages.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseUsages")
   @operationId("DatabaseUsages_ListByDatabase")
   @list
   @get
@@ -316,6 +334,7 @@ interface Databases {
    * Creates a restore point for a data warehouse.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("RestorePoints")
   @operationId("RestorePoints_Create")
   @action("restorePoints")
   create is ArmResourceActionAsync<
@@ -328,6 +347,7 @@ interface Databases {
    * Gets the sensitivity labels of a given database
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SensitivityLabels")
   @operationId("SensitivityLabels_ListCurrentByDatabase")
   @list
   @get
@@ -357,6 +377,7 @@ interface Databases {
    * Update sensitivity labels of a given database using an operations batch.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SensitivityLabels")
   @operationId("SensitivityLabels_Update")
   @patch
   @action("currentSensitivityLabels")
@@ -370,6 +391,7 @@ interface Databases {
    * Gets the sensitivity labels of a given database
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SensitivityLabels")
   @operationId("SensitivityLabels_ListRecommendedByDatabase")
   @list
   @get
@@ -401,6 +423,7 @@ interface Databases {
    * Update recommended sensitivity labels states of a given database using an operations batch.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SensitivityLabels")
   @operationId("RecommendedSensitivityLabels_Update")
   @patch
   @action("recommendedSensitivityLabels")
@@ -414,6 +437,7 @@ interface Databases {
    * Gets the sensitivity labels of a given database
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SensitivityLabels")
   @operationId("SensitivityLabels_ListByDatabase")
   @list
   @get
@@ -435,6 +459,7 @@ interface Databases {
    * Gets all synapselink workspaces for a database.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SynapseLinkWorkspaces")
   @operationId("SynapseLinkWorkspaces_ListByDatabase")
   @list
   @get

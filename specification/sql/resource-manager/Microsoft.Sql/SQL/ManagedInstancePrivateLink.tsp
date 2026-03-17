@@ -25,12 +25,13 @@ model ManagedInstancePrivateLink
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ManagedInstancePrivateLinks {
   /**
    * Gets a private link resource for SQL server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedInstancePrivateLinkResources")
   @operationId("ManagedInstancePrivateLinkResources_Get")
   get is ArmResourceRead<ManagedInstancePrivateLink>;
 
@@ -38,6 +39,7 @@ interface ManagedInstancePrivateLinks {
    * Gets the private link resources for SQL server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedInstancePrivateLinkResources")
   @operationId("ManagedInstancePrivateLinkResources_ListByManagedInstance")
   listByManagedInstance is ArmResourceListByParent<ManagedInstancePrivateLink>;
 }

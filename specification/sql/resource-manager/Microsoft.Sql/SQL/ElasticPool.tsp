@@ -45,11 +45,12 @@ model ElasticPool
   kind?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ElasticPools {
   /**
    * Gets an elastic pool.
    */
+  @tag("ElasticPools")
   get is ArmResourceRead<ElasticPool>;
 
   /**
@@ -57,6 +58,7 @@ interface ElasticPools {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @tag("ElasticPools")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ElasticPool,
     Response = ArmResourceUpdatedResponse<ElasticPool> | ArmResourceCreatedResponse<
@@ -69,12 +71,14 @@ interface ElasticPools {
    * Updates an elastic pool.
    */
   @patch(#{ implicitOptionality: false })
+  @tag("ElasticPools")
   update is ArmCustomPatchAsync<ElasticPool, PatchModel = ElasticPoolUpdate>;
 
   /**
    * Deletes an elastic pool.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("ElasticPools")
   delete is ArmResourceDeleteWithoutOkAsync<
     ElasticPool,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -83,6 +87,7 @@ interface ElasticPools {
   /**
    * Gets all elastic pools in a server.
    */
+  @tag("ElasticPools")
   listByServer is ArmResourceListByParent<
     ElasticPool,
     Parameters = {
@@ -98,6 +103,7 @@ interface ElasticPools {
    * Gets a list of databases in an elastic pool.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("Databases")
   @operationId("Databases_ListByElasticPool")
   @list
   @get
@@ -112,6 +118,7 @@ interface ElasticPools {
    * Gets a list of operations performed on the elastic pool.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ElasticPoolOperations")
   @operationId("ElasticPoolOperations_ListByElasticPool")
   @list
   @get
@@ -126,6 +133,7 @@ interface ElasticPools {
    * Cancels the asynchronous operation on the elastic pool.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ElasticPoolOperations")
   @operationId("ElasticPoolOperations_Cancel")
   cancel is ArmResourceActionSync<
     ElasticPool,
@@ -146,6 +154,7 @@ interface ElasticPools {
   /**
    * Failovers an elastic pool.
    */
+  @tag("ElasticPools")
   failover is ArmResourceActionAsync<ElasticPool, void, OkResponse>;
 }
 

@@ -66,12 +66,13 @@ alias AdvisorOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Advisors {
   /**
    * Gets a database advisor.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseAdvisors")
   @operationId("DatabaseAdvisors_Get")
   get is AdvisorOps.Read<Advisor>;
 
@@ -79,6 +80,7 @@ interface Advisors {
    * Updates a database advisor.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseAdvisors")
   @operationId("DatabaseAdvisors_Update")
   @patch(#{ implicitOptionality: false })
   update is AdvisorOps.CustomPatchSync<Advisor, PatchModel = Advisor>;
@@ -87,6 +89,7 @@ interface Advisors {
    * Gets a list of database advisors.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseAdvisors")
   @operationId("DatabaseAdvisors_ListByDatabase")
   listByDatabase is AdvisorOps.List<
     Advisor,

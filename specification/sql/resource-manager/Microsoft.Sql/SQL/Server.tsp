@@ -35,11 +35,12 @@ model Server is Azure.ResourceManager.TrackedResource<ServerProperties> {
   kind?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Servers {
   /**
    * Gets a server.
    */
+  @tag("Servers")
   get is ArmResourceRead<
     Server,
     Parameters = {
@@ -55,6 +56,7 @@ interface Servers {
    * Creates or updates a server.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("Servers")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Server,
     Response = ArmResourceUpdatedResponse<Server> | ArmResourceCreatedResponse<
@@ -68,12 +70,14 @@ interface Servers {
    * Updates a server.
    */
   @patch(#{ implicitOptionality: false })
+  @tag("Servers")
   update is ArmCustomPatchAsync<Server, PatchModel = ServerUpdate>;
 
   /**
    * Deletes a server.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("Servers")
   delete is ArmResourceDeleteWithoutOkAsync<
     Server,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -82,6 +86,7 @@ interface Servers {
   /**
    * Gets a list of servers in a resource groups.
    */
+  @tag("Servers")
   listByResourceGroup is ArmResourceListByParent<
     Server,
     Parameters = {
@@ -96,6 +101,7 @@ interface Servers {
   /**
    * Gets a list of all servers in the subscription.
    */
+  @tag("Servers")
   list is ArmListBySubscription<
     Server,
     Parameters = {
@@ -111,6 +117,7 @@ interface Servers {
    * Gets a list of inaccessible databases in a logical server
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("Databases")
   @operationId("Databases_ListInaccessibleByServer")
   @list
   @get
@@ -125,6 +132,7 @@ interface Servers {
    * Replaces all firewall rules on the server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("FirewallRules")
   @operationId("FirewallRules_Replace")
   @put
   @action("firewallRules")
@@ -138,6 +146,7 @@ interface Servers {
    * Gets a list of replication links.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ReplicationLinks")
   @operationId("ReplicationLinks_ListByServer")
   @list
   @get
@@ -152,6 +161,7 @@ interface Servers {
    * Gets a list of operations performed on the server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerOperations")
   @operationId("ServerOperations_ListByServer")
   @list
   @get
@@ -165,6 +175,7 @@ interface Servers {
   /**
    * Imports a bacpac into a new database.
    */
+  @tag("Servers")
   @action("import")
   importDatabase is ArmResourceActionAsync<
     Server,
@@ -175,6 +186,7 @@ interface Servers {
   /**
    * Refresh external governance enablement status.
    */
+  @tag("Servers")
   @action("refreshExternalGovernanceStatus")
   refreshStatus is ArmResourceActionAsync<
     Server,
@@ -186,6 +198,7 @@ interface Servers {
    * Gets server usages.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerUsages")
   @operationId("ServerUsages_ListByServer")
   @list
   @get
@@ -200,6 +213,7 @@ interface Servers {
    * Creates a TDE certificate for a given server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("TdeCertificates")
   @operationId("TdeCertificates_Create")
   @action("tdeCertificates")
   create is ArmResourceActionAsync<Server, TdeCertificate, OkResponse>;

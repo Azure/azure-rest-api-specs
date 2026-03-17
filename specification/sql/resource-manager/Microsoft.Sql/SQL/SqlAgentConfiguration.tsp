@@ -26,12 +26,13 @@ model SqlAgentConfiguration
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SqlAgentConfigurations {
   /**
    * Gets current instance sql agent configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SqlAgent")
   @operationId("SqlAgent_Get")
   get is ArmResourceRead<SqlAgentConfiguration>;
 
@@ -40,6 +41,7 @@ interface SqlAgentConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("SqlAgent")
   @operationId("SqlAgent_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SqlAgentConfiguration,

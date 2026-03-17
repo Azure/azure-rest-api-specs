@@ -47,17 +47,19 @@ alias ExtendedServerBlobAuditingPolicyOps = Azure.ResourceManager.Legacy.LegacyO
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ExtendedServerBlobAuditingPolicies {
   /**
    * Gets an extended server's blob auditing policy.
    */
+  @tag("BlobAuditing")
   get is ExtendedServerBlobAuditingPolicyOps.Read<ExtendedServerBlobAuditingPolicy>;
 
   /**
    * Creates or updates an extended server's blob auditing policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("BlobAuditing")
   createOrUpdate is ExtendedServerBlobAuditingPolicyOps.CreateOrUpdateAsync<
     ExtendedServerBlobAuditingPolicy,
     Response = ArmResourceUpdatedResponse<ExtendedServerBlobAuditingPolicy> | ArmAcceptedLroResponse,
@@ -68,6 +70,7 @@ interface ExtendedServerBlobAuditingPolicies {
   /**
    * Lists extended auditing settings of a server.
    */
+  @tag("BlobAuditing")
   listByServer is ExtendedServerBlobAuditingPolicyOps.List<ExtendedServerBlobAuditingPolicy>;
 }
 

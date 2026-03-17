@@ -87,7 +87,8 @@ interface InstanceFailoverGroups {
     InstanceFailoverGroup,
     void,
     void,
-    Response = InstanceFailoverGroup
+    Response = ArmResponse<InstanceFailoverGroup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InstanceFailoverGroup> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -97,7 +98,8 @@ interface InstanceFailoverGroups {
     InstanceFailoverGroup,
     void,
     void,
-    Response = InstanceFailoverGroup
+    Response = ArmResponse<InstanceFailoverGroup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InstanceFailoverGroup> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 }
 

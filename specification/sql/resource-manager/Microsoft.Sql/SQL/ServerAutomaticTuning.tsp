@@ -26,12 +26,13 @@ model ServerAutomaticTuning
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ServerAutomaticTunings {
   /**
    * Retrieves server automatic tuning options.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerAutomaticTuning")
   @operationId("ServerAutomaticTuning_Get")
   get is ArmResourceRead<ServerAutomaticTuning>;
 
@@ -39,6 +40,7 @@ interface ServerAutomaticTunings {
    * Update automatic tuning options on server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerAutomaticTuning")
   @operationId("ServerAutomaticTuning_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<

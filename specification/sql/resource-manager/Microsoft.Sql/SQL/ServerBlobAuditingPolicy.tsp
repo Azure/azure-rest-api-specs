@@ -47,17 +47,19 @@ alias ServerBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.LegacyOperati
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ServerBlobAuditingPolicies {
   /**
    * Gets a server's blob auditing policy.
    */
+  @tag("BlobAuditing")
   get is ServerBlobAuditingPoliciesOps.Read<ServerBlobAuditingPolicy>;
 
   /**
    * Creates or updates a server's blob auditing policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("BlobAuditing")
   createOrUpdate is ServerBlobAuditingPoliciesOps.CreateOrUpdateAsync<
     ServerBlobAuditingPolicy,
     Response = ArmResourceUpdatedResponse<ServerBlobAuditingPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerBlobAuditingPolicy> &
@@ -67,6 +69,7 @@ interface ServerBlobAuditingPolicies {
   /**
    * Lists auditing settings of a server.
    */
+  @tag("BlobAuditing")
   listByServer is ArmResourceListByParent<ServerBlobAuditingPolicy>;
 }
 

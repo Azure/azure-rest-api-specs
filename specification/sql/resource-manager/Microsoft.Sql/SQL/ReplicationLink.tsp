@@ -25,17 +25,19 @@ model ReplicationLink
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ReplicationLinks {
   /**
    * Gets a replication link.
    */
+  @tag("ReplicationLinks")
   get is ArmResourceRead<ReplicationLink>;
 
   /**
    * Updates the replication link type.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("ReplicationLinks")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ReplicationLink,
     Response = ArmResourceUpdatedResponse<ReplicationLink> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationLink> &
@@ -46,6 +48,7 @@ interface ReplicationLinks {
    * Updates the replication link type.
    */
   @patch(#{ implicitOptionality: false })
+  @tag("ReplicationLinks")
   update is ArmCustomPatchAsync<
     ReplicationLink,
     PatchModel = ReplicationLinkUpdate
@@ -55,6 +58,7 @@ interface ReplicationLinks {
    * Deletes the replication link.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("ReplicationLinks")
   delete is ArmResourceDeleteWithoutOkAsync<
     ReplicationLink,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse
@@ -63,11 +67,13 @@ interface ReplicationLinks {
   /**
    * Gets a list of replication links on database.
    */
+  @tag("ReplicationLinks")
   listByDatabase is ArmResourceListByParent<ReplicationLink>;
 
   /**
    * Fails over from the current primary server to this server.
    */
+  @tag("ReplicationLinks")
   failover is ArmResourceActionAsync<
     ReplicationLink,
     void,
@@ -78,6 +84,7 @@ interface ReplicationLinks {
    * Fails over from the current primary server to this server allowing data loss.
    */
   @action("forceFailoverAllowDataLoss")
+  @tag("ReplicationLinks")
   failoverAllowDataLoss is ArmResourceActionAsync<
     ReplicationLink,
     void,

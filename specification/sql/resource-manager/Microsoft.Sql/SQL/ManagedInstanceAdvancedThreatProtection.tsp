@@ -26,12 +26,13 @@ model ManagedInstanceAdvancedThreatProtection
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ManagedInstanceAdvancedThreatProtections {
   /**
    * Get a managed instance's Advanced Threat Protection state.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedInstanceAdvancedThreatProtectionSettings")
   @operationId("ManagedInstanceAdvancedThreatProtectionSettings_Get")
   get is ArmResourceRead<ManagedInstanceAdvancedThreatProtection>;
 
@@ -40,6 +41,7 @@ interface ManagedInstanceAdvancedThreatProtections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("ManagedInstanceAdvancedThreatProtectionSettings")
   @operationId("ManagedInstanceAdvancedThreatProtectionSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstanceAdvancedThreatProtection,
@@ -51,6 +53,7 @@ interface ManagedInstanceAdvancedThreatProtections {
    * Get the managed instance's Advanced Threat Protection settings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedInstanceAdvancedThreatProtectionSettings")
   @operationId("ManagedInstanceAdvancedThreatProtectionSettings_ListByInstance")
   listByInstance is ArmResourceListByParent<ManagedInstanceAdvancedThreatProtection>;
 }

@@ -58,26 +58,30 @@ alias JobStepOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface JobSteps {
   /**
    * Gets a job step in a job's current version.
    */
+  @tag("JobSteps")
   get is JobStepOps.Read<JobStep>;
 
   /**
    * Creates or updates a job step. This will implicitly create a new job version.
    */
+  @tag("JobSteps")
   createOrUpdate is JobStepOps.CreateOrUpdateSync<JobStep>;
 
   /**
    * Deletes a job step. This will implicitly create a new job version.
    */
+  @tag("JobSteps")
   delete is JobStepOps.DeleteSync<JobStep>;
 
   /**
    * Gets all job steps for a job's current version.
    */
+  @tag("JobSteps")
   listByJob is JobStepOps.List<JobStep>;
 }
 alias JobStepOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -120,12 +124,13 @@ alias JobStepOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface JobStepOperationGroup {
   /**
    * Gets the specified version of a job step.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("JobSteps")
   @operationId("JobSteps_GetByVersion")
   getByVersion is JobStepOperationGroupOps.Read<JobStep>;
 
@@ -133,6 +138,7 @@ interface JobStepOperationGroup {
    * Gets all job steps in the specified job version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("JobSteps")
   @operationId("JobSteps_ListByVersion")
   listByVersion is JobStepOperationGroupOps.List<JobStep>;
 }

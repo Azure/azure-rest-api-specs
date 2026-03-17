@@ -26,12 +26,13 @@ model DatabaseAutomaticTuning
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DatabaseAutomaticTunings {
   /**
    * Gets a database's automatic tuning.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseAutomaticTuning")
   @operationId("DatabaseAutomaticTuning_Get")
   get is ArmResourceRead<DatabaseAutomaticTuning>;
 
@@ -39,6 +40,7 @@ interface DatabaseAutomaticTunings {
    * Update automatic tuning properties for target database.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseAutomaticTuning")
   @operationId("DatabaseAutomaticTuning_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<

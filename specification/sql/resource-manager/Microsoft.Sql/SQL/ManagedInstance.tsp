@@ -36,11 +36,12 @@ model ManagedInstance
   sku?: Sku;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ManagedInstances {
   /**
    * Gets a managed instance.
    */
+  @tag("ManagedInstances")
   get is ArmResourceRead<
     ManagedInstance,
     Parameters = {
@@ -56,6 +57,7 @@ interface ManagedInstances {
    * Creates or updates a managed instance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("ManagedInstances")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstance,
     Response = ArmResourceUpdatedResponse<ManagedInstance> | ArmResourceCreatedResponse<
@@ -69,6 +71,7 @@ interface ManagedInstances {
    * Updates a managed instance.
    */
   @patch(#{ implicitOptionality: false })
+  @tag("ManagedInstances")
   update is ArmCustomPatchAsync<
     ManagedInstance,
     PatchModel = ManagedInstanceUpdate
@@ -78,6 +81,7 @@ interface ManagedInstances {
    * Deletes a managed instance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("ManagedInstances")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedInstance,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -86,6 +90,7 @@ interface ManagedInstances {
   /**
    * Gets a list of managed instances in a resource group.
    */
+  @tag("ManagedInstances")
   listByResourceGroup is ArmResourceListByParent<
     ManagedInstance,
     Parameters = {
@@ -100,6 +105,7 @@ interface ManagedInstances {
   /**
    * Gets a list of all managed instances in the subscription.
    */
+  @tag("ManagedInstances")
   list is ArmListBySubscription<
     ManagedInstance,
     Parameters = {
@@ -115,6 +121,7 @@ interface ManagedInstances {
    * Gets a list of inaccessible managed databases in a managed instance
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabases")
   @operationId("ManagedDatabases_ListInaccessibleByInstance")
   @list
   @get
@@ -128,6 +135,7 @@ interface ManagedInstances {
   /**
    * Failovers a managed instance.
    */
+  @tag("ManagedInstances")
   failover is ArmResourceActionAsync<
     ManagedInstance,
     void,
@@ -147,6 +155,7 @@ interface ManagedInstances {
   @list
   @get
   @action("outboundNetworkDependenciesEndpoints")
+  @tag("ManagedInstances")
   listOutboundNetworkDependenciesByManagedInstance is ArmResourceActionSync<
     ManagedInstance,
     void,
@@ -156,6 +165,7 @@ interface ManagedInstances {
   /**
    * Reevaluates the inaccessibility state of all managed databases.
    */
+  @tag("ManagedInstances")
   reevaluateInaccessibleDatabaseState is ArmResourceActionAsync<
     ManagedInstance,
     void,
@@ -165,6 +175,7 @@ interface ManagedInstances {
   /**
    * Refresh external governance enablement status.
    */
+  @tag("ManagedInstances")
   @action("refreshExternalGovernanceStatus")
   refreshStatus is ArmResourceActionAsync<
     ManagedInstance,
@@ -175,6 +186,7 @@ interface ManagedInstances {
   /**
    * Starts the managed instance.
    */
+  @tag("ManagedInstances")
   start is ArmResourceActionAsync<
     ManagedInstance,
     void,
@@ -184,6 +196,7 @@ interface ManagedInstances {
   /**
    * Stops the managed instance.
    */
+  @tag("ManagedInstances")
   stop is ArmResourceActionAsync<
     ManagedInstance,
     void,
@@ -196,6 +209,7 @@ interface ManagedInstances {
   @list
   @get
   @action("topqueries")
+  @tag("ManagedInstances")
   listByManagedInstance is ArmResourceActionSync<
     ManagedInstance,
     void,
@@ -248,6 +262,7 @@ interface ManagedInstances {
   /**
    * Validates customer managed key.
    */
+  @tag("ManagedInstances")
   validateAzureKeyVaultEncryptionKey is ArmResourceActionAsync<
     ManagedInstance,
     ManagedInstanceValidateAzureKeyVaultEncryptionKeyRequest,
@@ -258,6 +273,7 @@ interface ManagedInstances {
    * Creates a TDE certificate for a given server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedInstanceTdeCertificates")
   @operationId("ManagedInstanceTdeCertificates_Create")
   @action("tdeCertificates")
   create is ArmResourceActionAsync<ManagedInstance, TdeCertificate, OkResponse>;
@@ -266,6 +282,7 @@ interface ManagedInstances {
    * Gets a server trust groups by instance name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerTrustGroups")
   @operationId("ServerTrustGroups_ListByInstance")
   @list
   @get

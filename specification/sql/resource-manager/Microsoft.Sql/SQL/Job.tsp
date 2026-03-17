@@ -24,32 +24,37 @@ model Job is Azure.ResourceManager.ProxyResource<JobProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Jobs {
   /**
    * Gets a job.
    */
+  @tag("Jobs")
   get is ArmResourceRead<Job>;
 
   /**
    * Creates or updates a job.
    */
+  @tag("Jobs")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Job>;
 
   /**
    * Deletes a job.
    */
+  @tag("Jobs")
   delete is ArmResourceDeleteSync<Job>;
 
   /**
    * Gets a list of jobs.
    */
+  @tag("Jobs")
   listByAgent is ArmResourceListByParent<Job>;
 
   /**
    * Starts an elastic job execution.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("JobExecutions")
   @operationId("JobExecutions_Create")
   @action("start")
   create is ArmResourceActionAsync<Job, void, Response = JobExecution>;

@@ -26,12 +26,13 @@ model ManagedTransparentDataEncryption
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ManagedTransparentDataEncryptions {
   /**
    * Gets a managed database's transparent data encryption.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseTransparentDataEncryption")
   @operationId("ManagedDatabaseTransparentDataEncryption_Get")
   get is ArmResourceRead<ManagedTransparentDataEncryption>;
 
@@ -39,6 +40,7 @@ interface ManagedTransparentDataEncryptions {
    * Updates a database's transparent data encryption configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseTransparentDataEncryption")
   @operationId("ManagedDatabaseTransparentDataEncryption_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ManagedTransparentDataEncryption>;
 
@@ -46,6 +48,7 @@ interface ManagedTransparentDataEncryptions {
    * Gets a list of managed database's transparent data encryptions.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseTransparentDataEncryption")
   @operationId("ManagedDatabaseTransparentDataEncryption_ListByDatabase")
   listByDatabase is ArmResourceListByParent<ManagedTransparentDataEncryption>;
 }

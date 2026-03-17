@@ -26,12 +26,13 @@ model ManagedDatabaseRestoreDetailsResult
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ManagedDatabaseRestoreDetailsResults {
   /**
    * Gets managed database restore details.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseRestoreDetails")
   @operationId("ManagedDatabaseRestoreDetails_Get")
   get is ArmResourceRead<ManagedDatabaseRestoreDetailsResult>;
 }

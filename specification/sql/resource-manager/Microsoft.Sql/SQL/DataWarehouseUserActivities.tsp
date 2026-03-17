@@ -26,12 +26,13 @@ model DataWarehouseUserActivities
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DataWarehouseUserActivitiesOperationGroup {
   /**
    * Gets the user activities of a data warehouse which includes running and suspended queries
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DataWarehouseUserActivities")
   @operationId("DataWarehouseUserActivities_Get")
   get is ArmResourceRead<DataWarehouseUserActivities>;
 
@@ -39,6 +40,7 @@ interface DataWarehouseUserActivitiesOperationGroup {
    * List the user activities of a data warehouse which includes running and suspended queries
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DataWarehouseUserActivities")
   @operationId("DataWarehouseUserActivities_ListByDatabase")
   listByDatabase is ArmResourceListByParent<DataWarehouseUserActivities>;
 }

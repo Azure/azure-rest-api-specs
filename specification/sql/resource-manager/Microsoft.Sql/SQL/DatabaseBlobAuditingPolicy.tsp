@@ -60,21 +60,24 @@ alias DatabaseBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.LegacyOpera
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DatabaseBlobAuditingPolicies {
   /**
    * Gets a database's blob auditing policy.
    */
+  @tag("BlobAuditing")
   get is DatabaseBlobAuditingPoliciesOps.Read<DatabaseBlobAuditingPolicy>;
 
   /**
    * Creates or updates a database's blob auditing policy.
    */
+  @tag("BlobAuditing")
   createOrUpdate is DatabaseBlobAuditingPoliciesOps.CreateOrUpdateSync<DatabaseBlobAuditingPolicy>;
 
   /**
    * Lists auditing settings of a database.
    */
+  @tag("BlobAuditing")
   listByDatabase is DatabaseBlobAuditingPoliciesOps.List<DatabaseBlobAuditingPolicy>;
 }
 

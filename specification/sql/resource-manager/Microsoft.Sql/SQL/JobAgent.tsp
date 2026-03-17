@@ -36,17 +36,19 @@ model JobAgent is Azure.ResourceManager.TrackedResource<JobAgentProperties> {
   identity?: JobAgentIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface JobAgents {
   /**
    * Gets a job agent.
    */
+  @tag("JobAgents")
   get is ArmResourceRead<JobAgent>;
 
   /**
    * Creates or updates a job agent.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("JobAgents")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     JobAgent,
     Response = ArmResourceUpdatedResponse<JobAgent> | ArmResourceCreatedResponse<
@@ -60,12 +62,14 @@ interface JobAgents {
    * Updates a job agent.
    */
   @patch(#{ implicitOptionality: false })
+  @tag("JobAgents")
   update is ArmCustomPatchAsync<JobAgent, PatchModel = JobAgentUpdate>;
 
   /**
    * Deletes a job agent.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("JobAgents")
   delete is ArmResourceDeleteWithoutOkAsync<
     JobAgent,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -74,12 +78,14 @@ interface JobAgents {
   /**
    * Gets a list of job agents in a server.
    */
+  @tag("JobAgents")
   listByServer is ArmResourceListByParent<JobAgent>;
 
   /**
    * Lists all executions in a job agent.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("JobExecutions")
   @operationId("JobExecutions_ListByAgent")
   @list
   @get

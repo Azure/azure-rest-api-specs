@@ -29,17 +29,19 @@ model InstancePool
   sku?: Sku;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface InstancePools {
   /**
    * Gets an instance pool.
    */
+  @tag("InstancePools")
   get is ArmResourceRead<InstancePool>;
 
   /**
    * Creates or updates an instance pool.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("InstancePools")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InstancePool,
     Response = ArmResourceUpdatedResponse<InstancePool> | ArmResourceCreatedResponse<
@@ -53,12 +55,14 @@ interface InstancePools {
    * Updates an instance pool.
    */
   @patch(#{ implicitOptionality: false })
+  @tag("InstancePools")
   update is ArmCustomPatchAsync<InstancePool, PatchModel = InstancePoolUpdate>;
 
   /**
    * Deletes an instance pool
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("InstancePools")
   delete is ArmResourceDeleteWithoutOkAsync<
     InstancePool,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -67,17 +71,20 @@ interface InstancePools {
   /**
    * Gets a list of instance pools in the resource group
    */
+  @tag("InstancePools")
   listByResourceGroup is ArmResourceListByParent<InstancePool>;
 
   /**
    * Gets a list of all instance pools in the subscription.
    */
+  @tag("InstancePools")
   list is ArmListBySubscription<InstancePool>;
 
   /**
    * Gets a list of all managed instances in an instance pool.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedInstances")
   @operationId("ManagedInstances_ListByInstancePool")
   @list
   @get
@@ -99,6 +106,7 @@ interface InstancePools {
    * Gets all instance pool usage metrics
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("Usages")
   @operationId("Usages_ListByInstancePool")
   @list
   @get

@@ -53,21 +53,24 @@ alias ExtendedDatabaseBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.Leg
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ExtendedDatabaseBlobAuditingPolicies {
   /**
    * Gets an extended database's blob auditing policy.
    */
+  @tag("BlobAuditing")
   get is ExtendedDatabaseBlobAuditingPoliciesOps.Read<ExtendedDatabaseBlobAuditingPolicy>;
 
   /**
    * Creates or updates an extended database's blob auditing policy.
    */
+  @tag("BlobAuditing")
   createOrUpdate is ExtendedDatabaseBlobAuditingPoliciesOps.CreateOrUpdateSync<ExtendedDatabaseBlobAuditingPolicy>;
 
   /**
    * Lists extended auditing settings of a database.
    */
+  @tag("BlobAuditing")
   listByDatabase is ExtendedDatabaseBlobAuditingPoliciesOps.List<ExtendedDatabaseBlobAuditingPolicy>;
 }
 

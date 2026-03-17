@@ -39,12 +39,13 @@ model RecommendedAction
   location?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface RecommendedActions {
   /**
    * Gets a database recommended action.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseRecommendedActions")
   @operationId("DatabaseRecommendedActions_Get")
   get is ArmResourceRead<RecommendedAction>;
 
@@ -52,6 +53,7 @@ interface RecommendedActions {
    * Updates a database recommended action.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseRecommendedActions")
   @operationId("DatabaseRecommendedActions_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -63,6 +65,7 @@ interface RecommendedActions {
    * Gets list of Database Recommended Actions.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseRecommendedActions")
   @operationId("DatabaseRecommendedActions_ListByDatabaseAdvisor")
   listByDatabaseAdvisor is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     RecommendedAction,

@@ -25,12 +25,13 @@ model ManagedInstanceQuery
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ManagedInstanceQueries {
   /**
    * Get query by query id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseQueries")
   @operationId("ManagedDatabaseQueries_Get")
   get is ArmResourceRead<ManagedInstanceQuery>;
 
@@ -38,6 +39,7 @@ interface ManagedInstanceQueries {
    * Get query execution statistics by query id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseQueries")
   @operationId("ManagedDatabaseQueries_ListByQuery")
   @list
   @get

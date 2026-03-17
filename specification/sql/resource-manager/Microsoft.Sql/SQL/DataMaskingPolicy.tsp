@@ -88,22 +88,25 @@ alias DataMaskingPoliciesOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface DataMaskingPolicies {
   /**
    * Gets the database data masking policy.
    */
+  @tag("DataMaskingPolicies")
   get is ArmResourceRead<DataMaskingPolicy>;
 
   /**
    * Creates or updates a database data masking policy.
    */
+  @tag("DataMaskingPolicies")
   createOrUpdate is ArmResourceCreateOrReplaceSync<DataMaskingPolicy>;
 
   /**
    * Gets a list of database data masking rules.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DataMaskingRules")
   @operationId("DataMaskingRules_ListByDatabase")
   @list
   @get
@@ -118,6 +121,7 @@ interface DataMaskingPolicies {
    * Creates or updates a database data masking rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DataMaskingRules")
   @operationId("DataMaskingRules_CreateOrUpdate")
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}")

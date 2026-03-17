@@ -26,12 +26,13 @@ model LogicalDatabaseTransparentDataEncryption
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface LogicalDatabaseTransparentDataEncryptions {
   /**
    * Gets a logical database's transparent data encryption.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("TransparentDataEncryptions")
   @operationId("TransparentDataEncryptions_Get")
   get is ArmResourceRead<LogicalDatabaseTransparentDataEncryption>;
 
@@ -40,6 +41,7 @@ interface LogicalDatabaseTransparentDataEncryptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("TransparentDataEncryptions")
   @operationId("TransparentDataEncryptions_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -54,6 +56,7 @@ interface LogicalDatabaseTransparentDataEncryptions {
    * Gets a list of the logical database's transparent data encryption.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("TransparentDataEncryptions")
   @operationId("TransparentDataEncryptions_ListByDatabase")
   listByDatabase is ArmResourceListByParent<LogicalDatabaseTransparentDataEncryption>;
 
@@ -61,6 +64,7 @@ interface LogicalDatabaseTransparentDataEncryptions {
    * Resume ongoing logical database's Transparent Data Encryption scan configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("TransparentDataEncryptions")
   @operationId("TransparentDataEncryptions_Resume")
   resume is ArmResourceActionAsync<
     LogicalDatabaseTransparentDataEncryption,
@@ -72,6 +76,7 @@ interface LogicalDatabaseTransparentDataEncryptions {
    * Suspend ongoing logical database's Transparent Data Encryption scan configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("TransparentDataEncryptions")
   @operationId("TransparentDataEncryptions_Suspend")
   suspend is ArmResourceActionAsync<
     LogicalDatabaseTransparentDataEncryption,

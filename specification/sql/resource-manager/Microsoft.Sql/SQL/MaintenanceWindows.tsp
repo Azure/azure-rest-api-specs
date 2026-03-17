@@ -26,12 +26,13 @@ model MaintenanceWindows
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MaintenanceWindowsOperationGroup {
   /**
    * Gets maintenance windows settings for a database.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("MaintenanceWindows")
   @operationId("MaintenanceWindows_Get")
   get is ArmResourceRead<
     MaintenanceWindows,
@@ -49,6 +50,7 @@ interface MaintenanceWindowsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("MaintenanceWindows")
   @operationId("MaintenanceWindows_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     MaintenanceWindows,

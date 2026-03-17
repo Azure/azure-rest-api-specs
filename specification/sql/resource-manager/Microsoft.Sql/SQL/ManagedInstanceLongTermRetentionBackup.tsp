@@ -63,12 +63,13 @@ alias ManagedInstanceLongTermRetentionBackupOps = Azure.ResourceManager.Legacy.E
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ManagedInstanceLongTermRetentionBackups {
   /**
    * Gets a long term retention backup for a managed database.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("LongTermRetentionManagedInstanceBackups")
   @operationId("LongTermRetentionManagedInstanceBackups_Get")
   get is ManagedInstanceLongTermRetentionBackupOps.Read<ManagedInstanceLongTermRetentionBackup>;
 
@@ -77,6 +78,7 @@ interface ManagedInstanceLongTermRetentionBackups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("LongTermRetentionManagedInstanceBackups")
   @operationId("LongTermRetentionManagedInstanceBackups_Delete")
   delete is ManagedInstanceLongTermRetentionBackupOps.DeleteWithoutOkAsync<
     ManagedInstanceLongTermRetentionBackup,
@@ -87,6 +89,7 @@ interface ManagedInstanceLongTermRetentionBackups {
    * Lists all long term retention backups for a managed database.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("LongTermRetentionManagedInstanceBackups")
   @operationId("LongTermRetentionManagedInstanceBackups_ListByDatabase")
   listByDatabase is ManagedInstanceLongTermRetentionBackupOps.List<
     ManagedInstanceLongTermRetentionBackup,

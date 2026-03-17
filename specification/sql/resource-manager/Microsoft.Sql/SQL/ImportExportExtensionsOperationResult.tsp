@@ -25,12 +25,13 @@ model ImportExportExtensionsOperationResult
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ImportExportExtensionsOperationResults {
   /**
    * Gets a database extension. This will return resource not found as it is not supported.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseExtensions")
   @operationId("DatabaseExtensions_Get")
   get is ArmResourceRead<
     ImportExportExtensionsOperationResult,
@@ -42,6 +43,7 @@ interface ImportExportExtensionsOperationResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("DatabaseExtensions")
   @operationId("DatabaseExtensions_CreateOrUpdate")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ImportExportExtensionsOperationResult,
@@ -55,6 +57,7 @@ interface ImportExportExtensionsOperationResults {
    * List database extension. This will return an empty list as it is not supported.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DatabaseExtensions")
   @operationId("DatabaseExtensions_ListByDatabase")
   listByDatabase is ArmResourceListByParent<
     ImportExportExtensionsOperationResult,

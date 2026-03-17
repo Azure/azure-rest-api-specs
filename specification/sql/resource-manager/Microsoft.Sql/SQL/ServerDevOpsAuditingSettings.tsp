@@ -26,11 +26,12 @@ model ServerDevOpsAuditingSettings
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ServerDevOpsAuditSettings {
   /**
    * Gets a server's DevOps audit settings.
    */
+  @tag("ServerDevOpsAudit")
   get is ArmResourceRead<ServerDevOpsAuditingSettings>;
 
   /**
@@ -38,6 +39,7 @@ interface ServerDevOpsAuditSettings {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @tag("ServerDevOpsAudit")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerDevOpsAuditingSettings,
     Response = ArmResourceUpdatedResponse<ServerDevOpsAuditingSettings> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerDevOpsAuditingSettings>>
@@ -46,6 +48,7 @@ interface ServerDevOpsAuditSettings {
   /**
    * Lists DevOps audit settings of a server.
    */
+  @tag("ServerDevOpsAudit")
   listByServer is ArmResourceListByParent<
     ServerDevOpsAuditingSettings,
     Response = ServerDevOpsAuditSettingsListResult

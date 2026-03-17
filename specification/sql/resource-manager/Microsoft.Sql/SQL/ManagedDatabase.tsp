@@ -25,17 +25,19 @@ model ManagedDatabase
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ManagedDatabases {
   /**
    * Gets a managed database.
    */
+  @tag("ManagedDatabases")
   get is ArmResourceRead<ManagedDatabase>;
 
   /**
    * Creates a new database or updates an existing database.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("ManagedDatabases")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedDatabase,
     Response = ArmResourceUpdatedResponse<ManagedDatabase> | ArmResourceCreatedResponse<
@@ -49,6 +51,7 @@ interface ManagedDatabases {
    * Updates an existing database.
    */
   @patch(#{ implicitOptionality: false })
+  @tag("ManagedDatabases")
   update is ArmCustomPatchAsync<
     ManagedDatabase,
     PatchModel = ManagedDatabaseUpdate
@@ -58,6 +61,7 @@ interface ManagedDatabases {
    * Deletes a managed database.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("ManagedDatabases")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedDatabase,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -66,12 +70,14 @@ interface ManagedDatabases {
   /**
    * Gets a list of managed databases.
    */
+  @tag("ManagedDatabases")
   listByInstance is ArmResourceListByParent<ManagedDatabase>;
 
   /**
    * List managed database columns
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseColumns")
   @operationId("ManagedDatabaseColumns_ListByDatabase")
   @list
   @get
@@ -112,6 +118,7 @@ interface ManagedDatabases {
   /**
    * Cancels a managed database move operation.
    */
+  @tag("ManagedDatabases")
   cancelMove is ArmResourceActionAsync<
     ManagedDatabase,
     ManagedDatabaseMoveDefinition,
@@ -121,6 +128,7 @@ interface ManagedDatabases {
   /**
    * Completes a managed database move operation.
    */
+  @tag("ManagedDatabases")
   completeMove is ArmResourceActionAsync<
     ManagedDatabase,
     ManagedDatabaseMoveDefinition,
@@ -130,6 +138,7 @@ interface ManagedDatabases {
   /**
    * Completes the restore operation on a managed database.
    */
+  @tag("ManagedDatabases")
   completeRestore is ArmResourceActionAsync<
     ManagedDatabase,
     CompleteDatabaseRestoreDefinition,
@@ -139,6 +148,7 @@ interface ManagedDatabases {
   /**
    * Reevaluates the inaccessibility state of a managed database.
    */
+  @tag("ManagedDatabases")
   reevaluateInaccessibleDatabaseState is ArmResourceActionAsync<
     ManagedDatabase,
     void,
@@ -148,6 +158,7 @@ interface ManagedDatabases {
   /**
    * Starts a managed database move operation.
    */
+  @tag("ManagedDatabases")
   startMove is ArmResourceActionAsync<
     ManagedDatabase,
     ManagedDatabaseStartMoveDefinition,
@@ -158,6 +169,7 @@ interface ManagedDatabases {
    * Gets a list of security events.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseSecurityEvents")
   @operationId("ManagedDatabaseSecurityEvents_ListByDatabase")
   @list
   @get
@@ -197,6 +209,7 @@ interface ManagedDatabases {
    * Gets the sensitivity labels of a given database
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseSensitivityLabels")
   @operationId("ManagedDatabaseSensitivityLabels_ListCurrentByDatabase")
   @list
   @get
@@ -226,6 +239,7 @@ interface ManagedDatabases {
    * Update sensitivity labels of a given database using an operations batch.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseSensitivityLabels")
   @operationId("ManagedDatabaseSensitivityLabels_Update")
   @patch
   @action("currentSensitivityLabels")
@@ -239,6 +253,7 @@ interface ManagedDatabases {
    * Gets the sensitivity labels of a given database
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseSensitivityLabels")
   @operationId("ManagedDatabaseSensitivityLabels_ListRecommendedByDatabase")
   @list
   @get
@@ -270,6 +285,7 @@ interface ManagedDatabases {
    * Update recommended sensitivity labels states of a given database using an operations batch.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseSensitivityLabels")
   @operationId("ManagedDatabaseRecommendedSensitivityLabels_Update")
   @patch
   @action("recommendedSensitivityLabels")
@@ -283,6 +299,7 @@ interface ManagedDatabases {
    * Gets the sensitivity labels of a given database
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ManagedDatabaseSensitivityLabels")
   @operationId("ManagedDatabaseSensitivityLabels_ListByDatabase")
   @list
   @get
