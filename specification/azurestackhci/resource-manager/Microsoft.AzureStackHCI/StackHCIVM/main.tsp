@@ -22,6 +22,7 @@ import "./VirtualNetworks.tsp";
 import "./VirtualNetworkSubnets.tsp";
 import "./PublicIPAddresses.tsp";
 import "./NatGateways.tsp";
+import "./InboundRules.tsp";
 import "./LoadBalancers.tsp";
 import "./Operations.tsp";
 
@@ -89,4 +90,9 @@ enum Versions {
    * The 2026-02-01-preview API version.
    */
   v2026_02_01_preview: "2026-02-01-preview",
+
+  /**
+   * The 2026-04-01-preview API version.
+   */
+  v2026_04_01_preview: "2026-04-01-preview",
 }
