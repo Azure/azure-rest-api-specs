@@ -27,24 +27,25 @@ model IoTSecurityAggregatedRecommendation
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface IoTSecurityAggregatedRecommendations {
   /**
    * Use this method to get the aggregated security analytics recommendation of yours IoT Security solution. This aggregation is performed by recommendation name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolutionsAnalyticsRecommendation_Get")
-  get is ArmResourceRead<IoTSecurityAggregatedRecommendation>;
+  @tag("Aggregated Recommendation")
+  get is ArmResourceRead<
+    IoTSecurityAggregatedRecommendation,
+    Error = CloudError
+  >;
 
   /**
    * Use this method to get the list of aggregated security analytics recommendations of yours IoT Security solution.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolutionsAnalyticsRecommendation_List")
+  @tag("Aggregated Recommendation")
   list is ArmResourceListByParent<
     IoTSecurityAggregatedRecommendation,
     Parameters = {
@@ -54,7 +55,8 @@ interface IoTSecurityAggregatedRecommendations {
       @query("$top")
       $top?: int32;
     },
-    Response = ArmResponse<IoTSecurityAggregatedRecommendationList>
+    Response = ArmResponse<IoTSecurityAggregatedRecommendationList>,
+    Error = CloudError
   >;
 }
 

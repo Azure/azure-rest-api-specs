@@ -3,16 +3,16 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Security;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CloudError.error);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(UpdateIotSecuritySolutionData.properties);
 
 @@clientName(DeviceSecurityGroups.createOrUpdate::parameters.resource,
   "deviceSecurityGroup"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DeviceSecurityGroup.properties);
 
 @@clientLocation(IoTSecuritySolutionAnalyticsModels.get,
@@ -21,7 +21,7 @@ using Microsoft.Security;
 @@clientLocation(IoTSecuritySolutionAnalyticsModels.list,
   "IotSecuritySolutionAnalytics"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IoTSecuritySolutionAnalyticsModel.properties);
 
 @@clientLocation(IoTSecurityAggregatedAlerts.get,
@@ -33,7 +33,7 @@ using Microsoft.Security;
 @@clientLocation(IoTSecurityAggregatedAlerts.dismiss,
   "IotSecuritySolutionsAnalyticsAggregatedAlert"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IoTSecurityAggregatedAlert.properties);
 
 @@clientLocation(IoTSecurityAggregatedRecommendations.get,
@@ -42,7 +42,7 @@ using Microsoft.Security;
 @@clientLocation(IoTSecurityAggregatedRecommendations.list,
   "IotSecuritySolutionsAnalyticsRecommendation"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IoTSecurityAggregatedRecommendation.properties);
 
 @@clientLocation(IoTSecuritySolutionModels.get, "IotSecuritySolution");
@@ -63,5 +63,5 @@ using Microsoft.Security;
 @@clientLocation(IoTSecuritySolutionModels.listBySubscription,
   "IotSecuritySolution"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IoTSecuritySolutionModel.properties);

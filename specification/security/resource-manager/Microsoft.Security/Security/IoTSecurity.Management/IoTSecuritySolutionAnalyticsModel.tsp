@@ -26,23 +26,22 @@ model IoTSecuritySolutionAnalyticsModel
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface IoTSecuritySolutionAnalyticsModels {
   /**
    * Use this method to get IoT Security Analytics metrics.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolutionAnalytics_Get")
-  get is ArmResourceRead<IoTSecuritySolutionAnalyticsModel>;
+  @tag("IoT Security Solution Analytics")
+  get is ArmResourceRead<IoTSecuritySolutionAnalyticsModel, Error = CloudError>;
 
   /**
    * Use this method to get IoT security Analytics metrics in an array.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolutionAnalytics_List")
-  list is ArmResourceListByParent<
+  @tag("IoT Security Solution Analytics")
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     IoTSecuritySolutionAnalyticsModel,
-    Response = ArmResponse<IoTSecuritySolutionAnalyticsModelList>
+    Response = ArmResponse<IoTSecuritySolutionAnalyticsModelList>,
+    Error = CloudError
   >;
 }
 

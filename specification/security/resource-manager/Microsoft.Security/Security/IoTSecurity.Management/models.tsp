@@ -71,7 +71,7 @@ union SecuritySolutionStatus {
   Disabled: "Disabled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ExportData {
   string,
 
@@ -81,7 +81,7 @@ union ExportData {
   RawEvents: "RawEvents",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union DataSource {
   string,
 
@@ -276,7 +276,7 @@ model DeviceSecurityGroupList is Azure.Core.Page<DeviceSecurityGroup>;
 /**
  * describes properties of a security group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DeviceSecurityGroupProperties {
   /**
    * The list of custom alert threshold rules.
@@ -418,6 +418,8 @@ model Resource {
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 @error
 model CloudError {
   /**
@@ -429,6 +431,8 @@ model CloudError {
 /**
  * The error detail.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * The error code.
@@ -487,7 +491,7 @@ model IoTSecuritySolutionAnalyticsModelList
 /**
  * Security analytics properties of your IoT Security solution
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecuritySolutionAnalyticsModelProperties {
   /**
    * Security analytics of your IoT Security solution.
@@ -543,7 +547,7 @@ model IoTSeverityMetrics {
   low?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecuritySolutionAnalyticsModelPropertiesDevicesMetricsItem {
   /**
    * Aggregation of IoT Security solution device alert metrics by date.
@@ -629,7 +633,7 @@ model IoTSecurityAggregatedAlertList
 /**
  * IoT Security solution aggregated alert details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecurityAggregatedAlertProperties {
   /**
    * Name of the alert type.
@@ -710,7 +714,7 @@ model IoTSecurityAggregatedAlertProperties {
   topDevicesList?: IoTSecurityAggregatedAlertPropertiesTopDevicesListItem[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecurityAggregatedAlertPropertiesTopDevicesListItem {
   /**
    * Name of the device.
@@ -738,14 +742,14 @@ model TagsResource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * IoT Security solution aggregated recommendation information
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecurityAggregatedRecommendationProperties {
   /**
    * Name of the recommendation.
@@ -821,7 +825,7 @@ model IoTSecuritySolutionsList is Azure.Core.Page<IoTSecuritySolutionModel>;
 /**
  * Security Solution setting data
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecuritySolutionProperties {
   /**
    * Workspace resource ID
@@ -887,12 +891,14 @@ model UserDefinedResourcesProperties {
   /**
    * Azure Resource Graph query which represents the security solution's user defined resources. Required to start with "where type != "Microsoft.Devices/IotHubs""
    */
-  query: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  query: string | null;
 
   /**
    * List of Azure subscription ids on which the user defined resources query should be executed.
    */
-  querySubscriptions: string[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  querySubscriptions: string[] | null;
 }
 
 /**
@@ -904,7 +910,7 @@ model RecommendationConfigurationProperties {
    */
   recommendationType: RecommendationType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   name?: string;
 
@@ -934,8 +940,8 @@ model AdditionalWorkspacesProperties {
   dataTypes?: AdditionalWorkspaceDataType[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UpdateIotSecuritySolutionData extends TagsResource {
   /**
    * Security Solution data

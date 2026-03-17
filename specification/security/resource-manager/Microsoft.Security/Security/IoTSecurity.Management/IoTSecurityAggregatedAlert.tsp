@@ -27,24 +27,22 @@ model IoTSecurityAggregatedAlert
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface IoTSecurityAggregatedAlerts {
   /**
    * Use this method to get a single the aggregated alert of yours IoT Security solution. This aggregation is performed by alert name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolutionsAnalyticsAggregatedAlert_Get")
-  get is ArmResourceRead<IoTSecurityAggregatedAlert>;
+  @tag("Aggregated Alert")
+  get is ArmResourceRead<IoTSecurityAggregatedAlert, Error = CloudError>;
 
   /**
    * Use this method to get the aggregated alert list of yours IoT Security solution.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolutionsAnalyticsAggregatedAlert_List")
+  @tag("Aggregated Alert")
   list is ArmResourceListByParent<
     IoTSecurityAggregatedAlert,
     Parameters = {
@@ -54,18 +52,19 @@ interface IoTSecurityAggregatedAlerts {
       @query("$top")
       $top?: int32;
     },
-    Response = ArmResponse<IoTSecurityAggregatedAlertList>
+    Response = ArmResponse<IoTSecurityAggregatedAlertList>,
+    Error = CloudError
   >;
 
   /**
    * Use this method to dismiss an aggregated IoT Security Solution Alert.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolutionsAnalyticsAggregatedAlert_Dismiss")
+  @tag("Aggregated Alert")
   dismiss is ArmResourceActionSync<
     IoTSecurityAggregatedAlert,
     void,
-    OkResponse
+    OkResponse,
+    Error = CloudError
   >;
 }
 

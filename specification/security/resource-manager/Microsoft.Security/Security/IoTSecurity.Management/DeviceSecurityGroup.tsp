@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * The device security group resource
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model DeviceSecurityGroup
   is Azure.ResourceManager.ExtensionResource<DeviceSecurityGroupProperties> {
@@ -29,20 +30,29 @@ interface DeviceSecurityGroups {
   /**
    * Use this method to get the device security group for the specified IoT Hub resource.
    */
-  get is Extension.Read<Extension.ScopeParameter, DeviceSecurityGroup>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    DeviceSecurityGroup,
+    Error = CloudError
+  >;
 
   /**
    * Use this method to creates or updates the device security group on a specified IoT Hub resource.
    */
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
-    DeviceSecurityGroup
+    DeviceSecurityGroup,
+    Error = CloudError
   >;
 
   /**
    * User this method to deletes the device security group.
    */
-  delete is Extension.DeleteSync<Extension.ScopeParameter, DeviceSecurityGroup>;
+  delete is Extension.DeleteSync<
+    Extension.ScopeParameter,
+    DeviceSecurityGroup,
+    Error = CloudError
+  >;
 
   /**
    * Use this method get the list of device security groups for the specified IoT Hub resource.
@@ -50,7 +60,8 @@ interface DeviceSecurityGroups {
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     DeviceSecurityGroup,
-    Response = ArmResponse<DeviceSecurityGroupList>
+    Response = ArmResponse<DeviceSecurityGroupList>,
+    Error = CloudError
   >;
 }
 
@@ -61,3 +72,4 @@ interface DeviceSecurityGroups {
 @@doc(DeviceSecurityGroups.createOrUpdate::parameters.resource,
   "Security group object."
 );
+@@key(Azure.ResourceManager.Extension.ScopeParameter.scope, "resourceId");

@@ -23,45 +23,44 @@ model IoTSecuritySolutionModel
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface IoTSecuritySolutionModels {
   /**
    * User this method to get details of a specific IoT Security solution based on solution name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolution_Get")
-  get is ArmResourceRead<IoTSecuritySolutionModel>;
+  @tag("IoT Security Solution")
+  get is ArmResourceRead<IoTSecuritySolutionModel, Error = CloudError>;
 
   /**
    * Use this method to create or update yours IoT Security solution
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolution_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<IoTSecuritySolutionModel>;
+  @tag("IoT Security Solution")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    IoTSecuritySolutionModel,
+    Error = CloudError
+  >;
 
   /**
    * Use this method to update existing IoT Security solution tags or user defined resources. To update other fields use the CreateOrUpdate method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolution_Update")
+  @tag("IoT Security Solution")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     IoTSecuritySolutionModel,
-    PatchModel = UpdateIotSecuritySolutionData
+    PatchModel = UpdateIotSecuritySolutionData,
+    Error = CloudError
   >;
 
   /**
    * Use this method to delete yours IoT Security solution
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolution_Delete")
-  delete is ArmResourceDeleteSync<IoTSecuritySolutionModel>;
+  @tag("IoT Security Solution")
+  delete is ArmResourceDeleteSync<IoTSecuritySolutionModel, Error = CloudError>;
 
   /**
    * Use this method to get the list IoT Security solutions organized by resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolution_ListByResourceGroup")
+  @tag("IoT Security Solution")
   listByResourceGroup is ArmResourceListByParent<
     IoTSecuritySolutionModel,
     Parameters = {
@@ -71,14 +70,14 @@ interface IoTSecuritySolutionModels {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<IoTSecuritySolutionsList>
+    Response = ArmResponse<IoTSecuritySolutionsList>,
+    Error = CloudError
   >;
 
   /**
    * Use this method to get the list of IoT Security solutions by subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotSecuritySolution_ListBySubscription")
+  @tag("IoT Security Solution")
   listBySubscription is ArmListBySubscription<
     IoTSecuritySolutionModel,
     Parameters = {
@@ -88,7 +87,8 @@ interface IoTSecuritySolutionModels {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<IoTSecuritySolutionsList>
+    Response = ArmResponse<IoTSecuritySolutionsList>,
+    Error = CloudError
   >;
 }
 
