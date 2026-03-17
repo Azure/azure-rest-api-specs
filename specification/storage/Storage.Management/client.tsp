@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.Storage;
 
@@ -215,6 +216,10 @@ using Microsoft.Storage;
 @@clientName(TableSignedIdentifier, "StorageTableSignedIdentifier", "csharp");
 @@clientName(StorageTaskAssignmentUpdateProperties,
   "StorageTaskAssignmentPatchProperties",
+  "csharp"
+);
+@@clientName(StorageTaskAssignmentUpdateParameters,
+  "StorageTaskAssignmentPatch",
   "csharp"
 );
 @@clientName(UsageName, "StorageUsageName", "csharp");
@@ -610,7 +615,12 @@ namespace Azure.ResourceManager.Models {
 // BlobInventoryPolicy property rename
 @@clientName(BlobInventoryPolicyProperties.policy, "PolicySchema", "csharp");
 
-// PrivateEndpointConnection property rename
+// PrivateEndpointConnection property renames
+@@clientName(PrivateEndpointConnectionProperties,
+  "StoragePrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@access(PrivateEndpointConnectionProperties, Access.public, "csharp");
 @@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
@@ -662,7 +672,7 @@ namespace Azure.ResourceManager.Models {
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(NetworkSecurityPerimeter.id, armResourceIdentifier, "csharp");
+// NetworkSecurityPerimeter.id stays as string for C# backward compat (old API had string Id)
 
 // @@alternateType for Guid properties
 @@alternateType(NetworkSecurityPerimeter.perimeterGuid, uuid, "csharp");
@@ -783,5 +793,147 @@ namespace Azure.ResourceManager.Models {
 @@alternateType(
   DeletedAccountProperties.location,
   Azure.Core.azureLocation,
+  "csharp"
+);
+
+// ===== C# backward-compat fixes for MPG migration =====
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(StorageTaskAssignment, Azure.ResourceManager.CommonTypes.ProxyResource, "csharp");
+
+
+
+// Fix ETag type on resource envelope properties (old SDK had ETag?)
+@@alternateType(BlobContainer.etag, Azure.Core.eTag, "csharp");
+@@alternateType(FileShare.etag, Azure.Core.eTag, "csharp");
+@@alternateType(ImmutabilityPolicy.etag, Azure.Core.eTag, "csharp");
+// ImmutabilityPolicyProperties (renamed to BlobContainerImmutabilityPolicy) has its own etag
+@@alternateType(ImmutabilityPolicyProperties.etag, Azure.Core.eTag, "csharp");
+
+// Fix Identity type: old SDK used ManagedServiceIdentity from ARM common types
+@@alternateType(
+  StorageAccount.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  StorageAccountCreateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  StorageAccountUpdateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+// Fix ExtendedLocation type: old SDK used ExtendedLocation from ARM common types
+@@alternateType(
+  StorageAccount.extendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(
+  StorageAccountCreateParameters.extendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
+  "csharp"
+);
+
+// Fix IPRule/VirtualNetworkRule Action type: old SDK had StorageAccountNetworkRuleAction?
+@@clientName(Action, "StorageAccountNetworkRuleAction", "csharp");
+@@alternateType(IPRule.action, Action, "csharp");
+@@alternateType(VirtualNetworkRule.action, Action, "csharp");
+
+// Fix StorageTaskReportProperties date types: old SDK had DateTimeOffset?
+@@alternateType(StorageTaskReportProperties.startTime, utcDateTime, "csharp");
+@@alternateType(StorageTaskReportProperties.finishTime, utcDateTime, "csharp");
+
+// Fix UpdateHistoryEntry.TenantId: old SDK had Guid?
+@@alternateType(UpdateHistoryProperty.tenantId, uuid, "csharp");
+
+// Fix GetKeys/RegenerateKey: old SDK returned Pageable<StorageAccountKey>
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
+@@markAsPageable(StorageAccounts.listKeys, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
+@@markAsPageable(StorageAccounts.regenerateKey, "csharp");
+
+// @@clientName for enum value backward compatibility (old GA used PascalCase C# conventions)
+
+// CorsRuleAllowedMethod: UPPERCASE -> PascalCase
+@@clientName(AllowedMethods.DELETE, "Delete", "csharp");
+@@clientName(AllowedMethods.GET, "Get", "csharp");
+@@clientName(AllowedMethods.HEAD, "Head", "csharp");
+@@clientName(AllowedMethods.MERGE, "Merge", "csharp");
+@@clientName(AllowedMethods.POST, "Post", "csharp");
+@@clientName(AllowedMethods.OPTIONS, "Options", "csharp");
+@@clientName(AllowedMethods.PUT, "Put", "csharp");
+@@clientName(AllowedMethods.PATCH, "Patch", "csharp");
+@@clientName(AllowedMethods.CONNECT, "Connect", "csharp");
+@@clientName(AllowedMethods.TRACE, "Trace", "csharp");
+
+// SkuName (StorageSkuName): Remove underscores
+@@clientName(SkuName.Standard_LRS, "StandardLrs", "csharp");
+@@clientName(SkuName.Standard_GRS, "StandardGrs", "csharp");
+@@clientName(SkuName.Standard_RAGRS, "StandardRagrs", "csharp");
+@@clientName(SkuName.Standard_ZRS, "StandardZrs", "csharp");
+@@clientName(SkuName.Premium_LRS, "PremiumLrs", "csharp");
+@@clientName(SkuName.Premium_ZRS, "PremiumZrs", "csharp");
+@@clientName(SkuName.Standard_GZRS, "StandardGzrs", "csharp");
+@@clientName(SkuName.Standard_RAGZRS, "StandardRagzrs", "csharp");
+@@clientName(SkuName.StandardV2_LRS, "StandardV2Lrs", "csharp");
+@@clientName(SkuName.StandardV2_GRS, "StandardV2Grs", "csharp");
+@@clientName(SkuName.StandardV2_ZRS, "StandardV2Zrs", "csharp");
+@@clientName(SkuName.StandardV2_GZRS, "StandardV2Gzrs", "csharp");
+@@clientName(SkuName.PremiumV2_LRS, "PremiumV2Lrs", "csharp");
+@@clientName(SkuName.PremiumV2_ZRS, "PremiumV2Zrs", "csharp");
+
+// DefaultSharePermission: Shorten verbose names
+@@clientName(DefaultSharePermission.StorageFileDataSmbShareContributor, "Contributor", "csharp");
+@@clientName(DefaultSharePermission.StorageFileDataSmbShareElevatedContributor, "ElevatedContributor", "csharp");
+@@clientName(DefaultSharePermission.StorageFileDataSmbShareReader, "Reader", "csharp");
+
+// DirectoryServiceOptions: Fix acronym casing
+@@clientName(DirectoryServiceOptions.AADDS, "Aadds", "csharp");
+@@clientName(DirectoryServiceOptions.AADKERB, "Aadkerb", "csharp");
+
+// EncryptionScopeSource: Shorten dotted names
+@@clientName(EncryptionScopeSource.`Microsoft.KeyVault`, "KeyVault", "csharp");
+@@clientName(EncryptionScopeSource.`Microsoft.Storage`, "Storage", "csharp");
+
+// EnabledProtocols (FileShareEnabledProtocol): Fix acronym casing
+@@clientName(EnabledProtocols.SMB, "Smb", "csharp");
+@@clientName(EnabledProtocols.NFS, "Nfs", "csharp");
+
+// PostFailoverRedundancy: Remove underscores
+@@clientName(PostFailoverRedundancy.Standard_LRS, "StandardLrs", "csharp");
+@@clientName(PostFailoverRedundancy.Standard_ZRS, "StandardZrs", "csharp");
+
+// PostPlannedFailoverRedundancy: Remove underscores
+@@clientName(PostPlannedFailoverRedundancy.Standard_GRS, "StandardGrs", "csharp");
+@@clientName(PostPlannedFailoverRedundancy.Standard_GZRS, "StandardGzrs", "csharp");
+@@clientName(PostPlannedFailoverRedundancy.Standard_RAGRS, "StandardRagrs", "csharp");
+@@clientName(PostPlannedFailoverRedundancy.Standard_RAGZRS, "StandardRagzrs", "csharp");
+
+// SignedResource (ServiceSasSignedResourceType): Single-letter -> descriptive names
+@@clientName(SignedResource.b, "Blob", "csharp");
+@@clientName(SignedResource.c, "Container", "csharp");
+@@clientName(SignedResource.f, "File", "csharp");
+@@clientName(SignedResource.s, "Share", "csharp");
+
+// KeySource (StorageAccountKeySource): Shorten dotted names
+@@clientName(KeySource.`Microsoft.Keyvault`, "KeyVault", "csharp");
+@@clientName(KeySource.`Microsoft.Storage`, "Storage", "csharp");
+
+// Fix ProvisioningState.ResolvingDNS casing to match prior GA (ResolvingDns)
+@@clientName(ProvisioningState.ResolvingDNS, "ResolvingDns", "csharp");
+
+// Fix Action.ALLOW casing to match prior GA (Allow)
+@@clientName(Action.ALLOW, "Allow", "csharp");
+
+// Fix CheckNameAvailabilityParameters.type to Azure.Core.ResourceType
+@@alternateType(
+  StorageAccountCheckNameAvailabilityParameters.type,
+  Azure.Core.ResourceType,
   "csharp"
 );
