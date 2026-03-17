@@ -547,10 +547,6 @@ using Http;
   "etag",
   "java"
 );
-@@clientName(Microsoft.RecoveryServices.BackupResourceEncryptionConfigResource.eTag,
-  "etag",
-  "java"
-);
 @@clientName(Microsoft.RecoveryServices.BackupResourceVaultConfigResource.eTag,
   "etag",
   "java"
@@ -869,8 +865,8 @@ op backupResourceEncryptionConfigsUpdate(
   name: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: BackupResourceEncryptionConfigResource,
-): ArmResponse<BackupResourceEncryptionConfig>;
+  parameters: BackupResourceEncryptionConfigExtendedResource,
+): ArmResponse<BackupResourceEncryptionConfigExtended>;
 
 @@override(BackupResourceEncryptionConfigs.update,
   backupResourceEncryptionConfigsUpdate,

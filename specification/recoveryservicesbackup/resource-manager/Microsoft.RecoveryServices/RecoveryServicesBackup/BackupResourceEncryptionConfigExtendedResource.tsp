@@ -58,16 +58,3 @@ interface BackupResourceEncryptionConfigs {
 @@doc(BackupResourceEncryptionConfigs.update::parameters.resource,
   "Vault encryption input config request"
 );
-
-// Keep BackupResourceEncryptionConfigResource as a non-ARM model for Java/Go/Python override compatibility
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "non-ARM body model for update override"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
-@doc("")
-model BackupResourceEncryptionConfigResource
-  is TrackedResourceWithOptionalLocation<BackupResourceEncryptionConfig> {
-  /**
-   * Optional ETag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "non-ARM body model"
-  eTag?: string;
-}
