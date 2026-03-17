@@ -47,9 +47,14 @@ alias AdvancedThreatProtectionSettingOps = Azure.ResourceManager.Legacy.Extensio
     @path
     @segment("advancedThreatProtectionSettings")
     @key
-    settingName: "current";
+    settingName: AdvancedThreatProtectionSettingName;
   }
 >;
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum AdvancedThreatProtectionSettingName {
+  current,
+}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })

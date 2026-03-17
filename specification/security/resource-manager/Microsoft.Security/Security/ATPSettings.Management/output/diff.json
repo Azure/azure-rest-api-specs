@@ -1,177 +1,70 @@
 {
   "paths": {
-    "/{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/{settingName}__deleted": {
+    "/{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/{settingName}": {
       "get": {
-        "operationId": "AdvancedThreatProtection_Get",
-        "tags": [
-          "AdvancedThreatProtection"
-        ],
-        "description": "Gets the Advanced Threat Protection settings for the specified resource.",
         "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "settingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "AdvancedThreatProtectionSettingName",
-              "modelAsString": false
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
             }
-          }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AdvancedThreatProtectionSetting"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the Advanced Threat Protection settings for the specified resource.": {
-            "$ref": "./examples/AdvancedThreatProtection/GetAdvancedThreatProtectionSettings_example.json"
           }
         }
       },
       "put": {
-        "operationId": "AdvancedThreatProtection_Create",
-        "tags": [
-          "AdvancedThreatProtection"
-        ],
-        "description": "Creates or updates the Advanced Threat Protection settings on a specified resource.",
         "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "settingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "AdvancedThreatProtectionSettingName",
-              "modelAsString": false
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
             }
-          },
-          {
-            "name": "advancedThreatProtectionSetting",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AdvancedThreatProtectionSetting"
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string"
             }
-          }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AdvancedThreatProtectionSetting"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates or updates the Advanced Threat Protection settings on a specified resource.": {
-            "$ref": "./examples/AdvancedThreatProtection/PutAdvancedThreatProtectionSettings_example.json"
-          }
-        }
-      }
-    },
-    "/{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/current__added": {
-      "get": {
-        "operationId": "AdvancedThreatProtection_Get",
-        "tags": [
-          "AdvancedThreatProtection"
-        ],
-        "description": "Gets the Advanced Threat Protection settings for the specified resource.",
-        "parameters": [
-          {
-            "name": "resourceId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AdvancedThreatProtectionSetting"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the Advanced Threat Protection settings for the specified resource.": {
-            "$ref": "./examples/AdvancedThreatProtection/GetAdvancedThreatProtectionSettings_example.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "AdvancedThreatProtection_Create",
-        "tags": [
-          "AdvancedThreatProtection"
-        ],
-        "description": "Creates or updates the Advanced Threat Protection settings on a specified resource.",
-        "parameters": [
-          {
-            "name": "resourceId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "advancedThreatProtectionSetting",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AdvancedThreatProtectionSetting"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AdvancedThreatProtectionSetting"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creates or updates the Advanced Threat Protection settings on a specified resource.": {
-            "$ref": "./examples/AdvancedThreatProtection/PutAdvancedThreatProtectionSettings_example.json"
           }
         }
       }

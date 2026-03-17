@@ -12,7 +12,7 @@
     "application/json"
   ],
   "paths": {
-    "/{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/current": {
+    "/{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/{settingName}": {
       "get": {
         "operationId": "AdvancedThreatProtection_Get",
         "tags": [
@@ -25,6 +25,19 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "settingName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "AdvancedThreatProtectionSettingName",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -59,6 +72,19 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "settingName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "AdvancedThreatProtectionSettingName",
+              "modelAsString": false
+            }
           },
           {
             "name": "advancedThreatProtectionSetting",

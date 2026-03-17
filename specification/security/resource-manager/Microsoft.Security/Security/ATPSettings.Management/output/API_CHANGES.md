@@ -1,24 +1,4 @@
-## Changed Paths
-
-Path: /{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/{settingName}
-Change Type: deleted
-
-Path: /{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/current
-Change Type: added
-
 ## Swagger Changes
-
-### Changes for `/{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/{settingName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/{settingName}__deleted']` | deleted | `{"get":{"operationId":"AdvancedThreatProtection_Get","tags":["AdvancedThreatProtection"],"descriptio...` |
-
-### Changes for `/{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/current`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/current__added']` | added | `{"get":{"operationId":"AdvancedThreatProtection_Get","tags":["AdvancedThreatProtection"],"descriptio...` |
 
 ### Changes for `CloudError`
 
@@ -49,4 +29,6 @@ Change Type: added
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.AdvancedThreatProtectionSetting.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `paths['/{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/{settingName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{resourceId}/providers/microsoft.Security/advancedThreatProtectionSettings/{settingName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 

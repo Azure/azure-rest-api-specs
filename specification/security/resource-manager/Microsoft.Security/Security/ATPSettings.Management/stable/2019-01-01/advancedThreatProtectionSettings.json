@@ -44,7 +44,7 @@
     }
   ],
   "paths": {
-    "/{resourceId}/providers/Microsoft.Security/advancedThreatProtectionSettings/current": {
+    "/{resourceId}/providers/Microsoft.Security/advancedThreatProtectionSettings/{settingName}": {
       "get": {
         "operationId": "AdvancedThreatProtection_Get",
         "tags": [
@@ -61,6 +61,20 @@
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "settingName",
+            "in": "path",
+            "description": "Advanced Threat Protection setting name.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "AdvancedThreatProtectionSettingName",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -99,6 +113,20 @@
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "settingName",
+            "in": "path",
+            "description": "Advanced Threat Protection setting name.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "AdvancedThreatProtectionSettingName",
+              "modelAsString": false
+            }
           },
           {
             "name": "advancedThreatProtectionSetting",
