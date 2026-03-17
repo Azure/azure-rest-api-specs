@@ -21,14 +21,17 @@ namespace Microsoft.ResourceGraph;
 
 @@clientName(ResourceHistory.DateTimeInterval,
   "ResourceHistoryDateTimeInterval",
-  "java,python"
+  "java,python,javascript"
 );
 @@clientName(ResourceHistory.ErrorResponse,
   "ResourceHistoryErrorResponse",
-  "java,python"
+  "java,python,javascript"
 );
-@@clientName(ResourceHistory.Error, "ResourceHistoryError", "java,python");
+@@clientName(ResourceHistory.Error,
+  "ResourceHistoryError",
+  "java,python,javascript"
+);
 @@clientName(ResourceHistory.ErrorDetails,
   "ResourceHistoryErrorDetails",
-  "java,python"
+  "java,python,javascript"
 );
