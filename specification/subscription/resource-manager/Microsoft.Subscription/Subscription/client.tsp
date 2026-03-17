@@ -32,6 +32,11 @@ namespace Microsoft.Subscription;
 @@clientLocation(SubscriptionOperationGroup.cancel, "Subscriptions", "java");
 @@clientLocation(SubscriptionOperationGroup.rename, "Subscriptions", "java");
 @@clientLocation(SubscriptionOperationGroup.enable, "Subscriptions", "java");
-@@clientLocation(SubscriptionOperationGroup.acceptOwnership, "Subscriptions", "java");
-@@clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus, "Subscriptions", "java");
+@@clientLocation(SubscriptionOperationGroup.acceptOwnership,
+  "Subscriptions",
+  "java"
+);
+@@clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus,
+  "Subscriptions",
+  "java"
 );
