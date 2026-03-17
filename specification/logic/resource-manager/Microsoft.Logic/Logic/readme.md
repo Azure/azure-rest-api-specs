@@ -46,10 +46,6 @@ These settings apply only when `--tag=package-2026-04-preview` is specified on t
 ``` yaml $(tag) == 'package-2026-04-preview'
 input-file:
 - preview/2026-04-01-preview/automationproject.json
-suppressions:
-  - code: ProvisioningStateMustBeReadOnly
-    from: automationproject.json
-    reason: "provisioningState is already marked readOnly via @visibility(Lifecycle.Read) in TypeSpec. This is a known false positive in the linter."
 ```
 
 ### Tag: package-2019-05
