@@ -1,8 +1,11 @@
 {
   "parameters": {
     "api-version": "2026-04-01",
-    "extensionTypeName": "extensionType1",
-    "location": "westus2",
+    "clusterName": "my-cluster",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
+    "extensionTypeName": "my-extension-type",
+    "resourceGroupName": "rg1",
     "subscriptionId": "subId1"
   },
   "responses": {
@@ -17,9 +20,9 @@
           "isManagedIdentityRequired": true,
           "isSystemExtension": false,
           "planInfo": {
-            "offerId": "myOfferId",
-            "planId": "myPlanId",
-            "publisherId": "myPublisherId"
+            "offerId": "3333333",
+            "planId": "222222",
+            "publisherId": "111111"
           },
           "publisher": "Microsoft",
           "supportedClusterTypes": [
@@ -42,8 +45,6 @@
       "headers": {}
     }
   },
-  "operationId": "ExtensionTypes_LocationGet",
-  "title": "Get Extension Type"
+  "operationId": "ExtensionTypes_Get",
+  "title": "Get Extension Types"
 }
-
-
