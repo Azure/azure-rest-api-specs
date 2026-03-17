@@ -26,6 +26,10 @@ using Microsoft.NetworkFunction;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(AzureTrafficCollectorPropertiesFormat.collectorPolicies,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
 @@alternateType(AzureTrafficCollector, AzureTrafficCollectorData, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AzureTrafficCollectorData.properties);
@@ -84,5 +88,14 @@ namespace Microsoft.NetworkFunction {
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @visibility(Lifecycle.Read)
     etag?: Azure.Core.eTag;
+  }
+}
+
+// We add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** Represents a reference to an existing resource by its id. */
+  model SubResource {
+    /** The resource id. */
+    id?: Azure.Core.armResourceIdentifier;
   }
 }
