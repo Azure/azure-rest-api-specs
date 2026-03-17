@@ -53,14 +53,17 @@ interface SubscriptionOperationGroup {
   /**
    * Accept subscription ownership.
    */
-  @autoRoute
-  acceptOwnership is ArmProviderActionAsync<
-    Request = AcceptOwnershipRequest,
-    Parameters = {
-      ...SubscriptionIdPathParameter;
-    },
-    Response = ArmAcceptedResponse & ArmLroLocationHeader
-  >;
+  @route("/providers/microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnership")
+  acceptOwnership(
+    ...ApiVersionParameter,
+    ...SubscriptionIdPathParameter,
+
+    /**
+     * The request body
+     */
+    @body requestbodyBody: AcceptOwnershipRequest,
+  ): ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    Azure.Core.Foundations.RetryAfterHeader>;
   /**
    * Accept subscription ownership status.
    */
@@ -105,7 +108,7 @@ interface SubscriptionsOperationGroup {
   @autoRoute
   @action("acceptChangeTenant")
   acceptTargetDirectory is ArmProviderActionSync<Parameters = {
-    ...SubscriptionIdParameter;
+    ...SubscriptionIdPathParameter;
   }>;
   /**
    * The operation for Acceptor to view the accepted request
@@ -115,7 +118,7 @@ interface SubscriptionsOperationGroup {
   targetDirectoryStatus is ArmProviderActionSync<
     Response = TargetDirectoryResultProperties,
     Parameters = {
-      ...SubscriptionIdParameter;
+      ...SubscriptionIdPathParameter;
     }
   >;
 }

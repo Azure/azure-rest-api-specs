@@ -448,7 +448,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdPathParameter"
           }
         ],
         "responses": {
@@ -467,60 +467,6 @@
             "$ref": "./examples/acceptTargetDirectory.json"
           }
         }
-      }
-    },
-    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnership": {
-      "post": {
-        "operationId": "Subscription_AcceptOwnership",
-        "description": "Accept subscription ownership.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdPathParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AcceptOwnershipRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AcceptOwnership": {
-            "$ref": "./examples/acceptSubscriptionOwnership.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnershipStatus": {
@@ -565,7 +511,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdPathParameter"
           }
         ],
         "responses": {
@@ -587,6 +533,54 @@
             "$ref": "./examples/targetDirectoryStatus.json"
           }
         }
+      }
+    },
+    "/providers/microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnership": {
+      "post": {
+        "operationId": "Subscription_AcceptOwnership",
+        "description": "Accept subscription ownership.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdPathParameter"
+          },
+          {
+            "name": "requestbodyBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AcceptOwnershipRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AcceptOwnership": {
+            "$ref": "./examples/acceptSubscriptionOwnership.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel": {

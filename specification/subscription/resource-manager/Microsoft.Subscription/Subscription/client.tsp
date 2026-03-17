@@ -29,14 +29,15 @@ namespace Microsoft.Subscription;
   SubscriptionsOperationGroup.targetDirectoryStatus
 );
 
-@@clientLocation(SubscriptionOperationGroup.cancel, "Subscriptions", "java");
-@@clientLocation(SubscriptionOperationGroup.rename, "Subscriptions", "java");
-@@clientLocation(SubscriptionOperationGroup.enable, "Subscriptions", "java");
-@@clientLocation(SubscriptionOperationGroup.acceptOwnership,
-  "Subscriptions",
-  "java"
+@@Azure.ClientGenerator.Core.clientLocation(GetTargetDirectoryBaseParameters.subscriptionId,
+  TargetDirectoryResults.getTargetDirectory
 );
-@@clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus,
-  "Subscriptions",
-  "java"
+@@Azure.ClientGenerator.Core.clientLocation(PutTargetDirectoryBaseParameters.subscriptionId,
+  TargetDirectoryResults.putTargetDirectory
+);
+@@Azure.ClientGenerator.Core.clientLocation(DeleteTargetDirectoryBaseParameters.subscriptionId,
+  TargetDirectoryResults.deleteTargetDirectory
+);
+@@Azure.ClientGenerator.Core.clientLocation(ListTargetDirectoryBaseParameters.subscriptionId,
+  TargetDirectoryResults.listTargetDirectory
 );
