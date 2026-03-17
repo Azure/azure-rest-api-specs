@@ -5,30 +5,6 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.Subscription;
 
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
-@@clientName(SubscriptionOperationGroup.acceptOwnership::parameters.body,
-  "requestbody_body",
-  "python"
-);
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.cancel,
-  "SubscriptionOperation",
-  "java"
-);
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.rename,
-  "SubscriptionOperation",
-  "java"
-);
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.enable,
-  "SubscriptionOperation",
-  "java"
-);
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnership,
-  "Subscriptions",
-  "java"
-);
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnershipStatus,
-  "Subscriptions",
-  "java"
-);
 
 @@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.cancel::parameters.subscriptionId,
   SubscriptionOperationGroup.cancel
@@ -51,6 +27,27 @@ namespace Microsoft.Subscription;
 );
 @@Azure.ClientGenerator.Core.clientLocation(SubscriptionsOperationGroup.targetDirectoryStatus::parameters.subscriptionId,
   SubscriptionsOperationGroup.targetDirectoryStatus
+);
+
+@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.cancel,
+  "Subscriptions",
+  "java"
+);
+@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.rename,
+  "Subscriptions",
+  "java"
+);
+@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.enable,
+  "Subscriptions",
+  "java"
+);
+@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnership,
+  "Subscriptions",
+  "java"
+);
+@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnershipStatus,
+  "Subscriptions",
+  "java"
 );
 
 @@Azure.ClientGenerator.Core.clientLocation(GetTargetDirectoryBaseParameters.subscriptionId,
