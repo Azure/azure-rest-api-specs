@@ -16,23 +16,15 @@ namespace Microsoft.Storage;
 /**
  * The storage task assignment.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(StorageAccount)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model StorageTaskAssignment extends Resource {
+model StorageTaskAssignment
+  is ProxyResource<StorageTaskAssignmentProperties> {
   ...ResourceNameParameter<
     Resource = StorageTaskAssignment,
     KeyName = "storageTaskAssignmentName",
     SegmentName = "storageTaskAssignments",
     NamePattern = "^[a-z][a-z0-9]{2,23}$"
   >;
-
-  /**
-   * Properties of the storage task assignment.
-   */
-  properties: StorageTaskAssignmentProperties;
 }
 
 @armResourceOperations
