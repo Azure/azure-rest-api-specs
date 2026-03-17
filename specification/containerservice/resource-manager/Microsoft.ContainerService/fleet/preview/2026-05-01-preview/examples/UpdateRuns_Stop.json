@@ -36,6 +36,14 @@
                   }
                 ],
                 "afterStageWaitInSeconds": 3600
+              },
+              {
+                "name": "stage2",
+                "maxConcurrency": "50%",
+                "memberSelector": {
+                  "byLabel": "env=production"
+                },
+                "afterStageWaitInSeconds": 600
               }
             ]
           },
@@ -85,6 +93,20 @@
                     "state": "NotStarted"
                   },
                   "waitDurationInSeconds": 3600
+                }
+              },
+              {
+                "status": {
+                  "state": "NotStarted"
+                },
+                "name": "stage2",
+                "maxConcurrency": 50,
+                "groups": [],
+                "afterStageWaitStatus": {
+                  "status": {
+                    "state": "NotStarted"
+                  },
+                  "waitDurationInSeconds": 600
                 }
               }
             ]
