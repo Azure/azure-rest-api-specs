@@ -131,7 +131,7 @@ using Http;
 @@clientName(Microsoft.RecoveryServices.AzureSqlProtectionPolicy, "SqlProtectionPolicy", "csharp");
 @@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectionPolicy, "VmWorkloadProtectionPolicy", "csharp");
 
-// Job type renames (Azure* → *BackupJob)
+// Job type renames
 @@clientName(Microsoft.RecoveryServices.AzureIaaSVMJob, "IaasVmBackupJob", "csharp");
 @@clientName(Microsoft.RecoveryServices.AzureIaaSVMJobExtendedInfo, "IaasVmBackupJobExtendedInfo", "csharp");
 @@clientName(Microsoft.RecoveryServices.AzureIaaSVMJobTaskDetails, "IaasVmBackupJobTaskDetails", "csharp");
@@ -240,8 +240,6 @@ using Http;
 );
 
 @@clientLocation(RecoveryPoints.moveRecoveryPoint, "Client", "go");
-
-@@clientName(HttpStatusCode.Continue, "CONTINUE_ENUM", "python");
 
 // Migration mappings added to mitigate Java SDK breaking changes after TypeSpec migration
 @@clientName(Microsoft.RecoveryServices.IaaSVMContainer,
@@ -547,6 +545,10 @@ using Http;
   "etag",
   "java"
 );
+@@clientName(Microsoft.RecoveryServices.BackupResourceEncryptionConfigResource.eTag,
+  "etag",
+  "java"
+);
 @@clientName(Microsoft.RecoveryServices.BackupResourceVaultConfigResource.eTag,
   "etag",
   "java"
@@ -680,7 +682,7 @@ using Http;
 );
 @@clientName(Microsoft.RecoveryServices.ResourceGuardProxies.get,
   "list",
-  "java,javascript"
+  "java"
 );
 @@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxy.get,
   "ResourceGuardProxyOperation",
@@ -844,6 +846,32 @@ op backupResourceEncryptionConfigsGet(
 
 @@override(BackupResourceEncryptionConfigs.get,
   backupResourceEncryptionConfigsGet,
+  "java,go,python,javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupResourceEncryptionConfigsUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  vaultName: string,
+
+  ...ResourceGroupParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  backupEncryptionConfig: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  parameters: BackupResourceEncryptionConfigResource,
+): ArmResponse<BackupResourceEncryptionConfig>;
+
+@@override(BackupResourceEncryptionConfigs.update,
+  backupResourceEncryptionConfigsUpdate,
   "java,go,python,javascript"
 );
 
