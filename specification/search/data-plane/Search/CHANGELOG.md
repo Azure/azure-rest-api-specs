@@ -31,6 +31,7 @@ It is maintained for internal engineering reference and API Stewardship Board re
   - **URL path consolidation** (host templates → explicit paths; resolved URLs identical)
   - **Schema restructuring** (inline ↔ `$ref` conversions with equivalent schemas)
   - **Shared route operations**: `Indexes_ListWithSelectedProperties` added as separate operation sharing `GET /indexes` route with `Indexes_List` via TypeSpec `@sharedRoute` decorator. Wire-compatible: both map to the same endpoint with optional `$select` parameter. Improves SDK generation by providing distinct methods for listing all index properties vs. selected properties.
+  - **Security definitions**: `ApiKeyAuth` (header `api-key`) and `OAuth2Auth` (implicit flow, `https://search.azure.com/.default`) formally declared; documents existing authentication without changing client behaviour.
 
 #### Non-Breaking Changes
 
@@ -50,9 +51,13 @@ It is maintained for internal engineering reference and API Stewardship Board re
 
 *Indexers / Data sources*
 
-`SearchIndexerDataSource`: `identity` (managed identity for data source authentication).
-`SearchIndexerKnowledgeStore`: `identity` (managed identity for knowledge store projections).
-`SearchIndexerDataUserAssignedIdentity`: `federatedIdentityClientId` (workload identity federation support).
+- `SearchIndexerDataSource`: `identity` (managed identity for data source authentication).
+- `SearchIndexerKnowledgeStore`: `identity` (managed identity for knowledge store projections).
+- `SearchIndexerDataUserAssignedIdentity`: `federatedIdentityClientId` (workload identity federation support).
+
+*Encryption*
+
+- `SearchResourceEncryptionKey.keyVaultKeyVersion`: changed from **required** to **optional**, aligning with actual service behavior. This property was modified as optional in the preview track since 2025-03-01-preview, but the fix was not applied to 2025-09-01 GA.
 
 **Markdown parsing mode**
 
@@ -60,10 +65,6 @@ Native Markdown file parsing for blob indexers without requiring a separate skil
 - `BlobIndexerParsingMode`: new `markdown` enum value to enable Markdown parsing.
 - `IndexingParametersConfiguration.markdownParsingSubmode`: controls document splitting — `oneToOne` (entire file becomes one document) or `oneToMany` (split by header sections).
 - `IndexingParametersConfiguration.markdownHeaderDepth`: sets header depth for sectioning (`h1` through `h6`; default: `h6`).
-
-**Other additions**
-
-- Security definitions `ApiKeyAuth` (header `api-key`) and `OAuth2Auth` (implicit flow, `https://search.azure.com/.default`) formally declared; documents existing authentication without changing client behaviour.
 
 ---
 
