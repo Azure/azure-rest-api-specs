@@ -130,6 +130,9 @@ using Azure.AI.Projects;
 @@usage(MemoryStoreUpdateResponse, Usage.output);
 @@access(MemoryStoreUpdateResponse, Access.public);
 
+@@usage(AzureCreateResponse, Usage.input);
+@@access(AzureCreateResponse, Access.public);
+
 // --------------------------------------------------------------------------------
 // Type overrides
 // --------------------------------------------------------------------------------
