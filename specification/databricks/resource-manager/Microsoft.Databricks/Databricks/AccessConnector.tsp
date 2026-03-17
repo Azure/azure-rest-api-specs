@@ -30,7 +30,7 @@ interface AccessConnectors {
    * Gets an Azure Databricks Access Connector.
    */
   @tag("AccessConnector")
-  get is ArmResourceRead<AccessConnector>;
+  get is ArmResourceRead<AccessConnector, Error = ErrorResponse>;
 
   /**
    * Creates or updates Azure Databricks Access Connector.
@@ -39,7 +39,8 @@ interface AccessConnectors {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AccessConnector,
     LroHeaders = ArmLroLocationHeader<FinalResult = AccessConnector> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = ErrorResponse
   >;
 
   /**
@@ -49,7 +50,8 @@ interface AccessConnectors {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AccessConnector,
-    PatchModel = AccessConnectorUpdate
+    PatchModel = AccessConnectorUpdate,
+    Error = ErrorResponse
   >;
 
   /**
@@ -59,20 +61,27 @@ interface AccessConnectors {
   @tag("AccessConnector")
   delete is ArmResourceDeleteWithoutOkAsync<
     AccessConnector,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
    * Gets all the Azure Databricks Access Connectors within a resource group.
    */
   @tag("AccessConnector")
-  listByResourceGroup is ArmResourceListByParent<AccessConnector>;
+  listByResourceGroup is ArmResourceListByParent<
+    AccessConnector,
+    Error = ErrorResponse
+  >;
 
   /**
    * Gets all the Azure Databricks Access Connectors within a subscription.
    */
   @tag("AccessConnector")
-  listBySubscription is ArmListBySubscription<AccessConnector>;
+  listBySubscription is ArmListBySubscription<
+    AccessConnector,
+    Error = ErrorResponse
+  >;
 }
 
 @@maxLength(AccessConnector.name, 64);

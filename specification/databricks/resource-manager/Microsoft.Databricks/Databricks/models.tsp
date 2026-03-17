@@ -1436,3 +1436,22 @@ model AccessConnectorUpdate {
    */
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
+
+/**
+ * Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.
+ */
+model OperationListResult {
+  /**
+   * List of Resource Provider operations supported by the Resource Provider resource provider.
+   */
+  @pageItems
+  @identifiers(#[])
+  value?: Operation[];
+
+  /**
+   * URL to get the next set of operation list results if there are any.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}

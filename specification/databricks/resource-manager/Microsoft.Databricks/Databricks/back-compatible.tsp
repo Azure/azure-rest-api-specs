@@ -3,9 +3,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Databricks;
 
-@@clientName(Encryption.KeyName, "keyName");
-@@clientName(Encryption.keyversion, "keyVersion");
-@@clientName(Encryption.keyvaulturi, "keyVaultUri");
+@@clientName(Encryption.keyversion, "KeyVersion");
+@@clientName(Encryption.keyvaulturi, "KeyVaultUri");
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Workspaces.update::parameters.properties, "parameters");

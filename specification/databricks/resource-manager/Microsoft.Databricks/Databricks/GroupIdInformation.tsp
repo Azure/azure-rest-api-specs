@@ -34,7 +34,7 @@ interface GroupIdInformations {
   @tag("PrivateLinkResources")
   @summary("Get the specified private link resource")
   @operationId("PrivateLinkResources_Get")
-  get is ArmResourceRead<GroupIdInformation>;
+  get is ArmResourceRead<GroupIdInformation, Error = ErrorResponse>;
 
   /**
    * List private link resources for a given workspace
@@ -45,7 +45,8 @@ interface GroupIdInformations {
   @operationId("PrivateLinkResources_List")
   list is ArmResourceListByParent<
     GroupIdInformation,
-    Response = ArmResponse<PrivateLinkResourcesList>
+    Response = ArmResponse<PrivateLinkResourcesList>,
+    Error = ErrorResponse
   >;
 }
 

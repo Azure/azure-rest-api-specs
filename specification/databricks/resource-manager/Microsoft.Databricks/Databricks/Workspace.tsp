@@ -35,7 +35,7 @@ interface Workspaces {
    * Gets the workspace.
    */
   @tag("Workspaces")
-  get is ArmResourceRead<Workspace>;
+  get is ArmResourceRead<Workspace, Error = ErrorResponse>;
 
   /**
    * Creates a new workspace.
@@ -44,7 +44,8 @@ interface Workspaces {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
     LroHeaders = ArmLroLocationHeader<FinalResult = Workspace> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = ErrorResponse
   >;
 
   /**
@@ -52,7 +53,11 @@ interface Workspaces {
    */
   @tag("Workspaces")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Workspace, PatchModel = WorkspaceUpdate>;
+  update is ArmCustomPatchAsync<
+    Workspace,
+    PatchModel = WorkspaceUpdate,
+    Error = ErrorResponse
+  >;
 
   /**
    * Deletes the workspace.
@@ -68,20 +73,24 @@ interface Workspaces {
       @query("forceDeletion")
       forceDeletion?: boolean = false;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
    * Gets all the workspaces within a resource group.
    */
   @tag("Workspaces")
-  listByResourceGroup is ArmResourceListByParent<Workspace>;
+  listByResourceGroup is ArmResourceListByParent<
+    Workspace,
+    Error = ErrorResponse
+  >;
 
   /**
    * Gets all the workspaces within a subscription.
    */
   @tag("Workspaces")
-  listBySubscription is ArmListBySubscription<Workspace>;
+  listBySubscription is ArmListBySubscription<Workspace, Error = ErrorResponse>;
 
   /**
    * Gets the list of endpoints that VNET Injected Workspace calls Azure Databricks Control Plane. You must configure outbound access with these endpoints. For more information, see https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr
@@ -95,7 +104,8 @@ interface Workspaces {
   list is ArmResourceActionSync<
     Workspace,
     void,
-    ArmResponse<OutboundEnvironmentEndpointCollection>
+    ArmResponse<OutboundEnvironmentEndpointCollection>,
+    Error = ErrorResponse
   >;
 }
 

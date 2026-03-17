@@ -26,10 +26,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.
+ * ARM Databricks
  */
 @armProviderNamespace
-@service(#{ title: "AzureDatabricksManagementClient" })
+@service(#{ title: "DatabricksClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Databricks;
@@ -44,4 +44,8 @@ enum Versions {
   v2026_01_01: "2026-01-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      ErrorResponse
+    > {}

@@ -35,7 +35,7 @@ interface PrivateEndpointConnections {
    */
   @tag("PrivateEndpointConnections")
   @summary("Get private endpoint connection")
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is ArmResourceRead<PrivateEndpointConnection, Error = ErrorResponse>;
 
   /**
    * Update the status of a private endpoint connection with the specified name
@@ -51,7 +51,8 @@ interface PrivateEndpointConnections {
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: PrivateEndpointConnection;
-    })
+    }),
+    Error = ErrorResponse
   >;
 
   /**
@@ -63,7 +64,8 @@ interface PrivateEndpointConnections {
   @summary("Remove private endpoint connection")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -73,7 +75,8 @@ interface PrivateEndpointConnections {
   @summary("List private endpoint connections")
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Response = ArmResponse<PrivateEndpointConnectionsList>
+    Response = ArmResponse<PrivateEndpointConnectionsList>,
+    Error = ErrorResponse
   >;
 }
 

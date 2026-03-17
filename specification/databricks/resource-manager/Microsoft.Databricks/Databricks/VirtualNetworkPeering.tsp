@@ -38,7 +38,8 @@ interface VirtualNetworkPeerings {
   @operationId("vNetPeering_Get")
   get is ArmResourceRead<
     VirtualNetworkPeering,
-    Response = ArmResponse<VirtualNetworkPeering> | ArmNoContentResponse
+    Response = ArmResponse<VirtualNetworkPeering> | ArmNoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -50,7 +51,8 @@ interface VirtualNetworkPeerings {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualNetworkPeering,
     LroHeaders = ArmLroLocationHeader<FinalResult = VirtualNetworkPeering> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = ErrorResponse
   >;
 
   /**
@@ -62,7 +64,8 @@ interface VirtualNetworkPeerings {
   @operationId("vNetPeering_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkPeering,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -73,7 +76,8 @@ interface VirtualNetworkPeerings {
   @operationId("vNetPeering_ListByWorkspace")
   listByWorkspace is ArmResourceListByParent<
     VirtualNetworkPeering,
-    Response = ArmResponse<VirtualNetworkPeeringList>
+    Response = ArmResponse<VirtualNetworkPeeringList>,
+    Error = ErrorResponse
   >;
 }
 
