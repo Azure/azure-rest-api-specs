@@ -113,11 +113,6 @@ namespace Customizations;
   "javascript"
 );
 
-@@clientName(Storage.File.FileProperty.lastAccessTime,
-  "lastAccessedOn",
-  "javascript"
-);
-
 @@clientName(Storage.File.CopyStatusResponseHeaders.copyCompletionTime,
   "copyCompletedOn",
   "javascript"
