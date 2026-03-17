@@ -10,8 +10,9 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Common;
 
-namespace Microsoft.Compute;
+namespace Compute;
 
 /**
  * Defines a virtual machine scale set lifecycle hook event.

@@ -10,6 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
+using TypeSpec.Versioning;
 
 namespace Compute;
 /**
