@@ -217,3 +217,60 @@ namespace CombineClient;
   "VpnClientIpsecParameters",
   "java"
 );
+
+// Fix IP -> Ip naming for Java backward compatibility (additional types)
+@@clientName(Microsoft.Network.PublicIPPrefix, "PublicIpPrefix", "java");
+@@clientName(Microsoft.Network.PublicIPAddresses, "PublicIpAddresses", "java");
+@@clientName(Microsoft.Network.PublicIPPrefixes, "PublicIpPrefixes", "java");
+
+// Fix SQL/LOA/JWT/BGP/SNAT casing for Java backward compatibility
+@@clientName(Microsoft.Network.FirewallPolicySQL, "FirewallPolicySql", "java");
+@@clientName(Microsoft.Network.GenerateExpressRoutePortsLOARequest,
+  "GenerateExpressRoutePortsLoaRequest",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayEntraJWTValidationConfig,
+  "ApplicationGatewayEntraJwtValidationConfig",
+  "java"
+);
+@@clientName(Microsoft.Network.BGPCommunity, "BgpCommunity", "java");
+
+// Fix IDPS -> Idps casing for Java backward compatibility
+@@clientName(Microsoft.Network.FirewallPolicyIdpsSignatureMode,
+  "FirewallPolicyIdpsSignatureMode",
+  "java"
+);
+@@clientName(Microsoft.Network.FirewallPolicyIdpsQuerySortOrder,
+  "FirewallPolicyIdpsQuerySortOrder",
+  "java"
+);
+@@clientName(Microsoft.Network.FirewallPolicyIdpsSignatureSeverity,
+  "FirewallPolicyIdpsSignatureSeverity",
+  "java"
+);
+@@clientName(Microsoft.Network.FirewallPolicyIdpsSignatureDirection,
+  "FirewallPolicyIdpsSignatureDirection",
+  "java"
+);
+@@clientName(Microsoft.Network.IdpsQueryObject, "IdpsQueryObject", "java");
+
+// Fix HTTP -> Http casing for Java backward compatibility
+@@clientName(Microsoft.Network.HttpConfiguration, "HttpConfiguration", "java");
+@@clientName(Microsoft.Network.HttpConfigurationMethod,
+  "HttpConfigurationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.HttpHeader, "HttpHeader", "java");
+@@clientName(Microsoft.Network.HttpMethod, "HttpMethod", "java");
+
+// Fix SNAT -> Snat casing for Java backward compatibility
+@@clientName(Microsoft.Network.FirewallPolicySnat,
+  "FirewallPolicySnat",
+  "java"
+);
+
+// Fix property name: HTTPConfiguration -> httpConfiguration for Java backward compatibility
+@@clientName(Microsoft.Network.ProtocolConfiguration.HTTPConfiguration,
+  "httpConfiguration",
+  "java"
+);
