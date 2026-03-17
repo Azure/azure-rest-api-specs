@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -8431,6 +8433,12 @@ model FleetResourceProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: Status;
+
+  /**
+   * A test input string for the Fleet.
+   */
+  @added(Versions.v2026_03_15)
+  testInput?: string;
 }
 
 /**
