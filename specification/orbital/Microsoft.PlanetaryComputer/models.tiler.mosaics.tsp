@@ -291,32 +291,32 @@ model ApplicationJsonResponse {
  */
 model MosaicSearchQueryParameters {
   /**
-   * Return as soon as we scan N items (defaults to 10000 in PgSTAC).
+   * Return as soon as we scan N items (defaults to 10000).
    */
   @query("scan_limit")
   scanLimit?: int32;
 
   /**
-   * Return as soon as we have N items per geometry (defaults to 100 in PgSTAC).
+   * Return as soon as we have N items per geometry (defaults to 100).
    */
   @query("items_limit")
   itemsLimit?: int32;
 
   /**
-   * Return after N seconds to avoid long requests (defaults to 5 in PgSTAC).
+   * Return after N seconds to avoid long requests (defaults to 5).
    */
   @query("time_limit")
   timeLimit?: int32;
 
   /**
-   * Return as soon as the geometry is fully covered (defaults to True in PgSTAC).
+   * Return as soon as the geometry is fully covered (defaults to True).
    */
   @query("exitwhenfull")
   exitWhenFull?: boolean;
 
   /**
    * Skip any items that would show up completely under the previous items (defaults
-   * to True in PgSTAC).
+   * to True).
    */
   @query("skipcovered")
   skipCovered?: boolean;

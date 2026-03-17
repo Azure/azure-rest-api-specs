@@ -55,13 +55,13 @@
       "name": "Tiles for STAC Collections Mosaics"
     },
     {
+      "name": "Tiles for STAC Searches"
+    },
+    {
       "name": "Tile Matrix Sets"
     },
     {
-      "name": "Shared Access Signature (SAS) Tokens to use with Azure SDKs"
-    },
-    {
-      "name": "Sign an HREF for read access"
+      "name": "Shared Access Signature (SAS) Tokens for GeoCatalog Asset Access"
     },
     {
       "name": "Ingestion Management"
@@ -7128,7 +7128,7 @@
       "post": {
         "operationId": "MosaicsRegisterSearch_Register",
         "tags": [
-          "Tiles for STAC Collections Mosaics"
+          "Tiles for STAC Searches"
         ],
         "summary": "Register Search",
         "description": "Register a Search query",
@@ -8205,7 +8205,7 @@
       "get": {
         "operationId": "Sas_GetSign",
         "tags": [
-          "Sign an HREF for read access"
+          "Shared Access Signature (SAS) Tokens for GeoCatalog Asset Access"
         ],
         "summary": "sign an HREF in the format of a URL and returns a SharedAccessSignatureSignedHrefResponse",
         "description": "Signs a HREF (a link URL) by appending a [SAS Token](https://docs.microsoft.com//azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works).\nIf the HREF is not a Azure Blob Storage HREF, then pass back the HREF unsigned.",
@@ -8262,7 +8262,7 @@
       "get": {
         "operationId": "Sas_GetToken",
         "tags": [
-          "Shared Access Signature (SAS) Tokens to use with Azure SDKs"
+          "Shared Access Signature (SAS) Tokens for GeoCatalog Asset Access"
         ],
         "summary": "generate a SAS Token for the given Azure Blob storage account and container.",
         "description": "Generate a [SAS Token](https://docs.microsoft.com//azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)\nfor the given storage account and container. The storage account and container\nmust be associated with a Planetary Computer dataset indexed by the STAC API.",
@@ -8318,7 +8318,7 @@
       "post": {
         "operationId": "Sas_RevokeToken",
         "tags": [
-          "Shared Access Signature (SAS) Tokens to use with Azure SDKs"
+          "Shared Access Signature (SAS) Tokens for GeoCatalog Asset Access"
         ],
         "summary": "Revoke SAS token for the managed storage account of this GeoCatalog.",
         "description": "Revoke a [SAS Token](https://docs.microsoft.com//azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)\nfor managed storage account of this GeoCatalog.",
@@ -18451,7 +18451,7 @@
     "MosaicSearchQueryParameters.exitWhenFull": {
       "name": "exitwhenfull",
       "in": "query",
-      "description": "Return as soon as the geometry is fully covered (defaults to True in PgSTAC).",
+      "description": "Return as soon as the geometry is fully covered (defaults to True).",
       "required": false,
       "type": "boolean",
       "x-ms-parameter-location": "method",
@@ -18460,7 +18460,7 @@
     "MosaicSearchQueryParameters.itemsLimit": {
       "name": "items_limit",
       "in": "query",
-      "description": "Return as soon as we have N items per geometry (defaults to 100 in PgSTAC).",
+      "description": "Return as soon as we have N items per geometry (defaults to 100).",
       "required": false,
       "type": "integer",
       "format": "int32",
@@ -18470,7 +18470,7 @@
     "MosaicSearchQueryParameters.scanLimit": {
       "name": "scan_limit",
       "in": "query",
-      "description": "Return as soon as we scan N items (defaults to 10000 in PgSTAC).",
+      "description": "Return as soon as we scan N items (defaults to 10000).",
       "required": false,
       "type": "integer",
       "format": "int32",
@@ -18480,7 +18480,7 @@
     "MosaicSearchQueryParameters.skipCovered": {
       "name": "skipcovered",
       "in": "query",
-      "description": "Skip any items that would show up completely under the previous items (defaults\nto True in PgSTAC).",
+      "description": "Skip any items that would show up completely under the previous items (defaults\nto True).",
       "required": false,
       "type": "boolean",
       "x-ms-parameter-location": "method",
@@ -18489,7 +18489,7 @@
     "MosaicSearchQueryParameters.timeLimit": {
       "name": "time_limit",
       "in": "query",
-      "description": "Return after N seconds to avoid long requests (defaults to 5 in PgSTAC).",
+      "description": "Return after N seconds to avoid long requests (defaults to 5).",
       "required": false,
       "type": "integer",
       "format": "int32",

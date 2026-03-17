@@ -430,7 +430,7 @@ interface MosaicsRegisterSearch {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Register Search")
-  @tag("Tiles for STAC Collections Mosaics")
+  @tag("Tiles for STAC Searches")
   @route("/data/mosaic/register")
   @post
   register is Azure.Core.Foundations.Operation<
