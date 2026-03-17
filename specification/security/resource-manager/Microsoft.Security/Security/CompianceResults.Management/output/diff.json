@@ -1,109 +1,7 @@
 {
-  "info": {
-    "title": {
-      "__old": "Microsoft Defender for Cloud",
-      "__new": "SecurityCenter"
-    },
-    "description": {
-      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
-    }
-  },
   "paths": {
-    "/{resourceId}/providers/microsoft.Security/complianceResults/{complianceResultName}__deleted": {
-      "get": {
-        "operationId": "ComplianceResults_Get",
-        "tags": [
-          "Compliance Results"
-        ],
-        "description": "Security Compliance Result",
-        "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "complianceResultName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ComplianceResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get compliance results on subscription": {
-            "$ref": "./examples/ComplianceResults/GetComplianceResults_example.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Security/complianceResults/{complianceResultName}__added": {
-      "get": {
-        "operationId": "ComplianceResults_Get",
-        "tags": [
-          "ComplianceResults"
-        ],
-        "description": "Security Compliance Result",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "complianceResultName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ComplianceResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get compliance results on subscription": {
-            "$ref": "./examples/ComplianceResults/GetComplianceResults_example.json"
-          }
-        }
-      }
-    },
     "/{scope}/providers/microsoft.Security/complianceResults": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "Compliance Results"
-          ],
-          [
-            "+",
-            "ComplianceResults"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -122,7 +20,41 @@
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/microsoft.Security/complianceResults/{complianceResultName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -131,6 +63,71 @@
     }
   },
   "definitions": {
+    "CloudError__added": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody__added": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo__added": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
     "ComplianceResult": {
       "allOf": [
         [

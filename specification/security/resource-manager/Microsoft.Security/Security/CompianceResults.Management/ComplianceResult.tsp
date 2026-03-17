@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * a compliance result
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model ComplianceResult
   is Azure.ResourceManager.ExtensionResource<ComplianceResultProperties> {
@@ -24,20 +25,48 @@ model ComplianceResult
   >;
 }
 
-@armResourceOperations
+alias ComplianceResultOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The fully qualified Azure Resource manager identifier of the resource. */
+    @path
+    @key
+    resourceId: string;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+  },
+  {},
+  {
+    /** The compliance result key. */
+    @path
+    @segment("complianceResults")
+    @key
+    complianceResultName: string;
+  }
+>;
+
+@armResourceOperations(#{ omitTags: true })
 interface ComplianceResults {
   /**
    * Security Compliance Result
    */
-  get is Extension.Read<Extension.ScopeParameter, ComplianceResult>;
+  @tag("Compliance Results")
+  get is ComplianceResultOps.Read<ComplianceResult, ErrorType = CloudError>;
 
   /**
    * Security compliance results in the subscription
    */
+  @tag("Compliance Results")
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     ComplianceResult,
-    Response = ArmResponse<ComplianceResultList>
+    Response = ArmResponse<ComplianceResultList>,
+    Error = CloudError
   >;
 }
 

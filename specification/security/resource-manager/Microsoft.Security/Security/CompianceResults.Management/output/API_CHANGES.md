@@ -1,24 +1,4 @@
-## Changed Paths
-
-Path: /{resourceId}/providers/microsoft.Security/complianceResults/{complianceResultName}
-Change Type: deleted
-
-Path: /{scope}/providers/microsoft.Security/complianceResults/{complianceResultName}
-Change Type: added
-
 ## Swagger Changes
-
-### Changes for `/{resourceId}/providers/microsoft.Security/complianceResults/{complianceResultName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{resourceId}/providers/microsoft.Security/complianceResults/{complianceResultName}__deleted']` | deleted | `{"get":{"operationId":"ComplianceResults_Get","tags":["Compliance Results"],"description":"Security ...` |
-
-### Changes for `/{scope}/providers/microsoft.Security/complianceResults/{complianceResultName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.Security/complianceResults/{complianceResultName}__added']` | added | `{"get":{"operationId":"ComplianceResults_Get","tags":["ComplianceResults"],"description":"Security C...` |
 
 ### Changes for `$ref`
 
@@ -56,12 +36,29 @@ Change Type: added
 |------|------------|-------|
 | `paths['/{scope}/providers/microsoft.Security/complianceResults'].get.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
 
+### Changes for `CloudError`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.CloudError__added` | added | `{"type":"object","description":"Common error response for all Azure Resource Manager APIs to return ...` |
+
+### Changes for `CloudErrorBody`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.CloudErrorBody__added` | added | `{"type":"object","description":"The error detail.","properties":{"code":{"type":"string","descriptio...` |
+
+### Changes for `ErrorAdditionalInfo`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ErrorAdditionalInfo__added` | added | `{"type":"object","description":"The resource management error additional info.","properties":{"type"...` |
+
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.ComplianceResult.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `info.description` | `API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider` | `API spec for Microsoft.Security (Azure Security Center) resource provider` |
-| `info.title` | `Microsoft Defender for Cloud` | `SecurityCenter` |
-| `paths['/{scope}/providers/microsoft.Security/complianceResults'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/{resourceId}/providers/microsoft.Security/complianceResults/{complianceResultName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{scope}/providers/microsoft.Security/complianceResults'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 

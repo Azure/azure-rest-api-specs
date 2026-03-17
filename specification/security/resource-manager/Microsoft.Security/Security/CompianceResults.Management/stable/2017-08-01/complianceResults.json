@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2017-08-01",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -40,7 +40,7 @@
   },
   "tags": [
     {
-      "name": "ComplianceResults"
+      "name": "Compliance Results"
     }
   ],
   "paths": {
@@ -48,7 +48,7 @@
       "get": {
         "operationId": "ComplianceResults_List",
         "tags": [
-          "ComplianceResults"
+          "Compliance Results"
         ],
         "description": "Security compliance results in the subscription",
         "parameters": [
@@ -74,7 +74,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -88,11 +88,11 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/complianceResults/{complianceResultName}": {
+    "/{resourceId}/providers/Microsoft.Security/complianceResults/{complianceResultName}": {
       "get": {
         "operationId": "ComplianceResults_Get",
         "tags": [
-          "ComplianceResults"
+          "Compliance Results"
         ],
         "description": "Security Compliance Result",
         "parameters": [
@@ -100,17 +100,16 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "type": "string"
           },
           {
             "name": "complianceResultName",
             "in": "path",
-            "description": "name of the desired assessment compliance result",
+            "description": "The compliance result key.",
             "required": true,
             "type": "string"
           }
@@ -125,7 +124,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -138,6 +137,56 @@
     }
   },
   "definitions": {
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
     "ComplianceResult": {
       "type": "object",
       "description": "a compliance result",
@@ -182,6 +231,21 @@
         "resourceStatus": {
           "$ref": "#/definitions/ResourceStatus",
           "description": "The status of the resource regarding a single assessment",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
           "readOnly": true
         }
       }
