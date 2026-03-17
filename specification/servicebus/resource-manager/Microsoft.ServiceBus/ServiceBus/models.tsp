@@ -28,7 +28,7 @@ union CreatedByType {
 }
 
 /**
- * The minimum TLS version for the cluster to support, e.g. '1.2'
+ * The minimum TLS version for the cluster to support, e.g. '1.3'
  */
 union TlsVersion {
   string,
