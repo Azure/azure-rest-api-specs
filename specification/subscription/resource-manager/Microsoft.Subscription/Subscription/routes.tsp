@@ -61,7 +61,7 @@ interface SubscriptionOperationGroup {
     /**
      * The request body
      */
-    @body requestbodyBody: AcceptOwnershipRequest,
+    @body body: AcceptOwnershipRequest,
   ): ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
     Azure.Core.Foundations.RetryAfterHeader>;
   /**
