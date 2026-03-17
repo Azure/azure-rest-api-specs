@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace KeyVault;
 
@@ -353,4 +355,22 @@ model SecretProperties {
    * The media type (MIME type).
    */
   contentType?: string;
+}
+
+/**
+ * The media type (MIME type).
+ */
+@added(KeyVault.Versions.v2025_07_01)
+union ContentType {
+  string,
+
+  /**
+   * The PKCS#12 file format.
+   */
+  PFX: "application/x-pkcs12",
+
+  /**
+   * The PEM file format.
+   */
+  PEM: "application/x-pem-file",
 }
