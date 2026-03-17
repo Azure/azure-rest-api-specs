@@ -336,8 +336,15 @@ directive:
   - suppress: DOUBLE_FORWARD_SLASHES_IN_URL
     from: rbac.json
     reason: / is a valid scope in this scenario.
+  - suppress: DOUBLE_FORWARD_SLASHES_IN_URL
+    from: administration.json
+    reason: / is a valid scope in this scenario.
   - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
     from: rbac.json
+    where: $..parameters[?(@.name=='scope')]
+    reason: Suppress an invalid error caused by a bug in the linter.
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: administration.json
     where: $..parameters[?(@.name=='scope')]
     reason: Suppress an invalid error caused by a bug in the linter.
 ```
