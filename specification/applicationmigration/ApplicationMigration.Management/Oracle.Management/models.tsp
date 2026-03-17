@@ -127,9 +127,24 @@ union SupportStatus {
   Premier: "Premier",
 
   /**
+   * Mainstream support status.
+   */
+  Mainstream: "Mainstream",
+
+  /**
+   * Extended support status.
+   */
+  Extended: "Extended",
+
+  /**
    * Sustaining support status.
    */
   Sustaining: "Sustaining",
+
+  /**
+   * Out of support status.
+   */
+  OutOfSupport: "OutOfSupport",
 
   /**
    * Desupported support status.

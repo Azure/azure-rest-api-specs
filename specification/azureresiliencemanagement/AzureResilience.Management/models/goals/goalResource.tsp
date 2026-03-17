@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "../../main.tsp";
@@ -9,6 +10,7 @@ import "./enum.tsp";
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
@@ -39,6 +41,11 @@ model GoalResourceProperties {
   @doc("Reason for exclusion from disaster recovery goals.")
   @visibility(Lifecycle.Read)
   exclusionReasonForDisasterRecoveryGoals?: ExclusionReason;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("List of user confirmations for high availability solutions.")
+  @identifiers(#["solutionProviderName"])
+  userConfirmationForHighAvailability?: UserConfirmationForHighAvailabilityItem[];
 
   @doc("List of service groups of which this resource is memberof.")
   @visibility(Lifecycle.Read)

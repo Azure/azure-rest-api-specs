@@ -1,0 +1,68 @@
+{
+  "title": "ApprovalWorkflowInstances_Get_MaximumSet",
+  "operationId": "ApprovalWorkflowInstances_Get",
+  "parameters": {
+    "api-version": "2026-04-01-preview",
+    "resourceUri": "pnllaaoukpmclpsdiyoxegwviezp",
+    "approvalWorkflowDefinitionName": "my-workflow-def-01",
+    "approvalWorkflowInstanceName": "my-instance-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "requestedBy": "eniwndqirfmymmbrfvgrrcyyusk",
+          "requestedFor": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+          "description": "ekxzkzmwjqapsz",
+          "changeManifest": "yvbxxnrdaelbrlywhwhpkdtour",
+          "approvalRuleSnapshot": {
+            "stages": [
+              {
+                "name": "krqxulrwylmgyehpiflwqz",
+                "dependsOn": {
+                  "stages": [
+                    "niwlqpapeopeqmttqgbqkmrrjh"
+                  ],
+                  "and": [],
+                  "or": []
+                },
+                "approvers": [
+                  "gpecgztjvbtvq"
+                ],
+                "minimumApprovalsRequired": 9
+              }
+            ],
+            "timeoutInMinutes": 117243
+          },
+          "executionState": "InProgress",
+          "stageStatuses": [
+            {
+              "name": "rgjmqzqlvmvwqzxqfahemhhyojsho",
+              "state": "Created",
+              "signoffs": [
+                {
+                  "approver": "anqqnfosflbi",
+                  "signoffAction": "NotStarted",
+                  "signoffDateTime": "2026-03-04T03:31:44.530Z"
+                }
+              ]
+            }
+          ]
+        },
+        "eTag": "cenrygnypuhui",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/providers/Microsoft.Approvals/approvalWorkflowDefinitions/my-workflow-def-01/approvalWorkflowInstances/my-instance-01",
+        "name": "rmvnxihikbgxmoawinipwgvip",
+        "type": "xuquqfiybqmyncarxlsoiadkhnt",
+        "systemData": {
+          "createdBy": "sbsmzowiozxnfjsxqkxnbqlw",
+          "createdByType": "User",
+          "createdAt": "2026-03-04T03:31:43.860Z",
+          "lastModifiedBy": "kcuqkwaipwljuaielxit",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-04T03:31:43.860Z"
+        }
+      }
+    }
+  }
+}

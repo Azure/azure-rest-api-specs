@@ -186,6 +186,18 @@
           "deploymentMode": "Deploy",
           "operationType": "ClusterProvisioning",
           "provisioningState": "Succeeded",
+          "deploymentSummary": {
+            "title": "Deployment failed due to network configuration error",
+            "description": "The deployment encountered an error during the network configuration step. The DNS server was unreachable from one or more nodes.",
+            "recommendation": "Verify that the DNS server IP addresses are correct and reachable from all cluster nodes. Check firewall rules and network connectivity.",
+            "references": [
+              {
+                "title": "Troubleshoot Azure Stack HCI deployment",
+                "link": "https://learn.microsoft.com/en-us/azure-stack/hci/deploy/troubleshoot-deployment"
+              }
+            ],
+            "confidence": "High"
+          },
           "reportedProperties": {
             "deploymentStatus": {
               "status": "Error",

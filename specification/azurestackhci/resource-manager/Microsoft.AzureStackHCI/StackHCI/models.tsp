@@ -2801,6 +2801,47 @@ model DeploymentSettingsProperties {
    */
   @visibility(Lifecycle.Read)
   reportedProperties?: EceReportedProperties;
+
+  /**
+   * Summary of the deployment.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @visibility(Lifecycle.Read)
+  deploymentSummary?: DeploymentSummary;
+}
+
+/**
+ * Summary of the deployment error.
+ */
+@added(Versions.v2026_03_15_preview)
+model DeploymentSummary {
+  /** Title for the error summary. */
+  title?: string;
+
+  /** Detailed description of the error. */
+  description?: string;
+
+  /** Recommendation for fixing the error. */
+  recommendation?: string;
+
+  /** URL references related to the summary. */
+  @identifiers(#[])
+  references?: DeploymentSummaryReference[];
+
+  /** Confidence rating for the error recommendation. */
+  confidence?: string;
+}
+
+/**
+ * References from the AI Generated summary.
+ */
+@added(Versions.v2026_03_15_preview)
+model DeploymentSummaryReference {
+  /** Title for the reference. */
+  title: string;
+
+  /** Hyperlink to the reference. */
+  link: string;
 }
 
 /**
@@ -3165,13 +3206,6 @@ model Storage {
    */
   @added(Versions.v2026_03_15_preview)
   san?: StorageSanConfig;
-
-  /**
-   * List of storage disks.
-   */
-  @added(Versions.v2026_03_15_preview)
-  @identifiers(#["id"])
-  disks?: Disk[];
 }
 
 /**
@@ -3283,8 +3317,7 @@ model DeploymentSettingHostNetwork {
    * SAN network configuration for the host network. Applicable when StorageType is 'SAN' or 'SANS2D'.
    */
   @added(Versions.v2026_03_15_preview)
-  @identifiers(#[])
-  sanNetworks?: SanNetworks[];
+  sanNetworks?: SanNetworks;
 
   /**
    * Defines how the storage adapters between nodes are connected either switch or switch less..
@@ -6065,14 +6098,14 @@ model HciStorageProfile {
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_03_15_preview)
   @identifiers(#["id"])
-  disks?: Disk[];
+  disks?: EdgeDeviceDisks[];
 }
 
 /**
  * Represents a storage disk on the device.
  */
 @added(Versions.v2026_03_15_preview)
-model Disk {
+model EdgeDeviceDisks {
   /**
    * The unique identifier of the disk.
    */
@@ -9072,6 +9105,68 @@ model DiskJobReportedProperties {
   /** Percentage of job completion. */
   @visibility(Lifecycle.Read)
   percentComplete?: int32;
+
+  /** Validation status of Disk Job. */
+  @visibility(Lifecycle.Read)
+  validationStatus?: DiskActionStatus;
+
+  /** Deployment status of Disk Job. */
+  @visibility(Lifecycle.Read)
+  deploymentStatus?: DiskActionStatus;
+}
+
+/**
+ * The action plan deployment status for Disk Job.
+ */
+@added(Versions.v2026_03_15_preview)
+model DiskActionStatus {
+  /** Status of ECE action Disk Job. */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /** List of steps of Disk Job. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  steps?: DiskDeploymentStep[];
+}
+
+/**
+ * The Step of Disk Job.
+ */
+@added(Versions.v2026_03_15_preview)
+model DiskDeploymentStep {
+  /** Name of step. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Description of step. */
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  /** FullStepIndex of step. */
+  @visibility(Lifecycle.Read)
+  fullStepIndex?: string;
+
+  /** Start time of step. */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: string;
+
+  /** End time of step. */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: string;
+
+  /** Status of step (Error, Success, InProgress). */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /** List of nested steps. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  steps?: DiskDeploymentStep[];
+
+  /** List of exceptions. */
+  @visibility(Lifecycle.Read)
+  exception?: string[];
 }
 
 /**
@@ -9492,6 +9587,12 @@ union NetworkAdapterJobType {
  */
 @added(Versions.v2026_03_15_preview)
 model NetworkAdapterJobReportedProperties {
+  /**
+   * The percentage of the job that is complete.
+   */
+  @visibility(Lifecycle.Read)
+  percentComplete?: int32;
+
   /** Validation status of Network Adapter Job. */
   @visibility(Lifecycle.Read)
   validationStatus?: NetworkAdapterActionStatus;
