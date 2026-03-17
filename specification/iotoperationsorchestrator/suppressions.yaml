@@ -1,0 +1,14 @@
+- tool: TypeSpecValidation
+  reason: >
+    TypeSpec Config Incomplete - Missing required emitter options in tspconfig.yaml.
+    Responsibility: Spec owner would update missing configurations.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+  paths:
+    - IoTOperationsOrchestrator.Management/tspconfig.yaml

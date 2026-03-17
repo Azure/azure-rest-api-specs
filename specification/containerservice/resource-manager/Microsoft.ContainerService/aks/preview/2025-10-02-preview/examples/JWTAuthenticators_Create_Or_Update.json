@@ -1,18 +1,22 @@
 {
   "parameters": {
     "api-version": "2025-10-02-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
-    "resourceName": "clustername1",
     "jwtAuthenticatorName": "jwt1",
     "parameters": {
       "properties": {
-        "issuer": {
-          "url": "https://example.com",
-          "audiences": [
-            "https://example.com/audience1",
-            "https://example.com/audience2"
-          ]
+        "claimMappings": {
+          "extra": [
+            {
+              "key": "example.com/extrakey",
+              "valueExpression": "claims.customfield"
+            }
+          ],
+          "groups": {
+            "expression": "claims.groups.split(',').map(group, 'aks:jwt:' + group)"
+          },
+          "username": {
+            "expression": "'aks:jwt:' + claims.sub"
+          }
         },
         "claimValidationRules": [
           {
@@ -24,19 +28,12 @@
             "message": "Sub cannot be empty"
           }
         ],
-        "claimMappings": {
-          "username": {
-            "expression": "'aks:jwt:' + claims.sub"
-          },
-          "groups": {
-            "expression": "claims.groups.split(',').map(group, 'aks:jwt:' + group)"
-          },
-          "extra": [
-            {
-              "key": "example.com/extrakey",
-              "valueExpression": "claims.customfield"
-            }
-          ]
+        "issuer": {
+          "audiences": [
+            "https://example.com/audience1",
+            "https://example.com/audience2"
+          ],
+          "url": "https://example.com"
         },
         "userValidationRules": [
           {
@@ -45,22 +42,31 @@
           }
         ]
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/jwtAuthenticators/jwt1",
-        "type": "Microsoft.ContainerService/managedClusters/jwtAuthenticators",
         "name": "jwt1",
+        "type": "Microsoft.ContainerService/managedClusters/jwtAuthenticators",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/jwtAuthenticators/jwt1",
         "properties": {
-          "provisioningState": "Succeeded",
-          "issuer": {
-            "url": "https://example.com",
-            "audiences": [
-              "https://example.com/audience1",
-              "https://example.com/audience2"
-            ]
+          "claimMappings": {
+            "extra": [
+              {
+                "key": "example.com/extrakey",
+                "valueExpression": "claims.customfield"
+              }
+            ],
+            "groups": {
+              "expression": "claims.groups.split(',').map(group, 'aks:jwt:' + group)"
+            },
+            "username": {
+              "expression": "'aks:jwt:' + claims.sub"
+            }
           },
           "claimValidationRules": [
             {
@@ -72,20 +78,14 @@
               "message": "Sub cannot be empty"
             }
           ],
-          "claimMappings": {
-            "username": {
-              "expression": "'aks:jwt:' + claims.sub"
-            },
-            "groups": {
-              "expression": "claims.groups.split(',').map(group, 'aks:jwt:' + group)"
-            },
-            "extra": [
-              {
-                "key": "example.com/extrakey",
-                "valueExpression": "claims.customfield"
-              }
-            ]
+          "issuer": {
+            "audiences": [
+              "https://example.com/audience1",
+              "https://example.com/audience2"
+            ],
+            "url": "https://example.com"
           },
+          "provisioningState": "Succeeded",
           "userValidationRules": [
             {
               "expression": "user.groups.all(group, group.startsWith('aks:jwt:admin:'))",
@@ -97,17 +97,23 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/jwtAuthenticators/jwt1",
-        "type": "Microsoft.ContainerService/managedClusters/jwtAuthenticators",
         "name": "jwt1",
+        "type": "Microsoft.ContainerService/managedClusters/jwtAuthenticators",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/jwtAuthenticators/jwt1",
         "properties": {
-          "provisioningState": "Succeeded",
-          "issuer": {
-            "url": "https://example.com",
-            "audiences": [
-              "https://example.com/audience1",
-              "https://example.com/audience2"
-            ]
+          "claimMappings": {
+            "extra": [
+              {
+                "key": "example.com/extrakey",
+                "valueExpression": "claims.customfield"
+              }
+            ],
+            "groups": {
+              "expression": "claims.groups.split(',').map(group, 'aks:jwt:' + group)"
+            },
+            "username": {
+              "expression": "'aks:jwt:' + claims.sub"
+            }
           },
           "claimValidationRules": [
             {
@@ -119,20 +125,14 @@
               "message": "Sub cannot be empty"
             }
           ],
-          "claimMappings": {
-            "username": {
-              "expression": "'aks:jwt:' + claims.sub"
-            },
-            "groups": {
-              "expression": "claims.groups.split(',').map(group, 'aks:jwt:' + group)"
-            },
-            "extra": [
-              {
-                "key": "example.com/extrakey",
-                "valueExpression": "claims.customfield"
-              }
-            ]
+          "issuer": {
+            "audiences": [
+              "https://example.com/audience1",
+              "https://example.com/audience2"
+            ],
+            "url": "https://example.com"
           },
+          "provisioningState": "Succeeded",
           "userValidationRules": [
             {
               "expression": "user.groups.all(group, group.startsWith('aks:jwt:admin:'))",
@@ -142,5 +142,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "JWTAuthenticators_CreateOrUpdate",
+  "title": "Create or update JWT Authenticator"
 }

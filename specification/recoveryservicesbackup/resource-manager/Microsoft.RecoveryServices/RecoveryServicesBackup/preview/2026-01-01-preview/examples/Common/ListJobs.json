@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "NetSDKTestRsVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.RecoveryServices/vaults/backupJobs",
+            "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupJobs/00000000-0000-0000-0000-000000000000",
+            "properties": {
+              "activityId": "00000000-0000-0000-0000-000000000000",
+              "backupManagementType": "AzureIaasVM",
+              "duration": "PT12.4272909S",
+              "entityFriendlyName": "testvm",
+              "jobType": "AzureIaaSVMJob",
+              "operation": "Backup",
+              "startTime": "2017-08-03T05:31:07.014604Z",
+              "status": "InProgress",
+              "virtualMachineVersion": "Compute"
+            }
+          },
+          {
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.RecoveryServices/vaults/backupJobs",
+            "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupJobs/00000000-0000-0000-0000-000000000000",
+            "properties": {
+              "activityId": "00000000-0000-0000-0000-000000000000",
+              "backupManagementType": "AzureIaasVM",
+              "duration": "PT31.3066291S",
+              "endTime": "2017-08-03T05:31:03.7553376Z",
+              "entityFriendlyName": "testvm",
+              "jobType": "AzureIaaSVMJob",
+              "operation": "ConfigureBackup",
+              "startTime": "2017-08-03T05:30:32.4487085Z",
+              "status": "Completed",
+              "virtualMachineVersion": "Compute"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BackupJobs_List",
+  "title": "List All Jobs"
+}

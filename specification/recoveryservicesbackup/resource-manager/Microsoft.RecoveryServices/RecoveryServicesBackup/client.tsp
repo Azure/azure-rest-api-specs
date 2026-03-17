@@ -23,6 +23,8 @@ using Http;
 
 @@clientLocation(RecoveryPoints.moveRecoveryPoint, "Client", "go");
 
+@@clientName(HttpStatusCode.Continue, "CONTINUE_ENUM", "python");
+
 // Migration mappings added to mitigate Java SDK breaking changes after TypeSpec migration
 @@clientName(Microsoft.RecoveryServices.IaaSVMContainer,
   "IaaSvmContainer",
@@ -464,7 +466,7 @@ using Http;
 );
 @@clientName(Microsoft.RecoveryServices.ResourceGuardProxies.get,
   "list",
-  "java"
+  "java,javascript"
 );
 @@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxy.get,
   "ResourceGuardProxyOperation",
@@ -485,7 +487,7 @@ using Http;
 
 @@clientName(Microsoft.RecoveryServices,
   "RecoveryServicesBackupClient",
-  "javascript"
+  "javascript,python"
 );
 
 // Custom operations to reorder parameters (resourceGroupName after vaultName) for various operations
@@ -664,10 +666,7 @@ op backupResourceEncryptionConfigsUpdate(
 op backupResourceStorageConfigsNonCRRGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -691,10 +690,7 @@ op backupResourceStorageConfigsNonCRRGet(
 op backupResourceStorageConfigsNonCRRPatch(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -721,10 +717,7 @@ op backupResourceStorageConfigsNonCRRPatch(
 op backupResourceStorageConfigsNonCRRUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -751,10 +744,7 @@ op backupResourceStorageConfigsNonCRRUpdate(
 op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -781,10 +771,7 @@ op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
 op backupResourceStorageConfigsNonCRRBmsTriggerDataMove(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -1141,6 +1128,7 @@ op exportJobsOperationResultsGet(
   operationId: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupJobs: "backupJobs",
 ): OperationResultInfoBaseResource;
 
@@ -2094,3 +2082,6 @@ op protectionPolicyOperationStatusesGet(
   protectionPolicyOperationStatusesGet,
   "java,go,python,javascript"
 );
+
+// rename for duplicate model from Azure.ResourceManager.CommonTypes
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail, "ArmErrorDetail");

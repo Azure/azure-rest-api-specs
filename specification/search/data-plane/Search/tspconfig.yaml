@@ -5,7 +5,6 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/search.json"
   "@azure-tools/typespec-python":
@@ -13,16 +12,10 @@ options:
     package-name: "{package-dir}"
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-search-documents"
-  "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Search.Documents"
-    namespace: "Azure.Search.Documents"
-    clear-output-folder: true
-    model-namespace: false
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.Search.Documents"
   "@azure-typespec/http-client-csharp":
     namespace: "Azure.Search.Documents"
-    model-namespace: false
+    model-namespace: true
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.Search.Documents"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/search-documents"
     generate-metadata: false
@@ -38,17 +31,12 @@ options:
     namespace: "com.azure.search.documents"
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-search-documents"
-  "@azure-tools/typespec-go":
-    service-dir: "sdk/search/azsearchdocuments"
-    package-dir: "azsearchdocuments"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
-    fix-const-stuttering: true
-    flavor: "azure"
-    generate-samples: true
-    generate-fakes: true
-    head-as-boolean: true
-    inject-spans: true
-    emitter-output-dir: "{output-dir}/{service-dir}/azsearchdocuments"
+    customization-class: "customizations/src/main/java/SearchCustomizations.java"
+    use-object-for-unknown: true
+    partial-update: true
+    float32-as-double: false
+    generate-samples: false
+    generate-tests: false
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

@@ -42,7 +42,14 @@ interface PrivateEndpointConnectionsOps
         @segment("provisioningServices")
         resourceName: string,
       },
-      {},
+      {
+        /**
+         * The name of the private endpoint connection
+         */
+        @path
+        @segment("privateEndpointConnections")
+        privateEndpointConnectionName: string,
+      },
       ErrorDetails
     > {}
 
@@ -51,32 +58,13 @@ interface PrivateEndpointConnections {
   /**
    * Get private endpoint connection properties
    */
-  getPrivateEndpointConnection is PrivateEndpointConnectionsOps.Read<
-    PrivateEndpointConnection,
-    Parameters = {
-      /**
-       * The name of the private endpoint connection
-       */
-      @path
-      @segment("privateEndpointConnections")
-      privateEndpointConnectionName: string;
-    },
-    Response = ArmResponse<PrivateEndpointConnection>
-  >;
+  getPrivateEndpointConnection is PrivateEndpointConnectionsOps.Read<PrivateEndpointConnection>;
 
   /**
    * Create or update the status of a private endpoint connection with the specified name
    */
   createOrUpdatePrivateEndpointConnection is PrivateEndpointConnectionsOps.CreateOrUpdateAsync<
     PrivateEndpointConnection,
-    Parameters = {
-      /**
-       * The name of the private endpoint connection
-       */
-      @path
-      @segment("privateEndpointConnections")
-      privateEndpointConnectionName: string;
-    },
     LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -88,14 +76,6 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deletePrivateEndpointConnection is PrivateEndpointConnectionsOps.DeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Parameters = {
-      /**
-       * The name of the private endpoint connection
-       */
-      @path
-      @segment("privateEndpointConnections")
-      privateEndpointConnectionName: string;
-    },
     Response = ArmResponse<PrivateEndpointConnection> | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
@@ -106,17 +86,9 @@ interface PrivateEndpointConnections {
   /**
    * List private endpoint connection properties
    */
-  @action("privateEndpointConnections")
-  @get
-  listPrivateEndpointConnections is ArmProviderActionSync<
-    void,
-    ArmResponse<PrivateEndpointConnectionsList>,
-    {},
-    {
-      /** Name of the provisioning service to retrieve. */
-      @path @segment("provisioningServices") resourceName: string;
-    },
-    ErrorDetails
+  listPrivateEndpointConnections is PrivateEndpointConnectionsOps.ListSinglePage<
+    PrivateEndpointConnection,
+    Response = ArmResponse<PrivateEndpointConnectionsList>
   >;
 }
 

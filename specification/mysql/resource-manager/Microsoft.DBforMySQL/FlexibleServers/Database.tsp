@@ -35,6 +35,7 @@ interface Databases {
    * Creates a new database or updates an existing database.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Database,
     Response = ArmResourceUpdatedResponse<Database> | ArmResourceCreatedResponse<

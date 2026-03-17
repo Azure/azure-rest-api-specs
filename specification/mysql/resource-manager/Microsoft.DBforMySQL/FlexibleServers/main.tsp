@@ -68,16 +68,11 @@ interface Operations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Operations")
   @autoRoute
-  @Azure.ResourceManager.Private.armUpdateProviderNamespace
   @doc("List the operations for the provider")
   @segment("operations")
   @list
   list(
     ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
+    ...Azure.ResourceManager.Legacy.Provider,
   ): ArmResponse<OperationListResult> | ErrorResponse;
 }

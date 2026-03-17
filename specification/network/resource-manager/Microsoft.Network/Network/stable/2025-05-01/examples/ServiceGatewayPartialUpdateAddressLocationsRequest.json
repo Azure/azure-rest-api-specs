@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "serviceGatewayName": "sg",
+    "parameters": {
+      "action": "PartialUpdate",
+      "addressLocations": [
+        {
+          "addressLocation": "192.0.0.1",
+          "addresses": [
+            {
+              "address": "10.0.0.4",
+              "services": [
+                "Service1"
+              ]
+            }
+          ],
+          "addressUpdateAction": "FullUpdate"
+        },
+        {
+          "addressLocation": "192.0.0.2",
+          "addresses": [
+            {
+              "address": "10.0.0.5",
+              "services": [
+                "Service2"
+              ]
+            },
+            {
+              "address": "10.0.0.6"
+            }
+          ],
+          "addressUpdateAction": "PartialUpdate"
+        },
+        {
+          "addressLocation": "192.0.0.3"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2025-05-01"
+      }
+    },
+    "204": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-05-01"
+      }
+    }
+  }
+}

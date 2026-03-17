@@ -36,11 +36,7 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-10-01-preview'
 input-file:
-  - Microsoft.MachineLearningServices/preview/2025-10-01-preview/machineLearningServices.json
-  - Microsoft.MachineLearningServices/preview/2025-10-01-preview/mfe.json
-  - Microsoft.MachineLearningServices/preview/2025-10-01-preview/registries.json
-  - Microsoft.MachineLearningServices/preview/2025-10-01-preview/workspaceFeatures.json
-  - Microsoft.MachineLearningServices/preview/2025-10-01-preview/workspaceRP.json
+  - Microsoft.MachineLearningServices/preview/2025-10-01-preview/openapi.json
 suppressions:
   - code: AvoidAdditionalProperties
     reason: This is necessary to allow users to specify custom inference parameters and 
@@ -186,6 +182,136 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].put
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: These are list result models and action responses, not ARM resources. They do not require id/name/type properties.
+    where:
+      - $.definitions.AvailableQuota
+      - $.definitions.AvailableQuotaArmPaginatedResult
+      - $.definitions.EndpointModels
+      - $.definitions.ExternalFQDNResponse
+      - $.definitions.ListAmlUserFeatureResult
+      - $.definitions.ListUsagesResult
+      - $.definitions.ListWorkspaceQuotas
+      - $.definitions.SkuResourceArmPaginatedResult
+      - $.definitions.UsageAndQuotaDetailsArmPaginatedResult
+      - $.definitions.VirtualMachineSizeListResult
+  - code: ArmResourcePropertiesBag
+    reason: Pre-existing API contract uses type/name as discriminator properties within the properties bag for polymorphic resources.
+    where:
+      - $.definitions.EndpointDeploymentResourcePropertiesBasicResource
+      - $.definitions.EndpointResourcePropertiesBasicResource
+      - $.definitions.OutboundRuleBasicResource
+      - $.definitions.RaiPolicyPropertiesBasicResource
+  - code: TrackedResourcePatchOperation
+    reason: Pre-existing API uses PUT for updates. PrivateEndpointConnection has location/tags but uses PUT, not PATCH.
+    where:
+      - $.definitions.PrivateEndpointConnection
+```
+
+### Tag: package-2025-12-01
+
+These settings apply only when `--tag=package-2025-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-12-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2025-12-01/openapi.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Pre-existing API behavior, these schemas use additionalProperties for dynamic key-value pairs.
+    where:
+      - $.definitions.CustomKeys.properties.keys
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+      - $.definitions.SparkJob.properties.conf
+      - $.definitions.SparkJob.properties.environmentVariables
+      - $.definitions.DiagnoseRequestProperties.properties.applicationInsights
+      - $.definitions.DiagnoseRequestProperties.properties.containerRegistry
+      - $.definitions.DiagnoseRequestProperties.properties.dnsResolution
+      - $.definitions.DiagnoseRequestProperties.properties.keyVault
+      - $.definitions.DiagnoseRequestProperties.properties.nsg
+      - $.definitions.DiagnoseRequestProperties.properties.others
+      - $.definitions.DiagnoseRequestProperties.properties.requiredResourceProviders
+      - $.definitions.DiagnoseRequestProperties.properties.resourceLock
+      - $.definitions.DiagnoseRequestProperties.properties.storageAccount
+      - $.definitions.DiagnoseRequestProperties.properties.udr
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: Pre-existing API behavior, property name uses acronym CMK (Customer Managed Key) which is industry standard.
+    where:
+      - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
+  - code: DeleteResponseCodes
+    reason: Pre-existing API behavior, LRO delete operations return 200 in addition to 202/204.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions/{version}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions/{version}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/data/{name}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions/{version}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}"].delete
+  - code: ResourceNameRestriction
+    reason: Pre-existing API behavior, adding restriction would be a breaking change. Discussed with ARM reviewer.
+  - code: PostResponseCodes
+    reason: Pre-existing API behavior for action operations.
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Pre-existing API behavior, provisioning state is part of the resource model.
+  - code: ConsistentPatchProperties
+    reason: Pre-existing API design for Compute resource where properties.properties is a known pattern.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}"].patch.parameters[5].schema
+  - code: PatchBodyParametersSchema
+    reason: Pre-existing API behavior, PATCH for abstract classes requires type discriminator.
+  - code: PatchIdentityProperty
+    reason: Pre-existing API behavior for endpoints.
+  - code: LroPatch202
+    reason: Pre-existing API behavior for Compute update operations.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}"].patch.responses
+  - code: PutResponseCodes
+    reason: Pre-existing API behavior.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: Pre-existing API behavior for list operations.
+  - code: XmsPageableForListCalls
+    reason: Pre-existing API behavior, pagination is handled by the framework.
+  - code: PathForResourceAction
+    reason: Pre-existing API behavior for action endpoints.
+  - code: CollectionObjectPropertiesNaming
+    reason: Pre-existing API behavior.
+  - code: PatchResponseCodes
+    reason: Pre-existing API behavior.
+  - code: ProvisioningStateMustBeReadOnly
+    reason: Pre-existing API behavior, provisioningState properties are read-only in the API response.
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: These are list result models and action responses, not ARM resources. They do not require id/name/type properties.
+    where:
+      - $.definitions.ExternalFQDNResponse
+      - $.definitions.ListAmlUserFeatureResult
+      - $.definitions.ListUsagesResult
+      - $.definitions.ListWorkspaceQuotas
+      - $.definitions.SkuResourceArmPaginatedResult
+      - $.definitions.VirtualMachineSizeListResult
+  - code: ArmResourcePropertiesBag
+    reason: Pre-existing API contract uses type as discriminator property within the properties bag for polymorphic resources.
+    where:
+      - $.definitions.OutboundRuleBasicResource
+  - code: TrackedResourcePatchOperation
+    reason: Pre-existing API uses PUT for updates. PrivateEndpointConnection has location/tags but uses PUT, not PATCH.
+    where:
+      - $.definitions.PrivateEndpointConnection
 ```
 
 ### Tag: package-2025-09-01
