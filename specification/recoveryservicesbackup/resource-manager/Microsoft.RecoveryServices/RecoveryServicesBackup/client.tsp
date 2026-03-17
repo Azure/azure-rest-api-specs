@@ -50,6 +50,182 @@ using Http;
 // KPI health details
 @@clientName(Microsoft.RecoveryServices.KPIResourceHealthDetails, "KpiResourceHealthDetails", "csharp");
 
+// ===== C# backward compatibility renames for model types =====
+
+// Settings/Day/Common types
+@@clientName(Microsoft.RecoveryServices.Settings, "BackupCommonSettings", "csharp");
+@@clientName(Microsoft.RecoveryServices.Day, "BackupDay", "csharp");
+@@clientName(Microsoft.RecoveryServices.HourlySchedule, "BackupHourlySchedule", "csharp");
+@@clientName(Microsoft.RecoveryServices.WeeklySchedule, "BackupWeeklySchedule", "csharp");
+@@clientName(Microsoft.RecoveryServices.IdentityInfo, "BackupIdentityInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.NameInfo, "BackupNameInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.RetentionPolicy, "BackupRetentionPolicy", "csharp");
+@@clientName(Microsoft.RecoveryServices.SchedulePolicy, "BackupSchedulePolicy", "csharp");
+@@clientName(Microsoft.RecoveryServices.TargetDiskNetworkAccessOption, "BackupTargetDiskNetworkAccessOption", "csharp");
+@@clientName(Microsoft.RecoveryServices.TargetDiskNetworkAccessSettings, "BackupTargetDiskNetworkAccessSettings", "csharp");
+
+// Abstract base types
+@@clientName(Microsoft.RecoveryServices.Job, "BackupGenericJob", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectionContainer, "BackupGenericProtectionContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectionIntent, "BackupGenericProtectionIntent", "csharp");
+
+// ResourceConfig/EncryptionConfig/VaultConfig properties
+@@clientName(Microsoft.RecoveryServices.BackupResourceConfig, "BackupResourceConfigProperties", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupResourceEncryptionConfigExtended, "BackupResourceEncryptionConfigExtendedProperties", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupResourceVaultConfig, "BackupResourceVaultConfigProperties", "csharp");
+@@clientName(Microsoft.RecoveryServices.PrivateEndpointConnection, "BackupPrivateEndpointConnectionProperties", "csharp");
+
+// Request → Content renames
+@@clientName(Microsoft.RecoveryServices.BackupStatusRequest, "BackupStatusContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupRequestResource, "TriggerBackupContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.FeatureSupportRequest, "FeatureSupportContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.FetchTieringCostInfoRequest, "FetchTieringCostInfoContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.FetchTieringCostInfoForRehydrationRequest, "FetchTieringCostInfoForRehydrationContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.FetchTieringCostSavingsInfoForPolicyRequest, "FetchTieringCostSavingsInfoForPolicyContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.FetchTieringCostSavingsInfoForProtectedItemRequest, "FetchTieringCostSavingsInfoForProtectedItemContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.FetchTieringCostSavingsInfoForVaultRequest, "FetchTieringCostSavingsInfoForVaultContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.PrepareDataMoveRequest, "PrepareDataMoveContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.TriggerDataMoveRequest, "TriggerDataMoveContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.MoveRPAcrossTiersRequest, "MoveRPAcrossTiersContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.ListRecoveryPointsRecommendedForMoveRequest, "RecoveryPointsRecommendedForMoveContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.PreValidateEnableBackupRequest, "PreValidateEnableBackupContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.PreValidateEnableBackupResponse, "PreValidateEnableBackupResult", "csharp");
+@@clientName(Microsoft.RecoveryServices.UnlockDeleteRequest, "UnlockDeleteContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.UnlockDeleteResponse, "UnlockDeleteResult", "csharp");
+@@clientName(Microsoft.RecoveryServices.SnapshotRestoreParameters, "SnapshotRestoreContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.EncryptionDetails, "VmEncryptionDetails", "csharp");
+
+// ILR renames
+@@clientName(Microsoft.RecoveryServices.ILRRequest, "IlrContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.ILRRequestResource, "ProvisionIlrConnectionContent", "csharp");
+
+// Azure* → Backup/Iaas/Storage/Sql/etc container renames
+@@clientName(Microsoft.RecoveryServices.AzureBackupServerContainer, "BackupServerContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureBackupServerEngine, "BackupServerEngine", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureBackupGoalFeatureSupportRequest, "BackupGoalFeatureSupportContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaaSVMContainer, "IaasVmContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSClassicComputeVMContainer, "IaasClassicComputeVmContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSComputeVMContainer, "IaasComputeVmContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureSqlContainer, "SqlContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureSQLAGWorkloadContainerProtectionContainer, "SqlAvailabilityGroupWorkloadProtectionContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureStorageContainer, "StorageContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureStorageErrorInfo, "StorageErrorInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureStorageProtectableContainer, "StorageProtectableContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVMAppContainerProtectableContainer, "VmAppContainerProtectableContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVMAppContainerProtectionContainer, "VmAppContainerProtectionContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadContainer, "WorkloadContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadContainerExtendedInfo, "WorkloadContainerExtendedInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadContainerAutoProtectionIntent, "WorkloadContainerAutoProtectionIntent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadErrorInfo, "WorkloadErrorInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.InquiryInfo, "WorkloadContainerInquiryInfo", "csharp");
+
+// Protectable item renames
+@@clientName(Microsoft.RecoveryServices.IaaSVMProtectableItem, "IaasVmProtectableItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSClassicComputeVMProtectableItem, "IaasClassicComputeVmProtectableItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSComputeVMProtectableItem, "IaasComputeVmProtectableItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureFileShareProtectableItem, "FileShareProtectableItem", "csharp");
+
+// Protection policy renames
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMProtectionPolicy, "IaasVmProtectionPolicy", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureFileShareProtectionPolicy, "FileShareProtectionPolicy", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureSqlProtectionPolicy, "SqlProtectionPolicy", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectionPolicy, "VmWorkloadProtectionPolicy", "csharp");
+
+// Job type renames (Azure* → *BackupJob)
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMJob, "IaasVmBackupJob", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMJobExtendedInfo, "IaasVmBackupJobExtendedInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMJobTaskDetails, "IaasVmBackupJobTaskDetails", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMJobV2, "IaasVmBackupJobV2", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMErrorInfo, "IaasVmErrorInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.DpmJob, "DpmBackupJob", "csharp");
+@@clientName(Microsoft.RecoveryServices.DpmJobExtendedInfo, "DpmBackupJobExtendedInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.DpmJobTaskDetails, "DpmBackupJobTaskDetails", "csharp");
+@@clientName(Microsoft.RecoveryServices.MabJob, "MabBackupJob", "csharp");
+@@clientName(Microsoft.RecoveryServices.MabJobExtendedInfo, "MabBackupJobExtendedInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.MabJobTaskDetails, "MabBackupJobTaskDetails", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureStorageJob, "StorageBackupJob", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureStorageJobExtendedInfo, "StorageBackupJobExtendedInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureStorageJobTaskDetails, "StorageBackupJobTaskDetails", "csharp");
+@@clientName(Microsoft.RecoveryServices.VaultJob, "VaultBackupJob", "csharp");
+@@clientName(Microsoft.RecoveryServices.VaultJobErrorInfo, "VaultBackupJobErrorInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadJob, "WorkloadBackupJob", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadJobExtendedInfo, "WorkloadBackupJobExtendedInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadJobTaskDetails, "WorkloadBackupJobTaskDetails", "csharp");
+
+// Backup request/content renames
+@@clientName(Microsoft.RecoveryServices.AzureFileShareBackupRequest, "FileShareBackupContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMBackupRequest, "IaasVmBackupContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadBackupRequest, "WorkloadBackupContent", "csharp");
+
+// ILR/Provision renames
+@@clientName(Microsoft.RecoveryServices.AzureFileShareProvisionILRRequest, "FileShareProvisionIlrContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMILRRegistrationRequest, "IaasVmIlrRegistrationContent", "csharp");
+
+// Restore request/content renames
+@@clientName(Microsoft.RecoveryServices.AzureFileShareRestoreRequest, "FileShareRestoreContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMRestoreRequest, "IaasVmRestoreContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMRestoreWithRehydrationRequest, "IaasVmRestoreWithRehydrationContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMRecoveryPoint, "IaasVmRecoveryPoint", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadRestoreRequest, "WorkloadRestoreContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadPointInTimeRestoreRequest, "WorkloadPointInTimeRestoreContent", "csharp");
+
+// Recovery point renames
+@@clientName(Microsoft.RecoveryServices.AzureFileShareRecoveryPoint, "FileShareRecoveryPoint", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadRecoveryPoint, "WorkloadRecoveryPoint", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadPointInTimeRecoveryPoint, "WorkloadPointInTimeRecoveryPoint", "csharp");
+
+// SAP ASE renames
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPAsePointInTimeRecoveryPoint, "WorkloadSapAsePointInTimeRecoveryPoint", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPAseRecoveryPoint, "WorkloadSapAseRecoveryPoint", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPAsePointInTimeRestoreRequest, "WorkloadSapAsePointInTimeRestoreContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPAseRestoreRequest, "WorkloadSapAseRestoreContent", "csharp");
+
+// SAP HANA renames
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPHanaPointInTimeRecoveryPoint, "WorkloadSapHanaPointInTimeRecoveryPoint", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPHanaRecoveryPoint, "WorkloadSapHanaRecoveryPoint", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPHanaPointInTimeRestoreRequest, "WorkloadSapHanaPointInTimeRestoreContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest, "WorkloadSapHanaPointInTimeRestoreWithRehydrateContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPHanaRestoreRequest, "WorkloadSapHanaRestoreContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPHanaRestoreWithRehydrateRequest, "WorkloadSapHanaRestoreWithRehydrateContent", "csharp");
+
+// SQL renames
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLAutoProtectionIntent, "WorkloadSqlAutoProtectionIntent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLPointInTimeRecoveryPoint, "WorkloadSqlPointInTimeRecoveryPoint", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLRecoveryPoint, "WorkloadSqlRecoveryPoint", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLRecoveryPointExtendedInfo, "WorkloadSqlRecoveryPointExtendedInfo", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLPointInTimeRestoreRequest, "WorkloadSqlPointInTimeRestoreContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest, "WorkloadSqlPointInTimeRestoreWithRehydrateContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLRestoreRequest, "WorkloadSqlRestoreContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLRestoreWithRehydrateRequest, "WorkloadSqlRestoreWithRehydrateContent", "csharp");
+
+// VmWorkload protectable/workload item renames
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadItem, "VmWorkloadItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPAseDatabaseProtectableItem, "VmWorkloadSapAseDatabaseProtectableItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPAseDatabaseWorkloadItem, "VmWorkloadSapAseDatabaseWorkloadItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPAseSystemProtectableItem, "VmWorkloadSapAseSystemProtectableItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPAseSystemWorkloadItem, "VmWorkloadSapAseSystemWorkloadItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPHanaDatabaseProtectableItem, "VmWorkloadSapHanaDatabaseProtectableItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPHanaDatabaseWorkloadItem, "VmWorkloadSapHanaDatabaseWorkloadItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPHanaDBInstance, "VmWorkloadSapHanaDBInstance", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPHanaHSRProtectableItem, "VmWorkloadSapHanaHsrProtectableItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPHanaSystemProtectableItem, "VmWorkloadSapHanaSystemProtectableItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSAPHanaSystemWorkloadItem, "VmWorkloadSapHanaSystemWorkloadItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSQLAvailabilityGroupProtectableItem, "VmWorkloadSqlAvailabilityGroupProtectableItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSQLDatabaseProtectableItem, "VmWorkloadSqlDatabaseProtectableItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSQLDatabaseWorkloadItem, "VmWorkloadSqlDatabaseWorkloadItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSQLInstanceProtectableItem, "VmWorkloadSqlInstanceProtectableItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadSQLInstanceWorkloadItem, "VmWorkloadSqlInstanceWorkloadItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectionPolicy, "VmWorkloadProtectionPolicy", "csharp");
+
+// Intent renames
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadAutoProtectionIntent, "WorkloadAutoProtectionIntent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureRecoveryServiceVaultProtectionIntent, "RecoveryServiceVaultProtectionIntent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureResourceProtectionIntent, "ResourceProtectionIntent", "csharp");
+
+// Feature support renames
+@@clientName(Microsoft.RecoveryServices.AzureVMResourceFeatureSupportRequest, "VmResourceFeatureSupportContent", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVMResourceFeatureSupportResponse, "VmResourceFeatureSupportResult", "csharp");
+
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   "Client",
   "go"

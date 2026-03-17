@@ -31,27 +31,6 @@ model BackupResourceEncryptionConfigExtendedResource
   eTag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
-@singleton("backupResourceEncryptionConfig")
-@parentResource(VaultResource)
-@doc("")
-model BackupResourceEncryptionConfigResource
-  is TrackedResourceWithOptionalLocation<BackupResourceEncryptionConfig> {
-  ...ResourceNameParameter<
-    Resource = BackupResourceEncryptionConfigResource,
-    KeyName = "backupEncryptionConfig",
-    SegmentName = "backupEncryptionConfigs",
-    NamePattern = ""
-  >;
-
-  /**
-   * Optional ETag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  eTag?: string;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface BackupResourceEncryptionConfigs {
@@ -67,7 +46,7 @@ interface BackupResourceEncryptionConfigs {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   update is ArmResourceCreateOrReplaceSync<
-    BackupResourceEncryptionConfigResource,
+    BackupResourceEncryptionConfigExtendedResource,
     Response = OkResponse
   >;
 }
@@ -80,7 +59,15 @@ interface BackupResourceEncryptionConfigs {
   "Vault encryption input config request"
 );
 
-@@doc(BackupResourceEncryptionConfigResource.name, "");
-@@doc(BackupResourceEncryptionConfigResource.properties,
-  "BackupResourceEncryptionConfigResource properties"
-);
+// Keep BackupResourceEncryptionConfigResource as a non-ARM model for Java/Go/Python override compatibility
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "non-ARM body model for update override"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+@doc("")
+model BackupResourceEncryptionConfigResource
+  is TrackedResourceWithOptionalLocation<BackupResourceEncryptionConfig> {
+  /**
+   * Optional ETag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "non-ARM body model"
+  eTag?: string;
+}
