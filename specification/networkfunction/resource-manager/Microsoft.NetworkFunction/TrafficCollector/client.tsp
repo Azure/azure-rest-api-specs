@@ -30,12 +30,15 @@ using Microsoft.NetworkFunction;
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(AzureTrafficCollector, AzureTrafficCollectorData, "csharp");
+@@alternateType(AzureTrafficCollector,
+  NetworkFunctionAzureTrafficCollector,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(AzureTrafficCollectorData.properties);
-@@alternateType(CollectorPolicy, CollectorPolicyData, "csharp");
+@@Legacy.flattenProperty(NetworkFunctionAzureTrafficCollector.properties);
+@@alternateType(CollectorPolicy, NetworkFunctionCollectorPolicy, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(CollectorPolicyData.properties);
+@@Legacy.flattenProperty(NetworkFunctionCollectorPolicy.properties);
 
 @@clientLocation(Operations.list, "NetworkFunctionOperations", "csharp");
 
@@ -44,7 +47,7 @@ namespace Microsoft.NetworkFunction {
   /**
    * Azure Traffic Collector resource.
    */
-  model AzureTrafficCollectorData
+  model NetworkFunctionAzureTrafficCollector
     is Azure.ResourceManager.TrackedResource<AzureTrafficCollectorPropertiesFormat> {
     ...Azure.ResourceManager.ResourceNameParameter<
       Resource = AzureTrafficCollector,
@@ -69,7 +72,7 @@ namespace Microsoft.NetworkFunction {
    * Collector policy resource.
    */
   @TypeSpec.Rest.parentResource(AzureTrafficCollector)
-  model CollectorPolicyData
+  model NetworkFunctionCollectorPolicy
     is Azure.ResourceManager.TrackedResource<CollectorPolicyPropertiesFormat> {
     ...Azure.ResourceManager.ResourceNameParameter<
       Resource = CollectorPolicy,
