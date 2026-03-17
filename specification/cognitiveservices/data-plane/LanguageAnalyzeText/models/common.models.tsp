@@ -192,7 +192,7 @@ model AnalyzeTextJobsInput {
   defaultLanguage?: string;
 
   /** Optional duration in seconds after which the job will be canceled if not completed. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   cancelAfter?: float32;
 }
 
