@@ -126,7 +126,7 @@ function extractResourceProviders(files) {
  * @param {import('@actions/github-script').AsyncFunctionArguments['core']} params.core
  * @returns {Promise<{ status: string, labelActions: ManagedLabelActions }>}
  */
-export default async function detectNewResourceProvider({ core }) {
+export default async function armModelingReview({ core }) {
   const options = {
     cwd: process.env.GITHUB_WORKSPACE,
     paths: ["specification"],

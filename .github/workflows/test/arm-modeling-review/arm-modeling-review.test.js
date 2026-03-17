@@ -8,22 +8,22 @@ vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({ raw: mockRaw }),
 }));
 
-vi.mock("../../src/arm-lease-validation/detect-arm-leases.js", () => ({
+vi.mock("../../src/arm-modeling-review/detect-arm-leases.js", () => ({
   checkLease: vi.fn().mockResolvedValue(false),
 }));
 
-vi.mock("../../src/arm-lease-validation/detect-new-resource-types.js", () => ({
+vi.mock("../../src/arm-modeling-review/detect-new-resource-types.js", () => ({
   detectNewResourceTypes: vi.fn().mockResolvedValue([]),
 }));
 
 import * as changedFiles from "../../../shared/src/changed-files.js";
-import { checkLease } from "../../src/arm-lease-validation/detect-arm-leases.js";
-import detectNewResourceProvider from "../../src/arm-lease-validation/detect-new-resource-provider.js";
-import { detectNewResourceTypes } from "../../src/arm-lease-validation/detect-new-resource-types.js";
+import { checkLease } from "../../src/arm-modeling-review/detect-arm-leases.js";
+import armModelingReview from "../../src/arm-modeling-review/arm-modeling-review.js";
+import { detectNewResourceTypes } from "../../src/arm-modeling-review/detect-new-resource-types.js";
 
 const core = createMockCore();
 
-describe("detectNewResourceProvider", () => {
+describe("armModelingReview", () => {
   afterEach(() => {
     vi.clearAllMocks();
     delete process.env.GITHUB_WORKSPACE;
@@ -39,7 +39,7 @@ describe("detectNewResourceProvider", () => {
     // Pre-check: file exists in base → not brand new
     vi.mocked(mockRaw).mockResolvedValue(rmFile);
 
-    const result = await detectNewResourceProvider({ core });
+    const result = await armModelingReview({ core });
 
     expect(result.status).toBe("no-new-rp");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("remove");
@@ -57,7 +57,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
     vi.mocked(checkLease).mockResolvedValue(true);
 
-    const result = await detectNewResourceProvider({ core });
+    const result = await armModelingReview({ core });
 
     expect(result.status).toBe("new-rp-all-leases-valid");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("remove");
@@ -76,7 +76,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
     vi.mocked(checkLease).mockResolvedValue(false);
 
-    const result = await detectNewResourceProvider({ core });
+    const result = await armModelingReview({ core });
 
     expect(result.status).toBe("new-rp-invalid-lease");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("add");
@@ -100,7 +100,7 @@ describe("detectNewResourceProvider", () => {
     // SvcA valid, SvcB invalid
     vi.mocked(checkLease).mockImplementation((orgName) => Promise.resolve(orgName === "svcA"));
 
-    const result = await detectNewResourceProvider({ core });
+    const result = await armModelingReview({ core });
 
     expect(result.status).toBe("new-rp-invalid-lease");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("add");
@@ -120,7 +120,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
     vi.mocked(checkLease).mockResolvedValue(true);
 
-    const result = await detectNewResourceProvider({ core });
+    const result = await armModelingReview({ core });
 
     expect(result.status).toBe("new-rp-all-leases-valid");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("remove");
@@ -137,7 +137,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
     vi.mocked(checkLease).mockResolvedValue(true);
 
-    await detectNewResourceProvider({ core });
+    await armModelingReview({ core });
 
     expect(checkLease).toHaveBeenCalledWith("svc", "Microsoft.Svc", "ComputeRP");
   });
@@ -150,7 +150,7 @@ describe("detectNewResourceProvider", () => {
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([rmFile]);
     vi.mocked(mockRaw).mockResolvedValue(rmFile);
 
-    const result = await detectNewResourceProvider({ core });
+    const result = await armModelingReview({ core });
 
     expect(result.labelActions.ARMModelingReviewRequired).toBe("remove");
     expect(result.labelActions.ARMModelingSignedOff).toBe("remove");
@@ -166,7 +166,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
     vi.mocked(checkLease).mockResolvedValue(false);
 
-    const result = await detectNewResourceProvider({ core });
+    const result = await armModelingReview({ core });
 
     expect(result.labelActions.ARMModelingReviewRequired).toBe("add");
     expect(result.labelActions.ARMModelingSignedOff).toBe("remove");
@@ -182,7 +182,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue("");
     vi.mocked(checkLease).mockResolvedValue(true);
 
-    const result = await detectNewResourceProvider({ core });
+    const result = await armModelingReview({ core });
 
     expect(result.labelActions.ARMModelingReviewRequired).toBe("remove");
     expect(result.labelActions.ARMModelingSignedOff).toBe("remove");
@@ -217,7 +217,7 @@ describe("detectNewResourceProvider", () => {
     ]);
     vi.mocked(checkLease).mockResolvedValue(true);
 
-    const result = await detectNewResourceProvider({ core });
+    const result = await armModelingReview({ core });
 
     expect(result.status).toBe("new-rt-all-leases-valid");
     expect(result.labelActions.ARMModelingAutoSignedOff).toBe("add");
@@ -250,7 +250,7 @@ describe("detectNewResourceProvider", () => {
     ]);
     vi.mocked(checkLease).mockResolvedValue(false);
 
-    const result = await detectNewResourceProvider({ core });
+    const result = await armModelingReview({ core });
 
     expect(result.status).toBe("new-rt-invalid-lease");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("add");
@@ -267,7 +267,7 @@ describe("detectNewResourceProvider", () => {
     vi.mocked(mockRaw).mockResolvedValue(rmFile);
     vi.mocked(detectNewResourceTypes).mockResolvedValue([]);
 
-    const result = await detectNewResourceProvider({ core });
+    const result = await armModelingReview({ core });
 
     expect(result.status).toBe("no-new-rp");
     expect(result.labelActions.ARMModelingReviewRequired).toBe("remove");

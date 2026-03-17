@@ -11,7 +11,7 @@ vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({ raw: mockRaw, show: mockShow }),
 }));
 
-import { detectNewResourceTypes } from "../../src/arm-lease-validation/detect-new-resource-types.js";
+import { detectNewResourceTypes } from "../../src/arm-modeling-review/detect-new-resource-types.js";
 
 const core = createMockCore();
 

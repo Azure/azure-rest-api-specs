@@ -15,7 +15,7 @@ vi.mock("../../../shared/src/simple-git.js", () => ({
   getRootFolder: mockGetRootFolder,
 }));
 
-import { checkLease, parseLease } from "../../src/arm-lease-validation/detect-arm-leases.js";
+import { checkLease, parseLease } from "../../src/arm-modeling-review/detect-arm-leases.js";
 
 // Use a fixed date for deterministic tests (avoids flakiness around midnight)
 const FIXED_TEST_DATE = new Date("2025-06-15T12:00:00Z");
