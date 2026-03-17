@@ -10,6 +10,14 @@ namespace Azure.AI.Projects;
 alias JobsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.jobs_v1_preview>;
 
 alias JobsFilterQueryParams = {
+  @doc("Continuation token for pagination. Opaque string returned in a prior list response.")
+  @query("$skipToken")
+  skipToken?: string;
+
+  @doc("Filter by job type (e.g. 'Command').")
+  @query
+  jobType?: string;
+
   @doc("Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').")
   @query
   tag?: string;
@@ -17,6 +25,10 @@ alias JobsFilterQueryParams = {
   @doc("Specifies which view type to apply when listing jobs.")
   @query
   listViewType?: ListViewType;
+
+  @doc("Comma-separated user property names and optionally values. Example: prop1,prop2=value2.")
+  @query
+  properties?: string;
 };
 
 alias JobOperations = FoundryAzureOperations<{}>;
@@ -59,6 +71,7 @@ interface Jobs {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Delete returns 202/204 with no body"
   @doc("Delete a Job by name.")
   @delete
   delete is Azure.Core.Foundations.ResourceOperation<
@@ -66,19 +79,20 @@ interface Jobs {
     {
       ...JobsPreviewHeader;
     },
-    Http.NoContentResponse
+    Http.AcceptedResponse | Http.NoContentResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Cancel action uses ResourceAction with no response body"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Cancel returns 200 with no body"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Cancel returns 200/202 with no body"
   @doc("Cancel a Job by name.")
   @post
+  @Rest.action("cancel")
   @actionSeparator("/")
   cancel is Azure.Core.Foundations.ResourceOperation<
     CommandJob,
     {
       ...JobsPreviewHeader;
     },
-    Http.OkResponse
+    Http.OkResponse | Http.AcceptedResponse
   >;
 }

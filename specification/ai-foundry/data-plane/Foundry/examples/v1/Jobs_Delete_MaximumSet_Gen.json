@@ -8,6 +8,12 @@
     "Foundry-Features": "Jobs=V1Preview"
   },
   "responses": {
-    "204": {}
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/operations/delete-operation-id",
+        "Retry-After": "10",
+        "x-ms-async-operation-timeout": "PT1H"
+      }
+    }
   }
 }
