@@ -317,6 +317,49 @@ interface Data {
   @added(Versions.v2026_04_15)
   cropFeatureGeoJsonWidthByHeight is MosaicItemsFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
 
+  // Item Bounds, Info, Assets
+  @added(Versions.v2026_04_15)
+  getItemBounds is MosaicItemsBounds.getAll;
+  @added(Versions.v2026_04_15)
+  getItemInfo is MosaicItemsInfo.get;
+  @added(Versions.v2026_04_15)
+  getItemInfoGeoJson is MosaicItemsInfoGeoJson.get;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  @added(Versions.v2026_04_15)
+  listItemAvailableAssets is MosaicItemsAvailableAssets.getAll;
+
+  // Item Statistics
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  @added(Versions.v2026_04_15)
+  getItemAssetStatistics is MosaicItemsAssetStatistics.getAll;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  @added(Versions.v2026_04_15)
+  listItemStatistics is MosaicItemsStatistics.getAll;
+  @added(Versions.v2026_04_15)
+  getItemGeoJsonStatistics is MosaicItemsGeoJsonStatistics.get;
+
+  // Item TileJSON
+  @added(Versions.v2026_04_15)
+  getItemTileJson is MosaicItemsTileJson.get;
+  @added(Versions.v2026_04_15)
+  getItemTileJsonTms is MosaicItemsTileMatrixSetsTileJson.get;
+
+  // Item WMTS
+  @added(Versions.v2026_04_15)
+  getItemWmtsCapabilities is MosaicItemsWmts.getCapabilitiesXml;
+  @added(Versions.v2026_04_15)
+  getItemWmtsCapabilitiesTms is MosaicItemsWmtsTileMatrixSets.getCapabilitiesXml;
+
+  // Item Point
+  @added(Versions.v2026_04_15)
+  getItemPoint is MosaicItemsPoint.getPoint;
+
+  // Item Preview
+  @added(Versions.v2026_04_15)
+  getItemPreview is MosaicItemsPreview.get;
+  @added(Versions.v2026_04_15)
+  getItemPreviewWithFormat is MosaicItemsPreviewFormat.getFormat;
+
   // Item Bbox Crop
   @added(Versions.v2026_04_15)
   getItemBboxCrop is MosaicItemsBbox.getCroppedToBoundingBox;
