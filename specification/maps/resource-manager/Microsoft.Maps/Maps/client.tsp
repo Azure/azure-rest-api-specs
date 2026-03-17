@@ -8,11 +8,11 @@ using Azure.ClientGenerator.Core;
 // Preserve legacy Java names for renamed encryption identity models.
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
   "CustomerManagedKeyEncryptionKeyIdentity",
-  "java"
+  "java,javascript"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "IdentityType",
-  "java"
+  "java,javascript"
 );
 
 @@clientName(Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
@@ -61,6 +61,19 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.Maps.LinkedResource, "MapsLinkedResource", "csharp");
 @@clientName(Microsoft.Maps.CorsRule, "MapsCorsRule", "csharp");
 @@clientName(Microsoft.Maps.CorsRules, "MapsCorsRules", "csharp");
+@@clientName(Microsoft.Maps.PublicNetworkAccess,
+  "MapsPublicNetworkAccess",
+  "csharp"
+);
+@@clientName(Microsoft.Maps.PrivateEndpointConnection,
+  "MapsPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(Microsoft.Maps.PrivateLinkResource,
+  "MapsPrivateLinkResource",
+  "csharp"
+);
+@@clientName(Microsoft.Maps.LocationsItem, "MapsLocationItem", "csharp");
 
 // Common type renames for C#
 @@clientName(Azure.ResourceManager.CommonTypes.Encryption,
@@ -80,15 +93,9 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-// Suppress OperationResult/OperationStatus operations (not in previous GA SDK)
-@@access(Microsoft.Maps.OperationResultOperationGroup.get,
-  Access.internal,
-  "csharp"
-);
-@@access(Microsoft.Maps.OperationStatusOperationGroup.get,
-  Access.internal,
-  "csharp"
-);
+// Remove OperationResult/OperationStatus LRO polling operations from C# generation
+@@scope(Microsoft.Maps.OperationResultOperationGroup.get, "!csharp");
+@@scope(Microsoft.Maps.OperationStatusOperationGroup.get, "!csharp");
 
 // Override clientLocation for Operations.list to avoid C# namespace conflict
 // (back-compatible.tsp sets it to "Maps" for all languages, which conflicts with
