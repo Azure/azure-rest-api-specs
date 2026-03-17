@@ -121,6 +121,9 @@
       "name": "AgentDeployment"
     },
     {
+      "name": "ComputeOperations"
+    },
+    {
       "name": "Skus"
     },
     {
@@ -467,6 +470,52 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/computeOperations/{operationId}": {
+      "get": {
+        "operationId": "ComputeOperations_Get",
+        "tags": [
+          "ComputeOperations"
+        ],
+        "description": "Gets the status of a compute operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The ID of the compute operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComputeOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetComputeOperationStatus": {
+            "$ref": "./examples/GetComputeOperationStatus.json"
+          }
         }
       }
     },
@@ -11393,6 +11442,84 @@
           ]
         }
       }
+    },
+    "ComputeOperationStatus": {
+      "type": "object",
+      "description": "The status of an async compute operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ComputeOperationStatusProperties",
+          "description": "The properties of the compute operation status."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ComputeOperationStatusProperties": {
+      "type": "object",
+      "description": "The properties of a compute operation status.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ComputeOperationStatusType",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "Error details if the operation failed."
+        }
+      }
+    },
+    "ComputeOperationStatusType": {
+      "type": "string",
+      "description": "The status type of a compute operation.",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeOperationStatusType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "ConnectionAccessKey": {
       "type": "object",
