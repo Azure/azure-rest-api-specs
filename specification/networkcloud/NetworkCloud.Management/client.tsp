@@ -6,6 +6,44 @@ using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using Microsoft.NetworkCloud;
 
+// Backward-compat: old API exposed ExtendedLocation in Azure.ResourceManager.NetworkCloud.Models namespace.
+// Define a custom model so @@alternateType can map to it, preserving the old API type.
+// C# custom code uses [CodeGenType("NetworkCloudExtendedLocation")] to rename it to ExtendedLocation.
+namespace Microsoft.NetworkCloud {
+  model NetworkCloudExtendedLocation
+    is Azure.ResourceManager.CommonTypes.ExtendedLocation {}
+}
+
+// Map extendedLocation from mixins to the custom type for ApiCompat
+@@alternateType(RequiredExtendedLocationProperty.extendedLocation, Microsoft.NetworkCloud.NetworkCloudExtendedLocation, "csharp");
+@@alternateType(Azure.ResourceManager.ExtendedLocationProperty.extendedLocation, Microsoft.NetworkCloud.NetworkCloudExtendedLocation, "csharp");
+
+// ClusterProperties has additional ExtendedLocation properties
+@@alternateType(ClusterProperties.clusterExtendedLocation, Microsoft.NetworkCloud.NetworkCloudExtendedLocation, "csharp");
+@@alternateType(ClusterProperties.hybridAksExtendedLocation, Microsoft.NetworkCloud.NetworkCloudExtendedLocation, "csharp");
+
+// Map eTag from spread alias to Azure.ETag? for ApiCompat (property name is 'etag' lowercase)
+@@alternateType(AccessBridge.etag, Azure.Core.eTag, "csharp");
+@@alternateType(AgentPool.etag, Azure.Core.eTag, "csharp");
+@@alternateType(BareMetalMachine.etag, Azure.Core.eTag, "csharp");
+@@alternateType(BareMetalMachineKeySet.etag, Azure.Core.eTag, "csharp");
+@@alternateType(BmcKeySet.etag, Azure.Core.eTag, "csharp");
+@@alternateType(CloudServicesNetwork.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Cluster.etag, Azure.Core.eTag, "csharp");
+@@alternateType(ClusterManager.etag, Azure.Core.eTag, "csharp");
+@@alternateType(ClusterMetricsConfiguration.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Console.etag, Azure.Core.eTag, "csharp");
+@@alternateType(KubernetesCluster.etag, Azure.Core.eTag, "csharp");
+@@alternateType(KubernetesVersion.etag, Azure.Core.eTag, "csharp");
+@@alternateType(L2Network.etag, Azure.Core.eTag, "csharp");
+@@alternateType(L3Network.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Rack.etag, Azure.Core.eTag, "csharp");
+@@alternateType(StorageAppliance.etag, Azure.Core.eTag, "csharp");
+@@alternateType(TrunkedNetwork.etag, Azure.Core.eTag, "csharp");
+@@alternateType(VirtualMachine.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Volume.etag, Azure.Core.eTag, "csharp");
+@@alternateType(KubernetesClusterFeature.etag, Azure.Core.eTag, "csharp");
+
 @@clientName(AgentOptions, "NetworkCloudAgentConfiguration", "csharp");
 
 @@alternateType(BareMetalMachineProperties.associatedResourceIds,
@@ -334,10 +372,6 @@ using Microsoft.NetworkCloud;
 @@clientName(TrunkedNetwork, "NetworkCloudTrunkedNetwork", "csharp");
 @@clientName(VirtualMachine, "NetworkCloudVirtualMachine", "csharp");
 @@clientName(Volume, "NetworkCloudVolume", "csharp");
-@@clientName(ClusterAvailableUpgradeVersion,
-  "NetworkCloudClusterAvailableUpgradeVersion",
-  "csharp"
-);
 @@clientName(KubernetesClusterFeature,
   "NetworkCloudKubernetesClusterFeature",
   "csharp"
