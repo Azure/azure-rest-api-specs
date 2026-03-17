@@ -5,6 +5,10 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.Subscription;
 
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
+@@clientName(SubscriptionOperationGroup.acceptOwnership::parameters.body,
+  "requestbody_body",
+  "python"
+);
 
 @@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.cancel::parameters.subscriptionId,
   SubscriptionOperationGroup.cancel
