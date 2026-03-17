@@ -866,7 +866,7 @@ op backupResourceEncryptionConfigsUpdate(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  backupEncryptionConfig: string,
+  name: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   parameters: BackupResourceEncryptionConfigResource,

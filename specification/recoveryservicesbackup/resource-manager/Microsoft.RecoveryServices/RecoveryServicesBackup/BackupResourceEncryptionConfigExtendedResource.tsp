@@ -65,6 +65,10 @@ interface BackupResourceEncryptionConfigs {
 @doc("")
 model BackupResourceEncryptionConfigResource
   is TrackedResourceWithOptionalLocation<BackupResourceEncryptionConfig> {
+  @doc("")
+  @visibility(Lifecycle.Read)
+  name: string;
+
   /**
    * Optional ETag.
    */
