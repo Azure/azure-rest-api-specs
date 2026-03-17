@@ -952,8 +952,8 @@ namespace Azure.ResourceManager.Models {
 // Fix Action.ALLOW casing to match prior GA (Allow)
 @@clientName(Action.ALLOW, "Allow", "csharp");
 
-// Fix CheckNameAvailabilityParameters.type to Azure.Core.ResourceType
+// Fix CheckNameAvailabilityParameters.type to Azure.Core.armResourceType (maps to C# ResourceType)
 @@alternateType(StorageAccountCheckNameAvailabilityParameters.type,
-  Azure.Core.ResourceType,
+  Azure.Core.armResourceType,
   "csharp"
 );
