@@ -206,11 +206,10 @@ model TargetInput {
   @doc("Location of the folder / container with your documents")
   targetUrl: string;
 
-  @doc("Category / custom system for translation request")
-  @removed(Versions.v2026_03_01)
+  /** Category / custom system for translation request. Deprecated - use deploymentName instead. */
   category?: string;
 
-  @doc("Deployment name of the custom translation model for the translation request")
+  /** Deployment name of the custom translation model for the translation request. */
   @added(Versions.v2026_03_01)
   deploymentName?: string;
 
