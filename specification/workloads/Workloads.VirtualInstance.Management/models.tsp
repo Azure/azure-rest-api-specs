@@ -105,7 +105,7 @@ union LinkType {
 /**
  * Defines the resource provisioning states.
  */
-union ResourceProvisioningState {
+union WorkloadProvisioningState {
   string,
 
   /**
@@ -428,7 +428,7 @@ model VirtualInstanceProperties {
    * Defines the virtual instance provisioning state.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: WorkloadProvisioningState;
 
   /**
    * Indicates any errors on the Virtual Instance resource.
@@ -645,7 +645,7 @@ model WorkloadComponentProperties {
    * Defines the workload component provisioning state.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: WorkloadProvisioningState;
 
   /**
    * Indicates any errors on the workload component resource.

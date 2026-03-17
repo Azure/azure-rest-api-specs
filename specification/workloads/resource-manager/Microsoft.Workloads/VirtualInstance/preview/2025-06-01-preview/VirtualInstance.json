@@ -806,55 +806,6 @@
         "resourceId"
       ]
     },
-    "ResourceProvisioningState": {
-      "type": "string",
-      "description": "Defines the resource provisioning states.",
-      "enum": [
-        "Succeeded",
-        "Updating",
-        "Creating",
-        "Failed",
-        "Deleting",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The succeeded provisioning state."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The updating provisioning state."
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "The Creating provisioning state."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The Failed provisioning state."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The Deleting provisioning state."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The Canceled provisioning state."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "SystemLifecycleStage": {
       "type": "string",
       "description": "Defines the possible values for system lifecycle stage.",
@@ -1071,7 +1022,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ResourceProvisioningState",
+          "$ref": "#/definitions/WorkloadProvisioningState",
           "description": "Defines the virtual instance provisioning state.",
           "readOnly": true
         },
@@ -1211,7 +1162,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ResourceProvisioningState",
+          "$ref": "#/definitions/WorkloadProvisioningState",
           "description": "Defines the workload component provisioning state.",
           "readOnly": true
         },
@@ -1286,6 +1237,55 @@
       "required": [
         "workloadType"
       ]
+    },
+    "WorkloadProvisioningState": {
+      "type": "string",
+      "description": "Defines the resource provisioning states.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Creating",
+        "Failed",
+        "Deleting",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The succeeded provisioning state."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The updating provisioning state."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The Creating provisioning state."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The Failed provisioning state."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The Deleting provisioning state."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The Canceled provisioning state."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "WorkloadResourceId": {
       "type": "string",
