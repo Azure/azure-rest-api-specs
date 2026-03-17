@@ -24,7 +24,7 @@ model ApplyUpdate
 }
 
 @armResourceOperations
-interface ApplyUpdateOps
+interface ApplyParentUpdateOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
         ...ApiVersionParameter,
@@ -72,11 +72,92 @@ interface ApplyUpdateOps
     > {}
 
 @armResourceOperations
+interface ApplyUpdateGrandParentOps
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+
+        /**
+         * Resource provider name
+         */
+        @path
+        @key
+        @segment("providers")
+        providerName: string,
+
+        /**
+         * Resource second parent type
+         */
+        @path
+        @key
+        resourceGrandParentType: string,
+
+        /**
+         * Resource second parent name
+         */
+        @path
+        @key
+        resourceGrandParentName: string,
+
+        /**
+         * Resource parent type
+         */
+        @path
+        @key
+        resourceParentType: string,
+
+        /**
+         * Resource parent name
+         */
+        @path
+        @key
+        resourceParentName: string,
+
+        /**
+         * Resource type
+         */
+        @path
+        @key
+        resourceType: string,
+
+        /**
+         * Resource name
+         */
+        @path
+        @key
+        resourceName: string,
+      },
+      {},
+      {
+        ...Extension.ExtensionProviderNamespace<ApplyUpdate>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApplyUpdate,
+          KeyName = "applyUpdateName",
+          SegmentName = "applyUpdates",
+          NamePattern = ""
+        >>,
+      }
+    > {}
+
+@armResourceOperations
 interface ApplyUpdates {
   /**
    * Track maintenance updates to resource with parent
    */
-  getParent is ApplyUpdateOps.Read<ApplyUpdate, ErrorType = MaintenanceError>;
+  getParent is ApplyParentUpdateOps.Read<
+    ApplyUpdate,
+    ErrorType = MaintenanceError
+  >;
+
+  /**
+   * Track maintenance updates to resource with 2 parents
+   */
+  getGrandParent is ApplyUpdateGrandParentOps.Read<
+    ApplyUpdate,
+    ErrorType = MaintenanceError
+  >;
 }
 
 @armResourceOperations

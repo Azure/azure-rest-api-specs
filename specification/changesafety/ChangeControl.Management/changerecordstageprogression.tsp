@@ -100,6 +100,9 @@ union ChangeRecordStageProgressionState {
 
   @doc("Change is not applied to the stage.")
   Skipped: "Skipped",
+
+  @doc("Change has not yet been initialized for the stage.")
+  Uninitialized: "Uninitialized",
 }
 
 @added(Versions.v2026_01_01_preview)

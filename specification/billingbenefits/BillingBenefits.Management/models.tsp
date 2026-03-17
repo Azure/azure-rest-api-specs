@@ -2536,13 +2536,12 @@ model CreditReason {
   /**
    * The reason code for credit.
    */
-  @visibility(Lifecycle.Read)
-  code?: float32;
+  @typeChangedFrom(Versions.v2025_12_01_preview, float32)
+  code?: string;
 
   /**
    * The free string description of the credit.
    */
-  @visibility(Lifecycle.Read)
   description?: string;
 }
 
