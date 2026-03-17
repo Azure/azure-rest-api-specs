@@ -35,85 +35,16 @@ These settings apply only when `--tag=package-preview-2026-01-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2026-01-01-preview'
 input-file:
-  - Microsoft.KeyVault/preview/2026-01-01-preview/backuprestore.json
-  - Microsoft.KeyVault/preview/2026-01-01-preview/certificates.json
-  - Microsoft.KeyVault/preview/2026-01-01-preview/common.json
-  - Microsoft.KeyVault/preview/2026-01-01-preview/keys.json
-  - Microsoft.KeyVault/preview/2026-01-01-preview/rbac.json
-  - Microsoft.KeyVault/preview/2026-01-01-preview/secrets.json
-  - Microsoft.KeyVault/preview/2026-01-01-preview/securitydomain.json
-  - Microsoft.KeyVault/preview/2026-01-01-preview/settings.json
-  - Microsoft.KeyVault/preview/2026-01-01-preview/storage.json
-  - Microsoft.KeyVault/preview/2026-01-01-preview/ekm.json
-```
-
-### Tag: package-2025-07-01
-
-These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-07-01'
-input-file:
-  - Microsoft.KeyVault/stable/2025-07-01/backuprestore.json
-  - Microsoft.KeyVault/stable/2025-07-01/certificates.json
-  - Microsoft.KeyVault/stable/2025-07-01/common.json
-  - Microsoft.KeyVault/stable/2025-07-01/keys.json
-  - Microsoft.KeyVault/stable/2025-07-01/rbac.json
-  - Microsoft.KeyVault/stable/2025-07-01/secrets.json
-  - Microsoft.KeyVault/stable/2025-07-01/securitydomain.json
-  - Microsoft.KeyVault/stable/2025-07-01/settings.json
-  - Microsoft.KeyVault/stable/2025-07-01/storage.json
-```
-
-### Tag: package-preview-2025-06-01-preview
-
-These settings apply only when `--tag=package-preview-2025-06-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-06-01-preview'
-input-file:
-  - Microsoft.KeyVault/preview/2025-06-01-preview/backuprestore.json
-  - Microsoft.KeyVault/preview/2025-06-01-preview/certificates.json
-  - Microsoft.KeyVault/preview/2025-06-01-preview/common.json
-  - Microsoft.KeyVault/preview/2025-06-01-preview/keys.json
-  - Microsoft.KeyVault/preview/2025-06-01-preview/rbac.json
-  - Microsoft.KeyVault/preview/2025-06-01-preview/secrets.json
-  - Microsoft.KeyVault/preview/2025-06-01-preview/securitydomain.json
-  - Microsoft.KeyVault/preview/2025-06-01-preview/settings.json
-  - Microsoft.KeyVault/preview/2025-06-01-preview/storage.json
-```
-
-### Tag: package-7.6
-
-These settings apply only when `--tag=package-7.6` is specified on the command line.
-
-```yaml $(tag) == 'package-7.6'
-input-file:
-  - Microsoft.KeyVault/stable/7.6/backuprestore.json
-  - Microsoft.KeyVault/stable/7.6/certificates.json
-  - Microsoft.KeyVault/stable/7.6/common.json
-  - Microsoft.KeyVault/stable/7.6/keys.json
-  - Microsoft.KeyVault/stable/7.6/rbac.json
-  - Microsoft.KeyVault/stable/7.6/secrets.json
-  - Microsoft.KeyVault/stable/7.6/securitydomain.json
-  - Microsoft.KeyVault/stable/7.6/settings.json
-  - Microsoft.KeyVault/stable/7.6/storage.json
-```
-
-### Tag: package-preview-7.6-preview.2
-
-These settings apply only when `--tag=package-preview-7.6-preview.2` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-7.6-preview.2'
-input-file:
-  - Microsoft.KeyVault/preview/7.6-preview.2/backuprestore.json
-  - Microsoft.KeyVault/preview/7.6-preview.2/certificates.json
-  - Microsoft.KeyVault/preview/7.6-preview.2/common.json
-  - Microsoft.KeyVault/preview/7.6-preview.2/keys.json
-  - Microsoft.KeyVault/preview/7.6-preview.2/rbac.json
-  - Microsoft.KeyVault/preview/7.6-preview.2/secrets.json
-  - Microsoft.KeyVault/preview/7.6-preview.2/securitydomain.json
-  - Microsoft.KeyVault/preview/7.6-preview.2/settings.json
-  - Microsoft.KeyVault/preview/7.6-preview.2/storage.json
-tag: package-preview-7.6-preview.1
+  - preview/2026-01-01-preview/backuprestore.json
+  - preview/2026-01-01-preview/certificates.json
+  - preview/2026-01-01-preview/common.json
+  - preview/2026-01-01-preview/keys.json
+  - preview/2026-01-01-preview/rbac.json
+  - preview/2026-01-01-preview/secrets.json
+  - preview/2026-01-01-preview/securitydomain.json
+  - preview/2026-01-01-preview/settings.json
+  - preview/2026-01-01-preview/storage.json
+  - preview/2026-01-01-preview/ekm.json
 ```
 
 ### Tag: package-preview-7.6-preview.1
@@ -267,11 +198,11 @@ These settings apply only when `--tag=package-7.1-preview` is specified on the c
 
 ``` yaml $(tag) == 'package-7.1-preview'
 input-file:
-- preview/7.1/certificates.json
-- preview/7.1/common.json
-- preview/7.1/keys.json
-- preview/7.1/secrets.json
-- preview/7.1/storage.json
+- preview/7.1-preview/certificates.json
+- preview/7.1-preview/common.json
+- preview/7.1-preview/keys.json
+- preview/7.1-preview/secrets.json
+- preview/7.1-preview/storage.json
 ```
 
 ### Tag: package-7.0
@@ -289,7 +220,7 @@ These settings apply only when `--tag=package-7.0-preview` is specified on the c
 
 ``` yaml $(tag) == 'package-7.0-preview'
 input-file:
-- preview/7.0/keyvault.json
+- preview/7.0-preview/keyvault.json
 ```
 
 ### Tag: package-2016-10
@@ -398,13 +329,13 @@ input-file:
   - $(this-folder)/stable/7.1/keys.json
   - $(this-folder)/stable/7.1/secrets.json
   - $(this-folder)/stable/7.1/storage.json
-  - $(this-folder)/preview/7.1/certificates.json
-  - $(this-folder)/preview/7.1/common.json
-  - $(this-folder)/preview/7.1/keys.json
-  - $(this-folder)/preview/7.1/secrets.json
-  - $(this-folder)/preview/7.1/storage.json
+  - $(this-folder)/preview/7.1-preview/certificates.json
+  - $(this-folder)/preview/7.1-preview/common.json
+  - $(this-folder)/preview/7.1-preview/keys.json
+  - $(this-folder)/preview/7.1-preview/secrets.json
+  - $(this-folder)/preview/7.1-preview/storage.json
   - $(this-folder)/stable/7.0/keyvault.json
-  - $(this-folder)/preview/7.0/keyvault.json
+  - $(this-folder)/preview/7.0-preview/keyvault.json
   - $(this-folder)/stable/2016-10-01/keyvault.json
   - $(this-folder)/stable/2015-06-01/keyvault.json
 
