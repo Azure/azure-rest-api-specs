@@ -65,15 +65,6 @@ using Microsoft.Relay;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RelayUpdateParameters,
-  RelayUpdateParametersReplacement,
-  "csharp"
-);
-@@clientName(RelayUpdateParameters, "RelayUpdateParametersTemp", "csharp");
-@@clientName(RelayUpdateParametersReplacement,
-  "RelayUpdateParameters",
-  "csharp"
-);
 @@clientName(PrivateLinkResource, "RelayPrivateLinkResource", "csharp");
 @@clientName(PrivateEndpointConnection,
   "RelayPrivateEndpointConnection",
@@ -95,6 +86,41 @@ using Microsoft.Relay;
 // Back-compat: property was named ConnectionState in the old SDK
 @@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
+  "csharp"
+);
+
+/**
+ * Description of a namespace resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RelayUpdateParametersReplacement
+  extends Azure.ResourceManager.CommonTypes.Resource {
+  /**
+   * SKU of the namespace.
+   */
+  sku?: Sku;
+
+  /**
+   * Description of Relay namespace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  properties?: RelayNamespaceProperties;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+}
+
+@@alternateType(RelayUpdateParameters,
+  RelayUpdateParametersReplacement,
+  "csharp"
+);
+@@clientName(RelayUpdateParameters, "RelayUpdateParametersTemp", "csharp");
+@@clientName(RelayUpdateParametersReplacement,
+  "RelayUpdateParameters",
   "csharp"
 );
 
