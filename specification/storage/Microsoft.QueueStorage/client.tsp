@@ -149,8 +149,8 @@ interface QueueClient extends Storage.Queues.Queue {}
   "javascript"
 );
 @@clientName(Storage.Queues.Metrics.includeApis, "includeAPIs", "javascript");
-@@alternateType(Storage.Queues.KeyInfo.start, string, "javascript");
-@@alternateType(Storage.Queues.KeyInfo.expiry, string, "javascript");
+@@alternateType(Storage.Queues.KeyInfo.start, string, "javascript, python");
+@@alternateType(Storage.Queues.KeyInfo.expiry, string, "javascript, python");
 @@clientName(Storage.Queues.KeyInfo.start, "startsOn", "javascript");
 @@clientName(Storage.Queues.KeyInfo.expiry, "expiresOn", "javascript");
 @@clientOption(Storage.Queues.Error,
