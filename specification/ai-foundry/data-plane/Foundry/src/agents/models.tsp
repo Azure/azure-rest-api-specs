@@ -161,6 +161,7 @@ model AgentObject {
     }
   )
   @doc("The instance identity of the agent")
+  @visibility(Lifecycle.Read)
   instance_identity?: AgentIdentity;
 
   @extension(
@@ -170,6 +171,7 @@ model AgentObject {
     }
   )
   @doc("The blueprint for the agent")
+  @visibility(Lifecycle.Read)
   blueprint?: AgentIdentity;
 
   @extension(
@@ -179,6 +181,7 @@ model AgentObject {
     }
   )
   @doc("The blueprint for the agent")
+  @visibility(Lifecycle.Read)
   blueprint_reference?: AgentBlueprintReference;
 
   @extension(
