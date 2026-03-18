@@ -33,3 +33,9 @@ interface BlocklistClient {
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
+
+// Java: Rename AnalyzeImageOutputType to AnalyzeImageSeverityLevel
+@@clientName(ContentSafety.AnalyzeImageOutputType, "AnalyzeImageSeverityLevel", "java");
+
+// Java: Rename outputType property to severityLevel (affects getSeverityLevel/setSeverityLevel methods)
+@@clientName(ContentSafety.AnalyzeImageOptions.outputType, "severityLevel", "java");
