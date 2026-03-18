@@ -3,7 +3,6 @@
   "operationId": "Jobs_List",
   "parameters": {
     "api-version": "v1",
-    "$skipToken": "continuation_token_from_previous_response",
     "jobType": "Command",
     "tag": "framework=pytorch",
     "listViewType": "ActiveOnly",
@@ -18,24 +17,39 @@
           {
             "id": "my_training_job_01",
             "name": "my_training_job_01",
-            "jobType": "Command",
-            "command": "python train.py --epochs 10",
-            "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
-            "displayName": "My Training Job",
-            "description": "A sample command job for training",
-            "tags": {
-              "framework": "pytorch"
-            },
+            "type": "Microsoft.MachineLearningServices/workspaces/jobs",
             "properties": {
-              "experimentName": "my-experiment"
+              "jobType": "Command",
+              "command": "python train.py --epochs 10",
+              "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
+              "displayName": "My Training Job",
+              "description": "A sample command job for training",
+              "tags": {
+                "framework": "pytorch"
+              },
+              "properties": {
+                "experimentName": "my-experiment"
+              },
+              "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
+              "resources": {
+                "instanceCount": 1,
+                "instanceType": "Standard_NC6"
+              },
+              "limits": {
+                "jobLimitsType": "Command",
+                "timeout": "PT2H30M"
+              },
+              "status": "Running",
+              "isArchived": false
             },
-            "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
-            "resources": {
-              "instanceCount": 1,
-              "instanceType": "Standard_NC6"
-            },
-            "status": "Running",
-            "isArchived": false
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999Z",
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User"
+            }
           }
         ],
         "nextLink": "https://eastus.api.azureml.ms/jobs?api-version=v1&skip=100"

@@ -10,13 +10,9 @@ namespace Azure.AI.Projects;
 alias JobsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.jobs_v1_preview>;
 
 alias JobsFilterQueryParams = {
-  @doc("Continuation token for pagination. Opaque string returned in a prior list response.")
-  @query("$skipToken")
-  skipToken?: string;
-
   @doc("Filter by job type (e.g. 'Command').")
   @query
-  jobType?: string;
+  jobType?: JobType;
 
   @doc("Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').")
   @query
@@ -37,37 +33,37 @@ alias JobOperations = FoundryAzureOperations<{}>;
 interface Jobs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("List Jobs.")
-  @Rest.listsResource(CommandJob)
+  @Rest.listsResource(Job)
   list is Azure.Core.Foundations.ResourceList<
-    CommandJob,
+    Job,
     JobsFilterQueryParams & JobsPreviewHeader,
-    Azure.Core.Page<CommandJob>
+    Azure.Core.Page<Job>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("Get a Job by name.")
   @get
   get is Azure.Core.Foundations.ResourceOperation<
-    CommandJob,
+    Job,
     {
       ...JobsPreviewHeader;
     },
-    Azure.Core.Foundations.ResourceOkResponse<CommandJob>
+    Azure.Core.Foundations.ResourceOkResponse<Job>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT create-or-update pattern required by the Job API wire format"
   @doc("Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.")
   @put
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
-    CommandJob,
+    Job,
     {
       ...JobsPreviewHeader;
 
-      @doc("The command job to create or update.")
+      @doc("The job to create or update.")
       @bodyRoot
-      body: CommandJob;
+      body: Job;
     },
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<CommandJob>
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<Job>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
@@ -75,7 +71,7 @@ interface Jobs {
   @doc("Delete a Job by name.")
   @delete
   delete is Azure.Core.Foundations.ResourceOperation<
-    CommandJob,
+    Job,
     {
       ...JobsPreviewHeader;
     },
@@ -89,7 +85,7 @@ interface Jobs {
   @Rest.action("cancel")
   @actionSeparator("/")
   cancel is Azure.Core.Foundations.ResourceOperation<
-    CommandJob,
+    Job,
     {
       ...JobsPreviewHeader;
     },

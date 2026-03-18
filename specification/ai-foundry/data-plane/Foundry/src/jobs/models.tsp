@@ -187,7 +187,6 @@ model JobResourceConfiguration {
 @doc("Command Job limit class.")
 model CommandJobLimits {
   @doc("JobLimit type.")
-  @visibility(Lifecycle.Read)
   jobLimitsType: "Command";
 
   @doc("The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.")
@@ -227,26 +226,30 @@ model JobSystemData {
   lastModifiedAt?: utcDateTime;
 }
 
-@doc("Command job definition.")
-@Rest.resource("jobs")
-model CommandJob {
-  @doc("The name of the Job. This is case-sensitive.")
-  @key("name")
-  @visibility(Lifecycle.Read)
-  name: string;
+@doc("Type of a job.")
+union JobType {
+  string,
 
-  @doc("The id for the Job.")
-  @visibility(Lifecycle.Read)
-  id?: string;
+  @doc("Command job.")
+  Command: "Command",
+}
 
-  @doc("Specifies the type of job.")
-  @visibility(Lifecycle.Read)
-  jobType: "Command";
+@doc("Base properties of a Job.")
+@discriminator("jobType")
+model JobProperties {
+  @doc("Job type.")
+  jobType: JobType;
+}
+
+@doc("Properties of a Command Job.")
+model CommandJob extends JobProperties {
+  @doc("Job type.")
+  jobType: JobType = JobType.Command;
 
   @doc("The command to execute on startup of the job.")
   command: string;
 
-  @doc("ACR path of environment")
+  @doc("ACR path of environment.")
   environmentId: string;
 
   @doc("Display name of job.")
@@ -261,7 +264,7 @@ model CommandJob {
   @doc("The asset property dictionary.")
   properties?: Record<string>;
 
-  @doc("Datasets Id")
+  @doc("Code asset reference.")
   codeId?: string;
 
   @doc("Compute resource ID.")
@@ -285,7 +288,8 @@ model CommandJob {
   @doc("Command Job limit.")
   limits?: CommandJobLimits;
 
-  @doc("List of JobEndpoints. For local jobs, a job endpoint will have an endpoint value of FileStreamObject.")
+  @doc("List of job services.")
+  @visibility(Lifecycle.Read)
   services?: Record<JobService>;
 
   @doc("Queue settings for the job.")
@@ -297,10 +301,30 @@ model CommandJob {
   @doc("Status of the job.")
   @visibility(Lifecycle.Read)
   status?: string;
+}
+
+@doc("Job resource.")
+@Rest.resource("jobs")
+model Job {
+  @doc("The name of the Job. This is case-sensitive.")
+  @key("name")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("The resource ID.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("The resource type.")
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  @doc("Properties of the job.")
+  properties: JobProperties;
 
   @doc("Metadata pertaining to creation and last modification of the resource.")
   @visibility(Lifecycle.Read)
-  creationContext?: JobSystemData;
+  systemData?: JobSystemData;
 }
 
 @doc("Specifies which jobs to include in a list result based on their lifecycle state.")

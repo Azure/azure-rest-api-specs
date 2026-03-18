@@ -5,25 +5,32 @@
     "api-version": "v1",
     "name": "my_training_job_01",
     "body": {
-      "command": "python train.py",
-      "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10"
+      "properties": {
+        "jobType": "Command",
+        "command": "python train.py",
+        "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10"
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
         "name": "my_training_job_01",
-        "jobType": "Command",
-        "command": "python train.py",
-        "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10"
+        "properties": {
+          "jobType": "Command",
+          "command": "python train.py",
+          "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10"
+        }
       }
     },
     "201": {
       "body": {
         "name": "my_training_job_01",
-        "jobType": "Command",
-        "command": "python train.py",
-        "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10"
+        "properties": {
+          "jobType": "Command",
+          "command": "python train.py",
+          "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10"
+        }
       }
     }
   }
