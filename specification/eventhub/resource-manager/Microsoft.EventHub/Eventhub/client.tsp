@@ -267,6 +267,8 @@ using Microsoft.EventHub;
   "csharp"
 );
 @@alternateType(AuthorizationRule.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(Cluster.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(EHNamespace.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(Eventhub.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(ConsumerGroup.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(ApplicationGroup.location, Azure.Core.azureLocation, "csharp");
@@ -337,16 +339,16 @@ using Microsoft.EventHub;
 );
 @@alternateType(Encryption.keySource, EventHubsKeySource, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility - flatten properties for C# SDK"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(EventHubsCluster.properties,
   "csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility - flatten properties for C# SDK"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(EventHubsNamespace.properties,
   "csharp"
 );
 
-// added to solve the problem that the c# resource class can inherit the `trackedResource data` class
+// Custom models to ensure C# resource classes inherit TrackedResourceData
 namespace Microsoft.EventHub {
   /**
    * Single Event Hubs Cluster resource in List or Get operations.
