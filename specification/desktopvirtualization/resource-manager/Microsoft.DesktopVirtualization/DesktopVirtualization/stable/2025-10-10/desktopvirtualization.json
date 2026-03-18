@@ -7509,17 +7509,19 @@
     },
     "PrivateEndpointConnectionWithSystemData": {
       "type": "object",
+      "description": "The Private Endpoint Connection resource.",
       "properties": {
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData"
+        "properties": {
+          "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      ],
-      "description": "The Private Endpoint Connection resource."
+      ]
     },
     "PrivateLinkResourceListResult": {
       "type": "object",
