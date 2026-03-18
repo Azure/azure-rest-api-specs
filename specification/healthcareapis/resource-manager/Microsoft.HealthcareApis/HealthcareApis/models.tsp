@@ -1026,6 +1026,7 @@ model ServiceManagedIdentity {
   /**
    * Setting indicating whether the service has a managed identity associated with it.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ServiceManagedIdentityIdentity;
 }
 
