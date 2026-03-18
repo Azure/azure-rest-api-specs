@@ -635,8 +635,7 @@ model RescheduleOperationConstraint {
 @doc("Constraint defining allowed time window for rescheduling")
 model ReschedulingWindowConstraint extends RescheduleOperationConstraint {
   kind: RescheduleOperationConstraintKind.ReschedulingWindow;
-
-  ...AvailableWindowForMaintenance
+  ...AvailableWindowForMaintenance;
 }
 
 @doc("Constraint defining weekend rescheduling restrictions")
@@ -651,7 +650,6 @@ model WeekendReschedulingConstraint extends RescheduleOperationConstraint {
   @visibility(Lifecycle.Read)
   disabledReason?: string;
 }
-
 
 @doc("Time window in which Customer can reschedule maintenance")
 model AvailableWindowForMaintenanceWhileRescheduleOperation
