@@ -4594,7 +4594,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_]+",
+            "pattern": "^[A-Za-z0-9_-]+",
             "description": "The name of the express route circuit."
           },
           {
@@ -4683,7 +4683,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_]+",
+            "pattern": "^[A-Za-z0-9_-]+",
             "description": "The name of the express route circuit."
           },
           {
@@ -4785,7 +4785,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_]+",
+            "pattern": "^[A-Za-z0-9_-]+",
             "description": "The name of the express route circuit."
           },
           {
@@ -4880,7 +4880,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_]+",
+            "pattern": "^[A-Za-z0-9_-]+",
             "description": "The name of the express route circuit."
           },
           {
@@ -7071,11 +7071,17 @@
       }
     },
     "ExpressRouteCircuitLinkFailoverAllTestsDetails": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverTestDetails"
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverTestDetails"
+           },
+          "description": "List of Circuit Failover All Test Details"
+        }
       },
-      "description": "Circuit Failover All Test Details"
+      "description": "Circuit Failover All Test Details Object"
     },
     "ExpressRouteFailoverTestType": {
       "type": "string",
@@ -7154,9 +7160,15 @@
       "description": "ExpressRoute Circuit link failover test details"
     },
     "ExpressRouteCircuitLinkFailoverSingleTestDetailsObject": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverSingleTestDetails"
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverSingleTestDetails"
+           },
+          "description": "List of Circuit Failover Single Test Details"
+        }
       },
       "description": "Circuit Failover Single Test Details Object"
     },
