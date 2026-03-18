@@ -259,3 +259,229 @@ expected:
     - "azure-typespec-author"
     - "Task Type"
     - "General Authoring"
+
+---
+id: basic-usage-013
+name: "Versioning: Version a spread property"
+description: |
+  Test versioning a spread model property so it only appears in a specific API version.
+  Based on benchmark case 001001-version-spread-property.
+tags:
+  - versioning
+inputs:
+  prompt: "I added `...Azure.ResourceManager.ManagedServiceIdentityProperty;` which updates all my existing API versions and introduces a breaking change. I want to introduce the properties of the spread model '...ManagedServiceIdentityProperty' in a new API version 2025-05-04-preview only."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "API Version Evolution"
+---
+id: basic-usage-014
+name: "Versioning: Add default value from specific version"
+description: |
+  Test adding a default value to a property starting from a specific API version.
+  Based on benchmark case 001002-version-default-value.
+tags:
+  - versioning
+inputs:
+  prompt: "add a default value `21` for property age in model EmployeeProperties from a new api version 2025-11-01"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "API Version Evolution"
+---
+id: basic-usage-015
+name: "Versioning: Change required to optional"
+description: |
+  Test changing a property from required to optional in a new API version.
+  Based on benchmark case 001003-version-required-to-optional.
+tags:
+  - versioning
+inputs:
+  prompt: "change the property age of EmployeeProperties from required to optional for new api version 2025-05-04-preview"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "API Version Evolution"
+---
+id: basic-usage-016
+name: "Versioning: Change property visibility in specific version"
+description: |
+  Test changing the visibility decorator on a property for a specific API version only.
+  Based on benchmark case 001004-version-property-decorator.
+tags:
+  - versioning
+inputs:
+  prompt: "change the visibility of property 'provisioningState' from Lifecycle.Read to Lifecycle.Read and Lifecycle.Create in version 2025-05-04-preview only"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "API Version Evolution"
+---
+id: basic-usage-017
+name: "Versioning: Add preview after preview"
+description: |
+  Test adding a new preview version when the latest version is already a preview.
+  Based on benchmark case 001005-version-add-preview-after-preview.
+tags:
+  - versioning
+inputs:
+  prompt: "Add a new preview version `2025-05-04-preview` to my service widget resource manager."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "API Version Evolution"
+---
+id: basic-usage-018
+name: "Versioning: Add stable after preview"
+description: |
+  Test promoting a preview API to stable by adding a new stable version.
+  Based on benchmark case 001007-version-add-stable-after-preview.
+tags:
+  - versioning
+inputs:
+  prompt: "I want to add a new stable version `2025-01-01`."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "API Version Evolution"
+---
+id: basic-usage-019
+name: "ARM: Add new extension resource (asset)"
+description: |
+  Test adding a new extension resource named "asset" to an existing service.
+  Based on benchmark case 002002-ARM-define-extension-resource.
+tags:
+  - arm
+  - resource-type
+inputs:
+  prompt: "add an extension resource named asset"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-020
+name: "ARM: Define a new resource from scratch"
+description: |
+  Test defining a complete new Azure resource with properties and CRUD operations.
+  Based on benchmark case 002005-ARM-define-the-resource.
+tags:
+  - arm
+  - resource-type
+inputs:
+  prompt: 'Define a Azure resource "User" under the namespace "Microsoft.Contoso" using TypeSpec. Ensure the definition meets TypeSpec Azure design guidelines.'
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-021
+name: "LRO: Dataplane async delete operation"
+description: |
+  Test adding an async delete operation for a data-plane service resource.
+  Based on benchmark case 003001-dataplane-async-delete-op.
+tags:
+  - lro
+  - operations
+  - dataplane
+inputs:
+  prompt: "Add an async delete operation for StacItems"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-022
+name: "Decorators: Delete and restore operationId decorator"
+description: |
+  Test removing @operationId decorators and their associated suppressions, then selectively restoring operationIds that do not follow standard naming.
+  Based on benchmark case 004003-delete-and-restore-operationId-decorator.
+tags:
+  - decorators
+inputs:
+  prompt: "Remove @operationId and its associated #suppress for no-openapi from all operations. Then restore those operationIds that do not contain underscores or begin with a lowercase letter."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-023
+name: "Warning: Suppress compilation warnings"
+description: |
+  Test adding suppressions for warnings produced by tsp compile.
+  Based on benchmark case 005001-warning-suppress-warning.
+tags:
+  - warnings
+  - suppressions
+inputs:
+  prompt: 'Add suppressions for the warnings produced by "tsp compile .", and set the justification to "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details".'
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"

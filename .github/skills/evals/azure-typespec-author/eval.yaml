@@ -1,0 +1,25 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+skill: azure-typespec-author
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: copilot-sdk
+  model: gpt-5.1-codex-mini
+metrics:
+  - name: task_completion
+    weight: 1.0
+    threshold: 0.8
+    description: Did the skill complete the assigned task?
+graders:
+  - type: text
+    name: no_fatal_errors
+    config:
+      regex_not_match:
+        - (?i)error occurred
+        - (?i)failed
+        - (?i)re-run the tool
+tasks:
+  - "tasks/*.yaml"
