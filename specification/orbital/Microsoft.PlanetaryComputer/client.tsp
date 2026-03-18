@@ -191,57 +191,95 @@ interface Data {
 
   // Statistics
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getAssetStatistics is TilerAssetStatistics.getAll;
 
   // Basic Info and Assets
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   listAvailableAssets is TilerAvailableAssets.getAll;
 
   // Basic Info and Assets
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getBounds is TilerBound.getAll;
 
   // Parts/Crops
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   cropGeoJson is TilerGeoJsons.cropFormat;
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   cropGeoJsonWithDimensions is TilerGeoJsons.cropWidthByHeightFormat;
 
   // Statistics
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getGeoJsonStatistics is TilerGeoJsonStatistics.get;
 
   // Basic Info and Assets
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getInfoGeoJson is TilerInfoGeoJsonOperations.get;
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getItemAssetDetails is TilerInfoOperations.get;
 
   // Parts/Crops
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getPart is TilerParts.getCroppedToBoundingBox;
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getPartWithDimensions is TilerParts.getCroppedToBoundingBoxWidthByHeight;
 
   // Points
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getPoint is TilerPoints.getPoint;
 
   // Previews
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getPreview is TilerPreviews.get;
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getPreviewWithFormat is TilerPreviews.getFormat;
 
   // Image Exports for STAC Collections
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   createStaticImage is TilerStaticImages.create;
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getStaticImage is TilerStaticImages.get;
 
   // Statistics
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   listStatistics is TilerStatistics.getAll;
 
   // Tile JSON
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getTileJson is TilerTileJsonTileMatrixSets.get;
   // getTileJson is TilerTileJsonOperations.get;
 
   // Tiles
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getTile is TilerTileMatrixSets.getZxyScaleByFormat;
   // getTile is TilerTiles.getZxyScaleByFormat;
 
   // WMTS Capabilities
   // getWmtsCapabilities is TilerWmts.getCapabilitiesXml;
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
+  @removed(Versions.v2026_04_15)
   getWmtsCapabilities is TilerWmtsTileMatrixSets.getCapabilitiesXml;
 
   // Map Legends
@@ -250,32 +288,32 @@ interface Data {
   getLegend is MapsLegends.get;
 
   // Mosaic Assets
-  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
   @removed(Versions.v2026_04_15)
   getMosaicsAssetsForPoint is MosaicsAssetsForPoints.getPointAssets;
-  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
   @removed(Versions.v2026_04_15)
   getMosaicsAssetsForTile is MosaicsAssetsForTileMatrixSets.getZxyAssets;
   // getMosaicsAssetsForTile is MosaicsAssetsForTiles.getZxyAssets;
 
   // Mosaic Search and Registration
-  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
   @removed(Versions.v2026_04_15)
   getMosaicsSearchInfo is MosaicsInfoSearch.get;
   registerMosaicsSearch is MosaicsRegisterSearch.register;
 
   // Mosaic Tile JSON
-  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
   @removed(Versions.v2026_04_15)
   getMosaicsTileJson is MosaicsTileMatrixSetsTileJson.get;
 
   // Mosaic Tiles
-  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
   @removed(Versions.v2026_04_15)
   getMosaicsTile is MosaicsTileMatrixSets.getZxyScaleByFormat;
 
   // Mosaic WMTS Capabilities
-  #suppress "deprecated" "Preview-era operation kept for backward compatibility"
+  #suppress "deprecated" "Preview-only operation, removed in stable version"
   @removed(Versions.v2026_04_15)
   getMosaicsWmtsCapabilities is MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml;
   // getMosaicsWmtsCapabilities is MosaicsWmtsMosaics.getCapabilitiesXml;
