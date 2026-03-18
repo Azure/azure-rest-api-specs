@@ -1220,5 +1220,3 @@ interface MosaicSearchesPointWithAssets {
     StacItemPointAsset[]
   >;
 }
-
-
