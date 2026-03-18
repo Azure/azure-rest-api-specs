@@ -40,7 +40,21 @@ union ProvisioningState {
 /**
  * Page of a list of API collections as represented by Microsoft Defender for APIs.
  */
-model ApiCollectionList is Azure.Core.Page<ApiCollection>;
+model ApiCollectionList {
+  /**
+   * API collections in this page.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ApiCollection[];
+
+  /**
+   * The URI to fetch the next page.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Describes the properties of an API collection.

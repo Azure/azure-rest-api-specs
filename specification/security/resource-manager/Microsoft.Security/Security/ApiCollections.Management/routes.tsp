@@ -13,16 +13,16 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Security;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface APICollectionsOperationGroup {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface ApiCollectionsOperationGroup {
   /**
    * Gets a list of API collections within a resource group that have been onboarded to Microsoft Defender for APIs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("D4APICollectionList")
   @summary("Gets a list of API collections within a resource group")
-  @operationId("APICollections_ListByResourceGroup")
   @autoRoute
   @get
+  @list
   @action("apiCollections")
   listByResourceGroup is ArmProviderActionSync<
     Response = ApiCollectionList,

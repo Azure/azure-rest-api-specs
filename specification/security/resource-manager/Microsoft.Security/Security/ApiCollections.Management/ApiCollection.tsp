@@ -11,16 +11,23 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Security;
 
+@minLength(1)
+@maxLength(50)
+scalar ApiManagementServiceName extends string;
+
 alias serviceExternalResource = Extension.ExternalResource<
   "Microsoft.ApiManagement",
   "service",
-  "serviceName"
+  "serviceName",
+  "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
+  ApiManagementServiceName,
+  "The name of the API Management service."
 >;
 
 /**
  * An API collection as represented by Microsoft Defender for APIs.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model ApiCollection
   is Azure.ResourceManager.ExtensionResource<ApiCollectionProperties> {
@@ -32,13 +39,14 @@ model ApiCollection
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ApiCollections {
   /**
    * Gets an Azure API Management API if it has been onboarded to Microsoft Defender for APIs. If an Azure API Management API is onboarded to Microsoft Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("APICollections_GetByAzureApiManagementService")
+  @summary("Gets an onboarded Azure API Management API")
+  @tag("D4APICollection")
+  @tag("APIMConfig")
   getByAzureApiManagementService is Extension.Read<
     serviceExternalResource,
     ApiCollection
@@ -47,11 +55,13 @@ interface ApiCollections {
   /**
    * Onboard an Azure API Management API to Microsoft Defender for APIs. The system will start monitoring the operations within the Azure Management API for intrusive behaviors and provide alerts for attacks that have been detected.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("APICollections_OnboardAzureApiManagementApi")
+  @summary("Onboard an Azure API Management API to Microsoft Defender for APIs")
+  @tag("OnboardToD4API")
+  @tag("APIMConfig")
   onboardAzureApiManagementApi is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     serviceExternalResource,
     ApiCollection,
+    Request = void,
     OptionalRequestBody = true,
     LroHeaders = ArmLroLocationHeader<FinalResult = ApiCollection> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -60,8 +70,9 @@ interface ApiCollections {
   /**
    * Offboard an Azure API Management API from Microsoft Defender for APIs. The system will stop monitoring the operations within the Azure API Management API for intrusive behaviors.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("APICollections_OffboardAzureApiManagementApi")
+  @summary("Offboard an Azure API Management API from Microsoft Defender for APIs")
+  @tag("OffboardFromD4API")
+  @tag("APIMConfig")
   offboardAzureApiManagementApi is Extension.DeleteSync<
     serviceExternalResource,
     ApiCollection
@@ -70,8 +81,9 @@ interface ApiCollections {
   /**
    * Gets a list of Azure API Management APIs that have been onboarded to Microsoft Defender for APIs. If an Azure API Management API is onboarded to Microsoft Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("APICollections_ListByAzureApiManagementService")
+  @summary("Gets a list of onboarded Azure API Management APIs")
+  @tag("D4APICollectionList")
+  @tag("APIMConfig")
   listByAzureApiManagementService is Extension.ListByTarget<
     serviceExternalResource,
     ApiCollection,
@@ -81,8 +93,8 @@ interface ApiCollections {
   /**
    * Gets a list of API collections within a subscription that have been onboarded to Microsoft Defender for APIs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("APICollections_ListBySubscription")
+  @summary("Gets a list of API collections within a subscription")
+  @tag("D4APICollectionList")
   listBySubscription is ArmListBySubscription<
     ApiCollection,
     Response = ArmResponse<ApiCollectionList>

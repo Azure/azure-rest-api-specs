@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2023-11-15",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider"
   },
   "produces": [
     "application/json"
@@ -16,8 +16,9 @@
       "get": {
         "operationId": "APICollections_ListBySubscription",
         "tags": [
-          "ApiCollections"
+          "D4APICollectionList"
         ],
+        "summary": "Gets a list of API collections within a subscription",
         "description": "Gets a list of API collections within a subscription that have been onboarded to Microsoft Defender for APIs.",
         "parameters": [],
         "responses": {
@@ -48,15 +49,20 @@
       "get": {
         "operationId": "APICollections_ListByAzureApiManagementService",
         "tags": [
-          "ApiCollections"
+          "D4APICollectionList",
+          "APIMConfig"
         ],
+        "summary": "Gets a list of onboarded Azure API Management APIs",
         "description": "Gets a list of Azure API Management APIs that have been onboarded to Microsoft Defender for APIs. If an Azure API Management API is onboarded to Microsoft Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
         "parameters": [
           {
             "name": "serviceName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
@@ -87,15 +93,20 @@
       "get": {
         "operationId": "APICollections_GetByAzureApiManagementService",
         "tags": [
-          "ApiCollections"
+          "D4APICollection",
+          "APIMConfig"
         ],
+        "summary": "Gets an onboarded Azure API Management API",
         "description": "Gets an Azure API Management API if it has been onboarded to Microsoft Defender for APIs. If an Azure API Management API is onboarded to Microsoft Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
         "parameters": [
           {
             "name": "serviceName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           },
           {
             "name": "apiId",
@@ -130,15 +141,20 @@
       "put": {
         "operationId": "APICollections_OnboardAzureApiManagementApi",
         "tags": [
-          "ApiCollections"
+          "OnboardToD4API",
+          "APIMConfig"
         ],
+        "summary": "Onboard an Azure API Management API to Microsoft Defender for APIs",
         "description": "Onboard an Azure API Management API to Microsoft Defender for APIs. The system will start monitoring the operations within the Azure Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
         "parameters": [
           {
             "name": "serviceName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           },
           {
             "name": "apiId",
@@ -148,13 +164,6 @@
             "minLength": 1,
             "maxLength": 256,
             "pattern": "^[^*#&+:<>?]+$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/ApiCollection"
-            }
           }
         ],
         "responses": {
@@ -193,15 +202,20 @@
       "delete": {
         "operationId": "APICollections_OffboardAzureApiManagementApi",
         "tags": [
-          "ApiCollections"
+          "OffboardFromD4API",
+          "APIMConfig"
         ],
+        "summary": "Offboard an Azure API Management API from Microsoft Defender for APIs",
         "description": "Offboard an Azure API Management API from Microsoft Defender for APIs. The system will stop monitoring the operations within the Azure API Management API for intrusive behaviors.",
         "parameters": [
           {
             "name": "serviceName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           },
           {
             "name": "apiId",
@@ -237,6 +251,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/apiCollections": {
       "get": {
         "operationId": "APICollections_ListByResourceGroup",
+        "tags": [
+          "D4APICollectionList"
+        ],
         "summary": "Gets a list of API collections within a resource group",
         "description": "Gets a list of API collections within a resource group that have been onboarded to Microsoft Defender for APIs.",
         "parameters": [],
@@ -258,6 +275,9 @@
           "Gets a list of API collections within a resource group that have been onboarded to Microsoft Defender for APIs": {
             "$ref": "./examples/ApiCollections/APICollections_ListByResourceGroup_example.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -288,17 +308,15 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ApiCollection"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ApiCollectionProperties": {
       "type": "object",
