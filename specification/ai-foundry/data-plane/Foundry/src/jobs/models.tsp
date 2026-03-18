@@ -234,17 +234,18 @@ union JobType {
   Command: "Command",
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
 @doc("Base properties of a Job.")
 @discriminator("jobType")
 model JobProperties {
   @doc("Job type.")
-  jobType: JobType;
+  jobType: string;
 }
 
 @doc("Properties of a Command Job.")
 model CommandJob extends JobProperties {
   @doc("Job type.")
-  jobType: JobType = JobType.Command;
+  jobType: "Command";
 
   @doc("The command to execute on startup of the job.")
   command: string;
