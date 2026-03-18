@@ -23,6 +23,9 @@ options:
     service-name: "HealthcareApis"
     flavor: azure
     use-object-for-unknown: true
+    resource-collection-associations:
+      - resource: PrivateEndpointConnectionDescription
+        collection: WorkspacePrivateEndpointConnections
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-healthcareapis"
     flavor: azure
