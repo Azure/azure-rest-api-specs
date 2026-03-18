@@ -863,12 +863,6 @@ namespace Azure.ResourceManager.Models {
 // Fix UpdateHistoryEntry.TenantId: old SDK had Guid?
 @@alternateType(UpdateHistoryProperty.tenantId, uuid, "csharp");
 
-// Fix GetKeys/RegenerateKey: old SDK returned Pageable<StorageAccountKey>
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@markAsPageable(StorageAccounts.listKeys, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@markAsPageable(StorageAccounts.regenerateKey, "csharp");
-
 // @@clientName for enum value backward compatibility (old GA used PascalCase C# conventions)
 
 // CorsRuleAllowedMethod: UPPERCASE -> PascalCase
