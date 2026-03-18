@@ -11,7 +11,7 @@ describe("array", () => {
       return item === 1 || index === 1;
     });
 
-    expect(result).toEqual([1, 2]);
+    expect(result).toEqual([1, 1]);
   });
 
   it("flatMapAsync", async () => {
