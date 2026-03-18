@@ -342,7 +342,7 @@
         },
         "zone": {
           "type": "string",
-          "description": "Logical zone (e.g. \"1\", \"2\", \"3\"). Null or empty for regional deployments."
+          "description": "Logical zone (e.g. \"1\", \"2\", \"3\"). Omitted or empty for regional deployments."
         }
       },
       "required": [
@@ -436,7 +436,7 @@
       "properties": {
         "zones": {
           "type": "array",
-          "description": "Optional logical zones to consider (e.g. [\"1\",\"2\",\"3\"]). Null or empty implies regional deployment.",
+          "description": "Optional logical zones to consider (e.g. [\"1\",\"2\",\"3\"]). Omitted or empty implies regional deployment.",
           "items": {
             "type": "string"
           }
@@ -464,7 +464,10 @@
           "description": "List of deployment choice recommendations, ordered by score.",
           "items": {
             "$ref": "#/definitions/SkuMixPlacementDeploymentChoice"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "validUntil": {
           "type": "string",

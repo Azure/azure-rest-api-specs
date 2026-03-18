@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Compute;
 
 /**
- * Contains metadata of the SkuMixPlacement diagnostic type
+ * Contains metadata of the SkuMixPlacement scoring resource
  */
 @singleton("skuMixPlacement")
 @parentResource(SubscriptionLocationResource)

@@ -112,7 +112,7 @@ union VMAttributeSupport {
 
 /** Sku Mix Placement API request. */
 model SkuMixPlacementRequest {
-  /** Optional logical zones to consider (e.g. ["1","2","3"]). Null or empty implies regional deployment. */
+  /** Optional logical zones to consider (e.g. ["1","2","3"]). Omitted or empty implies regional deployment. */
   zones?: string[];
 
   /** All capacity-related properties. */
@@ -158,7 +158,6 @@ model SkuMixPlacementZoneAllocationPolicy {
   distributionStrategy?: SkuMixPlacementZonalDistributionStrategy;
 
   /** Per-zone allocation preferences. Used with the Prioritized strategy. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "ZonePreference is a non-resource data model; items are not individually addressable."
   @identifiers(#["zone"])
   zonePreferences?: SkuMixPlacementZonePreference[];
 }
@@ -181,7 +180,6 @@ model SkuMixPlacementInstanceDescription {
   type: SkuMixPlacementInstanceDescriptionType;
 
   /** The list of VM sizes. Required when type is VMSizes. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "VMSize is a non-resource data model; items are not individually addressable."
   @identifiers(#["name"])
   vmSizes?: SkuMixPlacementVMSize[];
 
@@ -294,7 +292,7 @@ model VmAttributeMinMaxDouble {
 /** Sku Mix Placement API response. */
 model SkuMixPlacementResponse {
   /** List of deployment choice recommendations, ordered by score. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "DeploymentChoice is identified by its id field."
+  @identifiers(#["id"])
   deploymentChoices: SkuMixPlacementDeploymentChoice[];
 
   /** Date/time until when the recommendations are valid. */
@@ -334,7 +332,7 @@ model SkuMixPlacementItem {
   /** Upper range of recommended allocation capacity. */
   capacityMax: int32;
 
-  /** Logical zone (e.g. "1", "2", "3"). Null or empty for regional deployments. */
+  /** Logical zone (e.g. "1", "2", "3"). Omitted or empty for regional deployments. */
   zone?: string;
 }
 
@@ -343,6 +341,6 @@ model SkuMixPlacementItem {
 /** Contains properties of the SkuMixPlacement resource. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This resource does not involve long-running operations and does not require provisioningState."
 model SkuMixPlacementProperties {
-  /** Describes what resource types are supported by this diagnostic. */
+  /** Describes what resource types are supported by the mix placement scoring service. */
   supportedResourceTypes?: string[];
 }

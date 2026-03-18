@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 /**
  * The Compute SkuSplit Resource Provider Client
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Already exist outside this subservice"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations endpoint already exists outside this subservice"
 @armProviderNamespace
 @service(#{ title: "ComputeSkuSplitResourceProviderClient" })
 @versioned(Versions)
