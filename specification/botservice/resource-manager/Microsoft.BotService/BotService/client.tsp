@@ -350,3 +350,5 @@ model PrivateLinkResourceReplacement
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResourceReplacement.properties
 );
+
+@@clientName(NetworkSecurityPerimeterConfiguration, "BotServiceNetworkSecurityPerimeterConfiguration", "csharp");
