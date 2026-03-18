@@ -1,0 +1,897 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AzureFleet",
+    "version": "2026-03-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "VirtualMachineScaleSets"
+    },
+    {
+      "name": "VirtualMachines"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureFleet/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureFleet/virtualMachineScaleSets": {
+      "get": {
+        "operationId": "VirtualMachineScaleSets_ListBySubscription",
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "description": "List VirtualMachineScaleSet resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineScaleSets_ListBySubscription": {
+            "$ref": "./examples/VirtualMachineScaleSets_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureFleet/virtualMachines": {
+      "get": {
+        "operationId": "VirtualMachines_ListBySubscription",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "List VirtualMachine resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachines_ListBySubscription": {
+            "$ref": "./examples/VirtualMachines_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/virtualMachineScaleSets": {
+      "get": {
+        "operationId": "VirtualMachineScaleSets_ListByResourceGroup",
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "description": "List VirtualMachineScaleSet resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineScaleSets_ListByResourceGroup": {
+            "$ref": "./examples/VirtualMachineScaleSets_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/virtualMachines": {
+      "get": {
+        "operationId": "VirtualMachines_ListByResourceGroup",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "List VirtualMachine resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachines_ListByResourceGroup": {
+            "$ref": "./examples/VirtualMachines_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/virtualMachineScaleSets/{vmssName}": {
+      "get": {
+        "operationId": "VirtualMachineScaleSets_Get",
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "description": "Get a VirtualMachineScaleSet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmssName",
+            "in": "path",
+            "description": "The name of the VirtualMachineScaleSet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineScaleSets_Get": {
+            "$ref": "./examples/VirtualMachineScaleSets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "description": "Create a VirtualMachineScaleSet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmssName",
+            "in": "path",
+            "description": "The name of the VirtualMachineScaleSet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualMachineScaleSet' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSet"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualMachineScaleSet' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSet"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineScaleSets_CreateOrUpdate": {
+            "$ref": "./examples/VirtualMachineScaleSets_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualMachineScaleSets_Update",
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "description": "Update a VirtualMachineScaleSet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmssName",
+            "in": "path",
+            "description": "The name of the VirtualMachineScaleSet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineScaleSets_Update": {
+            "$ref": "./examples/VirtualMachineScaleSets_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "VirtualMachineScaleSets_Delete",
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "description": "Delete a VirtualMachineScaleSet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmssName",
+            "in": "path",
+            "description": "The name of the VirtualMachineScaleSet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineScaleSets_Delete": {
+            "$ref": "./examples/VirtualMachineScaleSets_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/virtualMachines/{vmName}": {
+      "get": {
+        "operationId": "VirtualMachines_Get",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Get a VirtualMachine",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the VirtualMachine",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachines_Get": {
+            "$ref": "./examples/VirtualMachines_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualMachines_CreateOrUpdate",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Create a VirtualMachine",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the VirtualMachine",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualMachine' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualMachine' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachines_CreateOrUpdate": {
+            "$ref": "./examples/VirtualMachines_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualMachines_Update",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Update a VirtualMachine",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the VirtualMachine",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachines_Update": {
+            "$ref": "./examples/VirtualMachines_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "VirtualMachines_Delete",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Delete a VirtualMachine",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the VirtualMachine",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachines_Delete": {
+            "$ref": "./examples/VirtualMachines_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Migrating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          },
+          {
+            "name": "Migrating",
+            "value": "Migrating",
+            "description": "Resource is being migrated."
+          }
+        ]
+      }
+    },
+    "VirtualMachineScaleSet": {
+      "type": "object",
+      "description": "An AzureFleet VirtualMachineScaleSet resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineScaleSetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VirtualMachineScaleSetProperties": {
+      "type": "object",
+      "description": "Properties of a VirtualMachineScaleSet resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/FleetVmssSku",
+          "description": "The virtual machine scale set sku."
+        }
+      }
+    },
+    "FleetVmssSku": {
+      "type": "object",
+      "description": "Describes a virtual machine scale set sku.",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the number of virtual machines in the scale set.",
+          "minimum": 0
+        }
+      }
+    },
+    "VirtualMachineScaleSetUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the VirtualMachineScaleSet.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineScaleSetProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "VirtualMachineScaleSetListResult": {
+      "type": "object",
+      "description": "The response of a VirtualMachineScaleSet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualMachineScaleSet items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualMachine": {
+      "type": "object",
+      "description": "An AzureFleet VirtualMachine resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VirtualMachineProperties": {
+      "type": "object",
+      "description": "Properties of a VirtualMachine resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "osProfile": {
+          "$ref": "#/definitions/FleetVirtualMachineOSProfile",
+          "description": "Specifies the operating system settings for the virtual machine."
+        }
+      }
+    },
+    "FleetVirtualMachineOSProfile": {
+      "type": "object",
+      "description": "Specifies the operating system settings for the virtual machine.",
+      "properties": {
+        "computerName": {
+          "type": "string",
+          "description": "Specifies the computer name of the virtual machine."
+        }
+      }
+    },
+    "VirtualMachineUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the VirtualMachine.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "VirtualMachineListResult": {
+      "type": "object",
+      "description": "The response of a VirtualMachine list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualMachine items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualMachine"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {}
+}

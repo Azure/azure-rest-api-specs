@@ -67,13 +67,13 @@ input-file:
   - preview/2024-05-01-preview/azurefleet.json
 ```
 
-### Tag: package-2026-03-01
+### Tag: package-preview-2026-03
 
-These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
+These settings apply only when `--tag=package-preview-2026-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-03-01'
+```yaml $(tag) == 'package-preview-2026-03'
 input-file:
-  - stable/2026-03-01/azurefleet.json
+  - preview/2026-03-01-preview/azurefleet.json
 ```
 
 ### Tag: package-2024-11-01

@@ -8,6 +8,8 @@ import "./fleet.tsp";
 import "./baseVirtualMachineProfile.tsp";
 import "./virtualMachineScaleSet.tsp";
 import "./virtualMachine.tsp";
+import "./fleetVirtualMachineScaleSet.tsp";
+import "./fleetVirtualMachine.tsp";
 import "./back-compatible.tsp";
 
 using TypeSpec.Http;
@@ -37,6 +39,10 @@ enum Versions {
   /** Private preview Api version. */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_07_01_preview: "2025-07-01-preview",
+
+  /** Preview Api version with VirtualMachines and VirtualMachineScaleSets as TrackedResources. */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_03_01_preview: "2026-03-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
