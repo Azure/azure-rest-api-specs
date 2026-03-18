@@ -140,9 +140,9 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "objectReplicationRules",
   "rust"
 );
-@@clientName(ImmutabilityPolicyExpiryRequiredParameter.immutabilityPolicyExpiry,
-  "expiry",
-  "!python, !csharp, !javascript"
+@@clientName(ImmutabilityPolicyExpiryRequiredParameter.expiry,
+  "immutabilityPolicyExpiry",
+  "python, csharp, javascript"
 );
 
 @@alternateType(AccessPolicy.start, string, "javascript");
@@ -337,11 +337,11 @@ enum ImmutabilityPolicySetting {
 @@clientName(Error, "StorageError", "go");
 @@clientName(EncryptionAlgorithmTypeGo, "EncryptionAlgorithmType", "go");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "go");
-@@clientName(ImmutabilityPolicyExpiresOnResponseHeader.immutabilityPolicyUntilDate,
+@@clientName(ImmutabilityPolicyExpiresOnResponseHeader.immutabilityPolicyExpiresOn,
   "ImmutabilityPolicyExpiry",
   "go"
 );
-@@clientName(ImmutabilityPolicyExpiresOnResponseHeaderPrivate.immutabilityPolicyUntilDate,
+@@clientName(ImmutabilityPolicyExpiresOnResponseHeaderPrivate.immutabilityPolicyExpiresOn,
   "ImmutabilityPolicyExpiry",
   "go"
 );
@@ -430,6 +430,16 @@ enum ImmutabilityPolicySetting {
 @@alternateType(Storage.Blob.UserDelegationKey.value, string, "python");
 @@alternateType(Storage.Blob.Block.name, string, "python");
 
+/** The immutability policy expiration parameter. */
+alias ImmutabilityPolicyExpiryOptionalParameter = {
+  /** Specifies the date time when the blobs immutability policy is set to expire. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @header("x-ms-immutability-policy-until-date")
+  @clientName("immutabilityPolicyExpiry")
+  expiry?: utcDateTime;
+};
+
 /** Defining an override for backward compatibility for existing sdks since the expiry
  * parameter was originally defined as optional in the swagger
  **/
@@ -442,7 +452,7 @@ op setImmutabilityPolicyOptionalExpiry is StorageOperationNoBody<
   {
     ...TimeoutParameter;
     ...IfUnmodifiedSinceParameter;
-    ...ImmutabilityPolicyExpiryParameter;
+    ...ImmutabilityPolicyExpiryOptionalParameter;
     ...ImmutabilityPolicyModeParameter;
     ...SnapshotParameter;
     ...VersionIdParameter;
@@ -635,7 +645,7 @@ op setAccessPolicyRequiredContainerAcl is StorageOperationNoBody<
 
     ...TimeoutParameter;
     ...LeaseIdOptionalParameter;
-    ...BlobPublicAccess;
+    ...BlobPublicAccessParameter;
     ...IfModifiedSinceParameter;
     ...IfUnmodifiedSinceParameter;
   },
