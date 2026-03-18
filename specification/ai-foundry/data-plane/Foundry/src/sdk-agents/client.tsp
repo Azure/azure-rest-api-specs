@@ -106,6 +106,7 @@ using Azure.AI.Projects;
 @@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
 @@clientName(MemoryStores.searchMemories, "internalSearchMemories");
 
+// Disabled convenient API generation to provide a custom shim returning `void` in the client
 @@convenientAPI(Agents.deleteAgent, false, "java");
 @@convenientAPI(Agents.deleteAgentVersion, false, "java");
 
