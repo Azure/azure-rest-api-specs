@@ -168,9 +168,22 @@ namespace Microsoft.Purview {
   "csharp"
 );
 
-// Replace Account with TrackedResource-based model for C# (ensures TrackedResourceData base)
-@@alternateType(Microsoft.Purview.Account, Microsoft.Purview.PurviewAccountModel, "csharp");
-@@clientName(Microsoft.Purview.PurviewAccountModel, "PurviewAccount", "csharp");
+// Fix location type for hierarchyBuilding compatibility
+// (Legacy.TrackedResourceWithOptionalLocation uses string?, but TrackedResource uses azureLocation)
+@@alternateType(Microsoft.Purview.Account.location, Azure.Core.azureLocation, "csharp");
+
+// Use hierarchyBuilding to make Account inherit from TrackedResourceData in C#
+// (Account uses Legacy.TrackedResourceWithOptionalLocation which generates ResourceData base,
+//  but old SDK used TrackedResourceData)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Purview.Account,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+// Resource model renames for backward compatibility with old SDK naming
+@@clientName(Microsoft.Purview.Account, "PurviewAccount", "csharp");
 @@clientName(Microsoft.Purview.KafkaConfiguration, "PurviewKafkaConfiguration", "csharp");
 @@clientName(Microsoft.Purview.PrivateEndpointConnection,
   "PurviewPrivateEndpointConnection",
@@ -290,6 +303,28 @@ namespace Microsoft.Purview {
 );
 @@clientName(Microsoft.Purview.AccountsOperationGroup.checkNameAvailability,
   "CheckPurviewAccountNameAvailability",
+  "csharp"
+);
+
+// Operation renames to match main branch SDK naming
+@@clientName(Microsoft.Purview.Accounts.accountGet,
+  "AccountGetFeature",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.Accounts.list,
+  "GetIngestionPrivateEndpointConnections",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.Accounts.updateStatus,
+  "UpdateStatusIngestionPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.FeaturesOperationGroup.subscriptionGet,
+  "SubscriptionGetFeature",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.UsagesOperationGroup.get,
+  "GetUsages",
   "csharp"
 );
 
