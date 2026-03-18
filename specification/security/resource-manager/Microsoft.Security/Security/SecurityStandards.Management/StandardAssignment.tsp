@@ -50,13 +50,6 @@ interface StandardAssignments {
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     StandardAssignment,
-    Parameters = {
-      /**
-       * The scope of the standard assignment. Valid scopes are: management group (format: 'providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'
-       */
-      @path
-      scope: string;
-    },
     Response = ArmResponse<StandardAssignmentsList>
   >;
 }

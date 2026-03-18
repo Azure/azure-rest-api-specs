@@ -1,0 +1,714 @@
+{
+  "info": {
+    "title": {
+      "__old": "Microsoft Defender for Cloud",
+      "__new": "SecurityCenter"
+    },
+    "description": {
+      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    }
+  },
+  "paths": {
+    "/{resourceId}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}__deleted": {
+      "get": {
+        "operationId": "StandardAssignments_Get",
+        "tags": [
+          "StandardAssignments"
+        ],
+        "summary": "Retrieves a standard assignment.",
+        "description": "This operation retrieves a single standard assignment, given its name and the scope it was created at.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "name": "standardAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a standard assignment": {
+            "$ref": "./examples/StandardAssignments/GetStandardAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StandardAssignments_Create",
+        "tags": [
+          "StandardAssignments"
+        ],
+        "summary": "Creates or updates a standard assignment.",
+        "description": " This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "name": "standardAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          },
+          {
+            "name": "standardAssignment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put an audit standard assignment": {
+            "$ref": "./examples/StandardAssignments/PutStandardAssignment.json"
+          },
+          "Put exemption standard assignment": {
+            "$ref": "./examples/StandardAssignments/PutExemptionStandardAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StandardAssignments_Delete",
+        "tags": [
+          "StandardAssignments"
+        ],
+        "summary": "Deletes a standard assignment.",
+        "description": "This operation deletes a standard assignment, given its name and the scope it was created in. The scope of a standard assignment is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "name": "standardAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a standard assignment": {
+            "$ref": "./examples/StandardAssignments/DeleteStandardAssignment.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}__added": {
+      "get": {
+        "operationId": "StandardAssignments_Get",
+        "tags": [
+          "StandardAssignments"
+        ],
+        "description": "This operation retrieves a single standard assignment, given its name and the scope it was created at.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "standardAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a standard assignment": {
+            "$ref": "./examples/StandardAssignments/GetStandardAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StandardAssignments_Create",
+        "tags": [
+          "StandardAssignments"
+        ],
+        "description": "This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "standardAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          },
+          {
+            "name": "standardAssignment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put an audit standard assignment": {
+            "$ref": "./examples/StandardAssignments/PutStandardAssignment.json"
+          },
+          "Put exemption standard assignment": {
+            "$ref": "./examples/StandardAssignments/PutExemptionStandardAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StandardAssignments_Delete",
+        "tags": [
+          "StandardAssignments"
+        ],
+        "description": "This operation deletes a standard assignment, given its name and the scope it was created in. The scope of a standard assignment is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "standardAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a standard assignment": {
+            "$ref": "./examples/StandardAssignments/DeleteStandardAssignment.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Security/customRecommendations": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Security/customRecommendations/{customRecommendationName}": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Security/securityStandards": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Security/securityStandards/{standardId}": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Security/standardAssignments": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StandardAssignmentPropertiesAttestationData__added": {
+      "type": "object",
+      "description": "Additional data about assignment that has Attest effect",
+      "properties": {
+        "complianceState": {
+          "type": "string",
+          "description": "Attest category of this assignment",
+          "enum": [
+            "unknown",
+            "compliant",
+            "nonCompliant"
+          ],
+          "x-ms-enum": {
+            "name": "AttestationComplianceState",
+            "modelAsString": true
+          }
+        },
+        "assignedAssessment": {
+          "$ref": "#/definitions/AssignedAssessmentItem",
+          "description": "Component item with key as applied to this standard assignment over the given scope"
+        },
+        "complianceDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Attestation compliance date",
+          "readOnly": true
+        },
+        "evidence": {
+          "type": "array",
+          "description": "Array of links to attestation evidence",
+          "items": {
+            "$ref": "#/definitions/AttestationEvidence"
+          }
+        }
+      }
+    },
+    "StandardAssignmentPropertiesExemptionData__added": {
+      "type": "object",
+      "description": "Additional data about assignment that has Exempt effect",
+      "properties": {
+        "exemptionCategory": {
+          "type": "string",
+          "description": "Exemption category of this assignment",
+          "enum": [
+            "waiver",
+            "mitigated"
+          ],
+          "x-ms-enum": {
+            "name": "ExemptionCategory",
+            "modelAsString": true
+          }
+        },
+        "assignedAssessment": {
+          "$ref": "#/definitions/AssignedAssessmentItem",
+          "description": "Component item with key as applied to this standard assignment over the given scope"
+        }
+      }
+    },
+    "CustomRecommendation": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "CustomRecommendationProperties": {
+      "properties": {
+        "severity": {
+          "x-ms-client-default__deleted": "Low"
+        },
+        "securityIssue": {
+          "x-ms-client-default__deleted": "BestPractices"
+        }
+      }
+    },
+    "CustomRecommendationsList": {
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "SecurityStandard": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "SecurityStandardList": {
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "StandardAssignment": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "StandardAssignmentProperties": {
+      "properties": {
+        "excludedScopes": {
+          "items": {
+            "description__deleted": "The excluded scope"
+          }
+        },
+        "exemptionData": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "exemptionCategory": {
+              "type": "string",
+              "description": "Exemption category of this assignment",
+              "enum": [
+                "waiver",
+                "mitigated"
+              ],
+              "x-ms-enum": {
+                "name": "exemptionCategory",
+                "modelAsString": true
+              }
+            },
+            "assignedAssessment": {
+              "$ref": "#/definitions/AssignedAssessmentItem",
+              "description": "Component item with key as applied to this standard assignment over the given scope"
+            }
+          },
+          "$ref__added": "#/definitions/StandardAssignmentPropertiesExemptionData"
+        },
+        "attestationData": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "complianceState": {
+              "type": "string",
+              "description": "Attest category of this assignment",
+              "enum": [
+                "unknown",
+                "compliant",
+                "nonCompliant"
+              ],
+              "x-ms-enum": {
+                "name": "attestationComplianceState",
+                "modelAsString": true
+              }
+            },
+            "assignedAssessment": {
+              "$ref": "#/definitions/AssignedAssessmentItem",
+              "description": "Component item with key as applied to this standard assignment over the given scope"
+            },
+            "complianceDate": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Attestation compliance date",
+              "readOnly": true
+            },
+            "evidence": {
+              "type": "array",
+              "description": "Array of links to attestation evidence",
+              "items": {
+                "$ref": "#/definitions/AttestationEvidence"
+              }
+            }
+          },
+          "$ref__added": "#/definitions/StandardAssignmentPropertiesAttestationData"
+        }
+      }
+    },
+    "StandardAssignmentsList": {
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    }
+  }
+}

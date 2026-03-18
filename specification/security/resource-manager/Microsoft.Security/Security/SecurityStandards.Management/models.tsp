@@ -363,7 +363,6 @@ model StandardAssignmentProperties {
   /**
    * Excluded scopes, filter out the descendants of the scope (on management scopes)
    */
-  @identifiers(#[])
   excludedScopes?: string[];
 
   /**
