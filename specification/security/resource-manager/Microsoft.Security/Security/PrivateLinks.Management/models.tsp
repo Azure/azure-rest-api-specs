@@ -9,7 +9,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Security;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union SettingName {
   string,
 
@@ -39,7 +39,7 @@ union BlobScanResultsOptions {
 /**
  * Defender for Storage resource properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefenderForStorageSettingProperties {
   /**
    * Indicates whether Defender for Storage is enabled on this storage account.
@@ -69,7 +69,8 @@ model MalwareScanningProperties {
   /**
    * Properties of On Upload malware scanning.
    */
-  onUpload?: OnUploadProperties;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  onUpload?: OnUploadProperties | null;
 
   /**
    * Optional. Resource id of an Event Grid Topic to send scan results to.
@@ -100,12 +101,14 @@ model OnUploadProperties {
   /**
    * Defines the max GB to be scanned per Month. Set to -1 if no capping is needed. If not specified, the default value is -1.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   capGBPerMonth?: int32;
 
   /**
    * Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type.
    */
-  filters?: OnUploadFilters;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  filters?: OnUploadFilters | null;
 }
 
 /**
@@ -118,17 +121,21 @@ model OnUploadFilters {
    * Exclude entire containers: Use prefix of container names you want to exclude without a trailing `/`.
    * Exclude a single container: Add a trailing slash `/` after the container name to avoid excluding other containers with similar prefixes.
    */
-  excludeBlobsWithPrefix?: string[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  excludeBlobsWithPrefix?: string[] | null;
 
   /**
    * Optional. A list of suffixes to exclude from on-upload malware scanning. Suffixes match only the end of blob names, and should be used for file extensions or blob name endings only.
    */
-  excludeBlobsWithSuffix?: string[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  excludeBlobsWithSuffix?: string[] | null;
 
   /**
    * Optional. Specifies the maximum size in bytes for blobs to be scanned. This parameter accepts a single positive integer value. Blobs larger than this value will be excluded from scanning.
    */
-  excludeBlobsLargerThan?: unknown;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  excludeBlobsLargerThan?: unknown | null;
 }
 
 /**
@@ -188,6 +195,8 @@ model Resource {
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 @error
 model CloudError {
   /**
@@ -199,6 +208,8 @@ model CloudError {
 /**
  * The error detail.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * The error code.
@@ -221,12 +232,14 @@ model CloudErrorBody {
   /**
    * The error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   details?: CloudErrorBody[];
 
   /**
    * The error additional info.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
@@ -244,6 +257,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
@@ -252,11 +266,11 @@ model ErrorAdditionalInfo {
  * Describes the state of a malware scan operation.
  */
 model MalwareScan {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: MalwareScanProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MalwareScanProperties {
   /**
    * The identifier of the scan.
@@ -301,6 +315,7 @@ model ScanSummary {
   /**
    * The estimated cost of the scan. Only available for a scan which has terminated.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   estimatedScanCostUSD?: float64;
 }
 
@@ -331,5 +346,6 @@ model BlobsScanSummary {
   /**
    * The number of gigabytes of data that were scanned.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scannedBlobsInGB?: float64;
 }
