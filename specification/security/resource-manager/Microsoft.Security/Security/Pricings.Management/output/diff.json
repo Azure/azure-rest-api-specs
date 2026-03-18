@@ -1,0 +1,464 @@
+{
+  "info": {
+    "title": {
+      "__old": "Microsoft Defender for Cloud",
+      "__new": "SecurityCenter"
+    },
+    "description": {
+      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    }
+  },
+  "paths": {
+    "/{scopeId}/providers/microsoft.Security/pricings__deleted": {
+      "get": {
+        "operationId": "Pricings_List",
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Lists Microsoft Defender for Cloud pricing configurations of the scopeId, that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes the pricings set for 'planName1' and 'planName2' only.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/ScopeId"
+          },
+          {
+            "$ref": "./common/v1/types.json#/parameters/ODataFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PricingList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get pricings on resource": {
+            "$ref": "./examples/Pricings/ListResourcePricings_example.json"
+          },
+          "Get pricings on subscription": {
+            "$ref": "./examples/Pricings/ListPricings_example.json"
+          },
+          "Get pricings on subscription with plans filter": {
+            "$ref": "./examples/Pricings/ListPricingsWithPlanFilter_example.json"
+          }
+        }
+      }
+    },
+    "/{scopeId}/providers/microsoft.Security/pricings/{pricingName}__deleted": {
+      "get": {
+        "operationId": "Pricings_Get",
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Get the Defender plans pricing configurations of the selected scope (valid scopes are resource id or a subscription id). At the resource level, supported resource types are 'VirtualMachines, VMSS and ARC Machines'.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/ScopeId"
+          },
+          {
+            "name": "pricingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get pricings on resource - Containers plan": {
+            "$ref": "./examples/Pricings/GetResourcePricingByNameContainers_example.json"
+          },
+          "Get pricings on resource - VirtualMachines plan": {
+            "$ref": "./examples/Pricings/GetResourcePricingByNameVirtualMachines_example.json"
+          },
+          "Get pricings on subscription - CloudPosture plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameCloudPosture_example.json"
+          },
+          "Get pricings on subscription - Containers plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameContainers_example.json"
+          },
+          "Get pricings on subscription - Dns plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameDns_example.json"
+          },
+          "Get pricings on subscription - StorageAccounts plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameStorageAccounts_example.json"
+          },
+          "Get pricings on subscription - VirtualMachines plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameVirtualMachines_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Pricings_Update",
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Updates a provided Microsoft Defender for Cloud pricing configuration in the scope. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines' and only for plan='VirtualMachines' and subPlan='P1').",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/ScopeId"
+          },
+          {
+            "name": "pricingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pricing",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update pricing on resource (Container Registry ACR)": {
+            "$ref": "./examples/Pricings/PutResourcePricingByNameContainersACR_example.json"
+          },
+          "Update pricing on resource (example for Containers plan)": {
+            "$ref": "./examples/Pricings/PutResourcePricingByNameContainers_example.json"
+          },
+          "Update pricing on resource (example for VirtualMachines plan)": {
+            "$ref": "./examples/Pricings/PutResourcePricingByNameVirtualMachines_example.json"
+          },
+          "Update pricing on subscription (example for CloudPosture plan)": {
+            "$ref": "./examples/Pricings/PutPricingByName_example.json"
+          },
+          "Update pricing on subscription (example for CloudPosture plan) - partial success": {
+            "$ref": "./examples/Pricings/PutPricingByNamePartialSuccess_example.json"
+          },
+          "Update pricing on subscription (example for VirtualMachines plan)": {
+            "$ref": "./examples/Pricings/PutPricingVMsByName_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Pricings_Delete",
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines, VMSS, ARC Machines, and Containers').",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/ScopeResourceId"
+          },
+          {
+            "name": "pricingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a pricing on resource": {
+            "$ref": "./examples/Pricings/DeleteResourcePricing_example.json"
+          },
+          "Delete a pricing on resource (example for Containers plan)": {
+            "$ref": "./examples/Pricings/DeleteResourcePricingByNameContainers_example.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Security/pricings__added": {
+      "get": {
+        "operationId": "Pricings_List",
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Lists Microsoft Defender for Cloud pricing configurations of the scopeId, that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes the pricings set for 'planName1' and 'planName2' only.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PricingList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get pricings on resource": {
+            "$ref": "./examples/Pricings/ListResourcePricings_example.json"
+          },
+          "Get pricings on subscription": {
+            "$ref": "./examples/Pricings/ListPricings_example.json"
+          },
+          "Get pricings on subscription with plans filter": {
+            "$ref": "./examples/Pricings/ListPricingsWithPlanFilter_example.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Security/pricings/{pricingName}__added": {
+      "get": {
+        "operationId": "Pricings_Get",
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Get the Defender plans pricing configurations of the selected scope (valid scopes are resource id or a subscription id). At the resource level, supported resource types are 'VirtualMachines, VMSS and ARC Machines'.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "pricingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get pricings on resource - Containers plan": {
+            "$ref": "./examples/Pricings/GetResourcePricingByNameContainers_example.json"
+          },
+          "Get pricings on resource - VirtualMachines plan": {
+            "$ref": "./examples/Pricings/GetResourcePricingByNameVirtualMachines_example.json"
+          },
+          "Get pricings on subscription - CloudPosture plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameCloudPosture_example.json"
+          },
+          "Get pricings on subscription - Containers plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameContainers_example.json"
+          },
+          "Get pricings on subscription - Dns plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameDns_example.json"
+          },
+          "Get pricings on subscription - StorageAccounts plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameStorageAccounts_example.json"
+          },
+          "Get pricings on subscription - VirtualMachines plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameVirtualMachines_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Pricings_Update",
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Updates a provided Microsoft Defender for Cloud pricing configuration in the scope. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines' and only for plan='VirtualMachines' and subPlan='P1').",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "pricingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pricing",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update pricing on resource (Container Registry ACR)": {
+            "$ref": "./examples/Pricings/PutResourcePricingByNameContainersACR_example.json"
+          },
+          "Update pricing on resource (example for Containers plan)": {
+            "$ref": "./examples/Pricings/PutResourcePricingByNameContainers_example.json"
+          },
+          "Update pricing on resource (example for VirtualMachines plan)": {
+            "$ref": "./examples/Pricings/PutResourcePricingByNameVirtualMachines_example.json"
+          },
+          "Update pricing on subscription (example for CloudPosture plan)": {
+            "$ref": "./examples/Pricings/PutPricingByName_example.json"
+          },
+          "Update pricing on subscription (example for CloudPosture plan) - partial success": {
+            "$ref": "./examples/Pricings/PutPricingByNamePartialSuccess_example.json"
+          },
+          "Update pricing on subscription (example for VirtualMachines plan)": {
+            "$ref": "./examples/Pricings/PutPricingVMsByName_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Pricings_Delete",
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines, VMSS, ARC Machines, and Containers').",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "pricingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a pricing on resource": {
+            "$ref": "./examples/Pricings/DeleteResourcePricing_example.json"
+          },
+          "Delete a pricing on resource (example for Containers plan)": {
+            "$ref": "./examples/Pricings/DeleteResourcePricingByNameContainers_example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Extension": {
+      "properties": {
+        "operationStatus": {
+          "type__deleted": "object"
+        }
+      }
+    },
+    "Pricing": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}

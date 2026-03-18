@@ -28,23 +28,32 @@ interface Pricings {
   /**
    * Get the Defender plans pricing configurations of the selected scope (valid scopes are resource id or a subscription id). At the resource level, supported resource types are 'VirtualMachines, VMSS and ARC Machines'.
    */
-  get is Extension.Read<Extension.ScopeParameter, Pricing>;
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    Pricing
+  >;
 
   /**
    * Updates a provided Microsoft Defender for Cloud pricing configuration in the scope. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines' and only for plan='VirtualMachines' and subPlan='P1').
    */
-  update is Extension.CreateOrReplaceSync<Extension.ScopeParameter, Pricing>;
+  update is Azure.ResourceManager.Extension.CreateOrReplaceSync<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    Pricing
+  >;
 
   /**
    * Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines, VMSS, ARC Machines, and Containers').
    */
-  delete is Extension.DeleteSync<Extension.ScopeParameter, Pricing>;
+  delete is Azure.ResourceManager.Extension.DeleteSync<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    Pricing
+  >;
 
   /**
    * Lists Microsoft Defender for Cloud pricing configurations of the scopeId, that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes the pricings set for 'planName1' and 'planName2' only.
    */
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     Pricing,
     Parameters = {
       /**
