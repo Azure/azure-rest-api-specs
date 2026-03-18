@@ -954,6 +954,17 @@ union RuleType {
 }
 
 /**
+ * The action enum for a managed network outbound rule.
+ */
+union RuleAction {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Allow outbound traffic"
+  Allow: "Allow",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deny outbound traffic"
+  Deny: "Deny",
+}
+
+/**
  * Isolation mode for the managed network of a cognitive services account.
  */
 union IsolationMode {
@@ -5103,6 +5114,86 @@ model FqdnOutboundRule extends OutboundRule {
    * Type of a managed network Outbound Rule of a cognitive services account.
    */
   type: "FQDN";
+}
+
+/**
+ * Private Endpoint destination for an outbound rule.
+ */
+model PrivateEndpointOutboundRuleDestination {
+  /**
+   * The Azure resource ID of the target private endpoint service.
+   */
+  serviceResourceId?: string;
+
+  /**
+   * The subresource of the target service to connect to.
+   */
+  subresourceTarget?: string;
+}
+
+/**
+ * Private Endpoint outbound rule for the managed network of a cognitive services account.
+ */
+model PrivateEndpointOutboundRule extends OutboundRule {
+  /**
+   * Private Endpoint destination.
+   */
+  destination?: PrivateEndpointOutboundRuleDestination;
+
+  /**
+   * List of FQDNs associated with the private endpoint outbound rule.
+   */
+  fqdns?: string[];
+
+  /**
+   * Type of a managed network Outbound Rule of a cognitive services account.
+   */
+  type: "PrivateEndpoint";
+}
+
+/**
+ * Service Tag destination for an outbound rule.
+ */
+model ServiceTagOutboundRuleDestination {
+  /**
+   * Name of the Azure service tag to target.
+   */
+  serviceTag?: string;
+
+  /**
+   * Network protocol used by the service tag rule.
+   */
+  protocol?: string;
+
+  /**
+   * Destination port ranges.
+   */
+  portRanges?: string;
+
+  /**
+   * The action for the service tag outbound rule.
+   */
+  action?: RuleAction;
+
+  /**
+   * Optional address prefixes. If provided, the serviceTag property will be ignored.
+   */
+  addressPrefixes?: string[];
+}
+
+/**
+ * Service Tag outbound rule for the managed network of a cognitive services account.
+ */
+model ServiceTagOutboundRule extends OutboundRule {
+  /**
+   * Service Tag destination.
+   */
+  destination?: ServiceTagOutboundRuleDestination;
+
+  /**
+   * Type of a managed network Outbound Rule of a cognitive services account.
+   */
+  type: "ServiceTag";
 }
 
 /**
