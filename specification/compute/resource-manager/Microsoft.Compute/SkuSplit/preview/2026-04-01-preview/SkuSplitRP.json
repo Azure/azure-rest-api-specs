@@ -86,6 +86,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/mixPlacementScores/skuMixPlacement": {
+      "get": {
+        "operationId": "SkuMixPlacementScores_Get",
+        "tags": [
+          "SkuMixPlacementScores"
+        ],
+        "description": "Gets SkuMixPlacement scoring metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuMixPlacementBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the metadata of SkuMixPlacement Scores.": {
+            "$ref": "./examples/GetSkuMixPlacementScores.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/mixPlacementScores/skuMixPlacement/generate": {
       "post": {
         "operationId": "SkuMixPlacementScores_Post",
@@ -168,6 +207,21 @@
           }
         ]
       }
+    },
+    "SkuMixPlacementBase": {
+      "type": "object",
+      "description": "Contains metadata of the SkuMixPlacement scoring resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SkuMixPlacementProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SkuMixPlacementCapacityProfile": {
       "type": "object",
@@ -428,6 +482,19 @@
             "description": "Spot priority VMs with lower cost but potential eviction."
           }
         ]
+      }
+    },
+    "SkuMixPlacementProperties": {
+      "type": "object",
+      "description": "Contains properties of the SkuMixPlacement resource.",
+      "properties": {
+        "supportedResourceTypes": {
+          "type": "array",
+          "description": "Describes what resource types are supported by the mix placement scoring service.",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "SkuMixPlacementRequest": {

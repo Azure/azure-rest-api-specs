@@ -29,6 +29,11 @@ model SkuMixPlacementBase
 @armResourceOperations
 interface SkuMixPlacementScores {
   /**
+   * Gets SkuMixPlacement scoring metadata.
+   */
+  get is ArmResourceRead<SkuMixPlacementBase>;
+
+  /**
    * Generates placement scores for VM SKU mix placement.
    */
   @action("generate")

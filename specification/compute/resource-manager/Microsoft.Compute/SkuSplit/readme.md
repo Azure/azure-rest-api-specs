@@ -38,9 +38,13 @@ suppressions:
     reason: The operations API is defined in a separate file.
     from: SkuSplitRP.json
   - code: PathForResourceAction
-    reason: The mixPlacementScores singleton resource uses a custom path structure approved by ARM reviewers, matching the Recommender pattern.
+    reason: The mixPlacementScores singleton resource uses a custom path structure matching the Recommender pattern.
     from: SkuSplitRP.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/mixPlacementScores/skuMixPlacement/generate"]
+  - code: PathForNestedResource
+    reason: The mixPlacementScores singleton resource uses a custom path structure matching the Recommender pattern.
+    from: SkuSplitRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/mixPlacementScores/skuMixPlacement"]
 ```
 
 ### Tag: package-2026-04-01-preview
