@@ -3,7 +3,10 @@ import "./main.tsp";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
 using Microsoft.BotService;
+
+namespace Microsoft.BotService;
 
 @@scope(Operations.list, "!csharp");
 @@clientName(AlexaChannelProperties.urlFragment, "UriFragment", "csharp");
@@ -156,15 +159,6 @@ using Microsoft.BotService;
   "csharp"
 );
 
-@@alternateType(ListChannelWithKeysResponse,
-  ListChannelWithKeysResponseReplacement,
-  "csharp"
-);
-@@clientName(ListChannelWithKeysResponseReplacement,
-  "BotChannelGetWithKeysResult",
-  "csharp"
-);
-
 @@usage(ServiceProviderProperties, Usage.input | Usage.output, "csharp");
 
 @@alternateType(SlackChannelProperties.landingPageUrl, url, "csharp");
@@ -204,18 +198,6 @@ using Microsoft.BotService;
 
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 
-@@alternateType(BotChannel, BotChannelReplacement, "csharp");
-@@clientName(BotChannel, "BotChannelTemp", "csharp");
-@@clientName(BotChannelReplacement, "BotChannel", "csharp");
-
-@@alternateType(Bot, BotReplacement, "csharp");
-@@clientName(Bot, "BotTemp", "csharp");
-@@clientName(BotReplacement, "Bot", "csharp");
-
-@@alternateType(ConnectionSetting, ConnectionSettingReplacement, "csharp");
-@@clientName(ConnectionSetting, "ConnectionSettingTemp", "csharp");
-@@clientName(ConnectionSettingReplacement, "BotConnectionSetting", "csharp");
-
 @@clientName(BotChannels.listWithKeys, "GetChannelWithKeys", "csharp");
 @@clientName(Bots.createSignInUrl, "createEmailSignInUri", "csharp");
 @@clientName(Bots.listByBotResource,
@@ -243,12 +225,6 @@ using Microsoft.BotService;
   "csharp"
 );
 
-@@alternateType(PrivateLinkResource, PrivateLinkResourceReplacement, "csharp");
-@@clientName(PrivateLinkResourceReplacement,
-  "BotServicePrivateLinkResourceData",
-  "csharp"
-);
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Bots.listByBotResource,
   "csharp"
@@ -258,12 +234,119 @@ using Microsoft.BotService;
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResourceReplacement.properties
-);
+// =============================================================================
+// C# SDK backward-compatibility replacement models
+//
+// These models exist solely for C# client backward compatibility. They are used
+// via @@alternateType to provide the correct base types and shapes that the
+// previously published C# SDK exposed. They do not affect the service contract
+// or swagger output.
+// =============================================================================
 
+/**
+ * Bot resource definition
+ */
+model BotReplacement is Azure.ResourceManager.TrackedResource<BotProperties> {
+  ...ResourceNameParameter<
+    Resource = Bot,
+    KeyName = "resourceName",
+    SegmentName = "botServices",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+  >;
+  ...OmitProperties<
+    Bot,
+    "location" | "tags" | "properties" | "id" | "name" | "type"
+  >;
+}
+
+@@alternateType(Bot, BotReplacement, "csharp");
+@@clientName(Bot, "BotTemp", "csharp");
+@@clientName(BotReplacement, "Bot", "csharp");
+
+/**
+ * Bot channel resource definition
+ */
+model BotChannelReplacement is Azure.ResourceManager.TrackedResource<Channel> {
+  ...ResourceNameParameter<
+    Resource = BotChannel,
+    KeyName = "channelName",
+    SegmentName = "channels",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+  >;
+  ...OmitProperties<
+    BotChannel,
+    "location" | "tags" | "properties" | "name" | "id" | "type"
+  >;
+}
+
+@@alternateType(BotChannel, BotChannelReplacement, "csharp");
+@@clientName(BotChannel, "BotChannelTemp", "csharp");
+@@clientName(BotChannelReplacement, "BotChannel", "csharp");
+
+/**
+ * Connection setting resource definition
+ */
+model ConnectionSettingReplacement
+  is Azure.ResourceManager.TrackedResource<ConnectionSettingProperties> {
+  ...ResourceNameParameter<
+    Resource = ConnectionSetting,
+    KeyName = "connectionName",
+    SegmentName = "connections",
+    NamePattern = "^[a-zA-Z0-9][\\sa-zA-Z0-9_.-]*$"
+  >;
+  ...OmitProperties<
+    ConnectionSetting,
+    "location" | "tags " | "properties" | "id" | "name" | "type"
+  >;
+}
+
+@@alternateType(ConnectionSetting, ConnectionSettingReplacement, "csharp");
+@@clientName(ConnectionSetting, "ConnectionSettingTemp", "csharp");
+@@clientName(ConnectionSettingReplacement, "BotConnectionSetting", "csharp");
+
+/**
+ * The ARM channel of list channel with keys operation response
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat"
+model ListChannelWithKeysResponseReplacement
+  extends Azure.ResourceManager.CommonTypes.TrackedResource {
+  ...OmitProperties<
+    ListChannelWithKeysResponse,
+    "location" | "tags" | "name" | "id" | "type"
+  >;
+}
+
+@@alternateType(ListChannelWithKeysResponse,
+  ListChannelWithKeysResponseReplacement,
+  "csharp"
+);
+@@clientName(ListChannelWithKeysResponseReplacement,
+  "BotChannelGetWithKeysResult",
+  "csharp"
+);
 @@usage(ListChannelWithKeysResponseReplacement,
   Usage.input | Usage.output,
   "csharp"
 );
+
+/**
+ * A private link resource
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat"
+model PrivateLinkResourceReplacement
+  extends Azure.ResourceManager.CommonTypes.Resource {
+  /**
+   * Resource properties.
+   */
+  properties?: PrivateLinkResourceProperties;
+}
+
+@@alternateType(PrivateLinkResource, PrivateLinkResourceReplacement, "csharp");
+@@clientName(PrivateLinkResourceReplacement,
+  "BotServicePrivateLinkResourceData",
+  "csharp"
+);
 @@usage(PrivateLinkResourceReplacement, Usage.input | Usage.output, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResourceReplacement.properties
+);

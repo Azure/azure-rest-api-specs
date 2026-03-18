@@ -60,43 +60,6 @@ model Bot is Azure.ResourceManager.ProxyResource<BotProperties> {
   zones?: string[];
 }
 
-/**
- * Bot resource definition
- */
-model BotReplacement is Azure.ResourceManager.TrackedResource<BotProperties> {
-  ...ResourceNameParameter<
-    Resource = Bot,
-    KeyName = "resourceName",
-    SegmentName = "botServices",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-  >;
-
-  /**
-   * Gets or sets the SKU of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  sku?: Sku;
-
-  /**
-   * Required. Gets or sets the Kind of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  kind?: Kind;
-
-  /**
-   * Entity Tag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  etag?: Azure.Core.eTag;
-
-  /**
-   * Entity zones
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  zones?: string[];
-}
-
 @armResourceOperations
 interface Bots {
   /**
