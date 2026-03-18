@@ -8,6 +8,11 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
+@@clientName(Microsoft.KubernetesConfiguration,
+  "ExtensionsClient",
+  "javascript"
+);
+
 @@clientName(Microsoft.KubernetesConfiguration.AKSIdentityType,
   "AksIdentityType",
   "java"
