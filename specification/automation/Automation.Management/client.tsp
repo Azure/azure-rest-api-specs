@@ -24,3 +24,5 @@ using Microsoft.Automation;
   "ResourceProviders",
   "java"
 );
+
+@@alternateType(Runbooks.replaceContent::parameters.body, string, "javascript");
