@@ -66,13 +66,7 @@ interface Workspaces {
   @tag("Workspaces")
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
-    Parameters = {
-      /**
-       * Optional parameter to retain default unity catalog data. By default the data will retained if Uc is enabled on the workspace.
-       */
-      @query("forceDeletion")
-      forceDeletion?: boolean = false;
-    },
+    Parameters = WorkspaceDeleteParameters,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
@@ -106,6 +100,14 @@ interface Workspaces {
     Error = ErrorResponse
   >;
 }
+
+alias WorkspaceDeleteParameters = {
+  /**
+   * Optional parameter to retain default unity catalog data. By default the data will retained if Uc is enabled on the workspace.
+   */
+  @query("forceDeletion")
+  forceDeletion?: boolean = false;
+};
 
 @@maxLength(Workspace.name, 64);
 @@minLength(Workspace.name, 3);
