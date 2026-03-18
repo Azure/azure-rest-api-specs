@@ -23,7 +23,9 @@ model PreparedImageSpecification
   @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
-  ...EntityTagProperty;
+  @visibility(Lifecycle.Read)
+  @doc("A unique read-only string that changes whenever the resource is updated.")
+  etag?: string;
 }
 
 @doc("The properties of the Prepared Image Specification resource.")
@@ -40,12 +42,12 @@ model PreparedImageSpecificationProperties {
 
   @visibility(Lifecycle.Read)
   @doc("An auto-generated value that changes when the other fields of the image customization are changed.")
-  @pattern("^[\\w\\-\\.]+$")
+  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")
   version?: string;
 
   @visibility(Lifecycle.Read)
   @doc("The provisioning state of the prepared image specification.")
-  provisioningState?: ProvisioningState;
+  provisioningState: ProvisioningState;
 
   @doc("The scripts to customize the node before or after image capture.")
   @identifiers(#[])
@@ -63,10 +65,12 @@ model PreparedImageSpecificationManagedIdentityProfile {
 
   @visibility(Lifecycle.Read)
   @doc("The object ID of the managed identity.")
+  @format("uuid")
   objectId?: string;
 
   @visibility(Lifecycle.Read)
   @doc("The client ID of the managed identity.")
+  @format("uuid")
   clientId?: string;
 }
 
@@ -146,6 +150,15 @@ model PreparedImageSpecificationPatchProperties {
   customizationScripts?: PreparedImageSpecificationScriptUpdate[];
 }
 
+@doc("Prepared image specification patch resource")
+model PreparedImageSpecificationPatch {
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("Patchable prepared image specification properties.")
+  properties?: PreparedImageSpecificationPatchProperties;
+}
+
 @doc("The execution point for the script.")
 union ExecutionPoint {
   string,
@@ -190,9 +203,9 @@ union ProvisioningState {
 @doc("A version of the Prepared Image Specification resource.")
 model PreparedImageSpecificationVersion
   is ProxyResource<PreparedImageSpecificationProperties> {
-  @pattern("^[\\w\\-\\.]+$")
+  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")
   @minLength(1)
-  @maxLength(64)
+  @maxLength(128)
   @doc("The version of the Prepared Image Specification.")
   @key("version")
   @path

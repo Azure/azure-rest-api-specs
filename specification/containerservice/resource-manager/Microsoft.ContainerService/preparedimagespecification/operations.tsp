@@ -21,11 +21,8 @@ interface PreparedImageSpecifications {
 
   update is ArmCustomPatchAsync<
     PreparedImageSpecification,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      PreparedImageSpecification,
-      PreparedImageSpecificationPatchProperties
-    >,
-    Azure.ResourceManager.Foundations.BaseParameters<PreparedImageSpecification> &
+    PatchModel = PreparedImageSpecificationPatch,
+    Parameters = Azure.ResourceManager.Foundations.BaseParameters<PreparedImageSpecification> &
       IfMatchParameters<PreparedImageSpecification>
   >;
 

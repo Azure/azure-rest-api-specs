@@ -544,8 +544,8 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[\\w\\-\\.]+$"
+            "maxLength": 128,
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"
           }
         ],
         "responses": {
@@ -609,8 +609,8 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[\\w\\-\\.]+$"
+            "maxLength": 128,
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"
           }
         ],
         "responses": {
@@ -683,9 +683,9 @@
           "$ref": "#/definitions/PreparedImageSpecificationProperties",
           "description": "The resource-specific properties for this resource."
         },
-        "eTag": {
+        "etag": {
           "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
@@ -734,11 +734,13 @@
         },
         "objectId": {
           "type": "string",
+          "format": "uuid",
           "description": "The object ID of the managed identity.",
           "readOnly": true
         },
         "clientId": {
           "type": "string",
+          "format": "uuid",
           "description": "The client ID of the managed identity.",
           "readOnly": true
         }
@@ -808,7 +810,7 @@
         "version": {
           "type": "string",
           "description": "An auto-generated value that changes when the other fields of the image customization are changed.",
-          "pattern": "^[\\w\\-\\.]+$",
+          "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$",
           "readOnly": true
         },
         "provisioningState": {
@@ -903,33 +905,8 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/PreparedImageSpecificationUpdateProperties",
+          "$ref": "#/definitions/PreparedImageSpecificationPatchProperties",
           "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "PreparedImageSpecificationUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the PreparedImageSpecification.",
-      "properties": {
-        "containerImages": {
-          "type": "array",
-          "description": "The list of container images to cache on nodes. See https://kubernetes.io/docs/concepts/containers/images/#image-names",
-          "items": {
-            "type": "string"
-          }
-        },
-        "identityProfile": {
-          "$ref": "#/definitions/PreparedImageSpecificationManagedIdentityProfileUpdate",
-          "description": "The identity used to execute prepared image specification tasks during image build time and provisioning time."
-        },
-        "customizationScripts": {
-          "type": "array",
-          "description": "The scripts to customize the node before or after image capture.",
-          "items": {
-            "$ref": "#/definitions/PreparedImageSpecificationScriptUpdate"
-          },
-          "x-ms-identifiers": []
         }
       }
     },

@@ -5,7 +5,7 @@
 
 ## Getting Started
 
-To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+To build SDKs for the Prepared Image Specification API, install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
 > To see additional help and options, run:
