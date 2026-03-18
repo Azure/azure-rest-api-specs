@@ -846,6 +846,14 @@ union AzureOpenAIModelName {
 
   /** Gpt5Nano model. */
   Gpt5Nano: "gpt-5-nano",
+
+  /** Gpt54Mini model. */
+  @added(Versions.v2026_04_01)
+  Gpt54Mini: "gpt-5.4-mini",
+
+  /** Gpt54Nano model. */
+  @added(Versions.v2026_04_01)
+  Gpt54Nano: "gpt-5.4-nano",
 }
 
 /** The name of the embedding model from the Azure AI Foundry Catalog that will be called. */
