@@ -21,5 +21,5 @@ namespace Microsoft.HealthcareApis;
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
   "ArmManagedServiceIdentityType",
-  "javascript"
+  "javascript,go"
 );
