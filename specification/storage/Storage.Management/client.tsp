@@ -239,6 +239,9 @@ using Microsoft.Storage;
 @@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
 @@clientName(StorageAccounts.listAccountSAS, "listAccountSas", "java");
 @@clientName(StorageAccounts.listServiceSAS, "listServiceSas", "java");
+// Fix SAS method casing: old C# SDK used GetAccountSas/GetServiceSas (camelCase "Sas")
+@@clientName(StorageAccounts.listAccountSAS, "GetAccountSas", "csharp");
+@@clientName(StorageAccounts.listServiceSAS, "GetServiceSas", "csharp");
 @@clientName(ImmutableStorageWithVersioning.timeStamp, "timestamp", "java");
 @@clientName(FileShareRecommendations.baseIOPS, "baseIops", "java");
 @@clientName(AccountSasParameters.signedIp, "ipAddressOrRange", "java");
@@ -848,6 +851,14 @@ namespace Azure.ResourceManager.Models {
 // Fix StorageTaskReportProperties date types: old SDK had DateTimeOffset?
 @@alternateType(StorageTaskReportProperties.startTime, utcDateTime, "csharp");
 @@alternateType(StorageTaskReportProperties.finishTime, utcDateTime, "csharp");
+
+// Fix DeletedAccountProperties date types: old SDK had DateTimeOffset? (CreatedOn/DeletedOn)
+@@alternateType(DeletedAccountProperties.creationTime, utcDateTime, "csharp");
+@@alternateType(DeletedAccountProperties.deletionTime, utcDateTime, "csharp");
+
+// Fix StorageAccountSkuConversionStatus date types: old SDK had DateTimeOffset? (StartOn/EndOn)
+@@alternateType(StorageAccountSkuConversionStatus.startTime, utcDateTime, "csharp");
+@@alternateType(StorageAccountSkuConversionStatus.endTime, utcDateTime, "csharp");
 
 // Fix UpdateHistoryEntry.TenantId: old SDK had Guid?
 @@alternateType(UpdateHistoryProperty.tenantId, uuid, "csharp");
