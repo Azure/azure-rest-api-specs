@@ -22,15 +22,16 @@ Collect the inputs below from the TypeSpec project. Ask **up to 6 concise questi
 
 ### Definitions
 
-| Type                      | What it means                                                                                                                       | Tool Restriction                                                                       |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Type                      | What it means                                                                                                                       | Tool Restriction                                                                        |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | **API Version Evolution** | Adding a new preview or stable API version to an existing ARM service. Data-plane API version evolution is not fully supported yet. | **MUST NOT** call `azsdk_typespec_generate_authoring_plan`. Uses web-fetched docs only. |
-| **General Authoring**     | Any other TypeSpec authoring task that modifies `.tsp` files (resources, operations, models, properties, etc.)                      | **MUST** call `azsdk_typespec_generate_authoring_plan` in Step 3.                      |
+| **General Authoring**     | Any other TypeSpec authoring task that modifies `.tsp` files (resources, operations, models, properties, etc.)                      | **MUST** call `azsdk_typespec_generate_authoring_plan` in Step 3.                       |
 
 ### How to Classify
 
 **API Version Evolution** — any request whose **primary intent** is to introduce a new API version string.
 Keyword patterns:
+
 - _"add a new … API version"_, _"new preview version"_, _"new stable version"_
 - _"bump API version"_, _"introduce version"_, _"add … preview"_, _"add … stable"_
 

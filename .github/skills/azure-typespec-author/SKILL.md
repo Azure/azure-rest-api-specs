@@ -12,10 +12,10 @@ compatibility:
 
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
+| Tool                                                   | Purpose                                                   |
+| ------------------------------------------------------ | --------------------------------------------------------- |
 | `azure-sdk-mcp:azsdk_typespec_generate_authoring_plan` | Generate grounded authoring plan (General Authoring only) |
-| `azure-sdk-mcp:azsdk_run_typespec_validation` | Validate TypeSpec compilation + lint |
+| `azure-sdk-mcp:azsdk_run_typespec_validation`          | Validate TypeSpec compilation + lint                      |
 
 **Prerequisite:** `azure-sdk-mcp` server must be running.
 
@@ -37,7 +37,7 @@ compatibility:
 
 Copy and update as you progress:
 
-- [ ] Step 1: Analyzed project & classified as: ___
+- [ ] Step 1: Analyzed project & classified as: \_\_\_
 - [ ] Step 2: Collected intake inputs
 - [ ] Step 3: Retrieved authoring plan
 - [ ] Step 4: Applied changes
@@ -49,10 +49,10 @@ Follow [analyze project & classify task](references/analyze-project-and-classify
 
 Classify as exactly one:
 
-| Task Type                 | When                                                                         | `azsdk_typespec_generate_authoring_plan` |
-| ------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------- |
-| **API Version Evolution** | Adding a new preview or stable API version to an existing ARM service. | **MUST NOT** call                        |
-| **General Authoring**     | Any other `.tsp` change (resources, operations, models, properties, etc.)    | **MUST** call                            |
+| Task Type                 | When                                                                      | `azsdk_typespec_generate_authoring_plan` |
+| ------------------------- | ------------------------------------------------------------------------- | ---------------------------------------- |
+| **API Version Evolution** | Adding a new preview or stable API version to an existing ARM service.    | **MUST NOT** call                        |
+| **General Authoring**     | Any other `.tsp` change (resources, operations, models, properties, etc.) | **MUST** call                            |
 
 State your classification explicitly before proceeding.
 
@@ -103,13 +103,13 @@ See [validation guide](references/validation.md) for sub-steps (TypeSpec compila
 
 ## Reference Files
 
-| File | Purpose |
-|------|---------|
+| File                                                                                    | Purpose                                   |
+| --------------------------------------------------------------------------------------- | ----------------------------------------- |
 | [analyze-project-and-classify-task.md](references/analyze-project-and-classify-task.md) | Step 1: project analysis + classification |
-| [api-version-evolution.md](references/api-version-evolution.md) | Steps 2–4 for API Version Evolution tasks |
-| [general-authoring-intake.md](references/general-authoring-intake.md) | Step 2 for General Authoring tasks |
-| [agentic-search.md](references/agentic-search.md) | Procedure for fetching external docs |
-| [validation.md](references/validation.md) | Step 5: validation sub-steps |
+| [api-version-evolution.md](references/api-version-evolution.md)                         | Steps 2–4 for API Version Evolution tasks |
+| [general-authoring-intake.md](references/general-authoring-intake.md)                   | Step 2 for General Authoring tasks        |
+| [agentic-search.md](references/agentic-search.md)                                       | Procedure for fetching external docs      |
+| [validation.md](references/validation.md)                                               | Step 5: validation sub-steps              |
 
 ## Examples
 

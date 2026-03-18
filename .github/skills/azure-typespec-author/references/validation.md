@@ -2,8 +2,8 @@
 
 After applying changes (Step 4), run through all sub-steps below in order.
 
-| Sub-step | Action              | When                       |
-| -------- | ------------------- | -------------------------- |
+| Sub-step | Action               | When                       |
+| -------- | -------------------- | -------------------------- |
 | 5.1      | TypeSpec Validation  | Always                     |
 | 5.2      | Example Verification | API Version Evolution only |
 
