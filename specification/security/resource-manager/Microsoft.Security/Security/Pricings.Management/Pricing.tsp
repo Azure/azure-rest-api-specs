@@ -30,7 +30,8 @@ interface Pricings {
    */
   get is Azure.ResourceManager.Extension.Read<
     Azure.ResourceManager.Extension.ScopeParameter,
-    Pricing
+    Pricing,
+    Error = CloudError
   >;
 
   /**
@@ -38,7 +39,8 @@ interface Pricings {
    */
   update is Azure.ResourceManager.Extension.CreateOrReplaceSync<
     Azure.ResourceManager.Extension.ScopeParameter,
-    Pricing
+    Pricing,
+    Error = CloudError
   >;
 
   /**
@@ -46,7 +48,8 @@ interface Pricings {
    */
   delete is Azure.ResourceManager.Extension.DeleteSync<
     Azure.ResourceManager.Extension.ScopeParameter,
-    Pricing
+    Pricing,
+    Error = CloudError
   >;
 
   /**
@@ -62,10 +65,12 @@ interface Pricings {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<PricingList>
+    Response = ArmResponse<PricingList>,
+    Error = CloudError
   >;
 }
 
 @@doc(Pricing.name, "name of the pricing configuration");
 @@doc(Pricing.properties, "Pricing data");
 @@doc(Pricings.update::parameters.resource, "Pricing object");
+@@key(Azure.ResourceManager.Extension.ScopeParameter.scope, "scopeId");

@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2024-01-01",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider"
   },
   "produces": [
     "application/json"
@@ -12,7 +12,7 @@
     "application/json"
   ],
   "paths": {
-    "/{scope}/providers/microsoft.Security/pricings": {
+    "/{scopeId}/providers/microsoft.Security/pricings": {
       "get": {
         "operationId": "Pricings_List",
         "tags": [
@@ -21,7 +21,7 @@
         "description": "Lists Microsoft Defender for Cloud pricing configurations of the scopeId, that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes the pricings set for 'planName1' and 'planName2' only.",
         "parameters": [
           {
-            "name": "scope",
+            "name": "scopeId",
             "in": "path",
             "required": true,
             "type": "string",
@@ -43,7 +43,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -60,7 +60,7 @@
         }
       }
     },
-    "/{scope}/providers/microsoft.Security/pricings/{pricingName}": {
+    "/{scopeId}/providers/microsoft.Security/pricings/{pricingName}": {
       "get": {
         "operationId": "Pricings_Get",
         "tags": [
@@ -69,7 +69,7 @@
         "description": "Get the Defender plans pricing configurations of the selected scope (valid scopes are resource id or a subscription id). At the resource level, supported resource types are 'VirtualMachines, VMSS and ARC Machines'.",
         "parameters": [
           {
-            "name": "scope",
+            "name": "scopeId",
             "in": "path",
             "required": true,
             "type": "string",
@@ -92,7 +92,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -128,7 +128,7 @@
         "description": "Updates a provided Microsoft Defender for Cloud pricing configuration in the scope. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines' and only for plan='VirtualMachines' and subPlan='P1').",
         "parameters": [
           {
-            "name": "scope",
+            "name": "scopeId",
             "in": "path",
             "required": true,
             "type": "string",
@@ -165,7 +165,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -198,7 +198,7 @@
         "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines, VMSS, ARC Machines, and Containers').",
         "parameters": [
           {
-            "name": "scope",
+            "name": "scopeId",
             "in": "path",
             "required": true,
             "type": "string",
@@ -221,7 +221,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -237,6 +237,71 @@
     }
   },
   "definitions": {
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
     "Extension": {
       "type": "object",
       "description": "A plan's extension properties",
