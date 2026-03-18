@@ -6,26 +6,42 @@ using Microsoft.DomainRegistration;
 
 @@clientName(Domains.createOrUpdate::parameters.resource, "domain");
 @@clientName(Domains.update::parameters.properties, "domain");
-@@clientLocation(DomainOwnershipIdentifiers.getOwnershipIdentifier, Domains);
+@@clientLocation(DomainOwnershipIdentifiers.getOwnershipIdentifier,
+  Domains,
+  "!csharp"
+);
 @@clientLocation(DomainOwnershipIdentifiers.createOrUpdateOwnershipIdentifier,
-  Domains
+  Domains,
+  "!csharp"
 );
 @@clientName(DomainOwnershipIdentifiers.createOrUpdateOwnershipIdentifier::parameters.resource,
   "domainOwnershipIdentifier"
 );
-@@clientLocation(DomainOwnershipIdentifiers.updateOwnershipIdentifier, Domains);
+@@clientLocation(DomainOwnershipIdentifiers.updateOwnershipIdentifier,
+  Domains,
+  "!csharp"
+);
 @@clientName(DomainOwnershipIdentifiers.updateOwnershipIdentifier::parameters.properties,
   "domainOwnershipIdentifier"
 );
-@@clientLocation(DomainOwnershipIdentifiers.deleteOwnershipIdentifier, Domains);
-@@clientLocation(DomainOwnershipIdentifiers.listOwnershipIdentifiers, Domains);
+@@clientLocation(DomainOwnershipIdentifiers.deleteOwnershipIdentifier,
+  Domains,
+  "!csharp"
+);
+@@clientLocation(DomainOwnershipIdentifiers.listOwnershipIdentifiers,
+  Domains,
+  "!csharp"
+);
 
 @@clientName(TopLevelDomains.listAgreements::parameters.body,
   "agreementOption"
 );
-@@clientLocation(DomainsOperationGroup.checkAvailability, Domains);
-@@clientLocation(DomainsOperationGroup.getControlCenterSsoRequest, Domains);
-@@clientLocation(DomainsOperationGroup.listRecommendations, Domains);
+@@clientLocation(DomainsOperationGroup.checkAvailability, Domains, "!csharp");
+@@clientLocation(DomainsOperationGroup.getControlCenterSsoRequest,
+  Domains,
+  "!csharp"
+);
+@@clientLocation(DomainsOperationGroup.listRecommendations, Domains, "!csharp");
 
 @@clientName(DomainsOperationGroup.listRecommendations::parameters.body,
   "parameters"
@@ -45,5 +61,5 @@ using Microsoft.DomainRegistration;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Domain.properties);
 
-@@clientLocation(Operations.list, "DomainRegistrationProvider");
+@@clientLocation(Operations.list, "DomainRegistrationProvider", "!csharp");
 @@clientName(Operations.list, "ListOperations");
