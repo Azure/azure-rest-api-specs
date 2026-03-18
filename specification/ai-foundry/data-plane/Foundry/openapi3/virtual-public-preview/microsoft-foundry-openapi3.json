@@ -11399,6 +11399,20 @@
               ]
             },
             "readOnly": true
+          },
+          "blueprint_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentBlueprintReference"
+              }
+            ],
+            "description": "The blueprint for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            },
+            "readOnly": true
           }
         }
       },
@@ -11612,13 +11626,13 @@
             },
             "readOnly": true
           },
-          "agent_blueprint": {
+          "blueprint_reference": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AgentIdentity"
+                "$ref": "#/components/schemas/AgentBlueprintReference"
               }
             ],
-            "description": "The instance identity of the agent",
+            "description": "The blueprint for the agent",
             "x-ms-foundry-meta": {
               "required_previews": [
                 "AgentEndpoints=V1Preview"

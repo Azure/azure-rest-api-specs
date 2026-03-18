@@ -150,6 +150,17 @@ model AgentObject {
   @doc("The blueprint for the agent")
   @visibility(Lifecycle.Read)
   blueprint?: AgentIdentity;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @doc("The blueprint for the agent")
+  @visibility(Lifecycle.Read)
+  blueprint_reference?: AgentBlueprintReference;
 }
 
 model AgentVersionObject {
@@ -215,9 +226,9 @@ model AgentVersionObject {
       required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @doc("The instance identity of the agent")
+  @doc("The blueprint for the agent")
   @visibility(Lifecycle.Read)
-  agent_blueprint?: AgentIdentity;
+  blueprint_reference?: AgentBlueprintReference;
 }
 
 @removed(Versions.v1)
