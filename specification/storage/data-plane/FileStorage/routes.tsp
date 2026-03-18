@@ -267,7 +267,7 @@ interface Share {
 
       /** The next allowed quota downgrade time. */
       @header("x-ms-share-next-allowed-quota-downgrade-time")
-      nextAllowedQuotaDowngradeTime?: string;
+      nextAllowedQuotaDowngradeTime?: utcDateTime;
 
       /** The provisioned bandwidth for the share. */
       @header("x-ms-share-provisioned-bandwidth-mibps")
@@ -299,11 +299,11 @@ interface Share {
 
       /** The next allowed provisioned IOPS downgrade time. */
       @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
-      nextAllowedProvisionedIopsDowngradeTime?: string;
+      nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
 
       /** The next allowed provisioned bandwidth downgrade time. */
       @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time")
-      nextAllowedProvisionedBandwidthDowngradeTime?: string;
+      nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
 
       /** Whether SMB directory lease is enabled. */
       @header("x-ms-enable-smb-directory-lease")
@@ -582,15 +582,15 @@ interface Share {
 
       /** Approximate time remaining in the share's existing downgrade request. */
       @header("x-ms-share-next-allowed-quota-downgrade-time")
-      nextAllowedQuotaDowngradeTime?: string;
+      nextAllowedQuotaDowngradeTime?: utcDateTime;
 
       /** Approximate time remaining in the share's existing provisioned IOPS downgrade request. */
       @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
-      nextAllowedProvisionedIopsDowngradeTime?: string;
+      nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
 
       /** Approximate time remaining in the share's existing provisioned bandwidth downgrade request. */
       @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time")
-      nextAllowedProvisionedBandwidthDowngradeTime?: string;
+      nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
     }
   >;
 
