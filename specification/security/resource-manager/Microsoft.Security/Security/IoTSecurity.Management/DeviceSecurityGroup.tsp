@@ -72,4 +72,3 @@ interface DeviceSecurityGroups {
 @@doc(DeviceSecurityGroups.createOrUpdate::parameters.resource,
   "Security group object."
 );
-@@key(Azure.ResourceManager.Extension.ScopeParameter.scope, "resourceId");

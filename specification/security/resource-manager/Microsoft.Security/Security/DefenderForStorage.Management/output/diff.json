@@ -1,556 +1,260 @@
 {
   "info": {
-    "title": {
-      "__old": "Security Center",
-      "__new": "SecurityCenter"
+    "description": {
+      "__old": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider."
     }
   },
   "paths": {
-    "/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}__deleted": {
+    "/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}": {
       "get": {
-        "operationId": "DefenderForStorage_Get",
-        "tags": [
-          "DefenderForStorage"
-        ],
-        "description": "Gets the Defender for Storage settings for the specified storage account.",
         "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "settingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "SettingName",
-              "modelAsString": true
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
             }
-          }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DefenderForStorageSetting"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the Defender for Storage settings for the specified resource.": {
-            "$ref": "./examples/DefenderForStorage/GetDefenderForStorageSettings_example.json"
           }
         }
       },
       "put": {
-        "operationId": "DefenderForStorage_Create",
-        "tags": [
-          "DefenderForStorage"
-        ],
-        "description": "Creates or updates the Defender for Storage settings on a specified storage account.",
         "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "settingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "SettingName",
-              "modelAsString": true
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
             }
-          },
-          {
-            "name": "defenderForStorageSetting",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DefenderForStorageSetting"
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
             }
-          }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DefenderForStorageSetting"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DefenderForStorageSetting"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates or updates the Defender for Storage settings on a specified resource.": {
-            "$ref": "./examples/DefenderForStorage/PutDefenderForStorageSettings_example.json"
           }
         }
       }
     },
-    "/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}__deleted": {
+    "/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}": {
       "get": {
-        "operationId": "DefenderForStorage_GetMalwareScan",
-        "tags": [
-          "DefenderForStorage",
-          "Antimalware",
-          "Scan"
-        ],
-        "description": "Gets the Defender for Storage malware scan for the specified storage resource.",
         "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "settingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "SettingName",
-              "modelAsString": true
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
             }
-          },
-          {
-            "name": "scanId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^(latest|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$"
-          }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/MalwareScan"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the Defender for Storage malware scan for the specified storage resource.": {
-            "$ref": "./examples/DefenderForStorage/GetMalwareScan_example.json"
           }
         }
       }
     },
-    "/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}/cancelMalwareScan__deleted": {
+    "/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}/cancelMalwareScan": {
       "post": {
-        "operationId": "DefenderForStorage_CancelMalwareScan",
-        "tags": [
-          "DefenderForStorage",
-          "Antimalware",
-          "Scan"
-        ],
-        "description": "Cancels a Defender for Storage malware scan for the specified storage account.",
         "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "settingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "SettingName",
-              "modelAsString": true
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
             }
-          },
-          {
-            "name": "scanId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^(latest|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$"
-          }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/MalwareScan"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Cancel a Defender for Storage malware scan for the specified storage resource.": {
-            "$ref": "./examples/DefenderForStorage/CancelMalwareScan_example.json"
           }
         }
       }
     },
-    "/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan__deleted": {
+    "/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan": {
       "post": {
-        "operationId": "DefenderForStorage_StartMalwareScan",
-        "tags": [
-          "DefenderForStorage",
-          "Antimalware",
-          "Scan"
-        ],
-        "description": "Initiate a Defender for Storage malware scan for the specified storage account.",
         "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "settingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "SettingName",
-              "modelAsString": true
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
             }
-          }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/MalwareScan"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Initiate a Defender for Storage malware scan for the specified storage account.": {
-            "$ref": "./examples/DefenderForStorage/StartMalwareScan_example.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}__added": {
-      "get": {
-        "operationId": "DefenderForStorage_Get",
-        "tags": [
-          "DefenderForStorageSettings"
-        ],
-        "description": "Gets the Defender for Storage settings for the specified storage account.",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "settingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "SettingName",
-              "modelAsString": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DefenderForStorageSetting"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the Defender for Storage settings for the specified resource.": {
-            "$ref": "./examples/DefenderForStorage/GetDefenderForStorageSettings_example.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "DefenderForStorage_Create",
-        "tags": [
-          "DefenderForStorageSettings"
-        ],
-        "description": "Creates or updates the Defender for Storage settings on a specified storage account.",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "settingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "SettingName",
-              "modelAsString": true
-            }
-          },
-          {
-            "name": "defenderForStorageSetting",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DefenderForStorageSetting"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DefenderForStorageSetting"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DefenderForStorageSetting"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creates or updates the Defender for Storage settings on a specified resource.": {
-            "$ref": "./examples/DefenderForStorage/PutDefenderForStorageSettings_example.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/{scanId}/{scanId}__added": {
-      "get": {
-        "operationId": "DefenderForStorage_GetMalwareScan",
-        "tags": [
-          "DefenderForStorageSettings"
-        ],
-        "description": "Gets the Defender for Storage malware scan for the specified storage resource.",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "settingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "SettingName",
-              "modelAsString": true
-            }
-          },
-          {
-            "name": "scanId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^(latest|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/MalwareScan"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the Defender for Storage malware scan for the specified storage resource.": {
-            "$ref": "./examples/DefenderForStorage/GetMalwareScan_example.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/{scanId}/cancelMalwareScan__added": {
-      "post": {
-        "operationId": "DefenderForStorage_CancelMalwareScan",
-        "tags": [
-          "DefenderForStorageSettings"
-        ],
-        "description": "Cancels a Defender for Storage malware scan for the specified storage account.",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "settingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "SettingName",
-              "modelAsString": true
-            }
-          },
-          {
-            "name": "scanId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^(latest|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/MalwareScan"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Cancel a Defender for Storage malware scan for the specified storage resource.": {
-            "$ref": "./examples/DefenderForStorage/CancelMalwareScan_example.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan__added": {
-      "post": {
-        "operationId": "DefenderForStorage_StartMalwareScan",
-        "tags": [
-          "DefenderForStorageSettings"
-        ],
-        "description": "Initiate a Defender for Storage malware scan for the specified storage account.",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "settingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "SettingName",
-              "modelAsString": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/MalwareScan"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Initiate a Defender for Storage malware scan for the specified storage account.": {
-            "$ref": "./examples/DefenderForStorage/StartMalwareScan_example.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "CloudError__added": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody__added": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo__added": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
     "DefenderForStorageSetting": {
       "properties": {
         "properties": {
@@ -598,22 +302,8 @@
     },
     "OnUploadFilters": {
       "properties": {
-        "excludeBlobsWithPrefix": {
-          "x-nullable__deleted": true
-        },
-        "excludeBlobsWithSuffix": {
-          "x-nullable__deleted": true
-        },
         "excludeBlobsLargerThan": {
-          "format__deleted": "int64",
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "OnUploadProperties": {
-      "properties": {
-        "filters": {
-          "x-nullable__deleted": true
+          "format__deleted": "int64"
         }
       }
     },

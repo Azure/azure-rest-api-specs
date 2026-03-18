@@ -9,3 +9,4 @@ using Microsoft.Security;
 @@clientName(Pricings.update::parameters.resource, "pricing");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Pricing.properties);
+@@key(Azure.ResourceManager.Extension.ScopeParameter.scope, "scopeId");

@@ -74,4 +74,3 @@ interface Pricings {
 @@doc(Pricing.name, "name of the pricing configuration");
 @@doc(Pricing.properties, "Pricing data");
 @@doc(Pricings.update::parameters.resource, "Pricing object");
-@@key(Azure.ResourceManager.Extension.ScopeParameter.scope, "scopeId");

@@ -1,78 +1,22 @@
-## Changed Paths
-
-Path: /{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}
-Change Type: deleted
-
-Path: /{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}
-Change Type: deleted
-
-Path: /{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}/cancelMalwareScan
-Change Type: deleted
-
-Path: /{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan
-Change Type: deleted
-
-Path: /{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}
-Change Type: added
-
-Path: /{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/{scanId}/{scanId}
-Change Type: added
-
-Path: /{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/{scanId}/cancelMalwareScan
-Change Type: added
-
-Path: /{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan
-Change Type: added
-
 ## Swagger Changes
 
-### Changes for `/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}`
+### Changes for `CloudError`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}__deleted']` | deleted | `{"get":{"operationId":"DefenderForStorage_Get","tags":["DefenderForStorage"],"description":"Gets the...` |
+| `definitions.CloudError__added` | added | `{"type":"object","description":"Common error response for all Azure Resource Manager APIs to return ...` |
 
-### Changes for `/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}__deleted']` | deleted | `{"get":{"operationId":"DefenderForStorage_GetMalwareScan","tags":["DefenderForStorage","Antimalware"...` |
-
-### Changes for `/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}/cancelMalwareScan`
+### Changes for `CloudErrorBody`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}/cancelMalwareScan__deleted']` | deleted | `{"post":{"operationId":"DefenderForStorage_CancelMalwareScan","tags":["DefenderForStorage","Antimalw...` |
+| `definitions.CloudErrorBody__added` | added | `{"type":"object","description":"The error detail.","properties":{"code":{"type":"string","descriptio...` |
 
-### Changes for `/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan__deleted']` | deleted | `{"post":{"operationId":"DefenderForStorage_StartMalwareScan","tags":["DefenderForStorage","Antimalwa...` |
-
-### Changes for `/{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}`
+### Changes for `ErrorAdditionalInfo`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}__added']` | added | `{"get":{"operationId":"DefenderForStorage_Get","tags":["DefenderForStorageSettings"],"description":"...` |
-
-### Changes for `/{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/{scanId}/{scanId}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/{scanId}/{scanId}__added']` | added | `{"get":{"operationId":"DefenderForStorage_GetMalwareScan","tags":["DefenderForStorageSettings"],"des...` |
-
-### Changes for `/{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/{scanId}/cancelMalwareScan`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/{scanId}/cancelMalwareScan__added']` | added | `{"post":{"operationId":"DefenderForStorage_CancelMalwareScan","tags":["DefenderForStorageSettings"],...` |
-
-### Changes for `/{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan__added']` | added | `{"post":{"operationId":"DefenderForStorage_StartMalwareScan","tags":["DefenderForStorageSettings"],"...` |
+| `definitions.ErrorAdditionalInfo__added` | added | `{"type":"object","description":"The resource management error additional info.","properties":{"type"...` |
 
 ### Changes for `description`
 
@@ -92,15 +36,6 @@ Change Type: added
 | `definitions.ScanSummary.properties.blobs.type__deleted` | deleted | `object` |
 | `definitions.SensitiveDataDiscoveryProperties.properties.operationStatus.type__deleted` | deleted | `object` |
 
-### Changes for `x-nullable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OnUploadFilters.properties.excludeBlobsLargerThan['x-nullable__deleted']` | deleted | `true` |
-| `definitions.OnUploadFilters.properties.excludeBlobsWithPrefix['x-nullable__deleted']` | deleted | `true` |
-| `definitions.OnUploadFilters.properties.excludeBlobsWithSuffix['x-nullable__deleted']` | deleted | `true` |
-| `definitions.OnUploadProperties.properties.filters['x-nullable__deleted']` | deleted | `true` |
-
 ### Changes for `format`
 
 | Path | Change Type | Value |
@@ -112,5 +47,10 @@ Change Type: added
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.DefenderForStorageSetting.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `info.title` | `Security Center` | `SecurityCenter` |
+| `info.description` | `API spec for Microsoft.Security (Azure Security Center) resource provider` | `API spec for Microsoft.Security (Azure Security Center) resource provider.` |
+| `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}/cancelMalwareScan'].post.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan'].post.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 

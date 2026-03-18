@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Security Center",
     "version": "2025-06-01",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -40,15 +40,21 @@
   },
   "tags": [
     {
-      "name": "DefenderForStorageSettings"
+      "name": "DefenderForStorage"
+    },
+    {
+      "name": "Antimalware"
+    },
+    {
+      "name": "Scan"
     }
   ],
   "paths": {
-    "/{scope}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}": {
       "get": {
         "operationId": "DefenderForStorage_Get",
         "tags": [
-          "DefenderForStorageSettings"
+          "DefenderForStorage"
         ],
         "description": "Gets the Defender for Storage settings for the specified storage account.",
         "parameters": [
@@ -56,7 +62,7 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -66,9 +72,10 @@
           {
             "name": "settingName",
             "in": "path",
-            "description": "Defender for Storage setting name.",
+            "description": "The defender for storage setting name.",
             "required": true,
             "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
             "enum": [
               "current"
             ],
@@ -95,7 +102,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -108,7 +115,7 @@
       "put": {
         "operationId": "DefenderForStorage_Create",
         "tags": [
-          "DefenderForStorageSettings"
+          "DefenderForStorage"
         ],
         "description": "Creates or updates the Defender for Storage settings on a specified storage account.",
         "parameters": [
@@ -116,7 +123,7 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -126,9 +133,10 @@
           {
             "name": "settingName",
             "in": "path",
-            "description": "Defender for Storage setting name.",
+            "description": "The defender for storage setting name.",
             "required": true,
             "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
             "enum": [
               "current"
             ],
@@ -170,7 +178,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -181,11 +189,13 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/{scanId}/{scanId}": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}": {
       "get": {
         "operationId": "DefenderForStorage_GetMalwareScan",
         "tags": [
-          "DefenderForStorageSettings"
+          "DefenderForStorage",
+          "Antimalware",
+          "Scan"
         ],
         "description": "Gets the Defender for Storage malware scan for the specified storage resource.",
         "parameters": [
@@ -193,7 +203,7 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -203,9 +213,10 @@
           {
             "name": "settingName",
             "in": "path",
-            "description": "Defender for Storage setting name.",
+            "description": "The defender for storage setting name.",
             "required": true,
             "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
             "enum": [
               "current"
             ],
@@ -240,7 +251,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -251,11 +262,13 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/{scanId}/cancelMalwareScan": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}/cancelMalwareScan": {
       "post": {
         "operationId": "DefenderForStorage_CancelMalwareScan",
         "tags": [
-          "DefenderForStorageSettings"
+          "DefenderForStorage",
+          "Antimalware",
+          "Scan"
         ],
         "description": "Cancels a Defender for Storage malware scan for the specified storage account.",
         "parameters": [
@@ -263,7 +276,7 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -273,9 +286,10 @@
           {
             "name": "settingName",
             "in": "path",
-            "description": "Defender for Storage setting name.",
+            "description": "The defender for storage setting name.",
             "required": true,
             "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
             "enum": [
               "current"
             ],
@@ -310,7 +324,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -321,11 +335,13 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan": {
       "post": {
         "operationId": "DefenderForStorage_StartMalwareScan",
         "tags": [
-          "DefenderForStorageSettings"
+          "DefenderForStorage",
+          "Antimalware",
+          "Scan"
         ],
         "description": "Initiate a Defender for Storage malware scan for the specified storage account.",
         "parameters": [
@@ -333,7 +349,7 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -343,9 +359,10 @@
           {
             "name": "settingName",
             "in": "path",
-            "description": "Defender for Storage setting name.",
+            "description": "The defender for storage setting name.",
             "required": true,
             "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
             "enum": [
               "current"
             ],
@@ -372,7 +389,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -440,6 +457,56 @@
         }
       }
     },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
     "DefenderForStorageSetting": {
       "type": "object",
       "description": "The Defender for Storage resource.",
@@ -474,6 +541,21 @@
         "overrideSubscriptionLevelSettings": {
           "type": "boolean",
           "description": "Indicates whether the settings defined for this storage account should override the settings defined for the subscription."
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
         }
       }
     },
@@ -545,6 +627,7 @@
         "excludeBlobsWithPrefix": {
           "type": "array",
           "description": "Optional. A list of prefixes to exclude from on-upload malware scanning.\nFormat: `container-name/blob-name` (start with the container name; do not include the storage account name).\nExclude entire containers: Use prefix of container names you want to exclude without a trailing `/`.\nExclude a single container: Add a trailing slash `/` after the container name to avoid excluding other containers with similar prefixes.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -552,12 +635,14 @@
         "excludeBlobsWithSuffix": {
           "type": "array",
           "description": "Optional. A list of suffixes to exclude from on-upload malware scanning. Suffixes match only the end of blob names, and should be used for file extensions or blob name endings only.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "excludeBlobsLargerThan": {
-          "description": "Optional. Specifies the maximum size in bytes for blobs to be scanned. This parameter accepts a single positive integer value. Blobs larger than this value will be excluded from scanning."
+          "description": "Optional. Specifies the maximum size in bytes for blobs to be scanned. This parameter accepts a single positive integer value. Blobs larger than this value will be excluded from scanning.",
+          "x-nullable": true
         }
       }
     },
@@ -576,7 +661,8 @@
         },
         "filters": {
           "$ref": "#/definitions/OnUploadFilters",
-          "description": "Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type."
+          "description": "Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type.",
+          "x-nullable": true
         }
       }
     },
