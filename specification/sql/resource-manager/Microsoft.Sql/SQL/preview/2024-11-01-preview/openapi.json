@@ -480,7 +480,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -53247,6 +53247,25 @@
         "description": {
           "type": "string",
           "description": "The localized friendly description for the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Result of the request to list SQL operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of results.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
           "readOnly": true
         }
       }

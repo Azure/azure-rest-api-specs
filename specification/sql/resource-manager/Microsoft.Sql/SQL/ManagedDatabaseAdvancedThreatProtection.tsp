@@ -27,6 +27,7 @@ model ManagedDatabaseAdvancedThreatProtection
 }
 
 @armResourceOperations(#{ omitTags: true })
+ #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ManagedDatabaseAdvancedThreatProtections {
   /**
    * Gets a managed database's Advanced Threat Protection state.

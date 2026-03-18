@@ -27,6 +27,7 @@ model ManagedInstanceAdvancedThreatProtection
 }
 
 @armResourceOperations(#{ omitTags: true })
+ #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ManagedInstanceAdvancedThreatProtections {
   /**
    * Get a managed instance's Advanced Threat Protection state.
@@ -38,6 +39,7 @@ interface ManagedInstanceAdvancedThreatProtections {
    * Creates or updates Advanced Threat Protection settings.
    */
   @tag("ManagedInstanceAdvancedThreatProtectionSettings")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstanceAdvancedThreatProtection,
     Response = ArmResourceUpdatedResponse<ManagedInstanceAdvancedThreatProtection> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceAdvancedThreatProtection> &

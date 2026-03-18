@@ -26,11 +26,13 @@ model ImportExportExtensionsOperationResult
 }
 
 @armResourceOperations(#{ omitTags: true })
+ #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ImportExportExtensionsOperationResults {
   /**
    * Gets a database extension. This will return resource not found as it is not supported.
    */
   @tag("DatabaseExtensions")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<
     ImportExportExtensionsOperationResult,
     Response = OkResponse

@@ -190,6 +190,7 @@ interface JobStepExecutions {
   /**
    * Lists the step executions of a job execution.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ListByJobExecution is JobStepExecutionOps.List<
     JobExecution,
     Parameters = {
@@ -294,6 +295,7 @@ interface JobTargetExecutions {
   /**
    * Lists the target executions of a job step execution.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ListByStep is JobTargetExecutionOps.List<
     JobExecution,
     Parameters = {

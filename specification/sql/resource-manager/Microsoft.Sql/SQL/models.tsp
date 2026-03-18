@@ -4113,6 +4113,7 @@ model BackupShortTermRetentionPolicyProperties {
 /**
  * ARM proxy resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ProxyResource extends Resource {}
 
@@ -4135,6 +4136,7 @@ model Resource {
   /**
    * Resource type.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   type?: string;
 }
@@ -4715,6 +4717,7 @@ model ExtendedServerBlobAuditingPolicyProperties {
    * 2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.
    * For more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountAccessKey?: string;
 
@@ -4729,6 +4732,7 @@ model ExtendedServerBlobAuditingPolicyProperties {
 /**
  * Metadata pertaining to creation and last modification of the resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model systemData {
   /**
    * The identity that created the resource.
@@ -4944,18 +4948,21 @@ model RecommendedActionProperties {
   /**
    * Gets the estimated impact info for this recommended action e.g., Estimated CPU gain, Estimated Disk Space change
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   estimatedImpact?: RecommendedActionImpactRecord[];
 
   /**
    * Gets the observed/actual impact info for this recommended action e.g., Actual CPU gain, Actual Disk Space change
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   observedImpact?: RecommendedActionImpactRecord[];
 
   /**
    * Gets the time series info of metrics for this recommended action e.g., CPU consumption time series
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   timeSeries?: RecommendedActionMetricInfo[];
 
@@ -5964,6 +5971,7 @@ model TrackedResource extends Resource {
 /**
  * A database update resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseUpdate {
   /**
    * The name and tier of the SKU.
@@ -6421,6 +6429,7 @@ model ImportExportOperationResultProperties {
   /**
    * Gets the status of private endpoints associated with this request.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnectionRequestStatus[];
 }
@@ -6516,6 +6525,7 @@ model SecurityAlertsPolicyProperties {
   /**
    * Specifies the identifier key of the Threat Detection audit storage account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountAccessKey?: string;
 
   /**
@@ -6585,6 +6595,7 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineProperties {
   /**
    * The rule baseline result
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   results: string[][];
 }
 
@@ -6618,6 +6629,7 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineInputProperties {
   /**
    * The rule baseline result
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   results: string[][];
 }
 
@@ -6653,6 +6665,7 @@ model SqlVulnerabilityAssessmentScanResultProperties {
   /**
    * SQL Vulnerability Assessment query results that was run.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   queryResults?: string[][];
 
@@ -6723,12 +6736,14 @@ model BaselineAdjustedResult {
   /**
    * SQL Vulnerability Assessment results that are not in baseline
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   resultsNotInBaseline?: string[][];
 
   /**
    * SQL Vulnerability Assessment results that are in baseline.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   resultsOnlyInBaseline?: string[][];
 }
@@ -6740,6 +6755,7 @@ model Baseline {
   /**
    * SQL Vulnerability Assessment baseline expected results
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   expectedResults?: string[][];
 
@@ -6806,6 +6822,7 @@ model VaRule {
   /**
    * SQL Vulnerability Assessment benchmark references.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   benchmarkReferences?: BenchmarkReference[];
 }
@@ -6823,6 +6840,7 @@ model QueryCheck {
   /**
    * SQL Vulnerability Assessment query expected result.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   expectedResult?: string[][];
 
@@ -6890,6 +6908,7 @@ model SqlVulnerabilityAssessmentScanRecordProperties {
   /**
    * The scan errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errors?: SqlVulnerabilityAssessmentScanError[];
 
@@ -7051,6 +7070,7 @@ model DatabaseVulnerabilityAssessmentRuleBaselineProperties {
   /**
    * The rule baseline result
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   baselineResults: DatabaseVulnerabilityAssessmentRuleBaselineItem[];
 }
 
@@ -7078,12 +7098,14 @@ model DatabaseVulnerabilityAssessmentProperties {
   /**
    * A shared access signature (SAS Key) that has write access to the blob container specified in 'storageContainerPath' parameter. If 'storageAccountAccessKey' isn't specified, StorageContainerSasKey is required. Applies only if the storage account is not behind a Vnet or a firewall
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageContainerSasKey?: string;
 
   /**
    * Specifies the identifier key of the storage account for vulnerability assessment scan results. If 'StorageContainerSasKey' isn't specified, storageAccountAccessKey is required. Applies only if the storage account is not behind a Vnet or a firewall
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountAccessKey?: string;
 
@@ -7153,6 +7175,7 @@ model VulnerabilityAssessmentScanRecordProperties {
   /**
    * The scan errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errors?: VulnerabilityAssessmentScanError[];
 
@@ -7431,6 +7454,7 @@ model DistributedAvailabilityGroupProperties {
   /**
    * Databases in the distributed availability group
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   databases?: DistributedAvailabilityGroupDatabase[];
 }
 
@@ -8120,6 +8144,7 @@ model ServerFirewallRuleProperties {
 /**
  * ARM proxy resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ProxyResourceWithWritableName extends ResourceWithWritableName {}
 
@@ -8205,12 +8230,14 @@ model InstanceFailoverGroupProperties {
   /**
    * Partner region information for the failover group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   partnerRegions: PartnerRegionInfo[];
 
   /**
    * List of managed instance pairs in the failover group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedInstancePairs: ManagedInstancePairInfo[];
 }
 
@@ -8418,15 +8445,18 @@ model InstancePoolUpdate {
  * The properties of an IPv6 server firewall rule.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPv6ServerFirewallRuleProperties {
   /**
    * The start IP address of the firewall rule. Must be IPv6 format.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startIPv6Address?: string;
 
   /**
    * The end IP address of the firewall rule. Must be IPv6 format. Must be greater than or equal to startIpv6Address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endIPv6Address?: string;
 }
 
@@ -8526,6 +8556,7 @@ model JobCredentialProperties {
   /**
    * The credential password.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   password: string;
 }
@@ -8734,6 +8765,7 @@ model JobStepProperties {
   /**
    * The resource ID of the job credential that will be used to connect to the targets.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   credential?: string;
 
   /**
@@ -8816,6 +8848,7 @@ model JobStepOutput {
   /**
    * The resource ID of the credential to use to connect to the output destination.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   credential?: string;
 }
 
@@ -8857,6 +8890,7 @@ model JobTargetGroupProperties {
   /**
    * Members of the target group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   members: JobTarget[];
 }
 
@@ -8897,6 +8931,7 @@ model JobTarget {
   /**
    * The resource ID of the credential that is used during job execution to connect to the target and determine the list of databases inside the target.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   refreshCredential?: string;
 }
 
@@ -9029,6 +9064,7 @@ model EditionCapability {
   /**
    * The list of supported storage capabilities for this edition
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedStorageCapabilities?: StorageCapability[];
 
@@ -9071,6 +9107,7 @@ model ServiceObjectiveCapability {
   /**
    * The list of supported maximum database sizes.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedMaxSizes?: MaxSizeRangeCapability[];
 
@@ -9113,6 +9150,7 @@ model ServiceObjectiveCapability {
   /**
    * List of supported min capacities
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedMinCapacities?: MinCapacityCapability[];
 
@@ -9137,6 +9175,7 @@ model ServiceObjectiveCapability {
   /**
    * List of supported availability zones
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedZones?: ZonePinningCapability[];
 
@@ -9459,6 +9498,7 @@ model ElasticPoolEditionCapability {
   /**
    * The list of supported elastic pool DTU levels for the edition.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedElasticPoolPerformanceLevels?: ElasticPoolPerformanceLevelCapability[];
 
@@ -9523,18 +9563,21 @@ model ElasticPoolPerformanceLevelCapability {
   /**
    * The list of supported max sizes.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedMaxSizes?: MaxSizeRangeCapability[];
 
   /**
    * The list of supported per database max sizes.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedPerDatabaseMaxSizes?: MaxSizeRangeCapability[];
 
   /**
    * The list of supported per database max performance levels.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedPerDatabaseMaxPerformanceLevels?: ElasticPoolPerDatabaseMaxPerformanceLevelCapability[];
 
@@ -9572,6 +9615,7 @@ model ElasticPoolPerformanceLevelCapability {
   /**
    * List of supported availability zones
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedZones?: ZonePinningCapability[];
 
@@ -9606,6 +9650,7 @@ model ElasticPoolPerDatabaseMaxPerformanceLevelCapability {
   /**
    * The list of supported min database performance levels.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedPerDatabaseMinPerformanceLevels?: ElasticPoolPerDatabaseMinPerformanceLevelCapability[];
 
@@ -9749,6 +9794,7 @@ model ManagedInstanceEditionCapability {
   /**
    * The list of supported storage capabilities for this edition
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedStorageCapabilities?: StorageCapability[];
 
@@ -9829,6 +9875,7 @@ model ManagedInstanceVcoresCapability {
   /**
    * Supported memory sizes in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedMemorySizesInGB?: MaxLimitRangeCapability;
 
@@ -9841,54 +9888,63 @@ model ManagedInstanceVcoresCapability {
   /**
    * Storage size ranges.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedStorageSizes?: MaxSizeRangeCapability[];
 
   /**
    * Included storage IOps.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   includedStorageIOps?: int64;
 
   /**
    * Storage IOps ranges.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedStorageIOps?: MaxLimitRangeCapability;
 
   /**
    * Min IOps override factor per selected storage GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   iopsMinValueOverrideFactorPerSelectedStorageGB?: float64;
 
   /**
    * Included IOps override factor per selected storage GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   iopsIncludedValueOverrideFactorPerSelectedStorageGB?: float64;
 
   /**
    * Included storage throughput MBps.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   includedStorageThroughputMBps?: int64;
 
   /**
    * Storage throughput MBps ranges.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedStorageThroughputMBps?: MaxLimitRangeCapability;
 
   /**
    * Min throughput MBps override factor per selected storage GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   throughputMBpsMinValueOverrideFactorPerSelectedStorageGB?: float64;
 
   /**
    * Included throughput MBps override factor per selected storage GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   throughputMBpsIncludedValueOverrideFactorPerSelectedStorageGB?: float64;
 
@@ -10498,6 +10554,7 @@ model MaintenanceWindowOptionsProperties {
   /**
    * Available maintenance cycles e.g. {Saturday, 0, 48*60}, {Wednesday, 0, 24*60}.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maintenanceWindowCycles?: MaintenanceWindowTimeRange[];
 
   /**
@@ -10552,6 +10609,7 @@ model MaintenanceWindowTimeRange {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model MaintenanceWindowsProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeRanges?: MaintenanceWindowTimeRange[];
 }
 
@@ -10825,6 +10883,7 @@ model ManagedDatabaseRestoreDetailsProperties {
   /**
    * Restore type.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   type?: string;
 
@@ -10875,12 +10934,14 @@ model ManagedDatabaseRestoreDetailsProperties {
   /**
    * Current restored size MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   currentRestoredSizeMB?: int32;
 
   /**
    * Current restore plan size MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   currentRestorePlanSizeMB?: int32;
 
@@ -10935,18 +10996,21 @@ model ManagedDatabaseRestoreDetailsProperties {
   /**
    * Full backup sets.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   fullBackupSets?: ManagedDatabaseRestoreDetailsBackupSetProperties[];
 
   /**
    * Diff backup sets.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   diffBackupSets?: ManagedDatabaseRestoreDetailsBackupSetProperties[];
 
   /**
    * Log backup sets.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   logBackupSets?: ManagedDatabaseRestoreDetailsBackupSetProperties[];
 
@@ -10982,6 +11046,7 @@ model ManagedDatabaseRestoreDetailsBackupSetProperties {
   /**
    * Backup size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   backupSizeMB?: int32;
 
@@ -11106,6 +11171,7 @@ model ManagedDatabaseProperties {
   /**
    * Conditional. If createMode is RestoreExternalBackup and storageContainerIdentity is not ManagedIdentity, this value is required. Specifies the storage container sas token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create)
   storageContainerSasToken?: string;
 
@@ -11271,6 +11337,7 @@ model SecurityAlertPolicyProperties {
   /**
    * Specifies the identifier key of the Threat Detection audit storage account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountAccessKey?: string;
 
   /**
@@ -11598,10 +11665,12 @@ model ManagedInstanceAdministratorProperties {
  * Properties of a active directory only authentication for Managed Instance.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstanceAzureADOnlyAuthProperties {
   /**
    * Azure Active Directory only Authentication enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureADOnlyAuthentication: boolean;
 }
 
@@ -11912,6 +11981,7 @@ model UpsertManagedServerOperationParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   vCores?: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageSizeInGB?: int32;
 }
 
@@ -12167,21 +12237,25 @@ model ManagedInstanceProperties {
   /**
    * Storage size in GB. Minimum value: 32. Maximum value: 32768. Increments of 32 GB allowed only. Maximum value depends on the selected hardware family and number of vCores.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageSizeInGB?: int32;
 
   /**
    * Storage IOps. Minimum value: 300. Maximum value: 80000. Increments of 1 IOps allowed only. Maximum value depends on the selected hardware family and number of vCores.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageIOps?: int32;
 
   /**
    * Storage throughput MBps parameter is not supported in the instance create/update operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageThroughputMBps?: int32;
 
   /**
    * Memory size in GB. Minimum value: 28. Maximum value: 870. Minimum and maximum value depend on the number of vCores and service tier. Read more about resource limits: https://aka.ms/mi-resource-limits-api.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memorySizeInGB?: int32;
 
   /**
@@ -12392,6 +12466,7 @@ model ManagedInstanceExternalAdministrator {
   /**
    * Azure Active Directory only Authentication enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureADOnlyAuthentication?: boolean;
 }
 
@@ -12506,6 +12581,7 @@ model EndpointDetail {
  * An RefreshExternalGovernanceStatus operation result resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RefreshExternalGovernanceStatusOperationResultMI extends ProxyResource {
   /**
    * Resource properties.
@@ -12516,6 +12592,7 @@ model RefreshExternalGovernanceStatusOperationResultMI extends ProxyResource {
 /**
  * Contains the operation result properties for refresh external governance status operation.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RefreshExternalGovernanceStatusOperationResultPropertiesMI {
   /**
    * Request Id.
@@ -12659,12 +12736,14 @@ model ManagedInstanceVulnerabilityAssessmentProperties {
   /**
    * A shared access signature (SAS Key) that has write access to the blob container specified in 'storageContainerPath' parameter. If 'storageAccountAccessKey' isn't specified, StorageContainerSasKey is required. Applies only if the storage account is not behind a Vnet or a firewall
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageContainerSasKey?: string;
 
   /**
    * Specifies the identifier key of the storage account for vulnerability assessment scan results. If 'StorageContainerSasKey' isn't specified, storageAccountAccessKey is required. Applies only if the storage account is not behind a Vnet or a firewall
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountAccessKey?: string;
 
@@ -12751,6 +12830,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPConfigPerimeter {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   id?: string;
@@ -12761,6 +12841,7 @@ model NSPConfigPerimeter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPConfigAssociation {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   name?: string;
@@ -12769,6 +12850,7 @@ model NSPConfigAssociation {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPConfigProfile {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   name?: string;
@@ -12781,6 +12863,7 @@ model NSPConfigProfile {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPConfigAccessRule {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   name?: string;
@@ -12789,6 +12872,7 @@ model NSPConfigAccessRule {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPConfigAccessRuleProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   direction?: string;
@@ -12805,6 +12889,7 @@ model NSPConfigAccessRuleProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPConfigNetworkSecurityPerimeterRule {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   id?: string;
@@ -12815,6 +12900,7 @@ model NSPConfigNetworkSecurityPerimeterRule {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPProvisioningIssue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   name?: string;
@@ -12823,6 +12909,7 @@ model NSPProvisioningIssue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPProvisioningIssueProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   issueType?: string;
@@ -13342,6 +13429,7 @@ model AdministratorProperties {
   /**
    * Azure Active Directory only Authentication enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   azureADOnlyAuthentication?: boolean;
 }
@@ -13350,10 +13438,12 @@ model AdministratorProperties {
  * Properties of a active directory only authentication.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureADOnlyAuthProperties {
   /**
    * Azure Active Directory only Authentication enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureADOnlyAuthentication: boolean;
 }
 
@@ -13734,6 +13824,7 @@ model ServerProperties {
   /**
    * Whether or not to enable IPv6 support for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isIPv6Enabled?: ServerNetworkAccessFlag;
 
   /**
@@ -13807,6 +13898,7 @@ model ServerExternalAdministrator {
   /**
    * Azure Active Directory only Authentication enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureADOnlyAuthentication?: boolean;
 }
 
@@ -13988,6 +14080,7 @@ model ServerTrustGroupProperties {
   /**
    * Group members information for the server trust group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   groupMembers: ServerInfo[];
 
   /**
@@ -14060,12 +14153,14 @@ model ServerVulnerabilityAssessmentProperties {
   /**
    * A shared access signature (SAS Key) that has write access to the blob container specified in 'storageContainerPath' parameter. If 'storageAccountAccessKey' isn't specified, StorageContainerSasKey is required. Applies only if the storage account is not behind a Vnet or a firewall
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageContainerSasKey?: string;
 
   /**
    * Specifies the identifier key of the storage account for vulnerability assessment scan results. If 'StorageContainerSasKey' isn't specified, storageAccountAccessKey is required. Applies only if the storage account is not behind a Vnet or a firewall
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountAccessKey?: string;
 
@@ -14220,6 +14315,7 @@ model SyncAgentProperties {
   /**
    * Name of the sync agent.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   name?: string;
 
@@ -14268,6 +14364,7 @@ model SyncAgentKeyProperties {
   /**
    * Key of sync agent.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   syncAgentKey?: string;
 }
@@ -14419,6 +14516,7 @@ model SyncGroupSchema {
   /**
    * List of tables in sync group schema.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tables?: SyncGroupSchemaTable[];
 
   /**
@@ -14434,6 +14532,7 @@ model SyncGroupSchemaTable {
   /**
    * List of columns in sync group schema.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   columns?: SyncGroupSchemaTableColumn[];
 
   /**
@@ -14673,6 +14772,7 @@ model SyncMemberProperties {
   /**
    * Password of the member database in the sync member.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   password?: string;
 
@@ -15001,6 +15101,7 @@ model ManagedDatabaseMoveOperationListResult {
 /**
  * List of managed database move operations.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstanceAzureADOnlyAuthListResult {
   /**
    * Array of results.
@@ -15107,6 +15208,7 @@ model AdvisorListResult {
 /**
  * A list of active directory only authentications.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureADOnlyAuthListResult {
   /**
    * Array of results.
@@ -15175,6 +15277,7 @@ model DatabaseSecurityAlertListResult {
 /**
  * A list of vulnerability assessment scan results.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SQLVulnerabilityAssessmentScanListResult {
   /**
    * Array of results.
@@ -15226,5 +15329,24 @@ model LogicalServerSecurityAlertPolicyListResult {
    */
   @nextLink
   @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Result of the request to list SQL operations.
+ */
+model OperationListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Operation[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
   nextLink?: string;
 }

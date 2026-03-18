@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * Azure Active Directory only authentication.
  */
 @parentResource(ManagedInstance)
+ #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstanceAzureADOnlyAuthentication
   is Azure.ResourceManager.ProxyResource<ManagedInstanceAzureADOnlyAuthProperties> {
   ...ResourceNameParameter<
@@ -27,6 +28,7 @@ model ManagedInstanceAzureADOnlyAuthentication
 }
 
 @armResourceOperations
+ #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ManagedInstanceAzureADOnlyAuthentications {
   /**
    * Gets a specific Azure Active Directory only authentication property.

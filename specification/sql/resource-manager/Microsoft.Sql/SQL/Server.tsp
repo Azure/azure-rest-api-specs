@@ -132,6 +132,8 @@ interface Servers {
   @tag("FirewallRules")
   @put
   @action("firewallRules")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   replace is ArmResourceActionSync<
     Server,
     FirewallRuleList,

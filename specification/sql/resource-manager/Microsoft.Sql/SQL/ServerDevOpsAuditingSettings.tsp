@@ -27,6 +27,7 @@ model ServerDevOpsAuditingSettings
 }
 
 @armResourceOperations(#{ omitTags: true })
+ #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ServerDevOpsAuditSettings {
   /**
    * Gets a server's DevOps audit settings.

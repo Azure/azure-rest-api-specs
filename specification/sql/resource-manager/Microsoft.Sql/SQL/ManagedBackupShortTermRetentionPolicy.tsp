@@ -99,6 +99,7 @@ alias ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicyOps = Azure.
     @key
     managedInstanceName: string;
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     /**  */
     @path
     @segment("restorableDroppedDatabases")

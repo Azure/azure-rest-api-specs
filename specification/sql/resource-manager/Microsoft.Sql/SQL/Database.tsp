@@ -323,6 +323,7 @@ interface Databases {
    */
   @tag("RestorePoints")
   @action("restorePoints")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceActionAsync<
     Database,
     CreateDatabaseRestorePointDefinition,
@@ -363,6 +364,8 @@ interface Databases {
   @tag("SensitivityLabels")
   @patch
   @action("currentSensitivityLabels")
+  #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sensitivityLabelsUpdate is ArmResourceActionSync<
     Database,
     SensitivityLabelUpdateList,
@@ -405,6 +408,8 @@ interface Databases {
   @tag("SensitivityLabels")
   @patch
   @action("recommendedSensitivityLabels")
+  #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recommendedSensitivityLabelsUpdate is ArmResourceActionSync<
     Database,
     RecommendedSensitivityLabelUpdateList,

@@ -235,6 +235,8 @@ interface ManagedDatabases {
   @tag("ManagedDatabaseSensitivityLabels")
   @patch
   @action("currentSensitivityLabels")
+  #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedDatabaseSensitivityLabelsUpdate is ArmResourceActionSync<
     ManagedDatabase,
     SensitivityLabelUpdateList,
@@ -277,6 +279,8 @@ interface ManagedDatabases {
   @tag("ManagedDatabaseSensitivityLabels")
   @patch
   @action("recommendedSensitivityLabels")
+  #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedDatabaseRecommendedSensitivityLabelsUpdate is ArmResourceActionSync<
     ManagedDatabase,
     RecommendedSensitivityLabelUpdateList,

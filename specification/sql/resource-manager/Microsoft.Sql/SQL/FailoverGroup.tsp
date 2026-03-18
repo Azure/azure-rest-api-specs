@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A failover group.
  */
 @parentResource(Server)
+ #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FailoverGroup
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<FailoverGroupProperties> {
   ...ResourceNameParameter<

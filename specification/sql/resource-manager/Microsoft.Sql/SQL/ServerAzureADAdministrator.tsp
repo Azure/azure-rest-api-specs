@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * Azure Active Directory administrator.
  */
 @parentResource(Server)
+ #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerAzureADAdministrator
   is Azure.ResourceManager.ProxyResource<AdministratorProperties> {
   ...ResourceNameParameter<
@@ -27,6 +28,7 @@ model ServerAzureADAdministrator
 }
 
 @armResourceOperations
+ #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ServerAzureADAdministrators {
   /**
    * Gets a Azure Active Directory administrator.

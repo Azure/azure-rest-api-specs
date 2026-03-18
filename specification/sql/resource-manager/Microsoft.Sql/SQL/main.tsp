@@ -151,6 +151,10 @@ enum Versions {
   v2024_11_01_preview: "2024-11-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      ErrorResponse
+    > {}
 
 @@doc(Operations.list, "Lists all of the available SQL Rest API operations.");

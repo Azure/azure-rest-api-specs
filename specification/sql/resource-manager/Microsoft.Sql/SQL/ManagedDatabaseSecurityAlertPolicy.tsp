@@ -27,6 +27,7 @@ model ManagedDatabaseSecurityAlertPolicy
 }
 
 @armResourceOperations
+ #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ManagedDatabaseSecurityAlertPolicies {
   /**
    * Gets a managed database's security alert policy.
