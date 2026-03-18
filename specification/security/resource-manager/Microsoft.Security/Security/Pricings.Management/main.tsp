@@ -24,6 +24,7 @@ using TypeSpec.Versioning;
 /**
  * API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "Microsoft Defender for Cloud" })
 @versioned(Versions)

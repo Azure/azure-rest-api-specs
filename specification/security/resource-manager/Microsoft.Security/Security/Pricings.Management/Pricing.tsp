@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * Microsoft Defender for Cloud is provided in two pricing tiers: free and standard. The standard tier offers advanced security capabilities, while the free tier offers basic security features.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model Pricing is Azure.ResourceManager.ExtensionResource<PricingProperties> {
   ...ResourceNameParameter<

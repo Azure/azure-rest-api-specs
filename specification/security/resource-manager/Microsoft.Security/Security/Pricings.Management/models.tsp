@@ -121,7 +121,7 @@ union Code {
 /**
  * Pricing properties for the relevant scope
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PricingProperties {
   /**
    * Indicates whether the Defender plan is enabled on the selected scope. Microsoft Defender for Cloud is provided in two pricing tiers: free and standard. The standard tier offers advanced security capabilities, while the free tier offers basic security features.
@@ -205,7 +205,7 @@ model Extension {
   /**
    * Property values associated with the extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalExtensionProperties?: Record<unknown>;
 
   /**
@@ -293,12 +293,14 @@ model CloudErrorBody {
   /**
    * The error details.
    */
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   details?: CloudErrorBody[];
 
   /**
    * The error additional info.
    */
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
@@ -316,6 +318,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
