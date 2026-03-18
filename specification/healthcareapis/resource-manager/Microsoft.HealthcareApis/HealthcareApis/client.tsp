@@ -23,3 +23,13 @@ namespace Microsoft.HealthcareApis;
   "ArmManagedServiceIdentityType",
   "javascript,go"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
+@@Legacy.flattenProperty(PrivateEndpointConnectionDescription.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
+@@Legacy.flattenProperty(PrivateLinkResourceDescription.properties, "java");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
+@@Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection.properties,
+  "java"
+);
