@@ -5907,6 +5907,14 @@
             "name"
           ]
         },
+        "memberSelector": {
+          "$ref": "#/definitions/MemberSelector",
+          "description": "Select the members of the stage.\n  * Only key/value pairs with the `=` operator are accepted in the label selector.\n  * If empty or not specified, no Fleet members will be selected for the stage.\nSetting both `memberSelector` and `groups` is invalid.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "afterStageWaitInSeconds": {
           "type": "integer",
           "format": "int32",
