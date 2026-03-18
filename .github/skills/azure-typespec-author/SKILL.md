@@ -62,7 +62,7 @@ State your classification explicitly before proceeding.
 
 Collect inputs needed for the change. Branch by task type:
 
-- **API Version Evolution** → Follow [API version evolution reference — Step 2](references/api-version-evolution.md#step-2-intake). Make sure to list features from the latest version in a table and ask the user which to carry over vs exclude.
+- **API Version Evolution** → Follow [API version evolution reference — Step 2](references/api-version-evolution.md#step-2-intake).
 - **General Authoring** → Follow [intake guide](references/general-authoring-intake.md).
 
 ---

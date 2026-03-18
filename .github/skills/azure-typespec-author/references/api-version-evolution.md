@@ -6,7 +6,11 @@
 
 ## Step 2: Intake
 
-Search using [agentic search](agentic-search.md) in below documents to determine intake details. List features from latest version in a table and ask the user which to carry over vs exclude.
+Search using [agentic search](agentic-search.md) in below documents to determine information needed from user. 
+- MUST collect information from user rather than making assumptions. 
+- MUST use a user friendly way to collect information. 
+e.g. you MUST List features from latest version and let user select which to carry over vs exclude, rather than assume user wants to carry over all features.
+
 
    | Latest > Target   | Guide URL                                                                                     |
    | ----------------- | --------------------------------------------------------------------------------------------- |
