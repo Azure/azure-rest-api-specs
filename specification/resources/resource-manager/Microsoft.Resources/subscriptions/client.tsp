@@ -1,8 +1,11 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
+
 namespace Microsoft.Resources;
 
-@@Azure.ClientGenerator.Core.clientLocation(Subscriptions.checkZonePeers::parameters.subscriptionId,
+@@clientLocation(Subscriptions.checkZonePeers::parameters.subscriptionId,
   Subscriptions.checkZonePeers
 );
+@@clientName(Microsoft.Resources, "SubscriptionClient", "javascript");

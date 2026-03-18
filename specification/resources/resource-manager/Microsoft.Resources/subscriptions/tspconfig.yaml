@@ -12,8 +12,9 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-subscriptions"
-    namespace: "azure.mgmt.subscriptions"
+    service-dir: "sdk/resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource-subscriptions"
+    namespace: "azure.mgmt.resource.subscriptions"
     generate-test: true
     generate-sample: true
     flavor: "azure"
@@ -26,14 +27,15 @@ options:
     use-object-for-unknown: true
     float32-as-double: false
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-subscriptions"
+    service-dir: "sdk/resources-subscriptions"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resources-subscriptions"
     compatibility-lro: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-subscriptions"
+      name: "@azure/arm-resources-subscriptions"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/subscriptions"
+    service-dir: "sdk/resourcemanager/resources"
     emitter-output-dir: "{output-dir}/{service-dir}/armsubscriptions"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsubscriptions"
     fix-const-stuttering: false
