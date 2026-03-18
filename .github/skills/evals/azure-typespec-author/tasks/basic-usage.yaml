@@ -1,0 +1,261 @@
+id: basic-usage-001
+name: "Versioning: Add preview after stable"
+description: |
+  Test that the skill handles adding a new preview version after a stable version.
+tags:
+  - basic
+  - happy-path
+  - versioning
+inputs:
+  prompt: "add a new preview version `2025-05-04-preview` to my service widget resource manager. Carry over all the features from the latest stable version"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/readme.md
+    - path: Microsoft.Widget/Widget/shared.tsp
+    - path: Microsoft.Widget/Widget/stable/2021-11-01/examples/Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - path: Microsoft.Widget/Widget/stable/2021-11-01/examples/Employees_Delete_MaximumSet_Gen.json
+    - path: Microsoft.Widget/Widget/stable/2021-11-01/examples/Employees_Get_MaximumSet_Gen.json
+    - path: Microsoft.Widget/Widget/stable/2021-11-01/examples/Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - path: Microsoft.Widget/Widget/stable/2021-11-01/examples/Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - path: Microsoft.Widget/Widget/stable/2021-11-01/examples/Employees_ListBySubscription_MaximumSet_Gen.json
+    - path: Microsoft.Widget/Widget/stable/2021-11-01/examples/Employees_ListBySubscription_MinimumSet_Gen.json
+    - path: Microsoft.Widget/Widget/stable/2021-11-01/examples/Employees_Update_MaximumSet_Gen.json
+    - path: Microsoft.Widget/Widget/stable/2021-11-01/examples/Operations_List_MaximumSet_Gen.json
+    - path: Microsoft.Widget/Widget/stable/2021-11-01/examples/Operations_List_MinimumSet_Gen.json
+    - path: Microsoft.Widget/Widget/stable/2021-11-01/widget.json
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "API Version Evolution"
+---
+id: basic-usage-002
+name: "Versioning: Add stable after stable"
+description: |
+  Test adding a new stable version with a new property when the last version was stable.
+  Based on benchmark case 001008-version-add-stable-after-stable.
+tags:
+  - versioning
+inputs:
+  prompt: "Add a new stable version `2025-01-01` to my service. In this new version, I want to add a new property `department` of type `string` to `EmployeeProperties`."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "API Version Evolution"
+---
+id: basic-usage-003
+name: "ARM: Change resource to extension resource"
+description: |
+  Test changing a tracked resource to an extension resource.
+  Based on benchmark case 002001-ARM-change-resource-type.
+tags:
+  - arm
+  - resource-type
+inputs:
+  prompt: "change resource Employee to be an extension resource"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-004
+name: "ARM: Define a new child resource"
+description: |
+  Test defining a new child resource under an existing parent resource.
+  Based on benchmark case 002006-ARM-define-child-resource.
+tags:
+  - arm
+  - resource-type
+inputs:
+  prompt: 'Create a new "AddressResource" child resource under the parent resource "Employee". Ensure the definition meets TypeSpec Azure design guidelines.'
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-005
+name: "ARM: Define a custom POST action"
+description: |
+  Test adding a custom POST action to a resource's operations.
+  Based on benchmark case 002007-ARM-define-custom-action.
+tags:
+  - arm
+  - operations
+inputs:
+  prompt: 'Add an additional POST action called "/notify" to the standard operations of Employee. Ensure the definition meets TypeSpec Azure design guidelines.'
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-006
+name: "ARM: Add query parameters to list operation"
+description: |
+  Test adding top and skip query parameters to a list operation.
+  Based on benchmark case 002008-ARM-add-parameters.
+tags:
+  - arm
+  - operations
+inputs:
+  prompt: "add top and skip query parameters to the ListBySubscription operation in interface Employees"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-007
+name: "LRO: Add async action operation"
+description: |
+  Test adding an async long-running POST action operation with proper LRO headers.
+  Based on benchmark case 003002-arm-action-lro.
+tags:
+  - lro
+  - operations
+inputs:
+  prompt: "Add a move async operation to move employee, operation's request is MoveRequest, response is MoveResponse"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-008
+name: "LRO: Modify LRO response headers"
+description: |
+  Test modifying the LRO createOrUpdate operation to return only Azure-AsyncOperation header without Retry-After.
+  Based on benchmark case 003003-arm-modify-response.
+tags:
+  - lro
+  - operations
+inputs:
+  prompt: "Modify the LRO createOrUpdate PUT operation in interface Employees so that it returns Azure-AsyncOperation header but NOT Retry-After header in the 201 response. The operation currently uses ArmResourceCreateOrReplaceAsync<Employee> template."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-009
+name: "Decorators: Add minLength to resource name parameter"
+description: |
+  Test adding a minLength decorator to an ARM resource name parameter.
+  Based on benchmark case 004001-decorate-mgmt-resource-name-parameter.
+tags:
+  - decorators
+inputs:
+  prompt: "add minLength decorator to set the minLength 1 for resource name parameter of Employee resource"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-010
+name: "Decorators: Add length constraints on array items"
+description: |
+  Test adding minLength and maxLength constraints to individual items in a string array property.
+  Based on benchmark case 004002-decorate-length-constrains-on-array-item.
+tags:
+  - decorators
+inputs:
+  prompt: "I have a property `assets: string[]` in EmployeeProperties. Add @minLength(3) @maxLength(10) constraints for any item of the assets array."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-011
+name: "ARM: Define PATCH operation correctly"
+description: |
+  Test defining a correct PATCH update operation using ArmCustomPatchAsync instead of ArmResourcePatchAsync.
+  Based on benchmark case 002003-ARM-define-full-update-operation.
+tags:
+  - arm
+  - operations
+inputs:
+  prompt: "Define a PATCH operation for Employees. It is to update properties of an employee. Ensure the definition meets TypeSpec Azure guidelines."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
+---
+id: basic-usage-012
+name: "ARM: Define an extension resource"
+description: |
+  Test defining a new extension resource model with CRUD operations.
+  Based on benchmark case 002004-ARM-define-extension-resource.
+tags:
+  - arm
+  - resource-type
+inputs:
+  prompt: 'Define a "badge assignment" extension resource. It should be an extension resource that can be attached to an employee. Ensure the definition meets TypeSpec Azure guidelines.'
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "skill"
+    - "azure-typespec-author"
+    - "Task Type"
+    - "General Authoring"
