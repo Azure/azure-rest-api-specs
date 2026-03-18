@@ -7,3 +7,5 @@ import "../memory-stores/routes.tsp";
 // so we can customize visibility where necessary.
 import "../openai-responses/models.tsp";
 import "../openai-conversations/routes.tsp";
+
+import "../openai-responses/models.tsp";

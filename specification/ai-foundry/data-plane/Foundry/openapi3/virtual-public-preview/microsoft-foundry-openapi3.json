@@ -7960,6 +7960,10 @@
                         ],
                         "description": "(Deprecated) Use agent_reference instead.\nThe agent to use for generating the response."
                       },
+                      "agent_session_id": {
+                        "type": "string",
+                        "description": "Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.\nWhen provided, the request is routed to the same sandbox. When omitted, auto-derived from\nconversation_id/prev_response_id or a new UUID is generated."
+                      },
                       "agent_reference": {
                         "allOf": [
                           {
@@ -7972,10 +7976,6 @@
                         "type": "object",
                         "additionalProperties": {},
                         "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
-                      },
-                      "agent_session_id": {
-                        "type": "string",
-                        "description": "Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.\nWhen provided, the request is routed to the same sandbox. When omitted, auto-derived from\nconversation_id/prev_response_id or a new UUID is generated."
                       }
                     }
                   },
@@ -8172,6 +8172,10 @@
                         ],
                         "description": "(Deprecated) Use agent_reference instead.\nThe agent to use for generating the response."
                       },
+                      "agent_session_id": {
+                        "type": "string",
+                        "description": "Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.\nWhen provided, the request is routed to the same sandbox. When omitted, auto-derived from\nconversation_id/prev_response_id or a new UUID is generated."
+                      },
                       "agent_reference": {
                         "allOf": [
                           {
@@ -8184,10 +8188,6 @@
                         "type": "object",
                         "additionalProperties": {},
                         "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
-                      },
-                      "agent_session_id": {
-                        "type": "string",
-                        "description": "Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.\nWhen provided, the request is routed to the same sandbox. When omitted, auto-derived from\nconversation_id/prev_response_id or a new UUID is generated."
                       }
                     }
                   }
@@ -31765,6 +31765,10 @@
             ],
             "description": "(Deprecated) Use agent_reference instead.\nThe agent used for this response"
           },
+          "agent_session_id": {
+            "type": "string",
+            "description": "The session identifier for this response. Currently only relevant for hosted agents.\nAlways returned for hosted agents — either the caller-provided value, the auto-derived value,\nor an auto-generated UUID. Use for session-scoped operations and to maintain sandbox\naffinity in follow-up calls."
+          },
           "agent_reference": {
             "type": "object",
             "allOf": [
@@ -31774,10 +31778,6 @@
             ],
             "nullable": true,
             "description": "The agent used for this response"
-          },
-          "agent_session_id": {
-            "type": "string",
-            "description": "The session identifier for this response. Currently only relevant for hosted agents.\nAlways returned for hosted agents — either the caller-provided value, the auto-derived value,\nor an auto-generated UUID. Use for session-scoped operations and to maintain sandbox\naffinity in follow-up calls."
           }
         },
         "title": "The response object"
