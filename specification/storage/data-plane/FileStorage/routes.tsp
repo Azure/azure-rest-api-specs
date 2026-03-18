@@ -1066,7 +1066,7 @@ interface File {
 
       /** The MD5 hash of the full file content. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
-      @header("x-ms-content-md5") fileContentMD5?: string;
+      @header("x-ms-content-md5") fileContentMD5?: bytes;
 
       /** The value of this header indicates whether the file data and application metadata are completely encrypted. */
       @header("x-ms-server-encrypted") serverEncrypted?: boolean;

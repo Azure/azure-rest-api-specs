@@ -1805,7 +1805,7 @@ alias FileContentRequestHeaders = {
 
   /** An MD5 hash of the file content. This hash is used to verify the integrity of the file during transport. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
-  @header("x-ms-content-md5") fileContentMD5?: string;
+  @header("x-ms-content-md5") fileContentMD5?: bytes;
 
   /** Sets the file's Content-Disposition header. */
   @header("x-ms-content-disposition") fileContentDisposition?: string;
