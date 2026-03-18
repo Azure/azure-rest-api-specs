@@ -33,3 +33,6 @@ interface BlocklistClient {
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
+
+// Rename AnalyzeImageOutputType to OutputType for Java to align with existing Java SDK naming
+@@clientName(ContentSafety.AnalyzeImageOutputType, "OutputType", "java");
