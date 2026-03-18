@@ -138,7 +138,7 @@ model AgentObject {
   )
   @doc("The instance identity of the agent")
   @visibility(Lifecycle.Read)
-  identity?: AgentIdentity;
+  instance_identity?: AgentIdentity;
 
   @removed(Versions.v1)
   @extension(
