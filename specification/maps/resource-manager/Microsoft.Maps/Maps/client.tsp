@@ -8,11 +8,11 @@ using Azure.ClientGenerator.Core;
 // Preserve legacy Java names for renamed encryption identity models.
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
   "CustomerManagedKeyEncryptionKeyIdentity",
-  "java"
+  "java,javascript"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "IdentityType",
-  "java"
+  "java,javascript"
 );
 
 @@clientName(Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
