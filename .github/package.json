@@ -1,5 +1,5 @@
 {
-  "private": "true",
+  "private": true,
   "type": "module",
   "_comments": {
     "dependencies": "Runtime dependencies must be kept to an absolute minimum for performance, ideally with no transitive dependencies",
@@ -40,7 +40,7 @@
     "vitest": "^4.0.15"
   },
   "scripts": {
-    "check": "npm run lint && npm run format:check && npm run test:ci",
+    "check": "npm run test:ci && npm run lint && npm run format:check",
     "lint": "npm run lint:eslint && npm run lint:tsc",
     "lint:eslint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
     "lint:tsc": "tsc --build --verbose",
@@ -50,5 +50,8 @@
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose",
     "validate": "npm run lint && npm run format:check && npm run test:ci"
+  },
+  "overrides": {
+    "undici@^5.0.0": "^6.0.0"
   }
 }
