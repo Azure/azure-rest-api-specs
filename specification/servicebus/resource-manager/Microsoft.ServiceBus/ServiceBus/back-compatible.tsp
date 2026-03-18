@@ -166,5 +166,5 @@ using Microsoft.ServiceBus;
 
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
   "ArmErrorAdditionalInfo",
-  "python"
+  "python,java"
 );
