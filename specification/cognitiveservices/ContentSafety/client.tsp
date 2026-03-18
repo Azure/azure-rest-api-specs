@@ -33,3 +33,13 @@ interface BlocklistClient {
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
+
+// Rename "remove" to "delete" for Java (Line 63)
+@@clientName(ContentSafety.TextBlocklists.removeBlocklistItems, "deleteBlocklistItems", "java");
+@@clientName(ContentSafety.RemoveTextBlocklistItemsOptions, "DeleteTextBlocklistItemsOptions", "java");
+
+// Override doc for ImageData.content for Java (Line 199)
+@@clientDoc(ContentSafety.ImageData.content, "The raw image bytes to analyze", DocumentationMode.replace, "java");
+
+// Rename AnalyzeImageOutputType to SeverityLevel for Java (Line 156)
+@@clientName(ContentSafety.AnalyzeImageOutputType, "SeverityLevel", "java");
