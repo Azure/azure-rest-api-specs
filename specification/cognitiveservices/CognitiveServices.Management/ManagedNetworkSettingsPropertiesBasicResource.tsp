@@ -93,7 +93,8 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   provisionManagedNetwork is ArmResourceActionAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
     Request = ManagedNetworkProvisionOptions,
-    Response = ArmResponse<ManagedNetworkProvisionStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkProvisionStatus>>
+    Response = ArmResponse<ManagedNetworkProvisionStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkProvisionStatus>>,
+    OptionalRequestBody = true
   >;
 }
 
