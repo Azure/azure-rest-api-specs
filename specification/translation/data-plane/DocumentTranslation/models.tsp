@@ -537,9 +537,10 @@ model DocumentTranslateBody {
   @multipartBody
   body: DocumentTranslateContent;
 
+  // Placed after body to preserve parameter ordering with prior GA versions
   @doc("Optional boolean parameter to translate text within an image in the document")
-  @query("translateTextWithinImage")
   @added(Versions.v2024_11_01_preview)
+  @query("translateTextWithinImage")
   translateTextWithinImage?: boolean;
 }
 
