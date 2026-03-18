@@ -163,3 +163,8 @@ using Microsoft.ServiceBus;
 
 @@clientName(UserAssignedIdentity.principalId, "PrincipalId");
 @@clientName(UserAssignedIdentity.clientId, "ClientId");
+
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+  "ArmErrorAdditionalInfo",
+  "python,java"
+);
