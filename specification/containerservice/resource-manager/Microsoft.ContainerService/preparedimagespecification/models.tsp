@@ -45,7 +45,7 @@ model PreparedImageSpecificationProperties {
 
   @visibility(Lifecycle.Read)
   @doc("The provisioning state of the prepared image specification.")
-  provisioningState: ProvisioningState;
+  provisioningState?: ProvisioningState;
 
   @doc("The scripts to customize the node before or after image capture.")
   @identifiers(#[])
@@ -63,13 +63,11 @@ model PreparedImageSpecificationManagedIdentityProfile {
 
   @visibility(Lifecycle.Read)
   @doc("The object ID of the managed identity.")
-  @format("uuid")
-  objectId?: string;
+  objectId?: Azure.Core.uuid;
 
   @visibility(Lifecycle.Read)
   @doc("The client ID of the managed identity.")
-  @format("uuid")
-  clientId?: string;
+  clientId?: Azure.Core.uuid;
 }
 
 @doc("The managed identity profile used by the prepared image specification for update operations.")
@@ -150,8 +148,7 @@ model PreparedImageSpecificationPatchProperties {
 
 @doc("Prepared image specification patch resource")
 model PreparedImageSpecificationPatch {
-  @doc("Resource tags.")
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   @doc("Patchable prepared image specification properties.")
   properties?: PreparedImageSpecificationPatchProperties;

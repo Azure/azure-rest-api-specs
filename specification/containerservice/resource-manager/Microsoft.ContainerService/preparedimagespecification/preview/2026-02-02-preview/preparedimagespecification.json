@@ -651,6 +651,11 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "ExecutionPoint": {
       "type": "string",
       "description": "The execution point for the script.",
@@ -733,14 +738,12 @@
           }
         },
         "objectId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The object ID of the managed identity.",
           "readOnly": true
         },
         "clientId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The client ID of the managed identity.",
           "readOnly": true
         }
@@ -843,10 +846,7 @@
           },
           "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "provisioningState"
-      ]
+      }
     },
     "PreparedImageSpecificationScript": {
       "type": "object",
