@@ -36,23 +36,7 @@ These settings apply only when `--tag=package-preview-2026-01-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2026-01-01-preview'
 input-file:
   - preview/2026-01-01-preview/administration.json
-suppressions:
-  - code: DOUBLE_FORWARD_SLASHES_IN_URL
-    from: administration.json
-    where: $.paths["/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}"].get
-    reason: Scope "/" is a valid value for Key Vault RBAC and this is a known false positive.
-  - code: DOUBLE_FORWARD_SLASHES_IN_URL
-    from: administration.json
-    where: $.paths["/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}"].delete
-    reason: Scope "/" is a valid value for Key Vault RBAC and this is a known false positive.
-  - code: OBJECT_MISSING_REQUIRED_PROPERTY
-    from: GetRoleDefinition-example.json
-    where: $.parameters
-    reason: Example includes scope; known ModelValidation false positive.
-  - code: OBJECT_MISSING_REQUIRED_PROPERTY
-    from: DeleteRoleDefinition-example.json
-    where: $.parameters
-    reason: Example includes scope; known ModelValidation false positive.
+```
 ```
 
 ### Tag: package-2025-07-01
@@ -372,10 +356,8 @@ directive:
     reason: Suppress an invalid error caused by a bug in the linter.
   - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
     from: GetRoleDefinition-example.json
-    where: $..parameters[?(@.name=='scope')]
     reason: Suppress an invalid error caused by a bug in the linter.
   - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
     from: DeleteRoleDefinition-example.json
-    where: $..parameters[?(@.name=='scope')]
     reason: Suppress an invalid error caused by a bug in the linter.
 ```
