@@ -1,0 +1,110 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Workspace.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.HealthcareApis;
+/**
+ * IoT Connector definition.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@parentResource(Workspace)
+model IotConnector
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<IotConnectorProperties> {
+  ...ResourceNameParameter<
+    Resource = IotConnector,
+    KeyName = "iotConnectorName",
+    SegmentName = "iotconnectors",
+    NamePattern = ""
+  >;
+
+  /**
+   * An etag associated with the resource, used for optimistic concurrency when editing it.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  etag?: string;
+
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
+@armResourceOperations
+interface IotConnectors {
+  /**
+   * Gets the properties of the specified IoT Connector.
+   */
+  get is ArmResourceRead<IotConnector, Error = ErrorDetails>;
+
+  /**
+   * Creates or updates an IoT Connector resource with the specified parameters.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    IotConnector,
+    Response = ArmResourceUpdatedResponse<IotConnector> | ArmResourceCreatedResponse<
+      IotConnector,
+      ArmLroLocationHeader<FinalResult = IotConnector> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: IotConnector;
+    }),
+    Error = ErrorDetails
+  >;
+
+  /**
+   * Patch an IoT Connector.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    IotConnector,
+    PatchModel = IotConnectorPatchResource,
+    Response = ArmResponse<IotConnector> | (ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      LroHeaders = ArmLroLocationHeader<FinalResult = IotConnector> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      @bodyRoot
+      _: IotConnector;
+    }),
+    Error = ErrorDetails
+  >;
+
+  /**
+   * Deletes an IoT Connector.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    IotConnector,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = Error
+  >;
+
+  /**
+   * Lists all IoT Connectors for the given workspace
+   */
+  listByWorkspace is ArmResourceListByParent<
+    IotConnector,
+    Response = ArmResponse<IotConnectorCollection>,
+    Error = ErrorDetails
+  >;
+}
+
+@@maxLength(IotConnector.name, 24);
+@@minLength(IotConnector.name, 3);
+@@doc(IotConnector.name, "The name of IoT Connector resource.");
+@@doc(IotConnector.properties, "IoT Connector configuration.");
+@@doc(IotConnectors.createOrUpdate::parameters.resource,
+  "The parameters for creating or updating an IoT Connectors resource."
+);
+@@doc(IotConnectors.update::parameters.properties,
+  "The parameters for updating an IoT Connector."
+);
