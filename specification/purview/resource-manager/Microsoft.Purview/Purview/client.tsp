@@ -334,4 +334,33 @@ namespace Microsoft.Purview {
   "csharp"
 );
 
+// Property rename: Credentials.type → CredentialsType (match old SDK naming)
+@@clientName(Microsoft.Purview.Credentials.type,
+  "CredentialsType",
+  "csharp"
+);
+
+// ManagedResourcesPublicNetworkAccess: old SDK had a separate extensible enum type
+// for the managedResourcesPublicNetworkAccess property. Define union and use alternateType.
+namespace Microsoft.Purview {
+  union ManagedResourcesPublicNetworkAccess {
+    string,
+    Enabled: "Enabled",
+    Disabled: "Disabled",
+    NotSpecified: "NotSpecified",
+  }
+}
+@@alternateType(
+  Microsoft.Purview.AccountProperties.managedResourcesPublicNetworkAccess,
+  Microsoft.Purview.ManagedResourcesPublicNetworkAccess,
+  "csharp"
+);
+
+// Make GetUsages pageable to match old SDK (old returned Pageable<PurviewUsage>)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Microsoft.Purview.UsagesOperationGroup.get,
+  "csharp"
+);
+
 // Note: scopeTenantId Guid type is handled via custom code overloads
