@@ -130,6 +130,7 @@ interface Runbooks {
 
       #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
       @doc("The runbook draft content.")
+      @bodyRoot
       @encode("bytes")
       body: bytes;
     },
