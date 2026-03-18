@@ -26,25 +26,7 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-2026-01-01-preview
-```
-
-### Tag: package-preview-2026-01-01-preview
-
-These settings apply only when `--tag=package-preview-2026-01-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2026-01-01-preview'
-input-file:
-  - preview/2026-01-01-preview/backuprestore.json
-  - preview/2026-01-01-preview/certificates.json
-  - preview/2026-01-01-preview/common.json
-  - preview/2026-01-01-preview/keys.json
-  - preview/2026-01-01-preview/rbac.json
-  - preview/2026-01-01-preview/secrets.json
-  - preview/2026-01-01-preview/securitydomain.json
-  - preview/2026-01-01-preview/settings.json
-  - preview/2026-01-01-preview/storage.json
-  - preview/2026-01-01-preview/ekm.json
+tag: package-preview-7.6-preview.1
 ```
 
 ### Tag: package-preview-7.6-preview.1
