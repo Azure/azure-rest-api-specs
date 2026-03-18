@@ -351,4 +351,7 @@ model PrivateLinkResourceReplacement
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResourceReplacement.properties
 );
 
-@@clientName(NetworkSecurityPerimeterConfiguration, "BotServiceNetworkSecurityPerimeterConfiguration", "csharp");
+@@clientName(NetworkSecurityPerimeterConfiguration,
+  "BotServiceNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
