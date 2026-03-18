@@ -227,15 +227,16 @@ using Http;
 @@clientName(Microsoft.RecoveryServices.AzureVMResourceFeatureSupportResponse, "VmResourceFeatureSupportResult", "csharp");
 
 // ===== Resource type renames (generates Collection/Data/Resource triples) =====
-@@clientName(Microsoft.RecoveryServices.BackupEngineBaseResource, "BackupEngineResource", "csharp");
-@@clientName(Microsoft.RecoveryServices.JobResource, "BackupJobResource", "csharp");
-@@clientName(Microsoft.RecoveryServices.PrivateEndpointConnectionResource, "BackupPrivateEndpointConnectionResource", "csharp");
-@@clientName(Microsoft.RecoveryServices.ProtectedItemResource, "BackupProtectedItemResource", "csharp");
-@@clientName(Microsoft.RecoveryServices.ProtectionContainerResource, "BackupProtectionContainerResource", "csharp");
-@@clientName(Microsoft.RecoveryServices.ProtectionIntentResource, "BackupProtectionIntentResource", "csharp");
-@@clientName(Microsoft.RecoveryServices.ProtectionPolicyResource, "BackupProtectionPolicyResource", "csharp");
-@@clientName(Microsoft.RecoveryServices.RecoveryPointResource, "BackupRecoveryPointResource", "csharp");
-@@clientName(Microsoft.RecoveryServices.ResourceGuardProxyBaseResource, "ResourceGuardProxyResource", "csharp");
+// clientName value is the base name; generator auto-appends Resource/Collection/Data
+@@clientName(Microsoft.RecoveryServices.BackupEngineBaseResource, "BackupEngine", "csharp");
+@@clientName(Microsoft.RecoveryServices.JobResource, "BackupJob", "csharp");
+@@clientName(Microsoft.RecoveryServices.PrivateEndpointConnectionResource, "BackupPrivateEndpointConnection", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectedItemResource, "BackupProtectedItem", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectionContainerResource, "BackupProtectionContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectionIntentResource, "BackupProtectionIntent", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectionPolicyResource, "BackupProtectionPolicy", "csharp");
+@@clientName(Microsoft.RecoveryServices.RecoveryPointResource, "BackupRecoveryPoint", "csharp");
+@@clientName(Microsoft.RecoveryServices.ResourceGuardProxyBaseResource, "ResourceGuardProxy", "csharp");
 
 // ===== Enum/union type renames =====
 @@clientName(Microsoft.RecoveryServices.EncryptionAtRestType, "BackupEncryptionAtRestType", "csharp");
@@ -257,6 +258,11 @@ using Http;
 @@clientName(Microsoft.RecoveryServices.XcoolState, "VaultXcoolState", "csharp");
 @@clientName(Microsoft.RecoveryServices.SupportStatus, "VmResourceFeatureSupportStatus", "csharp");
 @@clientName(Microsoft.RecoveryServices.OperationType, "WorkloadOperationType", "csharp");
+@@clientName(Microsoft.RecoveryServices.GenericProtectionPolicy, "BackupGenericProtectionPolicy", "csharp");
+@@clientName(Microsoft.RecoveryServices.GenericRecoveryPoint, "BackupGenericRecoveryPoint", "csharp");
+@@clientName(Microsoft.RecoveryServices.BEKDetails, "BekDetails", "csharp");
+@@clientName(Microsoft.RecoveryServices.KEKDetails, "KekDetails", "csharp");
+@@clientName(Microsoft.RecoveryServices.TargetAFSRestoreInfo, "TargetAfsRestoreInfo", "csharp");
 
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   "Client",
