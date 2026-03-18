@@ -40,14 +40,14 @@ namespace Microsoft.ElasticSan;
  */
 enum Versions {
   /**
-   * The 2024-07-01-preview API version.
-   */
-  v2024_07_01_preview: "2024-07-01-preview",
-
-  /**
    * The 2025-09-01 stable API version.
    */
   v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2026-05-01-preview API version.
+   */
+  v2026_05_01_preview: "2026-05-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

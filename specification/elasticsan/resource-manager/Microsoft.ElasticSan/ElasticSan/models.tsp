@@ -28,6 +28,18 @@ union SkuName {
    * Premium zone redundant storage
    */
   Premium_ZRS: "Premium_ZRS",
+
+  /**
+   * Locally redundant storage
+   */
+  @added(Versions.v2026_05_01_preview)
+  ElasticSans_LRS: "ElasticSans_LRS",
+
+  /**
+   * Zone redundant storage
+   */
+  @added(Versions.v2026_05_01_preview)
+  ElasticSans_ZRS: "ElasticSans_ZRS",
 }
 
 /**
@@ -57,8 +69,20 @@ union ProvisioningStates {
   Restoring: "Restoring",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @removed(Versions.v2025_09_01)
+  @added(Versions.v2026_05_01_preview)
   SoftDeleting: "SoftDeleting",
+}
+
+/**
+ * Elastic San generation version.
+ */
+@added(Versions.v2026_05_01_preview)
+union ElasticSanVersion {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  V1: "V1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  V2: "V2",
 }
 
 /**
@@ -100,8 +124,20 @@ union AutoScalePolicyEnforcement {
   Disabled: "Disabled",
 }
 
+/**
+ * Quality of Service tier for the volume group, applicable for ElasticSanVersion V2 only.
+ */
+@added(Versions.v2026_05_01_preview)
+union QualityOfService {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  GeneralPurpose: "GeneralPurpose",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  PerformanceCritical: "PerformanceCritical",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@removed(Versions.v2025_09_01)
+@added(Versions.v2026_05_01_preview)
 union `x-ms-access-soft-deleted-resources` {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -130,6 +166,9 @@ union StorageTargetType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Iscsi: "Iscsi",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  DirectAttach: "DirectAttach",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 }
@@ -228,7 +267,7 @@ union `x-ms-force-delete` {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@removed(Versions.v2025_09_01)
+@added(Versions.v2026_05_01_preview)
 union DeleteType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -253,6 +292,7 @@ model SkuInformation {
   /**
    * Sku Tier
    */
+  @removed(Versions.v2026_05_01_preview)
   tier?: SkuTier;
 
   /**
@@ -280,6 +320,75 @@ model SkuInformation {
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   capabilities?: SKUCapability[];
+
+  /**
+   * The Quality of Service tier metadata in the specified SKU.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  qosTier?: SkuQosTier;
+}
+
+/**
+ * The Quality of Service tier metadata for the specified SKU.
+ */
+@added(Versions.v2026_05_01_preview)
+model SkuQosTier {
+  /**
+   * Performance critical tier metadata.
+   */
+  @visibility(Lifecycle.Read)
+  performanceCritical?: PerformanceCriticalSkuQosTier;
+
+  /**
+   * General purpose tier metadata.
+   */
+  @visibility(Lifecycle.Read)
+  generalPurpose?: GeneralPurposeSkuQosTier;
+}
+
+/**
+ * Performance critical Quality of Service tier metadata.
+ */
+@added(Versions.v2026_05_01_preview)
+model PerformanceCriticalSkuQosTier {
+  /**
+   * Availability zones supported for performance critical tier.
+   */
+  @visibility(Lifecycle.Read)
+  performanceCriticalZones?: string[];
+
+  /**
+   * The capability information in the performance critical tier.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  tierCapabilities?: SKUCapability[];
+}
+
+/**
+ * General purpose Quality of Service tier metadata.
+ */
+@added(Versions.v2026_05_01_preview)
+model GeneralPurposeSkuQosTier {
+  /**
+   * Availability zones supported for direct attach in general purpose tier.
+   */
+  @visibility(Lifecycle.Read)
+  generalPurposeDirectAttachZones?: string[];
+
+  /**
+   * Availability zones supported for iSCSI in general purpose tier.
+   */
+  @visibility(Lifecycle.Read)
+  generalPurposeIscsiZones?: string[];
+
+  /**
+   * The capability information in the general purpose tier.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  tierCapabilities?: SKUCapability[];
 }
 
 /**
@@ -345,14 +454,34 @@ model ElasticSanProperties {
   /**
    * Base size of the Elastic San appliance in TiB.
    */
+  @removed(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   baseSizeTiB: int64;
 
   /**
+   * Base size of the Elastic San appliance in TiB
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  @encodedName("application/json", "baseSizeTiB")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  baseSizeTiBForCreate?: int64;
+
+  /**
    * Extended size of the Elastic San appliance in TiB.
    */
+  @removed(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedCapacitySizeTiB: int64;
+
+  /**
+   * Extended size of the Elastic San appliance in TiB
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  @encodedName("application/json", "extendedCapacitySizeTiB")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  extendedCapacitySizeTiBForCreate?: int64;
 
   /**
    * Total size of the provisioned Volumes in GiB.
@@ -369,21 +498,48 @@ model ElasticSanProperties {
   /**
    * Total Provisioned IOPS of the Elastic San appliance.
    */
+  @removed(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
   totalIops?: int64;
+
+  /**
+    * Total Provisioned IOPS of the Elastic San appliance, applicable for ElasticSanVersion V2 only.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @encodedName("application/json", "totalIops")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  totalIopsForCreate?: int64;
 
   /**
    * Total Provisioned MBps Elastic San appliance.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
   totalMBps?: int64;
+
+  /**
+    * Total Provisioned MBps Elastic San appliance, applicable for ElasticSanVersion V2 only.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  @encodedName("application/json", "totalMBps")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  totalMbpsForCreate?: int64;
 
   /**
    * Total size of the Elastic San appliance in TB.
    */
   @visibility(Lifecycle.Read)
   totalSizeTiB?: int64;
+
+  /**
+    * Total size of the Elastic San appliance in TB, applicable for ElasticSanVersion V2 only.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @encodedName("application/json", "totalSizeTiB")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  totalSizeTibForCreate?: int64;
 
   /**
    * The list of Private Endpoint Connections.
@@ -400,6 +556,38 @@ model ElasticSanProperties {
    * Auto Scale Properties for Elastic San Appliance.
    */
   autoScaleProperties?: AutoScaleProperties;
+
+  /**
+   * Elastic San generation version.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  version?: ElasticSanVersion;
+
+  /**
+   * Used capacity in TiB.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  usedCapacityTiB?: int64;
+
+  /**
+   * Total IOPS reserved by all the volume groups under an ElasticSan
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  totalReservedIops?: int32;
+
+  /**
+   * Total MBps reserved by all the volume groups under an ElasticSan
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  totalReservedMBps?: int32;
+
 }
 
 /**
@@ -414,6 +602,7 @@ model Sku {
   /**
    * The sku tier.
    */
+  @removed(Versions.v2026_05_01_preview)
   tier?: SkuTier;
 }
 
@@ -551,6 +740,28 @@ model ElasticSanUpdateProperties {
    * Auto Scale Properties for Elastic San Appliance.
    */
   autoScaleProperties?: AutoScaleProperties;
+
+  /**
+   * Total Provisioned IOPS of the Elastic San appliance, applicable for ElasticSanVersion V2 only.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Update)
+  totalIops?: int64;
+
+  /**
+   * Total Provisioned MBps Elastic San appliance, applicable for ElasticSanVersion V2 only.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Update)
+  totalMBps?: int64;
+
+  /**
+   * Total size of the Elastic San appliance in TB, applicable for ElasticSanVersion V2 only.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Update)
+  totalSizeTiB?: int64;
 }
 
 /**
@@ -606,6 +817,7 @@ model UserAssignedIdentity {
 /**
  * The sku tier.
  */
+@removed(Versions.v2026_05_01_preview)
 union SkuTier {
   string,
 
@@ -658,9 +870,33 @@ model VolumeGroupProperties {
   enforceDataIntegrityCheckForIscsi?: boolean;
 
   /**
+   * Reserved IOPS allocated for this volume group, applicable for QualityOfService PerformanceCritical only.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minValue(0)
+  reservedIops?: int32;
+
+  /**
+   * Reserved MBps allocated for this volume group, applicable for QualityOfService PerformanceCritical only.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minValue(0)
+  reservedMBps?: int32;
+
+  /**
+   * Quality of Service tier for the volume group, applicable for ElasticSanVersion V2 only.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  qualityOfService?: QualityOfService;
+
+  /**
    * The retention policy for the soft deleted volume group and its associated resources.
    */
-  @removed(Versions.v2025_09_01)
+  @added(Versions.v2026_05_01_preview)
   deleteRetentionPolicy?: DeleteRetentionPolicy;
 }
 
@@ -757,7 +993,7 @@ model VirtualNetworkRule {
 /**
  * Response for Delete Retention Policy object
  */
-@removed(Versions.v2025_09_01)
+@added(Versions.v2026_05_01_preview)
 model DeleteRetentionPolicy {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   policyState?: PolicyState;
@@ -816,9 +1052,26 @@ model VolumeGroupUpdateProperties {
   enforceDataIntegrityCheckForIscsi?: boolean;
 
   /**
+   * Reserved IOPS allocated for this volume group, applicable for QualityOfService PerformanceCritical only.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Update)
+  @minValue(0)
+  reservedIops?: int32;
+
+  /**
+   * Reserved MBps allocated for this volume group, applicable for QualityOfService PerformanceCritical only.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Update)
+  @minValue(0)
+  reservedMBps?: int32;
+
+  /**
    * The retention policy for the soft deleted volume group and its associated resources
    */
-  @removed(Versions.v2025_09_01)
+  @added(Versions.v2026_05_01_preview)
   deleteRetentionPolicy?: DeleteRetentionPolicy;
 }
 
@@ -851,13 +1104,29 @@ model VolumeProperties {
   /**
    * Parent resource information.
    */
+  @removed(Versions.v2026_05_01_preview)
   managedBy?: ManagedByInfo;
+
+  /**
+   * Parent resource information.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @encodedName("application/json", "managedBy")
+  @identifiers(#[])
+  managedByV2?: ManagedByResources[];
 
   /**
    * State of the operation on the resource.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStates;
+
+  /**
+   * Used volume size in GiB.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  usedSizeGiB?: int64;
 }
 
 /**
@@ -912,11 +1181,32 @@ model IscsiTargetInfo {
 /**
  * Parent resource information.
  */
+@removed(Versions.v2026_05_01_preview)
 model ManagedByInfo {
   /**
    * Resource ID of the resource managing the volume, this is a restricted field and can only be set for internal use.
    */
   resourceId?: string;
+}
+
+/**
+ * Volume used by other Azure services.
+ */
+model ManagedByResources {
+  /**
+   * ClientId of the application managing the resource
+   */
+  clientId?: string;
+
+  /**
+   * Version number to keep track of resources using the Volume
+   */
+  version?: string;
+
+  /**
+   * ARM Resource IDs of the resources managing the volume
+   */
+  resourceIds?: Azure.Core.armResourceIdentifier[];
 }
 
 /**
@@ -942,7 +1232,16 @@ model VolumeUpdateProperties {
   /**
    * Parent resource information.
    */
+  @removed(Versions.v2026_05_01_preview)
   managedBy?: ManagedByInfo;
+
+  /**
+   * Parent resource information.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @encodedName("application/json", "managedBy")
+  @identifiers(#[])
+  managedByV2?: ManagedByResources[];
 }
 
 /**
