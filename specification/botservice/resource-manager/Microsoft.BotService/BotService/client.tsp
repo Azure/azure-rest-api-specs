@@ -355,3 +355,22 @@ model PrivateLinkResourceReplacement
   "BotServiceNetworkSecurityPerimeterConfiguration",
   "csharp"
 );
+
+// Suppress OperationResults_Get LRO polling operation from C# SDK — it's an
+// infrastructure operation, not user-facing.
+@@scope(OperationResultsOperationGroup.get, "!csharp");
+
+// Rename generic NSP model names with RP prefix to avoid cross-package collisions
+@@clientName(Profile, "BotServiceNetworkSecurityPerimeterProfile", "csharp");
+@@clientName(ResourceAssociation, "BotServiceResourceAssociation", "csharp");
+@@clientName(AccessMode, "BotServiceAccessMode", "csharp");
+@@clientName(Severity, "BotServiceSeverity", "csharp");
+@@clientName(ProvisioningState, "BotServiceProvisioningState", "csharp");
+@@clientName(OperationResultStatus,
+  "BotServiceOperationResultStatus",
+  "csharp"
+);
+@@clientName(NspAccessRulePropertiesSubscriptionsItem,
+  "BotServiceNspAccessRuleSubscription",
+  "csharp"
+);
