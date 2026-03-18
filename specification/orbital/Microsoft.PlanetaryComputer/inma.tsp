@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/openapi";
+import "@typespec/versioning";
 import "./models.stac.spec.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Foundations;
 @service(#{ title: "MPCPro Ingestion and Management API" })
@@ -126,6 +128,10 @@ model IngestionDefinition {
   @doc("Source catalog URL. Required for StaticCatalog ingestion type")
   sourceCatalogUrl?: url;
 
+  @added(Versions.v2026_04_15)
+  @doc("Parquet catalog URL. Required for StacGeoparquet ingestion type")
+  stacGeoparquetUrl?: url;
+
   @doc("Skip processing existing items in the catalog")
   skipExistingItems?: boolean;
 
@@ -147,6 +153,10 @@ union IngestionType {
 
   @doc("Static STAC Catalog")
   StaticCatalog: "StaticCatalog",
+
+  @added(Versions.v2026_04_15)
+  @doc("Ingestion STAC Geoparquet catalog")
+  StacGeoparquet: "StacGeoparquet",
 }
 
 @doc("Ingestion status")

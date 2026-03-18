@@ -14557,6 +14557,9 @@
         "x-ms-examples": {
           "Ingestions_Create": {
             "$ref": "./examples/Ingestions_Create.json"
+          },
+          "Ingestions_StacCreateGeoparquet": {
+            "$ref": "./examples/Ingestions_StacCreateGeoparquet.json"
           }
         }
       }
@@ -19855,6 +19858,11 @@
           "format": "uri",
           "description": "Source catalog URL. Required for StaticCatalog ingestion type"
         },
+        "stacGeoparquetUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Parquet catalog URL. Required for StacGeoparquet ingestion type"
+        },
         "skipExistingItems": {
           "type": "boolean",
           "description": "Skip processing existing items in the catalog"
@@ -19924,6 +19932,11 @@
           "type": "string",
           "format": "uri",
           "description": "Source catalog URL. Required for StaticCatalog ingestion type"
+        },
+        "stacGeoparquetUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Parquet catalog URL. Required for StacGeoparquet ingestion type"
         },
         "skipExistingItems": {
           "type": "boolean",
@@ -20193,7 +20206,8 @@
       "type": "string",
       "description": "Ingestion type",
       "enum": [
-        "StaticCatalog"
+        "StaticCatalog",
+        "StacGeoparquet"
       ],
       "x-ms-enum": {
         "name": "IngestionType",
@@ -20203,6 +20217,11 @@
             "name": "StaticCatalog",
             "value": "StaticCatalog",
             "description": "Static STAC Catalog"
+          },
+          {
+            "name": "StacGeoparquet",
+            "value": "StacGeoparquet",
+            "description": "Ingestion STAC Geoparquet catalog"
           }
         ]
       }
