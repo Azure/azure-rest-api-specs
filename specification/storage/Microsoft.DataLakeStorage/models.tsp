@@ -1221,14 +1221,14 @@ alias ContentMD5ResponseHeader = {
   /** The MD5 hash of the content. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
   @header("Content-MD5")
-  contentMD5?: string;
+  contentMD5?: bytes;
 };
 
 /** The x-ms-content-md5 response header (full file MD5). */
 alias XMsContentMD5ResponseHeader = {
   /** The MD5 hash of complete file stored in storage. */
   @header("x-ms-content-md5")
-  xMsContentMD5?: string;
+  xMsContentMD5?: bytes;
 };
 
 /** The Owner response header. */
