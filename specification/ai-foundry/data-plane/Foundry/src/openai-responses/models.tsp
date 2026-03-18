@@ -37,13 +37,13 @@ namespace Azure.AI.Projects {
       @removed(Versions.v1)
       agent_session_id?: string,
 
-      ...AzureCreateResponse;
+      ...AzureCreateResponseOptions;
     }
   );
 
   // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
   /** intermediate model */
-  model AzureCreateResponse {
+  model AzureCreateResponseOptions {
       /** The agent to use for generating the response. */
       agent_reference?: AgentReference,
 

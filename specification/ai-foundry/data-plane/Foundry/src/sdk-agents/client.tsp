@@ -130,8 +130,8 @@ using Azure.AI.Projects;
 @@usage(MemoryStoreUpdateResponse, Usage.output);
 @@access(MemoryStoreUpdateResponse, Access.public);
 
-@@usage(AzureCreateResponse, Usage.input);
-@@access(AzureCreateResponse, Access.public);
+@@usage(AzureCreateResponseOptions, Usage.input);
+@@access(AzureCreateResponseOptions, Access.public);
 
 @@usage(AzureCreateResponseResult, Usage.output);
 @@access(AzureCreateResponseResult, Access.public);
