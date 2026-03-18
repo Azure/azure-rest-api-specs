@@ -848,7 +848,7 @@ model AgentIdentity {
 )
 union AgentBlueprintReferenceType {
   string,
-  ManagedBlueprint: "ManagedBlueprint",
+  ManagedAgentIdentityBlueprint: "ManagedAgentIdentityBlueprint",
 }
 
 @removed(Versions.v1)
@@ -866,8 +866,8 @@ model AgentBlueprintReference {
   "x-ms-foundry-meta",
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
-model ManagedAgentBlueprintReference extends AgentBlueprintReference {
-  type: AgentBlueprintReferenceType.ManagedBlueprint;
+model ManagedAgentIdentityBlueprintReference extends AgentBlueprintReference {
+  type: AgentBlueprintReferenceType.ManagedAgentIdentityBlueprint;
 
   @doc("The ID of the managed blueprint")
   blueprint_id: string;

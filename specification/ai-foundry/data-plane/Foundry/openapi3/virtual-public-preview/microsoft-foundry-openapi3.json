@@ -10535,7 +10535,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "ManagedBlueprint": "#/components/schemas/ManagedAgentBlueprintReference"
+            "ManagedAgentIdentityBlueprint": "#/components/schemas/ManagedAgentIdentityBlueprintReference"
           }
         },
         "x-ms-foundry-meta": {
@@ -10552,7 +10552,7 @@
           {
             "type": "string",
             "enum": [
-              "ManagedBlueprint"
+              "ManagedAgentIdentityBlueprint"
             ]
           }
         ],
@@ -17425,7 +17425,19 @@
         ],
         "description": "The types of parameters for red team item generation."
       },
-      "ManagedAgentBlueprintReference": {
+      "ManagedAgentIdentityBlueprint": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "ManagedAgentIdentityBlueprintReference": {
         "type": "object",
         "required": [
           "type",
@@ -17435,7 +17447,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "ManagedBlueprint"
+              "ManagedAgentIdentityBlueprint"
             ]
           },
           "blueprint_id": {
@@ -17452,18 +17464,6 @@
           "required_previews": [
             "AgentEndpoints=V1Preview"
           ]
-        }
-      },
-      "ManagedAgentIdentityBlueprint": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "readOnly": true
-          }
         }
       },
       "ManagedAzureAISearchIndex": {
