@@ -23,7 +23,7 @@ interface ContentSafetyClient {
 })
 interface BlocklistClient {
   addOrUpdateBlocklistItems is ContentSafety.TextBlocklists.addOrUpdateBlocklistItems;
-  @convenientAPI(false, "csharp") // csharp is not ready for patch operations, therefore hide the convenience API of this operation
+  @convenientAPI(false, "csharp, java") // csharp is not ready for patch operations; java excludes it since addOrUpdateBlocklistItems covers this use case
   createOrUpdateTextBlocklist is ContentSafety.TextBlocklists.createOrUpdateTextBlocklist;
   deleteTextBlocklist is ContentSafety.TextBlocklists.deleteTextBlocklist;
   getTextBlocklist is ContentSafety.TextBlocklists.getTextBlocklist;
