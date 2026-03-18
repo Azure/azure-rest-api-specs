@@ -231,7 +231,7 @@ union ProcessingLogicType {
 /** Primary key attributes for batch job */
 model PrimaryKeyAttribute {
   /** The key attribute. */
-  keyAttribute: string;
+  keyAttribute?: string;
 
   /** The timestamp attribute. */
   timestampAttribute: string;
