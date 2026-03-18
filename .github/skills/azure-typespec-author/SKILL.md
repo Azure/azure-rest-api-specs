@@ -21,6 +21,7 @@ compatibility:
 
 ## Constraints
 
+- **Always follow the full workflow** — even seemingly simple changes (e.g. adding a default value) can require complex versioning decorator changes. Never skip steps.
 - **Mandatory for ALL `.tsp` edits** — even a single `?` change can be breaking.
 - **Minimal, scoped edits** — only change what the request requires.
 - **Always validate** — run [validation](references/validation.md) after every edit.
@@ -50,7 +51,7 @@ Classify as exactly one:
 
 | Task Type                 | When                                                                         | `azsdk_typespec_generate_authoring_plan` |
 | ------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------- |
-| **API Version Evolution** | Adding / bumping a preview or stable API version. | **MUST NOT** call                        |
+| **API Version Evolution** | Adding a new preview or stable API version to an existing ARM service. | **MUST NOT** call                        |
 | **General Authoring**     | Any other `.tsp` change (resources, operations, models, properties, etc.)    | **MUST** call                            |
 
 State your classification explicitly before proceeding.
@@ -70,7 +71,7 @@ Collect inputs needed for the change. Branch by task type:
 
 Check your classification from Step 1, then branch:
 
-- **API Version Evolution** → Follow [API version evolution reference — Step 3](references/api-version-evolution.md#step-3-retrieve-solution). **MUST NOT** call `azsdk_typespec_generate_authoring_plan`.
+- **API Version Evolution** → Follow [API version evolution reference — Step 3](references/api-version-evolution.md#step-3-retrieve-authoring-plan). **MUST NOT** call `azsdk_typespec_generate_authoring_plan`.
 - **General Authoring** → **MUST** invoke `azure-sdk-mcp:azsdk_typespec_generate_authoring_plan` with:
 
   | Parameter                 | Value                                                                                                           |
@@ -96,7 +97,7 @@ Confirm uncertainties with the user, then make minimal `.tsp` edits.
 
 Run `azure-sdk-mcp:azsdk_run_typespec_validation` → if errors, fix → re-validate → repeat until clean.
 
-See [validation guide](references/validation.md) for conditional sub-steps (example verification, breaking change checks).
+See [validation guide](references/validation.md) for sub-steps (TypeSpec compilation, example verification).
 
 ---
 
