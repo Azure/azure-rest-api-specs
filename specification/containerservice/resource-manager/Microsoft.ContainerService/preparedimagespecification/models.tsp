@@ -23,9 +23,7 @@ model PreparedImageSpecification
   @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
-  @visibility(Lifecycle.Read)
-  @doc("A unique read-only string that changes whenever the resource is updated.")
-  etag?: string;
+  ...EntityTagProperty;
 }
 
 @doc("The properties of the Prepared Image Specification resource.")

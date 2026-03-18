@@ -22,8 +22,7 @@ interface PreparedImageSpecifications {
   update is ArmCustomPatchAsync<
     PreparedImageSpecification,
     PatchModel = PreparedImageSpecificationPatch,
-    Parameters = Azure.ResourceManager.Foundations.BaseParameters<PreparedImageSpecification> &
-      IfMatchParameters<PreparedImageSpecification>
+    Parameters = IfMatchParameters<PreparedImageSpecification>
   >;
 
   @doc("Delete a prepared image specification. This operation will be blocked if the resource is in use.")

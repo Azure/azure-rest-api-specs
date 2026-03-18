@@ -322,14 +322,6 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
             "name": "preparedImageSpecificationName",
             "in": "path",
             "description": "The name of the Prepared Image Specification resource.",
@@ -340,12 +332,20 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
             "name": "properties",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PreparedImageSpecificationUpdate"
+              "$ref": "#/definitions/PreparedImageSpecificationPatch"
             }
           }
         ],
@@ -683,9 +683,9 @@
           "$ref": "#/definitions/PreparedImageSpecificationProperties",
           "description": "The resource-specific properties for this resource."
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -767,6 +767,23 @@
         }
       }
     },
+    "PreparedImageSpecificationPatch": {
+      "type": "object",
+      "description": "Prepared image specification patch resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PreparedImageSpecificationPatchProperties",
+          "description": "Patchable prepared image specification properties."
+        }
+      }
+    },
     "PreparedImageSpecificationPatchProperties": {
       "type": "object",
       "description": "The updatable properties of the Prepared Image Specification resource.",
@@ -826,7 +843,10 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "required": [
+        "provisioningState"
+      ]
     },
     "PreparedImageSpecificationScript": {
       "type": "object",
@@ -890,23 +910,6 @@
         "rebootAfter": {
           "type": "boolean",
           "description": "Whether the node should reboot after successful script execution."
-        }
-      }
-    },
-    "PreparedImageSpecificationUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the PreparedImageSpecification.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/PreparedImageSpecificationPatchProperties",
-          "description": "The resource-specific properties for this resource."
         }
       }
     },
