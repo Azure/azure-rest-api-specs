@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * Security Assignment on a resource group over a given scope
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model StandardAssignment
   is Azure.ResourceManager.ExtensionResource<StandardAssignmentProperties> {
@@ -24,25 +25,30 @@ model StandardAssignment
   >;
 }
 
+model ResourceIdScopeParameter is Extension.ScopeParameter;
+
 @armResourceOperations
 interface StandardAssignments {
   /**
    * This operation retrieves a single standard assignment, given its name and the scope it was created at.
    */
-  get is Extension.Read<Extension.ScopeParameter, StandardAssignment>;
+  @summary("Retrieves a standard assignment.")
+  get is Extension.Read<ResourceIdScopeParameter, StandardAssignment>;
 
   /**
    *  This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.
    */
+  @summary("Creates or updates a standard assignment.")
   create is Extension.CreateOrReplaceSync<
-    Extension.ScopeParameter,
+    ResourceIdScopeParameter,
     StandardAssignment
   >;
 
   /**
    * This operation deletes a standard assignment, given its name and the scope it was created in. The scope of a standard assignment is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.
    */
-  delete is Extension.DeleteSync<Extension.ScopeParameter, StandardAssignment>;
+  @summary("Deletes a standard assignment.")
+  delete is Extension.DeleteSync<ResourceIdScopeParameter, StandardAssignment>;
 
   /**
    * Get a list of all relevant standard assignments over a scope
@@ -63,3 +69,5 @@ interface StandardAssignments {
 @@doc(StandardAssignments.create::parameters.resource,
   "Custom standard assignment over a pre-defined scope"
 );
+
+@@key(ResourceIdScopeParameter.scope, "resourceId");

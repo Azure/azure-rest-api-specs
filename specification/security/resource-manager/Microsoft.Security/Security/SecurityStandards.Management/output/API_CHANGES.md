@@ -1,24 +1,4 @@
-## Changed Paths
-
-Path: /{resourceId}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}
-Change Type: deleted
-
-Path: /{scope}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}
-Change Type: added
-
 ## Swagger Changes
-
-### Changes for `/{resourceId}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{resourceId}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}__deleted']` | deleted | `{"get":{"operationId":"StandardAssignments_Get","tags":["StandardAssignments"],"summary":"Retrieves ...` |
-
-### Changes for `/{scope}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}__added']` | added | `{"get":{"operationId":"StandardAssignments_Get","tags":["StandardAssignments"],"description":"This o...` |
 
 ### Changes for `x-ms-skip-url-encoding`
 
@@ -59,14 +39,6 @@ Change Type: added
 | `definitions.CustomRecommendationProperties.properties.securityIssue['x-ms-client-default__deleted']` | deleted | `BestPractices` |
 | `definitions.CustomRecommendationProperties.properties.severity['x-ms-client-default__deleted']` | deleted | `Low` |
 
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CustomRecommendationsList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.SecurityStandardList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.StandardAssignmentsList.properties.value.readOnly__deleted` | deleted | `true` |
-
 ### Changes for `description`
 
 | Path | Change Type | Value |
@@ -101,8 +73,10 @@ Change Type: added
 | `definitions.CustomRecommendation.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.SecurityStandard.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.StandardAssignment.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `info.description` | `API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider` | `API spec for Microsoft.Security (Azure Security Center) resource provider` |
-| `info.title` | `Microsoft Defender for Cloud` | `SecurityCenter` |
+| `paths['/{resourceId}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}'].delete.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` | `../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/{resourceId}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` | `../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/{resourceId}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}'].put.description` | ` This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.` | `This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.` |
+| `paths['/{resourceId}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}'].put.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` | `../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/{scope}/providers/microsoft.Security/customRecommendations'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` | `../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/{scope}/providers/microsoft.Security/customRecommendations/{customRecommendationName}'].delete.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` | `../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/{scope}/providers/microsoft.Security/customRecommendations/{customRecommendationName}'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` | `../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |

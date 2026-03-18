@@ -1,296 +1,5 @@
 {
-  "info": {
-    "title": {
-      "__old": "Microsoft Defender for Cloud",
-      "__new": "SecurityCenter"
-    },
-    "description": {
-      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
-    }
-  },
   "paths": {
-    "/{resourceId}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}__deleted": {
-      "get": {
-        "operationId": "StandardAssignments_Get",
-        "tags": [
-          "StandardAssignments"
-        ],
-        "summary": "Retrieves a standard assignment.",
-        "description": "This operation retrieves a single standard assignment, given its name and the scope it was created at.",
-        "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "standardAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/StandardAssignment"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a standard assignment": {
-            "$ref": "./examples/StandardAssignments/GetStandardAssignment.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "StandardAssignments_Create",
-        "tags": [
-          "StandardAssignments"
-        ],
-        "summary": "Creates or updates a standard assignment.",
-        "description": " This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
-        "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "standardAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
-          },
-          {
-            "name": "standardAssignment",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StandardAssignment"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/StandardAssignment"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/StandardAssignment"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Put an audit standard assignment": {
-            "$ref": "./examples/StandardAssignments/PutStandardAssignment.json"
-          },
-          "Put exemption standard assignment": {
-            "$ref": "./examples/StandardAssignments/PutExemptionStandardAssignment.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "StandardAssignments_Delete",
-        "tags": [
-          "StandardAssignments"
-        ],
-        "summary": "Deletes a standard assignment.",
-        "description": "This operation deletes a standard assignment, given its name and the scope it was created in. The scope of a standard assignment is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.",
-        "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "standardAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a standard assignment": {
-            "$ref": "./examples/StandardAssignments/DeleteStandardAssignment.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}__added": {
-      "get": {
-        "operationId": "StandardAssignments_Get",
-        "tags": [
-          "StandardAssignments"
-        ],
-        "description": "This operation retrieves a single standard assignment, given its name and the scope it was created at.",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "standardAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/StandardAssignment"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a standard assignment": {
-            "$ref": "./examples/StandardAssignments/GetStandardAssignment.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "StandardAssignments_Create",
-        "tags": [
-          "StandardAssignments"
-        ],
-        "description": "This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "standardAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
-          },
-          {
-            "name": "standardAssignment",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StandardAssignment"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/StandardAssignment"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/StandardAssignment"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Put an audit standard assignment": {
-            "$ref": "./examples/StandardAssignments/PutStandardAssignment.json"
-          },
-          "Put exemption standard assignment": {
-            "$ref": "./examples/StandardAssignments/PutExemptionStandardAssignment.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "StandardAssignments_Delete",
-        "tags": [
-          "StandardAssignments"
-        ],
-        "description": "This operation deletes a standard assignment, given its name and the scope it was created in. The scope of a standard assignment is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "standardAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a standard assignment": {
-            "$ref": "./examples/StandardAssignments/DeleteStandardAssignment.json"
-          }
-        }
-      }
-    },
     "/{scope}/providers/microsoft.Security/customRecommendations": {
       "get": {
         "parameters": [
@@ -504,6 +213,114 @@
           }
         }
       }
+    },
+    "/{resourceId}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": {
+          "__old": " This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
+          "__new": "This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group."
+        },
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -596,13 +413,6 @@
         }
       }
     },
-    "CustomRecommendationsList": {
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
-    },
     "SecurityStandard": {
       "allOf": [
         [
@@ -615,13 +425,6 @@
           }
         ]
       ]
-    },
-    "SecurityStandardList": {
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
     },
     "StandardAssignment": {
       "allOf": [
@@ -700,13 +503,6 @@
             }
           },
           "$ref__added": "#/definitions/StandardAssignmentPropertiesAttestationData"
-        }
-      }
-    },
-    "StandardAssignmentsList": {
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
         }
       }
     }

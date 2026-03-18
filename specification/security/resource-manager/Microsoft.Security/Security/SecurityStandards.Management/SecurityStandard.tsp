@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * Security Standard on a resource
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model SecurityStandard
   is Azure.ResourceManager.ExtensionResource<StandardProperties> {

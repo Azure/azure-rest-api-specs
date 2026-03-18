@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2024-08-01",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider"
   },
   "produces": [
     "application/json"
@@ -464,16 +464,17 @@
         }
       }
     },
-    "/{scope}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}": {
+    "/{resourceId}/providers/microsoft.Security/standardAssignments/{standardAssignmentName}": {
       "get": {
         "operationId": "StandardAssignments_Get",
         "tags": [
           "StandardAssignments"
         ],
+        "summary": "Retrieves a standard assignment.",
         "description": "This operation retrieves a single standard assignment, given its name and the scope it was created at.",
         "parameters": [
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "required": true,
             "type": "string",
@@ -512,10 +513,11 @@
         "tags": [
           "StandardAssignments"
         ],
+        "summary": "Creates or updates a standard assignment.",
         "description": "This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
         "parameters": [
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "required": true,
             "type": "string",
@@ -571,10 +573,11 @@
         "tags": [
           "StandardAssignments"
         ],
+        "summary": "Deletes a standard assignment.",
         "description": "This operation deletes a standard assignment, given its name and the scope it was created in. The scope of a standard assignment is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.",
         "parameters": [
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "required": true,
             "type": "string",
@@ -743,7 +746,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/CustomRecommendation"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -790,7 +794,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/SecurityStandard"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -968,7 +973,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/StandardAssignment"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",

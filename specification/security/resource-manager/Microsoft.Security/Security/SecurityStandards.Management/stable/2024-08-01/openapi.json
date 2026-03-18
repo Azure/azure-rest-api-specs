@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2024-08-01",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -546,19 +546,20 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}": {
+    "/{resourceId}/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}": {
       "get": {
         "operationId": "StandardAssignments_Get",
         "tags": [
           "StandardAssignments"
         ],
+        "summary": "Retrieves a standard assignment.",
         "description": "This operation retrieves a single standard assignment, given its name and the scope it was created at.",
         "parameters": [
           {
             "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -599,13 +600,14 @@
         "tags": [
           "StandardAssignments"
         ],
+        "summary": "Creates or updates a standard assignment.",
         "description": "This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
         "parameters": [
           {
             "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -664,13 +666,14 @@
         "tags": [
           "StandardAssignments"
         ],
+        "summary": "Deletes a standard assignment.",
         "description": "This operation deletes a standard assignment, given its name and the scope it was created in. The scope of a standard assignment is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.",
         "parameters": [
           {
             "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -727,36 +730,6 @@
           "type": "string",
           "description": "Full resourceId of the Microsoft.Security/standard object"
         }
-      }
-    },
-    "AttestationComplianceState": {
-      "type": "string",
-      "description": "Attest category of this assignment",
-      "enum": [
-        "unknown",
-        "compliant",
-        "nonCompliant"
-      ],
-      "x-ms-enum": {
-        "name": "AttestationComplianceState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "unknown",
-            "value": "unknown",
-            "description": "unknown"
-          },
-          {
-            "name": "compliant",
-            "value": "compliant",
-            "description": "compliant"
-          },
-          {
-            "name": "nonCompliant",
-            "value": "nonCompliant",
-            "description": "nonCompliant"
-          }
-        ]
       }
     },
     "AttestationEvidence": {
@@ -837,15 +810,15 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The CustomRecommendation items on this page",
+          "description": "Collection of Custom Recommendations",
           "items": {
             "$ref": "#/definitions/CustomRecommendation"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link used to get the next page of operations."
         }
       },
       "required": [
@@ -1016,15 +989,16 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SecurityStandard items on this page",
+          "description": "Collection of standards in this page",
           "items": {
             "$ref": "#/definitions/SecurityStandard"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URI to fetch the next page",
+          "readOnly": true
         }
       },
       "required": [
@@ -1156,7 +1130,7 @@
       "description": "Additional data about assignment that has Attest effect",
       "properties": {
         "complianceState": {
-          "$ref": "#/definitions/AttestationComplianceState",
+          "$ref": "#/definitions/attestationComplianceState",
           "description": "Attest category of this assignment"
         },
         "assignedAssessment": {
@@ -1174,7 +1148,8 @@
           "description": "Array of links to attestation evidence",
           "items": {
             "$ref": "#/definitions/AttestationEvidence"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1198,15 +1173,16 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The StandardAssignment items on this page",
+          "description": "Collection of standardAssignments in this page",
           "items": {
             "$ref": "#/definitions/StandardAssignment"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URI to fetch the next page",
+          "readOnly": true
         }
       },
       "required": [
@@ -1339,6 +1315,36 @@
             "name": "Compliance",
             "value": "Compliance",
             "description": "Compliance"
+          }
+        ]
+      }
+    },
+    "attestationComplianceState": {
+      "type": "string",
+      "description": "Attest category of this assignment",
+      "enum": [
+        "unknown",
+        "compliant",
+        "nonCompliant"
+      ],
+      "x-ms-enum": {
+        "name": "attestationComplianceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "unknown",
+            "value": "unknown",
+            "description": "unknown"
+          },
+          {
+            "name": "compliant",
+            "value": "compliant",
+            "description": "compliant"
+          },
+          {
+            "name": "nonCompliant",
+            "value": "nonCompliant",
+            "description": "nonCompliant"
           }
         ]
       }

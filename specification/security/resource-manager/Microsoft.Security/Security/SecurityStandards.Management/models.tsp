@@ -96,7 +96,7 @@ union ExemptionCategory {
 /**
  * Attest category of this assignment
  */
-union AttestationComplianceState {
+union attestationComplianceState {
   string,
 
   /**
@@ -226,12 +226,26 @@ union CreatedByType {
 /**
  * Page of a Standard list
  */
-model SecurityStandardList is Azure.Core.Page<SecurityStandard>;
+model SecurityStandardList {
+  /**
+   * Collection of standards in this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value: SecurityStandard[];
+
+  /**
+   * The URI to fetch the next page
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Describes properties of a standard.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StandardProperties {
   /**
    * Display name of the standard, equivalent to the standardId
@@ -278,6 +292,7 @@ model PartialAssessmentProperties {
   /**
    * The assessment key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   assessmentKey?: string;
 }
 
@@ -338,7 +353,7 @@ model Resource {
 /**
  * Describes the properties of a standardAssignment
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StandardAssignmentProperties {
   /**
    * Display name of the standardAssignment
@@ -419,6 +434,7 @@ model AssignedAssessmentItem {
   /**
    * Unique key to a security assessment object
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   assessmentKey?: string;
 }
 
@@ -429,7 +445,7 @@ model StandardAssignmentPropertiesAttestationData {
   /**
    * Attest category of this assignment
    */
-  complianceState?: AttestationComplianceState;
+  complianceState?: attestationComplianceState;
 
   /**
    * Component item with key as applied to this standard assignment over the given scope
@@ -446,6 +462,7 @@ model StandardAssignmentPropertiesAttestationData {
   /**
    * Array of links to attestation evidence
    */
+  @identifiers(#[])
   evidence?: AttestationEvidence[];
 }
 
@@ -498,17 +515,44 @@ model StandardAssignmentMetadata {
 /**
  * Page of a standard assignment list
  */
-model StandardAssignmentsList is Azure.Core.Page<StandardAssignment>;
+model StandardAssignmentsList {
+  /**
+   * Collection of standardAssignments in this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value: StandardAssignment[];
+
+  /**
+   * The URI to fetch the next page
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * A list of Custom Recommendations
  */
-model CustomRecommendationsList is Azure.Core.Page<CustomRecommendation>;
+model CustomRecommendationsList {
+  /**
+   * Collection of Custom Recommendations
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value: CustomRecommendation[];
+
+  /**
+   * The link used to get the next page of operations.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * describes the Custom Recommendation properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CustomRecommendationProperties {
   /**
    * KQL query representing the Recommendation results required.
@@ -548,6 +592,7 @@ model CustomRecommendationProperties {
   /**
    * The assessment metadata key used when an assessment is generated for this Recommendation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   assessmentKey?: string;
 }
