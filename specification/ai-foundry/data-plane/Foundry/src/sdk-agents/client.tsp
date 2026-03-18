@@ -106,8 +106,8 @@ using Azure.AI.Projects;
 @@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
 @@clientName(MemoryStores.searchMemories, "internalSearchMemories");
 
-@@access(Agents.deleteAgent, Access.internal);
-@@clientName(Agents.deleteAgent, "internalDeleteAgent");
+@@convenientAPI(Agents.deleteAgent, false, "java");
+@@convenientAPI(Agents.deleteAgentVersion, false, "java");
 
 @@access(MemoryStoreSearchResponse, Access.public);
 @@usage(MemoryStoreSearchResponse, Usage.output);
