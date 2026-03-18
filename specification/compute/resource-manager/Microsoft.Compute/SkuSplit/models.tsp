@@ -313,7 +313,6 @@ model SkuMixPlacementDeploymentChoice {
   score: int32;
 
   /** The list of VM size / zone allocations that make up this deployment choice. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "SkuMixPlacementItem is a non-resource data model."
   @identifiers(#["name", "zone"])
   skuSplit: SkuMixPlacementItem[];
 }
