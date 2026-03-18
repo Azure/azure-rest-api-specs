@@ -100,7 +100,23 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: Pricings.Management
+tag: SecurityStandards.Management
+```
+
+### Composite packages
+
+The following packages may be composed from multiple api-versions.
+
+
+### Tag: SecurityStandards.Management
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'SecurityStandards.Management'
+input-file:
+  - stable/2024-08-01/securityStandards.json
+  - stable/2024-08-01/standardAssignments.json
+  - stable/2024-08-01/customRecommedations.json
 ```
 
 ### Composite packages

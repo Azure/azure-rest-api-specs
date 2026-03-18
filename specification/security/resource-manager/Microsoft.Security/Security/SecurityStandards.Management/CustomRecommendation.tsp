@@ -1,0 +1,66 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Security;
+/**
+ * Custom Recommendation
+ */
+@extensionResource
+model CustomRecommendation
+  is Azure.ResourceManager.ExtensionResource<CustomRecommendationProperties> {
+  ...ResourceNameParameter<
+    Resource = CustomRecommendation,
+    KeyName = "customRecommendationName",
+    SegmentName = "customRecommendations",
+    NamePattern = "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+  >;
+}
+
+@armResourceOperations
+interface CustomRecommendations {
+  /**
+   * Get a specific custom recommendation for the requested scope by customRecommendationName
+   */
+  get is Extension.Read<Extension.ScopeParameter, CustomRecommendation>;
+
+  /**
+   * Creates or updates a custom recommendation over a given scope
+   */
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    Extension.ScopeParameter,
+    CustomRecommendation
+  >;
+
+  /**
+   * Delete a custom recommendation over a given scope
+   */
+  delete is Extension.DeleteSync<
+    Extension.ScopeParameter,
+    CustomRecommendation
+  >;
+
+  /**
+   * Get a list of all relevant custom recommendations over a scope
+   */
+  list is Extension.ListByTarget<
+    Extension.ScopeParameter,
+    CustomRecommendation,
+    Response = ArmResponse<CustomRecommendationsList>
+  >;
+}
+
+@@doc(CustomRecommendation.name, "Name of the Custom Recommendation.");
+@@doc(CustomRecommendation.properties,
+  "describes Custom Recommendation properties."
+);
+@@doc(CustomRecommendations.createOrUpdate::parameters.resource,
+  "Custom Recommendation body"
+);
