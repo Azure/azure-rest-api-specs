@@ -421,22 +421,22 @@ using Microsoft.NetworkCloud;
 @@usage(BareMetalMachine, Usage.input, "csharp");
 @@usage(StorageAppliance, Usage.input, "csharp");
 
-// prepend-rp-prefix renames (types that need NetworkCloud prefix)
+// --- csharp: prepend-rp-prefix renames (types that need NetworkCloud prefix) ---
 @@clientName(ActionState, "NetworkCloudActionState", "csharp");
 @@clientName(ActionState.endTime, "EndOn", "csharp");
-@@alternateType(ActionState.endTime, utcDateTime, "csharp");
 @@clientName(ActionState.startTime, "StartOn", "csharp");
-@@alternateType(ActionState.startTime, utcDateTime, "csharp");
 @@clientName(ActionStateStatus, "NetworkCloudActionStateStatus", "csharp");
 @@clientName(CertificateInfo, "NetworkCloudCertificateInfo", "csharp");
 @@clientName(StepState, "NetworkCloudStepState", "csharp");
 @@clientName(StepState.endTime, "EndOn", "csharp");
-@@alternateType(StepState.endTime, utcDateTime, "csharp");
 @@clientName(StepState.startTime, "StartOn", "csharp");
-@@alternateType(StepState.startTime, utcDateTime, "csharp");
 @@clientName(StepStateStatus, "NetworkCloudStepStateStatus", "csharp");
+@@alternateType(ActionState.endTime, utcDateTime, "csharp");
+@@alternateType(ActionState.startTime, utcDateTime, "csharp");
+@@alternateType(StepState.endTime, utcDateTime, "csharp");
+@@alternateType(StepState.startTime, utcDateTime, "csharp");
 
-// Parameters → Content renames (autorest rename-mapping equivalents)
+// --- csharp: Parameters → Content renames (autorest rename-mapping equivalents) ---
 @@clientName(BareMetalMachineCordonParameters,
   "BareMetalMachineCordonContent",
   "csharp"
@@ -495,31 +495,36 @@ using Microsoft.NetworkCloud;
   "csharp"
 );
 
-// Casing renames (acronym-mapping equivalents)
-@@clientName(IpAddressPool, "IPAddressPool", "csharp");
-@@clientName(IpAllocationType, "IPAllocationType", "csharp");
-@@clientName(OsDiskCreateOption, "OSDiskCreateOption", "csharp");
-@@clientName(OsDiskDeleteOption, "OSDiskDeleteOption", "csharp");
+// --- csharp: Casing renames (acronym-mapping equivalents) ---
 @@clientName(CloudServicesNetworkEnableDefaultEgressEndpoints,
   "CloudServicesNetworkEnableDefaultEgressEndpoint",
   "csharp"
 );
+@@clientName(IpAddressPool, "IPAddressPool", "csharp");
+@@clientName(IpAllocationType, "IPAllocationType", "csharp");
+@@clientName(OsDiskCreateOption, "OSDiskCreateOption", "csharp");
+@@clientName(OsDiskDeleteOption, "OSDiskDeleteOption", "csharp");
 @@clientName(RelayType, "VirtualMachineAssignRelayType", "csharp");
 
-// Property casing renames - restore old API property names for ApiCompat
+// --- csharp: Property casing renames - restore old API property names for ApiCompat ---
+@@clientName(BareMetalMachineKeySetSpec.osGroupName, "OSGroupName", "csharp");
 @@clientName(BareMetalMachineStatus.oamIpv4Address, "OamIPv4Address", "csharp");
 @@clientName(BareMetalMachineStatus.oamIpv6Address, "OamIPv6Address", "csharp");
 @@clientName(BareMetalMachineStatus.osImage, "OSImage", "csharp");
-@@clientName(BareMetalMachineKeySetSpec.osGroupName, "OSGroupName", "csharp");
-@@clientName(L3NetworkSpec.ipAllocationType, "IPAllocationType", "csharp");
-@@clientName(L3NetworkSpec.ipv4ConnectedPrefix, "IPv4ConnectedPrefix", "csharp");
-@@clientName(L3NetworkSpec.ipv6ConnectedPrefix, "IPv6ConnectedPrefix", "csharp");
-@@clientName(StorageApplianceStatus.managementIpv4Address, "ManagementIPv4Address", "csharp");
 @@clientName(BgpAdvertisement.ipAddressPools, "IPAddressPools", "csharp");
 @@clientName(BgpServiceLoadBalancerConfiguration.ipAddressPools, "IPAddressPools", "csharp");
 @@clientName(IpAddressPool.onlyUseHostIps, "OnlyUseHostIPs", "csharp");
-@@clientName(NetworkConfiguration.dnsServiceIp, "DnsServiceIP", "csharp");
+@@clientName(L3NetworkSpec.ipAllocationType, "IPAllocationType", "csharp");
+@@clientName(L3NetworkSpec.ipv4ConnectedPrefix, "IPv4ConnectedPrefix", "csharp");
+@@clientName(L3NetworkSpec.ipv6ConnectedPrefix, "IPv6ConnectedPrefix", "csharp");
 @@clientName(NetworkAttachment.ipAllocationMethod, "IPAllocationMethod", "csharp");
 @@clientName(NetworkAttachment.ipv4Address, "IPv4Address", "csharp");
 @@clientName(NetworkAttachment.ipv6Address, "IPv6Address", "csharp");
+@@clientName(NetworkConfiguration.dnsServiceIp, "DnsServiceIP", "csharp");
+@@clientName(StorageApplianceStatus.managementIpv4Address, "ManagementIPv4Address", "csharp");
 @@clientName(StorageProfile.osDisk, "OSDisk", "csharp");
+
+// --- go ---
+@@clientName(HugepagesSize.`1G`, "OneG", "go");
+@@clientName(HugepagesSize.`2M`, "TwoM", "go");
+@@alternateType(Foundations.ExtendedLocation.type, string, "go");
