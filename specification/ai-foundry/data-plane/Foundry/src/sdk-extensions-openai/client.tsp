@@ -64,6 +64,31 @@ namespace Azure.AI.Projects {
     "OAuthConsentRequestResponseItem"
   );
   @@clientName(OpenAI.OutputItemType, "AgentResponseItemKind");
+  @@usage(OpenAI.OutputItemType, Usage.output | Usage.json | Usage.input);
+
+  // --------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------
+  // LocalShellToolCallOutputStatus - named union to replace inline union
+  // --------------------------------------------------------------------------------
+
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Matching OpenAI spec"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Matching OpenAI spec"
+  union LocalShellToolCallOutputStatus {
+    in_progress: "in_progress",
+    completed: "completed",
+    incomplete: "incomplete",
+    null,
+  }
+
+  // Use alternateType to replace the inline union with our named union for SDK generation
+  @@alternateType(OpenAI.LocalShellToolCallOutput.status,
+    LocalShellToolCallOutputStatus
+  );
+
+  // Rename and include in typegraph
+  @@clientName(LocalShellToolCallOutputStatus,
+    "ItemLocalShellToolCallOutputStatus"
+  );
 
   // --------------------------------------------------------------------------------
   // Renames and visibility changes for targeted suppressions
@@ -264,6 +289,8 @@ namespace Azure.AI.Projects {
     "InternalOutputItemReasoningItem"
   );
 
+  @@clientName(MemoryItem, "MemoryOutputItem");
+
   @@access(OpenAI.SummaryTextContent, Access.internal);
   @@clientName(OpenAI.SummaryTextContent, "InternalSummaryTextObject");
 
@@ -276,6 +303,9 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.OutputItemCustomToolCall,
     "InternalOutputItemCustomToolCall"
   );
+
+  @@clientName(_AgentItemType.a2a_preview_call, "A2APreviewCall ");
+  @@clientName(_AgentItemType.a2a_preview_call_output, "A2APreviewCallOutput");
 
   @@access(OpenAI.WebSearchActionFind, Access.internal);
   @@clientName(OpenAI.WebSearchActionFind, "InternalWebSearchActionFind");
@@ -315,7 +345,7 @@ namespace Azure.AI.Projects {
   @@access(CreatedBy, Access.public);
   @@usage(CreatedBy, Usage.output);
   @@clientName(CreatedBy, "AgentItemSource");
-
+  @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
   // --------------------------------------------------------------------------------
@@ -342,4 +372,6 @@ namespace Azure.AI.Projects {
 
   @@usage(ApiError, Usage.output);
   @@access(ApiError, Access.public);
+
+  @@usage(StructuredOutputsOutputItem, Usage.input | Usage.output);
 }

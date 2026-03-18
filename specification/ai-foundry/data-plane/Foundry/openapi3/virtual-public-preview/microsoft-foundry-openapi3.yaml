@@ -1311,9 +1311,7 @@ paths:
                 type: string
           content:
             '*/*':
-              schema:
-                type: string
-                format: binary
+              schema: {}
         default:
           description: An unexpected error response.
           content:
@@ -1326,9 +1324,7 @@ paths:
         required: true
         content:
           '*/*':
-            schema:
-              type: string
-              format: binary
+            schema: {}
         description: The request body.
       x-ms-foundry-meta:
         required_previews:
@@ -1431,9 +1427,7 @@ paths:
           description: The request has succeeded.
           content:
             '*/*':
-              schema:
-                type: string
-                format: binary
+              schema: {}
         default:
           description: An unexpected error response.
           content:
@@ -1490,9 +1484,7 @@ paths:
           description: The request has succeeded.
           content:
             '*/*':
-              schema:
-                type: string
-                format: binary
+              schema: {}
         default:
           description: An unexpected error response.
           content:
@@ -1505,9 +1497,7 @@ paths:
         required: false
         content:
           '*/*':
-            schema:
-              type: string
-              format: binary
+            schema: {}
         description: Optional request body.
       x-ms-foundry-meta:
         required_previews:
@@ -3271,10 +3261,9 @@ paths:
       operationId: Insights_generate
       description: Generate Insights
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: Foundry-Features
           in: header
-          required: true
+          required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -3293,6 +3282,13 @@ paths:
           schema:
             type: string
             format: http-date
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '201':
           description: The request has succeeded and a new resource has been created as a result.
@@ -3302,16 +3298,10 @@ paths:
                 $ref: '#/components/schemas/Insight'
         default:
           description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Insights
       requestBody:
@@ -3325,7 +3315,14 @@ paths:
       operationId: Insights_list
       description: List all insights in reverse chronological order (newest first).
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Insights=V1Preview
         - name: type
           in: query
           required: false
@@ -3361,14 +3358,13 @@ paths:
           schema:
             type: boolean
           explode: false
-        - name: Foundry-Features
-          in: header
+        - name: api-version
+          in: query
           required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          description: The API version to use for this operation.
           schema:
             type: string
-            enum:
-              - Insights=V1Preview
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -3378,16 +3374,10 @@ paths:
                 $ref: '#/components/schemas/PagedInsight'
         default:
           description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Insights
   /insights/{id}:
@@ -3395,16 +3385,9 @@ paths:
       operationId: Insights_get
       description: Get a specific insight by Id.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: id
-          in: path
-          required: true
-          description: The unique identifier for the insights report.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
-          required: true
+          required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -3417,6 +3400,19 @@ paths:
           schema:
             type: boolean
           explode: false
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier for the insights report.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -3426,16 +3422,10 @@ paths:
                 $ref: '#/components/schemas/Insight'
         default:
           description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Insights
   /managedAgentIdentityBlueprints:

@@ -106,6 +106,9 @@ using Azure.AI.Projects;
 @@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
 @@clientName(MemoryStores.searchMemories, "internalSearchMemories");
 
+@@access(Agents.deleteAgent, Access.internal);
+@@clientName(Agents.deleteAgent, "internalDeleteAgent");
+
 @@access(MemoryStoreSearchResponse, Access.public);
 @@usage(MemoryStoreSearchResponse, Usage.output);
 
@@ -136,11 +139,67 @@ using Azure.AI.Projects;
 // is already exposed by the Stainless library. Currently there aren't any azure-isms.
 @@changePropertyType(PromptAgentDefinition.tool_choice, string);
 
+// AI Tooling: openai-java de-dup
+// Suppress emission of standalone models that are exact duplicates of openai-java classes.
+// Map them to their openai-java equivalents so the codegen does not emit its own versions.
+//   ComparisonFilter + ComparisonFilterType  → com.openai.models.ComparisonFilter
+//   CompoundFilter + CompoundFilterType      → com.openai.models.CompoundFilter
+//   Reasoning + ReasoningSummary/GenerateSummary/Effort → com.openai.models.Reasoning
+@@alternateType(OpenAI.ComparisonFilter,
+  {
+    identity: "com.openai.models.ComparisonFilter",
+  },
+  "java"
+);
+@@alternateType(OpenAI.CompoundFilter,
+  {
+    identity: "com.openai.models.CompoundFilter",
+  },
+  "java"
+);
+@@alternateType(OpenAI.Reasoning,
+  {
+    identity: "com.openai.models.Reasoning",
+  },
+  "java"
+);
+//   ConversationResource → com.openai.models.conversations.Conversation
+@@alternateType(OpenAI.ConversationResource,
+  {
+    identity: "com.openai.models.conversations.Conversation",
+  },
+  "java"
+);
+
 // TimeZone property override via model indirection
-@alternateType({
-  identity: "java.util.TimeZone"
-}, "java")
+@alternateType(
+  {
+    identity: "java.util.TimeZone",
+  },
+  "java"
+)
 model TimeZoneType {}
 
 @@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
-@@alternateType(OpenAI.WebSearchApproximateLocation.timezone, TimeZoneType, "java");
+@@alternateType(OpenAI.WebSearchApproximateLocation.timezone,
+  TimeZoneType,
+  "java"
+);
+
+// --------------------------------------------------------------------------------
+// Conversations: only expose listConversations (Foundry-specific), suppress the rest
+// --------------------------------------------------------------------------------
+
+@@scope(Conversations.createConversation, "!(java)");
+@@scope(Conversations.updateConversation, "!(java)");
+@@scope(Conversations.getConversation, "!(java)");
+@@scope(Conversations.deleteConversation, "!(java)");
+@@scope(Conversations.createConversationItems, "!(java)");
+@@scope(Conversations.getConversationItem, "!(java)");
+@@scope(Conversations.deleteConversationItem, "!(java)");
+@@scope(Conversations.listConversationItems, "!(java)");
+
+// Rename and moving listAgentConversations to Agents subclient, so we prevent having a Conversation subclient 
+// of our own, to prevent confusion.
+@@clientName(Conversations.listConversations, "listAgentConversations", "java");
+@@clientLocation(Conversations.listConversations, Agents);
