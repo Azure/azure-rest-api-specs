@@ -9472,7 +9472,7 @@ union IpInterfaceType {
   Dhcp: "Dhcp",
 
   /** Static configuration. */
-  static: "static",
+  Static: "Static",
 }
 
 /**
