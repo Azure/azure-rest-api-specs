@@ -5,6 +5,10 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Chaos;
 
 // csharp
+@@clientName(Workspace, "ChaosWorkspace", "csharp");
+@@clientName(Scenario, "ChaosScenario", "csharp");
+@@clientName(ScenarioRun, "ChaosScenarioRun", "csharp");
+@@clientName(ScenarioConfiguration, "ChaosScenarioConfiguration", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
 @@clientName(Experiment, "ChaosExperiment", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
@@ -31,7 +35,6 @@ using Microsoft.Chaos;
   "ExecutionDetails",
   "csharp"
 );
-@@scope(Microsoft.Chaos.OperationStatuses.get, "!csharp");
 @@clientName(Microsoft.Chaos.Experiments.listAll, "getExperiments", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "update base model for SDK backward compatibility"

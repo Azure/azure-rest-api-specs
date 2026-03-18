@@ -31,6 +31,40 @@ openapi-type: arm
 tag: package-2025-01
 ```
 
+### Tag: package-2026-05-01-preview
+
+These settings apply only when `--tag=package-2026-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-01-preview'
+input-file:
+  - preview/2026-05-01-preview/openapi.json
+suppressions:
+  - code: XMSSecretInResponse
+    from: openapi.json
+    where: $.definitions.PrivateAccessProperties.properties.publicNetworkAccess
+    reason: False positive - publicNetworkAccess is not a secret. It is a simple Enabled/Disabled configuration setting for public network access control. The property name contains 'access' which may trigger the rule, but the values are not sensitive.
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].get
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.Target
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where: $.definitions.Target.properties.properties
+    reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.
+```
+
 ### Tag: package-2025-01
 
 These settings apply only when `--tag=package-2025-01` is specified on the command line.

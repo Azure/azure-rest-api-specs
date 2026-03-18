@@ -5,9 +5,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
 
@@ -43,10 +42,8 @@ alias ParentResourceParameters = {
 /**
  * Current provisioning state for a given Azure Chaos resource.
  */
-@Azure.Core.lroStatus
 union ProvisioningState {
-  string,
-  ResourceProvisioningState,
+  ResourceProvisioningState, // include standard provisioning states
 
   /**
    * Initial creation in progress.
@@ -62,6 +59,13 @@ union ProvisioningState {
    * Deletion in progress.
    */
   Deleting: "Deleting",
+
+  /**
+   * Action is running.
+   */
+  @removed(Microsoft.Chaos.Versions.v2025_01_01)
+  @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
+  Running: "Running",
 }
 
 /**
@@ -95,4 +99,21 @@ model OperationStatus extends ErrorResponse {
    * The status of the operation.
    */
   status?: string;
+}
+
+/**
+ * A map used to describe parameters actions or configurations.
+ */
+model KeyValuePair {
+  /**
+   * The name of the setting for the action.
+   */
+  @minLength(1)
+  key: string;
+
+  /**
+   * The value of the setting for the action.
+   */
+  @minLength(1)
+  value: string;
 }

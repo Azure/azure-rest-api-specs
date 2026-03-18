@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "workspaceName": "exampleWorkspace",
+    "scenarioName": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012",
+        "name": "12345678-1234-1234-1234-123456789012",
+        "type": "Microsoft.Chaos/workspaces/scenarios",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "version": "1.0.0",
+          "description": "This scenario demonstrates shutting down virtual machines to test application resilience to infrastructure failures.",
+          "parameters": [
+            {
+              "name": "duration",
+              "type": "string",
+              "default": "PT5M",
+              "required": false,
+              "description": "Duration of the shutdown in ISO 8601 format"
+            },
+            {
+              "name": "targetResourceIds",
+              "type": "array",
+              "required": true,
+              "description": "Array of target virtual machine resource IDs"
+            }
+          ],
+          "actions": [
+            {
+              "name": "shutdownAction",
+              "urn": "urn:csci:microsoft:virtualMachine:shutdown/1.0",
+              "targetTypes": [
+                "Microsoft.Compute/virtualMachines"
+              ],
+              "description": "Shutdown virtual machines to test resilience",
+              "duration": "PT5M",
+              "parameters": [
+                {
+                  "name": "abruptShutdown",
+                  "type": "boolean",
+                  "default": "false",
+                  "required": false,
+                  "description": "Whether to perform an abrupt shutdown"
+                }
+              ]
+            }
+          ],
+          "recommendation": {
+            "recommendationStatus": "Recommended",
+            "evaluationRunAt": "2025-01-15T10:30:00.000Z"
+          }
+        },
+        "systemData": {
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-01-15T10:30:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Scenarios_Get",
+  "title": "Get a scenario."
+}

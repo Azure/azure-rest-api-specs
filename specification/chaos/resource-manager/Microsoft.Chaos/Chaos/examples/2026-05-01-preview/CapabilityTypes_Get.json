@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "capabilityTypeName": "Shutdown-1.0",
+    "location": "westus2",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "targetTypeName": "Microsoft-VirtualMachine"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Shutdown-1.0",
+        "type": "Microsoft.Chaos/locations/targetTypes/capabilityTypes",
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/targetTypes/Microsoft-VirtualMachine/capabilityTypes/Shutdown-1.0",
+        "properties": {
+          "description": "Shutdown an Azure Virtual Machine for a defined period of time.",
+          "displayName": "Shutdown VM",
+          "kind": "fault",
+          "parametersSchema": "https://schema.centralus.chaos-prod.azure.com/targets/Microsoft-VirtualMachine/capabilities/Shutdown-1.0.json",
+          "publisher": "Microsoft",
+          "azureRbacActions": [
+            "Microsoft.Compute/virtualMachines/powerOff/action",
+            "Microsoft.Compute/virtualMachines/read"
+          ],
+          "azureRbacDataActions": [],
+          "requiredAzureRoleDefinitionIds": [
+            "9980e02c-c2be-4d73-94e8-173b1dc7cf3c"
+          ],
+          "runtimeProperties": {
+            "kind": "continuous"
+          },
+          "targetType": "VirtualMachine",
+          "urn": "urn:csci:microsoft:virtualMachine:shutdown/1.0"
+        }
+      }
+    }
+  },
+  "operationId": "CapabilityTypes_Get",
+  "title": "Get a Capability Type for a virtual machine Target resource on westus2 location."
+}

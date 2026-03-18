@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "workspaceName": "exampleWorkspace",
+    "scenarioName": "12345678-1234-1234-1234-123456789012",
+    "scenarioConfigurationName": "config-5678-9012-3456-789012345678",
+    "permissionFixName": "latest",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012/configurations/config-5678-9012-3456-789012345678/fixResourcePermissions/latest",
+        "name": "latest",
+        "type": "Microsoft.Chaos/workspaces/scenarios/configurations/fixResourcePermissions",
+        "properties": {
+          "state": "Succeeded",
+          "startedAt": "2025-01-20T10:00:00.000Z",
+          "completedAt": "2025-01-20T10:02:30.000Z",
+          "whatIfMode": false,
+          "roleAssignments": [
+            {
+              "targetResourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1",
+              "principalId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "roleDefinitionId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Authorization/roleDefinitions/9980e02c-c2be-4d73-94e8-173b1dc7cf3c",
+              "roleDefinitionName": "Virtual Machine Contributor",
+              "scope": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1",
+              "status": "Succeeded",
+              "roleAssignmentId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1/providers/Microsoft.Authorization/roleAssignments/f1e2d3c4-b5a6-7890-abcd-ef1234567890",
+              "error": null
+            },
+            {
+              "targetResourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2",
+              "principalId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "roleDefinitionId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Authorization/roleDefinitions/9980e02c-c2be-4d73-94e8-173b1dc7cf3c",
+              "roleDefinitionName": "Virtual Machine Contributor",
+              "scope": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2",
+              "status": "Skipped",
+              "roleAssignmentId": null,
+              "error": null
+            }
+          ],
+          "summary": {
+            "totalRequired": 2,
+            "succeeded": 1,
+            "failed": 0,
+            "skipped": 1
+          }
+        },
+        "systemData": {
+          "createdAt": "2025-01-20T10:00:00.000Z",
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-01-20T10:02:30.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ScenarioConfigurations_GetLatestPermissionFix",
+  "title": "Get the latest permission fix result for the scenario configuration.",
+  "description": "Retrieves the most recent permission fix operation result for the scenario configuration. Returns the existing operation state without triggering a new fix. Returns 404 if no permission fix operation has ever been run. Unlike the FixResourcePermissions operation (POST), this is a read-only operation that fetches existing results. Possible state values: NotStarted, InProgress, Succeeded, Failed, PartiallySucceeded, WhatIfCompleted. Role assignment status values: Succeeded, Failed, Skipped, Pending."
+}

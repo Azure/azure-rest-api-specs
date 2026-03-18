@@ -28,3 +28,9 @@
 - tool: TypeSpecRequirement
   path: ./stable/2024-01-01/*.json
   reason: Brownfield service not ready to migrate
+- tool: LintDiff
+  paths:
+    - preview/2026-05-01-preview/openapi.json
+  rules:
+    - XMSSecretInResponse
+  reason: False positive - publicNetworkAccess is not a secret. It is a simple Enabled/Disabled configuration setting for public network access control. The property name contains 'access' which may trigger the rule, but the values are not sensitive.
