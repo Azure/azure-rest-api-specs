@@ -10504,6 +10504,46 @@
         },
         "description": "A AI Search Index resource."
       },
+      "AgentBlueprintReference": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/AgentBlueprintReferenceType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "ManagedAgentIdentityBlueprint": "#/components/schemas/ManagedAgentIdentityBlueprintReference"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentBlueprintReferenceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ManagedAgentIdentityBlueprint"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "AgentCard": {
         "type": "object",
         "required": [
@@ -11028,7 +11068,8 @@
             "enum": [
               "activity",
               "responses",
-              "a2a"
+              "a2a",
+              "invocations"
             ]
           }
         ]
@@ -11234,11 +11275,11 @@
         "properties": {
           "principal_id": {
             "type": "string",
-            "description": "The principal ID of the agent"
+            "description": "The principal ID of the agent instance"
           },
           "client_id": {
             "type": "string",
-            "description": "The client ID of the agent"
+            "description": "The client ID of the agent instance. Also referred to as the instance ID"
           }
         },
         "x-ms-foundry-meta": {
@@ -11313,22 +11354,41 @@
               ]
             }
           },
-          "blueprint_id": {
-            "type": "string",
-            "description": "The reference to a managed agent identity blueprint for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
-          "identity": {
+          "instance_identity": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/AgentIdentity"
               }
             ],
-            "description": "The identity of the agent",
+            "description": "The instance identity of the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            },
+            "readOnly": true
+          },
+          "blueprint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentIdentity"
+              }
+            ],
+            "description": "The blueprint for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            },
+            "readOnly": true
+          },
+          "blueprint_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentBlueprintReference"
+              }
+            ],
+            "description": "The blueprint for the agent",
             "x-ms-foundry-meta": {
               "required_previews": [
                 "AgentEndpoints=V1Preview"
@@ -11520,9 +11580,13 @@
             ],
             "description": "Error details if the agent version provisioning failed."
           },
-          "blueprint_id": {
-            "type": "string",
-            "description": "The reference to a managed agent identity blueprint for the agent",
+          "instance_identity": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentIdentity"
+              }
+            ],
+            "description": "The instance identity of the agent",
             "x-ms-foundry-meta": {
               "required_previews": [
                 "AgentEndpoints=V1Preview"
@@ -11530,13 +11594,27 @@
             },
             "readOnly": true
           },
-          "identity": {
+          "blueprint": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/AgentIdentity"
               }
             ],
-            "description": "The identity of the agent",
+            "description": "The blueprint for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            },
+            "readOnly": true
+          },
+          "blueprint_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentBlueprintReference"
+              }
+            ],
+            "description": "The blueprint for the agent",
             "x-ms-foundry-meta": {
               "required_previews": [
                 "AgentEndpoints=V1Preview"
@@ -13749,9 +13827,13 @@
               ]
             }
           },
-          "managed_agent_identity_blueprint_id": {
-            "type": "string",
-            "description": "The managed agent identity blueprint id",
+          "blueprint_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentBlueprintReference"
+              }
+            ],
+            "description": "The blueprint reference for the agent.",
             "x-ms-foundry-meta": {
               "required_previews": [
                 "AgentEndpoints=V1Preview"
@@ -13832,9 +13914,13 @@
               ]
             }
           },
-          "managed_agent_identity_blueprint_id": {
-            "type": "string",
-            "description": "The managed agent identity blueprint id",
+          "blueprint_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentBlueprintReference"
+              }
+            ],
+            "description": "The blueprint reference for the agent.",
             "x-ms-foundry-meta": {
               "required_previews": [
                 "AgentEndpoints=V1Preview"
@@ -17331,6 +17417,35 @@
             "type": "string",
             "readOnly": true
           }
+        }
+      },
+      "ManagedAgentIdentityBlueprintReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "blueprint_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ManagedAgentIdentityBlueprint"
+            ]
+          },
+          "blueprint_id": {
+            "type": "string",
+            "description": "The ID of the managed blueprint"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentBlueprintReference"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
         }
       },
       "ManagedAzureAISearchIndex": {
@@ -40426,9 +40541,13 @@
               ]
             }
           },
-          "managed_agent_identity_blueprint_id": {
-            "type": "string",
-            "description": "The managed agent identity blueprint id",
+          "blueprint_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentBlueprintReference"
+              }
+            ],
+            "description": "The blueprint reference for the agent.",
             "x-ms-foundry-meta": {
               "required_previews": [
                 "AgentEndpoints=V1Preview"
