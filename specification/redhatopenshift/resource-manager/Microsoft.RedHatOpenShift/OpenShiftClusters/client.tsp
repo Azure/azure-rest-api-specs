@@ -5,5 +5,5 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.RedHatOpenShift,
   "AzureRedHatOpenShiftClient",
-  "javascript"
+  "javascript,python"
 );
