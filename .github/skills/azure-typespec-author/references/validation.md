@@ -2,12 +2,11 @@
 
 After applying changes (Step 4), run through all sub-steps below in order.
 
-| Sub-step | Action                   | When            |
-| -------- | ------------------------ | --------------- |
-| 5.1      | TypeSpec Validation      | Always          |
-| 5.2      | Output Path Verification | Always          |
-| 5.3      | Example Verification     | Always          |
-| 5.4      | Breaking Change Check    | Stable API only |
+| Sub-step | Action                | When                       |
+| -------- | --------------------- | -------------------------- |
+| 5.1      | TypeSpec Validation   | Always                     |
+| 5.2      | Example Verification  | API Version Evolution only |
+| 5.3      | Breaking Change Check | Stable API only            |
 
 ### Step 5.1: TypeSpec Validation
 
@@ -18,21 +17,7 @@ Invoke `azure-sdk-mcp:azsdk_run_typespec_validation` with the project root path.
 
 > Never skip this step, even for trivial changes.
 
-### Step 5.2: Output Path Verification
-
-Verify that the generated OpenAPI spec files exist and are under the correct api-version folder:
-
-1. Locate all generated `openapi.json` (or equivalent swagger JSON) files under the spec root.
-   - If **no generated swagger files are found**, run `tsp compile .` under the TypeSpec project root to produce them, then search again.
-   - If files are still missing after compilation → investigate `tspconfig.yaml` emitter configuration and fix, then re-compile.
-2. Confirm each file resides in a folder matching the **current working API version** from Step 1.
-   - Expected path pattern: `{spec-root}/{stability}/{api-version}/openapi.json`
-     - `{stability}` is `preview` or `stable`, matching the version suffix.
-     - `{api-version}` is the full version string (e.g., `2024-06-01-preview`).
-
-If misplaced files are found → check `tspconfig.yaml` emitter output settings and fix, then re-run Step 5.1.
-
-### Step 5.3: Example Verification
+### Step 5.2: Example Verification
 
 > Applies only for API Version Evolution Tasks
 
@@ -44,7 +29,7 @@ Verify that files under `examples/` are consistent with the current API version:
 
 If examples are missing or outdated → **restart from Step 2** to update them.
 
-### Step 5.4: Breaking Change Check
+### Step 5.3: Breaking Change Check
 
 > Applies only when adding a stable API version. Skip otherwise.
 

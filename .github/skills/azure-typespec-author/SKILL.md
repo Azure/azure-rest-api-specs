@@ -2,82 +2,122 @@
 name: azure-typespec-author
 license: MIT
 metadata:
-  version: "0.0.1"
-description: "Author or modify Azure TypeSpec API specifications. USE FOR: Any task that creates, modifies, or troubleshoots .tsp files or TypeSpec API specifications — including but not limited to API versioning evolution(add new preview version, add new stable version), ARM resource type(tracked, proxy, extension, child resources) or data-plane resource definitions, resource operations (CRUD, PATCH, custom actions, paging, async/Long Running Operations), models, enums, unions, properties, decorators, constraints, parameters, and swagger-to-TypeSpec conversion. DO NOT USE FOR: SDK generation from TypeSpec, releasing SDK packages, single MCP tool calls that do not require multi-step workflows. TOOLS/COMMANDS: azure-sdk-mcp:azsdk_typespec_generate_authoring_plan, azure-sdk-mcp:azsdk_run_typespec_validation"
-compatibility: >-
-  Requires: azure-sdk-mcp server with azure-sdk-mcp:azsdk_typespec_generate_authoring_plan and azure-sdk-mcp:azsdk_run_typespec_validation tools.
+  version: "1.0.0"
+description: "Authors and modifies Azure TypeSpec API specifications for ARM and data-plane services. Generates authoring plans and validates TypeSpec compilation. USE FOR: \"typespec\", \"tsp compile\", \"modify tsp\", \"api version\", \"preview version\", \"stable version\", \"bump version\", \"promote to stable\", \"add resource\", \"extension resource\", \"child resource\", \"add operation\", \"PATCH operation\", \"POST action\", \"LRO\", \"async operation\", \"add property\", \"change property\", \"visibility\", \"constraints\", \"suppress warning\", \"breaking change\", \"operationId\", \"spread model\", API version evolution, resource definitions, operations, models, properties, decorators. DO NOT USE FOR: SDK generation from TypeSpec, releasing SDK packages, or single MCP tool calls without multi-step workflows. INVOKES: azure-sdk-mcp:azsdk_typespec_generate_authoring_plan, azure-sdk-mcp:azsdk_run_typespec_validation."
+compatibility:
+  requires: "azure-sdk-mcp server with azsdk_typespec_generate_authoring_plan and azsdk_run_typespec_validation tools"
 ---
 
 # Azure TypeSpec Author
 
-## MCP Prerequisites
-
-Requires `azure-sdk-mcp` server with TypeSpec authoring and validation tools.
-
 ## MCP Tools
 
-| Tool                                                   | Purpose                              |
-| ------------------------------------------------------ | ------------------------------------ |
-| `azure-sdk-mcp:azsdk_typespec_generate_authoring_plan` | Generate grounded authoring plan     |
-| `azure-sdk-mcp:azsdk_run_typespec_validation`          | Validate TypeSpec compilation + lint |
+| Tool | Purpose |
+|------|---------|
+| `azure-sdk-mcp:azsdk_typespec_generate_authoring_plan` | Generate grounded authoring plan (General Authoring only) |
+| `azure-sdk-mcp:azsdk_run_typespec_validation` | Validate TypeSpec compilation + lint |
 
-## Principles
+**Prerequisite:** `azure-sdk-mcp` server must be running.
 
-1. **Mandatory for ALL `.tsp` edits** — even a single `?` change can be breaking.
-2. **Minimal, scoped edits** — only change what the request requires.
-3. **Always validate** — run `azure-sdk-mcp:azsdk_run_typespec_validation` after every edit.
-4. **Always cite references** — provide links that justify the approach.
+## Constraints
 
-## Task Classification
+- **Mandatory for ALL `.tsp` edits** — even a single `?` change can be breaking.
+- **Minimal, scoped edits** — only change what the request requires.
+- **Always validate** — run [validation](references/validation.md) after every edit.
+- **Always cite references** — provide links that justify the approach.
 
-**CRITICAL: You MUST classify the request into exactly one task type below and explicitly state your classification BEFORE proceeding to Step 2. The classification determines which tools are allowed in Step 3.**
+---
 
-- **API Version Evolution** = adding, introducing, or bumping to a new preview or stable API version (e.g. `2025-06-01-preview`, `2026-01-01`) for a service. Any request whose **primary intent** is to introduce a new API version string falls here.
-- **General Authoring** = everything else that modifies `.tsp` files (adding/updating resources, operations, models, properties, etc.) **without** introducing a new API version.
+## Workflow
 
-**Classification keywords:**
-- _"add a new … API version"_, _"new preview version"_, _"new stable version"_, _"bump API version"_, _"introduce version"_, _"add … preview"_, _"add … stable"_ → **API Version Evolution**
-- Everything else that modifies `.tsp` → **General Authoring**
+> Classify → Intake → Plan → Apply → Validate
 
-| Type                      | Description                                                                                                                         | Tool Restriction                                                                      | Examples                                                                                                                                                                                                                          |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **API Version Evolution** | Adding a new preview or stable API version to an existing ARM service. Data-plane API version evolution is not fully supported yet. | **MUST NOT** call `azsdk_typespec_generate_authoring_plan`. Uses web-fetched docs only. | "Add a new preview API version 2026-01-01-preview for widget resource manager", "Add preview version 2025-06-01-preview", "Bump to stable version 2026-01-01 for Microsoft.Widget", "Introduce a new preview API version for Foo" |
-| **General Authoring**     | Any other TypeSpec authoring task that modifies `.tsp` files                                                                        | **MUST** call `azsdk_typespec_generate_authoring_plan` in Step 3.                      | "Add an ARM resource named Asset with CRUD operations"                                                                                                                                                                            |
+### Progress Checklist
 
-After Step 1 (Analyze Project), output your classification:
-```
-Task Type: [API Version Evolution | General Authoring]
-```
+Copy and update as you progress:
 
-## Steps
+- [ ] Step 1: Analyzed project & classified as: ___
+- [ ] Step 2: Collected intake inputs
+- [ ] Step 3: Retrieved authoring plan
+- [ ] Step 4: Applied changes
+- [ ] Step 5: Validated (compilation passed)
 
-All tasks follow a 5-step workflow. Steps 2–3 branch by task type; the rest are shared.
+### Step 1: Analyze & Classify
 
-1. **Analyze Project & Classify Task** — Follow the [project analysis guide](references/analyze-project.md) to collect project context. Then **classify the task type** per the table above and state it explicitly before continuing. 
+Follow [analyze project & classify task](references/analyze-project-and-classify-task.md).
 
-2. **Intake & Clarification**
-   - _API Version Evolution:_ determine the versioning scenario from Step 1, use [agentic search](references/agentic-search.md) in the document with the scenario URL below to collect information from user. Be sure to use a user-friendly way to collect required inputs from user. e.g., list the existing features (resources, operations, properties) from the latest version and then ask the user which to carry over or exclude, instead of asking for raw input.
+Classify as exactly one:
 
-     | Latest  | Target  | URL to fetch                                                                                  |
-     | ------- | ------- | --------------------------------------------------------------------------------------------- |
-     | preview | preview | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/02-preview-after-preview/` |
-     | preview | stable  | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/03-stable-after-preview/`  |
-     | stable  | preview | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/04-preview-after-stable/`  |
-     | stable  | stable  | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/05-stable-after-stable/`   |
-   - _General Authoring:_ follow [intake guide](references/general-authoring-intake.md).
+| Task Type                 | When                                                                         | `azsdk_typespec_generate_authoring_plan` |
+| ------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------- |
+| **API Version Evolution** | Adding / bumping a preview or stable API version. | **MUST NOT** call                        |
+| **General Authoring**     | Any other `.tsp` change (resources, operations, models, properties, etc.)    | **MUST** call                            |
 
-3. **Retrieve Solution** — check the task type from Step 1 before choosing a path.
-   - _API Version Evolution:_ search the downloaded guide content for implementation steps via [agentic search](references/agentic-search.md) and generate solution. **MUST NOT call `azsdk_typespec_generate_authoring_plan`.** The versioning guides fetched in Step 2 contain all needed instructions.
-   - _General Authoring:_ invoke `azure-sdk-mcp:azsdk_typespec_generate_authoring_plan` MCP tool with the following parameters:
+State your classification explicitly before proceeding.
 
-     | Parameter                 | Value                                                                                                           |
-     | ------------------------- | --------------------------------------------------------------------------------------------------------------- |
-     | `request`                 | User request (verbatim)                                                                                         |
-     | `additionalInformation`   | All content gathered from Steps 1–2 (intake analysis, user answers, relevant `.tsp` code read from the project) |
-     | `typeSpecProjectRootPath` | TypeSpec project root path                                                                                      |
+---
 
-     Do not proceed without a grounded plan from this tool.
+### Step 2: Intake
 
-4. **Apply Changes** — Confirm uncertainties with user, make minimal `.tsp` edits, prefer official templates from retrieved context.
+Collect inputs needed for the change. Branch by task type:
 
-5. **Validate** — Follow the [validation guide](references/validation.md).
+- **API Version Evolution** → Follow [API version evolution reference — Step 2](references/api-version-evolution.md#step-2-intake). Make sure to list features from the latest version in a table and ask the user which to carry over vs exclude.
+- **General Authoring** → Follow [intake guide](references/general-authoring-intake.md).
+
+---
+
+### Step 3: Retrieve Authoring Plan
+
+Check your classification from Step 1, then branch:
+
+- **API Version Evolution** → Follow [API version evolution reference — Step 3](references/api-version-evolution.md#step-3-retrieve-solution). **MUST NOT** call `azsdk_typespec_generate_authoring_plan`.
+- **General Authoring** → **MUST** invoke `azure-sdk-mcp:azsdk_typespec_generate_authoring_plan` with:
+
+  | Parameter                 | Value                                                                                                           |
+  | ------------------------- | --------------------------------------------------------------------------------------------------------------- |
+  | `request`                 | User request (verbatim)                                                                                         |
+  | `additionalInformation`   | All content gathered from Steps 1–2 (intake analysis, user answers, relevant `.tsp` code read from the project) |
+  | `typeSpecProjectRootPath` | TypeSpec project root path                                                                                      |
+
+  Do not proceed without an authoring plan from this tool.
+
+---
+
+### Step 4: Apply Changes
+
+Confirm uncertainties with the user, then make minimal `.tsp` edits.
+
+- **API Version Evolution** → Apply the plan from Step 3.
+- **General Authoring** → Apply the authoring plan from Step 3.
+
+---
+
+### Step 5: Validate
+
+Run `azure-sdk-mcp:azsdk_run_typespec_validation` → if errors, fix → re-validate → repeat until clean.
+
+See [validation guide](references/validation.md) for conditional sub-steps (example verification, breaking change checks).
+
+---
+
+## Reference Files
+
+| File | Purpose |
+|------|---------|
+| [analyze-project-and-classify-task.md](references/analyze-project-and-classify-task.md) | Step 1: project analysis + classification |
+| [api-version-evolution.md](references/api-version-evolution.md) | Steps 2–4 for API Version Evolution tasks |
+| [general-authoring-intake.md](references/general-authoring-intake.md) | Step 2 for General Authoring tasks |
+| [agentic-search.md](references/agentic-search.md) | Procedure for fetching external docs |
+| [validation.md](references/validation.md) | Step 5: validation sub-steps |
+
+## Examples
+
+- "Add a new preview API version 2026-01-01-preview for widget resource manager"
+- "Bump to stable version 2026-01-01 for Microsoft.Widget"
+- "Add an ARM resource named Asset with CRUD operations"
+- "Add a new property to the Widget model"
+
+## Troubleshooting
+
+- **TypeSpec validation fails** — display all errors, provide fix suggestions, re-run validation.
+- **API Version Evolution** — use the versioning guide URLs in the [version evolution reference](references/api-version-evolution.md); do not call the authoring plan tool.
