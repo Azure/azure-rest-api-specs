@@ -23713,10 +23713,9 @@
               "$ref": "#/definitions/RestorePoint"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -23726,11 +23725,6 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -23748,7 +23742,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20Azure.ResourceManager.%7B%20location%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
+          "final-state-schema": "#/definitions/RestorePoint"
         },
         "x-ms-long-running-operation": true
       }
@@ -40650,10 +40644,7 @@
             "$ref": "#/definitions/Advisor"
           }
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "AdvisorProperties": {
       "type": "object",
@@ -41271,10 +41262,6 @@
           }
         ]
       }
-    },
-    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", Azure.ResourceManager.{ location: string, retryAfter: int32 }>": {
-      "type": "object",
-      "description": "Resource operation accepted."
     },
     "AzureADOnlyAuthListResult": {
       "type": "object",
@@ -54544,10 +54531,7 @@
             "$ref": "#/definitions/RecommendedAction"
           }
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "RecommendedActionMetricInfo": {
       "type": "object",

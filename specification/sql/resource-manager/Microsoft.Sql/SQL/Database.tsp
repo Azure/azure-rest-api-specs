@@ -324,10 +324,14 @@ interface Databases {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("RestorePoints")
   @action("restorePoints")
-  create is ArmResourceActionAsync<
+  create is ArmResourceActionAsyncBase<
     Database,
-    CreateDatabaseRestorePointDefinition,
-    ArmResponse<RestorePoint> | ArmResourceCreatedResponse<RestorePoint>
+    Request = CreateDatabaseRestorePointDefinition,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>,
+    Response = ArmResponse<RestorePoint> | ArmResourceCreatedResponse<
+      RestorePoint,
+      LroHeaders = ArmLroLocationHeader<FinalResult = RestorePoint>
+    > | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RestorePoint>>
   >;
 
   /**

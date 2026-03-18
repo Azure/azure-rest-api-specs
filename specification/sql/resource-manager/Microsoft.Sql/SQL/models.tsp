@@ -15202,7 +15202,7 @@ model AdvisorListResult {
    * Array of results.
    */
   @pageItems
-  value: Advisor[];
+  value?: Advisor[];
 }
 
 /**
@@ -15233,7 +15233,7 @@ model RecommendedActionListResult {
    * Array of results.
    */
   @pageItems
-  value: RecommendedAction[];
+  value?: RecommendedAction[];
 }
 
 /**
