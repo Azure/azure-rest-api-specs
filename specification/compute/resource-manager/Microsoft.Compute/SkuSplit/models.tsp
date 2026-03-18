@@ -1,0 +1,348 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
+namespace Microsoft.Compute;
+
+// ===================== Enums =====================
+
+/** Allocation strategy for determining the optimal SKU split. */
+union SkuMixPlacementAllocationStrategy {
+  string,
+
+  /** VMs allocated to optimize for lowest price. */
+  LowestPrice: "LowestPrice",
+
+  /** VMs allocated based on customer-specified rank for each VM size. */
+  Prioritized: "Prioritized",
+
+  /** VMs allocated to optimize for lowest eviction rate (Spot only). */
+  EvictionOptimized: "EvictionOptimized",
+}
+
+/** The unit type for the capacity value. */
+union SkuMixPlacementCapacityType {
+  string,
+
+  /** Capacity measured in number of VMs. */
+  VM: "VM",
+
+  /** Capacity measured in number of vCPUs. */
+  VCpu: "VCpu",
+}
+
+/** Priority levels for VM allocation. */
+union SkuMixPlacementPriority {
+  string,
+
+  /** Regular priority VMs with guaranteed capacity. */
+  Regular: "Regular",
+
+  /** Spot priority VMs with lower cost but potential eviction. */
+  Spot: "Spot",
+}
+
+/** The OS type of the VMs. */
+union SkuMixPlacementOSType {
+  string,
+
+  /** Windows OS. */
+  Windows: "Windows",
+
+  /** Linux OS. */
+  Linux: "Linux",
+}
+
+/** Strategy for distributing capacity across availability zones. */
+union SkuMixPlacementZonalDistributionStrategy {
+  string,
+
+  /** Capacity distributed across zones on a best-effort balanced basis. */
+  BestEffortBalanced: "BestEffortBalanced",
+
+  /** Zones filled based on zone preferences/rank. Higher priority zones filled first. */
+  Prioritized: "Prioritized",
+}
+
+/** The type of instance description provided in the request. */
+union SkuMixPlacementInstanceDescriptionType {
+  string,
+
+  /** Instance description is a list of explicit VM sizes. */
+  VMSizes: "VMSizes",
+
+  /** Instance description is a set of VM attribute constraints. */
+  VMAttributes: "VMAttributes",
+}
+
+/** Reason for partial fulfillment of the requested capacity. */
+union SkuMixPlacementPartialFulfillmentReason {
+  string,
+
+  /** Full capacity was fulfilled. */
+  None: "None",
+
+  /** Not enough allocable capacity was available. */
+  InsufficientCapacity: "InsufficientCapacity",
+
+  /** Not enough quota was available. */
+  InsufficientQuota: "InsufficientQuota",
+}
+
+/** Whether a VM capability should be excluded, included, or required. */
+union VMAttributeSupport {
+  string,
+
+  /** Exclude VM sizes that have the capability. */
+  Excluded: "Excluded",
+
+  /** Allow VM sizes with and without the capability. */
+  Included: "Included",
+
+  /** Only allow VM sizes that have the capability. */
+  Required: "Required",
+}
+
+// ===================== Request Models =====================
+
+/** Sku Mix Placement API request. */
+model SkuMixPlacementRequest {
+  /** Optional logical zones to consider (e.g. ["1","2","3"]). Null or empty implies regional deployment. */
+  zones?: string[];
+
+  /** All capacity-related properties. */
+  capacityProfile: SkuMixPlacementCapacityProfile;
+
+  /** Describes how the service should choose candidate VM sizes. */
+  instanceDescription: SkuMixPlacementInstanceDescription;
+}
+
+/** Capacity-related properties for the placement request. */
+model SkuMixPlacementCapacityProfile {
+  /** The capacity to run the workload. For VMs: [1..10,000]. For vCPUs: [1..100,000]. */
+  capacity: int32;
+
+  /** The unit type for the capacity value. */
+  capacityType: SkuMixPlacementCapacityType;
+
+  /** The priority of the VMs to allocate. */
+  priority: SkuMixPlacementPriority;
+
+  /** Required when priority is Spot. Contains spot-specific configuration. */
+  spotPriorityProfile?: SkuMixPlacementSpotPriorityProfile;
+
+  /** The allocation strategy for determining the optimal SKU split. */
+  allocationStrategy: SkuMixPlacementAllocationStrategy;
+
+  /** The OS type. Required when allocationStrategy is LowestPrice because pricing varies by OS. */
+  osType?: SkuMixPlacementOSType;
+
+  /** Zone allocation policy. Default: BestEffortBalanced. */
+  zoneAllocationPolicy?: SkuMixPlacementZoneAllocationPolicy;
+}
+
+/** Spot priority configuration. Required when priority is Spot. */
+model SkuMixPlacementSpotPriorityProfile {
+  /** Maximum price per VM the customer is willing to pay. Default: -1 (no price restriction). */
+  maxPricePerVm?: float64;
+}
+
+/** Zone allocation policy for the placement request. */
+model SkuMixPlacementZoneAllocationPolicy {
+  /** Distribution strategy for allocating capacity across zones. */
+  distributionStrategy?: SkuMixPlacementZonalDistributionStrategy;
+
+  /** Per-zone allocation preferences. Used with the Prioritized strategy. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "ZonePreference is a non-resource data model; items are not individually addressable."
+  @identifiers(#["zone"])
+  zonePreferences?: SkuMixPlacementZonePreference[];
+}
+
+/** Per-zone allocation preference. */
+model SkuMixPlacementZonePreference {
+  /** Logical zone (e.g. "1", "2", "3"). */
+  zone: string;
+
+  /** Rank of the zone. Lower values = higher priority (0 is highest). */
+  rank?: int32;
+
+  /** Best-effort limit to avoid allocating more than this count within the zone. */
+  targetMaxCapacity?: int32;
+}
+
+/** Describes which VM sizes (or VM attributes) to consider. */
+model SkuMixPlacementInstanceDescription {
+  /** The type of instance description. */
+  type: SkuMixPlacementInstanceDescriptionType;
+
+  /** The list of VM sizes. Required when type is VMSizes. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "VMSize is a non-resource data model; items are not individually addressable."
+  @identifiers(#["name"])
+  vmSizes?: SkuMixPlacementVMSize[];
+
+  /** VM attribute constraints. Required when type is VMAttributes. */
+  vmAttributes?: VmAttributesDto;
+}
+
+/** A VM size with optional rank for prioritization. */
+model SkuMixPlacementVMSize {
+  /** SKU name (e.g. Standard_D2s_v3). */
+  name: string;
+
+  /** Rank of the VM size. Lower = higher priority (starting at 0). Only valid with Prioritized strategy. */
+  rank?: int32;
+}
+
+/** VM attribute constraints for attribute-based VM selection. */
+model VmAttributesDto {
+  /** vCPU count range. Required. */
+  vCpuCount: VmAttributeMinMaxInteger;
+
+  /** Memory range in GiB. Required. */
+  memoryInGiB: VmAttributeMinMaxDouble;
+
+  /** Supported VM architectures. Required. */
+  architectureTypes: string[];
+
+  /** Memory-per-vCPU range in GiB. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "memoryInGiBPerVCpu matches the established Azure Compute API naming convention"
+  memoryInGiBPerVCpu?: VmAttributeMinMaxDouble;
+
+  /** Data disk count range. */
+  dataDiskCount?: VmAttributeMinMaxInteger;
+
+  /** NIC count range. */
+  networkInterfaceCount?: VmAttributeMinMaxInteger;
+
+  /** Network bandwidth range in Mbps. */
+  networkBandwidthInMbps?: VmAttributeMinMaxDouble;
+
+  /** Whether local storage support should be excluded, included, or required. */
+  localStorageSupport?: VMAttributeSupport;
+
+  /** Local storage capacity range in GiB. */
+  localStorageInGiB?: VmAttributeMinMaxDouble;
+
+  /** Allowed local storage disk types. */
+  localStorageDiskTypes?: string[];
+
+  /** Whether RDMA support should be excluded, included, or required. */
+  rdmaSupport?: VMAttributeSupport;
+
+  /** RDMA NIC count range. */
+  rdmaNetworkInterfaceCount?: VmAttributeMinMaxInteger;
+
+  /** Whether accelerator support should be excluded, included, or required. */
+  acceleratorSupport?: VMAttributeSupport;
+
+  /** Allowed accelerator manufacturers. */
+  acceleratorManufacturers?: string[];
+
+  /** Allowed accelerator types. */
+  acceleratorTypes?: string[];
+
+  /** Accelerator count range. */
+  acceleratorCount?: VmAttributeMinMaxInteger;
+
+  /** Allowed VM categories. */
+  vmCategories?: string[];
+
+  /** Allowed CPU manufacturers. */
+  cpuManufacturers?: string[];
+
+  /** Whether burstable SKUs should be excluded, included, or required. */
+  burstableSupport?: VMAttributeSupport;
+
+  /** Allowed Hyper-V generations. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "hyperVGenerations matches the established Azure Compute API naming convention"
+  hyperVGenerations?: string[];
+
+  /** VM sizes to explicitly exclude. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "excludedVMSizes matches the established Azure Compute API naming convention"
+  excludedVMSizes?: string[];
+
+  /** VM sizes to explicitly allow; attribute filtering applied only to this set. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "allowedVMSizes matches the established Azure Compute API naming convention"
+  allowedVMSizes?: string[];
+}
+
+/** Integer min/max range for VM attributes. */
+model VmAttributeMinMaxInteger {
+  /** Minimum value. */
+  min?: int32;
+
+  /** Maximum value. */
+  max?: int32;
+}
+
+/** Double min/max range for VM attributes. */
+model VmAttributeMinMaxDouble {
+  /** Minimum value. */
+  min?: float64;
+
+  /** Maximum value. */
+  max?: float64;
+}
+
+// ===================== Response Models =====================
+
+/** Sku Mix Placement API response. */
+model SkuMixPlacementResponse {
+  /** List of deployment choice recommendations, ordered by score. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "DeploymentChoice is identified by its id field."
+  deploymentChoices: SkuMixPlacementDeploymentChoice[];
+
+  /** Date/time until when the recommendations are valid. */
+  validUntil: utcDateTime;
+
+  /** Indicates whether the response is a complete or partial fulfillment. */
+  partialFulfillmentReason: SkuMixPlacementPartialFulfillmentReason;
+}
+
+/** A single deployment choice recommendation. */
+model SkuMixPlacementDeploymentChoice {
+  /** Unique identifier for this deployment choice. */
+  id: string;
+
+  /** Placement score from 0 to 9 (inclusive). Higher is better. */
+  @minValue(0)
+  @maxValue(9)
+  score: int32;
+
+  /** The list of VM size / zone allocations that make up this deployment choice. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "SkuMixPlacementItem is a non-resource data model."
+  @identifiers(#["name", "zone"])
+  skuSplit: SkuMixPlacementItem[];
+}
+
+/** A single VM size allocation within a deployment choice. */
+model SkuMixPlacementItem {
+  /** VM size name (e.g. Standard_D2s_v3). */
+  name: string;
+
+  /** Priority of this allocation (Regular or Spot). */
+  priority: SkuMixPlacementPriority;
+
+  /** Lower range of recommended allocation capacity. */
+  capacity: int32;
+
+  /** Upper range of recommended allocation capacity. */
+  capacityMax: int32;
+
+  /** Logical zone (e.g. "1", "2", "3"). Null or empty for regional deployments. */
+  zone?: string;
+}
+
+// ===================== Resource Properties =====================
+
+/** Contains properties of the SkuMixPlacement resource. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This resource does not involve long-running operations and does not require provisioningState."
+model SkuMixPlacementProperties {
+  /** Describes what resource types are supported by this diagnostic. */
+  supportedResourceTypes?: string[];
+}
