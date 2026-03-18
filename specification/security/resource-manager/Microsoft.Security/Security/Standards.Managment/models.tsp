@@ -40,7 +40,7 @@ union CreatedByType {
 /**
  * The cloud that the standard is supported on.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum StandardSupportedClouds {
   /**
    * AWS
@@ -56,12 +56,26 @@ enum StandardSupportedClouds {
 /**
  * Page of a Standard list
  */
-model StandardList is Azure.Core.Page<Standard>;
+model StandardList {
+  /**
+   * Collection of standards in this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Standard[];
+
+  /**
+   * The URI to fetch the next page
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Describes properties of a standard.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StandardProperties {
   /**
    * display name of the standard, equivalent to the standardId
@@ -87,6 +101,7 @@ model StandardProperties {
   /**
    * List of component objects containing component unique keys (such as assessment keys) to apply to standard scope.  Currently only supports assessment keys.
    */
+  @identifiers(#[])
   components?: StandardComponentProperties[];
 
   /**
@@ -102,6 +117,7 @@ model StandardComponentProperties {
   /**
    * Component Key matching componentMetadata
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
 }
 
@@ -156,16 +172,20 @@ model Kind {
   /**
    * Kind of the resource
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 }
 
 /**
  * Entity tag is used for comparing two or more entities from the same requested resource.
  */
+// #suppress applies to the next declaration
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ETag {
   /**
    * Entity tag is used for comparing two or more entities from the same requested resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -176,14 +196,17 @@ model Tags {
   /**
    * A list of key value pairs that describe the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * The error object.
@@ -194,6 +217,8 @@ model CloudError {
 /**
  * The error detail.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * The error code.
@@ -217,12 +242,14 @@ model CloudErrorBody {
    * The error details.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   details?: CloudErrorBody[];
 
   /**
    * The error additional info.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
@@ -239,6 +266,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
@@ -246,12 +274,26 @@ model ErrorAdditionalInfo {
 /**
  * Page of a standard assignment list
  */
-model AssignmentList is Azure.Core.Page<Assignment>;
+model AssignmentList {
+  /**
+   * Collection of standardAssignments in this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Assignment[];
+
+  /**
+   * The URI to fetch the next page
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Describes the properties of a standardAssignment
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AssignmentProperties {
   /**
    * display name of the standardAssignment
@@ -297,6 +339,7 @@ model AssignmentProperties {
   /**
    * The assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: unknown;
 }
 
@@ -317,6 +360,7 @@ model AssignedComponentItem {
   /**
    * unique key to a security assessment object
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
 }
 

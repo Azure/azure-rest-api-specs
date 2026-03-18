@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * Security Standard on a resource
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Standard
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<StandardProperties> {
   ...ResourceNameParameter<
@@ -25,13 +26,13 @@ model Standard
   /**
    * Kind of the resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   /**
    * Entity tag is used for comparing two or more entities from the same requested resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -40,24 +41,28 @@ interface Standards {
   /**
    * Get a specific security standard for the requested scope
    */
-  get is ArmResourceRead<Standard>;
+  get is ArmResourceRead<Standard, Error = CloudError>;
 
   /**
    * Create a security standard on the given scope.  Available only for custom standards.  Will create/update the required standard definitions.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Standard>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    Standard,
+    Error = CloudError
+  >;
 
   /**
    * Delete a security standard on a scope.
    */
-  delete is ArmResourceDeleteSync<Standard>;
+  delete is ArmResourceDeleteSync<Standard, Error = CloudError>;
 
   /**
    * Get security standards on all your resources inside a scope
    */
   list is ArmResourceListByParent<
     Standard,
-    Response = ArmResponse<StandardList>
+    Response = ArmResponse<StandardList>,
+    Error = CloudError
   >;
 
   /**
@@ -65,7 +70,8 @@ interface Standards {
    */
   listBySubscription is ArmListBySubscription<
     Standard,
-    Response = ArmResponse<StandardList>
+    Response = ArmResponse<StandardList>,
+    Error = CloudError
   >;
 }
 

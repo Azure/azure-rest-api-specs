@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Security Center",
     "version": "2021-08-01-preview",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
     "x-typespec-generated": [
@@ -72,7 +72,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -111,7 +111,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -153,7 +153,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -202,7 +202,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -261,7 +261,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -347,7 +347,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -396,7 +396,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -455,7 +455,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -499,7 +499,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -577,20 +577,18 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Assignment items on this page",
+          "description": "Collection of standardAssignments in this page",
           "items": {
             "$ref": "#/definitions/Assignment"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URI to fetch the next page",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "AssignmentProperties": {
       "type": "object",
@@ -641,6 +639,73 @@
         "exemptionCategory": {
           "type": "string",
           "description": "Exemption category of this assignment"
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
         }
       }
     },
@@ -699,20 +764,18 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Standard items on this page",
+          "description": "Collection of standards in this page",
           "items": {
             "$ref": "#/definitions/Standard"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URI to fetch the next page",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "StandardProperties": {
       "type": "object",
@@ -740,7 +803,8 @@
           "description": "List of component objects containing component unique keys (such as assessment keys) to apply to standard scope.  Currently only supports assessment keys.",
           "items": {
             "$ref": "#/definitions/StandardComponentProperties"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "supportedClouds": {
           "type": "array",

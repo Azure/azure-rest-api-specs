@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * Security Assignment on a resource group over a given scope
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Assignment
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<AssignmentProperties> {
   ...ResourceNameParameter<
@@ -25,13 +26,13 @@ model Assignment
   /**
    * Kind of the resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   /**
    * Entity tag is used for comparing two or more entities from the same requested resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -40,12 +41,15 @@ interface Assignments {
   /**
    * Get a specific standard assignment for the requested scope by resourceId
    */
-  get is ArmResourceRead<Assignment>;
+  get is ArmResourceRead<Assignment, Error = CloudError>;
 
   /**
    * Create a security assignment on the given scope. Will create/update the required standard assignment.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Assignment>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    Assignment,
+    Error = CloudError
+  >;
 
   /**
    * Delete a standard assignment over a given scope
@@ -57,7 +61,8 @@ interface Assignments {
    */
   list is ArmResourceListByParent<
     Assignment,
-    Response = ArmResponse<AssignmentList>
+    Response = ArmResponse<AssignmentList>,
+    Error = CloudError
   >;
 
   /**
@@ -65,7 +70,8 @@ interface Assignments {
    */
   listBySubscription is ArmListBySubscription<
     Assignment,
-    Response = ArmResponse<AssignmentList>
+    Response = ArmResponse<AssignmentList>,
+    Error = CloudError
   >;
 }
 

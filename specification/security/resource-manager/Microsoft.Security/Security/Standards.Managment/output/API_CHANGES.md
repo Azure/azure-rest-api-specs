@@ -12,6 +12,24 @@
 |------|------------|-------|
 | `definitions.AssignmentPropertiesAdditionalData__added` | added | `{"type":"object","description":"Additional data about the assignment","properties":{"exemptionCatego...` |
 
+### Changes for `CloudError`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.CloudError__added` | added | `{"type":"object","description":"Common error response for all Azure Resource Manager APIs to return ...` |
+
+### Changes for `CloudErrorBody`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.CloudErrorBody__added` | added | `{"type":"object","description":"The error detail.","properties":{"code":{"type":"string","descriptio...` |
+
+### Changes for `ErrorAdditionalInfo`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ErrorAdditionalInfo__added` | added | `{"type":"object","description":"The resource management error additional info.","properties":{"type"...` |
+
 ### Changes for `systemData`
 
 | Path | Change Type | Value |
@@ -47,20 +65,6 @@
 | `definitions.Assignment.properties.etag__added` | added | `{"type":"string","description":"Entity tag is used for comparing two or more entities from the same ...` |
 | `definitions.Standard.properties.etag__added` | added | `{"type":"string","description":"Entity tag is used for comparing two or more entities from the same ...` |
 
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AssignmentList.required__added` | added | `["value"]` |
-| `definitions.StandardList.required__added` | added | `["value"]` |
-
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AssignmentList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.StandardList.properties.value.readOnly__deleted` | deleted | `true` |
-
 ### Changes for `type`
 
 | Path | Change Type | Value |
@@ -86,15 +90,14 @@
 |------|-----------|----------|
 | `definitions.Assignment.allOf[0].$ref` | `./common/v1/types.json#/definitions/TrackedResource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource` |
 | `definitions.Standard.allOf[0].$ref` | `./common/v1/types.json#/definitions/TrackedResource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource` |
-| `info.title` | `Security Center` | `SecurityCenter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/assignments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/standards'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/assignments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/assignments/{assignmentId}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/assignments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/standards'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/assignments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/assignments/{assignmentId}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/assignments/{assignmentId}'].put.description` | `Create a security assignment on the given scope. Will create/update the required standard assignment. ` | `Create a security assignment on the given scope. Will create/update the required standard assignment.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/assignments/{assignmentId}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/standards'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/standards/{standardId}'].delete.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/standards/{standardId}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/standards/{standardId}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/assignments/{assignmentId}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/standards'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/standards/{standardId}'].delete.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/standards/{standardId}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/standards/{standardId}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 
