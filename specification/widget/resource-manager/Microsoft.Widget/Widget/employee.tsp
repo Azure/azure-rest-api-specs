@@ -2,11 +2,11 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Widget;
 
@@ -18,7 +18,13 @@ model Employee is TrackedResource<EmployeeProperties> {
 /** Employee properties */
 model EmployeeProperties {
   /** Age of employee */
-  age?: int32;
+  @removed(Versions.v2026_01_01_preview)
+  @renamedFrom(Versions.v2026_01_01_preview, "age")
+  ageV1?: int32;
+
+  /** Age of employee */
+  @added(Versions.v2026_01_01_preview)
+  age?: int32 = 30;
 
   /** City of employee */
   city?: string;
@@ -56,7 +62,13 @@ union ProvisioningState {
 interface Employees {
   get is ArmResourceRead<Employee>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Employee>;
-  update is ArmResourcePatchSync<Employee, EmployeeProperties>;
+  update is ArmCustomPatchSync<
+    Employee,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Employee,
+      EmployeeProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Employee>;
   listByResourceGroup is ArmResourceListByParent<Employee>;
   listBySubscription is ArmListBySubscription<Employee>;
