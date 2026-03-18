@@ -34,6 +34,45 @@
     }
   },
   "paths": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings": {
+      "get": {
+        "x-ms-examples": {
+          "Lists the Defender for Storage settings for the specified storage account.": {
+            "$ref": "./examples/DefenderForStorage/ListDefenderForStorageSettings_example.json"
+          }
+        },
+        "tags": [
+          "DefenderForStorage"
+        ],
+        "description": "Lists the Defender for Storage settings for the specified storage account.",
+        "operationId": "DefenderForStorage_List",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "./common/v1/types.json#/parameters/ResourceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to list Defender for Storage settings.",
+            "schema": {
+              "$ref": "#/definitions/DefenderForStorageSettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}": {
       "get": {
         "x-ms-examples": {
@@ -250,6 +289,25 @@
     }
   },
   "definitions": {
+    "DefenderForStorageSettingList": {
+      "type": "object",
+      "description": "List of Defender for Storage settings.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of Defender for Storage settings.",
+          "items": {
+            "$ref": "#/definitions/DefenderForStorageSetting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
     "DefenderForStorageSetting": {
       "type": "object",
       "allOf": [
