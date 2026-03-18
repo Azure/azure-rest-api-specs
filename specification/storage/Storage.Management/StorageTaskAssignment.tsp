@@ -36,9 +36,9 @@ interface StorageTaskAssignments {
   /**
    * Asynchronously creates a new storage task assignment sub-resource with the specified parameters. If a storage task assignment is already created and a subsequent create request is issued with different properties, the storage task assignment properties will be updated. If a storage task assignment is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns 202 for LRO PUT"
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns 202 for LRO PUT"
   create is ArmResourceCreateOrReplaceAsync<
     StorageTaskAssignment,
     Response = ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageTaskAssignment> &
@@ -123,9 +123,9 @@ interface StorageTaskAssignments {
   /**
    * Stops any active running storage action for the storage task assignment
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API uses non-standard response codes for this action"
   @added(Versions.v2025_08_01)
   @action("stopAssignment")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API uses non-standard response codes for this action"
   stopAssignment is ArmResourceActionAsync<StorageTaskAssignment, void, void>;
 }
 

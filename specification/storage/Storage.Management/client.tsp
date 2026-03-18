@@ -857,8 +857,14 @@ namespace Azure.ResourceManager.Models {
 @@alternateType(DeletedAccountProperties.deletionTime, utcDateTime, "csharp");
 
 // Fix StorageAccountSkuConversionStatus date types: old SDK had DateTimeOffset? (StartOn/EndOn)
-@@alternateType(StorageAccountSkuConversionStatus.startTime, utcDateTime, "csharp");
-@@alternateType(StorageAccountSkuConversionStatus.endTime, utcDateTime, "csharp");
+@@alternateType(StorageAccountSkuConversionStatus.startTime,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(StorageAccountSkuConversionStatus.endTime,
+  utcDateTime,
+  "csharp"
+);
 
 // Fix UpdateHistoryEntry.TenantId: old SDK had Guid?
 @@alternateType(UpdateHistoryProperty.tenantId, uuid, "csharp");
