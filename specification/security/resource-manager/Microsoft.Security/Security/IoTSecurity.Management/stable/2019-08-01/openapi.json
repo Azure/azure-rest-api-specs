@@ -2344,7 +2344,7 @@
           "description": "List of Azure subscription ids on which the user defined resources query should be executed.",
           "x-nullable": true,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/UserDefinedResourcesPropertiesConstrainedString"
           }
         }
       },
@@ -2352,6 +2352,10 @@
         "query",
         "querySubscriptions"
       ]
+    },
+    "UserDefinedResourcesPropertiesConstrainedString": {
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
     },
     "ValueType": {
       "type": "string",

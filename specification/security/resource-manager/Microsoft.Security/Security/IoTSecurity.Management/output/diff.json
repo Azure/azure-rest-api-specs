@@ -437,6 +437,10 @@
         }
       }
     },
+    "UserDefinedResourcesPropertiesConstraintedStr__added": {
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+    },
     "ActiveConnectionsNotInAllowedRange": {
       "properties__deleted": {},
       "x-ms-discriminator-value__added": "ActiveConnectionsNotInAllowedRange"
@@ -890,7 +894,9 @@
       "properties": {
         "querySubscriptions": {
           "items": {
-            "pattern__deleted": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+            "type__deleted": "string",
+            "pattern__deleted": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+            "$ref__added": "#/definitions/UserDefinedResourcesPropertiesConstraintedStr"
           }
         }
       }

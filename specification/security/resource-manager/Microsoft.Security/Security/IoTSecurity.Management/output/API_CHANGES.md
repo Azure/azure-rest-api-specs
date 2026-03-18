@@ -11,6 +11,7 @@
 | `definitions.IoTSecuritySolutionAnalyticsModelProperties.properties.topAlertedDevices.$ref__deleted` | deleted | `#/definitions/IoTSecurityAlertedDevicesList` |
 | `definitions.IoTSecuritySolutionProperties.properties.recommendationsConfiguration.$ref__deleted` | deleted | `#/definitions/RecommendationConfigurationList` |
 | `definitions.UpdateIoTSecuritySolutionProperties.properties.recommendationsConfiguration.$ref__deleted` | deleted | `#/definitions/RecommendationConfigurationList` |
+| `definitions.UserDefinedResourcesProperties.properties.querySubscriptions.items.$ref__added` | added | `#/definitions/UserDefinedResourcesPropertiesConstraintedStr` |
 | `paths['/{resourceId}/providers/microsoft.Security/deviceSecurityGroups'].get.parameters[0].$ref__deleted` | deleted | `./common/v1/types.json#/parameters/ResourceId` |
 
 ### Changes for `name`
@@ -44,6 +45,7 @@
 | `definitions.IoTSecuritySolutionAnalyticsModelProperties.properties.metrics.type__deleted` | deleted | `object` |
 | `definitions.IoTSecuritySolutionProperties.properties.recommendationsConfiguration.type__added` | added | `array` |
 | `definitions.UpdateIoTSecuritySolutionProperties.properties.recommendationsConfiguration.type__added` | added | `array` |
+| `definitions.UserDefinedResourcesProperties.properties.querySubscriptions.items.type__deleted` | deleted | `string` |
 | `paths['/{resourceId}/providers/microsoft.Security/deviceSecurityGroups'].get.parameters[0].type__added` | added | `string` |
 
 ### Changes for `x-ms-skip-url-encoding`
@@ -105,6 +107,12 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.IoTSecuritySolutionAnalyticsModelPropertiesDevicesMetricsItem__added` | added | `{"type":"object","properties":{"date":{"type":"string","format":"date-time","description":"Aggregati...` |
+
+### Changes for `UserDefinedResourcesPropertiesConstraintedStr`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.UserDefinedResourcesPropertiesConstraintedStr__added` | added | `{"type":"string","pattern":"^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"}` |
 
 ### Changes for `properties`
 

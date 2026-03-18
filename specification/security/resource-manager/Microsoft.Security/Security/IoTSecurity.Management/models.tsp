@@ -898,9 +898,11 @@ model UserDefinedResourcesProperties {
    * List of Azure subscription ids on which the user defined resources query should be executed.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  querySubscriptions: string[] | null;
+  querySubscriptions: UserDefinedResourcesPropertiesConstrainedString[] | null;
 }
 
+@pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
+scalar UserDefinedResourcesPropertiesConstrainedString extends string;
 /**
  * The type of IoT Security recommendation.
  */
