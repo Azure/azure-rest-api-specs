@@ -198,3 +198,8 @@ model TimeZoneType {}
 @@scope(Conversations.getConversationItem, "!(java)");
 @@scope(Conversations.deleteConversationItem, "!(java)");
 @@scope(Conversations.listConversationItems, "!(java)");
+
+// Rename and moving listAgentConversations to Agents subclient, so we prevent having a Conversation subclient 
+// of our own, to prevent confusion.
+@@clientName(Conversations.listConversations, "listAgentConversations", "java");
+@@clientLocation(Conversations.listConversations, Agents);
