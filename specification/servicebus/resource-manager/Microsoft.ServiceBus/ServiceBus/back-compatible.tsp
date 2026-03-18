@@ -102,7 +102,7 @@ using Microsoft.ServiceBus;
   "parameters"
 );
 @@clientLocation(SBAuthorizationRules.deleteAuthorizationRule, "Namespaces");
-@@clientLocation(SBAuthorizationRules.listAuthorizationRules, "Namespaces");
+@@clientLocation(SBAuthorizationRules.listAuthorizationRules, "Namespaces", "!csharp");
 @@clientLocation(SBAuthorizationRules.listKeys, "Namespaces");
 @@clientLocation(SBAuthorizationRules.regenerateKeys, "Namespaces");
 @@clientName(SBAuthorizationRules.regenerateKeys::parameters.body,

@@ -70,6 +70,9 @@ using Microsoft.ServiceBus;
 @@clientName(ProvisioningIssueProperties, "ServiceBusNspConfigurationProvisioningIssueProperties", "csharp");
 @@clientName(FailOver, "ServiceBusNamespaceFailOver", "csharp");
 @@clientName(SBNamespaces.privateLinkResourcesGet, "GetPrivateLinkResources", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(SBNamespaces.privateLinkResourcesGet, "csharp");
 @@clientName(NWRuleSetIpRules.ipMask, "IPMask", "csharp");
 @@clientName(CorrelationFilter.properties, "ApplicationProperties", "csharp");
 @@clientName(CorrelationFilter.to, "SendTo", "csharp");
@@ -95,6 +98,8 @@ using Microsoft.ServiceBus;
 // Step 6: Fix property names (MembersMustExist)
 @@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
 @@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState, "ConnectionState", "csharp");
+@@clientName(PrivateEndpointConnection, "ServiceBusPrivateEndpointConnection", "csharp");
+@@clientName(NamespaceFailoverProperties, "FailoverProperties", "csharp");
 
 // Step 6: Fix property types to ResourceIdentifier (MembersMustExist)
 @@alternateType(Subnet.id, armResourceIdentifier, "csharp");
