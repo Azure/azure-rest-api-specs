@@ -20,4 +20,10 @@ output-folder: $(python-sdks-folder)/storage/azure-mgmt-storagecache/azure/mgmt/
 ``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
+
+directive:
+  - from: stable/2026-01-01/amlfilesystem.json
+    where: $.definitions.AmlFilesystem.properties.currentStorageCapacityTiB
+    transform: >-
+      $["x-ms-client-name"] = "current_storage_capacity_tib";
 ```
