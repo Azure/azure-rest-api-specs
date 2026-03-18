@@ -11,6 +11,7 @@ describe("array", () => {
       return item === 1 || index === 1;
     });
 
+    // TODO: revert
     expect(result).toEqual([1, 1]);
   });
 
