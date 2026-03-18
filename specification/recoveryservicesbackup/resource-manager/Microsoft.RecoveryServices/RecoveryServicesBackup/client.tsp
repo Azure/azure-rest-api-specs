@@ -226,6 +226,38 @@ using Http;
 @@clientName(Microsoft.RecoveryServices.AzureVMResourceFeatureSupportRequest, "VmResourceFeatureSupportContent", "csharp");
 @@clientName(Microsoft.RecoveryServices.AzureVMResourceFeatureSupportResponse, "VmResourceFeatureSupportResult", "csharp");
 
+// ===== Resource type renames (generates Collection/Data/Resource triples) =====
+@@clientName(Microsoft.RecoveryServices.BackupEngineBaseResource, "BackupEngineResource", "csharp");
+@@clientName(Microsoft.RecoveryServices.JobResource, "BackupJobResource", "csharp");
+@@clientName(Microsoft.RecoveryServices.PrivateEndpointConnectionResource, "BackupPrivateEndpointConnectionResource", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectedItemResource, "BackupProtectedItemResource", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectionContainerResource, "BackupProtectionContainerResource", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectionIntentResource, "BackupProtectionIntentResource", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProtectionPolicyResource, "BackupProtectionPolicyResource", "csharp");
+@@clientName(Microsoft.RecoveryServices.RecoveryPointResource, "BackupRecoveryPointResource", "csharp");
+@@clientName(Microsoft.RecoveryServices.ResourceGuardProxyBaseResource, "ResourceGuardProxyResource", "csharp");
+
+// ===== Enum/union type renames =====
+@@clientName(Microsoft.RecoveryServices.EncryptionAtRestType, "BackupEncryptionAtRestType", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureFileShareType, "BackupFileShareType", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupEngineBase, "BackupGenericEngine", "csharp");
+@@clientName(Microsoft.RecoveryServices.ProvisioningState, "BackupPrivateEndpointConnectionProvisioningState", "csharp");
+@@clientName(Microsoft.RecoveryServices.StorageType, "BackupStorageType", "csharp");
+@@clientName(Microsoft.RecoveryServices.StorageTypeState, "BackupStorageTypeState", "csharp");
+@@clientName(Microsoft.RecoveryServices.ValidationStatus, "BackupValidationStatus", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadType, "BackupWorkloadType", "csharp");
+@@clientName(Microsoft.RecoveryServices.CopyOptions, "FileShareCopyOption", "csharp");
+@@clientName(Microsoft.RecoveryServices.RecoveryType, "FileShareRecoveryType", "csharp");
+@@clientName(Microsoft.RecoveryServices.RestoreRequestType, "FileShareRestoreType", "csharp");
+@@clientName(Microsoft.RecoveryServices.IAASVMPolicyType, "IaasVmPolicyType", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMSnapshotConsistencyType, "IaasVmSnapshotConsistencyType", "csharp");
+@@clientName(Microsoft.RecoveryServices.OverwriteOptions, "RestoreOverwriteOption", "csharp");
+@@clientName(Microsoft.RecoveryServices.PolicyType, "SubProtectionPolicyType", "csharp");
+@@clientName(Microsoft.RecoveryServices.DedupState, "VaultDedupState", "csharp");
+@@clientName(Microsoft.RecoveryServices.XcoolState, "VaultXcoolState", "csharp");
+@@clientName(Microsoft.RecoveryServices.SupportStatus, "VmResourceFeatureSupportStatus", "csharp");
+@@clientName(Microsoft.RecoveryServices.OperationType, "WorkloadOperationType", "csharp");
+
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   "Client",
   "go"
