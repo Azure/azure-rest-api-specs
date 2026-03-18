@@ -25,6 +25,12 @@ model PolicyEnrollment
     SegmentName = "policyEnrollments",
     NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
   >;
+
+  /**
+   * The ETag for the policy enrollment.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  eTag?: Azure.Core.eTag;
 }
 
 alias PolicyEnrollmentListParameters = {

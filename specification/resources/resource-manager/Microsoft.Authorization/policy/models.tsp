@@ -1403,7 +1403,6 @@ model PolicyExemptionUpdateProperties {
  * The policy enrollment properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-@added(Versions.v2025_12_01_preview)
 @added(Versions.v2026_01_01_preview)
 model PolicyEnrollmentProperties {
   /**
@@ -1453,7 +1452,6 @@ model PolicyEnrollmentProperties {
 /**
  * The policy enrollment for Patch request.
  */
-@added(Versions.v2025_12_01_preview)
 @added(Versions.v2026_01_01_preview)
 model PolicyEnrollmentUpdate {
   /**
@@ -1465,7 +1463,6 @@ model PolicyEnrollmentUpdate {
 /**
  * The policy enrollment properties for Patch request.
  */
-@added(Versions.v2025_12_01_preview)
 @added(Versions.v2026_01_01_preview)
 model PolicyEnrollmentUpdateProperties {
   /**
