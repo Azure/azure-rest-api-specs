@@ -31,25 +31,19 @@ interface DatabaseAdvancedThreatProtections {
   /**
    * Gets a database's Advanced Threat Protection state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("DatabaseAdvancedThreatProtectionSettings")
-  @operationId("DatabaseAdvancedThreatProtectionSettings_Get")
   get is ArmResourceRead<DatabaseAdvancedThreatProtection>;
 
   /**
    * Creates or updates a database's Advanced Threat Protection state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("DatabaseAdvancedThreatProtectionSettings")
-  @operationId("DatabaseAdvancedThreatProtectionSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<DatabaseAdvancedThreatProtection>;
 
   /**
    * Gets a list of database's Advanced Threat Protection states.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("DatabaseAdvancedThreatProtectionSettings")
-  @operationId("DatabaseAdvancedThreatProtectionSettings_ListByDatabase")
   listByDatabase is ArmResourceListByParent<DatabaseAdvancedThreatProtection>;
 }
 

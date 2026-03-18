@@ -84,9 +84,7 @@ interface JobAgents {
   /**
    * Lists all executions in a job agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("JobExecutions")
-  @operationId("JobExecutions_ListByAgent")
   @list
   @get
   @action("executions")

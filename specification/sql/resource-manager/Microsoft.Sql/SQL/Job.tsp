@@ -53,9 +53,7 @@ interface Jobs {
   /**
    * Starts an elastic job execution.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("JobExecutions")
-  @operationId("JobExecutions_Create")
   @action("start")
   create is ArmResourceActionAsync<Job, void, Response = JobExecution>;
 }

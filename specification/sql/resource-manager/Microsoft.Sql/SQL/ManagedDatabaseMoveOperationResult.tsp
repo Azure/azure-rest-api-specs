@@ -51,17 +51,13 @@ interface ManagedDatabaseMoveOperationResults {
   /**
    * Gets a managed database move operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseMoveOperations")
-  @operationId("ManagedDatabaseMoveOperations_Get")
   get is ManagedDatabaseMoveOperationResultsOps.Read<ManagedDatabaseMoveOperationResult>;
 
   /**
    * Lists managed database move operations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseMoveOperations")
-  @operationId("ManagedDatabaseMoveOperations_ListByLocation")
   listByLocation is ManagedDatabaseMoveOperationResultsOps.List<
     ManagedDatabaseMoveOperationResult,
     Parameters = {

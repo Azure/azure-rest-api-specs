@@ -76,9 +76,7 @@ interface ManagedDatabases {
   /**
    * List managed database columns
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseColumns")
-  @operationId("ManagedDatabaseColumns_ListByDatabase")
   @list
   @get
   @action("columns")
@@ -168,9 +166,7 @@ interface ManagedDatabases {
   /**
    * Gets a list of security events.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseSecurityEvents")
-  @operationId("ManagedDatabaseSecurityEvents_ListByDatabase")
   @list
   @get
   @action("securityEvents")
@@ -208,9 +204,7 @@ interface ManagedDatabases {
   /**
    * Gets the sensitivity labels of a given database
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseSensitivityLabels")
-  @operationId("ManagedDatabaseSensitivityLabels_ListCurrentByDatabase")
   @list
   @get
   @action("currentSensitivityLabels")
@@ -238,9 +232,7 @@ interface ManagedDatabases {
   /**
    * Update sensitivity labels of a given database using an operations batch.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseSensitivityLabels")
-  @operationId("ManagedDatabaseSensitivityLabels_Update")
   @patch
   @action("currentSensitivityLabels")
   managedDatabaseSensitivityLabelsUpdate is ArmResourceActionSync<
@@ -252,9 +244,7 @@ interface ManagedDatabases {
   /**
    * Gets the sensitivity labels of a given database
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseSensitivityLabels")
-  @operationId("ManagedDatabaseSensitivityLabels_ListRecommendedByDatabase")
   @list
   @get
   @action("recommendedSensitivityLabels")
@@ -284,9 +274,7 @@ interface ManagedDatabases {
   /**
    * Update recommended sensitivity labels states of a given database using an operations batch.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseSensitivityLabels")
-  @operationId("ManagedDatabaseRecommendedSensitivityLabels_Update")
   @patch
   @action("recommendedSensitivityLabels")
   managedDatabaseRecommendedSensitivityLabelsUpdate is ArmResourceActionSync<
@@ -298,9 +286,7 @@ interface ManagedDatabases {
   /**
    * Gets the sensitivity labels of a given database
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseSensitivityLabels")
-  @operationId("ManagedDatabaseSensitivityLabels_ListByDatabase")
   @list
   @get
   @action("sensitivityLabels")

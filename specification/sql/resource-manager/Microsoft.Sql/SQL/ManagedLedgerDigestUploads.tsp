@@ -31,18 +31,14 @@ interface ManagedLedgerDigestUploadsOperationGroup {
   /**
    * Gets the current ledger digest upload configuration for a database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedLedgerDigestUploads")
-  @operationId("ManagedLedgerDigestUploads_Get")
   get is ArmResourceRead<ManagedLedgerDigestUploads>;
 
   /**
    * Enables upload ledger digests to an Azure Storage account or an Azure Confidential Ledger instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @tag("ManagedLedgerDigestUploads")
-  @operationId("ManagedLedgerDigestUploads_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedLedgerDigestUploads,
     Response = ArmResourceUpdatedResponse<ManagedLedgerDigestUploads> | ArmAcceptedLroResponse,
@@ -53,17 +49,13 @@ interface ManagedLedgerDigestUploadsOperationGroup {
   /**
    * Gets all ledger digest upload settings on a database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedLedgerDigestUploads")
-  @operationId("ManagedLedgerDigestUploads_ListByDatabase")
   listByDatabase is ArmResourceListByParent<ManagedLedgerDigestUploads>;
 
   /**
    * Disables uploading ledger digests to an Azure Storage account or an Azure Confidential Ledger instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedLedgerDigestUploads")
-  @operationId("ManagedLedgerDigestUploads_Disable")
   disable is ArmResourceActionAsync<
     ManagedLedgerDigestUploads,
     void,

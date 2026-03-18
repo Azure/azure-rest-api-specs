@@ -120,9 +120,7 @@ interface ManagedInstances {
   /**
    * Gets a list of inaccessible managed databases in a managed instance
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabases")
-  @operationId("ManagedDatabases_ListInaccessibleByInstance")
   @list
   @get
   @action("inaccessibleManagedDatabases")
@@ -272,18 +270,14 @@ interface ManagedInstances {
   /**
    * Creates a TDE certificate for a given server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedInstanceTdeCertificates")
-  @operationId("ManagedInstanceTdeCertificates_Create")
   @action("tdeCertificates")
   create is ArmResourceActionAsync<ManagedInstance, TdeCertificate, OkResponse>;
 
   /**
    * Gets a server trust groups by instance name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ServerTrustGroups")
-  @operationId("ServerTrustGroups_ListByInstance")
   @list
   @get
   @action("serverTrustGroups")

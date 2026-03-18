@@ -209,18 +209,14 @@ interface LongTermRetentionBackupOperationGroup {
   /**
    * Gets a long term retention backup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_GetByResourceGroup")
   getByResourceGroup is LongTermRetentionBackupOperationGroupOps.Read<LongTermRetentionBackup>;
 
   /**
    * Deletes a long term retention backup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_DeleteByResourceGroup")
   deleteByResourceGroup is LongTermRetentionBackupOperationGroupOps.DeleteWithoutOkAsync<
     LongTermRetentionBackup,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse
@@ -229,9 +225,7 @@ interface LongTermRetentionBackupOperationGroup {
   /**
    * Lists all long term retention backups for a database based on a particular resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_ListByResourceGroupDatabase")
   listByResourceGroupDatabase is LongTermRetentionBackupOperationGroupOps.List<
     LongTermRetentionBackup,
     Parameters = {
@@ -253,9 +247,7 @@ interface LongTermRetentionBackupOperationGroup {
   /**
    * Change a long term retention backup access tier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_ChangeAccessTierByResourceGroup")
   @action("changeAccessTier")
   changeAccessTierByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
@@ -267,9 +259,7 @@ interface LongTermRetentionBackupOperationGroup {
   /**
    * Copy an existing long term retention backup to a different server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_CopyByResourceGroup")
   @action("copy")
   copyByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
@@ -281,9 +271,7 @@ interface LongTermRetentionBackupOperationGroup {
   /**
    * Lock time based immutability of an existing long term retention backup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_LockTimeBasedImmutabilityByResourceGroup")
   @action("lockTimeBasedImmutability")
   lockTimeBasedImmutabilityByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
@@ -295,9 +283,7 @@ interface LongTermRetentionBackupOperationGroup {
   /**
    * Remove legal hold immutability of an existing long term retention backup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_RemoveLegalHoldImmutabilityByResourceGroup")
   @action("removeLegalHoldImmutability")
   removeLegalHoldImmutabilityByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
@@ -309,9 +295,7 @@ interface LongTermRetentionBackupOperationGroup {
   /**
    * Remove time based immutability of an existing long term retention backup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_RemoveTimeBasedImmutabilityByResourceGroup")
   @action("removeTimeBasedImmutability")
   removeTimeBasedImmutabilityByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
@@ -323,9 +307,7 @@ interface LongTermRetentionBackupOperationGroup {
   /**
    * Set legal hold immutability of an existing long term retention backup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_SetLegalHoldImmutabilityByResourceGroup")
   @action("setLegalHoldImmutability")
   setLegalHoldImmutabilityByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,
@@ -337,9 +319,7 @@ interface LongTermRetentionBackupOperationGroup {
   /**
    * Updates an existing long term retention backup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_UpdateByResourceGroup")
   @action("update")
   updateByResourceGroup is LongTermRetentionBackupOperationGroupOps.ActionAsync<
     LongTermRetentionBackup,

@@ -31,18 +31,14 @@ interface LogicalDatabaseTransparentDataEncryptions {
   /**
    * Gets a logical database's transparent data encryption.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("TransparentDataEncryptions")
-  @operationId("TransparentDataEncryptions_Get")
   get is ArmResourceRead<LogicalDatabaseTransparentDataEncryption>;
 
   /**
    * Updates a logical database's transparent data encryption configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @tag("TransparentDataEncryptions")
-  @operationId("TransparentDataEncryptions_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     LogicalDatabaseTransparentDataEncryption,
@@ -55,17 +51,13 @@ interface LogicalDatabaseTransparentDataEncryptions {
   /**
    * Gets a list of the logical database's transparent data encryption.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("TransparentDataEncryptions")
-  @operationId("TransparentDataEncryptions_ListByDatabase")
   listByDatabase is ArmResourceListByParent<LogicalDatabaseTransparentDataEncryption>;
 
   /**
    * Resume ongoing logical database's Transparent Data Encryption scan configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("TransparentDataEncryptions")
-  @operationId("TransparentDataEncryptions_Resume")
   resume is ArmResourceActionAsync<
     LogicalDatabaseTransparentDataEncryption,
     void,
@@ -75,9 +67,7 @@ interface LogicalDatabaseTransparentDataEncryptions {
   /**
    * Suspend ongoing logical database's Transparent Data Encryption scan configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("TransparentDataEncryptions")
-  @operationId("TransparentDataEncryptions_Suspend")
   suspend is ArmResourceActionAsync<
     LogicalDatabaseTransparentDataEncryption,
     void,

@@ -31,25 +31,19 @@ interface ManagedDatabaseAdvancedThreatProtections {
   /**
    * Gets a managed database's Advanced Threat Protection state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseAdvancedThreatProtectionSettings")
-  @operationId("ManagedDatabaseAdvancedThreatProtectionSettings_Get")
   get is ArmResourceRead<ManagedDatabaseAdvancedThreatProtection>;
 
   /**
    * Creates or updates a managed database's Advanced Threat Protection state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseAdvancedThreatProtectionSettings")
-  @operationId("ManagedDatabaseAdvancedThreatProtectionSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ManagedDatabaseAdvancedThreatProtection>;
 
   /**
    * Gets a list of managed database's Advanced Threat Protection states.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseAdvancedThreatProtectionSettings")
-  @operationId("ManagedDatabaseAdvancedThreatProtectionSettings_ListByDatabase")
   listByDatabase is ArmResourceListByParent<ManagedDatabaseAdvancedThreatProtection>;
 }
 

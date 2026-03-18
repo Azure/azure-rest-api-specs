@@ -31,9 +31,7 @@ interface MaintenanceWindowOptionsOperationGroup {
   /**
    * Gets a list of available maintenance windows.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("MaintenanceWindowOptions")
-  @operationId("MaintenanceWindowOptions_Get")
   get is ArmResourceRead<
     MaintenanceWindowOptions,
     Parameters = {

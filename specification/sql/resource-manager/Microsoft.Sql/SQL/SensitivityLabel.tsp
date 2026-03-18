@@ -77,9 +77,7 @@ interface SensitivityLabels {
   /**
    * Gets the sensitivity label of a given column
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseSensitivityLabels")
-  @operationId("ManagedDatabaseSensitivityLabels_Get")
   get is SensitivityLabelOps.Read<
     SensitivityLabel,
     Parameters = {
@@ -94,9 +92,7 @@ interface SensitivityLabels {
   /**
    * Creates or updates the sensitivity label of a given column
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseSensitivityLabels")
-  @operationId("ManagedDatabaseSensitivityLabels_CreateOrUpdate")
   createOrUpdate is SensitivityLabelOps.CreateOrUpdateSync<
     SensitivityLabel,
     Parameters = {
@@ -111,10 +107,8 @@ interface SensitivityLabels {
   /**
    * Deletes the sensitivity label of a given column
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @tag("ManagedDatabaseSensitivityLabels")
-  @operationId("ManagedDatabaseSensitivityLabels_Delete")
   delete is SensitivityLabelOps.DeleteSync<
     SensitivityLabel,
     Response = ArmDeletedResponse,
@@ -130,9 +124,7 @@ interface SensitivityLabels {
   /**
    * Disables sensitivity recommendations on a given column
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseSensitivityLabels")
-  @operationId("ManagedDatabaseSensitivityLabels_DisableRecommendation")
   @action("disable")
   disableRecommendation is SensitivityLabelOps.ActionSync<
     SensitivityLabel,
@@ -150,9 +142,7 @@ interface SensitivityLabels {
   /**
    * Enables sensitivity recommendations on a given column (recommendations are enabled by default on all columns)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedDatabaseSensitivityLabels")
-  @operationId("ManagedDatabaseSensitivityLabels_EnableRecommendation")
   @action("enable")
   enableRecommendation is SensitivityLabelOps.ActionSync<
     SensitivityLabel,
@@ -212,9 +202,7 @@ interface SensitivityLabelOperationGroup {
   /**
    * Gets the sensitivity label of a given column
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("SensitivityLabels")
-  @operationId("SensitivityLabels_Get")
   get is SensitivityLabelOperationGroupOps.Read<
     SensitivityLabel,
     Parameters = {
@@ -229,9 +217,7 @@ interface SensitivityLabelOperationGroup {
   /**
    * Creates or updates the sensitivity label of a given column
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("SensitivityLabels")
-  @operationId("SensitivityLabels_CreateOrUpdate")
   createOrUpdate is SensitivityLabelOperationGroupOps.CreateOrUpdateSync<
     SensitivityLabel,
     Parameters = {
@@ -246,10 +232,8 @@ interface SensitivityLabelOperationGroup {
   /**
    * Deletes the sensitivity label of a given column
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @tag("SensitivityLabels")
-  @operationId("SensitivityLabels_Delete")
   delete is SensitivityLabelOperationGroupOps.DeleteSync<
     SensitivityLabel,
     Response = ArmDeletedResponse,
@@ -265,9 +249,7 @@ interface SensitivityLabelOperationGroup {
   /**
    * Disables sensitivity recommendations on a given column
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("SensitivityLabels")
-  @operationId("SensitivityLabels_DisableRecommendation")
   @action("disable")
   disableRecommendation is SensitivityLabelOperationGroupOps.ActionSync<
     SensitivityLabel,
@@ -285,9 +267,7 @@ interface SensitivityLabelOperationGroup {
   /**
    * Enables sensitivity recommendations on a given column (recommendations are enabled by default on all columns)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("SensitivityLabels")
-  @operationId("SensitivityLabels_EnableRecommendation")
   @action("enable")
   enableRecommendation is SensitivityLabelOperationGroupOps.ActionSync<
     SensitivityLabel,

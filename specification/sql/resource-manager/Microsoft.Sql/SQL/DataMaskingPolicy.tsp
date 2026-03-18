@@ -105,9 +105,7 @@ interface DataMaskingPolicies {
   /**
    * Gets a list of database data masking rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("DataMaskingRules")
-  @operationId("DataMaskingRules_ListByDatabase")
   @list
   @get
   @action("rules")
@@ -120,9 +118,7 @@ interface DataMaskingPolicies {
   /**
    * Creates or updates a database data masking rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("DataMaskingRules")
-  @operationId("DataMaskingRules_CreateOrUpdate")
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}")
   dataMaskingRulesCreateOrUpdate is DataMaskingPoliciesOps.ActionSync<

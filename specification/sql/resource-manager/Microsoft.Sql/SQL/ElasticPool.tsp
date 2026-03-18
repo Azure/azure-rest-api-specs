@@ -102,9 +102,7 @@ interface ElasticPools {
   /**
    * Gets a list of databases in an elastic pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("Databases")
-  @operationId("Databases_ListByElasticPool")
   @list
   @get
   @action("databases")
@@ -117,9 +115,7 @@ interface ElasticPools {
   /**
    * Gets a list of operations performed on the elastic pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ElasticPoolOperations")
-  @operationId("ElasticPoolOperations_ListByElasticPool")
   @list
   @get
   @action("operations")
@@ -132,9 +128,7 @@ interface ElasticPools {
   /**
    * Cancels the asynchronous operation on the elastic pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ElasticPoolOperations")
-  @operationId("ElasticPoolOperations_Cancel")
   cancel is ArmResourceActionSync<
     ElasticPool,
     void,

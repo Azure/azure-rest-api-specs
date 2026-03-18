@@ -19,9 +19,7 @@ interface DeletedServersOperationGroup {
   /**
    * Gets a list of all deleted servers in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("DeletedServers")
-  @operationId("DeletedServers_List")
   @autoRoute
   @get
   @action("deletedServers")
@@ -38,9 +36,7 @@ interface CapabilitiesOperationGroup {
   /**
    * Gets the subscription capabilities available for the specified location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LocationCapabilities")
-  @operationId("Capabilities_ListByLocation")
   @autoRoute
   @get
   @action("capabilities")
@@ -70,9 +66,7 @@ interface LongTermRetentionBackupsOperationGroup {
   /**
    * Lists the long term retention backups for a given location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_ListByLocation")
   @autoRoute
   @get
   @action("longTermRetentionBackups")
@@ -104,9 +98,7 @@ interface LongTermRetentionBackupsOperationGroup {
   /**
    * Lists the long term retention backups for a given server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_ListByServer")
   @autoRoute
   @get
   @action("longTermRetentionBackups")
@@ -145,9 +137,7 @@ interface LongTermRetentionBackupsOperationGroup {
   /**
    * Lists the long term retention backups for a given location based on resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_ListByResourceGroupLocation")
   @autoRoute
   @get
   @action("longTermRetentionBackups")
@@ -179,9 +169,7 @@ interface LongTermRetentionBackupsOperationGroup {
   /**
    * Lists the long term retention backups for a given server based on resource groups.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionBackups")
-  @operationId("LongTermRetentionBackups_ListByResourceGroupServer")
   @autoRoute
   @get
   @action("longTermRetentionBackups")
@@ -225,9 +213,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
   /**
    * Lists the long term retention backups for managed databases in a given location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionManagedInstanceBackups")
-  @operationId("LongTermRetentionManagedInstanceBackups_ListByLocation")
   @autoRoute
   @get
   @action("longTermRetentionManagedInstanceBackups")
@@ -277,9 +263,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
   /**
    * Lists the long term retention backups for a given managed instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionManagedInstanceBackups")
-  @operationId("LongTermRetentionManagedInstanceBackups_ListByInstance")
   @autoRoute
   @get
   @action("longTermRetentionManagedInstanceBackups")
@@ -318,9 +302,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
   /**
    * Lists the long term retention backups for managed databases in a given location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionManagedInstanceBackups")
-  @operationId("LongTermRetentionManagedInstanceBackups_ListByResourceGroupLocation")
   @autoRoute
   @get
   @action("longTermRetentionManagedInstanceBackups")
@@ -370,9 +352,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
   /**
    * Lists the long term retention backups for a given managed instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("LongTermRetentionManagedInstanceBackups")
-  @operationId("LongTermRetentionManagedInstanceBackups_ListByResourceGroupInstance")
   @autoRoute
   @get
   @action("longTermRetentionManagedInstanceBackups")
@@ -416,9 +396,7 @@ interface ServersOperationGroup {
   /**
    * Determines whether a resource can be created with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("Servers")
-  @operationId("Servers_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckNameAvailabilityRequest,
@@ -433,9 +411,7 @@ interface SyncGroupsOperationGroup {
   /**
    * Gets a collection of sync database ids.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("SyncGroups")
-  @operationId("SyncGroups_ListSyncDatabaseIds")
   @autoRoute
   @get
   @action("syncDatabaseIds")

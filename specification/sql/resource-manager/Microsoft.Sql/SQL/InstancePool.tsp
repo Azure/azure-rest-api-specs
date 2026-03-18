@@ -83,9 +83,7 @@ interface InstancePools {
   /**
    * Gets a list of all managed instances in an instance pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ManagedInstances")
-  @operationId("ManagedInstances_ListByInstancePool")
   @list
   @get
   @action("managedInstances")
@@ -105,9 +103,7 @@ interface InstancePools {
   /**
    * Gets all instance pool usage metrics
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("Usages")
-  @operationId("Usages_ListByInstancePool")
   @list
   @get
   @action("usages")

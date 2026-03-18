@@ -31,18 +31,14 @@ interface ServerAdvancedThreatProtections {
   /**
    * Get a server's Advanced Threat Protection state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ServerAdvancedThreatProtectionSettings")
-  @operationId("ServerAdvancedThreatProtectionSettings_Get")
   get is ArmResourceRead<ServerAdvancedThreatProtection>;
 
   /**
    * Creates or updates an Advanced Threat Protection state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @tag("ServerAdvancedThreatProtectionSettings")
-  @operationId("ServerAdvancedThreatProtectionSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerAdvancedThreatProtection,
     Response = ArmResourceUpdatedResponse<ServerAdvancedThreatProtection> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerAdvancedThreatProtection> &
@@ -52,9 +48,7 @@ interface ServerAdvancedThreatProtections {
   /**
    * Get a list of the server's Advanced Threat Protection states.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ServerAdvancedThreatProtectionSettings")
-  @operationId("ServerAdvancedThreatProtectionSettings_ListByServer")
   listByServer is ArmResourceListByParent<
     ServerAdvancedThreatProtection,
     Response = LogicalServerAdvancedThreatProtectionListResult

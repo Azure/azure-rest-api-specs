@@ -116,9 +116,7 @@ interface Servers {
   /**
    * Gets a list of inaccessible databases in a logical server
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("Databases")
-  @operationId("Databases_ListInaccessibleByServer")
   @list
   @get
   @action("inaccessibleDatabases")
@@ -131,9 +129,7 @@ interface Servers {
   /**
    * Replaces all firewall rules on the server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("FirewallRules")
-  @operationId("FirewallRules_Replace")
   @put
   @action("firewallRules")
   replace is ArmResourceActionSync<
@@ -145,9 +141,7 @@ interface Servers {
   /**
    * Gets a list of replication links.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ReplicationLinks")
-  @operationId("ReplicationLinks_ListByServer")
   @list
   @get
   @action("replicationLinks")
@@ -160,9 +154,7 @@ interface Servers {
   /**
    * Gets a list of operations performed on the server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ServerOperations")
-  @operationId("ServerOperations_ListByServer")
   @list
   @get
   @action("operations")
@@ -197,9 +189,7 @@ interface Servers {
   /**
    * Gets server usages.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("ServerUsages")
-  @operationId("ServerUsages_ListByServer")
   @list
   @get
   @action("usages")
@@ -212,9 +202,7 @@ interface Servers {
   /**
    * Creates a TDE certificate for a given server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("TdeCertificates")
-  @operationId("TdeCertificates_Create")
   @action("tdeCertificates")
   create is ArmResourceActionAsync<Server, TdeCertificate, OkResponse>;
 }
