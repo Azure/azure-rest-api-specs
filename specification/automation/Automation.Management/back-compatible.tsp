@@ -407,10 +407,7 @@ using Microsoft.Automation;
 @@clientLocation(Runbooks.listByAutomationAccount, "Runbook");
 @@clientLocation(Runbooks.getContent, "RunbookDraft");
 @@clientLocation(Runbooks.replaceContent, "RunbookDraft");
-@@clientName(Runbooks.replaceContent::parameters.body,
-  "runbookContent",
-  "!javascript"
-);
+@@clientName(Runbooks.replaceContent::parameters.body, "runbookContent");
 @@clientLocation(Runbooks.runbookDraftGet, "RunbookDraft");
 @@clientName(Runbooks.runbookDraftGet, "Get");
 @@clientLocation(Runbooks.undoEdit, "RunbookDraft");
