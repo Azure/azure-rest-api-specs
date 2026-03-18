@@ -100,7 +100,21 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: PrivateLinks.Management
+tag: SecureScore.Managment
+```
+
+### Composite packages
+
+The following packages may be composed from multiple api-versions.
+
+
+### Tag: SecureScore.Managment
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'SecureScore.Managment'
+input-file:
+  - stable/2020-01-01/secureScore.json
 ```
 
 ### Composite packages
