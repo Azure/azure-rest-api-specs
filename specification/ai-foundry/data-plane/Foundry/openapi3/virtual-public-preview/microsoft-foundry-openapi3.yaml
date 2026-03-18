@@ -5235,6 +5235,12 @@ paths:
                       description: |-
                         (Deprecated) Use agent_reference instead.
                         The agent to use for generating the response.
+                    agent_session_id:
+                      type: string
+                      description: |-
+                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
+                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
+                        conversation_id/prev_response_id or a new UUID is generated.
                     agent_reference:
                       allOf:
                         - $ref: '#/components/schemas/AgentReference'
@@ -5243,12 +5249,6 @@ paths:
                       type: object
                       additionalProperties: {}
                       description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
-                    agent_session_id:
-                      type: string
-                      description: |-
-                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
-                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
-                        conversation_id/prev_response_id or a new UUID is generated.
                 - type: object
                   properties:
                     metadata:
@@ -5379,6 +5379,12 @@ paths:
                       description: |-
                         (Deprecated) Use agent_reference instead.
                         The agent to use for generating the response.
+                    agent_session_id:
+                      type: string
+                      description: |-
+                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
+                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
+                        conversation_id/prev_response_id or a new UUID is generated.
                     agent_reference:
                       allOf:
                         - $ref: '#/components/schemas/AgentReference'
@@ -5387,12 +5393,6 @@ paths:
                       type: object
                       additionalProperties: {}
                       description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
-                    agent_session_id:
-                      type: string
-                      description: |-
-                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
-                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
-                        conversation_id/prev_response_id or a new UUID is generated.
     get:
       operationId: listResponses
       description: Returns the list of all responses.
@@ -22331,12 +22331,6 @@ components:
           description: |-
             (Deprecated) Use agent_reference instead.
             The agent used for this response
-        agent_reference:
-          type: object
-          allOf:
-            - $ref: '#/components/schemas/AgentReference'
-          nullable: true
-          description: The agent used for this response
         agent_session_id:
           type: string
           description: |-
@@ -22344,6 +22338,12 @@ components:
             Always returned for hosted agents — either the caller-provided value, the auto-derived value,
             or an auto-generated UUID. Use for session-scoped operations and to maintain sandbox
             affinity in follow-up calls.
+        agent_reference:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/AgentReference'
+          nullable: true
+          description: The agent used for this response
       title: The response object
     OpenAI.ResponseAudioDeltaEvent:
       type: object
