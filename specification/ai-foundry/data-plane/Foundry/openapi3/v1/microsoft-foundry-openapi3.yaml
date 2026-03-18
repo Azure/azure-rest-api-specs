@@ -31,7 +31,11 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
+            anyOf:
+              - $ref: '#/components/schemas/AgentDefinitionOptInKeys'
+              - type: string
+                enum:
+                  - AgentEndpoints=V1Preview
         - name: api-version
           in: query
           required: true
@@ -319,7 +323,11 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
+            anyOf:
+              - $ref: '#/components/schemas/AgentDefinitionOptInKeys'
+              - type: string
+                enum:
+                  - AgentEndpoints=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -5397,6 +5405,7 @@ paths:
         conditional_previews:
           - Toolsets=V1Preview
 security:
+  - ApiKeyAuth: []
   - OAuth2Auth:
       - https://ai.azure.com/.default
 components:
@@ -26350,6 +26359,10 @@ components:
       type: integer
       format: int64
   securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: api-key
     OAuth2Auth:
       type: oauth2
       flows:
