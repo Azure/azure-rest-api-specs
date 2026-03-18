@@ -83,11 +83,6 @@ using Microsoft.HealthcareApis;
   "checkNameAvailabilityInputs"
 );
 
-@@clientName(Azure.ResourceManager.Foundations.ManagedServiceIdentity,
-  "ServiceManagedIdentityIdentity",
-  "go"
-);
-
 @@clientLocation(DicomServiceOperationGroup.delete, "DicomServices");
 @@clientLocation(DicomServiceOperationGroup.update, "DicomServices");
 @@clientLocation(FhirServiceOperationGroup.delete, "FhirServices");
