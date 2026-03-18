@@ -276,7 +276,7 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: search.json
     where: $.definitions["OfferingsListResult"]
-    reason: OfferingsListResult is a list/result container, not an ARM resource; it intentionally does not include readOnly 'name', 'id', 'type'.
+    reason: Temporary suppression for a known API shape issue. This Offerings_List API returns non-resource objects without id, name, type, which is not ARM RPC-compliant. A fix (moving to an action-style API) is committed for the next preview release as a breaking change before GA.
   - code: PatchBodyParametersSchema
     from: search.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}"].patch.parameters[5].schema.properties.properties
