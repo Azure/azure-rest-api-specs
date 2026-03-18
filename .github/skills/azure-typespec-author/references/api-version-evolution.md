@@ -1,6 +1,6 @@
 # API Version Evolution — Reference
 
-**MUST NOT** call `azsdk_typespec_generate_authoring_plan` for version evolution tasks.
+**MUST NOT** call `azsdk_typespec_generate_authoring_plan` for API Version Evolution tasks.
 
 ---
 
@@ -18,6 +18,12 @@ Search using [agentic search](agentic-search.md) in below documents to determine
 
 ---
 
-## Step 3: Retrieve Solution
+## Step 3: Retrieve Authoring Plan
 
-Build an implementation plan from the fetched guide. Follow its rules for carried-over features and excluded features.
+
+1. Build an authoring plan from the fetched guide. Follow its rules for carried-over features and excluded features.
+
+2. Set up example folder: Copy all `.json` files from the latest version's `examples/` folder into `{project-root}/{version-status}/{target-version}/examples/`, e.g. from 
+`stable/2021-11-01/examples` to `preview/2024-02-01-preview/examples`. Create folder if necessary and update example content if necessary, e.g. api-version should be updated.
+
+3. update readme.md.
