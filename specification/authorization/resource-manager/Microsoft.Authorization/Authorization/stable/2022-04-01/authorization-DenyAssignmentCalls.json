@@ -243,47 +243,6 @@
         }
       }
     },
-    "/{denyAssignmentId}": {
-      "get": {
-        "tags": [
-          "DenyAssignments"
-        ],
-        "operationId": "DenyAssignments_GetById",
-        "description": "Gets a deny assignment by ID.",
-        "parameters": [
-          {
-            "name": "denyAssignmentId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The fully qualified deny assignment ID. For example, use the format, /subscriptions/{guid}/providers/Microsoft.Authorization/denyAssignments/{denyAssignmentId} for subscription level deny assignments, or /providers/Microsoft.Authorization/denyAssignments/{denyAssignmentId} for tenant level deny assignments.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns the deny assignment.",
-            "schema": {
-              "$ref": "#/definitions/DenyAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get deny assignment by ID": {
-            "$ref": "./examples/GetDenyAssignmentById.json"
-          }
-        }
-      }
-    },
     "/{scope}/providers/Microsoft.Authorization/denyAssignments": {
       "get": {
         "tags": [

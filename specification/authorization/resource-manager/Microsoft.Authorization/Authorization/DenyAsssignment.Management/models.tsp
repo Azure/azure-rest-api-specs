@@ -1,0 +1,171 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
+namespace Microsoft.Authorization;
+
+/**
+ * Deny assignment properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model DenyAssignmentProperties {
+  /**
+   * The display name of the deny assignment.
+   */
+  denyAssignmentName?: string;
+
+  /**
+   * The description of the deny assignment.
+   */
+  description?: string;
+
+  /**
+   * An array of permissions that are denied by the deny assignment.
+   */
+  @identifiers(#[])
+  permissions?: DenyAssignmentPermission[];
+
+  /**
+   * The deny assignment scope.
+   */
+  scope?: string;
+
+  /**
+   * Determines if the deny assignment applies to child scopes. Default value is false.
+   */
+  doNotApplyToChildScopes?: boolean;
+
+  /**
+   * Array of principals to which the deny assignment applies.
+   */
+  principals?: Principal[];
+
+  /**
+   * Array of principals to which the deny assignment does not apply.
+   */
+  excludePrincipals?: Principal[];
+
+  /**
+   * Specifies whether this deny assignment was created by Azure and cannot be edited or deleted.
+   */
+  isSystemProtected?: boolean;
+
+  @doc("The conditions on the deny assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'")
+  condition?: string;
+
+  /**
+   * Version of the condition.
+   */
+  conditionVersion?: string;
+
+  /**
+   * Time it was created
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdOn?: utcDateTime;
+
+  /**
+   * Time it was updated
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  updatedOn?: utcDateTime;
+
+  /**
+   * Id of the user who created the assignment
+   */
+  @visibility(Lifecycle.Read)
+  createdBy?: string;
+
+  /**
+   * Id of the user who updated the assignment
+   */
+  @visibility(Lifecycle.Read)
+  updatedBy?: string;
+}
+
+/**
+ * Deny assignment permissions.
+ */
+model DenyAssignmentPermission {
+  /**
+   * Actions to which the deny assignment does not grant access.
+   */
+  actions?: string[];
+
+  /**
+   * Actions to exclude from that the deny assignment does not grant access.
+   */
+  notActions?: string[];
+
+  /**
+   * Data actions to which the deny assignment does not grant access.
+   */
+  dataActions?: string[];
+
+  /**
+   * Data actions to exclude from that the deny assignment does not grant access.
+   */
+  notDataActions?: string[];
+
+  /**
+   * The conditions on the Deny assignment permission. This limits the resources it applies to.
+   */
+  condition?: string;
+
+  /**
+   * Version of the condition.
+   */
+  conditionVersion?: string;
+}
+
+/**
+ * The name of the entity last modified it
+ */
+model Principal {
+  /**
+   * The id of the principal made changes
+   */
+  id?: string;
+
+  /**
+   * The name of the principal made changes
+   */
+  displayName?: string;
+
+  /**
+   * Type of principal such as user , group etc
+   */
+  type?: string;
+
+  /**
+   * Email of principal
+   */
+  email?: string;
+}
+
+/**
+ * Deny Assignments filter
+ */
+model DenyAssignmentFilter {
+  /**
+   * Return deny assignment with specified name.
+   */
+  denyAssignmentName?: string;
+
+  /**
+   * Return all deny assignments where the specified principal is listed in the principals list of deny assignments.
+   */
+  principalId?: string;
+
+  /**
+   * Return all deny assignments where the specified principal is listed either in the principals list or exclude principals list of deny assignments.
+   */
+  gdprExportPrincipalId?: string;
+}

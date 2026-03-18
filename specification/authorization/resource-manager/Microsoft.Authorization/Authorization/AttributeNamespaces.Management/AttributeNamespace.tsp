@@ -1,0 +1,60 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Authorization;
+// FIXME: AttributeNamespace has no properties property
+/**
+ * An attribute namespace resource.
+ */
+@tenantResource
+model AttributeNamespace is Azure.ResourceManager.ProxyResource<{}> {
+  ...ResourceNameParameter<
+    Resource = AttributeNamespace,
+    KeyName = "attributeNamespace",
+    SegmentName = "attributeNamespaces",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface AttributeNamespaces {
+  /**
+   * Gets the specified attribute namespace.
+   */
+  get is ArmResourceRead<
+    AttributeNamespace,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+
+  /**
+   * Deletes the specified attribute namespace.
+   */
+  delete is ArmResourceDeleteSync<
+    AttributeNamespace,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+
+  /**
+   * Creates a new attribute namespace.
+   */
+  @action("action")
+  create is ArmResourceActionSync<
+    AttributeNamespace,
+    AttributeNamespaceCreateRequest,
+    ArmResponse<AttributeNamespace>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+}
+
+@@doc(AttributeNamespace.name, "The name of the attribute namespace to get.");
+@@doc(AttributeNamespaces.create::parameters.body,
+  "Parameters for creating the attribute namespace."
+);

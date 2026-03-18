@@ -1,0 +1,58 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Authorization;
+/**
+ * Alert configuration.
+ */
+@extensionResource
+model AlertConfiguration
+  is Azure.ResourceManager.ExtensionResource<AlertConfigurationProperties> {
+  ...ResourceNameParameter<
+    Resource = AlertConfiguration,
+    KeyName = "alertId",
+    SegmentName = "roleManagementAlertConfigurations",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface AlertConfigurations {
+  /**
+   * Get the specified alert configuration.
+   */
+  get is Extension.Read<Extension.ScopeParameter, AlertConfiguration>;
+
+  /**
+   * Update an alert configuration.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is Extension.CustomPatchSync<
+    Extension.ScopeParameter,
+    AlertConfiguration,
+    PatchModel = AlertConfiguration,
+    Response = ArmNoContentResponse
+  >;
+
+  /**
+   * Gets alert configurations for a resource scope.
+   */
+  listForScope is Extension.ListByTarget<
+    Extension.ScopeParameter,
+    AlertConfiguration
+  >;
+}
+
+@@doc(AlertConfiguration.name, "The name of the alert configuration to get.");
+@@doc(AlertConfiguration.properties, "Alert configuration properties.");
+@@doc(AlertConfigurations.update::parameters.properties,
+  "Parameters for the alert configuration."
+);
