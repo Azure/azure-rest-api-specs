@@ -35,7 +35,7 @@ interface ServerTrustCertificates {
   /**
    * Uploads a server trust certificate from SQL Server to SQL Managed Instance.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerTrustCertificate,
     Response = ArmResourceUpdatedResponse<ServerTrustCertificate> | ArmResourceCreatedResponse<
@@ -48,7 +48,7 @@ interface ServerTrustCertificates {
   /**
    * Deletes a server trust certificate that was uploaded from SQL Server to SQL Managed Instance.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerTrustCertificate,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

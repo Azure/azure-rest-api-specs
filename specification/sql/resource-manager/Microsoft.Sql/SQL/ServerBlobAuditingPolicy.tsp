@@ -58,7 +58,7 @@ interface ServerBlobAuditingPolicies {
   /**
    * Creates or updates a server's blob auditing policy.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("BlobAuditing")
   createOrUpdate is ServerBlobAuditingPoliciesOps.CreateOrUpdateAsync<
     ServerBlobAuditingPolicy,

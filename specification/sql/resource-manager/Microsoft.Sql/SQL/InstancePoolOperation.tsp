@@ -38,7 +38,7 @@ interface InstancePoolOperations {
   listByInstancePool is ArmResourceListByParent<InstancePoolOperation>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-format"
+#suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@format(InstancePoolOperation.name, "uuid");
 @@doc(InstancePoolOperation.name, "");
 @@doc(InstancePoolOperation.properties, "Resource properties.");

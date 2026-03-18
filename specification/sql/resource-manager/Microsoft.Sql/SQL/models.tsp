@@ -27,7 +27,7 @@ union DiffBackupIntervalInHours {
   `24`: 24,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ShortTermRetentionPolicyName {
   string,
 
@@ -64,7 +64,7 @@ union CreatedByType {
   Key: "Key",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AdvancedThreatProtectionName {
   string,
 
@@ -350,7 +350,7 @@ union TableTemporalType {
   SystemVersionedTemporalTable: "SystemVersionedTemporalTable",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union EncryptionProtectorName {
   string,
 
@@ -894,7 +894,7 @@ union AvailabilityZoneType {
   `3`: "3",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ReplicaType {
   string,
 
@@ -909,7 +909,7 @@ union ReplicaType {
   ReadableSecondary: "ReadableSecondary",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union DatabaseSecurityAlertPolicyName {
   string,
 
@@ -919,7 +919,7 @@ union DatabaseSecurityAlertPolicyName {
   default: "default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union VulnerabilityAssessmentName {
   string,
 
@@ -929,7 +929,7 @@ union VulnerabilityAssessmentName {
   default: "default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union BaselineName {
   string,
 
@@ -939,7 +939,7 @@ union BaselineName {
   default: "default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union SqlVulnerabilityAssessmentName {
   string,
 
@@ -1074,7 +1074,7 @@ union VulnerabilityAssessmentScanState {
   InProgress: "InProgress",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union DataMaskingPolicyName {
   string,
 
@@ -1084,7 +1084,7 @@ union DataMaskingPolicyName {
   Default: "Default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union DataWarehouseUserActivityName {
   string,
 
@@ -1376,7 +1376,7 @@ union FailoverGroupDatabasesSecondaryType {
   Standby: "Standby",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union GeoBackupPolicyName {
   string,
 
@@ -1670,7 +1670,7 @@ union JobStepOutputType {
   SqlDatabase: "SqlDatabase",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union LedgerDigestUploadsName {
   string,
 
@@ -1680,7 +1680,7 @@ union LedgerDigestUploadsName {
   current: "current",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union CapabilityGroup {
   string,
 
@@ -1830,7 +1830,7 @@ union StorageCapabilityStorageAccountType {
   GZRS: "GZRS",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union DatabaseState {
   string,
 
@@ -1918,7 +1918,7 @@ union BackupStorageAccessTier {
   Archive: "Archive",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union LongTermRetentionPolicyName {
   string,
 
@@ -1970,7 +1970,7 @@ union DayOfWeek {
   Saturday: "Saturday",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ManagedShortTermRetentionPolicyName {
   string,
 
@@ -2041,7 +2041,7 @@ union QueryMetricUnitType {
   count: "count",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union RestoreDetailsName {
   string,
 
@@ -2172,7 +2172,7 @@ union InaccessibilityReason {
   DatabaseReplication: "DatabaseReplication",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ManagedDatabaseSecurityAlertPolicyName {
   string,
 
@@ -2182,7 +2182,7 @@ union ManagedDatabaseSecurityAlertPolicyName {
   default: "default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ClientClassificationSource {
   string,
 
@@ -2207,7 +2207,7 @@ union ClientClassificationSource {
   MIP: "MIP",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union TransparentDataEncryptionName {
   string,
 
@@ -2229,7 +2229,7 @@ union ManagedInstanceAdministratorType {
   ActiveDirectory: "ActiveDirectory",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AdministratorName {
   string,
 
@@ -2239,7 +2239,7 @@ union AdministratorName {
   ActiveDirectory: "ActiveDirectory",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AuthenticationName {
   string,
 
@@ -2249,7 +2249,7 @@ union AuthenticationName {
   Default: "Default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union DtcName {
   string,
 
@@ -2259,7 +2259,7 @@ union DtcName {
   current: "current",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ManagedInstanceLongTermRetentionPolicyName {
   string,
 
@@ -2269,7 +2269,7 @@ union ManagedInstanceLongTermRetentionPolicyName {
   default: "default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union UpsertManagedServerOperationStepWithEstimatesAndDurationStatus {
   string,
 
@@ -2554,7 +2554,7 @@ union ManagedInstanceDatabaseFormat {
   SQLServer2025: "SQLServer2025",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AggregationFunctionType {
   string,
 
@@ -2584,7 +2584,7 @@ union AggregationFunctionType {
   sum: "sum",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union MetricType {
   string,
 
@@ -2631,7 +2631,7 @@ union ManagedLedgerDigestUploadsState {
   Disabled: "Disabled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ManagedLedgerDigestUploadsName {
   string,
 
@@ -2641,7 +2641,7 @@ union ManagedLedgerDigestUploadsName {
   current: "current",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ManagedServerSecurityAlertPolicyName {
   string,
 
@@ -2710,7 +2710,7 @@ union PrivateLinkServiceConnectionStateActionsRequire {
 /**
  * State of the private endpoint connection.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union PrivateEndpointProvisioningState {
   string,
 
@@ -2789,7 +2789,7 @@ union ReplicationLinkType {
   STANDBY: "STANDBY",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ServerConfigurationOptionName {
   string,
 
@@ -2821,7 +2821,7 @@ union ServerConnectionType {
   Proxy: "Proxy",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ConnectionPolicyName {
   string,
 
@@ -2831,7 +2831,7 @@ union ConnectionPolicyName {
   default: "default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union DevOpsAuditingSettingsName {
   string,
 
@@ -2946,7 +2946,7 @@ union ServerCreateMode {
   Restore: "Restore",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union SecurityAlertPolicyName {
   string,
 
@@ -2956,7 +2956,7 @@ union SecurityAlertPolicyName {
   Default: "Default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ServerTrustGroupPropertiesTrustScopesItem {
   string,
 
@@ -2988,7 +2988,7 @@ union SqlAgentConfigurationPropertiesState {
   Disabled: "Disabled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StartStopScheduleName {
   string,
 
@@ -3086,7 +3086,7 @@ union SyncGroupState {
   Good: "Good",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union SyncGroupsType {
   string,
 
@@ -3356,7 +3356,7 @@ union VirtualNetworkRuleState {
 /**
  * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum BlobAuditingPolicyState {
   /**
    * Enabled
@@ -3372,7 +3372,7 @@ enum BlobAuditingPolicyState {
 /**
  * Specifies the state of the Advanced Threat Protection, whether it is enabled or disabled or a state has not been applied yet on the specific database or server.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AdvancedThreatProtectionState {
   /**
    * New
@@ -3393,7 +3393,7 @@ enum AdvancedThreatProtectionState {
 /**
  * Gets the status of availability of this advisor to customers. Possible values are 'GA', 'PublicPreview', 'LimitedPublicPreview' and 'PrivatePreview'.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AdvisorStatus {
   /**
    * GA
@@ -3419,7 +3419,7 @@ enum AdvisorStatus {
 /**
  * Gets the auto-execute status (whether to let the system execute the recommendations) of this advisor. Possible values are 'Enabled' and 'Disabled'
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AutoExecuteStatus {
   /**
    * Enabled
@@ -3440,7 +3440,7 @@ enum AutoExecuteStatus {
 /**
  * Gets the resource from which current value of auto-execute status is inherited. Auto-execute status can be set on (and inherited from) different levels in the resource hierarchy. Possible values are 'Subscription', 'Server', 'ElasticPool', 'Database' and 'Default' (when status is not explicitly set on any level).
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AutoExecuteStatusInheritedFrom {
   /**
    * Default
@@ -3471,7 +3471,7 @@ enum AutoExecuteStatusInheritedFrom {
 /**
  * Gets if approval for applying this recommended action was given by user/system.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum RecommendedActionInitiatedBy {
   /**
    * User
@@ -3487,7 +3487,7 @@ enum RecommendedActionInitiatedBy {
 /**
  * Gets the method in which this recommended action can be manually implemented. e.g., TSql, AzurePowerShell.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ImplementationMethod {
   /**
    * TSql
@@ -3503,7 +3503,7 @@ enum ImplementationMethod {
 /**
  * Gets whether the error could be ignored and recommended action could be retried. Possible values are: Yes/No
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum IsRetryable {
   /**
    * Yes
@@ -3519,7 +3519,7 @@ enum IsRetryable {
 /**
  * Automatic tuning desired state.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AutomaticTuningMode {
   /**
    * Inherit
@@ -3545,7 +3545,7 @@ enum AutomaticTuningMode {
 /**
  * Automatic tuning option desired state.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AutomaticTuningOptionModeDesired {
   /**
    * Off
@@ -3566,7 +3566,7 @@ enum AutomaticTuningOptionModeDesired {
 /**
  * Automatic tuning option actual state.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AutomaticTuningOptionModeActual {
   /**
    * Off
@@ -3582,7 +3582,7 @@ enum AutomaticTuningOptionModeActual {
 /**
  * Reason description if desired and actual state are different.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AutomaticTuningDisabledReason {
   /**
    * Default
@@ -3623,7 +3623,7 @@ enum AutomaticTuningDisabledReason {
 /**
  * Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SecurityAlertsPolicyState {
   /**
    * Enabled
@@ -3639,7 +3639,7 @@ enum SecurityAlertsPolicyState {
 /**
  * Specifies the state of the SQL Vulnerability Assessment, whether it is enabled or disabled or a state has not been applied yet on the specific database or server.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SqlVulnerabilityAssessmentState {
   /**
    * Enabled
@@ -3652,8 +3652,8 @@ enum SqlVulnerabilityAssessmentState {
   Disabled,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum VulnerabilityAssessmentPolicyBaselineName {
   /**
    * master
@@ -3669,7 +3669,7 @@ enum VulnerabilityAssessmentPolicyBaselineName {
 /**
  * The state of the data masking policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DataMaskingState {
   /**
    * Enabled
@@ -3685,7 +3685,7 @@ enum DataMaskingState {
 /**
  * The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DataMaskingRuleState {
   /**
    * Enabled
@@ -3701,7 +3701,7 @@ enum DataMaskingRuleState {
 /**
  * The masking function that is used for the data masking rule.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DataMaskingFunction {
   /**
    * Default
@@ -3737,7 +3737,7 @@ enum DataMaskingFunction {
 /**
  * The state of the geo backup policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum GeoBackupPolicyState {
   /**
    * Enabled
@@ -3753,7 +3753,7 @@ enum GeoBackupPolicyState {
 /**
  * Schedule interval type
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum JobScheduleType {
   /**
    * Once
@@ -3769,7 +3769,7 @@ enum JobScheduleType {
 /**
  * Whether the target is included or excluded from the group.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum JobTargetGroupMembershipType {
   /**
    * Include
@@ -3785,7 +3785,7 @@ enum JobTargetGroupMembershipType {
 /**
  * Specifies the state of ledger digest upload.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum LedgerDigestUploadsState {
   /**
    * Enabled
@@ -3801,7 +3801,7 @@ enum LedgerDigestUploadsState {
 /**
  * The status of the capability.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum CapabilityStatus {
   /**
    * Visible
@@ -3827,7 +3827,7 @@ enum CapabilityStatus {
 /**
  * Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SecurityAlertPolicyState {
   /**
    * New
@@ -3848,7 +3848,7 @@ enum SecurityAlertPolicyState {
 /**
  * The type of the security event.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SecurityEventType {
   /**
    * Undefined
@@ -3866,8 +3866,8 @@ enum SecurityEventType {
   SqlInjectionExploit,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SensitivityLabelRank {
   /**
    * None
@@ -3895,8 +3895,8 @@ enum SensitivityLabelRank {
   Critical,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SensitivityLabelUpdateKind {
   /**
    * set
@@ -3909,8 +3909,8 @@ enum SensitivityLabelUpdateKind {
   remove,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum RecommendedSensitivityLabelUpdateKind {
   /**
    * enable
@@ -3923,8 +3923,8 @@ enum RecommendedSensitivityLabelUpdateKind {
   disable,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SensitivityLabelSource {
   /**
    * current
@@ -3937,8 +3937,8 @@ enum SensitivityLabelSource {
   recommended,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum CurrentSensitivityLabelSource {
   /**
    * current
@@ -3946,8 +3946,8 @@ enum CurrentSensitivityLabelSource {
   current,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum RecommendedSensitivityLabelSource {
   /**
    * recommended
@@ -3955,8 +3955,8 @@ enum RecommendedSensitivityLabelSource {
   recommended,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum BlobAuditingPolicyName {
   /**
    * default
@@ -3964,8 +3964,8 @@ enum BlobAuditingPolicyName {
   default,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum VulnerabilityAssessmentSystemDatabaseName {
   /**
    * master
@@ -3976,7 +3976,7 @@ enum VulnerabilityAssessmentSystemDatabaseName {
 /**
  * Specifies the state of the transparent data encryption.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum TransparentDataEncryptionState {
   /**
    * Enabled
@@ -3992,7 +3992,7 @@ enum TransparentDataEncryptionState {
 /**
  * Local replication role.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ReplicationRole {
   /**
    * Primary
@@ -4023,7 +4023,7 @@ enum ReplicationRole {
 /**
  * The type of restore point
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum RestorePointType {
   /**
    * CONTINUOUS
@@ -4039,7 +4039,7 @@ enum RestorePointType {
 /**
  * Automatic tuning desired state.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AutomaticTuningServerMode {
   /**
    * Custom
@@ -4060,7 +4060,7 @@ enum AutomaticTuningServerMode {
 /**
  * Reason description if desired and actual state are different.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AutomaticTuningServerReason {
   /**
    * Default
@@ -4081,7 +4081,7 @@ enum AutomaticTuningServerReason {
 /**
  * The reason code explaining why the name is unavailable. Will be undefined if the name is available.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum CheckNameAvailabilityReason {
   /**
    * Invalid
@@ -4097,7 +4097,7 @@ enum CheckNameAvailabilityReason {
 /**
  * Properties of a short term retention policy
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BackupShortTermRetentionPolicyProperties {
   /**
    * The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
@@ -4114,7 +4114,7 @@ model BackupShortTermRetentionPolicyProperties {
  * ARM proxy resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProxyResource extends Resource {}
 
 /**
@@ -4144,7 +4144,7 @@ model Resource {
 /**
  * Properties of a server blob auditing policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerBlobAuditingPolicyProperties {
   /**
    * Specifies the state of devops audit. If state is Enabled, devops logs will be sent to Azure Monitor.
@@ -4288,7 +4288,7 @@ model ServerBlobAuditingPolicyProperties {
   /**
    * Specifies the blob storage subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   storageAccountSubscriptionId?: string;
 }
@@ -4296,7 +4296,7 @@ model ServerBlobAuditingPolicyProperties {
 /**
  * Properties of a database blob auditing policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseBlobAuditingPolicyProperties {
   /**
    * Specifies the number of days to keep in the audit logs in the storage account.
@@ -4425,7 +4425,7 @@ model DatabaseBlobAuditingPolicyProperties {
   /**
    * Specifies the blob storage subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   storageAccountSubscriptionId?: string;
 }
@@ -4433,7 +4433,7 @@ model DatabaseBlobAuditingPolicyProperties {
 /**
  * Properties of an extended database blob auditing policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExtendedDatabaseBlobAuditingPolicyProperties {
   /**
    * Specifies condition of where clause when creating an audit.
@@ -4567,7 +4567,7 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
   /**
    * Specifies the blob storage subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   storageAccountSubscriptionId?: string;
 }
@@ -4575,7 +4575,7 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
 /**
  * Properties of an extended server blob auditing policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExtendedServerBlobAuditingPolicyProperties {
   /**
    * Specifies the state of devops audit. If state is Enabled, devops logs will be sent to Azure Monitor.
@@ -4724,7 +4724,7 @@ model ExtendedServerBlobAuditingPolicyProperties {
   /**
    * Specifies the blob storage subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   storageAccountSubscriptionId?: string;
 }
@@ -4770,7 +4770,7 @@ model systemData {
 /**
  * Properties of an Advanced Threat Protection state.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AdvancedThreatProtectionProperties {
   /**
    * Specifies the state of the Advanced Threat Protection, whether it is enabled or disabled or a state has not been applied yet on the specific database or server.
@@ -4788,7 +4788,7 @@ model AdvancedThreatProtectionProperties {
 /**
  * Properties for a Database, Server or Elastic Pool Advisor.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AdvisorProperties {
   /**
    * Gets the status of availability of this advisor to customers. Possible values are 'GA', 'PublicPreview', 'LimitedPublicPreview' and 'PrivatePreview'.
@@ -4830,7 +4830,7 @@ model AdvisorProperties {
 /**
  * Properties for a Database, Server or Elastic Pool Recommended Action.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecommendedActionProperties {
   /**
    * Gets the reason for recommending this action. e.g., DuplicateIndex
@@ -4975,7 +4975,7 @@ model RecommendedActionProperties {
   /**
    * Gets additional details specific to this recommended action.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   details?: Record<string>;
 }
@@ -5111,7 +5111,7 @@ model RecommendedActionMetricInfo {
 /**
  * Database-level Automatic Tuning properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseAutomaticTuningProperties {
   /**
    * Automatic tuning desired state.
@@ -5127,7 +5127,7 @@ model DatabaseAutomaticTuningProperties {
   /**
    * Automatic tuning options definition.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: Record<AutomaticTuningOptions>;
 }
 
@@ -5162,7 +5162,7 @@ model AutomaticTuningOptions {
 /**
  * Database column properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseColumnProperties {
   /**
    * The column data type.
@@ -5188,12 +5188,12 @@ model DatabaseColumnProperties {
 /**
  * Contains the operation result properties for import/export operation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ImportExportExtensionsOperationResultProperties {
   /**
    * Request Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   requestId?: string;
@@ -5280,7 +5280,7 @@ model PrivateEndpointConnectionRequestStatus {
 /**
  * An Import, Export, or PolybaseImport resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseExtensions extends ProxyResource {
   /**
    * Resource properties.
@@ -5380,7 +5380,7 @@ model NetworkIsolationSettings {
 /**
  * A database operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseOperation extends ProxyResource {
   /**
    * Resource properties.
@@ -5498,7 +5498,7 @@ model PhaseDetails {
   /**
    * The operation phase information.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   phaseInformation?: Record<string>;
 }
@@ -5545,7 +5545,7 @@ model DatabaseIdentity {
   /**
    * The Azure Active Directory tenant id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
@@ -5553,7 +5553,7 @@ model DatabaseIdentity {
   /**
    * The resource ids of the user assigned identities to use
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<DatabaseUserIdentity>;
 }
 
@@ -5564,7 +5564,7 @@ model DatabaseUserIdentity {
   /**
    * The Azure Active Directory principal id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -5572,7 +5572,7 @@ model DatabaseUserIdentity {
   /**
    * The Azure Active Directory client id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   clientId?: string;
@@ -5581,7 +5581,7 @@ model DatabaseUserIdentity {
 /**
  * The database's properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseProperties {
   /**
    * Specifies the mode of database creation.
@@ -5646,7 +5646,7 @@ model DatabaseProperties {
   /**
    * The ID of the database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   databaseId?: string;
@@ -5829,14 +5829,14 @@ model DatabaseProperties {
   /**
    * The Client id used for cross tenant per database CMK scenario
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   federatedClientId?: string;
 
   /**
    * The resource ids of the user assigned identities to use
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   keys?: Record<DatabaseKey>;
 
   /**
@@ -5953,7 +5953,7 @@ model DatabaseKey {
 /**
  * ARM tracked top level resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TrackedResource extends Resource {
   /**
    * Resource location.
@@ -5964,7 +5964,7 @@ model TrackedResource extends Resource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -5991,7 +5991,7 @@ model DatabaseUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -6062,7 +6062,7 @@ model DatabaseUpdateProperties {
   /**
    * The ID of the database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   databaseId?: string;
@@ -6245,14 +6245,14 @@ model DatabaseUpdateProperties {
   /**
    * The Client id used for cross tenant per database CMK scenario
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   federatedClientId?: string;
 
   /**
    * The resource ids of the user assigned identities to use
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   keys?: Record<DatabaseKey>;
 
   /**
@@ -6358,7 +6358,7 @@ model ExportDatabaseDefinition {
 /**
  * An ImportExport operation result resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ImportExportOperationResult extends ProxyResource {
   /**
    * Resource properties.
@@ -6373,7 +6373,7 @@ model ImportExportOperationResultProperties {
   /**
    * Request Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   requestId?: string;
@@ -6495,7 +6495,7 @@ model ResourceMoveDefinition {
 /**
  * Properties of a security alert policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityAlertsPolicyProperties {
   /**
    * Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.
@@ -6544,19 +6544,19 @@ model SecurityAlertsPolicyProperties {
 /**
  * Properties of a database Sql Vulnerability Assessment baseline set.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseSqlVulnerabilityAssessmentBaselineSetProperties {
   /**
    * The baseline set result
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   results: Record<string[][]>;
 }
 
 /**
  * A database sql vulnerability assessment rule baseline list input.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseSqlVulnerabilityAssessmentRuleBaselineListInput
   extends ProxyResource {
   /**
@@ -6583,14 +6583,14 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineListInputProperties {
   /**
    * The rule baseline result list
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   results: Record<string[][]>;
 }
 
 /**
  * Properties of a database Sql Vulnerability Assessment rule baseline.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseSqlVulnerabilityAssessmentRuleBaselineProperties {
   /**
    * The rule baseline result
@@ -6602,7 +6602,7 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineProperties {
 /**
  * A database sql vulnerability assessment rule baseline input.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseSqlVulnerabilityAssessmentRuleBaselineInput
   extends ProxyResource {
   /**
@@ -6636,7 +6636,7 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineInputProperties {
 /**
  * SQL Vulnerability Assessment scan result properties for a single rule.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlVulnerabilityAssessmentScanResultProperties {
   /**
    * SQL Vulnerability Assessment rule Id.
@@ -6871,7 +6871,7 @@ model BenchmarkReference {
 /**
  * Properties of a vulnerability assessment scan record.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlVulnerabilityAssessmentScanRecordProperties {
   /**
    * The scan ID.
@@ -6997,8 +6997,8 @@ model SqlVulnerabilityAssessmentScanError {
   message?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlVulnerabilityAssessmentPolicyProperties {
   /**
    * Specifies the state of the SQL Vulnerability Assessment, whether it is enabled or disabled or a state has not been applied yet on the specific database or server.
@@ -7009,7 +7009,7 @@ model SqlVulnerabilityAssessmentPolicyProperties {
 /**
  * Database table properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseTableProperties {
   /**
    * The table temporal type.
@@ -7025,7 +7025,7 @@ model DatabaseTableProperties {
 /**
  * Usage metric of a database.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseUsage extends ProxyResource {
   /**
    * Resource properties.
@@ -7065,7 +7065,7 @@ model DatabaseUsageProperties {
 /**
  * Properties of a database Vulnerability Assessment rule baseline.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseVulnerabilityAssessmentRuleBaselineProperties {
   /**
    * The rule baseline result
@@ -7087,7 +7087,7 @@ model DatabaseVulnerabilityAssessmentRuleBaselineItem {
 /**
  * Properties of a database Vulnerability Assessment.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseVulnerabilityAssessmentProperties {
   /**
    * A blob storage container path to hold the scan results (e.g. https://myStorage.blob.core.windows.net/VaScans/).  It is required if server level vulnerability assessment policy doesn't set
@@ -7138,7 +7138,7 @@ model VulnerabilityAssessmentRecurringScansProperties {
 /**
  * Properties of a vulnerability assessment scan record.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VulnerabilityAssessmentScanRecordProperties {
   /**
    * The scan ID.
@@ -7212,7 +7212,7 @@ model VulnerabilityAssessmentScanError {
 /**
  * A database Vulnerability Assessment scan export resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseVulnerabilityAssessmentScansExport extends ProxyResource {
   /**
    * Resource properties.
@@ -7234,7 +7234,7 @@ model DatabaseVulnerabilityAssessmentScanExportProperties {
 /**
  * The properties of a database data masking policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataMaskingPolicyProperties {
   /**
    * The state of the data masking policy.
@@ -7262,7 +7262,7 @@ model DataMaskingPolicyProperties {
 /**
  * A database data masking rule.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataMaskingRule extends ProxyResource {
   /**
    * The location of the data masking rule.
@@ -7351,7 +7351,7 @@ model DataMaskingRuleProperties {
 /**
  * User activities of a data warehouse. This currently includes the count of running or suspended queries. For more information, please view the sys.dm_pdw_exec_requests dynamic management view (DMV).
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataWarehouseUserActivitiesProperties {
   /**
    * Count of running and suspended queries.
@@ -7363,7 +7363,7 @@ model DataWarehouseUserActivitiesProperties {
 /**
  * The properties of a deleted server.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DeletedServerProperties {
   /**
    * The version of the deleted server.
@@ -7394,7 +7394,7 @@ model DeletedServerProperties {
 /**
  * The properties of a distributed availability group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DistributedAvailabilityGroupProperties {
   /**
    * Name of the distributed availability group
@@ -7405,7 +7405,7 @@ model DistributedAvailabilityGroupProperties {
   /**
    * ID of the distributed availability group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   distributedAvailabilityGroupId?: string;
@@ -7470,7 +7470,7 @@ model DistributedAvailabilityGroupDatabase {
   /**
    * Managed instance replica id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   instanceReplicaId?: string;
@@ -7478,7 +7478,7 @@ model DistributedAvailabilityGroupDatabase {
   /**
    * SQL server replica id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   partnerReplicaId?: string;
@@ -7646,7 +7646,7 @@ model DistributedAvailabilityGroupSetRole {
 /**
  * A elastic pool operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ElasticPoolOperation extends ProxyResource {
   /**
    * Resource properties.
@@ -7748,7 +7748,7 @@ model ElasticPoolOperationProperties {
 /**
  * Properties of an elastic pool
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ElasticPoolProperties {
   /**
    * The state of the elastic pool.
@@ -7851,7 +7851,7 @@ model ElasticPoolUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -7913,7 +7913,7 @@ model ElasticPoolUpdateProperties {
 /**
  * Properties for an encryption protector execution.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EncryptionProtectorProperties {
   /**
    * Subregion of the encryption protector.
@@ -7958,7 +7958,7 @@ model EncryptionProtectorProperties {
 /**
  * The properties of an endpoint certificate.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EndpointCertificateProperties {
   /**
    * The certificate public blob
@@ -7969,7 +7969,7 @@ model EndpointCertificateProperties {
 /**
  * Properties of a failover group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FailoverGroupProperties {
   /**
    * Read-write endpoint of the failover group instance.
@@ -8086,7 +8086,7 @@ model FailoverGroupUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8128,7 +8128,7 @@ model FailoverGroupUpdateProperties {
 /**
  * The properties of a server firewall rule.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerFirewallRuleProperties {
   /**
    * The start IP address of the firewall rule. Must be IPv4 format. Use value '0.0.0.0' for all Azure-internal IP addresses.
@@ -8145,7 +8145,7 @@ model ServerFirewallRuleProperties {
  * ARM proxy resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProxyResourceWithWritableName extends ResourceWithWritableName {}
 
 /**
@@ -8174,14 +8174,14 @@ model ResourceWithWritableName {
  * A list of server firewall rules.
  */
 model FirewallRuleList {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   values?: FirewallRule[];
 }
 
 /**
  * The properties of the geo backup policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GeoBackupPolicyProperties {
   /**
    * The state of the geo backup policy.
@@ -8198,7 +8198,7 @@ model GeoBackupPolicyProperties {
 /**
  * Properties of a instance failover group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InstanceFailoverGroupProperties {
   /**
    * Type of the geo-secondary instance. Set 'Standby' if the instance is used as a DR option only.
@@ -8300,7 +8300,7 @@ model ManagedInstancePairInfo {
 /**
  * The properties of a instance pool operation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InstancePoolOperationProperties {
   /**
    * The name of the instance pool the operation is being performed on.
@@ -8386,7 +8386,7 @@ model InstancePoolOperationProperties {
 /**
  * Properties of an instance pool.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InstancePoolProperties {
   /**
    * Resource ID of the subnet to place this instance pool in.
@@ -8437,14 +8437,14 @@ model InstancePoolUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * The properties of an IPv6 server firewall rule.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPv6ServerFirewallRuleProperties {
   /**
@@ -8467,7 +8467,7 @@ model JobAgentIdentity {
   /**
    * The job agent identity tenant id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   tenantId?: string;
 
@@ -8479,7 +8479,7 @@ model JobAgentIdentity {
   /**
    * The resource ids of the user assigned identities to use
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<JobAgentUserAssignedIdentity>;
 }
 
@@ -8490,7 +8490,7 @@ model JobAgentUserAssignedIdentity {
   /**
    * The Azure Active Directory principal id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -8498,7 +8498,7 @@ model JobAgentUserAssignedIdentity {
   /**
    * The Azure Active Directory client id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   clientId?: string;
@@ -8507,7 +8507,7 @@ model JobAgentUserAssignedIdentity {
 /**
  * Properties of a job agent.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobAgentProperties {
   /**
    * Resource ID of the database to store job metadata in.
@@ -8539,14 +8539,14 @@ model JobAgentUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * Properties of a job credential.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobCredentialProperties {
   /**
    * The credential user name.
@@ -8586,7 +8586,7 @@ model JobExecutionProperties {
   /**
    * The unique identifier of the job execution.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   jobExecutionId?: string;
@@ -8675,7 +8675,7 @@ model JobExecutionTarget {
 /**
  * Properties of job agent private endpoint.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobPrivateEndpointProperties {
   /**
    * ARM resource id of the server the private endpoint will target.
@@ -8696,7 +8696,7 @@ model JobPrivateEndpointProperties {
 /**
  * Properties of a job.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobProperties {
   /**
    * User-defined description of the job.
@@ -8750,7 +8750,7 @@ model JobSchedule {
 /**
  * Properties of a job step.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobStepProperties {
   /**
    * The job step's index within the job. If not specified when creating the job step, it will be created as the last step. If not specified when updating the job step, the step id is not modified.
@@ -8816,7 +8816,7 @@ model JobStepOutput {
   /**
    * The output destination subscription id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   subscriptionId?: string;
 
@@ -8885,7 +8885,7 @@ model JobStepExecutionOptions {
 /**
  * Properties of job target group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobTargetGroupProperties {
   /**
    * Members of the target group.
@@ -8938,7 +8938,7 @@ model JobTarget {
 /**
  * The properties of a database ledger digest upload settings.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LedgerDigestUploadsProperties {
   /**
    * The digest storage endpoint, which must be either an Azure blob storage endpoint or an URI for Azure Confidential Ledger.
@@ -9093,7 +9093,7 @@ model ServiceObjectiveCapability {
   /**
    * The unique ID of the service objective.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   id?: string;
@@ -10219,7 +10219,7 @@ model JobAgentServiceLevelObjectiveCapability {
 /**
  * Properties of a long term retention backup
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LongTermRetentionBackupProperties {
   /**
    * The server name that the backup database belong to.
@@ -10369,7 +10369,7 @@ model CopyLongTermRetentionBackupParametersProperties {
 /**
  * A LongTermRetentionBackup operation result resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LongTermRetentionBackupOperationResult extends ProxyResource {
   /**
    * Resource properties.
@@ -10384,7 +10384,7 @@ model LongTermRetentionOperationResultProperties {
   /**
    * Request Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   requestId?: string;
@@ -10450,7 +10450,7 @@ model UpdateLongTermRetentionBackupParametersProperties {
 /**
  * Properties of a long term retention backup
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstanceLongTermRetentionBackupProperties {
   /**
    * The managed instance that the backup database belongs to.
@@ -10508,7 +10508,7 @@ model ManagedInstanceLongTermRetentionBackupProperties {
 /**
  * Properties of a long term retention policy
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LongTermRetentionPolicyProperties {
   /**
    * The setting for whether to enable time-based immutability for future backups. When set, future backups will have TimeBasedImmutability enabled.
@@ -10544,7 +10544,7 @@ model LongTermRetentionPolicyProperties {
 /**
  * Maintenance window options properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MaintenanceWindowOptionsProperties {
   /**
    * Whether maintenance windows are enabled for the database.
@@ -10606,9 +10606,9 @@ model MaintenanceWindowTimeRange {
 /**
  * Maintenance windows resource properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MaintenanceWindowsProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeRanges?: MaintenanceWindowTimeRange[];
 }
@@ -10616,7 +10616,7 @@ model MaintenanceWindowsProperties {
 /**
  * Properties of a short term retention policy
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedBackupShortTermRetentionPolicyProperties {
   /**
    * The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
@@ -10627,7 +10627,7 @@ model ManagedBackupShortTermRetentionPolicyProperties {
 /**
  * Contains the operation result properties for managed database move operation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedDatabaseMoveOperationResultProperties {
   /**
    * The name of operation.
@@ -10730,7 +10730,7 @@ model ManagedDatabaseMoveOperationResultProperties {
 /**
  * Properties of a database query.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model QueryProperties {
   /**
    * Query text.
@@ -10743,8 +10743,8 @@ model QueryProperties {
  */
 model ManagedInstanceQueryStatistics is Azure.Core.Page<QueryStatistics>;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model QueryStatistics extends ProxyResource {
   /**
    * Resource properties.
@@ -10878,7 +10878,7 @@ model QueryMetricProperties {
 /**
  * The managed database's restore details properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedDatabaseRestoreDetailsProperties {
   /**
    * Restore type.
@@ -11079,7 +11079,7 @@ model ManagedDatabaseRestoreDetailsUnrestorableFileProperties {
 /**
  * The managed database's properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedDatabaseProperties {
   /**
    * Collation of the managed database.
@@ -11265,7 +11265,7 @@ model ManagedDatabaseUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -11307,7 +11307,7 @@ model ManagedDatabaseStartMoveDefinition {
 /**
  * Properties of a security alert policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityAlertPolicyProperties {
   /**
    * Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.
@@ -11361,7 +11361,7 @@ model SecurityEventCollection is Azure.Core.Page<SecurityEvent>;
 /**
  * A security event.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityEvent extends ProxyResource {
   /**
    * Resource properties.
@@ -11479,7 +11479,7 @@ model SecurityEventSqlInjectionAdditionalProperties {
 /**
  * Properties of a sensitivity label.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SensitivityLabelProperties {
   /**
    * The schema name.
@@ -11525,9 +11525,9 @@ model SensitivityLabelProperties {
   @visibility(Lifecycle.Read)
   isDisabled?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rank?: SensitivityLabelRank;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientClassificationSource?: ClientClassificationSource;
 }
 
@@ -11535,14 +11535,14 @@ model SensitivityLabelProperties {
  * A list of sensitivity label update operations.
  */
 model SensitivityLabelUpdateList {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   operations?: SensitivityLabelUpdate[];
 }
 
 /**
  * A sensitivity label update operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SensitivityLabelUpdate extends ProxyResource {
   /**
    * Resource properties.
@@ -11554,7 +11554,7 @@ model SensitivityLabelUpdate extends ProxyResource {
  * Properties of an operation executed on a sensitivity label.
  */
 model SensitivityLabelUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `op`: SensitivityLabelUpdateKind;
 
   /**
@@ -11582,14 +11582,14 @@ model SensitivityLabelUpdateProperties {
  * A list of recommended sensitivity label update operations.
  */
 model RecommendedSensitivityLabelUpdateList {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   operations?: RecommendedSensitivityLabelUpdate[];
 }
 
 /**
  * A recommended sensitivity label update operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecommendedSensitivityLabelUpdate extends ProxyResource {
   /**
    * Resource properties.
@@ -11601,7 +11601,7 @@ model RecommendedSensitivityLabelUpdate extends ProxyResource {
  * Properties of an operation executed on a recommended sensitivity label.
  */
 model RecommendedSensitivityLabelUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `op`: RecommendedSensitivityLabelUpdateKind;
 
   /**
@@ -11623,7 +11623,7 @@ model RecommendedSensitivityLabelUpdateProperties {
 /**
  * Properties of a transparent data encryption.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedTransparentDataEncryptionProperties {
   /**
    * Specifies the state of the transparent data encryption.
@@ -11634,7 +11634,7 @@ model ManagedTransparentDataEncryptionProperties {
 /**
  * The properties of a managed instance administrator.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstanceAdministratorProperties {
   /**
    * Type of the managed instance administrator.
@@ -11649,14 +11649,14 @@ model ManagedInstanceAdministratorProperties {
   /**
    * SID (object ID) of the managed instance administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   sid: string;
 
   /**
    * Tenant ID of the managed instance administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   tenantId?: string;
 }
@@ -11664,7 +11664,7 @@ model ManagedInstanceAdministratorProperties {
 /**
  * Properties of a active directory only authentication for Managed Instance.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstanceAzureADOnlyAuthProperties {
   /**
@@ -11759,7 +11759,7 @@ model ManagedInstanceDtcTransactionManagerCommunicationSettings {
 /**
  * Properties for an encryption protector execution.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstanceEncryptionProtectorProperties {
   /**
    * The name of the managed instance key.
@@ -11792,7 +11792,7 @@ model ManagedInstanceEncryptionProtectorProperties {
 /**
  * Properties for a key execution.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstanceKeyProperties {
   /**
    * The key type like 'ServiceManaged', 'AzureKeyVault'.
@@ -11829,7 +11829,7 @@ model ManagedInstanceKeyProperties {
 /**
  * Properties of a long term retention policy
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstanceLongTermRetentionPolicyProperties {
   /**
    * The BackupStorageAccessTier for the LTR backups
@@ -11860,7 +11860,7 @@ model ManagedInstanceLongTermRetentionPolicyProperties {
 /**
  * The properties of a managed instance operation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstanceOperationProperties {
   /**
    * The name of the managed instance the operation is being performed on.
@@ -11972,15 +11972,15 @@ model ManagedInstanceOperationParametersPair {
   requestedParameters?: UpsertManagedServerOperationParameters;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UpsertManagedServerOperationParameters {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   family?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tier?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vCores?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageSizeInGB?: int32;
 }
@@ -12008,23 +12008,23 @@ model ManagedInstanceOperationSteps {
   stepsList?: UpsertManagedServerOperationStepWithEstimatesAndDuration[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UpsertManagedServerOperationStepWithEstimatesAndDuration {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stepStartTime?: utcDateTime;
 
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stepEndTime?: utcDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeElapsed?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   order?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   status?: UpsertManagedServerOperationStepWithEstimatesAndDurationStatus;
 }
 
@@ -12045,12 +12045,12 @@ model ManagedInstancePrivateEndpointConnectionProperties {
   /**
    * State of the Private Endpoint Connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstancePrivateEndpointProperty {
   /**
    * Resource id of the private endpoint.
@@ -12058,7 +12058,7 @@ model ManagedInstancePrivateEndpointProperty {
   id?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstancePrivateLinkServiceConnectionStateProperty {
   /**
    * The private link service connection status.
@@ -12080,7 +12080,7 @@ model ManagedInstancePrivateLinkServiceConnectionStateProperty {
 /**
  * Properties of a private link resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstancePrivateLinkProperties {
   /**
    * The private link resource group id.
@@ -12108,13 +12108,13 @@ model ResourceIdentity {
   /**
    * The resource ids of the user assigned identities to use
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserIdentity>;
 
   /**
    * The Azure Active Directory principal id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -12127,7 +12127,7 @@ model ResourceIdentity {
   /**
    * The Azure Active Directory tenant id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
@@ -12140,7 +12140,7 @@ model UserIdentity {
   /**
    * The Azure Active Directory principal id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -12148,7 +12148,7 @@ model UserIdentity {
   /**
    * The Azure Active Directory client id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   clientId?: string;
@@ -12452,14 +12452,14 @@ model ManagedInstanceExternalAdministrator {
   /**
    * SID (object ID) of the server administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   sid?: string;
 
   /**
    * Tenant ID of the administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   tenantId?: string;
 
@@ -12520,7 +12520,7 @@ model ManagedInstanceUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -12580,7 +12580,7 @@ model EndpointDetail {
 /**
  * An RefreshExternalGovernanceStatus operation result resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RefreshExternalGovernanceStatusOperationResultMI extends ProxyResource {
   /**
@@ -12597,7 +12597,7 @@ model RefreshExternalGovernanceStatusOperationResultPropertiesMI {
   /**
    * Request Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   requestId?: string;
@@ -12638,7 +12638,7 @@ model RefreshExternalGovernanceStatusOperationResultPropertiesMI {
  */
 model TopQueriesListResult is Azure.Core.Page<TopQueries>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TopQueries {
   /**
    * Requested number of top queries.
@@ -12697,7 +12697,7 @@ model ManagedInstanceValidateAzureKeyVaultEncryptionKeyRequest {
 /**
  * A TDE certificate that can be uploaded into a server.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TdeCertificate extends ProxyResource {
   /**
    * Resource properties.
@@ -12725,7 +12725,7 @@ model TdeCertificateProperties {
 /**
  * Properties of a managed instance vulnerability assessment.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedInstanceVulnerabilityAssessmentProperties {
   /**
    * A blob storage container path to hold the scan results (e.g. https://myStorage.blob.core.windows.net/VaScans/).
@@ -12756,7 +12756,7 @@ model ManagedInstanceVulnerabilityAssessmentProperties {
 /**
  * The properties of a database ledger digest upload settings.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedLedgerDigestUploadsProperties {
   /**
    * The digest storage endpoint, which must be either an Azure blob storage endpoint or an URI for Azure Confidential Ledger.
@@ -12773,7 +12773,7 @@ model ManagedLedgerDigestUploadsProperties {
 /**
  * Properties of a managed server DNS alias.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedServerDnsAliasProperties {
   /**
    * The fully qualified DNS record for managed server alias
@@ -12812,114 +12812,114 @@ model ManagedServerDnsAliasAcquisition {
  * The properties of an NSP config.
  */
 model NetworkSecurityPerimeterConfigurationProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   networkSecurityPerimeter?: NSPConfigPerimeter;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceAssociation?: NSPConfigAssociation;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   profile?: NSPConfigProfile;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   provisioningIssues?: NSPProvisioningIssue[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPConfigPerimeter {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   perimeterGuid?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPConfigAssociation {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accessMode?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPConfigProfile {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accessRulesVersion?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   accessRules?: NSPConfigAccessRule[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPConfigAccessRule {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: NSPConfigAccessRuleProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPConfigAccessRuleProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   direction?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   addressPrefixes?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   fullyQualifiedDomainNames?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subscriptions?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   networkSecurityPerimeters?: NSPConfigNetworkSecurityPerimeterRule[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serviceTags?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPConfigNetworkSecurityPerimeterRule {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   perimeterGuid?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPProvisioningIssue {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: NSPProvisioningIssueProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NSPProvisioningIssueProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   issueType?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   severity?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   suggestedResourceIds?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   suggestedAccessRules?: string[];
 }
 
@@ -12948,7 +12948,7 @@ model Operation {
   /**
    * Additional descriptions for the operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: Record<unknown>;
 }
@@ -12989,7 +12989,7 @@ model OutboundFirewallRuleProperties {
   /**
    * The state of the outbound rule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -13021,7 +13021,7 @@ model PrivateEndpointConnectionProperties {
   provisioningState?: PrivateEndpointProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateEndpointProperty {
   /**
    * Resource id of the private endpoint.
@@ -13029,7 +13029,7 @@ model PrivateEndpointProperty {
   id?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkServiceConnectionStateProperty {
   /**
    * The private link service connection status.
@@ -13051,7 +13051,7 @@ model PrivateLinkServiceConnectionStateProperty {
 /**
  * Properties of a private link resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
@@ -13075,7 +13075,7 @@ model PrivateLinkResourceProperties {
 /**
  * The recoverable database's properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecoverableDatabaseProperties {
   /**
    * The edition of the database.
@@ -13105,14 +13105,14 @@ model RecoverableDatabaseProperties {
   /**
    * The resource ids of the user assigned identities to use
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   keys?: Record<DatabaseKey>;
 }
 
 /**
  * The recoverable managed database's properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecoverableManagedDatabaseProperties {
   /**
    * The last available backup date.
@@ -13124,7 +13124,7 @@ model RecoverableManagedDatabaseProperties {
 /**
  * Properties of a replication link.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ReplicationLinkProperties {
   /**
    * Resource partner server.
@@ -13202,7 +13202,7 @@ model ReplicationLinkProperties {
 /**
  * A replication link update request.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ReplicationLinkUpdate extends ProxyResource {
   /**
    * Resource properties.
@@ -13223,7 +13223,7 @@ model ReplicationLinkUpdateProperties {
 /**
  * The restorable dropped database's properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RestorableDroppedDatabaseProperties {
   /**
    * The name of the database.
@@ -13267,14 +13267,14 @@ model RestorableDroppedDatabaseProperties {
   /**
    * The resource ids of the user assigned identities to use
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   keys?: Record<DatabaseKey>;
 }
 
 /**
  * The restorable dropped managed database's properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RestorableDroppedManagedDatabaseProperties {
   /**
    * The name of the database.
@@ -13307,7 +13307,7 @@ model RestorableDroppedManagedDatabaseProperties {
 /**
  * Properties of a database restore point
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RestorePointProperties {
   /**
    * The type of restore point
@@ -13349,7 +13349,7 @@ model CreateDatabaseRestorePointDefinition {
 /**
  * Server-level Automatic Tuning properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AutomaticTuningServerProperties {
   /**
    * Automatic tuning desired state.
@@ -13365,7 +13365,7 @@ model AutomaticTuningServerProperties {
   /**
    * Automatic tuning options definition.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: Record<AutomaticTuningServerOptions>;
 }
 
@@ -13400,7 +13400,7 @@ model AutomaticTuningServerOptions {
 /**
  * Properties of a active directory administrator.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AdministratorProperties {
   /**
    * Type of the sever administrator.
@@ -13415,14 +13415,14 @@ model AdministratorProperties {
   /**
    * SID (object ID) of the server administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   sid: string;
 
   /**
    * Tenant ID of the administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   tenantId?: string;
 
@@ -13437,7 +13437,7 @@ model AdministratorProperties {
 /**
  * Properties of a active directory only authentication.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureADOnlyAuthProperties {
   /**
@@ -13467,7 +13467,7 @@ model ServerConfigurationOptionProperties {
 /**
  * The properties of a server connection policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerConnectionPolicyProperties {
   /**
    * The server connection type.
@@ -13478,7 +13478,7 @@ model ServerConnectionPolicyProperties {
 /**
  * Properties of a server DevOps audit settings.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerDevOpsAuditSettingsProperties {
   /**
    * Specifies whether DevOps audit events are sent to Azure Monitor.
@@ -13525,7 +13525,7 @@ model ServerDevOpsAuditSettingsProperties {
   /**
    * Specifies the blob storage subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   storageAccountSubscriptionId?: string;
 }
@@ -13533,7 +13533,7 @@ model ServerDevOpsAuditSettingsProperties {
 /**
  * Properties of a server DNS alias.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerDnsAliasProperties {
   /**
    * The fully qualified DNS record for alias
@@ -13555,7 +13555,7 @@ model ServerDnsAliasAcquisition {
 /**
  * Properties for a server key execution.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerKeyProperties {
   /**
    * Subregion of the server key.
@@ -13604,7 +13604,7 @@ model ServerKeyProperties {
 /**
  * A server operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerOperation extends ProxyResource {
   /**
    * Resource properties.
@@ -13701,9 +13701,9 @@ model ServerOperationProperties {
  * A request to check whether the specified name for a resource is available.
  */
 model CheckNameAvailabilityRequest {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: "Microsoft.Sql/servers";
 }
 
@@ -13739,7 +13739,7 @@ model CheckNameAvailabilityResponse {
 /**
  * The properties of a server.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerProperties {
   /**
    * Administrator username for the server. Once created it cannot be changed.
@@ -13801,7 +13801,7 @@ model ServerProperties {
   /**
    * The Client id used for cross tenant CMK scenario
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   federatedClientId?: string;
 
@@ -13884,14 +13884,14 @@ model ServerExternalAdministrator {
   /**
    * SID (object ID) of the server administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   sid?: string;
 
   /**
    * Tenant ID of the administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   tenantId?: string;
 
@@ -13919,7 +13919,7 @@ model ServerUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -13998,7 +13998,7 @@ model ImportNewDatabaseDefinition {
 /**
  * An RefreshExternalGovernanceStatus operation result resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RefreshExternalGovernanceStatusOperationResult extends ProxyResource {
   /**
    * Resource properties.
@@ -14013,7 +14013,7 @@ model RefreshExternalGovernanceStatusOperationResultProperties {
   /**
    * Request Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   requestId?: string;
@@ -14052,7 +14052,7 @@ model RefreshExternalGovernanceStatusOperationResultProperties {
 /**
  * The properties of a server trust certificate.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerTrustCertificateProperties {
   /**
    * The certificate public blob
@@ -14075,7 +14075,7 @@ model ServerTrustCertificateProperties {
 /**
  * Properties of a server trust group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerTrustGroupProperties {
   /**
    * Group members information for the server trust group.
@@ -14102,7 +14102,7 @@ model ServerInfo {
 /**
  * Usage metric of a server.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerUsage extends ProxyResource {
   /**
    * Resource properties.
@@ -14142,7 +14142,7 @@ model ServerUsageProperties {
 /**
  * Properties of a server Vulnerability Assessment.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerVulnerabilityAssessmentProperties {
   /**
    * A blob storage container path to hold the scan results (e.g. https://myStorage.blob.core.windows.net/VaScans/).
@@ -14173,7 +14173,7 @@ model ServerVulnerabilityAssessmentProperties {
 /**
  * Sql agent configuration properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlAgentConfigurationProperties {
   /**
    * The state of Sql Agent.
@@ -14184,7 +14184,7 @@ model SqlAgentConfigurationProperties {
 /**
  * Properties of managed instance's Start/Stop schedule.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StartStopManagedInstanceScheduleProperties {
   /**
    * The description of the schedule.
@@ -14243,7 +14243,7 @@ model ScheduleItem {
 /**
  * Properties of a subscription usage.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SubscriptionUsageProperties {
   /**
    * User-readable name of the metric.
@@ -14273,7 +14273,7 @@ model SubscriptionUsageProperties {
 /**
  * Synapse link workspace resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SynapseLinkWorkspace extends ProxyResource {
   /**
    * Resource properties.
@@ -14310,7 +14310,7 @@ model SynapseLinkWorkspaceInfoProperties {
 /**
  * Properties of an Azure SQL Database sync agent.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SyncAgentProperties {
   /**
    * Name of the sync agent.
@@ -14372,7 +14372,7 @@ model SyncAgentKeyProperties {
 /**
  * An Azure SQL Database sync agent linked database.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SyncAgentLinkedDatabase extends ProxyResource {
   /**
    * Resource properties.
@@ -14440,7 +14440,7 @@ model SyncDatabaseIdProperties {
 /**
  * Properties of a sync group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SyncGroupProperties {
   /**
    * Sync interval of the sync group.
@@ -14704,7 +14704,7 @@ model SyncGroupLogProperties {
   /**
    * TracingId of the sync group log.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   tracingId?: string;
@@ -14719,7 +14719,7 @@ model SyncGroupLogProperties {
 /**
  * Properties of a sync member.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SyncMemberProperties {
   /**
    * Database type of the sync member.
@@ -14734,7 +14734,7 @@ model SyncMemberProperties {
   /**
    * SQL Server database id of the sync member.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   sqlServerDatabaseId?: string;
 
@@ -14791,7 +14791,7 @@ model SyncMemberProperties {
 /**
  * The properties of a time zone.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TimeZoneProperties {
   /**
    * The time zone id
@@ -14809,7 +14809,7 @@ model TimeZoneProperties {
 /**
  * Properties of a transparent data encryption scan.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TransparentDataEncryptionProperties {
   /**
    * Specifies the state of the transparent data encryption.
@@ -14892,7 +14892,7 @@ model Name {
 /**
  * The properties of a virtual cluster.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualClusterProperties {
   /**
    * Subnet resource ID for the virtual cluster.
@@ -14924,14 +14924,14 @@ model VirtualClusterUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * A refresh DNS servers operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UpdateVirtualClusterDnsServersOperation extends ProxyResource {
   /**
    * Resource properties.
@@ -14953,7 +14953,7 @@ model VirtualClusterDnsServersProperties {
 /**
  * Properties of a virtual network rule.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualNetworkRuleProperties {
   /**
    * The ARM resource id of the virtual network subnet.
@@ -14975,7 +14975,7 @@ model VirtualNetworkRuleProperties {
 /**
  * Workload classifier definition. For more information look at sys.workload_management_workload_classifiers (DMV).
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkloadClassifierProperties {
   /**
    * The workload classifier member name.
@@ -15011,7 +15011,7 @@ model WorkloadClassifierProperties {
 /**
  * Workload group definition. For more information look at sys.workload_management_workload_groups (DMV).
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkloadGroupProperties {
   /**
    * The workload group minimum percentage resource.

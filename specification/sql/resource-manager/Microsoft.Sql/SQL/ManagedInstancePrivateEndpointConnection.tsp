@@ -35,7 +35,7 @@ interface ManagedInstancePrivateEndpointConnections {
   /**
    * Approve or reject a private endpoint connection with a given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstancePrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<ManagedInstancePrivateEndpointConnection> | ArmAcceptedLroResponse,
@@ -46,7 +46,7 @@ interface ManagedInstancePrivateEndpointConnections {
   /**
    * Deletes a private endpoint connection with a given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedInstancePrivateEndpointConnection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

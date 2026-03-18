@@ -74,7 +74,7 @@ interface ManagedInstanceLongTermRetentionBackups {
   /**
    * Deletes a long term retention backup.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("LongTermRetentionManagedInstanceBackups")
   delete is ManagedInstanceLongTermRetentionBackupOps.DeleteWithoutOkAsync<
     ManagedInstanceLongTermRetentionBackup,
@@ -146,7 +146,7 @@ interface LongTermRetentionManagedInstanceBackups {
   /**
    * Deletes a long term retention backup.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteByResourceGroup is LongTermRetentionManagedInstanceBackupOps.DeleteWithoutOkAsync<
     ManagedInstanceLongTermRetentionBackup,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse

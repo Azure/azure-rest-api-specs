@@ -14,8 +14,8 @@ namespace Microsoft.Sql;
 /**
  * Azure Active Directory administrator.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
- #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerAzureADAdministrator
   is Azure.ResourceManager.ProxyResource<AdministratorProperties> {
   ...ResourceNameParameter<
@@ -27,8 +27,8 @@ model ServerAzureADAdministrator
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
- #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ServerAzureADAdministrators {
   /**
    * Gets a Azure Active Directory administrator.
@@ -38,7 +38,7 @@ interface ServerAzureADAdministrators {
   /**
    * Creates or updates an existing Azure Active Directory administrator.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerAzureADAdministrator,
     Response = ArmResourceUpdatedResponse<ServerAzureADAdministrator> | ArmResourceCreatedResponse<
@@ -51,7 +51,7 @@ interface ServerAzureADAdministrators {
   /**
    * Deletes the Azure Active Directory administrator with the given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerAzureADAdministrator,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

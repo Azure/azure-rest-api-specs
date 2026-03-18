@@ -14,8 +14,8 @@ namespace Microsoft.Sql;
 /**
  * A failover group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
- #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FailoverGroup
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<FailoverGroupProperties> {
   ...ResourceNameParameter<
@@ -36,7 +36,7 @@ interface FailoverGroups {
   /**
    * Creates or updates a failover group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FailoverGroup,
     Response = ArmResourceUpdatedResponse<FailoverGroup> | ArmResourceCreatedResponse<
@@ -58,7 +58,7 @@ interface FailoverGroups {
   /**
    * Deletes a failover group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     FailoverGroup,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

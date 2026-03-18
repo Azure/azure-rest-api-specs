@@ -36,7 +36,7 @@ interface ManagedInstanceLongTermRetentionPolicies {
   /**
    * Sets a managed database's long term retention policy.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstanceLongTermRetentionPolicy,
     Response = ArmResourceUpdatedResponse<ManagedInstanceLongTermRetentionPolicy> | ArmAcceptedLroResponse,
@@ -47,7 +47,7 @@ interface ManagedInstanceLongTermRetentionPolicies {
   /**
    * Deletes a managed database's long term retention policy.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedInstanceLongTermRetentionPolicy,
     Response = ArmResponse<ManagedInstanceLongTermRetentionPolicy> | ArmDeleteAcceptedLroResponse

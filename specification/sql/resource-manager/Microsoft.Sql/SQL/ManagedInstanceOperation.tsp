@@ -43,7 +43,7 @@ interface ManagedInstanceOperations {
   cancel is ArmResourceActionSync<ManagedInstanceOperation, void, OkResponse>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-format"
+#suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@format(ManagedInstanceOperation.name, "uuid");
 @@doc(ManagedInstanceOperation.name, "");
 @@doc(ManagedInstanceOperation.properties, "Resource properties.");

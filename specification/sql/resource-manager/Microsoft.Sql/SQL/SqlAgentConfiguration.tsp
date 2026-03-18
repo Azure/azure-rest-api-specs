@@ -26,8 +26,8 @@ model SqlAgentConfiguration
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
- #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SqlAgentConfigurations {
   /**
    * Gets current instance sql agent configuration.
@@ -39,7 +39,7 @@ interface SqlAgentConfigurations {
    * Puts new sql agent configuration to instance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlAgent")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SqlAgentConfiguration,

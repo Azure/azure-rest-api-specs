@@ -26,8 +26,8 @@ model DatabaseAdvancedThreatProtection
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
- #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DatabaseAdvancedThreatProtections {
   /**
    * Gets a database's Advanced Threat Protection state.

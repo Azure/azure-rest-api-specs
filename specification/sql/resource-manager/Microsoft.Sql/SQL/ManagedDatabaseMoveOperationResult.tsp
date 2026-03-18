@@ -77,7 +77,7 @@ interface ManagedDatabaseMoveOperationResults {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-format"
+#suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@format(ManagedDatabaseMoveOperationResult.name, "uuid");
 @@doc(ManagedDatabaseMoveOperationResult.name, "");
 @@doc(ManagedDatabaseMoveOperationResult.properties, "Resource properties.");

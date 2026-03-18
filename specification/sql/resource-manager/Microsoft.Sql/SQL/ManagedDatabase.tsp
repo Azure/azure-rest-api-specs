@@ -36,7 +36,7 @@ interface ManagedDatabases {
   /**
    * Creates a new database or updates an existing database.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedDatabase,
@@ -60,7 +60,7 @@ interface ManagedDatabases {
   /**
    * Deletes a managed database.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedDatabase,
@@ -85,23 +85,23 @@ interface ManagedDatabases {
     void,
     ArmResponse<ResourceListResult<DatabaseColumn>>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "schema", explode: true })
       schema?: string[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "table", explode: true })
       table?: string[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "column", explode: true })
       column?: string[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "orderBy", explode: true })
       orderBy?: string[];
 
@@ -213,11 +213,11 @@ interface ManagedDatabases {
     void,
     ArmResponse<ResourceListResult<SensitivityLabel>>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$skipToken")
       $skipToken?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$count")
       $count?: boolean;
 
@@ -232,11 +232,11 @@ interface ManagedDatabases {
   /**
    * Update sensitivity labels of a given database using an operations batch.
    */
+  #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabaseSensitivityLabels")
   @patch
   @action("currentSensitivityLabels")
-  #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedDatabaseSensitivityLabelsUpdate is ArmResourceActionSync<
     ManagedDatabase,
     SensitivityLabelUpdateList,
@@ -255,7 +255,7 @@ interface ManagedDatabases {
     void,
     ArmResponse<ResourceListResult<SensitivityLabel>>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$skipToken")
       $skipToken?: string;
 
@@ -276,11 +276,11 @@ interface ManagedDatabases {
   /**
    * Update recommended sensitivity labels states of a given database using an operations batch.
    */
+  #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabaseSensitivityLabels")
   @patch
   @action("recommendedSensitivityLabels")
-  #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedDatabaseRecommendedSensitivityLabelsUpdate is ArmResourceActionSync<
     ManagedDatabase,
     RecommendedSensitivityLabelUpdateList,

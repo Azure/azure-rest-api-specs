@@ -26,13 +26,13 @@ model JobAgent is Azure.ResourceManager.TrackedResource<JobAgentProperties> {
   /**
    * The name and tier of the SKU.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 
   /**
    * The identity of the job agent.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: JobAgentIdentity;
 }
 
@@ -47,7 +47,7 @@ interface JobAgents {
   /**
    * Creates or updates a job agent.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobAgents")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     JobAgent,
@@ -68,7 +68,7 @@ interface JobAgents {
   /**
    * Deletes a job agent.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobAgents")
   delete is ArmResourceDeleteWithoutOkAsync<
     JobAgent,

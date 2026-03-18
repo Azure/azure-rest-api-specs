@@ -26,8 +26,8 @@ model MaintenanceWindows
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
- #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface MaintenanceWindowsOperationGroup {
   /**
    * Gets maintenance windows settings for a database.
@@ -47,7 +47,7 @@ interface MaintenanceWindowsOperationGroup {
   /**
    * Sets maintenance windows settings for a database.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("MaintenanceWindows")
   createOrUpdate is ArmResourceCreateOrReplaceSync<

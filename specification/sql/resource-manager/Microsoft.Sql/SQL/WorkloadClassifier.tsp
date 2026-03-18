@@ -35,7 +35,7 @@ interface WorkloadClassifiers {
   /**
    * Creates or updates a workload classifier.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WorkloadClassifier,
     Response = ArmResourceUpdatedResponse<WorkloadClassifier> | ArmResourceCreatedResponse<
@@ -48,7 +48,7 @@ interface WorkloadClassifiers {
   /**
    * Deletes a workload classifier.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     WorkloadClassifier,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

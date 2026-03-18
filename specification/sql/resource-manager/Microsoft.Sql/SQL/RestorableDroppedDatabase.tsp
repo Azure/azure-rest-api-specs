@@ -14,8 +14,8 @@ namespace Microsoft.Sql;
 /**
  * A restorable dropped database resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
- #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RestorableDroppedDatabase
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<RestorableDroppedDatabaseProperties> {
   ...ResourceNameParameter<
@@ -28,7 +28,7 @@ model RestorableDroppedDatabase
   /**
    * The name and tier of the SKU.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 }
 

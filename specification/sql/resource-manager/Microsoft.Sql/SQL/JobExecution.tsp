@@ -69,7 +69,7 @@ interface JobExecutions {
   /**
    * Creates or updates a job execution.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is JobExecutionOps.CreateOrUpdateAsync<
     JobExecution,
     Request = void,
@@ -399,7 +399,7 @@ interface JobTargetExecutions {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-format"
+#suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@format(JobExecution.name, "uuid");
 @@doc(JobExecution.name, "The id of the job execution");
 @@doc(JobExecution.properties, "Resource properties.");

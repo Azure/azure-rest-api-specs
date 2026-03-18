@@ -14,8 +14,8 @@ namespace Microsoft.Sql;
 /**
  * Azure Active Directory only authentication.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
- #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerAzureADOnlyAuthentication
   is Azure.ResourceManager.ProxyResource<AzureADOnlyAuthProperties> {
   ...ResourceNameParameter<
@@ -27,8 +27,8 @@ model ServerAzureADOnlyAuthentication
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
- #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ServerAzureADOnlyAuthentications {
   /**
    * Gets a specific Azure Active Directory only authentication property.
@@ -38,7 +38,7 @@ interface ServerAzureADOnlyAuthentications {
   /**
    * Sets Server Active Directory only authentication property or updates an existing server Active Directory only authentication property.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerAzureADOnlyAuthentication,
     Response = ArmResourceUpdatedResponse<ServerAzureADOnlyAuthentication> | ArmResourceCreatedResponse<
@@ -51,7 +51,7 @@ interface ServerAzureADOnlyAuthentications {
   /**
    * Deletes an existing server Active Directory only authentication property.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerAzureADOnlyAuthentication,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

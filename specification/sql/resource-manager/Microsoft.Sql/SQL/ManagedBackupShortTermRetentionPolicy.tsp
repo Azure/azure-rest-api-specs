@@ -64,7 +64,7 @@ interface ManagedBackupShortTermRetentionPolicies {
   /**
    * Updates a managed database's short term retention policy.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ManagedBackupShortTermRetentionPolicyOps.CreateOrUpdateAsync<
     ManagedBackupShortTermRetentionPolicy,
     Response = ArmResourceUpdatedResponse<ManagedBackupShortTermRetentionPolicy> | ArmAcceptedLroResponse,
@@ -99,8 +99,8 @@ alias ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicyOps = Azure.
     @key
     managedInstanceName: string;
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     /**  */
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("restorableDroppedDatabases")
     @key
@@ -125,7 +125,7 @@ interface ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies {
   /**
    * Sets a database's short term retention policy.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicyOps.CreateOrUpdateAsync<
     ManagedBackupShortTermRetentionPolicy,
     Response = ArmResourceUpdatedResponse<ManagedBackupShortTermRetentionPolicy> | ArmAcceptedLroResponse,

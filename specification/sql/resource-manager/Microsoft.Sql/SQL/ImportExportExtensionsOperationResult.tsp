@@ -25,14 +25,14 @@ model ImportExportExtensionsOperationResult
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
- #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ImportExportExtensionsOperationResults {
   /**
    * Gets a database extension. This will return resource not found as it is not supported.
    */
-  @tag("DatabaseExtensions")
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("DatabaseExtensions")
   get is ArmResourceRead<
     ImportExportExtensionsOperationResult,
     Response = OkResponse
@@ -41,7 +41,7 @@ interface ImportExportExtensionsOperationResults {
   /**
    * Perform a database extension operation, like database import, database export, or polybase import
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DatabaseExtensions")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ImportExportExtensionsOperationResult,

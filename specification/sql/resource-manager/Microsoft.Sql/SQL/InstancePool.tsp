@@ -25,7 +25,7 @@ model InstancePool
   /**
    * The name and tier of the SKU.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 }
 
@@ -40,7 +40,7 @@ interface InstancePools {
   /**
    * Creates or updates an instance pool.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("InstancePools")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InstancePool,
@@ -61,7 +61,7 @@ interface InstancePools {
   /**
    * Deletes an instance pool
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("InstancePools")
   delete is ArmResourceDeleteWithoutOkAsync<
     InstancePool,

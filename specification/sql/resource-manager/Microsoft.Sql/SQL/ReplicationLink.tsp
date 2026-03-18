@@ -36,7 +36,7 @@ interface ReplicationLinks {
   /**
    * Updates the replication link type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ReplicationLinks")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ReplicationLink,
@@ -57,7 +57,7 @@ interface ReplicationLinks {
   /**
    * Deletes the replication link.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ReplicationLinks")
   delete is ArmResourceDeleteWithoutOkAsync<
     ReplicationLink,

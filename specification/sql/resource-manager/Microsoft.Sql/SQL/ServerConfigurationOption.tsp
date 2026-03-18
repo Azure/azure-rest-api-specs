@@ -26,8 +26,8 @@ model ServerConfigurationOption
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
- #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ServerConfigurationOptions {
   /**
    * Gets managed instance server configuration option.
@@ -37,7 +37,7 @@ interface ServerConfigurationOptions {
   /**
    * Updates managed instance server configuration option.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerConfigurationOption,
     Response = ArmResourceUpdatedResponse<ServerConfigurationOption> &

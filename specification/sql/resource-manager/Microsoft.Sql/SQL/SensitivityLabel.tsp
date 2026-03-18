@@ -27,7 +27,7 @@ model SensitivityLabel
   /**
    * Resource that manages the sensitivity label.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   managedBy?: string;
 }
@@ -107,7 +107,7 @@ interface SensitivityLabels {
   /**
    * Deletes the sensitivity label of a given column
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabaseSensitivityLabels")
   delete is SensitivityLabelOps.DeleteSync<
     SensitivityLabel,
@@ -232,7 +232,7 @@ interface SensitivityLabelOperationGroup {
   /**
    * Deletes the sensitivity label of a given column
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SensitivityLabels")
   delete is SensitivityLabelOperationGroupOps.DeleteSync<
     SensitivityLabel,

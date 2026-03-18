@@ -14,8 +14,8 @@ namespace Microsoft.Sql;
 /**
  * An IPv6 server firewall rule.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
- #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPv6FirewallRule
   is Azure.ResourceManager.ProxyResource<IPv6ServerFirewallRuleProperties> {
   ...ResourceNameParameter<
@@ -26,8 +26,8 @@ model IPv6FirewallRule
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
- #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface IPv6FirewallRules {
   /**
    * Gets an IPv6 firewall rule.
