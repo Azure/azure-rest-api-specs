@@ -33,8 +33,8 @@ model CreateAgentVersionRequest {
     }
   )
   @removed(Versions.v1)
-  @doc("The managed agent identity blueprint id")
-  managed_agent_identity_blueprint_id?: string;
+  @doc("The blueprint reference for the agent.")
+  blueprint_reference?: AgentBlueprintReference;
 }
 
 model CreateAgentVersionFromManifestRequest {
@@ -136,9 +136,9 @@ model AgentObject {
       required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @doc("The reference to a managed agent identity blueprint for the agent")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  blueprint_id?: string;
+  @doc("The instance identity of the agent")
+  @visibility(Lifecycle.Read)
+  identity?: AgentIdentity;
 
   @removed(Versions.v1)
   @extension(
@@ -147,9 +147,9 @@ model AgentObject {
       required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @doc("The instance identity of the agent")
+  @doc("The blueprint for the agent")
   @visibility(Lifecycle.Read)
-  identity?: AgentIdentity;
+  blueprint?: AgentIdentity;
 }
 
 model AgentVersionObject {
@@ -193,9 +193,20 @@ model AgentVersionObject {
       required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @doc("The reference to a managed agent identity blueprint for the agent")
+  @doc("The instance identity of the agent")
   @visibility(Lifecycle.Read)
-  blueprint_id?: string;
+  instance_identity?: AgentIdentity;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @doc("The blueprint for the agent")
+  @visibility(Lifecycle.Read)
+  blueprint?: AgentIdentity;
 
   @removed(Versions.v1)
   @extension(
@@ -206,7 +217,7 @@ model AgentVersionObject {
   )
   @doc("The instance identity of the agent")
   @visibility(Lifecycle.Read)
-  identity?: AgentIdentity;
+  agent_blueprint?: AgentIdentity;
 }
 
 @removed(Versions.v1)
@@ -243,7 +254,7 @@ union AgentEndpointProtocol {
   activity: "activity",
   responses: "responses",
   a2a: "a2a",
-  invoke: "invoke",
+  invocations: "invocations",
 }
 
 union AgentKind {
@@ -817,6 +828,38 @@ model AgentIdentity {
 
   @doc("The client ID of the agent instance. Also referred to as the instance ID")
   client_id: string;
+}
+
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+)
+union AgentBlueprintReferenceType {
+  string,
+  ManagedBlueprint: "ManagedBlueprint",
+}
+
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+)
+@discriminator("type")
+model AgentBlueprintReference {
+  type: AgentBlueprintReferenceType;
+}
+
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+)
+model ManagedAgentBlueprintReference extends AgentBlueprintReference {
+  type: AgentBlueprintReferenceType.ManagedBlueprint;
+
+  @doc("The ID of the managed blueprint")
+  blueprint_id: string;
 }
 
 /** A skill example string with a maximum length of 1024 characters. */
