@@ -11046,7 +11046,8 @@
             "enum": [
               "activity",
               "responses",
-              "a2a"
+              "a2a",
+              "invoke"
             ]
           }
         ]
@@ -11252,11 +11253,11 @@
         "properties": {
           "principal_id": {
             "type": "string",
-            "description": "The principal ID of the agent"
+            "description": "The principal ID of the agent instance"
           },
           "client_id": {
             "type": "string",
-            "description": "The client ID of the agent"
+            "description": "The client ID of the agent instance. Also referred to as the instance ID"
           }
         },
         "x-ms-foundry-meta": {
@@ -11346,7 +11347,7 @@
                 "$ref": "#/components/schemas/AgentIdentity"
               }
             ],
-            "description": "The identity of the agent",
+            "description": "The instance identity of the agent",
             "x-ms-foundry-meta": {
               "required_previews": [
                 "AgentEndpoints=V1Preview"
@@ -11554,7 +11555,7 @@
                 "$ref": "#/components/schemas/AgentIdentity"
               }
             ],
-            "description": "The identity of the agent",
+            "description": "The instance identity of the agent",
             "x-ms-foundry-meta": {
               "required_previews": [
                 "AgentEndpoints=V1Preview"

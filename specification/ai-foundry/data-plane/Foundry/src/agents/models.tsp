@@ -147,7 +147,7 @@ model AgentObject {
       required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @doc("The identity of the agent")
+  @doc("The instance identity of the agent")
   @visibility(Lifecycle.Read)
   identity?: AgentIdentity;
 }
@@ -204,7 +204,7 @@ model AgentVersionObject {
       required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @doc("The identity of the agent")
+  @doc("The instance identity of the agent")
   @visibility(Lifecycle.Read)
   identity?: AgentIdentity;
 }
@@ -243,6 +243,7 @@ union AgentEndpointProtocol {
   activity: "activity",
   responses: "responses",
   a2a: "a2a",
+  invoke: "invoke",
 }
 
 union AgentKind {
@@ -811,10 +812,10 @@ model AgentEndpoint {
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 model AgentIdentity {
-  @doc("The principal ID of the agent")
+  @doc("The principal ID of the agent instance")
   principal_id: string;
 
-  @doc("The client ID of the agent")
+  @doc("The client ID of the agent instance. Also referred to as the instance ID")
   client_id: string;
 }
 
