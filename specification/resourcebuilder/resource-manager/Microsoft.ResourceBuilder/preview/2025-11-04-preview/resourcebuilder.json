@@ -2619,9 +2619,9 @@
           "$ref": "#/definitions/DataQualityValidationPolicy",
           "description": "Data quality dataset validation. Required for DataQualityValidation jobs."
         },
-        "resourceType": {
-          "$ref": "#/definitions/ResourceNotificationResourceType",
-          "description": "Resource type (resource or relationship). Required for AzureResourceNotificationPublish jobs."
+        "environment": {
+          "$ref": "#/definitions/ResourceNotificationPublishEnvironment",
+          "description": "Publish environment for AzureResourceNotificationPublish jobs."
         }
       }
     },
@@ -2993,32 +2993,26 @@
       ],
       "x-ms-discriminator-value": "Reference"
     },
-    "ResourceNotificationResourceType": {
+    "ResourceNotificationPublishEnvironment": {
       "type": "string",
-      "description": "Resource notification resource type",
+      "description": "Resource notification publish environment",
       "enum": [
-        "Default",
-        "Resource",
-        "Relationship"
+        "Preview",
+        "Production"
       ],
       "x-ms-enum": {
-        "name": "ResourceNotificationResourceType",
+        "name": "ResourceNotificationPublishEnvironment",
         "modelAsString": true,
         "values": [
           {
-            "name": "Default",
-            "value": "Default",
-            "description": "Default resource notification type."
+            "name": "Preview",
+            "value": "Preview",
+            "description": "The preview/experimental environment."
           },
           {
-            "name": "Resource",
-            "value": "Resource",
-            "description": "Resource notification for a resource."
-          },
-          {
-            "name": "Relationship",
-            "value": "Relationship",
-            "description": "Resource notification for a relationship."
+            "name": "Production",
+            "value": "Production",
+            "description": "The production environment."
           }
         ]
       }
