@@ -28,18 +28,18 @@ These are the global settings for the KubernetesConfiguration.
 title: ExtensionTypesClient
 description: KubernetesConfiguration Extension Types Client
 openapi-type: arm
-tag: package-preview-2026-04
+tag: package-2026-04
 ```
 
 ---
 
-### Tag: package-preview-2026-04
+### Tag: package-2026-04
 
-These settings apply only when `--tag=package-preview-2026-04` is specified on the command line.
+These settings apply only when `--tag=package-2026-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2026-04'
+``` yaml $(tag) == 'package-2026-04'
 input-file:
-  - preview/2026-04-01-preview/extensionTypes.json
+  - stable/2026-04-01/extensionTypes.json
 suppressions:
   - code: OperationsAPIImplementation
     from: extensionTypes.json
