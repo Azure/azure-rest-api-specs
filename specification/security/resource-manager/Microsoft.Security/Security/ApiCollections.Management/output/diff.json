@@ -1,0 +1,267 @@
+{
+  "info": {
+    "title": {
+      "__old": "Microsoft Defender for Cloud",
+      "__new": "SecurityCenter"
+    },
+    "description": {
+      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/apiCollections": {
+      "get": {
+        "summary__deleted": "Gets a list of API collections within a subscription",
+        "tags": [
+          [
+            "-",
+            "D4APICollectionList"
+          ],
+          [
+            "+",
+            "ApiCollections"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/providers/microsoft.Security/apiCollections": {
+      "get": {
+        "summary__deleted": "Gets a list of onboarded Azure API Management APIs",
+        "tags": [
+          [
+            "-",
+            "D4APICollectionList"
+          ],
+          [
+            "-",
+            "APIMConfig"
+          ],
+          [
+            "+",
+            "ApiCollections"
+          ]
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "minLength__deleted": 1,
+              "maxLength__deleted": 50,
+              "pattern__deleted": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/providers/microsoft.Security/apiCollections/{apiId}": {
+      "get": {
+        "summary__deleted": "Gets an onboarded Azure API Management API",
+        "tags": [
+          [
+            "-",
+            "D4APICollection"
+          ],
+          [
+            "-",
+            "APIMConfig"
+          ],
+          [
+            "+",
+            "ApiCollections"
+          ]
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "minLength__deleted": 1,
+              "maxLength__deleted": 50,
+              "pattern__deleted": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary__deleted": "Onboard an Azure API Management API to Microsoft Defender for APIs",
+        "tags": [
+          [
+            "-",
+            "OnboardToD4API"
+          ],
+          [
+            "-",
+            "APIMConfig"
+          ],
+          [
+            "+",
+            "ApiCollections"
+          ]
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "minLength__deleted": 1,
+              "maxLength__deleted": 50,
+              "pattern__deleted": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "resource",
+              "in": "body",
+              "schema": {
+                "$ref": "#/definitions/ApiCollection"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary__deleted": "Offboard an Azure API Management API from Microsoft Defender for APIs",
+        "tags": [
+          [
+            "-",
+            "OffboardFromD4API"
+          ],
+          [
+            "-",
+            "APIMConfig"
+          ],
+          [
+            "+",
+            "ApiCollections"
+          ]
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "minLength__deleted": 1,
+              "maxLength__deleted": 50,
+              "pattern__deleted": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/apiCollections": {
+      "get": {
+        "tags__deleted": [
+          "D4APICollectionList"
+        ],
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiCollection": {
+      "properties": {
+        "properties": {
+          "description__added": "Describes the properties of an API collection."
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ApiCollectionList": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    }
+  }
+}

@@ -10,11 +10,20 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Security;
+
+alias serviceExternalResource = Extension.ExternalResource<
+  "Microsoft.ApiManagement",
+  "service",
+  "serviceName"
+>;
+
 /**
  * An API collection as represented by Microsoft Defender for APIs.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "For backward compatibility"
+@extensionResource
 model ApiCollection
-  is Azure.ResourceManager.ProxyResource<ApiCollectionProperties> {
+  is Azure.ResourceManager.ExtensionResource<ApiCollectionProperties> {
   ...ResourceNameParameter<
     Resource = ApiCollection,
     KeyName = "apiId",
@@ -23,12 +32,6 @@ model ApiCollection
   >;
 }
 
-alias serviceExternalResource = Extension.ExternalResource<
-  "Microsoft.ApiManagement",
-  "service",
-  "{serviceName}"
->;
-
 @armResourceOperations
 interface ApiCollections {
   /**
@@ -36,16 +39,20 @@ interface ApiCollections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("APICollections_GetByAzureApiManagementService")
-  getByAzureApiManagementService is ArmResourceRead<ApiCollection>;
+  getByAzureApiManagementService is Extension.Read<
+    serviceExternalResource,
+    ApiCollection
+  >;
 
   /**
    * Onboard an Azure API Management API to Microsoft Defender for APIs. The system will start monitoring the operations within the Azure Management API for intrusive behaviors and provide alerts for attacks that have been detected.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("APICollections_OnboardAzureApiManagementApi")
-  onboardAzureApiManagementApi is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
+  onboardAzureApiManagementApi is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
+    serviceExternalResource,
     ApiCollection,
-    Request = void,
+    OptionalRequestBody = true,
     LroHeaders = ArmLroLocationHeader<FinalResult = ApiCollection> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -55,14 +62,18 @@ interface ApiCollections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("APICollections_OffboardAzureApiManagementApi")
-  offboardAzureApiManagementApi is ArmResourceDeleteSync<ApiCollection>;
+  offboardAzureApiManagementApi is Extension.DeleteSync<
+    serviceExternalResource,
+    ApiCollection
+  >;
 
   /**
    * Gets a list of Azure API Management APIs that have been onboarded to Microsoft Defender for APIs. If an Azure API Management API is onboarded to Microsoft Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("APICollections_ListByAzureApiManagementService")
-  listByAzureApiManagementService is ArmResourceListByParent<
+  listByAzureApiManagementService is Extension.ListByTarget<
+    serviceExternalResource,
     ApiCollection,
     Response = ArmResponse<ApiCollectionList>
   >;
