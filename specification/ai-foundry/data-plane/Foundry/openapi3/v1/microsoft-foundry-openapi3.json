@@ -8282,6 +8282,9 @@
   },
   "security": [
     {
+      "ApiKeyAuth": []
+    },
+    {
       "OAuth2Auth": [
         "https://ai.azure.com/.default"
       ]
@@ -36746,6 +36749,11 @@
       }
     },
     "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "api-key"
+      },
       "OAuth2Auth": {
         "type": "oauth2",
         "flows": {
