@@ -10,3 +10,4 @@ using Azure.ClientGenerator.Core;
 );
 @@access(Microsoft.Kusto.CalloutPoliciesList, Access.public, "java");
 @@access(Microsoft.Kusto.LanguageExtensionsList, Access.public, "java");
+@@clientName(Microsoft.Kusto.PublicIPType, "PublicIpType", "java");
