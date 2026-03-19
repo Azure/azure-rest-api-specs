@@ -24,34 +24,33 @@ model SecureScoreItem
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SecureScoreItems {
   /**
    * Get secure score for a specific Microsoft Defender for Cloud initiative within your current scope. For the ASC Default initiative, use 'ascScore'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SecureScores_Get")
+  @tag("Secure Score")
   get is ArmResourceRead<
     SecureScoreItem,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
    * List secure scores for all your Microsoft Defender for Cloud initiatives within your current scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SecureScores_List")
+  @tag("Secure Score")
   list is ArmResourceListByParent<
     SecureScoreItem,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<SecureScoresList>
+    Response = ArmResponse<SecureScoresList>,
+    Error = CloudError
   >;
 
   /**
    * Get all security controls for a specific initiative within a scope
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SecureScoreControls_ListBySecureScore")
+  @tag("Secure Score")
   @list
   @get
   @action("secureScoreControls")
@@ -60,6 +59,7 @@ interface SecureScoreItems {
     void,
     ArmResponse<SecureScoreControlList>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError,
     Parameters = {
       /**
        * OData expand. Optional.

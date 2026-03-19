@@ -10,7 +10,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Security;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ExpandControlsEnum {
   string,
 
@@ -40,12 +40,25 @@ union ControlType {
 /**
  * List of secure scores
  */
-model SecureScoresList is Azure.Core.Page<SecureScoreItem>;
+model SecureScoresList {
+  /**
+   * [Placeholder] Discription for value property
+   */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: SecureScoreItem[];
+
+  /**
+   * [Placeholder] Discription for nextLink property
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Describes properties of a calculated secure score.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecureScoreItemProperties {
   /**
    * The initiative’s name
@@ -63,6 +76,7 @@ model SecureScoreItemProperties {
    * The relative weight for each subscription. Used when calculating an aggregated secure score for multiple subscriptions.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   weight?: int64;
 }
 
@@ -74,18 +88,21 @@ model ScoreDetails {
    * Maximum score available
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   max?: int32;
 
   /**
    * Current score
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   current?: float64;
 
   /**
    * Ratio of the current score divided by the maximum. Rounded to 4 digits after the decimal point
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   @maxValue(1)
   percentage?: float64;
 }
@@ -116,6 +133,8 @@ model Resource {
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 @error
 model CloudError {
   /**
@@ -127,6 +146,9 @@ model CloudError {
 /**
  * The error detail.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * The error code.
@@ -172,6 +194,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
@@ -179,12 +202,25 @@ model ErrorAdditionalInfo {
 /**
  * List of security controls
  */
-model SecureScoreControlList is Azure.Core.Page<SecureScoreControlDetails>;
+model SecureScoreControlList {
+  /**
+   * [Placeholder] Discription for value property
+   */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: SecureScoreControlDetails[];
+
+  /**
+   * [Placeholder] Discription for nextLink property
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Details of the security control, its score, and the health status of the relevant resources.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecureScoreControlDetails extends Resource {
   /**
    * Calculation result data in control level
@@ -230,6 +266,7 @@ model SecureScoreControlScoreDetails {
    * The relative weight for this specific control in each of your subscriptions. Used when calculating an aggregated score for this control across all of your subscriptions.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   weight?: int64;
 
   /**
@@ -241,7 +278,7 @@ model SecureScoreControlScoreDetails {
 /**
  * Information about the security control.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecureScoreControlDefinitionItem extends Resource {
   /**
    * Security Control Definition Properties.
@@ -270,6 +307,7 @@ model SecureScoreControlDefinitionItemProperties {
    * Maximum control score (0..10)
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   @maxValue(10)
   maxScore?: int32;
 
@@ -310,8 +348,21 @@ model AzureResourceLink {
 /**
  * List of security controls definition
  */
-model SecureScoreControlDefinitionList
-  is Azure.Core.Page<SecureScoreControlDefinitionItem>;
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model secureScoreControlDefinitionList {
+  /**
+   * Collection of security control definitions.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SecureScoreControlDefinitionItem[];
+
+  /**
+   * The URL to get the next page of results.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Calculation result data

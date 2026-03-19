@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2020-01-01",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider"
   },
   "produces": [
     "application/json"
@@ -15,19 +15,22 @@
     "/providers/microsoft.Security/secureScoreControlDefinitions": {
       "get": {
         "operationId": "SecureScoreControlDefinitions_List",
+        "tags": [
+          "Secure Score Control Definitions"
+        ],
         "description": "List the available security controls, their assessments, and the max score",
         "parameters": [],
         "responses": {
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/SecureScoreControlDefinitionList"
+              "$ref": "#/definitions/secureScoreControlDefinitionList"
             }
           },
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -35,25 +38,31 @@
           "List security controls definition": {
             "$ref": "./examples/secureScoreControlDefinitions/ListSecureScoreControlDefinitions_example.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/secureScoreControlDefinitions": {
       "get": {
         "operationId": "SecureScoreControlDefinitions_ListBySubscription",
+        "tags": [
+          "Secure Score Control Definitions"
+        ],
         "description": "For a specified subscription, list the available security controls, their assessments, and the max score",
         "parameters": [],
         "responses": {
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/SecureScoreControlDefinitionList"
+              "$ref": "#/definitions/secureScoreControlDefinitionList"
             }
           },
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -61,12 +70,18 @@
           "List security controls definition by subscription": {
             "$ref": "./examples/secureScoreControlDefinitions/ListSecureScoreControlDefinitions_subscription_example.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/secureScoreControls": {
       "get": {
         "operationId": "SecureScoreControls_List",
+        "tags": [
+          "Secure Score Controls"
+        ],
         "description": "Get all security controls within a scope",
         "parameters": [
           {
@@ -92,7 +107,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -100,6 +115,9 @@
           "List all secure scores controls": {
             "$ref": "./examples/secureScores/ListSecureScoreControls_example.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -107,7 +125,7 @@
       "get": {
         "operationId": "SecureScores_List",
         "tags": [
-          "SecureScoreItems"
+          "Secure Score"
         ],
         "description": "List secure scores for all your Microsoft Defender for Cloud initiatives within your current scope.",
         "parameters": [],
@@ -121,7 +139,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -139,7 +157,7 @@
       "get": {
         "operationId": "SecureScores_Get",
         "tags": [
-          "SecureScoreItems"
+          "Secure Score"
         ],
         "description": "Get secure score for a specific Microsoft Defender for Cloud initiative within your current scope. For the ASC Default initiative, use 'ascScore'.",
         "parameters": [
@@ -160,7 +178,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -175,7 +193,7 @@
       "get": {
         "operationId": "SecureScoreControls_ListBySecureScore",
         "tags": [
-          "SecureScoreItems"
+          "Secure Score"
         ],
         "description": "Get all security controls for a specific initiative within a scope",
         "parameters": [
@@ -208,7 +226,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -234,6 +252,71 @@
         "id": {
           "type": "string",
           "description": "Azure resource Id",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
           "readOnly": true
         }
       }
@@ -267,18 +350,21 @@
           "type": "integer",
           "format": "int32",
           "description": "Maximum score available",
+          "minimum": 0,
           "readOnly": true
         },
         "current": {
           "type": "number",
           "format": "double",
           "description": "Current score",
+          "minimum": 0,
           "readOnly": true
         },
         "percentage": {
           "type": "number",
           "format": "double",
           "description": "Ratio of the current score divided by the maximum. Rounded to 4 digits after the decimal point",
+          "minimum": 0,
           "maximum": 1,
           "readOnly": true
         }
@@ -319,6 +405,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Maximum control score (0..10)",
+          "minimum": 0,
           "maximum": 10,
           "readOnly": true
         },
@@ -336,27 +423,6 @@
           "readOnly": true
         }
       }
-    },
-    "SecureScoreControlDefinitionList": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/SecureScoreControlDefinitionItem"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "SecureScoreControlDefinitionSource": {
       "type": "object",
@@ -401,17 +467,15 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/SecureScoreControlDetails"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "SecureScoreControlScoreDetails": {
       "type": "object",
@@ -450,6 +514,7 @@
           "type": "integer",
           "format": "int64",
           "description": "The relative weight for this specific control in each of your subscriptions. Used when calculating an aggregated score for this control across all of your subscriptions.",
+          "minimum": 0,
           "readOnly": true
         },
         "definition": {
@@ -465,6 +530,7 @@
         "properties": {
           "$ref": "#/definitions/SecureScoreItemProperties",
           "description": "Secure score item",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       },
@@ -493,6 +559,7 @@
           "type": "integer",
           "format": "int64",
           "description": "The relative weight for each subscription. Used when calculating an aggregated secure score for multiple subscriptions.",
+          "minimum": 0,
           "readOnly": true
         }
       }
@@ -506,17 +573,34 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/SecureScoreItem"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
+    },
+    "secureScoreControlDefinitionList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/SecureScoreControlDefinitionItem"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
     }
   },
   "parameters": {}

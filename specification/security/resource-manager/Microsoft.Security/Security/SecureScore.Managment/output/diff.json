@@ -1,37 +1,13 @@
 {
-  "info": {
-    "title": {
-      "__old": "Microsoft Defender for Cloud",
-      "__new": "SecurityCenter"
-    },
-    "description": {
-      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
-    }
-  },
   "paths": {
     "/providers/microsoft.Security/secureScoreControlDefinitions": {
       "get": {
-        "tags__deleted": [
-          "Secure Score Control Definitions"
-        ],
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/secureScoreControlDefinitionList",
-                "__new": "#/definitions/SecureScoreControlDefinitionList"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -40,26 +16,12 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/secureScoreControlDefinitions": {
       "get": {
-        "tags__deleted": [
-          "Secure Score Control Definitions"
-        ],
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/secureScoreControlDefinitionList",
-                "__new": "#/definitions/SecureScoreControlDefinitionList"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -68,18 +30,12 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/secureScoreControls": {
       "get": {
-        "tags__deleted": [
-          "Secure Score Controls"
-        ],
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -88,22 +44,12 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/secureScores": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "Secure Score"
-          ],
-          [
-            "+",
-            "SecureScoreItems"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -112,22 +58,12 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/secureScores/{secureScoreName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "Secure Score"
-          ],
-          [
-            "+",
-            "SecureScoreItems"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -136,22 +72,12 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/secureScores/{secureScoreName}/secureScoreControls": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "Secure Score"
-          ],
-          [
-            "+",
-            "SecureScoreItems"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -194,25 +120,6 @@
         }
       }
     },
-    "secureScoreControlDefinitionList__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/SecureScoreControlDefinitionItem"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
     "AzureResourceLink__added": {
       "type": "object",
       "description": "Describes an Azure resource with kind",
@@ -220,6 +127,71 @@
         "id": {
           "type": "string",
           "description": "Azure resource Id",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudError__added": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody__added": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo__added": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
           "readOnly": true
         }
       }
@@ -245,40 +217,16 @@
         }
       }
     },
-    "SecureScoreControlDefinitionList__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/SecureScoreControlDefinitionItem"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ScoreDetails": {
       "readOnly__deleted": true,
       "properties": {
         "max": {
-          "minimum__deleted": 0,
           "exclusiveMinimum__deleted": false
         },
         "current": {
-          "minimum__deleted": 0,
           "exclusiveMinimum__deleted": false
         },
         "percentage": {
-          "minimum__deleted": 0,
           "exclusiveMinimum__deleted": false,
           "exclusiveMaximum__deleted": false
         }
@@ -305,7 +253,6 @@
     "SecureScoreControlDefinitionItemProperties": {
       "properties": {
         "maxScore": {
-          "minimum__deleted": 0,
           "exclusiveMinimum__deleted": false
         },
         "assessmentDefinitions": {
@@ -338,23 +285,12 @@
         ]
       ]
     },
-    "SecureScoreControlList": {
-      "required__added": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
-    },
     "SecureScoreControlScoreDetails": {
       "properties": {
         "score": {
           "readOnly__added": true
         },
         "weight": {
-          "minimum__deleted": 0,
           "exclusiveMinimum__deleted": false
         },
         "definition": {
@@ -364,11 +300,6 @@
     },
     "SecureScoreItem": {
       "readOnly__deleted": true,
-      "properties": {
-        "properties": {
-          "readOnly__deleted": true
-        }
-      },
       "allOf": [
         [
           "~",
@@ -385,18 +316,7 @@
       "readOnly__deleted": true,
       "properties": {
         "weight": {
-          "minimum__deleted": 0,
           "exclusiveMinimum__deleted": false
-        }
-      }
-    },
-    "SecureScoresList": {
-      "required__added": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
         }
       }
     }

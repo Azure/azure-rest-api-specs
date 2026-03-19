@@ -13,19 +13,20 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Security;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@tag("Secure Score Controls")
 interface SecureScoreControlsOperationGroup {
   /**
    * Get all security controls within a scope
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SecureScoreControls_List")
   @autoRoute
   @get
+  @list
   @action("secureScoreControls")
   list is ArmProviderActionSync<
     Response = SecureScoreControlList,
     Scope = SubscriptionActionScope,
+    Error = CloudError,
     Parameters = {
       /**
        * OData expand. Optional.
@@ -36,27 +37,30 @@ interface SecureScoreControlsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@tag("Secure Score Control Definitions")
 interface SecureScoreControlDefinitionsOperationGroup {
   /**
    * List the available security controls, their assessments, and the max score
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SecureScoreControlDefinitions_List")
   @autoRoute
   @get
+  @list
   @action("secureScoreControlDefinitions")
-  list is ArmProviderActionSync<Response = SecureScoreControlDefinitionList>;
+  list is ArmProviderActionSync<
+    Response = secureScoreControlDefinitionList,
+    Error = CloudError
+  >;
   /**
    * For a specified subscription, list the available security controls, their assessments, and the max score
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SecureScoreControlDefinitions_ListBySubscription")
   @autoRoute
   @get
+  @list
   @action("secureScoreControlDefinitions")
   listBySubscription is ArmProviderActionSync<
-    Response = SecureScoreControlDefinitionList,
-    Scope = SubscriptionActionScope
+    Response = secureScoreControlDefinitionList,
+    Scope = SubscriptionActionScope,
+    Error = CloudError
   >;
 }
