@@ -928,6 +928,10 @@ directive:
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: policyAssignments.json
     reason: "Policy assignments can have a manged identity associated with them. This requires a location."
+  - suppress: GuidUsage
+    from: preview/2026-01-01-preview/openapi.json
+    reason: "This is for a server side generated read only property."
+    where: $.definitions["Azure.Core.uuid"]
 ```
 
 ---
