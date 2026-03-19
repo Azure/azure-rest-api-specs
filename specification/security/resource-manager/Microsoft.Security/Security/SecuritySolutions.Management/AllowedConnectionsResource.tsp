@@ -9,6 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 /**
  * The resource whose properties describes the allowed traffic between Azure resources
@@ -27,31 +28,34 @@ model AllowedConnectionsResource
   /**
    * Location where the resource is stored
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@tag("AllowedConnections")
 interface AllowedConnectionsResources {
   /**
    * Gets the list of all possible traffic between resources for the subscription and location, based on connection type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   @operationId("AllowedConnections_Get")
-  get is ArmResourceRead<AllowedConnectionsResource>;
+  get is ArmResourceRead<AllowedConnectionsResource, Error = CloudError>;
 
   /**
    * Gets the list of all possible traffic between resources for the subscription and location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   @operationId("AllowedConnections_ListByHomeRegion")
   listByHomeRegion is Extension.ListByTarget<
     Extension.Subscription,
     AllowedConnectionsResource,
-    Response = ArmResponse<AllowedConnectionsList>
+    Response = ArmResponse<AllowedConnectionsList>,
+    Error = CloudError
   >;
 }
 

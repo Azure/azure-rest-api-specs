@@ -9,6 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 
 @parentResource(ResourceGroupLocationResource)
@@ -24,18 +25,20 @@ model SecuritySolution
   /**
    * Location where the resource is stored
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@tag("SecuritySolutions")
 interface SecuritySolutions {
   /**
    * Gets a specific Security Solution.
    */
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  get is ArmResourceRead<SecuritySolution>;
+  get is ArmResourceRead<SecuritySolution, Error = CloudError>;
 }
 
 @@doc(SecuritySolution.name, "Name of security solution.");

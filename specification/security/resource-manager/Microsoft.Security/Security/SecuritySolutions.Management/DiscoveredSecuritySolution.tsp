@@ -9,6 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 
 @parentResource(ResourceGroupLocationResource)
@@ -27,18 +28,20 @@ model DiscoveredSecuritySolution
   /**
    * Location where the resource is stored
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@tag("DiscoveredSecuritySolutions")
 interface DiscoveredSecuritySolutions {
   /**
    * Gets a specific discovered Security Solution.
    */
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  get is ArmResourceRead<DiscoveredSecuritySolution>;
+  get is ArmResourceRead<DiscoveredSecuritySolution, Error = CloudError>;
 
   /**
    * Gets a list of discovered Security Solutions for the subscription and location.
@@ -47,7 +50,8 @@ interface DiscoveredSecuritySolutions {
   listByHomeRegion is Extension.ListByTarget<
     Extension.Subscription,
     DiscoveredSecuritySolution,
-    Response = ArmResponse<DiscoveredSecuritySolutionList>
+    Response = ArmResponse<DiscoveredSecuritySolutionList>,
+    Error = CloudError
   >;
 }
 

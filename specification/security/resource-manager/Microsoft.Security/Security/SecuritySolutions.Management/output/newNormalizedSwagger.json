@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2020-01-01",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider"
   },
   "produces": [
     "application/json"
@@ -15,6 +15,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/allowedConnections": {
       "get": {
         "operationId": "AllowedConnections_List",
+        "tags": [
+          "AllowedConnections"
+        ],
         "description": "Gets the list of all possible traffic between resources for the subscription",
         "parameters": [],
         "responses": {
@@ -27,7 +30,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -35,12 +38,18 @@
           "Get allowed connections on a subscription": {
             "$ref": "./examples/AllowedConnections/GetAllowedConnectionsSubscription_example.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/discoveredSecuritySolutions": {
       "get": {
         "operationId": "DiscoveredSecuritySolutions_List",
+        "tags": [
+          "DiscoveredSecuritySolutions"
+        ],
         "description": "Gets a list of discovered Security Solutions for the subscription.",
         "parameters": [],
         "responses": {
@@ -53,7 +62,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -61,12 +70,18 @@
           "Get discovered security solutions": {
             "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionsSubscription_example.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/externalSecuritySolutions": {
       "get": {
         "operationId": "ExternalSecuritySolutions_List",
+        "tags": [
+          "ExternalSecuritySolutions"
+        ],
         "description": "Gets a list of external security solutions for the subscription.",
         "parameters": [],
         "responses": {
@@ -79,7 +94,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -87,12 +102,18 @@
           "Get external security solutions on a subscription": {
             "$ref": "./examples/ExternalSecuritySolutions/GetExternalSecuritySolutionsSubscription_example.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/jitNetworkAccessPolicies": {
       "get": {
         "operationId": "JitNetworkAccessPolicies_List",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
         "description": "Policies for protecting resources using Just-in-Time access control.",
         "parameters": [],
         "responses": {
@@ -105,7 +126,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -113,6 +134,9 @@
           "Get JIT network access policies on a subscription": {
             "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesSubscription_example.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -120,7 +144,7 @@
       "get": {
         "operationId": "AllowedConnections_ListByHomeRegion",
         "tags": [
-          "AllowedConnectionsResources"
+          "AllowedConnections"
         ],
         "description": "Gets the list of all possible traffic between resources for the subscription and location.",
         "parameters": [
@@ -138,7 +162,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -174,7 +198,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -210,7 +234,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -246,7 +270,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -263,6 +287,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData": {
       "get": {
         "operationId": "SecuritySolutionsReferenceData_ListByHomeRegion",
+        "tags": [
+          "SecuritySolutionsReferenceData"
+        ],
         "description": "Gets list of all supported Security Solutions for subscription and location.",
         "parameters": [
           {
@@ -282,7 +309,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -297,7 +324,7 @@
       "get": {
         "operationId": "Topology_ListByHomeRegion",
         "tags": [
-          "TopologyResources"
+          "Topology"
         ],
         "description": "Gets a list that allows to build a topology view of a subscription and location.",
         "parameters": [
@@ -315,7 +342,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -332,6 +359,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/securitySolutions": {
       "get": {
         "operationId": "SecuritySolutions_List",
+        "tags": [
+          "SecuritySolutions"
+        ],
         "description": "Gets a list of Security Solutions for the subscription.",
         "parameters": [],
         "responses": {
@@ -344,7 +374,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -352,12 +382,18 @@
           "Get security solutions": {
             "$ref": "./examples/SecuritySolutions/GetSecuritySolutionsSubscription_example.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/securitySolutionsReferenceData": {
       "get": {
         "operationId": "securitySolutionsReferenceData_List",
+        "tags": [
+          "securitySolutionsReferenceData"
+        ],
         "description": "Gets a list of all supported Security Solutions for the subscription.",
         "parameters": [],
         "responses": {
@@ -370,7 +406,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -384,6 +420,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/topologies": {
       "get": {
         "operationId": "Topology_List",
+        "tags": [
+          "Topology"
+        ],
         "description": "Gets a list that allows to build a topology view of a subscription.",
         "parameters": [],
         "responses": {
@@ -396,7 +435,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -404,6 +443,9 @@
           "Get topology on a subscription": {
             "$ref": "./examples/Topology/GetTopologySubscription_example.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -444,7 +486,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -485,7 +527,14 @@
             "name": "serverVulnerabilityAssessment",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ServerVulnerabilityAssessmentName",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -498,7 +547,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -511,7 +560,7 @@
       "put": {
         "operationId": "ServerVulnerabilityAssessment_CreateOrUpdate",
         "tags": [
-          "ServerVulnerabilityAssessments"
+          "ServerVulnerabilityAssessment"
         ],
         "description": "Creating a server vulnerability assessment on a resource, which will onboard a resource for having a vulnerability assessment on it",
         "parameters": [
@@ -537,7 +586,14 @@
             "name": "serverVulnerabilityAssessment",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ServerVulnerabilityAssessmentName",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -550,7 +606,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -563,7 +619,7 @@
       "delete": {
         "operationId": "ServerVulnerabilityAssessment_Delete",
         "tags": [
-          "ServerVulnerabilityAssessments"
+          "ServerVulnerabilityAssessment"
         ],
         "description": "Removing server vulnerability assessment from a resource.",
         "parameters": [
@@ -589,7 +645,14 @@
             "name": "serverVulnerabilityAssessment",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ServerVulnerabilityAssessmentName",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -611,7 +674,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -626,6 +689,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/jitNetworkAccessPolicies": {
       "get": {
         "operationId": "JitNetworkAccessPolicies_ListByResourceGroup",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
         "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
         "parameters": [],
         "responses": {
@@ -638,7 +704,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -646,6 +712,9 @@
           "Get JIT network access policies on a resource group": {
             "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesResourceGroup_example.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -653,7 +722,7 @@
       "get": {
         "operationId": "AllowedConnections_Get",
         "tags": [
-          "AllowedConnectionsResources"
+          "AllowedConnections"
         ],
         "description": "Gets the list of all possible traffic between resources for the subscription and location, based on connection type.",
         "parameters": [
@@ -685,7 +754,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -724,7 +793,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -763,7 +832,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -796,7 +865,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -838,7 +907,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -883,7 +952,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -920,7 +989,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -983,7 +1052,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1022,7 +1091,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1037,7 +1106,7 @@
       "get": {
         "operationId": "Topology_Get",
         "tags": [
-          "TopologyResources"
+          "Topology"
         ],
         "description": "Gets a specific topology component.",
         "parameters": [
@@ -1061,7 +1130,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1245,6 +1314,56 @@
         }
       ]
     },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
     "ConnectableResource": {
       "type": "object",
       "description": "Describes the allowed inbound and outbound traffic of an Azure resource",
@@ -1342,10 +1461,7 @@
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "DiscoveredSecuritySolutionProperties": {
       "type": "object",
@@ -1383,6 +1499,21 @@
         "securityFamily",
         "sku"
       ]
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
     },
     "ExternalSecuritySolution": {
       "type": "object",
@@ -1509,6 +1640,7 @@
         "number": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
           "maximum": 65535
         },
         "allowedSourceAddressPrefix": {
@@ -1621,6 +1753,7 @@
         "number": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
           "maximum": 65535
         },
         "protocol": {
@@ -1692,6 +1825,7 @@
         "number": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
           "maximum": 65535
         },
         "allowedSourceAddressPrefix": {

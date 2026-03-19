@@ -9,6 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 
 @parentResource(ResourceGroupLocationResource)
@@ -24,31 +25,34 @@ model TopologyResource
   /**
    * Location where the resource is stored
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@tag("Topology")
 interface TopologyResources {
   /**
    * Gets a specific topology component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   @operationId("Topology_Get")
-  get is ArmResourceRead<TopologyResource>;
+  get is ArmResourceRead<TopologyResource, Error = CloudError>;
 
   /**
    * Gets a list that allows to build a topology view of a subscription and location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   @operationId("Topology_ListByHomeRegion")
   listByHomeRegion is Extension.ListByTarget<
     Extension.Subscription,
     TopologyResource,
-    Response = ArmResponse<TopologyList>
+    Response = ArmResponse<TopologyList>,
+    Error = CloudError
   >;
 }
 

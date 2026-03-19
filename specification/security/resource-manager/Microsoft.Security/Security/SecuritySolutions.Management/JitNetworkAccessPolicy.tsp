@@ -9,6 +9,11 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Security;
 
 @parentResource(ResourceGroupLocationResource)
@@ -27,13 +32,13 @@ model JitNetworkAccessPolicy
   /**
    * Kind of the resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   /**
    * Location where the resource is stored
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   location?: string;
 }
@@ -57,6 +62,7 @@ alias JitNetworkAccessPoliciesInitiateOps = Azure.ResourceManager.Legacy.RoutedO
     jitNetworkAccessPolicyName: string;
   },
   {
+    /** Type of the action to do on the Just-in-Time access policy. */
     @path
     @key
     jitNetworkAccessPolicyInitiateType: JitNetworkAccessPolicyInitiateType;
@@ -66,29 +72,32 @@ alias JitNetworkAccessPoliciesInitiateOps = Azure.ResourceManager.Legacy.RoutedO
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ allowStaticRoutes: true })
+@tag("JitNetworkAccessPolicies")
 interface JitNetworkAccessPolicies {
   /**
    * Policies for protecting resources using Just-in-Time access control for the subscription, location
    */
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  get is ArmResourceRead<JitNetworkAccessPolicy>;
+  get is ArmResourceRead<JitNetworkAccessPolicy, Error = CloudError>;
 
   /**
    * Create a policy for protecting resources using Just-in-Time access control
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     JitNetworkAccessPolicy,
-    Response = ArmResourceUpdatedResponse<JitNetworkAccessPolicy>
+    Response = ArmResourceUpdatedResponse<JitNetworkAccessPolicy>,
+    Error = CloudError
   >;
 
   /**
    * Delete a Just-in-Time access control policy.
    */
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  delete is ArmResourceDeleteSync<JitNetworkAccessPolicy>;
+  delete is ArmResourceDeleteSync<JitNetworkAccessPolicy, Error = CloudError>;
 
   /**
    * Policies for protecting resources using Just-in-Time access control for the subscription, location
@@ -96,7 +105,8 @@ interface JitNetworkAccessPolicies {
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   listByResourceGroupAndRegion is ArmResourceListByParent<
     JitNetworkAccessPolicy,
-    Response = ArmResponse<JitNetworkAccessPoliciesList>
+    Response = ArmResponse<JitNetworkAccessPoliciesList>,
+    Error = CloudError
   >;
 
   /**
@@ -106,12 +116,15 @@ interface JitNetworkAccessPolicies {
   listByRegion is Extension.ListByTarget<
     Extension.Subscription,
     JitNetworkAccessPolicy,
-    Response = ArmResponse<JitNetworkAccessPoliciesList>
+    Response = ArmResponse<JitNetworkAccessPoliciesList>,
+    Error = CloudError
   >;
 
   /**
    * Initiate a JIT access from a specific Just-in-Time policy configuration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}")
   initiate is JitNetworkAccessPoliciesInitiateOps.ActionSync<
     JitNetworkAccessPolicy,
@@ -119,9 +132,11 @@ interface JitNetworkAccessPolicies {
     AcceptedResponse & {
       @bodyRoot
       _: JitNetworkAccessRequest;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 }
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum JitNetworkAccessPolicyInitiateType {
   initiate,
 }
