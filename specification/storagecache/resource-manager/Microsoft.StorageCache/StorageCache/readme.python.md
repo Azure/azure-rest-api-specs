@@ -23,6 +23,6 @@ modelerfour:
 
 directive:
   - from: swagger-document
-    where: $.definitions.AmlFilesystem.properties
+    where: $.definitions.AmlFilesystem.properties.properties.properties
     transform: $.currentStorageCapacityTiB["x-ms-client-name"] = "currentStorageCapacityTib"
 ```
