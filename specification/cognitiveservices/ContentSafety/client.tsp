@@ -33,3 +33,10 @@ interface BlocklistClient {
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
+
+// Python-specific customizations for APIView feedback
+@@clientName(ContentSafety.TextBlocklists.removeBlocklistItems, "removeItems", "python");
+@@access(ContentSafety.TextBlocklists.deleteTextBlocklist, Access.internal, "python");
+@@clientName(ContentSafety.AnalyzeImageOutputType.FourSeverityLevels, "fourSeverity", "python");
+@@alternateType(ContentSafety.TextCategoriesAnalysis.severity, float32, "python");
+@@alternateType(ContentSafety.ImageCategoriesAnalysis.severity, float32, "python");
