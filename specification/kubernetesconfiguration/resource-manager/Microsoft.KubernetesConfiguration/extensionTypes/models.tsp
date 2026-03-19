@@ -176,3 +176,13 @@ model ExtensionTypeVersionUnsupportedKubernetesMatrixItem {
    */
   unsupportedVersions?: string[];
 }
+
+/**
+ * List of supported Azure locations for an extension type
+ */
+model SupportedLocationsList {
+  /**
+   * Array of Azure region names where the extension type is supported
+   */
+  value: string[];
+}

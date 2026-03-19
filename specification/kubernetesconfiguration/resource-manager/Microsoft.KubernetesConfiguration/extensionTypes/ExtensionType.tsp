@@ -98,6 +98,29 @@ interface ExtensionTypes {
     Response = ArmResponse<ExtensionTypesList>
   >;
 }
+
+interface ExtensionTypeSupportedLocations {
+  /**
+   * List all supported Azure locations for the specified extension type.
+   */
+  @tag("ExtensionTypes")
+  @tag("ClusterExtensionTypes")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}/locations")
+  @get
+  listSupportedLocations(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    
+    /**
+     * Name of the Extension Type.
+     */
+    @path
+    @pattern("^[a-zA-Z][a-zA-Z0-9-_]*$")
+    extensionTypeName: string,
+  ): ArmResponse<SupportedLocationsList> | ErrorResponse;
+}
+
+
 alias ExtensionTypeOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
