@@ -44,3 +44,7 @@ namespace CombineClient;
 @@clientName(Microsoft.Network.QosIpRange.startIP, "startIp", "java");
 @@clientName(Microsoft.Network.QosIpRange.endIP, "endIp", "java");
 @@clientName(Microsoft.Network.ErrorResponse, "NetworkErrorResponse", "java");
+@@clientName(Microsoft.Network.Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
+  "ManagedServiceIdentityUserAssignedIdentities",
+  "java"
+);
