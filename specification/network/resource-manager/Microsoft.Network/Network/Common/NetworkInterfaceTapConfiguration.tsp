@@ -21,6 +21,7 @@ namespace Microsoft.Network;
 @parentResource(NetworkInterface)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkInterfaceTapConfiguration extends SubResourceModel {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: NetworkInterfaceTapConfigurationPropertiesFormat;
 
   /**

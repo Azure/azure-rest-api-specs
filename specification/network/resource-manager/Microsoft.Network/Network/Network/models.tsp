@@ -2009,89 +2009,6 @@ union IpAllocationType {
 }
 
 /**
- * The load distribution policy for this rule.
- */
-union LoadDistribution {
-  string,
-
-  /**
-   * Default
-   */
-  Default: "Default",
-
-  /**
-   * SourceIP
-   */
-  SourceIP: "SourceIP",
-
-  /**
-   * SourceIPProtocol
-   */
-  SourceIPProtocol: "SourceIPProtocol",
-}
-
-/**
- * The protocol of the end point. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be successful.
- */
-union ProbeProtocol {
-  string,
-
-  /**
-   * Http
-   */
-  Http: "Http",
-
-  /**
-   * Tcp
-   */
-  Tcp: "Tcp",
-
-  /**
-   * Https
-   */
-  Https: "Https",
-}
-
-/**
- * Determines how new connections are handled by the load balancer when all backend instances are probed down.
- */
-union ProbeNoHealthyBackendsBehavior {
-  string,
-
-  /**
-   * No new flows will be sent to the backend pool.
-   */
-  AllProbedDown: "AllProbedDown",
-
-  /**
-   * When all backend instances are probed down, incoming packets will be sent to all instances.
-   */
-  AllProbedUp: "AllProbedUp",
-}
-
-/**
- * The protocol for the outbound rule in load balancer.
- */
-union LoadBalancerOutboundRuleProtocol {
-  string,
-
-  /**
-   * Tcp
-   */
-  Tcp: "Tcp",
-
-  /**
-   * Udp
-   */
-  Udp: "Udp",
-
-  /**
-   * All
-   */
-  All: "All",
-}
-
-/**
  * Who created the route.
  */
 union EffectiveRouteSource {
@@ -3622,55 +3539,6 @@ union UsageUnit {
    * Count
    */
   Count: "Count",
-}
-
-/**
- * The status of the virtual network peering.
- */
-union VirtualNetworkPeeringState {
-  string,
-
-  /**
-   * Initiated
-   */
-  Initiated: "Initiated",
-
-  /**
-   * Connected
-   */
-  Connected: "Connected",
-
-  /**
-   * Disconnected
-   */
-  Disconnected: "Disconnected",
-}
-
-/**
- * The peering sync status of the virtual network peering.
- */
-union VirtualNetworkPeeringLevel {
-  string,
-
-  /**
-   * FullyInSync
-   */
-  FullyInSync: "FullyInSync",
-
-  /**
-   * RemoteNotInSync
-   */
-  RemoteNotInSync: "RemoteNotInSync",
-
-  /**
-   * LocalNotInSync
-   */
-  LocalNotInSync: "LocalNotInSync",
-
-  /**
-   * LocalAndRemoteNotInSync
-   */
-  LocalAndRemoteNotInSync: "LocalAndRemoteNotInSync",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -26051,8 +25919,8 @@ model VirtualNetworkAppliancePropertiesFormat {
  * The virtual network appliance ip configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model VirtualNetworkApplianceIpConfiguration extends SubResource {
   /**
    * Properties of the virtual network appliance ip configuration.

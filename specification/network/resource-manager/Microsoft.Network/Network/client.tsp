@@ -24,3 +24,32 @@ namespace CombineClient;
   "ArmErrorResponse",
   "javascript"
 );
+
+// Java naming mitigations
+@@clientName(Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.hostName,
+  "hostname",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayBackendSettingsPropertiesFormat.hostName,
+  "hostname",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayHttpListenerPropertiesFormat.hostName,
+  "hostname",
+  "java"
+);
+@@clientName(Microsoft.Network.BastionActiveSession.userName,
+  "username",
+  "java"
+);
+@@clientName(Microsoft.Network.AzureReachabilityReportLatencyInfo.timeStamp,
+  "timestamp",
+  "java"
+);
+@@clientName(Microsoft.Network.QosIpRange.startIP, "startIp", "java");
+@@clientName(Microsoft.Network.QosIpRange.endIP, "endIp", "java");
+@@clientName(Microsoft.Network.ErrorResponse, "NetworkErrorResponse", "java");
+@@clientName(Microsoft.Network.Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
+  "ManagedServiceIdentityUserAssignedIdentities",
+  "java"
+);

@@ -47,7 +47,7 @@ model CacheProperties {
   @minLength(1)
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  filepath: string;
+  filePath: string;
 
   /**
    * Maximum storage quota allowed for a file system in bytes. Valid values are in the range 50GiB to 1PiB. Values expressed in bytes as multiples of 1GiB.
