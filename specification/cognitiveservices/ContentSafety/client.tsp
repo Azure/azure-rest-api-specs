@@ -24,6 +24,7 @@ interface ContentSafetyClient {
 interface BlocklistClient {
   addOrUpdateBlocklistItems is ContentSafety.TextBlocklists.addOrUpdateBlocklistItems;
   @convenientAPI(false, "csharp") // csharp is not ready for patch operations, therefore hide the convenience API of this operation
+  @convenientAPI(false, "java")
   createOrUpdateTextBlocklist is ContentSafety.TextBlocklists.createOrUpdateTextBlocklist;
   deleteTextBlocklist is ContentSafety.TextBlocklists.deleteTextBlocklist;
   getTextBlocklist is ContentSafety.TextBlocklists.getTextBlocklist;
@@ -33,3 +34,8 @@ interface BlocklistClient {
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
+
+// Java-specific customizations
+@@clientName(ContentSafety.AnalyzeTextOutputType, "AnalyzeTextSeverityLevel", "java");
+@@clientName(ContentSafety.AnalyzeTextOptions.outputType, "severityLevel", "java");
+@@clientName(ContentSafety.TextCategoriesAnalysis.severity, "severityLevel", "java");
