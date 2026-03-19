@@ -195,4 +195,30 @@ interface Agents {
     },
     AgentsPagedResult<AgentVersionObject>
   >;
+
+  /**
+   * Upload a code zip file for code-based hosted agent deployment.
+   * The zip is stored internally and an opaque code_reference_id is returned.
+   * This ID is then passed into code_configuration.code_reference_id when creating an agent version.
+   * Maximum upload size is 250 MB.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/byos" "Code upload is stored internally by the service, not BYOS."
+  @post
+  @route("/code:upload")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
+  uploadCode is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
+    {
+      @header contentType: "application/zip" | "application/octet-stream";
+
+      @doc("The code zip file to upload.")
+      @body
+      body: bytes;
+    },
+    CodeUploadResponse
+  >;
 }
