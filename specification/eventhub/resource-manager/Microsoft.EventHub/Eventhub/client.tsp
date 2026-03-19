@@ -159,8 +159,14 @@ using Microsoft.EventHub;
   "csharp"
 );
 @@clientName(ErrorDetail, "EventHubsErrorDetail", "csharp");
+@@clientName(ErrorDetail, "EventHubsErrorDetail", "java");
+@@clientName(ErrorDetail, "EventHubsErrorDetail", "python");
 @@clientName(ErrorAdditionalInfo, "EventHubsErrorAdditionalInfo", "csharp");
+@@clientName(ErrorAdditionalInfo, "EventHubsErrorAdditionalInfo", "java");
+@@clientName(ErrorAdditionalInfo, "EventHubsErrorAdditionalInfo", "python");
 @@clientName(ErrorResponse, "EventHubsErrorResponse", "csharp");
+@@clientName(ErrorResponse, "EventHubsErrorResponse", "java");
+@@clientName(ErrorResponse, "EventHubsErrorResponse", "python");
 @@clientName(TlsVersion, "EventHubsTlsVersion", "csharp");
 @@clientName(TlsVersion.`1.0`, "Tls1_0", "csharp");
 @@clientName(TlsVersion.`1.1`, "Tls1_1", "csharp");
