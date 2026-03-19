@@ -345,6 +345,128 @@ namespace CombineClient;
   "java"
 );
 
+// More property-level IP → Ip renames
+@@clientName(Microsoft.Network.NetworkInterfacePropertiesFormat.enableIPForwarding,
+  "enableIpForwarding",
+  "java"
+);
+@@clientName(Microsoft.Network.InboundNatRulePropertiesFormat.enableFloatingIP,
+  "enableFloatingIp",
+  "java"
+);
+@@clientName(Microsoft.Network.InboundNatRulePropertiesFormat.backendIPConfiguration,
+  "backendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.LoadBalancingRulePropertiesFormat.enableFloatingIP,
+  "enableFloatingIp",
+  "java"
+);
+@@clientName(Microsoft.Network.InboundNatPoolPropertiesFormat.enableFloatingIP,
+  "enableFloatingIp",
+  "java"
+);
+@@clientName(Microsoft.Network.IPConfigurationPropertiesFormat.privateIPAllocationMethod,
+  "privateIpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressPropertiesFormat.publicIPAllocationMethod,
+  "publicIpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressPropertiesFormat.publicIPAddressVersion,
+  "publicIpAddressVersion",
+  "java"
+);
+@@clientName(Microsoft.Network.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+  "privateIpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddressVersion,
+  "privateIpAddressVersion",
+  "java"
+);
+@@clientName(Microsoft.Network.FrontendIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+  "privateIpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.FrontendIPConfigurationPropertiesFormat.privateIPAddressVersion,
+  "privateIpAddressVersion",
+  "java"
+);
+@@clientName(Microsoft.Network.PrivateLinkServiceIpConfigurationProperties.privateIPAllocationMethod,
+  "privateIpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.PrivateLinkServiceIpConfigurationProperties.privateIPAddressVersion,
+  "privateIpAddressVersion",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+  "privateIpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayPrivateLinkIpConfigurationProperties.privateIPAllocationMethod,
+  "privateIpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.BastionHostIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+  "privateIpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.HubIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+  "privateIpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+  "privateIpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.RouteTargetAddressPropertiesFormat.privateIPAllocationMethod,
+  "privateIpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualNetworkApplianceIpConfigurationProperties.privateIPAllocationMethod,
+  "privateIpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualNetworkApplianceIpConfigurationProperties.privateIPAddressVersion,
+  "privateIpAddressVersion",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPPrefixPropertiesFormat.publicIPAddressVersion,
+  "publicIpAddressVersion",
+  "java"
+);
+@@clientName(Microsoft.Network.IPAddressAvailabilityResult.availableIPAddresses,
+  "availableIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.Network.DdosProtectionPlanPropertiesFormat.publicIPAddresses,
+  "publicIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPPrefixPropertiesFormat.publicIPAddresses,
+  "publicIpAddresses",
+  "java"
+);
+
+// activeActive → active rename
+@@clientName(Microsoft.Network.VirtualNetworkGatewayPropertiesFormat.activeActive,
+  "active",
+  "java"
+);
+
+// Operation renames IP → Ip
+@@clientName(Microsoft.Network.NetworkWatchers.verifyIPFlow,
+  "verifyIpFlow",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualNetworks.checkIPAddressAvailability,
+  "checkIpAddressAvailability",
+  "java"
+);
+
 // Operation renames for Java (from readme.java.md)
 @@clientLocation(Microsoft.Network.BgpConnections.get,
   "VirtualHubBgpConnections",
