@@ -27,7 +27,7 @@ These are the global settings for the ResourceGraph API.
 ``` yaml
 title: ResourceGraphClient
 openapi-type: arm
-tag: package-preview-2023-09
+tag: 2024-04
 ```
 
 ### Validations
@@ -47,7 +47,8 @@ These settings apply only when `--tag=2024-04` is specified on the command line.
 
 ```yaml $(tag) == '2024-04'
 input-file:
-  - stable/2024-04-01/openapi.json
+  - stable/2024-04-01/graphquery.json
+  - stable/2024-04-01/resourcegraph.json
   - preview/2021-06-01-preview/resourceshistory.json
   - preview/2020-09-01-preview/resourcechanges.json
 ```
