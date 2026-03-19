@@ -2,6 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
+
 ``` yaml $(python)
 title: PolicyClient
 azure-arm: true
@@ -12,8 +13,6 @@ no-namespace-folders: true
 reformat-next-link: false
 combine-operation-files: true
 clear-output-folder: true
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python)

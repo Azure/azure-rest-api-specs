@@ -23,7 +23,7 @@ namespace Microsoft.Authorization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Retrieves the policy assignment with the given ID.")
-  @scope("java,csharp")
+  @scope("java,csharp,go")
   @clientLocation(PolicyAssignments)
   @get
   @route("/{+policyAssignmentId}")
@@ -37,7 +37,7 @@ namespace Microsoft.Authorization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Creates or updates a policy assignment.")
-  @scope("java,csharp")
+  @scope("java,csharp,go")
   @clientLocation(PolicyAssignments)
   @put
   @route("/{+policyAssignmentId}")
@@ -58,7 +58,7 @@ namespace Microsoft.Authorization {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   #suppress "@typespec/http/patch-implicit-optional" "For client"
   @summary("Updates a policy assignment.")
-  @scope("java,csharp")
+  @scope("java,csharp,go")
   @clientLocation(PolicyAssignments)
   @patch
   @route("/{+policyAssignmentId}")
@@ -78,7 +78,7 @@ namespace Microsoft.Authorization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Deletes a policy assignment.")
-  @scope("java,csharp")
+  @scope("java,csharp,go")
   @clientLocation(PolicyAssignments)
   @delete
   @route("/{+policyAssignmentId}")
@@ -100,6 +100,106 @@ namespace Microsoft.Authorization {
 );
 @@clientName(Microsoft.Authorization.PolicyTokenResponse,
   "PolicyTokenResponseResult",
+  "csharp"
+);
+
+// Rename types that are too generic and lack service-context prefix
+@@clientName(Microsoft.Authorization.Identity,
+  "PolicyAssignmentIdentity",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.ResourceIdentityType,
+  "PolicyIdentityType",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.UserAssignedIdentitiesValue,
+  "PolicyUserAssignedIdentity",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.Override, "PolicyOverride", "csharp");
+@@clientName(Microsoft.Authorization.OverrideKind,
+  "PolicyOverrideKind",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.Selector, "PolicySelector", "csharp");
+@@clientName(Microsoft.Authorization.SelectorKind,
+  "PolicySelectorKind",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.ResourceSelector,
+  "PolicyResourceSelector",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.ParameterDefinitionsValue,
+  "PolicyParameterMetadata",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.ParameterDefinitionsValueMetadata,
+  "PolicyParameterMetadataProperties",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.ParameterValuesValue,
+  "PolicyParameterValue",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.ParameterType,
+  "PolicyParameterType",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.AssignmentType,
+  "PolicyAssignmentType",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.EnforcementMode,
+  "PolicyEnforcementMode",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.ExternalEndpointResult,
+  "PolicyExternalEndpointResult",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.NonComplianceMessage,
+  "PolicyNonComplianceMessage",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.SelfServeExemptionSettings,
+  "PolicySelfServeExemptionSettings",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.ExternalEvaluationEndpointSettings,
+  "PolicyExternalEvaluationEndpointSettings",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.ExternalEvaluationEnforcementSettings,
+  "PolicyExternalEvaluationEnforcementSettings",
+  "csharp"
+);
+
+// Boolean naming: Enabled -> IsEnabled
+@@clientName(Microsoft.Authorization.SelfServeExemptionSettings.enabled,
+  "IsEnabled",
+  "csharp"
+);
+
+// DateTimeOffset naming: Expiration -> ExpiresOn
+@@clientName(Microsoft.Authorization.PolicyTokenResponse.expiration,
+  "ExpiresOn",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.ExternalEvaluationEndpointInvocationResult.expiration,
+  "ExpiresOn",
+  "csharp"
+);
+
+// Type formatting: Location -> AzureLocation
+@@alternateType(Microsoft.Authorization.PolicyAssignmentUpdate.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+// Rename model ending with "Definition" (AZC0031)
+@@clientName(Microsoft.Authorization.DataManifestCustomResourceFunctionDefinition,
+  "DataManifestCustomResourceFunctionDetail",
   "csharp"
 );
 

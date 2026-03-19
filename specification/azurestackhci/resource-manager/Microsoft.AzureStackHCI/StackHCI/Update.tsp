@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 /**
@@ -74,6 +75,13 @@ interface Updates {
     OkResponse,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /**
+   * Prepare Update
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
+  @added(Versions.v2026_03_01_preview)
+  prepare is ArmResourceActionNoContentAsync<Update, void>;
 }
 
 @@doc(Update.name, "The name of the Update");
