@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Dynatrace.Observability;
 /**
@@ -95,6 +97,7 @@ interface MonitorResources {
   /**
    * Performs Dynatrace agent install/uninstall action through the Azure Dynatrace resource on the provided list of resources.
    */
+  @added(Versions.v2024_04_24)
   manageAgentInstallation is ArmResourceActionSync<
     MonitorResource,
     ManageAgentInstallationRequest,
