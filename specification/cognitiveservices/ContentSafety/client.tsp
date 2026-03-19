@@ -33,5 +33,8 @@ interface BlocklistClient {
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
-@@clientName(ImageData.content, "base64EncodedImageContent", "java");
-@@alternateType(ImageData.content, string, "java");
+@@clientName(ContentSafety.ImageData.content,
+  "base64EncodedImageContent",
+  "java"
+);
+@@alternateType(ContentSafety.ImageData.content, string, "java");
