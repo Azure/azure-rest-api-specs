@@ -264,6 +264,130 @@ using Http;
 @@clientName(Microsoft.RecoveryServices.KEKDetails, "KekDetails", "csharp");
 @@clientName(Microsoft.RecoveryServices.TargetAFSRestoreInfo, "TargetAfsRestoreInfo", "csharp");
 
+// ===== Case-change property/enum member renames for C# =====
+@@clientName(Microsoft.RecoveryServices.Settings.issqlcompression, "IsSqlCompression", "csharp");
+@@clientName(Microsoft.RecoveryServices.DataSourceType.AzureSqlDb, "AzureSqlDB", "csharp");
+@@clientName(Microsoft.RecoveryServices.DataSourceType.SAPAseDatabase, "SapAseDatabase", "csharp");
+@@clientName(Microsoft.RecoveryServices.DataSourceType.SAPHanaDBInstance, "SapHanaDBInstance", "csharp");
+@@clientName(Microsoft.RecoveryServices.DataSourceType.SAPHanaDatabase, "SapHanaDatabase", "csharp");
+@@clientName(Microsoft.RecoveryServices.DataSourceType.SQLDB, "SqlDB", "csharp");
+@@clientName(Microsoft.RecoveryServices.DataSourceType.SQLDataBase, "SqlDatabase", "csharp");
+@@clientName(Microsoft.RecoveryServices.DataSourceType.VM, "Vm", "csharp");
+@@clientName(Microsoft.RecoveryServices.DataSourceType.VMwareVM, "VMwareVm", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureFileShareType.XSMB, "Xsmb", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupItemType.AzureSqlDb, "AzureSqlDB", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupItemType.SAPAseDatabase, "SapAseDatabase", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupItemType.SAPHanaDBInstance, "SapHanaDBInstance", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupItemType.SAPHanaDatabase, "SapHanaDatabase", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupItemType.SQLDB, "SqlDB", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupItemType.SQLDataBase, "SqlDatabase", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupItemType.VM, "Vm", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupItemType.VMwareVM, "VMwareVm", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupManagementType.AzureIaasVM, "AzureIaasVm", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupManagementType.DPM, "Dpm", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupManagementType.MAB, "Mab", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadType.AzureSqlDb, "AzureSqlDB", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadType.SAPAseDatabase, "SapAseDatabase", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadType.SAPHanaDBInstance, "SapHanaDBInstance", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadType.SAPHanaDatabase, "SapHanaDatabase", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadType.SQLDB, "SqlDB", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadType.SQLDataBase, "SqlDatabase", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadType.VM, "Vm", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadType.VMwareVM, "VMwareVm", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMProtectionPolicy.instantRpRetentionRangeInDays, "InstantRPRetentionRangeInDays", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMRecoveryPoint.isSourceVMEncrypted, "IsSourceVmEncrypted", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMRecoveryPoint.osType, "OSType", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMRecoveryPoint.sourceVMStorageType, "SourceVmStorageType", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMRestoreRequest.securedVMOsDiskEncryptionSetId, "SecuredVmOSDiskEncryptionSetId", "csharp");
+@@clientName(Microsoft.RecoveryServices.MabServerType.DPMContainer, "DpmContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.MabServerType.IaasVMContainer, "IaasVmContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.MabServerType.IaasVMServiceContainer, "IaasVmServiceContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.MabServerType.MABContainer, "MabContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.MabServerType.VMAppContainer, "VmAppContainer", "csharp");
+@@clientName(Microsoft.RecoveryServices.TokenInformation.securityPIN, "SecurityPin", "csharp");
+@@clientName(Microsoft.RecoveryServices.SupportStatus.DefaultOFF, "DefaultOff", "csharp");
+@@clientName(Microsoft.RecoveryServices.SupportStatus.DefaultON, "DefaultOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadItem.subinquireditemcount, "SubInquiredItemCount", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectableItem.prebackupvalidation, "PreBackupValidation", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectableItem.subinquireditemcount, "SubInquiredItemCount", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectableItem.subprotectableitemcount, "SubProtectableItemCount", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadItemType.SAPAseDatabase, "SapAseDatabase", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadItemType.SAPAseSystem, "SapAseSystem", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadItemType.SAPHanaDBInstance, "SapHanaDBInstance", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadItemType.SAPHanaDatabase, "SapHanaDatabase", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadItemType.SAPHanaSystem, "SapHanaSystem", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadItemType.SQLDataBase, "SqlDatabase", "csharp");
+@@clientName(Microsoft.RecoveryServices.WorkloadItemType.SQLInstance, "SqlInstance", "csharp");
+
+// ===== Property name renames for C# backward compatibility =====
+
+// DateTime property renames: RecoveryPoint -> RecoverOn
+@@clientName(Microsoft.RecoveryServices.AzureFileshareProtectedItemExtendedInfo.oldestRecoveryPoint, "OldestRecoverOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMProtectedItemExtendedInfo.oldestRecoveryPoint, "OldestRecoverOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureSqlProtectedItemExtendedInfo.oldestRecoveryPoint, "OldestRecoverOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectedItemExtendedInfo.oldestRecoveryPoint, "OldestRecoverOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.DPMProtectedItemExtendedInfo.oldestRecoveryPoint, "OldestRecoverOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.MabFileFolderProtectedItemExtendedInfo.oldestRecoveryPoint, "OldestRecoverOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMProtectedItemExtendedInfo.oldestRecoveryPointInVault, "OldestRecoverOnInVault", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectedItemExtendedInfo.oldestRecoveryPointInVault, "OldestRecoverOnInVault", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMProtectedItemExtendedInfo.oldestRecoveryPointInArchive, "OldestRecoverOnInArchive", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectedItemExtendedInfo.oldestRecoveryPointInArchive, "OldestRecoverOnInArchive", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMProtectedItemExtendedInfo.newestRecoveryPointInArchive, "NewestRecoverOnInArchive", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectedItemExtendedInfo.newestRecoveryPointInArchive, "NewestRecoverOnInArchive", "csharp");
+
+// DateTime property renames: ExpiryTime -> ExpireOn
+@@clientName(Microsoft.RecoveryServices.AzureFileShareBackupRequest.recoveryPointExpiryTimeInUTC, "RecoveryPointExpireOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadBackupRequest.recoveryPointExpiryTimeInUTC, "RecoveryPointExpireOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMBackupRequest.recoveryPointExpiryTimeInUTC, "RecoveryPointExpireOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.RecoveryPointProperties.expiryTime, "ExpireOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.UnlockDeleteResponse.unlockDeleteExpiryTime, "UnlockDeleteExpireOn", "csharp");
+
+// DateTime property renames: recoveryPointTime -> RecoveryPointOn
+@@clientName(Microsoft.RecoveryServices.AzureFileShareRecoveryPoint.recoveryPointTime, "RecoveryPointOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.GenericRecoveryPoint.recoveryPointTime, "RecoveryPointOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMRecoveryPoint.recoveryPointTime, "RecoveryPointOn", "csharp");
+
+// DateTime property renames: recoveryPointTimeInUTC -> RecoveryPointCreatedOn
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadPointInTimeRecoveryPoint.recoveryPointTimeInUTC, "RecoveryPointCreatedOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadRecoveryPoint.recoveryPointTimeInUTC, "RecoveryPointCreatedOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPHanaPointInTimeRecoveryPoint.recoveryPointTimeInUTC, "RecoveryPointCreatedOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPHanaRecoveryPoint.recoveryPointTimeInUTC, "RecoveryPointCreatedOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPAsePointInTimeRecoveryPoint.recoveryPointTimeInUTC, "RecoveryPointCreatedOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPAseRecoveryPoint.recoveryPointTimeInUTC, "RecoveryPointCreatedOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLPointInTimeRecoveryPoint.recoveryPointTimeInUTC, "RecoveryPointCreatedOn", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLRecoveryPoint.recoveryPointTimeInUTC, "RecoveryPointCreatedOn", "csharp");
+
+// DateTime property renames: other
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLRecoveryPointExtendedInfo.dataDirectoryTimeInUTC, "DataDirectoryInfoCapturedOn", "csharp");
+
+// Boolean property renames: Does prefix
+@@clientName(Microsoft.RecoveryServices.TriggerDataMoveRequest.pauseGC, "DoesPauseGC", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMRestoreRequest.createNewCloudService, "DoesCreateNewCloudService", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMRestoreWithRehydrationRequest.createNewCloudService, "DoesCreateNewCloudService", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMRestoreRequest.restoreWithManagedDisks, "DoesRestoreWithManagedDisks", "csharp");
+@@clientName(Microsoft.RecoveryServices.IaasVMRestoreWithRehydrationRequest.restoreWithManagedDisks, "DoesRestoreWithManagedDisks", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureVmWorkloadProtectionPolicy.makePolicyConsistent, "DoesMakePolicyConsistent", "csharp");
+
+// Boolean property renames: Is prefix
+@@clientName(Microsoft.RecoveryServices.DpmContainer.upgradeAvailable, "IsUpgradeAvailable", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureBackupServerContainer.upgradeAvailable, "IsUpgradeAvailable", "csharp");
+@@clientName(Microsoft.RecoveryServices.EncryptionDetails.encryptionEnabled, "IsEncryptionEnabled", "csharp");
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMProtectedItemExtendedInfo.policyInconsistent, "IsPolicyInconsistent", "csharp");
+
+// Property name renames: type -> specific name
+@@clientName(Microsoft.RecoveryServices.WorkloadInquiryDetails.type, "WorkloadInquiryDetailsType", "csharp");
+@@clientName(Microsoft.RecoveryServices.SQLDataDirectory.type, "DirectoryType", "csharp");
+@@clientName(Microsoft.RecoveryServices.RecoveryPointTierInformation.type, "TierType", "csharp");
+
+// Property name renames: other
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMJobExtendedInfo.estimatedRemainingDuration, "EstimatedRemainingDurationValue", "csharp");
+@@clientName(Microsoft.RecoveryServices.TieringPolicy.duration, "DurationValue", "csharp");
+@@clientName(Microsoft.RecoveryServices.ResourceGuardOperationDetail.defaultResourceRequest, "DefaultResourceId", "csharp");
+@@clientName(Microsoft.RecoveryServices.BackupResourceConfig.crossRegionRestoreFlag, "EnableCrossRegionRestore", "csharp");
+
+// Enum member rename
+@@clientName(Microsoft.RecoveryServices.MabServerType.SQLAGWorkLoadContainer, "SqlAvailabilityGroupWorkLoadContainer", "csharp");
+
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   "Client",
   "go"
