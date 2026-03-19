@@ -23,3 +23,5 @@ using Microsoft.Databricks;
   false,
   "python"
 );
+
+@@clientName(Microsoft.Databricks.ErrorDetail, "DatabricksErrorDetail", "java");
