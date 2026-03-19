@@ -9,3 +9,4 @@ module-name: sdk/resourcemanager/storagediscovery/armstoragediscovery
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 ```
+even moew fake chages
