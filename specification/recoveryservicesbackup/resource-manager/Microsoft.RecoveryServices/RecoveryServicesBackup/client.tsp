@@ -388,6 +388,111 @@ using Http;
 // Enum member rename
 @@clientName(Microsoft.RecoveryServices.MabServerType.SQLAGWorkLoadContainer, "SqlAvailabilityGroupWorkLoadContainer", "csharp");
 
+// ===== Usage decorators for C# backward compatibility (public setters) =====
+
+// Base/abstract types
+@@usage(Microsoft.RecoveryServices.BackupEngineBase, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.Job, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.ProtectedItem, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.ProtectionIntent, Usage.input | Usage.output, "csharp");
+
+// Engine/Config types
+@@usage(Microsoft.RecoveryServices.BackupEngineExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.BackupResourceEncryptionConfig, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.BackupResourceEncryptionConfigExtended, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.PrivateEndpointConnection, Usage.input | Usage.output, "csharp");
+
+// Settings/Identity types
+@@usage(Microsoft.RecoveryServices.IdentityInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.TargetDiskNetworkAccessSettings, Usage.input | Usage.output, "csharp");
+
+// Key/encryption types
+@@usage(Microsoft.RecoveryServices.BEKDetails, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.KEKDetails, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.KeyAndSecretDetails, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.EncryptionDetails, Usage.input | Usage.output, "csharp");
+
+// Container types
+@@usage(Microsoft.RecoveryServices.ContainerIdentityInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.IaaSVMContainer, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureStorageContainer, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureWorkloadContainer, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.ProtectableContainer, Usage.input | Usage.output, "csharp");
+
+// Protectable item types
+@@usage(Microsoft.RecoveryServices.AzureFileShareProtectableItem, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.IaaSVMProtectableItem, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureVmWorkloadProtectableItem, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.WorkloadProtectableItem, Usage.input | Usage.output, "csharp");
+
+// Job types
+@@usage(Microsoft.RecoveryServices.AzureIaaSVMJob, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureIaaSVMJobExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureIaaSVMJobTaskDetails, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureIaaSVMJobV2, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.DpmJob, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.DpmJobExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.DpmJobTaskDetails, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.DpmErrorInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.MabJob, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.MabJobExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.MabJobTaskDetails, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureStorageJob, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureStorageJobExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureStorageJobTaskDetails, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.VaultJob, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.VaultJobErrorInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureWorkloadJob, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureWorkloadJobExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureWorkloadJobTaskDetails, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureStorageErrorInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureWorkloadErrorInfo, Usage.input | Usage.output, "csharp");
+
+// Protected item extended info types
+@@usage(Microsoft.RecoveryServices.DPMProtectedItemExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureIaaSVMProtectedItemExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureVmWorkloadProtectedItemExtendedInfo, Usage.input | Usage.output, "csharp");
+
+// Recovery point types
+@@usage(Microsoft.RecoveryServices.AzureFileShareRecoveryPoint, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.IaasVMRecoveryPoint, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureWorkloadRecoveryPoint, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureWorkloadSQLRecoveryPoint, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureWorkloadSQLRecoveryPointExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.RecoveryPointDiskConfiguration, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.RecoveryPointMoveReadinessInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.RecoveryPointProperties, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.RecoveryPointRehydrationInfo, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.RecoveryPointTierInformation, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.PointInTimeRange, Usage.input | Usage.output, "csharp");
+
+// Restore/ILR content types (discriminated subtypes needing explicit input usage)
+@@usage(Microsoft.RecoveryServices.AzureFileShareProvisionILRRequest, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureFileShareRestoreRequest, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.IaasVMILRRegistrationRequest, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.IaasVMRestoreRequest, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.AzureWorkloadRestoreRequest, Usage.input | Usage.output, "csharp");
+
+// Disk/restore info types
+@@usage(Microsoft.RecoveryServices.DiskInformation, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.IdentityBasedRestoreDetails, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.TargetAFSRestoreInfo, Usage.input | Usage.output, "csharp");
+
+// Workload item types
+@@usage(Microsoft.RecoveryServices.AzureVmWorkloadItem, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.WorkloadItem, Usage.input | Usage.output, "csharp");
+
+// Validation/guard types
+@@usage(Microsoft.RecoveryServices.PreBackupValidation, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.ResourceGuardOperationDetail, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.RecoveryServices.ResourceGuardProxyBase, Usage.input | Usage.output, "csharp");
+
+// SQL types
+@@usage(Microsoft.RecoveryServices.SQLDataDirectory, Usage.input | Usage.output, "csharp");
+
+// User-assigned identity
+@@usage(Microsoft.RecoveryServices.UserAssignedManagedIdentityDetails, Usage.input | Usage.output, "csharp");
+
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   "Client",
   "go"
