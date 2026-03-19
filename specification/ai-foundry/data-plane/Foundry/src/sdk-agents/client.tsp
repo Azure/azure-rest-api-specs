@@ -134,8 +134,8 @@ using Azure.AI.Projects;
 @@usage(AzureCreateResponseOptions, Usage.input);
 @@access(AzureCreateResponseOptions, Access.public);
 
-@@usage(AzureCreateResponseResult, Usage.output);
-@@access(AzureCreateResponseResult, Access.public);
+@@usage(AzureCreateResponseDetails, Usage.output);
+@@access(AzureCreateResponseDetails, Access.public);
 
 // --------------------------------------------------------------------------------
 // Type overrides
