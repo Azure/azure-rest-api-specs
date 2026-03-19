@@ -339,12 +339,15 @@ directive:
     reason: / is a valid scope in this scenario.
   - suppress: DOUBLE_FORWARD_SLASHES_IN_URL
     from: administration.json
+    where: $..parameters[?(@.name=='scope')]
     reason: / is a valid scope in this scenario.
   - suppress: DOUBLE_FORWARD_SLASHES_IN_URL
     from: GetRoleDefinition-example.json
+    where: $.parameters.scope
     reason: / is a valid scope in this scenario.
   - suppress: DOUBLE_FORWARD_SLASHES_IN_URL
     from: DeleteRoleDefinition-example.json
+    where: $.parameters.scope
     reason: / is a valid scope in this scenario.
   - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
     from: rbac.json
