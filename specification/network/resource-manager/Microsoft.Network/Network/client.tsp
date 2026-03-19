@@ -108,3 +108,273 @@ namespace CombineClient;
   "java"
 );
 @@clientName(Microsoft.Network.PublicIPPrefixSku, "PublicIpPrefixSku", "java");
+@@clientName(Microsoft.Network.PublicIPAddressDnsSettings,
+  "PublicIpAddressDnsSettings",
+  "java"
+);
+
+// Interface/client IP → Ip renames
+@@clientName(Microsoft.Network.PublicIPAddresses, "PublicIpAddresses", "java");
+@@clientName(Microsoft.Network.PublicIPPrefixes, "PublicIpPrefixes", "java");
+@@clientName(Microsoft.Network.PublicIPAddressOperationGroup,
+  "PublicIpAddressOperationGroup",
+  "java"
+);
+
+// Property-level IP → Ip renames on PropertiesFormat models (Common)
+@@clientName(Microsoft.Network.IPConfigurationPropertiesFormat.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.IPConfigurationPropertiesFormat.publicIPAddress,
+  "publicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.NetworkInterfaceIPConfigurationPropertiesFormat.publicIPAddress,
+  "publicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.FrontendIPConfigurationPropertiesFormat.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.FrontendIPConfigurationPropertiesFormat.publicIPAddress,
+  "publicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayBackendAddressPoolPropertiesFormat.backendIPConfigurations,
+  "backendIpConfigurations",
+  "java"
+);
+@@clientName(Microsoft.Network.BackendAddressPoolPropertiesFormat.backendIPConfigurations,
+  "backendIpConfigurations",
+  "java"
+);
+@@clientName(Microsoft.Network.InboundNatRulePropertiesFormat.frontendIPConfiguration,
+  "frontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.InboundNatPoolPropertiesFormat.frontendIPConfiguration,
+  "frontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.LoadBalancingRulePropertiesFormat.frontendIPConfiguration,
+  "frontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.OutboundRulePropertiesFormat.frontendIPConfigurations,
+  "frontendIpConfigurations",
+  "java"
+);
+@@clientName(Microsoft.Network.LoadBalancerPropertiesFormat.frontendIPConfigurations,
+  "frontendIpConfigurations",
+  "java"
+);
+@@clientName(Microsoft.Network.PrivateEndpointIPConfigurationProperties.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.PrivateLinkServiceIpConfigurationProperties.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.PrivateLinkServiceProperties.destinationIPAddress,
+  "destinationIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayIPConfigurationPropertiesFormat.subnet,
+  "subnet",
+  "java"
+);
+
+// Property-level IP → Ip renames on models (Network)
+@@clientName(Microsoft.Network.ApplicationGatewayPropertiesFormat.gatewayIPConfigurations,
+  "gatewayIpConfigurations",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayPropertiesFormat.frontendIPConfigurations,
+  "frontendIpConfigurations",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.publicIPAddress,
+  "publicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayHttpListenerPropertiesFormat.frontendIPConfiguration,
+  "frontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayListenerPropertiesFormat.frontendIPConfiguration,
+  "frontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.AzureFirewallIPConfigurationPropertiesFormat.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.AzureFirewallIPConfigurationPropertiesFormat.publicIPAddress,
+  "publicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.BastionHostIPConfigurationPropertiesFormat.publicIPAddress,
+  "publicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.HubIPAddresses.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.HubIPConfigurationPropertiesFormat.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.HubIPConfigurationPropertiesFormat.publicIPAddress,
+  "publicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat.publicIPAddress,
+  "publicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.PacketCaptureFilter.localIPAddress,
+  "localIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.PacketCaptureFilter.remoteIPAddress,
+  "remoteIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.VerificationIPFlowParameters.localIPAddress,
+  "localIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.VerificationIPFlowParameters.remoteIPAddress,
+  "remoteIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.NextHopParameters.destinationIPAddress,
+  "destinationIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.NextHopParameters.sourceIPAddress,
+  "sourceIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.DdosCustomPolicyPropertiesFormat.frontendIPConfiguration,
+  "frontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.LoadBalancerVipSwapRequest.frontendIPConfigurations,
+  "frontendIpConfigurations",
+  "java"
+);
+@@clientName(Microsoft.Network.LoadBalancerVipSwapRequestFrontendIPConfigurationProperties.publicIPAddress,
+  "publicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressPropertiesFormat.servicePublicIPAddress,
+  "servicePublicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressPropertiesFormat.linkedPublicIPAddress,
+  "linkedPublicIpAddress",
+  "java"
+);
+
+// pickHostName → pickHostname renames
+@@clientName(Microsoft.Network.ApplicationGatewayProbePropertiesFormat.pickHostNameFromBackendHttpSettings,
+  "pickHostnameFromBackendHttpSettings",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayProbePropertiesFormat.pickHostNameFromBackendSettings,
+  "pickHostnameFromBackendSettings",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.pickHostNameFromBackendAddress,
+  "pickHostnameFromBackendAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayBackendSettingsPropertiesFormat.pickHostNameFromBackendAddress,
+  "pickHostnameFromBackendAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayOnDemandProbe.pickHostNameFromBackendHttpSettings,
+  "pickHostnameFromBackendHttpSettings",
+  "java"
+);
+
+// ASN → Asn renames
+@@clientName(Microsoft.Network.ExpressRouteCircuitPeeringPropertiesFormat.azureASN,
+  "azureAsn",
+  "java"
+);
+@@clientName(Microsoft.Network.ExpressRouteCircuitPeeringPropertiesFormat.peerASN,
+  "peerAsn",
+  "java"
+);
+@@clientName(Microsoft.Network.ExpressRouteCircuitPeeringConfig.customerASN,
+  "customerAsn",
+  "java"
+);
+@@clientName(Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties.azureASN,
+  "azureAsn",
+  "java"
+);
+@@clientName(Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties.peerASN,
+  "peerAsn",
+  "java"
+);
+@@clientName(Microsoft.Network.BgpConnectionProperties.peerASN,
+  "peerAsn",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualRouterPeeringProperties.peerASN,
+  "peerAsn",
+  "java"
+);
+
+// sTag → stag rename
+@@clientName(Microsoft.Network.ExpressRouteCrossConnectionProperties.sTag,
+  "stag",
+  "java"
+);
+
+// Make read-only ExpressRoute models input for backward compat
+@@usage(Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties,
+  Usage.input,
+  "java"
+);
+
+// Operation renames for Java (from readme.java.md)
+@@clientLocation(Microsoft.Network.BgpConnections.get,
+  "VirtualHubBgpConnections",
+  "java"
+);
+@@clientLocation(Microsoft.Network.BgpConnections.createOrUpdate,
+  "VirtualHubBgpConnections",
+  "java"
+);
+@@clientLocation(Microsoft.Network.BgpConnections.delete,
+  "VirtualHubBgpConnections",
+  "java"
+);
+@@clientLocation(Microsoft.Network.InboundSecurityRuleOperationGroup.get,
+  "InboundSecurityRuleOperation",
+  "java"
+);
+@@clientLocation(Microsoft.Network.InboundSecurityRuleOperationGroup.createOrUpdate,
+  "InboundSecurityRuleOperation",
+  "java"
+);
