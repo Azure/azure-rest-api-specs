@@ -57,10 +57,35 @@ model ProviderOperation {
   /**
    * The operation properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   properties?: unknown;
 
   /**
    * The dataAction flag to specify the operation type.
    */
   isDataAction?: boolean;
+}
+
+/**
+ * The resource model definition for resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource
+model SettableResource {
+  /**
+   * The provider ID.
+   */
+  id?: string;
+
+  /**
+   * The provider name.
+   */
+  name?: string;
+
+  /**
+   * The provider type.
+   */
+  type?: string;
 }

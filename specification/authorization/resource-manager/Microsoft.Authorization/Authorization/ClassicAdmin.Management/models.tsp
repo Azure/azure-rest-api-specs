@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace AuthorizationManagementClient;
+namespace Microsoft.Authorization;
 
 /**
  * Classic Administrators

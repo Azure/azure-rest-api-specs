@@ -24,6 +24,69 @@ model DenyAssignment
   >;
 }
 
+alias DenyAssignmentForResourceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    @path
+    @segment("subscriptions")
+    @key
+    subscriptionId: string;
+
+    @path
+    @segment("resourceGroups")
+    @key
+    resourceGroupName: string;
+
+    /**
+     * The namespace of the resource provider.
+     */
+    @path
+    @segment("providers")
+    @key
+    @extension("x-ms-skip-url-encoding", true)
+    resourceProviderNamespace: string;
+
+    /**
+     * The parent resource identity.
+     */
+    @path
+    @segment("")
+    @key
+    @extension("x-ms-skip-url-encoding", true)
+    parentResourcePath: string;
+
+    /**
+     * The resource type of the resource.
+     */
+    @path
+    @segment("")
+    @key
+    @extension("x-ms-skip-url-encoding", true)
+    resourceType: string;
+
+    /**
+     * The name of the resource to get deny assignments for.
+     */
+    @path
+    @segment("")
+    @key
+    resourceName: string;
+
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "microsoft.Authorization";
+  },
+  {},
+  {
+    @path
+    @segment("denyAssignments")
+    @key
+    denyAssignmentId: string;
+  }
+>;
+
 @armResourceOperations
 interface DenyAssignments {
   /**
@@ -32,39 +95,46 @@ interface DenyAssignments {
   get is Extension.Read<Extension.ScopeParameter, DenyAssignment>;
 
   /**
-   * Gets deny assignments for a resource.
+   * Gets deny assignments for a scope.
    */
-  listForResource is Extension.ListByTarget<
+  listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     DenyAssignment,
+    {
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
+   * Gets all deny assignments for the subscription.
+   */
+  list is ArmListBySubscription<
+    DenyAssignment,
     Parameters = {
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
 
-      /**
-       * The namespace of the resource provider.
-       */
-      @path
-      resourceProviderNamespace: string;
+  /**
+   * Gets deny assignments for a resource group.
+   */
+  listForResourceGroup is Extension.ListByTarget<
+    Extension.ResourceGroup,
+    DenyAssignment,
+    {
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
 
-      /**
-       * The parent resource identity.
-       */
-      @path
-      parentResourcePath: string;
-
-      /**
-       * The resource type of the resource.
-       */
-      @path
-      resourceType: string;
-
-      /**
-       * The name of the resource to get deny assignments for.
-       */
-      @path
-      resourceName: string;
-
+  /**
+   * Gets deny assignments for a resource.
+   */
+  listForResource is DenyAssignmentForResourceOps.List<
+    DenyAssignment,
+    Parameters = {
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all deny assignments at or above the scope. Use $filter=denyAssignmentName eq '{name}' to search deny assignments by name at specified scope. Use $filter=principalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. Use $filter=gdprExportPrincipalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. This filter is different from the principalId filter as it returns not only those deny assignments that contain the specified principal is the Principals list but also those deny assignments that contain the specified principal is the ExcludePrincipals list. Additionally, when gdprExportPrincipalId filter is used, only the deny assignment name and description properties are returned.
        */

@@ -14,14 +14,18 @@ namespace Microsoft.Authorization;
 /**
  * Provider Operations metadata
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @tenantResource
-model ProviderOperationsMetadata is Azure.ResourceManager.ProxyResource<{}> {
-  ...ResourceNameParameter<
-    Resource = ProviderOperationsMetadata,
-    KeyName = "resourceProviderNamespace",
-    SegmentName = "providerOperations",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ProviderOperationsMetadata extends SettableResource {
+  @visibility(Lifecycle.Read)
+  @path
+  @segment("providerOperations")
+  @key("resourceProviderNamespace")
+  name: string;
 
   /**
    * The provider display name.
@@ -44,12 +48,13 @@ model ProviderOperationsMetadata is Azure.ResourceManager.ProxyResource<{}> {
   operations?: ProviderOperation[];
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ProviderOperationsMetadataOperationGroup {
   /**
    * Gets provider operations metadata for the specified resource provider.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ProviderOperationsMetadata")
   @operationId("ProviderOperationsMetadata_Get")
   get is ArmResourceRead<
     ProviderOperationsMetadata,
@@ -68,6 +73,7 @@ interface ProviderOperationsMetadataOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ProviderOperationsMetadata_List")
+  @tag("ProviderOperationsMetadata")
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,

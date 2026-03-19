@@ -1,32 +1,34 @@
 {
   "parameters": {
-    "subscriptionId": "subId",
-    "api-version": "2015-07-01"
+    "api-version": "2015-07-01",
+    "subscriptionId": "subId"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "name": "classicadminid",
+            "type": "Microsoft.Authorization/classicAdministrators",
+            "id": "/subscriptions/subId/providers/Microsoft.Authorization/classicAdministrators/classicadminid",
             "properties": {
               "emailAddress": "test@test.com",
               "role": "ServiceAdministrator;AccountAdministrator"
-            },
-            "id": "/subscriptions/subId/providers/Microsoft.Authorization/classicAdministrators/classicadminid",
-            "type": "Microsoft.Authorization/classicAdministrators",
-            "name": "classicadminid"
+            }
           },
           {
+            "name": "classicadminid2",
+            "type": "Microsoft.Authorization/classicAdministrators",
+            "id": "/subscriptions/subId/providers/Microsoft.Authorization/classicAdministrators/classicadminid2",
             "properties": {
               "emailAddress": "coadmin@test.com",
               "role": "CoAdministrator"
-            },
-            "id": "/subscriptions/subId/providers/Microsoft.Authorization/classicAdministrators/classicadminid2",
-            "type": "Microsoft.Authorization/classicAdministrators",
-            "name": "classicadminid2"
+            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ClassicAdministrators_List",
+  "title": "List classic administrators"
 }

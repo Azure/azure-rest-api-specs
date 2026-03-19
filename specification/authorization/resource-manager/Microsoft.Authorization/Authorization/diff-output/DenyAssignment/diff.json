@@ -1,0 +1,174 @@
+{
+  "tags__added": [
+    {
+      "name": "DenyAssignments"
+    }
+  ],
+  "paths": {
+    "/{scope}/providers/microsoft.Authorization/denyAssignments": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/DenyAssignmentFilter",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Authorization/denyAssignments/{denyAssignmentId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/denyAssignments": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/DenyAssignmentFilter",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/microsoft.Authorization/denyAssignments": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/DenyAssignmentFilter",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Authorization/denyAssignments": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/DenyAssignmentFilter",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DenyAssignmentFilter__deleted": {
+      "type": "object",
+      "description": "Deny Assignments filter",
+      "properties": {
+        "denyAssignmentName": {
+          "type": "string",
+          "description": "Return deny assignment with specified name."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Return all deny assignments where the specified principal is listed in the principals list of deny assignments."
+        },
+        "gdprExportPrincipalId": {
+          "type": "string",
+          "description": "Return all deny assignments where the specified principal is listed either in the principals list or exclude principals list of deny assignments."
+        }
+      }
+    },
+    "Principal__added": {
+      "type": "object",
+      "description": "The name of the entity last modified it",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the principal made changes"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the principal made changes"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of principal such as user , group etc"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of principal"
+        }
+      }
+    },
+    "DenyAssignment": {
+      "allOf__added": [
+        {
+          "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "description": "The deny assignment ID.",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "description": "The deny assignment name.",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "description": "The deny assignment type.",
+          "readOnly": true
+        }
+      }
+    },
+    "DenyAssignmentListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "DenyAssignmentProperties": {
+      "properties": {
+        "principals": {
+          "items": {
+            "$ref": {
+              "__old": "./common-types.json#/definitions/Principal",
+              "__new": "#/definitions/Principal"
+            }
+          }
+        },
+        "excludePrincipals": {
+          "items": {
+            "$ref": {
+              "__old": "./common-types.json#/definitions/Principal",
+              "__new": "#/definitions/Principal"
+            }
+          }
+        }
+      }
+    }
+  }
+}

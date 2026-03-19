@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-namespace AuthorizationManagementClient;
+namespace Microsoft.Authorization;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ClassicAdministratorsOperationGroup {
@@ -19,8 +19,10 @@ interface ClassicAdministratorsOperationGroup {
    * Gets service administrator, account administrator, and co-administrators for the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ClassicAdministrators")
   @operationId("ClassicAdministrators_List")
   @autoRoute
+  @list
   @get
   @action("classicAdministrators")
   list is ArmProviderActionSync<
@@ -35,7 +37,8 @@ interface GlobalAdministratorOperationGroup {
    * Elevates access for a Global Administrator.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ElevateAccess")
   @operationId("GlobalAdministrator_ElevateAccess")
   @autoRoute
-  elevateAccess is ArmProviderActionSync<Response = void>;
+  elevateAccess is ArmProviderActionSync<Response = OkResponse>;
 }

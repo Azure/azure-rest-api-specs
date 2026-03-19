@@ -1,0 +1,143 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthorizationManagementClient",
+    "version": "2015-07-01",
+    "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role definitions and role assignments. A role definition describes the set of actions that can be performed on resources. A role assignment grants access to Azure Active Directory users."
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "ClassicAdministrators"
+    },
+    {
+      "name": "ElevateAccess"
+    }
+  ],
+  "paths": {
+    "/providers/microsoft.Authorization/elevateAccess": {
+      "post": {
+        "operationId": "GlobalAdministrator_ElevateAccess",
+        "tags": [
+          "ElevateAccess"
+        ],
+        "description": "Elevates access for a Global Administrator.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Elevate access global administrator": {
+            "$ref": "./examples/ElevateAccess.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/classicAdministrators": {
+      "get": {
+        "operationId": "ClassicAdministrators_List",
+        "tags": [
+          "ClassicAdministrators"
+        ],
+        "description": "Gets service administrator, account administrator, and co-administrators for the subscription.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ClassicAdministratorListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List classic administrators": {
+            "$ref": "./examples/GetClassicAdministrators.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClassicAdministrator": {
+      "type": "object",
+      "description": "Classic Administrators",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the administrator."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the administrator."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the administrator."
+        },
+        "properties": {
+          "$ref": "#/definitions/ClassicAdministratorProperties",
+          "description": "Properties for the classic administrator.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ClassicAdministratorListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ClassicAdministrator"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClassicAdministratorProperties": {
+      "type": "object",
+      "description": "Classic Administrator properties.",
+      "properties": {
+        "emailAddress": {
+          "type": "string",
+          "description": "The email address of the administrator."
+        },
+        "role": {
+          "type": "string",
+          "description": "The role of the administrator."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

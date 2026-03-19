@@ -68,6 +68,7 @@ model RoleDefinitionProperties {
   /**
    * The role type.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: string;
 
   /**

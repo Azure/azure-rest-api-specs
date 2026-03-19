@@ -1,0 +1,55 @@
+{
+  "tags__added": [
+    {
+      "name": "ClassicAdministrators"
+    },
+    {
+      "name": "ElevateAccess"
+    }
+  ],
+  "paths": {
+    "/providers/microsoft.Authorization/elevateAccess": {
+      "post": {
+        "x-ms-azure-rbac-permissions-required__deleted": {
+          "actions": "Microsoft.Authorization/elevateAccess/action",
+          "dataActions": "",
+          "rolesWithThesePermissions": [
+            "Owner"
+          ],
+          "moreInfoLink": "[Elevate access to manage all Azure subscriptions and management groups](https://docs.microsoft.com/azure/role-based-access-control/elevate-access-global-admin)"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/classicAdministrators": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClassicAdministratorListResult": {
+      "required__added": [
+        "value"
+      ]
+    }
+  }
+}

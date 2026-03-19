@@ -15,7 +15,7 @@ namespace Microsoft.Authorization;
  */
 @extensionResource
 model RoleDefinition
-  is Azure.ResourceManager.ExtensionResource<RoleDefinitionProperties> {
+  is Azure.ResourceManager.ProxyResource<RoleDefinitionProperties> {
   ...ResourceNameParameter<
     Resource = RoleDefinition,
     KeyName = "roleDefinitionId",

@@ -1,0 +1,315 @@
+{
+  "paths": {
+    "/{scope}/providers/microsoft.Authorization/roleDefinitions": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/RoleDefinitionFilter",
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common-types.json#/parameters/ScopeParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scope",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Authorization/roleDefinitions/{roleDefinitionId}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common-types.json#/parameters/ScopeParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scope",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common-types.json#/parameters/ScopeParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scope",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common-types.json#/parameters/ScopeParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scope",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/microsoft.Authorization/permissions": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common-types.json#/parameters/ResourceProviderNamespaceParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceProviderNamespace",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Authorization/permissions": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RoleDefinitionFilter__deleted": {
+      "type": "object",
+      "description": "Role Definitions filter",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "Returns role definition with the specific name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Returns role definition with the specific type."
+        }
+      }
+    },
+    "Permission__added": {
+      "type": "object",
+      "description": "Role definition permissions.",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "Allowed actions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notActions": {
+          "type": "array",
+          "description": "Denied actions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataActions": {
+          "type": "array",
+          "description": "Allowed Data actions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notDataActions": {
+          "type": "array",
+          "description": "Denied Data actions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "condition": {
+          "type": "string",
+          "description": "The conditions on the role definition. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'",
+          "readOnly": true
+        },
+        "conditionVersion": {
+          "type": "string",
+          "description": "Version of the condition. Currently the only accepted value is '2.0'",
+          "readOnly": true
+        }
+      }
+    },
+    "PermissionGetResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": {
+              "__old": "./common-types.json#/definitions/Permission",
+              "__new": "#/definitions/Permission"
+            }
+          }
+        }
+      }
+    },
+    "RoleDefinition": {
+      "allOf__added": [
+        {
+          "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "description": "The role definition ID.",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "description": "The role definition name.",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "description": "The role definition type.",
+          "readOnly": true
+        }
+      }
+    },
+    "RoleDefinitionListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "RoleDefinitionProperties": {
+      "properties": {
+        "permissions": {
+          "items": {
+            "$ref": {
+              "__old": "./common-types.json#/definitions/Permission",
+              "__new": "#/definitions/Permission"
+            }
+          }
+        }
+      }
+    }
+  }
+}
