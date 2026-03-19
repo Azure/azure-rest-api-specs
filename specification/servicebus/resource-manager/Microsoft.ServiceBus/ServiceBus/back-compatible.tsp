@@ -97,20 +97,27 @@ using Microsoft.ServiceBus;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkRuleSet.properties);
 
-@@clientLocation(SBAuthorizationRules.getAuthorizationRule, "Namespaces");
+@@clientLocation(SBAuthorizationRules.getAuthorizationRule,
+  "Namespaces",
+  "!csharp"
+);
 @@clientLocation(SBAuthorizationRules.createOrUpdateAuthorizationRule,
-  "Namespaces"
+  "Namespaces",
+  "!csharp"
 );
 @@clientName(SBAuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
   "parameters"
 );
-@@clientLocation(SBAuthorizationRules.deleteAuthorizationRule, "Namespaces");
+@@clientLocation(SBAuthorizationRules.deleteAuthorizationRule,
+  "Namespaces",
+  "!csharp"
+);
 @@clientLocation(SBAuthorizationRules.listAuthorizationRules,
   "Namespaces",
   "!csharp"
 );
-@@clientLocation(SBAuthorizationRules.listKeys, "Namespaces");
-@@clientLocation(SBAuthorizationRules.regenerateKeys, "Namespaces");
+@@clientLocation(SBAuthorizationRules.listKeys, "Namespaces", "!csharp");
+@@clientLocation(SBAuthorizationRules.regenerateKeys, "Namespaces", "!csharp");
 @@clientName(SBAuthorizationRules.regenerateKeys::parameters.body,
   "parameters"
 );
