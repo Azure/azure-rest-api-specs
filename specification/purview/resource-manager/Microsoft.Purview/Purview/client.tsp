@@ -30,7 +30,7 @@ namespace Microsoft.Purview {
 
 // csharp renames to preserve backward compatibility
 // Rename sub-types (not base types) to match old SDK naming
-@@clientName(Microsoft.Purview.AccountPropertiesEndpoints,
+@@clientName(Microsoft.Purview.AccountEndpoints,
   "PurviewAccountEndpoint",
   "csharp"
 );
@@ -38,10 +38,7 @@ namespace Microsoft.Purview {
   "PurviewAccountProperties",
   "csharp"
 );
-@@clientName(Microsoft.Purview.AccessKeys,
-  "PurviewAccountAccessKey",
-  "csharp"
-);
+@@clientName(Microsoft.Purview.AccessKeys, "PurviewAccountAccessKey", "csharp");
 @@clientName(Microsoft.Purview.CheckNameAvailabilityRequest,
   "PurviewAccountNameAvailabilityContent",
   "csharp"
@@ -58,7 +55,7 @@ namespace Microsoft.Purview {
   "DefaultPurviewAccountPayload",
   "csharp"
 );
-@@clientName(Microsoft.Purview.AccountPropertiesManagedResources,
+@@clientName(Microsoft.Purview.ManagedResources,
   "PurviewManagedResource",
   "csharp"
 );
@@ -78,10 +75,7 @@ namespace Microsoft.Purview {
   "PurviewAccountNameUnavailableReason",
   "csharp"
 );
-@@clientName(Microsoft.Purview.ScopeType,
-  "PurviewAccountScopeType",
-  "csharp"
-);
+@@clientName(Microsoft.Purview.ScopeType, "PurviewAccountScopeType", "csharp");
 @@clientName(Microsoft.Purview.PrivateEndpointConnectionStatus,
   "PurviewPrivateLinkServiceStatus",
   "csharp"
@@ -108,10 +102,7 @@ namespace Microsoft.Purview {
 );
 
 // prepend-rp-prefix equivalents
-@@clientName(Microsoft.Purview.Credentials,
-  "PurviewCredentials",
-  "csharp"
-);
+@@clientName(Microsoft.Purview.Credentials, "PurviewCredentials", "csharp");
 @@clientName(Microsoft.Purview.KafkaConfigurationIdentityType,
   "PurviewCredentialsType",
   "csharp"
@@ -120,10 +111,10 @@ namespace Microsoft.Purview {
   "PurviewAccountProvisioningState",
   "csharp"
 );
-@@clientName(Microsoft.Purview.AccountPropertiesAccountStatus,
-  "PurviewAccountStatus",
-  "csharp"
-);
+// @@clientName(Microsoft.Purview.AccountPropertiesAccountStatus,
+//   "PurviewAccountStatus",
+//   "csharp"
+// );
 @@clientName(Microsoft.Purview.EventStreamingState,
   "PurviewEventStreamingState",
   "csharp"
@@ -140,14 +131,8 @@ namespace Microsoft.Purview {
   "PurviewManagedEventHubState",
   "csharp"
 );
-@@clientName(Microsoft.Purview.UsageName,
-  "PurviewUsageName",
-  "csharp"
-);
-@@clientName(Microsoft.Purview.QuotaName,
-  "PurviewQuotaName",
-  "csharp"
-);
+@@clientName(Microsoft.Purview.UsageName, "PurviewUsageName", "csharp");
+@@clientName(Microsoft.Purview.QuotaName, "PurviewQuotaName", "csharp");
 
 // property renames
 @@clientName(Microsoft.Purview.CheckNameAvailabilityResult.nameAvailable,
@@ -160,7 +145,14 @@ namespace Microsoft.Purview {
 );
 
 // accessibility fix
-@@access(Microsoft.Purview.PrivateLinkResourceProperties, Access.public, "csharp");
+@@access(Microsoft.Purview.PrivateLinkResourceProperties,
+  Access.public,
+  "csharp"
+);
+@@usage(Microsoft.Purview.PrivateLinkResourceProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
 
 // fix common types v3 Resource.id type for C# (v3 emits string instead of armResourceIdentifier)
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
@@ -170,21 +162,25 @@ namespace Microsoft.Purview {
 
 // Fix location type for hierarchyBuilding compatibility
 // (Legacy.TrackedResourceWithOptionalLocation uses string?, but TrackedResource uses azureLocation)
-@@alternateType(Microsoft.Purview.Account.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(Microsoft.Purview.Account.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 
 // Use hierarchyBuilding to make Account inherit from TrackedResourceData in C#
 // (Account uses Legacy.TrackedResourceWithOptionalLocation which generates ResourceData base,
 //  but old SDK used TrackedResourceData)
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Microsoft.Purview.Account,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.Purview.Account,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
-
-// Resource model renames for backward compatibility with old SDK naming
 @@clientName(Microsoft.Purview.Account, "PurviewAccount", "csharp");
-@@clientName(Microsoft.Purview.KafkaConfiguration, "PurviewKafkaConfiguration", "csharp");
+@@clientName(Microsoft.Purview.KafkaConfiguration,
+  "PurviewKafkaConfiguration",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.PrivateEndpointConnection,
   "PurviewPrivateEndpointConnection",
   "csharp"
@@ -193,27 +189,33 @@ namespace Microsoft.Purview {
   "PurviewPrivateLinkResource",
   "csharp"
 );
-
-// Additional model renames for backward compat
 @@clientName(Microsoft.Purview.AccountSku, "PurviewAccountSku", "csharp");
-@@clientName(Microsoft.Purview.AccountUpdateParameters, "PurviewAccountPatch", "csharp");
+@@usage(Microsoft.Purview.AccountSku, Usage.output, "csharp");
+@@clientName(Microsoft.Purview.AccountUpdateParameters,
+  "PurviewAccountPatch",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.PrivateLinkServiceConnectionState,
   "PurviewPrivateLinkServiceConnectionState",
   "csharp"
 );
-@@clientName(Microsoft.Purview.AccountMergeInfo, "PurviewAccountMergeInfo", "csharp");
+@@clientName(Microsoft.Purview.AccountMergeInfo,
+  "PurviewAccountMergeInfo",
+  "csharp"
+);
 
 // Property rename for backward compat (createdAt → CreatedOn)
-@@clientName(Microsoft.Purview.AccountProperties.createdAt, "CreatedOn", "csharp");
+@@clientName(Microsoft.Purview.AccountProperties.createdAt,
+  "CreatedOn",
+  "csharp"
+);
 
 // Identity type override to use ARM common type instead of custom Identity model
-@@alternateType(
-  Microsoft.Purview.PurviewAccountModel.identity,
+@@alternateType(Microsoft.Purview.Account.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(
-  Microsoft.Purview.AccountUpdateParameters.identity,
+@@alternateType(Microsoft.Purview.AccountUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -228,9 +230,8 @@ namespace Microsoft.Purview {
 // Flatten Account.properties is already done in back-compatible.tsp for all languages
 
 // Flatten CloudConnectors for C# (old SDK had CloudConnectorsAwsExternalId as direct property)
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  Microsoft.Purview.AccountProperties.cloudConnectors,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.Purview.AccountProperties.cloudConnectors,
   "csharp"
 );
 
@@ -242,53 +243,55 @@ namespace Microsoft.Purview {
 
 // Make AccountProperties public (old SDK exposed it in PurviewAccountPatch.Properties)
 @@access(Microsoft.Purview.AccountProperties, Access.public, "csharp");
-@@usage(Microsoft.Purview.AccountProperties, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.Purview.AccountProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
 
 // Property type fixes: string → ResourceIdentifier for ManagedResources
-@@alternateType(
-  Microsoft.Purview.ManagedResources.eventHubNamespace,
+@@alternateType(Microsoft.Purview.ManagedResources.eventHubNamespace,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  Microsoft.Purview.ManagedResources.resourceGroup,
+@@alternateType(Microsoft.Purview.ManagedResources.resourceGroup,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  Microsoft.Purview.ManagedResources.storageAccount,
+@@alternateType(Microsoft.Purview.ManagedResources.storageAccount,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 // Property type fix: PrivateEndpoint.id → ResourceIdentifier
-@@alternateType(
-  Microsoft.Purview.PrivateEndpoint.id,
+@@alternateType(Microsoft.Purview.PrivateEndpoint.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 // Property type fix: DefaultAccountPayload.scopeTenantId → Guid
-@@alternateType(
-  Microsoft.Purview.DefaultAccountPayload.scopeTenantId,
+@@alternateType(Microsoft.Purview.DefaultAccountPayload.scopeTenantId,
   Azure.Core.uuid,
   "csharp"
 );
 
 // Property rename: PrivateEndpointConnectionProperties.privateLinkServiceConnectionState → ConnectionState
-@@clientName(
-  Microsoft.Purview.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(Microsoft.Purview.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
-
-// Rename error-related sub-types
 @@clientName(Microsoft.Purview.AccountStatusErrorDetails,
   "PurviewAccountStatusErrorDetails",
   "csharp"
 );
-
-// Operation renames for backward compatibility with old extension method names
+@@clientName(Microsoft.Purview.MergeAccountType,
+  "PurviewMergeAccountType",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.MergeStatus, "PurviewMergeStatus", "csharp");
+@@clientName(Microsoft.Purview.TenantEndpointState,
+  "PurviewTenantEndpointState",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.DefaultAccountsOperationGroup.get,
   "GetDefaultAccount",
   "csharp"
@@ -323,44 +326,24 @@ namespace Microsoft.Purview {
   "SubscriptionGetFeature",
   "csharp"
 );
-@@clientName(Microsoft.Purview.UsagesOperationGroup.get,
-  "GetUsages",
-  "csharp"
-);
+@@clientName(Microsoft.Purview.UsagesOperationGroup.get, "GetUsages", "csharp");
 
 // Property rename: CheckNameAvailabilityRequest.type → ResourceType
 @@clientName(Microsoft.Purview.CheckNameAvailabilityRequest.type,
   "ResourceType",
   "csharp"
 );
-
+@@clientName(Microsoft.Purview.AccountStatus, "PurviewAccountStatus", "csharp");
 // Property rename: Credentials.type → CredentialsType (match old SDK naming)
-@@clientName(Microsoft.Purview.Credentials.type,
-  "CredentialsType",
-  "csharp"
-);
+@@clientName(Microsoft.Purview.Credentials.type, "CredentialsType", "csharp");
 
-// ManagedResourcesPublicNetworkAccess: old SDK had a separate extensible enum type
-// for the managedResourcesPublicNetworkAccess property. Define union and use alternateType.
-namespace Microsoft.Purview {
-  union ManagedResourcesPublicNetworkAccess {
-    string,
-    Enabled: "Enabled",
-    Disabled: "Disabled",
-    NotSpecified: "NotSpecified",
-  }
-}
-@@alternateType(
-  Microsoft.Purview.AccountProperties.managedResourcesPublicNetworkAccess,
+@@alternateType(Microsoft.Purview.AccountProperties.managedResourcesPublicNetworkAccess,
   Microsoft.Purview.ManagedResourcesPublicNetworkAccess,
   "csharp"
 );
 
 // Make GetUsages pageable to match old SDK (old returned Pageable<PurviewUsage>)
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
-  Microsoft.Purview.UsagesOperationGroup.get,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Purview.UsagesOperationGroup.get,
   "csharp"
 );
-
-// Note: scopeTenantId Guid type is handled via custom code overloads
