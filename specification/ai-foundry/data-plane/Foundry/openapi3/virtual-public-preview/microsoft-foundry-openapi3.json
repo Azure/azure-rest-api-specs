@@ -3024,6 +3024,81 @@
         }
       }
     },
+    "/code:upload": {
+      "post": {
+        "operationId": "Agents_uploadCode",
+        "description": "Upload a code zip file for code-based hosted agent deployment.\nThe zip is stored internally and an opaque code_reference_id is returned.\nThis ID is then passed into code_configuration.code_reference_id when creating an agent version.\nMaximum upload size is 250 MB.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeUploadResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agents"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/zip": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          },
+          "description": "The code zip file to upload."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "CodeAgents=V1Preview"
+          ]
+        }
+      }
+    },
     "/connections": {
       "get": {
         "operationId": "Connections_list",
@@ -14882,15 +14957,14 @@
       "CodeConfiguration": {
         "type": "object",
         "required": [
-          "code_uri",
+          "code_reference_id",
           "runtime",
           "entry_point"
         ],
         "properties": {
-          "code_uri": {
+          "code_reference_id": {
             "type": "string",
-            "format": "uri",
-            "description": "The URI pointing to the packaged code artifact."
+            "description": "Opaque reference ID returned from POST /code:upload. Use this to associate uploaded code with an agent version."
           },
           "runtime": {
             "type": "string",
@@ -14905,6 +14979,36 @@
           }
         },
         "description": "Code-based deployment configuration for a hosted agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "CodeAgents=V1Preview"
+          ]
+        }
+      },
+      "CodeUploadResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "size_bytes",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Opaque code reference identifier. Pass as code_configuration.code_reference_id when creating an agent version."
+          },
+          "size_bytes": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Size of the uploaded zip file in bytes."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of the upload."
+          }
+        },
+        "description": "Response from uploading a code artifact for code-based hosted agent deployment.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "CodeAgents=V1Preview"
