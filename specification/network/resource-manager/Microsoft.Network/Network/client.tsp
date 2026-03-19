@@ -495,3 +495,76 @@ namespace CombineClient;
   Microsoft.Network.NetworkInterfaces,
   "java"
 );
+
+@@clientName(FirewallPolicyIdpsSignatureDirection.`0`, "Zero", "go");
+@@clientName(FirewallPolicyIdpsSignatureDirection.`1`, "One", "go");
+@@clientName(FirewallPolicyIdpsSignatureDirection.`2`, "Two", "go");
+@@clientName(FirewallPolicyIdpsSignatureDirection.`3`, "Three", "go");
+@@clientName(FirewallPolicyIdpsSignatureDirection.`4`, "Four", "go");
+@@clientName(FirewallPolicyIdpsSignatureDirection.`5`, "Five", "go");
+
+@@clientName(FirewallPolicyIdpsSignatureMode.`0`, "Zero", "go");
+@@clientName(FirewallPolicyIdpsSignatureMode.`1`, "One", "go");
+@@clientName(FirewallPolicyIdpsSignatureMode.`2`, "Two", "go");
+
+@@clientName(FirewallPolicyIdpsSignatureSeverity.`1`, "One", "go");
+@@clientName(FirewallPolicyIdpsSignatureSeverity.`2`, "Two", "go");
+@@clientName(FirewallPolicyIdpsSignatureSeverity.`3`, "Three", "go");
+
+@@clientLocation(BastionHosts.deleteBastionShareableLink,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(BastionHosts.deleteBastionShareableLinkByToken,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(BastionHosts.disconnectActiveSessions,
+  "ManagementClient",
+  "go"
+);
+
+@@clientLocation(ExpressRouteProviderPorts.expressRouteProviderPort,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(BastionHosts.getActiveSessions, "ManagementClient", "go");
+@@clientLocation(BastionHosts.getBastionShareableLink,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(NetworkManagers.listActiveConnectivityConfigurations,
+  "ManagementClient",
+  "go"
+);
+
+@@clientLocation(NetworkManagers.listActiveSecurityAdminRules,
+  "ManagementClient",
+  "go"
+);
+
+@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(BastionHosts.putBastionShareableLink,
+  "ManagementClient",
+  "go"
+);
+
+@@clientLocation(BastionHosts.putBastionShareableLink,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(VirtualWans.supportedSecurityProviders,
+  "ManagementClient",
+  "go"
+);
