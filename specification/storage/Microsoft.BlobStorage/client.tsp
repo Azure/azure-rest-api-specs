@@ -543,9 +543,38 @@ model BlobServicePropertiesCsharp {
 @@clientName(Service.listContainers, "ListContainersSegment", "csharp");
 @@clientName(QueryType, "QueryFormatType", "csharp");
 @@clientName(QueryType.JSON, "Json", "csharp");
+@@clientName(ArrowField, "ArrowFieldInternal", "csharp");
+@@clientName(ArrowConfiguration, "ArrowTextConfigurationInternal", "csharp");
+@@clientName(ContainerItem, "ContainerItemInternal", "csharp");
+@@clientName(ContainerProperties, "ContainerPropertiesInternal", "csharp");
+@@clientName(DelimitedTextConfiguration, "DelimitedTextConfigurationInternal", "csharp");
+@@clientName(JsonTextConfiguration, "JsonTextConfigurationInternal", "csharp");
+@@clientName(StorageServiceStats, "BlobServiceStatistics", "csharp");
+@@clientName(AccessPolicy.start, "PolicyStartsOn", "csharp");
+@@clientName(AccessPolicy.expiry, "PolicyExpiresOn", "csharp");
+@@clientName(AccessPolicy.permission, "Permissions", "csharp");
+@@clientName(Metrics.includeApis, "IncludeApis", "csharp");
+@@clientName(BlobType.BlockBlob, "Block", "csharp");
+@@clientName(BlobType.PageBlob, "Page", "csharp");
+@@clientName(BlobType.AppendBlob, "Append", "csharp");
+@@clientName(SkuName.StandardLRS, "StandardLrs", "csharp");
+@@clientName(SkuName.StandardGRS, "StandardGrs", "csharp");
+@@clientName(SkuName.StandardRAGRS, "StandardRagrs", "csharp");
+@@clientName(SkuName.StandardZRS, "StandardZrs", "csharp");
+@@clientName(SkuName.PremiumLRS, "PremiumLrs", "csharp");
+@@clientName(SkuName.StandardGZRS, "StandardGzrs", "csharp");
+@@clientName(SkuName.PremiumZRS, "PremiumZrs", "csharp");
+@@clientName(SkuName.StandardRAGZRS, "StandardRagzrs", "csharp");
+@@clientName(ContentMd5Parameter.transactionalContentMd5, "transactionalContentMD5", "csharp");
 
 @@access(BlobProperties, Access.internal, "csharp");
 @@access(BlobItem, Access.internal, "csharp");
+@@access(ArrowField, Access.internal, "csharp");
+@@access(ArrowConfiguration, Access.internal, "csharp");
+@@access(ContainerItem, Access.internal, "csharp");
+@@access(ContainerProperties, Access.internal, "csharp");
+@@access(DelimitedTextConfiguration, Access.internal, "csharp");
+@@access(JsonTextConfiguration, Access.internal, "csharp");
 
 @@clientOption(MetadataHeaders.metadata,
   "collectionHeaderPrefix",
