@@ -48,3 +48,58 @@ namespace CombineClient;
   "ManagedServiceIdentityUserAssignedIdentities",
   "java"
 );
+
+// IP → Ip naming mitigations for backward compatibility with hand-written wrapper code
+@@clientName(Microsoft.Network.PublicIPAddress, "PublicIpAddress", "java");
+@@clientName(Microsoft.Network.PublicIPPrefix, "PublicIpPrefix", "java");
+@@clientName(Microsoft.Network.FrontendIPConfiguration,
+  "FrontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.IPConfiguration, "IpConfiguration", "java");
+@@clientName(Microsoft.Network.IPConfigurationProfile,
+  "IpConfigurationProfile",
+  "java"
+);
+@@clientName(Microsoft.Network.NetworkInterfaceIPConfiguration,
+  "NetworkInterfaceIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.IPAddressAvailabilityResult,
+  "IpAddressAvailabilityResult",
+  "java"
+);
+@@clientName(Microsoft.Network.VerificationIPFlowResult,
+  "VerificationIpFlowResult",
+  "java"
+);
+@@clientName(Microsoft.Network.VerificationIPFlowParameters,
+  "VerificationIpFlowParameters",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualNetworkGatewayIPConfiguration,
+  "VirtualNetworkGatewayIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayIPConfiguration,
+  "ApplicationGatewayIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayFrontendIPConfiguration,
+  "ApplicationGatewayFrontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.IPAllocationMethod,
+  "IpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.IPVersion, "IpVersion", "java");
+@@clientName(Microsoft.Network.PublicIPAddressSku,
+  "PublicIpAddressSku",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressSkuName,
+  "PublicIpAddressSkuName",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPPrefixSku, "PublicIpPrefixSku", "java");
