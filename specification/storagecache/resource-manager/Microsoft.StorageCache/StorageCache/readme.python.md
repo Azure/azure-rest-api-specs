@@ -23,7 +23,7 @@ modelerfour:
 
 directive:
   - from: stable/2026-01-01/amlfilesystem.json
-    where: $.definitions.AmlFilesystem.properties
+    where: $.definitions.AmlFilesystem.properties.properties
     transform: >-
       $.currentStorageCapacityTiB["x-ms-client-name"] = "current_storage_capacity_tib";
 ```
