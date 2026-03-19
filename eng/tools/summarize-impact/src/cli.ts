@@ -1,5 +1,5 @@
+import * as core from "@actions/core";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
-import { setOutput } from "@azure-tools/specs-shared/error-reporting";
 import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { evaluateImpact, getRPaaSFolderList } from "./impact.js";
 
@@ -77,6 +77,8 @@ export async function main() {
   const targetGitRoot = await getRootFolder(targetDirectory);
   const fileList = await getChangedFilesStatuses({
     cwd: sourceGitRoot,
+    // code in diff-types.ts and impact.ts assumes the file list only contains add/modify/delete, not renames
+    gitOptions: ["--no-renames"],
     logger: defaultLogger,
     paths: ["specification"],
   });
@@ -123,5 +125,5 @@ export async function main() {
   // Intentionally doesn't use GITHUB_STEP_SUMMARY, since it's not a markdown summary for GH UI
   const summaryFile = resolve("summary.json");
   await writeFile(summaryFile, JSON.stringify(impact, null, 2));
-  setOutput("summary", summaryFile);
+  core.setOutput("summary", summaryFile);
 }

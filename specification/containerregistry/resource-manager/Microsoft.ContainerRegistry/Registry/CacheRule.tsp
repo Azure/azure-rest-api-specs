@@ -4,10 +4,10 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./CacheRule.models.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using TypeSpec.Rest;
+using Versioning;
 
 namespace Microsoft.ContainerRegistry;
 /**
@@ -21,6 +21,13 @@ model CacheRule is Azure.ResourceManager.ProxyResource<CacheRuleProperties> {
     SegmentName = "cacheRules",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
+
+  /**
+   * The identity of the cache rule.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Unable to use `added` decorator on spread property. Use `...ManagedServiceIdentityProperty` instead when feature has been GA'd."
+  @added(Versions.vLatestPreview)
+  identity?: IdentityProperties;
 }
 
 @armResourceOperations
