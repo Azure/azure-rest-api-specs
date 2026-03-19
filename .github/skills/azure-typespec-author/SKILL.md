@@ -3,7 +3,7 @@ name: azure-typespec-author
 license: MIT
 metadata:
   version: "1.0.0"
-description: "Authors and modifies Azure TypeSpec API specifications for ARM and data-plane services. Generates authoring plans and validates TypeSpec compilation. USE FOR: \"typespec\", \"tsp compile\", \"modify tsp\", \"api version\", \"preview version\", \"stable version\", \"bump version\", \"promote to stable\", \"add resource\", \"extension resource\", \"child resource\", \"add operation\", \"PATCH operation\", \"POST action\", \"LRO\", \"async operation\", \"add property\", \"change property\", \"visibility\", \"constraints\", \"suppress warning\", \"breaking change\", \"operationId\", \"spread model\", API version evolution, resource definitions, operations, models, properties, decorators. DO NOT USE FOR: SDK generation from TypeSpec, releasing SDK packages, or single MCP tool calls without multi-step workflows. INVOKES: azure-sdk-mcp:azsdk_typespec_generate_authoring_plan, azure-sdk-mcp:azsdk_run_typespec_validation."
+description: "Authors and modifies Azure TypeSpec (.tsp) API specifications. USE FOR: any TypeSpec/tsp change — api versions (add, bump, preview, stable, promote), resources, operations, models, properties, decorators, visibility, constraints, breaking changes, LRO, suppressions, operationId, spread model. Covers ARM resource-manager and data-plane services. DO NOT USE FOR: SDK generation, releasing SDK packages, or single MCP tool calls. INVOKES: azure-sdk-mcp:azsdk_typespec_generate_authoring_plan, azure-sdk-mcp:azsdk_run_typespec_validation."
 compatibility:
   requires: "azure-sdk-mcp server with azsdk_typespec_generate_authoring_plan and azsdk_run_typespec_validation tools"
 ---
@@ -12,10 +12,10 @@ compatibility:
 
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
+| Tool                                                   | Purpose                                                   |
+| ------------------------------------------------------ | --------------------------------------------------------- |
 | `azure-sdk-mcp:azsdk_typespec_generate_authoring_plan` | Generate grounded authoring plan (General Authoring only) |
-| `azure-sdk-mcp:azsdk_run_typespec_validation` | Validate TypeSpec compilation + lint |
+| `azure-sdk-mcp:azsdk_run_typespec_validation`          | Validate TypeSpec compilation + lint                      |
 
 **Prerequisite:** `azure-sdk-mcp` server must be running.
 
@@ -37,7 +37,7 @@ compatibility:
 
 Copy and update as you progress:
 
-- [ ] Step 1: Analyzed project & classified as: ___
+- [ ] Step 1: Analyzed project & classified as: \_\_\_
 - [ ] Step 2: Collected intake inputs
 - [ ] Step 3: Retrieved authoring plan
 - [ ] Step 4: Applied changes
@@ -49,10 +49,10 @@ Follow [analyze project & classify task](references/analyze-project-and-classify
 
 Classify as exactly one:
 
-| Task Type                 | When                                                                         | `azsdk_typespec_generate_authoring_plan` |
-| ------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------- |
-| **API Version Evolution** | Adding a new preview or stable API version to an existing ARM service. | **MUST NOT** call                        |
-| **General Authoring**     | Any other `.tsp` change (resources, operations, models, properties, etc.)    | **MUST** call                            |
+| Task Type                 | When                                                                      | `azsdk_typespec_generate_authoring_plan` |
+| ------------------------- | ------------------------------------------------------------------------- | ---------------------------------------- |
+| **API Version Evolution** | Adding a new preview or stable API version to an existing ARM service.    | **MUST NOT** call                        |
+| **General Authoring**     | Any other `.tsp` change (resources, operations, models, properties, etc.) | **MUST** call                            |
 
 State your classification explicitly before proceeding.
 
@@ -62,7 +62,7 @@ State your classification explicitly before proceeding.
 
 Collect inputs needed for the change. Branch by task type:
 
-- **API Version Evolution** → Follow [API version evolution reference — Step 2](references/api-version-evolution.md#step-2-intake). Make sure to list features from the latest version in a table and ask the user which to carry over vs exclude.
+- **API Version Evolution** → Follow [API version evolution reference — Step 2](references/api-version-evolution.md#step-2-intake).
 - **General Authoring** → Follow [intake guide](references/general-authoring-intake.md).
 
 ---
@@ -103,13 +103,13 @@ See [validation guide](references/validation.md) for sub-steps (TypeSpec compila
 
 ## Reference Files
 
-| File | Purpose |
-|------|---------|
+| File                                                                                    | Purpose                                   |
+| --------------------------------------------------------------------------------------- | ----------------------------------------- |
 | [analyze-project-and-classify-task.md](references/analyze-project-and-classify-task.md) | Step 1: project analysis + classification |
-| [api-version-evolution.md](references/api-version-evolution.md) | Steps 2–4 for API Version Evolution tasks |
-| [general-authoring-intake.md](references/general-authoring-intake.md) | Step 2 for General Authoring tasks |
-| [agentic-search.md](references/agentic-search.md) | Procedure for fetching external docs |
-| [validation.md](references/validation.md) | Step 5: validation sub-steps |
+| [api-version-evolution.md](references/api-version-evolution.md)                         | Steps 2–4 for API Version Evolution tasks |
+| [general-authoring-intake.md](references/general-authoring-intake.md)                   | Step 2 for General Authoring tasks        |
+| [agentic-search.md](references/agentic-search.md)                                       | Procedure for fetching external docs      |
+| [validation.md](references/validation.md)                                               | Step 5: validation sub-steps              |
 
 ## Examples
 
