@@ -75,7 +75,7 @@ interface SBAuthorizationRules {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx")
   getAuthorizationRule is SBAuthorizationRuleOps.Read<
     SBAuthorizationRule,
-    OverrideErrorType = ErrorResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -87,7 +87,7 @@ interface SBAuthorizationRules {
   createOrUpdateAuthorizationRule is SBAuthorizationRuleOps.CreateOrUpdateSync<
     SBAuthorizationRule,
     Response = ArmResourceUpdatedResponse<SBAuthorizationRule>,
-    OverrideErrorType = ErrorResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -97,7 +97,7 @@ interface SBAuthorizationRules {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639417.aspx")
   deleteAuthorizationRule is SBAuthorizationRuleOps.DeleteSync<
     SBAuthorizationRule,
-    OverrideErrorType = ErrorResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -107,7 +107,7 @@ interface SBAuthorizationRules {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx")
   listAuthorizationRules is SBAuthorizationRuleOps.List<
     SBAuthorizationRule,
-    OverrideErrorType = ErrorResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -193,7 +193,7 @@ interface DisasterRecoveryConfigs {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx")
   listAuthorizationRules is DisasterRecoveryConfigOps.List<
     SBAuthorizationRule,
-    OverrideErrorType = ErrorResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -256,7 +256,7 @@ interface Queues {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx")
   getAuthorizationRule is QueueOps.Read<
     SBAuthorizationRule,
-    OverrideErrorType = ErrorResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -266,7 +266,7 @@ interface Queues {
   createOrUpdateAuthorizationRule is QueueOps.CreateOrUpdateSync<
     SBAuthorizationRule,
     Response = ArmResourceUpdatedResponse<SBAuthorizationRule>,
-    OverrideErrorType = ErrorResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -276,7 +276,7 @@ interface Queues {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt705609.aspx")
   deleteAuthorizationRule is QueueOps.DeleteSync<
     SBAuthorizationRule,
-    OverrideErrorType = ErrorResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -362,7 +362,7 @@ interface Topics {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx")
   getAuthorizationRule is TopicOps.Read<
     SBAuthorizationRule,
-    OverrideErrorType = ErrorResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -394,7 +394,7 @@ interface Topics {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx")
   listAuthorizationRules is TopicOps.List<
     SBAuthorizationRule,
-    OverrideErrorType = ErrorResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**

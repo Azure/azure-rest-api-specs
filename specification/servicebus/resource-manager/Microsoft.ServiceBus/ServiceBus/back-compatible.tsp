@@ -38,7 +38,10 @@ using Microsoft.ServiceBus;
 @@clientName(SBNamespaces.failover::parameters.body, "parameters");
 @@clientLocation(SBNamespaces.privateLinkResourcesGet, "PrivateLinkResources");
 @@clientName(SBNamespaces.privateLinkResourcesGet, "Get", "!csharp");
-@@clientLocation(SBNamespaces.checkNameAvailability, DisasterRecoveryConfigs, "!csharp");
+@@clientLocation(SBNamespaces.checkNameAvailability,
+  DisasterRecoveryConfigs,
+  "!csharp"
+);
 @@clientName(SBNamespaces.checkNameAvailability::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
@@ -102,7 +105,10 @@ using Microsoft.ServiceBus;
   "parameters"
 );
 @@clientLocation(SBAuthorizationRules.deleteAuthorizationRule, "Namespaces");
-@@clientLocation(SBAuthorizationRules.listAuthorizationRules, "Namespaces", "!csharp");
+@@clientLocation(SBAuthorizationRules.listAuthorizationRules,
+  "Namespaces",
+  "!csharp"
+);
 @@clientLocation(SBAuthorizationRules.listKeys, "Namespaces");
 @@clientLocation(SBAuthorizationRules.regenerateKeys, "Namespaces");
 @@clientName(SBAuthorizationRules.regenerateKeys::parameters.body,
