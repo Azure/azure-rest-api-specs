@@ -15195,17 +15195,6 @@ model LogicalServerAdvancedThreatProtectionListResult {
 }
 
 /**
- * A list of the advisors.
- */
-model AdvisorListResult {
-  /**
-   * Array of results.
-   */
-  @pageItems
-  value?: Advisor[];
-}
-
-/**
  * A list of active directory only authentications.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -15223,17 +15212,6 @@ model AzureADOnlyAuthListResult {
   @nextLink
   @visibility(Lifecycle.Read)
   nextLink?: string;
-}
-
-/**
- * A list of the recommended actions.
- */
-model RecommendedActionListResult {
-  /**
-   * Array of results.
-   */
-  @pageItems
-  value?: RecommendedAction[];
 }
 
 /**

@@ -17501,9 +17501,12 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AdvisorListResult"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Advisor"
+              }
             }
           },
           "default": {
@@ -19189,9 +19192,12 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AdvisorListResult"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Advisor"
+              }
             }
           },
           "default": {
@@ -19379,9 +19385,12 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RecommendedActionListResult"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RecommendedAction"
+              }
             }
           },
           "default": {
@@ -40633,19 +40642,6 @@
         }
       ]
     },
-    "AdvisorListResult": {
-      "type": "object",
-      "description": "A list of the advisors.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of results.",
-          "items": {
-            "$ref": "#/definitions/Advisor"
-          }
-        }
-      }
-    },
     "AdvisorProperties": {
       "type": "object",
       "description": "Properties for a Database, Server or Elastic Pool Advisor.",
@@ -46204,13 +46200,13 @@
         },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
+          "description": "Resource location.",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -54518,19 +54514,6 @@
             "description": "System"
           }
         ]
-      }
-    },
-    "RecommendedActionListResult": {
-      "type": "object",
-      "description": "A list of the recommended actions.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of results.",
-          "items": {
-            "$ref": "#/definitions/RecommendedAction"
-          }
-        }
       }
     },
     "RecommendedActionMetricInfo": {

@@ -63,7 +63,7 @@ interface RecommendedActions {
   @tag("DatabaseRecommendedActions")
   listByDatabaseAdvisor is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     RecommendedAction,
-    Response = RecommendedActionListResult
+    Response = ArmResponse<RecommendedAction[]>
   >;
 }
 

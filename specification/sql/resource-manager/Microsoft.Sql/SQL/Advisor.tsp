@@ -85,7 +85,7 @@ interface Advisors {
    * Gets a list of database advisors.
    */
   @tag("DatabaseAdvisors")
-  listByDatabase is AdvisorOps.List<
+  listByDatabase is AdvisorOps.ListSinglePage<
     Advisor,
     Parameters = {
       /**
@@ -94,7 +94,7 @@ interface Advisors {
       @query("$expand")
       $expand?: string;
     },
-    Response = AdvisorListResult
+    Response = ArmResponse<Advisor[]>
   >;
 }
 alias ServerAdvisorOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -144,7 +144,7 @@ interface ServerAdvisors {
       @query("$expand")
       $expand?: string;
     },
-    Response = AdvisorListResult
+    Response = ArmResponse<Advisor[]>
   >;
 }
 

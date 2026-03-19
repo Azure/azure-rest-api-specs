@@ -1095,8 +1095,6 @@ using Microsoft.Sql;
 @@clientName(ServersOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
-@@removeVisibility(FailoverGroup.location, Lifecycle.Create);
-@@removeVisibility(FirewallRule.name, Lifecycle.Read);
 @@visibility(ManagedInstancePrivateLink.properties, Lifecycle.Read);
 @@visibility(PrivateLinkResource.properties, Lifecycle.Read);
 @@doc(RestorableDroppedDatabase.location, "Resource location.");
