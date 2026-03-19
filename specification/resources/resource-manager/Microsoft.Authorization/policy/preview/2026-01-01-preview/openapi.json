@@ -6250,7 +6250,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PolicyEnrollmentProperties",
-          "description": "The properties of the policy enrollment."
+          "description": "The properties of the policy enrollment.",
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "$ref": "#/definitions/Azure.Core.eTag",
@@ -6290,16 +6291,24 @@
       "properties": {
         "policyAssignmentId": {
           "type": "string",
-          "description": "The ID of the policy assignment that is being enrolled."
+          "format": "arm-id",
+          "description": "The ID of the policy assignment that is being enrolled.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Authorization/policyAssignments"
+              }
+            ]
+          }
         },
         "policyAssignmentInstanceId": {
           "type": "string",
-          "description": "The policy assignment instance ID associated with this enrollment.",
+          "description": "The policy assignment instance ID associated with this enrollment.\nThe value is set to the instance ID of the policy assignment the policyAssignmentId references when the enrollment is created or updated.\nThe format is a GUID string.",
           "readOnly": true
         },
         "policyDefinitionReferenceIds": {
           "type": "array",
-          "description": "The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.",
+          "description": "The policy definition reference IDs for policy definitions in an assigned policy set definition.\nThese IDs correspond to a subset of `policyDefinitions[*].policyDefinitionReferenceId` in the policy set definition.\nWhen specified and not empty, only the referenced policy definitions will be enrolled to. Otherwise, the entire policy set is enrolled to",
           "items": {
             "type": "string"
           }
@@ -6317,7 +6326,7 @@
         },
         "assignmentScopeValidation": {
           "$ref": "#/definitions/AssignmentScopeValidation",
-          "description": "The option whether validate the enrollment is at or under the assignment scope."
+          "description": "The option whether to validate the enrollment is at or under the assignment scope."
         },
         "resourceSelectors": {
           "type": "array",
@@ -6338,7 +6347,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PolicyEnrollmentUpdateProperties",
-          "description": "The policy enrollment properties for Patch request."
+          "description": "The policy enrollment properties for Patch request.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -6348,7 +6358,7 @@
       "properties": {
         "assignmentScopeValidation": {
           "$ref": "#/definitions/AssignmentScopeValidation",
-          "description": "The option whether validate the enrollment is at or under the assignment scope."
+          "description": "The option whether to validate the enrollment is at or under the assignment scope."
         },
         "resourceSelectors": {
           "type": "array",

@@ -1408,16 +1408,24 @@ model PolicyEnrollmentProperties {
   /**
    * The ID of the policy assignment that is being enrolled.
    */
-  policyAssignmentId: string;
+  policyAssignmentId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Authorization/policyAssignments";
+    }
+  ]>;
 
   /**
    * The policy assignment instance ID associated with this enrollment.
+   * The value is set to the instance ID of the policy assignment the policyAssignmentId references when the enrollment is created or updated.
+   * The format is a GUID string.
    */
   @visibility(Lifecycle.Read)
   policyAssignmentInstanceId?: string;
 
   /**
-   * The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
+   * The policy definition reference IDs for policy definitions in an assigned policy set definition.
+   * These IDs correspond to a subset of `policyDefinitions[*].policyDefinitionReferenceId` in the policy set definition.
+   * When specified and not empty, only the referenced policy definitions will be enrolled to. Otherwise, the entire policy set is enrolled to
    */
   policyDefinitionReferenceIds?: string[];
 
@@ -1438,7 +1446,7 @@ model PolicyEnrollmentProperties {
   metadata?: unknown;
 
   /**
-   * The option whether validate the enrollment is at or under the assignment scope.
+   * The option whether to validate the enrollment is at or under the assignment scope.
    */
   assignmentScopeValidation?: AssignmentScopeValidation;
 
@@ -1466,7 +1474,7 @@ model PolicyEnrollmentUpdate {
 @added(Versions.v2026_01_01_preview)
 model PolicyEnrollmentUpdateProperties {
   /**
-   * The option whether validate the enrollment is at or under the assignment scope.
+   * The option whether to validate the enrollment is at or under the assignment scope.
    */
   assignmentScopeValidation?: AssignmentScopeValidation;
 
@@ -1861,3 +1869,4 @@ model DataPolicyManifestProperties {
    */
   resourceFunctions?: DataManifestResourceFunctionsDefinition;
 }
+
