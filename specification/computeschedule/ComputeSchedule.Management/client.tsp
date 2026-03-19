@@ -114,6 +114,10 @@ using Azure.ResourceManager;
   "correlationId",
   "csharp,javascript"
 );
+@@clientName(ExecuteCreateFlexRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
 @@clientName(SubmitDeallocateRequest.correlationid,
   "correlationId",
   "csharp,javascript"
