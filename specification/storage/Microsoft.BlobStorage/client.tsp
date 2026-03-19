@@ -333,6 +333,7 @@ enum ImmutabilityPolicySetting {
 @@clientName(BlobDeleteTypeGo, "DeleteType", "go");
 @@clientName(BlobExpiryOptions, "ExpiryOptions", "go");
 @@clientName(BlobItem.objectReplicationMetadata, "OrMetadata", "go");
+@@clientName(BlobPublicAccessResponseHeader.access, "BlobPublicAccess", "go");
 @@clientName(BlobServiceProperties, "StorageServiceProperties", "go");
 @@clientName(BlobServiceProperties.cors, "CORS", "go");
 @@clientName(CopyStatus, "CopyStatusType", "go");

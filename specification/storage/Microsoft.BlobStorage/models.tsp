@@ -1554,7 +1554,7 @@ alias BlobPublicAccessParameter = {
 alias BlobPublicAccessResponseHeader = {
   /** The public access setting for the container. */
   @header("x-ms-blob-public-access")
-  blobPublicAccess?: PublicAccessType;
+  access?: PublicAccessType;
 };
 
 /** Optional: Indicates the priority with which to rehydrate an archived blob. */
