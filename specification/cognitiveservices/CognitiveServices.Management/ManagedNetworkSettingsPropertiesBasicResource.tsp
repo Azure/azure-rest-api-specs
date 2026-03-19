@@ -37,9 +37,9 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
    * PUT API for managed network settings of a cognitive services account.
    */
-  @tag("ManagedNetwork")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "PUT returns 202 Accepted instead of 201 Created to match backend LRO behavior"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "PUT returns 202 Accepted instead of 201 Created to match backend LRO behavior"
+  @tag("ManagedNetwork")
   put is ArmResourceCreateOrReplaceAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource> &

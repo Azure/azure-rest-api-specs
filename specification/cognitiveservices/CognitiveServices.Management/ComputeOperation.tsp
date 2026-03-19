@@ -41,9 +41,7 @@ interface ComputeOperations {
   >;
 }
 
-@@doc(ComputeOperationStatus.name,
-  "The ID of the compute operation."
-);
+@@doc(ComputeOperationStatus.name, "The ID of the compute operation.");
 @@doc(ComputeOperationStatus.properties,
   "The properties of the compute operation status."
 );
@@ -51,8 +49,8 @@ interface ComputeOperations {
 /**
  * The properties of a compute operation status.
  */
-@added(Versions.v2026_01_15_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Operation status resource does not have a provisioning state"
+@added(Versions.v2026_01_15_preview)
 model ComputeOperationStatusProperties {
   /**
    * The start time of the operation.
