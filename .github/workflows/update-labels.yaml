@@ -20,6 +20,7 @@ on:
 permissions:
   actions: read
   contents: read
+  issues: write
   pull-requests: write
 
 jobs:
@@ -42,6 +43,33 @@ jobs:
             const { default: updateLabels } =
               await import('${{ github.workspace }}/.github/workflows/src/update-labels.js');
             await updateLabels({ github, context, core });
+
+      - name: Ensure ARM Modeling labels exist
+        if: github.event.workflow_run.name == 'ARM Modeling Review'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const labels = [
+              "ARMModelingReviewRequired",
+              "ARMModelingSignedOff",
+              "ARMModelingAutoSignedOff",
+            ];
+            for (const name of labels) {
+              try {
+                // Check whether the label already exists; result is intentionally unused.
+                await github.rest.issues.getLabel({ owner: context.repo.owner, repo: context.repo.repo, name });
+                core.info(`Label '${name}' already exists`);
+              } catch (error) {
+                if (error.status === 404) {
+                  // Use GitHub's default "light gray" color so the label is neutral and
+                  // distinguishable from labels that carry semantic color coding.
+                  await github.rest.issues.createLabel({ owner: context.repo.owner, repo: context.repo.repo, name, color: "ededed" });
+                  core.info(`Created label '${name}'`);
+                } else {
+                  throw error;
+                }
+              }
+            }
 
       - if: ${{ always() && steps.update-labels.outputs.head_sha }}
         name: Upload artifact with head SHA
