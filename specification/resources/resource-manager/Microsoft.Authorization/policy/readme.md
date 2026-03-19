@@ -931,7 +931,6 @@ directive:
   - suppress: GuidUsage
     from: preview/2026-01-01-preview/openapi.json
     reason: "This is for a server side generated read only property."
-    where: $.definitions["Azure.Core.uuid"].format
 ```
 
 ---
