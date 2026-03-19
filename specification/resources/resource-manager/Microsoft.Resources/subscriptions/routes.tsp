@@ -13,14 +13,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Resources;
 
-alias SubscriptionIdParameter = {
-  /**
-   * The ID of the target subscription.
-   */
-  @path("subscriptionId")
-  subscriptionId: string;
-};
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface Subscriptions {
   /**
