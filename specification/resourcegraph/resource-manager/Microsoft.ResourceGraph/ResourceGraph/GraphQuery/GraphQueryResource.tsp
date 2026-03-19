@@ -1,19 +1,17 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace GraphQueryApi;
 /**
  * Graph Query entity definition.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphQueryResource
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GraphQueryProperties> {
   ...ResourceNameParameter<
@@ -26,7 +24,7 @@ model GraphQueryResource
   /**
    * This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -35,16 +33,12 @@ interface GraphQueryResources {
   /**
    * Get a single graph query by its resourceName.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GraphQuery_Get")
   @tag("GraphQuery")
   get is ArmResourceRead<GraphQueryResource, Error = GraphQueryError>;
 
   /**
    * Create a new graph query.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GraphQuery_CreateOrUpdate")
   @tag("GraphQuery")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GraphQueryResource,
@@ -54,8 +48,6 @@ interface GraphQueryResources {
   /**
    * Updates a graph query that has already been added.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GraphQuery_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     GraphQueryResource,
@@ -66,16 +58,12 @@ interface GraphQueryResources {
   /**
    * Delete a graph query.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GraphQuery_Delete")
   @tag("GraphQuery")
   delete is ArmResourceDeleteSync<GraphQueryResource, Error = GraphQueryError>;
 
   /**
    * Get all graph queries defined within a specified subscription and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GraphQuery_List")
   @tag("GraphQuery")
   list is ArmResourceListByParent<
     GraphQueryResource,
@@ -86,8 +74,6 @@ interface GraphQueryResources {
   /**
    * Get all graph queries defined within a specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GraphQuery_ListBySubscription")
   @tag("GraphQuery")
   listBySubscription is ArmListBySubscription<
     GraphQueryResource,

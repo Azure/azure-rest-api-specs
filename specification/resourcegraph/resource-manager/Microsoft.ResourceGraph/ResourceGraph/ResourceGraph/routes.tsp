@@ -14,8 +14,8 @@ namespace ResourceGraph;
 /**
  * Queries the resources managed by Azure Resource Manager for scopes specified in the request.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
 @tag("Resources")
 @OpenAPI.externalDocs(
