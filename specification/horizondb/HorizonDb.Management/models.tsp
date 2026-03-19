@@ -125,6 +125,9 @@ model HorizonDbClusterProperties {
   @doc("Restore point creation time specifying the time to restore from")
   pointInTimeUTC?: utcDateTime;
 
+  @doc("The source cluster resource ID for restore or replica creation")
+  sourceClusterResourceId?: armResourceIdentifier;
+
   @doc("The pool name for restore or replica operations")
   poolName?: string;
 
