@@ -33,3 +33,14 @@ interface BlocklistClient {
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
+
+// Python-specific customizations
+// Make deleteTextBlocklist private as discussed in APIView feedback
+@@access(ContentSafety.TextBlocklists.deleteTextBlocklist, Access.internal, "python");
+
+// Rename FourSeverityLevels to FourSeverity so Python emits FOUR_SEVERITY
+@@clientName(ContentSafety.AnalyzeImageOutputType.FourSeverityLevels, "FourSeverity", "python");
+
+// Change severity from int to float in Python per APIView feedback
+@@alternateType(ContentSafety.TextCategoriesAnalysis.severity, float32, "python");
+@@alternateType(ContentSafety.ImageCategoriesAnalysis.severity, float32, "python");
