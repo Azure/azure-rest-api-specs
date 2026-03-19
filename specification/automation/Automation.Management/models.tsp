@@ -1330,7 +1330,7 @@ model NodeCountProperties {
  * Error response of an operation failure
  */
 @error
-model ErrorResponse {
+model AutomationErrorResponse {
   /**
    * Error code
    */
@@ -1367,7 +1367,7 @@ model softwareUpdateConfigurationProperties {
   /**
    * Details of provisioning error
    */
-  error?: ErrorResponse;
+  error?: AutomationErrorResponse;
 
   /**
    * Creation time of the resource, which only appears in the response.
@@ -5555,7 +5555,7 @@ model updateConfigurationMachineRunProperties {
   /**
    * Details of provisioning error
    */
-  error?: ErrorResponse;
+  error?: AutomationErrorResponse;
 }
 
 /**

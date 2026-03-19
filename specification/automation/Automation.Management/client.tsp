@@ -4,8 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Automation;
 
-@@clientName(ErrorResponse, "AutomationErrorResponse", "java");
-
 // Model renames
 @@clientName(SUCScheduleProperties, "SucScheduleProperties", "java");
 @@clientName(UserAssignedIdentitiesProperties,

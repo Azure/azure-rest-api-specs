@@ -11198,6 +11198,20 @@
         }
       }
     },
+    "AutomationErrorResponse": {
+      "type": "object",
+      "description": "Error response of an operation failure",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
     "AutomationKeyName": {
       "type": "string",
       "description": "Automation key name.",
@@ -12923,20 +12937,6 @@
       "properties": {
         "userAssignedIdentity": {
           "description": "The user identity used for CMK. It will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Error response of an operation failure",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message indicating why the operation failed."
         }
       }
     },
@@ -17970,7 +17970,7 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/ErrorResponse",
+          "$ref": "#/definitions/AutomationErrorResponse",
           "description": "Details of provisioning error"
         },
         "creationTime": {
@@ -18321,7 +18321,7 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/ErrorResponse",
+          "$ref": "#/definitions/AutomationErrorResponse",
           "description": "Details of provisioning error"
         }
       }
