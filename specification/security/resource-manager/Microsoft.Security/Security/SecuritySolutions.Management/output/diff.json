@@ -1,0 +1,2372 @@
+{
+  "info": {
+    "title": {
+      "__old": "Microsoft Defender for Cloud",
+      "__new": "SecurityCenter"
+    },
+    "description": {
+      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/allowedConnections__deleted": {
+      "get": {
+        "operationId": "AllowedConnections_ListByHomeRegion",
+        "tags": [
+          "AllowedConnections"
+        ],
+        "description": "Gets the list of all possible traffic between resources for the subscription and location.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AllowedConnectionsList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get allowed connections on a subscription from security data location": {
+            "$ref": "./examples/AllowedConnections/GetAllowedConnectionsSubscriptionLocation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions__deleted": {
+      "get": {
+        "operationId": "DiscoveredSecuritySolutions_ListByHomeRegion",
+        "tags": [
+          "DiscoveredSecuritySolutions"
+        ],
+        "description": "Gets a list of discovered Security Solutions for the subscription and location.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredSecuritySolutionList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get discovered security solutions from a security data location": {
+            "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionsSubscriptionLocation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions__deleted": {
+      "get": {
+        "operationId": "ExternalSecuritySolutions_ListByHomeRegion",
+        "tags": [
+          "ExternalSecuritySolutions"
+        ],
+        "description": "Gets a list of external Security Solutions for the subscription and location.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExternalSecuritySolutionList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get external security solutions on a subscription from security data location": {
+            "$ref": "./examples/ExternalSecuritySolutions/GetExternalSecuritySolutionsSubscriptionLocation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies__deleted": {
+      "get": {
+        "operationId": "JitNetworkAccessPolicies_ListByRegion",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPoliciesList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get JIT network access policies on a subscription from a security data location": {
+            "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesSubscriptionLocation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/topologies__deleted": {
+      "get": {
+        "operationId": "Topology_ListByHomeRegion",
+        "tags": [
+          "Topology"
+        ],
+        "description": "Gets a list that allows to build a topology view of a subscription and location.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TopologyList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get topology on a subscription from security data location": {
+            "$ref": "./examples/Topology/GetTopologySubscriptionLocation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments__deleted": {
+      "get": {
+        "operationId": "ServerVulnerabilityAssessment_ListByExtendedResource",
+        "tags": [
+          "ServerVulnerabilityAssessments"
+        ],
+        "description": "Gets a list of server vulnerability assessment onboarding statuses on a given resource.",
+        "parameters": [
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServerVulnerabilityAssessmentsList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of server vulnerability assessments on a resource. Though this API returns a list, Currently Microsoft.Security only supports a single default type of server vulnerability assessment": {
+            "$ref": "./examples/ServerVulnerabilityAssessments/ListByExtendedResourceServerVulnerabilityAssessments_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments/{serverVulnerabilityAssessment}__deleted": {
+      "get": {
+        "operationId": "ServerVulnerabilityAssessment_Get",
+        "tags": [
+          "ServerVulnerabilityAssessments"
+        ],
+        "description": "Gets a server vulnerability assessment onboarding statuses on a given resource.",
+        "parameters": [
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverVulnerabilityAssessment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ServerVulnerabilityAssessmentName",
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServerVulnerabilityAssessment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a server vulnerability assessments onboarding status on a resource. Currently Microsoft.Security only supports the single 'default' resource": {
+            "$ref": "./examples/ServerVulnerabilityAssessments/GetServerVulnerabilityAssessments_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServerVulnerabilityAssessment_CreateOrUpdate",
+        "tags": [
+          "ServerVulnerabilityAssessment"
+        ],
+        "description": "Creating a server vulnerability assessment on a resource, which will onboard a resource for having a vulnerability assessment on it",
+        "parameters": [
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverVulnerabilityAssessment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ServerVulnerabilityAssessmentName",
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServerVulnerabilityAssessment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a server vulnerability assessments on a resource. Only 'default' resource is supported. Once creating the resource, the server will be onboarded to vulnerability assessment by Microsoft.Security": {
+            "$ref": "./examples/ServerVulnerabilityAssessments/CreateServerVulnerabilityAssessments_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ServerVulnerabilityAssessment_Delete",
+        "tags": [
+          "ServerVulnerabilityAssessment"
+        ],
+        "description": "Removing server vulnerability assessment from a resource.",
+        "parameters": [
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverVulnerabilityAssessment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ServerVulnerabilityAssessmentName",
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a server vulnerability assessments on a resource. Only 'default' resource is supported. Once deleting, Microsoft.Security will not provide vulnerability assessment findings on the resource.": {
+            "$ref": "./examples/ServerVulnerabilityAssessments/DeleteServerVulnerabilityAssessments_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/allowedConnections/{connectionType}__deleted": {
+      "get": {
+        "operationId": "AllowedConnections_Get",
+        "tags": [
+          "AllowedConnections"
+        ],
+        "description": "Gets the list of all possible traffic between resources for the subscription and location, based on connection type.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "name": "connectionType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Internal",
+              "External"
+            ],
+            "x-ms-enum": {
+              "name": "ConnectionType",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AllowedConnectionsResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get allowed connections": {
+            "$ref": "./examples/AllowedConnections/GetAllowedConnections_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions/{discoveredSecuritySolutionName}__deleted": {
+      "get": {
+        "operationId": "DiscoveredSecuritySolutions_Get",
+        "tags": [
+          "DiscoveredSecuritySolutions"
+        ],
+        "description": "Gets a specific discovered Security Solution.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "name": "discoveredSecuritySolutionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredSecuritySolution"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get discovered security solution from a security data location": {
+            "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionResourceGroupLocation_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions/{externalSecuritySolutionsName}__deleted": {
+      "get": {
+        "operationId": "ExternalSecuritySolutions_Get",
+        "tags": [
+          "ExternalSecuritySolutions"
+        ],
+        "description": "Gets a specific external Security Solution.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "name": "externalSecuritySolutionsName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExternalSecuritySolution"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get external security solution": {
+            "$ref": "./examples/ExternalSecuritySolutions/GetExternalSecuritySolution_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies__deleted": {
+      "get": {
+        "operationId": "JitNetworkAccessPolicies_ListByResourceGroupAndRegion",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPoliciesList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get JIT network access policies on a resource group from a security data location": {
+            "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesResourceGroupLocation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}__deleted": {
+      "get": {
+        "operationId": "JitNetworkAccessPolicies_Get",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "name": "jitNetworkAccessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPolicy"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPolicy_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "JitNetworkAccessPolicies_CreateOrUpdate",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Create a policy for protecting resources using Just-in-Time access control",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "name": "jitNetworkAccessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPolicy"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/CreateJitNetworkAccessPolicy_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "JitNetworkAccessPolicies_Delete",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Delete a Just-in-Time access control policy.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "name": "jitNetworkAccessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/DeleteJitNetworkAccessPolicy_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}__deleted": {
+      "post": {
+        "operationId": "JitNetworkAccessPolicies_Initiate",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Initiate a JIT access from a specific Just-in-Time policy configuration.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "name": "jitNetworkAccessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jitNetworkAccessPolicyInitiateType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "initiate"
+            ],
+            "x-ms-enum": {
+              "name": "JitNetworkAccessPolicyInitiateType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPolicyInitiateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessRequest"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Initiate an action on a JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/InitiateJitNetworkAccessPolicy_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/securitySolutions/{securitySolutionName}__deleted": {
+      "get": {
+        "operationId": "SecuritySolutions_Get",
+        "tags": [
+          "SecuritySolutions"
+        ],
+        "description": "Gets a specific Security Solution.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "name": "securitySolutionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecuritySolution"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a security solution from a security data location": {
+            "$ref": "./examples/SecuritySolutions/GetSecuritySolutionsResourceGroupLocation_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/topologies/{topologyResourceName}__deleted": {
+      "get": {
+        "operationId": "Topology_Get",
+        "tags": [
+          "Topology"
+        ],
+        "description": "Gets a specific topology component.",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "name": "topologyResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TopologyResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get topology": {
+            "$ref": "./examples/Topology/GetTopology_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/{resourceType}/serverVulnerabilityAssessments__added": {
+      "get": {
+        "operationId": "ServerVulnerabilityAssessment_ListByExtendedResource",
+        "tags": [
+          "ServerVulnerabilityAssessments"
+        ],
+        "description": "Gets a list of server vulnerability assessment onboarding statuses on a given resource.",
+        "parameters": [
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServerVulnerabilityAssessmentsList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of server vulnerability assessments on a resource. Though this API returns a list, Currently Microsoft.Security only supports a single default type of server vulnerability assessment": {
+            "$ref": "./examples/ServerVulnerabilityAssessments/ListByExtendedResourceServerVulnerabilityAssessments_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/allowedConnections__added": {
+      "get": {
+        "operationId": "AllowedConnections_ListByHomeRegion",
+        "tags": [
+          "AllowedConnectionsResources"
+        ],
+        "description": "Gets the list of all possible traffic between resources for the subscription and location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AllowedConnectionsList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get allowed connections on a subscription from security data location": {
+            "$ref": "./examples/AllowedConnections/GetAllowedConnectionsSubscriptionLocation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/allowedConnections/{connectionType}__added": {
+      "get": {
+        "operationId": "AllowedConnections_Get",
+        "tags": [
+          "AllowedConnectionsResources"
+        ],
+        "description": "Gets the list of all possible traffic between resources for the subscription and location, based on connection type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "connectionType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Internal",
+              "External"
+            ],
+            "x-ms-enum": {
+              "name": "ConnectionType",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AllowedConnectionsResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get allowed connections": {
+            "$ref": "./examples/AllowedConnections/GetAllowedConnections_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/discoveredSecuritySolutions__added": {
+      "get": {
+        "operationId": "DiscoveredSecuritySolutions_ListByResourceGroupLocationResource",
+        "tags": [
+          "DiscoveredSecuritySolutions"
+        ],
+        "description": "Gets a list of discovered Security Solutions for the subscription and location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredSecuritySolutionList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/discoveredSecuritySolutions/{discoveredSecuritySolutionName}__added": {
+      "get": {
+        "operationId": "DiscoveredSecuritySolutions_Get",
+        "tags": [
+          "DiscoveredSecuritySolutions"
+        ],
+        "description": "Gets a specific discovered Security Solution.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "discoveredSecuritySolutionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredSecuritySolution"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get discovered security solution from a security data location": {
+            "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionResourceGroupLocation_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/externalSecuritySolutions__added": {
+      "get": {
+        "operationId": "ExternalSecuritySolutions_ListByResourceGroupLocationResource",
+        "tags": [
+          "ExternalSecuritySolutions"
+        ],
+        "description": "Gets a list of external Security Solutions for the subscription and location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExternalSecuritySolutionList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/externalSecuritySolutions/{externalSecuritySolutionsName}__added": {
+      "get": {
+        "operationId": "ExternalSecuritySolutions_Get",
+        "tags": [
+          "ExternalSecuritySolutions"
+        ],
+        "description": "Gets a specific external Security Solution.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "externalSecuritySolutionsName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExternalSecuritySolution"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get external security solution": {
+            "$ref": "./examples/ExternalSecuritySolutions/GetExternalSecuritySolution_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/jitNetworkAccessPolicies__added": {
+      "get": {
+        "operationId": "JitNetworkAccessPolicies_ListByResourceGroupAndRegion",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPoliciesList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get JIT network access policies on a resource group from a security data location": {
+            "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesResourceGroupLocation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}__added": {
+      "get": {
+        "operationId": "JitNetworkAccessPolicies_Get",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "jitNetworkAccessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPolicy"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPolicy_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "JitNetworkAccessPolicies_CreateOrUpdate",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Create a policy for protecting resources using Just-in-Time access control",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "jitNetworkAccessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPolicy"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/CreateJitNetworkAccessPolicy_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "JitNetworkAccessPolicies_Delete",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Delete a Just-in-Time access control policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "jitNetworkAccessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/DeleteJitNetworkAccessPolicy_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/initiate/initiate__added": {
+      "post": {
+        "operationId": "JitNetworkAccessPolicies_Initiate",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Initiate a JIT access from a specific Just-in-Time policy configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "jitNetworkAccessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPolicyInitiateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessRequest"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Initiate an action on a JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/InitiateJitNetworkAccessPolicy_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/securitySolutions/{securitySolutionName}__added": {
+      "get": {
+        "operationId": "SecuritySolutions_Get",
+        "tags": [
+          "SecuritySolutions"
+        ],
+        "description": "Gets a specific Security Solution.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "securitySolutionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecuritySolution"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a security solution from a security data location": {
+            "$ref": "./examples/SecuritySolutions/GetSecuritySolutionsResourceGroupLocation_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/topologies__added": {
+      "get": {
+        "operationId": "Topology_ListByHomeRegion",
+        "tags": [
+          "TopologyResources"
+        ],
+        "description": "Gets a list that allows to build a topology view of a subscription and location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TopologyList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get topology on a subscription from security data location": {
+            "$ref": "./examples/Topology/GetTopologySubscriptionLocation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/topologies/{topologyResourceName}__added": {
+      "get": {
+        "operationId": "Topology_Get",
+        "tags": [
+          "TopologyResources"
+        ],
+        "description": "Gets a specific topology component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "topologyResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TopologyResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get topology": {
+            "$ref": "./examples/Topology/GetTopology_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/serverVulnerabilityAssessments/default/{resourceType}__added": {
+      "get": {
+        "operationId": "ServerVulnerabilityAssessment_Get",
+        "tags": [
+          "ServerVulnerabilityAssessments"
+        ],
+        "description": "Gets a server vulnerability assessment onboarding statuses on a given resource.",
+        "parameters": [
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServerVulnerabilityAssessment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a server vulnerability assessments onboarding status on a resource. Currently Microsoft.Security only supports the single 'default' resource": {
+            "$ref": "./examples/ServerVulnerabilityAssessments/GetServerVulnerabilityAssessments_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServerVulnerabilityAssessment_CreateOrUpdate",
+        "tags": [
+          "ServerVulnerabilityAssessments"
+        ],
+        "description": "Creating a server vulnerability assessment on a resource, which will onboard a resource for having a vulnerability assessment on it",
+        "parameters": [
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServerVulnerabilityAssessment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a server vulnerability assessments on a resource. Only 'default' resource is supported. Once creating the resource, the server will be onboarded to vulnerability assessment by Microsoft.Security": {
+            "$ref": "./examples/ServerVulnerabilityAssessments/CreateServerVulnerabilityAssessments_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ServerVulnerabilityAssessment_Delete",
+        "tags": [
+          "ServerVulnerabilityAssessments"
+        ],
+        "description": "Removing server vulnerability assessment from a resource.",
+        "parameters": [
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a server vulnerability assessments on a resource. Only 'default' resource is supported. Once deleting, Microsoft.Security will not provide vulnerability assessment findings on the resource.": {
+            "$ref": "./examples/ServerVulnerabilityAssessments/DeleteServerVulnerabilityAssessments_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/allowedConnections": {
+      "get": {
+        "tags__deleted": [
+          "AllowedConnections"
+        ],
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/discoveredSecuritySolutions": {
+      "get": {
+        "tags__deleted": [
+          "DiscoveredSecuritySolutions"
+        ],
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/externalSecuritySolutions": {
+      "get": {
+        "tags__deleted": [
+          "ExternalSecuritySolutions"
+        ],
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/jitNetworkAccessPolicies": {
+      "get": {
+        "tags__deleted": [
+          "JitNetworkAccessPolicies"
+        ],
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData": {
+      "get": {
+        "tags__deleted": [
+          "SecuritySolutionsReferenceData"
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "./common/v1/types.json#/parameters/AscLocation",
+              "name__added": "ascLocation",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/securitySolutionsReferenceDataList",
+                "__new": "#/definitions/SecuritySolutionsReferenceDataList"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/securitySolutions": {
+      "get": {
+        "tags__deleted": [
+          "SecuritySolutions"
+        ],
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/securitySolutionsReferenceData": {
+      "get": {
+        "tags__deleted": [
+          "securitySolutionsReferenceData"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/securitySolutionsReferenceDataList",
+                "__new": "#/definitions/SecuritySolutionsReferenceDataList"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/topologies": {
+      "get": {
+        "tags__deleted": [
+          "Topology"
+        ],
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/jitNetworkAccessPolicies": {
+      "get": {
+        "tags__deleted": [
+          "JitNetworkAccessPolicies"
+        ],
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AadConnectivityState__deleted": {
+      "type": "object",
+      "description": "Describes an Azure resource with kind",
+      "properties": {
+        "connectivityState": {
+          "type": "string",
+          "title": "The connectivity state of the external AAD solution ",
+          "enum": [
+            "Discovered",
+            "NotLicensed",
+            "Connected"
+          ],
+          "x-ms-enum": {
+            "name": "AadConnectivityState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ExternalSecuritySolutionKind__deleted": {
+      "type": "object",
+      "description": "Describes an Azure resource with kind",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the external solution",
+          "enum": [
+            "CEF",
+            "ATA",
+            "AAD"
+          ],
+          "x-ms-enum": {
+            "name": "ExternalSecuritySolutionKind",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PortNumber__deleted": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535
+    },
+    "securitySolutionsReferenceData__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/securitySolutionsReferenceDataProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common/v1/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "./common/v1/types.json#/definitions/Location"
+        }
+      ]
+    },
+    "securitySolutionsReferenceDataList__deleted": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/securitySolutionsReferenceData"
+          }
+        }
+      }
+    },
+    "securitySolutionsReferenceDataProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "securityFamily": {
+          "type": "string",
+          "description": "The security family of the security solution",
+          "enum": [
+            "Waf",
+            "Ngfw",
+            "SaasWaf",
+            "Va"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityFamily",
+            "modelAsString": true
+          }
+        },
+        "alertVendorName": {
+          "type": "string",
+          "description": "The security solutions' vendor name"
+        },
+        "packageInfoUrl": {
+          "type": "string",
+          "description": "The security solutions' package info url"
+        },
+        "productName": {
+          "type": "string",
+          "description": "The security solutions' product name"
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The security solutions' publisher"
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "The security solutions' publisher display name"
+        },
+        "template": {
+          "type": "string",
+          "description": "The security solutions' template"
+        }
+      },
+      "required": [
+        "alertVendorName",
+        "packageInfoUrl",
+        "productName",
+        "publisher",
+        "publisherDisplayName",
+        "securityFamily",
+        "template"
+      ]
+    },
+    "SecuritySolutionsReferenceData__added": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Location where the resource is stored",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SecuritySolutionsReferenceDataProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SecuritySolutionsReferenceDataList__added": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecuritySolutionsReferenceData"
+          }
+        }
+      }
+    },
+    "SecuritySolutionsReferenceDataProperties__added": {
+      "type": "object",
+      "properties": {
+        "securityFamily": {
+          "type": "string",
+          "description": "The security family of the discovered solution",
+          "enum": [
+            "Waf",
+            "Ngfw",
+            "SaasWaf",
+            "Va"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityFamily",
+            "modelAsString": true
+          }
+        },
+        "alertVendorName": {
+          "type": "string",
+          "description": "The security solutions' vendor name"
+        },
+        "packageInfoUrl": {
+          "type": "string",
+          "description": "The security solutions' package info url"
+        },
+        "productName": {
+          "type": "string",
+          "description": "The security solutions' product name"
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The security solutions' publisher"
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "The security solutions' publisher display name"
+        },
+        "template": {
+          "type": "string",
+          "description": "The security solutions' template"
+        }
+      },
+      "required": [
+        "alertVendorName",
+        "packageInfoUrl",
+        "productName",
+        "publisher",
+        "publisherDisplayName",
+        "securityFamily",
+        "template"
+      ]
+    },
+    "AadExternalSecuritySolution": {
+      "x-ms-discriminator-value__deleted": "AAD",
+      "properties": {
+        "properties": {
+          "description__added": "The external security solution properties for AAD solutions"
+        }
+      }
+    },
+    "AadSolutionProperties": {
+      "title__deleted": "The external security solution properties for AAD solutions",
+      "allOf__deleted": [
+        {
+          "$ref": "#/definitions/ExternalSecuritySolutionProperties"
+        },
+        {
+          "$ref": "#/definitions/AadConnectivityState"
+        }
+      ],
+      "description__added": "The external security solution properties for AAD solutions",
+      "properties__added": {
+        "deviceVendor": {
+          "type": "string"
+        },
+        "deviceType": {
+          "type": "string"
+        },
+        "workspace": {
+          "$ref": "#/definitions/ConnectedWorkspace",
+          "description": "Represents an OMS workspace to which the solution is connected"
+        },
+        "connectivityState": {
+          "type": "string",
+          "description": "The connectivity state of the external AAD solution",
+          "enum": [
+            "Discovered",
+            "NotLicensed",
+            "Connected"
+          ],
+          "x-ms-enum": {
+            "name": "AadConnectivityState",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties__added": {}
+    },
+    "AllowedConnectionsList": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "AllowedConnectionsResource": {
+      "properties": {
+        "location__added": {
+          "type": "string",
+          "description": "Location where the resource is stored",
+          "readOnly": true
+        },
+        "properties": {
+          "readOnly__deleted": true,
+          "description__added": "Describes the allowed traffic between Azure resources"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ],
+        [
+          "-",
+          {
+            "$ref": "./common/v1/types.json#/definitions/Location"
+          }
+        ]
+      ]
+    },
+    "AtaExternalSecuritySolution": {
+      "x-ms-discriminator-value__deleted": "ATA",
+      "properties": {
+        "properties": {
+          "description__added": "The external security solution properties for ATA solutions"
+        }
+      }
+    },
+    "AtaSolutionProperties": {
+      "title__deleted": "The external security solution properties for ATA solutions",
+      "description__added": "The external security solution properties for ATA solutions"
+    },
+    "CefExternalSecuritySolution": {
+      "x-ms-discriminator-value__deleted": "CEF",
+      "properties": {
+        "properties": {
+          "description__added": "The external security solution properties for CEF solutions"
+        }
+      }
+    },
+    "CefSolutionProperties": {
+      "title__deleted": "The external security solution properties for CEF solutions",
+      "description__added": "The external security solution properties for CEF solutions"
+    },
+    "ConnectedWorkspace": {
+      "title__deleted": "Represents an OMS workspace to which the solution is connected",
+      "description__added": "Represents an OMS workspace to which the solution is connected"
+    },
+    "DiscoveredSecuritySolution": {
+      "description__added": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "location__added": {
+          "type": "string",
+          "description": "Location where the resource is stored",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ],
+        [
+          "-",
+          {
+            "$ref": "./common/v1/types.json#/definitions/Location"
+          }
+        ]
+      ]
+    },
+    "DiscoveredSecuritySolutionList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ExternalSecuritySolution": {
+      "discriminator__deleted": "kind",
+      "required__deleted": [
+        "kind"
+      ],
+      "properties": {
+        "properties__added": {
+          "type": "object",
+          "description": "The resource-specific properties for this resource."
+        },
+        "kind__added": {
+          "type": "string",
+          "description": "The kind of the external solution",
+          "enum": [
+            "CEF",
+            "ATA",
+            "AAD"
+          ],
+          "x-ms-enum": {
+            "name": "ExternalSecuritySolutionKind",
+            "modelAsString": true
+          }
+        },
+        "location__added": {
+          "type": "string",
+          "description": "Location where the resource is stored",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ],
+        [
+          "-",
+          {
+            "$ref": "#/definitions/ExternalSecuritySolutionKind"
+          }
+        ],
+        [
+          "-",
+          {
+            "$ref": "./common/v1/types.json#/definitions/Location"
+          }
+        ]
+      ]
+    },
+    "ExternalSecuritySolutionList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ExternalSecuritySolutionProperties": {
+      "properties": {
+        "workspace": {
+          "description__added": "Represents an OMS workspace to which the solution is connected"
+        }
+      },
+      "additionalProperties": {
+        "__old": true,
+        "__new": {}
+      }
+    },
+    "JitNetworkAccessPoliciesList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "JitNetworkAccessPolicy": {
+      "description__added": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "kind__added": {
+          "type": "string",
+          "description": "Kind of the resource"
+        },
+        "location__added": {
+          "type": "string",
+          "description": "Location where the resource is stored",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ],
+        [
+          "-",
+          {
+            "$ref": "./common/v1/types.json#/definitions/Kind"
+          }
+        ],
+        [
+          "-",
+          {
+            "$ref": "./common/v1/types.json#/definitions/Location"
+          }
+        ]
+      ]
+    },
+    "JitNetworkAccessPolicyInitiatePort": {
+      "properties": {
+        "number": {
+          "minimum__deleted": 0,
+          "format__added": "int32"
+        }
+      }
+    },
+    "JitNetworkAccessPortRule": {
+      "properties": {
+        "number": {
+          "minimum__deleted": 0,
+          "format__added": "int32"
+        },
+        "allowedSourceAddressPrefixes": {
+          "items": {
+            "description__deleted": "IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
+          }
+        }
+      }
+    },
+    "JitNetworkAccessRequestPort": {
+      "properties": {
+        "number": {
+          "minimum__deleted": 0,
+          "format__added": "int32"
+        },
+        "allowedSourceAddressPrefixes": {
+          "items": {
+            "description__deleted": "IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
+          }
+        },
+        "mappedPort": {
+          "format__added": "int32"
+        }
+      }
+    },
+    "SecuritySolution": {
+      "description__added": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "location__added": {
+          "type": "string",
+          "description": "Location where the resource is stored",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ],
+        [
+          "-",
+          {
+            "$ref": "./common/v1/types.json#/definitions/Location"
+          }
+        ]
+      ]
+    },
+    "SecuritySolutionList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "SecuritySolutionProperties": {
+      "properties": {
+        "securityFamily": {
+          "description": {
+            "__old": "The security family of the security solution",
+            "__new": "The security family of the discovered solution"
+          }
+        }
+      }
+    },
+    "ServerVulnerabilityAssessment": {
+      "properties": {
+        "properties": {
+          "description__added": "describes ServerVulnerabilityAssessment properties."
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ServerVulnerabilityAssessmentProperties": {
+      "properties": {
+        "provisioningState": {
+          "x-ms-enum__added": {
+            "name": "ServerVulnerabilityAssessmentPropertiesProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TopologyList": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "TopologyResource": {
+      "description__added": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "location__added": {
+          "type": "string",
+          "description": "Location where the resource is stored",
+          "readOnly": true
+        },
+        "properties": {
+          "readOnly__deleted": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ],
+        [
+          "-",
+          {
+            "$ref": "./common/v1/types.json#/definitions/Location"
+          }
+        ]
+      ]
+    },
+    "TopologySingleResource": {
+      "properties": {
+        "topologyScore": {
+          "format__added": "int32"
+        }
+      }
+    }
+  }
+}

@@ -49,7 +49,7 @@ interface ExternalSecuritySolutions {
    */
   listByHomeRegion is ArmResourceListAtScope<
     ExternalSecuritySolution,
-    BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
+    // BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
     Response = ArmResponse<ExternalSecuritySolutionList>
   >;
 }

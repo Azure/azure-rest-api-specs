@@ -45,7 +45,7 @@ interface TopologyResources {
   @operationId("Topology_ListByHomeRegion")
   listByHomeRegion is ArmResourceListAtScope<
     TopologyResource,
-    BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
+    // BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
     Response = ArmResponse<TopologyList>
   >;
 }

@@ -48,7 +48,7 @@ interface AllowedConnectionsResources {
   @operationId("AllowedConnections_ListByHomeRegion")
   listByHomeRegion is ArmResourceListAtScope<
     AllowedConnectionsResource,
-    BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
+    // BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
     Response = ArmResponse<AllowedConnectionsList>
   >;
 }

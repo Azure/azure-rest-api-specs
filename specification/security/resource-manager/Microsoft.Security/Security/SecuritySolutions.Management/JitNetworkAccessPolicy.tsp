@@ -67,19 +67,19 @@ interface JitNetworkAccessPolicies {
     Response = ArmResponse<JitNetworkAccessPoliciesList>
   >;
 
-  /**
-   * Policies for protecting resources using Just-in-Time access control for the subscription, location
-   */
-  listByRegion is ArmResourceListAtScope<
-    JitNetworkAccessPolicy,
-    BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
-    Response = ArmResponse<JitNetworkAccessPoliciesList>
-  >;
+  // /**
+  //  * Policies for protecting resources using Just-in-Time access control for the subscription, location
+  //  */
+  // listByRegion is ArmResourceListAtScope<
+  //   JitNetworkAccessPolicy,
+  //   // BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
+  //   Response = ArmResponse<JitNetworkAccessPoliciesList>
+  // >;
 
   /**
    * Initiate a JIT access from a specific Just-in-Time policy configuration.
    */
-  @action("{jitNetworkAccessPolicyInitiateType}")
+  // @action("{jitNetworkAccessPolicyInitiateType}")
   initiate is ArmResourceActionSync<
     JitNetworkAccessPolicy,
     JitNetworkAccessPolicyInitiateRequest,

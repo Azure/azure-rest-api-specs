@@ -44,7 +44,7 @@ interface DiscoveredSecuritySolutions {
    */
   listByHomeRegion is ArmResourceListAtScope<
     DiscoveredSecuritySolution,
-    BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
+    // BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
     Response = ArmResponse<DiscoveredSecuritySolutionList>
   >;
 }
