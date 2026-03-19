@@ -1,0 +1,897 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
+namespace Microsoft.Security;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+union ConnectionType {
+  string,
+
+  /**
+   * Internal
+   */
+  Internal: "Internal",
+
+  /**
+   * External
+   */
+  External: "External",
+}
+
+/**
+ * The security family of the discovered solution
+ */
+union SecurityFamily {
+  string,
+
+  /**
+   * Waf
+   */
+  Waf: "Waf",
+
+  /**
+   * Ngfw
+   */
+  Ngfw: "Ngfw",
+
+  /**
+   * SaasWaf
+   */
+  SaasWaf: "SaasWaf",
+
+  /**
+   * Va
+   */
+  Va: "Va",
+}
+
+/**
+ * The kind of the external solution
+ */
+union ExternalSecuritySolutionKind {
+  string,
+
+  /**
+   * CEF
+   */
+  CEF: "CEF",
+
+  /**
+   * ATA
+   */
+  ATA: "ATA",
+
+  /**
+   * AAD
+   */
+  AAD: "AAD",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+union Protocol {
+  string,
+
+  /**
+   * TCP
+   */
+  TCP: "TCP",
+
+  /**
+   * UDP
+   */
+  UDP: "UDP",
+
+  /**
+   * *
+   */
+  All: "*",
+}
+
+/**
+ * The status of the port
+ */
+union Status {
+  string,
+
+  /**
+   * Revoked
+   */
+  Revoked: "Revoked",
+
+  /**
+   * Initiated
+   */
+  Initiated: "Initiated",
+}
+
+/**
+ * A description of why the `status` has its value
+ */
+union StatusReason {
+  string,
+
+  /**
+   * Expired
+   */
+  Expired: "Expired",
+
+  /**
+   * UserRequested
+   */
+  UserRequested: "UserRequested",
+
+  /**
+   * NewerRequestInitiated
+   */
+  NewerRequestInitiated: "NewerRequestInitiated",
+}
+
+/**
+ * The security family provisioning State
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+union ProvisioningState {
+  string,
+
+  /**
+   * Succeeded
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Failed
+   */
+  Failed: "Failed",
+
+  /**
+   * Updating
+   */
+  Updating: "Updating",
+}
+
+/**
+ * The provisioningState of the vulnerability assessment capability on the VM
+ */
+union ServerVulnerabilityAssessmentPropertiesProvisioningState {
+  string,
+
+  /**
+   * Succeeded
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Failed
+   */
+  Failed: "Failed",
+
+  /**
+   * Canceled
+   */
+  Canceled: "Canceled",
+
+  /**
+   * Provisioning
+   */
+  Provisioning: "Provisioning",
+
+  /**
+   * Deprovisioning
+   */
+  Deprovisioning: "Deprovisioning",
+}
+
+/**
+ * The connectivity state of the external AAD solution
+ */
+union AadConnectivityState {
+  string,
+
+  /**
+   * Discovered
+   */
+  Discovered: "Discovered",
+
+  /**
+   * NotLicensed
+   */
+  NotLicensed: "NotLicensed",
+
+  /**
+   * Connected
+   */
+  Connected: "Connected",
+}
+
+/**
+ * List of all possible traffic between Azure resources
+ */
+model AllowedConnectionsList is Azure.Core.Page<AllowedConnectionsResource>;
+
+/**
+ * Describes the allowed traffic between Azure resources
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model AllowedConnectionsResourceProperties {
+  /**
+   * The UTC time on which the allowed connections resource was calculated
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  calculatedDateTime?: utcDateTime;
+
+  /**
+   * List of connectable resources
+   */
+  @visibility(Lifecycle.Read)
+  connectableResources?: ConnectableResource[];
+}
+
+/**
+ * Describes the allowed inbound and outbound traffic of an Azure resource
+ */
+model ConnectableResource {
+  /**
+   * The Azure resource id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The list of Azure resources that the resource has inbound allowed connection from
+   */
+  @visibility(Lifecycle.Read)
+  inboundConnectedResources?: ConnectedResource[];
+
+  /**
+   * The list of Azure resources that the resource has outbound allowed connection to
+   */
+  @visibility(Lifecycle.Read)
+  outboundConnectedResources?: ConnectedResource[];
+}
+
+/**
+ * Describes properties of a connected resource
+ */
+model ConnectedResource {
+  /**
+   * The Azure resource id of the connected resource
+   */
+  @visibility(Lifecycle.Read)
+  connectedResourceId?: string;
+
+  /**
+   * The allowed tcp ports
+   */
+  @visibility(Lifecycle.Read)
+  tcpPorts?: string;
+
+  /**
+   * The allowed udp ports
+   */
+  @visibility(Lifecycle.Read)
+  udpPorts?: string;
+}
+
+/**
+ * Describes an Azure resource.
+ */
+model Resource {
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Describes an Azure resource with location
+ */
+model Location {
+  /**
+   * Location where the resource is stored
+   */
+  @visibility(Lifecycle.Read)
+  location?: string;
+}
+
+/**
+ * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+ */
+@error
+model CloudError {
+  /**
+   * The error object.
+   */
+  error?: CloudErrorBody;
+}
+
+/**
+ * The error detail.
+ */
+model CloudErrorBody {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The error target.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * The error details.
+   */
+  @visibility(Lifecycle.Read)
+  details?: CloudErrorBody[];
+
+  /**
+   * The error additional info.
+   */
+  @visibility(Lifecycle.Read)
+  additionalInfo?: ErrorAdditionalInfo[];
+}
+
+/**
+ * The resource management error additional info.
+ */
+model ErrorAdditionalInfo {
+  /**
+   * The additional info type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The additional info.
+   */
+  @visibility(Lifecycle.Read)
+  info?: unknown;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model DiscoveredSecuritySolutionList
+  is Azure.Core.Page<DiscoveredSecuritySolution>;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model DiscoveredSecuritySolutionProperties {
+  /**
+   * The security family of the discovered solution
+   */
+  securityFamily: SecurityFamily;
+
+  /**
+   * The security solutions' image offer
+   */
+  offer: string;
+
+  /**
+   * The security solutions' image publisher
+   */
+  publisher: string;
+
+  /**
+   * The security solutions' image sku
+   */
+  sku: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ExternalSecuritySolutionList is Azure.Core.Page<ExternalSecuritySolution>;
+
+/**
+ * Describes an Azure resource with kind
+ */
+model ExternalSecuritySolutionKindAutoGenerated {
+  /**
+   * The kind of the external solution
+   */
+  kind?: ExternalSecuritySolutionKind;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model JitNetworkAccessPoliciesList is Azure.Core.Page<JitNetworkAccessPolicy>;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model JitNetworkAccessPolicyProperties {
+  /**
+   * Configurations for Microsoft.Compute/virtualMachines resource type.
+   */
+  virtualMachines: JitNetworkAccessPolicyVirtualMachine[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  requests?: JitNetworkAccessRequest[];
+
+  /**
+   * Gets the provisioning state of the Just-in-Time policy.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model JitNetworkAccessPolicyVirtualMachine {
+  /**
+   * Resource ID of the virtual machine that is linked to this policy
+   */
+  id: string;
+
+  /**
+   * Port configurations for the virtual machine
+   */
+  ports: JitNetworkAccessPortRule[];
+
+  /**
+   * Public IP address of the Azure Firewall that is linked to this policy, if applicable
+   */
+  publicIpAddress?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model JitNetworkAccessPortRule {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @maxValue(65535)
+  number: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  protocol: Protocol;
+
+  /**
+   * Mutually exclusive with the "allowedSourceAddressPrefixes" parameter. Should be an IP address or CIDR, for example "192.168.0.3" or "192.168.0.0/16".
+   */
+  allowedSourceAddressPrefix?: string;
+
+  /**
+   * Mutually exclusive with the "allowedSourceAddressPrefix" parameter.
+   */
+  allowedSourceAddressPrefixes?: string[];
+
+  /**
+   * Maximum duration requests can be made for. In ISO 8601 duration format. Minimum 5 minutes, maximum 1 day
+   */
+  maxRequestAccessDuration: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model JitNetworkAccessRequest {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  virtualMachines: JitNetworkAccessRequestVirtualMachine[];
+
+  /**
+   * The start time of the request in UTC
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTimeUtc: utcDateTime;
+
+  /**
+   * The identity of the person who made the request
+   */
+  requestor: string;
+
+  /**
+   * The justification for making the initiate request
+   */
+  justification?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model JitNetworkAccessRequestVirtualMachine {
+  /**
+   * Resource ID of the virtual machine that is linked to this policy
+   */
+  id: string;
+
+  /**
+   * The ports that were opened for the virtual machine
+   */
+  ports: JitNetworkAccessRequestPort[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model JitNetworkAccessRequestPort {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @maxValue(65535)
+  number: int32;
+
+  /**
+   * Mutually exclusive with the "allowedSourceAddressPrefixes" parameter. Should be an IP address or CIDR, for example "192.168.0.3" or "192.168.0.0/16".
+   */
+  allowedSourceAddressPrefix?: string;
+
+  /**
+   * Mutually exclusive with the "allowedSourceAddressPrefix" parameter.
+   */
+  allowedSourceAddressPrefixes?: string[];
+
+  /**
+   * The date & time at which the request ends in UTC
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTimeUtc: utcDateTime;
+
+  /**
+   * The status of the port
+   */
+  status: Status;
+
+  /**
+   * A description of why the `status` has its value
+   */
+  statusReason: StatusReason;
+
+  /**
+   * The port which is mapped to this port's `number` in the Azure Firewall, if applicable
+   */
+  mappedPort?: int32;
+}
+
+/**
+ * Describes an Azure resource with kind
+ */
+model Kind {
+  /**
+   * Kind of the resource
+   */
+  kind?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model JitNetworkAccessPolicyInitiateRequest {
+  /**
+   * A list of virtual machines & ports to open access for
+   */
+  virtualMachines: JitNetworkAccessPolicyInitiateVirtualMachine[];
+
+  /**
+   * The justification for making the initiate request
+   */
+  justification?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model JitNetworkAccessPolicyInitiateVirtualMachine {
+  /**
+   * Resource ID of the virtual machine that is linked to this policy
+   */
+  id: string;
+
+  /**
+   * The ports to open for the resource with the `id`
+   */
+  ports: JitNetworkAccessPolicyInitiatePort[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model JitNetworkAccessPolicyInitiatePort {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @maxValue(65535)
+  number: int32;
+
+  /**
+   * Source of the allowed traffic. If omitted, the request will be for the source IP address of the initiate request.
+   */
+  allowedSourceAddressPrefix?: string;
+
+  /**
+   * The time to close the request in UTC
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTimeUtc: utcDateTime;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model SecuritySolutionList is Azure.Core.Page<SecuritySolution>;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model SecuritySolutionProperties {
+  /**
+   * The security family of the security solution
+   */
+  securityFamily: SecurityFamily;
+
+  /**
+   * The security family provisioning State
+   */
+  provisioningState: ProvisioningState;
+
+  /**
+   * The security solutions' template
+   */
+  template: string;
+
+  /**
+   * The security solutions' status
+   */
+  protectionStatus: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model SecuritySolutionsReferenceDataList {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  value?: SecuritySolutionsReferenceData[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model SecuritySolutionsReferenceData {
+  ...Resource;
+  ...Location;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  properties: SecuritySolutionsReferenceDataProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model SecuritySolutionsReferenceDataProperties {
+  /**
+   * The security family of the security solution
+   */
+  securityFamily: SecurityFamily;
+
+  /**
+   * The security solutions' vendor name
+   */
+  alertVendorName: string;
+
+  /**
+   * The security solutions' package info url
+   */
+  packageInfoUrl: string;
+
+  /**
+   * The security solutions' product name
+   */
+  productName: string;
+
+  /**
+   * The security solutions' publisher
+   */
+  publisher: string;
+
+  /**
+   * The security solutions' publisher display name
+   */
+  publisherDisplayName: string;
+
+  /**
+   * The security solutions' template
+   */
+  template: string;
+}
+
+/**
+ * List of server vulnerability assessments
+ */
+model ServerVulnerabilityAssessmentsList {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @pageItems
+  value?: ServerVulnerabilityAssessment[];
+}
+
+/**
+ * describes ServerVulnerabilityAssessment properties.
+ */
+model ServerVulnerabilityAssessmentProperties {
+  /**
+   * The provisioningState of the vulnerability assessment capability on the VM
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ServerVulnerabilityAssessmentPropertiesProvisioningState;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model TopologyList is Azure.Core.Page<TopologyResource>;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model TopologyResourceProperties {
+  /**
+   * The UTC time on which the topology was calculated
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  calculatedDateTime?: utcDateTime;
+
+  /**
+   * Azure resources which are part of this topology resource
+   */
+  @visibility(Lifecycle.Read)
+  topologyResources?: TopologySingleResource[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model TopologySingleResource {
+  /**
+   * Azure resource id
+   */
+  @visibility(Lifecycle.Read)
+  resourceId?: string;
+
+  /**
+   * The security severity of the resource
+   */
+  @visibility(Lifecycle.Read)
+  severity?: string;
+
+  /**
+   * Indicates if the resource has security recommendations
+   */
+  @visibility(Lifecycle.Read)
+  recommendationsExist?: boolean;
+
+  /**
+   * Indicates the resource connectivity level to the Internet (InternetFacing, Internal ,etc.)
+   */
+  @visibility(Lifecycle.Read)
+  networkZones?: string;
+
+  /**
+   * Score of the resource based on its security severity
+   */
+  @visibility(Lifecycle.Read)
+  topologyScore?: int32;
+
+  /**
+   * The location of this resource
+   */
+  @visibility(Lifecycle.Read)
+  location?: string;
+
+  /**
+   * Azure resources connected to this resource which are in higher level in the topology view
+   */
+  @visibility(Lifecycle.Read)
+  parents?: TopologySingleResourceParent[];
+
+  /**
+   * Azure resources connected to this resource which are in lower level in the topology view
+   */
+  @visibility(Lifecycle.Read)
+  children?: TopologySingleResourceChild[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model TopologySingleResourceParent {
+  /**
+   * Azure resource id which serves as parent resource in topology view
+   */
+  @visibility(Lifecycle.Read)
+  resourceId?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model TopologySingleResourceChild {
+  /**
+   * Azure resource id which serves as child resource in topology view
+   */
+  @visibility(Lifecycle.Read)
+  resourceId?: string;
+}
+
+/**
+ * Represents a security solution which sends CEF logs to an OMS workspace
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model CefExternalSecuritySolution extends ExternalSecuritySolution {
+  /**
+   * The external security solution properties for CEF solutions
+   */
+  properties?: CefSolutionProperties;
+}
+
+/**
+ * The external security solution properties for CEF solutions
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model CefSolutionProperties extends ExternalSecuritySolutionProperties {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  hostname?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  agent?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  lastEventReceived?: string;
+}
+
+/**
+ * The solution properties (correspond to the solution kind)
+ */
+model ExternalSecuritySolutionProperties {
+  ...Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  deviceVendor?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  deviceType?: string;
+
+  /**
+   * Represents an OMS workspace to which the solution is connected
+   */
+  workspace?: ConnectedWorkspace;
+}
+
+/**
+ * Represents an OMS workspace to which the solution is connected
+ */
+model ConnectedWorkspace {
+  /**
+   * Azure resource ID of the connected OMS workspace
+   */
+  id?: string;
+}
+
+/**
+ * Represents an ATA security solution which sends logs to an OMS workspace
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model AtaExternalSecuritySolution extends ExternalSecuritySolution {
+  /**
+   * The external security solution properties for ATA solutions
+   */
+  properties?: AtaSolutionProperties;
+}
+
+/**
+ * The external security solution properties for ATA solutions
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model AtaSolutionProperties extends ExternalSecuritySolutionProperties {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  lastEventReceived?: string;
+}
+
+/**
+ * Represents an AAD identity protection solution which sends logs to an OMS workspace.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model AadExternalSecuritySolution extends ExternalSecuritySolution {
+  /**
+   * The external security solution properties for AAD solutions
+   */
+  properties?: AadSolutionProperties;
+}
+
+/**
+ * The external security solution properties for AAD solutions
+ */
+model AadSolutionProperties {
+  ...ExternalSecuritySolutionProperties;
+  ...AadConnectivityStateAutoGenerated;
+}
+
+/**
+ * Describes an Azure resource with kind
+ */
+model AadConnectivityStateAutoGenerated {
+  /**
+   * The connectivity state of the external AAD solution
+   */
+  connectivityState?: AadConnectivityState;
+}

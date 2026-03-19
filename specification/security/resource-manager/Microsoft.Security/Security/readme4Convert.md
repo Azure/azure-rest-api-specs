@@ -100,7 +100,31 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: SecureScore.Managment
+tag: SecuritySolutions.Management
+```
+
+### Composite packages
+
+The following packages may be composed from multiple api-versions.
+
+
+### Tag: SecuritySolutions.Management
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'SecuritySolutions.Management'
+input-file:
+  - stable/2020-01-01/allowedConnections.json
+  - stable/2020-01-01/discoveredSecuritySolutions.json
+  - stable/2020-01-01/externalSecuritySolutions.json
+  - stable/2020-01-01/jitNetworkAccessPolicies.json
+  - stable/2020-01-01/SecuritySolutions.json
+  - stable/2020-01-01/securitySolutionsReferenceData.json
+  - stable/2020-01-01/serverVulnerabilityAssessments.json
+  - stable/2020-01-01/topologies.json
+modelerfour:
+  lenient-model-deduplication: true
+  prenamer: true
 ```
 
 ### Composite packages
