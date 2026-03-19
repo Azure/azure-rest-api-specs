@@ -1420,7 +1420,7 @@ model PolicyEnrollmentProperties {
    * The format is a GUID string.
    */
   @visibility(Lifecycle.Read)
-  policyAssignmentInstanceId?: string;
+  policyAssignmentInstanceId?: Azure.Core.uuid;
 
   /**
    * The policy definition reference IDs for policy definitions in an assigned policy set definition.

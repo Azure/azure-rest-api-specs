@@ -5260,6 +5260,11 @@
       "type": "string",
       "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "DataEffect": {
       "type": "object",
       "description": "The data effect definition.",
@@ -6302,7 +6307,7 @@
           }
         },
         "policyAssignmentInstanceId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The policy assignment instance ID associated with this enrollment.\nThe value is set to the instance ID of the policy assignment the policyAssignmentId references when the enrollment is created or updated.\nThe format is a GUID string.",
           "readOnly": true
         },
