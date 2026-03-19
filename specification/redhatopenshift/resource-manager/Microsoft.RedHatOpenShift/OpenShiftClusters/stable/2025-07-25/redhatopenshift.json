@@ -67,15 +67,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -811,6 +811,28 @@
         }
       }
     },
+    "Display": {
+      "type": "object",
+      "description": "Display represents the display details of an operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Friendly name of the resource provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource type on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation type: read, write, delete, listKeys/action, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Friendly name of the operation."
+        }
+      }
+    },
     "EffectiveOutboundIP": {
       "type": "object",
       "description": "EffectiveOutboundIP represents an effective outbound IP resource of the cluster public load balancer.",
@@ -1166,6 +1188,45 @@
           "description": "Version represents the version to create the cluster at."
         }
       }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Operation represents an RP operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}."
+        },
+        "display": {
+          "$ref": "#/definitions/Display",
+          "description": "The object that describes the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Sources of requests to this operation.  Comma separated list with valid values user or system, e.g. \"user,system\"."
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "description": "OperationList represents an RP operation list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "OutboundType": {
       "type": "string",

@@ -185,6 +185,11 @@ model Operation {
 }
 
 /**
+ * OperationList represents an RP operation list.
+ */
+model OperationList is Azure.Core.Page<Operation>;
+
+/**
  * Display represents the display details of an operation.
  */
 model Display {
