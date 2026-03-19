@@ -28,7 +28,7 @@ These are the global settings for the sovereign.
 title: Microsoft.Sovereign
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-10-31-preview
+tag: package-2026-03-15-preview
 ```
 
 ### Tag: package-2023-09-28-preview
@@ -67,6 +67,28 @@ suppressions:
     reason: The resource type /providers/Microsoft.Sovereign/transparencyLogs was added in previous version of this api where we got the approval for this resource type to be at tenant.
   - code: AvoidAnonymousTypes
     reason: This error is caused by typespec inbuilt managed identity model.
+```
+---
+### Tag: package-2026-03-15-preview
+
+These settings apply only when `--tag=package-2026-03-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-15-preview'
+input-file:
+  - Microsoft.Sovereign/preview/2026-03-15-preview/sovereign.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: sovereign.json
+    where: $.definitions.SovereignViewPolicyInitiativeAssignment.properties.assignmentParameters
+    reason: Parameters vary based on the selected policy initiatives.
+  - code: XMSSecretInResponse
+    from: sovereign.json
+    where: $.definitions.SovereignViewComplianceDetailsRequest.properties.skipToken
+    reason: SkipToken is a pagination token. It is not a secret.
+  - code: XMSSecretInResponse
+    from: sovereign.json
+    where: $.definitions.SovereignViewComplianceDetailsResponse.properties.skipToken
+    reason: SkipToken is a pagination token. It is not a secret.
 ```
 ---
 
