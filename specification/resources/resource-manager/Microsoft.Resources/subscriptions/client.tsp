@@ -16,3 +16,4 @@ namespace Microsoft.Resources;
 );
 
 @@clientName(Microsoft.Resources, "SubscriptionClient", "javascript");
+@@clientLocation(checkResourceName, "SubscriptionClient", "go");
