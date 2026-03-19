@@ -16,6 +16,7 @@ using Microsoft.ServiceBus;
 @@clientName(TlsVersion.`1.0`, "ONE0", "python");
 @@clientName(TlsVersion.`1.1`, "ONE1", "python");
 @@clientName(TlsVersion.`1.2`, "ONE2", "python");
+@@clientName(TlsVersion.`1.3`, "ONE3", "python");
 
 @@clientName(ErrorAdditionalInfo, "ServiceBusErrorAdditionalInfo", "csharp");
 @@clientName(UnavailableReason, "ServiceBusNameUnavailableReason", "csharp");
