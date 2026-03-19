@@ -16,6 +16,11 @@ options:
     service-name: "Network"
     flavor: azure
     use-object-for-unknown: true
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    add-inner: "ApplicationGatewayIpConfiguration,ApplicationGatewayPathRule,ApplicationGatewayProbe,ApplicationGatewayRedirectConfiguration,ApplicationGatewayRequestRoutingRule,ApplicationGatewaySslCertificate,ApplicationGatewayUrlPathMap,ApplicationGatewayAuthenticationCertificate,VirtualNetworkGatewayIpConfiguration,ConnectionMonitor,PacketCapture,ApplicationGateway,ApplicationGatewayListener"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-network"
     service-dir: "sdk/network"

@@ -19,3 +19,27 @@ using Microsoft.Compute;
 namespace CombineClient;
 
 @@clientName(CombineClient, "NetworkManagementClient", "javascript");
+
+// Java naming mitigations
+@@clientName(Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.hostName,
+  "hostname",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayBackendSettingsPropertiesFormat.hostName,
+  "hostname",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayHttpListenerPropertiesFormat.hostName,
+  "hostname",
+  "java"
+);
+@@clientName(Microsoft.Network.BastionActiveSession.userName,
+  "username",
+  "java"
+);
+@@clientName(Microsoft.Network.AzureReachabilityReportLatencyInfo.timeStamp,
+  "timestamp",
+  "java"
+);
+@@clientName(Microsoft.Network.QosIpRange.startIP, "startIp", "java");
+@@clientName(Microsoft.Network.QosIpRange.endIP, "endIp", "java");
