@@ -151,9 +151,7 @@ interface VirtualNetworkGateways {
   generatevpnclientpackage is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnClientParameters,
-    {
-      @body body: stringApplicationJson;
-    },
+    stringApplicationJson,
     Error = CloudError
   >;
 
