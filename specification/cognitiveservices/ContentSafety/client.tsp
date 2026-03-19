@@ -35,3 +35,4 @@ interface BlocklistClient {
 }
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
 @@clientName(ContentSafety.ImageData.content, "base64EncodedImageContent", "java");
+@@alternateType(ContentSafety.ImageData.content, string, "java");
