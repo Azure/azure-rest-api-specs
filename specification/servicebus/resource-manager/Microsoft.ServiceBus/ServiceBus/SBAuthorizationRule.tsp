@@ -171,7 +171,7 @@ interface DisasterRecoveryConfigOps
         @maxLength(50)
         authorizationRuleName: string,
       },
-      ResourceName = "ServiceBusDisasterRecoveryConfigAuthorizationRule"
+      ResourceName = "ServiceBusDisasterRecoveryAuthorizationRule"
     > {}
 
 @armResourceOperations
