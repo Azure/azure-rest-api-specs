@@ -320,6 +320,34 @@ model MosaicSearchQueryParameters {
    */
   @query("skipcovered")
   skipCovered?: boolean;
+
+  /**
+   * Array of Item ids.
+   */
+  @added(Versions.v2026_04_15)
+  @query("ids")
+  ids?: string;
+
+  /**
+   * Bounding box (west, south, east, north).
+   */
+  @added(Versions.v2026_04_15)
+  @query("bbox")
+  bbox?: string;
+
+  /**
+   * JSON query expression for filtering items.
+   */
+  @added(Versions.v2026_04_15)
+  @query("query")
+  query?: string;
+
+  /**
+   * Sorting expression (e.g. +/-property).
+   */
+  @added(Versions.v2026_04_15)
+  @query("sortby")
+  sortby?: string;
 }
 
 /**

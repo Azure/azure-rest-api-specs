@@ -170,6 +170,15 @@ interface MosaicSearchesTileMatrixSetsPlain {
       tileMatrixSetId: string;
 
       ...ZxyPathParameters;
+
+      /** Output format for the tile or image (e.g., png, jpeg, webp) */
+      @query("format")
+      format?: TilerImageFormat;
+
+      /** Numeric scale factor for the tile. Higher values produce larger tiles */
+      @query("scale")
+      scale?: int32;
+
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
@@ -219,6 +228,10 @@ interface MosaicSearchesTileMatrixSetsFormat {
       @pattern(".*")
       format: string;
 
+      /** Numeric scale factor for the tile. Higher values produce larger tiles */
+      @query("scale")
+      scale?: int32;
+
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
@@ -265,6 +278,10 @@ interface MosaicSearchesTileMatrixSetsScale {
        */
       @path
       scale: float32;
+
+      /** Output format for the tile or image (e.g., png, jpeg, webp) */
+      @query("format")
+      format?: TilerImageFormat;
 
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
@@ -976,6 +993,14 @@ interface MosaicSearchesTilesPlain {
       @query("tileMatrixSetId")
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
+      /** Output format for the tile or image (e.g., png, jpeg, webp) */
+      @query("format")
+      format?: TilerImageFormat;
+
+      /** Numeric scale factor for the tile. Higher values produce larger tiles */
+      @query("scale")
+      scale?: int32;
+
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
@@ -1013,6 +1038,10 @@ interface MosaicSearchesTilesFormat {
       @query("tileMatrixSetId")
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
+      /** Numeric scale factor for the tile. Higher values produce larger tiles */
+      @query("scale")
+      scale?: int32;
+
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
@@ -1046,6 +1075,10 @@ interface MosaicSearchesTilesScale {
       /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
       @query("tileMatrixSetId")
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+      /** Output format for the tile or image (e.g., png, jpeg, webp) */
+      @query("format")
+      format?: TilerImageFormat;
 
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;

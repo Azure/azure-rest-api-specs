@@ -1,11 +1,14 @@
 // Tiles for STAC Items interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tiler.common.tsp";
 import "./models.common.images.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
@@ -105,6 +108,38 @@ model TileMatrixSetQueryParameters {
 }
 
 /**
+ * Xarray indexing method to use for inexact matches
+ */
+@added(Versions.v2026_04_15)
+union SelMethod {
+  string,
+
+  /** Nearest neighbor method */
+  nearest: "nearest",
+
+  /** Linear interpolation */
+  linear: "linear",
+
+  /** Bilinear interpolation */
+  bilinear: "bilinear",
+
+  /** Cubic interpolation */
+  cubic: "cubic",
+
+  /** Cubic spline interpolation */
+  cubic_spline: "cubic_spline",
+
+  /** Lanczos interpolation */
+  lanczos: "lanczos",
+
+  /** Area-weighted interpolation */
+  area: "area",
+
+  /** Mode (most common) value */
+  mode: "mode",
+}
+
+/**
  * Parameters for accessing specific subdatasets within multi-dataset raster assets
  */
 model SubDatasetQueryParameters {
@@ -119,6 +154,35 @@ model SubDatasetQueryParameters {
    */
   @query("subdataset_bands")
   subdatasetBands?: string[];
+
+  /**
+   * Coordinate Reference System.
+   */
+  @added(Versions.v2026_04_15)
+  @query("crs")
+  crs?: string;
+
+  /**
+   * Datetime to use for subsetting the asset.
+   */
+  @added(Versions.v2026_04_15)
+  @query("datetime")
+  datetime?: string;
+
+  /**
+   * Xarray Indexing using dimension names `{dimension}={value}`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @added(Versions.v2026_04_15)
+  @query(#{ explode: true })
+  sel?: string[];
+
+  /**
+   * Xarray indexing method to use for inexact matches.
+   */
+  @added(Versions.v2026_04_15)
+  @query("sel_method")
+  selMethod?: SelMethod;
 }
 
 /**

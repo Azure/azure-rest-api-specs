@@ -63,6 +63,56 @@ union Resampling {
 }
 
 /**
+ * WarpKernel resampling algorithm used when doing re-projection. Defaults to `nearest`.
+ */
+@added(Versions.v2026_04_15)
+union WarpKernelResampling {
+  string,
+
+  /** Nearest neighbor */
+  nearest: "nearest",
+
+  /** Bilinear interpolation */
+  bilinear: "bilinear",
+
+  /** Cubic interpolation */
+  cubic: "cubic",
+
+  /** Cubic spline interpolation */
+  cubic_spline: "cubic_spline",
+
+  /** Lanczos windowed sinc resampling */
+  lanczos: "lanczos",
+
+  /** Average resampling */
+  average: "average",
+
+  /** Mode resampling */
+  mode: "mode",
+
+  /** Maximum value resampling */
+  max: "max",
+
+  /** Minimum value resampling */
+  min: "min",
+
+  /** Median value resampling */
+  med: "med",
+
+  /** First quartile resampling */
+  q1: "q1",
+
+  /** Third quartile resampling */
+  q3: "q3",
+
+  /** Sum resampling */
+  sum: "sum",
+
+  /** Root mean square resampling */
+  rms: "rms",
+}
+
+/**
  * Image format specifier for tile and image requests
  */
 union TilerImageFormat {
@@ -440,6 +490,14 @@ model WmtsCapabilitiesXmlResponse {
  */
 model AssetQueryParameters {
   /**
+   * Dataset band indexes
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @added(Versions.v2026_04_15)
+  @query(#{ explode: true })
+  bidx?: int32[];
+
+  /**
    * Asset's names.
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
@@ -476,6 +534,13 @@ model AssetQueryParameters {
    */
   @query("unscale")
   unscale?: boolean;
+
+  /**
+   * WarpKernel resampling algorithm (only used when doing re-projection). Defaults to `nearest`.
+   */
+  @added(Versions.v2026_04_15)
+  @query("reproject")
+  reproject?: WarpKernelResampling;
 }
 
 /**
@@ -523,6 +588,14 @@ model MiscTileQueryParameters {
    */
   @query("return_mask")
   returnMask?: boolean = true;
+
+  /**
+   * Padding to apply to each tile edge. Helps reduce resampling artefacts along edges. Defaults to `0`.
+   */
+  @added(Versions.v2026_04_15)
+  @query
+  @minValueExclusive(0)
+  padding?: int32;
 }
 
 /**

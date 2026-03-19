@@ -128,6 +128,15 @@ interface MosaicItemsTileMatrixSetsPlain {
       tileMatrixSetId: string;
 
       ...ZxyPathParameters;
+
+      /** Output format for the tile or image (e.g., png, jpeg, webp) */
+      @query("format")
+      format?: TilerImageFormat;
+
+      /** Numeric scale factor for the tile. Higher values produce larger tiles */
+      @query("scale")
+      scale?: int32;
+
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
@@ -185,6 +194,10 @@ interface MosaicItemsTileMatrixSetsFormat {
       @pattern(".*")
       format: string;
 
+      /** Numeric scale factor for the tile. Higher values produce larger tiles */
+      @query("scale")
+      scale?: int32;
+
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
@@ -240,6 +253,10 @@ interface MosaicItemsTileMatrixSetsScale {
       @path
       scale: float32;
 
+      /** Output format for the tile or image (e.g., png, jpeg, webp) */
+      @query("format")
+      format?: TilerImageFormat;
+
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
@@ -287,6 +304,14 @@ interface MosaicItemsTilesPlain {
        */
       @query("tileMatrixSetId")
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+      /** Output format for the tile or image (e.g., png, jpeg, webp) */
+      @query("format")
+      format?: TilerImageFormat;
+
+      /** Numeric scale factor for the tile. Higher values produce larger tiles */
+      @query("scale")
+      scale?: int32;
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
@@ -344,6 +369,10 @@ interface MosaicItemsTilesFormat {
       @query("tileMatrixSetId")
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
+      /** Numeric scale factor for the tile. Higher values produce larger tiles */
+      @query("scale")
+      scale?: int32;
+
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
@@ -397,6 +426,10 @@ interface MosaicItemsTilesScale {
        */
       @query("tileMatrixSetId")
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+      /** Output format for the tile or image (e.g., png, jpeg, webp) */
+      @query("format")
+      format?: TilerImageFormat;
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
