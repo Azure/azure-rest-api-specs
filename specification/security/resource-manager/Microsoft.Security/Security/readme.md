@@ -144,6 +144,21 @@ suppressions:
   - code: PutRequestResponseSchemeArm
     from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
     reason: The PUT body uses RuleResultsInput (latestScan flag + results array) which is intentionally different from the RuleResults ARM resource response. The controller accepts this simplified input format.
+  - code: ParametersInPointGet
+    from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+  - code: ParametersInPointGet
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+  - code: ParametersInPointGet
+    from: sqlVulnerabilityAssessmentsScanResultsOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+  - code: ParametersInPost
+    from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+  - code: ParametersInPost
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
 ```
 
 ### Tag: package-2026-01
@@ -758,6 +773,21 @@ suppressions:
   - code: PutRequestResponseSchemeArm
     from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
     reason: The PUT body uses RuleResultsInput (latestScan flag + results array) which is intentionally different from the RuleResults ARM resource response. The controller accepts this simplified input format.
+  - code: ParametersInPointGet
+    from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+  - code: ParametersInPointGet
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+  - code: ParametersInPointGet
+    from: sqlVulnerabilityAssessmentsScanResultsOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+  - code: ParametersInPost
+    from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+  - code: ParametersInPost
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
 
 # Needed when there is more than one input file
 override-info:
@@ -849,6 +879,21 @@ suppressions:
   - code: PutRequestResponseSchemeArm
     from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
     reason: The PUT body uses RuleResultsInput (latestScan flag + results array) which is intentionally different from the RuleResults ARM resource response. The controller accepts this simplified input format.
+  - code: ParametersInPointGet
+    from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+  - code: ParametersInPointGet
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+  - code: ParametersInPointGet
+    from: sqlVulnerabilityAssessmentsScanResultsOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+  - code: ParametersInPost
+    from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+  - code: ParametersInPost
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
 
 # Needed when there is more than one input file
 override-info:
