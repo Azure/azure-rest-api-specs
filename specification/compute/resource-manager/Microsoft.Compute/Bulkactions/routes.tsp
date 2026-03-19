@@ -86,7 +86,7 @@ interface VirtualMachineBulkOperations {
   /** BulkDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
-  @action("virtualMachines/BulkDeallocate")
+  @action("virtualMachines/bulkDeallocate")
   bulkDeallocate(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
@@ -101,7 +101,7 @@ interface VirtualMachineBulkOperations {
   /** BulkHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
-  @action("virtualMachines/BulkHibernate")
+  @action("virtualMachines/bulkHibernate")
   bulkHibernate(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
@@ -116,7 +116,7 @@ interface VirtualMachineBulkOperations {
   /** BulkStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
-  @action("virtualMachines/BulkStart")
+  @action("virtualMachines/bulkStart")
   bulkStart(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
@@ -131,7 +131,7 @@ interface VirtualMachineBulkOperations {
   /** BulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
-  @action("virtualMachines/BulkCreate")
+  @action("virtualMachines/bulkCreate")
   bulkCreate(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
@@ -146,7 +146,7 @@ interface VirtualMachineBulkOperations {
   /** BulkVdiFlexCreate: Bulk create  operation for a batch of virtual machines, this operation supports flex properties to give options on Sku and zone selection. */
   @post
   @autoRoute
-  @action("virtualMachines/VdiFlexCreate")
+  @action("virtualMachines/bulkVdiFlexCreate")
   bulkVdiFlexCreate(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
@@ -161,7 +161,7 @@ interface VirtualMachineBulkOperations {
   /** BulkDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
-  @action("virtualMachines/BulkDelete")
+  @action("virtualMachines/bulkDelete")
   bulkDelete(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
@@ -176,7 +176,7 @@ interface VirtualMachineBulkOperations {
   /** BulkGetOperationsStatus: Polling endpoint to read status of operations performed on virtual machines */
   @post
   @autoRoute
-  @action("virtualMachines/BulkGetOperationsStatus")
+  @action("virtualMachines/bulkGetOperationsStatus")
   bulkGetOperationsStatus(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
@@ -191,7 +191,7 @@ interface VirtualMachineBulkOperations {
   /** BulkCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request */
   @post
   @autoRoute
-  @action("virtualMachines/BulkCancelOperations")
+  @action("virtualMachines/bulkCancelOperations")
   bulkCancelOperations(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
@@ -206,7 +206,7 @@ interface VirtualMachineBulkOperations {
   /** BulkReimage: Execute reimage operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
-  @action("virtualMachines/BulkReimage")
+  @action("virtualMachines/bulkReimage")
   bulkReimage(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
