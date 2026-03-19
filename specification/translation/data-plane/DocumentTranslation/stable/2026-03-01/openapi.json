@@ -473,6 +473,9 @@
             "$ref": "#/parameters/DocumentTranslateBody.category"
           },
           {
+            "$ref": "#/parameters/DocumentTranslateBody.deploymentName"
+          },
+          {
             "$ref": "#/parameters/DocumentTranslateBody.allowFallback"
           },
           {
@@ -1161,7 +1164,7 @@
         },
         "category": {
           "type": "string",
-          "description": "Category / custom system for translation request. Deprecated - use deploymentName instead."
+          "description": "Category / custom system for translation request"
         },
         "deploymentName": {
           "type": "string",
@@ -1375,6 +1378,14 @@
       "required": false,
       "type": "string",
       "default": "general",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentTranslateBody.deploymentName": {
+      "name": "deploymentName",
+      "in": "query",
+      "description": "Deployment name of the custom translation model for the translation request.",
+      "required": false,
+      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "DocumentTranslateBody.sourceLanguage": {

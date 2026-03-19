@@ -206,7 +206,7 @@ model TargetInput {
   @doc("Location of the folder / container with your documents")
   targetUrl: string;
 
-  /** Category / custom system for translation request. Deprecated - use deploymentName instead. */
+  @doc("Category / custom system for translation request")
   category?: string;
 
   /** Deployment name of the custom translation model for the translation request. */
@@ -521,6 +521,11 @@ model DocumentTranslateBody {
     """)
   @query("category")
   category?: string = "general";
+
+  /** Deployment name of the custom translation model for the translation request. */
+  @added(Versions.v2026_03_01)
+  @query("deploymentName")
+  deploymentName?: string;
 
   @doc("""
     Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
