@@ -1869,4 +1869,3 @@ model DataPolicyManifestProperties {
    */
   resourceFunctions?: DataManifestResourceFunctionsDefinition;
 }
-
