@@ -5,6 +5,7 @@ import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
+using Azure.ResourceManager;
 using Azure.Core;
 using Microsoft.Network;
 using Microsoft.Compute;
@@ -19,3 +20,7 @@ using Microsoft.Compute;
 namespace CombineClient;
 
 @@clientName(CombineClient, "NetworkManagementClient", "javascript");
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "ArmErrorResponse",
+  "javascript"
+);
