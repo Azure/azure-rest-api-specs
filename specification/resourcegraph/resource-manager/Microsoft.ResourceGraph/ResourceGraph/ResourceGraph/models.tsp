@@ -609,6 +609,9 @@ model Column {
 /**
  * Successfully executed facet containing additional statistics on the response of a query.
  */
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Facet)
 model FacetResult extends Facet {
   /**
    * Number of total records in the facet results.
@@ -635,6 +638,9 @@ model FacetResult extends Facet {
 /**
  * A facet whose execution resulted in an error.
  */
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Facet)
 model FacetError extends Facet {
   /**
    * An array containing detected facet errors with details.
