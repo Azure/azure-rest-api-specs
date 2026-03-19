@@ -12,6 +12,7 @@ using Microsoft.Compute;
 @client({
   name: "CombineClient",
   service: [Microsoft.Network, Microsoft.Compute],
+  autoMergeService: true,
 })
 @useDependency(
   Microsoft.Network.Versions.v2025_05_01,
