@@ -23,7 +23,7 @@ namespace Microsoft.Authorization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Retrieves the policy assignment with the given ID.")
-  @scope("java")
+  @scope("java,csharp")
   @clientLocation(PolicyAssignments)
   @get
   @route("/{+policyAssignmentId}")
@@ -37,7 +37,7 @@ namespace Microsoft.Authorization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Creates or updates a policy assignment.")
-  @scope("java")
+  @scope("java,csharp")
   @clientLocation(PolicyAssignments)
   @put
   @route("/{+policyAssignmentId}")
@@ -58,7 +58,7 @@ namespace Microsoft.Authorization {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   #suppress "@typespec/http/patch-implicit-optional" "For client"
   @summary("Updates a policy assignment.")
-  @scope("java")
+  @scope("java,csharp")
   @clientLocation(PolicyAssignments)
   @patch
   @route("/{+policyAssignmentId}")
@@ -78,7 +78,7 @@ namespace Microsoft.Authorization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Deletes a policy assignment.")
-  @scope("java")
+  @scope("java,csharp")
   @clientLocation(PolicyAssignments)
   @delete
   @route("/{+policyAssignmentId}")
@@ -88,3 +88,86 @@ namespace Microsoft.Authorization {
   ): PolicyAssignment | ArmDeletedNoContentResponse | ErrorResponse;
 }
 @@clientName(Microsoft.Authorization, "PolicyClient", "javascript,python");
+
+// Rename models with forbidden suffixes for C# naming conventions
+@@clientName(Microsoft.Authorization.PolicyTokenOperation,
+  "PolicyTokenOperationInfo",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.PolicyTokenRequest,
+  "PolicyTokenRequestContent",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.PolicyTokenResponse,
+  "PolicyTokenResponseResult",
+  "csharp"
+);
+
+// Suppress tenant-scope and management-group-scope operations from C# to avoid
+// duplicate resource entries for the same model at multiple scopes.
+// The subscription-scope operations provide equivalent functionality.
+@@scope(Microsoft.Authorization.PolicyDefinitions.getBuiltIn, "!csharp");
+@@scope(Microsoft.Authorization.PolicyDefinitions.listBuiltIn, "!csharp");
+@@scope(Microsoft.Authorization.PolicyDefinitions.getAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicyDefinitions.createOrUpdateAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicyDefinitions.deleteAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicyDefinitions.listByManagementGroup,
+  "!csharp"
+);
+
+@@scope(Microsoft.Authorization.PolicySetDefinitions.getBuiltIn, "!csharp");
+@@scope(Microsoft.Authorization.PolicySetDefinitions.listBuiltIn, "!csharp");
+@@scope(Microsoft.Authorization.PolicySetDefinitions.getAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicySetDefinitions.createOrUpdateAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicySetDefinitions.deleteAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicySetDefinitions.listByManagementGroup,
+  "!csharp"
+);
+
+@@scope(Microsoft.Authorization.PolicyDefinitionVersions.getBuiltIn, "!csharp");
+@@scope(Microsoft.Authorization.PolicyDefinitionVersions.listBuiltIn,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicyDefinitionVersions.getAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicyDefinitionVersions.createOrUpdateAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicyDefinitionVersions.deleteAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicyDefinitionVersions.listByManagementGroup,
+  "!csharp"
+);
+
+@@scope(Microsoft.Authorization.PolicySetDefinitionVersions.getBuiltIn,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicySetDefinitionVersions.listBuiltIn,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicySetDefinitionVersions.getAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicySetDefinitionVersions.createOrUpdateAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicySetDefinitionVersions.deleteAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.PolicySetDefinitionVersions.listByManagementGroup,
+  "!csharp"
+);
