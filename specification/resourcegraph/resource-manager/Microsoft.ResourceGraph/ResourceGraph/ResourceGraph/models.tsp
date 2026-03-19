@@ -10,48 +10,9 @@ using Azure.ResourceManager.Foundations;
 namespace ResourceGraph;
 
 /**
- * Enum indicating a type of graph query.
- */
-union ResultKind {
-  string,
-
-  /**
-   * basic
-   */
-  basic: "basic",
-}
-
-/**
- * The type of identity that created the resource.
- */
-union CreatedByType {
-  string,
-
-  /**
-   * User
-   */
-  User: "User",
-
-  /**
-   * Application
-   */
-  Application: "Application",
-
-  /**
-   * ManagedIdentity
-   */
-  ManagedIdentity: "ManagedIdentity",
-
-  /**
-   * Key
-   */
-  Key: "Key",
-}
-
-/**
  * Defines in which format query result returned.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ResultFormat {
   /**
    * table
@@ -67,7 +28,7 @@ enum ResultFormat {
 /**
  * Defines what level of authorization resources should be returned based on the which subscriptions and management groups are passed as scopes.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum AuthorizationScopeFilter {
   /**
    * AtScopeAndBelow
@@ -93,7 +54,7 @@ enum AuthorizationScopeFilter {
 /**
  * The sorting order by the selected column (count by default).
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum FacetSortOrder {
   /**
    * asc
@@ -109,7 +70,7 @@ enum FacetSortOrder {
 /**
  * Indicates whether the query results are truncated.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ResultTruncated {
   /**
    * true
@@ -125,7 +86,7 @@ enum ResultTruncated {
 /**
  * Data type of a column in a table.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ColumnDataType {
   /**
    * string
@@ -219,7 +180,7 @@ model QueryRequestOptions {
   /**
    * Only applicable for tenant and management group level queries to decide whether to allow partial scopes for result in case the number of subscriptions exceed allowed limits.
    */
-  allowPartialScopes?: boolean;
+  allowPartialScopes?: boolean = false;
 
   /**
    * Defines what level of authorization resources should be returned based on the which subscriptions and management groups are passed as scopes.
@@ -291,13 +252,13 @@ model QueryResponse {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" ""
   $skipToken?: string;
 
   /**
    * Query output in JObject array or Table format.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
   data: unknown;
 
   /**
@@ -320,13 +281,14 @@ model Facet {
   /**
    * Result type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" ""
   resultType: string;
 }
 
 /**
  * An error response from the API.
  */
+@summary("Error response.")
 @error
 model ErrorResponse {
   /**
@@ -338,6 +300,7 @@ model ErrorResponse {
 /**
  * Error details.
  */
+@summary("Error info.")
 model Error {
   /**
    * Error code identifying the specific error.
@@ -359,6 +322,7 @@ model Error {
 /**
  * Error details.
  */
+@summary("Error details.")
 model ErrorDetails {
   ...Record<unknown>;
 
@@ -419,163 +383,6 @@ model OperationDisplay {
 }
 
 /**
- * Properties that contain a graph query.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model GraphQueryProperties {
-  /**
-   * Date and time in UTC of the last modification that was made to this graph query definition.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeModified?: utcDateTime;
-
-  /**
-   * The description of a graph query.
-   */
-  description?: string;
-
-  /**
-   * KQL query that will be graph.
-   */
-  query: string;
-
-  /**
-   * Enum indicating a type of graph query.
-   */
-  @visibility(Lifecycle.Read)
-  resultKind?: ResultKind;
-}
-
-/**
- * An azure resource object
- */
-model Resource {
-  /**
-   * Azure resource Id
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Azure resource name. This is GUID value. The display name should be assigned within properties field.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The location of the resource
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
-
-  /**
-   * Azure resource type
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict.
-   */
-  etag?: string;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-}
-
-/**
- * Error message body that will indicate why the operation failed.
- */
-@error
-model GraphQueryError {
-  /**
-   * The error object.
-   */
-  error?: GraphQueryErrorError;
-}
-
-/**
- * The error object.
- */
-model GraphQueryErrorError {
-  /**
-   * Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-   */
-  code?: string;
-
-  /**
-   * Human-readable representation of the error.
-   */
-  message?: string;
-
-  /**
-   * The list of invalid fields send in request, in case of validation error.
-   */
-  @identifiers(#[])
-  details?: ErrorFieldContract[];
-}
-
-/**
- * Error Field contract.
- */
-model ErrorFieldContract {
-  /**
-   * Property level error code.
-   */
-  code?: string;
-
-  /**
-   * Human-readable representation of property-level error.
-   */
-  message?: string;
-
-  /**
-   * Property name.
-   */
-  target?: string;
-}
-
-/**
- * The parameters that can be provided when updating workbook properties properties.
- */
-model GraphQueryUpdateParameters {
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  /**
-   * This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict.
-   */
-  etag?: string;
-
-  /**
-   * Metadata describing a graph query for an Azure resource.
-   */
-  properties?: GraphQueryPropertiesUpdateParameters;
-}
-
-/**
- * Properties that contain a workbook for PATCH operation.
- */
-model GraphQueryPropertiesUpdateParameters {
-  /**
-   * The description of a graph query.
-   */
-  description?: string;
-
-  /**
-   * KQL query that will be graph.
-   */
-  query?: string;
-}
-
-/**
  * Query output in tabular format.
  */
 model Table {
@@ -587,7 +394,7 @@ model Table {
   /**
    * Query result rows.
    */
-  @identifiers(#[])
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   rows: unknown[][];
 }
 
@@ -609,9 +416,6 @@ model Column {
 /**
  * Successfully executed facet containing additional statistics on the response of a query.
  */
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Facet)
 model FacetResult extends Facet {
   /**
    * Number of total records in the facet results.
@@ -626,7 +430,7 @@ model FacetResult extends Facet {
   /**
    * A JObject array or Table containing the desired facets. Only present if the facet is valid.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
   data: unknown;
 
   /**
@@ -638,9 +442,6 @@ model FacetResult extends Facet {
 /**
  * A facet whose execution resulted in an error.
  */
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Facet)
 model FacetError extends Facet {
   /**
    * An array containing detected facet errors with details.
@@ -655,5 +456,3 @@ model FacetError extends Facet {
 }
 
 model OperationListResult is Azure.Core.Page<Operation>;
-model GraphQueryListResult is Azure.Core.Page<GraphQueryResource>;
-@@visibility(GraphQueryListResult.value, Lifecycle.Read);

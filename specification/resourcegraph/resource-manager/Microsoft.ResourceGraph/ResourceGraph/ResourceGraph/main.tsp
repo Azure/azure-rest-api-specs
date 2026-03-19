@@ -4,8 +4,8 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.11.13
- * Date: 2026-03-11T06:02:10.445Z
+ * Version: 0.11.12
+ * Date: 2026-03-19T03:35:56.259Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -13,7 +13,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
-import "./GraphQueryResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
