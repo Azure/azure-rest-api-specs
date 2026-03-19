@@ -10,7 +10,7 @@ using Microsoft.CognitiveServices;
 @@clientName(Accounts.privateLinkResourcesList, "List");
 @@clientLocation(Accounts.createOrUpdate, "TestRaiExternalSafetyProvider");
 @@clientName(Accounts.createOrUpdate::parameters.resource, "safetyProvider");
-@@clientLocation(Accounts.provisionManagedNetwork, "ManagedNetworkProvisions");
+@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.provisionManagedNetwork, "ManagedNetworkProvisions");
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "properties"
