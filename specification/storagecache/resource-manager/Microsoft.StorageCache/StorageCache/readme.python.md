@@ -22,8 +22,7 @@ modelerfour:
   lenient-model-deduplication: true
 
 directive:
-  - from: stable/2026-01-01/amlfilesystem.json
+  - from: swagger-document
     where: $.definitions.AmlFilesystem.properties.properties
-    transform: >-
-      $.currentStorageCapacityTiB["x-ms-client-name"] = "current_storage_capacity_tib";
+    transform: $.currentStorageCapacityTiB["x-ms-client-name"] = "current_storage_capacity_tib"
 ```
