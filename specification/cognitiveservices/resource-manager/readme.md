@@ -41,6 +41,10 @@ These settings apply only when `--tag=package-2026-01-15-preview` is specified o
 input-file:
   - Microsoft.CognitiveServices/preview/2026-01-15-preview/cognitiveservices.json
 suppressions:
+  - code: NestedResourcesMustHaveListOperation
+    reason: ComputeOperationStatus is an async operation status polling resource, listing all operations is not applicable.
+    where:
+      - $.definitions.ComputeOperationStatus
   - code: ArmResourcePropertiesBag
     reason: This API is copied from Machine Learning Services RP where this behavior is already established.
     where:
