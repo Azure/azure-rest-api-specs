@@ -38,6 +38,7 @@ interface AllowedConnectionsResources {
    * Gets the list of all possible traffic between resources for the subscription and location, based on connection type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   @operationId("AllowedConnections_Get")
   get is ArmResourceRead<AllowedConnectionsResource>;
 
@@ -45,10 +46,11 @@ interface AllowedConnectionsResources {
    * Gets the list of all possible traffic between resources for the subscription and location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   @operationId("AllowedConnections_ListByHomeRegion")
-  listByHomeRegion is ArmResourceListAtScope<
+  listByHomeRegion is Extension.ListByTarget<
+    Extension.Subscription,
     AllowedConnectionsResource,
-    // BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
     Response = ArmResponse<AllowedConnectionsList>
   >;
 }

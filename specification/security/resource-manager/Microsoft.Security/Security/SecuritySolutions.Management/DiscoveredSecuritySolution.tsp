@@ -37,14 +37,16 @@ interface DiscoveredSecuritySolutions {
   /**
    * Gets a specific discovered Security Solution.
    */
+  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   get is ArmResourceRead<DiscoveredSecuritySolution>;
 
   /**
    * Gets a list of discovered Security Solutions for the subscription and location.
    */
-  listByHomeRegion is ArmResourceListAtScope<
+  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
+  listByHomeRegion is Extension.ListByTarget<
+    Extension.Subscription,
     DiscoveredSecuritySolution,
-    // BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
     Response = ArmResponse<DiscoveredSecuritySolutionList>
   >;
 }

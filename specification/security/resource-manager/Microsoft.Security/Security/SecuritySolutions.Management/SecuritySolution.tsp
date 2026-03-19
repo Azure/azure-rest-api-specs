@@ -34,6 +34,7 @@ interface SecuritySolutions {
   /**
    * Gets a specific Security Solution.
    */
+  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   get is ArmResourceRead<SecuritySolution>;
 }
 

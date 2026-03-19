@@ -38,17 +38,47 @@ model JitNetworkAccessPolicy
   location?: string;
 }
 
-@armResourceOperations
+alias JitNetworkAccessPoliciesInitiateOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
+    @path
+    @segment("locations")
+    @key
+    ascLocation: string;
+
+    /** Name of a Just-in-Time access configuration policy. */
+    @path
+    @segment("jitNetworkAccessPolicies")
+    @key
+    jitNetworkAccessPolicyName: string;
+  },
+  {
+    @path
+    @key
+    jitNetworkAccessPolicyInitiateType: JitNetworkAccessPolicyInitiateType;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface JitNetworkAccessPolicies {
   /**
    * Policies for protecting resources using Just-in-Time access control for the subscription, location
    */
+  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   get is ArmResourceRead<JitNetworkAccessPolicy>;
 
   /**
    * Create a policy for protecting resources using Just-in-Time access control
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     JitNetworkAccessPolicy,
     Response = ArmResourceUpdatedResponse<JitNetworkAccessPolicy>
@@ -57,46 +87,44 @@ interface JitNetworkAccessPolicies {
   /**
    * Delete a Just-in-Time access control policy.
    */
+  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   delete is ArmResourceDeleteSync<JitNetworkAccessPolicy>;
 
   /**
    * Policies for protecting resources using Just-in-Time access control for the subscription, location
    */
+  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   listByResourceGroupAndRegion is ArmResourceListByParent<
     JitNetworkAccessPolicy,
     Response = ArmResponse<JitNetworkAccessPoliciesList>
   >;
 
-  // /**
-  //  * Policies for protecting resources using Just-in-Time access control for the subscription, location
-  //  */
-  // listByRegion is ArmResourceListAtScope<
-  //   JitNetworkAccessPolicy,
-  //   // BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
-  //   Response = ArmResponse<JitNetworkAccessPoliciesList>
-  // >;
+  /**
+   * Policies for protecting resources using Just-in-Time access control for the subscription, location
+   */
+  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
+  listByRegion is Extension.ListByTarget<
+    Extension.Subscription,
+    JitNetworkAccessPolicy,
+    Response = ArmResponse<JitNetworkAccessPoliciesList>
+  >;
 
   /**
    * Initiate a JIT access from a specific Just-in-Time policy configuration.
    */
-  // @action("{jitNetworkAccessPolicyInitiateType}")
-  initiate is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}")
+  initiate is JitNetworkAccessPoliciesInitiateOps.ActionSync<
     JitNetworkAccessPolicy,
     JitNetworkAccessPolicyInitiateRequest,
     AcceptedResponse & {
       @bodyRoot
       _: JitNetworkAccessRequest;
-    },
-    Parameters = {
-      /**
-       * Type of the action to do on the Just-in-Time access policy.
-       */
-      @path
-      jitNetworkAccessPolicyInitiateType: "initiate";
     }
   >;
 }
-
+enum JitNetworkAccessPolicyInitiateType {
+  initiate,
+}
 @@doc(JitNetworkAccessPolicy.name,
   "Name of a Just-in-Time access configuration policy."
 );

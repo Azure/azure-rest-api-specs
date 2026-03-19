@@ -1,267 +1,4 @@
-## Changed Paths
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/allowedConnections
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/topologies
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments/{serverVulnerabilityAssessment}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/{resourceType}/serverVulnerabilityAssessments
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/allowedConnections/{connectionType}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions/{discoveredSecuritySolutionName}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions/{externalSecuritySolutionsName}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/securitySolutions/{securitySolutionName}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/topologies/{topologyResourceName}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/allowedConnections
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/allowedConnections/{connectionType}
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/discoveredSecuritySolutions
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/discoveredSecuritySolutions/{discoveredSecuritySolutionName}
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/externalSecuritySolutions
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/externalSecuritySolutions/{externalSecuritySolutionsName}
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/jitNetworkAccessPolicies
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/initiate/initiate
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/securitySolutions/{securitySolutionName}
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/topologies
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/topologies/{topologyResourceName}
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/serverVulnerabilityAssessments/default/{resourceType}
-Change Type: added
-
 ## Swagger Changes
-
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/allowedConnections`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/allowedConnections__deleted']` | deleted | `{"get":{"operationId":"AllowedConnections_ListByHomeRegion","tags":["AllowedConnections"],"descripti...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions__deleted']` | deleted | `{"get":{"operationId":"DiscoveredSecuritySolutions_ListByHomeRegion","tags":["DiscoveredSecuritySolu...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions__deleted']` | deleted | `{"get":{"operationId":"ExternalSecuritySolutions_ListByHomeRegion","tags":["ExternalSecuritySolution...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies__deleted']` | deleted | `{"get":{"operationId":"JitNetworkAccessPolicies_ListByRegion","tags":["JitNetworkAccessPolicies"],"d...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/topologies`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/topologies__deleted']` | deleted | `{"get":{"operationId":"Topology_ListByHomeRegion","tags":["Topology"],"description":"Gets a list tha...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments__deleted']` | deleted | `{"get":{"operationId":"ServerVulnerabilityAssessment_ListByExtendedResource","tags":["ServerVulnerab...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments/{serverVulnerabilityAssessment}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments/{serverVulnerabilityAssessment}__deleted']` | deleted | `{"get":{"operationId":"ServerVulnerabilityAssessment_Get","tags":["ServerVulnerabilityAssessments"],...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/allowedConnections/{connectionType}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/allowedConnections/{connectionType}__deleted']` | deleted | `{"get":{"operationId":"AllowedConnections_Get","tags":["AllowedConnections"],"description":"Gets the...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions/{discoveredSecuritySolutionName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions/{discoveredSecuritySolutionName}__deleted']` | deleted | `{"get":{"operationId":"DiscoveredSecuritySolutions_Get","tags":["DiscoveredSecuritySolutions"],"desc...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions/{externalSecuritySolutionsName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions/{externalSecuritySolutionsName}__deleted']` | deleted | `{"get":{"operationId":"ExternalSecuritySolutions_Get","tags":["ExternalSecuritySolutions"],"descript...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies__deleted']` | deleted | `{"get":{"operationId":"JitNetworkAccessPolicies_ListByResourceGroupAndRegion","tags":["JitNetworkAcc...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}__deleted']` | deleted | `{"get":{"operationId":"JitNetworkAccessPolicies_Get","tags":["JitNetworkAccessPolicies"],"descriptio...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}__deleted']` | deleted | `{"post":{"operationId":"JitNetworkAccessPolicies_Initiate","tags":["JitNetworkAccessPolicies"],"desc...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/securitySolutions/{securitySolutionName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/securitySolutions/{securitySolutionName}__deleted']` | deleted | `{"get":{"operationId":"SecuritySolutions_Get","tags":["SecuritySolutions"],"description":"Gets a spe...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/topologies/{topologyResourceName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/topologies/{topologyResourceName}__deleted']` | deleted | `{"get":{"operationId":"Topology_Get","tags":["Topology"],"description":"Gets a specific topology com...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/{resourceType}/serverVulnerabilityAssessments`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/{resourceType}/serverVulnerabilityAssessments__added']` | added | `{"get":{"operationId":"ServerVulnerabilityAssessment_ListByExtendedResource","tags":["ServerVulnerab...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/allowedConnections`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/allowedConnections__added']` | added | `{"get":{"operationId":"AllowedConnections_ListByHomeRegion","tags":["AllowedConnectionsResources"],"...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/allowedConnections/{connectionType}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/allowedConnections/{connectionType}__added']` | added | `{"get":{"operationId":"AllowedConnections_Get","tags":["AllowedConnectionsResources"],"description":...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/discoveredSecuritySolutions`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/discoveredSecuritySolutions__added']` | added | `{"get":{"operationId":"DiscoveredSecuritySolutions_ListByResourceGroupLocationResource","tags":["Dis...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/discoveredSecuritySolutions/{discoveredSecuritySolutionName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/discoveredSecuritySolutions/{discoveredSecuritySolutionName}__added']` | added | `{"get":{"operationId":"DiscoveredSecuritySolutions_Get","tags":["DiscoveredSecuritySolutions"],"desc...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/externalSecuritySolutions`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/externalSecuritySolutions__added']` | added | `{"get":{"operationId":"ExternalSecuritySolutions_ListByResourceGroupLocationResource","tags":["Exter...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/externalSecuritySolutions/{externalSecuritySolutionsName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/externalSecuritySolutions/{externalSecuritySolutionsName}__added']` | added | `{"get":{"operationId":"ExternalSecuritySolutions_Get","tags":["ExternalSecuritySolutions"],"descript...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/jitNetworkAccessPolicies`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/jitNetworkAccessPolicies__added']` | added | `{"get":{"operationId":"JitNetworkAccessPolicies_ListByResourceGroupAndRegion","tags":["JitNetworkAcc...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}__added']` | added | `{"get":{"operationId":"JitNetworkAccessPolicies_Get","tags":["JitNetworkAccessPolicies"],"descriptio...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/initiate/initiate`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/initiate/initiate__added']` | added | `{"post":{"operationId":"JitNetworkAccessPolicies_Initiate","tags":["JitNetworkAccessPolicies"],"desc...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/securitySolutions/{securitySolutionName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/securitySolutions/{securitySolutionName}__added']` | added | `{"get":{"operationId":"SecuritySolutions_Get","tags":["SecuritySolutions"],"description":"Gets a spe...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/topologies`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/topologies__added']` | added | `{"get":{"operationId":"Topology_ListByHomeRegion","tags":["TopologyResources"],"description":"Gets a...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/topologies/{topologyResourceName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{location}/topologies/{topologyResourceName}__added']` | added | `{"get":{"operationId":"Topology_Get","tags":["TopologyResources"],"description":"Gets a specific top...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/serverVulnerabilityAssessments/default/{resourceType}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/serverVulnerabilityAssessments/default/{resourceType}__added']` | added | `{"get":{"operationId":"ServerVulnerabilityAssessment_Get","tags":["ServerVulnerabilityAssessments"],...` |
 
 ### Changes for `tags`
 
@@ -325,6 +62,12 @@ Change Type: added
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData'].get.parameters[0].type__added` | added | `string` |
+
+### Changes for `headers`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments/{serverVulnerabilityAssessment}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 
 ### Changes for `AadConnectivityState`
 
@@ -513,11 +256,44 @@ Change Type: added
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/discoveredSecuritySolutions'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/externalSecuritySolutions'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/jitNetworkAccessPolicies'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/allowedConnections'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/allowedConnections'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData'].get.responses.200.schema.$ref` | `#/definitions/securitySolutionsReferenceDataList` | `#/definitions/SecuritySolutionsReferenceDataList` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/topologies'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/topologies'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securitySolutions'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securitySolutionsReferenceData'].get.responses.200.schema.$ref` | `#/definitions/securitySolutionsReferenceDataList` | `#/definitions/SecuritySolutionsReferenceDataList` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securitySolutionsReferenceData'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/topologies'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments/{serverVulnerabilityAssessment}'].delete.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments/{serverVulnerabilityAssessment}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments/{serverVulnerabilityAssessment}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/jitNetworkAccessPolicies'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/allowedConnections/{connectionType}'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/allowedConnections/{connectionType}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions/{discoveredSecuritySolutionName}'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions/{discoveredSecuritySolutionName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions/{externalSecuritySolutionsName}'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions/{externalSecuritySolutionsName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}'].delete.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}'].delete.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}'].put.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}'].post.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/securitySolutions/{securitySolutionName}'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/securitySolutions/{securitySolutionName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/topologies/{topologyResourceName}'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/topologies/{topologyResourceName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 

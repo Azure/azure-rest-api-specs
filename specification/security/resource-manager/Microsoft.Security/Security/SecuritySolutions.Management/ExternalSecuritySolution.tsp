@@ -42,14 +42,16 @@ interface ExternalSecuritySolutions {
   /**
    * Gets a specific external Security Solution.
    */
+  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   get is ArmResourceRead<ExternalSecuritySolution>;
 
   /**
    * Gets a list of external Security Solutions for the subscription and location.
    */
-  listByHomeRegion is ArmResourceListAtScope<
+  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
+  listByHomeRegion is Extension.ListByTarget<
+    Extension.Subscription,
     ExternalSecuritySolution,
-    // BaseParameters = Azure.ResourceManager.Foundations.LocationBaseParameters,
     Response = ArmResponse<ExternalSecuritySolutionList>
   >;
 }
