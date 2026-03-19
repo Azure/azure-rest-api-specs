@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
-namespace ResourceGraph;
+namespace ResourceGraphApi;
 
 /**
  * Queries the resources managed by Azure Resource Manager for scopes specified in the request.

@@ -28,7 +28,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "Azure Resource Graph" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-namespace ResourceGraph;
+namespace ResourceGraphApi;
 
 /**
  * The available API versions.

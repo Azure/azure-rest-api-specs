@@ -16,7 +16,7 @@ using Azure.ClientGenerator.Core;
 
 @client({
   name: "ResourceGraphClient",
-  service: [ResourceChanges, ResourceGraph, ResourceHistory, GraphQueryApi],
+  service: [ResourceChanges, ResourceGraphApi, ResourceHistory, GraphQueryApi],
   autoMergeServices: true,
 })
 namespace Microsoft.ResourceGraph;

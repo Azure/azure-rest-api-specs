@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace ResourceGraph;
+namespace ResourceGraphApi;
 
 /**
  * Defines in which format query result returned.
