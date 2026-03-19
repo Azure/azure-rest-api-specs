@@ -488,3 +488,9 @@ namespace CombineClient;
   "InboundSecurityRuleOperation",
   "java"
 );
+
+// Move VMSS listVirtualMachineScaleSetNetworkInterfaces to NetworkInterfaces client for Java
+@@clientLocation(Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
+  Microsoft.Network.NetworkInterfaces,
+  "java"
+);
