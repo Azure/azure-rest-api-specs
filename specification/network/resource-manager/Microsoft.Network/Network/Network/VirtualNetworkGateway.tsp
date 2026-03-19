@@ -151,7 +151,11 @@ interface VirtualNetworkGateways {
   generatevpnclientpackage is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnClientParameters,
-    stringApplicationJson,
+    {
+      @body body: stringApplicationJson;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
