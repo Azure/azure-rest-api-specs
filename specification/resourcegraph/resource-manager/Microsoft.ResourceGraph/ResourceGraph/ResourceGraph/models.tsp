@@ -51,7 +51,7 @@ union CreatedByType {
 /**
  * Defines in which format query result returned.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ResultFormat {
   /**
    * table
@@ -67,7 +67,7 @@ enum ResultFormat {
 /**
  * Defines what level of authorization resources should be returned based on the which subscriptions and management groups are passed as scopes.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AuthorizationScopeFilter {
   /**
    * AtScopeAndBelow
@@ -93,7 +93,7 @@ enum AuthorizationScopeFilter {
 /**
  * The sorting order by the selected column (count by default).
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum FacetSortOrder {
   /**
    * asc
@@ -109,7 +109,7 @@ enum FacetSortOrder {
 /**
  * Indicates whether the query results are truncated.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ResultTruncated {
   /**
    * true
@@ -125,7 +125,7 @@ enum ResultTruncated {
 /**
  * Data type of a column in a table.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ColumnDataType {
   /**
    * string
@@ -291,13 +291,13 @@ model QueryResponse {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   $skipToken?: string;
 
   /**
    * Query output in JObject array or Table format.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   data: unknown;
 
   /**
@@ -320,7 +320,7 @@ model Facet {
   /**
    * Result type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" ""
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resultType: string;
 }
 
@@ -421,7 +421,7 @@ model OperationDisplay {
 /**
  * Properties that contain a graph query.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphQueryProperties {
   /**
    * Date and time in UTC of the last modification that was made to this graph query definition.
@@ -483,7 +483,7 @@ model Resource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -546,7 +546,7 @@ model GraphQueryUpdateParameters {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -623,7 +623,7 @@ model FacetResult extends Facet {
   /**
    * A JObject array or Table containing the desired facets. Only present if the facet is valid.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   data: unknown;
 
   /**
