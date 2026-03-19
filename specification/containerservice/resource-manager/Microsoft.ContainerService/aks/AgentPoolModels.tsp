@@ -171,7 +171,6 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * The version of node image
    */
-  @visibility(Lifecycle.Read)
   nodeImageVersion?: string;
 
   /**
