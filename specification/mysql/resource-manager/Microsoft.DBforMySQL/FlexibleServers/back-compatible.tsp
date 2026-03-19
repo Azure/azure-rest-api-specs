@@ -111,3 +111,6 @@ using Microsoft.DBforMySQL;
 @@clientName(CheckNameAvailability.execute::parameters.body,
   "nameAvailabilityRequest"
 );
+
+@@clientName(ServerUpgradeConfigurations.update::parameters.body, "parameters");
+
