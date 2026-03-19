@@ -15,5 +15,5 @@ namespace Microsoft.Resources;
   Subscriptions.get
 );
 
-@@clientName(Microsoft.Resources, "SubscriptionClient", "javascript");
+@@clientName(Microsoft.Resources, "SubscriptionClient", "javascript,python");
 @@clientLocation(checkResourceName, "SubscriptionClient", "go");
