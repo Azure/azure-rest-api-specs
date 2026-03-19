@@ -272,10 +272,6 @@ namespace CombineClient;
   "sourceIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.DdosCustomPolicyPropertiesFormat.frontendIPConfiguration,
-  "frontendIpConfiguration",
-  "java"
-);
 @@clientName(Microsoft.Network.LoadBalancerVipSwapRequest.frontendIPConfigurations,
   "frontendIpConfigurations",
   "java"
@@ -336,14 +332,6 @@ namespace CombineClient;
   "peerAsn",
   "java"
 );
-@@clientName(Microsoft.Network.BgpConnectionProperties.peerASN,
-  "peerAsn",
-  "java"
-);
-@@clientName(Microsoft.Network.VirtualRouterPeeringProperties.peerASN,
-  "peerAsn",
-  "java"
-);
 
 // sTag → stag rename
 @@clientName(Microsoft.Network.ExpressRouteCrossConnectionProperties.sTag,
@@ -353,7 +341,7 @@ namespace CombineClient;
 
 // Make read-only ExpressRoute models input for backward compat
 @@usage(Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties,
-  Usage.input,
+  Azure.ClientGenerator.Core.Usage.input,
   "java"
 );
 
