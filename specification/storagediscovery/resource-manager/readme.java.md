@@ -6,3 +6,6 @@ These settings apply only when `--java` is specified on the command line.
 client-flattened-annotation-target: disabled
 uuid-as-string: true
 ```
+
+Yadda yadda sdfljksadfkjalsdf
+here are some changes
