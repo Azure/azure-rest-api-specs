@@ -1551,7 +1551,7 @@ interface File {
    * Aborts a pending Copy File operation, and leaves a destination file with zero length and full metadata.
    */
   @sharedRoute
-  @route("?comp=copy&copyid")
+  @route("?comp=copy")
   @put
   abortCopy is StorageOperationNoBody<
     {
