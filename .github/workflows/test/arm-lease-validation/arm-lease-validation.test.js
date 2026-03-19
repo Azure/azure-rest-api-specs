@@ -193,16 +193,16 @@ describe("validate-arm-leases", () => {
       expect(mockStat).toHaveBeenCalledTimes(2);
     });
 
-    it("fails when service folder does not exist", async () => {
+    it("allows new RP when service folder does not exist", async () => {
       mockReadFile.mockResolvedValue(validYaml);
       mockStat.mockRejectedValue(new Error("ENOENT"));
 
       const result = await validateLeaseContent(
-        "/repo/.github/arm-leases/invalidservice/Microsoft.Test/lease.yaml",
-        ".github/arm-leases/invalidservice/Microsoft.Test/lease.yaml",
+        "/repo/.github/arm-leases/newservice/Microsoft.Test/lease.yaml",
+        ".github/arm-leases/newservice/Microsoft.Test/lease.yaml",
         "/repo",
       );
-      expect(result.errors.some((e) => e.includes("Service folder not found"))).toBe(true);
+      expect(result.errors).toHaveLength(0);
     });
 
     it("allows new RP when service exists but RP folder does not", async () => {
