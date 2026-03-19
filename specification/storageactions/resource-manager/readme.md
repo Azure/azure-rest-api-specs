@@ -27,12 +27,21 @@ These are the global settings for the storageactions.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-01-01
+tag: package-2026-03-01
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-2026-03-01
+
+These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01'
+input-file:
+  - Microsoft.StorageActions/stable/2026-03-01/storageactions.json
 ```
 
 ### Tag: package-2023-01-01
