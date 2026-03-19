@@ -29,11 +29,13 @@ import "./Probe.tsp";
 import "./VirtualNetwork.tsp";
 import "./VirtualNetworkPeering.tsp";
 import "./NetworkWatcher.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Network;
 
@@ -4171,3 +4173,7 @@ union VirtualNetworkPeeringLevel {
    */
   LocalAndRemoteNotInSync: "LocalAndRemoteNotInSync",
 }
+
+@@clientName(Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
+  "ManagedServiceIdentityUserAssignedIdentities"
+);

@@ -58,10 +58,6 @@ namespace CombineClient;
   "java"
 );
 @@clientName(Microsoft.Network.ErrorResponse, "NetworkErrorResponse", "java");
-@@clientName(Microsoft.Network.Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
-  "ManagedServiceIdentityUserAssignedIdentities",
-  "java"
-);
 
 // IP → Ip naming mitigations for backward compatibility with hand-written wrapper code
 @@clientName(Microsoft.Network.PublicIPAddress, "PublicIpAddress", "java");
