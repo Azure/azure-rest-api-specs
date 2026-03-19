@@ -24,6 +24,8 @@ model HorizonDbCluster
 @parentResource(HorizonDbCluster)
 model HorizonDbPool
   is Azure.ResourceManager.ProxyResource<HorizonDbPoolProperties> {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
   @doc("The name of the HorizonDb pool")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
@@ -120,7 +122,7 @@ model HorizonDbClusterProperties {
   createMode?: CreateModeCluster;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UTC is a well-established acronym for Coordinated Universal Time and should remain uppercase for clarity and consistency with Azure service conventions"
-  @doc("Restore point creation time (ISO8601 format), specifying the time to restore from")
+  @doc("Restore point creation time specifying the time to restore from")
   pointInTimeUTC?: utcDateTime;
 
   @doc("The pool name for restore or replica operations")
@@ -136,9 +138,6 @@ model HorizonDbClusterProperties {
   @maxValue(96)
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   vCores?: int32;
-
-  @doc("The availability zone of the HorizonDb cluster")
-  availabilityZone?: string;
 
   @doc("The processor type for the HorizonDb cluster")
   processorType?: string;
@@ -157,10 +156,6 @@ model HorizonDbClusterProperties {
   @doc("The fully qualified domain name used for readonly endpoint for the cluster")
   @visibility(Lifecycle.Read)
   readonlyEndpoint?: string;
-
-  @doc("The earliest restore point time (ISO8601 format) for the cluster")
-  @visibility(Lifecycle.Read)
-  earliestRestoreDate?: utcDateTime;
 
   @doc("The provisioning state of the cluster")
   @visibility(Lifecycle.Read)
@@ -197,13 +192,9 @@ model HorizonDbClusterForPatchUpdate {
 
 @doc("Properties of a HorizonDb pool")
 model HorizonDbPoolProperties {
-  @doc("The SKU for the HorizonDb pool")
-  @visibility(Lifecycle.Read)
-  sku?: string;
-
   @doc("The location of the HorizonDb pool")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+  location?: azureLocation;
 
   @doc("Current state of the pool")
   @visibility(Lifecycle.Read)
@@ -219,16 +210,14 @@ model HorizonDbPoolProperties {
 
   @doc("The administrator login password for the pool")
   @secret
-  @visibility(Lifecycle.Read)
+  @minLength(8)
+  @maxLength(128)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   administratorLoginPassword?: string;
 
   @doc("The version of the HorizonDb pool")
   @visibility(Lifecycle.Read)
   version?: string;
-
-  @doc("The tags for the HorizonDb pool")
-  @visibility(Lifecycle.Read)
-  tags?: string;
 
   @doc("The create mode for the pool")
   @visibility(Lifecycle.Read)
@@ -239,19 +228,35 @@ model HorizonDbPoolProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("Properties of a HorizonDb pool for update operations")
+model HorizonDbPoolPropertiesForPatchUpdate {
+  @doc("The administrator login password for the pool")
+  @secret
+  @minLength(8)
+  @maxLength(128)
+  @visibility(Lifecycle.Update)
+  administratorLoginPassword?: string;
+}
+
+@doc("HorizonDb pool for update operations")
+model HorizonDbPoolForPatchUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  @doc("The properties that can be updated for a HorizonDb pool.")
+  properties?: HorizonDbPoolPropertiesForPatchUpdate;
+}
+
 @doc("Network properties")
 model Network {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "publicNetworkAccess is a configuration flag, not sensitive data"
   @doc("The flag indicating whether public ip is requested")
   @visibility(Lifecycle.Read)
-  publicNetworkAccess?: string;
+  publicNetworkAccess?: PublicNetworkAccessState;
 }
 
 @doc("Properties of a HorizonDb replica")
 model HorizonDbReplicaProperties {
-  /**
-   * Role of the replica
-   */
+  @doc("Role of the replica")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   role?: ReplicaRole;
 
@@ -262,6 +267,9 @@ model HorizonDbReplicaProperties {
   @doc("The fully qualified domain name of the replica")
   @visibility(Lifecycle.Read)
   fullyQualifiedDomainName?: string;
+
+  @doc("The availability zone of the replica")
+  availabilityZone?: string;
 
   @doc("The provisioning state of the replica")
   @visibility(Lifecycle.Read)
@@ -459,6 +467,17 @@ union State {
 
   /** Is healthy */
   Healthy: "Healthy",
+}
+
+@doc("Indicates if public network access is enabled or not.")
+union PublicNetworkAccessState {
+  string,
+
+  @doc("Public network access is enabled")
+  Enabled: "Enabled",
+
+  @doc("Public network access is disabled")
+  Disabled: "Disabled",
 }
 
 @doc("Role of the replica")

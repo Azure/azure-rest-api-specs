@@ -2193,6 +2193,10 @@
     }
   },
   "definitions": {
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "CreateModeCluster": {
       "type": "string",
       "description": "The mode to create a new HorizonDb cluster",
@@ -2349,7 +2353,7 @@
         "pointInTimeUTC": {
           "type": "string",
           "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from"
+          "description": "Restore point creation time specifying the time to restore from"
         },
         "poolName": {
           "type": "string",
@@ -2377,10 +2381,6 @@
             "create"
           ]
         },
-        "availabilityZone": {
-          "type": "string",
-          "description": "The availability zone of the HorizonDb cluster"
-        },
         "processorType": {
           "type": "string",
           "description": "The processor type for the HorizonDb cluster"
@@ -2402,12 +2402,6 @@
         "readonlyEndpoint": {
           "type": "string",
           "description": "The fully qualified domain name used for readonly endpoint for the cluster",
-          "readOnly": true
-        },
-        "earliestRestoreDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The earliest restore point time (ISO8601 format) for the cluster",
           "readOnly": true
         },
         "provisioningState": {
@@ -2777,6 +2771,13 @@
         "properties": {
           "$ref": "#/definitions/HorizonDbPoolProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -2810,13 +2811,8 @@
       "type": "object",
       "description": "Properties of a HorizonDb pool",
       "properties": {
-        "sku": {
-          "type": "string",
-          "description": "The SKU for the HorizonDb pool",
-          "readOnly": true
-        },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The location of the HorizonDb pool",
           "x-ms-mutability": [
             "read",
@@ -2843,17 +2839,17 @@
           "type": "string",
           "format": "password",
           "description": "The administrator login password for the pool",
-          "readOnly": true,
+          "minLength": 8,
+          "maxLength": 128,
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "version": {
           "type": "string",
           "description": "The version of the HorizonDb pool",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "string",
-          "description": "The tags for the HorizonDb pool",
           "readOnly": true
         },
         "createMode": {
@@ -3092,6 +3088,10 @@
           "description": "The fully qualified domain name of the replica",
           "readOnly": true
         },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The availability zone of the replica"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the replica",
@@ -3117,7 +3117,7 @@
       "description": "Network properties",
       "properties": {
         "publicNetworkAccess": {
-          "type": "string",
+          "$ref": "#/definitions/PublicNetworkAccessState",
           "description": "The flag indicating whether public ip is requested",
           "readOnly": true
         }
@@ -3280,6 +3280,30 @@
         ]
       },
       "readOnly": true
+    },
+    "PublicNetworkAccessState": {
+      "type": "string",
+      "description": "Indicates if public network access is enabled or not.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Public network access is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Public network access is disabled"
+          }
+        ]
+      }
     },
     "ReplicaRole": {
       "type": "string",
