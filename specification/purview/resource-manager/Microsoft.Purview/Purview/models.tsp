@@ -662,8 +662,6 @@ model AccountProperties {
   tenantEndpointState?: TenantEndpointState;
 }
 
-alias ManagedResourcesPublicNetworkAccess = PublicNetworkAccess;
-
 /**
  * Gets or sets the status of the account.
  */

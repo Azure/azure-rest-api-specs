@@ -334,11 +334,14 @@ namespace Microsoft.Purview {
   "csharp"
 );
 @@clientName(Microsoft.Purview.AccountStatus, "PurviewAccountStatus", "csharp");
-// Property rename: Credentials.type → CredentialsType (match old SDK naming)
 @@clientName(Microsoft.Purview.Credentials.type, "CredentialsType", "csharp");
 
 @@alternateType(Microsoft.Purview.AccountProperties.managedResourcesPublicNetworkAccess,
   Microsoft.Purview.ManagedResourcesPublicNetworkAccess,
+  "csharp"
+);
+@@alternateType(Microsoft.Purview.AccountProperties.accountStatus,
+  Microsoft.Purview.AccountStatus,
   "csharp"
 );
 
@@ -347,3 +350,27 @@ namespace Microsoft.Purview {
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Purview.UsagesOperationGroup.get,
   "csharp"
 );
+
+namespace Microsoft.Purview {
+  /**
+   * Gets or sets the public network access for managed resources.
+   */
+  union ManagedResourcesPublicNetworkAccess {
+    string,
+
+    /**
+     * NotSpecified
+     */
+    NotSpecified: "NotSpecified",
+
+    /**
+     * Enabled
+     */
+    Enabled: "Enabled",
+
+    /**
+     * Disabled
+     */
+    Disabled: "Disabled",
+  }
+}
