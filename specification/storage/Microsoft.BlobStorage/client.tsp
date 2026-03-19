@@ -4,6 +4,7 @@ import "./main.tsp";
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 using Storage.Blob;
+using Azure.Core;
 
 namespace Customizations;
 
@@ -305,6 +306,8 @@ enum ImmutabilityPolicySetting {
 @@alternateType(Block.name, string, "go");
 @@alternateType(BlockIdParameter.blockid, string, "go");
 @@alternateType(BlockLookupList.latest, string[], "go");
+@@alternateType(ConditionalRequestHeaders.ifMatch, Azure.Core.eTag, "go");
+@@alternateType(ConditionalRequestHeaders.ifNoneMatch, Azure.Core.eTag, "go");
 @@alternateType(EncryptionAlgorithmParameter.encryptionAlgorithm,
   EncryptionAlgorithmTypeGo,
   "go"
@@ -387,11 +390,11 @@ enum ImmutabilityPolicySetting {
 
 @@alternateType(BlockIdParameter.blockid, string, "python");
 
-@@Legacy.disablePageable(Storage.Blob.Container.listBlobs, "python,javascript");
-@@Legacy.disablePageable(Storage.Blob.Container.listBlobHierarchySegment,
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobs, "python,javascript");
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobHierarchySegment,
   "python,javascript"
 );
-@@Legacy.disablePageable(Storage.Blob.Service.listContainers,
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Service.listContainers,
   "python,javascript"
 );
 
