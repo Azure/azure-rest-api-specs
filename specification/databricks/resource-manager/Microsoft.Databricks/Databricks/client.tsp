@@ -7,7 +7,10 @@ using Microsoft.Databricks;
   "ArmErrorDetail",
   "python"
 );
-@@clientName(Microsoft.Databricks, "AzureDatabricksManagementClient", "python");
+@@clientName(Microsoft.Databricks,
+  "AzureDatabricksManagementClient",
+  "python,javascript"
+);
 @@clientLocation(VirtualNetworkPeerings.get, "VNetPeering", "python");
 @@clientLocation(VirtualNetworkPeerings.createOrUpdate,
   "VNetPeering",
