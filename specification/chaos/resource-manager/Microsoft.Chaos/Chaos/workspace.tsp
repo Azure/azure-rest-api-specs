@@ -75,7 +75,7 @@ interface Workspaces {
   refreshRecommendations is ArmResourceActionNoContentAsyncWithLocationResult<
     Workspace,
     void,
-    Workspace
+    RefreshRecommendationsResult
   >;
 }
 
