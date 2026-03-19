@@ -298,7 +298,7 @@ using Http;
 @@clientName(Microsoft.RecoveryServices.IaasVMRecoveryPoint.isSourceVMEncrypted, "IsSourceVmEncrypted", "csharp");
 @@clientName(Microsoft.RecoveryServices.IaasVMRecoveryPoint.osType, "OSType", "csharp");
 @@clientName(Microsoft.RecoveryServices.IaasVMRecoveryPoint.sourceVMStorageType, "SourceVmStorageType", "csharp");
-@@clientName(Microsoft.RecoveryServices.IaasVMRestoreRequest.securedVMOsDiskEncryptionSetId, "SecuredVmOSDiskEncryptionSetId", "csharp");
+@@clientName(Microsoft.RecoveryServices.SecuredVMDetails.securedVMOsDiskEncryptionSetId, "SecuredVmOSDiskEncryptionSetId", "csharp");
 @@clientName(Microsoft.RecoveryServices.MabServerType.DPMContainer, "DpmContainer", "csharp");
 @@clientName(Microsoft.RecoveryServices.MabServerType.IaasVMContainer, "IaasVmContainer", "csharp");
 @@clientName(Microsoft.RecoveryServices.MabServerType.IaasVMServiceContainer, "IaasVmServiceContainer", "csharp");
