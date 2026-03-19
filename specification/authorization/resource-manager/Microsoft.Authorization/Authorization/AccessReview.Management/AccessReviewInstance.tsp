@@ -26,6 +26,27 @@ model AccessReviewInstance
   >;
 }
 
+alias AccessReviewScheduleOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Authorization";
+  },
+  {},
+  {
+    /** The id of the access review schedule definition. */
+    @path
+    @segment("accessReviewScheduleDefinitions")
+    @key
+    scheduleDefinitionId: string;
+  }
+>;
+
 alias AccessReviewInstanceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -200,17 +221,13 @@ interface ScopeAccessReviewInstances {
   /**
    * Get access review instances
    */
-  getById is ScopeAccessReviewInstanceOps.Read<
-    Extension.ScopeParameter,
-    AccessReviewInstance
-  >;
+  getById is ScopeAccessReviewInstanceOps.Read<AccessReviewInstance>;
 
   /**
    * Update access review instance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ScopeAccessReviewInstanceOps.CreateOrUpdateSync<
-    Extension.ScopeParameter,
     AccessReviewInstance,
     Request = AccessReviewInstanceProperties,
     Response = ArmResourceUpdatedResponse<AccessReviewInstance>
@@ -220,7 +237,6 @@ interface ScopeAccessReviewInstances {
    * Get access review instances
    */
   list is ScopeAccessReviewInstanceOps.List<
-    Extension.ScopeParameter,
     AccessReviewInstance,
     Parameters = {
       /**
@@ -237,7 +253,6 @@ interface ScopeAccessReviewInstances {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewInstance_Stop")
   stop is ScopeAccessReviewInstanceOps.ActionSync<
-    Extension.ScopeParameter,
     AccessReviewInstance,
     void,
     NoContentResponse
@@ -249,7 +264,6 @@ interface ScopeAccessReviewInstances {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewInstance_RecordAllDecisions")
   recordAllDecisions is ScopeAccessReviewInstanceOps.ActionSync<
-    Extension.ScopeParameter,
     AccessReviewInstance,
     RecordAllDecisionsProperties,
     NoContentResponse
@@ -261,7 +275,6 @@ interface ScopeAccessReviewInstances {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewInstance_ResetDecisions")
   resetDecisions is ScopeAccessReviewInstanceOps.ActionSync<
-    Extension.ScopeParameter,
     AccessReviewInstance,
     void,
     NoContentResponse
@@ -273,7 +286,6 @@ interface ScopeAccessReviewInstances {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewInstance_ApplyDecisions")
   applyDecisions is ScopeAccessReviewInstanceOps.ActionSync<
-    Extension.ScopeParameter,
     AccessReviewInstance,
     void,
     NoContentResponse
@@ -285,7 +297,6 @@ interface ScopeAccessReviewInstances {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewInstance_SendReminders")
   sendReminders is ScopeAccessReviewInstanceOps.ActionSync<
-    Extension.ScopeParameter,
     AccessReviewInstance,
     void,
     NoContentResponse
@@ -300,7 +311,6 @@ interface ScopeAccessReviewInstances {
   @get
   @action("decisions")
   scopeAccessReviewInstanceDecisionsList is ScopeAccessReviewInstanceOps.ActionSync<
-    Extension.ScopeParameter,
     AccessReviewInstance,
     void,
     ArmResponse<ResourceListResult<AccessReviewDecision>>,
@@ -322,7 +332,6 @@ interface ScopeAccessReviewInstances {
   @get
   @action("contactedReviewers")
   scopeAccessReviewInstanceContactedReviewersList is ScopeAccessReviewInstanceOps.ActionSync<
-    Extension.ScopeParameter,
     AccessReviewInstance,
     void,
     ArmResponse<ResourceListResult<AccessReviewContactedReviewer>>
@@ -373,6 +382,13 @@ interface AccessReviewInstancesAssignedForMyApproval {
   >;
 
   /**
+   * Get access review instances assigned for my approval.
+   */
+  @list
+  @get
+  list is AccessReviewInstancesAssignedForMyApprovalOps.List<AccessReviewInstance>;
+
+  /**
    * Get access review instance contacted reviewers
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
@@ -380,7 +396,7 @@ interface AccessReviewInstancesAssignedForMyApproval {
   @list
   @get
   @action("contactedReviewers")
-  list is AccessReviewInstancesAssignedForMyApprovalOps.ActionSync<
+  reviewersList is AccessReviewInstancesAssignedForMyApprovalOps.ActionSync<
     AccessReviewInstance,
     void,
     ArmResponse<ResourceListResult<AccessReviewContactedReviewer>>

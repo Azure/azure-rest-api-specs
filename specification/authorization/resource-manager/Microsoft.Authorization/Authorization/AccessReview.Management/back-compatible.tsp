@@ -32,8 +32,6 @@ using Microsoft.Authorization;
 @@Legacy.flattenProperty(AccessReviewRecurrenceSettings.range);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(AccessReviewDecisionProperties.principal);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(AccessReviewDecisionProperties.resource);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(AccessReviewDecisionProperties.reviewedBy);
@@ -42,9 +40,6 @@ using Microsoft.Authorization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(AccessReviewDecisionProperties.principalResourceMembership
 );
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(AccessReviewDecisionInsight.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(AccessReviewContactedReviewer.properties);
@@ -146,7 +141,7 @@ using Microsoft.Authorization;
 @@clientLocation(AccessReviewInstancesAssignedForMyApproval.acceptRecommendations,
   "AccessReviewInstance"
 );
-@@clientLocation(AccessReviewInstancesAssignedForMyApproval.list,
+@@clientLocation(AccessReviewInstancesAssignedForMyApproval.reviewersList,
   "TenantLevelAccessReviewInstanceContactedReviewers"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -176,3 +171,7 @@ using Microsoft.Authorization;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(AccessReviewDefaultSettings.properties);
+@@clientLocation(ScopeAccessReviewScheduleDefinitions.listForMyApproval,
+  "AccessReviewScheduleDefinitionsAssignedForMyApproval"
+);
+@@clientName(ScopeAccessReviewScheduleDefinitions.listForMyApproval, "List");

@@ -99,8 +99,10 @@ interface AccessReviewHistoryDefinitions {
        * The id of the access review history definition instance to generate a URI for.
        */
       @path
+      @segment("instances")
       instanceId: string;
-    }
+    },
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -149,8 +151,8 @@ interface ScopeAccessReviewHistoryDefinitions {
    * Get access review history definition by definition Id
    */
   getById is ScopeAccessReviewHistoryDefinitionOps.Read<
-    Extension.ScopeParameter,
-    AccessReviewHistoryDefinition
+    AccessReviewHistoryDefinition,
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -160,10 +162,10 @@ interface ScopeAccessReviewHistoryDefinitions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("ScopeAccessReviewHistoryDefinition_Create")
   create is ScopeAccessReviewHistoryDefinitionOps.CreateOrUpdateSync<
-    Extension.ScopeParameter,
     AccessReviewHistoryDefinition,
     Request = AccessReviewHistoryDefinitionProperties,
-    Response = ArmResourceUpdatedResponse<AccessReviewHistoryDefinition>
+    Response = ArmResourceUpdatedResponse<AccessReviewHistoryDefinition>,
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -172,15 +174,14 @@ interface ScopeAccessReviewHistoryDefinitions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewHistoryDefinition_DeleteById")
   deleteById is ScopeAccessReviewHistoryDefinitionOps.DeleteSync<
-    Extension.ScopeParameter,
-    AccessReviewHistoryDefinition
+    AccessReviewHistoryDefinition,
+    ErrorType = ErrorDefinition
   >;
 
   /**
    * Lists the accessReviewHistoryDefinitions available from this provider, definition instances are only available for 30 days after creation.
    */
   list is ScopeAccessReviewHistoryDefinitionOps.List<
-    Extension.ScopeParameter,
     AccessReviewHistoryDefinition,
     Parameters = {
       /**
@@ -188,7 +189,8 @@ interface ScopeAccessReviewHistoryDefinitions {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -197,7 +199,6 @@ interface ScopeAccessReviewHistoryDefinitions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewHistoryDefinitionInstance_GenerateDownloadUri")
   generateDownloadUri is ScopeAccessReviewHistoryDefinitionOps.ActionSync<
-    Extension.ScopeParameter,
     AccessReviewHistoryDefinition,
     void,
     ArmResponse<AccessReviewHistoryInstance>,
@@ -206,6 +207,7 @@ interface ScopeAccessReviewHistoryDefinitions {
        * The id of the access review history definition instance to generate a URI for.
        */
       @path
+      @segment("instances")
       instanceId: string;
     }
   >;
@@ -219,7 +221,6 @@ interface ScopeAccessReviewHistoryDefinitions {
   @get
   @action("instances")
   scopeAccessReviewHistoryDefinitionInstancesList is ScopeAccessReviewHistoryDefinitionOps.ActionSync<
-    Extension.ScopeParameter,
     AccessReviewHistoryDefinition,
     void,
     ArmResponse<ResourceListResult<AccessReviewHistoryInstance>>

@@ -24,6 +24,26 @@ model AccessReviewScheduleDefinition
   >;
 }
 
+alias AccessReviewScheduleDefinitionAssignedOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Authorization";
+  },
+  {},
+  {
+    /** The id of the access review schedule definition. */
+    @path
+    @segment("accessReviewScheduleDefinitions")
+    @key
+    scheduleDefinitionId: string;
+  }
+>;
+
 alias AccessReviewScheduleDefinitionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -121,17 +141,13 @@ interface ScopeAccessReviewScheduleDefinitions {
   /**
    * Get single access review definition
    */
-  getById is ScopeAccessReviewScheduleDefinitionOps.Read<
-    Extension.ScopeParameter,
-    AccessReviewScheduleDefinition
-  >;
+  getById is ScopeAccessReviewScheduleDefinitionOps.Read<AccessReviewScheduleDefinition>;
 
   /**
    * Create or Update access review schedule definition.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdateById is ScopeAccessReviewScheduleDefinitionOps.CreateOrUpdateSync<
-    Extension.ScopeParameter,
     AccessReviewScheduleDefinition,
     Request = AccessReviewScheduleDefinitionProperties,
     Response = ArmResourceUpdatedResponse<AccessReviewScheduleDefinition>
@@ -140,16 +156,12 @@ interface ScopeAccessReviewScheduleDefinitions {
   /**
    * Delete access review schedule definition
    */
-  deleteById is ScopeAccessReviewScheduleDefinitionOps.DeleteSync<
-    Extension.ScopeParameter,
-    AccessReviewScheduleDefinition
-  >;
+  deleteById is ScopeAccessReviewScheduleDefinitionOps.DeleteSync<AccessReviewScheduleDefinition>;
 
   /**
    * Get access review schedule definitions
    */
   list is ScopeAccessReviewScheduleDefinitionOps.List<
-    Extension.ScopeParameter,
     AccessReviewScheduleDefinition,
     Parameters = {
       /**
@@ -164,10 +176,20 @@ interface ScopeAccessReviewScheduleDefinitions {
    * Stop access review definition
    */
   stop is ScopeAccessReviewScheduleDefinitionOps.ActionSync<
-    Extension.ScopeParameter,
     AccessReviewScheduleDefinition,
     void,
     NoContentResponse
+  >;
+
+  listForMyApproval is AccessReviewScheduleDefinitionAssignedOps.List<
+    AccessReviewScheduleDefinition,
+    Parameters = {
+      /**
+       * The filter to apply on the operation. One custom filter option is supported : 'assignedToMeToReview()'. When specified $filter=assignedToMeToReview(), only items that are assigned to the calling user to review are returned
+       */
+      @query("$filter")
+      $filter?: string;
+    }
   >;
 }
 

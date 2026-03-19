@@ -3,78 +3,16 @@
   "info": {
     "title": "AuthorizationManagementClient",
     "version": "2021-12-01-preview",
-    "description": "Access reviews service provides the workflow for running access reviews on different kind of resources.",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "description": "Access reviews service provides the workflow for running access reviews on different kind of resources."
   },
-  "schemes": [
-    "https"
-  ],
-  "host": "management.azure.com",
   "produces": [
     "application/json"
   ],
   "consumes": [
     "application/json"
   ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "tags": [
-    {
-      "name": "Operations"
-    },
-    {
-      "name": "AccessReviewHistoryDefinitions"
-    },
-    {
-      "name": "ScopeAccessReviewHistoryDefinitions"
-    },
-    {
-      "name": "AccessReviewScheduleDefinitions"
-    },
-    {
-      "name": "ScopeAccessReviewScheduleDefinitions"
-    },
-    {
-      "name": "AccessReviewInstances"
-    },
-    {
-      "name": "ScopeAccessReviewInstances"
-    },
-    {
-      "name": "AccessReviewInstancesAssignedForMyApproval"
-    },
-    {
-      "name": "AccessReviewDefaultSettingsOperationGroup"
-    },
-    {
-      "name": "ScopeAccessReviewDefaultSettings"
-    },
-    {
-      "name": "AccessReviewDecisions"
-    }
-  ],
   "paths": {
-    "/{scope}/providers/Microsoft.Authorization/accessReviewHistoryDefinitions": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewHistoryDefinitions": {
       "get": {
         "operationId": "ScopeAccessReviewHistoryDefinitions_List",
         "tags": [
@@ -83,32 +21,26 @@
         "description": "Lists the accessReviewHistoryDefinitions available from this provider, definition instances are only available for 30 days after creation.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply on the operation. Only standard filters on definition name and created date are supported",
-            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryDefinitionListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ErrorDefinition"
             }
@@ -124,7 +56,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}": {
       "get": {
         "operationId": "ScopeAccessReviewHistoryDefinitions_GetById",
         "tags": [
@@ -133,32 +65,27 @@
         "description": "Get access review history definition by definition Id",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "historyDefinitionId",
             "in": "path",
-            "description": "The id of the access review history definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryDefinition"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ErrorDefinition"
             }
@@ -178,26 +105,20 @@
         "description": "Create a scheduled or one-time Access Review History Definition",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "historyDefinitionId",
             "in": "path",
-            "description": "The id of the access review history definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "Access review history definition properties.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryDefinitionProperties"
@@ -206,13 +127,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AccessReviewHistoryDefinition' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryDefinition"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ErrorDefinition"
             }
@@ -232,32 +153,27 @@
         "description": "Delete an access review history definition",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "historyDefinitionId",
             "in": "path",
-            "description": "The id of the access review history definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "ignore"
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ErrorDefinition"
             }
@@ -270,7 +186,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances": {
       "get": {
         "operationId": "ScopeAccessReviewHistoryDefinitionInstances_List",
         "tags": [
@@ -279,32 +195,27 @@
         "description": "Get access review history definition instances by definition Id",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "historyDefinitionId",
             "in": "path",
-            "description": "The id of the access review history definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryInstanceListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -320,7 +231,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances/{instanceId}/generateDownloadUri": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances/{instanceId}/generateDownloadUri": {
       "post": {
         "operationId": "ScopeAccessReviewHistoryDefinitionInstance_GenerateDownloadUri",
         "tags": [
@@ -329,39 +240,33 @@
         "description": "Generates a uri which can be used to retrieve review history data. This URI has a TTL of 1 day and can be retrieved by fetching the accessReviewHistoryDefinition object.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "historyDefinitionId",
             "in": "path",
-            "description": "The id of the access review history definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "instanceId",
             "in": "path",
-            "description": "The id of the access review history definition instance to generate a URI for.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryInstance"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -374,7 +279,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions": {
       "get": {
         "operationId": "ScopeAccessReviewScheduleDefinitions_List",
         "tags": [
@@ -383,32 +288,26 @@
         "description": "Get access review schedule definitions",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply on the operation. Other than standard filters, one custom filter option is supported : 'assignedToMeToReview()'. When one specified $filter=assignedToMeToReview(), only items that are assigned to the calling user to review are returned",
-            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewScheduleDefinitionListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -424,7 +323,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}": {
       "get": {
         "operationId": "ScopeAccessReviewScheduleDefinitions_GetById",
         "tags": [
@@ -433,32 +332,27 @@
         "description": "Get single access review definition",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewScheduleDefinition"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -478,26 +372,20 @@
         "description": "Create or Update access review schedule definition.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "Access review schedule definition properties.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccessReviewScheduleDefinitionProperties"
@@ -506,13 +394,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AccessReviewScheduleDefinition' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewScheduleDefinition"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -532,32 +420,27 @@
         "description": "Delete access review schedule definition",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "ignore"
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -570,7 +453,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances": {
       "get": {
         "operationId": "ScopeAccessReviewInstances_List",
         "tags": [
@@ -579,39 +462,32 @@
         "description": "Get access review instances",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply on the operation. Other than standard filters, one custom filter option is supported : 'assignedToMeToReview()'. When one specified $filter=assignedToMeToReview(), only items that are assigned to the calling user to review are returned",
-            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewInstanceListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -627,7 +503,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}": {
       "get": {
         "operationId": "ScopeAccessReviewInstances_GetById",
         "tags": [
@@ -636,39 +512,33 @@
         "description": "Get access review instances",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewInstance"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -688,33 +558,26 @@
         "description": "Update access review instance.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "Access review instance properties.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccessReviewInstanceProperties"
@@ -723,13 +586,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AccessReviewInstance' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewInstance"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -742,7 +605,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/applyDecisions": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/applyDecisions": {
       "post": {
         "operationId": "ScopeAccessReviewInstance_ApplyDecisions",
         "tags": [
@@ -751,36 +614,30 @@
         "description": "An action to apply all decisions for an access review instance.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -793,7 +650,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
       "get": {
         "operationId": "ScopeAccessReviewInstanceContactedReviewers_List",
         "tags": [
@@ -802,39 +659,33 @@
         "description": "Get access review instance contacted reviewers",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewContactedReviewerListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -850,7 +701,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions": {
       "get": {
         "operationId": "ScopeAccessReviewInstanceDecisions_List",
         "tags": [
@@ -859,46 +710,38 @@
         "description": "Get access review instance decisions",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           },
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply on the operation. Other than standard filters, one custom filter option is supported : 'assignedToMeToReview()'. When one specified $filter=assignedToMeToReview(), only items that are assigned to the calling user to review are returned",
-            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewDecisionListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -914,7 +757,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/recordAllDecisions": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/recordAllDecisions": {
       "post": {
         "operationId": "ScopeAccessReviewInstance_RecordAllDecisions",
         "tags": [
@@ -923,33 +766,26 @@
         "description": "An action to approve/deny all decisions for a review with certain filters.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "Record all decisions payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RecordAllDecisionsProperties"
@@ -958,10 +794,10 @@
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -974,7 +810,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/resetDecisions": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/resetDecisions": {
       "post": {
         "operationId": "ScopeAccessReviewInstance_ResetDecisions",
         "tags": [
@@ -983,36 +819,30 @@
         "description": "An action to reset all decisions for an access review instance.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1025,7 +855,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/sendReminders": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/sendReminders": {
       "post": {
         "operationId": "ScopeAccessReviewInstance_SendReminders",
         "tags": [
@@ -1034,36 +864,30 @@
         "description": "An action to send reminders for an access review instance.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1076,7 +900,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/stop": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/stop": {
       "post": {
         "operationId": "ScopeAccessReviewInstance_Stop",
         "tags": [
@@ -1085,36 +909,30 @@
         "description": "An action to stop an access review instance.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1127,7 +945,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/stop": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/stop": {
       "post": {
         "operationId": "ScopeAccessReviewScheduleDefinitions_Stop",
         "tags": [
@@ -1136,29 +954,24 @@
         "description": "Stop access review definition",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1171,7 +984,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/accessReviewScheduleSettings/default": {
+    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleSettings/default": {
       "get": {
         "operationId": "ScopeAccessReviewDefaultSettings_Get",
         "tags": [
@@ -1180,25 +993,21 @@
         "description": "Get access review default settings for the subscription",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewDefaultSettings"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1218,19 +1027,14 @@
         "description": "Get access review default settings for the subscription",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scope",
             "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "Access review schedule settings.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccessReviewScheduleSettings"
@@ -1239,13 +1043,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AccessReviewDefaultSettings' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewDefaultSettings"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1258,7 +1062,7 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/accessReviewScheduleDefinitions": {
+    "/providers/microsoft.Authorization/accessReviewScheduleDefinitions": {
       "get": {
         "operationId": "AccessReviewScheduleDefinitionsAssignedForMyApproval_List",
         "tags": [
@@ -1267,25 +1071,20 @@
         "description": "List a AccessReviewScheduleDefinition",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply on the operation. One custom filter option is supported : 'assignedToMeToReview()'. When specified $filter=assignedToMeToReview(), only items that are assigned to the calling user to review are returned",
-            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewScheduleDefinitionListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1296,7 +1095,7 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances": {
+    "/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances": {
       "get": {
         "operationId": "AccessReviewInstancesAssignedForMyApproval_List",
         "tags": [
@@ -1305,25 +1104,21 @@
         "description": "Get access review instances assigned for my approval.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewInstanceListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1334,7 +1129,7 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}": {
+    "/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}": {
       "get": {
         "operationId": "AccessReviewInstancesAssignedForMyApproval_GetById",
         "tags": [
@@ -1343,32 +1138,27 @@
         "description": "Get single access review instance assigned for my approval.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewInstance"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1381,7 +1171,7 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/acceptRecommendations": {
+    "/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/acceptRecommendations": {
       "post": {
         "operationId": "AccessReviewInstance_AcceptRecommendations",
         "tags": [
@@ -1390,29 +1180,24 @@
         "description": "An action to accept recommendations for decision in an access review instance.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1425,7 +1210,7 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
+    "/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
       "get": {
         "operationId": "TenantLevelAccessReviewInstanceContactedReviewers_List",
         "tags": [
@@ -1434,32 +1219,27 @@
         "description": "Get access review instance contacted reviewers",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewContactedReviewerListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1475,7 +1255,7 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions": {
+    "/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions": {
       "get": {
         "operationId": "AccessReviewInstanceMyDecisions_List",
         "tags": [
@@ -1484,39 +1264,32 @@
         "description": "Get my access review instance decisions.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           },
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply on the operation. Other than standard filters, one custom filter option is supported : 'assignedToMeToReview()'. When one specified $filter=assignedToMeToReview(), only items that are assigned to the calling user to review are returned",
-            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewDecisionListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1532,7 +1305,7 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions/{decisionId}": {
+    "/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions/{decisionId}": {
       "get": {
         "operationId": "AccessReviewInstanceMyDecisions_GetById",
         "tags": [
@@ -1541,39 +1314,33 @@
         "description": "Get my single access review instance decision.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           },
           {
             "name": "decisionId",
             "in": "path",
-            "description": "The id of the decision record.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewDecision"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1593,33 +1360,26 @@
         "description": "Record a decision.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           },
           {
             "name": "decisionId",
             "in": "path",
-            "description": "The id of the decision record.",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "Access review decision properties to patch.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccessReviewDecisionProperties"
@@ -1628,13 +1388,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewDecision"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1647,27 +1407,23 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/operations": {
+    "/providers/microsoft.Authorization/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
         "description": "List the operations for the provider",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1678,7 +1434,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewHistoryDefinitions": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewHistoryDefinitions": {
       "get": {
         "operationId": "AccessReviewHistoryDefinitions_List",
         "tags": [
@@ -1687,28 +1443,20 @@
         "description": "Lists the accessReviewHistoryDefinitions available from this provider, definition instances are only available for 30 days after creation.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply on the operation. Only standard filters on definition name and created date are supported",
-            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryDefinitionListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1719,7 +1467,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}": {
       "get": {
         "operationId": "AccessReviewHistoryDefinitions_GetById",
         "tags": [
@@ -1728,28 +1476,21 @@
         "description": "Get access review history definition by definition Id",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "historyDefinitionId",
             "in": "path",
-            "description": "The id of the access review history definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryDefinition"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1764,22 +1505,14 @@
         "description": "Create a scheduled or one-time Access Review History Definition",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "historyDefinitionId",
             "in": "path",
-            "description": "The id of the access review history definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "Access review history definition properties.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryDefinitionProperties"
@@ -1788,13 +1521,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AccessReviewHistoryDefinition' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryDefinition"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1809,28 +1542,21 @@
         "description": "Delete an access review history definition",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "historyDefinitionId",
             "in": "path",
-            "description": "The id of the access review history definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "ignore"
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1838,7 +1564,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances": {
       "get": {
         "operationId": "AccessReviewHistoryDefinitionInstances_List",
         "tags": [
@@ -1847,28 +1573,21 @@
         "description": "Get access review history definition instances by definition Id",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "historyDefinitionId",
             "in": "path",
-            "description": "The id of the access review history definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryInstanceListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1879,7 +1598,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances/{instanceId}/generateDownloadUri": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances/{instanceId}/generateDownloadUri": {
       "post": {
         "operationId": "AccessReviewHistoryDefinitionInstance_GenerateDownloadUri",
         "tags": [
@@ -1888,35 +1607,27 @@
         "description": "Generates a uri which can be used to retrieve review history data. This URI has a TTL of 1 day and can be retrieved by fetching the accessReviewHistoryDefinition object.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "historyDefinitionId",
             "in": "path",
-            "description": "The id of the access review history definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "instanceId",
             "in": "path",
-            "description": "The id of the access review history definition instance to generate a URI for.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryInstance"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ErrorDefinition"
             }
@@ -1924,7 +1635,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions": {
       "get": {
         "operationId": "AccessReviewScheduleDefinitions_List",
         "tags": [
@@ -1933,28 +1644,20 @@
         "description": "Get access review schedule definitions",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply on the operation. Other than standard filters, one custom filter option is supported : 'assignedToMeToReview()'. When one specified $filter=assignedToMeToReview(), only items that are assigned to the calling user to review are returned",
-            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewScheduleDefinitionListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1965,7 +1668,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}": {
       "get": {
         "operationId": "AccessReviewScheduleDefinitions_GetById",
         "tags": [
@@ -1974,28 +1677,21 @@
         "description": "Get single access review definition",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewScheduleDefinition"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2010,22 +1706,14 @@
         "description": "Create or Update access review schedule definition.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "Access review schedule definition properties.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccessReviewScheduleDefinitionProperties"
@@ -2034,13 +1722,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AccessReviewScheduleDefinition' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewScheduleDefinition"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2055,28 +1743,21 @@
         "description": "Delete access review schedule definition",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "ignore"
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2084,7 +1765,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances": {
       "get": {
         "operationId": "AccessReviewInstances_List",
         "tags": [
@@ -2093,35 +1774,26 @@
         "description": "Get access review instances",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply on the operation. Other than standard filters, one custom filter option is supported : 'assignedToMeToReview()'. When one specified $filter=assignedToMeToReview(), only items that are assigned to the calling user to review are returned",
-            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewInstanceListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2132,7 +1804,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}": {
       "get": {
         "operationId": "AccessReviewInstances_GetById",
         "tags": [
@@ -2141,35 +1813,27 @@
         "description": "Get access review instances",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewInstance"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2184,29 +1848,20 @@
         "description": "Update access review instance.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "Access review instance properties.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccessReviewInstanceProperties"
@@ -2215,13 +1870,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AccessReviewInstance' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewInstance"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2229,7 +1884,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/applyDecisions": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/applyDecisions": {
       "post": {
         "operationId": "AccessReviewInstance_ApplyDecisions",
         "tags": [
@@ -2238,32 +1893,24 @@
         "description": "An action to apply all decisions for an access review instance.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2271,7 +1918,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
       "get": {
         "operationId": "AccessReviewInstanceContactedReviewers_List",
         "tags": [
@@ -2280,35 +1927,27 @@
         "description": "Get access review instance contacted reviewers",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewContactedReviewerListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2319,7 +1958,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions": {
       "get": {
         "operationId": "AccessReviewInstanceDecisions_List",
         "tags": [
@@ -2328,42 +1967,32 @@
         "description": "Get access review instance decisions",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           },
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply on the operation. Other than standard filters, one custom filter option is supported : 'assignedToMeToReview()'. When one specified $filter=assignedToMeToReview(), only items that are assigned to the calling user to review are returned",
-            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewDecisionListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2374,7 +2003,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/resetDecisions": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/resetDecisions": {
       "post": {
         "operationId": "AccessReviewInstance_ResetDecisions",
         "tags": [
@@ -2383,32 +2012,24 @@
         "description": "An action to reset all decisions for an access review instance.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2416,7 +2037,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/sendReminders": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/sendReminders": {
       "post": {
         "operationId": "AccessReviewInstance_SendReminders",
         "tags": [
@@ -2425,32 +2046,24 @@
         "description": "An action to send reminders for an access review instance.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2458,7 +2071,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/stop": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/stop": {
       "post": {
         "operationId": "AccessReviewInstance_Stop",
         "tags": [
@@ -2467,32 +2080,24 @@
         "description": "An action to stop an access review instance.",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the access review instance.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2500,7 +2105,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/stop": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/stop": {
       "post": {
         "operationId": "AccessReviewScheduleDefinitions_Stop",
         "tags": [
@@ -2509,25 +2114,18 @@
         "description": "Stop access review definition",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "scheduleDefinitionId",
             "in": "path",
-            "description": "The id of the access review schedule definition.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2535,30 +2133,23 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleSettings/default": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleSettings/default": {
       "get": {
         "operationId": "AccessReviewDefaultSettings_Get",
         "tags": [
           "AccessReviewDefaultSettingsOperationGroup"
         ],
         "description": "Get access review default settings for the subscription",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewDefaultSettings"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2573,15 +2164,8 @@
         "description": "Get access review default settings for the subscription",
         "parameters": [
           {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "properties",
             "in": "body",
-            "description": "Access review schedule settings.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccessReviewScheduleSettings"
@@ -2590,13 +2174,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AccessReviewDefaultSettings' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AccessReviewDefaultSettings"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -2606,36 +2190,6 @@
     }
   },
   "definitions": {
-    "AccessRecommendationType": {
-      "type": "string",
-      "description": "The feature- generated recommendation shown to the reviewer.",
-      "enum": [
-        "Approve",
-        "Deny",
-        "NoInfoAvailable"
-      ],
-      "x-ms-enum": {
-        "name": "AccessRecommendationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Approve",
-            "value": "Approve",
-            "description": "Approve"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "Deny"
-          },
-          {
-            "name": "NoInfoAvailable",
-            "value": "NoInfoAvailable",
-            "description": "NoInfoAvailable"
-          }
-        ]
-      }
-    },
     "AccessReviewActorIdentity": {
       "type": "object",
       "description": "Details of the actor identity",
@@ -2646,8 +2200,16 @@
           "readOnly": true
         },
         "principalType": {
-          "$ref": "#/definitions/AccessReviewActorIdentityType",
+          "type": "string",
           "description": "The identity type : user/servicePrincipal",
+          "enum": [
+            "user",
+            "servicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewActorIdentityType",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "principalName": {
@@ -2660,78 +2222,6 @@
           "description": "The user principal name(if valid)",
           "readOnly": true
         }
-      }
-    },
-    "AccessReviewActorIdentityType": {
-      "type": "string",
-      "description": "The identity type : user/servicePrincipal",
-      "enum": [
-        "user",
-        "servicePrincipal"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewActorIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "user",
-            "value": "user",
-            "description": "user"
-          },
-          {
-            "name": "servicePrincipal",
-            "value": "servicePrincipal",
-            "description": "servicePrincipal"
-          }
-        ]
-      }
-    },
-    "AccessReviewApplyResult": {
-      "type": "string",
-      "description": "The outcome of applying the decision.",
-      "enum": [
-        "New",
-        "Applying",
-        "AppliedSuccessfully",
-        "AppliedWithUnknownFailure",
-        "AppliedSuccessfullyButObjectNotFound",
-        "ApplyNotSupported"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewApplyResult",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "New",
-            "value": "New",
-            "description": "New"
-          },
-          {
-            "name": "Applying",
-            "value": "Applying",
-            "description": "Applying"
-          },
-          {
-            "name": "AppliedSuccessfully",
-            "value": "AppliedSuccessfully",
-            "description": "AppliedSuccessfully"
-          },
-          {
-            "name": "AppliedWithUnknownFailure",
-            "value": "AppliedWithUnknownFailure",
-            "description": "AppliedWithUnknownFailure"
-          },
-          {
-            "name": "AppliedSuccessfullyButObjectNotFound",
-            "value": "AppliedSuccessfullyButObjectNotFound",
-            "description": "AppliedSuccessfullyButObjectNotFound"
-          },
-          {
-            "name": "ApplyNotSupported",
-            "value": "ApplyNotSupported",
-            "description": "ApplyNotSupported"
-          }
-        ]
       }
     },
     "AccessReviewContactedReviewer": {
@@ -2762,11 +2252,11 @@
     },
     "AccessReviewContactedReviewerListResult": {
       "type": "object",
-      "description": "The response of a AccessReviewContactedReviewer list operation.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AccessReviewContactedReviewer items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AccessReviewContactedReviewer"
           }
@@ -2774,7 +2264,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -2824,8 +2314,16 @@
       "description": "Target of the decision.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/DecisionTargetType",
-          "description": "The type of decision target : User/ServicePrincipal"
+          "type": "string",
+          "description": "The type of decision target : User/ServicePrincipal",
+          "enum": [
+            "user",
+            "servicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "DecisionTargetType",
+            "modelAsString": true
+          }
         },
         "id": {
           "type": "string",
@@ -2873,8 +2371,15 @@
       "description": "Details of the Insight.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AccessReviewDecisionInsightType",
-          "description": "The type of insight"
+          "type": "string",
+          "description": "The type of insight",
+          "enum": [
+            "userSignInInsight"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewDecisionInsightType",
+            "modelAsString": true
+          }
         },
         "insightCreatedDateTime": {
           "description": "Date Time when the insight was created.",
@@ -2886,31 +2391,13 @@
         "type"
       ]
     },
-    "AccessReviewDecisionInsightType": {
-      "type": "string",
-      "description": "The type of insight",
-      "enum": [
-        "userSignInInsight"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewDecisionInsightType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "userSignInInsight",
-            "value": "userSignInInsight",
-            "description": "userSignInInsight"
-          }
-        ]
-      }
-    },
     "AccessReviewDecisionListResult": {
       "type": "object",
-      "description": "The response of a AccessReviewDecision list operation.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AccessReviewDecision items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AccessReviewDecision"
           }
@@ -2918,7 +2405,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -2933,32 +2420,17 @@
           "type": "array",
           "description": "Every decision item in an access review represents a principal's membership to a resource. This property represents details of the membership. Examples of this detail might be whether the principal has direct access or indirect access",
           "items": {
-            "$ref": "#/definitions/AccessReviewDecisionPrincipalResourceMembershipType"
+            "type": "string",
+            "enum": [
+              "direct",
+              "indirect"
+            ],
+            "x-ms-enum": {
+              "name": "AccessReviewDecisionPrincipalResourceMembershipType",
+              "modelAsString": true
+            }
           }
         }
-      }
-    },
-    "AccessReviewDecisionPrincipalResourceMembershipType": {
-      "type": "string",
-      "enum": [
-        "direct",
-        "indirect"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewDecisionPrincipalResourceMembershipType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "direct",
-            "value": "direct",
-            "description": "direct"
-          },
-          {
-            "name": "indirect",
-            "value": "indirect",
-            "description": "indirect"
-          }
-        ]
       }
     },
     "AccessReviewDecisionProperties": {
@@ -2977,13 +2449,33 @@
           "x-ms-client-flatten": true
         },
         "recommendation": {
-          "$ref": "#/definitions/AccessRecommendationType",
+          "type": "string",
           "description": "The feature- generated recommendation shown to the reviewer.",
+          "enum": [
+            "Approve",
+            "Deny",
+            "NoInfoAvailable"
+          ],
+          "x-ms-enum": {
+            "name": "AccessRecommendationType",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "decision": {
-          "$ref": "#/definitions/AccessReviewResult",
-          "description": "The decision on the approval step. This value is initially set to NotReviewed. Approvers can take action of Approve/Deny"
+          "type": "string",
+          "description": "Represents a reviewer's decision for a given review",
+          "enum": [
+            "Approve",
+            "Deny",
+            "NotReviewed",
+            "DontKnow",
+            "NotNotified"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewResult",
+            "modelAsString": true
+          }
         },
         "justification": {
           "type": "string",
@@ -3002,8 +2494,20 @@
           "x-ms-client-flatten": true
         },
         "applyResult": {
-          "$ref": "#/definitions/AccessReviewApplyResult",
+          "type": "string",
           "description": "The outcome of applying the decision.",
+          "enum": [
+            "New",
+            "Applying",
+            "AppliedSuccessfully",
+            "AppliedWithUnknownFailure",
+            "AppliedSuccessfullyButObjectNotFound",
+            "ApplyNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewApplyResult",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "appliedDateTime": {
@@ -3038,8 +2542,15 @@
       "description": "Target of the decision.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/DecisionResourceType",
-          "description": "The type of resource"
+          "type": "string",
+          "description": "The type of resource",
+          "enum": [
+            "azureRole"
+          ],
+          "x-ms-enum": {
+            "name": "DecisionResourceType",
+            "modelAsString": true
+          }
         },
         "id": {
           "type": "string",
@@ -3140,11 +2651,11 @@
     },
     "AccessReviewHistoryDefinitionListResult": {
       "type": "object",
-      "description": "The response of a AccessReviewHistoryDefinition list operation.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AccessReviewHistoryDefinition items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AccessReviewHistoryDefinition"
           }
@@ -3152,7 +2663,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -3183,12 +2694,34 @@
           "type": "array",
           "description": "Collection of review decisions which the history data should be filtered on. For example if Approve and Deny are supplied the data will only contain review results in which the decision maker approved or denied a review request.",
           "items": {
-            "$ref": "#/definitions/AccessReviewResult"
+            "type": "string",
+            "description": "Represents a reviewer's decision for a given review",
+            "enum": [
+              "Approve",
+              "Deny",
+              "NotReviewed",
+              "DontKnow",
+              "NotNotified"
+            ],
+            "x-ms-enum": {
+              "name": "AccessReviewResult",
+              "modelAsString": true
+            }
           }
         },
         "status": {
-          "$ref": "#/definitions/AccessReviewHistoryDefinitionStatus",
+          "type": "string",
           "description": "This read-only field specifies the of the requested review history data. This is either requested, in-progress, done or error.",
+          "enum": [
+            "Requested",
+            "InProgress",
+            "Done",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewHistoryDefinitionStatus",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "createdDateTime": {
@@ -3208,8 +2741,7 @@
           "description": "A collection of scopes used when selecting review history data",
           "items": {
             "$ref": "#/definitions/AccessReviewScope"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "settings": {
           "$ref": "#/definitions/AccessReviewHistoryScheduleSettings",
@@ -3223,42 +2755,6 @@
             "$ref": "#/definitions/AccessReviewHistoryInstance"
           }
         }
-      }
-    },
-    "AccessReviewHistoryDefinitionStatus": {
-      "type": "string",
-      "description": "This read-only field specifies the of the requested review history data. This is either requested, in-progress, done or error.",
-      "enum": [
-        "Requested",
-        "InProgress",
-        "Done",
-        "Error"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewHistoryDefinitionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Requested",
-            "value": "Requested",
-            "description": "Requested"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "InProgress"
-          },
-          {
-            "name": "Done",
-            "value": "Done",
-            "description": "Done"
-          },
-          {
-            "name": "Error",
-            "value": "Error",
-            "description": "Error"
-          }
-        ]
       }
     },
     "AccessReviewHistoryInstance": {
@@ -3289,11 +2785,11 @@
     },
     "AccessReviewHistoryInstanceListResult": {
       "type": "object",
-      "description": "The response of a AccessReviewHistoryInstance list operation.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AccessReviewHistoryInstance items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AccessReviewHistoryInstance"
           }
@@ -3301,7 +2797,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -3327,8 +2823,18 @@
           "description": "The display name for the parent history definition."
         },
         "status": {
-          "$ref": "#/definitions/AccessReviewHistoryDefinitionStatus",
-          "description": "Status of the requested review history instance data. This is either requested, in-progress, done or error. The state transitions are as follows - Requested -> InProgress -> Done -> Expired",
+          "type": "string",
+          "description": "This read-only field specifies the of the requested review history data. This is either requested, in-progress, done or error.",
+          "enum": [
+            "Requested",
+            "InProgress",
+            "Done",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewHistoryDefinitionStatus",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "runDateTime": {
@@ -3387,11 +2893,11 @@
     },
     "AccessReviewInstanceListResult": {
       "type": "object",
-      "description": "The response of a AccessReviewInstance list operation.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AccessReviewInstance items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AccessReviewInstance"
           }
@@ -3399,7 +2905,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -3411,8 +2917,25 @@
       "description": "Access Review Instance properties.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/AccessReviewInstanceStatus",
+          "type": "string",
           "description": "This read-only field specifies the status of an access review instance.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Applied",
+            "Initializing",
+            "Applying",
+            "Completing",
+            "Scheduled",
+            "AutoReviewing",
+            "AutoReviewed",
+            "Starting"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewInstanceStatus",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "startDateTime": {
@@ -3446,118 +2969,19 @@
           ]
         },
         "reviewersType": {
-          "$ref": "#/definitions/AccessReviewInstanceReviewersType",
+          "type": "string",
           "description": "This field specifies the type of reviewers for a review. Usually for a review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be assigned and instead be chosen dynamically. For example managers review or self review.",
+          "enum": [
+            "Assigned",
+            "Self",
+            "Managers"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewInstanceReviewersType",
+            "modelAsString": true
+          },
           "readOnly": true
         }
-      }
-    },
-    "AccessReviewInstanceReviewersType": {
-      "type": "string",
-      "description": "This field specifies the type of reviewers for a review. Usually for a review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be assigned and instead be chosen dynamically. For example managers review or self review.",
-      "enum": [
-        "Assigned",
-        "Self",
-        "Managers"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewInstanceReviewersType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Assigned",
-            "value": "Assigned",
-            "description": "Assigned"
-          },
-          {
-            "name": "Self",
-            "value": "Self",
-            "description": "Self"
-          },
-          {
-            "name": "Managers",
-            "value": "Managers",
-            "description": "Managers"
-          }
-        ]
-      }
-    },
-    "AccessReviewInstanceStatus": {
-      "type": "string",
-      "description": "This read-only field specifies the status of an access review instance.",
-      "enum": [
-        "NotStarted",
-        "InProgress",
-        "Completed",
-        "Applied",
-        "Initializing",
-        "Applying",
-        "Completing",
-        "Scheduled",
-        "AutoReviewing",
-        "AutoReviewed",
-        "Starting"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewInstanceStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "NotStarted"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "InProgress"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Completed"
-          },
-          {
-            "name": "Applied",
-            "value": "Applied",
-            "description": "Applied"
-          },
-          {
-            "name": "Initializing",
-            "value": "Initializing",
-            "description": "Initializing"
-          },
-          {
-            "name": "Applying",
-            "value": "Applying",
-            "description": "Applying"
-          },
-          {
-            "name": "Completing",
-            "value": "Completing",
-            "description": "Completing"
-          },
-          {
-            "name": "Scheduled",
-            "value": "Scheduled",
-            "description": "Scheduled"
-          },
-          {
-            "name": "AutoReviewing",
-            "value": "AutoReviewing",
-            "description": "AutoReviewing"
-          },
-          {
-            "name": "AutoReviewed",
-            "value": "AutoReviewed",
-            "description": "AutoReviewed"
-          },
-          {
-            "name": "Starting",
-            "value": "Starting",
-            "description": "Starting"
-          }
-        ]
       }
     },
     "AccessReviewRecurrencePattern": {
@@ -3565,8 +2989,16 @@
       "description": "Recurrence Pattern of an Access Review Schedule Definition.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AccessReviewRecurrencePatternType",
-          "description": "The recurrence type : weekly, monthly, etc."
+          "type": "string",
+          "description": "The recurrence type : weekly, monthly, etc.",
+          "enum": [
+            "weekly",
+            "absoluteMonthly"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewRecurrencePatternType",
+            "modelAsString": true
+          }
         },
         "interval": {
           "type": "integer",
@@ -3575,37 +3007,22 @@
         }
       }
     },
-    "AccessReviewRecurrencePatternType": {
-      "type": "string",
-      "description": "The recurrence type : weekly, monthly, etc.",
-      "enum": [
-        "weekly",
-        "absoluteMonthly"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewRecurrencePatternType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "weekly",
-            "value": "weekly",
-            "description": "weekly"
-          },
-          {
-            "name": "absoluteMonthly",
-            "value": "absoluteMonthly",
-            "description": "absoluteMonthly"
-          }
-        ]
-      }
-    },
     "AccessReviewRecurrenceRange": {
       "type": "object",
       "description": "Recurrence Range of an Access Review Schedule Definition.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AccessReviewRecurrenceRangeType",
-          "description": "The recurrence range type. The possible values are: endDate, noEnd, numbered."
+          "type": "string",
+          "description": "The recurrence range type. The possible values are: endDate, noEnd, numbered.",
+          "enum": [
+            "endDate",
+            "noEnd",
+            "numbered"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewRecurrenceRangeType",
+            "modelAsString": true
+          }
         },
         "numberOfOccurrences": {
           "type": "integer",
@@ -3624,36 +3041,6 @@
         }
       }
     },
-    "AccessReviewRecurrenceRangeType": {
-      "type": "string",
-      "description": "The recurrence range type. The possible values are: endDate, noEnd, numbered.",
-      "enum": [
-        "endDate",
-        "noEnd",
-        "numbered"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewRecurrenceRangeType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "endDate",
-            "value": "endDate",
-            "description": "endDate"
-          },
-          {
-            "name": "noEnd",
-            "value": "noEnd",
-            "description": "noEnd"
-          },
-          {
-            "name": "numbered",
-            "value": "numbered",
-            "description": "numbered"
-          }
-        ]
-      }
-    },
     "AccessReviewRecurrenceSettings": {
       "type": "object",
       "description": "Recurrence Settings of an Access Review Schedule Definition.",
@@ -3670,48 +3057,6 @@
         }
       }
     },
-    "AccessReviewResult": {
-      "type": "string",
-      "description": "Represents a reviewer's decision for a given review",
-      "enum": [
-        "Approve",
-        "Deny",
-        "NotReviewed",
-        "DontKnow",
-        "NotNotified"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewResult",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Approve",
-            "value": "Approve",
-            "description": "Approve"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "Deny"
-          },
-          {
-            "name": "NotReviewed",
-            "value": "NotReviewed",
-            "description": "NotReviewed"
-          },
-          {
-            "name": "DontKnow",
-            "value": "DontKnow",
-            "description": "DontKnow"
-          },
-          {
-            "name": "NotNotified",
-            "value": "NotNotified",
-            "description": "NotNotified"
-          }
-        ]
-      }
-    },
     "AccessReviewReviewer": {
       "type": "object",
       "description": "Descriptor for what needs to be reviewed",
@@ -3721,34 +3066,18 @@
           "description": "The id of the reviewer(user/servicePrincipal)"
         },
         "principalType": {
-          "$ref": "#/definitions/AccessReviewReviewerType",
+          "type": "string",
           "description": "The identity type : user/servicePrincipal",
+          "enum": [
+            "user",
+            "servicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewReviewerType",
+            "modelAsString": true
+          },
           "readOnly": true
         }
-      }
-    },
-    "AccessReviewReviewerType": {
-      "type": "string",
-      "description": "The identity type : user/servicePrincipal",
-      "enum": [
-        "user",
-        "servicePrincipal"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewReviewerType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "user",
-            "value": "user",
-            "description": "user"
-          },
-          {
-            "name": "servicePrincipal",
-            "value": "servicePrincipal",
-            "description": "servicePrincipal"
-          }
-        ]
       }
     },
     "AccessReviewScheduleDefinition": {
@@ -3769,11 +3098,11 @@
     },
     "AccessReviewScheduleDefinitionListResult": {
       "type": "object",
-      "description": "The response of a AccessReviewScheduleDefinition list operation.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AccessReviewScheduleDefinition items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AccessReviewScheduleDefinition"
           }
@@ -3781,7 +3110,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -3797,8 +3126,25 @@
           "description": "The display name for the schedule definition."
         },
         "status": {
-          "$ref": "#/definitions/AccessReviewScheduleDefinitionStatus",
+          "type": "string",
           "description": "This read-only field specifies the status of an accessReview.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Applied",
+            "Initializing",
+            "Applying",
+            "Completing",
+            "Scheduled",
+            "AutoReviewing",
+            "AutoReviewed",
+            "Starting"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewScheduleDefinitionStatus",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "descriptionForAdmins": {
@@ -3847,8 +3193,17 @@
           ]
         },
         "reviewersType": {
-          "$ref": "#/definitions/AccessReviewScheduleDefinitionReviewersType",
+          "type": "string",
           "description": "This field specifies the type of reviewers for a review. Usually for a review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be assigned and instead be chosen dynamically. For example managers review or self review.",
+          "enum": [
+            "Assigned",
+            "Self",
+            "Managers"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewScheduleDefinitionReviewersType",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "instances": {
@@ -3858,114 +3213,6 @@
             "$ref": "#/definitions/AccessReviewInstance"
           }
         }
-      }
-    },
-    "AccessReviewScheduleDefinitionReviewersType": {
-      "type": "string",
-      "description": "This field specifies the type of reviewers for a review. Usually for a review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be assigned and instead be chosen dynamically. For example managers review or self review.",
-      "enum": [
-        "Assigned",
-        "Self",
-        "Managers"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewScheduleDefinitionReviewersType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Assigned",
-            "value": "Assigned",
-            "description": "Assigned"
-          },
-          {
-            "name": "Self",
-            "value": "Self",
-            "description": "Self"
-          },
-          {
-            "name": "Managers",
-            "value": "Managers",
-            "description": "Managers"
-          }
-        ]
-      }
-    },
-    "AccessReviewScheduleDefinitionStatus": {
-      "type": "string",
-      "description": "This read-only field specifies the status of an accessReview.",
-      "enum": [
-        "NotStarted",
-        "InProgress",
-        "Completed",
-        "Applied",
-        "Initializing",
-        "Applying",
-        "Completing",
-        "Scheduled",
-        "AutoReviewing",
-        "AutoReviewed",
-        "Starting"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewScheduleDefinitionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "NotStarted"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "InProgress"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Completed"
-          },
-          {
-            "name": "Applied",
-            "value": "Applied",
-            "description": "Applied"
-          },
-          {
-            "name": "Initializing",
-            "value": "Initializing",
-            "description": "Initializing"
-          },
-          {
-            "name": "Applying",
-            "value": "Applying",
-            "description": "Applying"
-          },
-          {
-            "name": "Completing",
-            "value": "Completing",
-            "description": "Completing"
-          },
-          {
-            "name": "Scheduled",
-            "value": "Scheduled",
-            "description": "Scheduled"
-          },
-          {
-            "name": "AutoReviewing",
-            "value": "AutoReviewing",
-            "description": "AutoReviewing"
-          },
-          {
-            "name": "AutoReviewed",
-            "value": "AutoReviewed",
-            "description": "AutoReviewed"
-          },
-          {
-            "name": "Starting",
-            "value": "Starting",
-            "description": "Starting"
-          }
-        ]
       }
     },
     "AccessReviewScheduleSettings": {
@@ -3989,8 +3236,17 @@
           "description": "Flag to indicate whether the reviewer is required to pass justification when recording a decision."
         },
         "defaultDecision": {
-          "$ref": "#/definitions/DefaultDecisionType",
-          "description": "This specifies the behavior for the autoReview feature when an access review completes."
+          "type": "string",
+          "description": "This specifies the behavior for the autoReview feature when an access review completes.",
+          "enum": [
+            "Approve",
+            "Deny",
+            "Recommendation"
+          ],
+          "x-ms-enum": {
+            "name": "DefaultDecisionType",
+            "modelAsString": true
+          }
         },
         "autoApplyDecisionsEnabled": {
           "type": "boolean",
@@ -4032,13 +3288,32 @@
           "readOnly": true
         },
         "principalType": {
-          "$ref": "#/definitions/AccessReviewScopePrincipalType",
+          "type": "string",
           "description": "The identity type user/servicePrincipal to review",
+          "enum": [
+            "user",
+            "guestUser",
+            "servicePrincipal",
+            "user,group",
+            "redeemedGuestUser"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewScopePrincipalType",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "assignmentState": {
-          "$ref": "#/definitions/AccessReviewScopeAssignmentState",
+          "type": "string",
           "description": "The role assignment state eligible/active to review",
+          "enum": [
+            "eligible",
+            "active"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewScopeAssignmentState",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "inactiveDuration": {
@@ -4066,144 +3341,6 @@
           "type": "string",
           "description": "This is used to indicate the role definition id(s) to exclude"
         }
-      }
-    },
-    "AccessReviewScopeAssignmentState": {
-      "type": "string",
-      "description": "The role assignment state eligible/active to review",
-      "enum": [
-        "eligible",
-        "active"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewScopeAssignmentState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "eligible",
-            "value": "eligible",
-            "description": "eligible"
-          },
-          {
-            "name": "active",
-            "value": "active",
-            "description": "active"
-          }
-        ]
-      }
-    },
-    "AccessReviewScopePrincipalType": {
-      "type": "string",
-      "description": "The identity type user/servicePrincipal to review",
-      "enum": [
-        "user",
-        "guestUser",
-        "servicePrincipal",
-        "user,group",
-        "redeemedGuestUser"
-      ],
-      "x-ms-enum": {
-        "name": "AccessReviewScopePrincipalType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "user",
-            "value": "user",
-            "description": "user"
-          },
-          {
-            "name": "guestUser",
-            "value": "guestUser",
-            "description": "guestUser"
-          },
-          {
-            "name": "servicePrincipal",
-            "value": "servicePrincipal",
-            "description": "servicePrincipal"
-          },
-          {
-            "name": "user,group",
-            "value": "user,group",
-            "description": "user,group"
-          },
-          {
-            "name": "redeemedGuestUser",
-            "value": "redeemedGuestUser",
-            "description": "redeemedGuestUser"
-          }
-        ]
-      }
-    },
-    "DecisionResourceType": {
-      "type": "string",
-      "description": "The type of resource",
-      "enum": [
-        "azureRole"
-      ],
-      "x-ms-enum": {
-        "name": "DecisionResourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "azureRole",
-            "value": "azureRole",
-            "description": "azureRole"
-          }
-        ]
-      }
-    },
-    "DecisionTargetType": {
-      "type": "string",
-      "description": "The type of decision target : User/ServicePrincipal",
-      "enum": [
-        "user",
-        "servicePrincipal"
-      ],
-      "x-ms-enum": {
-        "name": "DecisionTargetType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "user",
-            "value": "user",
-            "description": "user"
-          },
-          {
-            "name": "servicePrincipal",
-            "value": "servicePrincipal",
-            "description": "servicePrincipal"
-          }
-        ]
-      }
-    },
-    "DefaultDecisionType": {
-      "type": "string",
-      "description": "This specifies the behavior for the autoReview feature when an access review completes.",
-      "enum": [
-        "Approve",
-        "Deny",
-        "Recommendation"
-      ],
-      "x-ms-enum": {
-        "name": "DefaultDecisionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Approve",
-            "value": "Approve",
-            "description": "Approve"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "Deny"
-          },
-          {
-            "name": "Recommendation",
-            "value": "Recommendation",
-            "description": "Recommendation"
-          }
-        ]
       }
     },
     "ErrorDefinition": {
@@ -4246,37 +3383,21 @@
           "readOnly": true
         },
         "decision": {
-          "$ref": "#/definitions/RecordAllDecisionsResult",
-          "description": "The decision to make. Approvers can take action of Approve/Deny"
+          "type": "string",
+          "description": "The decision to make. Approvers can take action of Approve/Deny",
+          "enum": [
+            "Approve",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "RecordAllDecisionsResult",
+            "modelAsString": true
+          }
         },
         "justification": {
           "type": "string",
           "description": "Justification provided by approvers for their action"
         }
-      }
-    },
-    "RecordAllDecisionsResult": {
-      "type": "string",
-      "description": "The decision to make. Approvers can take action of Approve/Deny",
-      "enum": [
-        "Approve",
-        "Deny"
-      ],
-      "x-ms-enum": {
-        "name": "RecordAllDecisionsResult",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Approve",
-            "value": "Approve",
-            "description": "Approve"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "Deny"
-          }
-        ]
       }
     }
   },

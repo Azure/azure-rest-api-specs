@@ -37,13 +37,7 @@ alias AccessReviewDefaultSettingsOperationGroupOps = Azure.ResourceManager.Legac
     providerNamespace: "Microsoft.Authorization";
   },
   {},
-  {
-    /** undefined */
-    @path
-    @segment("accessReviewScheduleSettings")
-    @key
-    default: string;
-  }
+  {}
 >;
 
 @armResourceOperations
@@ -53,6 +47,7 @@ interface AccessReviewDefaultSettingsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewDefaultSettings_Get")
+  @action("accessReviewScheduleSettings/default")
   get is AccessReviewDefaultSettingsOperationGroupOps.Read<AccessReviewDefaultSettings>;
 
   /**
@@ -61,6 +56,7 @@ interface AccessReviewDefaultSettingsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("AccessReviewDefaultSettings_Put")
+  @action("accessReviewScheduleSettings/default")
   put is AccessReviewDefaultSettingsOperationGroupOps.CreateOrUpdateSync<
     AccessReviewDefaultSettings,
     Request = AccessReviewScheduleSettings,
@@ -84,13 +80,7 @@ alias ScopeAccessReviewDefaultSettingOps = Azure.ResourceManager.Legacy.Extensio
     providerNamespace: "Microsoft.Authorization";
   },
   {},
-  {
-    /** undefined */
-    @path
-    @segment("accessReviewScheduleSettings")
-    @key
-    default: string;
-  }
+  {}
 >;
 
 @armResourceOperations
@@ -98,17 +88,15 @@ interface ScopeAccessReviewDefaultSettings {
   /**
    * Get access review default settings for the subscription
    */
-  get is ScopeAccessReviewDefaultSettingOps.Read<
-    Extension.ScopeParameter,
-    AccessReviewDefaultSettings
-  >;
+  @action("accessReviewScheduleSettings/default")
+  get is ScopeAccessReviewDefaultSettingOps.Read<AccessReviewDefaultSettings>;
 
   /**
    * Get access review default settings for the subscription
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @action("accessReviewScheduleSettings/default")
   put is ScopeAccessReviewDefaultSettingOps.CreateOrUpdateSync<
-    Extension.ScopeParameter,
     AccessReviewDefaultSettings,
     Request = AccessReviewScheduleSettings,
     Response = ArmResourceUpdatedResponse<AccessReviewDefaultSettings>
