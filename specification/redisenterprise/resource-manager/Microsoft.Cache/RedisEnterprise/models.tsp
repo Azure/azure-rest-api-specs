@@ -1707,6 +1707,11 @@ model MigrationValidationRequest {
   skipDataMigration?: boolean;
 
   /**
+   * Sets whether the data is migrated from source to target or not.
+   */
+  skipDataMigration: boolean;
+
+  /**
    * Sets whether to ignore warnings when validating if the source cache can be migrated to the target cache. If this property is true, the isValid property in the response will ignore warning-level disparities between the source and target resource. The default value is false.
    */
   forceMigrate?: boolean;
