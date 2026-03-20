@@ -1,0 +1,104 @@
+{
+  "title": "Training_Jobs_CreateOrUpdate_MaximumSet",
+  "operationId": "Training_Jobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "v1",
+    "name": "my_training_job_01",
+    "body": {
+      "properties": {
+        "jobType": "Command",
+        "command": "python train.py --epochs 10",
+        "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
+        "displayName": "My Training Job",
+        "description": "A sample command job for training",
+        "tags": {
+          "framework": "pytorch"
+        },
+        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
+        "resources": {
+          "instanceCount": 1,
+          "instanceType": "Standard_NC6"
+        },
+        "limits": {
+          "jobLimitsType": "Command",
+          "timeout": "PT2H30M"
+        }
+      }
+    },
+    "Foundry-Features": "Jobs=V1Preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "my_training_job_01",
+        "name": "my_training_job_01",
+        "type": "Microsoft.MachineLearningServices/workspaces/jobs",
+        "properties": {
+          "jobType": "Command",
+          "command": "python train.py --epochs 10",
+          "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
+          "displayName": "My Training Job",
+          "description": "A sample command job for training",
+          "tags": {
+            "framework": "pytorch"
+          },
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
+          "resources": {
+            "instanceCount": 1,
+            "instanceType": "Standard_NC6"
+          },
+          "limits": {
+            "jobLimitsType": "Command",
+            "timeout": "PT2H30M"
+          },
+          "status": "Running",
+          "isArchived": false
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "my_training_job_01",
+        "name": "my_training_job_01",
+        "type": "Microsoft.MachineLearningServices/workspaces/jobs",
+        "properties": {
+          "jobType": "Command",
+          "command": "python train.py --epochs 10",
+          "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
+          "displayName": "My Training Job",
+          "description": "A sample command job for training",
+          "tags": {
+            "framework": "pytorch"
+          },
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
+          "resources": {
+            "instanceCount": 1,
+            "instanceType": "Standard_NC6"
+          },
+          "limits": {
+            "jobLimitsType": "Command",
+            "timeout": "PT2H30M"
+          },
+          "status": "NotStarted",
+          "isArchived": false
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "title": "Training_Jobs_CreateOrUpdate_MinimumSet",
+  "operationId": "Training_Jobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "v1",
+    "name": "my_training_job_01",
+    "body": {
+      "properties": {
+        "jobType": "Command",
+        "command": "python train.py",
+        "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
+        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "my_training_job_01",
+        "properties": {
+          "jobType": "Command",
+          "command": "python train.py",
+          "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "my_training_job_01",
+        "properties": {
+          "jobType": "Command",
+          "command": "python train.py",
+          "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster"
+        }
+      }
+    }
+  }
+}
