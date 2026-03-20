@@ -1,11 +1,11 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 
-/** @type {import("vitest").MockedFunction<typeof import("fs/promises").readFile>} */
-const mockReadFile = vi.hoisted(() => vi.fn());
+/** @type {{ show: import("vitest").MockedFunction<() => Promise<string>> }} */
+const mockGitInstance = vi.hoisted(() => ({ show: vi.fn() }));
 
-vi.mock("fs/promises", () => ({
-  readFile: mockReadFile,
+vi.mock("simple-git", () => ({
+  simpleGit: vi.fn(() => mockGitInstance),
 }));
 
 /** @type {import("vitest").MockedFunction<typeof import("../../../shared/src/simple-git.js").getRootFolder>} */
@@ -121,44 +121,66 @@ describe("detect-arm-leases", () => {
 
   describe("checkLease", () => {
     it("returns false when lease file does not exist", async () => {
-      mockReadFile.mockRejectedValue(new Error("ENOENT"));
+      mockGitInstance.show.mockRejectedValue(new Error("does not exist in HEAD^"));
 
       const result = await checkLease("testservice", "Microsoft.Test");
       expect(result).toBe(false);
     });
 
     it("returns true when lease is valid and not expired", async () => {
-      mockReadFile.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
+      mockGitInstance.show.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
 
       const result = await checkLease("testservice", "Microsoft.Test");
       expect(result).toBe(true);
     });
 
     it("returns false when lease has expired", async () => {
-      mockReadFile.mockResolvedValue(leaseYaml(daysAgo(100), "P90D"));
+      mockGitInstance.show.mockResolvedValue(leaseYaml(daysAgo(100), "P90D"));
 
       const result = await checkLease("testservice", "Microsoft.Test");
       expect(result).toBe(false);
     });
 
     it("returns false for invalid lease file format", async () => {
-      mockReadFile.mockResolvedValue("invalid: yaml: content");
+      mockGitInstance.show.mockResolvedValue("invalid: yaml: content");
 
       const result = await checkLease("testservice", "Microsoft.Test");
       expect(result).toBe(false);
     });
 
     it("handles multiple services and namespaces", async () => {
-      mockReadFile.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
+      mockGitInstance.show.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
 
       expect(await checkLease("app", "Microsoft.App")).toBe(true);
       expect(await checkLease("compute", "Microsoft.Compute")).toBe(true);
     });
 
     it("returns false for missing namespace", async () => {
-      mockReadFile.mockRejectedValue(new Error("ENOENT"));
+      mockGitInstance.show.mockRejectedValue(new Error("does not exist in HEAD^"));
 
       expect(await checkLease("storage", "Microsoft.Storage")).toBe(false);
+    });
+
+    it("reads lease from HEAD^ with correct path (with serviceName)", async () => {
+      mockGitInstance.show.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
+
+      const result = await checkLease("xyz", "Microsoft.XYZ", "XYZ");
+
+      expect(result).toBe(true);
+      expect(mockGitInstance.show).toHaveBeenCalledWith([
+        "HEAD^:.github/arm-leases/xyz/Microsoft.XYZ/XYZ/lease.yaml",
+      ]);
+    });
+
+    it("reads lease from HEAD^ with correct path (without serviceName)", async () => {
+      mockGitInstance.show.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
+
+      const result = await checkLease("xyz", "Microsoft.XYZ");
+
+      expect(result).toBe(true);
+      expect(mockGitInstance.show).toHaveBeenCalledWith([
+        "HEAD^:.github/arm-leases/xyz/Microsoft.XYZ/lease.yaml",
+      ]);
     });
   });
 });
