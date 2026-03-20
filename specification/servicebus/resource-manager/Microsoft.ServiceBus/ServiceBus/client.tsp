@@ -178,6 +178,7 @@ using Microsoft.ServiceBus;
 @@clientName(TlsVersion.`1.0`, "Tls1_0", "csharp");
 @@clientName(TlsVersion.`1.1`, "Tls1_1", "csharp");
 @@clientName(TlsVersion.`1.2`, "Tls1_2", "csharp");
+@@clientName(TlsVersion.`1.3`, "Tls1_3", "csharp");
 
 // Step 6: Avoid Windows filename collision between FailOverProperties.cs and FailoverProperties.cs
 @@clientName(FailOverProperties, "ServiceBusFailOverDetail", "csharp");
@@ -233,6 +234,7 @@ namespace Microsoft.ServiceBus {
     extends Azure.ResourceManager.CommonTypes.TrackedResource {
     /** The namespace update properties. */
     properties?: SBNamespaceUpdateProperties;
+
     ...OmitProperties<
       SBNamespaceUpdateParameters,
       "location" | "tags" | "properties" | "id" | "name" | "type" | "systemData"
