@@ -1,0 +1,44 @@
+parameters:
+  "service-dir":
+    default: "sdk/testrop"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/testrop.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.TestROP"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-testrop"
+    namespace: "azure.mgmt.testrop"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-testrop"
+    namespace: "com.azure.resourcemanager.testrop"
+    service-name: "TestROP"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-testrop"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-testrop"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/testrop"
+    emitter-output-dir: "{output-dir}/{service-dir}/armtestrop"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armtestrop"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
