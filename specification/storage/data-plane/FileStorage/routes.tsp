@@ -973,7 +973,6 @@ interface File {
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing storage API."
   @sharedRoute
-  @route("")
   @put
   create is StorageOperationRequestBody<
     {
@@ -1029,7 +1028,6 @@ interface File {
    * Reads or downloads a file from the system, including its metadata and properties.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("")
   @get
   download is StorageOperationResponseBody<
     {
@@ -1092,7 +1090,6 @@ interface File {
   /**
    * Returns all user-defined metadata, standard HTTP properties, and system properties for the file.
    */
-  @route("")
   @head
   getProperties is StorageOperationNoBody<
     {
@@ -1138,7 +1135,6 @@ interface File {
   /**
    * Removes the file from the storage account.
    */
-  @route("")
   @delete
   delete is StorageOperationNoBody<
     {
