@@ -14,15 +14,15 @@ namespace Microsoft.Sql;
 /**
  * A server firewall rule.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-model FirewallRule
-  is Azure.ResourceManager.ProxyResource<ServerFirewallRuleProperties> {
-  ...ResourceNameParameter<
-    Resource = FirewallRule,
-    KeyName = "firewallRuleName",
-    SegmentName = "firewallRules",
-    NamePattern = ""
-  >;
+model FirewallRule extends ProxyResourceWithWritableName {
+  /**
+   * Resource properties.
+   */
+  properties?: ServerFirewallRuleProperties;
 }
 
 @armResourceOperations
@@ -30,25 +30,55 @@ interface FirewallRules {
   /**
    * Gets a firewall rule.
    */
-  get is ArmResourceRead<FirewallRule>;
+  get is ArmResourceRead<
+    FirewallRule,
+    Parameters = {
+      /**
+       * The name of the firewall rule.
+       */
+      @segment("firewallRules")
+      @path
+      firewallRuleName: string;
+    }
+  >;
 
   /**
    * Creates or updates a firewall rule.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<FirewallRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    FirewallRule,
+    Parameters = {
+      /**
+       * The name of the firewall rule.
+       */
+      @segment("firewallRules")
+      @path
+      firewallRuleName: string;
+    }
+  >;
 
   /**
    * Deletes a firewall rule.
    */
-  delete is ArmResourceDeleteSync<FirewallRule>;
+  delete is ArmResourceDeleteSync<
+    FirewallRule,
+    Parameters = {
+      /**
+       * The name of the firewall rule.
+       */
+      @segment("firewallRules")
+      @path
+      firewallRuleName: string;
+    }
+  >;
 
   /**
    * Gets a list of firewall rules.
    */
+  @action("firewallRules")
   listByServer is ArmResourceListByParent<FirewallRule>;
 }
 
-@@doc(FirewallRule.name, "The name of the firewall rule.");
 @@doc(FirewallRule.properties, "Resource properties.");
 @@doc(FirewallRules.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating a firewall rule."
