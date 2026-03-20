@@ -25,3 +25,8 @@ namespace Microsoft.ResourceGraph;
   "ResourceHistoryDateTimeInterval",
   "java,python,javascript"
 );
+
+@@clientName(ResourceHistory.ResultFormat,
+  "ResourceHistoryResultFormat",
+  "java"
+);
