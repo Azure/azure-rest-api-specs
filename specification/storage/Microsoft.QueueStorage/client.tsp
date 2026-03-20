@@ -11,7 +11,7 @@ namespace Customizations;
   {
     service: Storage.Queues,
   },
-  "rust"
+  "rust,go"
 )
 interface QueueServiceClient extends Storage.Queues.Service {}
 
@@ -20,7 +20,7 @@ interface QueueServiceClient extends Storage.Queues.Service {}
   {
     service: Storage.Queues,
   },
-  "rust"
+  "rust,go"
 )
 interface QueueClient extends Storage.Queues.Queue {}
 
@@ -57,6 +57,7 @@ interface QueueClient extends Storage.Queues.Queue {}
 // Go customizations
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
+@@clientName(QueueServiceClient, "ServiceClient", "go");
 
 // JavaScript SDK renames - based on azure-sdk-for-js storage-queue swagger README
 
