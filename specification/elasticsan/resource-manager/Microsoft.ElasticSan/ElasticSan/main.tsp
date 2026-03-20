@@ -32,7 +32,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "ElasticSanManagement" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.ElasticSan;
 
 /**

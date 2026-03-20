@@ -74,7 +74,7 @@ union ProvisioningStates {
 }
 
 /**
- * Elastic San generation version.
+ * Elastic San appliance version.
  */
 @added(Versions.v2026_05_01_preview)
 union ElasticSanVersion {
@@ -372,12 +372,6 @@ model PerformanceCriticalSkuQosTier {
 @added(Versions.v2026_05_01_preview)
 model GeneralPurposeSkuQosTier {
   /**
-   * Availability zones supported for direct attach in general purpose tier.
-   */
-  @visibility(Lifecycle.Read)
-  generalPurposeDirectAttachZones?: string[];
-
-  /**
    * Availability zones supported for iSCSI in general purpose tier.
    */
   @visibility(Lifecycle.Read)
@@ -459,7 +453,7 @@ model ElasticSanProperties {
   baseSizeTiB: int64;
 
   /**
-   * Base size of the Elastic San appliance in TiB
+   * Base size of the Elastic San appliance in TiB, applicable for ElasticSanVersion V1 only
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_05_01_preview)
@@ -475,7 +469,7 @@ model ElasticSanProperties {
   extendedCapacitySizeTiB: int64;
 
   /**
-   * Extended size of the Elastic San appliance in TiB
+   * Extended size of the Elastic San appliance in TiB, applicable for ElasticSanVersion V1 only
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_05_01_preview)
@@ -530,6 +524,7 @@ model ElasticSanProperties {
   /**
    * Total size of the Elastic San appliance in TB.
    */
+  @removed(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
   totalSizeTiB?: int64;
 
@@ -558,7 +553,7 @@ model ElasticSanProperties {
   autoScaleProperties?: AutoScaleProperties;
 
   /**
-   * Elastic San generation version.
+   * Elastic San appliance version.
    */
   @added(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -587,7 +582,6 @@ model ElasticSanProperties {
   @visibility(Lifecycle.Read)
   @minValue(0)
   totalReservedMBps?: int32;
-
 }
 
 /**
@@ -870,6 +864,12 @@ model VolumeGroupProperties {
   enforceDataIntegrityCheckForIscsi?: boolean;
 
   /**
+   * A boolean indicating whether or not Encryption in Transit is enabled
+   */
+  @added(Versions.v2026_05_01_preview)
+  encryptionInTransit?: boolean;
+
+  /**
    * Reserved IOPS allocated for this volume group, applicable for QualityOfService PerformanceCritical only.
    */
   @added(Versions.v2026_05_01_preview)
@@ -1108,7 +1108,7 @@ model VolumeProperties {
   managedBy?: ManagedByInfo;
 
   /**
-   * Parent resource information.
+   * Information about Azure services owning the ElasticSan volume resource.
    */
   @added(Versions.v2026_05_01_preview)
   @encodedName("application/json", "managedBy")
@@ -1190,8 +1190,9 @@ model ManagedByInfo {
 }
 
 /**
- * Volume used by other Azure services.
+ * Information about Azure services owning the ElasticSan volume resource.
  */
+@added(Versions.v2026_05_01_preview)
 model ManagedByResources {
   /**
    * ClientId of the application managing the resource
@@ -1236,7 +1237,7 @@ model VolumeUpdateProperties {
   managedBy?: ManagedByInfo;
 
   /**
-   * Parent resource information.
+   * Information about Azure services owning the ElasticSan volume resource.
    */
   @added(Versions.v2026_05_01_preview)
   @encodedName("application/json", "managedBy")
