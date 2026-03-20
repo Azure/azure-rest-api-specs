@@ -3372,7 +3372,7 @@ model NetworkRuleSet {
   ipRules?: IPRule[];
 
   /**
-   * Sets the IPv6 ACL rules.
+   * Sets the IPv6 ACL rules.  IPv6 is not a publicly supported feature, do not attempt to read or write these values.
    */
   @identifiers(#[])
   ipv6Rules?: IPRule[];
@@ -3536,11 +3536,11 @@ model RoutingPreference {
 }
 
 /**
- * Dual-stack endpoint preference defines whether IPv6 endpoints are going to be published.
+ * Dual-stack endpoint preference defines whether IPv6 endpoints are going to be published.  IPv6 is not a publicly supported feature, do not attempt to read or write these values.
  */
 model DualStackEndpointPreference {
   /**
-   * A boolean flag which indicates whether IPv6 storage endpoints are to be published.
+   * A boolean flag which indicates whether IPv6 storage endpoints are to be published.  IPv6 is not a publicly supported feature, do not attempt to read or write these values.
    */
   publishIpv6Endpoint?: boolean;
 }
@@ -3948,7 +3948,7 @@ model Endpoints {
   internetEndpoints?: StorageAccountInternetEndpoints;
 
   /**
-   * Gets the IPv6 storage endpoints.
+   * Gets the IPv6 storage endpoints.  IPv6 is not a publicly supported feature, do not attempt to read or write these values.
    */
   ipv6Endpoints?: StorageAccountIpv6Endpoints;
 }
