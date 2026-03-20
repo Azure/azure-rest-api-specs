@@ -3372,12 +3372,6 @@ model NetworkRuleSet {
   ipRules?: IPRule[];
 
   /**
-   * Sets the IPv6 ACL rules.
-   */
-  @identifiers(#[])
-  ipv6Rules?: IPRule[];
-
-  /**
    * Specifies the default action of allow or deny when no other rules match.
    */
   defaultAction: DefaultAction = DefaultAction.Allow;
@@ -3533,16 +3527,6 @@ model RoutingPreference {
    * A boolean flag which indicates whether internet routing storage endpoints are to be published
    */
   publishInternetEndpoints?: boolean;
-}
-
-/**
- * Dual-stack endpoint preference defines whether IPv6 endpoints are going to be published.
- */
-model DualStackEndpointPreference {
-  /**
-   * A boolean flag which indicates whether IPv6 storage endpoints are to be published.
-   */
-  publishIpv6Endpoint?: boolean;
 }
 
 /**
@@ -3946,11 +3930,6 @@ model Endpoints {
    * Gets the internet routing storage endpoints
    */
   internetEndpoints?: StorageAccountInternetEndpoints;
-
-  /**
-   * Gets the IPv6 storage endpoints.
-   */
-  ipv6Endpoints?: StorageAccountIpv6Endpoints;
 }
 
 /**
@@ -4021,57 +4000,6 @@ model StorageAccountInternetEndpoints {
    */
   @visibility(Lifecycle.Read)
   dfs?: string;
-}
-
-/**
- * The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object via an IPv6 endpoint.
- */
-model StorageAccountIpv6Endpoints {
-  /**
-   * Gets the blob endpoint.
-   */
-  @visibility(Lifecycle.Read)
-  blob?: string;
-
-  /**
-   * Gets the queue endpoint.
-   */
-  @visibility(Lifecycle.Read)
-  queue?: string;
-
-  /**
-   * Gets the table endpoint.
-   */
-  @visibility(Lifecycle.Read)
-  table?: string;
-
-  /**
-   * Gets the file endpoint.
-   */
-  @visibility(Lifecycle.Read)
-  file?: string;
-
-  /**
-   * Gets the web endpoint.
-   */
-  @visibility(Lifecycle.Read)
-  web?: string;
-
-  /**
-   * Gets the dfs endpoint.
-   */
-  @visibility(Lifecycle.Read)
-  dfs?: string;
-
-  /**
-   * Gets the microsoft routing storage endpoints.
-   */
-  microsoftEndpoints?: StorageAccountMicrosoftEndpoints;
-
-  /**
-   * Gets the internet routing storage endpoints
-   */
-  internetEndpoints?: StorageAccountInternetEndpoints;
 }
 
 /**
