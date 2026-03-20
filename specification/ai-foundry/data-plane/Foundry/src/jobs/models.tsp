@@ -269,7 +269,7 @@ model CommandJob extends JobProperties {
   codeId?: string;
 
   @doc("Compute resource ID.")
-  computeId?: string;
+  computeId: string;
 
   @doc("Mapping of input data bindings used in the job.")
   inputs?: Record<JobInput>;
