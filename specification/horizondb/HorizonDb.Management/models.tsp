@@ -531,17 +531,6 @@ union PrivateLinkServiceConnectionStatus {
   Disconnected: "Disconnected",
 }
 
-@doc("Restart mode for parameter group")
-union RestartMode {
-  string,
-
-  /** Restart immediately */
-  Immediate: "Immediate",
-
-  /** Restart during maintenance window */
-  Maintenance: "Maintenance",
-}
-
 @doc("Properties of a HorizonDb parameter group")
 model HorizonDbParameterGroupProperties {
   @doc("Parameters in the parameter group")
@@ -553,17 +542,17 @@ model HorizonDbParameterGroupProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   description?: string;
 
-  @doc("Target version for the parameter group")
+  @doc("PostgreSQL version for the parameter group")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  targetVersion?: int32;
+  pgVersion?: int32;
 
   @doc("Current version of the parameter group")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   version?: int32;
 
-  @doc("Restart mode for applying parameters")
+  @doc("Indicates whether the parameters should be applied immediately")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  restartMode?: RestartMode;
+  applyImmediately?: boolean;
 
   @doc("The provisioning state of the parameter group")
   @visibility(Lifecycle.Read)
@@ -618,13 +607,9 @@ model HorizonDbParameterGroupPropertiesForPatchUpdate {
   @visibility(Lifecycle.Update)
   description?: string;
 
-  @doc("Current version of the parameter group")
+  @doc("Indicates whether the parameters should be applied immediately")
   @visibility(Lifecycle.Update)
-  version?: int32;
-
-  @doc("Restart mode for applying parameters")
-  @visibility(Lifecycle.Update)
-  restartMode?: RestartMode;
+  applyImmediately?: boolean;
 }
 
 @doc("HorizonDb parameter group for update operations")

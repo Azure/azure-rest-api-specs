@@ -2693,10 +2693,10 @@
             "create"
           ]
         },
-        "targetVersion": {
+        "pgVersion": {
           "type": "integer",
           "format": "int32",
-          "description": "Target version for the parameter group",
+          "description": "PostgreSQL version for the parameter group",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2706,15 +2706,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Current version of the parameter group",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         },
-        "restartMode": {
-          "$ref": "#/definitions/RestartMode",
-          "description": "Restart mode for applying parameters",
+        "applyImmediately": {
+          "type": "boolean",
+          "description": "Indicates whether the parameters should be applied immediately",
           "x-ms-mutability": [
             "read",
             "update",
@@ -2752,17 +2748,9 @@
             "update"
           ]
         },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Current version of the parameter group",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "restartMode": {
-          "$ref": "#/definitions/RestartMode",
-          "description": "Restart mode for applying parameters",
+        "applyImmediately": {
+          "type": "boolean",
+          "description": "Indicates whether the parameters should be applied immediately",
           "x-ms-mutability": [
             "update"
           ]
@@ -3330,30 +3318,6 @@
             "name": "ReadWrite",
             "value": "Read/Write",
             "description": "Read/write replica"
-          }
-        ]
-      }
-    },
-    "RestartMode": {
-      "type": "string",
-      "description": "Restart mode for parameter group",
-      "enum": [
-        "Immediate",
-        "Maintenance"
-      ],
-      "x-ms-enum": {
-        "name": "RestartMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Immediate",
-            "value": "Immediate",
-            "description": "Restart immediately"
-          },
-          {
-            "name": "Maintenance",
-            "value": "Maintenance",
-            "description": "Restart during maintenance window"
           }
         ]
       }
