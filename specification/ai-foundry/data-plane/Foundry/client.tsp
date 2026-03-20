@@ -253,8 +253,8 @@ using Azure.AI.Projects;
 // proprties there. But it does not seem to work I add @scope("!python") above `foundry_features`?
 // in alias WithConditionalFoundryPreviewHeader.
 //
-//@@access(AgentDefinitionOptInKeys, Access.internal, "python");
-//@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
+@@access(AgentDefinitionOptInKeys, Access.internal, "python");
+@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
 //@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
 //@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
 
