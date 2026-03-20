@@ -1,0 +1,1125 @@
+{
+  "info": {
+    "title": {
+      "__old": "Microsoft Defender for Cloud",
+      "__new": "SecurityCenter"
+    },
+    "description": {
+      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    }
+  },
+  "paths": {
+    "/{resourceId}/providers/microsoft.Security/assessments/{assessmentName}__deleted": {
+      "get": {
+        "operationId": "Assessments_Get",
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Get a security assessment on your scanned resource",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "links",
+              "metadata"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandEnum",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get security recommendation task from security data location": {
+            "$ref": "./examples/Assessments/GetAssessment_example.json"
+          },
+          "Get security recommendation task from security data location with expand parameter": {
+            "$ref": "./examples/Assessments/GetAssessmentWithExpand_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Assessments_CreateOrUpdate",
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Create a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assessment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentResponse"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create security recommendation task on a resource": {
+            "$ref": "./examples/Assessments/PutAssessment_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Assessments_Delete",
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Delete a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a security recommendation task on a resource": {
+            "$ref": "./examples/Assessments/DeleteAssessment_example.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Security/assessments/{assessmentName}__added": {
+      "get": {
+        "operationId": "Assessments_Get",
+        "tags": [
+          "SecurityAssessmentResponses"
+        ],
+        "description": "Get a security assessment on your scanned resource",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "links",
+              "metadata"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandEnum",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get security recommendation task from security data location": {
+            "$ref": "./examples/Assessments/GetAssessment_example.json"
+          },
+          "Get security recommendation task from security data location with expand parameter": {
+            "$ref": "./examples/Assessments/GetAssessmentWithExpand_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Assessments_CreateOrUpdate",
+        "tags": [
+          "SecurityAssessmentResponses"
+        ],
+        "description": "Create a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assessment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentResponse"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create security recommendation task on a resource": {
+            "$ref": "./examples/Assessments/PutAssessment_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Assessments_Delete",
+        "tags": [
+          "SecurityAssessmentResponses"
+        ],
+        "description": "Delete a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a security recommendation task on a resource": {
+            "$ref": "./examples/Assessments/DeleteAssessment_example.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Security/assessments": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "Assessments"
+          ],
+          [
+            "+",
+            "SecurityAssessmentResponses"
+          ]
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "./common/v1/types.json#/parameters/Scope",
+              "name__added": "scope",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "x-ms-skip-url-encoding__added": true
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/microsoft.Security/assessmentMetadata": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "Assessments Metadata"
+          ],
+          [
+            "+",
+            "SecurityAssessmentMetadataResponses"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/microsoft.Security/assessmentMetadata/{assessmentMetadataName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "Assessments Metadata"
+          ],
+          [
+            "+",
+            "SecurityAssessmentMetadataResponses"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/assessmentMetadata": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "Assessments Metadata"
+          ],
+          [
+            "+",
+            "AssessmentsMetadata"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/assessmentMetadata/{assessmentMetadataName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "Assessments Metadata"
+          ],
+          [
+            "+",
+            "AssessmentsMetadata"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "Assessments Metadata"
+          ],
+          [
+            "+",
+            "AssessmentsMetadata"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "Assessments Metadata"
+          ],
+          [
+            "+",
+            "AssessmentsMetadata"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EdgeIdentifiers__deleted": {
+      "type": "object",
+      "description": "Represents an edge in the path",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The source node of the edge"
+        },
+        "target": {
+          "type": "string",
+          "description": "The target node of the edge"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the edge"
+        }
+      },
+      "required": [
+        "source",
+        "target",
+        "type"
+      ]
+    },
+    "NodeIdentifier__deleted": {
+      "type": "object",
+      "description": "Represents a node in the path",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the node"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the node"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "Path__deleted": {
+      "type": "object",
+      "description": "Represents a path that composes the risk",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Path ID"
+        },
+        "nodes": {
+          "type": "array",
+          "description": "Path Nodes",
+          "items": {
+            "$ref": "#/definitions/NodeIdentifier"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "description": "Path Edges",
+          "items": {
+            "$ref": "#/definitions/EdgeIdentifiers"
+          }
+        }
+      },
+      "required": [
+        "edges",
+        "id",
+        "nodes"
+      ]
+    },
+    "attackPathsReferences__deleted": {
+      "type": "array",
+      "description": "The attack paths references of the risk",
+      "items": {
+        "type": "string"
+      }
+    },
+    "isContextualRisk__deleted": {
+      "type": "boolean",
+      "description": "Indicates if the risk is contextual or static"
+    },
+    "level__deleted": {
+      "$ref": "#/definitions/RiskLevel",
+      "description": "The risk level"
+    },
+    "paths__deleted": {
+      "type": "array",
+      "description": "The paths that compose the risk",
+      "items": {
+        "$ref": "#/definitions/Path"
+      }
+    },
+    "riskFactors__deleted": {
+      "type": "array",
+      "description": "The factors of the risk adding base factor",
+      "items": {
+        "type": "string"
+      }
+    },
+    "AzureResourceDetails__added": {
+      "type": "object",
+      "description": "Details of the Azure resource that was assessed",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource Id of the assessed resource",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Azure"
+    },
+    "Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems__added": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Edge identifier"
+        },
+        "targetId": {
+          "type": "string",
+          "description": "Target node identifier"
+        },
+        "sourceId": {
+          "type": "string",
+          "description": "Source node identifier"
+        }
+      },
+      "required": [
+        "id",
+        "sourceId",
+        "targetId"
+      ]
+    },
+    "OnPremiseResourceDetails__added": {
+      "type": "object",
+      "description": "Details of the On Premise resource that was assessed",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Discriminator property for OnPremiseResourceDetails."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "Azure resource Id of the workspace the machine is attached to"
+        },
+        "vmuuid": {
+          "type": "string",
+          "description": "The unique Id of the machine"
+        },
+        "sourceComputerId": {
+          "type": "string",
+          "description": "The oms agent Id installed on the machine"
+        },
+        "machineName": {
+          "type": "string",
+          "description": "The name of the machine"
+        }
+      },
+      "discriminator": "source",
+      "required": [
+        "machineName",
+        "source",
+        "sourceComputerId",
+        "vmuuid",
+        "workspaceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceDetails"
+        }
+      ]
+    },
+    "OnPremiseSqlResourceDetails__added": {
+      "type": "object",
+      "description": "Details of the On Premise Sql resource that was assessed",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "The Sql server name installed on the machine"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The Sql database name installed on the machine"
+        }
+      },
+      "required": [
+        "databaseName",
+        "serverName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnPremiseResourceDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "OnPremiseSql"
+    },
+    "Resource__added": {
+      "type": "object",
+      "description": "Describes an Azure resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceDetails__added": {
+      "type": "object",
+      "description": "Details of the resource that was assessed",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The platform where the assessed resource resides",
+          "enum": [
+            "Azure",
+            "OnPremise",
+            "OnPremiseSql"
+          ],
+          "x-ms-enum": {
+            "name": "Source",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "source",
+      "required": [
+        "source"
+      ]
+    },
+    "SecurityAssessmentMetadataPropertiesResponsePublishDates__added": {
+      "type": "object",
+      "properties": {
+        "GA": {
+          "type": "string",
+          "pattern": "^([0-9]{2}/){2}[0-9]{4}$"
+        },
+        "public": {
+          "type": "string",
+          "pattern": "^([0-9]{2}/){2}[0-9]{4}$"
+        }
+      },
+      "required": [
+        "public"
+      ]
+    },
+    "SecurityAssessmentPropertiesBaseRisk__added": {
+      "type": "object",
+      "description": "External model of risk result",
+      "properties": {
+        "riskFactors": {
+          "type": "array",
+          "description": "The factors of the risk adding base factor",
+          "items": {
+            "type": "string"
+          }
+        },
+        "level": {
+          "type": "string",
+          "description": "The risk level",
+          "enum": [
+            "None",
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ],
+          "x-ms-enum": {
+            "name": "RiskLevel",
+            "modelAsString": true
+          }
+        },
+        "attackPathsReferences": {
+          "type": "array",
+          "description": "The attack paths references of the risk",
+          "items": {
+            "type": "string"
+          }
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityAssessmentPropertiesBaseRiskPathsItem"
+          }
+        },
+        "isContextualRisk": {
+          "type": "boolean",
+          "description": "Indicates if the risk is contextual or static"
+        }
+      }
+    },
+    "SecurityAssessmentPropertiesBaseRiskPathsItem__added": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the path"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "description": "Connections between nodes",
+          "items": {
+            "$ref": "#/definitions/Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems"
+          }
+        }
+      }
+    },
+    "SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem__added": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Node identifier"
+        },
+        "nodePropertiesLabel": {
+          "type": "array",
+          "description": "Properties associated with the node",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AssessmentLinks": {
+      "readOnly__deleted": true
+    },
+    "SecurityAssessment": {
+      "properties": {
+        "properties": {
+          "description__added": "Describes properties of an assessment."
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "#/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    },
+    "SecurityAssessmentList": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "SecurityAssessmentMetadata": {
+      "properties": {
+        "properties": {
+          "description__added": "Describes properties of an assessment metadata."
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "#/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    },
+    "SecurityAssessmentMetadataPartnerData": {
+      "properties": {
+        "secret": {
+          "x-ms-secret__deleted": true
+        }
+      }
+    },
+    "SecurityAssessmentMetadataProperties": {
+      "properties": {
+        "partnerData": {
+          "description__added": "Describes the partner that created the assessment"
+        }
+      }
+    },
+    "SecurityAssessmentMetadataPropertiesResponse": {
+      "properties": {
+        "publishDates": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "GA": {
+              "type": "string",
+              "pattern": "^([0-9]{2}/){2}[0-9]{4}$"
+            },
+            "public": {
+              "type": "string",
+              "pattern": "^([0-9]{2}/){2}[0-9]{4}$"
+            }
+          },
+          "required__deleted": [
+            "public"
+          ],
+          "$ref__added": "#/definitions/SecurityAssessmentMetadataPropertiesResponsePublishDates"
+        }
+      }
+    },
+    "SecurityAssessmentMetadataResponse": {
+      "properties": {
+        "properties": {
+          "description__added": "Describes properties of an assessment metadata response."
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "SecurityAssessmentMetadataResponseList": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "SecurityAssessmentPartnerData": {
+      "properties": {
+        "secret": {
+          "x-ms-secret__deleted": true
+        }
+      }
+    },
+    "SecurityAssessmentProperties": {
+      "properties": {
+        "status": {
+          "description__added": "The result of the assessment"
+        }
+      }
+    },
+    "SecurityAssessmentPropertiesBase": {
+      "properties": {
+        "risk": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "riskFactors": {
+              "type": "array",
+              "description": "The factors of the risk adding base factor",
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "level": {
+              "type": "string",
+              "description": "The risk level",
+              "enum": [
+                "Low",
+                "Medium",
+                "High",
+                "Critical"
+              ],
+              "x-ms-enum": {
+                "name": "RiskLevel",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Low",
+                    "description": "Low risk"
+                  },
+                  {
+                    "value": "Medium",
+                    "description": "Medium risk"
+                  },
+                  {
+                    "value": "High",
+                    "description": "High risk"
+                  },
+                  {
+                    "value": "Critical",
+                    "description": "Critical risk"
+                  }
+                ]
+              }
+            },
+            "attackPathsReferences": {
+              "type": "array",
+              "description": "The attack paths references of the risk",
+              "items": {
+                "type": "string"
+              }
+            },
+            "paths": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Unique identifier for the path"
+                  },
+                  "nodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Node identifier"
+                        },
+                        "nodePropertiesLabel": {
+                          "type": "array",
+                          "description": "Properties associated with the node",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "edges": {
+                    "type": "array",
+                    "description": "Connections between nodes",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Edge identifier"
+                        },
+                        "targetId": {
+                          "type": "string",
+                          "description": "Target node identifier"
+                        },
+                        "sourceId": {
+                          "type": "string",
+                          "description": "Source node identifier"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "targetId",
+                        "sourceId"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "isContextualRisk": {
+              "type": "boolean",
+              "description": "Indicates if the risk is contextual or static"
+            }
+          },
+          "$ref__added": "#/definitions/SecurityAssessmentPropertiesBaseRisk"
+        },
+        "resourceDetails": {
+          "description__added": "Details of the resource that was assessed",
+          "$ref": {
+            "__old": "./common/v1/types.json#/definitions/ResourceDetails",
+            "__new": "#/definitions/ResourceDetails"
+          }
+        },
+        "links": {
+          "description__added": "Links relevant to the assessment",
+          "readOnly__added": true
+        },
+        "metadata": {
+          "description__added": "Describes properties of an assessment metadata.",
+          "$ref": {
+            "__old": "./assessmentMetadata.json#/definitions/SecurityAssessmentMetadataProperties",
+            "__new": "#/definitions/SecurityAssessmentMetadataProperties"
+          }
+        },
+        "partnersData": {
+          "description__added": "Data regarding 3rd party partner integration"
+        }
+      }
+    },
+    "SecurityAssessmentPropertiesResponse": {
+      "properties": {
+        "status": {
+          "description__added": "The result of the assessment"
+        }
+      }
+    },
+    "SecurityAssessmentResponse": {
+      "properties": {
+        "properties": {
+          "description__added": "Describes properties of an assessment."
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}

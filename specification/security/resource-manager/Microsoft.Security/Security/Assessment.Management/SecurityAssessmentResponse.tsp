@@ -72,13 +72,6 @@ interface SecurityAssessmentResponses {
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     SecurityAssessmentResponse,
-    Parameters = {
-      /**
-       * Scope of the query, can be subscription (/subscriptions/0b06d9ea-afe6-4779-bd59-30e5c2d9d13f) or management group (/providers/Microsoft.Management/managementGroups/mgName).
-       */
-      @path
-      scope: string;
-    },
     Response = ArmResponse<SecurityAssessmentList>
   >;
 }
