@@ -266,6 +266,7 @@ interface Share {
       provisionedEgressMBps?: int32;
 
       /** The next allowed quota downgrade time. */
+      @encode("rfc7231")
       @header("x-ms-share-next-allowed-quota-downgrade-time")
       nextAllowedQuotaDowngradeTime?: utcDateTime;
 
@@ -298,10 +299,12 @@ interface Share {
       ...PaidBurstingResponseHeaders;
 
       /** The next allowed provisioned IOPS downgrade time. */
+      @encode("rfc7231")
       @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
       nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
 
       /** The next allowed provisioned bandwidth downgrade time. */
+      @encode("rfc7231")
       @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time")
       nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
 
@@ -581,14 +584,17 @@ interface Share {
       maxBurstCreditsForIops?: int64;
 
       /** Approximate time remaining in the share's existing downgrade request. */
+      @encode("rfc7231")
       @header("x-ms-share-next-allowed-quota-downgrade-time")
       nextAllowedQuotaDowngradeTime?: utcDateTime;
 
       /** Approximate time remaining in the share's existing provisioned IOPS downgrade request. */
+      @encode("rfc7231")
       @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
       nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
 
       /** Approximate time remaining in the share's existing provisioned bandwidth downgrade request. */
+      @encode("rfc7231")
       @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time")
       nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
     }

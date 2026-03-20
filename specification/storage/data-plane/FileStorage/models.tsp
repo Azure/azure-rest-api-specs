@@ -831,24 +831,29 @@ model FileProperty {
   @Xml.name("Content-Length") contentLength: int64;
 
   /** The creation time. */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("CreationTime") creationTime?: utcDateTime;
+  @encode("rfc7231")
+  @Xml.name("CreationTime")
+  creationTime?: utcDateTime;
 
   /** The last access time. */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("LastAccessTime") lastAccessTime?: utcDateTime;
+  @encode("rfc7231")
+  @Xml.name("LastAccessTime")
+  lastAccessTime?: utcDateTime;
 
   /** The last write time. */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("LastWriteTime") lastWriteTime?: utcDateTime;
+  @encode("rfc7231")
+  @Xml.name("LastWriteTime")
+  lastWriteTime?: utcDateTime;
 
   /** The change time. */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("ChangeTime") changeTime?: utcDateTime;
+  @encode("rfc7231")
+  @Xml.name("ChangeTime")
+  changeTime?: utcDateTime;
 
   /** The last modified time. */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("Last-Modified") lastModified?: utcDateTime;
+  @encode("rfc7231")
+  @Xml.name("Last-Modified")
+  lastModified?: utcDateTime;
 
   /** The ETag of the file. */
   @Xml.name("Etag") eTag?: Azure.Core.eTag;
@@ -919,14 +924,16 @@ model HandleItem {
    * Time when the session that previously opened the handle has last been
    * reconnected. (UTC)
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("OpenTime") openTime: utcDateTime;
+  @encode("rfc7231")
+  @Xml.name("OpenTime")
+  openTime: utcDateTime;
 
   /**
    * Time handle was last connected to (UTC)
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("LastReconnectTime") lastReconnectTime?: utcDateTime;
+  @encode("rfc7231")
+  @Xml.name("LastReconnectTime")
+  lastReconnectTime?: utcDateTime;
 
   /** The access rights. */
   @Xml.name("AccessRightList") accessRightList?: AccessRight[];
@@ -1065,8 +1072,9 @@ model ShareItemInternal {
  */
 model SharePropertiesInternal {
   /** The last modified time. */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("Last-Modified") lastModified: utcDateTime;
+  @encode("rfc7231")
+  @Xml.name("Last-Modified")
+  lastModified: utcDateTime;
 
   /** The ETag of the share. */
   @Xml.name("Etag") eTag: Azure.Core.eTag;
@@ -1089,13 +1097,14 @@ model SharePropertiesInternal {
   @Xml.name("ProvisionedBandwidthMiBps") provisionedBandwidthMiBps?: int32;
 
   /** The next allowed quota downgrade time. */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   @Xml.name("NextAllowedQuotaDowngradeTime")
   nextAllowedQuotaDowngradeTime?: utcDateTime;
 
   /** The deleted time. */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("DeletedTime") deletedTime?: utcDateTime;
+  @encode("rfc7231")
+  @Xml.name("DeletedTime")
+  deletedTime?: utcDateTime;
 
   /** The remaining retention days. */
   @Xml.name("RemainingRetentionDays") remainingRetentionDays?: int32;
@@ -1104,8 +1113,9 @@ model SharePropertiesInternal {
   @Xml.name("AccessTier") accessTier?: string;
 
   /** The access tier change time. */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("AccessTierChangeTime") accessTierChangeTime?: utcDateTime;
+  @encode("rfc7231")
+  @Xml.name("AccessTierChangeTime")
+  accessTierChangeTime?: utcDateTime;
 
   /** The access tier transition state. */
   @Xml.name("AccessTierTransitionState") accessTierTransitionState?: string;
@@ -1153,12 +1163,12 @@ model SharePropertiesInternal {
   @Xml.name("MaxBurstCreditsForIops") maxBurstCreditsForIops?: int64;
 
   /** The next allowed provisioned IOPS downgrade time. */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   @Xml.name("NextAllowedProvisionedIopsDowngradeTime")
   nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
 
   /** The next allowed provisioned bandwidth downgrade time. */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   @Xml.name("NextAllowedProvisionedBandwidthDowngradeTime")
   nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
 
@@ -1477,14 +1487,16 @@ model UserDelegationKey {
   /**
    * The date-time the key is active
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("SignedStart") signedStart: utcDateTime;
+  @encode("rfc7231")
+  @Xml.name("SignedStart")
+  signedStart: utcDateTime;
 
   /**
    * The date-time the key expires
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("SignedExpiry") signedExpiry: utcDateTime;
+  @encode("rfc7231")
+  @Xml.name("SignedExpiry")
+  signedExpiry: utcDateTime;
 
   /**
    * Abbreviation of the Azure Storage service that accepts the key
