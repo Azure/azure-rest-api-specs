@@ -144,10 +144,6 @@ using Microsoft.SignalRService;
   "WebPubSubSharedPrivateLinkStatus",
   "csharp"
 );
-@@clientName(SharedPrivateLinkResources,
-  "WebPubSubReplicaSharedPrivateLinkResources",
-  "csharp"
-);
 @@clientName(UsagesOperationGroup.list, "GetUsages", "csharp");
 @@clientName(Sku, "WebPubSubSku", "csharp");
 @@alternateType(Sku.resourceType, armResourceType, "csharp");
