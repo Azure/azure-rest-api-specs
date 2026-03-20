@@ -1990,6 +1990,7 @@
       "description": "Defines the list of available Assessment List and SurveyList",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ServicesHubAssessmentSurveyResultProperties",
           "description": "Defines the properties."
         }
@@ -2365,6 +2366,7 @@
       "description": "Defines the Result for offline download of Assessment Report.",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/OfflineDownloadResultProperties",
           "description": "Defines properties."
         }
@@ -2375,15 +2377,18 @@
       "description": "Defines the properties for offline download of Assessment Report.",
       "properties": {
         "fileName": {
+          "readOnly": true,
           "type": "string",
           "description": "Defines the name of the file."
         },
         "downloadUrl": {
+          "readOnly": true,
           "type": "string",
           "format": "uri",
           "description": "The URL to download the file."
         },
         "expiresAt": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Expiry time for the download URL in format: YYYY-MM-DDTHH:MM:SSZ"
