@@ -39,9 +39,9 @@ interface QueueClient extends Storage.Queues.Queue {}
   "rust"
 );
 
-@@clientNamespace(Storage.Queues, "Azure.Storage.Queues", "!python");
-@@clientNamespace(Storage.Queues.Service, "Azure.Storage.Queues", "!python");
-@@clientNamespace(Storage.Queues.Queue, "Azure.Storage.Queues", "!python");
+@@clientNamespace(Storage.Queues, "Azure.Storage.Queues", "!python, !csharp");
+@@clientNamespace(Storage.Queues.Service, "Azure.Storage.Queues", "!python, !csharp");
+@@clientNamespace(Storage.Queues.Queue, "Azure.Storage.Queues", "!python, !csharp");
 
 @@clientName(Storage.Queues.MetadataHeaders.metadata, "metadata", "rust");
 @@clientName(Storage.Queues.SentMessage, "SentMessageInternal", "rust");
@@ -215,7 +215,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@clientOption(Storage.Queues, "includeRootSlash", false, "python,javascript");
 
-@@Legacy.disablePageable(Storage.Queues.Service.getQueues, "python,javascript");
+@@Legacy.disablePageable(Storage.Queues.Service.getQueues, "python,javascript,csharp");
 
 @@alternateType(Storage.Queues.UserDelegationKey.signedExpiry,
   string,
@@ -276,3 +276,52 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 >;
 
 @@override(Queue.setMetadata, setMetadataRequiredMetadataQueue, "rust");
+
+// csharp customizations
+@@alternateType(AccessPolicy.start, utcDateTime, "csharp");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "csharp");
+@@alternateType(MetadataHeaders.metadata, Record<string>, "csharp");
+@@alternateType(ListQueuesIncludeType, string, "csharp");
+@@alternateType(KeyInfo.start, string, "csharp");
+@@alternateType(KeyInfo.expiry, string, "csharp");
+
+@@clientName(Storage.Queues, "QueueClient", "csharp");
+@@clientName(AccessPolicy, "QueueAccessPolicy", "csharp");
+@@clientName(AccessPolicy.start, "StartsOn", "csharp");
+@@clientName(AccessPolicy.expiry, "ExpiresOn", "csharp");
+@@clientName(AccessPolicy.permission, "Permissions", "csharp");
+@@clientName(Service, "ServiceRestClient", "csharp");
+@@clientName(Queue, "QueueRestClient", "csharp");
+@@clientName(GeoReplication, "QueueGeoReplication", "csharp");
+@@clientName(GeoReplicationStatus, "QueueGeoReplicationStatus", "csharp");
+@@clientName(QueueServiceStats, "QueueServiceStatistics", "csharp");
+@@clientName(SentMessage, "SendReceipt", "csharp");
+@@clientName(StorageErrorCode, "QueueErrorCode", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.receiveMessages, "Dequeue", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.sendMessage, "Enqueue", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.peekMessages, "Peek", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.updateMessage, "Update", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.deleteMessage, "Delete", "csharp");
+@@clientName(Service.getQueues, "GetQueuesSegment", "csharp");
+@@clientName(CorsRule, "QueueCorsRule", "csharp");
+@@clientName(Metrics, "QueueMetrics", "csharp");
+@@clientName(RetentionPolicy, "QueueRetentionPolicy", "csharp");
+@@clientName(Logging, "QueueAnalyticsLogging", "csharp");
+@@clientName(SignedIdentifier, "QueueSignedIdentifier", "csharp");
+@@clientName(SignedIdentifiers, "QueueSignedIdentifiers", "csharp");
+
+
+@@clientLocation(Queue.receiveMessages, "MessagesRestClient", "csharp");
+@@clientLocation(Queue.sendMessage, "MessagesRestClient", "csharp");
+@@clientLocation(Queue.peekMessages, "MessagesRestClient", "csharp");
+@@clientLocation(Queue.clear, "MessagesRestClient", "csharp");
+@@clientLocation(Queue.updateMessage, "MessageIdRestClient", "csharp");
+@@clientLocation(Queue.deleteMessage, "MessageIdRestClient", "csharp");
+
+@@clientOption(MetadataHeaders.metadata, "collectionHeaderPrefix", "x-ms-meta-", "csharp");
+@@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "csharp");
