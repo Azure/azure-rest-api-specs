@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Storage.Queues;
 
 namespace Customizations;
 
@@ -52,6 +53,10 @@ interface QueueClient extends Storage.Queues.Queue {}
 );
 
 @@scope(Storage.Queues.Service.getUserDelegationKey, "!rust");
+
+// Go customizations
+@@alternateType(AccessPolicy.start, utcDateTime, "go");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "go");
 
 // JavaScript SDK renames - based on azure-sdk-for-js storage-queue swagger README
 

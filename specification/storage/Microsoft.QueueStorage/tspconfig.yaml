@@ -33,9 +33,11 @@ options:
     namespace: "com.azure.storage.queue"
     flavor: azure
   "@azure-tools/typespec-go":
-    emitter-output-dir: "{output-dir}/{service-dir}/azqueue"
-    module: "github.com/Azure/azure-sdk-for-go/sdk/storage/azqueue"
-    flavor: azure
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/storage/azqueue"
+    service-dir: "sdk/storage"
+    emitter-output-dir: "{output-dir}/{service-dir}/azqueue/internal/generated"
+    generate-fakes: false
+    omit-constructors: true
   "@azure-tools/typespec-rust":
     package-dir: "azure_storage_queue"
     crate-name: "azure_storage_queue"

@@ -665,7 +665,7 @@ alias TimeNextVisibleResponseHeaderPrivate = {
 /** The metadata headers parameter (required). */
 alias MetadataHeadersParameter = {
   /** The metadata headers. */
-  @alternateType(Record<string>, "rust")
+  @alternateType(Record<string>, "rust,go")
   @header("x-ms-meta")
   metadata: string;
 };
@@ -673,7 +673,7 @@ alias MetadataHeadersParameter = {
 /** The metadata headers. */
 alias MetadataHeaders = {
   /** The metadata headers. */
-  @alternateType(Record<string>, "rust")
+  @alternateType(Record<string>, "rust,go")
   @header("x-ms-meta")
   metadata?: string;
 };
