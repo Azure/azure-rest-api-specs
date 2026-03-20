@@ -572,3 +572,8 @@ namespace CombineClient;
   "ManagementClient",
   "go"
 );
+@@clientName(Microsoft.Network.NetworkProvisioningState,
+  "ArmProvisioningState",
+  "go"
+);
+@@clientName(Microsoft.Network.NetworkProtocol, "ArmNetworkProtocol", "go");
