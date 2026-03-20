@@ -11,7 +11,7 @@
 | `definitions.IoTSecuritySolutionAnalyticsModelProperties.properties.topAlertedDevices.$ref__deleted` | deleted | `#/definitions/IoTSecurityAlertedDevicesList` |
 | `definitions.IoTSecuritySolutionProperties.properties.recommendationsConfiguration.$ref__deleted` | deleted | `#/definitions/RecommendationConfigurationList` |
 | `definitions.UpdateIoTSecuritySolutionProperties.properties.recommendationsConfiguration.$ref__deleted` | deleted | `#/definitions/RecommendationConfigurationList` |
-| `definitions.UserDefinedResourcesProperties.properties.querySubscriptions.items.$ref__added` | added | `#/definitions/UserDefinedResourcesPropertiesConstraintedStr` |
+| `definitions.UserDefinedResourcesProperties.properties.querySubscriptions.items.$ref__added` | added | `#/definitions/UserDefinedResourcesPropertiesConstrainedString` |
 | `paths['/{resourceId}/providers/microsoft.Security/deviceSecurityGroups'].get.parameters[0].$ref__deleted` | deleted | `./common/v1/types.json#/parameters/ResourceId` |
 
 ### Changes for `name`
@@ -31,7 +31,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.DeviceSecurityGroupList.required__added` | added | `["value"]` |
-| `definitions.ListCustomAlertRule.required__added` | added | `["ruleType"]` |
 | `paths['/{resourceId}/providers/microsoft.Security/deviceSecurityGroups'].get.parameters[0].required__added` | added | `true` |
 
 ### Changes for `type`
@@ -108,11 +107,11 @@
 |------|------------|-------|
 | `definitions.IoTSecuritySolutionAnalyticsModelPropertiesDevicesMetricsItem__added` | added | `{"type":"object","properties":{"date":{"type":"string","format":"date-time","description":"Aggregati...` |
 
-### Changes for `UserDefinedResourcesPropertiesConstraintedStr`
+### Changes for `UserDefinedResourcesPropertiesConstrainedString`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.UserDefinedResourcesPropertiesConstraintedStr__added` | added | `{"type":"string","pattern":"^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"}` |
+| `definitions.UserDefinedResourcesPropertiesConstrainedString__added` | added | `{"type":"string","pattern":"^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"}` |
 
 ### Changes for `properties`
 
@@ -146,44 +145,28 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ActiveConnectionsNotInAllowedRange['x-ms-discriminator-value__added']` | added | `ActiveConnectionsNotInAllowedRange` |
+| `definitions.AllowlistCustomAlertRule['x-ms-discriminator-value__added']` | added | `ListCustomAlertRule` |
 | `definitions.AmqpC2DMessagesNotInAllowedRange['x-ms-discriminator-value__added']` | added | `AmqpC2DMessagesNotInAllowedRange` |
 | `definitions.AmqpC2DRejectedMessagesNotInAllowedRange['x-ms-discriminator-value__added']` | added | `AmqpC2DRejectedMessagesNotInAllowedRange` |
 | `definitions.AmqpD2CMessagesNotInAllowedRange['x-ms-discriminator-value__added']` | added | `AmqpD2CMessagesNotInAllowedRange` |
-| `definitions.ConnectionFromIpNotAllowed['x-ms-discriminator-value__added']` | added | `ConnectionFromIpNotAllowed` |
-| `definitions.ConnectionToIpNotAllowed['x-ms-discriminator-value__added']` | added | `ConnectionToIpNotAllowed` |
-| `definitions.DenylistCustomAlertRule['x-ms-discriminator-value__added']` | added | `DenylistCustomAlertRule` |
+| `definitions.ConnectionFromIpNotAllowed['x-ms-discriminator-value__added']` | added | `ListCustomAlertRule` |
+| `definitions.ConnectionToIpNotAllowed['x-ms-discriminator-value__added']` | added | `ListCustomAlertRule` |
+| `definitions.DenylistCustomAlertRule['x-ms-discriminator-value__added']` | added | `ListCustomAlertRule` |
 | `definitions.DirectMethodInvokesNotInAllowedRange['x-ms-discriminator-value__added']` | added | `DirectMethodInvokesNotInAllowedRange` |
 | `definitions.FailedLocalLoginsNotInAllowedRange['x-ms-discriminator-value__added']` | added | `FailedLocalLoginsNotInAllowedRange` |
 | `definitions.FileUploadsNotInAllowedRange['x-ms-discriminator-value__added']` | added | `FileUploadsNotInAllowedRange` |
 | `definitions.HttpC2DMessagesNotInAllowedRange['x-ms-discriminator-value__added']` | added | `HttpC2DMessagesNotInAllowedRange` |
 | `definitions.HttpC2DRejectedMessagesNotInAllowedRange['x-ms-discriminator-value__added']` | added | `HttpC2DRejectedMessagesNotInAllowedRange` |
 | `definitions.HttpD2CMessagesNotInAllowedRange['x-ms-discriminator-value__added']` | added | `HttpD2CMessagesNotInAllowedRange` |
-| `definitions.LocalUserNotAllowed['x-ms-discriminator-value__added']` | added | `LocalUserNotAllowed` |
+| `definitions.ListCustomAlertRule['x-ms-discriminator-value__added']` | added | `ListCustomAlertRule` |
+| `definitions.LocalUserNotAllowed['x-ms-discriminator-value__added']` | added | `ListCustomAlertRule` |
 | `definitions.MqttC2DMessagesNotInAllowedRange['x-ms-discriminator-value__added']` | added | `MqttC2DMessagesNotInAllowedRange` |
 | `definitions.MqttC2DRejectedMessagesNotInAllowedRange['x-ms-discriminator-value__added']` | added | `MqttC2DRejectedMessagesNotInAllowedRange` |
 | `definitions.MqttD2CMessagesNotInAllowedRange['x-ms-discriminator-value__added']` | added | `MqttD2CMessagesNotInAllowedRange` |
-| `definitions.ProcessNotAllowed['x-ms-discriminator-value__added']` | added | `ProcessNotAllowed` |
+| `definitions.ProcessNotAllowed['x-ms-discriminator-value__added']` | added | `ListCustomAlertRule` |
 | `definitions.QueuePurgesNotInAllowedRange['x-ms-discriminator-value__added']` | added | `QueuePurgesNotInAllowedRange` |
 | `definitions.TwinUpdatesNotInAllowedRange['x-ms-discriminator-value__added']` | added | `TwinUpdatesNotInAllowedRange` |
 | `definitions.UnauthorizedOperationsNotInAllowedRange['x-ms-discriminator-value__added']` | added | `UnauthorizedOperationsNotInAllowedRange` |
-
-### Changes for `discriminator`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AllowlistCustomAlertRule.discriminator__added` | added | `ruleType` |
-| `definitions.ListCustomAlertRule.discriminator__added` | added | `ruleType` |
-| `definitions.ThresholdCustomAlertRule.discriminator__added` | added | `ruleType` |
-| `definitions.TimeWindowCustomAlertRule.discriminator__added` | added | `ruleType` |
-
-### Changes for `ruleType`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AllowlistCustomAlertRule.properties.ruleType__added` | added | `{"type":"string","description":"Discriminator property for AllowlistCustomAlertRule."}` |
-| `definitions.ListCustomAlertRule.properties.ruleType__added` | added | `{"type":"string","description":"Discriminator property for ListCustomAlertRule."}` |
-| `definitions.ThresholdCustomAlertRule.properties.ruleType__added` | added | `{"type":"string","description":"Discriminator property for ThresholdCustomAlertRule."}` |
-| `definitions.TimeWindowCustomAlertRule.properties.ruleType__added` | added | `{"type":"string","description":"Discriminator property for TimeWindowCustomAlertRule."}` |
 
 ### Changes for `readOnly`
 
@@ -229,6 +212,20 @@
 | `definitions.IoTSecuritySolutionProperties.properties.userDefinedResources.description__added` | added | `Properties of the IoT Security solution's user defined resources.` |
 | `definitions.UpdateIoTSecuritySolutionProperties.properties.recommendationsConfiguration.description__added` | added | `List of the configuration status for each recommendation type.` |
 | `definitions.UpdateIoTSecuritySolutionProperties.properties.userDefinedResources.description__added` | added | `Properties of the IoT Security solution's user defined resources.` |
+
+### Changes for `discriminator`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ThresholdCustomAlertRule.discriminator__added` | added | `ruleType` |
+| `definitions.TimeWindowCustomAlertRule.discriminator__added` | added | `ruleType` |
+
+### Changes for `ruleType`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ThresholdCustomAlertRule.properties.ruleType__added` | added | `{"type":"string","description":"Discriminator property for ThresholdCustomAlertRule."}` |
+| `definitions.TimeWindowCustomAlertRule.properties.ruleType__added` | added | `{"type":"string","description":"Discriminator property for TimeWindowCustomAlertRule."}` |
 
 ### Changes for `pattern`
 

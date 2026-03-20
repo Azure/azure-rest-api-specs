@@ -437,7 +437,7 @@
         }
       }
     },
-    "UserDefinedResourcesPropertiesConstraintedStr__added": {
+    "UserDefinedResourcesPropertiesConstrainedString__added": {
       "type": "string",
       "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
     },
@@ -446,22 +446,7 @@
       "x-ms-discriminator-value__added": "ActiveConnectionsNotInAllowedRange"
     },
     "AllowlistCustomAlertRule": {
-      "discriminator__added": "ruleType",
-      "properties": {
-        "ruleType__added": {
-          "type": "string",
-          "description": "Discriminator property for AllowlistCustomAlertRule."
-        }
-      },
-      "required": [
-        [
-          " "
-        ],
-        [
-          "+",
-          "ruleType"
-        ]
-      ]
+      "x-ms-discriminator-value__added": "ListCustomAlertRule"
     },
     "AmqpC2DMessagesNotInAllowedRange": {
       "properties__deleted": {},
@@ -477,14 +462,14 @@
     },
     "ConnectionFromIpNotAllowed": {
       "properties__deleted": {},
-      "x-ms-discriminator-value__added": "ConnectionFromIpNotAllowed"
+      "x-ms-discriminator-value__added": "ListCustomAlertRule"
     },
     "ConnectionToIpNotAllowed": {
       "properties__deleted": {},
-      "x-ms-discriminator-value__added": "ConnectionToIpNotAllowed"
+      "x-ms-discriminator-value__added": "ListCustomAlertRule"
     },
     "DenylistCustomAlertRule": {
-      "x-ms-discriminator-value__added": "DenylistCustomAlertRule"
+      "x-ms-discriminator-value__added": "ListCustomAlertRule"
     },
     "DeviceSecurityGroup": {
       "allOf": [
@@ -793,20 +778,11 @@
       }
     },
     "ListCustomAlertRule": {
-      "discriminator__added": "ruleType",
-      "required__added": [
-        "ruleType"
-      ],
-      "properties": {
-        "ruleType__added": {
-          "type": "string",
-          "description": "Discriminator property for ListCustomAlertRule."
-        }
-      }
+      "x-ms-discriminator-value__added": "ListCustomAlertRule"
     },
     "LocalUserNotAllowed": {
       "properties__deleted": {},
-      "x-ms-discriminator-value__added": "LocalUserNotAllowed"
+      "x-ms-discriminator-value__added": "ListCustomAlertRule"
     },
     "MqttC2DMessagesNotInAllowedRange": {
       "properties__deleted": {},
@@ -822,7 +798,7 @@
     },
     "ProcessNotAllowed": {
       "properties__deleted": {},
-      "x-ms-discriminator-value__added": "ProcessNotAllowed"
+      "x-ms-discriminator-value__added": "ListCustomAlertRule"
     },
     "QueuePurgesNotInAllowedRange": {
       "properties__deleted": {},
@@ -896,7 +872,7 @@
           "items": {
             "type__deleted": "string",
             "pattern__deleted": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-            "$ref__added": "#/definitions/UserDefinedResourcesPropertiesConstraintedStr"
+            "$ref__added": "#/definitions/UserDefinedResourcesPropertiesConstrainedString"
           }
         }
       }

@@ -357,7 +357,6 @@ model TimeWindowCustomAlertRule extends ThresholdCustomAlertRule {
 /**
  * A custom alert rule that checks if a value (depends on the custom alert type) is allowed.
  */
-@discriminator("ruleType")
 model AllowlistCustomAlertRule extends ListCustomAlertRule {
   /**
    * The values to allow. The format of the values depends on the rule type.
@@ -368,13 +367,14 @@ model AllowlistCustomAlertRule extends ListCustomAlertRule {
 /**
  * A List custom alert rule.
  */
-@discriminator("ruleType")
 model ListCustomAlertRule extends CustomAlertRule {
   /**
    * The value type of the items in the list.
    */
   @visibility(Lifecycle.Read)
   valueType?: ValueType;
+
+  ruleType: "ListCustomAlertRule";
 }
 
 /**
@@ -385,11 +385,6 @@ model DenylistCustomAlertRule extends ListCustomAlertRule {
    * The values to deny. The format of the values depends on the rule type.
    */
   denylistValues: string[];
-
-  /**
-   * The type of the custom alert rule.
-   */
-  ruleType: "DenylistCustomAlertRule";
 }
 
 /**
@@ -969,42 +964,22 @@ model UpdateIoTSecuritySolutionProperties {
 /**
  * Outbound connection to an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation.
  */
-model ConnectionToIpNotAllowed extends AllowlistCustomAlertRule {
-  /**
-   * The type of the custom alert rule.
-   */
-  ruleType: "ConnectionToIpNotAllowed";
-}
+model ConnectionToIpNotAllowed extends AllowlistCustomAlertRule {}
 
 /**
  * Inbound connection from an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation.
  */
-model ConnectionFromIpNotAllowed extends AllowlistCustomAlertRule {
-  /**
-   * The type of the custom alert rule.
-   */
-  ruleType: "ConnectionFromIpNotAllowed";
-}
+model ConnectionFromIpNotAllowed extends AllowlistCustomAlertRule {}
 
 /**
  * Login by a local user that isn't allowed. Allow list consists of login names to allow.
  */
-model LocalUserNotAllowed extends AllowlistCustomAlertRule {
-  /**
-   * The type of the custom alert rule.
-   */
-  ruleType: "LocalUserNotAllowed";
-}
+model LocalUserNotAllowed extends AllowlistCustomAlertRule {}
 
 /**
  * Execution of a process that isn't allowed. Allow list consists of process names to allow.
  */
-model ProcessNotAllowed extends AllowlistCustomAlertRule {
-  /**
-   * The type of the custom alert rule.
-   */
-  ruleType: "ProcessNotAllowed";
-}
+model ProcessNotAllowed extends AllowlistCustomAlertRule {}
 
 /**
  * Number of active connections is not in allowed range.

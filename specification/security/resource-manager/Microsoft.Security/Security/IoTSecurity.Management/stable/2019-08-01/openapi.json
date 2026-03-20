@@ -996,10 +996,6 @@
       "type": "object",
       "description": "A custom alert rule that checks if a value (depends on the custom alert type) is allowed.",
       "properties": {
-        "ruleType": {
-          "type": "string",
-          "description": "Discriminator property for AllowlistCustomAlertRule."
-        },
         "allowlistValues": {
           "type": "array",
           "description": "The values to allow. The format of the values depends on the rule type.",
@@ -1008,16 +1004,15 @@
           }
         }
       },
-      "discriminator": "ruleType",
       "required": [
-        "ruleType",
         "allowlistValues"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/ListCustomAlertRule"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ListCustomAlertRule"
     },
     "AmqpC2DMessagesNotInAllowedRange": {
       "type": "object",
@@ -1107,7 +1102,7 @@
           "$ref": "#/definitions/AllowlistCustomAlertRule"
         }
       ],
-      "x-ms-discriminator-value": "ConnectionFromIpNotAllowed"
+      "x-ms-discriminator-value": "ListCustomAlertRule"
     },
     "ConnectionToIpNotAllowed": {
       "type": "object",
@@ -1117,7 +1112,7 @@
           "$ref": "#/definitions/AllowlistCustomAlertRule"
         }
       ],
-      "x-ms-discriminator-value": "ConnectionToIpNotAllowed"
+      "x-ms-discriminator-value": "ListCustomAlertRule"
     },
     "CustomAlertRule": {
       "type": "object",
@@ -1185,7 +1180,7 @@
           "$ref": "#/definitions/ListCustomAlertRule"
         }
       ],
-      "x-ms-discriminator-value": "DenylistCustomAlertRule"
+      "x-ms-discriminator-value": "ListCustomAlertRule"
     },
     "DeviceSecurityGroup": {
       "type": "object",
@@ -1942,25 +1937,18 @@
       "type": "object",
       "description": "A List custom alert rule.",
       "properties": {
-        "ruleType": {
-          "type": "string",
-          "description": "Discriminator property for ListCustomAlertRule."
-        },
         "valueType": {
           "$ref": "#/definitions/ValueType",
           "description": "The value type of the items in the list.",
           "readOnly": true
         }
       },
-      "discriminator": "ruleType",
-      "required": [
-        "ruleType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/CustomAlertRule"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ListCustomAlertRule"
     },
     "LocalUserNotAllowed": {
       "type": "object",
@@ -1970,7 +1958,7 @@
           "$ref": "#/definitions/AllowlistCustomAlertRule"
         }
       ],
-      "x-ms-discriminator-value": "LocalUserNotAllowed"
+      "x-ms-discriminator-value": "ListCustomAlertRule"
     },
     "MqttC2DMessagesNotInAllowedRange": {
       "type": "object",
@@ -2010,7 +1998,7 @@
           "$ref": "#/definitions/AllowlistCustomAlertRule"
         }
       ],
-      "x-ms-discriminator-value": "ProcessNotAllowed"
+      "x-ms-discriminator-value": "ListCustomAlertRule"
     },
     "QueuePurgesNotInAllowedRange": {
       "type": "object",
