@@ -7,6 +7,7 @@ using TypeSpec.Http;
 namespace Storage.File;
 
 /** Azure Storage File basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperation<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -35,6 +36,7 @@ op StorageOperation<
 }) | TError;
 
 /** Azure Storage File basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -47,6 +49,7 @@ op StorageOperationNoBody<
 }) | TError;
 
 /** Azure Storage File basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperationResponseBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -64,6 +67,7 @@ op StorageOperationResponseBody<
 >;
 
 /** Azure Storage File basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperationRequestBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -84,6 +88,7 @@ op StorageOperationRequestBody<
  * Service operations
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Service {
   /**
    * Sets properties for a storage account's File service endpoint, including properties for Storage Analytics metrics and CORS (Cross-Origin Resource Sharing) rules.
@@ -163,6 +168,7 @@ interface Service {
  * Share operations
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Share {
   /**
    * Creates a new share under the specified account. If the share with the same name already exists, the operation fails.
@@ -208,7 +214,7 @@ interface Share {
       ...LastModifiedResponseHeader;
 
       /** The share quota. */
-      @header("x-ms-share-quota") shareQuota?: int32;
+      @header("x-ms-share-quota") quota?: int32;
 
       /** The provisioned IOPS. */
       @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
@@ -222,7 +228,7 @@ interface Share {
 
       /** The maximum burst credits for IOPS. */
       @header("x-ms-share-max-burst-credits-for-iops")
-      shareMaxBurstCreditsForIops?: int64;
+      maxBurstCreditsForIops?: int64;
     }
   >;
 
@@ -244,26 +250,28 @@ interface Share {
       ...LastModifiedResponseHeader;
 
       /** The maximum quota for the share. */
-      @header("x-ms-share-quota") shareQuota: int32;
+      @header("x-ms-share-quota") quota: int32;
 
       /** The provisioned IOPS for the share. */
-      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
+      @header("x-ms-share-provisioned-iops") provisionedIops?: int32;
 
       /** The provisioned ingress for the share. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
       @header("x-ms-share-provisioned-ingress-mbps")
-      shareProvisionedIngressMbps?: int32;
+      provisionedIngressMBps?: int32;
 
       /** The provisioned egress for the share. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
       @header("x-ms-share-provisioned-egress-mbps")
-      shareProvisionedEgressMbps?: int32;
+      provisionedEgressMBps?: int32;
 
       /** The next allowed quota downgrade time. */
       @header("x-ms-share-next-allowed-quota-downgrade-time")
-      shareNextAllowedQuotaDowngradeTime?: string;
+      nextAllowedQuotaDowngradeTime?: utcDateTime;
 
       /** The provisioned bandwidth for the share. */
       @header("x-ms-share-provisioned-bandwidth-mibps")
-      shareProvisionedBandwidthMibps?: int32;
+      provisionedBandwidthMibps?: int32;
 
       ...LeaseResponseHeaders;
 
@@ -291,11 +299,11 @@ interface Share {
 
       /** The next allowed provisioned IOPS downgrade time. */
       @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
-      shareNextAllowedProvisionedIopsDowngradeTime?: string;
+      nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
 
       /** The next allowed provisioned bandwidth downgrade time. */
       @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time")
-      shareNextAllowedProvisionedBandwidthDowngradeTime?: string;
+      nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
 
       /** Whether SMB directory lease is enabled. */
       @header("x-ms-enable-smb-directory-lease")
@@ -322,13 +330,8 @@ interface Share {
     },
     {
       @statusCode statusCode: 202;
-
-      /** The approximate size of the data stored on the share. */
-      @header("x-ms-file-share-usage-bytes") shareUsageBytes?: int64;
-
-      /** The approximate size of the data stored on the share snapshot. */
-      @header("x-ms-file-share-snapshot-usage-bytes")
-      shareSnapshotUsageBytes?: int64;
+      ...ShareUsageResponseHeader;
+      ...ShareSnapshotUsageResponseHeader;
     }
   >;
 
@@ -336,7 +339,8 @@ interface Share {
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?restype=share&comp=lease&acquire")
+  @sharedRoute
+  @route("?restype=share&comp=lease")
   @put
   acquireLease is StorageOperationNoBody<
     {
@@ -346,6 +350,7 @@ interface Share {
       @header("x-ms-lease-duration") leaseDuration?: int32;
 
       ...ProposeLeaseIdParameter;
+      ...LeaseActionParameter<"acquire">;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
@@ -361,11 +366,13 @@ interface Share {
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?restype=share&comp=lease&release")
+  @sharedRoute
+  @route("?restype=share&comp=lease")
   @put
   releaseLease is StorageOperationNoBody<
     {
       ...LeaseIdRequiredParameter;
+      ...LeaseActionParameter<"release">;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
@@ -380,12 +387,14 @@ interface Share {
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?restype=share&comp=lease&change")
+  @sharedRoute
+  @route("?restype=share&comp=lease")
   @put
   changeLease is StorageOperationNoBody<
     {
       ...LeaseIdRequiredParameter;
       ...ProposeLeaseIdParameter;
+      ...LeaseActionParameter<"change">;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
@@ -401,11 +410,13 @@ interface Share {
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?restype=share&comp=lease&renew")
+  @sharedRoute
+  @route("?restype=share&comp=lease")
   @put
   renewLease is StorageOperationNoBody<
     {
       ...LeaseIdRequiredParameter;
+      ...LeaseActionParameter<"renew">;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
@@ -420,16 +431,18 @@ interface Share {
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
-  @route("?restype=share&comp=lease&break")
+  @sharedRoute
+  @route("?restype=share&comp=lease")
   @put
   breakLease is StorageOperationNoBody<
     {
       ...TimeoutParameter;
 
       /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately. */
-      @header("x-ms-lease-break-period") leaseBreakPeriod?: int32;
+      @header("x-ms-lease-break-period") breakPeriod?: int32;
 
       ...LeaseIdOptionalParameter;
+      ...LeaseActionParameter<"break">;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
@@ -437,10 +450,7 @@ interface Share {
       @statusCode statusCode: 202;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-
-      /** Approximate time remaining in the lease period, in seconds. */
-      @header("x-ms-lease-time") leaseTime?: int32;
-
+      ...LeaseTimeResponseHeader;
       ...LeaseIdOptionalParameter;
     }
   >;
@@ -554,33 +564,33 @@ interface Share {
       ...LastModifiedResponseHeader;
 
       /** The current share quota. */
-      @header("x-ms-share-quota") shareQuota?: int32;
+      @header("x-ms-share-quota") quota?: int32;
 
       /** The share provisioned IOPS. */
-      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
+      @header("x-ms-share-provisioned-iops") provisionedIops?: int32;
 
       /** The share provisioned bandwidth in mebibytes per second. */
       @header("x-ms-share-provisioned-bandwidth-mibps")
-      shareProvisionedBandwidthMibps?: int32;
+      provisionedBandwidthMibps?: int32;
 
       /** The share included burst IOPS. */
-      @header("x-ms-share-included-burst-iops") shareIncludedBurstIops?: int32;
+      @header("x-ms-share-included-burst-iops") includedBurstIops?: int32;
 
       /** The share max burst credits for IOPS. */
       @header("x-ms-share-max-burst-credits-for-iops")
-      shareMaxBurstCreditsForIops?: int64;
+      maxBurstCreditsForIops?: int64;
 
       /** Approximate time remaining in the share's existing downgrade request. */
       @header("x-ms-share-next-allowed-quota-downgrade-time")
-      shareNextAllowedQuotaDowngradeTime?: string;
+      nextAllowedQuotaDowngradeTime?: utcDateTime;
 
       /** Approximate time remaining in the share's existing provisioned IOPS downgrade request. */
       @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
-      shareNextAllowedProvisionedIopsDowngradeTime?: string;
+      nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
 
       /** Approximate time remaining in the share's existing provisioned bandwidth downgrade request. */
       @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time")
-      shareNextAllowedProvisionedBandwidthDowngradeTime?: string;
+      nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
     }
   >;
 
@@ -619,8 +629,7 @@ interface Share {
       ...LastModifiedResponseHeader;
 
       @body
-      @Xml.name("SignedIdentifiers")
-      signedIdentifiers: SignedIdentifier[];
+      signedIdentifiers: SignedIdentifiers;
     }
   >;
 
@@ -638,7 +647,7 @@ interface Share {
 
       /** The ACL for the share. */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing storage API."
-      @body shareAcl?: SignedIdentifier[];
+      @body shareAcl?: SignedIdentifiers;
     },
     {
       ...EtagResponseHeader;
@@ -686,16 +695,16 @@ interface Share {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      @header("x-ms-share-quota") shareQuota?: int32;
-      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
+      @header("x-ms-share-quota") quota?: int32;
+      @header("x-ms-share-provisioned-iops") provisionedIops?: int32;
 
       @header("x-ms-share-provisioned-bandwidth-mibps")
-      shareProvisionedBandwidthMibps?: int32;
+      provisionedBandwidthMibps?: int32;
 
-      @header("x-ms-share-included-burst-iops") shareIncludedBurstIops?: int32;
+      @header("x-ms-share-included-burst-iops") includedBurstIops?: int32;
 
       @header("x-ms-share-max-burst-credits-for-iops")
-      shareMaxBurstCreditsForIops?: int64;
+      maxBurstCreditsForIops?: int64;
     }
   >;
 }
@@ -704,6 +713,7 @@ interface Share {
  * Directory operations
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Directory {
   /**
    * Creates a new directory under the specified share or parent directory.
@@ -796,7 +806,7 @@ interface Directory {
       ...LastModifiedResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
-      @header("x-ms-mode") mode?: string;
+      @header("x-ms-mode") fileMode?: string;
       @header("x-ms-owner") owner?: string;
       @header("x-ms-group") group?: string;
     }
@@ -841,7 +851,7 @@ interface Directory {
       ...TimeoutParameter;
 
       /** Include extended information. */
-      @header("x-ms-file-extended-info") fileExtendedInfo?: boolean;
+      @header("x-ms-file-extended-info") includeExtendedInfo?: boolean;
 
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
@@ -898,7 +908,9 @@ interface Directory {
       @header("x-ms-marker") marker?: string;
 
       @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
-      @header("x-ms-number-of-handles-failed") numberOfHandlesFailed: int32;
+
+      @header("x-ms-number-of-handles-failed")
+      numberOfHandlesFailedToClose: int32;
     }
   >;
 
@@ -954,11 +966,13 @@ interface Directory {
  * File operations
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface File {
   /**
    * Creates a new file or replaces a file. Note it only initializes the file with no content.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing storage API."
+  @sharedRoute
   @route("")
   @put
   create is StorageOperationRequestBody<
@@ -973,6 +987,7 @@ interface File {
       ...FileSmtPropertyRequestHeaders;
       ...FilePermissionFormatParameter;
       ...LeaseIdOptionalParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
       ...NfsRequestHeaders;
 
@@ -980,7 +995,8 @@ interface File {
       @header("x-ms-file-file-type") nfsFileType?: NfsFileType;
 
       /** An MD5 hash of the content. This hash is used to verify the integrity of the data during transport. */
-      @header("Content-MD5") contentMd5?: string;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("Content-MD5") contentMD5?: bytes;
 
       /** SMB only. Default value is New. */
       @header("x-ms-file-property-semantics")
@@ -1000,7 +1016,8 @@ interface File {
       ...NfsResponseHeaders;
 
       /** An MD5 hash returned for the content. */
-      @header("Content-MD5") contentMd5?: bytes;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("Content-MD5") contentMD5?: bytes;
 
       /** Content length of the file. */
       @header("Content-Length") contentLength?: int64;
@@ -1020,13 +1037,15 @@ interface File {
       ...RangeHeader;
 
       /** When this header is set to true and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
-      @header("x-ms-range-get-content-md5") getContentMd5?: boolean;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("x-ms-range-get-content-md5") rangeGetContentMD5?: boolean;
 
       ...LeaseIdOptionalParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
 
       /** Optional. Used for structured get operations. */
-      @header("x-ms-structured-body") structuredBodyGet?: string;
+      @header("x-ms-structured-body") structuredBodyType?: string;
     },
     {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying supported status codes for download operation."
@@ -1036,7 +1055,8 @@ interface File {
       @header("Content-Length") contentLength: int64;
       @header("Content-Range") contentRange?: string;
       @header("ETag") etag: Azure.Core.eTag;
-      @header("Content-MD5") contentMd5?: bytes;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("Content-MD5") contentMD5?: bytes;
       @header("Content-Encoding") contentEncoding?: string;
       @header("Cache-Control") cacheControl?: string;
       @header("Content-Disposition") contentDisposition?: string;
@@ -1045,7 +1065,8 @@ interface File {
       ...CopyStatusResponseHeaders;
 
       /** The MD5 hash of the full file content. */
-      @header("x-ms-content-md5") fileContentMd5?: string;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("x-ms-content-md5") fileContentMD5?: bytes;
 
       /** The value of this header indicates whether the file data and application metadata are completely encrypted. */
       @header("x-ms-server-encrypted") serverEncrypted?: boolean;
@@ -1054,7 +1075,7 @@ interface File {
       ...LeaseResponseHeaders;
 
       /** Structured body response header. */
-      @header("x-ms-structured-body") structuredBody?: string;
+      @header("x-ms-structured-body") structuredBodyType?: string;
 
       /** Structured content length. */
       @header("x-ms-structured-content-length") structuredContentLength?: int64;
@@ -1080,6 +1101,7 @@ interface File {
 
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
     },
     {
@@ -1093,7 +1115,8 @@ interface File {
       #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation"
       @header("Content-Type") contentType?: string;
       @header("ETag") etag: Azure.Core.eTag;
-      @header("Content-MD5") contentMd5?: bytes;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("Content-MD5") contentMD5?: bytes;
       @header("Content-Encoding") contentEncoding?: string;
       @header("Cache-Control") cacheControl?: string;
       @header("Content-Disposition") contentDisposition?: string;
@@ -1121,6 +1144,7 @@ interface File {
     {
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
     },
     {
@@ -1157,7 +1181,7 @@ interface File {
       ...LastModifiedResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
-      @header("x-ms-mode") mode?: string;
+      @header("x-ms-mode") fileMode?: string;
       @header("x-ms-owner") owner?: string;
       @header("x-ms-group") group?: string;
 
@@ -1189,16 +1213,21 @@ interface File {
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?comp=lease&acquire")
   @put
+  @sharedRoute
+  @route("?comp=lease")
   acquireLease is StorageOperationNoBody<
     {
+      ...TimeoutParameter;
+
       /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
       @header("x-ms-lease-duration") leaseDuration?: int32;
 
       ...ProposeLeaseIdParameter;
-      ...TimeoutParameter;
+      ...LeaseActionParameter<"acquire">;
       ...FileRequestIntentParameter;
       ...AllowTrailingDotParameter;
     },
@@ -1213,13 +1242,17 @@ interface File {
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?comp=lease&release")
   @put
+  @sharedRoute
+  @route("?comp=lease")
   releaseLease is StorageOperationNoBody<
     {
-      ...LeaseIdRequiredParameter;
       ...TimeoutParameter;
+      ...LeaseIdRequiredParameter;
+      ...LeaseActionParameter<"release">;
       ...FileRequestIntentParameter;
       ...AllowTrailingDotParameter;
     },
@@ -1232,14 +1265,18 @@ interface File {
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?comp=lease&change")
   @put
+  @sharedRoute
+  @route("?comp=lease")
   changeLease is StorageOperationNoBody<
     {
+      ...TimeoutParameter;
       ...LeaseIdRequiredParameter;
       ...ProposeLeaseIdParameter;
-      ...TimeoutParameter;
+      ...LeaseActionParameter<"change">;
       ...FileRequestIntentParameter;
       ...AllowTrailingDotParameter;
     },
@@ -1253,12 +1290,16 @@ interface File {
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
-  @route("?comp=lease&break")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
+  @sharedRoute
+  @route("?comp=lease")
   breakLease is StorageOperationNoBody<
     {
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
+      ...LeaseActionParameter<"break">;
       ...FileRequestIntentParameter;
       ...AllowTrailingDotParameter;
     },
@@ -1266,6 +1307,7 @@ interface File {
       @statusCode statusCode: 202;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
+      ...LeaseTimeResponseHeader;
       ...LeaseIdOptionalParameter;
     }
   >;
@@ -1275,12 +1317,13 @@ interface File {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing storage API."
+  @sharedRoute
   @route("?comp=range")
   @put
   uploadRange is StorageOperationRequestBody<
     {
       /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
-      @header("x-ms-range") targetRange: string;
+      @header("x-ms-range") range: string;
 
       /** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. - Clear: Clears the specified range and releases the space used in storage for that range. */
       @header("x-ms-write")
@@ -1292,19 +1335,20 @@ interface File {
       ...TimeoutParameter;
 
       /** An MD5 hash of the content. This hash is used to verify the integrity of data during transport. */
-      @header("Content-MD5") contentMd5?: string;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("Content-MD5") contentMD5?: bytes;
 
       ...LeaseIdOptionalParameter;
 
       /** If the file last write time should be preserved or overwritten. */
       @header("x-ms-file-last-write-time")
-      fileLastWriteTimeMode?: FileLastWrittenMode;
+      fileLastWrittenMode?: FileLastWrittenMode;
 
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
 
       /** Optional. Used for structured put operations. */
-      @header("x-ms-structured-body") structuredBodyPut?: string;
+      @header("x-ms-structured-body") structuredBodyType?: string;
 
       /** Optional. Used for structured put operations to specify content length. */
       @header("x-ms-structured-content-length") structuredContentLength?: int64;
@@ -1315,7 +1359,8 @@ interface File {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      @header("Content-MD5") contentMd5?: bytes;
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+      @header("Content-MD5") contentMD5?: bytes;
       ...RequestServerEncryptedResponseHeader;
 
       /** The file last write time. */
@@ -1324,7 +1369,7 @@ interface File {
       fileLastWriteTime?: utcDateTime;
 
       /** Structured body response header. */
-      @header("x-ms-structured-body") structuredBody?: string;
+      @header("x-ms-structured-body") structuredBodyType?: string;
     },
     "application/octet-stream"
   >;
@@ -1333,12 +1378,13 @@ interface File {
    * Upload a range of bytes to a file where the contents are read from a URL.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
-  @route("?comp=range&fromURL")
+  @sharedRoute
+  @route("?comp=range")
   @put
   uploadRangeFromUrl is StorageOperationNoBody<
     {
       /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
-      @header("x-ms-range") targetRange: string;
+      @header("x-ms-range") range: string;
 
       /** Specifies the URL of the source file or blob, up to 2 KB in length. */
       @header("x-ms-copy-source") copySource: string;
@@ -1373,7 +1419,7 @@ interface File {
 
       /** If the file last write time should be preserved or overwritten. */
       @header("x-ms-file-last-write-time")
-      fileLastWriteTimeMode?: FileLastWrittenMode;
+      fileLastWrittenMode?: FileLastWrittenMode;
 
       ...AllowTrailingDotParameter;
       ...SourceAllowTrailingDotParameter;
@@ -1390,7 +1436,9 @@ interface File {
       ...RequestServerEncryptedResponseHeader;
 
       /** The file last write time. */
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @encode("rfc7231")
+      @header("x-ms-file-last-write-time")
+      fileLastWriteTime?: utcDateTime;
     }
   >;
 
@@ -1430,7 +1478,7 @@ interface File {
   /**
    * Copies a blob or file to a destination file within the storage account.
    */
-  @route("?comp=copy")
+  @sharedRoute
   @put
   startCopy is StorageOperationNoBody<
     {
@@ -1454,7 +1502,7 @@ interface File {
 
       /** A boolean value that specifies whether the ReadOnly attribute on a preexisting destination file should be respected or overridden. */
       @header("x-ms-file-copy-ignore-readonly")
-      fileCopyIgnoreReadOnly?: boolean;
+      ignoreReadOnly?: boolean;
 
       /** If specified, the provided file attributes shall be set. */
       @header("x-ms-file-attributes") fileAttributes?: string;
@@ -1470,7 +1518,7 @@ interface File {
 
       /** Optional. Sets the archive attribute on the destination file. */
       @header("x-ms-file-copy-set-archive")
-      fileCopySetArchiveAttribute?: boolean;
+      setArchiveAttribute?: boolean;
 
       ...LeaseIdOptionalParameter;
       ...AllowTrailingDotParameter;
@@ -1480,11 +1528,11 @@ interface File {
 
       /** Specifies mode copy option for the file. */
       @header("x-ms-file-mode-copy-mode")
-      fileCopyModeCopyMode?: ModeCopyMode;
+      fileModeCopyMode?: ModeCopyMode;
 
       /** Specifies owner copy option for the file. */
       @header("x-ms-file-owner-copy-mode")
-      fileCopyOwnerCopyMode?: OwnerCopyMode;
+      fileOwnerCopyMode?: OwnerCopyMode;
     },
     {
       @statusCode statusCode: 202;
@@ -1495,19 +1543,20 @@ interface File {
       @header("x-ms-copy-id") copyId: string;
 
       /** State of the copy operation identified by x-ms-copy-id. */
-      @header("x-ms-copy-status") copyStatus: string;
+      @header("x-ms-copy-status") copyStatus: CopyStatus;
     }
   >;
 
   /**
    * Aborts a pending Copy File operation, and leaves a destination file with zero length and full metadata.
    */
-  @route("?comp=copy&copyid")
+  @sharedRoute
+  @route("?comp=copy")
   @put
   abortCopy is StorageOperationNoBody<
     {
       /** Must be the literal "abort" to abort the pending copy operation. */
-      @header("x-ms-copy-action") copyActionAbort: "abort";
+      @header("x-ms-copy-action") copyActionAbortConstant: "abort";
 
       /** The copy identifier provided in the x-ms-copy-id header of the original Copy File operation. */
       @query copyid: string;
@@ -1573,7 +1622,9 @@ interface File {
       @header("x-ms-marker") marker?: string;
 
       @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
-      @header("x-ms-number-of-handles-failed") numberOfHandlesFailed: int32;
+
+      @header("x-ms-number-of-handles-failed")
+      numberOfHandlesFailedToClose: int32;
     }
   >;
 

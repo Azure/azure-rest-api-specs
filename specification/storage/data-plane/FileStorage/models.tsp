@@ -768,18 +768,17 @@ model CorsRule {
 /**
  * Abstract for entries that can be listed from Directory.
  */
-@Xml.name("Entries")
 model FilesAndDirectoriesListSegment {
   /** The directory items. */
   // FIXME: update this definition since paging is on the entries property
   @pageItems
   @Xml.unwrapped
-  @Xml.name("DirectoryItems")
+  @Xml.name("Directory")
   directoryItems: DirectoryItem[];
 
   /** The file items. */
   @Xml.unwrapped
-  @Xml.name("FileItems")
+  @Xml.name("File")
   fileItems: FileItem[];
 }
 
@@ -973,7 +972,7 @@ model ListFilesAndDirectoriesSegmentResponse {
   /**
    * Abstract for entries that can be listed from Directory.
    */
-  @Xml.name("Segment")
+  @Xml.name("Entries")
   segment: FilesAndDirectoriesListSegment;
 
   /** The next marker. */
@@ -1257,12 +1256,12 @@ model ShareProtocolSettings {
   /**
    * Settings for SMB protocol.
    */
-  @Xml.name("Smb") smb?: ShareSmbSettings;
+  @Xml.name("SMB") smb?: ShareSmbSettings;
 
   /**
    * Settings for NFS protocol.
    */
-  @Xml.name("Nfs") nfs?: ShareNfsSettings;
+  @Xml.name("NFS") nfs?: ShareNfsSettings;
 }
 
 /**
@@ -1317,15 +1316,16 @@ model ShareNfsSettingsEncryptionInTransit {
 /**
  * The list of file ranges
  */
+@Xml.name("Ranges")
 model ShareFileRangeList {
   /** The file ranges. */
   @Xml.unwrapped
-  @Xml.name("Ranges")
+  @Xml.name("Range")
   ranges?: FileRange[];
 
   /** The clear ranges. */
   @Xml.unwrapped
-  @Xml.name("ClearRanges")
+  @Xml.name("ClearRange")
   clearRanges?: ClearRange[];
 }
 
@@ -1376,9 +1376,18 @@ model ShareStats {
   @Xml.name("ShareUsageBytes") shareUsageBytes: int32;
 }
 
+/** Represents an array of signed identifiers */
+model SignedIdentifiers {
+  /** The array of signed identifiers. */
+  @Xml.unwrapped
+  @Xml.name("SignedIdentifier")
+  items: Array<SignedIdentifier>;
+}
+
 /**
  * Signed identifier.
  */
+@Xml.name("SignedIdentifier")
 model SignedIdentifier {
   /**
    * A unique id.
@@ -1413,7 +1422,7 @@ model StorageServiceProperties {
   /**
    * Protocol settings
    */
-  @Xml.name("Protocol") protocol?: ShareProtocolSettings;
+  @Xml.name("ProtocolSettings") protocol?: ShareProtocolSettings;
 }
 
 /**
@@ -1519,8 +1528,9 @@ enum FileRangeWriteFromUrlType {
 alias ApiVersionHeader = {
   /** Specifies the version of the operation to use for this request. */
   @apiVersion
+  @access(Access.internal)
   @header("x-ms-version")
-  apiVersion: string;
+  version: string;
 };
 
 /** The timeout parameter. */
@@ -1586,7 +1596,7 @@ alias AllowTrailingDotParameter = {
 alias SourceAllowTrailingDotParameter = {
   /** If true, the trailing dot will not be trimmed from the source URI. */
   @header("x-ms-source-allow-trailing-dot")
-  sourceAllowTrailingDot?: boolean;
+  allowSourceTrailingDot?: boolean;
 };
 
 /** Share snapshot parameter. */
@@ -1599,6 +1609,7 @@ alias ShareSnapshotParameter = {
 /** Common metadata headers. */
 alias MetadataHeaders = {
   /** Optional. User-defined metadata for the resource. */
+  @alternateType(Record<string>, "rust,javascript,python,csharp,go")
   @header("x-ms-meta")
   metadata?: string;
 };
@@ -1657,7 +1668,7 @@ alias LeaseIdRequiredParameter = {
 /** Share quota optional header. */
 alias ShareQuotaOptionalHeader = {
   /** Specifies the maximum size of the share, in gigabytes. */
-  @header("x-ms-share-quota") shareQuota?: int32;
+  @header("x-ms-share-quota") quota?: int32;
 };
 
 /** Recursive parameter (header). */
@@ -1738,13 +1749,13 @@ alias NfsRequestHeaders = {
   @header("x-ms-group") group?: string;
 
   /** Optional, NFS only. The file mode of the file or directory. */
-  @header("x-ms-mode") mode?: string;
+  @header("x-ms-mode") fileMode?: string;
 };
 
 /** NFS property response headers. */
 alias NfsResponseHeaders = {
   /** NFS only. The file mode. */
-  @header("x-ms-mode") mode?: string;
+  @header("x-ms-mode") fileMode?: string;
 
   /** NFS only. The owner. */
   @header("x-ms-owner") owner?: string;
@@ -1775,7 +1786,8 @@ alias FileContentRequestHeaders = {
   @header("x-ms-cache-control") fileCacheControl?: string;
 
   /** An MD5 hash of the file content. This hash is used to verify the integrity of the file during transport. */
-  @header("x-ms-content-md5") fileContentMd5?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+  @header("x-ms-content-md5") fileContentMD5?: bytes;
 
   /** Sets the file's Content-Disposition header. */
   @header("x-ms-content-disposition") fileContentDisposition?: string;
@@ -1822,6 +1834,22 @@ alias PaidBurstingResponseHeaders = {
 // Copy Status Response Headers
 //
 
+/** The copy status. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum CopyStatus {
+  /** The copy operation is pending. */
+  Pending: "pending",
+
+  /** The copy operation succeeded. */
+  Success: "success",
+
+  /** The copy operation was aborted. */
+  Aborted: "aborted",
+
+  /** The copy operation failed. */
+  Failed: "failed",
+}
+
 /** Copy status response headers. */
 alias CopyStatusResponseHeaders = {
   /** Conclusion time of the last attempted Copy File operation. */
@@ -1840,7 +1868,26 @@ alias CopyStatusResponseHeaders = {
   @header("x-ms-copy-source") copySource?: string;
 
   /** State of the copy operation identified by x-ms-copy-id. */
-  @header("x-ms-copy-status") copyStatus?: string;
+  @header("x-ms-copy-status") copyStatus?: CopyStatus;
+};
+
+/** Lease time response header. */
+alias LeaseTimeResponseHeader = {
+  /** Approximate time remaining in the lease period, in seconds. */
+  @header("x-ms-lease-time") leaseTime?: int32;
+};
+
+/** Share usage bytes response header. */
+alias ShareUsageResponseHeader = {
+  /** The approximate size of the data stored on the share. */
+  @header("x-ms-file-share-usage-bytes") shareUsageBytes?: int64;
+};
+
+/** Share snapshot usage bytes response header. */
+alias ShareSnapshotUsageResponseHeader = {
+  /** The approximate size of the data stored on the share snapshot. */
+  @header("x-ms-file-share-snapshot-usage-bytes")
+  shareSnapshotUsageBytes?: int64;
 };
 
 /** Lease response headers. */
@@ -1868,11 +1915,11 @@ alias RenameRequestHeaders = {
 
   /** Boolean. Default value is false. Set to true to indicate that the destination should be overwritten. */
   @header("x-ms-file-rename-replace-if-exists")
-  renameReplaceIfExists?: boolean;
+  replaceIfExists?: boolean;
 
   /** Boolean. Default value is false. Set to true to overwrite the destination even if it has the read-only attribute set. */
   @header("x-ms-file-rename-ignore-readonly")
-  renameIgnoreReadOnly?: boolean;
+  ignoreReadOnly?: boolean;
 
   /** Required if the source file has an active lease. */
   @header("x-ms-source-lease-id") sourceLeaseId?: string;
@@ -1906,4 +1953,11 @@ alias FileTypeParameter = {
 alias ProposeLeaseIdParameter = {
   /** Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats. */
   @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
+};
+
+/** The lease action parameter. */
+alias LeaseActionParameter<TAction extends string> = {
+  /** Describes what lease action to take. */
+  @header("x-ms-lease-action")
+  action: TAction;
 };
