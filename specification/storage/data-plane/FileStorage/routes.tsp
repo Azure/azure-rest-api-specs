@@ -1323,7 +1323,7 @@ interface File {
   uploadRange is StorageOperationRequestBody<
     {
       /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
-      @header("x-ms-range") range: string;
+      @header("Range") range: string;
 
       /** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. - Clear: Clears the specified range and releases the space used in storage for that range. */
       @header("x-ms-write")
@@ -1384,7 +1384,7 @@ interface File {
   uploadRangeFromUrl is StorageOperationNoBody<
     {
       /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
-      @header("x-ms-range") range: string;
+      @header("Range") range: string;
 
       /** Specifies the URL of the source file or blob, up to 2 KB in length. */
       @header("x-ms-copy-source") copySource: string;
