@@ -40,17 +40,13 @@ interface AllowedConnectionsResources {
   /**
    * Gets the list of all possible traffic between resources for the subscription and location, based on connection type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  @operationId("AllowedConnections_Get")
   get is ArmResourceRead<AllowedConnectionsResource, Error = CloudError>;
 
   /**
    * Gets the list of all possible traffic between resources for the subscription and location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  @operationId("AllowedConnections_ListByHomeRegion")
   listByHomeRegion is Extension.ListByTarget<
     Extension.Subscription,
     AllowedConnectionsResource,

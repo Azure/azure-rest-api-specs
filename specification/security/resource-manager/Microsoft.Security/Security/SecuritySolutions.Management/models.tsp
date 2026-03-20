@@ -219,6 +219,7 @@ union AadConnectivityState {
  * List of all possible traffic between Azure resources
  */
 model AllowedConnectionsList {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
   @visibility(Lifecycle.Read)
   value?: AllowedConnectionsResource[];
@@ -700,13 +701,13 @@ model SecuritySolutionProperties {
    */
   protectionStatus: string;
 }
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model securitySolutionsReferenceDataList {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: securitySolutionsReferenceData[];
 }
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model securitySolutionsReferenceData {
   ...Resource;
@@ -714,7 +715,7 @@ model securitySolutionsReferenceData {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: securitySolutionsReferenceDataProperties;
 }
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model securitySolutionsReferenceDataProperties {
   /**

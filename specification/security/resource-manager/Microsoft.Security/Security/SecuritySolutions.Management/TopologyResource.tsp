@@ -37,17 +37,13 @@ interface TopologyResources {
   /**
    * Gets a specific topology component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  @operationId("Topology_Get")
   get is ArmResourceRead<TopologyResource, Error = CloudError>;
 
   /**
    * Gets a list that allows to build a topology view of a subscription and location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  @operationId("Topology_ListByHomeRegion")
   listByHomeRegion is Extension.ListByTarget<
     Extension.Subscription,
     TopologyResource,
