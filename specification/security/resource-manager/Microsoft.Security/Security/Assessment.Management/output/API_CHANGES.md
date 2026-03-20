@@ -1,24 +1,4 @@
-## Changed Paths
-
-Path: /{resourceId}/providers/microsoft.Security/assessments/{assessmentName}
-Change Type: deleted
-
-Path: /{scope}/providers/microsoft.Security/assessments/{assessmentName}
-Change Type: added
-
 ## Swagger Changes
-
-### Changes for `/{resourceId}/providers/microsoft.Security/assessments/{assessmentName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{resourceId}/providers/microsoft.Security/assessments/{assessmentName}__deleted']` | deleted | `{"get":{"operationId":"Assessments_Get","tags":["Assessments"],"description":"Get a security assessm...` |
-
-### Changes for `/{scope}/providers/microsoft.Security/assessments/{assessmentName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}__added']` | added | `{"get":{"operationId":"Assessments_Get","tags":["SecurityAssessmentResponses"],"description":"Get a ...` |
 
 ### Changes for `$ref`
 
@@ -44,9 +24,7 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.SecurityAssessmentList.required__added` | added | `["value"]` |
 | `definitions.SecurityAssessmentMetadataPropertiesResponse.properties.publishDates.required__deleted` | deleted | `["public"]` |
-| `definitions.SecurityAssessmentMetadataResponseList.required__added` | added | `["value"]` |
 | `paths['/{scope}/providers/microsoft.Security/assessments'].get.parameters[0].required__added` | added | `true` |
 
 ### Changes for `type`
@@ -117,11 +95,29 @@ Change Type: added
 |------|------------|-------|
 | `definitions.AzureResourceDetails__added` | added | `{"type":"object","description":"Details of the Azure resource that was assessed","properties":{"id":...` |
 
+### Changes for `CloudError`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.CloudError__added` | added | `{"type":"object","description":"Common error response for all Azure Resource Manager APIs to return ...` |
+
+### Changes for `CloudErrorBody`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.CloudErrorBody__added` | added | `{"type":"object","description":"The error detail.","properties":{"code":{"type":"string","descriptio...` |
+
 ### Changes for `Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems__added` | added | `{"type":"object","properties":{"id":{"type":"string","description":"Edge identifier"},"targetId":{"t...` |
+
+### Changes for `ErrorAdditionalInfo`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ErrorAdditionalInfo__added` | added | `{"type":"object","description":"The resource management error additional info.","properties":{"type"...` |
 
 ### Changes for `OnPremiseResourceDetails`
 
@@ -176,8 +172,6 @@ Change Type: added
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AssessmentLinks.readOnly__deleted` | deleted | `true` |
-| `definitions.SecurityAssessmentList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.SecurityAssessmentMetadataResponseList.properties.value.readOnly__deleted` | deleted | `true` |
 | `definitions.SecurityAssessmentPropertiesBase.properties.links.readOnly__added` | added | `true` |
 
 ### Changes for `description`
@@ -196,12 +190,12 @@ Change Type: added
 | `definitions.SecurityAssessmentPropertiesResponse.properties.status.description__added` | added | `The result of the assessment` |
 | `definitions.SecurityAssessmentResponse.properties.properties.description__added` | added | `Describes properties of an assessment.` |
 
-### Changes for `x-ms-secret`
+### Changes for `format`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.SecurityAssessmentMetadataPartnerData.properties.secret['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.SecurityAssessmentPartnerData.properties.secret['x-ms-secret__deleted']` | deleted | `true` |
+| `definitions.SecurityAssessmentMetadataPartnerData.properties.secret.format__added` | added | `password` |
+| `definitions.SecurityAssessmentPartnerData.properties.secret.format__added` | added | `password` |
 
 ### Changes for `properties`
 
@@ -220,13 +214,14 @@ Change Type: added
 | `definitions.SecurityAssessmentPropertiesBase.properties.metadata.$ref` | `./assessmentMetadata.json#/definitions/SecurityAssessmentMetadataProperties` | `#/definitions/SecurityAssessmentMetadataProperties` |
 | `definitions.SecurityAssessmentPropertiesBase.properties.resourceDetails.$ref` | `./common/v1/types.json#/definitions/ResourceDetails` | `#/definitions/ResourceDetails` |
 | `definitions.SecurityAssessmentResponse.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `info.description` | `API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider` | `API spec for Microsoft.Security (Azure Security Center) resource provider` |
-| `info.title` | `Microsoft Defender for Cloud` | `SecurityCenter` |
-| `paths['/{scope}/providers/microsoft.Security/assessments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/providers/microsoft.Security/assessmentMetadata'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/providers/microsoft.Security/assessmentMetadata/{assessmentMetadataName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/assessmentMetadata'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/assessmentMetadata/{assessmentMetadataName}'].delete.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/assessmentMetadata/{assessmentMetadataName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/assessmentMetadata/{assessmentMetadataName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/{resourceId}/providers/microsoft.Security/assessments/{assessmentName}'].delete.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{resourceId}/providers/microsoft.Security/assessments/{assessmentName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{resourceId}/providers/microsoft.Security/assessments/{assessmentName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{scope}/providers/microsoft.Security/assessments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/providers/microsoft.Security/assessmentMetadata'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/providers/microsoft.Security/assessmentMetadata/{assessmentMetadataName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/assessmentMetadata'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/assessmentMetadata/{assessmentMetadataName}'].delete.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/assessmentMetadata/{assessmentMetadataName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/assessmentMetadata/{assessmentMetadataName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 

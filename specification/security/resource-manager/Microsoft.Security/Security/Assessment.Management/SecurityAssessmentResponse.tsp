@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * Security assessment on a resource - response format
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model SecurityAssessmentResponse
   is Azure.ResourceManager.ExtensionResource<SecurityAssessmentPropertiesResponse> {
@@ -24,15 +25,16 @@ model SecurityAssessmentResponse
   >;
 }
 
-@armResourceOperations
+model SecurityAssessmentResponsesScopeParameter is Extension.ScopeParameter;
+
+@armResourceOperations(#{ omitTags: true })
 interface SecurityAssessmentResponses {
   /**
    * Get a security assessment on your scanned resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Assessments_Get")
+  @tag("Assessments")
   get is Extension.Read<
-    Extension.ScopeParameter,
+    SecurityAssessmentResponsesScopeParameter,
     SecurityAssessmentResponse,
     Parameters = {
       /**
@@ -40,39 +42,40 @@ interface SecurityAssessmentResponses {
        */
       @query("$expand")
       $expand?: ExpandEnum;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
    * Create a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Assessments_CreateOrUpdate")
+  @tag("Assessments")
   createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
-    Extension.ScopeParameter,
+    SecurityAssessmentResponsesScopeParameter,
     SecurityAssessmentResponse,
-    Request = SecurityAssessment
+    Request = SecurityAssessment,
+    Error = CloudError
   >;
 
   /**
    * Delete a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Assessments_Delete")
+  @tag("Assessments")
   delete is Extension.DeleteSync<
-    Extension.ScopeParameter,
-    SecurityAssessmentResponse
+    SecurityAssessmentResponsesScopeParameter,
+    SecurityAssessmentResponse,
+    Error = CloudError
   >;
 
   /**
    * Get security assessments on all your scanned resources inside a scope
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Assessments_List")
+  @tag("Assessments")
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     SecurityAssessmentResponse,
-    Response = ArmResponse<SecurityAssessmentList>
+    Response = ArmResponse<SecurityAssessmentList>,
+    Error = CloudError
   >;
 }
 
@@ -85,3 +88,4 @@ interface SecurityAssessmentResponses {
 @@doc(SecurityAssessmentResponses.createOrUpdate::parameters.resource,
   "Calculated assessment on a pre-defined assessment metadata"
 );
+@@key(SecurityAssessmentResponsesScopeParameter.scope, "resourceId");

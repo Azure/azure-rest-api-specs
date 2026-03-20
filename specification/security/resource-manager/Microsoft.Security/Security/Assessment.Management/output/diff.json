@@ -1,325 +1,7 @@
 {
-  "info": {
-    "title": {
-      "__old": "Microsoft Defender for Cloud",
-      "__new": "SecurityCenter"
-    },
-    "description": {
-      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
-    }
-  },
   "paths": {
-    "/{resourceId}/providers/microsoft.Security/assessments/{assessmentName}__deleted": {
-      "get": {
-        "operationId": "Assessments_Get",
-        "tags": [
-          "Assessments"
-        ],
-        "description": "Get a security assessment on your scanned resource",
-        "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "links",
-              "metadata"
-            ],
-            "x-ms-enum": {
-              "name": "ExpandEnum",
-              "modelAsString": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SecurityAssessmentResponse"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get security recommendation task from security data location": {
-            "$ref": "./examples/Assessments/GetAssessment_example.json"
-          },
-          "Get security recommendation task from security data location with expand parameter": {
-            "$ref": "./examples/Assessments/GetAssessmentWithExpand_example.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Assessments_CreateOrUpdate",
-        "tags": [
-          "Assessments"
-        ],
-        "description": "Create a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
-        "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "assessment",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SecurityAssessment"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SecurityAssessmentResponse"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SecurityAssessmentResponse"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create security recommendation task on a resource": {
-            "$ref": "./examples/Assessments/PutAssessment_example.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Assessments_Delete",
-        "tags": [
-          "Assessments"
-        ],
-        "description": "Delete a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
-        "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a security recommendation task on a resource": {
-            "$ref": "./examples/Assessments/DeleteAssessment_example.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Security/assessments/{assessmentName}__added": {
-      "get": {
-        "operationId": "Assessments_Get",
-        "tags": [
-          "SecurityAssessmentResponses"
-        ],
-        "description": "Get a security assessment on your scanned resource",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "links",
-              "metadata"
-            ],
-            "x-ms-enum": {
-              "name": "ExpandEnum",
-              "modelAsString": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SecurityAssessmentResponse"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get security recommendation task from security data location": {
-            "$ref": "./examples/Assessments/GetAssessment_example.json"
-          },
-          "Get security recommendation task from security data location with expand parameter": {
-            "$ref": "./examples/Assessments/GetAssessmentWithExpand_example.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Assessments_CreateOrUpdate",
-        "tags": [
-          "SecurityAssessmentResponses"
-        ],
-        "description": "Create a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "assessment",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SecurityAssessment"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SecurityAssessmentResponse"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SecurityAssessmentResponse"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create security recommendation task on a resource": {
-            "$ref": "./examples/Assessments/PutAssessment_example.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Assessments_Delete",
-        "tags": [
-          "SecurityAssessmentResponses"
-        ],
-        "description": "Delete a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a security recommendation task on a resource": {
-            "$ref": "./examples/Assessments/DeleteAssessment_example.json"
-          }
-        }
-      }
-    },
     "/{scope}/providers/microsoft.Security/assessments": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "Assessments"
-          ],
-          [
-            "+",
-            "SecurityAssessmentResponses"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -338,7 +20,114 @@
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/microsoft.Security/assessments/{assessmentName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common/v1/types.json#/parameters/ResourceId"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "x-ms-skip-url-encoding": true
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -347,22 +136,12 @@
     },
     "/providers/microsoft.Security/assessmentMetadata": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "Assessments Metadata"
-          ],
-          [
-            "+",
-            "SecurityAssessmentMetadataResponses"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -371,22 +150,12 @@
     },
     "/providers/microsoft.Security/assessmentMetadata/{assessmentMetadataName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "Assessments Metadata"
-          ],
-          [
-            "+",
-            "SecurityAssessmentMetadataResponses"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -395,22 +164,12 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/assessmentMetadata": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "Assessments Metadata"
-          ],
-          [
-            "+",
-            "AssessmentsMetadata"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -419,66 +178,36 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/assessmentMetadata/{assessmentMetadataName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "Assessments Metadata"
-          ],
-          [
-            "+",
-            "AssessmentsMetadata"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "Assessments Metadata"
-          ],
-          [
-            "+",
-            "AssessmentsMetadata"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "Assessments Metadata"
-          ],
-          [
-            "+",
-            "AssessmentsMetadata"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -603,6 +332,56 @@
       ],
       "x-ms-discriminator-value": "Azure"
     },
+    "CloudError__added": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody__added": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
     "Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems__added": {
       "type": "object",
       "properties": {
@@ -624,6 +403,21 @@
         "sourceId",
         "targetId"
       ]
+    },
+    "ErrorAdditionalInfo__added": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
     },
     "OnPremiseResourceDetails__added": {
       "type": "object",
@@ -852,16 +646,6 @@
         ]
       ]
     },
-    "SecurityAssessmentList": {
-      "required__added": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
-    },
     "SecurityAssessmentMetadata": {
       "properties": {
         "properties": {
@@ -883,7 +667,7 @@
     "SecurityAssessmentMetadataPartnerData": {
       "properties": {
         "secret": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     },
@@ -933,20 +717,10 @@
         ]
       ]
     },
-    "SecurityAssessmentMetadataResponseList": {
-      "required__added": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
-    },
     "SecurityAssessmentPartnerData": {
       "properties": {
         "secret": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     },

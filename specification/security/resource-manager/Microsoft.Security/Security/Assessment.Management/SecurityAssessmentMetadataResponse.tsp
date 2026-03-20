@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * Security assessment metadata response
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @tenantResource
 model SecurityAssessmentMetadataResponse
   is Azure.ResourceManager.ProxyResource<SecurityAssessmentMetadataPropertiesResponse> {
@@ -44,23 +45,25 @@ alias SecurityAssessmentMetadataResponseOps = Azure.ResourceManager.Legacy.Exten
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SecurityAssessmentMetadataResponses {
   /**
    * Get metadata information on an assessment type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AssessmentsMetadata_Get")
-  get is SecurityAssessmentMetadataResponseOps.Read<SecurityAssessmentMetadataResponse>;
+  @tag("Assessments Metadata")
+  get is SecurityAssessmentMetadataResponseOps.Read<
+    SecurityAssessmentMetadataResponse,
+    ErrorType = CloudError
+  >;
 
   /**
    * Get metadata information on all assessment types
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AssessmentsMetadata_List")
+  @tag("Assessments Metadata")
   list is SecurityAssessmentMetadataResponseOps.List<
     SecurityAssessmentMetadataResponse,
-    Response = ArmResponse<SecurityAssessmentMetadataResponseList>
+    Response = ArmResponse<SecurityAssessmentMetadataResponseList>,
+    ErrorType = CloudError
   >;
 }
 alias AssessmentsMetadatumOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -84,37 +87,47 @@ alias AssessmentsMetadatumOps = Azure.ResourceManager.Legacy.ExtensionOperations
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AssessmentsMetadata {
   /**
    * Get metadata information on an assessment type in a specific subscription
    */
-  getInSubscription is AssessmentsMetadatumOps.Read<SecurityAssessmentMetadataResponse>;
+  @tag("Assessments Metadata")
+  getInSubscription is AssessmentsMetadatumOps.Read<
+    SecurityAssessmentMetadataResponse,
+    ErrorType = CloudError
+  >;
 
   /**
    * Create metadata information on an assessment type in a specific subscription
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Assessments Metadata")
   createInSubscription is AssessmentsMetadatumOps.CreateOrUpdateSync<
     SecurityAssessmentMetadataResponse,
-    Response = ArmResourceUpdatedResponse<SecurityAssessmentMetadataResponse>
+    Response = ArmResourceUpdatedResponse<SecurityAssessmentMetadataResponse>,
+    ErrorType = CloudError
   >;
 
   /**
    * Delete metadata information on an assessment type in a specific subscription, will cause the deletion of all the assessments of that type in that subscription
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Assessments Metadata")
   deleteInSubscription is AssessmentsMetadatumOps.DeleteSync<
     SecurityAssessmentMetadataResponse,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse,
+    ErrorType = CloudError
   >;
 
   /**
    * Get metadata information on all assessment types in a specific subscription
    */
+  @tag("Assessments Metadata")
   listBySubscription is AssessmentsMetadatumOps.List<
     SecurityAssessmentMetadataResponse,
-    Response = ArmResponse<SecurityAssessmentMetadataResponseList>
+    Response = ArmResponse<SecurityAssessmentMetadataResponseList>,
+    ErrorType = CloudError
   >;
 }
 

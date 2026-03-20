@@ -912,7 +912,7 @@ union Source {
   OnPremiseSql: "OnPremiseSql",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ExpandEnum {
   string,
 
@@ -930,36 +930,50 @@ union ExpandEnum {
 /**
  * List of security assessment metadata
  */
-model SecurityAssessmentMetadataResponseList
-  is Azure.Core.Page<SecurityAssessmentMetadataResponse>;
+model SecurityAssessmentMetadataResponseList {
+  /**
+   * [Placeholder] Discription for value property
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SecurityAssessmentMetadataResponse[];
+
+  /**
+   * [Placeholder] Discription for nextLink property
+   */
+  @nextLink
+  // FIXME: (url) Please double check that this is the correct type for your scenario.
+  nextLink?: url;
+}
 
 /**
  * Describes properties of an assessment metadata response.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityAssessmentMetadataPropertiesResponse
   extends SecurityAssessmentMetadataProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publishDates?: SecurityAssessmentMetadataPropertiesResponsePublishDates;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pattern("^[0-9]{2}/[0-9]{4}$")
   plannedDeprecationDate?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tactics?: Tactics[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   techniques?: Techniques[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityAssessmentMetadataPropertiesResponsePublishDates {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pattern("^([0-9]{2}/){2}[0-9]{4}$")
   GA?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pattern("^([0-9]{2}/){2}[0-9]{4}$")
   public: string;
 }
@@ -989,7 +1003,7 @@ model SecurityAssessmentMetadataProperties {
    */
   remediationDescription?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   categories?: Categories[];
 
   /**
@@ -1007,7 +1021,7 @@ model SecurityAssessmentMetadataProperties {
    */
   implementationEffort?: ImplementationEffort;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   threats?: Threats[];
 
   /**
@@ -1043,6 +1057,7 @@ model SecurityAssessmentMetadataPartnerData {
   /**
    * Secret to authenticate the partner and verify it created the assessment - write only
    */
+  @secret
   secret: string;
 }
 
@@ -1072,7 +1087,9 @@ model Resource {
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * The error object.
@@ -1083,6 +1100,8 @@ model CloudError {
 /**
  * The error detail.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * The error code.
@@ -1105,12 +1124,14 @@ model CloudErrorBody {
   /**
    * The error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   details?: CloudErrorBody[];
 
   /**
    * The error additional info.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
@@ -1128,6 +1149,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
@@ -1135,13 +1157,27 @@ model ErrorAdditionalInfo {
 /**
  * Page of a security assessments list
  */
-model SecurityAssessmentList is Azure.Core.Page<SecurityAssessmentResponse>;
+model SecurityAssessmentList {
+  /**
+   * [Placeholder] Discription for value property
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SecurityAssessmentResponse[];
+
+  /**
+   * [Placeholder] Discription for nextLink property
+   */
+  @nextLink
+  // FIXME: (url) Please double check that this is the correct type for your scenario.
+  nextLink?: url;
+}
 
 /**
  * Describes properties of an assessment.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityAssessmentPropertiesResponse
   extends SecurityAssessmentPropertiesBase {
   /**
@@ -1153,7 +1189,7 @@ model SecurityAssessmentPropertiesResponse
 /**
  * The result of the assessment
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AssessmentStatusResponse extends AssessmentStatus {
   /**
    * The time that the assessment was created and first evaluated. Returned as UTC time in ISO 8601 format
@@ -1213,7 +1249,7 @@ model SecurityAssessmentPropertiesBase {
   /**
    * Additional data regarding the assessment
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalData?: Record<string>;
 
   /**
@@ -1252,7 +1288,7 @@ model SecurityAssessmentPropertiesBaseRisk {
    */
   attackPathsReferences?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   paths?: SecurityAssessmentPropertiesBaseRiskPathsItem[];
 
   /**
@@ -1261,14 +1297,14 @@ model SecurityAssessmentPropertiesBaseRisk {
   isContextualRisk?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityAssessmentPropertiesBaseRiskPathsItem {
   /**
    * Unique identifier for the path
    */
   id?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nodes?: SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem[];
 
   /**
@@ -1277,7 +1313,7 @@ model SecurityAssessmentPropertiesBaseRiskPathsItem {
   edges?: Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem {
   /**
    * Node identifier
@@ -1290,7 +1326,7 @@ model SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem {
   nodePropertiesLabel?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems {
   /**
    * Edge identifier
@@ -1342,13 +1378,14 @@ model SecurityAssessmentPartnerData {
   /**
    * secret to authenticate the partner - write only
    */
+  @secret
   secret: string;
 }
 
 /**
  * Security assessment on a resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityAssessment extends Resource {
   /**
    * Describes properties of an assessment.
@@ -1359,7 +1396,7 @@ model SecurityAssessment extends Resource {
 /**
  * Describes properties of an assessment.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityAssessmentProperties extends SecurityAssessmentPropertiesBase {
   /**
    * The result of the assessment
@@ -1384,6 +1421,7 @@ model Path {
   /**
    * Path Edges
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   edges: EdgeIdentifiers[];
 }
 
@@ -1425,7 +1463,7 @@ model EdgeIdentifiers {
 /**
  * Security assessment metadata
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityAssessmentMetadata extends Resource {
   /**
    * Describes properties of an assessment metadata.
@@ -1452,6 +1490,8 @@ model AzureResourceDetails extends ResourceDetails {
 /**
  * Details of the On Premise resource that was assessed
  */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("source")
 model OnPremiseResourceDetails extends ResourceDetails {
   /**
@@ -1478,6 +1518,7 @@ model OnPremiseResourceDetails extends ResourceDetails {
 /**
  * Details of the On Premise Sql resource that was assessed
  */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OnPremiseSqlResourceDetails extends OnPremiseResourceDetails {
   /**
    * The Sql server name installed on the machine

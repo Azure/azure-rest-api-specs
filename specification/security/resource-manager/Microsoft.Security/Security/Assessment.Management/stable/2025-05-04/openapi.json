@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2025-05-04",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -40,13 +40,10 @@
   },
   "tags": [
     {
-      "name": "AssessmentsMetadata"
+      "name": "Assessments Metadata"
     },
     {
-      "name": "SecurityAssessmentMetadataResponses"
-    },
-    {
-      "name": "SecurityAssessmentResponses"
+      "name": "Assessments"
     }
   ],
   "paths": {
@@ -54,7 +51,7 @@
       "get": {
         "operationId": "Assessments_List",
         "tags": [
-          "SecurityAssessmentResponses"
+          "Assessments"
         ],
         "description": "Get security assessments on all your scanned resources inside a scope",
         "parameters": [
@@ -80,7 +77,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -94,11 +91,11 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/assessments/{assessmentName}": {
+    "/{resourceId}/providers/Microsoft.Security/assessments/{assessmentName}": {
       "get": {
         "operationId": "Assessments_Get",
         "tags": [
-          "SecurityAssessmentResponses"
+          "Assessments"
         ],
         "description": "Get a security assessment on your scanned resource",
         "parameters": [
@@ -106,7 +103,7 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -158,7 +155,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -174,7 +171,7 @@
       "put": {
         "operationId": "Assessments_CreateOrUpdate",
         "tags": [
-          "SecurityAssessmentResponses"
+          "Assessments"
         ],
         "description": "Create a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
         "parameters": [
@@ -182,7 +179,7 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -222,7 +219,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -235,7 +232,7 @@
       "delete": {
         "operationId": "Assessments_Delete",
         "tags": [
-          "SecurityAssessmentResponses"
+          "Assessments"
         ],
         "description": "Delete a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
         "parameters": [
@@ -243,7 +240,7 @@
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -268,7 +265,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -283,7 +280,7 @@
       "get": {
         "operationId": "AssessmentsMetadata_List",
         "tags": [
-          "SecurityAssessmentMetadataResponses"
+          "Assessments Metadata"
         ],
         "description": "Get metadata information on all assessment types",
         "parameters": [
@@ -301,7 +298,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -319,7 +316,7 @@
       "get": {
         "operationId": "AssessmentsMetadata_Get",
         "tags": [
-          "SecurityAssessmentMetadataResponses"
+          "Assessments Metadata"
         ],
         "description": "Get metadata information on an assessment type",
         "parameters": [
@@ -344,7 +341,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -359,7 +356,7 @@
       "get": {
         "operationId": "AssessmentsMetadata_ListBySubscription",
         "tags": [
-          "AssessmentsMetadata"
+          "Assessments Metadata"
         ],
         "description": "Get metadata information on all assessment types in a specific subscription",
         "parameters": [
@@ -380,7 +377,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -398,7 +395,7 @@
       "get": {
         "operationId": "AssessmentsMetadata_GetInSubscription",
         "tags": [
-          "AssessmentsMetadata"
+          "Assessments Metadata"
         ],
         "description": "Get metadata information on an assessment type in a specific subscription",
         "parameters": [
@@ -426,7 +423,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -439,7 +436,7 @@
       "put": {
         "operationId": "AssessmentsMetadata_CreateInSubscription",
         "tags": [
-          "AssessmentsMetadata"
+          "Assessments Metadata"
         ],
         "description": "Create metadata information on an assessment type in a specific subscription",
         "parameters": [
@@ -476,7 +473,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -489,7 +486,7 @@
       "delete": {
         "operationId": "AssessmentsMetadata_DeleteInSubscription",
         "tags": [
-          "AssessmentsMetadata"
+          "Assessments Metadata"
         ],
         "description": "Delete metadata information on an assessment type in a specific subscription, will cause the deletion of all the assessments of that type in that subscription",
         "parameters": [
@@ -514,7 +511,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -761,6 +758,56 @@
         ]
       }
     },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
     "Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems": {
       "type": "object",
       "properties": {
@@ -782,6 +829,21 @@
         "targetId",
         "sourceId"
       ]
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
     },
     "ImplementationEffort": {
       "type": "string",
@@ -975,20 +1037,18 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SecurityAssessmentResponse items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/SecurityAssessmentResponse"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "SecurityAssessmentMetadata": {
       "type": "object",
@@ -1020,7 +1080,9 @@
         },
         "secret": {
           "type": "string",
-          "description": "Secret to authenticate the partner and verify it created the assessment - write only"
+          "format": "password",
+          "description": "Secret to authenticate the partner and verify it created the assessment - write only",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -1160,20 +1222,18 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SecurityAssessmentMetadataResponse items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "SecurityAssessmentPartnerData": {
       "type": "object",
@@ -1185,7 +1245,9 @@
         },
         "secret": {
           "type": "string",
-          "description": "secret to authenticate the partner - write only"
+          "format": "password",
+          "description": "secret to authenticate the partner - write only",
+          "x-ms-secret": true
         }
       },
       "required": [
