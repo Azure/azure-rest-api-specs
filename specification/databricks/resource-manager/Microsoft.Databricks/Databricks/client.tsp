@@ -28,3 +28,4 @@ using Microsoft.Databricks;
 );
 
 @@clientName(Microsoft.Databricks.ErrorDetail, "DatabricksErrorDetail", "java");
+@@clientName(Microsoft.Databricks.WorkspaceNoPublicIPBooleanParameter, "WorkspaceNoPublicIpBooleanParameter", "java");
