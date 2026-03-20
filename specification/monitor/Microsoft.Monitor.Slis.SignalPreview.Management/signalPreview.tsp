@@ -45,7 +45,7 @@ alias SignalPreviewServiceGroupRoute = "/providers/Microsoft.Management/serviceG
 @doc("ServiceGroup as parameter")
 model ServiceGroupBaseParameters {
   @path
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[A-Za-z0-9._()~-]{1,250}$")
   @doc("The name of the service group.")
   serviceGroupName: string;
 }
@@ -90,7 +90,7 @@ interface SloView {
   @doc("Returns preview data for the signal.")
   sliSignalPreview(
     @path
-    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    @pattern("^[A-Za-z0-9._()~-]{1,250}$")
     @doc("The name of the service group.")
     serviceGroupName: string,
 

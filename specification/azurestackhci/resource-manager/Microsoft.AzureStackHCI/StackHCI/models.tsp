@@ -9472,7 +9472,7 @@ union IpInterfaceType {
   Dhcp: "Dhcp",
 
   /** Static configuration. */
-  static: "static",
+  Static: "Static",
 }
 
 /**
@@ -9654,6 +9654,23 @@ model NetworkAdapterDeploymentStep {
   /** List of exceptions. */
   @visibility(Lifecycle.Read)
   exception?: string[];
+}
+
+/**
+ * Edge machine metadata properties.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineMetadataProperties {
+  /**
+   * Validated Recipe name or identifier.
+   */
+  validatedRecipe?: string;
+
+  /**
+   * Provisioning state of the metadata resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }
 
 ////////////////////////////////////////////////////////////////
