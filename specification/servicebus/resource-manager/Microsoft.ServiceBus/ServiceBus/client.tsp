@@ -228,8 +228,10 @@ namespace Microsoft.ServiceBus {
    * Parameters supplied to the Patch Namespace operation.
    */
   #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SB prefix matches existing ServiceBus naming convention"
   model SBNamespaceUpdateParametersReplacement
     extends Azure.ResourceManager.CommonTypes.TrackedResource {
+    /** The namespace update properties. */
     properties?: SBNamespaceUpdateProperties;
     ...OmitProperties<
       SBNamespaceUpdateParameters,
@@ -243,6 +245,7 @@ namespace Microsoft.ServiceBus {
   #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat"
   model PrivateLinkResourceReplacement
     extends Azure.ResourceManager.CommonTypes.Resource {
+    /** The private link resource properties. */
     properties?: PrivateLinkResourceProperties;
   }
 } // namespace Microsoft.ServiceBus
