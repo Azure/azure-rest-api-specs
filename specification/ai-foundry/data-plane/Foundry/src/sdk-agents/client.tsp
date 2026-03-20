@@ -63,6 +63,7 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.MCPTool.connector_id, "connectorType");
 @@clientName(OpenAI.MCPToolFilter, "McpToolFilter");
 @@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval");
+@@clientName(OpenAI.MCPToolConnectorId, "McpToolConnectorId");
 
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
