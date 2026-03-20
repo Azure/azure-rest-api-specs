@@ -99,7 +99,7 @@ namespace Microsoft.Authorization {
   "csharp"
 );
 @@clientName(Microsoft.Authorization.PolicyTokenResponse,
-  "PolicyTokenResponseResult",
+  "PolicyTokenAcquisitionResult",
   "csharp"
 );
 
@@ -196,10 +196,90 @@ namespace Microsoft.Authorization {
   Azure.Core.azureLocation,
   "csharp"
 );
+@@alternateType(Microsoft.Authorization.PolicyAssignment.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 
-// Rename model ending with "Definition" (AZC0031)
+// Rename model ending with "Definition" (AZC0031) and add Policy prefix
 @@clientName(Microsoft.Authorization.DataManifestCustomResourceFunctionDefinition,
-  "DataManifestCustomResourceFunctionDetail",
+  "PolicyDataManifestCustomResourceFunctionDetail",
+  "csharp"
+);
+
+// Note: Variable/VariableValue resources are NOT renamed here because @@clientName on
+// ARM resource models causes duplicate extension methods in the mgmt emitter.
+// The types are already in the Azure.ResourceManager.Resources.Policy namespace
+// which provides sufficient context.
+
+// Rename Alias-related types to add Policy prefix
+@@clientName(Microsoft.Authorization.Alias, "PolicyAlias", "csharp");
+@@clientName(Microsoft.Authorization.AliasPath, "PolicyAliasPath", "csharp");
+@@clientName(Microsoft.Authorization.AliasPathAttributes,
+  "PolicyAliasPathAttributes",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.AliasPathMetadata,
+  "PolicyAliasPathMetadata",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.AliasPathTokenType,
+  "PolicyAliasPathTokenType",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.AliasPattern, "PolicyAliasPattern", "csharp");
+@@clientName(Microsoft.Authorization.AliasPatternType,
+  "PolicyAliasPatternType",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.AliasType, "PolicyAliasType", "csharp");
+
+// Rename types that still lack Policy prefix
+@@clientName(Microsoft.Authorization.AssignmentScopeValidation,
+  "PolicyAssignmentScopeValidation",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.DataEffect, "PolicyDataEffect", "csharp");
+@@clientName(Microsoft.Authorization.ExemptionCategory,
+  "PolicyExemptionCategory",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.ExternalEvaluationEndpointInvocationResult,
+  "PolicyExternalEvaluationEndpointInvocationResult",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.ResourceTypeAliases,
+  "PolicyResourceTypeAliases",
+  "csharp"
+);
+
+// Type formatting: PrincipalId/TenantId/ClientId -> Guid (uuid)
+@@alternateType(Microsoft.Authorization.Identity.principalId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.Authorization.Identity.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.Authorization.UserAssignedIdentitiesValue.principalId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.Authorization.UserAssignedIdentitiesValue.clientId,
+  Azure.Core.uuid,
+  "csharp"
+);
+
+// Boolean naming: AllowCustomProperties -> IsCustomPropertiesAllowed
+@@clientName(Microsoft.Authorization.DataManifestCustomResourceFunctionDefinition.allowCustomProperties,
+  "IsCustomPropertiesAllowed",
+  "csharp"
+);
+
+// Boolean naming: AssignPermissions -> ShouldAssignPermissions
+@@clientName(Microsoft.Authorization.ParameterDefinitionsValueMetadata.assignPermissions,
+  "ShouldAssignPermissions",
   "csharp"
 );
 
@@ -271,3 +351,17 @@ namespace Microsoft.Authorization {
 @@scope(Microsoft.Authorization.PolicySetDefinitionVersions.listByManagementGroup,
   "!csharp"
 );
+
+@@scope(Microsoft.Authorization.Variables.getAtManagementGroup, "!csharp");
+@@scope(Microsoft.Authorization.Variables.createOrUpdateAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.Variables.deleteAtManagementGroup, "!csharp");
+@@scope(Microsoft.Authorization.Variables.listForManagementGroup, "!csharp");
+
+@@scope(Microsoft.Authorization.VariableValues.getAtManagementGroup, "!csharp");
+@@scope(Microsoft.Authorization.VariableValues.createOrUpdateAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.VariableValues.deleteAtManagementGroup, "!csharp");
+@@scope(Microsoft.Authorization.VariableValues.listForManagementGroup, "!csharp");
