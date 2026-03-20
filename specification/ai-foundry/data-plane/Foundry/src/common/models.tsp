@@ -1,5 +1,5 @@
 namespace Azure.AI.Projects;
-
+using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
@@ -73,6 +73,7 @@ alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends Foundr
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
   @header("Foundry-Features")
+  @scope("!python")
   foundry_features: RequiredPreviewOptInHeader;
 };
 
@@ -81,6 +82,7 @@ alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends Fou
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
   @header("Foundry-Features")
+  @scope("!python")
   foundry_features?: OptionalPreviewOptInHeader;
 };
 
