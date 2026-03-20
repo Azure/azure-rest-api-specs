@@ -333,13 +333,11 @@ model GovernanceRuleProperties {
   /**
    * Excluded scopes, filter out the descendants of the scope (on management scopes)
    */
-  @identifiers(#[])
   excludedScopes?: string[];
 
   /**
    * The governance rule conditionSets - see examples
    */
-  @identifiers(#[])
   conditionSets: unknown[];
 
   /**

@@ -66,7 +66,6 @@ interface GovernanceRules {
     GovernanceRule,
     ExecuteGovernanceRuleParams,
     ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<GovernanceRule>,
     OptionalRequestBody = true
   >;
 
