@@ -19,10 +19,12 @@ interface webTestLocationsOperationGroup {
   /**
    * Gets a list of web test locations available to this Application Insights component.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
   @list
   @action("syntheticmonitorlocations")
+  @operationId("webTestLocations_List")
   list is ArmProviderActionSync<
     Response = ApplicationInsightsWebTestLocationsListResult,
     Scope = Extension.ResourceGroup,

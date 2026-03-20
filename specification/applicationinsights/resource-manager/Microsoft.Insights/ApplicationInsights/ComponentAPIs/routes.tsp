@@ -44,31 +44,6 @@ interface AnnotationsOperationGroup {
     @query("end")
     end: string,
   ): ArmResponse<AnnotationsListResult> | AnnotationError;
-  // list is ArmProviderActionSync<
-  //   Response = AnnotationsListResult,
-  //   Scope = Extension.ResourceGroup,
-  //   Parameters = {
-  //     /**
-  //      * The name of the Application Insights component resource.
-  //      */
-  //     @path
-  //     @segment("components")
-  //     resourceName: string;
-
-  //     /**
-  //      * The start time to query from for annotations, cannot be older than 90 days from current date.
-  //      */
-  //     @query("start")
-  //     start: string;
-
-  //     /**
-  //      * The end time to query for annotations.
-  //      */
-  //     @query("end")
-  //     end: string;
-  //   },
-  //   Error = AnnotationError
-  // >;
 
   /**
    * Create an Annotation of an Application Insights component.
