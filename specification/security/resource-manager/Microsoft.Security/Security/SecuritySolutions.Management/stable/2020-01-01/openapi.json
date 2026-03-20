@@ -421,7 +421,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SecuritySolutionsReferenceDataList"
+              "$ref": "#/definitions/securitySolutionsReferenceDataList"
             }
           },
           "default": {
@@ -538,7 +538,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SecuritySolutionsReferenceDataList"
+              "$ref": "#/definitions/securitySolutionsReferenceDataList"
             }
           },
           "default": {
@@ -1296,6 +1296,82 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}": {
+      "post": {
+        "operationId": "JitNetworkAccessPolicies_Initiate",
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Initiate a JIT access from a specific Just-in-Time policy configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "ascLocation",
+            "in": "path",
+            "description": "The location where ASC stores the data of the subscription. can be retrieved from Get locations",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jitNetworkAccessPolicyName",
+            "in": "path",
+            "description": "Name of a Just-in-Time access configuration policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jitNetworkAccessPolicyInitiateType",
+            "in": "path",
+            "description": "Type of the action to do on the Just-in-Time access policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "initiate"
+            ],
+            "x-ms-enum": {
+              "name": "JitNetworkAccessPolicyInitiateType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPolicyInitiateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Initiate an action on a JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/InitiateJitNetworkAccessPolicy_example.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/securitySolutions/{securitySolutionName}": {
       "get": {
         "operationId": "SecuritySolutions_Get",
@@ -1393,82 +1469,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}": {
-      "post": {
-        "operationId": "JitNetworkAccessPolicies_Initiate",
-        "tags": [
-          "JitNetworkAccessPolicies"
-        ],
-        "description": "Initiate a JIT access from a specific Just-in-Time policy configuration.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "ascLocation",
-            "in": "path",
-            "description": "The location where ASC stores the data of the subscription. can be retrieved from Get locations",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jitNetworkAccessPolicyName",
-            "in": "path",
-            "description": "Name of a Just-in-Time access configuration policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jitNetworkAccessPolicyInitiateType",
-            "in": "path",
-            "description": "Type of the action to do on the Just-in-Time access policy.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "initiate"
-            ],
-            "x-ms-enum": {
-              "name": "JitNetworkAccessPolicyInitiateType",
-              "modelAsString": false
-            }
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JitNetworkAccessPolicyInitiateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/JitNetworkAccessRequest"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Initiate an action on a JIT network access policy": {
-            "$ref": "./examples/JitNetworkAccessPolicies/InitiateJitNetworkAccessPolicy_example.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1515,7 +1515,8 @@
         {
           "$ref": "#/definitions/ExternalSecuritySolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AAD"
     },
     "AadSolutionProperties": {
       "type": "object",
@@ -1544,20 +1545,17 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AllowedConnectionsResource items on this page",
           "items": {
             "$ref": "#/definitions/AllowedConnectionsResource"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URI to fetch the next page.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "AllowedConnectionsResource": {
       "type": "object",
@@ -1566,6 +1564,7 @@
         "properties": {
           "$ref": "#/definitions/AllowedConnectionsResourceProperties",
           "description": "Describes the allowed traffic between Azure resources",
+          "readOnly": true,
           "x-ms-client-flatten": true
         },
         "location": {
@@ -1613,7 +1612,8 @@
         {
           "$ref": "#/definitions/ExternalSecuritySolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ATA"
     },
     "AtaSolutionProperties": {
       "type": "object",
@@ -1642,7 +1642,8 @@
         {
           "$ref": "#/definitions/ExternalSecuritySolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "CEF"
     },
     "CefSolutionProperties": {
       "type": "object",
@@ -1871,6 +1872,10 @@
           "readOnly": true
         }
       },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -1909,24 +1914,18 @@
     },
     "ExternalSecuritySolutionList": {
       "type": "object",
-      "description": "Paged collection of ExternalSecuritySolution items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ExternalSecuritySolution items on this page",
           "items": {
             "$ref": "#/definitions/ExternalSecuritySolution"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ExternalSecuritySolutionProperties": {
       "type": "object",
@@ -1947,24 +1946,18 @@
     },
     "JitNetworkAccessPoliciesList": {
       "type": "object",
-      "description": "Paged collection of JitNetworkAccessPolicy items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The JitNetworkAccessPolicy items on this page",
           "items": {
             "$ref": "#/definitions/JitNetworkAccessPolicy"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "JitNetworkAccessPolicy": {
       "type": "object",
@@ -2352,24 +2345,18 @@
     },
     "SecuritySolutionList": {
       "type": "object",
-      "description": "Paged collection of SecuritySolution items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SecuritySolution items on this page",
           "items": {
             "$ref": "#/definitions/SecuritySolution"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "SecuritySolutionProperties": {
       "type": "object",
@@ -2396,91 +2383,6 @@
         "provisioningState",
         "template",
         "protectionStatus"
-      ]
-    },
-    "SecuritySolutionsReferenceData": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Location where the resource is stored",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/SecuritySolutionsReferenceDataProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "SecuritySolutionsReferenceDataList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SecuritySolutionsReferenceData"
-          }
-        }
-      }
-    },
-    "SecuritySolutionsReferenceDataProperties": {
-      "type": "object",
-      "properties": {
-        "securityFamily": {
-          "$ref": "#/definitions/SecurityFamily",
-          "description": "The security family of the security solution"
-        },
-        "alertVendorName": {
-          "type": "string",
-          "description": "The security solutions' vendor name"
-        },
-        "packageInfoUrl": {
-          "type": "string",
-          "description": "The security solutions' package info url"
-        },
-        "productName": {
-          "type": "string",
-          "description": "The security solutions' product name"
-        },
-        "publisher": {
-          "type": "string",
-          "description": "The security solutions' publisher"
-        },
-        "publisherDisplayName": {
-          "type": "string",
-          "description": "The security solutions' publisher display name"
-        },
-        "template": {
-          "type": "string",
-          "description": "The security solutions' template"
-        }
-      },
-      "required": [
-        "securityFamily",
-        "alertVendorName",
-        "packageInfoUrl",
-        "productName",
-        "publisher",
-        "publisherDisplayName",
-        "template"
       ]
     },
     "ServerVulnerabilityAssessment": {
@@ -2620,24 +2522,19 @@
     },
     "TopologyList": {
       "type": "object",
-      "description": "Paged collection of TopologyResource items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TopologyResource items on this page",
           "items": {
             "$ref": "#/definitions/TopologyResource"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "TopologyResource": {
       "type": "object",
@@ -2645,6 +2542,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/TopologyResourceProperties",
+          "readOnly": true,
           "x-ms-client-flatten": true
         },
         "location": {
@@ -2749,6 +2647,91 @@
           "readOnly": true
         }
       }
+    },
+    "securitySolutionsReferenceData": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Location where the resource is stored",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/securitySolutionsReferenceDataProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "securitySolutionsReferenceDataList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/securitySolutionsReferenceData"
+          }
+        }
+      }
+    },
+    "securitySolutionsReferenceDataProperties": {
+      "type": "object",
+      "properties": {
+        "securityFamily": {
+          "$ref": "#/definitions/SecurityFamily",
+          "description": "The security family of the security solution"
+        },
+        "alertVendorName": {
+          "type": "string",
+          "description": "The security solutions' vendor name"
+        },
+        "packageInfoUrl": {
+          "type": "string",
+          "description": "The security solutions' package info url"
+        },
+        "productName": {
+          "type": "string",
+          "description": "The security solutions' product name"
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The security solutions' publisher"
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "The security solutions' publisher display name"
+        },
+        "template": {
+          "type": "string",
+          "description": "The security solutions' template"
+        }
+      },
+      "required": [
+        "securityFamily",
+        "alertVendorName",
+        "packageInfoUrl",
+        "productName",
+        "publisher",
+        "publisherDisplayName",
+        "template"
+      ]
     }
   },
   "parameters": {}

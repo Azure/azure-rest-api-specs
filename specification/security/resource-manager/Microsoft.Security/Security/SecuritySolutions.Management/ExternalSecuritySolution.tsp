@@ -20,6 +20,7 @@ namespace Microsoft.Security;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ResourceGroupLocationResource)
+@discriminator("kind")
 model ExternalSecuritySolution is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = ExternalSecuritySolution,

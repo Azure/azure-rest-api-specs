@@ -122,7 +122,7 @@ interface SecuritySolutionsReferenceDataOperationGroup {
   @get
   @action("securitySolutionsReferenceData")
   list is ArmProviderActionSync<
-    Response = SecuritySolutionsReferenceDataList,
+    Response = securitySolutionsReferenceDataList,
     Scope = SubscriptionActionScope,
     Error = CloudError
   >;
@@ -134,7 +134,7 @@ interface SecuritySolutionsReferenceDataOperationGroup {
   @get
   @action("securitySolutionsReferenceData")
   listByHomeRegion is ArmProviderActionSync<
-    Response = SecuritySolutionsReferenceDataList,
+    Response = securitySolutionsReferenceDataList,
     Scope = SubscriptionActionScope,
     Error = CloudError,
     Parameters = {

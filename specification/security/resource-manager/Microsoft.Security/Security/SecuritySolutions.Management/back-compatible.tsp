@@ -7,7 +7,7 @@ using Microsoft.Security;
 @@Legacy.flattenProperty(CloudError.error);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SecuritySolutionsReferenceData.properties);
+@@Legacy.flattenProperty(securitySolutionsReferenceData.properties);
 
 @@clientLocation(AllowedConnectionsResources.get, "AllowedConnections");
 @@clientLocation(AllowedConnectionsResources.listByHomeRegion,
@@ -75,3 +75,5 @@ using Microsoft.Security;
 );
 
 @@clientLocation(TopologyOperationGroup.list, "Topology");
+@@visibility(AllowedConnectionsResource.properties, Lifecycle.Read);
+@@visibility(TopologyResource.properties, Lifecycle.Read);

@@ -10,6 +10,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.securitySolutionsReferenceData.properties.name__added` | added | `{"type":"string","description":"Resource name","readOnly":true}` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData'].get.parameters[0].name__added` | added | `ascLocation` |
 
 ### Changes for `in`
@@ -22,18 +23,13 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AllowedConnectionsList.required__added` | added | `["value"]` |
-| `definitions.ExternalSecuritySolution.required__deleted` | deleted | `["kind"]` |
-| `definitions.ExternalSecuritySolutionList.required__added` | added | `["value"]` |
-| `definitions.JitNetworkAccessPoliciesList.required__added` | added | `["value"]` |
-| `definitions.SecuritySolutionList.required__added` | added | `["value"]` |
-| `definitions.TopologyList.required__added` | added | `["value"]` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData'].get.parameters[0].required__added` | added | `true` |
 
 ### Changes for `type`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.securitySolutionsReferenceData.properties.type__added` | added | `{"type":"string","description":"Resource type","readOnly":true}` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData'].get.parameters[0].type__added` | added | `string` |
 
 ### Changes for `headers`
@@ -60,24 +56,6 @@
 |------|------------|-------|
 | `definitions.PortNumber__deleted` | deleted | `{"type":"integer","minimum":0,"maximum":65535}` |
 
-### Changes for `securitySolutionsReferenceData`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.securitySolutionsReferenceData__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/securitySolutionsReferenceDataPro...` |
-
-### Changes for `securitySolutionsReferenceDataList`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.securitySolutionsReferenceDataList__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/securitySoluti...` |
-
-### Changes for `securitySolutionsReferenceDataProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.securitySolutionsReferenceDataProperties__deleted` | deleted | `{"type":"object","properties":{"securityFamily":{"type":"string","description":"The security family ...` |
-
 ### Changes for `CloudError`
 
 | Path | Change Type | Value |
@@ -95,32 +73,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ErrorAdditionalInfo__added` | added | `{"type":"object","description":"The resource management error additional info.","properties":{"type"...` |
-
-### Changes for `SecuritySolutionsReferenceData`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecuritySolutionsReferenceData__added` | added | `{"type":"object","properties":{"id":{"type":"string","description":"Resource Id","readOnly":true},"n...` |
-
-### Changes for `SecuritySolutionsReferenceDataList`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecuritySolutionsReferenceDataList__added` | added | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/SecuritySoluti...` |
-
-### Changes for `SecuritySolutionsReferenceDataProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecuritySolutionsReferenceDataProperties__added` | added | `{"type":"object","properties":{"securityFamily":{"type":"string","description":"The security family ...` |
-
-### Changes for `x-ms-discriminator-value`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AadExternalSecuritySolution['x-ms-discriminator-value__deleted']` | deleted | `AAD` |
-| `definitions.AtaExternalSecuritySolution['x-ms-discriminator-value__deleted']` | deleted | `ATA` |
-| `definitions.CefExternalSecuritySolution['x-ms-discriminator-value__deleted']` | deleted | `CEF` |
 
 ### Changes for `description`
 
@@ -157,6 +109,7 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AadSolutionProperties.allOf__deleted` | deleted | `[{"$ref":"#/definitions/ExternalSecuritySolutionProperties"},{"$ref":"#/definitions/AadConnectivityS...` |
+| `definitions.securitySolutionsReferenceData.allOf__deleted` | deleted | `[{"$ref":"./common/v1/types.json#/definitions/Resource"},{"$ref":"./common/v1/types.json#/definition...` |
 
 ### Changes for `properties`
 
@@ -171,15 +124,6 @@
 |------|------------|-------|
 | `definitions.AadSolutionProperties.additionalProperties__added` | added | `{}` |
 
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AllowedConnectionsList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.AllowedConnectionsResource.properties.properties.readOnly__deleted` | deleted | `true` |
-| `definitions.TopologyList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.TopologyResource.properties.properties.readOnly__deleted` | deleted | `true` |
-
 ### Changes for `location`
 
 | Path | Change Type | Value |
@@ -189,13 +133,8 @@
 | `definitions.ExternalSecuritySolution.properties.location__added` | added | `{"type":"string","description":"Location where the resource is stored","readOnly":true}` |
 | `definitions.JitNetworkAccessPolicy.properties.location__added` | added | `{"type":"string","description":"Location where the resource is stored","readOnly":true}` |
 | `definitions.SecuritySolution.properties.location__added` | added | `{"type":"string","description":"Location where the resource is stored","readOnly":true}` |
+| `definitions.securitySolutionsReferenceData.properties.location__added` | added | `{"type":"string","description":"Location where the resource is stored","readOnly":true}` |
 | `definitions.TopologyResource.properties.location__added` | added | `{"type":"string","description":"Location where the resource is stored","readOnly":true}` |
-
-### Changes for `discriminator`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExternalSecuritySolution.discriminator__deleted` | deleted | `kind` |
 
 ### Changes for `kind`
 
@@ -220,6 +159,12 @@
 |------|------------|-------|
 | `definitions.ServerVulnerabilityAssessmentProperties.properties.provisioningState['x-ms-enum__added']` | added | `{"name":"ServerVulnerabilityAssessmentPropertiesProvisioningState","modelAsString":true}` |
 
+### Changes for `id`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.securitySolutionsReferenceData.properties.id__added` | added | `{"type":"string","description":"Resource Id","readOnly":true}` |
+
 ## Modified Values
 
 | Path | Old Value | New Value |
@@ -231,6 +176,7 @@
 | `definitions.JitNetworkAccessPolicy.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.SecuritySolution.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.SecuritySolutionProperties.properties.securityFamily.description` | `The security family of the security solution` | `The security family of the discovered solution` |
+| `definitions.securitySolutionsReferenceDataProperties.properties.securityFamily.description` | `The security family of the security solution` | `The security family of the discovered solution` |
 | `definitions.ServerVulnerabilityAssessment.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.TopologyResource.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/allowedConnections'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
@@ -245,12 +191,10 @@
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/externalSecuritySolutions'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData'].get.responses.200.schema.$ref` | `#/definitions/securitySolutionsReferenceDataList` | `#/definitions/SecuritySolutionsReferenceDataList` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/topologies'].get.parameters[0].$ref` | `./common/v1/types.json#/parameters/AscLocation` | `../../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/topologies'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securitySolutions'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securitySolutionsReferenceData'].get.responses.200.schema.$ref` | `#/definitions/securitySolutionsReferenceDataList` | `#/definitions/SecuritySolutionsReferenceDataList` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/securitySolutionsReferenceData'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/topologies'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/microsoft.Security/serverVulnerabilityAssessments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |

@@ -171,14 +171,6 @@
           ]
         ],
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/securitySolutionsReferenceDataList",
-                "__new": "#/definitions/SecuritySolutionsReferenceDataList"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -232,14 +224,6 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/securitySolutionsReferenceData": {
       "get": {
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/securitySolutionsReferenceDataList",
-                "__new": "#/definitions/SecuritySolutionsReferenceDataList"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -672,89 +656,6 @@
       "minimum": 0,
       "maximum": 65535
     },
-    "securitySolutionsReferenceData__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/securitySolutionsReferenceDataProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "./common/v1/types.json#/definitions/Resource"
-        },
-        {
-          "$ref": "./common/v1/types.json#/definitions/Location"
-        }
-      ]
-    },
-    "securitySolutionsReferenceDataList__deleted": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/securitySolutionsReferenceData"
-          }
-        }
-      }
-    },
-    "securitySolutionsReferenceDataProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "securityFamily": {
-          "type": "string",
-          "description": "The security family of the security solution",
-          "enum": [
-            "Waf",
-            "Ngfw",
-            "SaasWaf",
-            "Va"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityFamily",
-            "modelAsString": true
-          }
-        },
-        "alertVendorName": {
-          "type": "string",
-          "description": "The security solutions' vendor name"
-        },
-        "packageInfoUrl": {
-          "type": "string",
-          "description": "The security solutions' package info url"
-        },
-        "productName": {
-          "type": "string",
-          "description": "The security solutions' product name"
-        },
-        "publisher": {
-          "type": "string",
-          "description": "The security solutions' publisher"
-        },
-        "publisherDisplayName": {
-          "type": "string",
-          "description": "The security solutions' publisher display name"
-        },
-        "template": {
-          "type": "string",
-          "description": "The security solutions' template"
-        }
-      },
-      "required": [
-        "alertVendorName",
-        "packageInfoUrl",
-        "productName",
-        "publisher",
-        "publisherDisplayName",
-        "securityFamily",
-        "template"
-      ]
-    },
     "CloudError__added": {
       "type": "object",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
@@ -820,103 +721,7 @@
         }
       }
     },
-    "SecuritySolutionsReferenceData__added": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Location where the resource is stored",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/SecuritySolutionsReferenceDataProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "SecuritySolutionsReferenceDataList__added": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SecuritySolutionsReferenceData"
-          }
-        }
-      }
-    },
-    "SecuritySolutionsReferenceDataProperties__added": {
-      "type": "object",
-      "properties": {
-        "securityFamily": {
-          "type": "string",
-          "description": "The security family of the discovered solution",
-          "enum": [
-            "Waf",
-            "Ngfw",
-            "SaasWaf",
-            "Va"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityFamily",
-            "modelAsString": true
-          }
-        },
-        "alertVendorName": {
-          "type": "string",
-          "description": "The security solutions' vendor name"
-        },
-        "packageInfoUrl": {
-          "type": "string",
-          "description": "The security solutions' package info url"
-        },
-        "productName": {
-          "type": "string",
-          "description": "The security solutions' product name"
-        },
-        "publisher": {
-          "type": "string",
-          "description": "The security solutions' publisher"
-        },
-        "publisherDisplayName": {
-          "type": "string",
-          "description": "The security solutions' publisher display name"
-        },
-        "template": {
-          "type": "string",
-          "description": "The security solutions' template"
-        }
-      },
-      "required": [
-        "alertVendorName",
-        "packageInfoUrl",
-        "productName",
-        "publisher",
-        "publisherDisplayName",
-        "securityFamily",
-        "template"
-      ]
-    },
     "AadExternalSecuritySolution": {
-      "x-ms-discriminator-value__deleted": "AAD",
       "properties": {
         "properties": {
           "description__added": "The external security solution properties for AAD solutions"
@@ -961,16 +766,6 @@
       },
       "additionalProperties__added": {}
     },
-    "AllowedConnectionsList": {
-      "required__added": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
-    },
     "AllowedConnectionsResource": {
       "properties": {
         "location__added": {
@@ -979,7 +774,6 @@
           "readOnly": true
         },
         "properties": {
-          "readOnly__deleted": true,
           "description__added": "Describes the allowed traffic between Azure resources"
         }
       },
@@ -1002,7 +796,6 @@
       ]
     },
     "AtaExternalSecuritySolution": {
-      "x-ms-discriminator-value__deleted": "ATA",
       "properties": {
         "properties": {
           "description__added": "The external security solution properties for ATA solutions"
@@ -1014,7 +807,6 @@
       "description__added": "The external security solution properties for ATA solutions"
     },
     "CefExternalSecuritySolution": {
-      "x-ms-discriminator-value__deleted": "CEF",
       "properties": {
         "properties": {
           "description__added": "The external security solution properties for CEF solutions"
@@ -1057,10 +849,6 @@
       ]
     },
     "ExternalSecuritySolution": {
-      "discriminator__deleted": "kind",
-      "required__deleted": [
-        "kind"
-      ],
       "properties": {
         "properties__added": {
           "type": "object",
@@ -1109,11 +897,6 @@
         ]
       ]
     },
-    "ExternalSecuritySolutionList": {
-      "required__added": [
-        "value"
-      ]
-    },
     "ExternalSecuritySolutionProperties": {
       "properties": {
         "workspace": {
@@ -1124,11 +907,6 @@
         "__old": true,
         "__new": {}
       }
-    },
-    "JitNetworkAccessPoliciesList": {
-      "required__added": [
-        "value"
-      ]
     },
     "JitNetworkAccessPolicy": {
       "description__added": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
@@ -1228,11 +1006,6 @@
         ]
       ]
     },
-    "SecuritySolutionList": {
-      "required__added": [
-        "value"
-      ]
-    },
     "SecuritySolutionProperties": {
       "properties": {
         "securityFamily": {
@@ -1271,16 +1044,6 @@
         }
       }
     },
-    "TopologyList": {
-      "required__added": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
-    },
     "TopologyResource": {
       "description__added": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
@@ -1288,9 +1051,6 @@
           "type": "string",
           "description": "Location where the resource is stored",
           "readOnly": true
-        },
-        "properties": {
-          "readOnly__deleted": true
         }
       },
       "allOf": [
@@ -1315,6 +1075,48 @@
       "properties": {
         "topologyScore": {
           "format__added": "int32"
+        }
+      }
+    },
+    "securitySolutionsReferenceData": {
+      "allOf__deleted": [
+        {
+          "$ref": "./common/v1/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "./common/v1/types.json#/definitions/Location"
+        }
+      ],
+      "properties": {
+        "id__added": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "name__added": {
+          "type": "string",
+          "description": "Resource name",
+          "readOnly": true
+        },
+        "type__added": {
+          "type": "string",
+          "description": "Resource type",
+          "readOnly": true
+        },
+        "location__added": {
+          "type": "string",
+          "description": "Location where the resource is stored",
+          "readOnly": true
+        }
+      }
+    },
+    "securitySolutionsReferenceDataProperties": {
+      "properties": {
+        "securityFamily": {
+          "description": {
+            "__old": "The security family of the security solution",
+            "__new": "The security family of the discovered solution"
+          }
         }
       }
     }
