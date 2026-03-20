@@ -23,7 +23,7 @@ model ManagedNetworkSettingsPropertiesBasicResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "'ManagedNetworkSettingsPropertiesBasicResource' does not support standalone delete – removed via parent or side-effect"
 @armResourceOperations(#{ omitTags: true })
 interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
