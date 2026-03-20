@@ -7451,12 +7451,67 @@
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        },
+        "sslmode": {
+          "$ref": "#/definitions/AmazonRedshiftSslMode",
+          "description": "The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0"
+        },
+        "sslinsecure": {
+          "description": "Specifies whether the driver checks the authenticity of the IdP server certificate. The default value is False. Only used for Version 2.0"
         }
       },
       "required": [
         "server",
         "database"
       ]
+    },
+    "AmazonRedshiftSslMode": {
+      "type": "string",
+      "description": "The SSL certificate verification mode to use when connecting to Amazon Redshift.Only used for Version 2.0",
+      "enum": [
+        "verify-full",
+        "verify-ca",
+        "require",
+        "prefer",
+        "allow",
+        "disable"
+      ],
+      "x-ms-enum": {
+        "name": "AmazonRedshiftSslMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Verify_full",
+            "value": "verify-full",
+            "description": "Connect only using SSL, a trusted certificate authority, and a server name that matches the certificate."
+          },
+          {
+            "name": "Verify_ca",
+            "value": "verify-ca",
+            "description": "Connect only using SSL and a trusted certificate authority."
+          },
+          {
+            "name": "Required",
+            "value": "require",
+            "description": "Connect only using SSL."
+          },
+          {
+            "name": "Preferred",
+            "value": "prefer",
+            "description": "Connect using SSL if available. Otherwise, connect without using SSL."
+          },
+          {
+            "name": "Allowed",
+            "value": "allow",
+            "description": "By default, connect without using SSL. If the server requires SSL connections, then use SSL."
+          },
+          {
+            "name": "Disabled",
+            "value": "disable",
+            "description": "Connect without using SSL."
+          }
+        ]
+      }
     },
     "AmazonRedshiftSource": {
       "type": "object",
@@ -19051,6 +19106,8 @@
       "x-ms-discriminator-value": "HiveSource"
     },
     "HiveThriftTransportProtocol": {
+
+      
       "type": "string",
       "description": "The transport protocol to use in the Thrift layer.",
       "enum": [
