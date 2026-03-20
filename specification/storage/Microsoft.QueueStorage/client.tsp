@@ -57,7 +57,22 @@ interface QueueClient extends Storage.Queues.Queue {}
 // Go customizations
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
+@@clientName(Metrics.includeApis, "includeAPIs", "go");
+@@clientName(CorsRule, "CORSRule", "go");
+@@clientName(ListQueuesResponse.queueItems, "Queues", "go");
+@@clientName(ListQueuesResponse, "ListQueuesSegmentResponse", "go");
+@@clientName(ListQueuesResponse.queueItems, "Queues", "go");
+@@clientName(QueueItem, "Queue", "go");
 @@clientName(QueueServiceClient, "ServiceClient", "go");
+@@clientName(QueueServiceProperties, "StorageServiceProperties", "go");
+@@clientName(QueueServiceProperties.cors, "CORS", "go");
+@@clientName(QueueServiceStats, "StorageServiceStats", "go");
+@@clientName(ReceivedMessage, "DequeuedMessage", "go");
+@@clientName(SentMessage, "EnqueuedMessage", "go");
+@@clientName(Service.getQueues, "ListQueuesSegment", "go");
+@@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
+@@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
+@@clientName(UserDelegationKey.signedDelegatedUserTid, "SignedDelegatedUserTID", "go");
 
 // JavaScript SDK renames - based on azure-sdk-for-js storage-queue swagger README
 
