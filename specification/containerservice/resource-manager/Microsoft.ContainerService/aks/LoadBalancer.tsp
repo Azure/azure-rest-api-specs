@@ -19,7 +19,7 @@ namespace Microsoft.ContainerService;
  * The configurations regarding multiple standard load balancers. If not supplied, single load balancer mode will be used. Multiple standard load balancers mode will be used if at lease one configuration is supplied. There has to be a configuration named `kubernetes`. The name field will be the name of the corresponding public load balancer. There will be an internal load balancer created if needed, and the name will be `<name>-internal`. The internal lb shares the same configurations as the external one. The internal lbs are not needed to be included in LoadBalancer list.
  */
 @parentResource(ManagedCluster)
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model LoadBalancer
   is Azure.ResourceManager.ProxyResource<LoadBalancerProperties> {
   ...ResourceNameParameter<
@@ -39,7 +39,7 @@ model LoadBalancer
 );
 
 @armResourceOperations
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 interface LoadBalancers {
   /**
    * Gets the specified load balancer.
@@ -73,7 +73,7 @@ interface LoadBalancers {
 /**
  * operator represents a key's relationship to a set of values. Valid operators are In and NotIn
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union Operator {
   string,
 
@@ -99,7 +99,7 @@ union Operator {
 }
 
 /** Properties for a load balancer resource. */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model LoadBalancerProperties {
   /**
    * Required field. A string value that must specify the ID of an existing agent pool. All nodes in the given pool will always be added to this load balancer. This agent pool must have at least one node and minCount>=1 for autoscaling operations. An agent pool can only be the primary pool for a single load balancer.
@@ -137,7 +137,7 @@ model LoadBalancerProperties {
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model LabelSelector {
   /**
    * matchLabels is an array of {key=value} pairs. A single {key=value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is `key`, the operator is `In`, and the values array contains only `value`. The requirements are ANDed.
@@ -154,7 +154,7 @@ model LabelSelector {
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model LabelSelectorRequirement {
   /**
    * key is the label key that the selector applies to.
@@ -176,7 +176,7 @@ model LabelSelectorRequirement {
 /**
  * The names of the load balancers to rebalance. If set to empty, all load balancers will be rebalanced.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model RebalanceLoadBalancersRequestBody {
   /**
    * The load balancer names list.
