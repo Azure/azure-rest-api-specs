@@ -156,7 +156,7 @@
               "provider": "Microsoft Search",
               "resource": "Diagnostic Settings",
               "operation": "Get Diagnostic Setting",
-              "description": "Gets the diganostic setting for the resource."
+              "description": "Gets the diagnostic setting for the resource."
             },
             "origin": "system"
           },
@@ -167,7 +167,7 @@
               "provider": "Microsoft Search",
               "resource": "Diagnostic Settings",
               "operation": "Set Diagnostic Setting",
-              "description": "Creates or updates the diganostic setting for the resource."
+              "description": "Creates or updates the diagnostic setting for the resource."
             },
             "origin": "system"
           },
@@ -180,7 +180,52 @@
               "operation": "Read search service metric definitions",
               "description": "Gets the available metrics for the search service."
             },
-            "origin": "system"
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "SearchLatency",
+                    "displayName": "Search Latency",
+                    "displayDescription": "Average search latency for the search service",
+                    "unit": "Seconds",
+                    "aggregationType": "Average",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "SearchQueriesPerSecond",
+                    "displayName": "Search queries per second",
+                    "displayDescription": "Search queries per second for the search service",
+                    "unit": "CountPerSecond",
+                    "aggregationType": "Average",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "ThrottledSearchQueriesPercentage",
+                    "displayName": "Throttled search queries percentage",
+                    "displayDescription": "Percentage of search queries that were throttled for the search service",
+                    "unit": "Percent",
+                    "aggregationType": "Average",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
           },
           {
             "name": "Microsoft.Search/searchServices/logDefinitions/read",
@@ -191,7 +236,18 @@
               "operation": "Read search service log definitions",
               "description": "Gets the available logs for the search service."
             },
-            "origin": "system"
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "logSpecifications": [
+                  {
+                    "name": "OperationLogs",
+                    "displayName": "Operation Logs",
+                    "blobDuration": "PT1H"
+                  }
+                ]
+              }
+            }
           },
           {
             "name": "Microsoft.Search/searchServices/privateEndpointConnectionProxies/validate/action",
@@ -239,6 +295,7 @@
           },
           {
             "name": "Microsoft.Search/searchServices/privateEndpointConnections/write",
+            "isDataAction": false,
             "display": {
               "provider": "Microsoft Search",
               "resource": "Private Endpoint Connection",
@@ -249,6 +306,7 @@
           },
           {
             "name": "Microsoft.Search/searchServices/privateEndpointConnections/read",
+            "isDataAction": false,
             "display": {
               "provider": "Microsoft Search",
               "resource": "Private Endpoint Connection",
@@ -259,11 +317,23 @@
           },
           {
             "name": "Microsoft.Search/searchServices/privateEndpointConnections/delete",
+            "isDataAction": false,
             "display": {
               "provider": "Microsoft Search",
               "resource": "Private Endpoint Connection",
               "operation": "Delete Private Endpoint Connection",
               "description": "Deletes an existing private endpoint connection."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/privateEndpointConnectionsApproval/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Private Endpoint Connection",
+              "operation": "Approve Private Endpoint Connection",
+              "description": "Approve Private Endpoint Connection."
             },
             "origin": "user,system"
           },
@@ -312,6 +382,83 @@
             "origin": "user,system"
           },
           {
+            "name": "Microsoft.Search/searchServices/networkSecurityPerimeterAssociationProxies/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Network Security Perimeter Association Proxy",
+              "operation": "Delete a Network Security Perimeter Association Proxy",
+              "description": "Delete an association proxy to a Network Security Perimeter resource of Microsoft.Network provider."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Search/locations/notifyNetworkSecurityPerimeterUpdatesAvailable/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Network Security Perimeter",
+              "operation": "Check the Network Security Perimeter for configuration updates.",
+              "description": "Check if the configuration of the Network Security Perimeter needs updating."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/networkSecurityPerimeterAssociationProxies/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Network Security Perimeter Association Proxy",
+              "operation": "Delete a Network Security Perimeter Association Proxy",
+              "description": "Delete an association proxy to a Network Security Perimeter resource of Microsoft.Network provider."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/networkSecurityPerimeterAssociationProxies/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Network Security Perimeter Association Proxy",
+              "operation": "Change state of Network Security Perimeter Association",
+              "description": "Change the state of an association to a Network Security Perimeter resource of Microsoft.Network provider."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/networkSecurityPerimeterConfigurations/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Network Security Perimeter Configuration",
+              "operation": "Read Network Security Perimeter configuration",
+              "description": "Read the Network Security Perimeter configuration."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/networkSecurityPerimeterConfigurations/reconcile/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Network Security Perimeter Configuration",
+              "operation": "Reconcile Network Security Perimeter configuration",
+              "description": "Reconcile the Network Security Perimeter configuration with NRP''s (Microsoft.Network Resource Provider) copy."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Search/offerings/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Offerings",
+              "operation": "Get Offerings",
+              "description": "Lists all of the features and SKUs offered by the Azure AI Search service in each region."
+            },
+            "origin": "user,system"
+          },
+          {
             "name": "Microsoft.Search/searchServices/indexes/read",
             "isDataAction": false,
             "display": {
@@ -341,6 +488,50 @@
               "resource": "Indexes",
               "operation": "Delete Index",
               "description": "Delete an index."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexes/documents/read",
+            "isDataAction": true,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Documents",
+              "operation": "Read Documents",
+              "description": "Read documents or suggested query terms from an index."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexes/documents/write",
+            "isDataAction": true,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Documents",
+              "operation": "Write Documents",
+              "description": "Upload documents to an index or modify existing documents."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexes/documents/delete",
+            "isDataAction": true,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Documents",
+              "operation": "Delete Documents",
+              "description": "Delete documents from an index."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexes/contentSecurity/elevatedOperations/read",
+            "isDataAction": true,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Content Security",
+              "operation": "Elevated Read",
+              "description": "Enable the option to read all documents in an index regardless of permission filters."
             },
             "origin": "user,system"
           },
@@ -521,35 +712,134 @@
             "origin": "user,system"
           },
           {
-            "name": "Microsoft.Search/searchServices/indexes/documents/read",
-            "isDataAction": true,
+            "name": "Microsoft.Search/searchServices/aliases/read",
+            "isDataAction": false,
             "display": {
               "provider": "Microsoft Search",
-              "resource": "Documents",
-              "operation": "Read Documents",
-              "description": "Read documents or suggested query terms from an index."
+              "resource": "Aliases",
+              "operation": "Read Alias",
+              "description": "Return an alias or a list of aliases."
             },
             "origin": "user,system"
           },
           {
-            "name": "Microsoft.Search/searchServices/indexes/documents/write",
-            "isDataAction": true,
+            "name": "Microsoft.Search/searchServices/aliases/write",
+            "isDataAction": false,
             "display": {
               "provider": "Microsoft Search",
-              "resource": "Documents",
-              "operation": "Write Documents",
-              "description": "Upload documents to an index or modify existing documents."
+              "resource": "Aliases",
+              "operation": "Create or Update Alias",
+              "description": "Create an alias or modify its properties."
             },
             "origin": "user,system"
           },
           {
-            "name": "Microsoft.Search/searchServices/indexes/documents/delete",
-            "isDataAction": true,
+            "name": "Microsoft.Search/searchServices/aliases/delete",
+            "isDataAction": false,
             "display": {
               "provider": "Microsoft Search",
-              "resource": "Documents",
-              "operation": "Delete Documents",
-              "description": "Delete documents from an index."
+              "resource": "Aliases",
+              "operation": "Delete Alias",
+              "description": "Delete an alias."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/knowledgeBases/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Knowledge Bases",
+              "operation": "Read Knowledge Base",
+              "description": "Return a knowledge base or a list of knowledge bases."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/knowledgeBases/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Knowledge Bases",
+              "operation": "Create or Update Knowledge Base",
+              "description": "Create a knowledge base or modify its properties."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/knowledgeBases/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Knowledge Bases",
+              "operation": "Delete Knowledge Base",
+              "description": "Delete a knowledge base."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/agents/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Agents",
+              "operation": "Read Agents",
+              "description": "Read agent configurations."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/agents/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Agents",
+              "operation": "Create or Update Agent",
+              "description": "Create new agents or modify existing agent configurations."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/agents/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Agents",
+              "operation": "Delete Agent",
+              "description": "Delete an agent."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/knowledgeSources/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Knowledge Sources",
+              "operation": "Read Knowledge Source",
+              "description": "Read Knowledge Sources."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/knowledgeSources/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Knowledge Sources",
+              "operation": "Create or Update Knowledge Source",
+              "description": "Create new knowledge sources or modify existing knowledge sources."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/knowledgeSources/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Knowledge Sources",
+              "operation": "Delete Knowledge Source",
+              "description": "Delete a knowledge source."
             },
             "origin": "user,system"
           }
