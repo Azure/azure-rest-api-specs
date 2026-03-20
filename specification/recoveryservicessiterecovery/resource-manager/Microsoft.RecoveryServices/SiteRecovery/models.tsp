@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -13328,6 +13329,12 @@ model InMageRcmDiskInput {
   diskEncryptionSetId?: string;
 
   /**
+   * The ConfidentialDiskEncryptionSet ARM Id.
+   */
+  @added(Versions.v2026_02_01)
+  confidentialDiskEncryptionSetId?: string;
+
+  /**
    * The logical sector size (in bytes), 512 by default.
    */
   sectorSizeInBytes?: int32;
@@ -14191,6 +14198,12 @@ model InMageRcmDisksDefaultInput {
    * The DiskEncryptionSet ARM Id.
    */
   diskEncryptionSetId?: string;
+
+  /**
+   * The ConfidentialDiskEncryptionSet ARM Id.
+   */
+  @added(Versions.v2026_02_01)
+  confidentialDiskEncryptionSetId?: string;
 
   /**
    * The logical sector size (in bytes), 512 by default.
@@ -15629,6 +15642,13 @@ model InMageRcmProtectedDiskDetails {
    */
   @visibility(Lifecycle.Read)
   diskEncryptionSetId?: string;
+
+  /**
+   * The ConfidentialDiskEncryptionSet ARM Id.
+   */
+  @added(Versions.v2026_02_01)
+  @visibility(Lifecycle.Read)
+  confidentialDiskEncryptionSetId?: string;
 
   /**
    * The ARM Id of the seed managed disk.
@@ -18024,6 +18044,12 @@ model VMwareCbtDiskInput {
   diskEncryptionSetId?: string;
 
   /**
+   * The ConfidentialDiskEncryptionSet ARM Id.
+   */
+  @added(Versions.v2026_02_01)
+  confidentialDiskEncryptionSetId?: string;
+
+  /**
    * The logical sector size (in bytes), 512 by default.
    */
   sectorSizeInBytes?: int32;
@@ -18637,6 +18663,13 @@ model VMwareCbtProtectedDiskDetails {
    */
   @visibility(Lifecycle.Read)
   diskEncryptionSetId?: string;
+
+  /**
+   * The ConfidentialDiskEncryptionSet ARM Id.
+   */
+  @added(Versions.v2026_02_01)
+  @visibility(Lifecycle.Read)
+  confidentialDiskEncryptionSetId?: string;
 
   /**
    * The ARM Id of the seed managed disk.
