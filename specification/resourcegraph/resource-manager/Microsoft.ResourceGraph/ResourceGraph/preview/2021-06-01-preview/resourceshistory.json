@@ -76,7 +76,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ResourceGraphCommon.ErrorResponse"
             }
           }
         },
@@ -112,7 +112,7 @@
         "end"
       ]
     },
-    "Error": {
+    "ResourceGraphCommon.Error": {
       "type": "object",
       "title": "Error info.",
       "description": "Error details.",
@@ -129,7 +129,7 @@
           "type": "array",
           "description": "Error details",
           "items": {
-            "$ref": "#/definitions/ErrorDetails"
+            "$ref": "#/definitions/ResourceGraphCommon.ErrorDetails"
           },
           "x-ms-identifiers": []
         }
@@ -139,7 +139,7 @@
         "message"
       ]
     },
-    "ErrorDetails": {
+    "ResourceGraphCommon.ErrorDetails": {
       "type": "object",
       "title": "Error details.",
       "description": "Error details.",
@@ -159,13 +159,13 @@
       ],
       "additionalProperties": {}
     },
-    "ErrorResponse": {
+    "ResourceGraphCommon.ErrorResponse": {
       "type": "object",
       "title": "Error response.",
       "description": "An error response from the API.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error",
+          "$ref": "#/definitions/ResourceGraphCommon.Error",
           "description": "Error information."
         }
       },

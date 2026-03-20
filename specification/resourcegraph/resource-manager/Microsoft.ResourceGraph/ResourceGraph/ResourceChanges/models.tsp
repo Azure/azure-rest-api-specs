@@ -6,6 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using ResourceGraphCommon;
 
 namespace ResourceChanges;
 
@@ -260,58 +261,6 @@ model ResourcePropertyChange {
    * The property change Type
    */
   propertyChangeType: PropertyChangeType;
-}
-
-/**
- * An error response from the API.
- */
-@error
-@summary("Error response.")
-model ErrorResponse {
-  /**
-   * Error information.
-   */
-  error: Error;
-}
-
-/**
- * Error details.
- */
-@summary("Error info.")
-model Error {
-  /**
-   * Error code identifying the specific error.
-   */
-  code: string;
-
-  /**
-   * A human readable error message.
-   */
-  message: string;
-
-  /**
-   * Error details
-   */
-  @identifiers(#[])
-  details?: ErrorDetails[];
-}
-
-/**
- * Error details.
- */
-@summary("Error details.")
-model ErrorDetails {
-  ...Record<unknown>;
-
-  /**
-   * Error code identifying the specific error.
-   */
-  code: string;
-
-  /**
-   * A human readable error message.
-   */
-  message: string;
 }
 
 /**

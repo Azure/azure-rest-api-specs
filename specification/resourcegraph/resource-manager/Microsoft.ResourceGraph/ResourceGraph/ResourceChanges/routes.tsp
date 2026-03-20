@@ -8,6 +8,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using ResourceGraphCommon;
 
 namespace ResourceChanges;
 
@@ -20,7 +21,7 @@ namespace ResourceChanges;
 op resourceChanges is ArmProviderActionSync<
   Request = ResourceChangesRequestParameters,
   Response = ResourceChangeList,
-  Error = ErrorResponse
+  Error = ResourceGraphCommon.ErrorResponse
 >;
 /**
  * Get resource change details.
@@ -30,5 +31,5 @@ op resourceChanges is ArmProviderActionSync<
 op resourceChangeDetails is ArmProviderActionSync<
   Request = ResourceChangeDetailsRequestParameters,
   Response = Body<ResourceChangeData[]>,
-  Error = ErrorResponse
+  Error = ResourceGraphCommon.ErrorResponse
 >;

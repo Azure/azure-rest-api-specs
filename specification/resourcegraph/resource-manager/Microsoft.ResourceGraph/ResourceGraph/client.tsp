@@ -25,15 +25,3 @@ namespace Microsoft.ResourceGraph;
   "ResourceHistoryDateTimeInterval",
   "java,python,javascript"
 );
-@@clientName(ResourceHistory.ErrorResponse,
-  "ResourceHistoryErrorResponse",
-  "java,python,javascript"
-);
-@@clientName(ResourceHistory.Error,
-  "ResourceHistoryError",
-  "java,python,javascript"
-);
-@@clientName(ResourceHistory.ErrorDetails,
-  "ResourceHistoryErrorDetails",
-  "java,python,javascript"
-);

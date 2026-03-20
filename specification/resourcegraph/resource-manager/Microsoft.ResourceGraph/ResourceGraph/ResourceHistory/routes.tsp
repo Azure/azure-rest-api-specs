@@ -20,5 +20,5 @@ namespace ResourceHistory;
 op resourcesHistory is ArmProviderActionSync<
   Request = ResourcesHistoryRequest,
   Response = ArmResponse<ResourcesHistoryResult>,
-  Error = ErrorResponse
+  Error = ResourceGraphCommon.ErrorResponse
 >;

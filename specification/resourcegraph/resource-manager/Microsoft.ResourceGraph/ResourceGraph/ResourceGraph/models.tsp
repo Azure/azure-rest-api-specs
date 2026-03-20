@@ -286,58 +286,6 @@ model Facet {
 }
 
 /**
- * An error response from the API.
- */
-@summary("Error response.")
-@error
-model ErrorResponse {
-  /**
-   * Error information.
-   */
-  error: Error;
-}
-
-/**
- * Error details.
- */
-@summary("Error info.")
-model Error {
-  /**
-   * Error code identifying the specific error.
-   */
-  code: string;
-
-  /**
-   * A human readable error message.
-   */
-  message: string;
-
-  /**
-   * Error details
-   */
-  @identifiers(#[])
-  details?: ErrorDetails[];
-}
-
-/**
- * Error details.
- */
-@summary("Error details.")
-model ErrorDetails {
-  ...Record<unknown>;
-
-  /**
-   * Error code identifying the specific error.
-   */
-  code: string;
-
-  /**
-   * A human readable error message.
-   */
-  message: string;
-}
-
-/**
  * Resource Graph REST API operation definition.
  */
 model Operation {
@@ -447,7 +395,7 @@ model FacetError extends Facet {
    * An array containing detected facet errors with details.
    */
   @identifiers(#[])
-  errors: ErrorDetails[];
+  errors: ResourceGraphCommon.ErrorDetails[];
 
   /**
    * Result type

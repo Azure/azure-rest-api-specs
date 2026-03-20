@@ -25,5 +25,5 @@ namespace ResourceGraphApi;
 op resources is ArmProviderActionSync<
   Request = QueryRequest,
   Response = QueryResponse,
-  Error = ErrorResponse
+  Error = ResourceGraphCommon.ErrorResponse
 >;

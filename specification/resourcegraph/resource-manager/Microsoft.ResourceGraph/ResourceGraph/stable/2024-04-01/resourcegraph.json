@@ -69,7 +69,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ResourceGraphCommon.ErrorResponse"
             }
           }
         },
@@ -118,7 +118,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ResourceGraphCommon.ErrorResponse"
             }
           }
         },
@@ -161,67 +161,6 @@
     }
   },
   "definitions": {
-    "Error": {
-      "type": "object",
-      "title": "Error info.",
-      "description": "Error details.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code identifying the specific error."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human readable error message."
-        },
-        "details": {
-          "type": "array",
-          "description": "Error details",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "ErrorDetails": {
-      "type": "object",
-      "title": "Error details.",
-      "description": "Error details.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code identifying the specific error."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human readable error message."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ],
-      "additionalProperties": {}
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "title": "Error response.",
-      "description": "An error response from the API.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error information."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
     "Facet": {
       "type": "object",
       "description": "A facet containing additional statistics on the response of a query. Can be either FacetResult or FacetError.",
@@ -249,7 +188,7 @@
           "type": "array",
           "description": "An array containing detected facet errors with details.",
           "items": {
-            "$ref": "#/definitions/ErrorDetails"
+            "$ref": "#/definitions/ResourceGraphCommon.ErrorDetails"
           },
           "x-ms-identifiers": []
         }
@@ -586,6 +525,67 @@
         "count",
         "resultTruncated",
         "data"
+      ]
+    },
+    "ResourceGraphCommon.Error": {
+      "type": "object",
+      "title": "Error info.",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code identifying the specific error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable error message."
+        },
+        "details": {
+          "type": "array",
+          "description": "Error details",
+          "items": {
+            "$ref": "#/definitions/ResourceGraphCommon.ErrorDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ResourceGraphCommon.ErrorDetails": {
+      "type": "object",
+      "title": "Error details.",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code identifying the specific error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": {}
+    },
+    "ResourceGraphCommon.ErrorResponse": {
+      "type": "object",
+      "title": "Error response.",
+      "description": "An error response from the API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ResourceGraphCommon.Error",
+          "description": "Error information."
+        }
+      },
+      "required": [
+        "error"
       ]
     },
     "ResultTruncated": {
