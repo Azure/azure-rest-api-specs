@@ -4,14 +4,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using Azure.ResourceManager;
-
 namespace Microsoft.Monitor;
 
 @doc("Represents a signal model used in SLI calculations.")
 model Signal {
   @doc("Sources of metrics used for SLIs.")
-  @identifiers(#["signalSourceId"])
+  @Azure.ResourceManager.identifiers(#["signalSourceId"])
   signalSources: SignalSource[];
 
   @doc("Mathematical formula used to combine multiple metrics.")
@@ -36,7 +34,7 @@ model SignalSource {
   metricName: string;
 
   @doc("Filters applied to modify signal values.")
-  @identifiers(#[
+  @Azure.ResourceManager.identifiers(#[
     "dimensionName",
     "scalarFunction",
     "samplingType",
