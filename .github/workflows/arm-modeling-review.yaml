@@ -37,11 +37,6 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Fetch latest base branch for lease verification
-        # Ensures origin/<base_ref> is available so checkLease can fall back to it when the
-        # PR's merge commit is stale (i.e., the lease was merged after the last PR push).
-        run: git fetch origin ${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }} --depth=1
-
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
