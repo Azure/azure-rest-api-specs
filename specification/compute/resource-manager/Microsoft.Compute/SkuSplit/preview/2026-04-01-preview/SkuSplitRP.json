@@ -276,7 +276,7 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "VM",
+            "name": "Vm",
             "value": "VM",
             "description": "Capacity measured in number of VMs."
           },
@@ -340,7 +340,7 @@
           ]
         },
         "vmAttributes": {
-          "$ref": "#/definitions/VmAttributesDto",
+          "$ref": "#/definitions/VmAttributes",
           "description": "VM attribute constraints. Required when type is VMAttributes."
         }
       },
@@ -648,36 +648,6 @@
         "zone"
       ]
     },
-    "VMAttributeSupport": {
-      "type": "string",
-      "description": "Whether a VM capability should be excluded, included, or required.",
-      "enum": [
-        "Excluded",
-        "Included",
-        "Required"
-      ],
-      "x-ms-enum": {
-        "name": "VMAttributeSupport",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Excluded",
-            "value": "Excluded",
-            "description": "Exclude VM sizes that have the capability."
-          },
-          {
-            "name": "Included",
-            "value": "Included",
-            "description": "Allow VM sizes with and without the capability."
-          },
-          {
-            "name": "Required",
-            "value": "Required",
-            "description": "Only allow VM sizes that have the capability."
-          }
-        ]
-      }
-    },
     "VmAttributeMinMaxDouble": {
       "type": "object",
       "description": "Double min/max range for VM attributes.",
@@ -710,7 +680,37 @@
         }
       }
     },
-    "VmAttributesDto": {
+    "VmAttributeSupport": {
+      "type": "string",
+      "description": "Whether a VM capability should be excluded, included, or required.",
+      "enum": [
+        "Excluded",
+        "Included",
+        "Required"
+      ],
+      "x-ms-enum": {
+        "name": "VmAttributeSupport",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Excluded",
+            "value": "Excluded",
+            "description": "Exclude VM sizes that have the capability."
+          },
+          {
+            "name": "Included",
+            "value": "Included",
+            "description": "Allow VM sizes with and without the capability."
+          },
+          {
+            "name": "Required",
+            "value": "Required",
+            "description": "Only allow VM sizes that have the capability."
+          }
+        ]
+      }
+    },
+    "VmAttributes": {
       "type": "object",
       "description": "VM attribute constraints for attribute-based VM selection.",
       "properties": {
@@ -746,7 +746,7 @@
           "description": "Network bandwidth range in Mbps."
         },
         "localStorageSupport": {
-          "$ref": "#/definitions/VMAttributeSupport",
+          "$ref": "#/definitions/VmAttributeSupport",
           "description": "Whether local storage support should be excluded, included, or required."
         },
         "localStorageInGiB": {
@@ -761,7 +761,7 @@
           }
         },
         "rdmaSupport": {
-          "$ref": "#/definitions/VMAttributeSupport",
+          "$ref": "#/definitions/VmAttributeSupport",
           "description": "Whether RDMA support should be excluded, included, or required."
         },
         "rdmaNetworkInterfaceCount": {
@@ -769,7 +769,7 @@
           "description": "RDMA NIC count range."
         },
         "acceleratorSupport": {
-          "$ref": "#/definitions/VMAttributeSupport",
+          "$ref": "#/definitions/VmAttributeSupport",
           "description": "Whether accelerator support should be excluded, included, or required."
         },
         "acceleratorManufacturers": {
@@ -805,7 +805,7 @@
           }
         },
         "burstableSupport": {
-          "$ref": "#/definitions/VMAttributeSupport",
+          "$ref": "#/definitions/VmAttributeSupport",
           "description": "Whether burstable SKUs should be excluded, included, or required."
         },
         "hyperVGenerations": {

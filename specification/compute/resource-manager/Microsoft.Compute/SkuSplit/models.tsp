@@ -30,7 +30,7 @@ union SkuMixPlacementCapacityType {
   string,
 
   /** Capacity measured in number of VMs. */
-  VM: "VM",
+  Vm: "VM",
 
   /** Capacity measured in number of vCPUs. */
   VCpu: "VCpu",
@@ -95,7 +95,7 @@ union SkuMixPlacementPartialFulfillmentReason {
 }
 
 /** Whether a VM capability should be excluded, included, or required. */
-union VMAttributeSupport {
+union VmAttributeSupport {
   string,
 
   /** Exclude VM sizes that have the capability. */
@@ -184,7 +184,7 @@ model SkuMixPlacementInstanceDescription {
   vmSizes?: SkuMixPlacementVMSize[];
 
   /** VM attribute constraints. Required when type is VMAttributes. */
-  vmAttributes?: VmAttributesDto;
+  vmAttributes?: VmAttributes;
 }
 
 /** A VM size with optional rank for prioritization. */
@@ -197,7 +197,7 @@ model SkuMixPlacementVMSize {
 }
 
 /** VM attribute constraints for attribute-based VM selection. */
-model VmAttributesDto {
+model VmAttributes {
   /** vCPU count range. Required. */
   vCpuCount: VmAttributeMinMaxInteger;
 
@@ -221,7 +221,7 @@ model VmAttributesDto {
   networkBandwidthInMbps?: VmAttributeMinMaxDouble;
 
   /** Whether local storage support should be excluded, included, or required. */
-  localStorageSupport?: VMAttributeSupport;
+  localStorageSupport?: VmAttributeSupport;
 
   /** Local storage capacity range in GiB. */
   localStorageInGiB?: VmAttributeMinMaxDouble;
@@ -230,13 +230,13 @@ model VmAttributesDto {
   localStorageDiskTypes?: string[];
 
   /** Whether RDMA support should be excluded, included, or required. */
-  rdmaSupport?: VMAttributeSupport;
+  rdmaSupport?: VmAttributeSupport;
 
   /** RDMA NIC count range. */
   rdmaNetworkInterfaceCount?: VmAttributeMinMaxInteger;
 
   /** Whether accelerator support should be excluded, included, or required. */
-  acceleratorSupport?: VMAttributeSupport;
+  acceleratorSupport?: VmAttributeSupport;
 
   /** Allowed accelerator manufacturers. */
   acceleratorManufacturers?: string[];
@@ -254,7 +254,7 @@ model VmAttributesDto {
   cpuManufacturers?: string[];
 
   /** Whether burstable SKUs should be excluded, included, or required. */
-  burstableSupport?: VMAttributeSupport;
+  burstableSupport?: VmAttributeSupport;
 
   /** Allowed Hyper-V generations. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "hyperVGenerations matches the established Azure Compute API naming convention"
