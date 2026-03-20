@@ -67,6 +67,10 @@ using Azure.ResourceManager;
 );
 
 @@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
+@@clientName(CreateFlexResourceOperationResponse,
+  "CreateFlexResourceOperationResult",
+  "csharp"
+);
 @@clientName(DeadlineType, "ScheduledActionDeadlineType", "csharp");
 @@clientName(DeallocateResourceOperationResponse,
   "DeallocateResourceOperationResult",
@@ -107,6 +111,10 @@ using Azure.ResourceManager;
 );
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
 @@clientName(ExecuteCreateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(ExecuteCreateFlexRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
@@ -232,6 +240,7 @@ using Azure.ResourceManager;
 @@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent");
 @@clientName(CancelOperationsRequest, "CancelOperationsContent");
 @@clientName(ExecuteCreateRequest, "ExecuteCreateContent");
+@@clientName(ExecuteCreateFlexRequest, "ExecuteCreateFlexContent");
 @@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent");
 @@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent");
 @@clientName(ExecuteStartRequest, "ExecuteStartContent");
