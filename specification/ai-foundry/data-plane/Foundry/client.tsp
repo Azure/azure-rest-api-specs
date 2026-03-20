@@ -221,14 +221,17 @@ using Azure.AI.Projects;
 @@clientName(Toolsets.deleteToolset, "delete");
 
 // --------------------------------------------------------------------------------
-// Jobs sub-client (beta)
+// Jobs sub-client (beta, under Training)
 // --------------------------------------------------------------------------------
 
-@@clientName(Jobs.get, "get", "python");
-@@clientName(Jobs.list, "list", "python");
-@@clientName(Jobs.createOrUpdate, "create_or_update", "python");
-@@clientName(Jobs.delete, "delete", "python");
-@@clientName(Jobs.cancel, "cancel", "python");
+@@clientName(Azure.AI.Projects.Training.Jobs.get, "get", "python");
+@@clientName(Azure.AI.Projects.Training.Jobs.list, "list", "python");
+@@clientName(Azure.AI.Projects.Training.Jobs.createOrUpdate,
+  "create_or_update",
+  "python"
+);
+@@clientName(Azure.AI.Projects.Training.Jobs.delete, "delete", "python");
+@@clientName(Azure.AI.Projects.Training.Jobs.cancel, "cancel", "python");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
