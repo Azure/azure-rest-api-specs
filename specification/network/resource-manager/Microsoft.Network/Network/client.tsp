@@ -568,12 +568,21 @@ namespace CombineClient;
   "ManagementClient",
   "go"
 );
+@@clientLocation(CheckDnsNameAvailability.checkDnsNameAvailability,
+  "ManagementClient",
+  "go"
+);
 @@clientLocation(VirtualWans.supportedSecurityProviders,
   "ManagementClient",
   "go"
 );
 @@clientName(Microsoft.Network.NetworkProvisioningState,
-  "ArmProvisioningState",
+  "ProvisioningState",
   "go"
 );
-@@clientName(Microsoft.Network.NetworkProtocol, "ArmNetworkProtocol", "go");
+@@clientName(Microsoft.Network.ProvisioningState,
+  "BaseProvisioningState",
+  "go"
+);
+@@clientName(Microsoft.Network.NetworkProtocol, "Protocol", "go");
+@@clientName(Microsoft.Network.Protocol, "BaseProtocol", "go");
