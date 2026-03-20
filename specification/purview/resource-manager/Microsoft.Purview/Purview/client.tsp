@@ -160,23 +160,13 @@ namespace Microsoft.Purview {
   "csharp"
 );
 
-// Fix location type for hierarchyBuilding compatibility
-// (Legacy.TrackedResourceWithOptionalLocation uses string?, but TrackedResource uses azureLocation)
-@@alternateType(Microsoft.Purview.Account.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
+// Custom TrackedResource model to fix base class inheritance
+// (Legacy.TrackedResourceWithOptionalLocation generates ResourceData base, but old SDK used TrackedResourceData)
+@@alternateType(Microsoft.Purview.Account, Microsoft.Purview.PurviewAccount, "csharp");
 
-// Use hierarchyBuilding to make Account inherit from TrackedResourceData in C#
-// (Account uses Legacy.TrackedResourceWithOptionalLocation which generates ResourceData base,
-//  but old SDK used TrackedResourceData)
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.Purview.Account,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-@@clientName(Microsoft.Purview.Account, "PurviewAccount", "csharp");
+// Flatten PurviewAccount.properties for C# (the back-compatible.tsp flatten targets Account, not PurviewAccount)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.Purview.PurviewAccount.properties, "csharp");
 @@clientName(Microsoft.Purview.KafkaConfiguration,
   "PurviewKafkaConfiguration",
   "csharp"
@@ -211,7 +201,7 @@ namespace Microsoft.Purview {
 );
 
 // Identity type override to use ARM common type instead of custom Identity model
-@@alternateType(Microsoft.Purview.Account.identity,
+@@alternateType(Microsoft.Purview.PurviewAccount.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -245,6 +235,17 @@ namespace Microsoft.Purview {
 @@access(Microsoft.Purview.AccountProperties, Access.public, "csharp");
 @@usage(Microsoft.Purview.AccountProperties,
   Usage.input | Usage.output,
+  "csharp"
+);
+
+// Fix property return types: use base types instead of generated derived sub-types
+// (flattening creates AccountPropertiesEndpoints/AccountPropertiesManagedResources but old API used base types)
+@@alternateType(Microsoft.Purview.AccountProperties.endpoints,
+  Microsoft.Purview.AccountEndpoints,
+  "csharp"
+);
+@@alternateType(Microsoft.Purview.AccountProperties.managedResources,
+  Microsoft.Purview.ManagedResources,
   "csharp"
 );
 
@@ -352,6 +353,25 @@ namespace Microsoft.Purview {
 );
 
 namespace Microsoft.Purview {
+  // Custom TrackedResource model to fix base class inheritance
+  // (Legacy.TrackedResourceWithOptionalLocation generates ResourceData base, but old SDK used TrackedResourceData)
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Required for backward compatibility"
+  model PurviewAccount
+    is Azure.ResourceManager.TrackedResource<AccountProperties> {
+    ...Azure.ResourceManager.ResourceNameParameter<
+      Resource = Account,
+      KeyName = "accountName",
+      SegmentName = "accounts",
+      NamePattern = "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+    >;
+    /** The Managed Identity of the resource. */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required for backward compatibility"
+    identity?: Identity;
+    /** Gets or sets the Sku. */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required for backward compatibility"
+    sku?: AccountSku;
+  }
+
   /**
    * Gets or sets the public network access for managed resources.
    */
