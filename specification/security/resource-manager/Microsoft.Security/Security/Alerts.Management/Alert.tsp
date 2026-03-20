@@ -23,7 +23,7 @@ model Alert is Azure.ResourceManager.ProxyResource<AlertProperties> {
   >;
 }
 
-alias AlertOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+alias AlertOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
@@ -40,7 +40,6 @@ alias AlertOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     ascLocation: string;
   },
-  {},
   {
     /** Name of the alert object */
     @path
