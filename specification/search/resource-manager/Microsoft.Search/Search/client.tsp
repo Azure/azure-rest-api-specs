@@ -755,7 +755,10 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   "!java,!python,!javascript"
 );
 
-@@clientName(Microsoft.Search, "SearchManagementClient", "python, javascript");
+@@clientName(Microsoft.Search,
+  "SearchManagementClient",
+  "python,javascript,java"
+);
 
 @@clientName(servicesCheckNameAvailabilityCustomization::parameters.params,
   "searchManagementRequestOptions",
@@ -858,7 +861,7 @@ model AccessRulePropertiesSubscriptionsItem {
 }
 @@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   AccessRulePropertiesSubscriptionsItem[],
-  "go,python,javascript"
+  "go,python,javascript,java"
 );
 
 @@clientName(SearchServiceProperties.eTag, "etag", "java");
