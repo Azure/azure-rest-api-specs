@@ -24,54 +24,43 @@ model Application
   >;
 }
 
-alias ApplicationOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Security";
-  },
-  {},
-  {
-    /** The security Application key - unique key for the standard application */
-    @path
-    @segment("applications")
-    @key
-    applicationId: string;
-  }
->;
-
 @armResourceOperations
 interface Applications {
   /**
    * Get a specific application for the requested scope by applicationId
    */
-  get is ApplicationOps.Read<Application, ErrorType = CloudError>;
+  get is Extension.Read<
+    Extension.Subscription,
+    Application,
+    Error = CloudError
+  >;
 
   /**
    * Creates or update a security application on the given subscription.
    */
-  createOrUpdate is ApplicationOps.CreateOrUpdateSync<
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    Extension.Subscription,
     Application,
-    ErrorType = CloudError
+    Error = CloudError
   >;
 
   /**
    * Delete an Application over a given scope
    */
-  delete is ApplicationOps.DeleteSync<Application, ErrorType = CloudError>;
+  delete is Extension.DeleteSync<
+    Extension.Subscription,
+    Application,
+    Error = CloudError
+  >;
 
   /**
    * Get a list of all relevant applications over a subscription level scope
    */
-  list is ApplicationOps.List<
+  list is Extension.ListByTarget<
+    Extension.Subscription,
     Application,
     Response = ArmResponse<ApplicationsList>,
-    ErrorType = CloudError
+    Error = CloudError
   >;
 }
 alias SecurityConnectorApplicationOps = Azure.ResourceManager.Legacy.ExtensionOperations<
