@@ -123,8 +123,8 @@ model ApplicationInsightsComponentAnalyticsItem {
   /**
    * This instance's version of the data model. This can change as new features are added.
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   Version?: string;
 
   /**
@@ -142,15 +142,15 @@ model ApplicationInsightsComponentAnalyticsItem {
   /**
    * Date and time in UTC when this item was created.
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   TimeCreated?: string;
 
   /**
    * Date and time in UTC of the last modification that was made to this item.
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   TimeModified?: string;
 
   /**
