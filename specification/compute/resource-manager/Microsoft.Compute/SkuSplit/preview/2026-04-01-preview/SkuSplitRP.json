@@ -296,13 +296,6 @@
           "type": "string",
           "description": "Unique identifier for this deployment choice."
         },
-        "score": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Placement score from 0 to 9 (inclusive). Higher is better.",
-          "minimum": 0,
-          "maximum": 9
-        },
         "skuSplit": {
           "type": "array",
           "description": "The list of VM size / zone allocations that make up this deployment choice.",
@@ -317,7 +310,6 @@
       },
       "required": [
         "id",
-        "score",
         "skuSplit"
       ]
     },
@@ -528,7 +520,7 @@
       "properties": {
         "deploymentChoices": {
           "type": "array",
-          "description": "List of deployment choice recommendations, ordered by score.",
+          "description": "List of deployment choice recommendations.",
           "items": {
             "$ref": "#/definitions/SkuMixPlacementDeploymentChoice"
           },

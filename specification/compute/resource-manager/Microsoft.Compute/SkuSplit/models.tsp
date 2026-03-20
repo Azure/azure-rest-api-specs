@@ -291,7 +291,7 @@ model VmAttributeMinMaxDouble {
 
 /** Sku Mix Placement API response. */
 model SkuMixPlacementResponse {
-  /** List of deployment choice recommendations, ordered by score. */
+  /** List of deployment choice recommendations. */
   @identifiers(#["id"])
   deploymentChoices: SkuMixPlacementDeploymentChoice[];
 
@@ -306,11 +306,6 @@ model SkuMixPlacementResponse {
 model SkuMixPlacementDeploymentChoice {
   /** Unique identifier for this deployment choice. */
   id: string;
-
-  /** Placement score from 0 to 9 (inclusive). Higher is better. */
-  @minValue(0)
-  @maxValue(9)
-  score: int32;
 
   /** The list of VM size / zone allocations that make up this deployment choice. */
   @identifiers(#["name", "zone"])
