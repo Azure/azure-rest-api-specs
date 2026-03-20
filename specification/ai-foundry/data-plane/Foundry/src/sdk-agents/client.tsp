@@ -77,7 +77,7 @@ using Azure.AI.Projects;
 @@clientName(AgentObject.object, "objectType");
 @@clientName(AgentVersionObject.object, "objectType");
 @@clientName(DeleteMemoryStoreResponse.object, "objectType");
-@@clientName(MemoryStoreObject.object, "SobjectType");
+@@clientName(MemoryStoreObject.object, "objectType");
 @@clientName(MemoryStoreDeleteScopeResponse.object, "objectType");
 
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
