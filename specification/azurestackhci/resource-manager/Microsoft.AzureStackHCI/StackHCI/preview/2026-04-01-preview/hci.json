@@ -8181,6 +8181,10 @@
             "name"
           ]
         },
+        "sanNetworks": {
+          "$ref": "#/definitions/SanNetworks",
+          "description": "SAN network configuration for the host network. Applicable when StorageType is 'SAN' or 'SANS2D'."
+        },
         "storageConnectivitySwitchless": {
           "type": "boolean",
           "description": "Defines how the storage adapters between nodes are connected either switch or switch less..",
@@ -8963,6 +8967,30 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "EdgeDeviceDisks": {
+      "type": "object",
+      "description": "Represents a storage disk on the device.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the disk.",
+          "readOnly": true
+        },
+        "sizeInBytes": {
+          "type": "string",
+          "description": "The size of the disk in bytes.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the disk. For example, S2D or SAN.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "EdgeDeviceJob": {
@@ -11164,6 +11192,17 @@
           "format": "int64",
           "description": "Number of storage disks in the device with $CanPool as true.",
           "readOnly": true
+        },
+        "disks": {
+          "type": "array",
+          "description": "List of storage disks on the device.",
+          "items": {
+            "$ref": "#/definitions/EdgeDeviceDisks"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -12734,6 +12773,36 @@
         }
       }
     },
+    "OverprovisioningRatio": {
+      "type": "string",
+      "description": "Overprovisioning ratio for S2D storage.",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "x-ms-enum": {
+        "name": "OverprovisioningRatio",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Zero",
+            "value": "0",
+            "description": "No overprovisioning."
+          },
+          {
+            "name": "One",
+            "value": "1",
+            "description": "Overprovisioning ratio of 1."
+          },
+          {
+            "name": "Two",
+            "value": "2",
+            "description": "Overprovisioning ratio of 2."
+          }
+        ]
+      }
+    },
     "OwnerKeyType": {
       "type": "string",
       "description": "Type of owner key in the voucher",
@@ -13910,6 +13979,85 @@
         }
       }
     },
+    "SanAdapterIPConfig": {
+      "type": "object",
+      "description": "Per-adapter IP configuration for SAN cluster network.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Logical name of the adapter IP configuration (e.g., clusterNetwork-A)."
+        },
+        "networkAdapterName": {
+          "type": "string",
+          "description": "Physical NIC name (e.g., ethernet 3)."
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "VLAN ID (0-4095). Value of 0 or omitted means untagged."
+        },
+        "addressPrefix": {
+          "type": "string",
+          "description": "Subnet address prefix in CIDR notation (e.g., 10.10.30.0/24)."
+        }
+      }
+    },
+    "SanAdapterProperties": {
+      "type": "object",
+      "description": "QoS and adapter property overrides for SAN cluster network traffic.",
+      "properties": {
+        "priorityValue8021ActionCluster": {
+          "type": "integer",
+          "format": "int32",
+          "description": "802.1p priority value for cluster traffic."
+        },
+        "priorityValue8021ActionSmb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "802.1p priority value for SMB traffic."
+        },
+        "bandwidthPercentageSmb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "SMB bandwidth percentage (1-97)."
+        },
+        "jumboPacket": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Jumbo frame size in bytes."
+        }
+      }
+    },
+    "SanClusterNetworkConfig": {
+      "type": "object",
+      "description": "Cluster network configuration for SAN deployments (CSV/LiveMig traffic).",
+      "properties": {
+        "adapterProperties": {
+          "$ref": "#/definitions/SanAdapterProperties",
+          "description": "QoS and adapter overrides for the cluster network."
+        },
+        "adapterIPConfig": {
+          "type": "array",
+          "description": "Per-adapter IP configuration for the cluster network.",
+          "items": {
+            "$ref": "#/definitions/SanAdapterIPConfig"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "SanNetworks": {
+      "type": "object",
+      "description": "SAN network configuration for host network of AzureStackHCI Cluster.",
+      "properties": {
+        "clusterNetworkConfig": {
+          "$ref": "#/definitions/SanClusterNetworkConfig",
+          "description": "Cluster (CSV/LiveMig) network configuration for SAN deployments."
+        }
+      }
+    },
     "SbeCredentials": {
       "type": "object",
       "description": "secrets used for solution builder extension (SBE) partner extensibility.",
@@ -14951,6 +15099,18 @@
           "type": "string",
           "description": "By default, this mode is set to Express and your storage is configured as per best practices based on the number of nodes in the cluster. Allowed values are 'Express','InfraOnly', 'KeepStorage'",
           "default": "Express"
+        },
+        "storageType": {
+          "$ref": "#/definitions/StorageType",
+          "description": "Storage type for the HCI Cluster. Allowed values are 'S2D', 'SAN', 'SANS2D'."
+        },
+        "s2d": {
+          "$ref": "#/definitions/StorageS2dConfig",
+          "description": "S2D (Storage Spaces Direct) configuration. Applicable when StorageType is 'S2D' or 'SANS2D'."
+        },
+        "san": {
+          "$ref": "#/definitions/StorageSanConfig",
+          "description": "SAN (Storage Area Network) configuration. Applicable when StorageType is 'SAN' or 'SANS2D'."
         }
       }
     },
@@ -14974,6 +15134,64 @@
           "description": "Number of storage disks in the device with $CanPool as true.",
           "readOnly": true
         }
+      }
+    },
+    "StorageS2dConfig": {
+      "type": "object",
+      "description": "The S2D (Storage Spaces Direct) configuration for AzureStackHCI Cluster storage.",
+      "properties": {
+        "volumeType": {
+          "$ref": "#/definitions/VolumeType",
+          "description": "Volume provisioning type. Allowed values are 'Fixed', 'ThinProvisioned'."
+        },
+        "overprovisioningRatio": {
+          "$ref": "#/definitions/OverprovisioningRatio",
+          "description": "Overprovisioning ratio for S2D storage. Allowed values are '0', '1', '2'."
+        }
+      }
+    },
+    "StorageSanConfig": {
+      "type": "object",
+      "description": "The SAN (Storage Area Network) configuration for AzureStackHCI Cluster storage.",
+      "properties": {
+        "infraVolLunId": {
+          "type": "string",
+          "description": "Infrastructure volume LUN ID (e.g. PURE1234567890ABCDEF)."
+        },
+        "infraPerfLunId": {
+          "type": "string",
+          "description": "Infrastructure performance LUN ID."
+        }
+      }
+    },
+    "StorageType": {
+      "type": "string",
+      "description": "Storage type supported for HCI Cluster.",
+      "enum": [
+        "S2D",
+        "SAN",
+        "SANS2D"
+      ],
+      "x-ms-enum": {
+        "name": "StorageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "S2D",
+            "value": "S2D",
+            "description": "Storage Spaces Direct (S2D) storage type."
+          },
+          {
+            "name": "SAN",
+            "value": "SAN",
+            "description": "Storage Area Network (SAN) storage type."
+          },
+          {
+            "name": "SANS2D",
+            "value": "SANS2D",
+            "description": "Combined SAN and Storage Spaces Direct (SANS2D) storage type."
+          }
+        ]
       }
     },
     "SwitchDetail": {
@@ -15969,6 +16187,30 @@
       "required": [
         "recipeContent"
       ]
+    },
+    "VolumeType": {
+      "type": "string",
+      "description": "Volume provisioning type for S2D storage.",
+      "enum": [
+        "Fixed",
+        "ThinProvisioned"
+      ],
+      "x-ms-enum": {
+        "name": "VolumeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fixed",
+            "value": "Fixed",
+            "description": "Fixed provisioning type."
+          },
+          {
+            "name": "ThinProvisioned",
+            "value": "ThinProvisioned",
+            "description": "Thin provisioned provisioning type."
+          }
+        ]
+      }
     },
     "WebProxyConfiguration": {
       "type": "object",

@@ -3027,6 +3027,88 @@ model DeploymentCluster {
   clusterPattern?: ClusterPattern;
 }
 
+// PRIVATE PREVIEW - Storage type and SAN/S2D configuration
+
+/**
+ * Storage type supported for HCI Cluster.
+ */
+@added(Versions.v2026_04_01_preview)
+union StorageType {
+  string,
+
+  /** Storage Spaces Direct (S2D) storage type. */
+  S2D: "S2D",
+
+  /** Storage Area Network (SAN) storage type. */
+  SAN: "SAN",
+
+  /** Combined SAN and Storage Spaces Direct (SANS2D) storage type. */
+  SANS2D: "SANS2D",
+}
+
+/**
+ * Volume provisioning type for S2D storage.
+ */
+@added(Versions.v2026_04_01_preview)
+union VolumeType {
+  string,
+
+  /** Fixed provisioning type. */
+  Fixed: "Fixed",
+
+  /** Thin provisioned provisioning type. */
+  ThinProvisioned: "ThinProvisioned",
+}
+
+/**
+ * Overprovisioning ratio for S2D storage.
+ */
+@added(Versions.v2026_04_01_preview)
+union OverprovisioningRatio {
+  string,
+
+  /** No overprovisioning. */
+  Zero: "0",
+
+  /** Overprovisioning ratio of 1. */
+  One: "1",
+
+  /** Overprovisioning ratio of 2. */
+  Two: "2",
+}
+
+/**
+ * The S2D (Storage Spaces Direct) configuration for AzureStackHCI Cluster storage.
+ */
+@added(Versions.v2026_04_01_preview)
+model StorageS2dConfig {
+  /**
+   * Volume provisioning type. Allowed values are 'Fixed', 'ThinProvisioned'.
+   */
+  volumeType?: VolumeType;
+
+  /**
+   * Overprovisioning ratio for S2D storage. Allowed values are '0', '1', '2'.
+   */
+  overprovisioningRatio?: OverprovisioningRatio;
+}
+
+/**
+ * The SAN (Storage Area Network) configuration for AzureStackHCI Cluster storage.
+ */
+@added(Versions.v2026_04_01_preview)
+model StorageSanConfig {
+  /**
+   * Infrastructure volume LUN ID (e.g. PURE1234567890ABCDEF).
+   */
+  infraVolLunId?: string;
+
+  /**
+   * Infrastructure performance LUN ID.
+   */
+  infraPerfLunId?: string;
+}
+
 /**
  * The Storage config of AzureStackHCI Cluster.
  */
@@ -3035,6 +3117,26 @@ model Storage {
    * By default, this mode is set to Express and your storage is configured as per best practices based on the number of nodes in the cluster. Allowed values are 'Express','InfraOnly', 'KeepStorage'
    */
   configurationMode?: string = "Express";
+
+  // PRIVATE PREVIEW - Storage type and SAN/S2D sub-configuration
+
+  /**
+   * Storage type for the HCI Cluster. Allowed values are 'S2D', 'SAN', 'SANS2D'.
+   */
+  @added(Versions.v2026_04_01_preview)
+  storageType?: StorageType;
+
+  /**
+   * S2D (Storage Spaces Direct) configuration. Applicable when StorageType is 'S2D' or 'SANS2D'.
+   */
+  @added(Versions.v2026_04_01_preview)
+  s2d?: StorageS2dConfig;
+
+  /**
+   * SAN (Storage Area Network) configuration. Applicable when StorageType is 'SAN' or 'SANS2D'.
+   */
+  @added(Versions.v2026_04_01_preview)
+  san?: StorageSanConfig;
 }
 
 /**
@@ -3139,6 +3241,14 @@ model DeploymentSettingHostNetwork {
    */
   @identifiers(#["name"])
   storageNetworks?: DeploymentSettingStorageNetworks[];
+
+  // PRIVATE PREVIEW - SAN host network configuration
+
+  /**
+   * SAN network configuration for the host network. Applicable when StorageType is 'SAN' or 'SANS2D'.
+   */
+  @added(Versions.v2026_04_01_preview)
+  sanNetworks?: SanNetworks;
 
   /**
    * Defines how the storage adapters between nodes are connected either switch or switch less..
@@ -3304,6 +3414,89 @@ model DeploymentSettingStorageAdapterIPInfo {
    * The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster.
    */
   subnetMask?: string;
+}
+
+// PRIVATE PREVIEW - SAN network models
+
+/**
+ * SAN network configuration for host network of AzureStackHCI Cluster.
+ */
+@added(Versions.v2026_04_01_preview)
+model SanNetworks {
+  /**
+   * Cluster (CSV/LiveMig) network configuration for SAN deployments.
+   */
+  clusterNetworkConfig?: SanClusterNetworkConfig;
+}
+
+/**
+ * Cluster network configuration for SAN deployments (CSV/LiveMig traffic).
+ */
+@added(Versions.v2026_04_01_preview)
+model SanClusterNetworkConfig {
+  /**
+   * QoS and adapter overrides for the cluster network.
+   */
+  adapterProperties?: SanAdapterProperties;
+
+  /**
+   * Per-adapter IP configuration for the cluster network.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#["name"])
+  adapterIPConfig?: SanAdapterIPConfig[];
+}
+
+/**
+ * QoS and adapter property overrides for SAN cluster network traffic.
+ */
+@added(Versions.v2026_04_01_preview)
+model SanAdapterProperties {
+  /**
+   * 802.1p priority value for cluster traffic.
+   */
+  priorityValue8021ActionCluster?: int32;
+
+  /**
+   * 802.1p priority value for SMB traffic.
+   */
+  priorityValue8021ActionSmb?: int32;
+
+  /**
+   * SMB bandwidth percentage (1-97).
+   */
+  bandwidthPercentageSmb?: int32;
+
+  /**
+   * Jumbo frame size in bytes.
+   */
+  jumboPacket?: int32;
+}
+
+/**
+ * Per-adapter IP configuration for SAN cluster network.
+ */
+@added(Versions.v2026_04_01_preview)
+model SanAdapterIPConfig {
+  /**
+   * Logical name of the adapter IP configuration (e.g., clusterNetwork-A).
+   */
+  name?: string;
+
+  /**
+   * Physical NIC name (e.g., ethernet 3).
+   */
+  networkAdapterName?: string;
+
+  /**
+   * VLAN ID (0-4095). Value of 0 or omitted means untagged.
+   */
+  vlanId?: int32;
+
+  /**
+   * Subnet address prefix in CIDR notation (e.g., 10.10.30.0/24).
+   */
+  addressPrefix?: string;
 }
 
 /**
@@ -5829,6 +6022,38 @@ model HciStorageProfile {
    */
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
+
+  /**
+   * List of storage disks on the device.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_04_01_preview)
+  @identifiers(#["id"])
+  disks?: EdgeDeviceDisks[];
+}
+
+/**
+ * Represents a storage disk on the device.
+ */
+@added(Versions.v2026_04_01_preview)
+model EdgeDeviceDisks {
+  /**
+   * The unique identifier of the disk.
+   */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /**
+   * The size of the disk in bytes.
+   */
+  @visibility(Lifecycle.Read)
+  sizeInBytes?: string;
+
+  /**
+   * The type of the disk. For example, S2D or SAN.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
 }
 
 /**
