@@ -322,7 +322,7 @@
         "tags": [
           "Services"
         ],
-        "description": "Gets a list of all Search services in the given subscription.",
+        "description": "Gets a list of all search services in the given subscription.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -377,7 +377,7 @@
         "tags": [
           "Services"
         ],
-        "description": "Gets a list of all Search services in the given resource group.",
+        "description": "Gets a list of all search services in the given resource group.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -2345,7 +2345,7 @@
           {
             "name": "HighDensity",
             "value": "HighDensity",
-            "description": "Only application for standard3 SKU, where the search service can have up to 1000 indexes."
+            "description": "Only applies to the Standard3 (S3) SKU, where the search services can have up to 1,000 indexes."
           }
         ]
       }
@@ -2826,7 +2826,7 @@
           {
             "name": "Provisioning",
             "value": "provisioning",
-            "description": "The search service is being provisioned or scaled up or down."
+            "description": "The search service is in the process of being provisioned. For dedicated search services only, the service might be in the process of scaling up or down."
           },
           {
             "name": "Failed",
@@ -2913,7 +2913,7 @@
     },
     "QuotaUsageResultName": {
       "type": "object",
-      "description": "The name of the SKU supported by Azure AI Search.",
+      "description": "The SKU name information, including its identifier and localized display name.",
       "properties": {
         "value": {
           "type": "string",
@@ -3072,7 +3072,7 @@
           {
             "name": "standard",
             "value": "standard",
-            "description": "Enables semantic reranker on a search service as a billable feature, with higher throughput and volume of semantically reranked queries."
+            "description": "Enables semantic reranker on a search service as a billable feature after the free quota is exhausted, with higher throughput and volume of semantically reranked queries."
           }
         ]
       }
@@ -3096,7 +3096,7 @@
           {
             "name": "standard",
             "value": "standard",
-            "description": "Enables knowledge retrieval on a search service as a billable feature, with higher throughput and volume of knowledge retrieval requests."
+            "description": "Enables knowledge retrieval on a search service as a billable feature after the free quota is exhausted, with higher throughput and volume of knowledge retrieval requests."
           }
         ]
       }
@@ -3155,7 +3155,7 @@
         "replicaCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of replicas in the search service. If specified, it must be a value between 1 and 12 inclusive for standard SKUs or between 1 and 3 inclusive for basic SKU.",
+          "description": "The number of replicas in the dedicated search service. If specified, it must be a value between 1 and 12 inclusive for standard SKUs or between 1 and 3 inclusive for basic SKU.",
           "default": 1,
           "minimum": 1,
           "maximum": 12
@@ -3163,7 +3163,7 @@
         "partitionCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of partitions in the search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3.",
+          "description": "The number of replicas in the dedicated search service. If specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3.",
           "default": 1,
           "minimum": 1,
           "maximum": 12
@@ -3188,12 +3188,12 @@
               {
                 "name": "Default",
                 "value": "Default",
-                "description": "The limit on number of indexes is determined by the default limits for the SKU."
+                "description": "The maximum limit of indexes is determined by the SKU or pricing tier."
               },
               {
                 "name": "HighDensity",
                 "value": "HighDensity",
-                "description": "Only application for standard3 SKU, where the search service can have up to 1000 indexes."
+                "description": "Applies only to the Standard3 (S3) SKU or pricing tier, where the search service can have up to 1000 indexes."
               }
             ]
           }
