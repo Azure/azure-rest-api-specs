@@ -55,6 +55,7 @@ describe("detect-arm-leases", () => {
 
   afterEach(() => {
     vi.clearAllMocks();
+    vi.unstubAllEnvs();
   });
 
   describe("parseLease", () => {
@@ -181,6 +182,52 @@ describe("detect-arm-leases", () => {
       expect(mockGitInstance.show).toHaveBeenCalledWith([
         "HEAD^:.github/arm-leases/xyz/Microsoft.XYZ/lease.yaml",
       ]);
+    });
+
+    it("falls back to origin/<baseBranch> when HEAD^ does not have the lease", async () => {
+      vi.stubEnv("GITHUB_BASE_REF", "main");
+
+      // First call (HEAD^) fails, second call (origin/main) succeeds
+      mockGitInstance.show
+        .mockRejectedValueOnce(new Error("does not exist in HEAD^"))
+        .mockResolvedValueOnce(leaseYaml(daysAgo(30), "P90D"));
+
+      const result = await checkLease("xyz", "Microsoft.XYZ", "XYZInsights");
+      expect(result).toBe(true);
+      expect(mockGitInstance.show).toHaveBeenCalledTimes(2);
+      expect(mockGitInstance.show).toHaveBeenNthCalledWith(1, [
+        "HEAD^:.github/arm-leases/xyz/Microsoft.XYZ/XYZInsights/lease.yaml",
+      ]);
+      expect(mockGitInstance.show).toHaveBeenNthCalledWith(2, [
+        "origin/main:.github/arm-leases/xyz/Microsoft.XYZ/XYZInsights/lease.yaml",
+      ]);
+    });
+
+    it("returns false when both HEAD^ and origin/<baseBranch> do not have the lease", async () => {
+      vi.stubEnv("GITHUB_BASE_REF", "main");
+      mockGitInstance.show.mockRejectedValue(new Error("does not exist"));
+
+      const result = await checkLease("testservice", "Microsoft.Test");
+      expect(result).toBe(false);
+    });
+
+    it("returns false when HEAD^ fails and GITHUB_BASE_REF is not set", async () => {
+      mockGitInstance.show.mockRejectedValue(new Error("does not exist in HEAD^"));
+
+      const result = await checkLease("testservice", "Microsoft.Test");
+      expect(result).toBe(false);
+      // Only one call (HEAD^), no fallback attempted
+      expect(mockGitInstance.show).toHaveBeenCalledTimes(1);
+    });
+
+    it("returns false when origin/<baseBranch> has an expired lease", async () => {
+      vi.stubEnv("GITHUB_BASE_REF", "main");
+      mockGitInstance.show
+        .mockRejectedValueOnce(new Error("does not exist in HEAD^"))
+        .mockResolvedValueOnce(leaseYaml(daysAgo(100), "P90D"));
+
+      const result = await checkLease("testservice", "Microsoft.Test");
+      expect(result).toBe(false);
     });
   });
 });

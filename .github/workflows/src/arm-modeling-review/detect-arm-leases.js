@@ -89,8 +89,10 @@ export function parseLease(content) {
  * Check if ARM lease exists and is valid.
  *
  * Reads the lease file directly from HEAD^ (the base-branch parent of the merge commit)
- * via git show. This is the same pattern used by trivial-changes-check.js and
- * arm-incremental-typespec.js and requires no extra git fetch or GitHub API calls.
+ * via git show. If the lease is not found in HEAD^ (which can happen when the PR's merge
+ * commit is stale — i.e., the lease was merged to the base branch after the merge commit
+ * was last generated), falls back to checking origin/<GITHUB_BASE_REF> which is pre-fetched
+ * by the workflow to reflect the current state of the base branch.
  *
  * @param {string} orgName - Organization name (e.g., "compute")
  * @param {string} rpNamespace - Resource provider namespace (e.g., "Microsoft.Compute")
@@ -101,13 +103,29 @@ export async function checkLease(orgName, rpNamespace, serviceName = "") {
   const repoRoot = await getRootFolder(process.cwd());
   const relLeasePath = buildLeaseRelativePath(orgName, rpNamespace, serviceName);
 
-  let content;
+  // git is initialized once and reused for both lookups (HEAD^ and origin/<baseBranch>).
+  const git = simpleGit(repoRoot);
+
+  // Try reading from HEAD^ (the base-branch parent of the merge commit).
+  // This is the common case when the lease was merged before the PR's merge commit was generated.
   try {
-    const git = simpleGit(repoRoot);
-    content = await git.show([`HEAD^:${relLeasePath}`]);
+    const content = await git.show([`HEAD^:${relLeasePath}`]);
+    return parseLease(content).valid;
   } catch {
+    // Expected when the lease file is absent from HEAD^ — this happens when the PR's merge
+    // commit is stale (the lease was merged to the base branch after the last PR push).
+    // Fall back to origin/<baseBranch>, which is pre-fetched by the workflow.
+  }
+
+  const baseBranch = process.env.GITHUB_BASE_REF;
+  if (!baseBranch) {
     return false;
   }
 
-  return parseLease(content).valid;
+  try {
+    const content = await git.show([`origin/${baseBranch}:${relLeasePath}`]);
+    return parseLease(content).valid;
+  } catch {
+    return false;
+  }
 }
