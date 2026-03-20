@@ -31,7 +31,7 @@ enum Versions {
 }
 ```
 
-**Important:** Remove the previous preview version from the enum when replacing it (e.g., remove `v2026_03_01_preview` when adding `v2026_04_01_preview`).
+**Important:** Remove the previous preview version from the enum when replacing it (e.g., remove `v2026_03_15_preview` when adding `v2026_04_01_preview`).
 
 ### Step 2: Update Version References in TSP Files
 
@@ -41,8 +41,8 @@ Search and replace all references to the old preview version with the new one ac
 # PowerShell command to find and replace version references in all tsp files
 Get-ChildItem -Path . -Filter "*.tsp" | ForEach-Object {
     $content = Get-Content $_.FullName -Raw
-    if ($content -match "v2026_03_01_preview") {
-        $content = $content -replace "v2026_03_01_preview", "v2026_04_01_preview"
+    if ($content -match "v2026_03_15_preview") {
+        $content = $content -replace "v2026_03_15_preview", "v2026_04_01_preview"
         Set-Content -Path $_.FullName -Value $content -NoNewline
         Write-Host "Updated: $($_.Name)"
     }
@@ -60,7 +60,7 @@ Rename the examples directory from the old preview version to the new one:
 
 ```powershell
 # Rename the examples directory
-Rename-Item -Path "examples\2026-03-01-preview" -NewName "2026-04-01-preview"
+Rename-Item -Path "examples\2026-03-15-preview" -NewName "2026-04-01-preview"
 ```
 
 ### Step 4: Update API Version in Example Files
@@ -71,7 +71,7 @@ Update the `api-version` query parameter in all example JSON files:
 # PowerShell script to update api-version in all example files
 Get-ChildItem -Path "examples\2026-04-01-preview" -Filter "*.json" | ForEach-Object {
     $content = Get-Content $_.FullName -Raw
-    $content = $content -replace "2026-03-01-preview", "2026-04-01-preview"
+    $content = $content -replace "2026-03-15-preview", "2026-04-01-preview"
     Set-Content -Path $_.FullName -Value $content -NoNewline
 }
 ```
@@ -222,11 +222,11 @@ When you run `git status preview`, you should see:
 
 ```powershell
 # Complete workflow for creating new preview version
-$oldVersion = "2026-03-01-preview"
+$oldVersion = "2026-03-15-preview"
 $newVersion = "2026-04-01-preview"
-$oldVersionVar = "v2026_03_01_preview"
+$oldVersionVar = "v2026_03_15_preview"
 $newVersionVar = "v2026_04_01_preview"
-$oldTag = "package-preview-2026-03-01-preview"
+$oldTag = "package-preview-2026-03-15-preview"
 $newTag = "package-preview-2026-04-01-preview"
 
 # 1. Update main.tsp Versions enum manually (remove old, add new)
@@ -253,9 +253,9 @@ Get-ChildItem -Path "examples\$newVersion" -Filter "*.json" | ForEach-Object {
 
 # 5. Update readme.md - update default tag and add new tag section
 # Edit readme.md manually:
-#   - Change: tag: package-preview-2026-03-01-preview
+#   - Change: tag: package-preview-2026-03-15-preview
 #   - To:     tag: package-preview-2026-04-01-preview
-#   - Add new tag section for 2026-04-01-preview before the 2026-03-01-preview section
+#   - Add new tag section for 2026-04-01-preview before the 2026-03-15-preview section
 
 # 6. Format (optional) and compile
 npx prettier --write ".\examples\$newVersion\*.json"

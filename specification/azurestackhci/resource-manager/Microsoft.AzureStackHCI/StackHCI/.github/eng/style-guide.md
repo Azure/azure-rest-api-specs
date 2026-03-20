@@ -34,7 +34,7 @@ namespace Microsoft.AzureStackHCI;
  * Resource description.
  */
 @parentResource(ParentResource)  // if applicable
-@added(Versions.v2026_03_01_preview)  // if version-specific
+@added(Versions.v2026_03_15_preview)  // if version-specific
 model MyResource is Azure.ResourceManager.TrackedResource<MyResourceProperties> {
   ...ResourceNameParameter<...>;
 }
@@ -112,10 +112,10 @@ If you encounter files with `@doc` decorators, use the conversion script:
 
 ```powershell
 # Dry run to see what would change
-.\eng\convert-doc-to-jsdoc.ps1 -Path "." -DryRun
+.\.github\eng\convert-doc-to-jsdoc.ps1 -Path "." -DryRun
 
 # Apply changes
-.\eng\convert-doc-to-jsdoc.ps1 -Path "."
+.\.github\eng\convert-doc-to-jsdoc.ps1 -Path "."
 ```
 
 ## Imports and Using Statements
@@ -155,7 +155,7 @@ namespace Microsoft.AzureStackHCI;
 Use `@added` decorator to indicate version availability:
 
 ```typespec
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 model NewFeature {
   // ...
 }
@@ -169,22 +169,90 @@ For properties or models added in specific versions:
 model ExistingModel {
   existingProperty: string;
 
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_03_15_preview)
   newProperty?: string;
 }
 ```
+
+## Private Preview Features (Private Repo Only)
+
+When working in the private repository, features not yet available in the public repo should be clearly marked.
+
+### Rule: Mark private preview features with non-doc comments
+
+Use `// PRIVATE PREVIEW` comments to identify models and union members that exist only in the private repo:
+
+```typespec
+@added(Versions.v2026_03_15_preview)
+union HciJobType {
+  string,
+
+  /** Job to configure CVM for the cluster. */
+  ConfigureCVM: "ConfigureCVM",
+
+  /** Job to configure SDN integration. */
+  ConfigureSdnIntegration: "ConfigureSdnIntegration",
+
+  // PRIVATE PREVIEW - GPU and Arc Gateway job types
+
+  /** Job to configure arc gateway for the cluster. */
+  ConfigureArcGateway: "ConfigureArcGateway",
+
+  /** Job to create GPU partition. */
+  GpuCreatePartition: "GpuCreatePartition",
+
+  /** Job to switch GPU mode. */
+  GpuSwitchMode: "GpuSwitchMode",
+}
+```
+
+### Rule: Keep private models in `models.tsp`
+
+Private preview models should be added to `models.tsp` (not in separate files) and grouped with section comments:
+
+```typespec
+// PRIVATE PREVIEW - Arc Gateway and GPU Job Properties
+
+/**
+ * Properties for configuring Arc Gateway job.
+ */
+@added(Versions.v2026_03_15_preview)
+model HciConfigureArcGatewayJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.ConfigureArcGateway;
+
+  /** The Arc Gateway resource ID. */
+  arcGatewayResourceId?: string;
+}
+```
+
+### Private Preview Resources
+
+For complete private preview resource files (not in public repo), keep them as separate `.tsp` files with clear naming:
+- Use PascalCase naming (e.g., `EdgeMachineGpu.tsp`)
+- Add to the import list in `main.tsp`
+- Document in `private-repo-differences.md`
+
+### Syncing with Public Repo
+
+When features graduate from private preview to public:
+1. Remove `// PRIVATE PREVIEW` comments
+2. Update version annotations if needed
+3. Update `private-repo-differences.md` to remove the feature from tracking
+4. Ensure model validation passes on both repos
 
 ## Code Review Checklist
 
 When reviewing TypeSpec changes, verify:
 
-- [ ] File name uses PascalCase except: client.tsp,  back-compatible.tsp and models.tsp
+- [ ] File name uses PascalCase except: client.tsp, back-compatible.tsp and models.tsp
 - [ ] Models are defined in `models.tsp` (not in resource files)
 - [ ] Documentation uses `/** */` style (not `@doc`)
 - [ ] No unused imports or using statements
 - [ ] No redundant `@armProviderNamespace` declaration
 - [ ] Section comments used when adding groups of models
 - [ ] Proper versioning decorators applied
+- [ ] **Private preview features marked with `// PRIVATE PREVIEW` comments**
 - [ ] Compilation succeeds (`npx tsp compile .`)
 
 ## Running Compilation
@@ -199,5 +267,5 @@ npx tsp compile .
 
 | Script | Purpose |
 |--------|---------|
-| `eng/convert-doc-to-jsdoc.ps1` | Convert `@doc` decorators to `/** */` comments |
-| `eng/version-creator.md` | Instructions for creating new API versions |
+| `.github/eng/convert-doc-to-jsdoc.ps1` | Convert `@doc` decorators to `/** */` comments |
+| `.github/eng/new-api-version.md` | Instructions for creating new API versions |
