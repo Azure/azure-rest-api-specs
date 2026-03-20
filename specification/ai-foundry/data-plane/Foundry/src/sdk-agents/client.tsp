@@ -73,6 +73,13 @@ using Azure.AI.Projects;
   "cachedTokensCount"
 );
 
+//rename object types to avoid confusion with Java objects
+@@clientName(AgentObject.object, "objectType");
+@@clientName(AgentVersionObject.object, "objectType");
+@@clientName(DeleteMemoryStoreResponse.object, "objectType");
+@@clientName(MemoryStoreObject.object, "SobjectType");
+@@clientName(MemoryStoreDeleteScopeResponse.object, "objectType");
+
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
@@ -136,12 +143,6 @@ using Azure.AI.Projects;
 
 @@usage(AzureCreateResponseDetails, Usage.output);
 @@access(AzureCreateResponseDetails, Access.public);
-
-@@access(AgentObject.object, Access.internal);
-@@access(AgentVersionObject.object, Access.internal);
-@@access(DeleteMemoryStoreResponse.object, Access.internal);
-@@access(MemoryStoreObject.object, Access.internal);
-@@access(MemoryStoreDeleteScopeResponse.object, Access.internal);
 
 // --------------------------------------------------------------------------------
 // Type overrides
