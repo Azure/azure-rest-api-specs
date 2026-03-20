@@ -46,9 +46,9 @@ namespace MapsSearch {
    */
   enum Versions {
     /**
-     * The 2025-01-01 API version.
+     * The 2026-01-01 API version.
      */
-    v2025_01_01: "2025-01-01",
+    v2026_01_01: "2026-01-01",
 
     /**
      * The 2025-06-01-preview API version.
