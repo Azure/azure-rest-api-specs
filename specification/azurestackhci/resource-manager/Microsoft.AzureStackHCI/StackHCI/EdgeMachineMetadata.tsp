@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureStackHCI;
 
 /**
- * EdgeMachine Metadata resource - stores validated recipe information for an edge machine.
+ * EdgeMachine Metadata resource that stores validated recipe details for an edge machine.
  */
 @added(Versions.v2026_03_15_preview)
 @parentResource(EdgeMachine)
