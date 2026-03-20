@@ -28,5 +28,5 @@ namespace Microsoft.ResourceGraph;
 
 @@clientName(ResourceHistory.ResultFormat,
   "ResourceHistoryResultFormat",
-  "java"
+  "java,python"
 );
