@@ -86,6 +86,11 @@ parameters:
 - name: EmitterPackagePath
   type: string
 
+# The DevOps npm registry URL used for publishing and consuming emitter packages.
+- name: NpmDevOpsFeedUrl
+  type: string
+  default: 'https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/'
+
 extends:
   template: /eng/pipelines/templates/stages/1es-redirect.yml
   parameters:
@@ -247,7 +252,7 @@ extends:
                 - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
                   parameters:
                     npmrcPath: $(buildArtifactsPath)/packages/.npmrc
-                    registryUrl: https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/
+                    registryUrl: ${{ parameters.NpmDevOpsFeedUrl }}
         
                 # publish to devops feed
                 - pwsh: |
@@ -316,6 +321,7 @@ extends:
           - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
             parameters:
               npmrcPath: $(tspClientNpmrcPath)
+              registryUrl: ${{ parameters.NpmDevOpsFeedUrl }}
 
           - pwsh: |
               npm ci
@@ -413,6 +419,7 @@ extends:
           - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
             parameters:
               npmrcPath: $(emitterNpmrcPath)
+              registryUrl: ${{ parameters.NpmDevOpsFeedUrl }}
 
           - task: PowerShell@2
             displayName: Call regeneration script
