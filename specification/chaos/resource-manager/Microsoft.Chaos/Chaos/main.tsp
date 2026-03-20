@@ -38,7 +38,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "ChaosManagementClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Chaos;
 
 /**
