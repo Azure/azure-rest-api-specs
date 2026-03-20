@@ -187,13 +187,33 @@ stages:
             - Name: $(SpecRepoOwner)/$(SpecRepoName)
               Commitish: $(SpecRepoCommit)
               WorkingDirectory: $(SpecRepoDirectory)
-            - Name: $(SdkRepoOwner)/$(SdkRepoName)
-              Commitish: $(CheckoutCommitish)
-              WorkingDirectory: $(SdkRepoDirectory)
           SkipCheckoutNone: true
           ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
             TokenToUseForAuth: $(azuresdk-github-pat)
             PreserveAuthToken: true
+
+      - pwsh: |
+          $PSNativeCommandArgumentPassing = 'Legacy'
+          function Retry() {
+            $retries, $command, $arguments = $args
+            $attempt = 0; $sleep = 5
+            while ($true) {
+              $attempt++
+              & $command $arguments
+              if (!$LASTEXITCODE) { return }
+              if ($attempt -gt $retries) { exit $LASTEXITCODE }
+              Write-Warning "Attempt $attempt failed. Retrying in $sleep seconds..."
+              Start-Sleep -Seconds $sleep; $sleep *= 2
+            }
+          }
+          New-Item -ItemType Directory -Force -Path "$(SdkRepoDirectory)" | Out-Null
+          Push-Location "$(SdkRepoDirectory)"
+          Write-Host "Cloning $(SdkRepoOwner)/$(SdkRepoName) with full checkout..."
+          $repoUrl = "https://github.com/$(SdkRepoOwner)/$(SdkRepoName)"
+          Retry 3 git clone --single-branch --branch "$(CheckoutCommitish)" $repoUrl .
+          git config gc.auto 0
+          Pop-Location
+        displayName: 'Clone SDK repository (full checkout)'
 
       - task: NodeTool@0
         inputs:
