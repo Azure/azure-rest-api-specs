@@ -850,7 +850,7 @@ model FileProperty {
   @Xml.name("Last-Modified") lastModified?: utcDateTime;
 
   /** The ETag of the file. */
-  @Xml.name("Etag") eTag?: string;
+  @Xml.name("Etag") eTag?: Azure.Core.eTag;
 }
 
 /**
@@ -1068,7 +1068,7 @@ model SharePropertiesInternal {
   @Xml.name("Last-Modified") lastModified: utcDateTime;
 
   /** The ETag of the share. */
-  @Xml.name("Etag") eTag: string;
+  @Xml.name("Etag") eTag: Azure.Core.eTag;
 
   /** The share quota. */
   @Xml.name("Quota") quota: int32;
@@ -1625,7 +1625,7 @@ alias MetadataHeaders = {
 alias EtagResponseHeader = {
   /** The ETag contains a value that represents the version of the resource. */
   @header("ETag")
-  etag: string;
+  etag: Azure.Core.eTag;
 };
 
 /** Last modified response header. */

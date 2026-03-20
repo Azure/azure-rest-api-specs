@@ -1035,7 +1035,7 @@ interface File {
       ...MetadataHeaders;
       @header("Content-Length") contentLength: int64;
       @header("Content-Range") contentRange?: string;
-      @header("ETag") etag: string;
+      @header("ETag") etag: Azure.Core.eTag;
       @header("Content-MD5") contentMd5?: bytes;
       @header("Content-Encoding") contentEncoding?: string;
       @header("Cache-Control") cacheControl?: string;
@@ -1092,7 +1092,7 @@ interface File {
       @header("Content-Length") contentLength: int64;
       #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation"
       @header("Content-Type") contentType?: string;
-      @header("ETag") etag: string;
+      @header("ETag") etag: Azure.Core.eTag;
       @header("Content-MD5") contentMd5?: bytes;
       @header("Content-Encoding") contentEncoding?: string;
       @header("Cache-Control") cacheControl?: string;
