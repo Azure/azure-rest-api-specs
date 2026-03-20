@@ -90,8 +90,8 @@ export function parseLease(content) {
  * Reads the lease file directly from HEAD^ (the base-branch parent of the merge commit)
  * via git show. If the lease is not found in HEAD^ (which can happen when the PR's merge
  * commit is stale — i.e., the lease was merged to the base branch after the merge commit
- * was last generated), falls back to checking origin/<GITHUB_BASE_REF> which is pre-fetched
- * by the workflow to reflect the current state of the base branch.
+ * was last generated), falls back to checking origin/<GITHUB_BASE_REF> after fetching
+ * the latest state of the base branch.
  *
  * @param {string} orgName - Organization name (e.g., "compute")
  * @param {string} rpNamespace - Resource provider namespace (e.g., "Microsoft.Compute")
@@ -102,7 +102,6 @@ export async function checkLease(orgName, rpNamespace, serviceName = "") {
   const repoRoot = await getRootFolder(process.cwd());
   const relLeasePath = buildLeaseRelativePath(orgName, rpNamespace, serviceName);
 
-  // git is initialized once and reused for both lookups (HEAD^ and origin/<baseBranch>).
   const git = simpleGit(repoRoot);
 
   // Try reading from HEAD^ (the base-branch parent of the merge commit).
@@ -113,7 +112,7 @@ export async function checkLease(orgName, rpNamespace, serviceName = "") {
   } catch {
     // Expected when the lease file is absent from HEAD^ — this happens when the PR's merge
     // commit is stale (the lease was merged to the base branch after the last PR push).
-    // Fall back to origin/<baseBranch>, which is pre-fetched by the workflow.
+    // Fall back to origin/<baseBranch> after fetching latest.
   }
 
   const baseBranch = process.env.GITHUB_BASE_REF;
@@ -122,6 +121,8 @@ export async function checkLease(orgName, rpNamespace, serviceName = "") {
   }
 
   try {
+    // Fetch the latest base branch to get any leases merged after the PR was created
+    await git.fetch(["origin", `${baseBranch}:refs/remotes/origin/${baseBranch}`, "--depth=1"]);
     const content = await git.show([`origin/${baseBranch}:${relLeasePath}`]);
     return parseLease(content).valid;
   } catch {

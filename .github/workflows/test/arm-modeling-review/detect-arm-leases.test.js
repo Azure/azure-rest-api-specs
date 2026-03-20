@@ -2,8 +2,8 @@ import { Temporal } from "@js-temporal/polyfill";
 import { resolve } from "path";
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 
-/** @type {{ show: import("vitest").MockedFunction<() => Promise<string>> }} */
-const mockGitInstance = vi.hoisted(() => ({ show: vi.fn() }));
+/** @type {{ show: import("vitest").MockedFunction<() => Promise<string>>, fetch: import("vitest").MockedFunction<() => Promise<void>> }} */
+const mockGitInstance = vi.hoisted(() => ({ show: vi.fn(), fetch: vi.fn() }));
 
 vi.mock("simple-git", () => ({
   simpleGit: vi.fn(() => mockGitInstance),
@@ -192,9 +192,15 @@ describe("detect-arm-leases", () => {
       mockGitInstance.show
         .mockRejectedValueOnce(new Error("does not exist in HEAD^"))
         .mockResolvedValueOnce(leaseYaml(daysAgo(30), "P90D"));
+      mockGitInstance.fetch.mockResolvedValue();
 
       const result = await checkLease("xyz", "Microsoft.XYZ", "XYZInsights");
       expect(result).toBe(true);
+      expect(mockGitInstance.fetch).toHaveBeenCalledWith([
+        "origin",
+        "main:refs/remotes/origin/main",
+        "--depth=1",
+      ]);
       expect(mockGitInstance.show).toHaveBeenCalledTimes(2);
       expect(mockGitInstance.show).toHaveBeenNthCalledWith(1, [
         `HEAD^:${resolve(".github", "arm-leases", "xyz", "Microsoft.XYZ", "XYZInsights", "lease.yaml")}`,
@@ -206,6 +212,7 @@ describe("detect-arm-leases", () => {
 
     it("returns false when both HEAD^ and origin/<baseBranch> do not have the lease", async () => {
       vi.stubEnv("GITHUB_BASE_REF", "main");
+      mockGitInstance.fetch.mockResolvedValue();
       mockGitInstance.show.mockRejectedValue(new Error("does not exist"));
 
       const result = await checkLease("testservice", "Microsoft.Test");
@@ -219,10 +226,12 @@ describe("detect-arm-leases", () => {
       expect(result).toBe(false);
       // Only one call (HEAD^), no fallback attempted
       expect(mockGitInstance.show).toHaveBeenCalledTimes(1);
+      expect(mockGitInstance.fetch).not.toHaveBeenCalled();
     });
 
     it("returns false when origin/<baseBranch> has an expired lease", async () => {
       vi.stubEnv("GITHUB_BASE_REF", "main");
+      mockGitInstance.fetch.mockResolvedValue();
       mockGitInstance.show
         .mockRejectedValueOnce(new Error("does not exist in HEAD^"))
         .mockResolvedValueOnce(leaseYaml(daysAgo(100), "P90D"));
