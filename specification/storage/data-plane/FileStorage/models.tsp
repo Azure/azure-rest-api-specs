@@ -1515,24 +1515,6 @@ enum FileRangeWriteFromUrlType {
   update: "update",
 }
 
-/** Share name path parameter. */
-alias ShareNamePathParameter = {
-  /** The name of the target share. */
-  @path shareName: string;
-};
-
-/** Directory path parameter. */
-alias DirectoryPathParameter = {
-  /** The path of the target directory. */
-  @path directory: string;
-};
-
-/** File name path parameter. */
-alias FileNamePathParameter = {
-  /** The path of the target file. */
-  @path fileName: string;
-};
-
 /** API version header alias */
 alias ApiVersionHeader = {
   /** Specifies the version of the operation to use for this request. */
