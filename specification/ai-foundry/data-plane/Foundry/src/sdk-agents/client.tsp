@@ -137,10 +137,10 @@ using Azure.AI.Projects;
 @@usage(AzureCreateResponseDetails, Usage.output);
 @@access(AzureCreateResponseDetails, Access.public);
 
-@@access(AgentDetails.object, Access.internal);
-@@access(AgentVersionDetails.object, Access.internal);
-@@access(DeleteMemoryStoreResult.object, Access.internal);
-@@access(MemoryStoreDetails.object, Access.internal);
+@@access(AgentObject.object, Access.internal);
+@@access(AgentVersionObject.object, Access.internal);
+@@access(DeleteMemoryStoreResponse.object, Access.internal);
+@@access(MemoryStoreObject.object, Access.internal);
 @@access(MemoryStoreDeleteScopeResponse.object, Access.internal);
 
 // --------------------------------------------------------------------------------
