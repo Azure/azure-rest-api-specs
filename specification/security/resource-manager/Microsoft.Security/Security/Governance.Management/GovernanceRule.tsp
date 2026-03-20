@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * Governance rule over a given scope
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model GovernanceRule
   is Azure.ResourceManager.ExtensionResource<GovernanceRuleProperties> {
@@ -81,7 +82,7 @@ interface GovernanceRules {
   /**
    * Delete a Governance rule over a given scope
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is Extension.DeleteWithoutOkAsync<
     Extension.ScopeParameter,
     GovernanceRule,
