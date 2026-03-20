@@ -3109,11 +3109,6 @@ model StorageAccountPropertiesCreateParameters {
   routingPreference?: RoutingPreference;
 
   /**
-   * Maintains information about the Internet protocol opted by the user.
-   */
-  dualStackEndpointPreference?: DualStackEndpointPreference;
-
-  /**
    * Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is false for this property.
    */
   allowBlobPublicAccess?: boolean;
@@ -3785,11 +3780,6 @@ model StorageAccountProperties {
   routingPreference?: RoutingPreference;
 
   /**
-   * Maintains information about the Internet protocol opted by the user.
-   */
-  dualStackEndpointPreference?: DualStackEndpointPreference;
-
-  /**
    * Blob restore status
    */
   @visibility(Lifecycle.Read)
@@ -4308,11 +4298,6 @@ model StorageAccountPropertiesUpdateParameters {
    * Maintains information about the network routing choice opted by the user for data transfer
    */
   routingPreference?: RoutingPreference;
-
-  /**
-   * Maintains information about the Internet protocol opted by the user.
-   */
-  dualStackEndpointPreference?: DualStackEndpointPreference;
 
   /**
    * Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is false for this property.
