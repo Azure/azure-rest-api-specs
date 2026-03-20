@@ -54697,6 +54697,27 @@
         }
       }
     },
+    "AuthorizationProviderFederatedIdentityCredentialsProperties": {
+      "type": "object",
+      "description": "Federated identity credentials properties returned by the authorization provider.",
+      "properties": {
+        "issuer": {
+          "type": "string",
+          "description": "The issuer URL of the federated identity credentials.",
+          "readOnly": true
+        },
+        "subject": {
+          "type": "string",
+          "description": "The subject identifier of the federated identity credentials.",
+          "readOnly": true
+        },
+        "audience": {
+          "type": "string",
+          "description": "The audience of the federated identity credentials.",
+          "readOnly": true
+        }
+      }
+    },
     "AuthorizationProviderKeyVaultContract": {
       "type": "object",
       "description": "Authorization Provider KeyVault contract properties.",
@@ -54729,6 +54750,29 @@
         }
       }
     },
+    "AuthorizationProviderOAuth2FederatedIdentityCredentialsGrantType": {
+      "type": "object",
+      "description": "OAuth2 authorization code with federated identity credentials grant type parameters.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of the application in the identity provider."
+        },
+        "clientAssertionType": {
+          "type": "string",
+          "description": "The type of client assertion used for federated identity credentials.",
+          "readOnly": true
+        },
+        "resourceUri": {
+          "type": "string",
+          "description": "The resource URI for the target service."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID of the identity provider."
+        }
+      }
+    },
     "AuthorizationProviderOAuth2GrantTypes": {
       "type": "object",
       "description": "Authorization Provider oauth2 grant types settings",
@@ -54746,6 +54790,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "authorizationCodeWithFederatedIdentityCredentials": {
+          "$ref": "#/definitions/AuthorizationProviderOAuth2FederatedIdentityCredentialsGrantType",
+          "description": "OAuth2 authorization code grant with federated identity credentials parameters"
         }
       }
     },
@@ -54764,6 +54812,11 @@
         "keyVault": {
           "$ref": "#/definitions/AuthorizationProviderKeyVaultContract",
           "description": "Key Vault reference for client secret storage"
+        },
+        "federatedIdentityCredentialsProperties": {
+          "$ref": "#/definitions/AuthorizationProviderFederatedIdentityCredentialsProperties",
+          "description": "Federated identity credentials properties.",
+          "readOnly": true
         }
       }
     },

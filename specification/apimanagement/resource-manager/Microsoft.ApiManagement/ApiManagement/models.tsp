@@ -4164,6 +4164,12 @@ model AuthorizationProviderOAuth2Settings {
    * Key Vault reference for client secret storage
    */
   keyVault?: AuthorizationProviderKeyVaultContract;
+
+  /**
+   * Federated identity credentials properties.
+   */
+  @visibility(Lifecycle.Read)
+  federatedIdentityCredentialsProperties?: AuthorizationProviderFederatedIdentityCredentialsProperties;
 }
 
 /**
@@ -4182,6 +4188,61 @@ model AuthorizationProviderOAuth2GrantTypes {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientCredentials?: Record<string>;
+
+  /**
+   * OAuth2 authorization code grant with federated identity credentials parameters
+   */
+  authorizationCodeWithFederatedIdentityCredentials?: AuthorizationProviderOAuth2FederatedIdentityCredentialsGrantType;
+}
+
+/**
+ * OAuth2 authorization code with federated identity credentials grant type parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AuthorizationProviderOAuth2FederatedIdentityCredentialsGrantType {
+  /**
+   * Client ID of the application in the identity provider.
+   */
+  clientId?: string;
+
+  /**
+   * The type of client assertion used for federated identity credentials.
+   */
+  @visibility(Lifecycle.Read)
+  clientAssertionType?: string;
+
+  /**
+   * The resource URI for the target service.
+   */
+  resourceUri?: string;
+
+  /**
+   * Tenant ID of the identity provider.
+   */
+  tenantId?: string;
+}
+
+/**
+ * Federated identity credentials properties returned by the authorization provider.
+ */
+model AuthorizationProviderFederatedIdentityCredentialsProperties {
+  /**
+   * The issuer URL of the federated identity credentials.
+   */
+  @visibility(Lifecycle.Read)
+  issuer?: string;
+
+  /**
+   * The subject identifier of the federated identity credentials.
+   */
+  @visibility(Lifecycle.Read)
+  subject?: string;
+
+  /**
+   * The audience of the federated identity credentials.
+   */
+  @visibility(Lifecycle.Read)
+  audience?: string;
 }
 
 /**
