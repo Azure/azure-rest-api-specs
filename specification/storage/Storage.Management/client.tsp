@@ -239,7 +239,7 @@ using Microsoft.Storage;
 @@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
 @@clientName(StorageAccounts.listAccountSAS, "listAccountSas", "java");
 @@clientName(StorageAccounts.listServiceSAS, "listServiceSas", "java");
-// Fix SAS method casing: old C# SDK used GetAccountSas/GetServiceSas (camelCase "Sas")
+// C# SAS casing: new generator preserves uppercase SAS, prior GA used Sas
 @@clientName(StorageAccounts.listAccountSAS, "GetAccountSas", "csharp");
 @@clientName(StorageAccounts.listServiceSAS, "GetServiceSas", "csharp");
 @@clientName(ImmutableStorageWithVersioning.timeStamp, "timestamp", "java");
@@ -448,6 +448,11 @@ namespace Azure.ResourceManager.Models {
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
+// SkuConversionStatus time fields are string in spec, prior GA had DateTimeOffset?
+@@clientName(StorageAccountSkuConversionStatus.startTime, "StartOn", "csharp");
+@@clientName(StorageAccountSkuConversionStatus.endTime, "EndOn", "csharp");
+@@alternateType(StorageAccountSkuConversionStatus.startTime, utcDateTime, "csharp");
+@@alternateType(StorageAccountSkuConversionStatus.endTime, utcDateTime, "csharp");
 @@usage(StorageAccountUpdateParameters,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
@@ -733,6 +738,9 @@ namespace Azure.ResourceManager.Models {
 @@clientName(StorageTaskReportProperties.finishTime, "FinishedOn", "csharp");
 @@clientName(DeletedAccountProperties.creationTime, "CreatedOn", "csharp");
 @@clientName(DeletedAccountProperties.deletionTime, "DeletedOn", "csharp");
+// DeletedAccountProperties time fields are string in spec, prior GA had DateTimeOffset?
+@@alternateType(DeletedAccountProperties.creationTime, utcDateTime, "csharp");
+@@alternateType(DeletedAccountProperties.deletionTime, utcDateTime, "csharp");
 
 // Property renames for Iops casing
 @@clientName(BurstingConstants.burstFloorIOPS, "BurstFloorIops", "csharp");
