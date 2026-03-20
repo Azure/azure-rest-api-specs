@@ -145,7 +145,7 @@ model RefreshRecommendationsTaskError {
 }
 
 /**
- * Describes an experiment update.
+ * Describes a workspace update.
  */
 model WorkspaceUpdate {
   ...Azure.ResourceManager.Foundations.TagsUpdateModel<Workspace>;
