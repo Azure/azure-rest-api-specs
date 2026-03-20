@@ -2,16 +2,6 @@
   "paths": {
     "/{scope}/providers/microsoft.Authorization/accessReviewHistoryDefinitions": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewHistoryDefinitions"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewHistoryDefinitions"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -23,114 +13,10 @@
             }
           ]
         ]
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewHistoryDefinition"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewHistoryDefinitions"
-          ]
-        ]
-      },
-      "put": {
-        "tags": [
-          [
-            "-",
-            "PutAccessReviewHistoryDefinition"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewHistoryDefinitions"
-          ]
-        ]
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "DeleteAccessReviewHistoryDefinition"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewHistoryDefinitions"
-          ]
-        ]
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ScopeGetAccessReviewHistoryDefinitionInstances"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewHistoryDefinitions"
-          ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/AccessReviewHistoryDefinitionInstanceListResult",
-                "__new": "#/definitions/AccessReviewHistoryInstanceListResult"
-              }
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances/{instanceId}/generateDownloadUri": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "PostAccessReviewHistoryDefinitionInstance"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewHistoryDefinitions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
       }
     },
     "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewScheduleDefinitions"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewScheduleDefinitions"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -141,99 +27,11 @@
               "x-ms-skip-url-encoding__deleted": true
             }
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewScheduleDefinition"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewScheduleDefinitions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          [
-            "-",
-            "PutAccessReviewScheduleDefinition"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewScheduleDefinitions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "DeleteAccessReviewScheduleDefinition"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewScheduleDefinitions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewInstances"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewInstances"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -247,125 +45,11 @@
               "x-ms-skip-url-encoding__deleted": true
             }
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewInstance"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          [
-            "-",
-            "PutAccessReviewInstance"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/applyDecisions": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "AccessReviewInstanceApplyDecisions"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewInstanceContactedReviewers"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewInstanceDecisions"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewInstances"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -382,206 +66,11 @@
               "x-ms-skip-url-encoding__deleted": true
             }
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/recordAllDecisions": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "AccessReviewInstanceRecordAllDecisions"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/resetDecisions": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "AccessReviewInstanceResetDecisions"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/sendReminders": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "AccessReviewInstanceSendReminders"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/stop": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "AccessReviewInstanceStop"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/stop": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "AccessReviewScheduleDefinitionStop"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewScheduleDefinitions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Authorization/accessReviewScheduleSettings/default": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewDefaultSettings"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewDefaultSettings"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          [
-            "-",
-            "PutAccessReviewDefaultSettings"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewDefaultSettings"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/providers/microsoft.Authorization/accessReviewScheduleDefinitions": {
       "get": {
-        "x-ms-examples__deleted": {
-          "GetAccessReviews": {
-            "$ref": "./examples/GetAccessReviewScheduleDefinitionsAssignedForMyApproval.json"
-          }
-        },
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewScheduleDefinitionsAssignedForMyApproval"
-          ],
-          [
-            "+",
-            "ScopeAccessReviewScheduleDefinitions"
-          ]
-        ],
-        "description": {
-          "__old": "Get access review instances assigned for my approval.",
-          "__new": "List a AccessReviewScheduleDefinition"
-        },
         "parameters": [
           [
             "~",
@@ -589,146 +78,26 @@
               "x-ms-skip-url-encoding__deleted": true
             }
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances": {
       "get": {
-        "x-ms-examples__deleted": {
-          "GetAccessReviews": {
-            "$ref": "./examples/GetAccessReviewInstancesAssignedForMyApproval.json"
-          }
-        },
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewInstancesAssignedForMyApproval"
-          ],
-          [
-            "+",
-            "AccessReviewInstancesAssignedForMyApproval"
-          ]
-        ],
         "parameters": [
           [
             " "
           ],
           [
-            "-",
+            "~",
             {
-              "name": "$filter",
-              "in": "query",
-              "type": "string",
-              "x-ms-skip-url-encoding": true
+              "x-ms-skip-url-encoding__deleted": true
             }
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewInstance"
-          ],
-          [
-            "+",
-            "AccessReviewInstancesAssignedForMyApproval"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/acceptRecommendations": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "AccessReviewInstanceAcceptRecommmendations"
-          ],
-          [
-            "+",
-            "AccessReviewInstancesAssignedForMyApproval"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "TenantLevelGetAccessReviewInstanceContactedReviewers"
-          ],
-          [
-            "+",
-            "AccessReviewInstancesAssignedForMyApproval"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewMyInstanceDecisions"
-          ],
-          [
-            "+",
-            "AccessReviewDecisions"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -742,63 +111,7 @@
               "x-ms-skip-url-encoding__deleted": true
             }
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions/{decisionId}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewMyInstanceDecision"
-          ],
-          [
-            "+",
-            "AccessReviewDecisions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "PatchAccessReviewMyInstanceDecision"
-          ],
-          [
-            "+",
-            "AccessReviewDecisions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/providers/microsoft.Authorization/operations": {
@@ -806,44 +119,12 @@
         "x-ms-examples__deleted": {},
         "tags__added": [
           "Operations"
-        ],
-        "description": {
-          "__old": "Lists the operations available from this provider.",
-          "__new": "List the operations for the provider"
-        },
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/OperationListResult",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
-              }
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewHistoryDefinitions": {
       "get": {
         "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewHistoryDefinitions"
-          ],
-          [
-            "+",
-            "AccessReviewHistoryDefinitions"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -851,151 +132,33 @@
               "x-ms-skip-url-encoding__deleted": true
             }
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}": {
       "get": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewHistoryDefinition"
-          ],
-          [
-            "+",
-            "AccessReviewHistoryDefinitions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       },
       "put": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "PutAccessReviewHistoryDefinition"
-          ],
-          [
-            "+",
-            "AccessReviewHistoryDefinitions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       },
       "delete": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "DeleteAccessReviewHistoryDefinition"
-          ],
-          [
-            "+",
-            "AccessReviewHistoryDefinitions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances": {
       "get": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewHistoryDefinitionInstances"
-          ],
-          [
-            "+",
-            "AccessReviewHistoryDefinitions"
-          ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/AccessReviewHistoryDefinitionInstanceListResult",
-                "__new": "#/definitions/AccessReviewHistoryInstanceListResult"
-              }
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances/{instanceId}/generateDownloadUri": {
       "post": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "PostAccessReviewHistoryDefinitionInstance"
-          ],
-          [
-            "+",
-            "AccessReviewHistoryDefinitions"
-          ]
-        ]
+        "x-ms-examples__deleted": {}
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions": {
       "get": {
         "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewScheduleDefinitions"
-          ],
-          [
-            "+",
-            "AccessReviewScheduleDefinitions"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -1003,103 +166,23 @@
               "x-ms-skip-url-encoding__deleted": true
             }
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}": {
       "get": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewScheduleDefinition"
-          ],
-          [
-            "+",
-            "AccessReviewScheduleDefinitions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       },
       "put": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "PutAccessReviewScheduleDefinition"
-          ],
-          [
-            "+",
-            "AccessReviewScheduleDefinitions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       },
       "delete": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "DeleteAccessReviewScheduleDefinition"
-          ],
-          [
-            "+",
-            "AccessReviewScheduleDefinitions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances": {
       "get": {
         "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewInstances"
-          ],
-          [
-            "+",
-            "AccessReviewInstances"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -1110,130 +193,30 @@
               "x-ms-skip-url-encoding__deleted": true
             }
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}": {
       "get": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewInstance"
-          ],
-          [
-            "+",
-            "AccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       },
       "put": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "PutAccessReviewInstance"
-          ],
-          [
-            "+",
-            "AccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/applyDecisions": {
       "post": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "AccessReviewInstanceApplyDecisions"
-          ],
-          [
-            "+",
-            "AccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
       "get": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewInstanceContactedReviewers"
-          ],
-          [
-            "+",
-            "AccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions": {
       "get": {
         "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewInstanceDecisions"
-          ],
-          [
-            "+",
-            "AccessReviewInstances"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -1247,288 +230,43 @@
               "x-ms-skip-url-encoding__deleted": true
             }
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/resetDecisions": {
       "post": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "AccessReviewInstanceResetDecisions"
-          ],
-          [
-            "+",
-            "AccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/sendReminders": {
       "post": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "AccessReviewInstanceSendReminders"
-          ],
-          [
-            "+",
-            "AccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/stop": {
       "post": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "AccessReviewInstanceStop"
-          ],
-          [
-            "+",
-            "AccessReviewInstances"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/stop": {
       "post": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "AccessReviewScheduleDefinitionStop"
-          ],
-          [
-            "+",
-            "AccessReviewScheduleDefinitions"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Authorization/accessReviewScheduleSettings/default": {
       "get": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "GetAccessReviewDefaultSettings"
-          ],
-          [
-            "+",
-            "AccessReviewDefaultSettingsOperationGroup"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       },
       "put": {
-        "x-ms-examples__deleted": {},
-        "tags": [
-          [
-            "-",
-            "PutAccessReviewDefaultSettings"
-          ],
-          [
-            "+",
-            "AccessReviewDefaultSettingsOperationGroup"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorDefinition",
-                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
+        "x-ms-examples__deleted": {}
       }
     }
   },
   "definitions": {
-    "AccessReviewHistoryDefinitionInstanceListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/AccessReviewHistoryInstance"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "Operation__deleted": {
-      "type": "object",
-      "description": "The definition of a Microsoft.Authorization operation.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation"
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "description": "Indicates whether the operation is a data action"
-        },
-        "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "Display of the operation"
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin of the operation"
-        }
-      }
-    },
-    "OperationDisplay__deleted": {
-      "type": "object",
-      "description": "The display information for a Microsoft.Authorization operation.",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "The resource provider name: Microsoft.Authorization.",
-          "readOnly": true
-        },
-        "resource": {
-          "type": "string",
-          "description": "The resource on which the operation is performed.",
-          "readOnly": true
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that users can perform.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "The description for the operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "AccessReviewHistoryInstanceListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/AccessReviewHistoryInstance"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "AccessReviewContactedReviewerListResult": {
       "required__added": [
         "value"
       ]
-    },
-    "AccessReviewContactedReviewerProperties": {
-      "properties": {
-        "createdDateTime": {
-          "x-nullable__deleted": true
-        }
-      }
     },
     "AccessReviewDecision": {
       "allOf__added": [
@@ -1564,8 +302,7 @@
     "AccessReviewDecisionInsightProperties": {
       "properties": {
         "insightCreatedDateTime": {
-          "format__deleted": "date-time",
-          "x-nullable__deleted": true
+          "type__added": "string"
         }
       }
     },
@@ -1577,32 +314,13 @@
     "AccessReviewDecisionProperties": {
       "properties": {
         "principal": {
-          "x-nullable__deleted": true,
           "x-ms-client-flatten__deleted": true
-        },
-        "resource": {
-          "x-nullable__deleted": true
         },
         "decision": {
           "description": {
             "__old": "The decision on the approval step. This value is initially set to NotReviewed. Approvers can take action of Approve/Deny",
             "__new": "Represents a reviewer's decision for a given review"
           }
-        },
-        "reviewedDateTime": {
-          "x-nullable__deleted": true
-        },
-        "reviewedBy": {
-          "x-nullable__deleted": true
-        },
-        "appliedDateTime": {
-          "x-nullable__deleted": true
-        },
-        "appliedBy": {
-          "x-nullable__deleted": true
-        },
-        "principalResourceMembership": {
-          "x-nullable__deleted": true
         }
       }
     },
@@ -1637,8 +355,7 @@
     "AccessReviewDecisionUserSignInInsightProperties": {
       "properties": {
         "lastSignInDateTime": {
-          "format__deleted": "date-time",
-          "x-nullable__deleted": true
+          "type__added": "string"
         }
       },
       "allOf": [
@@ -1702,6 +419,11 @@
         }
       }
     },
+    "AccessReviewHistoryDefinitionInstanceListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "AccessReviewHistoryDefinitionListResult": {
       "required__added": [
         "value"
@@ -1709,26 +431,8 @@
     },
     "AccessReviewHistoryDefinitionProperties": {
       "properties": {
-        "reviewHistoryPeriodStartDateTime": {
-          "x-nullable__deleted": true
-        },
-        "reviewHistoryPeriodEndDateTime": {
-          "x-nullable__deleted": true
-        },
-        "decisions": {
-          "x-nullable__deleted": true
-        },
-        "createdDateTime": {
-          "x-nullable__deleted": true
-        },
-        "createdBy": {
-          "x-nullable__deleted": true
-        },
         "scopes": {
           "x-nullable__deleted": false
-        },
-        "settings": {
-          "x-nullable__deleted": true
         }
       }
     },
@@ -1745,15 +449,6 @@
             "__old": "Status of the requested review history instance data. This is either requested, in-progress, done or error. The state transitions are as follows - Requested -> InProgress -> Done -> Expired",
             "__new": "This read-only field specifies the of the requested review history data. This is either requested, in-progress, done or error."
           }
-        },
-        "runDateTime": {
-          "x-nullable__deleted": true
-        },
-        "fulfilledDateTime": {
-          "x-nullable__deleted": true
-        },
-        "expiration": {
-          "x-nullable__deleted": true
         }
       }
     },
@@ -1796,16 +491,6 @@
         }
       }
     },
-    "AccessReviewRecurrenceRange": {
-      "properties": {
-        "startDate": {
-          "x-nullable__deleted": true
-        },
-        "endDate": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
     "AccessReviewScheduleDefinition": {
       "allOf__added": [
         {
@@ -1835,11 +520,10 @@
         "value"
       ]
     },
-    "ErrorDefinition": {
-      "title__deleted": "Error"
-    },
-    "ErrorDefinitionProperties": {
-      "title__deleted": "Error"
+    "OperationListResult": {
+      "required__added": [
+        "value"
+      ]
     }
   }
 }

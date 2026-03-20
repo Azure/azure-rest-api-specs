@@ -13,6 +13,7 @@ namespace Microsoft.Authorization;
 /**
  * The alert.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model Alert is Azure.ResourceManager.ExtensionResource<AlertProperties> {
   ...ResourceNameParameter<
@@ -28,7 +29,7 @@ interface Alerts {
   /**
    * Get the specified alert.
    */
-  get is Extension.Read<Extension.ScopeParameter, Alert>;
+  get is Extension.Read<Extension.ScopeParameter, Alert, Error = CloudError>;
 
   /**
    * Update an alert.
@@ -38,17 +39,23 @@ interface Alerts {
     Extension.ScopeParameter,
     Alert,
     PatchModel = Alert,
-    Response = ArmNoContentResponse
+    Response = ArmNoContentResponse,
+    Error = CloudError
   >;
 
   /**
    * Gets alerts for a resource scope.
    */
-  listForScope is Extension.ListByTarget<Extension.ScopeParameter, Alert>;
+  listForScope is Extension.ListByTarget<
+    Extension.ScopeParameter,
+    Alert,
+    Error = CloudError
+  >;
 
   /**
    * Refresh an alert.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   refresh is Extension.ActionAsyncBase<
     Extension.ScopeParameter,
     Alert,
@@ -57,7 +64,7 @@ interface Alerts {
       @bodyRoot
       _: AlertOperationResult;
     },
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Alert>
+    Error = CloudError
   >;
 }
 

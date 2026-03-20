@@ -1,0 +1,198 @@
+{
+  "paths": {
+    "/{scope}/providers/microsoft.Authorization/roleManagementAlerts/{alertId}/refresh": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/microsoft.Authorization/roleManagementAlerts/refresh": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Alert": {
+      "allOf__added": [
+        {
+          "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "description": "The alert ID.",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "description": "The alert name.",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "description": "The alert type.",
+          "readOnly": true
+        }
+      }
+    },
+    "AlertConfiguration": {
+      "allOf__added": [
+        {
+          "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "description": "The alert configuration ID.",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "description": "The alert configuration name.",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "description": "The alert configuration type.",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten__deleted": true
+        }
+      }
+    },
+    "AlertConfigurationListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "AlertConfigurationProperties": {
+      "properties": {
+        "isEnabled": {
+          "readOnly__deleted": false
+        },
+        "alertConfigurationType": {
+          "readOnly__deleted": false
+        }
+      }
+    },
+    "AlertDefinition": {
+      "allOf__added": [
+        {
+          "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "description": "The alert definition ID.",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "description": "The alert definition name.",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "description": "The alert definition type.",
+          "readOnly": true
+        }
+      }
+    },
+    "AlertDefinitionListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "AlertIncident": {
+      "allOf__added": [
+        {
+          "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "description": "The alert incident ID.",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "description": "The alert incident name.",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "description": "The alert incident type.",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten__deleted": true
+        }
+      }
+    },
+    "AlertIncidentListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "AlertIncidentProperties": {
+      "properties": {
+        "alertIncidentType": {
+          "readOnly__deleted": false
+        }
+      }
+    },
+    "AlertListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "CloudError": {
+      "properties": {
+        "error": {
+          "description__added": "An error response from the service."
+        }
+      }
+    },
+    "TooManyOwnersAssignedToResourceAlertConfigurationProperties": {
+      "properties": {
+        "thresholdNumberOfOwners": {
+          "readOnly__deleted": false
+        },
+        "thresholdPercentageOfOwnersOutOfAllRoleMembers": {
+          "readOnly__deleted": false
+        }
+      }
+    },
+    "TooManyPermanentOwnersAssignedToResourceAlertConfigurationProperties": {
+      "properties": {
+        "thresholdNumberOfPermanentOwners": {
+          "readOnly__deleted": false
+        },
+        "thresholdPercentageOfPermanentOwnersOutOfAllOwners": {
+          "readOnly__deleted": false
+        }
+      }
+    }
+  }
+}

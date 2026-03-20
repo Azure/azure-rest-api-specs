@@ -537,6 +537,9 @@ model Operation {
   origin?: string;
 }
 
+model OperationListResult is Azure.Core.Page<Operation>;
+@@identifiers(OperationListResult.value, #["name"]);
+
 /**
  * The display information for a Microsoft.Authorization operation.
  */
@@ -570,6 +573,7 @@ model OperationDisplay {
  * Error description and code explaining why an operation failed.
  */
 @error
+@summary("Error")
 model ErrorDefinition {
   /**
    * Error of the list gateway status.
@@ -580,6 +584,7 @@ model ErrorDefinition {
 /**
  * Error description and code explaining why an operation failed.
  */
+@summary("Error")
 model ErrorDefinitionProperties {
   /**
    * Description of the error.
@@ -606,21 +611,24 @@ model AccessReviewHistoryDefinitionProperties {
   /**
    * Date time used when selecting review data, all reviews included in data start on or after this date. For use only with one-time/non-recurring reports.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  reviewHistoryPeriodStartDateTime?: utcDateTime;
+  reviewHistoryPeriodStartDateTime?: utcDateTime | null;
 
   /**
    * Date time used when selecting review data, all reviews included in data end on or before this date. For use only with one-time/non-recurring reports.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  reviewHistoryPeriodEndDateTime?: utcDateTime;
+  reviewHistoryPeriodEndDateTime?: utcDateTime | null;
 
   /**
    * Collection of review decisions which the history data should be filtered on. For example if Approve and Deny are supplied the data will only contain review results in which the decision maker approved or denied a review request.
    */
-  decisions?: AccessReviewResult[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  decisions?: AccessReviewResult[] | null;
 
   /**
    * This read-only field specifies the of the requested review history data. This is either requested, in-progress, done or error.
@@ -631,15 +639,17 @@ model AccessReviewHistoryDefinitionProperties {
   /**
    * Date time when history definition was created
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdDateTime?: utcDateTime;
+  createdDateTime?: utcDateTime | null;
 
   /**
    * The user or other identity who created this history definition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  createdBy?: AccessReviewActorIdentity;
+  createdBy?: AccessReviewActorIdentity | null;
 
   /**
    * A collection of scopes used when selecting review history data
@@ -650,7 +660,8 @@ model AccessReviewHistoryDefinitionProperties {
   /**
    * Recurrence settings for recurring history reports, skip for one-time reports.
    */
-  settings?: AccessReviewHistoryScheduleSettings;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  settings?: AccessReviewHistoryScheduleSettings | null;
 
   /**
    * Set of access review history instances for this history definition.
@@ -794,13 +805,15 @@ model AccessReviewRecurrenceRange {
    * The DateTime when the review is scheduled to be start. This could be a date in the future. Required on create.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startDate?: utcDateTime;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  startDate?: utcDateTime | null;
 
   /**
    * The DateTime when the review is scheduled to end. Required if type is endDate
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endDate?: utcDateTime;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  endDate?: utcDateTime | null;
 }
 
 /**
@@ -862,13 +875,15 @@ model AccessReviewHistoryInstanceProperties {
    * Date time when the history data report is scheduled to be generated.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  runDateTime?: utcDateTime;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  runDateTime?: utcDateTime | null;
 
   /**
    * Date time when the history data report is scheduled to be generated.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  fulfilledDateTime?: utcDateTime;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  fulfilledDateTime?: utcDateTime | null;
 
   /**
    * Uri which can be used to retrieve review history data. To generate this Uri, generateDownloadUri() must be called for a specific accessReviewHistoryDefinitionInstance. The link expires after a 24 hour period. Callers can see the expiration date time by looking at the 'se' parameter in the generated uri.
@@ -880,7 +895,8 @@ model AccessReviewHistoryInstanceProperties {
    * Date time when history data report expires and the associated data is deleted.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expiration?: utcDateTime;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  expiration?: utcDateTime | null;
 }
 
 /**
@@ -1087,14 +1103,16 @@ model AccessReviewDecisionProperties {
   /**
    * Principal associated with the decision record. Can be AccessReviewDecisionUserIdentity or AccessReviewDecisionServicePrincipalIdentity
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  principal?: AccessReviewDecisionIdentity;
+  principal?: AccessReviewDecisionIdentity | null;
 
   /**
    * Resource associated with this decision record.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  resource?: AccessReviewDecisionResource;
+  resource?: AccessReviewDecisionResource | null;
 
   /**
    * The feature- generated recommendation shown to the reviewer.
@@ -1115,15 +1133,17 @@ model AccessReviewDecisionProperties {
   /**
    * Date Time when a decision was taken.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  reviewedDateTime?: utcDateTime;
+  reviewedDateTime?: utcDateTime | null;
 
   /**
    * Details of the approver.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  reviewedBy?: AccessReviewActorIdentity;
+  reviewedBy?: AccessReviewActorIdentity | null;
 
   /**
    * The outcome of applying the decision.
@@ -1134,15 +1154,17 @@ model AccessReviewDecisionProperties {
   /**
    * The date and time when the review decision was applied.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  appliedDateTime?: utcDateTime;
+  appliedDateTime?: utcDateTime | null;
 
   /**
    * Details of the approver.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  appliedBy?: AccessReviewActorIdentity;
+  appliedBy?: AccessReviewActorIdentity | null;
 
   /**
    * This is the collection of insights for this decision item.
@@ -1152,8 +1174,9 @@ model AccessReviewDecisionProperties {
   /**
    * Details of the membership type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  principalResourceMembership?: AccessReviewDecisionPrincipalResourceMembership;
+  principalResourceMembership?: AccessReviewDecisionPrincipalResourceMembership | null;
 }
 
 /**
@@ -1242,8 +1265,9 @@ model AccessReviewDecisionInsightProperties {
   /**
    * Date Time when the insight was created.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  insightCreatedDateTime?: unknown;
+  insightCreatedDateTime?: utcDateTime | null;
 }
 
 /**
@@ -1303,9 +1327,10 @@ model AccessReviewContactedReviewerProperties {
   /**
    * Date Time when the reviewer was contacted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdDateTime?: utcDateTime;
+  createdDateTime?: utcDateTime | null;
 }
 
 /**
@@ -1343,8 +1368,9 @@ model AccessReviewDecisionUserSignInInsightProperties
   /**
    * Date Time when the user signed into the tenant.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  lastSignInDateTime?: unknown;
+  lastSignInDateTime?: utcDateTime | null;
 
   /**
    * The type of insight
@@ -1384,3 +1410,6 @@ model AccessReviewDecisionServicePrincipalIdentity
    */
   type: "servicePrincipal";
 }
+
+model AccessReviewHistoryDefinitionInstanceListResult
+  is Azure.Core.Page<AccessReviewHistoryInstance>;

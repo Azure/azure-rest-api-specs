@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -155,6 +157,7 @@ model AlertIncidentProperties {
   /**
    * The alert incident type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   alertIncidentType: string;
 }
 
@@ -184,6 +187,7 @@ model AlertConfigurationProperties {
   /**
    * The alert configuration type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   alertConfigurationType: string;
 
   /**
@@ -196,7 +200,9 @@ model AlertConfigurationProperties {
 /**
  * An error response from the service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * An error response from the service.
@@ -207,6 +213,8 @@ model CloudError {
 /**
  * An error response from the service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.

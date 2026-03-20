@@ -13,6 +13,7 @@ namespace Microsoft.Authorization;
 /**
  * Alert configuration.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model AlertConfiguration
   is Azure.ResourceManager.ExtensionResource<AlertConfigurationProperties> {
@@ -29,7 +30,11 @@ interface AlertConfigurations {
   /**
    * Get the specified alert configuration.
    */
-  get is Extension.Read<Extension.ScopeParameter, AlertConfiguration>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    AlertConfiguration,
+    Error = CloudError
+  >;
 
   /**
    * Update an alert configuration.
@@ -39,7 +44,8 @@ interface AlertConfigurations {
     Extension.ScopeParameter,
     AlertConfiguration,
     PatchModel = AlertConfiguration,
-    Response = ArmNoContentResponse
+    Response = ArmNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -47,7 +53,8 @@ interface AlertConfigurations {
    */
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
-    AlertConfiguration
+    AlertConfiguration,
+    Error = CloudError
   >;
 }
 

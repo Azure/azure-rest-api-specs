@@ -45,4 +45,10 @@ enum Versions {
   v2021_12_01_preview: "2021-12-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      ErrorDefinition
+    > {}
+
+@@doc(Operations.list, "Lists the operations available from this provider.");

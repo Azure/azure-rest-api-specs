@@ -26,16 +26,18 @@ model AccessReviewDecision
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AccessReviewDecisions {
   /**
    * Get my single access review instance decision.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewInstanceMyDecisions_GetById")
+  @tag("GetAccessReviewMyInstanceDecision")
   getById is ArmResourceRead<
     AccessReviewDecision,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ErrorDefinition
   >;
 
   /**
@@ -43,11 +45,13 @@ interface AccessReviewDecisions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewInstanceMyDecisions_Patch")
+  @tag("PatchAccessReviewMyInstanceDecision")
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
     AccessReviewDecision,
     PatchModel = AccessReviewDecisionProperties,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ErrorDefinition
   >;
 
   /**
@@ -55,6 +59,7 @@ interface AccessReviewDecisions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewInstanceMyDecisions_List")
+  @tag("GetAccessReviewMyInstanceDecisions")
   list is ArmResourceListByParent<
     AccessReviewDecision,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -64,7 +69,8 @@ interface AccessReviewDecisions {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = ErrorDefinition
   >;
 }
 

@@ -16,7 +16,7 @@
       "get": {
         "operationId": "ScopeAccessReviewHistoryDefinitions_List",
         "tags": [
-          "ScopeAccessReviewHistoryDefinitions"
+          "GetAccessReviewHistoryDefinitions"
         ],
         "description": "Lists the accessReviewHistoryDefinitions available from this provider, definition instances are only available for 30 days after creation.",
         "parameters": [
@@ -60,7 +60,7 @@
       "get": {
         "operationId": "ScopeAccessReviewHistoryDefinitions_GetById",
         "tags": [
-          "ScopeAccessReviewHistoryDefinitions"
+          "GetAccessReviewHistoryDefinition"
         ],
         "description": "Get access review history definition by definition Id",
         "parameters": [
@@ -100,7 +100,7 @@
       "put": {
         "operationId": "ScopeAccessReviewHistoryDefinition_Create",
         "tags": [
-          "ScopeAccessReviewHistoryDefinitions"
+          "PutAccessReviewHistoryDefinition"
         ],
         "description": "Create a scheduled or one-time Access Review History Definition",
         "parameters": [
@@ -148,7 +148,7 @@
       "delete": {
         "operationId": "ScopeAccessReviewHistoryDefinition_DeleteById",
         "tags": [
-          "ScopeAccessReviewHistoryDefinitions"
+          "DeleteAccessReviewHistoryDefinition"
         ],
         "description": "Delete an access review history definition",
         "parameters": [
@@ -190,7 +190,7 @@
       "get": {
         "operationId": "ScopeAccessReviewHistoryDefinitionInstances_List",
         "tags": [
-          "ScopeAccessReviewHistoryDefinitions"
+          "ScopeGetAccessReviewHistoryDefinitionInstances"
         ],
         "description": "Get access review history definition instances by definition Id",
         "parameters": [
@@ -211,13 +211,13 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/AccessReviewHistoryInstanceListResult"
+              "$ref": "#/definitions/AccessReviewHistoryDefinitionInstanceListResult"
             }
           },
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -235,7 +235,7 @@
       "post": {
         "operationId": "ScopeAccessReviewHistoryDefinitionInstance_GenerateDownloadUri",
         "tags": [
-          "ScopeAccessReviewHistoryDefinitions"
+          "PostAccessReviewHistoryDefinitionInstance"
         ],
         "description": "Generates a uri which can be used to retrieve review history data. This URI has a TTL of 1 day and can be retrieved by fetching the accessReviewHistoryDefinition object.",
         "parameters": [
@@ -268,7 +268,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -283,7 +283,7 @@
       "get": {
         "operationId": "ScopeAccessReviewScheduleDefinitions_List",
         "tags": [
-          "ScopeAccessReviewScheduleDefinitions"
+          "GetAccessReviewScheduleDefinitions"
         ],
         "description": "Get access review schedule definitions",
         "parameters": [
@@ -309,7 +309,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -327,7 +327,7 @@
       "get": {
         "operationId": "ScopeAccessReviewScheduleDefinitions_GetById",
         "tags": [
-          "ScopeAccessReviewScheduleDefinitions"
+          "GetAccessReviewScheduleDefinition"
         ],
         "description": "Get single access review definition",
         "parameters": [
@@ -354,7 +354,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -367,7 +367,7 @@
       "put": {
         "operationId": "ScopeAccessReviewScheduleDefinitions_CreateOrUpdateById",
         "tags": [
-          "ScopeAccessReviewScheduleDefinitions"
+          "PutAccessReviewScheduleDefinition"
         ],
         "description": "Create or Update access review schedule definition.",
         "parameters": [
@@ -402,7 +402,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -415,7 +415,7 @@
       "delete": {
         "operationId": "ScopeAccessReviewScheduleDefinitions_DeleteById",
         "tags": [
-          "ScopeAccessReviewScheduleDefinitions"
+          "DeleteAccessReviewScheduleDefinition"
         ],
         "description": "Delete access review schedule definition",
         "parameters": [
@@ -442,7 +442,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -457,7 +457,7 @@
       "get": {
         "operationId": "ScopeAccessReviewInstances_List",
         "tags": [
-          "ScopeAccessReviewInstances"
+          "GetAccessReviewInstances"
         ],
         "description": "Get access review instances",
         "parameters": [
@@ -489,7 +489,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -507,7 +507,7 @@
       "get": {
         "operationId": "ScopeAccessReviewInstances_GetById",
         "tags": [
-          "ScopeAccessReviewInstances"
+          "GetAccessReviewInstance"
         ],
         "description": "Get access review instances",
         "parameters": [
@@ -540,7 +540,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -553,7 +553,7 @@
       "put": {
         "operationId": "ScopeAccessReviewInstances_Create",
         "tags": [
-          "ScopeAccessReviewInstances"
+          "PutAccessReviewInstance"
         ],
         "description": "Update access review instance.",
         "parameters": [
@@ -594,7 +594,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -609,7 +609,7 @@
       "post": {
         "operationId": "ScopeAccessReviewInstance_ApplyDecisions",
         "tags": [
-          "ScopeAccessReviewInstances"
+          "AccessReviewInstanceApplyDecisions"
         ],
         "description": "An action to apply all decisions for an access review instance.",
         "parameters": [
@@ -639,7 +639,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -654,7 +654,7 @@
       "get": {
         "operationId": "ScopeAccessReviewInstanceContactedReviewers_List",
         "tags": [
-          "ScopeAccessReviewInstances"
+          "GetAccessReviewInstanceContactedReviewers"
         ],
         "description": "Get access review instance contacted reviewers",
         "parameters": [
@@ -687,7 +687,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -705,7 +705,7 @@
       "get": {
         "operationId": "ScopeAccessReviewInstanceDecisions_List",
         "tags": [
-          "ScopeAccessReviewInstances"
+          "GetAccessReviewInstanceDecisions"
         ],
         "description": "Get access review instance decisions",
         "parameters": [
@@ -743,7 +743,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -761,7 +761,7 @@
       "post": {
         "operationId": "ScopeAccessReviewInstance_RecordAllDecisions",
         "tags": [
-          "ScopeAccessReviewInstances"
+          "AccessReviewInstanceRecordAllDecisions"
         ],
         "description": "An action to approve/deny all decisions for a review with certain filters.",
         "parameters": [
@@ -799,7 +799,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -814,7 +814,7 @@
       "post": {
         "operationId": "ScopeAccessReviewInstance_ResetDecisions",
         "tags": [
-          "ScopeAccessReviewInstances"
+          "AccessReviewInstanceResetDecisions"
         ],
         "description": "An action to reset all decisions for an access review instance.",
         "parameters": [
@@ -844,7 +844,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -859,7 +859,7 @@
       "post": {
         "operationId": "ScopeAccessReviewInstance_SendReminders",
         "tags": [
-          "ScopeAccessReviewInstances"
+          "AccessReviewInstanceSendReminders"
         ],
         "description": "An action to send reminders for an access review instance.",
         "parameters": [
@@ -889,7 +889,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -904,7 +904,7 @@
       "post": {
         "operationId": "ScopeAccessReviewInstance_Stop",
         "tags": [
-          "ScopeAccessReviewInstances"
+          "AccessReviewInstanceStop"
         ],
         "description": "An action to stop an access review instance.",
         "parameters": [
@@ -934,7 +934,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -949,7 +949,7 @@
       "post": {
         "operationId": "ScopeAccessReviewScheduleDefinitions_Stop",
         "tags": [
-          "ScopeAccessReviewScheduleDefinitions"
+          "AccessReviewScheduleDefinitionStop"
         ],
         "description": "Stop access review definition",
         "parameters": [
@@ -973,7 +973,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -988,7 +988,7 @@
       "get": {
         "operationId": "ScopeAccessReviewDefaultSettings_Get",
         "tags": [
-          "ScopeAccessReviewDefaultSettings"
+          "GetAccessReviewDefaultSettings"
         ],
         "description": "Get access review default settings for the subscription",
         "parameters": [
@@ -1009,7 +1009,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1022,7 +1022,7 @@
       "put": {
         "operationId": "ScopeAccessReviewDefaultSettings_Put",
         "tags": [
-          "ScopeAccessReviewDefaultSettings"
+          "PutAccessReviewDefaultSettings"
         ],
         "description": "Get access review default settings for the subscription",
         "parameters": [
@@ -1051,7 +1051,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1066,9 +1066,9 @@
       "get": {
         "operationId": "AccessReviewScheduleDefinitionsAssignedForMyApproval_List",
         "tags": [
-          "ScopeAccessReviewScheduleDefinitions"
+          "GetAccessReviewScheduleDefinitionsAssignedForMyApproval"
         ],
-        "description": "List a AccessReviewScheduleDefinition",
+        "description": "Get access review instances assigned for my approval.",
         "parameters": [
           {
             "name": "$filter",
@@ -1086,8 +1086,13 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/GetAccessReviewScheduleDefinitionsAssignedForMyApproval.json"
           }
         },
         "x-ms-pageable": {
@@ -1099,7 +1104,7 @@
       "get": {
         "operationId": "AccessReviewInstancesAssignedForMyApproval_List",
         "tags": [
-          "AccessReviewInstancesAssignedForMyApproval"
+          "GetAccessReviewInstancesAssignedForMyApproval"
         ],
         "description": "Get access review instances assigned for my approval.",
         "parameters": [
@@ -1107,6 +1112,11 @@
             "name": "scheduleDefinitionId",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
             "type": "string"
           }
         ],
@@ -1120,8 +1130,13 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/GetAccessReviewInstancesAssignedForMyApproval.json"
           }
         },
         "x-ms-pageable": {
@@ -1133,7 +1148,7 @@
       "get": {
         "operationId": "AccessReviewInstancesAssignedForMyApproval_GetById",
         "tags": [
-          "AccessReviewInstancesAssignedForMyApproval"
+          "GetAccessReviewInstance"
         ],
         "description": "Get single access review instance assigned for my approval.",
         "parameters": [
@@ -1160,7 +1175,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1175,7 +1190,7 @@
       "post": {
         "operationId": "AccessReviewInstance_AcceptRecommendations",
         "tags": [
-          "AccessReviewInstancesAssignedForMyApproval"
+          "AccessReviewInstanceAcceptRecommmendations"
         ],
         "description": "An action to accept recommendations for decision in an access review instance.",
         "parameters": [
@@ -1199,7 +1214,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1214,7 +1229,7 @@
       "get": {
         "operationId": "TenantLevelAccessReviewInstanceContactedReviewers_List",
         "tags": [
-          "AccessReviewInstancesAssignedForMyApproval"
+          "TenantLevelGetAccessReviewInstanceContactedReviewers"
         ],
         "description": "Get access review instance contacted reviewers",
         "parameters": [
@@ -1241,7 +1256,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1259,7 +1274,7 @@
       "get": {
         "operationId": "AccessReviewInstanceMyDecisions_List",
         "tags": [
-          "AccessReviewDecisions"
+          "GetAccessReviewMyInstanceDecisions"
         ],
         "description": "Get my access review instance decisions.",
         "parameters": [
@@ -1291,7 +1306,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1309,7 +1324,7 @@
       "get": {
         "operationId": "AccessReviewInstanceMyDecisions_GetById",
         "tags": [
-          "AccessReviewDecisions"
+          "GetAccessReviewMyInstanceDecision"
         ],
         "description": "Get my single access review instance decision.",
         "parameters": [
@@ -1342,7 +1357,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1355,7 +1370,7 @@
       "patch": {
         "operationId": "AccessReviewInstanceMyDecisions_Patch",
         "tags": [
-          "AccessReviewDecisions"
+          "PatchAccessReviewMyInstanceDecision"
         ],
         "description": "Record a decision.",
         "parameters": [
@@ -1396,7 +1411,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1413,19 +1428,19 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists the operations available from this provider.",
         "parameters": [],
         "responses": {
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1438,7 +1453,7 @@
       "get": {
         "operationId": "AccessReviewHistoryDefinitions_List",
         "tags": [
-          "AccessReviewHistoryDefinitions"
+          "GetAccessReviewHistoryDefinitions"
         ],
         "description": "Lists the accessReviewHistoryDefinitions available from this provider, definition instances are only available for 30 days after creation.",
         "parameters": [
@@ -1458,7 +1473,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1471,7 +1486,7 @@
       "get": {
         "operationId": "AccessReviewHistoryDefinitions_GetById",
         "tags": [
-          "AccessReviewHistoryDefinitions"
+          "GetAccessReviewHistoryDefinition"
         ],
         "description": "Get access review history definition by definition Id",
         "parameters": [
@@ -1492,7 +1507,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -1500,7 +1515,7 @@
       "put": {
         "operationId": "AccessReviewHistoryDefinition_Create",
         "tags": [
-          "AccessReviewHistoryDefinitions"
+          "PutAccessReviewHistoryDefinition"
         ],
         "description": "Create a scheduled or one-time Access Review History Definition",
         "parameters": [
@@ -1529,7 +1544,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -1537,7 +1552,7 @@
       "delete": {
         "operationId": "AccessReviewHistoryDefinition_DeleteById",
         "tags": [
-          "AccessReviewHistoryDefinitions"
+          "DeleteAccessReviewHistoryDefinition"
         ],
         "description": "Delete an access review history definition",
         "parameters": [
@@ -1558,7 +1573,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -1568,7 +1583,7 @@
       "get": {
         "operationId": "AccessReviewHistoryDefinitionInstances_List",
         "tags": [
-          "AccessReviewHistoryDefinitions"
+          "GetAccessReviewHistoryDefinitionInstances"
         ],
         "description": "Get access review history definition instances by definition Id",
         "parameters": [
@@ -1583,13 +1598,13 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/AccessReviewHistoryInstanceListResult"
+              "$ref": "#/definitions/AccessReviewHistoryDefinitionInstanceListResult"
             }
           },
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1602,7 +1617,7 @@
       "post": {
         "operationId": "AccessReviewHistoryDefinitionInstance_GenerateDownloadUri",
         "tags": [
-          "AccessReviewHistoryDefinitions"
+          "PostAccessReviewHistoryDefinitionInstance"
         ],
         "description": "Generates a uri which can be used to retrieve review history data. This URI has a TTL of 1 day and can be retrieved by fetching the accessReviewHistoryDefinition object.",
         "parameters": [
@@ -1639,7 +1654,7 @@
       "get": {
         "operationId": "AccessReviewScheduleDefinitions_List",
         "tags": [
-          "AccessReviewScheduleDefinitions"
+          "GetAccessReviewScheduleDefinitions"
         ],
         "description": "Get access review schedule definitions",
         "parameters": [
@@ -1659,7 +1674,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1672,7 +1687,7 @@
       "get": {
         "operationId": "AccessReviewScheduleDefinitions_GetById",
         "tags": [
-          "AccessReviewScheduleDefinitions"
+          "GetAccessReviewScheduleDefinition"
         ],
         "description": "Get single access review definition",
         "parameters": [
@@ -1693,7 +1708,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -1701,7 +1716,7 @@
       "put": {
         "operationId": "AccessReviewScheduleDefinitions_CreateOrUpdateById",
         "tags": [
-          "AccessReviewScheduleDefinitions"
+          "PutAccessReviewScheduleDefinition"
         ],
         "description": "Create or Update access review schedule definition.",
         "parameters": [
@@ -1730,7 +1745,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -1738,7 +1753,7 @@
       "delete": {
         "operationId": "AccessReviewScheduleDefinitions_DeleteById",
         "tags": [
-          "AccessReviewScheduleDefinitions"
+          "DeleteAccessReviewScheduleDefinition"
         ],
         "description": "Delete access review schedule definition",
         "parameters": [
@@ -1759,7 +1774,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -1769,7 +1784,7 @@
       "get": {
         "operationId": "AccessReviewInstances_List",
         "tags": [
-          "AccessReviewInstances"
+          "GetAccessReviewInstances"
         ],
         "description": "Get access review instances",
         "parameters": [
@@ -1795,7 +1810,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1808,7 +1823,7 @@
       "get": {
         "operationId": "AccessReviewInstances_GetById",
         "tags": [
-          "AccessReviewInstances"
+          "GetAccessReviewInstance"
         ],
         "description": "Get access review instances",
         "parameters": [
@@ -1835,7 +1850,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -1843,7 +1858,7 @@
       "put": {
         "operationId": "AccessReviewInstances_Create",
         "tags": [
-          "AccessReviewInstances"
+          "PutAccessReviewInstance"
         ],
         "description": "Update access review instance.",
         "parameters": [
@@ -1878,7 +1893,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -1888,7 +1903,7 @@
       "post": {
         "operationId": "AccessReviewInstance_ApplyDecisions",
         "tags": [
-          "AccessReviewInstances"
+          "AccessReviewInstanceApplyDecisions"
         ],
         "description": "An action to apply all decisions for an access review instance.",
         "parameters": [
@@ -1912,7 +1927,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -1922,7 +1937,7 @@
       "get": {
         "operationId": "AccessReviewInstanceContactedReviewers_List",
         "tags": [
-          "AccessReviewInstances"
+          "GetAccessReviewInstanceContactedReviewers"
         ],
         "description": "Get access review instance contacted reviewers",
         "parameters": [
@@ -1949,7 +1964,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -1962,7 +1977,7 @@
       "get": {
         "operationId": "AccessReviewInstanceDecisions_List",
         "tags": [
-          "AccessReviewInstances"
+          "GetAccessReviewInstanceDecisions"
         ],
         "description": "Get access review instance decisions",
         "parameters": [
@@ -1994,7 +2009,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -2007,7 +2022,7 @@
       "post": {
         "operationId": "AccessReviewInstance_ResetDecisions",
         "tags": [
-          "AccessReviewInstances"
+          "AccessReviewInstanceResetDecisions"
         ],
         "description": "An action to reset all decisions for an access review instance.",
         "parameters": [
@@ -2031,7 +2046,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -2041,7 +2056,7 @@
       "post": {
         "operationId": "AccessReviewInstance_SendReminders",
         "tags": [
-          "AccessReviewInstances"
+          "AccessReviewInstanceSendReminders"
         ],
         "description": "An action to send reminders for an access review instance.",
         "parameters": [
@@ -2065,7 +2080,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -2075,7 +2090,7 @@
       "post": {
         "operationId": "AccessReviewInstance_Stop",
         "tags": [
-          "AccessReviewInstances"
+          "AccessReviewInstanceStop"
         ],
         "description": "An action to stop an access review instance.",
         "parameters": [
@@ -2099,7 +2114,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -2109,7 +2124,7 @@
       "post": {
         "operationId": "AccessReviewScheduleDefinitions_Stop",
         "tags": [
-          "AccessReviewScheduleDefinitions"
+          "AccessReviewScheduleDefinitionStop"
         ],
         "description": "Stop access review definition",
         "parameters": [
@@ -2127,7 +2142,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -2137,7 +2152,7 @@
       "get": {
         "operationId": "AccessReviewDefaultSettings_Get",
         "tags": [
-          "AccessReviewDefaultSettingsOperationGroup"
+          "GetAccessReviewDefaultSettings"
         ],
         "description": "Get access review default settings for the subscription",
         "parameters": [],
@@ -2151,7 +2166,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -2159,7 +2174,7 @@
       "put": {
         "operationId": "AccessReviewDefaultSettings_Put",
         "tags": [
-          "AccessReviewDefaultSettingsOperationGroup"
+          "PutAccessReviewDefaultSettings"
         ],
         "description": "Get access review default settings for the subscription",
         "parameters": [
@@ -2182,7 +2197,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -2289,6 +2304,7 @@
           "type": "string",
           "format": "date-time",
           "description": "Date Time when the reviewer was contacted.",
+          "x-nullable": true,
           "readOnly": true
         }
       }
@@ -2382,7 +2398,10 @@
           }
         },
         "insightCreatedDateTime": {
+          "type": "string",
+          "format": "date-time",
           "description": "Date Time when the insight was created.",
+          "x-nullable": true,
           "readOnly": true
         }
       },
@@ -2440,11 +2459,13 @@
         "principal": {
           "$ref": "#/definitions/AccessReviewDecisionIdentity",
           "description": "Principal associated with the decision record. Can be AccessReviewDecisionUserIdentity or AccessReviewDecisionServicePrincipalIdentity",
+          "x-nullable": true,
           "readOnly": true
         },
         "resource": {
           "$ref": "#/definitions/AccessReviewDecisionResource",
           "description": "Resource associated with this decision record.",
+          "x-nullable": true,
           "readOnly": true,
           "x-ms-client-flatten": true
         },
@@ -2485,11 +2506,13 @@
           "type": "string",
           "format": "date-time",
           "description": "Date Time when a decision was taken.",
+          "x-nullable": true,
           "readOnly": true
         },
         "reviewedBy": {
           "$ref": "#/definitions/AccessReviewActorIdentity",
           "description": "Details of the approver.",
+          "x-nullable": true,
           "readOnly": true,
           "x-ms-client-flatten": true
         },
@@ -2514,11 +2537,13 @@
           "type": "string",
           "format": "date-time",
           "description": "The date and time when the review decision was applied.",
+          "x-nullable": true,
           "readOnly": true
         },
         "appliedBy": {
           "$ref": "#/definitions/AccessReviewActorIdentity",
           "description": "Details of the approver.",
+          "x-nullable": true,
           "readOnly": true,
           "x-ms-client-flatten": true
         },
@@ -2532,6 +2557,7 @@
         "principalResourceMembership": {
           "$ref": "#/definitions/AccessReviewDecisionPrincipalResourceMembership",
           "description": "Details of the membership type.",
+          "x-nullable": true,
           "readOnly": true,
           "x-ms-client-flatten": true
         }
@@ -2606,7 +2632,10 @@
       "description": "User Decision Target",
       "properties": {
         "lastSignInDateTime": {
+          "type": "string",
+          "format": "date-time",
           "description": "Date Time when the user signed into the tenant.",
+          "x-nullable": true,
           "readOnly": true
         }
       },
@@ -2649,6 +2678,27 @@
         }
       ]
     },
+    "AccessReviewHistoryDefinitionInstanceListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/AccessReviewHistoryInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "AccessReviewHistoryDefinitionListResult": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -2682,17 +2732,20 @@
           "type": "string",
           "format": "date-time",
           "description": "Date time used when selecting review data, all reviews included in data start on or after this date. For use only with one-time/non-recurring reports.",
+          "x-nullable": true,
           "readOnly": true
         },
         "reviewHistoryPeriodEndDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "Date time used when selecting review data, all reviews included in data end on or before this date. For use only with one-time/non-recurring reports.",
+          "x-nullable": true,
           "readOnly": true
         },
         "decisions": {
           "type": "array",
           "description": "Collection of review decisions which the history data should be filtered on. For example if Approve and Deny are supplied the data will only contain review results in which the decision maker approved or denied a review request.",
+          "x-nullable": true,
           "items": {
             "type": "string",
             "description": "Represents a reviewer's decision for a given review",
@@ -2728,11 +2781,13 @@
           "type": "string",
           "format": "date-time",
           "description": "Date time when history definition was created",
+          "x-nullable": true,
           "readOnly": true
         },
         "createdBy": {
           "$ref": "#/definitions/AccessReviewActorIdentity",
           "description": "The user or other identity who created this history definition.",
+          "x-nullable": true,
           "readOnly": true,
           "x-ms-client-flatten": true
         },
@@ -2746,6 +2801,7 @@
         "settings": {
           "$ref": "#/definitions/AccessReviewHistoryScheduleSettings",
           "description": "Recurrence settings for recurring history reports, skip for one-time reports.",
+          "x-nullable": true,
           "x-ms-client-flatten": true
         },
         "instances": {
@@ -2783,27 +2839,6 @@
         }
       }
     },
-    "AccessReviewHistoryInstanceListResult": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/AccessReviewHistoryInstance"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "AccessReviewHistoryInstanceProperties": {
       "type": "object",
       "description": "Access Review History Definition Instance properties.",
@@ -2840,12 +2875,14 @@
         "runDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Date time when the history data report is scheduled to be generated."
+          "description": "Date time when the history data report is scheduled to be generated.",
+          "x-nullable": true
         },
         "fulfilledDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Date time when the history data report is scheduled to be generated."
+          "description": "Date time when the history data report is scheduled to be generated.",
+          "x-nullable": true
         },
         "downloadUri": {
           "type": "string",
@@ -2855,7 +2892,8 @@
         "expiration": {
           "type": "string",
           "format": "date-time",
-          "description": "Date time when history data report expires and the associated data is deleted."
+          "description": "Date time when history data report expires and the associated data is deleted.",
+          "x-nullable": true
         }
       }
     },
@@ -3032,12 +3070,14 @@
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The DateTime when the review is scheduled to be start. This could be a date in the future. Required on create."
+          "description": "The DateTime when the review is scheduled to be start. This could be a date in the future. Required on create.",
+          "x-nullable": true
         },
         "endDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The DateTime when the review is scheduled to end. Required if type is endDate"
+          "description": "The DateTime when the review is scheduled to end. Required if type is endDate",
+          "x-nullable": true
         }
       }
     },
@@ -3345,6 +3385,7 @@
     },
     "ErrorDefinition": {
       "type": "object",
+      "title": "Error",
       "description": "Error description and code explaining why an operation failed.",
       "properties": {
         "error": {
@@ -3355,6 +3396,7 @@
     },
     "ErrorDefinitionProperties": {
       "type": "object",
+      "title": "Error",
       "description": "Error description and code explaining why an operation failed.",
       "properties": {
         "message": {
@@ -3367,6 +3409,78 @@
           "description": "Error code of list gateway."
         }
       }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "The definition of a Microsoft.Authorization operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "The display information for a Microsoft.Authorization operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The resource provider name: Microsoft.Authorization.",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource on which the operation is performed.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that users can perform.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description for the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "RecordAllDecisionsProperties": {
       "type": "object",

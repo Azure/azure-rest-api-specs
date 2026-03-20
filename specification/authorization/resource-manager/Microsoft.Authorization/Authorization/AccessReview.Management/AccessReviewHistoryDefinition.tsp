@@ -45,12 +45,16 @@ alias AccessReviewHistoryDefinitionOps = Azure.ResourceManager.Legacy.ExtensionO
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AccessReviewHistoryDefinitions {
   /**
    * Get access review history definition by definition Id
    */
-  getById is AccessReviewHistoryDefinitionOps.Read<AccessReviewHistoryDefinition>;
+  @tag("GetAccessReviewHistoryDefinition")
+  getById is AccessReviewHistoryDefinitionOps.Read<
+    AccessReviewHistoryDefinition,
+    ErrorType = ErrorDefinition
+  >;
 
   /**
    * Create a scheduled or one-time Access Review History Definition
@@ -58,10 +62,12 @@ interface AccessReviewHistoryDefinitions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("AccessReviewHistoryDefinition_Create")
+  @tag("PutAccessReviewHistoryDefinition")
   create is AccessReviewHistoryDefinitionOps.CreateOrUpdateSync<
     AccessReviewHistoryDefinition,
     Request = AccessReviewHistoryDefinitionProperties,
-    Response = ArmResourceUpdatedResponse<AccessReviewHistoryDefinition>
+    Response = ArmResourceUpdatedResponse<AccessReviewHistoryDefinition>,
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -69,11 +75,16 @@ interface AccessReviewHistoryDefinitions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewHistoryDefinition_DeleteById")
-  deleteById is AccessReviewHistoryDefinitionOps.DeleteSync<AccessReviewHistoryDefinition>;
+  @tag("DeleteAccessReviewHistoryDefinition")
+  deleteById is AccessReviewHistoryDefinitionOps.DeleteSync<
+    AccessReviewHistoryDefinition,
+    ErrorType = ErrorDefinition
+  >;
 
   /**
    * Lists the accessReviewHistoryDefinitions available from this provider, definition instances are only available for 30 days after creation.
    */
+  @tag("GetAccessReviewHistoryDefinitions")
   list is AccessReviewHistoryDefinitionOps.List<
     AccessReviewHistoryDefinition,
     Parameters = {
@@ -82,7 +93,8 @@ interface AccessReviewHistoryDefinitions {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -90,6 +102,7 @@ interface AccessReviewHistoryDefinitions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewHistoryDefinitionInstance_GenerateDownloadUri")
+  @tag("PostAccessReviewHistoryDefinitionInstance")
   generateDownloadUri is AccessReviewHistoryDefinitionOps.ActionSync<
     AccessReviewHistoryDefinition,
     void,
@@ -110,13 +123,15 @@ interface AccessReviewHistoryDefinitions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewHistoryDefinitionInstances_List")
+  @tag("GetAccessReviewHistoryDefinitionInstances")
   @list
   @get
   @action("instances")
   accessReviewHistoryDefinitionInstancesList is AccessReviewHistoryDefinitionOps.ActionSync<
     AccessReviewHistoryDefinition,
     void,
-    ArmResponse<ResourceListResult<AccessReviewHistoryInstance>>
+    AccessReviewHistoryDefinitionInstanceListResult,
+    ErrorType = ErrorDefinition
   >;
 }
 alias ScopeAccessReviewHistoryDefinitionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -145,11 +160,12 @@ alias ScopeAccessReviewHistoryDefinitionOps = Azure.ResourceManager.Legacy.Exten
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ScopeAccessReviewHistoryDefinitions {
   /**
    * Get access review history definition by definition Id
    */
+  @tag("GetAccessReviewHistoryDefinition")
   getById is ScopeAccessReviewHistoryDefinitionOps.Read<
     AccessReviewHistoryDefinition,
     ErrorType = ErrorDefinition
@@ -161,6 +177,7 @@ interface ScopeAccessReviewHistoryDefinitions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("ScopeAccessReviewHistoryDefinition_Create")
+  @tag("PutAccessReviewHistoryDefinition")
   create is ScopeAccessReviewHistoryDefinitionOps.CreateOrUpdateSync<
     AccessReviewHistoryDefinition,
     Request = AccessReviewHistoryDefinitionProperties,
@@ -173,6 +190,7 @@ interface ScopeAccessReviewHistoryDefinitions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewHistoryDefinition_DeleteById")
+  @tag("DeleteAccessReviewHistoryDefinition")
   deleteById is ScopeAccessReviewHistoryDefinitionOps.DeleteSync<
     AccessReviewHistoryDefinition,
     ErrorType = ErrorDefinition
@@ -181,6 +199,7 @@ interface ScopeAccessReviewHistoryDefinitions {
   /**
    * Lists the accessReviewHistoryDefinitions available from this provider, definition instances are only available for 30 days after creation.
    */
+  @tag("GetAccessReviewHistoryDefinitions")
   list is ScopeAccessReviewHistoryDefinitionOps.List<
     AccessReviewHistoryDefinition,
     Parameters = {
@@ -198,6 +217,7 @@ interface ScopeAccessReviewHistoryDefinitions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewHistoryDefinitionInstance_GenerateDownloadUri")
+  @tag("PostAccessReviewHistoryDefinitionInstance")
   generateDownloadUri is ScopeAccessReviewHistoryDefinitionOps.ActionSync<
     AccessReviewHistoryDefinition,
     void,
@@ -209,7 +229,8 @@ interface ScopeAccessReviewHistoryDefinitions {
       @path
       @segment("instances")
       instanceId: string;
-    }
+    },
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -217,13 +238,15 @@ interface ScopeAccessReviewHistoryDefinitions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewHistoryDefinitionInstances_List")
+  @tag("ScopeGetAccessReviewHistoryDefinitionInstances")
   @list
   @get
   @action("instances")
   scopeAccessReviewHistoryDefinitionInstancesList is ScopeAccessReviewHistoryDefinitionOps.ActionSync<
     AccessReviewHistoryDefinition,
     void,
-    ArmResponse<ResourceListResult<AccessReviewHistoryInstance>>
+    AccessReviewHistoryDefinitionInstanceListResult,
+    ErrorType = ErrorDefinition
   >;
 }
 

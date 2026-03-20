@@ -20,9 +20,18 @@ interface AlertsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Alerts_RefreshAll")
+  @tag("Alerts")
   @autoRoute
   @action("roleManagementAlerts/refresh")
-  refreshAll is ArmProviderActionAsync<Scope = ExtensionActionScope>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  refreshAll is ArmProviderActionAsync<
+    Response = ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: AlertOperationResult;
+    },
+    Scope = ExtensionActionScope,
+    Error = CloudError
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -32,7 +41,8 @@ interface AlertOperationOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AlertOperation_Get")
-  @route("/{scope}/providers/Microsoft.Authorization/roleManagementAlertOperations/{operationId}")
+  @tag("AlertOperations")
+  @route("/{+scope}/providers/Microsoft.Authorization/roleManagementAlertOperations/{+operationId}")
   @get
   get(
     ...ApiVersionParameter,
@@ -48,5 +58,5 @@ interface AlertOperationOperationGroup {
      */
     @path
     operationId: string,
-  ): ArmResponse<AlertOperationResult> | ErrorResponse;
+  ): ArmResponse<AlertOperationResult> | CloudError;
 }

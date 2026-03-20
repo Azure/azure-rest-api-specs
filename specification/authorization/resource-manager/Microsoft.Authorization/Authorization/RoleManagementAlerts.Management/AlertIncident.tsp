@@ -14,6 +14,7 @@ namespace Microsoft.Authorization;
 /**
  * Alert incident
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 @parentResource(Alert)
 model AlertIncident
@@ -31,14 +32,19 @@ interface AlertIncidents {
   /**
    * Get the specified alert incident.
    */
-  get is Extension.Read<Extension.ScopeParameter, AlertIncident>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    AlertIncident,
+    Error = CloudError
+  >;
 
   /**
    * Gets alert incidents for a resource scope.
    */
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
-    AlertIncident
+    AlertIncident,
+    Error = CloudError
   >;
 
   /**
@@ -48,7 +54,8 @@ interface AlertIncidents {
     Extension.ScopeParameter,
     AlertIncident,
     void,
-    NoContentResponse
+    NoContentResponse,
+    Error = CloudError
   >;
 }
 

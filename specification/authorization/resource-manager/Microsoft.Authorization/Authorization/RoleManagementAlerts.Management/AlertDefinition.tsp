@@ -13,6 +13,7 @@ namespace Microsoft.Authorization;
 /**
  * Alert definition
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model AlertDefinition
   is Azure.ResourceManager.ExtensionResource<AlertDefinitionProperties> {
@@ -29,14 +30,19 @@ interface AlertDefinitions {
   /**
    * Get the specified alert definition.
    */
-  get is Extension.Read<Extension.ScopeParameter, AlertDefinition>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    AlertDefinition,
+    Error = CloudError
+  >;
 
   /**
    * Gets alert definitions for a resource scope.
    */
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
-    AlertDefinition
+    AlertDefinition,
+    Error = CloudError
   >;
 }
 

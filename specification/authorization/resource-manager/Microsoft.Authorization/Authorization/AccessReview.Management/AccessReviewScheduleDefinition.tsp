@@ -65,31 +65,42 @@ alias AccessReviewScheduleDefinitionOps = Azure.ResourceManager.Legacy.Extension
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AccessReviewScheduleDefinitions {
   /**
    * Get single access review definition
    */
-  getById is AccessReviewScheduleDefinitionOps.Read<AccessReviewScheduleDefinition>;
+  @tag("GetAccessReviewScheduleDefinition")
+  getById is AccessReviewScheduleDefinitionOps.Read<
+    AccessReviewScheduleDefinition,
+    ErrorType = ErrorDefinition
+  >;
 
   /**
    * Create or Update access review schedule definition.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("PutAccessReviewScheduleDefinition")
   createOrUpdateById is AccessReviewScheduleDefinitionOps.CreateOrUpdateSync<
     AccessReviewScheduleDefinition,
     Request = AccessReviewScheduleDefinitionProperties,
-    Response = ArmResourceUpdatedResponse<AccessReviewScheduleDefinition>
+    Response = ArmResourceUpdatedResponse<AccessReviewScheduleDefinition>,
+    ErrorType = ErrorDefinition
   >;
 
   /**
    * Delete access review schedule definition
    */
-  deleteById is AccessReviewScheduleDefinitionOps.DeleteSync<AccessReviewScheduleDefinition>;
+  @tag("DeleteAccessReviewScheduleDefinition")
+  deleteById is AccessReviewScheduleDefinitionOps.DeleteSync<
+    AccessReviewScheduleDefinition,
+    ErrorType = ErrorDefinition
+  >;
 
   /**
    * Get access review schedule definitions
    */
+  @tag("GetAccessReviewScheduleDefinitions")
   list is AccessReviewScheduleDefinitionOps.List<
     AccessReviewScheduleDefinition,
     Parameters = {
@@ -98,16 +109,19 @@ interface AccessReviewScheduleDefinitions {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    ErrorType = ErrorDefinition
   >;
 
   /**
    * Stop access review definition
    */
+  @tag("AccessReviewScheduleDefinitionStop")
   stop is AccessReviewScheduleDefinitionOps.ActionSync<
     AccessReviewScheduleDefinition,
     void,
-    NoContentResponse
+    NoContentResponse,
+    ErrorType = ErrorDefinition
   >;
 }
 alias ScopeAccessReviewScheduleDefinitionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -136,31 +150,42 @@ alias ScopeAccessReviewScheduleDefinitionOps = Azure.ResourceManager.Legacy.Exte
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ScopeAccessReviewScheduleDefinitions {
   /**
    * Get single access review definition
    */
-  getById is ScopeAccessReviewScheduleDefinitionOps.Read<AccessReviewScheduleDefinition>;
+  @tag("GetAccessReviewScheduleDefinition")
+  getById is ScopeAccessReviewScheduleDefinitionOps.Read<
+    AccessReviewScheduleDefinition,
+    ErrorType = ErrorDefinition
+  >;
 
   /**
    * Create or Update access review schedule definition.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("PutAccessReviewScheduleDefinition")
   createOrUpdateById is ScopeAccessReviewScheduleDefinitionOps.CreateOrUpdateSync<
     AccessReviewScheduleDefinition,
     Request = AccessReviewScheduleDefinitionProperties,
-    Response = ArmResourceUpdatedResponse<AccessReviewScheduleDefinition>
+    Response = ArmResourceUpdatedResponse<AccessReviewScheduleDefinition>,
+    ErrorType = ErrorDefinition
   >;
 
   /**
    * Delete access review schedule definition
    */
-  deleteById is ScopeAccessReviewScheduleDefinitionOps.DeleteSync<AccessReviewScheduleDefinition>;
+  @tag("DeleteAccessReviewScheduleDefinition")
+  deleteById is ScopeAccessReviewScheduleDefinitionOps.DeleteSync<
+    AccessReviewScheduleDefinition,
+    ErrorType = ErrorDefinition
+  >;
 
   /**
    * Get access review schedule definitions
    */
+  @tag("GetAccessReviewScheduleDefinitions")
   list is ScopeAccessReviewScheduleDefinitionOps.List<
     AccessReviewScheduleDefinition,
     Parameters = {
@@ -169,18 +194,25 @@ interface ScopeAccessReviewScheduleDefinitions {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    ErrorType = ErrorDefinition
   >;
 
   /**
    * Stop access review definition
    */
+  @tag("AccessReviewScheduleDefinitionStop")
   stop is ScopeAccessReviewScheduleDefinitionOps.ActionSync<
     AccessReviewScheduleDefinition,
     void,
-    NoContentResponse
+    NoContentResponse,
+    ErrorType = ErrorDefinition
   >;
 
+  /**
+   * Get access review instances assigned for my approval.
+   */
+  @tag("GetAccessReviewScheduleDefinitionsAssignedForMyApproval")
   listForMyApproval is AccessReviewScheduleDefinitionAssignedOps.List<
     AccessReviewScheduleDefinition,
     Parameters = {
@@ -189,7 +221,8 @@ interface ScopeAccessReviewScheduleDefinitions {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    ErrorType = ErrorDefinition
   >;
 }
 

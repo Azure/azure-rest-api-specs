@@ -26,27 +26,6 @@ model AccessReviewInstance
   >;
 }
 
-alias AccessReviewScheduleOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Authorization";
-  },
-  {},
-  {
-    /** The id of the access review schedule definition. */
-    @path
-    @segment("accessReviewScheduleDefinitions")
-    @key
-    scheduleDefinitionId: string;
-  }
->;
-
 alias AccessReviewInstanceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -74,26 +53,33 @@ alias AccessReviewInstanceOps = Azure.ResourceManager.Legacy.ExtensionOperations
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AccessReviewInstances {
   /**
    * Get access review instances
    */
-  getById is AccessReviewInstanceOps.Read<AccessReviewInstance>;
+  @tag("GetAccessReviewInstance")
+  getById is AccessReviewInstanceOps.Read<
+    AccessReviewInstance,
+    ErrorType = ErrorDefinition
+  >;
 
   /**
    * Update access review instance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("PutAccessReviewInstance")
   create is AccessReviewInstanceOps.CreateOrUpdateSync<
     AccessReviewInstance,
     Request = AccessReviewInstanceProperties,
-    Response = ArmResourceUpdatedResponse<AccessReviewInstance>
+    Response = ArmResourceUpdatedResponse<AccessReviewInstance>,
+    ErrorType = ErrorDefinition
   >;
 
   /**
    * Get access review instances
    */
+  @tag("GetAccessReviewInstances")
   list is AccessReviewInstanceOps.List<
     AccessReviewInstance,
     Parameters = {
@@ -102,7 +88,8 @@ interface AccessReviewInstances {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -110,10 +97,12 @@ interface AccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewInstance_Stop")
+  @tag("AccessReviewInstanceStop")
   stop is AccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
     void,
-    NoContentResponse
+    NoContentResponse,
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -121,10 +110,12 @@ interface AccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewInstance_ResetDecisions")
+  @tag("AccessReviewInstanceResetDecisions")
   resetDecisions is AccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
     void,
-    NoContentResponse
+    NoContentResponse,
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -132,10 +123,12 @@ interface AccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewInstance_ApplyDecisions")
+  @tag("AccessReviewInstanceApplyDecisions")
   applyDecisions is AccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
     void,
-    NoContentResponse
+    NoContentResponse,
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -143,17 +136,21 @@ interface AccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewInstance_SendReminders")
+  @tag("AccessReviewInstanceSendReminders")
   sendReminders is AccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
     void,
-    NoContentResponse
+    NoContentResponse,
+    ErrorType = ErrorDefinition
   >;
 
   /**
    * Get access review instance decisions
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AccessReviewInstanceDecisions_List")
+  @tag("GetAccessReviewInstanceDecisions")
   @list
   @get
   @action("decisions")
@@ -167,7 +164,8 @@ interface AccessReviewInstances {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -175,13 +173,15 @@ interface AccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewInstanceContactedReviewers_List")
+  @tag("GetAccessReviewInstanceContactedReviewers")
   @list
   @get
   @action("contactedReviewers")
   accessReviewInstanceContactedReviewersList is AccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
     void,
-    ArmResponse<ResourceListResult<AccessReviewContactedReviewer>>
+    ArmResponse<ResourceListResult<AccessReviewContactedReviewer>>,
+    ErrorType = ErrorDefinition
   >;
 }
 alias ScopeAccessReviewInstanceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -216,26 +216,33 @@ alias ScopeAccessReviewInstanceOps = Azure.ResourceManager.Legacy.ExtensionOpera
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ScopeAccessReviewInstances {
   /**
    * Get access review instances
    */
-  getById is ScopeAccessReviewInstanceOps.Read<AccessReviewInstance>;
+  @tag("GetAccessReviewInstance")
+  getById is ScopeAccessReviewInstanceOps.Read<
+    AccessReviewInstance,
+    ErrorType = ErrorDefinition
+  >;
 
   /**
    * Update access review instance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("PutAccessReviewInstance")
   create is ScopeAccessReviewInstanceOps.CreateOrUpdateSync<
     AccessReviewInstance,
     Request = AccessReviewInstanceProperties,
-    Response = ArmResourceUpdatedResponse<AccessReviewInstance>
+    Response = ArmResourceUpdatedResponse<AccessReviewInstance>,
+    ErrorType = ErrorDefinition
   >;
 
   /**
    * Get access review instances
    */
+  @tag("GetAccessReviewInstances")
   list is ScopeAccessReviewInstanceOps.List<
     AccessReviewInstance,
     Parameters = {
@@ -244,7 +251,8 @@ interface ScopeAccessReviewInstances {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -252,10 +260,12 @@ interface ScopeAccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewInstance_Stop")
+  @tag("AccessReviewInstanceStop")
   stop is ScopeAccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
     void,
-    NoContentResponse
+    NoContentResponse,
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -263,10 +273,12 @@ interface ScopeAccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewInstance_RecordAllDecisions")
+  @tag("AccessReviewInstanceRecordAllDecisions")
   recordAllDecisions is ScopeAccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
     RecordAllDecisionsProperties,
-    NoContentResponse
+    NoContentResponse,
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -274,10 +286,12 @@ interface ScopeAccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewInstance_ResetDecisions")
+  @tag("AccessReviewInstanceResetDecisions")
   resetDecisions is ScopeAccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
     void,
-    NoContentResponse
+    NoContentResponse,
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -285,10 +299,12 @@ interface ScopeAccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewInstance_ApplyDecisions")
+  @tag("AccessReviewInstanceApplyDecisions")
   applyDecisions is ScopeAccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
     void,
-    NoContentResponse
+    NoContentResponse,
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -296,17 +312,21 @@ interface ScopeAccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewInstance_SendReminders")
+  @tag("AccessReviewInstanceSendReminders")
   sendReminders is ScopeAccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
     void,
-    NoContentResponse
+    NoContentResponse,
+    ErrorType = ErrorDefinition
   >;
 
   /**
    * Get access review instance decisions
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ScopeAccessReviewInstanceDecisions_List")
+  @tag("GetAccessReviewInstanceDecisions")
   @list
   @get
   @action("decisions")
@@ -320,7 +340,8 @@ interface ScopeAccessReviewInstances {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    ErrorType = ErrorDefinition
   >;
 
   /**
@@ -328,13 +349,15 @@ interface ScopeAccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ScopeAccessReviewInstanceContactedReviewers_List")
+  @tag("GetAccessReviewInstanceContactedReviewers")
   @list
   @get
   @action("contactedReviewers")
   scopeAccessReviewInstanceContactedReviewersList is ScopeAccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
     void,
-    ArmResponse<ResourceListResult<AccessReviewContactedReviewer>>
+    ArmResponse<ResourceListResult<AccessReviewContactedReviewer>>,
+    ErrorType = ErrorDefinition
   >;
 }
 alias AccessReviewInstancesAssignedForMyApprovalOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -363,43 +386,62 @@ alias AccessReviewInstancesAssignedForMyApprovalOps = Azure.ResourceManager.Lega
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AccessReviewInstancesAssignedForMyApproval {
   /**
    * Get single access review instance assigned for my approval.
    */
-  getById is AccessReviewInstancesAssignedForMyApprovalOps.Read<AccessReviewInstance>;
+  @tag("GetAccessReviewInstance")
+  getById is AccessReviewInstancesAssignedForMyApprovalOps.Read<
+    AccessReviewInstance,
+    ErrorType = ErrorDefinition
+  >;
 
   /**
    * An action to accept recommendations for decision in an access review instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccessReviewInstance_AcceptRecommendations")
+  @tag("AccessReviewInstanceAcceptRecommmendations")
   acceptRecommendations is AccessReviewInstancesAssignedForMyApprovalOps.ActionSync<
     AccessReviewInstance,
     void,
-    NoContentResponse
+    NoContentResponse,
+    ErrorType = ErrorDefinition
   >;
 
   /**
    * Get access review instances assigned for my approval.
    */
+  @tag("GetAccessReviewInstancesAssignedForMyApproval")
   @list
   @get
-  list is AccessReviewInstancesAssignedForMyApprovalOps.List<AccessReviewInstance>;
+  list is AccessReviewInstancesAssignedForMyApprovalOps.List<
+    AccessReviewInstance,
+    Parameters = {
+      /**
+       * The filter to apply on the operation. Other than standard filters, one custom filter option is supported : 'assignedToMeToReview()'. When one specified $filter=assignedToMeToReview(), only items that are assigned to the calling user to review are returned
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    ErrorType = ErrorDefinition
+  >;
 
   /**
    * Get access review instance contacted reviewers
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantLevelAccessReviewInstanceContactedReviewers_List")
+  @tag("TenantLevelGetAccessReviewInstanceContactedReviewers")
   @list
   @get
   @action("contactedReviewers")
   reviewersList is AccessReviewInstancesAssignedForMyApprovalOps.ActionSync<
     AccessReviewInstance,
     void,
-    ArmResponse<ResourceListResult<AccessReviewContactedReviewer>>
+    ArmResponse<ResourceListResult<AccessReviewContactedReviewer>>,
+    ErrorType = ErrorDefinition
   >;
 }
 
