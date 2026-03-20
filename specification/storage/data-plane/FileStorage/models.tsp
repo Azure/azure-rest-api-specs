@@ -708,14 +708,14 @@ enum FileLastWrittenMode {
 model AccessPolicy {
   /** The date-time the policy is active. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage requires 7 digit precision"
-  #suppress "@azure-tools/typespec-azure-core/unknown-format" "Storage requires 7 digit precision"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage requires 7 digit precision"
   @Xml.name("Start")
   @encode("rfc3339-fixed-width")
   start?: utcDateTime;
 
   /** The date-time the policy expires. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage requires 7 digit precision"
-  #suppress "@azure-tools/typespec-azure-core/unknown-format" "Storage requires 7 digit precision"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage requires 7 digit precision"
   @Xml.name("Expiry")
   @encode("rfc3339-fixed-width")
   expiry?: utcDateTime;
