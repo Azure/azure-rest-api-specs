@@ -164,10 +164,7 @@ interface SovereignViewOperations {
   @doc("Creates the Sovereign View resource.")
   create is ArmResourceCreateOrReplaceAsync<SovereignViewResource>;
   @doc("Updates the Sovereign View resource.")
-  update is ArmResourcePatchAsync<
-    SovereignViewResource,
-    SovereignViewResourceProperties
-  >;
+  update is ArmTagsPatchSync<SovereignViewResource>;
   @doc("Deletes the Sovereign View resource.")
   delete is ArmResourceDeleteWithoutOkAsync<SovereignViewResource>;
   @doc("Lists the Sovereign View resources within a resource group.")
