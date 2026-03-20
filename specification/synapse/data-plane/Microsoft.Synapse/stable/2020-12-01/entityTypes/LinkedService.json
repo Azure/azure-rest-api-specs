@@ -4118,11 +4118,12 @@
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         },
-        "sslmode": {
+        "sslMode": {
           "$ref": "#/definitions/AmazonRedshiftSslMode",
           "description": "The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0"
         },
-        "sslinsecure": {
+        "sslInsecure": {
+          "type": "boolean",
           "description": "Specifies whether the driver checks the authenticity of the IdP server certificate. The default value is False. Only used for Version 2.0"
         }
       },
