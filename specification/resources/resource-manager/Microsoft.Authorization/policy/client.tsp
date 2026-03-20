@@ -227,7 +227,10 @@ namespace Microsoft.Authorization {
   "PolicyAliasPathTokenType",
   "csharp"
 );
-@@clientName(Microsoft.Authorization.AliasPattern, "PolicyAliasPattern", "csharp");
+@@clientName(Microsoft.Authorization.AliasPattern,
+  "PolicyAliasPattern",
+  "csharp"
+);
 @@clientName(Microsoft.Authorization.AliasPatternType,
   "PolicyAliasPatternType",
   "csharp"
@@ -363,5 +366,9 @@ namespace Microsoft.Authorization {
 @@scope(Microsoft.Authorization.VariableValues.createOrUpdateAtManagementGroup,
   "!csharp"
 );
-@@scope(Microsoft.Authorization.VariableValues.deleteAtManagementGroup, "!csharp");
-@@scope(Microsoft.Authorization.VariableValues.listForManagementGroup, "!csharp");
+@@scope(Microsoft.Authorization.VariableValues.deleteAtManagementGroup,
+  "!csharp"
+);
+@@scope(Microsoft.Authorization.VariableValues.listForManagementGroup,
+  "!csharp"
+);
