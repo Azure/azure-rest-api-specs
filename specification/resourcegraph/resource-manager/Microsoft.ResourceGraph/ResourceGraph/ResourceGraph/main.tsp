@@ -41,18 +41,8 @@ enum Versions {
   v2024_04_01: "2024-04-01",
 }
 
-interface Operations {
-  /**
-   * Lists all of the available REST API operations.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Operations")
-  @autoRoute
-  @segment("operations")
-  @get
-  @list
-  list(
-    ...CommonTypes.ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<OperationListResult> | ResourceGraphCommon.ErrorResponse;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      OperationListResult,
+      ResourceGraphCommon.ErrorResponse
+    > {}
