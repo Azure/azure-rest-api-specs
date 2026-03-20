@@ -166,9 +166,11 @@ union StorageTargetType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Iscsi: "Iscsi",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_05_01_preview)
   DirectAttach: "DirectAttach",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 }
@@ -497,7 +499,7 @@ model ElasticSanProperties {
   totalIops?: int64;
 
   /**
-    * Total Provisioned IOPS of the Elastic San appliance, applicable for ElasticSanVersion V2 only.
+   * Total Provisioned IOPS of the Elastic San appliance, applicable for ElasticSanVersion V2 only.
    */
   @added(Versions.v2026_05_01_preview)
   @encodedName("application/json", "totalIops")
@@ -513,7 +515,7 @@ model ElasticSanProperties {
   totalMBps?: int64;
 
   /**
-    * Total Provisioned MBps Elastic San appliance, applicable for ElasticSanVersion V2 only.
+   * Total Provisioned MBps Elastic San appliance, applicable for ElasticSanVersion V2 only.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_05_01_preview)
@@ -529,7 +531,7 @@ model ElasticSanProperties {
   totalSizeTiB?: int64;
 
   /**
-    * Total size of the Elastic San appliance in TB, applicable for ElasticSanVersion V2 only.
+   * Total size of the Elastic San appliance in TB, applicable for ElasticSanVersion V2 only.
    */
   @added(Versions.v2026_05_01_preview)
   @encodedName("application/json", "totalSizeTiB")
