@@ -468,7 +468,6 @@ op secureWrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    @clientName("version", "rust")
     keyVersion?: string;
 
     /**
@@ -491,7 +490,7 @@ op secureWrapKey is KeyVaultOperation<
 #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @operationId("secureunwrapkey")
 @Versioning.added(KeyVault.Versions.v2026_01_01_preview)
-@summary("Creates a new 256 bit AES key within the trusted execution environment and wraps a symmetric key using a specified key.")
+@summary("Securely unwraps a previously wrapped symmetric key using a specified key, ensuring TEE attestation via Microsoft Azure Attestation (MAA) before unwrapping.")
 @route("/keys/{key-name}/{key-version}/secureunwrapkey")
 @post
 op secureUnwrapKey is KeyVaultOperation<
@@ -508,7 +507,6 @@ op secureUnwrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    @clientName("version", "rust")
     keyVersion?: string;
 
     /**
