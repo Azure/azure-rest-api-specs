@@ -1,3 +1,4 @@
+import { resolve } from "path";
 import { Temporal } from "@js-temporal/polyfill";
 import yaml from "js-yaml";
 import { simpleGit } from "simple-git";
@@ -41,12 +42,10 @@ const leaseSchema = z.object({
  * @returns {string} Relative path to lease.yaml file (e.g., ".github/arm-leases/compute/Microsoft.Compute/lease.yaml")
  */
 function buildLeaseRelativePath(orgName, rpNamespace, serviceName = "") {
-  const parts = [".github", "arm-leases", orgName, rpNamespace];
   if (serviceName) {
-    parts.push(serviceName);
+    return resolve(".github", "arm-leases", orgName, rpNamespace, serviceName, "lease.yaml");
   }
-  parts.push("lease.yaml");
-  return parts.join("/");
+  return resolve(".github", "arm-leases", orgName, rpNamespace, "lease.yaml");
 }
 
 /**
