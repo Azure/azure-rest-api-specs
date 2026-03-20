@@ -5805,10 +5805,6 @@ model SearchIndexerDataUserAssignedIdentity extends SearchIndexerDataIdentity {
   /** The fully qualified Azure resource Id of a user assigned managed identity typically in the form "/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId" that should have been assigned to the search service. */
   userAssignedIdentity: string;
 
-  /** Multi-tenant User-Assigned Managed Identity Support: The client id of the multi-tenant App that has been configured to federate with the user-assigned managed identity. */
-  @added(Versions.v2026_04_01)
-  federatedIdentityClientId?: string;
-
   /** A URI fragment specifying the type of identity. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.DataUserAssignedIdentity";

@@ -53,7 +53,6 @@ It is maintained for internal engineering reference and API Stewardship Board re
 
 - `SearchIndexerDataSource`: `identity` (managed identity for data source authentication).
 - `SearchIndexerKnowledgeStore`: `identity` (managed identity for knowledge store projections).
-- `SearchIndexerDataUserAssignedIdentity`: `federatedIdentityClientId` (workload identity federation support).
 
 *Encryption*
 
