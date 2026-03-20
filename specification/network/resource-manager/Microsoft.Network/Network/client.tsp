@@ -459,7 +459,7 @@ namespace CombineClient;
 // activeActive → active rename
 @@clientName(Microsoft.Network.VirtualNetworkGatewayPropertiesFormat.activeActive,
   "active",
-  "java"
+  "java,javascript"
 );
 
 // Operation renames IP → Ip
@@ -572,3 +572,5 @@ namespace CombineClient;
   "ManagementClient",
   "go"
 );
+@@clientName(AzureFirewallSkuName.AZFW_VNet, "AzfwVnet", "javascript");
+@@clientName(VM, "Vm", "javascript");
