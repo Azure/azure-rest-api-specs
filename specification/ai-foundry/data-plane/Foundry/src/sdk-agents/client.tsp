@@ -73,6 +73,13 @@ using Azure.AI.Projects;
   "cachedTokensCount"
 );
 
+//rename object types to avoid confusion with Java objects
+@@clientName(AgentObject.object, "objectType");
+@@clientName(AgentVersionObject.object, "objectType");
+@@clientName(DeleteMemoryStoreResponse.object, "objectType");
+@@clientName(MemoryStoreObject.object, "objectType");
+@@clientName(MemoryStoreDeleteScopeResponse.object, "objectType");
+
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
@@ -90,6 +97,43 @@ using Azure.AI.Projects;
   "CustomGrammarFormatParameter",
   "java"
 );
+@@clientName(OpenAI.AutoCodeInterpreterToolParam,
+  "AutoCodeInterpreterToolParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerAutoParam, "ContainerAutoParameter", "java");
+@@clientName(OpenAI.ContainerNetworkPolicyParam,
+  "ContainerNetworkPolicyParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerNetworkPolicyAllowlistParam,
+  "ContainerNetworkPolicyAllowlistParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerNetworkPolicyDisabledParam,
+  "ContainerNetworkPolicyDisabledParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerNetworkPolicyDomainSecretParam,
+  "ContainerNetworkPolicyDomainSecretParameter",
+  "java"
+);
+@@clientName(OpenAI.CustomTextFormatParam, "CustomTextFormatParameter", "java");
+@@clientName(OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
+  "FunctionShellToolParameterEnvironmentContainerReferenceParameter",
+  "java"
+);
+@@clientName(OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam,
+  "FunctionShellToolParameterEnvironmentLocalEnvironmentParameter",
+  "java"
+);
+@@clientName(OpenAI.InlineSkillParam, "InlineSkillParameter", "java");
+@@clientName(OpenAI.InlineSkillSourceParam,
+  "InlineSkillSourceParameter",
+  "java"
+);
+@@clientName(OpenAI.LocalSkillParam, "LocalSkillParameter", "java");
+@@clientName(OpenAI.SkillReferenceParam, "SkillReferenceParameter", "java");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
