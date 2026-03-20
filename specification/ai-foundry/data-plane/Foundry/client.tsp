@@ -236,14 +236,11 @@ using Azure.AI.Projects;
 // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
 
-@@clientName(Azure.AI.Projects.Training.Jobs.get, "get", "python");
-@@clientName(Azure.AI.Projects.Training.Jobs.list, "list", "python");
-@@clientName(Azure.AI.Projects.Training.Jobs.createOrUpdate,
-  "create_or_update",
-  "python"
-);
-@@clientName(Azure.AI.Projects.Training.Jobs.delete, "delete", "python");
-@@clientName(Azure.AI.Projects.Training.Jobs.cancel, "cancel", "python");
+@@clientName(Jobs.get, "get", "python");
+@@clientName(Jobs.list, "list", "python");
+@@clientName(Jobs.createOrUpdate, "create_or_update", "python");
+@@clientName(Jobs.delete, "delete", "python");
+@@clientName(Jobs.cancel, "cancel", "python");
 
 // --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
