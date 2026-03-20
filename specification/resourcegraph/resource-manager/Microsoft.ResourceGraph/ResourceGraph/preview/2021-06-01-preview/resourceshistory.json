@@ -92,7 +92,7 @@
     }
   },
   "definitions": {
-    "DateTimeInterval": {
+    "ResourceGraphCommon.DateTimeInterval": {
       "type": "object",
       "description": "An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.",
       "properties": {
@@ -173,6 +173,30 @@
         "error"
       ]
     },
+    "ResourceGraphCommon.ResultFormat": {
+      "type": "string",
+      "description": "Defines in which format query result returned.",
+      "enum": [
+        "table",
+        "objectArray"
+      ],
+      "x-ms-enum": {
+        "name": "ResultFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "table",
+            "value": "table",
+            "description": "table"
+          },
+          {
+            "name": "objectArray",
+            "value": "objectArray",
+            "description": "objectArray"
+          }
+        ]
+      }
+    },
     "ResourcesHistoryRequest": {
       "type": "object",
       "description": "Describes a history request to be executed.",
@@ -206,7 +230,7 @@
       "description": "The options for history request evaluation",
       "properties": {
         "interval": {
-          "$ref": "#/definitions/DateTimeInterval",
+          "$ref": "#/definitions/ResourceGraphCommon.DateTimeInterval",
           "description": "The time interval used to fetch history."
         },
         "$top": {
@@ -227,33 +251,9 @@
           "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query."
         },
         "resultFormat": {
-          "$ref": "#/definitions/ResultFormat",
+          "$ref": "#/definitions/ResourceGraphCommon.ResultFormat",
           "description": "Defines in which format query result returned."
         }
-      }
-    },
-    "ResultFormat": {
-      "type": "string",
-      "description": "Defines in which format query result returned.",
-      "enum": [
-        "table",
-        "objectArray"
-      ],
-      "x-ms-enum": {
-        "name": "ResultFormat",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "table",
-            "value": "table",
-            "description": "table"
-          },
-          {
-            "name": "objectArray",
-            "value": "objectArray",
-            "description": "objectArray"
-          }
-        ]
       }
     }
   },

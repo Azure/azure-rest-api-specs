@@ -9,21 +9,8 @@ using Azure.ResourceManager.Foundations;
 
 namespace ResourceHistory;
 
-/**
- * Defines in which format query result returned.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum ResultFormat {
-  /**
-   * table
-   */
-  table,
-
-  /**
-   * objectArray
-   */
-  objectArray,
-}
+alias ResultFormat = ResourceGraphCommon.ResultFormat;
+alias DateTimeInterval = ResourceGraphCommon.DateTimeInterval;
 
 /**
  * Describes a history request to be executed.
@@ -81,23 +68,6 @@ model ResourcesHistoryRequestOptions {
    * Defines in which format query result returned.
    */
   resultFormat?: ResultFormat;
-}
-
-/**
- * An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.
- */
-model DateTimeInterval {
-  /**
-   * A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  start: utcDateTime;
-
-  /**
-   * A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  end: utcDateTime;
 }
 
 alias ResourcesHistoryResult = Record<unknown>;

@@ -9,21 +9,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace ResourceGraphApi;
 
-/**
- * Defines in which format query result returned.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum ResultFormat {
-  /**
-   * table
-   */
-  table,
-
-  /**
-   * objectArray
-   */
-  objectArray,
-}
+alias ResultFormat = ResourceGraphCommon.ResultFormat;
 
 /**
  * Defines what level of authorization resources should be returned based on the which subscriptions and management groups are passed as scopes.

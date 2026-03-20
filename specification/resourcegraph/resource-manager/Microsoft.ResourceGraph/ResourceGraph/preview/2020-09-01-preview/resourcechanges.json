@@ -193,26 +193,6 @@
         ]
       }
     },
-    "DateTimeInterval": {
-      "type": "object",
-      "description": "An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.",
-      "properties": {
-        "start": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error."
-        },
-        "end": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error."
-        }
-      },
-      "required": [
-        "start",
-        "end"
-      ]
-    },
     "PropertyChangeType": {
       "type": "string",
       "description": "The property change Type",
@@ -393,8 +373,28 @@
       "description": "Specifies the date and time interval for a changes request.",
       "allOf": [
         {
-          "$ref": "#/definitions/DateTimeInterval"
+          "$ref": "#/definitions/ResourceGraphCommon.DateTimeInterval"
         }
+      ]
+    },
+    "ResourceGraphCommon.DateTimeInterval": {
+      "type": "object",
+      "description": "An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error."
+        }
+      },
+      "required": [
+        "start",
+        "end"
       ]
     },
     "ResourceGraphCommon.Error": {

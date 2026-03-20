@@ -115,29 +115,14 @@ model ResourceChangesRequestParameters {
   fetchSnapshots?: boolean;
 }
 
+alias DateTimeInterval = ResourceGraphCommon.DateTimeInterval;
+
 /**
  * Specifies the date and time interval for a changes request.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ResourceChangesRequestParametersInterval extends DateTimeInterval {}
-
-/**
- * An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.
- */
-model DateTimeInterval {
-  /**
-   * A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  start: utcDateTime;
-
-  /**
-   * A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  end: utcDateTime;
-}
 
 /**
  * A list of changes associated with a resource over a specific time interval.

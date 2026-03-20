@@ -20,13 +20,3 @@ using Azure.ClientGenerator.Core;
   autoMergeServices: true,
 })
 namespace Microsoft.ResourceGraph;
-
-@@clientName(ResourceHistory.DateTimeInterval,
-  "ResourceHistoryDateTimeInterval",
-  "java,python,javascript"
-);
-
-@@clientName(ResourceHistory.ResultFormat,
-  "ResourceHistoryResultFormat",
-  "java,python"
-);
