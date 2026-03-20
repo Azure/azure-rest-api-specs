@@ -13,6 +13,7 @@ namespace Microsoft.ContainerInstance;
 /**
  * A container group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 model ContainerGroup
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ContainerGroupProperties> {
   ...ResourceNameParameter<
@@ -63,6 +64,7 @@ interface ContainerGroups {
   /**
    * Delete the specified container group in the specified subscription and resource group. The operation does not delete other resources provided by the user, such as volumes.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @summary("Delete the specified container group.")
   delete is ArmResourceDeleteAsyncBase<
     ContainerGroup,
@@ -74,12 +76,15 @@ interface ContainerGroups {
   /**
    * Restarts all containers in a container group in place. If container image has updates, new image will be downloaded.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @summary("Restarts all containers in a container group.")
-  @extension("x-ms-long-running-operation", true)
   restart is ArmResourceActionAsyncBase<
     ContainerGroup,
     void,
-    NoContentResponse,
+    NoContentResponse &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ContainerGroup>,
     Error = CloudError
   >;
@@ -98,6 +103,7 @@ interface ContainerGroups {
   /**
    * Starts all containers in a container group. Compute resources will be allocated and billing will start.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @summary("Starts all containers in a container group.")
   start is ArmResourceActionAsync<
     ContainerGroup,
@@ -124,9 +130,7 @@ interface ContainerGroups {
   /**
    * Get the logs for a specified container instance in a specified resource group and container group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get the logs for a specified container instance.")
-  @operationId("Containers_ListLogs")
   @get
   @action("logs")
   listLogs is ArmResourceActionSync<
@@ -159,9 +163,7 @@ interface ContainerGroups {
   /**
    * Executes a command for a specific container instance in a specified resource group and container group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Executes a command in a specific container instance.")
-  @operationId("Containers_ExecuteCommand")
   @action("exec")
   executeCommand is ArmResourceActionSync<
     ContainerGroup,
@@ -181,9 +183,7 @@ interface ContainerGroups {
   /**
    * Attach to the output stream of a specific container instance in a specified resource group and container group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Attach to the output of a specific container instance.")
-  @operationId("Containers_Attach")
   attach is ArmResourceActionSync<
     ContainerGroup,
     void,

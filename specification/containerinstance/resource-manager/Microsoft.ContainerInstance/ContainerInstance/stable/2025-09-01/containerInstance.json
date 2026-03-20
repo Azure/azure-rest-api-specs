@@ -50,7 +50,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for Azure Container Instance service.",
+        "description": "List the operations for the provider",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -58,9 +58,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -269,7 +269,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1219,7 +1219,18 @@
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1232,6 +1243,9 @@
           "ContainerRestart": {
             "$ref": "./examples/ContainerGroupsRestart.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1929,7 +1943,9 @@
         },
         "storageAccountKey": {
           "type": "string",
-          "description": "The storage account access key used to access the Azure File share."
+          "format": "password",
+          "description": "The storage account access key used to access the Azure File share.",
+          "x-ms-secret": true
         },
         "storageAccountKeyReference": {
           "type": "string",
@@ -3014,6 +3030,30 @@
       "required": [
         "port"
       ]
+    },
+    "ContainerInstanceOperationsOrigin": {
+      "type": "string",
+      "description": "The intended executor of the operation.",
+      "enum": [
+        "User",
+        "System"
+      ],
+      "x-ms-enum": {
+        "name": "ContainerInstanceOperationsOrigin",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "User"
+          },
+          {
+            "name": "System",
+            "value": "System",
+            "description": "System"
+          }
+        ]
+      }
     },
     "ContainerNetworkProtocol": {
       "type": "string",
@@ -4497,6 +4537,75 @@
         ]
       }
     },
+    "Operation": {
+      "type": "object",
+      "description": "An operation for Azure Container Instance service.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The display information of the operation."
+        },
+        "properties": {
+          "description": "The additional properties.",
+          "x-ms-client-flatten": true
+        },
+        "origin": {
+          "$ref": "#/definitions/ContainerInstanceOperationsOrigin",
+          "description": "The intended executor of the operation."
+        }
+      },
+      "required": [
+        "name",
+        "display"
+      ]
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "The display information of the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The name of the provider of the operation."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The name of the resource type of the operation."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The friendly name of the operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the operation."
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Paged collection of Operation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PlacementProfile": {
       "type": "object",
       "description": "Provides options w.r.t allocation and management w.r.t certain placement policies. These utilize capabilities provided by the underlying Azure infrastructure. They are typically used for high availability scenarios. E.g., distributing CGs across fault domains.",
@@ -4877,6 +4986,10 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
         }
       }
     },

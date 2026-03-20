@@ -522,6 +522,7 @@ model ContainerGroupListResult is Azure.Core.Page<ListResultContainerGroup>;
 /**
  * The Resource model definition.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model Resource {
   /**
    * The resource id.
@@ -1012,6 +1013,7 @@ model ResourceRequests {
   /**
    * The memory request in GB of this container instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   memoryInGB: float64;
 
   /**
@@ -1047,6 +1049,7 @@ model ResourceLimits {
   /**
    * The memory limit in GB of this container instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   memoryInGB?: float64;
 
   /**
@@ -1317,6 +1320,7 @@ model Port {
   /**
    * The port number.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   port: int32;
 }
 
@@ -1337,6 +1341,7 @@ model Volume {
   /**
    * The empty directory volume.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   emptyDir?: unknown;
 
   /**
@@ -1379,6 +1384,7 @@ model AzureFileVolume {
   /**
    * The storage account access key used to access the Azure File share.
    */
+  @secret
   storageAccountKey?: string;
 
   /**
@@ -1625,11 +1631,13 @@ model DeploymentExtensionSpecProperties {
   /**
    * Settings for the extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   settings?: unknown;
 
   /**
    * Protected settings for the extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   protectedSettings?: unknown;
 }
 
@@ -1707,6 +1715,7 @@ model StandbyPoolProfileDefinition {
 /**
  * An error response from the Container Instance service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @error
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
@@ -1719,6 +1728,7 @@ model CloudError {
 /**
  * An error response from the Container Instance service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
@@ -1746,15 +1756,18 @@ model CloudErrorBody {
 /**
  * The container group properties
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model ContainerGroupProperties {
   /**
    * The identity of the container group, if configured.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   identity?: ContainerGroupIdentity;
 
   /**
    * The container group properties
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   properties: ContainerGroupPropertiesProperties;
 }
 
@@ -1904,6 +1917,8 @@ model ContainerGroupPropertiesPropertiesInstanceView {
   state?: string;
 }
 
+model OperationListResult is Azure.Core.Page<Operation>;
+
 /**
  * An operation for Azure Container Instance service.
  */
@@ -1921,6 +1936,7 @@ model Operation {
   /**
    * The additional properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   properties?: unknown;
 
   /**
@@ -1965,11 +1981,18 @@ model UsageListResult {
   @pageItems
   @identifiers(#["name"])
   value?: Usage[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * The response of a NGroups list operation.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NGroupsListResult is Azure.Core.Page<NGroup>;
 
 /**
@@ -2184,6 +2207,7 @@ model Capabilities {
   /**
    * The supported capabilities.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   @visibility(Lifecycle.Read)
   capabilities?: CapabilitiesCapabilities;
 }
@@ -2195,6 +2219,7 @@ model CapabilitiesCapabilities {
   /**
    * The maximum allowed memory request in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   maxMemoryInGB?: float32;
 
@@ -2214,6 +2239,7 @@ model CapabilitiesCapabilities {
 /**
  * Describes the properties of the NGroups resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NGroupProperties {
   /**
    * The elastic profile.
@@ -2428,6 +2454,7 @@ model FileShareProperties {
 /**
  * Container Group properties which can be set while creating or updating the NGroups.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NGroupContainerGroupProperties {
   /**
    * Contains information about Virtual Network Subnet ARM Resource
@@ -2450,6 +2477,7 @@ model NGroupContainerGroupProperties {
 /**
  * Contains information about the volumes that can be mounted by Containers in the Container Groups.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NGroupCGPropertyVolume {
   /**
    * The name of the volume.
@@ -2465,6 +2493,7 @@ model NGroupCGPropertyVolume {
 /**
  * Container properties that can be provided with NGroups object.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NGroupCGPropertyContainer {
   /**
    * container name
@@ -2480,6 +2509,7 @@ model NGroupCGPropertyContainer {
 /**
  * container properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NGroupCGPropertyContainerProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @identifiers(#["name"])
@@ -2527,6 +2557,7 @@ model UpdateProfileRollingUpdateProfile {
 /**
  * Identity for the NGroup.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NGroupIdentity {
   /**
    * The principal id of the NGroup identity. This property will only be provided for a system assigned identity.
@@ -2555,6 +2586,7 @@ model NGroupIdentity {
 /**
  * Describes the NGroups resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NGroupPatch {
   /**
    * Metadata pertaining to creation and last modification of the resource.
@@ -2712,11 +2744,13 @@ model ContainerGroupProfilePatch {
 /**
  * List of SKU definitions. NGroups offer a single sku
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NGroupsSkusList is Azure.Core.Page<NGroupSkus>;
 
 /**
  * The container probe, for liveness or readiness.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NGroupSkus {
   /**
    * The type of resource the sku is applied to.

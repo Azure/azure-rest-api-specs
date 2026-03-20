@@ -44,16 +44,8 @@ enum Versions {
   v2025_09_01: "2025-09-01",
 }
 
-interface Operations {
-  /**
-   * List the operations for Azure Container Instance service.
-   */
-  @tag("Operations")
-  @operationId("Operations_List")
-  @route("/providers/Microsoft.ContainerInstance/operations")
-  @get
-  @list
-  list(
-    ...ApiVersionParameter,
-  ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | CloudError;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      Response = OperationListResult,
+      Error = CloudError
+    > {}

@@ -13,6 +13,8 @@ namespace Microsoft.ContainerInstance;
 /**
  * Describes the NGroups resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 model NGroup
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NGroupProperties> {
   ...ResourceNameParameter<
@@ -30,6 +32,7 @@ model NGroup
   identity?: NGroupIdentity;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @armResourceOperations(#{ omitTags: true })
 interface NGroups {
   /**
@@ -45,6 +48,7 @@ interface NGroups {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NGroup,
     Response = (ArmResourceUpdatedResponse<NGroup> & {
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("Azure-AsyncOperation")
       `Azure-AsyncOperation`: string;
     }) | ArmResourceCreatedResponse<
@@ -63,6 +67,7 @@ interface NGroups {
     NGroup,
     PatchModel = NGroupPatch,
     Response = (ArmResponse<NGroup> & {
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("Azure-AsyncOperation")
       `Azure-AsyncOperation`: string;
     }) | ArmAcceptedLroResponse<
