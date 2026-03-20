@@ -1,0 +1,117 @@
+{
+  "info": {
+    "title": {
+      "__old": "Microsoft Defender for Cloud",
+      "__new": "SecurityCenter"
+    },
+    "description": {
+      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/settings": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/settings/{settingName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlertSyncSettings": {
+      "x-ms-discriminator-value__deleted": "AlertSyncSettings",
+      "required__added": [
+        "kind"
+      ],
+      "properties": {
+        "kind__added": {
+          "type": "string",
+          "description": "the kind of the settings string",
+          "enum": [
+            "AlertSyncSettings"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "DataExportSettings": {
+      "x-ms-discriminator-value__deleted": "DataExportSettings",
+      "required__added": [
+        "kind"
+      ],
+      "properties": {
+        "kind__added": {
+          "type": "string",
+          "description": "the kind of the settings string",
+          "enum": [
+            "DataExportSettings"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Setting": {
+      "discriminator__deleted": "kind",
+      "properties": {
+        "properties__added": {
+          "type": "object",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./common/v1/types.json#/definitions/Resource",
+              "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "SettingsList": {
+      "required__added": [
+        "value"
+      ]
+    }
+  }
+}
