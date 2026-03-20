@@ -24,36 +24,111 @@ model GovernanceAssignment
   >;
 }
 
+alias GovernanceAssignmentsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /**
+     * The scope of the governance assignment.
+     */
+    @path
+    @key
+    scope: string;
+
+    /**
+     * The provider namespace.
+     */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+  },
+  {},
+  {
+    /**
+     * The assessment key of the governance assignment.
+     */
+    @path
+    @segment("assessments")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    assessmentName: string;
+
+    /**
+     * The governance assignment key.
+     */
+    @path
+    @segment("governanceAssignments")
+    @key
+    assignmentKey: string;
+  }
+>;
+
+alias GovernanceAssignmentsListOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /**
+     * The scope of the governance assignment.
+     */
+    @path
+    @key
+    scope: string;
+
+    /**
+     * The provider namespace.
+     */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+  },
+  {
+    /**
+     * The assessment key of the governance assignment.
+     */
+    @path
+    @segment("assessments")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    assessmentName: string;
+  },
+  {}
+>;
+
 @armResourceOperations
 interface GovernanceAssignments {
   /**
    * Get a specific governanceAssignment for the requested scope by AssignmentKey
    */
-  get is Extension.Read<Extension.ScopeParameter, GovernanceAssignment>;
+  get is GovernanceAssignmentsOps.Read<
+    GovernanceAssignment,
+    ErrorType = CloudError
+  >;
 
   /**
    * Creates or updates a governance assignment on the given subscription.
    */
-  createOrUpdate is Extension.CreateOrReplaceSync<
-    Extension.ScopeParameter,
-    GovernanceAssignment
+  createOrUpdate is GovernanceAssignmentsOps.CreateOrUpdateSync<
+    GovernanceAssignment,
+    ErrorType = CloudError
   >;
 
   /**
    * Delete a GovernanceAssignment over a given scope
    */
-  delete is Extension.DeleteSync<
-    Extension.ScopeParameter,
-    GovernanceAssignment
+  delete is GovernanceAssignmentsOps.DeleteSync<
+    GovernanceAssignment,
+    ErrorType = CloudError
   >;
 
   /**
    * Get governance assignments on all of your resources inside a scope
    */
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is GovernanceAssignmentsListOps.List<
     GovernanceAssignment,
-    Response = ArmResponse<GovernanceAssignmentsList>
+    Response = ArmResponse<GovernanceAssignmentsList>,
+    ErrorType = CloudError
   >;
 }
 

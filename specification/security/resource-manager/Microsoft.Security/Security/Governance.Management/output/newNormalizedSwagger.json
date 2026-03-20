@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2022-01-01-preview",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider"
   },
   "produces": [
     "application/json"
@@ -12,7 +12,7 @@
     "application/json"
   ],
   "paths": {
-    "/{scope}/providers/microsoft.Security/governanceAssignments": {
+    "/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments": {
       "get": {
         "operationId": "GovernanceAssignments_List",
         "tags": [
@@ -24,8 +24,14 @@
             "name": "scope",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
             "type": "string",
-            "x-ms-skip-url-encoding": true
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
         "responses": {
@@ -38,7 +44,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -52,7 +58,7 @@
         }
       }
     },
-    "/{scope}/providers/microsoft.Security/governanceAssignments/{assignmentKey}": {
+    "/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}": {
       "get": {
         "operationId": "GovernanceAssignments_Get",
         "tags": [
@@ -64,8 +70,14 @@
             "name": "scope",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
             "type": "string",
-            "x-ms-skip-url-encoding": true
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "assignmentKey",
@@ -84,7 +96,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -105,8 +117,14 @@
             "name": "scope",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
             "type": "string",
-            "x-ms-skip-url-encoding": true
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "assignmentKey",
@@ -139,7 +157,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -160,8 +178,14 @@
             "name": "scope",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
             "type": "string",
-            "x-ms-skip-url-encoding": true
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "assignmentKey",
@@ -180,7 +204,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -404,64 +428,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{scope}/providers/microsoft.Security/governanceRules/{ruleId}/{operationId}/{operationId}": {
-      "get": {
-        "operationId": "GovernanceRules_OperationResults",
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Get governance rules long run operation result for the requested scope by ruleId and operationId",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "ruleId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OperationResultAutoGenerated"
-            }
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get governance rules long run operation result over management group": {
-            "$ref": "./examples/GovernanceRules/GetManagementGroupGovernanceRuleExecuteStatus_example.json"
-          },
-          "Get governance rules long run operation result over security connector": {
-            "$ref": "./examples/GovernanceRules/GetSecurityConnectorGovernanceRuleExecuteStatus_example.json"
-          },
-          "Get governance rules long run operation result over subscription": {
-            "$ref": "./examples/GovernanceRules/GetGovernanceRuleExecuteStatus_example.json"
-          }
-        }
-      }
-    },
     "/{scope}/providers/microsoft.Security/governanceRules/{ruleId}/execute": {
       "post": {
         "operationId": "GovernanceRules_Execute",
@@ -484,7 +450,7 @@
             "type": "string"
           },
           {
-            "name": "executeGovernanceRuleParams",
+            "name": "ExecuteGovernanceRuleParams",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/ExecuteGovernanceRuleParams"
@@ -521,9 +487,161 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/{scope}/providers/microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}": {
+      "get": {
+        "operationId": "GovernanceRules_OperationResults",
+        "tags": [
+          "GovernanceRules"
+        ],
+        "description": "Get governance rules long run operation result for the requested scope by ruleId and operationId",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location URL for the execution status"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get governance rules long run operation result over management group": {
+            "$ref": "./examples/GovernanceRules/GetManagementGroupGovernanceRuleExecuteStatus_example.json"
+          },
+          "Get governance rules long run operation result over security connector": {
+            "$ref": "./examples/GovernanceRules/GetSecurityConnectorGovernanceRuleExecuteStatus_example.json"
+          },
+          "Get governance rules long run operation result over subscription": {
+            "$ref": "./examples/GovernanceRules/GetGovernanceRuleExecuteStatus_example.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Condition": {
+      "type": "object",
+      "description": "Governance rule's condition",
+      "properties": {
+        "property": {
+          "type": "string",
+          "description": "The governance rule Condition's Property, e.g. Severity or AssessmentKey, see examples"
+        },
+        "value": {
+          "type": "string",
+          "description": "The governance rule Condition's Value like severity Low, High or assessments keys, see examples"
+        },
+        "operator": {
+          "type": "string",
+          "description": "The governance rule Condition's Operator, for example Equals for severity or In for list of assessments, see examples",
+          "enum": [
+            "Equals",
+            "In"
+          ],
+          "x-ms-enum": {
+            "name": "GovernanceRuleConditionOperator",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
     "ExecuteGovernanceRuleParams": {
       "type": "object",
       "description": "Governance rule execution parameters",
@@ -557,7 +675,8 @@
         "ticketNumber": {
           "type": "integer",
           "format": "int32",
-          "description": "Ticket number associated with this governance assignment"
+          "description": "Ticket number associated with this governance assignment",
+          "minimum": 0
         },
         "ticketLink": {
           "type": "string",
@@ -612,17 +731,15 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/GovernanceAssignment"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "GovernanceEmailNotification": {
       "type": "object",
@@ -677,17 +794,15 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/GovernanceRule"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "GovernanceRuleMetadata": {
       "type": "object",
@@ -769,6 +884,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The governance rule priority, priority to the lower number. Rules with the same priority on the same scope will not be allowed",
+          "minimum": 0,
           "maximum": 1000
         },
         "isDisabled": {
@@ -808,7 +924,15 @@
         "conditionSets": {
           "type": "array",
           "description": "The governance rule conditionSets - see examples",
-          "items": {}
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Condition"
+              }
+            }
+          }
         },
         "includeMemberScopes": {
           "type": "boolean",
@@ -836,7 +960,7 @@
         "sourceResourceType"
       ]
     },
-    "OperationResultAutoGenerated": {
+    "OperationResult": {
       "type": "object",
       "description": "Long run operation status of governance rule over a given scope",
       "properties": {
@@ -849,7 +973,7 @@
             "Canceled"
           ],
           "x-ms-enum": {
-            "name": "OperationResult",
+            "name": "OperationResultStatus",
             "modelAsString": true
           },
           "readOnly": true

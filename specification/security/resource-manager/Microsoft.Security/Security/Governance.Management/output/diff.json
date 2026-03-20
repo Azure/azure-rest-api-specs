@@ -1,511 +1,50 @@
 {
-  "info": {
-    "title": {
-      "__old": "Microsoft Defender for Cloud",
-      "__new": "SecurityCenter"
-    },
-    "description": {
-      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
-    }
-  },
   "paths": {
-    "/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments__deleted": {
+    "/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments": {
       "get": {
-        "operationId": "GovernanceAssignments_List",
-        "tags": [
-          "GovernanceAssignments"
-        ],
-        "description": "Get governance assignments on all of your resources inside a scope",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
-          }
-        ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/GovernanceAssignmentsList"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List governance assignments": {
-            "$ref": "./examples/GovernanceAssignments/ListGovernanceAssignments_example.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}__deleted": {
-      "get": {
-        "operationId": "GovernanceAssignments_Get",
-        "tags": [
-          "GovernanceAssignments"
-        ],
-        "description": "Get a specific governanceAssignment for the requested scope by AssignmentKey",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
-          },
-          {
-            "name": "assignmentKey",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/GovernanceAssignment"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get governanceAssignment by specific governanceAssignmentKey": {
-            "$ref": "./examples/GovernanceAssignments/GetGovernanceAssignment_example.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "GovernanceAssignments_CreateOrUpdate",
-        "tags": [
-          "GovernanceAssignments"
-        ],
-        "description": "Creates or updates a governance assignment on the given subscription.",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
-          },
-          {
-            "name": "assignmentKey",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "governanceAssignment",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GovernanceAssignment"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/GovernanceAssignment"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/GovernanceAssignment"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create Governance assignment": {
-            "$ref": "./examples/GovernanceAssignments/PutGovernanceAssignment_example.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "GovernanceAssignments_Delete",
-        "tags": [
-          "GovernanceAssignments"
-        ],
-        "description": "Delete a GovernanceAssignment over a given scope",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
-          },
-          {
-            "name": "assignmentKey",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore"
-          }
-        },
-        "x-ms-examples": {
-          "Delete security assignment": {
-            "$ref": "./examples/GovernanceAssignments/DeleteGovernanceAssignment_example.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}__deleted": {
-      "get": {
-        "operationId": "GovernanceRules_OperationResults",
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Get governance rules long run operation result for the requested scope by ruleId and operationId",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ruleId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OperationResult"
-            }
-          },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "location": {
-                "type": "string",
-                "description": "Location URL for the execution status"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
               }
             }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get governance rules long run operation result over management group": {
-            "$ref": "./examples/GovernanceRules/GetManagementGroupGovernanceRuleExecuteStatus_example.json"
-          },
-          "Get governance rules long run operation result over security connector": {
-            "$ref": "./examples/GovernanceRules/GetSecurityConnectorGovernanceRuleExecuteStatus_example.json"
-          },
-          "Get governance rules long run operation result over subscription": {
-            "$ref": "./examples/GovernanceRules/GetGovernanceRuleExecuteStatus_example.json"
           }
         }
       }
     },
-    "/{scope}/providers/microsoft.Security/governanceAssignments__added": {
+    "/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}": {
       "get": {
-        "operationId": "GovernanceAssignments_List",
-        "tags": [
-          "GovernanceAssignments"
-        ],
-        "description": "Get governance assignments on all of your resources inside a scope",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/GovernanceAssignmentsList"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "List governance assignments": {
-            "$ref": "./examples/GovernanceAssignments/ListGovernanceAssignments_example.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Security/governanceAssignments/{assignmentKey}__added": {
-      "get": {
-        "operationId": "GovernanceAssignments_Get",
-        "tags": [
-          "GovernanceAssignments"
-        ],
-        "description": "Get a specific governanceAssignment for the requested scope by AssignmentKey",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "assignmentKey",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/GovernanceAssignment"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get governanceAssignment by specific governanceAssignmentKey": {
-            "$ref": "./examples/GovernanceAssignments/GetGovernanceAssignment_example.json"
           }
         }
       },
       "put": {
-        "operationId": "GovernanceAssignments_CreateOrUpdate",
-        "tags": [
-          "GovernanceAssignments"
-        ],
-        "description": "Creates or updates a governance assignment on the given subscription.",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "assignmentKey",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "governanceAssignment",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GovernanceAssignment"
-            }
-          }
-        ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/GovernanceAssignment"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/GovernanceAssignment"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create Governance assignment": {
-            "$ref": "./examples/GovernanceAssignments/PutGovernanceAssignment_example.json"
           }
         }
       },
       "delete": {
-        "operationId": "GovernanceAssignments_Delete",
-        "tags": [
-          "GovernanceAssignments"
-        ],
-        "description": "Delete a GovernanceAssignment over a given scope",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "assignmentKey",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
           "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            "schema__added": {
+              "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete security assignment": {
-            "$ref": "./examples/GovernanceAssignments/DeleteGovernanceAssignment_example.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.Security/governanceRules/{ruleId}/{operationId}/{operationId}__added": {
-      "get": {
-        "operationId": "GovernanceRules_OperationResults",
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Get governance rules long run operation result for the requested scope by ruleId and operationId",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "ruleId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OperationResultAutoGenerated"
-            }
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get governance rules long run operation result over management group": {
-            "$ref": "./examples/GovernanceRules/GetManagementGroupGovernanceRuleExecuteStatus_example.json"
-          },
-          "Get governance rules long run operation result over security connector": {
-            "$ref": "./examples/GovernanceRules/GetSecurityConnectorGovernanceRuleExecuteStatus_example.json"
-          },
-          "Get governance rules long run operation result over subscription": {
-            "$ref": "./examples/GovernanceRules/GetGovernanceRuleExecuteStatus_example.json"
           }
         }
       }
@@ -628,13 +167,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "name": {
-                "__old": "ExecuteGovernanceRuleParams",
-                "__new": "executeGovernanceRuleParams"
-              }
-            }
+            " "
           ]
         ],
         "responses": {
@@ -660,35 +193,35 @@
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "Condition__deleted": {
-      "type": "object",
-      "description": "Governance rule's condition",
-      "properties": {
-        "property": {
-          "type": "string",
-          "description": "The governance rule Condition's Property, e.g. Severity or AssessmentKey, see examples"
-        },
-        "value": {
-          "type": "string",
-          "description": "The governance rule Condition's Value like severity Low, High or assessments keys, see examples"
-        },
-        "operator": {
-          "type": "string",
-          "description": "The governance rule Condition's Operator, for example Equals for severity or In for list of assessments, see examples",
-          "enum": [
-            "Equals",
-            "In"
-          ],
-          "x-ms-enum": {
-            "name": "GovernanceRuleConditionOperator",
-            "modelAsString": true
+    },
+    "/{scope}/providers/microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}": {
+      "get": {
+        "responses": {
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string",
+                "description": "Location URL for the execution status"
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "Location URL for the execution status"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
+            }
           }
         }
       }
-    },
+    }
+  },
+  "definitions": {
     "Conditions__deleted": {
       "type": "array",
       "description": "Governance rule's conditions",
@@ -704,42 +237,65 @@
         "$ref": "#/definitions/Conditions"
       }
     },
-    "OperationResult__deleted": {
+    "CloudError__added": {
       "type": "object",
-      "description": "Long run operation status of governance rule over a given scope",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
-        "status": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CloudErrorBody__added": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
           "type": "string",
-          "description": "The status of the long run operation result of governance rule",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "OperationResult",
-            "modelAsString": true
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
           },
           "readOnly": true
         }
       }
     },
-    "OperationResultAutoGenerated__added": {
+    "ErrorAdditionalInfo__added": {
       "type": "object",
-      "description": "Long run operation status of governance rule over a given scope",
+      "description": "The resource management error additional info.",
       "properties": {
-        "status": {
+        "type": {
           "type": "string",
-          "description": "The status of the long run operation result of governance rule",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "OperationResult",
-            "modelAsString": true
-          },
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
           "readOnly": true
         }
       }
@@ -757,23 +313,6 @@
         ]
       ]
     },
-    "GovernanceAssignmentAdditionalData": {
-      "properties": {
-        "ticketNumber": {
-          "minimum__deleted": 0
-        }
-      }
-    },
-    "GovernanceAssignmentsList": {
-      "required__added": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
-    },
     "GovernanceRule": {
       "allOf": [
         [
@@ -787,21 +326,8 @@
         ]
       ]
     },
-    "GovernanceRuleList": {
-      "required__added": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
-    },
     "GovernanceRuleProperties": {
       "properties": {
-        "rulePriority": {
-          "minimum__deleted": 0
-        },
         "excludedScopes": {
           "items": {
             "description__deleted": "The excluded scope"
@@ -809,11 +335,30 @@
         },
         "conditionSets": {
           "items": {
-            "$ref__deleted": "#/definitions/GovernanceRuleConditionSets"
+            "$ref__deleted": "#/definitions/GovernanceRuleConditionSets",
+            "type__added": "array",
+            "items__added": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Condition"
+              }
+            }
           }
         },
         "metadata": {
           "description__added": "The governance rule metadata"
+        }
+      }
+    },
+    "OperationResult": {
+      "properties": {
+        "status": {
+          "x-ms-enum": {
+            "name": {
+              "__old": "OperationResult",
+              "__new": "OperationResultStatus"
+            }
+          }
         }
       }
     }

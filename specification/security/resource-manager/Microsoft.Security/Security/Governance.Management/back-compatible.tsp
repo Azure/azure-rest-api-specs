@@ -16,7 +16,7 @@ using Microsoft.Security;
   "governanceRule"
 );
 @@clientName(GovernanceRules.execute::parameters.body,
-  "executeGovernanceRuleParams"
+  "ExecuteGovernanceRuleParams"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(GovernanceRule.properties);
