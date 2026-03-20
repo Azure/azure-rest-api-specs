@@ -662,7 +662,7 @@
     "/keys/{key-name}/{key-version}/secureunwrapkey": {
       "post": {
         "operationId": "secureunwrapkey",
-        "summary": "Creates a new 256 bit AES key within the trusted execution environment and wraps a symmetric key using a specified key.",
+        "summary": "Securely unwraps a previously wrapped symmetric key using a specified key, ensuring TEE attestation via Microsoft Azure Attestation (MAA) before unwrapping.",
         "description": "The SECURE UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the SECURE WRAP operation. The SECURE UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/unwrapKey permission.\nThe SECURE UNWRAP operation ensures that MAA (Microsoft Azure Attestation Service) is used to attest the TEE (Trusted Execution Environment) before the key is unwrapped.",
         "parameters": [
           {
