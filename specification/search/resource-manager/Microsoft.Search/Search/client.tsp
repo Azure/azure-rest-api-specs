@@ -915,6 +915,14 @@ model AccessRulePropertiesSubscriptionsItem {
   azureLocation,
   "csharp"
 );
+@@clientName(SharedPrivateLinkResourceProperties.status,
+  "SharedPrivateLinkResourceStatus",
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResourceProperties.provisioningState,
+  "SharedPrivateLinkResourceProvisioningState",
+  "csharp"
+);
 @@clientName(SharedPrivateLinkResourceStatus,
   "SearchServiceSharedPrivateLinkResourceStatus",
   "csharp"
@@ -1028,6 +1036,10 @@ model AccessRulePropertiesSubscriptionsItem {
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
+@@alternateType(`search-management-request-options`.clientRequestId,
+  uuid,
+  "csharp"
+);
 @@alternateType(QuotaUsageResult.id, armResourceIdentifier, "csharp");
 @@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
   "SearchServiceNetworkSecurityPerimeterConfigurationProperties",
@@ -1056,6 +1068,10 @@ model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
 );
 @@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
   "SearchServiceNetworkSecurityPerimeter",
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+  azureLocation,
   "csharp"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
@@ -1091,6 +1107,12 @@ model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
   "csharp"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.Severity,
-  "SearchServiceNetworkSecurityPerimeterSeverity",
+  "SearchServiceNetworkSecurityPerimeterProvisioningIssueSeverity",
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(SearchServiceUpdate,
+  Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
