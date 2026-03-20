@@ -2247,7 +2247,7 @@
           {
             "name": "Confidential",
             "value": "Confidential",
-            "description": "Create the service with Azure Confidential Compute."
+            "description": "Create the dedicated service with Azure Confidential Compute."
           }
         ]
       }
@@ -3652,7 +3652,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
-          "description": "The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions.'"
+          "description": "The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions. 'serverless': Serverless tier with auto-scaling capabilities."
         }
       },
       "externalDocs": {
@@ -3745,7 +3745,7 @@
     },
     "UpgradeAvailable": {
       "type": "string",
-      "description": "Indicates if the search service has an upgrade available.",
+      "description": "Indicates if the dedicated search service has an upgrade available.",
       "enum": [
         "notAvailable",
         "available"
@@ -3757,12 +3757,12 @@
           {
             "name": "NotAvailable",
             "value": "notAvailable",
-            "description": "An upgrade is currently not available for the service."
+            "description": "An upgrade is currently not available for the dedicated service."
           },
           {
             "name": "Available",
             "value": "available",
-            "description": "There is an upgrade available for the service."
+            "description": "There is an upgrade available for the dedicated service."
           }
         ]
       }
