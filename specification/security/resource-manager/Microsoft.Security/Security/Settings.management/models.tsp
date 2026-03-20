@@ -1,0 +1,204 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
+namespace Microsoft.Security;
+
+/**
+ * the kind of the settings string
+ */
+union SettingKind {
+  string,
+
+  /**
+   * DataExportSettings
+   */
+  DataExportSettings: "DataExportSettings",
+
+  /**
+   * AlertSuppressionSetting
+   */
+  AlertSuppressionSetting: "AlertSuppressionSetting",
+
+  /**
+   * AlertSyncSettings
+   */
+  AlertSyncSettings: "AlertSyncSettings",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+union SettingName {
+  string,
+
+  /**
+   * MCAS
+   */
+  MCAS: "MCAS",
+
+  /**
+   * WDATP
+   */
+  WDATP: "WDATP",
+
+  /**
+   * WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW
+   */
+  WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW: "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW",
+
+  /**
+   * WDATP_UNIFIED_SOLUTION
+   */
+  WDATP_UNIFIED_SOLUTION: "WDATP_UNIFIED_SOLUTION",
+
+  /**
+   * Sentinel
+   */
+  Sentinel: "Sentinel",
+}
+
+/**
+ * Subscription settings list.
+ */
+model SettingsList is Azure.Core.Page<Setting>;
+
+/**
+ * Describes an Azure resource.
+ */
+model Resource {
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+ */
+@error
+model CloudError {
+  /**
+   * The error object.
+   */
+  error?: CloudErrorBody;
+}
+
+/**
+ * The error detail.
+ */
+model CloudErrorBody {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The error target.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * The error details.
+   */
+  @visibility(Lifecycle.Read)
+  details?: CloudErrorBody[];
+
+  /**
+   * The error additional info.
+   */
+  @visibility(Lifecycle.Read)
+  additionalInfo?: ErrorAdditionalInfo[];
+}
+
+/**
+ * The resource management error additional info.
+ */
+model ErrorAdditionalInfo {
+  /**
+   * The additional info type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The additional info.
+   */
+  @visibility(Lifecycle.Read)
+  info?: unknown;
+}
+
+/**
+ * Represents a data export setting
+ */
+model DataExportSettings extends Setting {
+  /**
+   * Data export setting data
+   */
+  properties?: DataExportSettingProperties;
+
+  /**
+   * the kind of the settings string
+   */
+  kind: "DataExportSettings";
+}
+
+/**
+ * The data export setting properties
+ */
+model DataExportSettingProperties {
+  /**
+   * Is the data export setting enabled
+   */
+  enabled: boolean;
+}
+
+/**
+ * Represents an alert sync setting
+ */
+model AlertSyncSettings extends Setting {
+  /**
+   * Alert sync setting data
+   */
+  properties?: AlertSyncSettingProperties;
+
+  /**
+   * the kind of the settings string
+   */
+  kind: "AlertSyncSettings";
+}
+
+/**
+ * The alert sync setting properties
+ */
+model AlertSyncSettingProperties {
+  /**
+   * Is the alert sync setting enabled
+   */
+  enabled: boolean;
+}
