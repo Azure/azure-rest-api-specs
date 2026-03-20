@@ -11,6 +11,13 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/billingMeters": {
       "get": {
