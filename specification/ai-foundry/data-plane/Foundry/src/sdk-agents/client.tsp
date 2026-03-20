@@ -63,7 +63,6 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.MCPTool.connector_id, "connectorType");
 @@clientName(OpenAI.MCPToolFilter, "McpToolFilter");
 @@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval");
-@@clientName(OpenAI.MCPToolConnectorId, "McpToolConnectorId");
 
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
@@ -98,6 +97,43 @@ using Azure.AI.Projects;
   "CustomGrammarFormatParameter",
   "java"
 );
+@@clientName(OpenAI.AutoCodeInterpreterToolParam,
+  "AutoCodeInterpreterToolParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerAutoParam, "ContainerAutoParameter", "java");
+@@clientName(OpenAI.ContainerNetworkPolicyParam,
+  "ContainerNetworkPolicyParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerNetworkPolicyAllowlistParam,
+  "ContainerNetworkPolicyAllowlistParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerNetworkPolicyDisabledParam,
+  "ContainerNetworkPolicyDisabledParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerNetworkPolicyDomainSecretParam,
+  "ContainerNetworkPolicyDomainSecretParameter",
+  "java"
+);
+@@clientName(OpenAI.CustomTextFormatParam, "CustomTextFormatParameter", "java");
+@@clientName(OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
+  "FunctionShellToolParameterEnvironmentContainerReferenceParameter",
+  "java"
+);
+@@clientName(OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam,
+  "FunctionShellToolParameterEnvironmentLocalEnvironmentParameter",
+  "java"
+);
+@@clientName(OpenAI.InlineSkillParam, "InlineSkillParameter", "java");
+@@clientName(OpenAI.InlineSkillSourceParam,
+  "InlineSkillSourceParameter",
+  "java"
+);
+@@clientName(OpenAI.LocalSkillParam, "LocalSkillParameter", "java");
+@@clientName(OpenAI.SkillReferenceParam, "SkillReferenceParameter", "java");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
