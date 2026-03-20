@@ -486,11 +486,11 @@ input-file:
   - preview/2015-06-01-preview/tasks.json
 ```
 
-### Tag: Settings.management
+### Tag: LegacySettings.management
 
 These settings apply only when `--tag=package-2026-01` is specified on the command line.
 
-```yaml $(tag) == 'Settings.management'
+```yaml $(tag) == 'LegacySettings.management'
 input-file:
   - preview/2017-08-01-preview/autoProvisioningSettings.json
   - preview/2017-08-01-preview/compliances.json
