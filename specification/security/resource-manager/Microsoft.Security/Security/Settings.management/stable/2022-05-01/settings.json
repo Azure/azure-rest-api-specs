@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2022-05-01",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -69,7 +69,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -153,7 +153,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -241,7 +241,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -275,26 +275,64 @@
           "$ref": "#/definitions/AlertSyncSettingProperties",
           "description": "Alert sync setting data",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "the kind of the settings string",
-          "enum": [
-            "AlertSyncSettings"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Setting"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AlertSyncSettings"
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
     },
     "DataExportSettingProperties": {
       "type": "object",
@@ -317,26 +355,29 @@
           "$ref": "#/definitions/DataExportSettingProperties",
           "description": "Data export setting data",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "the kind of the settings string",
-          "enum": [
-            "DataExportSettings"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Setting"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "DataExportSettings"
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
     },
     "Setting": {
       "type": "object",
@@ -351,6 +392,7 @@
           "description": "the kind of the settings string"
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -396,20 +438,16 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Setting items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/Setting"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     }
   },
   "parameters": {}

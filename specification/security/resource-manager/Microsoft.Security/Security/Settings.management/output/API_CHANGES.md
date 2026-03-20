@@ -1,32 +1,22 @@
 ## Swagger Changes
 
-### Changes for `x-ms-discriminator-value`
+### Changes for `CloudError`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AlertSyncSettings['x-ms-discriminator-value__deleted']` | deleted | `AlertSyncSettings` |
-| `definitions.DataExportSettings['x-ms-discriminator-value__deleted']` | deleted | `DataExportSettings` |
+| `definitions.CloudError__added` | added | `{"type":"object","description":"Common error response for all Azure Resource Manager APIs to return ...` |
 
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AlertSyncSettings.required__added` | added | `["kind"]` |
-| `definitions.DataExportSettings.required__added` | added | `["kind"]` |
-| `definitions.SettingsList.required__added` | added | `["value"]` |
-
-### Changes for `kind`
+### Changes for `CloudErrorBody`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AlertSyncSettings.properties.kind__added` | added | `{"type":"string","description":"the kind of the settings string","enum":["AlertSyncSettings"],"x-ms-...` |
-| `definitions.DataExportSettings.properties.kind__added` | added | `{"type":"string","description":"the kind of the settings string","enum":["DataExportSettings"],"x-ms...` |
+| `definitions.CloudErrorBody__added` | added | `{"type":"object","description":"The error detail.","properties":{"code":{"type":"string","descriptio...` |
 
-### Changes for `discriminator`
+### Changes for `ErrorAdditionalInfo`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Setting.discriminator__deleted` | deleted | `kind` |
+| `definitions.ErrorAdditionalInfo__added` | added | `{"type":"object","description":"The resource management error additional info.","properties":{"type"...` |
 
 ### Changes for `properties`
 
@@ -39,9 +29,7 @@
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.Setting.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `info.description` | `API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider` | `API spec for Microsoft.Security (Azure Security Center) resource provider` |
-| `info.title` | `Microsoft Defender for Cloud` | `SecurityCenter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/settings'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/settings/{settingName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/settings/{settingName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/settings'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/settings/{settingName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/settings/{settingName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 

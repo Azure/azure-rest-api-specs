@@ -14,7 +14,10 @@ namespace Microsoft.Security;
 /**
  * The kind of the security setting
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
+@discriminator("kind")
 model Setting is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = Setting,
@@ -27,10 +30,11 @@ model Setting is Azure.ResourceManager.ProxyResource<{}> {
   /**
    * the kind of the settings string
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind: SettingKind;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface Settings {
   /**
@@ -38,17 +42,19 @@ interface Settings {
    */
   get is ArmResourceRead<
     Setting,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
    * updating settings about different configurations in Microsoft Defender for Cloud
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   update is ArmResourceCreateOrReplaceSync<
     Setting,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResourceUpdatedResponse<Setting>
+    Response = ArmResourceUpdatedResponse<Setting>,
+    Error = CloudError
   >;
 
   /**
@@ -57,7 +63,8 @@ interface Settings {
   list is ArmResourceListByParent<
     Setting,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<SettingsList>
+    Response = ArmResponse<SettingsList>,
+    Error = CloudError
   >;
 }
 

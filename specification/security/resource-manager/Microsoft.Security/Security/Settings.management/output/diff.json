@@ -1,14 +1,4 @@
 {
-  "info": {
-    "title": {
-      "__old": "Microsoft Defender for Cloud",
-      "__new": "SecurityCenter"
-    },
-    "description": {
-      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
-    }
-  },
   "paths": {
     "/subscriptions/{subscriptionId}/providers/microsoft.Security/settings": {
       "get": {
@@ -17,7 +7,7 @@
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -31,7 +21,7 @@
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -43,7 +33,7 @@
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -52,44 +42,72 @@
     }
   },
   "definitions": {
-    "AlertSyncSettings": {
-      "x-ms-discriminator-value__deleted": "AlertSyncSettings",
-      "required__added": [
-        "kind"
-      ],
+    "CloudError__added": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
-        "kind__added": {
-          "type": "string",
-          "description": "the kind of the settings string",
-          "enum": [
-            "AlertSyncSettings"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
         }
-      }
+      },
+      "x-ms-external": true
     },
-    "DataExportSettings": {
-      "x-ms-discriminator-value__deleted": "DataExportSettings",
-      "required__added": [
-        "kind"
-      ],
+    "CloudErrorBody__added": {
+      "type": "object",
+      "description": "The error detail.",
       "properties": {
-        "kind__added": {
+        "code": {
           "type": "string",
-          "description": "the kind of the settings string",
-          "enum": [
-            "DataExportSettings"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo__added": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
         }
       }
     },
     "Setting": {
-      "discriminator__deleted": "kind",
       "properties": {
         "properties__added": {
           "type": "object",
@@ -106,11 +124,6 @@
             }
           }
         ]
-      ]
-    },
-    "SettingsList": {
-      "required__added": [
-        "value"
       ]
     }
   }
