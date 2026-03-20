@@ -102,32 +102,30 @@ export function parseLease(content) {
 export async function checkLease(orgName, rpNamespace, serviceName = "") {
   const repoRoot = await getRootFolder(process.cwd());
   const relLeasePath = buildLeaseRelativePath(orgName, rpNamespace, serviceName);
+
+  // git is initialized once and reused for both lookups (HEAD^ and origin/<baseBranch>).
   const git = simpleGit(repoRoot);
 
   // Try reading from HEAD^ (the base-branch parent of the merge commit).
   // This is the common case when the lease was merged before the PR's merge commit was generated.
-  let content;
   try {
-    content = await git.show([`HEAD^:${relLeasePath}`]);
+    const content = await git.show([`HEAD^:${relLeasePath}`]);
     return parseLease(content).valid;
   } catch {
-    // HEAD^ doesn't have the lease file. This can happen when the PR's merge commit is stale:
-    // the lease was merged to the base branch after the last push to this PR triggered CI.
-    // Fall back to checking origin/<baseBranch>, which is pre-fetched by the workflow.
+    // Expected when the lease file is absent from HEAD^ — this happens when the PR's merge
+    // commit is stale (the lease was merged to the base branch after the last PR push).
+    // Fall back to origin/<baseBranch>, which is pre-fetched by the workflow.
   }
 
-  // Fall back to origin/<baseBranch> to handle the race condition where the lease was merged
-  // to the base branch after this PR's merge commit was generated but before this check runs.
   const baseBranch = process.env.GITHUB_BASE_REF;
   if (!baseBranch) {
     return false;
   }
 
   try {
-    content = await git.show([`origin/${baseBranch}:${relLeasePath}`]);
+    const content = await git.show([`origin/${baseBranch}:${relLeasePath}`]);
+    return parseLease(content).valid;
   } catch {
     return false;
   }
-
-  return parseLease(content).valid;
 }
