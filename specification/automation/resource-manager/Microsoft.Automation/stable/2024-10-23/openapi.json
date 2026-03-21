@@ -6783,7 +6783,7 @@
             "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
-            "name": "body",
+            "name": "runbookContent",
             "in": "body",
             "description": "The runbook draft content.",
             "required": true,
@@ -6795,7 +6795,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "type": "file"
             }
@@ -6805,12 +6805,10 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "type": "string"
               },
               "Retry-After": {
                 "type": "integer",

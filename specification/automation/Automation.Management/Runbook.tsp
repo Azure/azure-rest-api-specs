@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./AutomationAccount.tsp";
+import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -121,8 +122,7 @@ interface Runbooks {
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookdraftoperations")
   @put
   @action("draft/content")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  replaceContent is ArmResourceActionAsync<
+  replaceContent is ArmResourceActionAsyncCustom<
     Runbook,
     {
       @header("Content-Type")
@@ -132,7 +132,7 @@ interface Runbooks {
       @doc("The runbook draft content.")
       @bodyRoot
       @encode("bytes")
-      body: bytes;
+      runbookContent: bytes;
     },
     {
       @header("Content-Type")
@@ -142,8 +142,11 @@ interface Runbooks {
       @bodyRoot
       @encode("bytes")
       body: bytes;
-    },
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    } | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        @header("Location")
+        location: string;
+      }>
   >;
 
   /**
@@ -312,7 +315,6 @@ interface Runbooks {
 @@doc(Runbooks.update::parameters.properties,
   "The update parameters for runbook."
 );
-@@doc(Runbooks.replaceContent::parameters.body, "The runbook draft content.");
 @@doc(Runbooks.create::parameters.body,
   "The parameters supplied to the create test job operation."
 );
