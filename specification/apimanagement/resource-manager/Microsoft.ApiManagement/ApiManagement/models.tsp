@@ -341,6 +341,13 @@ union McpTransportType {
  */
 model McpEndpoint {
   /**
+   * MCP endpoint name, e.g. 'sse' or 'messages'.
+   */
+  @maxLength(300)
+  @minLength(1)
+  name: string;
+
+  /**
    * Relative URL path that must start with '/'.
    */
   @pattern("^/.*$")
@@ -359,8 +366,8 @@ model McpProperties {
   /**
    * Collection of MCP endpoint definitions with relative URLs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "MCP endpoints are a dynamic map of endpoint names to endpoint definitions"
-  endpoints?: Record<McpEndpoint>;
+  @identifiers(#["name"])
+  endpoints?: McpEndpoint[];
 }
 
 /**
