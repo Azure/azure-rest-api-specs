@@ -1,15 +1,33 @@
 {
   "parameters": {
-    "api-version": "2022-12-01",
-    "subscriptionId": "a1ffc958-d2c7-493e-9f1e-125a0477f536"
+    "subscriptionId": "a1ffc958-d2c7-493e-9f1e-125a0477f536",
+    "api-version": "2022-12-01"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/a1ffc958-d2c7-493e-9f1e-125a0477f536/locations/eastus",
             "name": "eastus",
             "type": "Region",
+            "displayName": "East US",
+            "regionalDisplayName": "(US) East US",
+            "metadata": {
+              "regionType": "Physical",
+              "regionCategory": "Recommended",
+              "geography": "United States",
+              "geographyGroup": "US",
+              "longitude": "-79.8164",
+              "latitude": "37.3719",
+              "physicalLocation": "Virginia",
+              "pairedRegion": [
+                {
+                  "name": "westus",
+                  "id": "/subscriptions/a1ffc958-d2c7-493e-9f1e-125a0477f536/locations/westus"
+                }
+              ]
+            },
             "availabilityZoneMappings": [
               {
                 "logicalZone": "1",
@@ -23,29 +41,29 @@
                 "logicalZone": "3",
                 "physicalZone": "eastus-az2"
               }
-            ],
-            "displayName": "East US",
-            "id": "/subscriptions/a1ffc958-d2c7-493e-9f1e-125a0477f536/locations/eastus",
-            "metadata": {
-              "geography": "United States",
-              "geographyGroup": "US",
-              "latitude": "37.3719",
-              "longitude": "-79.8164",
-              "pairedRegion": [
-                {
-                  "name": "westus",
-                  "id": "/subscriptions/a1ffc958-d2c7-493e-9f1e-125a0477f536/locations/westus"
-                }
-              ],
-              "physicalLocation": "Virginia",
-              "regionCategory": "Recommended",
-              "regionType": "Physical"
-            },
-            "regionalDisplayName": "(US) East US"
+            ]
           },
           {
+            "id": "/subscriptions/a1ffc958-d2c7-493e-9f1e-125a0477f536/locations/eastus2",
             "name": "eastus2",
             "type": "Region",
+            "displayName": "East US 2",
+            "regionalDisplayName": "(US) East US 2",
+            "metadata": {
+              "regionType": "Physical",
+              "regionCategory": "Recommended",
+              "geography": "United States",
+              "geographyGroup": "US",
+              "longitude": "-78.3889",
+              "latitude": "36.6681",
+              "physicalLocation": "Virginia",
+              "pairedRegion": [
+                {
+                  "name": "centralus",
+                  "id": "/subscriptions/a1ffc958-d2c7-493e-9f1e-125a0477f536/locations/centralus"
+                }
+              ]
+            },
             "availabilityZoneMappings": [
               {
                 "logicalZone": "1",
@@ -59,30 +77,10 @@
                 "logicalZone": "3",
                 "physicalZone": "eastus2-az2"
               }
-            ],
-            "displayName": "East US 2",
-            "id": "/subscriptions/a1ffc958-d2c7-493e-9f1e-125a0477f536/locations/eastus2",
-            "metadata": {
-              "geography": "United States",
-              "geographyGroup": "US",
-              "latitude": "36.6681",
-              "longitude": "-78.3889",
-              "pairedRegion": [
-                {
-                  "name": "centralus",
-                  "id": "/subscriptions/a1ffc958-d2c7-493e-9f1e-125a0477f536/locations/centralus"
-                }
-              ],
-              "physicalLocation": "Virginia",
-              "regionCategory": "Recommended",
-              "regionType": "Physical"
-            },
-            "regionalDisplayName": "(US) East US 2"
+            ]
           }
         ]
       }
     }
-  },
-  "operationId": "Subscriptions_ListLocations",
-  "title": "GetLocationsWithASubscriptionId"
+  }
 }

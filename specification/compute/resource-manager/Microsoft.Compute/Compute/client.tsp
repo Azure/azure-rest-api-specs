@@ -11,6 +11,5 @@ using Azure.ClientGenerator.Core;
 @client({
   name: "ComputeClient",
   service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
-  autoMergeService: true,
 })
 namespace ComputeCombine;

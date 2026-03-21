@@ -1,213 +1,211 @@
 {
   "parameters": {
     "api-version": "2025-07-25",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroup",
+    "resourceName": "resourceName",
     "parameters": {
-      "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "": {}
-        }
-      },
       "location": "location",
+      "tags": {
+        "key": "value"
+      },
       "properties": {
-        "apiserverProfile": {
-          "visibility": "Public"
-        },
         "clusterProfile": {
-          "domain": "cluster.location.aroapp.io",
-          "fipsValidatedModules": "Enabled",
           "pullSecret": "{\"auths\":{\"registry.connect.redhat.com\":{\"auth\":\"\"},\"registry.redhat.io\":{\"auth\":\"\"}}}",
-          "resourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clusterResourceGroup"
+          "domain": "cluster.location.aroapp.io",
+          "resourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clusterResourceGroup",
+          "fipsValidatedModules": "Enabled"
         },
         "consoleProfile": {},
-        "ingressProfiles": [
-          {
-            "name": "default",
-            "visibility": "Public"
-          }
-        ],
-        "masterProfile": {
-          "encryptionAtHost": "Enabled",
-          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/master",
-          "vmSize": "Standard_D8s_v3"
-        },
-        "networkProfile": {
-          "loadBalancerProfile": {
-            "managedOutboundIps": {
-              "count": 1
-            }
-          },
-          "podCidr": "10.128.0.0/14",
-          "preconfiguredNSG": "Disabled",
-          "serviceCidr": "172.30.0.0/16"
+        "servicePrincipalProfile": {
+          "clientId": "clientId",
+          "clientSecret": "clientSecret"
         },
         "platformWorkloadIdentityProfile": {
           "platformWorkloadIdentities": {
             "": {}
           }
         },
-        "servicePrincipalProfile": {
-          "clientId": "clientId",
-          "clientSecret": "clientSecret"
+        "networkProfile": {
+          "podCidr": "10.128.0.0/14",
+          "serviceCidr": "172.30.0.0/16",
+          "loadBalancerProfile": {
+            "managedOutboundIps": {
+              "count": 1
+            }
+          },
+          "preconfiguredNSG": "Disabled"
+        },
+        "masterProfile": {
+          "vmSize": "Standard_D8s_v3",
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/master",
+          "encryptionAtHost": "Enabled"
         },
         "workerProfiles": [
           {
             "name": "worker",
-            "count": 3,
+            "vmSize": "Standard_D2s_v3",
             "diskSizeGB": 128,
             "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
-            "vmSize": "Standard_D2s_v3"
+            "count": 3
+          }
+        ],
+        "apiserverProfile": {
+          "visibility": "Public"
+        },
+        "ingressProfiles": [
+          {
+            "name": "default",
+            "visibility": "Public"
           }
         ]
       },
-      "tags": {
-        "key": "value"
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "": {}
+        }
       }
-    },
-    "resourceGroupName": "resourceGroup",
-    "resourceName": "resourceName",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.RedHatOpenShift/OpenShiftClusters/resourceName",
         "name": "resourceName",
         "type": "Microsoft.RedHatOpenShift/OpenShiftClusters",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.RedHatOpenShift/OpenShiftClusters/resourceName",
+        "location": "location",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-03T01:01:01.1075056Z"
+        },
+        "tags": {
+          "key": "value"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterProfile": {
+            "domain": "cluster.location.aroapp.io",
+            "version": "4.11.0",
+            "resourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clusterResourceGroup"
+          },
+          "consoleProfile": {
+            "url": "https://console-openshift-console.apps.cluster.location.aroapp.io/"
+          },
+          "servicePrincipalProfile": {
+            "clientId": "clientId"
+          },
+          "networkProfile": {
+            "podCidr": "10.128.0.0/14",
+            "serviceCidr": "172.30.0.0/16",
+            "preconfiguredNSG": "Disabled"
+          },
+          "masterProfile": {
+            "vmSize": "Standard_D8s_v3",
+            "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/master"
+          },
+          "workerProfiles": [
+            {
+              "name": "worker",
+              "vmSize": "Standard_D2s_v3",
+              "diskSizeGB": 128,
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
+              "count": 3
+            }
+          ],
+          "apiserverProfile": {
+            "visibility": "Public",
+            "url": "https://api.cluster.location.aroapp.io:6443/",
+            "ip": "1.2.3.4"
+          },
+          "ingressProfiles": [
+            {
+              "name": "default",
+              "visibility": "Public",
+              "ip": "1.2.3.4"
+            }
+          ]
+        },
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
             "": {}
           }
-        },
-        "location": "location",
-        "properties": {
-          "apiserverProfile": {
-            "ip": "1.2.3.4",
-            "url": "https://api.cluster.location.aroapp.io:6443/",
-            "visibility": "Public"
-          },
-          "clusterProfile": {
-            "domain": "cluster.location.aroapp.io",
-            "resourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clusterResourceGroup",
-            "version": "4.11.0"
-          },
-          "consoleProfile": {
-            "url": "https://console-openshift-console.apps.cluster.location.aroapp.io/"
-          },
-          "ingressProfiles": [
-            {
-              "name": "default",
-              "ip": "1.2.3.4",
-              "visibility": "Public"
-            }
-          ],
-          "masterProfile": {
-            "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/master",
-            "vmSize": "Standard_D8s_v3"
-          },
-          "networkProfile": {
-            "podCidr": "10.128.0.0/14",
-            "preconfiguredNSG": "Disabled",
-            "serviceCidr": "172.30.0.0/16"
-          },
-          "provisioningState": "Succeeded",
-          "servicePrincipalProfile": {
-            "clientId": "clientId"
-          },
-          "workerProfiles": [
-            {
-              "name": "worker",
-              "count": 3,
-              "diskSizeGB": 128,
-              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
-              "vmSize": "Standard_D2s_v3"
-            }
-          ]
-        },
-        "systemData": {
-          "createdAt": "2020-02-03T01:01:01.1075056Z",
-          "createdBy": "string",
-          "createdByType": "Application",
-          "lastModifiedAt": "2020-02-03T01:01:01.1075056Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "Application"
-        },
-        "tags": {
-          "key": "value"
         }
       }
     },
     "201": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.RedHatOpenShift/OpenShiftClusters/resourceName",
         "name": "resourceName",
         "type": "Microsoft.RedHatOpenShift/OpenShiftClusters",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.RedHatOpenShift/OpenShiftClusters/resourceName",
+        "location": "location",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-03T01:01:01.1075056Z"
+        },
+        "tags": {
+          "key": "value"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterProfile": {
+            "domain": "cluster.location.aroapp.io",
+            "version": "4.11.0",
+            "resourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clusterResourceGroup"
+          },
+          "consoleProfile": {
+            "url": "https://console-openshift-console.apps.cluster.location.aroapp.io/"
+          },
+          "servicePrincipalProfile": {
+            "clientId": "clientId"
+          },
+          "networkProfile": {
+            "podCidr": "10.128.0.0/14",
+            "serviceCidr": "172.30.0.0/16",
+            "preconfiguredNSG": "Disabled"
+          },
+          "masterProfile": {
+            "vmSize": "Standard_D8s_v3",
+            "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/master"
+          },
+          "workerProfiles": [
+            {
+              "name": "worker",
+              "vmSize": "Standard_D2s_v3",
+              "diskSizeGB": 128,
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
+              "count": 3
+            }
+          ],
+          "apiserverProfile": {
+            "visibility": "Public",
+            "url": "https://api.cluster.location.aroapp.io:6443/",
+            "ip": "1.2.3.4"
+          },
+          "ingressProfiles": [
+            {
+              "name": "default",
+              "visibility": "Public",
+              "ip": "1.2.3.4"
+            }
+          ]
+        },
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
             "": {}
           }
-        },
-        "location": "location",
-        "properties": {
-          "apiserverProfile": {
-            "ip": "1.2.3.4",
-            "url": "https://api.cluster.location.aroapp.io:6443/",
-            "visibility": "Public"
-          },
-          "clusterProfile": {
-            "domain": "cluster.location.aroapp.io",
-            "resourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clusterResourceGroup",
-            "version": "4.11.0"
-          },
-          "consoleProfile": {
-            "url": "https://console-openshift-console.apps.cluster.location.aroapp.io/"
-          },
-          "ingressProfiles": [
-            {
-              "name": "default",
-              "ip": "1.2.3.4",
-              "visibility": "Public"
-            }
-          ],
-          "masterProfile": {
-            "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/master",
-            "vmSize": "Standard_D8s_v3"
-          },
-          "networkProfile": {
-            "podCidr": "10.128.0.0/14",
-            "preconfiguredNSG": "Disabled",
-            "serviceCidr": "172.30.0.0/16"
-          },
-          "provisioningState": "Succeeded",
-          "servicePrincipalProfile": {
-            "clientId": "clientId"
-          },
-          "workerProfiles": [
-            {
-              "name": "worker",
-              "count": 3,
-              "diskSizeGB": 128,
-              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
-              "vmSize": "Standard_D2s_v3"
-            }
-          ]
-        },
-        "systemData": {
-          "createdAt": "2020-02-03T01:01:01.1075056Z",
-          "createdBy": "string",
-          "createdByType": "Application",
-          "lastModifiedAt": "2020-02-03T01:01:01.1075056Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "Application"
-        },
-        "tags": {
-          "key": "value"
         }
       }
     }
-  },
-  "operationId": "OpenShiftClusters_CreateOrUpdate",
-  "title": "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name."
+  }
 }

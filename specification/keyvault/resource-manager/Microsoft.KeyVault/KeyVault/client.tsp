@@ -383,11 +383,3 @@ enum NameAvailabilityReason {
 
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "javascript");
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "python");
-
-// temporary until https://github.com/Azure/typespec-rust/issues/907 is fixed
-@@clientInitialization(Microsoft.KeyVault,
-  {
-    initializedBy: InitializedBy.customizeCode,
-  },
-  "rust"
-);

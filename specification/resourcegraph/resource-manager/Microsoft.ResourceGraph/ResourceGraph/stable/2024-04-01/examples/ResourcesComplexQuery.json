@@ -1,37 +1,36 @@
 {
-  "operationId": "Resources",
+  "title": "Complex Query",
   "description": "A complex query on resources featuring multiple operations.",
   "parameters": {
     "api-version": "2024-04-01",
     "query": {
-      "query": "Resources | project id, name, type, location | where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by location | top 3 by count_",
       "subscriptions": [
         "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
-      ]
+      ],
+      "query": "Resources | project id, name, type, location | where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by location | top 3 by count_"
     }
   },
-  "title": "Complex query",
   "responses": {
     "200": {
       "body": {
+        "totalRecords": 3,
         "count": 3,
+        "resultTruncated": "false",
+        "facets": [],
         "data": [
           {
-            "count_": 11,
-            "location": "centralus"
+            "location": "centralus",
+            "count_": 11
           },
           {
-            "count_": 11,
-            "location": "eastus"
+            "location": "eastus",
+            "count_": 11
           },
           {
-            "count_": 3,
-            "location": "southcentralus"
+            "location": "southcentralus",
+            "count_": 3
           }
-        ],
-        "facets": [],
-        "resultTruncated": "false",
-        "totalRecords": 3
+        ]
       }
     }
   }

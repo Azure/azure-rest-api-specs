@@ -64,8 +64,7 @@ interface SharedPrivateLinkResourceOps
         @minLength(3)
         @maxLength(63)
         sharedPrivateLinkResourceName: string,
-      },
-      ResourceName = "WebPubSubReplicaSharedPrivateLink"
+      }
     > {}
 
 @armResourceOperations
@@ -119,8 +118,7 @@ interface WebPubSubSharedPrivateLinkResourceOps
         @minLength(3)
         @maxLength(63)
         sharedPrivateLinkResourceName: string,
-      },
-      ResourceName = "WebPubSubSharedPrivateLink"
+      }
     > {}
 
 @armResourceOperations
