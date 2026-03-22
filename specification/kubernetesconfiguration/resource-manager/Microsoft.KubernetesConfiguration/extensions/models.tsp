@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -348,7 +349,7 @@ model ExtensionPropertiesAksAssignedIdentity {
    * The ID of the resource identity.
    */
   @added(Versions.v2025_03_01)
-  resourceId?: string;
+  resourceId?: armResourceIdentifier;
 }
 
 /**

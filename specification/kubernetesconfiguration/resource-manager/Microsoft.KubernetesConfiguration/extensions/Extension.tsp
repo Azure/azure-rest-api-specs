@@ -6,6 +6,7 @@ import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -35,7 +36,7 @@ model Extension is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This field is allowed at the top-level as per the ARM resource specification."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2025_03_01)
-  managedBy?: string;
+  managedBy?: armResourceIdentifier;
 
   ...Azure.ResourceManager.ResourcePlanProperty;
 }
