@@ -20,6 +20,9 @@ union ToolsetMCPMethodName {
   initialized: "notifications/initialized",
   list: "tools/list",
   call: "tools/call",
+  taskCreate: "tasks/create",
+  taskGet: "tasks/get",
+  taskCancel: "tasks/cancel",
 }
 
 /**
@@ -570,6 +573,9 @@ union ToolsetMCPJsonRpcResult {
   ToolsetMCPInitializeResult,
   ToolsetMCPListToolsResult,
   ToolsetMCPCallToolResult,
+  ToolsetMCPCreateTaskResult,
+  ToolsetMCPGetTaskResult,
+  ToolsetMCPCancelTaskResult,
 }
 
 /**
@@ -658,12 +664,146 @@ union ToolsetMCPJsonRpcMessage {
 }
 
 /**
+ * Parameters for a tasks/create request.
+ * Uses the same shape as tools/call — name, arguments, and optional metadata.
+ */
+model ToolsetMCPCreateTaskRequestParams {
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
+
+  /**
+   * The name of the tool to call asynchronously.
+   */
+  name: string;
+
+  /**
+   * Arguments to pass to the tool.
+   */
+  arguments?: Record<unknown>;
+}
+
+/**
+ * Parameters for a tasks/get request.
+ */
+model ToolsetMCPGetTaskRequestParams {
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
+
+  /**
+   * The task identifier to query.
+   */
+  id: string;
+}
+
+/**
+ * Parameters for a tasks/cancel request.
+ */
+model ToolsetMCPCancelTaskRequestParams {
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
+
+  /**
+   * The task identifier to cancel.
+   */
+  id: string;
+}
+
+/**
+ * Status of a task.
+ */
+union ToolsetMCPTaskStatus {
+  running: "running",
+  completed: "completed",
+  failed: "failed",
+  cancelled: "cancelled",
+}
+
+/**
+ * A task object representing an asynchronous tool invocation.
+ */
+model ToolsetMCPTask {
+  /**
+   * The unique task identifier.
+   */
+  id: string;
+
+  /**
+   * The current status of the task.
+   */
+  status: ToolsetMCPTaskStatus;
+
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
+}
+
+/**
+ * Result payload for tasks/create.
+ */
+model ToolsetMCPCreateTaskResult {
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
+
+  /**
+   * The created task.
+   */
+  ...ToolsetMCPTask;
+}
+
+/**
+ * Result payload for tasks/get.
+ */
+model ToolsetMCPGetTaskResult {
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
+
+  /**
+   * The task with current status.
+   */
+  ...ToolsetMCPTask;
+
+  /**
+   * The tool call result, present when status is "completed".
+   */
+  result?: ToolsetMCPCallToolResult;
+}
+
+/**
+ * Result payload for tasks/cancel.
+ */
+model ToolsetMCPCancelTaskResult {
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
+
+  /**
+   * The cancelled task.
+   */
+  ...ToolsetMCPTask;
+}
+
+/**
  * Method parameters accepted by the toolset MCP endpoint.
  */
 union ToolsetMCPInvokeRequestParams {
   ToolsetMCPInitializeRequestParams,
   ToolsetMCPPaginatedRequestParams,
   ToolsetMCPCallToolRequestParams,
+  ToolsetMCPCreateTaskRequestParams,
+  ToolsetMCPGetTaskRequestParams,
+  ToolsetMCPCancelTaskRequestParams,
 }
 
 /**
