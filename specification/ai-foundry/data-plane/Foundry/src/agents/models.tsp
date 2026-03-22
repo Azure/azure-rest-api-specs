@@ -440,7 +440,7 @@ model ContainerConfiguration {
   #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
 )
 model CodeConfiguration {
-  @doc("Opaque reference ID returned from POST /code:upload. Use this to associate uploaded code with an agent version.")
+  @doc("Code reference ID in format '{name}:{version}' returned from POST /code:upload. Use this to associate uploaded code with an agent version.")
   code_reference_id: string;
 
   @doc("The runtime identifier for code execution (e.g., 'python_3_11', 'python_3_12', 'python_3_13').")
@@ -1235,8 +1235,38 @@ model SessionListResult {
   }
 )
 model CodeUploadResponse {
-  @doc("Opaque code reference identifier. Pass as code_configuration.code_reference_id when creating an agent version.")
+  @doc("Code reference identifier in format '{name}:{version}'. Pass as code_configuration.code_reference_id when creating an agent version.")
   id: string;
+
+  @doc("The user-provided name for this code artifact.")
+  name: string;
+
+  @doc("Auto-incremented version number. Re-uploading with the same name creates a new version.")
+  version: string;
+
+  @doc("Size of the uploaded zip file in bytes.")
+  size_bytes: int64;
+
+  @doc("Timestamp of the upload.")
+  created_at: utcDateTime;
+}
+
+@doc("A code artifact representing an uploaded code package.")
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview],
+  }
+)
+model CodeArtifact {
+  @doc("Code reference identifier in format '{name}:{version}'.")
+  id: string;
+
+  @doc("The user-provided name for this code artifact.")
+  name: string;
+
+  @doc("The version number of this code artifact.")
+  version: string;
 
   @doc("Size of the uploaded zip file in bytes.")
   size_bytes: int64;
