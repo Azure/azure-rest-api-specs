@@ -198,14 +198,15 @@ interface Agents {
 
   /**
    * Upload a code zip file for code-based hosted agent deployment.
-   * The zip is stored internally and an opaque code_reference_id is returned.
+   * The zip is stored internally and a code_reference_id in format '{name}:{version}' is returned.
+   * Re-uploading with the same name auto-increments the version.
    * This ID is then passed into code_configuration.code_reference_id when creating an agent version.
    * Maximum upload size is 250 MB.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   #suppress "@azure-tools/typespec-azure-core/byos" "Code upload is stored internally by the service, not BYOS."
   @post
-  @route("/code:upload")
+  @route("/code/{name}:upload")
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
@@ -213,6 +214,10 @@ interface Agents {
   uploadCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
+      @doc("User-provided name for the code artifact. Re-uploading with the same name auto-increments the version.")
+      @path
+      name: string;
+
       @header contentType: "application/zip" | "application/octet-stream";
 
       @doc("The code zip file to upload.")
@@ -220,5 +225,83 @@ interface Agents {
       body: bytes;
     },
     CodeUploadResponse
+  >;
+
+  /**
+   * List uploaded code artifacts. Returns the latest version of each named artifact.
+   */
+  @get
+  @route("/code")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
+  listCode is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
+    {},
+    Azure.Core.Page<CodeArtifact>
+  >;
+
+  /**
+   * List all versions of a named code artifact.
+   */
+  @get
+  @route("/code/{name}/versions")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
+  listCodeVersions is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
+    {
+      @doc("The name of the code artifact.")
+      @path
+      name: string;
+    },
+    Azure.Core.Page<CodeArtifact>
+  >;
+
+  /**
+   * Delete all versions of a named code artifact.
+   * Returns 409 Conflict if any version is referenced by active agent versions.
+   */
+  @delete
+  @route("/code/{name}")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
+  deleteCode is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
+    {
+      @doc("The name of the code artifact to delete.")
+      @path
+      name: string;
+    },
+    void
+  >;
+
+  /**
+   * Delete a specific version of a code artifact.
+   * Returns 409 Conflict if the code version is referenced by active agent versions.
+   */
+  @delete
+  @route("/code/{name}/versions/{version}")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
+  deleteCodeVersion is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
+    {
+      @doc("The name of the code artifact.")
+      @path
+      name: string;
+
+      @doc("The version of the code artifact to delete.")
+      @path
+      version: string;
+    },
+    void
   >;
 }
