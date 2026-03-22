@@ -749,11 +749,6 @@ model ToolsetMCPTask {
  */
 model ToolsetMCPCreateTaskResult {
   /**
-   * Optional metadata for protocol-level extensions.
-   */
-  _meta?: ToolsetMCPMeta;
-
-  /**
    * The created task.
    */
   ...ToolsetMCPTask;
@@ -763,11 +758,6 @@ model ToolsetMCPCreateTaskResult {
  * Result payload for tasks/get.
  */
 model ToolsetMCPGetTaskResult {
-  /**
-   * Optional metadata for protocol-level extensions.
-   */
-  _meta?: ToolsetMCPMeta;
-
   /**
    * The task with current status.
    */
@@ -783,11 +773,6 @@ model ToolsetMCPGetTaskResult {
  * Result payload for tasks/cancel.
  */
 model ToolsetMCPCancelTaskResult {
-  /**
-   * Optional metadata for protocol-level extensions.
-   */
-  _meta?: ToolsetMCPMeta;
-
   /**
    * The cancelled task.
    */
