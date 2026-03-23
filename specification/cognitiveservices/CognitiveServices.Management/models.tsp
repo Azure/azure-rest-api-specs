@@ -5509,7 +5509,8 @@ model ComputeProperties {
   /**
    * Location of the compute resource.
    */
-  location: string;
+  @visibility(Lifecycle.Read)
+  location?: string;
 
   /**
    * Provisioning state of the compute resource.
