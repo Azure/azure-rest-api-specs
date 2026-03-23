@@ -235,7 +235,19 @@ union BundleType {
 /**
  * List of security alerts
  */
-model AlertList is Azure.Core.Page<Alert>;
+model AlertList {
+  /**
+   * The Alert items on this page
+   */
+  @pageItems
+  value?: Alert[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * describes security alert properties.

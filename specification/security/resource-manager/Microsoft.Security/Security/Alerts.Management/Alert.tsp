@@ -55,7 +55,7 @@ interface Alerts {
    * Get an alert that is associated with a subscription
    */
   @tag("Alerts")
-  getSubscriptionLevel is AlertOps.Read<Alert>;
+  getSubscriptionLevel is AlertOps.Read<Alert, OverrideErrorType = CloudError>;
 
   /**
    * List all the alerts that are associated with the subscription that are stored in a specific location
@@ -63,7 +63,8 @@ interface Alerts {
   @tag("Alerts")
   listSubscriptionLevelByRegion is AlertOps.List<
     Alert,
-    Response = ArmResponse<AlertList>
+    Response = ArmResponse<AlertList>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -74,7 +75,8 @@ interface Alerts {
   updateSubscriptionLevelStateToDismiss is AlertOps.ActionSync<
     Alert,
     void,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -85,7 +87,8 @@ interface Alerts {
   updateSubscriptionLevelStateToResolve is AlertOps.ActionSync<
     Alert,
     void,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -96,7 +99,8 @@ interface Alerts {
   updateSubscriptionLevelStateToActivate is AlertOps.ActionSync<
     Alert,
     void,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -107,7 +111,8 @@ interface Alerts {
   updateSubscriptionLevelStateToInProgress is AlertOps.ActionSync<
     Alert,
     void,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrorType = CloudError
   >;
 }
 alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -138,7 +143,10 @@ interface AlertOperationGroup {
    * Get an alert that is associated a resource group or a resource in a resource group
    */
   @tag("Alerts")
-  getResourceGroupLevel is AlertOperationGroupOps.Read<Alert>;
+  getResourceGroupLevel is AlertOperationGroupOps.Read<
+    Alert,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * List all the alerts that are associated with the resource group that are stored in a specific location
@@ -157,7 +165,8 @@ interface AlertOperationGroup {
   updateResourceGroupLevelStateToResolve is AlertOperationGroupOps.ActionSync<
     Alert,
     void,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -168,7 +177,8 @@ interface AlertOperationGroup {
   updateResourceGroupLevelStateToDismiss is AlertOperationGroupOps.ActionSync<
     Alert,
     void,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -179,7 +189,8 @@ interface AlertOperationGroup {
   updateResourceGroupLevelStateToActivate is AlertOperationGroupOps.ActionSync<
     Alert,
     void,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -190,7 +201,8 @@ interface AlertOperationGroup {
   updateResourceGroupLevelStateToInProgress is AlertOperationGroupOps.ActionSync<
     Alert,
     void,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrorType = CloudError
   >;
 }
 
