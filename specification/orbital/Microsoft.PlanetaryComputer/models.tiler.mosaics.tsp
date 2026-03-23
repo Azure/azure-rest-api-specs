@@ -23,7 +23,8 @@ model MosaicTileQueryParameters {
    * 1.0 = 258x258).
    */
   @query("buffer")
-  buffer?: string;
+  @typeChangedFrom(Versions.v2026_04_15, string)
+  buffer?: float32;
 
   /**
    * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -114,6 +115,66 @@ union TerrainAlgorithm {
    * Encodes elevation data in Mapbox TerrainRGB format
    */
   terrainrgb: "terrainrgb",
+
+  /**
+   * Calculates slope from elevation data
+   */
+  @added(Versions.v2026_04_15)
+  slope: "slope",
+
+  /**
+   * Casts data to a different type
+   */
+  @added(Versions.v2026_04_15)
+  cast: "cast",
+
+  /**
+   * Rounds values up to the nearest integer
+   */
+  @added(Versions.v2026_04_15)
+  ceil: "ceil",
+
+  /**
+   * Rounds values down to the nearest integer
+   */
+  @added(Versions.v2026_04_15)
+  floor: "floor",
+
+  /**
+   * Computes the minimum value across bands
+   */
+  @added(Versions.v2026_04_15)
+  min: "min",
+
+  /**
+   * Computes the maximum value across bands
+   */
+  @added(Versions.v2026_04_15)
+  max: "max",
+
+  /**
+   * Computes the median value across bands
+   */
+  @added(Versions.v2026_04_15)
+  median: "median",
+
+  /**
+   * Computes the mean value across bands
+   */
+  @added(Versions.v2026_04_15)
+  mean: "mean",
+
+  /**
+   * Computes the standard deviation across bands
+   */
+  @added(Versions.v2026_04_15)
+  std: "std",
+
+  /**
+   * Computes the variance across bands
+   */
+  @added(Versions.v2026_04_15)
+  var: "var",
 }
 
 /**

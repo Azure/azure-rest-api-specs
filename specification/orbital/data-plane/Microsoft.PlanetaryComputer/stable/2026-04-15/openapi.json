@@ -2996,7 +2996,11 @@
             "in": "query",
             "description": "Per asset band indexes (coma separated indexes, e.g. \"image|1,2,3\" means use the bands 1, 2, and 3 from the asset named \"image\")",
             "required": false,
-            "type": "string",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv",
             "x-ms-client-name": "assetBandIndices"
           },
           {
@@ -3004,8 +3008,7 @@
             "in": "query",
             "description": "Overwrite internal Nodata value",
             "required": false,
-            "type": "number",
-            "format": "float",
+            "type": "string",
             "x-ms-client-name": "noData"
           },
           {
@@ -13608,7 +13611,8 @@
               "median",
               "stdev",
               "lastbandlow",
-              "lastbandhigh"
+              "lastbandhigh",
+              "count"
             ],
             "x-ms-enum": {
               "name": "PixelSelection",
@@ -13653,6 +13657,11 @@
                   "name": "lastBandHigh",
                   "value": "lastbandhigh",
                   "description": "Select image with highest value in the last band"
+                },
+                {
+                  "name": "count",
+                  "value": "count",
+                  "description": "Count available pixels across sources"
                 }
               ]
             },
@@ -13669,7 +13678,17 @@
               "contours",
               "normalizedIndex",
               "terrarium",
-              "terrainrgb"
+              "terrainrgb",
+              "slope",
+              "cast",
+              "ceil",
+              "floor",
+              "min",
+              "max",
+              "median",
+              "mean",
+              "std",
+              "var"
             ],
             "x-ms-enum": {
               "name": "TerrainAlgorithm",
@@ -13699,6 +13718,56 @@
                   "name": "terrainrgb",
                   "value": "terrainrgb",
                   "description": "Encodes elevation data in Mapbox TerrainRGB format"
+                },
+                {
+                  "name": "slope",
+                  "value": "slope",
+                  "description": "Calculates slope from elevation data"
+                },
+                {
+                  "name": "cast",
+                  "value": "cast",
+                  "description": "Casts data to a different type"
+                },
+                {
+                  "name": "ceil",
+                  "value": "ceil",
+                  "description": "Rounds values up to the nearest integer"
+                },
+                {
+                  "name": "floor",
+                  "value": "floor",
+                  "description": "Rounds values down to the nearest integer"
+                },
+                {
+                  "name": "min",
+                  "value": "min",
+                  "description": "Computes the minimum value across bands"
+                },
+                {
+                  "name": "max",
+                  "value": "max",
+                  "description": "Computes the maximum value across bands"
+                },
+                {
+                  "name": "median",
+                  "value": "median",
+                  "description": "Computes the median value across bands"
+                },
+                {
+                  "name": "mean",
+                  "value": "mean",
+                  "description": "Computes the mean value across bands"
+                },
+                {
+                  "name": "std",
+                  "value": "std",
+                  "description": "Computes the standard deviation across bands"
+                },
+                {
+                  "name": "var",
+                  "value": "var",
+                  "description": "Computes the variance across bands"
                 }
               ]
             }
@@ -13944,7 +14013,51 @@
               "ylorbr",
               "ylorbr_r",
               "ylorrd",
-              "ylorrd_r"
+              "ylorrd_r",
+              "algae",
+              "algae_r",
+              "amp",
+              "amp_r",
+              "balance",
+              "balance_r",
+              "curl",
+              "curl_r",
+              "deep",
+              "deep_r",
+              "delta",
+              "delta_r",
+              "dense",
+              "dense_r",
+              "diff",
+              "diff_r",
+              "haline",
+              "haline_r",
+              "ice",
+              "ice_r",
+              "matter",
+              "matter_r",
+              "oxy",
+              "oxy_r",
+              "phase",
+              "phase_r",
+              "rain",
+              "rain_r",
+              "solar",
+              "solar_r",
+              "speed",
+              "speed_r",
+              "tarn",
+              "tarn_r",
+              "tempo",
+              "tempo_r",
+              "thermal",
+              "thermal_r",
+              "topo",
+              "topo_r",
+              "turbid",
+              "turbid_r",
+              "turbo",
+              "turbo_r"
             ],
             "x-ms-enum": {
               "name": "ColorMapNames",
@@ -15029,6 +15142,226 @@
                   "name": "ylorrd_r",
                   "value": "ylorrd_r",
                   "description": "Reversed YlOrRd colormap"
+                },
+                {
+                  "name": "algae",
+                  "value": "algae",
+                  "description": "Algae colormap - sequential green colormap for ocean data"
+                },
+                {
+                  "name": "algae_r",
+                  "value": "algae_r",
+                  "description": "Reversed algae colormap"
+                },
+                {
+                  "name": "amp",
+                  "value": "amp",
+                  "description": "Amp colormap - sequential magenta colormap for ocean data"
+                },
+                {
+                  "name": "amp_r",
+                  "value": "amp_r",
+                  "description": "Reversed amp colormap"
+                },
+                {
+                  "name": "balance",
+                  "value": "balance",
+                  "description": "Balance colormap - diverging blue to red for ocean data"
+                },
+                {
+                  "name": "balance_r",
+                  "value": "balance_r",
+                  "description": "Reversed balance colormap"
+                },
+                {
+                  "name": "curl",
+                  "value": "curl",
+                  "description": "Curl colormap - diverging teal to red for ocean data"
+                },
+                {
+                  "name": "curl_r",
+                  "value": "curl_r",
+                  "description": "Reversed curl colormap"
+                },
+                {
+                  "name": "deep",
+                  "value": "deep",
+                  "description": "Deep colormap - sequential blue colormap for ocean data"
+                },
+                {
+                  "name": "deep_r",
+                  "value": "deep_r",
+                  "description": "Reversed deep colormap"
+                },
+                {
+                  "name": "delta",
+                  "value": "delta",
+                  "description": "Delta colormap - diverging blue to green for ocean data"
+                },
+                {
+                  "name": "delta_r",
+                  "value": "delta_r",
+                  "description": "Reversed delta colormap"
+                },
+                {
+                  "name": "dense",
+                  "value": "dense",
+                  "description": "Dense colormap - sequential purple colormap for ocean data"
+                },
+                {
+                  "name": "dense_r",
+                  "value": "dense_r",
+                  "description": "Reversed dense colormap"
+                },
+                {
+                  "name": "diff",
+                  "value": "diff",
+                  "description": "Diff colormap - diverging colormap for difference data"
+                },
+                {
+                  "name": "diff_r",
+                  "value": "diff_r",
+                  "description": "Reversed diff colormap"
+                },
+                {
+                  "name": "haline",
+                  "value": "haline",
+                  "description": "Haline colormap - sequential blue to yellow for salinity data"
+                },
+                {
+                  "name": "haline_r",
+                  "value": "haline_r",
+                  "description": "Reversed haline colormap"
+                },
+                {
+                  "name": "ice",
+                  "value": "ice",
+                  "description": "Ice colormap - sequential blue colormap for ice data"
+                },
+                {
+                  "name": "ice_r",
+                  "value": "ice_r",
+                  "description": "Reversed ice colormap"
+                },
+                {
+                  "name": "matter",
+                  "value": "matter",
+                  "description": "Matter colormap - sequential yellow to brown for ocean data"
+                },
+                {
+                  "name": "matter_r",
+                  "value": "matter_r",
+                  "description": "Reversed matter colormap"
+                },
+                {
+                  "name": "oxy",
+                  "value": "oxy",
+                  "description": "Oxy colormap - diverging colormap for oxygen data"
+                },
+                {
+                  "name": "oxy_r",
+                  "value": "oxy_r",
+                  "description": "Reversed oxy colormap"
+                },
+                {
+                  "name": "phase",
+                  "value": "phase",
+                  "description": "Phase colormap - circular colormap for phase data"
+                },
+                {
+                  "name": "phase_r",
+                  "value": "phase_r",
+                  "description": "Reversed phase colormap"
+                },
+                {
+                  "name": "rain",
+                  "value": "rain",
+                  "description": "Rain colormap - sequential colormap for precipitation data"
+                },
+                {
+                  "name": "rain_r",
+                  "value": "rain_r",
+                  "description": "Reversed rain colormap"
+                },
+                {
+                  "name": "solar",
+                  "value": "solar",
+                  "description": "Solar colormap - sequential colormap for solar radiation data"
+                },
+                {
+                  "name": "solar_r",
+                  "value": "solar_r",
+                  "description": "Reversed solar colormap"
+                },
+                {
+                  "name": "speed",
+                  "value": "speed",
+                  "description": "Speed colormap - sequential colormap for velocity data"
+                },
+                {
+                  "name": "speed_r",
+                  "value": "speed_r",
+                  "description": "Reversed speed colormap"
+                },
+                {
+                  "name": "tarn",
+                  "value": "tarn",
+                  "description": "Tarn colormap - sequential colormap for topographic data"
+                },
+                {
+                  "name": "tarn_r",
+                  "value": "tarn_r",
+                  "description": "Reversed tarn colormap"
+                },
+                {
+                  "name": "tempo",
+                  "value": "tempo",
+                  "description": "Tempo colormap - sequential colormap for temporal data"
+                },
+                {
+                  "name": "tempo_r",
+                  "value": "tempo_r",
+                  "description": "Reversed tempo colormap"
+                },
+                {
+                  "name": "thermal",
+                  "value": "thermal",
+                  "description": "Thermal colormap - sequential colormap for temperature data"
+                },
+                {
+                  "name": "thermal_r",
+                  "value": "thermal_r",
+                  "description": "Reversed thermal colormap"
+                },
+                {
+                  "name": "topo",
+                  "value": "topo",
+                  "description": "Topo colormap - sequential colormap for topographic data"
+                },
+                {
+                  "name": "topo_r",
+                  "value": "topo_r",
+                  "description": "Reversed topo colormap"
+                },
+                {
+                  "name": "turbid",
+                  "value": "turbid",
+                  "description": "Turbid colormap - sequential colormap for turbidity data"
+                },
+                {
+                  "name": "turbid_r",
+                  "value": "turbid_r",
+                  "description": "Reversed turbid colormap"
+                },
+                {
+                  "name": "turbo",
+                  "value": "turbo",
+                  "description": "Turbo colormap - improved rainbow colormap"
+                },
+                {
+                  "name": "turbo_r",
+                  "value": "turbo_r",
+                  "description": "Reversed turbo colormap"
                 }
               ]
             },
@@ -21747,7 +22080,51 @@
         "ylorbr",
         "ylorbr_r",
         "ylorrd",
-        "ylorrd_r"
+        "ylorrd_r",
+        "algae",
+        "algae_r",
+        "amp",
+        "amp_r",
+        "balance",
+        "balance_r",
+        "curl",
+        "curl_r",
+        "deep",
+        "deep_r",
+        "delta",
+        "delta_r",
+        "dense",
+        "dense_r",
+        "diff",
+        "diff_r",
+        "haline",
+        "haline_r",
+        "ice",
+        "ice_r",
+        "matter",
+        "matter_r",
+        "oxy",
+        "oxy_r",
+        "phase",
+        "phase_r",
+        "rain",
+        "rain_r",
+        "solar",
+        "solar_r",
+        "speed",
+        "speed_r",
+        "tarn",
+        "tarn_r",
+        "tempo",
+        "tempo_r",
+        "thermal",
+        "thermal_r",
+        "topo",
+        "topo_r",
+        "turbid",
+        "turbid_r",
+        "turbo",
+        "turbo_r"
       ],
       "x-ms-enum": {
         "name": "ColorMapNames",
@@ -22832,6 +23209,226 @@
             "name": "ylorrd_r",
             "value": "ylorrd_r",
             "description": "Reversed YlOrRd colormap"
+          },
+          {
+            "name": "algae",
+            "value": "algae",
+            "description": "Algae colormap - sequential green colormap for ocean data"
+          },
+          {
+            "name": "algae_r",
+            "value": "algae_r",
+            "description": "Reversed algae colormap"
+          },
+          {
+            "name": "amp",
+            "value": "amp",
+            "description": "Amp colormap - sequential magenta colormap for ocean data"
+          },
+          {
+            "name": "amp_r",
+            "value": "amp_r",
+            "description": "Reversed amp colormap"
+          },
+          {
+            "name": "balance",
+            "value": "balance",
+            "description": "Balance colormap - diverging blue to red for ocean data"
+          },
+          {
+            "name": "balance_r",
+            "value": "balance_r",
+            "description": "Reversed balance colormap"
+          },
+          {
+            "name": "curl",
+            "value": "curl",
+            "description": "Curl colormap - diverging teal to red for ocean data"
+          },
+          {
+            "name": "curl_r",
+            "value": "curl_r",
+            "description": "Reversed curl colormap"
+          },
+          {
+            "name": "deep",
+            "value": "deep",
+            "description": "Deep colormap - sequential blue colormap for ocean data"
+          },
+          {
+            "name": "deep_r",
+            "value": "deep_r",
+            "description": "Reversed deep colormap"
+          },
+          {
+            "name": "delta",
+            "value": "delta",
+            "description": "Delta colormap - diverging blue to green for ocean data"
+          },
+          {
+            "name": "delta_r",
+            "value": "delta_r",
+            "description": "Reversed delta colormap"
+          },
+          {
+            "name": "dense",
+            "value": "dense",
+            "description": "Dense colormap - sequential purple colormap for ocean data"
+          },
+          {
+            "name": "dense_r",
+            "value": "dense_r",
+            "description": "Reversed dense colormap"
+          },
+          {
+            "name": "diff",
+            "value": "diff",
+            "description": "Diff colormap - diverging colormap for difference data"
+          },
+          {
+            "name": "diff_r",
+            "value": "diff_r",
+            "description": "Reversed diff colormap"
+          },
+          {
+            "name": "haline",
+            "value": "haline",
+            "description": "Haline colormap - sequential blue to yellow for salinity data"
+          },
+          {
+            "name": "haline_r",
+            "value": "haline_r",
+            "description": "Reversed haline colormap"
+          },
+          {
+            "name": "ice",
+            "value": "ice",
+            "description": "Ice colormap - sequential blue colormap for ice data"
+          },
+          {
+            "name": "ice_r",
+            "value": "ice_r",
+            "description": "Reversed ice colormap"
+          },
+          {
+            "name": "matter",
+            "value": "matter",
+            "description": "Matter colormap - sequential yellow to brown for ocean data"
+          },
+          {
+            "name": "matter_r",
+            "value": "matter_r",
+            "description": "Reversed matter colormap"
+          },
+          {
+            "name": "oxy",
+            "value": "oxy",
+            "description": "Oxy colormap - diverging colormap for oxygen data"
+          },
+          {
+            "name": "oxy_r",
+            "value": "oxy_r",
+            "description": "Reversed oxy colormap"
+          },
+          {
+            "name": "phase",
+            "value": "phase",
+            "description": "Phase colormap - circular colormap for phase data"
+          },
+          {
+            "name": "phase_r",
+            "value": "phase_r",
+            "description": "Reversed phase colormap"
+          },
+          {
+            "name": "rain",
+            "value": "rain",
+            "description": "Rain colormap - sequential colormap for precipitation data"
+          },
+          {
+            "name": "rain_r",
+            "value": "rain_r",
+            "description": "Reversed rain colormap"
+          },
+          {
+            "name": "solar",
+            "value": "solar",
+            "description": "Solar colormap - sequential colormap for solar radiation data"
+          },
+          {
+            "name": "solar_r",
+            "value": "solar_r",
+            "description": "Reversed solar colormap"
+          },
+          {
+            "name": "speed",
+            "value": "speed",
+            "description": "Speed colormap - sequential colormap for velocity data"
+          },
+          {
+            "name": "speed_r",
+            "value": "speed_r",
+            "description": "Reversed speed colormap"
+          },
+          {
+            "name": "tarn",
+            "value": "tarn",
+            "description": "Tarn colormap - sequential colormap for topographic data"
+          },
+          {
+            "name": "tarn_r",
+            "value": "tarn_r",
+            "description": "Reversed tarn colormap"
+          },
+          {
+            "name": "tempo",
+            "value": "tempo",
+            "description": "Tempo colormap - sequential colormap for temporal data"
+          },
+          {
+            "name": "tempo_r",
+            "value": "tempo_r",
+            "description": "Reversed tempo colormap"
+          },
+          {
+            "name": "thermal",
+            "value": "thermal",
+            "description": "Thermal colormap - sequential colormap for temperature data"
+          },
+          {
+            "name": "thermal_r",
+            "value": "thermal_r",
+            "description": "Reversed thermal colormap"
+          },
+          {
+            "name": "topo",
+            "value": "topo",
+            "description": "Topo colormap - sequential colormap for topographic data"
+          },
+          {
+            "name": "topo_r",
+            "value": "topo_r",
+            "description": "Reversed topo colormap"
+          },
+          {
+            "name": "turbid",
+            "value": "turbid",
+            "description": "Turbid colormap - sequential colormap for turbidity data"
+          },
+          {
+            "name": "turbid_r",
+            "value": "turbid_r",
+            "description": "Reversed turbid colormap"
+          },
+          {
+            "name": "turbo",
+            "value": "turbo",
+            "description": "Turbo colormap - improved rainbow colormap"
+          },
+          {
+            "name": "turbo_r",
+            "value": "turbo_r",
+            "description": "Reversed turbo colormap"
           }
         ]
       }
@@ -24113,7 +24710,8 @@
         "median",
         "stdev",
         "lastbandlow",
-        "lastbandhigh"
+        "lastbandhigh",
+        "count"
       ],
       "x-ms-enum": {
         "name": "PixelSelection",
@@ -24158,6 +24756,11 @@
             "name": "lastBandHigh",
             "value": "lastbandhigh",
             "description": "Select image with highest value in the last band"
+          },
+          {
+            "name": "count",
+            "value": "count",
+            "description": "Count available pixels across sources"
           }
         ]
       }
@@ -26525,7 +27128,17 @@
         "contours",
         "normalizedIndex",
         "terrarium",
-        "terrainrgb"
+        "terrainrgb",
+        "slope",
+        "cast",
+        "ceil",
+        "floor",
+        "min",
+        "max",
+        "median",
+        "mean",
+        "std",
+        "var"
       ],
       "x-ms-enum": {
         "name": "TerrainAlgorithm",
@@ -26555,6 +27168,56 @@
             "name": "terrainrgb",
             "value": "terrainrgb",
             "description": "Encodes elevation data in Mapbox TerrainRGB format"
+          },
+          {
+            "name": "slope",
+            "value": "slope",
+            "description": "Calculates slope from elevation data"
+          },
+          {
+            "name": "cast",
+            "value": "cast",
+            "description": "Casts data to a different type"
+          },
+          {
+            "name": "ceil",
+            "value": "ceil",
+            "description": "Rounds values up to the nearest integer"
+          },
+          {
+            "name": "floor",
+            "value": "floor",
+            "description": "Rounds values down to the nearest integer"
+          },
+          {
+            "name": "min",
+            "value": "min",
+            "description": "Computes the minimum value across bands"
+          },
+          {
+            "name": "max",
+            "value": "max",
+            "description": "Computes the maximum value across bands"
+          },
+          {
+            "name": "median",
+            "value": "median",
+            "description": "Computes the median value across bands"
+          },
+          {
+            "name": "mean",
+            "value": "mean",
+            "description": "Computes the mean value across bands"
+          },
+          {
+            "name": "std",
+            "value": "std",
+            "description": "Computes the standard deviation across bands"
+          },
+          {
+            "name": "var",
+            "value": "var",
+            "description": "Computes the variance across bands"
           }
         ]
       }
@@ -27781,7 +28444,11 @@
       "in": "query",
       "description": "Per asset band indexes (coma separated indexes, e.g. \"image|1,2,3\" means use the bands 1, 2, and 3 from the asset named \"image\")",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "assetBandIndices"
     },
@@ -27823,8 +28490,7 @@
       "in": "query",
       "description": "Overwrite internal Nodata value",
       "required": false,
-      "type": "number",
-      "format": "float",
+      "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "noData"
     },
@@ -28132,7 +28798,8 @@
       "required": false,
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "integer",
+        "format": "int32"
       },
       "collectionFormat": "csv",
       "x-ms-parameter-location": "method",
@@ -28432,7 +29099,51 @@
         "ylorbr",
         "ylorbr_r",
         "ylorrd",
-        "ylorrd_r"
+        "ylorrd_r",
+        "algae",
+        "algae_r",
+        "amp",
+        "amp_r",
+        "balance",
+        "balance_r",
+        "curl",
+        "curl_r",
+        "deep",
+        "deep_r",
+        "delta",
+        "delta_r",
+        "dense",
+        "dense_r",
+        "diff",
+        "diff_r",
+        "haline",
+        "haline_r",
+        "ice",
+        "ice_r",
+        "matter",
+        "matter_r",
+        "oxy",
+        "oxy_r",
+        "phase",
+        "phase_r",
+        "rain",
+        "rain_r",
+        "solar",
+        "solar_r",
+        "speed",
+        "speed_r",
+        "tarn",
+        "tarn_r",
+        "tempo",
+        "tempo_r",
+        "thermal",
+        "thermal_r",
+        "topo",
+        "topo_r",
+        "turbid",
+        "turbid_r",
+        "turbo",
+        "turbo_r"
       ],
       "x-ms-enum": {
         "name": "ColorMapNames",
@@ -29517,6 +30228,226 @@
             "name": "ylorrd_r",
             "value": "ylorrd_r",
             "description": "Reversed YlOrRd colormap"
+          },
+          {
+            "name": "algae",
+            "value": "algae",
+            "description": "Algae colormap - sequential green colormap for ocean data"
+          },
+          {
+            "name": "algae_r",
+            "value": "algae_r",
+            "description": "Reversed algae colormap"
+          },
+          {
+            "name": "amp",
+            "value": "amp",
+            "description": "Amp colormap - sequential magenta colormap for ocean data"
+          },
+          {
+            "name": "amp_r",
+            "value": "amp_r",
+            "description": "Reversed amp colormap"
+          },
+          {
+            "name": "balance",
+            "value": "balance",
+            "description": "Balance colormap - diverging blue to red for ocean data"
+          },
+          {
+            "name": "balance_r",
+            "value": "balance_r",
+            "description": "Reversed balance colormap"
+          },
+          {
+            "name": "curl",
+            "value": "curl",
+            "description": "Curl colormap - diverging teal to red for ocean data"
+          },
+          {
+            "name": "curl_r",
+            "value": "curl_r",
+            "description": "Reversed curl colormap"
+          },
+          {
+            "name": "deep",
+            "value": "deep",
+            "description": "Deep colormap - sequential blue colormap for ocean data"
+          },
+          {
+            "name": "deep_r",
+            "value": "deep_r",
+            "description": "Reversed deep colormap"
+          },
+          {
+            "name": "delta",
+            "value": "delta",
+            "description": "Delta colormap - diverging blue to green for ocean data"
+          },
+          {
+            "name": "delta_r",
+            "value": "delta_r",
+            "description": "Reversed delta colormap"
+          },
+          {
+            "name": "dense",
+            "value": "dense",
+            "description": "Dense colormap - sequential purple colormap for ocean data"
+          },
+          {
+            "name": "dense_r",
+            "value": "dense_r",
+            "description": "Reversed dense colormap"
+          },
+          {
+            "name": "diff",
+            "value": "diff",
+            "description": "Diff colormap - diverging colormap for difference data"
+          },
+          {
+            "name": "diff_r",
+            "value": "diff_r",
+            "description": "Reversed diff colormap"
+          },
+          {
+            "name": "haline",
+            "value": "haline",
+            "description": "Haline colormap - sequential blue to yellow for salinity data"
+          },
+          {
+            "name": "haline_r",
+            "value": "haline_r",
+            "description": "Reversed haline colormap"
+          },
+          {
+            "name": "ice",
+            "value": "ice",
+            "description": "Ice colormap - sequential blue colormap for ice data"
+          },
+          {
+            "name": "ice_r",
+            "value": "ice_r",
+            "description": "Reversed ice colormap"
+          },
+          {
+            "name": "matter",
+            "value": "matter",
+            "description": "Matter colormap - sequential yellow to brown for ocean data"
+          },
+          {
+            "name": "matter_r",
+            "value": "matter_r",
+            "description": "Reversed matter colormap"
+          },
+          {
+            "name": "oxy",
+            "value": "oxy",
+            "description": "Oxy colormap - diverging colormap for oxygen data"
+          },
+          {
+            "name": "oxy_r",
+            "value": "oxy_r",
+            "description": "Reversed oxy colormap"
+          },
+          {
+            "name": "phase",
+            "value": "phase",
+            "description": "Phase colormap - circular colormap for phase data"
+          },
+          {
+            "name": "phase_r",
+            "value": "phase_r",
+            "description": "Reversed phase colormap"
+          },
+          {
+            "name": "rain",
+            "value": "rain",
+            "description": "Rain colormap - sequential colormap for precipitation data"
+          },
+          {
+            "name": "rain_r",
+            "value": "rain_r",
+            "description": "Reversed rain colormap"
+          },
+          {
+            "name": "solar",
+            "value": "solar",
+            "description": "Solar colormap - sequential colormap for solar radiation data"
+          },
+          {
+            "name": "solar_r",
+            "value": "solar_r",
+            "description": "Reversed solar colormap"
+          },
+          {
+            "name": "speed",
+            "value": "speed",
+            "description": "Speed colormap - sequential colormap for velocity data"
+          },
+          {
+            "name": "speed_r",
+            "value": "speed_r",
+            "description": "Reversed speed colormap"
+          },
+          {
+            "name": "tarn",
+            "value": "tarn",
+            "description": "Tarn colormap - sequential colormap for topographic data"
+          },
+          {
+            "name": "tarn_r",
+            "value": "tarn_r",
+            "description": "Reversed tarn colormap"
+          },
+          {
+            "name": "tempo",
+            "value": "tempo",
+            "description": "Tempo colormap - sequential colormap for temporal data"
+          },
+          {
+            "name": "tempo_r",
+            "value": "tempo_r",
+            "description": "Reversed tempo colormap"
+          },
+          {
+            "name": "thermal",
+            "value": "thermal",
+            "description": "Thermal colormap - sequential colormap for temperature data"
+          },
+          {
+            "name": "thermal_r",
+            "value": "thermal_r",
+            "description": "Reversed thermal colormap"
+          },
+          {
+            "name": "topo",
+            "value": "topo",
+            "description": "Topo colormap - sequential colormap for topographic data"
+          },
+          {
+            "name": "topo_r",
+            "value": "topo_r",
+            "description": "Reversed topo colormap"
+          },
+          {
+            "name": "turbid",
+            "value": "turbid",
+            "description": "Turbid colormap - sequential colormap for turbidity data"
+          },
+          {
+            "name": "turbid_r",
+            "value": "turbid_r",
+            "description": "Reversed turbid colormap"
+          },
+          {
+            "name": "turbo",
+            "value": "turbo",
+            "description": "Turbo colormap - improved rainbow colormap"
+          },
+          {
+            "name": "turbo_r",
+            "value": "turbo_r",
+            "description": "Reversed turbo colormap"
           }
         ]
       },
@@ -29577,7 +30508,8 @@
         "median",
         "stdev",
         "lastbandlow",
-        "lastbandhigh"
+        "lastbandhigh",
+        "count"
       ],
       "x-ms-enum": {
         "name": "PixelSelection",
@@ -29622,6 +30554,11 @@
             "name": "lastBandHigh",
             "value": "lastbandhigh",
             "description": "Select image with highest value in the last band"
+          },
+          {
+            "name": "count",
+            "value": "count",
+            "description": "Count available pixels across sources"
           }
         ]
       },
@@ -29752,7 +30689,8 @@
       "in": "query",
       "description": "Buffer on each side of the given tile. It must be a multiple of `0.5`. Output\n**tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257,\n1.0 = 258x258).",
       "required": false,
-      "type": "string",
+      "type": "number",
+      "format": "float",
       "x-ms-parameter-location": "method"
     },
     "MosaicTileQueryParameters.collection": {
@@ -29787,7 +30725,8 @@
         "median",
         "stdev",
         "lastbandlow",
-        "lastbandhigh"
+        "lastbandhigh",
+        "count"
       ],
       "x-ms-enum": {
         "name": "PixelSelection",
@@ -29832,6 +30771,11 @@
             "name": "lastBandHigh",
             "value": "lastbandhigh",
             "description": "Select image with highest value in the last band"
+          },
+          {
+            "name": "count",
+            "value": "count",
+            "description": "Count available pixels across sources"
           }
         ]
       },
@@ -29944,7 +30888,8 @@
       "required": false,
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "integer",
+        "format": "int32"
       },
       "collectionFormat": "csv",
       "x-ms-parameter-location": "method",
@@ -30164,7 +31109,8 @@
       "required": false,
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "integer",
+        "format": "int32"
       },
       "collectionFormat": "csv",
       "x-ms-parameter-location": "method",
@@ -30190,7 +31136,17 @@
         "contours",
         "normalizedIndex",
         "terrarium",
-        "terrainrgb"
+        "terrainrgb",
+        "slope",
+        "cast",
+        "ceil",
+        "floor",
+        "min",
+        "max",
+        "median",
+        "mean",
+        "std",
+        "var"
       ],
       "x-ms-enum": {
         "name": "TerrainAlgorithm",
@@ -30220,6 +31176,56 @@
             "name": "terrainrgb",
             "value": "terrainrgb",
             "description": "Encodes elevation data in Mapbox TerrainRGB format"
+          },
+          {
+            "name": "slope",
+            "value": "slope",
+            "description": "Calculates slope from elevation data"
+          },
+          {
+            "name": "cast",
+            "value": "cast",
+            "description": "Casts data to a different type"
+          },
+          {
+            "name": "ceil",
+            "value": "ceil",
+            "description": "Rounds values up to the nearest integer"
+          },
+          {
+            "name": "floor",
+            "value": "floor",
+            "description": "Rounds values down to the nearest integer"
+          },
+          {
+            "name": "min",
+            "value": "min",
+            "description": "Computes the minimum value across bands"
+          },
+          {
+            "name": "max",
+            "value": "max",
+            "description": "Computes the maximum value across bands"
+          },
+          {
+            "name": "median",
+            "value": "median",
+            "description": "Computes the median value across bands"
+          },
+          {
+            "name": "mean",
+            "value": "mean",
+            "description": "Computes the mean value across bands"
+          },
+          {
+            "name": "std",
+            "value": "std",
+            "description": "Computes the standard deviation across bands"
+          },
+          {
+            "name": "var",
+            "value": "var",
+            "description": "Computes the variance across bands"
           }
         ]
       },
@@ -30239,7 +31245,8 @@
       "in": "query",
       "description": "Buffer on each side of the given tile. It must be a multiple of `0.5`. Output\n**tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257,\n1.0 = 258x258).",
       "required": false,
-      "type": "string",
+      "type": "number",
+      "format": "float",
       "x-ms-parameter-location": "method"
     },
     "TileMatrixSetQueryParameters.colorFormula": {

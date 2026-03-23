@@ -41,3 +41,10 @@ using TypeSpec.Versioning;
 @service(#{ title: "Microsoft Planetary Computer Pro" })
 @versioned(Versions)
 namespace Microsoft.PlanetaryComputer;
+
+// NOTE: The `api-version` query parameter is automatically injected as required
+// by Azure.Core.Foundations.Operation via the VersionParameterTrait. This is an
+// Azure API standard — the service accepts requests without it (required=false
+// in the service OpenAPI spec), but published Azure specs must declare it as
+// required per Azure API guidelines. See:
+// @azure-tools/typespec-azure-core/lib/foundations.tsp — ApiVersionParameter model

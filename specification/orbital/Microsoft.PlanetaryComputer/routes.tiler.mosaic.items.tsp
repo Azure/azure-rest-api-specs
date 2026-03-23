@@ -988,13 +988,15 @@ interface MosaicItemsAssetStatistics {
        */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
       @query("asset_bidx")
-      assetBandIndices?: string;
+      @typeChangedFrom(Versions.v2026_04_15, string)
+      assetBandIndices?: string[];
 
       /**
        * Overwrite internal Nodata value
        */
       @query("nodata")
-      noData?: float32;
+      @typeChangedFrom(Versions.v2026_04_15, float32)
+      noData?: string;
 
       /**
        * Apply internal Scale or Offset

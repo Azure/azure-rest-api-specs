@@ -40,7 +40,8 @@ model StatisticsQueryParameters {
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
   @query("c")
   @query(#{ explode: true })
-  categoriesPixels?: string[];
+  @typeChangedFrom(Versions.v2026_04_15, string[])
+  categoriesPixels?: int32[];
 
   /**
    * List of percentile values (default to [2, 98]).
@@ -92,7 +93,8 @@ model TileMatrixSetQueryParameters {
    * 1.0 = 258x258).
    */
   @query("buffer")
-  buffer?: string;
+  @typeChangedFrom(Versions.v2026_04_15, string)
+  buffer?: float32;
 
   /**
    * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -153,7 +155,8 @@ model SubDatasetQueryParameters {
    * The index of a subdataset band within the asset.
    */
   @query("subdataset_bands")
-  subdatasetBands?: string[];
+  @typeChangedFrom(Versions.v2026_04_15, string[])
+  subdatasetBands?: int32[];
 
   /**
    * Coordinate Reference System.
@@ -204,7 +207,7 @@ model CollectionSubDatasetQueryParameters {
    */
   @added(Versions.v2026_04_15)
   @query("subdataset_bands")
-  subdatasetBands?: string[];
+  subdatasetBands?: int32[];
 
   /**
    * Coordinate Reference System.

@@ -307,6 +307,12 @@ union PixelSelection {
    * Select image with highest value in the last band
    */
   lastBandHigh: "lastbandhigh",
+
+  /**
+   * Count available pixels across sources
+   */
+  @added(Versions.v2026_04_15)
+  count: "count",
 }
 
 /**
@@ -515,7 +521,8 @@ model AssetQueryParameters {
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
   @query("asset_bidx")
-  assetBandIndices?: string;
+  @typeChangedFrom(Versions.v2026_04_15, string)
+  assetBandIndices?: string[];
 
   /**
    * Asset as Band
@@ -527,7 +534,8 @@ model AssetQueryParameters {
    * Overwrite internal Nodata value
    */
   @query("nodata")
-  noData?: float32;
+  @typeChangedFrom(Versions.v2026_04_15, float32)
+  noData?: string;
 
   /**
    * Apply internal Scale or Offset
