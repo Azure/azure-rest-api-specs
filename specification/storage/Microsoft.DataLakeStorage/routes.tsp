@@ -373,7 +373,7 @@ interface Path {
   /** Uploads data to be appended to a file, flushes (writes) previously uploaded data to a file, sets properties for a file or directory, or sets access control for a file or directory. Data can only be appended to a file. Concurrent writes to the same file using multiple clients are not supported. This operation supports conditional HTTP requests. For more information, see [Specifying Conditional Headers for Blob Service Operations](https://learn.microsoft.com/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   @route("/{filesystem}/{path}")
   update is DataLakeOperation<
     {
@@ -409,7 +409,6 @@ interface Path {
       ...ContentMD5Parameter;
       ...LeaseIdOptionalParameter;
       ...CacheControlParameter;
-      ...ContentTypeParameter;
       ...ContentDispositionParameter;
       ...ContentEncodingParameter;
       ...ContentLanguageParameter;
@@ -515,8 +514,8 @@ interface Path {
       ...LeaseIdOptionalParameter;
 
       /** Optional. When this header is set to "true" and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4MB in size. */
-      @header("x-ms-range-get-content-md5")
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
+      @header("x-ms-range-get-content-md5")
       rangeGetContentMD5?: boolean;
 
       ...IfMatchParameter;
@@ -770,7 +769,7 @@ interface Path {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   @route("/{filesystem}/{path}?action=append")
   appendData is DataLakeOperationRequestBody<
     {
