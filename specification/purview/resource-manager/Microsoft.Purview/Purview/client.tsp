@@ -268,6 +268,10 @@ using Azure.ResourceManager;
   Azure.Core.uuid,
   "csharp"
 );
+@@alternateType(Microsoft.Purview.ScopeTenantIdParameters.scopeTenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
 @@alternateType(Microsoft.Purview.ManagedResources.eventHubNamespace,
   Azure.Core.armResourceIdentifier,
   "csharp"
