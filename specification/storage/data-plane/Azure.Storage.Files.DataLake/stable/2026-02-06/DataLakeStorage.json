@@ -732,6 +732,7 @@
               },
               "Content-MD5": {
                 "type": "string",
+                "format": "byte",
                 "description": "The MD5 hash of the content."
               },
               "Content-Range": {
@@ -1692,14 +1693,6 @@
             "x-ms-client-name": "cacheControl"
           },
           {
-            "name": "x-ms-content-type",
-            "in": "header",
-            "description": "Optional. Sets the blob's content type. If specified, this property is stored with the blob and returned with a read request.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "contentType"
-          },
-          {
             "name": "x-ms-content-disposition",
             "in": "header",
             "description": "Optional. Sets the blob's Content-Disposition header.",
@@ -1868,6 +1861,7 @@
               },
               "Content-MD5": {
                 "type": "string",
+                "format": "byte",
                 "description": "The MD5 hash of the content."
               },
               "Content-Range": {
@@ -2239,6 +2233,7 @@
               },
               "Content-MD5": {
                 "type": "string",
+                "format": "byte",
                 "description": "The MD5 hash of the content."
               },
               "Content-Range": {
@@ -2526,7 +2521,7 @@
             "description": "Optional. Filters results to paths within the specified directory. An error occurs if the directory does not exist.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "Path"
+            "x-ms-client-name": "path"
           },
           {
             "name": "recursive",
@@ -3712,6 +3707,7 @@
             "headers": {
               "Content-MD5": {
                 "type": "string",
+                "format": "byte",
                 "description": "The MD5 hash of the content."
               },
               "Date": {
@@ -4374,16 +4370,14 @@
           "description": "The expiry time.",
           "xml": {
             "name": "Expiry-Time"
-          },
-          "x-ms-client-name": "ExpiresOn"
+          }
         },
         "isSealed": {
           "type": "boolean",
           "description": "Whether the blob is sealed.",
           "xml": {
             "name": "Sealed"
-          },
-          "x-ms-client-name": "IsSealed"
+          }
         },
         "lastAccessedOn": {
           "type": "string",
@@ -4391,8 +4385,7 @@
           "description": "The last accessed time.",
           "xml": {
             "name": "LastAccessTime"
-          },
-          "x-ms-client-name": "LastAccessedOn"
+          }
         },
         "deleteTime": {
           "type": "string",
@@ -4429,7 +4422,7 @@
         ]
       }
     },
-    "FileSystem": {
+    "FileSystemItem": {
       "type": "object",
       "description": "Represents a filesystem.",
       "properties": {
@@ -4445,9 +4438,6 @@
           "type": "string",
           "description": "The entity tag."
         }
-      },
-      "xml": {
-        "name": "FileSystemItem"
       }
     },
     "FileSystemList": {
@@ -4458,7 +4448,7 @@
           "type": "array",
           "description": "The list of filesystems.",
           "items": {
-            "$ref": "#/definitions/FileSystem"
+            "$ref": "#/definitions/FileSystemItem"
           },
           "xml": {
             "wrapped": true
@@ -4665,71 +4655,6 @@
         ]
       }
     },
-    "Path": {
-      "type": "object",
-      "description": "Represents a path in a filesystem.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The path name."
-        },
-        "isDirectory": {
-          "type": "boolean",
-          "description": "Whether the path is a directory.",
-          "default": false
-        },
-        "lastModified": {
-          "type": "string",
-          "description": "The last modified time."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "The entity tag."
-        },
-        "contentLength": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The content length."
-        },
-        "owner": {
-          "type": "string",
-          "description": "The owner of the path."
-        },
-        "group": {
-          "type": "string",
-          "description": "The owning group of the path."
-        },
-        "permissions": {
-          "type": "string",
-          "description": "The POSIX access permissions."
-        },
-        "encryptionScope": {
-          "type": "string",
-          "description": "The name of the encryption scope under which the blob is encrypted.",
-          "xml": {
-            "name": "EncryptionScope"
-          }
-        },
-        "creationTime": {
-          "type": "string",
-          "description": "The creation time."
-        },
-        "expiryTime": {
-          "type": "string",
-          "description": "The expiry time."
-        },
-        "encryptionContext": {
-          "type": "string",
-          "description": "The encryption context.",
-          "xml": {
-            "name": "EncryptionContext"
-          }
-        }
-      },
-      "xml": {
-        "name": "PathItem"
-      }
-    },
     "PathExpiryOptions": {
       "type": "string",
       "description": "The path expiry options.",
@@ -4790,6 +4715,68 @@
         ]
       }
     },
+    "PathItem": {
+      "type": "object",
+      "description": "Represents a path in a filesystem.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The path name."
+        },
+        "isDirectory": {
+          "type": "boolean",
+          "description": "Whether the path is a directory.",
+          "default": false
+        },
+        "lastModified": {
+          "type": "string",
+          "description": "The last modified time."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "The entity tag."
+        },
+        "contentLength": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The content length."
+        },
+        "owner": {
+          "type": "string",
+          "description": "The owner of the path."
+        },
+        "group": {
+          "type": "string",
+          "description": "The owning group of the path."
+        },
+        "permissions": {
+          "type": "string",
+          "description": "The POSIX access permissions."
+        },
+        "encryptionScope": {
+          "type": "string",
+          "description": "The name of the encryption scope under which the blob is encrypted.",
+          "xml": {
+            "name": "EncryptionScope"
+          }
+        },
+        "creationTime": {
+          "type": "string",
+          "description": "The creation time."
+        },
+        "expiryTime": {
+          "type": "string",
+          "description": "The expiry time."
+        },
+        "encryptionContext": {
+          "type": "string",
+          "description": "The encryption context.",
+          "xml": {
+            "name": "EncryptionContext"
+          }
+        }
+      }
+    },
     "PathLeaseAction": {
       "type": "string",
       "description": "The lease action for Path_Lease.",
@@ -4840,7 +4827,7 @@
           "type": "array",
           "description": "The list of paths.",
           "items": {
-            "$ref": "#/definitions/Path"
+            "$ref": "#/definitions/PathItem"
           },
           "xml": {
             "wrapped": true
