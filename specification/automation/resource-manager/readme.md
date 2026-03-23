@@ -20,13 +20,13 @@ To see additional help and options, run:
 =======
 ### Basic Information
 These are the global settings for the Automation API.
-
+<!-- 
 ``` yaml
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
 tag: package-2024-10-23
-```
+``` -->
 
 ### Tag: package-2015-10
 
