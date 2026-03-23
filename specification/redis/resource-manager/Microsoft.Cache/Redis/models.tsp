@@ -1107,7 +1107,7 @@ model OperationListResult {
   value: Operation[];
 
   /**
-   * URL to get the next set of operation list results if there are any.
+   * URL to get the next set of operation list results if there are any .
    */
   @nextLink
   nextLink?: string;
