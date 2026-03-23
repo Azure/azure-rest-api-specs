@@ -710,3 +710,63 @@ op privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourc
   privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourceGroup,
   "go"
 );
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op replaceAvailableResourceGroupDelegationsOperationGroupList(
+  /**
+   * The location of the domain name.
+   */
+  @path
+  @segment("locations")
+  location: string,
+
+  /**
+   * The name of the resource group.
+   */
+  @path
+  @segment("resourceGroups")
+  resourceGroupName: string,
+
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  @body
+  body: void,
+): Microsoft.Network.AvailableDelegationsResult | Microsoft.Network.CloudError;
+
+@@override(AvailableResourceGroupDelegationsOperationGroup.list,
+  replaceAvailableResourceGroupDelegationsOperationGroupList,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op replaceprivateDnsZoneGroupsList(
+  /**
+   * The name of the private endpoint.
+   */
+  @path
+  @segment("privateEndpoints")
+  privateEndpointName: string,
+
+  /**
+   * The name of the resource group.
+   */
+  @path
+  @segment("resourceGroups")
+  resourceGroupName: string,
+
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  @body
+  body: void,
+): Azure.ResourceManager.ArmResponse<Microsoft.Network.PrivateDnsZoneGroupListResult> | Microsoft.Network.CloudError;
+
+@@override(Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsList,
+  replaceprivateDnsZoneGroupsList,
+  "go"
+);
