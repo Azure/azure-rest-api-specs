@@ -60,3 +60,8 @@ using Microsoft.AzureStackHCI;
   "default",
   "python"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(EdgeMachineMetadata.name,
+  "default",
+  "python"
+);
