@@ -154,6 +154,7 @@ using Azure.AI.Projects;
 @@convenientAPI(Agents.deleteAgent, false, "java");
 @@convenientAPI(Agents.deleteAgentVersion, false, "java");
 @@access(Agents.deleteAgent, Access.internal, "java");
+@@access(Agents.deleteAgentVersion, Access.internal, "java");
 
 @@convenientAPI(MemoryStores.deleteMemoryStore, false, "java");
 @@convenientAPI(MemoryStores.deleteScope, false, "java");
