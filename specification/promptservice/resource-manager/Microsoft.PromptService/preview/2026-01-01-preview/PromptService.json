@@ -788,6 +788,24 @@
         }
       }
     },
+    "AiProvider": {
+      "type": "string",
+      "description": "The AI provider associated with a container.",
+      "enum": [
+        "OpenAI"
+      ],
+      "x-ms-enum": {
+        "name": "AiProvider",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OpenAI",
+            "value": "OpenAI",
+            "description": "OpenAI provider."
+          }
+        ]
+      }
+    },
     "Container": {
       "type": "object",
       "description": "A container resource within a Prompt Service Account",
@@ -839,8 +857,22 @@
         },
         "provider": {
           "type": "string",
-          "description": "The AI provider associated with this container (e.g., OpenAI, Anthropic). \n  This is a free-form string used as blob metadata to avoid maintenance overhead as new providers are onboarded.",
-          "default": "OpenAI"
+          "description": "The AI provider associated with this container.",
+          "default": "OpenAI",
+          "enum": [
+            "OpenAI"
+          ],
+          "x-ms-enum": {
+            "name": "AiProvider",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "OpenAI",
+                "value": "OpenAI",
+                "description": "OpenAI provider."
+              }
+            ]
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
