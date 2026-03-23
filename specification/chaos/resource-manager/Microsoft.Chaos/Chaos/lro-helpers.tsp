@@ -86,3 +86,43 @@ op ArmResourceActionNoContentAsyncWithLocationResult<
   ArmLroLocationHeader<FinalResult = FinalResult> &
     Azure.Core.Foundations.RetryAfterHeader
 > | ErrorResponse;
+
+/**
+ * A long-running resource action that returns no body on completion (204 No Content).
+ * Uses Location header for polling with `final-state-via: location` pattern.
+ *
+ * Use this when:
+ * - The initial POST returns 202 Accepted
+ * - The operation completes with 204 No Content (no response body)
+ *
+ * @template Resource The resource being acted upon
+ * @template Request The request model for the action (usually void)
+ * @template BaseParameters Optional. Allows overriding the parameters for the operation
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Custom LRO operation with specific response codes"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for LRO extensions in OpenAPI output"
+@autoRoute
+@armResourceAction(Resource)
+@post
+@extension("x-ms-long-running-operation", true)
+@extension(
+  "x-ms-long-running-operation-options",
+  #{ `final-state-via`: "location" }
+)
+op ArmResourceActionNoBodyAsyncWithLocation<
+  Resource extends Azure.ResourceManager.Foundations.Resource,
+  Request extends TypeSpec.Reflection.Model | void,
+  BaseParameters extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>
+>(
+  ...ResourceInstanceParameters<Resource, BaseParameters>,
+  @bodyRoot body?: Request,
+): ArmAcceptedLroResponse<
+  "Resource operation accepted.",
+  ArmLroLocationHeader &
+    Azure.Core.Foundations.RetryAfterHeader
+> | {
+  @doc("The operation completed successfully with no content.")
+  @statusCode _: 204;
+} | ErrorResponse;
