@@ -43,10 +43,28 @@ model SignaturesOverrides extends WritableResource {
 
 @@doc(SignaturesOverrides.name, "Contains the name of the resource (default)");
 
+alias FirewallPolicyIdpsSignaturesOverridesListOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The name of the Firewall Policy. */
+    @path
+    @segment("firewallPolicies")
+    @key
+    firewallPolicyName: string;
+  },
+  {},
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/signatureOverrides",
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface FirewallPolicyIdpsSignaturesOverrides {
   /**
    * Returns all signatures overrides for a specific policy.
@@ -76,10 +94,13 @@ interface FirewallPolicyIdpsSignaturesOverrides {
   /**
    * Returns all signatures overrides objects for a specific policy as a list containing a single value.
    */
-  list is ArmResourceListByParent<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/signatureOverrides")
+  @get
+  list is FirewallPolicyIdpsSignaturesOverridesListOps.ActionSync<
     SignaturesOverrides,
-    Response = ArmResponse<SignaturesOverridesList>,
-    Error = CloudError
+    void,
+    ArmResponse<SignaturesOverridesList>,
+    OverrideErrorType = CloudError
   >;
 }
 

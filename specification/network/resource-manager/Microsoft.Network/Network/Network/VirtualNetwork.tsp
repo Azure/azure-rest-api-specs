@@ -144,7 +144,6 @@ interface EffectiveConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ListNetworkManagerEffectiveConnectivityConfigurations")
   @tag("NetworkManagerEffectiveConnectivityConfiguration")
-  @list
   listNetworkManagerEffectiveConnectivityConfigurations is ArmResourceActionSync<
     VirtualNetwork,
     QueryRequestOptions,
@@ -167,7 +166,6 @@ interface EffectiveConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ListNetworkManagerEffectiveSecurityAdminRules")
   @tag("NetworkManagerEffectiveSecurityAdminRules")
-  @list
   listNetworkManagerEffectiveSecurityAdminRules is ArmResourceActionSync<
     VirtualNetwork,
     QueryRequestOptions,

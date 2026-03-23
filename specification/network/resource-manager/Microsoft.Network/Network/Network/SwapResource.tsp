@@ -77,6 +77,35 @@ alias CloudServiceOps = Legacy.ExtensionOperations<
   }
 >;
 
+alias SwapResourceListOps = Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    @segment("resourceGroups")
+    groupName: string;
+
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    @segment("providers")
+    providerName: "microsoft.Compute";
+
+    /** The name of the cloud service. */
+    @path
+    @segment("cloudServices")
+    @key
+    resourceName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<SwapResource>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<SwapResource>;
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @armResourceOperations(#{ omitTags: true })
@@ -107,9 +136,12 @@ interface SwapResources {
    * Gets the list of SwapResource which identifies the slot type for the specified cloud service. The slot type on a cloud service can either be Staging or Production
    */
   @tag("VipSwap")
-  list is CloudServiceOps.List<
+  @action("cloudServiceSlots")
+  @get
+  list is SwapResourceListOps.ActionSync<
     SwapResource,
-    Response = ArmResponse<SwapResourceListResult>,
+    void,
+    ArmResponse<SwapResourceListResult>,
     ErrorType = CloudError
   >;
 }

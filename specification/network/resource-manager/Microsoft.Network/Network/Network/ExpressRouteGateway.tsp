@@ -34,6 +34,29 @@ model ExpressRouteGateway extends Resource {
   etag?: string;
 }
 
+alias ExpressRouteGatewaysListOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {},
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways",
+  }
+>;
+
+alias ExpressRouteGatewaysListBySubOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+  },
+  {},
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteGateways",
+  }
+>;
+
 alias ExpressRouteConnectionOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
@@ -109,22 +132,26 @@ interface ExpressRouteGateways {
    * Lists ExpressRoute gateways in a given resource group.
    */
   @tag("ExpressRouteGateways")
-  @autoRoute
-  listByResourceGroup is ArmResourceListByParent<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways")
+  @get
+  listByResourceGroup is ExpressRouteGatewaysListOps.ActionSync<
     ExpressRouteGateway,
-    Response = ArmResponse<ExpressRouteGatewayList>,
-    Error = CloudError
+    void,
+    ArmResponse<ExpressRouteGatewayList>,
+    OverrideErrorType = CloudError
   >;
 
   /**
    * Lists ExpressRoute gateways under a given subscription.
    */
   @tag("ExpressRouteGateways")
-  @autoRoute
-  listBySubscription is ArmListBySubscription<
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteGateways")
+  @get
+  listBySubscription is ExpressRouteGatewaysListBySubOps.ActionSync<
     ExpressRouteGateway,
-    Response = ArmResponse<ExpressRouteGatewayList>,
-    Error = CloudError
+    void,
+    ArmResponse<ExpressRouteGatewayList>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -180,7 +207,6 @@ interface ExpressRouteGateways {
    * Lists ExpressRouteConnections.
    */
   @tag("ExpressRouteConnections")
-  @list
   @get
   @action("expressRouteConnections")
   list is ArmResourceActionSync<

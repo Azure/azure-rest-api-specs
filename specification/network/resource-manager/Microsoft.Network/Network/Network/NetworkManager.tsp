@@ -143,7 +143,6 @@ interface NetworkManagers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ListActiveConnectivityConfigurations")
   @tag("NetworkManagerActiveConnectivityConfigurations")
-  @list
   listActiveConnectivityConfigurations is ArmResourceActionSync<
     NetworkManager,
     ActiveConfigurationParameter,
@@ -166,7 +165,6 @@ interface NetworkManagers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ListActiveSecurityAdminRules")
   @tag("NetworkManagerActiveConfigurations")
-  @list
   listActiveSecurityAdminRules is ArmResourceActionSync<
     NetworkManager,
     ActiveConfigurationParameter,
@@ -205,7 +203,6 @@ interface NetworkManagers {
    * Post to List of Network Manager Deployment Status.
    */
   @tag("NetworkManagers")
-  @list
   @action("listDeploymentStatus")
   networkManagerDeploymentStatusList is ArmResourceActionSync<
     NetworkManager,
