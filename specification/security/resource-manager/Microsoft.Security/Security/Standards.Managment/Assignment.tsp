@@ -54,7 +54,7 @@ interface Assignments {
   /**
    * Delete a standard assignment over a given scope
    */
-  delete is ArmResourceDeleteSync<Assignment>;
+  delete is ArmResourceDeleteSync<Assignment, Error = CloudError>;
 
   /**
    * Get a list of all relevant standardAssignments available for scope

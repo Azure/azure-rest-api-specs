@@ -4,7 +4,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/assignments/{assignmentId}'].delete.responses.default.schema__added` | added | `{"$ref":"../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorRespo...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/assignments/{assignmentId}'].delete.responses.default.schema__added` | added | `{"$ref":"#/definitions/CloudError"}` |
 
 ### Changes for `AssignmentPropertiesAdditionalData`
 
