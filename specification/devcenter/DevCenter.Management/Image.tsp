@@ -59,7 +59,8 @@ interface ImageOps
         @minLength(3)
         @maxLength(80)
         imageName: string,
-      }
+      },
+      ResourceName = "DevCenterImage"
     > {}
 
 @armResourceOperations
