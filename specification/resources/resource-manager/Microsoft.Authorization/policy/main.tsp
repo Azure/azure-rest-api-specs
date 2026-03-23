@@ -47,7 +47,8 @@ namespace Microsoft.Authorization;
  *
  * The preview version (v2026_01_01_preview) includes everything from the latest
  * stable version plus new preview-only resource types:
- * - PolicyEnrollment, PolicyExemption, Variable, VariableValue (marked with @added(Versions.v2026_01_01_preview))
+ * - PolicyExemption, Variable, VariableValue (marked with @added(Versions.v2025_12_01_preview))
+ * - PolicyEnrollment (marked with @added(Versions.v2026_01_01_preview))
  *
  * See https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/04-preview-after-stable/
  */

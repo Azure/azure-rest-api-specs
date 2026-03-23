@@ -63,14 +63,12 @@ union SelectorKind {
    * The selector kind to filter policies by the user principal ID.
    */
   @added(Versions.v2025_12_01_preview)
-  @added(Versions.v2026_01_01_preview)
   userPrincipalId: "userPrincipalId",
 
   /**
    * The selector kind to filter policies by the security group membership ID.
    */
   @added(Versions.v2025_12_01_preview)
-  @added(Versions.v2026_01_01_preview)
   groupPrincipalId: "groupPrincipalId",
 }
 
@@ -1296,10 +1294,9 @@ union ExemptionCategory {
 }
 
 /**
- * The option whether validate the exemption or PolicyEnrollment is at or under the assignment scope.
+ * The option to validate whether the exemption or enrollment is at or under the assignment scope.
  */
 @added(Versions.v2025_12_01_preview)
-@added(Versions.v2026_01_01_preview)
 union AssignmentScopeValidation {
   string,
 
@@ -1402,7 +1399,7 @@ model PolicyExemptionUpdateProperties {
 /**
  * The policy enrollment properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Policy resources are modeled without provisioningState to keep consistency with existing policy resource contracts"
 @added(Versions.v2026_01_01_preview)
 model PolicyEnrollmentProperties {
   /**

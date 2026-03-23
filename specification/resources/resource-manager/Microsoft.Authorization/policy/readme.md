@@ -927,10 +927,11 @@ directive:
     reason: "This is for specific properties that require extra processing to produce so only want to return on demand."
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: policyAssignments.json
-    reason: "Policy assignments can have a manged identity associated with them. This requires a location."
+    reason: "Policy assignments can have a managed identity associated with them. This requires a location."
   - suppress: GuidUsage
     from: preview/2026-01-01-preview/openapi.json
-    reason: "This is for a server side generated read only property."
+    reason: "policyAssignmentInstanceId is a server-generated, read-only GUID in the established service contract"
+    where: $.definitions["Azure.Core.uuid"].format
 ```
 
 ---
