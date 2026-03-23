@@ -5493,14 +5493,6 @@ model Pool {
 }
 
 /**
- * Error details associated with compute resource operations.
- */
-model RootError {
-  code?: string;
-  message?: string;
-}
-
-/**
  * Properties of a compute resource.
  */
 model ComputeProperties {
@@ -5529,7 +5521,7 @@ model ComputeProperties {
    * Error details for the compute resource.
    */
   @visibility(Lifecycle.Read)
-  errors?: RootError[];
+  errors?: Azure.ResourceManager.CommonTypes.ErrorDetail[];
 
   /**
    * Creation time of the compute resource.
