@@ -6,20 +6,33 @@ using Data.Tables;
 
 namespace ClientCustomizations;
 
-@@clientNamespace(Data.Tables, "Azure.Data.Tables._generated", "python");
-@@clientNamespace(Data.Tables.Service,
-  "Azure.Data.Tables._generated",
+// --- Client naming ---
+// Rename client to "AzureTable*" to match old AutoRest naming.
+// NOTE: The Python emitter always appends "Client" suffix, so this produces
+// "AzureTableClient" / "AzureTableClientConfiguration" instead of
+// "AzureTable" / "AzureTableConfiguration". The convenience layer handles the difference.
+@@clientName(Data.Tables, "AzureTable", "python");
+
+// --- Model renames to match old generated code ---
+@@clientName(Data.Tables.TablesServiceError, "TableServiceError", "python");
+
+// --- Parameter renames to match old generated code ---
+// The "Prefer" header parameter is named "prefer" in TypeSpec but was
+// "response_preference" in the old AutoRest-generated code
+@@clientName(Data.Tables.Table.create::parameters.prefer,
+  "responsePreference",
   "python"
 );
-@@clientNamespace(Data.Tables.Table, "Azure.Data.Tables._generated", "python");
-@@clientNamespace(ClientCustomizations,
-  "Azure.Data.Tables._generated",
+@@clientName(Data.Tables.Table.insertEntity::parameters.prefer,
+  "responsePreference",
   "python"
 );
 
+// --- AccessPolicy: use string types for start/expiry (not datetime) ---
 @@alternateType(Data.Tables.AccessPolicy.start, string, "python");
 @@alternateType(Data.Tables.AccessPolicy.expiry, string, "python");
 
+// --- SignedIdentifier: override to match old structure ---
 /** The signed identifier. */
 model SignedIdentifier {
   /** The unique ID for the signed identifier. */
