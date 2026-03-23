@@ -548,3 +548,13 @@ union RoleAssignmentStatus {
    */
   Pending: "Pending",
 }
+
+/**
+ * Request body for fixing resource permissions.
+ */
+model FixResourcePermissionsRequest {
+  /**
+   * Optional value that indicates whether to run a "dry run" of fixing resource permissions.
+   */
+  whatIf?: boolean;
+}

@@ -42,3 +42,9 @@
   rules:
     - LatestVersionOfCommonTypesMustBeUsed
   reason: TypeSpec @armCommonTypesVersion is a namespace-level setting. Upgrading to v6 would change ManagedServiceIdentity model structure in already-shipped API versions, introducing breaking changes. Remaining v5 LocationParameter references are a known TypeSpec autorest emitter limitation.
+- tool: LintDiff
+  paths:
+    - preview/2026-05-01-preview/openapi.json
+  rules:
+    - PathForTrackedResourceTypes
+  reason: WorkspaceOperationResults is an LRO polling endpoint (final-state-via location), not a resource CRUD path. It is subscription-scoped by design because it serves as a shared polling endpoint for all workspace async operations across resource groups.

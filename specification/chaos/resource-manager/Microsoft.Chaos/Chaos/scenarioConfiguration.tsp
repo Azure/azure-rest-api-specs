@@ -85,14 +85,7 @@ interface ScenarioConfigurations {
    */
   fixResourcePermissions is ArmResourceActionNoResponseContentAsync<
     ScenarioConfiguration,
-    Parameters = {
-      /**
-       * Optional value that indicates whether to run a "dry run" of fixing resource permissions.
-       */
-      @query("whatIf")
-      whatIf?: boolean;
-    },
-    Request = void
+    FixResourcePermissionsRequest
   >;
 
   /**
