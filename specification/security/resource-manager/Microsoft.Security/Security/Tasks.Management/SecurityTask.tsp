@@ -24,7 +24,7 @@ model SecurityTask
   >;
 }
 
-alias SecurityTaskOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+alias SecurityTaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
@@ -41,14 +41,14 @@ alias SecurityTaskOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     ascLocation: string;
   },
-  {},
   {
     /** Name of the task object, will be a GUID */
     @path
     @segment("tasks")
     @key
     taskName: string;
-  }
+  },
+  {}
 >;
 
 alias SecurityTaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -82,7 +82,7 @@ interface SecurityTasks {
   @tag("Tasks")
   getSubscriptionLevelTask is SecurityTaskOps.Read<
     SecurityTask,
-    ErrorType = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -99,14 +99,13 @@ interface SecurityTasks {
       $filter?: string;
     },
     Response = ArmResponse<SecurityTaskList>,
-    ErrorType = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
   @tag("Tasks")
-  @action("{taskUpdateActionType}")
   @route("/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}")
   updateSubscriptionLevelTaskState is SecurityTaskBuildingOps.ActionSync<
     SecurityTask,
