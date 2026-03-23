@@ -1,6 +1,6 @@
 {
-  "title": "Jobs_List_MaximumSet",
-  "operationId": "Jobs_List",
+  "title": "Training_Jobs_List_MaximumSet",
+  "operationId": "Training_Jobs_List",
   "parameters": {
     "api-version": "v1",
     "jobType": "Command",
@@ -21,7 +21,7 @@
             "properties": {
               "jobType": "Command",
               "command": "python train.py --epochs 10",
-              "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
+              "environmentImageReference": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
               "displayName": "My Training Job",
               "description": "A sample command job for training",
               "tags": {
@@ -30,7 +30,7 @@
               "properties": {
                 "experimentName": "my-experiment"
               },
-              "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
+              "compute": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
               "resources": {
                 "instanceCount": 1,
                 "instanceType": "Standard_NC6"

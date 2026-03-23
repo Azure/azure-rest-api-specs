@@ -29,66 +29,69 @@ alias JobsFilterQueryParams = {
 
 alias JobOperations = FoundryAzureOperations<{}>;
 
-@tag("Jobs")
-interface Jobs {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
-  @doc("List Jobs.")
-  @Rest.listsResource(Job)
-  list is Azure.Core.Foundations.ResourceList<
-    Job,
-    JobsFilterQueryParams & JobsPreviewHeader,
-    Azure.Core.Page<Job>
-  >;
+@route("/training")
+namespace Training {
+  @tag("Training")
+  interface Jobs {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
+    @doc("List Jobs.")
+    @Rest.listsResource(Job)
+    list is Azure.Core.Foundations.ResourceList<
+      Job,
+      JobsFilterQueryParams & JobsPreviewHeader,
+      Azure.Core.Page<Job>
+    >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
-  @doc("Get a Job by name.")
-  @get
-  get is Azure.Core.Foundations.ResourceOperation<
-    Job,
-    {
-      ...JobsPreviewHeader;
-    },
-    Azure.Core.Foundations.ResourceOkResponse<Job>
-  >;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
+    @doc("Get a Job by name.")
+    @get
+    get is Azure.Core.Foundations.ResourceOperation<
+      Job,
+      {
+        ...JobsPreviewHeader;
+      },
+      Azure.Core.Foundations.ResourceOkResponse<Job>
+    >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT create-or-update pattern required by the Job API wire format"
-  @doc("Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.")
-  @put
-  createOrUpdate is Azure.Core.Foundations.ResourceOperation<
-    Job,
-    {
-      ...JobsPreviewHeader;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT create-or-update pattern required by the Job API wire format"
+    @doc("Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.")
+    @put
+    createOrUpdate is Azure.Core.Foundations.ResourceOperation<
+      Job,
+      {
+        ...JobsPreviewHeader;
 
-      @doc("The job to create or update.")
-      @bodyRoot
-      body: Job;
-    },
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<Job>
-  >;
+        @doc("The job to create or update.")
+        @bodyRoot
+        body: Job;
+      },
+      Azure.Core.Foundations.ResourceCreatedOrOkResponse<Job>
+    >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Delete returns 202/204 with no body"
-  @doc("Delete a Job by name.")
-  @delete
-  delete is Azure.Core.Foundations.ResourceOperation<
-    Job,
-    {
-      ...JobsPreviewHeader;
-    },
-    Http.AcceptedResponse | Http.NoContentResponse
-  >;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO delete returns 202 with Location header for polling, or 204 when job not found"
+    #suppress "@azure-tools/typespec-azure-core/no-response-body" "Delete LRO returns 202 with Location header, 204 with no body"
+    @doc("Delete a Job by name. Returns 202 Accepted with a Location header to poll for completion, or 204 if the job does not exist.")
+    @delete
+    beginDelete is Azure.Core.Foundations.ResourceOperation<
+      Job,
+      {
+        ...JobsPreviewHeader;
+      },
+      JobDeleteAcceptedResponse | Http.NoContentResponse
+    >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Cancel action uses ResourceAction with no response body"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Cancel returns 200/202 with no body"
-  @doc("Cancel a Job by name.")
-  @post
-  @Rest.action("cancel")
-  @actionSeparator("/")
-  cancel is Azure.Core.Foundations.ResourceOperation<
-    Job,
-    {
-      ...JobsPreviewHeader;
-    },
-    Http.OkResponse | Http.AcceptedResponse
-  >;
-}
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO cancel returns 200 synchronously or 202 with Location header for async polling"
+    #suppress "@azure-tools/typespec-azure-core/no-response-body" "Cancel LRO returns 200 or 202 with Location header, no body"
+    @doc("Cancel a Job by name. Returns 200 if cancelled immediately, or 202 Accepted with a Location header to poll for completion.")
+    @post
+    @Rest.action("cancel")
+    @actionSeparator("/")
+    beginCancel is Azure.Core.Foundations.ResourceOperation<
+      Job,
+      {
+        ...JobsPreviewHeader;
+      },
+      Http.OkResponse | JobCancelAcceptedResponse
+    >;
+  }
+} // namespace Training

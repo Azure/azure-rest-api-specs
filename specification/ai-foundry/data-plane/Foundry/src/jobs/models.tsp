@@ -1,6 +1,8 @@
 import "../common/models.tsp";
 import "../common/service.tsp";
 
+using TypeSpec.Http;
+
 namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
@@ -41,6 +43,40 @@ model TensorFlowDistribution extends DistributionConfiguration {
   parameterServerCount?: int32;
 }
 
+@doc("Enum to determine the input data delivery mode.")
+union InputDeliveryMode {
+  string,
+
+  @doc("Read-only mount mode.")
+  ReadOnlyMount: "ReadOnlyMount",
+
+  @doc("Read-write mount mode.")
+  ReadWriteMount: "ReadWriteMount",
+
+  @doc("Download mode.")
+  Download: "Download",
+
+  @doc("Direct mode.")
+  Direct: "Direct",
+
+  @doc("Eval mount mode.")
+  EvalMount: "EvalMount",
+
+  @doc("Eval download mode.")
+  EvalDownload: "EvalDownload",
+}
+
+@doc("Output data delivery mode.")
+union OutputDeliveryMode {
+  string,
+
+  @doc("Read-write mount mode.")
+  ReadWriteMount: "ReadWriteMount",
+
+  @doc("Upload mode.")
+  Upload: "Upload",
+}
+
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
 @doc("Mapping of input data bindings used in the job.")
 @discriminator("jobInputType")
@@ -54,31 +90,31 @@ model JobInput {
 
 @doc("Uri file job input.")
 model UriFileJobInput extends JobInput {
-  @doc("Specifies the type of job.")
+  @doc("Specifies the type of job input.")
   jobInputType: "uri_file";
 
   @doc("Input Asset URI.")
   uri: string;
 
   @doc("Input Asset Delivery Mode.")
-  mode?: string;
+  mode?: InputDeliveryMode;
 }
 
 @doc("Uri folder job input.")
 model UriFolderJobInput extends JobInput {
-  @doc("Specifies the type of job.")
+  @doc("Specifies the type of job input.")
   jobInputType: "uri_folder";
 
   @doc("Input Asset URI.")
   uri: string;
 
   @doc("Input Asset Delivery Mode.")
-  mode?: string;
+  mode?: InputDeliveryMode;
 }
 
 @doc("Literal input type.")
 model LiteralJobInput extends JobInput {
-  @doc("Specifies the type of job.")
+  @doc("Specifies the type of job input.")
   jobInputType: "literal";
 
   @doc("Literal value for the input.")
@@ -98,14 +134,14 @@ model JobOutput {
 
 @doc("Uri file job output.")
 model UriFileJobOutput extends JobOutput {
-  @doc("Specifies the type of job.")
+  @doc("Specifies the type of job output.")
   jobOutputType: "uri_file";
 
   @doc("Output Asset URI.")
   uri?: string;
 
   @doc("Output Asset Delivery Mode.")
-  mode?: string;
+  mode?: OutputDeliveryMode;
 
   @doc("Name of the output data asset to register.")
   assetName?: string;
@@ -113,14 +149,14 @@ model UriFileJobOutput extends JobOutput {
 
 @doc("Uri folder job output.")
 model UriFolderJobOutput extends JobOutput {
-  @doc("Specifies the type of job.")
+  @doc("Specifies the type of job output.")
   jobOutputType: "uri_folder";
 
   @doc("Output Asset URI.")
   uri?: string;
 
   @doc("Output Asset Delivery Mode.")
-  mode?: string;
+  mode?: OutputDeliveryMode;
 
   @doc("Name of the output data asset to register.")
   assetName?: string;
@@ -251,7 +287,7 @@ model CommandJob extends JobProperties {
   command: string;
 
   @doc("ACR path of environment.")
-  environmentId: string;
+  environmentImageReference: string;
 
   @doc("Display name of job.")
   displayName?: string;
@@ -266,10 +302,10 @@ model CommandJob extends JobProperties {
   properties?: Record<string>;
 
   @doc("Code asset reference.")
-  codeId?: string;
+  code?: string;
 
   @doc("Compute resource ID.")
-  computeId: string;
+  compute: string;
 
   @doc("Mapping of input data bindings used in the job.")
   inputs?: Record<JobInput>;
@@ -326,6 +362,32 @@ model Job {
   @doc("Metadata pertaining to creation and last modification of the resource.")
   @visibility(Lifecycle.Read)
   systemData?: JobSystemData;
+}
+
+@doc("Response returned when a job delete operation is accepted asynchronously.")
+model JobDeleteAcceptedResponse {
+  @statusCode statusCode: 202;
+
+  @doc("URL to poll for the status of the delete operation.")
+  @header("Location")
+  location: string;
+
+  @doc("Suggested delay in seconds before polling.")
+  @header("Retry-After")
+  retryAfter?: int32;
+}
+
+@doc("Response returned when a job cancel operation is accepted asynchronously.")
+model JobCancelAcceptedResponse {
+  @statusCode statusCode: 202;
+
+  @doc("URL to poll for the status of the cancel operation.")
+  @header("Location")
+  location: string;
+
+  @doc("Suggested delay in seconds before polling.")
+  @header("Retry-After")
+  retryAfter?: int32;
 }
 
 @doc("Specifies which jobs to include in a list result based on their lifecycle state.")

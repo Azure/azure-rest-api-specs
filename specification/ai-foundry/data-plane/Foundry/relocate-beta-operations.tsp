@@ -76,9 +76,8 @@ interface Toolsets {}
 @@clientLocation(Azure.AI.Projects.Toolsets.listToolsets, Toolsets);
 @@clientLocation(Azure.AI.Projects.Toolsets.deleteToolset, Toolsets);
 
-interface Jobs {}
-@@clientLocation(Azure.AI.Projects.Jobs.list, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.get, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.createOrUpdate, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.delete, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.cancel, Jobs);
+@operationGroup
+namespace Training {
+  @operationGroup
+  interface Jobs {}
+}
