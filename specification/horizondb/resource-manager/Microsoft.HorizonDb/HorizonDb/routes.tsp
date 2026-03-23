@@ -106,21 +106,21 @@ interface HorizonDbPrivateEndpointConnections {
   @doc("Gets a private endpoint connection")
   get is HorizonDbPrivateEndpointOperations.Read<
     HorizonDbCluster,
-    HorizonDbPrivateEndpointConnection
+    PrivateEndpointConnectionResource
   >;
 
   @doc("Lists private endpoint connections in a HorizonDb cluster")
   list is HorizonDbPrivateEndpointOperations.ListByParent<
     HorizonDbCluster,
-    HorizonDbPrivateEndpointConnection
+    PrivateEndpointConnectionResource
   >;
 
   @doc("Updates a private endpoint connection")
-  update is HorizonDbPrivateEndpointOperations.CustomPatchAsync<HorizonDbPrivateEndpointConnection>;
+  update is HorizonDbPrivateEndpointOperations.CustomPatchAsync<PrivateEndpointConnectionResource>;
 
   @doc("Deletes a private endpoint connection")
   delete is HorizonDbPrivateEndpointOperations.DeleteAsync<
-    HorizonDbPrivateEndpointConnection,
+    PrivateEndpointConnectionResource,
     Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;

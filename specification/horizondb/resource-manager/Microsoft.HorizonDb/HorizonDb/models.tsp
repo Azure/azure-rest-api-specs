@@ -63,9 +63,6 @@ model HorizonDbFirewallRule
 }
 
 @parentResource(HorizonDbCluster)
-model HorizonDbPrivateEndpointConnection is PrivateEndpointConnectionResource;
-
-@parentResource(HorizonDbCluster)
 model HorizonDbPrivateLinkResource
   is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
   @doc("The name of the private link resource")
