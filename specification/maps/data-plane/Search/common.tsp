@@ -433,5 +433,5 @@ model ErrorAdditionalInfo {
    * The additional info.
    */
   @visibility(Lifecycle.Read)
-  info?: Record<unknown>;
+  info?: Record<string>;
 }

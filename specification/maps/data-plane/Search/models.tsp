@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 namespace MapsSearch;
 
 /**
- * Specifies the `GeoJSON` type. The only supported object type is
- * `FeatureCollection`. For more information, see [RFC
- * 7946](https://www.rfc-editor.org/rfc/rfc7946).
+ * Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
  */
 union FeatureCollectionEnum {
   string,
@@ -36,51 +34,26 @@ union FeatureTypeEnum {
 }
 
 /**
- * The level of confidence that the geocoded location result is a match. Use this
- * value with the match code to determine for more complete information about the
- * match.
+ * The level of confidence that the geocoded location result is a match. Use this value with the match code to determine for more complete information about the match.
  *
- * The confidence of a geocoded location is based on many factors including the
- * relative importance of the geocoded location and the user’s location, if
- * specified.
+ * The confidence of a geocoded location is based on many factors including the relative importance of the geocoded location and the user’s location, if specified.
  */
 union ConfidenceEnum {
   string,
 
   /**
-   * If the confidence is set to `High`, one or more strong matches were found.
-   * Multiple `High` confidence matches are sorted in ranked order by importance
-   * when applicable. For example, landmarks have importance but addresses do not.
+   * If the confidence is set to `High`, one or more strong matches were found. Multiple `High` confidence matches are sorted in ranked order by importance when applicable. For example, landmarks have importance but addresses do not.
    *
-   * If a request includes a location or a view, then the ranking may change
-   * appropriately. For example, a location query for "Paris" returns "Paris,
-   * France" and "Paris, TX" both with `High` confidence. "Paris, France" is always
-   * ranked first due to importance unless a user location indicates that the user
-   * is in or very close to Paris, TX or the map view indicates that the user is
-   * searching in that area.
+   * If a request includes a location or a view, then the ranking may change appropriately. For example, a location query for "Paris" returns "Paris, France" and "Paris, TX" both with `High` confidence. "Paris, France" is always ranked first due to importance unless a user location indicates that the user is in or very close to Paris, TX or the map view indicates that the user is searching in that area.
    */
   High: "High",
 
   /**
-   * In some situations, the returned match may not be at the same level as the
-   * information provided in the request. For example, a request may specify address
-   * information and the geocode service may only be able to match a postal code. In
-   * this case, if the geocode service has a confidence that the postal code matches
-   * the data, the confidence is set to `Medium` and the match code is set to
-   * `UpHierarchy` to specify that it could not match all of the information and had
-   * to search up-hierarchy.
+   * In some situations, the returned match may not be at the same level as the information provided in the request. For example, a request may specify address information and the geocode service may only be able to match a postal code. In this case, if the geocode service has a confidence that the postal code matches the data, the confidence is set to `Medium` and the match code is set to `UpHierarchy` to specify that it could not match all of the information and had to search up-hierarchy.
    *
-   * If the location information in the query is ambiguous, and there is no
-   * additional information to rank the locations (such as user location or the
-   * relative importance of the location), the confidence is set to `Medium`. For
-   * example, a location query for "148th Ave, Bellevue" may return "148th Ave SE"
-   * and "148th Ave NE" both with `Medium` confidence.
+   * If the location information in the query is ambiguous, and there is no additional information to rank the locations (such as user location or the relative importance of the location), the confidence is set to `Medium`. For example, a location query for "148th Ave, Bellevue" may return "148th Ave SE" and "148th Ave NE" both with `Medium` confidence.
    *
-   * If the location information in the query does not provide enough information to
-   * geocode a specific location, a less precise location value may be returned and
-   * the confidence is set to `Medium`. For example, if an address is provided, but
-   * a match is not found for the house number, the geocode result with a Roadblock
-   * entity type may be returned.
+   * If the location information in the query does not provide enough information to geocode a specific location, a less precise location value may be returned and the confidence is set to `Medium`. For example, if an address is provided, but a match is not found for the house number, the geocode result with a Roadblock entity type may be returned.
    */
   Medium: "Medium",
 
@@ -90,6 +63,9 @@ union ConfidenceEnum {
   Low: "Low",
 }
 
+/**
+ * An enum representing the match code.
+ */
 union MatchCodesEnum {
   string,
 
@@ -121,8 +97,7 @@ union CalculationMethodEnum {
   Interpolation: "Interpolation",
 
   /**
-   * The geocode point was matched to a point on a road using interpolation with an
-   * additional offset to shift the point to the side of the street.
+   * The geocode point was matched to a point on a road using interpolation with an additional offset to shift the point to the side of the street.
    */
   InterpolationOffset: "InterpolationOffset",
 
@@ -137,6 +112,9 @@ union CalculationMethodEnum {
   Rooftop: "Rooftop",
 }
 
+/**
+ * An enum representing the usage type.
+ */
 union UsageTypeEnum {
   string,
 
@@ -151,6 +129,9 @@ union UsageTypeEnum {
   Route: "Route",
 }
 
+/**
+ * An enum representing the boundary result type.
+ */
 union BoundaryResultTypeEnum {
   string,
 
@@ -160,8 +141,7 @@ union BoundaryResultTypeEnum {
   countryRegion: "countryRegion",
 
   /**
-   * First administrative level within the country/region level, such as a state or
-   * a province.
+   * First administrative level within the country/region level, such as a state or a province.
    */
   adminDistrict: "adminDistrict",
 
@@ -176,26 +156,22 @@ union BoundaryResultTypeEnum {
   postalCode: "postalCode",
 
   /**
-   * The next largest post code category after postalCode that is created by
-   * aggregating postalCode areas.
+   * The next largest post code category after postalCode that is created by aggregating postalCode areas.
    */
   postalCode2: "postalCode2",
 
   /**
-   * The next largest post code category after postalCode2 that is created by
-   * aggregating postalCode2 areas.
+   * The next largest post code category after postalCode2 that is created by aggregating postalCode2 areas.
    */
   postalCode3: "postalCode3",
 
   /**
-   * The next largest post code category after postalCode3 that is created by
-   * aggregating postalCode3 areas.
+   * The next largest post code category after postalCode3 that is created by aggregating postalCode3 areas.
    */
   postalCode4: "postalCode4",
 
   /**
-   * A section of a populated place that is typically well-known, but often with
-   * indistinct boundaries.
+   * A section of a populated place that is typically well-known, but often with indistinct boundaries.
    */
   neighborhood: "neighborhood",
 
@@ -205,6 +181,9 @@ union BoundaryResultTypeEnum {
   locality: "locality",
 }
 
+/**
+ * An enum representing the resolution of the boundary geometry returned.
+ */
 union ResolutionEnum {
   string,
 
@@ -229,6 +208,9 @@ union ResolutionEnum {
   huge: "huge",
 }
 
+/**
+ * An enum representing the reverse geocoding result type.
+ */
 union ReverseGeocodingResultTypeEnum {
   string,
 
@@ -268,6 +250,9 @@ union ReverseGeocodingResultTypeEnum {
   CountryRegion: "CountryRegion",
 }
 
+/**
+ * An enum representing the result type.
+ */
 union ResultTypeEnum {
   string,
 
@@ -324,8 +309,7 @@ union AutocompleteResultTypeGroupsEnum {
   Address: "Address",
 
   /**
-   * All other types belong to the Place type group. These may include entities such
-   * as AdminDivision1, Neighborhood, PopulatedPlace, and more.
+   * All other types belong to the Place type group. These may include entities such as AdminDivision1, Neighborhood, PopulatedPlace, and more.
    */
   Place: "Place",
 }
@@ -733,21 +717,24 @@ union AutocompleteResultTypeEnum {
  */
 model GeocodingResponse {
   /**
-   * Specifies the `GeoJSON` type. The only supported object type is
-   * `FeatureCollection`. For more information, see [RFC
-   * 7946](https://www.rfc-editor.org/rfc/rfc7946).
+   * Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
    */
   type?: FeatureCollectionEnum;
 
+  /**
+   * An array of features returned from the query.
+   */
   features?: FeaturesItem[];
 
   /**
-   * The is the link to the next page of the features returned. If it's the last
-   * page, no this field.
+   * The is the link to the next page of the features returned. If it's the last page, no this field.
    */
   nextLink?: string;
 }
 
+/**
+ * A feature object.
+ */
 model FeaturesItem {
   /**
    * The type of a feature must be Feature.
@@ -759,79 +746,52 @@ model FeaturesItem {
    */
   id?: string;
 
+  /**
+   * Properties of the feature.
+   */
   properties?: FeaturesItemProperties;
 
   /**
-   * A valid `GeoJSON Point` geometry type. Please refer to [RFC
-   * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.
+   * A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.
    */
   geometry: GeoJsonPoint;
 
   /**
-   * Bounding box. Projection used - EPSG:3857. Please refer to [RFC
-   * 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
+   * Bounding box. Projection used - EPSG:3857. Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
    */
   bbox?: float64[];
 }
 
+/**
+ * Properties of the feature.
+ */
 model FeaturesItemProperties {
   /**
-   * One of:
-   * * Address
-   * * RoadBlock
-   * * RoadIntersection
-   * * Neighborhood
-   * * PopulatedPlace
-   * * Postcode1
-   * * AdminDivision1
-   * * AdminDivision2
-   * * CountryRegion
+   * One of: * Address * RoadBlock * RoadIntersection * Neighborhood * PopulatedPlace * Postcode1 * AdminDivision1 * AdminDivision2 * CountryRegion
    */
   type?: string;
 
   /**
-   * The level of confidence that the geocoded location result is a match. Use this
-   * value with the match code to determine for more complete information about the
-   * match.
+   * The level of confidence that the geocoded location result is a match. Use this value with the match code to determine for more complete information about the match.
    *
-   * The confidence of a geocoded location is based on many factors including the
-   * relative importance of the geocoded location and the user’s location, if
-   * specified.
+   * The confidence of a geocoded location is based on many factors including the relative importance of the geocoded location and the user’s location, if specified.
    */
   confidence?: ConfidenceEnum;
 
   /**
-   * One or more match code values that represent the geocoding level for each
-   * location in the response.
+   * One or more match code values that represent the geocoding level for each location in the response.
    *
-   * For example, a geocoded location with match codes of `Good` and `Ambiguous`
-   * means that more than one geocode location was found for the location
-   * information and that the geocode service did not have search up-hierarchy to
-   * find a match.
+   * For example, a geocoded location with match codes of `Good` and `Ambiguous` means that more than one geocode location was found for the location information and that the geocode service did not have search up-hierarchy to find a match.
    *
-   * Similarly, a geocoded location with match codes of `Ambiguous` and
-   * `UpHierarchy` implies that a geocode location could not be found that matched
-   * all the provided location information, so the geocode service had to search
-   * up-hierarchy and found multiple matches at that level. An example of up an
-   * `Ambiguous` and `UpHierarchy` result is when you provide complete address
-   * information, but the geocode service cannot locate a match for the street
-   * address and instead returns information for more than one RoadBlock value.
+   * Similarly, a geocoded location with match codes of `Ambiguous` and `UpHierarchy` implies that a geocode location could not be found that matched all the provided location information, so the geocode service had to search up-hierarchy and found multiple matches at that level. An example of up an `Ambiguous` and `UpHierarchy` result is when you provide complete address information, but the geocode service cannot locate a match for the street address and instead returns information for more than one RoadBlock value.
    *
    * The possible values are:
    *
-   * `Good`: The location has only one match or all returned matches are considered
-   * strong matches. For example, a query for New York returns several Good matches.
+   * `Good`: The location has only one match or all returned matches are considered strong matches. For example, a query for New York returns several Good matches.
    *
-   * `Ambiguous`: The location is one of a set of possible matches. For example,
-   * when you query for the street address 128 Main St., the response may return two
-   * locations for 128 North Main St. and 128 South Main St. because there is not
-   * enough information to determine which option to choose.
+   * `Ambiguous`: The location is one of a set of possible matches. For example, when you query for the street address 128 Main St., the response may return two locations for 128 North Main St. and 128 South Main St. because there is not enough information to determine which option to choose.
    *
-   * `UpHierarchy`: The location represents a move up the geographic hierarchy. This
-   * occurs when a match for the location request was not found, so a less precise
-   * result is returned. For example, if a match for the requested address cannot be
-   * found, then a match code of `UpHierarchy` with a RoadBlock entity type may be
-   * returned.
+   * `UpHierarchy`: The location represents a move up the geographic hierarchy. This occurs when a match for the location request was not found, so a less precise result is returned. For example, if a match for the requested address cannot be found, then a match code of `UpHierarchy` with a RoadBlock entity type may be returned.
    */
   matchCodes?: MatchCodesEnum[];
 
@@ -841,8 +801,7 @@ model FeaturesItemProperties {
   address?: Address;
 
   /**
-   * A collection of geocode points that differ in how they were calculated and
-   * their suggested use.
+   * A collection of geocode points that differ in how they were calculated and their suggested use.
    */
   geocodePoints?: GeocodePointsItem[];
 }
@@ -867,10 +826,7 @@ model Address {
   neighborhood?: string;
 
   /**
-   * The subdivision name in the country or region for an address. This element is
-   * typically treated as the first order administrative subdivision, but in some
-   * cases it also contains the second, third, or fourth order subdivision in a
-   * country, dependency, or region.
+   * The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.
    */
   adminDistricts?: AddressAdminDistrictsItem[];
 
@@ -905,18 +861,17 @@ model Address {
   intersection?: Intersection;
 }
 
+/**
+ * The subdivision name in the country or region for an address.
+ */
 model AddressAdminDistrictsItem {
   /**
-   * The name for the corresponding adminDistrict field,
-   * For adminDistrict[0], this could be full name of state such as Washington,
-   * For adminDistrict[1], this could be the full name of the county
+   * The name for the corresponding adminDistrict field, For adminDistrict[0], this could be full name of state such as Washington, For adminDistrict[1], this could be the full name of the county
    */
   name?: string;
 
   /**
-   * The short name for the corresponding adminDistrict field,
-   * For adminDistrict[0], this could be short name of state such as WA,
-   * For adminDistrict[1], this could be the short name of the county
+   * The short name for the corresponding adminDistrict field, For adminDistrict[0], this could be short name of state such as WA, For adminDistrict[1], this could be the short name of the county
    */
   shortName?: string;
 }
@@ -928,7 +883,7 @@ model AddressCountryRegion {
   /**
    * ISO of country/region
    */
-  ISO?: string;
+  iso?: string;
 
   /**
    * name of country/region
@@ -966,10 +921,12 @@ model Intersection {
   displayName?: string;
 }
 
+/**
+ * A geocode point.
+ */
 model GeocodePointsItem {
   /**
-   * A valid `GeoJSON Point` geometry type. Please refer to [RFC
-   * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.
+   * A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.
    */
   geometry?: GeoJsonPoint;
 
@@ -979,20 +936,13 @@ model GeocodePointsItem {
   calculationMethod?: CalculationMethodEnum;
 
   /**
-   * The best use for the geocode point.
-   * Each geocode point is defined as a `Route` point, a `Display` point or both.
-   * Use `Route` points if you are creating a route to the location. Use `Display`
-   * points if you are showing the location on a map. For example, if the location
-   * is a park, a `Route` point may specify an entrance to the park where you can
-   * enter with a car, and a `Display` point may be a point that specifies the
-   * center of the park.
+   * The best use for the geocode point. Each geocode point is defined as a `Route` point, a `Display` point or both. Use `Route` points if you are creating a route to the location. Use `Display` points if you are showing the location on a map. For example, if the location is a park, a `Route` point may specify an entrance to the park where you can enter with a car, and a `Display` point may be a point that specifies the center of the park.
    */
   usageTypes?: UsageTypeEnum[];
 }
 
 /**
- * The list of address geocoding queries/requests to process. The list can contain
- * a max of 100 queries and must contain at least 1 query.
+ * The list of address geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.
  */
 model GeocodingBatchRequestBody {
   /**
@@ -1011,102 +961,80 @@ model GeocodingBatchRequestItem {
   optionalId?: string;
 
   /**
-   * Maximum number of responses that will be returned. Default: 5, minimum: 1 and
-   * maximum: 20.
+   * Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 20.
    */
   @maxValue(20)
   @minValue(1)
   top?: int32 = 5;
 
   /**
-   * A string that contains information about a location, such as an address or
-   * landmark name.
+   * A string that contains information about a location, such as an address or landmark name.
    */
   query?: string;
 
   /**
-   * The official street line of an address relative to the area, as specified by
-   * the locality, or postalCode, properties. Typical use of this element would be
-   * to provide a street address or any official address.
+   * The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.
    *
-   * This parameter should not be used when the `query` parameter is included in the
-   * request.
+   * This parameter should not be used when the `query` parameter is included in the request.
    */
   addressLine?: string;
 
   /**
-   * Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country
-   * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g.
-   * FR.
+   * Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR.
    *
-   * This parameter should not be used when the `query` parameter is included in the
-   * request.
+   * This parameter should not be used when the `query` parameter is included in the request.
    */
   countryRegion?: string;
 
   /**
-   * A rectangular area on the earth defined as a bounding box object. The sides of
-   * the rectangles are defined by longitude and latitude values. For more
-   * information, see Location and Area Types. When you specify this parameter, the
-   * geographical area is taken into account when computing the results of a
-   * location query.
+   * A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by longitude and latitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.
    *
    * Example: [lon1, lat1, lon2, lat2]
    */
   bbox?: float64[];
 
   /**
-   * A string that specifies an [ISO 3166-1 Alpha-2 region/country
-   * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter
-   * Geopolitical disputed borders and labels to align with the specified user
-   * region.
+   * A string that specifies an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.
    */
   view?: string = "auto";
 
   /**
-   * A point on the earth specified as a longitude and latitude. When you specify
-   * this parameter, the user’s location is taken into account and the results
-   * returned may be more relevant to the user. Example: [lon, lat]
+   * A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: [lon, lat]
    */
   coordinates?: float64[];
 
   /**
    * The country subdivision portion of an address, such as WA.
    *
-   * This parameter should not be used when the `query` parameter is included in the
-   * request.
+   * This parameter should not be used when the `query` parameter is included in the request.
    */
   adminDistrict?: string;
 
   /**
    * The county for the structured address, such as King.
    *
-   * This parameter should not be used when the `query` parameter is included in the
-   * request.
+   * This parameter should not be used when the `query` parameter is included in the request.
    */
   adminDistrict2?: string;
 
   /**
    * The named area for the structured address.
    *
-   * This parameter should not be used when the `query` parameter is included in the
-   * request.
+   * This parameter should not be used when the `query` parameter is included in the request.
    */
   adminDistrict3?: string;
 
   /**
    * The locality portion of an address, such as Seattle.
    *
-   * This parameter should not be used when the `query` parameter is included in the
-   * request.
+   * This parameter should not be used when the `query` parameter is included in the request.
    */
   locality?: string;
 
   /**
    * The postal code portion of an address.
    *
-   * This parameter should not be used when the `query` parameter is included in the
-   * request.
+   * This parameter should not be used when the `query` parameter is included in the request.
    */
   postalCode?: string;
 }
@@ -1126,8 +1054,7 @@ model GeocodingBatchResponse {
   batchItems?: GeocodingBatchResponseItem[];
 
   /**
-   * The is the link to the next page of the features returned. If it's the last
-   * page, no this field.
+   * The is the link to the next page of the features returned. If it's the last page, no this field.
    */
   nextLink?: string;
 }
@@ -1147,6 +1074,9 @@ model GeocodingBatchResponseSummary {
   totalRequests?: int32;
 }
 
+/**
+ * A batch response item.
+ */
 model GeocodingBatchResponseItem {
   /**
    * id of the batchItem which would be the same as the id in the request
@@ -1154,17 +1084,17 @@ model GeocodingBatchResponseItem {
   optionalId?: string;
 
   /**
-   * Specifies the `GeoJSON` type. The only supported object type is
-   * `FeatureCollection`. For more information, see [RFC
-   * 7946](https://www.rfc-editor.org/rfc/rfc7946).
+   * Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
    */
   type?: FeatureCollectionEnum;
 
+  /**
+   * An array of features returned from the query.
+   */
   features?: FeaturesItem[];
 
   /**
-   * The is the link to the next page of the features returned. If it's the last
-   * page, no this field.
+   * The is the link to the next page of the features returned. If it's the last page, no this field.
    */
   nextLink?: string;
 
@@ -1175,12 +1105,9 @@ model GeocodingBatchResponseItem {
 }
 
 /**
- * `GeoJSON GeocodingFeature` object that describe the boundaries of a
- * geographical area. Geometry of the feature is described with
- * `GeoJSON GeometryCollection`.
+ * `GeoJSON GeocodingFeature` object that describe the boundaries of a geographical area. Geometry of the feature is described with `GeoJSON GeometryCollection`.
  *
- * Please note, the service typically returns a GeometryCollection with Polygon or
- * MultiPolygon sub-types.
+ * Please note, the service typically returns a GeometryCollection with Polygon or MultiPolygon sub-types.
  */
 model Boundary {
   /**
@@ -1189,8 +1116,7 @@ model Boundary {
   type?: FeatureTypeEnum;
 
   /**
-   * A valid `GeoJSON GeometryCollection` object type. Please refer to [RFC
-   * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.8) for details.
+   * A valid `GeoJSON GeometryCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.8) for details.
    */
   geometry: GeoJsonGeometryCollection;
 
@@ -1215,14 +1141,12 @@ model BoundaryProperties {
   copyright?: string;
 
   /**
-   * A URL that lists many of the data providers for Azure Maps and their related
-   * copyright information.
+   * A URL that lists many of the data providers for Azure Maps and their related copyright information.
    */
-  copyrightURL?: string;
+  copyrightUrl?: string;
 
   /**
-   * A collection of copyright information for each geometry of the Boundary object
-   * in the same order they appear.
+   * A collection of copyright information for each geometry of the Boundary object in the same order they appear.
    */
   geometriesCopyright?: GeometryCopyright[];
 }
@@ -1243,8 +1167,7 @@ model GeometryCopyright {
 }
 
 /**
- * The list of reverse geocoding queries/requests to process. The list can contain
- * a max of 100 queries and must contain at least 1 query.
+ * The list of reverse geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.
  */
 model ReverseGeocodingBatchRequestBody {
   /**
@@ -1263,17 +1186,12 @@ model ReverseGeocodingBatchRequestItem {
   optionalId?: string;
 
   /**
-   * The coordinates of the location that you want to reverse geocode. Example:
-   * [lon,lat]
+   * The coordinates of the location that you want to reverse geocode. Example: [lon,lat]
    */
   coordinates?: float64[];
 
   /**
-   * Specify entity types that you want in the response. Only the types you specify
-   * will be returned. If the point cannot be mapped to the entity types you
-   * specify, no location information is returned in the response.
-   * Default value is all possible entities.
-   * A comma separated list of entity types selected from the following options.
+   * Specify entity types that you want in the response. Only the types you specify will be returned. If the point cannot be mapped to the entity types you specify, no location information is returned in the response. Default value is all possible entities. A comma separated list of entity types selected from the following options.
    *
    * - Address
    * - Neighborhood
@@ -1283,19 +1201,12 @@ model ReverseGeocodingBatchRequestItem {
    * - AdminDivision2
    * - CountryRegion
    *
-   * These entity types are ordered from the most specific entity to the least
-   * specific entity. When entities of more than one entity type are found, only the
-   * most specific entity is returned. For example, if you specify Address and
-   * AdminDistrict1 as entity types and entities were found for both types, only the
-   * Address entity information is returned in the response.
+   * These entity types are ordered from the most specific entity to the least specific entity. When entities of more than one entity type are found, only the most specific entity is returned. For example, if you specify Address and AdminDistrict1 as entity types and entities were found for both types, only the Address entity information is returned in the response.
    */
   resultTypes?: ResultTypeEnum[];
 
   /**
-   * A string that specifies an [ISO 3166-1 Alpha-2 region/country
-   * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter
-   * Geopolitical disputed borders and labels to align with the specified user
-   * region.
+   * A string that specifies an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.
    */
   view?: string;
 }
@@ -1306,9 +1217,7 @@ model ReverseGeocodingBatchRequestItem {
 @added(Versions.v2025_06_01_preview)
 model AutocompleteResponse {
   /**
-   * Specifies the `GeoJSON` type. The only supported object type is
-   * `FeatureCollection`. For more information, see [RFC
-   * 7946](https://www.rfc-editor.org/rfc/rfc7946).
+   * Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
    */
   type?: FeatureCollectionEnum;
 
@@ -1316,8 +1225,7 @@ model AutocompleteResponse {
   features?: AutocompleteFeature[];
 
   /**
-   * The is the link to the next page of the features returned. If it's the last
-   * page, no this field.
+   * The is the link to the next page of the features returned. If it's the last page, no this field.
    */
   nextLink?: string;
 }
@@ -1328,14 +1236,12 @@ model AutocompleteResponse {
 @added(Versions.v2025_06_01_preview)
 model AutocompleteFeature {
   /**
-   * Specifies the `GeoJSON` type. The only supported object type is Feature. For
-   * more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
+   * Specifies the `GeoJSON` type. The only supported object type is Feature. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
    */
   type: FeatureTypeEnum;
 
   /**
-   * A valid `GeoJSON Point` geometry type. Please refer to [RFC
-   * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.
+   * A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.
    */
   geometry?: GeoJsonPoint;
 
@@ -1366,8 +1272,7 @@ model AutocompleteProperties {
   address?: Address;
 
   /**
-   * The name of the place. This field will not appear if the returned type is
-   * Address.
+   * The name of the place. This field will not appear if the returned type is Address.
    */
   name?: string;
 }

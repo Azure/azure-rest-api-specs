@@ -579,7 +579,7 @@
                 {
                   "name": "adminDistrict",
                   "value": "adminDistrict",
-                  "description": "First administrative level within the country/region level, such as a state or\na province."
+                  "description": "First administrative level within the country/region level, such as a state or a province."
                 },
                 {
                   "name": "adminDistrict2",
@@ -594,22 +594,22 @@
                 {
                   "name": "postalCode2",
                   "value": "postalCode2",
-                  "description": "The next largest post code category after postalCode that is created by\naggregating postalCode areas."
+                  "description": "The next largest post code category after postalCode that is created by aggregating postalCode areas."
                 },
                 {
                   "name": "postalCode3",
                   "value": "postalCode3",
-                  "description": "The next largest post code category after postalCode2 that is created by\naggregating postalCode2 areas."
+                  "description": "The next largest post code category after postalCode2 that is created by aggregating postalCode2 areas."
                 },
                 {
                   "name": "postalCode4",
                   "value": "postalCode4",
-                  "description": "The next largest post code category after postalCode3 that is created by\naggregating postalCode3 areas."
+                  "description": "The next largest post code category after postalCode3 that is created by aggregating postalCode3 areas."
                 },
                 {
                   "name": "neighborhood",
                   "value": "neighborhood",
-                  "description": "A section of a populated place that is typically well-known, but often with\nindistinct boundaries."
+                  "description": "A section of a populated place that is typically well-known, but often with indistinct boundaries."
                 },
                 {
                   "name": "locality",
@@ -707,7 +707,7 @@
         },
         "adminDistricts": {
           "type": "array",
-          "description": "The subdivision name in the country or region for an address. This element is\ntypically treated as the first order administrative subdivision, but in some\ncases it also contains the second, third, or fourth order subdivision in a\ncountry, dependency, or region.",
+          "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
           "items": {
             "$ref": "#/definitions/AddressAdminDistrictsItem"
           }
@@ -740,14 +740,15 @@
     },
     "AddressAdminDistrictsItem": {
       "type": "object",
+      "description": "The subdivision name in the country or region for an address.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name for the corresponding adminDistrict field,\nFor adminDistrict[0], this could be full name of state such as Washington,\nFor adminDistrict[1], this could be the full name of the county"
+          "description": "The name for the corresponding adminDistrict field, For adminDistrict[0], this could be full name of state such as Washington, For adminDistrict[1], this could be the full name of the county"
         },
         "shortName": {
           "type": "string",
-          "description": "The short name for the corresponding adminDistrict field,\nFor adminDistrict[0], this could be short name of state such as WA,\nFor adminDistrict[1], this could be the short name of the county"
+          "description": "The short name for the corresponding adminDistrict field, For adminDistrict[0], this could be short name of state such as WA, For adminDistrict[1], this could be the short name of the county"
         }
       }
     },
@@ -755,7 +756,7 @@
       "type": "object",
       "description": "Country or region with its name and ISO code.",
       "properties": {
-        "ISO": {
+        "iso": {
           "type": "string",
           "description": "ISO of country/region"
         },
@@ -784,7 +785,7 @@
           {
             "name": "Place",
             "value": "Place",
-            "description": "All other types belong to the Place type group. These may include entities such\nas AdminDivision1, Neighborhood, PopulatedPlace, and more."
+            "description": "All other types belong to the Place type group. These may include entities such as AdminDivision1, Neighborhood, PopulatedPlace, and more."
           }
         ]
       }
@@ -851,7 +852,7 @@
     },
     "Boundary": {
       "type": "object",
-      "description": "`GeoJSON GeocodingFeature` object that describe the boundaries of a\ngeographical area. Geometry of the feature is described with\n`GeoJSON GeometryCollection`.\n\nPlease note, the service typically returns a GeometryCollection with Polygon or\nMultiPolygon sub-types.",
+      "description": "`GeoJSON GeocodingFeature` object that describe the boundaries of a geographical area. Geometry of the feature is described with `GeoJSON GeometryCollection`.\n\nPlease note, the service typically returns a GeometryCollection with Polygon or MultiPolygon sub-types.",
       "properties": {
         "type": {
           "$ref": "#/definitions/FeatureTypeEnum",
@@ -859,7 +860,7 @@
         },
         "geometry": {
           "$ref": "#/definitions/GeoJsonGeometryCollection",
-          "description": "A valid `GeoJSON GeometryCollection` object type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.8) for details."
+          "description": "A valid `GeoJSON GeometryCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.8) for details."
         },
         "properties": {
           "$ref": "#/definitions/BoundaryProperties",
@@ -882,13 +883,13 @@
           "type": "string",
           "description": "The copyright string."
         },
-        "copyrightURL": {
+        "copyrightUrl": {
           "type": "string",
-          "description": "A URL that lists many of the data providers for Azure Maps and their related\ncopyright information."
+          "description": "A URL that lists many of the data providers for Azure Maps and their related copyright information."
         },
         "geometriesCopyright": {
           "type": "array",
-          "description": "A collection of copyright information for each geometry of the Boundary object\nin the same order they appear.",
+          "description": "A collection of copyright information for each geometry of the Boundary object in the same order they appear.",
           "items": {
             "$ref": "#/definitions/GeometryCopyright"
           }
@@ -897,6 +898,7 @@
     },
     "BoundaryResultTypeEnum": {
       "type": "string",
+      "description": "An enum representing the boundary result type.",
       "enum": [
         "countryRegion",
         "adminDistrict",
@@ -920,7 +922,7 @@
           {
             "name": "adminDistrict",
             "value": "adminDistrict",
-            "description": "First administrative level within the country/region level, such as a state or\na province."
+            "description": "First administrative level within the country/region level, such as a state or a province."
           },
           {
             "name": "adminDistrict2",
@@ -935,22 +937,22 @@
           {
             "name": "postalCode2",
             "value": "postalCode2",
-            "description": "The next largest post code category after postalCode that is created by\naggregating postalCode areas."
+            "description": "The next largest post code category after postalCode that is created by aggregating postalCode areas."
           },
           {
             "name": "postalCode3",
             "value": "postalCode3",
-            "description": "The next largest post code category after postalCode2 that is created by\naggregating postalCode2 areas."
+            "description": "The next largest post code category after postalCode2 that is created by aggregating postalCode2 areas."
           },
           {
             "name": "postalCode4",
             "value": "postalCode4",
-            "description": "The next largest post code category after postalCode3 that is created by\naggregating postalCode3 areas."
+            "description": "The next largest post code category after postalCode3 that is created by aggregating postalCode3 areas."
           },
           {
             "name": "neighborhood",
             "value": "neighborhood",
-            "description": "A section of a populated place that is typically well-known, but often with\nindistinct boundaries."
+            "description": "A section of a populated place that is typically well-known, but often with indistinct boundaries."
           },
           {
             "name": "locality",
@@ -981,7 +983,7 @@
           {
             "name": "InterpolationOffset",
             "value": "InterpolationOffset",
-            "description": "The geocode point was matched to a point on a road using interpolation with an\nadditional offset to shift the point to the side of the street."
+            "description": "The geocode point was matched to a point on a road using interpolation with an additional offset to shift the point to the side of the street."
           },
           {
             "name": "Parcel",
@@ -998,7 +1000,7 @@
     },
     "ConfidenceEnum": {
       "type": "string",
-      "description": "The level of confidence that the geocoded location result is a match. Use this\nvalue with the match code to determine for more complete information about the\nmatch.\n\nThe confidence of a geocoded location is based on many factors including the\nrelative importance of the geocoded location and the user’s location, if\nspecified.",
+      "description": "The level of confidence that the geocoded location result is a match. Use this value with the match code to determine for more complete information about the match.\n\nThe confidence of a geocoded location is based on many factors including the relative importance of the geocoded location and the user’s location, if specified.",
       "enum": [
         "High",
         "Medium",
@@ -1011,12 +1013,12 @@
           {
             "name": "High",
             "value": "High",
-            "description": "If the confidence is set to `High`, one or more strong matches were found.\nMultiple `High` confidence matches are sorted in ranked order by importance\nwhen applicable. For example, landmarks have importance but addresses do not.\n\nIf a request includes a location or a view, then the ranking may change\nappropriately. For example, a location query for \"Paris\" returns \"Paris,\nFrance\" and \"Paris, TX\" both with `High` confidence. \"Paris, France\" is always\nranked first due to importance unless a user location indicates that the user\nis in or very close to Paris, TX or the map view indicates that the user is\nsearching in that area."
+            "description": "If the confidence is set to `High`, one or more strong matches were found. Multiple `High` confidence matches are sorted in ranked order by importance when applicable. For example, landmarks have importance but addresses do not.\n\nIf a request includes a location or a view, then the ranking may change appropriately. For example, a location query for \"Paris\" returns \"Paris, France\" and \"Paris, TX\" both with `High` confidence. \"Paris, France\" is always ranked first due to importance unless a user location indicates that the user is in or very close to Paris, TX or the map view indicates that the user is searching in that area."
           },
           {
             "name": "Medium",
             "value": "Medium",
-            "description": "In some situations, the returned match may not be at the same level as the\ninformation provided in the request. For example, a request may specify address\ninformation and the geocode service may only be able to match a postal code. In\nthis case, if the geocode service has a confidence that the postal code matches\nthe data, the confidence is set to `Medium` and the match code is set to\n`UpHierarchy` to specify that it could not match all of the information and had\nto search up-hierarchy.\n\nIf the location information in the query is ambiguous, and there is no\nadditional information to rank the locations (such as user location or the\nrelative importance of the location), the confidence is set to `Medium`. For\nexample, a location query for \"148th Ave, Bellevue\" may return \"148th Ave SE\"\nand \"148th Ave NE\" both with `Medium` confidence.\n\nIf the location information in the query does not provide enough information to\ngeocode a specific location, a less precise location value may be returned and\nthe confidence is set to `Medium`. For example, if an address is provided, but\na match is not found for the house number, the geocode result with a Roadblock\nentity type may be returned."
+            "description": "In some situations, the returned match may not be at the same level as the information provided in the request. For example, a request may specify address information and the geocode service may only be able to match a postal code. In this case, if the geocode service has a confidence that the postal code matches the data, the confidence is set to `Medium` and the match code is set to `UpHierarchy` to specify that it could not match all of the information and had to search up-hierarchy.\n\nIf the location information in the query is ambiguous, and there is no additional information to rank the locations (such as user location or the relative importance of the location), the confidence is set to `Medium`. For example, a location query for \"148th Ave, Bellevue\" may return \"148th Ave SE\" and \"148th Ave NE\" both with `Medium` confidence.\n\nIf the location information in the query does not provide enough information to geocode a specific location, a less precise location value may be returned and the confidence is set to `Medium`. For example, if an address is provided, but a match is not found for the house number, the geocode result with a Roadblock entity type may be returned."
           },
           {
             "name": "Low",
@@ -1038,7 +1040,9 @@
         "info": {
           "type": "object",
           "description": "The additional info.",
-          "additionalProperties": {},
+          "additionalProperties": {
+            "type": "string"
+          },
           "readOnly": true
         }
       }
@@ -1092,7 +1096,7 @@
     },
     "FeatureCollectionEnum": {
       "type": "string",
-      "description": "Specifies the `GeoJSON` type. The only supported object type is\n`FeatureCollection`. For more information, see [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946).",
+      "description": "Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "enum": [
         "FeatureCollection"
       ],
@@ -1128,6 +1132,7 @@
     },
     "FeaturesItem": {
       "type": "object",
+      "description": "A feature object.",
       "properties": {
         "type": {
           "$ref": "#/definitions/FeatureTypeEnum",
@@ -1138,15 +1143,16 @@
           "description": "ID for feature returned"
         },
         "properties": {
-          "$ref": "#/definitions/FeaturesItemProperties"
+          "$ref": "#/definitions/FeaturesItemProperties",
+          "description": "Properties of the feature."
         },
         "geometry": {
           "$ref": "#/definitions/GeoJsonPoint",
-          "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details."
+          "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details."
         },
         "bbox": {
           "type": "array",
-          "description": "Bounding box. Projection used - EPSG:3857. Please refer to [RFC\n7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
+          "description": "Bounding box. Projection used - EPSG:3857. Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
           "items": {
             "type": "number",
             "format": "double"
@@ -1159,18 +1165,19 @@
     },
     "FeaturesItemProperties": {
       "type": "object",
+      "description": "Properties of the feature.",
       "properties": {
         "type": {
           "type": "string",
-          "description": "One of:\n* Address\n* RoadBlock\n* RoadIntersection\n* Neighborhood\n* PopulatedPlace\n* Postcode1\n* AdminDivision1\n* AdminDivision2\n* CountryRegion"
+          "description": "One of: * Address * RoadBlock * RoadIntersection * Neighborhood * PopulatedPlace * Postcode1 * AdminDivision1 * AdminDivision2 * CountryRegion"
         },
         "confidence": {
           "$ref": "#/definitions/ConfidenceEnum",
-          "description": "The level of confidence that the geocoded location result is a match. Use this\nvalue with the match code to determine for more complete information about the\nmatch.\n\nThe confidence of a geocoded location is based on many factors including the\nrelative importance of the geocoded location and the user’s location, if\nspecified."
+          "description": "The level of confidence that the geocoded location result is a match. Use this value with the match code to determine for more complete information about the match.\n\nThe confidence of a geocoded location is based on many factors including the relative importance of the geocoded location and the user’s location, if specified."
         },
         "matchCodes": {
           "type": "array",
-          "description": "One or more match code values that represent the geocoding level for each\nlocation in the response.\n\nFor example, a geocoded location with match codes of `Good` and `Ambiguous`\nmeans that more than one geocode location was found for the location\ninformation and that the geocode service did not have search up-hierarchy to\nfind a match.\n\nSimilarly, a geocoded location with match codes of `Ambiguous` and\n`UpHierarchy` implies that a geocode location could not be found that matched\nall the provided location information, so the geocode service had to search\nup-hierarchy and found multiple matches at that level. An example of up an\n`Ambiguous` and `UpHierarchy` result is when you provide complete address\ninformation, but the geocode service cannot locate a match for the street\naddress and instead returns information for more than one RoadBlock value.\n\nThe possible values are:\n\n`Good`: The location has only one match or all returned matches are considered\nstrong matches. For example, a query for New York returns several Good matches.\n\n`Ambiguous`: The location is one of a set of possible matches. For example,\nwhen you query for the street address 128 Main St., the response may return two\nlocations for 128 North Main St. and 128 South Main St. because there is not\nenough information to determine which option to choose.\n\n`UpHierarchy`: The location represents a move up the geographic hierarchy. This\noccurs when a match for the location request was not found, so a less precise\nresult is returned. For example, if a match for the requested address cannot be\nfound, then a match code of `UpHierarchy` with a RoadBlock entity type may be\nreturned.",
+          "description": "One or more match code values that represent the geocoding level for each location in the response.\n\nFor example, a geocoded location with match codes of `Good` and `Ambiguous` means that more than one geocode location was found for the location information and that the geocode service did not have search up-hierarchy to find a match.\n\nSimilarly, a geocoded location with match codes of `Ambiguous` and `UpHierarchy` implies that a geocode location could not be found that matched all the provided location information, so the geocode service had to search up-hierarchy and found multiple matches at that level. An example of up an `Ambiguous` and `UpHierarchy` result is when you provide complete address information, but the geocode service cannot locate a match for the street address and instead returns information for more than one RoadBlock value.\n\nThe possible values are:\n\n`Good`: The location has only one match or all returned matches are considered strong matches. For example, a query for New York returns several Good matches.\n\n`Ambiguous`: The location is one of a set of possible matches. For example, when you query for the street address 128 Main St., the response may return two locations for 128 North Main St. and 128 South Main St. because there is not enough information to determine which option to choose.\n\n`UpHierarchy`: The location represents a move up the geographic hierarchy. This occurs when a match for the location request was not found, so a less precise result is returned. For example, if a match for the requested address cannot be found, then a match code of `UpHierarchy` with a RoadBlock entity type may be returned.",
           "items": {
             "$ref": "#/definitions/MatchCodesEnum"
           }
@@ -1181,7 +1188,7 @@
         },
         "geocodePoints": {
           "type": "array",
-          "description": "A collection of geocode points that differ in how they were calculated and\ntheir suggested use.",
+          "description": "A collection of geocode points that differ in how they were calculated and their suggested use.",
           "items": {
             "$ref": "#/definitions/GeocodePointsItem"
           }
@@ -1784,10 +1791,11 @@
     },
     "GeocodePointsItem": {
       "type": "object",
+      "description": "A geocode point.",
       "properties": {
         "geometry": {
           "$ref": "#/definitions/GeoJsonPoint",
-          "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details."
+          "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details."
         },
         "calculationMethod": {
           "$ref": "#/definitions/CalculationMethodEnum",
@@ -1795,7 +1803,7 @@
         },
         "usageTypes": {
           "type": "array",
-          "description": "The best use for the geocode point.\nEach geocode point is defined as a `Route` point, a `Display` point or both.\nUse `Route` points if you are creating a route to the location. Use `Display`\npoints if you are showing the location on a map. For example, if the location\nis a park, a `Route` point may specify an entrance to the park where you can\nenter with a car, and a `Display` point may be a point that specifies the\ncenter of the park.",
+          "description": "The best use for the geocode point. Each geocode point is defined as a `Route` point, a `Display` point or both. Use `Route` points if you are creating a route to the location. Use `Display` points if you are showing the location on a map. For example, if the location is a park, a `Route` point may specify an entrance to the park where you can enter with a car, and a `Display` point may be a point that specifies the center of the park.",
           "items": {
             "$ref": "#/definitions/UsageTypeEnum"
           }
@@ -1804,7 +1812,7 @@
     },
     "GeocodingBatchRequestBody": {
       "type": "object",
-      "description": "The list of address geocoding queries/requests to process. The list can contain\na max of 100 queries and must contain at least 1 query.",
+      "description": "The list of address geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
       "properties": {
         "batchItems": {
           "type": "array",
@@ -1826,26 +1834,26 @@
         "top": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and\nmaximum: 20.",
+          "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 20.",
           "default": 5,
           "minimum": 1,
           "maximum": 20
         },
         "query": {
           "type": "string",
-          "description": "A string that contains information about a location, such as an address or\nlandmark name."
+          "description": "A string that contains information about a location, such as an address or landmark name."
         },
         "addressLine": {
           "type": "string",
-          "description": "The official street line of an address relative to the area, as specified by\nthe locality, or postalCode, properties. Typical use of this element would be\nto provide a street address or any official address.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+          "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.\n\nThis parameter should not be used when the `query` parameter is included in the request."
         },
         "countryRegion": {
           "type": "string",
-          "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country\ncode](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g.\nFR.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+          "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR.\n\nThis parameter should not be used when the `query` parameter is included in the request."
         },
         "bbox": {
           "type": "array",
-          "description": "A rectangular area on the earth defined as a bounding box object. The sides of\nthe rectangles are defined by longitude and latitude values. For more\ninformation, see Location and Area Types. When you specify this parameter, the\ngeographical area is taken into account when computing the results of a\nlocation query.\n\nExample: [lon1, lat1, lon2, lat2]",
+          "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by longitude and latitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: [lon1, lat1, lon2, lat2]",
           "items": {
             "type": "number",
             "format": "double"
@@ -1853,12 +1861,12 @@
         },
         "view": {
           "type": "string",
-          "description": "A string that specifies an [ISO 3166-1 Alpha-2 region/country\ncode](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter\nGeopolitical disputed borders and labels to align with the specified user\nregion.",
+          "description": "A string that specifies an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
           "default": "auto"
         },
         "coordinates": {
           "type": "array",
-          "description": "A point on the earth specified as a longitude and latitude. When you specify\nthis parameter, the user’s location is taken into account and the results\nreturned may be more relevant to the user. Example: [lon, lat]",
+          "description": "A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: [lon, lat]",
           "items": {
             "type": "number",
             "format": "double"
@@ -1866,23 +1874,23 @@
         },
         "adminDistrict": {
           "type": "string",
-          "description": "The country subdivision portion of an address, such as WA.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+          "description": "The country subdivision portion of an address, such as WA.\n\nThis parameter should not be used when the `query` parameter is included in the request."
         },
         "adminDistrict2": {
           "type": "string",
-          "description": "The county for the structured address, such as King.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+          "description": "The county for the structured address, such as King.\n\nThis parameter should not be used when the `query` parameter is included in the request."
         },
         "adminDistrict3": {
           "type": "string",
-          "description": "The named area for the structured address.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+          "description": "The named area for the structured address.\n\nThis parameter should not be used when the `query` parameter is included in the request."
         },
         "locality": {
           "type": "string",
-          "description": "The locality portion of an address, such as Seattle.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+          "description": "The locality portion of an address, such as Seattle.\n\nThis parameter should not be used when the `query` parameter is included in the request."
         },
         "postalCode": {
           "type": "string",
-          "description": "The postal code portion of an address.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+          "description": "The postal code portion of an address.\n\nThis parameter should not be used when the `query` parameter is included in the request."
         }
       }
     },
@@ -1903,12 +1911,13 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The is the link to the next page of the features returned. If it's the last\npage, no this field."
+          "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
         }
       }
     },
     "GeocodingBatchResponseItem": {
       "type": "object",
+      "description": "A batch response item.",
       "properties": {
         "optionalId": {
           "type": "string",
@@ -1916,17 +1925,18 @@
         },
         "type": {
           "$ref": "#/definitions/FeatureCollectionEnum",
-          "description": "Specifies the `GeoJSON` type. The only supported object type is\n`FeatureCollection`. For more information, see [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946)."
+          "description": "Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
         },
         "features": {
           "type": "array",
+          "description": "An array of features returned from the query.",
           "items": {
             "$ref": "#/definitions/FeaturesItem"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "The is the link to the next page of the features returned. If it's the last\npage, no this field."
+          "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
         },
         "error": {
           "$ref": "#/definitions/ErrorDetail",
@@ -1956,17 +1966,18 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/FeatureCollectionEnum",
-          "description": "Specifies the `GeoJSON` type. The only supported object type is\n`FeatureCollection`. For more information, see [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946)."
+          "description": "Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
         },
         "features": {
           "type": "array",
+          "description": "An array of features returned from the query.",
           "items": {
             "$ref": "#/definitions/FeaturesItem"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "The is the link to the next page of the features returned. If it's the last\npage, no this field."
+          "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
         }
       }
     },
@@ -2012,6 +2023,7 @@
     },
     "MatchCodesEnum": {
       "type": "string",
+      "description": "An enum representing the match code.",
       "enum": [
         "Good",
         "Ambiguous",
@@ -2041,6 +2053,7 @@
     },
     "ResolutionEnum": {
       "type": "string",
+      "description": "An enum representing the resolution of the boundary geometry returned.",
       "enum": [
         "small",
         "medium",
@@ -2076,6 +2089,7 @@
     },
     "ResultTypeEnum": {
       "type": "string",
+      "description": "An enum representing the result type.",
       "enum": [
         "Address",
         "Neighborhood",
@@ -2129,7 +2143,7 @@
     },
     "ReverseGeocodingBatchRequestBody": {
       "type": "object",
-      "description": "The list of reverse geocoding queries/requests to process. The list can contain\na max of 100 queries and must contain at least 1 query.",
+      "description": "The list of reverse geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
       "properties": {
         "batchItems": {
           "type": "array",
@@ -2150,7 +2164,7 @@
         },
         "coordinates": {
           "type": "array",
-          "description": "The coordinates of the location that you want to reverse geocode. Example:\n[lon,lat]",
+          "description": "The coordinates of the location that you want to reverse geocode. Example: [lon,lat]",
           "items": {
             "type": "number",
             "format": "double"
@@ -2158,19 +2172,20 @@
         },
         "resultTypes": {
           "type": "array",
-          "description": "Specify entity types that you want in the response. Only the types you specify\nwill be returned. If the point cannot be mapped to the entity types you\nspecify, no location information is returned in the response.\nDefault value is all possible entities.\nA comma separated list of entity types selected from the following options.\n\n- Address\n- Neighborhood\n- PopulatedPlace\n- Postcode1\n- AdminDivision1\n- AdminDivision2\n- CountryRegion\n\nThese entity types are ordered from the most specific entity to the least\nspecific entity. When entities of more than one entity type are found, only the\nmost specific entity is returned. For example, if you specify Address and\nAdminDistrict1 as entity types and entities were found for both types, only the\nAddress entity information is returned in the response.",
+          "description": "Specify entity types that you want in the response. Only the types you specify will be returned. If the point cannot be mapped to the entity types you specify, no location information is returned in the response. Default value is all possible entities. A comma separated list of entity types selected from the following options.\n\n- Address\n- Neighborhood\n- PopulatedPlace\n- Postcode1\n- AdminDivision1\n- AdminDivision2\n- CountryRegion\n\nThese entity types are ordered from the most specific entity to the least specific entity. When entities of more than one entity type are found, only the most specific entity is returned. For example, if you specify Address and AdminDistrict1 as entity types and entities were found for both types, only the Address entity information is returned in the response.",
           "items": {
             "$ref": "#/definitions/ResultTypeEnum"
           }
         },
         "view": {
           "type": "string",
-          "description": "A string that specifies an [ISO 3166-1 Alpha-2 region/country\ncode](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter\nGeopolitical disputed borders and labels to align with the specified user\nregion."
+          "description": "A string that specifies an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region."
         }
       }
     },
     "ReverseGeocodingResultTypeEnum": {
       "type": "string",
+      "description": "An enum representing the reverse geocoding result type.",
       "enum": [
         "Address",
         "Neighborhood",
@@ -2224,6 +2239,7 @@
     },
     "UsageTypeEnum": {
       "type": "string",
+      "description": "An enum representing the usage type.",
       "enum": [
         "Display",
         "Route"
