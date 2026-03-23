@@ -40,6 +40,15 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 ``` yaml $(tag) == 'package-2025-03'
 input-file:
   - stable/2025-03-01/extensions.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensions.json
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations/{operationId}"]
 ```
 
 ---
