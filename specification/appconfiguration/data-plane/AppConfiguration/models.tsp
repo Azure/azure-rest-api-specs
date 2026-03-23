@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace AzureAppConfiguration;
@@ -28,8 +30,50 @@ union KeyValueFields {
   @doc("Tags field.")
   tags: "tags",
 
+  @doc("Description field.")
+  description: "description",
+
   @doc("Locked field.")
   locked: "locked",
+
+  @doc("Etag field.")
+  etag: "etag",
+
+  string,
+}
+
+@doc("Feature Flag fields.")
+@added(Versions.v2025_07_01_preview)
+union FeatureFlagFields {
+  @doc("Name field.")
+  name: "name",
+
+  @doc("Enabled field.")
+  enabled: "enabled",
+
+  @doc("Label field.")
+  label: "label",
+
+  @doc("Description field.")
+  description: "description",
+
+  @doc("Conditions field.")
+  conditions: "conditions",
+
+  @doc("Variants field.")
+  variants: "variants",
+
+  @doc("Allocation field.")
+  allocation: "allocation",
+
+  @doc("Telemetry field.")
+  telemetry: "telemetry",
+
+  @doc("Tags field.")
+  tags: "tags",
+
+  @doc("Last modified field.")
+  last_modified: "last_modified",
 
   @doc("Etag field.")
   etag: "etag",
@@ -68,6 +112,9 @@ union SnapshotFields {
 
   @doc("Tags field.")
   tags: "tags",
+
+  @doc("Description field.")
+  description: "description",
 
   @doc("Etag field.")
   etag: "etag",
@@ -190,11 +237,210 @@ model KeyValue {
   @doc("The tags of the key-value")
   tags?: Record<string>;
 
+  @doc("The description of the key-value.")
+  description?: string;
+
   @doc("Indicates whether the key-value is locked.")
   locked?: boolean;
 
   @doc("A value representing the current state of the resource.")
   etag?: string;
+}
+
+@doc("The result of a Feature Flag list request.")
+@added(Versions.v2025_07_01_preview)
+model FeatureFlagListResult {
+  @doc("The collection value.")
+  @pageItems
+  @added(Versions.v2025_07_01_preview)
+  items?: FeatureFlag[];
+
+  @doc("An identifier representing the returned state of the resource.")
+  etag?: string;
+
+  @doc("The URI that can be used to request the next set of paged results.")
+  @nextLink
+  `@nextLink`?: string;
+}
+
+@doc("A feature flag.")
+@added(Versions.v2025_07_01_preview)
+@resource("ff")
+model FeatureFlag {
+  @key
+  @visibility(Lifecycle.Read)
+  @doc("The name of the feature flag.")
+  name: string;
+
+  @doc("The enabled state of the feature flag.")
+  enabled?: boolean;
+
+  @doc("The label the feature flag belongs to.")
+  label?: string;
+
+  @doc("The description of the feature flag.")
+  description?: string;
+
+  @doc("The conditions of the feature flag.")
+  conditions?: FeatureFlagConditions;
+
+  @doc("The variants of the feature flag.")
+  variants?: FeatureFlagVariantDefinition[];
+
+  @doc("The allocation of the feature flag.")
+  allocation?: FeatureFlagAllocation;
+
+  @doc("The telemetry settings of the feature flag.")
+  telemetry?: FeatureFlagTelemetryConfiguration;
+
+  @doc("The tags of the feature flag")
+  tags?: Record<string>;
+
+  @doc("A date representing the last time the feature flag was modified.")
+  @encodedName("application/json", "last_modified")
+  @visibility(Lifecycle.Read)
+  lastModified?: utcDateTime;
+
+  @doc("A value representing the current state of the resource.")
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
+@doc("The conditions that must be met for the feature flag to be enabled.")
+@added(Versions.v2025_07_01_preview)
+model FeatureFlagConditions {
+  @doc("The requirement type for the conditions.")
+  @encodedName("application/json", "requirement_type")
+  requirementType?: RequirementType;
+
+  @doc("The filters that will conditionally enable or disable the flag.")
+  filters?: FeatureFlagFilter[];
+}
+
+@doc("Requirement Type.")
+@added(Versions.v2025_07_01_preview)
+union RequirementType {
+  @doc("Any.")
+  Any: "Any",
+
+  @doc("All.")
+  All: "All",
+
+  string,
+}
+
+@doc("Feature Flag Filter object.")
+@added(Versions.v2025_07_01_preview)
+model FeatureFlagFilter {
+  @doc("The name of the filter.")
+  name: string;
+
+  @doc("The parameters used by the filter")
+  parameters?: Record<string>;
+}
+
+@doc("Feature Flag Variants object.")
+@added(Versions.v2025_07_01_preview)
+model FeatureFlagVariantDefinition {
+  @doc("The name of the variant.")
+  name: string;
+
+  @doc("The value of the variant.")
+  value?: string;
+
+  @doc("The content type of the value stored within the key-value.")
+  @encodedName("application/json", "content_type")
+  contentType?: string;
+
+  @doc("Determines if the variant should override the status of the flag.")
+  @encodedName("application/json", "status_override")
+  statusOverride?: StatusOverride;
+}
+
+@doc("Status Override.")
+@added(Versions.v2025_07_01_preview)
+union StatusOverride {
+  @doc("None.")
+  None: "None",
+
+  @doc("Enabled.")
+  Enabled: "Enabled",
+
+  @doc("Disabled.")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("Defines how to allocate variants based on context.")
+@added(Versions.v2025_07_01_preview)
+model FeatureFlagAllocation {
+  @doc("The default variant to use when disabled.")
+  @encodedName("application/json", "default_when_disabled")
+  defaultWhenDisabled?: string;
+
+  @doc("The default variant to use when enabled but not allocated.")
+  @encodedName("application/json", "default_when_enabled")
+  defaultWhenEnabled?: string;
+
+  @doc("Allocates percentiles to variants.")
+  percentile?: PercentileAllocation[];
+
+  @doc("Allocates users to variants.")
+  user?: UserAllocation[];
+
+  @doc("Allocates groups to variants.")
+  group?: GroupAllocation[];
+
+  @doc("The seed used for random allocation.")
+  seed?: string;
+}
+
+@doc("Feature Flag PercentileAllocation object.")
+@added(Versions.v2025_07_01_preview)
+model PercentileAllocation {
+  @doc("The variant to allocate these percentiles to.")
+  variant: string;
+
+  @maxValue(100)
+  @minValue(0)
+  @doc("The lower bounds for this percentile allocation.")
+  from: int32;
+
+  @maxValue(100)
+  @minValue(0)
+  @doc("The upper bounds for this percentile allocation.")
+  to: int32;
+}
+
+@doc("Feature Flag UserAllocation object.")
+@added(Versions.v2025_07_01_preview)
+model UserAllocation {
+  @doc("The variant to allocate these percentiles to.")
+  variant: string;
+
+  @doc("The users to get this variant.")
+  users: string[];
+}
+
+@doc("Feature Flag GroupAllocation object.")
+@added(Versions.v2025_07_01_preview)
+model GroupAllocation {
+  @doc("The variant to allocate these percentiles to.")
+  variant: string;
+
+  @doc("The groups to get this variant.")
+  groups: string[];
+}
+
+@doc("Feature Flag Telemetry object.")
+@added(Versions.v2025_07_01_preview)
+model FeatureFlagTelemetryConfiguration {
+  @doc("The enabled state of the telemetry.")
+  enabled: boolean;
+
+  @doc("The metadata to include on outbound telemetry")
+  metadata?: Record<string>;
 }
 
 @doc("The result of a snapshot list request.")
@@ -267,6 +513,9 @@ model Snapshot {
   @doc("The tags of the snapshot.")
   tags?: Record<string>;
 
+  @doc("The description of the snapshot.")
+  description?: string;
+
   @doc("A value representing the current state of the snapshot.")
   @visibility(Lifecycle.Read)
   etag?: string;
@@ -304,7 +553,7 @@ model LabelListResult {
   `@nextLink`?: string;
 }
 
-@doc("Labels are used to group key-values.")
+@doc("Labels are used to group key values or feature flags.")
 model Label {
   @doc("The name of the label.")
   name?: string;
@@ -347,7 +596,7 @@ alias AppConfigResponseHeaders = {
   etagHeader?: string;
 };
 
-alias AfterHeader = {
+alias AfterQueryParam = {
   @doc("""
     Instructs the server to return elements that appear after the element referred
     to by the specified token.

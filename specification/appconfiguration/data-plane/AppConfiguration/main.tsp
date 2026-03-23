@@ -1,12 +1,16 @@
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
+@client({
+  name: "AzureAppConfigurationClient",
+})
 @service(#{ title: "Azure App Configuration" })
 @versioned(Versions)
 @useAuth(
@@ -35,4 +39,7 @@ enum Versions {
 
   @doc("The 2024-09-01 API version")
   v2024_09_01: "2024-09-01",
+
+  @doc("The 2025-07-01-preview API version")
+  v2025_07_01_preview: "2025-07-01-preview",
 }
