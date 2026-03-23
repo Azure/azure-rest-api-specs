@@ -47,7 +47,6 @@
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.DefenderForStorageSetting.allOf[0].$ref` | `./common/v1/types.json#/definitions/Resource` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `info.description` | `API spec for Microsoft.Security (Azure Security Center) resource provider` | `API spec for Microsoft.Security (Azure Security Center) resource provider.` |
 | `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
