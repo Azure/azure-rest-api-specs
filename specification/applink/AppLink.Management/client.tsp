@@ -14,7 +14,7 @@ model AppLinkUpdate {
 
 @@alternateType(Microsoft.AppLink.AppLinks.update::parameters.properties,
   AppLinkUpdate,
-  "javascript"
+  "javascript,go,python,java"
 );
 
 @doc("The updatable properties of the AppLinkMember.")
@@ -41,5 +41,5 @@ model AppLinkMemberUpdate {
 
 @@alternateType(Microsoft.AppLink.AppLinkMembers.update::parameters.properties,
   AppLinkMemberUpdate,
-  "javascript"
+  "javascript,go,python,java"
 );
