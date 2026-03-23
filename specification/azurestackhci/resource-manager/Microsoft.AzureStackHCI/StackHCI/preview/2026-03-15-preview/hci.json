@@ -19920,8 +19920,62 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "remoteSupportProvisioningState": {
+          "$ref": "#/definitions/RemoteSupportProvisioningState",
+          "description": "Provisioning state of remote support operations.",
+          "readOnly": true
         }
       }
+    },
+    "RemoteSupportProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of remote support operations on the cluster.",
+      "enum": [
+        "None",
+        "GrantInProgress",
+        "RevokeInProgress",
+        "Succeeded",
+        "PartiallySucceeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No operation is in progress."
+          },
+          {
+            "name": "GrantInProgress",
+            "value": "GrantInProgress",
+            "description": "A grant (enable) operation is in progress."
+          },
+          {
+            "name": "RevokeInProgress",
+            "value": "RevokeInProgress",
+            "description": "A revoke operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The last operation completed successfully on all nodes."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The last operation succeeded on some nodes but failed on others."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The last operation failed on all nodes."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "RemoteSupportRequest": {
       "type": "object",
