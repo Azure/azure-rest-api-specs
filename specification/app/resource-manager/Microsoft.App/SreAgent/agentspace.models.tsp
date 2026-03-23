@@ -124,7 +124,7 @@ model AgentSpacePoliciesPatch {
 /** Geneva Actions policy configuration for Agent Space */
 model GenevaActionsPolicy {
   /** ACIS (Azure Container Instance Service) endpoint URL */
-  acisEndpoint?: string;
+  acisEndpoint?: url;
 
   /** Client ID for authentication */
   clientId?: string;
@@ -150,7 +150,7 @@ model GenevaActionsPolicy {
 /** Geneva Actions policy configuration for Agent Space (PATCH request model) */
 model GenevaActionsPolicyPatch {
   /** ACIS (Azure Container Instance Service) endpoint URL */
-  acisEndpoint?: string;
+  acisEndpoint?: url;
 
   /** Client ID for authentication */
   clientId?: string;
