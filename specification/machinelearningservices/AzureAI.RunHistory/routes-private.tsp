@@ -80,6 +80,7 @@ interface Spans {
 
   /** Get active run status spans. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API name from swagger."
   @route("/history/v1.0/private/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/runs/{runId}/spans/active")
   @list
   @get
