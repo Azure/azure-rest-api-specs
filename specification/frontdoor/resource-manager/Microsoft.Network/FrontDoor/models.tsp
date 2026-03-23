@@ -1804,7 +1804,7 @@ model ManagedRuleSetExceptionList {
   /**
    * List of exceptions.
    */
-    #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Exceptions do not have a single natural identifier; they are identified by a composite key of matchVariable, selector, valueMatchOperator, and matchValues properties."
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Exceptions do not have a single natural identifier; they are identified by a composite key of matchVariable, selector, valueMatchOperator, and matchValues properties."
   exceptions?: ManagedRuleSetException[];
 }
 
