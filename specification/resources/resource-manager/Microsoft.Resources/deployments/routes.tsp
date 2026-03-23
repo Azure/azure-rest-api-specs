@@ -20,6 +20,7 @@ interface DeploymentsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CalculateTemplateHash")
+  @tag("Deployments")
   @autoRoute
   calculateTemplateHash is ArmProviderActionSync<
     Request = {},
@@ -34,6 +35,7 @@ interface DeploymentOperationsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeploymentOperations_Get")
+  @tag("DeploymentOperations")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/operations/{operationId}")
   @get
   get(
@@ -56,15 +58,17 @@ interface DeploymentOperationsOperationGroup {
     operationId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<DeploymentOperation> | ErrorResponse;
+  ): ArmResponse<DeploymentOperation> | CloudError;
 
   /**
    * Gets all deployments operations for a deployment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeploymentOperations_List")
+  @tag("DeploymentOperations")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/operations")
   @get
+  @list
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -85,5 +89,5 @@ interface DeploymentOperationsOperationGroup {
      */
     @query("$top")
     $top?: int32,
-  ): ArmResponse<DeploymentOperationsListResult> | ErrorResponse;
+  ): ArmResponse<DeploymentOperationsListResult> | CloudError;
 }

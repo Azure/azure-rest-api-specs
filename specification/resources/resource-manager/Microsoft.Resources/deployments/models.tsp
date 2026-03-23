@@ -10,6 +10,8 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Resources;
 
+model DeploymentListResult is Azure.Core.Page<DeploymentListResult>;
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExtensionConfigPropertyType {
   string,

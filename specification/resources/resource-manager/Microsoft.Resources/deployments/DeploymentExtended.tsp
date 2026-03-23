@@ -48,27 +48,34 @@ interface DeploymentExtendedScopeOps
       {
         ...KeysOf<DeploymentExtended>,
       },
-      ErrorResponse,
+      CloudError,
       #{ useStaticRoute: true }
     > {}
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface DeploymentExtendeds {
   /**
    * Gets a deployment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_GetAtScope")
-  getAtScope is Extension.Read<Extension.ScopeParameter, DeploymentExtended>;
+  @tag("Deployments")
+  getAtScope is Extension.Read<
+    Extension.ScopeParameter,
+    DeploymentExtended,
+    Error = CloudError
+  >;
 
   /**
    * Checks whether the deployment exists.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CheckExistenceAtScope")
+  @tag("Deployments")
   checkExistenceAtScope is Extension.CheckExistence<
     Extension.ScopeParameter,
-    DeploymentExtended
+    DeploymentExtended,
+    Error = CloudError
   >;
 
   /**
@@ -76,12 +83,14 @@ interface DeploymentExtendeds {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CreateOrUpdateAtScope")
+  @tag("Deployments")
   createOrUpdateAtScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.ScopeParameter,
     DeploymentExtended,
     Request = Deployment,
     LroHeaders = ArmLroLocationHeader<FinalResult = DeploymentExtended> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -89,9 +98,11 @@ interface DeploymentExtendeds {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_DeleteAtScope")
+  @tag("Deployments")
   deleteAtScope is Extension.DeleteWithoutOkAsync<
     Extension.ScopeParameter,
-    DeploymentExtended
+    DeploymentExtended,
+    Error = CloudError
   >;
 
   /**
@@ -99,6 +110,7 @@ interface DeploymentExtendeds {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_ListAtScope")
+  @tag("Deployments")
   listAtScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     DeploymentExtended,
@@ -114,7 +126,9 @@ interface DeploymentExtendeds {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = DeploymentListResult,
+    Error = CloudError
   >;
 
   /**
@@ -122,12 +136,14 @@ interface DeploymentExtendeds {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CancelAtScope")
+  @tag("Deployments")
   @action("cancel")
   cancelAtScope is Extension.ActionSync<
     Extension.ScopeParameter,
     DeploymentExtended,
     void,
-    NoContentResponse
+    NoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -135,12 +151,14 @@ interface DeploymentExtendeds {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_ValidateAtScope")
+  @tag("Deployments")
   @action("validate")
   validateAtScope is Extension.ActionAsync<
     Extension.ScopeParameter,
     DeploymentExtended,
     Deployment,
-    ArmResponse<DeploymentValidateResult>
+    DeploymentValidateResult,
+    Error = CloudError
   >;
 
   /**
@@ -148,12 +166,14 @@ interface DeploymentExtendeds {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_ExportTemplateAtScope")
+  @tag("Deployments")
   @action("exportTemplate")
   exportTemplateAtScope is Extension.ActionSync<
     Extension.ScopeParameter,
     DeploymentExtended,
     void,
-    ArmResponse<DeploymentExportResult>
+    DeploymentExportResult,
+    Error = CloudError
   >;
 
   /**
@@ -161,6 +181,7 @@ interface DeploymentExtendeds {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeploymentOperations_GetAtScope")
+  @tag("DeploymentOperations")
   @get
   @route("/{+scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}")
   deploymentOperationsGetAtScope is DeploymentExtendedScopeOps.ActionSync<
@@ -182,6 +203,7 @@ interface DeploymentExtendeds {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeploymentOperations_ListAtScope")
+  @tag("DeploymentOperations")
   @list
   @get
   @action("operations")
@@ -196,7 +218,8 @@ interface DeploymentExtendeds {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 
@@ -209,86 +232,105 @@ interface DeploymentExtendedTenantOps
       {
         ...KeysOf<DeploymentExtended>,
       },
-      ErrorResponse,
+      CloudError,
       #{ useStaticRoute: true }
     > {}
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface Deployments {
   /**
    * Gets a deployment.
    */
-  getAtTenantScope is Extension.Read<Extension.Tenant, DeploymentExtended>;
+  @tag("Deployments")
+  getAtTenantScope is Extension.Read<
+    Extension.Tenant,
+    DeploymentExtended,
+    Error = CloudError
+  >;
 
   /**
    * Checks whether the deployment exists.
    */
+  @tag("Deployments")
   checkExistenceAtTenantScope is Extension.CheckExistence<
     Extension.Tenant,
-    DeploymentExtended
+    DeploymentExtended,
+    Error = CloudError
   >;
 
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
+  @tag("Deployments")
   createOrUpdateAtTenantScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.Tenant,
     DeploymentExtended,
     Request = ScopedDeployment,
     LroHeaders = ArmLroLocationHeader<FinalResult = DeploymentExtended> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
    * A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.
    */
+  @tag("Deployments")
   deleteAtTenantScope is Extension.DeleteWithoutOkAsync<
     Extension.Tenant,
-    DeploymentExtended
+    DeploymentExtended,
+    Error = CloudError
   >;
 
   /**
    * You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.
    */
+  @tag("Deployments")
   @action("cancel")
   cancelAtTenantScope is Extension.ActionSync<
     Extension.Tenant,
     DeploymentExtended,
     void,
-    NoContentResponse
+    NoContentResponse,
+    Error = CloudError
   >;
 
   /**
    * Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..
    */
+  @tag("Deployments")
   @action("validate")
   validateAtTenantScope is Extension.ActionAsync<
     Extension.Tenant,
     DeploymentExtended,
     ScopedDeployment,
-    ArmResponse<DeploymentValidateResult>
+    DeploymentValidateResult,
+    Error = CloudError
   >;
 
   /**
    * Returns changes that will be made by the deployment if executed at the scope of the tenant group.
    */
+  @tag("Deployments")
   @action("whatIf")
   whatIfAtTenantScope is Extension.ActionAsync<
     Extension.Tenant,
     DeploymentExtended,
     ScopedDeploymentWhatIf,
-    ArmResponse<WhatIfOperationResult>
+    WhatIfOperationResult,
+    Error = CloudError
   >;
 
   /**
    * Exports the template used for specified deployment.
    */
+  @tag("Deployments")
   @action("exportTemplate")
   exportTemplateAtTenantScope is Extension.ActionSync<
     Extension.Tenant,
     DeploymentExtended,
     void,
-    ArmResponse<DeploymentExportResult>
+    DeploymentExportResult,
+    Error = CloudError
   >;
 
   /**
@@ -296,6 +338,7 @@ interface Deployments {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeploymentOperations_GetAtTenantScope")
+  @tag("DeploymentOperations")
   @get
   @route("/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}")
   deploymentOperationsGetAtTenantScope is DeploymentExtendedTenantOps.ActionSync<
@@ -315,6 +358,7 @@ interface Deployments {
   /**
    * Get all the deployments at the tenant scope.
    */
+  @tag("Deployments")
   @operationId("Deployments_ListAtTenantScope")
   list is Extension.ListByTarget<
     Extension.Tenant,
@@ -331,7 +375,8 @@ interface Deployments {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -339,6 +384,7 @@ interface Deployments {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeploymentOperations_ListAtTenantScope")
+  @tag("DeploymentOperations")
   @list
   @get
   @action("operations")
@@ -353,7 +399,8 @@ interface Deployments {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 
@@ -371,20 +418,22 @@ interface DeploymentExtendedManagementGroupOps
       {
         ...KeysOf<DeploymentExtended>,
       },
-      ErrorResponse,
+      CloudError,
       #{ useStaticRoute: true }
     > {}
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface DeploymentExtendedManagementGroup {
   /**
    * Gets a deployment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_GetAtManagementGroupScope")
+  @tag("Deployments")
   getAtManagementGroupScope is Extension.Read<
     Extension.ManagementGroup<"groupId">,
-    DeploymentExtended
+    DeploymentExtended,
+    Error = CloudError
   >;
 
   /**
@@ -392,9 +441,11 @@ interface DeploymentExtendedManagementGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CheckExistenceAtManagementGroupScope")
+  @tag("Deployments")
   checkExistenceAtManagementGroupScope is Extension.CheckExistence<
     Extension.ManagementGroup<"groupId">,
-    DeploymentExtended
+    DeploymentExtended,
+    Error = CloudError
   >;
 
   /**
@@ -402,12 +453,14 @@ interface DeploymentExtendedManagementGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CreateOrUpdateAtManagementGroupScope")
+  @tag("Deployments")
   createOrUpdateAtManagementGroupScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.ManagementGroup<"groupId">,
     DeploymentExtended,
     Request = ScopedDeployment,
     LroHeaders = ArmLroLocationHeader<FinalResult = DeploymentExtended> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -415,9 +468,11 @@ interface DeploymentExtendedManagementGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_DeleteAtManagementGroupScope")
+  @tag("Deployments")
   deleteAtManagementGroupScope is Extension.DeleteWithoutOkAsync<
     Extension.ManagementGroup<"groupId">,
-    DeploymentExtended
+    DeploymentExtended,
+    Error = CloudError
   >;
 
   /**
@@ -425,6 +480,7 @@ interface DeploymentExtendedManagementGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_ListAtManagementGroupScope")
+  @tag("Deployments")
   listAtManagementGroupScope is Extension.ListByTarget<
     Extension.ManagementGroup<"groupId">,
     DeploymentExtended,
@@ -440,7 +496,8 @@ interface DeploymentExtendedManagementGroup {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -448,12 +505,14 @@ interface DeploymentExtendedManagementGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CancelAtManagementGroupScope")
+  @tag("Deployments")
   @action("cancel")
   cancelAtManagementGroupScope is Extension.ActionSync<
     Extension.ManagementGroup<"groupId">,
     DeploymentExtended,
     void,
-    NoContentResponse
+    NoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -461,12 +520,14 @@ interface DeploymentExtendedManagementGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_ValidateAtManagementGroupScope")
+  @tag("Deployments")
   @action("validate")
   validateAtManagementGroupScope is Extension.ActionAsync<
     Extension.ManagementGroup<"groupId">,
     DeploymentExtended,
     ScopedDeployment,
-    ArmResponse<DeploymentValidateResult>
+    DeploymentValidateResult,
+    Error = CloudError
   >;
 
   /**
@@ -474,12 +535,14 @@ interface DeploymentExtendedManagementGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_WhatIfAtManagementGroupScope")
+  @tag("Deployments")
   @action("whatIf")
   whatIfAtManagementGroupScope is Extension.ActionAsync<
     Extension.ManagementGroup<"groupId">,
     DeploymentExtended,
     ScopedDeploymentWhatIf,
-    ArmResponse<WhatIfOperationResult>
+    WhatIfOperationResult,
+    Error = CloudError
   >;
 
   /**
@@ -487,12 +550,14 @@ interface DeploymentExtendedManagementGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_ExportTemplateAtManagementGroupScope")
+  @tag("Deployments")
   @action("exportTemplate")
   exportTemplateAtManagementGroupScope is Extension.ActionSync<
     Extension.ManagementGroup<"groupId">,
     DeploymentExtended,
     void,
-    ArmResponse<DeploymentExportResult>
+    DeploymentExportResult,
+    Error = CloudError
   >;
 
   /**
@@ -500,12 +565,13 @@ interface DeploymentExtendedManagementGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeploymentOperations_GetAtManagementGroupScope")
+  @tag("DeploymentOperations")
   @get
   @route("/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}")
   deploymentOperationsGetAtManagementGroupScope is DeploymentExtendedManagementGroupOps.ActionSync<
     DeploymentExtended,
     void,
-    ArmResponse<DeploymentOperation>,
+    DeploymentOperation,
     Parameters = {
       /**
        * The ID of the operation to get.
@@ -521,6 +587,7 @@ interface DeploymentExtendedManagementGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeploymentOperations_ListAtManagementGroupScope")
+  @tag("DeploymentOperations")
   @list
   @get
   @action("operations")
@@ -528,14 +595,15 @@ interface DeploymentExtendedManagementGroup {
     Extension.ManagementGroup<"groupId">,
     DeploymentExtended,
     void,
-    ArmResponse<DeploymentOperationsListResult>,
+    DeploymentOperationsListResult,
     Parameters = {
       /**
        * The number of results to return.
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 
@@ -548,20 +616,22 @@ interface DeploymentExtendedSubscriptionOps
       {
         ...KeysOf<DeploymentExtended>,
       },
-      ErrorResponse,
+      CloudError,
       #{ useStaticRoute: true }
     > {}
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface DeploymentExtendedSubscriptionGroup {
   /**
    * Gets a deployment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_GetAtSubscriptionScope")
+  @tag("Deployments")
   getAtSubscriptionScope is Extension.Read<
     Extension.Subscription,
-    DeploymentExtended
+    DeploymentExtended,
+    Error = CloudError
   >;
 
   /**
@@ -569,9 +639,11 @@ interface DeploymentExtendedSubscriptionGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CheckExistenceAtSubscriptionScope")
+  @tag("Deployments")
   checkExistenceAtSubscriptionScope is Extension.CheckExistence<
     Extension.Subscription,
-    DeploymentExtended
+    DeploymentExtended,
+    Error = CloudError
   >;
 
   /**
@@ -579,12 +651,14 @@ interface DeploymentExtendedSubscriptionGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CreateOrUpdateAtSubscriptionScope")
+  @tag("Deployments")
   createOrUpdateAtSubscriptionScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.Subscription,
     DeploymentExtended,
     Request = Deployment,
     LroHeaders = ArmLroLocationHeader<FinalResult = DeploymentExtended> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -592,9 +666,11 @@ interface DeploymentExtendedSubscriptionGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_DeleteAtSubscriptionScope")
+  @tag("Deployments")
   deleteAtSubscriptionScope is Extension.DeleteWithoutOkAsync<
     Extension.Subscription,
-    DeploymentExtended
+    DeploymentExtended,
+    Error = CloudError
   >;
 
   /**
@@ -602,6 +678,7 @@ interface DeploymentExtendedSubscriptionGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_ListAtSubscriptionScope")
+  @tag("Deployments")
   listAtSubscriptionScope is Extension.ListByTarget<
     Extension.Subscription,
     DeploymentExtended,
@@ -617,7 +694,8 @@ interface DeploymentExtendedSubscriptionGroup {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -625,12 +703,14 @@ interface DeploymentExtendedSubscriptionGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CancelAtSubscriptionScope")
+  @tag("Deployments")
   @action("cancel")
   cancelAtSubscriptionScope is Extension.ActionSync<
     Extension.Subscription,
     DeploymentExtended,
     void,
-    NoContentResponse
+    NoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -638,12 +718,14 @@ interface DeploymentExtendedSubscriptionGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_ValidateAtSubscriptionScope")
+  @tag("Deployments")
   @action("validate")
   validateAtSubscriptionScope is Extension.ActionAsync<
     Extension.Subscription,
     DeploymentExtended,
     Deployment,
-    ArmResponse<DeploymentValidateResult>
+    DeploymentValidateResult,
+    Error = CloudError
   >;
 
   /**
@@ -651,12 +733,14 @@ interface DeploymentExtendedSubscriptionGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_WhatIfAtSubscriptionScope")
+  @tag("Deployments")
   @action("whatIf")
   whatIfAtSubscriptionScope is Extension.ActionAsync<
     Extension.Subscription,
     DeploymentExtended,
     DeploymentWhatIf,
-    ArmResponse<WhatIfOperationResult>
+    WhatIfOperationResult,
+    Error = CloudError
   >;
 
   /**
@@ -664,12 +748,14 @@ interface DeploymentExtendedSubscriptionGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_ExportTemplateAtSubscriptionScope")
+  @tag("Deployments")
   @action("exportTemplate")
   exportTemplateAtSubscriptionScope is Extension.ActionSync<
     Extension.Subscription,
     DeploymentExtended,
     void,
-    ArmResponse<DeploymentExportResult>
+    DeploymentExportResult,
+    Error = CloudError
   >;
 
   /**
@@ -677,6 +763,7 @@ interface DeploymentExtendedSubscriptionGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeploymentOperations_GetAtSubscriptionScope")
+  @tag("DeploymentOperations")
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}")
   deploymentOperationsGetAtSubscriptionScope is DeploymentExtendedSubscriptionOps.ActionSync<
@@ -698,6 +785,7 @@ interface DeploymentExtendedSubscriptionGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeploymentOperations_ListAtSubscriptionScope")
+  @tag("DeploymentOperations")
   @list
   @get
   @action("operations")
@@ -712,7 +800,8 @@ interface DeploymentExtendedSubscriptionGroup {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 
@@ -734,16 +823,18 @@ alias DeploymentExtendedResourceGroupOps = Azure.ResourceManager.Legacy.LegacyOp
   },
   {
     ...KeysOf<DeploymentExtended>;
-  }
+  },
+  CloudError
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DeploymentExtendedOperationGroup {
   /**
    * Gets a deployment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_Get")
+  @tag("Deployments")
   get is DeploymentExtendedResourceGroupOps.Read<DeploymentExtended>;
 
   /**
@@ -751,6 +842,7 @@ interface DeploymentExtendedOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CheckExistence")
+  @tag("Deployments")
   checkExistence is DeploymentExtendedResourceGroupOps.CheckExistence<DeploymentExtended>;
 
   /**
@@ -758,6 +850,7 @@ interface DeploymentExtendedOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CreateOrUpdate")
+  @tag("Deployments")
   createOrUpdate is DeploymentExtendedResourceGroupOps.CreateOrUpdateAsync<
     DeploymentExtended,
     Request = Deployment,
@@ -770,6 +863,7 @@ interface DeploymentExtendedOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_Delete")
+  @tag("Deployments")
   delete is DeploymentExtendedResourceGroupOps.DeleteWithoutOkAsync<DeploymentExtended>;
 
   /**
@@ -777,6 +871,7 @@ interface DeploymentExtendedOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_ListByResourceGroup")
+  @tag("Deployments")
   listByResourceGroup is DeploymentExtendedResourceGroupOps.List<
     DeploymentExtended,
     Parameters = {
@@ -799,6 +894,7 @@ interface DeploymentExtendedOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_Cancel")
+  @tag("Deployments")
   cancel is DeploymentExtendedResourceGroupOps.ActionSync<
     DeploymentExtended,
     void,
@@ -810,10 +906,11 @@ interface DeploymentExtendedOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_Validate")
+  @tag("Deployments")
   validate is DeploymentExtendedResourceGroupOps.ActionAsync<
     DeploymentExtended,
     Deployment,
-    ArmResponse<DeploymentValidateResult>
+    DeploymentValidateResult
   >;
 
   /**
@@ -821,10 +918,11 @@ interface DeploymentExtendedOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_WhatIf")
+  @tag("Deployments")
   whatIf is DeploymentExtendedResourceGroupOps.ActionAsync<
     DeploymentExtended,
     DeploymentWhatIf,
-    ArmResponse<WhatIfOperationResult>
+    WhatIfOperationResult
   >;
 
   /**
@@ -832,10 +930,11 @@ interface DeploymentExtendedOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_ExportTemplate")
+  @tag("Deployments")
   exportTemplate is DeploymentExtendedResourceGroupOps.ActionSync<
     DeploymentExtended,
     void,
-    ArmResponse<DeploymentExportResult>
+    DeploymentExportResult
   >;
 }
 

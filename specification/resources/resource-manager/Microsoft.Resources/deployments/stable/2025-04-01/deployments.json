@@ -3,7 +3,7 @@
   "info": {
     "title": "DeploymentsClient",
     "version": "2025-04-01",
-    "description": "Deployments Client",
+    "description": "Provides operations for working with deployments.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -43,16 +43,7 @@
       "name": "Deployments"
     },
     {
-      "name": "DeploymentExtendeds"
-    },
-    {
-      "name": "DeploymentExtendedManagementGroup"
-    },
-    {
-      "name": "DeploymentExtendedSubscriptionGroup"
-    },
-    {
-      "name": "DeploymentExtendedOperationGroup"
+      "name": "DeploymentOperations"
     }
   ],
   "paths": {
@@ -60,7 +51,7 @@
       "get": {
         "operationId": "Deployments_ListAtScope",
         "tags": [
-          "DeploymentExtendeds"
+          "Deployments"
         ],
         "description": "Get all the deployments at the given scope.",
         "parameters": [
@@ -93,15 +84,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeploymentExtendedListResult"
+              "$ref": "#/definitions/DeploymentListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -114,7 +105,7 @@
       "get": {
         "operationId": "Deployments_GetAtScope",
         "tags": [
-          "DeploymentExtendeds"
+          "Deployments"
         ],
         "description": "Gets a deployment.",
         "parameters": [
@@ -150,7 +141,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -158,7 +149,7 @@
       "put": {
         "operationId": "Deployments_CreateOrUpdateAtScope",
         "tags": [
-          "DeploymentExtendeds"
+          "Deployments"
         ],
         "description": "You can provide the template and parameters directly in the request or link to JSON files.",
         "parameters": [
@@ -220,7 +211,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -238,7 +229,7 @@
       "delete": {
         "operationId": "Deployments_DeleteAtScope",
         "tags": [
-          "DeploymentExtendeds"
+          "Deployments"
         ],
         "description": "A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.",
         "parameters": [
@@ -285,7 +276,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -297,7 +288,7 @@
       "head": {
         "operationId": "Deployments_CheckExistenceAtScope",
         "tags": [
-          "DeploymentExtendeds"
+          "Deployments"
         ],
         "description": "Checks whether the deployment exists.",
         "parameters": [
@@ -333,7 +324,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -343,7 +334,7 @@
       "post": {
         "operationId": "Deployments_CancelAtScope",
         "tags": [
-          "DeploymentExtendeds"
+          "Deployments"
         ],
         "description": "You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.",
         "parameters": [
@@ -376,7 +367,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -386,7 +377,7 @@
       "post": {
         "operationId": "Deployments_ExportTemplateAtScope",
         "tags": [
-          "DeploymentExtendeds"
+          "Deployments"
         ],
         "description": "Exports the template used for specified deployment.",
         "parameters": [
@@ -422,7 +413,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -432,7 +423,7 @@
       "get": {
         "operationId": "DeploymentOperations_ListAtScope",
         "tags": [
-          "DeploymentExtendeds"
+          "DeploymentOperations"
         ],
         "description": "Gets all deployments operations for a deployment.",
         "parameters": [
@@ -476,7 +467,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -489,7 +480,7 @@
       "get": {
         "operationId": "DeploymentOperations_GetAtScope",
         "tags": [
-          "DeploymentExtendeds"
+          "DeploymentOperations"
         ],
         "description": "Gets a deployments operation.",
         "parameters": [
@@ -532,7 +523,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -542,7 +533,7 @@
       "post": {
         "operationId": "Deployments_ValidateAtScope",
         "tags": [
-          "DeploymentExtendeds"
+          "Deployments"
         ],
         "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
         "parameters": [
@@ -601,7 +592,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -612,7 +603,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CDeploymentValidateResult%3E"
+          "final-state-schema": "#/definitions/DeploymentValidateResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -621,7 +612,7 @@
       "get": {
         "operationId": "Deployments_ListAtManagementGroupScope",
         "tags": [
-          "DeploymentExtendedManagementGroup"
+          "Deployments"
         ],
         "description": "Get all the deployments for a management group.",
         "parameters": [
@@ -662,7 +653,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -675,7 +666,7 @@
       "get": {
         "operationId": "Deployments_GetAtManagementGroupScope",
         "tags": [
-          "DeploymentExtendedManagementGroup"
+          "Deployments"
         ],
         "description": "Gets a deployment.",
         "parameters": [
@@ -711,7 +702,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -719,7 +710,7 @@
       "put": {
         "operationId": "Deployments_CreateOrUpdateAtManagementGroupScope",
         "tags": [
-          "DeploymentExtendedManagementGroup"
+          "Deployments"
         ],
         "description": "You can provide the template and parameters directly in the request or link to JSON files.",
         "parameters": [
@@ -781,7 +772,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -799,7 +790,7 @@
       "delete": {
         "operationId": "Deployments_DeleteAtManagementGroupScope",
         "tags": [
-          "DeploymentExtendedManagementGroup"
+          "Deployments"
         ],
         "description": "A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.",
         "parameters": [
@@ -846,7 +837,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -858,7 +849,7 @@
       "head": {
         "operationId": "Deployments_CheckExistenceAtManagementGroupScope",
         "tags": [
-          "DeploymentExtendedManagementGroup"
+          "Deployments"
         ],
         "description": "Checks whether the deployment exists.",
         "parameters": [
@@ -894,7 +885,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -904,7 +895,7 @@
       "post": {
         "operationId": "Deployments_CancelAtManagementGroupScope",
         "tags": [
-          "DeploymentExtendedManagementGroup"
+          "Deployments"
         ],
         "description": "You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.",
         "parameters": [
@@ -937,7 +928,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -947,7 +938,7 @@
       "post": {
         "operationId": "Deployments_ExportTemplateAtManagementGroupScope",
         "tags": [
-          "DeploymentExtendedManagementGroup"
+          "Deployments"
         ],
         "description": "Exports the template used for specified deployment.",
         "parameters": [
@@ -983,7 +974,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -993,7 +984,7 @@
       "get": {
         "operationId": "DeploymentOperations_ListAtManagementGroupScope",
         "tags": [
-          "DeploymentExtendedManagementGroup"
+          "DeploymentOperations"
         ],
         "description": "Gets all deployments operations for a deployment.",
         "parameters": [
@@ -1037,7 +1028,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1050,7 +1041,7 @@
       "get": {
         "operationId": "DeploymentOperations_GetAtManagementGroupScope",
         "tags": [
-          "DeploymentExtendedManagementGroup"
+          "DeploymentOperations"
         ],
         "description": "Gets a deployments operation.",
         "parameters": [
@@ -1093,7 +1084,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1103,7 +1094,7 @@
       "post": {
         "operationId": "Deployments_ValidateAtManagementGroupScope",
         "tags": [
-          "DeploymentExtendedManagementGroup"
+          "Deployments"
         ],
         "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
         "parameters": [
@@ -1162,7 +1153,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1173,7 +1164,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CDeploymentValidateResult%3E"
+          "final-state-schema": "#/definitions/DeploymentValidateResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -1182,7 +1173,7 @@
       "post": {
         "operationId": "Deployments_WhatIfAtManagementGroupScope",
         "tags": [
-          "DeploymentExtendedManagementGroup"
+          "Deployments"
         ],
         "description": "Returns changes that will be made by the deployment if executed at the scope of the management group.",
         "parameters": [
@@ -1241,7 +1232,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1252,7 +1243,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CWhatIfOperationResult%3E"
+          "final-state-schema": "#/definitions/WhatIfOperationResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -1260,6 +1251,9 @@
     "/providers/Microsoft.Resources/calculateTemplateHash": {
       "post": {
         "operationId": "Deployments_CalculateTemplateHash",
+        "tags": [
+          "Deployments"
+        ],
         "description": "Calculate the hash of the given template.",
         "parameters": [
           {
@@ -1333,7 +1327,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1374,7 +1368,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1436,7 +1430,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1493,7 +1487,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1533,7 +1527,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1568,7 +1562,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1606,7 +1600,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1616,7 +1610,7 @@
       "get": {
         "operationId": "DeploymentOperations_ListAtTenantScope",
         "tags": [
-          "Deployments"
+          "DeploymentOperations"
         ],
         "description": "Gets all deployments operations for a deployment.",
         "parameters": [
@@ -1652,7 +1646,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1665,7 +1659,7 @@
       "get": {
         "operationId": "DeploymentOperations_GetAtTenantScope",
         "tags": [
-          "Deployments"
+          "DeploymentOperations"
         ],
         "description": "Gets a deployments operation.",
         "parameters": [
@@ -1700,7 +1694,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1761,7 +1755,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1772,7 +1766,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CDeploymentValidateResult%3E"
+          "final-state-schema": "#/definitions/DeploymentValidateResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -1832,7 +1826,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1843,7 +1837,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CWhatIfOperationResult%3E"
+          "final-state-schema": "#/definitions/WhatIfOperationResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -1852,7 +1846,7 @@
       "get": {
         "operationId": "Deployments_ListAtSubscriptionScope",
         "tags": [
-          "DeploymentExtendedSubscriptionGroup"
+          "Deployments"
         ],
         "description": "Get all the deployments for a subscription.",
         "parameters": [
@@ -1888,7 +1882,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1901,7 +1895,7 @@
       "get": {
         "operationId": "Deployments_GetAtSubscriptionScope",
         "tags": [
-          "DeploymentExtendedSubscriptionGroup"
+          "Deployments"
         ],
         "description": "Gets a deployment.",
         "parameters": [
@@ -1932,7 +1926,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1940,7 +1934,7 @@
       "put": {
         "operationId": "Deployments_CreateOrUpdateAtSubscriptionScope",
         "tags": [
-          "DeploymentExtendedSubscriptionGroup"
+          "Deployments"
         ],
         "description": "You can provide the template and parameters directly in the request or link to JSON files.",
         "parameters": [
@@ -1997,7 +1991,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2015,7 +2009,7 @@
       "delete": {
         "operationId": "Deployments_DeleteAtSubscriptionScope",
         "tags": [
-          "DeploymentExtendedSubscriptionGroup"
+          "Deployments"
         ],
         "description": "A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.",
         "parameters": [
@@ -2057,7 +2051,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2069,7 +2063,7 @@
       "head": {
         "operationId": "Deployments_CheckExistenceAtSubscriptionScope",
         "tags": [
-          "DeploymentExtendedSubscriptionGroup"
+          "Deployments"
         ],
         "description": "Checks whether the deployment exists.",
         "parameters": [
@@ -2100,7 +2094,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2110,7 +2104,7 @@
       "post": {
         "operationId": "Deployments_CancelAtSubscriptionScope",
         "tags": [
-          "DeploymentExtendedSubscriptionGroup"
+          "Deployments"
         ],
         "description": "You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.",
         "parameters": [
@@ -2138,7 +2132,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2148,7 +2142,7 @@
       "post": {
         "operationId": "Deployments_ExportTemplateAtSubscriptionScope",
         "tags": [
-          "DeploymentExtendedSubscriptionGroup"
+          "Deployments"
         ],
         "description": "Exports the template used for specified deployment.",
         "parameters": [
@@ -2179,7 +2173,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2189,7 +2183,7 @@
       "get": {
         "operationId": "DeploymentOperations_ListAtSubscriptionScope",
         "tags": [
-          "DeploymentExtendedSubscriptionGroup"
+          "DeploymentOperations"
         ],
         "description": "Gets all deployments operations for a deployment.",
         "parameters": [
@@ -2228,7 +2222,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2241,7 +2235,7 @@
       "get": {
         "operationId": "DeploymentOperations_GetAtSubscriptionScope",
         "tags": [
-          "DeploymentExtendedSubscriptionGroup"
+          "DeploymentOperations"
         ],
         "description": "Gets a deployments operation.",
         "parameters": [
@@ -2279,7 +2273,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2289,7 +2283,7 @@
       "post": {
         "operationId": "Deployments_ValidateAtSubscriptionScope",
         "tags": [
-          "DeploymentExtendedSubscriptionGroup"
+          "Deployments"
         ],
         "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
         "parameters": [
@@ -2343,7 +2337,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2354,7 +2348,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CDeploymentValidateResult%3E"
+          "final-state-schema": "#/definitions/DeploymentValidateResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -2363,7 +2357,7 @@
       "post": {
         "operationId": "Deployments_WhatIfAtSubscriptionScope",
         "tags": [
-          "DeploymentExtendedSubscriptionGroup"
+          "Deployments"
         ],
         "description": "Returns changes that will be made by the deployment if executed at the scope of the subscription.",
         "parameters": [
@@ -2417,7 +2411,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2428,7 +2422,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CWhatIfOperationResult%3E"
+          "final-state-schema": "#/definitions/WhatIfOperationResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -2436,6 +2430,9 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/operations": {
       "get": {
         "operationId": "DeploymentOperations_List",
+        "tags": [
+          "DeploymentOperations"
+        ],
         "description": "Gets all deployments operations for a deployment.",
         "parameters": [
           {
@@ -2476,15 +2473,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/operations/{operationId}": {
       "get": {
         "operationId": "DeploymentOperations_Get",
+        "tags": [
+          "DeploymentOperations"
+        ],
         "description": "Gets a deployments operation.",
         "parameters": [
           {
@@ -2524,7 +2527,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2534,7 +2537,7 @@
       "get": {
         "operationId": "Deployments_ListByResourceGroup",
         "tags": [
-          "DeploymentExtendedOperationGroup"
+          "Deployments"
         ],
         "description": "Get all the deployments for a resource group.",
         "parameters": [
@@ -2577,7 +2580,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2590,7 +2593,7 @@
       "get": {
         "operationId": "Deployments_Get",
         "tags": [
-          "DeploymentExtendedOperationGroup"
+          "Deployments"
         ],
         "description": "Gets a deployment.",
         "parameters": [
@@ -2628,7 +2631,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2636,7 +2639,7 @@
       "put": {
         "operationId": "Deployments_CreateOrUpdate",
         "tags": [
-          "DeploymentExtendedOperationGroup"
+          "Deployments"
         ],
         "description": "You can provide the template and parameters directly in the request or link to JSON files.",
         "parameters": [
@@ -2700,7 +2703,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2730,7 +2733,7 @@
       "delete": {
         "operationId": "Deployments_Delete",
         "tags": [
-          "DeploymentExtendedOperationGroup"
+          "Deployments"
         ],
         "description": "A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. Deleting a template deployment does not affect the state of the resource group. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.",
         "parameters": [
@@ -2779,7 +2782,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2791,7 +2794,7 @@
       "head": {
         "operationId": "Deployments_CheckExistence",
         "tags": [
-          "DeploymentExtendedOperationGroup"
+          "Deployments"
         ],
         "description": "Checks whether the deployment exists.",
         "parameters": [
@@ -2829,7 +2832,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2839,7 +2842,7 @@
       "post": {
         "operationId": "Deployments_Cancel",
         "tags": [
-          "DeploymentExtendedOperationGroup"
+          "Deployments"
         ],
         "description": "You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resource group partially deployed.",
         "parameters": [
@@ -2874,7 +2877,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2884,7 +2887,7 @@
       "post": {
         "operationId": "Deployments_ExportTemplate",
         "tags": [
-          "DeploymentExtendedOperationGroup"
+          "Deployments"
         ],
         "description": "Exports the template used for specified deployment.",
         "parameters": [
@@ -2922,7 +2925,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2932,7 +2935,7 @@
       "post": {
         "operationId": "Deployments_Validate",
         "tags": [
-          "DeploymentExtendedOperationGroup"
+          "Deployments"
         ],
         "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
         "parameters": [
@@ -2993,7 +2996,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3004,7 +3007,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CDeploymentValidateResult%3E"
+          "final-state-schema": "#/definitions/DeploymentValidateResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -3013,7 +3016,7 @@
       "post": {
         "operationId": "Deployments_WhatIf",
         "tags": [
-          "DeploymentExtendedOperationGroup"
+          "Deployments"
         ],
         "description": "Returns changes that will be made by the deployment if executed at the scope of the resource group.",
         "parameters": [
@@ -3074,7 +3077,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3085,7 +3088,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CWhatIfOperationResult%3E"
+          "final-state-schema": "#/definitions/WhatIfOperationResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -3339,32 +3342,6 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmResponse<DeploymentValidateResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/DeploymentValidateResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<WhatIfOperationResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/WhatIfOperationResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "BasicDependency": {
       "type": "object",
       "description": "Deployment dependency information.",
@@ -3435,6 +3412,16 @@
             "description": "The resource is not supported by What-If."
           }
         ]
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An error response for a resource management request.",
+      "properties": {
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)"
+        }
       }
     },
     "DebugSetting": {
@@ -3716,6 +3703,27 @@
           }
         ]
       }
+    },
+    "DeploymentListResult": {
+      "type": "object",
+      "description": "Paged collection of DeploymentListResult items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeploymentListResult items on this page",
+          "items": {
+            "$ref": "#/definitions/DeploymentListResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "DeploymentMode": {
       "type": "string",

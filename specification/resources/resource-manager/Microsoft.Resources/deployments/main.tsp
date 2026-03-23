@@ -23,7 +23,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Deployments Client
+ * Provides operations for working with deployments.
  */
 @armProviderNamespace
 @service(#{ title: "DeploymentsClient" })
