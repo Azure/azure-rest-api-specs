@@ -5,25 +5,21 @@ After applying changes (Step 4), run through all sub-steps below in order.
 | Sub-step | Action               | When                       |
 | -------- | -------------------- | -------------------------- |
 | 5.1      | TypeSpec Validation  | Always                     |
-| 5.2      | Output Generation    | Always                     |
+| 5.2      | Compile successfully | Always                     |
 | 5.3      | Example Verification | API Version Evolution only |
 
 ### Step 5.1: TypeSpec Validation
 
-1. Invoke `azure-sdk-mcp:azsdk_run_typespec_validation` with the TypeSpec project root path.
-2. Run `tsp compile .` with the TypeSpec project root path.
+Invoke `azure-sdk-mcp:azsdk_run_typespec_validation` with the TypeSpec project root path.
 
 - **Pass** → proceed to Step 5.2.
 - **Fail** → fix with minimal, scoped changes, then re-run. Repeat until resolved.
 
 > Never skip this step, even for trivial changes.
 
-### Step 5.2: Output Generation
+### Step 5.2: Compile successfully
 
-Verify that the corresponding swagger (OpenAPI `.json`) file has been generated under the `{TypeSpec project root}/{version-status}/{target-version}/` directory.
-
-- **Swagger exists** → proceed to Step 5.3.
-- **Swagger missing** → run `tsp compile .` from the TypeSpec project root path to generate it, then verify the file is created.
+Run `tsp compile .` from the TypeSpec project root path. Verify that the corresponding swagger (OpenAPI `.json`) file has been generated under the `{TypeSpec project root}/{version-status}/{target-version}/` directory. Fix the compile error if any.
 
 ### Step 5.3: Example Verification
 
