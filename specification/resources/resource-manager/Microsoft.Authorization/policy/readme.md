@@ -928,6 +928,8 @@ directive:
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: policyAssignments.json
     reason: "Policy assignments can have a managed identity associated with them. This requires a location."
+
+suppressions:
   - code: GuidUsage
     from: preview/2026-01-01-preview/openapi.json
     reason: "policyAssignmentInstanceId is a server-generated, read-only GUID in the established service contract"
