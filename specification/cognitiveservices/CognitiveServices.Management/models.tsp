@@ -5544,7 +5544,6 @@ model ComputeListResult {
    * Gets the list of Cognitive Services computes and their properties.
    */
   @pageItems
-  @visibility(Lifecycle.Read)
   @identifiers(#["name"])
   value?: Compute[];
 }
