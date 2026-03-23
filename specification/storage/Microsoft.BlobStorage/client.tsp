@@ -372,9 +372,6 @@ enum ImmutabilityPolicySetting {
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
 
-@@alternateType(AccessPolicy.start, string, "python");
-@@alternateType(AccessPolicy.expiry, string, "python");
-
 @@clientName(QueryType, "QueryFormatType", "python");
 @@clientName(Storage.Blob.BlockBlob.uploadBlobFromUrl,
   "putBlobFromUrl",
@@ -391,7 +388,9 @@ enum ImmutabilityPolicySetting {
 
 @@alternateType(BlockIdParameter.blockid, string, "python");
 
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobs, "python,javascript,csharp");
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobs,
+  "python,javascript,csharp"
+);
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobHierarchySegment,
   "python,javascript,csharp"
 );
@@ -551,7 +550,10 @@ model BlobServicePropertiesCsharp {
 @@clientName(ArrowConfiguration, "ArrowTextConfigurationInternal", "csharp");
 @@clientName(ContainerItem, "ContainerItemInternal", "csharp");
 @@clientName(ContainerProperties, "ContainerPropertiesInternal", "csharp");
-@@clientName(DelimitedTextConfiguration, "DelimitedTextConfigurationInternal", "csharp");
+@@clientName(DelimitedTextConfiguration,
+  "DelimitedTextConfigurationInternal",
+  "csharp"
+);
 @@clientName(JsonTextConfiguration, "JsonTextConfigurationInternal", "csharp");
 @@clientName(StorageServiceStats, "BlobServiceStatistics", "csharp");
 @@clientName(AccessPolicy.start, "PolicyStartsOn", "csharp");
@@ -569,7 +571,10 @@ model BlobServicePropertiesCsharp {
 @@clientName(SkuName.StandardGZRS, "StandardGzrs", "csharp");
 @@clientName(SkuName.PremiumZRS, "PremiumZrs", "csharp");
 @@clientName(SkuName.StandardRAGZRS, "StandardRagzrs", "csharp");
-@@clientName(ContentMd5Parameter.transactionalContentMd5, "transactionalContentMD5", "csharp");
+@@clientName(ContentMd5Parameter.transactionalContentMd5,
+  "transactionalContentMD5",
+  "csharp"
+);
 
 @@access(BlobProperties, Access.internal, "csharp");
 @@access(BlobItem, Access.internal, "csharp");
