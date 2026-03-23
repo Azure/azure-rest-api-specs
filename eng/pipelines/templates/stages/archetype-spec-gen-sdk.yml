@@ -187,6 +187,9 @@ stages:
             - Name: $(SpecRepoOwner)/$(SpecRepoName)
               Commitish: $(SpecRepoCommit)
               WorkingDirectory: $(SpecRepoDirectory)
+            - Name: $(SdkRepoOwner)/$(SdkRepoName)
+              Commitish: $(CheckoutCommitish)
+              WorkingDirectory: $(SdkRepoDirectory)
           SkipCheckoutNone: true
           ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
             TokenToUseForAuth: $(azuresdk-github-pat)
@@ -206,14 +209,16 @@ stages:
               Start-Sleep -Seconds $sleep; $sleep *= 2
             }
           }
+          Write-Host "Replacing sparse clone with full checkout for azure-sdk-for-js..."
+          Remove-Item -Recurse -Force "$(SdkRepoDirectory)"
           New-Item -ItemType Directory -Force -Path "$(SdkRepoDirectory)" | Out-Null
           Push-Location "$(SdkRepoDirectory)"
-          Write-Host "Cloning $(SdkRepoOwner)/$(SdkRepoName) with full checkout..."
           $repoUrl = "https://github.com/$(SdkRepoOwner)/$(SdkRepoName)"
           Retry 3 git clone --single-branch --branch "$(CheckoutCommitish)" $repoUrl .
           git config gc.auto 0
           Pop-Location
-        displayName: 'Clone SDK repository (full checkout)'
+        displayName: 'Re-clone azure-sdk-for-js with full checkout'
+        condition: and(succeeded(), eq(variables['SdkRepoName'], 'azure-sdk-for-js'))
 
       - task: NodeTool@0
         inputs:
