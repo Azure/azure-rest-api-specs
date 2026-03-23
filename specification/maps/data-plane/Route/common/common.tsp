@@ -31,6 +31,9 @@ union LroStatus {
   Succeeded: "Succeeded",
 }
 
+/**
+ * The response format.
+ */
 union ResponseFormat {
   string,
 
@@ -46,6 +49,9 @@ union ResponseFormat {
   xml: "xml",
 }
 
+/**
+ * The geographic location of the resource.
+ */
 union GeographicResourceLocation {
   string,
 
@@ -60,6 +66,9 @@ union GeographicResourceLocation {
   eu: "eu",
 }
 
+/**
+ * The localized map view to return the route geometry in.
+ */
 union LocalizedMapView {
   string,
 
@@ -154,6 +163,9 @@ union LocalizedMapView {
   Unified: "Unified",
 }
 
+/**
+ * Yes/no value to exclude textual data from response.
+ */
 union IncludeText {
   string,
 
@@ -174,6 +186,7 @@ union IncludeText {
  * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
  * GeometryCollection, Feature and FeatureCollection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API contract"
 enum GeoJsonObjectType {
   /**
    * `GeoJSON Point` geometry.
@@ -305,7 +318,7 @@ model ErrorAdditionalInfo {
    * The additional info.
    */
   @visibility(Lifecycle.Read)
-  info?: unknown;
+  info?: Record<string>;
 }
 
 /**
@@ -402,9 +415,19 @@ model LatLongPairAbbreviated {
 }
 
 /**
+ * A valid `GeoJSON` geometry object. The type must be one of the seven valid
+ * GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,
+ * Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC
+ * 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.
+ */
+model GeoJsonGeometry is GeoJsonObject;
+
+/**
  * A valid `GeoJSON` object. Please refer to [RFC
  * 7946](https://tools.ietf.org/html/rfc7946#section-3) for details.
  */
+// FIXME The warning for type looks like a bug
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing API contract"
 @discriminator("type")
 model GeoJsonObject {
   /**
@@ -412,37 +435,13 @@ model GeoJsonObject {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  objectType: GeoJsonObjectType;
+  type: GeoJsonObjectType;
 
   /**
    * Bounding box. Projection used - EPSG:3857. Please refer to [RFC
    * 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
    */
   bbox?: float64[];
-}
-
-/**
- * A valid `GeoJSON` geometry object. The type must be one of the seven valid
- * GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,
- * Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC
- * 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.
- */
-@discriminator("type")
-model GeoJsonGeometry extends GeoJsonObject {}
-
-/**
- * A valid `GeoJSON Point` geometry type. Please refer to [RFC
- * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.
- */
-model GeoJsonPoint extends GeoJsonGeometry {
-  ...GeoJsonPointData;
-
-  /**
-   * Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-   * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-   * GeometryCollection, Feature and FeatureCollection.
-   */
-  type: "Point";
 }
 
 /**
@@ -462,6 +461,7 @@ model GeoJsonPointData {
  * A valid `GeoJSON MultiPoint` geometry type. Please refer to [RFC
  * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.3) for details.
  */
+// FIXME: the discriminator is deeply nested, probably incorrectly reported warning
 model GeoJsonMultiPoint extends GeoJsonGeometry {
   ...GeoJsonMultiPointData;
 
@@ -470,7 +470,7 @@ model GeoJsonMultiPoint extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: "MultiPoint";
+  type: GeoJsonObjectType.GeoJsonMultiPoint;
 }
 
 /**
@@ -481,6 +481,37 @@ model GeoJsonMultiPointData {
    * Coordinates for the `GeoJson MultiPoint` geometry.
    */
   coordinates: float64[][];
+}
+
+/** GeoJson MultiLineString data */
+model GeoJsonMultiLineStringData {
+  /**
+   * Coordinates for the `GeoJson MultiLineString` geometry.
+   */
+  coordinates: float64[][][];
+}
+
+/** GeoJson Polygon data */
+model GeoJsonPolygonData {
+  /**
+   * Coordinates for the `GeoJson Polygon` geometry type.
+   */
+  coordinates: float64[][][];
+}
+
+/**
+ * A valid `GeoJSON Point` geometry type. Please refer to [RFC
+ * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.
+ */
+model GeoJsonPoint extends GeoJsonGeometry {
+  ...GeoJsonPointData;
+
+  /**
+   * Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
+   * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
+   * GeometryCollection, Feature and FeatureCollection.
+   */
+  type: GeoJsonObjectType.GeoJsonPoint;
 }
 
 /**
@@ -495,9 +526,10 @@ model GeoJsonLineString extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: "LineString";
+  type: GeoJsonObjectType.GeoJsonLineString;
 }
 
+/** GeoJson LineString data */
 model GeoJsonLineStringData {
   /**
    * Coordinates for the `GeoJson LineString` geometry.
@@ -517,14 +549,7 @@ model GeoJsonMultiLineString extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: "MultiLineString";
-}
-
-model GeoJsonMultiLineStringData {
-  /**
-   * Coordinates for the `GeoJson MultiLineString` geometry.
-   */
-  coordinates: float64[][][];
+  type: GeoJsonObjectType.GeoJsonMultiLineString;
 }
 
 /**
@@ -539,14 +564,7 @@ model GeoJsonPolygon extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: "Polygon";
-}
-
-model GeoJsonPolygonData {
-  /**
-   * Coordinates for the `GeoJson Polygon` geometry type.
-   */
-  coordinates: float64[][][];
+  type: GeoJsonObjectType.GeoJsonPolygon;
 }
 
 /**
@@ -561,9 +579,10 @@ model GeoJsonMultiPolygon extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: "MultiPolygon";
+  type: GeoJsonObjectType.GeoJsonMultiPolygon;
 }
 
+/** GeoJson MultiPolygon data */
 model GeoJsonMultiPolygonData {
   /**
    * Contains a list of valid `GeoJSON Polygon` objects. **Note** that coordinates
@@ -584,9 +603,12 @@ model GeoJsonGeometryCollection extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: "GeometryCollection";
+  type: GeoJsonObjectType.GeoJsonGeometryCollection;
 }
 
+/**
+ * GeoJson GeometryCollection data.
+ */
 model GeoJsonGeometryCollectionData {
   /**
    * Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates
@@ -607,9 +629,12 @@ model GeoJsonFeature extends GeoJsonObject {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: "Feature";
+  type: GeoJsonObjectType.GeoJsonFeature;
 }
 
+/**
+ * GeoJson Feature data.
+ */
 model GeoJsonFeatureData {
   /**
    * A valid `GeoJSON` geometry object. The type must be one of the seven valid
@@ -623,7 +648,9 @@ model GeoJsonFeatureData {
    * Properties can contain any additional metadata about the `Feature`. Value can
    * be any JSON object or a JSON null value
    */
-  properties?: unknown;
+  // FIXME: should this be specified as optional?
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract"
+  properties?: Record<unknown> | null;
 
   /**
    * Identifier for the feature.
@@ -649,24 +676,15 @@ model GeoJsonFeatureCollection extends GeoJsonObject {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: "FeatureCollection";
+  type: GeoJsonObjectType.GeoJsonFeatureCollection;
 }
 
+/**
+ * GeoJson FeatureCollection data.
+ */
 model GeoJsonFeatureCollectionData {
   /**
    * Contains a list of valid `GeoJSON Feature` objects.
    */
   features: GeoJsonFeature[];
-}
-
-/**
- * Common error response for all Azure Resource Manager APIs to return error
- * details for failed operations. (This also follows the OData error response
- * format.).
- */
-model ErrorResponse {
-  /**
-   * The error object.
-   */
-  error?: CommonErrorDetail;
 }
