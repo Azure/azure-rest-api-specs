@@ -150,9 +150,15 @@ using Azure.AI.Projects;
 @@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
 @@clientName(MemoryStores.searchMemories, "internalSearchMemories");
 
-// Disabled convenient API generation to provide a custom shim returning `void` in the client
+// Disabled convenient API generation and make methods private to provide a custom shim returning `void` in the client
 @@convenientAPI(Agents.deleteAgent, false, "java");
 @@convenientAPI(Agents.deleteAgentVersion, false, "java");
+@@access(Agents.deleteAgent, Access.internal, "java");
+
+@@convenientAPI(MemoryStores.deleteMemoryStore, false, "java");
+@@convenientAPI(MemoryStores.deleteScope, false, "java");
+@@access(MemoryStores.deleteScope, Access.internal, "java");
+@@access(MemoryStores.deleteMemoryStore, Access.internal, "java");
 
 @@access(MemoryStoreSearchResponse, Access.public);
 @@usage(MemoryStoreSearchResponse, Usage.output);
@@ -180,8 +186,6 @@ using Azure.AI.Projects;
 
 @@usage(AzureCreateResponseDetails, Usage.output);
 @@access(AzureCreateResponseDetails, Access.public);
-
-@@access(Agents.deleteAgent, Access.internal, "java");
 
 // --------------------------------------------------------------------------------
 // Type overrides
