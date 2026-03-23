@@ -16,8 +16,7 @@ namespace Microsoft.CognitiveServices;
  * Cognitive Services compute cluster resource.
  */
 @parentResource(Account)
-model Compute
-  is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
+model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   ...ResourceNameParameter<
     Resource = Compute,
     KeyName = "computeName",
@@ -55,7 +54,6 @@ model Compute
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Identity;
-
 }
 
 @armResourceOperations
@@ -92,6 +90,8 @@ interface Computes {
 
 @@maxLength(Compute.name, 63);
 @@minLength(Compute.name, 1);
-@@doc(Compute.name, "The name of the compute associated with the Cognitive Services Account.");
+@@doc(Compute.name,
+  "The name of the compute associated with the Cognitive Services Account."
+);
 @@doc(Compute.properties, "Properties of Cognitive Services compute.");
 @@doc(Computes.createOrUpdate::parameters.resource, "The compute properties.");
