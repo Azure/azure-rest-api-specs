@@ -220,7 +220,7 @@ interface Runbooks {
   @tag("TestJobStream")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobstreamoperations")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/streams/{jobStreamId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/streams/{jobStreamId}")
   testJobStreamsGet is RunbookOps.ActionSync<
     Runbook,
     Request = void,
