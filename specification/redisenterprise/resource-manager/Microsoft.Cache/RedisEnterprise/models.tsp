@@ -1249,7 +1249,7 @@ model DatabaseProperties {
    * Specifies which keyspace events should trigger notifications. Default is an empty string, meaning this feature is disabled. When enabled, at least 'K' (keyspace events) or 'E' (keyevent events) must be present. For example, 'AKE' enables all standard events. See https://redis.io/docs/latest/develop/use/keyspace-notifications/ for the complete list of event types.
    */
   @added(Versions.v2026_02_01_preview)
-  keySpaceNotification?: string;
+  notifyKeyspaceEvents?: string;
 }
 
 /**
