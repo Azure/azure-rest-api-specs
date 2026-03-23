@@ -62,41 +62,47 @@ interface BlockBlobClient extends Storage.Blob.BlockBlob {}
 )
 interface PageBlobClient extends Storage.Blob.PageBlob {}
 
-// @@clientInitialization(BlobServiceClient,
-//   {
-//     initializedBy: InitializedBy.customizeCode,
-//   }
-// );
+@@clientInitialization(BlobServiceClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  },
+  "rust"
+);
 
-// @@clientInitialization(BlobContainerClient,
-//   {
-//     initializedBy: InitializedBy.customizeCode,
-//   }
-// );
+@@clientInitialization(BlobContainerClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  },
+  "rust"
+);
 
-// @@clientInitialization(BlobClient,
-//   {
-//     initializedBy: InitializedBy.customizeCode,
-//   }
-// );
+@@clientInitialization(BlobClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  },
+  "rust"
+);
 
-// @@clientInitialization(AppendBlobClient,
-//   {
-//     initializedBy: InitializedBy.customizeCode,
-//   }
-// );
+@@clientInitialization(AppendBlobClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  },
+  "rust"
+);
 
-// @@clientInitialization(BlockBlobClient,
-//   {
-//     initializedBy: InitializedBy.customizeCode,
-//   }
-// );
+@@clientInitialization(BlockBlobClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  },
+  "rust"
+);
 
-// @@clientInitialization(PageBlobClient,
-//   {
-//     initializedBy: InitializedBy.customizeCode,
-//   }
-// );
+@@clientInitialization(PageBlobClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  },
+  "rust"
+);
 
 @@usage(BlobName, Usage.output, "rust");
 
