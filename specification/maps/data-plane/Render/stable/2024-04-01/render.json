@@ -300,32 +300,6 @@
             "x-ms-client-name": "clientId"
           },
           {
-            "name": "mincoordinates",
-            "in": "query",
-            "description": "Minimum coordinates (south-west point) of bounding box in latitude longitude\ncoordinate system. E.g. 52.41064,4.84228",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            },
-            "collectionFormat": "csv",
-            "x-ms-client-name": "southWest"
-          },
-          {
-            "name": "maxcoordinates",
-            "in": "query",
-            "description": "Maximum coordinates (north-east point) of bounding box in latitude longitude\ncoordinate system. E.g. 52.41064,4.84228",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            },
-            "collectionFormat": "csv",
-            "x-ms-client-name": "northEast"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Value can be either _json_ or _xml_.",
@@ -351,6 +325,32 @@
                 }
               ]
             }
+          },
+          {
+            "name": "mincoordinates",
+            "in": "query",
+            "description": "Minimum coordinates (south-west point) of bounding box in latitude longitude\ncoordinate system. E.g. 52.41064,4.84228",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "southWest"
+          },
+          {
+            "name": "maxcoordinates",
+            "in": "query",
+            "description": "Maximum coordinates (north-east point) of bounding box in latitude longitude\ncoordinate system. E.g. 52.41064,4.84228",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "northEast"
           },
           {
             "name": "text",
@@ -486,31 +486,6 @@
             "x-ms-client-name": "clientId"
           },
           {
-            "name": "zoom",
-            "in": "query",
-            "description": "Zoom level for the desired tile.\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "z"
-          },
-          {
-            "name": "x",
-            "in": "query",
-            "description": "X coordinate of the tile on zoom grid. Value must be in the range [0,\n2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "y",
-            "in": "query",
-            "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0,\n2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Value can be either _json_ or _xml_.",
@@ -536,6 +511,31 @@
                 }
               ]
             }
+          },
+          {
+            "name": "zoom",
+            "in": "query",
+            "description": "Zoom level for the desired tile.\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "z"
+          },
+          {
+            "name": "x",
+            "in": "query",
+            "description": "X coordinate of the tile on zoom grid. Value must be in the range [0,\n2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "y",
+            "in": "query",
+            "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0,\n2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "text",
