@@ -8,31 +8,53 @@ using Azure.ResourceManager;
 
 // java renames
 @@clientName(Microsoft.Purview.AccountSkuName, "Name", "java");
-@@clientName(Microsoft.Purview.PrivateEndpointConnectionStatus, "Status", "java");
+@@clientName(Microsoft.Purview.PrivateEndpointConnectionStatus,
+  "Status",
+  "java"
+);
 @@clientName(Microsoft.Purview.ManagedIdentityType, "Type", "java");
 
 // C# customizations: renames, access/usage overrides, type overrides, and legacy transforms
 // to preserve backward compatibility with the existing Azure.ResourceManager.Purview SDK.
-
-// --- clientName: type renames ---
 @@clientName(Microsoft.Purview.AccessKeys, "PurviewAccountAccessKey", "csharp");
-@@clientName(Microsoft.Purview.AccountEndpoints, "PurviewAccountEndpoint", "csharp");
-@@clientName(Microsoft.Purview.AccountMergeInfo, "PurviewAccountMergeInfo", "csharp");
-@@clientName(Microsoft.Purview.AccountProperties, "PurviewAccountProperties", "csharp");
+@@clientName(Microsoft.Purview.AccountEndpoints,
+  "PurviewAccountEndpoint",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.AccountMergeInfo,
+  "PurviewAccountMergeInfo",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.AccountProperties,
+  "PurviewAccountProperties",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.AccountProvisioningState,
   "PurviewAccountProvisioningState",
   "csharp"
 );
 @@clientName(Microsoft.Purview.AccountSku, "PurviewAccountSku", "csharp");
-@@clientName(Microsoft.Purview.AccountSkuName, "PurviewAccountSkuName", "csharp");
+@@clientName(Microsoft.Purview.AccountSkuName,
+  "PurviewAccountSkuName",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.AccountStatus, "PurviewAccountStatus", "csharp");
 @@clientName(Microsoft.Purview.AccountStatusErrorDetails,
   "PurviewAccountStatusErrorDetails",
   "csharp"
 );
-@@clientName(Microsoft.Purview.AccountUpdateParameters, "PurviewAccountPatch", "csharp");
-@@clientName(Microsoft.Purview.BatchFeatureRequest, "PurviewBatchFeatureContent", "csharp");
-@@clientName(Microsoft.Purview.BatchFeatureStatus, "PurviewBatchFeatureStatus", "csharp");
+@@clientName(Microsoft.Purview.AccountUpdateParameters,
+  "PurviewAccountPatch",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.BatchFeatureRequest,
+  "PurviewBatchFeatureContent",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.BatchFeatureStatus,
+  "PurviewBatchFeatureStatus",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.CheckNameAvailabilityRequest,
   "PurviewAccountNameAvailabilityContent",
   "csharp"
@@ -41,24 +63,51 @@ using Azure.ResourceManager;
   "PurviewAccountNameAvailabilityResult",
   "csharp"
 );
-@@clientName(Microsoft.Purview.CollectionAdminUpdate, "CollectionAdminUpdateContent", "csharp");
+@@clientName(Microsoft.Purview.CollectionAdminUpdate,
+  "CollectionAdminUpdateContent",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.Credentials, "PurviewCredentials", "csharp");
 @@clientName(Microsoft.Purview.DefaultAccountPayload,
   "DefaultPurviewAccountPayload",
   "csharp"
 );
-@@clientName(Microsoft.Purview.EventHubType, "PurviewKafkaEventHubType", "csharp");
-@@clientName(Microsoft.Purview.EventStreamingState, "PurviewEventStreamingState", "csharp");
-@@clientName(Microsoft.Purview.EventStreamingType, "PurviewEventStreamingType", "csharp");
-@@clientName(Microsoft.Purview.IngestionStorage, "PurviewIngestionStorage", "csharp");
-@@clientName(Microsoft.Purview.KafkaConfiguration, "PurviewKafkaConfiguration", "csharp");
+@@clientName(Microsoft.Purview.EventHubType,
+  "PurviewKafkaEventHubType",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.EventStreamingState,
+  "PurviewEventStreamingState",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.EventStreamingType,
+  "PurviewEventStreamingType",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.IngestionStorage,
+  "PurviewIngestionStorage",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.KafkaConfiguration,
+  "PurviewKafkaConfiguration",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.KafkaConfigurationIdentityType,
   "PurviewCredentialsType",
   "csharp"
 );
-@@clientName(Microsoft.Purview.ManagedEventHubState, "PurviewManagedEventHubState", "csharp");
-@@clientName(Microsoft.Purview.ManagedResources, "PurviewManagedResource", "csharp");
-@@clientName(Microsoft.Purview.MergeAccountType, "PurviewMergeAccountType", "csharp");
+@@clientName(Microsoft.Purview.ManagedEventHubState,
+  "PurviewManagedEventHubState",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.ManagedResources,
+  "PurviewManagedResource",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.MergeAccountType,
+  "PurviewMergeAccountType",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.MergeStatus, "PurviewMergeStatus", "csharp");
 @@clientName(Microsoft.Purview.PrivateEndpointConnection,
   "PurviewPrivateEndpointConnection",
@@ -76,23 +125,44 @@ using Azure.ResourceManager;
   "PrivateEndpointConnectionStatusUpdateResult",
   "csharp"
 );
-@@clientName(Microsoft.Purview.PrivateLinkResource, "PurviewPrivateLinkResource", "csharp");
+@@clientName(Microsoft.Purview.PrivateLinkResource,
+  "PurviewPrivateLinkResource",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.PrivateLinkServiceConnectionState,
   "PurviewPrivateLinkServiceConnectionState",
   "csharp"
 );
-@@clientName(Microsoft.Purview.ProvisioningState, "PurviewProvisioningState", "csharp");
-@@clientName(Microsoft.Purview.PublicNetworkAccess, "PurviewPublicNetworkAccess", "csharp");
+@@clientName(Microsoft.Purview.ProvisioningState,
+  "PurviewProvisioningState",
+  "csharp"
+);
+@@clientName(Microsoft.Purview.PublicNetworkAccess,
+  "PurviewPublicNetworkAccess",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.QuotaName, "PurviewQuotaName", "csharp");
-@@clientName(Microsoft.Purview.Reason, "PurviewAccountNameUnavailableReason", "csharp");
+@@clientName(Microsoft.Purview.Reason,
+  "PurviewAccountNameUnavailableReason",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.ScopeType, "PurviewAccountScopeType", "csharp");
-@@clientName(Microsoft.Purview.TenantEndpointState, "PurviewTenantEndpointState", "csharp");
+@@clientName(Microsoft.Purview.TenantEndpointState,
+  "PurviewTenantEndpointState",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.UsageName, "PurviewUsageName", "csharp");
 
 // --- clientName: property renames ---
-@@clientName(Microsoft.Purview.AccountProperties.createdAt, "CreatedOn", "csharp");
+@@clientName(Microsoft.Purview.AccountProperties.createdAt,
+  "CreatedOn",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.AccountStatus.errorDetails, "Error", "csharp");
-@@clientName(Microsoft.Purview.CheckNameAvailabilityRequest.type, "ResourceType", "csharp");
+@@clientName(Microsoft.Purview.CheckNameAvailabilityRequest.type,
+  "ResourceType",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.CheckNameAvailabilityResult.nameAvailable,
   "IsNameAvailable",
   "csharp"
@@ -101,16 +171,25 @@ using Azure.ResourceManager;
   "CloudConnectorsAwsExternalId",
   "csharp"
 );
-@@clientName(Microsoft.Purview.CollectionAdminUpdate.objectId, "AdminObjectId", "csharp");
+@@clientName(Microsoft.Purview.CollectionAdminUpdate.objectId,
+  "AdminObjectId",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.Credentials.type, "CredentialsType", "csharp");
 @@clientName(Microsoft.Purview.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse.error, "ErrorDetails", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse.error,
+  "ErrorDetails",
+  "csharp"
+);
 
 // --- clientName: operation renames ---
-@@clientName(Microsoft.Purview.Accounts.accountGet, "AccountGetFeature", "csharp");
+@@clientName(Microsoft.Purview.Accounts.accountGet,
+  "AccountGetFeature",
+  "csharp"
+);
 @@clientName(Microsoft.Purview.Accounts.list,
   "GetIngestionPrivateEndpointConnections",
   "csharp"
@@ -144,7 +223,10 @@ using Azure.ResourceManager;
 // --- access / usage overrides ---
 // AccountProperties: public class, input+output (exposed in PurviewAccountPatch.Properties)
 @@access(Microsoft.Purview.AccountProperties, Access.public, "csharp");
-@@usage(Microsoft.Purview.AccountProperties, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.Purview.AccountProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
 // AccountSku: public class, output-only (internal constructor, get-only properties)
 @@access(Microsoft.Purview.AccountSku, Access.public, "csharp");
 @@usage(Microsoft.Purview.AccountSku, Usage.output, "csharp");
@@ -154,7 +236,10 @@ using Azure.ResourceManager;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.Purview.Account, Microsoft.Purview.PurviewAccount, "csharp");
+@@alternateType(Microsoft.Purview.Account,
+  Microsoft.Purview.PurviewAccount,
+  "csharp"
+);
 @@alternateType(Microsoft.Purview.AccountProperties.accountStatus,
   Microsoft.Purview.AccountStatus,
   "csharp"
