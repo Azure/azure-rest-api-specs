@@ -29,3 +29,4 @@ using Microsoft.Automation;
   "ArmErrorResponse",
   "go"
 );
+@@clientLocation(AutomationAccounts.convertGraphRunbookContent, "Client", "go");
