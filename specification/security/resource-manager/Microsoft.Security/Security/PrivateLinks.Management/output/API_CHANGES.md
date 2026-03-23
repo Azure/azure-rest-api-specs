@@ -36,12 +36,6 @@
 | `definitions.ScanSummary.properties.blobs.type__deleted` | deleted | `object` |
 | `definitions.SensitiveDataDiscoveryProperties.properties.operationStatus.type__deleted` | deleted | `object` |
 
-### Changes for `x-nullable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.MalwareScanningProperties.properties.onUpload['x-nullable__added']` | added | `true` |
-
 ### Changes for `format`
 
 | Path | Change Type | Value |

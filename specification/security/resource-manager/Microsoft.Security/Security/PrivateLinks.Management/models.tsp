@@ -69,8 +69,7 @@ model MalwareScanningProperties {
   /**
    * Properties of On Upload malware scanning.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  onUpload?: OnUploadProperties | null;
+  onUpload?: OnUploadProperties;
 
   /**
    * Optional. Resource id of an Event Grid Topic to send scan results to.
