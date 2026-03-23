@@ -40,11 +40,11 @@ suppressions:
   - code: PathForResourceAction
     reason: The mixPlacementScores singleton resource uses a custom path structure matching the Recommender pattern.
     from: SkuSplitRP.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/mixPlacementScores/virtualMachines/generate"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/mixPlacementScores/recommendations/generate"]
   - code: PathForNestedResource
     reason: The mixPlacementScores singleton resource uses a custom path structure matching the Recommender pattern.
     from: SkuSplitRP.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/mixPlacementScores/virtualMachines"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/mixPlacementScores/recommendations"]
 ```
 
 ### Tag: package-2026-04-01-preview

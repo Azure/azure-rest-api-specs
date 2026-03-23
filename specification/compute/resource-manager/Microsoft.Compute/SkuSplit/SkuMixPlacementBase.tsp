@@ -16,7 +16,7 @@ namespace Microsoft.Compute;
 /**
  * Contains metadata of the SkuMixPlacement scoring resource
  */
-@singleton("virtualMachines")
+@singleton("recommendations")
 @parentResource(SubscriptionLocationResource)
 model SkuMixPlacementBase
   is Azure.ResourceManager.ProxyResource<SkuMixPlacementProperties> {
