@@ -33,3 +33,5 @@ enum Versions {
   @doc("API Version 2025-10-03-preview")
   v2025_10_03: "2025-10-03-preview",
 }
+
+interface Operations extends Azure.ResourceManager.Operations {}
