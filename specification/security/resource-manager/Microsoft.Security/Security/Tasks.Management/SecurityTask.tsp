@@ -198,7 +198,6 @@ interface Tasks {
    * Recommended tasks that will help improve the security of the subscription proactively
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}")
-  @action("{taskUpdateActionType}")
   updateResourceGroupLevelTaskState is TaskBuildingOps.ActionSync<
     SecurityTask,
     void,
