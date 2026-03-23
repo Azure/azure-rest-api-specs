@@ -2,11 +2,11 @@
 
 After applying changes (Step 4), run through all sub-steps below in order.
 
-| Sub-step | Action                | When                       |
-| -------- | --------------------- | -------------------------- |
-| 5.1      | TypeSpec Validation   | Always                     |
-| 5.2      | Output Generation     | Always                     |
-| 5.3      | Example Verification  | API Version Evolution only |
+| Sub-step | Action               | When                       |
+| -------- | -------------------- | -------------------------- |
+| 5.1      | TypeSpec Validation  | Always                     |
+| 5.2      | Output Generation    | Always                     |
+| 5.3      | Example Verification | API Version Evolution only |
 
 ### Step 5.1: TypeSpec Validation
 
