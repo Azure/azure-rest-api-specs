@@ -1,10 +1,12 @@
 // SpatioTemporal Asset Catalog (STAC) API interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.stac.spec.tsp";
 import "./routes.common.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 namespace Microsoft.PlanetaryComputer;
 
 interface StacLandingPages {
@@ -118,6 +120,20 @@ interface StacSearch {
       filter?: string;
 
       /**
+       * The coordinate reference system (CRS) used by spatial literals in the 'filter' value.
+       */
+      @added(Versions.v2026_04_15)
+      @query("filter-crs")
+      filterCoordinateReferenceSystem?: string;
+
+      /**
+       * The CQL filter encoding that the 'filter' value uses.
+       */
+      @added(Versions.v2026_04_15)
+      @query("filter-lang")
+      filterLang?: FilterLanguage;
+
+      /**
        * Pagination token for fetching the next set of results.
        */
       @query("token")
@@ -138,12 +154,14 @@ interface StacSearch {
       /**
        * Whether to sign asset URLs in the response.
        */
+      @removed(Versions.v2026_04_15)
       @query("sign")
       sign?: StacAssetUrlSigningMode;
 
       /**
        * URL signature duration in minutes.
        */
+      @removed(Versions.v2026_04_15)
       @query("duration")
       durationInMinutes?: int32;
 

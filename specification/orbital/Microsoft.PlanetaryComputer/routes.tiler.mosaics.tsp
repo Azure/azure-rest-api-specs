@@ -134,6 +134,7 @@ interface MosaicsTiles {
 
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
     },
     TileResponse
   >;
@@ -160,6 +161,7 @@ interface MosaicsTileMatrixSets {
       ...getMosaicsTileCustomizedCommonSignatures;
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
     },
     TileResponse
   >;
@@ -325,6 +327,7 @@ interface MosaicsTileMatrixSetsTileJson {
 
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
     },
     TileJsonMetadata
   >;

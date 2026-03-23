@@ -316,6 +316,7 @@ interface TilerTiles {
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
     },
     TileResponse
@@ -342,6 +343,7 @@ interface TilerTileMatrixSets {
       ...getTileCustomizedCommonSignatures;
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
     },
     TileResponse
@@ -406,6 +408,7 @@ interface TilerTileJsonOperations {
       ...ZoomQueryParameters;
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
     },
     TileJsonMetadata
   >;
@@ -447,6 +450,7 @@ interface TilerTileJsonTileMatrixSets {
       ...ZoomQueryParameters;
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
     },
     TileJsonMetadata
   >;

@@ -588,7 +588,14 @@ model MiscTileQueryParameters {
    */
   @query("return_mask")
   returnMask?: boolean = true;
+}
 
+/**
+ * Padding parameter for tile rendering endpoints only.
+ * Separated from MiscTileQueryParameters because padding applies to tiles/tilejson but not to bbox/feature/preview/WMTS.
+ */
+@added(Versions.v2026_04_15)
+model TilePaddingQueryParameters {
   /**
    * Padding to apply to each tile edge. Helps reduce resampling artefacts along edges. Defaults to `0`.
    */
@@ -639,6 +646,32 @@ model ZoomQueryParameters {
    */
   @query("maxzoom")
   maxZoom?: int32;
+}
+
+/**
+ * STAC Collection Identifier as a query parameter
+ */
+@added(Versions.v2026_04_15)
+model CollectionQueryParameter {
+  /**
+   * STAC Collection Identifier
+   */
+  @added(Versions.v2026_04_15)
+  @query("collection")
+  collection?: string;
+}
+
+/**
+ * Output Coordinate Reference System query parameter
+ */
+@added(Versions.v2026_04_15)
+model DstCrsQueryParameter {
+  /**
+   * Output Coordinate Reference System.
+   */
+  @added(Versions.v2026_04_15)
+  @query("dst_crs")
+  destinationCrs?: string;
 }
 
 alias TileResponse =

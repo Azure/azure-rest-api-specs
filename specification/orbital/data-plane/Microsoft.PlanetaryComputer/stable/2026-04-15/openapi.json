@@ -318,34 +318,19 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.bidx"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.assets"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.expression"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.noData"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.unscale"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.reproject"
-          },
-          {
-            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
-          },
-          {
-            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
           },
           {
             "name": "collectionId",
@@ -445,30 +430,6 @@
           },
           {
             "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
-          },
-          {
-            "$ref": "#/parameters/TileMatrixSetQueryParameters.buffer"
-          },
-          {
-            "$ref": "#/parameters/TileMatrixSetQueryParameters.colorFormula"
-          },
-          {
-            "$ref": "#/parameters/TileMatrixSetQueryParameters.resampling"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
           }
         ],
         "responses": {
@@ -550,16 +511,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -693,7 +672,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -740,34 +719,19 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.bidx"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.assets"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.expression"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.noData"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.unscale"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.reproject"
-          },
-          {
-            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
-          },
-          {
-            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
           },
           {
             "name": "collectionId",
@@ -779,7 +743,7 @@
             "pattern": ".*"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -858,7 +822,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "tile_format",
@@ -940,36 +905,6 @@
           },
           {
             "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
           }
         ],
         "responses": {
@@ -1061,16 +996,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -1109,7 +1062,7 @@
             "pattern": ".*"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -1117,7 +1070,7 @@
             "x-ms-client-name": "coordinateReferenceSystem"
           },
           {
-            "name": "dst-crs",
+            "name": "dst_crs",
             "in": "query",
             "description": "Output Coordinate Reference System.",
             "required": false,
@@ -1141,19 +1094,16 @@
             "$ref": "#/parameters/DimensionsQueryParameters.width"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+            "$ref": "#/parameters/MosaicCropQueryParameters.colorFormula"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+            "$ref": "#/parameters/MosaicCropQueryParameters.collection"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.resampling"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.pixelSelection"
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.rescale"
@@ -1166,9 +1116,6 @@
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
           }
         ],
         "responses": {
@@ -1260,16 +1207,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -1324,7 +1289,7 @@
             "pattern": ".*"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -1332,7 +1297,7 @@
             "x-ms-client-name": "coordinateReferenceSystem"
           },
           {
-            "name": "dst-crs",
+            "name": "dst_crs",
             "in": "query",
             "description": "Output Coordinate Reference System.",
             "required": false,
@@ -1340,19 +1305,26 @@
             "x-ms-client-name": "destinationCrs"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+            "$ref": "#/parameters/MosaicCropQueryParameters.colorFormula"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.collection"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+            "$ref": "#/parameters/MosaicCropQueryParameters.resampling"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.pixelSelection"
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.rescale"
@@ -1365,9 +1337,6 @@
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
           }
         ],
         "responses": {
@@ -1434,16 +1403,37 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "$ref": "#/parameters/BoundingBoxPathParameters.minx"
@@ -1458,7 +1448,7 @@
             "$ref": "#/parameters/BoundingBoxPathParameters.maxy"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -1556,16 +1546,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -1583,7 +1591,7 @@
             "pattern": ".*"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -1607,19 +1615,16 @@
             "$ref": "#/parameters/DimensionsQueryParameters.width"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+            "$ref": "#/parameters/MosaicCropQueryParameters.colorFormula"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+            "$ref": "#/parameters/MosaicCropQueryParameters.collection"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.resampling"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.pixelSelection"
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.rescale"
@@ -1634,7 +1639,70 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/DstCrsQueryParameter"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Output image format.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "png",
+              "npy",
+              "tif",
+              "jpeg",
+              "jpg",
+              "jp2",
+              "webp",
+              "pngraw"
+            ],
+            "x-ms-enum": {
+              "name": "TilerImageFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "png",
+                  "value": "png",
+                  "description": "Portable Network Graphics format - supports transparency"
+                },
+                {
+                  "name": "npy",
+                  "value": "npy",
+                  "description": "NumPy array format for raw data access"
+                },
+                {
+                  "name": "tif",
+                  "value": "tif",
+                  "description": "GeoTIFF format for georeferenced raster data"
+                },
+                {
+                  "name": "jpeg",
+                  "value": "jpeg",
+                  "description": "JPEG format - smaller file size but lossy compression"
+                },
+                {
+                  "name": "jpg",
+                  "value": "jpg",
+                  "description": "Alternate extension for JPEG format"
+                },
+                {
+                  "name": "jp2",
+                  "value": "jp2",
+                  "description": "JPEG 2000 format - supports both lossy and lossless compression"
+                },
+                {
+                  "name": "webp",
+                  "value": "webp",
+                  "description": "WebP format - modern image format with good compression"
+                },
+                {
+                  "name": "pngraw",
+                  "value": "pngraw",
+                  "description": "Raw PNG format for access to unprocessed data"
+                }
+              ]
+            }
           },
           {
             "name": "body",
@@ -1735,16 +1803,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -1787,7 +1873,7 @@
             "pattern": ".*"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -1805,19 +1891,16 @@
             "x-ms-client-name": "maxSize"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+            "$ref": "#/parameters/MosaicCropQueryParameters.colorFormula"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+            "$ref": "#/parameters/MosaicCropQueryParameters.collection"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.resampling"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.pixelSelection"
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.rescale"
@@ -1832,7 +1915,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/DstCrsQueryParameter"
           },
           {
             "name": "body",
@@ -1933,16 +2016,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -1969,7 +2070,7 @@
             "pattern": ".*"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -1993,19 +2094,16 @@
             "$ref": "#/parameters/DimensionsQueryParameters.width"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+            "$ref": "#/parameters/MosaicCropQueryParameters.colorFormula"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+            "$ref": "#/parameters/MosaicCropQueryParameters.collection"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.resampling"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.pixelSelection"
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.rescale"
@@ -2020,7 +2118,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/DstCrsQueryParameter"
           },
           {
             "name": "body",
@@ -2284,7 +2382,28 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -2485,7 +2604,28 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -2580,7 +2720,7 @@
             "pattern": ".*"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -2659,7 +2799,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "tile_format",
@@ -2764,7 +2905,28 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -2807,28 +2969,150 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.bidx"
+            "name": "bidx",
+            "in": "query",
+            "description": "Dataset band indexes",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.assets"
+            "name": "assets",
+            "in": "query",
+            "description": "Asset's names.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.expression"
+            "name": "asset_bidx",
+            "in": "query",
+            "description": "Per asset band indexes (coma separated indexes, e.g. \"image|1,2,3\" means use the bands 1, 2, and 3 from the asset named \"image\")",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "assetBandIndices"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+            "name": "nodata",
+            "in": "query",
+            "description": "Overwrite internal Nodata value",
+            "required": false,
+            "type": "number",
+            "format": "float",
+            "x-ms-client-name": "noData"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+            "name": "unscale",
+            "in": "query",
+            "description": "Apply internal Scale or Offset",
+            "required": false,
+            "type": "boolean"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.noData"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.unscale"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.reproject"
+            "name": "reproject",
+            "in": "query",
+            "description": "WarpKernel resampling algorithm (only used when doing re-projection). Defaults to `nearest`.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "nearest",
+              "bilinear",
+              "cubic",
+              "cubic_spline",
+              "lanczos",
+              "average",
+              "mode",
+              "max",
+              "min",
+              "med",
+              "q1",
+              "q3",
+              "sum",
+              "rms"
+            ],
+            "x-ms-enum": {
+              "name": "WarpKernelResampling",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "nearest",
+                  "value": "nearest",
+                  "description": "Nearest neighbor"
+                },
+                {
+                  "name": "bilinear",
+                  "value": "bilinear",
+                  "description": "Bilinear interpolation"
+                },
+                {
+                  "name": "cubic",
+                  "value": "cubic",
+                  "description": "Cubic interpolation"
+                },
+                {
+                  "name": "cubic_spline",
+                  "value": "cubic_spline",
+                  "description": "Cubic spline interpolation"
+                },
+                {
+                  "name": "lanczos",
+                  "value": "lanczos",
+                  "description": "Lanczos windowed sinc resampling"
+                },
+                {
+                  "name": "average",
+                  "value": "average",
+                  "description": "Average resampling"
+                },
+                {
+                  "name": "mode",
+                  "value": "mode",
+                  "description": "Mode resampling"
+                },
+                {
+                  "name": "max",
+                  "value": "max",
+                  "description": "Maximum value resampling"
+                },
+                {
+                  "name": "min",
+                  "value": "min",
+                  "description": "Minimum value resampling"
+                },
+                {
+                  "name": "med",
+                  "value": "med",
+                  "description": "Median value resampling"
+                },
+                {
+                  "name": "q1",
+                  "value": "q1",
+                  "description": "First quartile resampling"
+                },
+                {
+                  "name": "q3",
+                  "value": "q3",
+                  "description": "Third quartile resampling"
+                },
+                {
+                  "name": "sum",
+                  "value": "sum",
+                  "description": "Sum resampling"
+                },
+                {
+                  "name": "rms",
+                  "value": "rms",
+                  "description": "Root mean square resampling"
+                }
+              ]
+            }
           },
           {
             "name": "collectionId",
@@ -2868,6 +3152,55 @@
           },
           {
             "$ref": "#/parameters/StatisticsQueryParameters.histogramRange"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
+          },
+          {
+            "name": "asset_expression",
+            "in": "query",
+            "description": "Per asset band expression.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "assetExpression"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "description": "Force output image height.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "width",
+            "in": "query",
+            "description": "Force output image width.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -2926,6 +3259,27 @@
             "type": "string",
             "maxLength": 500,
             "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -3058,7 +3412,7 @@
             "x-ms-client-name": "colorFormula"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -3066,7 +3420,7 @@
             "x-ms-client-name": "coordinateReferenceSystem"
           },
           {
-            "name": "dst-crs",
+            "name": "dst_crs",
             "in": "query",
             "description": "Output Coordinate Reference System.",
             "required": false,
@@ -3172,7 +3526,25 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -3318,7 +3690,7 @@
             "x-ms-client-name": "colorFormula"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -3326,7 +3698,7 @@
             "x-ms-client-name": "coordinateReferenceSystem"
           },
           {
-            "name": "dst-crs",
+            "name": "dst_crs",
             "in": "query",
             "description": "Output Coordinate Reference System.",
             "required": false,
@@ -3404,6 +3776,16 @@
             }
           },
           {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
             "$ref": "#/parameters/MiscTileQueryParameters.rescale"
           },
           {
@@ -3416,7 +3798,25 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -3475,6 +3875,27 @@
             "type": "string",
             "maxLength": 500,
             "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -3583,7 +4004,7 @@
             "x-ms-client-name": "colorFormula"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -3689,7 +4110,91 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/DstCrsQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Output image format.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "png",
+              "npy",
+              "tif",
+              "jpeg",
+              "jpg",
+              "jp2",
+              "webp",
+              "pngraw"
+            ],
+            "x-ms-enum": {
+              "name": "TilerImageFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "png",
+                  "value": "png",
+                  "description": "Portable Network Graphics format - supports transparency"
+                },
+                {
+                  "name": "npy",
+                  "value": "npy",
+                  "description": "NumPy array format for raw data access"
+                },
+                {
+                  "name": "tif",
+                  "value": "tif",
+                  "description": "GeoTIFF format for georeferenced raster data"
+                },
+                {
+                  "name": "jpeg",
+                  "value": "jpeg",
+                  "description": "JPEG format - smaller file size but lossy compression"
+                },
+                {
+                  "name": "jpg",
+                  "value": "jpg",
+                  "description": "Alternate extension for JPEG format"
+                },
+                {
+                  "name": "jp2",
+                  "value": "jp2",
+                  "description": "JPEG 2000 format - supports both lossy and lossless compression"
+                },
+                {
+                  "name": "webp",
+                  "value": "webp",
+                  "description": "WebP format - modern image format with good compression"
+                },
+                {
+                  "name": "pngraw",
+                  "value": "pngraw",
+                  "description": "Raw PNG format for access to unprocessed data"
+                }
+              ]
+            }
           },
           {
             "name": "body",
@@ -3832,7 +4337,7 @@
             "x-ms-client-name": "colorFormula"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -3932,7 +4437,28 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/DstCrsQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "body",
@@ -4059,7 +4585,7 @@
             "x-ms-client-name": "colorFormula"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -4165,7 +4691,28 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/DstCrsQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "body",
@@ -4235,6 +4782,27 @@
             "pattern": ".*"
           },
           {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
+          },
+          {
             "name": "assets",
             "in": "query",
             "description": "Asset's names.",
@@ -4302,6 +4870,27 @@
             "type": "string",
             "maxLength": 500,
             "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "assets",
@@ -4413,7 +5002,28 @@
             "$ref": "#/parameters/AssetQueryParameters.reproject"
           },
           {
-            "name": "coord-crs",
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
+          },
+          {
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -4660,7 +5270,7 @@
             "x-ms-client-name": "colorFormula"
           },
           {
-            "name": "dst-crs",
+            "name": "dst_crs",
             "in": "query",
             "description": "Output Coordinate Reference System.",
             "required": false,
@@ -4766,7 +5376,25 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -4884,7 +5512,7 @@
             "x-ms-client-name": "colorFormula"
           },
           {
-            "name": "dst-crs",
+            "name": "dst_crs",
             "in": "query",
             "description": "Output Coordinate Reference System.",
             "required": false,
@@ -4990,7 +5618,25 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -5094,6 +5740,58 @@
           },
           {
             "$ref": "#/parameters/StatisticsQueryParameters.histogramRange"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
+          },
+          {
+            "name": "algorithm",
+            "in": "query",
+            "description": "Algorithm name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "algorithm_params",
+            "in": "query",
+            "description": "Algorithm parameter.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "algorithmParams"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "description": "Force output image height.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "width",
+            "in": "query",
+            "description": "Force output image width.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -5176,7 +5874,7 @@
             "pattern": ".*"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -5203,6 +5901,61 @@
           },
           {
             "$ref": "#/parameters/StatisticsQueryParameters.histogramRange"
+          },
+          {
+            "$ref": "#/parameters/DstCrsQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
+          },
+          {
+            "name": "algorithm",
+            "in": "query",
+            "description": "Algorithm name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "algorithm_params",
+            "in": "query",
+            "description": "Algorithm parameter.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "algorithmParams"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "description": "Force output image height.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "width",
+            "in": "query",
+            "description": "Force output image width.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "body",
@@ -5302,7 +6055,7 @@
             "pattern": ".*"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -5381,7 +6134,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "tile_format",
@@ -5485,7 +6239,28 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -5544,6 +6319,27 @@
             "type": "string",
             "maxLength": 500,
             "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -5602,6 +6398,27 @@
             "type": "string",
             "maxLength": 500,
             "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "tileMatrixSetId",
@@ -5720,7 +6537,7 @@
             "$ref": "#/parameters/ZxyPathParameters.y"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -5799,7 +6616,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "format",
@@ -5894,7 +6712,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
@@ -5913,6 +6731,9 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -6031,7 +6852,7 @@
             "pattern": ".*"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -6110,7 +6931,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "scale",
@@ -6142,7 +6964,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
@@ -6161,6 +6983,9 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -6278,7 +7103,7 @@
             "format": "float"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -6357,7 +7182,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "format",
@@ -6444,7 +7270,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
@@ -6463,6 +7289,9 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -6673,7 +7502,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
@@ -6692,6 +7521,9 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -6848,7 +7680,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
@@ -6867,6 +7699,9 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -7077,7 +7912,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
@@ -7096,6 +7931,9 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -7153,16 +7991,37 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "collectionId",
@@ -7214,7 +8073,7 @@
             "$ref": "#/parameters/AssetQueryParameters.reproject"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -7347,16 +8206,37 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "collectionId",
@@ -7384,7 +8264,7 @@
             "format": "float"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -7474,16 +8354,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -7501,7 +8399,7 @@
             "pattern": ".*"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -7580,7 +8478,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "tile_format",
@@ -7690,7 +8589,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -7731,6 +8630,39 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "collectionId",
@@ -7780,6 +8712,39 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "collectionId",
@@ -7898,16 +8863,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -7925,7 +8908,7 @@
             "$ref": "#/parameters/ZxyPathParameters.y"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -8004,7 +8987,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "scale",
@@ -8051,7 +9035,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -8152,16 +9136,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -8179,7 +9181,7 @@
             "$ref": "#/parameters/ZxyPathParameters.y"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -8258,7 +9260,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "format",
@@ -8359,7 +9362,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -8460,16 +9463,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -8496,7 +9517,7 @@
             "pattern": ".*"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -8575,7 +9596,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "scale",
@@ -8613,7 +9635,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -8714,16 +9736,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -8749,7 +9789,7 @@
             "format": "float"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -8828,7 +9868,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "format",
@@ -8921,7 +9962,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -9013,16 +10054,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -9102,7 +10161,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -9194,16 +10253,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -9337,7 +10414,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -9429,16 +10506,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -9518,7 +10613,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -9610,16 +10705,34 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -9753,7 +10866,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -9820,16 +10933,37 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "tileMatrixSetId",
@@ -9917,16 +11051,37 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.ids"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.bbox"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.query"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.sortby"
+          },
+          {
+            "$ref": "#/parameters/CollectionMosaicFilterQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "$ref": "#/parameters/ZxyPathParameters.z"
@@ -9938,7 +11093,7 @@
             "$ref": "#/parameters/ZxyPathParameters.y"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -10017,7 +11172,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           }
         ],
         "responses": {
@@ -10111,36 +11267,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.bidx"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.assets"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.expression"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.noData"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.unscale"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.reproject"
-          },
-          {
-            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
-          },
-          {
-            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
           },
           {
             "name": "searchId",
@@ -10240,30 +11366,6 @@
           },
           {
             "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
-          },
-          {
-            "$ref": "#/parameters/TileMatrixSetQueryParameters.buffer"
-          },
-          {
-            "$ref": "#/parameters/TileMatrixSetQueryParameters.colorFormula"
-          },
-          {
-            "$ref": "#/parameters/TileMatrixSetQueryParameters.resampling"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
           }
         ],
         "responses": {
@@ -10345,16 +11447,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -10487,7 +11595,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -10534,36 +11642,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AssetQueryParameters.bidx"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.assets"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.expression"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.noData"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.unscale"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.reproject"
-          },
-          {
-            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
-          },
-          {
-            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
-          },
-          {
             "name": "searchId",
             "in": "path",
             "description": "Search Id (pgSTAC Search Hash)",
@@ -10573,7 +11651,7 @@
             "pattern": ".*"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
             "required": false,
@@ -10652,7 +11730,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "tile_format",
@@ -10734,30 +11813,6 @@
           },
           {
             "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
-          },
-          {
-            "$ref": "#/parameters/TileMatrixSetQueryParameters.buffer"
-          },
-          {
-            "$ref": "#/parameters/TileMatrixSetQueryParameters.colorFormula"
-          },
-          {
-            "$ref": "#/parameters/TileMatrixSetQueryParameters.resampling"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
           }
         ],
         "responses": {
@@ -10849,16 +11904,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -10897,7 +11958,7 @@
             "pattern": ".*"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -10905,7 +11966,7 @@
             "x-ms-client-name": "coordinateReferenceSystem"
           },
           {
-            "name": "dst-crs",
+            "name": "dst_crs",
             "in": "query",
             "description": "Output Coordinate Reference System.",
             "required": false,
@@ -10929,19 +11990,16 @@
             "$ref": "#/parameters/DimensionsQueryParameters.width"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+            "$ref": "#/parameters/MosaicCropQueryParameters.colorFormula"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+            "$ref": "#/parameters/MosaicCropQueryParameters.collection"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.resampling"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.pixelSelection"
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.rescale"
@@ -10954,9 +12012,6 @@
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
           }
         ],
         "responses": {
@@ -11048,16 +12103,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -11112,7 +12173,7 @@
             "pattern": ".*"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -11120,7 +12181,7 @@
             "x-ms-client-name": "coordinateReferenceSystem"
           },
           {
-            "name": "dst-crs",
+            "name": "dst_crs",
             "in": "query",
             "description": "Output Coordinate Reference System.",
             "required": false,
@@ -11128,19 +12189,26 @@
             "x-ms-client-name": "destinationCrs"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+            "$ref": "#/parameters/MosaicCropQueryParameters.colorFormula"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.collection"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+            "$ref": "#/parameters/MosaicCropQueryParameters.resampling"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.pixelSelection"
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.rescale"
@@ -11153,9 +12221,6 @@
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
           }
         ],
         "responses": {
@@ -11247,16 +12312,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -11274,7 +12345,7 @@
             "pattern": ".*"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -11298,19 +12369,16 @@
             "$ref": "#/parameters/DimensionsQueryParameters.width"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+            "$ref": "#/parameters/MosaicCropQueryParameters.colorFormula"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+            "$ref": "#/parameters/MosaicCropQueryParameters.collection"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.resampling"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.pixelSelection"
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.rescale"
@@ -11325,7 +12393,70 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/DstCrsQueryParameter"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Output image format.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "png",
+              "npy",
+              "tif",
+              "jpeg",
+              "jpg",
+              "jp2",
+              "webp",
+              "pngraw"
+            ],
+            "x-ms-enum": {
+              "name": "TilerImageFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "png",
+                  "value": "png",
+                  "description": "Portable Network Graphics format - supports transparency"
+                },
+                {
+                  "name": "npy",
+                  "value": "npy",
+                  "description": "NumPy array format for raw data access"
+                },
+                {
+                  "name": "tif",
+                  "value": "tif",
+                  "description": "GeoTIFF format for georeferenced raster data"
+                },
+                {
+                  "name": "jpeg",
+                  "value": "jpeg",
+                  "description": "JPEG format - smaller file size but lossy compression"
+                },
+                {
+                  "name": "jpg",
+                  "value": "jpg",
+                  "description": "Alternate extension for JPEG format"
+                },
+                {
+                  "name": "jp2",
+                  "value": "jp2",
+                  "description": "JPEG 2000 format - supports both lossy and lossless compression"
+                },
+                {
+                  "name": "webp",
+                  "value": "webp",
+                  "description": "WebP format - modern image format with good compression"
+                },
+                {
+                  "name": "pngraw",
+                  "value": "pngraw",
+                  "description": "Raw PNG format for access to unprocessed data"
+                }
+              ]
+            }
           },
           {
             "name": "body",
@@ -11426,16 +12557,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -11478,7 +12615,7 @@
             "pattern": ".*"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -11496,19 +12633,16 @@
             "x-ms-client-name": "maxSize"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+            "$ref": "#/parameters/MosaicCropQueryParameters.colorFormula"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+            "$ref": "#/parameters/MosaicCropQueryParameters.collection"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.resampling"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.pixelSelection"
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.rescale"
@@ -11523,7 +12657,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/DstCrsQueryParameter"
           },
           {
             "name": "body",
@@ -11624,16 +12758,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -11660,7 +12800,7 @@
             "pattern": ".*"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -11684,19 +12824,16 @@
             "$ref": "#/parameters/DimensionsQueryParameters.width"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+            "$ref": "#/parameters/MosaicCropQueryParameters.colorFormula"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+            "$ref": "#/parameters/MosaicCropQueryParameters.collection"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.resampling"
           },
           {
-            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
-          },
-          {
-            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+            "$ref": "#/parameters/MosaicCropQueryParameters.pixelSelection"
           },
           {
             "$ref": "#/parameters/MiscTileQueryParameters.rescale"
@@ -11711,7 +12848,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/DstCrsQueryParameter"
           },
           {
             "name": "body",
@@ -11827,16 +12964,25 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "searchId",
@@ -11888,7 +13034,7 @@
             "$ref": "#/parameters/AssetQueryParameters.reproject"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -12021,16 +13167,25 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "searchId",
@@ -12058,7 +13213,7 @@
             "format": "float"
           },
           {
-            "name": "coord-crs",
+            "name": "coord_crs",
             "in": "query",
             "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
             "required": false,
@@ -12157,19 +13312,25 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
           },
           {
-            "name": "tileMatrixSetId",
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad').",
             "required": false,
@@ -12248,7 +13409,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "tile_format",
@@ -12328,6 +13490,14 @@
           },
           {
             "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
+          },
+          {
+            "name": "padding",
+            "in": "query",
+            "description": "Padding to apply to each tile edge. Helps reduce resampling artefacts along edges. Defaults to `0`.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "buffer",
@@ -13921,6 +15091,27 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
+          },
+          {
             "name": "searchId",
             "in": "path",
             "description": "Search Id (pgSTAC Search Hash)",
@@ -13968,6 +15159,27 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "searchId",
@@ -14086,16 +15298,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -14113,7 +15331,7 @@
             "$ref": "#/parameters/ZxyPathParameters.y"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad')",
             "required": false,
@@ -14192,7 +15410,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "format",
@@ -14293,7 +15512,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -14394,16 +15613,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -14430,7 +15655,7 @@
             "pattern": ".*"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad')",
             "required": false,
@@ -14509,7 +15734,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "scale",
@@ -14547,7 +15773,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -14648,16 +15874,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -14683,7 +15915,7 @@
             "format": "float"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad')",
             "required": false,
@@ -14762,7 +15994,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "format",
@@ -14855,7 +16088,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -14956,16 +16189,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -14983,7 +16222,7 @@
             "$ref": "#/parameters/ZxyPathParameters.y"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad')",
             "required": false,
@@ -15062,7 +16301,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           },
           {
             "name": "scale",
@@ -15109,7 +16349,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -15201,16 +16441,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -15290,7 +16536,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -15382,16 +16628,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -15525,7 +16777,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -15617,16 +16869,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -15706,7 +16964,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -15798,16 +17056,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
@@ -15941,7 +17205,7 @@
             "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
           },
           {
-            "$ref": "#/parameters/MiscTileQueryParameters.padding"
+            "$ref": "#/parameters/TilePaddingQueryParameters"
           }
         ],
         "responses": {
@@ -16008,16 +17272,22 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
             "name": "tileMatrixSetId",
@@ -16115,16 +17385,25 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.ids"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetName"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.bbox"
+            "$ref": "#/parameters/SubDatasetQueryParameters.subdatasetBands"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.query"
+            "$ref": "#/parameters/SubDatasetQueryParameters.crs"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.sortby"
+            "$ref": "#/parameters/SubDatasetQueryParameters.datetime"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.sel"
+          },
+          {
+            "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
+          },
+          {
+            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "$ref": "#/parameters/ZxyPathParameters.z"
@@ -16136,7 +17415,7 @@
             "$ref": "#/parameters/ZxyPathParameters.y"
           },
           {
-            "name": "tileMatrixSetId",
+            "name": "TileMatrixSetId",
             "in": "query",
             "description": "Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad')",
             "required": false,
@@ -16215,7 +17494,8 @@
                   "description": "World Mercator WGS84 Quad tile matrix set"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "tileMatrixSetId"
           }
         ],
         "responses": {
@@ -18857,6 +20137,49 @@
             "description": "Either a date-time or an interval, open or closed. Date and time expressions\nadhere to RFC 3339. Open intervals are expressed using double-dots.\n\nExamples:\n\n- A date-time: \"2018-02-12T23:20:50Z\"\n- A closed interval: \"2018-02-12T00:00:00Z/2018-03-18T12:31:12Z\"\n- Open intervals: \"2018-02-12T00:00:00Z/..\" or \"../2018-03-18T12:31:12Z\"\n\nOnly features that have a temporal property that intersects the value of\n`datetime` are selected.\n\nIf a feature has multiple temporal properties, it is the decision of the\nserver whether only a single temporal property is used to determine\nthe extent or all relevant temporal properties.",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "sign",
+            "in": "query",
+            "description": "Whether to sign asset URLs in the response.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "StacAssetUrlSigningMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "True",
+                  "value": "true",
+                  "description": "Sign asset URLs in the response."
+                },
+                {
+                  "name": "False",
+                  "value": "false",
+                  "description": "Do not sign asset URLs in the response."
+                }
+              ]
+            }
+          },
+          {
+            "name": "duration",
+            "in": "query",
+            "description": "URL signature duration in minutes.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "durationInMinutes"
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "description": "Pagination token for fetching the next set of results.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -18973,6 +20296,42 @@
             "type": "string",
             "maxLength": 500,
             "pattern": ".*"
+          },
+          {
+            "name": "sign",
+            "in": "query",
+            "description": "Whether to sign asset URLs in the response.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "StacAssetUrlSigningMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "True",
+                  "value": "true",
+                  "description": "Sign asset URLs in the response."
+                },
+                {
+                  "name": "False",
+                  "value": "false",
+                  "description": "Do not sign asset URLs in the response."
+                }
+              ]
+            }
+          },
+          {
+            "name": "duration",
+            "in": "query",
+            "description": "URL signature duration in minutes.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "durationInMinutes"
           }
         ],
         "responses": {
@@ -19724,6 +21083,48 @@
             "type": "string"
           },
           {
+            "name": "filter-crs",
+            "in": "query",
+            "description": "The coordinate reference system (CRS) used by spatial literals in the 'filter' value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filterCoordinateReferenceSystem"
+          },
+          {
+            "name": "filter-lang",
+            "in": "query",
+            "description": "The CQL filter encoding that the 'filter' value uses.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "cql-json",
+              "cql2-json",
+              "cql2-text"
+            ],
+            "x-ms-enum": {
+              "name": "FilterLanguage",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "cql-json",
+                  "value": "cql-json",
+                  "description": "Common Query Language in JSON format."
+                },
+                {
+                  "name": "cql2-json",
+                  "value": "cql2-json",
+                  "description": "Common Query Language 2 in JSON format"
+                },
+                {
+                  "name": "cql2-text",
+                  "value": "cql2-text",
+                  "description": "Common Query Language 2 in text format."
+                }
+              ]
+            },
+            "x-ms-client-name": "filterLang"
+          },
+          {
             "name": "token",
             "in": "query",
             "description": "Pagination token for fetching the next set of results.",
@@ -19767,42 +21168,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "sign",
-            "in": "query",
-            "description": "Whether to sign asset URLs in the response.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "true",
-              "false"
-            ],
-            "x-ms-enum": {
-              "name": "StacAssetUrlSigningMode",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "True",
-                  "value": "true",
-                  "description": "Sign asset URLs in the response."
-                },
-                {
-                  "name": "False",
-                  "value": "false",
-                  "description": "Do not sign asset URLs in the response."
-                }
-              ]
-            }
-          },
-          {
-            "name": "duration",
-            "in": "query",
-            "description": "URL signature duration in minutes.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "durationInMinutes"
           },
           {
             "name": "body",
@@ -26581,6 +27946,46 @@
       "format": "float",
       "x-ms-parameter-location": "method"
     },
+    "CollectionMosaicFilterQueryParameters.bbox": {
+      "name": "bbox",
+      "in": "query",
+      "description": "Bounding box (west, south, east, north).",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CollectionMosaicFilterQueryParameters.datetime": {
+      "name": "datetime",
+      "in": "query",
+      "description": "Datetime filter expression (single datetime or range using `/` separator).",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CollectionMosaicFilterQueryParameters.ids": {
+      "name": "ids",
+      "in": "query",
+      "description": "Array of Item ids.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CollectionMosaicFilterQueryParameters.query": {
+      "name": "query",
+      "in": "query",
+      "description": "JSON query expression for filtering items.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CollectionMosaicFilterQueryParameters.sortby": {
+      "name": "sortby",
+      "in": "query",
+      "description": "Sorting expression (e.g. +/-property).",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "CollectionParameters.collectionId": {
       "name": "collectionId",
       "in": "path",
@@ -26590,6 +27995,121 @@
       "maxLength": 500,
       "pattern": ".*",
       "x-ms-parameter-location": "method"
+    },
+    "CollectionQueryParameter": {
+      "name": "collection",
+      "in": "query",
+      "description": "STAC Collection Identifier",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CollectionSubDatasetQueryParameters.crs": {
+      "name": "crs",
+      "in": "query",
+      "description": "Coordinate Reference System.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CollectionSubDatasetQueryParameters.sel": {
+      "name": "sel",
+      "in": "query",
+      "description": "Xarray Indexing using dimension names `{dimension}={value}`.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
+    "CollectionSubDatasetQueryParameters.selMethod": {
+      "name": "sel_method",
+      "in": "query",
+      "description": "Xarray indexing method to use for inexact matches.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "nearest",
+        "linear",
+        "bilinear",
+        "cubic",
+        "cubic_spline",
+        "lanczos",
+        "area",
+        "mode"
+      ],
+      "x-ms-enum": {
+        "name": "SelMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "nearest",
+            "value": "nearest",
+            "description": "Nearest neighbor method"
+          },
+          {
+            "name": "linear",
+            "value": "linear",
+            "description": "Linear interpolation"
+          },
+          {
+            "name": "bilinear",
+            "value": "bilinear",
+            "description": "Bilinear interpolation"
+          },
+          {
+            "name": "cubic",
+            "value": "cubic",
+            "description": "Cubic interpolation"
+          },
+          {
+            "name": "cubic_spline",
+            "value": "cubic_spline",
+            "description": "Cubic spline interpolation"
+          },
+          {
+            "name": "lanczos",
+            "value": "lanczos",
+            "description": "Lanczos interpolation"
+          },
+          {
+            "name": "area",
+            "value": "area",
+            "description": "Area-weighted interpolation"
+          },
+          {
+            "name": "mode",
+            "value": "mode",
+            "description": "Mode (most common) value"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "selMethod"
+    },
+    "CollectionSubDatasetQueryParameters.subdatasetBands": {
+      "name": "subdataset_bands",
+      "in": "query",
+      "description": "The index of a subdataset band within the asset.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "subdatasetBands"
+    },
+    "CollectionSubDatasetQueryParameters.subdatasetName": {
+      "name": "subdataset_name",
+      "in": "query",
+      "description": "The name of a subdataset within the asset.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "subdatasetName"
     },
     "DimensionsQueryParameters.height": {
       "name": "height",
@@ -26608,6 +28128,15 @@
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
+    },
+    "DstCrsQueryParameter": {
+      "name": "dst_crs",
+      "in": "query",
+      "description": "Output Coordinate Reference System.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "destinationCrs"
     },
     "IngestionParameters.ingestionId": {
       "name": "ingestionId",
@@ -27958,15 +29487,6 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "colorMapName"
     },
-    "MiscTileQueryParameters.padding": {
-      "name": "padding",
-      "in": "query",
-      "description": "Padding to apply to each tile edge. Helps reduce resampling artefacts along edges. Defaults to `0`.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
     "MiscTileQueryParameters.rescale": {
       "name": "rescale",
       "in": "query",
@@ -27989,12 +29509,158 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "returnMask"
     },
-    "MosaicSearchQueryParameters.bbox": {
-      "name": "bbox",
+    "MosaicCropQueryParameters.collection": {
+      "name": "collection",
       "in": "query",
-      "description": "Bounding box (west, south, east, north).",
+      "description": "STAC Collection ID",
       "required": false,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "MosaicCropQueryParameters.colorFormula": {
+      "name": "color_formula",
+      "in": "query",
+      "description": "rio-color formula (info: https://github.com/mapbox/rio-color)",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "colorFormula"
+    },
+    "MosaicCropQueryParameters.pixelSelection": {
+      "name": "pixel_selection",
+      "in": "query",
+      "description": "Pixel selection method.",
+      "required": false,
+      "type": "string",
+      "default": "first",
+      "enum": [
+        "first",
+        "highest",
+        "lowest",
+        "mean",
+        "median",
+        "stdev",
+        "lastbandlow",
+        "lastbandhigh"
+      ],
+      "x-ms-enum": {
+        "name": "PixelSelection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "first",
+            "value": "first",
+            "description": "Select pixel from the first available image"
+          },
+          {
+            "name": "highest",
+            "value": "highest",
+            "description": "Select pixel with the highest value"
+          },
+          {
+            "name": "lowest",
+            "value": "lowest",
+            "description": "Select pixel with the lowest value"
+          },
+          {
+            "name": "mean",
+            "value": "mean",
+            "description": "Calculate mean of available pixels"
+          },
+          {
+            "name": "median",
+            "value": "median",
+            "description": "Calculate median of available pixels"
+          },
+          {
+            "name": "standardDeviation",
+            "value": "stdev",
+            "description": "Calculate standard deviation of available pixels"
+          },
+          {
+            "name": "lastBandLow",
+            "value": "lastbandlow",
+            "description": "Select image with lowest value in the last band"
+          },
+          {
+            "name": "lastBandHigh",
+            "value": "lastbandhigh",
+            "description": "Select image with highest value in the last band"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "pixelSelection"
+    },
+    "MosaicCropQueryParameters.resampling": {
+      "name": "resampling",
+      "in": "query",
+      "description": "Resampling method.",
+      "required": false,
+      "type": "string",
+      "default": "nearest",
+      "enum": [
+        "nearest",
+        "bilinear",
+        "cubic",
+        "cubic_spline",
+        "lanczos",
+        "average",
+        "mode",
+        "gauss",
+        "rms"
+      ],
+      "x-ms-enum": {
+        "name": "Resampling",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "nearest",
+            "value": "nearest",
+            "description": "Nearest neighbor - fastest method that selects the closest pixel value"
+          },
+          {
+            "name": "bilinear",
+            "value": "bilinear",
+            "description": "Bilinear interpolation - calculates output values using a weighted average of 2x2 input cells"
+          },
+          {
+            "name": "cubic",
+            "value": "cubic",
+            "description": "Cubic interpolation - uses a weighted average of 4x4 input cells for smoother results"
+          },
+          {
+            "name": "cubic_spline",
+            "value": "cubic_spline",
+            "description": "Cubic spline interpolation - similar to cubic but preserves edges better"
+          },
+          {
+            "name": "lanczos",
+            "value": "lanczos",
+            "description": "Lanczos windowed sinc resampling - high-quality with minimal artifacts"
+          },
+          {
+            "name": "average",
+            "value": "average",
+            "description": "Average resampling - calculates the mean of all contributing pixels"
+          },
+          {
+            "name": "mode",
+            "value": "mode",
+            "description": "Mode resampling - selects the most common value from contributing pixels"
+          },
+          {
+            "name": "gauss",
+            "value": "gauss",
+            "description": "Gaussian weighted resampling - applies a gaussian weighting to contributing pixels"
+          },
+          {
+            "name": "rms",
+            "value": "rms",
+            "description": "Root mean square resampling - useful for resampling error or deviation grids"
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     },
     "MosaicSearchQueryParameters.exitWhenFull": {
@@ -28006,14 +29672,6 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "exitWhenFull"
     },
-    "MosaicSearchQueryParameters.ids": {
-      "name": "ids",
-      "in": "query",
-      "description": "Array of Item ids.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "MosaicSearchQueryParameters.itemsLimit": {
       "name": "items_limit",
       "in": "query",
@@ -28023,14 +29681,6 @@
       "format": "int32",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "itemsLimit"
-    },
-    "MosaicSearchQueryParameters.query": {
-      "name": "query",
-      "in": "query",
-      "description": "JSON query expression for filtering items.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     },
     "MosaicSearchQueryParameters.scanLimit": {
       "name": "scan_limit",
@@ -28050,14 +29700,6 @@
       "type": "boolean",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "skipCovered"
-    },
-    "MosaicSearchQueryParameters.sortby": {
-      "name": "sortby",
-      "in": "query",
-      "description": "Sorting expression (e.g. +/-property).",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     },
     "MosaicSearchQueryParameters.timeLimit": {
       "name": "time_limit",
@@ -28642,6 +30284,15 @@
           }
         ]
       },
+      "x-ms-parameter-location": "method"
+    },
+    "TilePaddingQueryParameters": {
+      "name": "padding",
+      "in": "query",
+      "description": "Padding to apply to each tile edge. Helps reduce resampling artefacts along edges. Defaults to `0`.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
       "x-ms-parameter-location": "method"
     },
     "ZoomQueryParameters.maxZoom": {

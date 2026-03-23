@@ -186,6 +186,50 @@ model SubDatasetQueryParameters {
 }
 
 /**
+ * Subdataset query parameters for collection-level mosaic operations.
+ * Same as SubDatasetQueryParameters but without datetime (which is already
+ * provided by CollectionMosaicFilterQueryParameters).
+ */
+@added(Versions.v2026_04_15)
+model CollectionSubDatasetQueryParameters {
+  /**
+   * The name of a subdataset within the asset.
+   */
+  @added(Versions.v2026_04_15)
+  @query("subdataset_name")
+  subdatasetName?: string;
+
+  /**
+   * The index of a subdataset band within the asset.
+   */
+  @added(Versions.v2026_04_15)
+  @query("subdataset_bands")
+  subdatasetBands?: string[];
+
+  /**
+   * Coordinate Reference System.
+   */
+  @added(Versions.v2026_04_15)
+  @query("crs")
+  crs?: string;
+
+  /**
+   * Xarray Indexing using dimension names `{dimension}={value}`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @added(Versions.v2026_04_15)
+  @query(#{ explode: true })
+  sel?: string[];
+
+  /**
+   * Xarray indexing method to use for inexact matches.
+   */
+  @added(Versions.v2026_04_15)
+  @query("sel_method")
+  selMethod?: SelMethod;
+}
+
+/**
  * Width and height parameters for specifying output image dimensions
  */
 model DimensionsQueryParameters {

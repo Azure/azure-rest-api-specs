@@ -43,6 +43,9 @@ interface MosaicItemsTileSetList {
       @maxLength(500)
       @pattern(".*")
       itemId: string;
+
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileSetList
   >;
@@ -75,6 +78,9 @@ interface MosaicItemsTileSetMetadata {
       @maxLength(500)
       @pattern(".*")
       itemId: string;
+
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Identifier selecting one of the TileMatrixSetId supported
@@ -139,7 +145,9 @@ interface MosaicItemsTileMatrixSetsPlain {
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -200,7 +208,9 @@ interface MosaicItemsTileMatrixSetsFormat {
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -259,7 +269,9 @@ interface MosaicItemsTileMatrixSetsScale {
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -302,7 +314,7 @@ interface MosaicItemsTilesPlain {
        * Identifier selecting one of the TileMatrixSetId supported (default:
        * 'WebMercatorQuad')
        */
-      @query("tileMatrixSetId")
+      @query("TileMatrixSetId")
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /** Output format for the tile or image (e.g., png, jpeg, webp) */
@@ -315,7 +327,9 @@ interface MosaicItemsTilesPlain {
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -366,7 +380,7 @@ interface MosaicItemsTilesFormat {
        * Identifier selecting one of the TileMatrixSetId supported (default:
        * 'WebMercatorQuad')
        */
-      @query("tileMatrixSetId")
+      @query("TileMatrixSetId")
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /** Numeric scale factor for the tile. Higher values produce larger tiles */
@@ -375,7 +389,9 @@ interface MosaicItemsTilesFormat {
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -424,7 +440,7 @@ interface MosaicItemsTilesScale {
        * Identifier selecting one of the TileMatrixSetId supported (default:
        * 'WebMercatorQuad')
        */
-      @query("tileMatrixSetId")
+      @query("TileMatrixSetId")
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /** Output format for the tile or image (e.g., png, jpeg, webp) */
@@ -433,7 +449,9 @@ interface MosaicItemsTilesScale {
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -479,7 +497,7 @@ interface MosaicItemsFeatureGeoJson {
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
-      @query("coord-crs")
+      @query("coord_crs")
       coordinateReferenceSystem?: string;
 
       /**
@@ -496,6 +514,15 @@ interface MosaicItemsFeatureGeoJson {
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
+      ...DstCrsQueryParameter;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
+
+      /**
+       * Output image format.
+       */
+      @query("format")
+      format?: TilerImageFormat;
 
       /**
        * Request GeoJson body.
@@ -561,13 +588,13 @@ interface MosaicItemsBbox {
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
-      @query("coord-crs")
+      @query("coord_crs")
       coordinateReferenceSystem?: string;
 
       /**
        * Output Coordinate Reference System.
        */
-      @query("dst-crs")
+      @query("dst_crs")
       destinationCrs?: string;
 
       /**
@@ -584,6 +611,8 @@ interface MosaicItemsBbox {
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -651,13 +680,13 @@ interface MosaicItemsBboxWithDimensions {
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
-      @query("coord-crs")
+      @query("coord_crs")
       coordinateReferenceSystem?: string;
 
       /**
        * Output Coordinate Reference System.
        */
-      @query("dst-crs")
+      @query("dst_crs")
       destinationCrs?: string;
 
       /**
@@ -666,7 +695,15 @@ interface MosaicItemsBboxWithDimensions {
       @query("resampling")
       resampling?: Resampling = Resampling.nearest;
 
+      /**
+       * Image output size limit if width and height limits are not set.
+       */
+      @query("max_size")
+      maxSize?: int32 = 1024;
+
       ...MiscTileQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -720,7 +757,7 @@ interface MosaicItemsFeatureGeoJsonFormat {
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
-      @query("coord-crs")
+      @query("coord_crs")
       coordinateReferenceSystem?: string;
 
       /**
@@ -737,6 +774,9 @@ interface MosaicItemsFeatureGeoJsonFormat {
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
+      ...DstCrsQueryParameter;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Request GeoJson body.
@@ -778,6 +818,9 @@ interface MosaicItemsBounds {
       @maxLength(500)
       @pattern(".*")
       itemId: string;
+
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     StacItemBounds
   >;
@@ -814,6 +857,9 @@ interface MosaicItemsInfo {
       @maxLength(500)
       @pattern(".*")
       itemId: string;
+
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Asset's names.
@@ -853,6 +899,9 @@ interface MosaicItemsInfoGeoJson {
       @maxLength(500)
       @pattern(".*")
       itemId: string;
+
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Asset's names.
@@ -896,6 +945,9 @@ interface MosaicItemsAvailableAssets {
       @maxLength(500)
       @pattern(".*")
       itemId: string;
+
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     AvailableAssets
   >;
@@ -917,7 +969,44 @@ interface MosaicItemsAssetStatistics {
   @get
   getAll is Azure.Core.Foundations.Operation<
     {
-      ...AssetQueryParameters;
+      /**
+       * Dataset band indexes
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+      @query(#{ explode: true })
+      bidx?: int32[];
+
+      /**
+       * Asset's names.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+      @query(#{ explode: true })
+      assets?: string[];
+
+      /**
+       * Per asset band indexes (coma separated indexes, e.g. "image|1,2,3" means use the bands 1, 2, and 3 from the asset named "image")
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+      @query("asset_bidx")
+      assetBandIndices?: string;
+
+      /**
+       * Overwrite internal Nodata value
+       */
+      @query("nodata")
+      noData?: float32;
+
+      /**
+       * Apply internal Scale or Offset
+       */
+      @query("unscale")
+      unscale?: boolean;
+
+      /**
+       * WarpKernel resampling algorithm (only used when doing re-projection). Defaults to `nearest`.
+       */
+      @query("reproject")
+      reproject?: WarpKernelResampling;
 
       /**
        * STAC Collection Identifier
@@ -936,6 +1025,28 @@ interface MosaicItemsAssetStatistics {
       itemId: string;
 
       ...StatisticsQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
+
+      /**
+       * Per asset band expression.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+      @query("asset_expression")
+      @query(#{ explode: true })
+      assetExpression?: string[];
+
+      /**
+       * Force output image height.
+       */
+      @query("height")
+      height?: int32;
+
+      /**
+       * Force output image width.
+       */
+      @query("width")
+      width?: int32;
     },
     AssetStatisticsResponse
   >;
@@ -972,6 +1083,32 @@ interface MosaicItemsStatistics {
       itemId: string;
 
       ...StatisticsQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
+
+      /**
+       * Algorithm name.
+       */
+      @query("algorithm")
+      algorithm?: string;
+
+      /**
+       * Algorithm parameter.
+       */
+      @query("algorithm_params")
+      algorithmParams?: string;
+
+      /**
+       * Force output image height.
+       */
+      @query("height")
+      height?: int32;
+
+      /**
+       * Force output image width.
+       */
+      @query("width")
+      width?: int32;
     },
     TilerStacItemStatistics
   >;
@@ -1010,10 +1147,37 @@ interface MosaicItemsGeoJsonStatistics {
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
-      @query("coord-crs")
+      @query("coord_crs")
       coordinateReferenceSystem?: string;
 
       ...StatisticsQueryParameters;
+      ...DstCrsQueryParameter;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
+
+      /**
+       * Algorithm name.
+       */
+      @query("algorithm")
+      algorithm?: string;
+
+      /**
+       * Algorithm parameter.
+       */
+      @query("algorithm_params")
+      algorithmParams?: string;
+
+      /**
+       * Force output image height.
+       */
+      @query("height")
+      height?: int32;
+
+      /**
+       * Force output image width.
+       */
+      @query("width")
+      width?: int32;
 
       /**
        * Request GeoJson body
@@ -1064,7 +1228,7 @@ interface MosaicItemsTileJson {
        * Identifier selecting one of the TileMatrixSetId supported (default:
        * 'WebMercatorQuad')
        */
-      @query("tileMatrixSetId")
+      @query("TileMatrixSetId")
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
@@ -1083,6 +1247,9 @@ interface MosaicItemsTileJson {
       ...ZoomQueryParameters;
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileJsonMetadata
   >;
@@ -1143,6 +1310,9 @@ interface MosaicItemsTileMatrixSetsTileJson {
       ...ZoomQueryParameters;
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileJsonMetadata
   >;
@@ -1187,7 +1357,7 @@ interface MosaicItemsWmts {
        * Identifier selecting one of the TileMatrixSetId supported (default:
        * 'WebMercatorQuad')
        */
-      @query("tileMatrixSetId")
+      @query("TileMatrixSetId")
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
@@ -1205,6 +1375,9 @@ interface MosaicItemsWmts {
       ...ZoomQueryParameters;
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     WmtsCapabilitiesXmlResponse
   >;
@@ -1264,6 +1437,9 @@ interface MosaicItemsWmtsTileMatrixSets {
       ...ZoomQueryParameters;
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     WmtsCapabilitiesXmlResponse
   >;
@@ -1314,11 +1490,13 @@ interface MosaicItemsPoint {
       latitude: float32;
 
       ...AssetQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
-      @query("coord-crs")
+      @query("coord_crs")
       coordinateReferenceSystem?: string;
 
       /**
@@ -1383,7 +1561,7 @@ interface MosaicItemsPreviewFormat {
       /**
        * Output Coordinate Reference System.
        */
-      @query("dst-crs")
+      @query("dst_crs")
       dstCrs?: string;
 
       /**
@@ -1400,6 +1578,8 @@ interface MosaicItemsPreviewFormat {
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -1451,7 +1631,7 @@ interface MosaicItemsPreview {
       /**
        * Output Coordinate Reference System.
        */
-      @query("dst-crs")
+      @query("dst_crs")
       dstCrs?: string;
 
       /**
@@ -1468,6 +1648,8 @@ interface MosaicItemsPreview {
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -1536,7 +1718,7 @@ interface MosaicItemsFeatureGeoJsonWidthByHeight {
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
-      @query("coord-crs")
+      @query("coord_crs")
       coordinateReferenceSystem?: string;
 
       /**
@@ -1552,6 +1734,9 @@ interface MosaicItemsFeatureGeoJsonWidthByHeight {
       maxSize?: int32 = 1024;
 
       ...MiscTileQueryParameters;
+      ...DstCrsQueryParameter;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Request GeoJson body.

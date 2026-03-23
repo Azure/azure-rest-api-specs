@@ -361,6 +361,27 @@ interface StacItems {
      */
     @query
     datetime?: string,
+
+    /**
+     * Whether to sign asset URLs in the response.
+     */
+    @added(Versions.v2026_04_15)
+    @query("sign")
+    sign?: StacAssetUrlSigningMode,
+
+    /**
+     * URL signature duration in minutes.
+     */
+    @added(Versions.v2026_04_15)
+    @query("duration")
+    durationInMinutes?: int32,
+
+    /**
+     * Pagination token for fetching the next set of results.
+     */
+    @added(Versions.v2026_04_15)
+    @query("token")
+    token?: string,
   ): StacItemCollection | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -375,6 +396,20 @@ interface StacItems {
     @maxLength(500)
     @pattern(".*")
     itemId: string,
+
+    /**
+     * Whether to sign asset URLs in the response.
+     */
+    @added(Versions.v2026_04_15)
+    @query("sign")
+    sign?: StacAssetUrlSigningMode,
+
+    /**
+     * URL signature duration in minutes.
+     */
+    @added(Versions.v2026_04_15)
+    @query("duration")
+    durationInMinutes?: int32,
   ): StacItem | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."

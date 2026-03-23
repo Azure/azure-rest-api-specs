@@ -51,6 +51,40 @@ model MosaicTileQueryParameters {
 }
 
 /**
+ * Query parameters for mosaic crop/feature/bbox operations (without buffer).
+ */
+@added(Versions.v2026_04_15)
+model MosaicCropQueryParameters {
+  /**
+   * rio-color formula (info: https://github.com/mapbox/rio-color)
+   */
+  @added(Versions.v2026_04_15)
+  @query("color_formula")
+  colorFormula?: string;
+
+  /**
+   * STAC Collection ID
+   */
+  @added(Versions.v2026_04_15)
+  @query("collection")
+  collection?: string;
+
+  /**
+   * Resampling method.
+   */
+  @added(Versions.v2026_04_15)
+  @query("resampling")
+  resampling?: Resampling = Resampling.nearest;
+
+  /**
+   * Pixel selection method.
+   */
+  @added(Versions.v2026_04_15)
+  @query("pixel_selection")
+  pixelSelection?: PixelSelection = PixelSelection.first;
+}
+
+/**
  * Supported algorithms for terrain and index-based analysis
  */
 union TerrainAlgorithm {
@@ -320,34 +354,44 @@ model MosaicSearchQueryParameters {
    */
   @query("skipcovered")
   skipCovered?: boolean;
+}
 
+/**
+ * Collection-level mosaic filter parameters (ids, bbox, query, sortby).
+ * These apply to collection mosaic endpoints but NOT to registered search endpoints
+ * (where the filter criteria are already baked into the search object).
+ */
+@added(Versions.v2026_04_15)
+model CollectionMosaicFilterQueryParameters {
   /**
    * Array of Item ids.
    */
-  @added(Versions.v2026_04_15)
   @query("ids")
   ids?: string;
 
   /**
    * Bounding box (west, south, east, north).
    */
-  @added(Versions.v2026_04_15)
   @query("bbox")
   bbox?: string;
 
   /**
    * JSON query expression for filtering items.
    */
-  @added(Versions.v2026_04_15)
   @query("query")
   query?: string;
 
   /**
    * Sorting expression (e.g. +/-property).
    */
-  @added(Versions.v2026_04_15)
   @query("sortby")
   sortby?: string;
+
+  /**
+   * Datetime filter expression (single datetime or range using `/` separator).
+   */
+  @query("datetime")
+  datetime?: string;
 }
 
 /**
