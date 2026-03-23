@@ -23,16 +23,6 @@ alias ReplaceContentRequest = {
   @encode("bytes")
   runbookContent: bytes;
 };
-alias ReplaceContentResponse = {
-  @header("Content-Type")
-  contentType: "text/powershell";
-
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-  @doc("The runbook draft content.")
-  @bodyRoot
-  @encode("bytes")
-  runbookContent: bytes;
-};
 /**
  * Definition of the runbook type.
  */
@@ -146,7 +136,15 @@ interface Runbooks {
   replaceContent is ArmResourceActionAsyncCustom<
     Runbook,
     ReplaceContentRequest,
-    ReplaceContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+    {
+      @header("Content-Type")
+      contentType: "text/powershell";
+
+      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
+      @bodyRoot
+      @encode("bytes")
+      body: bytes;
+    } | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader & {
         @header("Location")
         location: string;
