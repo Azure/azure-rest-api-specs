@@ -5449,12 +5449,26 @@ model RaiPolicyListResult {
  */
 union ComputeProvisioningState {
   string,
+
+  /** The resource provisioning request has been accepted. */
   Accepted: "Accepted",
+
+  /** The resource has been fully provisioned. */
   Succeeded: "Succeeded",
+
+  /** The resource provisioning has failed. */
   Failed: "Failed",
+
+  /** The resource provisioning was canceled. */
   Canceled: "Canceled",
+
+  /** The resource is being deleted. */
   Deleting: "Deleting",
+
+  /** The resource is scaling. */
   Scaling: "Scaling",
+
+  /** The resource is disabled. */
   Disabled: "Disabled",
 }
 
@@ -5463,7 +5477,11 @@ union ComputeProvisioningState {
  */
 union VmPriority {
   string,
+
+  /** Regular VM priority. */
   Regular: "Regular",
+
+  /** Spot VM priority. */
   Spot: "Spot",
 }
 
