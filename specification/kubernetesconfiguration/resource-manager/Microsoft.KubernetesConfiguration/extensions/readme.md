@@ -74,9 +74,9 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: Existing service contract needs to be backward compatible.
     where:
-      - $.definitions.ExtensionProperties.properties.properties.configurationSettings
-      - $.definitions.ExtensionProperties.properties.properties.configurationProtectedSettings
-      - $.definitions.ExtensionProperties.properties.properties.customLocationSettings
+      - $.definitions.ExtensionProperties.properties.configurationSettings
+      - $.definitions.ExtensionProperties.properties.configurationProtectedSettings
+      - $.definitions.ExtensionProperties.properties.customLocationSettings
       - $.definitions.OperationStatusResult.properties.properties
       - $.definitions.PatchExtensionProperties.properties.configurationSettings
       - $.definitions.PatchExtensionProperties.properties.configurationProtectedSettings
