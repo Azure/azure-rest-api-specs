@@ -32,7 +32,7 @@ title: AzureMonitorPipelinesClient
 description: Azure Monitor Pipelines Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-03-01-preview
+tag: package-2026-04-01
 ```
 
 ### Tag: package-2024-10-01-preview
@@ -51,6 +51,15 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 ``` yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
 - preview/2025-03-01-preview/pipelineGroups.json
+```
+
+### Tag: package-2026-04-01
+
+These settings apply only when `--tag=package-2026-04-01` is specified on the command line
+
+``` yaml $(tag) == 'package-2026-04-01'
+input-file:
+- stable/2026-04-01/pipelineGroups.json
 ```
 
 ---
