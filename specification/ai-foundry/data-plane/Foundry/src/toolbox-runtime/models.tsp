@@ -20,7 +20,7 @@ union ToolsetMCPMethodName {
   initialized: "notifications/initialized",
   list: "tools/list",
   call: "tools/call",
-  taskCreate: "tasks/create",
+  taskResult: "tasks/result",
   taskGet: "tasks/get",
   taskCancel: "tasks/cancel",
 }
@@ -573,7 +573,7 @@ union ToolsetMCPJsonRpcResult {
   ToolsetMCPInitializeResult,
   ToolsetMCPListToolsResult,
   ToolsetMCPCallToolResult,
-  ToolsetMCPCreateTaskResult,
+  ToolsetMCPResultTaskResult,
   ToolsetMCPGetTaskResult,
   ToolsetMCPCancelTaskResult,
 }
@@ -664,10 +664,10 @@ union ToolsetMCPJsonRpcMessage {
 }
 
 /**
- * Parameters for a tasks/create request.
+ * Parameters for a tasks/result request.
  * Uses the same shape as tools/call — name, arguments, and optional metadata.
  */
-model ToolsetMCPCreateTaskRequestParams {
+model ToolsetMCPResultTaskRequestParams {
   /**
    * Optional metadata for protocol-level extensions.
    */
@@ -745,11 +745,11 @@ model ToolsetMCPTask {
 }
 
 /**
- * Result payload for tasks/create.
+ * Result payload for tasks/result.
  */
-model ToolsetMCPCreateTaskResult {
+model ToolsetMCPResultTaskResult {
   /**
-   * The created task.
+   * The task.
    */
   ...ToolsetMCPTask;
 }
@@ -786,7 +786,7 @@ union ToolsetMCPInvokeRequestParams {
   ToolsetMCPInitializeRequestParams,
   ToolsetMCPPaginatedRequestParams,
   ToolsetMCPCallToolRequestParams,
-  ToolsetMCPCreateTaskRequestParams,
+  ToolsetMCPResultTaskRequestParams,
   ToolsetMCPGetTaskRequestParams,
   ToolsetMCPCancelTaskRequestParams,
 }
