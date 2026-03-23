@@ -74,3 +74,58 @@ union ExclusionReason {
   @doc("The resource is unsupported and excluded.")
   UnsupportedResource: "UnsupportedResource",
 }
+
+@added(Versions.v2026_03_01_preview)
+@doc("Enum for the confirmation status of a high availability solution.")
+union ConfirmationStatus {
+  string,
+
+  @doc("The high availability solution has been approved by the user.")
+  ApprovedByUser: "ApprovedByUser",
+
+  @doc("The high availability solution is pending approval from the user.")
+  ApprovalPending: "ApprovalPending",
+
+  @doc("The high availability solution does not require user approval.")
+  ApprovalNotNeeded: "ApprovalNotNeeded",
+
+  @doc("The high availability solution has been rejected by the user.")
+  RejectedByUser: "RejectedByUser",
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Enum for the solution provider name of a high availability solution.")
+union SolutionProviderName {
+  string,
+
+  @doc("Zone pinned VM with ZRS disk.")
+  ZonePinnedVmWithZrsDisk: "ZonePinnedVmWithZrsDisk",
+
+  @doc("VM in multi-zone VMSS.")
+  VmInMultiZoneVmss: "VmInMultiZoneVmss",
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Enum for the reason for requesting user confirmation for a high availability solution.")
+union ReasonForRequestingConfirmation {
+  string,
+
+  @doc("Zone pinned ZRS data disks conditional.")
+  ZonePinnedZrsDataDisksConditional: "ZonePinnedZrsDataDisksConditional",
+
+  @doc("VM in multi-zone scale set stateless only.")
+  VmInMultiZoneScaleSetStatelessOnly: "VmInMultiZoneScaleSetStatelessOnly",
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Represents a user confirmation for a high availability solution.")
+model UserConfirmationForHighAvailabilityItem {
+  @doc("The solution provider name of the high availability solution.")
+  solutionProviderName: SolutionProviderName;
+
+  @doc("The confirmation status of the high availability solution.")
+  confirmationStatus: ConfirmationStatus;
+
+  @doc("The reason for requesting user confirmation for the high availability solution.")
+  reasonForRequestingConfirmation?: ReasonForRequestingConfirmation;
+}

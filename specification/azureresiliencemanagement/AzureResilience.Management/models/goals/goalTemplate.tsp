@@ -8,6 +8,7 @@ import "./enum.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
@@ -15,6 +16,7 @@ namespace Microsoft.AzureResilienceManagement;
 
 @doc("Definition of goal template property.")
 model GoalTemplateProperties {
+  @removed(Versions.v2026_03_01_preview)
   @doc("Description string provided by customer.")
   description?: string;
 
@@ -47,6 +49,7 @@ model GoalTemplateProperties {
 model GoalTemplate
   is Azure.ResourceManager.ProxyResource<GoalTemplateProperties> {
   @doc("The name of the goalTemplate")
+  // Do not add underscore (_) to the allowed pattern
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("goalTemplateName")
   @segment("goalTemplates")

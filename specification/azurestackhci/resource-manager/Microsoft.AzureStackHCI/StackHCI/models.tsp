@@ -3317,8 +3317,7 @@ model DeploymentSettingHostNetwork {
    * SAN network configuration for the host network. Applicable when StorageType is 'SAN' or 'SANS2D'.
    */
   @added(Versions.v2026_03_15_preview)
-  @identifiers(#[])
-  sanNetworks?: SanNetworks[];
+  sanNetworks?: SanNetworks;
 
   /**
    * Defines how the storage adapters between nodes are connected either switch or switch less..
@@ -9473,7 +9472,7 @@ union IpInterfaceType {
   Dhcp: "Dhcp",
 
   /** Static configuration. */
-  static: "static",
+  Static: "Static",
 }
 
 /**
