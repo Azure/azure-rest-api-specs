@@ -9,6 +9,8 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
+alias HorizonDbPrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
+
 @armResourceOperations
 interface HorizonDbClusters {
   @doc("Gets information about a HorizonDb cluster")
@@ -102,19 +104,23 @@ interface HorizonDbFirewallRules {
 @armResourceOperations
 interface HorizonDbPrivateEndpointConnections {
   @doc("Gets a private endpoint connection")
-  get is ArmResourceRead<HorizonDbPrivateEndpointConnection>;
-
-  @doc("Lists private endpoint connections in a HorizonDb cluster")
-  list is ArmResourceListByParent<HorizonDbPrivateEndpointConnection>;
-
-  @doc("Updates a private endpoint connection")
-  update is ArmCustomPatchAsync<
-    HorizonDbPrivateEndpointConnection,
-    HorizonDbPrivateEndpointConnectionForPatchUpdate
+  get is HorizonDbPrivateEndpointOperations.Read<
+    HorizonDbCluster,
+    HorizonDbPrivateEndpointConnection
   >;
 
+  @doc("Lists private endpoint connections in a HorizonDb cluster")
+  list is Azure.ResourceManager.Legacy.PrivateEndpoints.ListSinglePageByParent<
+    HorizonDbCluster,
+    HorizonDbPrivateEndpointConnection,
+    Response = ArmResponse<HorizonDbPrivateEndpointConnectionListResult>
+  >;
+
+  @doc("Updates a private endpoint connection")
+  update is HorizonDbPrivateEndpointOperations.CustomPatchAsync<HorizonDbPrivateEndpointConnection>;
+
   @doc("Deletes a private endpoint connection")
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is HorizonDbPrivateEndpointOperations.DeleteAsync<
     HorizonDbPrivateEndpointConnection,
     Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
