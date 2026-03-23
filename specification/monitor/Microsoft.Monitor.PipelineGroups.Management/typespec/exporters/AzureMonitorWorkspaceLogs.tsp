@@ -2,6 +2,8 @@
   Definitions of elements exclusively defined for the Azure Monitor Workspace for Logs exporter.
 */
 
+using TypeSpec.Versioning;
+
 namespace Microsoft.Monitor;
 
 @doc("Azure Monitor Workspace Logs specific configurations.")
@@ -10,10 +12,17 @@ model AzureMonitorWorkspaceLogsExporter {
   api: AzureMonitorWorkspaceLogsApiConfig;
 
   @doc("Concurrency configuration for the exporter.")
+  @removed(Microsoft.Monitor.Versions.v2026_04_01)
   concurrency?: ConcurrencyConfiguration;
 
   @doc("Cache configurations.")
+  @removed(Microsoft.Monitor.Versions.v2026_04_01)
   cache?: CacheConfiguration;
+
+  @doc("Persistence options for the exporter.")
+  @renamedFrom(Microsoft.Monitor.Versions.v2026_04_01, "cache")
+  @added(Microsoft.Monitor.Versions.v2026_04_01)
+  persistence?: ExporterPersistenceConfiguration;
 }
 
 @doc("Azure Monitor Workspace Logs Api configurations.")
@@ -77,6 +86,7 @@ model ScopeMap {
 }
 
 @doc("Concurrent publishing configuration.")
+@removed(Microsoft.Monitor.Versions.v2026_04_01)
 model ConcurrencyConfiguration {
   @doc("Number of parallel workers processing the log queues.")
   workerCount?: int32 = 4;
@@ -86,10 +96,23 @@ model ConcurrencyConfiguration {
 }
 
 @doc("Cache configurations.")
+@removed(Microsoft.Monitor.Versions.v2026_04_01)
 model CacheConfiguration {
   @doc("Max storage usage in megabytes.")
   maxStorageUsage?: int32;
 
   @doc("Retention period in minutes.")
+  retentionPeriod?: int32;
+}
+
+@doc("Persistence options for this exporter.")
+@added(Microsoft.Monitor.Versions.v2026_04_01)
+model ExporterPersistenceConfiguration {
+  @doc("Max storage usage in gigabytes.")
+  @minValue(1)
+  maxStorageUsage?: int32;
+
+  @doc("Retention period in minutes.")
+  @minValue(1)
   retentionPeriod?: int32;
 }

@@ -2,9 +2,12 @@
   Definitions of elements defined for different TCP receivers.
 */
 
+using TypeSpec.Versioning;
+
 namespace Microsoft.Monitor;
 
 @doc("Base receiver using TCP as transport protocol.")
+@removed(Microsoft.Monitor.Versions.v2026_04_01)
 model TcpReceiver {
   @doc("TCP endpoint definition. Example: 0.0.0.0:<port>.")
   @pattern("^[a-zA-Z0-9-\\.]+:[0-9]+$")
@@ -12,6 +15,7 @@ model TcpReceiver {
 }
 
 @doc("Receiver using UDP as transport protocol.")
+@removed(Microsoft.Monitor.Versions.v2026_04_01)
 model UdpReceiver is TcpReceiver {
   @doc("The encoding of the stream being received.")
   encoding?: StreamEncodingType = StreamEncodingType.nop;
@@ -26,6 +30,7 @@ model UdpReceiver is TcpReceiver {
 }
 
 @doc("Encoding types for streams.")
+@removed(Microsoft.Monitor.Versions.v2026_04_01)
 union StreamEncodingType {
   string,
 
@@ -49,6 +54,7 @@ union StreamEncodingType {
 }
 
 @doc("A component that allows parsing a value from sourceField as a json array, match a key to each parsed value from keys, and output the key-value map to destinationField field.")
+@removed(Microsoft.Monitor.Versions.v2026_04_01)
 model JsonArrayMapper {
   @doc("Define a source field from which a json array will be read and parsed to it's elements. The number of elements in the json array is expected to be the same as the length of keys.")
   sourceField?: JsonMapperSourceField;
@@ -61,12 +67,14 @@ model JsonArrayMapper {
 }
 
 @doc("JsonArrayMapper source field used to describe the field from which the json array will be read.")
+@removed(Microsoft.Monitor.Versions.v2026_04_01)
 model JsonMapperSourceField {
   @doc("Define a source field name from which the json array mapper will read the json array. Leaving this empty, means reading the body of the message itself.")
   fieldName?: string;
 }
 
 @doc("JsonArrayMapper destination field used to describe the field to which the parsed output will be written.")
+@removed(Microsoft.Monitor.Versions.v2026_04_01)
 model JsonMapperDestinationField {
   @doc("Define the destination's element. The element is the body or the attributes of the message, to which the json array mapper will write the output map.")
   destination?: JsonMapperElement = JsonMapperElement.Attributes;
@@ -76,6 +84,7 @@ model JsonMapperDestinationField {
 }
 
 @doc("JsonArrayMapper element types.")
+@removed(Microsoft.Monitor.Versions.v2026_04_01)
 union JsonMapperElement {
   string,
 
