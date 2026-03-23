@@ -140,6 +140,43 @@ union JsonWebKeyCurveName {
 }
 
 /**
+ * An algorithm used for key wrapping and unwrapping.
+ */
+@added(KeyVault.Versions.v2026_01_01_preview)
+union JsonWebKeyWrapAlgorithm {
+  string,
+
+  /** RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256 and a mask generation function of MGF1 with SHA-256. */
+  RSA_OAEP256: "RSA-OAEP-256",
+
+  /** 128-bit AES key wrap. */
+  A128_KW: "A128KW",
+
+  /** 192-bit AES key wrap. */
+  A192_KW: "A192KW",
+
+  /** 256-bit AES key wrap. */
+  A256_KW: "A256KW",
+
+  /** 128-bit AES key wrap with padding. */
+  A256_KWPAD: "A256KWPAD",
+
+  /** 192-bit AES key wrap with padding. */
+  A128_KWPAD: "A128KWPAD",
+
+  /** 256-bit AES key wrap with padding. */
+  A192_KWPAD: "A192KWPAD",
+
+  /** CKM AES key wrap. */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  CKM_AES_KEY_WRAP: "CKM_AES_KEY_WRAP",
+
+  /** CKM AES key wrap with padding. */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  CKM_AES_KEY_WRAP_PAD: "CKM_AES_KEY_WRAP_PAD",
+}
+
+/**
  * An algorithm used for encryption and decryption.
  */
 union JsonWebKeyEncryptionAlgorithm {
@@ -367,6 +404,17 @@ model KeyCreateParameters {
 }
 
 /**
+ * External Key parameters.
+ */
+@added(KeyVault.Versions.v2026_01_01_preview)
+model ExternalKey {
+  /**
+   * The external key identifier. The valid id can only contain characters in the set [a-zA-Z0-9-]. Maximum length is 64 characters.
+   */
+  id: string;
+}
+
+/**
  * The attributes of a key managed by the key vault service.
  */
 model KeyAttributes {
@@ -401,6 +449,21 @@ model KeyAttributes {
   @added(KeyVault.Versions.`v7.6_preview.2`)
   @visibility(Lifecycle.Read)
   attestation?: KeyAttestation;
+
+  /**
+   * The external key information.
+   */
+  @added(KeyVault.Versions.v2026_01_01_preview)
+  @encodedName("application/json", "external_key")
+  externalKey?: ExternalKey;
+
+  /**
+   * The optional key size in bits for symmetric keys. For example: 128, 192, or 256 for AES keys.
+   */
+  @added(KeyVault.Versions.v2026_01_01_preview)
+  @encodedName("application/json", "key_size")
+  @visibility(Lifecycle.Read)
+  keySize?: int32;
 }
 
 /**
@@ -430,6 +493,47 @@ model KeyAttestation {
    * The version of the attestation.
    */
   version?: string;
+}
+
+/**
+ * The Secure Key wrap operation result.
+ */
+@added(KeyVault.Versions.v2026_01_01_preview)
+model SecureKeyOperationCommonParameters {
+  /**
+   * algorithm identifier
+   */
+  @encodedName("application/json", "alg")
+  algorithm: JsonWebKeyWrapAlgorithm;
+}
+
+/**
+ * The Secure Key wrap attributes.
+ */
+@added(KeyVault.Versions.v2026_01_01_preview)
+model SecureKeyWrapOperationParameters {
+  ...SecureKeyOperationCommonParameters;
+}
+
+/**
+ * The Secure Key unwrap attributes.
+ */
+@added(KeyVault.Versions.v2026_01_01_preview)
+model SecureKeyUnWrapOperationParameters {
+  ...SecureKeyOperationCommonParameters;
+
+  /**
+   * The value to operate on.
+   */
+  @encode("base64url")
+  value: bytes;
+
+  /**
+   * The attestation assertion for the target of the key release.
+   */
+  @minLength(1)
+  @encodedName("application/json", "target")
+  targetAttestationToken: string;
 }
 
 /**
@@ -812,6 +916,29 @@ model KeyOperationsParameters {
    */
   @encode("base64url")
   tag?: bytes;
+}
+
+/**
+ * The secure key wrap operation result.
+ */
+@added(KeyVault.Versions.v2026_01_01_preview)
+model SecureKeyOperationResult {
+  /**
+   * Key identifier
+   */
+  kid: string;
+
+  /**
+   * The algorithm used for the operation.
+   */
+  @encodedName("application/json", "alg")
+  algorithm: JsonWebKeyWrapAlgorithm;
+
+  /**
+   * The result of the operation.
+   */
+  @encode("base64url")
+  value: bytes;
 }
 
 /**
