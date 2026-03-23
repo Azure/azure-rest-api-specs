@@ -154,14 +154,12 @@ interface StacSearch {
       /**
        * Whether to sign asset URLs in the response.
        */
-      @removed(Versions.v2026_04_15)
       @query("sign")
       sign?: StacAssetUrlSigningMode;
 
       /**
        * URL signature duration in minutes.
        */
-      @removed(Versions.v2026_04_15)
       @query("duration")
       durationInMinutes?: int32;
 
