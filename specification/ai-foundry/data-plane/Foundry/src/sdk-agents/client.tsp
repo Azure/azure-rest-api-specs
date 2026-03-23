@@ -181,6 +181,8 @@ using Azure.AI.Projects;
 @@usage(AzureCreateResponseDetails, Usage.output);
 @@access(AzureCreateResponseDetails, Access.public);
 
+@@access(Agents.deleteAgent, Access.internal, "java");
+
 // --------------------------------------------------------------------------------
 // Type overrides
 // --------------------------------------------------------------------------------
