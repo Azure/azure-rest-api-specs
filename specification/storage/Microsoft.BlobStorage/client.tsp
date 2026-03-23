@@ -391,12 +391,12 @@ enum ImmutabilityPolicySetting {
 
 @@alternateType(BlockIdParameter.blockid, string, "python");
 
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobs, "python,javascript");
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobs, "python,javascript,csharp");
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobHierarchySegment,
-  "python,javascript"
+  "python,javascript,csharp"
 );
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Service.listContainers,
-  "python,javascript"
+  "python,javascript,csharp"
 );
 
 @@clientName(Storage.Blob.Container.listBlobs, "listBlobFlatSegment", "python");
@@ -585,19 +585,7 @@ model BlobServicePropertiesCsharp {
   "x-ms-meta-",
   "csharp"
 );
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Disabling pageable in favor of custom pageable implementation in client"
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobs,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Disabling pageable in favor of custom pageable implementation in client"
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobHierarchySegment,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Disabling pageable in favor of custom pageable implementation in client"
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Service.listContainers,
-  "csharp"
-);
+@@clientOption(Storage.Blob, "omitSlashFromEmptyRoute", true, "csharp");
 
 /** ----- This section overrides the setMetadata operations for Rust to require the metadata headers ----- */
 alias MetadataHeadersRequired = {
