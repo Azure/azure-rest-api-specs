@@ -214,7 +214,6 @@ model StorageErrorBody {
 // ============================================================================
 
 /** Represents a filesystem. */
-@clientName("FileSystem")
 model FileSystemItem {
   /** The filesystem name. */
   name?: string;
@@ -233,7 +232,6 @@ model FileSystemList {
 }
 
 /** Represents a path in a filesystem. */
-@clientName("Path")
 model PathItem {
   /** The path name. */
   name?: string;
@@ -520,19 +518,16 @@ model BlobPropertiesInternal {
   /** The expiry time. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
-  @clientName("ExpiresOn")
   @Xml.name("Expiry-Time")
   expiresOn?: utcDateTime;
 
   /** Whether the blob is sealed. */
-  @clientName("IsSealed")
   @Xml.name("Sealed")
   isSealed?: boolean;
 
   /** The last accessed time. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
-  @clientName("LastAccessedOn")
   @Xml.name("LastAccessTime")
   lastAccessedOn?: utcDateTime;
 
@@ -725,8 +720,7 @@ alias ContentLanguageParameter = {
 alias ContentTypeParameter = {
   /** Optional. Sets the blob's content type. If specified, this property is stored with the blob and returned with a read request. */
   @header("x-ms-content-type")
-  @clientName("contentType")
-  pathContentType?: string;
+  contentType?: string;
 };
 
 /** The content MD5 header parameter. */
@@ -856,7 +850,6 @@ alias RecursiveOptionalParameter = {
 alias DirectoryParameter = {
   /** Optional. Filters results to paths within the specified directory. An error occurs if the directory does not exist. */
   @query("directory")
-  @clientName("Path")
   path?: string;
 };
 
