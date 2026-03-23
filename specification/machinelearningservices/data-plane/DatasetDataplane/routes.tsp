@@ -468,6 +468,7 @@ interface DatasetsV1 {
   @route("/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/definitions")
   @list
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API name from swagger."
   getAllDatasetDefinitions is Azure.Core.Foundations.Operation<
     {
       ...WorkspacePathParameters;
@@ -539,6 +540,7 @@ interface DatasetsV1 {
   @route("/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/versions")
   @list
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API name from swagger."
   getAllDatasetVersions is Azure.Core.Foundations.Operation<
     {
       ...WorkspacePathParameters;
@@ -710,6 +712,7 @@ interface DatasetControllerV2 {
   @route("/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/definitions")
   @list
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API name from swagger."
   getAllDatasetDefinitions is Azure.Core.Foundations.Operation<
     {
       ...WorkspacePathParameters;
@@ -781,6 +784,7 @@ interface DatasetControllerV2 {
   @route("/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/versions")
   @list
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API name from swagger."
   getAllDatasetVersions is Azure.Core.Foundations.Operation<
     {
       ...WorkspacePathParameters;

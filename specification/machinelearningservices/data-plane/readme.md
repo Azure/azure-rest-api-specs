@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-dataset-dataplane-1.5.0` is specif
 
 ```yaml $(tag) == 'package-dataset-dataplane-1.5.0'
 input-file:
-  - Microsoft.MachineLearningServices.DatasetDataplane/stable/1.5.0/dataset-dataplane.json
+  - DatasetDataplane/stable/1.5.0/dataset-dataplane.json
 ```
 
 ### Tag: package-model-dataplane-1.0.0
@@ -192,7 +192,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.MachineLearningServices.DatasetDataplane/stable/1.5.0/dataset-dataplane.json
+  - $(this-folder)/DatasetDataplane/stable/1.5.0/dataset-dataplane.json
   - $(this-folder)/Microsoft.MachineLearningServices.ModelDataplane/stable/1.0.0/model-dataplane.json
   - $(this-folder)/Microsoft.MachineLearningServices.RegistryDiscovery/stable/v1.0/registry-discovery.json
   - $(this-folder)/Microsoft.MachineLearningServices.RunHistory/stable/v1.0/run-history.json
