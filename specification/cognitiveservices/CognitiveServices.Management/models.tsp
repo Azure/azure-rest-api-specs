@@ -4481,9 +4481,15 @@ model ManagedNetworkSettings {
   /**
    * Public IP address assigned to the Azure Firewall.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'egressIpAddress' is nullable in 'ManagedNetworkSettings' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'firewallPublicIpAddress' is nullable in 'ManagedNetworkSettings' for backward compatibility with existing API behavior"
   @visibility(Lifecycle.Read)
-  egressIpAddress?: string | null;
+  firewallPublicIpAddress?: string | null;
+
+  /**
+   * The provisioning state of the managed network settings.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ManagedNetworkProvisioningState;
 }
 
 /**
