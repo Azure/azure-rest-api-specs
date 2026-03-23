@@ -49,19 +49,19 @@ model TimezoneResult {
    * Version property
    */
   @visibility(Lifecycle.Read)
-  Version?: string;
+  version?: string;
 
   /**
    * Reference Utc Timestamp property
    */
   @visibility(Lifecycle.Read)
-  ReferenceUtcTimestamp?: utcDateTime;
+  referenceUtcTimestamp?: utcDateTime;
 
   /**
    * TimeZoneId array
    */
   @visibility(Lifecycle.Read)
-  TimeZones?: TimezoneId[];
+  timeZones?: TimezoneId[];
 }
 
 /** Timezone ID information. */
@@ -70,7 +70,7 @@ model TimezoneId {
    * Id property
    */
   @visibility(Lifecycle.Read)
-  Id?: string;
+  id?: string;
 
   /**
    * An array of time zone ID aliases. Only returned when [options]=*zoneinfo* or
@@ -79,37 +79,37 @@ model TimezoneId {
    * Note: may be null.
    */
   @visibility(Lifecycle.Read)
-  Aliases?: string[];
+  aliases?: string[];
 
   /**
    * An array of country/region records. Only returned when [options]=*zoneinfo* or
    * *all*.
    */
   @visibility(Lifecycle.Read)
-  Countries?: CountryRecord[];
+  countries?: CountryRecord[];
 
   /**
    * Timezone names object.
    */
-  Names?: TimezoneNames;
+  names?: TimezoneNames;
 
   /**
    * Details in effect at the local time.
    */
   @visibility(Lifecycle.Read)
-  ReferenceTime?: ReferenceTime;
+  referenceTime?: ReferenceTime;
 
   /**
    * Representative point property
    */
   @visibility(Lifecycle.Read)
-  RepresentativePoint?: RepresentativePoint;
+  representativePoint?: RepresentativePoint;
 
   /**
    * Time zone DST transitions from [transitionsFrom] until timestamp + 1 year.
    */
   @visibility(Lifecycle.Read)
-  TimeTransitions?: TimeTransition[];
+  timeTransitions?: TimeTransition[];
 }
 
 /**
@@ -120,13 +120,13 @@ model CountryRecord {
    * country/region Name
    */
   @visibility(Lifecycle.Read)
-  Name?: string;
+  name?: string;
 
   /**
    * ISO-3166 2-letter country/region code for the country/region.
    */
   @visibility(Lifecycle.Read)
-  Code?: string;
+  code?: string;
 }
 
 /**
@@ -137,25 +137,25 @@ model TimezoneNames {
    * The ISO 639-1 language code of the Names
    */
   @visibility(Lifecycle.Read)
-  ISO6391LanguageCode?: string;
+  iso6391LanguageCode?: string;
 
   /**
    * Generic Name
    */
   @visibility(Lifecycle.Read)
-  Generic?: string;
+  generic?: string;
 
   /**
    * Standard Name
    */
   @visibility(Lifecycle.Read)
-  Standard?: string;
+  standard?: string;
 
   /**
    * Daylight Name
    */
   @visibility(Lifecycle.Read)
-  Daylight?: string;
+  daylight?: string;
 }
 
 /**
@@ -167,38 +167,38 @@ model ReferenceTime {
    * whether Daylight Savings Time is in effect).
    */
   @visibility(Lifecycle.Read)
-  Tag?: string;
+  tag?: string;
 
   /**
    * UTC offset in effect at the `ReferenceUTCTimestamp`.
    */
   @visibility(Lifecycle.Read)
-  StandardOffset?: string;
+  standardOffset?: string;
 
   /**
    * Time saving in minutes in effect at the `ReferenceUTCTimestamp`.
    */
   @visibility(Lifecycle.Read)
-  DaylightSavings?: string;
+  daylightSavings?: string;
 
   /**
    * Current wall time at the given time zone as shown in the `Tag` property.
    */
   @visibility(Lifecycle.Read)
-  WallTime?: string;
+  wallTime?: string;
 
   /**
    * The year this POSIX string is valid for. Note: A POSIX string will only be
    * valid in the given year.
    */
   @visibility(Lifecycle.Read)
-  PosixTzValidYear?: int32;
+  posixTzValidYear?: int32;
 
   /**
    * POSIX string used to set the time zone environment variable.
    */
   @visibility(Lifecycle.Read)
-  PosixTz?: string;
+  posixTz?: string;
 
   /**
    * Sunrise at the given time zone as shown in the `Tag` property, populated only
@@ -208,7 +208,7 @@ model ReferenceTime {
    * observed in the requested region.
    */
   @visibility(Lifecycle.Read)
-  Sunrise?: utcDateTime;
+  sunrise?: utcDateTime;
 
   /**
    * Sunset at the given time zone as shown in the `Tag` property, populated only
@@ -218,7 +218,7 @@ model ReferenceTime {
    * observed in the requested region.
    */
   @visibility(Lifecycle.Read)
-  Sunset?: utcDateTime;
+  sunset?: utcDateTime;
 }
 
 /**
@@ -229,13 +229,13 @@ model RepresentativePoint {
    * Latitude property
    */
   @visibility(Lifecycle.Read)
-  Latitude?: float32;
+  latitude?: float32;
 
   /**
    * Longitude property
    */
   @visibility(Lifecycle.Read)
-  Longitude?: float32;
+  longitude?: float32;
 }
 
 /** Represents a time zone transition. */
@@ -244,31 +244,31 @@ model TimeTransition {
    * Tag property
    */
   @visibility(Lifecycle.Read)
-  Tag?: string;
+  tag?: string;
 
   /**
    * StandardOffset property
    */
   @visibility(Lifecycle.Read)
-  StandardOffset?: string;
+  standardOffset?: string;
 
   /**
    * DaylightSavings property
    */
   @visibility(Lifecycle.Read)
-  DaylightSavings?: string;
+  daylightSavings?: string;
 
   /**
    * Start date, start time for this transition period
    */
   @visibility(Lifecycle.Read)
-  UtcStart?: utcDateTime;
+  utcStart?: utcDateTime;
 
   /**
    * End date, end time for this transition period
    */
   @visibility(Lifecycle.Read)
-  UtcEnd?: utcDateTime;
+  utcEnd?: utcDateTime;
 }
 
 /**
@@ -343,18 +343,18 @@ model TimezoneWindows {
    * Windows Id property
    */
   @visibility(Lifecycle.Read)
-  WindowsId?: string;
+  windowsId?: string;
 
   /**
    * Territory property
    */
   @visibility(Lifecycle.Read)
-  Territory?: string;
+  territory?: string;
 
   /**
    * IanaIds array
    */
-  IanaIds?: string[];
+  ianaIds?: string[];
 }
 
 /** IANA time zone ID information. */
@@ -363,26 +363,26 @@ model IanaId {
    * Id property
    */
   @visibility(Lifecycle.Read)
-  Id?: string;
+  id?: string;
 
   /**
    * IsAlias property
    */
   @visibility(Lifecycle.Read)
-  IsAlias?: boolean;
+  isAlias?: boolean;
 
   /**
    * AliasOf property
    */
   @visibility(Lifecycle.Read)
-  AliasOf?: string;
+  aliasOf?: string;
 
   /**
    * This attribute returns `True` if the IanaId has any country/zone associated
    * with it.
    */
   @visibility(Lifecycle.Read)
-  HasZone1970Location?: boolean;
+  hasZone1970Location?: boolean;
 }
 
 /**
@@ -393,5 +393,5 @@ model TimezoneIanaVersionResult {
    * Version property
    */
   @visibility(Lifecycle.Read)
-  Version?: string;
+  version?: string;
 }

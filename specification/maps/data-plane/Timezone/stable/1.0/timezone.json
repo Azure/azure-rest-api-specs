@@ -22,9 +22,12 @@
         "in": "path",
         "required": true,
         "type": "string",
-        "format": "uri",
-        "default": "https://atlas.microsoft.com",
-        "x-ms-skip-url-encoding": true
+        "enum": [
+          "https://atlas.microsoft.com"
+        ],
+        "x-ms-enum": {
+          "modelAsString": false
+        }
       }
     ]
   },
@@ -41,10 +44,10 @@
       ]
     },
     {
-      "ApiKeyAuth": []
+      "SharedKeyAuth": []
     },
     {
-      "ApiKeyAuth": []
+      "SasTokenAuth": []
     }
   ],
   "securityDefinitions": {
@@ -58,9 +61,16 @@
       },
       "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     },
-    "ApiKeyAuth": {
+    "SasTokenAuth": {
       "type": "apiKey",
+      "description": "SAS Token Authentication",
       "name": "SAS Token",
+      "in": "header"
+    },
+    "SharedKeyAuth": {
+      "type": "apiKey",
+      "description": "Shared Key Authentication",
+      "name": "subscription-key",
       "in": "header"
     }
   },
@@ -74,6 +84,27 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired format of the response. Only `json` format is supported.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "name": "JsonFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+                }
+              ]
+            }
           },
           {
             "name": "x-ms-client-id",
@@ -155,27 +186,6 @@
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "daylightSavingsTimeLastingYears"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "Desired format of the response. Only `json` format is supported.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "json"
-            ],
-            "x-ms-enum": {
-              "name": "JsonFormat",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "json",
-                  "value": "json",
-                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
-                }
-              ]
-            }
           },
           {
             "name": "query",
@@ -217,6 +227,27 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "format",
+            "in": "path",
+            "description": "Desired format of the response. Only `json` format is supported.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "name": "JsonFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+                }
+              ]
+            }
+          },
+          {
             "name": "x-ms-client-id",
             "in": "header",
             "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
@@ -298,27 +329,6 @@
             "x-ms-client-name": "daylightSavingsTimeLastingYears"
           },
           {
-            "name": "format",
-            "in": "path",
-            "description": "Desired format of the response. Only `json` format is supported.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "json"
-            ],
-            "x-ms-enum": {
-              "name": "JsonFormat",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "json",
-                  "value": "json",
-                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
-                }
-              ]
-            }
-          },
-          {
             "name": "query",
             "in": "query",
             "description": "The IANA time zone ID.",
@@ -353,14 +363,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -380,6 +382,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           }
         ],
         "responses": {
@@ -411,14 +421,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -438,6 +440,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           }
         ],
         "responses": {
@@ -469,14 +479,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -496,6 +498,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           }
         ],
         "responses": {
@@ -524,14 +534,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -551,6 +553,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "query",
@@ -594,12 +604,12 @@
       "type": "object",
       "description": "A country/region record.",
       "properties": {
-        "Name": {
+        "name": {
           "type": "string",
           "description": "country/region Name",
           "readOnly": true
         },
-        "Code": {
+        "code": {
           "type": "string",
           "description": "ISO-3166 2-letter country/region code for the country/region.",
           "readOnly": true
@@ -674,22 +684,22 @@
       "type": "object",
       "description": "IANA time zone ID information.",
       "properties": {
-        "Id": {
+        "id": {
           "type": "string",
           "description": "Id property",
           "readOnly": true
         },
-        "IsAlias": {
+        "isAlias": {
           "type": "boolean",
           "description": "IsAlias property",
           "readOnly": true
         },
-        "AliasOf": {
+        "aliasOf": {
           "type": "string",
           "description": "AliasOf property",
           "readOnly": true
         },
-        "HasZone1970Location": {
+        "hasZone1970Location": {
           "type": "boolean",
           "description": "This attribute returns `True` if the IanaId has any country/zone associated\nwith it.",
           "readOnly": true
@@ -718,44 +728,44 @@
       "type": "object",
       "description": "Details in effect at the local time.",
       "properties": {
-        "Tag": {
+        "tag": {
           "type": "string",
           "description": "Time zone name in effect at the reference timestamp (i.e. PST or PDT depending\nwhether Daylight Savings Time is in effect).",
           "readOnly": true
         },
-        "StandardOffset": {
+        "standardOffset": {
           "type": "string",
           "description": "UTC offset in effect at the `ReferenceUTCTimestamp`.",
           "readOnly": true
         },
-        "DaylightSavings": {
+        "daylightSavings": {
           "type": "string",
           "description": "Time saving in minutes in effect at the `ReferenceUTCTimestamp`.",
           "readOnly": true
         },
-        "WallTime": {
+        "wallTime": {
           "type": "string",
           "description": "Current wall time at the given time zone as shown in the `Tag` property.",
           "readOnly": true
         },
-        "PosixTzValidYear": {
+        "posixTzValidYear": {
           "type": "integer",
           "format": "int32",
           "description": "The year this POSIX string is valid for. Note: A POSIX string will only be\nvalid in the given year.",
           "readOnly": true
         },
-        "PosixTz": {
+        "posixTz": {
           "type": "string",
           "description": "POSIX string used to set the time zone environment variable.",
           "readOnly": true
         },
-        "Sunrise": {
+        "sunrise": {
           "type": "string",
           "format": "date-time",
           "description": "Sunrise at the given time zone as shown in the `Tag` property, populated only\nwhen the call is `byCoordinates`. The sunrise is described in the [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Note that\nthe Timezone API does not return sunrise and sunset times when solar day is\nobserved in the requested region.",
           "readOnly": true
         },
-        "Sunset": {
+        "sunset": {
           "type": "string",
           "format": "date-time",
           "description": "Sunset at the given time zone as shown in the `Tag` property, populated only\nwhen the call is `byCoordinates`. The sunset is described in the [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Note that\nthe Timezone API does not return sunrise and sunset times when solar day is\nobserved in the requested region.",
@@ -767,13 +777,13 @@
       "type": "object",
       "description": "Representative point property",
       "properties": {
-        "Latitude": {
+        "latitude": {
           "type": "number",
           "format": "float",
           "description": "Latitude property",
           "readOnly": true
         },
-        "Longitude": {
+        "longitude": {
           "type": "number",
           "format": "float",
           "description": "Longitude property",
@@ -785,28 +795,28 @@
       "type": "object",
       "description": "Represents a time zone transition.",
       "properties": {
-        "Tag": {
+        "tag": {
           "type": "string",
           "description": "Tag property",
           "readOnly": true
         },
-        "StandardOffset": {
+        "standardOffset": {
           "type": "string",
           "description": "StandardOffset property",
           "readOnly": true
         },
-        "DaylightSavings": {
+        "daylightSavings": {
           "type": "string",
           "description": "DaylightSavings property",
           "readOnly": true
         },
-        "UtcStart": {
+        "utcStart": {
           "type": "string",
           "format": "date-time",
           "description": "Start date, start time for this transition period",
           "readOnly": true
         },
-        "UtcEnd": {
+        "utcEnd": {
           "type": "string",
           "format": "date-time",
           "description": "End date, end time for this transition period",
@@ -818,7 +828,7 @@
       "type": "object",
       "description": "This object is returned from a successful Timezone IANA Version call",
       "properties": {
-        "Version": {
+        "version": {
           "type": "string",
           "description": "Version property",
           "readOnly": true
@@ -829,12 +839,12 @@
       "type": "object",
       "description": "Timezone ID information.",
       "properties": {
-        "Id": {
+        "id": {
           "type": "string",
           "description": "Id property",
           "readOnly": true
         },
-        "Aliases": {
+        "aliases": {
           "type": "array",
           "description": "An array of time zone ID aliases. Only returned when [options]=*zoneinfo* or\n*all*.\n\nNote: may be null.",
           "items": {
@@ -842,7 +852,7 @@
           },
           "readOnly": true
         },
-        "Countries": {
+        "countries": {
           "type": "array",
           "description": "An array of country/region records. Only returned when [options]=*zoneinfo* or\n*all*.",
           "items": {
@@ -850,21 +860,21 @@
           },
           "readOnly": true
         },
-        "Names": {
+        "names": {
           "$ref": "#/definitions/TimezoneNames",
           "description": "Timezone names object."
         },
-        "ReferenceTime": {
+        "referenceTime": {
           "$ref": "#/definitions/ReferenceTime",
           "description": "Details in effect at the local time.",
           "readOnly": true
         },
-        "RepresentativePoint": {
+        "representativePoint": {
           "$ref": "#/definitions/RepresentativePoint",
           "description": "Representative point property",
           "readOnly": true
         },
-        "TimeTransitions": {
+        "timeTransitions": {
           "type": "array",
           "description": "Time zone DST transitions from [transitionsFrom] until timestamp + 1 year.",
           "items": {
@@ -878,22 +888,22 @@
       "type": "object",
       "description": "Timezone names object.",
       "properties": {
-        "ISO6391LanguageCode": {
+        "iso6391LanguageCode": {
           "type": "string",
           "description": "The ISO 639-1 language code of the Names",
           "readOnly": true
         },
-        "Generic": {
+        "generic": {
           "type": "string",
           "description": "Generic Name",
           "readOnly": true
         },
-        "Standard": {
+        "standard": {
           "type": "string",
           "description": "Standard Name",
           "readOnly": true
         },
-        "Daylight": {
+        "daylight": {
           "type": "string",
           "description": "Daylight Name",
           "readOnly": true
@@ -940,18 +950,18 @@
       "type": "object",
       "description": "This object is returned from a successful Timezone By ID call or By Coordinates\ncall",
       "properties": {
-        "Version": {
+        "version": {
           "type": "string",
           "description": "Version property",
           "readOnly": true
         },
-        "ReferenceUtcTimestamp": {
+        "referenceUtcTimestamp": {
           "type": "string",
           "format": "date-time",
           "description": "Reference Utc Timestamp property",
           "readOnly": true
         },
-        "TimeZones": {
+        "timeZones": {
           "type": "array",
           "description": "TimeZoneId array",
           "items": {
@@ -965,17 +975,17 @@
       "type": "object",
       "description": "Windows timezone information with IANA mappings.",
       "properties": {
-        "WindowsId": {
+        "windowsId": {
           "type": "string",
           "description": "Windows Id property",
           "readOnly": true
         },
-        "Territory": {
+        "territory": {
           "type": "string",
           "description": "Territory property",
           "readOnly": true
         },
-        "IanaIds": {
+        "ianaIds": {
           "type": "array",
           "description": "IanaIds array",
           "items": {
