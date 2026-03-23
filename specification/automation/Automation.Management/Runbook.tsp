@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Automation;
 
-alias replaceContentRequest = {
+alias ReplaceContentRequest = {
   @header("Content-Type")
   contentType: "text/powershell";
 
@@ -135,7 +135,7 @@ interface Runbooks {
   @action("draft/content")
   replaceContent is ArmResourceActionAsyncCustom<
     Runbook,
-    replaceContentRequest,
+    ReplaceContentRequest,
     {
       @header("Content-Type")
       contentType: "text/powershell";

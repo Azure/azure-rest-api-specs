@@ -23,4 +23,4 @@ using Microsoft.Automation;
   "java"
 );
 
-@@alternateType(replaceContentRequest.runbookContent, string, "javascript");
+@@alternateType(ReplaceContentRequest.runbookContent, string, "javascript");
