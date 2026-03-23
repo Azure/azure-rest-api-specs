@@ -21,9 +21,11 @@ describe("compile", function () {
   beforeEach(() => {
     vi.spyOn(utils, "fileExists").mockResolvedValue(true);
     vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
-    gitDiffTopSpecFolderSpy = vi.spyOn(utils, "gitDiffTopSpecFolder").mockImplementation(() =>
+    gitDiffTopSpecFolderSpy = vi.spyOn(utils, "gitDiffTopSpecFolder").mockImplementation((folder) =>
       Promise.resolve({
         success: true,
+        stdOutput: `Running git diff on folder ${folder}}`,
+        errorOutput: "",
       }),
     );
     runNpmSpy = vi
@@ -130,7 +132,7 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      reason: expect.stringContaining("not generated from the current") as unknown,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
   });
 
@@ -156,6 +158,7 @@ describe("compile", function () {
     const result = await new CompileRule().execute(mockFolder);
     expect(result).toMatchObject({
       success: true,
+      stdOutput: expect.stringContaining("older versions") as unknown,
     });
   });
 
@@ -179,7 +182,7 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      reason: expect.stringContaining("not generated from the current") as unknown,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
   });
 
@@ -200,7 +203,7 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      reason: expect.stringContaining("not generated from the current") as unknown,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
   });
 
@@ -226,6 +229,7 @@ describe("compile", function () {
     const result = await new CompileRule().execute(mockFolder);
     expect(result).toMatchObject({
       success: true,
+      stdOutput: expect.stringContaining("older versions") as unknown,
     });
   });
 
@@ -249,7 +253,7 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      reason: expect.stringContaining("not generated from the current") as unknown,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
   });
 
@@ -328,6 +332,7 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
+      stdOutput: expect.not.stringContaining("Running git diff") as unknown,
     });
   });
 
@@ -338,15 +343,19 @@ describe("compile", function () {
 
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([swaggerPath]));
 
-    gitDiffTopSpecFolderSpy.mockImplementation((): Promise<RuleResult> => {
+    gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
+      const stdOut = `Running git diff on folder ${folder}`;
+
       return Promise.resolve({
         success: false,
-        reason: `Files generated: ${mockFolder}/bar`,
+        stdOutput: stdOut,
+        errorOutput: `Files generated: ${folder}/bar`,
       });
     });
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
+      stdOutput: expect.stringContaining("Running git diff") as unknown,
     });
   });
 
@@ -357,14 +366,17 @@ describe("compile", function () {
 
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([swaggerPath]));
 
-    gitDiffTopSpecFolderSpy.mockImplementation((): Promise<RuleResult> => {
+    gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
+      const stdOut = `Running git diff on folder ${folder}`;
       return Promise.resolve({
         success: true,
+        stdOutput: stdOut,
       });
     });
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: true,
+      stdOutput: expect.stringContaining("Running git diff") as unknown,
     });
   });
 });

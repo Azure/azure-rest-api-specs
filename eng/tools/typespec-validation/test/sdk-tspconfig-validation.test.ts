@@ -939,6 +939,10 @@ describe("tspconfig", function () {
       : new SdkTspConfigValidationRule(c.subRules, []);
     const result = await rule.execute(c.folder);
     strictEqual(result.success, c.success); // Verify the validation result matches the expected outcome
+    if (c.success)
+      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
+    if (!c.success)
+      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation failed."), true);
   });
 
   it.each([...suppressSubRuleTestCases])(`$description`, async (c: Case) => {
@@ -961,6 +965,10 @@ describe("tspconfig", function () {
     const result = await rule.execute(c.folder);
     const returnSuccess = c.folder.includes(".Management") ? c.success : true;
     strictEqual(result.success, returnSuccess);
+    if (c.success)
+      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
+    if (!c.success)
+      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation failed."), true);
   });
 
   it.each([suppressEntireRuleTestCase])(`$description`, async (c: Case) => {
@@ -981,6 +989,7 @@ describe("tspconfig", function () {
     const rule = new SdkTspConfigValidationRule(c.subRules, []);
     const result = await rule.execute(c.folder);
     strictEqual(result.success, true);
+    strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation skipped."), true);
   });
 
   it("Tests wildcard suppression for multiple AWS connector services", async () => {
@@ -1034,6 +1043,11 @@ parameters:
 
       // Validate that validation passes for each service
       strictEqual(result.success, true, `Validation should pass for ${awsServiceFolder}`);
+      strictEqual(
+        result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."),
+        true,
+        `Output should indicate validation passed for ${awsServiceFolder}`,
+      );
 
       // Verify suppressions were called with the correct path
       strictEqual(

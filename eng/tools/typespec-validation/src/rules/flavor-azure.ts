@@ -36,11 +36,11 @@ export class FlavorAzureRule implements Rule {
       }
     }
 
-    if (stdOutput) console.log(stdOutput);
-
-    return success
-      ? { success: true }
-      : { success: false, reason: errorOutput || "Flavor validation failed." };
+    return {
+      success: success,
+      stdOutput: stdOutput,
+      errorOutput: errorOutput,
+    };
   }
 
   requiresAzureFlavor(name: string): boolean {

@@ -244,17 +244,18 @@ export class CompileRule implements Rule {
 
     if (success) {
       const gitDiffResult = await gitDiffTopSpecFolder(folder);
+      stdOutput += gitDiffResult.stdOutput;
       if (!gitDiffResult.success) {
         success = false;
-        errorOutput += gitDiffResult.reason;
+        errorOutput += gitDiffResult.errorOutput;
         errorOutput += `\nFiles have been changed after \`tsp compile\`. Run \`tsp compile\` and ensure all files are included in your change.`;
       }
     }
 
-    if (stdOutput) console.log(stdOutput);
-
-    return success
-      ? { success: true }
-      : { success: false, reason: errorOutput || "Compilation validation failed." };
+    return {
+      success: success,
+      stdOutput: stdOutput,
+      errorOutput: errorOutput,
+    };
   }
 }

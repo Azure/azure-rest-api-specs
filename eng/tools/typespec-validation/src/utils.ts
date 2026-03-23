@@ -81,9 +81,9 @@ export async function gitDiffTopSpecFolder(folder: string) {
     errorOutput += await git.diff();
   }
 
-  if (stdOutput) console.log(stdOutput);
-
-  return success
-    ? { success: true }
-    : { success: false, reason: errorOutput || "Git diff check failed." };
+  return {
+    success: success,
+    stdOutput: stdOutput,
+    errorOutput: errorOutput,
+  };
 }

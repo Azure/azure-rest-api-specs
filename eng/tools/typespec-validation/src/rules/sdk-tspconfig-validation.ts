@@ -30,10 +30,11 @@ export abstract class TspconfigSubRuleBase {
     }
 
     const { shouldSkip, reason } = this.skip(config, folder);
-    if (shouldSkip) {
-      console.log(`Validation skipped. ${reason}`);
-      return { success: true };
-    }
+    if (shouldSkip)
+      return {
+        success: true,
+        stdOutput: `Validation skipped. ${reason}`,
+      };
     return this.validate(config);
   }
 
@@ -76,7 +77,7 @@ export abstract class TspconfigSubRuleBase {
   protected createFailedResult(error: string, action: string): RuleResult {
     return {
       success: false,
-      reason: `- ${error}. ${action}.`,
+      errorOutput: `- ${error}. ${action}.`,
     };
   }
 
@@ -844,10 +845,8 @@ export class SdkTspConfigValidationRule implements Rule {
     const shouldSuppressEntireRule = suppressions.some(
       (s) => s.rules?.includes(this.name) === true && (!s.subRules || s.subRules.length === 0),
     );
-    if (shouldSuppressEntireRule) {
-      console.log(`[${this.name}]: validation skipped.`);
-      return { success: true };
-    }
+    if (shouldSuppressEntireRule)
+      return { success: true, stdOutput: `[${this.name}]: validation skipped.` };
 
     this.setSuppressedKeyPaths(suppressions);
 
@@ -887,18 +886,13 @@ export class SdkTspConfigValidationRule implements Rule {
 
     const stdOutputFailedResults =
       failedResults.length > 0
-        ? `${failedResults.map((r) => r.reason).join("\n")}\nPlease see https://aka.ms/azsdk/spec-gen-sdk-config for more info.\nFor additional information on TypeSpec validation, please refer to https://aka.ms/azsdk/specs/typespec-validation\nFor exception requests, please refer to https://eng.ms/docs/products/azure-developer-experience/onboard/request-exception`
+        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\nPlease see https://aka.ms/azsdk/spec-gen-sdk-config for more info.\nFor additional information on TypeSpec validation, please refer to https://aka.ms/azsdk/specs/typespec-validation\nFor exception requests, please refer to https://eng.ms/docs/products/azure-developer-experience/onboard/request-exception`
         : "";
 
-    const stdOutput = `[${this.name}]: validation ${success ? "passed" : "failed"}.${stdOutputFailedResults ? "\n" + stdOutputFailedResults : ""}`;
-    if (stdOutput) console.log(stdOutput);
-
-    return success
-      ? { success: true }
-      : {
-          success: false,
-          reason: stdOutputFailedResults || "Validation failed with no specific error message.",
-        };
+    return {
+      success,
+      stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
+    };
   }
 
   private skipIfEmitterNotConfigured(config: any, emitterName: string): boolean {

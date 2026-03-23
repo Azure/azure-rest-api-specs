@@ -1,8 +1,5 @@
-export type RuleResult =
-  | {
-      readonly success: true;
-    }
-  | {
-      readonly success: false;
-      readonly reason: string;
-    };
+export interface RuleResult {
+  readonly success: boolean;
+  readonly stdOutput?: string;
+  readonly errorOutput?: string;
+}

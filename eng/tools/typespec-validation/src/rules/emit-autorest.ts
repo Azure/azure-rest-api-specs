@@ -34,10 +34,10 @@ export class EmitAutorestRule implements Rule {
       }
     }
 
-    if (stdOutput) console.log(stdOutput);
-
-    return success
-      ? { success: true }
-      : { success: false, reason: errorOutput || "Emit autorest validation failed." };
+    return {
+      success: success,
+      stdOutput: stdOutput,
+      errorOutput: errorOutput,
+    };
   }
 }
