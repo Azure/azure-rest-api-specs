@@ -11,8 +11,18 @@ options:
     emitter-output-dir: "{project-root}"
     examples-dir: "{project-root}/examples"
     output-file: "{version-status}/{version}/DataLakeStorage.json"
-  "@azure-tools/typespec-python":
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/storage-file-datalake"
+    generate-metadata: false
+    generate-test: false
+    include-headers-in-response: true
+    enable-storage-compat: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/storage-file-datalake"
+      description: "Azure.Storage.File DataLake Service"
     flavor: azure
+  "@azure-tools/typespec-python":
     package-name: "azure-storage-file-datalake"
     namespace: "azure.storage.filedatalake._generated"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-file-datalake"
