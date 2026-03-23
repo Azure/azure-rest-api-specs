@@ -7131,6 +7131,70 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/streams/{jobStreamId}": {
+      "get": {
+        "operationId": "TestJobStreams_Get",
+        "tags": [
+          "TestJobStream"
+        ],
+        "description": "Retrieve a test job stream of the test job identified by runbook name and stream id.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "description": "The name of the automation account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "The runbook name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
+          },
+          {
+            "name": "jobStreamId",
+            "in": "path",
+            "description": "The job stream id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobStream"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get test job stream": {
+            "$ref": "./examples/runbook/getTestJobStream.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/suspend": {
       "post": {
         "operationId": "TestJob_Suspend",
@@ -10594,70 +10658,6 @@
         "x-ms-examples": {
           "Generate webhook uri": {
             "$ref": "./examples/webhookGenerateUri.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/streams/{jobStreamId}": {
-      "get": {
-        "operationId": "TestJobStreams_Get",
-        "tags": [
-          "TestJobStream"
-        ],
-        "description": "Retrieve a test job stream of the test job identified by runbook name and stream id.",
-        "externalDocs": {
-          "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "automationAccountName",
-            "in": "path",
-            "description": "The name of the automation account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "runbookName",
-            "in": "path",
-            "description": "The runbook name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
-          },
-          {
-            "name": "jobStreamId",
-            "in": "path",
-            "description": "The job stream id.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/JobStream"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get test job stream": {
-            "$ref": "./examples/runbook/getTestJobStream.json"
           }
         }
       }

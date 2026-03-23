@@ -97,7 +97,6 @@ interface AutomationAccounts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NodeCountInformation")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/nodecounts")
-  @list
   @get
   nodeCountInformationGet is ArmResourceRead<
     AutomationAccount,
@@ -119,7 +118,6 @@ interface AutomationAccounts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Software Update Configuration")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
-  @list
   @get
   @action("softwareUpdateConfigurations")
   softwareUpdateConfigurationsList is ArmResourceActionSync<
