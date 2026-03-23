@@ -108,7 +108,9 @@ interface ApplicationGateways {
     Response = {
       @body body: void;
     },
-    Error = CloudError
+    Error = CloudError,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -121,7 +123,9 @@ interface ApplicationGateways {
     Response = {
       @body body: void;
     },
-    Error = CloudError
+    Error = CloudError,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**

@@ -168,6 +168,8 @@ interface VirtualNetworkGateways {
     {
       @body body: stringApplicationJson;
     },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = string>,
     Error = CloudError
   >;
 
