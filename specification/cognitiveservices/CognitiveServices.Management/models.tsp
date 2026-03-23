@@ -5525,12 +5525,6 @@ model ComputeProperties {
   subnetArmId?: string;
 
   /**
-   * Location of the compute resource.
-   */
-  @visibility(Lifecycle.Read)
-  location?: string;
-
-  /**
    * Provisioning state of the compute resource.
    */
   @visibility(Lifecycle.Read)

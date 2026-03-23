@@ -41,6 +41,7 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'Compute' to support extensible key-value pairs matching service behavior"
   tags?: Record<string>;
 
   /**
