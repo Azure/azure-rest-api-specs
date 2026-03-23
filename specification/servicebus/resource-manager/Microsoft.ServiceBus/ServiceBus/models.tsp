@@ -28,7 +28,7 @@ union CreatedByType {
 }
 
 /**
- * The minimum TLS version for the cluster to support, e.g. '1.2'
+ * The minimum TLS version for the cluster to support, e.g. '1.3'
  */
 union TlsVersion {
   string,
@@ -38,6 +38,8 @@ union TlsVersion {
   `1.1`: "1.1",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `1.2`: "1.2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `1.3`: "1.3",
 }
 
 /**
