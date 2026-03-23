@@ -1535,6 +1535,44 @@ union RemoteSupportAccessLevel {
 }
 
 /**
+ * Provisioning state of remote support operations on the cluster.
+ */
+@added(Versions.v2026_03_15_preview)
+union RemoteSupportProvisioningState {
+  string,
+
+  /**
+   * No operation is in progress.
+   */
+  None: "None",
+
+  /**
+   * A grant (enable) operation is in progress.
+   */
+  GrantInProgress: "GrantInProgress",
+
+  /**
+   * A revoke operation is in progress.
+   */
+  RevokeInProgress: "RevokeInProgress",
+
+  /**
+   * The last operation completed successfully on all nodes.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The last operation succeeded on some nodes but failed on others.
+   */
+  PartiallySucceeded: "PartiallySucceeded",
+
+  /**
+   * The last operation failed on all nodes.
+   */
+  Failed: "Failed",
+}
+
+/**
  * Arc extension installation state.
  */
 union ArcExtensionState {
@@ -2244,6 +2282,13 @@ model RemoteSupportProperties {
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   remoteSupportSessionDetails?: PerNodeRemoteSupportSession[];
+
+  /**
+   * Provisioning state of remote support operations.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @visibility(Lifecycle.Read)
+  remoteSupportProvisioningState?: RemoteSupportProvisioningState;
 }
 
 /**
