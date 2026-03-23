@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./common/common.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -440,6 +441,83 @@ op wrapKey is KeyVaultOperation<
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
+>;
+
+/**
+ * The SECURE WRAP operation creates a new 256 bit AES key within the trusted execution environment(TEE) and encrypts the same with a key encryption key that has previously been stored in an Azure Key Vault. The WRAP operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using the public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/wrapKey permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
+@operationId("securewrapkey")
+@Versioning.added(KeyVault.Versions.v2026_01_01_preview)
+@summary("Creates a new 256 bit AES key within the trusted execution environment and wraps this key using a specified key.")
+@route("/keys/{key-name}/{key-version}/securewrapkey")
+@post
+op secureWrapKey is KeyVaultOperation<
+  {
+    /**
+     * The name of the key.
+     */
+    @path("key-name")
+    @clientName("name", "go")
+    keyName: string;
+
+    /**
+     * The version of the key.
+     */
+    @path("key-version")
+    @clientName("version", "go")
+    keyVersion?: string;
+
+    /**
+     * The parameters for wrap operation.
+     */
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
+    @body
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
+    parameters: SecureKeyWrapOperationParameters;
+  },
+  SecureKeyOperationResult
+>;
+
+/**
+ * The SECURE UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the SECURE WRAP operation. The SECURE UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/unwrapKey permission.
+ * The SECURE UNWRAP operation ensures that MAA (Microsoft Azure Attestation Service) is used to attest the TEE (Trusted Execution Environment) before the key is unwrapped.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
+@operationId("secureunwrapkey")
+@Versioning.added(KeyVault.Versions.v2026_01_01_preview)
+@summary("Securely unwraps a previously wrapped symmetric key using a specified key, ensuring TEE attestation via Microsoft Azure Attestation (MAA) before unwrapping.")
+@route("/keys/{key-name}/{key-version}/secureunwrapkey")
+@post
+op secureUnwrapKey is KeyVaultOperation<
+  {
+    /**
+     * The name of the key.
+     */
+    @path("key-name")
+    @clientName("name", "go")
+    keyName: string;
+
+    /**
+     * The version of the key.
+     */
+    @path("key-version")
+    @clientName("version", "go")
+    keyVersion?: string;
+
+    /**
+     * The parameters for unwrap operation.
+     */
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
+    @body
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
+    parameters: SecureKeyUnWrapOperationParameters;
+  },
+  SecureKeyOperationResult
 >;
 
 /**
