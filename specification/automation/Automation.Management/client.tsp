@@ -22,6 +22,14 @@ using Microsoft.Automation;
   "ResourceProviders",
   "java"
 );
+@@alternateType(softwareUpdateConfigurationProperties.error,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "java"
+);
+@@alternateType(updateConfigurationMachineRunProperties.error,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "java"
+);
 
 @@alternateType(ReplaceContentRequest.runbookContent, string, "javascript");
 
@@ -30,3 +38,12 @@ using Microsoft.Automation;
   "go"
 );
 @@clientLocation(AutomationAccounts.convertGraphRunbookContent, "Client", "go");
+
+@@clientLocation(AutomationAccounts.convertGraphRunbookContent,
+  Microsoft.Automation,
+  "python"
+);
+@@clientLocation(deletedAutomationAccountsOperationGroup.listBySubscription,
+  "DeletedAutomationAccounts",
+  "python"
+);
