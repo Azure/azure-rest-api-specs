@@ -42,7 +42,6 @@
 |------|------------|-------|
 | `definitions.ScoreDetails.readOnly__deleted` | deleted | `true` |
 | `definitions.SecureScoreControlDefinitionSource.readOnly__deleted` | deleted | `true` |
-| `definitions.SecureScoreControlScoreDetails.properties.score.readOnly__added` | added | `true` |
 | `definitions.SecureScoreItem.readOnly__deleted` | deleted | `true` |
 | `definitions.SecureScoreItemProperties.readOnly__deleted` | deleted | `true` |
 

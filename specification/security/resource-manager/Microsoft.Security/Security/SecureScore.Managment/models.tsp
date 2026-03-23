@@ -241,7 +241,6 @@ model SecureScoreControlScoreDetails {
   /**
    * Actual score object for the control
    */
-  @visibility(Lifecycle.Read)
   score?: ScoreDetails;
 
   /**
