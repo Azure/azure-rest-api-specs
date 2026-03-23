@@ -1786,7 +1786,7 @@ model ManagedRuleSetList {
   /**
    * List of rule sets.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Managed rule sets are identified by a composite key of ruleSetType and ruleSetVersion properties."
   managedRuleSets?: ManagedRuleSet[];
 
   /**
@@ -1804,7 +1804,7 @@ model ManagedRuleSetExceptionList {
   /**
    * List of exceptions.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Exceptions do not have a single natural identifier; they are identified by a composite key of matchVariable, selector, valueMatchOperator, and matchValues properties."
   exceptions?: ManagedRuleSetException[];
 }
 
