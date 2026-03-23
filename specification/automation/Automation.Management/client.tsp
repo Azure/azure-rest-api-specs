@@ -22,6 +22,14 @@ using Microsoft.Automation;
   "ResourceProviders",
   "java"
 );
+@@alternateType(softwareUpdateConfigurationProperties.error,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "java"
+);
+@@alternateType(updateConfigurationMachineRunProperties.error,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "java"
+);
 
 @@alternateType(ReplaceContentRequest.runbookContent, string, "javascript");
 
