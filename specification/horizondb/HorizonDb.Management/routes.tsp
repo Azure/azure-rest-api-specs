@@ -110,10 +110,9 @@ interface HorizonDbPrivateEndpointConnections {
   >;
 
   @doc("Lists private endpoint connections in a HorizonDb cluster")
-  list is Azure.ResourceManager.Legacy.PrivateEndpoints.ListSinglePageByParent<
+  list is HorizonDbPrivateEndpointOperations.ListByParent<
     HorizonDbCluster,
-    HorizonDbPrivateEndpointConnection,
-    Response = ArmResponse<HorizonDbPrivateEndpointConnectionListResult>
+    HorizonDbPrivateEndpointConnection
   >;
 
   @doc("Updates a private endpoint connection")
