@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Microsoft.LoadTestService;
 
-@useDependency(APIVersions.v2025_11_01_preview)
+@useDependency(APIVersions.v2026_04_01)
 namespace Customizations;
 
 // Client customizations should be kept in this file only and not in other files
@@ -170,9 +170,13 @@ interface AdministrationOperations {
   deleteTestFile is LoadTestAdministration.deleteTestFile;
   deleteTest is LoadTestAdministration.deleteTest;
 
+  @removed(APIVersions.v2026_04_01)
   createOrUpdateTestProfile is TestProfileAdministration.createOrUpdateTestProfile;
+  @removed(APIVersions.v2026_04_01)
   deleteTestProfile is TestProfileAdministration.deleteTestProfile;
+  @removed(APIVersions.v2026_04_01)
   getTestProfile is TestProfileAdministration.getTestProfile;
+  @removed(APIVersions.v2026_04_01)
   listTestProfiles is TestProfileAdministration.listTestProfiles;
 
   createOrUpdateTrigger is TriggerAdministration.createOrUpdateTrigger;

@@ -492,6 +492,7 @@ interface Operations {
 // including the @added decorator and causes tsp compile client.tsp to fail. To handle this, @added is added at each operation level instead.
 // Do the same whenever routes are added in a new API Version
 @tag("TestProfile")
+@removed(APIVersions.v2026_04_01)
 interface TestProfileAdministration {
   @summary("Create a new test profile or update an existing test profile.")
   @doc("Create a new test profile or update an existing test profile by providing the test profile Id.")
@@ -520,6 +521,7 @@ interface TestProfileAdministration {
 }
 
 @tag("TestProfileRun")
+@removed(APIVersions.v2026_04_01)
 interface TestProfileRunAdministration {
   @summary("Get test profile run details.")
   @doc("Get test profile run details by test profile run Id.")
