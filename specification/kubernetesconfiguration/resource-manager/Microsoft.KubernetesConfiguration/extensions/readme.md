@@ -40,7 +40,6 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 ``` yaml $(tag) == 'package-2025-03'
 input-file:
   - stable/2025-03-01/extensions.json
-suppressions:
 ```
 
 ---
