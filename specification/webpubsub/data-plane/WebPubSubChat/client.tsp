@@ -6,16 +6,16 @@ using Azure.ClientGenerator.Core;
 namespace Customizations;
 
 /** Client options for Azure Web PubSub Chat. */
-model WebPubSubChatClientOptions {
+model WebPubSubChatServiceClientOptions {
   /** Target hub name, which should start with alphabetic characters and only contain
      alpha-numeric characters or underscore. */
   hub: string;
 }
 
-@@clientName(WebPubSubChat.Chat, "WebPubSubChat");
+@@clientName(WebPubSubChat.Chat, "WebPubSubChatService");
 
 @@clientInitialization(WebPubSubChat.Chat,
   {
-    parameters: WebPubSubChatClientOptions,
+    parameters: WebPubSubChatServiceClientOptions,
   }
 );
