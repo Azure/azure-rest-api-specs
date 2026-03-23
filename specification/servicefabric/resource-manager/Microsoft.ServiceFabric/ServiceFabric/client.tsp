@@ -12,3 +12,16 @@ using Microsoft.ServiceFabric;
   "ArmProxyResource",
   "python,java"
 );
+
+@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "ManagedIdentity",
+  "java"
+);
+
+@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+  "ManagedIdentityType",
+  "java"
+);
+
+@@clientName(ServiceResource.eTag, "etag", "java");
+@@clientName(ServiceResourceUpdate.eTag, "etag", "java");

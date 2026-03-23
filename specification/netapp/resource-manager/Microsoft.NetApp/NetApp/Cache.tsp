@@ -15,8 +15,6 @@ namespace Microsoft.NetApp;
 /**
  * Cache resource
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @parentResource(CapacityPool)
 model Cache is Azure.ResourceManager.TrackedResource<CacheProperties, false> {
@@ -34,16 +32,12 @@ model Cache is Azure.ResourceManager.TrackedResource<CacheProperties, false> {
 /**
  * List of Cache resources
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model CacheList is Azure.Core.Page<Cache>;
 
 /**
  * Cache resource properties
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model CacheProperties {
   /**
@@ -53,7 +47,7 @@ model CacheProperties {
   @minLength(1)
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  filepath: string;
+  filePath: string;
 
   /**
    * Maximum storage quota allowed for a file system in bytes. Valid values are in the range 50GiB to 1PiB. Values expressed in bytes as multiples of 1GiB.
@@ -204,8 +198,6 @@ model CacheProperties {
 /**
  * SMB settings for the cache
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model SmbSettings {
   /**
@@ -227,8 +219,6 @@ model SmbSettings {
 /**
  * Stores the origin cluster information associated to a cache.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model OriginClusterInformation {
   /**
@@ -256,8 +246,6 @@ model OriginClusterInformation {
 /**
  * The response containing peering passphrases and commands for cluster and vserver peering.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model PeeringPassphrases {
   /**
@@ -286,8 +274,6 @@ model PeeringPassphrases {
 /**
  * Contains all the information needed to mount a cache
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model CacheMountTargetProperties {
   /**
@@ -315,8 +301,6 @@ model CacheMountTargetProperties {
 /**
  * Flag indicating whether writeback is enabled for the cache.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union EnableWriteBackState {
   string,
@@ -335,8 +319,6 @@ union EnableWriteBackState {
 /**
  * Specifies whether LDAP is enabled or not.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union LdapState {
   string,
@@ -366,8 +348,6 @@ model CachePropertiesExportPolicy {
 /**
  * Flag indicating whether the global file lock is enabled for the cache.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union GlobalFileLockingState {
   string,
@@ -386,8 +366,6 @@ union GlobalFileLockingState {
 /**
  * Flag indicating whether a CIFS change notification is enabled for the cache.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union CifsChangeNotifyState {
   string,
@@ -406,8 +384,6 @@ union CifsChangeNotifyState {
 /**
  * Specifies if the cache is encryption or not.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union EncryptionState {
   string,
@@ -426,8 +402,6 @@ union EncryptionState {
 /**
  * Describe if a cache is Kerberos enabled.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union KerberosState {
   string,
@@ -446,8 +420,6 @@ union KerberosState {
 /**
  * Azure NetApp Files Cache lifecycle management
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union CacheLifeCycleState {
   string,
@@ -481,8 +453,6 @@ union CacheLifeCycleState {
 /**
  * Enables encryption for in-flight smb3 data. Only applicable for SMB/DualProtocol cache
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union SmbEncryptionState {
   string,
@@ -501,8 +471,6 @@ union SmbEncryptionState {
 /**
  * Set of supported protocol types, which include NFSv3, NFSv4 and SMB protocol
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union ProtocolTypes {
   string,
@@ -526,8 +494,6 @@ union ProtocolTypes {
 /**
  * Azure lifecycle management
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union CacheProvisioningState {
   string,
@@ -564,8 +530,6 @@ union CacheProvisioningState {
 }
 
 @armResourceOperations
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 interface Caches {
   /**
@@ -581,7 +545,6 @@ interface Caches {
   /**
    * Patch the specified Cache
    */
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Cache,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
