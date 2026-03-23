@@ -1,24 +1,26 @@
 {
   "parameters": {
-    "subscriptionId": "12345678-1234-1234-1234-123456789098",
-    "resourceGroupName": "kustorptest",
+    "api-version": "2024-04-13",
     "clusterName": "kustoCluster",
+    "resourceGroupName": "kustorptest",
     "sandboxCustomImageName": "customImage8",
-    "api-version": "2025-02-14"
+    "subscriptionId": "12345678-1234-1234-1234-123456789098"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/f12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/SandboxCustomImages/customImage8",
         "name": "kustoCluster/customImage8",
         "type": "Microsoft.Kusto/Clusters/SandboxCustomImages",
+        "id": "/subscriptions/f12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/SandboxCustomImages/customImage8",
         "properties": {
-          "language": "Python",
           "languageVersion": "3.10.8",
+          "provisioningState": "Succeeded",
           "requirementsFileContent": "Requests",
-          "provisioningState": "Succeeded"
+          "language": "Python"
         }
       }
     }
-  }
+  },
+  "operationId": "SandboxCustomImages_Get",
+  "title": "KustoSandboxCustomImagesGet"
 }

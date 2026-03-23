@@ -1,50 +1,52 @@
 {
   "parameters": {
-    "subscriptionId": "12345678-1234-1234-1234-123456789098",
-    "resourceGroupName": "kustorptest",
+    "api-version": "2024-04-13",
     "clusterName": "kustoCluster",
-    "sandboxCustomImageName": "customImage8",
-    "api-version": "2025-02-14",
     "parameters": {
       "properties": {
-        "language": "Python",
         "languageVersion": "3.10.8",
-        "requirementsFileContent": "Requests"
+        "requirementsFileContent": "Requests",
+        "language": "Python"
       }
-    }
+    },
+    "resourceGroupName": "kustorptest",
+    "sandboxCustomImageName": "customImage8",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098"
   },
   "responses": {
     "200": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f12?api-version=2021-02-01"
-      },
       "body": {
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/SandboxCustomImages/customImage8",
         "name": "kustoCluster/customImage8",
         "type": "Microsoft.Kusto/Clusters/SandboxCustomImages",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/SandboxCustomImages/customImage8",
         "properties": {
-          "language": "Python",
           "languageVersion": "3.10.8",
+          "provisioningState": "Accepted",
           "requirementsFileContent": "Requests",
-          "provisioningState": "Accepted"
+          "language": "Python"
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f12?api-version=2021-02-01"
       }
     },
     "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f12?api-version=2021-02-01"
-      },
       "body": {
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/SandboxCustomImages/customImage8",
         "name": "kustoCluster/customImage8",
         "type": "Microsoft.Kusto/Clusters/SandboxCustomImages",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/SandboxCustomImages/customImage8",
         "properties": {
-          "language": "Python",
           "languageVersion": "3.10.8",
+          "provisioningState": "Creating",
           "requirementsFileContent": "Requests",
-          "provisioningState": "Creating"
+          "language": "Python"
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f12?api-version=2021-02-01"
       }
     }
-  }
+  },
+  "operationId": "SandboxCustomImages_CreateOrUpdate",
+  "title": "KustoSandboxCustomImagesCreateOrUpdate"
 }

@@ -46,9 +46,9 @@ namespace Microsoft.Kusto;
  */
 enum Versions {
   /**
-   * The 2024-04-13 API version.
+   * The 2025-02-14 API version.
    */
-  v2024_04_13: "2024-04-13",
+  v2025_02_14: "2025-02-14",
 }
 
 interface Operations

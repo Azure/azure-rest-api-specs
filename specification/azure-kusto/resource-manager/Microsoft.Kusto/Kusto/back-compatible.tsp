@@ -195,3 +195,6 @@ using Microsoft.Kusto;
 @@clientName(KeyVaultProperties.keyVersion, "KeyVersion");
 @@clientName(KeyVaultProperties.keyVaultUri, "KeyVaultUri");
 @@clientName(KeyVaultProperties.userIdentity, "UserIdentity");
+@@clientName(KeyVaultProperties.federatedIdentityClientId,
+  "FederatedIdentityClientId"
+);

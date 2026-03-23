@@ -599,6 +599,11 @@ union PublicNetworkAccess {
    * Disabled
    */
   Disabled: "Disabled",
+
+  /**
+   * SecuredByPerimeter
+   */
+  SecuredByPerimeter: "SecuredByPerimeter",
 }
 
 /**
@@ -1059,6 +1064,16 @@ union DataConnectionKind {
    * CosmosDb
    */
   CosmosDb: "CosmosDb",
+
+  /**
+   * EventHubWithManagedIdentity
+   */
+  EventHubWithManagedIdentity: "EventHubWithManagedIdentity",
+
+  /**
+   * EventGridWithManagedIdentity
+   */
+  EventGridWithManagedIdentity: "EventGridWithManagedIdentity",
 }
 
 /**
@@ -1403,6 +1418,11 @@ union EventGridDataFormat {
    * W3CLOGFILE
    */
   W3CLOGFILE: "W3CLOGFILE",
+
+  /**
+   * AZMONSTREAM
+   */
+  AZMONSTREAM: "AZMONSTREAM",
 }
 
 /**
@@ -1738,9 +1758,14 @@ model KeyVaultProperties {
   keyVaultUri?: string;
 
   /**
-   * The user assigned identity (ARM resource id) that has access to the key.
+   * The user assigned identity (ARM resource id) that has access to the key. The identity must have 'Get', 'Wrap Key', and 'Unwrap Key' permissions on the Key Vault key, or be assigned the 'Key Vault Crypto Service Encryption User' role.
    */
   userIdentity?: string;
+
+  /**
+   * The application (client) ID of the multi-tenant Microsoft Entra application. Used for cross-tenant customer-managed key scenarios where the encryption key is stored in a different tenant than the cluster. The application must be configured with the user-assigned managed identity as a federated identity credential.
+   */
+  federatedIdentityClientId?: string;
 }
 
 /**
@@ -2709,6 +2734,11 @@ model ScriptProperties {
    * Indicates if the permissions for the script caller are kept following completion of the script.
    */
   principalPermissionsAction?: PrincipalPermissionsAction;
+
+  /**
+   * The resource identifier of the managed identity to be used. When provided, the managed identity will be used to read the script content from the scriptUrl.
+   */
+  managedIdentityResourceId?: string;
 }
 
 /**
