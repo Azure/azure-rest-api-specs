@@ -535,6 +535,39 @@ union RemoteSupportType {
 }
 
 /**
+ * Remote Support Provisioning State
+ */
+@added(Versions.v2026_04_01_preview)
+union RemoteSupportProvisioningState {
+  string,
+
+  /**
+   * No operation is in progress.
+   */
+  None: "None",
+
+  /**
+   * A Grant (Enable) operation is in progress.
+   */
+  GrantInProgress: "GrantInProgress",
+
+  /**
+   * A Revoke operation is in progress.
+   */
+  RevokeInProgress: "RevokeInProgress",
+
+  /**
+   * The last operation completed successfully.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The last operation failed.
+   */
+  Failed: "Failed",
+}
+
+/**
  * Desired state of Windows Server Subscription.
  */
 union WindowsServerSubscription {
@@ -2216,6 +2249,13 @@ model RemoteSupportProperties {
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   remoteSupportSessionDetails?: PerNodeRemoteSupportSession[];
+
+  /**
+   * Remote Support Provisioning State
+   */
+  @added(Versions.v2026_04_01_preview)
+  @visibility(Lifecycle.Read)
+  remoteSupportProvisioningState?: RemoteSupportProvisioningState;
 }
 
 /**

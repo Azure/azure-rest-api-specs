@@ -13867,8 +13867,56 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "remoteSupportProvisioningState": {
+          "$ref": "#/definitions/RemoteSupportProvisioningState",
+          "description": "Remote Support Provisioning State",
+          "readOnly": true
         }
       }
+    },
+    "RemoteSupportProvisioningState": {
+      "type": "string",
+      "description": "Remote Support Provisioning State",
+      "enum": [
+        "None",
+        "GrantInProgress",
+        "RevokeInProgress",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No operation is in progress."
+          },
+          {
+            "name": "GrantInProgress",
+            "value": "GrantInProgress",
+            "description": "A Grant (Enable) operation is in progress."
+          },
+          {
+            "name": "RevokeInProgress",
+            "value": "RevokeInProgress",
+            "description": "A Revoke operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The last operation completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The last operation failed."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "RemoteSupportRequest": {
       "type": "object",
