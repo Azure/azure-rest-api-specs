@@ -2701,6 +2701,16 @@ union LoadBalancerSkuName {
 }
 
 /**
+ * Controls verbosity of the returned load balancer resource.
+ */
+union LoadBalancerDetailLevel {
+  string,
+
+  /** When set to 'reduced', read-only reference collections may be omitted. */
+  reduced: "reduced",
+}
+
+/**
  * Tier of a load balancer SKU.
  */
 union LoadBalancerSkuTier {
