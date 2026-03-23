@@ -232,12 +232,6 @@ interface CrossTenantOperations {
     protectedItemName: string,
 
     ...ApiVersionParameter,
-
-    /**
-     * OData filter options.
-     */
-    @query("$filter")
-    $filter?: string,
   ): ArmResponse<ProtectedItemResource> | ErrorResponse;
 
   /**
@@ -421,7 +415,7 @@ interface CrossTenantOperations {
     operationId: string,
 
     ...ApiVersionParameter,
-  ): ArmResponse<ProtectedItemResource> | ArmAcceptedLroResponse | ErrorResponse;
+  ): ArmResponse<ProtectedItemResource> | ArmAcceptedLroResponse | ArmNoContentResponse | ErrorResponse;
 
   /**
    * Fetches the status of a cross-tenant operation such as triggering a restore.
@@ -639,7 +633,7 @@ interface CrossTenantOperations {
      */
     @bodyRoot
     parameters: ValidateOperationRequestResource,
-  ): ArmAcceptedLroResponse | ErrorResponse;
+  ): ArmResponse<ValidateOperationsResponse> | ArmAcceptedLroResponse | ErrorResponse;
 
   /**
    * Gets the result of a specific validate operation for cross-tenant restore scenarios.
@@ -682,7 +676,10 @@ interface CrossTenantOperations {
     operationId: string,
 
     ...ApiVersionParameter,
-  ): ArmResponse<ValidateOperationsResponse> | ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
+  ): ArmResponse<ValidateOperationsResponse> | ArmAcceptedResponse<
+    "Accepted",
+    ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  > | ArmNoContentResponse | ErrorResponse;
 
   /**
    * Gets the status of a validate operation for cross-tenant restore scenarios.
@@ -794,3 +791,170 @@ model CrossTenantJobResourceList {
 @@doc(CrossTenantVaultMappings.removeCrossTenantVaultMapping::parameters.body,
   "Request body for operation"
 );
+
+
+// ============================================================
+// Cross-tenant Vault Credential operations
+// ============================================================
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-standard routes for cross-tenant vault credential operations"
+@added(Versions.v2026_03_01_preview)
+interface CrossTenantVaultCredentialOperations {
+  /**
+   * Generates a vault credential certificate for cross-tenant restore scenarios.
+   * This is an asynchronous operation. BMS creates a TEE job that calls IDM's certificates
+   * endpoint for the source vault, generating a self-signed certificate registered with AAD.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId and x-ms-examples required for service contract compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}")
+  @put
+  @operationId("CrossTenantVaultCredential_Generate")
+  @tag("CrossTenant")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "location" }
+  )
+  @extension(
+    "x-ms-examples",
+    #{
+      `Generate Cross-Tenant Vault Credential`: #{
+        $ref: "./examples/CrossTenantVaultMappingOperations/GenerateCrossTenantVaultCredential.json",
+      },
+    }
+  )
+  generateCrossTenantVaultCredential(
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @path
+    vaultName: string,
+
+    /**
+     * Cross-tenant vault mapping name.
+     */
+    @path
+    crossTenantVaultMappingName: string,
+
+    /**
+     * Name identifier for the certificate.
+     */
+    @path
+    certificateName: string,
+
+    ...ApiVersionParameter,
+
+    /**
+     * Optional certificate generation options.
+     */
+    @bodyRoot
+    parameters?: VaultCredentialCertificateRequest,
+  ): ArmAcceptedLroResponse | ErrorResponse;
+
+  /**
+   * Gets the result of an async vault credential generation operation.
+   * Returns 202 Accepted while the TEE job is still in progress.
+   * Returns 200 OK with VaultCredentialCertificateResponse when the job completes.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId and x-ms-examples required for service contract compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Matches existing OperationResults pattern"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/operationResults/{operationId}")
+  @get
+  @operationId("CrossTenantVaultCredentialOperationResults_Get")
+  @tag("CrossTenant")
+  @extension(
+    "x-ms-examples",
+    #{
+      `Get Vault Credential Operation Result`: #{
+        $ref: "./examples/CrossTenantVaultMappingOperations/GetVaultCredentialOperationResult.json",
+      },
+    }
+  )
+  getVaultCredentialOperationResult(
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @path
+    vaultName: string,
+
+    /**
+     * Cross-tenant vault mapping name.
+     */
+    @path
+    crossTenantVaultMappingName: string,
+
+    /**
+     * Name identifier for the certificate.
+     */
+    @path
+    certificateName: string,
+
+    /**
+     * Operation ID returned in the Location header of the generate call.
+     */
+    @path
+    operationId: string,
+
+    ...ApiVersionParameter,
+  ): ArmResponse<VaultCredentialCertificateResponse> | ArmAcceptedResponse<
+    "Accepted",
+    ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  > | ArmNoContentResponse | ErrorResponse;
+
+  /**
+   * Gets the status of an async vault credential generation operation.
+   * Returns the current status (InProgress, Completed, Failed) and any associated job details.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId and x-ms-examples required for service contract compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/operationStatus/{operationId}")
+  @get
+  @operationId("CrossTenantVaultCredentialOperationStatuses_Get")
+  @tag("CrossTenant")
+  @extension(
+    "x-ms-examples",
+    #{
+      `Get Vault Credential Operation Status`: #{
+        $ref: "./examples/CrossTenantVaultMappingOperations/GetVaultCredentialOperationStatus.json",
+      },
+    }
+  )
+  getVaultCredentialOperationStatus(
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @path
+    vaultName: string,
+
+    /**
+     * Cross-tenant vault mapping name.
+     */
+    @path
+    crossTenantVaultMappingName: string,
+
+    /**
+     * Name identifier for the certificate.
+     */
+    @path
+    certificateName: string,
+
+    /**
+     * Operation ID returned in the Azure-AsyncOperation header of the generate call.
+     */
+    @path
+    operationId: string,
+
+    ...ApiVersionParameter,
+  ): ArmResponse<OperationStatus> | ErrorResponse;
+}

@@ -8710,7 +8710,8 @@ model CrossTenantVaultMapping {
    * Additional properties for the mapping.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Service contract uses Dictionary<string, string> for additional properties"
-  additionalProperties?: Record<string>;
+  @encodedName("application/json", "additionalProperties")
+  extendedProperties?: Record<string>;
 
   /**
    * Provisioning state of the resource.
@@ -8762,4 +8763,125 @@ model CrossTenantVaultMappingStatusResponse {
    * Current state of the mapping.
    */
   mappingState?: VaultMappingState;
+}
+
+/**
+ * Request to generate a vault credential certificate for cross-tenant restore.
+ */
+@added(Versions.v2026_03_01_preview)
+model VaultCredentialCertificateRequest {
+  /**
+   * Options for certificate generation.
+   */
+  certificateCreateOptions?: VaultCredentialCertificateCreateOptions;
+}
+
+/**
+ * Options for self-signed certificate generation.
+ */
+@added(Versions.v2026_03_01_preview)
+model VaultCredentialCertificateCreateOptions {
+  /**
+   * Validity period of the generated certificate in hours.
+   */
+  validityInHours?: int32;
+}
+
+/**
+ * Response containing the generated vault credential certificate
+ * and associated AAD identity details for MARS agent registration.
+ */
+@added(Versions.v2026_03_01_preview)
+model VaultCredentialCertificateResponse {
+  /**
+   * Certificate and AAD identity properties.
+   */
+  properties?: VaultCredentialCertificateProperties;
+}
+
+/**
+ * Properties of the vault credential certificate including the certificate data
+ * and AAD service principal identity details required by MARS agent.
+ */
+@added(Versions.v2026_03_01_preview)
+model VaultCredentialCertificateProperties {
+  /**
+   * Authentication type.
+   */
+  authType?: string;
+
+  /**
+   * Base64-encoded certificate data.
+   */
+  certificate?: string;
+
+  /**
+   * IDM resource ID of the vault.
+   */
+  resourceId?: int64;
+
+  /**
+   * String form of the IDM resource ID.
+   */
+  serviceResourceId?: string;
+
+  /**
+   * AAD authority URL.
+   */
+  aadAuthority?: string;
+
+  /**
+   * AAD tenant ID of the source vault.
+   */
+  aadTenantId?: string;
+
+  /**
+   * Service principal client ID for the vault.
+   */
+  servicePrincipalClientId?: string;
+
+  /**
+   * Service principal object ID for the vault.
+   */
+  servicePrincipalObjectId?: string;
+
+  /**
+   * Azure management endpoint audience.
+   */
+  azureManagementEndpointAudience?: string;
+
+  /**
+   * AAD audience URI for the vault.
+   */
+  aadAudience?: string;
+
+  /**
+   * Certificate subject.
+   */
+  subject?: string;
+
+  /**
+   * Certificate issuer.
+   */
+  issuer?: string;
+
+  /**
+   * Certificate thumbprint.
+   */
+  thumbprint?: string;
+
+  /**
+   * Certificate validity start date.
+   */
+  validFrom?: utcDateTime;
+
+  /**
+   * Certificate validity end date.
+   */
+  validTo?: utcDateTime;
+
+  /**
+   * Certificate friendly name.
+   */
+  friendlyName?: string;
 }

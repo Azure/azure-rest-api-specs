@@ -623,13 +623,6 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter options.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -733,6 +726,9 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "204": {
+            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1260,6 +1256,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationsResponse"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -1401,7 +1403,21 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted."
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1552,6 +1568,238 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}": {
+      "put": {
+        "operationId": "CrossTenantVaultCredential_Generate",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Generates a vault credential certificate for cross-tenant restore scenarios.\nThis is an asynchronous operation. BMS creates a TEE job that calls IDM's certificates\nendpoint for the source vault, generating a self-signed certificate registered with AAD.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name identifier for the certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Optional certificate generation options.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VaultCredentialCertificateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate Cross-Tenant Vault Credential": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GenerateCrossTenantVaultCredential.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/operationResults/{operationId}": {
+      "get": {
+        "operationId": "CrossTenantVaultCredentialOperationResults_Get",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Gets the result of an async vault credential generation operation.\nReturns 202 Accepted while the TEE job is still in progress.\nReturns 200 OK with VaultCredentialCertificateResponse when the job completes.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name identifier for the certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID returned in the Location header of the generate call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VaultCredentialCertificateResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Vault Credential Operation Result": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetVaultCredentialOperationResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/operationStatus/{operationId}": {
+      "get": {
+        "operationId": "CrossTenantVaultCredentialOperationStatuses_Get",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Gets the status of an async vault credential generation operation.\nReturns the current status (InProgress, Completed, Failed) and any associated job details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name identifier for the certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID returned in the Azure-AsyncOperation header of the generate call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Vault Credential Operation Status": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetVaultCredentialOperationStatus.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappingStatus": {
@@ -10242,7 +10490,8 @@
           "description": "Additional properties for the mapping.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "extendedProperties"
         },
         "provisioningState": {
           "type": "string",
@@ -16541,6 +16790,110 @@
             "value": "Failed"
           }
         ]
+      }
+    },
+    "VaultCredentialCertificateCreateOptions": {
+      "type": "object",
+      "description": "Options for self-signed certificate generation.",
+      "properties": {
+        "validityInHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Validity period of the generated certificate in hours."
+        }
+      }
+    },
+    "VaultCredentialCertificateProperties": {
+      "type": "object",
+      "description": "Properties of the vault credential certificate including the certificate data\nand AAD service principal identity details required by MARS agent.",
+      "properties": {
+        "authType": {
+          "type": "string",
+          "description": "Authentication type."
+        },
+        "certificate": {
+          "type": "string",
+          "description": "Base64-encoded certificate data."
+        },
+        "resourceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "IDM resource ID of the vault."
+        },
+        "serviceResourceId": {
+          "type": "string",
+          "description": "String form of the IDM resource ID."
+        },
+        "aadAuthority": {
+          "type": "string",
+          "description": "AAD authority URL."
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "AAD tenant ID of the source vault."
+        },
+        "servicePrincipalClientId": {
+          "type": "string",
+          "description": "Service principal client ID for the vault."
+        },
+        "servicePrincipalObjectId": {
+          "type": "string",
+          "description": "Service principal object ID for the vault."
+        },
+        "azureManagementEndpointAudience": {
+          "type": "string",
+          "description": "Azure management endpoint audience."
+        },
+        "aadAudience": {
+          "type": "string",
+          "description": "AAD audience URI for the vault."
+        },
+        "subject": {
+          "type": "string",
+          "description": "Certificate subject."
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Certificate issuer."
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Certificate thumbprint."
+        },
+        "validFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Certificate validity start date."
+        },
+        "validTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Certificate validity end date."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Certificate friendly name."
+        }
+      }
+    },
+    "VaultCredentialCertificateRequest": {
+      "type": "object",
+      "description": "Request to generate a vault credential certificate for cross-tenant restore.",
+      "properties": {
+        "certificateCreateOptions": {
+          "$ref": "#/definitions/VaultCredentialCertificateCreateOptions",
+          "description": "Options for certificate generation."
+        }
+      }
+    },
+    "VaultCredentialCertificateResponse": {
+      "type": "object",
+      "description": "Response containing the generated vault credential certificate\nand associated AAD identity details for MARS agent registration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultCredentialCertificateProperties",
+          "description": "Certificate and AAD identity properties."
+        }
       }
     },
     "VaultJob": {
