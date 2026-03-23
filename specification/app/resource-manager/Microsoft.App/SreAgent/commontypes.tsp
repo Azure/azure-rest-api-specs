@@ -17,7 +17,7 @@ model ResourceTags {
 /** Base connector properties shared across Agent and AgentSpace connectors */
 model Connector {
   /** Endpoint of the connector */
-  endpoint?: string;
+  endpoint?: url;
 
   /** Data source connection string or endpoint */
   @secret
