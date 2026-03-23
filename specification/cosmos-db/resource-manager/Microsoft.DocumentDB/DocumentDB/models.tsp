@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -1206,6 +1208,10 @@ union ContinuousTier {
   Continuous7Days: "Continuous7Days",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Continuous30Days: "Continuous30Days",
+
+  /** Continuous 35 Days backup tier. */
+  @added(Versions.v2026_04_01_preview)
+  Continuous35Days: "Continuous35Days",
 }
 
 /**
