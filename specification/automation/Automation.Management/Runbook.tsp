@@ -12,6 +12,17 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Automation;
+
+alias replaceContentRequest = {
+  @header("Content-Type")
+  contentType: "text/powershell";
+
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
+  @doc("The runbook draft content.")
+  @bodyRoot
+  @encode("bytes")
+  runbookContent: bytes;
+};
 /**
  * Definition of the runbook type.
  */
@@ -124,16 +135,7 @@ interface Runbooks {
   @action("draft/content")
   replaceContent is ArmResourceActionAsyncCustom<
     Runbook,
-    {
-      @header("Content-Type")
-      contentType: "text/powershell";
-
-      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-      @doc("The runbook draft content.")
-      @bodyRoot
-      @encode("bytes")
-      runbookContent: bytes;
-    },
+    replaceContentRequest,
     {
       @header("Content-Type")
       contentType: "text/powershell";

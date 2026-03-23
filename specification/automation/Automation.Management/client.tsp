@@ -23,4 +23,4 @@ using Microsoft.Automation;
   "java"
 );
 
-@@alternateType(Runbooks.replaceContent::parameters.body, string, "javascript");
+@@alternateType(replaceContentRequest.runbookContent, string, "javascript");
