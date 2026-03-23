@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./Account.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -15,6 +16,7 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services compute cluster resource.
  */
+@added(Versions.v2026_01_15_preview)
 @parentResource(Account)
 model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   ...ResourceNameParameter<
@@ -58,6 +60,7 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
 }
 
 @armResourceOperations
+@added(Versions.v2026_01_15_preview)
 interface Computes {
   /**
    * Gets the specified compute associated with the Cognitive Services account.
