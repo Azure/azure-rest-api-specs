@@ -48,3 +48,11 @@
   rules:
     - PathForTrackedResourceTypes
   reason: WorkspaceOperationResults is an LRO polling endpoint (final-state-via location), not a resource CRUD path. It is subscription-scoped by design because it serves as a shared polling endpoint for all workspace async operations across resource groups.
+- tool: LintDiff
+  paths:
+    - preview/2026-05-01-preview/openapi.json
+    - preview/2024-11-01-preview/openapi.json
+    - stable/2025-01-01/openapi.json
+  rules:
+    - PostOperationIdContainsUrlVerb
+  reason: The operationId Experiments_ExecutionDetails is established in previous API versions (2024-11-01-preview, 2025-01-01). Renaming would be a breaking change for existing SDKs.

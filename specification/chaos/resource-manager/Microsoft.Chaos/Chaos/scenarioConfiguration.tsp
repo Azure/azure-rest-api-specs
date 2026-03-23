@@ -49,6 +49,7 @@ interface ScenarioConfigurations {
   /**
    * Execute the scenario execution with the given scenario configuration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202+204, custom template not recognized by linter"
   @pollingOperation(ScenarioRuns.get)
   execute is ArmResourceActionNoBodyAsyncWithLocation<
     ScenarioConfiguration,
@@ -58,6 +59,7 @@ interface ScenarioConfigurations {
   /**
    * Cancel the currently running scenario execution.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202+204, custom template not recognized by linter"
   @removed(Microsoft.Chaos.Versions.v2026_05_01_preview)
   @pollingOperation(ScenarioRuns.get)
   cancel is ArmResourceActionNoBodyAsyncWithLocation<
@@ -68,6 +70,7 @@ interface ScenarioConfigurations {
   /**
    * Validate the given scenario configuration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 200+202, custom template not recognized by linter"
   @pollingOperation(ScenarioConfigurations.getLatestValidation)
   validate is ArmResourceActionAsyncWithLocation<
     ScenarioConfiguration,
@@ -78,6 +81,7 @@ interface ScenarioConfigurations {
   /**
    * Fixes resource permissions for the given scenario configuration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 200+202, custom template not recognized by linter"
   @pollingOperation(ScenarioConfigurations.getLatestPermissionsFix)
   fixResourcePermissions is ArmResourceActionAsyncWithLocation<
     ScenarioConfiguration,
@@ -112,6 +116,7 @@ interface ScenarioConfigurations {
   /**
    * Get the latest fix resource permissions result for the scenario configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/polling-operation-no-status-monitor" "LRO uses final-state-via:location pattern, not status monitor"
   getLatestPermissionsFix is ArmResourceRead<PermissionsFix>;
 }
 
