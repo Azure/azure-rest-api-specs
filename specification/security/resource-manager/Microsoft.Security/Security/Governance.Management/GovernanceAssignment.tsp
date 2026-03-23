@@ -32,7 +32,7 @@ alias GovernanceAssignmentsOps = Azure.ResourceManager.Legacy.ExtensionOperation
     /**
      * The scope of the governance assignment.
      */
-    @path
+    @path(#{ allowReserved: true })
     @key
     scope: string;
 
@@ -72,7 +72,7 @@ alias GovernanceAssignmentsListOps = Azure.ResourceManager.Legacy.ExtensionOpera
     /**
      * The scope of the governance assignment.
      */
-    @path
+    @path(#{ allowReserved: true })
     @key
     scope: string;
 

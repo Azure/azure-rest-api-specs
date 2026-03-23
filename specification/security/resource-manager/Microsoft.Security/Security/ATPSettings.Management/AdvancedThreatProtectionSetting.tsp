@@ -31,7 +31,7 @@ alias AdvancedThreatProtectionSettingOps = Azure.ResourceManager.Legacy.Extensio
     ...ApiVersionParameter;
 
     /** The fully qualified Azure Resource manager identifier of the resource. */
-    @path
+    @path(#{ allowReserved: true })
     @key
     resourceId: string;
 

@@ -30,7 +30,7 @@ alias ComplianceResultOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     ...ApiVersionParameter;
 
     /** The fully qualified Azure Resource manager identifier of the resource. */
-    @path
+    @path(#{ allowReserved: true })
     @key
     resourceId: string;
 
