@@ -5,6 +5,8 @@ import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
 using Microsoft.Network;
@@ -588,3 +590,123 @@ namespace CombineClient;
 );
 @@clientName(Microsoft.Network.NetworkProtocol, "Protocol", "go");
 @@clientName(Microsoft.Network.Protocol, "BaseProtocol", "go");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op availablePrivateEndpointTypesOperationGroupListByResourceGroup(
+  /**
+   * The location of the domain name.
+   */
+  @path
+  @segment("locations")
+  location: string,
+
+  /**
+   * The name of the resource group.
+   */
+  @path
+  @segment("resourceGroups")
+  resourceGroupName: string,
+
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  @body
+  body: void,
+): ArmResponse<AvailablePrivateEndpointTypesResult> | CloudError;
+
+@@override(AvailablePrivateEndpointTypesOperationGroup.listByResourceGroup,
+  availablePrivateEndpointTypesOperationGroupListByResourceGroup,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op availablePrivateEndpointTypesOperationGroupList(
+  /**
+   * The location of the domain name.
+   */
+  @path
+  @segment("locations")
+  location: string,
+
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...SubscriptionActionScope,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  @body
+  body: void,
+): ArmResponse<AvailablePrivateEndpointTypesResult> | CloudError;
+
+@@override(AvailablePrivateEndpointTypesOperationGroup.list,
+  availablePrivateEndpointTypesOperationGroupList,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup(
+  /**
+   * The location of the domain name.
+   */
+  @path
+  @segment("locations")
+  location: string,
+
+  /**
+   * The name of the resource group.
+   */
+  @path
+  @segment("resourceGroups")
+  resourceGroupName: string,
+
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  /**
+   * The request body of CheckPrivateLinkService API call.
+   */
+  @body
+  body: CheckPrivateLinkServiceVisibilityRequest,
+): ArmResponse<AvailablePrivateEndpointTypesResult> | ArmAcceptedLroResponse<
+  "Accepted and the operation will complete asynchronously.",
+  ArmLroLocationHeader<FinalResult = PrivateLinkServiceVisibility>
+> | CloudError;
+
+@@override(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup,
+  privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourceGroup(
+  /**
+   * The location of the domain name.
+   */
+  @path
+  @segment("locations")
+  location: string,
+
+  /**
+   * The name of the resource group.
+   */
+  @path
+  @segment("resourceGroups")
+  resourceGroupName: string,
+
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  @body
+  body: void,
+): ArmResponse<AutoApprovedPrivateLinkServicesResult> | CloudError;
+
+@@override(PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServicesByResourceGroup,
+  privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourceGroup,
+  "go"
+);
