@@ -96,8 +96,6 @@ Confirm uncertainties with the user, then make minimal `.tsp` edits.
 
 ### Step 5: Validate
 
-Run `azure-sdk-mcp:azsdk_run_typespec_validation` → if errors, fix → re-validate → repeat until clean.
-
 See [validation guide](references/validation.md) for sub-steps (TypeSpec compilation, example verification).
 
 ---
