@@ -322,10 +322,6 @@ model HorizonDbFirewallRuleForPatchUpdate {
   properties?: HorizonDbFirewallRulePropertiesForPatchUpdate;
 }
 
-@doc("List of private endpoint connections for a HorizonDb cluster")
-model HorizonDbPrivateEndpointConnectionListResult
-  is Azure.Core.Page<HorizonDbPrivateEndpointConnection>;
-
 @doc("The mode to create a new HorizonDb cluster")
 union CreateModeCluster {
   string,
