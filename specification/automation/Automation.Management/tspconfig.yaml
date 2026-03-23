@@ -23,6 +23,9 @@ options:
     service-name: "Automation" # human-readable service name, whitespace allowed
     use-object-for-unknown: true
     flavor: azure
+    rename-model:
+      DscConfigurationPropertiesProvisioningState: DscConfigurationProvisioningState
+      DscConfigurationPropertiesProvisioningState1: RunbookProvisioningState
   "@azure-tools/typespec-ts":
     service-dir: sdk/automation
     emitter-output-dir: "{output-dir}/{service-dir}/arm-automation"
