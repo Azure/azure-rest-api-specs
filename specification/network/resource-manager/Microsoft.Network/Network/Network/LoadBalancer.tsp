@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/LoadBalancer.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -51,6 +53,13 @@ interface LoadBalancers {
        */
       @query("$expand")
       $expand?: string;
+
+      /**
+       * Controls verbosity of the returned load balancer resource. When set to 'reduced', read-only reference collections may be omitted.
+       */
+      @added(Versions.v2025_07_01)
+      @query("detailLevel")
+      detailLevel?: LoadBalancerDetailLevel;
     },
     Error = CloudError
   >;
