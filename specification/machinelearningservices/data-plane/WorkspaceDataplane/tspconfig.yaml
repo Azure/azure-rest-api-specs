@@ -5,13 +5,12 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
-    emitter-output-dir: "{project-root}/.."
-    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}"
     emit-lro-options: "none"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/run-history.json"
+    output-file: "{version-status}/{version}/workspace-dataplane.json"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-ml"
-    namespace: "azure.ai.ml._restclient.runhistory"
+    namespace: "azure.ai.ml._restclient.workspace_dataplane"
     flavor: azure
     generate-test: false
     generate-sample: false
