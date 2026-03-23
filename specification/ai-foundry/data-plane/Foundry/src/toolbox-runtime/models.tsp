@@ -20,9 +20,10 @@ union ToolsetMCPMethodName {
   initialized: "notifications/initialized",
   list: "tools/list",
   call: "tools/call",
-  taskResult: "tasks/result",
   taskGet: "tasks/get",
+  taskResult: "tasks/result",
   taskCancel: "tasks/cancel",
+  taskList: "tasks/list",
 }
 
 /**
@@ -168,6 +169,12 @@ model ToolsetMCPCallToolRequestParams {
    * Arguments to pass to the tool.
    */
   arguments?: Record<unknown>;
+
+  /**
+   * Optional task metadata for requesting async execution.
+   * When present, the server returns a task object instead of the tool result.
+   */
+  task?: Record<unknown>;
 }
 
 /**
@@ -323,6 +330,12 @@ model ToolsetMCPTool {
    * Optional metadata for protocol-level extensions.
    */
   _meta?: ToolsetMCPMeta;
+
+  /**
+   * Optional execution configuration indicating task support level
+   * (forbidden, optional, required).
+   */
+  execution?: Record<unknown>;
 }
 
 /**
@@ -534,6 +547,11 @@ model ToolsetMCPCallToolResult {
    * Indicates whether the tool call result represents an error.
    */
   isError?: boolean;
+
+  /**
+   * Optional task information. Present when the tool call was executed as a task.
+   */
+  task?: Record<unknown>;
 }
 
 /**
@@ -573,9 +591,7 @@ union ToolsetMCPJsonRpcResult {
   ToolsetMCPInitializeResult,
   ToolsetMCPListToolsResult,
   ToolsetMCPCallToolResult,
-  ToolsetMCPResultTaskResult,
-  ToolsetMCPGetTaskResult,
-  ToolsetMCPCancelTaskResult,
+  ToolsetMCPTaskStatus,
 }
 
 /**
@@ -664,119 +680,59 @@ union ToolsetMCPJsonRpcMessage {
 }
 
 /**
- * Parameters for a tasks/result request.
- * Uses the same shape as tools/call — name, arguments, and optional metadata.
+ * Parameters for tasks/get, tasks/result, or tasks/cancel requests.
  */
-model ToolsetMCPResultTaskRequestParams {
+model ToolsetMCPTaskRequestParams {
   /**
    * Optional metadata for protocol-level extensions.
    */
   _meta?: ToolsetMCPMeta;
 
   /**
-   * The name of the tool to call asynchronously.
+   * The task identifier.
    */
-  name: string;
-
-  /**
-   * Arguments to pass to the tool.
-   */
-  arguments?: Record<unknown>;
+  taskId: string;
 }
 
 /**
- * Parameters for a tasks/get request.
+ * Task status information returned by tasks/get and tasks/cancel.
+ * Matches MCP spec Task type.
  */
-model ToolsetMCPGetTaskRequestParams {
-  /**
-   * Optional metadata for protocol-level extensions.
-   */
-  _meta?: ToolsetMCPMeta;
-
-  /**
-   * The task identifier to query.
-   */
-  id: string;
-}
-
-/**
- * Parameters for a tasks/cancel request.
- */
-model ToolsetMCPCancelTaskRequestParams {
-  /**
-   * Optional metadata for protocol-level extensions.
-   */
-  _meta?: ToolsetMCPMeta;
-
-  /**
-   * The task identifier to cancel.
-   */
-  id: string;
-}
-
-/**
- * Status of a task.
- */
-union ToolsetMCPTaskStatus {
-  running: "running",
-  completed: "completed",
-  failed: "failed",
-  cancelled: "cancelled",
-}
-
-/**
- * A task object representing an asynchronous tool invocation.
- */
-model ToolsetMCPTask {
+model ToolsetMCPTaskStatus {
   /**
    * The unique task identifier.
    */
-  id: string;
+  taskId: string;
 
   /**
-   * The current status of the task.
+   * Current task status: working, completed, failed, cancelled, input_required.
    */
-  status: ToolsetMCPTaskStatus;
+  status: string;
 
   /**
-   * Optional metadata for protocol-level extensions.
+   * Optional human-readable status message.
    */
-  _meta?: ToolsetMCPMeta;
-}
-
-/**
- * Result payload for tasks/result.
- */
-model ToolsetMCPResultTaskResult {
-  /**
-   * The task.
-   */
-  ...ToolsetMCPTask;
-}
-
-/**
- * Result payload for tasks/get.
- */
-model ToolsetMCPGetTaskResult {
-  /**
-   * The task with current status.
-   */
-  ...ToolsetMCPTask;
+  statusMessage?: string;
 
   /**
-   * The tool call result, present when status is "completed".
+   * ISO 8601 timestamp when the task was created.
    */
-  result?: ToolsetMCPCallToolResult;
-}
+  createdAt: string;
 
-/**
- * Result payload for tasks/cancel.
- */
-model ToolsetMCPCancelTaskResult {
   /**
-   * The cancelled task.
+   * ISO 8601 timestamp when the task was last updated.
    */
-  ...ToolsetMCPTask;
+  lastUpdatedAt: string;
+
+  /**
+   * Actual retention duration from creation in milliseconds.
+   */
+  ttl?: int64;
+
+  /**
+   * Suggested polling interval in milliseconds.
+   */
+  pollInterval?: int64;
 }
 
 /**
@@ -786,9 +742,7 @@ union ToolsetMCPInvokeRequestParams {
   ToolsetMCPInitializeRequestParams,
   ToolsetMCPPaginatedRequestParams,
   ToolsetMCPCallToolRequestParams,
-  ToolsetMCPResultTaskRequestParams,
-  ToolsetMCPGetTaskRequestParams,
-  ToolsetMCPCancelTaskRequestParams,
+  ToolsetMCPTaskRequestParams,
 }
 
 /**
