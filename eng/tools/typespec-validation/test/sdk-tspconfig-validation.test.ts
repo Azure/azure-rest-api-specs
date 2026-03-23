@@ -4,7 +4,7 @@
 import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
-import { strictEqual } from "node:assert";
+import assert, { strictEqual } from "node:assert";
 import { join } from "path";
 import { stringify } from "yaml";
 import {
@@ -937,12 +937,12 @@ describe("tspconfig", function () {
     const rule = isOptional
       ? new SdkTspConfigValidationRule([], c.subRules as any)
       : new SdkTspConfigValidationRule(c.subRules, []);
+    const consoleSpy = vi.spyOn(console, "log");
     const result = await rule.execute(c.folder);
     strictEqual(result.success, c.success); // Verify the validation result matches the expected outcome
-    if (c.success)
-      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
-    if (!c.success)
-      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation failed."), true);
+    const allOutput = consoleSpy.mock.calls.map((args) => String(args[0])).join("\n");
+    if (c.success) assert(allOutput.includes("[SdkTspConfigValidation]: validation passed."));
+    if (!c.success) assert(allOutput.includes("[SdkTspConfigValidation]: validation failed."));
   });
 
   it.each([...suppressSubRuleTestCases])(`$description`, async (c: Case) => {
@@ -962,13 +962,13 @@ describe("tspconfig", function () {
     });
 
     const rule = new SdkTspConfigValidationRule(c.subRules, []);
+    const consoleSpy = vi.spyOn(console, "log");
     const result = await rule.execute(c.folder);
     const returnSuccess = c.folder.includes(".Management") ? c.success : true;
     strictEqual(result.success, returnSuccess);
-    if (c.success)
-      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
-    if (!c.success)
-      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation failed."), true);
+    const allOutput = consoleSpy.mock.calls.map((args) => String(args[0])).join("\n");
+    if (returnSuccess) assert(allOutput.includes("[SdkTspConfigValidation]: validation passed."));
+    if (!returnSuccess) assert(allOutput.includes("[SdkTspConfigValidation]: validation failed."));
   });
 
   it.each([suppressEntireRuleTestCase])(`$description`, async (c: Case) => {
@@ -987,9 +987,11 @@ describe("tspconfig", function () {
     });
 
     const rule = new SdkTspConfigValidationRule(c.subRules, []);
+    const consoleSpy = vi.spyOn(console, "log");
     const result = await rule.execute(c.folder);
     strictEqual(result.success, true);
-    strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation skipped."), true);
+    const allOutput = consoleSpy.mock.calls.map((args) => String(args[0])).join("\n");
+    assert(allOutput.includes("[SdkTspConfigValidation]: validation skipped."));
   });
 
   it("Tests wildcard suppression for multiple AWS connector services", async () => {
@@ -1017,10 +1019,12 @@ describe("tspconfig", function () {
         },
       ]);
 
+    const consoleSpy = vi.spyOn(console, "log");
     // Test each AWS connector service path
     for (const awsServiceFolder of awsServiceFolders) {
       // Reset mocks for each service
       suppressionsSpy.mockClear();
+      consoleSpy.mockClear();
 
       // Mock configuration content
       const tspconfigContent = `
@@ -1043,9 +1047,9 @@ parameters:
 
       // Validate that validation passes for each service
       strictEqual(result.success, true, `Validation should pass for ${awsServiceFolder}`);
-      strictEqual(
-        result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."),
-        true,
+      const allOutput = consoleSpy.mock.calls.map((args) => String(args[0])).join("\n");
+      assert(
+        allOutput.includes("[SdkTspConfigValidation]: validation passed."),
         `Output should indicate validation passed for ${awsServiceFolder}`,
       );
 

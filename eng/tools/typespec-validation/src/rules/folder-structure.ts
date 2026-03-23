@@ -24,7 +24,8 @@ export class FolderStructureRule implements Rule {
     );
 
     if (suppressAll) {
-      return { success: true, stdOutput: `suppressed: ${suppressAll.reason}` };
+      console.log(`suppressed: ${suppressAll.reason}`);
+      return { success: true };
     }
 
     let success = true;
@@ -46,18 +47,17 @@ export class FolderStructureRule implements Rule {
       } else {
         return {
           success: false,
-          stdOutput: stdOutput,
-          errorOutput: `Folder '${folder}' must use "folder structure v2". See https://github.com/Azure/azure-rest-api-specs/wiki/Folder-Structure \n`,
+          reason: `Folder '${folder}' must use "folder structure v2". See https://github.com/Azure/azure-rest-api-specs/wiki/Folder-Structure \n`,
         };
       }
     }
 
     stdOutput += `folder: ${folder}\n`;
     if (!(await fileExists(folder))) {
+      if (stdOutput) console.log(stdOutput);
       return {
         success: false,
-        stdOutput: stdOutput,
-        errorOutput: `Folder '${folder}' does not exist.\n`,
+        reason: `Folder '${folder}' does not exist.\n`,
       };
     }
 
@@ -226,10 +226,10 @@ export class FolderStructureRule implements Rule {
       }
     }
 
-    return {
-      success: success,
-      stdOutput: stdOutput,
-      errorOutput: errorOutput,
-    };
+    if (stdOutput) console.log(stdOutput);
+
+    return success
+      ? { success: true }
+      : { success: false, reason: errorOutput || "Folder structure validation failed." };
   }
 }
