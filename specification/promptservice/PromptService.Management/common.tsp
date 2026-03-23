@@ -31,6 +31,14 @@ union ProvisioningState {
   string,
 }
 
+/** The AI provider associated with a container. */
+union AiProvider {
+  string,
+
+  /** OpenAI provider. */
+  OpenAI: "OpenAI",
+}
+
 /** The kind of prompt service account, determining storage topology. */
 union AccountKind {
   /** Single-region storage account */
