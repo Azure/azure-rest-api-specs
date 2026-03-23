@@ -155,6 +155,9 @@ interface HorizonDbParameterGroups {
   @doc("Lists all HorizonDb parameter groups in a resource group")
   listByResourceGroup is ArmResourceListByParent<HorizonDbParameterGroup>;
 
+  @doc("Lists all HorizonDb parameter groups in a subscription")
+  listBySubscription is ArmListBySubscription<HorizonDbParameterGroup>;
+
   @doc("Gets all connections to a parameter group")
   @get
   @list

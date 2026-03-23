@@ -140,6 +140,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/parameterGroups": {
+      "get": {
+        "operationId": "HorizonDbParameterGroups_ListBySubscription",
+        "tags": [
+          "HorizonDbParameterGroups"
+        ],
+        "description": "Lists all HorizonDb parameter groups in a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbParameterGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List HorizonDb parameter groups in a subscription": {
+            "$ref": "./examples/ParameterGroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters": {
       "get": {
         "operationId": "HorizonDbClusters_ListByResourceGroup",
