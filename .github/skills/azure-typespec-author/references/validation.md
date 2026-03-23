@@ -9,7 +9,8 @@ After applying changes (Step 4), run through all sub-steps below in order.
 
 ### Step 5.1: TypeSpec Validation
 
-Invoke `azure-sdk-mcp:azsdk_run_typespec_validation` with the TypeSpec project root path.
+1. Invoke `azure-sdk-mcp:azsdk_run_typespec_validation` with the TypeSpec project root path.
+2. Run `tsp compile` for the typespec project.
 
 - **Pass** → proceed to Step 5.2.
 - **Fail** → fix with minimal, scoped changes, then re-run. Repeat until resolved.
