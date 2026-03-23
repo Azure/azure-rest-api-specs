@@ -464,6 +464,7 @@ interface DatasetsV1 {
 
   /** Get all dataset definitions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API name from swagger."
   @route("/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/definitions")
   @list
   @get
@@ -534,6 +535,7 @@ interface DatasetsV1 {
 
   /** Get all dataset versions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API name from swagger."
   @route("/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/versions")
   @list
   @get
@@ -704,6 +706,7 @@ interface DatasetControllerV2 {
 
   /** Get all dataset definitions (v1.2). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API name from swagger."
   @route("/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/definitions")
   @list
   @get
@@ -774,6 +777,7 @@ interface DatasetControllerV2 {
 
   /** Get all dataset versions (v1.2). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API name from swagger."
   @route("/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/versions")
   @list
   @get
