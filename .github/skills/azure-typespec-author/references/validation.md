@@ -2,10 +2,11 @@
 
 After applying changes (Step 4), run through all sub-steps below in order.
 
-| Sub-step | Action               | When                       |
-| -------- | -------------------- | -------------------------- |
-| 5.1      | TypeSpec Validation  | Always                     |
-| 5.2      | Example Verification | API Version Evolution only |
+| Sub-step | Action                | When                       |
+| -------- | --------------------- | -------------------------- |
+| 5.1      | TypeSpec Validation   | Always                     |
+| 5.2      | Output Generation     | Always                     |
+| 5.3      | Example Verification  | API Version Evolution only |
 
 ### Step 5.1: TypeSpec Validation
 
@@ -17,7 +18,14 @@ After applying changes (Step 4), run through all sub-steps below in order.
 
 > Never skip this step, even for trivial changes.
 
-### Step 5.2: Example Verification
+### Step 5.2: Output Generation
+
+Verify that the corresponding swagger (OpenAPI `.json`) file has been generated under the `{TypeSpec project root}/{version-status}/{target-version}/` directory.
+
+- **Swagger exists** → proceed to Step 5.3.
+- **Swagger missing** → run `tsp compile .` from the TypeSpec project root path to generate it, then verify the file is created.
+
+### Step 5.3: Example Verification
 
 > Applies only for API Version Evolution tasks
 
