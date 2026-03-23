@@ -1265,33 +1265,6 @@ namespace Azure.ResourceManager.Models {
   ManagedClusters,
   "java"
 );
-// TODO: drop the type replacement upon next major breaking change
-@@alternateType(ManagedClusterIdentity.type,
-  global.ResourceIdentityType,
-  "java"
-);
-/**
- * The type of identity used for the managed cluster. For more information see [use managed identities in AKS](https://docs.microsoft.com/azure/aks/use-managed-identity).
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by using enum in place of string union type"
-enum ResourceIdentityType {
-  /**
-   * Use an implicitly created system assigned managed identity to manage cluster resources. Master components in the control plane such as kube-controller-manager will use the system assigned managed identity to manipulate Azure resources.
-   */
-  SystemAssigned: "SystemAssigned",
-
-  /**
-   * Use a user-specified identity to manage cluster resources. Master components in the control plane such as kube-controller-manager will use the specified user assigned managed identity to manipulate Azure resources.
-   */
-  UserAssigned: "UserAssigned",
-
-  /**
-   * Do not use a managed identity for the Managed Cluster, service principal will be used instead.
-   */
-  None: "None",
-}
-
-// Java: additional casing fixes for backward compatibility
 // LocalDNSProfile
 @@clientName(LocalDNSProfile.vnetDNSOverrides, "vnetDnsOverrides", "java");
 @@clientName(LocalDNSProfile.kubeDNSOverrides, "kubeDnsOverrides", "java");
@@ -1326,3 +1299,28 @@ enum ResourceIdentityType {
   "enableCsiProxy",
   "java"
 );
+// TODO: drop the type replacement upon next major breaking change
+@@alternateType(ManagedClusterIdentity.type,
+  global.ResourceIdentityType,
+  "java"
+);
+/**
+ * The type of identity used for the managed cluster. For more information see [use managed identities in AKS](https://docs.microsoft.com/azure/aks/use-managed-identity).
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by using enum in place of string union type"
+enum ResourceIdentityType {
+  /**
+   * Use an implicitly created system assigned managed identity to manage cluster resources. Master components in the control plane such as kube-controller-manager will use the system assigned managed identity to manipulate Azure resources.
+   */
+  SystemAssigned: "SystemAssigned",
+
+  /**
+   * Use a user-specified identity to manage cluster resources. Master components in the control plane such as kube-controller-manager will use the specified user assigned managed identity to manipulate Azure resources.
+   */
+  UserAssigned: "UserAssigned",
+
+  /**
+   * Do not use a managed identity for the Managed Cluster, service principal will be used instead.
+   */
+  None: "None",
+}
