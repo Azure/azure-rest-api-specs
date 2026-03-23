@@ -22,6 +22,3 @@ using Microsoft.ServiceFabric;
   "ManagedIdentityType",
   "java"
 );
-
-@@clientName(ServiceResource.eTag, "etag", "java");
-@@clientName(ServiceResourceUpdate.eTag, "etag", "java");
