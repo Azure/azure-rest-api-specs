@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./HostPool.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -39,15 +41,9 @@ interface SessionHostConfigurations {
    * Update a SessionHostConfiguration.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is ArmCustomPatchAsyncWithOptionalBody<
     SessionHostConfiguration,
-    SessionHostConfigurationPatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot sessionHostConfiguration?: SessionHostConfigurationPatch;
-    }
+    SessionHostConfigurationPatch
   >;
 
   /**
@@ -71,4 +67,7 @@ interface SessionHostConfigurations {
 );
 @@doc(SessionHostConfiguration.properties,
   "Detailed properties for SessionHostConfiguration"
+);
+@@clientName(SessionHostConfigurations.update::parameters.body,
+  "sessionHostConfiguration"
 );
