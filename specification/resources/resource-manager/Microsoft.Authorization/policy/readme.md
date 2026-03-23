@@ -49,6 +49,11 @@ These settings apply only when `--tag=package-policy-2026-01-preview` is specifi
 ```yaml $(tag) == 'package-policy-2026-01-preview'
 input-file:
 - preview/2026-01-01-preview/openapi.json
+suppressions:
+  - code: GuidUsage
+    from: openapi.json
+    reason: "policyAssignmentInstanceId is a server-generated, read-only GUID in the established service contract"
+    where: $.definitions["Azure.Core.uuid"].format
 
 # Needed when there is more than one input file
 override-info:
@@ -928,12 +933,6 @@ directive:
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: policyAssignments.json
     reason: "Policy assignments can have a managed identity associated with them. This requires a location."
-
-suppressions:
-  - code: GuidUsage
-    from: preview/2026-01-01-preview/openapi.json
-    reason: "policyAssignmentInstanceId is a server-generated, read-only GUID in the established service contract"
-    where: $.definitions["Azure.Core.uuid"].format
 ```
 
 ---
