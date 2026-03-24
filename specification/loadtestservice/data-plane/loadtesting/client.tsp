@@ -170,15 +170,6 @@ interface AdministrationOperations {
   deleteTestFile is LoadTestAdministration.deleteTestFile;
   deleteTest is LoadTestAdministration.deleteTest;
 
-  @removed(APIVersions.v2026_04_01)
-  createOrUpdateTestProfile is TestProfileAdministration.createOrUpdateTestProfile;
-  @removed(APIVersions.v2026_04_01)
-  deleteTestProfile is TestProfileAdministration.deleteTestProfile;
-  @removed(APIVersions.v2026_04_01)
-  getTestProfile is TestProfileAdministration.getTestProfile;
-  @removed(APIVersions.v2026_04_01)
-  listTestProfiles is TestProfileAdministration.listTestProfiles;
-
   createOrUpdateTrigger is TriggerAdministration.createOrUpdateTrigger;
   deleteTrigger is TriggerAdministration.deleteTrigger;
   getTrigger is TriggerAdministration.getTrigger;
@@ -228,16 +219,6 @@ interface TestRunOperations {
   listTestRuns is LoadTestRun.listTestRuns;
   @clientName("stopTestRun", "javascript,python,java,csharp,go")
   stop is LoadTestRun.stop;
-
-  @clientName("begin_test_profile_run", "python")
-  @access(Access.internal, "python,csharp,java") // NOTE: These are overridden to LRO methods so original methods are made internal
-  createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
-  deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
-  getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
-  listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
-  @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
-  @action("stop")
-  stopTestProfileRun is TestProfileRunAdministration.stop;
 
   getLatestTestRunInsights is LoadTestRun.getLatestInsights;
   updateLatestTestRunInsights is LoadTestRun.updateLatestInsights;
