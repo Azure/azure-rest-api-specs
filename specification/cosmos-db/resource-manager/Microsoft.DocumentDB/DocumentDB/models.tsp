@@ -1727,6 +1727,13 @@ model DatabaseAccountGetProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   throughputPoolMaxConsumableRUs?: int64;
+
+  /**
+   * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
+   */
+  @added(Versions.v2026_03_15)
+  @removed(Versions.v2026_04_01_preview)
+  enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
 }
 
 /**
@@ -2491,6 +2498,13 @@ model DatabaseAccountUpdateProperties {
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
   enableAllVersionsAndDeletesChangeFeed?: boolean;
+
+  /**
+   * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
+   */
+  @added(Versions.v2026_03_15)
+  @removed(Versions.v2026_04_01_preview)
+  enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
 }
 
 /**
@@ -2713,6 +2727,13 @@ model DatabaseAccountCreateUpdateProperties {
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
   enableAllVersionsAndDeletesChangeFeed?: boolean;
+
+  /**
+   * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
+   */
+  @added(Versions.v2026_03_15)
+  @removed(Versions.v2026_04_01_preview)
+  enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
 }
 
 /**
