@@ -36,26 +36,6 @@ using Microsoft.Storage;
   "javascript"
 );
 
-// should only be used in Java
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum Action {
-  ALLOW: "Allow",
-}
-@@alternateType(IPRule.action, Action, "java");
-@@alternateType(VirtualNetworkRule.action, Action, "java");
-
-@@alternateType(TriggerParameters.intervalUnit, IntervalUnitEnum, "java");
-@@alternateType(TriggerParametersUpdate.intervalUnit, IntervalUnitEnum, "java");
-
-@@alternateType(ExecutionTrigger.type, TriggerTypeEnum, "java");
-@@alternateType(ExecutionTriggerUpdate.type, TriggerTypeEnum, "java");
-
-@@usage(StorageAccount,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
-  "java"
-);
-
 @@clientName(ETagHeader.eTag, "etag", "java");
 
 // Fix client parameter order.
@@ -97,7 +77,27 @@ op getDeletedAccountCustomized(
   "python"
 );
 
-// Mirror enums for Java backward compatibility (union -> enum)
+@@usage(StorageAccount,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "java"
+);
+
+// TODO: drop the type replacement upon next major breaking change
+@@alternateType(IPRule.action, Action, "java");
+@@alternateType(VirtualNetworkRule.action, Action, "java");
+
+@@alternateType(TriggerParameters.intervalUnit, IntervalUnitEnum, "java");
+@@alternateType(TriggerParametersUpdate.intervalUnit, IntervalUnitEnum, "java");
+
+@@alternateType(ExecutionTrigger.type, TriggerTypeEnum, "java");
+@@alternateType(ExecutionTriggerUpdate.type, TriggerTypeEnum, "java");
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum Action {
+  ALLOW: "Allow",
+}
+
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by using enum in place of string union type"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror enum for backward compatibility"
 enum IntervalUnitEnum {
