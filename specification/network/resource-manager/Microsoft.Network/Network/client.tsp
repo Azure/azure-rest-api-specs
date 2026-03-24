@@ -1165,3 +1165,7 @@ op replaceprivateDnsZoneGroupsList(
   50,
   "python"
 );
+@@alternateType(Microsoft.Network.EffectiveNetworkSecurityGroup,
+  string,
+  "javascript"
+);
