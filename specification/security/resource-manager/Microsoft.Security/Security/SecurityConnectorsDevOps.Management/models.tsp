@@ -340,7 +340,19 @@ union DesiredOnboardingState {
 /**
  * List of RP resources which supports pagination.
  */
-model AzureDevOpsOrgListResponse is Azure.Core.Page<AzureDevOpsOrg>;
+model AzureDevOpsOrgListResponse {
+  /**
+   * The AzureDevOpsOrg items on this page.
+   */
+  @pageItems
+  value?: AzureDevOpsOrg[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * Azure DevOps Organization properties.
@@ -463,7 +475,19 @@ model TargetBranchConfiguration {
 /**
  * List of RP resources which supports pagination.
  */
-model AzureDevOpsProjectListResponse is Azure.Core.Page<AzureDevOpsProject>;
+model AzureDevOpsProjectListResponse {
+  /**
+   * The AzureDevOpsProject items on this page.
+   */
+  @pageItems
+  value?: AzureDevOpsProject[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * Azure DevOps Project properties.
@@ -526,8 +550,19 @@ model AzureDevOpsProjectProperties {
 /**
  * List of RP resources which supports pagination.
  */
-model AzureDevOpsRepositoryListResponse
-  is Azure.Core.Page<AzureDevOpsRepository>;
+model AzureDevOpsRepositoryListResponse {
+  /**
+   * The AzureDevOpsRepository items on this page.
+   */
+  @pageItems
+  value?: AzureDevOpsRepository[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * Azure DevOps Repository properties.
@@ -607,7 +642,19 @@ model AzureDevOpsRepositoryProperties {
 /**
  * List of RP resources which supports pagination.
  */
-model DevOpsConfigurationListResponse is Azure.Core.Page<DevOpsConfiguration>;
+model DevOpsConfigurationListResponse {
+  /**
+   * The DevOpsConfiguration items on this page.
+   */
+  @pageItems
+  value?: DevOpsConfiguration[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * DevOps Configuration properties.
@@ -749,7 +796,19 @@ model InventoryList {
 /**
  * List of RP resources which supports pagination.
  */
-model GitHubOwnerListResponse is Azure.Core.Page<GitHubOwner>;
+model GitHubOwnerListResponse {
+  /**
+   * The GitHubOwner items on this page.
+   */
+  @pageItems
+  value?: GitHubOwner[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * GitHub Owner properties.
@@ -808,7 +867,19 @@ model GitHubOwnerProperties {
 /**
  * List of RP resources which supports pagination.
  */
-model GitHubRepositoryListResponse is Azure.Core.Page<GitHubRepository>;
+model GitHubRepositoryListResponse {
+  /**
+   * The GitHubRepository items on this page.
+   */
+  @pageItems
+  value?: GitHubRepository[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * GitHub Repository properties.
@@ -900,7 +971,19 @@ model IssueCreationRequest {
 /**
  * List of RP resources which supports pagination.
  */
-model GitLabGroupListResponse is Azure.Core.Page<GitLabGroup>;
+model GitLabGroupListResponse {
+  /**
+   * The GitLabGroup items on this page.
+   */
+  @pageItems
+  value?: GitLabGroup[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * GitLab Group properties.
@@ -969,7 +1052,19 @@ model GitLabGroupProperties {
 /**
  * List of RP resources which supports pagination.
  */
-model GitLabProjectListResponse is Azure.Core.Page<GitLabProject>;
+model GitLabProjectListResponse {
+  /**
+   * The GitLabProject items on this page.
+   */
+  @pageItems
+  value?: GitLabProject[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * GitLab Project properties.

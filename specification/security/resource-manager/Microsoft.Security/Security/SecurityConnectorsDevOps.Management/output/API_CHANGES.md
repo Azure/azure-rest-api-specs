@@ -183,19 +183,6 @@
 | `definitions.GitLabGroup.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"}` |
 | `definitions.GitLabProject.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"}` |
 
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureDevOpsOrgListResponse.required__added` | added | `["value"]` |
-| `definitions.AzureDevOpsProjectListResponse.required__added` | added | `["value"]` |
-| `definitions.AzureDevOpsRepositoryListResponse.required__added` | added | `["value"]` |
-| `definitions.DevOpsConfigurationListResponse.required__added` | added | `["value"]` |
-| `definitions.GitHubOwnerListResponse.required__added` | added | `["value"]` |
-| `definitions.GitHubRepositoryListResponse.required__added` | added | `["value"]` |
-| `definitions.GitLabGroupListResponse.required__added` | added | `["value"]` |
-| `definitions.GitLabProjectListResponse.required__added` | added | `["value"]` |
-
 ## Modified Values
 
 | Path | Old Value | New Value |
