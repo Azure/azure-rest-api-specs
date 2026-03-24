@@ -102,23 +102,24 @@ union CreatedByType {
 /**
  * The identity type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum AKSIdentityType {
+union AKSIdentityType {
   /**
    * SystemAssigned identity
    */
-  SystemAssigned,
+  SystemAssigned: "SystemAssigned",
 
   /**
    * UserAssigned identity
    */
-  UserAssigned,
+  UserAssigned: "UserAssigned",
 
   /**
    * Workload identity
    */
   @added(Versions.v2025_03_01)
-  Workload,
+  Workload: "Workload",
+
+  string,
 }
 
 /**
