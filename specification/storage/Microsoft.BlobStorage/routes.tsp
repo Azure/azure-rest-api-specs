@@ -883,7 +883,7 @@ interface Blob {
       ...VersionIdResponseHeader;
       ...IsCurrentVersionResponseHeader;
       ...TagCountResponseHeader;
-      ...ExpiryTimeHeader;
+      ...ExpiryTimeResponseHeader;
       ...IsSealedResponseHeader;
       ...RehydratePriorityHeader;
       ...LastAccessedResponseHeader;
@@ -950,7 +950,7 @@ interface Blob {
     {
       ...TimeoutParameter;
       ...BlobExpiryOptionsParameter;
-      ...ExpiryTimeHeader;
+      ...ExpiryTimeParameter;
     },
     {
       ...EtagResponseHeader;

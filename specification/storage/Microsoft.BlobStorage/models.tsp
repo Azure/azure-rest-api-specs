@@ -1565,8 +1565,17 @@ alias RehydratePriorityHeader = {
   rehydratePriority?: RehydratePriority;
 };
 
+/** The expires parameter. */
+alias ExpiryTimeParameter = {
+  /** The time this blob will expire. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @header("x-ms-expiry-time")
+  expiresOn?: utcDateTime;
+};
+
 /** The expires on response header. */
-alias ExpiryTimeHeader = {
+alias ExpiryTimeResponseHeader = {
   /** The time this blob will expire. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
