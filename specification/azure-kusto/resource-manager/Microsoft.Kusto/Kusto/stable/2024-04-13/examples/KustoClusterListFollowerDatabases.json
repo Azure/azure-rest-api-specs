@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "api-version": "2024-04-13",
-    "clusterName": "kustoCluster",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
     "resourceGroupName": "kustorptest",
-    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+    "clusterName": "kustoCluster",
+    "api-version": "2024-04-13"
   },
   "responses": {
     "200": {
@@ -19,32 +19,30 @@
             "attachedDatabaseConfigurationName": "attachedDbConfiguration2",
             "clusterResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/follower4",
             "databaseName": "db1",
-            "databaseShareOrigin": "Direct",
             "tableLevelSharingProperties": {
-              "externalTablesToExclude": [
-                "ExternalTable2"
-              ],
-              "externalTablesToInclude": [
-                "ExternalTable1"
-              ],
-              "materializedViewsToExclude": [
-                "MaterializedViewTable2"
-              ],
-              "materializedViewsToInclude": [
-                "MaterializedViewTable1"
+              "tablesToInclude": [
+                "Table1"
               ],
               "tablesToExclude": [
                 "Table2"
               ],
-              "tablesToInclude": [
-                "Table1"
+              "externalTablesToInclude": [
+                "ExternalTable1"
+              ],
+              "externalTablesToExclude": [
+                "ExternalTable2"
+              ],
+              "materializedViewsToInclude": [
+                "MaterializedViewTable1"
+              ],
+              "materializedViewsToExclude": [
+                "MaterializedViewTable2"
               ]
-            }
+            },
+            "databaseShareOrigin": "Direct"
           }
         ]
       }
     }
-  },
-  "operationId": "Clusters_ListFollowerDatabases",
-  "title": "KustoClusterListFollowerDatabases"
+  }
 }

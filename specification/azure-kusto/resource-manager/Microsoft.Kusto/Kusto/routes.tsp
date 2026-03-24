@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Kusto;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ClustersOperationGroup {
   /**
    * Lists eligible SKUs for Kusto resource provider.
@@ -39,7 +39,7 @@ interface ClustersOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SkusOperationGroup {
   /**
    * Lists eligible region SKUs for Kusto resource provider by Azure region.
@@ -55,7 +55,7 @@ interface SkusOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface OperationsResultsOperationGroup {
   /**
@@ -81,6 +81,7 @@ interface OperationsResultsOperationGroup {
   /**
    * Returns operation results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("OperationResults")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/locations/{location}/operationResults/{operationId}?operationResultResponseType=Location")
@@ -104,7 +105,6 @@ interface OperationsResultsOperationGroup {
   ): OkResponse | ArmAcceptedResponse<
     Message = "Operation is still in progress.",
     ExtraHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 }

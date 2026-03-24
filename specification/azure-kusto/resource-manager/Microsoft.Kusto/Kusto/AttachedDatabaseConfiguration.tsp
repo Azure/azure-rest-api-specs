@@ -27,7 +27,7 @@ model AttachedDatabaseConfiguration
   /**
    * Resource location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
@@ -41,8 +41,8 @@ interface AttachedDatabaseConfigurations {
   /**
    * Creates or updates an attached database configuration.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AttachedDatabaseConfiguration,
     Response = ArmResourceUpdatedResponse<AttachedDatabaseConfiguration> | ArmResourceCreatedResponse<AttachedDatabaseConfiguration> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AttachedDatabaseConfiguration> &
@@ -56,7 +56,7 @@ interface AttachedDatabaseConfigurations {
   /**
    * Deletes the attached database configuration with the given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     AttachedDatabaseConfiguration,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &

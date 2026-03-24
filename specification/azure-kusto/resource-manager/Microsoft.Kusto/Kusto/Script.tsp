@@ -35,8 +35,8 @@ interface Scripts {
   /**
    * Creates a Kusto database script.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Scripts")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Script,
@@ -51,7 +51,7 @@ interface Scripts {
   /**
    * Updates a database script.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Scripts")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -71,7 +71,7 @@ interface Scripts {
   /**
    * Deletes a Kusto database script.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Scripts")
   delete is ArmResourceDeleteWithoutOkAsync<
     Script,

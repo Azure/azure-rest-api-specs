@@ -1,4 +1,4 @@
-﻿import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -24,7 +24,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
   /**
    * The SKU of the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: AzureSku;
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
@@ -32,10 +32,10 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
   /**
    * The identity of the cluster, if configured.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Identity;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
@@ -75,7 +75,7 @@ interface Clusters {
   /**
    * Update a Kusto cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Clusters")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -108,7 +108,7 @@ interface Clusters {
   /**
    * Deletes a Kusto cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Clusters")
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,

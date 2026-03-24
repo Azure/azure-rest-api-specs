@@ -1,49 +1,47 @@
 {
   "parameters": {
-    "api-version": "2024-04-13",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
     "clusterName": "kustoclusterrptest4",
+    "privateEndpointConnectionName": "privateEndpointTest",
+    "api-version": "2024-04-13",
     "parameters": {
       "properties": {
         "privateLinkServiceConnectionState": {
-          "description": "Approved by johndoe@contoso.com",
-          "status": "Approved"
+          "status": "Approved",
+          "description": "Approved by johndoe@contoso.com"
         }
       }
-    },
-    "privateEndpointConnectionName": "privateEndpointTest",
-    "resourceGroupName": "kustorptest",
-    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/privateEndpointConnections/privateEndpointTest",
         "name": "privateEndpointTest",
         "type": "Microsoft.Kusto/clusters/privateEndpointConnections",
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/privateEndpointConnections/privateEndpointTest",
         "properties": {
           "privateLinkServiceConnectionState": {
+            "status": "Approved",
             "description": "Approved by johndoe@contoso.com",
-            "actionsRequired": "None",
-            "status": "Approved"
+            "actionsRequired": "None"
           }
         }
       }
     },
     "201": {
       "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/privateEndpointConnections/privateEndpointTest",
         "name": "privateEndpointTest",
         "type": "Microsoft.Kusto/clusters/privateEndpointConnections",
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/privateEndpointConnections/privateEndpointTest",
         "properties": {
           "privateLinkServiceConnectionState": {
+            "status": "Approved",
             "description": "Approved by johndoe@contoso.com",
-            "actionsRequired": "None",
-            "status": "Approved"
+            "actionsRequired": "None"
           }
         }
       }
     }
-  },
-  "operationId": "PrivateEndpointConnections_CreateOrUpdate",
-  "title": "Approve or reject a private endpoint connection with a given name."
+  }
 }
