@@ -13,3 +13,4 @@ using Azure.ClientGenerator.Core;
   "publicIpType",
   "java"
 );
+@@access(Microsoft.Kusto.CalloutPoliciesList, Access.public, "java");
