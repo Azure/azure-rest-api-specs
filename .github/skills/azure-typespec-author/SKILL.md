@@ -15,7 +15,7 @@ compatibility:
 | Tool                                                   | Purpose                                                   |
 | ------------------------------------------------------ | --------------------------------------------------------- |
 | `azure-sdk-mcp:azsdk_typespec_generate_authoring_plan` | Generate grounded authoring plan (General Authoring only) |
-| `azure-sdk-mcp:azsdk_run_typespec_validation`          | Validate TypeSpec compilation + lint                      |
+| `azure-sdk-mcp:azsdk_run_typespec_validation`          | Validate TypeSpec                     |
 
 **Prerequisite:** `azure-sdk-mcp` server must be running.
 
@@ -24,7 +24,7 @@ compatibility:
 - **Always follow the full workflow** — even seemingly simple changes (e.g. adding a default value) can require complex versioning decorator changes. Never skip steps.
 - **Mandatory for ALL `.tsp` edits** — even a single `?` change can be breaking.
 - **Minimal, scoped edits** — only change what the request requires.
-- **Always validate** — run [validation](references/validation.md) after every edit.
+- **Always validate** — run every steps in [validation](references/validation.md) after every edit. 
 - **Always cite references** — provide links that justify the approach.
 - **Follow the authoring plan exactly** — code changes in Step 4 MUST follow the authoring plan generated in Step 3. Do not deviate by referring to existing code patterns in the TypeSpec project; the authoring plan is the single source of truth for what to change.
 
@@ -42,7 +42,7 @@ Copy and update as you progress:
 - [ ] Step 2: Collected intake inputs
 - [ ] Step 3: Retrieved authoring plan
 - [ ] Step 4: Applied changes
-- [ ] Step 5: Validated (compilation passed)
+- [ ] Step 5: Validated with TypeSpec validation and `tsp compile .`
 
 ### Step 1: Analyze & Classify
 
@@ -52,7 +52,7 @@ Classify as exactly one:
 
 | Task Type                 | When                                                                      | `azsdk_typespec_generate_authoring_plan` |
 | ------------------------- | ------------------------------------------------------------------------- | ---------------------------------------- |
-| **API Version Evolution** | Adding a new preview or stable API version to an existing ARM service.    | **MUST NOT** call                        |
+| **API Version Evolution** | Adding a new preview or stable API version to an existing ARM service. (ARM only)    | **MUST NOT** call                        |
 | **General Authoring**     | Any other `.tsp` change (resources, operations, models, properties, etc.) | **MUST** call                            |
 
 State your classification explicitly before proceeding.
@@ -96,7 +96,7 @@ Confirm uncertainties with the user, then make minimal `.tsp` edits.
 
 ### Step 5: Validate
 
-See [validation guide](references/validation.md) for sub-steps (TypeSpec compilation, example verification).
+See [validation guide](references/validation.md) for sub-steps. **All sub-steps are mandatory** — you must run both TypeSpec validation (5.1) AND `tsp compile .` (5.2) every time, plus example verification (5.3) for API Version Evolution tasks.
 
 ---
 
