@@ -31,6 +31,17 @@ openapi-type: arm
 tag: package-2025-05-01
 ```
 
+### Tag: package-2025-07-01
+
+These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01'
+suppressions:
+  - code: ParametersInPointGet
+    from: loadBalancer.json
+    reason: Want to add extra parameter for GET Load Balancer operation. This parameter "detailLevel" is extremely important so customers can query big resources, without having a huge performance impact on our RP infrastructure.
+```
+
 ### Tag: package-2025-05-01
 
 These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
