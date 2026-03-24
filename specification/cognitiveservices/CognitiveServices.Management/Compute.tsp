@@ -72,12 +72,31 @@ interface Computes {
   /**
    * Creates or updates a compute associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "PUT response codes for 'createOrUpdate' match existing service endpoint behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'createOrUpdate' returns no response body, matching existing service endpoint behavior"
   @tag("Computes")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Compute,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Compute> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<Compute> | ArmResourceCreatedResponse<Compute> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Compute> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: Compute;
+    })
+  >;
+
+  /**
+   * Updates a compute associated with the Cognitive Services account.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'update' returns no response body, matching existing service endpoint behavior"
+  @tag("Computes")
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    Compute,
+    PatchModel = Compute,
+    Response = ArmResponse<Compute> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Compute>> & {
+      @bodyRoot
+      _: Compute;
+    })
   >;
 
   /**
@@ -100,3 +119,4 @@ interface Computes {
 );
 @@doc(Compute.properties, "Properties of Cognitive Services compute.");
 @@doc(Computes.createOrUpdate::parameters.resource, "The compute properties.");
+@@doc(Computes.update::parameters.properties, "The compute properties to update.");

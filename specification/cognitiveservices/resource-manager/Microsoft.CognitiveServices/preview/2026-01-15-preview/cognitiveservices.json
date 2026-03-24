@@ -2567,8 +2567,30 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource 'Compute' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Compute"
+            }
+          },
+          "201": {
+            "description": "Resource 'Compute' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Compute"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/Compute"
+            },
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -2591,6 +2613,89 @@
         "x-ms-examples": {
           "PutCompute": {
             "$ref": "./examples/PutCompute.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Compute"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Computes_Update",
+        "tags": [
+          "Computes"
+        ],
+        "description": "Updates a compute associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "computeName",
+            "in": "path",
+            "description": "The name of the compute associated with the Cognitive Services Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The compute properties to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Compute"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Compute"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/Compute"
+            },
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateCompute": {
+            "$ref": "./examples/UpdateCompute.json"
           }
         },
         "x-ms-long-running-operation-options": {

@@ -1,35 +1,15 @@
 {
-  "operationId": "Computes_CreateOrUpdate",
-  "title": "PutCompute",
+  "operationId": "Computes_Update",
+  "title": "UpdateCompute",
   "parameters": {
     "api-version": "2026-01-15-preview",
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "rgcognitiveservices",
     "accountName": "myAccount",
     "computeName": "myCompute",
-    "resource": {
-      "properties": {
-        "pools": [
-          {
-            "name": "default",
-            "vmPriority": "Regular",
-            "instanceType": "Standard_DS3_v2",
-            "nodeCount": 2
-          }
-        ],
-        "subnetArmId": "ozalbnhbppvkefmxpwiszks"
-      },
-      "location": "zdacaocjwjdkj",
+    "properties": {
       "tags": {
-        "key3793": "dwrwfzfuhusjx",
-        "key7828": "nyraqncqyebtijzzrfyglafokf"
-      },
-      "kind": "zerer",
-      "identity": {
-        "type": "None",
-        "userAssignedIdentities": {
-          "key1470": {}
-        }
+        "key3793": "updatedValue"
       }
     }
   },
@@ -46,15 +26,14 @@
             }
           ],
           "subnetArmId": "ozalbnhbppvkefmxpwiszks",
-          "provisioningState": "Accepted",
+          "provisioningState": "Succeeded",
           "errors": [],
           "creationTime": "2026-03-24T11:39:39.795Z"
         },
         "etag": "jjtrxtjyyfdd",
         "location": "zdacaocjwjdkj",
         "tags": {
-          "key3793": "dwrwfzfuhusjx",
-          "key7828": "nyraqncqyebtijzzrfyglafokf"
+          "key3793": "updatedValue"
         },
         "kind": "zerer",
         "identity": {
@@ -81,7 +60,10 @@
         }
       }
     },
-    "201": {
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      },
       "body": {
         "properties": {
           "pools": [
@@ -100,8 +82,7 @@
         "etag": "jjtrxtjyyfdd",
         "location": "zdacaocjwjdkj",
         "tags": {
-          "key3793": "dwrwfzfuhusjx",
-          "key7828": "nyraqncqyebtijzzrfyglafokf"
+          "key3793": "updatedValue"
         },
         "kind": "zerer",
         "identity": {
