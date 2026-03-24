@@ -484,6 +484,23 @@ namespace CombineClient;
   "java"
 );
 
+// HTTP → Http casing overrides for Java checkstyle compliance
+@@clientName(Microsoft.Network.HttpConfiguration, "HttpConfiguration", "java");
+@@clientName(Microsoft.Network.HttpConfigurationMethod,
+  "HttpConfigurationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.HttpHeader, "HttpHeader", "java");
+@@clientName(Microsoft.Network.HttpMethod, "HttpMethod", "java");
+@@clientName(Microsoft.Network.ConnectionMonitorHttpConfiguration.preferHTTPS,
+  "preferHttps",
+  "java"
+);
+@@clientName(Microsoft.Network.ProtocolConfiguration.HTTPConfiguration,
+  "httpConfiguration",
+  "java"
+);
+
 // Operation renames for Java (from readme.java.md)
 @@clientLocation(Microsoft.Network.BgpConnections.get,
   "VirtualHubBgpConnections",
