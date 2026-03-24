@@ -90,7 +90,7 @@ alias DefaultVirtualMachines = {
 @armResourceOperations(#{ omitTags: true })
 interface VirtualMachineBulkOperations {
   // -------------- Routes -------------
- /** BulkDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** BulkDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
   @armResourceCollectionAction
