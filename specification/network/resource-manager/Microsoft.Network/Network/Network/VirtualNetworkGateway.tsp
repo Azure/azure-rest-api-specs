@@ -191,7 +191,6 @@ interface VirtualNetworkGateways {
    * The GetBgpPeerStatus operation retrieves the status of all BGP peers.
    */
   @tag("VirtualNetworkGateways")
-  @list
   getBgpPeerStatus is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
@@ -236,7 +235,6 @@ interface VirtualNetworkGateways {
    * This operation retrieves a list of routes the virtual network gateway has learned, including routes learned from BGP peers.
    */
   @tag("VirtualNetworkGateways")
-  @list
   getLearnedRoutes is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
@@ -248,7 +246,6 @@ interface VirtualNetworkGateways {
    * This operation retrieves a list of routes the virtual network gateway is advertising to the specified peer.
    */
   @tag("VirtualNetworkGateways")
-  @list
   getAdvertisedRoutes is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
@@ -452,7 +449,6 @@ interface VirtualNetworkGateways {
    * Get VPN client connection health detail per P2S client connection of the virtual network gateway in the specified resource group.
    */
   @tag("VirtualNetworkGateways")
-  @list
   @action("getVpnClientConnectionHealth")
   getVpnclientConnectionHealth is ArmResourceActionAsync<
     VirtualNetworkGateway,

@@ -230,6 +230,10 @@ using Microsoft.GuestConfiguration;
   "GetReport",
   "csharp"
 );
+@@clientName(GuestConfigurationAssignmentsOperationGroup.rGList,
+  "GetGuestConfigurationAssignments",
+  "csharp"
+);
 
 // ============================================================================
 // Mark report list operations as pageable for backward compatibility

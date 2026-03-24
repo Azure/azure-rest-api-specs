@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Resource Graph",
+    "version": "2021-06-01-preview",
     "description": "Azure Resource Graph API Reference",
-    "version": "2021-06-01-preview"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,148 +30,81 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "History"
+    }
+  ],
   "paths": {
     "/providers/Microsoft.ResourceGraph/resourcesHistory": {
       "post": {
-        "description": "List all snapshots of a resource for a given time interval.",
         "operationId": "ResourcesHistory",
         "tags": [
           "History"
         ],
+        "description": "List all snapshots of a resource for a given time interval.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "name": "request",
             "in": "body",
+            "description": "The request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResourcesHistoryRequest"
-            },
-            "description": "Request specifying the query and its options."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ResourcesHistoryResult"
+              "type": "object",
+              "additionalProperties": {}
             }
           },
           "default": {
-            "description": "A response indicating an error.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ResourceGraphCommon.ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Resource History Query": {
-            "$ref": "./examples/ResourcesHistoryGet.json"
-          },
           "Resource History Management Group scope Query": {
             "$ref": "./examples/ResourcesHistoryMgsGet.json"
+          },
+          "Resource History Query": {
+            "$ref": "./examples/ResourcesHistoryGet.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "ResourcesHistoryResult": {
+    "ResourceGraphCommon.DateTimeInterval": {
       "type": "object",
-      "additionalProperties": {}
-    },
-    "ResourcesHistoryRequest": {
-      "description": "Describes a history request to be executed.",
-      "type": "object",
-      "properties": {
-        "subscriptions": {
-          "description": "Azure subscriptions against which to execute the query.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Subscription Id."
-          }
-        },
-        "query": {
-          "description": "The resources query.",
-          "type": "string"
-        },
-        "options": {
-          "description": "The history request evaluation options",
-          "$ref": "#/definitions/ResourcesHistoryRequestOptions"
-        },
-        "managementGroups": {
-          "description": "Azure management groups against which to execute the query. Example: [ 'mg1', 'mg2' ]",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "The name of Management group."
-          }
-        }
-      }
-    },
-    "ResourcesHistoryRequestOptions": {
-      "description": "The options for history request evaluation",
-      "type": "object",
-      "properties": {
-        "interval": {
-          "description": "The time interval used to fetch history.",
-          "$ref": "#/definitions/DateTimeInterval"
-        },
-        "$top": {
-          "description": "The maximum number of rows that the query should return. Overrides the page size when ```$skipToken``` property is present.",
-          "format": "int32",
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 1000
-        },
-        "$skip": {
-          "description": "The number of rows to skip from the beginning of the results. Overrides the next page offset when ```$skipToken``` property is present.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0
-        },
-        "$skipToken": {
-          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
-          "type": "string"
-        },
-        "resultFormat": {
-          "description": "Defines in which format query result returned.",
-          "type": "string",
-          "enum": [
-            "table",
-            "objectArray"
-          ],
-          "x-ms-enum": {
-            "name": "ResultFormat",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "DateTimeInterval": {
       "description": "An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.",
-      "type": "object",
       "properties": {
         "start": {
-          "description": "A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error."
         },
         "end": {
-          "description": "A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error."
         }
       },
       "required": [
@@ -174,23 +112,9 @@
         "end"
       ]
     },
-    "ErrorResponse": {
-      "title": "Error response.",
+    "ResourceGraphCommon.Error": {
       "type": "object",
-      "description": "An error response from the API.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error information."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Error": {
       "title": "Error info.",
-      "type": "object",
       "description": "Error details.",
       "properties": {
         "code": {
@@ -205,8 +129,9 @@
           "type": "array",
           "description": "Error details",
           "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          }
+            "$ref": "#/definitions/ResourceGraphCommon.ErrorDetails"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -214,9 +139,10 @@
         "message"
       ]
     },
-    "ErrorDetails": {
-      "title": "Error details.",
+    "ResourceGraphCommon.ErrorDetails": {
       "type": "object",
+      "title": "Error details.",
+      "description": "Error details.",
       "properties": {
         "code": {
           "type": "string",
@@ -227,22 +153,109 @@
           "description": "A human readable error message."
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      },
       "required": [
         "code",
         "message"
+      ],
+      "additionalProperties": {}
+    },
+    "ResourceGraphCommon.ErrorResponse": {
+      "type": "object",
+      "title": "Error response.",
+      "description": "An error response from the API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ResourceGraphCommon.Error",
+          "description": "Error information."
+        }
+      },
+      "required": [
+        "error"
       ]
+    },
+    "ResourceGraphCommon.ResultFormat": {
+      "type": "string",
+      "description": "Defines in which format query result returned.",
+      "enum": [
+        "table",
+        "objectArray"
+      ],
+      "x-ms-enum": {
+        "name": "ResultFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "table",
+            "value": "table",
+            "description": "table"
+          },
+          {
+            "name": "objectArray",
+            "value": "objectArray",
+            "description": "objectArray"
+          }
+        ]
+      }
+    },
+    "ResourcesHistoryRequest": {
+      "type": "object",
+      "description": "Describes a history request to be executed.",
+      "properties": {
+        "subscriptions": {
+          "type": "array",
+          "description": "Azure subscriptions against which to execute the query.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "query": {
+          "type": "string",
+          "description": "The resources query."
+        },
+        "options": {
+          "$ref": "#/definitions/ResourcesHistoryRequestOptions",
+          "description": "The history request evaluation options"
+        },
+        "managementGroups": {
+          "type": "array",
+          "description": "Azure management groups against which to execute the query. Example: [ 'mg1', 'mg2' ]",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourcesHistoryRequestOptions": {
+      "type": "object",
+      "description": "The options for history request evaluation",
+      "properties": {
+        "interval": {
+          "$ref": "#/definitions/ResourceGraphCommon.DateTimeInterval",
+          "description": "The time interval used to fetch history."
+        },
+        "$top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of rows that the query should return. Overrides the page size when ```$skipToken``` property is present.",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "$skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of rows to skip from the beginning of the results. Overrides the next page offset when ```$skipToken``` property is present.",
+          "minimum": 0
+        },
+        "$skipToken": {
+          "type": "string",
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query."
+        },
+        "resultFormat": {
+          "$ref": "#/definitions/ResourceGraphCommon.ResultFormat",
+          "description": "Defines in which format query result returned."
+        }
+      }
     }
   },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Api Version."
-    }
-  }
+  "parameters": {}
 }

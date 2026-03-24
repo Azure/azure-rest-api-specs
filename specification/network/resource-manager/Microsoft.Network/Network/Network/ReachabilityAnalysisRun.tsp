@@ -78,40 +78,42 @@ interface ReachabilityAnalysisRuns {
   @summary("Gets list of Reachability Analysis Runs.")
   list is ArmResourceListByParent<
     ReachabilityAnalysisRun,
-    Parameters = {
-      /**
-       * Optional skip token.
-       */
-      @query("skipToken")
-      skipToken?: string;
-
-      /**
-       * Optional num entries to skip.
-       */
-      @query("skip")
-      skip?: int32 = 0;
-
-      /**
-       * Optional num entries to show.
-       */
-      @query("top")
-      top?: int32 = 50;
-
-      /**
-       * Optional key by which to sort.
-       */
-      @query("sortKey")
-      sortKey?: string;
-
-      /**
-       * Optional sort value for pagination.
-       */
-      @query("sortValue")
-      sortValue?: string;
-    },
+    Parameters = ReachabilityAnalysisRunsListParameters,
     Error = CommonErrorResponse
   >;
 }
+
+alias ReachabilityAnalysisRunsListParameters = {
+  /**
+   * Optional skip token.
+   */
+  @query("skipToken")
+  skipToken?: string;
+
+  /**
+   * Optional num entries to skip.
+   */
+  @query("skip")
+  skip?: int32 = 0;
+
+  /**
+   * Optional num entries to show.
+   */
+  @query("top")
+  top?: int32 = 50;
+
+  /**
+   * Optional key by which to sort.
+   */
+  @query("sortKey")
+  sortKey?: string;
+
+  /**
+   * Optional sort value for pagination.
+   */
+  @query("sortValue")
+  sortValue?: string;
+};
 
 @@doc(ReachabilityAnalysisRun.name, "Reachability Analysis Run name.");
 @@doc(ReachabilityAnalysisRun.properties,

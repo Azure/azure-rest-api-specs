@@ -156,7 +156,6 @@ interface VirtualHubs {
   /**
    * Gets the effective routes configured for the Virtual Hub resource or the specified resource .
    */
-  @list
   @action("effectiveRoutes")
   @autoRoute
   getEffectiveVirtualHubRoutes is ArmResourceActionAsync<
@@ -170,7 +169,6 @@ interface VirtualHubs {
   /**
    * Gets the inbound routes configured for the Virtual Hub on a particular connection.
    */
-  @list
   @action("inboundRoutes")
   @autoRoute
   getInboundRoutes is ArmResourceActionAsync<
@@ -183,7 +181,6 @@ interface VirtualHubs {
   /**
    * Gets the outbound routes configured for the Virtual Hub on a particular connection.
    */
-  @list
   @action("outboundRoutes")
   @autoRoute
   getOutboundRoutes is ArmResourceActionAsync<
