@@ -16,12 +16,15 @@
 
 **Case 1 — Add Resource Type (For ARM service only)**
 Collect: target API version, resource name (PascalCase), hierarchy (top-level or nested + parent), properties (name, type, required/optional).
-Defaults: top-level → `TrackedResource`, child → `ProxyResource`. Operations: `createOrReplace` (PUT/async), `get`, `update/patch`, `delete` (async), list by parent. Top-level adds list by subscription. Use `createOrReplace` (not `createOrUpdate`), `ArmCustomPatch` for PATCH.
 
+Defaults: top-level → `TrackedResource`, child → `ProxyResource`. Operations: `createOrReplace` (PUT/async), `get`, `update/patch`, `delete` (async), list by parent. Top-level adds list by subscription. Use `createOrReplace` (not `createOrUpdate`), 
+
+> MUST use `ArmCustomPatch` for PATCH `update/patch`.
 > Top-level tracked resources MUST have `listByResourceGroup` and `listBySubscription`.
 
 **Case 2 — Add Resource Operations (For ARM service only)**  
 Collect: target resource, operation type (CRUD or custom), operation name (custom actions), request/response models (custom actions).
+
 Defaults: never async → GET, LIST, HEAD. Default async → PUT, DELETE. Default sync → PATCH. Always ask user → POST/action.
 
 > Use `createOrReplace` templates (not `createOrUpdate`). Use `ArmCustomPatch` for PATCH.
@@ -34,4 +37,5 @@ Display collected information and wait for user confirmation:
 Case:              [Name]
 Target Version:    [version]
 Requested Changes: [summary]
+Defaults:          [defaults guidelines]
 ```

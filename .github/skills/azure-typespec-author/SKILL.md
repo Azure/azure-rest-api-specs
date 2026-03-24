@@ -78,7 +78,7 @@ Check your classification from Step 1, then branch:
   | Parameter                 | Value                                                                                                           |
   | ------------------------- | --------------------------------------------------------------------------------------------------------------- |
   | `request`                 | User request (verbatim)                                                                                         |
-  | `additionalInformation`   | All content gathered from Steps 1–2 (intake analysis, user answers, relevant `.tsp` code read from the project) |
+  | `additionalInformation`   | All content gathered from Steps 1–2 (intake analysis, user answers, relevant `.tsp` code read from the project), **including any case-specific Defaults noted in Step 2.2** |
   | `typeSpecProjectRootPath` | TypeSpec project root path                                                                                      |
 
   Do not proceed without an authoring plan from this tool.
