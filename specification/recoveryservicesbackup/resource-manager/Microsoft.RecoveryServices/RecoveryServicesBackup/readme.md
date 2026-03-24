@@ -574,32 +574,4 @@ suppressions:
     code: ProvisioningStateSpecifiedForLROPut
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}"].put
     reason: The existing API contract is legacy code and not be able to change.
-  - from: bms.json
-    code: GetResponseCodes
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}"].get
-    reason: Service contract returns 204 for completed operation results with no body. This is consistent with the existing service implementation.
-  - from: bms.json
-    code: GetResponseCodes
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupValidateOperationResults/{operationId}"].get
-    reason: Service contract returns 204 for completed validation operation results with no body. This is consistent with the existing service implementation.
-  - from: bms.json
-    code: GetResponseCodes
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/operationResults/{operationId}"].get
-    reason: Service contract returns 204 for completed vault credential operation results with no body. This is consistent with the existing service implementation.
-  - from: bms.json
-    code: PutResponseCodes
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}"].put
-    reason: Vault credential generation uses PUT with 202 LRO pattern per service contract. The service does not return 200/201 synchronous responses.
-  - from: bms.json
-    code: ProvisioningStateSpecifiedForLROPut
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}"].put
-    reason: Vault credential generation uses PUT with 202 LRO pattern per service contract. No synchronous 200/201 response with provisioningState is returned.
-  - from: bms.json
-    code: AvoidAdditionalProperties
-    where: $.definitions.CrossTenantVaultMapping.properties.additionalProperties
-    reason: Property named additionalProperties is part of the existing service contract wire format. Renaming would be a breaking change.
-  - from: bms.json
-    code: AvoidAdditionalProperties
-    where: $.definitions.CrossTenantVaultMapping.properties.additionalProperties.additionalProperties
-    reason: Inner additionalProperties schema for the dictionary-typed property is required by the service contract wire format.
 ```

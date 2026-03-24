@@ -739,9 +739,6 @@
               }
             }
           },
-          "204": {
-            "description": "Operation completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1456,9 +1453,6 @@
               }
             }
           },
-          "204": {
-            "description": "Operation completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1613,8 +1607,8 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}": {
-      "put": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/generate": {
+      "post": {
         "operationId": "CrossTenantVaultCredential_Generate",
         "tags": [
           "CrossTenant"
@@ -1766,9 +1760,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -6900,6 +6891,36 @@
         ]
       }
     },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
     "AzureBackupGoalFeatureSupportRequest": {
       "type": "object",
       "description": "Azure backup goal feature specific request.",
@@ -10538,13 +10559,12 @@
             "type": "string"
           }
         },
-        "additionalProperties": {
+        "extendedProperties": {
           "type": "object",
           "description": "Additional properties for the mapping.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-name": "extendedProperties"
+          }
         },
         "provisioningState": {
           "type": "string",
@@ -16926,6 +16946,11 @@
         "friendlyName": {
           "type": "string",
           "description": "Certificate friendly name."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the vault credential certificate.",
+          "readOnly": true
         }
       }
     },

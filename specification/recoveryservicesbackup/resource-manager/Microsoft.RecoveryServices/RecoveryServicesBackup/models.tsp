@@ -8710,7 +8710,6 @@ model CrossTenantVaultMapping {
    * Additional properties for the mapping.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Service contract uses Dictionary<string, string> for additional properties"
-  @encodedName("application/json", "additionalProperties")
   extendedProperties?: Record<string>;
 
   /**
@@ -8890,4 +8889,10 @@ model VaultCredentialCertificateProperties {
    * Certificate friendly name.
    */
   friendlyName?: string;
+
+  /**
+   * Provisioning state of the vault credential certificate.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
 }

@@ -438,11 +438,7 @@ interface CrossTenantOperations {
     operationId: string,
 
     ...ApiVersionParameter,
-  ):
-    | ArmResponse<ProtectedItemResource>
-    | ArmAcceptedLroResponse
-    | ArmNoContentResponse
-    | ErrorResponse;
+  ): ArmResponse<ProtectedItemResource> | ArmAcceptedLroResponse | ErrorResponse;
 
   /**
    * Fetches the status of a cross-tenant operation such as triggering a restore.
@@ -719,14 +715,10 @@ interface CrossTenantOperations {
     operationId: string,
 
     ...ApiVersionParameter,
-  ):
-    | ArmResponse<ValidateOperationsResponse>
-    | ArmAcceptedResponse<
-        "Accepted",
-        ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ArmNoContentResponse
-    | ErrorResponse;
+  ): ArmResponse<ValidateOperationsResponse> | ArmAcceptedResponse<
+    "Accepted",
+    ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
 
   /**
    * Gets the status of a validate operation for cross-tenant restore scenarios.
@@ -855,8 +847,8 @@ interface CrossTenantVaultCredentialOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId and x-ms-examples required for service contract compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}")
-  @put
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/generate")
+  @post
   @operationId("CrossTenantVaultCredential_Generate")
   @tag("CrossTenant")
   @extension("x-ms-long-running-operation", true)
@@ -958,14 +950,10 @@ interface CrossTenantVaultCredentialOperations {
     operationId: string,
 
     ...ApiVersionParameter,
-  ):
-    | ArmResponse<VaultCredentialCertificateResponse>
-    | ArmAcceptedResponse<
-        "Accepted",
-        ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ArmNoContentResponse
-    | ErrorResponse;
+  ): ArmResponse<VaultCredentialCertificateResponse> | ArmAcceptedResponse<
+    "Accepted",
+    ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
 
   /**
    * Gets the status of an async vault credential generation operation.
