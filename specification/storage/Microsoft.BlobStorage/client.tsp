@@ -238,7 +238,7 @@ op setAccessPolicyRequiredContainerAcl is StorageOperationNoBody<
 
     ...TimeoutParameter;
     ...LeaseIdOptionalParameter;
-    ...BlobPublicAccess;
+    ...BlobPublicAccessParameter;
     ...IfModifiedSinceParameter;
     ...IfUnmodifiedSinceParameter;
   },

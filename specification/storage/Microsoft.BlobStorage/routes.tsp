@@ -252,7 +252,7 @@ interface Container {
     {
       ...TimeoutParameter;
       ...MetadataHeaders;
-      ...BlobPublicAccess;
+      ...BlobPublicAccessParameter;
 
       /** Optional.  Version 2019-07-07 and later.  Specifies the default encryption scope to set on the container and use for all future writes. */
       @header("x-ms-default-encryption-scope")
@@ -284,7 +284,7 @@ interface Container {
       ...LeaseDurationResponseHeader;
       ...LeaseStateResponseHeader;
       ...LeaseStatusResponseHeader;
-      ...BlobPublicAccess;
+      ...BlobPublicAccessResponseHeader;
 
       /** Indicates whether the container has an immutability policy set on it. */
       @header("x-ms-has-immutability-policy")
@@ -355,7 +355,7 @@ interface Container {
       /** Signed identifiers */
       @body body: SignedIdentifiers;
 
-      ...BlobPublicAccess;
+      ...BlobPublicAccessResponseHeader;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
     }
@@ -380,7 +380,7 @@ interface Container {
 
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
-      ...BlobPublicAccess;
+      ...BlobPublicAccessParameter;
       ...IfModifiedSinceParameter;
       ...IfUnmodifiedSinceParameter;
     },
