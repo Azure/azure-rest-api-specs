@@ -945,7 +945,3 @@ op replaceprivateDnsZoneGroupsList(
   "networkInterfaceIpConfigurationId",
   "java"
 );
-@@clientName(Microsoft.Network.VirtualApplianceIPConfigurationProperties.privateIPAddress,
-  "privateIpAddress",
-  "java"
-);
