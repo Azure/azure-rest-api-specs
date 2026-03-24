@@ -2991,6 +2991,11 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
+              },
+              "x-ms-download-hint": {
+                "x-ms-client-name": "DownloadHint",
+                "type": "string",
+                "description": "Indicates the download hint for the blob."
               }
             },
             "schema": {
@@ -3278,6 +3283,11 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
+              },
+              "x-ms-download-hint": {
+                "x-ms-client-name": "DownloadHint",
+                "type": "string",
+                "description": "Indicates the download hint for the blob."
               }
             },
             "schema": {
@@ -3775,6 +3785,773 @@
         },
         {
           "$ref": "#/parameters/Blob"
+        }
+      ]
+    },
+    "/{containerName}/{blob}?comp=layout": {
+      "get": {
+        "tags": [
+          "blob"
+        ],
+        "operationId": "Blob_GetLayout",
+        "description": "The Get Blob Layout operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob.  In addition, it may optionally return the layout of the blob.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Snapshot"
+          },
+          {
+            "$ref": "#/parameters/VersionId"
+          },
+          {
+            "$ref": "#/parameters/Marker"
+          },
+          {
+            "$ref": "#/parameters/MaxResults"
+          },
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/Range"
+          },
+          {
+            "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/IfTags"
+          },
+          {
+            "$ref": "#/parameters/IfModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/IfUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/EncryptionKey"
+          },
+          {
+            "$ref": "#/parameters/EncryptionKeySha256"
+          },
+          {
+            "$ref": "#/parameters/EncryptionAlgorithm"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the properties of the blob.",
+            "headers": {
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Returns the date and time the blob was last modified. Any operation that modifies the blob, including an update of the blob's metadata or properties, changes the last-modified time of the blob."
+              },
+              "x-ms-blob-content-length": {
+                "x-ms-client-name": "BlobContentLength",
+                "type": "integer",
+                "format": "int64",
+                "description": "Returns the length of the blob in bytes."
+              },
+              "x-ms-blob-content-type": {
+                "x-ms-client-name": "BlobContentType",
+                "type": "string",
+                "description": "Returns the content type of the blob."
+              },
+              "x-ms-blob-content-encoding": {
+                "x-ms-client-name": "BlobContentEncoding",
+                "type": "string",
+                "description": "Returns the Content-Encoding of the blob."
+              },
+              "x-ms-blob-content-md5": {
+                "x-ms-client-name": "BlobContentMD5",
+                "type": "string",
+                "format": "byte",
+                "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
+              },
+              "x-ms-blob-creation-time": {
+                "x-ms-client-name": "BlobCreationTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Returns the date and time the blob was created."
+              },
+              "x-ms-creation-time": {
+                "x-ms-client-name": "CreationTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Returns the date and time the blob was created."
+              },
+              "x-ms-meta": {
+                "type": "string",
+                "x-ms-client-name": "Metadata",
+                "x-ms-header-collection-prefix": "x-ms-meta-"
+              },
+              "x-ms-or-policy-id": {
+                "x-ms-client-name": "ObjectReplicationPolicyId",
+                "type": "string",
+                "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication."
+              },
+              "x-ms-or": {
+                "type": "string",
+                "x-ms-client-name": "ObjectReplicationRules",
+                "x-ms-header-collection-prefix": "x-ms-or-",
+                "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed)."
+              },
+              "x-ms-blob-type": {
+                "x-ms-client-name": "BlobType",
+                "description": "The blob's type.",
+                "type": "string",
+                "enum": [
+                  "BlockBlob",
+                  "PageBlob",
+                  "AppendBlob"
+                ],
+                "x-ms-enum": {
+                  "name": "BlobType",
+                  "modelAsString": false
+                }
+              },
+              "x-ms-copy-completion-time": {
+                "x-ms-client-name": "CopyCompletionTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List."
+              },
+              "x-ms-copy-status-description": {
+                "x-ms-client-name": "CopyStatusDescription",
+                "type": "string",
+                "description": "Only appears when x-ms-copy-status is failed or pending. Describes the cause of the last fatal or non-fatal copy operation failure. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List"
+              },
+              "x-ms-copy-id": {
+                "x-ms-client-name": "CopyId",
+                "type": "string",
+                "description": "String identifier for this copy operation. Use with Get Blob Properties to check the status of this copy operation, or pass to Abort Copy Blob to abort a pending copy."
+              },
+              "x-ms-copy-progress": {
+                "x-ms-client-name": "CopyProgress",
+                "type": "string",
+                "description": "Contains the number of bytes copied and the total bytes in the source in the last attempted Copy Blob operation where this blob was the destination blob. Can show between 0 and Content-Length bytes copied. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List"
+              },
+              "x-ms-copy-source": {
+                "x-ms-client-name": "CopySource",
+                "type": "string",
+                "description": "URL up to 2 KB in length that specifies the source blob or file used in the last attempted Copy Blob operation where this blob was the destination blob. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List."
+              },
+              "x-ms-copy-status": {
+                "x-ms-client-name": "CopyStatus",
+                "description": "State of the copy operation identified by x-ms-copy-id.",
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "success",
+                  "aborted",
+                  "failed"
+                ],
+                "x-ms-enum": {
+                  "name": "CopyStatusType",
+                  "modelAsString": false
+                }
+              },
+              "x-ms-incremental-copy": {
+                "x-ms-client-name": "IsIncrementalCopy",
+                "type": "boolean",
+                "description": "Included if the blob is incremental copy blob."
+              },
+              "x-ms-copy-destination-snapshot": {
+                "x-ms-client-name": "DestinationSnapshot",
+                "type": "string",
+                "description": "Included if the blob is incremental copy blob or incremental copy snapshot, if x-ms-copy-status is success. Snapshot time of the last successful incremental copy snapshot for this blob."
+              },
+              "x-ms-lease-duration": {
+                "x-ms-client-name": "LeaseDuration",
+                "description": "When a blob is leased, specifies whether the lease is of infinite or fixed duration.",
+                "type": "string",
+                "enum": [
+                  "infinite",
+                  "fixed"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseDurationType",
+                  "modelAsString": false
+                }
+              },
+              "x-ms-lease-state": {
+                "x-ms-client-name": "LeaseState",
+                "description": "Lease state of the blob.",
+                "type": "string",
+                "enum": [
+                  "available",
+                  "leased",
+                  "expired",
+                  "breaking",
+                  "broken"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseStateType",
+                  "modelAsString": false
+                }
+              },
+              "x-ms-lease-status": {
+                "x-ms-client-name": "LeaseStatus",
+                "description": "The current lease status of the blob.",
+                "type": "string",
+                "enum": [
+                  "locked",
+                  "unlocked"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseStatusType",
+                  "modelAsString": false
+                }
+              },
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of bytes present in the response body."
+              },
+              "Content-Type": {
+                "type": "string",
+                "description": "The content type specified for the blob. The default content type is 'application/octet-stream'"
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
+              },
+              "Content-MD5": {
+                "type": "string",
+                "format": "byte",
+                "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "description": "This header returns the value that was specified for the Content-Encoding request header"
+              },
+              "Content-Disposition": {
+                "type": "string",
+                "description": "This header returns the value that was specified for the 'x-ms-blob-content-disposition' header. The Content-Disposition response header field conveys additional information about how to process the response payload, and also can be used to attach additional metadata. For example, if set to attachment, it indicates that the user-agent should not display the response, but instead show a Save As dialog with a filename other than the blob name specified."
+              },
+              "Content-Language": {
+                "type": "string",
+                "description": "This header returns the value that was specified for the Content-Language request header."
+              },
+              "Cache-Control": {
+                "type": "string",
+                "description": "This header is returned if it was previously specified for the blob."
+              },
+              "x-ms-blob-sequence-number": {
+                "x-ms-client-name": "BlobSequenceNumber",
+                "type": "integer",
+                "format": "int64",
+                "description": "The current sequence number for a page blob. This header is not returned for block blobs or append blobs"
+              },
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "Accept-Ranges": {
+                "type": "string",
+                "description": "Indicates that the service supports requests for partial blob content."
+              },
+              "x-ms-blob-committed-block-count": {
+                "x-ms-client-name": "BlobCommittedBlockCount",
+                "type": "integer",
+                "description": "The number of committed blocks present in the blob. This header is returned only for append blobs."
+              },
+              "x-ms-server-encrypted": {
+                "x-ms-client-name": "IsServerEncrypted",
+                "type": "boolean",
+                "description": "The value of this header is set to true if the blob data and application metadata are completely encrypted using the specified algorithm. Otherwise, the value is set to false (when the blob is unencrypted, or if only parts of the blob/application metadata are encrypted)."
+              },
+              "x-ms-encryption-key-sha256": {
+                "x-ms-client-name": "EncryptionKeySha256",
+                "type": "string",
+                "description": "The SHA-256 hash of the encryption key used to encrypt the metadata. This header is only returned when the metadata was encrypted with a customer-provided key."
+              },
+              "x-ms-encryption-scope": {
+                "x-ms-client-name": "EncryptionScope",
+                "type": "string",
+                "description": "Returns the name of the encryption scope used to encrypt the blob contents and application metadata.  Note that the absence of this header implies use of the default account encryption scope."
+              },
+              "x-ms-access-tier": {
+                "x-ms-client-name": "AccessTier",
+                "type": "string",
+                "description": "The tier of page blob on a premium storage account or tier of block blob on blob storage LRS accounts. For a list of allowed premium page blob tiers, see https://learn.microsoft.com/azure/virtual-machines/disks-types#premium-ssd. For blob storage LRS accounts, valid values are Hot/Cool/Archive."
+              },
+              "x-ms-access-tier-inferred": {
+                "x-ms-client-name": "AccessTierInferred",
+                "type": "boolean",
+                "description": "For page blobs on a premium storage account only. If the access tier is not explicitly set on the blob, the tier is inferred based on its content length and this header will be returned with true value."
+              },
+              "x-ms-archive-status": {
+                "x-ms-client-name": "ArchiveStatus",
+                "type": "string",
+                "description": "For blob storage LRS accounts, valid values are rehydrate-pending-to-hot/rehydrate-pending-to-cool. If the blob is being rehydrated and is not complete then this header is returned indicating that rehydrate is pending and also tells the destination tier."
+              },
+              "x-ms-access-tier-change-time": {
+                "x-ms-client-name": "AccessTierChangeTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set."
+              },
+              "x-ms-version-id": {
+                "x-ms-client-name": "VersionId",
+                "type": "string",
+                "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
+              },
+              "x-ms-is-current-version": {
+                "x-ms-client-name": "IsCurrentVersion",
+                "type": "boolean",
+                "description": "The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header."
+              },
+              "x-ms-tag-count": {
+                "x-ms-client-name": "TagCount",
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of tags associated with the blob"
+              },
+              "x-ms-expiry-time": {
+                "x-ms-client-name": "ExpiresOn",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "The time this blob will expire."
+              },
+              "x-ms-blob-sealed": {
+                "x-ms-client-name": "IsSealed",
+                "type": "boolean",
+                "description": "If this blob has been sealed"
+              },
+              "x-ms-rehydrate-priority": {
+                "x-ms-client-name": "RehydratePriority",
+                "description": "If an object is in rehydrate pending state then this header is returned with priority of rehydrate. Valid values are High and Standard.",
+                "type": "string"
+              },
+              "x-ms-last-access-time": {
+                "x-ms-client-name": "LastAccessed",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "UTC date/time value generated by the service that indicates the time at which the blob was last read or written to"
+              },
+              "x-ms-immutability-policy-until-date": {
+                "x-ms-client-name": "ImmutabilityPolicyExpiresOn",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire."
+              },
+              "x-ms-immutability-policy-mode": {
+                "x-ms-client-name": "ImmutabilityPolicyMode",
+                "type": "string",
+                "enum": [
+                  "Mutable",
+                  "Unlocked",
+                  "Locked"
+                ],
+                "x-ms-enum": {
+                  "name": "BlobImmutabilityPolicyMode",
+                  "modelAsString": false
+                },
+                "description": "Indicates immutability policy mode."
+              },
+              "x-ms-legal-hold": {
+                "x-ms-client-name": "LegalHold",
+                "type": "boolean",
+                "description": "Indicates if a legal hold is present on the blob."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/BlobLayout"
+            }
+          },
+          "204": {
+            "description": "Returns the properties of the blob.",
+            "headers": {
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Returns the date and time the blob was last modified. Any operation that modifies the blob, including an update of the blob's metadata or properties, changes the last-modified time of the blob."
+              },
+              "x-ms-blob-content-length": {
+                "x-ms-client-name": "BlobContentLength",
+                "type": "integer",
+                "format": "int64",
+                "description": "Returns the length of the blob in bytes."
+              },
+              "x-ms-blob-content-type": {
+                "x-ms-client-name": "BlobContentType",
+                "type": "string",
+                "description": "Returns the content type of the blob."
+              },
+              "x-ms-blob-content-encoding": {
+                "x-ms-client-name": "BlobContentEncoding",
+                "type": "string",
+                "description": "Returns the Content-Encoding of the blob."
+              },
+              "x-ms-blob-content-md5": {
+                "x-ms-client-name": "BlobContentMD5",
+                "type": "string",
+                "format": "byte",
+                "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
+              },
+              "x-ms-blob-creation-time": {
+                "x-ms-client-name": "BlobCreationTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Returns the date and time the blob was created."
+              },
+              "x-ms-creation-time": {
+                "x-ms-client-name": "CreationTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Returns the date and time the blob was created."
+              },
+              "x-ms-meta": {
+                "type": "string",
+                "x-ms-client-name": "Metadata",
+                "x-ms-header-collection-prefix": "x-ms-meta-"
+              },
+              "x-ms-or-policy-id": {
+                "x-ms-client-name": "ObjectReplicationPolicyId",
+                "type": "string",
+                "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication."
+              },
+              "x-ms-or": {
+                "type": "string",
+                "x-ms-client-name": "ObjectReplicationRules",
+                "x-ms-header-collection-prefix": "x-ms-or-",
+                "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed)."
+              },
+              "x-ms-blob-type": {
+                "x-ms-client-name": "BlobType",
+                "description": "The blob's type.",
+                "type": "string",
+                "enum": [
+                  "BlockBlob",
+                  "PageBlob",
+                  "AppendBlob"
+                ],
+                "x-ms-enum": {
+                  "name": "BlobType",
+                  "modelAsString": false
+                }
+              },
+              "x-ms-copy-completion-time": {
+                "x-ms-client-name": "CopyCompletionTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List."
+              },
+              "x-ms-copy-status-description": {
+                "x-ms-client-name": "CopyStatusDescription",
+                "type": "string",
+                "description": "Only appears when x-ms-copy-status is failed or pending. Describes the cause of the last fatal or non-fatal copy operation failure. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List"
+              },
+              "x-ms-copy-id": {
+                "x-ms-client-name": "CopyId",
+                "type": "string",
+                "description": "String identifier for this copy operation. Use with Get Blob Properties to check the status of this copy operation, or pass to Abort Copy Blob to abort a pending copy."
+              },
+              "x-ms-copy-progress": {
+                "x-ms-client-name": "CopyProgress",
+                "type": "string",
+                "description": "Contains the number of bytes copied and the total bytes in the source in the last attempted Copy Blob operation where this blob was the destination blob. Can show between 0 and Content-Length bytes copied. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List"
+              },
+              "x-ms-copy-source": {
+                "x-ms-client-name": "CopySource",
+                "type": "string",
+                "description": "URL up to 2 KB in length that specifies the source blob or file used in the last attempted Copy Blob operation where this blob was the destination blob. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List."
+              },
+              "x-ms-copy-status": {
+                "x-ms-client-name": "CopyStatus",
+                "description": "State of the copy operation identified by x-ms-copy-id.",
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "success",
+                  "aborted",
+                  "failed"
+                ],
+                "x-ms-enum": {
+                  "name": "CopyStatusType",
+                  "modelAsString": false
+                }
+              },
+              "x-ms-incremental-copy": {
+                "x-ms-client-name": "IsIncrementalCopy",
+                "type": "boolean",
+                "description": "Included if the blob is incremental copy blob."
+              },
+              "x-ms-copy-destination-snapshot": {
+                "x-ms-client-name": "DestinationSnapshot",
+                "type": "string",
+                "description": "Included if the blob is incremental copy blob or incremental copy snapshot, if x-ms-copy-status is success. Snapshot time of the last successful incremental copy snapshot for this blob."
+              },
+              "x-ms-lease-duration": {
+                "x-ms-client-name": "LeaseDuration",
+                "description": "When a blob is leased, specifies whether the lease is of infinite or fixed duration.",
+                "type": "string",
+                "enum": [
+                  "infinite",
+                  "fixed"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseDurationType",
+                  "modelAsString": false
+                }
+              },
+              "x-ms-lease-state": {
+                "x-ms-client-name": "LeaseState",
+                "description": "Lease state of the blob.",
+                "type": "string",
+                "enum": [
+                  "available",
+                  "leased",
+                  "expired",
+                  "breaking",
+                  "broken"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseStateType",
+                  "modelAsString": false
+                }
+              },
+              "x-ms-lease-status": {
+                "x-ms-client-name": "LeaseStatus",
+                "description": "The current lease status of the blob.",
+                "type": "string",
+                "enum": [
+                  "locked",
+                  "unlocked"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseStatusType",
+                  "modelAsString": false
+                }
+              },
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of bytes present in the response body."
+              },
+              "Content-Type": {
+                "type": "string",
+                "description": "The content type specified for the blob. The default content type is 'application/octet-stream'"
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
+              },
+              "Content-MD5": {
+                "type": "string",
+                "format": "byte",
+                "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "description": "This header returns the value that was specified for the Content-Encoding request header"
+              },
+              "Content-Disposition": {
+                "type": "string",
+                "description": "This header returns the value that was specified for the 'x-ms-blob-content-disposition' header. The Content-Disposition response header field conveys additional information about how to process the response payload, and also can be used to attach additional metadata. For example, if set to attachment, it indicates that the user-agent should not display the response, but instead show a Save As dialog with a filename other than the blob name specified."
+              },
+              "Content-Language": {
+                "type": "string",
+                "description": "This header returns the value that was specified for the Content-Language request header."
+              },
+              "Cache-Control": {
+                "type": "string",
+                "description": "This header is returned if it was previously specified for the blob."
+              },
+              "x-ms-blob-sequence-number": {
+                "x-ms-client-name": "BlobSequenceNumber",
+                "type": "integer",
+                "format": "int64",
+                "description": "The current sequence number for a page blob. This header is not returned for block blobs or append blobs"
+              },
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "Accept-Ranges": {
+                "type": "string",
+                "description": "Indicates that the service supports requests for partial blob content."
+              },
+              "x-ms-blob-committed-block-count": {
+                "x-ms-client-name": "BlobCommittedBlockCount",
+                "type": "integer",
+                "description": "The number of committed blocks present in the blob. This header is returned only for append blobs."
+              },
+              "x-ms-server-encrypted": {
+                "x-ms-client-name": "IsServerEncrypted",
+                "type": "boolean",
+                "description": "The value of this header is set to true if the blob data and application metadata are completely encrypted using the specified algorithm. Otherwise, the value is set to false (when the blob is unencrypted, or if only parts of the blob/application metadata are encrypted)."
+              },
+              "x-ms-encryption-key-sha256": {
+                "x-ms-client-name": "EncryptionKeySha256",
+                "type": "string",
+                "description": "The SHA-256 hash of the encryption key used to encrypt the metadata. This header is only returned when the metadata was encrypted with a customer-provided key."
+              },
+              "x-ms-encryption-scope": {
+                "x-ms-client-name": "EncryptionScope",
+                "type": "string",
+                "description": "Returns the name of the encryption scope used to encrypt the blob contents and application metadata.  Note that the absence of this header implies use of the default account encryption scope."
+              },
+              "x-ms-access-tier": {
+                "x-ms-client-name": "AccessTier",
+                "type": "string",
+                "description": "The tier of page blob on a premium storage account or tier of block blob on blob storage LRS accounts. For a list of allowed premium page blob tiers, see https://learn.microsoft.com/azure/virtual-machines/disks-types#premium-ssd. For blob storage LRS accounts, valid values are Hot/Cool/Archive."
+              },
+              "x-ms-access-tier-inferred": {
+                "x-ms-client-name": "AccessTierInferred",
+                "type": "boolean",
+                "description": "For page blobs on a premium storage account only. If the access tier is not explicitly set on the blob, the tier is inferred based on its content length and this header will be returned with true value."
+              },
+              "x-ms-archive-status": {
+                "x-ms-client-name": "ArchiveStatus",
+                "type": "string",
+                "description": "For blob storage LRS accounts, valid values are rehydrate-pending-to-hot/rehydrate-pending-to-cool. If the blob is being rehydrated and is not complete then this header is returned indicating that rehydrate is pending and also tells the destination tier."
+              },
+              "x-ms-access-tier-change-time": {
+                "x-ms-client-name": "AccessTierChangeTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set."
+              },
+              "x-ms-version-id": {
+                "x-ms-client-name": "VersionId",
+                "type": "string",
+                "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
+              },
+              "x-ms-is-current-version": {
+                "x-ms-client-name": "IsCurrentVersion",
+                "type": "boolean",
+                "description": "The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header."
+              },
+              "x-ms-tag-count": {
+                "x-ms-client-name": "TagCount",
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of tags associated with the blob"
+              },
+              "x-ms-expiry-time": {
+                "x-ms-client-name": "ExpiresOn",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "The time this blob will expire."
+              },
+              "x-ms-blob-sealed": {
+                "x-ms-client-name": "IsSealed",
+                "type": "boolean",
+                "description": "If this blob has been sealed"
+              },
+              "x-ms-rehydrate-priority": {
+                "x-ms-client-name": "RehydratePriority",
+                "description": "If an object is in rehydrate pending state then this header is returned with priority of rehydrate. Valid values are High and Standard.",
+                "type": "string"
+              },
+              "x-ms-last-access-time": {
+                "x-ms-client-name": "LastAccessed",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "UTC date/time value generated by the service that indicates the time at which the blob was last read or written to"
+              },
+              "x-ms-immutability-policy-until-date": {
+                "x-ms-client-name": "ImmutabilityPolicyExpiresOn",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire."
+              },
+              "x-ms-immutability-policy-mode": {
+                "x-ms-client-name": "ImmutabilityPolicyMode",
+                "type": "string",
+                "enum": [
+                  "Mutable",
+                  "Unlocked",
+                  "Locked"
+                ],
+                "x-ms-enum": {
+                  "name": "BlobImmutabilityPolicyMode",
+                  "modelAsString": false
+                },
+                "description": "Indicates immutability policy mode."
+              },
+              "x-ms-legal-hold": {
+                "x-ms-client-name": "LegalHold",
+                "type": "boolean",
+                "description": "Indicates if a legal hold is present on the blob."
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
+          "name": "comp",
+          "description": "comp",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "layout"
+          ]
         }
       ]
     },
@@ -11366,6 +12143,88 @@
       "properties": {
         "GeoReplication": {
           "$ref": "#/definitions/GeoReplication"
+        }
+      }
+    },
+    "BlobLayout": {
+      "type": "object",
+      "xml": { "name": "BlobLayout" },
+      "properties": {
+        "Ranges": {
+          "type": "object",
+          "xml": { "name": "Ranges" },
+          "properties": {
+            "Range": {
+              "type": "array",
+              "xml": { "name": "Range", "wrapped": false },
+              "items": {
+                "type": "object",
+                "xml": { "name": "Range" },
+                "properties": {
+                  "Start": {
+                    "type": "integer",
+                    "format": "int64",
+                    "xml": { "attribute": true },
+                    "description": "The start byte offset of the range."
+                  },
+                  "End": {
+                    "type": "integer",
+                    "format": "int64",
+                    "xml": { "attribute": true },
+                    "description": "The end byte offset of the range."
+                  },
+                  "EndpointIndex": {
+                    "type": "integer",
+                    "xml": { "attribute": true },
+                    "description": "Index into the Endpoints array indicating which endpoint serves this range."
+                  }
+                },
+                "required": ["Start", "End", "EndpointIndex"]
+              }
+            }
+          }
+        },
+        "Endpoints": {
+          "type": "object",
+          "xml": { "name": "Endpoints" },
+          "properties": {
+            "Endpoint": {
+              "type": "array",
+              "xml": { "name": "Endpoint", "wrapped": false },
+              "items": {
+                "type": "object",
+                "xml": { "name": "Endpoint" },
+                "properties": {
+                  "Index": {
+                    "type": "integer",
+                    "xml": { "attribute": true },
+                    "description": "The index of the endpoint, referenced by Range elements."
+                  },
+                  "Value": {
+                    "type": "string",
+                    "xml": { "attribute": true },
+                    "description": "The host:port of the endpoint."
+                  }
+                },
+                "required": ["Index", "Value"]
+              }
+            }
+          }
+        },
+        "Marker": {
+          "type": "string",
+          "xml": { "name": "Marker" },
+          "description": "The continuation marker used for this request."
+        },
+        "NextMarker": {
+          "type": "string",
+          "xml": { "name": "NextMarker" },
+          "description": "If the number of ranges exceeds MaxResults, a NextMarker is returned for use in subsequent requests to continue listing."
+        },
+        "MaxResults": {
+          "type": "integer",
+          "xml": { "name": "MaxResults" },
+          "description": "The maximum number of ranges to return per request."
         }
       }
     }
