@@ -23,8 +23,7 @@ modelerfour:
   lenient-model-deduplication: true
 
 directive:
-  - from: specification/common-types/resource-management/v6/types.json
-    where: $.definitions.Operation.properties.origin
+  - from: swagger-document
     transform: >
-        $['x-ms-enum']['name'] = 'OriginEnum';
+        $.definitions.Origin["x-ms-client-name"] = 'EntityOrigin';
 ```
