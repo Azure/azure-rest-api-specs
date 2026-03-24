@@ -148,7 +148,9 @@ namespace Customizations;
   "csharp"
 );
 
-@@clientOption(Storage.File, "includeRootSlash", false, "python,javascript");
+@@clientOption(Storage.File, "includeRootSlash", false, "javascript");
+
+@@clientOption(Storage.File, "omitSlashFromEmptyRoute", true, "python");
 
 @@clientName(Storage.File.UserDelegationKey.signedDelegatedUserTid,
   "signedDelegatedUserTenantId",
