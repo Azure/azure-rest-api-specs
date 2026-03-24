@@ -9328,11 +9328,6 @@ model SyncConfigurationJobProperties extends EdgeMachineDiskJobProperties {
   /** The strategy to use for resolving the configuration drift. */
   @visibility(Lifecycle.Create)
   resolutionStrategy: ResolutionStrategy;
-
-  /** Details of the detected drift. */
-  @visibility(Lifecycle.Read)
-  @identifiers(#[])
-  driftDetails?: DriftDetail[];
 }
 
 /**
@@ -9638,13 +9633,11 @@ union NetworkAdapterOperationStatus {
  * Properties of the Network Adapter Job.
  */
 @added(Versions.v2026_03_15_preview)
+@discriminator("jobType")
 model EdgeMachineNetworkAdapterJobProperties {
   /** Type of operation. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   jobType: NetworkAdapterJobType;
-
-  /** The desired network configuration to apply. */
-  targetConfiguration: NetworkAdapterConfiguration;
 
   /** Deployment mode to trigger job. */
   deploymentMode?: DeploymentMode;
@@ -9690,6 +9683,46 @@ union NetworkAdapterJobType {
 
   /** Force push configuration to the network adapter. */
   ForcePush: "ForcePush",
+
+  /** Job to resolve configuration drift between desired and reported state. */
+  SyncConfiguration: "SyncConfiguration",
+}
+
+/**
+ * Properties for applying network adapter configuration.
+ */
+@added(Versions.v2026_03_15_preview)
+model ApplyConfigurationNetworkAdapterJobProperties
+  extends EdgeMachineNetworkAdapterJobProperties {
+  /** Job type. */
+  jobType: NetworkAdapterJobType.ApplyConfiguration;
+
+  /** The desired network configuration to apply. */
+  targetConfiguration: NetworkAdapterConfiguration;
+}
+
+/**
+ * Properties for force push of network adapter configuration.
+ */
+@added(Versions.v2026_03_15_preview)
+model ForcePushNetworkAdapterJobProperties
+  extends EdgeMachineNetworkAdapterJobProperties {
+  /** Job type. */
+  jobType: NetworkAdapterJobType.ForcePush;
+}
+
+/**
+ * Properties for resolving network adapter configuration drift.
+ */
+@added(Versions.v2026_03_15_preview)
+model SyncConfigurationNetworkAdapterJobProperties
+  extends EdgeMachineNetworkAdapterJobProperties {
+  /** Job type. */
+  jobType: NetworkAdapterJobType.SyncConfiguration;
+
+  /** The strategy to use for resolving the configuration drift. */
+  @visibility(Lifecycle.Create)
+  resolutionStrategy: ResolutionStrategy;
 }
 
 /**
