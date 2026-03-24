@@ -64,6 +64,7 @@ union FoundryFeaturesOptInKeys {
   red_teams_v1_preview: "RedTeams=V1Preview",
   insights_v1_preview: "Insights=V1Preview",
   memory_stores_v1_preview: "MemoryStores=V1Preview",
+  toolbox_v1_preview: "Toolboxes=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
