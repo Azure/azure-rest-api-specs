@@ -8675,3 +8675,227 @@ model ClientDiscoveryResponse {
   @nextLink
   nextLink?: string;
 }
+
+// ============================================================
+// Cross-Tenant Restore (CTR) Models — added in v2026_03_01_preview
+// ============================================================
+
+/**
+ * Cross-tenant vault mapping properties for cross-tenant restore.
+ * Represents the configuration linking a source vault to a target vault across tenants.
+ */
+@added(Versions.v2026_03_01_preview)
+model CrossTenantVaultMapping {
+  /**
+   * ARM resource ID of the source vault.
+   */
+  sourceVaultId: string;
+
+  /**
+   * Name of the mapping.
+   */
+  mappingName?: string;
+
+  /**
+   * Timestamp when the mapping was created.
+   */
+  createdTime?: utcDateTime;
+
+  /**
+   * ResourceGuardOperationRequests on which LAC check will be performed.
+   */
+  resourceGuardOperationRequests?: string[];
+
+  /**
+   * Additional properties for the mapping.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Service contract uses Dictionary<string, string> for additional properties"
+  extendedProperties?: Record<string>;
+
+  /**
+   * Provisioning state of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Inline enum used to put readOnly on definition for ProvisioningStateMustBeReadOnly lint compliance"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Inline enum intentionally closed for provisioningState"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Inline enum used to avoid $ref pattern that fails ProvisioningStateMustBeReadOnly"
+  @visibility(Lifecycle.Read)
+  provisioningState?: "Succeeded" | "Failed" | "Canceled";
+}
+
+/**
+ * Request to remove a cross-tenant vault mapping for cross-tenant restore.
+ */
+@added(Versions.v2026_03_01_preview)
+model RemoveCrossTenantVaultMappingRequest {
+  /**
+   * ResourceGuardOperationRequests on which LAC check will be performed.
+   */
+  resourceGuardOperationRequests?: string[];
+}
+
+/**
+ * State of a vault mapping.
+ */
+@added(Versions.v2026_03_01_preview)
+union VaultMappingState {
+  string,
+
+  /** The mapping is active. */
+  Active: "Active",
+
+  /** The mapping is inactive. */
+  Inactive: "Inactive",
+}
+
+/**
+ * Response for CheckVaultMappingStatus API.
+ * Contains information about whether a source vault is mapped to a target vault.
+ */
+@added(Versions.v2026_03_01_preview)
+model CrossTenantVaultMappingStatusResponse {
+  /**
+   * Mapping name (if mapped).
+   */
+  mappingName?: string;
+
+  /**
+   * Current state of the mapping.
+   */
+  mappingState?: VaultMappingState;
+}
+
+/**
+ * Request to generate a vault credential certificate for cross-tenant restore.
+ */
+@added(Versions.v2026_03_01_preview)
+model VaultCredentialCertificateRequest {
+  /**
+   * Options for certificate generation.
+   */
+  certificateCreateOptions?: VaultCredentialCertificateCreateOptions;
+}
+
+/**
+ * Options for self-signed certificate generation.
+ */
+@added(Versions.v2026_03_01_preview)
+model VaultCredentialCertificateCreateOptions {
+  /**
+   * Validity period of the generated certificate in hours.
+   */
+  validityInHours?: int32;
+}
+
+/**
+ * Response containing the generated vault credential certificate
+ * and associated AAD identity details for MARS agent registration.
+ */
+@added(Versions.v2026_03_01_preview)
+model VaultCredentialCertificateResponse
+  is Azure.ResourceManager.ProxyResource<VaultCredentialCertificateProperties> {
+  /**
+   * The name of the vault credential certificate resource.
+   */
+  @key("vaultCredentialCertificateName")
+  @TypeSpec.Rest.segment("vaultCredentials")
+  @pattern(".*")
+  @TypeSpec.Http.path
+  @visibility(Lifecycle.Read)
+  name: string;
+}
+
+/**
+ * Properties of the vault credential certificate including the certificate data
+ * and AAD service principal identity details required by MARS agent.
+ */
+@added(Versions.v2026_03_01_preview)
+model VaultCredentialCertificateProperties {
+  /**
+   * Authentication type.
+   */
+  authType?: string;
+
+  /**
+   * Base64-encoded certificate data.
+   */
+  certificate?: string;
+
+  /**
+   * IDM resource ID of the vault.
+   */
+  resourceId?: int64;
+
+  /**
+   * String form of the IDM resource ID.
+   */
+  serviceResourceId?: string;
+
+  /**
+   * AAD authority URL.
+   */
+  aadAuthority?: string;
+
+  /**
+   * AAD tenant ID of the source vault.
+   */
+  aadTenantId?: string;
+
+  /**
+   * Service principal client ID for the vault.
+   */
+  servicePrincipalClientId?: string;
+
+  /**
+   * Service principal object ID for the vault.
+   */
+  servicePrincipalObjectId?: string;
+
+  /**
+   * Azure management endpoint audience.
+   */
+  azureManagementEndpointAudience?: string;
+
+  /**
+   * AAD audience URI for the vault.
+   */
+  aadAudience?: string;
+
+  /**
+   * Certificate subject.
+   */
+  subject?: string;
+
+  /**
+   * Certificate issuer.
+   */
+  issuer?: string;
+
+  /**
+   * Certificate thumbprint.
+   */
+  thumbprint?: string;
+
+  /**
+   * Certificate validity start date.
+   */
+  validFrom?: utcDateTime;
+
+  /**
+   * Certificate validity end date.
+   */
+  validTo?: utcDateTime;
+
+  /**
+   * Certificate friendly name.
+   */
+  friendlyName?: string;
+
+  /**
+   * Provisioning state of the vault credential certificate.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Inline enum used to put readOnly on definition for ProvisioningStateMustBeReadOnly lint compliance"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Inline enum intentionally closed for provisioningState"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Inline enum used to avoid $ref pattern that fails ProvisioningStateMustBeReadOnly"
+  @visibility(Lifecycle.Read)
+  provisioningState?: "Succeeded" | "Failed" | "Canceled";
+}

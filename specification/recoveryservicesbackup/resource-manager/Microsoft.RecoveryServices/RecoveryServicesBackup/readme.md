@@ -568,10 +568,26 @@ directive:
     where: 
      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}"].patch.parameters[8]["schema"]
     reason: Known false alarm for the discriminator pattern that causes ConsistentPatchProperties rule to fail.
+  - suppress: ResourceNameRestriction
+    from: bms.json
+    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility across all API versions. Adding a pattern would be a breaking change affecting the entire specification.
+  - suppress: AvoidAdditionalProperties
+    from: bms.json
+    where: $.definitions.CrossTenantVaultMapping.properties.extendedProperties
+    reason: extendedProperties is a dictionary (Record<string>) for extensible key-value metadata. additionalProperties is the correct OpenAPI representation.
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: bms.json
+    where: $.definitions.ProtectedItemResource
+    reason: ProtectedItemResource has DELETE on the standard path. The cross-tenant pass-through paths are read-only and intentionally do not support DELETE.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: bms.json
+    where: $.definitions.VaultCredentialCertificateResponse
+    reason: VaultCredentialCertificateResponse is returned by the operationResults GET endpoint as an async polling result, not as a standalone nested resource with CRUD lifecycle.
 
 suppressions:
   - from: bms.json
     code: ProvisioningStateSpecifiedForLROPut
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}"].put
     reason: The existing API contract is legacy code and not be able to change.
+
 ```

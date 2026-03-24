@@ -136,6 +136,12 @@
       "name": "ResourceGuardProxies"
     },
     {
+      "name": "CrossTenantVaultMappings"
+    },
+    {
+      "name": "CrossTenant"
+    },
+    {
       "name": "ProtectionIntent"
     },
     {
@@ -394,6 +400,1497 @@
         "x-ms-examples": {
           "Check Azure Vm Backup Feature Support": {
             "$ref": "./examples/AzureIaasVm/BackupFeature_Validate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping": {
+      "get": {
+        "operationId": "CrossTenantVaultMappings_List",
+        "tags": [
+          "CrossTenantVaultMappings"
+        ],
+        "description": "Lists the cross-tenant vault mapping configurations for cross-tenant restore operations.\nRetrieves the current cross-tenant vault mapping details including source vault mappings and mapping state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the VaultResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMappingResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Cross Tenant Vault Mappings": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/ListCrossTenantVaultMappings.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}": {
+      "get": {
+        "operationId": "CrossTenantVaultMapping_Get",
+        "tags": [
+          "CrossTenantVaultMappings"
+        ],
+        "description": "Gets a specific cross-tenant vault mapping configuration for cross-tenant restore operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the VaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMappingResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cross Tenant Vault Mapping": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantVaultMapping.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CrossTenantVaultMapping_Create",
+        "tags": [
+          "CrossTenantVaultMappings"
+        ],
+        "description": "Creates or updates the cross-tenant vault mapping for cross-tenant restore operations.\nThis API updates the target vault properties with source vault ID and creates catalog mapping.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the VaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMappingResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CrossTenantVaultMappingResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMappingResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'CrossTenantVaultMappingResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMappingResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Cross Tenant Vault Mapping": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/CreateCrossTenantVaultMapping.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}": {
+      "get": {
+        "operationId": "CrossTenantProtectedItems_Get",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Gets the details of a protected item from a cross-tenant vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backed up items.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Container name associated with the backed up items.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Backed up item name whose details are to be fetched.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Protected Item From Cross-Tenant Vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetProtectedItemFromCrossTenantVault.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
+      "get": {
+        "operationId": "CrossTenantProtectedItemOperationResults_Get",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Fetches the result of any cross-tenant operation on the backup item.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backed up items.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Container name associated with the backed up items.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Backed up item name whose details are to be fetched.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID which represents the operation whose result needs to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cross-Tenant Operation Result": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantOperationResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationsStatus/{operationId}": {
+      "get": {
+        "operationId": "CrossTenantProtectedItemOperationStatuses_Get",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Fetches the status of a cross-tenant operation such as triggering a restore.\nThe status can be in progress, completed or failed.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backing up items.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Container name associated with the backed up items.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Backup item name whose details are to be fetched.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID represents the operation whose status needs to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cross-Tenant Operation Status": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints": {
+      "get": {
+        "operationId": "CrossTenantVaultRecoveryPoints_List",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Lists recovery points from the source vault in a different tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the container.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Container name associated with the backed up items.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Backed up item name whose recovery points are to be fetched.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantRecoveryPointResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Recovery Points From Cross-Tenant Vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantRecoveryPoints.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/restore": {
+      "post": {
+        "operationId": "RestoresFromCrossTenantVault_Trigger",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Restores the specified backed up data from a source vault in a different tenant. This is an asynchronous operation.\nTo know the status of this API call, use GetProtectedItemOperationResult API.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backed up items.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Container name associated with the backed up items.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Backed up item to be restored.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "recoveryPointId",
+            "in": "path",
+            "description": "Recovery point ID which represents the backed up data to be restored.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "resource restore request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Trigger Cross-Tenant Restore": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/TriggerCrossTenantRestore.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupJobs": {
+      "get": {
+        "operationId": "BackupJobsFromCrossTenantVault_List",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Provides a pageable list of cross-tenant backup jobs.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "skipToken Filter.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantJobResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Cross-Tenant Jobs": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/ListCrossTenantJobs.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupJobs/{jobName}": {
+      "get": {
+        "operationId": "JobDetailsFromCrossTenantVault_Get",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Gets extended information associated with a cross-tenant backup job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Name of the job whose details are to be fetched.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cross-Tenant Job Details": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantJobDetails.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupProtectedItems": {
+      "get": {
+        "operationId": "BackupProtectedItemsFromCrossTenantVault_List",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Lists the protected items from the source vault in a different tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "skipToken Filter.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantProtectedItemResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Protected Items From Cross-Tenant Vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/ListCrossTenantProtectedItems.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupTriggerValidateOperation": {
+      "post": {
+        "operationId": "ValidateOperationFromCrossTenantVault_Trigger",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Triggers a validate operation for cross-tenant restore scenarios.\nThis is an asynchronous operation that performs validation checks.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Trigger validate operation request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationsResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Trigger Cross-Tenant Validate Operation": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/TriggerValidateOperation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupValidateOperation": {
+      "post": {
+        "operationId": "OperationFromCrossTenantVault_Validate",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Validates a backup operation for cross-tenant restore scenarios.\nThis API performs validation checks before executing a backup operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Validate operation request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate Cross-Tenant Backup Operation": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/ValidateOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupValidateOperationResults/{operationId}": {
+      "get": {
+        "operationId": "ValidateOperationResultFromCrossTenantVault_Get",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Gets the result of a specific validate operation for cross-tenant restore scenarios.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID which represents the operation whose result needs to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationsResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cross-Tenant Validate Operation Result": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetValidateOperationResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/backupValidateOperationsStatuses/{operationId}": {
+      "get": {
+        "operationId": "ValidateOperationStatusFromCrossTenantVault_Get",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Gets the status of a validate operation for cross-tenant restore scenarios.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID represents the operation whose status needs to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cross-Tenant Validate Operation Status": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetValidateOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/removeCrossTenantVaultMapping": {
+      "post": {
+        "operationId": "CrossTenantVaultMappings_Remove",
+        "tags": [
+          "CrossTenantVaultMappings"
+        ],
+        "description": "Removes the cross-tenant vault mapping for cross-tenant restore operations.\nThis API removes the target vault properties associated with source vault ID and deletes catalog mapping.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the VaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveCrossTenantVaultMappingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove Cross Tenant Vault Mapping": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/RemoveCrossTenantVaultMapping.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/generate": {
+      "post": {
+        "operationId": "CrossTenantVaultCredential_Generate",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Generates a vault credential certificate for cross-tenant restore scenarios.\nThis is an asynchronous operation. BMS creates a TEE job that calls IDM's certificates\nendpoint for the source vault, generating a self-signed certificate registered with AAD.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name identifier for the certificate.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Optional certificate generation options.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VaultCredentialCertificateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate Cross-Tenant Vault Credential": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GenerateCrossTenantVaultCredential.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/operationResults/{operationId}": {
+      "get": {
+        "operationId": "CrossTenantVaultCredentialOperationResults_Get",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Gets the result of an async vault credential generation operation.\nReturns 202 Accepted while the TEE job is still in progress.\nReturns 200 OK with VaultCredentialCertificateResponse when the job completes.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name identifier for the certificate.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID returned in the Location header of the generate call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VaultCredentialCertificateResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Vault Credential Operation Result": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetVaultCredentialOperationResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/operationStatus/{operationId}": {
+      "get": {
+        "operationId": "CrossTenantVaultCredentialOperationStatuses_Get",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Gets the status of an async vault credential generation operation.\nReturns the current status (InProgress, Completed, Failed) and any associated job details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name identifier for the certificate.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID returned in the Azure-AsyncOperation header of the generate call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Vault Credential Operation Status": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetVaultCredentialOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappingStatus": {
+      "post": {
+        "operationId": "VaultMappingStatus_Check",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Gets the mapping status of the vault for cross-tenant restore operations.\nReturns the mapping status that indicates whether the vault is properly configured for cross-tenant operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMappingStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check Vault Mapping Status": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/CheckVaultMappingStatus.json"
           }
         }
       }
@@ -8957,6 +10454,163 @@
         ]
       }
     },
+    "CrossTenantJobResourceList": {
+      "type": "object",
+      "description": "List of jobs for cross-tenant restore operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of resources.",
+          "items": {
+            "$ref": "#/definitions/JobResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    },
+    "CrossTenantProtectedItemResourceList": {
+      "type": "object",
+      "description": "List of protected items for cross-tenant restore operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of resources.",
+          "items": {
+            "$ref": "#/definitions/ProtectedItemResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    },
+    "CrossTenantRecoveryPointResourceList": {
+      "type": "object",
+      "description": "List of recovery points for cross-tenant restore operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of resources.",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    },
+    "CrossTenantVaultMapping": {
+      "type": "object",
+      "description": "Cross-tenant vault mapping properties for cross-tenant restore.\nRepresents the configuration linking a source vault to a target vault across tenants.",
+      "properties": {
+        "sourceVaultId": {
+          "type": "string",
+          "description": "ARM resource ID of the source vault."
+        },
+        "mappingName": {
+          "type": "string",
+          "description": "Name of the mapping."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the mapping was created."
+        },
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "description": "ResourceGuardOperationRequests on which LAC check will be performed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedProperties": {
+          "type": "object",
+          "description": "Additional properties for the mapping.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sourceVaultId"
+      ]
+    },
+    "CrossTenantVaultMappingResource": {
+      "type": "object",
+      "description": "Cross-tenant vault mapping resource for cross-tenant restore.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CrossTenantVaultMapping",
+          "description": "CrossTenantVaultMappingResource properties"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Optional ETag."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CrossTenantVaultMappingResourceListResult": {
+      "type": "object",
+      "description": "The response of a CrossTenantVaultMappingResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CrossTenantVaultMappingResource items on this page",
+          "items": {
+            "$ref": "#/definitions/CrossTenantVaultMappingResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CrossTenantVaultMappingStatusResponse": {
+      "type": "object",
+      "description": "Response for CheckVaultMappingStatus API.\nContains information about whether a source vault is mapped to a target vault.",
+      "properties": {
+        "mappingName": {
+          "type": "string",
+          "description": "Mapping name (if mapped)."
+        },
+        "mappingState": {
+          "$ref": "#/definitions/VaultMappingState",
+          "description": "Current state of the mapping."
+        }
+      }
+    },
     "DPMContainerExtendedInfo": {
       "type": "object",
       "description": "Additional information of the DPMContainer.",
@@ -13516,6 +15170,19 @@
         ]
       }
     },
+    "RemoveCrossTenantVaultMappingRequest": {
+      "type": "object",
+      "description": "Request to remove a cross-tenant vault mapping for cross-tenant restore.",
+      "properties": {
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "description": "ResourceGuardOperationRequests on which LAC check will be performed.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ResourceGuardOperationDetail": {
       "type": "object",
       "properties": {
@@ -15171,6 +16838,128 @@
         ]
       }
     },
+    "VaultCredentialCertificateCreateOptions": {
+      "type": "object",
+      "description": "Options for self-signed certificate generation.",
+      "properties": {
+        "validityInHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Validity period of the generated certificate in hours."
+        }
+      }
+    },
+    "VaultCredentialCertificateProperties": {
+      "type": "object",
+      "description": "Properties of the vault credential certificate including the certificate data\nand AAD service principal identity details required by MARS agent.",
+      "properties": {
+        "authType": {
+          "type": "string",
+          "description": "Authentication type."
+        },
+        "certificate": {
+          "type": "string",
+          "description": "Base64-encoded certificate data."
+        },
+        "resourceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "IDM resource ID of the vault."
+        },
+        "serviceResourceId": {
+          "type": "string",
+          "description": "String form of the IDM resource ID."
+        },
+        "aadAuthority": {
+          "type": "string",
+          "description": "AAD authority URL."
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "AAD tenant ID of the source vault."
+        },
+        "servicePrincipalClientId": {
+          "type": "string",
+          "description": "Service principal client ID for the vault."
+        },
+        "servicePrincipalObjectId": {
+          "type": "string",
+          "description": "Service principal object ID for the vault."
+        },
+        "azureManagementEndpointAudience": {
+          "type": "string",
+          "description": "Azure management endpoint audience."
+        },
+        "aadAudience": {
+          "type": "string",
+          "description": "AAD audience URI for the vault."
+        },
+        "subject": {
+          "type": "string",
+          "description": "Certificate subject."
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Certificate issuer."
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Certificate thumbprint."
+        },
+        "validFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Certificate validity start date."
+        },
+        "validTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Certificate validity end date."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Certificate friendly name."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the vault credential certificate.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "VaultCredentialCertificateRequest": {
+      "type": "object",
+      "description": "Request to generate a vault credential certificate for cross-tenant restore.",
+      "properties": {
+        "certificateCreateOptions": {
+          "$ref": "#/definitions/VaultCredentialCertificateCreateOptions",
+          "description": "Options for certificate generation."
+        }
+      }
+    },
+    "VaultCredentialCertificateResponse": {
+      "type": "object",
+      "description": "Response containing the generated vault credential certificate\nand associated AAD identity details for MARS agent registration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultCredentialCertificateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "VaultJob": {
       "type": "object",
       "description": "Vault level Job",
@@ -15242,6 +17031,30 @@
             "type": "string"
           }
         }
+      }
+    },
+    "VaultMappingState": {
+      "type": "string",
+      "description": "State of a vault mapping.",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "VaultMappingState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The mapping is active."
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "The mapping is inactive."
+          }
+        ]
       }
     },
     "VaultResource": {

@@ -1,0 +1,41 @@
+{
+  "operationId": "ValidateOperationFromCrossTenantVault_Trigger",
+  "title": "Trigger Cross-Tenant Validate Operation",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "vaultName": "NetSDKTestRsVault",
+    "crossTenantVaultMappingName": "crossTenantVaultMapping1",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "parameters": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupCrossTenantVaultMapping/crossTenantVaultMapping1",
+      "properties": {
+        "objectType": "ValidateIaasVMRestoreOperationRequest",
+        "restoreRequest": {
+          "objectType": "IaasVMRestoreRequest",
+          "recoveryPointId": "348916168024334",
+          "recoveryType": "RestoreDisks",
+          "sourceResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/SourceRG/providers/Microsoft.Compute/virtualMachines/testVM",
+          "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestaccount",
+          "region": "westus"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupCrossTenantVaultMapping/crossTenantVaultMapping1/backupValidateOperationResults/00000000-0000-0000-0000-000000000000?api-version=2026-03-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupCrossTenantVaultMapping/crossTenantVaultMapping1/backupValidateOperationsStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-03-01-preview",
+        "Retry-After": "60"
+      }
+    },
+    "200": {
+      "body": {
+        "validateOperationResponse": {
+          "validationResults": []
+        }
+      }
+    }
+  }
+}

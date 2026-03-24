@@ -1,0 +1,41 @@
+{
+  "operationId": "CrossTenantVaultRecoveryPoints_List",
+  "title": "List Recovery Points From Cross-Tenant Vault",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "vaultName": "NetSDKTestRsVault",
+    "crossTenantVaultMappingName": "crossTenantVaultMapping1",
+    "fabricName": "Azure",
+    "containerName": "IaasVMContainer;iaasvmcontainerv2;SwaggerTestRg;testVM",
+    "protectedItemName": "VM;iaasvmcontainerv2;SwaggerTestRg;testVM",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupCrossTenantVaultMapping/crossTenantVaultMapping1/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;SwaggerTestRg;testVM/protectedItems/VM;iaasvmcontainerv2;SwaggerTestRg;testVM/recoveryPoints/348916168024334",
+            "name": "348916168024334",
+            "type": "Microsoft.RecoveryServices/vaults/backupCrossTenantVaultMapping/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+            "properties": {
+              "objectType": "IaasVMRecoveryPoint",
+              "recoveryPointType": "CrashConsistent",
+              "recoveryPointTime": "2026-01-15T08:00:00.0000000Z",
+              "sourceVMStorageType": "PremiumVMOnPartialPremiumStorage",
+              "isSourceVMEncrypted": false,
+              "isInstantIlrSessionActive": false,
+              "recoveryPointTierDetails": [
+                {
+                  "type": "HardenedRP",
+                  "status": "Valid"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
