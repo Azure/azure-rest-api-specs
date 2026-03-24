@@ -2039,7 +2039,7 @@ model ManagedClusterProperties {
   healthMonitorProfile?: ManagedClusterHealthMonitorProfile;
 
   /**
-   * Profile for providing scaled and performance guaranteed control plane capacity to deliver consistent performance under high workload. Requires Kubernetes version 1.33.0 or later and Azure CNI Overlay networking.
+   * Profile for providing scaled and performance guaranteed control plane capacity to deliver consistent performance under high workload. Requires Kubernetes version 1.33.0 or later.
    */
   @added(Versions.v2026_02_02_preview)
   controlPlaneScalingProfile?: ManagedClusterControlPlaneScalingProfile;
@@ -4333,7 +4333,7 @@ model ManagedClusterHealthMonitorProfile {
 }
 
 /**
- * Profile for providing scaled and performance guaranteed control plane capacity to deliver consistent performance under high workload. Requires Kubernetes version 1.33.0 or later and Azure CNI Overlay networking.
+ * Profile for providing scaled and performance guaranteed control plane capacity to deliver consistent performance under high workload. Requires Kubernetes version 1.33.0 or later.
  */
 @added(Versions.v2026_02_02_preview)
 model ManagedClusterControlPlaneScalingProfile {
