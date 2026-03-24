@@ -129,15 +129,27 @@ using Microsoft.NotificationHubs;
 @@clientName(NamespaceResources.getPnsCredentials, "GetPnsCredentials");
 @@clientLocation(NotificationHubResources.get, "NotificationHubs", "!csharp");
 @@clientName(NotificationHubResources.get, "Get");
-@@clientLocation(NotificationHubResources.createOrUpdate, "NotificationHubs", "!csharp");
+@@clientLocation(NotificationHubResources.createOrUpdate,
+  "NotificationHubs",
+  "!csharp"
+);
 @@clientName(NotificationHubResources.createOrUpdate, "CreateOrUpdate");
-@@clientLocation(NotificationHubResources.update, "NotificationHubs", "!csharp");
+@@clientLocation(NotificationHubResources.update,
+  "NotificationHubs",
+  "!csharp"
+);
 @@clientName(NotificationHubResources.update, "Update");
-@@clientLocation(NotificationHubResources.delete, "NotificationHubs", "!csharp");
+@@clientLocation(NotificationHubResources.delete,
+  "NotificationHubs",
+  "!csharp"
+);
 @@clientName(NotificationHubResources.delete, "Delete");
 @@clientLocation(NotificationHubResources.list, "NotificationHubs", "!csharp");
 @@clientName(NotificationHubResources.list, "List");
-@@clientLocation(NotificationHubResources.debugSend, "NotificationHubs", "!csharp");
+@@clientLocation(NotificationHubResources.debugSend,
+  "NotificationHubs",
+  "!csharp"
+);
 @@clientName(NotificationHubResources.debugSend, "DebugSend");
 @@clientLocation(NotificationHubResources.getPnsCredentials,
   "NotificationHubs",
