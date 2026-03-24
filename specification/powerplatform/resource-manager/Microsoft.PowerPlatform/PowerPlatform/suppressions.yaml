@@ -3,8 +3,7 @@
   reason: Brownfield service not ready to migrate
 - tool: TypeSpecValidation
   reason: >
-    Only Go emitter is configured in [tspconfig.yaml]
-  rules: [SdkTspConfigValidation]
+    Java, Python, TS don't have released SDKs yet, so we need to suppress validation errors for now.
   sub-rules:
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
