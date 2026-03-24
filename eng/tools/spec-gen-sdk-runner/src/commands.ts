@@ -11,6 +11,7 @@ import {
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
+  readSdkOutputCheckRequired,
   setPipelineVariables,
 } from "./command-helpers.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
@@ -105,6 +106,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let overallExecutionResult = "";
   let currentExecutionResult: string;
   let stagedArtifactsFolder = "";
+  let sdkReportedCheckRequired: boolean | undefined;
   const apiViewRequestData: APIViewRequestData[] = [];
 
   if (changedSpecs.length === 0) {
@@ -181,6 +183,19 @@ export async function generateSdkForSpecPr(): Promise<number> {
       currentRunHasBreakingChange = getBreakingChangeInfo(executionReport);
       overallRunHasBreakingChange = overallRunHasBreakingChange || currentRunHasBreakingChange;
       logMessage(`Runner command execution result:${currentExecutionResult}`);
+
+      // For .NET, read the SDK's explicit isSpecGenSdkCheckRequired from the generation output.
+      // Only override when the SDK explicitly provides the value (not undefined).
+      if (commandInput.sdkLanguage === "azure-sdk-for-net") {
+        const currentRunCheckRequired = readSdkOutputCheckRequired(commandInput);
+        if (currentRunCheckRequired === true) {
+          sdkReportedCheckRequired = true;
+        } else if (currentRunCheckRequired === false && sdkReportedCheckRequired === undefined) {
+          sdkReportedCheckRequired = false;
+        }
+        // If currentRunCheckRequired is undefined (old SDK script), sdkReportedCheckRequired
+        // stays undefined and getRequiredSettingValue falls back to existing logic.
+      }
     } catch (error) {
       logMessage(`Runner: error reading execution-report.json:${inspect(error)}`, LogLevel.Error);
       statusCode = 1;
@@ -202,6 +217,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       stagedArtifactsFolder,
       apiViewRequestData,
       sdkGenerationExecuted,
+      sdkReportedCheckRequired,
     ) || statusCode;
   return statusCode;
 }
