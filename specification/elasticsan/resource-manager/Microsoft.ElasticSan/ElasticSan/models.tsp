@@ -323,7 +323,7 @@ model SkuInformation {
   capabilities?: SKUCapability[];
 
   /**
-    * The Volume Group Quality of Service tier metadata for the specified SKU. Applicable only to ElasticSanVersion V2; for V1, use 'tier'.
+   * The Volume Group Quality of Service tier metadata for the specified SKU. Applicable only to ElasticSanVersion V2; for V1, use 'tier'.
    */
   @added(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
