@@ -36,6 +36,14 @@ model DeploymentExtended
   tags?: Record<string>;
 }
 
+model BadResponse<T> is Response<400> {
+  /**
+   * The error details.
+   */
+  @bodyRoot
+  body: T;
+}
+
 interface DeploymentExtendedScopeOps
   extends Azure.ResourceManager.Legacy.RoutedOperations<
       {
@@ -157,7 +165,7 @@ interface DeploymentExtendeds {
     Extension.ScopeParameter,
     DeploymentExtended,
     Deployment,
-    DeploymentValidateResult,
+    DeploymentValidateResult | BadResponse<DeploymentValidateResult>,
     Error = CloudError
   >;
 
@@ -411,6 +419,7 @@ interface DeploymentExtendedManagementGroupOps
 
         @path
         @minLength(1)
+        @maxLength(90)
         @segment("managementGroups")
         @doc("The management group ID.")
         groupId: string,
@@ -497,6 +506,7 @@ interface DeploymentExtendedManagementGroup {
       @query("$top")
       $top?: int32;
     },
+    Response = DeploymentListResult,
     Error = CloudError
   >;
 
@@ -526,7 +536,7 @@ interface DeploymentExtendedManagementGroup {
     Extension.ManagementGroup<"groupId">,
     DeploymentExtended,
     ScopedDeployment,
-    DeploymentValidateResult,
+    DeploymentValidateResult | BadResponse<DeploymentValidateResult>,
     Error = CloudError
   >;
 
@@ -984,3 +994,4 @@ interface DeploymentExtendedOperationGroup {
 @@doc(DeploymentExtendedOperationGroup.whatIf::parameters.body,
   "Parameters to validate."
 );
+@@maxLength(Extension.ManagementGroup.name, 90);

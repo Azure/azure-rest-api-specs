@@ -625,7 +625,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "$filter",
@@ -645,9 +646,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeploymentExtendedListResult"
+              "$ref": "#/definitions/DeploymentListResult"
             }
           },
           "default": {
@@ -679,7 +680,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -723,7 +725,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -803,7 +806,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -862,7 +866,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -908,7 +913,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -951,7 +957,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -997,7 +1004,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -1054,7 +1062,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -1107,7 +1116,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -1150,6 +1160,12 @@
               }
             }
           },
+          "400": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1164,7 +1180,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/DeploymentValidateResult"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20Azure.ResourceManager.Extension.%7B%20location%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -1186,7 +1202,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -3341,6 +3358,10 @@
           "readOnly": true
         }
       }
+    },
+    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", Azure.ResourceManager.Extension.{ location: string, retryAfter: int32 }>": {
+      "type": "object",
+      "description": "Resource operation accepted."
     },
     "BasicDependency": {
       "type": "object",
