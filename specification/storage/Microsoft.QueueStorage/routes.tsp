@@ -185,7 +185,7 @@ interface Service {
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Queue {
-  /** Creates a new queue under the specified account. If the queue with the same name already exists, the operation fails. */
+  /** Creates a new queue under the specified account. If a queue with the same name already exists, the operation succeeds when the metadata is identical and returns 204; if the metadata differs, the operation returns 409. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @put
@@ -195,7 +195,8 @@ interface Queue {
       ...MetadataHeaders;
     },
     {
-      @statusCode statusCode: 201;
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
+      @statusCode statusCode: 201 | 204;
     }
   >;
 
@@ -235,7 +236,7 @@ interface Queue {
   setMetadata is StorageOperationNoBody<
     {
       ...TimeoutParameter;
-      ...MetadataHeadersParameter;
+      ...MetadataHeaders;
     },
     {
       @statusCode statusCode: 204;
@@ -262,14 +263,18 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @route("?comp=acl")
-  setAccessPolicy is StorageOperationRequestBody<
+  setAccessPolicy is StorageOperationNoBody<
     {
+      /** The media type of the requestbody */
+      @header("Content-Type")
+      contentType?: "application/xml";
+
       ...TimeoutParameter;
 
       /** The access control list for the queue. */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
       @bodyRoot
-      queueAcl: SignedIdentifiers;
+      queueAcl?: SignedIdentifiers;
     },
     {
       @statusCode statusCode: 204;
@@ -401,8 +406,12 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @route("messages/{messageId}")
-  updateMessage is StorageOperationRequestBody<
+  updateMessage is StorageOperationNoBody<
     {
+      /** Content-Type header */
+      @header("Content-Type")
+      contentType?: "application/xml";
+
       ...MessageIdPathParameter;
       ...PopReceiptQueryParameter;
 

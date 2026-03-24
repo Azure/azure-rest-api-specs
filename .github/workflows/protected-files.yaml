@@ -40,15 +40,17 @@ jobs:
         run: |
           . eng/scripts/ChangedFiles-Functions.ps1
 
-          $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", ".vscode/*", "eng/*")
-          $excludedFiles = @(".github/CODEOWNERS")
+          # powershell glob syntax
+          $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", ".github/azsdk-common-*", ".vscode/*", "eng/*")
+          # regex syntax, to support protected paths within larger excluded paths
+          $excludedFiles = @('.github/CODEOWNERS', '.github/skills/(?!azsdk-common-).+')
           $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -headCommitish HEAD -diffFilter "")
 
           $matchedFiles = @(
             $changedFiles | Where-Object {
-              $changedFile = $_; 
+              $changedFile = $_;
               ($protectedFiles | Where-Object { $changedFile -like $_ }) -and
-              -not ($excludedFiles | Where-Object { $changedFile -like $_ })
+              -not ($excludedFiles | Where-Object { $changedFile -match $_ })
             }
           )
 
