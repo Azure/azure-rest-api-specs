@@ -57,6 +57,7 @@ interface SBAuthorizationRuleOps
          * The authorization rule name.
          */
         @path
+        @key
         @segment("AuthorizationRules")
         @minLength(1)
         @maxLength(50)
