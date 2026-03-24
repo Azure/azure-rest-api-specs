@@ -285,40 +285,6 @@ export function getBreakingChangeInfo(executionReport: ExecutionReport): boolean
 }
 
 /**
- * Read isSpecGenSdkCheckRequired from the SDK generation output (generateOutput.json).
- * For .NET SDK, the generation script explicitly declares whether the SDK validation
- * check should be required, based on whether the package uses the new mgmt emitter.
- * @param commandInput - The command input.
- * @returns true/false if SDK explicitly declares the value, undefined if the property
- *          is not present (e.g., older SDK script) or the file doesn't exist.
- */
-export function readSdkOutputCheckRequired(commandInput: SpecGenSdkCmdInput): boolean | undefined {
-  const generateOutputPath = path.join(
-    commandInput.workingFolder,
-    `${commandInput.sdkRepoName}_tmp/generateOutput.json`,
-  );
-  if (!fs.existsSync(generateOutputPath)) {
-    return undefined;
-  }
-  try {
-    const generateOutput = JSON.parse(fs.readFileSync(generateOutputPath, "utf8")) as {
-      isSpecGenSdkCheckRequired?: boolean;
-    };
-    if (typeof generateOutput.isSpecGenSdkCheckRequired === "boolean") {
-      return generateOutput.isSpecGenSdkCheckRequired;
-    }
-    return undefined;
-  } catch (error) {
-    logMessage(
-      `Runner: failed to parse generateOutput.json at '${generateOutputPath}': ${inspect(error)}. ` +
-        `Falling back to legacy inference logic.`,
-      LogLevel.Warn,
-    );
-    return undefined;
-  }
-}
-
-/**
  * Generate the spec-gen-sdk artifacts.
  * @param commandInput - The command input.
  * @param result - The spec-gen-sdk execution result.
@@ -328,7 +294,6 @@ export function readSdkOutputCheckRequired(commandInput: SpecGenSdkCmdInput): bo
  * @param stagedArtifactsFolder - The staged artifacts folder.
  * @param apiViewRequestData - The API view request data.
  * @param sdkGenerationExecuted - A flag indicating whether the SDK generation was executed.
- * @param sdkReportedCheckRequired - Optional value from SDK output indicating whether the check is required.
  * @returns the run status code.
  */
 export function generateArtifact(
@@ -340,7 +305,6 @@ export function generateArtifact(
   stagedArtifactsFolder: string,
   apiViewRequestData: APIViewRequestData[],
   sdkGenerationExecuted: boolean = true,
-  sdkReportedCheckRequired?: boolean,
 ): number {
   const specGenSdkArtifactName = "spec-gen-sdk-artifact";
   const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
@@ -359,7 +323,6 @@ export function generateArtifact(
         hasManagementPlaneSpecs,
         hasTypeSpecProjects,
         commandInput.sdkLanguage,
-        sdkReportedCheckRequired,
       );
     }
 
@@ -411,21 +374,13 @@ export function getServiceFolderPath(specConfigPath: string): string {
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
  * @param hasTypeSpecProjects - A flag indicating whether there are TypeSpec projects.
  * @param sdkName - The SDK name.
- * @param sdkReportedCheckRequired - Optional value from SDK output indicating whether the check is required.
  * @returns boolean indicating whether the SDK check is required.
  */
 export function getRequiredSettingValue(
   hasManagementPlaneSpecs: boolean,
   hasTypeSpecProjects: boolean,
   sdkName: SdkName,
-  sdkReportedCheckRequired?: boolean,
 ): boolean {
-  // If the SDK explicitly reported whether the check is required (e.g., .NET SDK
-  // reports this based on whether the package uses the new mgmt emitter), use that
-  // value directly instead of inferring from the broad hasTypeSpecProjects flag.
-  if (sdkName === "azure-sdk-for-net" && sdkReportedCheckRequired !== undefined) {
-    return sdkReportedCheckRequired;
-  }
   // If the SDK is azure-sdk-for-net, return false if there are no TypeSpec projects.
   if (sdkName === "azure-sdk-for-net" && !hasTypeSpecProjects) {
     return false;
