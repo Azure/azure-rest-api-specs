@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -178,11 +180,19 @@ model ExtensionTypeVersionUnsupportedKubernetesMatrixItem {
 }
 
 /**
- * List of supported Azure locations for an extension type
+ * List of supported Azure locations for an extension type.
  */
-model SupportedLocationsList {
+@added(Versions.v2026_04_01)
+model SupportedLocationsResult {
   /**
-   * Array of Azure region names where the extension type is supported
+   * Array of supported Azure location names.
    */
+  @pageItems
   value: string[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }

@@ -44,6 +44,10 @@ suppressions:
   - code: OperationsAPIImplementation
     from: extensionTypes.json
     reason: Operations API is implemented as a separate service.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: extensionTypes.json
+    where: $.definitions.SupportedLocationsResult
+    reason: SupportedLocationsResult is a paginated list of location name strings, not an ARM resource model.
 ```
 
 ---

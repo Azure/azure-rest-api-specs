@@ -73,9 +73,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SupportedLocationsList"
+              "$ref": "#/definitions/SupportedLocationsResult"
             }
           },
           "default": {
@@ -89,6 +89,9 @@
           "List Extension Type Supported Locations": {
             "$ref": "./examples/ListExtensionTypeSupportedLocations.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -936,16 +939,20 @@
         "value"
       ]
     },
-    "SupportedLocationsList": {
+    "SupportedLocationsResult": {
       "type": "object",
-      "description": "List of supported Azure locations for an extension type",
+      "description": "List of supported Azure locations for an extension type.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Array of Azure region names where the extension type is supported",
+          "description": "Array of supported Azure location names.",
           "items": {
             "type": "string"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
         }
       },
       "required": [

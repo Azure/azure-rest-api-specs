@@ -2,12 +2,15 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.KubernetesConfiguration;
 /**
@@ -99,27 +102,31 @@ interface ExtensionTypes {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface models a custom listSupportedLocations action route and does not correspond to an ARM resource operation group, so @armResourceOperations is not applicable."
+@added(Versions.v2026_04_01)
 interface ExtensionTypeSupportedLocations {
   /**
    * List all supported Azure locations for the specified extension type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required by ARM linter for list operations and @pageItems/@nextLink on the model do not emit it for custom route operations."
+  @added(Versions.v2026_04_01)
   @tag("ExtensionTypes")
   @tag("ClusterExtensionTypes")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}/locations")
   @get
+  @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   listSupportedLocations(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    
+
     /**
      * Name of the Extension Type.
      */
     @path
     @pattern("^[a-zA-Z][a-zA-Z0-9-_]*$")
     extensionTypeName: string,
-  ): ArmResponse<SupportedLocationsList> | ErrorResponse;
+  ): SupportedLocationsResult | ErrorResponse;
 }
-
 
 alias ExtensionTypeOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
