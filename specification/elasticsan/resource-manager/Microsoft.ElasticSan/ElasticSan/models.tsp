@@ -450,34 +450,16 @@ model ElasticSanProperties {
   /**
    * Base size of the Elastic San appliance in TiB.
    */
-  @removed(Versions.v2026_05_01_preview)
+  @madeOptional(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  baseSizeTiB: int64;
-
-  /**
-   * Base size of the Elastic San appliance in TiB, applicable for ElasticSanVersion V1 only
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_05_01_preview)
-  @encodedName("application/json", "baseSizeTiB")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  baseSizeTiBForCreate?: int64;
+  baseSizeTiB?: int64;
 
   /**
    * Extended size of the Elastic San appliance in TiB.
    */
-  @removed(Versions.v2026_05_01_preview)
+  @madeOptional(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedCapacitySizeTiB: int64;
-
-  /**
-   * Extended size of the Elastic San appliance in TiB, applicable for ElasticSanVersion V1 only
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_05_01_preview)
-  @encodedName("application/json", "extendedCapacitySizeTiB")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedCapacitySizeTiBForCreate?: int64;
+  extendedCapacitySizeTiB?: int64;
 
   /**
    * Total size of the provisioned Volumes in GiB.
@@ -496,15 +478,15 @@ model ElasticSanProperties {
    */
   @removed(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
-  totalIops?: int64;
+  @renamedFrom(Versions.v2026_05_01_preview, "totalIops")
+  oldTotalIops?: int64;
 
   /**
    * Total Provisioned IOPS of the Elastic San appliance, applicable for ElasticSanVersion V2 only.
    */
   @added(Versions.v2026_05_01_preview)
-  @encodedName("application/json", "totalIops")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  totalIopsForCreate?: int64;
+  totalIops?: int64;
 
   /**
    * Total Provisioned MBps Elastic San appliance.
@@ -512,31 +494,31 @@ model ElasticSanProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @removed(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
-  totalMBps?: int64;
+  @renamedFrom(Versions.v2026_05_01_preview, "totalMBps")
+  oldTotalMBps?: int64;
 
   /**
    * Total Provisioned MBps Elastic San appliance, applicable for ElasticSanVersion V2 only.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_05_01_preview)
-  @encodedName("application/json", "totalMBps")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  totalMbpsForCreate?: int64;
+  totalMBps?: int64;
 
   /**
    * Total size of the Elastic San appliance in TB.
    */
   @removed(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
-  totalSizeTiB?: int64;
+  @renamedFrom(Versions.v2026_05_01_preview, "totalSizeTiB")
+  oldTotalSizeTiB?: int64;
 
   /**
    * Total size of the Elastic San appliance in TB, applicable for ElasticSanVersion V2 only.
    */
   @added(Versions.v2026_05_01_preview)
-  @encodedName("application/json", "totalSizeTiB")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  totalSizeTibForCreate?: int64;
+  totalSizeTiB?: int64;
 
   /**
    * The list of Private Endpoint Connections.
@@ -1107,15 +1089,16 @@ model VolumeProperties {
    * Parent resource information.
    */
   @removed(Versions.v2026_05_01_preview)
-  managedBy?: ManagedByInfo;
+  @renamedFrom(Versions.v2026_05_01_preview, "managedBy")
+  oldManagedBy?: ManagedByInfo;
 
   /**
    * Information about Azure services owning the ElasticSan volume resource.
    */
   @added(Versions.v2026_05_01_preview)
-  @encodedName("application/json", "managedBy")
+  @renamedFrom(Versions.v2026_05_01_preview, "managedBy")
   @identifiers(#[])
-  managedByV2?: ManagedByResources[];
+  managedBy?: ManagedByResources[];
 
   /**
    * State of the operation on the resource.
@@ -1236,15 +1219,16 @@ model VolumeUpdateProperties {
    * Parent resource information.
    */
   @removed(Versions.v2026_05_01_preview)
-  managedBy?: ManagedByInfo;
+  @renamedFrom(Versions.v2026_05_01_preview, "managedBy")
+  oldManagedBy?: ManagedByInfo;
 
   /**
    * Information about Azure services owning the ElasticSan volume resource.
    */
   @added(Versions.v2026_05_01_preview)
-  @encodedName("application/json", "managedBy")
+  @renamedFrom(Versions.v2026_05_01_preview, "managedBy")
   @identifiers(#[])
-  managedByV2?: ManagedByResources[];
+  managedBy?: ManagedByResources[];
 }
 
 /**
