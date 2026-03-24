@@ -84,7 +84,8 @@ alias DefaultVirtualMachines = {
   "requestBody"
 );
 @@doc(VirtualMachineBulkOperations.bulkCancel::parameters.body,
-  "The request body");
+  "The request body"
+);
 
 @armResourceOperations(#{ omitTags: true })
 interface VirtualMachineBulkOperations {
