@@ -134,12 +134,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
     void,
     ArmResponse<EndpointModels>,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     }
   >;
 }

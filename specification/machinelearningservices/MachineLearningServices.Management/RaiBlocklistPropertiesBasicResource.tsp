@@ -50,12 +50,7 @@ interface RaiBlocklistPropertiesBasicResources {
   create is ArmResourceCreateOrReplaceAsync<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiBlocklistPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -68,12 +63,7 @@ interface RaiBlocklistPropertiesBasicResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     }
   >;
 
@@ -84,12 +74,7 @@ interface RaiBlocklistPropertiesBasicResources {
   list is ArmResourceListByParent<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     Response = ArmResponse<RaiBlocklistPropertiesBasicResourceArmPaginatedResult>
   >;
