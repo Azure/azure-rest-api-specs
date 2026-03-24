@@ -38,6 +38,7 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
    * The location of the compute resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
   /**
@@ -72,32 +73,15 @@ interface Computes {
   /**
    * Creates or updates a compute associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "PUT response codes for 'createOrUpdate' match existing service endpoint behavior"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'createOrUpdate' returns no response body, matching existing service endpoint behavior"
   @tag("Computes")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Compute,
-    Response = ArmResourceUpdatedResponse<Compute> | ArmResourceCreatedResponse<Compute> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Compute> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Compute;
-    })
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Compute>;
 
   /**
    * Updates a compute associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'update' returns no response body, matching existing service endpoint behavior"
   @tag("Computes")
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    Compute,
-    PatchModel = Compute,
-    Response = ArmResponse<Compute> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Compute>> & {
-      @bodyRoot
-      _: Compute;
-    })
-  >;
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<Compute, PatchModel = Compute>;
 
   /**
    * Deletes the specified compute associated with the Cognitive Services account.
