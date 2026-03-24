@@ -9028,6 +9028,80 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/validate": {
+      "post": {
+        "operationId": "EdgeMachines_Validate",
+        "tags": [
+          "EdgeMachines"
+        ],
+        "description": "A long-running resource action to validate the edge machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineValidateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineValidateResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachines_Validate": {
+            "$ref": "./examples/EdgeMachines_Validate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/volumes": {
       "get": {
         "operationId": "EdgeMachineVolumes_List",
@@ -14755,6 +14829,46 @@
             "description": "Preparing EdgeMachine"
           }
         ]
+      }
+    },
+    "EdgeMachineValidateRequest": {
+      "type": "object",
+      "description": "The validate request for Edge Machine.",
+      "properties": {
+        "edgeMachineIds": {
+          "type": "array",
+          "description": "Machine Ids against which, current machine has to be validated.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.AzureStackHCI/edgeMachines"
+                }
+              ]
+            }
+          }
+        },
+        "additionalInfo": {
+          "type": "string",
+          "description": "Additional info required for validation."
+        }
+      },
+      "required": [
+        "edgeMachineIds"
+      ]
+    },
+    "EdgeMachineValidateResponse": {
+      "type": "object",
+      "description": "The validate response for Edge Machine.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Edge machine validation status.",
+          "readOnly": true
+        }
       }
     },
     "EdgeMachineVolume": {
