@@ -801,3 +801,119 @@ op replaceprivateDnsZoneGroupsList(
   replaceprivateDnsZoneGroupsList,
   "go"
 );
+
+// Java: restore Ip casing for model names (TypeSpec uses uppercase IP)
+@@clientName(Microsoft.Network.HubIPAddresses, "HubIpAddresses", "java");
+@@clientName(Microsoft.Network.HubPublicIPAddresses,
+  "HubPublicIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress,
+  "IpConfigurationBgpPeeringAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.IPRule, "IpRule", "java");
+@@clientName(Microsoft.Network.IPTraffic, "IpTraffic", "java");
+@@clientName(Microsoft.Network.AzureFirewallPublicIPAddress,
+  "AzureFirewallPublicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.AzureFirewallIPConfiguration,
+  "AzureFirewallIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.PrivateEndpointIPConfiguration,
+  "PrivateEndpointIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.PrivateEndpointIPVersionType,
+  "PrivateEndpointIpVersionType",
+  "java"
+);
+@@clientName(Microsoft.Network.LoadBalancerVipSwapRequestFrontendIPConfiguration,
+  "LoadBalancerVipSwapRequestFrontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties,
+  "NetworkInterfaceIpConfigurationPrivateLinkConnectionProperties",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualApplianceIPConfiguration,
+  "VirtualApplianceIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualApplianceIPConfigurationProperties,
+  "VirtualApplianceIpConfigurationProperties",
+  "java"
+);
+@@clientName(Microsoft.Network.PreferredIPVersion,
+  "PreferredIpVersion",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressMigrationPhase,
+  "PublicIpAddressMigrationPhase",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressSkuTier,
+  "PublicIpAddressSkuTier",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPPrefixSkuName,
+  "PublicIpPrefixSkuName",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPPrefixSkuTier,
+  "PublicIpPrefixSkuTier",
+  "java"
+);
+
+// Java: restore casing for BGP, JWT, IDPS, SNAT, SQL, LOA model names
+@@clientName(Microsoft.Network.BGPCommunity, "BgpCommunity", "java");
+@@clientName(Microsoft.Network.ApplicationGatewayEntraJWTValidationConfig,
+  "ApplicationGatewayEntraJwtValidationConfig",
+  "java"
+);
+@@clientName(FirewallPolicyIdpsQuerySortOrder,
+  "FirewallPolicyIdpsQuerySortOrder",
+  "java"
+);
+@@clientName(FirewallPolicyIdpsSignatureDirection,
+  "FirewallPolicyIdpsSignatureDirection",
+  "java"
+);
+@@clientName(FirewallPolicyIdpsSignatureMode,
+  "FirewallPolicyIdpsSignatureMode",
+  "java"
+);
+@@clientName(FirewallPolicyIdpsSignatureSeverity,
+  "FirewallPolicyIdpsSignatureSeverity",
+  "java"
+);
+@@clientName(Microsoft.Network.IDPSQueryObject, "IdpsQueryObject", "java");
+@@clientName(Microsoft.Network.FirewallPolicySNAT,
+  "FirewallPolicySnat",
+  "java"
+);
+@@clientName(Microsoft.Network.FirewallPolicySQL, "FirewallPolicySql", "java");
+@@clientName(Microsoft.Network.GenerateExpressRoutePortsLOARequest,
+  "GenerateExpressRoutePortsLoaRequest",
+  "java"
+);
+
+// Java: restore property name casing
+@@clientName(Microsoft.Network.StaticCidrProperties.numberOfIPAddressesToAllocate,
+  "numberOfIpAddressesToAllocate",
+  "java"
+);
+@@clientName(Microsoft.Network.StaticCidrProperties.totalNumberOfIPAddresses,
+  "totalNumberOfIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.vpnUserName,
+  "vpnUsername",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationRule.terminateTLS,
+  "terminateTls",
+  "java"
+);
