@@ -1,18 +1,17 @@
 {
   "parameters": {
-    "api-version": "2024-11-01-preview",
-    "managedInstanceName": "managedInstance-1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "Default-SQL-SouthEastAsia",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "managedInstanceName": "managedInstance-1",
+    "api-version": "2024-11-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "server-trust-group-test",
-            "type": "Microsoft.Sql/locations/serverTrustGroups",
             "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/Japan East/serverTrustGroups/server-trust-group-test",
+            "name": "server-trust-group-test",
             "properties": {
               "groupMembers": [
                 {
@@ -26,12 +25,12 @@
                 "GlobalTransactions",
                 "ServiceBroker"
               ]
-            }
+            },
+            "type": "Microsoft.Sql/locations/serverTrustGroups"
           },
           {
-            "name": "server-trust-group-test-2",
-            "type": "Microsoft.Sql/locations/serverTrustGroups",
             "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/Japan East/serverTrustGroups/server-trust-group-test-2",
+            "name": "server-trust-group-test-2",
             "properties": {
               "groupMembers": [
                 {
@@ -45,12 +44,11 @@
                 "GlobalTransactions",
                 "ServiceBroker"
               ]
-            }
+            },
+            "type": "Microsoft.Sql/locations/serverTrustGroups"
           }
         ]
       }
     }
-  },
-  "operationId": "ServerTrustGroups_ListByInstance",
-  "title": "List server trust groups by managed instance"
+  }
 }

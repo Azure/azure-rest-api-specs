@@ -1,95 +1,93 @@
 {
   "parameters": {
-    "api-version": "2024-11-01-preview",
-    "databaseName": "database_1",
-    "interval": "PT1H",
-    "managedInstanceName": "sqlcrudtest-4645",
-    "queryId": "42",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "sqlcrudtest-7398",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "managedInstanceName": "sqlcrudtest-4645",
+    "databaseName": "database_1",
+    "queryId": "42",
+    "api-version": "2024-11-01-preview",
+    "interval": "PT1H"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "type": "Microsoft.Sql/managedInstances/databases/queries/statistics",
-            "id": "28",
             "properties": {
               "databaseName": "db1",
+              "queryId": "28",
+              "startTime": "03/10/2020 14:00:30",
               "endTime": "03/11/2020 14:00:30",
               "intervals": [
                 {
-                  "executionCount": 1,
                   "intervalStartTime": "03/11/2020 11:00:00",
                   "intervalType": "PT1H",
+                  "executionCount": 1,
                   "metrics": [
                     {
                       "name": "cpu",
-                      "avg": 0.03824320138888889,
                       "displayName": "Cpu",
-                      "max": 0.03824320138888889,
-                      "min": 0.03824320138888889,
-                      "stdev": 0,
-                      "sum": 0.03824320138888889,
                       "unit": "percentage",
-                      "value": 0
+                      "value": 0.0,
+                      "min": 0.038243201388888891,
+                      "max": 0.038243201388888891,
+                      "avg": 0.038243201388888891,
+                      "sum": 0.038243201388888891,
+                      "stdev": 0.0
                     },
                     {
                       "name": "io",
-                      "avg": 0.0001013888888888889,
                       "displayName": "Physical Io Reads",
-                      "max": 0.0001013888888888889,
-                      "min": 0.0001013888888888889,
-                      "stdev": 0,
-                      "sum": 0.0001013888888888889,
                       "unit": "percentage",
-                      "value": 0
+                      "value": 0.0,
+                      "min": 0.0001013888888888889,
+                      "max": 0.0001013888888888889,
+                      "avg": 0.0001013888888888889,
+                      "sum": 0.0001013888888888889,
+                      "stdev": 0.0
                     },
                     {
                       "name": "logIo",
-                      "avg": 0,
                       "displayName": "Log Writes",
-                      "max": 0,
-                      "min": 0,
-                      "stdev": 0,
-                      "sum": 0,
                       "unit": "percentage",
-                      "value": 0
+                      "value": 0.0,
+                      "min": 0.0,
+                      "max": 0.0,
+                      "avg": 0.0,
+                      "sum": 0.0,
+                      "stdev": 0.0
                     },
                     {
                       "name": "memory",
-                      "avg": 8336,
                       "displayName": "Memory consumption",
-                      "max": 8336,
-                      "min": 8336,
-                      "stdev": 0,
-                      "sum": 8336,
                       "unit": "KB",
-                      "value": 0
+                      "value": 0.0,
+                      "min": 8336.0,
+                      "max": 8336.0,
+                      "avg": 8336.0,
+                      "sum": 8336.0,
+                      "stdev": 0.0
                     },
                     {
                       "name": "duration",
-                      "avg": 11091296,
                       "displayName": "Query duration",
-                      "max": 11091296,
-                      "min": 11091296,
-                      "stdev": 0,
-                      "sum": 11091296,
                       "unit": "microseconds",
-                      "value": 0
+                      "value": 0.0,
+                      "min": 11091296.0,
+                      "max": 11091296.0,
+                      "avg": 11091296.0,
+                      "sum": 11091296.0,
+                      "stdev": 0.0
                     }
                   ]
                 }
-              ],
-              "queryId": "28",
-              "startTime": "03/10/2020 14:00:30"
-            }
+              ]
+            },
+            "id": "28",
+            "type": "Microsoft.Sql/managedInstances/databases/queries/statistics"
           }
         ]
       }
     }
-  },
-  "operationId": "ManagedDatabaseQueries_ListByQuery",
-  "title": "Obtain query execution statistics. Minimal example with only mandatory request parameters."
+  }
 }

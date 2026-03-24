@@ -1,18 +1,25 @@
 {
   "parameters": {
-    "api-version": "2024-11-01-preview",
-    "managedInstanceName": "schedulemi",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "schedulerg",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "managedInstanceName": "schedulemi",
+    "api-version": "2024-11-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/schedulerg/providers/Microsoft.Sql/managedInstances/schedulemi/startStopSchedules",
             "name": "default",
-            "type": "Microsoft.Sql/managedInstances/startStopSchedules",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/schedulerg/providers/Microsoft.Sql/managedInstances/schedulemi/startStopSchedules/default",
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "User",
+              "createdAt": "2021-08-26T04:41:33.937Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-08-27T04:41:33.937Z"
+            },
             "properties": {
               "description": "This is a schedule for our Dev/Test environment.",
               "nextExecutionTime": "2021-08-26T14:00:00",
@@ -33,19 +40,10 @@
               ],
               "timeZoneId": "Central European Standard Time"
             },
-            "systemData": {
-              "createdAt": "2021-08-26T04:41:33.937Z",
-              "createdBy": "string",
-              "createdByType": "User",
-              "lastModifiedAt": "2021-08-27T04:41:33.937Z",
-              "lastModifiedBy": "string",
-              "lastModifiedByType": "User"
-            }
+            "type": "Microsoft.Sql/managedInstances/startStopSchedules"
           }
         ]
       }
     }
-  },
-  "operationId": "StartStopManagedInstanceSchedules_ListByInstance",
-  "title": "Lists the managed instance's Start/Stop schedules."
+  }
 }

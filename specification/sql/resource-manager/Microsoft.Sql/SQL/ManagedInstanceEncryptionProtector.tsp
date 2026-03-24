@@ -59,10 +59,11 @@ interface ManagedInstanceEncryptionProtectors {
   /**
    * Revalidates an existing encryption protector.
    */
-  revalidate is ArmResourceActionAsync<
+  revalidate is ArmResourceActionAsyncBase<
     ManagedInstanceEncryptionProtector,
     void,
-    OkResponse
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedInstanceEncryptionProtector>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceEncryptionProtector>>
   >;
 }
 

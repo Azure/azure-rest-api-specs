@@ -113,7 +113,14 @@ interface DataMaskingPolicies {
   listByDatabase is ArmResourceActionSync<
     DataMaskingPolicy,
     void,
-    ArmResponse<ResourceListResult<DataMaskingRule>>
+    ArmResponse<ResourceListResult<DataMaskingRule>>,
+    Parameters = {
+      /**
+       * The number of elements in the collection to skip.
+       */
+      @query("$skip")
+      $skip?: int64;
+    }
   >;
 
   /**

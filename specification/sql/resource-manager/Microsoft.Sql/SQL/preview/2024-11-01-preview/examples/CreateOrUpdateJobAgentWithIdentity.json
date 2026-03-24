@@ -1,29 +1,30 @@
 {
   "parameters": {
-    "api-version": "2024-11-01-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "group1",
+    "serverName": "server1",
     "jobAgentName": "agent1",
+    "api-version": "2024-11-01-preview",
     "parameters": {
+      "location": "southeastasia",
       "identity": {
         "type": "UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-umi": {}
         }
       },
-      "location": "southeastasia",
       "properties": {
         "databaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/databases/db1"
       }
-    },
-    "resourceGroupName": "group1",
-    "serverName": "server1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1",
         "name": "agent1",
         "type": "Microsoft.Sql/servers/jobAgents",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1",
+        "location": "southeastasia",
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
@@ -33,7 +34,6 @@
             }
           }
         },
-        "location": "southeastasia",
         "properties": {
           "databaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/databases/db1"
         }
@@ -41,9 +41,10 @@
     },
     "201": {
       "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1",
         "name": "agent1",
         "type": "Microsoft.Sql/servers/jobAgents",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1",
+        "location": "southeastasia",
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
@@ -53,14 +54,11 @@
             }
           }
         },
-        "location": "southeastasia",
         "properties": {
           "databaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/databases/db1"
         }
       }
     },
     "202": {}
-  },
-  "operationId": "JobAgents_CreateOrUpdate",
-  "title": "Create or update a job agent with identity"
+  }
 }

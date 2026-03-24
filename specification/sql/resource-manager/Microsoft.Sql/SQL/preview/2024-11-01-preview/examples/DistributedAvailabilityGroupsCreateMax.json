@@ -1,71 +1,69 @@
 {
   "parameters": {
-    "api-version": "2024-11-01-preview",
-    "distributedAvailabilityGroupName": "dag",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
     "managedInstanceName": "testcl",
+    "distributedAvailabilityGroupName": "dag",
+    "api-version": "2024-11-01-preview",
     "parameters": {
       "properties": {
+        "instanceLinkRole": "Primary",
+        "instanceAvailabilityGroupName": "testcl",
+        "partnerAvailabilityGroupName": "BoxLocalAg1",
+        "partnerEndpoint": "TCP://SERVER:7022",
+        "failoverMode": "None",
+        "seedingMode": "Automatic",
         "databases": [
           {
             "databaseName": "testdb"
           }
-        ],
-        "failoverMode": "None",
-        "instanceAvailabilityGroupName": "testcl",
-        "instanceLinkRole": "Primary",
-        "partnerAvailabilityGroupName": "BoxLocalAg1",
-        "partnerEndpoint": "TCP://SERVER:7022",
-        "seedingMode": "Automatic"
+        ]
       }
-    },
-    "resourceGroupName": "testrg",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "dag",
-        "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
         "properties": {
+          "distributedAvailabilityGroupName": "dag",
+          "instanceLinkRole": "Primary",
+          "instanceAvailabilityGroupName": "testcl",
+          "partnerAvailabilityGroupName": "BoxLocalAg1",
+          "partnerEndpoint": "TCP://SERVER:7022",
+          "failoverMode": "None",
+          "seedingMode": "Automatic",
           "databases": [
             {
               "databaseName": "testdb"
             }
-          ],
-          "distributedAvailabilityGroupName": "dag",
-          "failoverMode": "None",
-          "instanceAvailabilityGroupName": "testcl",
-          "instanceLinkRole": "Primary",
-          "partnerAvailabilityGroupName": "BoxLocalAg1",
-          "partnerEndpoint": "TCP://SERVER:7022",
-          "seedingMode": "Automatic"
-        }
+          ]
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
+        "name": "dag",
+        "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups"
       }
     },
     "201": {
       "body": {
-        "name": "dag",
-        "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
         "properties": {
+          "distributedAvailabilityGroupName": "dag",
+          "instanceLinkRole": "Primary",
+          "instanceAvailabilityGroupName": "testcl",
+          "partnerAvailabilityGroupName": "BoxLocalAg1",
+          "partnerEndpoint": "TCP://SERVER:7022",
+          "failoverMode": "None",
+          "seedingMode": "Automatic",
           "databases": [
             {
               "databaseName": "testdb"
             }
-          ],
-          "distributedAvailabilityGroupName": "dag",
-          "failoverMode": "None",
-          "instanceAvailabilityGroupName": "testcl",
-          "instanceLinkRole": "Primary",
-          "partnerAvailabilityGroupName": "BoxLocalAg1",
-          "partnerEndpoint": "TCP://SERVER:7022",
-          "seedingMode": "Automatic"
-        }
+          ]
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
+        "name": "dag",
+        "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups"
       }
     },
     "202": {}
-  },
-  "operationId": "DistributedAvailabilityGroups_CreateOrUpdate",
-  "title": "Create a distributed availability group with all properties."
+  }
 }

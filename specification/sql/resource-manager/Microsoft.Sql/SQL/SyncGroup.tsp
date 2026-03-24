@@ -28,6 +28,11 @@ model SyncGroup is Azure.ResourceManager.ProxyResource<SyncGroupProperties> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
+
+  /**
+   * Sync group authentication information.
+   */
+  identity?: DataSyncParticipantIdentity;
 }
 
 @armResourceOperations
@@ -127,7 +132,12 @@ interface SyncGroups {
   /**
    * Refreshes a hub database schema.
    */
-  refreshHubSchema is ArmResourceActionAsync<SyncGroup, void, OkResponse>;
+  refreshHubSchema is ArmResourceActionAsyncBase<
+    SyncGroup,
+    void,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SyncGroup>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SyncGroup>>
+  >;
 
   /**
    * Triggers a sync group synchronization.

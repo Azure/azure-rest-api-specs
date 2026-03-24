@@ -37,6 +37,30 @@ union ShortTermRetentionPolicyName {
   default: "default",
 }
 
+union DataSyncParticipantIdentityType {
+  string,
+
+  /**
+   * None
+   */
+  None: "None",
+
+  /**
+   * SystemAssigned
+   */
+  SystemAssigned: "SystemAssigned",
+
+  /**
+   * UserAssigned
+   */
+  UserAssigned: "UserAssigned",
+
+  /**
+   * SystemAssignedUserAssigned
+   */
+  SystemAssignedUserAssigned: "SystemAssignedUserAssigned",
+}
+
 /**
  * The type of identity that created the resource.
  */
@@ -3369,6 +3393,14 @@ enum BlobAuditingPolicyState {
   Disabled,
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum CheckNameAvailabilityResourceType {
+  /**
+   * Microsoft.Sql/servers
+   */
+  `Microsoft.Sql/servers`,
+}
+
 /**
  * Specifies the state of the Advanced Threat Protection, whether it is enabled or disabled or a state has not been applied yet on the specific database or server.
  */
@@ -4717,7 +4749,7 @@ model ExtendedServerBlobAuditingPolicyProperties {
    * 2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.
    * For more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountAccessKey?: string;
 
@@ -5912,6 +5944,12 @@ model DatabaseProperties {
    * The flag to enable or disable auto rotation of database encryption protector AKV key.
    */
   encryptionProtectorAutoRotation?: boolean;
+
+  /**
+   * Specifies the provisioning state for this resource
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
 }
 
 /**
@@ -6305,6 +6343,12 @@ model DatabaseUpdateProperties {
    * The flag to enable or disable auto rotation of database encryption protector AKV key.
    */
   encryptionProtectorAutoRotation?: boolean;
+
+  /**
+   * Specifies the provisioning state for this resource
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
 }
 
 /**
@@ -7812,6 +7856,12 @@ model ElasticPoolProperties {
    * Specifies the availability zone the pool's primary replica is pinned to.
    */
   availabilityZone?: AvailabilityZoneType;
+
+  /**
+   * The name and tier of the current SKU.
+   */
+  @visibility(Lifecycle.Read)
+  currentSku?: Sku;
 }
 
 /**
@@ -7908,6 +7958,12 @@ model ElasticPoolUpdateProperties {
    * Specifies the availability zone the pool's primary replica is pinned to.
    */
   availabilityZone?: AvailabilityZoneType;
+
+  /**
+   * The name and tier of the current SKU.
+   */
+  @visibility(Lifecycle.Read)
+  currentSku?: Sku;
 }
 
 /**
@@ -8731,13 +8787,13 @@ model JobSchedule {
    * Schedule start time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime = utcDateTime.fromISO("0001-01-01T16:00:00-08:00");
+  startTime?: utcDateTime = utcDateTime.fromISO("0001-01-01T05:30:00+05:30");
 
   /**
    * Schedule end time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime = utcDateTime.fromISO("9999-12-31T03:59:59-08:00");
+  endTime?: utcDateTime = utcDateTime.fromISO("9999-12-31T17:29:59+05:30");
 
   /**
    * Schedule interval type
@@ -9886,6 +9942,12 @@ model ManagedInstanceVcoresCapability {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedMemorySizesInGB?: MaxLimitRangeCapability;
+
+  /**
+   * Memory limit MB ranges.
+   */
+  @visibility(Lifecycle.Read)
+  supportedMemoryLimitsMB?: MaxLimitRangeCapability;
 
   /**
    * Included size.
@@ -11706,6 +11768,11 @@ model ManagedInstanceDtcProperties {
    */
   @visibility(Lifecycle.Read)
   dtcHostNameDnsSuffix?: string;
+
+  /**
+   * Status of FQDN of managed instance DTC. Toggling this setting might trigger a restart of the managed instance.
+   */
+  fqdnEnabled?: boolean;
 
   /**
    * Provisioning state of managed instance DTC.
@@ -13712,7 +13779,7 @@ model CheckNameAvailabilityRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  type: "Microsoft.Sql/servers";
+  type: CheckNameAvailabilityResourceType;
 }
 
 /**
@@ -14446,7 +14513,7 @@ model SyncDatabaseIdProperties {
 }
 
 /**
- * Properties of a sync group.
+ * Properties of a sync group with support to MI.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SyncGroupProperties {
@@ -14725,7 +14792,7 @@ model SyncGroupLogProperties {
 }
 
 /**
- * Properties of a sync member.
+ * Properties of a sync member with support to MI.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SyncMemberProperties {
@@ -15335,4 +15402,116 @@ model OperationListResult {
   @visibility(Lifecycle.Read)
   @nextLink
   nextLink?: string;
+}
+
+/**
+ * A Server ImportExport operation result resource.
+ */
+model ServerImportExportOperationResult extends ProxyResource {
+  /**
+   * Resource properties.
+   */
+  properties?: ServerImportExportOperationResultProperties;
+}
+
+/**
+ * Contains the operation result properties for import/export operation.
+ */
+model ServerImportExportOperationResultProperties {
+  /**
+   * Request Id.
+   */
+  @visibility(Lifecycle.Read)
+  requestId?: Azure.Core.uuid;
+
+  /**
+   * Request type.
+   */
+  @visibility(Lifecycle.Read)
+  requestType?: string;
+
+  /**
+   * Queued time.
+   */
+  @visibility(Lifecycle.Read)
+  queuedTime?: string;
+
+  /**
+   * Last modified time.
+   */
+  @visibility(Lifecycle.Read)
+  lastModifiedTime?: string;
+
+  /**
+   * Blob Uri.
+   */
+  @visibility(Lifecycle.Read)
+  blobUri?: string;
+
+  /**
+   * Server name.
+   */
+  @visibility(Lifecycle.Read)
+  serverName?: string;
+
+  /**
+   * Database name.
+   */
+  @visibility(Lifecycle.Read)
+  databaseName?: string;
+
+  /**
+   * Operation status.
+   */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /**
+   * Error message.
+   */
+  @visibility(Lifecycle.Read)
+  errorMessage?: string;
+
+  /**
+   * Gets the status of private endpoints associated with this request.
+   */
+  @visibility(Lifecycle.Read)
+  privateEndpointConnections?: PrivateEndpointConnectionRequestStatus[];
+}
+
+/**
+ * Azure Active Directory identity configuration for a resource.
+ */
+model DataSyncParticipantIdentity {
+  /**
+   * The Datasync identity type
+   */
+  type: DataSyncParticipantIdentityType;
+
+  /**
+   * The DataSync participant identity tenant id
+   */
+  tenantId?: Azure.Core.uuid;
+
+  /**
+   * The resource ids of the user assigned identities to use
+   */
+  userAssignedIdentities?: Record<DataSyncParticipantUserAssignedIdentity>;
+}
+
+/**
+ * Azure Active Directory identity configuration for a resource.
+ */
+model DataSyncParticipantUserAssignedIdentity {
+  /**
+   * The Azure Active Directory principal id.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: Azure.Core.uuid;
+
+  /**
+   * The Azure Active Directory client id.
+   */
+  @visibility(Lifecycle.Read)
+  clientId?: Azure.Core.uuid;
 }

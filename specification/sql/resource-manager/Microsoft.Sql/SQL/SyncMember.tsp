@@ -22,6 +22,11 @@ model SyncMember is Azure.ResourceManager.ProxyResource<SyncMemberProperties> {
     SegmentName = "syncMembers",
     NamePattern = ""
   >;
+
+  /**
+   * Sync member authentication information.
+   */
+  identity?: DataSyncParticipantIdentity;
 }
 
 @armResourceOperations
@@ -68,7 +73,12 @@ interface SyncMembers {
    * Refreshes a sync member database schema.
    */
   @action("refreshSchema")
-  refreshMemberSchema is ArmResourceActionAsync<SyncMember, void, OkResponse>;
+  refreshMemberSchema is ArmResourceActionAsyncBase<
+    SyncMember,
+    void,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SyncMember>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SyncMember>>
+  >;
 
   /**
    * Gets a sync member database schema.

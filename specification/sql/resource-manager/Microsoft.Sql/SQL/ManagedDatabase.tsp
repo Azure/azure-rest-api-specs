@@ -117,30 +117,33 @@ interface ManagedDatabases {
    * Cancels a managed database move operation.
    */
   @tag("ManagedDatabases")
-  cancelMove is ArmResourceActionAsync<
+  cancelMove is ArmResourceActionAsyncBase<
     ManagedDatabase,
     ManagedDatabaseMoveDefinition,
-    OkResponse
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedDatabase>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedDatabase>>
   >;
 
   /**
    * Completes a managed database move operation.
    */
   @tag("ManagedDatabases")
-  completeMove is ArmResourceActionAsync<
+  completeMove is ArmResourceActionAsyncBase<
     ManagedDatabase,
     ManagedDatabaseMoveDefinition,
-    OkResponse
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedDatabase>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedDatabase>>
   >;
 
   /**
    * Completes the restore operation on a managed database.
    */
   @tag("ManagedDatabases")
-  completeRestore is ArmResourceActionAsync<
+  completeRestore is ArmResourceActionAsyncBase<
     ManagedDatabase,
     CompleteDatabaseRestoreDefinition,
-    OkResponse
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedDatabase>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedDatabase>>
   >;
 
   /**
@@ -157,10 +160,11 @@ interface ManagedDatabases {
    * Starts a managed database move operation.
    */
   @tag("ManagedDatabases")
-  startMove is ArmResourceActionAsync<
+  startMove is ArmResourceActionAsyncBase<
     ManagedDatabase,
     ManagedDatabaseStartMoveDefinition,
-    OkResponse
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedDatabase>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedDatabase>>
   >;
 
   /**

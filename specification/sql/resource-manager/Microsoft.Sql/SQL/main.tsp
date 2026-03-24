@@ -146,9 +146,9 @@ namespace Microsoft.Sql;
  */
 enum Versions {
   /**
-   * The 2024-11-01-preview API version.
+   * The 2025-02-01-preview API version.
    */
-  v2024_11_01_preview: "2024-11-01-preview",
+  v2025_02_01_preview: "2025-02-01-preview",
 }
 
 interface Operations

@@ -1,5 +1,8 @@
 {
   "parameters": {
+    "subscriptionId": "c3aa9078-0000-0000-0000-e36f151182d7",
+    "resourceGroupName": "default-sql-onebox",
+    "serverName": "testsvr11",
     "api-version": "2024-11-01-preview",
     "parameters": {
       "properties": {
@@ -16,38 +19,35 @@
           }
         }
       }
-    },
-    "resourceGroupName": "default-sql-onebox",
-    "serverName": "testsvr11",
-    "subscriptionId": "c3aa9078-0000-0000-0000-e36f151182d7"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/c3aa9078-0000-0000-0000-e36f151182d7/resourceGroups/default-sql-onebox/providers/Microsoft.Sql/servers/testsvr11/automaticTuning/current",
         "name": "current",
         "type": "Microsoft.Sql/servers/automaticTuning",
-        "id": "/subscriptions/c3aa9078-0000-0000-0000-e36f151182d7/resourceGroups/default-sql-onebox/providers/Microsoft.Sql/servers/testsvr11/automaticTuning/current",
         "properties": {
-          "actualState": "Auto",
           "desiredState": "Auto",
+          "actualState": "Auto",
           "options": {
             "createIndex": {
-              "actualState": "Off",
-              "desiredState": "Off"
+              "desiredState": "Off",
+              "actualState": "Off"
             },
             "dropIndex": {
-              "actualState": "On",
-              "desiredState": "On"
+              "desiredState": "On",
+              "actualState": "On"
             },
             "forceLastGoodPlan": {
-              "actualState": "On",
               "desiredState": "Default",
+              "actualState": "On",
               "reasonCode": 2,
               "reasonDesc": "AutoConfigured"
             },
             "maintainIndex": {
-              "actualState": "Off",
               "desiredState": "Default",
+              "actualState": "Off",
               "reasonCode": 2,
               "reasonDesc": "AutoConfigured"
             }
@@ -55,7 +55,5 @@
         }
       }
     }
-  },
-  "operationId": "ServerAutomaticTuning_Update",
-  "title": "Updates server automatic tuning settings with all properties"
+  }
 }

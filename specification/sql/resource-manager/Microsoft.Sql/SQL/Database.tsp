@@ -123,9 +123,29 @@ interface Databases {
   listByServer is ArmResourceListByParent<
     Database,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$skipToken")
-      $skipToken?: string;
+      /**
+       * The number of elements to return from the collection.
+       */
+      @query("$top")
+      $top?: int64;
+
+      /**
+       * The number of elements in the collection to skip.
+       */
+      @query("$skip")
+      $skip?: int64;
+
+      /**
+       * An OData filter expression that filters elements in the collection.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * How the results should be ordered.
+       */
+      @query("$orderby")
+      $orderby?: string;
     }
   >;
 
@@ -173,10 +193,11 @@ interface Databases {
    * Revalidates an existing encryption protector for a particular database.
    */
   @tag("DatabaseEncryptionProtectorRevalidate")
-  revalidate is ArmResourceActionAsync<
+  revalidate is ArmResourceActionAsyncBase<
     Database,
     void,
-    Response = OkResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database>>,
     Parameters = {
       /**
        * The name of the encryption protector to be updated.
@@ -191,10 +212,11 @@ interface Databases {
    * Reverts an existing encryption protector for a particular database.
    */
   @tag("DatabaseEncryptionProtectorRevert")
-  revert is ArmResourceActionAsync<
+  revert is ArmResourceActionAsyncBase<
     Database,
     void,
-    OkResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database>>,
     Parameters = {
       /**
        * The name of the encryption protector to be updated.
@@ -252,10 +274,11 @@ interface Databases {
    * Failovers a database.
    */
   @tag("Databases")
-  failover is ArmResourceActionAsync<
+  failover is ArmResourceActionAsyncBase<
     Database,
     void,
-    OkResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database>>,
     Parameters = {
       /**
        * The type of replica to be failed over.
@@ -299,10 +322,11 @@ interface Databases {
    * Upgrades a data warehouse.
    */
   @tag("Databases")
-  upgradeDataWarehouse is ArmResourceActionAsync<
+  upgradeDataWarehouse is ArmResourceActionAsyncBase<
     Database,
     void,
-    Response = OkResponse
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database>>
   >;
 
   /**

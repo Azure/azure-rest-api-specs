@@ -1,28 +1,26 @@
 {
   "parameters": {
-    "api-version": "2024-11-01-preview",
-    "databaseName": "testDatabase",
-    "managedInstanceName": "testInstance",
-    "policyName": "default",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "testResourceGroup",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "managedInstanceName": "testInstance",
+    "databaseName": "testDatabase",
+    "policyName": "default",
+    "api-version": "2024-11-01-preview"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql//managedInstances/testInstance/databases/testDatabase/backupLongTermRetentionPolicies/default",
         "name": "default",
-        "type": "Microsoft.Sql/managedInstances/databases/backupLongTermRetentionPolicies",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/managedInstances/testInstance/databases/testDatabase/backupLongTermRetentionPolicies/default",
+        "type": "Microsoft.Sql/resourceGroups/managedInstances/databases/backupLongTermRetentionPolicies",
         "properties": {
-          "backupStorageAccessTier": "Archive",
-          "monthlyRetention": "P1Y",
-          "weekOfYear": 5,
           "weeklyRetention": "P1M",
-          "yearlyRetention": "P5Y"
+          "monthlyRetention": "P1Y",
+          "yearlyRetention": "P5Y",
+          "weekOfYear": 5,
+          "backupStorageAccessTier": "Archive"
         }
       }
     }
-  },
-  "operationId": "ManagedInstanceLongTermRetentionPolicies_Get",
-  "title": "Get the long term retention policy for the managed database."
+  }
 }

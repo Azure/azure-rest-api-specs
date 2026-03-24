@@ -67,7 +67,12 @@ interface EncryptionProtectors {
   /**
    * Revalidates an existing encryption protector.
    */
-  revalidate is ArmResourceActionAsync<EncryptionProtector, void, OkResponse>;
+  revalidate is ArmResourceActionAsyncBase<
+    EncryptionProtector,
+    void,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<EncryptionProtector>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EncryptionProtector>>
+  >;
 }
 
 @@doc(EncryptionProtector.name,

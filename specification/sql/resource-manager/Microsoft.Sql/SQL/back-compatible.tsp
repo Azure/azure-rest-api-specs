@@ -421,6 +421,9 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FirewallRule.properties);
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(ServerImportExportOperationResult.properties);
+
 @@clientName(GeoBackupPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );

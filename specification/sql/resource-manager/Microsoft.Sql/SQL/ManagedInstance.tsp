@@ -134,10 +134,11 @@ interface ManagedInstances {
    * Failovers a managed instance.
    */
   @tag("ManagedInstances")
-  failover is ArmResourceActionAsync<
+  failover is ArmResourceActionAsyncBase<
     ManagedInstance,
     void,
-    OkResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedInstance>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstance>>,
     Parameters = {
       /**
        * The type of replica to be failed over.
@@ -164,10 +165,11 @@ interface ManagedInstances {
    * Reevaluates the inaccessibility state of all managed databases.
    */
   @tag("ManagedInstances")
-  reevaluateInaccessibleDatabaseState is ArmResourceActionAsync<
+  reevaluateInaccessibleDatabaseState is ArmResourceActionAsyncBase<
     ManagedInstance,
     void,
-    OkResponse
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedInstance>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstance>>
   >;
 
   /**
@@ -261,10 +263,11 @@ interface ManagedInstances {
    * Validates customer managed key.
    */
   @tag("ManagedInstances")
-  validateAzureKeyVaultEncryptionKey is ArmResourceActionAsync<
+  validateAzureKeyVaultEncryptionKey is ArmResourceActionAsyncBase<
     ManagedInstance,
     ManagedInstanceValidateAzureKeyVaultEncryptionKeyRequest,
-    OkResponse
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedInstance>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstance>>
   >;
 
   /**
@@ -272,7 +275,12 @@ interface ManagedInstances {
    */
   @tag("ManagedInstanceTdeCertificates")
   @action("tdeCertificates")
-  create is ArmResourceActionAsync<ManagedInstance, TdeCertificate, OkResponse>;
+  create is ArmResourceActionAsyncBase<
+    ManagedInstance,
+    TdeCertificate,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedInstance>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstance>>
+  >;
 
   /**
    * Gets a server trust groups by instance name.

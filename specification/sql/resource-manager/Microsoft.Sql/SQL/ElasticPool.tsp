@@ -149,7 +149,12 @@ interface ElasticPools {
    * Failovers an elastic pool.
    */
   @tag("ElasticPools")
-  failover is ArmResourceActionAsync<ElasticPool, void, OkResponse>;
+  failover is ArmResourceActionAsyncBase<
+    ElasticPool,
+    void,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ElasticPool>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ElasticPool>>
+  >;
 }
 
 @@doc(ElasticPool.name, "The name of the elastic pool.");

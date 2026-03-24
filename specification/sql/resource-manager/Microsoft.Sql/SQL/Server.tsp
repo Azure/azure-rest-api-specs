@@ -206,7 +206,12 @@ interface Servers {
    */
   @tag("TdeCertificates")
   @action("tdeCertificates")
-  create is ArmResourceActionAsync<Server, TdeCertificate, OkResponse>;
+  create is ArmResourceActionAsyncBase<
+    Server,
+    TdeCertificate,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Server>>
+  >;
 }
 
 @@doc(Server.name, "The name of the server.");

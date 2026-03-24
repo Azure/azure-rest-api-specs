@@ -1,96 +1,94 @@
 {
   "parameters": {
-    "api-version": "2024-11-01-preview",
+    "subscriptionId": "20D7082A-0FC7-4468-82BD-542694D5042B",
+    "resourceGroupName": "testrg",
     "managedInstanceName": "testinstance",
+    "api-version": "2024-11-01-preview",
     "parameters": {
-      "location": "Japan East",
-      "properties": {
-        "administratorLogin": "dummylogin",
-        "administratorLoginPassword": "PLACEHOLDER",
-        "licenseType": "LicenseIncluded",
-        "storageSizeInGB": 1024,
-        "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
-        "vCores": 8
-      },
       "sku": {
         "name": "GP_Gen5",
         "tier": "GeneralPurpose"
-      }
-    },
-    "resourceGroupName": "testrg",
-    "subscriptionId": "20D7082A-0FC7-4468-82BD-542694D5042B"
+      },
+      "properties": {
+        "administratorLogin": "dummylogin",
+        "administratorLoginPassword": "PLACEHOLDER",
+        "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+        "vCores": 8,
+        "storageSizeInGB": 1024,
+        "licenseType": "LicenseIncluded"
+      },
+      "location": "Japan East"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "testinstance",
-        "type": "Microsoft.Sql/managedInstances",
-        "id": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance",
-        "location": "japaneast",
-        "properties": {
-          "administratorLogin": "dummylogin",
-          "collation": "SQL_Latin1_General_CP1_CI_AS",
-          "currentBackupStorageRedundancy": "Geo",
-          "databaseFormat": "SQLServer2022",
-          "dnsZone": "1b4e2caff2530",
-          "externalGovernanceStatus": "Enabled",
-          "fullyQualifiedDomainName": "testinstance.1b4e2caff2530.database.windows.net",
-          "hybridSecondaryUsage": "Passive",
-          "licenseType": "LicenseIncluded",
-          "provisioningState": "Creating",
-          "proxyOverride": "Redirect",
-          "publicDataEndpointEnabled": false,
-          "requestedBackupStorageRedundancy": "Geo",
-          "state": "Ready",
-          "storageSizeInGB": 1024,
-          "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
-          "vCores": 8
-        },
         "sku": {
           "name": "GP_Gen5",
+          "tier": "GeneralPurpose",
           "capacity": 8,
-          "family": "Gen4",
-          "tier": "GeneralPurpose"
+          "family": "Gen4"
         },
-        "tags": {}
+        "properties": {
+          "fullyQualifiedDomainName": "testinstance.1b4e2caff2530.database.windows.net",
+          "administratorLogin": "dummylogin",
+          "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "state": "Ready",
+          "provisioningState": "Creating",
+          "vCores": 8,
+          "storageSizeInGB": 1024,
+          "licenseType": "LicenseIncluded",
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "publicDataEndpointEnabled": false,
+          "proxyOverride": "Redirect",
+          "dnsZone": "1b4e2caff2530",
+          "currentBackupStorageRedundancy": "Geo",
+          "requestedBackupStorageRedundancy": "Geo",
+          "externalGovernanceStatus": "Enabled",
+          "hybridSecondaryUsage": "Passive",
+          "databaseFormat": "SQLServer2022"
+        },
+        "location": "japaneast",
+        "tags": {},
+        "id": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance",
+        "name": "testinstance",
+        "type": "Microsoft.Sql/managedInstances"
       }
     },
     "201": {
       "body": {
-        "name": "testinstance",
-        "type": "Microsoft.Sql/managedInstances",
-        "id": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance",
-        "location": "japaneast",
-        "properties": {
-          "administratorLogin": "dummylogin",
-          "collation": "SQL_Latin1_General_CP1_CI_AS",
-          "currentBackupStorageRedundancy": "Geo",
-          "databaseFormat": "SQLServer2022",
-          "dnsZone": "1b4e2caff2530",
-          "externalGovernanceStatus": "Enabled",
-          "fullyQualifiedDomainName": "testinstance.1b4e2caff2530.database.windows.net",
-          "hybridSecondaryUsage": "Passive",
-          "licenseType": "LicenseIncluded",
-          "provisioningState": "Creating",
-          "proxyOverride": "Redirect",
-          "publicDataEndpointEnabled": false,
-          "requestedBackupStorageRedundancy": "Geo",
-          "state": "Ready",
-          "storageSizeInGB": 1024,
-          "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
-          "vCores": 8
-        },
         "sku": {
           "name": "GP_Gen5",
+          "tier": "GeneralPurpose",
           "capacity": 8,
-          "family": "Gen4",
-          "tier": "GeneralPurpose"
+          "family": "Gen4"
         },
-        "tags": {}
+        "properties": {
+          "fullyQualifiedDomainName": "testinstance.1b4e2caff2530.database.windows.net",
+          "administratorLogin": "dummylogin",
+          "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "state": "Ready",
+          "provisioningState": "Creating",
+          "vCores": 8,
+          "storageSizeInGB": 1024,
+          "licenseType": "LicenseIncluded",
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "publicDataEndpointEnabled": false,
+          "proxyOverride": "Redirect",
+          "dnsZone": "1b4e2caff2530",
+          "currentBackupStorageRedundancy": "Geo",
+          "requestedBackupStorageRedundancy": "Geo",
+          "externalGovernanceStatus": "Enabled",
+          "hybridSecondaryUsage": "Passive",
+          "databaseFormat": "SQLServer2022"
+        },
+        "location": "japaneast",
+        "tags": {},
+        "id": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance",
+        "name": "testinstance",
+        "type": "Microsoft.Sql/managedInstances"
       }
     },
     "202": {}
-  },
-  "operationId": "ManagedInstances_CreateOrUpdate",
-  "title": "Create managed instance with minimal properties"
+  }
 }

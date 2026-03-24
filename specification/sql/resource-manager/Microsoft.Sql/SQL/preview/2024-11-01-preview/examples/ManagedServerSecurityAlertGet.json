@@ -1,42 +1,40 @@
 {
   "parameters": {
-    "api-version": "2024-11-01-preview",
-    "managedInstanceName": "securityalert-6440",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "securityalert-4799",
+    "managedInstanceName": "securityalert-6440",
     "securityAlertPolicyName": "Default",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "api-version": "2024-11-01-preview"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.Sql/managedInstances/securityalert-6440",
         "name": "Default",
         "type": "Microsoft.Sql/managedInstances/securityAlertPolicies",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.Sql/managedInstances/securityalert-6440",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-04-03T04:41:33.937Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-04-03T04:41:33.937Z"
+        },
         "properties": {
-          "creationTime": "2020-04-03T04:41:33.937Z",
-          "disabledAlerts": [
-            "Access_Anomaly"
-          ],
+          "state": "Disabled",
           "emailAccountAdmins": true,
           "emailAddresses": [
             "test@consoto.com;user@consoto.com"
           ],
+          "disabledAlerts": [
+            "Access_Anomaly"
+          ],
           "retentionDays": 0,
-          "state": "Disabled",
           "storageAccountAccessKey": "",
-          "storageEndpoint": ""
-        },
-        "systemData": {
-          "createdAt": "2020-04-03T04:41:33.937Z",
-          "createdBy": "string",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-04-03T04:41:33.937Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "User"
+          "storageEndpoint": "",
+          "creationTime": "2020-04-03T04:41:33.937Z"
         }
       }
     }
-  },
-  "operationId": "ManagedServerSecurityAlertPolicies_Get",
-  "title": "Get a managed server's threat detection policy"
+  }
 }

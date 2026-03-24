@@ -1,21 +1,21 @@
 {
   "parameters": {
-    "api-version": "2024-11-01-preview",
-    "connectionPolicyName": "default",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "rgtest-12",
     "serverName": "servertest-6285",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "connectionPolicyName": "default",
+    "api-version": "2024-11-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "default",
-            "type": "Microsoft.Sql/servers/connectionPolicies",
             "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgtest-12/providers/Microsoft.Sql/servers/servertest-6285/connectionPolicies/default",
+            "name": "default",
             "kind": null,
             "location": "eastus",
+            "type": "Microsoft.Sql/servers/connectionPolicies",
             "properties": {
               "connectionType": "Redirect"
             }
@@ -23,7 +23,5 @@
         ]
       }
     }
-  },
-  "operationId": "ServerConnectionPolicies_ListByServer",
-  "title": "Lists a servers connection policies"
+  }
 }
