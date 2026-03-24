@@ -9644,9 +9644,6 @@ model ForcePushNetworkAdapterJobProperties
   extends EdgeMachineNetworkAdapterJobProperties {
   /** Job type. */
   jobType: NetworkAdapterJobType.ForcePush;
-
-  /** The desired network configuration to apply. */
-  targetConfiguration?: NetworkAdapterConfiguration;
 }
 
 /**

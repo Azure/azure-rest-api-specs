@@ -8863,6 +8863,12 @@
         "x-ms-examples": {
           "EdgeMachineNetworkAdapterJobs_Get": {
             "$ref": "./examples/EdgeMachineNetworkAdapterJobs_Get.json"
+          },
+          "EdgeMachineNetworkAdapterJobs_Get_ForcePush": {
+            "$ref": "./examples/EdgeMachineNetworkAdapterJobs_Get_ForcePush.json"
+          },
+          "EdgeMachineNetworkAdapterJobs_Get_SyncConfiguration": {
+            "$ref": "./examples/EdgeMachineNetworkAdapterJobs_Get_SyncConfiguration.json"
           }
         }
       },
@@ -8950,6 +8956,12 @@
         "x-ms-examples": {
           "EdgeMachineNetworkAdapterJobs_CreateOrUpdate": {
             "$ref": "./examples/EdgeMachineNetworkAdapterJobs_CreateOrUpdate.json"
+          },
+          "EdgeMachineNetworkAdapterJobs_CreateOrUpdate_ForcePush": {
+            "$ref": "./examples/EdgeMachineNetworkAdapterJobs_CreateOrUpdate_ForcePush.json"
+          },
+          "EdgeMachineNetworkAdapterJobs_CreateOrUpdate_SyncConfiguration": {
+            "$ref": "./examples/EdgeMachineNetworkAdapterJobs_CreateOrUpdate_SyncConfiguration.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -15224,12 +15236,6 @@
     "ForcePushNetworkAdapterJobProperties": {
       "type": "object",
       "description": "Properties for force push of network adapter configuration.",
-      "properties": {
-        "targetConfiguration": {
-          "$ref": "#/definitions/NetworkAdapterConfiguration",
-          "description": "The desired network configuration to apply."
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/EdgeMachineNetworkAdapterJobProperties"
