@@ -568,22 +568,39 @@ directive:
     where: 
      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}"].patch.parameters[8]["schema"]
     reason: Known false alarm for the discriminator pattern that causes ConsistentPatchProperties rule to fail.
+  - suppress: ResourceNameRestriction
+    from: bms.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping"].get.parameters[3]
+    reason: vaultName inherited from parent VaultResource with NamePattern="" for backward compatibility across all API versions.
+  - suppress: ResourceNameRestriction
+    from: bms.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}"].get.parameters[3]
+    reason: vaultName inherited from parent VaultResource with NamePattern="" for backward compatibility across all API versions.
+  - suppress: ResourceNameRestriction
+    from: bms.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}"].put.parameters[3]
+    reason: vaultName inherited from parent VaultResource with NamePattern="" for backward compatibility across all API versions.
+  - suppress: ResourceNameRestriction
+    from: bms.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/removeCrossTenantVaultMapping"].post.parameters[3]
+    reason: vaultName inherited from parent VaultResource with NamePattern="" for backward compatibility across all API versions.
+  - suppress: AvoidAdditionalProperties
+    from: bms.json
+    where: $.definitions.CrossTenantVaultMapping.properties.extendedProperties
+    reason: extendedProperties is a dictionary (Record<string>) for extensible key-value metadata. additionalProperties is the correct OpenAPI representation.
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: bms.json
+    where: $.definitions.ProtectedItemResource
+    reason: ProtectedItemResource has DELETE on the standard path. The cross-tenant pass-through paths are read-only and intentionally do not support DELETE.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: bms.json
+    where: $.definitions.VaultCredentialCertificateResponse
+    reason: VaultCredentialCertificateResponse is returned by the operationResults GET endpoint as an async polling result, not as a standalone nested resource with CRUD lifecycle.
 
 suppressions:
   - from: bms.json
     code: ProvisioningStateSpecifiedForLROPut
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}"].put
     reason: The existing API contract is legacy code and not be able to change.
-  - from: bms.json
-    code: ResourceNameRestriction
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping"].get.parameters[3]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}"].get.parameters[3]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}"].put.parameters[3]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/removeCrossTenantVaultMapping"].post.parameters[3]
-    reason: The vaultName parameter is inherited from the parent VaultResource which uses NamePattern="" for backward compatibility across all API versions. Adding a pattern to VaultResource would be a breaking change affecting the entire specification.
-  - from: bms.json
-    code: AvoidAdditionalProperties
-    where: $.definitions.CrossTenantVaultMapping.properties.extendedProperties
-    reason: The extendedProperties field is a dictionary (Record<string>) used for extensible key-value metadata. The additionalProperties schema is the correct OpenAPI representation of this dictionary type.
+
 ```
