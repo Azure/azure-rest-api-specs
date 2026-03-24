@@ -87,12 +87,6 @@ interface HorizonDbFirewallRules {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbFirewallRule>;
 
-  @doc("Updates an existing HorizonDb firewall rule (e.g., IP ranges)")
-  update is ArmCustomPatchAsync<
-    HorizonDbFirewallRule,
-    HorizonDbFirewallRuleForPatchUpdate
-  >;
-
   @doc("Deletes a HorizonDb firewall rule")
   delete is ArmResourceDeleteWithoutOkAsync<
     HorizonDbFirewallRule,

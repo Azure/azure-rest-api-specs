@@ -298,27 +298,6 @@ model HorizonDbFirewallRuleProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Properties of a HorizonDb firewall rule for update operations")
-model HorizonDbFirewallRulePropertiesForPatchUpdate {
-  @visibility(Lifecycle.Update)
-  @doc("The start IP address of the firewall rule (IPv4)")
-  startIpAddress?: string;
-
-  @visibility(Lifecycle.Update)
-  @doc("The end IP address of the firewall rule (IPv4)")
-  endIpAddress?: string;
-
-  @visibility(Lifecycle.Update)
-  @doc("The description of the firewall rule")
-  description?: string;
-}
-
-@doc("HorizonDb firewall rule for update operations")
-model HorizonDbFirewallRuleForPatchUpdate {
-  @doc("Properties of a HorizonDb firewall rule for update operations")
-  properties?: HorizonDbFirewallRulePropertiesForPatchUpdate;
-}
-
 @doc("The mode to create a new HorizonDb cluster")
 union CreateModeCluster {
   string,
