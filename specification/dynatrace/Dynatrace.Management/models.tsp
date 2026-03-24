@@ -2,9 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
+using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Dynatrace.Observability;
 
@@ -140,6 +144,24 @@ union Action {
   Install: "Install",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Uninstall: "Uninstall",
+}
+
+/**
+ * Add or Remove connectors for SRE agents.
+ */
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+union ConnectorAction {
+  string,
+
+  /**
+   * Add connector actions
+   */
+  Add: "Add",
+
+  /**
+   * Remove connector action
+   */
+  Remove: "Remove",
 }
 
 /**
@@ -579,6 +601,64 @@ model VMExtensionPayload {
 }
 
 /**
+ * Resource types for monitored compute resources.
+ */
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+union MonitoredComputeResourceType {
+  string,
+
+  /** All monitored compute resource types */
+  All: "All",
+
+  /** Azure Kubernetes Service managed clusters */
+  ManagedClusters: "managedClusters",
+}
+
+/**
+ * Request body for listing monitored compute resources. If not provided, returns all monitored compute resources.
+ */
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model MonitoredComputeResourcesRequest {
+  /**
+   * The type of compute resources to filter by. Use "All" to get all resource types, or specify a specific type like "managedClusters".
+   */
+  resourceType?: MonitoredComputeResourceType;
+}
+
+/**
+ * Response of a list operation for monitored compute resources.
+ */
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model MonitoredComputeResourceListResponse
+  is Azure.Core.Page<MonitoredComputeResourceInfo> {
+  /**
+   * The type of compute resources in this response. Returns the filter value used in the request (e.g., "managedClusters" or "All").
+   */
+  resourceType?: string;
+}
+
+/**
+ * Details of a monitored compute resource monitored by the Dynatrace monitor.
+ */
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model MonitoredComputeResourceInfo {
+  /**
+   * The full ARM resource ID of the monitored resource.
+   */
+  monitoredResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Flag indicating if the resource is currently being monitored.
+   */
+  isMonitored?: boolean;
+
+  /**
+   * Reason for monitoring status.
+   */
+  reasonForMonitoringStatus?: string;
+}
+
+/**
  * Request for performing Dynatrace agent install/uninstall action through the Azure Dynatrace resource on the provided list of agent resources.
  */
 model ManageAgentInstallationRequest {
@@ -591,6 +671,23 @@ model ManageAgentInstallationRequest {
    * Install/Uninstall action.
    */
   action: Action;
+}
+
+/**
+ * Request for adding/removing Dynatrace MCP connectors on SRE Agent resource.
+ */
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model SreAgentConnectorRequest {
+  /**
+   * The list of ARM resource ID of the MCP connector integrated with SRE Agent resource.
+   */
+  @Azure.ResourceManager.identifiers(#["mcpConnectorResourceId"])
+  mcpConnectorResourceIdList: SreAgentConfiguration[];
+
+  /**
+   * Add/Remove action.
+   */
+  action: ConnectorAction;
 }
 
 /**
@@ -654,6 +751,21 @@ model MonitorProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * SaaS details
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+  saaSData?: SaaSData;
+
+  /**
+   * SRE Agent configuration to connect to MCP server of Dynatrace for given environment.
+   */
+  @Azure.ResourceManager.identifiers(#["mcpConnectorResourceId"])
+  @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+  @visibility(Lifecycle.Update)
+  sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
 /**
@@ -679,6 +791,24 @@ model DynatraceEnvironmentProperties {
    * The details of a Dynatrace single sign-on.
    */
   singleSignOnProperties?: DynatraceSingleSignOnProperties;
+}
+
+/**
+ * Response of a list operation.
+ */
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model SreAgentConfigurationListResponse
+  is Azure.Core.Page<SreAgentConfiguration>;
+
+/**
+ * SRE Agent configuration to connect to MCP server of Dynatrace for a given organization.
+ */
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model SreAgentConfiguration {
+  /**
+   * The ARM resource ID of the MCP connector integrated with SRE Agent resource.
+   */
+  mcpConnectorResourceId: string;
 }
 
 /**
@@ -786,9 +916,27 @@ model UserInfo {
   phoneNumber?: string;
 
   /**
+   * Company name of the user
+   */
+  @added(Versions.v2026_01_07_preview)
+  company?: string;
+
+  /**
    * Country of the user
    */
   country?: string;
+
+  /**
+   * State of the user
+   */
+  @added(Versions.v2026_01_07_preview)
+  state?: string;
+
+  /**
+   * Job title of the user
+   */
+  @added(Versions.v2026_01_07_preview)
+  jobTitle?: string;
 }
 
 /**
@@ -815,6 +963,18 @@ model PlanData {
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   effectiveDate?: utcDateTime;
+
+  /**
+   * offer id as published by Dynatrace
+   */
+  @added(Versions.v2026_01_07_preview)
+  offerId?: string;
+
+  /**
+   * publisher id as published by Dynatrace
+   */
+  @added(Versions.v2026_01_07_preview)
+  publisherId?: string;
 }
 
 /**
@@ -951,6 +1111,12 @@ model MarketplaceSaaSResourceDetailsResponse {
    * Id of the plan
    */
   planId?: string;
+
+  /**
+   * Id of the offer
+   */
+  @added(Versions.v2026_01_07_preview)
+  offerId?: string;
 
   /**
    * Marketplace subscription status
@@ -1190,4 +1356,116 @@ model LinkableEnvironmentResponse {
    * Billing plan information.
    */
   planData?: PlanData;
+}
+
+/**
+ * SaaS guid for activate and Validate SaaS Resource
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model ActivateSaaSParameterRequest {
+  /**
+   * SaaS guid of marketplace SaaS subscription to be activated.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSGuid?: string;
+
+  /**
+   * Admin user details
+   */
+  adminUserDetails: AdminUserDetails;
+}
+
+/**
+ * Dynatrace Account Admin user details
+ */
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model AdminUserDetails {
+  /**
+   * First name of the admin user
+   */
+  firstName: string;
+
+  /**
+   * Last name of the admin user
+   */
+  lastName: string;
+
+  /**
+   * Email of the user used by Dynatrace for contacting them if needed
+   */
+  @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
+  emailAddress: string;
+
+  /**
+   * Phone number of the user used by Dynatrace for contacting them if needed
+   */
+  @maxLength(40)
+  phoneNumber?: string;
+
+  /**
+   * Company name of the admin user
+   */
+  company: string;
+
+  /**
+   * Country of the admin user
+   */
+  country: string;
+
+  /**
+   * State of the admin user
+   */
+  state?: string;
+
+  /**
+   * Job title of the admin user
+   */
+  jobTitle?: string;
+}
+
+/**
+ * Response of get latest linked SaaS resource operation
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model LatestLinkedSaaSResponse {
+  /**
+   * Flag indicating if the SaaS resource is hidden
+   */
+  isHiddenSaaS?: boolean;
+
+  /**
+   * SaaS resource id
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSResourceId?: string;
+}
+
+/**
+ * SaaS details
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model SaaSData {
+  /**
+   * SaaS resource id
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSResourceId?: string;
+}
+
+/**
+ * Marketplace SaaS resource details.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Using extends for proxy resource model"
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model SaaSResourceDetailsResponse
+  extends Azure.ResourceManager.Foundations.ProxyResource {
+  /**
+   * Id of the Marketplace SaaS Resource
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSGuid?: string;
 }

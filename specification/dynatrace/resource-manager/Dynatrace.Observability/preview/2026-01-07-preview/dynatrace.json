@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Dynatrace.Observability",
-    "version": "2024-04-24",
+    "version": "2026-01-07-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -91,6 +91,51 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/activateSaaS": {
+      "post": {
+        "operationId": "SaaSOperationGroup_ActivateSaaS",
+        "description": "Activate the marketplace SaaS resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActivateSaaSParameterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SaaSResourceDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SaaS_ActivateSaaS_MaximumSet_Gen": {
+            "$ref": "./examples/SaaS_ActivateResource_MaximumSet_Gen.json"
+          },
+          "SaaS_ActivateSaaS_MinimumSet_Gen": {
+            "$ref": "./examples/SaaS_ActivateResource_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -775,6 +820,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/latestLinkedSaaS": {
+      "post": {
+        "operationId": "Monitors_LatestLinkedSaaS",
+        "tags": [
+          "MonitorResources"
+        ],
+        "description": "Get the latest SaaS linked to the dynatrace account of the underlying monitor.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Monitor resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LatestLinkedSaaSResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_LatestLinkedSaaS": {
+            "$ref": "./examples/Monitors_LatestLinkedSaaS.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listAppServices": {
       "post": {
         "operationId": "Monitors_ListAppServices",
@@ -943,6 +1035,68 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listMonitoredComputeResources": {
+      "post": {
+        "operationId": "Monitors_ListMonitoredComputeResources",
+        "tags": [
+          "MonitorResources"
+        ],
+        "description": "Lists the compute resources monitored by current monitor.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Monitor resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body to filter compute resources by resource type.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/MonitoredComputeResourcesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitoredComputeResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_ListMonitoredComputeResources_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_ListMonitoredComputeResources_MaximumSet_Gen.json"
+          },
+          "Monitors_ListMonitoredComputeResources_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_ListMonitoredComputeResources_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listMonitoredResources": {
       "post": {
         "operationId": "Monitors_ListMonitoredResources",
@@ -1057,6 +1211,65 @@
           },
           "Monitors_ManageAgentInstallation_MinimumSet_Gen": {
             "$ref": "./examples/Monitors_ManageAgentInstallation_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/manageSreAgentConnectors": {
+      "post": {
+        "operationId": "Monitors_ManageSreAgentConnectors",
+        "tags": [
+          "MonitorResources"
+        ],
+        "description": "Manages Dynatrace MCP connectors to add/remove through the Azure Dynatrace resource on the provided list of resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Monitor resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SreAgentConnectorRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SreAgentConfigurationListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_ManageSreAgentConnectors_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_ManageSreAgentConnectors_MaximumSet_Gen.json"
+          },
+          "Monitors_ManageSreAgentConnectors_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_ManageSreAgentConnectors_MinimumSet_Gen.json"
           }
         }
       }
@@ -1176,7 +1389,7 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Monitor resource name",
+            "description": "The name of the MonitorResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9_-]*$"
@@ -1952,6 +2165,70 @@
         ]
       }
     },
+    "ActivateSaaSParameterRequest": {
+      "type": "object",
+      "description": "SaaS guid for activate and Validate SaaS Resource",
+      "properties": {
+        "saaSGuid": {
+          "type": "string",
+          "description": "SaaS guid of marketplace SaaS subscription to be activated."
+        },
+        "adminUserDetails": {
+          "$ref": "#/definitions/AdminUserDetails",
+          "description": "Admin user details"
+        }
+      },
+      "required": [
+        "adminUserDetails"
+      ]
+    },
+    "AdminUserDetails": {
+      "type": "object",
+      "description": "Dynatrace Account Admin user details",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First name of the admin user"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the admin user"
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "Email of the user used by Dynatrace for contacting them if needed",
+          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the user used by Dynatrace for contacting them if needed",
+          "maxLength": 40
+        },
+        "company": {
+          "type": "string",
+          "description": "Company name of the admin user"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country of the admin user"
+        },
+        "state": {
+          "type": "string",
+          "description": "State of the admin user"
+        },
+        "jobTitle": {
+          "type": "string",
+          "description": "Job title of the admin user"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "emailAddress",
+        "company",
+        "country"
+      ]
+    },
     "AppServiceInfo": {
       "type": "object",
       "description": "Details of App Services having Dynatrace OneAgent installed",
@@ -2098,6 +2375,30 @@
           "format": "int64",
           "description": "Count of the connected resources"
         }
+      }
+    },
+    "ConnectorAction": {
+      "type": "string",
+      "description": "Add or Remove connectors for SRE agents.",
+      "enum": [
+        "Add",
+        "Remove"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Add",
+            "value": "Add",
+            "description": "Add connector actions"
+          },
+          {
+            "name": "Remove",
+            "value": "Remove",
+            "description": "Remove connector action"
+          }
+        ]
       }
     },
     "CreateResourceSupportedProperties": {
@@ -2295,6 +2596,20 @@
       "required": [
         "type"
       ]
+    },
+    "LatestLinkedSaaSResponse": {
+      "type": "object",
+      "description": "Response of get latest linked SaaS resource operation",
+      "properties": {
+        "isHiddenSaaS": {
+          "type": "boolean",
+          "description": "Flag indicating if the SaaS resource is hidden"
+        },
+        "saaSResourceId": {
+          "type": "string",
+          "description": "SaaS resource id"
+        }
+      }
     },
     "LiftrResourceCategories": {
       "type": "string",
@@ -2524,6 +2839,10 @@
           "type": "string",
           "description": "Id of the plan"
         },
+        "offerId": {
+          "type": "string",
+          "description": "Id of the offer"
+        },
         "marketplaceSubscriptionStatus": {
           "$ref": "#/definitions/MarketplaceSubscriptionStatus",
           "description": "Marketplace subscription status"
@@ -2683,6 +3002,23 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
+        },
+        "saaSData": {
+          "$ref": "#/definitions/SaaSData",
+          "description": "SaaS details"
+        },
+        "sreAgentConfiguration": {
+          "type": "array",
+          "description": "SRE Agent configuration to connect to MCP server of Dynatrace for given environment.",
+          "items": {
+            "$ref": "#/definitions/SreAgentConfiguration"
+          },
+          "x-ms-identifiers": [
+            "mcpConnectorResourceId"
+          ],
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
@@ -2763,6 +3099,84 @@
         "planData": {
           "$ref": "#/definitions/PlanData",
           "description": "The new Billing plan information."
+        }
+      }
+    },
+    "MonitoredComputeResourceInfo": {
+      "type": "object",
+      "description": "Details of a monitored compute resource monitored by the Dynatrace monitor.",
+      "properties": {
+        "monitoredResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full ARM resource ID of the monitored resource."
+        },
+        "isMonitored": {
+          "type": "boolean",
+          "description": "Flag indicating if the resource is currently being monitored."
+        },
+        "reasonForMonitoringStatus": {
+          "type": "string",
+          "description": "Reason for monitoring status."
+        }
+      }
+    },
+    "MonitoredComputeResourceListResponse": {
+      "type": "object",
+      "description": "Response of a list operation for monitored compute resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MonitoredComputeResourceInfo items on this page",
+          "items": {
+            "$ref": "#/definitions/MonitoredComputeResourceInfo"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of compute resources in this response. Returns the filter value used in the request (e.g., \"managedClusters\" or \"All\")."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MonitoredComputeResourceType": {
+      "type": "string",
+      "description": "Resource types for monitored compute resources.",
+      "enum": [
+        "All",
+        "managedClusters"
+      ],
+      "x-ms-enum": {
+        "name": "MonitoredComputeResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All monitored compute resource types"
+          },
+          {
+            "name": "ManagedClusters",
+            "value": "managedClusters",
+            "description": "Azure Kubernetes Service managed clusters"
+          }
+        ]
+      }
+    },
+    "MonitoredComputeResourcesRequest": {
+      "type": "object",
+      "description": "Request body for listing monitored compute resources. If not provided, returns all monitored compute resources.",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/MonitoredComputeResourceType",
+          "description": "The type of compute resources to filter by. Use \"All\" to get all resource types, or specify a specific type like \"managedClusters\"."
         }
       }
     },
@@ -2962,6 +3376,14 @@
           "type": "string",
           "format": "date-time",
           "description": "date when plan was applied"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "offer id as published by Dynatrace"
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "publisher id as published by Dynatrace"
         }
       }
     },
@@ -3088,6 +3510,31 @@
           }
         ]
       }
+    },
+    "SaaSData": {
+      "type": "object",
+      "description": "SaaS details",
+      "properties": {
+        "saaSResourceId": {
+          "type": "string",
+          "description": "SaaS resource id"
+        }
+      }
+    },
+    "SaaSResourceDetailsResponse": {
+      "type": "object",
+      "description": "Marketplace SaaS resource details.",
+      "properties": {
+        "saaSGuid": {
+          "type": "string",
+          "description": "Id of the Marketplace SaaS Resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SendAadLogsStatus": {
       "type": "string",
@@ -3230,6 +3677,64 @@
           }
         ]
       }
+    },
+    "SreAgentConfiguration": {
+      "type": "object",
+      "description": "SRE Agent configuration to connect to MCP server of Dynatrace for a given organization.",
+      "properties": {
+        "mcpConnectorResourceId": {
+          "type": "string",
+          "description": "The ARM resource ID of the MCP connector integrated with SRE Agent resource."
+        }
+      },
+      "required": [
+        "mcpConnectorResourceId"
+      ]
+    },
+    "SreAgentConfigurationListResponse": {
+      "type": "object",
+      "description": "Response of a list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SreAgentConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/SreAgentConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SreAgentConnectorRequest": {
+      "type": "object",
+      "description": "Request for adding/removing Dynatrace MCP connectors on SRE Agent resource.",
+      "properties": {
+        "mcpConnectorResourceIdList": {
+          "type": "array",
+          "description": "The list of ARM resource ID of the MCP connector integrated with SRE Agent resource.",
+          "items": {
+            "$ref": "#/definitions/SreAgentConfiguration"
+          },
+          "x-ms-identifiers": [
+            "mcpConnectorResourceId"
+          ]
+        },
+        "action": {
+          "$ref": "#/definitions/ConnectorAction",
+          "description": "Add/Remove action."
+        }
+      },
+      "required": [
+        "mcpConnectorResourceIdList",
+        "action"
+      ]
     },
     "Status": {
       "type": "string",
@@ -3478,9 +3983,21 @@
           "description": "Phone number of the user used by Dynatrace for contacting them if needed",
           "maxLength": 40
         },
+        "company": {
+          "type": "string",
+          "description": "Company name of the user"
+        },
         "country": {
           "type": "string",
           "description": "Country of the user"
+        },
+        "state": {
+          "type": "string",
+          "description": "State of the user"
+        },
+        "jobTitle": {
+          "type": "string",
+          "description": "Job title of the user"
         }
       }
     },
