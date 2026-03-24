@@ -31,6 +31,14 @@ using Microsoft.Communication;
 @@clientName(DomainPropertiesVerificationRecords.DMARC, "dmarc", "java");
 
 @@clientName(CommunicationServiceProperties.hostName, "hostname", "java");
+@@clientName(SuppressionListProperties.createdTimeStamp,
+  "createdTimestamp",
+  "java"
+);
+@@clientName(SuppressionListProperties.lastUpdatedTimeStamp,
+  "lastUpdatedTimestamp",
+  "java"
+);
 @@clientName(NameAvailabilityParameters,
   "CommunicationServiceNameAvailabilityContent",
   "csharp"
