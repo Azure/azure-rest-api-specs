@@ -889,12 +889,12 @@ op replaceprivateDnsZoneGroupsList(
   "FirewallPolicyIdpsSignatureSeverity",
   "java"
 );
-@@clientName(Microsoft.Network.IDPSQueryObject, "IdpsQueryObject", "java");
-@@clientName(Microsoft.Network.FirewallPolicySNAT,
+@@clientName(Microsoft.Network.IdpsQueryObject, "IdpsQueryObject", "java");
+@@clientName(Microsoft.Network.FirewallPolicySnat,
   "FirewallPolicySnat",
   "java"
 );
-@@clientName(Microsoft.Network.FirewallPolicySQL, "FirewallPolicySql", "java");
+@@clientName(Microsoft.Network.FirewallPolicySql, "FirewallPolicySql", "java");
 @@clientName(Microsoft.Network.GenerateExpressRoutePortsLOARequest,
   "GenerateExpressRoutePortsLoaRequest",
   "java"
