@@ -15,7 +15,7 @@ namespace Microsoft.Compute;
 @@clientName(VirtualMachineBulkOperations.bulkGetOperationsStatus,
   "BulkGetOperationsStatus"
 );
-@@clientName(VirtualMachineBulkOperations.bulkCancelOperations,
+@@clientName(VirtualMachineBulkOperations.bulkCancel,
   "BulkCancelOperations"
 );
 @@clientName(VirtualMachineBulkOperations.bulkCreate, "BulkCreateOperation");
