@@ -193,11 +193,6 @@ interface QueueClient extends Storage.Queues.Queue {}
   "x-ms-meta",
   "javascript"
 );
-@@clientOption(Storage.Queues.MetadataHeadersParameter.metadata,
-  "headerCollectionPrefix",
-  "x-ms-meta",
-  "javascript"
-);
 
 @@clientOption(Storage.Queues, "includeRootSlash", false, "python,javascript");
 
