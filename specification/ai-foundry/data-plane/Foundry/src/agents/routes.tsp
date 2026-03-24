@@ -202,7 +202,7 @@ interface Agents {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @patch(#{ implicitOptionality: true })
-  @route("/agents/{agent_name}/endpoint")
+  @route("/agents/{agent_name}")
   @extension(
     "x-ms-foundry-meta",
     #{
@@ -217,7 +217,7 @@ interface Agents {
       @path agent_name: string;
 
       @header("Content-Type") contentType: "application/merge-patch+json";
-      ...UpdateAgentEndpointRequest;
+      ...PatchAgentRequest;
     },
     AgentObject
   >;

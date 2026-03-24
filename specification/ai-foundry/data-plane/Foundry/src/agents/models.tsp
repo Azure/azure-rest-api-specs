@@ -80,6 +80,26 @@ model CreateAgentRequest {
   name: string;
 
   ...CreateAgentVersionRequest;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @doc("An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent")
+  agent_endpoint?: AgentEndpoint;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @doc("Optional agent card for the agent")
+  agent_card?: AgentCard;
 }
 
 model UpdateAgentRequest {
@@ -91,8 +111,18 @@ model UpdateAgentRequest {
   "x-ms-foundry-meta",
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
-model UpdateAgentEndpointRequest {
-  ...AgentEndpoint;
+model PatchAgentRequest {
+  ...MetadataPropertyForRequest;
+
+  @doc("A human-readable description of the agent.")
+  @maxLength(512)
+  description?: string;
+
+  @doc("The endpoint configuration for the agent")
+  agent_endpoint?: AgentEndpoint;
+
+  @doc("Optional agent card for the agent")
+  agent_card?: AgentCard;
 }
 
 union AgentObjectType {
@@ -137,7 +167,6 @@ model AgentObject {
     }
   )
   @doc("The instance identity of the agent")
-  @visibility(Lifecycle.Read)
   instance_identity?: AgentIdentity;
 
   @removed(Versions.v1)
@@ -148,7 +177,6 @@ model AgentObject {
     }
   )
   @doc("The blueprint for the agent")
-  @visibility(Lifecycle.Read)
   blueprint?: AgentIdentity;
 
   @removed(Versions.v1)
@@ -159,8 +187,25 @@ model AgentObject {
     }
   )
   @doc("The blueprint for the agent")
-  @visibility(Lifecycle.Read)
   blueprint_reference?: AgentBlueprintReference;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  m365_card?: M365Card;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  agent_card?: AgentCard;
 }
 
 model AgentVersionObject {
@@ -257,6 +302,47 @@ union AgentProtocol {
 
   @removed(Versions.v1)
   invocations: "invocations",
+}
+
+@removed(Versions.v1)
+union AgentPublishScope {
+  string,
+  individual: "Individual",
+  shared: "Shared",
+  organization: "Organization",
+}
+
+@removed(Versions.v1)
+model M365Card {
+  @doc("The display name of the agent as it will appear in Teams/M365")
+  display_name: string;
+
+  @doc("The user-facing version of the agent")
+  version: string;
+
+  @doc("A one sentence description of what your agent does")
+  short_description: string;
+
+  @doc("Longer description of your agent's responsibilities and the actions it can take")
+  full_description: string;
+
+  @doc("The organization or agent developer's name")
+  developer_name: string;
+
+  @doc("URL to the website of the developer")
+  website: string;
+
+  @doc("URL to the terms of use for the agent")
+  terms_of_use: string;
+
+  @doc("URL to the privacy policy for the agent")
+  privacy_statement: string;
+
+  @doc("The scope at which the agent is available")
+  publish_scope: AgentPublishScope;
+
+  @doc("Whether the agent is a digital worker or regular published agent")
+  is_digital_worker: boolean;
 }
 
 @removed(Versions.v1)
@@ -822,10 +908,6 @@ model AgentEndpoint {
 
   @doc("The authorization schemes supported by the agent endpoint")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
-
-  // TODO: move this out to the agent object. This is under preview so for fast iteration putting it here
-  @doc("The agent card")
-  agent_card?: AgentCard;
 }
 
 @removed(Versions.v1)
