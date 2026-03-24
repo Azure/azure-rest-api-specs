@@ -168,6 +168,7 @@ using Azure.AI.Projects;
 // Insights sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
+@@clientName(InsightsGetParams.id, "insight_id");
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
