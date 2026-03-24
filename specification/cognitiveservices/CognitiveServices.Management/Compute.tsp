@@ -119,4 +119,6 @@ interface Computes {
 );
 @@doc(Compute.properties, "Properties of Cognitive Services compute.");
 @@doc(Computes.createOrUpdate::parameters.resource, "The compute properties.");
-@@doc(Computes.update::parameters.properties, "The compute properties to update.");
+@@doc(Computes.update::parameters.properties,
+  "The compute properties to update."
+);
