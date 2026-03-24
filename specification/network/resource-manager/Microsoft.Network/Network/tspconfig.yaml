@@ -22,7 +22,20 @@ options:
     enable-sync-stack: false
     float32-as-double: false
     customization-class: customization/src/main/java/NetworkCustomization.java
-    add-inner: "ApplicationGatewayIpConfiguration,ApplicationGatewayPathRule,ApplicationGatewayProbe,ApplicationGatewayRedirectConfiguration,ApplicationGatewayRequestRoutingRule,ApplicationGatewaySslCertificate,ApplicationGatewayUrlPathMap,ApplicationGatewayAuthenticationCertificate,VirtualNetworkGatewayIpConfiguration,ConnectionMonitor,PacketCapture,ApplicationGateway,ApplicationGatewayListener"
+    add-inner:
+      - ApplicationGatewayIpConfiguration
+      - ApplicationGatewayPathRule
+      - ApplicationGatewayProbe
+      - ApplicationGatewayRedirectConfiguration
+      - ApplicationGatewayRequestRoutingRule
+      - ApplicationGatewaySslCertificate
+      - ApplicationGatewayUrlPathMap
+      - ApplicationGatewayAuthenticationCertificate
+      - VirtualNetworkGatewayIpConfiguration
+      - ConnectionMonitor
+      - PacketCapture
+      - ApplicationGateway
+      - ApplicationGatewayListener
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-network"
     service-dir: "sdk/network"

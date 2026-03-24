@@ -894,7 +894,7 @@ op replaceprivateDnsZoneGroupsList(
   "FirewallPolicySnat",
   "java"
 );
-@@clientName(Microsoft.Network.FirewallPolicySql, "FirewallPolicySql", "java");
+@@clientName(Microsoft.Network.FirewallPolicySQL, "FirewallPolicySql", "java");
 @@clientName(Microsoft.Network.GenerateExpressRoutePortsLOARequest,
   "GenerateExpressRoutePortsLoaRequest",
   "java"
