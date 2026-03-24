@@ -31,11 +31,3 @@
 - tool: TypeSpecRequirement
   path: ./stable/2024-01-01/*.json
   reason: Brownfield service not ready to migrate
-- tool: Swagger BreakingChange
-  paths:
-    - preview/2025-05-01-preview/servicebus.json
-  reason: Path casing change from authorizationRules to AuthorizationRules to align list operations with CRUD operations. No actual breaking change.
-- tool: Swagger LintDiff
-  paths:
-    - preview/2025-05-01-preview/servicebus.json
-  reason: Pre-existing warnings (EnumInsteadOfBoolean, LocationMustHaveXmsMutability, SchemaDescriptionOrTitle) surfaced due to swagger regeneration from TypeSpec MPG migration. Not introduced by this change.
