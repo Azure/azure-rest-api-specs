@@ -4,22 +4,44 @@ skill: azure-typespec-author
 version: "1.0"
 config:
   trials_per_task: 1
-  timeout_seconds: 300
+  timeout_seconds: 1000
   parallel: false
   executor: copilot-sdk
-  model: gpt-5.1-codex-mini
+  model: claude-opus-4.6-1m
 metrics:
   - name: task_completion
     weight: 1.0
     threshold: 0.8
     description: Did the skill complete the assigned task?
 graders:
-  - type: text
-    name: no_fatal_errors
+  - type: skill_invocation
+    name: routing_check
     config:
-      regex_not_match:
-        - (?i)error occurred
-        - (?i)failed
-        - (?i)re-run the tool
+      required_skills:
+        - azure-typespec-author
+      mode: in_order
+      allow_extra: true
 tasks:
-  - "tasks/*.yaml"
+  - "tasks/basic-usage-001.yaml"
+  - "tasks/basic-usage-002.yaml"
+  - "tasks/basic-usage-003.yaml"
+  - "tasks/basic-usage-004.yaml"
+  - "tasks/basic-usage-005.yaml"
+  - "tasks/basic-usage-006.yaml"
+  - "tasks/basic-usage-007.yaml"
+  - "tasks/basic-usage-008.yaml"
+  - "tasks/basic-usage-009.yaml"
+  - "tasks/basic-usage-010.yaml"
+  - "tasks/basic-usage-011.yaml"
+  - "tasks/basic-usage-012.yaml"
+  - "tasks/basic-usage-013.yaml"
+  - "tasks/basic-usage-014.yaml"
+  - "tasks/basic-usage-015.yaml"
+  - "tasks/basic-usage-016.yaml"
+  - "tasks/basic-usage-017.yaml"
+  - "tasks/basic-usage-018.yaml"
+  - "tasks/basic-usage-019.yaml"
+  - "tasks/basic-usage-020.yaml"
+  - "tasks/basic-usage-021.yaml"
+  - "tasks/basic-usage-022.yaml"
+  - "tasks/basic-usage-023.yaml"
