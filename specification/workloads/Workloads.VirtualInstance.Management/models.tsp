@@ -222,7 +222,7 @@ model ChangeDetection {
 union DiscoveryConfigurationType {
   string,
 
-  /** SAP API discovery type for discovering SAP systems via API calls. */
+  /** SAP API discovery type for discovering SAP systems via sapcontrol API calls. */
   SAPAPI: "SAPAPI",
 }
 
@@ -346,7 +346,7 @@ model VirtualInstanceProperties {
   workloadInfo: WorkloadInfo;
 
   /**
-   * The type of environment in which the workload system is deployed - Production / Non Production.
+   * The type of environment in which the workload system is deployed - Production / NonProduction.
    */
   environmentType: EnvironmentType;
 
@@ -525,7 +525,7 @@ model WorkloadInfo {
   workloadType: string;
 
   /**
-   * The name of the corresponding workload definition.
+   * The name of the corresponding workload definition. Optional for certain discovery based scenarios. Mandatory for manual registration.
    */
   workloadDefinitionName?: string;
 
@@ -598,7 +598,7 @@ model WorkloadComponentProperties {
   componentType: string;
 
   /**
-   * Role of the component. There can be multiple roles for a same component type. Allowed values change based on the workload type and will be defined in the workload definition. Examples of Role for SAP workloads include "pas"/"aas" for application component, "ascs"/"ers" for central component, "backup", etc.
+   * Role of the component. There can be multiple roles for a same component type. Allowed values change based on the workload type and will be defined in the workload definition.
    */
   componentRole?: string;
 
