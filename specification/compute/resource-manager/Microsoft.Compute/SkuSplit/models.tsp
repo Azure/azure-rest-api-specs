@@ -307,6 +307,11 @@ model SkuMixPlacementDeploymentChoice {
   /** Unique identifier for this deployment choice. */
   id: string;
 
+  /** Placement score from 0 to 9 (inclusive). Higher is better. */
+  @minValue(0)
+  @maxValue(9)
+  score: float64;
+
   /** The list of VM size / zone allocations that make up this deployment choice. */
   @identifiers(#["name", "zone"])
   skuSplit: SkuMixPlacementItem[];

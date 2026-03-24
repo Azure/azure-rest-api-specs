@@ -296,6 +296,13 @@
           "type": "string",
           "description": "Unique identifier for this deployment choice."
         },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Placement score from 0 to 9 (inclusive). Higher is better.",
+          "minimum": 0,
+          "maximum": 9
+        },
         "skuSplit": {
           "type": "array",
           "description": "The list of VM size / zone allocations that make up this deployment choice.",
@@ -310,6 +317,7 @@
       },
       "required": [
         "id",
+        "score",
         "skuSplit"
       ]
     },
