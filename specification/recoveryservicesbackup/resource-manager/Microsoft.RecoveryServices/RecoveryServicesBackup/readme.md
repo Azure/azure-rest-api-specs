@@ -570,20 +570,7 @@ directive:
     reason: Known false alarm for the discriminator pattern that causes ConsistentPatchProperties rule to fail.
   - suppress: ResourceNameRestriction
     from: bms.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping"].get.parameters[3]
-    reason: vaultName inherited from parent VaultResource with NamePattern="" for backward compatibility across all API versions.
-  - suppress: ResourceNameRestriction
-    from: bms.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}"].get.parameters[3]
-    reason: vaultName inherited from parent VaultResource with NamePattern="" for backward compatibility across all API versions.
-  - suppress: ResourceNameRestriction
-    from: bms.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}"].put.parameters[3]
-    reason: vaultName inherited from parent VaultResource with NamePattern="" for backward compatibility across all API versions.
-  - suppress: ResourceNameRestriction
-    from: bms.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMapping/{crossTenantVaultMappingName}/removeCrossTenantVaultMapping"].post.parameters[3]
-    reason: vaultName inherited from parent VaultResource with NamePattern="" for backward compatibility across all API versions.
+    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility across all API versions. Adding a pattern would be a breaking change affecting the entire specification.
   - suppress: AvoidAdditionalProperties
     from: bms.json
     where: $.definitions.CrossTenantVaultMapping.properties.extendedProperties
