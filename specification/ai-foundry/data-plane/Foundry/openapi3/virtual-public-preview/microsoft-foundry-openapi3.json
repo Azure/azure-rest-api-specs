@@ -11415,18 +11415,6 @@
               ]
             }
           },
-          "m365_card": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/M365Card"
-              }
-            ],
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
           "agent_card": {
             "allOf": [
               {
@@ -11452,21 +11440,6 @@
               "activity_protocol",
               "responses",
               "invocations"
-            ]
-          }
-        ]
-      },
-      "AgentPublishScope": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "Individual",
-              "Shared",
-              "Organization"
             ]
           }
         ]
@@ -17490,67 +17463,6 @@
           }
         ],
         "description": "The types of parameters for red team item generation."
-      },
-      "M365Card": {
-        "type": "object",
-        "required": [
-          "display_name",
-          "version",
-          "short_description",
-          "full_description",
-          "developer_name",
-          "website",
-          "terms_of_use",
-          "privacy_statement",
-          "publish_scope",
-          "is_digital_worker"
-        ],
-        "properties": {
-          "display_name": {
-            "type": "string",
-            "description": "The display name of the agent as it will appear in Teams/M365"
-          },
-          "version": {
-            "type": "string",
-            "description": "The user-facing version of the agent"
-          },
-          "short_description": {
-            "type": "string",
-            "description": "A one sentence description of what your agent does"
-          },
-          "full_description": {
-            "type": "string",
-            "description": "Longer description of your agent's responsibilities and the actions it can take"
-          },
-          "developer_name": {
-            "type": "string",
-            "description": "The organization or agent developer's name"
-          },
-          "website": {
-            "type": "string",
-            "description": "URL to the website of the developer"
-          },
-          "terms_of_use": {
-            "type": "string",
-            "description": "URL to the terms of use for the agent"
-          },
-          "privacy_statement": {
-            "type": "string",
-            "description": "URL to the privacy policy for the agent"
-          },
-          "publish_scope": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentPublishScope"
-              }
-            ],
-            "description": "The scope at which the agent is available"
-          },
-          "is_digital_worker": {
-            "type": "boolean",
-            "description": "Whether the agent is a digital worker or regular published agent"
-          }
-        }
       },
       "ManagedAgentIdentityBlueprint": {
         "type": "object",
