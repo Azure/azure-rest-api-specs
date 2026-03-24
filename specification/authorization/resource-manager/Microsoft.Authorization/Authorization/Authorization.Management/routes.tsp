@@ -20,11 +20,13 @@ interface EligibleChildResourcesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EligibleChildResources_Get")
+  @tag("eligibleChildResources")
   @autoRoute
+  @list
   @get
   @action("eligibleChildResources")
   get is ArmProviderActionSync<
-    Response = ResourceListResult<EligibleChildResource>,
+    Response = EligibleChildResourcesListResult,
     Scope = ExtensionActionScope,
     Parameters = {
       /**
@@ -32,6 +34,7 @@ interface EligibleChildResourcesOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = CloudError
   >;
 }

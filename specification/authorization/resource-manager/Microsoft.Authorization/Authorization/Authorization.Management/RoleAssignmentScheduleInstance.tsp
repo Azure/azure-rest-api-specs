@@ -24,19 +24,22 @@ model RoleAssignmentScheduleInstance
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface RoleAssignmentScheduleInstances {
   /**
    * Gets the specified role assignment schedule instance.
    */
+  @tag("roleAssignmentScheduleInstances")
   get is Extension.Read<
     Extension.ScopeParameter,
-    RoleAssignmentScheduleInstance
+    RoleAssignmentScheduleInstance,
+    Error = CloudError
   >;
 
   /**
    * Gets role assignment schedule instances of a role assignment schedule.
    */
+  @tag("roleAssignmentScheduleInstances")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleAssignmentScheduleInstance,
@@ -46,7 +49,8 @@ interface RoleAssignmentScheduleInstances {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 

@@ -24,19 +24,22 @@ model RoleEligibilityScheduleInstance
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface RoleEligibilityScheduleInstances {
   /**
    * Gets the specified role eligibility schedule instance.
    */
+  @tag("roleEligibilityScheduleInstances")
   get is Extension.Read<
     Extension.ScopeParameter,
-    RoleEligibilityScheduleInstance
+    RoleEligibilityScheduleInstance,
+    Error = CloudError
   >;
 
   /**
    * Gets role eligibility schedule instances of a role eligibility schedule.
    */
+  @tag("roleEligibilityScheduleInstances")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleEligibilityScheduleInstance,
@@ -46,7 +49,8 @@ interface RoleEligibilityScheduleInstances {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 

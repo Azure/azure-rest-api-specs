@@ -24,29 +24,34 @@ model RoleEligibilityScheduleRequest
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface RoleEligibilityScheduleRequests {
   /**
    * Get the specified role eligibility schedule request.
    */
+  @tag("RoleEligibilityScheduleRequests")
   get is Extension.Read<
     Extension.ScopeParameter,
-    RoleEligibilityScheduleRequest
+    RoleEligibilityScheduleRequest,
+    Error = CloudError
   >;
 
   /**
    * Creates a role eligibility schedule request.
    */
+  @tag("RoleEligibilityScheduleRequests")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
     RoleEligibilityScheduleRequest,
-    Response = ArmResourceCreatedSyncResponse<RoleEligibilityScheduleRequest>
+    Response = ArmResourceCreatedSyncResponse<RoleEligibilityScheduleRequest>,
+    Error = CloudError
   >;
 
   /**
    * Gets role eligibility schedule requests for a scope.
    */
+  @tag("RoleEligibilityScheduleRequests")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleEligibilityScheduleRequest,
@@ -56,27 +61,32 @@ interface RoleEligibilityScheduleRequests {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
    * Cancels a pending role eligibility schedule request.
    */
+  @tag("RoleEligibilityScheduleRequests")
   cancel is Extension.ActionSync<
     Extension.ScopeParameter,
     RoleEligibilityScheduleRequest,
     void,
-    OkResponse
+    OkResponse,
+    Error = CloudError
   >;
 
   /**
    * Validates a new role eligibility schedule request.
    */
+  @tag("RoleEligibilityScheduleRequests")
   validate is Extension.ActionSync<
     Extension.ScopeParameter,
     RoleEligibilityScheduleRequest,
     RoleEligibilityScheduleRequest,
-    ArmResponse<RoleEligibilityScheduleRequest>
+    ArmResponse<RoleEligibilityScheduleRequest>,
+    Error = CloudError
   >;
 }
 

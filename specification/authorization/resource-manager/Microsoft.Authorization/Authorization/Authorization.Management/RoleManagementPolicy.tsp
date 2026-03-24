@@ -24,37 +24,44 @@ model RoleManagementPolicy
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface RoleManagementPolicies {
   /**
    * Get the specified role management policy for a resource scope
    */
-  get is Extension.Read<Extension.ScopeParameter, RoleManagementPolicy>;
+  @tag("roleManagementPolicies")
+  get is Extension.Read<Extension.ScopeParameter, RoleManagementPolicy, Error = CloudError>;
 
   /**
    * Update a role management policy
    */
+  @tag("roleManagementPolicies")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
     Extension.ScopeParameter,
     RoleManagementPolicy,
-    PatchModel = RoleManagementPolicy
+    PatchModel = RoleManagementPolicy,
+    Error = CloudError
   >;
 
   /**
    * Delete a role management policy
    */
+  @tag("roleManagementPolicies")
   delete is Extension.DeleteSync<
     Extension.ScopeParameter,
-    RoleManagementPolicy
+    RoleManagementPolicy,
+    Error = CloudError
   >;
 
   /**
    * Gets role management policies for a resource scope.
    */
+  @tag("roleManagementPolicies")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
-    RoleManagementPolicy
+    RoleManagementPolicy,
+    Error = CloudError
   >;
 }
 

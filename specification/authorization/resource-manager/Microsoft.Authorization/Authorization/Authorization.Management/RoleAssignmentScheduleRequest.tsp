@@ -24,29 +24,34 @@ model RoleAssignmentScheduleRequest
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface RoleAssignmentScheduleRequests {
   /**
    * Get the specified role assignment schedule request.
    */
+  @tag("RoleAssignmentScheduleRequests")
   get is Extension.Read<
     Extension.ScopeParameter,
-    RoleAssignmentScheduleRequest
+    RoleAssignmentScheduleRequest,
+    Error = CloudError
   >;
 
   /**
    * Creates a role assignment schedule request.
    */
+  @tag("RoleAssignmentScheduleRequests")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
     RoleAssignmentScheduleRequest,
-    Response = ArmResourceCreatedSyncResponse<RoleAssignmentScheduleRequest>
+    Response = ArmResourceCreatedSyncResponse<RoleAssignmentScheduleRequest>,
+    Error = CloudError
   >;
 
   /**
    * Gets role assignment schedule requests for a scope.
    */
+  @tag("RoleAssignmentScheduleRequests")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleAssignmentScheduleRequest,
@@ -56,27 +61,32 @@ interface RoleAssignmentScheduleRequests {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
    * Cancels a pending role assignment schedule request.
    */
+  @tag("RoleAssignmentScheduleRequests")
   cancel is Extension.ActionSync<
     Extension.ScopeParameter,
     RoleAssignmentScheduleRequest,
     void,
-    OkResponse
+    OkResponse,
+    Error = CloudError
   >;
 
   /**
    * Validates a new role assignment schedule request.
    */
+  @tag("RoleAssignmentScheduleRequests")
   validate is Extension.ActionSync<
     Extension.ScopeParameter,
     RoleAssignmentScheduleRequest,
     RoleAssignmentScheduleRequest,
-    ArmResponse<RoleAssignmentScheduleRequest>
+    ArmResponse<RoleAssignmentScheduleRequest>,
+    Error = CloudError
   >;
 }
 

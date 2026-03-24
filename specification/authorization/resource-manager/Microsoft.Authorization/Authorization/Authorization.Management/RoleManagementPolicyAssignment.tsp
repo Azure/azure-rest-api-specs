@@ -24,40 +24,48 @@ model RoleManagementPolicyAssignment
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface RoleManagementPolicyAssignments {
   /**
    * Get the specified role management policy assignment for a resource scope
    */
+  @tag("roleManagementPolicyAssignments")
   get is Extension.Read<
     Extension.ScopeParameter,
-    RoleManagementPolicyAssignment
+    RoleManagementPolicyAssignment,
+    Error = CloudError
   >;
 
   /**
    * Create a role management policy assignment
    */
+  @tag("roleManagementPolicyAssignments")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
     RoleManagementPolicyAssignment,
-    Response = ArmResourceCreatedSyncResponse<RoleManagementPolicyAssignment>
+    Response = ArmResourceCreatedSyncResponse<RoleManagementPolicyAssignment>,
+    Error = CloudError
   >;
 
   /**
    * Delete a role management policy assignment
    */
+  @tag("roleManagementPolicyAssignments")
   delete is Extension.DeleteSync<
     Extension.ScopeParameter,
-    RoleManagementPolicyAssignment
+    RoleManagementPolicyAssignment,
+    Error = CloudError
   >;
 
   /**
    * Gets role management assignment policies for a resource scope.
    */
+  @tag("roleManagementPolicyAssignments")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
-    RoleManagementPolicyAssignment
+    RoleManagementPolicyAssignment,
+    Error = CloudError
   >;
 }
 
