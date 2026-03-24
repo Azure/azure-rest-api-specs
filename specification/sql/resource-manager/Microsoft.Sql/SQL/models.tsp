@@ -37,6 +37,7 @@ union ShortTermRetentionPolicyName {
   default: "default",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union DataSyncParticipantIdentityType {
   string,
 
@@ -9946,6 +9947,7 @@ model ManagedInstanceVcoresCapability {
   /**
    * Memory limit MB ranges.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   supportedMemoryLimitsMB?: MaxLimitRangeCapability;
 
@@ -15407,6 +15409,7 @@ model OperationListResult {
 /**
  * A Server ImportExport operation result resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerImportExportOperationResult extends ProxyResource {
   /**
    * Resource properties.
@@ -15475,6 +15478,7 @@ model ServerImportExportOperationResultProperties {
   /**
    * Gets the status of private endpoints associated with this request.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnectionRequestStatus[];
 }
@@ -15496,6 +15500,7 @@ model DataSyncParticipantIdentity {
   /**
    * The resource ids of the user assigned identities to use
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<DataSyncParticipantUserAssignedIdentity>;
 }
 
