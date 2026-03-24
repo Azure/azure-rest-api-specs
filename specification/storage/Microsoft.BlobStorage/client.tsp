@@ -596,7 +596,7 @@ model BlobServicePropertiesCsharp {
   "x-ms-meta-",
   "csharp"
 );
-@@clientOption(Storage.Blob, "omitSlashFromEmptyRoute", true, "csharp");
+@@clientOption(Storage.Blob, "omitSlashFromEmptyRoute", true, "csharp,python");
 
 /** ----- This section overrides the setMetadata operations for Rust to require the metadata headers ----- */
 alias MetadataHeadersRequired = {
