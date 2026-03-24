@@ -2,8 +2,9 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.Kusto;
 
-@@clientName(Microsoft.Kusto, "KustoManagementClient", "javascript");
+@@clientName(Microsoft.Kusto, "KustoManagementClient", "javascript,python");
 @@clientName(Microsoft.Kusto.ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties,
   "IdentityUserAssignedIdentities",
   "java"
@@ -13,3 +14,6 @@ using Azure.ClientGenerator.Core;
   "publicIpType",
   "java"
 );
+@@clientName(IotHubDataFormat.W3CLOGFILE, "W3_CLOGFILE", "python");
+@@clientName(EventHubDataFormat.W3CLOGFILE, "W3_CLOGFILE", "python");
+@@clientName(EventGridDataFormat.W3CLOGFILE, "W3_CLOGFILE", "python");
