@@ -1,4 +1,5 @@
 namespace Azure.AI.Projects;
+
 using Azure.Core.Experimental;
 using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
