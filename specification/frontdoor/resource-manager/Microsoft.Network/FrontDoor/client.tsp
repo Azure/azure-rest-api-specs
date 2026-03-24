@@ -13,6 +13,7 @@ using TypeSpec.Rest;
 );
 @@clientName(MinimumTLSVersion.`1.0`, "ONE0", "python");
 @@clientName(MinimumTLSVersion.`1.2`, "ONE2", "python");
+@@clientName(MatchProcessingBehavior.Continue, "CONTINUE_ENUM", "python");
 @@clientName(MinimumTLSVersion.`1.0`, "One0", "javascript");
 @@clientName(MinimumTLSVersion.`1.2`, "One2", "javascript");
 
@@ -77,5 +78,5 @@ interface ProfilesOverrides {
 }
 @@override(Profiles.createOrUpdate,
   ProfilesOverrides.replaceCreateOrUpdate,
-  "go,javascript"
+  "go,javascript,python"
 );

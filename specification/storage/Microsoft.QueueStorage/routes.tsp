@@ -263,14 +263,18 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @route("?comp=acl")
-  setAccessPolicy is StorageOperationRequestBody<
+  setAccessPolicy is StorageOperationNoBody<
     {
+      /** The media type of the requestbody */
+      @header("Content-Type")
+      contentType?: "application/xml";
+
       ...TimeoutParameter;
 
       /** The access control list for the queue. */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
       @bodyRoot
-      queueAcl: SignedIdentifiers;
+      queueAcl?: SignedIdentifiers;
     },
     {
       @statusCode statusCode: 204;
@@ -402,8 +406,12 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @route("messages/{messageId}")
-  updateMessage is StorageOperationRequestBody<
+  updateMessage is StorageOperationNoBody<
     {
+      /** Content-Type header */
+      @header("Content-Type")
+      contentType?: "application/xml";
+
       ...MessageIdPathParameter;
       ...PopReceiptQueryParameter;
 

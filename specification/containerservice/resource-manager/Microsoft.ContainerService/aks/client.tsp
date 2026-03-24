@@ -29,6 +29,55 @@ using Microsoft.ContainerService;
 );
 @@clientName(ManagedClusterOIDCIssuerProfile.issuerURL, "issuerUrl", "java");
 @@clientName(TrustedAccessRoleRule.nonResourceURLs, "nonResourceUrls", "java");
+@@clientName(AgentPoolSSHAccess, "AgentPoolSshAccess", "java");
+@@clientName(GPUDriver, "GpuDriver", "java");
+@@clientName(GPUInstanceProfile, "GpuInstanceProfile", "java");
+@@clientName(GPUProfile, "GpuProfile", "java");
+@@clientName(IPFamily, "IpFamily", "java");
+@@clientName(IPTag, "IpTag", "java");
+@@clientName(LocalDNSForwardDestination, "LocalDnsForwardDestination", "java");
+@@clientName(LocalDNSForwardPolicy, "LocalDnsForwardPolicy", "java");
+@@clientName(LocalDNSMode, "LocalDnsMode", "java");
+@@clientName(LocalDNSOverride, "LocalDnsOverride", "java");
+@@clientName(LocalDNSProfile, "LocalDnsProfile", "java");
+@@clientName(LocalDNSProtocol, "LocalDnsProtocol", "java");
+@@clientName(LocalDNSQueryLogging, "LocalDnsQueryLogging", "java");
+@@clientName(LocalDNSServeStale, "LocalDnsServeStale", "java");
+@@clientName(LocalDNSState, "LocalDnsState", "java");
+@@clientName(ManagedClusterAADProfile, "ManagedClusterAadProfile", "java");
+@@clientName(ManagedClusterLoadBalancerProfileOutboundIPPrefixes,
+  "ManagedClusterLoadBalancerProfileOutboundIpPrefixes",
+  "java"
+);
+@@clientName(ManagedClusterManagedOutboundIPProfile,
+  "ManagedClusterManagedOutboundIpProfile",
+  "java"
+);
+@@clientName(ManagedClusterNATGatewayProfile,
+  "ManagedClusterNatGatewayProfile",
+  "java"
+);
+@@clientName(ManagedClusterOIDCIssuerProfile,
+  "ManagedClusterOidcIssuerProfile",
+  "java"
+);
+@@clientName(ManagedClusterSKU, "ManagedClusterSku", "java");
+@@clientName(ManagedClusterSKUName, "ManagedClusterSkuName", "java");
+@@clientName(ManagedClusterSKUTier, "ManagedClusterSkuTier", "java");
+@@clientName(ManagedClusterStorageProfileBlobCSIDriver,
+  "ManagedClusterStorageProfileBlobCsiDriver",
+  "java"
+);
+@@clientName(ManagedClusterStorageProfileDiskCSIDriver,
+  "ManagedClusterStorageProfileDiskCsiDriver",
+  "java"
+);
+@@clientName(ManagedClusterStorageProfileFileCSIDriver,
+  "ManagedClusterStorageProfileFileCsiDriver",
+  "java"
+);
+@@clientName(OSSKU, "OSSku", "java");
+@@clientName(PodIPAllocationMode, "PodIpAllocationMode", "java");
 
 @@clientName(Microsoft.ContainerService, "ContainerServiceClient", "python");
 @@clientName(ManagedClusterLoadBalancerProfileManagedOutboundIPs.countIPv6,
@@ -1077,3 +1126,201 @@ namespace Azure.ResourceManager.Models {
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
+
+// Java: rename properties with uppercase acronyms for backward compatibility
+// ManagedClusterAgentPoolProfileProperties
+@@clientName(ManagedClusterAgentPoolProfileProperties.vnetSubnetID,
+  "vnetSubnetId",
+  "java"
+);
+@@clientName(ManagedClusterAgentPoolProfileProperties.podSubnetID,
+  "podSubnetId",
+  "java"
+);
+@@clientName(ManagedClusterAgentPoolProfileProperties.podIPAllocationMode,
+  "podIpAllocationMode",
+  "java"
+);
+@@clientName(ManagedClusterAgentPoolProfileProperties.osSKU, "osSku", "java");
+@@clientName(ManagedClusterAgentPoolProfileProperties.enableNodePublicIP,
+  "enableNodePublicIp",
+  "java"
+);
+@@clientName(ManagedClusterAgentPoolProfileProperties.nodePublicIPPrefixID,
+  "nodePublicIpPrefixId",
+  "java"
+);
+@@clientName(ManagedClusterAgentPoolProfileProperties.proximityPlacementGroupID,
+  "proximityPlacementGroupId",
+  "java"
+);
+@@clientName(ManagedClusterAgentPoolProfileProperties.enableUltraSSD,
+  "enableUltraSsd",
+  "java"
+);
+@@clientName(ManagedClusterAgentPoolProfileProperties.enableFIPS,
+  "enableFips",
+  "java"
+);
+@@clientName(ManagedClusterAgentPoolProfileProperties.hostGroupID,
+  "hostGroupId",
+  "java"
+);
+@@clientName(ManagedClusterAgentPoolProfileProperties.capacityReservationGroupID,
+  "capacityReservationGroupId",
+  "java"
+);
+// AgentPoolNetworkProfile
+@@clientName(AgentPoolNetworkProfile.nodePublicIPTags,
+  "nodePublicIpTags",
+  "java"
+);
+// AgentPoolGatewayProfile
+@@clientName(AgentPoolGatewayProfile.publicIPPrefixSize,
+  "publicIpPrefixSize",
+  "java"
+);
+// ContainerServiceNetworkProfile
+@@clientName(ContainerServiceNetworkProfile.dnsServiceIP,
+  "dnsServiceIp",
+  "java"
+);
+// ManagedClusterLoadBalancerProfile
+@@clientName(ManagedClusterLoadBalancerProfile.outboundIPPrefixes,
+  "outboundIpPrefixes",
+  "java"
+);
+// ManagedClusterLoadBalancerProfileOutboundIPPrefixes
+@@clientName(ManagedClusterLoadBalancerProfileOutboundIPPrefixes.publicIPPrefixes,
+  "publicIpPrefixes",
+  "java"
+);
+// ManagedClusterNATGatewayProfile
+@@clientName(ManagedClusterNATGatewayProfile.managedOutboundIPProfile,
+  "managedOutboundIpProfile",
+  "java"
+);
+@@clientName(ManagedClusterNATGatewayProfile.outboundIPPrefixes,
+  "outboundIpPrefixes",
+  "java"
+);
+@@clientName(ManagedClusterNATGatewayProfile.outboundIPs,
+  "outboundIps",
+  "java"
+);
+// ManagedClusterAADProfile
+@@clientName(ManagedClusterAADProfile.enableAzureRBAC,
+  "enableAzureRbac",
+  "java"
+);
+@@clientName(ManagedClusterAADProfile.clientAppID, "clientAppId", "java");
+@@clientName(ManagedClusterAADProfile.serverAppID, "serverAppId", "java");
+@@clientName(ManagedClusterAADProfile.tenantID, "tenantId", "java");
+// ManagedClusterProperties
+@@clientName(ManagedClusterProperties.enableRBAC, "enableRbac", "java");
+@@clientName(ManagedClusterProperties.diskEncryptionSetID,
+  "diskEncryptionSetId",
+  "java"
+);
+// ManagedClusterAPIServerAccessProfile
+@@clientName(ManagedClusterAPIServerAccessProfile.authorizedIPRanges,
+  "authorizedIpRanges",
+  "java"
+);
+@@clientName(ManagedClusterAPIServerAccessProfile.privateDNSZone,
+  "privateDnsZone",
+  "java"
+);
+// PrivateLinkResource
+@@clientName(PrivateLinkResource.privateLinkServiceID,
+  "privateLinkServiceId",
+  "java"
+);
+// MachineNetworkProperties
+@@clientName(MachineNetworkProperties.vnetSubnetID, "vnetSubnetId", "java");
+@@clientName(MachineNetworkProperties.podSubnetID, "podSubnetId", "java");
+@@clientName(MachineNetworkProperties.nodePublicIPPrefixID,
+  "nodePublicIpPrefixId",
+  "java"
+);
+@@clientName(MachineNetworkProperties.enableNodePublicIP,
+  "enableNodePublicIp",
+  "java"
+);
+@@clientName(MachineNetworkProperties.nodePublicIPTags,
+  "nodePublicIpTags",
+  "java"
+);
+// MachineOSProfile
+@@clientName(MachineOSProfile.enableFIPS, "enableFips", "java");
+@@clientName(MachineOSProfile.osSKU, "osSku", "java");
+// SnapshotProperties
+@@clientName(SnapshotProperties.enableFIPS, "enableFips", "java");
+// ResourceSkuCosts
+@@clientName(ResourceSkuCosts.meterID, "meterId", "java");
+// MeshMembershipProperties
+@@clientName(MeshMembershipProperties.managedMeshID, "managedMeshId", "java");
+// listNodeImageVersions
+@@clientLocation(ContainerServiceOperationGroup.listNodeImageVersions,
+  ManagedClusters,
+  "java"
+);
+// LocalDNSProfile
+@@clientName(LocalDNSProfile.vnetDNSOverrides, "vnetDnsOverrides", "java");
+@@clientName(LocalDNSProfile.kubeDNSOverrides, "kubeDnsOverrides", "java");
+// ManagedClusterAgentPoolProfileProperties
+@@clientName(ManagedClusterAgentPoolProfileProperties.eTag, "etag", "java");
+@@clientName(ManagedClusterAgentPoolProfileProperties.localDNSProfile,
+  "localDnsProfile",
+  "java"
+);
+// ManagedClusterStorageProfile
+@@clientName(ManagedClusterStorageProfile.diskCSIDriver,
+  "diskCsiDriver",
+  "java"
+);
+@@clientName(ManagedClusterStorageProfile.fileCSIDriver,
+  "fileCsiDriver",
+  "java"
+);
+@@clientName(ManagedClusterStorageProfile.blobCSIDriver,
+  "blobCsiDriver",
+  "java"
+);
+// ManagedClusterAPIServerAccessProfile
+@@clientName(ManagedClusterAPIServerAccessProfile.enablePrivateClusterPublicFQDN,
+  "enablePrivateClusterPublicFqdn",
+  "java"
+);
+// AgentPoolSecurityProfile
+@@clientName(AgentPoolSecurityProfile.enableVTPM, "enableVtpm", "java");
+// ManagedClusterWindowsProfile
+@@clientName(ManagedClusterWindowsProfile.enableCSIProxy,
+  "enableCsiProxy",
+  "java"
+);
+// TODO: drop the type replacement upon next major breaking change
+@@alternateType(ManagedClusterIdentity.type,
+  global.ResourceIdentityType,
+  "java"
+);
+/**
+ * The type of identity used for the managed cluster. For more information see [use managed identities in AKS](https://docs.microsoft.com/azure/aks/use-managed-identity).
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by using enum in place of string union type"
+enum ResourceIdentityType {
+  /**
+   * Use an implicitly created system assigned managed identity to manage cluster resources. Master components in the control plane such as kube-controller-manager will use the system assigned managed identity to manipulate Azure resources.
+   */
+  SystemAssigned: "SystemAssigned",
+
+  /**
+   * Use a user-specified identity to manage cluster resources. Master components in the control plane such as kube-controller-manager will use the specified user assigned managed identity to manipulate Azure resources.
+   */
+  UserAssigned: "UserAssigned",
+
+  /**
+   * Do not use a managed identity for the Managed Cluster, service principal will be used instead.
+   */
+  None: "None",
+}
