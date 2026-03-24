@@ -2,8 +2,6 @@ import "@typespec/http";
 import "./sap-common-models.tsp";
 
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
 
 namespace Microsoft.Workloads;
 
@@ -50,11 +48,11 @@ model HanaDbProperties {
  * Defines the SAP Database Server default component profile.
  */
 @added(Versions.v2026_02_01_preview)
-model SapDatabaseServerDefaultComponentProfile extends ComponentProfile {
+model SapDatabaseServerDefaultComponentProfile extends ComponentProfile<SAPComponentProfileType> {
   /**
    * The component profile type.
    */
-  profileType: ComponentProfileType.SAP_DatabaseServer_Default;
+  profileType: SAPComponentProfileType.SAP_DatabaseServer_Default;
 
   /**
    * The hostname of the database server.

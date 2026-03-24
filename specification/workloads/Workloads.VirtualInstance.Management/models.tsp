@@ -221,9 +221,6 @@ model ChangeDetection {
 @added(Versions.v2026_02_01_preview)
 union DiscoveryConfigurationType {
   string,
-
-  /** SAP API discovery type for discovering SAP systems via API calls. */
-  SAPAPI: "SAPAPI",
 }
 
 /**
@@ -232,12 +229,12 @@ union DiscoveryConfigurationType {
  */
 @discriminator("discoveryType")
 @added(Versions.v2026_02_01_preview)
-model DiscoveryConfiguration {
+model DiscoveryConfiguration<TDiscoveryConfigurationType  = DiscoveryConfigurationType> {
   /**
    * The type of discovery to execute. This value determines the expected structure
    * of the configuration and must be compatible with the workloadType specified in workloadInfo.
    */
-  discoveryType: DiscoveryConfigurationType;
+  discoveryType: TDiscoveryConfigurationType;
 
   /**
    * The execution mode for the discovery process.
@@ -254,12 +251,12 @@ model DiscoveryConfiguration {
  */
 @discriminator("discoveryType")
 @added(Versions.v2026_02_01_preview)
-model UpdateDiscoveryConfiguration {
+model UpdateDiscoveryConfiguration<TDiscoveryConfigurationType  = DiscoveryConfigurationType> {
   /**
    * The type of discovery to execute. This value determines the expected structure
    * of the configuration and must be compatible with the workloadType specified in workloadInfo.
    */
-  discoveryType: DiscoveryConfigurationType;
+  discoveryType: TDiscoveryConfigurationType;
 
   /**
    * The execution mode for the discovery process.
@@ -346,7 +343,7 @@ model VirtualInstanceProperties {
   workloadInfo: WorkloadInfo;
 
   /**
-   * The type of environment in which the workload system is deployed - Production / Non Production.
+   * The type of environment in which the workload system is deployed - Production / NonProduction.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentType: EnvironmentType;
@@ -520,7 +517,7 @@ model WorkloadInfo {
   workloadType: string;
 
   /**
-   * The name of the corresponding workload definition.
+   * The name of the corresponding workload definition. Optional for certain discovery based scenarios. Mandatory for manual registration.
    */
   workloadDefinitionName?: string;
 
@@ -588,7 +585,7 @@ model WorkloadComponentProperties {
   componentType: string;
 
   /**
-   * Role of the component. There can be multiple roles for a same component type. Allowed values change based on the workload type and will be defined in the workload definition. Examples of Role for SAP workloads include "pas"/"aas" for application component, "ascs"/"ers" for central component, "backup", etc.
+   * Role of the component. There can be multiple roles for a same component type. Allowed values change based on the workload type and will be defined in the workload definition.
    */
   componentRole?: string;
 
@@ -660,15 +657,6 @@ model ResourceConfiguration {
 @added(Versions.v2026_02_01_preview)
 union ComponentProfileType {
   string,
-
-  /** SAP Central Services component profile. */
-  SAP_CentralServices_Default: "SAP-CentralServices-Default",
-
-  /** SAP Application Server component profile. */
-  SAP_ApplicationServer_Default: "SAP-ApplicationServer-Default",
-
-  /** SAP Database Server component profile. */
-  SAP_DatabaseServer_Default: "SAP-DatabaseServer-Default",
 }
 
 /**
@@ -677,12 +665,12 @@ union ComponentProfileType {
  */
 @discriminator("profileType")
 @added(Versions.v2026_02_01_preview)
-model ComponentProfile {
+model ComponentProfile<TComponentProfileType = ComponentProfileType> {
   /**
    * The type of the component profile. This value determines the expected structure
    * of the profile properties and must be compatible with the componentType.
    */
-  profileType: ComponentProfileType;
+  profileType: TComponentProfileType;
 }
 
 /**

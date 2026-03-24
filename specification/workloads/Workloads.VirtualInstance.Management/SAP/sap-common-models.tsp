@@ -1,8 +1,6 @@
 import "@typespec/http";
 
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
 
 namespace Microsoft.Workloads;
 
@@ -31,4 +29,23 @@ model SapGatewayConfiguration {
    * The gateway port.
    */
   gwPort?: int32;
+}
+
+/**
+ * Defines the type of component profile.
+ */
+@added(Versions.v2026_02_01_preview)
+union SAPComponentProfileType {
+  string,
+  
+  ComponentProfileType,
+
+  /** SAP Central Services component profile. */
+  SAP_CentralServices_Default: "SAP-CentralServices-Default",
+
+  /** SAP Application Server component profile. */
+  SAP_ApplicationServer_Default: "SAP-ApplicationServer-Default",
+
+  /** SAP Database Server component profile. */
+  SAP_DatabaseServer_Default: "SAP-DatabaseServer-Default",
 }
