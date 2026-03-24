@@ -1,7 +1,6 @@
 import "./models.tsp";
 
 using TypeSpec.Http;
-using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
@@ -29,6 +28,13 @@ alias FilterQueryParamsTraits = {
   agentName?: string;
 
   ...IncludeCoordinatesTrait;
+};
+
+alias InsightsGetParams = {
+  ...IncludeCoordinatesTrait;
+
+  /** The unique identifier for the insights report. */
+  @path id: string;
 };
 
 @tag("Insights")
@@ -60,13 +66,7 @@ interface Insights {
   @route("/{id}")
   get is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.insights_v1_preview,
-    {
-      ...IncludeCoordinatesTrait;
-
-      /** The unique identifier for the insights report. */
-      @clientName("insight_id")
-      @path id: string;
-    },
+    InsightsGetParams,
     Insight
   >;
 
