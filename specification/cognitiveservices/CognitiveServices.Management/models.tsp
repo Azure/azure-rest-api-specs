@@ -5443,6 +5443,124 @@ model RaiPolicyListResult {
   @identifiers(#["name"])
   value?: RaiPolicy[];
 }
+
+/**
+ * The provisioning state of a compute resource.
+ */
+union ComputeProvisioningState {
+  string,
+
+  /** The resource provisioning request has been accepted. */
+  Accepted: "Accepted",
+
+  /** The resource has been fully provisioned. */
+  Succeeded: "Succeeded",
+
+  /** The resource provisioning has failed. */
+  Failed: "Failed",
+
+  /** The resource provisioning was canceled. */
+  Canceled: "Canceled",
+
+  /** The resource is being deleted. */
+  Deleting: "Deleting",
+
+  /** The resource is scaling. */
+  Scaling: "Scaling",
+
+  /** The resource is disabled. */
+  Disabled: "Disabled",
+}
+
+/**
+ * VM priority for a compute pool.
+ */
+union VmPriority {
+  string,
+
+  /** Regular VM priority. */
+  Regular: "Regular",
+
+  /** Spot VM priority. */
+  Spot: "Spot",
+}
+
+/**
+ * Compute pool configuration.
+ */
+model Pool {
+  /**
+   * Pool name identifier.
+   */
+  name: string;
+
+  /**
+   * Priority of VM instances in this pool.
+   */
+  vmPriority?: VmPriority;
+
+  /**
+   * VM size for this pool.
+   */
+  instanceType: string;
+
+  /**
+   * Number of nodes in this pool.
+   */
+  nodeCount: int32;
+}
+
+/**
+ * Properties of a compute resource.
+ */
+model ComputeProperties {
+  /**
+   * Pools attached to this compute cluster.
+   */
+  pools: Pool[];
+
+  /**
+   * ARM ID of the subnet used for compute.
+   */
+  subnetArmId?: string;
+
+  /**
+   * Provisioning state of the compute resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ComputeProvisioningState;
+
+  /**
+   * Error details for the compute resource.
+   */
+  @visibility(Lifecycle.Read)
+  errors?: Azure.ResourceManager.CommonTypes.ErrorDetail[];
+
+  /**
+   * Creation time of the compute resource.
+   */
+  @visibility(Lifecycle.Read)
+  creationTime?: utcDateTime;
+}
+
+/**
+ * The list of cognitive services computes operation response.
+ */
+model ComputeListResult {
+  /**
+   * The link used to get the next page of compute resources.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of Cognitive Services computes and their properties.
+   */
+  @pageItems
+  @identifiers(#["name"])
+  value?: Compute[];
+}
+
 @@identifiers(ResourceSkuListResult.value, #["resourceType", "name", "kind"]);
 
 /**
