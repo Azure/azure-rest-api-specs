@@ -2786,7 +2786,7 @@
         ]
       }
     },
-    "GeneralPurposeSkuQosTier": {
+    "GeneralPurposeVolumeGroupQosTier": {
       "type": "object",
       "description": "General purpose Quality of Service tier metadata.",
       "properties": {
@@ -3027,7 +3027,7 @@
         ]
       }
     },
-    "PerformanceCriticalSkuQosTier": {
+    "PerformanceCriticalVolumeGroupQosTier": {
       "type": "object",
       "description": "Performance critical Quality of Service tier metadata.",
       "properties": {
@@ -3434,6 +3434,10 @@
         "name": {
           "$ref": "#/definitions/SkuName",
           "description": "The sku name."
+        },
+        "tier": {
+          "$ref": "#/definitions/SkuTier",
+          "description": "The sku tier."
         }
       },
       "required": [
@@ -3447,6 +3451,10 @@
         "name": {
           "$ref": "#/definitions/SkuName",
           "description": "Sku Name"
+        },
+        "tier": {
+          "$ref": "#/definitions/SkuTier",
+          "description": "Sku Tier"
         },
         "resourceType": {
           "type": "string",
@@ -3479,9 +3487,9 @@
           "readOnly": true,
           "x-ms-identifiers": []
         },
-        "qosTier": {
-          "$ref": "#/definitions/SkuQosTier",
-          "description": "The Quality of Service tier metadata in the specified SKU.",
+        "volumeGroupQosTier": {
+          "$ref": "#/definitions/VolumeGroupQosTier",
+          "description": "The Volume Group Quality of Service tier metadata for the specified SKU. Applicable only to ElasticSanVersion V2; for V1, use 'tier'.",
           "readOnly": true
         }
       },
@@ -3566,20 +3574,22 @@
         ]
       }
     },
-    "SkuQosTier": {
-      "type": "object",
-      "description": "The Quality of Service tier metadata for the specified SKU.",
-      "properties": {
-        "performanceCritical": {
-          "$ref": "#/definitions/PerformanceCriticalSkuQosTier",
-          "description": "Performance critical tier metadata.",
-          "readOnly": true
-        },
-        "generalPurpose": {
-          "$ref": "#/definitions/GeneralPurposeSkuQosTier",
-          "description": "General purpose tier metadata.",
-          "readOnly": true
-        }
+    "SkuTier": {
+      "type": "string",
+      "description": "The sku tier.",
+      "enum": [
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium Tier"
+          }
+        ]
       }
     },
     "Snapshot": {
@@ -3926,6 +3936,22 @@
         "deleteRetentionPolicy": {
           "$ref": "#/definitions/DeleteRetentionPolicy",
           "description": "The retention policy for the soft deleted volume group and its associated resources."
+        }
+      }
+    },
+    "VolumeGroupQosTier": {
+      "type": "object",
+      "description": "The Volume Group Quality of Service tier metadata in the specified SKU.",
+      "properties": {
+        "performanceCritical": {
+          "$ref": "#/definitions/PerformanceCriticalVolumeGroupQosTier",
+          "description": "Performance critical tier metadata.",
+          "readOnly": true
+        },
+        "generalPurpose": {
+          "$ref": "#/definitions/GeneralPurposeVolumeGroupQosTier",
+          "description": "General purpose tier metadata.",
+          "readOnly": true
         }
       }
     },

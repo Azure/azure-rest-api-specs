@@ -294,7 +294,6 @@ model SkuInformation {
   /**
    * Sku Tier
    */
-  @removed(Versions.v2026_05_01_preview)
   tier?: SkuTier;
 
   /**
@@ -324,36 +323,36 @@ model SkuInformation {
   capabilities?: SKUCapability[];
 
   /**
-   * The Quality of Service tier metadata in the specified SKU.
+    * The Volume Group Quality of Service tier metadata for the specified SKU. Applicable only to ElasticSanVersion V2; for V1, use 'tier'.
    */
   @added(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
-  qosTier?: SkuQosTier;
+  volumeGroupQosTier?: VolumeGroupQosTier;
 }
 
 /**
- * The Quality of Service tier metadata for the specified SKU.
+ * The Volume Group Quality of Service tier metadata in the specified SKU.
  */
 @added(Versions.v2026_05_01_preview)
-model SkuQosTier {
+model VolumeGroupQosTier {
   /**
    * Performance critical tier metadata.
    */
   @visibility(Lifecycle.Read)
-  performanceCritical?: PerformanceCriticalSkuQosTier;
+  performanceCritical?: PerformanceCriticalVolumeGroupQosTier;
 
   /**
    * General purpose tier metadata.
    */
   @visibility(Lifecycle.Read)
-  generalPurpose?: GeneralPurposeSkuQosTier;
+  generalPurpose?: GeneralPurposeVolumeGroupQosTier;
 }
 
 /**
  * Performance critical Quality of Service tier metadata.
  */
 @added(Versions.v2026_05_01_preview)
-model PerformanceCriticalSkuQosTier {
+model PerformanceCriticalVolumeGroupQosTier {
   /**
    * Availability zones supported for performance critical tier.
    */
@@ -372,7 +371,7 @@ model PerformanceCriticalSkuQosTier {
  * General purpose Quality of Service tier metadata.
  */
 @added(Versions.v2026_05_01_preview)
-model GeneralPurposeSkuQosTier {
+model GeneralPurposeVolumeGroupQosTier {
   /**
    * Availability zones supported for iSCSI in general purpose tier.
    */
@@ -580,7 +579,6 @@ model Sku {
   /**
    * The sku tier.
    */
-  @removed(Versions.v2026_05_01_preview)
   tier?: SkuTier;
 }
 
@@ -795,7 +793,6 @@ model UserAssignedIdentity {
 /**
  * The sku tier.
  */
-@removed(Versions.v2026_05_01_preview)
 union SkuTier {
   string,
 
