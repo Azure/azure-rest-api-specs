@@ -113,3 +113,34 @@ enum TriggerTypeEnum {
   MockRun: "MockRun",
 }
 @@clientName(TriggerTypeEnum, "TriggerType", "java");
+
+// Mitigate ProvisioningState split: merge values from ProvisioningState and StorageTaskAssignmentProvisioningState
+@@clientName(ProvisioningState, "StorageProvisioningState", "java");
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by merging ProvisioningState values"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror enum for backward compatibility"
+enum ProvisioningStateEnum {
+  Creating: "Creating",
+  ResolvingDNS: "ResolvingDNS",
+  Succeeded: "Succeeded",
+  ValidateSubscriptionQuotaBegin: "ValidateSubscriptionQuotaBegin",
+  ValidateSubscriptionQuotaEnd: "ValidateSubscriptionQuotaEnd",
+  Accepted: "Accepted",
+  Deleting: "Deleting",
+  Canceled: "Canceled",
+  Failed: "Failed",
+}
+@@clientName(ProvisioningStateEnum, "ProvisioningState", "java");
+
+@@alternateType(StorageAccountProperties.provisioningState,
+  ProvisioningStateEnum,
+  "java"
+);
+@@alternateType(StorageTaskAssignmentProperties.provisioningState,
+  ProvisioningStateEnum,
+  "java"
+);
+@@alternateType(StorageTaskAssignmentUpdateProperties.provisioningState,
+  ProvisioningStateEnum,
+  "java"
+);
