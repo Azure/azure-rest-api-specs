@@ -21,4 +21,10 @@ output-folder: $(python-sdks-folder)/monitoraccounts/azure-mgmt-monitoraccounts/
 ``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
+
+directive:
+  - from: specification/common-types/resource-management/v6/types.json
+    where: $.definitions.Operation.properties.origin
+    transform: >
+        $['x-ms-enum']['name'] = 'OriginEnum';
 ```
