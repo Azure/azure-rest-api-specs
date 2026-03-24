@@ -8,16 +8,6 @@ using Azure.ClientGenerator.Core;
   "IdentityUserAssignedIdentities",
   "java"
 );
-@@access(Microsoft.Kusto.CalloutPoliciesList, Access.public, "java");
-@@usage(Microsoft.Kusto.CalloutPoliciesList,
-  Usage.input | Usage.output,
-  "java"
-);
-@@access(Microsoft.Kusto.LanguageExtensionsList, Access.public, "java");
-@@usage(Microsoft.Kusto.LanguageExtensionsList,
-  Usage.input | Usage.output,
-  "java"
-);
 @@clientName(Microsoft.Kusto.PublicIPType, "PublicIpType", "java");
 @@clientName(Microsoft.Kusto.ClusterProperties.publicIPType,
   "publicIpType",
