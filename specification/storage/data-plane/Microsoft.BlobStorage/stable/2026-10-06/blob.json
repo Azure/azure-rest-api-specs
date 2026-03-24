@@ -2658,6 +2658,17 @@
         ],
         "parameters": [
           {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/vnd.apache.arrow.stream"
+            ],
+            "default": "application/vnd.apache.arrow.stream",
+            "description": "Must be set to 'application/vnd.apache.arrow.stream' to request Apache Arrow format. The service may still return XML if Arrow is not enabled for the account — clients must check the Content-Type response header."
+          },
+          {
             "$ref": "#/parameters/Prefix"
           },
           {
