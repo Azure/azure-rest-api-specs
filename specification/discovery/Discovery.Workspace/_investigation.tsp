@@ -60,27 +60,6 @@ model InvestigationDataAssets {
   dataAssetIds: DataAssetId[];
 }
 
-@doc("Collection of storage assets linked to an investigation.")
-@added(Versions.`2026-02-01-preview`)
-model InvestigationStorageAssets {
-  @doc("List of linked storage asset IDs.")
-  storageAssetIds: StorageAssetId[];
-}
-
-@doc("Request body for linking a storage asset to an investigation.")
-@added(Versions.`2026-02-01-preview`)
-model LinkStorageAssetRequest {
-  @doc("The storage asset resource ID to link.")
-  storageAssetId: StorageAssetId;
-}
-
-@doc("Request body for unlinking a storage asset from an investigation.")
-@added(Versions.`2026-02-01-preview`)
-model UnlinkStorageAssetRequest {
-  @doc("The storage asset resource ID to unlink.")
-  storageAssetId: StorageAssetId;
-}
-
 @doc("Request body for linking a data asset to an investigation.")
 @removed(Versions.`2026-02-01-preview`)
 model LinkDataAssetRequest {
@@ -205,28 +184,6 @@ interface Investigations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get storage assets linked to an investigation.")
-  @route("/projects/{projectName}/investigations/{investigationName}/storageAssets")
-  @get
-  @added(Versions.`2026-02-01-preview`)
-  getStorageAssets is Azure.Core.Foundations.Operation<
-    {
-      @doc("The project name.")
-      @path
-      @maxLength(24)
-      @pattern(resourceNamePattern)
-      projectName: string;
-
-      @doc("The investigation name.")
-      @path
-      @maxLength(24)
-      @pattern(resourceNamePattern)
-      investigationName: string;
-    },
-    InvestigationStorageAssets
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get data assets linked to an investigation.")
   @route("/projects/{projectName}/investigations/{investigationName}/data")
   @get
@@ -246,32 +203,6 @@ interface Investigations {
       investigationName: string;
     },
     InvestigationDataAssets
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Link a storage asset to an investigation.")
-  @route("/projects/{projectName}/investigations/{investigationName}/storageAssets:link")
-  @post
-  @added(Versions.`2026-02-01-preview`)
-  linkStorageAsset is Azure.Core.Foundations.Operation<
-    {
-      @doc("The project name.")
-      @path
-      @maxLength(24)
-      @pattern(resourceNamePattern)
-      projectName: string;
-
-      @doc("The investigation name.")
-      @path
-      @maxLength(24)
-      @pattern(resourceNamePattern)
-      investigationName: string;
-
-      @doc("The storage asset link request.")
-      @body
-      body: LinkStorageAssetRequest;
-    },
-    void
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -296,32 +227,6 @@ interface Investigations {
       @doc("The data asset link request.")
       @body
       body: LinkDataAssetRequest;
-    },
-    void
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Unlink a storage asset from an investigation.")
-  @route("/projects/{projectName}/investigations/{investigationName}/storageAssets:unlink")
-  @post
-  @added(Versions.`2026-02-01-preview`)
-  unlinkStorageAsset is Azure.Core.Foundations.Operation<
-    {
-      @doc("The project name.")
-      @path
-      @maxLength(24)
-      @pattern(resourceNamePattern)
-      projectName: string;
-
-      @doc("The investigation name.")
-      @path
-      @maxLength(24)
-      @pattern(resourceNamePattern)
-      investigationName: string;
-
-      @doc("The storage asset unlink request.")
-      @body
-      body: UnlinkStorageAssetRequest;
     },
     void
   >;
