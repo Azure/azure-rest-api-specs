@@ -1,19 +1,28 @@
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const DataGenerationJobsRequiredPreviews = #{
+  conditional_previews: #[
+    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview
+  ],
+};
+
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
-@route("data_generation/jobs")
 @tag("DataGenerationJobs")
 interface DataGenerationJobs {
   /**
    * Gets the details of a data generation job by its ID.
    */
   @summary("Get info about a data generation job.")
-  get is OpenAIOperation<
+  @route("data_generation/jobs/{data_generation_job_id}")
+  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+  @get
+  get is FoundryDataPlaneOperation<
     {
       @doc("The ID of the data generation job.")
       @path
@@ -27,17 +36,13 @@ interface DataGenerationJobs {
    * Returns a list of data generation jobs.
    */
   @summary("Returns a list of data generation jobs")
+  @route("data_generation/jobs")
+  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   @get
   @list
-  list is OpenAIOperation<
+  list is FoundryDataPlaneOperation<
     {
-      @doc("Identifier for the last job from the previous pagination request.")
-      @query
-      after?: string;
-
-      @doc("Number of data generation jobs to retrieve.")
-      @query
-      limit?: int32 = 20;
+      ...CommonPageQueryParameters;
 
       @doc("Filter data generation jobs by their purpose.")
       @query
@@ -47,29 +52,33 @@ interface DataGenerationJobs {
       @query
       type?: DataGenerationJobType;
     },
-    Array<DataGenerationJob>
+    AgentsPagedResult<DataGenerationJob>
   >;
 
   /**
    * Creates a data generation job.
    */
   @summary("Creates a data generation job.")
+  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+  @route("data_generation/jobs")
   @post
-  create is OpenAIOperation<
+  create is FoundryDataPlaneOperation<
     {
       @doc("Data generation job create request body")
       @body
       dataGenerationJob: DataGenerationJob;
     },
-    DataGenerationJob
+    ResourceCreatedResponse<DataGenerationJob>
   >;
 
   /**
    * Cancels a data generation job by its ID.
    */
   @summary("Cancels a data generation job.")
+  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+  @route("data_generation/jobs/{data_generation_job_id}:cancel")
   @post
-  cancel is OpenAIOperation<
+  cancel is FoundryDataPlaneOperation<
     {
       @doc("The ID of the data generation job to cancel.")
       @path
@@ -82,8 +91,10 @@ interface DataGenerationJobs {
   /**
    * Deletes a data generation job by its ID.
    */
+  @route("data_generation/jobs/{data_generation_job_id}")
+  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   @delete
-  delete is OpenAIOperation<
+  delete is FoundryDataPlaneOperation<
     {
       @doc("The ID of the data generation job to delete.")
       @path
