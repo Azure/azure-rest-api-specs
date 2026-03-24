@@ -9,3 +9,7 @@
     TypeSpec projects generate into subdirectories (_bookshelf/_workspace) of a single SDK package.
     The emitter-output-dir paths include subdirectory suffixes that don't match standard naming
     conventions but are required for the unified package structure.
+- tool: TypeSpecValidation
+  rules: [FolderStructure]
+  sub-rules: [MustUseV2]
+  reason: Already have CP using v1, DP should follow same path as CP until we migrate together to v2.
