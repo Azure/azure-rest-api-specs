@@ -203,6 +203,9 @@ interface QueueClient extends Storage.Queues.Queue {}
   "python"
 );
 @@alternateType(Storage.Queues.UserDelegationKey.signedStart, string, "python");
+
+@@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "python");
+
 /** ----- This section overrides the setAccessPolicy operation for Rust to require the queueAcl body ----- */
 /** sets the permissions for the specified queue. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
