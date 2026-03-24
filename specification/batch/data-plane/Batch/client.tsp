@@ -181,7 +181,7 @@ interface BatchClient {
 @@clientName(Azure.Batch.BatchNodeFile.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchJobSchedule.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchJobScheduleConfiguration.doNotRunUntil,
-  "doNitRunBefore ",
+  "doNotRunBefore ",
   "csharp"
 );
 @@clientName(Azure.Batch.SecurityProfile.encryptionAtHost,
