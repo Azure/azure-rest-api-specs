@@ -15338,8 +15338,9 @@ model InMageRcmMobilityAgentDetails {
   /**
    * The agent auto reinstall state.
    */
+  @typeChangedFrom(Versions.v2026_02_01, MobilityAgentReinstallType[])
   @visibility(Lifecycle.Read)
-  agentReinstallState?: MobilityAgentReinstallType[];
+  agentReinstallState?: MobilityAgentReinstallType;
 
   /**
    * The last agent reinstall type.
