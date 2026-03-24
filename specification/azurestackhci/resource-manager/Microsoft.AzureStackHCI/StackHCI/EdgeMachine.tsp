@@ -59,6 +59,16 @@ interface EdgeMachines {
    * List all edge machines in a subscription.
    */
   listBySubscription is ArmListBySubscription<EdgeMachine>;
+
+  /**
+   * A long-running resource action to validate the edge machine.
+   */
+  @added(Versions.v2026_03_15_preview)
+  validate is ArmResourceActionAsync<
+    EdgeMachine,
+    EdgeMachineValidateRequest,
+    EdgeMachineValidateResponse
+  >;
 }
 
 @@doc(EdgeMachine.name, "Name of Device");

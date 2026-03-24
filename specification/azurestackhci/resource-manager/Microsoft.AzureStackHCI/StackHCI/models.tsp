@@ -2037,6 +2037,13 @@ model ClusterProperties {
   billingModel?: string;
 
   /**
+   * Billing properties of the cluster, including upcoming billing model details.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @visibility(Lifecycle.Read)
+  billingProperties?: ClusterBillingProperties;
+
+  /**
    * First cluster sync timestamp.
    */
   @visibility(Lifecycle.Read)
@@ -2674,6 +2681,32 @@ model ClusterPatchProperties {
    * Desired properties of the cluster.
    */
   desiredProperties?: ClusterDesiredProperties;
+}
+
+/**
+ * Billing properties of the cluster.
+ */
+@added(Versions.v2026_03_15_preview)
+model ClusterBillingProperties {
+  /**
+   * The next billing model to be applied to the cluster.
+   */
+  nextBillingModel?: NextBillingModel;
+}
+
+/**
+ * Details of the next billing model for the cluster.
+ */
+@added(Versions.v2026_03_15_preview)
+model NextBillingModel {
+  /** Type of billing model. */
+  billingModel?: string;
+
+  /** Capabilities enabled under this billing model. */
+  capabilitiesEnabled?: string[];
+
+  /** Number of days remaining in the trial period. */
+  trialDaysRemaining?: float32;
 }
 
 /**
@@ -6812,6 +6845,38 @@ model EdgeMachineProperties {
 model EdgeMachinePatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
+/**
+ * The validate request for Edge Machine.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineValidateRequest {
+  /**
+   * Machine Ids against which, current machine has to be validated.
+   */
+  edgeMachineIds: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/edgeMachines";
+    }
+  ]>[];
+
+  /**
+   * Additional info required for validation.
+   */
+  additionalInfo?: string;
+}
+
+/**
+ * The validate response for Edge Machine.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineValidateResponse {
+  /**
+   * Edge machine validation status.
+   */
+  @visibility(Lifecycle.Read)
+  status?: string;
 }
 
 /**
