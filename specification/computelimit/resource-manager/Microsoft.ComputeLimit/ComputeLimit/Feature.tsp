@@ -24,9 +24,22 @@ model Feature is Azure.ResourceManager.ProxyResource<FeatureProperties> {
 @added(Versions.v2026_03_20)
 model FeatureProperties {
   /** The current state of the feature (for example, Enabled, Disabled). */
-  state?: string;
+  state?: FeatureState;
 
   ...DefaultProvisioningStateProperty;
+}
+
+/** The allowed states for a compute limit feature. */
+@added(Versions.v2026_03_20)
+union FeatureState {
+  /** The feature is enabled. */
+  Enabled: "Enabled",
+
+  /** The feature is disabled. */
+  Disabled: "Disabled",
+
+  /** Future-proof extensible value. */
+  string,
 }
 
 /** Location-scoped operations for compute limit features. */

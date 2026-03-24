@@ -172,6 +172,9 @@
           }
         },
         "x-ms-examples": {
+          "Get SharedLimit feature": {
+            "$ref": "./examples/Features_Get_SharedLimit.json"
+          },
           "Get feature": {
             "$ref": "./examples/Features_Get.json"
           }
@@ -705,7 +708,7 @@
       "description": "Properties of the compute limit feature.",
       "properties": {
         "state": {
-          "type": "string",
+          "$ref": "#/definitions/FeatureState",
           "description": "The current state of the feature (for example, Enabled, Disabled)."
         },
         "provisioningState": {
@@ -713,6 +716,30 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         }
+      }
+    },
+    "FeatureState": {
+      "type": "string",
+      "description": "The allowed states for a compute limit feature.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "FeatureState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The feature is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The feature is disabled."
+          }
+        ]
       }
     },
     "GuestSubscription": {
