@@ -1673,6 +1673,9 @@
               }
             }
           },
+          "204": {
+            "description": "Operation completed successfully."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -6887,36 +6890,6 @@
           {
             "name": "NotAcquire",
             "value": "NotAcquire"
-          }
-        ]
-      }
-    },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
           }
         ]
       }
@@ -16948,8 +16921,16 @@
           "description": "Certificate friendly name."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "type": "string",
           "description": "Provisioning state of the vault credential certificate.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
           "readOnly": true
         }
       }

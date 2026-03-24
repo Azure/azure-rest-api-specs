@@ -896,7 +896,7 @@ interface CrossTenantVaultCredentialOperations {
      */
     @bodyRoot
     parameters?: VaultCredentialCertificateRequest,
-  ): ArmAcceptedLroResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse | ArmNoContentResponse | ErrorResponse;
 
   /**
    * Gets the result of an async vault credential generation operation.
