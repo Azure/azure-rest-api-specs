@@ -1370,7 +1370,6 @@ using Microsoft.Network;
   "p2SVpnGatewayParameters"
 );
 @@clientLocation(P2SVpnGateways.reset, "P2sVpnGateways", "javascript");
-@@clientLocation(P2SVpnGateways.reset, "P2SVPNGatewaysClient", "go");
 @@clientLocation(P2SVpnGateways.delete, "P2sVpnGateways");
 @@clientLocation(P2SVpnGateways.listByResourceGroup, "P2sVpnGateways");
 @@clientLocation(P2SVpnGateways.list, "P2sVpnGateways");
