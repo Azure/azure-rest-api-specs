@@ -617,7 +617,9 @@ model SuggestOptions {
   minimumCoverage?: float64;
 
   /** The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @query("$orderby")
+  @encode(ArrayEncoding.commaDelimited)
   orderBy?: string[];
 
   /** The list of field names to search for the specified search text. Target fields must be included in the specified suggester. */
