@@ -1783,6 +1783,12 @@ model LanguageExtensionsList {
   @pageItems
   @identifiers(#[])
   value?: LanguageExtension[];
+
+  /**
+   * The link to the next page of resources.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**

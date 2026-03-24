@@ -312,6 +312,7 @@ interface Clusters {
    * Returns a list of language extensions that can run within KQL queries.
    */
   @tag("Clusters")
+  @list
   listLanguageExtensions is ArmResourceActionSync<
     Cluster,
     void,
