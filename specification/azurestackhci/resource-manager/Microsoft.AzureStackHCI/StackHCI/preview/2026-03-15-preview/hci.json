@@ -9907,6 +9907,16 @@
         }
       ]
     },
+    "ClusterBillingProperties": {
+      "type": "object",
+      "description": "Billing properties of the cluster.",
+      "properties": {
+        "nextBillingModel": {
+          "$ref": "#/definitions/NextBillingModel",
+          "description": "The next billing model to be applied to the cluster."
+        }
+      }
+    },
     "ClusterDesiredProperties": {
       "type": "object",
       "description": "Desired properties of the cluster.",
@@ -10349,6 +10359,11 @@
         "billingModel": {
           "type": "string",
           "description": "Type of billing applied to the resource.",
+          "readOnly": true
+        },
+        "billingProperties": {
+          "$ref": "#/definitions/ClusterBillingProperties",
+          "description": "Billing properties of the cluster, including upcoming billing model details.",
           "readOnly": true
         },
         "registrationTimestamp": {
@@ -18048,6 +18063,28 @@
       "required": [
         "id"
       ]
+    },
+    "NextBillingModel": {
+      "type": "object",
+      "description": "Details of the next billing model for the cluster.",
+      "properties": {
+        "billingModel": {
+          "type": "string",
+          "description": "Type of billing model."
+        },
+        "capabilitiesEnabled": {
+          "type": "array",
+          "description": "Capabilities enabled under this billing model.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trialDaysRemaining": {
+          "type": "number",
+          "format": "float",
+          "description": "Number of days remaining in the trial period."
+        }
+      }
     },
     "NicDetail": {
       "type": "object",
