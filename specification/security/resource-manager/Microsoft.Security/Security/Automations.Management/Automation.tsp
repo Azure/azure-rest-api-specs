@@ -107,3 +107,8 @@ interface Automations {
 @@doc(Automations.validate::parameters.body,
   "The security automation resource"
 );
+@@visibility(Automation.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);
