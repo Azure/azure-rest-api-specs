@@ -7933,9 +7933,16 @@
         ],
         "properties": {
           "object": {
-            "type": "string",
-            "enum": [
-              "agent"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "agent",
+                ]
+              }
             ],
             "description": "The object type, which is always 'agent'."
           },
