@@ -68,10 +68,8 @@ using Http;
 @@clientName(AlertProperties, "ServiceAlertProperties", "csharp");
 @@clientName(AlertsSortByFields, "ListServiceAlertsSortByField", "csharp");
 @@clientName(AlertsSummary, "ServiceAlertSummary", "csharp");
-@@clientName(AlertsSummaryGroupByFields,
-  "GetServiceAlertSummaryGroupByField",
-  "csharp"
-);
+// Renamed back to match old SDK name (was GetServiceAlertSummaryGroupByField)
+@@clientName(AlertsSummaryGroupByFields, "AlertsSummaryGroupByField", "csharp");
 @@clientName(AlertsSummaryGroupItem,
   "ServiceAlertSummaryGroupItemInfo",
   "csharp"
@@ -89,3 +87,32 @@ using Http;
 @@clientName(SortOrder, "AlertsManagementQuerySortOrder", "csharp");
 @@clientName(ActionStatus, "ServiceAlertActionStatus", "csharp");
 @@clientName(Essentials.lastModifiedUserName, "lastModifiedBy", "csharp");
+
+// Fix member renames for backward compatibility with old SDK
+@@clientName(MonitorService.SCOM, "Scom", "csharp");
+@@clientName(MonitorService.`VM Insights`, "VmInsights", "csharp");
+@@clientName(AlertsSortByFields.lastModifiedDateTime,
+  "LastModifiedOn",
+  "csharp"
+);
+@@clientName(AlertsSortByFields.startDateTime, "StartOn", "csharp");
+
+// Fix property casing: spec has "groupedby", old SDK had "GroupedBy"
+@@clientName(AlertsSummaryGroup.groupedby, "GroupedBy", "csharp");
+@@clientName(AlertsSummaryGroupItem.groupedby, "GroupedBy", "csharp");
+
+// Fix property types: spec has string, old SDK had Guid?
+@@alternateType(Essentials.smartGroupId, Azure.Core.uuid, "csharp");
+@@alternateType(AlertModificationProperties.alertId, Azure.Core.uuid, "csharp");
+
+// Restore property setters and constructors for backward compatibility
+@@usage(Essentials, Usage.input, "csharp");
+@@usage(AlertModification, Usage.input, "csharp");
+@@usage(AlertModificationItem, Usage.input, "csharp");
+@@usage(AlertModificationProperties, Usage.input, "csharp");
+@@usage(AlertProperties, Usage.input, "csharp");
+@@usage(AlertsSummary, Usage.input, "csharp");
+@@usage(AlertsSummaryGroup, Usage.input, "csharp");
+@@usage(AlertsSummaryGroupItem, Usage.input, "csharp");
+@@usage(Alert, Usage.input, "csharp");
+@@usage(MonitorServiceList, Usage.input, "csharp");
