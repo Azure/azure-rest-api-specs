@@ -59762,12 +59762,21 @@
       "type": "object",
       "description": "Endpoint definition for MCP API type.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "MCP endpoint name, e.g. 'sse' or 'messages'.",
+          "minLength": 1,
+          "maxLength": 300
+        },
         "uriTemplate": {
           "type": "string",
           "description": "Relative URL path that must start with '/'.",
           "pattern": "^/.*$"
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "McpProperties": {
       "type": "object",
@@ -59778,11 +59787,14 @@
           "description": "Transport type for Model Context Protocol API."
         },
         "endpoints": {
-          "type": "object",
+          "type": "array",
           "description": "Collection of MCP endpoint definitions with relative URLs.",
-          "additionalProperties": {
+          "items": {
             "$ref": "#/definitions/McpEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
