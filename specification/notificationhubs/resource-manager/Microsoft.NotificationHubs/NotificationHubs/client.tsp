@@ -106,7 +106,8 @@ using Microsoft.NotificationHubs;
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PnsCredentialsResourceReplacement.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PnsCredentialsResourceReplacement.properties,
+  "csharp"
 );
 @@clientName(PolicyKeyResource, "NotificationHubPolicyKey", "csharp");
 @@clientName(ResourceListKeys, "NotificationHubResourceKeys", "csharp");
@@ -205,7 +206,8 @@ using Microsoft.NotificationHubs;
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NotificationHubPatchParametersReplacement.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NotificationHubPatchParametersReplacement.properties,
+  "csharp"
 );
 
 // Change SharedAccessAuthorizationRuleResource base type from ProxyResource (ResourceData)
