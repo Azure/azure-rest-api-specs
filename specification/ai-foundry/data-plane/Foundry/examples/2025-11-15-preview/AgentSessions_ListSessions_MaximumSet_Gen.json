@@ -1,0 +1,41 @@
+{
+  "title": "AgentSessions_ListSessions_MaximumSet",
+  "operationId": "Agents_ListSessions",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "agent_name": "my-agent",
+    "Foundry-Features": "AgentEndpoints=V1Preview",
+    "limit": 20
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "agent_session_id": "my-session",
+            "version_indicator": {
+              "type": "version_ref",
+              "agent_version": "3"
+            },
+            "status": "Active",
+            "created_at": 1710234567,
+            "last_accessed_at": 1710320967,
+            "expires_at": 1712826567
+          },
+          {
+            "agent_session_id": "session-2",
+            "version_indicator": {
+              "type": "version_ref",
+              "agent_version": "2"
+            },
+            "status": "Idle",
+            "created_at": 1710148167,
+            "last_accessed_at": 1710234567,
+            "expires_at": 1712826567
+          }
+        ],
+        "pagination_token": null
+      }
+    }
+  }
+}

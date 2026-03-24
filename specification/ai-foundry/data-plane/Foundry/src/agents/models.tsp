@@ -947,3 +947,303 @@ model AgentCard {
   @maxItems(16)
   skills: AgentCardSkill[];
 }
+
+// ══════════════════════════════════════════════════════════
+// Session Lifecycle Management
+// ══════════════════════════════════════════════════════════
+
+// ── Session Status ──────────────────────────────────────
+
+/** The status of an agent session. */
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+union AgentSessionStatus {
+  string,
+
+  /** Session creation LRO is in progress. */
+  Creating: "Creating",
+
+  /** Session is running and operational. */
+  Active: "Active",
+
+  /** Session sandbox is auto-suspended; resumes on next invocation. */
+  Idle: "Idle",
+
+  /** Reserved — session re-parenting LRO is in progress (future phase). */
+  Updating: "Updating",
+
+  /** Session operation failed — requires delete to recover. */
+  Failed: "Failed",
+
+  /** Session is being deleted (cleanup in progress). */
+  Deleting: "Deleting",
+
+  /** Session has been explicitly deleted. */
+  Deleted: "Deleted",
+
+  /** Session TTL exceeded (30 days from last activity). */
+  Expired: "Expired",
+}
+
+// ── Session Operation Enums ─────────────────────────────
+
+/** The type of session operation. */
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+union AgentSessionOperationType {
+  string,
+
+  /** Session creation. */
+  Create: "Create",
+
+  /** Reserved — session re-parenting (future phase). */
+  Update: "Update",
+
+  /** Session deletion and resource cleanup. */
+  Delete: "Delete",
+}
+
+/** The status of a session operation. */
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+union AgentSessionOperationStatus {
+  string,
+
+  /** Operation has been accepted but not yet begun. */
+  NotStarted: "NotStarted",
+
+  /** Operation is in progress. */
+  InProgress: "InProgress",
+
+  /** Operation completed successfully. */
+  Succeeded: "Succeeded",
+
+  /** Operation failed — see error for details. */
+  Failed: "Failed",
+
+  /** Operation was cancelled. */
+  Cancelled: "Cancelled",
+}
+
+// ── Version Indicator ───────────────────────────────────
+
+/** The type of version indicator used to determine the agent version backing a session. */
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+union VersionIndicatorType {
+  string,
+
+  /** Direct reference to a specific agent version. */
+  version_ref: "version_ref",
+}
+
+/** Base class for version indicators. Uses type discriminator for polymorphism. */
+@doc("Version indicator determining which agent version backs the session.")
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+@discriminator("type")
+model VersionIndicator {
+  /** The type of version indicator. */
+  type: VersionIndicatorType;
+}
+
+/** Version indicator that references a specific agent version by name. */
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+model VersionRefIndicator extends VersionIndicator {
+  /** Discriminator value for version_ref. */
+  type: VersionIndicatorType.version_ref;
+
+  /** The agent version identifier. */
+  agent_version: string;
+}
+
+// ── Session Resource ────────────────────────────────────
+
+/** Represents an agent session resource. */
+@doc("An agent session providing a long-lived compute sandbox for hosted agent invocations.")
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+model AgentSessionResource {
+  /** The session identifier. */
+  agent_session_id: string;
+
+  /** The version indicator determining which agent version backs this session. */
+  version_indicator: VersionIndicator;
+
+  /** The current status of the session. */
+  status: AgentSessionStatus;
+
+  /** The Unix timestamp (in seconds) when the session was created. */
+  @visibility(Lifecycle.Read)
+  created_at: int64;
+
+  /** The Unix timestamp (in seconds) when the session was last accessed. */
+  @visibility(Lifecycle.Read)
+  last_accessed_at: int64;
+
+  /** The Unix timestamp (in seconds) when the session expires (rolling, 30 days from last activity). */
+  @visibility(Lifecycle.Read)
+  expires_at: int64;
+}
+
+// ── Session Request Models ──────────────────────────────
+
+/** Request body for creating a new agent session. */
+@doc("Request to create a new agent session.")
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+model CreateAgentSessionRequest {
+  /** Optional user-provided session ID. Auto-generated if omitted. */
+  agent_session_id?: string;
+
+  /** Determines which agent version backs the session. */
+  version_indicator: VersionIndicator;
+}
+
+// ── Session Operation Models ────────────────────────────
+
+/** Error details for a failed session operation. */
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+model AgentSessionOperationError {
+  /** The error code. */
+  code: string;
+
+  /** A human-readable error message. */
+  message: string;
+}
+
+/** Represents a session operation tracking a long-running create, update, or delete. */
+@doc("A session operation object for tracking long-running session lifecycle changes.")
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+model AgentSessionOperationObject {
+  /** The operation identifier. */
+  operation_id: string;
+
+  /** The type of operation. */
+  operation_type: AgentSessionOperationType;
+
+  /** The status of the operation. */
+  status: AgentSessionOperationStatus;
+
+  /** Error details when status is "failed". */
+  error?: AgentSessionOperationError;
+
+  /** The current state of the associated session. Allows callers to inspect session state alongside operation outcome. */
+  session?: AgentSessionResource;
+}
+
+// ── Session Response Models ─────────────────────────────
+
+/** Response for session creation (201 Created with LRO tracking header). */
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+model CreatedAgentSessionResponse {
+  @statusCode
+  code: 201;
+
+  /** Operation ID for tracking the create LRO. */
+  @header("x-ms-session-operation-id")
+  operation_id: string;
+
+  @body
+  body: AgentSessionResource;
+}
+
+/** Response for session deletion (202 Accepted with LRO tracking header). */
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+model AcceptedAgentSessionDeleteResponse {
+  @statusCode
+  code: 202;
+
+  /** Operation ID for tracking the delete LRO. */
+  @header("x-ms-session-operation-id")
+  operation_id: string;
+
+  @body
+  body: AgentSessionResource;
+}
+
+// ── Session List Result ─────────────────────────────────
+
+/** Paged result for session list operations using continuation token pagination. */
+@doc("Paged result for session list operations.")
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
+)
+@removed(Versions.v1)
+model SessionListResult {
+  /** The list of sessions. */
+  @pageItems
+  data: AgentSessionResource[];
+
+  /** Opaque token to retrieve the next page. Null when there are no more results. */
+  @continuationToken
+  pagination_token?: string;
+}
