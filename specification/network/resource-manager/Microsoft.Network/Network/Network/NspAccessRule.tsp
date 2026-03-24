@@ -21,7 +21,7 @@ namespace Microsoft.Network;
 @Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(NspProfile)
-model NspAccessRule extends CommonProxyResource {
+model NspAccessRule extends SecurityPerimeterProxyResource {
   /**
    * Properties of the NSP access rule.
    */
