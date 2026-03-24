@@ -241,16 +241,10 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 // Remove preview opt-in union types from the public PythonSDK surface.
-//
-// TODO: These do not work. Follow up with the Python emitter team.
-// What does work: Adding @scope("!python") to `CreateAgentVersionRequest` above any of the
-// proprties there. But it does not seem to work I add @scope("!python") above `foundry_features`?
-// in alias WithConditionalFoundryPreviewHeader.
-//
-//@@access(AgentDefinitionOptInKeys, Access.internal, "python");
-//@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
-//@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
-//@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
+@@access(AgentDefinitionOptInKeys, Access.internal, "python");
+@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
+@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
+@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
 
 // Add optional boolean "allow_preview" client initialization parameter
 // See: https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#adding-client-initialization-parameters
