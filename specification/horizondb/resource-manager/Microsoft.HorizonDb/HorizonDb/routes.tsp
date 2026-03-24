@@ -41,6 +41,15 @@ interface HorizonDbClusters {
 }
 
 @armResourceOperations
+interface HorizonDbPools {
+  @doc("Gets information about a HorizonDb pool")
+  get is ArmResourceRead<HorizonDbPool>;
+
+  @doc("Lists all HorizonDb pools in a cluster")
+  list is ArmResourceListByParent<HorizonDbPool>;
+}
+
+@armResourceOperations
 interface HorizonDbReplicas {
   @doc("Gets information about a HorizonDb replica")
   get is ArmResourceRead<HorizonDbReplica>;
@@ -68,6 +77,9 @@ interface HorizonDbReplicas {
 
 @armResourceOperations
 interface HorizonDbFirewallRules {
+  @doc("Gets information about a HorizonDb firewall rule")
+  get is ArmResourceRead<HorizonDbFirewallRule>;
+
   @doc("Lists all HorizonDb firewall rules in a pool")
   list is ArmResourceListByParent<HorizonDbFirewallRule>;
 
