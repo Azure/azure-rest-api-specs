@@ -156,7 +156,7 @@ union ActionType {
 /**
  * The type of identity used for the EnterprisePolicy. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ResourceIdentityType {
   /**
    * SystemAssigned
@@ -172,7 +172,7 @@ enum ResourceIdentityType {
 /**
  * The properties that define configuration for the account.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AccountProperties {
   /**
    * The internally assigned unique identifier of the resource.
@@ -189,7 +189,7 @@ model AccountProperties {
 /**
  * Definition of the account.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PatchAccount extends PatchTrackedResource {
   /**
    * The properties that define configuration for the account.
@@ -206,12 +206,12 @@ model PatchAccount extends PatchTrackedResource {
 /**
  * The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PatchTrackedResource extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -264,7 +264,7 @@ model EnterprisePolicyIdentity {
 /**
  * The properties that define configuration for the enterprise policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Properties {
   /**
    * The internally assigned unique identifier of the resource.
@@ -336,6 +336,7 @@ model KeyVaultProperties {
 /**
  * Url and version of the KeyVault Secret
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model keyProperties {
   /**
    * The identifier of the key vault key used to encrypt data.
@@ -386,7 +387,7 @@ model SubnetProperties {
 /**
  * Definition of the EnterprisePolicy.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PatchEnterprisePolicy extends PatchTrackedResource {
   /**
    * The identity of the EnterprisePolicy.
@@ -466,6 +467,7 @@ model PrivateEndpointConnectionListResult {
   @pageItems
   value?: PrivateEndpointConnection[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }

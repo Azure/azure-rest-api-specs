@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/powerplatform"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,6 +12,16 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/powerplatform"
+    emitter-output-dir: "{output-dir}/{service-dir}/armpowerplatform"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpowerplatform"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
