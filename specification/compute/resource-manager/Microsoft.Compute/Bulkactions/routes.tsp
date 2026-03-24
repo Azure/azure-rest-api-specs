@@ -25,6 +25,13 @@ alias LocationParameter = {
   locationparameter: Azure.Core.azureLocation;
 };
 
+alias DefaultVirtualMachines = {
+  /** Static virtual machine segment for bulk VM operations. */
+  @path
+  @segment("virtualMachines")
+  virtualMachines: "BulkVmOperations";
+};
+
 @@clientName(VirtualMachineBulkOperations.bulkDeallocate::parameters.body,
   "requestBody"
 );
@@ -83,30 +90,33 @@ alias LocationParameter = {
 @armResourceOperations(#{ omitTags: true })
 interface VirtualMachineBulkOperations {
   // -------------- Routes -------------
-  /** BulkDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+ /** BulkDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
-  @action("virtualMachines/bulkDeallocate")
+  @armResourceCollectionAction
+  @action("deallocate")
   bulkDeallocate(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
+    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
     body: ExecuteDeallocateRequest,
   ): ArmResponse<DeallocateResourceOperationResponse> | ErrorResponse;
-
   /** BulkHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
-  @action("virtualMachines/bulkHibernate")
+  @armResourceCollectionAction
+  @action("hibernate")
   bulkHibernate(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
+    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -116,12 +126,14 @@ interface VirtualMachineBulkOperations {
   /** BulkStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
-  @action("virtualMachines/bulkStart")
+  @armResourceCollectionAction
+  @action("start")
   bulkStart(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
+    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -131,12 +143,14 @@ interface VirtualMachineBulkOperations {
   /** BulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
-  @action("virtualMachines/bulkCreate")
+  @armResourceCollectionAction
+  @action("create")
   bulkCreate(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
+    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -146,12 +160,14 @@ interface VirtualMachineBulkOperations {
   /** BulkVdiFlexCreate: Bulk create  operation for a batch of virtual machines, this operation supports flex properties to give options on Sku and zone selection. */
   @post
   @autoRoute
-  @action("virtualMachines/bulkVdiFlexCreate")
+  @armResourceCollectionAction
+  @action("vdiFlexCreate")
   bulkVdiFlexCreate(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
+    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -161,12 +177,14 @@ interface VirtualMachineBulkOperations {
   /** BulkDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
-  @action("virtualMachines/bulkDelete")
+  @armResourceCollectionAction
+  @action("delete")
   bulkDelete(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
+    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -176,12 +194,14 @@ interface VirtualMachineBulkOperations {
   /** BulkGetOperationsStatus: Polling endpoint to read status of operations performed on virtual machines */
   @post
   @autoRoute
-  @action("virtualMachines/bulkGetOperationsStatus")
+  @armResourceCollectionAction
+  @action("getOperationsStatus")
   bulkGetOperationsStatus(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
+    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -191,12 +211,14 @@ interface VirtualMachineBulkOperations {
   /** BulkCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request */
   @post
   @autoRoute
-  @action("virtualMachines/bulkCancelOperations")
+  @armResourceCollectionAction
+  @action("cancelOperations")
   bulkCancelOperations(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
+    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -206,12 +228,14 @@ interface VirtualMachineBulkOperations {
   /** BulkReimage: Execute reimage operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @post
   @autoRoute
-  @action("virtualMachines/bulkReimage")
+  @armResourceCollectionAction
+  @action("reimage")
   bulkReimage(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
+    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body

@@ -136,7 +136,7 @@ model BulkactionVMSpec {
  * The flex properties for flexible VM creation.
  */
 // ----------- ExecuteCreateFlex ---------
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("The supported operating system types for flex VM creation")
 union OsType {
   @doc("Windows operating system")
@@ -148,7 +148,7 @@ union OsType {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("The priority type for VM allocation")
 union PriorityType {
   @doc("Regular priority VMs")
@@ -160,7 +160,7 @@ union PriorityType {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("The allocation strategy for VM size selection")
 union AllocationStrategy {
   @doc("Platform prioritizes VM sizes with the lowest hourly cost")
@@ -175,7 +175,7 @@ union AllocationStrategy {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("The distribution strategy for zone allocation")
 union DistributionStrategy {
   @doc("Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed")
@@ -193,7 +193,7 @@ union DistributionStrategy {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("A VM size profile with a name and rank for flex VM creation")
 model VmSizeProfile {
   @doc("The name of the VM size, eg Standard_D2ads_v5")
@@ -204,7 +204,7 @@ model VmSizeProfile {
   rank: int32;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("The priority profile for flex VM creation")
 model PriorityProfile {
   @doc("The priority type for VM allocation")
@@ -214,7 +214,7 @@ model PriorityProfile {
   allocationStrategy?: AllocationStrategy;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("A zone preference with a zone identifier and rank")
 model ZonePreference {
   @doc("The zone identifier")
@@ -224,7 +224,7 @@ model ZonePreference {
   rank: int32;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("The zone allocation policy for distributing VMs across availability zones")
 model ZoneAllocationPolicy {
   @doc("The distribution strategy for zone allocation")
@@ -235,7 +235,7 @@ model ZoneAllocationPolicy {
   zonePreferences?: Array<ZonePreference>;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("The flex properties for flexible VM creation")
 model FlexProperties {
   @identifiers(#[])
@@ -266,6 +266,9 @@ model BulkVMConfiguration {
 
   @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
   computeApiVersion?: string;
+
+  @doc("identifier for created virtual machine, if not passed it will create one from resource prefix.")
+  name?: string;
 }
 
 @doc("Resource creation data model")
