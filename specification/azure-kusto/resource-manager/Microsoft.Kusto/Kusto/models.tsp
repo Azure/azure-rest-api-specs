@@ -1336,6 +1336,11 @@ union IotHubDataFormat {
    * W3CLOGFILE
    */
   W3CLOGFILE: "W3CLOGFILE",
+
+  /**
+   * AZMONSTREAM
+   */
+  AZMONSTREAM: "AZMONSTREAM",
 }
 
 /**
