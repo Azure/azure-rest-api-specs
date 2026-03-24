@@ -241,8 +241,8 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 // Remove preview opt-in union types from the public PythonSDK surface.
-@@access(AgentDefinitionOptInKeys, Access.internal, "python");
-@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
+@@access(AgentDefinitionOptInKeys, Access.internal, "python");  // Why doesn't this have any effect?
+@@access(FoundryFeaturesOptInKeys, Access.internal, "python");  // Why doesn't this have any effect?
 @@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
 @@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
 
