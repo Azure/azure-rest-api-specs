@@ -106,41 +106,43 @@ interface StaticCidrs {
   @summary("Gets list of Static CIDR resources at Network Manager level.")
   list is ArmResourceListByParent<
     StaticCidr,
-    Parameters = {
-      /**
-       * Optional skip token.
-       */
-      @query("skipToken")
-      skipToken?: string;
-
-      /**
-       * Optional num entries to skip.
-       */
-      @query("skip")
-      skip?: int32 = 0;
-
-      /**
-       * Optional num entries to show.
-       */
-      @query("top")
-      top?: int32 = 50;
-
-      /**
-       * Optional key by which to sort.
-       */
-      @query("sortKey")
-      sortKey?: string;
-
-      /**
-       * Optional sort value for pagination.
-       */
-      @query("sortValue")
-      sortValue?: string;
-    },
+    Parameters = StaticCidrsListParameters,
     Response = ArmResponse<StaticCidrList>,
     Error = CommonErrorResponse
   >;
 }
+
+alias StaticCidrsListParameters = {
+  /**
+   * Optional skip token.
+   */
+  @query("skipToken")
+  skipToken?: string;
+
+  /**
+   * Optional num entries to skip.
+   */
+  @query("skip")
+  skip?: int32 = 0;
+
+  /**
+   * Optional num entries to show.
+   */
+  @query("top")
+  top?: int32 = 50;
+
+  /**
+   * Optional key by which to sort.
+   */
+  @query("sortKey")
+  sortKey?: string;
+
+  /**
+   * Optional sort value for pagination.
+   */
+  @query("sortValue")
+  sortValue?: string;
+};
 
 @@doc(StaticCidr.name, "StaticCidr resource name to retrieve.");
 @@doc(StaticCidr.properties, "Properties of static CIDR resource.");

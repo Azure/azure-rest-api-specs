@@ -85,40 +85,42 @@ interface ReachabilityAnalysisIntents {
   @tag("ReachabilityAnalysisIntents")
   list is ArmResourceListByParent<
     ReachabilityAnalysisIntent,
-    Parameters = {
-      /**
-       * Optional skip token.
-       */
-      @query("skipToken")
-      skipToken?: string;
-
-      /**
-       * Optional num entries to skip.
-       */
-      @query("skip")
-      skip?: int32 = 0;
-
-      /**
-       * Optional num entries to show.
-       */
-      @query("top")
-      top?: int32 = 50;
-
-      /**
-       * Optional key by which to sort.
-       */
-      @query("sortKey")
-      sortKey?: string;
-
-      /**
-       * Optional sort value for pagination.
-       */
-      @query("sortValue")
-      sortValue?: string;
-    },
+    Parameters = ReachabilityAnalysisIntentsListParameters,
     Error = CommonErrorResponse
   >;
 }
+
+alias ReachabilityAnalysisIntentsListParameters = {
+  /**
+   * Optional skip token.
+   */
+  @query("skipToken")
+  skipToken?: string;
+
+  /**
+   * Optional num entries to skip.
+   */
+  @query("skip")
+  skip?: int32 = 0;
+
+  /**
+   * Optional num entries to show.
+   */
+  @query("top")
+  top?: int32 = 50;
+
+  /**
+   * Optional key by which to sort.
+   */
+  @query("sortKey")
+  sortKey?: string;
+
+  /**
+   * Optional sort value for pagination.
+   */
+  @query("sortValue")
+  sortValue?: string;
+};
 
 @@doc(ReachabilityAnalysisIntent.name, "Reachability Analysis Intent name.");
 @@doc(ReachabilityAnalysisIntent.properties,

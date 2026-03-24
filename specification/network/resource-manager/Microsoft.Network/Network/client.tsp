@@ -22,10 +22,10 @@ using Microsoft.Compute;
 )
 namespace CombineClient;
 
-@@clientName(CombineClient, "NetworkManagementClient", "javascript");
+@@clientName(CombineClient, "NetworkManagementClient", "javascript,python");
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ArmErrorResponse",
-  "javascript"
+  "javascript,python"
 );
 
 // Java naming mitigations
@@ -649,7 +649,7 @@ op availablePrivateEndpointTypesOperationGroupListByResourceGroup(
 
 @@override(AvailablePrivateEndpointTypesOperationGroup.listByResourceGroup,
   availablePrivateEndpointTypesOperationGroupListByResourceGroup,
-  "go"
+  "go,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -709,7 +709,7 @@ op privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup(
 
 @@override(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup,
   privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup,
-  "go"
+  "go,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -739,7 +739,7 @@ op privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourc
 
 @@override(PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServicesByResourceGroup,
   privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourceGroup,
-  "go"
+  "go,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -769,7 +769,7 @@ op replaceAvailableResourceGroupDelegationsOperationGroupList(
 
 @@override(AvailableResourceGroupDelegationsOperationGroup.list,
   replaceAvailableResourceGroupDelegationsOperationGroupList,
-  "go"
+  "go,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -799,7 +799,7 @@ op replaceprivateDnsZoneGroupsList(
 
 @@override(Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsList,
   replaceprivateDnsZoneGroupsList,
-  "go"
+  "go,python"
 );
 
 // Java: restore Ip casing for model names (TypeSpec uses uppercase IP)
@@ -948,4 +948,220 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(Microsoft.Network.VirtualApplianceIpConfigurationProperties.privateIPAddress,
   "privateIpAddress",
   "java"
+);
+
+// python
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
+  "TLS_ECDHE_RSA_WITH_AES256_CBC_SHA384",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA,
+  "TLS_DHE_DSS_WITH3_DES_EDE_CBC_SHA",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES_128_CBC_SHA,
+  "TLS_DHE_DSS_WITH_AES128_CBC_SHA",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,
+  "TLS_DHE_DSS_WITH_AES128_CBC_SHA256",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES_256_CBC_SHA,
+  "TLS_DHE_DSS_WITH_AES256_CBC_SHA",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,
+  "TLS_DHE_DSS_WITH_AES256_CBC_SHA256",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES_128_CBC_SHA,
+  "TLS_DHE_RSA_WITH_AES128_CBC_SHA",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
+  "TLS_DHE_RSA_WITH_AES128_GCM_SHA256",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES_256_CBC_SHA,
+  "TLS_DHE_RSA_WITH_AES256_CBC_SHA",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,
+  "TLS_DHE_RSA_WITH_AES256_GCM_SHA384",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
+  "TLS_ECDHE_ECDSA_WITH_AES128_CBC_SHA",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
+  "TLS_ECDHE_ECDSA_WITH_AES128_CBC_SHA256",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+  "TLS_ECDHE_ECDSA_WITH_AES128_GCM_SHA256",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
+  "TLS_ECDHE_ECDSA_WITH_AES256_CBC_SHA",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,
+  "TLS_ECDHE_ECDSA_WITH_AES256_CBC_SHA384",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+  "TLS_ECDHE_ECDSA_WITH_AES256_GCM_SHA384",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
+  "TLS_ECDHE_RSA_WITH_AES128_CBC_SHA",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+  "TLS_ECDHE_RSA_WITH_AES128_CBC_SHA256",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+  "TLS_ECDHE_RSA_WITH_AES128_GCM_SHA256",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
+  "TLS_ECDHE_RSA_WITH_AES256_CBC_SHA",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+  "TLS_ECDHE_RSA_WITH_AES256_GCM_SHA384",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_3DES_EDE_CBC_SHA,
+  "TLS_RSA_WITH3_DES_EDE_CBC_SHA",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_128_CBC_SHA,
+  "TLS_RSA_WITH_AES128_CBC_SHA",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_128_CBC_SHA256,
+  "TLS_RSA_WITH_AES128_CBC_SHA256",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_128_GCM_SHA256,
+  "TLS_RSA_WITH_AES128_GCM_SHA256",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_256_CBC_SHA,
+  "TLS_RSA_WITH_AES256_CBC_SHA",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_256_CBC_SHA256,
+  "TLS_RSA_WITH_AES256_CBC_SHA256",
+  "python"
+);
+@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_256_GCM_SHA384,
+  "TLS_RSA_WITH_AES256_GCM_SHA384",
+  "python"
+);
+@@clientName(FirewallPolicyIdpsSignatureDirection.`0`, "ZERO", "python");
+@@clientName(FirewallPolicyIdpsSignatureDirection.`1`, "ONE", "python");
+@@clientName(FirewallPolicyIdpsSignatureDirection.`2`, "TWO", "python");
+@@clientName(FirewallPolicyIdpsSignatureDirection.`3`, "THREE", "python");
+@@clientName(FirewallPolicyIdpsSignatureDirection.`4`, "FOUR", "python");
+@@clientName(FirewallPolicyIdpsSignatureDirection.`5`, "FIVE", "python");
+@@clientName(FirewallPolicyIdpsSignatureMode.`0`, "ZERO", "python");
+@@clientName(FirewallPolicyIdpsSignatureMode.`1`, "ONE", "python");
+@@clientName(FirewallPolicyIdpsSignatureMode.`2`, "TWO", "python");
+@@clientName(FirewallPolicyIdpsSignatureSeverity.`1`, "ONE", "python");
+@@clientName(FirewallPolicyIdpsSignatureSeverity.`2`, "TWO", "python");
+@@clientName(FirewallPolicyIdpsSignatureSeverity.`3`, "THREE", "python");
+
+@@clientLocation(P2SVpnGateways.get, "P2SVpnGateways", "python");
+@@clientLocation(P2SVpnGateways.createOrUpdate, "P2SVpnGateways", "python");
+@@clientLocation(P2SVpnGateways.updateTags, "P2SVpnGateways", "python");
+@@clientLocation(P2SVpnGateways.delete, "P2SVpnGateways", "python");
+@@clientLocation(P2SVpnGateways.listByResourceGroup,
+  "P2SVpnGateways",
+  "python"
+);
+@@clientLocation(P2SVpnGateways.list, "P2SVpnGateways", "python");
+@@clientLocation(P2SVpnGateways.generateVpnProfile, "P2SVpnGateways", "python");
+@@clientLocation(P2SVpnGateways.getP2sVpnConnectionHealth,
+  "P2SVpnGateways",
+  "python"
+);
+@@clientLocation(P2SVpnGateways.getP2sVpnConnectionHealthDetailed,
+  "P2SVpnGateways",
+  "python"
+);
+@@clientLocation(P2SVpnGateways.disconnectP2sVpnConnections,
+  "P2SVpnGateways",
+  "python"
+);
+@@clientLocation(VirtualHubs.virtualHubRouteTableV2sGet,
+  "VirtualHubRouteTableV2S",
+  "python"
+);
+@@clientLocation(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
+  "VirtualHubRouteTableV2S",
+  "python"
+);
+@@clientLocation(VirtualHubs.virtualHubRouteTableV2sDelete,
+  "VirtualHubRouteTableV2S",
+  "python"
+);
+@@clientLocation(VirtualHubs.virtualHubRouteTableV2sList,
+  "VirtualHubRouteTableV2S",
+  "python"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(IpamPoolsListParameters.skip,
+  0,
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(IpamPoolsListParameters.top,
+  50,
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ReachabilityAnalysisIntentsListParameters.skip,
+  0,
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ReachabilityAnalysisIntentsListParameters.top,
+  50,
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ReachabilityAnalysisRunsListParameters.skip,
+  0,
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ReachabilityAnalysisRunsListParameters.top,
+  50,
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(StaticCidrsListParameters.skip,
+  0,
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(StaticCidrsListParameters.top,
+  50,
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(VerifierWorkspacesListParameters.skip,
+  0,
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(VerifierWorkspacesListParameters.top,
+  50,
+  "python"
 );
