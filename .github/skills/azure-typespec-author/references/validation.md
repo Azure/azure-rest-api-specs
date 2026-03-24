@@ -5,10 +5,10 @@ After applying changes (Step 4), run through all sub-steps below in order.
 | Sub-step | Action                              | When                       |
 | -------- | ----------------------------------- | -------------------------- |
 | 5.1      | TypeSpec Validation (error checks)  | Always                     |
-| 5.2      | `tsp compile .` (generate swagger)  | Always — **DO NOT SKIP**   |
+| 5.2      | `tsp compile .` (generate swagger)  | Always                     |
 | 5.3      | Example Verification                | API Version Evolution only |
 
-> **Important:** Steps 5.1 and 5.2 serve different purposes and both must be executed. Step 5.1 validates for errors/warnings. Step 5.2 compiles and generates the OpenAPI `.json` output files.
+> Steps 5.1 and 5.2 serve different purposes. Step 5.1 validates for errors/warnings. Step 5.2 compiles and generates the OpenAPI `.json` output files. Both must be executed.
 
 ### Step 5.1: TypeSpec Validation
 
@@ -21,13 +21,9 @@ Invoke `azure-sdk-mcp:azsdk_run_typespec_validation` with the TypeSpec project r
 
 ### Step 5.2: Compile successfully
 
-> **DO NOT SKIP.** This step is different from Step 5.1. Step 5.1 runs TypeSpec _validation_ (error/warning checks). This step runs `tsp compile .` which **generates the OpenAPI (swagger) `.json` output files**. You must run both — validation alone does not produce the output files.
+> This step is separate from Step 5.1. Validation alone does not produce output files — you must also run `tsp compile .` to generate the OpenAPI swagger.
 
-Run `tsp compile .` from the TypeSpec project root path. After compilation succeeds:
-
-1. Verify that the swagger (OpenAPI `.json`) file has been generated under the `{TypeSpec project root}/{version-status}/{target-version}/` directory (e.g. `preview/2025-01-01-preview/widget.json`).
-2. If the file was not generated, investigate and fix the issue, then re-run `tsp compile .`.
-3. Fix any compile errors if they occur.
+Run `tsp compile .` from the TypeSpec project root path. After compilation succeeds, verify that the swagger `.json` file has been generated under `{TypeSpec project root}/{version-status}/{target-version}/` (e.g. `preview/2025-01-01-preview/widget.json`). Fix any compile errors if they occur.
 
 
 ### Step 5.3: Example Verification

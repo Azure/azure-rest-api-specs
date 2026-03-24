@@ -96,7 +96,7 @@ Confirm uncertainties with the user, then make minimal `.tsp` edits.
 
 ### Step 5: Validate
 
-See [validation guide](references/validation.md) for sub-steps. **All sub-steps are mandatory** — you must run both TypeSpec validation (5.1) AND `tsp compile .` (5.2) every time, plus example verification (5.3) for API Version Evolution tasks.
+See [validation guide](references/validation.md) for sub-steps. You must run TypeSpec validation (5.1), `tsp compile .` (5.2), and example verification (5.3, API Version Evolution only).
 
 ---
 
