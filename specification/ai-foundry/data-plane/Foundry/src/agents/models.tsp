@@ -296,14 +296,6 @@ union AgentProtocol {
 }
 
 @removed(Versions.v1)
-union AgentPublishScope {
-  string,
-  individual: "Individual",
-  shared: "Shared",
-  organization: "Organization",
-}
-
-@removed(Versions.v1)
 union AgentEndpointProtocol {
   string,
   activity: "activity",
