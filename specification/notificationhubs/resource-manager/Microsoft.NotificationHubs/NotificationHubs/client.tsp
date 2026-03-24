@@ -57,6 +57,7 @@ using Microsoft.NotificationHubs;
 @@alternateType(PnsCredentialsResource, PnsCredentialsResourceReplacement, "csharp");
 @@clientName(PnsCredentialsResourceReplacement, "NotificationHubPnsCredentials", "csharp");
 @@usage(PnsCredentialsResourceReplacement, Usage.input | Usage.output, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PnsCredentialsResourceReplacement.properties);
 @@clientName(PolicyKeyResource, "NotificationHubPolicyKey", "csharp");
 @@clientName(ResourceListKeys, "NotificationHubResourceKeys", "csharp");
