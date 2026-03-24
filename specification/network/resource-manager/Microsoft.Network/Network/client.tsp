@@ -352,6 +352,16 @@ namespace CombineClient;
   "java"
 );
 
+// Make read-only models input for backward compat with hand-written wrapper code
+@@usage(Microsoft.Network.PacketCaptureResult,
+  Azure.ClientGenerator.Core.Usage.input,
+  "java"
+);
+@@usage(Microsoft.Network.ConnectionMonitorResult,
+  Azure.ClientGenerator.Core.Usage.input,
+  "java"
+);
+
 // More property-level IP → Ip renames
 @@clientName(Microsoft.Network.NetworkInterfacePropertiesFormat.enableIPForwarding,
   "enableIpForwarding",
