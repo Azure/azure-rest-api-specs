@@ -1,150 +1,148 @@
 {
   "parameters": {
-    "api-version": "2024-04-13",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
     "clusterName": "kustoCluster",
+    "api-version": "2024-04-13",
     "parameters": {
-      "identity": {
-        "type": "SystemAssigned"
-      },
       "location": "westus",
-      "properties": {
-        "allowedIpRangeList": [
-          "0.0.0.0/0"
-        ],
-        "enableAutoStop": true,
-        "enableDoubleEncryption": false,
-        "enablePurge": true,
-        "enableStreamingIngest": true,
-        "languageExtensions": {
-          "value": [
-            {
-              "languageExtensionImageName": "Python3_10_8",
-              "languageExtensionName": "PYTHON"
-            },
-            {
-              "languageExtensionImageName": "R",
-              "languageExtensionName": "R"
-            }
-          ]
-        },
-        "publicIPType": "DualStack",
-        "publicNetworkAccess": "Enabled"
-      },
       "sku": {
         "name": "Standard_L16as_v3",
         "capacity": 2,
         "tier": "Standard"
-      }
-    },
-    "resourceGroupName": "kustorptest",
-    "subscriptionId": "12345678-1234-1234-1234-123456789098"
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "name": "kustoCluster",
-        "type": "Microsoft.Kusto/Clusters",
-        "etag": "abcd",
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster",
-        "identity": {
-          "type": "SystemAssigned",
-          "principalId": "faabad1f-4876-463c-af9d-6ba2d2d2394c",
-          "tenantId": "b932977f-6277-4ab7-a2cd-5bd21f07aaf4",
-          "userAssignedIdentities": {}
-        },
-        "location": "westus",
-        "properties": {
-          "allowedIpRangeList": [
-            "0.0.0.0/0"
-          ],
-          "enableAutoStop": true,
-          "enableDiskEncryption": false,
-          "enableDoubleEncryption": false,
-          "enablePurge": true,
-          "enableStreamingIngest": true,
-          "engineType": "V3",
-          "keyVaultProperties": {
-            "keyName": "keyName",
-            "keyVaultUri": "https://dummy.keyvault.com",
-            "keyVersion": "keyVersion"
-          },
-          "languageExtensions": {
-            "value": [
-              {
-                "languageExtensionImageName": "Python3_10_8",
-                "languageExtensionName": "PYTHON"
-              },
-              {
-                "languageExtensionImageName": "R",
-                "languageExtensionName": "R"
-              }
-            ]
-          },
-          "provisioningState": "Succeeded",
-          "publicIPType": "DualStack",
-          "publicNetworkAccess": "Enabled",
-          "restrictOutboundNetworkAccess": "Disabled"
-        },
-        "sku": {
-          "name": "Standard_L16as_v3",
-          "capacity": 2,
-          "tier": "Standard"
-        }
-      }
-    },
-    "201": {
-      "body": {
-        "name": "kustoCluster",
-        "type": "Microsoft.Kusto/Clusters",
-        "etag": "abcd123",
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster",
-        "identity": {
-          "type": "SystemAssigned",
-          "principalId": "faabad1f-4876-463c-af9d-6ba2d2d2394c",
-          "tenantId": "b932977f-6277-4ab7-a2cd-5bd21f07aaf4",
-          "userAssignedIdentities": {}
-        },
-        "location": "westus",
-        "properties": {
-          "allowedIpRangeList": [
-            "0.0.0.0/0"
-          ],
-          "enableAutoStop": true,
-          "enableDiskEncryption": false,
-          "enableDoubleEncryption": false,
-          "enablePurge": true,
-          "enableStreamingIngest": true,
-          "engineType": "V3",
-          "keyVaultProperties": {
-            "keyName": "keyName",
-            "keyVaultUri": "https://dummy.keyvault.com",
-            "keyVersion": "keyVersion"
-          },
-          "languageExtensions": {
-            "value": [
-              {
-                "languageExtensionImageName": "Python3_10_8",
-                "languageExtensionName": "PYTHON"
-              },
-              {
-                "languageExtensionImageName": "R",
-                "languageExtensionName": "R"
-              }
-            ]
-          },
-          "provisioningState": "Succeeded",
-          "publicIPType": "DualStack",
-          "publicNetworkAccess": "Enabled",
-          "restrictOutboundNetworkAccess": "Disabled"
-        },
-        "sku": {
-          "name": "Standard_L16as_v3",
-          "capacity": 2,
-          "tier": "Standard"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "enableStreamingIngest": true,
+        "enablePurge": true,
+        "enableDoubleEncryption": false,
+        "enableAutoStop": true,
+        "publicIPType": "DualStack",
+        "publicNetworkAccess": "Enabled",
+        "allowedIpRangeList": [
+          "0.0.0.0/0"
+        ],
+        "languageExtensions": {
+          "value": [
+            {
+              "languageExtensionName": "PYTHON",
+              "languageExtensionImageName": "Python3_10_8"
+            },
+            {
+              "languageExtensionName": "R",
+              "languageExtensionImageName": "R"
+            }
+          ]
         }
       }
     }
   },
-  "operationId": "Clusters_CreateOrUpdate",
-  "title": "KustoClustersCreateOrUpdate"
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster",
+        "name": "kustoCluster",
+        "type": "Microsoft.Kusto/Clusters",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "enableDiskEncryption": false,
+          "enableStreamingIngest": true,
+          "enablePurge": true,
+          "enableDoubleEncryption": false,
+          "enableAutoStop": true,
+          "publicIPType": "DualStack",
+          "keyVaultProperties": {
+            "keyVaultUri": "https://dummy.keyvault.com",
+            "keyName": "keyName",
+            "keyVersion": "keyVersion"
+          },
+          "engineType": "V3",
+          "publicNetworkAccess": "Enabled",
+          "restrictOutboundNetworkAccess": "Disabled",
+          "allowedIpRangeList": [
+            "0.0.0.0/0"
+          ],
+          "languageExtensions": {
+            "value": [
+              {
+                "languageExtensionName": "PYTHON",
+                "languageExtensionImageName": "Python3_10_8"
+              },
+              {
+                "languageExtensionName": "R",
+                "languageExtensionImageName": "R"
+              }
+            ]
+          }
+        },
+        "sku": {
+          "name": "Standard_L16as_v3",
+          "capacity": 2,
+          "tier": "Standard"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "b932977f-6277-4ab7-a2cd-5bd21f07aaf4",
+          "principalId": "faabad1f-4876-463c-af9d-6ba2d2d2394c",
+          "userAssignedIdentities": {}
+        },
+        "etag": "abcd"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster",
+        "name": "kustoCluster",
+        "type": "Microsoft.Kusto/Clusters",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "enableDiskEncryption": false,
+          "enableStreamingIngest": true,
+          "enablePurge": true,
+          "enableDoubleEncryption": false,
+          "enableAutoStop": true,
+          "publicIPType": "DualStack",
+          "keyVaultProperties": {
+            "keyVaultUri": "https://dummy.keyvault.com",
+            "keyName": "keyName",
+            "keyVersion": "keyVersion"
+          },
+          "engineType": "V3",
+          "publicNetworkAccess": "Enabled",
+          "restrictOutboundNetworkAccess": "Disabled",
+          "allowedIpRangeList": [
+            "0.0.0.0/0"
+          ],
+          "languageExtensions": {
+            "value": [
+              {
+                "languageExtensionName": "PYTHON",
+                "languageExtensionImageName": "Python3_10_8"
+              },
+              {
+                "languageExtensionName": "R",
+                "languageExtensionImageName": "R"
+              }
+            ]
+          }
+        },
+        "sku": {
+          "name": "Standard_L16as_v3",
+          "capacity": 2,
+          "tier": "Standard"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "b932977f-6277-4ab7-a2cd-5bd21f07aaf4",
+          "principalId": "faabad1f-4876-463c-af9d-6ba2d2d2394c",
+          "userAssignedIdentities": {}
+        },
+        "etag": "abcd123"
+      }
+    }
+  }
 }

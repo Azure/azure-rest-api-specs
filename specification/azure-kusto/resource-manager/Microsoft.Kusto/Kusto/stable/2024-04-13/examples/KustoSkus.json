@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "api-version": "2024-04-13",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
     "location": "westus",
-    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+    "api-version": "2024-04-13"
   },
   "responses": {
     "200": {
@@ -10,6 +10,10 @@
         "value": [
           {
             "name": "Standard_L8s_v3",
+            "tier": "Standard",
+            "locations": [
+              "West US"
+            ],
             "locationInfo": [
               {
                 "location": "West US",
@@ -23,35 +27,36 @@
                 "location": "West US",
                 "zones": []
               }
-            ],
-            "locations": [
-              "West US"
-            ],
-            "tier": "Standard"
+            ]
           },
           {
             "name": "Standard_L16s_v3",
-            "locationInfo": [
-              {
-                "location": "West US",
-                "zones": [
-                  "1",
-                  "2",
-                  "3"
-                ]
-              },
-              {
-                "location": "West US",
-                "zones": []
-              }
-            ],
+            "tier": "Standard",
             "locations": [
               "West US"
             ],
-            "tier": "Standard"
+            "locationInfo": [
+              {
+                "location": "West US",
+                "zones": [
+                  "1",
+                  "2",
+                  "3"
+                ]
+              },
+              {
+                "location": "West US",
+                "zones": []
+              }
+            ]
           },
           {
             "name": "Standard_L8as_v3",
+            "tier": "Standard",
+            "locations": [
+              "West US",
+              "West Europe"
+            ],
             "locationInfo": [
               {
                 "location": "West US",
@@ -65,15 +70,15 @@
                 "location": "West US",
                 "zones": []
               }
-            ],
-            "locations": [
-              "West US",
-              "West Europe"
-            ],
-            "tier": "Standard"
+            ]
           },
           {
             "name": "Standard_L16as_v3",
+            "tier": "Standard",
+            "locations": [
+              "West US",
+              "West Europe"
+            ],
             "locationInfo": [
               {
                 "location": "West US",
@@ -87,17 +92,10 @@
                 "location": "West US",
                 "zones": []
               }
-            ],
-            "locations": [
-              "West US",
-              "West Europe"
-            ],
-            "tier": "Standard"
+            ]
           }
         ]
       }
     }
-  },
-  "operationId": "Skus_List",
-  "title": "KustoListRegionSkus"
+  }
 }

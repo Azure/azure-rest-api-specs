@@ -1,80 +1,78 @@
 {
   "parameters": {
-    "api-version": "2024-04-13",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
     "clusterName": "kustoCluster",
     "databaseName": "KustoDatabase8",
-    "resourceGroupName": "kustorptest",
-    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+    "api-version": "2024-04-13"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8/DataConnections/KustoDataConnection1",
             "name": "kustoCluster/KustoDatabase8/KustoDataConnection1",
             "type": "Microsoft.Kusto/Clusters/Databases/DataConnections",
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8/DataConnections/KustoDataConnection1",
-            "kind": "EventHub",
             "location": "westus",
+            "kind": "EventHub",
             "properties": {
-              "compression": "None",
-              "consumerGroup": "$Default",
-              "dataFormat": "MULTIJSON",
-              "databaseRouting": "Single",
               "eventHubResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1",
-              "eventSystemProperties": [],
-              "managedIdentityObjectId": "87654321-1234-1234-1234-123456789123",
-              "managedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/managedidentityTest1",
+              "consumerGroup": "$Default",
+              "tableName": "TestTable",
               "mappingRuleName": "TestMapping",
-              "provisioningState": "Succeeded",
+              "dataFormat": "MULTIJSON",
+              "eventSystemProperties": [],
+              "compression": "None",
+              "managedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/managedidentityTest1",
+              "managedIdentityObjectId": "87654321-1234-1234-1234-123456789123",
+              "databaseRouting": "Single",
               "retrievalStartDate": "2022-07-29T12:00:00.6554616Z",
-              "tableName": "TestTable"
+              "provisioningState": "Succeeded"
             }
           },
           {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8/DataConnections/KustoDataConnection2",
             "name": "kustoCluster/KustoDatabase8/KustoDataConnection2",
             "type": "Microsoft.Kusto/Clusters/Databases/DataConnections",
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8/DataConnections/KustoDataConnection2",
-            "kind": "EventGrid",
             "location": "westus",
+            "kind": "EventGrid",
             "properties": {
-              "blobStorageEventType": "Microsoft.Storage.BlobCreated",
-              "consumerGroup": "$Default",
-              "dataFormat": "MULTIJSON",
-              "databaseRouting": "Single",
+              "ignoreFirstRecord": false,
+              "storageAccountResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Storage/storageAccounts/teststorageaccount",
               "eventGridResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Storage/storageAccounts/teststorageaccount/providers/Microsoft.EventGrid/eventSubscriptions/eventSubscriptionTest",
               "eventHubResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest2",
-              "ignoreFirstRecord": false,
-              "managedIdentityObjectId": "87654321-1234-1234-1234-123456789123",
-              "managedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/managedidentityTest1",
+              "consumerGroup": "$Default",
+              "tableName": "TestTable",
               "mappingRuleName": "TestMapping",
-              "provisioningState": "Succeeded",
-              "storageAccountResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Storage/storageAccounts/teststorageaccount",
-              "tableName": "TestTable"
+              "dataFormat": "MULTIJSON",
+              "blobStorageEventType": "Microsoft.Storage.BlobCreated",
+              "managedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/managedidentityTest1",
+              "managedIdentityObjectId": "87654321-1234-1234-1234-123456789123",
+              "databaseRouting": "Single",
+              "provisioningState": "Succeeded"
             }
           },
           {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8/DataConnections/KustoDataConnection3",
             "name": "kustoCluster/KustoDatabase8/KustoDataConnection3",
             "type": "Microsoft.Kusto/Clusters/Databases/DataConnections",
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8/DataConnections/KustoDataConnection3",
-            "kind": "CosmosDb",
             "location": "westus",
+            "kind": "CosmosDb",
             "properties": {
-              "cosmosDbAccountResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.DocumentDb/databaseAccounts/cosmosDbAccountTest1",
-              "cosmosDbContainer": "cosmosDbContainerTest",
-              "cosmosDbDatabase": "cosmosDbDatabaseTest",
-              "managedIdentityObjectId": "87654321-1234-1234-1234-123456789123",
-              "managedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/managedidentityTest1",
+              "tableName": "TestTable",
               "mappingRuleName": "TestMapping",
-              "provisioningState": "Succeeded",
+              "managedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/managedidentityTest1",
+              "managedIdentityObjectId": "87654321-1234-1234-1234-123456789123",
+              "cosmosDbAccountResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.DocumentDb/databaseAccounts/cosmosDbAccountTest1",
+              "cosmosDbDatabase": "cosmosDbDatabaseTest",
+              "cosmosDbContainer": "cosmosDbContainerTest",
               "retrievalStartDate": "2022-07-29T12:00:00.6554616Z",
-              "tableName": "TestTable"
+              "provisioningState": "Succeeded"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "DataConnections_ListByDatabase",
-  "title": "KustoDatabasesListByCluster"
+  }
 }

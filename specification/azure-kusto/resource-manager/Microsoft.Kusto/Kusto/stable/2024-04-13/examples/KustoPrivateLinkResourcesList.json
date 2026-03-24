@@ -1,18 +1,18 @@
 {
   "parameters": {
-    "api-version": "2024-04-13",
-    "clusterName": "kustoCluster",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
     "resourceGroupName": "kustorptest",
-    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+    "clusterName": "kustoCluster",
+    "api-version": "2024-04-13"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/privateLinkResources/cluster",
             "name": "cluster",
             "type": "Microsoft.Kusto/clusters/PrivateLinkResources",
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/privateLinkResources/cluster",
             "properties": {
               "groupId": "cluster",
               "requiredMembers": [
@@ -36,7 +36,5 @@
         ]
       }
     }
-  },
-  "operationId": "PrivateLinkResources_List",
-  "title": "Gets private endpoint connections."
+  }
 }

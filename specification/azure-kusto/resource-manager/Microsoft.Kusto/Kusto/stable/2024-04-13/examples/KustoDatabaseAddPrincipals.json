@@ -1,38 +1,38 @@
 {
   "parameters": {
-    "api-version": "2024-04-13",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
     "clusterName": "kustoCluster",
     "databaseName": "KustoDatabase8",
+    "api-version": "2024-04-13",
     "databasePrincipalsToAdd": {
       "value": [
         {
           "name": "Some User",
+          "role": "Admin",
           "type": "User",
-          "appId": "",
-          "email": "user@microsoft.com",
           "fqn": "aaduser=some_guid",
-          "role": "Admin"
+          "email": "user@microsoft.com",
+          "appId": ""
         },
         {
           "name": "Kusto",
+          "role": "Viewer",
           "type": "Group",
-          "appId": "",
-          "email": "kusto@microsoft.com",
           "fqn": "aadgroup=some_guid",
-          "role": "Viewer"
+          "email": "kusto@microsoft.com",
+          "appId": ""
         },
         {
           "name": "SomeApp",
+          "role": "Admin",
           "type": "App",
-          "appId": "some_guid_app_id",
-          "email": "",
           "fqn": "aadapp=some_guid_app_id",
-          "role": "Admin"
+          "email": "",
+          "appId": "some_guid_app_id"
         }
       ]
-    },
-    "resourceGroupName": "kustorptest",
-    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+    }
   },
   "responses": {
     "200": {
@@ -40,32 +40,30 @@
         "value": [
           {
             "name": "Some User",
+            "role": "Admin",
             "type": "User",
-            "appId": "",
-            "email": "user@microsoft.com",
             "fqn": "aaduser=some_guid",
-            "role": "Admin"
+            "email": "user@microsoft.com",
+            "appId": ""
           },
           {
             "name": "Kusto",
+            "role": "Viewer",
             "type": "Group",
-            "appId": "",
-            "email": "kusto@microsoft.com",
             "fqn": "aadgroup=some_guid",
-            "role": "Viewer"
+            "email": "kusto@microsoft.com",
+            "appId": ""
           },
           {
             "name": "SomeApp",
+            "role": "Admin",
             "type": "App",
-            "appId": "some_guid_app_id",
-            "email": "",
             "fqn": "aadapp=some_guid_app_id",
-            "role": "Admin"
+            "email": "",
+            "appId": "some_guid_app_id"
           }
         ]
       }
     }
-  },
-  "operationId": "Databases_AddPrincipals",
-  "title": "KustoDatabaseAddPrincipals"
+  }
 }

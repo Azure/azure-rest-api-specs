@@ -1,76 +1,74 @@
 {
   "parameters": {
-    "api-version": "2024-04-13",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
     "resourceGroupName": "kustorptest",
-    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+    "api-version": "2024-04-13"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4",
             "name": "KustoClusterRPTest4",
             "type": "Microsoft.Kusto/Clusters",
-            "etag": "abcd123",
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4",
             "location": "westus",
             "properties": {
+              "provisioningState": "Succeeded",
+              "enableDiskEncryption": false,
+              "enableStreamingIngest": true,
+              "keyVaultProperties": {
+                "keyVaultUri": "https://dummy.keyvault.com",
+                "keyName": "keyName",
+                "keyVersion": "keyVersion"
+              },
+              "engineType": "V2",
+              "publicNetworkAccess": "Enabled",
+              "restrictOutboundNetworkAccess": "Disabled",
+              "allowedIpRangeList": [],
               "allowedFqdnList": [
                 "my-stroage.blob.core.windows.net"
               ],
-              "allowedIpRangeList": [],
-              "enableDiskEncryption": false,
-              "enableStreamingIngest": true,
-              "engineType": "V2",
-              "keyVaultProperties": {
-                "keyName": "keyName",
-                "keyVaultUri": "https://dummy.keyvault.com",
-                "keyVersion": "keyVersion"
-              },
               "migrationCluster": {
-                "dataIngestionUri": "https://ingest-kustocluster2.westus.kusto.windows.net",
                 "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster2",
-                "role": "Destination",
-                "uri": "https://kustocluster2.westus.kusto.windows.net"
+                "uri": "https://kustocluster2.westus.kusto.windows.net",
+                "dataIngestionUri": "https://ingest-kustocluster2.westus.kusto.windows.net",
+                "role": "Destination"
               },
-              "provisioningState": "Succeeded",
-              "publicNetworkAccess": "Enabled",
-              "restrictOutboundNetworkAccess": "Disabled",
               "zoneStatus": "NonZonal"
             },
             "sku": {
               "name": "Standard_L16as_v3",
               "capacity": 2,
               "tier": "Standard"
-            }
+            },
+            "etag": "abcd123"
           },
           {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest3",
             "name": "KustoClusterRPTest3",
             "type": "Microsoft.Kusto/Clusters",
-            "etag": "abcd123",
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest3",
             "location": "westus",
             "properties": {
-              "allowedIpRangeList": [
-                "0.0.0.0/0"
-              ],
               "enableDiskEncryption": true,
               "enableStreamingIngest": true,
               "engineType": "V3",
-              "provisioningState": "Succeeded",
               "publicNetworkAccess": "Enabled",
+              "allowedIpRangeList": [
+                "0.0.0.0/0"
+              ],
+              "provisioningState": "Succeeded",
               "restrictOutboundNetworkAccess": "Disabled"
             },
             "sku": {
               "name": "Standard_L16as_v3",
               "capacity": 2,
               "tier": "Standard"
-            }
+            },
+            "etag": "abcd123"
           }
         ]
       }
     }
-  },
-  "operationId": "Clusters_ListByResourceGroup",
-  "title": "KustoClustersListByResourceGroup"
+  }
 }
