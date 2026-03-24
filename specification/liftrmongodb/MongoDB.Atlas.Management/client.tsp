@@ -33,3 +33,18 @@ using MongoDB.Atlas;
   "MongoDBAtlasResourceProvisioningState",
   "csharp"
 );
+
+//csharp - Project
+@@clientName(MongoDB.Atlas.Project, "MongoDBAtlasProject", "csharp");
+@@clientName(MongoDB.Atlas.ProjectProperties,
+  "MongoDBAtlasProjectProperties",
+  "csharp"
+);
+
+//csharp - Cluster
+@@clientName(MongoDB.Atlas.Cluster, "MongoDBAtlasCluster", "csharp");
+@@clientName(MongoDB.Atlas.ClusterProperties,
+  "MongoDBAtlasClusterProperties",
+  "csharp"
+);
+@@clientName(MongoDB.Atlas.ClusterTier, "MongoDBAtlasClusterTier", "csharp");

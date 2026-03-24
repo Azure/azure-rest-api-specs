@@ -27,10 +27,15 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v1_preview)
   v2024_11_18_preview: "2024-11-18-preview",
 
-  /** 2025-06-01 version */
+  /** 2025-06-01 stable version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v1_preview)
   v2025_06_01: "2025-06-01",
+
+  /** 2026-03-01 preview version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v2026_03_01_preview: "2026-03-01-preview",
 }
 
 @doc("User details for an organization")
@@ -123,4 +128,220 @@ interface Organizations {
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
+}
+
+// =====================================================
+// Project - child proxy resource under Organization
+// =====================================================
+
+@doc("Cluster tier options for MongoDB Atlas.")
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+union ClusterTier {
+  string,
+
+  @doc("Free tier cluster.")
+  FREE: "FREE",
+
+  @doc("Flex tier cluster.")
+  FLEX: "FLEX",
+
+  @doc("M10 tier cluster.")
+  M10: "M10",
+
+  @doc("M30 tier cluster.")
+  M30: "M30",
+}
+
+@doc("Properties specific to a MongoDB Atlas Project.")
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+model ProjectProperties {
+  @doc("Atlas project id.")
+  @visibility(Lifecycle.Read)
+  @pattern("^[a-fA-F0-9]{24}$")
+  projectId?: string;
+
+  @doc("Atlas organization id.")
+  @visibility(Lifecycle.Read)
+  @pattern("^[a-fA-F0-9]{24}$")
+  organizationId?: string;
+
+  @doc("Number of clusters in the project.")
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  clusterCount?: int32;
+
+  @doc("Provisioning state of the resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("The MongoDB Atlas Project resource type. A project is a logical grouping of clusters within an organization.")
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+@parentResource(OrganizationResource)
+model Project is ProxyResource<ProjectProperties> {
+  @key("projectName")
+  @pattern("^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$")
+  @segment("projects")
+  @minLength(1)
+  @maxLength(64)
+  @doc("Project name in MongoDB Atlas.")
+  @path
+  @visibility(Lifecycle.Read)
+  projectName: string;
+}
+
+@armResourceOperations
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+interface Projects {
+  get is ArmResourceRead<Project>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
+  delete is ArmResourceDeleteWithoutOkAsync<Project>;
+  list is ArmResourceListByParent<Project>;
+
+  @doc("Check if tier limit is reached for the project.")
+  @autoRoute
+  @armResourceAction(Project)
+  @post
+  tierLimitReached(
+    ...ResourceInstanceParameters<Project>,
+  ): ArmResponse<TierLimitReachedResponse> | ErrorResponse;
+
+  @doc("List available regions by cluster tier for the project.")
+  @autoRoute
+  @armResourceAction(Project)
+  @post
+  @action("clusterTierRegions")
+  listClusterTierRegions(
+    ...ResourceInstanceParameters<Project>,
+  ): ArmResponse<RegionsByTierResponse> | ErrorResponse;
+}
+
+@doc("Response for tier limit check.")
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+model TierLimitReachedResponse {
+  @doc("List of project limit statuses.")
+  @Azure.ResourceManager.identifiers(#["type"])
+  limits: ProjectLimitStatus[];
+}
+
+@doc("Usage and limit status for a resource quota in a MongoDB Atlas project.")
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+model ProjectLimitStatus {
+  @doc("Type of the limit.")
+  type: string;
+
+  @doc("Maximum allowed value.")
+  maximum: int32;
+
+  @doc("Current value.")
+  current: int32;
+
+  @doc("Whether the limit has been reached.")
+  isReached: boolean;
+}
+
+@doc("Response for regions by cluster tier.")
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+model RegionsByTierResponse {
+  @doc("Atlas organization id.")
+  @pattern("^[a-fA-F0-9]{24}$")
+  organizationId: string;
+
+  @doc("Atlas project id.")
+  @pattern("^[a-fA-F0-9]{24}$")
+  projectId: string;
+
+  @doc("List of cluster tiers and their supported regions.")
+  @Azure.ResourceManager.identifiers(#["tier"])
+  regionsByTier: TierRegions[];
+}
+
+@doc("Cluster tier and its supported regions.")
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+model TierRegions {
+  @doc("Cluster tier name.")
+  tier: ClusterTier;
+
+  @doc("Supported region names.")
+  regions: string[];
+}
+
+// =====================================================
+// Cluster - child proxy resource under Project
+// =====================================================
+
+@doc("State of the cluster.")
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+union ClusterState {
+  string,
+
+  @doc("Cluster is idle and ready.")
+  IDLE: "IDLE",
+
+  @doc("Cluster is being created.")
+  CREATING: "CREATING",
+
+  @doc("Cluster is being updated.")
+  UPDATING: "UPDATING",
+
+  @doc("Cluster is being deleted.")
+  DELETING: "DELETING",
+
+  @doc("Cluster has been deleted.")
+  DELETED: "DELETED",
+
+  @doc("Cluster is being repaired.")
+  REPAIRING: "REPAIRING",
+}
+
+@doc("Properties specific to a MongoDB Atlas Cluster.")
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+model ClusterProperties {
+  @doc("Cluster tier (FREE, FLEX, M10, M30).")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  clusterTier: ClusterTier;
+
+  @doc("Azure region where the cluster is deployed.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  regionName: string;
+
+  @doc("MongoDB version running on the cluster.")
+  @visibility(Lifecycle.Read)
+  mongoDbVersion?: string;
+
+  @doc("Whether backups are enabled for the cluster.")
+  @visibility(Lifecycle.Read)
+  backupEnabled?: boolean;
+
+  @doc("Current state of the cluster.")
+  @visibility(Lifecycle.Read)
+  state?: ClusterState;
+
+  @doc("Provisioning state of the resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("The MongoDB Atlas Cluster resource type. A cluster is a managed database deployment within a project.")
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+@parentResource(Project)
+model Cluster is ProxyResource<ClusterProperties> {
+  @key("clusterName")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]*$")
+  @segment("clusters")
+  @minLength(1)
+  @maxLength(64)
+  @doc("Name of the MongoDB Atlas Cluster resource.")
+  @path
+  @visibility(Lifecycle.Read)
+  clusterName: string;
+}
+
+@armResourceOperations
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+interface Clusters {
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Cluster>;
+  delete is ArmResourceDeleteWithoutOkAsync<Cluster>;
+  list is ArmResourceListByParent<Cluster>;
+  get is ArmResourceRead<Cluster>;
 }
