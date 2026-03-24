@@ -415,7 +415,11 @@ interface CrossTenantOperations {
     operationId: string,
 
     ...ApiVersionParameter,
-  ): ArmResponse<ProtectedItemResource> | ArmAcceptedLroResponse | ArmNoContentResponse | ErrorResponse;
+  ):
+    | ArmResponse<ProtectedItemResource>
+    | ArmAcceptedLroResponse
+    | ArmNoContentResponse
+    | ErrorResponse;
 
   /**
    * Fetches the status of a cross-tenant operation such as triggering a restore.
@@ -676,10 +680,14 @@ interface CrossTenantOperations {
     operationId: string,
 
     ...ApiVersionParameter,
-  ): ArmResponse<ValidateOperationsResponse> | ArmAcceptedResponse<
-    "Accepted",
-    ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-  > | ArmNoContentResponse | ErrorResponse;
+  ):
+    | ArmResponse<ValidateOperationsResponse>
+    | ArmAcceptedResponse<
+        "Accepted",
+        ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      >
+    | ArmNoContentResponse
+    | ErrorResponse;
 
   /**
    * Gets the status of a validate operation for cross-tenant restore scenarios.
@@ -792,7 +800,6 @@ model CrossTenantJobResourceList {
   "Request body for operation"
 );
 
-
 // ============================================================
 // Cross-tenant Vault Credential operations
 // ============================================================
@@ -904,10 +911,14 @@ interface CrossTenantVaultCredentialOperations {
     operationId: string,
 
     ...ApiVersionParameter,
-  ): ArmResponse<VaultCredentialCertificateResponse> | ArmAcceptedResponse<
-    "Accepted",
-    ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-  > | ArmNoContentResponse | ErrorResponse;
+  ):
+    | ArmResponse<VaultCredentialCertificateResponse>
+    | ArmAcceptedResponse<
+        "Accepted",
+        ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      >
+    | ArmNoContentResponse
+    | ErrorResponse;
 
   /**
    * Gets the status of an async vault credential generation operation.
