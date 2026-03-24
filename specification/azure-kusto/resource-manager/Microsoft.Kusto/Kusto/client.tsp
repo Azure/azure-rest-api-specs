@@ -12,3 +12,4 @@ using Azure.ClientGenerator.Core;
   "publicIpType",
   "java"
 );
+@@access(Microsoft.Kusto.LanguageExtensionsList, Access.public, "java");
