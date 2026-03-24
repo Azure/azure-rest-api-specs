@@ -408,8 +408,8 @@ union ReplicaRole {
   /** Read-only replica */
   Read: "Read",
 
-  /** Read/write replica */
-  ReadWrite: "Read/Write",
+  /** ReadWrite replica */
+  ReadWrite: "ReadWrite",
 }
 
 @doc("The provisioning state")
