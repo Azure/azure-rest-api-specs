@@ -14,3 +14,7 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@access(Microsoft.Kusto.CalloutPoliciesList, Access.public, "java");
+@@usage(Microsoft.Kusto.CalloutPoliciesList,
+  Usage.input | Usage.output,
+  "java"
+);
