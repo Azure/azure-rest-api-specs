@@ -590,10 +590,6 @@ namespace CombineClient;
 );
 @@clientName(Microsoft.Network.NetworkProtocol, "Protocol", "go");
 @@clientName(Microsoft.Network.Protocol, "BaseProtocol", "go");
-@@clientName(Azure.ResourceManager.CommonTypes.SystemData,
-  "SecurityPerimeterSystemData",
-  "go"
-);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
