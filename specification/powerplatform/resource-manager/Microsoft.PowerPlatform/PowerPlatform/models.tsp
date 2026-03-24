@@ -225,7 +225,19 @@ model PatchTrackedResource extends Azure.ResourceManager.CommonTypes.Resource {
 /**
  * The response of the list accounts operation.
  */
-model AccountList is Azure.Core.Page<Account>;
+model AccountList {
+  /**
+   * The collection value.
+   */
+  @pageItems
+  value?: Account[];
+
+  /**
+   * The next page link.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * The identity of the EnterprisePolicy.
@@ -318,13 +330,13 @@ model KeyVaultProperties {
   /**
    * Identity of the secret that includes name and version.
    */
-  key?: KeyProperties;
+  key?: keyProperties;
 }
 
 /**
  * Url and version of the KeyVault Secret
  */
-model KeyProperties {
+model keyProperties {
   /**
    * The identifier of the key vault key used to encrypt data.
    */
@@ -401,7 +413,19 @@ model PatchEnterprisePolicy extends PatchTrackedResource {
 /**
  * The response of the list EnterprisePolicy operation.
  */
-model EnterprisePolicyList is Azure.Core.Page<EnterprisePolicy>;
+model EnterprisePolicyList {
+  /**
+   * The collection value.
+   */
+  @pageItems
+  value?: EnterprisePolicy[];
+
+  /**
+   * The next page link.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Localized display information for this particular operation.
@@ -441,4 +465,7 @@ model PrivateEndpointConnectionListResult {
    */
   @pageItems
   value?: PrivateEndpointConnection[];
+
+  @nextLink
+  nextLink?: string;
 }
