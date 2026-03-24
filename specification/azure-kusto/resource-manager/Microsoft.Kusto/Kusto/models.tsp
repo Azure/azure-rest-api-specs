@@ -1787,7 +1787,6 @@ model LanguageExtensionsList {
   /**
    * The link to the next page of resources.
    */
-  @nextLink
   nextLink?: string;
 }
 
