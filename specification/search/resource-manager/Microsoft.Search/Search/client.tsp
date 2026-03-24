@@ -869,9 +869,13 @@ model AccessRulePropertiesSubscriptionsItem {
 
 // C# settings
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flatten sku for backward compat with C# SDK"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchServiceUpdate.sku);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchServiceUpdate.sku,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flatten sku for backward compat with C# SDK"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchService.sku);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchService.sku,
+  "csharp"
+);
 @@clientName(HostingMode, "SearchServiceHostingMode", "csharp");
 @@clientName(ComputeType, "SearchServiceComputeType", "csharp");
 @@clientName(ProvisioningState, "SearchServiceProvisioningState", "csharp");
