@@ -355,6 +355,7 @@ alias CommonListParameters = {
   @maxValue(1000)
   @clientName("maxPageSize", "java")
   @clientName("max_results", "python")
+  @clientName("maxResults", "javascript")
   maxresults?: int32 = 1000;
 };
 
@@ -393,7 +394,7 @@ alias CommonParameters = {
   @query
   @clientName("timeOutInSeconds", "java")
   @clientName("timeOutInSeconds", "csharp")
-  @clientName("timeOutInSeconds", "javascript")
+  @clientName("timeoutInSeconds", "javascript")
   @clientName("timeout", "go,python")
   @encode("seconds", int32)
   timeOut?: duration;
@@ -416,7 +417,7 @@ alias CommonParameters = {
     """)
   @header("ocp-date")
   @encode(DateTimeKnownEncoding.rfc7231)
-  @clientName("ocpDate", "csharp")
+  @clientName("ocpDate", "csharp,javascript")
   ocpdate?: utcDateTime;
 };
 

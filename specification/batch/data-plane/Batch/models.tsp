@@ -854,6 +854,7 @@ model BatchSupportedImage {
   capabilities?: string[];
 
   @doc("The time when the Azure Batch service will stop accepting create Pool requests for the Image.")
+  @clientName("supportEndDate", "javascript")
   batchSupportEndOfLife?: utcDateTime;
 
   @doc("Whether the Azure Batch service actively verifies that the Image is compatible with the associated Compute Node agent SKU.")
@@ -1689,6 +1690,7 @@ model BatchApplicationPackageReference {
   """)
 model AuthenticationTokenSettings {
   @doc("The Batch resources to which the token grants access. The authentication token grants access to a limited set of Batch service operations. Currently the only supported value for the access property is 'job', which grants access to all operations related to the Job which contains the Task.")
+  @clientName("scopes", "javascript")
   access?: BatchAccessScope[];
 }
 
@@ -2026,6 +2028,7 @@ model VMExtension {
   publisher: string;
 
   @doc("The type of the extension.")
+  @clientName("extensionType", "javascript")
   type: string;
 
   @doc("The version of script handler.")
@@ -2297,7 +2300,7 @@ model MountConfiguration {
   nfsMountConfiguration?: NfsMountConfiguration;
 
   @doc("The CIFS/SMB file system to mount on each node. This property is mutually exclusive with all other properties.")
-  cifsMountConfiguration?: CifsMountConfiguration;
+  cifsMountConfiguration?: BatchCifsMountConfiguration;
 
   @doc("The Azure File Share to mount on each node. This property is mutually exclusive with all other properties.")
   azureFileShareConfiguration?: AzureFileShareConfiguration;
@@ -2343,7 +2346,7 @@ model NfsMountConfiguration {
 }
 
 @doc("Information used to connect to a CIFS file system.")
-model CifsMountConfiguration {
+model BatchCifsMountConfiguration {
   @doc("The user to use for authentication against the CIFS file system.")
   username: string;
 
@@ -3278,6 +3281,7 @@ model BatchNodeRemoveOptions {
 @doc("Options for deallocating a Compute Node.")
 model BatchNodeDeallocateOptions {
   @doc("When to deallocate the Compute Node and what to do with currently running Tasks. The default value is requeue.")
+  @clientName("nodeDeallocationOption", "javascript")
   nodeDeallocateOption?: BatchNodeDeallocateOption;
 }
 
@@ -3471,6 +3475,7 @@ model ExitConditions {
   fileUploadError?: ExitOptions;
 
   @doc("How the Batch service should respond if the Task fails with an exit condition not covered by any of the other properties. This value is used if the Task exits with any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, with a pre-processing error if the preProcessingError property is not present, or with a file upload error if the fileUploadError property is not present. If you want non-default behavior on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection.")
+  @clientName("defaultOptions", "javascript")
   default?: ExitOptions;
 }
 
