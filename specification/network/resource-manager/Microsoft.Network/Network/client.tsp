@@ -500,6 +500,10 @@ namespace CombineClient;
   "httpConfiguration",
   "java"
 );
+@@clientName(Microsoft.Network.BastionHostIPConfiguration,
+  "BastionHostIpConfiguration",
+  "java"
+);
 
 // Operation renames for Java (from readme.java.md)
 @@clientLocation(Microsoft.Network.BgpConnections.get,
