@@ -835,13 +835,85 @@
         ]
       }
     },
+    "ComponentProfile": {
+      "type": "object",
+      "description": "Defines the base component profile. The profile type determines the specific\nconfiguration properties available for each workload component type.",
+      "properties": {
+        "profileType": {
+          "$ref": "#/definitions/ComponentProfileType",
+          "description": "The type of the component profile. This value determines the expected structure\nof the profile properties and must be compatible with the componentType."
+        }
+      },
+      "discriminator": "profileType",
+      "required": [
+        "profileType"
+      ]
+    },
     "ComponentProfileType": {
       "type": "string",
-      "x-nullable": false
+      "description": "Defines the type of component profile.",
+      "enum": [
+        "SAP-CentralServices-Default",
+        "SAP-ApplicationServer-Default",
+        "SAP-DatabaseServer-Default"
+      ],
+      "x-ms-enum": {
+        "name": "ComponentProfileType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SAP_CentralServices_Default",
+            "value": "SAP-CentralServices-Default",
+            "description": "SAP Central Services component profile."
+          },
+          {
+            "name": "SAP_ApplicationServer_Default",
+            "value": "SAP-ApplicationServer-Default",
+            "description": "SAP Application Server component profile."
+          },
+          {
+            "name": "SAP_DatabaseServer_Default",
+            "value": "SAP-DatabaseServer-Default",
+            "description": "SAP Database Server component profile."
+          }
+        ]
+      }
+    },
+    "DiscoveryConfiguration": {
+      "type": "object",
+      "description": "Defines the base configuration for automated discovery. The discovery type determines\nthe specific configuration properties available for each discovery workflow.",
+      "properties": {
+        "discoveryType": {
+          "$ref": "#/definitions/DiscoveryConfigurationType",
+          "description": "The type of discovery to execute. This value determines the expected structure\nof the configuration and must be compatible with the workloadType specified in workloadInfo."
+        },
+        "mode": {
+          "$ref": "#/definitions/DiscoveryExecutionMode",
+          "description": "The execution mode for the discovery process.\nWhen set to 'Execute', the discovery process will be executed as part of this request.\nWhen set to 'Skip', only the configuration is updated without running discovery.\nDefaults to 'Execute' if not provided."
+        }
+      },
+      "discriminator": "discoveryType",
+      "required": [
+        "discoveryType"
+      ]
     },
     "DiscoveryConfigurationType": {
       "type": "string",
-      "x-nullable": false
+      "description": "Defines the type of discovery configuration.",
+      "enum": [
+        "SAPAPI"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SAPAPI",
+            "value": "SAPAPI",
+            "description": "SAP API discovery type for discovering SAP systems via sapcontrol API calls."
+          }
+        ]
+      }
     },
     "DiscoveryExecutionMode": {
       "type": "string",
@@ -992,54 +1064,6 @@
         "resourceId"
       ]
     },
-    "SAPComponentProfileType": {
-      "type": "string",
-      "description": "Defines the type of component profile.",
-      "enum": [
-        "SAP-CentralServices-Default",
-        "SAP-ApplicationServer-Default",
-        "SAP-DatabaseServer-Default"
-      ],
-      "x-ms-enum": {
-        "name": "SAPComponentProfileType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SAP_CentralServices_Default",
-            "value": "SAP-CentralServices-Default",
-            "description": "SAP Central Services component profile."
-          },
-          {
-            "name": "SAP_ApplicationServer_Default",
-            "value": "SAP-ApplicationServer-Default",
-            "description": "SAP Application Server component profile."
-          },
-          {
-            "name": "SAP_DatabaseServer_Default",
-            "value": "SAP-DatabaseServer-Default",
-            "description": "SAP Database Server component profile."
-          }
-        ]
-      }
-    },
-    "SAPDiscoveryConfigurationType": {
-      "type": "string",
-      "description": "Defines the type of discovery configuration.",
-      "enum": [
-        "SAPAPI"
-      ],
-      "x-ms-enum": {
-        "name": "SAPDiscoveryConfigurationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SAPAPI",
-            "value": "SAPAPI",
-            "description": "SAP API discovery type for discovering SAP systems via sapcontrol API calls."
-          }
-        ]
-      }
-    },
     "SapApiDiscoveryConfiguration": {
       "type": "object",
       "description": "Defines the SAP API discovery configuration for discovering SAP systems via API calls.",
@@ -1062,22 +1086,7 @@
       ],
       "allOf": [
         {
-          "type": "object",
-          "description": "Defines the base configuration for automated discovery. The discovery type determines\nthe specific configuration properties available for each discovery workflow.",
-          "properties": {
-            "discoveryType": {
-              "$ref": "#/definitions/SAPDiscoveryConfigurationType",
-              "description": "The type of discovery to execute. This value determines the expected structure\nof the configuration and must be compatible with the workloadType specified in workloadInfo."
-            },
-            "mode": {
-              "$ref": "#/definitions/DiscoveryExecutionMode",
-              "description": "The execution mode for the discovery process.\nWhen set to 'Execute', the discovery process will be executed as part of this request.\nWhen set to 'Skip', only the configuration is updated without running discovery.\nDefaults to 'Execute' if not provided."
-            }
-          },
-          "discriminator": "discoveryType",
-          "required": [
-            "discoveryType"
-          ]
+          "$ref": "#/definitions/DiscoveryConfiguration"
         }
       ],
       "x-ms-discriminator-value": "SAPAPI"
@@ -1122,18 +1131,7 @@
       },
       "allOf": [
         {
-          "type": "object",
-          "description": "Defines the base component profile. The profile type determines the specific\nconfiguration properties available for each workload component type.",
-          "properties": {
-            "profileType": {
-              "$ref": "#/definitions/SAPComponentProfileType",
-              "description": "The type of the component profile. This value determines the expected structure\nof the profile properties and must be compatible with the componentType."
-            }
-          },
-          "discriminator": "profileType",
-          "required": [
-            "profileType"
-          ]
+          "$ref": "#/definitions/ComponentProfile"
         }
       ],
       "x-ms-discriminator-value": "SAP-ApplicationServer-Default"
@@ -1182,18 +1180,7 @@
       },
       "allOf": [
         {
-          "type": "object",
-          "description": "Defines the base component profile. The profile type determines the specific\nconfiguration properties available for each workload component type.",
-          "properties": {
-            "profileType": {
-              "$ref": "#/definitions/SAPComponentProfileType",
-              "description": "The type of the component profile. This value determines the expected structure\nof the profile properties and must be compatible with the componentType."
-            }
-          },
-          "discriminator": "profileType",
-          "required": [
-            "profileType"
-          ]
+          "$ref": "#/definitions/ComponentProfile"
         }
       ],
       "x-ms-discriminator-value": "SAP-CentralServices-Default"
@@ -1240,18 +1227,7 @@
       },
       "allOf": [
         {
-          "type": "object",
-          "description": "Defines the base component profile. The profile type determines the specific\nconfiguration properties available for each workload component type.",
-          "properties": {
-            "profileType": {
-              "$ref": "#/definitions/SAPComponentProfileType",
-              "description": "The type of the component profile. This value determines the expected structure\nof the profile properties and must be compatible with the componentType."
-            }
-          },
-          "discriminator": "profileType",
-          "required": [
-            "profileType"
-          ]
+          "$ref": "#/definitions/ComponentProfile"
         }
       ],
       "x-ms-discriminator-value": "SAP-DatabaseServer-Default"
@@ -1383,6 +1359,24 @@
         ]
       }
     },
+    "UpdateDiscoveryConfiguration": {
+      "type": "object",
+      "description": "Defines the update configuration for automated discovery. The discovery type determines\nthe specific configuration properties available for each discovery workflow.",
+      "properties": {
+        "discoveryType": {
+          "$ref": "#/definitions/DiscoveryConfigurationType",
+          "description": "The type of discovery to execute. This value determines the expected structure\nof the configuration and must be compatible with the workloadType specified in workloadInfo."
+        },
+        "mode": {
+          "$ref": "#/definitions/DiscoveryExecutionMode",
+          "description": "The execution mode for the discovery process.\nWhen set to 'Execute', the discovery process will be executed as part of this request.\nWhen set to 'Skip', only the configuration is updated without running discovery.\nDefaults to 'Execute' if not provided."
+        }
+      },
+      "discriminator": "discoveryType",
+      "required": [
+        "discoveryType"
+      ]
+    },
     "UpdateSapApiDiscoveryConfiguration": {
       "type": "object",
       "description": "Defines the update configuration for SAP API discovery.",
@@ -1402,22 +1396,7 @@
       },
       "allOf": [
         {
-          "type": "object",
-          "description": "Defines the update configuration for automated discovery. The discovery type determines\nthe specific configuration properties available for each discovery workflow.",
-          "properties": {
-            "discoveryType": {
-              "$ref": "#/definitions/SAPDiscoveryConfigurationType",
-              "description": "The type of discovery to execute. This value determines the expected structure\nof the configuration and must be compatible with the workloadType specified in workloadInfo."
-            },
-            "mode": {
-              "$ref": "#/definitions/DiscoveryExecutionMode",
-              "description": "The execution mode for the discovery process.\nWhen set to 'Execute', the discovery process will be executed as part of this request.\nWhen set to 'Skip', only the configuration is updated without running discovery.\nDefaults to 'Execute' if not provided."
-            }
-          },
-          "discriminator": "discoveryType",
-          "required": [
-            "discoveryType"
-          ]
+          "$ref": "#/definitions/UpdateDiscoveryConfiguration"
         }
       ],
       "x-ms-discriminator-value": "SAPAPI"
@@ -1465,22 +1444,8 @@
           "x-ms-identifiers": []
         },
         "discoveryConfiguration": {
-          "type": "object",
-          "description": "Defines the automated discovery input configuration.",
-          "properties": {
-            "discoveryType": {
-              "$ref": "#/definitions/DiscoveryConfigurationType",
-              "description": "The type of discovery to execute. This value determines the expected structure\nof the configuration and must be compatible with the workloadType specified in workloadInfo."
-            },
-            "mode": {
-              "$ref": "#/definitions/DiscoveryExecutionMode",
-              "description": "The execution mode for the discovery process.\nWhen set to 'Execute', the discovery process will be executed as part of this request.\nWhen set to 'Skip', only the configuration is updated without running discovery.\nDefaults to 'Execute' if not provided."
-            }
-          },
-          "discriminator": "discoveryType",
-          "required": [
-            "discoveryType"
-          ]
+          "$ref": "#/definitions/UpdateDiscoveryConfiguration",
+          "description": "Defines the automated discovery input configuration."
         },
         "changeDetection": {
           "$ref": "#/definitions/ChangeDetection",
@@ -1512,18 +1477,8 @@
           }
         },
         "componentProfile": {
-          "type": "object",
-          "description": "The component profile containing workload-specific configuration details.\nThe profile type varies based on the workload and component type.",
-          "properties": {
-            "profileType": {
-              "$ref": "#/definitions/ComponentProfileType",
-              "description": "The type of the component profile. This value determines the expected structure\nof the profile properties and must be compatible with the componentType."
-            }
-          },
-          "discriminator": "profileType",
-          "required": [
-            "profileType"
-          ]
+          "$ref": "#/definitions/ComponentProfile",
+          "description": "The component profile containing workload-specific configuration details.\nThe profile type varies based on the workload and component type."
         }
       }
     },
@@ -1596,7 +1551,7 @@
         },
         "environmentType": {
           "$ref": "#/definitions/EnvironmentType",
-          "description": "The type of environment in which the workload system is deployed - Production / Non Production.",
+          "description": "The type of environment in which the workload system is deployed - Production / NonProduction.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1633,22 +1588,8 @@
           "x-ms-identifiers": []
         },
         "discoveryConfiguration": {
-          "type": "object",
-          "description": "Defines the automated discovery input configuration.",
-          "properties": {
-            "discoveryType": {
-              "$ref": "#/definitions/DiscoveryConfigurationType",
-              "description": "The type of discovery to execute. This value determines the expected structure\nof the configuration and must be compatible with the workloadType specified in workloadInfo."
-            },
-            "mode": {
-              "$ref": "#/definitions/DiscoveryExecutionMode",
-              "description": "The execution mode for the discovery process.\nWhen set to 'Execute', the discovery process will be executed as part of this request.\nWhen set to 'Skip', only the configuration is updated without running discovery.\nDefaults to 'Execute' if not provided."
-            }
-          },
-          "discriminator": "discoveryType",
-          "required": [
-            "discoveryType"
-          ]
+          "$ref": "#/definitions/DiscoveryConfiguration",
+          "description": "Defines the automated discovery input configuration."
         },
         "changeDetection": {
           "$ref": "#/definitions/ChangeDetection",
@@ -1799,18 +1740,8 @@
           }
         },
         "componentProfile": {
-          "type": "object",
-          "description": "The component profile containing workload-specific configuration details.\nThe profile type varies based on the workload and component type.",
-          "properties": {
-            "profileType": {
-              "$ref": "#/definitions/ComponentProfileType",
-              "description": "The type of the component profile. This value determines the expected structure\nof the profile properties and must be compatible with the componentType."
-            }
-          },
-          "discriminator": "profileType",
-          "required": [
-            "profileType"
-          ]
+          "$ref": "#/definitions/ComponentProfile",
+          "description": "The component profile containing workload-specific configuration details.\nThe profile type varies based on the workload and component type."
         },
         "complianceState": {
           "$ref": "#/definitions/WorkloadComplianceState",

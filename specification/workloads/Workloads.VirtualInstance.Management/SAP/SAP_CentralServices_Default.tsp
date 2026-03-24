@@ -46,11 +46,11 @@ model SapEnqueueServerConfiguration {
  * Defines the SAP Central Services default component profile.
  */
 @added(Versions.v2026_02_01_preview)
-model SapCentralServicesDefaultComponentProfile extends ComponentProfile<SAPComponentProfileType> {
+model SapCentralServicesDefaultComponentProfile extends ComponentProfile {
   /**
    * The component profile type.
    */
-  profileType: SAPComponentProfileType.SAP_CentralServices_Default;
+  profileType: ComponentProfileType.SAP_CentralServices_Default;
 
   /**
    * The SAP instance number. Must be a two-digit number from 00 to 99.

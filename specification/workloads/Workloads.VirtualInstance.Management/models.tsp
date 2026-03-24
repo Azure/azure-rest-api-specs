@@ -221,6 +221,9 @@ model ChangeDetection {
 @added(Versions.v2026_02_01_preview)
 union DiscoveryConfigurationType {
   string,
+
+  /** SAP API discovery type for discovering SAP systems via sapcontrol API calls. */
+  SAPAPI: "SAPAPI",
 }
 
 /**
@@ -229,12 +232,12 @@ union DiscoveryConfigurationType {
  */
 @discriminator("discoveryType")
 @added(Versions.v2026_02_01_preview)
-model DiscoveryConfiguration<TDiscoveryConfigurationType  = DiscoveryConfigurationType> {
+model DiscoveryConfiguration {
   /**
    * The type of discovery to execute. This value determines the expected structure
    * of the configuration and must be compatible with the workloadType specified in workloadInfo.
    */
-  discoveryType: TDiscoveryConfigurationType;
+  discoveryType: DiscoveryConfigurationType;
 
   /**
    * The execution mode for the discovery process.
@@ -251,12 +254,12 @@ model DiscoveryConfiguration<TDiscoveryConfigurationType  = DiscoveryConfigurati
  */
 @discriminator("discoveryType")
 @added(Versions.v2026_02_01_preview)
-model UpdateDiscoveryConfiguration<TDiscoveryConfigurationType  = DiscoveryConfigurationType> {
+model UpdateDiscoveryConfiguration {
   /**
    * The type of discovery to execute. This value determines the expected structure
    * of the configuration and must be compatible with the workloadType specified in workloadInfo.
    */
-  discoveryType: TDiscoveryConfigurationType;
+  discoveryType: DiscoveryConfigurationType;
 
   /**
    * The execution mode for the discovery process.
@@ -657,6 +660,15 @@ model ResourceConfiguration {
 @added(Versions.v2026_02_01_preview)
 union ComponentProfileType {
   string,
+
+  /** SAP Central Services component profile. */
+  SAP_CentralServices_Default: "SAP-CentralServices-Default",
+
+  /** SAP Application Server component profile. */
+  SAP_ApplicationServer_Default: "SAP-ApplicationServer-Default",
+
+  /** SAP Database Server component profile. */
+  SAP_DatabaseServer_Default: "SAP-DatabaseServer-Default",
 }
 
 /**
@@ -665,12 +677,12 @@ union ComponentProfileType {
  */
 @discriminator("profileType")
 @added(Versions.v2026_02_01_preview)
-model ComponentProfile<TComponentProfileType = ComponentProfileType> {
+model ComponentProfile {
   /**
    * The type of the component profile. This value determines the expected structure
    * of the profile properties and must be compatible with the componentType.
    */
-  profileType: TComponentProfileType;
+  profileType: ComponentProfileType;
 }
 
 /**
