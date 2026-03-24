@@ -917,3 +917,35 @@ op replaceprivateDnsZoneGroupsList(
   "terminateTls",
   "java"
 );
+@@clientName(Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.validateSNI,
+  "validateSni",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayPrivateLinkIpConfigurationProperties.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.ConnectionMonitorTestConfiguration.preferredIPVersion,
+  "preferredIpVersion",
+  "java"
+);
+@@clientName(Microsoft.Network.ConnectivityParameters.preferredIPVersion,
+  "preferredIpVersion",
+  "java"
+);
+@@clientName(Microsoft.Network.LoadBalancerBackendAddressPropertiesFormat.loadBalancerFrontendIPConfiguration,
+  "loadBalancerFrontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.LoadBalancerBackendAddressPropertiesFormat.networkInterfaceIPConfiguration,
+  "networkInterfaceIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.LoadBalancerHealthPerRulePerBackendAddress.networkInterfaceIPConfigurationId,
+  "networkInterfaceIpConfigurationId",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualApplianceIpConfigurationProperties.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
