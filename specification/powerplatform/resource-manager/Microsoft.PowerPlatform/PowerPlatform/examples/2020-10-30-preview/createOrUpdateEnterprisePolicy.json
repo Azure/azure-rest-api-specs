@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2020-10-30-preview",
+    "enterprisePolicyName": "enterprisePolicy",
+    "parameters": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "kind": "Lockbox",
+      "location": "East US",
+      "tags": {
+        "Organization": "Administration"
+      }
+    },
+    "resourceGroupName": "resourceGroup",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "enterprisePolicy",
+        "type": "Microsoft.PowerPlatform/enterprisePolicies",
+        "id": "/subscriptions/subid/resourceGroups/resourceGroup/providers/Microsoft.PowerPlatform/enterprisePolicies/enterprisePolicy",
+        "identity": {
+          "type": "SystemAssigned",
+          "systemAssignedIdentityPrincipalId": "principalId",
+          "tenantId": "tenantId"
+        },
+        "kind": "Lockbox",
+        "location": "East US",
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "Organization": "Administration"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "enterprisePolicy",
+        "type": "Microsoft.PowerPlatform/enterprisePolicies",
+        "id": "/subscriptions/subid/resourceGroups/resourceGroup/providers/Microsoft.PowerPlatform/enterprisePolicies/enterprisePolicy",
+        "identity": {
+          "type": "SystemAssigned",
+          "systemAssignedIdentityPrincipalId": "principalId",
+          "tenantId": "tenantId"
+        },
+        "kind": "Lockbox",
+        "location": "East US",
+        "tags": {
+          "Organization": "Administration"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "EnterprisePolicies_CreateOrUpdate",
+  "title": "Create or update EnterprisePolicy"
+}

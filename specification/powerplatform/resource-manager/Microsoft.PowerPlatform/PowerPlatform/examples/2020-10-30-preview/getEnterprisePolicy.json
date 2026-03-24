@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2020-10-30-preview",
+    "enterprisePolicyName": "enterprisePolicy",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "enterprisePolicy",
+        "type": "Microsoft.PowerPlatform/enterprisePolicies",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.PowerPlatform/enterprisePolicies/enterprisePolicy",
+        "identity": {
+          "type": "SystemAssigned",
+          "systemAssignedIdentityPrincipalId": "principalId",
+          "tenantId": "tenantId"
+        },
+        "kind": "Lockbox",
+        "location": "East US",
+        "properties": {
+          "encryption": {
+            "keyVault": {
+              "id": "nnn",
+              "key": {
+                "name": "name",
+                "version": "1.0"
+              }
+            }
+          },
+          "healthStatus": "Undetermined",
+          "lockbox": {
+            "state": "succeeded"
+          },
+          "networkInjection": {
+            "virtualNetworks": [
+              {
+                "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/virtualNetwork",
+                "subnet": {
+                  "name": "testSubnet"
+                }
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "EnterprisePolicies_Get",
+  "title": "Get an EnterprisePolicy"
+}
