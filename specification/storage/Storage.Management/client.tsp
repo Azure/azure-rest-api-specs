@@ -45,8 +45,11 @@ enum Action {
 @@alternateType(IPRule.action, Action, "java");
 @@alternateType(VirtualNetworkRule.action, Action, "java");
 
-@@alternateType(TriggerParameters.intervalUnit, IntervalUnit, "java");
-@@alternateType(TriggerParametersUpdate.intervalUnit, IntervalUnit, "java");
+@@alternateType(TriggerParameters.intervalUnit, IntervalUnitEnum, "java");
+@@alternateType(TriggerParametersUpdate.intervalUnit, IntervalUnitEnum, "java");
+
+@@alternateType(ExecutionTrigger.type, TriggerTypeEnum, "java");
+@@alternateType(ExecutionTriggerUpdate.type, TriggerTypeEnum, "java");
 
 @@usage(StorageAccount,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
@@ -93,3 +96,20 @@ op getDeletedAccountCustomized(
   "Planned",
   "python"
 );
+
+// Mirror enums for Java backward compatibility (union -> enum)
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by using enum in place of string union type"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror enum for backward compatibility"
+enum IntervalUnitEnum {
+  Days: "Days",
+}
+@@clientName(IntervalUnitEnum, "IntervalUnit", "java");
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by using enum in place of string union type"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror enum for backward compatibility"
+enum TriggerTypeEnum {
+  RunOnce: "RunOnce",
+  OnSchedule: "OnSchedule",
+  MockRun: "MockRun",
+}
+@@clientName(TriggerTypeEnum, "TriggerType", "java");
