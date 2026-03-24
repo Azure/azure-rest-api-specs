@@ -42,5 +42,6 @@ using Azure.ClientGenerator.Core;
     WorkbooksApi,
     WorkbookTemplatesApi
   ],
+  autoMergeService: true,
 })
 namespace ApplicationInsightsManagementClient;
