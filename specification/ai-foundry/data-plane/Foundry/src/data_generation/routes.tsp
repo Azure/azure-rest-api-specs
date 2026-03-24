@@ -38,6 +38,14 @@ interface DataGenerationJobs {
       @doc("Number of data generation jobs to retrieve.")
       @query
       limit?: int32 = 20;
+
+      @doc("Filter data generation jobs by their purpose.")
+      @query
+      purpose?: DataGenerationJobPurpose;
+
+      @doc("Filter data generation jobs by their type.")
+      @query
+      type?: DataGenerationJobType;
     },
     Array<DataGenerationJob>
   >;
@@ -54,5 +62,34 @@ interface DataGenerationJobs {
       dataGenerationJob: DataGenerationJob;
     },
     DataGenerationJob
+  >;
+
+  /**
+   * Cancels a data generation job by its ID.
+   */
+  @summary("Cancels a data generation job.")
+  @post
+  cancel is OpenAIOperation<
+    {
+      @doc("The ID of the data generation job to cancel.")
+      @path
+      @maxLength(1024)
+      data_generation_job_id: string;
+    },
+    DataGenerationJob
+  >;
+
+  /**
+   * Deletes a data generation job by its ID.
+   */
+  @delete
+  delete is OpenAIOperation<
+    {
+      @doc("The ID of the data generation job to delete.")
+      @path
+      @maxLength(1024)
+      data_generation_job_id: string;
+    },
+    NoContentResponse
   >;
 }
