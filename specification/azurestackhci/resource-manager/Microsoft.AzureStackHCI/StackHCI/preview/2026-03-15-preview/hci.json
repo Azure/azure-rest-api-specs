@@ -7081,6 +7081,9 @@
         "x-ms-examples": {
           "EdgeMachineDiskJobs_Get": {
             "$ref": "./examples/EdgeMachineDiskJobs_Get.json"
+          },
+          "EdgeMachineDiskJobs_Get_SyncConfiguration": {
+            "$ref": "./examples/EdgeMachineDiskJobs_Get_SyncConfiguration.json"
           }
         }
       },
@@ -7168,6 +7171,9 @@
         "x-ms-examples": {
           "EdgeMachineDiskJobs_CreateOrUpdate": {
             "$ref": "./examples/EdgeMachineDiskJobs_CreateOrUpdate.json"
+          },
+          "EdgeMachineDiskJobs_CreateOrUpdate_SyncConfiguration": {
+            "$ref": "./examples/EdgeMachineDiskJobs_CreateOrUpdate_SyncConfiguration.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9357,6 +9363,25 @@
           }
         ]
       }
+    },
+    "ApplyConfigurationNetworkAdapterJobProperties": {
+      "type": "object",
+      "description": "Properties for applying network adapter configuration.",
+      "properties": {
+        "targetConfiguration": {
+          "$ref": "#/definitions/NetworkAdapterConfiguration",
+          "description": "The desired network configuration to apply."
+        }
+      },
+      "required": [
+        "targetConfiguration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineNetworkAdapterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ApplyConfiguration"
     },
     "ArcConnectivityProperties": {
       "type": "object",
@@ -14149,10 +14174,6 @@
             "create"
           ]
         },
-        "targetConfiguration": {
-          "$ref": "#/definitions/NetworkAdapterConfiguration",
-          "description": "The desired network configuration to apply."
-        },
         "deploymentMode": {
           "$ref": "#/definitions/DeploymentMode",
           "description": "Deployment mode to trigger job."
@@ -14195,9 +14216,9 @@
           "readOnly": true
         }
       },
+      "discriminator": "jobType",
       "required": [
-        "jobType",
-        "targetConfiguration"
+        "jobType"
       ]
     },
     "EdgeMachineNetworkAdapterListResult": {
@@ -15199,6 +15220,22 @@
           "description": "Extension Upgrade Target Version."
         }
       }
+    },
+    "ForcePushNetworkAdapterJobProperties": {
+      "type": "object",
+      "description": "Properties for force push of network adapter configuration.",
+      "properties": {
+        "targetConfiguration": {
+          "$ref": "#/definitions/NetworkAdapterConfiguration",
+          "description": "The desired network configuration to apply."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineNetworkAdapterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ForcePush"
     },
     "GpuCreatePartitionJobProperties": {
       "type": "object",
@@ -17264,7 +17301,8 @@
       "description": "Type of network adapter job operation.",
       "enum": [
         "ApplyConfiguration",
-        "ForcePush"
+        "ForcePush",
+        "SyncConfiguration"
       ],
       "x-ms-enum": {
         "name": "NetworkAdapterJobType",
@@ -17279,6 +17317,11 @@
             "name": "ForcePush",
             "value": "ForcePush",
             "description": "Force push configuration to the network adapter."
+          },
+          {
+            "name": "SyncConfiguration",
+            "value": "SyncConfiguration",
+            "description": "Job to resolve configuration drift between desired and reported state."
           }
         ]
       }
@@ -21426,15 +21469,6 @@
           "x-ms-mutability": [
             "create"
           ]
-        },
-        "driftDetails": {
-          "type": "array",
-          "description": "Details of the detected drift.",
-          "items": {
-            "$ref": "#/definitions/DriftDetail"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -21443,6 +21477,28 @@
       "allOf": [
         {
           "$ref": "#/definitions/EdgeMachineDiskJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SyncConfiguration"
+    },
+    "SyncConfigurationNetworkAdapterJobProperties": {
+      "type": "object",
+      "description": "Properties for resolving network adapter configuration drift.",
+      "properties": {
+        "resolutionStrategy": {
+          "$ref": "#/definitions/ResolutionStrategy",
+          "description": "The strategy to use for resolving the configuration drift.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "resolutionStrategy"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineNetworkAdapterJobProperties"
         }
       ],
       "x-ms-discriminator-value": "SyncConfiguration"
