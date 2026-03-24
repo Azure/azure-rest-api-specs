@@ -1,3 +1,14 @@
 - tool: TypeSpecRequirement
   path: ./preview/2020-10-30-preview/*.json
   reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  reason: >
+    Only Go emitter is configured in [tspconfig.yaml]
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+  paths: 
+    - tspconfig.yaml
