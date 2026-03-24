@@ -29,7 +29,7 @@ alias DefaultVirtualMachines = {
   /** Static virtual machine segment for bulk VM operations. */
   @path
   @segment("virtualMachines")
-  virtualMachines: "BulkVmOperations";
+  virtualMachines: "bulkVmOperations";
 };
 
 @@clientName(VirtualMachineBulkOperations.bulkDeallocate::parameters.body,
