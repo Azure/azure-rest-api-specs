@@ -5684,6 +5684,7 @@ model RaiPolicyListResult {
 /**
  * The provisioning state of a compute resource.
  */
+@added(Versions.v2026_01_15_preview)
 union ComputeProvisioningState {
   string,
 
@@ -5712,6 +5713,7 @@ union ComputeProvisioningState {
 /**
  * VM priority for a compute pool.
  */
+@added(Versions.v2026_01_15_preview)
 union VmPriority {
   string,
 
@@ -5725,6 +5727,7 @@ union VmPriority {
 /**
  * Compute pool configuration.
  */
+@added(Versions.v2026_01_15_preview)
 model Pool {
   /**
    * Pool name identifier.
@@ -5750,6 +5753,7 @@ model Pool {
 /**
  * Properties of a compute resource.
  */
+@added(Versions.v2026_01_15_preview)
 model ComputeProperties {
   /**
    * Pools attached to this compute cluster.
@@ -5783,6 +5787,7 @@ model ComputeProperties {
 /**
  * The list of cognitive services computes operation response.
  */
+@added(Versions.v2026_01_15_preview)
 model ComputeListResult {
   /**
    * The link used to get the next page of compute resources.

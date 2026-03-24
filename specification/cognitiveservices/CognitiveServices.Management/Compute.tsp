@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Account.tsp";
 
@@ -9,12 +10,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.CognitiveServices;
 
 /**
  * Cognitive Services compute cluster resource.
  */
+@added(Versions.v2026_01_15_preview)
 @parentResource(Account)
 model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   ...ResourceNameParameter<
@@ -57,19 +60,20 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   identity?: Identity;
 }
 
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface Computes {
   /**
    * Gets the specified compute associated with the Cognitive Services account.
    */
-  @tag("CognitiveServicesComputes")
+  @tag("Computes")
   get is ArmResourceRead<Compute>;
 
   /**
    * Creates or updates a compute associated with the Cognitive Services account.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("CognitiveServicesComputes")
+  @tag("Computes")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Compute,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Compute> &
@@ -79,13 +83,13 @@ interface Computes {
   /**
    * Deletes the specified compute associated with the Cognitive Services account.
    */
-  @tag("CognitiveServicesComputes")
+  @tag("Computes")
   delete is ArmResourceDeleteWithoutOkAsync<Compute>;
 
   /**
    * Gets the computes associated with the Cognitive Services account.
    */
-  @tag("CognitiveServicesComputes")
+  @tag("Computes")
   list is ArmResourceListByParent<Compute, Response = ComputeListResult>;
 }
 
