@@ -133,18 +133,6 @@ using Microsoft.Purview;
   "csharp"
 );
 @@clientName(UsagesOperationGroup.get, "GetUsages", "csharp");
-
-// --- access / usage overrides ---
-// AccountProperties: public class, input+output (exposed in PurviewAccountPatch.Properties)
-@@access(AccountProperties, Access.public, "csharp");
-@@usage(AccountProperties,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
-  "csharp"
-);
-// AccountSku: public class, output-only (internal constructor, get-only properties)
-@@access(AccountSku, Access.public, "csharp");
-@@usage(AccountSku, Azure.ClientGenerator.Core.Usage.output, "csharp");
-
 // --- alternateType overrides ---
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
