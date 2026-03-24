@@ -107,12 +107,6 @@
 |------|------------|-------|
 | `definitions.CloudErrorBody__added` | added | `{"type":"object","description":"The error detail.","properties":{"code":{"type":"string","descriptio...` |
 
-### Changes for `Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems__added` | added | `{"type":"object","properties":{"id":{"type":"string","description":"Edge identifier"},"targetId":{"t...` |
-
 ### Changes for `ErrorAdditionalInfo`
 
 | Path | Change Type | Value |
@@ -161,11 +155,17 @@
 |------|------------|-------|
 | `definitions.SecurityAssessmentPropertiesBaseRiskPathsItem__added` | added | `{"type":"object","properties":{"id":{"type":"string","description":"Unique identifier for the path"}...` |
 
-### Changes for `SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem`
+### Changes for `SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem__added` | added | `{"type":"object","properties":{"id":{"type":"string","description":"Node identifier"},"nodePropertie...` |
+| `definitions.SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem__added` | added | `{"type":"object","properties":{"id":{"type":"string","description":"Edge identifier"},"targetId":{"t...` |
+
+### Changes for `SecurityAssessmentPropertiesBaseRiskPathsItemNodesItem`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.SecurityAssessmentPropertiesBaseRiskPathsItemNodesItem__added` | added | `{"type":"object","properties":{"id":{"type":"string","description":"Node identifier"},"nodePropertie...` |
 
 ### Changes for `readOnly`
 

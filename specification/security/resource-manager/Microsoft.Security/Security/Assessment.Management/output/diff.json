@@ -382,28 +382,6 @@
       },
       "x-ms-external": true
     },
-    "Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems__added": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Edge identifier"
-        },
-        "targetId": {
-          "type": "string",
-          "description": "Target node identifier"
-        },
-        "sourceId": {
-          "type": "string",
-          "description": "Source node identifier"
-        }
-      },
-      "required": [
-        "id",
-        "sourceId",
-        "targetId"
-      ]
-    },
     "ErrorAdditionalInfo__added": {
       "type": "object",
       "description": "The resource management error additional info.",
@@ -597,19 +575,41 @@
         "nodes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem"
+            "$ref": "#/definitions/SecurityAssessmentPropertiesBaseRiskPathsItemNodesItem"
           }
         },
         "edges": {
           "type": "array",
           "description": "Connections between nodes",
           "items": {
-            "$ref": "#/definitions/Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems"
+            "$ref": "#/definitions/SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem"
           }
         }
       }
     },
-    "SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem__added": {
+    "SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem__added": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Edge identifier"
+        },
+        "targetId": {
+          "type": "string",
+          "description": "Target node identifier"
+        },
+        "sourceId": {
+          "type": "string",
+          "description": "Source node identifier"
+        }
+      },
+      "required": [
+        "id",
+        "sourceId",
+        "targetId"
+      ]
+    },
+    "SecurityAssessmentPropertiesBaseRiskPathsItemNodesItem__added": {
       "type": "object",
       "properties": {
         "id": {

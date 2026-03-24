@@ -66,7 +66,7 @@ interface SecurityAssessmentMetadataResponses {
     ErrorType = CloudError
   >;
 }
-alias AssessmentsMetadatumOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+alias AssessmentsMetadatumOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
@@ -77,14 +77,14 @@ alias AssessmentsMetadatumOps = Azure.ResourceManager.Legacy.ExtensionOperations
     @key
     providerNamespace: "Microsoft.Security";
   },
-  {},
   {
     /** The Assessment Key - Unique key for the assessment type */
     @path
     @segment("assessmentMetadata")
     @key
     assessmentMetadataName: string;
-  }
+  },
+  {}
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -95,7 +95,7 @@ interface AssessmentsMetadata {
   @tag("Assessments Metadata")
   getInSubscription is AssessmentsMetadatumOps.Read<
     SecurityAssessmentMetadataResponse,
-    ErrorType = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -106,7 +106,7 @@ interface AssessmentsMetadata {
   createInSubscription is AssessmentsMetadatumOps.CreateOrUpdateSync<
     SecurityAssessmentMetadataResponse,
     Response = ArmResourceUpdatedResponse<SecurityAssessmentMetadataResponse>,
-    ErrorType = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -117,7 +117,7 @@ interface AssessmentsMetadata {
   deleteInSubscription is AssessmentsMetadatumOps.DeleteSync<
     SecurityAssessmentMetadataResponse,
     Response = ArmDeletedResponse,
-    ErrorType = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -127,7 +127,7 @@ interface AssessmentsMetadata {
   listBySubscription is AssessmentsMetadatumOps.List<
     SecurityAssessmentMetadataResponse,
     Response = ArmResponse<SecurityAssessmentMetadataResponseList>,
-    ErrorType = CloudError
+    OverrideErrorType = CloudError
   >;
 }
 

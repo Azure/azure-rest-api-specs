@@ -1305,16 +1305,16 @@ model SecurityAssessmentPropertiesBaseRiskPathsItem {
   id?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  nodes?: SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem[];
+  nodes?: SecurityAssessmentPropertiesBaseRiskPathsItemNodesItem[];
 
   /**
    * Connections between nodes
    */
-  edges?: Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems[];
+  edges?: SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem {
+model SecurityAssessmentPropertiesBaseRiskPathsItemNodesItem {
   /**
    * Node identifier
    */
@@ -1327,7 +1327,7 @@ model SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Components1Uu4J47SchemasSecurityassessmentpropertiesbasePropertiesRiskPropertiesPathsItemsPropertiesEdgesItems {
+model SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem {
   /**
    * Edge identifier
    */
