@@ -73,6 +73,7 @@ alias CloudServiceOps = Legacy.ExtensionOperations<
     @path
     @segment("cloudServiceSlots")
     @key
+    @Azure.ClientGenerator.Core.alternateType("swap", "javascript")
     singletonResource: SingletonResource;
   }
 >;

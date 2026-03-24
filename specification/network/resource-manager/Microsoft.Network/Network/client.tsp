@@ -774,3 +774,7 @@ op replaceprivateDnsZoneGroupsList(
   replaceprivateDnsZoneGroupsList,
   "go"
 );
+@@alternateType(Microsoft.Network.EffectiveNetworkSecurityGroup,
+  string,
+  "javascript"
+);
