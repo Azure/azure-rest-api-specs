@@ -16945,9 +16945,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VaultCredentialCertificateProperties",
-          "description": "Certificate and AAD identity properties."
+          "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "VaultJob": {
       "type": "object",

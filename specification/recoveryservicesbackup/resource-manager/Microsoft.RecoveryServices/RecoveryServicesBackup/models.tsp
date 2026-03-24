@@ -8792,11 +8792,17 @@ model VaultCredentialCertificateCreateOptions {
  * and associated AAD identity details for MARS agent registration.
  */
 @added(Versions.v2026_03_01_preview)
-model VaultCredentialCertificateResponse {
+model VaultCredentialCertificateResponse
+  is Azure.ResourceManager.ProxyResource<VaultCredentialCertificateProperties> {
   /**
-   * Certificate and AAD identity properties.
+   * The name of the vault credential certificate resource.
    */
-  properties?: VaultCredentialCertificateProperties;
+  @key("vaultCredentialCertificateName")
+  @TypeSpec.Rest.segment("vaultCredentials")
+  @pattern(".*")
+  @TypeSpec.Http.path
+  @visibility(Lifecycle.Read)
+  name: string;
 }
 
 /**

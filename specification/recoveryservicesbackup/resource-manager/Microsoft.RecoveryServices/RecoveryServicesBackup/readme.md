@@ -602,8 +602,4 @@ suppressions:
     code: AvoidAdditionalProperties
     where: $.definitions.CrossTenantVaultMapping.properties.additionalProperties.additionalProperties
     reason: Inner additionalProperties schema for the dictionary-typed property is required by the service contract wire format.
-  - from: bms.json
-    code: RequiredPropertiesMissingInResourceModel
-    where: $.definitions.VaultCredentialCertificateResponse
-    reason: VaultCredentialCertificateResponse is not an ARM resource - it is a data transfer object returned by the vault credential generation LRO. It intentionally does not include id/name/type.
 ```
