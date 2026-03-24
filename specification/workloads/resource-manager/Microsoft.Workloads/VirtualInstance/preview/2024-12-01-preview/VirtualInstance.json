@@ -604,7 +604,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Request body to update the Workload Component resource.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkloadComponentUpdate"
@@ -917,7 +917,7 @@
         },
         "environmentType": {
           "$ref": "#/definitions/EnvironmentType",
-          "description": "The type of environment in which the workload system is deployed - Production / Non Production."
+          "description": "The type of environment in which the workload system is deployed - Production / NonProduction."
         },
         "environmentLabel": {
           "type": "string",
@@ -1061,7 +1061,7 @@
         },
         "componentRole": {
           "type": "string",
-          "description": "Role of the component. There can be multiple roles for a same component type. Allowed values change based on the workload type and will be defined in the workload definition. Examples of Role for SAP workloads include \"pas\"/\"aas\" for application component, \"ascs\"/\"ers\" for central component, \"backup\", etc."
+          "description": "Role of the component. There can be multiple roles for a same component type. Allowed values change based on the workload type and will be defined in the workload definition."
         },
         "resources": {
           "type": "array",

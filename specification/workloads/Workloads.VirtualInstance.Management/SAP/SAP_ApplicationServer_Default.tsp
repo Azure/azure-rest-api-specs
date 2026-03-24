@@ -41,11 +41,11 @@ model SapIcmConfiguration {
  * Defines the SAP Application Server default component profile.
  */
 @added(Versions.v2026_02_01_preview)
-model SapApplicationServerDefaultComponentProfile extends ComponentProfile {
+model SapApplicationServerDefaultComponentProfile extends ComponentProfile<SAPComponentProfileType> {
   /**
    * The component profile type.
    */
-  profileType: ComponentProfileType.SAP_ApplicationServer_Default;
+  profileType: SAPComponentProfileType.SAP_ApplicationServer_Default;
 
   /**
    * The SAP instance number. Must be a two-digit number from 00 to 99.
