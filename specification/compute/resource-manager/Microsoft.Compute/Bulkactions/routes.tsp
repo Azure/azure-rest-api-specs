@@ -80,12 +80,11 @@ alias DefaultVirtualMachines = {
 @@doc(VirtualMachineBulkOperations.bulkGetOperationsStatus::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.bulkCancelOperations::parameters.body,
+@@clientName(VirtualMachineBulkOperations.bulkCancel::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.bulkCancelOperations::parameters.body,
-  "The request body"
-);
+@@doc(VirtualMachineBulkOperations.bulkCancel::parameters.body,
+  "The request body");
 
 @armResourceOperations(#{ omitTags: true })
 interface VirtualMachineBulkOperations {
@@ -212,8 +211,8 @@ interface VirtualMachineBulkOperations {
   @post
   @autoRoute
   @armResourceCollectionAction
-  @action("cancelOperations")
-  bulkCancelOperations(
+  @action("cancel")
+  bulkCancel(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
