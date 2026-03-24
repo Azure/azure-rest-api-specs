@@ -2405,6 +2405,12 @@
           "KustoDataConnectionsEventGridUpdate": {
             "$ref": "./examples/KustoDataConnectionsEventGridUpdate.json"
           },
+          "KustoDataConnectionsEventGridWithManagedIdentityUpdate": {
+            "$ref": "./examples/KustoDataConnectionsEventGridWithManagedIdentityUpdate.json"
+          },
+          "KustoDataConnectionsEventHubWithManagedIdentityUpdate": {
+            "$ref": "./examples/KustoDataConnectionsEventHubWithManagedIdentityUpdate.json"
+          },
           "KustoDataConnectionsUpdate": {
             "$ref": "./examples/KustoDataConnectionsUpdate.json"
           }
@@ -7932,6 +7938,93 @@
         "consumerGroup"
       ]
     },
+    "EventGridConnectionWithManagedIdentityProperties": {
+      "type": "object",
+      "description": "Class representing the Kusto event grid connection with mandatory managed identity properties.",
+      "properties": {
+        "storageAccountResourceIdForManagedIdentity": {
+          "type": "string",
+          "description": "The resource ID of the storage account where the data resides."
+        },
+        "eventHubResourceIdForManagedIdentity": {
+          "type": "string",
+          "description": "The resource ID of the event hub that is subscribed to the storage account events."
+        },
+        "eventGridResourceId": {
+          "type": "string",
+          "description": "The resource ID where the event grid is configured to send events."
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "The event hub consumer group."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table where the data should be ingested. Optionally the table information can be added to each message."
+        },
+        "mappingRuleName": {
+          "type": "string",
+          "description": "The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message."
+        },
+        "dataFormat": {
+          "$ref": "#/definitions/EventGridDataFormat",
+          "description": "The data format of the message. Optionally the data format can be added to each message."
+        },
+        "ignoreFirstRecord": {
+          "type": "boolean",
+          "description": "A Boolean value that, if set to true, indicates that ingestion should ignore the first record of every file"
+        },
+        "blobStorageEventType": {
+          "$ref": "#/definitions/BlobStorageEventType",
+          "description": "The name of blob storage event type to process."
+        },
+        "managedIdentityResourceId": {
+          "type": "string",
+          "description": "The resource ID of a managed identity (system or user assigned) to be used to authenticate with event hub and storage account."
+        },
+        "managedIdentityObjectId": {
+          "type": "string",
+          "description": "The object ID of managedIdentityResourceId",
+          "readOnly": true
+        },
+        "databaseRouting": {
+          "type": "string",
+          "description": "Indication for database routing information from the data connection, by default only database routing information is allowed",
+          "default": "Single",
+          "enum": [
+            "Single",
+            "Multi"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseRouting",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Single",
+                "value": "Single",
+                "description": "Single"
+              },
+              {
+                "name": "Multi",
+                "value": "Multi",
+                "description": "Multi"
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "storageAccountResourceIdForManagedIdentity",
+        "eventHubResourceIdForManagedIdentity",
+        "consumerGroup",
+        "managedIdentityResourceId"
+      ]
+    },
     "EventGridDataConnection": {
       "type": "object",
       "description": "Class representing an Event Grid data connection.",
@@ -7948,6 +8041,23 @@
         }
       ],
       "x-ms-discriminator-value": "EventGrid"
+    },
+    "EventGridDataConnectionWithManagedIdentity": {
+      "type": "object",
+      "description": "Class representing an Event Grid data connection with mandatory managed identity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventGridConnectionWithManagedIdentityProperties",
+          "description": "The properties of the Event Grid data connection with mandatory managed identity.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnection"
+        }
+      ],
+      "x-ms-discriminator-value": "EventGridWithManagedIdentity"
     },
     "EventGridDataFormat": {
       "type": "string",
@@ -8169,6 +8279,113 @@
         "consumerGroup"
       ]
     },
+    "EventHubConnectionWithManagedIdentityProperties": {
+      "type": "object",
+      "description": "Class representing the Kusto event hub connection with required managed identity properties.",
+      "properties": {
+        "eventHubResourceIdForManagedIdentity": {
+          "type": "string",
+          "description": "The resource ID of the event hub to be used to create a data connection."
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "The event hub consumer group."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table where the data should be ingested. Optionally the table information can be added to each message."
+        },
+        "mappingRuleName": {
+          "type": "string",
+          "description": "The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message."
+        },
+        "dataFormat": {
+          "$ref": "#/definitions/EventHubDataFormat",
+          "description": "The data format of the message. Optionally the data format can be added to each message."
+        },
+        "eventSystemProperties": {
+          "type": "array",
+          "description": "System properties of the event hub",
+          "items": {
+            "type": "string"
+          }
+        },
+        "compression": {
+          "type": "string",
+          "description": "The compression type",
+          "default": "None",
+          "enum": [
+            "None",
+            "GZip"
+          ],
+          "x-ms-enum": {
+            "name": "Compression",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "None"
+              },
+              {
+                "name": "GZip",
+                "value": "GZip",
+                "description": "GZip"
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource.",
+          "readOnly": true
+        },
+        "managedIdentityResourceId": {
+          "type": "string",
+          "description": "The resource ID of a managed identity (system or user assigned) to be used to authenticate with event hub."
+        },
+        "managedIdentityObjectId": {
+          "type": "string",
+          "description": "The object ID of the managedIdentityResourceId",
+          "readOnly": true
+        },
+        "databaseRouting": {
+          "type": "string",
+          "description": "Indication for database routing information from the data connection, by default only database routing information is allowed",
+          "default": "Single",
+          "enum": [
+            "Single",
+            "Multi"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseRouting",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Single",
+                "value": "Single",
+                "description": "Single"
+              },
+              {
+                "name": "Multi",
+                "value": "Multi",
+                "description": "Multi"
+              }
+            ]
+          }
+        },
+        "retrievalStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When defined, the data connection retrieves existing Event hub events created since the Retrieval start date. It can only retrieve events retained by the Event hub, based on its retention period."
+        }
+      },
+      "required": [
+        "eventHubResourceIdForManagedIdentity",
+        "consumerGroup",
+        "managedIdentityResourceId"
+      ]
+    },
     "EventHubDataConnection": {
       "type": "object",
       "description": "Class representing an event hub data connection.",
@@ -8185,6 +8402,23 @@
         }
       ],
       "x-ms-discriminator-value": "EventHub"
+    },
+    "EventHubDataConnectionWithManagedIdentity": {
+      "type": "object",
+      "description": "Class representing an event hub data connection with required managed identity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventHubConnectionWithManagedIdentityProperties",
+          "description": "The Event Hub data connection properties to validate.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnection"
+        }
+      ],
+      "x-ms-discriminator-value": "EventHubWithManagedIdentity"
     },
     "EventHubDataFormat": {
       "type": "string",
@@ -8205,7 +8439,8 @@
         "PARQUET",
         "ORC",
         "APACHEAVRO",
-        "W3CLOGFILE"
+        "W3CLOGFILE",
+        "AZMONSTREAM"
       ],
       "x-ms-enum": {
         "name": "EventHubDataFormat",
@@ -8290,6 +8525,11 @@
             "name": "W3CLOGFILE",
             "value": "W3CLOGFILE",
             "description": "W3CLOGFILE"
+          },
+          {
+            "name": "AZMONSTREAM",
+            "value": "AZMONSTREAM",
+            "description": "AZMONSTREAM"
           }
         ]
       }

@@ -897,7 +897,7 @@ union Kind {
   ReadOnlyFollowing: "ReadOnlyFollowing",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union CallerRole {
   string,
 
@@ -1210,6 +1210,11 @@ union EventHubDataFormat {
    * W3CLOGFILE
    */
   W3CLOGFILE: "W3CLOGFILE",
+
+  /**
+   * AZMONSTREAM
+   */
+  AZMONSTREAM: "AZMONSTREAM",
 }
 
 /**
@@ -1445,7 +1450,7 @@ union BlobStorageEventType {
 /**
  * The type of resource, for instance Microsoft.Kusto/clusters/databases.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum Type {
   /**
    * Microsoft.Kusto/clusters/databases
@@ -1502,11 +1507,11 @@ model Identity {
   /**
    * The list of user identities associated with the Kusto cluster. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties {
   /**
    * The principal id of user assigned identity.
@@ -1860,7 +1865,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * Provisioning state of the private endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -1929,12 +1934,12 @@ model MigrationClusterProperties {
 /**
  * Class representing an update to a Kusto cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterUpdate extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -2225,7 +2230,7 @@ model FollowerDatabaseDefinition {
   databaseShareOrigin?: DatabaseShareOrigin;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DiagnoseVirtualNetworkResult {
   /**
    * The list of network connectivity diagnostic finding
@@ -2866,7 +2871,7 @@ model PrivateLinkResourceListResult {
 /**
  * Properties of a private link resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
@@ -2890,7 +2895,7 @@ model PrivateLinkResourceProperties {
 /**
  * Endpoints accessed for a common purpose that the Kusto Service Environment requires outbound network access to.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OutboundNetworkDependenciesEndpoint
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -3152,7 +3157,7 @@ model Operation {
   /**
    * Properties of the operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Properties of the operation.")
   properties?: unknown;
 }
@@ -3677,7 +3682,7 @@ model CosmosDbDataConnectionProperties {
 /**
  * Class representing a read write database.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ReadWriteDatabase extends Database {
   /**
    * The database properties.
@@ -3693,7 +3698,7 @@ model ReadWriteDatabase extends Database {
 /**
  * Class representing a read only following database.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ReadOnlyFollowingDatabase extends Database {
   /**
    * The database properties.
@@ -3709,7 +3714,7 @@ model ReadOnlyFollowingDatabase extends Database {
 /**
  * Class representing an event hub data connection.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EventHubDataConnection extends DataConnection {
   /**
    * The Event Hub data connection properties to validate.
@@ -3725,7 +3730,7 @@ model EventHubDataConnection extends DataConnection {
 /**
  * Class representing an iot hub data connection.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IotHubDataConnection extends DataConnection {
   /**
    * The Iot Hub data connection properties.
@@ -3741,7 +3746,7 @@ model IotHubDataConnection extends DataConnection {
 /**
  * Class representing an Event Grid data connection.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EventGridDataConnection extends DataConnection {
   /**
    * The properties of the Event Grid data connection.
@@ -3757,7 +3762,7 @@ model EventGridDataConnection extends DataConnection {
 /**
  * Class representing a CosmosDb data connection.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CosmosDbDataConnection extends DataConnection {
   /**
    * The properties of the CosmosDb data connection.
@@ -3774,3 +3779,175 @@ model CosmosDbDataConnection extends DataConnection {
  * The list Kusto sandbox custom images operation response.
  */
 model SandboxCustomImagesListResult is Azure.Core.Page<SandboxCustomImage>;
+
+/**
+ * Class representing an Event Grid data connection with mandatory managed identity.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model EventGridDataConnectionWithManagedIdentity extends DataConnection {
+  /**
+   * The properties of the Event Grid data connection with mandatory managed identity.
+   */
+  properties?: EventGridConnectionWithManagedIdentityProperties;
+
+  /**
+   * Kind of the endpoint for the data connection
+   */
+  kind: "EventGridWithManagedIdentity";
+}
+
+/**
+ * Class representing the Kusto event grid connection with mandatory managed identity properties.
+ */
+model EventGridConnectionWithManagedIdentityProperties {
+  /**
+   * The resource ID of the storage account where the data resides.
+   */
+  storageAccountResourceIdForManagedIdentity: string;
+
+  /**
+   * The resource ID of the event hub that is subscribed to the storage account events.
+   */
+  eventHubResourceIdForManagedIdentity: string;
+
+  /**
+   * The resource ID where the event grid is configured to send events.
+   */
+  eventGridResourceId?: string;
+
+  /**
+   * The event hub consumer group.
+   */
+  consumerGroup: string;
+
+  /**
+   * The table where the data should be ingested. Optionally the table information can be added to each message.
+   */
+  tableName?: string;
+
+  /**
+   * The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message.
+   */
+  mappingRuleName?: string;
+
+  /**
+   * The data format of the message. Optionally the data format can be added to each message.
+   */
+  dataFormat?: EventGridDataFormat;
+
+  /**
+   * A Boolean value that, if set to true, indicates that ingestion should ignore the first record of every file
+   */
+  ignoreFirstRecord?: boolean;
+
+  /**
+   * The name of blob storage event type to process.
+   */
+  blobStorageEventType?: BlobStorageEventType;
+
+  /**
+   * The resource ID of a managed identity (system or user assigned) to be used to authenticate with event hub and storage account.
+   */
+  managedIdentityResourceId: string;
+
+  /**
+   * The object ID of managedIdentityResourceId
+   */
+  @visibility(Lifecycle.Read)
+  managedIdentityObjectId?: string;
+
+  /**
+   * Indication for database routing information from the data connection, by default only database routing information is allowed
+   */
+  databaseRouting?: DatabaseRouting = "Single";
+
+  /**
+   * The provisioned state of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Class representing an event hub data connection with required managed identity.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model EventHubDataConnectionWithManagedIdentity extends DataConnection {
+  /**
+   * The Event Hub data connection properties to validate.
+   */
+  properties?: EventHubConnectionWithManagedIdentityProperties;
+
+  /**
+   * Kind of the endpoint for the data connection
+   */
+  kind: "EventHubWithManagedIdentity";
+}
+
+/**
+ * Class representing the Kusto event hub connection with required managed identity properties.
+ */
+model EventHubConnectionWithManagedIdentityProperties {
+  /**
+   * The resource ID of the event hub to be used to create a data connection.
+   */
+  eventHubResourceIdForManagedIdentity: string;
+
+  /**
+   * The event hub consumer group.
+   */
+  consumerGroup: string;
+
+  /**
+   * The table where the data should be ingested. Optionally the table information can be added to each message.
+   */
+  tableName?: string;
+
+  /**
+   * The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message.
+   */
+  mappingRuleName?: string;
+
+  /**
+   * The data format of the message. Optionally the data format can be added to each message.
+   */
+  dataFormat?: EventHubDataFormat;
+
+  /**
+   * System properties of the event hub
+   */
+  eventSystemProperties?: string[];
+
+  /**
+   * The compression type
+   */
+  compression?: Compression = Compression.None;
+
+  /**
+   * The provisioned state of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * The resource ID of a managed identity (system or user assigned) to be used to authenticate with event hub.
+   */
+  managedIdentityResourceId: string;
+
+  /**
+   * The object ID of the managedIdentityResourceId
+   */
+  @visibility(Lifecycle.Read)
+  managedIdentityObjectId?: string;
+
+  /**
+   * Indication for database routing information from the data connection, by default only database routing information is allowed
+   */
+  databaseRouting?: DatabaseRouting = "Single";
+
+  /**
+   * When defined, the data connection retrieves existing Event hub events created since the Retrieval start date. It can only retrieve events retained by the Event hub, based on its retention period.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  retrievalStartDate?: utcDateTime;
+}

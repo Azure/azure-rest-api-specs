@@ -15,10 +15,10 @@ namespace Microsoft.Kusto;
 /**
  * Class representing a Kusto database.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" ""
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Cluster)
 @discriminator("kind")
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
@@ -34,13 +34,13 @@ model Database extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Resource location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 
   /**
    * Kind of the database
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind: Kind;
 }
 
@@ -55,8 +55,8 @@ interface Databases {
   /**
    * Creates or updates a database.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Database,
@@ -81,7 +81,7 @@ interface Databases {
   /**
    * Updates a database.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -110,7 +110,7 @@ interface Databases {
   /**
    * Deletes the database with the given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   delete is ArmResourceDeleteWithoutOkAsync<
     Database,
