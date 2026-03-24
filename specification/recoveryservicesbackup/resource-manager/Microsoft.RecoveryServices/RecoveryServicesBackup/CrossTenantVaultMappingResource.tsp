@@ -30,7 +30,7 @@ model CrossTenantVaultMappingResource
     Resource = CrossTenantVaultMappingResource,
     KeyName = "crossTenantVaultMappingName",
     SegmentName = "backupCrossTenantVaultMapping",
-    NamePattern = ""
+    NamePattern = ".*"
   >;
 
   /**
@@ -142,6 +142,7 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
@@ -164,12 +165,14 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
@@ -204,30 +207,35 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
     /**
      * Fabric name associated with the backed up items.
      */
+    @pattern(".*")
     @path
     fabricName: string,
 
     /**
      * Container name associated with the backed up items.
      */
+    @pattern(".*")
     @path
     containerName: string,
 
     /**
      * Backed up item name whose details are to be fetched.
      */
+    @pattern(".*")
     @path
     protectedItemName: string,
 
@@ -250,30 +258,35 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
     /**
      * Fabric name associated with the container.
      */
+    @pattern(".*")
     @path
     fabricName: string,
 
     /**
      * Container name associated with the backed up items.
      */
+    @pattern(".*")
     @path
     containerName: string,
 
     /**
      * Backed up item name whose recovery points are to be fetched.
      */
+    @pattern(".*")
     @path
     protectedItemName: string,
 
@@ -315,30 +328,35 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
     /**
      * Fabric name associated with the backed up items.
      */
+    @pattern(".*")
     @path
     fabricName: string,
 
     /**
      * Container name associated with the backed up items.
      */
+    @pattern(".*")
     @path
     containerName: string,
 
     /**
      * Backed up item to be restored.
      */
+    @pattern(".*")
     @path
     protectedItemName: string,
 
@@ -381,30 +399,35 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
     /**
      * Fabric name associated with the backed up items.
      */
+    @pattern(".*")
     @path
     fabricName: string,
 
     /**
      * Container name associated with the backed up items.
      */
+    @pattern(".*")
     @path
     containerName: string,
 
     /**
      * Backed up item name whose details are to be fetched.
      */
+    @pattern(".*")
     @path
     protectedItemName: string,
 
@@ -438,30 +461,35 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
     /**
      * Fabric name associated with the backing up items.
      */
+    @pattern(".*")
     @path
     fabricName: string,
 
     /**
      * Container name associated with the backed up items.
      */
+    @pattern(".*")
     @path
     containerName: string,
 
     /**
      * Backup item name whose details are to be fetched.
      */
+    @pattern(".*")
     @path
     protectedItemName: string,
 
@@ -490,12 +518,14 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
@@ -530,18 +560,21 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
     /**
      * Name of the job whose details are to be fetched.
      */
+    @pattern(".*")
     @path
     jobName: string,
 
@@ -573,12 +606,14 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
@@ -621,12 +656,14 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
@@ -664,12 +701,14 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
@@ -713,12 +752,14 @@ interface CrossTenantOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
@@ -838,18 +879,21 @@ interface CrossTenantVaultCredentialOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
     /**
      * Name identifier for the certificate.
      */
+    @pattern(".*")
     @path
     certificateName: string,
 
@@ -889,18 +933,21 @@ interface CrossTenantVaultCredentialOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
     /**
      * Name identifier for the certificate.
      */
+    @pattern(".*")
     @path
     certificateName: string,
 
@@ -945,18 +992,21 @@ interface CrossTenantVaultCredentialOperations {
     /**
      * The name of the recovery services vault.
      */
+    @pattern(".*")
     @path
     vaultName: string,
 
     /**
      * Cross-tenant vault mapping name.
      */
+    @pattern(".*")
     @path
     crossTenantVaultMappingName: string,
 
     /**
      * Name identifier for the certificate.
      */
+    @pattern(".*")
     @path
     certificateName: string,
 
