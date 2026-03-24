@@ -31,3 +31,12 @@ using Azure.ClientGenerator.Core;
   "VersionForReleaseTrain",
   "java"
 );
+
+@@clientName(Microsoft.KubernetesConfiguration.ExtensionTypes.locationList,
+  "listLocationList",
+  "javascript"
+);
+@@clientName(Microsoft.KubernetesConfiguration.ExtensionTypeVersionForReleaseTrainOperationGroup.clusterListVersions,
+  "listClusterListVersions",
+  "javascript"
+);
