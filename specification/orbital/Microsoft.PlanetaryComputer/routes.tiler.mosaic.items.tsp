@@ -217,6 +217,71 @@ interface MosaicItemsTileMatrixSetsFormat {
 }
 
 @added(Versions.v2026_04_15)
+interface MosaicItemsTileMatrixSetsScaleByFormat {
+  /**
+   * Create map tile from a dataset (with TileMatrixSetId, scale, and format in path).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Tile Tilematrixsetid")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}")
+  @get
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      tileMatrixSetId: string;
+
+      ...ZxyPathParameters;
+
+      /**
+       * Numeric scale factor for the tile. Higher values produce larger tiles
+       */
+      @path
+      scale: float32;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
 interface MosaicItemsTileMatrixSetsScale {
   /**
    * Create map tile from a dataset (with scale in path, without format).
@@ -386,6 +451,70 @@ interface MosaicItemsTilesFormat {
       /** Numeric scale factor for the tile. Higher values produce larger tiles */
       @query("scale")
       scale?: int32;
+
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicItemsTilesScaleByFormat {
+  /**
+   * Create map tile from a dataset (with scale and format in path, without TileMatrixSetId).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Tile")
+  @tag("Tiles for STAC Items")
+  @route("/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x.{format}")
+  @get
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * STAC Item Identifier
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      itemId: string;
+
+      ...ZxyPathParameters;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported (default:
+       * 'WebMercatorQuad')
+       */
+      @query("TileMatrixSetId")
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+      /**
+       * Numeric scale factor for the tile. Higher values produce larger tiles
+       */
+      @path
+      scale: float32;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;

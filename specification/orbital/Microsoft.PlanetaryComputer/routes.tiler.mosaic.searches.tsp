@@ -631,6 +631,45 @@ interface MosaicSearchesBboxWithDimensions {
 }
 
 // =====================================================================
+// Searches Mosaic Assets for Bbox
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicSearchesAssetsForBbox {
+  /**
+   * Return a list of assets which overlap a given bounding box for a search.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Searches Assets For Bbox")
+  @tag("Tiles for STAC Searches")
+  @route("/data/mosaic/searches/{searchId}/bbox/{minx},{miny},{maxx},{maxy}/assets")
+  @get
+  getBboxAssets is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      ...MosaicSearchQueryParameters;
+      ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
+      ...BoundingBoxPathParameters;
+
+      /**
+       * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+       */
+      @query("coord_crs")
+      coordinateReferenceSystem?: string;
+    },
+    ApplicationJsonResponse
+  >;
+}
+
+// =====================================================================
 // Searches Mosaic Feature GeoJson Crop (POST with Feature body)
 // =====================================================================
 

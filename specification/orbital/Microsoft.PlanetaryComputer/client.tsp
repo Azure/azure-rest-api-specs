@@ -334,6 +334,8 @@ interface Data {
   getTileByFormat is MosaicItemsTileMatrixSetsFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
   getTileByScale is MosaicItemsTileMatrixSetsScale.getZxyByScale;
+  @added(Versions.v2026_04_15)
+  getTileByScaleAndFormat is MosaicItemsTileMatrixSetsScaleByFormat.getZxyScaleByFormat;
 
   // Item Tile Variants (without TileMatrixSetId in path)
   @added(Versions.v2026_04_15)
@@ -342,6 +344,8 @@ interface Data {
   getTileNoTmsByFormat is MosaicItemsTilesFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
   getTileNoTmsByScale is MosaicItemsTilesScale.getZxyByScale;
+  @added(Versions.v2026_04_15)
+  getTileNoTmsByScaleAndFormat is MosaicItemsTilesScaleByFormat.getZxyScaleByFormat;
 
   // GeoJSON Feature (bare, no format)
   @added(Versions.v2026_04_15)
@@ -510,6 +514,8 @@ interface Data {
   getSearchesBboxCrop is MosaicSearchesBbox.getCroppedToBoundingBox;
   @added(Versions.v2026_04_15)
   getSearchesBboxCropWithDimensions is MosaicSearchesBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
+  @added(Versions.v2026_04_15)
+  getSearchesBboxAssets is MosaicSearchesAssetsForBbox.getBboxAssets;
   @added(Versions.v2026_04_15)
   cropSearchesFeatureGeoJson is MosaicSearchesFeatureGeoJson.crop;
   @added(Versions.v2026_04_15)
