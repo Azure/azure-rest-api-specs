@@ -2310,7 +2310,7 @@ model SevereWeatherAlert {
   /**
    * Information about the alert specific to the affected area(s).
    */
-  alertAreas?: AlertDetails[];
+  alertAreas?: AlertArea[];
 }
 
 /**
@@ -2335,7 +2335,7 @@ model SevereWeatherAlertDescription {
  * in order of `priority` within the API response, with the highest priority alert
  * being returned at the top of the response.
  */
-model AlertDetails {
+model AlertArea {
   /**
    * The name of an area which is affected by the alert. The location that was
    * requested falls under the alert area.

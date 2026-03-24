@@ -22,9 +22,12 @@
         "in": "path",
         "required": true,
         "type": "string",
-        "format": "uri",
-        "default": "https://atlas.microsoft.com",
-        "x-ms-skip-url-encoding": true
+        "enum": [
+          "https://atlas.microsoft.com"
+        ],
+        "x-ms-enum": {
+          "modelAsString": false
+        }
       }
     ]
   },
@@ -41,10 +44,10 @@
       ]
     },
     {
-      "ApiKeyAuth": []
+      "SharedKeyAuth": []
     },
     {
-      "ApiKeyAuth": []
+      "SasTokenAuth": []
     }
   ],
   "securityDefinitions": {
@@ -58,9 +61,16 @@
       },
       "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     },
-    "ApiKeyAuth": {
+    "SasTokenAuth": {
       "type": "apiKey",
+      "description": "SAS Token Authentication",
       "name": "SAS Token",
+      "in": "header"
+    },
+    "SharedKeyAuth": {
+      "type": "apiKey",
+      "description": "Shared Key Authentication",
+      "name": "subscription-key",
       "in": "header"
     }
   },
@@ -74,14 +84,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
           },
           {
             "name": "format",
@@ -103,6 +105,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "language",
@@ -159,14 +169,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -186,6 +188,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "language",
@@ -291,14 +301,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -318,6 +320,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "language",
@@ -425,14 +435,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -452,6 +454,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "query",
@@ -542,14 +552,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -569,6 +571,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "query",
@@ -652,14 +662,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -679,6 +681,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "query",
@@ -762,14 +772,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -789,6 +791,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "query",
@@ -845,14 +855,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -872,6 +874,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "query",
@@ -955,14 +965,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -982,6 +984,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "query",
@@ -1066,14 +1076,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -1093,6 +1095,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "query",
@@ -1177,14 +1187,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -1204,6 +1206,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "query",
@@ -1288,14 +1298,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -1315,6 +1317,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "query",
@@ -1387,14 +1397,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -1414,6 +1416,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "query",
@@ -1456,14 +1466,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -1483,6 +1485,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "query",
@@ -1530,20 +1540,12 @@
     },
     "/weather/tropical/storms/{format}": {
       "get": {
-        "operationId": "SearchTropicalStorm",
+        "operationId": "GetTropicalStormSearch",
         "summary": "Use to get a list of storms issued by national weather forecasting agencies.",
         "description": "The `Get Tropical Storm Search` API is an HTTP `GET` request that returns a\nlist of government-issued tropical storms by year, basin ID, and government ID.\nInformation about the tropical storms includes, government ID, basin ID,\nstatus, year, name and if it is subtropical.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
           },
           {
             "name": "format",
@@ -1565,6 +1567,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "year",
@@ -1667,14 +1677,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -1694,6 +1696,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           }
         ],
         "responses": {
@@ -1722,14 +1732,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -1749,6 +1751,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "year",
@@ -1902,14 +1912,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "format",
             "in": "path",
             "description": "Desired format of the response. Only `json` format is supported.",
@@ -1929,6 +1931,14 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
           },
           {
             "name": "year",
@@ -2211,7 +2221,7 @@
         }
       }
     },
-    "AlertDetails": {
+    "AlertArea": {
       "type": "object",
       "description": "Information about a severe weather alert issued within an affected area(s). If\nmultiple alerts are active for the same location, the alerts will be returned\nin order of `priority` within the API response, with the highest priority alert\nbeing returned at the top of the response.",
       "properties": {
@@ -3172,107 +3182,26 @@
         }
       }
     },
-    "GeoJsonFeature": {
-      "type": "object",
-      "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
-      "properties": {
-        "geometry": {
-          "$ref": "#/definitions/GeoJsonGeometry",
-          "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Properties can contain any additional metadata about the `Feature`. Value can\nbe any JSON object or a JSON null value",
-          "additionalProperties": {}
-        },
-        "id": {
-          "type": "string",
-          "description": "Identifier for the feature."
-        },
-        "featureType": {
-          "type": "string",
-          "description": "The type of the feature. The value depends on the data model the current\nfeature is part of. Some data models may have an empty value."
-        }
-      },
-      "required": [
-        "geometry"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJsonObject"
-        }
-      ]
-    },
-    "GeoJsonFeatureCollection": {
-      "type": "object",
-      "description": "A valid `GeoJSON FeatureCollection` object type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
-      "properties": {
-        "features": {
-          "type": "array",
-          "description": "Contains a list of valid `GeoJSON Feature` objects.",
-          "items": {
-            "$ref": "#/definitions/GeoJsonFeature"
-          }
-        }
-      },
-      "required": [
-        "features"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJsonObject"
-        }
-      ]
-    },
-    "GeoJsonFeatureCollectionData": {
-      "type": "object",
-      "description": "Data contained by a GeoJSON FeatureCollection.",
-      "properties": {
-        "features": {
-          "type": "array",
-          "description": "Contains a list of valid `GeoJSON Feature` objects.",
-          "items": {
-            "$ref": "#/definitions/GeoJsonFeature"
-          }
-        }
-      },
-      "required": [
-        "features"
-      ]
-    },
-    "GeoJsonFeatureData": {
-      "type": "object",
-      "description": "Data contained by a GeoJSON Feature.",
-      "properties": {
-        "geometry": {
-          "$ref": "#/definitions/GeoJsonGeometry",
-          "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Properties can contain any additional metadata about the `Feature`. Value can\nbe any JSON object or a JSON null value",
-          "additionalProperties": {}
-        },
-        "id": {
-          "type": "string",
-          "description": "Identifier for the feature."
-        },
-        "featureType": {
-          "type": "string",
-          "description": "The type of the feature. The value depends on the data model the current\nfeature is part of. Some data models may have an empty value."
-        }
-      },
-      "required": [
-        "geometry"
-      ]
-    },
     "GeoJsonGeometry": {
       "type": "object",
       "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJsonObject"
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GeoJsonObjectType",
+          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection."
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box. Projection used - EPSG:3857. Please refer to [RFC\n7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
         }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
       ]
     },
     "GeoJsonGeometryCollection": {
@@ -3294,23 +3223,8 @@
         {
           "$ref": "#/definitions/GeoJsonGeometry"
         }
-      ]
-    },
-    "GeoJsonGeometryCollectionData": {
-      "type": "object",
-      "description": "Data contained by a GeoJSON GeometryCollection.",
-      "properties": {
-        "geometries": {
-          "type": "array",
-          "description": "Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates\nin GeoJSON are in x, y order (longitude, latitude).",
-          "items": {
-            "$ref": "#/definitions/GeoJsonGeometry"
-          }
-        }
-      },
-      "required": [
-        "geometries"
-      ]
+      ],
+      "x-ms-discriminator-value": "GeometryCollection"
     },
     "GeoJsonLineString": {
       "type": "object",
@@ -3335,27 +3249,8 @@
         {
           "$ref": "#/definitions/GeoJsonGeometry"
         }
-      ]
-    },
-    "GeoJsonLineStringData": {
-      "type": "object",
-      "description": "Data contained by a GeoJSON LineString.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "Coordinates for the `GeoJson LineString` geometry.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
+      ],
+      "x-ms-discriminator-value": "LineString"
     },
     "GeoJsonMultiLineString": {
       "type": "object",
@@ -3383,30 +3278,8 @@
         {
           "$ref": "#/definitions/GeoJsonGeometry"
         }
-      ]
-    },
-    "GeoJsonMultiLineStringData": {
-      "type": "object",
-      "description": "Data contained by a GeoJSON MultiLineString.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "Coordinates for the `GeoJson MultiLineString` geometry.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
+      ],
+      "x-ms-discriminator-value": "MultiLineString"
     },
     "GeoJsonMultiPoint": {
       "type": "object",
@@ -3431,27 +3304,8 @@
         {
           "$ref": "#/definitions/GeoJsonGeometry"
         }
-      ]
-    },
-    "GeoJsonMultiPointData": {
-      "type": "object",
-      "description": "Data contained by a `GeoJson MultiPoint`.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "Coordinates for the `GeoJson MultiPoint` geometry.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
+      ],
+      "x-ms-discriminator-value": "MultiPoint"
     },
     "GeoJsonMultiPolygon": {
       "type": "object",
@@ -3482,46 +3336,8 @@
         {
           "$ref": "#/definitions/GeoJsonGeometry"
         }
-      ]
-    },
-    "GeoJsonMultiPolygonData": {
-      "type": "object",
-      "description": "Data contained by a GeoJSON MultiPolygon.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "Contains a list of valid `GeoJSON Polygon` objects. **Note** that coordinates\nin GeoJSON are in x, y order (longitude, latitude).",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "array",
-                "items": {
-                  "type": "number",
-                  "format": "double"
-                }
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
-    },
-    "GeoJsonObject": {
-      "type": "object",
-      "description": "A valid `GeoJSON` object. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3) for details.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/GeoJsonObjectType",
-          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection."
-        }
-      },
-      "required": [
-        "type"
-      ]
+      ],
+      "x-ms-discriminator-value": "MultiPolygon"
     },
     "GeoJsonObjectType": {
       "type": "string",
@@ -3539,7 +3355,7 @@
       ],
       "x-ms-enum": {
         "name": "GeoJsonObjectType",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "GeoJsonPoint",
@@ -3609,24 +3425,8 @@
         {
           "$ref": "#/definitions/GeoJsonGeometry"
         }
-      ]
-    },
-    "GeoJsonPointData": {
-      "type": "object",
-      "description": "Data contained by a `GeoJson Point`.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "A `Position` is an array of numbers with two or more elements. The first two\nelements are _longitude_ and _latitude_, precisely in that order.\n_Altitude/Elevation_ is an optional third element. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
+      ],
+      "x-ms-discriminator-value": "Point"
     },
     "GeoJsonPolygon": {
       "type": "object",
@@ -3654,30 +3454,8 @@
         {
           "$ref": "#/definitions/GeoJsonGeometry"
         }
-      ]
-    },
-    "GeoJsonPolygonData": {
-      "type": "object",
-      "description": "Data contained by a GeoJSON Polygon.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "Coordinates for the `GeoJson Polygon` geometry type.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
+      ],
+      "x-ms-discriminator-value": "Polygon"
     },
     "HazardDetail": {
       "type": "object",
@@ -4457,7 +4235,7 @@
             "description": "Ozone"
           },
           {
-            "name": "PM2.5",
+            "name": "PM2_5",
             "value": "PM2.5",
             "description": "Particulate matter 2.5"
           },
@@ -4748,7 +4526,7 @@
           "type": "array",
           "description": "Information about the alert specific to the affected area(s).",
           "items": {
-            "$ref": "#/definitions/AlertDetails"
+            "$ref": "#/definitions/AlertArea"
           }
         }
       }

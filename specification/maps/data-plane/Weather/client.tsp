@@ -58,9 +58,10 @@ namespace Customizations;
 @@clientName(SevereWeatherAlertDescription.localized, "description");
 @@clientName(SevereWeatherAlertDescription.english, "status");
 
-@@clientName(AlertDetails.summary, "description");
-@@clientName(AlertDetails.alertDetails, "details");
-@@clientName(AlertDetails.alertDetailsLanguageCode, "language");
+@@clientName(AlertArea, "AlertDetails");
+@@clientName(AlertArea.summary, "description");
+@@clientName(AlertArea.alertDetails, "details");
+@@clientName(AlertArea.alertDetailsLanguageCode, "language");
 
 @@clientName(DailyIndex.category, "categoryDescription");
 @@clientName(DailyIndex.ascending, "isAscending");
