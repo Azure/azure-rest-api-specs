@@ -15,7 +15,7 @@ compatibility:
 | Tool                                                   | Purpose                                                   |
 | ------------------------------------------------------ | --------------------------------------------------------- |
 | `azure-sdk-mcp:azsdk_typespec_generate_authoring_plan` | Generate grounded authoring plan (General Authoring only) |
-| `azure-sdk-mcp:azsdk_run_typespec_validation`          | Validate TypeSpec                     |
+| `azure-sdk-mcp:azsdk_run_typespec_validation`          | Validate TypeSpec                                         |
 
 **Prerequisite:** `azure-sdk-mcp` server must be running.
 
@@ -24,7 +24,7 @@ compatibility:
 - **Always follow the full workflow** — even seemingly simple changes (e.g. adding a default value) can require complex versioning decorator changes. Never skip steps.
 - **Mandatory for ALL `.tsp` edits** — even a single `?` change can be breaking.
 - **Minimal, scoped edits** — only change what the request requires.
-- **Always validate** — run every steps in [validation](references/validation.md) after every edit. 
+- **Always validate** — run every steps in [validation](references/validation.md) after every edit.
 - **Always cite references** — provide links that justify the approach.
 - **Follow the authoring plan exactly** — code changes in Step 4 MUST follow the authoring plan generated in Step 3. Do not deviate by referring to existing code patterns in the TypeSpec project; the authoring plan is the single source of truth for what to change.
 
@@ -50,10 +50,10 @@ Follow [analyze project & classify task](references/analyze-project-and-classify
 
 Classify as exactly one:
 
-| Task Type                 | When                                                                      | `azsdk_typespec_generate_authoring_plan` |
-| ------------------------- | ------------------------------------------------------------------------- | ---------------------------------------- |
-| **API Version Evolution** | Adding a new preview or stable API version to an existing ARM service. (ARM only)    | **MUST NOT** call                        |
-| **General Authoring**     | Any other `.tsp` change (resources, operations, models, properties, etc.) | **MUST** call                            |
+| Task Type                 | When                                                                              | `azsdk_typespec_generate_authoring_plan` |
+| ------------------------- | --------------------------------------------------------------------------------- | ---------------------------------------- |
+| **API Version Evolution** | Adding a new preview or stable API version to an existing ARM service. (ARM only) | **MUST NOT** call                        |
+| **General Authoring**     | Any other `.tsp` change (resources, operations, models, properties, etc.)         | **MUST** call                            |
 
 State your classification explicitly before proceeding.
 
