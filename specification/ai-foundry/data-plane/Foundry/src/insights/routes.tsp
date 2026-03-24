@@ -1,6 +1,7 @@
 import "./models.tsp";
 
 using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
@@ -63,6 +64,7 @@ interface Insights {
       ...IncludeCoordinatesTrait;
 
       /** The unique identifier for the insights report. */
+      @clientName("insight_id")
       @path id: string;
     },
     Insight
