@@ -3,19 +3,22 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "@typespec/versioning";
+import "./skuMixPlacementModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Compute;
 
 /**
  * Contains metadata of the SkuMixPlacement scoring resource
  */
+@added(Versions.v2026_05_05_preview)
 @singleton("recommendations")
 @parentResource(SubscriptionLocationResource)
 model SkuMixPlacementBase
@@ -28,6 +31,7 @@ model SkuMixPlacementBase
   >;
 }
 
+@added(Versions.v2026_05_05_preview)
 @armResourceOperations
 interface SkuMixPlacementScores {
   /**
@@ -46,9 +50,6 @@ interface SkuMixPlacementScores {
   >;
 }
 
-@@clientName(SkuMixPlacementScores.post::parameters.body,
-  "skuMixPlacementRequest"
-);
 @@doc(SkuMixPlacementScores.post::parameters.body,
   "SkuMixPlacement request object supplied in the body of the generate operation."
 );

@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -12,6 +14,7 @@ namespace Microsoft.Compute;
 // ===================== Enums =====================
 
 /** Allocation strategy for determining the optimal SKU split. */
+@added(Versions.v2026_05_05_preview)
 union SkuMixPlacementAllocationStrategy {
   string,
 
@@ -26,6 +29,7 @@ union SkuMixPlacementAllocationStrategy {
 }
 
 /** The unit type for the capacity value. */
+@added(Versions.v2026_05_05_preview)
 union SkuMixPlacementCapacityType {
   string,
 
@@ -37,6 +41,7 @@ union SkuMixPlacementCapacityType {
 }
 
 /** Priority levels for VM allocation. */
+@added(Versions.v2026_05_05_preview)
 union SkuMixPlacementPriority {
   string,
 
@@ -48,6 +53,7 @@ union SkuMixPlacementPriority {
 }
 
 /** The OS type of the VMs. */
+@added(Versions.v2026_05_05_preview)
 union SkuMixPlacementOSType {
   string,
 
@@ -59,6 +65,7 @@ union SkuMixPlacementOSType {
 }
 
 /** Strategy for distributing capacity across availability zones. */
+@added(Versions.v2026_05_05_preview)
 union SkuMixPlacementZonalDistributionStrategy {
   string,
 
@@ -70,6 +77,7 @@ union SkuMixPlacementZonalDistributionStrategy {
 }
 
 /** The type of instance description provided in the request. */
+@added(Versions.v2026_05_05_preview)
 union SkuMixPlacementInstanceDescriptionType {
   string,
 
@@ -81,6 +89,7 @@ union SkuMixPlacementInstanceDescriptionType {
 }
 
 /** Reason for partial fulfillment of the requested capacity. */
+@added(Versions.v2026_05_05_preview)
 union SkuMixPlacementPartialFulfillmentReason {
   string,
 
@@ -95,6 +104,7 @@ union SkuMixPlacementPartialFulfillmentReason {
 }
 
 /** Whether a VM capability should be excluded, included, or required. */
+@added(Versions.v2026_05_05_preview)
 union VmAttributeSupport {
   string,
 
@@ -111,6 +121,7 @@ union VmAttributeSupport {
 // ===================== Request Models =====================
 
 /** Sku Mix Placement API request. */
+@added(Versions.v2026_05_05_preview)
 model SkuMixPlacementRequest {
   /** Optional logical zones to consider (e.g. ["1","2","3"]). Omitted or empty implies regional deployment. */
   zones?: string[];
@@ -123,6 +134,7 @@ model SkuMixPlacementRequest {
 }
 
 /** Capacity-related properties for the placement request. */
+@added(Versions.v2026_05_05_preview)
 model SkuMixPlacementCapacityProfile {
   /** The capacity to run the workload. For VMs: [1..10,000]. For vCPUs: [1..100,000]. */
   capacity: int32;
@@ -147,12 +159,14 @@ model SkuMixPlacementCapacityProfile {
 }
 
 /** Spot priority configuration. Required when priority is Spot. */
+@added(Versions.v2026_05_05_preview)
 model SkuMixPlacementSpotPriorityProfile {
   /** Maximum price per VM the customer is willing to pay. Default: -1 (no price restriction). */
   maxPricePerVm?: float64;
 }
 
 /** Zone allocation policy for the placement request. */
+@added(Versions.v2026_05_05_preview)
 model SkuMixPlacementZoneAllocationPolicy {
   /** Distribution strategy for allocating capacity across zones. */
   distributionStrategy?: SkuMixPlacementZonalDistributionStrategy;
@@ -163,6 +177,7 @@ model SkuMixPlacementZoneAllocationPolicy {
 }
 
 /** Per-zone allocation preference. */
+@added(Versions.v2026_05_05_preview)
 model SkuMixPlacementZonePreference {
   /** Logical zone (e.g. "1", "2", "3"). */
   zone: string;
@@ -175,6 +190,7 @@ model SkuMixPlacementZonePreference {
 }
 
 /** Describes which VM sizes (or VM attributes) to consider. */
+@added(Versions.v2026_05_05_preview)
 model SkuMixPlacementInstanceDescription {
   /** The type of instance description. */
   type: SkuMixPlacementInstanceDescriptionType;
@@ -188,6 +204,7 @@ model SkuMixPlacementInstanceDescription {
 }
 
 /** A VM size with optional rank for prioritization. */
+@added(Versions.v2026_05_05_preview)
 model SkuMixPlacementVMSize {
   /** SKU name (e.g. Standard_D2s_v3). */
   name: string;
@@ -197,6 +214,7 @@ model SkuMixPlacementVMSize {
 }
 
 /** VM attribute constraints for attribute-based VM selection. */
+@added(Versions.v2026_05_05_preview)
 model VmAttributes {
   /** vCPU count range. Required. */
   vCpuCount: VmAttributeMinMaxInteger;
@@ -270,6 +288,7 @@ model VmAttributes {
 }
 
 /** Integer min/max range for VM attributes. */
+@added(Versions.v2026_05_05_preview)
 model VmAttributeMinMaxInteger {
   /** Minimum value. */
   min?: int32;
@@ -279,6 +298,7 @@ model VmAttributeMinMaxInteger {
 }
 
 /** Double min/max range for VM attributes. */
+@added(Versions.v2026_05_05_preview)
 model VmAttributeMinMaxDouble {
   /** Minimum value. */
   min?: float64;
@@ -290,6 +310,7 @@ model VmAttributeMinMaxDouble {
 // ===================== Response Models =====================
 
 /** Sku Mix Placement API response. */
+@added(Versions.v2026_05_05_preview)
 model SkuMixPlacementResponse {
   /** List of deployment choice recommendations. */
   @identifiers(#["id"])
@@ -303,6 +324,7 @@ model SkuMixPlacementResponse {
 }
 
 /** A single deployment choice recommendation. */
+@added(Versions.v2026_05_05_preview)
 model SkuMixPlacementDeploymentChoice {
   /** Unique identifier for this deployment choice. */
   id: string;
@@ -318,6 +340,7 @@ model SkuMixPlacementDeploymentChoice {
 }
 
 /** A single VM size allocation within a deployment choice. */
+@added(Versions.v2026_05_05_preview)
 model SkuMixPlacementItem {
   /** VM size name (e.g. Standard_D2s_v3). */
   name: string;
@@ -339,6 +362,7 @@ model SkuMixPlacementItem {
 
 /** Contains properties of the SkuMixPlacement resource. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This resource does not involve long-running operations and does not require provisioningState."
+@added(Versions.v2026_05_05_preview)
 model SkuMixPlacementProperties {
   /** Describes what resource types are supported by the mix placement scoring service. */
   supportedResourceTypes?: string[];
