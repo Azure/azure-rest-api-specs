@@ -99,50 +99,6 @@
     }
   },
   "definitions": {
-    "EnvironmentDetails": {
-      "type": "object",
-      "description": "The environment details of the resource",
-      "properties": {
-        "nativeResourceId": {
-          "type": "string",
-          "description": "The native resource id of the resource (in case of Azure - the resource Id, in case of MC - the native resource id)"
-        },
-        "environmentHierarchyId": {
-          "type": "string",
-          "description": "The hierarchy id of the connector (in case of Azure - the subscription Id, in case of MC - the hierarchyId id)"
-        },
-        "organizationalHierarchyId": {
-          "type": "string",
-          "description": "The organizational hierarchy id of the connector (in case of Azure - the subscription Id, in case of MC - the organizational hierarchyId id)"
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "The subscription Id"
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant Id"
-        }
-      }
-    },
-    "HealthDataClassification": {
-      "type": "object",
-      "description": "The classification of the health report",
-      "properties": {
-        "component": {
-          "type": "string",
-          "description": "The component describes the name of the agent/service that scans the issue"
-        },
-        "scenario": {
-          "type": "string",
-          "description": "The scenario describes the health scenario issue of the component"
-        },
-        "scope": {
-          "type": "string",
-          "description": "The resource scope of the health report"
-        }
-      }
-    },
     "HealthReport": {
       "type": "object",
       "description": "The health report resource",
@@ -168,11 +124,11 @@
           "description": "The resource details of the health report"
         },
         "environmentDetails": {
-          "$ref": "#/definitions/EnvironmentDetails",
+          "$ref": "#/definitions/environmentDetails",
           "description": "The environment details of the resource"
         },
         "healthDataClassification": {
-          "$ref": "#/definitions/HealthDataClassification",
+          "$ref": "#/definitions/healthDataClassification",
           "description": "The classification of the health report"
         },
         "status": {
@@ -205,7 +161,7 @@
           "type": "array",
           "description": "A collection of the issues in the report",
           "items": {
-            "$ref": "#/definitions/Issue"
+            "$ref": "#/definitions/issue"
           }
         }
       }
@@ -219,19 +175,61 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/HealthReport"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
-    "Issue": {
+    "environmentDetails": {
+      "type": "object",
+      "description": "The environment details of the resource",
+      "properties": {
+        "nativeResourceId": {
+          "type": "string",
+          "description": "The native resource id of the resource (in case of Azure - the resource Id, in case of MC - the native resource id)"
+        },
+        "environmentHierarchyId": {
+          "type": "string",
+          "description": "The hierarchy id of the connector (in case of Azure - the subscription Id, in case of MC - the hierarchyId id)"
+        },
+        "organizationalHierarchyId": {
+          "type": "string",
+          "description": "The organizational hierarchy id of the connector (in case of Azure - the subscription Id, in case of MC - the organizational hierarchyId id)"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription Id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant Id"
+        }
+      }
+    },
+    "healthDataClassification": {
+      "type": "object",
+      "description": "The classification of the health report",
+      "properties": {
+        "component": {
+          "type": "string",
+          "description": "The component describes the name of the agent/service that scans the issue"
+        },
+        "scenario": {
+          "type": "string",
+          "description": "The scenario describes the health scenario issue of the component"
+        },
+        "scope": {
+          "type": "string",
+          "description": "The resource scope of the health report"
+        }
+      }
+    },
+    "issue": {
       "type": "object",
       "description": "The issue that caused the resource to by unhealthy",
       "properties": {

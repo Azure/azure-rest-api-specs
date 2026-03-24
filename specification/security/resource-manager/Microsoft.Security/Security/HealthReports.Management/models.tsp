@@ -57,7 +57,20 @@ union StatusName {
 /**
  * Page of health reports list
  */
-model HealthReportsList is Azure.Core.Page<HealthReport>;
+model HealthReportsList {
+  /**
+   * The HealthReport items on this page.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: HealthReport[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * Describes properties of the health report
@@ -72,12 +85,12 @@ model HealthReportProperties {
   /**
    * The environment details of the resource
    */
-  environmentDetails?: EnvironmentDetails;
+  environmentDetails?: environmentDetails;
 
   /**
    * The classification of the health report
    */
-  healthDataClassification?: HealthDataClassification;
+  healthDataClassification?: healthDataClassification;
 
   /**
    * The status of the health report
@@ -105,7 +118,7 @@ model HealthReportProperties {
    * A collection of the issues in the report
    */
   @identifiers(#[])
-  issues?: Issue[];
+  issues?: issue[];
 }
 
 /**
@@ -134,7 +147,8 @@ model resourceDetails {
 /**
  * The environment details of the resource
  */
-model EnvironmentDetails {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model environmentDetails {
   /**
    * The native resource id of the resource (in case of Azure - the resource Id, in case of MC - the native resource id)
    */
@@ -164,7 +178,8 @@ model EnvironmentDetails {
 /**
  * The classification of the health report
  */
-model HealthDataClassification {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model healthDataClassification {
   /**
    * The component describes the name of the agent/service that scans the issue
    */
@@ -222,7 +237,8 @@ model status {
 /**
  * The issue that caused the resource to by unhealthy
  */
-model Issue {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model issue {
   /**
    * The unique issue key
    */
