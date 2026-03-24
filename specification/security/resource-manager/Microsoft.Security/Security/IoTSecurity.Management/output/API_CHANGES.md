@@ -30,7 +30,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DeviceSecurityGroupList.required__added` | added | `["value"]` |
 | `paths['/{resourceId}/providers/microsoft.Security/deviceSecurityGroups'].get.parameters[0].required__added` | added | `true` |
 
 ### Changes for `type`

@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -271,7 +273,20 @@ union CreatedByType {
 /**
  * List of device security groups
  */
-model DeviceSecurityGroupList is Azure.Core.Page<DeviceSecurityGroup>;
+model DeviceSecurityGroupList {
+  /**
+   * List of device security group objects
+   */
+  @pageItems
+  value?: DeviceSecurityGroup[];
+
+  /**
+   * The URI to fetch the next page.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
+}
 
 /**
  * describes properties of a security group.
