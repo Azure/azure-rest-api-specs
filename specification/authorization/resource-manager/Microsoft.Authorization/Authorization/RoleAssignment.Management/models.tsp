@@ -156,6 +156,11 @@ model ValidationResponse {
 }
 
 /**
+ * Role assignment list operation result.
+ */
+model RoleAssignmentListResult is Azure.Core.Page<RoleAssignment>;
+
+/**
  * Role Assignments filter
  */
 model RoleAssignmentFilter {

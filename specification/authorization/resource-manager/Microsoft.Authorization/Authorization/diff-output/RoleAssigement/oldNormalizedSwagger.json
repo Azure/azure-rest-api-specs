@@ -12,6 +12,140 @@
     "application/json"
   ],
   "paths": {
+    "/{roleAssignmentId}": {
+      "get": {
+        "operationId": "RoleAssignments_GetById",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "Get a role assignment by ID.",
+        "parameters": [
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get role assignment by ID": {
+            "$ref": "./examples/RoleAssignments_GetById.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoleAssignments_CreateById",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "Create or update a role assignment by ID.",
+        "parameters": [
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentCreateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update role assignment by ID": {
+            "$ref": "./examples/RoleAssignments_CreateById.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RoleAssignments_DeleteById",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "Delete a role assignment by ID.",
+        "parameters": [
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete role assignment by ID": {
+            "$ref": "./examples/RoleAssignments_DeleteById.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/microsoft.Authorization/roleAssignments": {
       "get": {
         "operationId": "RoleAssignments_ListForScope",

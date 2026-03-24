@@ -44,6 +44,222 @@
     }
   ],
   "paths": {
+    "/{roleAssignmentId}": {
+      "get": {
+        "operationId": "RoleAssignments_GetById",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "Get a role assignment by ID.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The fully qualified ID of the role assignment including scope, resource name, and resource type. Format: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}. Example: /subscriptions/<SUB_ID>/resourcegroups/<RESOURCE_GROUP>/providers/Microsoft.Authorization/roleAssignments/<ROLE_ASSIGNMENT_NAME>",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "description": "Tenant ID for cross-tenant request",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get role assignment by ID": {
+            "$ref": "./examples/RoleAssignments_GetById.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoleAssignments_CreateById",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "Create or update a role assignment by ID.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The fully qualified ID of the role assignment including scope, resource name, and resource type. Format: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}. Example: /subscriptions/<SUB_ID>/resourcegroups/<RESOURCE_GROUP>/providers/Microsoft.Authorization/roleAssignments/<ROLE_ASSIGNMENT_NAME>",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentCreateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RoleAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'RoleAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update role assignment by ID": {
+            "$ref": "./examples/RoleAssignments_CreateById.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RoleAssignments_DeleteById",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "Delete a role assignment by ID.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The fully qualified ID of the role assignment including scope, resource name, and resource type. Format: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}. Example: /subscriptions/<SUB_ID>/resourcegroups/<RESOURCE_GROUP>/providers/Microsoft.Authorization/roleAssignments/<ROLE_ASSIGNMENT_NAME>",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "description": "Tenant ID for cross-tenant request",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete role assignment by ID": {
+            "$ref": "./examples/RoleAssignments_DeleteById.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
+      "get": {
+        "operationId": "RoleAssignments_ListForScope",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "List all role assignments that apply to a scope.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "description": "Tenant ID for cross-tenant request",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The skipToken to apply on the operation. Use $skipToken={skiptoken} to return paged role assignments following the skipToken passed. Only supported on provider level calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List role assignments for scope": {
+            "$ref": "./examples/RoleAssignments_ListForScope.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
       "get": {
         "operationId": "RoleAssignments_Get",
@@ -68,7 +284,8 @@
             "in": "path",
             "description": "The name of the role assignment. It can be any valid GUID.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "tenantId",
@@ -121,7 +338,8 @@
             "in": "path",
             "description": "The name of the role assignment. It can be any valid GUID.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "parameters",
@@ -188,7 +406,8 @@
             "in": "path",
             "description": "The name of the role assignment. It can be any valid GUID.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "tenantId",
@@ -222,7 +441,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/subscriptions/{subscriptionId}/roleAssignments": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments": {
       "get": {
         "operationId": "RoleAssignments_ListForSubscription",
         "tags": [
@@ -232,14 +451,6 @@
         "parameters": [
           {
             "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -276,6 +487,150 @@
         "x-ms-examples": {
           "List role assignments for subscription": {
             "$ref": "./examples/RoleAssignments_ListForSubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/roleAssignments": {
+      "get": {
+        "operationId": "RoleAssignments_ListForResource",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "List all role assignments that apply to a resource.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "description": "The namespace of the resource provider.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource to get role assignments for.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "description": "Tenant ID for cross-tenant request",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List role assignments for a resource": {
+            "$ref": "./examples/RoleAssignments_ListForResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/roleAssignments": {
+      "get": {
+        "operationId": "RoleAssignments_ListForResourceGroup",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "List all role assignments that apply to a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "description": "Tenant ID for cross-tenant request",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List role assignments for resource group": {
+            "$ref": "./examples/RoleAssignments_ListForResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -324,7 +679,11 @@
           "description": "The RoleAssignment items on this page",
           "items": {
             "$ref": "#/definitions/RoleAssignment"
-          }
+          },
+          "x-ms-identifiers": [
+            "roleAssignmentName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",

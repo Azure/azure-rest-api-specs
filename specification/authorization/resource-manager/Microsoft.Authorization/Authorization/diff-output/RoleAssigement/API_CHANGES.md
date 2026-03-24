@@ -1,51 +1,21 @@
-## Changed Paths
-
-Path: /{scope}/providers/microsoft.Authorization/roleAssignments
-Change Type: deleted
-
-Path: /{scope}/providers/microsoft.Authorization/subscriptions/{subscriptionId}/roleAssignments
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.Authorization/roleAssignments
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/microsoft.Authorization/roleAssignments
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Authorization/roleAssignments
-Change Type: deleted
-
 ## Swagger Changes
 
-### Changes for `/{scope}/providers/microsoft.Authorization/roleAssignments`
+### Changes for `x-ms-odata`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/{scope}/providers/microsoft.Authorization/roleAssignments__deleted']` | deleted | `{"get":{"operationId":"RoleAssignments_ListForScope","tags":["RoleAssignments"],"description":"List ...` |
+| `paths['/{scope}/providers/microsoft.Authorization/roleAssignments'].get['x-ms-odata__deleted']` | deleted | `#/definitions/RoleAssignmentFilter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Authorization/roleAssignments'].get['x-ms-odata__deleted']` | deleted | `#/definitions/RoleAssignmentFilter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/microsoft.Authorization/roleAssignments'].get['x-ms-odata__deleted']` | deleted | `#/definitions/RoleAssignmentFilter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Authorization/roleAssignments'].get['x-ms-odata__deleted']` | deleted | `#/definitions/RoleAssignmentFilter` |
 
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Authorization/roleAssignments`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Authorization/roleAssignments__deleted']` | deleted | `{"get":{"operationId":"RoleAssignments_ListForSubscription","tags":["RoleAssignments"],"description"...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/microsoft.Authorization/roleAssignments`
+### Changes for `required`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/microsoft.Authorization/roleAssignments__deleted']` | deleted | `{"get":{"operationId":"RoleAssignments_ListForResource","tags":["RoleAssignments"],"description":"Li...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Authorization/roleAssignments`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Authorization/roleAssignments__deleted']` | deleted | `{"get":{"operationId":"RoleAssignments_ListForResourceGroup","tags":["RoleAssignments"],"description...` |
-
-### Changes for `/{scope}/providers/microsoft.Authorization/subscriptions/{subscriptionId}/roleAssignments`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.Authorization/subscriptions/{subscriptionId}/roleAssignments__added']` | added | `{"get":{"operationId":"RoleAssignments_ListForSubscription","tags":["RoleAssignments"],"description"...` |
+| `definitions.RoleAssignmentListResult.required__added` | added | `["value"]` |
+| `paths['/{scope}/providers/microsoft.Authorization/roleAssignments'].get.parameters[1].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/microsoft.Authorization/roleAssignments'].get.parameters[3].required__added` | added | `true` |
 
 ### Changes for `RoleAssignmentFilter`
 
@@ -89,20 +59,28 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.RoleAssignment.properties.type__deleted` | deleted | `{"type":"string","description":"The role assignment type.","readOnly":true}` |
 
-### Changes for `required`
+### Changes for `x-ms-identifiers`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.RoleAssignmentListResult.required__added` | added | `["value"]` |
+| `definitions.RoleAssignmentListResult.properties.value['x-ms-identifiers__added']` | added | `["roleAssignmentName","id"]` |
 
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
-| `paths['/{scope}/providers/microsoft.Authorization/roleAssignments/{roleAssignmentName}'].delete.parameters[1].name` | `roleAssignmentName` | `scope` |
+| `paths./{roleAssignmentId}.delete.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths./{roleAssignmentId}.get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths./{roleAssignmentId}.put.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/{scope}/providers/microsoft.Authorization/roleAssignments'].get.parameters[1].in` | `query` | `path` |
+| `paths['/{scope}/providers/microsoft.Authorization/roleAssignments'].get.parameters[1].name` | `$filter` | `scope` |
+| `paths['/{scope}/providers/microsoft.Authorization/roleAssignments'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/{scope}/providers/microsoft.Authorization/roleAssignments/{roleAssignmentName}'].delete.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/{scope}/providers/microsoft.Authorization/roleAssignments/{roleAssignmentName}'].get.parameters[1].name` | `roleAssignmentName` | `scope` |
 | `paths['/{scope}/providers/microsoft.Authorization/roleAssignments/{roleAssignmentName}'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/{scope}/providers/microsoft.Authorization/roleAssignments/{roleAssignmentName}'].put.parameters[1].name` | `roleAssignmentName` | `scope` |
 | `paths['/{scope}/providers/microsoft.Authorization/roleAssignments/{roleAssignmentName}'].put.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Authorization/roleAssignments'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/microsoft.Authorization/roleAssignments'].get.parameters[3].in` | `query` | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/microsoft.Authorization/roleAssignments'].get.parameters[3].name` | `$filter` | `resourceProviderNamespace` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/microsoft.Authorization/roleAssignments'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Authorization/roleAssignments'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 
