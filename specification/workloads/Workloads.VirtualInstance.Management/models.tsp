@@ -348,6 +348,7 @@ model VirtualInstanceProperties {
   /**
    * The type of environment in which the workload system is deployed - Production / Non Production.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentType: EnvironmentType;
 
   /**
@@ -442,13 +443,6 @@ model VirtualInstanceProperties {
  */
 model UpdateVirtualInstanceProperties {
   /**
-   * The ID corresponding to the deployment architecture of the system.
-   * The workload specific information including the workload type, definition ID and version.
-   */
-  @removed(Versions.v2025_06_01_preview)
-  architectureId?: string;
-
-  /**
    * The workload specific information including the workload type, definition ID and version.
    */
   @added(Versions.v2025_06_01_preview)
@@ -522,6 +516,7 @@ model WorkloadInfo {
   /**
    * The type of the workload.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   workloadType: string;
 
   /**
@@ -540,11 +535,6 @@ model WorkloadInfo {
  */
 @added(Versions.v2025_06_01_preview)
 model UpdateWorkloadInfo {
-  /**
-   * The name of the corresponding workload definition.
-   */
-  workloadDefinitionName?: string;
-
   /**
    * The version selected for the corresponding workload definition.
    */

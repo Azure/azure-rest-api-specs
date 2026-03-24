@@ -1486,10 +1486,6 @@
       "type": "object",
       "description": "Defines the workload information object for update scenarios.",
       "properties": {
-        "workloadDefinitionName": {
-          "type": "string",
-          "description": "The name of the corresponding workload definition."
-        },
         "workloadDefinitionVersion": {
           "type": "string",
           "description": "The version selected for the corresponding workload definition."
@@ -1555,7 +1551,11 @@
         },
         "environmentType": {
           "$ref": "#/definitions/EnvironmentType",
-          "description": "The type of environment in which the workload system is deployed - Production / Non Production."
+          "description": "The type of environment in which the workload system is deployed - Production / Non Production.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "environmentLabel": {
           "type": "string",
@@ -1820,7 +1820,11 @@
       "properties": {
         "workloadType": {
           "type": "string",
-          "description": "The type of the workload."
+          "description": "The type of the workload.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "workloadDefinitionName": {
           "type": "string",
