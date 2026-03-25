@@ -254,6 +254,7 @@ model Metrics {
 }
 
 /** CORS is an HTTP feature that enables a web application running under one domain to access resources in another domain. Web browsers implement a security restriction known as same-origin policy that prevents a web page from calling APIs in a different domain; CORS provides a secure way to allow one domain (the origin domain) to call APIs in another domain */
+@Xml.name("CorsRule")
 model CorsRule {
   /** The allowed origins. */
   @Xml.name("AllowedOrigins") allowedOrigins: string;
@@ -394,6 +395,7 @@ model AccessPolicy {
  * The object returned in the QueueMessageList array when calling Get Messages on
  * a Queue.
  */
+@Xml.name("QueueMessage")
 model ReceivedMessage {
   /**
    * The Id of the Message.
@@ -503,6 +505,7 @@ model QueueMessage {
  * The object returned in the QueueMessageList array when calling Put Message on a
  * Queue
  */
+@Xml.name("QueueMessage")
 model SentMessage {
   /**
    * The Id of the Message.
@@ -541,6 +544,7 @@ model SentMessage {
  * The object returned in the QueueMessageList array when calling Peek Messages on
  * a Queue
  */
+@Xml.name("QueueMessage")
 model PeekedMessage {
   /**
    * The Id of the Message.
