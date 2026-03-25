@@ -229,6 +229,10 @@ using Microsoft.Storage;
 @@clientName(UsageName, "StorageUsageName", "csharp");
 @@clientName(UsageUnit, "StorageUsageUnit", "csharp");
 @@access(StorageTaskAssignmentReport, Access.public, "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  armResourceIdentifier,
+  "csharp"
+);
 
 @@clientName(Microsoft.Storage, "StorageManagementClient", "javascript");
 @@clientName(Microsoft.Storage, "StorageManagementClient", "python");
