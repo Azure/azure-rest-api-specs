@@ -4175,5 +4175,6 @@ union VirtualNetworkPeeringLevel {
 }
 
 @@clientName(Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
-  "ManagedServiceIdentityUserAssignedIdentities"
+  "ManagedServiceIdentityUserAssignedIdentities",
+  "!javascript"
 );

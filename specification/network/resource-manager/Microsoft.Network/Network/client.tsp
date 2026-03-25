@@ -1912,7 +1912,7 @@ op replaceprivateDnsZoneGroupsList(
   50,
   "python"
 );
-@@alternateType(Microsoft.Network.EffectiveNetworkSecurityGroup,
+@@alternateType(Microsoft.Network.EffectiveNetworkSecurityGroup.tagMap,
   string,
   "javascript"
 );
