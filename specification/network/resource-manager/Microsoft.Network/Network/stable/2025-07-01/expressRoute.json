@@ -7077,7 +7077,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverTestDetails"
-           },
+          },
           "description": "List of Circuit Failover All Test Details"
         }
       },
@@ -7094,6 +7094,25 @@
       ],
       "x-ms-enum": {
         "name": "ExpressRouteFailoverTestType",
+        "modelAsString": true
+      }
+    },
+    "FailoverTestStatus": {
+      "type": "string",
+      "description": "The current status of the test",
+      "enum": [
+        "NotStarted",
+        "Starting",
+        "Running",
+        "StartFailed",
+        "Stopping",
+        "Completed",
+        "StopFailed",
+        "Invalid",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "FailoverTestStatus",
         "modelAsString": true
       }
     },
@@ -7166,7 +7185,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverSingleTestDetails"
-           },
+          },
           "description": "List of Circuit Failover Single Test Details"
         }
       },
