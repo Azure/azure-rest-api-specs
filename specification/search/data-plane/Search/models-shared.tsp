@@ -25,16 +25,32 @@ alias preferHeader = {
   prefer: "return=representation";
 };
 
+/** Represents allowed Accept header values. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+union AcceptHeader {
+  /** Default application/json. */
+  ApplicationJson: "application/json",
+
+  /** application/json returning no ODATA metadata. */
+  OdataMetadataNone: "application/json;odata.metadata=none",
+
+  /** application/json returning minimal ODATA metadata. */
+  OdataMetadataMinimal: "application/json;odata.metadata=minimal",
+
+  /** application/json returning full ODATA metadata. */
+  OdataMetadataFull: "application/json;odata.metadata=full",
+}
+
 alias acceptHeaderMinimal = {
   /** The Accept header. */
   @header("Accept")
-  accept?: "application/json;odata.metadata=minimal";
+  accept?: AcceptHeader = AcceptHeader.OdataMetadataMinimal;
 };
 
 alias acceptHeaderNone = {
   /** The Accept header. */
   @header("Accept")
-  accept?: "application/json;odata.metadata=none";
+  accept?: AcceptHeader = AcceptHeader.OdataMetadataNone;
 };
 
 alias selectQuery = {
