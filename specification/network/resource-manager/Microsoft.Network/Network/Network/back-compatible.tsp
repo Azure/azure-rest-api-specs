@@ -613,16 +613,16 @@ using Microsoft.Network;
 @@clientName(SwapResources.create::parameters.resource, "parameters");
 @@clientLocation(SwapResources.list, "VipSwap");
 
-@@clientLocation(CustomIpPrefixes.get, "CustomIPPrefixes");
-@@clientLocation(CustomIpPrefixes.createOrUpdate, "CustomIPPrefixes");
+@@clientLocation(CustomIpPrefixes.get, "CustomIPPrefixes", "!java");
+@@clientLocation(CustomIpPrefixes.createOrUpdate, "CustomIPPrefixes", "!java");
 @@clientName(CustomIpPrefixes.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(CustomIpPrefixes.updateTags, "CustomIPPrefixes");
+@@clientLocation(CustomIpPrefixes.updateTags, "CustomIPPrefixes", "!java");
 @@clientName(CustomIpPrefixes.updateTags::parameters.properties, "parameters");
-@@clientLocation(CustomIpPrefixes.delete, "CustomIPPrefixes");
-@@clientLocation(CustomIpPrefixes.list, "CustomIPPrefixes");
-@@clientLocation(CustomIpPrefixes.listAll, "CustomIPPrefixes");
+@@clientLocation(CustomIpPrefixes.delete, "CustomIPPrefixes", "!java");
+@@clientLocation(CustomIpPrefixes.list, "CustomIPPrefixes", "!java");
+@@clientLocation(CustomIpPrefixes.listAll, "CustomIPPrefixes", "!java");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CustomIpPrefix.properties);
 
