@@ -575,7 +575,7 @@ model ToolsetMCPListToolsResult {
 }
 
 /**
- * Result payload for tools/call.
+ * Result payload for tools/call (synchronous execution).
  */
 model ToolsetMCPCallToolResult {
   /**
@@ -597,11 +597,22 @@ model ToolsetMCPCallToolResult {
    * Indicates whether the tool call result represents an error.
    */
   isError?: boolean;
+}
+
+/**
+ * Result payload for a task-augmented tools/call request.
+ * Returned instead of CallToolResult when the request includes task metadata.
+ */
+model ToolsetMCPCreateTaskResult {
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
 
   /**
-   * Optional task information. Present when the tool call was executed as a task.
+   * The created task.
    */
-  task?: Record<unknown>;
+  task: ToolsetMCPTask;
 }
 
 /**
@@ -641,7 +652,8 @@ union ToolsetMCPJsonRpcResult {
   ToolsetMCPInitializeResult,
   ToolsetMCPListToolsResult,
   ToolsetMCPCallToolResult,
-  ToolsetMCPTaskStatus,
+  ToolsetMCPCreateTaskResult,
+  ToolsetMCPTask,
 }
 
 /**
@@ -745,10 +757,10 @@ model ToolsetMCPTaskRequestParams {
 }
 
 /**
- * Task status information returned by tasks/get and tasks/cancel.
- * Matches MCP spec Task type.
+ * Data associated with a task.
+ * Matches MCP spec Task interface.
  */
-model ToolsetMCPTaskStatus {
+model ToolsetMCPTask {
   /**
    * The unique task identifier.
    */
