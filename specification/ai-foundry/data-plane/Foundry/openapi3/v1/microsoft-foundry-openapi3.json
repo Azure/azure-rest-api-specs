@@ -10700,16 +10700,41 @@
         "type": "object",
         "required": [
           "name",
+          "data_source",
+          "options",
+          "purpose",
           "id",
           "status",
-          "type",
-          "purpose",
           "created_at"
         ],
         "properties": {
           "name": {
             "type": "string",
             "description": "The display name of the data generation job."
+          },
+          "data_source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobDataSource"
+              }
+            ],
+            "description": "The data source used for the data generation job."
+          },
+          "options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobOptions"
+              }
+            ],
+            "description": "The options for the data generation job."
+          },
+          "purpose": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobPurpose"
+              }
+            ],
+            "description": "The purpose of the data generation job. Either for fine-tuning supervised training or evaluation."
           },
           "id": {
             "type": "string",
@@ -10727,33 +10752,17 @@
           },
           "output_dataset_name": {
             "type": "string",
-            "description": "The name of the output dataset to create. If not specified, a default name will be generated. If dataset with the same name already exists then tries to create a new version of the dataset with the generated data."
+            "description": "The name of the output dataset to create. If not specified, a default name will be generated. If a dataset with the same name already exists, a new version of the dataset will be created with the generated data."
           },
           "output_dataset_id": {
             "type": "string",
-            "description": "Identifier of the output dataset produced after successful completion. This will be in format of in the format of 'azureai://accounts/<account-name>/projects/<project-name>/data/<dataset-name>/versions/<version-no>'",
+            "description": "Identifier of the output dataset produced after successful completion. This will be in the format of 'azureai://accounts/<account-name>/projects/<project-name>/data/<dataset-name>/versions/<version-no>'",
             "readOnly": true
-          },
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobType"
-              }
-            ],
-            "description": "The kind of data generation job executed."
-          },
-          "purpose": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobPurpose"
-              }
-            ],
-            "description": "The purpose of the data generation job. Either for fine-tuning supervised training or evaluation."
           },
           "generated_samples_count": {
             "type": "integer",
             "format": "int32",
-            "description": "The number of synthetic samples actually generated. This field will be populated only after the job is completed.",
+            "description": "The number of samples actually generated. This field will be populated only after the job is completed.",
             "readOnly": true
           },
           "token_usage": {
@@ -10780,7 +10789,7 @@
           "error": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DataGenerationJobError"
+                "$ref": "#/components/schemas/OpenAI.Error"
               }
             ],
             "description": "Error information set only when status is 'failed'.",
@@ -10798,15 +10807,33 @@
             "readOnly": true
           }
         },
+        "description": "Data Generation Job resource."
+      },
+      "DataGenerationJobDataSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobDataSourceType"
+              }
+            ],
+            "description": "The type of the data source."
+          }
+        },
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "SimpleQnA": "#/components/schemas/SimpleQnADataGenerationJob",
-            "MultiTurnQnA": "#/components/schemas/MultiTurnQnADataGenerationJob",
-            "ToolUse": "#/components/schemas/ToolUseFineTuningDataGenerationJob"
+            "Traces": "#/components/schemas/TracesDataGenerationJobDataSource",
+            "Prompt": "#/components/schemas/PromptDataGenerationJobDataSource",
+            "SeedDataFiles": "#/components/schemas/SeedDataFilesDataGenerationJobDataSource",
+            "PromptAndSeedDataFiles": "#/components/schemas/PromptAndSeedDataFilesDataGenerationJobDataSource"
           }
         },
-        "description": "Data Generation Job resource."
+        "description": "The base data source model for a data generation job."
       },
       "DataGenerationJobDataSourceType": {
         "anyOf": [
@@ -10825,19 +10852,44 @@
         ],
         "description": "The supported data source types for a data generation job."
       },
-      "DataGenerationJobError": {
+      "DataGenerationJobOptions": {
         "type": "object",
+        "required": [
+          "type",
+          "max_samples_count"
+        ],
         "properties": {
-          "code": {
-            "type": "string",
-            "description": "A machine-readable error code."
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobType"
+              }
+            ],
+            "description": "The data generation job type."
           },
-          "message": {
-            "type": "string",
-            "description": "A human-readable error message."
+          "max_samples_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of samples to generate."
+          },
+          "model_options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationModelOptions"
+              }
+            ],
+            "description": "The model deployment options. Required only when the data source type is not Traces."
           }
         },
-        "description": "Error information for a data generation job that failed."
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "SimpleQnA": "#/components/schemas/SimpleQnADataGenerationJobOptions",
+            "ToolUse": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions",
+            "MultiTurn": "#/components/schemas/MultiTurnDataGenerationJobOptions"
+          }
+        },
+        "description": "Options for managing data generation jobs."
       },
       "DataGenerationJobPurpose": {
         "anyOf": [
@@ -10866,7 +10918,8 @@
               "queued",
               "running",
               "succeeded",
-              "failed"
+              "failed",
+              "cancelled"
             ]
           }
         ],
@@ -10882,7 +10935,7 @@
             "enum": [
               "SimpleQnA",
               "ToolUse",
-              "MultiTurnQnA"
+              "MultiTurn"
             ]
           }
         ],
@@ -10891,15 +10944,15 @@
       "DataGenerationModelOptions": {
         "type": "object",
         "required": [
-          "model"
+          "model_name"
         ],
         "properties": {
-          "model": {
+          "model_name": {
             "type": "string",
-            "description": "Base model deployment name used to generate synthetic data."
+            "description": "Base model name used to generate data."
           }
         },
-        "description": "Model generation sampling / configuration options."
+        "description": "LLM model options for data generation jobs."
       },
       "DataSourceConfig": {
         "type": "object",
@@ -14521,73 +14574,26 @@
         ],
         "description": "Monthly recurrence schedule."
       },
-      "MultiTurnQnADataGenerationJob": {
+      "MultiTurnDataGenerationJobOptions": {
         "type": "object",
         "required": [
-          "type",
-          "datasource_type"
+          "type"
         ],
         "properties": {
           "type": {
             "type": "string",
             "enum": [
-              "MultiTurnQnA"
-            ]
-          },
-          "datasource_type": {
-            "$ref": "#/components/schemas/DataGenerationJobDataSourceType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "datasource_type",
-          "mapping": {
-            "Traces": "#/components/schemas/MultiTurnQnATracesDataGenerationJob"
+              "MultiTurn"
+            ],
+            "description": "The data generation job type, which is MultiTurn for this model."
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/DataGenerationJob"
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "A data generation job of type MultiTurnQnA used for generating multi-turn question and answer pairs."
-      },
-      "MultiTurnQnATracesDataGenerationJob": {
-        "type": "object",
-        "required": [
-          "type",
-          "datasource_type",
-          "options"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "MultiTurnQnA"
-            ],
-            "description": "The data generation job type, which is MultiTurnQnA for this model."
-          },
-          "datasource_type": {
-            "type": "string",
-            "enum": [
-              "Traces"
-            ],
-            "description": "The datasource type for this job, which is Traces."
-          },
-          "options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TracesDataGenerationJobOptions"
-              }
-            ],
-            "description": "The options for a MultiTurnQnA data generation job with Traces datasource."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/MultiTurnQnADataGenerationJob"
-          }
-        ],
-        "description": "A data generation job of type MultiTurnQnA with Traces datasource used for evaluation or fine-tuning training based on the specified purpose."
+        "description": "The options for a data generation job with MultiTurn type."
       },
       "NoAuthenticationCredentials": {
         "type": "object",
@@ -34718,6 +34724,48 @@
         },
         "description": "Configuration options for a text response from the model. Can be plain text or structured JSON data."
       },
+      "PromptAndSeedDataFilesDataGenerationJobDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name",
+          "seed_datasets"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PromptAndSeedDataFiles"
+            ],
+            "description": "The data source type for this job, which is a combination of prompts and seed data files."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The prompt used for data generation. Required if agent name is not specified."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window. If both agent name and agent version are specified, the agent version will be used to fetch the traces."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used."
+          },
+          "seed_datasets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Input seed dataset references used for data generation. The dataset should already exist before creating the job."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobDataSource"
+          }
+        ],
+        "description": "The options for a data generation job with Prompt and Seed Data Files datasource used for Evaluation purpose, which includes the prompt, the input seed datasets and the agent name to fetch the prompt and other metadata for data generation."
+      },
       "PromptBasedEvaluatorDefinition": {
         "type": "object",
         "required": [
@@ -34742,6 +34790,40 @@
           }
         ],
         "description": "Prompt-based evaluator"
+      },
+      "PromptDataGenerationJobDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Prompt"
+            ],
+            "description": "The data source type for this job, which is Prompt."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The prompt used for data generation. Required if agent name is not specified."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window. If both agent name and agent version are specified, the agent version will be used to fetch the traces."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobDataSource"
+          }
+        ],
+        "description": "The options for a data generation job with Prompt datasource used for Evaluation purpose, which includes the prompt or the agent name to fetch the prompt and other metadata for data generation."
       },
       "ProtocolVersionRecord": {
         "type": "object",
@@ -35425,6 +35507,35 @@
         ],
         "description": "Type of the task."
       },
+      "SeedDataFilesDataGenerationJobDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "seed_datasets"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "SeedDataFiles"
+            ],
+            "description": "The data source type for this job, which is SeedDataFiles."
+          },
+          "seed_datasets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Input seed dataset references used for data generation. The dataset should already exist before creating the job."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobDataSource"
+          }
+        ],
+        "description": "The options for a data generation job with SeedDataFiles datasource used for fine-tuning supervised training, which includes the input seed datasets for data generation."
+      },
       "SharepointGroundingToolCall": {
         "type": "object",
         "required": [
@@ -35550,11 +35661,10 @@
         ],
         "description": "The input definition information for a sharepoint tool as used to configure an agent."
       },
-      "SimpleQnADataGenerationJob": {
+      "SimpleQnADataGenerationJobOptions": {
         "type": "object",
         "required": [
-          "type",
-          "datasource_type"
+          "type"
         ],
         "properties": {
           "type": {
@@ -35563,282 +35673,21 @@
               "SimpleQnA"
             ],
             "description": "The data generation job type, which is SimpleQnA for this model."
-          },
-          "datasource_type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobDataSourceType"
-              }
-            ],
-            "description": "The datasource type for this job."
-          }
-        },
-        "discriminator": {
-          "propertyName": "datasource_type",
-          "mapping": {
-            "Prompt": "#/components/schemas/SimpleQnAPromptEvaluationDataGenerationJob",
-            "PromptAndSeedDataFiles": "#/components/schemas/SimpleQnAPromptAndSeedDataFilesEvaluationDataGenerationJob",
-            "SeedDataFiles": "#/components/schemas/SimpleQnASeedDataFilesSupervisedFineTuningDataGenerationJob",
-            "Traces": "#/components/schemas/SimpleQnATracesDataGenerationJob"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJob"
-          }
-        ],
-        "description": "A data generation job of type SimpleQnA which generates simple question and answer pairs based on the specified datasource type."
-      },
-      "SimpleQnAPromptAndSeedDataFilesEvaluationDataGenerationJob": {
-        "type": "object",
-        "required": [
-          "type",
-          "datasource_type",
-          "purpose",
-          "options",
-          "model_options"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "SimpleQnA"
-            ],
-            "description": "The data generation job type, which is SimpleQnA for this model."
-          },
-          "datasource_type": {
-            "type": "string",
-            "enum": [
-              "PromptAndSeedDataFiles"
-            ],
-            "description": "The datasource type for this job, which is a combination of prompts and seed data files."
-          },
-          "purpose": {
-            "type": "string",
-            "enum": [
-              "Evaluation"
-            ],
-            "description": "The purpose of the data generation job. For this type of job, the purpose is always evaluation."
-          },
-          "options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SimpleQnAPromptAndSeedDataFilesEvaluationDataGenerationJobOptions"
-              }
-            ],
-            "description": "The options for a SimpleQnA data generation job with Prompt and Seed Data Files datasource used for evaluation."
-          },
-          "model_options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationModelOptions"
-              }
-            ],
-            "description": "The model deployment options. Only models which support Responses API can be used for this type of job."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/SimpleQnADataGenerationJob"
-          }
-        ],
-        "description": "A data generation job of type SimpleQnA with Prompt and Seed Data Files datasource used for evaluation."
-      },
-      "SimpleQnAPromptAndSeedDataFilesEvaluationDataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "max_samples_count",
-          "seed_datasets"
-        ],
-        "properties": {
-          "max_samples_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of synthetic samples to generate."
-          },
-          "prompt": {
-            "type": "string",
-            "description": "The prompt used for data generation. Required if agent id is not specified."
-          },
-          "agent_id": {
-            "type": "string",
-            "description": "The agent id to fetch the prompt and other metadata for data generation. The agent id should be in format of '<agent_id>:<version>'"
-          },
-          "seed_datasets": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Input seed dataset references used for data generation. The dataset should already exist before creating the job."
-          }
-        },
-        "description": "A data generation job of type SimpleQnA with Prompt and Seed Data Files datasource used for evaluation."
-      },
-      "SimpleQnAPromptEvaluationDataGenerationJob": {
-        "type": "object",
-        "required": [
-          "type",
-          "datasource_type",
-          "purpose",
-          "options",
-          "model_options"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "SimpleQnA"
-            ],
-            "description": "The data generation job type, which is SimpleQnA for this model."
-          },
-          "datasource_type": {
-            "type": "string",
-            "enum": [
-              "Prompt"
-            ],
-            "description": "The datasource type for this job, which is Prompt."
-          },
-          "purpose": {
-            "type": "string",
-            "enum": [
-              "Evaluation"
-            ],
-            "description": "The purpose of the data generation job. For this type of job, the purpose is always evaluation."
-          },
-          "options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SimpleQnAPromptEvaluationDataGenerationJobOptions"
-              }
-            ],
-            "description": "The options for a SimpleQnA data generation job with Prompt datasource used for evaluation."
-          },
-          "model_options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationModelOptions"
-              }
-            ],
-            "description": "The model deployment options. Only models which support Responses API can be used for this type of job."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/SimpleQnADataGenerationJob"
-          }
-        ],
-        "description": "A data generation job of type SimpleQnA with Prompt datasource used for evaluation."
-      },
-      "SimpleQnAPromptEvaluationDataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "max_samples_count"
-        ],
-        "properties": {
-          "max_samples_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of synthetic samples to generate."
-          },
-          "prompt": {
-            "type": "string",
-            "description": "The prompt used for data generation. Required if agent id is not specified."
-          },
-          "agent_id": {
-            "type": "string",
-            "description": "The agent id to fetch the prompt and other metadata for data generation. The agent id should be in format of '<agent_id>:<version>'"
-          }
-        },
-        "description": "A data generation job of type SimpleQnA with Prompt datasource used for evaluation."
-      },
-      "SimpleQnASeedDataFilesSupervisedFineTuningDataGenerationJob": {
-        "type": "object",
-        "required": [
-          "type",
-          "datasource_type",
-          "purpose",
-          "options"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "SimpleQnA"
-            ],
-            "description": "The data generation job type, which is SimpleQnA for this model."
-          },
-          "datasource_type": {
-            "type": "string",
-            "enum": [
-              "SeedDataFiles"
-            ],
-            "description": "The datasource type for this job, which is SeedDataFiles."
-          },
-          "purpose": {
-            "type": "string",
-            "enum": [
-              "SupervisedFineTuning"
-            ],
-            "description": "The purpose of the data generation job. For this type of job, the purpose is always supervised fine-tuning."
-          },
-          "options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SimpleQnASeedDataFilesSupervisedFineTuningDataGenerationJobOptions"
-              }
-            ],
-            "description": "The options for a SimpleQnA data generation job with SeedDataFiles datasource used for supervised fine-tuning training."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/SimpleQnADataGenerationJob"
-          }
-        ],
-        "description": "A data generation job of type SimpleQnA with SeedDataFiles datasource used for supervised fine-tuning training."
-      },
-      "SimpleQnASeedDataFilesSupervisedFineTuningDataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "max_samples_count",
-          "seed_datasets",
-          "model_options"
-        ],
-        "properties": {
-          "max_samples_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of synthetic samples to generate."
-          },
-          "seed_datasets": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Input seed dataset references used for data generation. The dataset should already exist before creating the job."
-          },
-          "model_options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationModelOptions"
-              }
-            ],
-            "description": "The model deployment options."
           },
           "question_types": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SimpleQnASupervisedFineTuningQuestionType"
             },
-            "description": "The question types to generate. If not specified, both short answer and long answer question types will be generated. Applicable only for simple QnA data generation jobs."
-          },
-          "train_split": {
-            "type": "number",
-            "format": "float",
-            "description": "The proportion of the generated data to use for training vs validation. Should be a value between 0 and 1, where a value of 0.8 means 80% of the generated data will be used for training and 20% will be used for validation. Applicable only when format is 'SupervisedFineTuning'."
+            "description": "The question types to generate. If not specified, both short answer and long answer question types will be generated. Applicable only for simple QnA data generation jobs used for supervised fine-tuning training."
           }
         },
-        "description": "A data generation job of type SimpleQnA with SeedDataFiles datasource used for supervised fine-tuning training."
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a data generation job with SimpleQnA type."
       },
       "SimpleQnASupervisedFineTuningQuestionType": {
         "anyOf": [
@@ -35854,44 +35703,6 @@
           }
         ],
         "description": "The supported question types for SimpleQnA data generation jobs used for supervised fine-tuning training."
-      },
-      "SimpleQnATracesDataGenerationJob": {
-        "type": "object",
-        "required": [
-          "type",
-          "datasource_type",
-          "options"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "SimpleQnA"
-            ],
-            "description": "The data generation job type, which is SimpleQnA for this model."
-          },
-          "datasource_type": {
-            "type": "string",
-            "enum": [
-              "Traces"
-            ],
-            "description": "The datasource type for this job, which is Traces."
-          },
-          "options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TracesDataGenerationJobOptions"
-              }
-            ],
-            "description": "The options for a SimpleQnA data generation job with Traces datasource."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/SimpleQnADataGenerationJob"
-          }
-        ],
-        "description": "A data generation job of type SimpleQnA with Traces datasource used for evaluation or fine-tuning training based on the specified purpose."
       },
       "Sku": {
         "type": "object",
@@ -36294,16 +36105,16 @@
       "TokenUsage": {
         "type": "object",
         "properties": {
-          "input_tokens": {
+          "prompt_tokens": {
             "type": "integer",
             "format": "int32",
-            "description": "Number of input tokens used.",
+            "description": "The number of prompt tokens used.",
             "readOnly": true
           },
-          "output_tokens": {
+          "completion_tokens": {
             "type": "integer",
             "format": "int32",
-            "description": "Number of output tokens used.",
+            "description": "The number of completion tokens generated.",
             "readOnly": true
           },
           "total_tokens": {
@@ -36368,14 +36179,10 @@
         },
         "description": "A project connection resource."
       },
-      "ToolUseFineTuningDataGenerationJob": {
+      "ToolUseFineTuningDataGenerationJobOptions": {
         "type": "object",
         "required": [
-          "type",
-          "purpose",
-          "datasource_type",
-          "options",
-          "model_options"
+          "type"
         ],
         "properties": {
           "type": {
@@ -36384,83 +36191,37 @@
               "ToolUse"
             ],
             "description": "The data generation job type, which is ToolUse for this model."
-          },
-          "purpose": {
-            "type": "string",
-            "enum": [
-              "SupervisedFineTuning"
-            ],
-            "description": "The datasource type for this job, which is SupervisedFineTuning."
-          },
-          "datasource_type": {
-            "type": "string",
-            "enum": [
-              "SeedDataFiles"
-            ],
-            "description": "The datasource type for this job, which is always SeedDataFiles."
-          },
-          "options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions"
-              }
-            ],
-            "description": "The options for a ToolUse data generation job used for fine-tuning supervised training."
-          },
-          "model_options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationModelOptions"
-              }
-            ],
-            "description": "The model deployment options."
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/DataGenerationJob"
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "A data generation job of type ToolUse used for generating tool use data for fine-tuning supervised training."
+        "description": "The options for ToolUse data generation job used for fine-tuning supervised training."
       },
-      "ToolUseFineTuningDataGenerationJobOptions": {
+      "TracesDataGenerationJobDataSource": {
         "type": "object",
         "required": [
-          "max_samples_count",
-          "seed_datasets"
-        ],
-        "properties": {
-          "max_samples_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of synthetic samples to generate."
-          },
-          "seed_datasets": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The input dataset references used for data generation. The dataset should already exist before creating the job."
-          }
-        },
-        "description": "The options for a ToolUse data generation job used for fine-tuning supervised training."
-      },
-      "TracesDataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "max_samples_count",
-          "agent_id",
+          "type",
+          "agent_name",
           "from_time"
         ],
         "properties": {
-          "max_samples_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of synthetic samples to generate."
-          },
-          "agent_id": {
+          "type": {
             "type": "string",
-            "description": "The agent id to fetch the traces for data generation. The agent id should be in format of '<agent_id>:<version>'"
+            "enum": [
+              "Traces"
+            ],
+            "description": "The data source type for this job, which is Traces."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window. If both agent name and agent version are specified, the agent version will be used to fetch the traces."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used."
           },
           "from_time": {
             "type": "string",
@@ -36473,7 +36234,12 @@
             "description": "The end of the time window for fetching traces. This defines the end of the time range for which traces will be considered for data generation. If not specified, it will default to the current time, meaning that traces up until now will be considered for data generation."
           }
         },
-        "description": "The options for a data generation job with Traces datasource, which includes the agent id and the time window for fetching traces."
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobDataSource"
+          }
+        ],
+        "description": "The options for a data generation job with Traces datasource used for Evaluation and fine-tuning purposes, which includes the agent name and the time window for fetching traces."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",

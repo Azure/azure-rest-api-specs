@@ -2,33 +2,24 @@ import "../common/models.tsp";
 
 namespace Azure.AI.Projects;
 
-@doc("Error information for a data generation job that failed.")
-model DataGenerationJobError {
-  @doc("A machine-readable error code.")
-  code?: string;
-
-  @doc("A human-readable error message.")
-  message?: string;
-}
-
 @doc("The supported data generation job types.")
 union DataGenerationJobType {
   string,
 
-  @doc("SimpleQnA job type")
+  @doc("Simple question and answer between user and agent job type")
   SimpleQnA: "SimpleQnA",
 
   @doc("Tool use job type")
   ToolUse: "ToolUse",
 
-  @doc("Multi turn Question and Answer generation job type")
-  MultiTurnQnA: "MultiTurnQnA",
+  @doc("Multi turn conversation between agents and user.")
+  MultiTurn: "MultiTurn",
 }
 
-@doc("Model generation sampling / configuration options.")
+@doc("LLM model options for data generation jobs.")
 model DataGenerationModelOptions {
-  @doc("Base model deployment name used to generate synthetic data.")
-  `model`: string;
+  @doc("Base model name used to generate data.")
+  model_name: string;
 }
 
 @doc("Status values for a data generation job.")
@@ -46,13 +37,24 @@ union DataGenerationJobStatus {
 
   @doc("Job failed.")
   failed: "failed",
+
+  @doc("Job was cancelled.")
+  cancelled: "cancelled",
 }
 
 @doc("Data Generation Job resource.")
-@discriminator("type")
 model DataGenerationJob {
   @doc("The display name of the data generation job.")
   name: string;
+
+  @doc("The data source used for the data generation job.")
+  data_source: DataGenerationJobDataSource;
+
+  @doc("The options for the data generation job.")
+  options: DataGenerationJobOptions;
+
+  @doc("The purpose of the data generation job. Either for fine-tuning supervised training or evaluation.")
+  purpose: DataGenerationJobPurpose;
 
   @doc("The job identifier.")
   @visibility(Lifecycle.Read)
@@ -62,20 +64,14 @@ model DataGenerationJob {
   @visibility(Lifecycle.Read)
   status: DataGenerationJobStatus;
 
-  @doc("The name of the output dataset to create. If not specified, a default name will be generated. If dataset with the same name already exists then tries to create a new version of the dataset with the generated data.")
+  @doc("The name of the output dataset to create. If not specified, a default name will be generated. If a dataset with the same name already exists, a new version of the dataset will be created with the generated data.")
   output_dataset_name?: string;
 
-  @doc("Identifier of the output dataset produced after successful completion. This will be in format of in the format of 'azureai://accounts/<account-name>/projects/<project-name>/data/<dataset-name>/versions/<version-no>'")
+  @doc("Identifier of the output dataset produced after successful completion. This will be in the format of 'azureai://accounts/<account-name>/projects/<project-name>/data/<dataset-name>/versions/<version-no>'")
   @visibility(Lifecycle.Read)
   output_dataset_id?: string;
 
-  @doc("The kind of data generation job executed.")
-  type: DataGenerationJobType;
-
-  @doc("The purpose of the data generation job. Either for fine-tuning supervised training or evaluation.")
-  purpose: DataGenerationJobPurpose;
-
-  @doc("The number of synthetic samples actually generated. This field will be populated only after the job is completed.")
+  @doc("The number of samples actually generated. This field will be populated only after the job is completed.")
   @visibility(Lifecycle.Read)
   generated_samples_count?: int32;
 
@@ -93,7 +89,7 @@ model DataGenerationJob {
 
   @doc("Error information set only when status is 'failed'.")
   @visibility(Lifecycle.Read)
-  error?: DataGenerationJobError;
+  error?: ApiError;
 
   @doc("Additional warnings related to the data generation job execution. These are non-critical issues that do not cause the job to fail but may be important for users to be aware of.")
   @visibility(Lifecycle.Read)
@@ -103,21 +99,15 @@ model DataGenerationJob {
   };
 }
 
-@doc("Options for managing data generation jobs.")
-model DataGenerationJobOptions {
-  @doc("Maximum number of synthetic samples to generate.")
-  max_samples_count: int32;
-}
-
 @doc("Token usage information for a data generation job.")
 model TokenUsage {
-  @doc("Number of input tokens used.")
+  @doc("The number of prompt tokens used.")
   @visibility(Lifecycle.Read)
-  input_tokens?: int32;
+  prompt_tokens?: int32;
 
-  @doc("Number of output tokens used.")
+  @doc("The number of completion tokens generated.")
   @visibility(Lifecycle.Read)
-  output_tokens?: int32;
+  completion_tokens?: int32;
 
   @doc("Total number of tokens used.")
   @visibility(Lifecycle.Read)
@@ -155,104 +145,108 @@ union DataGenerationJobDataSourceType {
   PromptAndSeedDataFiles: "PromptAndSeedDataFiles",
 }
 
-@doc("A data generation job of type SimpleQnA which generates simple question and answer pairs based on the specified datasource type.")
-@discriminator("datasource_type")
-model SimpleQnADataGenerationJob extends DataGenerationJob {
+@doc("Options for managing data generation jobs.")
+@discriminator("type")
+model DataGenerationJobOptions {
+  @doc("The data generation job type.")
+  type: DataGenerationJobType;
+
+  @doc("Maximum number of samples to generate.")
+  max_samples_count: int32;
+
+  @doc("The model deployment options. Required only when the data source type is not Traces.")
+  model_options?: DataGenerationModelOptions;
+}
+
+@doc("The options for a data generation job with SimpleQnA type.")
+model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is SimpleQnA for this model.")
   type: "SimpleQnA";
 
-  @doc("The datasource type for this job.")
-  datasource_type: DataGenerationJobDataSourceType;
+  @doc("The question types to generate. If not specified, both short answer and long answer question types will be generated. Applicable only for simple QnA data generation jobs used for supervised fine-tuning training.")
+  question_types?: Array<SimpleQnASupervisedFineTuningQuestionType>;
 }
 
-@doc("A data generation job of type SimpleQnA with Prompt datasource used for evaluation.")
-model SimpleQnAPromptEvaluationDataGenerationJob
-  extends SimpleQnADataGenerationJob {
-  @doc("The data generation job type, which is SimpleQnA for this model.")
-  type: "SimpleQnA";
-
-  @doc("The datasource type for this job, which is Prompt.")
-  datasource_type: "Prompt";
-
-  @doc("The purpose of the data generation job. For this type of job, the purpose is always evaluation.")
-  purpose: "Evaluation";
-
-  @doc("The options for a SimpleQnA data generation job with Prompt datasource used for evaluation.")
-  options: SimpleQnAPromptEvaluationDataGenerationJobOptions;
-
-  @doc("The model deployment options. Only models which support Responses API can be used for this type of job.")
-  model_options: DataGenerationModelOptions;
+@doc("The options for ToolUse data generation job used for fine-tuning supervised training.")
+model ToolUseFineTuningDataGenerationJobOptions
+  extends DataGenerationJobOptions {
+  @doc("The data generation job type, which is ToolUse for this model.")
+  type: "ToolUse";
 }
 
-@doc("A data generation job of type SimpleQnA with Prompt and Seed Data Files datasource used for evaluation.")
-model SimpleQnAPromptAndSeedDataFilesEvaluationDataGenerationJob
-  extends SimpleQnADataGenerationJob {
-  @doc("The data generation job type, which is SimpleQnA for this model.")
-  type: "SimpleQnA";
-
-  @doc("The datasource type for this job, which is a combination of prompts and seed data files.")
-  datasource_type: "PromptAndSeedDataFiles";
-
-  @doc("The purpose of the data generation job. For this type of job, the purpose is always evaluation.")
-  purpose: "Evaluation";
-
-  @doc("The options for a SimpleQnA data generation job with Prompt and Seed Data Files datasource used for evaluation.")
-  options: SimpleQnAPromptAndSeedDataFilesEvaluationDataGenerationJobOptions;
-
-  @doc("The model deployment options. Only models which support Responses API can be used for this type of job.")
-  model_options: DataGenerationModelOptions;
+@doc("The options for a data generation job with MultiTurn type.")
+model MultiTurnDataGenerationJobOptions extends DataGenerationJobOptions {
+  @doc("The data generation job type, which is MultiTurn for this model.")
+  type: "MultiTurn";
 }
 
-@doc("A data generation job of type SimpleQnA with Prompt datasource used for evaluation.")
-model SimpleQnAPromptEvaluationDataGenerationJobOptions {
-  ...DataGenerationJobOptions;
+@doc("The base data source model for a data generation job.")
+@discriminator("type")
+model DataGenerationJobDataSource {
+  @doc("The type of the data source.")
+  type: DataGenerationJobDataSourceType;
+}
 
-  @doc("The prompt used for data generation. Required if agent id is not specified.")
+@doc("The options for a data generation job with Traces datasource used for Evaluation and fine-tuning purposes, which includes the agent name and the time window for fetching traces.")
+model TracesDataGenerationJobDataSource extends DataGenerationJobDataSource {
+  @doc("The data source type for this job, which is Traces.")
+  type: "Traces";
+
+  @doc("The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window. If both agent name and agent version are specified, the agent version will be used to fetch the traces.")
+  agent_name: string;
+
+  @doc("The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used.")
+  agent_version?: string;
+
+  @doc("The start of the time window for fetching traces. This defines the beginning of the time range for which traces will be considered for data generation.")
+  from_time: utcDateTime;
+
+  @doc("The end of the time window for fetching traces. This defines the end of the time range for which traces will be considered for data generation. If not specified, it will default to the current time, meaning that traces up until now will be considered for data generation.")
+  to_time?: utcDateTime;
+}
+
+@doc("The options for a data generation job with Prompt datasource used for Evaluation purpose, which includes the prompt or the agent name to fetch the prompt and other metadata for data generation.")
+model PromptDataGenerationJobDataSource extends DataGenerationJobDataSource {
+  @doc("The data source type for this job, which is Prompt.")
+  type: "Prompt";
+
+  @doc("The prompt used for data generation. Required if agent name is not specified.")
   prompt?: string;
 
-  @doc("The agent id to fetch the prompt and other metadata for data generation. The agent id should be in format of '<agent_id>:<version>'")
-  agent_id?: string;
+  @doc("The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window. If both agent name and agent version are specified, the agent version will be used to fetch the traces.")
+  agent_name: string;
+
+  @doc("The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used.")
+  agent_version?: string;
 }
 
-@doc("A data generation job of type SimpleQnA with Prompt and Seed Data Files datasource used for evaluation.")
-model SimpleQnAPromptAndSeedDataFilesEvaluationDataGenerationJobOptions {
-  ...SimpleQnAPromptEvaluationDataGenerationJobOptions;
+@doc("The options for a data generation job with SeedDataFiles datasource used for fine-tuning supervised training, which includes the input seed datasets for data generation.")
+model SeedDataFilesDataGenerationJobDataSource
+  extends DataGenerationJobDataSource {
+  @doc("The data source type for this job, which is SeedDataFiles.")
+  type: "SeedDataFiles";
 
   @doc("Input seed dataset references used for data generation. The dataset should already exist before creating the job.")
   seed_datasets: Array<string>;
 }
 
-@doc("A data generation job of type SimpleQnA with SeedDataFiles datasource used for supervised fine-tuning training.")
-model SimpleQnASeedDataFilesSupervisedFineTuningDataGenerationJob
-  extends SimpleQnADataGenerationJob {
-  @doc("The data generation job type, which is SimpleQnA for this model.")
-  type: "SimpleQnA";
+@doc("The options for a data generation job with Prompt and Seed Data Files datasource used for Evaluation purpose, which includes the prompt, the input seed datasets and the agent name to fetch the prompt and other metadata for data generation.")
+model PromptAndSeedDataFilesDataGenerationJobDataSource
+  extends DataGenerationJobDataSource {
+  @doc("The data source type for this job, which is a combination of prompts and seed data files.")
+  type: "PromptAndSeedDataFiles";
 
-  @doc("The datasource type for this job, which is SeedDataFiles.")
-  datasource_type: "SeedDataFiles";
+  @doc("The prompt used for data generation. Required if agent name is not specified.")
+  prompt?: string;
 
-  @doc("The purpose of the data generation job. For this type of job, the purpose is always supervised fine-tuning.")
-  purpose: "SupervisedFineTuning";
+  @doc("The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window. If both agent name and agent version are specified, the agent version will be used to fetch the traces.")
+  agent_name: string;
 
-  @doc("The options for a SimpleQnA data generation job with SeedDataFiles datasource used for supervised fine-tuning training.")
-  options: SimpleQnASeedDataFilesSupervisedFineTuningDataGenerationJobOptions;
-}
-
-@doc("A data generation job of type SimpleQnA with SeedDataFiles datasource used for supervised fine-tuning training.")
-model SimpleQnASeedDataFilesSupervisedFineTuningDataGenerationJobOptions {
-  ...DataGenerationJobOptions;
+  @doc("The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used.")
+  agent_version?: string;
 
   @doc("Input seed dataset references used for data generation. The dataset should already exist before creating the job.")
   seed_datasets: Array<string>;
-
-  @doc("The model deployment options.")
-  model_options: DataGenerationModelOptions;
-
-  @doc("The question types to generate. If not specified, both short answer and long answer question types will be generated. Applicable only for simple QnA data generation jobs.")
-  question_types?: Array<SimpleQnASupervisedFineTuningQuestionType>;
-
-  @doc("The proportion of the generated data to use for training vs validation. Should be a value between 0 and 1, where a value of 0.8 means 80% of the generated data will be used for training and 20% will be used for validation. Applicable only when format is 'SupervisedFineTuning'.")
-  train_split?: float32;
 }
 
 @doc("The supported question types for SimpleQnA data generation jobs used for supervised fine-tuning training.")
@@ -264,76 +258,4 @@ union SimpleQnASupervisedFineTuningQuestionType {
 
   @doc("Long answer question type.")
   LongAnswer: "LongAnswer",
-}
-
-@doc("A data generation job of type SimpleQnA with Traces datasource used for evaluation or fine-tuning training based on the specified purpose.")
-model SimpleQnATracesDataGenerationJob extends SimpleQnADataGenerationJob {
-  @doc("The data generation job type, which is SimpleQnA for this model.")
-  type: "SimpleQnA";
-
-  @doc("The datasource type for this job, which is Traces.")
-  datasource_type: "Traces";
-
-  @doc("The options for a SimpleQnA data generation job with Traces datasource.")
-  options: TracesDataGenerationJobOptions;
-}
-
-@doc("The options for a data generation job with Traces datasource, which includes the agent id and the time window for fetching traces.")
-model TracesDataGenerationJobOptions {
-  ...DataGenerationJobOptions;
-
-  @doc("The agent id to fetch the traces for data generation. The agent id should be in format of '<agent_id>:<version>'")
-  agent_id: string;
-
-  @doc("The start of the time window for fetching traces. This defines the beginning of the time range for which traces will be considered for data generation.")
-  from_time: utcDateTime;
-
-  @doc("The end of the time window for fetching traces. This defines the end of the time range for which traces will be considered for data generation. If not specified, it will default to the current time, meaning that traces up until now will be considered for data generation.")
-  to_time?: utcDateTime;
-}
-
-@doc("A data generation job of type MultiTurnQnA used for generating multi-turn question and answer pairs.")
-@discriminator("datasource_type")
-model MultiTurnQnADataGenerationJob extends DataGenerationJob {
-  type: "MultiTurnQnA";
-  datasource_type: DataGenerationJobDataSourceType;
-}
-
-@doc("A data generation job of type MultiTurnQnA with Traces datasource used for evaluation or fine-tuning training based on the specified purpose.")
-model MultiTurnQnATracesDataGenerationJob
-  extends MultiTurnQnADataGenerationJob {
-  @doc("The data generation job type, which is MultiTurnQnA for this model.")
-  type: "MultiTurnQnA";
-
-  @doc("The datasource type for this job, which is Traces.")
-  datasource_type: "Traces";
-
-  @doc("The options for a MultiTurnQnA data generation job with Traces datasource.")
-  options: TracesDataGenerationJobOptions;
-}
-
-@doc("A data generation job of type ToolUse used for generating tool use data for fine-tuning supervised training.")
-model ToolUseFineTuningDataGenerationJob extends DataGenerationJob {
-  @doc("The data generation job type, which is ToolUse for this model.")
-  type: "ToolUse";
-
-  @doc("The datasource type for this job, which is SupervisedFineTuning.")
-  purpose: "SupervisedFineTuning";
-
-  @doc("The datasource type for this job, which is always SeedDataFiles.")
-  datasource_type: "SeedDataFiles";
-
-  @doc("The options for a ToolUse data generation job used for fine-tuning supervised training.")
-  options: ToolUseFineTuningDataGenerationJobOptions;
-
-  @doc("The model deployment options.")
-  model_options: DataGenerationModelOptions;
-}
-
-@doc("The options for a ToolUse data generation job used for fine-tuning supervised training.")
-model ToolUseFineTuningDataGenerationJobOptions {
-  ...DataGenerationJobOptions;
-
-  @doc("The input dataset references used for data generation. The dataset should already exist before creating the job.")
-  seed_datasets: Array<string>;
 }
