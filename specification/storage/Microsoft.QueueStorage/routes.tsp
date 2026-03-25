@@ -406,8 +406,12 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @route("messages/{messageId}")
-  updateMessage is StorageOperationRequestBody<
+  updateMessage is StorageOperationNoBody<
     {
+      /** Content-Type header */
+      @header("Content-Type")
+      contentType?: "application/xml";
+
       ...MessageIdPathParameter;
       ...PopReceiptQueryParameter;
 
