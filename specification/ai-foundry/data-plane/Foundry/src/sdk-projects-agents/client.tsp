@@ -26,7 +26,7 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Root client
   // --------------------------------------------------------------------------------
-  @@clientName(Agents, "AgentsClient", "csharp");
+  @@clientName(Agents, "AgentAdministrationClient", "csharp");
   @@clientInitialization(Azure.AI.Projects.Agents,
     {
       initializedBy: InitializedBy.parent | InitializedBy.individually,
@@ -189,6 +189,7 @@ namespace Azure.AI.Projects {
 
   @@usage(PromptAgentDefinition, Usage.input | Usage.output);
   @@access(PromptAgentDefinition, Access.public);
+  @@clientName(PromptAgentDefinition, "DeclarativeAgentDefinition");
 
   @@usage(AgentObject, Usage.output);
   @@access(AgentObject, Access.public);

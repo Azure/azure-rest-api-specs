@@ -75,5 +75,3 @@ interface Toolsets {}
 @@clientLocation(Azure.AI.Projects.Toolsets.getToolset, Toolsets);
 @@clientLocation(Azure.AI.Projects.Toolsets.listToolsets, Toolsets);
 @@clientLocation(Azure.AI.Projects.Toolsets.deleteToolset, Toolsets);
-
-
