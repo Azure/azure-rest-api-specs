@@ -240,7 +240,8 @@ interface VpnGateways {
     void,
     Response = {
       @body body: void;
-    } | ArmAcceptedLroResponse | NoContentResponse,
+    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 

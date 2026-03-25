@@ -233,7 +233,8 @@ interface ExpressRouteCrossConnections {
     void,
     Response = {
       @body body: void;
-    } | ArmAcceptedLroResponse | NoContentResponse,
+    } | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>> | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 

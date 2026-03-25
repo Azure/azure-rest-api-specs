@@ -108,7 +108,7 @@ interface NetworkVirtualApplianceConnections {
     void,
     Response = {
       @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | NoContentResponse,
+    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void>> | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 

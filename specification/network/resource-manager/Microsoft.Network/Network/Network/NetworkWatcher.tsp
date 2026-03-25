@@ -386,7 +386,8 @@ interface NetworkWatchers {
     Result = void,
     Response = {
       @body body: void;
-    } | ArmAcceptedLroResponse,
+    } | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>>,
     OverrideErrorType = ErrorResponse
   >;
 

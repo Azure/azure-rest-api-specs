@@ -127,9 +127,8 @@ interface SwapResources {
     SwapResource,
     Response = {
       @body body: void;
-    } | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     ErrorType = CloudError
   >;
 

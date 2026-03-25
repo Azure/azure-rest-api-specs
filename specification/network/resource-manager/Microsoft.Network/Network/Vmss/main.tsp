@@ -31,8 +31,8 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "NetworkManagementClient" })
 @versioned(Versions)
-// FIXME: Common type version not set. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+// FIXME: Common type version not set. Set to v5.
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Compute;
 
 /**
