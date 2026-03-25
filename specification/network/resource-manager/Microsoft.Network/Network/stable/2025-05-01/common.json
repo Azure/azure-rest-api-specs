@@ -7495,6 +7495,31 @@
     "SecurityPerimeterTrackedResource": {
       "type": "object",
       "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/SecurityPerimeterResource"

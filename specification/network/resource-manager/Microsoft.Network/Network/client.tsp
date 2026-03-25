@@ -1290,6 +1290,10 @@ union ProvisioningStateUnion {
 );
 @@clientName(Microsoft.Network.NetworkProtocol, "Protocol", "go");
 @@clientName(Microsoft.Network.Protocol, "BaseProtocol", "go");
+@@clientName(FirewallPolicyPropertiesFormat.explicitProxy,
+  "ExplicitProxySettings",
+  "go"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
