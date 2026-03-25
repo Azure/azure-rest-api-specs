@@ -15114,7 +15114,20 @@ model SecurityPerimeterProxyResource extends SecurityPerimeterResource {}
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
-model SecurityPerimeterTrackedResource extends SecurityPerimeterResource {}
+model SecurityPerimeterTrackedResource extends SecurityPerimeterResource {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: string;
+}
 
 /**
  * Properties of NSP access rule.
