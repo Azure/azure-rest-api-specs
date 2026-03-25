@@ -17,9 +17,7 @@ using Azure.ResourceManager;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.HorizonDb;
 
-/**
- * The available API versions.
- */
+@doc("The available API versions.")
 enum Versions {
   /**
    * The 2026-01-20-preview API version.

@@ -3,20 +3,20 @@
   "title": "Create or update a HorizonDb cluster",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "myResourceGroup",
-    "clusterName": "myHorizonCluster",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
     "api-version": "2026-01-20-preview",
     "resource": {
-      "location": "eastus2",
+      "location": "westus2",
       "tags": {
         "env": "dev"
       },
       "properties": {
         "createMode": "Create",
-        "sourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/mySourceGroup/providers/Microsoft.HorizonDb/clusters/sourceCluster",
+        "sourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/examplesourceresourcegroup/providers/Microsoft.HorizonDb/clusters/examplesourcecluster",
         "version": "17",
-        "administratorLogin": "hdbadmin",
-        "administratorLoginPassword": "P@ssword1!",
+        "administratorLogin": "exampleadministratorlogin",
+        "administratorLoginPassword": "examplepassword",
         "vCores": 4,
         "replicaCount": 2,
         "zonePlacementPolicy": "Strict"
@@ -26,42 +26,42 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster",
-        "name": "myHorizonCluster",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster",
+        "name": "examplecluster",
         "type": "Microsoft.HorizonDb/clusters",
-        "location": "eastus2",
+        "location": "westus2",
         "tags": {
           "env": "dev"
         },
         "properties": {
-          "administratorLogin": "hdbadmin",
+          "administratorLogin": "exampleadministratorlogin",
           "version": "17",
           "createMode": "Create",
-          "sourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/mySourceGroup/providers/Microsoft.HorizonDb/clusters/sourceCluster",
+          "sourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/examplesourceresourcegroup/providers/Microsoft.HorizonDb/clusters/examplesourcecluster",
           "vCores": 4,
           "replicaCount": 2,
           "zonePlacementPolicy": "Strict",
           "state": "Ready",
-          "fullyQualifiedDomainName": "myHorizonCluster.eastus2.horizondb.azure.com",
-          "readonlyEndpoint": "myHorizonCluster-ro.horizondb.azure.com",
+          "fullyQualifiedDomainName": "examplecluster.westus2.horizondb.azure.com",
+          "readonlyEndpoint": "examplecluster-ro.horizondb.azure.com",
           "provisioningState": "Succeeded"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster",
-        "name": "myHorizonCluster",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster",
+        "name": "examplecluster",
         "type": "Microsoft.HorizonDb/clusters",
-        "location": "eastus2",
+        "location": "westus2",
         "tags": {
           "env": "dev"
         },
         "properties": {
-          "administratorLogin": "hdbadmin",
+          "administratorLogin": "exampleadministratorlogin",
           "version": "17",
           "createMode": "Create",
-          "sourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/mySourceGroup/providers/Microsoft.HorizonDb/clusters/sourceCluster",
+          "sourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/examplesourceresourcegroup/providers/Microsoft.HorizonDb/clusters/examplesourcecluster",
           "vCores": 4,
           "replicaCount": 2,
           "zonePlacementPolicy": "Strict",

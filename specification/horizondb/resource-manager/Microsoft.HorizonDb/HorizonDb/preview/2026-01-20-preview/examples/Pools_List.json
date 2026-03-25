@@ -3,8 +3,8 @@
   "title": "List HorizonDb pools in a cluster",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "myResourceGroup",
-    "clusterName": "myHorizonCluster",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
     "api-version": "2026-01-20-preview"
   },
   "responses": {
@@ -12,25 +12,13 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster/pools/pool1",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/pool1",
             "name": "pool1",
             "type": "Microsoft.HorizonDb/clusters/pools",
             "properties": {
-              "location": "canadacentral",
+              "location": "westus2",
               "state": "Ready",
               "replicaCount": 2,
-              "administratorLogin": "pooladmin",
-              "provisioningState": "Succeeded"
-            }
-          },
-          {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster/pools/pool2",
-            "name": "pool2",
-            "type": "Microsoft.HorizonDb/clusters/pools",
-            "properties": {
-              "location": "canadacentral",
-              "state": "Ready",
-              "replicaCount": 3,
               "administratorLogin": "pooladmin",
               "provisioningState": "Succeeded"
             }

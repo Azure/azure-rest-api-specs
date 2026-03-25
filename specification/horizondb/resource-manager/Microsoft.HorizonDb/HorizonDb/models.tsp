@@ -9,9 +9,10 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
+@doc("Represents the HorizonDb cluster.")
 model HorizonDbCluster
   is Azure.ResourceManager.TrackedResource<HorizonDbClusterProperties> {
-  @doc("The name of the HorizonDb cluster")
+  @doc("The name of the HorizonDb cluster.")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(63)
@@ -21,12 +22,13 @@ model HorizonDbCluster
   name: string;
 }
 
+@doc("Represents the HorizonDb pool.")
 @parentResource(HorizonDbCluster)
 model HorizonDbPool
   is Azure.ResourceManager.ProxyResource<HorizonDbPoolProperties> {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  @doc("The name of the HorizonDb pool")
+  @doc("The name of the HorizonDb pool.")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(63)
@@ -36,10 +38,11 @@ model HorizonDbPool
   name: string;
 }
 
+@doc("Represents the HorizonDb replica.")
 @parentResource(HorizonDbPool)
 model HorizonDbReplica
   is Azure.ResourceManager.ProxyResource<HorizonDbReplicaProperties> {
-  @doc("The name of the HorizonDb replica")
+  @doc("The name of the HorizonDb replica.")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(63)
@@ -49,10 +52,11 @@ model HorizonDbReplica
   name: string;
 }
 
+@doc("Represents the HorizonDb firewall rule.")
 @parentResource(HorizonDbPool)
 model HorizonDbFirewallRule
   is Azure.ResourceManager.ProxyResource<HorizonDbFirewallRuleProperties> {
-  @doc("The name of the HorizonDb firewall rule")
+  @doc("The name of the HorizonDb firewall rule.")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(128)
@@ -62,10 +66,11 @@ model HorizonDbFirewallRule
   name: string;
 }
 
+@doc("Represents the HorizonDb private link resource.")
 @parentResource(HorizonDbCluster)
 model HorizonDbPrivateLinkResource
   is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
-  @doc("The name of the private link resource")
+  @doc("The name of the private link resource.")
   @pattern("^.*$")
   @minLength(1)
   @maxLength(128)
@@ -75,9 +80,10 @@ model HorizonDbPrivateLinkResource
   name: string;
 }
 
+@doc("Represents the HorizonDb parameter group.")
 model HorizonDbParameterGroup
   is Azure.ResourceManager.TrackedResource<HorizonDbParameterGroupProperties> {
-  @doc("The name of the HorizonDb parameter group")
+  @doc("The name of the HorizonDb parameter group.")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(63)
@@ -87,92 +93,92 @@ model HorizonDbParameterGroup
   name: string;
 }
 
-@doc("Properties of a HorizonDb cluster")
+@doc("Properties of a HorizonDb cluster.")
 model HorizonDbClusterProperties {
-  @doc("The administrator login name")
+  @doc("The administrator login name.")
   @minLength(1)
   @maxLength(63)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   administratorLogin: string;
 
-  @doc("The administrator login password")
+  @doc("The administrator login password.")
   @secret
   @minLength(8)
   @maxLength(128)
   @visibility(Lifecycle.Create, Lifecycle.Update)
   administratorLoginPassword?: string;
 
-  @doc("The version of the HorizonDb cluster")
+  @doc("The version of the HorizonDb cluster.")
   version?: string;
 
-  @doc("The mode to create a new HorizonDb cluster")
+  @doc("The mode to create a new HorizonDb cluster.")
   createMode?: CreateModeCluster;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UTC is a well-established acronym for Coordinated Universal Time and should remain uppercase for clarity and consistency with Azure service conventions"
-  @doc("Restore point creation time specifying the time to restore from")
+  @doc("Restore point creation time specifying the time to restore from.")
   pointInTimeUTC?: utcDateTime;
 
-  @doc("The source cluster resource ID for restore or replica creation")
+  @doc("The source cluster resource ID for restore or replica creation.")
   sourceClusterResourceId?: armResourceIdentifier;
 
-  @doc("The pool name for restore or replica operations")
+  @doc("The pool name for restore or replica operations.")
   poolName?: string;
 
-  @doc("Number of replicas")
+  @doc("Number of replicas.")
   @minValue(1)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   replicaCount?: int32;
 
-  @doc("Number of vCores")
+  @doc("Number of vCores.")
   @minValue(1)
   @maxValue(96)
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   vCores?: int32;
 
-  @doc("The processor type for the HorizonDb cluster")
+  @doc("The processor type for the HorizonDb cluster.")
   processorType?: string;
 
-  @doc("The network related info")
+  @doc("The network related info.")
   network?: Network;
 
-  @doc("Current state of the cluster")
+  @doc("Current state of the cluster.")
   @visibility(Lifecycle.Read)
   state?: State;
 
-  @doc("The fully qualified domain name of the cluster")
+  @doc("The fully qualified domain name of the cluster.")
   @visibility(Lifecycle.Read)
   fullyQualifiedDomainName?: string;
 
-  @doc("The fully qualified domain name used for readonly endpoint for the cluster")
+  @doc("The fully qualified domain name used for readonly endpoint for the cluster.")
   @visibility(Lifecycle.Read)
   readonlyEndpoint?: string;
 
-  @doc("The provisioning state of the cluster")
+  @doc("The provisioning state of the cluster.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @doc("Defines how replicas are placed across availability zones")
+  @doc("Defines how replicas are placed across availability zones.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   zonePlacementPolicy?: ZonePlacementPolicy;
 }
 
-@doc("Properties of a HorizonDb cluster for update operations")
+@doc("Properties of a HorizonDb cluster for update operations.")
 model HorizonDbClusterPropertiesForPatchUpdate {
   @secret
   @minLength(8)
   @maxLength(128)
-  @doc("The administrator login password")
+  @doc("The administrator login password.")
   @visibility(Lifecycle.Update)
   administratorLoginPassword?: string;
 
-  @doc("Number of vCores")
+  @doc("Number of vCores.")
   @minValue(1)
   @maxValue(96)
   @visibility(Lifecycle.Update)
   vCores?: int32;
 }
 
-@doc("HorizonDb cluster for update operations")
+@doc("HorizonDb cluster for update operations.")
 model HorizonDbClusterForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
@@ -180,21 +186,21 @@ model HorizonDbClusterForPatchUpdate {
   properties?: HorizonDbClusterPropertiesForPatchUpdate;
 }
 
-@doc("Properties of a HorizonDb pool")
+@doc("Properties of a HorizonDb pool.")
 model HorizonDbPoolProperties {
-  @doc("The location of the HorizonDb pool")
+  @doc("The location of the HorizonDb pool.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: azureLocation;
 
-  @doc("Current state of the pool")
+  @doc("Current state of the pool.")
   @visibility(Lifecycle.Read)
   state?: State;
 
-  @doc("Number of replicas in the pool")
+  @doc("Number of replicas in the pool.")
   @visibility(Lifecycle.Read)
   replicaCount?: int32;
 
-  @doc("The administrator login for the pool")
+  @doc("The administrator login for the pool.")
   @visibility(Lifecycle.Read)
   administratorLogin?: string;
 
@@ -205,22 +211,22 @@ model HorizonDbPoolProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update)
   administratorLoginPassword?: string;
 
-  @doc("The version of the HorizonDb pool")
+  @doc("The version of the HorizonDb pool.")
   @visibility(Lifecycle.Read)
   version?: string;
 
-  @doc("The create mode for the pool")
+  @doc("The create mode for the pool.")
   @visibility(Lifecycle.Read)
   createMode?: CreateModePool;
 
-  @doc("The provisioning state of the pool")
+  @doc("The provisioning state of the pool.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-@doc("Properties of a HorizonDb pool for update operations")
+@doc("Properties of a HorizonDb pool for update operations.")
 model HorizonDbPoolPropertiesForPatchUpdate {
-  @doc("The administrator login password for the pool")
+  @doc("The administrator login password for the pool.")
   @secret
   @minLength(8)
   @maxLength(128)
@@ -228,7 +234,7 @@ model HorizonDbPoolPropertiesForPatchUpdate {
   administratorLoginPassword?: string;
 }
 
-@doc("HorizonDb pool for update operations")
+@doc("HorizonDb pool for update operations.")
 model HorizonDbPoolForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
@@ -236,69 +242,69 @@ model HorizonDbPoolForPatchUpdate {
   properties?: HorizonDbPoolPropertiesForPatchUpdate;
 }
 
-@doc("Network properties")
+@doc("Network properties.")
 model Network {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "publicNetworkAccess is a configuration flag, not sensitive data"
-  @doc("The flag indicating whether public ip is requested")
+  @doc("The flag indicating whether public ip is requested.")
   @visibility(Lifecycle.Read)
   publicNetworkAccess?: PublicNetworkAccessState;
 }
 
-@doc("Properties of a HorizonDb replica")
+@doc("Properties of a HorizonDb replica.")
 model HorizonDbReplicaProperties {
-  @doc("Role of the replica")
+  @doc("Role of the replica.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   role?: ReplicaRole;
 
-  @doc("Current status of the replica")
+  @doc("Current status of the replica.")
   @visibility(Lifecycle.Read)
   status?: State;
 
-  @doc("The fully qualified domain name of the replica")
+  @doc("The fully qualified domain name of the replica.")
   @visibility(Lifecycle.Read)
   fullyQualifiedDomainName?: string;
 
-  @doc("The availability zone of the replica")
+  @doc("The availability zone of the replica.")
   availabilityZone?: string;
 
-  @doc("The provisioning state of the replica")
+  @doc("The provisioning state of the replica.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-@doc("Properties of a HorizonDb replica for update operations")
+@doc("Properties of a HorizonDb replica for update operations.")
 model HorizonDbReplicaPropertiesForPatchUpdate {
   @visibility(Lifecycle.Update)
-  @doc("Role of the replica")
+  @doc("Role of the replica.")
   role?: ReplicaRole;
 }
 
-@doc("HorizonDb replica for update operations")
+@doc("HorizonDb replica for update operations.")
 model HorizonDbReplicaForPatchUpdate {
-  @doc("Properties of a HorizonDb replica for update operations")
+  @doc("Properties of a HorizonDb replica for update operations.")
   properties?: HorizonDbReplicaPropertiesForPatchUpdate;
 }
 
-@doc("Properties of a HorizonDb firewall rule")
+@doc("Properties of a HorizonDb firewall rule.")
 model HorizonDbFirewallRuleProperties {
-  @doc("The start IP address of the firewall rule (IPv4)")
+  @doc("The start IP address of the firewall rule (IPv4).")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   startIpAddress: string;
 
-  @doc("The end IP address of the firewall rule (IPv4)")
+  @doc("The end IP address of the firewall rule (IPv4).")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   endIpAddress: string;
 
-  @doc("The description of the HorizonDb firewall rule")
+  @doc("The description of the HorizonDb firewall rule.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   description?: string;
 
-  @doc("The provisioning state of the firewall rule")
+  @doc("The provisioning state of the firewall rule.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-@doc("The mode to create a new HorizonDb cluster")
+@doc("The mode to create a new HorizonDb cluster.")
 union CreateModeCluster {
   string,
 
@@ -318,7 +324,7 @@ union CreateModeCluster {
   ReviveDropped: "ReviveDropped",
 }
 
-@doc("The mode to create a new HorizonDb cluster")
+@doc("The mode to create a new HorizonDb cluster.")
 union CreateModePool {
   string,
 
@@ -329,7 +335,7 @@ union CreateModePool {
   Update: "Update",
 }
 
-@doc("The zone redundancy option for the cluster")
+@doc("The zone redundancy option for the cluster.")
 union ZonePlacementPolicy {
   string,
 
@@ -340,7 +346,7 @@ union ZonePlacementPolicy {
   BestEffort: "BestEffort",
 }
 
-@doc("Current states")
+@doc("Current states.")
 union State {
   string,
 
@@ -380,7 +386,7 @@ union PublicNetworkAccessState {
   Disabled: "Disabled",
 }
 
-@doc("Role of the replica")
+@doc("Role of the replica.")
 union ReplicaRole {
   string,
 
@@ -391,7 +397,7 @@ union ReplicaRole {
   ReadWrite: "ReadWrite",
 }
 
-@doc("The provisioning state")
+@doc("The provisioning state.")
 union ProvisioningState {
   string,
 
@@ -411,88 +417,88 @@ union ProvisioningState {
   Provisioning: "Provisioning",
 }
 
-@doc("Properties of a HorizonDb parameter group")
+@doc("Properties of a HorizonDb parameter group.")
 model HorizonDbParameterGroupProperties {
-  @doc("Parameters in the parameter group")
+  @doc("Parameters in the parameter group.")
   @identifiers(#["name"])
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   parameters?: ParameterProperties[];
 
-  @doc("Description of the parameter group")
+  @doc("Description of the parameter group.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   description?: string;
 
-  @doc("PostgreSQL version for the parameter group")
+  @doc("PostgreSQL version for the parameter group.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   pgVersion?: int32;
 
-  @doc("Current version of the parameter group")
+  @doc("Current version of the parameter group.")
   @visibility(Lifecycle.Read)
   version?: int32;
 
-  @doc("Indicates whether the parameters should be applied immediately")
+  @doc("Indicates whether the parameters should be applied immediately.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   applyImmediately?: boolean;
 
-  @doc("The provisioning state of the parameter group")
+  @doc("The provisioning state of the parameter group.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-@doc("Properties of a HorizonDb parameters")
+@doc("Properties of a HorizonDb parameters.")
 model ParameterProperties {
-  @doc("The name of the parameter")
+  @doc("The name of the parameter.")
   name?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The description of the parameter")
+  @doc("The description of the parameter.")
   description?: string;
 
-  @doc("The value of the configuration")
+  @doc("The value of the configuration.")
   value?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The data type of the parameter")
+  @doc("The data type of the parameter.")
   dataType?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The allowed values for the parameter")
+  @doc("The allowed values for the parameter.")
   allowedValues?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("Whether the parameter can be changed dynamically")
+  @doc("Whether the parameter can be changed dynamically.")
   isDynamic?: boolean;
 
   @visibility(Lifecycle.Read)
-  @doc("Whether the parameter is a read-only parameter")
+  @doc("Whether the parameter is a read-only parameter.")
   isReadOnly?: boolean;
 
   @visibility(Lifecycle.Read)
-  @doc("Link to parameter documentation")
+  @doc("Link to parameter documentation.")
   documentationLink?: url;
 
   @visibility(Lifecycle.Read)
-  @doc("The unit of measurement for the parameter")
+  @doc("The unit of measurement for the parameter.")
   unit?: string;
 }
 
-@doc("Properties of a HorizonDb parameter group for update operations")
+@doc("Properties of a HorizonDb parameter group for update operations.")
 model HorizonDbParameterGroupPropertiesForPatchUpdate {
-  @doc("Parameters in the parameter group")
+  @doc("Parameters in the parameter group.")
   @identifiers(#["name"])
   @visibility(Lifecycle.Update)
   parameters?: ParameterProperties[];
 
-  @doc("Description of the parameter group")
+  @doc("Description of the parameter group.")
   @visibility(Lifecycle.Update)
   description?: string;
 
-  @doc("Indicates whether the parameters should be applied immediately")
+  @doc("Indicates whether the parameters should be applied immediately.")
   @visibility(Lifecycle.Update)
   applyImmediately?: boolean;
 }
 
-@doc("HorizonDb parameter group for update operations")
+@doc("HorizonDb parameter group for update operations.")
 model HorizonDbParameterGroupForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
@@ -500,17 +506,17 @@ model HorizonDbParameterGroupForPatchUpdate {
   properties?: HorizonDbParameterGroupPropertiesForPatchUpdate;
 }
 
-@doc("Connection information for HorizonDb parameter group")
+@doc("Connection information for HorizonDb parameter group.")
 model HorizonDbParameterGroupConnectionProperties {
-  @doc("The name of the connected resource")
+  @doc("The name of the connected resource.")
   @visibility(Lifecycle.Read)
   name?: string;
 
-  @doc("The resource ID of the connected resource")
+  @doc("The resource ID of the connected resource.")
   @visibility(Lifecycle.Read)
   id?: armResourceIdentifier;
 
-  @doc("The type of the resource")
+  @doc("The type of the resource.")
   @visibility(Lifecycle.Read)
   type?: string;
 }
