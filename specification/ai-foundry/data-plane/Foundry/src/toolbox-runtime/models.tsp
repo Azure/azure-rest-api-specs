@@ -192,6 +192,16 @@ model ToolsetMCPPaginatedRequestParams {
 }
 
 /**
+ * Metadata for augmenting a request with task execution.
+ */
+model ToolsetMCPTaskMetadata {
+  /**
+   * Requested duration in milliseconds to retain task from creation.
+   */
+  ttl?: int64;
+}
+
+/**
  * Parameters for a tools/call request.
  */
 model ToolsetMCPCallToolRequestParams {
@@ -212,9 +222,9 @@ model ToolsetMCPCallToolRequestParams {
 
   /**
    * Optional task metadata for requesting async execution.
-   * When present, the server returns a task object instead of the tool result.
+   * When present, the server returns a CreateTaskResult instead of CallToolResult.
    */
-  task?: Record<unknown>;
+  task?: ToolsetMCPTaskMetadata;
 }
 
 /**
