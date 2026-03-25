@@ -14,6 +14,9 @@ using Microsoft.Cache;
   "python"
 );
 
+// Rename `args` to `module_args` for Python to avoid collision with Python's *args syntax
+@@clientName(Module.args, "module_args", "python");
+
 // csharp configurations
 @@clientName(AccessKeys, "RedisEnterpriseDataAccessKeys", "csharp");
 @@clientName(AccessKeyType, "RedisEnterpriseAccessKeyType", "csharp");
