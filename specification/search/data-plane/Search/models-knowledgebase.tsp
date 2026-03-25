@@ -14,6 +14,7 @@ namespace Search;
 /** The input contract for the retrieval request. */
 model KnowledgeBaseRetrievalRequest {
   /** A list of chat message style input. */
+  @removed(Versions.v2026_04_01)
   messages?: KnowledgeBaseMessage[];
 
   /** A list of intended queries to execute without model query planning. */
