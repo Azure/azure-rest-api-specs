@@ -6,8 +6,8 @@ using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.KeyVault;
 using Azure.Core;
 
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
-#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "scoped to csharp"
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "https://github.com/Azure/typespec-azure/issues/4104"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "https://github.com/Azure/typespec-azure/issues/4104"
 @@clientOption(Vault,
   "resource-rbac-roles",
   #{

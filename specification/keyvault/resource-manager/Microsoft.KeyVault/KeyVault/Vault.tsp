@@ -14,6 +14,8 @@ namespace Microsoft.KeyVault;
 /**
  * Resource information with extended details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "https://github.com/Azure/typespec-azure/issues/4104"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "https://github.com/Azure/typespec-azure/issues/4104"
 model Vault is Azure.ResourceManager.ProxyResource<VaultProperties, false> {
   ...ResourceNameParameter<
     Resource = Vault,
