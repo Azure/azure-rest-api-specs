@@ -15391,7 +15391,6 @@ model AmazonRedshiftLinkedServiceTypeProperties {
    */
   port?: Dfe<int32>;
   
-  
   /**
    * The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0. Type: string.
    */
