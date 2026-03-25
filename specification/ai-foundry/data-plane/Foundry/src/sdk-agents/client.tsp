@@ -153,6 +153,8 @@ using Azure.AI.Projects;
 // Disabled convenient API generation to provide a custom shim returning `void` in the client
 @@convenientAPI(Agents.deleteAgent, false, "java");
 @@convenientAPI(Agents.deleteAgentVersion, false, "java");
+@@convenientAPI(MemoryStores.deleteMemoryStore, false, "java");
+@@convenientAPI(MemoryStores.deleteScope, false, "java");
 
 @@access(MemoryStoreSearchResponse, Access.public);
 @@usage(MemoryStoreSearchResponse, Usage.output);
