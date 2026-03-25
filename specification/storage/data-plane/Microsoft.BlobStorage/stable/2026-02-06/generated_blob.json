@@ -1253,7 +1253,7 @@
             "required": false,
             "type": "string",
             "format": "date-time-rfc7231",
-            "x-ms-client-name": "expiry"
+            "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
             "name": "x-ms-immutability-policy-mode",
@@ -1813,7 +1813,7 @@
                     {
                       "name": "RehydratePendingToCold",
                       "value": "rehydrate-pending-to-cold",
-                      "description": "The archive status is rehydrating pending to archive."
+                      "description": "The archive status is rehydrating pending to cold."
                     }
                   ]
                 }
@@ -2441,7 +2441,7 @@
             "required": false,
             "type": "string",
             "format": "date-time-rfc7231",
-            "x-ms-client-name": "expiry"
+            "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
             "name": "x-ms-immutability-policy-mode",
@@ -2855,7 +2855,7 @@
             "required": false,
             "type": "string",
             "format": "date-time-rfc7231",
-            "x-ms-client-name": "expiry"
+            "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
             "name": "x-ms-immutability-policy-mode",
@@ -3053,7 +3053,7 @@
             "required": false,
             "type": "string",
             "format": "byte",
-            "x-ms-client-name": "transactionalContentMD5"
+            "x-ms-client-name": "transactionalContentMd5"
           },
           {
             "name": "Content-Length",
@@ -3336,7 +3336,7 @@
             "required": false,
             "type": "string",
             "format": "date-time-rfc7231",
-            "x-ms-client-name": "expiry"
+            "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
             "name": "x-ms-immutability-policy-mode",
@@ -3459,6 +3459,11 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
               },
+              "x-ms-content-crc64": {
+                "type": "string",
+                "format": "byte",
+                "description": "This response header is returned so that the client can check for the integrity of the copied content."
+              },
               "x-ms-encryption-key-sha256": {
                 "type": "string",
                 "description": "The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key."
@@ -3560,7 +3565,7 @@
             "required": false,
             "type": "string",
             "format": "byte",
-            "x-ms-client-name": "transactionalContentMD5"
+            "x-ms-client-name": "transactionalContentMd5"
           },
           {
             "name": "x-ms-blob-content-type",
@@ -4107,7 +4112,7 @@
             "required": false,
             "type": "string",
             "format": "byte",
-            "x-ms-client-name": "transactionalContentMD5"
+            "x-ms-client-name": "transactionalContentMd5"
           },
           {
             "name": "x-ms-content-crc64",
@@ -4434,7 +4439,7 @@
             "required": false,
             "type": "string",
             "format": "byte",
-            "x-ms-client-name": "transactionalContentMD5"
+            "x-ms-client-name": "transactionalContentMd5"
           },
           {
             "name": "x-ms-encryption-key",
@@ -4975,7 +4980,7 @@
             "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.",
             "required": true,
             "type": "string",
-            "format": "base64",
+            "format": "byte",
             "x-ms-client-name": "blockId"
           },
           {
@@ -4994,7 +4999,7 @@
             "required": false,
             "type": "string",
             "format": "byte",
-            "x-ms-client-name": "transactionalContentMD5"
+            "x-ms-client-name": "transactionalContentMd5"
           },
           {
             "name": "x-ms-content-crc64",
@@ -5199,7 +5204,7 @@
             "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.",
             "required": true,
             "type": "string",
-            "format": "base64",
+            "format": "byte",
             "x-ms-client-name": "blockId"
           },
           {
@@ -5523,7 +5528,7 @@
             "required": false,
             "type": "string",
             "format": "byte",
-            "x-ms-client-name": "transactionalContentMD5"
+            "x-ms-client-name": "transactionalContentMd5"
           },
           {
             "name": "x-ms-content-crc64",
@@ -5773,7 +5778,7 @@
             "required": false,
             "type": "string",
             "format": "date-time-rfc7231",
-            "x-ms-client-name": "expiry"
+            "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
             "name": "x-ms-immutability-policy-mode",
@@ -6255,7 +6260,7 @@
             "required": false,
             "type": "string",
             "format": "date-time-rfc7231",
-            "x-ms-client-name": "ExpiresOn"
+            "x-ms-client-name": "expiresOn"
           }
         ],
         "responses": {
@@ -8768,7 +8773,7 @@
             "required": false,
             "type": "string",
             "format": "byte",
-            "x-ms-client-name": "transactionalContentMD5"
+            "x-ms-client-name": "transactionalContentMd5"
           },
           {
             "name": "x-ms-content-crc64",
@@ -11913,7 +11918,7 @@
             "required": false,
             "type": "string",
             "format": "byte",
-            "x-ms-client-name": "transactionalContentMD5"
+            "x-ms-client-name": "transactionalContentMd5"
           },
           {
             "name": "x-ms-content-crc64",
@@ -12809,7 +12814,7 @@
             "description": "If a blob has a lease and the lease is of infinite duration then the value of this header is set to true, otherwise it is set to false.",
             "required": false,
             "type": "boolean",
-            "x-ms-client-name": "PreventEncryptionScopeOverride"
+            "x-ms-client-name": "preventEncryptionScopeOverride"
           }
         ],
         "responses": {
@@ -14787,13 +14792,13 @@
       "properties": {
         "Start": {
           "type": "string",
-          "format": "rfc3339-fixed-width",
+          "format": "date-time",
           "description": "The date-time the policy is active.",
           "x-ms-client-name": "start"
         },
         "Expiry": {
           "type": "string",
-          "format": "rfc3339-fixed-width",
+          "format": "date-time",
           "description": "The date-time the policy expires.",
           "x-ms-client-name": "expiry"
         },
@@ -14979,7 +14984,7 @@
           {
             "name": "RehydratePendingToCold",
             "value": "rehydrate-pending-to-cold",
-            "description": "The archive status is rehydrating pending to archive."
+            "description": "The archive status is rehydrating pending to cold."
           }
         ]
       }
@@ -15482,12 +15487,12 @@
           "type": "string",
           "format": "date-time-rfc7231",
           "description": "The expire time of the blob.",
-          "x-ms-client-name": "ExpiresOn"
+          "x-ms-client-name": "expiresOn"
         },
         "Sealed": {
           "type": "boolean",
           "description": "Whether the blob is sealed.",
-          "x-ms-client-name": "IsSealed"
+          "x-ms-client-name": "isSealed"
         },
         "RehydratePriority": {
           "$ref": "#/definitions/RehydratePriority",
@@ -15498,13 +15503,13 @@
           "type": "string",
           "format": "date-time-rfc7231",
           "description": "The last access time of the blob.",
-          "x-ms-client-name": "LastAccessedOn"
+          "x-ms-client-name": "lastAccessedOn"
         },
         "ImmutabilityPolicyUntilDate": {
           "type": "string",
           "format": "date-time-rfc7231",
           "description": "The immutability policy until time of the blob.",
-          "x-ms-client-name": "ImmutabilityPolicyExpiresOn"
+          "x-ms-client-name": "immutabilityPolicyExpiresOn"
         },
         "ImmutabilityPolicyMode": {
           "$ref": "#/definitions/ImmutabilityPolicyMode",
@@ -15888,7 +15893,7 @@
         "DenyEncryptionScopeOverride": {
           "type": "boolean",
           "description": "Whether to prevent encryption scope override.",
-          "x-ms-client-name": "PreventEncryptionScopeOverride"
+          "x-ms-client-name": "preventEncryptionScopeOverride"
         },
         "DeletedTime": {
           "type": "string",
@@ -15905,7 +15910,7 @@
         "ImmutableStorageWithVersioningEnabled": {
           "type": "boolean",
           "description": "Whether immutable storage with versioning is enabled.",
-          "x-ms-client-name": "IsImmutableStorageWithVersioningEnabled"
+          "x-ms-client-name": "isImmutableStorageWithVersioningEnabled"
         }
       },
       "required": [
@@ -18021,7 +18026,7 @@
     },
     "base64Bytes": {
       "type": "string",
-      "format": "base64"
+      "format": "byte"
     }
   },
   "parameters": {
