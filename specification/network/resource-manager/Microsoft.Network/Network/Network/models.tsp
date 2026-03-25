@@ -8253,6 +8253,24 @@ model FrontendIPConfigurationPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: NetworkProvisioningState;
+
+  /**
+   * The DDoS protection settings associated with the frontend IP configuration.
+   */
+  ddosSettings?: FrontendIPConfigurationDdosSettings;
+}
+
+/**
+ * Contains the DDoS protection settings associated with the frontend IP configuration.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
+model FrontendIPConfigurationDdosSettings {
+  /**
+   * The reference to the DDoS custom policy resource.
+   */
+  ddosCustomPolicy?: SubResource;
 }
 
 /**
