@@ -15,15 +15,15 @@ import {
 } from "./command-helpers.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
-import { SpecGenSdkCmdInput } from "./types.js";
+import { CommandResult, SpecGenSdkCmdInput } from "./types.js";
 import { resetGitRepo, runSpecGenSdkCommand, SpecConfigs } from "./utils.js";
 
 /**
  * Generate SDK for a single spec.
  * This is for the SDK release scenario.
- * @returns the run status code.
+ * @returns the command result with status code and execution result.
  */
-export async function generateSdkForSingleSpec(): Promise<number> {
+export async function generateSdkForSingleSpec(): Promise<CommandResult> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   const specConfigPathText = `${commandInput.tspConfigPath} ${commandInput.readmePath}`;
@@ -80,11 +80,9 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
   }
 
-  return statusCode;
+  return { statusCode, executionResult: executionReport?.executionResult ?? "" };
 }
-
-/* Generate SDKs for spec pull request */
-export async function generateSdkForSpecPr(): Promise<number> {
+export async function generateSdkForSpecPr(): Promise<CommandResult> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   // Construct the spec-gen-sdk command
@@ -202,13 +200,13 @@ export async function generateSdkForSpecPr(): Promise<number> {
       apiViewRequestData,
       sdkGenerationExecuted,
     ) || statusCode;
-  return statusCode;
+  return { statusCode, executionResult: overallExecutionResult as CommandResult["executionResult"] };
 }
 
 /**
  * Generate SDKs for batch specs.
  */
-export async function generateSdkForBatchSpecs(batchType: string): Promise<number> {
+export async function generateSdkForBatchSpecs(batchType: string): Promise<CommandResult> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   // Construct the spec-gen-sdk command
@@ -237,6 +235,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   let notEnabledCount = 0;
   let duplicatedConfigCount = 0;
   let succeededCount = 0;
+  let warningCount = 0;
   let executionReport;
   let specConfigPath = "";
   let stagedArtifactsFolder = "";
@@ -295,6 +294,9 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       if (executionResult === "succeeded" || executionResult === "warning") {
         succeededContent += `${specConfigPath},`;
         succeededCount++;
+        if (executionResult === "warning") {
+          warningCount++;
+        }
       } else if (executionResult === "notEnabled") {
         notEnabledContent += `${specConfigPath},`;
         notEnabledCount++;
@@ -388,5 +390,6 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   // Set the pipeline variables for artifacts location
   setPipelineVariables(stagedArtifactsFolder);
 
-  return statusCode;
+  const batchExecutionResult = failedCount > 0 ? "failed" : warningCount > 0 ? "warning" : "succeeded";
+  return { statusCode, executionResult: batchExecutionResult };
 }
