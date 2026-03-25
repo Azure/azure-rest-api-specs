@@ -1276,6 +1276,15 @@
         "responses": {
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "description": "The URL to poll the created data generation job status and retrieve the job details.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -36451,7 +36460,7 @@
           },
           "agent_id": {
             "type": "string",
-            "description": "The agent id to fetch the traces for data generation. The agent id should be in format of '<agentid>:<version>'"
+            "description": "The agent id to fetch the traces for data generation. The agent id should be in format of '<agent_id>:<version>'"
           },
           "from_time": {
             "type": "string",

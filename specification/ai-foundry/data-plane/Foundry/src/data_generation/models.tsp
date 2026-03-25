@@ -1,7 +1,5 @@
 import "../common/models.tsp";
 
-using Azure.Core.Experimental;
-
 namespace Azure.AI.Projects;
 
 @doc("Error information for a data generation job that failed.")
@@ -284,7 +282,7 @@ model SimpleQnATracesDataGenerationJob extends SimpleQnADataGenerationJob {
 model TracesDataGenerationJobOptions {
   ...DataGenerationJobOptions;
 
-  @doc("The agent id to fetch the traces for data generation. The agent id should be in format of '<agentid>:<version>'")
+  @doc("The agent id to fetch the traces for data generation. The agent id should be in format of '<agent_id>:<version>'")
   agent_id: string;
 
   @doc("The start of the time window for fetching traces. This defines the beginning of the time range for which traces will be considered for data generation.")

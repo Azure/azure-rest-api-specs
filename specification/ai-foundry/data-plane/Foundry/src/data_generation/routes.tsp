@@ -68,7 +68,11 @@ interface DataGenerationJobs {
       @body
       dataGenerationJob: DataGenerationJob;
     },
-    ResourceCreatedResponse<DataGenerationJob>
+    ResourceCreatedResponse<DataGenerationJob & {
+      @doc("The URL to poll the created data generation job status and retrieve the job details.")
+      @header("Location")
+      location: string;
+    }>
   >;
 
   /**
