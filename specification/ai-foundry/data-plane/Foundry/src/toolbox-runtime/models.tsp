@@ -343,6 +343,19 @@ model ToolsetMCPToolAnnotations {
 }
 
 /**
+ * Execution-related properties for a tool.
+ */
+model ToolsetMCPToolExecution {
+  /**
+   * Indicates whether this tool supports task-augmented execution.
+   * - "forbidden": Tool does not support task-augmented execution (default when absent)
+   * - "optional": Tool may support task-augmented execution
+   * - "required": Tool requires task-augmented execution
+   */
+  taskSupport?: "forbidden" | "optional" | "required";
+}
+
+/**
  * A tool definition returned from tools/list.
  */
 model ToolsetMCPTool {
@@ -372,6 +385,11 @@ model ToolsetMCPTool {
   outputSchema?: ToolsetMCPObjectSchema;
 
   /**
+   * Execution-related properties for this tool.
+   */
+  execution?: ToolsetMCPToolExecution;
+
+  /**
    * Optional additional tool annotations.
    */
   annotations?: ToolsetMCPToolAnnotations;
@@ -380,12 +398,6 @@ model ToolsetMCPTool {
    * Optional metadata for protocol-level extensions.
    */
   _meta?: ToolsetMCPMeta;
-
-  /**
-   * Optional execution configuration indicating task support level
-   * (forbidden, optional, required).
-   */
-  execution?: Record<unknown>;
 }
 
 /**
