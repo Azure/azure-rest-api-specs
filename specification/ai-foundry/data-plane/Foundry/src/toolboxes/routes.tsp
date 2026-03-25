@@ -29,7 +29,7 @@ interface Toolboxes {
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   createToolboxVersion is FoundryDataPlaneOperation<
     CreateToolboxVersionRequest & ToolboxesPreviewHeader,
-    ToolboxObject
+    ToolboxVersionObject
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -64,7 +64,7 @@ interface Toolboxes {
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   listToolboxVersions is FoundryDataPlaneOperation<
     ListToolboxVersionsRequest & ToolboxesPreviewHeader,
-    AgentsPagedResult<ToolboxObject>
+    AgentsPagedResult<ToolboxVersionObject>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -75,7 +75,7 @@ interface Toolboxes {
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   getToolboxVersion is FoundryDataPlaneOperation<
     GetToolboxVersionRequest & ToolboxesPreviewHeader,
-    ToolboxObject
+    ToolboxVersionObject
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"

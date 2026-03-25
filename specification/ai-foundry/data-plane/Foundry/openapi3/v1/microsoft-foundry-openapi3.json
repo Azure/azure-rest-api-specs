@@ -8045,7 +8045,7 @@
             "name": "toolbox_name",
             "in": "path",
             "required": true,
-            "description": "The name of the toolbox to retrieve. Returns the latest version.",
+            "description": "The name of the toolbox to retrieve.",
             "schema": {
               "type": "string"
             }
@@ -8215,7 +8215,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ToolboxObject"
+                  "$ref": "#/components/schemas/ToolboxVersionObject"
                 }
               }
             }
@@ -8367,7 +8367,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/ToolboxObject"
+                        "$ref": "#/components/schemas/ToolboxVersionObject"
                       },
                       "description": "The requested list of items."
                     },
@@ -8428,10 +8428,9 @@
             "name": "version",
             "in": "path",
             "required": true,
-            "description": "The version number to retrieve.",
+            "description": "The version identifier to retrieve.",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           },
           {
@@ -8463,7 +8462,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ToolboxObject"
+                  "$ref": "#/components/schemas/ToolboxVersionObject"
                 }
               }
             }
@@ -8505,10 +8504,9 @@
             "name": "version",
             "in": "path",
             "required": true,
-            "description": "The version number to delete.",
+            "description": "The version identifier to delete.",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           },
           {
@@ -11742,18 +11740,17 @@
           "object": {
             "type": "string",
             "enum": [
-              "toolbox.deleted"
+              "toolbox.version.deleted"
             ],
-            "description": "The object type. Always 'toolbox.deleted'."
+            "description": "The object type. Always 'toolbox.version.deleted'."
           },
           "name": {
             "type": "string",
             "description": "The name of the toolbox."
           },
           "version": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The version that was deleted."
+            "type": "string",
+            "description": "The version identifier that was deleted."
           },
           "deleted": {
             "type": "boolean",
@@ -36598,11 +36595,8 @@
         "required": [
           "object",
           "id",
-          "version",
-          "created_at",
-          "updated_at",
           "name",
-          "tools"
+          "versions"
         ],
         "properties": {
           "object": {
@@ -36616,48 +36610,91 @@
             "type": "string",
             "description": "The unique identifier of the toolbox."
           },
-          "version": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The version number of this toolbox. Increments with each update."
+          "name": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The name of the toolbox."
           },
-          "created_at": {
-            "type": "integer",
-            "format": "unixtime",
-            "description": "The Unix timestamp (seconds) when the toolbox was created."
+          "versions": {
+            "type": "object",
+            "properties": {
+              "latest": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ToolboxVersionObject"
+                  }
+                ],
+                "description": "The latest version of the toolbox."
+              }
+            },
+            "required": [
+              "latest"
+            ],
+            "description": "The versions of the toolbox."
+          }
+        },
+        "description": "A toolbox that stores reusable tool definitions for agents."
+      },
+      "ToolboxVersionObject": {
+        "type": "object",
+        "required": [
+          "metadata",
+          "object",
+          "id",
+          "name",
+          "version",
+          "created_at",
+          "tools"
+        ],
+        "properties": {
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+            "x-oaiTypeLabel": "map"
           },
-          "updated_at": {
-            "type": "integer",
-            "format": "unixtime",
-            "description": "The Unix timestamp (seconds) when this version was created."
+          "object": {
+            "type": "string",
+            "enum": [
+              "toolbox.version"
+            ],
+            "description": "The object type, which is always 'toolbox.version'."
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the toolbox version."
           },
           "name": {
             "type": "string",
             "maxLength": 256,
             "description": "The name of the toolbox."
           },
+          "version": {
+            "type": "string",
+            "description": "The version identifier of the toolbox. Toolbox versions are immutable and every update creates a new version."
+          },
           "description": {
             "type": "string",
             "maxLength": 512,
             "description": "A human-readable description of the toolbox."
           },
-          "metadata": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Arbitrary key-value metadata to associate with the toolbox."
+          "created_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp (seconds) when the toolbox version was created."
           },
           "tools": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OpenAI.Tool"
             },
-            "description": "The list of tools contained in this toolbox."
+            "description": "The list of tools contained in this toolbox version."
           }
         },
-        "description": "A toolbox that stores reusable tool definitions for agents."
+        "description": "A specific version of a toolbox."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",

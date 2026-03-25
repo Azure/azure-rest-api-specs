@@ -12,7 +12,9 @@ const ToolboxesRequiredPreviews = #{
 
 union ToolboxObjectType {
   toolbox: "toolbox",
+  toolboxVersion: "toolbox.version",
   toolboxDeleted: "toolbox.deleted",
+  toolboxVersionDeleted: "toolbox.version.deleted",
 }
 
 @doc("A toolbox that stores reusable tool definitions for agents.")
@@ -23,30 +25,43 @@ model ToolboxObject {
   @doc("The unique identifier of the toolbox.")
   id: string;
 
-  @doc("The version number of this toolbox. Increments with each update.")
-  @minValue(1)
-  version: int32;
+  @doc("The name of the toolbox.")
+  @maxLength(256)
+  name: string;
 
-  @doc("The Unix timestamp (seconds) when the toolbox was created.")
-  @encode("unixTimestamp", int32)
-  created_at: utcDateTime;
+  @doc("The versions of the toolbox.")
+  versions: {
+    @doc("The latest version of the toolbox.")
+    latest: ToolboxVersionObject;
+  };
+}
 
-  @doc("The Unix timestamp (seconds) when this version was created.")
-  @encode("unixTimestamp", int32)
-  updated_at: utcDateTime;
+@doc("A specific version of a toolbox.")
+model ToolboxVersionObject {
+  ...MetadataPropertyForResponse;
+
+  @doc("The object type, which is always 'toolbox.version'.")
+  object: ToolboxObjectType.toolboxVersion;
+
+  @doc("The unique identifier of the toolbox version.")
+  id: string;
 
   @doc("The name of the toolbox.")
   @maxLength(256)
   name: string;
 
+  @doc("The version identifier of the toolbox. Toolbox versions are immutable and every update creates a new version.")
+  version: string;
+
   @doc("A human-readable description of the toolbox.")
   @maxLength(512)
   description?: string;
 
-  @doc("Arbitrary key-value metadata to associate with the toolbox.")
-  metadata?: Record<string>;
+  @doc("The Unix timestamp (seconds) when the toolbox version was created.")
+  @encode("unixTimestamp", int32)
+  created_at: utcDateTime;
 
-  @doc("The list of tools contained in this toolbox.")
+  @doc("The list of tools contained in this toolbox version.")
   tools: OpenAI.Tool[];
 }
 
@@ -59,6 +74,21 @@ model DeleteToolboxResponse {
   name: string;
 
   @doc("Whether the toolbox was successfully deleted.")
+  deleted: boolean;
+}
+
+@doc("Response returned when a toolbox version is deleted.")
+model DeleteToolboxVersionResponse {
+  @doc("The object type. Always 'toolbox.version.deleted'.")
+  object: ToolboxObjectType.toolboxVersionDeleted;
+
+  @doc("The name of the toolbox.")
+  name: string;
+
+  @doc("The version identifier that was deleted.")
+  version: string;
+
+  @doc("Whether the version was successfully deleted.")
   deleted: boolean;
 }
 
@@ -95,7 +125,7 @@ alias CreateToolboxVersionRequest = {
 };
 
 alias GetToolboxRequest = {
-  @doc("The name of the toolbox to retrieve. Returns the latest version.")
+  @doc("The name of the toolbox to retrieve.")
   @path
   toolbox_name: string;
 };
@@ -105,9 +135,9 @@ alias GetToolboxVersionRequest = {
   @path
   toolbox_name: string;
 
-  @doc("The version number to retrieve.")
+  @doc("The version identifier to retrieve.")
   @path
-  version: int32;
+  version: string;
 };
 
 alias ListToolboxesRequest = {
@@ -133,22 +163,7 @@ alias DeleteToolboxVersionRequest = {
   @path
   toolbox_name: string;
 
-  @doc("The version number to delete.")
+  @doc("The version identifier to delete.")
   @path
-  version: int32;
+  version: string;
 };
-
-@doc("Response returned when a toolbox version is deleted.")
-model DeleteToolboxVersionResponse {
-  @doc("The object type. Always 'toolbox.deleted'.")
-  object: ToolboxObjectType.toolboxDeleted;
-
-  @doc("The name of the toolbox.")
-  name: string;
-
-  @doc("The version that was deleted.")
-  version: int32;
-
-  @doc("Whether the version was successfully deleted.")
-  deleted: boolean;
-}
