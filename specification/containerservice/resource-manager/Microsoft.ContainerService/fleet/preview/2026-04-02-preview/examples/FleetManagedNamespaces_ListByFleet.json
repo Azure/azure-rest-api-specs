@@ -39,7 +39,10 @@
                 "placementProfile": {
                   "defaultClusterResourcePlacement": {
                     "rolloutStrategy": {
-                      "type": "External"
+                      "type": "External",
+                      "clusterUpdateStrategy": {
+                        "name": "my-update-strategy"
+                      }
                     },
                     "policy": {
                       "placementType": "PickAll",
@@ -88,19 +91,6 @@
                         }
                       ]
                     }
-                  },
-                  "defaultClusterUpdateStrategy": {
-                    "stages": [
-                      {
-                        "name": "eastregion",
-                        "labelSelector": {
-                          "matchLabels": {
-                            "region": "east"
-                          }
-                        },
-                        "maxConcurrency": "3"
-                      }
-                    ]
                   }
                 }
               },

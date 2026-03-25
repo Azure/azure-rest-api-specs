@@ -23,36 +23,11 @@
           "placementProfile": {
             "defaultClusterResourcePlacement": {
               "rolloutStrategy": {
-                "type": "External"
-              }
-            },
-            "defaultClusterUpdateStrategy": {
-              "stages": [
-                {
-                  "name": "canary",
-                  "labelSelector": {
-                    "matchLabels": {
-                      "environment": "canary"
-                    }
-                  },
-                  "maxConcurrency": "1",
-                  "afterStageTasks": [
-                    {
-                      "type": "Approval"
-                    }
-                  ]
-                },
-                {
-                  "name": "production",
-                  "labelSelector": {
-                    "matchLabels": {
-                      "environment": "production"
-                    }
-                  },
-                  "sortingLabelKey": "priority",
-                  "maxConcurrency": "10"
+                "type": "External",
+                "clusterUpdateStrategy": {
+                  "name": "my-update-strategy"
                 }
-              ]
+              }
             }
           }
         }
@@ -92,7 +67,10 @@
             "placementProfile": {
               "defaultClusterResourcePlacement": {
                 "rolloutStrategy": {
-                  "type": "External"
+                  "type": "External",
+                  "clusterUpdateStrategy": {
+                    "name": "my-update-strategy"
+                  }
                 },
                 "policy": {
                   "placementType": "PickAll",
@@ -141,34 +119,6 @@
                     }
                   ]
                 }
-              },
-              "defaultClusterUpdateStrategy": {
-                "stages": [
-                  {
-                    "name": "canary",
-                    "labelSelector": {
-                      "matchLabels": {
-                        "environment": "canary"
-                      }
-                    },
-                    "maxConcurrency": "1",
-                    "afterStageTasks": [
-                      {
-                        "type": "Approval"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "production",
-                    "labelSelector": {
-                      "matchLabels": {
-                        "environment": "production"
-                      }
-                    },
-                    "sortingLabelKey": "priority",
-                    "maxConcurrency": "10"
-                  }
-                ]
               }
             }
           },
