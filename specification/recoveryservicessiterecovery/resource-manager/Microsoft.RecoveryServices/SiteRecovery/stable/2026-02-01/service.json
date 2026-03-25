@@ -11857,6 +11857,18 @@
         "tfoDiskName": {
           "type": "string",
           "description": "The test failover name for the managed disk."
+        },
+        "recoveryNetworkAccessPolicy": {
+          "$ref": "#/definitions/DiskNetworkAccessPolicy",
+          "description": "The network access policy for the recovery managed disk."
+        },
+        "recoveryDiskAccessId": {
+          "type": "string",
+          "description": "The recovery disk access Arm Id."
+        },
+        "recoveryPublicNetworkAccess": {
+          "$ref": "#/definitions/DiskPublicNetworkAccess",
+          "description": "The public network access setting for the recovery managed disk."
         }
       }
     },
@@ -13090,6 +13102,18 @@
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery disk encryption information (for one / single pass flows)."
+        },
+        "recoveryNetworkAccessPolicy": {
+          "$ref": "#/definitions/DiskNetworkAccessPolicy",
+          "description": "The network access policy for the recovery managed disk."
+        },
+        "recoveryDiskAccessId": {
+          "type": "string",
+          "description": "The recovery disk access Arm Id."
+        },
+        "recoveryPublicNetworkAccess": {
+          "$ref": "#/definitions/DiskPublicNetworkAccess",
+          "description": "The public network access setting for the recovery managed disk."
         }
       },
       "required": [
@@ -13125,6 +13149,18 @@
         "tfoDiskName": {
           "type": "string",
           "description": "The target disk name for test failover operation."
+        },
+        "recoveryNetworkAccessPolicy": {
+          "$ref": "#/definitions/DiskNetworkAccessPolicy",
+          "description": "The network access policy for the recovery managed disk."
+        },
+        "recoveryDiskAccessId": {
+          "type": "string",
+          "description": "The recovery disk access Arm Id."
+        },
+        "recoveryPublicNetworkAccess": {
+          "$ref": "#/definitions/DiskPublicNetworkAccess",
+          "description": "The public network access setting for the recovery managed disk."
         }
       }
     },
@@ -15100,6 +15136,31 @@
           "type": "string",
           "description": "The KeyVault resource ARM id for secret."
         }
+      }
+    },
+    "DiskNetworkAccessPolicy": {
+      "type": "string",
+      "description": "The network access policy for managed disks.",
+      "enum": [
+        "AllowAll",
+        "AllowPrivate",
+        "DenyAll"
+      ],
+      "x-ms-enum": {
+        "name": "DiskNetworkAccessPolicy",
+        "modelAsString": true
+      }
+    },
+    "DiskPublicNetworkAccess": {
+      "type": "string",
+      "description": "The public network access setting for managed disks.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DiskPublicNetworkAccess",
+        "modelAsString": true
       }
     },
     "DiskReplicationProgressHealth": {

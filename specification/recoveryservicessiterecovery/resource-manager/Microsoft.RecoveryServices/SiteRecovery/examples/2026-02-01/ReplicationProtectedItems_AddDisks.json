@@ -4,11 +4,14 @@
       "properties": {
         "providerSpecificDetails": {
           "instanceType": "A2A",
-          "vmDisks": [
+          "vmManagedDisks": [
             {
-              "diskUri": "https://vmstorage.blob.core.windows.net/vhds/datadisk1.vhd",
+              "diskId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/primaryResource/providers/Microsoft.Compute/disks/datadisk2",
               "primaryStagingAzureStorageAccountId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/primaryResource/providers/Microsoft.Storage/storageAccounts/vmcachestorage",
-              "recoveryAzureStorageAccountId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource/providers/Microsoft.Storage/storageAccounts/recoverystorage"
+              "recoveryResourceGroupId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource",
+              "recoveryNetworkAccessPolicy": "AllowPrivate",
+              "recoveryDiskAccessId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource/providers/Microsoft.Compute/diskAccesses/recoveryDiskAccess",
+              "recoveryPublicNetworkAccess": "Disabled"
             }
           ]
         }
