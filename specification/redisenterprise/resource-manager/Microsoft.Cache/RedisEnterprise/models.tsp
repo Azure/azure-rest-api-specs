@@ -1702,7 +1702,7 @@ model MigrationValidationRequest {
   ]>;
 
   /**
-   * Sets whether the data is migrated from source to target or not.
+   * Sets whether the data is migrated from source to target or not. The default value is true.
    */
   skipDataMigration?: boolean;
 
