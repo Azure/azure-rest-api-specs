@@ -27,6 +27,8 @@ These are the global settings for the Authorization API.
 ``` yaml
 openapi-type: arm
 tag: package-2025-12-01-preview
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Suppression
