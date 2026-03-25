@@ -20,6 +20,10 @@ union ToolsetMCPMethodName {
   initialized: "notifications/initialized",
   list: "tools/list",
   call: "tools/call",
+  taskGet: "tasks/get",
+  taskResult: "tasks/result",
+  taskCancel: "tasks/cancel",
+  taskList: "tasks/list",
 }
 
 /**
@@ -165,6 +169,12 @@ model ToolsetMCPCallToolRequestParams {
    * Arguments to pass to the tool.
    */
   arguments?: Record<unknown>;
+
+  /**
+   * Optional task metadata for requesting async execution.
+   * When present, the server returns a task object instead of the tool result.
+   */
+  task?: Record<unknown>;
 }
 
 /**
@@ -320,6 +330,12 @@ model ToolsetMCPTool {
    * Optional metadata for protocol-level extensions.
    */
   _meta?: ToolsetMCPMeta;
+
+  /**
+   * Optional execution configuration indicating task support level
+   * (forbidden, optional, required).
+   */
+  execution?: Record<unknown>;
 }
 
 /**
@@ -531,6 +547,11 @@ model ToolsetMCPCallToolResult {
    * Indicates whether the tool call result represents an error.
    */
   isError?: boolean;
+
+  /**
+   * Optional task information. Present when the tool call was executed as a task.
+   */
+  task?: Record<unknown>;
 }
 
 /**
@@ -570,6 +591,7 @@ union ToolsetMCPJsonRpcResult {
   ToolsetMCPInitializeResult,
   ToolsetMCPListToolsResult,
   ToolsetMCPCallToolResult,
+  ToolsetMCPTaskStatus,
 }
 
 /**
@@ -658,12 +680,69 @@ union ToolsetMCPJsonRpcMessage {
 }
 
 /**
+ * Parameters for tasks/get, tasks/result, or tasks/cancel requests.
+ */
+model ToolsetMCPTaskRequestParams {
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
+
+  /**
+   * The task identifier.
+   */
+  taskId: string;
+}
+
+/**
+ * Task status information returned by tasks/get and tasks/cancel.
+ * Matches MCP spec Task type.
+ */
+model ToolsetMCPTaskStatus {
+  /**
+   * The unique task identifier.
+   */
+  taskId: string;
+
+  /**
+   * Current task status: working, completed, failed, cancelled, input_required.
+   */
+  status: string;
+
+  /**
+   * Optional human-readable status message.
+   */
+  statusMessage?: string;
+
+  /**
+   * ISO 8601 timestamp when the task was created.
+   */
+  createdAt: string;
+
+  /**
+   * ISO 8601 timestamp when the task was last updated.
+   */
+  lastUpdatedAt: string;
+
+  /**
+   * Actual retention duration from creation in milliseconds.
+   */
+  ttl?: int64;
+
+  /**
+   * Suggested polling interval in milliseconds.
+   */
+  pollInterval?: int64;
+}
+
+/**
  * Method parameters accepted by the toolset MCP endpoint.
  */
 union ToolsetMCPInvokeRequestParams {
   ToolsetMCPInitializeRequestParams,
   ToolsetMCPPaginatedRequestParams,
   ToolsetMCPCallToolRequestParams,
+  ToolsetMCPTaskRequestParams,
 }
 
 /**
