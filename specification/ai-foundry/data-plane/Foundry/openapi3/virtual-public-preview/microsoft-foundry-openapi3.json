@@ -13029,8 +13029,7 @@
             "items": {
               "$ref": "#/components/schemas/DataGenerationJobOutput"
             },
-            "description": "The outputs generated from the job. This field will be populated only after the job is completed.",
-            "readOnly": true
+            "description": "The outputs generated from the job. For fine-tuning purpose, the output will always be an Azure OpenAI file. For evaluation purpose, the output can be either an Azure OpenAI file or a dataset. For dataset output, optionally a name of oputput dataset can be specified"
           },
           "generated_samples_count": {
             "type": "integer",
@@ -13124,8 +13123,7 @@
       "DataGenerationJobOutput": {
         "type": "object",
         "required": [
-          "type",
-          "id"
+          "type"
         ],
         "properties": {
           "type": {
@@ -13135,20 +13133,13 @@
               }
             ],
             "description": "The type of the output."
-          },
-          "id": {
-            "type": "string",
-            "description": "The id of the output Azure OpenAI file or dataset."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the file or dataset generated.",
-            "readOnly": true
-          },
-          "version": {
-            "type": "string",
-            "description": "The version of the dataset. Applicable only for dataset output type.",
-            "readOnly": true
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "File": "#/components/schemas/FileDataGenerationJobOutput",
+            "Dataset": "#/components/schemas/DatasetDataGenerationJobOutput"
           }
         },
         "description": "Output information for a data generation job."
@@ -13296,6 +13287,40 @@
           "mapping": {}
         },
         "description": "Base class for run data sources with discriminator support."
+      },
+      "DatasetDataGenerationJobOutput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Dataset"
+            ],
+            "description": "The type of the output, which is Dataset for this model."
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the output dataset created.",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the output dataset."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the output dataset.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOutput"
+          }
+        ]
       },
       "DatasetDataGenerationJobSource": {
         "type": "object",
@@ -15488,6 +15513,31 @@
           }
         },
         "description": "The fabric data agent tool parameters."
+      },
+      "FileDataGenerationJobOutput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "File"
+            ],
+            "description": "The type of the output, which is File for this model."
+          },
+          "file_id": {
+            "type": "string",
+            "description": "The id of the output Azure OpenAI file.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOutput"
+          }
+        ]
       },
       "FileDataGenerationJobSource": {
         "type": "object",

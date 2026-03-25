@@ -64,8 +64,7 @@ model DataGenerationJob {
   @visibility(Lifecycle.Read)
   status: DataGenerationJobStatus;
 
-  @doc("The outputs generated from the job. This field will be populated only after the job is completed.")
-  @visibility(Lifecycle.Read)
+  @doc("The outputs generated from the job. For fine-tuning purpose, the output will always be an Azure OpenAI file. For evaluation purpose, the output can be either an Azure OpenAI file or a dataset. For dataset output, optionally a name of oputput dataset can be specified")
   outputs?: Array<DataGenerationJobOutput>;
 
   @doc("The number of samples actually generated. This field will be populated only after the job is completed.")
@@ -97,18 +96,33 @@ model DataGenerationJob {
 }
 
 @doc("Output information for a data generation job.")
+@discriminator("type")
 model DataGenerationJobOutput {
   @doc("The type of the output.")
   type: DataGenerationJobOutputFileType;
+}
 
-  @doc("The id of the output Azure OpenAI file or dataset.")
-  id: string;
+model FileDataGenerationJobOutput extends DataGenerationJobOutput {
+  @doc("The type of the output, which is File for this model.")
+  type: "File";
 
-  @doc("The name of the file or dataset generated.")
+  @doc("The id of the output Azure OpenAI file.")
   @visibility(Lifecycle.Read)
+  file_id?: string;
+}
+
+model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
+  @doc("The type of the output, which is Dataset for this model.")
+  type: "Dataset";
+
+  @doc("The id of the output dataset created.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("The name of the output dataset.")
   name?: string;
 
-  @doc("The version of the dataset. Applicable only for dataset output type.")
+  @doc("The version of the output dataset.")
   @visibility(Lifecycle.Read)
   version?: string;
 }
