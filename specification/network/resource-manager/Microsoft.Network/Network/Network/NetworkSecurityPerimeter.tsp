@@ -19,7 +19,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkSecurityPerimeter extends CommonTrackedResource {
+model NetworkSecurityPerimeter extends SecurityPerimeterTrackedResource {
   /**
    * Properties of the network security perimeter.
    */

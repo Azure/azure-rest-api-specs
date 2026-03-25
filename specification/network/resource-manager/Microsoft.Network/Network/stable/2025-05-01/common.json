@@ -2465,6 +2465,42 @@
         ]
       }
     },
+    "CreatedByType": {
+      "type": "string",
+      "description": "The type of identity that created the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "User"
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application"
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "ManagedIdentity"
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "Key"
+          }
+        ]
+      }
+    },
     "CustomIpPrefixType": {
       "type": "string",
       "description": "Type of custom IP prefix. Should be Singular, Parent, or Child.",
@@ -7386,6 +7422,85 @@
           }
         ]
       }
+    },
+    "SecurityPerimeterProxyResource": {
+      "type": "object",
+      "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityPerimeterResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SecurityPerimeterResource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SecurityPerimeterSystemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      }
+    },
+    "SecurityPerimeterSystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "$ref": "#/definitions/CreatedByType",
+          "description": "The type of identity that created the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/CreatedByType",
+          "description": "The type of identity that last modified the resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
+    "SecurityPerimeterTrackedResource": {
+      "type": "object",
+      "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityPerimeterResource"
+        }
+      ],
+      "x-ms-azure-resource": true
     },
     "SecurityProviderName": {
       "type": "string",

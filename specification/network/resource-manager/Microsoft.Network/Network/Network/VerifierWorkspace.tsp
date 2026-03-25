@@ -120,40 +120,42 @@ interface VerifierWorkspaces {
   @summary("Gets list of Verifier Workspaces.")
   list is ArmResourceListByParent<
     VerifierWorkspace,
-    Parameters = {
-      /**
-       * Optional skip token.
-       */
-      @query("skipToken")
-      skipToken?: string;
-
-      /**
-       * Optional num entries to skip.
-       */
-      @query("skip")
-      skip?: int32 = 0;
-
-      /**
-       * Optional num entries to show.
-       */
-      @query("top")
-      top?: int32 = 50;
-
-      /**
-       * Optional key by which to sort.
-       */
-      @query("sortKey")
-      sortKey?: string;
-
-      /**
-       * Optional sort value for pagination.
-       */
-      @query("sortValue")
-      sortValue?: string;
-    },
+    Parameters = VerifierWorkspacesListParameters,
     Error = CommonErrorResponse
   >;
 }
+
+alias VerifierWorkspacesListParameters = {
+  /**
+   * Optional skip token.
+   */
+  @query("skipToken")
+  skipToken?: string;
+
+  /**
+   * Optional num entries to skip.
+   */
+  @query("skip")
+  skip?: int32 = 0;
+
+  /**
+   * Optional num entries to show.
+   */
+  @query("top")
+  top?: int32 = 50;
+
+  /**
+   * Optional key by which to sort.
+   */
+  @query("sortKey")
+  sortKey?: string;
+
+  /**
+   * Optional sort value for pagination.
+   */
+  @query("sortValue")
+  sortValue?: string;
+};
 
 @@doc(VerifierWorkspace.name, "The name of the resource");
 @@doc(VerifierWorkspace.properties,

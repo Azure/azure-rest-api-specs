@@ -21,7 +21,7 @@ namespace Microsoft.Network;
 @Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(NetworkSecurityPerimeter)
-model NspLoggingConfiguration extends CommonProxyResource {
+model NspLoggingConfiguration extends SecurityPerimeterProxyResource {
   /**
    * Properties of the NSP logging configuration.
    */

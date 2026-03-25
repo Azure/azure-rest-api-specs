@@ -21,7 +21,7 @@ namespace Microsoft.Network;
 @Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(NetworkSecurityPerimeter)
-model NspLinkReference extends CommonProxyResource {
+model NspLinkReference extends SecurityPerimeterProxyResource {
   /**
    * Properties of the NSP link reference.
    */

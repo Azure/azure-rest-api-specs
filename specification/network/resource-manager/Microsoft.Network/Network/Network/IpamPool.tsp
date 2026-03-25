@@ -112,37 +112,7 @@ interface IpamPools {
   @summary("Gets list of Pool resources at Network Manager level.")
   list is ArmResourceListByParent<
     IpamPool,
-    Parameters = {
-      /**
-       * Optional skip token.
-       */
-      @query("skipToken")
-      skipToken?: string;
-
-      /**
-       * Optional num entries to skip.
-       */
-      @query("skip")
-      skip?: int32 = 0;
-
-      /**
-       * Optional num entries to show.
-       */
-      @query("top")
-      top?: int32 = 50;
-
-      /**
-       * Optional key by which to sort.
-       */
-      @query("sortKey")
-      sortKey?: string;
-
-      /**
-       * Optional sort value for pagination.
-       */
-      @query("sortValue")
-      sortValue?: string;
-    },
+    Parameters = IpamPoolsListParameters,
     Response = ArmResponse<IpamPoolList>,
     Error = CommonErrorResponse
   >;
@@ -170,6 +140,38 @@ interface IpamPools {
     Error = CommonErrorResponse
   >;
 }
+
+alias IpamPoolsListParameters = {
+  /**
+   * Optional skip token.
+   */
+  @query("skipToken")
+  skipToken?: string;
+
+  /**
+   * Optional num entries to skip.
+   */
+  @query("skip")
+  skip?: int32 = 0;
+
+  /**
+   * Optional num entries to show.
+   */
+  @query("top")
+  top?: int32 = 50;
+
+  /**
+   * Optional key by which to sort.
+   */
+  @query("sortKey")
+  sortKey?: string;
+
+  /**
+   * Optional sort value for pagination.
+   */
+  @query("sortValue")
+  sortValue?: string;
+};
 
 @@doc(IpamPool.name, "Pool resource name.");
 @@doc(IpamPool.properties,
