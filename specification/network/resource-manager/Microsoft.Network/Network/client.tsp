@@ -471,7 +471,7 @@ namespace CombineClient;
 // activeActive → active rename
 @@clientName(Microsoft.Network.VirtualNetworkGatewayPropertiesFormat.activeActive,
   "active",
-  "java,javascript"
+  "java,javascript,go"
 );
 
 // Operation renames IP → Ip
