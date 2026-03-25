@@ -68,6 +68,8 @@ using Microsoft.NotificationHubs;
 @@clientName(AdmCredential, "NotificationHubAdmCredential", "csharp");
 @@alternateType(AdmCredentialProperties.authTokenUrl, url, "csharp");
 @@clientName(AccessRights, "AuthorizationRuleAccessRightExt", "csharp");
+// TODO: Replace @@alternateType workaround with @@hierarchyBuilding once https://github.com/microsoft/typespec/issues/9234 is fixed.
+// CheckAvailabilityResult is a ProxyResource; hierarchyBuilding should be able to change its base to TrackedResource.
 @@clientName(CheckAvailabilityResult,
   "NotificationHubAvailabilityResultTemp",
   "csharp"
@@ -89,6 +91,8 @@ using Microsoft.NotificationHubs;
   "csharp"
 );
 @@clientName(NamespaceType, "NotificationHubNamespaceTypeExt", "csharp");
+// TODO: Replace @@alternateType workaround with @@hierarchyBuilding once https://github.com/microsoft/typespec/issues/9234 is fixed.
+// PnsCredentialsResource is a ProxyResource; hierarchyBuilding should be able to change its base to TrackedResource.
 @@clientName(PnsCredentialsResource,
   "NotificationHubPnsCredentialsTemp",
   "csharp"
@@ -162,6 +166,8 @@ using Microsoft.NotificationHubs;
 );
 @@clientName(NamespaceProperties.status, "NamespaceStatus", "csharp");
 @@clientName(NamespaceProperties.namespaceType, "HubNamespaceType", "csharp");
+// TODO: Replace @@alternateType workaround with @@hierarchyBuilding once https://github.com/microsoft/typespec/issues/9234 is fixed.
+// CheckAvailabilityParameters is a plain model (not a resource); hierarchyBuilding may not support this case.
 @@clientName(CheckAvailabilityParameters,
   "NotificationHubAvailabilityContentTemp",
   "csharp"
@@ -174,6 +180,8 @@ using Microsoft.NotificationHubs;
   "NotificationHubAvailabilityContent",
   "csharp"
 );
+// TODO: Replace @@alternateType workaround with @@hierarchyBuilding once https://github.com/microsoft/typespec/issues/9234 is fixed.
+// DebugSendResponse is a ProxyResource; hierarchyBuilding should be able to change its base to TrackedResource.
 @@clientName(DebugSendResponse, "NotificationHubTestSendResultTemp", "csharp");
 @@alternateType(DebugSendResponse, DebugSendResponseReplacement, "csharp");
 @@clientName(DebugSendResponseReplacement,
@@ -196,6 +204,8 @@ using Microsoft.NotificationHubs;
   "csharp"
 );
 
+// TODO: Replace @@alternateType workaround with @@hierarchyBuilding once https://github.com/microsoft/typespec/issues/9234 is fixed.
+// NotificationHubPatchParameters is a plain model (not a resource); hierarchyBuilding may not support this case.
 // Replacement model swaps: ProxyResource → TrackedResource for C# backward compat (TrackedResourceData base class)
 @@alternateType(NotificationHubPatchParameters,
   NotificationHubPatchParametersReplacement,
@@ -220,17 +230,6 @@ using Microsoft.NotificationHubs;
 );
 
 // C#-only replacement models — swap ProxyResource → TrackedResource to preserve TrackedResourceData base class.
-
-/**
- * Properties for CheckAvailabilityResult replacement model.
- */
-model CheckAvailabilityResultProperties {
-  /**
-   * Gets or sets true if the name is available and can be used to
-   * create new Namespace/NotificationHub. Otherwise false.
-   */
-  isAvailiable?: boolean;
-}
 
 /**
  * Replacement for CheckAvailabilityResult — uses TrackedResource base for C# backward compat.
@@ -260,18 +259,6 @@ model PnsCredentialsResourceReplacement
    * Collection of Notification Hub or Notification Hub Namespace PNS credentials.
    */
   properties?: PnsCredentials;
-}
-
-/**
- * Replacement for SharedAccessAuthorizationRuleResource — uses TrackedResource base for C# backward compat.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model"
-model SharedAccessAuthorizationRuleResourceReplacement
-  extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * SharedAccessAuthorizationRule properties.
-   */
-  properties?: SharedAccessAuthorizationRuleProperties;
 }
 
 /**
