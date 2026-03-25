@@ -5,6 +5,8 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AppLink;
 
+@@clientName(Microsoft.AppLink, "AppNetworkMgmtClient", "python");
+
 @doc("The type used for update operations of the AppLink.")
 model AppLinkUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
