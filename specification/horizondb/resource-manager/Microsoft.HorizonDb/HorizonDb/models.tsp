@@ -163,7 +163,7 @@ model HorizonDbClusterProperties {
 
   @doc("Defines connection to a parameter group.")
   @visibility(Lifecycle.Update, Lifecycle.Read)
-  parameterGroup?: ParameterGroupConnectionProperties;
+  parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
 }
 
 @doc("Properties of a HorizonDb cluster for update operations.")
@@ -182,7 +182,7 @@ model HorizonDbClusterPropertiesForPatchUpdate {
   vCores?: int32;
 
   @doc("Defines connection to a parameter group.")
-  parameterGroup?: ParameterGroupConnectionProperties;
+  parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
 }
 
 @doc("HorizonDb cluster for update operations.")
@@ -523,12 +523,12 @@ model HorizonDbParameterGroupConnectionProperties {
 }
 
 @doc("Connection information for HorizonDb parameter group.")
-model ParameterGroupConnectionProperties {
-  @doc("The resource ID of the connected resource.")
+model HorizonDbClusterParameterGroupConnectionProperties {
+  @doc("The resource ID of the connected parameter group.")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   id?: armResourceIdentifier;
 
-  @doc("Indication of if parameter group is applied on Horizon db resource.")
+  @doc("Indication of if parameter group is applied on HorizonDb resource.")
   @visibility(Lifecycle.Read)
   syncStatus?: string;
 
