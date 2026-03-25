@@ -51,14 +51,687 @@ namespace CombineClient;
 );
 @@clientName(Microsoft.Network.QosIpRange.startIP, "startIp", "java");
 @@clientName(Microsoft.Network.QosIpRange.endIP, "endIp", "java");
+// Mitigate ProvisioningState split: create unified union with all values
 @@clientName(Microsoft.Network.NetworkProvisioningState,
-  "ProvisioningState",
+  "NetworkProvisioningStateInternal",
   "java"
 );
 @@clientName(Microsoft.Network.ProvisioningState,
-  "BaseProvisioningState",
+  "BaseProvisioningStateInternal",
   "java"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by merging ProvisioningState values"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror union for backward compatibility"
+union ProvisioningStateUnion {
+  string,
+  Succeeded: "Succeeded",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Failed: "Failed",
+  Canceled: "Canceled",
+  Creating: "Creating",
+}
+
+@@clientName(ProvisioningStateUnion, "ProvisioningState", "java");
+
+@@alternateType(Microsoft.Network.AdminPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.AdminRuleCollectionPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayAuthenticationCertificatePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayBackendAddressPoolPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayBackendSettingsPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayFirewallRuleSetPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayFrontendPortPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayHttpListenerPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayIPConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayListenerPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayLoadDistributionPolicyPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayPathRulePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayPrivateEndpointConnectionProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayPrivateLinkConfigurationProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayPrivateLinkIpConfigurationProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayProbePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayRequestRoutingRulePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayRewriteRuleSetPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayRoutingRulePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewaySslCertificatePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewaySslProfilePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayTrustedClientCertificatePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayTrustedRootCertificatePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationGatewayUrlPathMapPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ApplicationSecurityGroupPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.AuthorizationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.AzureFirewallApplicationRuleCollectionPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.AzureFirewallFqdnTagPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.AzureFirewallIPConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.AzureFirewallNatRuleCollectionProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.AzureFirewallNetworkRuleCollectionPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.AzureFirewallPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.BackendAddressPoolPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.BastionHostIPConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.BastionHostPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.BgpConnectionProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ConnectionMonitorResultProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ConnectivityConfigurationProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ContainerNetworkInterfaceConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ContainerNetworkInterfaceIpConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ContainerNetworkInterfacePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.CustomIpPrefixPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.DdosCustomPolicyPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.DdosDetectionRulePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.DdosProtectionPlanPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.DefaultAdminPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.DelegationProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.DscpConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ExpressRouteCircuitConnectionPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ExpressRouteCircuitPeeringPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ExpressRouteCircuitPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ExpressRouteConnectionProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ExpressRouteCrossConnectionProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ExpressRouteGatewayProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ExpressRouteLinkPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ExpressRoutePortAuthorizationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ExpressRoutePortPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ExpressRoutePortsLocationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ExpressRouteServiceProviderPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.FirewallPolicyPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.FirewallPolicyRuleCollectionGroupProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.FlowLogPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.FrontendIPConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.HubIPConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.HubRouteTableProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.HubVirtualNetworkConnectionProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.InboundNatPoolPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.InboundNatRulePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.InboundSecurityRuleProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.IpamPoolProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.IPConfigurationProfilePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.IPConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.IpGroupPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.LoadBalancerPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.LoadBalancingRulePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.LocalNetworkGatewayPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.NatGatewayPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.NetworkGroupProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.NetworkInterfaceIPConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.NetworkInterfacePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.NetworkInterfaceTapConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.NetworkManagerProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.NetworkManagerRoutingConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.NetworkProfilePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.NetworkSecurityGroupPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.NetworkVirtualApplianceConnectionProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.NetworkVirtualAppliancePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.NetworkWatcherPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.OutboundRulePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.P2SConnectionConfigurationProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.P2SVpnGatewayProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.PacketCaptureResultProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.PeerExpressRouteCircuitConnectionPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.PrivateDnsZoneGroupPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.PrivateEndpointConnectionProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.PrivateEndpointProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.PrivateLinkServiceConnectionProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.PrivateLinkServiceIpConfigurationProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.PrivateLinkServiceProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ProbePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.PublicIPAddressPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.PublicIPPrefixPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ReachabilityAnalysisIntentProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ReachabilityAnalysisRunProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.RecordSet.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ResourceNavigationLinkFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.RouteFilterPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.RouteFilterRulePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.RouteMapProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.RoutePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.RouteTablePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.RoutingIntentProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.RoutingRuleCollectionPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.RoutingRulePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.SecurityAdminConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.SecurityPartnerProviderPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.SecurityRulePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.SecurityUserConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.SecurityUserRuleCollectionPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.SecurityUserRulePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ServiceAssociationLinkPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ServiceDelegationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ServiceEndpointPolicyDefinitionPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ServiceEndpointPolicyPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ServiceEndpointPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.ServiceGatewayPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.SharedKeyProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.StaticCidrProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.StaticMemberProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.SubnetPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VerifierWorkspaceProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualApplianceSiteProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualHubProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualHubRouteTableV2Properties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualNetworkApplianceIpConfigurationProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualNetworkAppliancePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualNetworkGatewayConnectionListEntityPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualNetworkGatewayConnectionPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualNetworkGatewayNatRuleProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualNetworkGatewayPolicyGroupProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualNetworkGatewayPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualNetworkPeeringPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualNetworkPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualNetworkTapPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualRouterPeeringProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualRouterPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VirtualWanProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VngClientConnectionConfigurationProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VpnClientRevokedCertificatePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VpnClientRootCertificatePropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VpnConnectionProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VpnGatewayNatRuleProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VpnGatewayProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VpnServerConfigurationPolicyGroupProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VpnSiteLinkConnectionProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VpnSiteLinkProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.VpnSiteProperties.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+@@alternateType(Microsoft.Network.WebApplicationFirewallPolicyPropertiesFormat.provisioningState,
+  ProvisioningStateUnion,
+  "java"
+);
+
 @@clientName(Microsoft.Network.ErrorResponse, "NetworkErrorResponse", "java");
 
 // IP → Ip naming mitigations for backward compatibility with hand-written wrapper code
