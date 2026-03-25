@@ -945,6 +945,10 @@ op replaceprivateDnsZoneGroupsList(
   "networkInterfaceIpConfigurationId",
   "java"
 );
+@@clientName(Microsoft.Network.VirtualNetworkApplianceIpConfigurationProperties.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
 // Fluent model renames (IP→Ip, JWT→Jwt, LOA→Loa)
 @@clientName(Microsoft.Network.ApplicationGatewayIPConfigurationPropertiesFormat,
   "ApplicationGatewayIpConfigurationPropertiesFormat",
