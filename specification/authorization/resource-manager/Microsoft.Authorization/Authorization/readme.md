@@ -93,8 +93,6 @@ directive:
   - suppress: R2015
     from: common-types.json
     reason: common-types doesn't need to reference api version.
-  - suppress: MULTIPLE_API_VERSION
-    reason: The authorization service bundles multiple resource types (classic admin, role assignments, role definitions, deny assignments, access reviews, PIM schedules) each at different API versions into a single package tag. This is the long-standing pattern for this RP.
   - suppress: NoDuplicatePathsForScopeParameter
     from: authorization-DenyAssignmentCalls.json
     reason: Deny assignments follow the same explicit+scope path pattern as existing role definitions and role assignments. Explicit subscription/RG/resource paths are required for backward compatibility.

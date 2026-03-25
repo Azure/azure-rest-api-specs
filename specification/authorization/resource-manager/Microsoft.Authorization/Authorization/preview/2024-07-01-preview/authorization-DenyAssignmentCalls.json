@@ -242,7 +242,7 @@
         "tags": [
           "DenyAssignments"
         ],
-        "operationId": "DenyAssignments_Create",
+        "operationId": "DenyAssignments_CreateOrUpdate",
         "description": "Create or update a deny assignment by scope and name.",
         "parameters": [
           {
@@ -542,6 +542,11 @@
           "type": "string",
           "readOnly": true,
           "description": "The deny assignment type."
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
         },
         "properties": {
           "x-ms-client-flatten": true,
