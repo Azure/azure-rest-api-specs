@@ -769,6 +769,17 @@ model ToolsetMCPTaskRequestParams {
 }
 
 /**
+ * The status of a task.
+ */
+union ToolsetMCPTaskStatus {
+  working: "working",
+  inputRequired: "input_required",
+  completed: "completed",
+  failed: "failed",
+  cancelled: "cancelled",
+}
+
+/**
  * Data associated with a task.
  * Matches MCP spec Task interface.
  */
@@ -779,9 +790,9 @@ model ToolsetMCPTask {
   taskId: string;
 
   /**
-   * Current task status: working, completed, failed, cancelled, input_required.
+   * Current task status.
    */
-  status: string;
+  status: ToolsetMCPTaskStatus;
 
   /**
    * Optional human-readable status message.
