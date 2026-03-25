@@ -11,11 +11,13 @@ options:
     emitter-output-dir: "{project-root}"
     examples-dir: "{project-root}/examples"
     output-file: "../Microsoft.FileStorage/{version-status}/{version}/file.json"
-  # "@azure-tools/typespec-python":
-  #   emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-file/azure/storage/file/_generated"
-  #   package-name: "azure-storage-file"
-  #   package-mode: dataplane
-  #   flavor: azure
+  "@azure-tools/typespec-python":
+    flavor: azure
+    "package-name": "azure-storage-file-share"
+    "package-pprint-name": "Azure Storage File Share"
+    "namespace": "azure.storage.fileshare._generated"
+    package-mode: dataplane
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-file-share"
   # "@azure-typespec/http-client-csharp":
   #   emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   #   namespace: "Azure.Storage.Files"

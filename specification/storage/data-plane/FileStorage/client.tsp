@@ -6,17 +6,26 @@ using Storage.File;
 
 namespace Customizations;
 
-@@clientNamespace(Storage.File, "Azure.Storage.Files.Shares", "!csharp");
+@@clientNamespace(Storage.File,
+  "Azure.Storage.Files.Shares",
+  "!csharp,!python"
+);
 @@clientNamespace(Storage.File.Service,
   "Azure.Storage.Files.Shares",
-  "!csharp"
+  "!csharp,!python"
 );
-@@clientNamespace(Storage.File.Share, "Azure.Storage.Files.Shares", "!csharp");
+@@clientNamespace(Storage.File.Share,
+  "Azure.Storage.Files.Shares",
+  "!csharp,!python"
+);
 @@clientNamespace(Storage.File.Directory,
   "Azure.Storage.Files.Shares",
-  "!csharp"
+  "!csharp,!python"
 );
-@@clientNamespace(Storage.File.File, "Azure.Storage.Files.Shares", "!csharp");
+@@clientNamespace(Storage.File.File,
+  "Azure.Storage.Files.Shares",
+  "!csharp,!python"
+);
 
 @@alternateType(Storage.File.AccessPolicy.start, string, "javascript");
 @@alternateType(Storage.File.AccessPolicy.expiry, string, "javascript");
