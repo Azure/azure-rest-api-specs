@@ -51,6 +51,18 @@
 - tool: LintDiff
   paths:
     - preview/2026-05-01-preview/openapi.json
+  rules:
+    - AllTrackedResourcesMustHaveDelete
+  reason: False positive - Workspace resource has a DELETE operation (Workspaces_Delete) defined at the path /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}. The linter fails to correlate the Workspace definition with its corresponding delete operation.
+- tool: LintDiff
+  paths:
+    - preview/2026-05-01-preview/openapi.json
+  rules:
+    - TrackedResourcePatchOperation
+  reason: False positive - Workspace resource has a PATCH operation (Workspaces_Update) defined at the same resource path, and the WorkspaceUpdate model includes tags support. The linter fails to correlate the Workspace definition with its corresponding patch operation.
+- tool: LintDiff
+  paths:
+    - preview/2026-05-01-preview/openapi.json
     - preview/2024-11-01-preview/openapi.json
     - stable/2025-01-01/openapi.json
   rules:

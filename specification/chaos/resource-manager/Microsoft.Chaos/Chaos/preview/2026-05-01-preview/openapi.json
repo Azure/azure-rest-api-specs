@@ -2819,9 +2819,6 @@
               }
             }
           },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -5835,6 +5832,107 @@
             "name": "NotApplicable",
             "value": "NotApplicable",
             "description": "The scenario recommendation status is not applicable."
+          }
+        ]
+      }
+    },
+    "RefreshRecommendationsResult": {
+      "type": "object",
+      "description": "The result of a refreshRecommendations long-running operation.\nContains the composite outcome of resource discovery and scenario evaluation tasks.",
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "description": "The individual task results for each phase of the refresh operation.\nEach task has a `kind` discriminator (e.g., ResourceDiscovery, ScenarioEvaluation).",
+          "items": {
+            "$ref": "#/definitions/RefreshRecommendationsTask"
+          },
+          "x-ms-identifiers": [
+            "kind"
+          ]
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the refresh operation completed."
+        }
+      },
+      "required": [
+        "tasks"
+      ]
+    },
+    "RefreshRecommendationsTask": {
+      "type": "object",
+      "description": "Represents the result of a single task (e.g., resource discovery or scenario evaluation)\nwithin the composite refreshRecommendations operation.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/RefreshRecommendationsTaskKind",
+          "description": "The kind of task (e.g., ResourceDiscovery, ScenarioEvaluation)."
+        },
+        "operationId": {
+          "type": "string",
+          "description": "The backend operation ID for this task."
+        },
+        "status": {
+          "type": "string",
+          "description": "The terminal status of this task (e.g., Succeeded, Failed, Cancelled)."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this task started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this task completed."
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors from this task, if any.",
+          "items": {
+            "$ref": "#/definitions/RefreshRecommendationsTaskError"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "RefreshRecommendationsTaskError": {
+      "type": "object",
+      "description": "An error from a refreshRecommendations task.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      }
+    },
+    "RefreshRecommendationsTaskKind": {
+      "type": "string",
+      "description": "The kind of refresh recommendations task.",
+      "enum": [
+        "ResourceDiscovery",
+        "ScenarioEvaluation"
+      ],
+      "x-ms-enum": {
+        "name": "RefreshRecommendationsTaskKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceDiscovery",
+            "value": "ResourceDiscovery",
+            "description": "Resource discovery task."
+          },
+          {
+            "name": "ScenarioEvaluation",
+            "value": "ScenarioEvaluation",
+            "description": "Scenario evaluation task."
           }
         ]
       }
