@@ -151,13 +151,11 @@ using Microsoft.Storage;
 // Without this, TCGC splits it into a separate client whose convenience methods
 // are not generated, causing the pageable method to be silently dropped.
 // See https://github.com/Azure/azure-sdk-for-net/issues/57457
-@@clientLocation(
-  StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
+@@clientLocation(StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
   StorageTaskAssignments,
   "csharp"
 );
-@@clientName(
-  BlobContainers.objectLevelWorm,
+@@clientName(BlobContainers.objectLevelWorm,
   "EnableVersionLevelImmutability",
   "csharp"
 );
