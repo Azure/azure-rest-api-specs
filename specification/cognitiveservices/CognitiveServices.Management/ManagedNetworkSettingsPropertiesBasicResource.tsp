@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Account.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.CognitiveServices;
 
@@ -23,7 +25,7 @@ model ManagedNetworkSettingsPropertiesBasicResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "'ManagedNetworkSettingsPropertiesBasicResource' does not support standalone delete – removed via parent or side-effect"
 @armResourceOperations(#{ omitTags: true })
 interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
@@ -35,11 +37,15 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
    * PUT API for managed network settings of a cognitive services account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "PUT returns 202 Accepted instead of 201 Created to match backend LRO behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "PUT returns 202 Accepted instead of 201 Created to match backend LRO behavior"
   @tag("ManagedNetwork")
   put is ArmResourceCreateOrReplaceAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<ManagedNetworkSettingsPropertiesBasicResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -52,6 +58,13 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
     PatchModel = ManagedNetworkSettingsPropertiesBasicResource,
     OptionalRequestBody = true
   >;
+
+  /**
+   * Delete API for managed network settings of a cognitive services account.
+   */
+  @added(Versions.v2026_01_15_preview)
+  @tag("ManagedNetwork")
+  delete is ArmResourceDeleteWithoutOkAsync<ManagedNetworkSettingsPropertiesBasicResource>;
 
   /**
    * List API for managed network settings of a cognitive services account.
@@ -71,6 +84,20 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
     ManagedNetworkSettingsPropertiesBasicResource,
     Request = ManagedNetworkSettingsBasicResource,
     Response = OutboundRuleListResult
+  >;
+
+  /**
+   * Provisions the managed network of a cognitive services account.
+   */
+  @tag("ManagedNetwork")
+  @action("provision")
+  provisionManagedNetwork is ArmResourceActionAsync<
+    ManagedNetworkSettingsPropertiesBasicResource,
+    Request = ManagedNetworkProvisionOptions,
+    Response = ArmResponse<ManagedNetworkProvisionStatus>,
+    LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkProvisionStatus> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 }
 
@@ -101,6 +128,15 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
 @@summary(ManagedNetworkSettingsPropertiesBasicResources.patch,
   "Patch API for managed network settings of a cognitive services account."
 );
+@@summary(ManagedNetworkSettingsPropertiesBasicResources.delete,
+  "Delete API for managed network settings of a cognitive services account."
+);
 @@summary(ManagedNetworkSettingsPropertiesBasicResources.post,
   "The POST API for updating the outbound rules of the managed network associated with the cognitive services account."
+);
+@@doc(ManagedNetworkSettingsPropertiesBasicResources.provisionManagedNetwork::parameters.body,
+  "Managed Network Provisioning Options for a cognitive services account."
+);
+@@summary(ManagedNetworkSettingsPropertiesBasicResources.provisionManagedNetwork,
+  "Provisions the managed network of a cognitive services account."
 );

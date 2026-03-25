@@ -125,8 +125,16 @@ interface StorageTaskAssignments {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API uses non-standard response codes for this action"
   @added(Versions.v2025_08_01)
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @action("stopAssignment")
-  stopAssignment is ArmResourceActionAsync<StorageTaskAssignment, void, void>;
+  stopAssignment is ArmResourceActionAsync<
+    StorageTaskAssignment,
+    void,
+    void,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@maxLength(StorageTaskAssignment.name, 24);
