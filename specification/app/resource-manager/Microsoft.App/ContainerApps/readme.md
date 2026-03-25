@@ -90,7 +90,32 @@ input-file:
   - preview/2025-10-02-preview/SessionPools.json
   - preview/2025-10-02-preview/SourceControls.json
   - preview/2025-10-02-preview/Subscriptions.json
+  - preview/2025-10-02-preview/SupportedModels.json
   - preview/2025-10-02-preview/Usages.json
+```
+
+### Tag: package-preview-2025-05-01-preview
+These settings apply only when `--tag=package-preview-2025-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-05-01-preview'
+input-file:
+  - preview/2025-05-01-preview/SupportedModels.json
+directive:
+  - suppress: PutResponseCodes
+    from: ConnectedEnvironmentsCertificates.json
+    reason: |
+      This resource type already existed in the previous stable version 2024-03-01.
+      This API is does not return 201
+  - suppress: PutResponseCodes
+    from: ConnectedEnvironmentsDaprComponents.json
+    reason: |
+      This resource type already existed in the previous stable version 2024-03-01.
+      This API is does not return 201
+  - suppress: PutResponseCodes
+    from: ConnectedEnvironmentsStorages.json
+    reason: |
+      This resource type already existed in the previous stable version 2024-03-01.
+      This API is does not return 201
 ```
 
 ### Tag: package-2025-07-01
