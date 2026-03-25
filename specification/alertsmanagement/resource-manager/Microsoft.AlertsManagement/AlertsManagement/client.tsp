@@ -44,6 +44,8 @@ using Http;
 @@clientName(TimeRange.`30d`, "ThirtyD", "go");
 
 // C# renames for migration backward compatibility
+@@clientName(Alert, "ServiceAlert", "csharp");
+@@clientName(Alerts, "ServiceAlert", "csharp");
 @@clientName(TimeRange, "TimeRangeFilter", "csharp");
 @@clientName(TimeRange.`1h`, "OneHour", "csharp");
 @@clientName(TimeRange.`1d`, "OneDay", "csharp");
@@ -68,14 +70,13 @@ using Http;
 @@clientName(AlertProperties, "ServiceAlertProperties", "csharp");
 @@clientName(AlertsSortByFields, "ListServiceAlertsSortByField", "csharp");
 @@clientName(AlertsSummary, "ServiceAlertSummary", "csharp");
-// Renamed back to match old SDK name (was GetServiceAlertSummaryGroupByField)
 @@clientName(AlertsSummaryGroupByFields, "AlertsSummaryGroupByField", "csharp");
 @@clientName(AlertsSummaryGroupItem,
   "ServiceAlertSummaryGroupItemInfo",
   "csharp"
 );
 @@clientName(AlertsSummaryGroup, "ServiceAlertSummaryGroup", "csharp");
-@@clientName(Comments, "AlertComments", "csharp");
+@@clientName(Comments, "ServiceAlertComments", "csharp");
 @@clientName(AlertEnrichmentResponse, "AlertEnrichmentResult", "csharp");
 @@clientName(AlertsMetaData, "ServiceAlertMetadata", "csharp");
 @@clientName(AlertsMetaDataProperties,
@@ -87,8 +88,6 @@ using Http;
 @@clientName(SortOrder, "AlertsManagementQuerySortOrder", "csharp");
 @@clientName(ActionStatus, "ServiceAlertActionStatus", "csharp");
 @@clientName(Essentials.lastModifiedUserName, "lastModifiedBy", "csharp");
-
-// Fix member renames for backward compatibility with old SDK
 @@clientName(MonitorService.SCOM, "Scom", "csharp");
 @@clientName(MonitorService.`VM Insights`, "VmInsights", "csharp");
 @@clientName(AlertsSortByFields.lastModifiedDateTime,
@@ -96,16 +95,20 @@ using Http;
   "csharp"
 );
 @@clientName(AlertsSortByFields.startDateTime, "StartOn", "csharp");
-
-// Fix property casing: spec has "groupedby", old SDK had "GroupedBy"
 @@clientName(AlertsSummaryGroup.groupedby, "GroupedBy", "csharp");
 @@clientName(AlertsSummaryGroupItem.groupedby, "GroupedBy", "csharp");
-
-// Fix property types: spec has string, old SDK had Guid?
+@@clientName(TriggeredRule, "AlertsManagementTriggeredRule", "csharp");
+@@clientName(Status, "AlertsManagementStatus", "csharp");
+@@clientName(RuleType, "AlertsManagementRuleType", "csharp");
+@@clientName(ResultStatus, "AlertsManagementResultStatus", "csharp");
+@@clientName(NotificationResult,
+  "AlertsManagementNotificationResult",
+  "csharp"
+);
+@@clientName(BaseDetails, "AlertsManagementBaseDetails", "csharp");
 @@alternateType(Essentials.smartGroupId, Azure.Core.uuid, "csharp");
 @@alternateType(AlertModificationProperties.alertId, Azure.Core.uuid, "csharp");
-
-// Restore property setters and constructors for backward compatibility
+@@alternateType(AlertIdParameter.alertId, Azure.Core.uuid, "csharp");
 @@usage(Essentials, Usage.input, "csharp");
 @@usage(AlertModification, Usage.input, "csharp");
 @@usage(AlertModificationItem, Usage.input, "csharp");
@@ -115,4 +118,15 @@ using Http;
 @@usage(AlertsSummaryGroup, Usage.input, "csharp");
 @@usage(AlertsSummaryGroupItem, Usage.input, "csharp");
 @@usage(Alert, Usage.input, "csharp");
-@@usage(MonitorServiceList, Usage.input, "csharp");
+
+// Map local ProxyResource-based models to ResourceData for backward compatibility
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AlertModification,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AlertsSummary,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
