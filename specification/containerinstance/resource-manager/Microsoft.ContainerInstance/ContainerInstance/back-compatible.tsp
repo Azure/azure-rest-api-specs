@@ -67,3 +67,6 @@ using Microsoft.ContainerInstance;
 @@clientLocation(SubnetServiceAssociationLinkOperationGroup.delete,
   "SubnetServiceAssociationLink"
 );
+
+@@clientName(Azure.ResourceManager.CommonTypes.Resource, "ArmResource", "python");
+@@clientName(Microsoft.ContainerInstance, "ContainerInstanceManagementClient", "python");
