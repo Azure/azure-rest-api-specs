@@ -1280,3 +1280,11 @@ op replaceprivateDnsZoneGroupsList(
   CombineClient,
   "python"
 );
+@@clientLocation(VirtualWans.supportedSecurityProviders,
+  CombineClient,
+  "python"
+);
+@@clientLocation(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
+  CombineClient,
+  "python"
+);
