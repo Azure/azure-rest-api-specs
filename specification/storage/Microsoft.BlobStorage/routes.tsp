@@ -1,12 +1,14 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "./models.tsp";
+import "@typespec/versioning";
 
 namespace Storage.Blob;
 
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 alias ApiVersionHeader = {
   /** Specifies the version of the operation to use for this request. */
@@ -200,7 +202,7 @@ interface Service {
   submitBatch(
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    multipartContentType: "multipart/mixed",
+    contentType: "multipart/mixed",
 
     ...ApiVersionHeader,
     ...TimeoutParameter,
@@ -208,6 +210,8 @@ interface Service {
     ...ContentLengthParameter,
     ...MultipartBodyParameter,
   ): (MultipartBodyParameter & {
+    @statusCode statusCode: 202;
+
     /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
     @header("Content-Type")
@@ -331,7 +335,7 @@ interface Container {
     {
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
-      ...MetadataHeadersParameter;
+      ...MetadataHeaders;
       ...IfModifiedSinceParameter;
     },
     {
@@ -365,12 +369,16 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @route("?restype=container&comp=acl")
-  setAccessPolicy is StorageOperationRequestBody<
+  setAccessPolicy is StorageOperationNoBody<
     {
+      /** The media type of the requestbody */
+      @header("Content-Type")
+      contentType?: "application/xml";
+
       /** The access control list for the container. */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
       @body
-      containerAcl: SignedIdentifiers;
+      containerAcl?: SignedIdentifiers;
 
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
@@ -439,7 +447,7 @@ interface Container {
 
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    multipartContentType: "multipart/mixed",
+    contentType: "multipart/mixed",
 
     ...ContentLengthParameter,
     ...TimeoutParameter,
@@ -450,7 +458,7 @@ interface Container {
 
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    multipartContentType: "multipart/mixed";
+    contentType: "multipart/mixed";
 
     ...RequestIdResponseHeader;
     ...ApiVersionHeader;
@@ -813,6 +821,11 @@ interface Blob {
       ...IfTagsParameter;
     },
     {
+      /** Content-type. */
+      #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation, so content-type header can be returned."
+      @header("Content-Type")
+      contentType?: string;
+
       ...MetadataHeaders;
       ...ObjectReplicationHeaders;
       ...LastModifiedResponseHeader;
@@ -868,6 +881,11 @@ interface Blob {
       @encode("rfc7231")
       @header("x-ms-access-tier-change-time")
       accessTierChangeTime?: utcDateTime;
+
+      /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
+      @added(Versions.v2026_06_06)
+      @header("x-ms-smart-access-tier")
+      smartAccessTier?: string;
 
       ...VersionIdResponseHeader;
       ...IsCurrentVersionResponseHeader;
@@ -987,7 +1005,12 @@ interface Blob {
     {
       ...TimeoutParameter;
       ...IfUnmodifiedSinceParameter;
+
+      // Note: this property is intentionally named `expiry` (rather than `immutabilityPolicyExpiry`
+      // like the optional sibling alias) so that it surfaces simply as `expiry` in emitted
+      // languages without requiring a `@clientName` override.
       ...ImmutabilityPolicyExpiryRequiredParameter;
+
       ...ImmutabilityPolicyModeParameter;
       ...SnapshotParameter;
       ...VersionIdParameter;
@@ -1039,7 +1062,7 @@ interface Blob {
   setMetadata is StorageOperationNoBody<
     {
       ...TimeoutParameter;
-      ...MetadataHeadersParameter;
+      ...MetadataHeaders;
       ...LeaseIdOptionalParameter;
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
@@ -1271,7 +1294,6 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @sharedRoute
-  @route("?comp=copy&sync")
   copyFromUrl is StorageOperationNoBody<
     {
       ...TimeoutParameter;
@@ -2029,6 +2051,7 @@ interface BlockBlob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
+      ...ContentCrc64ResponseHeader;
       ...VersionIdResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
