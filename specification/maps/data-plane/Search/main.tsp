@@ -34,7 +34,7 @@ model AzureKey is ApiKeyAuth<ApiKeyLocation.header, "subscription-key">;
 model SasToken is ApiKeyAuth<ApiKeyLocation.header, "SAS Token">;
 
 /**
- * Azure Maps Geolocation REST APIs
+ * Azure Maps Search REST APIs
  */
 @useAuth(AadToken | AzureKey | SasToken)
 @service(#{ title: "Maps Search" })
