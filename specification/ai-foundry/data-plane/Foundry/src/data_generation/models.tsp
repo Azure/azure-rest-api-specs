@@ -98,7 +98,7 @@ model DataGenerationJob {
 
 @doc("Output information for a data generation job.")
 model DataGenerationJobOutput {
-  @doc("The type of the output. If not specified, it will default to File type.")
+  @doc("The type of the output.")
   type: DataGenerationJobOutputFileType;
 
   @doc("The id of the output Azure OpenAI file or dataset.")
