@@ -2238,25 +2238,16 @@
       "type": "object",
       "description": "A container group.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ContainerGroupProperties",
-          "description": "The RP-specific properties for this resource.",
-          "x-ms-client-flatten": true
+        "location": {
+          "type": "string",
+          "description": "The resource location."
         },
         "tags": {
           "type": "object",
-          "description": "Resource tags.",
+          "description": "The resource tags.",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         },
         "zones": {
           "type": "array",
@@ -2268,11 +2259,20 @@
         "identity": {
           "$ref": "#/definitions/ContainerGroupIdentity",
           "description": "The identity of the container group, if configured."
+        },
+        "properties": {
+          "$ref": "#/definitions/ContainerGroupPropertiesProperties",
+          "description": "The container group properties",
+          "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "location",
+        "properties"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2645,24 +2645,6 @@
           "description": "Container Group properties which can be set while creating or updating the NGroups."
         }
       }
-    },
-    "ContainerGroupProperties": {
-      "type": "object",
-      "description": "The container group properties",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/ContainerGroupIdentity",
-          "description": "The identity of the container group, if configured."
-        },
-        "properties": {
-          "$ref": "#/definitions/ContainerGroupPropertiesProperties",
-          "description": "The container group properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "properties"
-      ]
     },
     "ContainerGroupPropertiesProperties": {
       "type": "object",

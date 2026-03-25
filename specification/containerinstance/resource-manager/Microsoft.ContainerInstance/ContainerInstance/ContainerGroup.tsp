@@ -14,22 +14,35 @@ namespace Microsoft.ContainerInstance;
  * A container group.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-model ContainerGroup
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ContainerGroupProperties> {
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ContainerGroup extends Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = ContainerGroup,
     KeyName = "containerGroupName",
     SegmentName = "containerGroups",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
 
   /**
-   * The identity of the container group, if configured.
+   * The resource location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  identity?: ContainerGroupIdentity;
+  location: string;
+
+  /**
+   * The resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
+  ...ContainerGroupProperties;
 }
+
+@@visibility(ContainerGroup.name, Lifecycle.Read);
 
 @armResourceOperations(#{ omitTags: true })
 interface ContainerGroups {
