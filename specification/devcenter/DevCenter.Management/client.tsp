@@ -203,71 +203,48 @@ using Microsoft.DevCenter;
 // Original models use `is TrackedResourceUpdate` which spreads (inlines) properties in C#.
 // Replacements use `extends` to preserve the inheritance chain.
 
-model DevCenterUpdateReplacement extends TrackedResourceUpdate {
-  /** Managed identity properties. */
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
-  /** Properties of a Dev Center to be updated. */
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
-  properties?: DevCenterUpdateProperties;
-}
-@@alternateType(DevCenterUpdate, DevCenterUpdateReplacement, "csharp");
-@@clientName(DevCenterUpdateReplacement, "DevCenterPatch", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DevCenterUpdate, TrackedResourceUpdate, "csharp");
+@@clientName(DevCenterUpdate, "DevCenterPatch", "csharp");
 
-model DevBoxDefinitionUpdateReplacement extends TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
-  /** Properties of a Dev Box definition to be updated. */
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
-  properties?: DevBoxDefinitionUpdateProperties;
-}
-@@alternateType(DevBoxDefinitionUpdate, DevBoxDefinitionUpdateReplacement, "csharp");
-@@clientName(DevBoxDefinitionUpdateReplacement, "DevBoxDefinitionPatch", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DevBoxDefinitionUpdate, TrackedResourceUpdate, "csharp");
+@@clientName(DevBoxDefinitionUpdate, "DevBoxDefinitionPatch", "csharp");
 
-model NetworkConnectionUpdateReplacement extends TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
-  /** Properties of a network connection resource to be updated. */
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
-  properties?: NetworkConnectionUpdateProperties;
-}
-@@alternateType(NetworkConnectionUpdate, NetworkConnectionUpdateReplacement, "csharp");
-@@clientName(NetworkConnectionUpdateReplacement, "DevCenterNetworkConnectionPatch", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(NetworkConnectionUpdate, TrackedResourceUpdate, "csharp");
+@@clientName(NetworkConnectionUpdate, "DevCenterNetworkConnectionPatch", "csharp");
 
-model PoolUpdateReplacement extends TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
-  /** Properties of a pool to be updated. */
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
-  properties?: PoolUpdateProperties;
-}
-@@alternateType(PoolUpdate, PoolUpdateReplacement, "csharp");
-@@clientName(PoolUpdateReplacement, "DevCenterPoolPatch", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PoolUpdate, TrackedResourceUpdate, "csharp");
+@@clientName(PoolUpdate, "DevCenterPoolPatch", "csharp");
 
-model ProjectUpdateReplacement extends TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
-  /** Properties of a project to be updated. */
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
-  properties?: ProjectUpdateProperties;
-  /** Managed identity properties. */
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
-}
-@@alternateType(ProjectUpdate, ProjectUpdateReplacement, "csharp");
-@@clientName(ProjectUpdateReplacement, "DevCenterProjectPatch", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ProjectUpdate, TrackedResourceUpdate, "csharp");
+@@clientName(ProjectUpdate, "DevCenterProjectPatch", "csharp");
 
+// ScheduleUpdate is a plain model without `is TrackedResourceUpdate`, so it doesn't have
+// tags/location properties. hierarchyBuilding requires all base type properties to be present,
+// so the replacement model approach is needed here.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Back compatibility"
+@doc("The schedule properties for partial update. Properties not provided in the update request will not be changed.")
 model ScheduleUpdateReplacement extends TrackedResourceUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
   /** Properties of a schedule resource to be updated. */
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
-  properties?: ScheduleUpdateProperties;
+  properties?: ScheduleUpdatePropertiesReplacement;
 }
 @@alternateType(ScheduleUpdate, ScheduleUpdateReplacement, "csharp");
 @@clientName(ScheduleUpdateReplacement, "DevCenterSchedulePatch", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScheduleUpdateReplacement.properties, "csharp");
 
 // ScheduleUpdateProperties uses `is TrackedResourceUpdate` which spreads tags/location into it.
 // When flattened into ScheduleUpdateReplacement (which inherits tags/location from base),
 // this causes CS0108. Replace with a plain model that omits tags/location.
+@doc("Updatable properties of a Schedule.")
 model ScheduleUpdatePropertiesReplacement {
   ...OmitProperties<ScheduleUpdateProperties, "tags" | "location">;
 }
-@@alternateType(ScheduleUpdateProperties, ScheduleUpdatePropertiesReplacement, "csharp");
 
 // ApiCompat fixes: property renames and type overrides
 @@clientName(DevBoxDefinitionUpdateProperties.osStorageType, "OSStorageType", "csharp");
