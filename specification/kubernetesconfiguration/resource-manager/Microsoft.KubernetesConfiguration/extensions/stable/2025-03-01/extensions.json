@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ExtensionsClient",
-    "version": "2024-11-01",
+    "version": "2025-03-01",
     "description": "Use these APIs to create extension resources through ARM, for Kubernetes Clusters.",
     "x-typespec-generated": [
       {
@@ -182,6 +182,18 @@
         "x-ms-examples": {
           "Get Extension": {
             "$ref": "./examples/GetExtension.json"
+          },
+          "Get Extension with Additional Details": {
+            "$ref": "./examples/GetExtensionWithAdditionalDetails.json"
+          },
+          "Get Extension with Extension State": {
+            "$ref": "./examples/GetExtensionWithExtensionState.json"
+          },
+          "Get Extension with ManagedBy": {
+            "$ref": "./examples/GetExtensionWithManagedBy.json"
+          },
+          "Get Extension with Management Details": {
+            "$ref": "./examples/GetExtensionWithManagementDetails.json"
           },
           "Get Extension with Plan": {
             "$ref": "./examples/GetExtensionWithPlan.json"
@@ -565,7 +577,8 @@
       "description": "The identity type.",
       "enum": [
         "SystemAssigned",
-        "UserAssigned"
+        "UserAssigned",
+        "Workload"
       ],
       "x-ms-enum": {
         "name": "AKSIdentityType",
@@ -580,6 +593,80 @@
             "name": "UserAssigned",
             "value": "UserAssigned",
             "description": "UserAssigned identity"
+          },
+          {
+            "name": "Workload",
+            "value": "Workload",
+            "description": "Workload identity"
+          }
+        ]
+      }
+    },
+    "AccessDetail": {
+      "type": "object",
+      "description": "Metadata about the access details of the managing entity of the extension",
+      "properties": {
+        "entity": {
+          "type": "string",
+          "description": "The entity to which the access details apply"
+        },
+        "allowedActions": {
+          "type": "array",
+          "description": "The list of allowed actions for the entity",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the entity"
+        }
+      }
+    },
+    "AdditionalDetails": {
+      "type": "object",
+      "description": "Additional details provided by the publisher of the extension.",
+      "properties": {
+        "docs": {
+          "type": "string",
+          "description": "Documentation for the extension."
+        },
+        "releaseNotes": {
+          "type": "string",
+          "description": "Release Notes of the extension."
+        },
+        "troubleshootingGuide": {
+          "type": "string",
+          "description": "Troubleshooting guide for the extension."
+        }
+      }
+    },
+    "AutoUpgradeMode": {
+      "type": "string",
+      "description": "The upgrade mode for auto upgrade.\nThe default is \"compatible\".",
+      "enum": [
+        "none",
+        "patch",
+        "compatible"
+      ],
+      "x-ms-enum": {
+        "name": "AutoUpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "The extension will not be automatically upgraded."
+          },
+          {
+            "name": "patch",
+            "value": "patch",
+            "description": "The extension will be automatically upgraded to the latest patch version within the minor version."
+          },
+          {
+            "name": "compatible",
+            "value": "compatible",
+            "description": "The extension will be automatically upgraded to compatible versions as determined by the user."
           }
         ]
       }
@@ -632,6 +719,15 @@
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Identity",
           "description": "Identity of the Extension resource"
+        },
+        "managedBy": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "plan": {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Plan",
@@ -737,6 +833,50 @@
           "description": "Flag to note if this extension is a system extension",
           "default": false,
           "readOnly": true
+        },
+        "autoUpgradeMode": {
+          "type": "string",
+          "description": "The upgrade mode for auto upgrade.\nThe default is \"compatible\".",
+          "default": "compatible",
+          "enum": [
+            "none",
+            "patch",
+            "compatible"
+          ],
+          "x-ms-enum": {
+            "name": "AutoUpgradeMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "none",
+                "value": "none",
+                "description": "The extension will not be automatically upgraded."
+              },
+              {
+                "name": "patch",
+                "value": "patch",
+                "description": "The extension will be automatically upgraded to the latest patch version within the minor version."
+              },
+              {
+                "name": "compatible",
+                "value": "compatible",
+                "description": "The extension will be automatically upgraded to compatible versions as determined by the user."
+              }
+            ]
+          }
+        },
+        "managementDetails": {
+          "$ref": "#/definitions/ManagementDetails",
+          "description": "Management details of the extension"
+        },
+        "additionalDetails": {
+          "$ref": "#/definitions/AdditionalDetails",
+          "description": "Additional details provided by the publisher of the extension."
+        },
+        "extensionState": {
+          "type": "string",
+          "description": "State of the extension on the cluster.",
+          "readOnly": true
         }
       }
     },
@@ -757,6 +897,19 @@
         "type": {
           "$ref": "#/definitions/AKSIdentityType",
           "description": "The identity type."
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The object ID of resource identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of resource identity."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ID of the resource identity."
         }
       }
     },
@@ -864,6 +1017,24 @@
         ]
       }
     },
+    "ManagementDetails": {
+      "type": "object",
+      "description": "Metadata about the managing entity of the extension and the permitted operations.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The category of the managing entity"
+        },
+        "accessDetails": {
+          "type": "array",
+          "description": "The list of access details of the managing entity",
+          "items": {
+            "$ref": "#/definitions/AccessDetail"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "OperationStatusResult": {
       "type": "object",
       "description": "The current status of an async operation.",
@@ -918,6 +1089,37 @@
           "type": "boolean",
           "description": "Flag to note if this extension participates in auto upgrade of minor version, or not.",
           "default": true
+        },
+        "autoUpgradeMode": {
+          "type": "string",
+          "description": "The upgrade mode for auto upgrade.\nThe default is \"compatible\".",
+          "default": "compatible",
+          "enum": [
+            "none",
+            "patch",
+            "compatible"
+          ],
+          "x-ms-enum": {
+            "name": "AutoUpgradeMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "none",
+                "value": "none",
+                "description": "The extension will not be automatically upgraded."
+              },
+              {
+                "name": "patch",
+                "value": "patch",
+                "description": "The extension will be automatically upgraded to the latest patch version within the minor version."
+              },
+              {
+                "name": "compatible",
+                "value": "compatible",
+                "description": "The extension will be automatically upgraded to compatible versions as determined by the user."
+              }
+            ]
+          }
         },
         "releaseTrain": {
           "type": "string",
