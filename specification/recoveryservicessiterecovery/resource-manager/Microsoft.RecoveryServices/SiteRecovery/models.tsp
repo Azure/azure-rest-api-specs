@@ -1084,6 +1084,7 @@ union InMageRcmFailbackRecoveryPointType {
 /**
  * The network access policy for managed disks.
  */
+@added(Versions.v2026_02_01)
 union DiskNetworkAccessPolicy {
   string,
 
@@ -1106,6 +1107,7 @@ union DiskNetworkAccessPolicy {
 /**
  * The public network access setting for managed disks.
  */
+@added(Versions.v2026_02_01)
 union DiskPublicNetworkAccess {
   string,
 
@@ -6593,16 +6595,19 @@ model A2AVmManagedDiskInputDetails {
   /**
    * The network access policy for the recovery managed disk.
    */
+  @added(Versions.v2026_02_01)
   recoveryNetworkAccessPolicy?: DiskNetworkAccessPolicy;
 
   /**
    * The recovery disk access Arm Id.
    */
+  @added(Versions.v2026_02_01)
   recoveryDiskAccessId?: string;
 
   /**
    * The public network access setting for the recovery managed disk.
    */
+  @added(Versions.v2026_02_01)
   recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
 }
 
@@ -7805,16 +7810,19 @@ model A2AProtectedManagedDiskDetails {
   /**
    * The network access policy for the recovery managed disk.
    */
+  @added(Versions.v2026_02_01)
   recoveryNetworkAccessPolicy?: DiskNetworkAccessPolicy;
 
   /**
    * The recovery disk access Arm Id.
    */
+  @added(Versions.v2026_02_01)
   recoveryDiskAccessId?: string;
 
   /**
    * The public network access setting for the recovery managed disk.
    */
+  @added(Versions.v2026_02_01)
   recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
 }
 
@@ -9118,16 +9126,19 @@ model A2AVmManagedDiskUpdateDetails {
   /**
    * The network access policy for the recovery managed disk.
    */
+  @added(Versions.v2026_02_01)
   recoveryNetworkAccessPolicy?: DiskNetworkAccessPolicy;
 
   /**
    * The recovery disk access Arm Id.
    */
+  @added(Versions.v2026_02_01)
   recoveryDiskAccessId?: string;
 
   /**
    * The public network access setting for the recovery managed disk.
    */
+  @added(Versions.v2026_02_01)
   recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
 }
 
