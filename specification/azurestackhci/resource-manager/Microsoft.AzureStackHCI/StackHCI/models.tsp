@@ -2012,6 +2012,13 @@ model ClusterProperties {
   billingModel?: string;
 
   /**
+   * Billing properties of the cluster, including upcoming billing model details.
+   */
+  @added(Versions.v2026_04_01_preview)
+  @visibility(Lifecycle.Read)
+  billingProperties?: ClusterBillingProperties;
+
+  /**
    * First cluster sync timestamp.
    */
   @visibility(Lifecycle.Read)
@@ -2081,6 +2088,13 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   identityProvider?: IdentityProvider = IdentityProvider.ActiveDirectory;
+
+  /**
+   * Storage type of the cluster. Indicates whether the cluster uses S2D, SAN, or a combination.
+   */
+  @added(Versions.v2026_04_01_preview)
+  @visibility(Lifecycle.Read)
+  storageType?: StorageType;
 }
 
 /**
@@ -2641,6 +2655,32 @@ model ClusterPatchProperties {
    * Desired properties of the cluster.
    */
   desiredProperties?: ClusterDesiredProperties;
+}
+
+/**
+ * Billing properties of the cluster.
+ */
+@added(Versions.v2026_04_01_preview)
+model ClusterBillingProperties {
+  /**
+   * The next billing model to be applied to the cluster.
+   */
+  nextBillingModel?: NextBillingModel;
+}
+
+/**
+ * Details of the next billing model for the cluster.
+ */
+@added(Versions.v2026_04_01_preview)
+model NextBillingModel {
+  /** Type of billing model. */
+  billingModel?: string;
+
+  /** Capabilities enabled under this billing model. */
+  capabilitiesEnabled?: string[];
+
+  /** Number of days remaining in the trial period. */
+  trialDaysRemaining?: float32;
 }
 
 /**
