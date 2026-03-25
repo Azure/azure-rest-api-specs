@@ -156,6 +156,11 @@ using Microsoft.Storage;
   StorageTaskAssignments,
   "csharp"
 );
+@@clientName(
+  BlobContainers.objectLevelWorm,
+  "EnableVersionLevelImmutability",
+  "csharp"
+);
 
 // Resource type renames for backward compatibility
 @@clientName(BlobServiceProperties, "BlobService", "csharp");
