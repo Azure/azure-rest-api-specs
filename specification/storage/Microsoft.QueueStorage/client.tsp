@@ -56,8 +56,28 @@ interface QueueClient extends Storage.Queues.Queue {}
 @@scope(Storage.Queues.Service.getUserDelegationKey, "!rust");
 
 // Go customizations
+/**
+ * List wrapper for EnqueuedMessage array
+ */
+model ListOfSentMessageGo is Array<SentMessage>;
+/**
+ * List wrapper for PeekedMessageItem array
+ */
+model PeekedMessagesGo is Array<PeekedMessage>;
+/**
+ * List wrapper for DequeuedMessageItem array
+*/
+@clientName("Messages", "go")
+model ReceivedMessagesGo is Array<ReceivedMessage>;
+/** Represents an array of signed identifiers */
+@clientName("SignedIdentifiers", "go")
+model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
+@@alternateType(ListOfSentMessage, ListOfSentMessageGo, "go");
+@@alternateType(PeekedMessages, PeekedMessagesGo, "go");
+@@alternateType(ReceivedMessages, ReceivedMessagesGo, "go");
+@@alternateType(SignedIdentifiers, SignedIdentifiersGo, "go");
 @@clientName(Metrics.includeApis, "includeAPIs", "go");
 @@clientName(CorsRule, "CORSRule", "go");
 @@clientName(ListQueuesResponse.queueItems, "Queues", "go");
