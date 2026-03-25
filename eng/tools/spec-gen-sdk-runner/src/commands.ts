@@ -235,7 +235,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   markdownContent += `## Batch Run Type\n ${batchType}\n`;
   let failedContent = `## Spec Failures in the Generation Process\n`;
   let warningContent = `## Specs with Warnings in the Generation Process\n`;
-  let succeededContent = `## Successful Specs in the Generation Process\n`;
+  let succeededContent = `## Successful Specs in the Generation Process (including success with warnings)\n`;
   let notEnabledContent = `## Specs with SDK Not Enabled\n`;
   let duplicatedConfigContent = `## Specs with Duplicated SDK Configurations (in 'tspconfig.yaml' and 'readme.md')\n`;
   let failedCount = 0;
