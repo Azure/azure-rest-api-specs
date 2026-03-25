@@ -1780,7 +1780,6 @@ model LanguageExtensionsList {
   /**
    * The list of language extensions.
    */
-  @pageItems
   @identifiers(#[])
   value?: LanguageExtension[];
 
