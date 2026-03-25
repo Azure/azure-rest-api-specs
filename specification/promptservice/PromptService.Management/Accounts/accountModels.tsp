@@ -16,14 +16,15 @@ namespace Microsoft.PromptService;
 /** Details of the Prompt Service Account. */
 model AccountProperties {
   /** The kind of account determining storage topology. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   accountKind: AccountKind;
 
   /** Account description. */
   @maxLength(250)
   description?: string;
 
-  /** Encryption settings for the account. */
-  encryptionSettings?: EncryptionSettings;
+  /** Customer-managed key encryption settings for the account. */
+  encryption?: CustomerManagedKeyEncryption;
 
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)

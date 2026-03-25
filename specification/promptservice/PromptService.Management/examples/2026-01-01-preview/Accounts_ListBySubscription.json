@@ -20,9 +20,11 @@
             "properties": {
               "accountKind": "Regional",
               "description": "Test prompt service account",
-              "encryptionSettings": {
-                "keyName": "myEncryptionKey",
-                "keyVaultUri": "https://mykeyvault.vault.azure.net"
+              "encryption": {
+                "keyEncryptionKeyIdentity": {
+                  "identityType": "systemAssignedIdentity"
+                },
+                "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey"
               },
               "provisioningState": "Succeeded"
             },

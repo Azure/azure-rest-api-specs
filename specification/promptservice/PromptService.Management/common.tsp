@@ -52,12 +52,3 @@ union AccountKind {
 
   string,
 }
-
-/** Encryption settings for the account. */
-model EncryptionSettings {
-  /** The name of the encryption key. */
-  keyName?: string;
-
-  /** The URI of the Key Vault containing the encryption key. */
-  keyVaultUri?: string;
-}

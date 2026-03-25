@@ -754,16 +754,20 @@
       "properties": {
         "accountKind": {
           "$ref": "#/definitions/AccountKind",
-          "description": "The kind of account determining storage topology."
+          "description": "The kind of account determining storage topology.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "description": {
           "type": "string",
           "description": "Account description.",
           "maxLength": 250
         },
-        "encryptionSettings": {
-          "$ref": "#/definitions/EncryptionSettings",
-          "description": "Encryption settings for the account."
+        "encryption": {
+          "$ref": "../../../../../common-types/resource-management/v6/customermanagedkeys.json#/definitions/customerManagedKeyEncryption",
+          "description": "Customer-managed key encryption settings for the account."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -856,23 +860,12 @@
           "description": "The model name associated with this container (e.g., gpt-4, claude-3)."
         },
         "provider": {
-          "type": "string",
+          "$ref": "#/definitions/AiProvider",
           "description": "The AI provider associated with this container.",
-          "default": "OpenAI",
-          "enum": [
-            "OpenAI"
-          ],
-          "x-ms-enum": {
-            "name": "AiProvider",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "OpenAI",
-                "value": "OpenAI",
-                "description": "OpenAI provider."
-              }
-            ]
-          }
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -884,20 +877,6 @@
         "modelName",
         "provider"
       ]
-    },
-    "EncryptionSettings": {
-      "type": "object",
-      "description": "Encryption settings for the account.",
-      "properties": {
-        "keyName": {
-          "type": "string",
-          "description": "The name of the encryption key."
-        },
-        "keyVaultUri": {
-          "type": "string",
-          "description": "The URI of the Key Vault containing the encryption key."
-        }
-      }
     },
     "ProvisioningState": {
       "type": "string",

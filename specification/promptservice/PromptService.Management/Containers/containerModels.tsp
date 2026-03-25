@@ -23,7 +23,8 @@ model ContainerProperties {
   modelName: string;
 
   /** The AI provider associated with this container. */
-  provider: AiProvider = AiProvider.OpenAI;
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  provider: AiProvider;
 
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
