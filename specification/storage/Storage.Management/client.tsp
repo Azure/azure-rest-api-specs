@@ -147,6 +147,15 @@ using Microsoft.Storage;
   "GetStorageTaskAssignmentInstancesReports",
   "csharp"
 );
+// Keep report list operation on the main StorageTaskAssignments client for C#.
+// Without this, TCGC splits it into a separate client whose convenience methods
+// are not generated, causing the pageable method to be silently dropped.
+// See https://github.com/Azure/azure-sdk-for-net/issues/57457
+@@clientLocation(
+  StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
+  StorageTaskAssignments,
+  "csharp"
+);
 
 // Resource type renames for backward compatibility
 @@clientName(BlobServiceProperties, "BlobService", "csharp");
