@@ -1013,7 +1013,6 @@ op replaceprivateDnsZoneGroupsList(
 );
 @@clientName(Microsoft.Network.VirtualWAN, "VirtualWan", "java");
 // Interface/operation group renames
-@@clientName(Microsoft.Network.CustomIPPrefixes, "CustomIpPrefixes", "java");
 @@clientName(Microsoft.Network.FrontendIPConfigurations,
   "FrontendIpConfigurations",
   "java"
@@ -1254,14 +1253,6 @@ op replaceprivateDnsZoneGroupsList(
 @@clientLocation(BastionHosts.getBastionShareableLink, CombineClient, "python");
 @@clientLocation(BastionHosts.getActiveSessions, CombineClient, "python");
 @@clientLocation(BastionHosts.disconnectActiveSessions,
-  CombineClient,
-  "python"
-);
-@@clientLocation(VirtualWANS.supportedSecurityProviders,
-  CombineClient,
-  "python"
-);
-@@clientLocation(VirtualWANS.generatevirtualwanvpnserverconfigurationvpnprofile,
   CombineClient,
   "python"
 );
