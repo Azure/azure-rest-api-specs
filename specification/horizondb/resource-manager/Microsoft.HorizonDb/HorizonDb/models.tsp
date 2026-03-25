@@ -316,12 +316,6 @@ union CreateModeCluster {
 
   /** Create cluster from point-in-time restore */
   PointInTimeRestore: "PointInTimeRestore",
-
-  /** Create cluster from geo restore */
-  GeoRestore: "GeoRestore",
-
-  /** Revive a dropped cluster */
-  ReviveDropped: "ReviveDropped",
 }
 
 @doc("The mode to create a new HorizonDb cluster.")
