@@ -1025,6 +1025,8 @@ op replaceprivateDnsZoneGroupsList(
   "NetworkInterfaceIpConfigurations",
   "java"
 );
+// etag header
+@@clientName(NetworkGroupCreateOrUpdateEtagHeader.eTag, "etag", "java");
 
 // python
 @@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
@@ -1284,7 +1286,6 @@ op replaceprivateDnsZoneGroupsList(
   CombineClient,
   "python"
 );
-@@clientName(NetworkGroupCreateOrUpdateEtagHeader.eTag, "etag", "java");
 @@clientLocation(VirtualWans.supportedSecurityProviders,
   CombineClient,
   "python"
