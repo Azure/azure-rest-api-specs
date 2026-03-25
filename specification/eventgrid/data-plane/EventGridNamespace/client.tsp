@@ -36,7 +36,7 @@ namespace Customizations {
 
   @client(
     {
-      name: "EventGridSenderClient",
+      name: "EventGridSendClient",
       service: Microsoft.EventGrid,
     },
     "csharp"
