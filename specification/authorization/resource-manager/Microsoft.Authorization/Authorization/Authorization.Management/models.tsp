@@ -338,7 +338,7 @@ union ApprovalMode {
 /**
  * The type of user.
  */
-union UserType {
+union CommonUserType {
   string,
 
   /**
@@ -355,6 +355,23 @@ union UserType {
    * ServicePrincipal
    */
   ServicePrincipal: "ServicePrincipal",
+}
+
+/**
+ * The type of user.
+ */
+union UserType {
+  string,
+
+  /**
+   * User
+   */
+  User: "User",
+
+  /**
+   * Group
+   */
+  Group: "Group",
 }
 
 /**
@@ -1637,7 +1654,7 @@ model UsersOrServicePrincipalSet {
   /**
    * The type of user.
    */
-  type?: UserType;
+  type?: CommonUserType;
 
   /**
    * The object id of the entity.

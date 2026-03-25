@@ -282,4 +282,5 @@
 | `definitions.RoleManagementPolicyProperties.properties.effectiveRules.items.$ref` | `./common-types.json#/definitions/RoleManagementPolicyRule` | `#/definitions/RoleManagementPolicyRule` |
 | `definitions.RoleManagementPolicyProperties.properties.lastModifiedBy.$ref` | `./common-types.json#/definitions/Principal` | `#/definitions/Principal` |
 | `definitions.RoleManagementPolicyProperties.properties.rules.items.$ref` | `./common-types.json#/definitions/RoleManagementPolicyRule` | `#/definitions/RoleManagementPolicyRule` |
+| `definitions.UsersOrServicePrincipalSet.properties.type['x-ms-enum'].name` | `UserType` | `CommonUserType` |
 

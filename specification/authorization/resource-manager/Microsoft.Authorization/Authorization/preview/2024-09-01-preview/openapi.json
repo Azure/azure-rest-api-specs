@@ -1575,6 +1575,36 @@
       },
       "x-ms-external": true
     },
+    "CommonUserType": {
+      "type": "string",
+      "description": "The type of user.",
+      "enum": [
+        "User",
+        "Group",
+        "ServicePrincipal"
+      ],
+      "x-ms-enum": {
+        "name": "CommonUserType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "User"
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "Group"
+          },
+          {
+            "name": "ServicePrincipal",
+            "value": "ServicePrincipal",
+            "description": "ServicePrincipal"
+          }
+        ]
+      }
+    },
     "EligibleChildResource": {
       "type": "object",
       "description": "Eligible child resource",
@@ -3518,8 +3548,7 @@
       "description": "The type of user.",
       "enum": [
         "User",
-        "Group",
-        "ServicePrincipal"
+        "Group"
       ],
       "x-ms-enum": {
         "name": "UserType",
@@ -3534,11 +3563,6 @@
             "name": "Group",
             "value": "Group",
             "description": "Group"
-          },
-          {
-            "name": "ServicePrincipal",
-            "value": "ServicePrincipal",
-            "description": "ServicePrincipal"
           }
         ]
       }
@@ -3548,7 +3572,7 @@
       "description": "The detail of a subject.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/UserType",
+          "$ref": "#/definitions/CommonUserType",
           "description": "The type of user."
         },
         "id": {
