@@ -496,17 +496,6 @@
     - machinelearningservices/AzureAI.Assets/tspconfig.yaml
 
 - tool: TypeSpecValidation
-  reason: Python SDK for MachineLearningServices.Management intentionally targets azure-ai-ml package with custom namespace and no test/sample generation
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-python.emitter-output-dir
-    - options.@azure-tools/typespec-python.namespace
-    - options.@azure-tools/typespec-python.generate-sample
-    - options.@azure-tools/typespec-python.generate-test
-  paths:
-    - machinelearningservices/MachineLearningServices.Management/tspconfig.yaml
-
-- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
