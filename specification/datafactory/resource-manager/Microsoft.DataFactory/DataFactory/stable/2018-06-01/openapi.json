@@ -7454,16 +7454,35 @@
         },
         "sslMode": {
           "$ref": "#/definitions/AmazonRedshiftSslMode",
-          "description": "The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0"
+          "description": "The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0. Type: string."
         },
         "sslInsecure": {
-          "description": "Specifies whether the driver checks the authenticity of the IdP server certificate. The default value is False. Only used for Version 2.0"
+          "description": "Specifies whether the driver checks the authenticity of the IdP server certificate. The default value is False. Only used for Version 2.0. Type: boolean."
         }
       },
       "required": [
         "server",
         "database"
       ]
+    },
+    "AmazonRedshiftSource": {
+      "type": "object",
+      "description": "A copy activity source for Amazon Redshift Source.",
+      "properties": {
+        "query": {
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "redshiftUnloadSettings": {
+          "$ref": "#/definitions/RedshiftUnloadSettings",
+          "description": "The Amazon S3 settings needed for the interim Amazon S3 when copying from Amazon Redshift with unload. With this, data from Amazon Redshift source will be unloaded into S3 first and then copied into the targeted sink from the interim S3."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "x-ms-discriminator-value": "AmazonRedshiftSource"
     },
     "AmazonRedshiftSslMode": {
       "type": "string",
@@ -7512,25 +7531,6 @@
           }
         ]
       }
-    },
-    "AmazonRedshiftSource": {
-      "type": "object",
-      "description": "A copy activity source for Amazon Redshift Source.",
-      "properties": {
-        "query": {
-          "description": "Database query. Type: string (or Expression with resultType string)."
-        },
-        "redshiftUnloadSettings": {
-          "$ref": "#/definitions/RedshiftUnloadSettings",
-          "description": "The Amazon S3 settings needed for the interim Amazon S3 when copying from Amazon Redshift with unload. With this, data from Amazon Redshift source will be unloaded into S3 first and then copied into the targeted sink from the interim S3."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TabularSource"
-        }
-      ],
-      "x-ms-discriminator-value": "AmazonRedshiftSource"
     },
     "AmazonRedshiftTableDataset": {
       "type": "object",
