@@ -1294,6 +1294,7 @@ union ProvisioningStateUnion {
   "ExplicitProxySettings",
   "go"
 );
+@@clientName(ExplicitProxy, "ExplicitProxySettings", "go");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
