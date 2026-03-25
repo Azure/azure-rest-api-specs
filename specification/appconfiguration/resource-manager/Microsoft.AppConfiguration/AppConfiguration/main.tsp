@@ -30,7 +30,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * // (missing-service-description) Add service description
+ * Azure App Configuration provides a service to centrally manage application settings and feature flags.
  */
 @armProviderNamespace
 @service(#{ title: "AppConfigurationManagementClient" })
