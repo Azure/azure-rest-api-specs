@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-02'
 input-file:
-  - Microsoft.Insights/stable/2024-02-01/metricBatch.json
+  - stable/2024-02-01/metricBatch.json
 ```
 ### Tag: package-2023-10
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2023-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-10'
 input-file:
-  - Microsoft.Insights/stable/2023-10-01/metricBatch.json
+  - stable/2023-10-01/metricBatch.json
 ```
 
 ### Tag: package-preview-2023-05
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-05'
 input-file:
-  - Microsoft.Insights/preview/2023-05-01-preview/metricBatch.json
+  - preview/2023-05-01-preview/metricBatch.json
 ```
 
 ### Tag: package-preview-2023-03
@@ -64,18 +64,7 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
-  - Microsoft.Insights/preview/2023-03-01-preview/metricBatch.json
-  - preview/2018-09-01-preview/metricsCreate_API.json
-```
-
-### Tag: package-2018-09-preview
-
-These settings apply only when `--tag=package-2018-09-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-09-preview'
-input-file:
-- preview/2018-09-01-preview/metricsCreate_API.json
-
+  - preview/2023-03-01-preview/metricBatch.json
 ```
 
 # Code Generation
@@ -120,15 +109,6 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2018-09-preview
-```
-
-### Tag: package-2018-09-preview and go
-
-These settings apply only when `--tag=package-2018-09-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-09-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/2018-09-01-preview/monitor
 ```
 
 ## Python
@@ -187,8 +167,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/preview/2018-09-01-preview/metricsCreate_API.json
-  - $(this-folder)/Microsoft.Insights/preview/2023-03-01-preview/metricBatch.json
+  - $(this-folder)/preview/2023-03-01-preview/metricBatch.json
 
 ```
 
@@ -197,5 +176,5 @@ uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file:
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+#  - $(this-folder)/stable/2010-01-01/somefile.json
 ```
