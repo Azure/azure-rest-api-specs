@@ -1705,6 +1705,43 @@ union HiveAuthenticationType {
 }
 
 /**
+ * The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0
+ */
+union AmazonRedshiftSslMode {
+  string,
+
+  /**
+   * Connect only using SSL, a trusted certificate authority, and a server name that matches the certificate.
+   */
+  Verify_full: "verify-full",
+
+  /**
+   * Connect only using SSL and a trusted certificate authority.
+   */
+  Verify_ca: "verify-ca",
+
+  /**
+   * Connect only using SSL.
+   */
+  Required: "require",
+
+  /**
+   * Connect using SSL if available. Otherwise, connect without using SSL.
+   */
+  Preferred: "prefer",
+
+  /**
+   * By default, connect without using SSL. If the server requires SSL connections, then use SSL.
+   */
+  Allowed: "allow",
+
+  /**
+   * Connect without using SSL.
+   */
+  Disabled: "disable",
+}
+
+/**
  * The authentication type to use.
  */
 union ImpalaAuthenticationType {
@@ -15363,7 +15400,7 @@ model AmazonRedshiftLinkedServiceTypeProperties {
   /**
    * The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0. Type: string.
    */
-  sslMode?: Dfe<string>;
+  sslMode?: AmazonRedshiftSslMode;
 
   /**
    * Specifies whether the driver checks the authenticity of the IdP server certificate. The default value is False. Only used for Version 2.0. Type: string.
