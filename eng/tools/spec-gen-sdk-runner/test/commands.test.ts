@@ -253,7 +253,6 @@ describe("generateSdkForSpecPr", () => {
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       true, // sdkGenerationExecuted
-      undefined, // sdkReportedCheckRequired
     );
   });
 
@@ -297,7 +296,6 @@ describe("generateSdkForSpecPr", () => {
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       false, // sdkGenerationExecuted should be set to false
-      undefined, // sdkReportedCheckRequired
     );
   });
 
@@ -337,7 +335,6 @@ describe("generateSdkForSpecPr", () => {
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       true, // sdkGenerationExecuted is true because there were some changed specs but they had no valid config
-      undefined, // sdkReportedCheckRequired
     );
   });
 
