@@ -211,13 +211,18 @@ stages:
           Write-Host "Tag count: $($tags.Count)"
           $tags | Select-Object -First 10
 
-          Write-Host "`n=== [Diag 1] Check tag object type for @azure/arm-purview_1.1.0 ==="
-          $tagSha = git rev-parse "refs/tags/@azure/arm-purview_1.1.0" 2>&1
-          Write-Host "Tag SHA: $tagSha"
-          git cat-file -t $tagSha 2>&1
+          $testTag = '@azure/arm-purview_1.1.0'
+          Write-Host "`n=== [Diag 1] Check tag object type for $testTag ==="
+          $tagSha = git rev-parse "refs/tags/$testTag"
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "Tag SHA: $tagSha"
+            git cat-file -t $tagSha
+          } else {
+            Write-Host "Tag not found: $testTag"
+          }
 
           Write-Host "`n=== [Diag 1] git ls-tree on tag (expected to FAIL with treeless clone) ==="
-          git ls-tree -d "@azure/arm-purview_1.1.0" src/api 2>&1
+          git ls-tree -d "$testTag" src/api 2>&1
           Write-Host "Exit code: $LASTEXITCODE"
           Pop-Location
         displayName: '[Diag 1] Baseline: treeless clone git tag + git ls-tree'
@@ -230,8 +235,9 @@ stages:
           git fetch --tags
           Write-Host "git fetch --tags exit code: $LASTEXITCODE"
 
-          Write-Host "`n=== [Diag 2] git ls-tree after fetch --tags ==="
-          git ls-tree -d "@azure/arm-purview_1.1.0" src/api 2>&1
+          $testTag = '@azure/arm-purview_1.1.0'
+          Write-Host "`n=== [Diag 2] git ls-tree after fetch --tags for $testTag ==="
+          git ls-tree -d "$testTag" src/api 2>&1
           Write-Host "Exit code: $LASTEXITCODE"
           Pop-Location
         displayName: '[Diag 2] git fetch --tags: does this fix git ls-tree?'
@@ -252,8 +258,9 @@ stages:
           Write-Host "`n=== [Diag 3] Clone filter (should be empty after full clone) ==="
           git config remote.origin.partialclonefilter 2>&1
 
-          Write-Host "`n=== [Diag 3] git ls-tree after full clone (expected to SUCCEED) ==="
-          git ls-tree -d "@azure/arm-purview_1.1.0" src/api 2>&1
+          $testTag = '@azure/arm-purview_1.1.0'
+          Write-Host "`n=== [Diag 3] git ls-tree after full clone for $testTag (expected to SUCCEED) ==="
+          git ls-tree -d "$testTag" src/api 2>&1
           Write-Host "Exit code: $LASTEXITCODE"
           Pop-Location
         displayName: '[Diag 3] Full re-clone: verify git ls-tree is stable'
