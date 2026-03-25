@@ -80,7 +80,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(SignedIdentifiers, SignedIdentifiersGo, "go");
 @@clientName(Metrics.includeApis, "includeAPIs", "go");
 @@clientName(CorsRule, "CORSRule", "go");
-@@clientName(ListQueuesResponse.queueItems, "Queues", "go");
 @@clientName(ListQueuesResponse, "ListQueuesSegmentResponse", "go");
 @@clientName(ListQueuesResponse.queueItems, "Queues", "go");
 @@clientName(QueueItem, "Queue", "go");
