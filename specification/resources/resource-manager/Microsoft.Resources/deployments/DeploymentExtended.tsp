@@ -36,14 +36,6 @@ model DeploymentExtended
   tags?: Record<string>;
 }
 
-model BadResponse<T> is Response<400> {
-  /**
-   * The error details.
-   */
-  @bodyRoot
-  body: T;
-}
-
 interface DeploymentExtendedScopeOps
   extends Azure.ResourceManager.Legacy.RoutedOperations<
       {
@@ -165,8 +157,16 @@ interface DeploymentExtendeds {
     Extension.ScopeParameter,
     DeploymentExtended,
     Deployment,
-    DeploymentValidateResult | BadResponse<DeploymentValidateResult>,
-    Error = CloudError
+    DeploymentValidateResult,
+    Error = CloudError | {
+      ...Response<400>;
+
+      /**
+       * The template deployment validation detected failures.
+       */
+      @bodyRoot
+      body: DeploymentValidateResult;
+    }
   >;
 
   /**
@@ -312,7 +312,15 @@ interface Deployments {
     DeploymentExtended,
     ScopedDeployment,
     DeploymentValidateResult,
-    Error = CloudError
+    Error = CloudError | {
+      ...Response<400>;
+
+      /**
+       * The template deployment validation detected failures.
+       */
+      @bodyRoot
+      body: DeploymentValidateResult;
+    }
   >;
 
   /**
@@ -536,8 +544,16 @@ interface DeploymentExtendedManagementGroup {
     Extension.ManagementGroup<"groupId">,
     DeploymentExtended,
     ScopedDeployment,
-    DeploymentValidateResult | BadResponse<DeploymentValidateResult>,
-    Error = CloudError
+    DeploymentValidateResult,
+    Error = CloudError | {
+      ...Response<400>;
+
+      /**
+       * The template deployment validation detected failures.
+       */
+      @bodyRoot
+      body: DeploymentValidateResult;
+    }
   >;
 
   /**
@@ -735,7 +751,15 @@ interface DeploymentExtendedSubscriptionGroup {
     DeploymentExtended,
     Deployment,
     DeploymentValidateResult,
-    Error = CloudError
+    Error = CloudError | {
+      ...Response<400>;
+
+      /**
+       * The template deployment validation detected failures.
+       */
+      @bodyRoot
+      body: DeploymentValidateResult;
+    }
   >;
 
   /**
