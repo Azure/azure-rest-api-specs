@@ -11,7 +11,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./Remediation.tsp";
@@ -21,7 +20,6 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -29,7 +27,7 @@ using TypeSpec.Versioning;
 /**
  * Query component policy states at varying resource scopes for Resource Provider mode policies.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace("Microsoft.PolicyInsights")
 @service(#{ title: "RemediationsClient" })
 @versioned(Versions)
@@ -51,7 +49,7 @@ interface Operations {
   /**
    * Lists available operations.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @segment("operations")
   @get

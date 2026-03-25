@@ -1,14 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-
 namespace PolicyInsightsApi;
 /**
  * An attestation resource.
@@ -83,7 +80,7 @@ interface Attestations {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -91,7 +88,7 @@ interface Attestations {
       /**
        * OData filter expression.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$filter")
       Filter?: string;
     },
@@ -119,8 +116,6 @@ interface AttestationResourceGroupOperations {
   /**
    * Gets an existing attestation at resource group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Attestations_GetAtResourceGroup")
   getAtResourceGroup is AttestationResourceGroupOps.Read<
     Attestation,
     OverrideErrorType = ErrorResponse
@@ -129,8 +124,6 @@ interface AttestationResourceGroupOperations {
   /**
    * Creates or updates an attestation at resource group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Attestations_CreateOrUpdateAtResourceGroup")
   createOrUpdateAtResourceGroup is AttestationResourceGroupOps.CreateOrUpdateAsync<
     Attestation,
     LroHeaders = ArmLroLocationHeader<FinalResult = Attestation> &
@@ -141,8 +134,6 @@ interface AttestationResourceGroupOperations {
   /**
    * Deletes an existing attestation at resource group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Attestations_DeleteAtResourceGroup")
   deleteAtResourceGroup is AttestationResourceGroupOps.DeleteSync<
     Attestation,
     OverrideErrorType = ErrorResponse
@@ -151,8 +142,6 @@ interface AttestationResourceGroupOperations {
   /**
    * Gets all attestations for the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Attestations_ListForResourceGroup")
   listForResourceGroup is AttestationResourceGroupOps.List<
     Attestation,
     Response = ArmResponse<AttestationListResult>,
@@ -160,7 +149,7 @@ interface AttestationResourceGroupOperations {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -168,7 +157,7 @@ interface AttestationResourceGroupOperations {
       /**
        * OData filter expression.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$filter")
       Filter?: string;
     },
@@ -176,13 +165,11 @@ interface AttestationResourceGroupOperations {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AttestationOperationGroup {
   /**
    * Gets an existing attestation at resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Attestations_GetAtResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/attestations/{attestationName}")
   @get
   getAtResource(
@@ -204,8 +191,6 @@ interface AttestationOperationGroup {
   /**
    * Creates or updates an attestation at resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Attestations_CreateOrUpdateAtResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/attestations/{attestationName}")
   @put
   createOrUpdateAtResource(
@@ -237,8 +222,6 @@ interface AttestationOperationGroup {
   /**
    * Deletes an existing attestation at individual resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Attestations_DeleteAtResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/attestations/{attestationName}")
   @delete
   deleteAtResource(
@@ -262,8 +245,6 @@ interface AttestationOperationGroup {
   /**
    * Gets all attestations for a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Attestations_ListForResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/attestations")
   @list
   @get
@@ -279,7 +260,7 @@ interface AttestationOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -287,7 +268,7 @@ interface AttestationOperationGroup {
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
   ): ArmResponse<AttestationListResult> | ErrorResponse;

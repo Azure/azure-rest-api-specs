@@ -4,22 +4,16 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
-
 namespace PolicyInsightsApi;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface RemediationsOperationGroup {
   /**
    * Gets all deployments for a remediation at management group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_ListDeploymentsAtManagementGroup")
   @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/listDeployments")
   @list
   @post
@@ -47,7 +41,7 @@ interface RemediationsOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -55,8 +49,6 @@ interface RemediationsOperationGroup {
   /**
    * Cancels a remediation at management group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_CancelAtManagementGroup")
   @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/cancel")
   @post
   cancelAtManagementGroup(
@@ -82,13 +74,11 @@ interface RemediationsOperationGroup {
   ): Remediation | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PolicyEventsOperationGroup {
   /**
    * Queries policy events for the resources under the management group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyEvents_ListQueryResultsForManagementGroup")
   @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults")
   @list
   @post
@@ -116,7 +106,7 @@ interface PolicyEventsOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -124,57 +114,55 @@ interface PolicyEventsOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
   /**
    * Queries policy events for the resources under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyEvents_ListQueryResultsForSubscription")
   @autoRoute
   @list
   @action("queryResults")
@@ -193,7 +181,7 @@ interface PolicyEventsOperationGroup {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -201,49 +189,49 @@ interface PolicyEventsOperationGroup {
       /**
        * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$orderby")
       OrderBy?: string;
 
       /**
        * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$select")
       Select?: string;
 
       /**
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$from")
       From?: utcDateTime;
 
       /**
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$to")
       To?: utcDateTime;
 
       /**
        * OData filter expression.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$filter")
       Filter?: string;
 
       /**
        * OData apply expression for aggregations.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$apply")
       Apply?: string;
 
       /**
        * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$skiptoken")
       SkipToken?: string;
     }
@@ -251,8 +239,6 @@ interface PolicyEventsOperationGroup {
   /**
    * Queries policy events for the resources under the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyEvents_ListQueryResultsForResourceGroup")
   @autoRoute
   @list
   @action("queryResults")
@@ -271,7 +257,7 @@ interface PolicyEventsOperationGroup {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -279,49 +265,49 @@ interface PolicyEventsOperationGroup {
       /**
        * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$orderby")
       OrderBy?: string;
 
       /**
        * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$select")
       Select?: string;
 
       /**
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$from")
       From?: utcDateTime;
 
       /**
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$to")
       To?: utcDateTime;
 
       /**
        * OData filter expression.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$filter")
       Filter?: string;
 
       /**
        * OData apply expression for aggregations.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$apply")
       Apply?: string;
 
       /**
        * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$skiptoken")
       SkipToken?: string;
     }
@@ -329,8 +315,6 @@ interface PolicyEventsOperationGroup {
   /**
    * Queries policy events for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyEvents_ListQueryResultsForResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults")
   @list
   @post
@@ -352,7 +336,7 @@ interface PolicyEventsOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -360,64 +344,62 @@ interface PolicyEventsOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * The $expand query parameter. For example, to expand components use $expand=components
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$expand")
     Expand?: string,
 
     /**
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
   /**
    * Queries policy events for the subscription level policy set definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyEvents_ListQueryResultsForPolicySetDefinition")
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults")
   @list
   @post
@@ -451,7 +433,7 @@ interface PolicyEventsOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -459,57 +441,55 @@ interface PolicyEventsOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
   /**
    * Queries policy events for the subscription level policy definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyEvents_ListQueryResultsForPolicyDefinition")
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults")
   @list
   @post
@@ -543,7 +523,7 @@ interface PolicyEventsOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -551,57 +531,55 @@ interface PolicyEventsOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
   /**
    * Queries policy events for the subscription level policy assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyEvents_ListQueryResultsForSubscriptionLevelPolicyAssignment")
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults")
   @list
   @post
@@ -635,7 +613,7 @@ interface PolicyEventsOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -643,57 +621,55 @@ interface PolicyEventsOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
   /**
    * Queries policy events for the resource group level policy assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyEvents_ListQueryResultsForResourceGroupLevelPolicyAssignment")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults")
   @list
   @post
@@ -733,7 +709,7 @@ interface PolicyEventsOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -741,61 +717,59 @@ interface PolicyEventsOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PolicyStatesOperationGroup {
   /**
    * Queries policy states for the resources under the management group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_ListQueryResultsForManagementGroup")
   @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")
   @list
   @post
@@ -823,7 +797,7 @@ interface PolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -831,57 +805,55 @@ interface PolicyStatesOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyStatesQueryResults | QueryFailure;
   /**
    * Summarizes policy states for the resources under the management group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_SummarizeForManagementGroup")
   @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForManagementGroup(
@@ -908,7 +880,7 @@ interface PolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -916,29 +888,27 @@ interface PolicyStatesOperationGroup {
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
   ): SummarizeResults | QueryFailure;
   /**
    * Queries policy states for the resources under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_ListQueryResultsForSubscription")
   @autoRoute
   @list
   @action("queryResults")
@@ -957,7 +927,7 @@ interface PolicyStatesOperationGroup {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -965,49 +935,49 @@ interface PolicyStatesOperationGroup {
       /**
        * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$orderby")
       OrderBy?: string;
 
       /**
        * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$select")
       Select?: string;
 
       /**
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$from")
       From?: utcDateTime;
 
       /**
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$to")
       To?: utcDateTime;
 
       /**
        * OData filter expression.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$filter")
       Filter?: string;
 
       /**
        * OData apply expression for aggregations.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$apply")
       Apply?: string;
 
       /**
        * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$skiptoken")
       SkipToken?: string;
     }
@@ -1015,8 +985,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Summarizes policy states for the resources under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_SummarizeForSubscription")
   @autoRoute
   @action("summarize")
   summarizeForSubscription is ArmProviderActionSync<
@@ -1034,7 +1002,7 @@ interface PolicyStatesOperationGroup {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -1042,21 +1010,21 @@ interface PolicyStatesOperationGroup {
       /**
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$from")
       From?: utcDateTime;
 
       /**
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$to")
       To?: utcDateTime;
 
       /**
        * OData filter expression.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$filter")
       Filter?: string;
     }
@@ -1064,8 +1032,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Queries policy states for the resources under the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_ListQueryResultsForResourceGroup")
   @autoRoute
   @list
   @action("queryResults")
@@ -1084,7 +1050,7 @@ interface PolicyStatesOperationGroup {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -1092,49 +1058,49 @@ interface PolicyStatesOperationGroup {
       /**
        * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$orderby")
       OrderBy?: string;
 
       /**
        * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$select")
       Select?: string;
 
       /**
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$from")
       From?: utcDateTime;
 
       /**
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$to")
       To?: utcDateTime;
 
       /**
        * OData filter expression.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$filter")
       Filter?: string;
 
       /**
        * OData apply expression for aggregations.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$apply")
       Apply?: string;
 
       /**
        * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$skiptoken")
       SkipToken?: string;
     }
@@ -1142,8 +1108,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Summarizes policy states for the resources under the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_SummarizeForResourceGroup")
   @autoRoute
   @action("summarize")
   summarizeForResourceGroup is ArmProviderActionSync<
@@ -1161,7 +1125,7 @@ interface PolicyStatesOperationGroup {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -1169,21 +1133,21 @@ interface PolicyStatesOperationGroup {
       /**
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$from")
       From?: utcDateTime;
 
       /**
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$to")
       To?: utcDateTime;
 
       /**
        * OData filter expression.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$filter")
       Filter?: string;
     }
@@ -1191,8 +1155,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Queries policy states for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_ListQueryResultsForResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")
   @list
   @post
@@ -1214,7 +1176,7 @@ interface PolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1222,64 +1184,62 @@ interface PolicyStatesOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * The $expand query parameter. For example, to expand components use $expand=components
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$expand")
     Expand?: string,
 
     /**
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyStatesQueryResults | QueryFailure;
   /**
    * Summarizes policy states for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_SummarizeForResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForResource(
@@ -1300,7 +1260,7 @@ interface PolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1308,21 +1268,21 @@ interface PolicyStatesOperationGroup {
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
   ): SummarizeResults | QueryFailure;
@@ -1330,9 +1290,7 @@ interface PolicyStatesOperationGroup {
   /**
    * Triggers a policy evaluation scan for all the resources under the subscription
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_TriggerSubscriptionEvaluation")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation")
   @post
   triggerSubscriptionEvaluation(
@@ -1348,8 +1306,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Triggers a policy evaluation scan for all the resources under the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_TriggerResourceGroupEvaluation")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation")
   @post
   triggerResourceGroupEvaluation(
@@ -1371,8 +1327,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Queries policy states for the subscription level policy set definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_ListQueryResultsForPolicySetDefinition")
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")
   @list
   @post
@@ -1406,7 +1360,7 @@ interface PolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1414,49 +1368,49 @@ interface PolicyStatesOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyStatesQueryResults | QueryFailure;
@@ -1464,8 +1418,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Summarizes policy states for the subscription level policy set definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_SummarizeForPolicySetDefinition")
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForPolicySetDefinition(
@@ -1498,7 +1450,7 @@ interface PolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1506,21 +1458,21 @@ interface PolicyStatesOperationGroup {
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
   ): SummarizeResults | QueryFailure;
@@ -1528,8 +1480,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Queries policy states for the subscription level policy definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_ListQueryResultsForPolicyDefinition")
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")
   @list
   @post
@@ -1563,7 +1513,7 @@ interface PolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1571,49 +1521,49 @@ interface PolicyStatesOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyStatesQueryResults | QueryFailure;
@@ -1621,8 +1571,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Summarizes policy states for the subscription level policy definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_SummarizeForPolicyDefinition")
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForPolicyDefinition(
@@ -1655,7 +1603,7 @@ interface PolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1663,21 +1611,21 @@ interface PolicyStatesOperationGroup {
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
   ): SummarizeResults | QueryFailure;
@@ -1685,8 +1633,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Queries policy states for the subscription level policy assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_ListQueryResultsForSubscriptionLevelPolicyAssignment")
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")
   @list
   @post
@@ -1720,7 +1666,7 @@ interface PolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1728,49 +1674,49 @@ interface PolicyStatesOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyStatesQueryResults | QueryFailure;
@@ -1778,8 +1724,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Summarizes policy states for the subscription level policy assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_SummarizeForSubscriptionLevelPolicyAssignment")
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForSubscriptionLevelPolicyAssignment(
@@ -1812,7 +1756,7 @@ interface PolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1820,21 +1764,21 @@ interface PolicyStatesOperationGroup {
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
   ): SummarizeResults | QueryFailure;
@@ -1842,8 +1786,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Queries policy states for the resource group level policy assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_ListQueryResultsForResourceGroupLevelPolicyAssignment")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")
   @list
   @post
@@ -1883,7 +1825,7 @@ interface PolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1891,49 +1833,49 @@ interface PolicyStatesOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyStatesQueryResults | QueryFailure;
@@ -1941,8 +1883,6 @@ interface PolicyStatesOperationGroup {
   /**
    * Summarizes policy states for the resource group level policy assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyStates_SummarizeForResourceGroupLevelPolicyAssignment")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForResourceGroupLevelPolicyAssignment(
@@ -1981,7 +1921,7 @@ interface PolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1989,33 +1929,31 @@ interface PolicyStatesOperationGroup {
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
   ): SummarizeResults | QueryFailure;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PolicyMetadataNonResourceOperationGroup {
   /**
    * Get a list of the policy metadata resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyMetadata_List")
   @autoRoute
   @list
   @get
@@ -2026,7 +1964,7 @@ interface PolicyMetadataNonResourceOperationGroup {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -2035,13 +1973,11 @@ interface PolicyMetadataNonResourceOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PolicyRestrictionsOperationGroup {
   /**
    * Checks what restrictions Azure Policy will place on a resource within a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyRestrictions_CheckAtSubscriptionScope")
   @autoRoute
   @action("checkPolicyRestrictions")
   checkAtSubscriptionScope is ArmProviderActionSync<
@@ -2053,8 +1989,6 @@ interface PolicyRestrictionsOperationGroup {
   /**
    * Checks what restrictions Azure Policy will place on a resource within a resource group. Use this when the resource group the resource will be created in is already known.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyRestrictions_CheckAtResourceGroupScope")
   @autoRoute
   @action("checkPolicyRestrictions")
   checkAtResourceGroupScope is ArmProviderActionSync<
@@ -2066,8 +2000,6 @@ interface PolicyRestrictionsOperationGroup {
   /**
    * Checks what restrictions Azure Policy will place on resources within a management group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyRestrictions_CheckAtManagementGroupScope")
   @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions")
   @post
   checkAtManagementGroupScope(
@@ -2093,13 +2025,11 @@ interface PolicyRestrictionsOperationGroup {
   ): CheckRestrictionsResult | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ComponentPolicyStatesOperationGroup {
   /**
    * Queries component policy states under subscription scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentPolicyStates_ListQueryResultsForSubscription")
   @autoRoute
   @action("queryResults")
   listQueryResultsForSubscription is ArmProviderActionSync<
@@ -2116,7 +2046,7 @@ interface ComponentPolicyStatesOperationGroup {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -2124,42 +2054,42 @@ interface ComponentPolicyStatesOperationGroup {
       /**
        * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$orderby")
       OrderBy?: string;
 
       /**
        * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$select")
       Select?: string;
 
       /**
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$from")
       From?: utcDateTime;
 
       /**
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$to")
       To?: utcDateTime;
 
       /**
        * OData filter expression.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$filter")
       Filter?: string;
 
       /**
        * OData apply expression for aggregations.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$apply")
       Apply?: string;
     },
@@ -2168,8 +2098,6 @@ interface ComponentPolicyStatesOperationGroup {
   /**
    * Queries component policy states under resource group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentPolicyStates_ListQueryResultsForResourceGroup")
   @autoRoute
   @action("queryResults")
   listQueryResultsForResourceGroup is ArmProviderActionSync<
@@ -2186,7 +2114,7 @@ interface ComponentPolicyStatesOperationGroup {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -2194,42 +2122,42 @@ interface ComponentPolicyStatesOperationGroup {
       /**
        * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$orderby")
       OrderBy?: string;
 
       /**
        * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$select")
       Select?: string;
 
       /**
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$from")
       From?: utcDateTime;
 
       /**
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$to")
       To?: utcDateTime;
 
       /**
        * OData filter expression.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$filter")
       Filter?: string;
 
       /**
        * OData apply expression for aggregations.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$apply")
       Apply?: string;
     },
@@ -2238,8 +2166,6 @@ interface ComponentPolicyStatesOperationGroup {
   /**
    * Queries component policy states for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentPolicyStates_ListQueryResultsForResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults")
   @post
   listQueryResultsForResource(
@@ -2260,7 +2186,7 @@ interface ComponentPolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -2268,57 +2194,55 @@ interface ComponentPolicyStatesOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
 
     /**
      * The $expand query parameter.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$expand")
     Expand?: string,
   ): ComponentPolicyStatesQueryResults | ErrorResponse;
   /**
    * Queries component policy states for the subscription level policy definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentPolicyStates_ListQueryResultsForPolicyDefinition")
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults")
   @post
   listQueryResultsForPolicyDefinition(
@@ -2354,7 +2278,7 @@ interface ComponentPolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -2362,50 +2286,48 @@ interface ComponentPolicyStatesOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
   ): ComponentPolicyStatesQueryResults | ErrorResponse;
   /**
    * Queries component policy states for the subscription level policy assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentPolicyStates_ListQueryResultsForSubscriptionLevelPolicyAssignment")
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults")
   @post
   listQueryResultsForSubscriptionLevelPolicyAssignment(
@@ -2441,7 +2363,7 @@ interface ComponentPolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -2449,50 +2371,48 @@ interface ComponentPolicyStatesOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
   ): ComponentPolicyStatesQueryResults | ErrorResponse;
   /**
    * Queries component policy states for the resource group level policy assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentPolicyStates_ListQueryResultsForResourceGroupLevelPolicyAssignment")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults")
   @post
   listQueryResultsForResourceGroupLevelPolicyAssignment(
@@ -2534,7 +2454,7 @@ interface ComponentPolicyStatesOperationGroup {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -2542,42 +2462,42 @@ interface ComponentPolicyStatesOperationGroup {
     /**
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$orderby")
     OrderBy?: string,
 
     /**
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$select")
     Select?: string,
 
     /**
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$from")
     From?: utcDateTime,
 
     /**
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$to")
     To?: utcDateTime,
 
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
 
     /**
      * OData apply expression for aggregations.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$apply")
     Apply?: string,
   ): ComponentPolicyStatesQueryResults | ErrorResponse;

@@ -2084,12 +2084,13 @@
             "in": "path",
             "description": "The name of the policy metadata resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PolicyMetadata"
             }
@@ -7589,7 +7590,8 @@
         "@odata.count": {
           "type": "integer",
           "format": "int32",
-          "description": "OData entity count; represents the number of policy event records returned."
+          "description": "OData entity count; represents the number of policy event records returned.",
+          "minimum": 0
         },
         "@odata.nextLink": {
           "type": "string",

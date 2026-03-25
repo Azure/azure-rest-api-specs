@@ -18,7 +18,7 @@ model OperationsListResults {
   /**
    * OData entity count; represents the number of operations returned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minValue(1)
   `@odata.count`?: int32;
 
@@ -73,7 +73,7 @@ union CreatedByType {
   Key: "Key",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union PolicyEventsResourceType {
   string,
 
@@ -83,7 +83,7 @@ union PolicyEventsResourceType {
   default: "default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union PolicyStatesResource {
   string,
 
@@ -98,7 +98,7 @@ union PolicyStatesResource {
   latest: "latest",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union PolicyStatesSummaryResourceType {
   string,
 
@@ -135,7 +135,7 @@ union FieldRestrictionResult {
   Audit: "Audit",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ComponentPolicyStatesResource {
   string,
 
@@ -282,7 +282,7 @@ model TypedErrorInfo {
   /**
    * The scenario specific error details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
@@ -320,7 +320,7 @@ model RemediationProperties {
   /**
    * The status of the remediation. This refers to the entire remediation task, not individual deployments. Allowed values are Evaluating, Canceled, Cancelling, Failed, Complete, or Succeeded.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -432,19 +432,20 @@ model PolicyEventsQueryResults {
   /**
    * OData context string; used by OData clients to resolve type information based on metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.context`?: string;
 
   /**
    * OData entity count; represents the number of policy event records returned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @minValue(0)
   `@odata.count`?: int32;
 
   /**
    * Odata next link; URL to get the next set of results.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   `@odata.nextLink`?: string;
 
@@ -465,13 +466,13 @@ model PolicyEvent {
   /**
    * OData entity ID; always set to null since policy event records do not have an entity ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.id`?: string;
 
   /**
    * OData context string; used by OData clients to resolve type information based on metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.context`?: string;
 
   /**
@@ -699,20 +700,20 @@ model PolicyStatesQueryResults {
   /**
    * OData context string; used by OData clients to resolve type information based on metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.context`?: string;
 
   /**
    * OData entity count; represents the number of policy state records returned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minValue(0)
   `@odata.count`?: int32;
 
   /**
    * Odata next link; URL to get the next set of results.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   `@odata.nextLink`?: string;
 
@@ -733,13 +734,13 @@ model PolicyState {
   /**
    * OData entity ID; always set to null since policy state records do not have an entity ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.id`?: string;
 
   /**
    * OData context string; used by OData clients to resolve type information based on metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.context`?: string;
 
   /**
@@ -951,13 +952,13 @@ model ExpressionEvaluationDetails {
   /**
    * Value of the expression.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   expressionValue?: unknown;
 
   /**
    * Target value to be compared with the expression value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetValue?: unknown;
 
   /**
@@ -1021,13 +1022,13 @@ model SummarizeResults {
   /**
    * OData context string; used by OData clients to resolve type information based on metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.context`?: string;
 
   /**
    * OData entity count; represents the number of summaries returned; always set to 1.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @maxValue(1)
   @minValue(1)
   `@odata.count`?: int32;
@@ -1046,13 +1047,13 @@ model Summary {
   /**
    * OData entity ID; always set to null since summaries do not have an entity ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.id`?: string;
 
   /**
    * OData context string; used by OData clients to resolve type information based on metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.context`?: string;
 
   /**
@@ -1202,8 +1203,8 @@ model PolicyGroupSummary {
 /**
  * The properties of the policy metadata.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PolicyMetadataProperties extends PolicyMetadataSlimProperties {
   /**
    * The description of the policy metadata.
@@ -1255,7 +1256,7 @@ model PolicyMetadataSlimProperties {
   /**
    * Additional metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   metadata?: unknown;
 }
@@ -1321,7 +1322,7 @@ model CheckRestrictionsResourceDetails {
   /**
    * The resource content. This should include whatever properties are already known and can be a partial set of all resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceContent: unknown;
 
   /**
@@ -1551,13 +1552,13 @@ model ComponentPolicyStatesQueryResults {
   /**
    * OData context string; used by OData clients to resolve type information based on metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.context`?: string;
 
   /**
    * OData entity count; represents the number of policy state records returned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minValue(0)
   `@odata.count`?: int32;
 
@@ -1577,14 +1578,14 @@ model ComponentPolicyState {
   /**
    * OData entity ID; always set to null since component policy state records do not have an entity ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   `@odata.id`?: string;
 
   /**
    * OData context string; used by OData clients to resolve type information based on metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   `@odata.context`?: string;
 
@@ -1816,14 +1817,14 @@ model ComponentExpressionEvaluationDetails {
   /**
    * Value of the expression.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   expressionValue?: unknown;
 
   /**
    * Target value to be compared with the expression value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   targetValue?: unknown;
 
@@ -1923,7 +1924,7 @@ model AttestationProperties {
   /**
    * The status of the attestation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -1943,7 +1944,7 @@ model AttestationProperties {
   /**
    * Additional metadata for this attestation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing property from original swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: unknown;
 }
 

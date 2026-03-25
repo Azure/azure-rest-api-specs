@@ -1,14 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-
 namespace PolicyInsightsApi;
 /**
  * Policy metadata resource definition.
@@ -24,18 +21,22 @@ model PolicyMetadata
   >;
 }
 
-@armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PolicyMetadataOperationGroup {
   /**
    * Get policy metadata resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyMetadata_GetResource")
-  getResource is ArmResourceRead<
-    PolicyMetadata,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Error = ErrorResponse
-  >;
+  @route("/providers/Microsoft.PolicyInsights/policyMetadata/{+resourceName}")
+  @get
+  getResource(
+    ...ApiVersionParameter,
+
+    /**
+     * The name of the policy metadata resource.
+     */
+    @path
+    resourceName: string,
+  ): PolicyMetadata | ErrorResponse;
 }
 
 @@doc(PolicyMetadata.name, "The name of the policy metadata resource.");

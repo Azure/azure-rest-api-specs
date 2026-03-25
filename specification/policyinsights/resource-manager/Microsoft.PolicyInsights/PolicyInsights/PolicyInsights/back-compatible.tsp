@@ -23,7 +23,7 @@ using PolicyInsightsApi;
 // @@clientName(Summary.`@odata.id`, "OdataId");
 // @@clientName(Summary.`@odata.context`, "OdataContext");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SlimPolicyMetadata.properties);
 
 // @@clientName(ComponentPolicyStatesQueryResults.`@odata.context`,
@@ -92,11 +92,11 @@ using PolicyInsightsApi;
   Remediations
 );
 @@clientLocation(RemediationResourceOperations.cancelAtResource, Remediations);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Remediation.properties);
 
 @@clientLocation(PolicyMetadataOperationGroup.getResource, "PolicyMetadata");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PolicyMetadata.properties);
 
 @@clientName(Attestations.createOrUpdateAtSubscription::parameters.resource,
@@ -126,7 +126,7 @@ using PolicyInsightsApi;
 );
 @@clientLocation(AttestationOperationGroup.deleteAtResource, Attestations);
 @@clientLocation(AttestationOperationGroup.listForResource, Attestations);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Attestation.properties);
 
 @@clientLocation(RemediationsOperationGroup.listDeploymentsAtManagementGroup,

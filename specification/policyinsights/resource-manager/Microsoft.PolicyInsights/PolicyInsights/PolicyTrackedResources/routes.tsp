@@ -4,13 +4,9 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
-
 namespace PolicyTrackedResourcesApi;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -18,8 +14,6 @@ interface PolicyTrackedResourcesOperationGroup {
   /**
    * Queries policy tracked resources under the management group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PolicyTrackedResources_ListQueryResultsForManagementGroup")
   @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyTrackedResources/{policyTrackedResourcesResource}/queryResults")
   @list
   @post
@@ -49,8 +43,6 @@ interface PolicyTrackedResourcesOperationGroup {
   /**
    * Queries policy tracked resources under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PolicyTrackedResources_ListQueryResultsForSubscription")
   @autoRoute
   @list
   @action("queryResults")
@@ -72,8 +64,6 @@ interface PolicyTrackedResourcesOperationGroup {
   /**
    * Queries policy tracked resources under the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PolicyTrackedResources_ListQueryResultsForResourceGroup")
   @autoRoute
   @list
   @action("queryResults")
@@ -95,8 +85,6 @@ interface PolicyTrackedResourcesOperationGroup {
   /**
    * Queries policy tracked resources under the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PolicyTrackedResources_ListQueryResultsForResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/policyTrackedResources/{policyTrackedResourcesResource}/queryResults")
   @list
   @post

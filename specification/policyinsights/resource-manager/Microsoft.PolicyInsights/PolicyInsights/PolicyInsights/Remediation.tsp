@@ -1,14 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-
 namespace PolicyInsightsApi;
 /**
  * The remediation definition.
@@ -23,13 +20,11 @@ model Remediation
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface Remediations {
   /**
    * Gets an existing remediation at management group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_GetAtManagementGroup")
   @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}")
   @get
   getAtManagementGroup(
@@ -57,8 +52,6 @@ interface Remediations {
   /**
    * Creates or updates a remediation at management group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_CreateOrUpdateAtManagementGroup")
   @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}")
   @put
   createOrUpdateAtManagementGroup(
@@ -92,8 +85,6 @@ interface Remediations {
   /**
    * Deletes an existing remediation at management group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_DeleteAtManagementGroup")
   @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}")
   @delete
   deleteAtManagementGroup(
@@ -121,8 +112,6 @@ interface Remediations {
   /**
    * Gets all remediations for the management group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_ListForManagementGroup")
   @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations")
   @list
   @get
@@ -144,7 +133,7 @@ interface Remediations {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -152,7 +141,7 @@ interface Remediations {
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
   ): ArmResponse<RemediationListResult> | ErrorResponse;
@@ -183,8 +172,6 @@ interface RemediationSubscriptionOperations {
   /**
    * Gets an existing remediation at subscription scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_GetAtSubscription")
   getAtSubscription is RemediationSubscriptionOps.Read<
     Remediation,
     ErrorType = ErrorResponse
@@ -193,8 +180,6 @@ interface RemediationSubscriptionOperations {
   /**
    * Creates or updates a remediation at subscription scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_CreateOrUpdateAtSubscription")
   createOrUpdateAtSubscription is RemediationSubscriptionOps.CreateOrUpdateSync<
     Remediation,
     ErrorType = ErrorResponse
@@ -203,8 +188,6 @@ interface RemediationSubscriptionOperations {
   /**
    * Deletes an existing remediation at subscription scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_DeleteAtSubscription")
   deleteAtSubscription is RemediationSubscriptionOps.DeleteSync<
     Remediation,
     Response = ArmResponse<Remediation> | ArmDeletedNoContentResponse,
@@ -214,8 +197,6 @@ interface RemediationSubscriptionOperations {
   /**
    * Gets all remediations for the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_ListForSubscription")
   listForSubscription is RemediationSubscriptionOps.List<
     Remediation,
     Response = ArmResponse<RemediationListResult>,
@@ -223,7 +204,7 @@ interface RemediationSubscriptionOperations {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -231,7 +212,7 @@ interface RemediationSubscriptionOperations {
       /**
        * OData filter expression.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$filter")
       Filter?: string;
     },
@@ -241,8 +222,6 @@ interface RemediationSubscriptionOperations {
   /**
    * Gets all deployments for a remediation at subscription scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_ListDeploymentsAtSubscription")
   @list
   @action("listDeployments")
   listDeploymentsAtSubscription is RemediationSubscriptionOps.ActionSync<
@@ -253,7 +232,7 @@ interface RemediationSubscriptionOperations {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -264,8 +243,6 @@ interface RemediationSubscriptionOperations {
   /**
    * Cancels a remediation at subscription scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_CancelAtSubscription")
   @action("cancel")
   cancelAtSubscription is RemediationSubscriptionOps.ActionSync<
     Remediation,
@@ -295,8 +272,6 @@ interface RemediationResourceGroupOperations {
   /**
    * Gets an existing remediation at resource group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_GetAtResourceGroup")
   getAtResourceGroup is RemediationResourceGroupOps.Read<
     Remediation,
     OverrideErrorType = ErrorResponse
@@ -305,8 +280,6 @@ interface RemediationResourceGroupOperations {
   /**
    * Creates or updates a remediation at resource group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_CreateOrUpdateAtResourceGroup")
   createOrUpdateAtResourceGroup is RemediationResourceGroupOps.CreateOrUpdateSync<
     Remediation,
     OverrideErrorType = ErrorResponse
@@ -315,8 +288,6 @@ interface RemediationResourceGroupOperations {
   /**
    * Deletes an existing remediation at resource group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_DeleteAtResourceGroup")
   deleteAtResourceGroup is RemediationResourceGroupOps.DeleteSync<
     Remediation,
     Response = ArmResponse<Remediation> | ArmDeletedNoContentResponse,
@@ -326,8 +297,6 @@ interface RemediationResourceGroupOperations {
   /**
    * Gets all remediations for the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_ListForResourceGroup")
   listForResourceGroup is RemediationResourceGroupOps.List<
     Remediation,
     Response = ArmResponse<RemediationListResult>,
@@ -335,7 +304,7 @@ interface RemediationResourceGroupOperations {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -343,7 +312,7 @@ interface RemediationResourceGroupOperations {
       /**
        * OData filter expression.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$filter")
       Filter?: string;
     },
@@ -353,8 +322,6 @@ interface RemediationResourceGroupOperations {
   /**
    * Gets all deployments for a remediation at resource group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_ListDeploymentsAtResourceGroup")
   @list
   @action("listDeployments")
   listDeploymentsAtResourceGroup is RemediationResourceGroupOps.ActionSync<
@@ -365,7 +332,7 @@ interface RemediationResourceGroupOperations {
       /**
        * Maximum number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -376,8 +343,6 @@ interface RemediationResourceGroupOperations {
   /**
    * Cancels a remediation at resource group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_CancelAtResourceGroup")
   @action("cancel")
   cancelAtResourceGroup is RemediationResourceGroupOps.ActionSync<
     Remediation,
@@ -387,13 +352,11 @@ interface RemediationResourceGroupOperations {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface RemediationResourceOperations {
   /**
    * Gets an existing remediation at resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_GetAtResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}")
   @get
   getAtResource(
@@ -415,8 +378,6 @@ interface RemediationResourceOperations {
   /**
    * Creates or updates a remediation at resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_CreateOrUpdateAtResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}")
   @put
   createOrUpdateAtResource(
@@ -444,8 +405,6 @@ interface RemediationResourceOperations {
   /**
    * Deletes an existing remediation at individual resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_DeleteAtResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}")
   @delete
   deleteAtResource(
@@ -467,8 +426,6 @@ interface RemediationResourceOperations {
   /**
    * Gets all remediations for a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_ListForResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/remediations")
   @list
   @get
@@ -484,7 +441,7 @@ interface RemediationResourceOperations {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -492,7 +449,7 @@ interface RemediationResourceOperations {
     /**
      * OData filter expression.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$filter")
     Filter?: string,
   ): ArmResponse<RemediationListResult> | ErrorResponse;
@@ -500,8 +457,6 @@ interface RemediationResourceOperations {
   /**
    * Gets all deployments for a remediation at resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_ListDeploymentsAtResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/listDeployments")
   @list
   @post
@@ -523,7 +478,7 @@ interface RemediationResourceOperations {
     /**
      * Maximum number of records to return.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property from original swagger"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -532,8 +487,6 @@ interface RemediationResourceOperations {
   /**
    * Cancel a remediation at resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Remediations_CancelAtResource")
   @route("/{+resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/cancel")
   @post
   cancelAtResource(
