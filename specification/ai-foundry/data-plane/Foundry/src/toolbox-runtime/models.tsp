@@ -87,13 +87,53 @@ model ToolsetMCPClientCapabilities {
 }
 
 /**
- * Capabilities that the server supports (tools-only subset).
+ * Declares which request types can be augmented with tasks.
+ */
+model ToolsetMCPTaskRequests {
+  /**
+   * Task support for tool-related requests.
+   */
+  tools?: {
+    /**
+     * Whether the server supports task-augmented tools/call requests.
+     */
+    call?: Record<unknown>;
+  };
+}
+
+/**
+ * Server task capability declaration.
+ */
+model ToolsetMCPTasksCapability {
+  /**
+   * Whether this server supports tasks/list.
+   */
+  list?: Record<unknown>;
+
+  /**
+   * Whether this server supports tasks/cancel.
+   */
+  cancel?: Record<unknown>;
+
+  /**
+   * Specifies which request types can be augmented with tasks.
+   */
+  requests?: ToolsetMCPTaskRequests;
+}
+
+/**
+ * Capabilities that the server supports.
  */
 model ToolsetMCPServerCapabilities {
   /**
    * Present if the server offers any tools to call.
    */
   tools?: ToolsetMCPToolsCapability;
+
+  /**
+   * Present if the server supports task-augmented requests.
+   */
+  tasks?: ToolsetMCPTasksCapability;
 }
 
 /**
