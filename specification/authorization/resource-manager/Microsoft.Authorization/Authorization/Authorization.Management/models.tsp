@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -1312,31 +1313,6 @@ model RoleManagementPolicyProperties {
    */
   @visibility(Lifecycle.Read)
   policyProperties?: PolicyProperties;
-}
-
-/**
- * The name of the entity last modified it
- */
-model Principal {
-  /**
-   * The id of the principal made changes
-   */
-  id?: string;
-
-  /**
-   * The name of the principal made changes
-   */
-  displayName?: string;
-
-  /**
-   * Type of principal such as user , group etc
-   */
-  type?: string;
-
-  /**
-   * Email of principal
-   */
-  email?: string;
 }
 
 /**
