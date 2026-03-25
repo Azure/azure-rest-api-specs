@@ -23,8 +23,8 @@ model AccountProperties {
   @maxLength(250)
   description?: string;
 
-  /** Customer-managed key encryption settings for the account. */
-  encryption?: CustomerManagedKeyEncryption;
+  /** Encryption settings for the account. */
+  encryption?: Azure.ResourceManager.CommonTypes.Encryption;
 
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
