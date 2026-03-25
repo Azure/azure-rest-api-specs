@@ -15368,7 +15368,7 @@ model AmazonRedshiftLinkedServiceTypeProperties {
   /**
    * Specifies whether the driver checks the authenticity of the IdP server certificate. The default value is False. Only used for Version 2.0. Type: string.
    */
-  sslInsecure?: Dfe<string>;
+  sslInsecure?: Dfe<boolean>;
 }
 
 /**
