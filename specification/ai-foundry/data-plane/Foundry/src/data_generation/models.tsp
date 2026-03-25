@@ -47,8 +47,8 @@ model DataGenerationJob {
   @doc("The display name of the data generation job.")
   name: string;
 
-  @doc("The data source used for the data generation job.")
-  data_source: DataGenerationJobDataSource;
+  @doc("The sources used for the data generation job.")
+  sources: Array<DataGenerationJobSource>;
 
   @doc("The options for the data generation job.")
   options: DataGenerationJobOptions;
@@ -64,12 +64,8 @@ model DataGenerationJob {
   @visibility(Lifecycle.Read)
   status: DataGenerationJobStatus;
 
-  @doc("The name of the output dataset to create. If not specified, a default name will be generated. If a dataset with the same name already exists, a new version of the dataset will be created with the generated data.")
-  output_dataset_name?: string;
-
-  @doc("Identifier of the output dataset produced after successful completion. This will be in the format of 'azureai://accounts/<account-name>/projects/<project-name>/data/<dataset-name>/versions/<version-no>'")
-  @visibility(Lifecycle.Read)
-  output_dataset_id?: string;
+  @doc("The output information of the data generation job, which includes the output file type and the identifiers of the generated output.")
+  output?: DataGenerationJobOutput;
 
   @doc("The number of samples actually generated. This field will be populated only after the job is completed.")
   @visibility(Lifecycle.Read)
@@ -97,6 +93,27 @@ model DataGenerationJob {
     @doc("A human-readable warning message.")
     message?: string;
   };
+}
+
+@doc("Output information for a data generation job.")
+model DataGenerationJobOutput {
+  @doc("The type of the output. If not specified, it will default to File type.")
+  type?: DataGenerationJobOutputFileType;
+
+  @doc("The identifiers of the output only available after the job is completed. For Finetuning supervised training jobs with File output type, the size of array will be 2 and for other file types & purpose, this will be always 1.")
+  @visibility(Lifecycle.Read)
+  ids: Array<string>;
+}
+
+@doc("The supported output file types for a data generation job.")
+union DataGenerationJobOutputFileType {
+  string,
+
+  @doc("The generated data is stored in an Azure OpenAI Files.")
+  File: "File",
+
+  @doc("The generated data is stored in an Azure Blob Storage container.")
+  Dataset: "Dataset",
 }
 
 @doc("Token usage information for a data generation job.")
@@ -128,21 +145,18 @@ union DataGenerationJobPurpose {
   Evaluation: "Evaluation",
 }
 
-@doc("The supported data source types for a data generation job.")
-union DataGenerationJobDataSourceType {
+@doc("The supported source types for a data generation job.")
+union DataGenerationJobSourceType {
   string,
 
-  @doc("Traces Datasource type. Data is generated based on input traces such as conversations, tool calls, etc. ")
+  @doc("Traces source type. Data is generated based on input traces such as conversations, tool calls, etc retrieved from the project connected Application Insights.")
   Traces: "Traces",
 
-  @doc("Prompt Datasource type. Data is generated based on input prompts provided by the user or will be extracted from the given Agent. Applicable only for evaluation purpose.")
+  @doc("Prompt source type. Data is generated based on input prompts provided by the user or will be extracted from the given Agent. Applicable only for evaluation purpose.")
   Prompt: "Prompt",
 
-  @doc("Seed data files datasource type. Data is generated based on input seed data files from the given input datasets. Applicable only for fine-tuning training purpose.")
+  @doc("Seed data files source type. Data is generated based on input seed data files from the given input datasets. Applicable only for fine-tuning training purpose.")
   SeedDataFiles: "SeedDataFiles",
-
-  @doc("Datasource type that combines prompts and seed data files. Data is generated based on both input prompts and seed data files. Applicable only for evaluation purpose.")
-  PromptAndSeedDataFiles: "PromptAndSeedDataFiles",
 }
 
 @doc("Options for managing data generation jobs.")
@@ -180,16 +194,16 @@ model MultiTurnDataGenerationJobOptions extends DataGenerationJobOptions {
   type: "MultiTurn";
 }
 
-@doc("The base data source model for a data generation job.")
+@doc("The base source model for a data generation job.")
 @discriminator("type")
-model DataGenerationJobDataSource {
-  @doc("The type of the data source.")
-  type: DataGenerationJobDataSourceType;
+model DataGenerationJobSource {
+  @doc("The type of source.")
+  type: DataGenerationJobSourceType;
 }
 
-@doc("The options for a data generation job with Traces datasource used for Evaluation and fine-tuning purposes, which includes the agent name and the time window for fetching traces.")
-model TracesDataGenerationJobDataSource extends DataGenerationJobDataSource {
-  @doc("The data source type for this job, which is Traces.")
+@doc("The options for a data generation job with Traces source used for Evaluation and fine-tuning purposes, which includes the agent name and the time window for fetching traces.")
+model TracesDataGenerationJobSource extends DataGenerationJobSource {
+  @doc("The source type for this job, which is Traces.")
   type: "Traces";
 
   @doc("The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window. If both agent name and agent version are specified, the agent version will be used to fetch the traces.")
@@ -205,9 +219,9 @@ model TracesDataGenerationJobDataSource extends DataGenerationJobDataSource {
   to_time?: utcDateTime;
 }
 
-@doc("The options for a data generation job with Prompt datasource used for Evaluation purpose, which includes the prompt or the agent name to fetch the prompt and other metadata for data generation.")
-model PromptDataGenerationJobDataSource extends DataGenerationJobDataSource {
-  @doc("The data source type for this job, which is Prompt.")
+@doc("The options for a data generation job with Prompt source used for Evaluation purpose, which includes the prompt or the agent name to fetch the prompt and other metadata for data generation.")
+model PromptDataGenerationJobSource extends DataGenerationJobSource {
+  @doc("The source type for this job, which is Prompt.")
   type: "Prompt";
 
   @doc("The prompt used for data generation. Required if agent name is not specified.")
@@ -220,33 +234,13 @@ model PromptDataGenerationJobDataSource extends DataGenerationJobDataSource {
   agent_version?: string;
 }
 
-@doc("The options for a data generation job with SeedDataFiles datasource used for fine-tuning supervised training, which includes the input seed datasets for data generation.")
-model SeedDataFilesDataGenerationJobDataSource
-  extends DataGenerationJobDataSource {
-  @doc("The data source type for this job, which is SeedDataFiles.")
+@doc("The options for a data generation job with SeedDataFiles source, which includes the input seed data files for data generation.")
+model SeedDataFilesDataGenerationJobSource extends DataGenerationJobSource {
+  @doc("The source type for this job, which is SeedDataFiles.")
   type: "SeedDataFiles";
 
-  @doc("Input seed dataset references used for data generation. The dataset should already exist before creating the job.")
-  seed_datasets: Array<string>;
-}
-
-@doc("The options for a data generation job with Prompt and Seed Data Files datasource used for Evaluation purpose, which includes the prompt, the input seed datasets and the agent name to fetch the prompt and other metadata for data generation.")
-model PromptAndSeedDataFilesDataGenerationJobDataSource
-  extends DataGenerationJobDataSource {
-  @doc("The data source type for this job, which is a combination of prompts and seed data files.")
-  type: "PromptAndSeedDataFiles";
-
-  @doc("The prompt used for data generation. Required if agent name is not specified.")
-  prompt?: string;
-
-  @doc("The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window. If both agent name and agent version are specified, the agent version will be used to fetch the traces.")
-  agent_name: string;
-
-  @doc("The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used.")
-  agent_version?: string;
-
-  @doc("Input seed dataset references used for data generation. The dataset should already exist before creating the job.")
-  seed_datasets: Array<string>;
+  @doc("Input seed data file references (can be dataset IDs or Azure Open AI file ids) used for data generation. The dataset should already exist before creating the job.")
+  seed_data_files: Array<string>;
 }
 
 @doc("The supported question types for SimpleQnA data generation jobs used for supervised fine-tuning training.")

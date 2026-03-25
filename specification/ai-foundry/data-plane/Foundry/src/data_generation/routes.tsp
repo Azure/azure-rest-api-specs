@@ -80,7 +80,7 @@ interface DataGenerationJobs {
    */
   @summary("Cancels a data generation job.")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  @route("data_generation/jobs/{data_generation_job_id}:cancel")
+  @route("data_generation/jobs/{data_generation_job_id}/cancel")
   @post
   cancel is FoundryDataPlaneOperation<
     {
