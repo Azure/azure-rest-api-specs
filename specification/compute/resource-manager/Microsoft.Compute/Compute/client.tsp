@@ -8,9 +8,20 @@ using Azure.ClientGenerator.Core;
 /**
  * Compute Client
  */
-@client({
-  name: "ComputeClient",
-  service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
-  autoMergeService: true,
-})
+@client(
+  {
+    name: "ComputeClient",
+    service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
+    autoMergeService: true,
+  },
+  "!javascript"
+)
+@client(
+  {
+    name: "ComputeManagementClient",
+    service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
+    autoMergeService: true,
+  },
+  "javascript"
+)
 namespace ComputeCombine;
