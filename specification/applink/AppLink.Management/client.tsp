@@ -6,6 +6,10 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.AppLink;
 
 @@clientName(Microsoft.AppLink, "AppNetworkMgmtClient", "python");
+@@clientName(AvailableVersionProperties.selfManagedVersions,
+  "selfManagedVersionDetail",
+  "csharp"
+);
 
 @doc("The type used for update operations of the AppLink.")
 model AppLinkUpdate {
