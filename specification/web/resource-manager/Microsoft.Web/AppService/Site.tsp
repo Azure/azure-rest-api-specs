@@ -98,7 +98,8 @@ interface WorkflowRegenerateAccessKeyOps
       }
     > {}
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("WebApps")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface Sites {
   /**
    * Description for Gets the details of a web, mobile, or API app.
@@ -175,94 +176,6 @@ interface Sites {
     Extension.Subscription,
     Site,
     Response = ArmResponse<WebAppCollection>,
-    Error = DefaultErrorResponse
-  >;
-
-  /**
-   * Description for Get past recommendations for an app, optionally specified by the time range.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Get past recommendations for an app, optionally specified by the time range.")
-  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
-  @get
-  @list
-  @action("recommendationHistory")
-  listHistoryForWebApp is SiteOps.ActionSync<
-    Site,
-    void,
-    ArmResponse<RecommendationCollection>,
-    Parameters = {
-      /**
-       * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
-       */
-      @query("expiredOnly")
-      expiredOnly?: boolean;
-
-      /**
-       * Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification' and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[PT1H|PT1M|P1D]
-       */
-      @query("$filter")
-      $filter?: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
-  >;
-
-  /**
-   * Description for Get all recommendations for an app.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Get all recommendations for an app.")
-  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
-  @get
-  @list
-  @action("recommendations")
-  listRecommendedRulesForWebApp is SiteOps.ActionSync<
-    Site,
-    void,
-    ArmResponse<RecommendationCollection>,
-    Parameters = {
-      /**
-       * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
-       */
-      @query("featured")
-      featured?: boolean;
-
-      /**
-       * Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification'
-       */
-      @query("$filter")
-      $filter?: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
-  >;
-
-  /**
-   * Description for Disable all recommendations for an app.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Disable all recommendations for an app.")
-  @post
-  @action("recommendations/disable")
-  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
-  disableAllForWebApp is ArmResourceActionSync<
-    Site,
-    Request = void,
-    Response = NoContentResponse,
-    Error = DefaultErrorResponse
-  >;
-
-  /**
-   * Description for Reset all recommendation opt-out settings for an app.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @post
-  @summary("Reset all recommendation opt-out settings for an app.")
-  @action("recommendations/reset")
-  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
-  resetAllFiltersForWebApp is ArmResourceActionSync<
-    Site,
-    Request = void,
-    Response = NoContentResponse,
     Error = DefaultErrorResponse
   >;
 
@@ -1380,7 +1293,103 @@ interface Sites {
     ArmResponse<WorkflowEnvelope>,
     OverrideErrorType = DefaultErrorResponse
   >;
+}
 
+@tag("Recommendations")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+interface SiteRecommendations {
+  /**
+   * Description for Get past recommendations for an app, optionally specified by the time range.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get past recommendations for an app, optionally specified by the time range.")
+  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
+  @get
+  @list
+  @action("recommendationHistory")
+  listHistoryForWebApp is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<RecommendationCollection>,
+    Parameters = {
+      /**
+       * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
+       */
+      @query("expiredOnly")
+      expiredOnly?: boolean;
+
+      /**
+       * Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification' and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[PT1H|PT1M|P1D]
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Get all recommendations for an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get all recommendations for an app.")
+  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
+  @get
+  @list
+  @action("recommendations")
+  listRecommendedRulesForWebApp is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<RecommendationCollection>,
+    Parameters = {
+      /**
+       * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
+       */
+      @query("featured")
+      featured?: boolean;
+
+      /**
+       * Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification'
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Disable all recommendations for an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Disable all recommendations for an app.")
+  @post
+  @action("recommendations/disable")
+  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
+  disableAllForWebApp is ArmResourceActionSync<
+    Site,
+    Request = void,
+    Response = NoContentResponse,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Reset all recommendation opt-out settings for an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @post
+  @summary("Reset all recommendation opt-out settings for an app.")
+  @action("recommendations/reset")
+  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
+  resetAllFiltersForWebApp is ArmResourceActionSync<
+    Site,
+    Request = void,
+    Response = NoContentResponse,
+    Error = DefaultErrorResponse
+  >;
+}
+
+@tag("Workflows")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+interface SiteWorkflows {
   /**
    * Regenerates the callback URL access key for request triggers.
    */
@@ -2687,8 +2696,8 @@ interface WebApps {
 @@doc(Sites.deployWorkflowArtifacts::parameters.body,
   "Application settings and files of the workflow."
 );
-@@doc(Sites.regenerateAccessKey::parameters.body, "The access key type.");
-@@doc(Sites.validate::parameters.body, "The workflow.");
+@@doc(SiteWorkflows.regenerateAccessKey::parameters.body, "The access key type.");
+@@doc(SiteWorkflows.validate::parameters.body, "The workflow.");
 @@doc(WebApps.createOrUpdateSlot::parameters.resource,
   "A JSON representation of the app properties. See example."
 );
