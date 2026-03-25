@@ -7,7 +7,6 @@ Quick reference guide for Azure Stack HCI TypeSpec repository documentation.
 | Document | Use When | Keywords |
 |----------|----------|----------|
 | [workflow.md](./workflow.md) | Fixing prettier errors, running validation, formatting JSON | `prettier`, `validation`, `oav`, `format`, `json`, `workflow`, `compile` |
-| [repo-structure.md](./repo-structure.md) | Understanding repo structure, private vs public differences, syncing repos | `structure`, `private`, `public`, `sync`, `files`, `comparison`, `swagger` |
 | [style-guide.md](./style-guide.md) | Writing TypeSpec code, naming conventions, documentation style | `style`, `naming`, `PascalCase`, `models.tsp`, `@doc`, `jsdoc`, `imports` |
 | [version-creator.md](./version-creator.md) | Creating new API versions, version bumps | `version`, `create`, `new`, `preview`, `stable`, `skeleton`, `readme.md` |
 
@@ -18,13 +17,6 @@ Quick reference guide for Azure Stack HCI TypeSpec repository documentation.
 - **"validation errors"** → [workflow.md](./workflow.md)
 - **"oav validate-example"** → [workflow.md](./workflow.md)
 - **"json formatting"** → [workflow.md](./workflow.md)
-
-### Repository & Structure Questions
-- **"private vs public"** → [repo-structure.md](./repo-structure.md)
-- **"what files are different"** → [repo-structure.md](./repo-structure.md)
-- **"sync with public repo"** → [repo-structure.md](./repo-structure.md)
-- **"private preview features"** → [repo-structure.md](./repo-structure.md)
-- **"file structure"** → [repo-structure.md](./repo-structure.md)
 
 ### Code Style & Conventions
 - **"how to write TypeSpec"** → [style-guide.md](./style-guide.md)

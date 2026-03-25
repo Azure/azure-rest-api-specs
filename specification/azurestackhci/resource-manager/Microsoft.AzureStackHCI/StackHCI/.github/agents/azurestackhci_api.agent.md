@@ -195,5 +195,6 @@ Before finishing, verify:
 - [ ] User was asked whether to update or create an example file
 - [ ] At least one representative example created or updated when needed
 - [ ] Read-only properties only in response bodies of examples
+- [ ] No "private preview" or internal-only comments remain in TypeSpec files (this is a public repo)
 - [ ] TypeSpec files are formatted
 - [ ] `tsp compile .` succeeds

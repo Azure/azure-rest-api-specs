@@ -70,7 +70,7 @@ Understanding the file structure is crucial for successful development:
 | Type | Location | Purpose |
 |------|----------|---------|
 | **Source Examples** | `examples/{API_VERSION}/*.json` | Where you edit and format |
-| **Source TypeSpec** | `*.tsp`, `private-preview/*.tsp` | TypeSpec model definitions |
+| **Source TypeSpec** | `*.tsp` | TypeSpec model definitions |
 | **Target Schema** | `preview/{API_VERSION}/hci.json` | Generated OpenAPI schema |
 | **Target Examples** | `preview/{API_VERSION}/examples/*.json` | Copied from source during compilation |
 

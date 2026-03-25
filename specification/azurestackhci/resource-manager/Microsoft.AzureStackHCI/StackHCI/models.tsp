@@ -3107,8 +3107,6 @@ model DeploymentCluster {
   clusterPattern?: ClusterPattern;
 }
 
-// PRIVATE PREVIEW - Storage type and SAN/S2D configuration
-
 /**
  * Storage type supported for HCI Cluster.
  */
@@ -3197,8 +3195,6 @@ model Storage {
    * By default, this mode is set to Express and your storage is configured as per best practices based on the number of nodes in the cluster. Allowed values are 'Express','InfraOnly', 'KeepStorage'
    */
   configurationMode?: string = "Express";
-
-  // PRIVATE PREVIEW - Storage type and SAN/S2D sub-configuration
 
   /**
    * Storage type for the HCI Cluster. Allowed values are 'S2D', 'SAN', 'SANS2D'.
@@ -3321,8 +3317,6 @@ model DeploymentSettingHostNetwork {
    */
   @identifiers(#["name"])
   storageNetworks?: DeploymentSettingStorageNetworks[];
-
-  // PRIVATE PREVIEW - SAN host network configuration
 
   /**
    * SAN network configuration for the host network. Applicable when StorageType is 'SAN' or 'SANS2D'.
@@ -3495,8 +3489,6 @@ model DeploymentSettingStorageAdapterIPInfo {
    */
   subnetMask?: string;
 }
-
-// PRIVATE PREVIEW - SAN network models
 
 /**
  * SAN network configuration for host network of AzureStackHCI Cluster.
