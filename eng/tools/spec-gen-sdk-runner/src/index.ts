@@ -22,12 +22,18 @@ export async function main() {
     mkdirSync(logFolder, { recursive: true });
   }
   let result;
-  if (batchType) {
-    result = await generateSdkForBatchSpecs(batchType);
-  } else if (pullRequestNumber) {
-    result = await generateSdkForSpecPr();
-  } else {
-    result = await generateSdkForSingleSpec();
+  try {
+    if (batchType) {
+      result = await generateSdkForBatchSpecs(batchType);
+    } else if (pullRequestNumber) {
+      result = await generateSdkForSpecPr();
+    } else {
+      result = await generateSdkForSingleSpec();
+    }
+  } catch (error) {
+    console.error("Unhandled exception in spec-gen-sdk-runner:", error);
+    console.log("##vso[task.complete result=Failed;]");
+    exit(1);
   }
   if (result.statusCode !== 0) {
     console.log("##vso[task.complete result=Failed;]");

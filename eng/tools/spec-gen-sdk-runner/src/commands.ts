@@ -15,7 +15,7 @@ import {
 } from "./command-helpers.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
-import { CommandResult, SpecGenSdkCmdInput } from "./types.js";
+import { CommandResult, ExecutionReport, SpecGenSdkCmdInput } from "./types.js";
 import { resetGitRepo, runSpecGenSdkCommand, SpecConfigs } from "./utils.js";
 
 /**
@@ -54,8 +54,8 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
 
   // Always set the pipeline variables for the SDK pull request even if
   // there are failures in the generation process since we allow the PR creation for such cases.
-  let packageName = "";
-  let installationInstructions = "";
+  let packageName: string;
+  let installationInstructions: string;
   if (executionReport) {
     packageName =
       executionReport.packages[0]?.packageName ??
@@ -65,6 +65,7 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
     installationInstructions = executionReport.packages[0]?.installationInstructions ?? "";
   } else {
     packageName = commandInput.tspConfigPath ?? commandInput.readmePath ?? "missing-package-name";
+    installationInstructions = "";
   }
 
   packageName = packageName.replace("/", "-");
@@ -88,19 +89,19 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
   // Get the spec paths from the changed files
-  const changedSpecs = detectChangedSpecConfigFiles(commandInput);
+  const changedSpecs = await detectChangedSpecConfigFiles(commandInput);
 
   let statusCode = 0;
-  let pushedSpecConfigCount;
-  let executionReport;
-  let changedSpecPathText = "";
+  let pushedSpecConfigCount: number;
+  let executionReport: ExecutionReport | undefined;
+  let changedSpecPathText: string;
   let hasManagementPlaneSpecs = false;
   let hasTypeSpecProjects = false;
   let overallRunHasBreakingChange = false;
-  let currentRunHasBreakingChange = false;
+  let currentRunHasBreakingChange: boolean;
   let sdkGenerationExecuted = true;
   let overallExecutionResult = "";
-  let currentExecutionResult = "";
+  let currentExecutionResult: string;
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
 

@@ -342,18 +342,18 @@ union CreatedByType {
   string,
 
   @doc("Entity was created by a user.")
-  "User",
+  User: "User",
 
   @doc("Entity was created by a scheduled trigger.")
-  "ScheduledTrigger",
+  ScheduledTrigger: "ScheduledTrigger",
 
   @added(APIVersions.v2025_03_01_preview)
   @doc("Entity was created by Azure DevOps pipelines.")
-  "AzurePipelines",
+  AzurePipelines: "AzurePipelines",
 
   @added(APIVersions.v2025_03_01_preview)
   @doc("Entity was created by GitHub Workflows.")
-  "GitHubWorkflows",
+  GitHubWorkflows: "GitHubWorkflows",
 }
 
 @doc("Test file info.")
