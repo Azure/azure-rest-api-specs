@@ -3,7 +3,12 @@
   "info": {
     "title": "SearchManagementClient",
     "version": "2026-03-01-preview",
-    "description": "Client that can be used to manage Azure AI Search services and API keys."
+    "description": "Client that can be used to manage Azure AI Search services and API keys.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
   "schemes": [
     "https"
@@ -60,9 +65,45 @@
     },
     {
       "name": "NetworkSecurityPerimeterConfigurations"
+    },
+    {
+      "name": "Offerings"
     }
   ],
   "paths": {
+    "/providers/Microsoft.Search/offerings": {
+      "get": {
+        "operationId": "Offerings_List",
+        "tags": [
+          "Offerings"
+        ],
+        "description": "Lists all of the features and SKUs offered by the Azure AI Search service in each region. Note: This API returns a non-ARM resource collection and is not RPC-compliant. It will be replaced with an action-style API in the next preview as a breaking change. Customers should avoid taking new dependencies on the current shape.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OfferingsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchListOfferings": {
+            "$ref": "./examples/SearchListOfferings.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Search/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -96,42 +137,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Search/offerings": {
-      "get": {
-        "operationId": "Offerings_List",
-        "tags": [
-          "Offerings"
-        ],
-        "description": "Lists all of the features and SKUs offered by the Azure AI Search service in each region. Note: This API returns a non-ARM resource collection and is not RPC-compliant. It will be replaced with an action-style API in the next preview as a breaking change. Customers should avoid taking new dependencies on the current shape.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the list of features and SKUs offered in each region.",
-            "schema": {
-              "$ref": "#/definitions/OfferingsListResult"
-            }
-          },
-          "default": {
-            "description": "Offerings API failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SearchListOfferings": {
-            "$ref": "./examples/SearchListOfferings.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -594,23 +599,23 @@
           "SearchCreateOrUpdateServiceWithCmkEnforcement": {
             "$ref": "./examples/SearchCreateOrUpdateServiceWithCmkEnforcement.json"
           },
-          "SearchCreateOrUpdateServiceWithServiceLevelCmkMultiTenantFederatedIdentity": {
-            "$ref": "./examples/SearchCreateOrUpdateServiceWithServiceLevelCmkMultiTenantFederatedIdentity.json"
-          },
           "SearchCreateOrUpdateServiceWithDataExfiltration": {
             "$ref": "./examples/SearchCreateOrUpdateServiceWithDataExfiltration.json"
           },
           "SearchCreateOrUpdateServiceWithIdentity": {
             "$ref": "./examples/SearchCreateOrUpdateServiceWithIdentity.json"
           },
-          "SearchCreateOrUpdateWithSemanticSearch": {
-            "$ref": "./examples/SearchCreateOrUpdateWithSemanticSearch.json"
+          "SearchCreateOrUpdateServiceWithServerless": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceWithServerless.json"
+          },
+          "SearchCreateOrUpdateServiceWithServiceLevelCmkMultiTenantFederatedIdentity": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceWithServiceLevelCmkMultiTenantFederatedIdentity.json"
           },
           "SearchCreateOrUpdateWithKnowledgeRetrieval": {
             "$ref": "./examples/SearchCreateOrUpdateWithKnowledgeRetrieval.json"
           },
-          "SearchCreateOrUpdateServiceWithServerless": {
-            "$ref": "./examples/SearchCreateOrUpdateServiceWithServerless.json"
+          "SearchCreateOrUpdateWithSemanticSearch": {
+            "$ref": "./examples/SearchCreateOrUpdateWithSemanticSearch.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -711,11 +716,11 @@
           "SearchUpdateServiceWithDataExfiltration": {
             "$ref": "./examples/SearchUpdateServiceWithDataExfiltration.json"
           },
-          "SearchUpdateServiceWithSemanticSearch": {
-            "$ref": "./examples/SearchUpdateServiceWithSemanticSearch.json"
-          },
           "SearchUpdateServiceWithKnowledgeRetrieval": {
             "$ref": "./examples/SearchUpdateServiceWithKnowledgeRetrieval.json"
+          },
+          "SearchUpdateServiceWithSemanticSearch": {
+            "$ref": "./examples/SearchUpdateServiceWithSemanticSearch.json"
           },
           "SearchUpdateServiceWithSku": {
             "$ref": "./examples/SearchUpdateServiceWithSku.json"
@@ -727,7 +732,7 @@
         "tags": [
           "Services"
         ],
-        "description": "Deletes a search service in the given resource group, along with its associated resources.",
+        "description": "Deletes a search service in the given resource group, along with its associated resources.\nReturns 200 (OK) on successful deletion, or 204 (No Content) if the service is not found.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -768,7 +773,7 @@
             "description": "The request has succeeded."
           },
           "204": {
-            "description": "There is no content to send for this request. The search service was not found."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -860,7 +865,7 @@
         "tags": [
           "QueryKeys"
         ],
-        "description": "Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.",
+        "description": "Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.\nReturns 200 (OK) on successful deletion, 204 (No Content) if the service exists but the query keys not found, or 404 (Not Found) if the service is not found.\nNOTE: The behavior of returning 404 is inconsistent with ARM guidelines. Clients should expect a 204 response in future versions and avoid new dependencies on the 404 response.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -908,10 +913,10 @@
             "description": "The request has succeeded."
           },
           "204": {
-            "description": "There is no content to send for this request. The query key was not found."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "404": {
-            "description": "The parent search service was not found. This response will be removed in a future version to align with ARM DELETE idempotency guidelines. Clients should expect a 204 response in future versions and should not rely on this response."
+            "description": "The server cannot find the requested resource."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1444,7 +1449,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "description": "Disconnects the private endpoint connection and deletes it from the search service.",
+        "description": "Disconnects the private endpoint connection and deletes it from the search service.\nReturns 200 (OK) with the deleted connection details on successful deletion, or 404 (Not Found) if the connection does not exist.\nNOTE: The behavior of returning 404 is inconsistent with ARM guidelines. Clients should expect a 204 response in future versions and avoid new dependencies on the 404 response.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -1495,7 +1500,7 @@
             }
           },
           "404": {
-            "description": "The parent search service was not found. This response will be removed in a future version to align with ARM DELETE idempotency guidelines. Clients should expect a 204 response in future versions and should not rely on this response."
+            "description": "The server cannot find the requested resource."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1898,7 +1903,7 @@
         "tags": [
           "SharedPrivateLinkResources"
         ],
-        "description": "Initiates the deletion of the shared private link resource from the search service.",
+        "description": "Initiates the deletion of the shared private link resource from the search service.\nReturns 202 (Accepted) for asynchronous deletion, 204 (No Content) if the service exists but the shared private link is not found, or 404 (Not Found) if the service is not found.\nNOTE: The behavior of returning 404 is inconsistent with ARM guidelines. Clients should expect a 204 response in future versions and avoid new dependencies on the 404 response.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -1957,10 +1962,10 @@
             }
           },
           "204": {
-            "description": "There is no content to send for this request. The shared private link resource was not found."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "404": {
-            "description": "The parent search service was not found. This response will be removed in a future version to align with ARM DELETE idempotency guidelines. Clients should expect a 204 response in future versions and should not rely on this response."
+            "description": "The server cannot find the requested resource."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2138,6 +2143,20 @@
         }
       }
     },
+    "AzureActiveDirectoryApplicationCredentials": {
+      "type": "object",
+      "description": "Describes the Azure Active Directory application credentials required to access an Azure Key Vault.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "The application (client) ID of an App Registration in the tenant."
+        },
+        "applicationSecret": {
+          "type": "string",
+          "description": "An AAD client secret that was generated for the App Registration used to authenticate with Azure Key Vault."
+        }
+      }
+    },
     "CheckNameAvailabilityInput": {
       "type": "object",
       "description": "Input of check name availability API.",
@@ -2281,6 +2300,54 @@
         ]
       }
     },
+    "DataIdentity": {
+      "type": "object",
+      "description": "Identity to use when accessing an Azure Key Vault.",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/DataIdentityType",
+          "description": "The type of identity."
+        }
+      },
+      "discriminator": "identityType",
+      "required": [
+        "identityType"
+      ]
+    },
+    "DataIdentityType": {
+      "type": "string",
+      "description": "The type of identity used to access the Azure Key Vault.",
+      "enum": [
+        "None",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "DataIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identity."
+          }
+        ]
+      }
+    },
+    "DataNoneIdentity": {
+      "type": "object",
+      "description": "Indicates that the data identity should be removed (set to none).",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataIdentity"
+        }
+      ],
+      "x-ms-discriminator-value": "None"
+    },
     "DataPlaneAadOrApiKeyAuthOption": {
       "type": "object",
       "description": "Indicates that either the API key or an access token from a Microsoft Entra ID tenant can be used for authentication.",
@@ -2304,6 +2371,26 @@
         }
       }
     },
+    "DataUserAssignedIdentity": {
+      "type": "object",
+      "description": "Indicates that a user-assigned managed identity should be used to access the Azure Key Vault.",
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The fully qualified Azure resource ID of a user-assigned managed identity. Format: '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<identityName>'."
+        },
+        "servicePrincipalObjectId": {
+          "type": "string",
+          "description": "The object ID of the Azure Active Directory application that should be granted access to the Azure Key Vault on behalf of the user-assigned managed identity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataIdentity"
+        }
+      ],
+      "x-ms-discriminator-value": "UserAssigned"
+    },
     "EncryptionWithCmk": {
       "type": "object",
       "description": "Describes a policy that determines how resources within the search service are to be encrypted with customer managed keys.",
@@ -2319,7 +2406,23 @@
         },
         "serviceLevelEncryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "The encryption key used for service-level encryption."
+          "description": "Describes the customer-managed key configuration for encrypting the search service."
+        }
+      }
+    },
+    "FeatureOffering": {
+      "type": "object",
+      "description": "Describes the availability of a specific feature in a region.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the feature.",
+          "readOnly": true
+        },
+        "available": {
+          "type": "boolean",
+          "description": "Indicates whether the feature is available in the region.",
+          "readOnly": true
         }
       }
     },
@@ -2337,7 +2440,7 @@
           {
             "name": "Default",
             "value": "Default",
-            "description": "The limit on number of indexes is determined by the default limits for the SKU."
+            "description": "The maximum limit of indexes is determined by the SKU or pricing tier."
           },
           {
             "name": "HighDensity",
@@ -2459,6 +2562,30 @@
         ]
       }
     },
+    "KnowledgeRetrieval": {
+      "type": "string",
+      "description": "Sets options that control the availability of knowledge retrieval. This configuration is only possible for certain Azure AI Search SKUs in certain locations.",
+      "enum": [
+        "free",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeRetrieval",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "free",
+            "value": "free",
+            "description": "Enables knowledge retrieval on a search service and indicates that it is to be used within the limits of the free plan. The free plan would cap the volume of knowledge retrieval requests and is offered at no extra charge."
+          },
+          {
+            "name": "standard",
+            "value": "standard",
+            "description": "Enables knowledge retrieval on a search service as a billable feature after the free quota is exhausted, with higher throughput and volume of knowledge retrieval requests."
+          }
+        ]
+      }
+    },
     "ListQueryKeysResult": {
       "type": "object",
       "description": "Response containing the query API keys for a given Azure AI Search service.",
@@ -2516,6 +2643,48 @@
       "required": [
         "value"
       ]
+    },
+    "OfferingsByRegion": {
+      "type": "object",
+      "description": "Describes the Azure AI Search features and SKUs available in a specific Azure region.",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "The Azure region where these offerings are available.",
+          "readOnly": true
+        },
+        "features": {
+          "type": "array",
+          "description": "The list of features available in this region.",
+          "items": {
+            "$ref": "#/definitions/FeatureOffering"
+          },
+          "readOnly": true
+        },
+        "skus": {
+          "type": "array",
+          "description": "The list of SKUs available in this region.",
+          "items": {
+            "$ref": "#/definitions/SkuOffering"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "OfferingsListResult": {
+      "type": "object",
+      "description": "Response containing the list of offerings available in Azure AI Search, organized by region.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of Azure AI Search offerings by region.",
+          "items": {
+            "$ref": "#/definitions/OfferingsByRegion"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
     },
     "OperationListResult": {
       "type": "object",
@@ -2823,7 +2992,7 @@
           {
             "name": "Provisioning",
             "value": "provisioning",
-            "description": "The search service is in the process of being provisioned. For dedicated search services only, the service might be in the process of scaling up or down."
+            "description": "The search service is being provisioned or scaled up or down. For dedicated search services only."
           },
           {
             "name": "Failed",
@@ -2903,7 +3072,7 @@
         },
         "name": {
           "$ref": "#/definitions/QuotaUsageResultName",
-          "description": "The SKU name information of the current search service",
+          "description": "The SKU name information of the current search service.",
           "readOnly": true
         }
       }
@@ -2962,7 +3131,7 @@
           {
             "name": "AzurePortal",
             "value": "AzurePortal",
-            "description": "Indicates that requests originating from the Azure portal can bypass the rules defined in the 'ipRules' section."
+            "description": "Indicates that requests originating from the Azure Portal can bypass the rules defined in the 'ipRules' section."
           },
           {
             "name": "AzureServices",
@@ -3044,9 +3213,36 @@
         ]
       }
     },
+    "SearchResourceEncryptionKey": {
+      "type": "object",
+      "description": "Describes the parameters for using a customer-managed encryption key to encrypt the search service.",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key in Azure Key Vault that is to be used to encrypt data at rest in the search service."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key in Azure Key Vault that is to be used to encrypt data at rest in the search service."
+        },
+        "vaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the Azure Key Vault where the key is stored."
+        },
+        "identity": {
+          "$ref": "#/definitions/DataIdentity",
+          "description": "An explicit identity to use when accessing the Azure Key Vault specified in the vaultUri. If this is not provided, the search service will use its own system-assigned managed identity to access the key vault. Providing an explicit identity is supported for services that need to access a key vault in a different tenant or in a key vault with a different access policy (e.g., RBAC based)."
+        },
+        "applicationCredentials": {
+          "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
+          "description": "Optional application credentials to authenticate to Azure Active Directory for accessing the Azure Key Vault."
+        }
+      }
+    },
     "SearchSemanticSearch": {
       "type": "string",
-      "description": "Specifies the availability and billing plan for semantic ranker on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.",
+      "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations.",
       "enum": [
         "disabled",
         "free",
@@ -3070,30 +3266,6 @@
             "name": "standard",
             "value": "standard",
             "description": "Enables semantic reranker on a search service as a billable feature after the free quota is exhausted, with higher throughput and volume of semantically reranked queries."
-          }
-        ]
-      }
-    },
-    "KnowledgeRetrieval": {
-      "type": "string",
-      "description": "Specifies the billing plan for agentic retrieval on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.",
-      "enum": [
-        "free",
-        "standard"
-      ],
-      "x-ms-enum": {
-        "name": "KnowledgeRetrievalBillingTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "free",
-            "value": "free",
-            "description": "Enables knowledge retrieval on a search service and indicates that it is to be used within the limits of the free plan. The free plan would cap the volume of knowledge retrieval requests and is offered at no extra charge."
-          },
-          {
-            "name": "standard",
-            "value": "standard",
-            "description": "Enables knowledge retrieval on a search service as a billable feature after the free quota is exhausted, with higher throughput and volume of knowledge retrieval requests."
           }
         ]
       }
@@ -3160,7 +3332,7 @@
         "partitionCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of partitions in the dedicated search service. If specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3.",
+          "description": "The number of partitions in the dedicated search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3.",
           "default": 1,
           "minimum": 1,
           "maximum": 12
@@ -3190,7 +3362,7 @@
               {
                 "name": "HighDensity",
                 "value": "HighDensity",
-                "description": "Applies only to the Standard3 (S3) SKU or pricing tier, where the search service can have up to 1000 indexes."
+                "description": "Only applies to the Standard3 (S3) SKU, where the search services can have up to 1,000 indexes."
               }
             ]
           }
@@ -3276,7 +3448,7 @@
         },
         "knowledgeRetrieval": {
           "$ref": "#/definitions/KnowledgeRetrieval",
-          "description": "Sets options that control the availability of knowledge retrieval. This configuration is only possible for certain Azure AI Search SKUs in certain locations.",
+          "description": "Specifies the billing plan for agentic retrieval on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.",
           "x-nullable": true
         },
         "privateEndpointConnections": {
@@ -3716,6 +3888,64 @@
         ]
       }
     },
+    "SkuOffering": {
+      "type": "object",
+      "description": "Describes a SKU offering with its limits in a specific region.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU.",
+          "readOnly": true
+        },
+        "available": {
+          "type": "boolean",
+          "description": "Indicates whether the SKU is available in the region.",
+          "readOnly": true
+        },
+        "maxIndexes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of indexes allowed for this SKU.",
+          "readOnly": true
+        },
+        "maxIndexers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of indexers allowed for this SKU.",
+          "readOnly": true
+        },
+        "maxStorageSizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum storage size in bytes allowed for this SKU.",
+          "readOnly": true
+        },
+        "maxVectorStorageSizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum vector storage size in bytes allowed for this SKU.",
+          "readOnly": true
+        },
+        "maxSearchUnits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of search units allowed for this SKU.",
+          "readOnly": true
+        },
+        "maxReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of replicas allowed for this SKU.",
+          "readOnly": true
+        },
+        "maxPartitions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of partitions allowed for this SKU.",
+          "readOnly": true
+        }
+      }
+    },
     "UnavailableNameReason": {
       "type": "string",
       "description": "The reason why the name is not available. 'Invalid' indicates the name provided does not match the naming requirements (incorrect length, unsupported characters, etc.). 'AlreadyExists' indicates that the name is already in use and is therefore unavailable.",
@@ -3762,203 +3992,6 @@
             "description": "There is an upgrade available for the dedicated service."
           }
         ]
-      }
-    },
-    "SearchResourceEncryptionKey": {
-      "type": "object",
-      "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest, such as indexes and synonym maps.",
-      "properties": {
-        "keyVaultKeyName": {
-          "x-ms-client-name": "keyName",
-          "type": "string",
-          "description": "The name of your Azure Key Vault key to be used to encrypt your data at rest."
-        },
-        "keyVaultKeyVersion": {
-          "x-ms-client-name": "keyVersion",
-          "type": "string",
-          "description": "The version of your Azure Key Vault key to be used to encrypt your data at rest."
-        },
-        "keyVaultUri": {
-          "x-ms-client-name": "vaultUri",
-          "type": "string",
-          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`."
-        },
-        "accessCredentials": {
-          "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
-          "description": "Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead.",
-          "externalDocs": {
-            "url": "https://aka.ms/azure-search-msi"
-          }
-        },
-        "identity": {
-          "$ref": "#/definitions/DataIdentity",
-          "x-nullable": true,
-          "description": "An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared."
-        }
-      }
-    },
-    "DataIdentity": {
-      "type": "object",
-      "description": "Abstract base type for data identities.",
-      "discriminator": "@odata.type",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "A URI fragment specifying the type of identity."
-        }
-      },
-      "required": [
-        "@odata.type"
-      ]
-    },
-    "DataNoneIdentity": {
-      "type": "object",
-      "description": "Clears the identity property.",
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataNoneIdentity",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataIdentity"
-        }
-      ]
-    },
-    "DataUserAssignedIdentity": {
-      "type": "object",
-      "description": "Specifies the user assigned identity to use.",
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataIdentity"
-        }
-      ],
-      "properties": {
-        "userAssignedIdentity": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The fully qualified Azure resource Id of a user assigned managed identity typically in the form \"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\" that should have been assigned to the search service."
-        },
-        "federatedIdentityClientId": {
-          "type": "string",
-          "description": "Optional for Multi-tenant User-Assigned Managed Identity CMK Support: The client id (as a UUID) of the multi-tenant App Registration that has been configured to federate with the userAssignedIdentity."
-        }
-      },
-      "required": [
-        "userAssignedIdentity"
-      ]
-    },
-    "AzureActiveDirectoryApplicationCredentials": {
-      "type": "object",
-      "description": "Credentials of a registered application created for your search service, used for authenticated access to the encryption keys stored in Azure Key Vault.",
-      "properties": {
-        "applicationId": {
-          "type": "string",
-          "description": "An AAD Application ID that was granted the required access permissions to the Azure Key Vault that is to be used when encrypting your data at rest. The Application ID should not be confused with the Object ID for your AAD Application."
-        },
-        "applicationSecret": {
-          "type": "string",
-          "x-ms-secret": true,
-          "description": "The authentication key of the specified AAD application."
-        }
-      }
-    },
-    "OfferingsListResult": {
-      "type": "object",
-      "description": "The response containing a list of features and SKUs offered in various regions.",
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OfferingsByRegion"
-          },
-          "description": "The list of regions with their respective features and SKUs offered."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The URL to get the next set of offerings, if any."
-        }
-      }
-    },
-    "OfferingsByRegion": {
-      "type": "object",
-      "properties": {
-        "regionName": {
-          "type": "string",
-          "description": "The name of the region."
-        },
-        "features": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FeatureOffering"
-          },
-          "description": "The list of features offered in this region.",
-          "x-ms-identifiers": []
-        },
-        "skus": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuOffering"
-          },
-          "description": "The list of SKUs offered in this region."
-        }
-      }
-    },
-    "FeatureOffering": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the feature offered in this region."
-        }
-      }
-    },
-    "SkuOffering": {
-      "type": "object",
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku"
-        },
-        "limits": {
-          "type": "object",
-          "description": "The limits associated with this SKU offered in this region.",
-          "properties": {
-            "indexes": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The maximum number of indexes available for this SKU."
-            },
-            "indexers": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The maximum number of indexers available for this SKU."
-            },
-            "partitionStorageInGigabytes": {
-              "type": "number",
-              "format": "float",
-              "description": "The maximum storage size in Gigabytes available for this SKU per partition."
-            },
-            "partitionVectorStorageInGigabytes": {
-              "type": "number",
-              "format": "float",
-              "description": "The maximum vector storage size in Gigabytes available for this SKU per partition."
-            },
-            "searchUnits": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The maximum number of search units available for this SKU."
-            },
-            "replicas": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The maximum number of replicas available for this SKU."
-            },
-            "partitions": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The maximum number of partitions available for this SKU."
-            }
-          }
-        }
       }
     }
   },

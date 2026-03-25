@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -45,7 +47,7 @@ union ComputeType {
   Default: "Default",
 
   /**
-   * Create the service with Azure Confidential Compute.
+   * Create the dedicated service with Azure Confidential Compute.
    */
   Confidential: "Confidential",
 }
@@ -84,6 +86,12 @@ union SearchBypass {
   None: "None",
 
   /**
+   * Indicates that requests originating from the Azure Portal can bypass the rules defined in the 'ipRules' section.
+   */
+  @added(Versions.v2026_03_01_preview)
+  AzurePortal: "AzurePortal",
+
+  /**
    * Indicates that requests originating from Azure trusted services can bypass the rules defined in the 'ipRules' section.
    */
   AzureServices: "AzureServices",
@@ -108,17 +116,36 @@ union SearchSemanticSearch {
   string,
 
   /**
-   * Indicates that semantic reranker is disabled for the search service. This is the default.
+   * Indicates that semantic reranker is disabled for the search service.
    */
   disabled: "disabled",
 
   /**
-   * Enables semantic reranker on a search service and indicates that it is to be used within the limits of the free plan. The free plan would cap the volume of semantic ranking requests and is offered at no extra charge. This is the default for newly provisioned search services.
+   * Enables semantic reranker on a search service and indicates that it is to be used within the limits of the free plan. The free plan would cap the volume of semantic ranking requests and is offered at no extra charge. This is the default for newly provisioned search services. This is the default.
    */
   free: "free",
 
   /**
-   * Enables semantic reranker on a search service as a billable feature, with higher throughput and volume of semantically reranked queries.
+   * Enables semantic reranker on a search service as a billable feature after the free quota is exhausted, with higher throughput and volume of semantically reranked queries.
+   */
+  standard: "standard",
+}
+
+/**
+ * Sets options that control the availability of knowledge retrieval. This configuration is only possible for certain Azure AI Search SKUs in certain locations.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "x-ms-enum name needs to be KnowledgeRetrievalBillingTier"
+@added(Versions.v2026_03_01_preview)
+union KnowledgeRetrieval {
+  string,
+
+  /**
+   * Enables knowledge retrieval on a search service and indicates that it is to be used within the limits of the free plan. The free plan would cap the volume of knowledge retrieval requests and is offered at no extra charge.
+   */
+  free: "free",
+
+  /**
+   * Enables knowledge retrieval on a search service as a billable feature after the free quota is exhausted, with higher throughput and volume of knowledge retrieval requests.
    */
   standard: "standard",
 }
@@ -236,24 +263,24 @@ union SharedPrivateLinkResourceProvisioningState {
 }
 
 /**
- * Indicates if the search service has an upgrade available.
+ * Indicates if the dedicated search service has an upgrade available.
  */
 union UpgradeAvailable {
   string,
 
   /**
-   * An upgrade is currently not available for the service.
+   * An upgrade is currently not available for the dedicated service.
    */
   NotAvailable: "notAvailable",
 
   /**
-   * There is an upgrade available for the service.
+   * There is an upgrade available for the dedicated service.
    */
   Available: "available",
 }
 
 /**
- * The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions.'
+ * The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions. 'serverless': Serverless tier with auto-scaling capabilities.
  */
 union SkuName {
   string,
@@ -292,6 +319,12 @@ union SkuName {
    * Billable tier for a dedicated service that supports 2TB per partition, up to 12 partitions.
    */
   StorageOptimizedL2: "storage_optimized_l2",
+
+  /**
+   * Serverless tier, offering low-touch, consumption-based, and pay-as-you-go experience, with auto-scaling capabilities.
+   */
+  @added(Versions.v2026_03_01_preview)
+  Serverless: "serverless",
 }
 
 /**
@@ -409,12 +442,12 @@ enum AdminKeyKind {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum HostingMode {
   /**
-   * The limit on number of indexes is determined by the default limits for the SKU.
+   * The maximum limit of indexes is determined by the SKU or pricing tier.
    */
   Default,
 
   /**
-   * Only application for standard3 SKU, where the search service can have up to 1000 indexes.
+   * Only applies to the Standard3 (S3) SKU, where the search services can have up to 1,000 indexes.
    */
   HighDensity,
 }
@@ -472,7 +505,7 @@ enum ProvisioningState {
   Succeeded: "succeeded",
 
   /**
-   * The search service is being provisioned or scaled up or down.
+   * The search service is being provisioned or scaled up or down. For dedicated search services only.
    */
   Provisioning: "provisioning",
 
@@ -670,14 +703,14 @@ model ListQueryKeysResult {
  */
 model SearchServiceProperties {
   /**
-   * The number of replicas in the search service. If specified, it must be a value between 1 and 12 inclusive for standard SKUs or between 1 and 3 inclusive for basic SKU.
+   * The number of replicas in the dedicated search service. If specified, it must be a value between 1 and 12 inclusive for standard SKUs or between 1 and 3 inclusive for basic SKU.
    */
   @maxValue(12)
   @minValue(1)
   replicaCount?: int32 = 1;
 
   /**
-   * The number of partitions in the search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3.
+   * The number of partitions in the dedicated search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3.
    */
   @maxValue(12)
   @minValue(1)
@@ -754,6 +787,13 @@ model SearchServiceProperties {
   semanticSearch?: SearchSemanticSearch | null;
 
   /**
+   * Specifies the billing plan for agentic retrieval on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_03_01_preview)
+  knowledgeRetrieval?: KnowledgeRetrieval | null;
+
+  /**
    * The list of private endpoint connections to the Azure AI Search service.
    */
   @visibility(Lifecycle.Read)
@@ -824,6 +864,116 @@ model EncryptionWithCmk {
    */
   @visibility(Lifecycle.Read)
   encryptionComplianceStatus?: SearchEncryptionComplianceStatus;
+
+  /**
+   * Describes the customer-managed key configuration for encrypting the search service.
+   */
+  @added(Versions.v2026_03_01_preview)
+  serviceLevelEncryptionKey?: SearchResourceEncryptionKey;
+}
+
+/**
+ * Describes the parameters for using a customer-managed encryption key to encrypt the search service.
+ */
+@added(Versions.v2026_03_01_preview)
+model SearchResourceEncryptionKey {
+  /**
+   * The name of the key in Azure Key Vault that is to be used to encrypt data at rest in the search service.
+   */
+  keyName?: string;
+
+  /**
+   * The version of the key in Azure Key Vault that is to be used to encrypt data at rest in the search service.
+   */
+  keyVersion?: string;
+
+  /**
+   * The URI of the Azure Key Vault where the key is stored.
+   */
+  vaultUri?: url;
+
+  /**
+   * An explicit identity to use when accessing the Azure Key Vault specified in the vaultUri. If this is not provided, the search service will use its own system-assigned managed identity to access the key vault. Providing an explicit identity is supported for services that need to access a key vault in a different tenant or in a key vault with a different access policy (e.g., RBAC based).
+   */
+  identity?: DataIdentity;
+
+  /**
+   * Optional application credentials to authenticate to Azure Active Directory for accessing the Azure Key Vault.
+   */
+  applicationCredentials?: AzureActiveDirectoryApplicationCredentials;
+}
+
+/**
+ * Identity to use when accessing an Azure Key Vault.
+ */
+@added(Versions.v2026_03_01_preview)
+@discriminator("identityType")
+model DataIdentity {
+  /**
+   * The type of identity.
+   */
+  identityType: DataIdentityType;
+}
+
+/**
+ * The type of identity used to access the Azure Key Vault.
+ */
+@added(Versions.v2026_03_01_preview)
+union DataIdentityType {
+  string,
+
+  /**
+   * No identity.
+   */
+  None: "None",
+
+  /**
+   * User-assigned managed identity.
+   */
+  UserAssigned: "UserAssigned",
+}
+
+/**
+ * Indicates that the data identity should be removed (set to none).
+ */
+@added(Versions.v2026_03_01_preview)
+model DataNoneIdentity extends DataIdentity {
+  identityType: DataIdentityType.None;
+}
+
+/**
+ * Indicates that a user-assigned managed identity should be used to access the Azure Key Vault.
+ */
+@added(Versions.v2026_03_01_preview)
+model DataUserAssignedIdentity extends DataIdentity {
+  identityType: DataIdentityType.UserAssigned;
+
+  /**
+   * The fully qualified Azure resource ID of a user-assigned managed identity. Format: '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<identityName>'.
+   */
+  userAssignedIdentity?: string;
+
+  /**
+   * The object ID of the Azure Active Directory application that should be granted access to the Azure Key Vault on behalf of the user-assigned managed identity.
+   */
+  servicePrincipalObjectId?: string;
+}
+
+/**
+ * Describes the Azure Active Directory application credentials required to access an Azure Key Vault.
+ */
+@added(Versions.v2026_03_01_preview)
+model AzureActiveDirectoryApplicationCredentials {
+  /**
+   * The application (client) ID of an App Registration in the tenant.
+   */
+  applicationId?: string;
+
+  /**
+   * An AAD client secret that was generated for the App Registration used to authenticate with Azure Key Vault.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a secret property for encryption key access"
+  applicationSecret?: string;
 }
 
 /**
@@ -956,7 +1106,7 @@ model SharedPrivateLinkResourceProperties {
 @OpenAPI.externalDocs("https://azure.microsoft.com/documentation/articles/search-sku-tier/")
 model Sku {
   /**
-   * The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions.'
+   * The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions. 'serverless': Serverless tier with auto-scaling capabilities.
    */
   name?: SkuName;
 }
@@ -1212,14 +1362,14 @@ model QuotaUsageResult {
   limit?: int32;
 
   /**
-   * The name of the SKU supported by Azure AI Search.
+   * The SKU name information of the current search service.
    */
   @visibility(Lifecycle.Read)
   name?: QuotaUsageResultName;
 }
 
 /**
- * The name of the SKU supported by Azure AI Search.
+ * The SKU name information, including its identifier and localized display name.
  */
 model QuotaUsageResultName {
   /**
@@ -1319,4 +1469,124 @@ model SharedPrivateLinkResourceListResult {
    */
   @nextLink
   nextLink?: string;
+}
+
+/**
+ * Response containing the list of offerings available in Azure AI Search, organized by region.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_03_01_preview)
+@Azure.ResourceManager.Legacy.armExternalType
+model OfferingsListResult {
+  /**
+   * The list of Azure AI Search offerings by region.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Offerings by region don't have a unique identifier"
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: OfferingsByRegion[];
+}
+
+/**
+ * Describes the Azure AI Search features and SKUs available in a specific Azure region.
+ */
+@added(Versions.v2026_03_01_preview)
+model OfferingsByRegion {
+  /**
+   * The Azure region where these offerings are available.
+   */
+  @visibility(Lifecycle.Read)
+  region?: string;
+
+  /**
+   * The list of features available in this region.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  features?: FeatureOffering[];
+
+  /**
+   * The list of SKUs available in this region.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  skus?: SkuOffering[];
+}
+
+/**
+ * Describes the availability of a specific feature in a region.
+ */
+@added(Versions.v2026_03_01_preview)
+model FeatureOffering {
+  /**
+   * The name of the feature.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Indicates whether the feature is available in the region.
+   */
+  @visibility(Lifecycle.Read)
+  available?: boolean;
+}
+
+/**
+ * Describes a SKU offering with its limits in a specific region.
+ */
+@added(Versions.v2026_03_01_preview)
+model SkuOffering {
+  /**
+   * The name of the SKU.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Indicates whether the SKU is available in the region.
+   */
+  @visibility(Lifecycle.Read)
+  available?: boolean;
+
+  /**
+   * The maximum number of indexes allowed for this SKU.
+   */
+  @visibility(Lifecycle.Read)
+  maxIndexes?: int32;
+
+  /**
+   * The maximum number of indexers allowed for this SKU.
+   */
+  @visibility(Lifecycle.Read)
+  maxIndexers?: int32;
+
+  /**
+   * The maximum storage size in bytes allowed for this SKU.
+   */
+  @visibility(Lifecycle.Read)
+  maxStorageSizeInBytes?: int64;
+
+  /**
+   * The maximum vector storage size in bytes allowed for this SKU.
+   */
+  @visibility(Lifecycle.Read)
+  maxVectorStorageSizeInBytes?: int64;
+
+  /**
+   * The maximum number of search units allowed for this SKU.
+   */
+  @visibility(Lifecycle.Read)
+  maxSearchUnits?: int32;
+
+  /**
+   * The maximum number of replicas allowed for this SKU.
+   */
+  @visibility(Lifecycle.Read)
+  maxReplicas?: int32;
+
+  /**
+   * The maximum number of partitions allowed for this SKU.
+   */
+  @visibility(Lifecycle.Read)
+  maxPartitions?: int32;
 }
