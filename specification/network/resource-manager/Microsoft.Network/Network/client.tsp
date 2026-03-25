@@ -1977,3 +1977,16 @@ op replaceprivateDnsZoneGroupsList(
   CombineClient,
   "python,javascript"
 );
+@@clientName(ConnectionSharedKeyResults.getAllSharedKeys,
+  "listAllSharedKeys",
+  "javascript"
+);
+@@clientName(ServiceGateways.getAddressLocations,
+  "listAddressLocations",
+  "javascript"
+);
+@@clientName(ServiceGateways.getServices, "listServices", "javascript");
+@@clientName(ApplicationGatewayWafDynamicManifestResults.applicationGatewayWafDynamicManifestsGet,
+  "list",
+  "javascript"
+);
