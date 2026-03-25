@@ -195,200 +195,67 @@ stages:
             TokenToUseForAuth: $(azuresdk-github-pat)
             PreserveAuthToken: true
 
-      - task: NodeTool@0
-        inputs:
-          versionSpec: $(NodeVersion)
-        displayName: 'Install Node.js'
+      # ============================================================
+      # DIAGNOSTIC: Validate sparse-checkout impact on git tag/tree commands
+      # Remove after validation
+      # ============================================================
 
-      - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
-        parameters:
-          npmrcPath: $(Agent.TempDirectory)/gen-sdk/.npmrc
+      # [Step 1] Observe state immediately after treeless clone: git tag and git ls-tree behavior
+      - pwsh: |
+          Push-Location "$(SdkRepoDirectory)/sdk/purview/arm-purview"
+          Write-Host "=== [Diag 1] Clone filter in use ==="
+          git config remote.origin.partialclonefilter
 
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: $(PythonVersion)
+          Write-Host "`n=== [Diag 1] Tag count and samples ==="
+          $tags = git tag -l
+          Write-Host "Tag count: $($tags.Count)"
+          $tags | Select-Object -First 10
 
-      - script: |
-          set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
-          optional_params=""
-          sdk_gen_info="Configurations: "
+          Write-Host "`n=== [Diag 1] Check tag object type for @azure/arm-purview_1.1.0 ==="
+          $tagSha = git rev-parse "refs/tags/@azure/arm-purview_1.1.0" 2>&1
+          Write-Host "Tag SHA: $tagSha"
+          git cat-file -t $tagSha 2>&1
 
-          if [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "TypeSpec" ]; then
-            optional_params="$optional_params --tsp-config-relative-path ${{ parameters.ConfigPath }}"
-            sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
-          elif [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "OpenAPI" ]; then
-            optional_params="$optional_params --readme-relative-path ${{ parameters.ConfigPath }}"
-            sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
-          fi
+          Write-Host "`n=== [Diag 1] git ls-tree on tag (expected to FAIL with treeless clone) ==="
+          git ls-tree -d "@azure/arm-purview_1.1.0" src/api 2>&1
+          Write-Host "Exit code: $LASTEXITCODE"
+          Pop-Location
+        displayName: '[Diag 1] Baseline: treeless clone git tag + git ls-tree'
+        continueOnError: true
 
-          updatedSpecRepoCommit="$(SpecRepoCommit)"
-          if [ "$(Build.Reason)" = "PullRequest" ]; then
-            optional_params="$optional_params --pr-number $(System.PullRequest.PullRequestNumber)"
-            specPrUrl="${{ parameters.SpecRepoUrl }}/pull/$(System.PullRequest.PullRequestNumber)"
-            sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl"
-            updatedSpecRepoCommit="$(System.PullRequest.SourceCommitId)"
-          fi
+      # [Step 2] Try git fetch --tags as a lightweight fix, then retry git ls-tree
+      - pwsh: |
+          Push-Location "$(SdkRepoDirectory)/sdk/purview/arm-purview"
+          Write-Host "=== [Diag 2] Running git fetch --tags ==="
+          git fetch --tags
+          Write-Host "git fetch --tags exit code: $LASTEXITCODE"
 
-          if [ "${{ parameters.SpecBatchTypes }}" != "" ]; then
-            optional_params="$optional_params --batch-type ${{ parameters.SpecBatchTypes }}"
-            sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},"
-          fi
+          Write-Host "`n=== [Diag 2] git ls-tree after fetch --tags ==="
+          git ls-tree -d "@azure/arm-purview_1.1.0" src/api 2>&1
+          Write-Host "Exit code: $LASTEXITCODE"
+          Pop-Location
+        displayName: '[Diag 2] git fetch --tags: does this fix git ls-tree?'
+        continueOnError: true
 
-          if [ "${{ parameters.ApiVersion }}" != "" ]; then
-            optional_params="$optional_params --api-version ${{ parameters.ApiVersion }} --sdk-release-type ${{ parameters.SdkReleaseType }}"
-            sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},"
-          fi
-          sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
+      # [Step 3] Full re-clone (no --filter), verify git ls-tree is stable
+      - pwsh: |
+          Write-Host "=== [Diag 3] Removing sparse clone and doing full re-clone ==="
+          Remove-Item -Recurse -Force "$(SdkRepoDirectory)"
+          New-Item -ItemType Directory -Force -Path "$(SdkRepoDirectory)" | Out-Null
+          Push-Location "$(SdkRepoDirectory)"
+          git clone --single-branch --branch "$(CheckoutCommitish)" "https://github.com/$(SdkRepoOwner)/$(SdkRepoName)" .
+          Write-Host "Clone exit code: $LASTEXITCODE"
+          git config gc.auto 0
+          Pop-Location
+          Push-Location "$(SdkRepoDirectory)/sdk/purview/arm-purview"
 
-          if [ "$(Build.Reason)" = "Manual" ]; then
-            sdk_gen_info="$sdk_gen_info Pipeline run: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"
-            sdk_gen_info="$sdk_gen_info Refer to https://eng.ms/docs/products/azure-developer-experience/develop/sdk-release/sdk-release-prerequisites to prepare for SDK release."
-          fi
-          echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
-          echo "$sdk_gen_info"
+          Write-Host "`n=== [Diag 3] Clone filter (should be empty after full clone) ==="
+          git config remote.origin.partialclonefilter 2>&1
 
-          cd $(SpecRepoDirectory)
-          echo "##[group]Run npm ci"
-          npm ci
-          echo "##[endgroup]"
-          node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
-            --scp $(SpecRepoDirectory) \
-            --sdp $(SdkRepoDirectory) \
-            --wf $(System.DefaultWorkingDirectory) \
-            --lang $(SdkRepoName) \
-            --commit $updatedSpecRepoCommit \
-            --spec-repo-url ${{ parameters.SpecRepoUrl }} \
-            $optional_params || true # return true always to suppress exit error logging
-        displayName: 'Generate SDK'
-        ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
-          continueOnError: true
-        env:
-          NPM_CONFIG_USERCONFIG: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+          Write-Host "`n=== [Diag 3] git ls-tree after full clone (expected to SUCCEED) ==="
+          git ls-tree -d "@azure/arm-purview_1.1.0" src/api 2>&1
+          Write-Host "Exit code: $LASTEXITCODE"
+          Pop-Location
+        displayName: '[Diag 3] Full re-clone: verify git ls-tree is stable'
+        continueOnError: true
 
-      - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
-        parameters:
-          ArtifactName: $(SpecGenSdkArtifactName)
-          ArtifactPath: "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)"
-          CustomCondition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''))
-
-      - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
-        parameters:
-          ArtifactName: $(PipelineArtifactsName)
-          ArtifactPath: $(StagedArtifactsFolder)
-          CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
-
-      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
-        - pwsh: |
-            $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
-            $sdkRepoBranch = '${{ parameters.SdkRepoBranch }}'
-            # use the user provided branch name
-            if (($sdkRepoBranch -ne 'main') -and (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch))) {
-              $sdkPrBranchName = $sdkRepoBranch
-            }
-            Write-Host "Branch name is set to: $sdkPrBranchName"
-            Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
-          workingDirectory: $(SdkRepoDirectory)
-          displayName: "Create SDK PR branch variable"
-
-        - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
-          - task: AzureCLI@2
-            displayName: "Get Release Plan details"
-            condition: succeeded()
-            continueOnError: true
-            inputs:
-              azureSubscription: opensource-api-connection
-              scriptType: pscore
-              scriptLocation: inlineScript
-              inlineScript: |
-                $releasePlanInfo = & "$(SpecRepoDirectory)/eng/scripts/Get-ReleasePlan-Info.ps1" ${{ parameters.ReleasePlanWorkItemId }}
-                Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
-                Write-Host "Release Plan Info: $releasePlanInfo"
-
-        - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
-          parameters:
-            BaseRepoBranch: $(SdkPullRequestSourceBranch)
-            BaseRepoOwner: $(SdkRepoOwner)
-            CommitMsg: $(GeneratedSDKInformation)
-            TargetRepoOwner: azure
-            TargetRepoName: $(SdkRepoName)
-            WorkingDirectory: $(SdkRepoDirectory)
-            ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
-
-        - pwsh: |
-            $currentTitle = "$(PrTitle)"
-            $updatedTitle = "Failed-$currentTitle"
-            Write-Host "##vso[task.setvariable variable=PrTitle]$updatedTitle"
-            Write-Host "Updated PR Title to: '$updatedTitle'"
-          displayName: "Set PR title prefix on failures"
-          condition: or(eq(variables['Agent.JobStatus'], 'Failed'), eq(variables['Agent.JobStatus'], 'SucceededWithIssues'))
-
-        - task: PowerShell@2
-          displayName: Create pull request
-          condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
-          inputs:
-            pwsh: true
-            workingDirectory: $(SdkRepoDirectory)
-            filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
-            arguments: >
-              -RepoOwner "azure"
-              -RepoName "$(SdkRepoName)"
-              -BaseBranch "main"
-              -PROwner "$(SdkRepoOwner)"
-              -PRBranch "$(SdkPullRequestSourceBranch)"
-              -AuthToken "$(azuresdk-github-pat)"
-              -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-              -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
-              -OpenAsDraft $true
-        
-
-        - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
-          - pwsh: |
-              $prUrl = "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
-              Write-Host "Pull request created: $prUrl"
-              Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
-              $prStatus = "draft"
-              Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
-            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
-            displayName: "Set pull request URL variable"
-
-          - pwsh: |
-              $prUrl = ""
-              Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
-              $prStatus = "Failed to generate SDK."
-              Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
-            condition: failed()
-            displayName: "Set pull request generation failed status variable"
-
-          - task: AzureCLI@2
-            displayName: Link pull request to release plan
-            condition: not(endsWith(variables['SdkRepoName'], '-pr'))
-            continueOnError: true
-            inputs:
-              azureSubscription: opensource-api-connection
-              scriptType: pscore
-              scriptLocation: scriptPath
-              scriptPath: $(SpecRepoDirectory)/eng/scripts/Update-PullRequest-In-ReleasePlan.ps1
-              arguments: >
-                -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
-                -PullRequestUrl "$(PullRequestUrl)"
-                -Status "$(SdkPrStatus)"
-                -SdkRepoName "$(SdkRepoName)"
-
-      - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-        - pwsh: |
-            . $(SpecRepoDirectory)/eng/common/scripts/Helpers/ApiView-Helpers.ps1
-            Create-API-Review `
-              -specGenSDKArtifactPath "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)/$(SpecGenSdkArtifactName).json" `
-              -apiviewArtifactName "$(PipelineArtifactsName)" `
-              -buildId "$(Build.BuildId)" `
-              -commitish "$(System.PullRequest.SourceCommitId)" `
-              -repoName "$(SpecRepoOwner)/$(SpecRepoName)" `
-              -pullRequestNumber "$(System.PullRequest.PullRequestNumber)" 
-          displayName: 'Detect API Change and Create API Review'
-          condition: and(succeeded(), eq(variables['HasAPIViewArtifact'], 'true'))
-
-      - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
-        parameters:
-          ArtifactName: "spec-gen-sdk-logs"
-          ArtifactPath: "$(System.DefaultWorkingDirectory)/out/logs"
-          CustomCondition: succeededOrFailed()
