@@ -243,9 +243,12 @@ using Azure.AI.Projects;
 // Remove foundry_features input arguments from public methods, as they are set internally.
 @@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
 @@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
-// These two lines are commented out since they have no effect. Emitted Python code needs to be edited to make these internal.
-//@@access(AgentDefinitionOptInKeys, Access.internal, "python");
-//@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
+
+// Force emitting these two, as patched code uses values from these enums to internally set Foundry-Features header.
+@@usage(AgentDefinitionOptInKeys, Usage.input, "python");
+@@access(AgentDefinitionOptInKeys, Access.internal, "python");
+@@usage(FoundryFeaturesOptInKeys, Usage.input, "python");
+@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
 
 // Add optional boolean "allow_preview" client initialization parameter
 // See: https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#adding-client-initialization-parameters
