@@ -237,7 +237,7 @@ interface FileSystem {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
-  @route("?restype=container&comp=list&hierarchy")
+  @route("?restype=container&comp=list")
   listBlobHierarchySegment is DataLakeOperationResponseBody<
     {
       ...PrefixParameter;
