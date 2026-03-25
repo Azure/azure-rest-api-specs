@@ -1082,6 +1082,45 @@ union InMageRcmFailbackRecoveryPointType {
 }
 
 /**
+ * The network access policy for managed disks.
+ */
+union DiskNetworkAccessPolicy {
+  string,
+
+  /**
+   * Allow all network access.
+   */
+  AllowAll: "AllowAll",
+
+  /**
+   * Allow private access through disk access resource.
+   */
+  AllowPrivate: "AllowPrivate",
+
+  /**
+   * Deny all network access.
+   */
+  DenyAll: "DenyAll",
+}
+
+/**
+ * The public network access setting for managed disks.
+ */
+union DiskPublicNetworkAccess {
+  string,
+
+  /**
+   * Public network access is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Public network access is disabled.
+   */
+  Disabled: "Disabled",
+}
+
+/**
  * The progress health.
  */
 union DiskReplicationProgressHealth {
@@ -6550,6 +6589,21 @@ model A2AVmManagedDiskInputDetails {
    * The recovery disk encryption information (for one / single pass flows).
    */
   diskEncryptionInfo?: DiskEncryptionInfo;
+
+  /**
+   * The network access policy for the recovery managed disk.
+   */
+  recoveryNetworkAccessPolicy?: DiskNetworkAccessPolicy;
+
+  /**
+   * The recovery disk access Arm Id.
+   */
+  recoveryDiskAccessId?: string;
+
+  /**
+   * The public network access setting for the recovery managed disk.
+   */
+  recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
 }
 
 /**
@@ -7747,6 +7801,21 @@ model A2AProtectedManagedDiskDetails {
    * The test failover name for the managed disk.
    */
   tfoDiskName?: string;
+
+  /**
+   * The network access policy for the recovery managed disk.
+   */
+  recoveryNetworkAccessPolicy?: DiskNetworkAccessPolicy;
+
+  /**
+   * The recovery disk access Arm Id.
+   */
+  recoveryDiskAccessId?: string;
+
+  /**
+   * The public network access setting for the recovery managed disk.
+   */
+  recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
 }
 
 /**
@@ -9045,6 +9114,21 @@ model A2AVmManagedDiskUpdateDetails {
    * The target disk name for test failover operation.
    */
   tfoDiskName?: string;
+
+  /**
+   * The network access policy for the recovery managed disk.
+   */
+  recoveryNetworkAccessPolicy?: DiskNetworkAccessPolicy;
+
+  /**
+   * The recovery disk access Arm Id.
+   */
+  recoveryDiskAccessId?: string;
+
+  /**
+   * The public network access setting for the recovery managed disk.
+   */
+  recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
 }
 
 /**
