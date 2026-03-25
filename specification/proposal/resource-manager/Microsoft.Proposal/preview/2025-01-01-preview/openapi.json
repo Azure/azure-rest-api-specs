@@ -47,6 +47,9 @@
     },
     {
       "name": "ProductResources"
+    },
+    {
+      "name": "LineItemResources"
     }
   ],
   "paths": {
@@ -480,6 +483,309 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Proposal/proposals/{name}/lineItems": {
+      "get": {
+        "operationId": "LineItemResources_ListByParent",
+        "tags": [
+          "LineItemResources"
+        ],
+        "description": "List LineItemResource resources by ProposalResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the proposal",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LineItemResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LineItemResources_ListByParent": {
+            "$ref": "./examples/LineItemResources_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Proposal/proposals/{name}/lineItems/{lineItemName}": {
+      "get": {
+        "operationId": "LineItemResources_Get",
+        "tags": [
+          "LineItemResources"
+        ],
+        "description": "Get a LineItemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the proposal",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "lineItemName",
+            "in": "path",
+            "description": "The name of the line item.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LineItemResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LineItemResources_Get": {
+            "$ref": "./examples/LineItemResources_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LineItemResources_CreateOrUpdate",
+        "tags": [
+          "LineItemResources"
+        ],
+        "description": "Create a LineItemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the proposal",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "lineItemName",
+            "in": "path",
+            "description": "The name of the line item.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LineItemResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LineItemResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LineItemResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'LineItemResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LineItemResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LineItemResources_CreateOrUpdate": {
+            "$ref": "./examples/LineItemResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LineItemResources_Update",
+        "tags": [
+          "LineItemResources"
+        ],
+        "description": "Update a LineItemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the proposal",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "lineItemName",
+            "in": "path",
+            "description": "The name of the line item.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LineItemResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LineItemResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LineItemResources_Update": {
+            "$ref": "./examples/LineItemResources_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "LineItemResources_Delete",
+        "tags": [
+          "LineItemResources"
+        ],
+        "description": "Delete a LineItemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the proposal",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "lineItemName",
+            "in": "path",
+            "description": "The name of the line item.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LineItemResources_Delete": {
+            "$ref": "./examples/LineItemResources_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -502,77 +808,124 @@
         }
       ]
     },
-    "LineItem": {
+    "LineItemResource": {
       "type": "object",
-      "description": "The line items to purchase in the proposal.",
+      "description": "A LineItem resource nested under a Proposal.",
       "properties": {
-        "productCode": {
-          "type": "string",
-          "description": "The product code of the line item as a UUID that uniquely identifies this line item within the proposal."
+        "properties": {
+          "$ref": "#/definitions/LineItemResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LineItemResourceListResult": {
+      "type": "object",
+      "description": "The response of a LineItemResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LineItemResource items on this page",
+          "items": {
+            "$ref": "#/definitions/LineItemResource"
+          }
         },
-        "resourceUri": {
+        "nextLink": {
           "type": "string",
-          "description": "The resource URI of the line item.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/LineItemStatus",
-          "description": "The status of the line item.",
-          "readOnly": true
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "The error code if any error occurs during processing the line item.",
-          "readOnly": true
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "The error message if any error occurs during processing the line item.",
-          "readOnly": true
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
-        "productCode"
+        "value"
+      ]
+    },
+    "LineItemResourceProperties": {
+      "type": "object",
+      "description": "Properties of the LineItem resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The product code of the line item."
+        },
+        "status": {
+          "$ref": "#/definitions/LineItemStatus",
+          "description": "The status of the line item."
+        },
+        "resourceUri": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource URI of the ARM resource associated with the line item."
+        }
+      },
+      "required": [
+        "productCode",
+        "status"
+      ]
+    },
+    "LineItemResourcePropertiesUpdate": {
+      "type": "object",
+      "description": "Properties of the LineItem resource.",
+      "properties": {
+        "productCode": {
+          "type": "string",
+          "description": "The product code of the line item."
+        },
+        "status": {
+          "$ref": "#/definitions/LineItemStatus",
+          "description": "The status of the line item."
+        },
+        "resourceUri": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource URI of the ARM resource associated with the line item."
+        }
+      }
+    },
+    "LineItemResourceUpdate": {
+      "type": "object",
+      "description": "A LineItem resource nested under a Proposal.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LineItemResourcePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "LineItemStatus": {
       "type": "string",
-      "description": "The status of the line item in the proposal.",
+      "description": "The status of the line item.",
       "enum": [
-        "NotDeployed",
-        "Success",
-        "InProgress",
-        "Canceled",
-        "Failed"
+        "Pending",
+        "Completed"
       ],
       "x-ms-enum": {
         "name": "LineItemStatus",
         "modelAsString": true,
         "values": [
           {
-            "name": "NotDeployed",
-            "value": "NotDeployed",
-            "description": "NotDeployed - Initial status when a line item is created."
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Pending - The line item is pending processing."
           },
           {
-            "name": "Success",
-            "value": "Success",
-            "description": "Success - status when a line item is successfully deployed."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "InProgress - status when a line item deployment is in progress."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Canceled - status when a line item deployment is canceled."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed - status when a line item deployment has failed."
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed - The line item has been successfully completed."
           }
         ]
       }
@@ -681,15 +1034,18 @@
           "$ref": "#/definitions/ProposalStatus",
           "description": "The proposal status."
         },
-        "lineItems": {
-          "type": "array",
-          "description": "The list of line items associated with the proposal.",
-          "items": {
-            "$ref": "#/definitions/LineItem"
-          },
-          "x-ms-identifiers": [
-            "productCode"
-          ]
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the proposal was created."
+        },
+        "quoteId": {
+          "type": "string",
+          "description": "The quote identifier associated with the proposal."
+        },
+        "dealId": {
+          "type": "string",
+          "description": "The deal identifier associated with the proposal."
         }
       },
       "required": [
@@ -708,15 +1064,18 @@
           "$ref": "#/definitions/ProposalStatus",
           "description": "The proposal status."
         },
-        "lineItems": {
-          "type": "array",
-          "description": "The list of line items associated with the proposal.",
-          "items": {
-            "$ref": "#/definitions/LineItem"
-          },
-          "x-ms-identifiers": [
-            "productCode"
-          ]
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the proposal was created."
+        },
+        "quoteId": {
+          "type": "string",
+          "description": "The quote identifier associated with the proposal."
+        },
+        "dealId": {
+          "type": "string",
+          "description": "The deal identifier associated with the proposal."
         }
       }
     },

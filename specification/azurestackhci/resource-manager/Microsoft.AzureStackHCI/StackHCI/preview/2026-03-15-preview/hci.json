@@ -109,6 +109,9 @@
       "name": "EdgeMachineJobs"
     },
     {
+      "name": "EdgeMachineMetadataOperations"
+    },
+    {
       "name": "EdgeMachineGpus"
     },
     {
@@ -7078,6 +7081,9 @@
         "x-ms-examples": {
           "EdgeMachineDiskJobs_Get": {
             "$ref": "./examples/EdgeMachineDiskJobs_Get.json"
+          },
+          "EdgeMachineDiskJobs_Get_SyncConfiguration": {
+            "$ref": "./examples/EdgeMachineDiskJobs_Get_SyncConfiguration.json"
           }
         }
       },
@@ -7165,6 +7171,9 @@
         "x-ms-examples": {
           "EdgeMachineDiskJobs_CreateOrUpdate": {
             "$ref": "./examples/EdgeMachineDiskJobs_CreateOrUpdate.json"
+          },
+          "EdgeMachineDiskJobs_CreateOrUpdate_SyncConfiguration": {
+            "$ref": "./examples/EdgeMachineDiskJobs_CreateOrUpdate_SyncConfiguration.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7529,6 +7538,262 @@
         "x-ms-examples": {
           "EdgeMachineDiskPrivilegedJobs_Delete": {
             "$ref": "./examples/EdgeMachineDiskPrivilegedJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/edgeMachineMetadata": {
+      "get": {
+        "operationId": "EdgeMachineMetadataOperations_List",
+        "tags": [
+          "EdgeMachineMetadataOperations"
+        ],
+        "description": "List EdgeMachine metadata resources by EdgeMachine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineMetadataListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineMetadata_List": {
+            "$ref": "./examples/EdgeMachineMetadata_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/edgeMachineMetadata/{default}": {
+      "get": {
+        "operationId": "EdgeMachineMetadataOperations_Get",
+        "tags": [
+          "EdgeMachineMetadataOperations"
+        ],
+        "description": "Get EdgeMachine metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Name of EdgeMachine metadata",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineMetadata_Get": {
+            "$ref": "./examples/EdgeMachineMetadata_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EdgeMachineMetadataOperations_CreateOrUpdate",
+        "tags": [
+          "EdgeMachineMetadataOperations"
+        ],
+        "description": "Create or update EdgeMachine metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Name of EdgeMachine metadata",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineMetadata"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EdgeMachineMetadata' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineMetadata"
+            }
+          },
+          "201": {
+            "description": "Resource 'EdgeMachineMetadata' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineMetadata"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineMetadata_CreateOrUpdate": {
+            "$ref": "./examples/EdgeMachineMetadata_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeMachineMetadataOperations_Delete",
+        "tags": [
+          "EdgeMachineMetadataOperations"
+        ],
+        "description": "Delete EdgeMachine metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Name of EdgeMachine metadata",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineMetadata_Delete": {
+            "$ref": "./examples/EdgeMachineMetadata_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8598,6 +8863,12 @@
         "x-ms-examples": {
           "EdgeMachineNetworkAdapterJobs_Get": {
             "$ref": "./examples/EdgeMachineNetworkAdapterJobs_Get.json"
+          },
+          "EdgeMachineNetworkAdapterJobs_Get_ForcePush": {
+            "$ref": "./examples/EdgeMachineNetworkAdapterJobs_Get_ForcePush.json"
+          },
+          "EdgeMachineNetworkAdapterJobs_Get_SyncConfiguration": {
+            "$ref": "./examples/EdgeMachineNetworkAdapterJobs_Get_SyncConfiguration.json"
           }
         }
       },
@@ -8685,6 +8956,12 @@
         "x-ms-examples": {
           "EdgeMachineNetworkAdapterJobs_CreateOrUpdate": {
             "$ref": "./examples/EdgeMachineNetworkAdapterJobs_CreateOrUpdate.json"
+          },
+          "EdgeMachineNetworkAdapterJobs_CreateOrUpdate_ForcePush": {
+            "$ref": "./examples/EdgeMachineNetworkAdapterJobs_CreateOrUpdate_ForcePush.json"
+          },
+          "EdgeMachineNetworkAdapterJobs_CreateOrUpdate_SyncConfiguration": {
+            "$ref": "./examples/EdgeMachineNetworkAdapterJobs_CreateOrUpdate_SyncConfiguration.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8761,6 +9038,80 @@
         "x-ms-examples": {
           "EdgeMachineNetworkAdapterJobs_Delete": {
             "$ref": "./examples/EdgeMachineNetworkAdapterJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/validate": {
+      "post": {
+        "operationId": "EdgeMachines_Validate",
+        "tags": [
+          "EdgeMachines"
+        ],
+        "description": "A long-running resource action to validate the edge machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineValidateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineValidateResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachines_Validate": {
+            "$ref": "./examples/EdgeMachines_Validate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9098,6 +9449,25 @@
           }
         ]
       }
+    },
+    "ApplyConfigurationNetworkAdapterJobProperties": {
+      "type": "object",
+      "description": "Properties for applying network adapter configuration.",
+      "properties": {
+        "targetConfiguration": {
+          "$ref": "#/definitions/NetworkAdapterConfiguration",
+          "description": "The desired network configuration to apply."
+        }
+      },
+      "required": [
+        "targetConfiguration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineNetworkAdapterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ApplyConfiguration"
     },
     "ArcConnectivityProperties": {
       "type": "object",
@@ -9648,6 +10018,16 @@
         }
       ]
     },
+    "ClusterBillingProperties": {
+      "type": "object",
+      "description": "Billing properties of the cluster.",
+      "properties": {
+        "nextBillingModel": {
+          "$ref": "#/definitions/NextBillingModel",
+          "description": "The next billing model to be applied to the cluster."
+        }
+      }
+    },
     "ClusterDesiredProperties": {
       "type": "object",
       "description": "Desired properties of the cluster.",
@@ -10090,6 +10470,11 @@
         "billingModel": {
           "type": "string",
           "description": "Type of billing applied to the resource.",
+          "readOnly": true
+        },
+        "billingProperties": {
+          "$ref": "#/definitions/ClusterBillingProperties",
+          "description": "Billing properties of the cluster, including upcoming billing model details.",
           "readOnly": true
         },
         "registrationTimestamp": {
@@ -13776,6 +14161,57 @@
         "value"
       ]
     },
+    "EdgeMachineMetadata": {
+      "type": "object",
+      "description": "EdgeMachine Metadata resource that stores validated recipe details for an edge machine.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeMachineMetadataProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EdgeMachineMetadataListResult": {
+      "type": "object",
+      "description": "The response of a EdgeMachineMetadata list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeMachineMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeMachineMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EdgeMachineMetadataProperties": {
+      "type": "object",
+      "description": "Edge machine metadata properties.",
+      "properties": {
+        "validatedRecipe": {
+          "type": "string",
+          "description": "Validated Recipe name or identifier."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the metadata resource.",
+          "readOnly": true
+        }
+      }
+    },
     "EdgeMachineNetworkAdapter": {
       "type": "object",
       "description": "Edge Machine Network Adapter Resource.",
@@ -13839,10 +14275,6 @@
             "create"
           ]
         },
-        "targetConfiguration": {
-          "$ref": "#/definitions/NetworkAdapterConfiguration",
-          "description": "The desired network configuration to apply."
-        },
         "deploymentMode": {
           "$ref": "#/definitions/DeploymentMode",
           "description": "Deployment mode to trigger job."
@@ -13885,9 +14317,9 @@
           "readOnly": true
         }
       },
+      "discriminator": "jobType",
       "required": [
-        "jobType",
-        "targetConfiguration"
+        "jobType"
       ]
     },
     "EdgeMachineNetworkAdapterListResult": {
@@ -14432,6 +14864,46 @@
         ]
       }
     },
+    "EdgeMachineValidateRequest": {
+      "type": "object",
+      "description": "The validate request for Edge Machine.",
+      "properties": {
+        "edgeMachineIds": {
+          "type": "array",
+          "description": "Machine Ids against which, current machine has to be validated.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.AzureStackHCI/edgeMachines"
+                }
+              ]
+            }
+          }
+        },
+        "additionalInfo": {
+          "type": "string",
+          "description": "Additional info required for validation."
+        }
+      },
+      "required": [
+        "edgeMachineIds"
+      ]
+    },
+    "EdgeMachineValidateResponse": {
+      "type": "object",
+      "description": "The validate response for Edge Machine.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Edge machine validation status.",
+          "readOnly": true
+        }
+      }
+    },
     "EdgeMachineVolume": {
       "type": "object",
       "description": "Volume resource representing a storage volume on an Edge Machine.",
@@ -14889,6 +15361,16 @@
           "description": "Extension Upgrade Target Version."
         }
       }
+    },
+    "ForcePushNetworkAdapterJobProperties": {
+      "type": "object",
+      "description": "Properties for force push of network adapter configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineNetworkAdapterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ForcePush"
     },
     "GpuCreatePartitionJobProperties": {
       "type": "object",
@@ -16954,7 +17436,8 @@
       "description": "Type of network adapter job operation.",
       "enum": [
         "ApplyConfiguration",
-        "ForcePush"
+        "ForcePush",
+        "SyncConfiguration"
       ],
       "x-ms-enum": {
         "name": "NetworkAdapterJobType",
@@ -16969,6 +17452,11 @@
             "name": "ForcePush",
             "value": "ForcePush",
             "description": "Force push configuration to the network adapter."
+          },
+          {
+            "name": "SyncConfiguration",
+            "value": "SyncConfiguration",
+            "description": "Job to resolve configuration drift between desired and reported state."
           }
         ]
       }
@@ -17738,6 +18226,28 @@
       "required": [
         "id"
       ]
+    },
+    "NextBillingModel": {
+      "type": "object",
+      "description": "Details of the next billing model for the cluster.",
+      "properties": {
+        "billingModel": {
+          "type": "string",
+          "description": "Type of billing model."
+        },
+        "capabilitiesEnabled": {
+          "type": "array",
+          "description": "Capabilities enabled under this billing model.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trialDaysRemaining": {
+          "type": "number",
+          "format": "float",
+          "description": "Number of days remaining in the trial period."
+        }
+      }
     },
     "NicDetail": {
       "type": "object",
@@ -19610,8 +20120,62 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "remoteSupportProvisioningState": {
+          "$ref": "#/definitions/RemoteSupportProvisioningState",
+          "description": "Provisioning state of remote support operations.",
+          "readOnly": true
         }
       }
+    },
+    "RemoteSupportProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of remote support operations on the cluster.",
+      "enum": [
+        "None",
+        "GrantInProgress",
+        "RevokeInProgress",
+        "Succeeded",
+        "PartiallySucceeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No operation is in progress."
+          },
+          {
+            "name": "GrantInProgress",
+            "value": "GrantInProgress",
+            "description": "A grant (enable) operation is in progress."
+          },
+          {
+            "name": "RevokeInProgress",
+            "value": "RevokeInProgress",
+            "description": "A revoke operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The last operation completed successfully on all nodes."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The last operation succeeded on some nodes but failed on others."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The last operation failed on all nodes."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "RemoteSupportRequest": {
       "type": "object",
@@ -21062,15 +21626,6 @@
           "x-ms-mutability": [
             "create"
           ]
-        },
-        "driftDetails": {
-          "type": "array",
-          "description": "Details of the detected drift.",
-          "items": {
-            "$ref": "#/definitions/DriftDetail"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -21079,6 +21634,28 @@
       "allOf": [
         {
           "$ref": "#/definitions/EdgeMachineDiskJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SyncConfiguration"
+    },
+    "SyncConfigurationNetworkAdapterJobProperties": {
+      "type": "object",
+      "description": "Properties for resolving network adapter configuration drift.",
+      "properties": {
+        "resolutionStrategy": {
+          "$ref": "#/definitions/ResolutionStrategy",
+          "description": "The strategy to use for resolving the configuration drift.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "resolutionStrategy"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineNetworkAdapterJobProperties"
         }
       ],
       "x-ms-discriminator-value": "SyncConfiguration"

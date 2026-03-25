@@ -141,9 +141,24 @@ interface RecoveryPlanActions {
   @route(ServiceGroupRoute)
   @post
   @doc("This action checks if the recovery orchestration plan is eligible for reprotect operation, ensuring it meets the necessary criteria and provides a list of qualified and unqualified resources.")
-  validateForReprotect is ArmResourceActionAsync<
+  @removed(Versions.v2026_03_01_preview)
+  @renamedFrom(Versions.v2026_03_01_preview, "validateForReprotect")
+  @sharedRoute
+  validateForReprotectOld is ArmResourceActionAsync<
     RecoveryPlan,
     void,
+    ValidateForRecoveryOperationBaseResponse,
+    ServiceGroupAndRequestHeadersParameters
+  >;
+
+  @route(ServiceGroupRoute)
+  @post
+  @doc("This action checks if the recovery orchestration plan is eligible for reprotect operation, ensuring it meets the necessary criteria and provides a list of qualified and unqualified resources.")
+  @added(Versions.v2026_03_01_preview)
+  @sharedRoute
+  validateForReprotect is ArmResourceActionAsync<
+    RecoveryPlan,
+    ReprotectRequest,
     ValidateForRecoveryOperationBaseResponse,
     ServiceGroupAndRequestHeadersParameters
   >;
@@ -184,9 +199,24 @@ interface RecoveryPlanActions {
   @route(ServiceGroupRoute)
   @post
   @doc("This action triggers the reprotect operation on the recovery orchestration plan for the qualified resources.")
-  reprotect is ArmResourceActionAsync<
+  @removed(Versions.v2026_03_01_preview)
+  @renamedFrom(Versions.v2026_03_01_preview, "reprotect")
+  @sharedRoute
+  reprotectOld is ArmResourceActionAsync<
     RecoveryPlan,
     void,
+    RecoveryPlanActionBaseResponse,
+    ServiceGroupAndRequestHeadersParameters
+  >;
+
+  @route(ServiceGroupRoute)
+  @post
+  @doc("This action triggers the reprotect operation on the recovery orchestration plan for the qualified resources.")
+  @added(Versions.v2026_03_01_preview)
+  @sharedRoute
+  reprotect is ArmResourceActionAsync<
+    RecoveryPlan,
+    ReprotectRequest,
     RecoveryPlanActionBaseResponse,
     ServiceGroupAndRequestHeadersParameters
   >;

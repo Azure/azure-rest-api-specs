@@ -36,6 +36,7 @@ import "./UpdateSummaries.tsp";
 import "./ValidatedSolutionRecipe.tsp";
 import "./EdgeMachine.tsp";
 import "./EdgeMachineJobs.tsp";
+import "./EdgeMachineMetadata.tsp";
 import "./EdgeMachineGpu.tsp";
 import "./EdgeMachineStorage.tsp";
 import "./EdgeMachineNetworkAdapters.tsp";
