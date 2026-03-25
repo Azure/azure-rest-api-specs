@@ -15354,21 +15354,21 @@ model AmazonRedshiftLinkedServiceTypeProperties {
    */
   port?: Dfe<int32>;
   
-    /**
-   * The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0. Type: string.
-   */
-  sslMode?: Dfe<string>;
-
-  /**
-   * Specifies whether the driver checks the authenticity of the IdP server certificate. The default value is False. Only used for Version 2.0. Type: string.
-   */
-  sslInsecure?: Dfe<boolean>;
-  
   /**
    * The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   encryptedCredential?: string;
+
+      /**
+   * The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0. Type: string.
+   */
+  sslMode?: Dfe<string>;
+
+  /**
+   * Specifies whether the driver checks the authenticity of the IdP server certificate. The default value is False. Only used for Version 2.0. Type: boolean.
+   */
+  sslInsecure?: Dfe<boolean>;
 }
 
 /**
