@@ -1920,50 +1920,59 @@ op replaceprivateDnsZoneGroupsList(
   string,
   "javascript"
 );
-@@clientLocation(BastionHosts.putBastionShareableLink, CombineClient, "python");
+@@clientLocation(BastionHosts.putBastionShareableLink,
+  CombineClient,
+  "python,javascript"
+);
 @@clientLocation(BastionHosts.deleteBastionShareableLink,
   CombineClient,
-  "python"
+  "python,javascript"
 );
 @@clientLocation(BastionHosts.deleteBastionShareableLinkByToken,
   CombineClient,
-  "python"
+  "python,javascript"
 );
-@@clientLocation(BastionHosts.getBastionShareableLink, CombineClient, "python");
-@@clientLocation(BastionHosts.getActiveSessions, CombineClient, "python");
+@@clientLocation(BastionHosts.getBastionShareableLink,
+  CombineClient,
+  "python,javascript"
+);
+@@clientLocation(BastionHosts.getActiveSessions,
+  CombineClient,
+  "python,javascript"
+);
 @@clientLocation(BastionHosts.disconnectActiveSessions,
   CombineClient,
-  "python"
+  "python,javascript"
 );
 @@clientLocation(CheckDnsNameAvailability.checkDnsNameAvailability,
   CombineClient,
-  "python"
+  "python,javascript"
 );
 @@clientLocation(ExpressRouteProviderPorts.expressRouteProviderPort,
   CombineClient,
-  "python"
+  "python,javascript"
 );
 @@clientLocation(NetworkManagers.listActiveConnectivityConfigurations,
   CombineClient,
-  "python"
+  "python,javascript"
 );
 @@clientLocation(NetworkManagers.listActiveSecurityAdminRules,
   CombineClient,
-  "python"
+  "python,javascript"
 );
 @@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
   CombineClient,
-  "python"
+  "python,javascript"
 );
 @@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
   CombineClient,
-  "python"
+  "python,javascript"
 );
 @@clientLocation(VirtualWans.supportedSecurityProviders,
   CombineClient,
-  "python"
+  "python,javascript"
 );
 @@clientLocation(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
   CombineClient,
-  "python"
+  "python,javascript"
 );

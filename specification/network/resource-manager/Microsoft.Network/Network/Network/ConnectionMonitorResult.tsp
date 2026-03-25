@@ -104,6 +104,8 @@ interface ConnectionMonitorResults {
     Response = {
       @body body: void;
     },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>,
     Error = ErrorResponse
   >;
 }
