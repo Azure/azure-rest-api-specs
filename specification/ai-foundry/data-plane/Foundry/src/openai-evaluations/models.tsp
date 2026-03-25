@@ -48,7 +48,7 @@ model GraderAzureAIEvaluator {
   evaluator_version?: string;
 
   /** The initialization parameters for the evaluation. Must support structured outputs. */
-  initialization_parameters?: {};
+  initialization_parameters?: Record<unknown>;
 
   /** The model to use for the evaluation. Must support structured outputs. */
   data_mapping?: Record<string>;
