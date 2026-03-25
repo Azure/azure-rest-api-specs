@@ -5,5 +5,9 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.ContainerInstance,
   "ContainerInstanceManagementClient",
-  "javascript"
+  "javascript,python"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.Resource,
+  "ArmResource",
+  "python"
 );
