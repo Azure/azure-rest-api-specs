@@ -51,8 +51,6 @@ interface ServiceGroups {
   /**
    * Create or Update a serviceGroup
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CreateOrUpdateServiceGroup")
   createOrUpdateServiceGroup is ArmResourceCreateOrReplaceAsync<
     ServiceGroup,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
@@ -61,8 +59,6 @@ interface ServiceGroups {
   /**
    * Update a serviceGroup
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UpdateServiceGroup")
   @patch(#{ implicitOptionality: false })
   updateServiceGroup is ArmCustomPatchAsync<
     ServiceGroup,
@@ -73,8 +69,6 @@ interface ServiceGroups {
   /**
    * Delete a ServiceGroup
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeleteServiceGroup")
   deleteServiceGroup is ArmResourceDeleteWithoutOkAsync<
     ServiceGroup,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
