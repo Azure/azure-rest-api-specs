@@ -203,7 +203,10 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
       apiViewRequestData,
       sdkGenerationExecuted,
     ) || statusCode;
-  return { statusCode, executionResult: overallExecutionResult as CommandResult["executionResult"] };
+  return {
+    statusCode,
+    executionResult: overallExecutionResult as CommandResult["executionResult"],
+  };
 }
 
 /**
@@ -347,9 +350,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
     markdownContent += `${succeededContent}\n`;
   }
   markdownContent += failedCount ? `## Total Failed Specs\n ${failedCount}\n` : "";
-  markdownContent += warningCount
-    ? `## Total Specs with Warnings\n ${warningCount}\n`
-    : "";
+  markdownContent += warningCount ? `## Total Specs with Warnings\n ${warningCount}\n` : "";
   markdownContent += notEnabledCount
     ? `## Total Specs with SDK not enabled in the Configuration\n ${notEnabledCount}\n`
     : "";
@@ -401,6 +402,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   // Set the pipeline variables for artifacts location
   setPipelineVariables(stagedArtifactsFolder);
 
-  const batchExecutionResult = failedCount > 0 ? "failed" : warningCount > 0 ? "warning" : "succeeded";
+  const batchExecutionResult =
+    failedCount > 0 ? "failed" : warningCount > 0 ? "warning" : "succeeded";
   return { statusCode, executionResult: batchExecutionResult };
 }
