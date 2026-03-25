@@ -64,8 +64,9 @@ model DataGenerationJob {
   @visibility(Lifecycle.Read)
   status: DataGenerationJobStatus;
 
-  @doc("The output information of the data generation job, which includes the output file type and the identifiers of the generated output.")
-  output?: DataGenerationJobOutput;
+  @doc("The outputs generated from the job. This field will be populated only after the job is completed.")
+  @visibility(Lifecycle.Read)
+  outputs?: Array<DataGenerationJobOutput>;
 
   @doc("The number of samples actually generated. This field will be populated only after the job is completed.")
   @visibility(Lifecycle.Read)
@@ -98,11 +99,18 @@ model DataGenerationJob {
 @doc("Output information for a data generation job.")
 model DataGenerationJobOutput {
   @doc("The type of the output. If not specified, it will default to File type.")
-  type?: DataGenerationJobOutputFileType;
+  type: DataGenerationJobOutputFileType;
 
-  @doc("The identifiers of the output only available after the job is completed. For Finetuning supervised training jobs with File output type, the size of array will be 2 and for other file types & purpose, this will be always 1.")
+  @doc("The id of the output Azure OpenAI file or dataset.")
+  id: string;
+
+  @doc("The name of the file or dataset generated.")
   @visibility(Lifecycle.Read)
-  ids: Array<string>;
+  name?: string;
+
+  @doc("The version of the dataset. Applicable only for dataset output type.")
+  @visibility(Lifecycle.Read)
+  version?: string;
 }
 
 @doc("The supported output file types for a data generation job.")
@@ -155,8 +163,11 @@ union DataGenerationJobSourceType {
   @doc("Prompt source type. Data is generated based on input prompts provided by the user or will be extracted from the given Agent. Applicable only for evaluation purpose.")
   Prompt: "Prompt",
 
-  @doc("Seed data files source type. Data is generated based on input seed data files from the given input datasets. Applicable only for fine-tuning training purpose.")
-  SeedDataFiles: "SeedDataFiles",
+  @doc("File source type. Data is generated based on input Azure Open AI file.")
+  File: "File",
+
+  @doc("The dataset source type. Data is generated based on input dataset.")
+  Dataset: "Dataset",
 }
 
 @doc("Options for managing data generation jobs.")
@@ -234,13 +245,24 @@ model PromptDataGenerationJobSource extends DataGenerationJobSource {
   agent_version?: string;
 }
 
-@doc("The options for a data generation job with SeedDataFiles source, which includes the input seed data files for data generation.")
-model SeedDataFilesDataGenerationJobSource extends DataGenerationJobSource {
-  @doc("The source type for this job, which is SeedDataFiles.")
-  type: "SeedDataFiles";
+@doc("The options for a data generation job with File source, which includes the input files for data generation.")
+model FileDataGenerationJobSource extends DataGenerationJobSource {
+  @doc("The source type for this job, which is File.")
+  type: "File";
 
-  @doc("Input seed data file references (can be dataset IDs or Azure Open AI file ids) used for data generation. The dataset should already exist before creating the job.")
-  seed_data_files: Array<string>;
+  @doc("Input Azure Open AI file id references used for data generation.")
+  file_id: string;
+}
+
+model DatasetDataGenerationJobSource extends DataGenerationJobSource {
+  @doc("The source type for this job, which is Dataset.")
+  type: "Dataset";
+
+  @doc("Input dataset name used for data generation.")
+  name: string;
+
+  @doc("Input dataset version used for data generation. If not specified, the latest version of the dataset will be used.")
+  version?: string;
 }
 
 @doc("The supported question types for SimpleQnA data generation jobs used for supervised fine-tuning training.")

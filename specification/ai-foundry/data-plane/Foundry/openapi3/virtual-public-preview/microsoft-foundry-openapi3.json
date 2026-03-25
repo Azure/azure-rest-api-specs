@@ -13024,13 +13024,13 @@
             "description": "The current status of the job.",
             "readOnly": true
           },
-          "output": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobOutput"
-              }
-            ],
-            "description": "The output information of the data generation job, which includes the output file type and the identifiers of the generated output."
+          "outputs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataGenerationJobOutput"
+            },
+            "description": "The outputs generated from the job. This field will be populated only after the job is completed.",
+            "readOnly": true
           },
           "generated_samples_count": {
             "type": "integer",
@@ -13124,7 +13124,8 @@
       "DataGenerationJobOutput": {
         "type": "object",
         "required": [
-          "ids"
+          "type",
+          "id"
         ],
         "properties": {
           "type": {
@@ -13135,12 +13136,18 @@
             ],
             "description": "The type of the output. If not specified, it will default to File type."
           },
-          "ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The identifiers of the output only available after the job is completed. For Finetuning supervised training jobs with File output type, the size of array will be 2 and for other file types & purpose, this will be always 1.",
+          "id": {
+            "type": "string",
+            "description": "The id of the output Azure OpenAI file or dataset."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the file or dataset generated.",
+            "readOnly": true
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the dataset. Applicable only for dataset output type.",
             "readOnly": true
           }
         },
@@ -13197,7 +13204,8 @@
           "mapping": {
             "Traces": "#/components/schemas/TracesDataGenerationJobSource",
             "Prompt": "#/components/schemas/PromptDataGenerationJobSource",
-            "SeedDataFiles": "#/components/schemas/SeedDataFilesDataGenerationJobSource"
+            "File": "#/components/schemas/FileDataGenerationJobSource",
+            "Dataset": "#/components/schemas/DatasetDataGenerationJobSource"
           }
         },
         "description": "The base source model for a data generation job."
@@ -13212,7 +13220,8 @@
             "enum": [
               "Traces",
               "Prompt",
-              "SeedDataFiles"
+              "File",
+              "Dataset"
             ]
           }
         ],
@@ -13287,6 +13296,35 @@
           "mapping": {}
         },
         "description": "Base class for run data sources with discriminator support."
+      },
+      "DatasetDataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Dataset"
+            ],
+            "description": "The source type for this job, which is Dataset."
+          },
+          "name": {
+            "type": "string",
+            "description": "Input dataset name used for data generation."
+          },
+          "version": {
+            "type": "string",
+            "description": "Input dataset version used for data generation. If not specified, the latest version of the dataset will be used."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ]
       },
       "DatasetType": {
         "anyOf": [
@@ -15450,6 +15488,32 @@
           }
         },
         "description": "The fabric data agent tool parameters."
+      },
+      "FileDataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "file_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "File"
+            ],
+            "description": "The source type for this job, which is File."
+          },
+          "file_id": {
+            "type": "string",
+            "description": "Input Azure Open AI file id references used for data generation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ],
+        "description": "The options for a data generation job with File source, which includes the input files for data generation."
       },
       "FileDatasetVersion": {
         "type": "object",
@@ -38130,35 +38194,6 @@
           }
         ],
         "description": "Type of the task."
-      },
-      "SeedDataFilesDataGenerationJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "seed_data_files"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "SeedDataFiles"
-            ],
-            "description": "The source type for this job, which is SeedDataFiles."
-          },
-          "seed_data_files": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Input seed data file references (can be dataset IDs or Azure Open AI file ids) used for data generation. The dataset should already exist before creating the job."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobSource"
-          }
-        ],
-        "description": "The options for a data generation job with SeedDataFiles source, which includes the input seed data files for data generation."
       },
       "SharepointGroundingToolCall": {
         "type": "object",
