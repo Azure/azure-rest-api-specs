@@ -155,7 +155,6 @@ union ClusterTier {
 @doc("Properties specific to a MongoDB Atlas Project.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model ProjectProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "projectId is intentionally in both the key and properties for ProjectByName responses"
   @doc("Atlas project id.")
   @visibility(Lifecycle.Read)
   @pattern("^[a-fA-F0-9]{24}$")
@@ -176,42 +175,26 @@ model ProjectProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@doc("The MongoDB Atlas Project resource type identified by project ID. Used for read, delete, list, and action operations.")
+@doc("The MongoDB Atlas Project resource type. A project is a logical grouping of clusters within an organization.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 @parentResource(OrganizationResource)
 model Project is ProxyResource<ProjectProperties> {
-  @key("projectId")
-  @pattern("^[a-fA-F0-9]{24}$")
-  @segment("projects")
-  @minLength(1)
-  @maxLength(24)
-  @doc("Atlas project id.")
-  @path
-  @visibility(Lifecycle.Read)
-  projectId: string;
-}
-
-@doc("The MongoDB Atlas Project resource type identified by project name. Used for create or update operations.")
-@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
-@parentResource(OrganizationResource)
-model ProjectByName is ProxyResource<ProjectProperties> {
   @key("projectName")
   @pattern("^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$")
   @segment("projects")
   @minLength(1)
   @maxLength(64)
-  @doc("Project name in MongoDB Atlas.")
+  @doc("Project name in MongoDB Atlas. For GET, DELETE, and POST actions, this parameter also accepts a project ID.")
   @path
   @visibility(Lifecycle.Read)
   projectName: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "ProjectByName is only used for create/update; delete uses Project (by ID)"
 @armResourceOperations
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 interface Projects {
   get is ArmResourceRead<Project>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ProjectByName>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
   delete is ArmResourceDeleteWithoutOkAsync<Project>;
   list is ArmResourceListByParent<Project>;
 

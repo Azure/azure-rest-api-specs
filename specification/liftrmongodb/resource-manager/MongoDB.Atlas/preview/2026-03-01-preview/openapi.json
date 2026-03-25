@@ -492,7 +492,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}": {
       "get": {
         "operationId": "Projects_Get",
         "tags": [
@@ -520,14 +520,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project id.",
+            "description": "Project name in MongoDB Atlas. For GET, DELETE, and POST actions, this parameter also accepts a project ID.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 24,
-            "pattern": "^[a-fA-F0-9]{24}$"
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           }
         ],
         "responses": {
@@ -549,6 +549,93 @@
             "$ref": "./examples/Projects_Get_MaximumSet_Gen.json"
           }
         }
+      },
+      "put": {
+        "operationId": "Projects_CreateOrUpdate",
+        "tags": [
+          "Projects"
+        ],
+        "description": "Create a Project",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organization resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Project name in MongoDB Atlas. For GET, DELETE, and POST actions, this parameter also accepts a project ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Project' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "201": {
+            "description": "Resource 'Project' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Projects_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Projects_Delete",
@@ -577,14 +664,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project id.",
+            "description": "Project name in MongoDB Atlas. For GET, DELETE, and POST actions, this parameter also accepts a project ID.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 24,
-            "pattern": "^[a-fA-F0-9]{24}$"
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           }
         ],
         "responses": {
@@ -623,96 +710,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}": {
-      "put": {
-        "operationId": "Projects_CreateOrUpdate",
-        "tags": [
-          "Projects"
-        ],
-        "description": "Create a ProjectByName",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Name of the Organization resource",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "Project name in MongoDB Atlas.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProjectByName"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'ProjectByName' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ProjectByName"
-            }
-          },
-          "201": {
-            "description": "Resource 'ProjectByName' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ProjectByName"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Projects_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/Projects_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}/clusterTierRegions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/clusterTierRegions": {
       "post": {
         "operationId": "Projects_ListClusterTierRegions",
         "tags": [
@@ -740,14 +738,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project id.",
+            "description": "Project name in MongoDB Atlas. For GET, DELETE, and POST actions, this parameter also accepts a project ID.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 24,
-            "pattern": "^[a-fA-F0-9]{24}$"
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           }
         ],
         "responses": {
@@ -771,7 +769,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}/clusters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/clusters": {
       "get": {
         "operationId": "Clusters_List",
         "tags": [
@@ -799,14 +797,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project id.",
+            "description": "Project name in MongoDB Atlas. For GET, DELETE, and POST actions, this parameter also accepts a project ID.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 24,
-            "pattern": "^[a-fA-F0-9]{24}$"
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           }
         ],
         "responses": {
@@ -833,7 +831,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}/clusters/{clusterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/clusters/{clusterName}": {
       "get": {
         "operationId": "Clusters_Get",
         "tags": [
@@ -861,14 +859,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project id.",
+            "description": "Project name in MongoDB Atlas. For GET, DELETE, and POST actions, this parameter also accepts a project ID.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 24,
-            "pattern": "^[a-fA-F0-9]{24}$"
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           },
           {
             "name": "clusterName",
@@ -928,14 +926,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project id.",
+            "description": "Project name in MongoDB Atlas. For GET, DELETE, and POST actions, this parameter also accepts a project ID.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 24,
-            "pattern": "^[a-fA-F0-9]{24}$"
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           },
           {
             "name": "clusterName",
@@ -1025,14 +1023,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project id.",
+            "description": "Project name in MongoDB Atlas. For GET, DELETE, and POST actions, this parameter also accepts a project ID.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 24,
-            "pattern": "^[a-fA-F0-9]{24}$"
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           },
           {
             "name": "clusterName",
@@ -1081,7 +1079,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}/tierLimitReached": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/tierLimitReached": {
       "post": {
         "operationId": "Projects_TierLimitReached",
         "tags": [
@@ -1109,14 +1107,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project id.",
+            "description": "Project name in MongoDB Atlas. For GET, DELETE, and POST actions, this parameter also accepts a project ID.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 24,
-            "pattern": "^[a-fA-F0-9]{24}$"
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           }
         ],
         "responses": {
@@ -1592,22 +1590,7 @@
     },
     "Project": {
       "type": "object",
-      "description": "The MongoDB Atlas Project resource type identified by project ID. Used for read, delete, list, and action operations.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProjectProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ProjectByName": {
-      "type": "object",
-      "description": "The MongoDB Atlas Project resource type identified by project name. Used for create or update operations.",
+      "description": "The MongoDB Atlas Project resource type. A project is a logical grouping of clusters within an organization.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProjectProperties",
@@ -1661,7 +1644,7 @@
             "$ref": "#/definitions/Project"
           },
           "x-ms-identifiers": [
-            "projectId",
+            "projectName",
             "id"
           ]
         },
