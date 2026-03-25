@@ -1757,6 +1757,7 @@ model RoleManagementPolicyPimOnlyModeRule extends RoleManagementPolicyRule {
 /**
  * The PIM Only Mode settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PIMOnlyModeSettings {
   /**
    * Determines whether the setting is enabled, disabled or report only.

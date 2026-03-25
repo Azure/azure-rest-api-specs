@@ -13,6 +13,7 @@ namespace Microsoft.Authorization;
 /**
  * Information about current or upcoming role assignment schedule instance
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model RoleAssignmentScheduleInstance
   is Azure.ResourceManager.ExtensionResource<RoleAssignmentScheduleInstanceProperties> {

@@ -13,6 +13,7 @@ namespace Microsoft.Authorization;
 /**
  * Role Assignment schedule request
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model RoleAssignmentScheduleRequest
   is Azure.ResourceManager.ExtensionResource<RoleAssignmentScheduleRequestProperties> {
@@ -24,6 +25,7 @@ model RoleAssignmentScheduleRequest
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{omitTags: true})
 interface RoleAssignmentScheduleRequests {
   /**

@@ -13,6 +13,7 @@ namespace Microsoft.Authorization;
 /**
  * Role Assignment schedule
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model RoleAssignmentSchedule
   is Azure.ResourceManager.ExtensionResource<RoleAssignmentScheduleProperties> {

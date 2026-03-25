@@ -13,6 +13,7 @@ namespace Microsoft.Authorization;
 /**
  * Role management policy
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model RoleManagementPolicy
   is Azure.ResourceManager.ExtensionResource<RoleManagementPolicyProperties> {
