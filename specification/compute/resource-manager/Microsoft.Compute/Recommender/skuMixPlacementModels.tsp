@@ -312,9 +312,9 @@ model VmAttributeMinMaxDouble {
 /** Sku Mix Placement API response. */
 @added(Versions.v2026_05_05_preview)
 model SkuMixPlacementResponse {
-  /** List of deployment choice recommendations. */
+  /** List of placement choice recommendations. */
   @identifiers(#["id"])
-  deploymentChoices: SkuMixPlacementDeploymentChoice[];
+  placementChoices: SkuMixPlacementDeploymentChoice[];
 
   /** Date/time until when the recommendations are valid. */
   validUntil: utcDateTime;

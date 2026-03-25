@@ -25,8 +25,8 @@ model SkuMixPlacementBase
   is Azure.ResourceManager.ProxyResource<SkuMixPlacementProperties> {
   ...ResourceNameParameter<
     Resource = SkuMixPlacementBase,
-    KeyName = "mixPlacementScore",
-    SegmentName = "mixPlacementScores",
+    KeyName = "skuMixPlacementScore",
+    SegmentName = "skuMixPlacementScores",
     NamePattern = ""
   >;
 }

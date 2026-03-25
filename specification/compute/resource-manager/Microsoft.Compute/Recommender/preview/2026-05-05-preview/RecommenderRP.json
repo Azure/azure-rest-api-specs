@@ -89,96 +89,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/mixPlacementScores/recommendations": {
-      "get": {
-        "operationId": "SkuMixPlacementScores_Get",
-        "tags": [
-          "SkuMixPlacementScores"
-        ],
-        "description": "Gets SkuMixPlacement scoring metadata.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SkuMixPlacementBase"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the metadata of SkuMixPlacement Scores.": {
-            "$ref": "./examples/GetSkuMixPlacementScores.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/mixPlacementScores/recommendations/generate": {
-      "post": {
-        "operationId": "SkuMixPlacementScores_Post",
-        "tags": [
-          "SkuMixPlacementScores"
-        ],
-        "description": "Generates placement scores for VM SKU mix placement.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "skuMixPlacementRequest",
-            "in": "body",
-            "description": "SkuMixPlacement request object supplied in the body of the generate operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SkuMixPlacementRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SkuMixPlacementResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Generates SkuMixPlacement scores for VM SKU mix placement with explicit VM sizes.": {
-            "$ref": "./examples/GenerateSkuMixPlacementScores.json"
-          },
-          "Generates SkuMixPlacement scores using VM attribute-based selection.": {
-            "$ref": "./examples/GenerateSkuMixPlacementScoresWithAttributes.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot": {
       "get": {
         "operationId": "SpotPlacementScores_Get",
@@ -262,6 +172,96 @@
         "x-ms-examples": {
           "Returns spot VM placement scores for given configurations.": {
             "$ref": "./examples/GenerateSpotPlacementScores.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/skuMixPlacementScores/recommendations": {
+      "get": {
+        "operationId": "SkuMixPlacementScores_Get",
+        "tags": [
+          "SkuMixPlacementScores"
+        ],
+        "description": "Gets SkuMixPlacement scoring metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuMixPlacementBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the metadata of SkuMixPlacement Scores.": {
+            "$ref": "./examples/GetSkuMixPlacementScores.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/skuMixPlacementScores/recommendations/generate": {
+      "post": {
+        "operationId": "SkuMixPlacementScores_Post",
+        "tags": [
+          "SkuMixPlacementScores"
+        ],
+        "description": "Generates placement scores for VM SKU mix placement.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "skuMixPlacementRequest",
+            "in": "body",
+            "description": "SkuMixPlacement request object supplied in the body of the generate operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkuMixPlacementRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuMixPlacementResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generates SkuMixPlacement scores for VM SKU mix placement with explicit VM sizes.": {
+            "$ref": "./examples/GenerateSkuMixPlacementScores.json"
+          },
+          "Generates SkuMixPlacement scores using VM attribute-based selection.": {
+            "$ref": "./examples/GenerateSkuMixPlacementScoresWithAttributes.json"
           }
         }
       }
@@ -680,9 +680,9 @@
       "type": "object",
       "description": "Sku Mix Placement API response.",
       "properties": {
-        "deploymentChoices": {
+        "placementChoices": {
           "type": "array",
-          "description": "List of deployment choice recommendations.",
+          "description": "List of placement choice recommendations.",
           "items": {
             "$ref": "#/definitions/SkuMixPlacementDeploymentChoice"
           },
@@ -701,7 +701,7 @@
         }
       },
       "required": [
-        "deploymentChoices",
+        "placementChoices",
         "validUntil",
         "partialFulfillmentReason"
       ]
