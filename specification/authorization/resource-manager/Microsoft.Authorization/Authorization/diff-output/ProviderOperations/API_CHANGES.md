@@ -1,11 +1,5 @@
 ## Swagger Changes
 
-### Changes for `x-ms-skip-url-encoding`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/providers/microsoft.Authorization/providerOperations/{resourceProviderNamespace}'].get.parameters[0]['x-ms-skip-url-encoding__deleted']` | deleted | `true` |
-
 ### Changes for `SettableResource`
 
 | Path | Change Type | Value |

@@ -1,11 +1,5 @@
 ## Swagger Changes
 
-### Changes for `tags`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `tags__added` | added | `[{"name":"DenyAssignments"}]` |
-
 ### Changes for `x-ms-odata`
 
 | Path | Change Type | Value |
@@ -63,6 +57,7 @@
 |------|-----------|----------|
 | `definitions.DenyAssignmentProperties.properties.excludePrincipals.items.$ref` | `./common-types.json#/definitions/Principal` | `#/definitions/Principal` |
 | `definitions.DenyAssignmentProperties.properties.principals.items.$ref` | `./common-types.json#/definitions/Principal` | `#/definitions/Principal` |
+| `paths./{denyAssignmentId}.get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/{scope}/providers/microsoft.Authorization/denyAssignments'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/{scope}/providers/microsoft.Authorization/denyAssignments/{denyAssignmentId}'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Authorization/denyAssignments'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |

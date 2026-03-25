@@ -24,6 +24,7 @@ using TypeSpec.Versioning;
 /**
  * Attribute namespaces provide a way to organize attributes associated with Federated Managed Identities. These attributes can also be used in attribute-based access control conditions in Azure role assignments. These operations enable users to manage attribute namespaces at the provider level to guarantee tenant-level uniqueness.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "AuthorizationManagementClient" })
 @versioned(Versions)

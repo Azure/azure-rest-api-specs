@@ -22,7 +22,7 @@ namespace Microsoft.Authorization;
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ProviderOperationsMetadata extends SettableResource {
   @visibility(Lifecycle.Read)
-  @path
+  @path(#{ allowReserved: true })
   @segment("providerOperations")
   @key("resourceProviderNamespace")
   name: string;

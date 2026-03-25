@@ -1,10 +1,19 @@
 {
-  "tags__added": [
-    {
-      "name": "DenyAssignments"
-    }
-  ],
   "paths": {
+    "/{denyAssignmentId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
     "/{scope}/providers/microsoft.Authorization/denyAssignments": {
       "get": {
         "x-ms-odata__deleted": "#/definitions/DenyAssignmentFilter",

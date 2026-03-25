@@ -13,6 +13,7 @@ namespace Microsoft.Authorization;
 /**
  * Deny Assignment
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model DenyAssignment
   is Azure.ResourceManager.ExtensionResource<DenyAssignmentProperties> {
@@ -28,11 +29,17 @@ alias DenyAssignmentForResourceOps = Azure.ResourceManager.Legacy.ExtensionOpera
   {
     ...ApiVersionParameter;
 
+    /**
+     * The ID of the target subscription.
+     */
     @path
     @segment("subscriptions")
     @key
     subscriptionId: string;
 
+    /**
+     * The name of the resource group. The name is case insensitive.
+     */
     @path
     @segment("resourceGroups")
     @key
@@ -41,28 +48,25 @@ alias DenyAssignmentForResourceOps = Azure.ResourceManager.Legacy.ExtensionOpera
     /**
      * The namespace of the resource provider.
      */
-    @path
+    @path(#{ allowReserved: true })
     @segment("providers")
     @key
-    @extension("x-ms-skip-url-encoding", true)
     resourceProviderNamespace: string;
 
     /**
      * The parent resource identity.
      */
-    @path
+    @path(#{ allowReserved: true })
     @segment("")
     @key
-    @extension("x-ms-skip-url-encoding", true)
     parentResourcePath: string;
 
     /**
      * The resource type of the resource.
      */
-    @path
+    @path(#{ allowReserved: true })
     @segment("")
     @key
-    @extension("x-ms-skip-url-encoding", true)
     resourceType: string;
 
     /**
@@ -73,15 +77,33 @@ alias DenyAssignmentForResourceOps = Azure.ResourceManager.Legacy.ExtensionOpera
     @key
     resourceName: string;
 
+    /**
+     * The provider namespace. Always "Microsoft.Authorization".
+     */
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Authorization";
+    providerNamespace: "Microsoft.Authorization";
   },
   {},
   {
     @path
     @segment("denyAssignments")
+    @key
+    denyAssignmentId: string;
+  }
+>;
+
+alias DenyAssignmentIdByIdOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+  },
+  {},
+  {
+    /**
+     * The fully qualified ID of the role assignment including scope, resource name, and resource type. Format: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}. Example: /subscriptions/<SUB_ID>/resourcegroups/<RESOURCE_GROUP>/providers/Microsoft.Authorization/roleAssignments/<ROLE_ASSIGNMENT_NAME>
+     */
+    @path(#{ allowReserved: true })
     @key
     denyAssignmentId: string;
   }
@@ -101,6 +123,9 @@ interface DenyAssignments {
     Extension.ScopeParameter,
     DenyAssignment,
     {
+      /**
+       * The filter to apply on the operation. Use $filter=atScope() to return all deny assignments at or above the scope. Use $filter=denyAssignmentName eq '{name}' to search deny assignments by name at specified scope. Use $filter=principalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. Use $filter=gdprExportPrincipalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. This filter is different from the principalId filter as it returns not only those deny assignments that contain the specified principal is the Principals list but also those deny assignments that contain the specified principal is the ExcludePrincipals list. Additionally, when gdprExportPrincipalId filter is used, only the deny assignment name and description properties are returned.
+       */
       @query("$filter")
       $filter?: string;
     }
@@ -112,6 +137,9 @@ interface DenyAssignments {
   list is ArmListBySubscription<
     DenyAssignment,
     Parameters = {
+      /**
+       * The filter to apply on the operation. Use $filter=atScope() to return all deny assignments at or above the scope. Use $filter=denyAssignmentName eq '{name}' to search deny assignments by name at specified scope. Use $filter=principalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. Use $filter=gdprExportPrincipalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. This filter is different from the principalId filter as it returns not only those deny assignments that contain the specified principal is the Principals list but also those deny assignments that contain the specified principal is the ExcludePrincipals list. Additionally, when gdprExportPrincipalId filter is used, only the deny assignment name and description properties are returned.
+       */
       @query("$filter")
       $filter?: string;
     }
@@ -124,6 +152,9 @@ interface DenyAssignments {
     Extension.ResourceGroup,
     DenyAssignment,
     {
+      /**
+       * The filter to apply on the operation. Use $filter=atScope() to return all deny assignments at or above the scope. Use $filter=denyAssignmentName eq '{name}' to search deny assignments by name at specified scope. Use $filter=principalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. Use $filter=gdprExportPrincipalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. This filter is different from the principalId filter as it returns not only those deny assignments that contain the specified principal is the Principals list but also those deny assignments that contain the specified principal is the ExcludePrincipals list. Additionally, when gdprExportPrincipalId filter is used, only the deny assignment name and description properties are returned.
+       */
       @query("$filter")
       $filter?: string;
     }
@@ -142,6 +173,12 @@ interface DenyAssignments {
       $filter?: string;
     }
   >;
+
+  /**
+   * Gets a deny assignment by ID.
+   */
+  @tag("DenyAssignments")
+  getById is DenyAssignmentIdByIdOps.Read<DenyAssignment>;
 }
 
 @@doc(DenyAssignment.name, "The ID of the deny assignment to get.");

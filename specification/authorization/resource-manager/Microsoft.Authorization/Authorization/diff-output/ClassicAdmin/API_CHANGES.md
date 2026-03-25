@@ -1,11 +1,5 @@
 ## Swagger Changes
 
-### Changes for `tags`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `tags__added` | added | `[{"name":"ClassicAdministrators"},{"name":"ElevateAccess"}]` |
-
 ### Changes for `x-ms-azure-rbac-permissions-required`
 
 | Path | Change Type | Value |

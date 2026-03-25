@@ -12,6 +12,43 @@
     "application/json"
   ],
   "paths": {
+    "/{denyAssignmentId}": {
+      "get": {
+        "operationId": "DenyAssignments_GetById",
+        "tags": [
+          "DenyAssignments"
+        ],
+        "description": "Gets a deny assignment by ID.",
+        "parameters": [
+          {
+            "name": "denyAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DenyAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get deny assignment by ID": {
+            "$ref": "./examples/GetDenyAssignmentById.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/microsoft.Authorization/denyAssignments": {
       "get": {
         "operationId": "DenyAssignments_ListForScope",

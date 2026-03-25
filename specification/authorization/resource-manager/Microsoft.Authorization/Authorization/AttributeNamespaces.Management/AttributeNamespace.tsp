@@ -15,7 +15,7 @@ namespace Microsoft.Authorization;
  * An attribute namespace resource.
  */
 @tenantResource
-model AttributeNamespace is Azure.ResourceManager.ProxyResource<{}> {
+model AttributeNamespace is Azure.ResourceManager.ProxyResource<never> {
   ...ResourceNameParameter<
     Resource = AttributeNamespace,
     KeyName = "attributeNamespace",
@@ -31,7 +31,8 @@ interface AttributeNamespaces {
    */
   get is ArmResourceRead<
     AttributeNamespace,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -39,7 +40,8 @@ interface AttributeNamespaces {
    */
   delete is ArmResourceDeleteSync<
     AttributeNamespace,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -50,7 +52,8 @@ interface AttributeNamespaces {
     AttributeNamespace,
     AttributeNamespaceCreateRequest,
     ArmResponse<AttributeNamespace>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = CloudError
   >;
 }
 
