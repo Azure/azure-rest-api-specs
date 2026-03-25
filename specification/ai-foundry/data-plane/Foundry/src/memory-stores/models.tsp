@@ -11,6 +11,7 @@ const MemoryStoreRequiredPreviews = #{
 };
 
 union MemoryStoreObjectType {
+  string,
   memoryStore: "memory_store",
   memoryStoreDeleted: "memory_store.deleted",
   memoryStoreScopeDeleted: "memory_store.scope.deleted",
@@ -121,6 +122,7 @@ model MemoryStoreOperationUsage {
 @doc("Status of a memory store update operation.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 union MemoryStoreUpdateStatus {
+  string,
   queued: "queued",
   in_progress: "in_progress",
 
