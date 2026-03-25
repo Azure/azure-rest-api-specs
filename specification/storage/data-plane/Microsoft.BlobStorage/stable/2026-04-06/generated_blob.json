@@ -533,7 +533,7 @@
               },
               "x-ms-legal-hold": {
                 "type": "boolean",
-                "description": "Specifies the legal hold status to set on the blob."
+                "description": "Indicates whether the blob has a legal hold."
               },
               "x-ms-meta": {
                 "type": "string",
@@ -899,7 +899,7 @@
               },
               "x-ms-legal-hold": {
                 "type": "boolean",
-                "description": "Specifies the legal hold status to set on the blob."
+                "description": "Indicates whether the blob has a legal hold."
               },
               "x-ms-meta": {
                 "type": "string",
@@ -949,7 +949,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -1324,17 +1324,6 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
-          },
-          {
-            "name": "x-ms-requires-sync",
-            "in": "header",
-            "description": "This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob.",
-            "required": true,
-            "type": "boolean",
-            "enum": [
-              true
-            ],
-            "x-ms-client-name": "requiresSync"
           }
         ],
         "responses": {
@@ -1418,7 +1407,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -1647,7 +1636,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2177,7 +2166,7 @@
               },
               "x-ms-legal-hold": {
                 "type": "boolean",
-                "description": "Specifies the legal hold status to set on the blob."
+                "description": "Indicates whether the blob has a legal hold."
               },
               "x-ms-meta": {
                 "type": "string",
@@ -2242,7 +2231,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2265,6 +2254,912 @@
     }
   },
   "x-ms-paths": {
+    "?restype=service&comp=properties": {
+      "put": {
+        "operationId": "SetProperties",
+        "description": "Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "storageServiceProperties",
+            "in": "body",
+            "description": "The storage service properties to set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageServiceProperties"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "?restype=service&comp=properties&_overload=getProperties": {
+      "get": {
+        "operationId": "GetProperties",
+        "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StorageServiceProperties"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "?restype=service&comp=stats": {
+      "get": {
+        "operationId": "GetStatistics",
+        "description": "Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account.",
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StorageServiceStats"
+            },
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "?comp=list": {
+      "get": {
+        "operationId": "ListContainersSegment",
+        "description": "The List Containers Segment operation returns a list of the containers under the specified account",
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "prefix",
+            "in": "query",
+            "description": "Filters the results to return only containers whose name begins with the specified prefix.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "marker",
+            "in": "query",
+            "description": "A string value that identifies the portion of the list of containers to be returned with the next listing operation. The operation returns the NextMarker value within the response body if the listing operation did not return all containers remaining to be listed with the current page. The NextMarker value can be used as the value for the marker parameter in a subsequent call to request the next page of list items. The marker value is opaque to the client.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "description": "Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "Include this parameter to specify that the container's metadata be returned as part of the response body.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "metadata",
+                "deleted",
+                "system"
+              ],
+              "x-ms-enum": {
+                "name": "ListContainersIncludeType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "name": "metadata",
+                    "value": "metadata",
+                    "description": "Include metadata"
+                  },
+                  {
+                    "name": "deleted",
+                    "value": "deleted",
+                    "description": "Include deleted"
+                  },
+                  {
+                    "name": "system",
+                    "value": "system",
+                    "description": "Include system"
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListContainersSegmentResponse"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "?restype=service&comp=userdelegationkey": {
+      "post": {
+        "operationId": "GetUserDelegationKey",
+        "description": "Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication.",
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "keyInfo",
+            "in": "body",
+            "description": "Key information provided in the request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserDelegationKey"
+            },
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "?restype=account&comp=properties": {
+      "get": {
+        "operationId": "GetAccountInfo",
+        "description": "Returns the sku name and account kind.",
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "x-ms-account-kind": {
+                "type": "string",
+                "description": "Identifies the account kind",
+                "enum": [
+                  "Storage",
+                  "BlobStorage",
+                  "StorageV2",
+                  "FileStorage",
+                  "BlockBlobStorage"
+                ],
+                "x-ms-enum": {
+                  "name": "AccountKind",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Storage",
+                      "value": "Storage",
+                      "description": "The storage account is a general-purpose account."
+                    },
+                    {
+                      "name": "BlobStorage",
+                      "value": "BlobStorage",
+                      "description": "The storage account is a blob storage account."
+                    },
+                    {
+                      "name": "StorageV2",
+                      "value": "StorageV2",
+                      "description": "The storage account is a storage V2 account."
+                    },
+                    {
+                      "name": "FileStorage",
+                      "value": "FileStorage",
+                      "description": "The storage account is a file storage account."
+                    },
+                    {
+                      "name": "BlockBlobStorage",
+                      "value": "BlockBlobStorage",
+                      "description": "The storage account is a block blob storage account."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-is-hns-enabled": {
+                "type": "boolean",
+                "description": "Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-sku-name": {
+                "type": "string",
+                "description": "Identifies the sku name of the account",
+                "enum": [
+                  "Standard_LRS",
+                  "Standard_GRS",
+                  "Standard_RAGRS",
+                  "Standard_ZRS",
+                  "Premium_LRS",
+                  "Standard_GZRS",
+                  "Premium_ZRS",
+                  "Standard_RAGZRS"
+                ],
+                "x-ms-enum": {
+                  "name": "SkuName",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "StandardLRS",
+                      "value": "Standard_LRS",
+                      "description": "The standard LRS SKU."
+                    },
+                    {
+                      "name": "StandardGRS",
+                      "value": "Standard_GRS",
+                      "description": "The standard GRS SKU."
+                    },
+                    {
+                      "name": "StandardRAGRS",
+                      "value": "Standard_RAGRS",
+                      "description": "The standard RAGRS SKU."
+                    },
+                    {
+                      "name": "StandardZRS",
+                      "value": "Standard_ZRS",
+                      "description": "The standard ZRS SKU."
+                    },
+                    {
+                      "name": "PremiumLRS",
+                      "value": "Premium_LRS",
+                      "description": "The premium LRS SKU."
+                    },
+                    {
+                      "name": "StandardGZRS",
+                      "value": "Standard_GZRS",
+                      "description": "The standard GZRS SKU."
+                    },
+                    {
+                      "name": "PremiumZRS",
+                      "value": "Premium_ZRS",
+                      "description": "The premium ZRS SKU."
+                    },
+                    {
+                      "name": "StandardRAGZRS",
+                      "value": "Standard_RAGZRS",
+                      "description": "The standard RAGZRS SKU."
+                    }
+                  ]
+                }
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "?comp=batch": {
+      "post": {
+        "operationId": "SubmitBatch",
+        "description": "The Batch operation allows multiple API calls to be embedded into a single HTTP request.",
+        "produces": [
+          "multipart/mixed",
+          "application/xml"
+        ],
+        "consumes": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "Content-Length",
+            "in": "header",
+            "description": "The length of the request.",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "x-ms-client-name": "contentLength"
+          },
+          {
+            "name": "body",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "?comp=blobs": {
+      "get": {
+        "operationId": "FilterBlobs",
+        "description": "The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression.",
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "description": "Filters the results to return only to return only blobs whose tags match the specified expression.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "marker",
+            "in": "query",
+            "description": "A string value that identifies the portion of the list of containers to be returned with the next listing operation. The operation returns the NextMarker value within the response body if the listing operation did not return all containers remaining to be listed with the current page. The NextMarker value can be used as the value for the marker parameter in a subsequent call to request the next page of list items. The marker value is opaque to the client.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "description": "Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "Include this parameter to specify one or more datasets to include in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "none",
+                "versions"
+              ],
+              "x-ms-enum": {
+                "name": "FilterBlobsIncludeItem",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "name": "None",
+                    "value": "none",
+                    "description": "The filter includes no versions."
+                  },
+                  {
+                    "name": "Versions",
+                    "value": "versions",
+                    "description": "The filter includes n versions."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FilterBlobSegment"
+            },
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
     "/{containerName}?restype=container": {
       "put": {
         "operationId": "Container_Create",
@@ -2393,7 +3288,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2636,7 +3531,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2745,7 +3640,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2867,7 +3762,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2999,7 +3894,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3159,7 +4054,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3263,7 +4158,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3367,7 +4262,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3443,12 +4338,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "name",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "formData",
             "required": true,
@@ -3476,7 +4365,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3621,7 +4510,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3771,7 +4660,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3908,7 +4797,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4049,7 +4938,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4192,7 +5081,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4341,7 +5230,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4541,7 +5430,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4748,7 +5637,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4942,7 +5831,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5040,7 +5929,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5196,7 +6085,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5407,7 +6296,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5601,7 +6490,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5714,7 +6603,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5823,7 +6712,7 @@
               },
               "x-ms-legal-hold": {
                 "type": "boolean",
-                "description": "Specifies the legal hold status to set on the blob."
+                "description": "Indicates whether the blob has a legal hold."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -5839,7 +6728,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6066,7 +6955,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6250,7 +7139,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6421,7 +7310,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6596,7 +7485,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6779,7 +7668,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6956,7 +7845,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -7179,7 +8068,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -7672,7 +8561,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -7800,7 +8689,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8083,7 +8972,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8287,7 +9176,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8453,7 +9342,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8636,7 +9525,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8995,7 +9884,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -9335,7 +10224,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -9613,7 +10502,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10037,7 +10926,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10233,7 +11122,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10444,7 +11333,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10661,7 +11550,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10867,7 +11756,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11064,7 +11953,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11377,7 +12266,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11783,7 +12672,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11945,7 +12834,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -12466,7 +13355,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13062,7 +13951,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13306,7 +14195,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13634,7 +14523,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -14112,7 +15001,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -14284,7 +15173,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15032,919 +15921,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
-            },
-            "headers": {
-              "x-ms-copy-source-error-code": {
-                "type": "string",
-                "description": "The error code for the copy source."
-              },
-              "x-ms-copy-source-status-code": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The status code for the copy source."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/?comp=batch": {
-      "post": {
-        "operationId": "SubmitBatch",
-        "description": "The Batch operation allows multiple API calls to be embedded into a single HTTP request.",
-        "produces": [
-          "multipart/mixed",
-          "application/xml"
-        ],
-        "consumes": [
-          "multipart/mixed"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Content-Length",
-            "in": "header",
-            "description": "The length of the request.",
-            "required": true,
-            "type": "integer",
-            "format": "int64",
-            "x-ms-client-name": "contentLength"
-          },
-          {
-            "name": "name",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "formData",
-            "required": true,
-            "type": "file"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "string"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "Specifies the version of the operation to use for this request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            },
-            "headers": {
-              "x-ms-copy-source-error-code": {
-                "type": "string",
-                "description": "The error code for the copy source."
-              },
-              "x-ms-copy-source-status-code": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The status code for the copy source."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/?comp=blobs": {
-      "get": {
-        "operationId": "FilterBlobs",
-        "description": "The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression.",
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "name": "where",
-            "in": "query",
-            "description": "Filters the results to return only to return only blobs whose tags match the specified expression.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "marker",
-            "in": "query",
-            "description": "A string value that identifies the portion of the list of containers to be returned with the next listing operation. The operation returns the NextMarker value within the response body if the listing operation did not return all containers remaining to be listed with the current page. The NextMarker value can be used as the value for the marker parameter in a subsequent call to request the next page of list items. The marker value is opaque to the client.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "maxresults",
-            "in": "query",
-            "description": "Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1
-          },
-          {
-            "name": "include",
-            "in": "query",
-            "description": "Include this parameter to specify one or more datasets to include in the response.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "none",
-                "versions"
-              ],
-              "x-ms-enum": {
-                "name": "FilterBlobsIncludeItem",
-                "modelAsString": false,
-                "values": [
-                  {
-                    "name": "None",
-                    "value": "none",
-                    "description": "The filter includes no versions."
-                  },
-                  {
-                    "name": "Versions",
-                    "value": "versions",
-                    "description": "The filter includes n versions."
-                  }
-                ]
-              }
-            },
-            "collectionFormat": "csv"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/FilterBlobSegment"
-            },
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "Specifies the version of the operation to use for this request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            },
-            "headers": {
-              "x-ms-copy-source-error-code": {
-                "type": "string",
-                "description": "The error code for the copy source."
-              },
-              "x-ms-copy-source-status-code": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The status code for the copy source."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/?comp=list": {
-      "get": {
-        "operationId": "ListContainersSegment",
-        "description": "The List Containers Segment operation returns a list of the containers under the specified account",
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "prefix",
-            "in": "query",
-            "description": "Filters the results to return only containers whose name begins with the specified prefix.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "marker",
-            "in": "query",
-            "description": "A string value that identifies the portion of the list of containers to be returned with the next listing operation. The operation returns the NextMarker value within the response body if the listing operation did not return all containers remaining to be listed with the current page. The NextMarker value can be used as the value for the marker parameter in a subsequent call to request the next page of list items. The marker value is opaque to the client.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "maxresults",
-            "in": "query",
-            "description": "Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "name": "include",
-            "in": "query",
-            "description": "Include this parameter to specify that the container's metadata be returned as part of the response body.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "metadata",
-                "deleted",
-                "system"
-              ],
-              "x-ms-enum": {
-                "name": "ListContainersIncludeType",
-                "modelAsString": false,
-                "values": [
-                  {
-                    "name": "metadata",
-                    "value": "metadata",
-                    "description": "Include metadata"
-                  },
-                  {
-                    "name": "deleted",
-                    "value": "deleted",
-                    "description": "Include deleted"
-                  },
-                  {
-                    "name": "system",
-                    "value": "system",
-                    "description": "Include system"
-                  }
-                ]
-              }
-            },
-            "collectionFormat": "csv"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ListContainersSegmentResponse"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "Specifies the version of the operation to use for this request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            },
-            "headers": {
-              "x-ms-copy-source-error-code": {
-                "type": "string",
-                "description": "The error code for the copy source."
-              },
-              "x-ms-copy-source-status-code": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The status code for the copy source."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/?restype=account&comp=properties": {
-      "get": {
-        "operationId": "GetAccountInfo",
-        "description": "Returns the sku name and account kind.",
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-account-kind": {
-                "type": "string",
-                "description": "Identifies the account kind",
-                "enum": [
-                  "Storage",
-                  "BlobStorage",
-                  "StorageV2",
-                  "FileStorage",
-                  "BlockBlobStorage"
-                ],
-                "x-ms-enum": {
-                  "name": "AccountKind",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "Storage",
-                      "value": "Storage",
-                      "description": "The storage account is a general-purpose account."
-                    },
-                    {
-                      "name": "BlobStorage",
-                      "value": "BlobStorage",
-                      "description": "The storage account is a blob storage account."
-                    },
-                    {
-                      "name": "StorageV2",
-                      "value": "StorageV2",
-                      "description": "The storage account is a storage V2 account."
-                    },
-                    {
-                      "name": "FileStorage",
-                      "value": "FileStorage",
-                      "description": "The storage account is a file storage account."
-                    },
-                    {
-                      "name": "BlockBlobStorage",
-                      "value": "BlockBlobStorage",
-                      "description": "The storage account is a block blob storage account."
-                    }
-                  ]
-                }
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-is-hns-enabled": {
-                "type": "boolean",
-                "description": "Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-sku-name": {
-                "type": "string",
-                "description": "Identifies the sku name of the account",
-                "enum": [
-                  "Standard_LRS",
-                  "Standard_GRS",
-                  "Standard_RAGRS",
-                  "Standard_ZRS",
-                  "Premium_LRS",
-                  "Standard_GZRS",
-                  "Premium_ZRS",
-                  "Standard_RAGZRS"
-                ],
-                "x-ms-enum": {
-                  "name": "SkuName",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "StandardLRS",
-                      "value": "Standard_LRS",
-                      "description": "The standard LRS SKU."
-                    },
-                    {
-                      "name": "StandardGRS",
-                      "value": "Standard_GRS",
-                      "description": "The standard GRS SKU."
-                    },
-                    {
-                      "name": "StandardRAGRS",
-                      "value": "Standard_RAGRS",
-                      "description": "The standard RAGRS SKU."
-                    },
-                    {
-                      "name": "StandardZRS",
-                      "value": "Standard_ZRS",
-                      "description": "The standard ZRS SKU."
-                    },
-                    {
-                      "name": "PremiumLRS",
-                      "value": "Premium_LRS",
-                      "description": "The premium LRS SKU."
-                    },
-                    {
-                      "name": "StandardGZRS",
-                      "value": "Standard_GZRS",
-                      "description": "The standard GZRS SKU."
-                    },
-                    {
-                      "name": "PremiumZRS",
-                      "value": "Premium_ZRS",
-                      "description": "The premium ZRS SKU."
-                    },
-                    {
-                      "name": "StandardRAGZRS",
-                      "value": "Standard_RAGZRS",
-                      "description": "The standard RAGZRS SKU."
-                    }
-                  ]
-                }
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "Specifies the version of the operation to use for this request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            },
-            "headers": {
-              "x-ms-copy-source-error-code": {
-                "type": "string",
-                "description": "The error code for the copy source."
-              },
-              "x-ms-copy-source-status-code": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The status code for the copy source."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/?restype=service&comp=properties": {
-      "put": {
-        "operationId": "SetProperties",
-        "description": "Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "name": "storageServiceProperties",
-            "in": "body",
-            "description": "The storage service properties to set.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StorageServiceProperties"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "Specifies the version of the operation to use for this request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            },
-            "headers": {
-              "x-ms-copy-source-error-code": {
-                "type": "string",
-                "description": "The error code for the copy source."
-              },
-              "x-ms-copy-source-status-code": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The status code for the copy source."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/?restype=service&comp=properties&_overload=getProperties": {
-      "get": {
-        "operationId": "GetProperties",
-        "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/StorageServiceProperties"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "Specifies the version of the operation to use for this request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            },
-            "headers": {
-              "x-ms-copy-source-error-code": {
-                "type": "string",
-                "description": "The error code for the copy source."
-              },
-              "x-ms-copy-source-status-code": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The status code for the copy source."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/?restype=service&comp=stats": {
-      "get": {
-        "operationId": "GetStatistics",
-        "description": "Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account.",
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/StorageServiceStats"
-            },
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "Specifies the version of the operation to use for this request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            },
-            "headers": {
-              "x-ms-copy-source-error-code": {
-                "type": "string",
-                "description": "The error code for the copy source."
-              },
-              "x-ms-copy-source-status-code": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The status code for the copy source."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/?restype=service&comp=userdelegationkey": {
-      "post": {
-        "operationId": "GetUserDelegationKey",
-        "description": "Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication.",
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "name": "keyInfo",
-            "in": "body",
-            "description": "Key information provided in the request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/UserDelegationKey"
-            },
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "Specifies the version of the operation to use for this request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -17226,6 +17203,38 @@
         ]
       }
     },
+    "Error": {
+      "type": "object",
+      "description": "The error response.",
+      "properties": {
+        "Code": {
+          "type": "string",
+          "description": "The error code.",
+          "x-ms-client-name": "code"
+        },
+        "Message": {
+          "type": "string",
+          "description": "The error message.",
+          "x-ms-client-name": "message"
+        },
+        "CopySourceStatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Copy source status code",
+          "x-ms-client-name": "copySourceStatusCode"
+        },
+        "CopySourceErrorCode": {
+          "type": "string",
+          "description": "Copy source error code",
+          "x-ms-client-name": "copySourceErrorCode"
+        },
+        "CopySourceErrorMessage": {
+          "type": "string",
+          "description": "Copy source error message",
+          "x-ms-client-name": "copySourceErrorMessage"
+        }
+      }
+    },
     "FileShareTokenIntent": {
       "type": "string",
       "description": "The file share token intent types.",
@@ -18390,38 +18399,6 @@
         "Enabled"
       ]
     },
-    "StorageError": {
-      "type": "object",
-      "description": "The error response.",
-      "properties": {
-        "Code": {
-          "type": "string",
-          "description": "The error code.",
-          "x-ms-client-name": "code"
-        },
-        "Message": {
-          "type": "string",
-          "description": "The error message.",
-          "x-ms-client-name": "message"
-        },
-        "CopySourceStatusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Copy source status code",
-          "x-ms-client-name": "copySourceStatusCode"
-        },
-        "CopySourceErrorCode": {
-          "type": "string",
-          "description": "Copy source error code",
-          "x-ms-client-name": "copySourceErrorCode"
-        },
-        "CopySourceErrorMessage": {
-          "type": "string",
-          "description": "Copy source error message",
-          "x-ms-client-name": "copySourceErrorMessage"
-        }
-      }
-    },
     "StorageServiceProperties": {
       "type": "object",
       "description": "The service properties.",
@@ -18496,11 +18473,13 @@
         },
         "SignedStart": {
           "type": "string",
+          "format": "date-time-rfc7231",
           "description": "The date-time the key is active.",
           "x-ms-client-name": "signedStart"
         },
         "SignedExpiry": {
           "type": "string",
+          "format": "date-time-rfc7231",
           "description": "The date-time the key expires.",
           "x-ms-client-name": "signedExpiry"
         },

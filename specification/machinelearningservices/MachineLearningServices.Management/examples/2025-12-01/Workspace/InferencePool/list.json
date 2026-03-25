@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "$skipToken": "string",
+    "api-version": "2025-12-01",
+    "count": 1,
+    "orderBy": "UpdatedAtAsc",
+    "properties": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "tags": "string",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/my-aml-workspace/inferencePools?api-version=2025-07-01-preview&$skip=2",
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "identity": {
+              "type": "UserAssigned",
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "tenantId": "00000000-1111-2222-3333-444444444444",
+              "userAssignedIdentities": {
+                "string": {
+                  "clientId": "00000000-1111-2222-3333-444444444444",
+                  "principalId": "00000000-1111-2222-3333-444444444444"
+                }
+              }
+            },
+            "kind": "string",
+            "location": "string",
+            "properties": {
+              "description": "string",
+              "properties": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "provisioningState": "Failed",
+              "scaleUnitConfiguration": {
+                "disablePublicEgress": false,
+                "registries": [
+                  "string",
+                  "registryName1"
+                ]
+              }
+            },
+            "sku": {
+              "name": "string",
+              "capacity": 1,
+              "family": "string",
+              "size": "string",
+              "tier": "Premium"
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999+00:22",
+              "createdBy": "string",
+              "createdByType": "Application",
+              "lastModifiedAt": "2020-01-01T12:34:56.999+00:22",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application"
+            },
+            "tags": {}
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "InferencePools_List",
+  "title": "List Workspace Inference Pool."
+}

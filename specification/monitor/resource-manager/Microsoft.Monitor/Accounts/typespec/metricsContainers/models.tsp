@@ -1,6 +1,8 @@
+import "@typespec/versioning";
 import "../models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.Monitor {
@@ -33,6 +35,13 @@ namespace Microsoft.Monitor {
      * Metrics limits.
      */
     limits?: MetricsLimits;
+
+    /**
+     * The version of Metrics Query Service that this AMW will use for all metric queries.
+     */
+    @added(Versions.v2025_10_03)
+    @example("1.0", #{ title: "Version example" })
+    version?: string;
   }
 
   /**

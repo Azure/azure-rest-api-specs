@@ -45,24 +45,22 @@ export async function updateLabelsImpl({
     core.info(`issue_number must be a positive integer: ${issue_number}`);
   }
 
-  /** @type {string[]} */
-  let artifactNames = [];
-
-  if (run_id) {
-    // List artifacts from a single run_id
-    core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run_id})`);
-    const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
-      owner: owner,
-      repo: repo,
-      run_id: run_id,
-      per_page: PER_PAGE_MAX,
-    });
-
-    artifactNames = artifacts.map((a) => a.name);
-  } else {
+  if (!run_id) {
     // TODO: List all artifacts of all workflows associated with issue_number
     throw new Error("Required input 'run_id' not found in env or context");
   }
+
+  // List artifacts from a single run_id
+  core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run_id})`);
+  const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+    owner: owner,
+    repo: repo,
+    run_id: run_id,
+    per_page: PER_PAGE_MAX,
+  });
+
+  /** @type {string[]} */
+  const artifactNames = artifacts.map((a) => a.name);
 
   core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 

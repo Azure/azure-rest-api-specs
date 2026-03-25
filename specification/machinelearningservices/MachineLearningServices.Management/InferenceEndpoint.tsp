@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
 
@@ -9,9 +10,15 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
+/**
+ * InferenceEndpoint is a preview-only resource.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @parentResource(Workspace)
 model InferenceEndpoint
   is Azure.ResourceManager.TrackedResource<InferenceEndpointProperties, false> {
@@ -26,12 +33,17 @@ model InferenceEndpoint
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
   kind?: string;
 
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
+/**
+ * InferenceEndpointOps is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface InferenceEndpointOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -65,6 +77,11 @@ interface InferenceEndpointOps
       }
     > {}
 
+/**
+ * InferenceEndpoints is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface InferenceEndpoints {
   /**
@@ -95,7 +112,7 @@ interface InferenceEndpoints {
   /**
    * Update InferenceEndpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Existing API uses custom patch envelope"
   @patch(#{ implicitOptionality: false })
   @summary("Update InferenceEndpoint (asynchronous).")
   update is InferenceEndpointOps.CustomPatchAsync<
@@ -114,7 +131,7 @@ interface InferenceEndpoints {
   /**
    * Delete InferenceEndpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete InferenceEndpoint (asynchronous).")
   delete is InferenceEndpointOps.DeleteWithoutOkAsync<
     InferenceEndpoint,

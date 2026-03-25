@@ -9,6 +9,9 @@ export class PullRequestChanges {
   rmExamples = false;
 
   /** @type {boolean} */
+  rmTypeSpec = false;
+
+  /** @type {boolean} */
   rmFunctional = false;
 
   /** @type {boolean} */
@@ -21,6 +24,7 @@ export class PullRequestChanges {
    * A PR is trivial if it contains only:
    * - Documentation changes
    * - Example changes
+   * - TypeSpec file changes (.tsp, tspconfig.yaml)
    * and does NOT contain:
    * - Functional spec changes
    * - Other file types
@@ -29,7 +33,7 @@ export class PullRequestChanges {
    */
   isTrivial() {
     const hasNoBlockingChanges = !this.rmFunctional && !this.rmOther && !this.other;
-    const hasTrivialChanges = this.rmDocumentation || this.rmExamples;
+    const hasTrivialChanges = this.rmDocumentation || this.rmExamples || this.rmTypeSpec;
     return hasNoBlockingChanges && hasTrivialChanges;
   }
 
@@ -38,7 +42,12 @@ export class PullRequestChanges {
    */
   isDocumentationOnly() {
     return (
-      this.rmDocumentation && !this.rmExamples && !this.rmFunctional && !this.rmOther && !this.other
+      this.rmDocumentation &&
+      !this.rmExamples &&
+      !this.rmTypeSpec &&
+      !this.rmFunctional &&
+      !this.rmOther &&
+      !this.other
     );
   }
 
@@ -47,7 +56,12 @@ export class PullRequestChanges {
    */
   isExamplesOnly() {
     return (
-      !this.rmDocumentation && this.rmExamples && !this.rmFunctional && !this.rmOther && !this.other
+      !this.rmDocumentation &&
+      this.rmExamples &&
+      !this.rmTypeSpec &&
+      !this.rmFunctional &&
+      !this.rmOther &&
+      !this.other
     );
   }
 }
