@@ -143,6 +143,10 @@ using Microsoft.Storage;
 );
 @@clientName(Permissions, "StorageAccountSasPermission", "csharp");
 @@clientName(HttpProtocol, "StorageAccountHttpProtocol", "csharp");
+@@clientName(StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
+  "GetStorageTaskAssignmentInstancesReports",
+  "csharp"
+);
 
 // Resource type renames for backward compatibility
 @@clientName(BlobServiceProperties, "BlobService", "csharp");
