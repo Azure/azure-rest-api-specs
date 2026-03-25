@@ -11,7 +11,6 @@ const MemoryStoreRequiredPreviews = #{
 };
 
 union MemoryStoreObjectType {
-  string,
   memoryStore: "memory_store",
   memoryStoreDeleted: "memory_store.deleted",
   memoryStoreScopeDeleted: "memory_store.scope.deleted",
