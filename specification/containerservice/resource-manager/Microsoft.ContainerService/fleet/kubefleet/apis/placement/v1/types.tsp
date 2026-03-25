@@ -14,6 +14,17 @@ model RolloutStrategy {
   @madeOptional(Microsoft.ContainerService.Versions.v2026_04_02_preview)
   @doc("The type of rollout strategy. Default is RollingUpdate.")
   type?: RolloutStrategyType;
+
+  @added(Microsoft.ContainerService.Versions.v2026_04_02_preview)
+  @doc("Reference to an existing cluster update strategy. Required when type is External.")
+  clusterUpdateStrategy?: ClusterUpdateStrategyReference;
+}
+
+@added(Microsoft.ContainerService.Versions.v2026_04_02_preview)
+@doc("A reference to an existing cluster staged update strategy.")
+model ClusterUpdateStrategyReference {
+  @doc("The name of an existing cluster staged update strategy.")
+  name: string;
 }
 
 @doc("The possible rollout strategy types.")
@@ -23,66 +34,6 @@ union RolloutStrategyType {
 
   @doc("Use external rollout strategy managed outside of Fleet.")
   External: "External",
-
-  string,
-}
-
-@added(Microsoft.ContainerService.Versions.v2026_04_02_preview)
-@doc("UpdateRunStrategySpec defines a reusable strategy that specifies the stages and the sequence in which the selected cluster resources will be updated on the member clusters.")
-model UpdateRunStrategySpec {
-  @doc("Stages specifies the configuration for each update stage. Maximum of 31 stages allowed.")
-  @maxItems(31)
-  stages?: StageConfig[];
-}
-
-@added(Microsoft.ContainerService.Versions.v2026_04_02_preview)
-@doc("StageConfig describes a single update stage. The clusters in each stage are updated sequentially. The update stops if any of the updates fail.")
-model StageConfig {
-  @doc("The name of the stage. This MUST be unique within the same UpdateRunStrategySpec.")
-  @maxLength(63)
-  @pattern("^[a-z0-9]+$")
-  name: string;
-
-  @doc("LabelSelector is a label query over all the joined member clusters. Clusters matching the query are selected for this stage. There cannot be overlapping clusters between stages when the update run is created. If the label selector is empty, the stage includes all the selected clusters. If the label selector is nil, the stage does not include any selected clusters.")
-  labelSelector?: LabelSelector;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This property contains a label key identifier for sorting clusters, not sensitive data"
-  @doc("The label key used to sort the selected clusters. The clusters within the stage are updated sequentially following the rule below: 1) Ascending order based on the value of the label key, interpreted as integers if present. 2) Ascending order based on the name of the cluster if the label key is absent or the label value is the same.")
-  sortingLabelKey?: string;
-
-  @doc("MaxConcurrency specifies the maximum number of clusters that can be updated concurrently within this stage. Value can be an absolute number (ex: 5) or a percentage of the total clusters in the stage (ex: 50%). Fractional results are rounded down. A minimum of 1 update is enforced. If not specified, all clusters in the stage are updated sequentially (effectively maxConcurrency = 1). Integer values must be at least 1. Percentage values must match pattern ^(100|[1-9][0-9]?)%$. Defaults to 1.")
-  maxConcurrency?: string;
-
-  @doc("The collection of tasks that each stage needs to complete successfully before moving to the next stage. Each task is executed in parallel and there cannot be more than one task of the same type. Maximum 2 tasks allowed.")
-  @maxItems(2)
-  @identifiers(#[])
-  afterStageTasks?: StageTask[];
-
-  @doc("The collection of tasks that needs to be completed successfully by each stage before starting the stage. Each task is executed in parallel and there cannot be more than one task of the same type. Maximum 1 task allowed.")
-  @maxItems(1)
-  @identifiers(#[])
-  beforeStageTasks?: StageTask[];
-}
-
-@added(Microsoft.ContainerService.Versions.v2026_04_02_preview)
-@doc("StageTask is the pre or post stage task that needs to be completed before starting or moving to the next stage.")
-model StageTask {
-  @doc("The type of the before or after stage task.")
-  type: StageTaskType;
-
-  @doc("The time to wait after all the clusters in the current stage complete the update before moving to the next stage. Format is duration string (e.g., '30s', '5m', '2h'). Pattern must match: ^0|([0-9]+(\\.[0-9]+)?(s|m|h))+$. Only valid when type is TimedWait. Required for TimedWait, not allowed for Approval.")
-  @pattern("^0|([0-9]+(\\.[0-9]+)?(s|m|h))+$")
-  waitTime?: string;
-}
-
-@added(Microsoft.ContainerService.Versions.v2026_04_02_preview)
-@doc("StageTaskType identifies a specific type of the AfterStageTask or BeforeStageTask.")
-union StageTaskType {
-  @doc("TimedWait indicates the stage task is a timed wait.")
-  TimedWait: "TimedWait",
-
-  @doc("Approval indicates the stage task is an approval.")
-  Approval: "Approval",
 
   string,
 }

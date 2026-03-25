@@ -5202,6 +5202,19 @@
         }
       }
     },
+    "Placement.V1.ClusterUpdateStrategyReference": {
+      "type": "object",
+      "description": "A reference to an existing cluster staged update strategy.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of an existing cluster staged update strategy."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "Placement.V1.PlacementPolicy": {
       "type": "object",
       "description": "PlacementPolicy contains the rules to select target member clusters to place the selected resources. Note that only clusters that are both joined and satisfying the rules will be selected. You can only specify at most one of the two fields: ClusterNames and Affinity. If none is specified, all the joined clusters are selected.",
@@ -5354,7 +5367,7 @@
           "description": "The type of rollout strategy. Default is RollingUpdate."
         },
         "clusterUpdateStrategy": {
-          "$ref": "#/definitions/ClusterUpdateStrategyReference",
+          "$ref": "#/definitions/Placement.V1.ClusterUpdateStrategyReference",
           "description": "Reference to an existing cluster update strategy. Required when type is External."
         }
       }
@@ -6177,19 +6190,6 @@
           "readOnly": true
         }
       }
-    },
-    "ClusterUpdateStrategyReference": {
-      "type": "object",
-      "description": "A reference to an existing cluster staged update strategy.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of an existing cluster staged update strategy."
-        }
-      },
-      "required": [
-        "name"
-      ]
     }
   },
   "parameters": {
