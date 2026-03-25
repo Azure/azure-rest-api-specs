@@ -250,6 +250,7 @@ stages:
           Push-Location $azurePkgDir
           git config remote.origin.partialclonefilter
           $tags2 = git tag -l
+          Write-Host "Tag count: $($tags2.Count)"
           $purviewTags2 = $tags2 | Where-Object { $_ -match 'arm-purview' }
           Write-Host "[Azure/azure-sdk-for-js] arm-purview tags: $($purviewTags2.Count)"
           $purviewTags2
