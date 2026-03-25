@@ -16,20 +16,26 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-/** Shared Key Authentication */
-model SharedKeyAuth is ApiKeyAuth<ApiKeyLocation.header, "subscription-key">;
+/** These are the [Microsoft Entra OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* For more information on Microsoft identity platform, see [Microsoft identity platform overview](https://learn.microsoft.com/entra/identity-platform/v2-overview). */
+model AadToken
+  is OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit;
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+      scopes: ["https://atlas.microsoft.com/.default"];
+    }
+  ]>;
 
-/** SAS Token Authentication */
-model SasTokenAuth is ApiKeyAuth<ApiKeyLocation.header, "SAS Token">;
+/** This is a shared key that is provisioned when you [Create an Azure Maps account](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account) in the Azure portal or using PowerShell, CLI, Azure SDKs, or REST API.\n\n With this key, any application can access all REST API. In other words, this key can be used as a master key in the account that they are issued in.\n\n For publicly exposed applications, our recommendation is to use the [confidential client applications](https://docs.microsoft.com/azure/azure-maps/authentication-best-practices#confidential-client-applications) approach to access Azure Maps REST APIs so your key can be securely stored. */
+model SharedKey is ApiKeyAuth<ApiKeyLocation.header, "subscription-key">;
+
+/** This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token. */
+model SasToken is ApiKeyAuth<ApiKeyLocation.header, "SAS Token">;
 
 /**
  * Azure Maps Weather REST APIs
  */
-@useAuth(
-  AadOauth2Auth<[
-    "https://atlas.microsoft.com/.default"
-  ]> | SharedKeyAuth | SasTokenAuth
-)
+@useAuth(AadToken | SharedKey | SasToken)
 @service(#{ title: "Maps Weather" })
 @versioned(Versions)
 @server(
