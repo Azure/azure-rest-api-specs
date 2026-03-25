@@ -15,6 +15,9 @@ namespace Microsoft.AzureStackHCI;
 union HciJobType {
   string,
 
+  /** Job to repair a server in the cluster. */
+  RepairServer: "RepairServer",
+
   // PRIVATE PREVIEW - Arc Gateway and GPU job types
   /** Job to configure arc gateway for the cluster. */
   ConfigureArcGateway: "ConfigureArcGateway",
@@ -6488,6 +6491,35 @@ model HciConfigureCvmJobProperties extends ClusterJobProperties {
    * Defines the customer's intent for updating confidential VM properties
    */
   confidentialVmIntent: ConfidentialVmIntent;
+}
+
+////////////////////////////////////////////////////////////////
+////////////////////// Repair Server Job Models ////////////////
+////////////////////////////////////////////////////////////////
+
+/** Details of servers to be repaired in the cluster */
+@added(Versions.v2026_03_15_preview)
+model RepairServerJobServerDetails {
+  /** Name of server to be repaired in cluster. */
+  serverName: string;
+
+  /** Azure resource id of Arc machine part of cluster for which job will be triggered. */
+  serverResourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/** Properties for repairing a server in the cluster. */
+@added(Versions.v2026_03_15_preview)
+model HciRepairServerJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.RepairServer;
+
+  /** Details of servers to be repaired in the cluster */
+  @Azure.ResourceManager.identifiers(#[])
+  repairServerJobServerDetails: RepairServerJobServerDetails[];
+
+  /** List of protected parameters to pass to trigger job for cluster. */
+  @Azure.ResourceManager.identifiers(#["secretName"])
+  secrets?: EceDeploymentSecrets[];
 }
 
 ////////////////////////////////////////////////////////////////
