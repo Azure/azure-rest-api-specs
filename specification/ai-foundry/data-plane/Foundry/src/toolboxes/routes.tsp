@@ -22,13 +22,13 @@ interface Toolboxes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Update a toolbox. Creates a new version of the toolbox with an incremented version number.")
-  @operationId("updateToolbox")
+  @doc("Create a new version of an existing toolbox.")
+  @operationId("createToolboxVersion")
   @post
-  @route("/toolboxes/{toolbox_name}")
+  @route("/toolboxes/{toolbox_name}/versions")
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
-  updateToolbox is FoundryDataPlaneOperation<
-    UpdateToolboxRequest & ToolboxesPreviewHeader,
+  createToolboxVersion is FoundryDataPlaneOperation<
+    CreateToolboxVersionRequest & ToolboxesPreviewHeader,
     ToolboxObject
   >;
 
@@ -68,7 +68,18 @@ interface Toolboxes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Delete a toolbox.")
+  @doc("Retrieve a specific version of a toolbox.")
+  @operationId("getToolboxVersion")
+  @get
+  @route("/toolboxes/{toolbox_name}/versions/{version}")
+  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
+  getToolboxVersion is FoundryDataPlaneOperation<
+    GetToolboxVersionRequest & ToolboxesPreviewHeader,
+    ToolboxObject
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Delete a toolbox and all its versions.")
   @operationId("deleteToolbox")
   @delete
   @route("/toolboxes/{toolbox_name}")
@@ -76,5 +87,16 @@ interface Toolboxes {
   deleteToolbox is FoundryDataPlaneOperation<
     DeleteToolboxRequest & ToolboxesPreviewHeader,
     DeleteToolboxResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Delete a specific version of a toolbox.")
+  @operationId("deleteToolboxVersion")
+  @delete
+  @route("/toolboxes/{toolbox_name}/versions/{version}")
+  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
+  deleteToolboxVersion is FoundryDataPlaneOperation<
+    DeleteToolboxVersionRequest & ToolboxesPreviewHeader,
+    DeleteToolboxVersionResponse
   >;
 }

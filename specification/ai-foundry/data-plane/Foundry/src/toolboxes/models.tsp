@@ -78,8 +78,8 @@ alias CreateToolboxRequest = {
   tools: OpenAI.Tool[];
 };
 
-alias UpdateToolboxRequest = {
-  @doc("The name of the toolbox to update.")
+alias CreateToolboxVersionRequest = {
+  @doc("The name of the toolbox to add a new version to.")
   @path
   toolbox_name: string;
 
@@ -90,18 +90,24 @@ alias UpdateToolboxRequest = {
   @doc("Arbitrary key-value metadata to associate with the toolbox.")
   metadata?: Record<string>;
 
-  @doc("The list of tools to include in the toolbox.")
+  @doc("The list of tools to include in this version.")
   tools: OpenAI.Tool[];
 };
 
 alias GetToolboxRequest = {
-  @doc("The name of the toolbox to retrieve.")
+  @doc("The name of the toolbox to retrieve. Returns the latest version.")
+  @path
+  toolbox_name: string;
+};
+
+alias GetToolboxVersionRequest = {
+  @doc("The name of the toolbox.")
   @path
   toolbox_name: string;
 
-  @doc("The specific version to retrieve. If not specified, returns the latest version.")
-  @query
-  version?: int32;
+  @doc("The version number to retrieve.")
+  @path
+  version: int32;
 };
 
 alias ListToolboxesRequest = {
@@ -120,8 +126,29 @@ alias DeleteToolboxRequest = {
   @doc("The name of the toolbox to delete.")
   @path
   toolbox_name: string;
-
-  @doc("The specific version to delete. If not specified, deletes all versions.")
-  @query
-  version?: int32;
 };
+
+alias DeleteToolboxVersionRequest = {
+  @doc("The name of the toolbox.")
+  @path
+  toolbox_name: string;
+
+  @doc("The version number to delete.")
+  @path
+  version: int32;
+};
+
+@doc("Response returned when a toolbox version is deleted.")
+model DeleteToolboxVersionResponse {
+  @doc("The object type. Always 'toolbox.deleted'.")
+  object: ToolboxObjectType.toolboxDeleted;
+
+  @doc("The name of the toolbox.")
+  name: string;
+
+  @doc("The version that was deleted.")
+  version: int32;
+
+  @doc("Whether the version was successfully deleted.")
+  deleted: boolean;
+}

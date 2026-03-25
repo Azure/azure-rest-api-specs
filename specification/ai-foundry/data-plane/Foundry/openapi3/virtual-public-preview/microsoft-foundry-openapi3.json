@@ -10057,15 +10057,151 @@
       }
     },
     "/toolboxes/{toolbox_name}": {
-      "post": {
-        "operationId": "updateToolbox",
-        "description": "Update a toolbox. Creates a new version of the toolbox with an incremented version number.",
+      "get": {
+        "operationId": "getToolbox",
+        "description": "Retrieve a toolbox.",
         "parameters": [
           {
             "name": "toolbox_name",
             "in": "path",
             "required": true,
-            "description": "The name of the toolbox to update.",
+            "description": "The name of the toolbox to retrieve. Returns the latest version.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Toolboxes=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolboxObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Toolboxes"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Toolboxes=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "deleteToolbox",
+        "description": "Delete a toolbox and all its versions.",
+        "parameters": [
+          {
+            "name": "toolbox_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the toolbox to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Toolboxes=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteToolboxResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Toolboxes"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Toolboxes=V1Preview"
+          ]
+        }
+      }
+    },
+    "/toolboxes/{toolbox_name}/versions": {
+      "post": {
+        "operationId": "createToolboxVersion",
+        "description": "Create a new version of an existing toolbox.",
+        "parameters": [
+          {
+            "name": "toolbox_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the toolbox to add a new version to.",
             "schema": {
               "type": "string"
             }
@@ -10142,7 +10278,7 @@
                     "items": {
                       "$ref": "#/components/schemas/OpenAI.Tool"
                     },
-                    "description": "The list of tools to include in the toolbox."
+                    "description": "The list of tools to include in this version."
                   }
                 },
                 "required": [
@@ -10158,164 +10294,6 @@
           ]
         }
       },
-      "get": {
-        "operationId": "getToolbox",
-        "description": "Retrieve a toolbox.",
-        "parameters": [
-          {
-            "name": "toolbox_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the toolbox to retrieve.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "query",
-            "required": false,
-            "description": "The specific version to retrieve. If not specified, returns the latest version.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ToolboxObject"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
-      },
-      "delete": {
-        "operationId": "deleteToolbox",
-        "description": "Delete a toolbox.",
-        "parameters": [
-          {
-            "name": "toolbox_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the toolbox to delete.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "query",
-            "required": false,
-            "description": "The specific version to delete. If not specified, deletes all versions.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteToolboxResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
-      }
-    },
-    "/toolboxes/{toolbox_name}/versions": {
       "get": {
         "operationId": "listToolboxVersions",
         "description": "List all versions of a toolbox.",
@@ -10427,6 +10405,162 @@
                     }
                   },
                   "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Toolboxes"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Toolboxes=V1Preview"
+          ]
+        }
+      }
+    },
+    "/toolboxes/{toolbox_name}/versions/{version}": {
+      "get": {
+        "operationId": "getToolboxVersion",
+        "description": "Retrieve a specific version of a toolbox.",
+        "parameters": [
+          {
+            "name": "toolbox_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the toolbox.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The version number to retrieve.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Toolboxes=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolboxObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Toolboxes"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Toolboxes=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "deleteToolboxVersion",
+        "description": "Delete a specific version of a toolbox.",
+        "parameters": [
+          {
+            "name": "toolbox_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the toolbox.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The version number to delete.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Toolboxes=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteToolboxVersionResponse"
                 }
               }
             }
@@ -14702,6 +14836,38 @@
           }
         },
         "description": "Response returned when a toolbox is deleted."
+      },
+      "DeleteToolboxVersionResponse": {
+        "type": "object",
+        "required": [
+          "object",
+          "name",
+          "version",
+          "deleted"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": [
+              "toolbox.deleted"
+            ],
+            "description": "The object type. Always 'toolbox.deleted'."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the toolbox."
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The version that was deleted."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the version was successfully deleted."
+          }
+        },
+        "description": "Response returned when a toolbox version is deleted."
       },
       "Deployment": {
         "type": "object",
