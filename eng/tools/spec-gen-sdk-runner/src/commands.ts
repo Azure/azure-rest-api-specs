@@ -83,6 +83,8 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
 
   return { statusCode, executionResult: executionReport?.executionResult ?? "" };
 }
+
+/* Generate SDKs for spec pull request */
 export async function generateSdkForSpecPr(): Promise<CommandResult> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
@@ -229,6 +231,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   let markdownContent = "\n";
   markdownContent += `## Batch Run Type\n ${batchType}\n`;
   let failedContent = `## Spec Failures in the Generation Process\n`;
+  let warningContent = `## Specs with Warnings in the Generation Process\n`;
   let succeededContent = `## Successful Specs in the Generation Process\n`;
   let notEnabledContent = `## Specs with SDK Not Enabled\n`;
   let duplicatedConfigContent = `## Specs with Duplicated SDK Configurations (in 'tspconfig.yaml' and 'readme.md')\n`;
@@ -297,6 +300,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
         succeededCount++;
         if (executionResult === "warning") {
           warningCount++;
+          warningContent += `${specConfigPath},`;
         }
       } else if (executionResult === "notEnabled") {
         notEnabledContent += `${specConfigPath},`;
@@ -330,6 +334,9 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
   }
+  if (warningCount > 0) {
+    markdownContent += `${warningContent}\n`;
+  }
   if (notEnabledCount > 0) {
     markdownContent += `${notEnabledContent}\n`;
   }
@@ -340,6 +347,9 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
     markdownContent += `${succeededContent}\n`;
   }
   markdownContent += failedCount ? `## Total Failed Specs\n ${failedCount}\n` : "";
+  markdownContent += warningCount
+    ? `## Total Specs with Warnings\n ${warningCount}\n`
+    : "";
   markdownContent += notEnabledCount
     ? `## Total Specs with SDK not enabled in the Configuration\n ${notEnabledCount}\n`
     : "";
