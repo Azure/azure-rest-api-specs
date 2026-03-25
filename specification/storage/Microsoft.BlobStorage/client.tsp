@@ -420,6 +420,8 @@ enum ImmutabilityPolicySetting {
   "javascript"
 );
 
+@@scope(Storage.Blob.RetentionPolicy.allowPermanentDelete, "!javascript");
+
 @@scope(Storage.Blob.Service.getUserDelegationKey, "!rust");
 @@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
 @@scope(Storage.Blob.Container.rename, "!rust");
