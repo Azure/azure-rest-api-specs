@@ -1,0 +1,55 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/../"
+    azure-resource-provider-folder: "./resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/Slis/{version-status}/{version}/openapi.json"
+    new-line: lf
+  "@azure-tools/typespec-providerhub-controller":
+    emitter-output-dir: "{output-dir}/generated"
+    code-kind: model
+    include-operation-controller: false
+    include-cancellation-token: true
+    include-subscription-lifecycle-controller: true
+    include-versioning-classes: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/monitor"
+    emitter-output-dir: "{output-dir}/{service-dir}/armslis"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armslis"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-monitorslis"
+    package-dir: "azure-mgmt-monitorslis"
+    namespace: "azure.mgmt.monitorslis"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-monitor-slis"
+    namespace: "com.azure.resourcemanager.monitor.slis"
+    service-name: "Slis"
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    flavor: "azure"
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-monitorslis"
+    package-details:
+      name: "@azure/arm-monitorslis"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    namespace: "Azure.ResourceManager.Monitor.Slis"
+    clear-output-folder: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+parameters:
+  "service-dir":
+    default: "sdk/monitor"
