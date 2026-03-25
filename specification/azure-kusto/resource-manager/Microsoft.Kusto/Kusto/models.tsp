@@ -1780,12 +1780,14 @@ model LanguageExtensionsList {
   /**
    * The list of language extensions.
    */
+  @pageItems
   @identifiers(#[])
   value?: LanguageExtension[];
 
   /**
    * The link to the next page of resources.
    */
+  @nextLink
   nextLink?: string;
 }
 
@@ -3196,18 +3198,7 @@ model OperationDisplay {
    * For example: read, write, delete.
    */
   @summary("The operation type.")
-  operation?: string;
-
-  /**
-   * The resource type on which the operation is performed.
-   */
-  @summary("The resource type on which the operation is performed.")
-  resource?: string;
-
-  /**
-   * The friendly name of the operation.
-   */
-  @summary("The friendly name of the operation.")
+  operation?: string;is Azure.Core.Page<CalloutPolicy>;on.")
   description?: string;
 }
 
