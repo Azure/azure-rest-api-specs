@@ -27,15 +27,15 @@ model AadToken
   ]>;
 
 /** This is a shared key that is provisioned when you [Create an Azure Maps account](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account) in the Azure portal or using PowerShell, CLI, Azure SDKs, or REST API.\n\n With this key, any application can access all REST API. In other words, this key can be used as a master key in the account that they are issued in.\n\n For publicly exposed applications, our recommendation is to use the [confidential client applications](https://docs.microsoft.com/azure/azure-maps/authentication-best-practices#confidential-client-applications) approach to access Azure Maps REST APIs so your key can be securely stored. */
-model SharedKeyAuth is ApiKeyAuth<ApiKeyLocation.header, "subscription-key">;
+model SharedKey is ApiKeyAuth<ApiKeyLocation.header, "subscription-key">;
 
 /** This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token. */
-model SasTokenAuth is ApiKeyAuth<ApiKeyLocation.header, "SAS Token">;
+model SasToken is ApiKeyAuth<ApiKeyLocation.header, "SAS Token">;
 
 /**
  * Azure Maps Geolocation REST APIs
  */
-@useAuth(AadToken | SharedKeyAuth | SasTokenAuth)
+@useAuth(AadToken | SharedKey | SasToken)
 @service(#{ title: "Maps Geolocation" })
 @versioned(Versions)
 @server(
