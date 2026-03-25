@@ -37,6 +37,13 @@ model NetworkGroup extends ChildResource {
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
+alias NetworkGroupCreateOrUpdateEtagHeader = {
+  /**
+   * The current entity tag.
+   */
+  @header("ETag") eTag?: string;
+};
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
 @armResourceOperations
@@ -59,17 +66,9 @@ interface NetworkGroups {
       @header("If-Match")
       IfMatch?: string;
     },
-    Response = (ArmResponse<NetworkGroup> & {
-      /**
-       * The current entity tag.
-       */
-      @header("ETag") eTag?: string;
-    }) | (ArmCreatedResponse<NetworkGroup> & {
-      /**
-       * The current entity tag.
-       */
-      @header("ETag") eTag?: string;
-    }),
+    Response = (ArmResponse<NetworkGroup> &
+      NetworkGroupCreateOrUpdateEtagHeader) | (ArmCreatedResponse<NetworkGroup> &
+      NetworkGroupCreateOrUpdateEtagHeader),
     Error = CloudError
   >;
 

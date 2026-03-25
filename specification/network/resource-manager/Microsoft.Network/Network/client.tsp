@@ -1280,3 +1280,4 @@ op replaceprivateDnsZoneGroupsList(
   CombineClient,
   "python"
 );
+@@clientName(NetworkGroupCreateOrUpdateEtagHeader.eTag, "etag", "java");
