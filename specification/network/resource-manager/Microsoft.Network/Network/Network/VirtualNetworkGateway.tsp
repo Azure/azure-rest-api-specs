@@ -141,6 +141,8 @@ interface VirtualNetworkGateways {
     Response = {
       @body body: void;
     },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>,
     Error = CloudError
   >;
 
@@ -467,6 +469,8 @@ interface VirtualNetworkGateways {
     Response = {
       @body body: void;
     },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>,
     Error = CloudError
   >;
 
