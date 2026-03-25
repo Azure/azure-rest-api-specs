@@ -377,7 +377,8 @@ using Microsoft.Storage;
 @@clientLocation(Tables.delete, "Table");
 @@clientLocation(Tables.list, "Table");
 @@clientLocation(StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
-  "StorageTaskAssignmentInstancesReport"
+  "StorageTaskAssignmentInstancesReport",
+  "!csharp"
 );
 @@clientName(StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
   "List"
