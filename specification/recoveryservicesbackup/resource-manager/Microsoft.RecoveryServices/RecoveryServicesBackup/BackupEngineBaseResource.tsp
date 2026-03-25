@@ -12,22 +12,22 @@ namespace Microsoft.RecoveryServices;
 /**
  * The base backup engine class. All workload specific backup engines derive from this class.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(VaultResource)
-model BackupEngineBaseResource
-  is TrackedResourceWithOptionalLocation<BackupEngineBase> {
+model BackupEngineBaseResource is ProxyResource<BackupEngineBase> {
   ...ResourceNameParameter<
     Resource = BackupEngineBaseResource,
     KeyName = "backupEngineName",
     SegmentName = "backupEngines",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  /**
-   * Optional ETag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  eTag?: string;
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
+
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 @armResourceOperations

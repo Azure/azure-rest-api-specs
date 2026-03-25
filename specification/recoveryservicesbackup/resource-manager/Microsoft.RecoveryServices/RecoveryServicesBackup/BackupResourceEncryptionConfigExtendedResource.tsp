@@ -10,46 +10,48 @@ using TypeSpec.Http;
 
 namespace Microsoft.RecoveryServices;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Empty documentation for back compatibility"
 @singleton("backupResourceEncryptionConfig")
 @parentResource(VaultResource)
 @doc("")
 model BackupResourceEncryptionConfigExtendedResource
-  is TrackedResourceWithOptionalLocation<BackupResourceEncryptionConfigExtended> {
+  is ProxyResource<BackupResourceEncryptionConfigExtended> {
   ...ResourceNameParameter<
     Resource = BackupResourceEncryptionConfigExtendedResource,
     KeyName = "backupEncryptionConfig",
     SegmentName = "backupEncryptionConfigs",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  /**
-   * Optional ETag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  eTag?: string;
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
+
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Empty documentation for back compatibility"
 @singleton("backupResourceEncryptionConfig")
 @parentResource(VaultResource)
 @doc("")
 model BackupResourceEncryptionConfigResource
-  is TrackedResourceWithOptionalLocation<BackupResourceEncryptionConfig> {
+  is ProxyResource<BackupResourceEncryptionConfig> {
   ...ResourceNameParameter<
     Resource = BackupResourceEncryptionConfigResource,
     KeyName = "backupEncryptionConfig",
     SegmentName = "backupEncryptionConfigs",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  /**
-   * Optional ETag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  eTag?: string;
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
+
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

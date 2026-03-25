@@ -4,9 +4,10 @@ import "@azure-tools/typespec-azure-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.RecoveryServices;
+using Azure.Core;
 using Azure.ResourceManager;
 using Http;
+using Microsoft.RecoveryServices;
 
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   "Client",
@@ -1982,6 +1983,10 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail, "ArmErrorDetail");
 
 // C# settings
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(DayOfWeek, "BackupDayOfWeek", "csharp");
 @@clientName(WeekOfMonth, "BackupWeekOfMonth", "csharp");
 @@clientName(MonthOfYear, "BackupMonthOfYear", "csharp");
@@ -2715,6 +2720,74 @@ op protectionPolicyOperationStatusesGet(
 );
 @@clientName(MabServerType.SQLAGWorkLoadContainer,
   "SqlAvailabilityGroupWorkLoadContainer",
+  "csharp"
+);
+
+@@clientName(JobDetails, "BackupJob", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(BackupEngineBaseResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(BackupResourceConfigResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(BackupResourceEncryptionConfigExtendedResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(BackupResourceEncryptionConfigResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(BackupResourceVaultConfigResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(JobResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.RecoveryServices.PrivateEndpointConnectionResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ProtectionContainerResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ProtectedItemResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ProtectionIntentResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ProtectionPolicyResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(RecoveryPointResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ResourceGuardProxyBaseResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 
