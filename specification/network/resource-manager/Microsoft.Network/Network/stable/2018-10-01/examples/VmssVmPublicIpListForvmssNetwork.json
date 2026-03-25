@@ -2,8 +2,11 @@
   "parameters": {
     "virtualMachineScaleSetName": "vmss1",
     "resourceGroupName": "vmss-tester",
-    "api-version": "2017-03-30",
-    "subscriptionId": "subid"
+    "api-version": "2018-10-01",
+    "subscriptionId": "subid",
+    "virtualmachineIndex": 1,
+    "networkInterfaceName": "nic1",
+    "ipConfigurationName": "ip1"
   },
   "responses": {
     "200": {
@@ -26,27 +29,11 @@
               "idleTimeoutInMinutes": 10,
               "provisioningState": "Succeeded"
             }
-          },
-          {
-            "id": "/subscriptions/subid/resourceGroups/vmss-tester/providers/Microsoft.Compute/virtualMachineScaleSets/vmss1/virtualMachines/3/networkInterfaces/nic1/ipConfigurations/ip1/publicIPAddresses/pub1",
-            "name": "pub1",
-            "properties": {
-              "publicIPAllocationMethod": "Dynamic",
-              "publicIPAddressVersion": "IPv4",
-              "ipConfiguration": {
-                "id": "/subscriptions/subid/resourceGroups/vmss-tester/providers/Microsoft.Compute/virtualMachineScaleSets/vmss1/virtualMachines/3/networkInterfaces/nic1/ipConfigurations/ip1"
-              },
-              "dnsSettings": {
-                "domainNameLabel": "vm3.testvmssacc",
-                "fqdn": "vm3.testvmssacc.southeastasia.cloudapp.azure.com"
-              },
-              "ipAddress": "13.67.118.216",
-              "idleTimeoutInMinutes": 10,
-              "provisioningState": "Succeeded"
-            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "PublicIPAddresses_ListVirtualMachineScaleSetVMPublicIPAddresses",
+  "title": "ListVMSSVMPublicIP"
 }
