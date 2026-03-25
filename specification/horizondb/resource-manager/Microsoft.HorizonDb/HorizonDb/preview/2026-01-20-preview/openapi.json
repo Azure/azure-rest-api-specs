@@ -2334,6 +2334,14 @@
             "read",
             "create"
           ]
+        },
+        "parameterGroup": {
+          "$ref": "#/definitions/HorizonDbParameterGroupConnectionProperties",
+          "description": "Defines connection to a parameter group.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         }
       },
       "required": [
@@ -2364,6 +2372,10 @@
           "x-ms-mutability": [
             "update"
           ]
+        },
+        "parameterGroup": {
+          "$ref": "#/definitions/HorizonDbParameterGroupConnectionProperties",
+          "description": "Defines connection to a parameter group."
         }
       }
     },
@@ -2473,12 +2485,28 @@
           "type": "string",
           "format": "arm-id",
           "description": "The resource ID of the connected resource.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
           "readOnly": true
+        },
+        "syncStatus": {
+          "type": "string",
+          "description": "Indication of if parameter group is applied on Horizon db resource.",
+          "readOnly": true
+        },
+        "applyImmediately": {
+          "type": "boolean",
+          "description": "Indicates whether the parameters should be applied immediately.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         }
       }
     },

@@ -160,6 +160,10 @@ model HorizonDbClusterProperties {
   @doc("Defines how replicas are placed across availability zones.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   zonePlacementPolicy?: ZonePlacementPolicy;
+
+  @doc("Defines connection to a parameter group.")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  parameterGroup?: HorizonDbParameterGroupConnectionProperties;
 }
 
 @doc("Properties of a HorizonDb cluster for update operations.")
@@ -176,6 +180,9 @@ model HorizonDbClusterPropertiesForPatchUpdate {
   @maxValue(96)
   @visibility(Lifecycle.Update)
   vCores?: int32;
+
+  @doc("Defines connection to a parameter group.")
+  parameterGroup?: HorizonDbParameterGroupConnectionProperties;
 }
 
 @doc("HorizonDb cluster for update operations.")
@@ -507,10 +514,18 @@ model HorizonDbParameterGroupConnectionProperties {
   name?: string;
 
   @doc("The resource ID of the connected resource.")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Update, Lifecycle.Read)
   id?: armResourceIdentifier;
 
   @doc("The type of the resource.")
   @visibility(Lifecycle.Read)
   type?: string;
+
+  @doc("Indication of if parameter group is applied on Horizon db resource.")
+  @visibility(Lifecycle.Read)
+  syncStatus?: string;
+
+  @doc("Indicates whether the parameters should be applied immediately.")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  applyImmediately?: boolean;
 }
