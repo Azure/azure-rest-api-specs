@@ -210,7 +210,7 @@ interface Agents {
     }
   )
   @removed(Versions.v1)
-  updateAgentEndpointObject is FoundryDataPlanePreviewOperation<
+  patchAgentObject is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
     {
       /** The name of the agent to retrieve. */
