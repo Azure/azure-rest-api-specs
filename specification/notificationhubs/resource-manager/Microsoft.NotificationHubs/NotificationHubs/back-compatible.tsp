@@ -102,7 +102,6 @@ using Microsoft.NotificationHubs;
 );
 // Removed: @@clientName(CheckAvailabilityParameters, "CheckAvailabilityContent", "csharp");
 // Replaced by csharp-scoped rename in client.tsp to "NotificationHubAvailabilityContent"
-@@clientName(DebugSendResponse, "DebugSendResponseResult", "csharp");
 @@clientName(Operation, "Info", "csharp");
 
 // @@clientLocation decorators for operations with @operationId

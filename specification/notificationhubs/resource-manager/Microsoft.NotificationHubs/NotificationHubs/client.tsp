@@ -68,49 +68,20 @@ using Microsoft.NotificationHubs;
 @@clientName(AdmCredential, "NotificationHubAdmCredential", "csharp");
 @@alternateType(AdmCredentialProperties.authTokenUrl, url, "csharp");
 @@clientName(AccessRights, "AuthorizationRuleAccessRightExt", "csharp");
-// TODO: Replace @@alternateType workaround with @@hierarchyBuilding once https://github.com/microsoft/typespec/issues/9234 is fixed.
-// CheckAvailabilityResult is a ProxyResource; hierarchyBuilding should be able to change its base to TrackedResource.
 @@clientName(CheckAvailabilityResult,
-  "NotificationHubAvailabilityResultTemp",
-  "csharp"
-);
-@@alternateType(CheckAvailabilityResult,
-  CheckAvailabilityResultReplacement,
-  "csharp"
-);
-@@clientName(CheckAvailabilityResultReplacement,
   "NotificationHubAvailabilityResult",
   "csharp"
 );
-@@usage(CheckAvailabilityResultReplacement,
-  Usage.input | Usage.output,
-  "csharp"
-);
+@@usage(CheckAvailabilityResult, Usage.input | Usage.output, "csharp");
 @@clientName(NamespaceListResult,
   "NotificationHubNamespaceListResult",
   "csharp"
 );
 @@clientName(NamespaceType, "NotificationHubNamespaceTypeExt", "csharp");
-// TODO: Replace @@alternateType workaround with @@hierarchyBuilding once https://github.com/microsoft/typespec/issues/9234 is fixed.
-// PnsCredentialsResource is a ProxyResource; hierarchyBuilding should be able to change its base to TrackedResource.
-@@clientName(PnsCredentialsResource,
-  "NotificationHubPnsCredentialsTemp",
-  "csharp"
-);
-@@alternateType(PnsCredentialsResource,
-  PnsCredentialsResourceReplacement,
-  "csharp"
-);
-@@clientName(PnsCredentialsResourceReplacement,
-  "NotificationHubPnsCredentials",
-  "csharp"
-);
-@@usage(PnsCredentialsResourceReplacement,
-  Usage.input | Usage.output,
-  "csharp"
-);
+@@clientName(PnsCredentialsResource, "NotificationHubPnsCredentials", "csharp");
+@@usage(PnsCredentialsResource, Usage.input | Usage.output, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PnsCredentialsResourceReplacement.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PnsCredentialsResource.properties,
   "csharp"
 );
 @@clientName(PolicyKeyResource, "NotificationHubPolicyKey", "csharp");
@@ -166,29 +137,6 @@ using Microsoft.NotificationHubs;
 );
 @@clientName(NamespaceProperties.status, "NamespaceStatus", "csharp");
 @@clientName(NamespaceProperties.namespaceType, "HubNamespaceType", "csharp");
-// TODO: Replace @@alternateType workaround with @@hierarchyBuilding once https://github.com/microsoft/typespec/issues/9234 is fixed.
-// CheckAvailabilityParameters is a plain model (not a resource); hierarchyBuilding may not support this case.
-@@clientName(CheckAvailabilityParameters,
-  "NotificationHubAvailabilityContentTemp",
-  "csharp"
-);
-@@alternateType(CheckAvailabilityParameters,
-  CheckAvailabilityParametersReplacement,
-  "csharp"
-);
-@@clientName(CheckAvailabilityParametersReplacement,
-  "NotificationHubAvailabilityContent",
-  "csharp"
-);
-// TODO: Replace @@alternateType workaround with @@hierarchyBuilding once https://github.com/microsoft/typespec/issues/9234 is fixed.
-// DebugSendResponse is a ProxyResource; hierarchyBuilding should be able to change its base to TrackedResource.
-@@clientName(DebugSendResponse, "NotificationHubTestSendResultTemp", "csharp");
-@@alternateType(DebugSendResponse, DebugSendResponseReplacement, "csharp");
-@@clientName(DebugSendResponseReplacement,
-  "NotificationHubTestSendResult",
-  "csharp"
-);
-@@usage(DebugSendResponseReplacement, Usage.input | Usage.output, "csharp");
 @@clientName(NotificationHubProperties.name, "NotificationHubName", "csharp");
 @@alternateType(NotificationHubProperties.registrationTtl, duration, "csharp");
 @@clientName(NamespaceProperties.name, "NamespaceName", "csharp");
@@ -204,77 +152,35 @@ using Microsoft.NotificationHubs;
   "csharp"
 );
 
-// TODO: Replace @@alternateType workaround with @@hierarchyBuilding once https://github.com/microsoft/typespec/issues/9234 is fixed.
-// NotificationHubPatchParameters is a plain model (not a resource); hierarchyBuilding may not support this case.
-// Replacement model swaps: ProxyResource → TrackedResource for C# backward compat (TrackedResourceData base class)
-@@alternateType(NotificationHubPatchParameters,
-  NotificationHubPatchParametersReplacement,
-  "csharp"
-);
-@@clientName(NotificationHubPatchParametersReplacement,
-  "NotificationHubPatch",
+// Change base type from ProxyResource (ResourceData) to TrackedResource (TrackedResourceData)
+// for C# backward compatibility. The pre-migration SDK had TrackedResourceData as the base with location/tags.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(CheckAvailabilityResult,
+  Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NotificationHubPatchParametersReplacement.properties,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PnsCredentialsResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
-
-// Change SharedAccessAuthorizationRuleResource base type from ProxyResource (ResourceData)
-// to TrackedResource (TrackedResourceData) for C# backward compatibility.
-// The pre-migration SDK had TrackedResourceData as the base with location/tags.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(SharedAccessAuthorizationRuleResource,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DebugSendResponse,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+@@clientName(DebugSendResponse, "NotificationHubTestSendResult", "csharp");
+@@usage(DebugSendResponse, Usage.input | Usage.output, "csharp");
 
-// C#-only replacement models — swap ProxyResource → TrackedResource to preserve TrackedResourceData base class.
-
+// Cannot use @@hierarchyBuilding because NotificationHubPatchParameters' properties are not a strict superset
+// of TrackedResource (missing id, name, type, systemData, location).
 /**
- * Replacement for CheckAvailabilityResult — uses TrackedResource base for C# backward compat.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model"
-model CheckAvailabilityResultReplacement
-  extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * Gets or sets true if the name is available and can be used to
-   * create new Namespace/NotificationHub. Otherwise false.
-   */
-  isAvailiable?: boolean;
-
-  /**
-   * The Sku description for a namespace
-   */
-  sku?: Sku;
-}
-
-/**
- * Replacement for PnsCredentialsResource — uses TrackedResource base for C# backward compat.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model"
-model PnsCredentialsResourceReplacement
-  extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * Collection of Notification Hub or Notification Hub Namespace PNS credentials.
-   */
-  properties?: PnsCredentials;
-}
-
-/**
- * Replacement for DebugSendResponse — uses TrackedResource base for C# backward compat.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model"
-model DebugSendResponseReplacement
-  extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * Result of DebugSend operations.
-   */
-  properties?: DebugSendResult;
-}
-
-/**
- * Replacement for NotificationHubPatchParameters — uses TrackedResource base for C# backward compat.
+ * Patch parameter for NamespaceResource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model"
 model NotificationHubPatchParametersReplacement
@@ -290,8 +196,24 @@ model NotificationHubPatchParametersReplacement
   sku?: Sku;
 }
 
+@@alternateType(NotificationHubPatchParameters,
+  NotificationHubPatchParametersReplacement,
+  "csharp"
+);
+@@clientName(NotificationHubPatchParametersReplacement,
+  "NotificationHubPatch",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NotificationHubPatchParametersReplacement.properties,
+  "csharp"
+);
+
+// Cannot use @@hierarchyBuilding because CheckAvailabilityParameters' properties are not a strict superset
+// of TrackedResource (e.g. location is string vs azureLocation, id is string vs armResourceIdentifier).
 /**
- * Replacement for CheckAvailabilityParameters — uses TrackedResource base for C# backward compat.
+ * Parameters supplied to the Check Name Availability for Namespace and
+ * NotificationHubs.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model"
 model CheckAvailabilityParametersReplacement
@@ -306,3 +228,16 @@ model CheckAvailabilityParametersReplacement
    */
   sku?: Sku;
 }
+
+@@clientName(CheckAvailabilityParameters,
+  "NotificationHubAvailabilityContentTemp",
+  "csharp"
+);
+@@alternateType(CheckAvailabilityParameters,
+  CheckAvailabilityParametersReplacement,
+  "csharp"
+);
+@@clientName(CheckAvailabilityParametersReplacement,
+  "NotificationHubAvailabilityContent",
+  "csharp"
+);
