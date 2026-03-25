@@ -765,9 +765,9 @@ model ToolsetMCPTaskStatus {
   lastUpdatedAt: string;
 
   /**
-   * Actual retention duration from creation in milliseconds.
+   * Actual retention duration from creation in milliseconds, null for unlimited.
    */
-  ttl?: int64;
+  ttl: int64 | null;
 
   /**
    * Suggested polling interval in milliseconds.
