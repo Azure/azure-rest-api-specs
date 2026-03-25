@@ -100,7 +100,7 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
-  @route("/")
+  @sharedRoute
   listFileSystems is DataLakeOperationResponseBody<
     {
       /** The value must be "account" for all account operations. */
@@ -130,16 +130,9 @@ interface FileSystem {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
-  @route("/{filesystem}")
+  @sharedRoute
   create is DataLakeOperationNoBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
       /** The value must be "filesystem" for all filesystem operations. */
       @query resource: FileSystemResourceType;
 
@@ -158,16 +151,9 @@ interface FileSystem {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @patch
-  @route("/{filesystem}")
+  @sharedRoute
   setProperties is DataLakeOperationNoBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
       /** The value must be "filesystem" for all filesystem operations. */
       @query resource: FileSystemResourceType;
 
@@ -186,16 +172,9 @@ interface FileSystem {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @head
-  @route("/{filesystem}")
+  @sharedRoute
   getProperties is DataLakeOperationNoBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
       /** The value must be "filesystem" for all filesystem operations. */
       @query resource: FileSystemResourceType;
 
@@ -213,16 +192,9 @@ interface FileSystem {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
-  @route("/{filesystem}")
+  @sharedRoute
   delete is DataLakeOperationNoBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
       /** The value must be "filesystem" for all filesystem operations. */
       @query resource: FileSystemResourceType;
 
@@ -239,16 +211,10 @@ interface FileSystem {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
-  @route("/{filesystem}?resource=filesystem")
+  @sharedRoute
+  @route("?resource=filesystem")
   listPaths is DataLakeOperationResponseBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
       ...ContinuationParameter;
       ...DirectoryParameter;
       ...RecursiveRequiredParameter;
@@ -271,16 +237,9 @@ interface FileSystem {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
-  @route("/{filesystem}?restype=container&comp=list&hierarchy")
+  @route("?restype=container&comp=list&hierarchy")
   listBlobHierarchySegment is DataLakeOperationResponseBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
       ...PrefixParameter;
       ...DelimiterParameter;
       ...MarkerParameter;
@@ -307,19 +266,9 @@ interface Path {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
-  @route("/{filesystem}/{path}")
+  @sharedRoute
   create is DataLakeOperationNoBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
-      /** The file or directory path. */
-      @path path: string;
-
       /** Required only for Create File and Create Directory. The value must be "file" or "directory". */
       @query resource?: PathResourceType;
 
@@ -374,19 +323,9 @@ interface Path {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @patch(#{ implicitOptionality: true })
-  @route("/{filesystem}/{path}")
+  @sharedRoute
   update is DataLakeOperation<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
-      /** The file or directory path. */
-      @path path: string;
-
       /** The action must be "append" to upload data to be appended to a file, "flush" to flush previously uploaded data to a file, "setProperties" to set the properties of a file or directory, "setAccessControl" to set the owner, group, permissions, or access control list for a file or directory, or "setAccessControlRecursive" to set the access control list for a directory recursively. Note that Hierarchical Namespace must be enabled for the account in order to use access control. Also note that the Access Control List (ACL) includes permissions for the owner, owning group, and others, so the x-ms-permissions and x-ms-acl request headers are mutually exclusive. */
       @query action: PathUpdateAction;
 
@@ -451,19 +390,9 @@ interface Path {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
-  @route("/{filesystem}/{path}")
+  @sharedRoute
   lease is DataLakeOperationNoBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
-      /** The file or directory path. */
-      @path path: string;
-
       /** There are five lease actions: "acquire", "break", "change", "renew", and "release". Use "acquire" and specify the "x-ms-proposed-lease-id" and "x-ms-lease-duration" to acquire a new lease. Use "break" to break an existing lease. When a lease is broken, the lease break period is allowed to elapse, during which time no lease operation except break and release can be performed on the file. When a lease is successfully broken, the response indicates the interval in seconds until a new lease can be acquired. Use "change" and specify the current lease ID in "x-ms-lease-id" and the new lease ID in "x-ms-proposed-lease-id" to change the lease ID of an active lease. Use "renew" and specify the "x-ms-lease-id" to renew an existing lease. Use "release" and specify the "x-ms-lease-id" to release a lease. */
       @header("x-ms-lease-action")
       leaseAction: PathLeaseAction;
@@ -494,19 +423,9 @@ interface Path {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
-  @route("/{filesystem}/{path}")
+  @sharedRoute
   read is DataLakeOperationResponseBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
-      /** The file or directory path. */
-      @path path: string;
-
       /** The HTTP Range request header specifies one or more byte ranges of the resource to be retrieved. */
       @header("Range")
       range?: string;
@@ -556,19 +475,9 @@ interface Path {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @head
-  @route("/{filesystem}/{path}")
+  @sharedRoute
   getProperties is DataLakeOperationNoBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
-      /** The file or directory path. */
-      @path path: string;
-
       /** Optional. If the value is "getStatus" only the system defined properties for the path are returned. If the value is "getAccessControl" the access control list is returned in the response headers (Hierarchical Namespace must be enabled for the account), otherwise the properties are returned. */
       @query action?: PathGetPropertiesAction;
 
@@ -614,19 +523,9 @@ interface Path {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
-  @route("/{filesystem}/{path}")
+  @sharedRoute
   delete is DataLakeOperationNoBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
-      /** The file or directory path. */
-      @path path: string;
-
       ...RecursiveOptionalParameter;
       ...ContinuationParameter;
       ...LeaseIdOptionalParameter;
@@ -647,19 +546,9 @@ interface Path {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @patch
-  @route("/{filesystem}/{path}?action=setAccessControl")
+  @route("?action=setAccessControl")
   setAccessControl is DataLakeOperationNoBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
-      /** The file or directory path. */
-      @path path: string;
-
       ...LeaseIdOptionalParameter;
       ...OwnerParameter;
       ...GroupParameter;
@@ -680,19 +569,9 @@ interface Path {
   /** Set the access control list for a path and sub-paths. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @patch
-  @route("/{filesystem}/{path}?action=setAccessControlRecursive")
+  @route("?action=setAccessControlRecursive")
   setAccessControlRecursive is DataLakeOperationResponseBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
-      /** The file or directory path. */
-      @path path: string;
-
       /** Mode "set" sets POSIX access control rights on files and directories, "modify" modifies one or more POSIX access control rights that pre-exist on files and directories, "remove" removes one or more POSIX access control rights that were present earlier on files and directories. */
       @query mode: PathSetAccessControlRecursiveMode;
 
@@ -719,19 +598,9 @@ interface Path {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @patch
-  @route("/{filesystem}/{path}?action=flush")
+  @route("?action=flush")
   flushData is DataLakeOperationNoBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
-      /** The file or directory path. */
-      @path path: string;
-
       ...PositionParameter;
       ...RetainUncommittedDataParameter;
       ...CloseParameter;
@@ -770,19 +639,9 @@ interface Path {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @patch(#{ implicitOptionality: true })
-  @route("/{filesystem}/{path}?action=append")
+  @route("?action=append")
   appendData is DataLakeOperationRequestBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
-      /** The file or directory path. */
-      @path path: string;
-
       ...PositionParameter;
       ...ContentLengthParameter;
       ...TransactionalContentMD5Parameter;
@@ -818,19 +677,9 @@ interface Path {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("/{filesystem}/{path}?comp=expiry")
+  @route("?comp=expiry")
   setExpiry is DataLakeOperationNoBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
-      /** The file or directory path. */
-      @path path: string;
-
       ...PathExpiryOptionsRequiredParameter;
       ...PathExpiryTimeParameter;
       ...TimeoutParameter;
@@ -846,19 +695,9 @@ interface Path {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("/{filesystem}/{path}?comp=undelete")
+  @route("?comp=undelete")
   undelete is DataLakeOperationNoBody<
     {
-      /** The filesystem identifier. */
-      @path
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$")
-      filesystem: string;
-
-      /** The file or directory path. */
-      @path path: string;
-
       ...UndeleteSourceParameter;
       ...TimeoutParameter;
     },
