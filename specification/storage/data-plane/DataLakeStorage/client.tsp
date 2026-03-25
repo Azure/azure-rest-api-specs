@@ -20,3 +20,16 @@ namespace Customizations;
   "sealed",
   "javascript"
 );
+
+@@clientOption(Storage.DataLake.StorageError,
+  "header",
+  "x-ms-error-code:errorCode",
+  "javascript"
+);
+@@clientOption(Storage.DataLake.StorageError,
+  "restErrorCodeHeader",
+  "x-ms-error-code",
+  "javascript"
+);
+
+@@clientOption(Storage.DataLake, "includeRootSlash", false, "javascript");
