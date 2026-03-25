@@ -246,7 +246,7 @@ stages:
 
           # --- Azure/azure-sdk-for-js public repo comparison ---
           $azurePkgDir = "$(publicSdkRepoDirectory)/sdk/purview/arm-purview"
-          Write-Host "`n=== [Diag 1][Azure/azure-sdk-for-js] CWD: $azurePkgDir ===
+          Write-Host "`n=== [Diag 1][Azure/azure-sdk-for-js] CWD: $azurePkgDir ==="
           Push-Location $azurePkgDir
           git config remote.origin.partialclonefilter
           $tags2 = git tag -l
@@ -281,7 +281,7 @@ stages:
 
           # --- Azure/azure-sdk-for-js public repo comparison ---
           $azurePkgDir = "$(publicSdkRepoDirectory)/sdk/purview/arm-purview"
-          Write-Host "`n=== [Diag 2][Azure/azure-sdk-for-js] CWD: $azurePkgDir ===
+          Write-Host "`n=== [Diag 2][Azure/azure-sdk-for-js] CWD: $azurePkgDir ==="
           Push-Location $azurePkgDir
           git fetch --tags
           Write-Host "[Azure/azure-sdk-for-js] git fetch --tags exit code: $LASTEXITCODE"
