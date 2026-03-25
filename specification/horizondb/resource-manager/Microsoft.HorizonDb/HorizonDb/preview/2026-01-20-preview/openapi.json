@@ -2336,7 +2336,7 @@
           ]
         },
         "parameterGroup": {
-          "$ref": "#/definitions/HorizonDbParameterGroupConnectionProperties",
+          "$ref": "#/definitions/ParameterGroupConnectionProperties",
           "description": "Defines connection to a parameter group.",
           "x-ms-mutability": [
             "read",
@@ -2374,7 +2374,7 @@
           ]
         },
         "parameterGroup": {
-          "$ref": "#/definitions/HorizonDbParameterGroupConnectionProperties",
+          "$ref": "#/definitions/ParameterGroupConnectionProperties",
           "description": "Defines connection to a parameter group."
         }
       }
@@ -2485,28 +2485,12 @@
           "type": "string",
           "format": "arm-id",
           "description": "The resource ID of the connected resource.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
+          "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
           "readOnly": true
-        },
-        "syncStatus": {
-          "type": "string",
-          "description": "Indication of if parameter group is applied on Horizon db resource.",
-          "readOnly": true
-        },
-        "applyImmediately": {
-          "type": "boolean",
-          "description": "Indicates whether the parameters should be applied immediately.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
         }
       }
     },
@@ -2898,6 +2882,34 @@
           "$ref": "#/definitions/PublicNetworkAccessState",
           "description": "The flag indicating whether public ip is requested.",
           "readOnly": true
+        }
+      }
+    },
+    "ParameterGroupConnectionProperties": {
+      "type": "object",
+      "description": "Connection information for HorizonDb parameter group.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the connected resource.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "syncStatus": {
+          "type": "string",
+          "description": "Indication of if parameter group is applied on Horizon db resource.",
+          "readOnly": true
+        },
+        "applyImmediately": {
+          "type": "boolean",
+          "description": "Indicates whether the parameters should be applied immediately.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         }
       }
     },
