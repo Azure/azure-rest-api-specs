@@ -7448,15 +7448,15 @@
         "port": {
           "description": "The TCP port number that the Amazon Redshift server uses to listen for client connections. The default value is 5439. Type: integer (or Expression with resultType integer)."
         },
-        "encryptedCredential": {
-          "type": "string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
-        },
         "sslMode": {
           "description": "The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0. Type: string."
         },
         "sslInsecure": {
           "description": "Specifies whether the driver checks the authenticity of the IdP server certificate. The default value is False. Only used for Version 2.0. Type: boolean (or Expression with resultType boolean)."
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -7485,6 +7485,7 @@
     },
     "AmazonRedshiftSslMode": {
       "type": "string",
+      "description": "The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0.",
       "enum": [
         "verify-full",
         "verify-ca",
