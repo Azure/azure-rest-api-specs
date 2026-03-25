@@ -77,6 +77,7 @@ model UpdateAgentRequest {
 }
 
 union AgentObjectType {
+  string,
   agent: "agent",
   agentVersion: "agent.version",
   agentDeleted: "agent.deleted",
