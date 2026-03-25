@@ -17,3 +17,6 @@ using Microsoft.Kusto;
 @@clientName(IotHubDataFormat.W3CLOGFILE, "W3_CLOGFILE", "python");
 @@clientName(EventHubDataFormat.W3CLOGFILE, "W3_CLOGFILE", "python");
 @@clientName(EventGridDataFormat.W3CLOGFILE, "W3_CLOGFILE", "python");
+
+model AddCalloutPoliciesRequest is CalloutPoliciesList;
+@@alternateType(Clusters.addCalloutPolicies::parameters.body, AddCalloutPoliciesRequest, "java");
