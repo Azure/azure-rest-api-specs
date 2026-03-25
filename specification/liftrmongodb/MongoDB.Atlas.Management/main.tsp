@@ -155,6 +155,7 @@ union ClusterTier {
 @doc("Properties specific to a MongoDB Atlas Project.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model ProjectProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "projectId is intentionally in both the key and properties for ProjectByName responses"
   @doc("Atlas project id.")
   @visibility(Lifecycle.Read)
   @pattern("^[a-fA-F0-9]{24}$")
@@ -175,10 +176,25 @@ model ProjectProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@doc("The MongoDB Atlas Project resource type. A project is a logical grouping of clusters within an organization.")
+@doc("The MongoDB Atlas Project resource type identified by project ID. Used for read, delete, list, and action operations.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 @parentResource(OrganizationResource)
 model Project is ProxyResource<ProjectProperties> {
+  @key("projectId")
+  @pattern("^[a-fA-F0-9]{24}$")
+  @segment("projects")
+  @minLength(1)
+  @maxLength(24)
+  @doc("Atlas project id.")
+  @path
+  @visibility(Lifecycle.Read)
+  projectId: string;
+}
+
+@doc("The MongoDB Atlas Project resource type identified by project name. Used for create or update operations.")
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+@parentResource(OrganizationResource)
+model ProjectByName is ProxyResource<ProjectProperties> {
   @key("projectName")
   @pattern("^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$")
   @segment("projects")
@@ -190,11 +206,12 @@ model Project is ProxyResource<ProjectProperties> {
   projectName: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "ProjectByName is only used for create/update; delete uses Project (by ID)"
 @armResourceOperations
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 interface Projects {
   get is ArmResourceRead<Project>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ProjectByName>;
   delete is ArmResourceDeleteWithoutOkAsync<Project>;
   list is ArmResourceListByParent<Project>;
 
@@ -270,30 +287,6 @@ model TierRegions {
 // Cluster - child proxy resource under Project
 // =====================================================
 
-@doc("State of the cluster.")
-@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
-union ClusterState {
-  string,
-
-  @doc("Cluster is idle and ready.")
-  IDLE: "IDLE",
-
-  @doc("Cluster is being created.")
-  CREATING: "CREATING",
-
-  @doc("Cluster is being updated.")
-  UPDATING: "UPDATING",
-
-  @doc("Cluster is being deleted.")
-  DELETING: "DELETING",
-
-  @doc("Cluster has been deleted.")
-  DELETED: "DELETED",
-
-  @doc("Cluster is being repaired.")
-  REPAIRING: "REPAIRING",
-}
-
 @doc("Properties specific to a MongoDB Atlas Cluster.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model ClusterProperties {
@@ -315,7 +308,7 @@ model ClusterProperties {
 
   @doc("Current state of the cluster.")
   @visibility(Lifecycle.Read)
-  state?: ClusterState;
+  state?: string;
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
