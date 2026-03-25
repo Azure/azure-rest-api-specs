@@ -1281,3 +1281,11 @@ op replaceprivateDnsZoneGroupsList(
   "python"
 );
 @@clientName(NetworkGroupCreateOrUpdateEtagHeader.eTag, "etag", "java");
+@@clientLocation(VirtualWans.supportedSecurityProviders,
+  CombineClient,
+  "python"
+);
+@@clientLocation(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
+  CombineClient,
+  "python"
+);
