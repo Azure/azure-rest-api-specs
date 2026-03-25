@@ -2841,6 +2841,41 @@ union DynamicsDeploymentType {
   OnPremisesWithIfd: "OnPremisesWithIfd",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union AmazonRedshiftSslMode {
+  string,
+
+  /**
+   * Connect only using SSL, a trusted certificate authority, and a server name that matches the certificate.
+   */
+  Verify_full: "verify-full",
+
+  /**
+   * Connect only using SSL and a trusted certificate authority.
+   */
+  Verify_ca: "verify-ca",
+
+  /**
+   * Connect only using SSL.
+   */
+  Required: "require",
+
+  /**
+   * Connect using SSL if available. Otherwise, connect without using SSL.
+   */
+  Preferred: "prefer",
+
+  /**
+   * By default, connect without using SSL. If the server requires SSL connections, then use SSL.
+   */
+  Allowed: "allow",
+
+  /**
+   * Connect without using SSL.
+   */
+  Disabled: "disable",
+}
+
 /**
  * All available dynamicsAuthenticationType values.
  */
