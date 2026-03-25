@@ -3,4 +3,4 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientNamespace(Storage.DataLake, "Azure.Storage.Files.DataLake");
+@@clientNamespace(Storage.DataLake, "Azure.Storage.Files.DataLake", "!python");
