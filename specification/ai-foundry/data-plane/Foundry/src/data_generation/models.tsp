@@ -64,7 +64,7 @@ model DataGenerationJob {
   @visibility(Lifecycle.Read)
   status: DataGenerationJobStatus;
 
-  @doc("The outputs generated from the job. For fine-tuning purpose, the output will always be an Azure OpenAI file. For evaluation purpose, the output can be either an Azure OpenAI file or a dataset. For dataset output, optionally a name of oputput dataset can be specified")
+  @doc("The job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation.")
   outputs?: Array<DataGenerationJobOutput>;
 
   @doc("The number of samples actually generated. This field will be populated only after the job is completed.")
