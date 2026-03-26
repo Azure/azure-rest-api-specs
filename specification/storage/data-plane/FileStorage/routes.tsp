@@ -647,8 +647,13 @@ interface Share {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?restype=share&comp=acl")
   @put
-  setAccessPolicy is StorageOperationRequestBody<
+  setAccessPolicy is StorageOperationNoBody<
     {
+      /** Content-Type header */
+      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+      @header("Content-Type")
+      contentType?: "application/xml";
+
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...FileRequestIntentParameter;
