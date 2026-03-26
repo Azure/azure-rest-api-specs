@@ -2974,6 +2974,10 @@ op protectionPolicyOperationStatusesGet(
   "GetGetTieringCostOperationResult",
   "csharp"
 );
+@@clientName(RecoveryPointsRecommendedForMove.list,
+  "GetRecoveryPointsRecommendedForMove",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(BackupEngineBaseResource,
@@ -3113,6 +3117,8 @@ op protectionPolicyOperationStatusesGet(
   Usage.input | Usage.output,
   "csharp"
 );
+@@usage(BackupEngineBaseResource, Usage.input | Usage.output, "csharp");
+@@usage(JobResource, Usage.input | Usage.output, "csharp");
 
 //@@scope(BackupResourceEncryptionConfigs.get, "!csharp");
 @@scope(BackupResourceEncryptionConfigs.update, "!csharp");
@@ -3133,3 +3139,4 @@ op protectionPolicyOperationStatusesGet(
 @@scope(ValidateOperationResults.get, "!csharp");
 @@scope(ValidateOperationStatuses.get, "!csharp");
 @@scope(ExportJobsOperationResults.get, "!csharp");
+@@scope(ProtectionContainerOperationResults.get, "!csharp");
