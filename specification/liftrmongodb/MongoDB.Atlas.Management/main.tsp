@@ -27,7 +27,7 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v1_preview)
   v2024_11_18_preview: "2024-11-18-preview",
 
-  /** 2025-06-01 stable version */
+  /** 2025-06-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v1_preview)
   v2025_06_01: "2025-06-01",
