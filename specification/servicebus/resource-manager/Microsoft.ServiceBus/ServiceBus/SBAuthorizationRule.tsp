@@ -57,11 +57,13 @@ interface SBAuthorizationRuleOps
          * The authorization rule name.
          */
         @path
+        @key
         @segment("AuthorizationRules")
         @minLength(1)
         @maxLength(50)
         authorizationRuleName: string,
-      }
+      },
+      ResourceName = "ServiceBusNamespaceAuthorizationRule"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -169,7 +171,8 @@ interface DisasterRecoveryConfigOps
         @minLength(1)
         @maxLength(50)
         authorizationRuleName: string,
-      }
+      },
+      ResourceName = "ServiceBusDisasterRecoveryAuthorizationRule"
     > {}
 
 @armResourceOperations
@@ -241,7 +244,8 @@ interface QueueOps
         @minLength(1)
         @maxLength(50)
         authorizationRuleName: string,
-      }
+      },
+      ResourceName = "ServiceBusQueueAuthorizationRule"
     > {}
 
 @armResourceOperations
@@ -346,7 +350,8 @@ interface TopicOps
         @minLength(1)
         @maxLength(50)
         authorizationRuleName: string,
-      }
+      },
+      ResourceName = "ServiceBusTopicAuthorizationRule"
     > {}
 
 @armResourceOperations

@@ -26,7 +26,7 @@ These are the global settings for the BlobStorage API.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2026-04
+tag: package-2026-06
 use-internal-constructors: true
 add-credentials: true
 ```
@@ -173,6 +173,15 @@ These settings apply only when `--tag=package-2026-04-tsp` is specified on the c
 ```yaml $(tag) == 'package-2026-04-tsp'
 input-file:
   - stable/2026-04-06/generated_blob.json
+```
+
+### Tag: package-2026-06
+
+These settings apply only when `--tag=package-2026-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-06'
+input-file:
+  - stable/2026-06-06/blob.json
 ```
 
 ### Suppression
