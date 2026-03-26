@@ -8719,11 +8719,8 @@ model CrossTenantVaultMapping {
   /**
    * Provisioning state of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Inline enum used to put readOnly on definition for ProvisioningStateMustBeReadOnly lint compliance"
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Inline enum intentionally closed for provisioningState"
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Inline enum used to avoid $ref pattern that fails ProvisioningStateMustBeReadOnly"
   @visibility(Lifecycle.Read)
-  provisioningState?: "Succeeded" | "Failed" | "Canceled";
+  provisioningState?: ResourceProvisioningState;
 }
 
 /**
@@ -8897,9 +8894,6 @@ model VaultCredentialCertificateProperties {
   /**
    * Provisioning state of the vault credential certificate.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Inline enum used to put readOnly on definition for ProvisioningStateMustBeReadOnly lint compliance"
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Inline enum intentionally closed for provisioningState"
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Inline enum used to avoid $ref pattern that fails ProvisioningStateMustBeReadOnly"
   @visibility(Lifecycle.Read)
-  provisioningState?: "Succeeded" | "Failed" | "Canceled";
+  provisioningState?: ResourceProvisioningState;
 }
