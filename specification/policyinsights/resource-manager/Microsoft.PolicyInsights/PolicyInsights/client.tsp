@@ -9,3 +9,12 @@ using Azure.ClientGenerator.Core;
   autoMergeService: true,
 })
 namespace PolicyInsightsManagementClient;
+
+@@clientName(PolicyTrackedResourcesApi.QueryFailure,
+  "PolicyTrackedResourcesQueryFailure",
+  "java"
+);
+@@clientName(PolicyTrackedResourcesApi.QueryFailureError,
+  "PolicyTrackedResourcesQueryFailureError",
+  "java"
+);
