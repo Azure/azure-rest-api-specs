@@ -197,7 +197,8 @@ interface RouteFilters {
   listByRouteFilter is ArmResourceActionSync<
     RouteFilter,
     void,
-    ArmResponse<RouteFilterRuleListResult>
+    ArmResponse<RouteFilterRuleListResult>,
+    Error = CloudError
   >;
 }
 

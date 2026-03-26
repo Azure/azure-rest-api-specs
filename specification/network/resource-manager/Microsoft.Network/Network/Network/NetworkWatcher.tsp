@@ -341,7 +341,7 @@ interface NetworkWatchers {
     void,
     Response = ArmResourceCreatedResponse<
       PacketCaptureResult,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = NetworkWatcher> &
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = PacketCaptureResult> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
     OverrideErrorType = ErrorResponse

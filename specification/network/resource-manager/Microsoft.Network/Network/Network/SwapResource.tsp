@@ -19,7 +19,6 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@singleton("default")
 model SwapResource extends ProxyResourceWithReadOnlyID {
   /**
    * Properties of the SwapResource.
@@ -46,7 +45,6 @@ alias SingletonResourceAlias = {
   @path
   @segment("cloudServiceSlots")
   @key
-  @Azure.ClientGenerator.Core.alternateType("swap", "javascript,go")
   singletonResource: SingletonResource;
 };
 

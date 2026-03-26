@@ -1732,3 +1732,7 @@ using Microsoft.Network;
   "swap",
   "python"
 );
+
+@@Azure.ClientGenerator.Core.alternateType(SingletonResourceAlias.singletonResource,
+  "swap"
+);
