@@ -665,7 +665,8 @@ union ToolsetMCPJsonRpcResult {
   ToolsetMCPListToolsResult,
   ToolsetMCPCallToolResult,
   ToolsetMCPCreateTaskResult,
-  ToolsetMCPTask,
+  ToolsetMCPGetTaskResult,
+  ToolsetMCPCancelTaskResult,
 }
 
 /**
@@ -818,6 +819,45 @@ model ToolsetMCPTask {
    * Suggested polling interval in milliseconds.
    */
   pollInterval?: int64;
+}
+
+/**
+ * Result payload for tasks/get.
+ * Returns the task's current status. Matches MCP spec GetTaskResult = Result & Task.
+ */
+model ToolsetMCPGetTaskResult {
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
+
+  /**
+   * The task with current status.
+   */
+  ...ToolsetMCPTask;
+}
+
+/**
+ * Result payload for tasks/result.
+ * Returns the original request's result. For tools/call tasks, this is CallToolResult.
+ * Using CallToolResult directly since tools/call is the only task-augmentable request.
+ */
+// tasks/result reuses ToolsetMCPCallToolResult — no separate model needed.
+
+/**
+ * Result payload for tasks/cancel.
+ * Returns the cancelled task's status. Matches MCP spec CancelTaskResult = Result & Task.
+ */
+model ToolsetMCPCancelTaskResult {
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
+
+  /**
+   * The cancelled task.
+   */
+  ...ToolsetMCPTask;
 }
 
 /**
