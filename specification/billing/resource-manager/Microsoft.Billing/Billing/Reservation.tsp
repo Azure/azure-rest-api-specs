@@ -14,17 +14,26 @@ namespace Microsoft.Billing;
 /**
  * The definition of the reservation.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @tenantResource
 @parentResource(ReservationOrder)
-model Reservation
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ReservationProperty> {
+model Reservation is Azure.ResourceManager.ProxyResource<ReservationProperty> {
   ...ResourceNameParameter<
     Resource = Reservation,
     KeyName = "reservationId",
     SegmentName = "reservations",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: int32;

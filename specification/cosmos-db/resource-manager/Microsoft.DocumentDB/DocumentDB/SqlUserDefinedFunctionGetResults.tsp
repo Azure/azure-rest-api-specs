@@ -15,16 +15,25 @@ namespace Microsoft.DocumentDB;
  * An Azure Cosmos DB userDefinedFunction.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SqlContainerGetResults)
 model SqlUserDefinedFunctionGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlUserDefinedFunctionGetProperties> {
+  is Azure.ResourceManager.ProxyResource<SqlUserDefinedFunctionGetProperties> {
   ...ResourceNameParameter<
     Resource = SqlUserDefinedFunctionGetResults,
     KeyName = "userDefinedFunctionName",
     SegmentName = "userDefinedFunctions",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 
   /**
    * Identity for the resource.

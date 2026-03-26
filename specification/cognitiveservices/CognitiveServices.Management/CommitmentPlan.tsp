@@ -14,16 +14,25 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services account commitment plan.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator required for 'CommitmentPlan' to maintain SDK backward compatibility"
 @parentResource(Account)
 model CommitmentPlan
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<CommitmentPlanProperties> {
+  is Azure.ResourceManager.ProxyResource<CommitmentPlanProperties> {
   ...ResourceNameParameter<
     Resource = CommitmentPlan,
     KeyName = "commitmentPlanName",
     SegmentName = "commitmentPlans",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 
   /**
    * Resource Etag.

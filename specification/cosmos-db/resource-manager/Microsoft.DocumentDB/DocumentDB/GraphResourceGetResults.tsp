@@ -14,16 +14,25 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB Graph resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
 model GraphResourceGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GraphResourceGetProperties> {
+  is Azure.ResourceManager.ProxyResource<GraphResourceGetProperties> {
   ...ResourceNameParameter<
     Resource = GraphResourceGetResults,
     KeyName = "graphName",
     SegmentName = "graphs",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 
   /**
    * Identity for the resource.

@@ -14,16 +14,26 @@ namespace Microsoft.ServiceFabric;
 /**
  * The application resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 @parentResource(Cluster)
 model ApplicationResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ApplicationResourceProperties> {
+  is Azure.ResourceManager.ProxyResource<ApplicationResourceProperties> {
   ...ResourceNameParameter<
     Resource = ApplicationResource,
     KeyName = "applicationName",
     SegmentName = "applications",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...ManagedServiceIdentityProperty;
 }

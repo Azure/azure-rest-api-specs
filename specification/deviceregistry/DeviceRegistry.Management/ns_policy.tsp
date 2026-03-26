@@ -12,15 +12,13 @@ using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.TrackedResourceWithOptionalLocation to make location property optional for backward compatibility"
 @added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_03_01_preview)
 @renamedFrom(Versions.v2026_03_01_preview, "Policy")
 @removed(Versions.v2026_04_01)
 @doc("A Credential Policy")
 @parentResource(Credential)
-model PolicyV1
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PolicyProperties> {
+model PolicyV1 is Azure.ResourceManager.ProxyResource<PolicyProperties> {
   @doc("The name of the Policy tracked resource.")
   @minLength(3)
   @maxLength(63)
@@ -29,6 +27,16 @@ model PolicyV1
   @segment("policies")
   @path
   name: string;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 }
 
 @added(Versions.v2026_03_01_preview)

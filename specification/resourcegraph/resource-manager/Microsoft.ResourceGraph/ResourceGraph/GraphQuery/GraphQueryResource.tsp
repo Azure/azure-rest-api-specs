@@ -11,15 +11,24 @@ namespace GraphQueryApi;
 /**
  * Graph Query entity definition.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphQueryResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GraphQueryProperties> {
+  is Azure.ResourceManager.ProxyResource<GraphQueryProperties> {
   ...ResourceNameParameter<
     Resource = GraphQueryResource,
     KeyName = "resourceName",
     SegmentName = "queries",
     NamePattern = "^[^<>&:\\?]*$"
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 
   /**
    * This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict.
