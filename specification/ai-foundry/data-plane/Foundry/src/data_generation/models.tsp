@@ -6,23 +6,23 @@ namespace Azure.AI.Projects;
 union DataGenerationJobType {
   string,
 
-  @doc("Simple question and answer between user and agent job type")
+  @doc("Simple question and answers between user and agent.")
   SimpleQnA: "SimpleQnA",
 
-  @doc("Tool use job type")
+  @doc("Tool calling conversation between user and agent.")
   ToolUse: "ToolUse",
 
-  @doc("Multi turn conversation between agents and user.")
+  @doc("Multi turn conversation between user and agent.")
   MultiTurn: "MultiTurn",
 }
 
 @doc("LLM model options for data generation jobs.")
 model DataGenerationModelOptions {
-  @doc("Base model name used to generate data.")
-  model_name: string;
+  @doc("Model deployment name used to generate data.")
+  `model`: string;
 }
 
-@doc("Status values for a data generation job.")
+@doc("Status values for data generation job.")
 union DataGenerationJobStatus {
   string,
 
@@ -53,7 +53,7 @@ model DataGenerationJob {
   @doc("The options for the data generation job.")
   options: DataGenerationJobOptions;
 
-  @doc("The purpose of the data generation job. Either for fine-tuning supervised training or evaluation.")
+  @doc("The purpose of the data generation job. Either for fine-tuning or evaluation.")
   purpose: DataGenerationJobPurpose;
 
   @doc("The job identifier.")
@@ -64,12 +64,12 @@ model DataGenerationJob {
   @visibility(Lifecycle.Read)
   status: DataGenerationJobStatus;
 
-  @doc("The job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation.")
+  @doc("The job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation. This field is populated only after the job has succeeded.")
   outputs?: Array<DataGenerationJobOutput>;
 
-  @doc("The number of samples actually generated. This field will be populated only after the job is completed.")
+  @doc("The number of samples actually generated. This field is populated only after the job has succeeded.")
   @visibility(Lifecycle.Read)
-  generated_samples_count?: int32;
+  generated_samples?: int32;
 
   @doc("The token usage information for the data generation job.")
   @visibility(Lifecycle.Read)
@@ -79,9 +79,9 @@ model DataGenerationJob {
   @visibility(Lifecycle.Read)
   created_at: int64;
 
-  @doc("The timestamp when the job was completed, represented in Unix time (seconds since January 1, 1970).")
+  @doc("The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
-  completed_at?: int64;
+  finished_at?: int64;
 
   @doc("Error information set only when status is 'failed'.")
   @visibility(Lifecycle.Read)
