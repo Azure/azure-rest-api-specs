@@ -23,6 +23,10 @@ using Microsoft.ContainerInstance;
 );
 @@clientName(ContainerAttachResponse, "ContainerAttachResult", "java");
 @@clientName(Microsoft.ContainerInstance.Resource, "ResourcePatch", "java");
+@@clientName(ContainerGroupProperties,
+  "ContainerGroupPropertiesWrapper",
+  "java"
+);
 @@clientName(ContainerGroupPropertiesProperties,
   "ContainerGroupProperties",
   "java"
