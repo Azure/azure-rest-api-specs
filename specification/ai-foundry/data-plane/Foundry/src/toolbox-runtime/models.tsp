@@ -667,6 +667,7 @@ union ToolsetMCPJsonRpcResult {
   ToolsetMCPCreateTaskResult,
   ToolsetMCPGetTaskResult,
   ToolsetMCPCancelTaskResult,
+  ToolsetMCPListTasksResult,
 }
 
 /**
@@ -858,6 +859,26 @@ model ToolsetMCPCancelTaskResult {
    * The cancelled task.
    */
   ...ToolsetMCPTask;
+}
+
+/**
+ * Result payload for tasks/list.
+ */
+model ToolsetMCPListTasksResult {
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
+
+  /**
+   * Cursor to retrieve the next page.
+   */
+  nextCursor?: string;
+
+  /**
+   * The list of tasks.
+   */
+  tasks: ToolsetMCPTask[];
 }
 
 /**
