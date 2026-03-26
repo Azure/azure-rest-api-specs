@@ -122,6 +122,13 @@ using Microsoft.DevCenter;
 @@clientName(UsageUnit, "DevCenterUsageUnit", "csharp");
 @@clientName(CatalogSyncState, "DevCenterCatalogSyncState", "csharp");
 
+// @@usage(Input): restore public constructors for output-only resource data models (ApiCompat)
+@@usage(AllowedEnvironmentType, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "csharp");
+@@usage(Image, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "csharp");
+@@usage(HealthCheckStatusDetails, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "csharp");
+@@usage(ImageVersion, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "csharp");
+@@usage(DevCenterSku, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "csharp");
+
 // Manual: directive-based renames from autorest.md
 @@clientName(ScheduleUpdateProperties.`type`, "ScheduledType", "csharp");
 @@alternateType(Azure.ResourceManager.CommonTypes.OperationStatusResult.id, Azure.Core.armResourceIdentifier, "csharp");
