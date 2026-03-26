@@ -57,10 +57,7 @@ interface ScenarioRuns {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202+204, custom template not recognized by linter"
   @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
   @pollingOperation(ScenarioRuns.get)
-  cancel is ArmResourceActionNoBodyAsyncWithLocation<
-    ScenarioRun,
-    void
-  >;
+  cancel is ArmResourceActionNoBodyAsyncWithLocation<ScenarioRun, void>;
 }
 
 @@doc(ScenarioRun.properties, "The properties of scenario run.");

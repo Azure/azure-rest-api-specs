@@ -120,9 +120,9 @@ op ArmResourceActionNoBodyAsyncWithLocation<
   @bodyRoot body?: Request,
 ): ArmAcceptedLroResponse<
   "Resource operation accepted.",
-  ArmLroLocationHeader &
-    Azure.Core.Foundations.RetryAfterHeader
+  ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
 > | {
   @doc("The operation completed successfully with no content.")
-  @statusCode _: 204;
+  @statusCode
+  _: 204;
 } | ErrorResponse;
