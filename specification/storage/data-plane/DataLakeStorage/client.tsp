@@ -33,3 +33,4 @@ namespace Customizations;
 );
 
 @@clientOption(Storage.DataLake, "includeRootSlash", false, "javascript");
+@@clientOption(Storage.DataLake, "omitSlashFromEmptyRoute", true, "python");
