@@ -13308,12 +13308,23 @@
           },
           "name": {
             "type": "string",
-            "description": "The name of the output dataset."
+            "description": "The name of the output dataset and can be optionally set during job creation time."
           },
           "version": {
             "type": "string",
             "description": "The version of the output dataset.",
             "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the output dataset and can be optionally set during job creation time."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary of the output dataset and can be optionally set during job creation time."
           }
         },
         "allOf": [
@@ -37549,11 +37560,11 @@
           },
           "agent_name": {
             "type": "string",
-            "description": "The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window. If both agent name and agent version are specified, the agent version will be used to fetch the traces."
+            "description": "The agent name to fetch the agent instructions for data generation. Required if prompt is not specified."
           },
           "agent_version": {
             "type": "string",
-            "description": "The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used."
+            "description": "The agent version to fetch the agent instructions for data generation. If not specified, the latest version of the agent will be used."
           }
         },
         "allOf": [
@@ -38940,7 +38951,7 @@
         "required": [
           "type",
           "agent_name",
-          "from_time"
+          "start_time"
         ],
         "properties": {
           "type": {
@@ -38952,21 +38963,33 @@
           },
           "agent_name": {
             "type": "string",
-            "description": "The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window. If both agent name and agent version are specified, the agent version will be used to fetch the traces."
+            "description": "The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window."
           },
           "agent_version": {
             "type": "string",
             "description": "The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used."
           },
-          "from_time": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The start of the time window for fetching traces. This defines the beginning of the time range for which traces will be considered for data generation."
+          "start_time": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The start of the time window (in Unix timestamp in seconds) for fetching traces. This defines the beginning of the time range for which traces will be considered for data generation."
           },
-          "to_time": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The end of the time window for fetching traces. This defines the end of the time range for which traces will be considered for data generation. If not specified, it will default to the current time, meaning that traces up until now will be considered for data generation."
+          "end_time": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The end of the time window (in Unix timestamp in seconds) for fetching traces. This defines the end of the time range for which traces will be considered for data generation. If not specified, it will default to the current time, meaning that traces up until now will be considered for data generation."
+          },
+          "ingestion_delay_seconds": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The delay to apply for ingestion when querying traces.",
+            "default": 300
+          },
+          "max_traces": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Sampling limit applied to traces retrieved for data generation.",
+            "default": 1000
           }
         },
         "allOf": [

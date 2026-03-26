@@ -119,12 +119,18 @@ model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
   @visibility(Lifecycle.Read)
   id?: string;
 
-  @doc("The name of the output dataset.")
+  @doc("The name of the output dataset and can be optionally set during job creation time.")
   name?: string;
 
   @doc("The version of the output dataset.")
   @visibility(Lifecycle.Read)
   version?: string;
+
+  @doc("Description of the output dataset and can be optionally set during job creation time.")
+  description?: string;
+
+  @doc("Tag dictionary of the output dataset and can be optionally set during job creation time.")
+  tags?: Record<string>;
 }
 
 @doc("The supported output file types for a data generation job.")
@@ -231,17 +237,26 @@ model TracesDataGenerationJobSource extends DataGenerationJobSource {
   @doc("The source type for this job, which is Traces.")
   type: "Traces";
 
-  @doc("The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window. If both agent name and agent version are specified, the agent version will be used to fetch the traces.")
+  @doc("The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window.")
   agent_name: string;
 
   @doc("The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used.")
   agent_version?: string;
 
-  @doc("The start of the time window for fetching traces. This defines the beginning of the time range for which traces will be considered for data generation.")
-  from_time: utcDateTime;
+  @doc("The start of the time window (in Unix timestamp in seconds) for fetching traces. This defines the beginning of the time range for which traces will be considered for data generation.")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  start_time: utcDateTime;
 
-  @doc("The end of the time window for fetching traces. This defines the end of the time range for which traces will be considered for data generation. If not specified, it will default to the current time, meaning that traces up until now will be considered for data generation.")
-  to_time?: utcDateTime;
+  @doc("The end of the time window (in Unix timestamp in seconds) for fetching traces. This defines the end of the time range for which traces will be considered for data generation. If not specified, it will default to the current time, meaning that traces up until now will be considered for data generation.")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  end_time?: utcDateTime;
+
+  @doc("The delay to apply for ingestion when querying traces.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  ingestion_delay_seconds?: duration = duration.fromISO("PT5M");
+
+  @doc("Sampling limit applied to traces retrieved for data generation.")
+  max_traces?: int32 = 1000;
 }
 
 @doc("The options for a data generation job with Prompt source used for Evaluation purpose, which includes the prompt or the agent name to fetch the prompt and other metadata for data generation.")
@@ -252,10 +267,10 @@ model PromptDataGenerationJobSource extends DataGenerationJobSource {
   @doc("The prompt used for data generation. Required if agent name is not specified.")
   prompt?: string;
 
-  @doc("The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window. If both agent name and agent version are specified, the agent version will be used to fetch the traces.")
+  @doc("The agent name to fetch the agent instructions for data generation. Required if prompt is not specified.")
   agent_name: string;
 
-  @doc("The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used.")
+  @doc("The agent version to fetch the agent instructions for data generation. If not specified, the latest version of the agent will be used.")
   agent_version?: string;
 }
 
