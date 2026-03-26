@@ -355,19 +355,15 @@ model ErrorAdditionalInfo {
 }
 
 /**
- * An object containing more specific information than the current object about the error.
+ * Common error response for Azure Maps APIs to return error details for failed operations.
  */
-model MapsInnerError {
+@error
+model MapsErrorResponse {
   /**
-   * The error code.
+   * The error detail.
    */
   @visibility(Lifecycle.Read)
-  code?: string;
-
-  /**
-   * The inner error.
-   */
-  innererror?: MapsInnerError;
+  error: MapsErrorDetail;
 }
 
 /**
@@ -399,20 +395,27 @@ model MapsErrorDetail {
   details?: MapsErrorDetail[];
 
   /**
-   * The error additional info.
+   * An object containing more specific information than the current object about the error.
    */
+  @visibility(Lifecycle.Read)
   innererror?: MapsInnerError;
 }
 
 /**
- * Common error response for Azure Maps APIs to return error details for failed operations.
+ * An object containing more specific information than the current object about the error.
  */
-model MapsErrorResponse {
+model MapsInnerError {
   /**
-   * The error detail.
+   * The error code.
    */
   @visibility(Lifecycle.Read)
-  error: MapsErrorDetail;
+  code?: string;
+
+  /**
+   * An object containing more specific information than the current object about the error.
+   */
+  @visibility(Lifecycle.Read)
+  innererror?: MapsInnerError;
 }
 
 /**
