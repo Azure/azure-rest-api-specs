@@ -21,6 +21,11 @@ graders:
         - azure-typespec-author
       mode: in_order
       allow_extra: true
+hooks:
+  before_run:
+    - command: "npm install"
+      working_directory: "./fixtures/Microsoft.Widget/Widget"
+      error_on_fail: true
 tasks:
   - "tasks/001001-version-spread-property.yaml"
   - "tasks/001002-version-default-value.yaml"
