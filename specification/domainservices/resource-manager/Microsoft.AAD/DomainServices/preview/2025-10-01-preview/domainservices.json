@@ -320,7 +320,7 @@
             "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
           },
           "204": {
-            "description": "HTTP 204 (Not Content) should be used if the resource does not exist and the request is well formed."
+            "description": "HTTP 204 (No Content) should be used if the resource does not exist and the request is well formed."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -628,6 +628,8 @@
           "readOnly": true,
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
+          "maximum": 5,
           "description": "Number of times the customer has self-resumed the domain service. Valid values range from 0 to 5, where 5 is the maximum allowed count before further self-resume is denied and support intervention is required."
         },
         "healthLastEvaluated": {
