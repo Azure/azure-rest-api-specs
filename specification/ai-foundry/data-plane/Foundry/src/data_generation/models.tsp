@@ -18,8 +18,8 @@ union DataGenerationJobType {
 
 @doc("LLM model options for data generation jobs.")
 model DataGenerationModelOptions {
-  @doc("Model deployment name used to generate data.")
-  `model`: string;
+  @doc("The model deployment name used to generate data.")
+  model_name: string;
 }
 
 @doc("Status values for data generation job.")
@@ -56,9 +56,6 @@ model DataGenerationJob {
   @doc("The purpose of the data generation job. Either for fine-tuning or evaluation.")
   purpose: DataGenerationJobPurpose;
 
-  @doc("The model deployment options.")
-  model_options?: DataGenerationModelOptions;
-
   @doc("The job identifier.")
   @visibility(Lifecycle.Read)
   id: string;
@@ -88,7 +85,7 @@ model DataGenerationJob {
 
   @doc("Error information set only when status is 'failed'.")
   @visibility(Lifecycle.Read)
-  error?: DataGenerationJobError;
+  error?: ApiError;
 }
 
 @doc("Output information for a data generation job.")
@@ -198,6 +195,9 @@ model DataGenerationJobOptions {
 
   @doc("Maximum number of samples to generate.")
   max_samples: int32;
+
+  @doc("The model deployment options.")
+  model_options?: DataGenerationModelOptions;
 }
 
 @doc("The options for a data generation job with SimpleQnA type.")
@@ -300,13 +300,4 @@ union SimpleQnAFineTuningQuestionType {
 
   @doc("Long answer question type.")
   LongAnswer: "LongAnswer",
-}
-
-@doc("Error information for a data generation job that failed.")
-model DataGenerationJobError {
-  @doc("A machine-readable error code.")
-  code: string;
-
-  @doc("A human-readable error message.")
-  message: string;
 }
