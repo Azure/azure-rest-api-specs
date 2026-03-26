@@ -71,9 +71,8 @@ interface Workspaces {
   /**
    * Refreshes recommendation status for all scenarios in a given workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202, custom template not recognized by linter"
   @pollingOperation(WorkspaceOperationResults.get)
-  refreshRecommendations is ArmResourceActionNoContentAsyncWithLocationResult<
+  refreshRecommendations is ArmResourceActionAsyncWithLocation<
     Workspace,
     void,
     RefreshRecommendationsResult
