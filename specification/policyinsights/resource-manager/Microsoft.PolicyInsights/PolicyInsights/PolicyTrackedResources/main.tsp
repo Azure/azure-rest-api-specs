@@ -11,6 +11,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "../common/main.tsp";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./routes.tsp";
@@ -20,6 +21,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
+using PolicyInsightsCommon;
 using TypeSpec.Versioning;
 /**
  *  PolicyTrackedResources Management Api

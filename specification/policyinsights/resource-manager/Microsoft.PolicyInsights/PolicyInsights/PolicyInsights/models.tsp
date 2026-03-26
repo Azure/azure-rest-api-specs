@@ -666,34 +666,6 @@ model ComponentEventDetails {
 }
 
 /**
- * Error response.
- */
-@error
-model QueryFailure {
-  /**
-   * Error definition.
-   */
-  error?: QueryFailureError;
-}
-
-/**
- * Error definition.
- */
-model QueryFailureError {
-  /**
-   * Service specific error code which serves as the substatus for the HTTP error code.
-   */
-  @visibility(Lifecycle.Read)
-  code?: string;
-
-  /**
-   * Description of the error.
-   */
-  @visibility(Lifecycle.Read)
-  message?: string;
-}
-
-/**
  * Query results.
  */
 model PolicyStatesQueryResults {

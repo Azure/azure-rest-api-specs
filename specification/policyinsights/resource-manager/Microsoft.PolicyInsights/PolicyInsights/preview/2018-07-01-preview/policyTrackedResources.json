@@ -94,7 +94,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/QueryFailure"
+              "$ref": "#/definitions/PolicyInsightsCommon.QueryFailure"
             }
           }
         },
@@ -177,7 +177,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/QueryFailure"
+              "$ref": "#/definitions/PolicyInsightsCommon.QueryFailure"
             }
           }
         },
@@ -243,7 +243,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/QueryFailure"
+              "$ref": "#/definitions/PolicyInsightsCommon.QueryFailure"
             }
           }
         },
@@ -312,7 +312,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/QueryFailure"
+              "$ref": "#/definitions/PolicyInsightsCommon.QueryFailure"
             }
           }
         },
@@ -363,6 +363,32 @@
         "policyDefinitionReferenceId": {
           "type": "string",
           "description": "The policy definition reference ID within the policy set definition.",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyInsightsCommon.QueryFailure": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/PolicyInsightsCommon.QueryFailureError",
+          "description": "Error definition."
+        }
+      }
+    },
+    "PolicyInsightsCommon.QueryFailureError": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error.",
           "readOnly": true
         }
       }
@@ -418,32 +444,6 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
-        }
-      }
-    },
-    "QueryFailure": {
-      "type": "object",
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/QueryFailureError",
-          "description": "Error definition."
-        }
-      }
-    },
-    "QueryFailureError": {
-      "type": "object",
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "Description of the error.",
-          "readOnly": true
         }
       }
     },
