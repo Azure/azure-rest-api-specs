@@ -7,5 +7,6 @@ import "../skills/routes.tsp";
 import "../openai-conversations/routes.tsp";
 import "../openai-responses/routes.tsp";
 import "../toolsets/routes.tsp";
+import "../toolbox-runtime/routes.tsp";
 
 import "./client.tsp";
