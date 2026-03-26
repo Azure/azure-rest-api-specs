@@ -5,6 +5,50 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AppLink;
 
+@@clientName(Microsoft.AppLink, "AppNetworkMgmtClient", "python");
+
+// Fix selfManagedVersions flattening name collision in C#
+@@clientName(AvailableVersionProperties.selfManagedVersions,
+  "selfManagedVersionDetail",
+  "csharp"
+);
+
+// Contextual naming: add AppLink prefix to avoid cross-SDK collisions in C#
+@@clientName(ProvisioningState, "AppLinkProvisioningState", "csharp");
+@@clientName(ClusterType, "AppLinkClusterType", "csharp");
+@@clientName(UpgradeMode, "AppLinkUpgradeMode", "csharp");
+@@clientName(UpgradeReleaseChannel, "AppLinkUpgradeReleaseChannel", "csharp");
+@@clientName(ConnectivityProfile, "AppLinkConnectivityProfile", "csharp");
+@@clientName(UpgradeProfile, "AppLinkUpgradeProfile", "csharp");
+@@clientName(ReleaseChannelInfo, "AppLinkReleaseChannelInfo", "csharp");
+@@clientName(VersionInfo, "AppLinkVersionInfo", "csharp");
+
+// Contextual naming: add AppLink prefix to resource types
+@@clientName(AvailableVersion, "AppLinkAvailableVersion", "csharp");
+@@clientName(AvailableVersionProperties,
+  "AppLinkAvailableVersionProperties",
+  "csharp"
+);
+@@clientName(UpgradeHistory, "AppLinkUpgradeHistory", "csharp");
+@@clientName(UpgradeHistoryProperties,
+  "AppLinkUpgradeHistoryProperties",
+  "csharp"
+);
+
+// Operation renames: method names should clearly indicate what is listed
+@@clientName(AvailableVersions.listByLocation,
+  "GetAppLinkAvailableVersionsByLocation",
+  "csharp"
+);
+@@clientName(UpgradeHistories.listByAppLinkMember,
+  "GetAppLinkUpgradeHistories",
+  "csharp"
+);
+
+// DateTimeOffset properties should follow *On naming convention in C#
+@@clientName(UpgradeHistoryProperties.startTimestamp, "startOn", "csharp");
+@@clientName(UpgradeHistoryProperties.endTimestamp, "endOn", "csharp");
+
 @doc("The type used for update operations of the AppLink.")
 model AppLinkUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
