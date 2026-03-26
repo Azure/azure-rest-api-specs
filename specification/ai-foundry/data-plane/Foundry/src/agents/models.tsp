@@ -76,7 +76,7 @@ model UpdateAgentRequest {
   ...CreateAgentVersionRequest;
 }
 
-union AgentObjectType {
+enum AgentObjectType {
   agent: "agent",
   agentVersion: "agent.version",
   agentDeleted: "agent.deleted",
