@@ -1,0 +1,372 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "api-version": "2025-12-01-preview",
+    "resourceGroupName": "rg1",
+    "expressRouteLagName": "lagName",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "peeringLocation": "peeringLocationName",
+        "bandwidthInGbps": 100,
+        "encapsulation": "QinQ",
+        "billingType": "UnlimitedData",
+        "links": [
+          {
+            "properties": {
+              "adminState": "Enabled"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "lagName",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName",
+        "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+        "type": "Microsoft.Network/expressRouteLags",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "29301a05-d7e0-4b1a-9cfe-c9e7c3e35fa8",
+          "links": [
+            {
+              "name": "link1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link1",
+              "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "routerName": "link1-Router",
+                "interfaceName": "link1-LogicalInterface",
+                "adminState": "Enabled",
+                "macSecConfig": {
+                  "cipher": "GcmAes128",
+                  "sciState": "Disabled"
+                },
+                "members": [
+                  {
+                    "name": "member1",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link1/members/member1",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link1-PatchPanel",
+                      "rackId": "link1-RackId",
+                      "coloLocation": "link1-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  },
+                  {
+                    "name": "member2",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link1/members/member2",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link1-PatchPanel",
+                      "rackId": "link1-RackId",
+                      "coloLocation": "link1-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  },
+                  {
+                    "name": "member3",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link1/members/member3",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link1-PatchPanel",
+                      "rackId": "link1-RackId",
+                      "coloLocation": "link1-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  },
+                  {
+                    "name": "member4",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link1/members/member4",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link1-PatchPanel",
+                      "rackId": "link1-RackId",
+                      "coloLocation": "link1-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  }
+                ]
+              },
+              "type": "Microsoft.Network/expressRouteLags/links"
+            },
+            {
+              "name": "link2",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link2",
+              "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "routerName": "link2-Router",
+                "interfaceName": "link2-LogicalInterface",
+                "adminState": "Disabled",
+                "macSecConfig": {
+                  "cipher": "GcmAes128",
+                  "sciState": "Disabled"
+                },
+                "members": [
+                  {
+                    "name": "member1",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link2/members/member1",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link2-PatchPanel",
+                      "rackId": "link2-RackId",
+                      "coloLocation": "link2-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  },
+                  {
+                    "name": "member2",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link2/members/member2",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link2-PatchPanel",
+                      "rackId": "link2-RackId",
+                      "coloLocation": "link2-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  },
+                  {
+                    "name": "member3",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link2/members/member3",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link2-PatchPanel",
+                      "rackId": "link2-RackId",
+                      "coloLocation": "link2-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  },
+                  {
+                    "name": "member4",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link2/members/member4",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link2-PatchPanel",
+                      "rackId": "link2-RackId",
+                      "coloLocation": "link2-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  }
+                ]
+              },
+              "type": "Microsoft.Network/expressRouteLags/links"
+            }
+          ],
+          "peeringLocation": "Equinix-Seattle-SE2",
+          "bandwidthInGbps": 100,
+          "encapsulation": "Dot1Q",
+          "provisionedBandwidthInGbps": 0,
+          "mtu": "1500",
+          "etherType": "0x8100",
+          "billingType": "MeteredData",
+          "numberOfPorts": 4,
+          "minimumActivePortsRequired": 4,
+          "lacpTimer": "Fast"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "lagName",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName",
+        "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+        "type": "Microsoft.Network/expressRouteLags",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "29301a05-d7e0-4b1a-9cfe-c9e7c3e35fa8",
+          "links": [
+            {
+              "name": "link1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link1",
+              "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "routerName": "link1-Router",
+                "interfaceName": "link1-LogicalInterface",
+                "adminState": "Enabled",
+                "macSecConfig": {
+                  "cipher": "GcmAes128",
+                  "sciState": "Disabled"
+                },
+                "members": [
+                  {
+                    "name": "member1",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link1/members/member1",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link1-PatchPanel",
+                      "rackId": "link1-RackId",
+                      "coloLocation": "link1-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  },
+                  {
+                    "name": "member2",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link1/members/member2",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link1-PatchPanel",
+                      "rackId": "link1-RackId",
+                      "coloLocation": "link1-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  },
+                  {
+                    "name": "member3",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link1/members/member3",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link1-PatchPanel",
+                      "rackId": "link1-RackId",
+                      "coloLocation": "link1-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  },
+                  {
+                    "name": "member4",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link1/members/member4",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link1-PatchPanel",
+                      "rackId": "link1-RackId",
+                      "coloLocation": "link1-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  }
+                ]
+              },
+              "type": "Microsoft.Network/expressRouteLags/links"
+            },
+            {
+              "name": "link2",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link2",
+              "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "routerName": "link2-Router",
+                "interfaceName": "link2-LogicalInterface",
+                "adminState": "Disabled",
+                "macSecConfig": {
+                  "cipher": "GcmAes128",
+                  "sciState": "Disabled"
+                },
+                "members": [
+                  {
+                    "name": "member1",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link2/members/member1",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link2-PatchPanel",
+                      "rackId": "link2-RackId",
+                      "coloLocation": "link2-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  },
+                  {
+                    "name": "member2",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link2/members/member2",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link2-PatchPanel",
+                      "rackId": "link2-RackId",
+                      "coloLocation": "link2-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  },
+                  {
+                    "name": "member3",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link2/members/member3",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link2-PatchPanel",
+                      "rackId": "link2-RackId",
+                      "coloLocation": "link2-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  },
+                  {
+                    "name": "member4",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/link2/members/member4",
+                    "etag": "W/\"b6bbda52-c0c3-4886-9147-a8ecd5dafa99\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "patchPanelId": "link2-PatchPanel",
+                      "rackId": "link2-RackId",
+                      "coloLocation": "link2-ColoLocation",
+                      "connectorType": "LC",
+                      "adminState": "Disabled"
+                    },
+                    "type": "Microsoft.Network/expressRouteLags/links/members"
+                  }
+                ]
+              },
+              "type": "Microsoft.Network/expressRouteLags/links"
+            }
+          ],
+          "peeringLocation": "Equinix-Seattle-SE2",
+          "bandwidthInGbps": 100,
+          "encapsulation": "Dot1Q",
+          "provisionedBandwidthInGbps": 0,
+          "mtu": "1500",
+          "etherType": "0x8100",
+          "billingType": "MeteredData",
+          "numberOfPorts": 4,
+          "minimumActivePortsRequired": 4,
+          "lacpTimer": "Fast"
+        }
+      }
+    }
+  }
+}

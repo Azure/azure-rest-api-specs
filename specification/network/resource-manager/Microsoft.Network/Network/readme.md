@@ -31,6 +31,120 @@ openapi-type: arm
 tag: package-2025-05-01
 ```
 
+### Tag: package-2025-12-01-preview
+
+These settings apply only when `--tag=package-2025-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-12-01-preview'
+input-file:
+  - preview/2025-12-01-preview/expressRouteLag.json
+  - preview/2025-12-01-preview/network.json
+  - stable/2025-03-01/applicationGateway.json
+  - stable/2025-03-01/applicationGatewayWafDynamicManifests.json
+  - stable/2025-03-01/applicationSecurityGroup.json
+  - stable/2025-03-01/availableDelegations.json
+  - stable/2025-03-01/availableServiceAliases.json
+  - stable/2025-03-01/azureFirewall.json
+  - stable/2025-03-01/azureFirewallFqdnTag.json
+  - stable/2025-03-01/azureWebCategory.json
+  - stable/2025-03-01/bastionHost.json
+  - stable/2025-03-01/checkDnsAvailability.json
+  - stable/2025-03-01/cloudServiceNetworkInterface.json
+  - stable/2025-03-01/cloudServicePublicIpAddress.json
+  - stable/2025-03-01/cloudServiceSwap.json
+  - stable/2025-03-01/customIpPrefix.json
+  - stable/2025-03-01/ddosCustomPolicy.json
+  - stable/2025-03-01/ddosProtectionPlan.json
+  - stable/2025-03-01/dscpConfiguration.json
+  - stable/2025-03-01/endpointService.json
+  - stable/2025-03-01/expressRouteCircuit.json
+  - stable/2025-03-01/expressRouteCrossConnection.json
+  - stable/2025-03-01/expressRoutePort.json
+  - stable/2025-03-01/expressRouteProviderPort.json
+  - stable/2025-03-01/firewallPolicy.json
+  - stable/2025-03-01/ipAddressManager.json
+  - stable/2025-03-01/ipAllocation.json
+  - stable/2025-03-01/ipGroups.json
+  - stable/2025-03-01/loadBalancer.json
+  - stable/2025-03-01/natGateway.json
+  - stable/2025-03-01/network.json
+  - stable/2025-03-01/networkInterface.json
+  - stable/2025-03-01/networkManager.json
+  - stable/2025-03-01/networkManagerActiveConfiguration.json
+  - stable/2025-03-01/networkManagerConnection.json
+  - stable/2025-03-01/networkManagerConnectivityConfiguration.json
+  - stable/2025-03-01/networkManagerEffectiveConfiguration.json
+  - stable/2025-03-01/networkManagerGroup.json
+  - stable/2025-03-01/networkManagerRoutingConfiguration.json
+  - stable/2025-03-01/networkManagerScopeConnection.json
+  - stable/2025-03-01/networkManagerSecurityAdminConfiguration.json
+  - stable/2025-03-01/networkManagerSecurityUserConfiguration.json
+  - stable/2025-03-01/networkProfile.json
+  - stable/2025-03-01/networkSecurityGroup.json
+  - stable/2025-03-01/networkSecurityPerimeter.json
+  - stable/2025-03-01/networkVerifier.json
+  - stable/2025-03-01/networkVirtualAppliance.json
+  - stable/2025-03-01/networkWatcher.json
+  - stable/2025-03-01/operation.json
+  - stable/2025-03-01/privateEndpoint.json
+  - stable/2025-03-01/privateLinkService.json
+  - stable/2025-03-01/publicIpAddress.json
+  - stable/2025-03-01/publicIpPrefix.json
+  - stable/2025-03-01/routeFilter.json
+  - stable/2025-03-01/routeTable.json
+  - stable/2025-03-01/securityPartnerProvider.json
+  - stable/2025-03-01/serviceCommunity.json
+  - stable/2025-03-01/serviceEndpointPolicy.json
+  - stable/2025-03-01/serviceTags.json
+  - stable/2025-03-01/usage.json
+  - stable/2025-03-01/virtualNetwork.json
+  - stable/2025-03-01/virtualNetworkGateway.json
+  - stable/2025-03-01/virtualNetworkTap.json
+  - stable/2025-03-01/virtualRouter.json
+  - stable/2025-03-01/virtualWan.json
+  - stable/2025-03-01/vmssNetworkInterface.json
+  - stable/2025-03-01/vmssPublicIpAddress.json
+  - stable/2025-03-01/webapplicationfirewall.json
+suppressions:
+  - code: PutResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
+  - code: DeleteResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
+  - code: PatchIdentityProperty
+    reason: False alarm.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
+  - code: SystemDataDefinitionsCommonTypes
+    from: networkVerifier.json
+    reason: False alarm for common type errors.
+  - code: SystemDataDefinitionsCommonTypes
+    from: network.json
+    reason: False alarm.
+directive:
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.ProxyResource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
+
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.Resource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterResource"
+
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.systemData"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterSystemData"
+```
+
 ### Tag: package-2025-05-01
 
 These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
