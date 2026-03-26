@@ -43,11 +43,7 @@ using Microsoft.ContainerInstance;
   Azure.ResourceManager.CommonTypes.TrackedResource,
   "java"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@Legacy.hierarchyBuilding(ListResultContainerGroup,
-  Azure.ResourceManager.CommonTypes.TrackedResource,
-  "java"
-);
+@@alternateType(ListResultContainerGroup, ContainerGroup);
 
 @@clientName(ListResultContainerGroupProperties,
   "ListResultContainerGroupPropertiesWrapper",
