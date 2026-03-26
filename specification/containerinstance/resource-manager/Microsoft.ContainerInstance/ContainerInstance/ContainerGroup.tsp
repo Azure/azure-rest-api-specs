@@ -30,7 +30,7 @@ model ContainerGroup extends Foundations.ProxyResource {
   /**
    * The resource location.
    */
-  location: string;
+  location?: string;
 
   /**
    * The resource tags.
