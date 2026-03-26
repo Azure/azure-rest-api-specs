@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "./common/common.tsp";
 
 namespace MapsGeolocation;
 
@@ -94,22 +95,4 @@ model ErrorDetail {
    */
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
-}
-
-/**
- * The resource management error additional info.
- */
-model ErrorAdditionalInfo {
-  /**
-   * The additional info type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The additional info.
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract."
-  @visibility(Lifecycle.Read)
-  info?: Record<unknown>;
 }
