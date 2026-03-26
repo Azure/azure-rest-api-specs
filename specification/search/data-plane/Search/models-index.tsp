@@ -692,6 +692,12 @@ model SearchDocumentsResult {
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.semanticQueryRewritesResultType")
   semanticQueryRewritesResultType?: SemanticQueryRewritesResultType;
+
+  /** Performance and diagnostic insights for this query execution. Only populated when queryInsightsMode is enabled. */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "@search.queryInsights")
+  queryInsights?: QueryInsights;
 }
 
 /** A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval. */
@@ -893,6 +899,14 @@ model SearchRequest {
 
   /** The query parameters to configure hybrid search behaviors. */
   hybridSearch?: HybridSearch;
+
+  /** Specifies the relevance scoring mode to use when ranking results. */
+  @added(Versions.v2026_05_01_preview)
+  relevanceScoreMode?: RelevanceScoreMode;
+
+  /** A value indicating whether to include query performance insights in the response. */
+  @added(Versions.v2026_05_01_preview)
+  queryInsightsEnabled?: boolean;
 }
 
 /** The query parameters for vector and hybrid search queries. */
@@ -1171,7 +1185,8 @@ model SuggestRequest {
   select?: string[];
 
   /** The name of the suggester as specified in the suggesters collection that's part of the index definition. */
-  suggesterName: string;
+  @madeOptional(Versions.v2026_05_01_preview)
+  suggesterName?: string;
 
   /** The number of suggestions to retrieve. This must be a value between 1 and 100. The default is 5. */
   top?: int32;
@@ -1347,4 +1362,71 @@ model SearchScoreThreshold extends VectorThreshold {
 
   /** The kind of threshold used to filter vector queries */
   kind: "searchScore";
+}
+
+/** Determines the relevance score calculation mode for search results. */
+@added(Versions.v2026_05_01_preview)
+union RelevanceScoreMode {
+  string,
+
+  /** Classic BM25 scoring. This is the default. */
+  Classic: "classic",
+
+  /** Enhanced scoring that incorporates freshness and proximity signals. */
+  Enhanced: "enhanced",
+
+  /** Experimental scoring using a learned model for improved relevance. */
+  Learned: "learned",
+}
+
+/** Performance and diagnostic insights for a query execution. */
+@added(Versions.v2026_05_01_preview)
+model QueryInsights {
+  /** Total query execution time in milliseconds. */
+  @visibility(Lifecycle.Read)
+  totalTimeMs: float64;
+
+  /** Time spent in the text matching phase in milliseconds. */
+  @visibility(Lifecycle.Read)
+  textMatchTimeMs?: float64;
+
+  /** Time spent in vector search in milliseconds, if applicable. */
+  @visibility(Lifecycle.Read)
+  vectorSearchTimeMs?: float64;
+
+  /** Time spent in semantic ranking in milliseconds, if applicable. */
+  @visibility(Lifecycle.Read)
+  semanticRankingTimeMs?: float64;
+
+  /** The number of index shards that participated in serving this query. */
+  @visibility(Lifecycle.Read)
+  shardsQueried: int32;
+
+  /** The relevance score mode that was used for this query. */
+  @visibility(Lifecycle.Read)
+  relevanceScoreMode?: RelevanceScoreMode;
+
+  /** Detailed performance breakdown per query phase. */
+  @visibility(Lifecycle.Read)
+  breakdown?: QueryInsightsBreakdown;
+}
+
+/** Detailed performance breakdown for each phase of query execution. */
+@added(Versions.v2026_05_01_preview)
+model QueryInsightsBreakdown {
+  /** Time spent parsing and analyzing the query in milliseconds. */
+  @visibility(Lifecycle.Read)
+  queryParsingMs: float64;
+
+  /** Time spent in the inverted index lookup phase in milliseconds. */
+  @visibility(Lifecycle.Read)
+  indexLookupMs: float64;
+
+  /** Time spent scoring and ranking documents in milliseconds. */
+  @visibility(Lifecycle.Read)
+  scoringMs: float64;
+
+  /** Time spent loading and projecting stored fields in milliseconds. */
+  @visibility(Lifecycle.Read)
+  fieldRetrievalMs: float64;
 }

@@ -892,3 +892,23 @@ op getIndexStatsSummary is SearchOperation<
   },
   ListIndexStatsSummary
 >;
+
+/** Gets usage metrics for the search service including query counts and latency. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+@added(Versions.v2026_05_01_preview)
+@route("/usagemetrics")
+@get
+op getUsageMetrics is SearchOperation<
+  {
+    ...acceptHeaderMinimal;
+
+    /** The start date for the metrics collection period in ISO 8601 format. */
+    @query("startDate")
+    startDate?: utcDateTime;
+
+    /** The end date for the metrics collection period in ISO 8601 format. */
+    @query("endDate")
+    endDate?: utcDateTime;
+  },
+  SearchServiceUsageMetrics
+>;

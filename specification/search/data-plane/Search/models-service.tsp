@@ -5,6 +5,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./models-shared.tsp";
 
 using Azure.ClientGenerator.Core.Legacy;
+using TypeSpec.Versioning;
 
 namespace Search;
 
@@ -3937,6 +3938,10 @@ model SearchIndex {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   purviewEnabled?: boolean | null;
 
+  /** Configuration for index-level analytics and query performance monitoring. */
+  @added(Versions.v2026_05_01_preview)
+  analyticsConfiguration?: IndexAnalyticsConfiguration;
+
   /** The ETag of the index. */
   @encodedName("application/json", "@odata.etag")
   eTag?: string;
@@ -4095,7 +4100,8 @@ model ScoringProfile {
   functions?: ScoringFunction[];
 
   /** A value indicating how the results of individual scoring functions should be combined. Defaults to "Sum". Ignored if there are no scoring functions. */
-  functionAggregation?: ScoringFunctionAggregation;
+  @renamedFrom(Versions.v2026_05_01_preview, "functionAggregation")
+  scoreFunctionAggregation?: ScoringFunctionAggregation;
 }
 
 /** Defines weights on index fields for which matches should boost scoring in search queries. */
@@ -4799,6 +4805,10 @@ model SearchServiceCounters {
 
   /** Total memory consumption of all vector indexes within the service, in bytes. */
   vectorIndexSize: ResourceCounter;
+
+  /** Total number of knowledge sources. */
+  @added(Versions.v2026_05_01_preview)
+  knowledgeSourcesCount?: ResourceCounter;
 }
 
 /** Represents a resource's usage and quota. */
@@ -6633,4 +6643,89 @@ model DocumentIntelligenceLayoutSkillChunkingProperties {
 /** A dictionary of http request headers. */
 model WebApiHttpHeaders {
   ...Record<string>;
+}
+
+/** The mode for index analytics collection. */
+@added(Versions.v2026_05_01_preview)
+union IndexAnalyticsMode {
+  string,
+
+  /** Analytics collection is disabled. */
+  Disabled: "disabled",
+
+  /** Only basic analytics are collected, such as query counts and latency. */
+  Basic: "basic",
+
+  /** Full analytics including query patterns and performance breakdowns are collected. */
+  Detailed: "detailed",
+}
+
+/** Configuration for index-level analytics and query performance monitoring. */
+@added(Versions.v2026_05_01_preview)
+model IndexAnalyticsConfiguration {
+  /** The analytics collection mode for the index. Default is 'disabled'. */
+  mode?: IndexAnalyticsMode;
+
+  /** The retention period for analytics data in ISO 8601 duration format. Default is P30D (30 days). */
+  retentionPeriod?: duration;
+
+  /** A value indicating whether to include vector search metrics in analytics. */
+  includeVectorMetrics?: boolean;
+
+  /** The maximum number of slow queries to retain for analysis. */
+  @minValue(0)
+  @maxValue(1000)
+  slowQueryThresholdCount?: int32;
+
+  /** The latency threshold in milliseconds above which a query is considered slow. */
+  @minValue(1)
+  slowQueryLatencyThresholdMs?: int32;
+}
+
+/** Response from a usage metrics request for the search service. */
+@added(Versions.v2026_05_01_preview)
+model SearchServiceUsageMetrics {
+  /** The total number of queries processed in the current billing period. */
+  @visibility(Lifecycle.Read)
+  totalQueries: int64;
+
+  /** The total number of throttled queries in the current billing period. */
+  @visibility(Lifecycle.Read)
+  throttledQueries: int64;
+
+  /** The average query latency in milliseconds over the current billing period. */
+  @visibility(Lifecycle.Read)
+  averageLatencyMs: float64;
+
+  /** The 95th percentile query latency in milliseconds. */
+  @visibility(Lifecycle.Read)
+  p95LatencyMs: float64;
+
+  /** The timestamp of the most recent metrics aggregation. */
+  @visibility(Lifecycle.Read)
+  lastUpdated: utcDateTime;
+
+  /** Per-index usage breakdown. */
+  @visibility(Lifecycle.Read)
+  indexMetrics?: IndexUsageMetrics[];
+}
+
+/** Per-index usage metrics. */
+@added(Versions.v2026_05_01_preview)
+model IndexUsageMetrics {
+  /** The name of the index. */
+  @visibility(Lifecycle.Read)
+  indexName: string;
+
+  /** The number of queries targeting this index. */
+  @visibility(Lifecycle.Read)
+  queryCount: int64;
+
+  /** The average latency in milliseconds for queries targeting this index. */
+  @visibility(Lifecycle.Read)
+  averageLatencyMs: float64;
+
+  /** The number of documents indexed in the current billing period. */
+  @visibility(Lifecycle.Read)
+  documentsProcessed: int64;
 }

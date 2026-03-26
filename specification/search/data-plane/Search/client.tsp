@@ -7,7 +7,7 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Search;
 
-@TypeSpec.Versioning.useDependency(Search.Versions.v2025_11_01_preview)
+@TypeSpec.Versioning.useDependency(Search.Versions.v2026_05_01_preview)
 namespace Customizations;
 
 @client({
@@ -196,6 +196,10 @@ namespace SearchIndexClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     getIndexStatsSummary is Search.getIndexStatsSummary;
+
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    getUsageMetrics is Search.getUsageMetrics;
   }
 }
 
@@ -768,6 +772,18 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(Search.SearchScoreThreshold, "Azure.Search.Documents");
 @@clientNamespace(Search.SearchScoreThreshold,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(Search.RelevanceScoreMode, "Azure.Search.Documents");
+@@clientNamespace(Search.RelevanceScoreMode,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(Search.QueryInsights, "Azure.Search.Documents");
+@@clientNamespace(Search.QueryInsights, "com.azure.search.documents", "java");
+@@clientNamespace(Search.QueryInsightsBreakdown, "Azure.Search.Documents");
+@@clientNamespace(Search.QueryInsightsBreakdown,
   "com.azure.search.documents",
   "java"
 );
@@ -1804,6 +1820,18 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(Search.SearchServiceUsageMetrics,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchServiceUsageMetrics,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.IndexUsageMetrics, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.IndexUsageMetrics,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.SearchServiceCounters,
   "Azure.Search.Documents.Indexes"
 );
@@ -1813,6 +1841,18 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(Search.ResourceCounter, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ResourceCounter,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.IndexAnalyticsMode, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.IndexAnalyticsMode,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.IndexAnalyticsConfiguration,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.IndexAnalyticsConfiguration,
   "com.azure.search.documents.indexes",
   "java"
 );
