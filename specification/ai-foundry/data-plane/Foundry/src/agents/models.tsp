@@ -408,21 +408,6 @@ model WorkflowAgentDefinition extends AgentDefinition {
   workflow?: string;
 }
 
-@doc("The type of hosted agent deployment.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-)
-union HostedAgentType {
-  string,
-
-  /** Image-based deployment using a container image. */
-  image: "image",
-
-  /** Code-based deployment using a packaged code artifact. */
-  code: "code",
-}
-
 @doc("Container-based deployment configuration for a hosted agent.")
 @extension(
   "x-ms-foundry-meta",
@@ -440,7 +425,7 @@ model ContainerConfiguration {
   #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
 )
 model CodeConfiguration {
-  @doc("Code reference ID in format '{name}:{version}' returned from POST /code:upload. Use this to associate uploaded code with an agent version.")
+  @doc("Code reference ID in format '{name}:{version}' or '{name}:latest' returned from POST /code/{name}/content. Use this to associate uploaded code with an agent version. Use ':latest' to always resolve to the most recent version.")
   code_reference_id: string;
 
   @doc("The runtime identifier for code execution (e.g., 'python_3_11', 'python_3_12', 'python_3_13').")
@@ -491,14 +476,7 @@ model HostedAgentDefinition extends AgentDefinition {
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
   image?: string;
 
-  @doc("The type of hosted agent deployment. Use 'image' for container-based or 'code' for code-based deployments.")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
-  type?: HostedAgentType;
-
-  @doc("Container-based deployment configuration. Mutually exclusive with code_configuration.")
+  @doc("Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set.")
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
@@ -516,7 +494,7 @@ model HostedAgentDefinition extends AgentDefinition {
   ])
   protocol_versions?: ProtocolVersionRecord[];
 
-  @doc("Code-based deployment configuration. Mutually exclusive with container_configuration.")
+  @doc("Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set.")
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
@@ -722,6 +700,14 @@ alias ListAgentQueryParameters = {
   @query
   @doc("Filter agents by kind. If not provided, all agents are returned.")
   kind?: AgentKind;
+
+  @query
+  @doc("Filter agents by code reference. Accepts a code artifact name (e.g., 'my-chatbot') to match any version, or a fully qualified reference (e.g., 'my-chatbot:2') to match a specific version. Useful for discovering which agents reference a code artifact before deleting it.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
+  code_reference_id?: string;
 
   ...CommonPageQueryParameters;
 };
@@ -1235,7 +1221,7 @@ model SessionListResult {
   }
 )
 model CodeUploadResponse {
-  @doc("Code reference identifier in format '{name}:{version}'. Pass as code_configuration.code_reference_id when creating an agent version.")
+  @doc("Code reference identifier in format '{name}:{version}'. Pass as code_configuration.code_reference_id when creating an agent version, or use '{name}:latest' to always resolve to the most recent version.")
   id: string;
 
   @doc("The user-provided name for this code artifact.")

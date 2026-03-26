@@ -192,6 +192,14 @@ interface Agents {
       /** The name of the agent to retrieve versions for. */
       @path agent_name: string;
 
+      @query
+      @doc("Filter agent versions by code reference. Accepts a fully qualified reference (e.g., 'my-chatbot:2') or a code artifact name (e.g., 'my-chatbot') to match any version. Useful for discovering which agent versions reference a code artifact before deleting it.")
+      @extension(
+        "x-ms-foundry-meta",
+        #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+      )
+      code_reference_id?: string;
+
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<AgentVersionObject>
@@ -343,7 +351,7 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   #suppress "@azure-tools/typespec-azure-core/byos" "Code upload is stored internally by the service, not BYOS."
   @post
-  @route("/code/{name}:upload")
+  @route("/code/{name}/content")
   @extension("x-ms-foundry-meta", #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] })
   uploadCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
@@ -388,8 +396,42 @@ interface Agents {
   >;
 
   /**
+   * Retrieve a specific version of a code artifact by name and version number.
+   */
+  @get
+  @route("/code/{name}/versions/{version}")
+  @extension("x-ms-foundry-meta", #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] })
+  getCodeVersion is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
+    {
+      @doc("The name of the code artifact.")
+      @path name: string;
+
+      @doc("The version of the code artifact to retrieve.")
+      @path version: string;
+    },
+    CodeArtifact
+  >;
+
+  /**
    * Delete all versions of a named code artifact.
-   * Returns 409 Conflict if any version is referenced by active agent versions.
+   *
+   * **Integrity check**: Before deletion, the service checks if any version of the artifact
+   * is referenced by an active agent version (via `code_configuration.code_reference_id`).
+   *
+   * **Success (204 No Content)**: All versions are permanently deleted. The artifact name
+   * becomes available for reuse. Version numbering resets if the name is reused.
+   *
+   * **Conflict (409)**: One or more versions are referenced by active agent versions.
+   * No versions are deleted (atomic operation). The error response includes:
+   * - `error.code`: `"CodeArtifactInUse"`
+   * - `error.message`: Human-readable description of the conflict
+   * - `error.details[]`: Array of errors, each identifying a referencing agent name and version
+   *
+   * **Not Found (404)**: No code artifact exists with the given name.
+   *
+   * To resolve a 409 conflict, use `GET /agents?code_reference_id={name}` to find
+   * referencing agents, then update or delete those agent versions before retrying.
    */
   @delete
   @route("/code/{name}")
@@ -405,7 +447,24 @@ interface Agents {
 
   /**
    * Delete a specific version of a code artifact.
-   * Returns 409 Conflict if the code version is referenced by active agent versions.
+   *
+   * **Integrity check**: Before deletion, the service checks if the specified version is
+   * referenced by an active agent version (via `code_configuration.code_reference_id`).
+   *
+   * **Success (204 No Content)**: The version is permanently deleted. Other versions of the
+   * same artifact are unaffected. If this was the last version, the artifact name remains
+   * reserved (use `DELETE /code/{name}` to fully remove the artifact).
+   *
+   * **Conflict (409)**: The version is referenced by one or more active agent versions.
+   * The version is not deleted. The error response includes:
+   * - `error.code`: `"CodeArtifactInUse"`
+   * - `error.message`: Human-readable description of the conflict
+   * - `error.details[]`: Array of errors, each identifying a referencing agent name and version
+   *
+   * **Not Found (404)**: No code artifact version exists with the given name and version.
+   *
+   * To resolve a 409 conflict, use `GET /agents?code_reference_id={name}:{version}` to find
+   * referencing agents, then update or delete those agent versions before retrying.
    */
   @delete
   @route("/code/{name}/versions/{version}")
