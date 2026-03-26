@@ -1292,6 +1292,7 @@ union ProvisioningStateUnion {
 );
 @@clientName(AzureFirewallSkuName.AZFW_VNet, "AzfwVnet", "javascript");
 @@clientName(VM, "Vm", "javascript");
+@@clientName(AzureFirewallSkuName.AZFW_VNet, "AZFWVnet", "go");
 @@clientName(FirewallPolicyPropertiesFormat.explicitProxy,
   "ExplicitProxySettings",
   "go"
