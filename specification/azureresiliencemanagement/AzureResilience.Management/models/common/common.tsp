@@ -147,7 +147,7 @@ union ResourceProtectionStatus {
   NotProtected: "NotProtected",
 
   @added(Versions.v2026_03_01_preview)
-  @doc("A state indicating that the resource is highly available.")
+  @doc("A state indicating that the resource is protected by the highly available recovery solution.")
   HighlyAvailable: "HighlyAvailable",
 
   string,
