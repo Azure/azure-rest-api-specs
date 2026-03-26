@@ -1,6 +1,4 @@
-// First, import the common Microsoft.Voiceservice definition
 import "./impact.tsp";
-//
 
 // Then import the resource API definitions
 import "./workloadImpacts.tsp";

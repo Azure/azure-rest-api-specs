@@ -39,31 +39,7 @@ These settings apply only when `--tag=package-2024-04` is specified on the comma
 title: BillingManagementClient
 description: Billing Client
 input-file:
-- stable/2024-04-01/agreement.json
-- stable/2024-04-01/associatedTenant.json
-- stable/2024-04-01/availableBalance.json
-- stable/2024-04-01/billingAccount.json
-- stable/2024-04-01/billingPermission.json
-- stable/2024-04-01/billingProfile.json
-- stable/2024-04-01/billingProperty.json
-- stable/2024-04-01/billingRequest.json
-- stable/2024-04-01/billingRoleAssignment.json
-- stable/2024-04-01/billingRoleDefinition.json
-- stable/2024-04-01/billingSavingsPlan.json
-- stable/2024-04-01/billingSubscription.json
-- stable/2024-04-01/customer.json
-- stable/2024-04-01/department.json
-- stable/2024-04-01/enrollmentAccount.json
-- stable/2024-04-01/invoice.json
-- stable/2024-04-01/invoiceSection.json
-- stable/2024-04-01/operation.json
-- stable/2024-04-01/payment.json
-- stable/2024-04-01/policy.json
-- stable/2024-04-01/product.json
-- stable/2024-04-01/reservation.json
-- stable/2024-04-01/transaction.json
-- stable/2024-04-01/transfers.json
-- stable/2024-04-01/types.json
+- stable/2024-04-01/openapi.json
 suppressions:
 - code: AllProxyResourcesShouldHaveDelete
   from: billingRequest.json
