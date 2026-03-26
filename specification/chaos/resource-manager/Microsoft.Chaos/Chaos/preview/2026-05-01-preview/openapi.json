@@ -2805,12 +2805,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/RefreshRecommendationsResult"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -3435,9 +3429,6 @@
               }
             }
           },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3660,12 +3651,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Validation"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -3983,9 +3968,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -6499,9 +6481,9 @@
           "description": "The principal id for the managed identity used for the run.",
           "readOnly": true
         },
-        "state": {
+        "status": {
           "$ref": "#/definitions/ScenarioRunState",
-          "description": "The scenario run state.",
+          "description": "The scenario run status.",
           "readOnly": true
         },
         "resources": {
@@ -6515,7 +6497,7 @@
             "id"
           ]
         },
-        "errors": {
+        "executionErrors": {
           "$ref": "#/definitions/ScenarioErrors",
           "description": "The scenario run errors.",
           "readOnly": true
@@ -6536,13 +6518,13 @@
             "actionUrn"
           ]
         },
-        "startedAt": {
+        "startTime": {
           "type": "string",
           "format": "date-time",
           "description": "When the scenario run was started.",
           "readOnly": true
         },
-        "completedAt": {
+        "endTime": {
           "type": "string",
           "format": "date-time",
           "description": "When the scenario run was completed.",
@@ -6554,9 +6536,9 @@
         "scenarioName",
         "scenarioConfigurationName",
         "managedIdentityPrincipalId",
-        "state",
+        "status",
         "resources",
-        "startedAt"
+        "startTime"
       ]
     },
     "ScenarioRunResource": {
@@ -7049,12 +7031,12 @@
       "type": "object",
       "description": "Model that represents the properties of the scenario validation.",
       "properties": {
-        "state": {
+        "status": {
           "$ref": "#/definitions/ScenarioValidationState",
-          "description": "The scenario validation state.",
+          "description": "The scenario validation status.",
           "readOnly": true
         },
-        "startedAt": {
+        "startTime": {
           "type": "string",
           "format": "date-time",
           "description": "The scenario validation UTC start time.",
@@ -7064,21 +7046,20 @@
           "type": "string",
           "description": "Execution plan created from validation. This plan will be executed as-is on next scenario execution."
         },
-        "completedAt": {
+        "endTime": {
           "type": "string",
           "format": "date-time",
           "description": "The scenario validation UTC end time.",
           "readOnly": true
         },
-        "errors": {
+        "validationErrors": {
           "$ref": "#/definitions/ScenarioErrors",
-          "description": "The scenario validation errors, if present."
+          "description": "Business errors from validation — permission and resource state issues."
         }
       },
       "required": [
-        "state",
-        "startedAt",
-        "completedAt"
+        "status",
+        "startTime"
       ]
     },
     "Workspace": {

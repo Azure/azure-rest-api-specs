@@ -55,11 +55,11 @@ model ScenarioRunProperties {
   managedIdentityPrincipalId: string;
 
   /**
-   * The scenario run state.
+   * The scenario run status.
    */
   @visibility(Lifecycle.Read)
   @lroStatus
-  state: ScenarioRunState;
+  status: ScenarioRunState;
 
   /**
    * All resources discovered for the scenario run.
@@ -72,7 +72,7 @@ model ScenarioRunProperties {
    * The scenario run errors.
    */
   @visibility(Lifecycle.Read)
-  errors?: ScenarioErrors;
+  executionErrors?: ScenarioErrors;
 
   /**
    * The scenario run json.
@@ -91,13 +91,13 @@ model ScenarioRunProperties {
    * When the scenario run was started.
    */
   @visibility(Lifecycle.Read)
-  startedAt: utcDateTime;
+  startTime: utcDateTime;
 
   /**
    * When the scenario run was completed.
    */
   @visibility(Lifecycle.Read)
-  completedAt?: utcDateTime;
+  endTime?: utcDateTime;
 }
 
 /**

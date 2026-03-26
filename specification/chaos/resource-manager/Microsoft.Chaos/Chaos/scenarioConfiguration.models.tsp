@@ -116,17 +116,17 @@ model Validation is ProxyResource<ValidationProperties> {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "kinda resource"
 model ValidationProperties {
   /**
-   * The scenario validation state.
+   * The scenario validation status.
    */
   @visibility(Lifecycle.Read)
   @lroStatus
-  state: ScenarioValidationState;
+  status: ScenarioValidationState;
 
   /**
    * The scenario validation UTC start time.
    */
   @visibility(Lifecycle.Read)
-  startedAt: utcDateTime;
+  startTime: utcDateTime;
 
   /**
    * Execution plan created from validation. This plan will be executed as-is on next scenario execution.
@@ -137,12 +137,12 @@ model ValidationProperties {
    * The scenario validation UTC end time.
    */
   @visibility(Lifecycle.Read)
-  completedAt: utcDateTime;
+  endTime?: utcDateTime;
 
   /**
-   * The scenario validation errors, if present.
+   * Business errors from validation — permission and resource state issues.
    */
-  errors?: ScenarioErrors;
+  validationErrors?: ScenarioErrors;
 }
 
 /**

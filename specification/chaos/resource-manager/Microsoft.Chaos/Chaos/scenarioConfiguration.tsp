@@ -49,30 +49,32 @@ interface ScenarioConfigurations {
   /**
    * Execute the scenario execution with the given scenario configuration.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202+204, custom template not recognized by linter"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO operation returns 202 only"
   @pollingOperation(ScenarioRuns.get)
-  execute is ArmResourceActionNoBodyAsyncWithLocation<
+  execute is ArmResourceActionNoContentAsyncWithLocationResult<
     ScenarioConfiguration,
-    void
+    void,
+    ScenarioRun
   >;
 
   /**
    * Cancel the currently running scenario execution.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202+204, custom template not recognized by linter"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO operation returns 202 only"
   @removed(Microsoft.Chaos.Versions.v2026_05_01_preview)
   @pollingOperation(ScenarioRuns.get)
-  cancel is ArmResourceActionNoBodyAsyncWithLocation<
+  cancel is ArmResourceActionNoContentAsyncWithLocationResult<
     ScenarioConfiguration,
-    void
+    void,
+    Azure.ResourceManager.Foundations.OperationStatusResult
   >;
 
   /**
    * Validate the given scenario configuration.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 200+202, custom template not recognized by linter"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO operation returns 202 only"
   @pollingOperation(ScenarioConfigurations.getLatestValidation)
-  validate is ArmResourceActionAsyncWithLocation<
+  validate is ArmResourceActionNoContentAsyncWithLocationResult<
     ScenarioConfiguration,
     void,
     Validation
