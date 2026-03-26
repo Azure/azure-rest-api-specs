@@ -8677,14 +8677,14 @@ model ClientDiscoveryResponse {
 }
 
 // ============================================================
-// Cross-Tenant Restore (CTR) Models — added in v2026_03_01_preview
+// Cross-Tenant Restore (CTR) Models — added in v2026_03_31_preview
 // ============================================================
 
 /**
  * Cross-tenant vault mapping properties for cross-tenant restore.
  * Represents the configuration linking a source vault to a target vault across tenants.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 model CrossTenantVaultMapping {
   /**
    * ARM resource ID of the source vault.
@@ -8725,7 +8725,7 @@ model CrossTenantVaultMapping {
 /**
  * Request to remove a cross-tenant vault mapping for cross-tenant restore.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 model RemoveCrossTenantVaultMappingRequest {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed.
@@ -8736,7 +8736,7 @@ model RemoveCrossTenantVaultMappingRequest {
 /**
  * State of a vault mapping.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 union VaultMappingState {
   string,
 
@@ -8751,7 +8751,7 @@ union VaultMappingState {
  * Response for CheckVaultMappingStatus API.
  * Contains information about whether a source vault is mapped to a target vault.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 model CrossTenantVaultMappingStatusResponse {
   /**
    * Mapping name (if mapped).
@@ -8767,7 +8767,7 @@ model CrossTenantVaultMappingStatusResponse {
 /**
  * Request to generate a vault credential certificate for cross-tenant restore.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 model VaultCredentialCertificateRequest {
   /**
    * Options for certificate generation.
@@ -8778,7 +8778,7 @@ model VaultCredentialCertificateRequest {
 /**
  * Options for self-signed certificate generation.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 model VaultCredentialCertificateCreateOptions {
   /**
    * Validity period of the generated certificate in hours.
@@ -8790,7 +8790,7 @@ model VaultCredentialCertificateCreateOptions {
  * Response containing the generated vault credential certificate
  * and associated AAD identity details for MARS agent registration.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 model VaultCredentialCertificateResponse
   is Azure.ResourceManager.ProxyResource<VaultCredentialCertificateProperties> {
   /**
@@ -8808,7 +8808,7 @@ model VaultCredentialCertificateResponse
  * Properties of the vault credential certificate including the certificate data
  * and AAD service principal identity details required by MARS agent.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 model VaultCredentialCertificateProperties {
   /**
    * Authentication type.

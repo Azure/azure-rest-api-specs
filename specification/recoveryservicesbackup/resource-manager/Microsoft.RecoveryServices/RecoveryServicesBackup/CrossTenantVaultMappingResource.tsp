@@ -1,4 +1,4 @@
-// Cross-Tenant Vault Mapping operations — added in v2026_03_01_preview
+// Cross-Tenant Vault Mapping operations — added in v2026_03_31_preview
 
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -22,7 +22,7 @@ namespace Microsoft.RecoveryServices;
 /**
  * Cross-tenant vault mapping resource for cross-tenant restore.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 @parentResource(VaultResource)
 model CrossTenantVaultMappingResource
   is ProxyResource<CrossTenantVaultMapping> {
@@ -45,7 +45,7 @@ model CrossTenantVaultMappingResource
 // ============================================================
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "CTR resource uses remove action instead of standard DELETE"
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 @armResourceOperations
 interface CrossTenantVaultMappings {
   /**
@@ -123,7 +123,7 @@ interface CrossTenantVaultMappings {
 // ============================================================
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-standard routes for cross-tenant pass-through operations"
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 interface CrossTenantOperations {
   /**
    * Gets the mapping status of the vault for cross-tenant restore operations.
@@ -768,7 +768,7 @@ interface CrossTenantOperations {
 /**
  * List of protected items for cross-tenant restore operations.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 model CrossTenantProtectedItemResourceList {
   /**
    * List of resources.
@@ -787,7 +787,7 @@ model CrossTenantProtectedItemResourceList {
 /**
  * List of recovery points for cross-tenant restore operations.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 model CrossTenantRecoveryPointResourceList {
   /**
    * List of resources.
@@ -806,7 +806,7 @@ model CrossTenantRecoveryPointResourceList {
 /**
  * List of jobs for cross-tenant restore operations.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 model CrossTenantJobResourceList {
   /**
    * List of resources.
@@ -838,7 +838,7 @@ model CrossTenantJobResourceList {
 // ============================================================
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-standard routes for cross-tenant vault credential operations"
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_31_preview)
 interface CrossTenantVaultCredentialOperations {
   /**
    * Generates a vault credential certificate for cross-tenant restore scenarios.

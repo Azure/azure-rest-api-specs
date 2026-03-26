@@ -1,0 +1,28 @@
+{
+  "operationId": "CrossTenantVaultMappings_List",
+  "title": "List Cross Tenant Vault Mappings",
+  "parameters": {
+    "api-version": "2026-03-31-preview",
+    "vaultName": "NetSDKTestRsVault",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupCrossTenantVaultMappings/crossTenantVaultMapping1",
+            "name": "crossTenantVaultMapping1",
+            "type": "Microsoft.RecoveryServices/vaults/backupCrossTenantVaultMappings",
+            "properties": {
+              "sourceVaultId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/SourceRG/providers/Microsoft.RecoveryServices/vaults/SourceVault",
+              "mappingName": "crossTenantVaultMapping1",
+              "createdTime": "2026-01-15T10:30:00.0000000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

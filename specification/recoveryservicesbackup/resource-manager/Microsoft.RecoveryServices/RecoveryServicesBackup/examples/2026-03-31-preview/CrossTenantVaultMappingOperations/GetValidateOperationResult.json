@@ -1,0 +1,27 @@
+{
+  "operationId": "ValidateOperationResultFromCrossTenantVault_Get",
+  "title": "Get Cross-Tenant Validate Operation Result",
+  "parameters": {
+    "api-version": "2026-03-31-preview",
+    "vaultName": "NetSDKTestRsVault",
+    "crossTenantVaultMappingName": "crossTenantVaultMapping1",
+    "operationId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "validateOperationResponse": {
+          "validationResults": []
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupCrossTenantVaultMappings/crossTenantVaultMapping1/backupValidateOperationResults/00000000-0000-0000-0000-000000000000?api-version=2026-03-31-preview",
+        "Retry-After": "60"
+      }
+    }
+  }
+}
