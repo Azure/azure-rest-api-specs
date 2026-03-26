@@ -239,10 +239,6 @@ interface BatchClient {
   "supportEndDate",
   "javascript"
 );
-@@clientName(Azure.Batch.AuthenticationTokenSettings.access,
-  "scopes",
-  "javascript"
-);
 @@clientName(Azure.Batch.VMExtension.type, "extensionType", "javascript");
 @@clientName(Azure.Batch.BatchNodeDeallocateOptions.nodeDeallocateOption,
   "nodeDeallocationOption",
