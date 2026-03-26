@@ -139,11 +139,11 @@ model CharacterMaskPolicyType extends BaseRedactionPolicy {
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 
   /** Optional parameter to indicate the length of unmasked characters at the end of the redacted PII entity. Default is 0. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_15_preview)
   unmaskLength?: int32;
 
   /** Optional parameter to indicate whether to unmask characters from the end of the redacted PII entity. Default is true. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_15_preview)
   unmaskFromEnd?: boolean = true;
 }
 
@@ -213,7 +213,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(Versions.v2025_11_15_preview, PiiEntitiesDocumentResult[])
+  @typeChangedFrom(Versions.v2026_05_15_preview, PiiEntitiesDocumentResult[])
   documents: PiiResultWithDetectedLanguage[];
 }
 
@@ -257,7 +257,7 @@ model PiiEntitiesDocumentResult is DocumentResult {
   redactedText: string;
 
   /** Recognized entities in the document. */
-  @typeChangedFrom(Versions.v2025_11_15_preview, Entity[])
+  @typeChangedFrom(Versions.v2026_05_15_preview, Entity[])
   entities: PiiEntityWithTags[];
 }
 
@@ -824,7 +824,7 @@ union PiiCategoriesExclude {
   DriversLicenseNumber: "DriversLicenseNumber",
 
   /** Neighborhood */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_15_preview)
   Neighborhood: "Neighborhood",
 
   /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held */
@@ -836,7 +836,7 @@ union PiiCategoriesExclude {
   PIN: "PIN",
 
   /** VIN */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_15_preview)
   VIN: "VIN",
 
   /** VIN */
