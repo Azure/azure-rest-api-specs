@@ -26,13 +26,14 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-containerinstance"
     flavor: azure
     experimental-extensible-enums: true
+    compatibility-lro: true
     package-details:
       name: "@azure/arm-containerinstance"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/containerinstance"
     emitter-output-dir: "{output-dir}/{service-dir}/armcontainerinstance"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerinstance"
-    fix-const-stuttering: true
+    fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
     generate-fakes: true
