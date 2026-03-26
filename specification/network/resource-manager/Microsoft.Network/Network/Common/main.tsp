@@ -108,7 +108,7 @@ union ProvisioningState {
  * The current provisioning state.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union NetworkProvisioningState {
+union BaseProvisioningState {
   string,
 
   /**
@@ -913,7 +913,7 @@ model NetworkInterfacePropertiesFormat {
    * The provisioning state of the network interface resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * WorkloadType of the NetworkInterface for BareMetal resources
@@ -1110,7 +1110,7 @@ model SubnetPropertiesFormat {
    * The provisioning state of the subnet resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * Enable or Disable apply network policies on private end point in the subnet.
@@ -1175,7 +1175,7 @@ model ServiceEndpointPropertiesFormat {
    * The provisioning state of the service endpoint resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -1235,7 +1235,7 @@ model IPConfigurationPropertiesFormat {
    * The provisioning state of the IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -1322,7 +1322,7 @@ model PublicIPAddressPropertiesFormat {
    * The provisioning state of the public IP address resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * The service public IP address of the public IP address resource.
@@ -1459,7 +1459,7 @@ model IPConfigurationProfilePropertiesFormat {
    * The provisioning state of the IP configuration profile resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -1518,7 +1518,7 @@ model ResourceNavigationLinkFormat {
    * The provisioning state of the resource navigation link resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -1571,7 +1571,7 @@ model ServiceAssociationLinkPropertiesFormat {
    * The provisioning state of the service association link resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * If true, the resource can be deleted.
@@ -1634,7 +1634,7 @@ model ServiceDelegationPropertiesFormat {
    * The provisioning state of the service delegation resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -1683,7 +1683,7 @@ model ApplicationGatewayIPConfigurationPropertiesFormat {
    * The provisioning state of the application gateway IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -1839,7 +1839,7 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
    * The provisioning state of the network interface IP configuration.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * PrivateLinkConnection properties for the network interface.
@@ -1920,7 +1920,7 @@ model FrontendIPConfigurationPropertiesFormat {
    * The provisioning state of the frontend IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -1977,7 +1977,7 @@ model ApplicationGatewayBackendAddressPoolPropertiesFormat {
    * The provisioning state of the backend address pool resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -2054,7 +2054,7 @@ model BackendAddressPoolPropertiesFormat {
    * The provisioning state of the backend address pool resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * Amount of seconds Load Balancer waits for before sending RESET to client and backend address.
@@ -2255,7 +2255,7 @@ model InboundNatRulePropertiesFormat {
    * The provisioning state of the inbound NAT rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -2446,7 +2446,7 @@ model NetworkInterfaceTapConfigurationPropertiesFormat {
    * The provisioning state of the network interface tap configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -2534,7 +2534,7 @@ model SecurityRulePropertiesFormat {
    * The provisioning state of the security rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -2580,7 +2580,7 @@ model PrivateEndpointConnectionProperties {
    * The provisioning state of the private endpoint connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * The consumer link id.
@@ -2647,7 +2647,7 @@ model VirtualNetworkTapPropertiesFormat {
    * The provisioning state of the virtual network tap resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * The reference to the private IP Address of the collector nic that will receive the tap.
@@ -2717,7 +2717,7 @@ model NetworkSecurityGroupPropertiesFormat {
    * The provisioning state of the network security group resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -2736,7 +2736,7 @@ model ApplicationSecurityGroupPropertiesFormat {
    * The provisioning state of the application security group resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -2760,7 +2760,7 @@ model PrivateEndpointProperties {
    * The provisioning state of the private endpoint resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * Specifies the IP version type for the private IPs of the private endpoint. If not defined, this defaults to IPv4.
@@ -2853,7 +2853,7 @@ model PrivateLinkServiceProperties {
    * The provisioning state of the private link service resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * An array of list about connections to the private endpoint.
@@ -2974,7 +2974,7 @@ model FlowLogPropertiesFormat {
    * The provisioning state of the flow log.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -3081,7 +3081,7 @@ model RouteTablePropertiesFormat {
    * The provisioning state of the route table resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * The resource GUID property of the route table.
@@ -3117,7 +3117,7 @@ model ServiceEndpointPolicyPropertiesFormat {
    * The provisioning state of the service endpoint policy resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * The alias indicating if the policy belongs to a service
@@ -3199,7 +3199,7 @@ model NatGatewayPropertiesFormat {
    * The provisioning state of the NAT gateway resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -3279,7 +3279,7 @@ model LoadBalancingRulePropertiesFormat {
    * The provisioning state of the load balancing rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -3333,7 +3333,7 @@ model ProbePropertiesFormat {
    * The provisioning state of the probe resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -3418,7 +3418,7 @@ model InboundNatPoolPropertiesFormat {
    * The provisioning state of the inbound NAT pool resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -3447,7 +3447,7 @@ model OutboundRulePropertiesFormat {
    * The provisioning state of the outbound rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * The protocol for the outbound rule in load balancer.
@@ -3541,7 +3541,7 @@ model VirtualNetworkPeeringPropertiesFormat {
    * The provisioning state of the virtual network peering resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * If we need to verify the provisioning state of the remote gateway.
@@ -3586,7 +3586,7 @@ model PrivateLinkServiceConnectionProperties {
    * The provisioning state of the private link service connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * The resource id of private link service.
@@ -3724,7 +3724,7 @@ model PrivateLinkServiceIpConfigurationProperties {
    * The provisioning state of the private link service IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4.
@@ -3758,7 +3758,7 @@ model RoutePropertiesFormat {
    * The provisioning state of the route resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * A value indicating whether this route overrides overlapping BGP routes regardless of LPM.
@@ -3792,7 +3792,7 @@ model ServiceEndpointPolicyDefinitionPropertiesFormat {
    * The provisioning state of the service endpoint policy definition resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -3864,7 +3864,7 @@ model LoadBalancerPropertiesFormat {
    * The provisioning state of the load balancer resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * Indicates the scope of the load balancer: external (Public) or internal (Private).
@@ -3882,7 +3882,7 @@ model NetworkWatcherPropertiesFormat {
    * The provisioning state of the network watcher resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 }
 
 /**
@@ -3926,7 +3926,7 @@ model VirtualNetworkPropertiesFormat {
    * The provisioning state of the virtual network resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: NetworkProvisioningState;
+  provisioningState?: BaseProvisioningState;
 
   /**
    * Indicates if DDoS protection is enabled for all the protected resources in the virtual network. It requires a DDoS protection plan associated with the resource.

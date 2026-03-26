@@ -1292,7 +1292,7 @@ union ProvisioningStateUnion {
 );
 @@clientName(AzureFirewallSkuName.AZFW_VNet, "AzfwVnet", "javascript");
 @@clientName(VM, "Vm", "javascript");
-@@clientName(Microsoft.Network.NetworkProvisioningState,
+@@clientName(Microsoft.Network.BaseProvisioningState,
   "ProvisioningState",
   "go"
 );
