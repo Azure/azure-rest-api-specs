@@ -31,6 +31,17 @@ union LroStatus {
   Succeeded: "Succeeded",
 }
 
+/** Desired format of the response. Only `json` format is supported. */
+union JsonFormat {
+  string,
+
+  /**
+   * [The JavaScript Object Notation Data Interchange
+   * Format](https://tools.ietf.org/html/rfc8259)
+   */
+  json: "json",
+}
+
 /**
  * The response format.
  */
@@ -438,8 +449,7 @@ model GeoJsonObject {
   type: GeoJsonObjectType;
 
   /**
-   * Bounding box. Projection used - EPSG:3857. Please refer to [RFC
-   * 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
+   * Bounding box. Projection used - EPSG:3857. Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
    */
   bbox?: float64[];
 }
