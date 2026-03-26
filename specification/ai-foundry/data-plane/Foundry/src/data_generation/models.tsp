@@ -104,7 +104,7 @@ model FileDataGenerationJobOutput extends DataGenerationJobOutput {
 
   @doc("The id of the output Azure OpenAI file.")
   @visibility(Lifecycle.Read)
-  file_id: string;
+  id: string;
 
   @doc("The filename of the output Azure OpenAI file.")
   @visibility(Lifecycle.Read)
@@ -277,7 +277,7 @@ model FileDataGenerationJobSource extends DataGenerationJobSource {
   type: "File";
 
   @doc("Input Azure Open AI file id used for data generation.")
-  file_id: string;
+  id: string;
 }
 
 model DatasetDataGenerationJobSource extends DataGenerationJobSource {
