@@ -3883,39 +3883,6 @@
       "type": "object",
       "description": "A container group part of the list result.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource id.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "zones": {
-          "type": "array",
-          "description": "The zones for the container group.",
-          "items": {
-            "type": "string"
-          }
-        },
         "identity": {
           "$ref": "#/definitions/ContainerGroupIdentity",
           "description": "The identity of the container group, if configured."
@@ -3928,6 +3895,11 @@
       },
       "required": [
         "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
       ]
     },
     "ListResultContainerGroupPropertiesProperties": {
