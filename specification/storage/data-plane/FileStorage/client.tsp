@@ -35,20 +35,6 @@ namespace Customizations;
 @@clientName(Storage.File.AccessPolicy.expiry, "expiresOn", "javascript");
 @@clientName(Storage.File.AccessPolicy.permission, "permissions", "javascript");
 
-// Use strings for dates when Python doesn't have enough precision
-@@alternateType(Storage.File.FileSmtPropertyResponseHeaders.fileCreationTime,
-  string,
-  "python"
-);
-@@alternateType(Storage.File.FileSmtPropertyResponseHeaders.fileLastWriteTime,
-  string,
-  "python"
-);
-@@alternateType(Storage.File.FileSmtPropertyResponseHeaders.fileChangeTime,
-  string,
-  "python"
-);
-
 @@alternateType(Storage.File.UserDelegationKey.signedStart,
   string,
   "javascript"

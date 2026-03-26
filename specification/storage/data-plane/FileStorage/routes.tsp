@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 namespace Storage.File;
 
@@ -980,8 +982,13 @@ interface File {
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing storage API."
   @sharedRoute
   @put
-  create is StorageOperationRequestBody<
+  create is StorageOperationNoBody<
     {
+      /** Content-Type header */
+      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+      @header("Content-Type")
+      contentType?: "application/octet-stream";
+
       /** Specifies the number of bytes being transmitted in the request body. When the x-ms-write header is set to clear, the value of this header must be set to zero. */
       @header("x-ms-content-length") contentLength: int64;
 
@@ -1026,8 +1033,7 @@ interface File {
 
       /** Content length of the file. */
       @header("Content-Length") contentLength?: int64;
-    },
-    "application/octet-stream"
+    }
   >;
 
   /**
@@ -1322,8 +1328,13 @@ interface File {
   @sharedRoute
   @route("?comp=range")
   @put
-  uploadRange is StorageOperationRequestBody<
+  uploadRange is StorageOperationNoBody<
     {
+      /** Content-Type header */
+      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+      @header("Content-Type")
+      contentType?: "application/octet-stream";
+
       /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
       @header("Range") range: string;
 
@@ -1368,12 +1379,12 @@ interface File {
       /** The file last write time. */
       @header("x-ms-file-last-write-time")
       @encode("rfc7231")
+      @alternateType(string, "python")
       fileLastWriteTime?: utcDateTime;
 
       /** Structured body response header. */
       @header("x-ms-structured-body") structuredBodyType?: string;
-    },
-    "application/octet-stream"
+    }
   >;
 
   /**
@@ -1440,6 +1451,7 @@ interface File {
       /** The file last write time. */
       @encode("rfc7231")
       @header("x-ms-file-last-write-time")
+      @alternateType(string, "python")
       fileLastWriteTime?: utcDateTime;
     }
   >;

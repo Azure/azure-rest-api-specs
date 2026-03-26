@@ -1735,16 +1735,19 @@ alias FileSmtPropertyResponseHeaders = {
   /** Creation time for the file/directory. */
   @header("x-ms-file-creation-time")
   @encode("rfc7231")
+  @alternateType(string, "python")
   fileCreationTime?: utcDateTime;
 
   /** Last write time for the file/directory. */
   @header("x-ms-file-last-write-time")
   @encode("rfc7231")
+  @alternateType(string, "python")
   fileLastWriteTime?: utcDateTime;
 
   /** Change time for the file/directory. */
   @header("x-ms-file-change-time")
   @encode("rfc7231")
+  @alternateType(string, "python")
   fileChangeTime?: utcDateTime;
 
   /** The fileId of the directory/file. */
