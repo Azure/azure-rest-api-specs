@@ -111,7 +111,7 @@ using Microsoft.Storage;
   "csharp"
 );
 @@clientName(ActiveDirectoryProperties.domainGuid,
-  "DomainGuid",
+  "ActiveDirectoryDomainGuid",
   "csharp"
 );
 @@clientName(TableAccessPolicy, "StorageTableAccessPolicy", "csharp");
@@ -658,9 +658,9 @@ namespace Azure.ResourceManager.Models {
 @@alternateType(EncryptionScopeKeyVaultProperties.keyUri, url, "csharp");
 @@alternateType(KeyVaultProperties.keyvaulturi, url, "csharp");
 
-// Rename DomainGuid for backward compat
+// Rename DomainGuid → ActiveDirectoryDomainGuid for backward compat
 @@clientName(ActiveDirectoryProperties.domainGuid,
-  "DomainGuid",
+  "ActiveDirectoryDomainGuid",
   "csharp"
 );
 
