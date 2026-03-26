@@ -23,3 +23,11 @@ using Microsoft.ContainerInstance;
 );
 @@clientName(ContainerAttachResponse, "ContainerAttachResult", "java");
 @@clientName(Microsoft.ContainerInstance.Resource, "ResourcePatch", "java");
+@@clientName(ContainerGroupPropertiesProperties,
+  "ContainerGroupProperties",
+  "java"
+);
+@@clientName(UserAssignedIdentities,
+  "ContainerGroupIdentityUserAssignedIdentities",
+  "java"
+);
