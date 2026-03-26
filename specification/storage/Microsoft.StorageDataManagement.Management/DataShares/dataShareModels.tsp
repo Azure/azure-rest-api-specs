@@ -31,11 +31,21 @@ model DataShareProperties {
   @pattern("^azds://[a-zA-Z0-9-]+:[a-zA-Z0-9-_]+:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   dataShareUri?: string;
 
-  @doc("List of access policies that specify the permission allowed to a managed identity.")
+  @doc("""
+    List of access policies that specify the permission allowed to a managed identity.
+    For Create - This property is required and cannot be null. If no access policies are provided at creation time, specify an empty array.
+    For Update - This property is optional. If set to null or not passed, the existing access policies are left unchanged.
+    If provided with a non-null value, the existing access policies are replaced with the specified list.
+    """)
   @Azure.ResourceManager.identifiers(#[])
   accessPolicies: AccessPolicy[];
 
-  @doc("List of assets that specify the properties of the shared resources.")
+  @doc("""
+    List of assets that specify the properties of the shared resources.
+    For Create - This property is required and cannot be null. If no assets are provided at creation time, specify an empty array.
+    For Update - This property is optional. If set to null or not passed, the existing assets are left unchanged.
+    If provided with a non-null value, the existing assets are replaced with the specified list.
+    """)
   @Azure.ResourceManager.identifiers(#[])
   assets: Asset[];
 
