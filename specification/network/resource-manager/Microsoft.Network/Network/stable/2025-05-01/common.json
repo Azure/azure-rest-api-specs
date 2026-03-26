@@ -1840,42 +1840,6 @@
         ]
       }
     },
-    "BaseProvisioningState": {
-      "type": "string",
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Updating",
-        "Deleting",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "BaseProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Succeeded"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Deleting"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed"
-          }
-        ]
-      }
-    },
     "BastionConnectProtocol": {
       "type": "string",
       "description": "The protocol used to connect to the target.",
@@ -6404,38 +6368,21 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "Provisioning states of a resource.",
+      "description": "The current provisioning state.",
       "enum": [
-        "Failed",
         "Succeeded",
-        "Canceled",
-        "Creating",
         "Updating",
-        "Deleting"
+        "Deleting",
+        "Failed"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed"
-          },
-          {
             "name": "Succeeded",
             "value": "Succeeded",
             "description": "Succeeded"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Canceled"
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "Creating"
           },
           {
             "name": "Updating",
@@ -6446,6 +6393,11 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "Deleting"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
           }
         ]
       }
@@ -6809,6 +6761,54 @@
             "name": "None",
             "value": "None",
             "description": "None"
+          }
+        ]
+      }
+    },
+    "ResourceProvisioningState": {
+      "type": "string",
+      "description": "Provisioning states of a resource.",
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
           }
         ]
       }
