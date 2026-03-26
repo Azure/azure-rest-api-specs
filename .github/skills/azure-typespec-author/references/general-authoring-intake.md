@@ -28,6 +28,7 @@ Collect: target resource, operation type (CRUD or custom), operation name (custo
 Defaults: never async → GET, LIST, HEAD. Default async → PUT, DELETE. Default sync → PATCH. Always ask user → POST/action.
 
 > Use `createOrReplace` templates (not `createOrUpdate`). Use `ArmCustomPatch` for PATCH.
+> For POST async operation, make sure use ARM combined headers. ` LroHeaders = ArmCombinedLroHeaders<FinalResult = ExportResult>`.
 
 ### Step 2.3: Confirm
 
