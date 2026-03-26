@@ -6,13 +6,13 @@ namespace Azure.AI.Projects;
 union DataGenerationJobType {
   string,
 
-  @doc("Simple question and answer between user and agent job type")
+  @doc("Simple question and answers between user and agent.")
   SimpleQnA: "SimpleQnA",
 
-  @doc("Tool use job type")
+  @doc("Tool calling conversation between user and agent.")
   ToolUse: "ToolUse",
 
-  @doc("Multi turn conversation between agents and user.")
+  @doc("Multi turn conversation between user and agent.")
   MultiTurn: "MultiTurn",
 }
 
@@ -22,7 +22,7 @@ model DataGenerationModelOptions {
   model_name: string;
 }
 
-@doc("Status values for a data generation job.")
+@doc("Status values for data generation job.")
 union DataGenerationJobStatus {
   string,
 
@@ -53,7 +53,7 @@ model DataGenerationJob {
   @doc("The options for the data generation job.")
   options: DataGenerationJobOptions;
 
-  @doc("The purpose of the data generation job. Either for fine-tuning supervised training or evaluation.")
+  @doc("The purpose of the data generation job. Either for fine-tuning or evaluation.")
   purpose: DataGenerationJobPurpose;
 
   @doc("The job identifier.")
@@ -64,12 +64,12 @@ model DataGenerationJob {
   @visibility(Lifecycle.Read)
   status: DataGenerationJobStatus;
 
-  @doc("The job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation.")
+  @doc("The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation.")
   outputs?: Array<DataGenerationJobOutput>;
 
-  @doc("The number of samples actually generated. This field will be populated only after the job is completed.")
+  @doc("The number of samples actually generated. This field is populated only after the job has succeeded.")
   @visibility(Lifecycle.Read)
-  generated_samples_count?: int32;
+  generated_samples?: int32;
 
   @doc("The token usage information for the data generation job.")
   @visibility(Lifecycle.Read)
@@ -79,40 +79,37 @@ model DataGenerationJob {
   @visibility(Lifecycle.Read)
   created_at: int64;
 
-  @doc("The timestamp when the job was completed, represented in Unix time (seconds since January 1, 1970).")
+  @doc("The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
-  completed_at?: int64;
+  finished_at?: int64;
 
   @doc("Error information set only when status is 'failed'.")
   @visibility(Lifecycle.Read)
   error?: ApiError;
-
-  @doc("Additional warnings related to the data generation job execution. These are non-critical issues that do not cause the job to fail but may be important for users to be aware of.")
-  @visibility(Lifecycle.Read)
-  warnings?: {
-    @doc("A human-readable warning message.")
-    message?: string;
-  };
 }
 
 @doc("Output information for a data generation job.")
 @discriminator("type")
 model DataGenerationJobOutput {
   @doc("The type of the output.")
-  type: DataGenerationJobOutputFileType;
+  type: DataGenerationJobOutputType;
 }
 
 model FileDataGenerationJobOutput extends DataGenerationJobOutput {
-  @doc("The type of the output, which is File for this model.")
+  @doc("Azure OpenAI file output.")
   type: "File";
 
   @doc("The id of the output Azure OpenAI file.")
   @visibility(Lifecycle.Read)
-  file_id?: string;
+  id: string;
+
+  @doc("The filename of the output Azure OpenAI file.")
+  @visibility(Lifecycle.Read)
+  filename: string;
 }
 
 model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
-  @doc("The type of the output, which is Dataset for this model.")
+  @doc("Dataset output.")
   type: "Dataset";
 
   @doc("The id of the output dataset created.")
@@ -134,13 +131,13 @@ model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
 }
 
 @doc("The supported output file types for a data generation job.")
-union DataGenerationJobOutputFileType {
+union DataGenerationJobOutputType {
   string,
 
-  @doc("The generated data is stored in an Azure OpenAI Files.")
+  @doc("The generated data is an Azure OpenAI File.")
   File: "File",
 
-  @doc("The generated data is stored in an Azure Blob Storage container.")
+  @doc("The generated data is a Dataset.")
   Dataset: "Dataset",
 }
 
@@ -163,10 +160,10 @@ model TokenUsage {
 union DataGenerationJobPurpose {
   string,
 
-  @doc("Fine-tuning supervised training purpose.")
+  @doc("Supervised Fine-tuning purpose.")
   SupervisedFineTuning: "SupervisedFineTuning",
 
-  @doc("Reinforcement learning fine-tuning training purpose.")
+  @doc("Reinforcement Fine-tuning purpose.")
   ReinforcementFineTuning: "ReinforcementFineTuning",
 
   @doc("Evaluation purpose.")
@@ -183,10 +180,10 @@ union DataGenerationJobSourceType {
   @doc("Prompt source type. Data is generated based on input prompts provided by the user or will be extracted from the given Agent. Applicable only for evaluation purpose.")
   Prompt: "Prompt",
 
-  @doc("File source type. Data is generated based on input Azure Open AI file.")
+  @doc("File source type. Data is generated based on Azure OpenAI file.")
   File: "File",
 
-  @doc("The dataset source type. Data is generated based on input dataset.")
+  @doc("Dataset source type. Data is generated based on dataset.")
   Dataset: "Dataset",
 }
 
@@ -199,7 +196,7 @@ model DataGenerationJobOptions {
   @doc("Maximum number of samples to generate.")
   max_samples_count: int32;
 
-  @doc("The model deployment options. Required only when the data source type is not Traces.")
+  @doc("The model options. Required only when the data source type is not Traces.")
   model_options?: DataGenerationModelOptions;
 }
 
@@ -208,11 +205,11 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is SimpleQnA for this model.")
   type: "SimpleQnA";
 
-  @doc("The question types to generate. If not specified, both short answer and long answer question types will be generated. Applicable only for simple QnA data generation jobs used for supervised fine-tuning training.")
-  question_types?: Array<SimpleQnASupervisedFineTuningQuestionType>;
+  @doc("The question types to generate. Used only for fine-tuning purposes.")
+  question_types?: Array<SimpleQnAFineTuningQuestionType>;
 }
 
-@doc("The options for ToolUse data generation job used for fine-tuning supervised training.")
+@doc("The options for a data generation job with ToolUse type. Used only for fine-tuning purposes.")
 model ToolUseFineTuningDataGenerationJobOptions
   extends DataGenerationJobOptions {
   @doc("The data generation job type, which is ToolUse for this model.")
@@ -232,7 +229,7 @@ model DataGenerationJobSource {
   type: DataGenerationJobSourceType;
 }
 
-@doc("The options for a data generation job with Traces source used for Evaluation and fine-tuning purposes, which includes the agent name and the time window for fetching traces.")
+@doc("The options for a data generation job with Traces source used for Evaluation and Fine-tuning purposes, which includes the agent name and the time window for fetching traces.")
 model TracesDataGenerationJobSource extends DataGenerationJobSource {
   @doc("The source type for this job, which is Traces.")
   type: "Traces";
@@ -279,8 +276,8 @@ model FileDataGenerationJobSource extends DataGenerationJobSource {
   @doc("The source type for this job, which is File.")
   type: "File";
 
-  @doc("Input Azure Open AI file id references used for data generation.")
-  file_id: string;
+  @doc("Input Azure Open AI file id used for data generation.")
+  id: string;
 }
 
 model DatasetDataGenerationJobSource extends DataGenerationJobSource {
@@ -294,8 +291,8 @@ model DatasetDataGenerationJobSource extends DataGenerationJobSource {
   version?: string;
 }
 
-@doc("The supported question types for SimpleQnA data generation jobs used for supervised fine-tuning training.")
-union SimpleQnASupervisedFineTuningQuestionType {
+@doc("The supported question types for SimpleQnA data generation jobs used for fine-tuning purposes.")
+union SimpleQnAFineTuningQuestionType {
   string,
 
   @doc("Short answer question type.")

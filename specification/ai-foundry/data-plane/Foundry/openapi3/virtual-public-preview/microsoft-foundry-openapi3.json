@@ -13008,7 +13008,7 @@
                 "$ref": "#/components/schemas/DataGenerationJobPurpose"
               }
             ],
-            "description": "The purpose of the data generation job. Either for fine-tuning supervised training or evaluation."
+            "description": "The purpose of the data generation job. Either for fine-tuning or evaluation."
           },
           "id": {
             "type": "string",
@@ -13029,12 +13029,12 @@
             "items": {
               "$ref": "#/components/schemas/DataGenerationJobOutput"
             },
-            "description": "The job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation."
+            "description": "The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation."
           },
-          "generated_samples_count": {
+          "generated_samples": {
             "type": "integer",
             "format": "int32",
-            "description": "The number of samples actually generated. This field will be populated only after the job is completed.",
+            "description": "The number of samples actually generated. This field is populated only after the job has succeeded.",
             "readOnly": true
           },
           "token_usage": {
@@ -13052,10 +13052,10 @@
             "description": "The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).",
             "readOnly": true
           },
-          "completed_at": {
+          "finished_at": {
             "type": "integer",
             "format": "int64",
-            "description": "The timestamp when the job was completed, represented in Unix time (seconds since January 1, 1970).",
+            "description": "The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).",
             "readOnly": true
           },
           "error": {
@@ -13065,17 +13065,6 @@
               }
             ],
             "description": "Error information set only when status is 'failed'.",
-            "readOnly": true
-          },
-          "warnings": {
-            "type": "object",
-            "properties": {
-              "message": {
-                "type": "string",
-                "description": "A human-readable warning message."
-              }
-            },
-            "description": "Additional warnings related to the data generation job execution. These are non-critical issues that do not cause the job to fail but may be important for users to be aware of.",
             "readOnly": true
           }
         },
@@ -13107,7 +13096,7 @@
                 "$ref": "#/components/schemas/DataGenerationModelOptions"
               }
             ],
-            "description": "The model deployment options. Required only when the data source type is not Traces."
+            "description": "The model options. Required only when the data source type is not Traces."
           }
         },
         "discriminator": {
@@ -13129,7 +13118,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DataGenerationJobOutputFileType"
+                "$ref": "#/components/schemas/DataGenerationJobOutputType"
               }
             ],
             "description": "The type of the output."
@@ -13144,7 +13133,7 @@
         },
         "description": "Output information for a data generation job."
       },
-      "DataGenerationJobOutputFileType": {
+      "DataGenerationJobOutputType": {
         "anyOf": [
           {
             "type": "string"
@@ -13234,7 +13223,7 @@
             ]
           }
         ],
-        "description": "Status values for a data generation job."
+        "description": "Status values for data generation job."
       },
       "DataGenerationJobType": {
         "anyOf": [
@@ -13299,7 +13288,7 @@
             "enum": [
               "Dataset"
             ],
-            "description": "The type of the output, which is Dataset for this model."
+            "description": "Dataset output."
           },
           "id": {
             "type": "string",
@@ -15528,7 +15517,9 @@
       "FileDataGenerationJobOutput": {
         "type": "object",
         "required": [
-          "type"
+          "type",
+          "id",
+          "filename"
         ],
         "properties": {
           "type": {
@@ -15536,11 +15527,16 @@
             "enum": [
               "File"
             ],
-            "description": "The type of the output, which is File for this model."
+            "description": "Azure OpenAI file output."
           },
-          "file_id": {
+          "id": {
             "type": "string",
             "description": "The id of the output Azure OpenAI file.",
+            "readOnly": true
+          },
+          "filename": {
+            "type": "string",
+            "description": "The filename of the output Azure OpenAI file.",
             "readOnly": true
           }
         },
@@ -15554,7 +15550,7 @@
         "type": "object",
         "required": [
           "type",
-          "file_id"
+          "id"
         ],
         "properties": {
           "type": {
@@ -15564,9 +15560,9 @@
             ],
             "description": "The source type for this job, which is File."
           },
-          "file_id": {
+          "id": {
             "type": "string",
-            "description": "Input Azure Open AI file id references used for data generation."
+            "description": "Input Azure Open AI file id used for data generation."
           }
         },
         "allOf": [
@@ -38397,9 +38393,9 @@
           "question_types": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SimpleQnASupervisedFineTuningQuestionType"
+              "$ref": "#/components/schemas/SimpleQnAFineTuningQuestionType"
             },
-            "description": "The question types to generate. If not specified, both short answer and long answer question types will be generated. Applicable only for simple QnA data generation jobs used for supervised fine-tuning training."
+            "description": "The question types to generate. Used only for fine-tuning purposes."
           }
         },
         "allOf": [
@@ -38409,7 +38405,7 @@
         ],
         "description": "The options for a data generation job with SimpleQnA type."
       },
-      "SimpleQnASupervisedFineTuningQuestionType": {
+      "SimpleQnAFineTuningQuestionType": {
         "anyOf": [
           {
             "type": "string"
@@ -38422,7 +38418,7 @@
             ]
           }
         ],
-        "description": "The supported question types for SimpleQnA data generation jobs used for supervised fine-tuning training."
+        "description": "The supported question types for SimpleQnA data generation jobs used for fine-tuning purposes."
       },
       "Sku": {
         "type": "object",
@@ -38944,7 +38940,7 @@
             "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "The options for ToolUse data generation job used for fine-tuning supervised training."
+        "description": "The options for a data generation job with ToolUse type. Used only for fine-tuning purposes."
       },
       "TracesDataGenerationJobSource": {
         "type": "object",
@@ -38997,7 +38993,7 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "The options for a data generation job with Traces source used for Evaluation and fine-tuning purposes, which includes the agent name and the time window for fetching traces."
+        "description": "The options for a data generation job with Traces source used for Evaluation and Fine-tuning purposes, which includes the agent name and the time window for fetching traces."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
