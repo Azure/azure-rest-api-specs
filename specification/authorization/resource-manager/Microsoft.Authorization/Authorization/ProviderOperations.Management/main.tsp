@@ -25,7 +25,7 @@ using TypeSpec.Versioning;
  * Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These calls handle provider operations.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Authorization")
 @service(#{ title: "AuthorizationManagementClient" })
 @versioned(Versions)
 // FIXME: Common type version v2 is not supported for now. Set to v3.

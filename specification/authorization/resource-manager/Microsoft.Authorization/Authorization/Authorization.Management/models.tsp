@@ -11,38 +11,6 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Authorization;
 
 /**
- * The principal type of the assigned principal ID.
- */
-union PrincipalType {
-  string,
-
-  /**
-   * User
-   */
-  User: "User",
-
-  /**
-   * Group
-   */
-  Group: "Group",
-
-  /**
-   * ServicePrincipal
-   */
-  ServicePrincipal: "ServicePrincipal",
-
-  /**
-   * ForeignGroup
-   */
-  ForeignGroup: "ForeignGroup",
-
-  /**
-   * Device
-   */
-  Device: "Device",
-}
-
-/**
  * Assignment type of the role assignment schedule
  */
 union AssignmentType {
@@ -511,36 +479,6 @@ model EligibleChildResource {
    */
   @visibility(Lifecycle.Read)
   type?: string;
-}
-
-/**
- * An error response from the service.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@error
-@Azure.ResourceManager.Legacy.armExternalType
-model CloudError {
-  /**
-   * An error response from the service.
-   */
-  error?: CloudErrorBody;
-}
-
-/**
- * An error response from the service.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.armExternalType
-model CloudErrorBody {
-  /**
-   * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
-   */
-  code?: string;
-
-  /**
-   * A message describing the error, intended to be suitable for display in a user interface.
-   */
-  message?: string;
 }
 
 /**

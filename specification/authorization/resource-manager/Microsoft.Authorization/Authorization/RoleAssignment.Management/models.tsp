@@ -1,6 +1,7 @@
 ﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -8,38 +9,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Authorization;
-
-/**
- * The principal type of the assigned principal ID.
- */
-union PrincipalType {
-  string,
-
-  /**
-   * User
-   */
-  User: "User",
-
-  /**
-   * Group
-   */
-  Group: "Group",
-
-  /**
-   * ServicePrincipal
-   */
-  ServicePrincipal: "ServicePrincipal",
-
-  /**
-   * ForeignGroup
-   */
-  ForeignGroup: "ForeignGroup",
-
-  /**
-   * Device
-   */
-  Device: "Device",
-}
 
 /**
  * Role assignment properties.
