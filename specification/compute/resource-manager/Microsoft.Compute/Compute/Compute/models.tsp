@@ -1252,16 +1252,19 @@ model VMScaleSetLifecycleHookEventProperties {
   /**
    * Specifies the exact UTC timestamp in ISO 8601 format till when the customer can delay the lifecycle hook event. The customer will not be allowed to delay the event to a timestamp beyond this.
    */
+  @visibility(Lifecycle.Read)
   maxWaitUntil?: string;
 
   /**
    * The UTC timestamp in ISO 8601 format at which the platform creates the virtual machine scale set lifecycle hook event entity.
    */
+  @visibility(Lifecycle.Read)
   timeCreated?: string;
 
   /**
    * Specify the action that will be applied on the a target resource in the virtual machine scale set lifecycle hook event if the platform does not get a response from the customer for the target resource before waitUntil.
    */
+  @visibility(Lifecycle.Read)
   defaultAction?: LifecycleHookAction;
 
   /**
@@ -1282,6 +1285,7 @@ model VMScaleSetLifecycleHookEventProperties {
   /**
    * Specifies the state of the virtual machine scale set lifecycle hook event.
    */
+  @visibility(Lifecycle.Read)
   state?: VMScaleSetLifecycleHookEventState;
 }
 
