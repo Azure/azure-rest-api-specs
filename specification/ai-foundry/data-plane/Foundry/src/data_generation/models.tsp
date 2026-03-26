@@ -198,6 +198,9 @@ model DataGenerationJobOptions {
 
   @doc("The model deployment options.")
   model_options?: DataGenerationModelOptions;
+
+  @doc("The train/validation split ratio. If set, outputs will have two separate files: one for training and one for validation. Used only for fine-tuning purposes.")
+  train_split?: float64;
 }
 
 @doc("The options for a data generation job with SimpleQnA type.")
