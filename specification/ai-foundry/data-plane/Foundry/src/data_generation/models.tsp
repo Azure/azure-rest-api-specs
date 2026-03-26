@@ -56,6 +56,9 @@ model DataGenerationJob {
   @doc("The purpose of the data generation job. Either for fine-tuning or evaluation.")
   purpose: DataGenerationJobPurpose;
 
+  @doc("The model deployment options.")
+  model_options?: DataGenerationModelOptions;
+
   @doc("The job identifier.")
   @visibility(Lifecycle.Read)
   id: string;
@@ -64,7 +67,7 @@ model DataGenerationJob {
   @visibility(Lifecycle.Read)
   status: DataGenerationJobStatus;
 
-  @doc("The final job outputs: Azure OpenAI files for fine-tuning, or Foundry datasets for evaluation. This field is populated only after the job has succeeded.")
+  @doc("The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation. This field is populated only after the job has succeeded.")
   outputs?: Array<DataGenerationJobOutput>;
 
   @doc("The number of samples actually generated. This field is populated only after the job has succeeded.")
@@ -109,7 +112,7 @@ model FileDataGenerationJobOutput extends DataGenerationJobOutput {
 }
 
 model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
-  @doc("Foundry dataset output.")
+  @doc("Dataset output.")
   type: "Dataset";
 
   @doc("The id of the output dataset created.")
@@ -137,7 +140,7 @@ union DataGenerationJobOutputType {
   @doc("The generated data is an Azure OpenAI File.")
   File: "File",
 
-  @doc("The generated data is a Foundry Dataset.")
+  @doc("The generated data is a Dataset.")
   Dataset: "Dataset",
 }
 
@@ -160,10 +163,10 @@ model TokenUsage {
 union DataGenerationJobPurpose {
   string,
 
-  @doc("Fine-tuning supervised training purpose.")
+  @doc("Supervised Fine-tuning purpose.")
   SupervisedFineTuning: "SupervisedFineTuning",
 
-  @doc("Reinforcement learning fine-tuning training purpose.")
+  @doc("Reinforcement Fine-tuning purpose.")
   ReinforcementFineTuning: "ReinforcementFineTuning",
 
   @doc("Evaluation purpose.")
@@ -180,10 +183,10 @@ union DataGenerationJobSourceType {
   @doc("Prompt source type. Data is generated based on input prompts provided by the user or will be extracted from the given Agent. Applicable only for evaluation purpose.")
   Prompt: "Prompt",
 
-  @doc("File source type. Data is generated based on input Azure Open AI file.")
+  @doc("File source type. Data is generated based on Azure OpenAI file.")
   File: "File",
 
-  @doc("The dataset source type. Data is generated based on input dataset.")
+  @doc("Dataset source type. Data is generated based on dataset.")
   Dataset: "Dataset",
 }
 
@@ -194,10 +197,7 @@ model DataGenerationJobOptions {
   type: DataGenerationJobType;
 
   @doc("Maximum number of samples to generate.")
-  max_samples_count: int32;
-
-  @doc("The model deployment options. Required only when the data source type is not Traces.")
-  model_options?: DataGenerationModelOptions;
+  max_samples: int32;
 }
 
 @doc("The options for a data generation job with SimpleQnA type.")
@@ -205,11 +205,11 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is SimpleQnA for this model.")
   type: "SimpleQnA";
 
-  @doc("The question types to generate. If not specified, both short answer and long answer question types will be generated. Applicable only for simple QnA data generation jobs used for supervised fine-tuning training.")
-  question_types?: Array<SimpleQnASupervisedFineTuningQuestionType>;
+  @doc("The question types to generate. Used only for fine-tuning purposes.")
+  question_types?: Array<SimpleQnAFineTuningQuestionType>;
 }
 
-@doc("The options for ToolUse data generation job used for fine-tuning supervised training.")
+@doc("The options for a data generation job with ToolUse type. Used only for fine-tuning purposes.")
 model ToolUseFineTuningDataGenerationJobOptions
   extends DataGenerationJobOptions {
   @doc("The data generation job type, which is ToolUse for this model.")
@@ -229,7 +229,7 @@ model DataGenerationJobSource {
   type: DataGenerationJobSourceType;
 }
 
-@doc("The options for a data generation job with Traces source used for Evaluation and fine-tuning purposes, which includes the agent name and the time window for fetching traces.")
+@doc("The options for a data generation job with Traces source used for Evaluation and Fine-tuning purposes, which includes the agent name and the time window for fetching traces.")
 model TracesDataGenerationJobSource extends DataGenerationJobSource {
   @doc("The source type for this job, which is Traces.")
   type: "Traces";
@@ -276,7 +276,7 @@ model FileDataGenerationJobSource extends DataGenerationJobSource {
   @doc("The source type for this job, which is File.")
   type: "File";
 
-  @doc("Input Azure Open AI file id references used for data generation.")
+  @doc("Input Azure Open AI file id used for data generation.")
   file_id: string;
 }
 
@@ -291,8 +291,8 @@ model DatasetDataGenerationJobSource extends DataGenerationJobSource {
   version?: string;
 }
 
-@doc("The supported question types for SimpleQnA data generation jobs used for supervised fine-tuning training.")
-union SimpleQnASupervisedFineTuningQuestionType {
+@doc("The supported question types for SimpleQnA data generation jobs used for fine-tuning purposes.")
+union SimpleQnAFineTuningQuestionType {
   string,
 
   @doc("Short answer question type.")
