@@ -350,10 +350,7 @@ using Microsoft.Storage;
   "StorageTaskAssignmentsInstancesReport",
   "!csharp"
 );
-@@clientName(StorageAccounts.storageTaskAssignmentsInstancesReportList,
-  "List",
-  "!csharp"
-);
+@@clientName(StorageAccounts.storageTaskAssignmentsInstancesReportList, "List");
 @@clientLocation(StorageAccountMigrations.getCustomerInitiatedMigration,
   StorageAccounts
 );
