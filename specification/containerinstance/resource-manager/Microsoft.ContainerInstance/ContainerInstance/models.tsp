@@ -509,8 +509,8 @@ enum AzureFileShareAccessTier {
 /**
  * A container group part of the list result.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ListResultContainerGroup extends Resource {
+model ListResultContainerGroup {
+  ...Resource;
   ...ListResultContainerGroupProperties;
 }
 
