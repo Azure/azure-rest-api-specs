@@ -904,24 +904,10 @@ model CollectionParameters is ApiVersionParameter {
 @doc("Odata query parameters")
 model OdataQuery {
   @doc("The number of items to return")
-  @removed(Versions.v2026_04_15)
-  @renamedFrom(Versions.v2026_04_15, "top")
-  @query("$top")
-  topOld?: int32;
-
-  @doc("The number of items to return")
-  @added(Versions.v2026_04_15)
   @query("top")
   top?: int32;
 
   @doc("The number of items to skip")
-  @removed(Versions.v2026_04_15)
-  @renamedFrom(Versions.v2026_04_15, "skip")
-  @query("$skip")
-  skipOld?: int32;
-
-  @doc("The number of items to skip")
-  @added(Versions.v2026_04_15)
   @query("skip")
   skip?: int32;
 }
