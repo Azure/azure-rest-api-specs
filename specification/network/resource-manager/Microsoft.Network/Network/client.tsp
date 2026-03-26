@@ -1292,16 +1292,6 @@ union ProvisioningStateUnion {
 );
 @@clientName(AzureFirewallSkuName.AZFW_VNet, "AzfwVnet", "javascript");
 @@clientName(VM, "Vm", "javascript");
-@@clientName(Microsoft.Network.NetworkProvisioningState,
-  "ProvisioningState",
-  "go,javascript"
-);
-@@clientName(Microsoft.Network.ProvisioningState,
-  "BaseProvisioningState",
-  "go"
-);
-@@clientName(Microsoft.Network.NetworkProtocol, "Protocol", "go");
-@@clientName(Microsoft.Network.Protocol, "BaseProtocol", "go");
 @@clientName(FirewallPolicyPropertiesFormat.explicitProxy,
   "ExplicitProxySettings",
   "go"
