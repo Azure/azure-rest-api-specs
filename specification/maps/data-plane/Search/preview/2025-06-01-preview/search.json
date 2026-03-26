@@ -3013,104 +3013,6 @@
         }
       }
     },
-    "GeoJsonFeature": {
-      "type": "object",
-      "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
-      "properties": {
-        "geometry": {
-          "$ref": "#/definitions/GeoJsonGeometry",
-          "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Properties can contain any additional metadata about the `Feature`. Value can\nbe any JSON object or a JSON null value",
-          "x-nullable": true,
-          "additionalProperties": {}
-        },
-        "id": {
-          "type": "string",
-          "description": "Identifier for the feature."
-        },
-        "featureType": {
-          "type": "string",
-          "description": "The type of the feature. The value depends on the data model the current\nfeature is part of. Some data models may have an empty value."
-        }
-      },
-      "required": [
-        "geometry"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJsonObject"
-        }
-      ],
-      "x-ms-discriminator-value": "Feature"
-    },
-    "GeoJsonFeatureCollection": {
-      "type": "object",
-      "description": "A valid `GeoJSON FeatureCollection` object type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
-      "properties": {
-        "features": {
-          "type": "array",
-          "description": "Contains a list of valid `GeoJSON Feature` objects.",
-          "items": {
-            "$ref": "#/definitions/GeoJsonFeature"
-          }
-        }
-      },
-      "required": [
-        "features"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJsonObject"
-        }
-      ],
-      "x-ms-discriminator-value": "FeatureCollection"
-    },
-    "GeoJsonFeatureCollectionData": {
-      "type": "object",
-      "description": "GeoJson FeatureCollection data.",
-      "properties": {
-        "features": {
-          "type": "array",
-          "description": "Contains a list of valid `GeoJSON Feature` objects.",
-          "items": {
-            "$ref": "#/definitions/GeoJsonFeature"
-          }
-        }
-      },
-      "required": [
-        "features"
-      ]
-    },
-    "GeoJsonFeatureData": {
-      "type": "object",
-      "description": "GeoJson Feature data.",
-      "properties": {
-        "geometry": {
-          "$ref": "#/definitions/GeoJsonGeometry",
-          "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Properties can contain any additional metadata about the `Feature`. Value can\nbe any JSON object or a JSON null value",
-          "x-nullable": true,
-          "additionalProperties": {}
-        },
-        "id": {
-          "type": "string",
-          "description": "Identifier for the feature."
-        },
-        "featureType": {
-          "type": "string",
-          "description": "The type of the feature. The value depends on the data model the current\nfeature is part of. Some data models may have an empty value."
-        }
-      },
-      "required": [
-        "geometry"
-      ]
-    },
     "GeoJsonGeometry": {
       "type": "object",
       "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
@@ -3121,7 +3023,7 @@
         },
         "bbox": {
           "type": "array",
-          "description": "Bounding box. Projection used - EPSG:3857. Please refer to [RFC\n7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
+          "description": "Bounding box. Projection used - EPSG:3857. Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
           "items": {
             "type": "number",
             "format": "double"
@@ -3155,76 +3057,6 @@
       ],
       "x-ms-discriminator-value": "GeometryCollection"
     },
-    "GeoJsonGeometryCollectionData": {
-      "type": "object",
-      "description": "GeoJson GeometryCollection data.",
-      "properties": {
-        "geometries": {
-          "type": "array",
-          "description": "Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates\nin GeoJSON are in x, y order (longitude, latitude).",
-          "items": {
-            "$ref": "#/definitions/GeoJsonGeometry"
-          }
-        }
-      },
-      "required": [
-        "geometries"
-      ]
-    },
-    "GeoJsonGeometryObjectType": {
-      "type": "string",
-      "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
-      "enum": [
-        "Point",
-        "MultiPoint",
-        "LineString",
-        "MultiLineString",
-        "Polygon",
-        "MultiPolygon",
-        "GeometryCollection"
-      ],
-      "x-ms-enum": {
-        "name": "GeoJsonGeometryObjectType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "GeoJsonPoint",
-            "value": "Point",
-            "description": "`GeoJSON Point` geometry."
-          },
-          {
-            "name": "GeoJsonMultiPoint",
-            "value": "MultiPoint",
-            "description": "`GeoJSON MultiPoint` geometry."
-          },
-          {
-            "name": "GeoJsonLineString",
-            "value": "LineString",
-            "description": "`GeoJSON LineString` geometry."
-          },
-          {
-            "name": "GeoJsonMultiLineString",
-            "value": "MultiLineString",
-            "description": "`GeoJSON MultiLineString` geometry."
-          },
-          {
-            "name": "GeoJsonPolygon",
-            "value": "Polygon",
-            "description": "`GeoJSON Polygon` geometry."
-          },
-          {
-            "name": "GeoJsonMultiPolygon",
-            "value": "MultiPolygon",
-            "description": "`GeoJSON MultiPolygon` geometry."
-          },
-          {
-            "name": "GeoJsonGeometryCollection",
-            "value": "GeometryCollection",
-            "description": "`GeoJSON GeometryCollection` geometry."
-          }
-        ]
-      }
-    },
     "GeoJsonLineString": {
       "type": "object",
       "description": "A valid `GeoJSON LineString` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
@@ -3250,26 +3082,6 @@
         }
       ],
       "x-ms-discriminator-value": "LineString"
-    },
-    "GeoJsonLineStringData": {
-      "type": "object",
-      "description": "GeoJson LineString data",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "Coordinates for the `GeoJson LineString` geometry.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
     },
     "GeoJsonMultiLineString": {
       "type": "object",
@@ -3300,29 +3112,6 @@
       ],
       "x-ms-discriminator-value": "MultiLineString"
     },
-    "GeoJsonMultiLineStringData": {
-      "type": "object",
-      "description": "GeoJson MultiLineString data",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "Coordinates for the `GeoJson MultiLineString` geometry.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
-    },
     "GeoJsonMultiPoint": {
       "type": "object",
       "description": "A valid `GeoJSON MultiPoint` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.3) for details.",
@@ -3348,26 +3137,6 @@
         }
       ],
       "x-ms-discriminator-value": "MultiPoint"
-    },
-    "GeoJsonMultiPointData": {
-      "type": "object",
-      "description": "Data contained by a `GeoJson MultiPoint`.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "Coordinates for the `GeoJson MultiPoint` geometry.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
     },
     "GeoJsonMultiPolygon": {
       "type": "object",
@@ -3400,54 +3169,6 @@
         }
       ],
       "x-ms-discriminator-value": "MultiPolygon"
-    },
-    "GeoJsonMultiPolygonData": {
-      "type": "object",
-      "description": "GeoJson MultiPolygon data",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "Contains a list of valid `GeoJSON Polygon` objects. **Note** that coordinates\nin GeoJSON are in x, y order (longitude, latitude).",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "array",
-                "items": {
-                  "type": "number",
-                  "format": "double"
-                }
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
-    },
-    "GeoJsonObject": {
-      "type": "object",
-      "description": "A valid `GeoJSON` object. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3) for details.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/GeoJsonObjectType",
-          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection."
-        },
-        "bbox": {
-          "type": "array",
-          "description": "Bounding box. Projection used - EPSG:3857. Please refer to [RFC\n7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
     },
     "GeoJsonObjectType": {
       "type": "string",
@@ -3538,23 +3259,6 @@
       ],
       "x-ms-discriminator-value": "Point"
     },
-    "GeoJsonPointData": {
-      "type": "object",
-      "description": "Data contained by a `GeoJson Point`.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "A `Position` is an array of numbers with two or more elements. The first two\nelements are _longitude_ and _latitude_, precisely in that order.\n_Altitude/Elevation_ is an optional third element. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
-    },
     "GeoJsonPolygon": {
       "type": "object",
       "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
@@ -3583,29 +3287,6 @@
         }
       ],
       "x-ms-discriminator-value": "Polygon"
-    },
-    "GeoJsonPolygonData": {
-      "type": "object",
-      "description": "GeoJson Polygon data",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "Coordinates for the `GeoJson Polygon` geometry type.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
     },
     "GeocodePointsItem": {
       "type": "object",

@@ -1,4 +1,196 @@
-namespace MapsSearch;
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using Azure.ResourceManager;
+
+/**
+ * The status state of the request.
+ */
+union LroStatus {
+  string,
+
+  /**
+   * The request has not started processing yet.
+   */
+  NotStarted: "NotStarted",
+
+  /**
+   * The request has started processing.
+   */
+  Running: "Running",
+
+  /**
+   * The request has one or more failures.
+   */
+  Failed: "Failed",
+
+  /**
+   * The request has successfully completed.
+   */
+  Succeeded: "Succeeded",
+}
+
+/** Desired format of the response. Only `json` format is supported. */
+union JsonFormat {
+  string,
+
+  /**
+   * [The JavaScript Object Notation Data Interchange
+   * Format](https://tools.ietf.org/html/rfc8259)
+   */
+  json: "json",
+}
+
+/**
+ * The response format.
+ */
+union ResponseFormat {
+  string,
+
+  /**
+   * [The JavaScript Object Notation Data Interchange
+   * Format](https://tools.ietf.org/html/rfc8259)
+   */
+  json: "json",
+
+  /**
+   * [The Extensible Markup Language](https://www.w3.org/TR/xml/)
+   */
+  xml: "xml",
+}
+
+/**
+ * The geographic location of the resource.
+ */
+union GeographicResourceLocation {
+  string,
+
+  /**
+   * Used to access an Azure Maps Creator resource in the United States
+   */
+  us: "us",
+
+  /**
+   * Used to access an Azure Maps Creator resource in Europe
+   */
+  eu: "eu",
+}
+
+/**
+ * The localized map view to return the route geometry in.
+ */
+union LocalizedMapView {
+  string,
+
+  /**
+   * United Arab Emirates (Arabic View)
+   */
+  AE: "AE",
+
+  /**
+   * Argentina (Argentinian View)
+   */
+  AR: "AR",
+
+  /**
+   * Bahrain (Arabic View)
+   */
+  BH: "BH",
+
+  /**
+   * India (Indian View)
+   */
+  IN: "IN",
+
+  /**
+   * Iraq (Arabic View)
+   */
+  IQ: "IQ",
+
+  /**
+   * Jordan (Arabic View)
+   */
+  JO: "JO",
+
+  /**
+   * Kuwait (Arabic View)
+   */
+  KW: "KW",
+
+  /**
+   * Lebanon (Arabic View)
+   */
+  LB: "LB",
+
+  /**
+   * Morocco (Moroccan View)
+   */
+  MA: "MA",
+
+  /**
+   * Oman (Arabic View)
+   */
+  OM: "OM",
+
+  /**
+   * Pakistan (Pakistani View)
+   */
+  PK: "PK",
+
+  /**
+   * Palestinian Authority (Arabic View)
+   */
+  PS: "PS",
+
+  /**
+   * Qatar (Arabic View)
+   */
+  QA: "QA",
+
+  /**
+   * Saudi Arabia (Arabic View)
+   */
+  SA: "SA",
+
+  /**
+   * Syria (Arabic View)
+   */
+  SY: "SY",
+
+  /**
+   * Yemen (Arabic View)
+   */
+  YE: "YE",
+
+  /**
+   * Return the map data based on the IP address of the request.
+   */
+  Auto: "Auto",
+
+  /**
+   * Unified View (Others)
+   */
+  Unified: "Unified",
+}
+
+/**
+ * Yes/no value to exclude textual data from response.
+ */
+union IncludeText {
+  string,
+
+  /**
+   * Include all textual data in response.
+   */
+  yes: "yes",
+
+  /**
+   * Exclude textual data from response. Only images and country names will be in
+   * response.
+   */
+  no: "no",
+}
 
 /**
  * Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
@@ -54,46 +246,113 @@ enum GeoJsonObjectType {
 }
 
 /**
- * Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
- * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
- * GeometryCollection, Feature and FeatureCollection.
+ * The resource management error additional info.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API contract"
-enum GeoJsonGeometryObjectType {
+model ErrorAdditionalInfo {
   /**
-   * `GeoJSON Point` geometry.
+   * The additional info type.
    */
-  GeoJsonPoint: "Point",
+  @visibility(Lifecycle.Read)
+  type?: string;
 
   /**
-   * `GeoJSON MultiPoint` geometry.
+   * The additional info.
    */
-  GeoJsonMultiPoint: "MultiPoint",
+  @visibility(Lifecycle.Read)
+  info?: Record<string>;
+}
+
+/**
+ * This type represents the request body for the Batch service.
+ */
+model BatchRequest {
+  /**
+   * The list of queries to process.
+   */
+  batchItems?: BatchRequestItem[];
+}
+
+/**
+ * Batch request object
+ */
+model BatchRequestItem {
+  /**
+   * This parameter contains a query string used to perform an unstructured
+   * geocoding operation. The query string will be passed verbatim to the search API
+   * for processing.
+   */
+  query?: string;
+}
+
+/**
+ * This object is returned from a successful Batch service call. Extend with
+ * 'batchItems' property.
+ */
+model BatchResult {
+  /**
+   * Summary of the results for the batch request
+   */
+  @visibility(Lifecycle.Read)
+  summary?: BatchResultSummary;
+}
+
+/**
+ * Summary of the results for the batch request
+ */
+model BatchResultSummary {
+  /**
+   * Number of successful requests in the batch
+   */
+  @visibility(Lifecycle.Read)
+  successfulRequests?: int32;
 
   /**
-   * `GeoJSON LineString` geometry.
+   * Total number of requests in the batch
    */
-  GeoJsonLineString: "LineString",
+  @visibility(Lifecycle.Read)
+  totalRequests?: int32;
+}
+
+/**
+ * An item returned from Batch API. Extend with 'response' property.
+ */
+model BatchResultItem {
+  /**
+   * HTTP request status code.
+   */
+  @visibility(Lifecycle.Read)
+  statusCode?: int32;
+}
+
+/**
+ * A location represented as a latitude and longitude.
+ */
+model LatLongPair {
+  /**
+   * Latitude property
+   */
+  latitude?: float64;
 
   /**
-   * `GeoJSON MultiLineString` geometry.
+   * Longitude property
    */
-  GeoJsonMultiLineString: "MultiLineString",
+  longitude?: float64;
+}
+
+/**
+ * A location represented as a latitude and longitude using short names 'lat' &
+ * 'lon'.
+ */
+model LatLongPairAbbreviated {
+  /**
+   * Latitude property
+   */
+  lat?: float64;
 
   /**
-   * `GeoJSON Polygon` geometry.
+   * Longitude property
    */
-  GeoJsonPolygon: "Polygon",
-
-  /**
-   * `GeoJSON MultiPolygon` geometry.
-   */
-  GeoJsonMultiPolygon: "MultiPolygon",
-
-  /**
-   * `GeoJSON GeometryCollection` geometry.
-   */
-  GeoJsonGeometryCollection: "GeometryCollection",
+  lon?: float64;
 }
 
 /**
@@ -120,8 +379,7 @@ model GeoJsonObject {
   type: GeoJsonObjectType;
 
   /**
-   * Bounding box. Projection used - EPSG:3857. Please refer to [RFC
-   * 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
+   * Bounding box. Projection used - EPSG:3857. Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
    */
   bbox?: float64[];
 }
@@ -369,69 +627,4 @@ model GeoJsonFeatureCollectionData {
    * Contains a list of valid `GeoJSON Feature` objects.
    */
   features: GeoJsonFeature[];
-}
-
-/**
- * Common error response for all Azure Resource Manager APIs to return error
- * details for failed operations. (This also follows the OData error response
- * format.).
- */
-@error
-model ErrorResponse {
-  /**
-   * The error object.
-   */
-  error?: ErrorDetail;
-}
-
-/**
- * The error detail.
- */
-model ErrorDetail {
-  /**
-   * The error code.
-   */
-  @visibility(Lifecycle.Read)
-  code?: string;
-
-  /**
-   * The error message.
-   */
-  @visibility(Lifecycle.Read)
-  message?: string;
-
-  /**
-   * The error target.
-   */
-  @visibility(Lifecycle.Read)
-  target?: string;
-
-  /**
-   * The error details.
-   */
-  @visibility(Lifecycle.Read)
-  details?: ErrorDetail[];
-
-  /**
-   * The error additional info.
-   */
-  @visibility(Lifecycle.Read)
-  additionalInfo?: ErrorAdditionalInfo[];
-}
-
-/**
- * The resource management error additional info.
- */
-model ErrorAdditionalInfo {
-  /**
-   * The additional info type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The additional info.
-   */
-  @visibility(Lifecycle.Read)
-  info?: Record<string>;
 }
