@@ -208,6 +208,16 @@
           },
           "202": {
             "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL to query for status of the operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "URL to query for status of the operation or result."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/OuContainer"
             }
