@@ -45,16 +45,16 @@ model JobProperties {
   // ============================================
   // Common properties (available for all kinds)
   // ============================================
-  /** Input datasets for the job. Required for AzureDataExplorerPublish and DataQualityValidation jobs. */
+  /** Input datasets for the job. Required for Batch, AzureDataExplorerPublish, DataQualityValidation, and AzureResourceGraph_Galaxy jobs. */
   inputs?: JobDataset[];
 
-  /** Output datasets for the job. */
+  /** Output datasets for the job. Required for Batch, AzureStorageAccountIngestion (exactly 1), AzureDataExplorerIngestion (exactly 1), and AzureResourceGraph_Galaxy jobs. */
   outputs?: JobDataset[];
 
   // ============================================
   // Batch job specific properties (kind: "Batch")
   // ============================================
-  /** Processing logic for the job. Required for Batch jobs. */
+  /** Processing logic for the job. Required for Batch, AzureDataExplorerIngestion, and AzureResourceGraph_Galaxy jobs. */
   processingLogic?: ProcessingLogic;
 
   /** Primary key attributes for the batch job. */
@@ -72,14 +72,12 @@ model JobProperties {
 
   // ============================================
   // AzureStorageAccountIngestion job specific properties (kind: "AzureStorageAccountIngestion")
+  // Uses outputs (exactly 1 dataset) defined above.
   // ============================================
-  /** Name of the output dataset for the job. Required for AzureStorageAccountIngestion and AzureDataExplorerIngestion jobs. */
-  outputDatasetName?: string;
-
   /** Path to the blob partition used for data ingestion. Required for AzureStorageAccountIngestion jobs. */
   blobPartitionPath?: string;
 
-  /** Time offset for the job execution. Used by AzureStorageAccountIngestion jobs. */
+  /** Time offset between DateTime.UtcNow and the timestamp of the blob available in source, used for the blob partition path. Used by AzureStorageAccountIngestion jobs. Defaults to 00:00:00. */
   timeOffset?: string;
 
   // ============================================
@@ -90,8 +88,8 @@ model JobProperties {
 
   // ============================================
   // AzureDataExplorerIngestion job specific properties (kind: "AzureDataExplorerIngestion")
+  // Uses processingLogic (must be KQL type) and outputs (exactly 1 dataset) defined above.
   // ============================================
-  // Note: Uses processingLogic and outputDatasetName (defined above)
 
   // ============================================
   // DataQualityValidation job specific properties (kind: "DataQualityValidation")
@@ -106,8 +104,8 @@ model JobProperties {
   // ============================================
   // AzureResourceNotificationPublish job specific properties (kind: "AzureResourceNotificationPublish")
   // ============================================
-  /** Resource type (resource or relationship). Required for AzureResourceNotificationPublish jobs. */
-  resourceType?: ResourceNotificationResourceType;
+  /** Publish environment for AzureResourceNotificationPublish jobs. */
+  environment?: ResourceNotificationPublishEnvironment;
 
   // ============================================
   // AzureResourceGraph_Galaxy job specific properties (kind: "AzureResourceGraph_Galaxy")
@@ -233,7 +231,7 @@ union ProcessingLogicType {
 /** Primary key attributes for batch job */
 model PrimaryKeyAttribute {
   /** The key attribute. */
-  keyAttribute: string;
+  keyAttribute?: string;
 
   /** The timestamp attribute. */
   timestampAttribute: string;
@@ -299,16 +297,13 @@ union PublishMode {
   string,
 }
 
-/** Resource notification resource type */
-union ResourceNotificationResourceType {
-  /** Default resource notification type. */
-  Default: "Default",
+/** Resource notification publish environment */
+union ResourceNotificationPublishEnvironment {
+  /** The preview/experimental environment. */
+  Preview: "Preview",
 
-  /** Resource notification for a resource. */
-  Resource: "Resource",
-
-  /** Resource notification for a relationship. */
-  Relationship: "Relationship",
+  /** The production environment. */
+  Production: "Production",
 
   string,
 }

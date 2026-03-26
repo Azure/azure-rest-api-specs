@@ -1,0 +1,64 @@
+{
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d/nsxNsGroups/f6a7b8c9-0d1e-2f3a-4b5c-678901234567",
+        "name": "f6a7b8c9-0d1e-2f3a-4b5c-678901234567",
+        "type": "Microsoft.ApplicationMigration/networkSites/nsxNsGroups",
+        "systemData": {
+          "lastModifiedAt": "2024-01-01T00:00:00Z",
+          "createdBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "Group-01",
+          "nsxManagerArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d/nsxManagers/b2c3d4e5-6f7a-8b9c-0d1e-f23456789012",
+          "uniqueId": "66666666-6666-6666-6666-666666666666",
+          "nsxTags": [],
+          "expressions": [
+            {
+              "resourceType": "Condition",
+              "memberType": "VirtualMachine",
+              "key": "Tag",
+              "operator": "EQUALS",
+              "value": "web-tier"
+            },
+            {
+              "resourceType": "ConjunctionOperator",
+              "conjunctionOperator": "OR"
+            },
+            {
+              "resourceType": "Condition",
+              "memberType": "VirtualMachine",
+              "key": "Tag",
+              "operator": "EQUALS",
+              "value": "app-tier"
+            }
+          ],
+          "machineArmIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.OffAzure/vmwareSites/vs1/machines/vm1"
+          ],
+          "effectiveIpMembers": [
+            "10.0.0.5"
+          ],
+          "nsxOriginalPath": "/infra/domains/default/groups/grp1",
+          "errors": [],
+          "errorCount": 0
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "siteName": "d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d",
+    "groupName": "f6a7b8c9-0d1e-2f3a-4b5c-678901234567"
+  },
+  "operationId": "NsxNsGroups_Get",
+  "title": "NsxNsGroups_Get_MaximumSet"
+}

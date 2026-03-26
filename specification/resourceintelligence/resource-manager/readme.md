@@ -4,16 +4,16 @@
 
 This is the AutoRest configuration file for Microsoft.ResourceIntelligence.
 
----
-
 ## Getting Started
 
 To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
+
 To see additional help and options, run:
 
 > `autorest --help`
+
 For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
 
 ---
@@ -24,9 +24,39 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the Microsoft.ResourceIntelligence.
 
-``` yaml
+```yaml
 openapi-type: arm
-tag: package-preview-2025-08
+openapi-subtype: rpaas
+tag: package-preview-2026-02
+```
+
+### Tag: package-preview-2026-02
+
+These settings apply only when `--tag=package-preview-2026-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-02'
+input-file:
+  - Microsoft.ResourceIntelligence/preview/2026-02-01-preview/resourceintelligence.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: resourceintelligence.json
+    reason: "The inputOverrides property requires a flexible key-value dictionary structure for passing runtime overrides, matching the previous API version."
+  - code: PutRequestResponseSchemeArm
+    from: resourceintelligence.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/threads/{threadId}"].put
+    reason: "Per API review: Threads_CreateOrUpdate PUT intentionally uses RunRequest as the request body while returning Thread in the response."
+  - code: PutResponseCodes
+    from: resourceintelligence.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}"].put
+    reason: "Per API review: Agent PUT is a synchronous tracked resource operation that returns 200 only."
+  - code: PostResponseCodes
+    from: resourceintelligence.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/execute"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/threads/{threadId}/execute"].post
+    reason: "Per API review: execute operations use 200+201 LRO pattern instead of standard 202."
 ```
 
 ### Tag: package-preview-2025-08

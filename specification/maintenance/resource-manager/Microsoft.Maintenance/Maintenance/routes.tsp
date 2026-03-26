@@ -51,7 +51,6 @@ interface ScheduledEventOperationGroup {
    * Post List of ScheduledEvents Acknowledgement
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2025_10_01_preview)
   @summary("Post ScheduledEvents List Acknowledgement")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents")
   @post
@@ -81,6 +80,60 @@ interface ScheduledEventOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Suppress expected decorator error"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Suppress expected arm error"
 interface ApplyUpdatesOperationGroup {
+  /**
+   * Apply maintenance updates to resource with 2 parents
+   */
+  @summary("Apply Updates to resource with 2 parents")
+  @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceGrandParentType}/{resourceGrandParentName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default")
+  @put
+  createOrUpdateGrandParent(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * Resource provider name
+     */
+    @path
+    providerName: string,
+
+    /**
+     * Resource second parent type
+     */
+    @path
+    resourceGrandParentType: string,
+
+    /**
+     * Resource second parent identifier
+     */
+    @path
+    resourceGrandParentName: string,
+
+    /**
+     * Resource parent type
+     */
+    @path
+    resourceParentType: string,
+
+    /**
+     * Resource parent identifier
+     */
+    @path
+    resourceParentName: string,
+
+    /**
+     * Resource type
+     */
+    @path
+    resourceType: string,
+
+    /**
+     * Resource identifier
+     */
+    @path
+    resourceName: string,
+  ): ArmResponse<ApplyUpdate> | ArmCreatedResponse<ApplyUpdate> | MaintenanceError;
+
   /**
    * Apply maintenance updates to resource with parent
    */
