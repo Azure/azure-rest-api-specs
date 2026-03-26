@@ -16003,7 +16003,8 @@
         "Edm.Half",
         "Edm.Int16",
         "Edm.SByte",
-        "Edm.Byte"
+        "Edm.Byte",
+        "Edm.Decimal"
       ],
       "x-ms-enum": {
         "name": "SearchFieldDataType",
@@ -16073,6 +16074,11 @@
             "name": "Byte",
             "value": "Edm.Byte",
             "description": "Indicates that a field contains a 8-bit unsigned integer. This is only valid when used with Collection(Edm.Byte)."
+          },
+          {
+            "name": "Decimal",
+            "value": "Edm.Decimal",
+            "description": "Indicates that a field contains a fixed-precision decimal number. This is only valid when used with Collection(Edm.Decimal)."
           }
         ]
       }
@@ -16653,7 +16659,8 @@
         "mysql",
         "adlsgen2",
         "onelake",
-        "sharepoint"
+        "sharepoint",
+        "cosmosdb-mongodb"
       ],
       "x-ms-enum": {
         "name": "SearchIndexerDataSourceType",
@@ -16698,6 +16705,11 @@
             "name": "SharePoint",
             "value": "sharepoint",
             "description": "Indicates a SharePoint datasource."
+          },
+          {
+            "name": "CosmosDbMongoDB",
+            "value": "cosmosdb-mongodb",
+            "description": "Indicates an Azure Cosmos DB for MongoDB datasource."
           }
         ]
       }
@@ -17747,7 +17759,8 @@
       "description": "Allows the user to choose whether a semantic call should fail completely, or to return partial results.",
       "enum": [
         "partial",
-        "fail"
+        "fail",
+        "bestEffort"
       ],
       "x-ms-enum": {
         "name": "SemanticErrorMode",
@@ -17762,6 +17775,11 @@
             "name": "Fail",
             "value": "fail",
             "description": "If there is an exception during the semantic processing step, the query will fail and return the appropriate HTTP code depending on the error."
+          },
+          {
+            "name": "BestEffort",
+            "value": "bestEffort",
+            "description": "Provides a best-effort semantic processing result, falling back to BM25 ranking if semantic ranking is unavailable."
           }
         ]
       }
@@ -20853,7 +20871,8 @@
         "cosine",
         "euclidean",
         "dotProduct",
-        "hamming"
+        "hamming",
+        "manhattan"
       ],
       "x-ms-enum": {
         "name": "VectorSearchAlgorithmMetric",
@@ -20878,6 +20897,11 @@
             "name": "Hamming",
             "value": "hamming",
             "description": "Only applicable to bit-packed binary data types. Determines dissimilarity by counting differing positions in binary vectors. The fewer differences, the closer the similarity."
+          },
+          {
+            "name": "Manhattan",
+            "value": "manhattan",
+            "description": "Computes the sum of absolute differences between vector components. Also known as L1 distance. The smaller the value, the closer the similarity."
           }
         ]
       }
@@ -22390,7 +22414,8 @@
       "type": "string",
       "enum": [
         "partial",
-        "fail"
+        "fail",
+        "bestEffort"
       ],
       "x-ms-enum": {
         "name": "SemanticErrorMode",
@@ -22405,6 +22430,11 @@
             "name": "Fail",
             "value": "fail",
             "description": "If there is an exception during the semantic processing step, the query will fail and return the appropriate HTTP code depending on the error."
+          },
+          {
+            "name": "BestEffort",
+            "value": "bestEffort",
+            "description": "Provides a best-effort semantic processing result, falling back to BM25 ranking if semantic ranking is unavailable."
           }
         ]
       },

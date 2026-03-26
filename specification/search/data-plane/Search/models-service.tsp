@@ -36,6 +36,10 @@ union SearchIndexerDataSourceType {
 
   /** Indicates a SharePoint datasource. */
   SharePoint: "sharepoint",
+
+  /** Indicates an Azure Cosmos DB for MongoDB datasource. */
+  @added(Versions.v2026_05_01_preview)
+  CosmosDbMongoDB: "cosmosdb-mongodb",
 }
 
 /** Represents the parsing mode for indexing from an Azure blob data source. */
@@ -226,6 +230,10 @@ union SearchFieldDataType {
 
   /** Indicates that a field contains a 8-bit unsigned integer. This is only valid when used with Collection(Edm.Byte). */
   Byte: "Edm.Byte",
+
+  /** Indicates that a field contains a fixed-precision decimal number. This is only valid when used with Collection(Edm.Decimal). */
+  @added(Versions.v2026_05_01_preview)
+  Decimal: "Edm.Decimal",
 }
 
 /** Defines the names of all text analyzers supported by the search engine. */
@@ -793,6 +801,10 @@ union VectorSearchAlgorithmMetric {
 
   /** Only applicable to bit-packed binary data types. Determines dissimilarity by counting differing positions in binary vectors. The fewer differences, the closer the similarity. */
   Hamming: "hamming",
+
+  /** Computes the sum of absolute differences between vector components. Also known as L1 distance. The smaller the value, the closer the similarity. */
+  @added(Versions.v2026_05_01_preview)
+  Manhattan: "manhattan",
 }
 
 /** The quantized data type of compressed vector values. */

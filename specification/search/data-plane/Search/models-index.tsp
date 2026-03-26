@@ -18,6 +18,10 @@ union SemanticErrorMode {
 
   /** If there is an exception during the semantic processing step, the query will fail and return the appropriate HTTP code depending on the error. */
   Fail: "fail",
+
+  /** Provides a best-effort semantic processing result, falling back to BM25 ranking if semantic ranking is unavailable. */
+  @added(Versions.v2026_05_01_preview)
+  BestEffort: "bestEffort",
 }
 
 /** This parameter is only valid if the query type is `semantic`. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character `|` followed by the `count-<number of answers>` option after the answers parameter value, such as `extractive|count-3`. Default count is 1. The confidence threshold can be configured by appending the pipe character `|` followed by the `threshold-<confidence threshold>` option after the answers parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7. The maximum character length of answers can be configured by appending the pipe character '|' followed by the 'count-<number of maximum character length>', such as 'extractive|maxcharlength-600'. */
