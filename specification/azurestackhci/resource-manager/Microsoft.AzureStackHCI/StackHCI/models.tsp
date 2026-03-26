@@ -2356,6 +2356,13 @@ model PerNodeRemoteSupportSession {
    */
   @visibility(Lifecycle.Read)
   accessLevel?: AccessLevel;
+
+  /**
+   * The location where the session transcript is stored.
+   */
+  @added(Versions.v2026_04_01_preview)
+  @visibility(Lifecycle.Read)
+  transcriptLocation?: string;
 }
 
 /**
