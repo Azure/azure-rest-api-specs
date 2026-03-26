@@ -5,19 +5,6 @@ import "./common/common.tsp";
 namespace MapsGeolocation;
 
 /**
- * Desired format of the response. Only `json` format is supported.
- */
-union JsonFormat {
-  string,
-
-  /**
-   * [The JavaScript Object Notation Data Interchange
-   * Format](https://tools.ietf.org/html/rfc8259)
-   */
-  json: "json",
-}
-
-/**
  * This object is returned from a successful call to IP Address to country/region
  * API
  */
