@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "./common.tsp";
+import "./common/common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
