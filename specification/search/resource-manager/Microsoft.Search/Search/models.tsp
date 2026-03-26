@@ -894,7 +894,8 @@ model SearchResourceEncryptionKey {
   /**
    * An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If "none" is specified, the value of this property is cleared.
    */
-  identity?: DataIdentity;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  identity?: DataIdentity | null;
 
   /**
    * Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead.
@@ -1497,6 +1498,8 @@ model OfferingsByRegion {
    * The list of features offered in this region.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Features don't have a unique identifier property"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract"
+  @OpenAPI.extension("x-ms-identifiers", #[])
   features?: FeatureOffering[];
 
   /**
