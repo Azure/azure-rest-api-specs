@@ -1378,6 +1378,7 @@ op privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup(
    * The request body of CheckPrivateLinkService API call.
    */
   @body
+  @clientName("parameters")
   body: CheckPrivateLinkServiceVisibilityRequest,
 ): ArmResponse<AvailablePrivateEndpointTypesResult> | ArmAcceptedLroResponse<
   "Accepted and the operation will complete asynchronously.",
