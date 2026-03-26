@@ -46,24 +46,6 @@ using Azure.ClientGenerator.Core;
 })
 namespace ApplicationInsightsManagementClient;
 
-@@clientName(Components.TagsResource, "ComponentTagsResource", "java");
-@@clientName(LiveTokenApi.ErrorResponseLinkedStorage,
-  "LiveTokenErrorResponseLinkedStorage",
-  "java"
-);
-@@clientName(LiveTokenApi.ErrorResponseLinkedStorageError,
-  "LiveTokenErrorResponseLinkedStorageError",
-  "java"
-);
-@@clientName(DeletedWorkbookApi.CategoryType,
-  "DeletedWorkbookCategoryType",
-  "java"
-);
-@@clientName(DeletedWorkbookApi.WorkbookSharedTypeKind,
-  "DeletedWorkbookSharedTypeKind",
-  "java"
-);
-
 @@clientName(ComponentAPIs.ApplicationInsightsComponentAPIKey,
   "ApplicationInsightsComponentApiKey",
   "java"
