@@ -54,7 +54,7 @@ namespace CombineClient;
 // Mitigate ProvisioningState split: create unified union with all values
 @@clientName(Microsoft.Network.ProvisioningState,
   "CommonProvisioningState",
-  "java"
+  "java,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by merging ProvisioningState values"
@@ -1282,7 +1282,7 @@ union ProvisioningStateUnion {
 @@clientName(VM, "Vm", "javascript");
 @@clientName(Microsoft.Network.NetworkProvisioningState,
   "ProvisioningState",
-  "go"
+  "go,javascript"
 );
 @@clientName(Microsoft.Network.ProvisioningState,
   "BaseProvisioningState",
