@@ -312,6 +312,9 @@ enum ImmutabilityPolicySetting {
   /** The immutability policy is unlocked. */
   Unlocked: "unlocked",
 }
+/** Represents an array of signed identifiers */
+@clientName("SignedIdentifiers", "go")
+model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
 @@alternateType(BlobItem.name, string, "go");
@@ -343,6 +346,7 @@ enum ImmutabilityPolicySetting {
 @@alternateType(UserDelegationKey.signedExpiry, utcDateTime, "go");
 @@alternateType(UserDelegationKey.signedStart, utcDateTime, "go");
 @@alternateType(UserDelegationKey.value, string, "go");
+@@alternateType(SignedIdentifiers, SignedIdentifiersGo, "go");
 @@clientName(BlobContainerClient, "ContainerClient", "go");
 @@clientName(BlobServiceClient, "ServiceClient", "go");
 @@clientName(BlobDeleteTypeGo, "DeleteType", "go");
