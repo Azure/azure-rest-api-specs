@@ -57,6 +57,9 @@ using Microsoft.NetworkCloud;
   "BareMetalMachineConfiguration",
   "csharp"
 );
+@@clientName(AccessBridge, "NetworkCloudAccessBridge", "csharp");
+@@clientName(KubernetesVersion, "NetworkCloudKubernetesVersion", "csharp");
+@@clientName(DeploymentType, "NetworkCloudDeploymentType", "csharp");
 @@clientName(BareMetalMachineKeySetProperties.expiration, "ExpireOn", "csharp");
 @@alternateType(BareMetalMachineKeySetProperties.jumpHostsAllowed,
   Azure.Core.ipV4Address[],
@@ -512,16 +515,31 @@ using Microsoft.NetworkCloud;
 @@clientName(BareMetalMachineStatus.oamIpv6Address, "OamIPv6Address", "csharp");
 @@clientName(BareMetalMachineStatus.osImage, "OSImage", "csharp");
 @@clientName(BgpAdvertisement.ipAddressPools, "IPAddressPools", "csharp");
-@@clientName(BgpServiceLoadBalancerConfiguration.ipAddressPools, "IPAddressPools", "csharp");
+@@clientName(BgpServiceLoadBalancerConfiguration.ipAddressPools,
+  "IPAddressPools",
+  "csharp"
+);
 @@clientName(IpAddressPool.onlyUseHostIps, "OnlyUseHostIPs", "csharp");
 @@clientName(L3NetworkSpec.ipAllocationType, "IPAllocationType", "csharp");
-@@clientName(L3NetworkSpec.ipv4ConnectedPrefix, "IPv4ConnectedPrefix", "csharp");
-@@clientName(L3NetworkSpec.ipv6ConnectedPrefix, "IPv6ConnectedPrefix", "csharp");
-@@clientName(NetworkAttachment.ipAllocationMethod, "IPAllocationMethod", "csharp");
+@@clientName(L3NetworkSpec.ipv4ConnectedPrefix,
+  "IPv4ConnectedPrefix",
+  "csharp"
+);
+@@clientName(L3NetworkSpec.ipv6ConnectedPrefix,
+  "IPv6ConnectedPrefix",
+  "csharp"
+);
+@@clientName(NetworkAttachment.ipAllocationMethod,
+  "IPAllocationMethod",
+  "csharp"
+);
 @@clientName(NetworkAttachment.ipv4Address, "IPv4Address", "csharp");
 @@clientName(NetworkAttachment.ipv6Address, "IPv6Address", "csharp");
 @@clientName(NetworkConfiguration.dnsServiceIp, "DnsServiceIP", "csharp");
-@@clientName(StorageApplianceStatus.managementIpv4Address, "ManagementIPv4Address", "csharp");
+@@clientName(StorageApplianceStatus.managementIpv4Address,
+  "ManagementIPv4Address",
+  "csharp"
+);
 @@clientName(StorageProfile.osDisk, "OSDisk", "csharp");
 
 // --- go ---
