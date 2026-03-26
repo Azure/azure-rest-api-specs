@@ -14,14 +14,23 @@ namespace Microsoft.Purview;
  * Account resource
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Account
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<AccountProperties> {
+model Account is Azure.ResourceManager.ProxyResource<AccountProperties> {
   ...ResourceNameParameter<
     Resource = Account,
     KeyName = "accountName",
     SegmentName = "accounts",
     NamePattern = "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 
   /**
    * The Managed Identity of the resource
@@ -58,6 +67,7 @@ interface Accounts {
   /**
    * Updates an account
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" ""
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Patches the account resource.")
   @patch(#{ implicitOptionality: false })

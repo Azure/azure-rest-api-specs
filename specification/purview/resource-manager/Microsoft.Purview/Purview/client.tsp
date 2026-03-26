@@ -87,6 +87,9 @@ using Microsoft.Purview;
 @@clientName(ScopeType, "PurviewAccountScopeType", "csharp");
 @@clientName(TenantEndpointState, "PurviewTenantEndpointState", "csharp");
 @@clientName(UsageName, "PurviewUsageName", "csharp");
+// Rename spec's UserAssignedIdentity to avoid conflict with ARM common-types UserAssignedIdentity
+// brought in via @@alternateType(...ManagedServiceIdentity)
+@@clientName(UserAssignedIdentity, "PurviewUserAssignedIdentity", "csharp");
 
 // --- clientName: property renames ---
 @@clientName(AccountProperties.createdAt, "CreatedOn", "csharp");
@@ -138,7 +141,7 @@ using Microsoft.Purview;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Account, PurviewAccount, "csharp");
+@@clientName(Account, "PurviewAccount", "csharp");
 @@alternateType(AccountProperties.accountStatus, AccountStatus, "csharp");
 @@alternateType(AccountProperties.endpoints, AccountEndpoints, "csharp");
 @@alternateType(AccountProperties.managedResources, ManagedResources, "csharp");
@@ -148,6 +151,10 @@ using Microsoft.Purview;
 );
 @@alternateType(AccountStatus.errorDetails,
   Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "csharp"
+);
+@@alternateType(Account.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(AccountUpdateParameters.identity,
@@ -175,12 +182,9 @@ using Microsoft.Purview;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(Account.location, Azure.Core.azureLocation, "csharp");
 
 // --- Legacy transforms ---
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PurviewAccount.properties,
-  "csharp"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AccountProperties.cloudConnectors,
   "csharp"
@@ -189,49 +193,31 @@ using Microsoft.Purview;
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(UsagesOperationGroup.get,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" ""
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Account,
+  Azure.ResourceManager.CommonTypes.TrackedResource,
+  "csharp"
+);
 
-namespace Microsoft.Purview {
-  // Custom TrackedResource model to fix base class inheritance
-  // (Legacy.TrackedResourceWithOptionalLocation generates ResourceData base, but old SDK used TrackedResourceData)
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Required for backward compatibility"
-  model PurviewAccount
-    is Azure.ResourceManager.TrackedResource<AccountProperties> {
-    ...Azure.ResourceManager.ResourceNameParameter<
-      Resource = Account,
-      KeyName = "accountName",
-      SegmentName = "accounts",
-      NamePattern = "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-    >;
-
-    /** The Managed Identity of the resource. */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required for backward compatibility"
-    identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
-
-    /** Gets or sets the Sku. */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required for backward compatibility"
-    @visibility(Lifecycle.Read)
-    sku?: AccountSku;
-  }
+/**
+ * Gets or sets the public network access for managed resources.
+ */
+union ManagedResourcesPublicNetworkAccess {
+  string,
 
   /**
-   * Gets or sets the public network access for managed resources.
+   * NotSpecified
    */
-  union ManagedResourcesPublicNetworkAccess {
-    string,
+  NotSpecified: "NotSpecified",
 
-    /**
-     * NotSpecified
-     */
-    NotSpecified: "NotSpecified",
+  /**
+   * Enabled
+   */
+  Enabled: "Enabled",
 
-    /**
-     * Enabled
-     */
-    Enabled: "Enabled",
-
-    /**
-     * Disabled
-     */
-    Disabled: "Disabled",
-  }
+  /**
+   * Disabled
+   */
+  Disabled: "Disabled",
 }
