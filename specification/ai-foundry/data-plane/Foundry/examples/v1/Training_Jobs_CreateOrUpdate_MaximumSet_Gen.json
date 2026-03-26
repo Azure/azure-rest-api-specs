@@ -8,7 +8,7 @@
       "properties": {
         "jobType": "Command",
         "command": "python train.py --data ${{inputs.training_data}} --output ${{outputs.model}}",
-        "environmentImageReference": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
+        "environmentImageReference": "mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04:latest",
         "displayName": "My Training Job",
         "description": "A sample command job for training",
         "tags": { "framework": "pytorch" },
@@ -18,7 +18,7 @@
         "inputs": {
           "training_data": {
             "jobInputType": "uri_folder",
-            "uri": "azureml://datastores/mystore/paths/data/train",
+            "uri": "azureai://datastores/mystore/paths/data/train",
             "mode": "ReadOnlyMount",
             "description": "Training dataset"
           },
@@ -31,7 +31,7 @@
         "outputs": {
           "model": {
             "jobOutputType": "uri_folder",
-            "uri": "azureml://datastores/mystore/paths/outputs/model",
+            "uri": "azureai://datastores/mystore/paths/outputs/model",
             "mode": "ReadWriteMount",
             "assetName": "my-trained-model",
             "description": "Trained model output"
@@ -69,7 +69,7 @@
         "properties": {
           "jobType": "Command",
           "command": "python train.py --data ${{inputs.training_data}} --output ${{outputs.model}}",
-          "environmentImageReference": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
+          "environmentImageReference": "mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04:latest",
           "displayName": "My Training Job",
           "description": "A sample command job for training",
           "tags": { "framework": "pytorch" },
@@ -79,7 +79,7 @@
           "inputs": {
             "training_data": {
               "jobInputType": "uri_folder",
-              "uri": "azureml://datastores/mystore/paths/data/train",
+              "uri": "azureai://datastores/mystore/paths/data/train",
               "mode": "ReadOnlyMount",
               "description": "Training dataset"
             },
@@ -92,7 +92,7 @@
           "outputs": {
             "model": {
               "jobOutputType": "uri_folder",
-              "uri": "azureml://datastores/mystore/paths/outputs/model",
+              "uri": "azureai://datastores/mystore/paths/outputs/model",
               "mode": "ReadWriteMount",
               "assetName": "my-trained-model",
               "description": "Trained model output"
@@ -141,7 +141,7 @@
         "properties": {
           "jobType": "Command",
           "command": "python train.py --data ${{inputs.training_data}} --output ${{outputs.model}}",
-          "environmentImageReference": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
+          "environmentImageReference": "mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04:latest",
           "displayName": "My Training Job",
           "description": "A sample command job for training",
           "tags": { "framework": "pytorch" },
@@ -151,7 +151,7 @@
           "inputs": {
             "training_data": {
               "jobInputType": "uri_folder",
-              "uri": "azureml://datastores/mystore/paths/data/train",
+              "uri": "azureai://datastores/mystore/paths/data/train",
               "mode": "ReadOnlyMount",
               "description": "Training dataset"
             },
@@ -164,7 +164,7 @@
           "outputs": {
             "model": {
               "jobOutputType": "uri_folder",
-              "uri": "azureml://datastores/mystore/paths/outputs/model",
+              "uri": "azureai://datastores/mystore/paths/outputs/model",
               "mode": "ReadWriteMount",
               "assetName": "my-trained-model",
               "description": "Trained model output"
