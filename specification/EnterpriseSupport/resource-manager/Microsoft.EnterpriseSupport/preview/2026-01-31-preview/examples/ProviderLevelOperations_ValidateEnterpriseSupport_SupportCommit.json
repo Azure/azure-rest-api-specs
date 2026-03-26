@@ -1,0 +1,35 @@
+{
+  "operationId": "ProviderLevelOperations_ValidateEnterpriseSupport",
+  "title": "ValidateEnterpriseSupportEligibility_SupportCommit",
+  "parameters": {
+    "api-version": "2026-01-31-preview",
+    "body": {
+      "intent": "PreTransact",
+      "lineItems": [
+        {
+          "scope": "/providers/Microsoft.Billing/billingAccounts/ba1/billingProfiles/bg1",
+          "upn": "base-upn",
+          "quantity": 1,
+          "market": "US",
+          "serviceStartDate": "2026-02-01T00:00:00.000Z",
+          "multiEntityReferenceType": "Resource",
+          "multiEntityReferenceId": "SC-2026-001234"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "lineItems": [
+          {
+            "scope": "/providers/Microsoft.Billing/billingAccounts/ba1/billingProfiles/bg1",
+            "upn": "base-upn",
+            "quantity": 1,
+            "isEligible": "eligible"
+          }
+        ]
+      }
+    }
+  }
+}

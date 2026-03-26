@@ -36,12 +36,13 @@ import "./UpdateSummaries.tsp";
 import "./ValidatedSolutionRecipe.tsp";
 import "./EdgeMachine.tsp";
 import "./EdgeMachineJobs.tsp";
+import "./EdgeMachineMetadata.tsp";
 import "./EdgeMachineGpu.tsp";
-import "./EdgeMachineGpuJobs.tsp";
 import "./EdgeMachineStorage.tsp";
 import "./EdgeMachineNetworkAdapters.tsp";
 import "./ValidateOwnershipVouchers.tsp";
 import "./ClusterJobs.tsp";
+import "./ClusterVolume.tsp";
 import "./DevicePool.tsp";
 
 using TypeSpec.Rest;

@@ -1,0 +1,46 @@
+{
+  "title": "DataConnections_StorageAccount_CreateOrUpdate",
+  "operationId": "DataConnections_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-11-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "dataConnectionName": "my-storage-connection",
+    "resource": {
+      "kind": "StorageAccount",
+      "properties": {
+        "storageAccountUri": "https://mystorageaccount.blob.core.windows.net",
+        "containerName": "my-container"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "StorageAccount",
+        "properties": {
+          "storageAccountUri": "https://mystorageaccount.blob.core.windows.net",
+          "containerName": "my-container",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/dataConnections/my-storage-connection",
+        "name": "my-storage-connection",
+        "type": "Microsoft.ResourceBuilder/workspaces/dataConnections"
+      }
+    },
+    "201": {
+      "body": {
+        "kind": "StorageAccount",
+        "properties": {
+          "storageAccountUri": "https://mystorageaccount.blob.core.windows.net",
+          "containerName": "my-container",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/dataConnections/my-storage-connection",
+        "name": "my-storage-connection",
+        "type": "Microsoft.ResourceBuilder/workspaces/dataConnections"
+      }
+    }
+  }
+}

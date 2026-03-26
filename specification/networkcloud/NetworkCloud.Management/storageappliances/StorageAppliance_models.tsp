@@ -107,6 +107,42 @@ union RemoteVendorManagementStatus {
 }
 
 /**
+ * The log level for the monitoring configuration status of the storage appliance.
+ */
+@added(Versions.v2026_05_01_preview)
+union StorageApplianceMetricsConfigurationStatusLogLevel {
+  string,
+
+  /**
+   * Logs are emitted at the default log level.
+   */
+  Default: "Default",
+
+  /**
+   * Logs are emitted at the Nexus log level.
+   */
+  Nexus: "Nexus",
+}
+
+/**
+ * The metrics level for the monitoring configuration status of the storage appliance.
+ */
+@added(Versions.v2026_05_01_preview)
+union StorageApplianceMetricsConfigurationStatusMetricsLevel {
+  string,
+
+  /**
+   * Metrics are emitted at the default metrics level.
+   */
+  Default: "Default",
+
+  /**
+   * Metrics are emitted at the Nexus metrics level.
+   */
+  Nexus: "Nexus",
+}
+
+/**
  * StorageApplianceList represents a list of storage appliances.
  */
 model StorageApplianceList is Azure.Core.Page<StorageAppliance>;
@@ -228,6 +264,13 @@ model StorageApplianceStatus {
   `model`?: string;
 
   /**
+   * The monitoring configuration status of the storage appliance.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  monitoringConfigurationStatus?: StorageApplianceMonitoringConfigurationStatus;
+
+  /**
    * The indicator of whether the storage appliance supports remote vendor management.
    */
   @visibility(Lifecycle.Read)
@@ -336,4 +379,20 @@ model StorageApplianceCommandSpecification {
    * The command to execute.
    */
   command: string;
+}
+
+/**
+ * The monitoring configuration status of the storage appliance.
+ */
+@added(Versions.v2026_05_01_preview)
+model StorageApplianceMonitoringConfigurationStatus {
+  /**
+   * The log level for the monitoring configuration status of the storage appliance.
+   */
+  logLevel?: StorageApplianceMetricsConfigurationStatusLogLevel;
+
+  /**
+   * The metrics level for the monitoring configuration status of the storage appliance.
+   */
+  metricsLevel?: StorageApplianceMetricsConfigurationStatusMetricsLevel;
 }

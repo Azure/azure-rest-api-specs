@@ -24,6 +24,9 @@ enum Versions {
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   v2026_01_01_preview: "2026-01-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
+  v2026_03_01_preview: "2026-03-01-preview",
 }
 
 @doc("Marketplace subscription status")
@@ -56,7 +59,14 @@ model MarketplaceDetails {
   subscriptionStatus?: MarketplaceSubscriptionStatus;
 
   @doc("Offer details of the marketplace subscription")
-  offerDetails: OfferDetails;
+  @madeOptional(Versions.v2026_03_01_preview)
+  offerDetails?: OfferDetails;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+  @added(Versions.v2026_03_01_preview)
+  @doc("ARM ID of the Marketplace SaaS resource. Only used in Create operations.")
+  @visibility(Lifecycle.Create)
+  saaSResourceId?: string;
 }
 
 @doc("Offer details for the marketplace that is selected by the user")
@@ -151,7 +161,8 @@ model BaseResourceProperties<TUserDetailsExtraProperties extends Model = UserDet
   marketplace: MarketplaceDetails;
 
   @doc("User details")
-  user: UserDetails<TUserDetailsExtraProperties>;
+  @madeOptional(Versions.v2026_03_01_preview)
+  user?: UserDetails<TUserDetailsExtraProperties>;
 
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)

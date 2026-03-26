@@ -1,0 +1,94 @@
+{
+  "title": "Datasets_WithAdxConnection_CreateOrUpdate",
+  "operationId": "Datasets_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-11-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "datasetName": "adx-connected-dataset",
+    "resource": {
+      "kind": "Custom",
+      "properties": {
+        "schema": [
+          {
+            "name": "resourceId",
+            "type": "String",
+            "description": "Azure Resource ID"
+          },
+          {
+            "name": "resourceName",
+            "type": "String",
+            "description": "Name of the Azure resource"
+          }
+        ],
+        "locations": [
+          "eastus"
+        ],
+        "connection": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/dataConnections/my-adx-connection"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "Custom",
+        "properties": {
+          "schema": [
+            {
+              "name": "resourceId",
+              "type": "String",
+              "description": "Azure Resource ID"
+            },
+            {
+              "name": "resourceName",
+              "type": "String",
+              "description": "Name of the Azure resource"
+            }
+          ],
+          "locations": [
+            "eastus"
+          ],
+          "connection": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/dataConnections/my-adx-connection"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/adx-connected-dataset",
+        "name": "adx-connected-dataset",
+        "type": "Microsoft.ResourceBuilder/workspaces/datasets"
+      }
+    },
+    "201": {
+      "body": {
+        "kind": "Custom",
+        "properties": {
+          "schema": [
+            {
+              "name": "resourceId",
+              "type": "String",
+              "description": "Azure Resource ID"
+            },
+            {
+              "name": "resourceName",
+              "type": "String",
+              "description": "Name of the Azure resource"
+            }
+          ],
+          "locations": [
+            "eastus"
+          ],
+          "connection": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/dataConnections/my-adx-connection"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/adx-connected-dataset",
+        "name": "adx-connected-dataset",
+        "type": "Microsoft.ResourceBuilder/workspaces/datasets"
+      }
+    }
+  }
+}
