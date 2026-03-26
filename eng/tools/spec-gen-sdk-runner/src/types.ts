@@ -95,6 +95,14 @@ export interface PlaneTypeSettings {
 /**
  * Required check settings for all languages.
  */
+/**
+ * Result returned by the command functions (generateSdkForSingleSpec, etc.)
+ */
+export interface CommandResult {
+  statusCode: number;
+  executionResult: ExecutionResult | "";
+}
+
 export const SpecGenSdkRequiredSettings: Record<SdkName, PlaneTypeSettings> = {
   "azure-sdk-for-go": {
     dataPlane: true,
