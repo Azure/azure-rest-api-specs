@@ -9,5 +9,5 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Azure.ResourceManager.CommonTypes.Resource,
   "ArmResource",
-  "python"
+  "python,javascript"
 );
