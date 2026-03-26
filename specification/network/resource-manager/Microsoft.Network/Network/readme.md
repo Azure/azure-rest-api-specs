@@ -37,19 +37,19 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
-  - Network/stable/2025-05-01/applicationGateway.json
-  - Network/stable/2025-05-01/common.json
-  - Network/stable/2025-05-01/expressRoute.json
-  - Network/stable/2025-05-01/firewall.json
-  - Network/stable/2025-05-01/loadBalancer.json
-  - Network/stable/2025-05-01/networkGateway.json
-  - Network/stable/2025-05-01/networkingOperations.json
-  - Network/stable/2025-05-01/networkManager.json
-  - Network/stable/2025-05-01/networkSecurityPerimeter.json
-  - Network/stable/2025-05-01/networkWatcher.json
-  - Network/stable/2025-05-01/virtualNetwork.json
-  - Network/stable/2025-05-01/virtualWan.json
-  - Network/stable/2018-10-01/openapi.json
+  - stable/2025-05-01/applicationGateway.json
+  - stable/2025-05-01/common.json
+  - stable/2025-05-01/expressRoute.json
+  - stable/2025-05-01/firewall.json
+  - stable/2025-05-01/loadBalancer.json
+  - stable/2025-05-01/networkGateway.json
+  - stable/2025-05-01/networkingOperations.json
+  - stable/2025-05-01/networkManager.json
+  - stable/2025-05-01/networkSecurityPerimeter.json
+  - stable/2025-05-01/networkWatcher.json
+  - stable/2025-05-01/virtualNetwork.json
+  - stable/2025-05-01/virtualWan.json
+  - stable/2018-10-01/openapi.json
 suppressions:
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.

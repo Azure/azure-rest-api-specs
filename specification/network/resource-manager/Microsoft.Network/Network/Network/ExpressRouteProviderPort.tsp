@@ -63,6 +63,7 @@ interface ExpressRouteProviderPorts {
       @query("$filter")
       $filter?: string;
     },
+    Response = ExpressRouteProviderPortListResult,
     Error = CloudError
   >;
 }

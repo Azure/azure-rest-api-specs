@@ -11532,6 +11532,18 @@ model ExpressRouteCrossConnectionPeeringList
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCrossConnectionsRoutesTableSummaryListResult
   is Azure.Core.Page<ExpressRouteCrossConnectionRoutesTableSummary>;
+@@visibility(ExpressRouteCrossConnectionsRoutesTableSummaryListResult.nextLink,
+  Lifecycle.Read
+);
+
+/**
+ * Response for ListExpressRouteProviderPort API service call.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model ExpressRouteProviderPortListResult
+  is Azure.Core.Page<ExpressRouteProviderPort>;
+@@visibility(ExpressRouteProviderPortListResult.nextLink, Lifecycle.Read);
 
 /**
  * The routes table associated with the ExpressRouteCircuit.
@@ -13337,6 +13349,7 @@ model MigratedPools {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model EffectiveRouteListResult is Azure.Core.Page<EffectiveRoute>;
+@@visibility(EffectiveRouteListResult.nextLink, Lifecycle.Read);
 
 /**
  * Effective Route.
@@ -13387,6 +13400,7 @@ model EffectiveRoute {
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model EffectiveNetworkSecurityGroupListResult
   is Azure.Core.Page<EffectiveNetworkSecurityGroup>;
+@@visibility(EffectiveNetworkSecurityGroupListResult.nextLink, Lifecycle.Read);
 
 /**
  * Effective network security group.
@@ -25538,11 +25552,13 @@ model NetworkVirtualApplianceSiteListResult
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ResourceNavigationLinksListResult
   is Azure.Core.Page<ResourceNavigationLink>;
+@@visibility(ResourceNavigationLinksListResult.nextLink, Lifecycle.Read);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ServiceAssociationLinksListResult
   is Azure.Core.Page<ServiceAssociationLink>;
+@@visibility(ServiceAssociationLinksListResult.nextLink, Lifecycle.Read);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.applicationGateway)

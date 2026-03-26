@@ -655,7 +655,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the backend address pool resource.",
           "readOnly": true
         }
@@ -700,7 +700,7 @@
           "description": "Reference to the subnet resource. A subnet from where application gateway gets its private address."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the application gateway IP configuration resource.",
           "readOnly": true
         }
@@ -737,7 +737,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the application security group resource.",
           "readOnly": true
         }
@@ -823,7 +823,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the backend address pool resource.",
           "readOnly": true
         },
@@ -1139,7 +1139,7 @@
           "description": "Parameters that define the configuration of traffic analytics."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the flow log.",
           "readOnly": true
         }
@@ -1241,7 +1241,7 @@
           "description": "The reference to gateway load balancer frontend IP."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the frontend IP configuration resource.",
           "readOnly": true
         }
@@ -1419,7 +1419,7 @@
           "description": "The reference to the subnet resource to create a container network interface ip configuration."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the IP configuration profile resource.",
           "readOnly": true
         }
@@ -1446,7 +1446,7 @@
           "description": "The reference to the public IP resource."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the IP configuration resource.",
           "readOnly": true
         }
@@ -1546,7 +1546,7 @@
           "description": "Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the inbound NAT pool resource.",
           "readOnly": true
         }
@@ -1633,7 +1633,7 @@
           "description": "A reference to backendAddressPool resource."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the inbound NAT rule resource.",
           "readOnly": true
         }
@@ -1886,7 +1886,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the load balancer resource.",
           "readOnly": true
         },
@@ -2070,7 +2070,7 @@
           "description": "Defines whether connections between 2 communicating endpoints can be tracked and associated to the same backend VM over its lifetime when using UDP protocol."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the load balancing rule resource.",
           "readOnly": true
         }
@@ -2228,7 +2228,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the NAT gateway resource.",
           "readOnly": true
         }
@@ -2547,7 +2547,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the network interface IP configuration.",
           "readOnly": true
         },
@@ -2712,7 +2712,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the network interface resource.",
           "readOnly": true
         },
@@ -2771,46 +2771,10 @@
           "description": "The reference to the Virtual Network Tap resource."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the network interface tap configuration resource.",
           "readOnly": true
         }
-      }
-    },
-    "Microsoft.Network.NetworkProvisioningState": {
-      "type": "string",
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Updating",
-        "Deleting",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Succeeded"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Deleting"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed"
-          }
-        ]
       }
     },
     "Microsoft.Network.NetworkSecurityGroup": {
@@ -2887,7 +2851,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the network security group resource.",
           "readOnly": true
         }
@@ -2918,7 +2882,7 @@
       "description": "The network watcher properties.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the network watcher resource.",
           "readOnly": true
         }
@@ -2964,7 +2928,7 @@
           "description": "A reference to a pool of DIPs. Outbound traffic is randomly load balanced across IPs in the backend IPs."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the outbound rule resource.",
           "readOnly": true
         },
@@ -3048,7 +3012,7 @@
           "description": "A collection of information about the state of the connection between service consumer and provider."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the private endpoint connection resource.",
           "readOnly": true
         },
@@ -3124,7 +3088,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the private endpoint resource.",
           "readOnly": true
         },
@@ -3284,7 +3248,7 @@
       "description": "Properties of the PrivateLinkServiceConnection.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the private link service connection resource.",
           "readOnly": true
         },
@@ -3378,7 +3342,7 @@
           "description": "Whether the ip configuration is primary or not."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the private link service IP configuration resource.",
           "readOnly": true
         },
@@ -3423,7 +3387,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the private link service resource.",
           "readOnly": true
         },
@@ -3567,7 +3531,7 @@
           "description": "The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the probe resource.",
           "readOnly": true
         }
@@ -3603,6 +3567,42 @@
             "name": "Https",
             "value": "Https",
             "description": "Https"
+          }
+        ]
+      }
+    },
+    "Microsoft.Network.ProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
           }
         ]
       }
@@ -3758,7 +3758,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the public IP address resource.",
           "readOnly": true
         },
@@ -4004,7 +4004,7 @@
           "description": "Link to the external resource."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the resource navigation link resource.",
           "readOnly": true
         }
@@ -4119,7 +4119,7 @@
           "description": "The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the route resource.",
           "readOnly": true
         },
@@ -4178,7 +4178,7 @@
           "description": "Whether to disable the routes learned by BGP on that route table. True means disable."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the route table resource.",
           "readOnly": true
         },
@@ -4341,7 +4341,7 @@
           "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the security rule resource.",
           "readOnly": true
         }
@@ -4444,7 +4444,7 @@
           "description": "Link to the external resource."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the service association link resource.",
           "readOnly": true
         },
@@ -4478,7 +4478,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the service delegation resource.",
           "readOnly": true
         }
@@ -4551,7 +4551,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the service endpoint policy definition resource.",
           "readOnly": true
         }
@@ -4582,7 +4582,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the service endpoint policy resource.",
           "readOnly": true
         },
@@ -4619,7 +4619,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the service endpoint resource.",
           "readOnly": true
         }
@@ -4800,7 +4800,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the subnet resource.",
           "readOnly": true
         },
@@ -5187,7 +5187,7 @@
           "description": "The peering sync status of the virtual network peering."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the virtual network peering resource.",
           "readOnly": true
         },
@@ -5291,7 +5291,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the virtual network resource.",
           "readOnly": true
         },
@@ -5382,7 +5382,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Network.NetworkProvisioningState",
+          "$ref": "#/definitions/Microsoft.Network.ProvisioningState",
           "description": "The provisioning state of the virtual network tap resource.",
           "readOnly": true
         },

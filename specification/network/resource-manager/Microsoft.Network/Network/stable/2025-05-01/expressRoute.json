@@ -388,7 +388,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ExpressRouteProviderPortListResult"
             }
@@ -5620,7 +5620,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -6047,7 +6048,7 @@
     },
     "ExpressRouteProviderPortListResult": {
       "type": "object",
-      "description": "The response of a ExpressRouteProviderPort list operation.",
+      "description": "Response for ListExpressRouteProviderPort API service call.",
       "properties": {
         "value": {
           "type": "array",
@@ -6059,7 +6060,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [

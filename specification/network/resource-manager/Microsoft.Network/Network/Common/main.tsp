@@ -40,21 +40,37 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.Network;
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 enum Features {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   applicationGateway,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   expressRoute,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   firewall,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   loadBalancer,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   networkGateway,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   networkManager,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   networkSecurityPerimeter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   networkWatcher,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   networkingOperations,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   virtualNetwork,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   virtualWAN,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   firewallPolicy,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   azureWebCategory,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   serviceGateway,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   virtualNetworkAppliance,
 }
 
