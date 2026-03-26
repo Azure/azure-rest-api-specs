@@ -14,7 +14,7 @@ using Microsoft.ContainerInstance;
 );
 @@clientName(ContainerGroupPropertiesPropertiesInstanceView,
   "ContainerGroupPropertiesInstanceView",
-  "go"
+  "go,python"
 );
 
 @@clientName(ContainerGroupPropertiesPropertiesInstanceView,
@@ -25,13 +25,22 @@ using Microsoft.ContainerInstance;
 @@clientName(Microsoft.ContainerInstance.Resource, "ResourcePatch", "java");
 @@clientName(ContainerGroupProperties,
   "ContainerGroupPropertiesWrapper",
-  "java"
+  "java,python"
 );
 @@clientName(ContainerGroupPropertiesProperties,
   "ContainerGroupProperties",
-  "java"
+  "java,python"
 );
 @@clientName(UserAssignedIdentities,
   "ContainerGroupIdentityUserAssignedIdentities",
   "java"
+);
+
+@@clientName(ListResultContainerGroupProperties,
+  "ListResultContainerGroupPropertiesWrapper",
+  "python"
+);
+@@clientName(ListResultContainerGroupPropertiesProperties,
+  "ListResultContainerGroupProperties",
+  "python"
 );
