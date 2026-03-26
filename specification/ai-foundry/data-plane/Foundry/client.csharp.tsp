@@ -122,6 +122,12 @@ namespace Azure.AI.Projects;
   "csharp"
 );
 
+@@access(OpenAI.DetailEnum, Access.internal);
+@@clientName(OpenAI.DetailEnum, "InternalImageDetailLevel");
+@@access(OpenAI.InputImageContentParamAutoParam, Access.internal);
+@@clientName(OpenAI.InputImageContentParamAutoParam,
+  "InternalInputImageContentParamAutoParam"
+);
 // --------------------------------------------------------------------------------
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
