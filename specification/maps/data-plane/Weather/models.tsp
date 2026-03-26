@@ -4,17 +4,6 @@ import "./common/common.tsp";
 
 namespace MapsWeather;
 
-/** Desired response format. */
-union JsonFormat {
-  string,
-
-  /**
-   * [The JavaScript Object Notation Data Interchange
-   * Format](https://tools.ietf.org/html/rfc8259)
-   */
-  json: "json",
-}
-
 /** Unit of measurement for weather data. */
 union WeatherDataUnit {
   string,
@@ -2721,21 +2710,6 @@ model StormForecast {
    * Displayed when `details=true` or `radiiGeometry=true` in the request.
    */
   windRadiiSummary?: StormWindRadiiSummary[];
-}
-
-/**
- * A location represented as a latitude and longitude.
- */
-model LatLongPair {
-  /**
-   * Latitude property
-   */
-  latitude?: float64;
-
-  /**
-   * Longitude property
-   */
-  longitude?: float64;
 }
 
 /**

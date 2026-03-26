@@ -3188,14 +3188,6 @@
         "type": {
           "$ref": "#/definitions/GeoJsonObjectType",
           "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection."
-        },
-        "bbox": {
-          "type": "array",
-          "description": "Bounding box. Projection used - EPSG:3857. Please refer to [RFC\n7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
         }
       },
       "discriminator": "type",
@@ -3979,24 +3971,6 @@
           "$ref": "#/definitions/IconCode",
           "description": "Numeric value representing an image that corresponds to the current weather\ncondition described by the `Phrase` property. For more information, see\n[Weather services in Azure\nMaps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL."
         }
-      }
-    },
-    "JsonFormat": {
-      "type": "string",
-      "description": "Desired response format.",
-      "enum": [
-        "json"
-      ],
-      "x-ms-enum": {
-        "name": "JsonFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
-          }
-        ]
       }
     },
     "LatLongPair": {

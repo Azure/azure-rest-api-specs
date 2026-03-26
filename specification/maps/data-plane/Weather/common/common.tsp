@@ -31,6 +31,17 @@ union LroStatus {
   Succeeded: "Succeeded",
 }
 
+/** Desired format of the response. Only `json` format is supported. */
+union JsonFormat {
+  string,
+
+  /**
+   * [The JavaScript Object Notation Data Interchange
+   * Format](https://tools.ietf.org/html/rfc8259)
+   */
+  json: "json",
+}
+
 /**
  * The response format.
  */
@@ -47,6 +58,23 @@ union ResponseFormat {
    * [The Extensible Markup Language](https://www.w3.org/TR/xml/)
    */
   xml: "xml",
+}
+
+/**
+ * This parameter specifies where the Azure Maps Account is located. Valid values are us (East US, West Central US, West US 2) and eu (North Europe, West Europe).
+ */
+union MapsAccountGeographicResourceLocation {
+  string,
+
+  /**
+   * Used to access an Azure Maps resource in the United States (East US, West Central US, West US 2)
+   */
+  us: "us",
+
+  /**
+   * Used to access an Azure Maps resource in Europe (North Europe, West Europe)
+   */
+  eu: "eu",
 }
 
 /**
@@ -146,6 +174,11 @@ union LocalizedMapView {
    * Syria (Arabic View)
    */
   SY: "SY",
+
+  /**
+   * United States of America
+   */
+  US: "US",
 
   /**
    * Yemen (Arabic View)
@@ -322,6 +355,70 @@ model ErrorAdditionalInfo {
 }
 
 /**
+ * Common error response for Azure Maps APIs to return error details for failed operations.
+ */
+@error
+model MapsErrorResponse {
+  /**
+   * The error detail.
+   */
+  @visibility(Lifecycle.Read)
+  error: MapsErrorDetail;
+}
+
+/**
+ * The error detail.
+ */
+model MapsErrorDetail {
+  /**
+   * One of a server-defined set of error codes.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * A human-readable representation of the error.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The target of the error.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * An array of details about specific errors that led to this reported error.
+   */
+  @visibility(Lifecycle.Read)
+  details?: MapsErrorDetail[];
+
+  /**
+   * An object containing more specific information than the current object about the error.
+   */
+  @visibility(Lifecycle.Read)
+  innererror?: MapsInnerError;
+}
+
+/**
+ * An object containing more specific information than the current object about the error.
+ */
+model MapsInnerError {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * An object containing more specific information than the current object about the error.
+   */
+  @visibility(Lifecycle.Read)
+  innererror?: MapsInnerError;
+}
+
+/**
  * This type represents the request body for the Batch service.
  */
 model BatchRequest {
@@ -436,12 +533,6 @@ model GeoJsonObject {
    * GeometryCollection, Feature and FeatureCollection.
    */
   type: GeoJsonObjectType;
-
-  /**
-   * Bounding box. Projection used - EPSG:3857. Please refer to [RFC
-   * 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
-   */
-  bbox?: float64[];
 }
 
 /**
