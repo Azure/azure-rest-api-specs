@@ -494,7 +494,7 @@
     "/playwrightworkspaces/{workspaceId}/browser-sessions/{sessionId}": {
       "get": {
         "operationId": "BrowserSessions_Get",
-        "description": "Get a browser session for the specified session and workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID.",
+        "description": "Get a browser session for the specified session and workspace ID. Requires Bearer JWT access token provided by Entra ID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1067,11 +1067,6 @@
           "description": "The browser session creator's ID.",
           "readOnly": true
         },
-        "creatorName": {
-          "type": "string",
-          "description": "The browser session creator's name.",
-          "readOnly": true
-        },
         "startTime": {
           "type": "string",
           "format": "date-time",
@@ -1084,10 +1079,10 @@
           "description": "The browser session end time in UTC.",
           "readOnly": true
         },
-        "durationInMinutes": {
+        "durationInMilliseconds": {
           "type": "integer",
           "format": "int64",
-          "description": "The browser session duration in minutes.",
+          "description": "The browser session duration in milliseconds.",
           "readOnly": true
         },
         "status": {
@@ -1115,7 +1110,6 @@
         "id",
         "displayName",
         "creatorId",
-        "startTime",
         "status",
         "source",
         "browserType",

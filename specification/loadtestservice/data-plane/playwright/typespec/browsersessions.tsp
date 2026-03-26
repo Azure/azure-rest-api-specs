@@ -29,21 +29,17 @@ model BrowserSession {
   @visibility(Lifecycle.Read)
   creatorId: string;
 
-  @doc("The browser session creator's name.")
-  @visibility(Lifecycle.Read)
-  creatorName?: string;
-
   @doc("The browser session start time in UTC.")
   @visibility(Lifecycle.Read)
-  startTime: utcDateTime;
+  startTime?: utcDateTime;
 
   @doc("The browser session end time in UTC.")
   @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
 
-  @doc("The browser session duration in minutes.")
+  @doc("The browser session duration in milliseconds.")
   @visibility(Lifecycle.Read)
-  durationInMinutes?: int64;
+  durationInMilliseconds?: int64;
 
   @doc("The browser session status.")
   @visibility(Lifecycle.Read)
@@ -109,7 +105,7 @@ union BrowserSessionSourceType {
 interface BrowserSessions {
   // BrowserSession Operations
   @added(Versions.v2026_04_01_preview)
-  @doc("Get a browser session for the specified session and workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID.")
+  @doc("Get a browser session for the specified session and workspace ID. Requires Bearer JWT access token provided by Entra ID.")
   get is Operations.ResourceRead<BrowserSession>;
 
   @added(Versions.v2026_04_01_preview)
