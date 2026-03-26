@@ -2277,7 +2277,7 @@
           {
             "name": "groupName",
             "in": "path",
-            "description": "The name of the private link resource.",
+            "description": "The name of the private link associated with the Azure resource.",
             "required": true,
             "type": "string"
           }
@@ -2286,7 +2286,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -5473,21 +5473,6 @@
         }
       }
     },
-    "PrivateLinkResource": {
-      "type": "object",
-      "description": "A private link resource for a container registry.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "A resource that supports private link capabilities."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "PrivateLinkResourceListResult": {
       "type": "object",
       "description": "The result of a request to list private link resources for a container registry.",
@@ -5496,39 +5481,12 @@
           "type": "array",
           "description": "The list of private link resources. Since this list may be incomplete, the nextLink field should be used to request the next list of private link resources.",
           "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
           }
         },
         "nextLink": {
           "type": "string",
           "description": "The URI that can be used to request the next list of private link resources."
-        }
-      }
-    },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "description": "The properties of a private link resource.",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "The private link resource group id.",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "type": "array",
-          "description": "The private link resource required member names.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "description": "The private link resource Private link DNS zone name.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
         }
       }
     },

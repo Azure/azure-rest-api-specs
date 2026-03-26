@@ -10,19 +10,16 @@ model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
    */
-  @visibility(Lifecycle.Read)
   groupId?: string;
 
   /**
    * The private link resource required member names.
    */
-  @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
    * The private link resource Private link DNS zone name.
    */
-  @visibility(Lifecycle.Read)
   requiredZoneNames?: string[];
 }
 

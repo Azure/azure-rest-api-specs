@@ -268,7 +268,7 @@ namespace Microsoft.ContainerRegistry {
   "ContainerRegistryResourceType",
   "csharp"
 );
-@@clientName(Microsoft.ContainerRegistry.PrivateLinkResource.name,
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkResource.name,
   "groupName",
   "csharp"
 );
@@ -337,7 +337,7 @@ namespace Microsoft.ContainerRegistry {
   "ConnectionState",
   "csharp"
 );
-@@clientName(PrivateLinkResource,
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkResource,
   "ContainerRegistryPrivateLinkResource",
   "csharp"
 );
@@ -526,7 +526,7 @@ namespace Microsoft.ContainerRegistry {
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"

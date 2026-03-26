@@ -11,33 +11,27 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerRegistry;
 
-/**
- * A private link resource for a container registry.
- */
-@parentResource(Registry)
-model PrivateLinkResource
-  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateLinkResource,
-    KeyName = "groupName",
-    SegmentName = "privateLinkResources",
-    NamePattern = ""
-  >;
-}
+model MyPrivateLinkResource is PrivateLinkResource;
+alias PrivateLinkOperations = PrivateLinks<MyPrivateLinkResource>;
 
 @armResourceOperations
 interface PrivateLinkResources {
   /**
    * Gets a private link resource by a specified group name for a container registry.
    */
-  getPrivateLinkResource is ArmResourceRead<PrivateLinkResource>;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Legacy.renamePathParameter(
+    "privateLinkResourceName",
+    "groupName"
+  )
+  getPrivateLinkResource is PrivateLinkOperations.Read<Registry>;
 
   /**
    * Lists the private link resources for a container registry.
    */
   @list
-  listPrivateLinkResources is ArmResourceListByParent<
-    PrivateLinkResource,
+  listPrivateLinkResources is PrivateLinkOperations.ListByParent<
+    Registry,
     Response = ArmResponse<PrivateLinkResourceListResult>
   >;
 }
