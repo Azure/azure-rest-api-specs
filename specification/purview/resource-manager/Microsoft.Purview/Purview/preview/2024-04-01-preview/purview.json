@@ -2915,7 +2915,7 @@
       "enum": [
         "None",
         "SystemAssigned",
-        "UserAssigned"
+        "SystemAssigned,UserAssigned"
       ],
       "x-ms-enum": {
         "name": "ManagedIdentityType",
@@ -2932,13 +2932,13 @@
             "description": "SystemAssigned"
           },
           {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "UserAssigned"
+            "name": "SystemAssignedUserAssigned",
+            "value": "SystemAssigned,UserAssigned",
+            "description": "Both SystemAssigned and UserAssigned identities"
           }
         ]
       }
-    },
+  },
     "ManagedResources": {
       "type": "object",
       "description": "The managed resources in customer subscription.",
