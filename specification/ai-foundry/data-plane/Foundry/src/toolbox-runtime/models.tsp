@@ -285,6 +285,78 @@ union ToolsetMCPJsonRpcRequest {
   ToolsetMCPInitializeRequest,
   ToolsetMCPListToolsRequest,
   ToolsetMCPCallToolRequest,
+  ToolsetMCPGetTaskRequest,
+  ToolsetMCPGetTaskPayloadRequest,
+  ToolsetMCPCancelTaskRequest,
+  ToolsetMCPListTasksRequest,
+}
+
+/**
+ * JSON-RPC request for tasks/get.
+ */
+model ToolsetMCPGetTaskRequest {
+  ...ToolsetMCPJsonRpcRequestBase;
+
+  /**
+   * The MCP method name.
+   */
+  method: "tasks/get";
+
+  /**
+   * Task request parameters.
+   */
+  params: ToolsetMCPTaskRequestParams;
+}
+
+/**
+ * JSON-RPC request for tasks/result.
+ */
+model ToolsetMCPGetTaskPayloadRequest {
+  ...ToolsetMCPJsonRpcRequestBase;
+
+  /**
+   * The MCP method name.
+   */
+  method: "tasks/result";
+
+  /**
+   * Task request parameters.
+   */
+  params: ToolsetMCPTaskRequestParams;
+}
+
+/**
+ * JSON-RPC request for tasks/cancel.
+ */
+model ToolsetMCPCancelTaskRequest {
+  ...ToolsetMCPJsonRpcRequestBase;
+
+  /**
+   * The MCP method name.
+   */
+  method: "tasks/cancel";
+
+  /**
+   * Task request parameters.
+   */
+  params: ToolsetMCPTaskRequestParams;
+}
+
+/**
+ * JSON-RPC request for tasks/list.
+ */
+model ToolsetMCPListTasksRequest {
+  ...ToolsetMCPJsonRpcRequestBase;
+
+  /**
+   * The MCP method name.
+   */
+  method: "tasks/list";
+
+  /**
+   * Optional pagination parameters.
+   */
+  params?: ToolsetMCPPaginatedRequestParams;
 }
 
 /**
