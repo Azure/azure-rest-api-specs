@@ -34,17 +34,6 @@ jobs:
           sparse-checkout: |
             .github
 
-      # Content copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
-      - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
-        name: Add ActionLint Problem Matcher
-        run: echo "::add-matcher::.github/matchers/actionlint.json"
-
-      - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
-        name: Lint workflows
-        uses: docker://rhysd/actionlint:1.7.10
-        with:
-          args: -color -verbose
-
       - if: ${{ matrix.folder == '.github' }}
         name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
@@ -67,15 +56,19 @@ jobs:
           node-version: 24.x
           working-directory: ./${{ matrix.folder }}
 
+      - run: npm run test:ci
+
       - run: npm run lint
 
       - run: npm run format:check:ci
 
-      - run: npm run test:ci
+      # Content copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
+      - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
+        name: Add ActionLint Problem Matcher
+        run: echo "::add-matcher::.github/matchers/actionlint.json"
 
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v6
+      - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
+        name: Lint workflows
+        uses: docker://rhysd/actionlint:1.7.11
         with:
-          name: code-coverage-report-${{ matrix.os }}-${{ fromJSON('{".github":"github", ".github/shared":"github-shared"}')[matrix.folder] }}
-          path: ./${{ matrix.folder }}/coverage
-          if-no-files-found: ignore
+          args: -color -verbose
