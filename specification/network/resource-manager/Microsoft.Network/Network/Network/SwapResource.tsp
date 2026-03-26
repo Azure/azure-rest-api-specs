@@ -39,6 +39,17 @@ model SwapResource extends ProxyResourceWithReadOnlyID {
 
 @@doc(SwapResource.name, "Resource name.");
 
+alias SingletonResourceAlias = {
+  /**
+   * The name of the singleton resource.
+   */
+  @path
+  @segment("cloudServiceSlots")
+  @key
+  @Azure.ClientGenerator.Core.alternateType("swap", "javascript,go")
+  singletonResource: SingletonResource;
+};
+
 alias CloudServiceOps = Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -66,15 +77,7 @@ alias CloudServiceOps = Legacy.ExtensionOperations<
   },
   {
     ...Extension.ExtensionProviderNamespace<SwapResource>;
-
-    /**
-     * The name of the singleton resource.
-     */
-    @path
-    @segment("cloudServiceSlots")
-    @key
-    @Azure.ClientGenerator.Core.alternateType("swap", "javascript,go")
-    singletonResource: SingletonResource;
+    ...SingletonResourceAlias;
   }
 >;
 
