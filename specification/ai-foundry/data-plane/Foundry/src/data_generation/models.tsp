@@ -64,7 +64,7 @@ model DataGenerationJob {
   @visibility(Lifecycle.Read)
   status: DataGenerationJobStatus;
 
-  @doc("The job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation. This field is populated only after the job has succeeded.")
+  @doc("The final job outputs: Azure OpenAI files for fine-tuning, or Foundry datasets for evaluation. This field is populated only after the job has succeeded.")
   outputs?: Array<DataGenerationJobOutput>;
 
   @doc("The number of samples actually generated. This field is populated only after the job has succeeded.")
@@ -85,34 +85,31 @@ model DataGenerationJob {
 
   @doc("Error information set only when status is 'failed'.")
   @visibility(Lifecycle.Read)
-  error?: ApiError;
-
-  @doc("Additional warnings related to the data generation job execution. These are non-critical issues that do not cause the job to fail but may be important for users to be aware of.")
-  @visibility(Lifecycle.Read)
-  warnings?: {
-    @doc("A human-readable warning message.")
-    message?: string;
-  };
+  error?: DataGenerationJobError;
 }
 
 @doc("Output information for a data generation job.")
 @discriminator("type")
 model DataGenerationJobOutput {
   @doc("The type of the output.")
-  type: DataGenerationJobOutputFileType;
+  type: DataGenerationJobOutputType;
 }
 
 model FileDataGenerationJobOutput extends DataGenerationJobOutput {
-  @doc("The type of the output, which is File for this model.")
+  @doc("Azure OpenAI file output.")
   type: "File";
 
   @doc("The id of the output Azure OpenAI file.")
   @visibility(Lifecycle.Read)
-  file_id?: string;
+  file_id: string;
+
+  @doc("The filename of the output Azure OpenAI file.")
+  @visibility(Lifecycle.Read)
+  filename: string;
 }
 
 model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
-  @doc("The type of the output, which is Dataset for this model.")
+  @doc("Foundry dataset output.")
   type: "Dataset";
 
   @doc("The id of the output dataset created.")
@@ -134,13 +131,13 @@ model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
 }
 
 @doc("The supported output file types for a data generation job.")
-union DataGenerationJobOutputFileType {
+union DataGenerationJobOutputType {
   string,
 
-  @doc("The generated data is stored in an Azure OpenAI Files.")
+  @doc("The generated data is an Azure OpenAI File.")
   File: "File",
 
-  @doc("The generated data is stored in an Azure Blob Storage container.")
+  @doc("The generated data is a Foundry Dataset.")
   Dataset: "Dataset",
 }
 
@@ -303,4 +300,13 @@ union SimpleQnASupervisedFineTuningQuestionType {
 
   @doc("Long answer question type.")
   LongAnswer: "LongAnswer",
+}
+
+@doc("Error information for a data generation job that failed.")
+model DataGenerationJobError {
+  @doc("A machine-readable error code.")
+  code: string;
+
+  @doc("A human-readable error message.")
+  message: string;
 }
