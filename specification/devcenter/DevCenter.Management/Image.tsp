@@ -107,7 +107,7 @@ interface ImageOperationGroupOps
         @maxLength(153)
         imageName: string,
       },
-      ResourceName = "DevCenterImageOperationGroup"
+      ResourceName = "ProjectImage"
     > {}
 
 @armResourceOperations

@@ -183,70 +183,183 @@ using Microsoft.DevCenter;
 @@clientName(CatalogSyncState, "DevCenterCatalogSyncState", "csharp");
 
 // RP prefix for new models added in this API version
-@@clientName(ActiveHoursConfiguration, "DevCenterActiveHoursConfiguration", "csharp");
+@@clientName(ActiveHoursConfiguration,
+  "DevCenterActiveHoursConfiguration",
+  "csharp"
+);
 @@clientName(AssignedGroup, "DevCenterAssignedGroup", "csharp");
 @@clientName(CatalogConflictError, "DevCenterCatalogConflictError", "csharp");
 @@clientName(CatalogErrorDetails, "DevCenterCatalogErrorDetails", "csharp");
-@@clientName(CatalogResourceValidationErrorDetails, "DevCenterCatalogResourceValidationErrorDetails", "csharp");
+@@clientName(CatalogResourceValidationErrorDetails,
+  "DevCenterCatalogResourceValidationErrorDetails",
+  "csharp"
+);
 @@clientName(CatalogSyncError, "DevCenterCatalogSyncError", "csharp");
 @@clientName(ConfigurationPolicies, "DevCenterConfigurationPolicies", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption, "DevCenterCustomerManagedKeyEncryption", "csharp");
-@@clientName(CustomizationTaskInput, "DevCenterCustomizationTaskInput", "csharp");
-@@clientName(CustomizationTaskInstance, "DevCenterCustomizationTaskInstance", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
+  "DevCenterCustomerManagedKeyEncryption",
+  "csharp"
+);
+@@clientName(CustomizationTask, "DevCenterCustomizationTask", "csharp");
+@@clientName(CustomizationTaskInput,
+  "DevCenterCustomizationTaskInput",
+  "csharp"
+);
+@@clientName(CustomizationTaskInstance,
+  "DevCenterCustomizationTaskInstance",
+  "csharp"
+);
 @@clientName(DefaultValue, "DevCenterDefaultValue", "csharp");
-@@clientName(DefinitionParametersItem, "DevCenterDefinitionParametersItem", "csharp");
-@@clientName(DevBoxScheduleDeleteSettings, "DevCenterDevBoxScheduleDeleteSettings", "csharp");
+@@clientName(DefinitionParametersItem,
+  "DevCenterDefinitionParametersItem",
+  "csharp"
+);
+@@clientName(DevBoxScheduleDeleteSettings,
+  "DevCenterDevBoxScheduleDeleteSettings",
+  "csharp"
+);
 @@clientName(FeatureState, "DevCenterFeatureState", "csharp");
-@@clientName(ImageCreationErrorDetails, "DevCenterImageCreationErrorDetails", "csharp");
-@@clientName(ImageDefinitionBuildDetails, "DevCenterImageDefinitionBuildDetails", "csharp");
-@@clientName(ImageDefinitionBuildTask, "DevCenterImageDefinitionBuildTask", "csharp");
-@@clientName(ImageDefinitionBuildTaskGroup, "DevCenterImageDefinitionBuildTaskGroup", "csharp");
-@@clientName(ImageDefinitionBuildTaskParametersItem, "DevCenterImageDefinitionBuildTaskParametersItem", "csharp");
-@@clientName(ImageDefinitionReference, "DevCenterImageDefinitionReference", "csharp");
-@@clientName(InheritedProjectCatalogSettings, "DevCenterInheritedProjectCatalogSettings", "csharp");
-@@clientName(InheritedSettingsForProject, "DevCenterInheritedSettingsForProject", "csharp");
+@@clientName(ImageCreationErrorDetails,
+  "DevCenterImageCreationErrorDetails",
+  "csharp"
+);
+@@clientName(ImageDefinitionBuildDetails,
+  "DevCenterImageDefinitionBuildDetails",
+  "csharp"
+);
+@@clientName(ImageDefinitionBuildTask,
+  "DevCenterImageDefinitionBuildTask",
+  "csharp"
+);
+@@clientName(ImageDefinitionBuildTaskGroup,
+  "DevCenterImageDefinitionBuildTaskGroup",
+  "csharp"
+);
+@@clientName(ImageDefinitionBuildTaskParametersItem,
+  "DevCenterImageDefinitionBuildTaskParametersItem",
+  "csharp"
+);
+@@clientName(ImageDefinitionReference,
+  "DevCenterImageDefinitionReference",
+  "csharp"
+);
+@@clientName(InheritedProjectCatalogSettings,
+  "DevCenterInheritedProjectCatalogSettings",
+  "csharp"
+);
+@@clientName(InheritedSettingsForProject,
+  "DevCenterInheritedSettingsForProject",
+  "csharp"
+);
 @@clientName(LatestImageBuild, "DevCenterLatestImageBuild", "csharp");
-@@clientName(ProjectCustomizationManagedIdentity, "DevCenterProjectCustomizationManagedIdentity", "csharp");
-@@clientName(ProjectCustomizationSettings, "DevCenterProjectCustomizationSettings", "csharp");
+@@clientName(ProjectCustomizationManagedIdentity,
+  "DevCenterProjectCustomizationManagedIdentity",
+  "csharp"
+);
+@@clientName(ProjectCustomizationSettings,
+  "DevCenterProjectCustomizationSettings",
+  "csharp"
+);
 @@clientName(ProjectPolicyUpdate, "DevCenterProjectPolicyPatch", "csharp");
 @@clientName(ResourcePolicy, "DevCenterResourcePolicy", "csharp");
-@@clientName(ServerlessGpuSessionsSettings, "DevCenterServerlessGpuSessionsSettings", "csharp");
-@@clientName(StopOnNoConnectConfiguration, "DevCenterStopOnNoConnectConfiguration", "csharp");
+@@clientName(ServerlessGpuSessionsSettings,
+  "DevCenterServerlessGpuSessionsSettings",
+  "csharp"
+);
+@@clientName(StopOnNoConnectConfiguration,
+  "DevCenterStopOnNoConnectConfiguration",
+  "csharp"
+);
 @@clientName(SyncErrorDetails, "DevCenterSyncErrorDetails", "csharp");
 @@clientName(SyncStats, "DevCenterSyncStats", "csharp");
+@@clientName(ProjectPolicy, "DevCenterProjectPolicy", "csharp");
 
 // RP prefix for new unions/enums added in this API version
 @@clientName(ArchitectureType, "DevCenterArchitectureType", "csharp");
 @@clientName(AssignedGroupScope, "DevCenterAssignedGroupScope", "csharp");
 @@clientName(AutoImageBuildStatus, "DevCenterAutoImageBuildStatus", "csharp");
 @@clientName(AutoStartEnableStatus, "DevCenterAutoStartEnableStatus", "csharp");
-@@clientName(CancelOnConnectEnableStatus, "DevCenterCancelOnConnectEnableStatus", "csharp");
-@@clientName(CatalogAutoImageBuildEnableStatus, "DevCenterCatalogAutoImageBuildEnableStatus", "csharp");
-@@clientName(CatalogConnectionState, "DevCenterCatalogConnectionState", "csharp");
-@@clientName(CatalogItemSyncEnableStatus, "DevCenterCatalogItemSyncEnableStatus", "csharp");
+@@clientName(CancelOnConnectEnableStatus,
+  "DevCenterCancelOnConnectEnableStatus",
+  "csharp"
+);
+@@clientName(CatalogAutoImageBuildEnableStatus,
+  "DevCenterCatalogAutoImageBuildEnableStatus",
+  "csharp"
+);
+@@clientName(CatalogConnectionState,
+  "DevCenterCatalogConnectionState",
+  "csharp"
+);
+@@clientName(CatalogItemSyncEnableStatus,
+  "DevCenterCatalogItemSyncEnableStatus",
+  "csharp"
+);
 @@clientName(CatalogItemType, "DevCenterCatalogItemType", "csharp");
-@@clientName(CatalogResourceValidationStatus, "DevCenterCatalogResourceValidationStatus", "csharp");
+@@clientName(CatalogResourceValidationStatus,
+  "DevCenterCatalogResourceValidationStatus",
+  "csharp"
+);
 @@clientName(CatalogSyncType, "DevCenterCatalogSyncType", "csharp");
 @@clientName(CmkIdentityType, "DevCenterCmkIdentityType", "csharp");
-@@clientName(CustomizationTaskInputType, "DevCenterCustomizationTaskInputType", "csharp");
+@@clientName(CustomizationTaskInputType,
+  "DevCenterCustomizationTaskInputType",
+  "csharp"
+);
 @@clientName(DevBoxDeleteMode, "DevCenterDevBoxDeleteMode", "csharp");
-@@clientName(DevBoxTunnelEnableStatus, "DevCenterDevBoxTunnelEnableStatus", "csharp");
-@@clientName(DevboxDisksEncryptionEnableStatus, "DevCenterDevboxDisksEncryptionEnableStatus", "csharp");
-@@clientName(FeatureStateModifiable, "DevCenterFeatureStateModifiable", "csharp");
+@@clientName(DevBoxTunnelEnableStatus,
+  "DevCenterDevBoxTunnelEnableStatus",
+  "csharp"
+);
+@@clientName(DevboxDisksEncryptionEnableStatus,
+  "DevCenterDevboxDisksEncryptionEnableStatus",
+  "csharp"
+);
+@@clientName(FeatureStateModifiable,
+  "DevCenterFeatureStateModifiable",
+  "csharp"
+);
 @@clientName(FeatureStatus, "DevCenterFeatureStatus", "csharp");
-@@clientName(ImageDefinitionBuildStatus, "DevCenterImageDefinitionBuildStatus", "csharp");
-@@clientName(InstallAzureMonitorAgentEnableStatus, "DevCenterInstallAzureMonitorAgentEnableStatus", "csharp");
+@@clientName(ImageDefinitionBuildStatus,
+  "DevCenterImageDefinitionBuildStatus",
+  "csharp"
+);
+@@clientName(InstallAzureMonitorAgentEnableStatus,
+  "DevCenterInstallAzureMonitorAgentEnableStatus",
+  "csharp"
+);
 @@clientName(KeepAwakeEnableStatus, "DevCenterKeepAwakeEnableStatus", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType, "DevCenterKeyEncryptionKeyIdentityType", "csharp");
-@@clientName(MicrosoftHostedNetworkEnableStatus, "DevCenterMicrosoftHostedNetworkEnableStatus", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
+  "DevCenterKeyEncryptionKeyIdentityType",
+  "csharp"
+);
+@@clientName(MicrosoftHostedNetworkEnableStatus,
+  "DevCenterMicrosoftHostedNetworkEnableStatus",
+  "csharp"
+);
 @@clientName(ParameterType, "DevCenterParameterType", "csharp");
 @@clientName(PolicyAction, "DevCenterPolicyAction", "csharp");
-@@clientName(PoolDevBoxDefinitionType, "DevCenterPoolDevBoxDefinitionType", "csharp");
-@@clientName(ProjectCustomizationIdentityType, "DevCenterProjectCustomizationIdentityType", "csharp");
-@@clientName(ServerlessGpuSessionsMode, "DevCenterServerlessGpuSessionsMode", "csharp");
+@@clientName(PoolDevBoxDefinitionType,
+  "DevCenterPoolDevBoxDefinitionType",
+  "csharp"
+);
+@@clientName(ProjectCustomizationIdentityType,
+  "DevCenterProjectCustomizationIdentityType",
+  "csharp"
+);
+@@clientName(ServerlessGpuSessionsMode,
+  "DevCenterServerlessGpuSessionsMode",
+  "csharp"
+);
 @@clientName(SingleSignOnStatus, "DevCenterSingleSignOnStatus", "csharp");
-@@clientName(StopOnNoConnectEnableStatus, "DevCenterStopOnNoConnectEnableStatus", "csharp");
-@@clientName(UserCustomizationsEnableStatus, "DevCenterUserCustomizationsEnableStatus", "csharp");
+@@clientName(StopOnNoConnectEnableStatus,
+  "DevCenterStopOnNoConnectEnableStatus",
+  "csharp"
+);
+@@clientName(UserCustomizationsEnableStatus,
+  "DevCenterUserCustomizationsEnableStatus",
+  "csharp"
+);
 @@clientName(VirtualNetworkType, "DevCenterVirtualNetworkType", "csharp");
 @@clientName(WorkspaceStorageMode, "DevCenterWorkspaceStorageMode", "csharp");
 
