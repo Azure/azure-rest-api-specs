@@ -66,7 +66,7 @@ namespace CombineClient;
 // Mitigate ProvisioningState split: create unified union with all values
 @@clientName(Microsoft.Network.ProvisioningState,
   "CommonProvisioningState",
-  "java"
+  "java,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by merging ProvisioningState values"
@@ -1292,16 +1292,6 @@ union ProvisioningStateUnion {
 );
 @@clientName(AzureFirewallSkuName.AZFW_VNet, "AzfwVnet", "javascript");
 @@clientName(VM, "Vm", "javascript");
-@@clientName(Microsoft.Network.BaseProvisioningState,
-  "ProvisioningState",
-  "go"
-);
-@@clientName(Microsoft.Network.ProvisioningState,
-  "BaseProvisioningState",
-  "go"
-);
-@@clientName(Microsoft.Network.NetworkProtocol, "Protocol", "go");
-@@clientName(Microsoft.Network.Protocol, "BaseProtocol", "go");
 @@clientName(FirewallPolicyPropertiesFormat.explicitProxy,
   "ExplicitProxySettings",
   "go"
