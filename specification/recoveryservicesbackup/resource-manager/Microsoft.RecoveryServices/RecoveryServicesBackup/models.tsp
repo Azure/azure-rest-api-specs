@@ -8693,6 +8693,11 @@ model CrossTenantVaultMapping {
   sourceVaultId: armResourceIdentifier<[{type: "Microsoft.RecoveryServices/vaults"}]>;
 
   /**
+   * Tenant ID of the source vault for cross-tenant mapping.
+   */
+  sourceTenantId?: string;
+
+  /**
    * Name of the mapping.
    */
   mappingName?: string;
