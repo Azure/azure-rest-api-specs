@@ -36,23 +36,6 @@ using Microsoft.Storage;
   "javascript"
 );
 
-// should only be used in Java
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum Action {
-  ALLOW: "Allow",
-}
-@@alternateType(IPRule.action, Action, "java");
-@@alternateType(VirtualNetworkRule.action, Action, "java");
-
-@@alternateType(TriggerParameters.intervalUnit, IntervalUnit, "java");
-@@alternateType(TriggerParametersUpdate.intervalUnit, IntervalUnit, "java");
-
-@@usage(StorageAccount,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
-  "java"
-);
-
 @@clientName(ETagHeader.eTag, "etag", "java");
 
 // Fix client parameter order.
@@ -92,4 +75,72 @@ op getDeletedAccountCustomized(
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(StorageAccountFailoverParameters.failoverType,
   "Planned",
   "python"
+);
+
+@@usage(StorageAccount,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "java"
+);
+
+// TODO: drop the type replacement upon next major breaking change
+@@alternateType(IPRule.action, Action, "java");
+@@alternateType(VirtualNetworkRule.action, Action, "java");
+
+@@alternateType(TriggerParameters.intervalUnit, IntervalUnitEnum, "java");
+@@alternateType(TriggerParametersUpdate.intervalUnit, IntervalUnitEnum, "java");
+
+@@alternateType(ExecutionTrigger.type, TriggerTypeEnum, "java");
+@@alternateType(ExecutionTriggerUpdate.type, TriggerTypeEnum, "java");
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum Action {
+  ALLOW: "Allow",
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by using enum in place of string union type"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror enum for backward compatibility"
+enum IntervalUnitEnum {
+  Days: "Days",
+}
+@@clientName(IntervalUnitEnum, "IntervalUnit", "java");
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by using enum in place of string union type"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror enum for backward compatibility"
+enum TriggerTypeEnum {
+  RunOnce: "RunOnce",
+  OnSchedule: "OnSchedule",
+  MockRun: "MockRun",
+}
+@@clientName(TriggerTypeEnum, "TriggerType", "java");
+
+// Mitigate ProvisioningState split: merge values from ProvisioningState and StorageTaskAssignmentProvisioningState
+@@clientName(ProvisioningState, "StorageProvisioningState", "java");
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by merging ProvisioningState values"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror enum for backward compatibility"
+enum ProvisioningStateEnum {
+  Creating: "Creating",
+  ResolvingDNS: "ResolvingDNS",
+  Succeeded: "Succeeded",
+  ValidateSubscriptionQuotaBegin: "ValidateSubscriptionQuotaBegin",
+  ValidateSubscriptionQuotaEnd: "ValidateSubscriptionQuotaEnd",
+  Accepted: "Accepted",
+  Deleting: "Deleting",
+  Canceled: "Canceled",
+  Failed: "Failed",
+}
+@@clientName(ProvisioningStateEnum, "ProvisioningState", "java");
+
+@@alternateType(StorageAccountProperties.provisioningState,
+  ProvisioningStateEnum,
+  "java"
+);
+@@alternateType(StorageTaskAssignmentProperties.provisioningState,
+  ProvisioningStateEnum,
+  "java"
+);
+@@alternateType(StorageTaskAssignmentUpdateProperties.provisioningState,
+  ProvisioningStateEnum,
+  "java"
 );
