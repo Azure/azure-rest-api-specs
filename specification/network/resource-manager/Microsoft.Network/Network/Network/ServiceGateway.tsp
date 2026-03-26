@@ -109,6 +109,8 @@ interface ServiceGateways {
     ServiceGateway,
     ServiceGatewayUpdateAddressLocationsRequest,
     NoContentResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
@@ -123,6 +125,8 @@ interface ServiceGateways {
     ServiceGateway,
     ServiceGatewayUpdateServicesRequest,
     NoContentResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
