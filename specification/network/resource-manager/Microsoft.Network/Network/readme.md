@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
   - stable/2025-05-01/applicationGateway.json
+  - stable/2025-05-01/azureWebCategory.json
   - stable/2025-05-01/common.json
   - stable/2025-05-01/expressRoute.json
   - stable/2025-05-01/firewall.json
