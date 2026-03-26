@@ -191,22 +191,6 @@ union MapTileSize {
   size512: "512",
 }
 
-/** Desired format of the response. Value can be either _json_ or _xml_. */
-union ResponseFormat {
-  string,
-
-  /**
-   * [The JavaScript Object Notation Data Interchange
-   * Format](https://tools.ietf.org/html/rfc8259)
-   */
-  json: "json",
-
-  /**
-   * [The Extensible Markup Language](https://www.w3.org/TR/xml/)
-   */
-  xml: "xml",
-}
-
 /** Value indicating no traffic flow overlaid on the image result. */
 union TrafficTilesetId {
   string,
@@ -235,22 +219,6 @@ union MediaType {
    * Return image in jpeg format.
    */
   `image/jpeg`: "image/jpeg",
-}
-
-/** Include textual data in response. */
-union IncludeText {
-  string,
-
-  /**
-   * Include all textual data in response.
-   */
-  yes: "yes",
-
-  /**
-   * Exclude textual data from response. Only images and country/region names will
-   * be in response.
-   */
-  no: "no",
 }
 
 /**

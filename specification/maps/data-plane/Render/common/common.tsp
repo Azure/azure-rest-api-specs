@@ -31,6 +31,17 @@ union LroStatus {
   Succeeded: "Succeeded",
 }
 
+/** Desired format of the response. Only `json` format is supported. */
+union JsonFormat {
+  string,
+
+  /**
+   * [The JavaScript Object Notation Data Interchange
+   * Format](https://tools.ietf.org/html/rfc8259)
+   */
+  json: "json",
+}
+
 /**
  * The response format.
  */
@@ -50,6 +61,23 @@ union ResponseFormat {
 }
 
 /**
+ * This parameter specifies where the Azure Maps Account is located. Valid values are us (East US, West Central US, West US 2) and eu (North Europe, West Europe).
+ */
+union MapsAccountGeographicResourceLocation {
+  string,
+
+  /**
+   * Used to access an Azure Maps resource in the United States (East US, West Central US, West US 2)
+   */
+  us: "us",
+
+  /**
+   * Used to access an Azure Maps resource in Europe (North Europe, West Europe)
+   */
+  eu: "eu",
+}
+
+/**
  * The geographic location of the resource.
  */
 union GeographicResourceLocation {
@@ -66,7 +94,9 @@ union GeographicResourceLocation {
   eu: "eu",
 }
 
-/** The View parameter (also called the \"user region\" parameter) allows you to show the correct maps for a certain country/region for geopolitically disputed regions. Different countries/regions have different views of such regions, and the View parameter allows your application to comply with the view required by the country/region your application will be serving. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country/region where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views. */
+/**
+ * The localized map view to return the route geometry in.
+ */
 union LocalizedMapView {
   string,
 
@@ -325,6 +355,67 @@ model ErrorAdditionalInfo {
 }
 
 /**
+ * An object containing more specific information than the current object about the error.
+ */
+model MapsInnerError {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * The inner error.
+   */
+  innererror?: MapsInnerError;
+}
+
+/**
+ * The error detail.
+ */
+model MapsErrorDetail {
+  /**
+   * One of a server-defined set of error codes.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * A human-readable representation of the error.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The target of the error.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * An array of details about specific errors that led to this reported error.
+   */
+  @visibility(Lifecycle.Read)
+  details?: MapsErrorDetail[];
+
+  /**
+   * The error additional info.
+   */
+  innererror?: MapsInnerError;
+}
+
+/**
+ * Common error response for Azure Maps APIs to return error details for failed operations.
+ */
+model MapsErrorResponse {
+  /**
+   * The error detail.
+   */
+  @visibility(Lifecycle.Read)
+  error: MapsErrorDetail;
+}
+
+/**
  * This type represents the request body for the Batch service.
  */
 model BatchRequest {
@@ -439,12 +530,6 @@ model GeoJsonObject {
    * GeometryCollection, Feature and FeatureCollection.
    */
   type: GeoJsonObjectType;
-
-  /**
-   * Bounding box. Projection used - EPSG:3857. Please refer to [RFC
-   * 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
-   */
-  bbox?: float64[];
 }
 
 /**
