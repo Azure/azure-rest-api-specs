@@ -1,0 +1,51 @@
+{
+  "operationId": "GetFeatureFlagRevisions",
+  "title": "Gets a list of feature flag revisions.",
+  "parameters": {
+    "endpoint": "https://{exampleAppConfigurationName}.azconfig.io",
+    "api-version": "2026-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json;profile=\"https://azconfig.io/mime-profiles/feature-management/ffset\"​;charset=utf-8",
+        "Sync-Token": "zAJw6V16=NjotMSM3ODk3NjM=;sn=789763"
+      },
+      "body": {
+        "items": [
+          {
+            "etag": "0BGYCoQ6iNdp5NtQ7N8shrobo6s",
+            "label": null,
+            "name": "myFlag",
+            "enabled": false,
+            "tags": {},
+            "last_modified": "2019-08-27T16:52:32+00:00"
+          },
+          {
+            "etag": "L10qpBghN693OaxydgTkLmrBbV4",
+            "label": null,
+            "name": "myOtherFlag",
+            "enabled": true,
+            "tags": {},
+            "last_modified": "2019-08-27T16:52:20+00:00"
+          },
+          {
+            "etag": "tnIHBkDYQwtdNMLoWtr5aybkKwL",
+            "label": null,
+            "name": "myThirdFlag",
+            "enabled": false,
+            "telemetry": {
+              "enabled": true,
+              "metadata": {
+                "key": "aKey",
+                "value": "aValue"
+              }
+            },
+            "tags": {},
+            "last_modified": "2019-08-27T16:50:47+00:00"
+          }
+        ]
+      }
+    }
+  }
+}

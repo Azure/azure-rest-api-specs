@@ -38,13 +38,13 @@ input-file:
 - stable/2024-09-01/appconfiguration.json
 ```
 
-### Tag: package-2025-07-01-preview
+### Tag: package-2026-05-01-preview
 
-These settings apply only when `--tag=package-2025-07-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-05-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-07-01-preview'
+``` yaml $(tag) == 'package-2026-05-01-preview'
 input-file:
-- preview/2025-07-01-preview/appconfiguration.json
+- preview/2026-05-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2023-11-01

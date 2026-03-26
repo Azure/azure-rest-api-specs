@@ -244,7 +244,7 @@ alias FeatureFlagsRequestParams = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Gets a list of feature flags.")
 @doc("Gets a list of feature flags.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 op getFeatureFlags is Foundations.ResourceList<
   FeatureFlag,
   FeatureFlagsRequestParams,
@@ -260,7 +260,7 @@ op getFeatureFlags is Foundations.ResourceList<
 @doc("Requests the headers and status of the given resource.")
 @route("/ff")
 @head
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 op checkFeatureFlags is AppConfigOperation<
   FeatureFlagsRequestParams,
   OkResponse & AppConfigResponseHeaders
@@ -284,7 +284,7 @@ alias FeatureFlagReadParams = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing pattern for the service"
 @summary("Gets a single feature flag.")
 @doc("Gets a single feature flag.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 op getFeatureFlag is Foundations.ResourceOperation<
   FeatureFlag,
   FeatureFlagReadParams,
@@ -301,7 +301,7 @@ op getFeatureFlag is Foundations.ResourceOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/ff/{name}")
 @head
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 op checkFeatureFlag is AppConfigOperation<
   {
     @doc("The name of the feature flag to retrieve.")
@@ -330,7 +330,7 @@ op checkFeatureFlag is AppConfigOperation<
 @doc("Creates a feature flag.")
 @route("/ff/{name}")
 @put
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 op putFeatureFlag is AppConfigOperation<
   {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
@@ -358,7 +358,7 @@ op putFeatureFlag is AppConfigOperation<
 @doc("Deletes a feature flag.")
 @route("/ff/{name}")
 @delete
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 op deleteFeatureFlag is AppConfigOperation<
   {
     ...NamePathParam<"The name of the feature flag to delete.">;
@@ -396,7 +396,7 @@ alias FeatureFlagRevisionsRequestParams = NameQueryParam<"""
 @doc("Gets a list of feature flag revisions.")
 @route("/ff-revisions")
 @get
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 op getFeatureFlagRevisions is AppConfigOperation<
   {
     ...FeatureFlagRevisionsRequestParams;
@@ -414,7 +414,7 @@ op getFeatureFlagRevisions is AppConfigOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/ff-revisions")
 @head
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 op checkFeatureFlagRevisions is AppConfigOperation<
   FeatureFlagRevisionsRequestParams,
   OkResponse & AppConfigResponseHeaders
@@ -552,7 +552,7 @@ alias LabelsRequestParams = {
   ...AcceptDatetimeHeader;
   ...SelectQueryParam<LabelFields>;
 
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2026_05_01_preview)
   @doc("A filter used to indicate the resource type of the labels. Accepted values: 'kv' for key-value labels, 'ff' for feature flag labels.")
   @query("resource-type")
   resourceType?: string;

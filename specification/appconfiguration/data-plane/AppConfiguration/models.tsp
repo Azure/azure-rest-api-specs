@@ -40,7 +40,7 @@ union KeyValueFields {
 }
 
 @doc("Feature Flag fields.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 union FeatureFlagFields {
   @doc("Name field.")
   name: "name",
@@ -239,11 +239,11 @@ model KeyValue {
 }
 
 @doc("The result of a Feature Flag list request.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 model FeatureFlagListResult {
   @doc("The collection value.")
   @pageItems
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2026_05_01_preview)
   items?: FeatureFlag[];
 
   @doc("An identifier representing the returned state of the resource.")
@@ -255,7 +255,7 @@ model FeatureFlagListResult {
 }
 
 @doc("A feature flag.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 @resource("ff")
 model FeatureFlag {
   @key
@@ -298,7 +298,7 @@ model FeatureFlag {
 }
 
 @doc("The conditions that must be met for the feature flag to be enabled.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 model FeatureFlagConditions {
   @doc("The requirement type for the conditions.")
   @encodedName("application/json", "requirement_type")
@@ -309,7 +309,7 @@ model FeatureFlagConditions {
 }
 
 @doc("Requirement Type.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 union RequirementType {
   @doc("Any.")
   Any: "Any",
@@ -321,7 +321,7 @@ union RequirementType {
 }
 
 @doc("Feature Flag Filter object.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 model FeatureFlagFilter {
   @doc("The name of the filter.")
   name: string;
@@ -331,7 +331,7 @@ model FeatureFlagFilter {
 }
 
 @doc("Feature Flag Variants object.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 model FeatureFlagVariantDefinition {
   @doc("The name of the variant.")
   name: string;
@@ -349,7 +349,7 @@ model FeatureFlagVariantDefinition {
 }
 
 @doc("Status Override.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 union StatusOverride {
   @doc("None.")
   None: "None",
@@ -364,7 +364,7 @@ union StatusOverride {
 }
 
 @doc("Defines how to allocate variants based on context.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 model FeatureFlagAllocation {
   @doc("The default variant to use when disabled.")
   @encodedName("application/json", "default_when_disabled")
@@ -388,7 +388,7 @@ model FeatureFlagAllocation {
 }
 
 @doc("Feature Flag PercentileAllocation object.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 model PercentileAllocation {
   @doc("The variant to allocate these percentiles to.")
   variant: string;
@@ -405,7 +405,7 @@ model PercentileAllocation {
 }
 
 @doc("Feature Flag UserAllocation object.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 model UserAllocation {
   @doc("The variant to allocate these percentiles to.")
   variant: string;
@@ -415,7 +415,7 @@ model UserAllocation {
 }
 
 @doc("Feature Flag GroupAllocation object.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 model GroupAllocation {
   @doc("The variant to allocate these percentiles to.")
   variant: string;
@@ -425,7 +425,7 @@ model GroupAllocation {
 }
 
 @doc("Feature Flag Telemetry object.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_05_01_preview)
 model FeatureFlagTelemetryConfiguration {
   @doc("The enabled state of the telemetry.")
   enabled: boolean;
