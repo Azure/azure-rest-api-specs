@@ -16,3 +16,9 @@ using Microsoft.ContainerInstance;
   "ContainerGroupPropertiesInstanceView",
   "go"
 );
+
+@@clientName(ContainerGroupPropertiesPropertiesInstanceView,
+  "ContainerGroupPropertiesInstanceView",
+  "java"
+);
+@@clientName(ContainerAttachResponse, "ContainerAttachResult", "java");

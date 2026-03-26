@@ -20,8 +20,18 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerinstance"
     namespace: "com.azure.resourcemanager.containerinstance"
-    service-name: "ContainerInstance" # human-readable service name, whitespace allowed
+    service-name: "ContainerInstance"
     flavor: azure
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    use-object-for-unknown: true
+    float32-as-double: false
+    remove-inner: Container,Operation,CachedImages,Capabilities
+    rename-model:
+      ContainerGroupPropertiesProperties: ContainerGroupProperties
+      UserAssignedIdentities: ContainerGroupIdentityUserAssignedIdentities
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-containerinstance"
     flavor: azure
