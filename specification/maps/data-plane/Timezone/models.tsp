@@ -30,17 +30,6 @@ union TimezoneOptions {
   all: "all",
 }
 
-/** Desired format of the response. */
-union JsonFormat {
-  string,
-
-  /**
-   * [The JavaScript Object Notation Data Interchange
-   * Format](https://tools.ietf.org/html/rfc8259)
-   */
-  json: "json",
-}
-
 /**
  * This object is returned from a successful Timezone By ID call or By Coordinates
  * call
