@@ -157,6 +157,8 @@ interface VirtualNetworkGatewayConnections {
       @body body: stringApplicationJson;
     },
     OptionalRequestBody = true,
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = Error
   >;
 
@@ -170,6 +172,8 @@ interface VirtualNetworkGatewayConnections {
     {
       @body body: stringApplicationJson;
     },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = Error
   >;
 
@@ -185,7 +189,7 @@ interface VirtualNetworkGatewayConnections {
       @body body: stringApplicationJson;
     },
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader,
+      ArmLroLocationHeader<FinalResult = stringApplicationJson>,
     Error = ErrorResponse
   >;
 

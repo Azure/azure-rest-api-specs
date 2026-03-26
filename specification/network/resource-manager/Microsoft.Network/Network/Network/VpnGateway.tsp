@@ -179,6 +179,8 @@ interface VpnGateways {
       @body body: stringApplicationJson;
     },
     OptionalRequestBody = true,
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
@@ -195,6 +197,8 @@ interface VpnGateways {
       @body body: stringApplicationJson;
     },
     OptionalRequestBody = true,
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
@@ -257,6 +261,8 @@ interface VpnGateways {
       @body body: stringApplicationJson;
     },
     OptionalRequestBody = true,
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = CloudError
   >;
 
@@ -272,6 +278,8 @@ interface VpnGateways {
       @body body: stringApplicationJson;
     },
     OptionalRequestBody = true,
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = CloudError
   >;
 

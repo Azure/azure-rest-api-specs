@@ -120,6 +120,8 @@ interface VpnSiteLinkConnections {
     {
       @body body: stringApplicationJson;
     },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = ErrorResponse
   >;
 }

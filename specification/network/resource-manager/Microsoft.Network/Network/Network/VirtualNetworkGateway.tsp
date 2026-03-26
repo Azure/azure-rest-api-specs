@@ -156,6 +156,8 @@ interface VirtualNetworkGateways {
     {
       @body body: stringApplicationJson;
     },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
@@ -171,7 +173,7 @@ interface VirtualNetworkGateways {
       @body body: stringApplicationJson;
     },
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = string>,
+      ArmLroLocationHeader<FinalResult = stringApplicationJson>,
     Error = CloudError
   >;
 
@@ -186,6 +188,8 @@ interface VirtualNetworkGateways {
     {
       @body body: stringApplicationJson;
     },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
@@ -337,6 +341,8 @@ interface VirtualNetworkGateways {
       @body body: stringApplicationJson;
     },
     OptionalRequestBody = true,
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = Error
   >;
 
@@ -350,6 +356,8 @@ interface VirtualNetworkGateways {
     {
       @body body: stringApplicationJson;
     },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = Error
   >;
 
@@ -430,6 +438,8 @@ interface VirtualNetworkGateways {
       @query("peeringLocation")
       peeringLocation: string;
     },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
@@ -444,6 +454,8 @@ interface VirtualNetworkGateways {
     {
       @body body: stringApplicationJson;
     },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
