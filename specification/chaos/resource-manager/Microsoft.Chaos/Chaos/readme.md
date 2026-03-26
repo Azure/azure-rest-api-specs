@@ -63,6 +63,18 @@ suppressions:
     from: openapi.json
     where: $.definitions.Target.properties.properties
     reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.
+  - code: PathForTrackedResourceTypes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/workspaceOperationResults/{operationId}"]
+    reason: WorkspaceOperationResults is an LRO polling endpoint (final-state-via location), not a tracked resource CRUD path. It is subscription/location-scoped by design as a shared polling endpoint for workspace async operations.
+  - code: AllTrackedResourcesMustHaveDelete
+    from: openapi.json
+    where: $.definitions.Workspace
+    reason: False positive - Workspace has a DELETE operation (Workspaces_Delete) at /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}. The linter fails to correlate the definition with its delete operation.
+  - code: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.Workspace
+    reason: False positive - Workspace has a PATCH operation (Workspaces_Update) at the same resource path with tags support via WorkspaceUpdate model. The linter fails to correlate the definition with its patch operation.
 ```
 
 ### Tag: package-2025-01
