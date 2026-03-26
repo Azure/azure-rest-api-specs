@@ -862,3 +862,7 @@ model AccessRulePropertiesSubscriptionsItem {
 );
 
 @@clientName(SearchServiceProperties.eTag, "etag", "java");
+
+@@clientName(SearchResourceEncryptionKey.keyVaultKeyName, "keyName");
+@@clientName(SearchResourceEncryptionKey.keyVaultKeyVersion, "keyVersion");
+@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri");

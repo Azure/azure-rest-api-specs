@@ -879,17 +879,17 @@ model SearchResourceEncryptionKey {
   /**
    * The name of the key in Azure Key Vault that is to be used to encrypt data at rest in the search service.
    */
-  keyName?: string;
+  keyVaultKeyName?: string;
 
   /**
    * The version of the key in Azure Key Vault that is to be used to encrypt data at rest in the search service.
    */
-  keyVersion?: string;
+  keyVaultKeyVersion?: string;
 
   /**
    * The URI of the Azure Key Vault where the key is stored.
    */
-  vaultUri?: url;
+  keyVaultUri?: url;
 
   /**
    * An explicit identity to use when accessing the Azure Key Vault specified in the vaultUri. If this is not provided, the search service will use its own system-assigned managed identity to access the key vault. Providing an explicit identity is supported for services that need to access a key vault in a different tenant or in a key vault with a different access policy (e.g., RBAC based).
