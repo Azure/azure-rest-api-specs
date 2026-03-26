@@ -571,10 +571,6 @@ directive:
   - suppress: ResourceNameRestriction
     from: bms.json
     reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility across all API versions. Adding a pattern would be a breaking change affecting the entire specification.
-  - suppress: AvoidAdditionalProperties
-    from: bms.json
-    where: $.definitions.CrossTenantVaultMapping.properties.extendedProperties
-    reason: extendedProperties is a dictionary (Record<string>) for extensible key-value metadata. additionalProperties is the correct OpenAPI representation.
   - suppress: AllTrackedResourcesMustHaveDelete
     from: bms.json
     where: $.definitions.ProtectedItemResource

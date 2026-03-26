@@ -10514,7 +10514,15 @@
       "properties": {
         "sourceVaultId": {
           "type": "string",
-          "description": "ARM resource ID of the source vault."
+          "format": "arm-id",
+          "description": "ARM resource ID of the source vault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults"
+              }
+            ]
+          }
         },
         "mappingName": {
           "type": "string",
@@ -10529,13 +10537,6 @@
           "type": "array",
           "description": "ResourceGuardOperationRequests on which LAC check will be performed.",
           "items": {
-            "type": "string"
-          }
-        },
-        "extendedProperties": {
-          "type": "object",
-          "description": "Additional properties for the mapping.",
-          "additionalProperties": {
             "type": "string"
           }
         },

@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Microsoft.RecoveryServices;
 
@@ -8689,7 +8690,7 @@ model CrossTenantVaultMapping {
   /**
    * ARM resource ID of the source vault.
    */
-  sourceVaultId: string;
+  sourceVaultId: armResourceIdentifier<[{type: "Microsoft.RecoveryServices/vaults"}]>;
 
   /**
    * Name of the mapping.
@@ -8705,12 +8706,6 @@ model CrossTenantVaultMapping {
    * ResourceGuardOperationRequests on which LAC check will be performed.
    */
   resourceGuardOperationRequests?: string[];
-
-  /**
-   * Additional properties for the mapping.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Service contract uses Dictionary<string, string> for additional properties"
-  extendedProperties?: Record<string>;
 
   /**
    * Provisioning state of the resource.
