@@ -7,7 +7,10 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Search;
 
-@TypeSpec.Versioning.useDependency(Search.Versions.v2025_11_01_preview)
+@TypeSpec.Versioning.useDependency(
+  Search.Versions.v2025_11_01_preview,
+  Search.Versions.v2026_05_01_preview
+)
 namespace Customizations;
 
 @client({
@@ -54,6 +57,9 @@ namespace SearchClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     autocompletePost is Search.Documents.autocompletePost;
+
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "New API"
+    explainPost is Search.Documents.explainPost;
   }
 }
 

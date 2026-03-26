@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models-index.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Search;
@@ -47,6 +49,22 @@ interface Documents {
       @statusCode
       code: "200" | "206";
     }
+  >;
+
+  /** Explains how a specific document is scored for a given search query. Returns a detailed breakdown of the scoring components that contribute to the document's relevance score. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "New API"
+  @added(Versions.v2026_05_01_preview)
+  @route("/indexes('{indexName}')/docs/search.post.explain")
+  @post
+  explainPost is SearchIndexOperation<
+    {
+      ...acceptHeaderNone;
+
+      /** The explain request parameters. */
+      @body
+      body: ExplainRequest;
+    },
+    ExplainDocumentsResult
   >;
 
   /** Searches for documents in the index. */

@@ -1,0 +1,109 @@
+{
+  "operationId": "Documents_ExplainPost",
+  "title": "SearchIndexExplainDocumentsPost",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "indexName": "preview-test",
+    "api-version": "2026-05-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "body": {
+      "search": "luxury hotels near the ocean",
+      "documentKey": "hotel-1234",
+      "verbosity": "detailed",
+      "filter": "rating ge 4",
+      "scoringProfile": "boostByRating",
+      "scoringParameters": [
+        "currentLocation--122.123,44.77"
+      ],
+      "queryType": "full",
+      "searchFields": "name,description,category"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "documentKey": "hotel-1234",
+        "score": 8.456,
+        "explanation": {
+          "value": 8.456,
+          "description": "sum of:",
+          "kind": "similarity",
+          "details": [
+            {
+              "value": 3.245,
+              "description": "weight(name:luxury in 42) [PerFieldSimilarity], result of:",
+              "kind": "similarity",
+              "details": [
+                {
+                  "value": 3.245,
+                  "description": "score(freq=1.0), computed as boost * idf * tf from:",
+                  "details": [
+                    {
+                      "value": 1.0,
+                      "description": "boost",
+                      "kind": "boost"
+                    },
+                    {
+                      "value": 2.614,
+                      "description": "idf, computed as log(1 + (N - n + 0.5) / (n + 0.5)) from: n=12, N=150",
+                      "kind": "idf"
+                    },
+                    {
+                      "value": 1.241,
+                      "description": "tf, computed as freq / (freq + k1 * (1 - b + b * dl / avgdl)) from: freq=1.0, k1=1.2, b=0.75, dl=5, avgdl=8.2",
+                      "kind": "tf"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": 2.811,
+              "description": "weight(description:ocean in 42) [PerFieldSimilarity], result of:",
+              "kind": "similarity",
+              "details": [
+                {
+                  "value": 2.811,
+                  "description": "score(freq=2.0), computed as boost * idf * tf from:",
+                  "details": [
+                    {
+                      "value": 1.0,
+                      "description": "boost",
+                      "kind": "boost"
+                    },
+                    {
+                      "value": 1.956,
+                      "description": "idf, computed as log(1 + (N - n + 0.5) / (n + 0.5)) from: n=35, N=150",
+                      "kind": "idf"
+                    },
+                    {
+                      "value": 1.437,
+                      "description": "tf, computed as freq / (freq + k1 * (1 - b + b * dl / avgdl)) from: freq=2.0, k1=1.2, b=0.75, dl=25, avgdl=30.5",
+                      "kind": "tf"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": 2.4,
+              "description": "scoring profile boost: boostByRating",
+              "kind": "custom",
+              "details": [
+                {
+                  "value": 2.4,
+                  "description": "magnitude boost on field 'rating' with value 4.8, boost factor 2",
+                  "kind": "boost"
+                }
+              ]
+            }
+          ]
+        },
+        "matchedFields": [
+          "name",
+          "description"
+        ]
+      }
+    }
+  }
+}

@@ -592,6 +592,11 @@ model SearchOptions {
   /** The list of field names used for semantic ranking. */
   @query
   semanticFields?: string[];
+
+  /** A value indicating whether to return scoring explanations for each search result. When set to true, the response includes a detailed breakdown of how each document's relevance score was computed. Default is false. */
+  @added(Versions.v2026_05_01_preview)
+  @query
+  explainResults?: boolean;
 }
 
 /** Parameters grouped for suggest operations. */
@@ -893,6 +898,10 @@ model SearchRequest {
 
   /** The query parameters to configure hybrid search behaviors. */
   hybridSearch?: HybridSearch;
+
+  /** A value indicating whether to return scoring explanations for each search result. When set to true, the response includes a detailed breakdown of how each document's relevance score was computed. Default is false. */
+  @added(Versions.v2026_05_01_preview)
+  explainResults?: boolean;
 }
 
 /** The query parameters for vector and hybrid search queries. */
@@ -980,6 +989,12 @@ model SearchResult {
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.documentDebugInfo")
   documentDebugInfo?: DocumentDebugInfo | null;
+
+  /** A detailed breakdown of how the document's relevance score was computed. Only returned when explainResults is set to true in the request. */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "@search.explanation")
+  explanation?: ScoreExplanation;
 }
 
 /** Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type `semantic`. */
@@ -1347,4 +1362,113 @@ model SearchScoreThreshold extends VectorThreshold {
 
   /** The kind of threshold used to filter vector queries */
   kind: "searchScore";
+}
+
+/** The level of detail for scoring explanations returned by the explain operation. */
+@added(Versions.v2026_05_01_preview)
+union ExplainVerbosity {
+  string,
+
+  /** Returns a minimal explanation containing only the final score and top-level component scores. */
+  Simple: "simple",
+
+  /** Returns a moderately detailed explanation including intermediate scoring steps and field-level contributions. */
+  Detailed: "detailed",
+
+  /** Returns the most comprehensive explanation including all scoring components down to individual term statistics. */
+  Full: "full",
+}
+
+/** The category of a score component in a scoring explanation tree. */
+@added(Versions.v2026_05_01_preview)
+union ScoreComponentKind {
+  string,
+
+  /** Term frequency: how often the term appears in the document field. */
+  TermFrequency: "tf",
+
+  /** Inverse document frequency: a measure of how rare the term is across all documents. */
+  InverseDocumentFrequency: "idf",
+
+  /** Field normalization: adjusts the score based on the length of the field. */
+  FieldNorm: "fieldNorm",
+
+  /** Boost: a scoring multiplier applied by a scoring profile or field boost. */
+  Boost: "boost",
+
+  /** Similarity: the overall similarity score computed by the ranking algorithm. */
+  Similarity: "similarity",
+
+  /** Coordination: accounts for how many of the query terms were found in the document. */
+  Coordination: "coordination",
+
+  /** Custom: a score component from a custom scoring function or scoring profile. */
+  Custom: "custom",
+}
+
+/** A node in the scoring explanation tree. Each node represents a component of the overall relevance score with an optional breakdown into sub-components. */
+@added(Versions.v2026_05_01_preview)
+model ScoreExplanation {
+  /** The numeric score contribution of this component. */
+  value: float64;
+
+  /** A human-readable description of what this score component represents. */
+  description: string;
+
+  /** The category of this score component, indicating what type of scoring factor it represents. */
+  kind?: ScoreComponentKind;
+
+  /** The child explanations that make up this component's score. Present when the score can be decomposed into finer-grained factors. */
+  details?: ScoreExplanation[];
+}
+
+/** The request payload for the search explain operation. Contains the search query context and the document to explain scoring for. */
+@added(Versions.v2026_05_01_preview)
+model ExplainRequest {
+  /** The search query text to explain scoring for. Use "*" to explain the base score without a text query. */
+  search: string;
+
+  /** The key of the document to explain scoring for. */
+  documentKey: string;
+
+  /** The level of detail to include in the scoring explanation. Default is 'simple'. */
+  verbosity?: ExplainVerbosity;
+
+  /** An OData expression that filters the documents considered during explanation. */
+  filter?: string;
+
+  /** The name of a scoring profile to evaluate for the document. */
+  scoringProfile?: string;
+
+  /** The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. */
+  scoringParameters?: string[];
+
+  /** A value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax. */
+  queryType?: QueryType;
+
+  /** The comma-separated list of field names to which to scope the full-text search. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
+  @encode(ArrayEncoding.commaDelimited)
+  searchFields?: string[];
+}
+
+/** The result of an explain operation, containing the scoring breakdown for a specific document. */
+@added(Versions.v2026_05_01_preview)
+model ExplainDocumentsResult {
+  /** The key of the document that was explained. */
+  @visibility(Lifecycle.Read)
+  documentKey: string;
+
+  /** The overall relevance score of the document for the given query. */
+  @visibility(Lifecycle.Read)
+  score: float64;
+
+  /** The detailed scoring explanation tree showing how the relevance score was computed. */
+  @visibility(Lifecycle.Read)
+  explanation: ScoreExplanation;
+
+  /** The list of fields that matched the search query in this document. */
+  @visibility(Lifecycle.Read)
+  matchedFields?: string[];
 }
