@@ -559,6 +559,12 @@ model NodeTypeProperties {
    */
   @added(Versions.v2026_02_01)
   enableResilientEphemeralOsDisk?: boolean;
+
+  /**
+   * Specifies the scale in policy for the node type, which will be used when scale in happens on the cluster. If not specified, the default is Default which means the platform will decide which nodes to remove during scale in.
+   */
+  @added(Versions.v2026_04_01_preview)
+  scaleInPolicy?: ScaleInPolicy;
 }
 
 /**
@@ -1297,3 +1303,35 @@ union NodeTypeSkuScaleType {
 }
 
 @@identifiers(NodeTypeListSkuResult.value, #[]);
+
+/**
+ * Specifies the scale in policy mode for a node type.
+ */
+union ScaleInPolicyMode {
+  string,
+
+  /**
+   * Default scale in policy mode where the system will choose which nodes to remove when scaling in.
+   */
+  Default: "Default",
+
+  /**
+   * OldestNode scale in policy mode where the oldest node in the node type will be removed first when scaling in.
+   */
+  OldestNode: "OldestNode",
+
+  /**
+   * NewestNode scale in policy mode where the newest node in the node type will be removed first when scaling in.
+   */
+  NewestNodeFirst: "NewestNodeFirst",
+}
+
+/**
+ * Scale in policy for a node type. This is used to specify the mode for scale in operations on a node type.
+ */
+model ScaleInPolicy {
+  /**
+   * The scale in policy mode for a node type.
+   */
+  mode?: ScaleInPolicyMode;
+}
