@@ -101,6 +101,9 @@
           "SearchListOfferings": {
             "$ref": "./examples/SearchListOfferings.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2153,7 +2156,9 @@
         },
         "applicationSecret": {
           "type": "string",
-          "description": "An AAD client secret that was generated for the App Registration used to authenticate with Azure Key Vault."
+          "format": "password",
+          "description": "An AAD client secret that was generated for the App Registration used to authenticate with Azure Key Vault.",
+          "x-ms-secret": true
         }
       }
     },

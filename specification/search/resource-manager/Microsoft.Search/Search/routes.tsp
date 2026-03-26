@@ -128,10 +128,12 @@ interface Offerings {
   /**
    * Lists all of the features and SKUs offered by the Azure AI Search service in each region. Note: This API returns a non-ARM resource collection and is not RPC-compliant. It will be replaced with an action-style API in the next preview as a breaking change. Customers should avoid taking new dependencies on the current shape.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract"
   @autoRoute
   @get
   @action("offerings")
   @tag("Offerings")
+  @OpenAPI.extension("x-ms-pageable", #{ nextLinkName: null })
   list is ArmProviderActionSync<
     Request = void,
     Response = OfferingsListResult,

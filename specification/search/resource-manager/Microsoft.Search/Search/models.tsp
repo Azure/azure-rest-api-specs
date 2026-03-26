@@ -962,7 +962,7 @@ model AzureActiveDirectoryApplicationCredentials {
   /**
    * An AAD client secret that was generated for the App Registration used to authenticate with Azure Key Vault.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a secret property for encryption key access"
+  @secret
   applicationSecret?: string;
 }
 
