@@ -134,7 +134,6 @@ union SearchSemanticSearch {
 /**
  * Sets options that control the availability of knowledge retrieval. This configuration is only possible for certain Azure AI Search SKUs in certain locations.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "x-ms-enum name needs to be KnowledgeRetrievalBillingTier"
 @added(Versions.v2026_03_01_preview)
 union KnowledgeRetrieval {
   string,
@@ -898,65 +897,55 @@ model SearchResourceEncryptionKey {
   identity?: DataIdentity;
 
   /**
-   * Optional application credentials to authenticate to Azure Active Directory for accessing the Azure Key Vault.
+   * Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead.
    */
-  applicationCredentials?: AzureActiveDirectoryApplicationCredentials;
+  accessCredentials?: AzureActiveDirectoryApplicationCredentials;
 }
 
 /**
- * Identity to use when accessing an Azure Key Vault.
+ * Abstract base type for data identities.
  */
 @added(Versions.v2026_03_01_preview)
-@discriminator("identityType")
+@discriminator("@odata.type")
 model DataIdentity {
   /**
-   * The type of identity.
+   * A URI fragment specifying the type of identity.
    */
-  identityType: DataIdentityType;
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "OData-style discriminator required for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OData-style property name required"
+  `@odata.type`: string;
 }
 
 /**
- * The type of identity used to access the Azure Key Vault.
- */
-@added(Versions.v2026_03_01_preview)
-union DataIdentityType {
-  string,
-
-  /**
-   * No identity.
-   */
-  None: "None",
-
-  /**
-   * User-assigned managed identity.
-   */
-  UserAssigned: "UserAssigned",
-}
-
-/**
- * Indicates that the data identity should be removed (set to none).
+ * Clears the identity property.
  */
 @added(Versions.v2026_03_01_preview)
 model DataNoneIdentity extends DataIdentity {
-  identityType: DataIdentityType.None;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OData-style discriminator value required"
+  `@odata.type`: "#Microsoft.Azure.Search.DataNoneIdentity";
 }
 
 /**
- * Indicates that a user-assigned managed identity should be used to access the Azure Key Vault.
+ * Specifies the user assigned identity to use.
  */
 @added(Versions.v2026_03_01_preview)
 model DataUserAssignedIdentity extends DataIdentity {
-  identityType: DataIdentityType.UserAssigned;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OData-style discriminator value required"
+  `@odata.type`: "#Microsoft.Azure.Search.DataUserAssignedIdentity";
 
   /**
-   * The fully qualified Azure resource ID of a user-assigned managed identity. Format: '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<identityName>'.
+   * The fully qualified Azure resource Id of a user assigned managed identity typically in the form "/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId" that should have been assigned to the search service.
    */
-  userAssignedIdentity?: string;
+  userAssignedIdentity: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 
   /**
-   * The object ID of the Azure Active Directory application that should be granted access to the Azure Key Vault on behalf of the user-assigned managed identity.
+   * Optional for Multi-tenant User-Assigned Managed Identity CMK Support: The client id (as a UUID) of the multi-tenant App Registration that has been configured to federate with the userAssignedIdentity.
    */
-  servicePrincipalObjectId?: string;
+  federatedIdentityClientId?: string;
 }
 
 /**
@@ -1485,6 +1474,13 @@ model OfferingsListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: OfferingsByRegion[];
+
+  /**
+   * The URL to get the next set of offerings, if any.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -1493,23 +1489,20 @@ model OfferingsListResult {
 @added(Versions.v2026_03_01_preview)
 model OfferingsByRegion {
   /**
-   * The Azure region where these offerings are available.
+   * The name of the region.
    */
-  @visibility(Lifecycle.Read)
-  region?: string;
+  regionName?: string;
 
   /**
-   * The list of features available in this region.
+   * The list of features offered in this region.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Features don't have a unique identifier property"
   features?: FeatureOffering[];
 
   /**
-   * The list of SKUs available in this region.
+   * The list of SKUs offered in this region.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "SKUs don't have a unique identifier property"
   skus?: SkuOffering[];
 }
 
@@ -1519,16 +1512,9 @@ model OfferingsByRegion {
 @added(Versions.v2026_03_01_preview)
 model FeatureOffering {
   /**
-   * The name of the feature.
+   * The name of the feature offered in this region.
    */
-  @visibility(Lifecycle.Read)
   name?: string;
-
-  /**
-   * Indicates whether the feature is available in the region.
-   */
-  @visibility(Lifecycle.Read)
-  available?: boolean;
 }
 
 /**
@@ -1537,56 +1523,53 @@ model FeatureOffering {
 @added(Versions.v2026_03_01_preview)
 model SkuOffering {
   /**
-   * The name of the SKU.
+   * The SKU definition.
    */
-  @visibility(Lifecycle.Read)
-  name?: string;
+  sku?: Sku;
 
   /**
-   * Indicates whether the SKU is available in the region.
+   * The limits associated with this SKU offered in this region.
    */
-  @visibility(Lifecycle.Read)
-  available?: boolean;
+  limits?: SkuLimits;
+}
+
+/**
+ * Describes the limits associated with a SKU offering.
+ */
+@added(Versions.v2026_03_01_preview)
+model SkuLimits {
+  /**
+   * The maximum number of indexes available for this SKU.
+   */
+  indexes?: int32;
 
   /**
-   * The maximum number of indexes allowed for this SKU.
+   * The maximum number of indexers available for this SKU.
    */
-  @visibility(Lifecycle.Read)
-  maxIndexes?: int32;
+  indexers?: int32;
 
   /**
-   * The maximum number of indexers allowed for this SKU.
+   * The maximum storage size in Gigabytes available for this SKU per partition.
    */
-  @visibility(Lifecycle.Read)
-  maxIndexers?: int32;
+  partitionStorageInGigabytes?: float32;
 
   /**
-   * The maximum storage size in bytes allowed for this SKU.
+   * The maximum vector storage size in Gigabytes available for this SKU per partition.
    */
-  @visibility(Lifecycle.Read)
-  maxStorageSizeInBytes?: int64;
+  partitionVectorStorageInGigabytes?: float32;
 
   /**
-   * The maximum vector storage size in bytes allowed for this SKU.
+   * The maximum number of search units available for this SKU.
    */
-  @visibility(Lifecycle.Read)
-  maxVectorStorageSizeInBytes?: int64;
+  searchUnits?: int32;
 
   /**
-   * The maximum number of search units allowed for this SKU.
+   * The maximum number of replicas available for this SKU.
    */
-  @visibility(Lifecycle.Read)
-  maxSearchUnits?: int32;
+  replicas?: int32;
 
   /**
-   * The maximum number of replicas allowed for this SKU.
+   * The maximum number of partitions available for this SKU.
    */
-  @visibility(Lifecycle.Read)
-  maxReplicas?: int32;
-
-  /**
-   * The maximum number of partitions allowed for this SKU.
-   */
-  @visibility(Lifecycle.Read)
-  maxPartitions?: int32;
+  partitions?: int32;
 }

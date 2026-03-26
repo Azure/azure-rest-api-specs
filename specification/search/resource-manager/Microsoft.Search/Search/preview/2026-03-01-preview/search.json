@@ -2302,51 +2302,27 @@
     },
     "DataIdentity": {
       "type": "object",
-      "description": "Identity to use when accessing an Azure Key Vault.",
+      "description": "Abstract base type for data identities.",
       "properties": {
-        "identityType": {
-          "$ref": "#/definitions/DataIdentityType",
-          "description": "The type of identity."
+        "@odata.type": {
+          "type": "string",
+          "description": "A URI fragment specifying the type of identity."
         }
       },
-      "discriminator": "identityType",
+      "discriminator": "@odata.type",
       "required": [
-        "identityType"
+        "@odata.type"
       ]
-    },
-    "DataIdentityType": {
-      "type": "string",
-      "description": "The type of identity used to access the Azure Key Vault.",
-      "enum": [
-        "None",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "DataIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User-assigned managed identity."
-          }
-        ]
-      }
     },
     "DataNoneIdentity": {
       "type": "object",
-      "description": "Indicates that the data identity should be removed (set to none).",
+      "description": "Clears the identity property.",
       "allOf": [
         {
           "$ref": "#/definitions/DataIdentity"
         }
       ],
-      "x-ms-discriminator-value": "None"
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataNoneIdentity"
     },
     "DataPlaneAadOrApiKeyAuthOption": {
       "type": "object",
@@ -2373,23 +2349,34 @@
     },
     "DataUserAssignedIdentity": {
       "type": "object",
-      "description": "Indicates that a user-assigned managed identity should be used to access the Azure Key Vault.",
+      "description": "Specifies the user assigned identity to use.",
       "properties": {
         "userAssignedIdentity": {
           "type": "string",
-          "description": "The fully qualified Azure resource ID of a user-assigned managed identity. Format: '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<identityName>'."
+          "format": "arm-id",
+          "description": "The fully qualified Azure resource Id of a user assigned managed identity typically in the form \"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\" that should have been assigned to the search service.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         },
-        "servicePrincipalObjectId": {
+        "federatedIdentityClientId": {
           "type": "string",
-          "description": "The object ID of the Azure Active Directory application that should be granted access to the Azure Key Vault on behalf of the user-assigned managed identity."
+          "description": "Optional for Multi-tenant User-Assigned Managed Identity CMK Support: The client id (as a UUID) of the multi-tenant App Registration that has been configured to federate with the userAssignedIdentity."
         }
       },
+      "required": [
+        "userAssignedIdentity"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataIdentity"
         }
       ],
-      "x-ms-discriminator-value": "UserAssigned"
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataUserAssignedIdentity"
     },
     "EncryptionWithCmk": {
       "type": "object",
@@ -2416,13 +2403,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the feature.",
-          "readOnly": true
-        },
-        "available": {
-          "type": "boolean",
-          "description": "Indicates whether the feature is available in the region.",
-          "readOnly": true
+          "description": "The name of the feature offered in this region."
         }
       }
     },
@@ -2648,26 +2629,23 @@
       "type": "object",
       "description": "Describes the Azure AI Search features and SKUs available in a specific Azure region.",
       "properties": {
-        "region": {
+        "regionName": {
           "type": "string",
-          "description": "The Azure region where these offerings are available.",
-          "readOnly": true
+          "description": "The name of the region."
         },
         "features": {
           "type": "array",
-          "description": "The list of features available in this region.",
+          "description": "The list of features offered in this region.",
           "items": {
             "$ref": "#/definitions/FeatureOffering"
-          },
-          "readOnly": true
+          }
         },
         "skus": {
           "type": "array",
-          "description": "The list of SKUs available in this region.",
+          "description": "The list of SKUs offered in this region.",
           "items": {
             "$ref": "#/definitions/SkuOffering"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -2681,6 +2659,11 @@
           "items": {
             "$ref": "#/definitions/OfferingsByRegion"
           },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of offerings, if any.",
           "readOnly": true
         }
       },
@@ -3234,9 +3217,9 @@
           "$ref": "#/definitions/DataIdentity",
           "description": "An explicit identity to use when accessing the Azure Key Vault specified in the vaultUri. If this is not provided, the search service will use its own system-assigned managed identity to access the key vault. Providing an explicit identity is supported for services that need to access a key vault in a different tenant or in a key vault with a different access policy (e.g., RBAC based)."
         },
-        "applicationCredentials": {
+        "accessCredentials": {
           "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
-          "description": "Optional application credentials to authenticate to Azure Active Directory for accessing the Azure Key Vault."
+          "description": "Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead."
         }
       }
     },
@@ -3828,6 +3811,47 @@
         "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
       }
     },
+    "SkuLimits": {
+      "type": "object",
+      "description": "Describes the limits associated with a SKU offering.",
+      "properties": {
+        "indexes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of indexes available for this SKU."
+        },
+        "indexers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of indexers available for this SKU."
+        },
+        "partitionStorageInGigabytes": {
+          "type": "number",
+          "format": "float",
+          "description": "The maximum storage size in Gigabytes available for this SKU per partition."
+        },
+        "partitionVectorStorageInGigabytes": {
+          "type": "number",
+          "format": "float",
+          "description": "The maximum vector storage size in Gigabytes available for this SKU per partition."
+        },
+        "searchUnits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of search units available for this SKU."
+        },
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of replicas available for this SKU."
+        },
+        "partitions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of partitions available for this SKU."
+        }
+      }
+    },
     "SkuName": {
       "type": "string",
       "description": "The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions. 'serverless': Serverless tier with auto-scaling capabilities.",
@@ -3892,57 +3916,13 @@
       "type": "object",
       "description": "Describes a SKU offering with its limits in a specific region.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the SKU.",
-          "readOnly": true
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU definition."
         },
-        "available": {
-          "type": "boolean",
-          "description": "Indicates whether the SKU is available in the region.",
-          "readOnly": true
-        },
-        "maxIndexes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of indexes allowed for this SKU.",
-          "readOnly": true
-        },
-        "maxIndexers": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of indexers allowed for this SKU.",
-          "readOnly": true
-        },
-        "maxStorageSizeInBytes": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The maximum storage size in bytes allowed for this SKU.",
-          "readOnly": true
-        },
-        "maxVectorStorageSizeInBytes": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The maximum vector storage size in bytes allowed for this SKU.",
-          "readOnly": true
-        },
-        "maxSearchUnits": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of search units allowed for this SKU.",
-          "readOnly": true
-        },
-        "maxReplicas": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of replicas allowed for this SKU.",
-          "readOnly": true
-        },
-        "maxPartitions": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of partitions allowed for this SKU.",
-          "readOnly": true
+        "limits": {
+          "$ref": "#/definitions/SkuLimits",
+          "description": "The limits associated with this SKU offered in this region."
         }
       }
     },
