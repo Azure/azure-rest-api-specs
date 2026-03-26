@@ -2906,40 +2906,17 @@
       "type": "object",
       "description": "Prometheus instant query enrichment object.",
       "properties": {
-        "linkToApi": {
-          "type": "string",
-          "description": "Link to Prometheus query API (Url format)."
-        },
-        "datasources": {
-          "type": "array",
-          "description": "An array of the azure monitor workspace resource ids.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "grafanaExplorePath": {
-          "type": "string",
-          "description": "Partial link to the Grafana explore API."
-        },
-        "query": {
-          "type": "string",
-          "description": "The Prometheus expression query."
-        },
         "time": {
           "type": "string",
           "description": "The date and the time of the evaluation."
         }
       },
       "required": [
-        "linkToApi",
-        "datasources",
-        "grafanaExplorePath",
-        "query",
         "time"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AlertEnrichmentItem"
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
         }
       ],
       "x-ms-discriminator-value": "PrometheusInstantQuery"
@@ -2948,25 +2925,6 @@
       "type": "object",
       "description": "Prometheus instant query enrichment object.",
       "properties": {
-        "linkToApi": {
-          "type": "string",
-          "description": "Link to Prometheus query API (Url format)."
-        },
-        "datasources": {
-          "type": "array",
-          "description": "An array of the azure monitor workspace resource ids.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "grafanaExplorePath": {
-          "type": "string",
-          "description": "Partial link to the Grafana explore API."
-        },
-        "query": {
-          "type": "string",
-          "description": "The Prometheus expression query."
-        },
         "start": {
           "type": "string",
           "format": "date-time",
@@ -2983,17 +2941,13 @@
         }
       },
       "required": [
-        "linkToApi",
-        "datasources",
-        "grafanaExplorePath",
-        "query",
         "start",
         "end",
         "step"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AlertEnrichmentItem"
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
         }
       ],
       "x-ms-discriminator-value": "PrometheusRangeQuery"
