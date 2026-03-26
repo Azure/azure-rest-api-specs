@@ -1,0 +1,3064 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Model Registry Service",
+    "version": "1.0.0",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Azure ML endpoints.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://ml.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://ml.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/modelregistry/v1.0/meta/migration": {
+      "post": {
+        "operationId": "Migration_StartMigration",
+        "description": "Start a migration operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "migration",
+            "in": "query",
+            "description": "The migration name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout duration.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "collectionId",
+            "in": "query",
+            "description": "The collection identifier.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workspaceId",
+            "in": "query",
+            "description": "The workspace identifier.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/assets": {
+      "get": {
+        "operationId": "Assets_List",
+        "description": "List assets in a workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "runId",
+            "in": "query",
+            "description": "Filter by run identifier.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "description": "Filter by project identifier.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Filter by name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "Filter by tag.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "Number of results to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Skip token for pagination.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "skipToken"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Filter by tags string.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "description": "Filter by properties string.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter by type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Order by expression.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CreatedAtDesc",
+              "CreatedAtAsc",
+              "UpdatedAtDesc",
+              "UpdatedAtAsc"
+            ],
+            "x-ms-enum": {
+              "name": "OrderString",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "CreatedAtDesc",
+                  "value": "CreatedAtDesc",
+                  "description": "Sort by created time descending."
+                },
+                {
+                  "name": "CreatedAtAsc",
+                  "value": "CreatedAtAsc",
+                  "description": "Sort by created time ascending."
+                },
+                {
+                  "name": "UpdatedAtDesc",
+                  "value": "UpdatedAtDesc",
+                  "description": "Sort by updated time descending."
+                },
+                {
+                  "name": "UpdatedAtAsc",
+                  "value": "UpdatedAtAsc",
+                  "description": "Sort by updated time ascending."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssetPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "Assets_Create",
+        "description": "Create a new asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The asset to create.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/assets/{id}": {
+      "get": {
+        "operationId": "Assets_QueryById",
+        "description": "Get an asset by identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The asset identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Assets_Patch",
+        "description": "Patch an asset.",
+        "consumes": [
+          "application/json-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The asset identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The patch operations to apply.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PatchOperation"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Assets_Delete",
+        "description": "Delete an asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The asset identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/extensiveModels/{id}": {
+      "get": {
+        "operationId": "ExtensiveModels_QueryById",
+        "description": "Get an extensive model by identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The extensive model identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExtensiveModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models": {
+      "get": {
+        "operationId": "Models_List",
+        "description": "List models in a workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Filter by model name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "Filter by tag.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Filter by version.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "framework",
+            "in": "query",
+            "description": "Filter by framework.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "Filter by description.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "Number of results to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset for pagination.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Skip token for pagination.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "skipToken"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Filter by tags string.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "description": "Filter by properties string.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "query",
+            "description": "Filter by run identifier.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "datasetId",
+            "in": "query",
+            "description": "Filter by dataset identifier.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Order by expression.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "latestVersionOnly",
+            "in": "query",
+            "description": "Whether to return only the latest version.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "feed",
+            "in": "query",
+            "description": "Filter by feed.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "listViewType",
+            "in": "query",
+            "description": "The list view type filter.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ActiveOnly",
+                  "value": "ActiveOnly",
+                  "description": "Active items only."
+                },
+                {
+                  "name": "ArchivedOnly",
+                  "value": "ArchivedOnly",
+                  "description": "Archived items only."
+                },
+                {
+                  "name": "All",
+                  "value": "All",
+                  "description": "All items."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModelPagedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "Models_Register",
+        "description": "Register a new model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "autoVersion",
+            "in": "query",
+            "description": "Whether to auto-version the model.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The model to register.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{id}": {
+      "get": {
+        "operationId": "Models_QueryById",
+        "description": "Get a model by identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The model identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "includeDeploymentSettings",
+            "in": "query",
+            "description": "Whether to include deployment settings.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Models_Patch",
+        "description": "Patch a model.",
+        "consumes": [
+          "application/json-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The model identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The patch operations to apply.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PatchOperation"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Models_Delete",
+        "description": "Delete a model by identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The model identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/batchGetResolvedUris": {
+      "post": {
+        "operationId": "Models_BatchGetResolvedUris",
+        "description": "Batch get resolved URIs for models.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The batch resolve request.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BatchGetResolvedUrisDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BatchModelPathResponseDto"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/createUnregisteredInput": {
+      "post": {
+        "operationId": "Models_CreateUnregisteredInputModel",
+        "description": "Create an unregistered input model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The unregistered input model to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUnregisteredInputModelDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/createUnregisteredOutput": {
+      "post": {
+        "operationId": "Models_CreateUnregisteredOutputModel",
+        "description": "Create an unregistered output model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The unregistered output model to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUnregisteredOutputModelDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/deploymentSettings": {
+      "post": {
+        "operationId": "Models_DeploymentSettings",
+        "description": "Set deployment settings for models.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The model settings identifiers.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ModelSettingsIdentifiers"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/list": {
+      "post": {
+        "operationId": "Models_ListQueryPost",
+        "description": "List models using POST with request body.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The list models request.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ListModelsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModelListModelsRequestPagedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/querybatch": {
+      "post": {
+        "operationId": "Models_BatchQuery",
+        "description": "Batch query models by identifiers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The batch query request.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ModelBatchDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModelBatchResponseDto"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Artifact": {
+      "type": "object",
+      "description": "An artifact reference within an asset.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The artifact identifier."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "The artifact prefix."
+        }
+      }
+    },
+    "Asset": {
+      "type": "object",
+      "description": "An asset in the model registry.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The asset identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "The asset name."
+        },
+        "type": {
+          "type": "string",
+          "description": "The asset type."
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description."
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "The list of artifacts associated with the asset.",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "kvTags": {
+          "type": "object",
+          "description": "Key-value tags for the asset.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties of the asset.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "runid": {
+          "type": "string",
+          "description": "The run identifier associated with the asset."
+        },
+        "projectid": {
+          "type": "string",
+          "description": "The project identifier associated with the asset."
+        },
+        "meta": {
+          "type": "object",
+          "description": "Metadata for the asset.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the asset was created."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AssetDto": {
+      "type": "object",
+      "description": "An asset data transfer object.",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The asset identifier."
+        },
+        "entityId": {
+          "type": "string",
+          "description": "The entity identifier."
+        },
+        "dataItems": {
+          "type": "object",
+          "description": "Data items keyed by name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DataItem"
+          }
+        },
+        "dataReferences": {
+          "$ref": "#/definitions/DataReferences",
+          "description": "Data references for the asset."
+        },
+        "shouldIndex": {
+          "type": "boolean",
+          "description": "Whether the asset should be indexed."
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "The list of dependent assets.",
+          "items": {
+            "$ref": "#/definitions/DependentAsset"
+          }
+        },
+        "intellectualPropertyPublisherInformation": {
+          "$ref": "#/definitions/IntellectualPropertyPublisherInformation",
+          "description": "Intellectual property publisher information."
+        }
+      }
+    },
+    "AssetPaginatedResult": {
+      "type": "object",
+      "description": "Paginated result of assets.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of assets.",
+          "items": {
+            "$ref": "#/definitions/Asset"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The continuation token for the next page."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page."
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "BatchGetResolvedUrisDto": {
+      "type": "object",
+      "description": "Request DTO for batch resolving model URIs.",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "The list of model identifiers to resolve.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BatchModelPathResponseDto": {
+      "type": "object",
+      "description": "Response DTO for batch resolved model URIs.",
+      "properties": {
+        "values": {
+          "type": "object",
+          "description": "The resolved model paths keyed by model identifier.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ModelPathResponseDto"
+          }
+        }
+      }
+    },
+    "BlobReference": {
+      "type": "object",
+      "description": "A blob storage reference.",
+      "properties": {
+        "blobUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The blob URI."
+        },
+        "storageAccountArmId": {
+          "type": "string",
+          "description": "The storage account ARM identifier."
+        }
+      }
+    },
+    "BlobReferenceForConsumptionDto": {
+      "type": "object",
+      "description": "A blob reference for consumption with credentials.",
+      "properties": {
+        "blobUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The blob URI."
+        },
+        "storageAccountArmId": {
+          "type": "string",
+          "description": "The storage account ARM identifier."
+        },
+        "credential": {
+          "$ref": "#/definitions/DataReferenceCredentialDto",
+          "description": "The credential for accessing the blob."
+        }
+      }
+    },
+    "ComputeEnvironmentType": {
+      "type": "string",
+      "description": "Compute environment type for service deployments.",
+      "enum": [
+        "ACS",
+        "FPGA",
+        "ACI",
+        "AKS",
+        "AMLCOMPUTE",
+        "IOT",
+        "MIR",
+        "AKSENDPOINT",
+        "MIRSINGLEMODEL",
+        "MIRAMLCOMPUTE",
+        "MIRGA",
+        "AMLARC",
+        "BATCHAMLCOMPUTE",
+        "UNKNOWN"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeEnvironmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ACS",
+            "value": "ACS",
+            "description": "Azure Container Service."
+          },
+          {
+            "name": "FPGA",
+            "value": "FPGA",
+            "description": "Field-Programmable Gate Array."
+          },
+          {
+            "name": "ACI",
+            "value": "ACI",
+            "description": "Azure Container Instances."
+          },
+          {
+            "name": "AKS",
+            "value": "AKS",
+            "description": "Azure Kubernetes Service."
+          },
+          {
+            "name": "AMLCOMPUTE",
+            "value": "AMLCOMPUTE",
+            "description": "Azure ML Compute."
+          },
+          {
+            "name": "IOT",
+            "value": "IOT",
+            "description": "Internet of Things."
+          },
+          {
+            "name": "MIR",
+            "value": "MIR",
+            "description": "Managed Inference Runtime."
+          },
+          {
+            "name": "AKSENDPOINT",
+            "value": "AKSENDPOINT",
+            "description": "AKS Endpoint."
+          },
+          {
+            "name": "MIRSINGLEMODEL",
+            "value": "MIRSINGLEMODEL",
+            "description": "MIR Single Model."
+          },
+          {
+            "name": "MIRAMLCOMPUTE",
+            "value": "MIRAMLCOMPUTE",
+            "description": "MIR AML Compute."
+          },
+          {
+            "name": "MIRGA",
+            "value": "MIRGA",
+            "description": "MIR GA."
+          },
+          {
+            "name": "AMLARC",
+            "value": "AMLARC",
+            "description": "Azure Arc ML."
+          },
+          {
+            "name": "BATCHAMLCOMPUTE",
+            "value": "BATCHAMLCOMPUTE",
+            "description": "Batch AML Compute."
+          },
+          {
+            "name": "UNKNOWN",
+            "value": "UNKNOWN",
+            "description": "Unknown compute type."
+          }
+        ]
+      }
+    },
+    "ContainerResourceRequirements": {
+      "type": "object",
+      "description": "Container resource requirements for model deployment.",
+      "properties": {
+        "cpu": {
+          "type": "number",
+          "format": "double",
+          "description": "CPU cores requested."
+        },
+        "cpuLimit": {
+          "type": "number",
+          "format": "double",
+          "description": "CPU cores limit."
+        },
+        "memoryInGB": {
+          "type": "number",
+          "format": "double",
+          "description": "Memory in GB requested."
+        },
+        "memoryInGBLimit": {
+          "type": "number",
+          "format": "double",
+          "description": "Memory in GB limit."
+        },
+        "gpuEnabled": {
+          "type": "boolean",
+          "description": "Whether GPU is enabled."
+        },
+        "gpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of GPUs."
+        },
+        "fpga": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of FPGAs."
+        }
+      }
+    },
+    "CreateUnregisteredInputModelDto": {
+      "type": "object",
+      "description": "DTO for creating an unregistered input model.",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "The run identifier."
+        },
+        "inputName": {
+          "type": "string",
+          "description": "The input name."
+        },
+        "path": {
+          "type": "string",
+          "format": "uri",
+          "description": "The path to the model."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the model."
+        }
+      }
+    },
+    "CreateUnregisteredOutputModelDto": {
+      "type": "object",
+      "description": "DTO for creating an unregistered output model.",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "The run identifier."
+        },
+        "outputName": {
+          "type": "string",
+          "description": "The output name."
+        },
+        "path": {
+          "type": "string",
+          "format": "uri",
+          "description": "The path to the model."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the model."
+        }
+      }
+    },
+    "CreatedBy": {
+      "type": "object",
+      "description": "Information about who created a resource.",
+      "properties": {
+        "userObjectId": {
+          "type": "string",
+          "description": "The user object identifier."
+        },
+        "userTenantId": {
+          "type": "string",
+          "description": "The user tenant identifier."
+        },
+        "userName": {
+          "type": "string",
+          "description": "The user name."
+        }
+      }
+    },
+    "CreationContext": {
+      "type": "object",
+      "description": "Context information about resource creation.",
+      "properties": {
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the resource was created."
+        },
+        "createdBy": {
+          "$ref": "#/definitions/CreatedBy",
+          "description": "Information about who created the resource."
+        },
+        "creationSource": {
+          "type": "string",
+          "description": "The creation source."
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "DataItem": {
+      "type": "object",
+      "description": "A data item.",
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "The data value."
+        }
+      }
+    },
+    "DataReferenceCredentialDto": {
+      "type": "object",
+      "description": "A data reference credential.",
+      "properties": {
+        "credentialType": {
+          "type": "string",
+          "description": "The credential type."
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "DataReferences": {
+      "type": "object",
+      "description": "Data references containing blob and image registry references.",
+      "properties": {
+        "blobReferences": {
+          "type": "object",
+          "description": "Blob references keyed by name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/BlobReference"
+          }
+        },
+        "imageRegistryReferences": {
+          "type": "object",
+          "description": "Image registry references keyed by name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ImageReference"
+          }
+        }
+      }
+    },
+    "DataReferencesForConsumptionDto": {
+      "type": "object",
+      "description": "Data references for consumption with credentials.",
+      "properties": {
+        "blobReferences": {
+          "type": "object",
+          "description": "Blob references for consumption keyed by name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/BlobReferenceForConsumptionDto"
+          }
+        },
+        "imageRegistryReferences": {
+          "type": "object",
+          "description": "Image registry references for consumption keyed by name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ImageReferenceForConsumptionDto"
+          }
+        }
+      }
+    },
+    "DatasetReference": {
+      "type": "object",
+      "description": "A dataset reference.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The dataset name."
+        },
+        "id": {
+          "type": "string",
+          "description": "The dataset identifier."
+        }
+      }
+    },
+    "DependencyMapDto": {
+      "type": "object",
+      "description": "A dependency map containing dependency items.",
+      "properties": {
+        "dependencies": {
+          "type": "array",
+          "description": "The list of dependency items.",
+          "items": {
+            "$ref": "#/definitions/DependencyMapItemDto"
+          }
+        }
+      }
+    },
+    "DependencyMapItemDto": {
+      "type": "object",
+      "description": "A dependency map item linking source to destination.",
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "description": "The source identifier."
+        },
+        "destinationId": {
+          "type": "string",
+          "description": "The destination identifier."
+        }
+      }
+    },
+    "DependentAsset": {
+      "type": "object",
+      "description": "A dependent asset reference.",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The dependent asset identifier."
+        }
+      }
+    },
+    "DependentEntitiesDto": {
+      "type": "object",
+      "description": "Dependent entities for an asset.",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The asset identifier."
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "The list of dependent assets.",
+          "items": {
+            "$ref": "#/definitions/DependentAsset"
+          }
+        }
+      }
+    },
+    "DeploymentType": {
+      "type": "string",
+      "description": "Deployment type for services.",
+      "enum": [
+        "GRPCRealtimeEndpoint",
+        "HttpRealtimeEndpoint",
+        "Batch"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GRPCRealtimeEndpoint",
+            "value": "GRPCRealtimeEndpoint",
+            "description": "gRPC real-time endpoint."
+          },
+          {
+            "name": "HttpRealtimeEndpoint",
+            "value": "HttpRealtimeEndpoint",
+            "description": "HTTP real-time endpoint."
+          },
+          {
+            "name": "Batch",
+            "value": "Batch",
+            "description": "Batch deployment."
+          }
+        ]
+      }
+    },
+    "EntityKind": {
+      "type": "string",
+      "description": "Entity kind for index entities.",
+      "enum": [
+        "Invalid",
+        "LineageRoot",
+        "Versioned",
+        "Unversioned"
+      ],
+      "x-ms-enum": {
+        "name": "EntityKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid entity."
+          },
+          {
+            "name": "LineageRoot",
+            "value": "LineageRoot",
+            "description": "Lineage root entity."
+          },
+          {
+            "name": "Versioned",
+            "value": "Versioned",
+            "description": "Versioned entity."
+          },
+          {
+            "name": "Unversioned",
+            "value": "Unversioned",
+            "description": "Unversioned entity."
+          }
+        ]
+      }
+    },
+    "ExtensibleObject": {
+      "type": "object",
+      "description": "An extensible object that allows additional properties.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "ExtensiveModel": {
+      "type": "object",
+      "description": "An extensive model with associated services and assets.",
+      "properties": {
+        "Model": {
+          "$ref": "#/definitions/Model",
+          "description": "The model."
+        },
+        "ServiceList": {
+          "type": "array",
+          "description": "The list of services associated with the model.",
+          "items": {
+            "$ref": "#/definitions/ServiceResponseBase"
+          }
+        },
+        "AssetList": {
+          "type": "array",
+          "description": "The list of assets associated with the model.",
+          "items": {
+            "$ref": "#/definitions/Asset"
+          }
+        }
+      }
+    },
+    "FeedIndexEntityDto": {
+      "type": "object",
+      "description": "A feed index entity DTO.",
+      "properties": {
+        "indexEntity": {
+          "$ref": "#/definitions/IndexEntity",
+          "description": "The index entity."
+        },
+        "schemaId": {
+          "type": "string",
+          "description": "The schema identifier."
+        },
+        "entitySchema": {
+          "type": "string",
+          "description": "The entity schema."
+        }
+      }
+    },
+    "FeedIndexEntityRequestDto": {
+      "type": "object",
+      "description": "A feed index entity request DTO.",
+      "properties": {
+        "feedEntity": {
+          "$ref": "#/definitions/AssetDto",
+          "description": "The feed entity."
+        },
+        "labelToVersionMapping": {
+          "type": "object",
+          "description": "Label to version mapping.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ImageReference": {
+      "type": "object",
+      "description": "An image registry reference.",
+      "properties": {
+        "imageRegistryReference": {
+          "type": "string",
+          "description": "The image registry reference string."
+        }
+      }
+    },
+    "ImageReferenceForConsumptionDto": {
+      "type": "object",
+      "description": "An image registry reference for consumption with credentials.",
+      "properties": {
+        "imageRegistryReference": {
+          "type": "string",
+          "description": "The image registry reference string."
+        },
+        "credential": {
+          "$ref": "#/definitions/DataReferenceCredentialDto",
+          "description": "The credential for accessing the image."
+        }
+      }
+    },
+    "IndexAnnotations": {
+      "type": "object",
+      "description": "Index annotations for an entity.",
+      "properties": {
+        "archived": {
+          "type": "boolean",
+          "description": "Whether the entity is archived."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags for the entity.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "IndexEntity": {
+      "type": "object",
+      "description": "An index entity.",
+      "properties": {
+        "schemaId": {
+          "type": "string",
+          "description": "The schema identifier."
+        },
+        "entityId": {
+          "type": "string",
+          "description": "The entity identifier."
+        },
+        "kind": {
+          "$ref": "#/definitions/EntityKind",
+          "description": "The entity kind."
+        },
+        "annotations": {
+          "$ref": "#/definitions/IndexAnnotations",
+          "description": "The index annotations."
+        },
+        "properties": {
+          "$ref": "#/definitions/IndexProperties",
+          "description": "The index properties."
+        },
+        "internal": {
+          "$ref": "#/definitions/ExtensibleObject",
+          "description": "Internal extensible data."
+        },
+        "updateSequence": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The update sequence number."
+        },
+        "type": {
+          "type": "string",
+          "description": "The entity type."
+        },
+        "version": {
+          "type": "string",
+          "description": "The entity version.",
+          "readOnly": true
+        },
+        "entityContainerId": {
+          "type": "string",
+          "description": "The entity container identifier.",
+          "readOnly": true
+        },
+        "entityObjectId": {
+          "type": "string",
+          "description": "The entity object identifier.",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "relationships": {
+          "type": "array",
+          "description": "The list of relationships.",
+          "items": {
+            "$ref": "#/definitions/Relationship"
+          }
+        },
+        "assetId": {
+          "type": "string",
+          "description": "The asset identifier."
+        }
+      }
+    },
+    "IndexProperties": {
+      "type": "object",
+      "description": "Index properties for an entity.",
+      "properties": {
+        "creationContext": {
+          "$ref": "#/definitions/CreationContext",
+          "description": "The creation context."
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "InnerErrorDetails": {
+      "type": "object",
+      "description": "Inner error detail information.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target."
+        }
+      }
+    },
+    "IntellectualPropertyPublisherInformation": {
+      "type": "object",
+      "description": "Intellectual property publisher information.",
+      "properties": {
+        "intellectualPropertyPublisher": {
+          "type": "string",
+          "description": "The intellectual property publisher."
+        }
+      }
+    },
+    "ListModelsRequest": {
+      "type": "object",
+      "description": "Request body for listing models.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Filter by model name."
+        },
+        "tag": {
+          "type": "string",
+          "description": "Filter by tag."
+        },
+        "version": {
+          "type": "string",
+          "description": "Filter by version."
+        },
+        "framework": {
+          "type": "string",
+          "description": "Filter by framework."
+        },
+        "description": {
+          "type": "string",
+          "description": "Filter by description."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of results to return."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Offset for pagination."
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "Skip token for pagination."
+        },
+        "tags": {
+          "type": "string",
+          "description": "Filter by tags string."
+        },
+        "properties": {
+          "type": "string",
+          "description": "Filter by properties string."
+        },
+        "runId": {
+          "type": "string",
+          "description": "Filter by run identifier."
+        },
+        "datasetId": {
+          "type": "string",
+          "description": "Filter by dataset identifier."
+        },
+        "orderBy": {
+          "$ref": "#/definitions/OrderString",
+          "description": "Order by expression."
+        },
+        "latestVersionOnly": {
+          "type": "boolean",
+          "description": "Whether to return only the latest version."
+        },
+        "modifiedAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Filter by modified after date."
+        },
+        "modifiedBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Filter by modified before date."
+        },
+        "listViewType": {
+          "$ref": "#/definitions/ListViewType",
+          "description": "The list view type filter."
+        }
+      }
+    },
+    "ListViewType": {
+      "type": "string",
+      "description": "List view type filter for models.",
+      "enum": [
+        "ActiveOnly",
+        "ArchivedOnly",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "ListViewType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ActiveOnly",
+            "value": "ActiveOnly",
+            "description": "Active items only."
+          },
+          {
+            "name": "ArchivedOnly",
+            "value": "ArchivedOnly",
+            "description": "Archived items only."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All items."
+          }
+        ]
+      }
+    },
+    "Model": {
+      "type": "object",
+      "description": "A machine learning model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The model identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "The model name."
+        },
+        "framework": {
+          "type": "string",
+          "description": "The framework used to create the model."
+        },
+        "frameworkVersion": {
+          "type": "string",
+          "description": "The framework version."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The model version number."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with the model.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "datasets": {
+          "type": "array",
+          "description": "Dataset references used by the model.",
+          "items": {
+            "$ref": "#/definitions/DatasetReference"
+          }
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the model."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "The MIME type of the model."
+        },
+        "description": {
+          "type": "string",
+          "description": "The model description."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the model was created."
+        },
+        "modifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the model was last modified."
+        },
+        "unpack": {
+          "type": "boolean",
+          "description": "Whether to unpack the model."
+        },
+        "parentModelId": {
+          "type": "string",
+          "description": "The parent model identifier."
+        },
+        "runId": {
+          "type": "string",
+          "description": "The run identifier associated with the model."
+        },
+        "experimentName": {
+          "type": "string",
+          "description": "The experiment name associated with the model."
+        },
+        "kvTags": {
+          "type": "object",
+          "description": "Key-value tags for the model.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties of the model.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "derivedModelIds": {
+          "type": "array",
+          "description": "Identifiers of derived models.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inputsSchema": {
+          "type": "array",
+          "description": "Input schema definitions.",
+          "items": {
+            "$ref": "#/definitions/ModelSchema"
+          }
+        },
+        "outputsSchema": {
+          "type": "array",
+          "description": "Output schema definitions.",
+          "items": {
+            "$ref": "#/definitions/ModelSchema"
+          }
+        },
+        "sampleInputData": {
+          "type": "string",
+          "description": "Sample input data."
+        },
+        "sampleOutputData": {
+          "type": "string",
+          "description": "Sample output data."
+        },
+        "resourceRequirements": {
+          "$ref": "#/definitions/ContainerResourceRequirements",
+          "description": "Container resource requirements for the model."
+        },
+        "createdBy": {
+          "$ref": "#/definitions/User",
+          "description": "The user who created the model."
+        },
+        "modifiedBy": {
+          "$ref": "#/definitions/User",
+          "description": "The user who last modified the model."
+        },
+        "flavors": {
+          "type": "object",
+          "description": "Model flavors as nested key-value maps.",
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          }
+        },
+        "modelFormat": {
+          "$ref": "#/definitions/ModelFormatEnum",
+          "description": "The model format."
+        },
+        "stage": {
+          "type": "string",
+          "description": "The model stage."
+        },
+        "modelContainerId": {
+          "type": "string",
+          "description": "The model container identifier."
+        },
+        "mmsId": {
+          "type": "string",
+          "description": "The MMS identifier."
+        },
+        "defaultDeploymentSettings": {
+          "$ref": "#/definitions/ModelDeploymentSettings",
+          "description": "Default deployment settings for the model."
+        },
+        "isAnonymous": {
+          "type": "boolean",
+          "description": "Whether the model is anonymous."
+        },
+        "isArchived": {
+          "type": "boolean",
+          "description": "Whether the model is archived."
+        },
+        "isRegistered": {
+          "type": "boolean",
+          "description": "Whether the model is registered."
+        },
+        "dataPath": {
+          "type": "string",
+          "format": "uri",
+          "description": "The data path of the model."
+        },
+        "modelType": {
+          "type": "string",
+          "description": "The model type."
+        },
+        "assetId": {
+          "type": "string",
+          "description": "The asset identifier."
+        }
+      },
+      "required": [
+        "name",
+        "mimeType"
+      ]
+    },
+    "ModelBatchDto": {
+      "type": "object",
+      "description": "Batch query DTO for models.",
+      "properties": {
+        "modelIds": {
+          "type": "array",
+          "description": "The list of model identifiers to query.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ModelBatchResponseDto": {
+      "type": "object",
+      "description": "Batch response DTO for models.",
+      "properties": {
+        "models": {
+          "type": "object",
+          "description": "The models keyed by identifier.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Model"
+          }
+        }
+      }
+    },
+    "ModelContainerRequest": {
+      "type": "object",
+      "description": "Model container request.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The container name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The container description."
+        },
+        "kvTags": {
+          "type": "object",
+          "description": "Key-value tags for the container.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isArchived": {
+          "type": "boolean",
+          "description": "Whether the container is archived."
+        },
+        "isRegistered": {
+          "type": "boolean",
+          "description": "Whether the container is registered."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ModelDeploymentSettings": {
+      "type": "object",
+      "description": "Model deployment settings.",
+      "properties": {
+        "modelFormat": {
+          "$ref": "#/definitions/ModelFormatEnum",
+          "description": "The model format."
+        },
+        "ModelName": {
+          "type": "string",
+          "description": "The model name."
+        },
+        "ModelVersion": {
+          "type": "string",
+          "description": "The model version."
+        },
+        "ModelType": {
+          "type": "string",
+          "description": "The model type."
+        }
+      },
+      "required": [
+        "modelFormat"
+      ]
+    },
+    "ModelErrorResponse": {
+      "type": "object",
+      "description": "Error response from the service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP status code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "type": "array",
+          "description": "The list of inner error details.",
+          "items": {
+            "$ref": "#/definitions/InnerErrorDetails"
+          }
+        },
+        "correlation": {
+          "type": "object",
+          "description": "Correlation information for the error.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ModelFormatEnum": {
+      "type": "string",
+      "description": "Model format enumeration.",
+      "enum": [
+        "CUSTOM",
+        "MLFLOW",
+        "TRITON",
+        "PRESETS"
+      ],
+      "x-ms-enum": {
+        "name": "ModelFormatEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CUSTOM",
+            "value": "CUSTOM",
+            "description": "Custom model format."
+          },
+          {
+            "name": "MLFLOW",
+            "value": "MLFLOW",
+            "description": "MLflow model format."
+          },
+          {
+            "name": "TRITON",
+            "value": "TRITON",
+            "description": "Triton model format."
+          },
+          {
+            "name": "PRESETS",
+            "value": "PRESETS",
+            "description": "Presets model format."
+          }
+        ]
+      }
+    },
+    "ModelListModelsRequestPagedResponse": {
+      "type": "object",
+      "description": "Paginated response of models with next request.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of models.",
+          "items": {
+            "$ref": "#/definitions/Model"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page."
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The continuation token for the next page."
+        },
+        "nextRequest": {
+          "$ref": "#/definitions/ListModelsRequest",
+          "description": "The next request for pagination."
+        }
+      }
+    },
+    "ModelPagedResponse": {
+      "type": "object",
+      "description": "Paginated response of models.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of models.",
+          "items": {
+            "$ref": "#/definitions/Model"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The continuation token for the next page."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page."
+        }
+      }
+    },
+    "ModelPathResponseDto": {
+      "type": "object",
+      "description": "Response DTO for a model path.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The resolved path."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the path."
+        }
+      }
+    },
+    "ModelSchema": {
+      "type": "object",
+      "description": "Schema definition for model inputs and outputs.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The schema field name."
+        },
+        "dataType": {
+          "$ref": "#/definitions/ModelSchemaDataType",
+          "description": "The data type of the schema field."
+        },
+        "shape": {
+          "type": "array",
+          "description": "The shape of the data.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ModelSchemaDataType": {
+      "type": "string",
+      "description": "Data type for model schema fields.",
+      "enum": [
+        "undefined",
+        "bool",
+        "uint8",
+        "uint16",
+        "uint32",
+        "uint64",
+        "int8",
+        "int16",
+        "int32",
+        "int64",
+        "float16",
+        "float32",
+        "float64",
+        "bfloat16",
+        "complex64",
+        "complex128",
+        "string"
+      ],
+      "x-ms-enum": {
+        "name": "ModelSchemaDataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Undefined",
+            "value": "undefined",
+            "description": "Undefined data type."
+          },
+          {
+            "name": "Bool",
+            "value": "bool",
+            "description": "Boolean data type."
+          },
+          {
+            "name": "Uint8",
+            "value": "uint8",
+            "description": "Unsigned 8-bit integer."
+          },
+          {
+            "name": "Uint16",
+            "value": "uint16",
+            "description": "Unsigned 16-bit integer."
+          },
+          {
+            "name": "Uint32",
+            "value": "uint32",
+            "description": "Unsigned 32-bit integer."
+          },
+          {
+            "name": "Uint64",
+            "value": "uint64",
+            "description": "Unsigned 64-bit integer."
+          },
+          {
+            "name": "Int8",
+            "value": "int8",
+            "description": "Signed 8-bit integer."
+          },
+          {
+            "name": "Int16",
+            "value": "int16",
+            "description": "Signed 16-bit integer."
+          },
+          {
+            "name": "Int32",
+            "value": "int32",
+            "description": "Signed 32-bit integer."
+          },
+          {
+            "name": "Int64",
+            "value": "int64",
+            "description": "Signed 64-bit integer."
+          },
+          {
+            "name": "Float16",
+            "value": "float16",
+            "description": "16-bit floating point."
+          },
+          {
+            "name": "Float32",
+            "value": "float32",
+            "description": "32-bit floating point."
+          },
+          {
+            "name": "Float64",
+            "value": "float64",
+            "description": "64-bit floating point."
+          },
+          {
+            "name": "Bfloat16",
+            "value": "bfloat16",
+            "description": "Brain 16-bit floating point."
+          },
+          {
+            "name": "Complex64",
+            "value": "complex64",
+            "description": "64-bit complex number."
+          },
+          {
+            "name": "Complex128",
+            "value": "complex128",
+            "description": "128-bit complex number."
+          },
+          {
+            "name": "String",
+            "value": "string",
+            "description": "String data type."
+          }
+        ]
+      }
+    },
+    "ModelSettingsIdentifiers": {
+      "type": "object",
+      "description": "Model settings identifiers for deployment.",
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "description": "The model identifier."
+        },
+        "engineId": {
+          "type": "string",
+          "description": "The engine identifier."
+        }
+      }
+    },
+    "OrderString": {
+      "type": "string",
+      "description": "Order string for sorting results.",
+      "enum": [
+        "CreatedAtDesc",
+        "CreatedAtAsc",
+        "UpdatedAtDesc",
+        "UpdatedAtAsc"
+      ],
+      "x-ms-enum": {
+        "name": "OrderString",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CreatedAtDesc",
+            "value": "CreatedAtDesc",
+            "description": "Sort by created time descending."
+          },
+          {
+            "name": "CreatedAtAsc",
+            "value": "CreatedAtAsc",
+            "description": "Sort by created time ascending."
+          },
+          {
+            "name": "UpdatedAtDesc",
+            "value": "UpdatedAtDesc",
+            "description": "Sort by updated time descending."
+          },
+          {
+            "name": "UpdatedAtAsc",
+            "value": "UpdatedAtAsc",
+            "description": "Sort by updated time ascending."
+          }
+        ]
+      }
+    },
+    "PatchOperation": {
+      "type": "object",
+      "description": "A JSON Patch operation.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The value to apply."
+        },
+        "path": {
+          "type": "string",
+          "description": "The path to the property to modify."
+        },
+        "op": {
+          "type": "string",
+          "description": "The operation type (e.g., add, remove, replace).",
+          "x-ms-client-name": "operationType"
+        },
+        "from": {
+          "type": "string",
+          "description": "The source path for move or copy operations.",
+          "x-ms-client-name": "fromPath"
+        }
+      }
+    },
+    "ProviderFeedEntityRequestDto": {
+      "type": "object",
+      "description": "A provider feed entity request DTO.",
+      "properties": {
+        "sourceAndTargetAssetIds": {
+          "$ref": "#/definitions/DependencyMapItemDto",
+          "description": "Source and target asset identifiers."
+        },
+        "dependencyMapDto": {
+          "$ref": "#/definitions/DependencyMapDto",
+          "description": "The dependency map."
+        },
+        "labelToVersionMapping": {
+          "type": "object",
+          "description": "Label to version mapping.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Relationship": {
+      "type": "object",
+      "description": "A relationship between entities.",
+      "properties": {
+        "relationType": {
+          "type": "string",
+          "description": "The relation type."
+        },
+        "targetEntityId": {
+          "type": "string",
+          "description": "The target entity identifier."
+        },
+        "assetId": {
+          "type": "string",
+          "description": "The asset identifier."
+        },
+        "entityType": {
+          "type": "string",
+          "description": "The entity type.",
+          "readOnly": true
+        },
+        "direction": {
+          "type": "string",
+          "description": "The direction of the relationship."
+        },
+        "entityContainerId": {
+          "type": "string",
+          "description": "The entity container identifier.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "ServiceResponseBase": {
+      "type": "object",
+      "description": "A service response.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The service identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "The service name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The service description."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with the service.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kvTags": {
+          "type": "object",
+          "description": "Key-value tags for the service.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties of the service.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "operationId": {
+          "type": "string",
+          "description": "The operation identifier."
+        },
+        "state": {
+          "$ref": "#/definitions/WebServiceState",
+          "description": "The state of the web service."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the service was created."
+        },
+        "updatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the service was last updated."
+        },
+        "error": {
+          "$ref": "#/definitions/ModelErrorResponse",
+          "description": "Error information if the service encountered an error."
+        },
+        "computeType": {
+          "$ref": "#/definitions/ComputeEnvironmentType",
+          "description": "The compute environment type."
+        },
+        "deploymentType": {
+          "$ref": "#/definitions/DeploymentType",
+          "description": "The deployment type."
+        },
+        "createdBy": {
+          "$ref": "#/definitions/User",
+          "description": "The user who created the service."
+        },
+        "endpointName": {
+          "type": "string",
+          "description": "The endpoint name."
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "description": "A user identity.",
+      "properties": {
+        "userObjectId": {
+          "type": "string",
+          "description": "The user object identifier."
+        },
+        "userPuId": {
+          "type": "string",
+          "description": "The user PUID."
+        },
+        "userIdp": {
+          "type": "string",
+          "description": "The user identity provider."
+        },
+        "userAltSecId": {
+          "type": "string",
+          "description": "The user alternate security identifier."
+        },
+        "userIss": {
+          "type": "string",
+          "description": "The user issuer."
+        },
+        "userTenantId": {
+          "type": "string",
+          "description": "The user tenant identifier."
+        },
+        "userName": {
+          "type": "string",
+          "description": "The user name."
+        },
+        "upn": {
+          "type": "string",
+          "description": "The user principal name."
+        }
+      }
+    },
+    "WebServiceState": {
+      "type": "string",
+      "description": "Web service state.",
+      "enum": [
+        "Transitioning",
+        "Healthy",
+        "Unhealthy",
+        "Failed",
+        "Unschedulable"
+      ],
+      "x-ms-enum": {
+        "name": "WebServiceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Transitioning",
+            "value": "Transitioning",
+            "description": "Service is transitioning."
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Service is healthy."
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "Service is unhealthy."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Service has failed."
+          },
+          {
+            "name": "Unschedulable",
+            "value": "Unschedulable",
+            "description": "Service is unschedulable."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "WorkspacePathParameters.resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The resource group name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspacePathParameters.subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure subscription identifier.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspacePathParameters.workspaceName": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The workspace name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
