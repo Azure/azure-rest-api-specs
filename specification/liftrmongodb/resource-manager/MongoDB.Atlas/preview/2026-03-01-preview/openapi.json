@@ -1260,6 +1260,15 @@
       "type": "object",
       "description": "Properties specific to a MongoDB Atlas Cluster.",
       "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "Atlas project id. The ID of the project this cluster belongs to.",
+          "pattern": "^[a-fA-F0-9]{24}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "clusterTier": {
           "$ref": "#/definitions/ClusterTier",
           "description": "Cluster tier (FREE, FLEX, M10, M30).",
@@ -1664,9 +1673,12 @@
       "properties": {
         "projectId": {
           "type": "string",
-          "description": "Atlas project id.",
+          "description": "Atlas project id. Required for all operations except project creation.",
           "pattern": "^[a-fA-F0-9]{24}$",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "organizationId": {
           "type": "string",

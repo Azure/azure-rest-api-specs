@@ -155,8 +155,8 @@ union ClusterTier {
 @doc("Properties specific to a MongoDB Atlas Project.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model ProjectProperties {
-  @doc("Atlas project id.")
-  @visibility(Lifecycle.Read)
+  @doc("Atlas project id. Required for all operations except project creation.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @pattern("^[a-fA-F0-9]{24}$")
   projectId?: string;
 
@@ -273,6 +273,11 @@ model TierRegions {
 @doc("Properties specific to a MongoDB Atlas Cluster.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model ClusterProperties {
+  @doc("Atlas project id. The ID of the project this cluster belongs to.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @pattern("^[a-fA-F0-9]{24}$")
+  projectId?: string;
+
   @doc("Cluster tier (FREE, FLEX, M10, M30).")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   clusterTier: ClusterTier;
