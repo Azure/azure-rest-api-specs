@@ -97,6 +97,7 @@ interface ManagedClusters {
    * Gets a fault simulation by the simulationId.
    */
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_04_01_preview)
   @tag("FaultSimulation")
   getFaultSimulation is ArmResourceActionSync<
     ManagedCluster,
@@ -108,6 +109,7 @@ interface ManagedClusters {
    * Gets the list of recent fault simulations for the cluster.
    */
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_04_01_preview)
   @tag("FaultSimulation")
   @list
   listFaultSimulation is ArmResourceActionSync<
@@ -120,6 +122,7 @@ interface ManagedClusters {
    * Starts a fault simulation on the cluster.
    */
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_04_01_preview)
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
@@ -133,6 +136,7 @@ interface ManagedClusters {
    * Stops a fault simulation on the cluster.
    */
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_04_01_preview)
   @tag("FaultSimulation")
   stopFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,

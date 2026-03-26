@@ -140,6 +140,7 @@ interface NodeTypes {
    * Starts a fault simulation on the node type.
    */
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_04_01_preview)
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     NodeType,
@@ -153,6 +154,7 @@ interface NodeTypes {
    * Stops a fault simulation on the node type.
    */
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_04_01_preview)
   @tag("FaultSimulation")
   stopFaultSimulation is ArmResourceActionAsync<
     NodeType,
@@ -166,6 +168,7 @@ interface NodeTypes {
    * Gets a fault simulation by the simulationId.
    */
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_04_01_preview)
   @tag("FaultSimulation")
   getFaultSimulation is ArmResourceActionSync<
     NodeType,
@@ -177,6 +180,7 @@ interface NodeTypes {
    * Gets the list of recent fault simulations for the node type.
    */
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_04_01_preview)
   @tag("FaultSimulation")
   @list
   listFaultSimulation is ArmResourceActionSync<
