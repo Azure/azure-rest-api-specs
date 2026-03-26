@@ -110,7 +110,7 @@ union SearchDataExfiltrationProtection {
 }
 
 /**
- * Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations.
+ * Specifies the availability and billing plan for semantic search on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.
  */
 union SearchSemanticSearch {
   string,
@@ -132,7 +132,7 @@ union SearchSemanticSearch {
 }
 
 /**
- * Sets options that control the availability of knowledge retrieval. This configuration is only possible for certain Azure AI Search SKUs in certain locations.
+ * Specifies the billing plan for agentic retrieval on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.
  */
 @added(Versions.v2026_03_01_preview)
 union KnowledgeRetrieval {
@@ -780,7 +780,7 @@ model SearchServiceProperties {
   authOptions?: DataPlaneAuthOptions;
 
   /**
-   * Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations.
+   * Specifies the availability and billing plan for semantic search on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   semanticSearch?: SearchSemanticSearch | null;
@@ -872,27 +872,27 @@ model EncryptionWithCmk {
 }
 
 /**
- * Describes the parameters for using a customer-managed encryption key to encrypt the search service.
+ * A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest, such as indexes and synonym maps.
  */
 @added(Versions.v2026_03_01_preview)
 model SearchResourceEncryptionKey {
   /**
-   * The name of the key in Azure Key Vault that is to be used to encrypt data at rest in the search service.
+   * The name of your Azure Key Vault key to be used to encrypt your data at rest.
    */
   keyVaultKeyName?: string;
 
   /**
-   * The version of the key in Azure Key Vault that is to be used to encrypt data at rest in the search service.
+   * The version of your Azure Key Vault key to be used to encrypt your data at rest.
    */
   keyVaultKeyVersion?: string;
 
   /**
-   * The URI of the Azure Key Vault where the key is stored.
+   * The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`.
    */
   keyVaultUri?: url;
 
   /**
-   * An explicit identity to use when accessing the Azure Key Vault specified in the vaultUri. If this is not provided, the search service will use its own system-assigned managed identity to access the key vault. Providing an explicit identity is supported for services that need to access a key vault in a different tenant or in a key vault with a different access policy (e.g., RBAC based).
+   * An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If "none" is specified, the value of this property is cleared.
    */
   identity?: DataIdentity;
 

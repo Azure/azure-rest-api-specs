@@ -2545,7 +2545,7 @@
     },
     "KnowledgeRetrieval": {
       "type": "string",
-      "description": "Sets options that control the availability of knowledge retrieval. This configuration is only possible for certain Azure AI Search SKUs in certain locations.",
+      "description": "Specifies the billing plan for agentic retrieval on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.",
       "enum": [
         "free",
         "standard"
@@ -3198,24 +3198,24 @@
     },
     "SearchResourceEncryptionKey": {
       "type": "object",
-      "description": "Describes the parameters for using a customer-managed encryption key to encrypt the search service.",
+      "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest, such as indexes and synonym maps.",
       "properties": {
         "keyVaultKeyName": {
           "type": "string",
-          "description": "The name of the key in Azure Key Vault that is to be used to encrypt data at rest in the search service."
+          "description": "The name of your Azure Key Vault key to be used to encrypt your data at rest."
         },
         "keyVaultKeyVersion": {
           "type": "string",
-          "description": "The version of the key in Azure Key Vault that is to be used to encrypt data at rest in the search service."
+          "description": "The version of your Azure Key Vault key to be used to encrypt your data at rest."
         },
         "keyVaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The URI of the Azure Key Vault where the key is stored."
+          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`."
         },
         "identity": {
           "$ref": "#/definitions/DataIdentity",
-          "description": "An explicit identity to use when accessing the Azure Key Vault specified in the vaultUri. If this is not provided, the search service will use its own system-assigned managed identity to access the key vault. Providing an explicit identity is supported for services that need to access a key vault in a different tenant or in a key vault with a different access policy (e.g., RBAC based)."
+          "description": "An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared."
         },
         "accessCredentials": {
           "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
@@ -3225,7 +3225,7 @@
     },
     "SearchSemanticSearch": {
       "type": "string",
-      "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations.",
+      "description": "Specifies the availability and billing plan for semantic search on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.",
       "enum": [
         "disabled",
         "free",
@@ -3426,7 +3426,7 @@
         },
         "semanticSearch": {
           "$ref": "#/definitions/SearchSemanticSearch",
-          "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations.",
+          "description": "Specifies the availability and billing plan for semantic search on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.",
           "x-nullable": true
         },
         "knowledgeRetrieval": {
