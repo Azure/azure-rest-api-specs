@@ -3,6 +3,7 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -29,7 +30,7 @@ interface Agents {
   @route("/agents")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgent is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys,
+    AgentDefinitionOptInKeys | FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
     CreateAgentRequest,
     AgentObject
   >;
@@ -109,7 +110,7 @@ interface Agents {
   @route("/agents/{agent_name}/versions")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgentVersion is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys,
+    AgentDefinitionOptInKeys | FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -194,5 +195,30 @@ interface Agents {
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<AgentVersionObject>
+  >;
+
+  /**
+   * Updates an agent endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  @patch(#{ implicitOptionality: true })
+  @route("/agents/{agent_name}/endpoint")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @removed(Versions.v1)
+  updateAgentEndpointObject is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
+    {
+      /** The name of the agent to retrieve. */
+      @path agent_name: string;
+
+      @header("Content-Type") contentType: "application/merge-patch+json";
+      ...UpdateAgentEndpointRequest;
+    },
+    AgentObject
   >;
 }
