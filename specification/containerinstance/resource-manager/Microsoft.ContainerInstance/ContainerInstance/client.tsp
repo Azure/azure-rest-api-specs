@@ -22,3 +22,4 @@ using Microsoft.ContainerInstance;
   "java"
 );
 @@clientName(ContainerAttachResponse, "ContainerAttachResult", "java");
+@@clientName(Microsoft.ContainerInstance.Resource, "ResourcePatch", "java");
