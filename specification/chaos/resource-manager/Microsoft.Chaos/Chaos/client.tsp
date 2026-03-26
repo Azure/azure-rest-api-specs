@@ -36,6 +36,8 @@ using Microsoft.Chaos;
   "csharp"
 );
 @@clientName(Microsoft.Chaos.Experiments.listAll, "getExperiments", "csharp");
+@@clientName(Microsoft.Chaos.PrivateAccesses.listAll, "getPrivateAccesses", "csharp");
+@@clientName(Microsoft.Chaos.Workspaces.listAll, "getWorkspaces", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "update base model for SDK backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExperimentExecutionDetails,
