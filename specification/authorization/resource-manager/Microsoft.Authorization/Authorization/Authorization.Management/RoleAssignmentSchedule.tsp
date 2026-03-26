@@ -25,13 +25,17 @@ model RoleAssignmentSchedule
   >;
 }
 
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface RoleAssignmentSchedules {
   /**
    * Get the specified role assignment schedule for a resource scope
    */
   @tag("roleAssignmentSchedules")
-  get is Extension.Read<Extension.ScopeParameter, RoleAssignmentSchedule, Error = CloudError>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    RoleAssignmentSchedule,
+    Error = CloudError
+  >;
 
   /**
    * Gets role assignment schedules for a resource scope.

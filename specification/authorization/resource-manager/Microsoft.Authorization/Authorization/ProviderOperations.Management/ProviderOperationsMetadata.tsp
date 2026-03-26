@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -30,20 +30,20 @@ model ProviderOperationsMetadata extends SettableResource {
   /**
    * The provider display name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   displayName?: string;
 
   /**
    * The provider resource types
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["name"])
   resourceTypes?: ResourceType[];
 
   /**
    * The provider operations.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   operations?: ProviderOperation[];
 }
@@ -53,9 +53,8 @@ interface ProviderOperationsMetadataOperationGroup {
   /**
    * Gets provider operations metadata for the specified resource provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ProviderOperationsMetadata")
-  @operationId("ProviderOperationsMetadata_Get")
   get is ArmResourceRead<
     ProviderOperationsMetadata,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -71,8 +70,6 @@ interface ProviderOperationsMetadataOperationGroup {
   /**
    * Gets provider operations metadata for all resource providers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProviderOperationsMetadata_List")
   @tag("ProviderOperationsMetadata")
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,

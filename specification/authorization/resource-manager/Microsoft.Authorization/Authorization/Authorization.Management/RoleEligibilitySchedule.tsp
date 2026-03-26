@@ -25,13 +25,17 @@ model RoleEligibilitySchedule
   >;
 }
 
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface RoleEligibilitySchedules {
   /**
    * Get the specified role eligibility schedule for a resource scope
    */
   @tag("roleEligibilitySchedules")
-  get is Extension.Read<Extension.ScopeParameter, RoleEligibilitySchedule, Error = CloudError>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    RoleEligibilitySchedule,
+    Error = CloudError
+  >;
 
   /**
    * Gets role eligibility schedules for a resource scope.

@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/main.tsp";
@@ -475,7 +475,7 @@ union PIMOnlyMode {
   ReportOnly: "ReportOnly",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ExcludedPrincipalTypes {
   string,
 
@@ -546,7 +546,7 @@ model CloudErrorBody {
 /**
  * Role assignment schedule properties with scope.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RoleAssignmentScheduleProperties {
   /**
    * The role assignment schedule scope.
@@ -631,7 +631,7 @@ model RoleAssignmentScheduleProperties {
   expandedProperties?: ExpandedProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExpandedProperties {
   /**
    * Details of the resource scope
@@ -717,7 +717,7 @@ model ExpandedPropertiesPrincipal {
 /**
  * Role assignment schedule properties with scope.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RoleAssignmentScheduleInstanceProperties {
   /**
    * The role assignment schedule scope.
@@ -809,7 +809,7 @@ model RoleAssignmentScheduleInstanceProperties {
 /**
  * Role assignment schedule request properties with scope.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RoleAssignmentScheduleRequestProperties {
   /**
    * The role assignment schedule request scope.
@@ -963,7 +963,7 @@ model RoleAssignmentScheduleRequestPropertiesTicketInfo {
 /**
  * Role eligibility schedule properties with scope.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RoleEligibilityScheduleProperties {
   /**
    * The role eligibility schedule scope.
@@ -1041,7 +1041,7 @@ model RoleEligibilityScheduleProperties {
 /**
  * Role eligibility schedule properties with scope.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RoleEligibilityScheduleInstanceProperties {
   /**
    * The role eligibility schedule scope.
@@ -1113,7 +1113,7 @@ model RoleEligibilityScheduleInstanceProperties {
 /**
  * Role eligibility schedule request properties with scope.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RoleEligibilityScheduleRequestProperties {
   /**
    * The role eligibility schedule request scope.
@@ -1262,7 +1262,7 @@ model RoleEligibilityScheduleRequestPropertiesTicketInfo {
 /**
  * Role management policy properties with scope.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RoleManagementPolicyProperties {
   /**
    * The role management policy scope.
@@ -1405,7 +1405,7 @@ model PolicyPropertiesScope {
 /**
  * Role management policy assignment properties with scope.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RoleManagementPolicyAssignmentProperties {
   /**
    * The role management policy scope.

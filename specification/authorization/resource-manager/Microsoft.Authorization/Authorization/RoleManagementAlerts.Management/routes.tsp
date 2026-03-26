@@ -1,4 +1,4 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+﻿// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
@@ -13,17 +13,15 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Authorization;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AlertsOperationGroup {
   /**
    * Refresh all alerts for a resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_RefreshAll")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Alerts")
   @autoRoute
   @action("roleManagementAlerts/refresh")
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   refreshAll is ArmProviderActionAsync<
     Response = ArmAcceptedLroResponse & {
       @bodyRoot
@@ -34,13 +32,11 @@ interface AlertsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AlertOperationOperationGroup {
   /**
    * Get the specified alert operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AlertOperation_Get")
   @tag("AlertOperations")
   @route("/{+scope}/providers/Microsoft.Authorization/roleManagementAlertOperations/{+operationId}")
   @get

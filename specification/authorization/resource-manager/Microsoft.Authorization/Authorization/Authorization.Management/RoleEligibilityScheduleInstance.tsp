@@ -25,7 +25,7 @@ model RoleEligibilityScheduleInstance
   >;
 }
 
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface RoleEligibilityScheduleInstances {
   /**
    * Gets the specified role eligibility schedule instance.

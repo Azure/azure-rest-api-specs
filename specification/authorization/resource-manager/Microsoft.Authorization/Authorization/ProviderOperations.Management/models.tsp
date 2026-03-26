@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -57,7 +57,7 @@ model ProviderOperation {
   /**
    * The operation properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: unknown;
 
   /**

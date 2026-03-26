@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -26,7 +26,7 @@ model RoleAssignmentScheduleRequest
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface RoleAssignmentScheduleRequests {
   /**
    * Get the specified role assignment schedule request.
@@ -41,8 +41,8 @@ interface RoleAssignmentScheduleRequests {
   /**
    * Creates a role assignment schedule request.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("RoleAssignmentScheduleRequests")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
     RoleAssignmentScheduleRequest,

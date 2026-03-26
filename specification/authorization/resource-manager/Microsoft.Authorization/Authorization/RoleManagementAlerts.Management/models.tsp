@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -36,7 +36,7 @@ union SeverityLevel {
 /**
  * Alert properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertProperties {
   /**
    * The alert scope.
@@ -91,7 +91,7 @@ model AlertProperties {
 /**
  * Alert definition properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertDefinitionProperties {
   /**
    * The alert display name.
@@ -151,7 +151,7 @@ model AlertDefinitionProperties {
 /**
  * Alert incident properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("alertIncidentType")
 model AlertIncidentProperties {
   /**
@@ -164,7 +164,7 @@ model AlertIncidentProperties {
 /**
  * Alert configuration properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("alertConfigurationType")
 model AlertConfigurationProperties {
   /**

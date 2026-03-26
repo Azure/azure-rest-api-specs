@@ -1,4 +1,4 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+﻿// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
@@ -78,13 +78,11 @@ alias PermissionsForResourceOps = Azure.ResourceManager.Legacy.ExtensionOperatio
   {}
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PermissionsOperationGroup {
   /**
    * Gets all permissions the caller has for a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Permissions_ListForResourceGroup")
   @autoRoute
   @tag("Permissions")
   @list
@@ -97,8 +95,6 @@ interface PermissionsOperationGroup {
   /**
    * Gets all permissions the caller has for a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Permissions_ListForResource")
   @tag("Permissions")
   @action("permissions")
   listForResource is PermissionsForResourceOps.List<

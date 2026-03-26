@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -31,8 +31,6 @@ interface AccessReviewDecisions {
   /**
    * Get my single access review instance decision.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewInstanceMyDecisions_GetById")
   @tag("GetAccessReviewMyInstanceDecision")
   getById is ArmResourceRead<
     AccessReviewDecision,
@@ -43,8 +41,6 @@ interface AccessReviewDecisions {
   /**
    * Record a decision.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewInstanceMyDecisions_Patch")
   @tag("PatchAccessReviewMyInstanceDecision")
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
@@ -57,8 +53,6 @@ interface AccessReviewDecisions {
   /**
    * Get my access review instance decisions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewInstanceMyDecisions_List")
   @tag("GetAccessReviewMyInstanceDecisions")
   list is ArmResourceListByParent<
     AccessReviewDecision,

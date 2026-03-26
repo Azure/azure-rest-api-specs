@@ -1,4 +1,4 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+﻿// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
@@ -13,14 +13,13 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Authorization;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ClassicAdministratorsOperationGroup {
   /**
    * Gets service administrator, account administrator, and co-administrators for the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ClassicAdministrators")
-  @operationId("ClassicAdministrators_List")
   @autoRoute
   @list
   @get
@@ -31,14 +30,13 @@ interface ClassicAdministratorsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface GlobalAdministratorOperationGroup {
   /**
    * Elevates access for a Global Administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElevateAccess")
-  @operationId("GlobalAdministrator_ElevateAccess")
   @autoRoute
   elevateAccess is ArmProviderActionSync<Response = OkResponse>;
 }

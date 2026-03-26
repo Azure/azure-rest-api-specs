@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -45,8 +45,6 @@ interface AccessReviewDefaultSettingsOperationGroup {
   /**
    * Get access review default settings for the subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewDefaultSettings_Get")
   @tag("GetAccessReviewDefaultSettings")
   @action("accessReviewScheduleSettings/default")
   get is AccessReviewDefaultSettingsOperationGroupOps.Read<
@@ -57,9 +55,8 @@ interface AccessReviewDefaultSettingsOperationGroup {
   /**
    * Get access review default settings for the subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("AccessReviewDefaultSettings_Put")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PutAccessReviewDefaultSettings")
   @action("accessReviewScheduleSettings/default")
   put is AccessReviewDefaultSettingsOperationGroupOps.CreateOrUpdateSync<
@@ -104,7 +101,7 @@ interface ScopeAccessReviewDefaultSettings {
   /**
    * Get access review default settings for the subscription
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PutAccessReviewDefaultSettings")
   @action("accessReviewScheduleSettings/default")
   put is ScopeAccessReviewDefaultSettingOps.CreateOrUpdateSync<

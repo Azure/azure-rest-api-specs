@@ -25,7 +25,7 @@ model RoleAssignmentScheduleInstance
   >;
 }
 
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface RoleAssignmentScheduleInstances {
   /**
    * Gets the specified role assignment schedule instance.

@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -25,7 +25,7 @@ model RoleManagementPolicyAssignment
   >;
 }
 
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface RoleManagementPolicyAssignments {
   /**
    * Get the specified role management policy assignment for a resource scope
@@ -40,8 +40,8 @@ interface RoleManagementPolicyAssignments {
   /**
    * Create a role management policy assignment
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("roleManagementPolicyAssignments")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
     RoleManagementPolicyAssignment,

@@ -1,4 +1,4 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+﻿// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
@@ -13,13 +13,11 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Authorization;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface EligibleChildResourcesOperationGroup {
   /**
    * Get the child resources of a resource on which user has eligible access
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EligibleChildResources_Get")
   @tag("eligibleChildResources")
   @autoRoute
   @list

@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -480,7 +480,7 @@ union AccessReviewDecisionInsightType {
   userSignInInsight: "userSignInInsight",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AccessReviewDecisionPrincipalResourceMembershipType {
   string,
 
@@ -601,7 +601,7 @@ model ErrorDefinitionProperties {
 /**
  * Access Review History Instances.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AccessReviewHistoryDefinitionProperties {
   /**
    * The display name for the history definition.
@@ -902,7 +902,7 @@ model AccessReviewHistoryInstanceProperties {
 /**
  * Access Review.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AccessReviewScheduleDefinitionProperties {
   /**
    * The display name for the schedule definition.
@@ -969,7 +969,7 @@ model AccessReviewScheduleDefinitionProperties {
 /**
  * Settings of an Access Review.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AccessReviewScheduleSettings {
   /**
    * Flag to indicate whether sending mails to reviewers and the review creator is enabled.
@@ -1056,7 +1056,7 @@ model AccessReviewReviewer {
 /**
  * Access Review Instance properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AccessReviewInstanceProperties {
   /**
    * This read-only field specifies the status of an access review instance.
@@ -1098,7 +1098,7 @@ model AccessReviewInstanceProperties {
 /**
  * Approval Step.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AccessReviewDecisionProperties {
   /**
    * Principal associated with the decision record. Can be AccessReviewDecisionUserIdentity or AccessReviewDecisionServicePrincipalIdentity

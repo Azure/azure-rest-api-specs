@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -67,7 +67,7 @@ interface AccessReviewInstances {
   /**
    * Update access review instance.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PutAccessReviewInstance")
   create is AccessReviewInstanceOps.CreateOrUpdateSync<
     AccessReviewInstance,
@@ -95,8 +95,6 @@ interface AccessReviewInstances {
   /**
    * An action to stop an access review instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewInstance_Stop")
   @tag("AccessReviewInstanceStop")
   stop is AccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
@@ -108,8 +106,6 @@ interface AccessReviewInstances {
   /**
    * An action to reset all decisions for an access review instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewInstance_ResetDecisions")
   @tag("AccessReviewInstanceResetDecisions")
   resetDecisions is AccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
@@ -121,8 +117,6 @@ interface AccessReviewInstances {
   /**
    * An action to apply all decisions for an access review instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewInstance_ApplyDecisions")
   @tag("AccessReviewInstanceApplyDecisions")
   applyDecisions is AccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
@@ -134,8 +128,6 @@ interface AccessReviewInstances {
   /**
    * An action to send reminders for an access review instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewInstance_SendReminders")
   @tag("AccessReviewInstanceSendReminders")
   sendReminders is AccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
@@ -147,9 +139,8 @@ interface AccessReviewInstances {
   /**
    * Get access review instance decisions
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AccessReviewInstanceDecisions_List")
   @tag("GetAccessReviewInstanceDecisions")
   @list
   @get
@@ -171,8 +162,6 @@ interface AccessReviewInstances {
   /**
    * Get access review instance contacted reviewers
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewInstanceContactedReviewers_List")
   @tag("GetAccessReviewInstanceContactedReviewers")
   @list
   @get
@@ -230,7 +219,7 @@ interface ScopeAccessReviewInstances {
   /**
    * Update access review instance.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PutAccessReviewInstance")
   create is ScopeAccessReviewInstanceOps.CreateOrUpdateSync<
     AccessReviewInstance,
@@ -258,8 +247,6 @@ interface ScopeAccessReviewInstances {
   /**
    * An action to stop an access review instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScopeAccessReviewInstance_Stop")
   @tag("AccessReviewInstanceStop")
   stop is ScopeAccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
@@ -271,8 +258,6 @@ interface ScopeAccessReviewInstances {
   /**
    * An action to approve/deny all decisions for a review with certain filters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScopeAccessReviewInstance_RecordAllDecisions")
   @tag("AccessReviewInstanceRecordAllDecisions")
   recordAllDecisions is ScopeAccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
@@ -284,8 +269,6 @@ interface ScopeAccessReviewInstances {
   /**
    * An action to reset all decisions for an access review instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScopeAccessReviewInstance_ResetDecisions")
   @tag("AccessReviewInstanceResetDecisions")
   resetDecisions is ScopeAccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
@@ -297,8 +280,6 @@ interface ScopeAccessReviewInstances {
   /**
    * An action to apply all decisions for an access review instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScopeAccessReviewInstance_ApplyDecisions")
   @tag("AccessReviewInstanceApplyDecisions")
   applyDecisions is ScopeAccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
@@ -310,8 +291,6 @@ interface ScopeAccessReviewInstances {
   /**
    * An action to send reminders for an access review instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScopeAccessReviewInstance_SendReminders")
   @tag("AccessReviewInstanceSendReminders")
   sendReminders is ScopeAccessReviewInstanceOps.ActionSync<
     AccessReviewInstance,
@@ -323,9 +302,8 @@ interface ScopeAccessReviewInstances {
   /**
    * Get access review instance decisions
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScopeAccessReviewInstanceDecisions_List")
   @tag("GetAccessReviewInstanceDecisions")
   @list
   @get
@@ -347,8 +325,6 @@ interface ScopeAccessReviewInstances {
   /**
    * Get access review instance contacted reviewers
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScopeAccessReviewInstanceContactedReviewers_List")
   @tag("GetAccessReviewInstanceContactedReviewers")
   @list
   @get
@@ -400,8 +376,6 @@ interface AccessReviewInstancesAssignedForMyApproval {
   /**
    * An action to accept recommendations for decision in an access review instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewInstance_AcceptRecommendations")
   @tag("AccessReviewInstanceAcceptRecommmendations")
   acceptRecommendations is AccessReviewInstancesAssignedForMyApprovalOps.ActionSync<
     AccessReviewInstance,
@@ -431,8 +405,6 @@ interface AccessReviewInstancesAssignedForMyApproval {
   /**
    * Get access review instance contacted reviewers
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TenantLevelAccessReviewInstanceContactedReviewers_List")
   @tag("TenantLevelGetAccessReviewInstanceContactedReviewers")
   @list
   @get

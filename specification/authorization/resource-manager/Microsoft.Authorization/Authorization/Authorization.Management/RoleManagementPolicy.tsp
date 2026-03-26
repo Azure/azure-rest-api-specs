@@ -25,13 +25,17 @@ model RoleManagementPolicy
   >;
 }
 
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface RoleManagementPolicies {
   /**
    * Get the specified role management policy for a resource scope
    */
   @tag("roleManagementPolicies")
-  get is Extension.Read<Extension.ScopeParameter, RoleManagementPolicy, Error = CloudError>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    RoleManagementPolicy,
+    Error = CloudError
+  >;
 
   /**
    * Update a role management policy

@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -59,9 +59,8 @@ interface AccessReviewHistoryDefinitions {
   /**
    * Create a scheduled or one-time Access Review History Definition
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("AccessReviewHistoryDefinition_Create")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PutAccessReviewHistoryDefinition")
   create is AccessReviewHistoryDefinitionOps.CreateOrUpdateSync<
     AccessReviewHistoryDefinition,
@@ -73,8 +72,6 @@ interface AccessReviewHistoryDefinitions {
   /**
    * Delete an access review history definition
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewHistoryDefinition_DeleteById")
   @tag("DeleteAccessReviewHistoryDefinition")
   deleteById is AccessReviewHistoryDefinitionOps.DeleteSync<
     AccessReviewHistoryDefinition,
@@ -100,8 +97,6 @@ interface AccessReviewHistoryDefinitions {
   /**
    * Generates a uri which can be used to retrieve review history data. This URI has a TTL of 1 day and can be retrieved by fetching the accessReviewHistoryDefinition object.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewHistoryDefinitionInstance_GenerateDownloadUri")
   @tag("PostAccessReviewHistoryDefinitionInstance")
   generateDownloadUri is AccessReviewHistoryDefinitionOps.ActionSync<
     AccessReviewHistoryDefinition,
@@ -121,8 +116,6 @@ interface AccessReviewHistoryDefinitions {
   /**
    * Get access review history definition instances by definition Id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AccessReviewHistoryDefinitionInstances_List")
   @tag("GetAccessReviewHistoryDefinitionInstances")
   @list
   @get
@@ -174,9 +167,8 @@ interface ScopeAccessReviewHistoryDefinitions {
   /**
    * Create a scheduled or one-time Access Review History Definition
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ScopeAccessReviewHistoryDefinition_Create")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PutAccessReviewHistoryDefinition")
   create is ScopeAccessReviewHistoryDefinitionOps.CreateOrUpdateSync<
     AccessReviewHistoryDefinition,
@@ -188,8 +180,6 @@ interface ScopeAccessReviewHistoryDefinitions {
   /**
    * Delete an access review history definition
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScopeAccessReviewHistoryDefinition_DeleteById")
   @tag("DeleteAccessReviewHistoryDefinition")
   deleteById is ScopeAccessReviewHistoryDefinitionOps.DeleteSync<
     AccessReviewHistoryDefinition,
@@ -215,8 +205,6 @@ interface ScopeAccessReviewHistoryDefinitions {
   /**
    * Generates a uri which can be used to retrieve review history data. This URI has a TTL of 1 day and can be retrieved by fetching the accessReviewHistoryDefinition object.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScopeAccessReviewHistoryDefinitionInstance_GenerateDownloadUri")
   @tag("PostAccessReviewHistoryDefinitionInstance")
   generateDownloadUri is ScopeAccessReviewHistoryDefinitionOps.ActionSync<
     AccessReviewHistoryDefinition,
@@ -236,8 +224,6 @@ interface ScopeAccessReviewHistoryDefinitions {
   /**
    * Get access review history definition instances by definition Id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScopeAccessReviewHistoryDefinitionInstances_List")
   @tag("ScopeGetAccessReviewHistoryDefinitionInstances")
   @list
   @get

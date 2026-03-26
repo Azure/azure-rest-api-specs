@@ -1,13 +1,13 @@
-import "@azure-tools/typespec-client-generator-core";
+﻿import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Authorization;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RoleAssignmentCreateParameters.properties);
 
 @@clientName(RoleAssignments.create::parameters.resource, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RoleAssignment.properties);
 
 @@clientName(RoleAssignmentsByIdOperations.createById::parameters.resource,
