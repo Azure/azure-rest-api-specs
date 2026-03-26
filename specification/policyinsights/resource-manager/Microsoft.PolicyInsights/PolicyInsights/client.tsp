@@ -12,5 +12,5 @@ namespace PolicyInsightsManagementClient;
 
 @@clientName(PolicyInsightsManagementClient,
   "PolicyInsightsClient",
-  "javaScript"
+  "javascript"
 );
