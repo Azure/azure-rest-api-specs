@@ -111,7 +111,7 @@ using Microsoft.Storage;
   "csharp"
 );
 @@clientName(ActiveDirectoryProperties.domainGuid,
-  "ActiveDirectoryDomainGuid",
+  "DomainGuid",
   "csharp"
 );
 @@clientName(TableAccessPolicy, "StorageTableAccessPolicy", "csharp");
@@ -153,6 +153,10 @@ using Microsoft.Storage;
 );
 @@clientName(BlobContainers.objectLevelWorm,
   "EnableVersionLevelImmutability",
+  "csharp"
+);
+@@clientName(StorageAccounts.hierarchicalNamespaceMigration,
+  "EnableHierarchicalNamespace",
   "csharp"
 );
 @@clientName(StorageAccounts.checkNameAvailability,
@@ -654,9 +658,9 @@ namespace Azure.ResourceManager.Models {
 @@alternateType(EncryptionScopeKeyVaultProperties.keyUri, url, "csharp");
 @@alternateType(KeyVaultProperties.keyvaulturi, url, "csharp");
 
-// Rename DomainGuid → ActiveDirectoryDomainGuid for backward compat
+// Rename DomainGuid for backward compat
 @@clientName(ActiveDirectoryProperties.domainGuid,
-  "ActiveDirectoryDomainGuid",
+  "DomainGuid",
   "csharp"
 );
 
