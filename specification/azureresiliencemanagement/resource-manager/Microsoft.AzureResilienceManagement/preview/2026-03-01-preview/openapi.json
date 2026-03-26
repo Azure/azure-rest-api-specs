@@ -4414,15 +4414,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{5,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReprotectRequest"
-            }
           }
         ],
         "responses": {
@@ -4923,15 +4914,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{5,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReprotectRequest"
-            }
           }
         ],
         "responses": {
@@ -11329,31 +11311,6 @@
         ]
       }
     },
-    "ReprotectRequest": {
-      "type": "object",
-      "description": "Reprotect post action request.",
-      "properties": {
-        "reprotectRequestProperties": {
-          "$ref": "#/definitions/ReprotectRequestProperties",
-          "description": "Additional properties for Reprotect."
-        }
-      }
-    },
-    "ReprotectRequestProperties": {
-      "type": "object",
-      "description": "Additional properties for Reprotect.",
-      "properties": {
-        "selectedResourceIds": {
-          "type": "array",
-          "description": "Selected recovery resource Ids to be processed. If not provided, all qualified resources will be processed.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
-        }
-      }
-    },
     "RequirementSelected": {
       "type": "string",
       "description": "Enum for the requirement status of the resource in the goal.",
@@ -11682,8 +11639,7 @@
       "enum": [
         "Unknown",
         "Protected",
-        "NotProtected",
-        "HighlyAvailable"
+        "NotProtected"
       ],
       "x-ms-enum": {
         "name": "ResourceProtectionStatus",
@@ -11703,11 +11659,6 @@
             "name": "NotProtected",
             "value": "NotProtected",
             "description": "A state indicating that the resource is not protected by any recovery solution."
-          },
-          {
-            "name": "HighlyAvailable",
-            "value": "HighlyAvailable",
-            "description": "A state indicating that the resource is highly available."
           }
         ]
       }
