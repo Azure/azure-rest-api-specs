@@ -1507,7 +1507,7 @@
     },
     "/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
       "get": {
-        "operationId": "TenantLevelAccessReviewInstanceContactedReviewers_ReviewersList",
+        "operationId": "TenantLevelAccessReviewInstanceContactedReviewers_List",
         "tags": [
           "TenantLevelGetAccessReviewInstanceContactedReviewers"
         ],
@@ -1543,6 +1543,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorDefinition"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/TenantLevelGetAccessReviewInstanceContactedReviewers.json"
           }
         },
         "x-ms-pageable": {

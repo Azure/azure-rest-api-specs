@@ -144,6 +144,7 @@ using Microsoft.Authorization;
 @@clientLocation(AccessReviewInstancesAssignedForMyApproval.reviewersList,
   "TenantLevelAccessReviewInstanceContactedReviewers"
 );
+@@clientName(AccessReviewInstancesAssignedForMyApproval.reviewersList, "List");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AccessReviewInstance.properties);
 

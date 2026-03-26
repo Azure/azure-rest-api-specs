@@ -13,3 +13,4 @@ using Microsoft.Authorization;
 
 @@clientLocation(PermissionsOperationGroup.listForResourceGroup, "Permissions");
 @@clientLocation(PermissionsOperationGroup.listForResource, "Permissions");
+@@clientLocation(RoleDefinitionsByIdOperationGroup.getById, "RoleDefinitions");
