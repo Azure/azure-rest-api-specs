@@ -148,7 +148,7 @@ interface RouteFilters {
       Azure.Core.Foundations.RetryAfterHeader,
     Response = {
       @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+    } | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
     OverrideErrorType = CloudError
   >;
@@ -197,7 +197,8 @@ interface RouteFilters {
   listByRouteFilter is ArmResourceActionSync<
     RouteFilter,
     void,
-    ArmResponse<RouteFilterRuleListResult>
+    ArmResponse<RouteFilterRuleListResult>,
+    Error = CloudError
   >;
 }
 

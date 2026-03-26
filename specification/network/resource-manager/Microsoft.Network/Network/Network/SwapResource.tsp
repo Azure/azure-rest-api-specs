@@ -19,7 +19,6 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@singleton("default")
 model SwapResource extends ProxyResourceWithReadOnlyID {
   /**
    * Properties of the SwapResource.
@@ -38,6 +37,16 @@ model SwapResource extends ProxyResourceWithReadOnlyID {
 }
 
 @@doc(SwapResource.name, "Resource name.");
+
+alias SingletonResourceAlias = {
+  /**
+   * The name of the singleton resource.
+   */
+  @path
+  @segment("cloudServiceSlots")
+  @key
+  singletonResource: SingletonResource;
+};
 
 alias CloudServiceOps = Legacy.ExtensionOperations<
   {
@@ -66,15 +75,7 @@ alias CloudServiceOps = Legacy.ExtensionOperations<
   },
   {
     ...Extension.ExtensionProviderNamespace<SwapResource>;
-
-    /**
-     * The name of the singleton resource.
-     */
-    @path
-    @segment("cloudServiceSlots")
-    @key
-    @Azure.ClientGenerator.Core.alternateType("swap", "javascript")
-    singletonResource: SingletonResource;
+    ...SingletonResourceAlias;
   }
 >;
 
@@ -127,9 +128,8 @@ interface SwapResources {
     SwapResource,
     Response = {
       @body body: void;
-    } | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     ErrorType = CloudError
   >;
 

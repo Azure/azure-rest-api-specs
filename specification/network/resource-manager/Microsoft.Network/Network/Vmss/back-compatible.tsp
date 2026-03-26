@@ -102,18 +102,22 @@ using Microsoft.Network;
 @@Legacy.flattenProperty(PublicIPAddress.properties);
 
 @@clientLocation(Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
-  "NetworkInterfaces"
+  Microsoft.Compute.NetworkInterfaces,
+  "autorest"
 );
 @@clientLocation(Microsoft.Compute.NetworkInterfaceIPConfigurations.listVirtualMachineScaleSetIpConfigurations,
-  "NetworkInterfaces"
+  Microsoft.Compute.NetworkInterfaces,
+  "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkInterfaceIPConfiguration.properties);
 
 @@clientLocation(Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
-  "NetworkInterfaces"
+  Microsoft.Compute.NetworkInterfaces,
+  "autorest"
 );
 
 @@clientLocation(Microsoft.Compute.PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
-  "PublicIPAddresses"
+  Microsoft.Compute.PublicIPAddresses,
+  "autorest"
 );

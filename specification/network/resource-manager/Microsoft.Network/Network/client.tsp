@@ -16,11 +16,23 @@ using Microsoft.Compute;
   service: [Microsoft.Network, Microsoft.Compute],
   autoMergeService: true,
 })
-@useDependency(
-  Microsoft.Network.Versions.v2025_05_01,
-  Microsoft.Compute.Versions.v2018_10_01
-)
 namespace CombineClient;
+
+@@clientLocation(Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
+  Microsoft.Network.NetworkInterfaces
+);
+
+@@clientLocation(Microsoft.Compute.NetworkInterfaceIPConfigurations.listVirtualMachineScaleSetIpConfigurations,
+  Microsoft.Network.NetworkInterfaces
+);
+
+@@clientLocation(Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
+  Microsoft.Network.NetworkInterfaces
+);
+
+@@clientLocation(Microsoft.Compute.PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
+  Microsoft.Network.PublicIPAddresses
+);
 
 @@clientName(CombineClient, "NetworkManagementClient", "javascript,python");
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,

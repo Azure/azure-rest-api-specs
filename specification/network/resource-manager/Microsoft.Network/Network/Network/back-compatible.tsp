@@ -1726,3 +1726,13 @@ using Microsoft.Network;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualNetworkApplianceIpConfiguration.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(SingletonResourceAlias.singletonResource,
+  "swap",
+  "python"
+);
+
+@@Azure.ClientGenerator.Core.alternateType(SingletonResourceAlias.singletonResource,
+  "swap"
+);
