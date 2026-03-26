@@ -19,6 +19,7 @@ namespace Microsoft.MachineLearningServices;
  */
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @parentResource(Workspace)
 model ManagedNetworkSettingsPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<ManagedNetworkSettingsProperties> {
@@ -36,6 +37,7 @@ model ManagedNetworkSettingsPropertiesBasicResource
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Resource does not support delete operation"
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
