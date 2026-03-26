@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./GuestSubscription.tsp";
 import "./SharedLimit.tsp";
+import "./Feature.tsp";
 import "./back-compat.tsp";
 
 using Azure.ResourceManager;
@@ -20,6 +21,9 @@ namespace Microsoft.ComputeLimit;
 enum Versions {
   /** The 2025-08-15 API version. */
   v2025_08_15: "2025-08-15",
+
+  /** The 2026-03-20 API version. */
+  v2026_03_20: "2026-03-20",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
