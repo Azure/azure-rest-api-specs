@@ -148,6 +148,11 @@ namespace Azure.AI.Projects;
 // Enums variants
 @@clientName(ConnectionType.APIKey, "API_KEY", "java");
 
+// Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
+// input parameter that calls either on these two.
+@@access(Connections.get, Access.internal);
+@@access(Connections.getWithCredentials, Access.internal);
+
 // The fix for ambiguous import of OperationState
 @@clientName(Azure.Core.Foundations.OperationState, "operationStatus", "java");
 
