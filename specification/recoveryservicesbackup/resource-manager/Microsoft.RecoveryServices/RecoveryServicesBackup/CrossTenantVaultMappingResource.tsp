@@ -131,7 +131,7 @@ interface CrossTenantOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for service contract compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappingsStatus")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappingStatus")
   @post
   @operationId("VaultMappingStatus_Check")
   @tag("CrossTenant")

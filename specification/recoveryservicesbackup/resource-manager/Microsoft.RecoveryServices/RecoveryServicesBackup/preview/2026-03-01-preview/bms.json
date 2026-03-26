@@ -404,6 +404,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappingStatus": {
+      "post": {
+        "operationId": "VaultMappingStatus_Check",
+        "tags": [
+          "CrossTenant"
+        ],
+        "description": "Gets the mapping status of the vault for cross-tenant restore operations.\nReturns the mapping status that indicates whether the vault is properly configured for cross-tenant operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMappingStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check Vault Mapping Status": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/CheckVaultMappingStatus.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings": {
       "get": {
         "operationId": "CrossTenantVaultMappings_List",
@@ -1844,53 +1891,6 @@
         "x-ms-examples": {
           "Get Vault Credential Operation Status": {
             "$ref": "./examples/CrossTenantVaultMappingOperations/GetVaultCredentialOperationStatus.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappingsStatus": {
-      "post": {
-        "operationId": "VaultMappingStatus_Check",
-        "tags": [
-          "CrossTenant"
-        ],
-        "description": "Gets the mapping status of the vault for cross-tenant restore operations.\nReturns the mapping status that indicates whether the vault is properly configured for cross-tenant operations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CrossTenantVaultMappingStatusResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Check Vault Mapping Status": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/CheckVaultMappingStatus.json"
           }
         }
       }
