@@ -6375,7 +6375,7 @@ model ProxyResourceWithReadOnlyID {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
-model ProxyResourcewithoutEtag {
+model ProxyResourceWithSettableId {
   /**
    * Resource ID.
    */
@@ -6401,7 +6401,7 @@ model ProxyResourcewithoutEtag {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
-model TrackedResourcewithOptionalLocation {
+model TrackedResourceWithEtag {
   /**
    * ID of the connection monitor.
    */
@@ -14106,7 +14106,7 @@ model WritableResource {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
-model ResourceWithWritableName {
+model TrackedResourceWithSettableName {
   /**
    * Resource ID.
    */
@@ -14142,7 +14142,7 @@ model ResourceWithWritableName {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
-model ResourceWithRequiredLocation {
+model TrackedResourceWithSettableId {
   /**
    * Resource ID.
    */
@@ -14177,49 +14177,9 @@ model ResourceWithRequiredLocation {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
-model ResourceWithReadOnlyNameAndID {
-  /**
-   * Resource ID.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Resource location.
-   */
-  location?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-}
-
-/**
- * Common resource representation.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
-model ResourceWithReadOnlyID {
+model TrackedResourceWithOptionalLocation {
   /**
    * Resource ID.
    */

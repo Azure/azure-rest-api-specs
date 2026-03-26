@@ -19,7 +19,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model RouteFilter extends ResourceWithRequiredLocation {
+model RouteFilter extends TrackedResourceWithSettableId {
   properties?: RouteFilterPropertiesFormat;
 
   @visibility(Lifecycle.Read)

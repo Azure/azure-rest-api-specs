@@ -6502,7 +6502,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "ProxyResourcewithoutEtag": {
+    "ProxyResourceWithSettableId": {
       "type": "object",
       "description": "Proxy resource representation.",
       "properties": {
@@ -6816,138 +6816,6 @@
           }
         ]
       }
-    },
-    "ResourceWithReadOnlyID": {
-      "type": "object",
-      "description": "Common resource representation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ResourceWithReadOnlyNameAndID": {
-      "type": "object",
-      "description": "Common resource representation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ResourceWithRequiredLocation": {
-      "type": "object",
-      "description": "Common resource representation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "ResourceWithWritableName": {
-      "type": "object",
-      "description": "Common resource representation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "RouteFilterRuleType": {
       "type": "string",
@@ -7948,7 +7816,7 @@
         }
       }
     },
-    "TrackedResourcewithOptionalLocation": {
+    "TrackedResourceWithEtag": {
       "type": "object",
       "description": "Tracked resource with optional location.",
       "properties": {
@@ -7979,6 +7847,105 @@
         "tags": {
           "type": "object",
           "description": "Connection monitor tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResourceWithOptionalLocation": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResourceWithSettableId": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "TrackedResourceWithSettableName": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }

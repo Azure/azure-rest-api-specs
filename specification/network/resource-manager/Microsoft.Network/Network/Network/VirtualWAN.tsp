@@ -20,9 +20,10 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-model VirtualWAN extends ResourceWithRequiredLocation {
+model VirtualWAN extends TrackedResourceWithSettableId {
   properties?: VirtualWanProperties;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars"
   @visibility(Lifecycle.Read)
   @path
   @key("VirtualWANName")

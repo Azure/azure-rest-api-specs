@@ -20,7 +20,7 @@ namespace Microsoft.Network;
 @subscriptionResource
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRouteProviderPort extends ResourceWithReadOnlyNameAndID {
+model ExpressRouteProviderPort extends TrackedResourceWithOptionalLocation {
   properties?: ExpressRouteProviderPortProperties;
 
   @visibility(Lifecycle.Read)

@@ -19,7 +19,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualHub extends ResourceWithRequiredLocation {
+model VirtualHub extends TrackedResourceWithSettableId {
   properties?: VirtualHubProperties;
 
   @visibility(Lifecycle.Read)

@@ -22,7 +22,7 @@ namespace Microsoft.Network;
 @singleton("dafault")
 @subscriptionResource
 model ApplicationGatewayWafDynamicManifestResult
-  extends ProxyResourcewithoutEtag {
+  extends ProxyResourceWithSettableId {
   /**
    * Properties of the ApplicationGatewayWafDynamicManifest.
    */

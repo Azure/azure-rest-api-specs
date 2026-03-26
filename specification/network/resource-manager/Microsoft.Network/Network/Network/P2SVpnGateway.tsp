@@ -20,7 +20,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model P2SVpnGateway extends ResourceWithRequiredLocation {
+model P2SVpnGateway extends TrackedResourceWithSettableId {
   properties?: P2SVpnGatewayProperties;
 
   @visibility(Lifecycle.Read)

@@ -21,7 +21,7 @@ namespace Microsoft.Network;
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(NetworkWatcher)
-model ConnectionMonitorResult extends TrackedResourcewithOptionalLocation {
+model ConnectionMonitorResult extends TrackedResourceWithEtag {
   /**
    * Properties of the connection monitor result.
    */
