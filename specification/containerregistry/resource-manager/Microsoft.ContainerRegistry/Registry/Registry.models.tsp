@@ -169,6 +169,37 @@ union RoleAssignmentMode {
 }
 
 /**
+ * Whether or not per-region endpoints are enabled for accessing the registry.
+ */
+@added(Versions.vLatestPreview)
+union RegionalEndpoints {
+  string,
+
+  /**
+   * Regional endpoints are enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Regional endpoints are disabled.
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * The connectivity protocol for the registry.
+ */
+union EndpointProtocol {
+  string,
+
+  /** IPv4 connectivity only */
+  IPv4: "IPv4",
+
+  /** IPv4 and IPv6 (dual stack) connectivity */
+  IPv4AndIPv6: "IPv4AndIPv6",
+}
+
+/**
  * The unit of measurement.
  */
 union RegistryUsageUnit {
@@ -296,6 +327,25 @@ model RegistryProperties {
    */
   @visibility(Lifecycle.Read)
   dataEndpointHostNames?: string[];
+
+  /**
+   * Enable per-region endpoints for accessing registry.
+   */
+  @added(Versions.vLatestPreview)
+  regionalEndpoints?: RegionalEndpoints = RegionalEndpoints.Disabled;
+
+  /**
+   * List of host names that will serve registry when RegionalEndpoints is enabled.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.vLatestPreview)
+  regionalEndpointHostNames?: string[];
+
+  /**
+   * The connectivity protocol for the registry, such as IPv4 or dual stack (IPv4 and IPv6).
+   */
+  @added(Versions.vLatestPreview)
+  endpointProtocol?: EndpointProtocol;
 
   /**
    * List of private endpoint connections for a container registry.
@@ -656,6 +706,18 @@ model RegistryPropertiesUpdateParameters {
    * Enable a single data endpoint per region for serving data.
    */
   dataEndpointEnabled?: boolean;
+
+  /**
+   * Enable per-region endpoints for accessing registry.
+   */
+  @added(Versions.vLatestPreview)
+  regionalEndpoints?: RegionalEndpoints;
+
+  /**
+   * The connectivity protocol for the registry, such as IPv4 or dual stack (IPv4 and IPv6).
+   */
+  @added(Versions.vLatestPreview)
+  endpointProtocol?: EndpointProtocol;
 
   /**
    * Whether or not public network access is allowed for the container registry.

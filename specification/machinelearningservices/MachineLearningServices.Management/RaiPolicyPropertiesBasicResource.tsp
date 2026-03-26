@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./WorkspaceConnectionPropertiesV2BasicResource.tsp";
 
@@ -9,11 +10,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 /**
  * Azure OpenAI Content Filters resource.
  */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiPolicyPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<RaiPolicyProperties, false> {
@@ -25,6 +29,11 @@ model RaiPolicyPropertiesBasicResource
   >;
 }
 
+/**
+ * RaiPolicyPropertiesBasicResourceOps is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -58,6 +67,11 @@ interface RaiPolicyPropertiesBasicResourceOps
       }
     > {}
 
+/**
+ * RaiPolicyPropertiesBasicResources is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResources {
   /**
@@ -102,6 +116,12 @@ interface RaiPolicyPropertiesBasicResources {
     Response = ArmResponse<RaiPolicyPropertiesBasicResourceArmPaginatedResult>
   >;
 }
+
+/**
+ * RaiPolicyOps is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface RaiPolicyOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -135,6 +155,11 @@ interface RaiPolicyOps
       }
     > {}
 
+/**
+ * RaiPolicy is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface RaiPolicy {
   /**
