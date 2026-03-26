@@ -23,6 +23,16 @@ namespace Microsoft.AppLink;
 @@clientName(ReleaseChannelInfo, "AppLinkReleaseChannelInfo", "csharp");
 @@clientName(VersionInfo, "AppLinkVersionInfo", "csharp");
 
+// Contextual naming: add AppLink prefix to resource types
+@@clientName(AvailableVersion, "AppLinkAvailableVersion", "csharp");
+@@clientName(AvailableVersionProperties, "AppLinkAvailableVersionProperties", "csharp");
+@@clientName(UpgradeHistory, "AppLinkUpgradeHistory", "csharp");
+@@clientName(UpgradeHistoryProperties, "AppLinkUpgradeHistoryProperties", "csharp");
+
+// Operation renames: method names should clearly indicate what is listed
+@@clientName(AvailableVersions.listByLocation, "GetAppLinkAvailableVersionsByLocation", "csharp");
+@@clientName(UpgradeHistories.listByAppLinkMember, "GetAppLinkUpgradeHistories", "csharp");
+
 // DateTimeOffset properties should follow *On naming convention in C#
 @@clientName(UpgradeHistoryProperties.startTimestamp, "startOn", "csharp");
 @@clientName(UpgradeHistoryProperties.endTimestamp, "endOn", "csharp");
