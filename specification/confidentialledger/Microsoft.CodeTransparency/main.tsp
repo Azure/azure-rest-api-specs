@@ -28,6 +28,9 @@ enum Versions {
   // aligns with Feb 4 2025 SCRAPI spec https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/4fafe531c21a3d1241934330bb771f82c64e0827/draft-ietf-scitt-scrapi.md
   @doc("The 2025-01-31-preview version of the Microsoft.CodeTransparency service.")
   `2025-01-31-preview`,
+
+  @doc("The 2026-03-26 version of the Microsoft.CodeTransparency service.")
+  `2026-03-26`,
 }
 
 // Additional supported traits by the API.
