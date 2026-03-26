@@ -2869,7 +2869,8 @@ op protectionPolicyOperationStatusesGet(
   "csharp"
 );
 @@clientName(SQLDataDirectory, "SqlDataDirectory", "csharp");
-@@clientName(SQLDataDirectory.type, "SqlDataDirectory", "csharp");
+@@clientName(SQLDataDirectory.type, "DirectoryType", "csharp");
+@@clientName(SQLDataDirectoryType, "SqlDataDirectoryType", "csharp");
 @@clientName(RecoveryPointTierInformation.type, "TierType", "csharp");
 @@clientName(AzureIaaSVMJobExtendedInfo.estimatedRemainingDuration,
   "EstimatedRemainingDurationValue",
@@ -2976,6 +2977,18 @@ op protectionPolicyOperationStatusesGet(
 );
 @@clientName(RecoveryPointsRecommendedForMove.list,
   "GetRecoveryPointsRecommendedForMove",
+  "csharp"
+);
+@@clientName(BackupWorkloadItems.list, "GetBackupWorkloadItems", "csharp");
+@@clientName(JobCancellations.trigger, "TriggerJobCancellation", "csharp");
+@@clientName(Backups.trigger, "TriggerBackup", "csharp");
+@@clientName(Restores.trigger, "TriggerRestore", "csharp");
+@@clientName(ItemLevelRecoveryConnections.provision,
+  "ProvisionItemLevelRecoveryConnection",
+  "csharp"
+);
+@@clientName(ItemLevelRecoveryConnections.revoke,
+  "RevokeItemLevelRecoveryConnection",
   "csharp"
 );
 
@@ -3119,6 +3132,7 @@ op protectionPolicyOperationStatusesGet(
 );
 @@usage(BackupEngineBaseResource, Usage.input | Usage.output, "csharp");
 @@usage(JobResource, Usage.input | Usage.output, "csharp");
+@@usage(RecoveryPointResource, Usage.input | Usage.output, "csharp");
 
 //@@scope(BackupResourceEncryptionConfigs.get, "!csharp");
 @@scope(BackupResourceEncryptionConfigs.update, "!csharp");
