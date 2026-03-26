@@ -200,7 +200,7 @@ using Microsoft.DevCenter;
   "DevCenterCustomerManagedKeyEncryption",
   "csharp"
 );
-@@clientName(CustomizationTask, "DevCenterCustomizationTask", "csharp");
+@@clientName(CustomizationTask, "DevCenterCatalogTask", "csharp");
 @@clientName(CustomizationTaskInput,
   "DevCenterCustomizationTaskInput",
   "csharp"
