@@ -8690,7 +8690,11 @@ model CrossTenantVaultMapping {
   /**
    * ARM resource ID of the source vault.
    */
-  sourceVaultId: armResourceIdentifier<[{type: "Microsoft.RecoveryServices/vaults"}]>;
+  sourceVaultId: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults";
+    }
+  ]>;
 
   /**
    * Tenant ID of the source vault for cross-tenant mapping.
