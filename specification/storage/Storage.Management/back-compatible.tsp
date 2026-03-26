@@ -347,9 +347,13 @@ using Microsoft.Storage;
 @@clientLocation(StorageQueues.delete, "Queue");
 @@clientLocation(StorageAccounts.listByStorageAccount, "PrivateLinkResources");
 @@clientLocation(StorageAccounts.storageTaskAssignmentsInstancesReportList,
-  "StorageTaskAssignmentsInstancesReport"
+  "StorageTaskAssignmentsInstancesReport",
+  "!csharp"
 );
-@@clientName(StorageAccounts.storageTaskAssignmentsInstancesReportList, "List");
+@@clientName(StorageAccounts.storageTaskAssignmentsInstancesReportList,
+  "List",
+  "!csharp"
+);
 @@clientLocation(StorageAccountMigrations.getCustomerInitiatedMigration,
   StorageAccounts
 );

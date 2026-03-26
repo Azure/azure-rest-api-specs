@@ -147,6 +147,10 @@ using Microsoft.Storage;
   "GetStorageTaskAssignmentInstancesReports",
   "csharp"
 );
+@@clientName(StorageAccounts.storageTaskAssignmentsInstancesReportList,
+  "GetStorageTaskAssignmentsInstancesReports",
+  "csharp"
+);
 @@clientName(BlobContainers.objectLevelWorm,
   "EnableVersionLevelImmutability",
   "csharp"
