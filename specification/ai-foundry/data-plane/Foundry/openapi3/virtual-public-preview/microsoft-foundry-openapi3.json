@@ -431,11 +431,9 @@
         "tags": [
           "Agents"
         ]
-      }
-    },
-    "/agents/{agent_name}/endpoint": {
+      },
       "patch": {
-        "operationId": "Agents_updateAgentEndpointObject",
+        "operationId": "Agents_patchAgentObject",
         "description": "Updates an agent endpoint.",
         "parameters": [
           {
@@ -500,7 +498,7 @@
           "content": {
             "application/merge-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateAgentEndpointRequest"
+                "$ref": "#/components/schemas/PatchAgentRequest"
               }
             }
           }
@@ -10972,7 +10970,7 @@
           "WorkflowAgents=V1Preview",
           "ContainerAgents=V1Preview"
         ],
-        "description": "Feature opt-in keys for agent definition operations supporting hosted or workflow agents."
+        "description": "Opt-in keys for defining preview Hosted or Workflow Agents."
       },
       "AgentEndpoint": {
         "type": "object",
@@ -10998,14 +10996,6 @@
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
             "description": "The authorization schemes supported by the agent endpoint"
-          },
-          "agent_card": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentCard"
-              }
-            ],
-            "description": "The agent card"
           }
         },
         "x-ms-foundry-meta": {
@@ -11073,6 +11063,38 @@
             ]
           }
         ]
+      },
+      "AgentEndpointUpdate": {
+        "type": "object",
+        "properties": {
+          "version_selector": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionSelectorUpdate"
+              }
+            ],
+            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
+          },
+          "protocols": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEndpointProtocol"
+            },
+            "description": "The protocols that the agent supports"
+          },
+          "authorization_schemes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+            },
+            "description": "The authorization schemes supported by the agent endpoint"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "AgentEvaluation": {
         "type": "object",
@@ -11365,8 +11387,7 @@
               "required_previews": [
                 "AgentEndpoints=V1Preview"
               ]
-            },
-            "readOnly": true
+            }
           },
           "blueprint": {
             "allOf": [
@@ -11379,8 +11400,7 @@
               "required_previews": [
                 "AgentEndpoints=V1Preview"
               ]
-            },
-            "readOnly": true
+            }
           },
           "blueprint_reference": {
             "allOf": [
@@ -11393,8 +11413,19 @@
               "required_previews": [
                 "AgentEndpoints=V1Preview"
               ]
-            },
-            "readOnly": true
+            }
+          },
+          "agent_card": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentCard"
+              }
+            ],
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
           }
         }
       },
@@ -13839,6 +13870,32 @@
                 "AgentEndpoints=V1Preview"
               ]
             }
+          },
+          "agent_endpoint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEndpoint"
+              }
+            ],
+            "description": "An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          "agent_card": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentCard"
+              }
+            ],
+            "description": "Optional agent card for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
           }
         },
         "x-ms-foundry-meta": {
@@ -14883,6 +14940,7 @@
           },
           "initialization_parameters": {
             "type": "object",
+            "additionalProperties": {},
             "description": "The initialization parameters for the evaluation. Must support structured outputs."
           },
           "data_mapping": {
@@ -38590,6 +38648,45 @@
         },
         "description": "Paged collection of ScheduleRun items"
       },
+      "PatchAgentRequest": {
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+            "x-oaiTypeLabel": "map"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "A human-readable description of the agent."
+          },
+          "agent_endpoint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEndpointUpdate"
+              }
+            ],
+            "description": "The endpoint configuration for the agent"
+          },
+          "agent_card": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentCardUpdate"
+              }
+            ],
+            "description": "Optional agent card for the agent"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "PendingUploadRequest": {
         "type": "object",
         "required": [
@@ -40435,46 +40532,6 @@
           }
         ],
         "description": "Type of the trigger."
-      },
-      "UpdateAgentEndpointRequest": {
-        "type": "object",
-        "properties": {
-          "version_selector": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/VersionSelectorUpdate"
-              }
-            ],
-            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
-          },
-          "protocols": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentEndpointProtocol"
-            },
-            "description": "The protocols that the agent supports"
-          },
-          "authorization_schemes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
-            },
-            "description": "The authorization schemes supported by the agent endpoint"
-          },
-          "agent_card": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentCardUpdate"
-              }
-            ],
-            "description": "The agent card"
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
       },
       "UpdateAgentFromManifestRequest": {
         "type": "object",

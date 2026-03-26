@@ -80,6 +80,26 @@ model CreateAgentRequest {
   name: string;
 
   ...CreateAgentVersionRequest;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @doc("An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent")
+  agent_endpoint?: AgentEndpoint;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @doc("Optional agent card for the agent")
+  agent_card?: AgentCard;
 }
 
 model UpdateAgentRequest {
@@ -91,8 +111,18 @@ model UpdateAgentRequest {
   "x-ms-foundry-meta",
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
-model UpdateAgentEndpointRequest {
-  ...AgentEndpoint;
+model PatchAgentRequest {
+  ...MetadataPropertyForRequest;
+
+  @doc("A human-readable description of the agent.")
+  @maxLength(512)
+  description?: string;
+
+  @doc("The endpoint configuration for the agent")
+  agent_endpoint?: AgentEndpoint;
+
+  @doc("Optional agent card for the agent")
+  agent_card?: AgentCard;
 }
 
 union AgentObjectType {
@@ -137,7 +167,6 @@ model AgentObject {
     }
   )
   @doc("The instance identity of the agent")
-  @visibility(Lifecycle.Read)
   instance_identity?: AgentIdentity;
 
   @removed(Versions.v1)
@@ -148,7 +177,6 @@ model AgentObject {
     }
   )
   @doc("The blueprint for the agent")
-  @visibility(Lifecycle.Read)
   blueprint?: AgentIdentity;
 
   @removed(Versions.v1)
@@ -159,8 +187,16 @@ model AgentObject {
     }
   )
   @doc("The blueprint for the agent")
-  @visibility(Lifecycle.Read)
   blueprint_reference?: AgentBlueprintReference;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  agent_card?: AgentCard;
 }
 
 model AgentVersionObject {
@@ -419,6 +455,7 @@ model HostedAgentDefinition extends AgentDefinition {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 union TelemetryEndpointKind {
   string,
 
@@ -431,6 +468,7 @@ union TelemetryEndpointKind {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 union TelemetryDataKind {
   string,
 
@@ -449,6 +487,7 @@ union TelemetryDataKind {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 union TelemetryTransportProtocol {
   string,
 
@@ -466,6 +505,7 @@ union TelemetryTransportProtocol {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 union TelemetryEndpointAuthType {
   string,
 
@@ -479,6 +519,7 @@ union TelemetryEndpointAuthType {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 model TelemetryEndpointAuth {
   @doc("The authentication type.")
   type: TelemetryEndpointAuthType;
@@ -489,6 +530,7 @@ model TelemetryEndpointAuth {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 model HeaderTelemetryEndpointAuth extends TelemetryEndpointAuth {
   @doc("The authentication type, always 'header' for header-based secret authentication.")
   type: TelemetryEndpointAuthType.header;
@@ -513,6 +555,7 @@ model HeaderTelemetryEndpointAuth extends TelemetryEndpointAuth {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 model TelemetryConfig {
   @doc("Customer-supplied telemetry export endpoint configurations.")
   @minItems(1)
@@ -526,6 +569,7 @@ model TelemetryConfig {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 model TelemetryEndpoint {
   @doc("The telemetry export endpoint kind.")
   kind: TelemetryEndpointKind;
@@ -543,6 +587,7 @@ model TelemetryEndpoint {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
+@removed(Versions.v1)
 model OtlpTelemetryEndpoint extends TelemetryEndpoint {
   @doc("The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints.")
   kind: TelemetryEndpointKind.OTLP;
@@ -822,10 +867,6 @@ model AgentEndpoint {
 
   @doc("The authorization schemes supported by the agent endpoint")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
-
-  // TODO: move this out to the agent object. This is under preview so for fast iteration putting it here
-  @doc("The agent card")
-  agent_card?: AgentCard;
 }
 
 @removed(Versions.v1)
