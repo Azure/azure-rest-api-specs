@@ -80,7 +80,7 @@ describe("generateSdkForSingleSpec", () => {
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValueOnce(undefined);
 
     const result = await generateSdkForSingleSpec();
-    expect(result).toBe(0);
+    expect(result.statusCode).toBe(0);
     expect(log.logMessage).toHaveBeenCalledWith(
       `Generating SDK from ${mockCommandInput.tspConfigPath} ${mockCommandInput.readmePath}`,
       LogLevel.Group,
@@ -127,7 +127,7 @@ describe("generateSdkForSingleSpec", () => {
 
     const result = await generateSdkForSingleSpec();
 
-    expect(result).toBe(1);
+    expect(result.statusCode).toBe(1);
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalled();
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalledWith(["mock-command"]);
     expect(log.logMessage).toHaveBeenCalledWith(
@@ -166,7 +166,7 @@ describe("generateSdkForSingleSpec", () => {
       // mock implementation intentionally left blank
     });
 
-    const statusCode = await generateSdkForSingleSpec();
+    const { statusCode } = await generateSdkForSingleSpec();
 
     expect(statusCode).toBe(1);
     expect(log.logMessage).toHaveBeenCalledWith(
@@ -226,7 +226,7 @@ describe("generateSdkForSpecPr", () => {
       // mock implementation intentionally left blank
     });
 
-    const statusCode = await generateSdkForSpecPr();
+    const { statusCode } = await generateSdkForSpecPr();
     const serviceFolderPath = commandHelpers.getServiceFolderPath(
       mockChangedSpecs[0].typespecProject,
     );
@@ -281,7 +281,7 @@ describe("generateSdkForSpecPr", () => {
       // mock implementation intentionally left blank
     });
 
-    const statusCode = await generateSdkForSpecPr();
+    const { statusCode } = await generateSdkForSpecPr();
 
     expect(statusCode).toBe(0);
     // Verify runSpecGenSdkCommand is not called when there are no changed specs
@@ -319,7 +319,7 @@ describe("generateSdkForSpecPr", () => {
       // mock implementation intentionally left blank
     });
 
-    const statusCode = await generateSdkForSpecPr();
+    const { statusCode } = await generateSdkForSpecPr();
 
     expect(statusCode).toBe(0);
     expect(log.logMessage).toHaveBeenCalledWith(
@@ -378,7 +378,7 @@ describe("generateSdkForSpecPr", () => {
       // mock implementation intentionally left blank
     });
 
-    const statusCode = await generateSdkForSpecPr();
+    const { statusCode } = await generateSdkForSpecPr();
 
     expect(statusCode).toBe(1);
     expect(log.logMessage).toHaveBeenCalledWith(
@@ -423,7 +423,7 @@ describe("generateSdkForSpecPr", () => {
       throw new Error("Failed to read execution report");
     });
 
-    const statusCode = await generateSdkForSpecPr();
+    const { statusCode } = await generateSdkForSpecPr();
 
     expect(statusCode).toBe(1);
     expect(log.logMessage).toHaveBeenCalledWith(
@@ -470,7 +470,7 @@ describe("generateSdkForBatchSpecs", () => {
 
     const code = await generateSdkForBatchSpecs(mockBatchType);
     expect(commandHelpers.getSpecPaths).toHaveBeenCalledWith(mockBatchType, "/spec/path");
-    expect(code).toBe(0);
+    expect(code.statusCode).toBe(0);
     expect(utils.runSpecGenSdkCommand).not.toHaveBeenCalled();
     expect(utils.resetGitRepo).not.toHaveBeenCalled();
     const markdownFilePath = path.normalize(
@@ -538,7 +538,7 @@ describe("generateSdkForBatchSpecs", () => {
     });
 
     const result = await generateSdkForBatchSpecs(mockBatchType);
-    expect(result).toBe(0);
+    expect(result.statusCode).toBe(0);
     expect(commandHelpers.getSpecPaths).toHaveBeenCalledWith(mockBatchType, "/spec/path");
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalledTimes(mockSpecPaths.length);
     expect(commandHelpers.setPipelineVariables).toHaveBeenCalledWith("path/to/artifacts");
@@ -600,7 +600,7 @@ describe("generateSdkForBatchSpecs", () => {
     });
     const result = await generateSdkForBatchSpecs(mockBatchType);
 
-    expect(result).toBe(1);
+    expect(result.statusCode).toBe(1);
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalledTimes(mockSpecPaths.length);
     expect(logSpy).toHaveBeenCalledTimes(11);
     const markdownFilePath = path.normalize(
