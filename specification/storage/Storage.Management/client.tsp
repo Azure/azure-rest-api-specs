@@ -155,6 +155,18 @@ using Microsoft.Storage;
   "EnableVersionLevelImmutability",
   "csharp"
 );
+@@clientName(StorageAccounts.checkNameAvailability,
+  "CheckStorageAccountNameAvailability",
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.LocationParameter.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@clientName(UsagesOperationGroup.listByLocation,
+  "GetUsagesByLocation",
+  "csharp"
+);
 
 // Resource type renames for backward compatibility
 @@clientName(BlobServiceProperties, "BlobService", "csharp");
