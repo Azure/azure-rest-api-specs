@@ -27,21 +27,19 @@ namespace Customizations;
   "!csharp,!python"
 );
 
-@@alternateType(Storage.File.AccessPolicy.start, string, "javascript");
-@@alternateType(Storage.File.AccessPolicy.expiry, string, "javascript");
-@@alternateType(Storage.File.AccessPolicy.start, string, "python");
-@@alternateType(Storage.File.AccessPolicy.expiry, string, "python");
+@@alternateType(Storage.File.AccessPolicy.start, string, "javascript,python");
+@@alternateType(Storage.File.AccessPolicy.expiry, string, "javascript,python");
 @@clientName(Storage.File.AccessPolicy.start, "startsOn", "javascript");
 @@clientName(Storage.File.AccessPolicy.expiry, "expiresOn", "javascript");
 @@clientName(Storage.File.AccessPolicy.permission, "permissions", "javascript");
 
 @@alternateType(Storage.File.UserDelegationKey.signedStart,
   string,
-  "javascript"
+  "javascript,python"
 );
 @@alternateType(Storage.File.UserDelegationKey.signedExpiry,
   string,
-  "javascript"
+  "javascript,python"
 );
 @@clientName(Storage.File.UserDelegationKey.signedOid,
   "signedObjectId",
