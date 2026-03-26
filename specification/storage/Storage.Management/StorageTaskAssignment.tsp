@@ -132,8 +132,16 @@ interface StorageTaskAssignments {
    * Stops any active running storage action for the storage task assignment
    */
   @added(Versions.v2025_08_01)
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @action("stopAssignment")
-  stopAssignment is ArmResourceActionAsync<StorageTaskAssignment, void, void>;
+  stopAssignment is ArmResourceActionAsync<
+    StorageTaskAssignment,
+    void,
+    void,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@maxLength(StorageTaskAssignment.name, 24);
