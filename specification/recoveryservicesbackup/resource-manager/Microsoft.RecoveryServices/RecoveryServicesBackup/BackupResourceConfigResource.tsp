@@ -28,7 +28,11 @@ model BackupResourceConfigResource is ProxyResource<BackupResourceConfig> {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: Azure.Core.azureLocation;
 
-  ...Azure.ResourceManager.EntityTagProperty;
+  /**
+   * Optional ETag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
+  eTag?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Legacy API"

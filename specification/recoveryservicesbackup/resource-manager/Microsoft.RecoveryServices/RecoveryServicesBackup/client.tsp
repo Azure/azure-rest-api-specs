@@ -230,6 +230,10 @@ using Microsoft.RecoveryServices;
 
 // Target restore info mapping
 @@clientName(TargetAFSRestoreInfo, "TargetAfsRestoreInfo", "java");
+@@alternateType(TargetAFSRestoreInfo.targetResourceId,
+  armResourceIdentifier,
+  "java"
+);
 
 // Additional ILR related mappings
 @@clientName(ILRRequest, "IlrRequest", "java");
@@ -2002,6 +2006,7 @@ op protectionPolicyOperationStatusesGet(
 );
 @@clientName(TieringPolicy, "BackupTieringPolicy", "csharp");
 @@clientName(BackupStatusResponse, "BackupStatusResult", "csharp");
+@@alternateType(BackupStatusResponse.vaultId, armResourceIdentifier, "csharp");
 @@clientName(ErrorDetail, "BackupErrorDetail", "csharp");
 @@clientName(SecurityPinBase, "SecurityPinContent", "csharp");
 @@clientName(ExtendedProperties, "IaasVmBackupExtendedProperties", "csharp");
@@ -2022,8 +2027,24 @@ op protectionPolicyOperationStatusesGet(
   "csharp"
 );
 @@clientName(AzureIaaSVMProtectedItem, "IaasVmProtectedItem", "csharp");
+@@alternateType(AzureIaaSVMProtectedItem.virtualMachineId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(AzureIaaSVMProtectedItemExtendedInfo,
   "IaasVmProtectedItemExtendedInfo",
+  "csharp"
+);
+@@clientName(AzureIaaSVMProtectedItemExtendedInfo.newestRecoveryPointInArchive,
+  "NewestRecoveryPointInArchive",
+  "csharp"
+);
+@@clientName(AzureIaaSVMProtectedItemExtendedInfo.oldestRecoveryPointInVault,
+  "OldestRecoveryPointInVault",
+  "csharp"
+);
+@@clientName(AzureIaaSVMProtectedItemExtendedInfo.oldestRecoveryPointInArchive,
+  "OldestRecoveryPointInArchive",
   "csharp"
 );
 @@clientName(AzureIaaSVMHealthDetails, "IaasVmHealthDetails", "csharp");
@@ -2068,7 +2089,12 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(HourlySchedule, "BackupHourlySchedule", "csharp");
 @@clientName(WeeklySchedule, "BackupWeeklySchedule", "csharp");
 @@clientName(IdentityInfo, "BackupIdentityInfo", "csharp");
+@@alternateType(IdentityInfo.managedIdentityResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(NameInfo, "BackupNameInfo", "csharp");
+@@clientName(UsagesUnit, "BackupUsagesUnit", "csharp");
 @@clientName(RetentionPolicy, "BackupRetentionPolicy", "csharp");
 @@clientName(SchedulePolicy, "BackupSchedulePolicy", "csharp");
 @@clientName(TargetDiskNetworkAccessOption,
@@ -2079,23 +2105,46 @@ op protectionPolicyOperationStatusesGet(
   "BackupTargetDiskNetworkAccessSettings",
   "csharp"
 );
+@@alternateType(TargetDiskNetworkAccessSettings.targetDiskAccessId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(Job, "BackupGenericJob", "csharp");
 @@clientName(ProtectionContainer, "BackupGenericProtectionContainer", "csharp");
 @@clientName(ProtectionIntent, "BackupGenericProtectionIntent", "csharp");
+@@alternateType(ProtectionIntent.itemId, armResourceIdentifier, "csharp");
+@@alternateType(ProtectionIntent.policyId, armResourceIdentifier, "csharp");
+@@alternateType(ProtectionIntent.sourceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(BackupResourceConfig, "BackupResourceConfigProperties", "csharp");
+@@clientName(BackupResourceConfigResource, "BackupResourceConfig", "csharp");
 @@clientName(BackupResourceEncryptionConfigExtended,
   "BackupResourceEncryptionConfigExtendedProperties",
+  "csharp"
+);
+@@alternateType(BackupResourceEncryptionConfigExtended.userAssignedIdentity,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(BackupResourceEncryptionConfigExtendedResource,
+  "BackupResourceEncryptionConfigExtended",
   "csharp"
 );
 @@clientName(BackupResourceVaultConfig,
   "BackupResourceVaultConfigProperties",
   "csharp"
 );
-@@clientName(Microsoft.RecoveryServices.PrivateEndpointConnection,
-  "BackupPrivateEndpointConnectionProperties",
+@@clientName(BackupResourceVaultConfigResource,
+  "BackupResourceVaultConfig",
   "csharp"
 );
 @@clientName(BackupStatusRequest, "BackupStatusContent", "csharp");
+@@alternateType(BackupStatusRequest.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(BackupRequestResource, "TriggerBackupContent", "csharp");
 @@clientName(FeatureSupportRequest, "FeatureSupportContent", "csharp");
 @@clientName(FetchTieringCostInfoRequest,
@@ -2119,6 +2168,11 @@ op protectionPolicyOperationStatusesGet(
   "csharp"
 );
 @@clientName(PrepareDataMoveRequest, "PrepareDataMoveContent", "csharp");
+@@alternateType(PrepareDataMoveRequest.targetRegion, azureLocation, "csharp");
+@@alternateType(PrepareDataMoveRequest.targetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(TriggerDataMoveRequest, "TriggerDataMoveContent", "csharp");
 @@clientName(MoveRPAcrossTiersRequest, "MoveRPAcrossTiersContent", "csharp");
 @@clientName(ListRecoveryPointsRecommendedForMoveRequest,
@@ -2129,6 +2183,14 @@ op protectionPolicyOperationStatusesGet(
   "PreValidateEnableBackupContent",
   "csharp"
 );
+@@alternateType(PreValidateEnableBackupRequest.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(PreValidateEnableBackupRequest.vaultId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(PreValidateEnableBackupResponse,
   "PreValidateEnableBackupResult",
   "csharp"
@@ -2137,6 +2199,13 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(UnlockDeleteResponse, "UnlockDeleteResult", "csharp");
 @@clientName(SnapshotRestoreParameters, "SnapshotRestoreContent", "csharp");
 @@clientName(EncryptionDetails, "VmEncryptionDetails", "csharp");
+@@alternateType(EncryptionDetails.kekUrl, url, "csharp");
+@@alternateType(EncryptionDetails.secretKeyUrl, url, "csharp");
+@@alternateType(EncryptionDetails.kekVaultId, armResourceIdentifier, "csharp");
+@@alternateType(EncryptionDetails.secretKeyVaultId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(ILRRequest, "IlrContent", "csharp");
 @@clientName(ILRRequestResource, "ProvisionIlrConnectionContent", "csharp");
 @@clientName(AzureBackupServerContainer, "BackupServerContainer", "csharp");
@@ -2146,6 +2215,10 @@ op protectionPolicyOperationStatusesGet(
   "csharp"
 );
 @@clientName(IaaSVMContainer, "IaasVmContainer", "csharp");
+@@alternateType(IaaSVMContainer.virtualMachineId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(AzureIaaSClassicComputeVMContainer,
   "IaasClassicComputeVmContainer",
   "csharp"
@@ -2157,6 +2230,10 @@ op protectionPolicyOperationStatusesGet(
   "csharp"
 );
 @@clientName(AzureStorageContainer, "StorageContainer", "csharp");
+@@alternateType(AzureStorageContainer.sourceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(AzureStorageErrorInfo, "StorageErrorInfo", "csharp");
 @@clientName(AzureStorageProtectableContainer,
   "StorageProtectableContainer",
@@ -2171,6 +2248,10 @@ op protectionPolicyOperationStatusesGet(
   "csharp"
 );
 @@clientName(AzureWorkloadContainer, "WorkloadContainer", "csharp");
+@@alternateType(AzureWorkloadContainerProperties.sourceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(AzureWorkloadContainerExtendedInfo,
   "WorkloadContainerExtendedInfo",
   "csharp"
@@ -2182,6 +2263,10 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(AzureWorkloadErrorInfo, "WorkloadErrorInfo", "csharp");
 @@clientName(InquiryInfo, "WorkloadContainerInquiryInfo", "csharp");
 @@clientName(IaaSVMProtectableItem, "IaasVmProtectableItem", "csharp");
+@@alternateType(IaaSVMProtectableItem.virtualMachineId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(AzureIaaSClassicComputeVMProtectableItem,
   "IaasClassicComputeVmProtectableItem",
   "csharp"
@@ -2216,8 +2301,11 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(DpmJobExtendedInfo, "DpmBackupJobExtendedInfo", "csharp");
 @@clientName(DpmJobTaskDetails, "DpmBackupJobTaskDetails", "csharp");
 @@clientName(MabJob, "MabBackupJob", "csharp");
+@@usage(MabJob, Usage.input | Usage.output, "csharp");
 @@clientName(MabJobExtendedInfo, "MabBackupJobExtendedInfo", "csharp");
+@@usage(MabJobExtendedInfo, Usage.input | Usage.output, "csharp");
 @@clientName(MabJobTaskDetails, "MabBackupJobTaskDetails", "csharp");
+@@usage(MabJobTaskDetails, Usage.input | Usage.output, "csharp");
 @@clientName(AzureStorageJob, "StorageBackupJob", "csharp");
 @@clientName(AzureStorageJobExtendedInfo,
   "StorageBackupJobExtendedInfo",
@@ -2245,18 +2333,79 @@ op protectionPolicyOperationStatusesGet(
   "FileShareProvisionIlrContent",
   "csharp"
 );
+@@alternateType(AzureFileShareProvisionILRRequest.sourceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(IaasVMILRRegistrationRequest,
   "IaasVmIlrRegistrationContent",
   "csharp"
 );
+@@alternateType(IaasVMILRRegistrationRequest.virtualMachineId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(AzureFileShareRestoreRequest, "FileShareRestoreContent", "csharp");
+@@alternateType(AzureFileShareRestoreRequest.sourceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(IaasVMRestoreRequest, "IaasVmRestoreContent", "csharp");
+@@alternateType(IaasVMRestoreRequestProperties.extendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(IaasVMRestoreRequestProperties.region, azureLocation, "csharp");
+@@alternateType(IaasVMRestoreRequestProperties.sourceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(IaasVMRestoreRequestProperties.storageAccountId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(IaasVMRestoreRequestProperties.subnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(IaasVMRestoreRequestProperties.targetDomainNameId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(IaasVMRestoreRequestProperties.targetResourceGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(IaasVMRestoreRequestProperties.targetVirtualMachineId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(IaasVMRestoreRequestProperties.virtualNetworkId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(IaasVMRecoveryPoint.extendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(SecuredVMDetails.securedVMOsDiskEncryptionSetId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(IaasVMRestoreWithRehydrationRequest,
   "IaasVmRestoreWithRehydrationContent",
   "csharp"
 );
 @@clientName(IaasVMRecoveryPoint, "IaasVmRecoveryPoint", "csharp");
 @@clientName(AzureWorkloadRestoreRequest, "WorkloadRestoreContent", "csharp");
+@@alternateType(AzureWorkloadRestoreRequestProperties.sourceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AzureWorkloadRestoreRequestProperties.targetVirtualMachineId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(AzureWorkloadPointInTimeRestoreRequest,
   "WorkloadPointInTimeRestoreContent",
   "csharp"
@@ -2430,6 +2579,14 @@ op protectionPolicyOperationStatusesGet(
   "BackupPrivateEndpointConnection",
   "csharp"
 );
+@@clientName(Microsoft.RecoveryServices.PrivateEndpointConnection,
+  "BackupPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@alternateType(Microsoft.RecoveryServices.PrivateEndpoint.id,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(ProtectedItemResource, "BackupProtectedItem", "csharp");
 @@clientName(ProtectionContainerResource,
   "BackupProtectionContainer",
@@ -2438,7 +2595,15 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(ProtectionIntentResource, "BackupProtectionIntent", "csharp");
 @@clientName(ProtectionPolicyResource, "BackupProtectionPolicy", "csharp");
 @@clientName(RecoveryPointResource, "BackupRecoveryPoint", "csharp");
+@@clientName(RecoveryPoint, "BackupGenericRecoveryPoint", "csharp");
 @@clientName(ResourceGuardProxyBaseResource, "ResourceGuardProxy", "csharp");
+@@clientName(ResourceGuardProxyBase, "ResourceGuardProxyProperties", "csharp");
+@@clientName(ResourceGuardProxyBase.lastUpdatedTime, "LastUpdatedOn", "csharp");
+@@alternateType(ResourceGuardProxyBase.lastUpdatedTime, utcDateTime, "csharp");
+@@alternateType(ResourceGuardProxyBase.resourceGuardResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(EncryptionAtRestType, "BackupEncryptionAtRestType", "csharp");
 @@clientName(AzureFileShareType, "BackupFileShareType", "csharp");
 @@clientName(BackupEngineBase, "BackupGenericEngine", "csharp");
@@ -2464,13 +2629,12 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(XcoolState, "VaultXcoolState", "csharp");
 @@clientName(SupportStatus, "VmResourceFeatureSupportStatus", "csharp");
 @@clientName(OperationType, "WorkloadOperationType", "csharp");
-@@clientName(GenericProtectionPolicy,
-  "BackupGenericProtectionPolicy",
-  "csharp"
-);
-@@clientName(GenericRecoveryPoint, "BackupGenericRecoveryPoint", "csharp");
+@@clientName(ProtectionPolicy, "BackupGenericProtectionPolicy", "csharp");
 @@clientName(BEKDetails, "BekDetails", "csharp");
 @@clientName(KEKDetails, "KekDetails", "csharp");
+@@alternateType(KEKDetails.keyUrl, url, "csharp");
+@@alternateType(KEKDetails.keyVaultId, armResourceIdentifier, "csharp");
+@@usage(KEKDetails, Usage.input | Usage.output, "csharp");
 @@clientName(TargetAFSRestoreInfo, "TargetAfsRestoreInfo", "csharp");
 @@clientName(Settings.issqlcompression, "IsSqlCompression", "csharp");
 @@clientName(DataSourceType.AzureSqlDb, "AzureSqlDB", "csharp");
@@ -2568,10 +2732,6 @@ op protectionPolicyOperationStatusesGet(
   "OldestRecoverOn",
   "csharp"
 );
-@@clientName(DPMProtectedItemExtendedInfo.oldestRecoveryPoint,
-  "OldestRecoverOn",
-  "csharp"
-);
 @@clientName(MabFileFolderProtectedItemExtendedInfo.oldestRecoveryPoint,
   "OldestRecoverOn",
   "csharp"
@@ -2613,8 +2773,13 @@ op protectionPolicyOperationStatusesGet(
   "csharp"
 );
 @@clientName(RecoveryPointProperties.expiryTime, "ExpireOn", "csharp");
+@@alternateType(RecoveryPointProperties.expiryTime, utcDateTime, "csharp");
 @@clientName(UnlockDeleteResponse.unlockDeleteExpiryTime,
   "UnlockDeleteExpireOn",
+  "csharp"
+);
+@@alternateType(UnlockDeleteResponse.unlockDeleteExpiryTime,
+  utcDateTime,
   "csharp"
 );
 @@clientName(AzureFileShareRecoveryPoint.recoveryPointTime,
@@ -2703,7 +2868,8 @@ op protectionPolicyOperationStatusesGet(
   "WorkloadInquiryDetailsType",
   "csharp"
 );
-@@clientName(SQLDataDirectory.type, "DirectoryType", "csharp");
+@@clientName(SQLDataDirectory, "SqlDataDirectory", "csharp");
+@@clientName(SQLDataDirectory.type, "SqlDataDirectory", "csharp");
 @@clientName(RecoveryPointTierInformation.type, "TierType", "csharp");
 @@clientName(AzureIaaSVMJobExtendedInfo.estimatedRemainingDuration,
   "EstimatedRemainingDurationValue",
@@ -2714,6 +2880,10 @@ op protectionPolicyOperationStatusesGet(
   "DefaultResourceId",
   "csharp"
 );
+@@alternateType(ResourceGuardOperationDetail.defaultResourceRequest,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(BackupResourceConfig.crossRegionRestoreFlag,
   "EnableCrossRegionRestore",
   "csharp"
@@ -2722,8 +2892,88 @@ op protectionPolicyOperationStatusesGet(
   "SqlAvailabilityGroupWorkLoadContainer",
   "csharp"
 );
+@@clientName(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
+  "PrepareDataMove",
+  "csharp"
+);
+@@clientName(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
+  "TriggerDataMove",
+  "csharp"
+);
 
 @@clientName(JobDetails, "BackupJob", "csharp");
+@@clientName(ProtectedItem, "BackupGenericProtectedItem", "csharp");
+@@alternateType(ContainerIdentityInfo.aadTenantId, uuid, "csharp");
+@@clientName(DPMProtectedItemExtendedInfo.oldestRecoveryPoint,
+  "OldestRecoverOn",
+  "csharp"
+);
+@@clientName(DPMProtectedItemExtendedInfo.onPremiseOldestRecoveryPoint,
+  "OnPremiseOldestRecoverOn",
+  "csharp"
+);
+@@clientName(DPMProtectedItemExtendedInfo.onPremiseLatestRecoveryPoint,
+  "OnPremiseLatestRecoverOn",
+  "csharp"
+);
+@@clientName(DPMProtectedItemExtendedInfo.protected, "IsProtected", "csharp");
+@@alternateType(IdentityBasedRestoreDetails.targetStorageAccountId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RecoveryPointRehydrationInfo.rehydrationRetentionDuration,
+  duration,
+  "csharp"
+);
+@@clientName(RecoveryPointTierStatus,
+  "BackupRecoveryPointTierStatus",
+  "csharp"
+);
+@@alternateType(BackupEngineBaseResource.eTag, eTag, "csharp");
+@@alternateType(BackupResourceConfigResource.eTag, eTag, "csharp");
+@@alternateType(BackupResourceEncryptionConfigExtendedResource.eTag,
+  eTag,
+  "csharp"
+);
+@@alternateType(BackupResourceEncryptionConfigResource.eTag, eTag, "csharp");
+@@alternateType(BackupResourceVaultConfigResource.eTag, eTag, "csharp");
+@@alternateType(JobResource.eTag, eTag, "csharp");
+@@alternateType(ResourceProperties.eTag, eTag, "csharp");
+@@alternateType(Microsoft.RecoveryServices.PrivateEndpointConnectionResource.eTag,
+  eTag,
+  "csharp"
+);
+@@alternateType(ProtectedItemResource.eTag, eTag, "csharp");
+@@alternateType(ProtectionContainerResource.eTag, eTag, "csharp");
+@@alternateType(ProtectionIntentResource.eTag, eTag, "csharp");
+@@alternateType(ProtectionPolicyResource.eTag, eTag, "csharp");
+@@alternateType(RecoveryPointResource.eTag, eTag, "csharp");
+@@alternateType(ResourceGuardProxyBaseResource.eTag, eTag, "csharp");
+@@alternateType(UserAssignedManagedIdentityDetails.userAssignedIdentityProperties,
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
+  "csharp"
+);
+@@clientName(MABContainerHealthDetails, "MabContainerHealthDetails", "csharp");
+@@clientName(SQLDataDirectoryMapping, "SqlDataDirectoryMapping", "csharp");
+@@clientName(BackupProtectionIntent.list,
+  "GetBackupProtectionIntents",
+  "csharp"
+);
+@@clientName(BackupProtectedItems.list, "GetBackupProtectedItems", "csharp");
+@@clientName(ProtectableContainers.list, "GetProtectableContainers", "csharp");
+@@clientName(BackupProtectableItems.list,
+  "GetBackupProtectableItems",
+  "csharp"
+);
+@@clientName(DeletedProtectionContainers.list,
+  "GetSoftDeletedProtectionContainers",
+  "csharp"
+);
+@@clientName(BackupUsageSummaries.list, "GetBackupUsageSummaries", "csharp");
+@@clientName(GetTieringCostOperationResult.get,
+  "GetGetTieringCostOperationResult",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(BackupEngineBaseResource,
@@ -2790,8 +3040,96 @@ op protectionPolicyOperationStatusesGet(
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ProtectableContainerResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(BackupRequestResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(WorkloadItemResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(WorkloadProtectableItemResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+@@usage(BackupEngineExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(BackupEngineBase, Usage.input | Usage.output, "csharp");
+@@usage(Job, Usage.input | Usage.output, "csharp");
+@@usage(BackupResourceEncryptionConfig, Usage.input | Usage.output, "csharp");
+@@usage(BackupResourceEncryptionConfigExtended,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(BEKDetails, Usage.input | Usage.output, "csharp");
+@@usage(DiskInformation, Usage.input | Usage.output, "csharp");
+@@usage(DpmJob, Usage.input | Usage.output, "csharp");
+@@usage(DpmJobExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(DpmJobTaskDetails, Usage.input | Usage.output, "csharp");
+@@usage(DpmErrorInfo, Usage.input | Usage.output, "csharp");
+@@usage(AzureFileShareProtectableItem, Usage.input | Usage.output, "csharp");
+@@usage(AzureFileShareRecoveryPoint, Usage.input | Usage.output, "csharp");
+@@usage(AzureIaaSVMJob, Usage.input | Usage.output, "csharp");
+@@usage(AzureIaaSVMJobExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(AzureIaaSVMJobTaskDetails, Usage.input | Usage.output, "csharp");
+@@usage(AzureIaaSVMJobV2, Usage.input | Usage.output, "csharp");
+@@usage(IaaSVMProtectableItem, Usage.input | Usage.output, "csharp");
+@@usage(IaasVMRecoveryPoint, Usage.input | Usage.output, "csharp");
+@@usage(KeyAndSecretDetails, Usage.input | Usage.output, "csharp");
+@@usage(PointInTimeRange, Usage.input | Usage.output, "csharp");
+@@usage(PreBackupValidation, Usage.input | Usage.output, "csharp");
+@@usage(ProtectableContainer, Usage.input | Usage.output, "csharp");
+@@usage(ProtectableContainerResource, Usage.input | Usage.output, "csharp");
+@@usage(RecoveryPointDiskConfiguration, Usage.input | Usage.output, "csharp");
+@@usage(RecoveryPointMoveReadinessInfo, Usage.input | Usage.output, "csharp");
+@@usage(RecoveryPointProperties, Usage.input | Usage.output, "csharp");
+@@usage(RecoveryPointTierInformation, Usage.input | Usage.output, "csharp");
+@@usage(SQLDataDirectory, Usage.input | Usage.output, "csharp");
+@@usage(AzureStorageJob, Usage.input | Usage.output, "csharp");
+@@usage(AzureStorageJobExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(AzureStorageJobTaskDetails, Usage.input | Usage.output, "csharp");
+@@usage(AzureStorageErrorInfo, Usage.input | Usage.output, "csharp");
+@@usage(VaultJob, Usage.input | Usage.output, "csharp");
+@@usage(VaultJobErrorInfo, Usage.input | Usage.output, "csharp");
+@@usage(AzureVmWorkloadItem, Usage.input | Usage.output, "csharp");
+@@usage(AzureVmWorkloadProtectableItem, Usage.input | Usage.output, "csharp");
+@@usage(AzureWorkloadJob, Usage.input | Usage.output, "csharp");
+@@usage(AzureWorkloadJobExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(AzureWorkloadJobTaskDetails, Usage.input | Usage.output, "csharp");
+@@usage(AzureWorkloadErrorInfo, Usage.input | Usage.output, "csharp");
+@@usage(WorkloadItem, Usage.input | Usage.output, "csharp");
+@@usage(WorkloadProtectableItem, Usage.input | Usage.output, "csharp");
+@@usage(AzureWorkloadRecoveryPoint, Usage.input | Usage.output, "csharp");
+@@usage(AzureWorkloadSQLRecoveryPoint, Usage.input | Usage.output, "csharp");
+@@usage(AzureWorkloadSQLRecoveryPointExtendedInfo,
+  Usage.input | Usage.output,
+  "csharp"
+);
 
 //@@scope(BackupResourceEncryptionConfigs.get, "!csharp");
 @@scope(BackupResourceEncryptionConfigs.update, "!csharp");
 
 @@scope(JobOperationResults.get, "!csharp");
+
+// Exclude operation status related operations as they are supported by core SDK.
+@@scope(PrivateEndpointOperationStatuses.getOperationStatus, "!csharp");
+@@scope(ProtectedItemOperationResults.get, "!csharp");
+@@scope(ProtectedItemOperationStatuses.get, "!csharp");
+@@scope(ProtectionPolicyOperationResults.get, "!csharp");
+@@scope(ProtectionPolicyOperationStatuses.get, "!csharp");
+@@scope(BMSPrepareDataMoveOperationResult.get, "!csharp");
+@@scope(BackupResourceConfigOperationStatuses.getOperationStatus, "!csharp");
+@@scope(BackupOperationStatuses.get, "!csharp");
+@@scope(TieringCostOperationStatus.get, "!csharp");
+@@scope(BackupOperationResults.get, "!csharp");
+@@scope(ValidateOperationResults.get, "!csharp");
+@@scope(ValidateOperationStatuses.get, "!csharp");
+@@scope(ExportJobsOperationResults.get, "!csharp");
