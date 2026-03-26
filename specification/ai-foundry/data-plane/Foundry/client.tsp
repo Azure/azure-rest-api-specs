@@ -237,17 +237,17 @@ using Azure.AI.Projects;
 // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
 
-@@clientName(Azure.AI.Projects.Training.Jobs.get, "get", "python");
-@@clientName(Azure.AI.Projects.Training.Jobs.list, "list", "python");
-@@clientName(Azure.AI.Projects.Training.Jobs.createOrUpdate,
+@@clientName(Azure.AI.Projects.Jobs.get, "get", "python");
+@@clientName(Azure.AI.Projects.Jobs.list, "list", "python");
+@@clientName(Azure.AI.Projects.Jobs.createOrUpdate,
   "create_or_update",
   "python"
 );
-@@clientName(Azure.AI.Projects.Training.Jobs.beginDelete,
+@@clientName(Azure.AI.Projects.Jobs.beginDelete,
   "begin_delete",
   "python"
 );
-@@clientName(Azure.AI.Projects.Training.Jobs.beginCancel,
+@@clientName(Azure.AI.Projects.Jobs.beginCancel,
   "begin_cancel",
   "python"
 );

@@ -43,8 +43,8 @@ model TensorFlowDistribution extends DistributionConfiguration {
   parameterServerCount?: int32;
 }
 
-@doc("Enum to determine the input data delivery mode.")
-union InputDeliveryMode {
+@doc("Enum to determine the input/output data delivery mode.")
+union InputOutputModes {
   string,
 
   @doc("Read-only mount mode.")
@@ -59,107 +59,65 @@ union InputDeliveryMode {
   @doc("Direct mode.")
   Direct: "Direct",
 
-  @doc("Eval mount mode.")
-  EvalMount: "EvalMount",
-
-  @doc("Eval download mode.")
-  EvalDownload: "EvalDownload",
-}
-
-@doc("Output data delivery mode.")
-union OutputDeliveryMode {
-  string,
-
-  @doc("Read-write mount mode.")
-  ReadWriteMount: "ReadWriteMount",
-
   @doc("Upload mode.")
   Upload: "Upload",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
-@doc("Mapping of input data bindings used in the job.")
-@discriminator("jobInputType")
-model JobInput {
-  @doc("Specifies the type of job.")
-  jobInputType: string;
+@doc("Type of job input/output asset.")
+union AssetTypes {
+  string,
+
+  @doc("URI file asset.")
+  UriFile: "uri_file",
+
+  @doc("URI folder asset.")
+  UriFolder: "uri_folder",
+
+  @doc("Safetensors model asset.")
+  SafetensorsModel: "safetensors_model",
+
+  @doc("Literal value (inputs only).")
+  Literal: "literal",
+}
+
+@doc("Job input definition.")
+model Input {
+  @doc("Specifies the type of job input.")
+  @encodedName("application/json", "jobInputType")
+  type: AssetTypes;
+
+  @doc("Input Asset URI. Required for uri_file, uri_folder, and safetensors_model types.")
+  @encodedName("application/json", "uri")
+  path?: string;
+
+  @doc("Input Asset Delivery Mode. Applies to uri-based inputs.")
+  mode?: InputOutputModes;
+
+  @doc("Literal value. Required for literal type.")
+  value?: string;
 
   @doc("Description for the input.")
   description?: string;
 }
 
-@doc("Uri file job input.")
-model UriFileJobInput extends JobInput {
-  @doc("Specifies the type of job input.")
-  jobInputType: "uri_file";
+@doc("Job output definition.")
+model Output {
+  @doc("Specifies the type of job output.")
+  @encodedName("application/json", "jobOutputType")
+  type: AssetTypes;
 
-  @doc("Input Asset URI.")
-  uri: string;
+  @doc("Output Asset URI.")
+  @encodedName("application/json", "uri")
+  path?: string;
 
-  @doc("Input Asset Delivery Mode.")
-  mode?: InputDeliveryMode;
-}
+  @doc("Output Asset Delivery Mode.")
+  mode?: InputOutputModes;
 
-@doc("Uri folder job input.")
-model UriFolderJobInput extends JobInput {
-  @doc("Specifies the type of job input.")
-  jobInputType: "uri_folder";
-
-  @doc("Input Asset URI.")
-  uri: string;
-
-  @doc("Input Asset Delivery Mode.")
-  mode?: InputDeliveryMode;
-}
-
-@doc("Literal input type.")
-model LiteralJobInput extends JobInput {
-  @doc("Specifies the type of job input.")
-  jobInputType: "literal";
-
-  @doc("Literal value for the input.")
-  value: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
-@doc("Mapping of output data bindings used in the job.")
-@discriminator("jobOutputType")
-model JobOutput {
-  @doc("Specifies the type of job.")
-  jobOutputType: string;
+  @doc("Name of the output data asset to register.")
+  assetName?: string;
 
   @doc("Description for the output.")
   description?: string;
-}
-
-@doc("Uri file job output.")
-model UriFileJobOutput extends JobOutput {
-  @doc("Specifies the type of job output.")
-  jobOutputType: "uri_file";
-
-  @doc("Output Asset URI.")
-  uri?: string;
-
-  @doc("Output Asset Delivery Mode.")
-  mode?: OutputDeliveryMode;
-
-  @doc("Name of the output data asset to register.")
-  assetName?: string;
-}
-
-@doc("Uri folder job output.")
-model UriFolderJobOutput extends JobOutput {
-  @doc("Specifies the type of job output.")
-  jobOutputType: "uri_folder";
-
-  @doc("Output Asset URI.")
-  uri?: string;
-
-  @doc("Output Asset Delivery Mode.")
-  mode?: OutputDeliveryMode;
-
-  @doc("Name of the output data asset to register.")
-  assetName?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
@@ -308,10 +266,10 @@ model CommandJob extends JobProperties {
   compute: string;
 
   @doc("Mapping of input data bindings used in the job.")
-  inputs?: Record<JobInput>;
+  inputs?: Record<Input>;
 
   @doc("Mapping of output data bindings used in the job.")
-  outputs?: Record<JobOutput>;
+  outputs?: Record<Output>;
 
   @doc("Environment variables included in the job.")
   environmentVariables?: Record<string>;

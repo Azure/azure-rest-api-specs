@@ -15,25 +15,58 @@
         "type": "Microsoft.MachineLearningServices/workspaces/jobs",
         "properties": {
           "jobType": "Command",
-          "command": "python train.py --epochs 10",
+          "command": "python train.py --data ${{inputs.training_data}} --output ${{outputs.model}}",
           "environmentImageReference": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
           "displayName": "My Training Job",
           "description": "A sample command job for training",
-          "tags": {
-            "framework": "pytorch"
-          },
-          "properties": {
-            "experimentName": "my-experiment"
-          },
+          "tags": { "framework": "pytorch" },
+          "properties": { "experimentName": "my-experiment" },
+          "code": "azureml:my-training-code:1",
           "compute": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
+          "inputs": {
+            "training_data": {
+              "jobInputType": "uri_folder",
+              "uri": "azureml://datastores/mystore/paths/data/train",
+              "mode": "ReadOnlyMount",
+              "description": "Training dataset"
+            },
+            "learning_rate": {
+              "jobInputType": "literal",
+              "value": "0.001",
+              "description": "Learning rate hyperparameter"
+            }
+          },
+          "outputs": {
+            "model": {
+              "jobOutputType": "uri_folder",
+              "uri": "azureml://datastores/mystore/paths/outputs/model",
+              "mode": "ReadWriteMount",
+              "assetName": "my-trained-model",
+              "description": "Trained model output"
+            }
+          },
+          "environmentVariables": {
+            "AZUREML_DATASET_FILE": "/mnt/data/train.csv"
+          },
+          "distribution": {
+            "distributionType": "PyTorch",
+            "processCountPerInstance": 4
+          },
           "resources": {
-            "instanceCount": 1,
-            "instanceType": "Standard_NC6"
+            "instanceCount": 2,
+            "instanceType": "Standard_NC6s_v3",
+            "shmSize": "2g",
+            "dockerArgs": "--privileged"
           },
           "limits": {
             "jobLimitsType": "Command",
             "timeout": "PT2H30M"
           },
+          "services": {
+            "Studio": { "jobServiceType": "Studio", "port": 8080, "endpoint": "https://studio.example.com" },
+            "Tracking": { "jobServiceType": "Tracking" }
+          },
+          "queueSettings": { "jobTier": "Standard" },
           "status": "Running",
           "isArchived": false
         },
