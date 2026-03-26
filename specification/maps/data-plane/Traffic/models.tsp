@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "./common/common.tsp";
 
 namespace MapsTraffic;
 
@@ -119,25 +120,6 @@ model TrafficIncidentFeaturesItem {
    * Specifies detailed information about the traffic incidents.
    */
   properties?: TrafficIncidentFeatureProperties;
-}
-
-/**
- * A valid `GeoJSON Point` geometry type. Please refer to [RFC
- * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.
- */
-model GeoJsonPoint {
-  /**
-   * Specifies the GeoJSON type as Point.
-   */
-  type?: string;
-
-  /**
-   * A `Position` is an array of numbers with two or more elements. The first two
-   * elements are _longitude_ and _latitude_, precisely in that order.
-   * _Altitude/Elevation_ is an optional third element. Please refer to [RFC
-   * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.
-   */
-  coordinates?: float64[];
 }
 
 /**
@@ -277,22 +259,4 @@ model ErrorDetail {
    */
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
-}
-
-/**
- * The resource management error additional info.
- */
-model ErrorAdditionalInfo {
-  /**
-   * The additional info type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The additional info.
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract."
-  @visibility(Lifecycle.Read)
-  info?: Record<unknown>;
 }
