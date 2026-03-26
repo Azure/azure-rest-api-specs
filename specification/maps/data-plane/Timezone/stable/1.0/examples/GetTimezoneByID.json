@@ -2,60 +2,62 @@
   "parameters": {
     "format": "json",
     "api-version": "1.0",
-    "query": "Asia/Bahrain",
-    "options": "all"
+    "options": "all",
+    "query": "Asia/Bahrain"
   },
   "responses": {
     "200": {
       "body": {
-        "Version": "2018c",
         "ReferenceUtcTimestamp": "2018-01-31T00:03:15.1349348Z",
         "TimeZones": [
           {
-            "Id": "Asia/Qatar",
             "Aliases": [
               "Asia/Bahrain"
             ],
             "Countries": [
               {
-                "Name": "Qatar",
-                "Code": "QA"
+                "Code": "QA",
+                "Name": "Qatar"
               },
               {
-                "Name": "Bahrain",
-                "Code": "BH"
+                "Code": "BH",
+                "Name": "Bahrain"
               }
             ],
+            "Id": "Asia/Qatar",
             "Names": {
-              "ISO6391LanguageCode": "en",
+              "Daylight": "Arabian Daylight Time",
               "Generic": "Arabian Time",
-              "Standard": "Arabian Standard Time",
-              "Daylight": "Arabian Daylight Time"
+              "ISO6391LanguageCode": "en",
+              "Standard": "Arabian Standard Time"
             },
             "ReferenceTime": {
-              "Tag": "+03",
-              "StandardOffset": "03:00:00",
               "DaylightSavings": "00:00:00",
-              "WallTime": "2018-01-31T03:03:15.1349348+03:00",
+              "PosixTz": "<+03>-3",
               "PosixTzValidYear": 2018,
-              "PosixTz": "<+03>-3"
+              "StandardOffset": "03:00:00",
+              "Tag": "+03",
+              "WallTime": "2018-01-31T03:03:15.1349348+03:00"
             },
             "RepresentativePoint": {
               "Latitude": 25.283333333333335,
-              "Longitude": 51.533333333333331
+              "Longitude": 51.53333333333333
             },
             "TimeTransitions": [
               {
-                "Tag": "+03",
-                "StandardOffset": "03:00:00",
                 "DaylightSavings": "00:00:00",
-                "UtcStart": "1972-05-31T20:00:00Z",
-                "UtcEnd": "9999-12-31T23:59:59.9999999Z"
+                "StandardOffset": "03:00:00",
+                "Tag": "+03",
+                "UtcEnd": "9999-12-31T23:59:59.9999999Z",
+                "UtcStart": "1972-05-31T20:00:00Z"
               }
             ]
           }
-        ]
+        ],
+        "Version": "2018c"
       }
     }
-  }
+  },
+  "operationId": "Timezone_GetTimezoneById",
+  "title": "Successfully retrieve timezone by ID"
 }

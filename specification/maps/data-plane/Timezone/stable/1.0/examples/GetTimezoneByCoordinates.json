@@ -2,45 +2,44 @@
   "parameters": {
     "format": "json",
     "api-version": "1.0",
+    "options": "all",
     "query": [
-      47.0,
+      47,
       -122
-    ],
-    "options": "all"
+    ]
   },
   "responses": {
     "200": {
       "body": {
-        "Version": "2019a",
         "ReferenceUtcTimestamp": "2019-06-17T22:16:59.0765556Z",
         "TimeZones": [
           {
-            "Id": "America/Los_Angeles",
             "Aliases": [
               "US/Pacific",
               "US/Pacific-New"
             ],
             "Countries": [
               {
-                "Name": "United States",
-                "Code": "US"
+                "Code": "US",
+                "Name": "United States"
               }
             ],
+            "Id": "America/Los_Angeles",
             "Names": {
-              "ISO6391LanguageCode": "en",
+              "Daylight": "Pacific Daylight Time",
               "Generic": "Pacific Time",
-              "Standard": "Pacific Standard Time",
-              "Daylight": "Pacific Daylight Time"
+              "ISO6391LanguageCode": "en",
+              "Standard": "Pacific Standard Time"
             },
             "ReferenceTime": {
-              "Tag": "PDT",
-              "StandardOffset": "-08:00:00",
               "DaylightSavings": "01:00:00",
-              "WallTime": "2019-06-17T15:16:59.0765556-07:00",
-              "PosixTzValidYear": 2019,
               "PosixTz": "PST+8PDT,M3.2.0,M11.1.0",
+              "PosixTzValidYear": 2019,
+              "StandardOffset": "-08:00:00",
               "Sunrise": "2019-06-17T05:12:21.267-07:00",
-              "Sunset": "2019-06-17T21:05:18.017-07:00"
+              "Sunset": "2019-06-17T21:05:18.017-07:00",
+              "Tag": "PDT",
+              "WallTime": "2019-06-17T15:16:59.0765556-07:00"
             },
             "RepresentativePoint": {
               "Latitude": 34.05222222222222,
@@ -48,30 +47,33 @@
             },
             "TimeTransitions": [
               {
-                "Tag": "PDT",
-                "StandardOffset": "-08:00:00",
                 "DaylightSavings": "01:00:00",
-                "UtcStart": "2019-03-10T10:00:00Z",
-                "UtcEnd": "2019-11-03T09:00:00Z"
+                "StandardOffset": "-08:00:00",
+                "Tag": "PDT",
+                "UtcEnd": "2019-11-03T09:00:00Z",
+                "UtcStart": "2019-03-10T10:00:00Z"
               },
               {
-                "Tag": "PST",
-                "StandardOffset": "-08:00:00",
                 "DaylightSavings": "00:00:00",
-                "UtcStart": "2019-11-03T09:00:00Z",
-                "UtcEnd": "2020-03-08T10:00:00Z"
+                "StandardOffset": "-08:00:00",
+                "Tag": "PST",
+                "UtcEnd": "2020-03-08T10:00:00Z",
+                "UtcStart": "2019-11-03T09:00:00Z"
               },
               {
-                "Tag": "PDT",
-                "StandardOffset": "-08:00:00",
                 "DaylightSavings": "01:00:00",
-                "UtcStart": "2020-03-08T10:00:00Z",
-                "UtcEnd": "2020-11-01T09:00:00Z"
+                "StandardOffset": "-08:00:00",
+                "Tag": "PDT",
+                "UtcEnd": "2020-11-01T09:00:00Z",
+                "UtcStart": "2020-03-08T10:00:00Z"
               }
             ]
           }
-        ]
+        ],
+        "Version": "2019a"
       }
     }
-  }
+  },
+  "operationId": "Timezone_GetTimezoneByCoordinates",
+  "title": "Successfully retrieve timezone by coordinates"
 }

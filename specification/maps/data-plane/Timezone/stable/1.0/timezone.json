@@ -77,7 +77,7 @@
   "paths": {
     "/timezone/byCoordinates/{format}": {
       "get": {
-        "operationId": "GetTimezoneByCoordinates",
+        "operationId": "Timezone_GetTimezoneByCoordinates",
         "summary": "Use to get the current, historical, and future time zone information for the\nspecified latitude-longitude pair.",
         "description": "The `Get Timezone By Coordinates` API is an HTTP `GET` request that returns\ncurrent, historical, and future time zone information for a specified\nlatitude-longitude pair. In addition, the API provides sunset and sunrise times\nfor a given location, with the exception of regions that observe solar days.",
         "parameters": [
@@ -213,12 +213,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve timezone by coordinates": {
+            "$ref": "./examples/GetTimezoneByCoordinates.json"
+          }
         }
       }
     },
     "/timezone/byId/{format}": {
       "get": {
-        "operationId": "GetTimezoneById",
+        "operationId": "Timezone_GetTimezoneById",
         "summary": "Use to get the current, historical, and future time zone information for the\nspecified IANA time zone ID.",
         "description": "The `Get Timezone By ID` API is an HTTP `GET` request that returns current,\nhistorical, and future time zone information for the specified IANA time zone\nID.",
         "parameters": [
@@ -349,12 +354,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve timezone by ID": {
+            "$ref": "./examples/GetTimezoneByID.json"
+          }
         }
       }
     },
     "/timezone/enumIana/{format}": {
       "get": {
-        "operationId": "GetIanaTimezoneIds",
+        "operationId": "Timezone_GetIanaTimezoneIds",
         "summary": "Use to get the list of IANA time zone IDs.",
         "description": "The `Get IANA Time Zones` API is an HTTP `GET` request that returns a full list\nof Internet Assigned Numbers Authority (IANA) time zone IDs. Updates to the\nIANA service are reflected in the system within one day.",
         "parameters": [
@@ -412,7 +422,7 @@
     },
     "/timezone/enumWindows/{format}": {
       "get": {
-        "operationId": "GetWindowsTimezoneIds",
+        "operationId": "Timezone_GetWindowsTimezoneIds",
         "summary": "Use to get the list of Windows Time Zone IDs.",
         "description": "The `Get Windows Time Zones` API is an HTTP `GET` request that returns a full\nlist of Windows Time Zone IDs.",
         "parameters": [
@@ -470,7 +480,7 @@
     },
     "/timezone/ianaVersion/{format}": {
       "get": {
-        "operationId": "GetIanaVersion",
+        "operationId": "Timezone_GetIanaVersion",
         "summary": "Use to get the current IANA version number.",
         "description": "The `Get Time Zone IANA Version` API is an HTTP `GET` request that returns the\ncurrent Internet Assigned Numbers Authority (IANA) version number as Metadata.",
         "parameters": [
@@ -525,7 +535,7 @@
     },
     "/timezone/windowsToIana/{format}": {
       "get": {
-        "operationId": "GetWindowsToIana",
+        "operationId": "Timezone_GetWindowsToIana",
         "summary": "Use to get the IANA ID.",
         "description": "The `Get Windows to IANA Time Zone` API is an HTTP `GET` request that returns a\ncorresponding Internet Assigned Numbers Authority (IANA) ID, given a valid\nWindows Time Zone ID. Multiple IANA IDs may be returned for a single Windows\nID. It is possible to narrow these results by adding an optional territory\nparameter.",
         "parameters": [
