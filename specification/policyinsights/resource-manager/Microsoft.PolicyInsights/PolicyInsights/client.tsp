@@ -9,3 +9,8 @@ using Azure.ClientGenerator.Core;
   autoMergeService: true,
 })
 namespace PolicyInsightsManagementClient;
+
+@@clientName(PolicyInsightsManagementClient,
+  "PolicyInsightsClient",
+  "javaScript"
+);
