@@ -1,12 +1,15 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Microsoft.Cache;
 
@@ -828,6 +831,11 @@ union MigrationProvisioningState {
    * The migration operation has been cancelled.
    */
   Cancelled: "Cancelled",
+
+  /**
+   * The migration operation cancellation has failed.
+   */
+  CancellationFailed: "CancellationFailed",
 }
 
 /**
@@ -998,6 +1006,13 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
+
+  /**
+   * The endpoint of the source resource that is currently pointing to this resource as a result of an ACR/ACRE to AMR migration.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_08_01_preview)
+  migratedEndpoint?: string;
 }
 
 /** Cluster-level maintenance configuration. */
@@ -1663,7 +1678,95 @@ model AzureCacheForRedisMigrationProperties extends MigrationProperties {
   skipDataMigration: boolean;
 
   /**
+   * Sets whether to ignore warnings when performing validation of the migration request. If this property is true, warning-level disparities between the source and target resources will be ignored, and the request will only fail validation if there are error-level disparities. The default value is false.
+   */
+  forceMigrate?: boolean;
+
+  /**
    * Describes the source of the migration operation.
    */
   sourceType: "AzureCacheForRedis";
+}
+
+/**
+ * Properties for validating migration from Azure Cache for Redis to Redis Enterprise.
+ */
+model MigrationValidationRequest {
+  /**
+   * The source resource ID to validate migration from. This is the resource ID of the Azure Cache for Redis.
+   */
+  sourceResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Cache/redis";
+    }
+  ]>;
+
+  /**
+   * Sets whether the data is migrated from source to target or not. The default value is true.
+   */
+  skipDataMigration?: boolean;
+
+  /**
+   * Sets whether to ignore warnings when validating if the source cache can be migrated to the target cache. If this property is true, the isValid property in the response will ignore warning-level disparities between the source and target resource. The default value is false.
+   */
+  forceMigrate?: boolean;
+}
+
+/**
+ * Response for migration validation operation.
+ */
+model MigrationValidationResponse {
+  /**
+   * Indicates whether the migration validation passed.
+   */
+  isValid: boolean;
+
+  /**
+   * List of validation errors that prevent migration.
+   */
+  @identifiers(#[])
+  errors?: MigrationValidationError[];
+
+  /**
+   * List of validation warnings that may impact migration.
+   */
+  @identifiers(#[])
+  warnings?: MigrationValidationWarning[];
+}
+
+/**
+ * Represents a validation error that prevents migration.
+ */
+model MigrationValidationError {
+  /**
+   * List of specific disparities that cause this error.
+   */
+  @identifiers(#[])
+  disparities: MigrationValidationDisparity[];
+}
+
+/**
+ * Represents a validation warning that may impact migration.
+ */
+model MigrationValidationWarning {
+  /**
+   * List of specific disparities that cause this warning.
+   */
+  @identifiers(#[])
+  disparities: MigrationValidationDisparity[];
+}
+
+/**
+ * Represents a specific validation issue found during migration validation.
+ */
+model MigrationValidationDisparity {
+  /**
+   * A localized string denoting the category of the validation issue. Examples are "Region", "Data", "Identity", "Clustering Mode", and "TLS".
+   */
+  category: string;
+
+  /**
+   * Detailed message describing the validation issue.
+   */
+  message: string;
 }
