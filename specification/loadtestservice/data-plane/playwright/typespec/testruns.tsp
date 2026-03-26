@@ -172,7 +172,7 @@ interface TestRuns {
   createOrUpdate is Operations.ResourceCreateOrUpdate<TestRun>;
 
   @added(Versions.v2026_04_01_preview)
-  @doc("Gets a test run for the specified run and workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID or Playwright Service.")
+  @doc("Gets a test run for the specified run and workspace ID. Requires Bearer JWT access token provided by Entra ID or Playwright Service.")
   get is Operations.ResourceRead<TestRun>;
 
   @doc("Lists test runs for the specified workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID or Playwright Service.")
