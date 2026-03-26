@@ -160,25 +160,6 @@ enum Versions {
   v2025_05_01: "2025-05-01",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum Features {
-  applicationGateway,
-  expressRoute,
-  firewall,
-  loadBalancer,
-  networkGateway,
-  networkManager,
-  networkSecurityPerimeter,
-  networkWatcher,
-  networkingOperations,
-  virtualNetwork,
-  virtualWAN,
-  firewallPolicy,
-  azureWebCategory,
-  serviceGateway,
-  virtualNetworkAppliance,
-}
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 @armResourceOperations(#{ omitTags: true })

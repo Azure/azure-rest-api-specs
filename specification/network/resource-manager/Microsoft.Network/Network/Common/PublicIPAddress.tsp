@@ -20,7 +20,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(NetworkInterface)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features1.virtualNetwork)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PublicIPAddress extends Resource {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: PublicIPAddressPropertiesFormat;
