@@ -211,11 +211,16 @@ namespace Microsoft.ContainerRegistry {
   "KeyVaultUri",
   "csharp"
 );
+@@clientName(ExportPipelineTargetProperties.type,
+  "ExportPipelineTargetPropertiesType",
+  "csharp"
+);
 @@clientName(ExportPipelineTargetProperties.uri, "Uri", "csharp");
 @@clientName(ExportPolicyStatus,
   "ContainerRegistryExportPolicyStatus",
   "csharp"
 );
+@@clientName(GarbageCollectionProperties.enabled, "IsEnabled", "csharp");
 @@clientName(GenerateCredentialsParameters,
   "ContainerRegistryGenerateCredentialsContent",
   "csharp"
@@ -240,6 +245,7 @@ namespace Microsoft.ContainerRegistry {
   "KeyVaultUri",
   "csharp"
 );
+@@clientName(ImportPipelineSourceProperties.type, "SourceType", "csharp");
 @@clientName(ImportPipelineSourceProperties.uri, "Uri", "csharp");
 @@clientName(ImportSource, "ContainerRegistryImportSource", "csharp");
 @@clientName(ImportSourceCredentials,
@@ -289,6 +295,10 @@ namespace Microsoft.ContainerRegistry {
   "ContainerRegistryPipelineRunResult",
   "csharp"
 );
+@@clientName(PipelineRunResponse.importedArtifacts,
+  "ImportedArtifactsList",
+  "csharp"
+);
 @@clientName(PipelineRunSourceProperties,
   "ContainerRegistryPipelineRunSourceProperties",
   "csharp"
@@ -307,7 +317,12 @@ namespace Microsoft.ContainerRegistry {
   "ContainerRegistryPipelineRunTargetType",
   "csharp"
 );
+@@clientName(PipelineSourceTriggerDescriptor.timestamp,
+  "SourceTriggerTimestamp",
+  "csharp"
+);
 @@clientName(PipelineSourceTriggerProperties.status, "Status", "csharp");
+@@clientName(PipelineTriggerDescriptor.sourceTrigger, "Source", "csharp");
 @@clientName(PipelineSourceType,
   "ContainerRegistryPipelineSourceType",
   "csharp"
