@@ -45,3 +45,41 @@ using Azure.ClientGenerator.Core;
   autoMergeService: true,
 })
 namespace ApplicationInsightsManagementClient;
+
+@@clientName(Components.TagsResource, "ComponentTagsResource", "java");
+@@clientName(LiveTokenApi.ErrorResponseLinkedStorage,
+  "LiveTokenErrorResponseLinkedStorage",
+  "java"
+);
+@@clientName(LiveTokenApi.ErrorResponseLinkedStorageError,
+  "LiveTokenErrorResponseLinkedStorageError",
+  "java"
+);
+@@clientName(DeletedWorkbookApi.CategoryType,
+  "DeletedWorkbookCategoryType",
+  "java"
+);
+@@clientName(DeletedWorkbookApi.WorkbookSharedTypeKind,
+  "DeletedWorkbookSharedTypeKind",
+  "java"
+);
+
+@@clientName(ComponentAPIs.ApplicationInsightsComponentAPIKey,
+  "ApplicationInsightsComponentApiKey",
+  "java"
+);
+@@clientName(ComponentAPIs.APIKeyRequest, "ApiKeyRequest", "java");
+
+@@clientLocation(ComponentAPIs.APIKeysOperationGroup.list, "ApiKeys", "java");
+@@clientLocation(ComponentAPIs.APIKeysOperationGroup.create, "ApiKeys", "java");
+@@clientLocation(ComponentAPIs.APIKeysOperationGroup.delete, "ApiKeys", "java");
+@@clientLocation(ComponentAPIs.APIKeysOperationGroup.get, "ApiKeys", "java");
+
+@@clientName(Microsoft.Insights.WebTestPropertiesValidationRules.SSLCheck,
+  "sslCheck",
+  "java"
+);
+@@clientName(Microsoft.Insights.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
+  "sslCertRemainingLifetimeCheck",
+  "java"
+);
