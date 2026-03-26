@@ -412,7 +412,7 @@
             "description": "Role name.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,64}$"
+            "pattern": "^[A-Za-z0-9_.-]{1,64}$"
           }
         ],
         "responses": {
@@ -466,7 +466,7 @@
             "description": "Role name.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,64}$"
+            "pattern": "^[A-Za-z0-9_.-]{1,64}$"
           },
           {
             "name": "request",
@@ -526,7 +526,7 @@
             "description": "Role name.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,64}$"
+            "pattern": "^[A-Za-z0-9_.-]{1,64}$"
           }
         ],
         "responses": {
@@ -1261,7 +1261,7 @@
     },
     "ChatRoleInfo": {
       "type": "object",
-      "description": "Represents role information.",
+      "description": "Represents role information.\nA role must contain either user permissions or room permissions, but not both.",
       "properties": {
         "role": {
           "type": "string",
@@ -1269,7 +1269,7 @@
         },
         "permissions": {
           "type": "array",
-          "description": "List of permissions associated with the role.",
+          "description": "Permissions associated with the role. Do not mix user permissions and room permissions in one role.",
           "items": {
             "type": "string"
           }
@@ -1313,7 +1313,7 @@
         },
         "role": {
           "type": "string",
-          "description": "Member role in the room (e.g., \"admin\", \"member\")."
+          "description": "Room role assigned to the user within this room."
         }
       },
       "required": [
@@ -1335,7 +1335,7 @@
         },
         "role": {
           "type": "string",
-          "description": "User's role in the chat system. Defaults to \"member\" if not specified."
+          "description": "Global user role assigned to the user."
         }
       },
       "required": [
@@ -1381,7 +1381,7 @@
       "properties": {
         "permissions": {
           "type": "array",
-          "description": "List of permissions associated with the role.",
+          "description": "Permissions associated with the role. Do not mix user permissions and room permissions in one role.",
           "items": {
             "type": "string"
           }
@@ -1455,7 +1455,7 @@
       "properties": {
         "role": {
           "type": "string",
-          "description": "Member role in the room (e.g., \"admin\", \"member\")."
+          "description": "Room role assigned to the user within this room."
         }
       },
       "required": [

@@ -45,12 +45,15 @@ model ChatMessageInfo {
   createdAt?: utcDateTime;
 }
 
-/** Represents role information. */
+/**
+ * Represents role information.
+ * A role must contain either user permissions or room permissions, but not both.
+ */
 model ChatRoleInfo {
   /** Role name. */
   role: string;
 
-  /** List of permissions associated with the role. */
+  /** Permissions associated with the role. Do not mix user permissions and room permissions in one role. */
   permissions: string[];
 }
 
@@ -71,7 +74,7 @@ model ChatRoomMember {
   /** User ID of the member. */
   userId: string;
 
-  /** Member role in the room (e.g., "admin", "member"). */
+  /** Room role assigned to the user within this room. */
   role: string;
 }
 
@@ -83,7 +86,7 @@ model ChatUserProfile {
   /** User's display nickname. */
   nickname: string;
 
-  /** User's role in the chat system. Defaults to "member" if not specified. */
+  /** Global user role assigned to the user. */
   role?: string;
 }
 
@@ -107,7 +110,7 @@ model CreateChatRoomRequest {
 
 /** Request to create or update a role. */
 model CreateOrUpdateChatRoleInfoRequest {
-  /** List of permissions associated with the role. */
+  /** Permissions associated with the role. Do not mix user permissions and room permissions in one role. */
   permissions: string[];
 }
 
@@ -146,7 +149,7 @@ model UpdateChatMessageRequest {
 
 /** Request to update a room member. */
 model UpdateChatRoomMemberRequest {
-  /** Member role in the room (e.g., "admin", "member"). */
+  /** Room role assigned to the user within this room. */
   role: string;
 }
 
