@@ -162,8 +162,9 @@ union DeletePolicy {
 @added(Versions.v2025_08_01_preview)
 @doc("The propagation to be used for provisioning the namespace among the fleet.")
 model PropagationPolicy {
+  @madeOptional(Microsoft.ContainerService.Versions.v2026_05_01_preview)
   @doc("The type of the policy to be used. Default is Placement.")
-  type: PropagationType;
+  type?: PropagationType;
 
   @doc("The profile to be used for propagation via placement.")
   placementProfile?: PlacementProfile;
@@ -228,9 +229,29 @@ interface FleetManagedNamespaces {
   >;
 }
 
+@added(Versions.v2026_05_01_preview)
+@doc("The properties of a fleet managed namespace that can be patched.")
+model FleetManagedNamespacePropertiesPatch {
+  @doc("The namespace properties for the fleet managed namespace.")
+  managedNamespaceProperties?: ManagedNamespaceProperties;
+
+  @doc("Action if the managed namespace with the same name already exists.")
+  adoptionPolicy?: AdoptionPolicy;
+
+  @doc("Delete options of a fleet managed namespace.")
+  deletePolicy?: DeletePolicy;
+
+  @doc("The profile of the propagation to create the namespace.")
+  propagationPolicy?: PropagationPolicy;
+}
+
 @added(Versions.v2025_08_01_preview)
 @doc("The properties of a fleet managed namespace that can be patched.")
 model FleetManagedNamespacePatch {
   /* The ARM tags of the fleet managed namespace resource.*/
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("The updatable properties of the fleet managed namespace.")
+  properties?: FleetManagedNamespacePropertiesPatch;
 }
