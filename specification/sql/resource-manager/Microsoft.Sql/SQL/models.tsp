@@ -3186,6 +3186,43 @@ union SyncDirection {
 }
 
 /**
+ * The masking function that is used for the data masking rule.
+ */
+union DataMaskingFunction {
+  string,
+
+  /**
+   * Default
+   */
+  Default: "Default",
+
+  /**
+   * CCN
+   */
+  CCN: "CCN",
+
+  /**
+   * Email
+   */
+  Email: "Email",
+
+  /**
+   * Number
+   */
+  Number: "Number",
+
+  /**
+   * SSN
+   */
+  SSN: "SSN",
+
+  /**
+   * Text
+   */
+  Text: "Text",
+}
+
+/**
  * Sync state of the sync member.
  */
 union SyncMemberState {
@@ -3376,6 +3413,23 @@ union VirtualNetworkRuleState {
    * Unknown
    */
   Unknown: "Unknown",
+}
+
+/**
+ * The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState.
+ */
+union DataMaskingRuleState {
+  string,
+
+  /**
+   * Enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Disabled
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -3713,58 +3767,6 @@ enum DataMaskingState {
    * Disabled
    */
   Disabled,
-}
-
-/**
- * The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum DataMaskingRuleState {
-  /**
-   * Enabled
-   */
-  Enabled,
-
-  /**
-   * Disabled
-   */
-  Disabled,
-}
-
-/**
- * The masking function that is used for the data masking rule.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum DataMaskingFunction {
-  /**
-   * Default
-   */
-  Default,
-
-  /**
-   * CCN
-   */
-  CCN,
-
-  /**
-   * Email
-   */
-  Email,
-
-  /**
-   * Number
-   */
-  Number,
-
-  /**
-   * SSN
-   */
-  SSN,
-
-  /**
-   * Text
-   */
-  Text,
 }
 
 /**
