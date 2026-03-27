@@ -26,7 +26,7 @@ using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 /**
- * // (missing-service-description) Add service description
+ * ContainerInstance
  */
 @armProviderNamespace
 @service(#{ title: "ContainerInstanceManagementClient" })
