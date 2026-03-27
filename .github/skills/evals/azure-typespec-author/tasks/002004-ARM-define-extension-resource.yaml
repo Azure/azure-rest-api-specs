@@ -1,0 +1,18 @@
+id: 002004-ARM-define-extension-resource
+name: "ARM: Define an extension resource"
+description: |
+  Test defining a new extension resource model with CRUD operations.
+  Based on benchmark case 002004-ARM-define-extension-resource.
+tags:
+  - arm
+  - resource-type
+inputs:
+  prompt: 'Define a "badge assignment" extension resource. It should be an extension resource that can be attached to an employee. Ensure the definition meets TypeSpec Azure guidelines.'
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "General Authoring"
