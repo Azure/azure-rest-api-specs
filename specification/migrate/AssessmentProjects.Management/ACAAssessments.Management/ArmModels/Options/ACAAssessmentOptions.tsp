@@ -37,6 +37,12 @@ model ACAAssessmentOptionsProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("A class that represents the outbound edges from a given node.")
 model ACAAssessmentOptionsOutboundEdgeGroup {
+  @doc("Gets or sets the Workload Profile SKU categories.")
+  categories: ACAWorkloadProfileSku[];
+
+  @doc("Gets or sets the Workload Profile Types.")
+  workloadProfileTypes: ACAWorkloadProfileType[];
+
   @doc("Gets or sets the Pricing Tier.")
   tiers: PricingTier[];
 

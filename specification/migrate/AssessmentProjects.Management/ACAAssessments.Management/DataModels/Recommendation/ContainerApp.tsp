@@ -17,6 +17,14 @@ model ContainerApp {
   @visibility(Lifecycle.Read)
   environmentName: string;
 
+  @doc("Gets the workload profile type.")
+  @visibility(Lifecycle.Read)
+  workloadProfileType?: ACAWorkloadProfileType;
+
+  @doc("Gets the workload profile SKU.")
+  @visibility(Lifecycle.Read)
+  sku?: ACAWorkloadProfileSku;
+
   @doc("Gets vCPU cores allocated to the container app.")
   @visibility(Lifecycle.Read)
   cores?: float64;

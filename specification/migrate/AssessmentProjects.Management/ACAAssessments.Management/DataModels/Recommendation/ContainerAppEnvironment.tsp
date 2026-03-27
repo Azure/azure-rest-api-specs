@@ -5,6 +5,10 @@ namespace Microsoft.Migrate;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property"
 @doc("Data model of Container App Environment.")
 model ContainerAppEnvironment {
+  @doc("Gets region.")
+  @visibility(Lifecycle.Read)
+  region?: string;
+
   @doc("Gets the workload profile type for the environment.")
   @visibility(Lifecycle.Read)
   workloadProfileType?: ACAWorkloadProfileType;

@@ -5,8 +5,8 @@ using Microsoft.Migrate;
 
 @@clientName(ACAOptionsOperations, "AcaOptionsOperations", "autorest");
 @@clientName(ACAAssessmentOperations, "AcaAssessmentOperations", "autorest");
-@@clientName(ACAContainerAppEnvironmentOperations,
-  "AcaContainerAppEnvironmentOperations",
+@@clientName(ACAManagedEnvironmentOperations,
+  "AcaManagedEnvironmentOperations",
   "autorest"
 );
 @@clientName(ACACostDetailOperations, "AcaCostDetailOperations", "autorest");

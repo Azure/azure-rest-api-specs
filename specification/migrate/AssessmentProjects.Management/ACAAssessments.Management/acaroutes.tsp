@@ -69,12 +69,12 @@ interface ACASummaryOperations {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @armResourceOperations
-interface ACAContainerAppEnvironmentOperations {
+interface ACAManagedEnvironmentOperations {
   @added(ACAApiVersions.v2025_09_09_preview)
-  get is ArmResourceRead<ACAContainerAppEnvironment>;
+  get is ArmResourceRead<ACAManagedEnvironment>;
 
   @added(ACAApiVersions.v2025_09_09_preview)
-  listByParent is ArmResourceListByParent<ACAContainerAppEnvironment>;
+  listByParent is ArmResourceListByParent<ACAManagedEnvironment>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"

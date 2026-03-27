@@ -52,7 +52,7 @@
       "name": "ACASummaryOperations"
     },
     {
-      "name": "ACAContainerAppEnvironmentOperations"
+      "name": "ACAManagedEnvironmentOperations"
     },
     {
       "name": "ACACostDetailOperations"
@@ -526,127 +526,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/acaAssessments/{assessmentName}/containerAppEnvironments": {
-      "get": {
-        "operationId": "AcaContainerAppEnvironmentOperations_ListByParent",
-        "tags": [
-          "ACAContainerAppEnvironmentOperations"
-        ],
-        "description": "List ACAContainerAppEnvironment resources by ACAAssessment",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "Assessment Project Name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "description": "ACA Assessment Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ACAContainerAppEnvironmentListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AcaContainerAppEnvironmentOperations_ListByParent_MaximumSet": {
-            "$ref": "./examples/AcaContainerAppEnvironmentOperations_ListByParent_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/acaAssessments/{assessmentName}/containerAppEnvironments/{containerAppEnvironmentName}": {
-      "get": {
-        "operationId": "AcaContainerAppEnvironmentOperations_Get",
-        "tags": [
-          "ACAContainerAppEnvironmentOperations"
-        ],
-        "description": "Get a ACAContainerAppEnvironment",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "Assessment Project Name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "description": "ACA Assessment Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "containerAppEnvironmentName",
-            "in": "path",
-            "description": "ACA Container App Environment Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ACAContainerAppEnvironment"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AcaContainerAppEnvironmentOperations_Get_MaximumSet": {
-            "$ref": "./examples/AcaContainerAppEnvironmentOperations_Get_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/acaAssessments/{assessmentName}/costDetails": {
       "get": {
         "operationId": "AcaCostDetailOperations_ListByParent",
@@ -785,6 +664,127 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/acaAssessments/{assessmentName}/managedEnvironments": {
+      "get": {
+        "operationId": "AcaManagedEnvironmentOperations_ListByParent",
+        "tags": [
+          "ACAManagedEnvironmentOperations"
+        ],
+        "description": "List ACAManagedEnvironment resources by ACAAssessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "ACA Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ACAManagedEnvironmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AcaManagedEnvironmentOperations_ListByParent_MaximumSet": {
+            "$ref": "./examples/AcaManagedEnvironmentOperations_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/acaAssessments/{assessmentName}/managedEnvironments/{managedEnvironmentName}": {
+      "get": {
+        "operationId": "AcaManagedEnvironmentOperations_Get",
+        "tags": [
+          "ACAManagedEnvironmentOperations"
+        ],
+        "description": "Get a ACAManagedEnvironment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "ACA Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "managedEnvironmentName",
+            "in": "path",
+            "description": "ACA Managed Environment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ACAManagedEnvironment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AcaManagedEnvironmentOperations_Get_MaximumSet": {
+            "$ref": "./examples/AcaManagedEnvironmentOperations_Get_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/acaAssessments/{assessmentName}/summaries": {
@@ -986,6 +986,20 @@
       "type": "object",
       "description": "A class that represents the outbound edges from a given node.",
       "properties": {
+        "categories": {
+          "type": "array",
+          "description": "Gets or sets the Workload Profile SKU categories.",
+          "items": {
+            "$ref": "#/definitions/ACAWorkloadProfileSku"
+          }
+        },
+        "workloadProfileTypes": {
+          "type": "array",
+          "description": "Gets or sets the Workload Profile Types.",
+          "items": {
+            "$ref": "#/definitions/ACAWorkloadProfileType"
+          }
+        },
         "tiers": {
           "type": "array",
           "description": "Gets or sets the Pricing Tier.",
@@ -1023,6 +1037,8 @@
         }
       },
       "required": [
+        "categories",
+        "workloadProfileTypes",
         "tiers",
         "targetLocations",
         "currencies",
@@ -1112,105 +1128,23 @@
           "$ref": "#/definitions/EnvironmentType",
           "description": "Gets or sets user configurable setting to display the environment type."
         },
+        "category": {
+          "$ref": "#/definitions/ACAWorkloadProfileSku",
+          "description": "Gets or sets the workload profile SKU category."
+        },
+        "workloadProfileType": {
+          "$ref": "#/definitions/ACAWorkloadProfileType",
+          "description": "Gets or sets the workload profile type."
+        },
         "pricingTier": {
           "$ref": "#/definitions/PricingTier",
           "description": "Gets or sets pricing tier."
         }
       },
       "required": [
+        "category",
+        "workloadProfileType",
         "pricingTier"
-      ]
-    },
-    "ACAContainerAppEnvironment": {
-      "type": "object",
-      "description": "ARM model of ACA Container App Environment.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ACAContainerAppEnvironmentProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ACAContainerAppEnvironmentListResult": {
-      "type": "object",
-      "description": "The response of a ACAContainerAppEnvironment list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ACAContainerAppEnvironment items on this page",
-          "items": {
-            "$ref": "#/definitions/ACAContainerAppEnvironment"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ACAContainerAppEnvironmentProperties": {
-      "type": "object",
-      "description": "ARM model of ACA Container App Environment Properties.",
-      "properties": {
-        "workloadProfileType": {
-          "$ref": "#/definitions/ACAWorkloadProfileType",
-          "description": "Gets the workload profile type for the environment.",
-          "readOnly": true
-        },
-        "cores": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets the total vCPU cores allocated to the environment.",
-          "readOnly": true
-        },
-        "memoryInGib": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets the total memory in GiB allocated to the environment.",
-          "readOnly": true
-        },
-        "numberOfContainerApps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets the number of container apps in this environment.",
-          "readOnly": true
-        },
-        "monthlyCost": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets monthly cost.",
-          "readOnly": true
-        },
-        "createdTimestamp": {
-          "type": "string",
-          "description": "Gets the created timestamp.",
-          "readOnly": true
-        },
-        "updatedTimestamp": {
-          "type": "string",
-          "description": "Gets the updated timestamp.",
-          "readOnly": true
-        },
-        "containerApps": {
-          "type": "array",
-          "description": "Gets list of container apps in this environment.",
-          "items": {
-            "$ref": "#/definitions/ContainerApp"
-          },
-          "readOnly": true
-        }
-      },
-      "required": [
-        "containerApps"
       ]
     },
     "ACACostDetail": {
@@ -1268,6 +1202,16 @@
           "description": "Gets the parent environment name.",
           "readOnly": true
         },
+        "workloadProfileType": {
+          "$ref": "#/definitions/ACAWorkloadProfileType",
+          "description": "Gets the workload profile type.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ACAWorkloadProfileSku",
+          "description": "Gets the workload profile SKU.",
+          "readOnly": true
+        },
         "cores": {
           "type": "number",
           "format": "double",
@@ -1291,6 +1235,103 @@
         "id",
         "name",
         "environmentName"
+      ]
+    },
+    "ACAManagedEnvironment": {
+      "type": "object",
+      "description": "ARM model of ACA Managed Environment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ACAManagedEnvironmentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ACAManagedEnvironmentListResult": {
+      "type": "object",
+      "description": "The response of a ACAManagedEnvironment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ACAManagedEnvironment items on this page",
+          "items": {
+            "$ref": "#/definitions/ACAManagedEnvironment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ACAManagedEnvironmentProperties": {
+      "type": "object",
+      "description": "ARM model of ACA Managed Environment Properties.",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Gets region.",
+          "readOnly": true
+        },
+        "workloadProfileType": {
+          "$ref": "#/definitions/ACAWorkloadProfileType",
+          "description": "Gets the workload profile type for the environment.",
+          "readOnly": true
+        },
+        "cores": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets the total vCPU cores allocated to the environment.",
+          "readOnly": true
+        },
+        "memoryInGib": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets the total memory in GiB allocated to the environment.",
+          "readOnly": true
+        },
+        "numberOfContainerApps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the number of container apps in this environment.",
+          "readOnly": true
+        },
+        "monthlyCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets monthly cost.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "description": "Gets the created timestamp.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "description": "Gets the updated timestamp.",
+          "readOnly": true
+        },
+        "containerApps": {
+          "type": "array",
+          "description": "Gets list of container apps in this environment.",
+          "items": {
+            "$ref": "#/definitions/ContainerApp"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "containerApps"
       ]
     },
     "ACASummary": {
@@ -1413,11 +1454,78 @@
         "machineCount"
       ]
     },
+    "ACAWorkloadProfileSku": {
+      "type": "string",
+      "description": "Workload Profile SKU for Azure Container Apps.",
+      "enum": [
+        "Consumption",
+        "Dedicated-D4",
+        "Dedicated-D8",
+        "Dedicated-D16",
+        "Dedicated-D32",
+        "Dedicated-E4",
+        "Dedicated-E8",
+        "Dedicated-E16",
+        "Dedicated-E32"
+      ],
+      "x-ms-enum": {
+        "name": "ACAWorkloadProfileSku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Consumption",
+            "value": "Consumption",
+            "description": "Consumption workload profile."
+          },
+          {
+            "name": "DedicatedD4",
+            "value": "Dedicated-D4",
+            "description": "Dedicated D4 — General purpose D-series."
+          },
+          {
+            "name": "DedicatedD8",
+            "value": "Dedicated-D8",
+            "description": "Dedicated D8 — General purpose D-series."
+          },
+          {
+            "name": "DedicatedD16",
+            "value": "Dedicated-D16",
+            "description": "Dedicated D16 — General purpose D-series."
+          },
+          {
+            "name": "DedicatedD32",
+            "value": "Dedicated-D32",
+            "description": "Dedicated D32 — General purpose D-series."
+          },
+          {
+            "name": "DedicatedE4",
+            "value": "Dedicated-E4",
+            "description": "Dedicated E4 — Memory optimized E-series."
+          },
+          {
+            "name": "DedicatedE8",
+            "value": "Dedicated-E8",
+            "description": "Dedicated E8 — Memory optimized E-series."
+          },
+          {
+            "name": "DedicatedE16",
+            "value": "Dedicated-E16",
+            "description": "Dedicated E16 — Memory optimized E-series."
+          },
+          {
+            "name": "DedicatedE32",
+            "value": "Dedicated-E32",
+            "description": "Dedicated E32 — Memory optimized E-series."
+          }
+        ]
+      }
+    },
     "ACAWorkloadProfileType": {
       "type": "string",
       "description": "Workload Profile Type for Azure Container Apps.",
       "enum": [
-        "Consumption"
+        "Consumption",
+        "Dedicated"
       ],
       "x-ms-enum": {
         "name": "ACAWorkloadProfileType",
@@ -1427,6 +1535,11 @@
             "name": "Consumption",
             "value": "Consumption",
             "description": "Consumption workload profile — up to 4 vCPUs, 8 GiB memory."
+          },
+          {
+            "name": "Dedicated",
+            "value": "Dedicated",
+            "description": "Dedicated workload profile."
           }
         ]
       }
@@ -3210,7 +3323,8 @@
         "AzureVM",
         "AzureAppService",
         "AzureAppServiceContainer",
-        "Avs"
+        "Avs",
+        "ACA"
       ],
       "x-ms-enum": {
         "name": "AzureTarget",
@@ -3285,6 +3399,11 @@
             "name": "Avs",
             "value": "Avs",
             "description": "Avs - Azure Target"
+          },
+          {
+            "name": "ACA",
+            "value": "ACA",
+            "description": "ACA - Azure Target"
           }
         ]
       }
@@ -6820,6 +6939,16 @@
           "description": "Gets the parent environment name.",
           "readOnly": true
         },
+        "workloadProfileType": {
+          "$ref": "#/definitions/ACAWorkloadProfileType",
+          "description": "Gets the workload profile type.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ACAWorkloadProfileSku",
+          "description": "Gets the workload profile SKU.",
+          "readOnly": true
+        },
         "cores": {
           "type": "number",
           "format": "double",
@@ -6849,6 +6978,11 @@
       "type": "object",
       "description": "Data model of Container App Environment.",
       "properties": {
+        "region": {
+          "type": "string",
+          "description": "Gets region.",
+          "readOnly": true
+        },
         "workloadProfileType": {
           "$ref": "#/definitions/ACAWorkloadProfileType",
           "description": "Gets the workload profile type for the environment.",
