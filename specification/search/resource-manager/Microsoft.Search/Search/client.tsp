@@ -61,7 +61,7 @@ op usagesListBySubscriptionCustomization(
   ...SubscriptionIdParameter,
   ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
-  ...LocationParameter,
+  ...LocationResourceParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   body: void,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -866,6 +866,10 @@ model AccessRulePropertiesSubscriptionsItem {
 );
 
 @@clientName(SearchServiceProperties.eTag, "etag", "java");
+
+@@clientName(SearchResourceEncryptionKey.keyVaultKeyName, "keyName");
+@@clientName(SearchResourceEncryptionKey.keyVaultKeyVersion, "keyVersion");
+@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri");
 
 // C# settings
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flatten sku for backward compat with C# SDK"

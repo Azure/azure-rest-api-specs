@@ -25200,16 +25200,6 @@
         }
       }
     },
-    "ComputeInstanceAutologgerSettings": {
-      "type": "object",
-      "description": "Specifies settings for autologger.",
-      "properties": {
-        "mlflowAutologger": {
-          "$ref": "#/definitions/MlflowAutologger",
-          "description": "Indicates whether mlflow autologger is enabled for notebooks."
-        }
-      }
-    },
     "ComputeInstanceConnectivityEndpoints": {
       "type": "object",
       "description": "Defines all connectivity endpoints and properties for an ComputeInstance.",
@@ -25451,11 +25441,6 @@
             ]
           }
         },
-        "autologgerSettings": {
-          "$ref": "#/definitions/ComputeInstanceAutologgerSettings",
-          "description": "Specifies settings for autologger.",
-          "x-nullable": true
-        },
         "sshSettings": {
           "$ref": "#/definitions/ComputeInstanceSshSettings",
           "description": "Specifies policy and settings for SSH access.",
@@ -25534,32 +25519,11 @@
           },
           "x-nullable": true
         },
-        "enableOSPatching": {
-          "type": "boolean",
-          "title": "Enable Auto OS Patching.",
-          "description": "Enable Auto OS Patching. Possible values are: true, false.",
-          "default": false,
-          "x-nullable": true
-        },
-        "enableRootAccess": {
-          "type": "boolean",
-          "title": "Enable root access.",
-          "description": "Enable root access. Possible values are: true, false.",
-          "default": true,
-          "x-nullable": true
-        },
         "enableSSO": {
           "type": "boolean",
           "title": "Enable SSO (single sign on).",
           "description": "Enable SSO (single sign on). Possible values are: true, false.",
           "default": true,
-          "x-nullable": true
-        },
-        "releaseQuotaOnStop": {
-          "type": "boolean",
-          "title": "Release quota if compute instance stopped.",
-          "description": "Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped.",
-          "default": false,
           "x-nullable": true
         },
         "personalComputeInstanceSettings": {
@@ -26941,29 +26905,6 @@
     "ContentSafety": {
       "type": "object",
       "properties": {
-        "contentSafetyLevel": {
-          "type": "string",
-          "description": "Specifies the current safety level for content safety.",
-          "default": "Blocking",
-          "enum": [
-            "Blocking",
-            "Deferred"
-          ],
-          "x-ms-enum": {
-            "name": "ContentSafetyLevel",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Blocking",
-                "value": "Blocking"
-              },
-              {
-                "name": "Deferred",
-                "value": "Deferred"
-              }
-            ]
-          }
-        },
         "contentSafetyStatus": {
           "$ref": "#/definitions/ContentSafetyStatus",
           "description": "[Required] Specifies the status of content safety."
@@ -27812,116 +27753,6 @@
       ],
       "x-ms-discriminator-value": "DataFactory"
     },
-    "DataGenerationTaskType": {
-      "type": "string",
-      "description": "Enum to determine the type of Data Generation Task.",
-      "enum": [
-        "Conversation",
-        "Math",
-        "Nli",
-        "NluQa",
-        "Summarization"
-      ],
-      "x-ms-enum": {
-        "name": "DataGenerationTaskType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Conversation",
-            "value": "Conversation",
-            "description": "Generate conversational data (multi/single turn)"
-          },
-          {
-            "name": "Math",
-            "value": "Math",
-            "description": "Generate Math data for numerical responses"
-          },
-          {
-            "name": "Nli",
-            "value": "Nli",
-            "description": "Generate Natural Language Inference data"
-          },
-          {
-            "name": "NluQa",
-            "value": "NluQa",
-            "description": "Generate Natural Language Understanding data for Question Answering data"
-          },
-          {
-            "name": "Summarization",
-            "value": "Summarization",
-            "description": "Generate Key Summary for an Article"
-          }
-        ]
-      }
-    },
-    "DataGenerationType": {
-      "type": "string",
-      "description": "Enum to determine the type of Data Generation.",
-      "enum": [
-        "LabelGeneration",
-        "DataGeneration"
-      ],
-      "x-ms-enum": {
-        "name": "DataGenerationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LabelGeneration",
-            "value": "LabelGeneration",
-            "description": "Label Generation by Teacher Model Inferencing"
-          },
-          {
-            "name": "DataGeneration",
-            "value": "DataGeneration",
-            "description": "Synthetic Data Generation"
-          }
-        ]
-      }
-    },
-    "DataGenerationVertical": {
-      "type": "object",
-      "properties": {
-        "dataGenerationTaskType": {
-          "$ref": "#/definitions/DataGenerationTaskType",
-          "description": "[Required] DataGeneration Task type.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "dataGenerationType": {
-          "$ref": "#/definitions/DataGenerationType",
-          "description": "[Required] Enum to determine the type of Data Generation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "promptSettings": {
-          "$ref": "#/definitions/PromptSettings",
-          "description": "Prompt Settings.",
-          "x-nullable": true
-        },
-        "teacherModelEndpoint": {
-          "$ref": "#/definitions/TeacherModelEndpoint",
-          "description": "[Required] Teacher Model Endpoint Details.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "teacherModelSettings": {
-          "$ref": "#/definitions/TeacherModelSettings",
-          "x-nullable": true
-        }
-      },
-      "discriminator": "dataGenerationType",
-      "required": [
-        "dataGenerationTaskType",
-        "dataGenerationType",
-        "teacherModelEndpoint"
-      ]
-    },
     "DataLakeAnalytics": {
       "type": "object",
       "description": "A DataLakeAnalytics compute.",
@@ -28404,27 +28235,6 @@
           {
             "name": "OneLake",
             "value": "OneLake"
-          }
-        ]
-      }
-    },
-    "DefaultActionType": {
-      "type": "string",
-      "enum": [
-        "Deny",
-        "Allow"
-      ],
-      "x-ms-enum": {
-        "name": "DefaultActionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Deny",
-            "value": "Deny"
-          },
-          {
-            "name": "Allow",
-            "value": "Allow"
           }
         ]
       }
@@ -28981,60 +28791,6 @@
           "$ref": "#/definitions/DiagnoseRequestProperties"
         }
       }
-    },
-    "DistillationJob": {
-      "type": "object",
-      "description": "Distillation Job definition.",
-      "properties": {
-        "dataGenerationDetails": {
-          "$ref": "#/definitions/DataGenerationVertical",
-          "description": "[Required]"
-        },
-        "finetuningDetails": {
-          "$ref": "#/definitions/FinetuningDetails",
-          "description": "[Required]"
-        },
-        "outputs": {
-          "type": "object",
-          "description": "[Required]",
-          "additionalProperties": {
-            "$ref": "#/definitions/JobOutput",
-            "x-nullable": true
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "queueSettings": {
-          "$ref": "#/definitions/QueueSettings",
-          "description": "Queue settings for the job",
-          "x-nullable": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "resources": {
-          "$ref": "#/definitions/JobResources",
-          "description": "Instance types and other resources for the job",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "dataGenerationDetails",
-        "finetuningDetails",
-        "outputs"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobBaseProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Distillation"
     },
     "DistributionConfiguration": {
       "type": "object",
@@ -29882,13 +29638,6 @@
           "format": "arm-id",
           "description": "Byo resource id for creating the built-in model service endpoints."
         },
-        "deployments": {
-          "type": "array",
-          "description": "Deployments info.",
-          "items": {
-            "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
-          }
-        },
         "endpointType": {
           "$ref": "#/definitions/EndpointType",
           "description": "Type of the endpoint."
@@ -30249,10 +29998,6 @@
             "read",
             "create"
           ]
-        },
-        "imageDetails": {
-          "$ref": "#/definitions/ImageDetails",
-          "description": "Environment image details."
         },
         "inferenceConfig": {
           "$ref": "#/definitions/InferenceContainerProperties",
@@ -31264,27 +31009,6 @@
         "trainingData"
       ]
     },
-    "FinetuningDetails": {
-      "type": "object",
-      "properties": {
-        "hyperParameters": {
-          "type": "object",
-          "description": "Finetuning Hyperparameters",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          }
-        },
-        "studentModel": {
-          "$ref": "#/definitions/JobInput",
-          "description": "[Required] Student model for fine tuning."
-        }
-      },
-      "required": [
-        "studentModel"
-      ]
-    },
     "FirewallSku": {
       "type": "string",
       "description": "Firewall Sku used for FQDN Rules",
@@ -32015,16 +31739,6 @@
         }
       }
     },
-    "IPRule": {
-      "type": "object",
-      "description": "Contains an IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). Value could be 'Allow' or  'Deny'.",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). Value could be 'Allow' or  'Deny'."
-        }
-      }
-    },
     "IdAssetReference": {
       "type": "object",
       "description": "Reference to an asset via its ARM resource ID.",
@@ -32338,50 +32052,6 @@
         }
       ],
       "x-ms-discriminator-value": "ImageClassificationMultilabel"
-    },
-    "ImageDetails": {
-      "type": "object",
-      "properties": {
-        "exists": {
-          "type": "boolean",
-          "description": "Indicates if image exists"
-        },
-        "image": {
-          "$ref": "#/definitions/ImageInfo",
-          "description": "Container image details",
-          "x-nullable": true
-        },
-        "vulnerabilityFindings": {
-          "$ref": "#/definitions/VulnerabilityFindings",
-          "description": "Vulnerability findings details",
-          "x-nullable": true
-        }
-      }
-    },
-    "ImageInfo": {
-      "type": "object",
-      "properties": {
-        "digest": {
-          "type": "string",
-          "description": "Image digest",
-          "x-nullable": true
-        },
-        "hostname": {
-          "type": "string",
-          "description": "Container registry host name",
-          "x-nullable": true
-        },
-        "repository": {
-          "type": "string",
-          "description": "Repository name",
-          "x-nullable": true
-        },
-        "tag": {
-          "type": "string",
-          "description": "Image tag",
-          "x-nullable": true
-        }
-      }
     },
     "ImageInstanceSegmentation": {
       "type": "object",
@@ -33768,11 +33438,6 @@
             "create"
           ]
         },
-        "parentJobName": {
-          "type": "string",
-          "description": "Parent job name.",
-          "x-nullable": true
-        },
         "services": {
           "type": "object",
           "description": "List of JobEndpoints.\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
@@ -34246,9 +33911,7 @@
         "Command",
         "Sweep",
         "Pipeline",
-        "Spark",
-        "FineTuning",
-        "Distillation"
+        "Spark"
       ],
       "x-ms-enum": {
         "name": "JobType",
@@ -34273,14 +33936,6 @@
           {
             "name": "Spark",
             "value": "Spark"
-          },
-          {
-            "name": "FineTuning",
-            "value": "FineTuning"
-          },
-          {
-            "name": "Distillation",
-            "value": "Distillation"
           }
         ]
       }
@@ -34434,27 +34089,6 @@
           }
         }
       }
-    },
-    "LabelGeneration": {
-      "type": "object",
-      "properties": {
-        "trainingData": {
-          "$ref": "#/definitions/JobInput",
-          "description": "Training data for fine tuning.",
-          "x-nullable": true
-        },
-        "validationData": {
-          "$ref": "#/definitions/JobInput",
-          "description": "Validation data for fine tuning.",
-          "x-nullable": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataGenerationVertical"
-        }
-      ],
-      "x-ms-discriminator-value": "LabelGeneration"
     },
     "LakeHouseArtifact": {
       "type": "object",
@@ -35612,28 +35246,6 @@
       ],
       "x-ms-discriminator-value": "MedianStopping"
     },
-    "MlflowAutologger": {
-      "type": "string",
-      "description": "Indicates whether mlflow autologger is enabled for notebooks.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "MlflowAutologger",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled"
-          }
-        ]
-      }
-    },
     "ModelContainer": {
       "type": "object",
       "description": "Azure Resource Manager resource envelope.",
@@ -36536,22 +36148,6 @@
             "value": "Host"
           }
         ]
-      }
-    },
-    "NetworkAcls": {
-      "type": "object",
-      "properties": {
-        "defaultAction": {
-          "$ref": "#/definitions/DefaultActionType",
-          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated."
-        },
-        "ipRules": {
-          "type": "array",
-          "description": "Rules governing the accessibility of a resource from a specific ip address or ip range.",
-          "items": {
-            "$ref": "#/definitions/IPRule"
-          }
-        }
       }
     },
     "NlpVerticalFeaturizationSettings": {
@@ -37806,31 +37402,6 @@
         }
       }
     },
-    "PackageDetails": {
-      "type": "object",
-      "properties": {
-        "installPath": {
-          "type": "string",
-          "description": "Install path.",
-          "x-nullable": true
-        },
-        "installedVersion": {
-          "type": "string",
-          "description": "Installed version.",
-          "x-nullable": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Package or dependency name.",
-          "x-nullable": true
-        },
-        "patchedVersion": {
-          "type": "string",
-          "description": "Patched version.",
-          "x-nullable": true
-        }
-      }
-    },
     "PaginatedComputeResourcesList": {
       "type": "object",
       "description": "Paginated list of Machine Learning compute objects wrapped in ARM resource envelope.",
@@ -38648,21 +38219,6 @@
           "format": "duration",
           "description": "The probe timeout in ISO 8601 format.",
           "default": "PT2S"
-        }
-      }
-    },
-    "PromptSettings": {
-      "type": "object",
-      "properties": {
-        "enableChainOfDensity": {
-          "type": "boolean"
-        },
-        "enableChainOfThought": {
-          "type": "boolean"
-        },
-        "maxLenSummary": {
-          "type": "integer",
-          "format": "int32"
         }
       }
     },
@@ -42719,47 +42275,6 @@
         ]
       }
     },
-    "TeacherModelEndpoint": {
-      "type": "object",
-      "properties": {
-        "endpointName": {
-          "type": "string",
-          "x-nullable": true
-        }
-      }
-    },
-    "TeacherModelEndpointRequestSettings": {
-      "type": "object",
-      "properties": {
-        "minEndpointSuccessRatio": {
-          "type": "number",
-          "format": "double"
-        },
-        "requestBatchSize": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "TeacherModelSettings": {
-      "type": "object",
-      "properties": {
-        "teacherModelEndpointRequestSettings": {
-          "$ref": "#/definitions/TeacherModelEndpointRequestSettings",
-          "description": "Teacher Model Request Settings.",
-          "x-nullable": true
-        },
-        "teacherModelInferenceParameters": {
-          "type": "object",
-          "description": "Teacher Model Inference Settings.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          }
-        }
-      }
-    },
     "TensorFlow": {
       "type": "object",
       "description": "TensorFlow distribution configuration.",
@@ -44105,173 +43620,6 @@
         }
       }
     },
-    "VulnerabilityDetails": {
-      "type": "object",
-      "properties": {
-        "cve": {
-          "type": "string",
-          "description": "CVE id.",
-          "x-nullable": true
-        },
-        "cveUrl": {
-          "type": "string",
-          "description": "CVE url.",
-          "x-nullable": true
-        },
-        "dueDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "DueDate for vulnerability. Provider data or PublishDate + 30 days.",
-          "x-nullable": true
-        },
-        "id": {
-          "type": "string",
-          "description": "Vulnerability ID.",
-          "x-nullable": true,
-          "readOnly": true
-        },
-        "packageDetails": {
-          "type": "array",
-          "description": "Dependency details.",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/PackageDetails"
-          }
-        },
-        "patchable": {
-          "type": "boolean",
-          "description": "Indicates if there is a known patch for vulnerability."
-        },
-        "providerId": {
-          "type": "string",
-          "description": "Vulnerability ID from provider.",
-          "x-nullable": true
-        },
-        "publishDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Vulnerability publish date.",
-          "x-nullable": true
-        },
-        "risk": {
-          "$ref": "#/definitions/VulnerabilityRisk",
-          "description": "Vulnerability Risk value."
-        },
-        "solution": {
-          "type": "string",
-          "description": "Vulnerability description.",
-          "x-nullable": true
-        },
-        "title": {
-          "type": "string",
-          "description": "Vulnerability name.",
-          "x-nullable": true
-        },
-        "vendorId": {
-          "type": "string",
-          "description": "Vendor vulnerability ID (USN, GH Advisory, etc).",
-          "x-nullable": true
-        },
-        "vendorUrl": {
-          "type": "string",
-          "description": "Vendor vulnerability url.",
-          "x-nullable": true
-        }
-      }
-    },
-    "VulnerabilityFindings": {
-      "type": "object",
-      "properties": {
-        "assetId": {
-          "type": "string",
-          "description": "AssetId (Image digest).",
-          "x-nullable": true
-        },
-        "criticalFindingsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of critical findings.",
-          "readOnly": true
-        },
-        "data": {
-          "type": "array",
-          "description": "List of vulnerability findings.",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/VulnerabilityDetails"
-          }
-        },
-        "generatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time the report was generated."
-        },
-        "highFindingsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of high findings.",
-          "readOnly": true
-        },
-        "lastScanDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Scan result date.",
-          "x-nullable": true
-        },
-        "scanner": {
-          "type": "string",
-          "description": "Vulnerability scanner name.",
-          "x-nullable": true
-        },
-        "source": {
-          "type": "string",
-          "description": "Data source (internal).",
-          "x-nullable": true
-        },
-        "totalFindingsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total findings count.",
-          "readOnly": true
-        }
-      }
-    },
-    "VulnerabilityRisk": {
-      "type": "string",
-      "enum": [
-        "UNKNOWN",
-        "CRITICAL",
-        "HIGH",
-        "MEDIUM",
-        "LOW"
-      ],
-      "x-ms-enum": {
-        "name": "VulnerabilityRisk",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "UNKNOWN",
-            "value": "UNKNOWN"
-          },
-          {
-            "name": "CRITICAL",
-            "value": "CRITICAL"
-          },
-          {
-            "name": "HIGH",
-            "value": "HIGH"
-          },
-          {
-            "name": "MEDIUM",
-            "value": "MEDIUM"
-          },
-          {
-            "name": "LOW",
-            "value": "LOW"
-          }
-        ]
-      }
-    },
     "Webhook": {
       "type": "object",
       "description": "Webhook base",
@@ -44712,31 +44060,15 @@
       "type": "object",
       "description": "The properties of a machine learning workspace.",
       "properties": {
-        "agentsEndpointUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URI of agents endpoint associated with this workspace.",
-          "readOnly": true
-        },
         "allowPublicAccessWhenBehindVnet": {
           "type": "boolean",
           "description": "The flag to indicate whether to allow public access when behind VNet."
-        },
-        "allowRoleAssignmentOnRG": {
-          "type": "boolean",
-          "description": "The flag to indicate whether we will do role assignment for the workspace MSI on resource group level."
         },
         "applicationInsights": {
           "type": "string",
           "description": "ARM id of the application insights associated with this workspace."
         },
         "associatedWorkspaces": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "containerRegistries": {
           "type": "array",
           "items": {
             "type": "string"
@@ -44760,22 +44092,8 @@
         "enableServiceSideCMKEncryption": {
           "type": "boolean"
         },
-        "enableSimplifiedCmk": {
-          "type": "boolean",
-          "description": "Flag to tell if simplified CMK should be enabled for this workspace."
-        },
-        "enableSoftwareBillOfMaterials": {
-          "type": "boolean",
-          "description": "Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace."
-        },
         "encryption": {
           "$ref": "#/definitions/EncryptionProperty"
-        },
-        "existingWorkspaces": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "featureStoreSettings": {
           "$ref": "#/definitions/FeatureStoreSettings",
@@ -44796,22 +44114,9 @@
           "type": "string",
           "description": "The compute name for image build"
         },
-        "ipAllowlist": {
-          "type": "array",
-          "description": "The list of IPv4  addresses that are allowed to access the workspace.",
-          "items": {
-            "type": "string"
-          }
-        },
         "keyVault": {
           "type": "string",
           "description": "ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created"
-        },
-        "keyVaults": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "managedNetwork": {
           "$ref": "#/definitions/ManagedNetworkSettings"
@@ -44820,10 +44125,6 @@
           "type": "string",
           "description": "The URI associated with this workspace that machine learning flow must point at to set up tracking.",
           "readOnly": true
-        },
-        "networkAcls": {
-          "$ref": "#/definitions/NetworkAcls",
-          "description": "A set of rules governing the network accessibility of the workspace."
         },
         "notebookInfo": {
           "$ref": "#/definitions/NotebookResourceInfo",
@@ -44887,20 +44188,9 @@
             "name"
           ]
         },
-        "softDeleteRetentionInDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Retention time in days after workspace get soft deleted."
-        },
         "storageAccount": {
           "type": "string",
           "description": "ARM id of the storage account associated with this workspace. This cannot be changed once the workspace has been created"
-        },
-        "storageAccounts": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "storageHnsEnabled": {
           "type": "boolean",
@@ -44935,9 +44225,6 @@
       "type": "object",
       "description": "The parameters for updating a machine learning workspace.",
       "properties": {
-        "allowRoleAssignmentOnRG": {
-          "type": "boolean"
-        },
         "applicationInsights": {
           "type": "string",
           "description": "ARM id of the application insights associated with this workspace."
@@ -44952,10 +44239,6 @@
         },
         "enableDataIsolation": {
           "type": "boolean"
-        },
-        "enableSoftwareBillOfMaterials": {
-          "type": "boolean",
-          "description": "Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace"
         },
         "encryption": {
           "$ref": "#/definitions/EncryptionUpdateProperties"
@@ -44972,19 +44255,8 @@
           "type": "string",
           "description": "The compute name for image build"
         },
-        "ipAllowlist": {
-          "type": "array",
-          "description": "The list of IPv4 addresses that are allowed to access the workspace.",
-          "items": {
-            "type": "string"
-          }
-        },
         "managedNetwork": {
           "$ref": "#/definitions/ManagedNetworkSettings"
-        },
-        "networkAcls": {
-          "$ref": "#/definitions/NetworkAcls",
-          "description": "A set of rules governing the network accessibility of the workspace."
         },
         "primaryUserAssignedIdentity": {
           "type": "string",
@@ -45001,11 +44273,6 @@
         "serviceManagedResourcesSettings": {
           "$ref": "#/definitions/ServiceManagedResourcesSettings",
           "description": "The service managed resource settings."
-        },
-        "softDeleteRetentionInDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Retention time in days after workspace get soft deleted."
         },
         "systemDatastoresAuthMode": {
           "$ref": "#/definitions/SystemDatastoresAuthMode",
