@@ -14,7 +14,7 @@ namespace Microsoft.AlertsManagement;
  * A Tenant Activity Log Alert rule resource.
  */
 model TenantActivityLogAlertResource
-  is Azure.ResourceManager.ProxyResource<AlertRuleProperties> {
+  is Azure.ResourceManager.ProxyResource<AlertRuleProperties, false> {
   ...ResourceNameParameter<
     Resource = TenantActivityLogAlertResource,
     KeyName = "alertRuleName",
