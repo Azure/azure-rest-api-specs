@@ -65,7 +65,7 @@ model MeshUpgradeProfileList is Azure.Core.Page<MeshUpgradeProfile>;
 /**
  * Mesh upgrade profile properties for a major.minor release.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance pattern matches existing API structure and cannot be changed without breaking changes."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model is intentional for extensibility and matches existing API structure."
 model MeshUpgradeProfileProperties extends MeshRevision {}

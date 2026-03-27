@@ -1,5 +1,5 @@
 {
-  "private": "true",
+  "private": true,
   "type": "module",
   "_comments": {
     "dependencies": "Runtime dependencies must be kept to an absolute minimum for performance, ideally with no transitive dependencies",
@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@actions/github-script": "github:actions/github-script",
-    "@eslint/js": "^9.22.0",
+    "@eslint/js": "^10.0.0",
     "@octokit/endpoint": "^11.0.0",
     "@octokit/rest": "^22.0.0",
     "@octokit/types": "^16.0.0",
@@ -26,9 +26,9 @@
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.0.0",
     "@types/semver": "^7.7.1",
-    "@vitest/coverage-v8": "^4.0.15",
+    "@vitest/coverage-v8": "^4.1.0",
     "cross-env": "^10.1.0",
-    "eslint": "^9.22.0",
+    "eslint": "^10.0.0",
     "fflate": "0.8.2",
     "globals": "^17.0.0",
     "prettier": "3.8.1",
@@ -36,11 +36,11 @@
     "semver": "^7.7.1",
     "tinybench": "^6.0.0",
     "typescript": "~5.9.2",
-    "typescript-eslint": "^8.45.0",
-    "vitest": "^4.0.15"
+    "typescript-eslint": "^8.56.0",
+    "vitest": "^4.1.0"
   },
   "scripts": {
-    "check": "npm run lint && npm run format:check && npm run test:ci",
+    "check": "npm run test:ci && npm run lint && npm run format:check",
     "lint": "npm run lint:eslint && npm run lint:tsc",
     "lint:eslint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
     "lint:tsc": "tsc --build --verbose",
@@ -50,5 +50,8 @@
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose",
     "validate": "npm run lint && npm run format:check && npm run test:ci"
+  },
+  "overrides": {
+    "undici@^5.0.0": "^6.0.0"
   }
 }

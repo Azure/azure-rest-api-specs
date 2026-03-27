@@ -1,9 +1,12 @@
 import "./main.tsp";
+import "./scheduledactionmodels.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.ComputeSchedule;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 @@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmtClient", "python");
 @@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmtClient", "java");
@@ -67,6 +70,10 @@ using Azure.ResourceManager;
 );
 
 @@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
+@@clientName(CreateFlexResourceOperationResponse,
+  "CreateFlexResourceOperationResult",
+  "csharp"
+);
 @@clientName(DeadlineType, "ScheduledActionDeadlineType", "csharp");
 @@clientName(DeallocateResourceOperationResponse,
   "DeallocateResourceOperationResult",
@@ -107,6 +114,10 @@ using Azure.ResourceManager;
 );
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
 @@clientName(ExecuteCreateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(ExecuteCreateFlexRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
@@ -232,6 +243,7 @@ using Azure.ResourceManager;
 @@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent");
 @@clientName(CancelOperationsRequest, "CancelOperationsContent");
 @@clientName(ExecuteCreateRequest, "ExecuteCreateContent");
+@@clientName(ExecuteCreateFlexRequest, "ExecuteCreateFlexContent");
 @@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent");
 @@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent");
 @@clientName(ExecuteStartRequest, "ExecuteStartContent");
@@ -241,4 +253,44 @@ using Azure.ResourceManager;
 @@clientName(SubmitHibernateRequest, "SubmitHibernateContent");
 @@clientName(ScheduledActionsExtensionProperties,
   "ScheduledActionsExtensionProperties"
+);
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@doc("Represents a scheduled action resource input for write operations.")
+model ScheduledActionResourceInput {
+  @doc("""
+    The ARM Id of the resource.
+    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+    """)
+  resourceId: ValidScheduledActionResourceId;
+
+  @doc("The desired notification settings for the specified resource.")
+  @Azure.ResourceManager.identifiers(#["destination"])
+  notificationSettings?: Array<NotificationProperties>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@doc("Request model to attach a list of scheduled action resources.")
+model ResourceAttachRequestInput {
+  @doc("List of resources to be attached/patched")
+  @identifiers(#["resourceId"])
+  resources: Array<ScheduledActionResourceInput>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@doc("Request model perform a resource operation in a list of resources")
+model ResourcePatchRequestInput {
+  @doc("The list of resources we watch to patch")
+  @identifiers(#["resourceId"])
+  resources: Array<ScheduledActionResourceInput>;
+}
+
+@@alternateType(ScheduledActions.attachResources::parameters.body,
+  ResourceAttachRequestInput,
+  "javascript"
+);
+
+@@alternateType(ScheduledActions.patchResources::parameters.body,
+  ResourcePatchRequestInput,
+  "javascript"
 );
