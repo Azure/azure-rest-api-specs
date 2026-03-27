@@ -152,11 +152,21 @@ using Azure.AI.Projects;
 @@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
 @@clientName(MemoryStores.searchMemories, "internalSearchMemories");
 
-// Disabled convenient API generation to provide a custom shim returning `void` in the client
+// Disabled convenient API generation and make private to provide a custom shim returning `void` in the client
 @@convenientAPI(Agents.deleteAgent, false, "java");
 @@convenientAPI(Agents.deleteAgentVersion, false, "java");
 @@convenientAPI(MemoryStores.deleteMemoryStore, false, "java");
 @@convenientAPI(MemoryStores.deleteScope, false, "java");
+
+//making delete methods internal to add public shims that return void
+@@access(Agents.deleteAgentVersion, Access.internal);
+@@access(Agents.deleteAgent, Access.internal);
+@@access(MemoryStores.deleteMemoryStore, Access.internal);
+@@access(MemoryStores.deleteScope, Access.internal);
+@@clientName(Agents.deleteAgentVersion, "internalDeleteAgentVersion");
+@@clientName(Agents.deleteAgent, "internalDeleteAgent");
+@@clientName(MemoryStores.deleteMemoryStore, "internalDeleteMemoryStore");
+@@clientName(MemoryStores.deleteScope, "internalDeleteScope");
 
 @@access(MemoryStoreSearchResponse, Access.public);
 @@usage(MemoryStoreSearchResponse, Usage.output);
