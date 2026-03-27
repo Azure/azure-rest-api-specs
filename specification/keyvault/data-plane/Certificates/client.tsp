@@ -246,17 +246,9 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 @@alternateType(CertificateOperation.error, string, "go");
 
 // Python configuration
-@@clientName(SubjectAlternativeNames.uris,
-  "uniform_resource_identifiers",
-  "python"
-);
 @@clientName(SubjectAlternativeNames.ipAddresses, "ip_addresses", "python");
 
 // JavaScript configuration
-@@clientName(SubjectAlternativeNames.uris,
-  "uniformResourceIdentifiers",
-  "javascript"
-);
 @@clientName(SubjectAlternativeNames.ipAddresses, "ipAddresses", "javascript");
 
 // Rust configuration
