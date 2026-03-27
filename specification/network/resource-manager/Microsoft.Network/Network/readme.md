@@ -38,73 +38,22 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
   - stable/2025-05-01/applicationGateway.json
-  - stable/2025-05-01/applicationGatewayWafDynamicManifests.json
-  - stable/2025-05-01/applicationSecurityGroup.json
-  - stable/2025-05-01/availableDelegations.json
-  - stable/2025-05-01/availableServiceAliases.json
-  - stable/2025-05-01/azureFirewall.json
-  - stable/2025-05-01/azureFirewallFqdnTag.json
   - stable/2025-05-01/azureWebCategory.json
-  - stable/2025-05-01/bastionHost.json
-  - stable/2025-05-01/checkDnsAvailability.json
-  - stable/2025-05-01/cloudServiceNetworkInterface.json
-  - stable/2025-05-01/cloudServicePublicIpAddress.json
-  - stable/2025-05-01/cloudServiceSwap.json
-  - stable/2025-05-01/customIpPrefix.json
-  - stable/2025-05-01/ddosCustomPolicy.json
-  - stable/2025-05-01/ddosProtectionPlan.json
-  - stable/2025-05-01/dscpConfiguration.json
-  - stable/2025-05-01/endpointService.json
-  - stable/2025-05-01/expressRouteCircuit.json
-  - stable/2025-05-01/expressRouteCrossConnection.json
-  - stable/2025-05-01/expressRoutePort.json
-  - stable/2025-05-01/expressRouteProviderPort.json
+  - stable/2025-05-01/common.json
+  - stable/2025-05-01/expressRoute.json
+  - stable/2025-05-01/firewall.json
   - stable/2025-05-01/firewallPolicy.json
-  - stable/2025-05-01/ipAddressManager.json
-  - stable/2025-05-01/ipAllocation.json
-  - stable/2025-05-01/ipGroups.json
   - stable/2025-05-01/loadBalancer.json
-  - stable/2025-05-01/natGateway.json
-  - stable/2025-05-01/network.json
-  - stable/2025-05-01/networkInterface.json
+  - stable/2025-05-01/networkGateway.json
+  - stable/2025-05-01/networkingOperations.json
   - stable/2025-05-01/networkManager.json
-  - stable/2025-05-01/networkManagerActiveConfiguration.json
-  - stable/2025-05-01/networkManagerConnection.json
-  - stable/2025-05-01/networkManagerConnectivityConfiguration.json
-  - stable/2025-05-01/networkManagerEffectiveConfiguration.json
-  - stable/2025-05-01/networkManagerGroup.json
-  - stable/2025-05-01/networkManagerRoutingConfiguration.json
-  - stable/2025-05-01/networkManagerScopeConnection.json
-  - stable/2025-05-01/networkManagerSecurityAdminConfiguration.json
-  - stable/2025-05-01/networkManagerSecurityUserConfiguration.json
-  - stable/2025-05-01/networkProfile.json
-  - stable/2025-05-01/networkSecurityGroup.json
   - stable/2025-05-01/networkSecurityPerimeter.json
-  - stable/2025-05-01/networkVerifier.json
-  - stable/2025-05-01/networkVirtualAppliance.json
   - stable/2025-05-01/networkWatcher.json
-  - stable/2025-05-01/operation.json
-  - stable/2025-05-01/privateEndpoint.json
-  - stable/2025-05-01/privateLinkService.json
-  - stable/2025-05-01/publicIpAddress.json
-  - stable/2025-05-01/publicIpPrefix.json
-  - stable/2025-05-01/routeFilter.json
-  - stable/2025-05-01/routeTable.json
-  - stable/2025-05-01/securityPartnerProvider.json
-  - stable/2025-05-01/serviceCommunity.json
-  - stable/2025-05-01/serviceEndpointPolicy.json
   - stable/2025-05-01/serviceGateway.json
-  - stable/2025-05-01/serviceTags.json
-  - stable/2025-05-01/usage.json
   - stable/2025-05-01/virtualNetwork.json
   - stable/2025-05-01/virtualNetworkAppliance.json
-  - stable/2025-05-01/virtualNetworkGateway.json
-  - stable/2025-05-01/virtualNetworkTap.json
-  - stable/2025-05-01/virtualRouter.json
   - stable/2025-05-01/virtualWan.json
-  - stable/2025-05-01/vmssNetworkInterface.json
-  - stable/2025-05-01/vmssPublicIpAddress.json
-  - stable/2025-05-01/webapplicationfirewall.json
+  - stable/2018-10-01/vmssNetwork.json
 suppressions:
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
@@ -123,13 +72,13 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
   - code: SystemDataDefinitionsCommonTypes
-    from: networkVerifier.json
+    from: virtualNetwork.json
     reason: False alarm for common type errors.
   - code: SystemDataDefinitionsCommonTypes
-    from: network.json
+    from: common.json
     reason: False alarm.
   - code: PutRequestResponseSchemeArm
-    from: serviceGateway.json
+    from: common.json
     reason: API spec code issue in PutRequestResponseSchemeArm validation.
   - code: RequiredPropertiesMissingInResourceModel
     reason: Not a standard azure resource.
