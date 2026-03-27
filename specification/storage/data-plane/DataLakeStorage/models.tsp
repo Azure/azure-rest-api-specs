@@ -258,7 +258,6 @@ model PathItem {
   permissions?: string;
 
   /** The name of the encryption scope under which the blob is encrypted. */
-  @Xml.name("EncryptionScope")
   encryptionScope?: string;
 
   /** The creation time. */
@@ -268,8 +267,8 @@ model PathItem {
   expiryTime?: string;
 
   /** The encryption context. */
-  @Xml.name("EncryptionContext")
-  encryptionContext?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Service API"
+  EncryptionContext?: string;
 }
 
 /** A list of paths. */
