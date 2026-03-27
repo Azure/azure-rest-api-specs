@@ -38,8 +38,7 @@ namespace Customizations;
 
 // === Python external type mappings ===
 // GeoJSON types → shapely (https://shapely.readthedocs.io/)
-@@alternateType(
-  Geometry,
+@@alternateType(Geometry,
   {
     identity: "shapely.geometry.base.BaseGeometry",
     package: "shapely",
@@ -47,8 +46,7 @@ namespace Customizations;
   },
   "python"
 );
-@@alternateType(
-  Point,
+@@alternateType(Point,
   {
     identity: "shapely.geometry.point.Point",
     package: "shapely",
@@ -56,8 +54,7 @@ namespace Customizations;
   },
   "python"
 );
-@@alternateType(
-  Polygon,
+@@alternateType(Polygon,
   {
     identity: "shapely.geometry.polygon.Polygon",
     package: "shapely",
@@ -65,8 +62,7 @@ namespace Customizations;
   },
   "python"
 );
-@@alternateType(
-  MultiPolygon,
+@@alternateType(MultiPolygon,
   {
     identity: "shapely.geometry.multipolygon.MultiPolygon",
     package: "shapely",
@@ -74,8 +70,7 @@ namespace Customizations;
   },
   "python"
 );
-@@alternateType(
-  MultiPoint,
+@@alternateType(MultiPoint,
   {
     identity: "shapely.geometry.multipoint.MultiPoint",
     package: "shapely",
@@ -83,8 +78,7 @@ namespace Customizations;
   },
   "python"
 );
-@@alternateType(
-  LineString,
+@@alternateType(LineString,
   {
     identity: "shapely.geometry.linestring.LineString",
     package: "shapely",
@@ -92,8 +86,7 @@ namespace Customizations;
   },
   "python"
 );
-@@alternateType(
-  MultiLineString,
+@@alternateType(MultiLineString,
   {
     identity: "shapely.geometry.multilinestring.MultiLineString",
     package: "shapely",
@@ -103,8 +96,7 @@ namespace Customizations;
 );
 
 // GeoJSON Feature → geojson (https://pypi.org/project/geojson/)
-@@alternateType(
-  Feature,
+@@alternateType(Feature,
   {
     identity: "geojson.Feature",
     package: "geojson",
@@ -112,8 +104,7 @@ namespace Customizations;
   },
   "python"
 );
-@@alternateType(
-  FeatureCollection,
+@@alternateType(FeatureCollection,
   {
     identity: "geojson.FeatureCollection",
     package: "geojson",
@@ -123,8 +114,7 @@ namespace Customizations;
 );
 
 // STAC types → pystac (https://pystac.readthedocs.io/)
-@@alternateType(
-  StacItem,
+@@alternateType(StacItem,
   {
     identity: "pystac.Item",
     package: "pystac",
@@ -132,8 +122,7 @@ namespace Customizations;
   },
   "python"
 );
-@@alternateType(
-  StacCollection,
+@@alternateType(StacCollection,
   {
     identity: "pystac.Collection",
     package: "pystac",
@@ -141,8 +130,7 @@ namespace Customizations;
   },
   "python"
 );
-@@alternateType(
-  StacItemCollection,
+@@alternateType(StacItemCollection,
   {
     identity: "pystac.ItemCollection",
     package: "pystac",
