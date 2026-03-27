@@ -93,6 +93,8 @@ op calculateModelCapacityCustom(
   "java"
 );
 
+@@clientName(ResourceSkuRestrictions.values, "values", "python");
+
 @@clientLocation(checkDomainAvailability, "ManagementClient", "go");
 @@clientLocation(checkSkuAvailability, "ManagementClient", "go");
 @@clientLocation(calculateModelCapacity, "ManagementClient", "go");
