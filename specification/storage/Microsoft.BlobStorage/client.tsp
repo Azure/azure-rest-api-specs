@@ -548,7 +548,7 @@ model BlobServicePropertiesCsharp {
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "csharp");
 @@clientName(StorageErrorCode, "BlobErrorCode", "csharp");
 @@clientName(Blob, "BlobRestClient", "csharp");
-@@clientName(BlobItem, "BlobItemInternal", "csharp");
+@@clientName(BlobItem, "BlobItemInternal", "csharp,python");
 @@clientName(Container, "ContainerRestClient", "csharp");
 @@clientName(Container.listBlobs, "ListBlobFlatSegment", "csharp");
 @@clientName(Service, "ServiceRestClient", "csharp");
