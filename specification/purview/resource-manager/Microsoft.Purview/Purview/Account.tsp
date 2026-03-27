@@ -23,12 +23,12 @@ model Account is Azure.ResourceManager.ProxyResource<AccountProperties> {
   >;
 
   /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
@@ -67,7 +67,7 @@ interface Accounts {
   /**
    * Updates an account
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Patches the account resource.")
   @patch(#{ implicitOptionality: false })
