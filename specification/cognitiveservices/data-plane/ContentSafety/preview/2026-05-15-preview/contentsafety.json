@@ -938,11 +938,11 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be 'FourSeverityLevels', and the output value can be 0, 2, 4, 6. Not applicable to ChildSexualExploitationAndAbuse,NonConsensualSexualImagery,ViolentExtremismAndTerrorism category."
+          "description": "The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be 'FourSeverityLevels', and the output value can be 0, 2, 4, 6. Not applicable to ChildSexualExploitationAndAbuse,NonConsensualIntimateImagery,ViolentExtremismAndTerrorism category."
         },
         "detected": {
           "type": "boolean",
-          "description": "Whether the content is detected as harmful or not. The value of this field is determined by the output type specified in the request. The output type could be 'Boolean'. Always returned for ChildSexualExploitationAndAbuse,NonConsensualSexualImagery,ViolentExtremismAndTerrorism category."
+          "description": "Whether the content is detected as harmful or not. The value of this field is determined by the output type specified in the request. The output type could be 'Boolean'. Always returned for ChildSexualExploitationAndAbuse,NonConsensualIntimateImagery,ViolentExtremismAndTerrorism category."
         }
       },
       "required": [
@@ -954,7 +954,7 @@
       "description": "The harm category supported in Image content analysis.",
       "enum": [
         "ChildSexualExploitationAndAbuse",
-        "NonConsensualSexualImagery",
+        "NonConsensualIntimateImagery",
         "ViolentExtremismAndTerrorism",
         "Hate",
         "SelfHarm",
@@ -971,9 +971,9 @@
             "description": "The harm category for Image - ChildSexualExploitationAndAbuse. Only supports Boolean outputType."
           },
           {
-            "name": "NonConsensualSexualImagery",
-            "value": "NonConsensualSexualImagery",
-            "description": "The harm category for Image - NonConsensualSexualImagery. Only supports Boolean outputType."
+            "name": "NonConsensualIntimateImagery",
+            "value": "NonConsensualIntimateImagery",
+            "description": "The harm category for Image - NonConsensualIntimateImagery. Only supports Boolean outputType."
           },
           {
             "name": "ViolentExtremismAndTerrorism",

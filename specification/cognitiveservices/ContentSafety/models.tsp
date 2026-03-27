@@ -35,8 +35,8 @@ union ImageCategory {
   "ChildSexualExploitationAndAbuse",
 
   @added(ContentSafety.Versions.v2026_05_15_preview)
-  @doc("The harm category for Image - NonConsensualSexualImagery. Only supports Boolean outputType.")
-  "NonConsensualSexualImagery",
+  @doc("The harm category for Image - NonConsensualIntimateImagery. Only supports Boolean outputType.")
+  "NonConsensualIntimateImagery",
 
   @added(ContentSafety.Versions.v2026_05_15_preview)
   @doc("The harm category for Image - ViolentExtremismAndTerrorism. Only supports Boolean outputType.")
@@ -165,10 +165,10 @@ model ImageCategoriesAnalysis {
   @doc("The image analysis category.")
   category: ImageCategory;
 
-  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be 'FourSeverityLevels', and the output value can be 0, 2, 4, 6. Not applicable to ChildSexualExploitationAndAbuse,NonConsensualSexualImagery,ViolentExtremismAndTerrorism category.")
+  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be 'FourSeverityLevels', and the output value can be 0, 2, 4, 6. Not applicable to ChildSexualExploitationAndAbuse,NonConsensualIntimateImagery,ViolentExtremismAndTerrorism category.")
   severity?: int32;
 
-  @doc("Whether the content is detected as harmful or not. The value of this field is determined by the output type specified in the request. The output type could be 'Boolean'. Always returned for ChildSexualExploitationAndAbuse,NonConsensualSexualImagery,ViolentExtremismAndTerrorism category.")
+  @doc("Whether the content is detected as harmful or not. The value of this field is determined by the output type specified in the request. The output type could be 'Boolean'. Always returned for ChildSexualExploitationAndAbuse,NonConsensualIntimateImagery,ViolentExtremismAndTerrorism category.")
   detected?: boolean;
 }
 
