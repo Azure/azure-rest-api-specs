@@ -32,6 +32,8 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.Authorization")
 @service(#{ title: "AuthorizationManagementClient" })
 @versioned(Versions)
+// FIXME: Common type version v2 is not supported for now. Set to v3.
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.RoleManagementAlerts;
 
 /**
@@ -41,6 +43,5 @@ enum Versions {
   /**
    * The 2022-08-01-preview API version.
    */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2022_08_01_preview: "2022-08-01-preview",
 }

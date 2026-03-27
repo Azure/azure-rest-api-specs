@@ -28,6 +28,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.Authorization")
 @service(#{ title: "AuthorizationManagementClient" })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AccessReview;
 
 /**
@@ -37,6 +38,5 @@ enum Versions {
   /**
    * The 2025-12-01-preview API version.
    */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_12_01_preview: "2025-12-01-preview",
 }
