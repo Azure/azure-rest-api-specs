@@ -22,7 +22,7 @@ using KeyVault;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified attributes associated with the given certificate.")
 @route("/certificates/{certificate-name}/{certificate-version}")
-@patch(#{ implicitOptionality: false })
+@patch(#{ implicitOptionality: true })
 op updateCertificate is KeyVaultOperation<
   {
     /**
@@ -76,8 +76,8 @@ op getCertificate is KeyVaultOperation<
   CertificateBundle
 >;
 
-@@override(KeyVault.updateCertificate, updateCertificate, "!rust");
-@@override(KeyVault.getCertificate, getCertificate, "!rust");
+@@override(KeyVault.updateCertificate, updateCertificate);
+@@override(KeyVault.getCertificate, getCertificate);
 
 // Java configuration
 @@usage(CertificateIssuerItem, Usage.input, "java");
@@ -93,11 +93,6 @@ op getCertificate is KeyVaultOperation<
 @@clientName(JsonWebKeyType, "CertificateKeyType", "java");
 @@clientName(KeyUsageType, "CertificateKeyUsage", "java");
 @@clientName(SubjectAlternativeNames.upns, "userPrincipalNames", "java");
-@@clientName(SubjectAlternativeNames.uris,
-  "uniformResourceIdentifiers",
-  "java"
-);
-@@clientName(SubjectAlternativeNames.ipAddresses, "ipAddresses", "java");
 
 // Go configuration
 
@@ -244,20 +239,6 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 
 @@alternateType(CertificateAttributes.recoveryLevel, string, "go");
 @@alternateType(CertificateOperation.error, string, "go");
-
-// Python configuration
-@@clientName(SubjectAlternativeNames.uris,
-  "uniform_resource_identifiers",
-  "python"
-);
-@@clientName(SubjectAlternativeNames.ipAddresses, "ip_addresses", "python");
-
-// JavaScript configuration
-@@clientName(SubjectAlternativeNames.uris,
-  "uniformResourceIdentifiers",
-  "javascript"
-);
-@@clientName(SubjectAlternativeNames.ipAddresses, "ipAddresses", "javascript");
 
 // Rust configuration
 @@clientName(setCertificateContacts, "SetContacts", "rust");

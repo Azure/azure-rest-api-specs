@@ -115,7 +115,6 @@ input-file:
   - stable/2023-07-01/providers.json
   - stable/2023-07-01/secrets.json
 ```
-
 ### Tag: package-2023-02
 
 These settings apply only when `--tag=package-2023-02` is specified on the command line.

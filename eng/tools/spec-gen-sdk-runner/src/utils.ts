@@ -249,8 +249,13 @@ export function findAllParentsWithFile(
         results.push(currentPath);
       }
     } catch (error) {
-      logMessage(`Error reading directory: ${currentPath} with ${inspect(error)}`, LogLevel.Warn);
-      return results;
+      logMessage(
+        `Error reading directory: ${currentPath}. ` +
+          `If this is a transient IO error, please re-run the pipeline. ` +
+          `Error details: ${inspect(error)}`,
+        LogLevel.Error,
+      );
+      throw error;
     }
     currentPath = path.dirname(currentPath);
     // Check if we've reached the root of the path (stopAtFolder) or
