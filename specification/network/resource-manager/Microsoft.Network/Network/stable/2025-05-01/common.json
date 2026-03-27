@@ -7759,10 +7759,6 @@
       "type": "object",
       "description": "Reference to another subresource.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
         "name": {
           "type": "string",
           "description": "Name of the resource."
@@ -7773,6 +7769,11 @@
           "readOnly": true
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
       "x-ms-azure-resource": true
     },
     "SyncMode": {
@@ -7883,7 +7884,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResourceWithSettableId": {
+    "TrackedResourceWithSettableIdOptionalLocation": {
       "type": "object",
       "description": "Common resource representation.",
       "properties": {
@@ -7913,9 +7914,6 @@
           }
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     },
     "TrackedResourceWithSettableName": {

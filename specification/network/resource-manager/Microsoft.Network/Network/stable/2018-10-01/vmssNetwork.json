@@ -4663,10 +4663,6 @@
       "type": "object",
       "description": "Reference to another subresource.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
         "name": {
           "type": "string",
           "description": "Name of the resource."
@@ -4677,6 +4673,11 @@
           "readOnly": true
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Microsoft.Network.SubResource"
+        }
+      ],
       "x-ms-azure-resource": true
     },
     "Microsoft.Network.Subnet": {

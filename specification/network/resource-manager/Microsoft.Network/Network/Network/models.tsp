@@ -14156,7 +14156,7 @@ model TrackedResourceWithSettableName {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
-model TrackedResourceWithSettableId {
+model TrackedResourceWithSettableIdOptionalLocation {
   /**
    * Resource ID.
    */
@@ -14177,7 +14177,7 @@ model TrackedResourceWithSettableId {
   /**
    * Resource location.
    */
-  location: string;
+  location?: string;
 
   /**
    * Resource tags.
