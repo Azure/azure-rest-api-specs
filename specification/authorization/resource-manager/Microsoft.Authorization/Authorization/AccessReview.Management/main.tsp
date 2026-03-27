@@ -31,8 +31,6 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.Authorization")
 @service(#{ title: "AuthorizationManagementClient" })
 @versioned(Versions)
-// FIXME: Common type version not set. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.AttributeNamespaces;
 
 /**
@@ -42,6 +40,7 @@ enum Versions {
   /**
    * The 2021-12-01-preview API version.
    */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2021_12_01_preview: "2021-12-01-preview",
 }
 
