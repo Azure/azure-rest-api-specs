@@ -39,4 +39,20 @@ input-file:
 suppressions:
   - code: OperationsAPIImplementation
     reason: Microsoft.Migrate resource provider has one RP with multiple SDKs. Operations API is centrally implemented at the AssessmentProjects level and intentionally excluded from individual service specifications to avoid duplication across multiple SDK instances.
+  - code: AvoidAdditionalProperties
+    from: acaAssessments.json
+    reason: The set of key-value pairs depend on the type of the workload and is not user-defined. Service uses this field to perform workload-specific validations and provide custom functionality based on the type of the workload.
+    where:
+      - $.definitions.ACAAssessmentOptionsProperties.properties.edges
+  - code: XMSSecretInResponse
+    from: acaAssessments.json
+    reason: The property contextKey is not a secret. It is used to convey a reasoning context key for migration guideline context and does not contain sensitive information.
+    where:
+      - $.definitions.MigrationGuidelineContext.properties.contextKey
+  - code: MissingSegmentsInNestedResourceListOperation
+    from: acaAssessments.json
+    reason: ACA Assessment Options and ACA Assessments are direct children of the assessment project and follow the same pattern as other Assessment Projects workloads (AKS, WebApp, etc.).
+  - code: EnumInsteadOfBoolean
+    from: acaAssessments.json
+    reason: The isolationRequired boolean property is part of the shared Common standardized contract inherited from other assessment workloads. Changing to an enum would break consistency across all assessment types.
 ```
