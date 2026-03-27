@@ -26,7 +26,16 @@ These are the global settings for the SearchManagementClient API.
 
 ```yaml
 openapi-type: arm
-tag: package-2025-05-01
+tag: package-preview-2026-03-01
+```
+
+### Tag: package-preview-2026-03-01
+
+These settings apply only when `--tag=package-preview-2026-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03-01'
+input-file:
+  - preview/2026-03-01-preview/search.json
 ```
 
 ### Tag: package-2025-05-01
@@ -264,4 +273,12 @@ suppressions:
   - code: LroErrorContent
     from: search.json
     reason: Agreement with ARM reviewers to update in next API version.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: search.json
+    where: $.definitions["OfferingsListResult"]
+    reason: Temporary suppression for a known API shape issue. This Offerings_List API returns non-resource objects without id, name, type, which is not ARM RPC-compliant. A fix (moving to an action-style API) is committed for the next preview release as a breaking change before GA.
+  - code: PatchBodyParametersSchema
+    from: search.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}"].patch.parameters[5].schema.properties.properties
+    reason: PATCH body uses a polymorphic properties payload that requires '@odata.type' as a discriminator in DataIdentity for type resolution; making it optional would break update semantics.
 ```
