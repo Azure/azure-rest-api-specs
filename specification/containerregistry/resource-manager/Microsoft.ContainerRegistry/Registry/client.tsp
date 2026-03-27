@@ -268,10 +268,6 @@ namespace Microsoft.ContainerRegistry {
   "ContainerRegistryResourceType",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkResource.name,
-  "groupName",
-  "csharp"
-);
 @@clientName(NetworkRuleBypassOptions,
   "ContainerRegistryNetworkRuleBypassOption",
   "csharp"
@@ -337,7 +333,7 @@ namespace Microsoft.ContainerRegistry {
   "ConnectionState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkResource,
+@@clientName(MyPrivateLinkResource,
   "ContainerRegistryPrivateLinkResource",
   "csharp"
 );
