@@ -392,7 +392,7 @@ alias CommonParameters = {
     """)
   @query
   @clientName("timeOutInSeconds", "java")
-  @clientName("timeOutInSeconds", "csharp")
+  @clientName("timeout", "csharp")
   @clientName("timeout", "go,python")
   @encode("seconds", int32)
   timeOut?: duration;
@@ -415,7 +415,7 @@ alias CommonParameters = {
     """)
   @header("ocp-date")
   @encode(DateTimeKnownEncoding.rfc7231)
-  @clientName("ocpDate", "csharp")
+  @clientName("requestDate", "csharp")
   ocpdate?: utcDateTime;
 };
 
