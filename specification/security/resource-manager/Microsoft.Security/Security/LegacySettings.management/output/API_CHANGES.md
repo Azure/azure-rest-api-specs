@@ -25,9 +25,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AutoProvisioningSettingList.required__added` | added | `["value"]` |
-| `definitions.ComplianceList.required__added` | added | `["value"]` |
-| `definitions.InformationProtectionPolicyList.required__added` | added | `["value"]` |
 | `paths['/{scope}/providers/microsoft.Security/compliances'].get.parameters[0].required__added` | added | `true` |
 | `paths['/{scope}/providers/microsoft.Security/informationProtectionPolicies'].get.parameters[0].required__added` | added | `true` |
 
@@ -70,6 +67,7 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.Compliance.readOnly__deleted` | deleted | `true` |
+| `definitions.ComplianceList.properties.value.readOnly__added` | added | `true` |
 | `definitions.ComplianceList.readOnly__deleted` | deleted | `true` |
 | `definitions.InformationProtectionPolicyList.readOnly__deleted` | deleted | `true` |
 

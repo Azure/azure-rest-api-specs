@@ -76,7 +76,16 @@ enum Rank {
 /**
  * List of all the auto provisioning settings response
  */
-model AutoProvisioningSettingList is Azure.Core.Page<AutoProvisioningSetting>;
+model AutoProvisioningSettingList {
+  /** List of all the auto provisioning settings */
+  @pageItems
+  value?: AutoProvisioningSetting[];
+
+  /** The URI to fetch the next page. */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * describes properties of an auto provisioning setting
@@ -185,7 +194,17 @@ model ErrorAdditionalInfo {
 /**
  * List of Compliance objects response
  */
-model ComplianceList is Azure.Core.Page<Compliance>;
+model ComplianceList {
+  /** List of Compliance objects */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Compliance[];
+
+  /** The URI to fetch the next page. */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * The Compliance score (percentage) of a Subscription is a sum of all Resources' Compliances under the given Subscription. A Resource Compliance is defined as the compliant ('healthy') Policy Definitions out of all Policy Definitions applicable to a given resource.
@@ -362,8 +381,16 @@ model InformationProtectionKeyword {
 /**
  * Information protection policies response.
  */
-model InformationProtectionPolicyList
-  is Azure.Core.Page<InformationProtectionPolicy>;
+model InformationProtectionPolicyList {
+  /** List of information protection policies */
+  @pageItems
+  value?: InformationProtectionPolicy[];
+
+  /** The URI to fetch the next page. */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * List of workspace settings response

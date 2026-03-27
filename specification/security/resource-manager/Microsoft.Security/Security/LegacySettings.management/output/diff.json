@@ -344,11 +344,6 @@
         ]
       ]
     },
-    "AutoProvisioningSettingList": {
-      "required__added": [
-        "value"
-      ]
-    },
     "Compliance": {
       "readOnly__deleted": true,
       "allOf": [
@@ -365,9 +360,11 @@
     },
     "ComplianceList": {
       "readOnly__deleted": true,
-      "required__added": [
-        "value"
-      ]
+      "properties": {
+        "value": {
+          "readOnly__added": true
+        }
+      }
     },
     "ComplianceProperties": {
       "properties": {
@@ -390,10 +387,7 @@
       ]
     },
     "InformationProtectionPolicyList": {
-      "readOnly__deleted": true,
-      "required__added": [
-        "value"
-      ]
+      "readOnly__deleted": true
     },
     "InformationProtectionPolicyProperties": {
       "properties": {
