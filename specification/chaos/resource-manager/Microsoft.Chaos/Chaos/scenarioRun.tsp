@@ -54,11 +54,10 @@ interface ScenarioRuns {
   /**
    * Cancel the currently running scenario execution.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO operation returns 202 only"
   #suppress "@azure-tools/typespec-azure-core/polling-operation-no-status-monitor" "LRO uses final-state-via:location pattern"
   @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
   @pollingOperation(ScenarioRuns.get)
-  cancel is ArmResourceActionNoContentAsyncWithLocationResult<
+  cancel is ArmResourceActionAsyncWithLocation<
     ScenarioRun,
     void,
     ScenarioRun

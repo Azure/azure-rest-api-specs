@@ -49,9 +49,8 @@ interface ScenarioConfigurations {
   /**
    * Execute the scenario execution with the given scenario configuration.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO operation returns 202 only"
   @pollingOperation(ScenarioRuns.get)
-  execute is ArmResourceActionNoContentAsyncWithLocationResult<
+  execute is ArmResourceActionAsyncWithLocation<
     ScenarioConfiguration,
     void,
     ScenarioRun
@@ -60,10 +59,9 @@ interface ScenarioConfigurations {
   /**
    * Cancel the currently running scenario execution.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO operation returns 202 only"
   @removed(Microsoft.Chaos.Versions.v2026_05_01_preview)
   @pollingOperation(ScenarioRuns.get)
-  cancel is ArmResourceActionNoContentAsyncWithLocationResult<
+  cancel is ArmResourceActionAsyncWithLocation<
     ScenarioConfiguration,
     void,
     Azure.ResourceManager.Foundations.OperationStatusResult
@@ -72,9 +70,8 @@ interface ScenarioConfigurations {
   /**
    * Validate the given scenario configuration.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO operation returns 202 only"
   @pollingOperation(ScenarioConfigurations.getLatestValidation)
-  validate is ArmResourceActionNoContentAsyncWithLocationResult<
+  validate is ArmResourceActionAsyncWithLocation<
     ScenarioConfiguration,
     void,
     Validation
