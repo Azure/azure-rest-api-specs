@@ -30,11 +30,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - $ref: '#/components/schemas/AgentDefinitionOptInKeys'
-              - type: string
-                enum:
-                  - AgentEndpoints=V1Preview
+            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
         - name: api-version
           in: query
           required: true
@@ -322,11 +318,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - $ref: '#/components/schemas/AgentDefinitionOptInKeys'
-              - type: string
-                enum:
-                  - AgentEndpoints=V1Preview
+            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
         - name: agent_name
           in: path
           required: true
@@ -9371,13 +9363,15 @@ components:
         conditional_previews:
           - MemoryStores=V1Preview
     MemoryStoreUpdateStatus:
-      type: string
-      enum:
-        - queued
-        - in_progress
-        - completed
-        - failed
-        - superseded
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - queued
+            - in_progress
+            - completed
+            - failed
+            - superseded
       description: Status of a memory store update operation.
       x-ms-foundry-meta:
         conditional_previews:

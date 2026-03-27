@@ -6110,6 +6110,7 @@ paths:
       tags:
         - Schedules
 security:
+  - ApiKeyAuth: []
   - OAuth2Auth:
       - https://ai.azure.com/.default
 components:
@@ -11104,13 +11105,15 @@ components:
         conditional_previews:
           - MemoryStores=V1Preview
     MemoryStoreUpdateStatus:
-      type: string
-      enum:
-        - queued
-        - in_progress
-        - completed
-        - failed
-        - superseded
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - queued
+            - in_progress
+            - completed
+            - failed
+            - superseded
       description: Status of a memory store update operation.
       x-ms-foundry-meta:
         conditional_previews:
@@ -27521,6 +27524,10 @@ components:
         - $ref: '#/components/schemas/EvaluationTarget'
       description: Evaluation target for generating responses using a given model and dataset.
   securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: api-key
     OAuth2Auth:
       type: oauth2
       flows:
