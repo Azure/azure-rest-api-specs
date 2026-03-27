@@ -9,10 +9,40 @@ using Azure.ResourceManager;
 
 namespace Placement.V1;
 
+@doc("The rollout strategy configuration.")
+model RolloutStrategy {
+  @doc("The type of rollout strategy. Default is RollingUpdate.")
+  type?: RolloutStrategyType;
+
+  @doc("Reference to an existing cluster update strategy. Required when type is External.")
+  clusterUpdateStrategy?: ClusterUpdateStrategyReference;
+}
+
+@doc("A reference to an existing cluster staged update strategy.")
+model ClusterUpdateStrategyReference {
+  @doc("The name of an existing cluster staged update strategy.")
+  name: string;
+}
+
+@doc("The possible rollout strategy types.")
+union RolloutStrategyType {
+  @doc("Use rolling update strategy for rollout.")
+  RollingUpdate: "RollingUpdate",
+
+  @doc("Use external rollout strategy via Staged Update Run.")
+  External: "External",
+
+  string,
+}
+
 @doc("ClusterResourcePlacementSpec defines the desired state of ClusterResourcePlacement.")
 model ClusterResourcePlacementSpec {
   @doc("Policy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected.")
   policy?: PlacementPolicy;
+
+  @added(Microsoft.ContainerService.Versions.v2026_05_01_preview)
+  @doc("The rollout strategy configuration for the cluster resource placement.")
+  rolloutStrategy?: RolloutStrategy;
 }
 
 @doc("PlacementPolicy contains the rules to select target member clusters to place the selected resources. Note that only clusters that are both joined and satisfying the rules will be selected. You can only specify at most one of the two fields: ClusterNames and Affinity. If none is specified, all the joined clusters are selected.")
@@ -56,9 +86,10 @@ model ClusterAffinity {
 
 @doc("ClusterSelector")
 model ClusterSelector {
+  @madeOptional(Microsoft.ContainerService.Versions.v2026_05_01_preview)
   @doc("ClusterSelectorTerms is a list of cluster selector terms. The terms are `ORed`.")
   @identifiers(#[])
-  clusterSelectorTerms: ClusterSelectorTerm[];
+  clusterSelectorTerms?: ClusterSelectorTerm[];
 }
 
 @doc("ClusterSelectorTerm")
