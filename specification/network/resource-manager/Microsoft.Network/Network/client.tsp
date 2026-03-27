@@ -1996,5 +1996,5 @@ op replaceprivateDnsZoneGroupsList(
 );
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "ArmResourceProvisioningState",
-  "python"
+  "python,javascript"
 );
