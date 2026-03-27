@@ -1,0 +1,51 @@
+parameters:
+  "service-dir":
+    default: "sdk/horizondb"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    use-read-only-status-schema: true
+    output-file: "{version-status}/{version}/openapi.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+    emit-lro-options: "all"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-horizondb"
+    namespace: "azure.mgmt.horizondb"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/horizondb"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-horizondb"
+    namespace: "com.azure.resourcemanager.horizondb"
+    service-name: "HorizonDb"
+    flavor: azure
+    use-object-for-unknown: true
+    generate-async-methods: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-horizondb"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    compatibility-lro: true
+    package-details:
+      name: "@azure/arm-horizondb"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/horizondb"
+    emitter-output-dir: "{output-dir}/{service-dir}/armhorizondb"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armhorizondb"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.HorizonDb"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

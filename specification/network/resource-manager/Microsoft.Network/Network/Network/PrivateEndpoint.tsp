@@ -1,0 +1,169 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "../Common/PrivateEndpoint.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+
+alias PrivateDnsZoneGroupOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The name of the private endpoint. */
+    @path
+    @segment("privateEndpoints")
+    @key
+    privateEndpointName: string;
+  },
+  {
+    /** The name of the private endpoint. */
+    @path
+    @segment("privateDnsZoneGroups")
+    @key
+    privateDnsZoneGroupName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}",
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+interface PrivateEndpoints {
+  /**
+   * Gets the specified private endpoint by resource group.
+   */
+  @tag("PrivateEndpoints")
+  @autoRoute
+  get is ArmResourceRead<
+    PrivateEndpoint,
+    Parameters = {
+      /**
+       * Expands referenced resources.
+       */
+      @query("$expand")
+      $expand?: string;
+    },
+    Error = Error
+  >;
+
+  /**
+   * Creates or updates an private endpoint in the specified resource group.
+   */
+  @tag("PrivateEndpoints")
+  @autoRoute
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    PrivateEndpoint,
+    Error = Error
+  >;
+
+  /**
+   * Deletes the specified private endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PrivateEndpoints")
+  @autoRoute
+  delete is ArmResourceDeleteWithoutOkAsync<
+    PrivateEndpoint,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = Error
+  >;
+
+  /**
+   * Gets all private endpoints in a resource group.
+   */
+  @tag("PrivateEndpoints")
+  @autoRoute
+  list is ArmResourceListByParent<PrivateEndpoint, Error = Error>;
+
+  /**
+   * Gets all private endpoints in a subscription.
+   */
+  @tag("PrivateEndpoints")
+  @autoRoute
+  listBySubscription is ArmListBySubscription<PrivateEndpoint, Error = Error>;
+
+  /**
+   * Deletes the specified private dns zone group.
+   */
+  @tag("PrivateDnsZoneGroups")
+  @delete
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}")
+  privateDnsZoneGroupsDelete is PrivateDnsZoneGroupOps.ActionAsync<
+    PrivateEndpoint,
+    void,
+    void,
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>> | NoContentResponse,
+    OverrideErrorType = CloudError
+  >;
+
+  /**
+   * Gets the private dns zone group resource by specified private dns zone group name.
+   */
+  @tag("PrivateDnsZoneGroups")
+  @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}")
+  privateDnsZoneGroupsGet is PrivateDnsZoneGroupOps.ActionSync<
+    PrivateEndpoint,
+    void,
+    Response = ArmResponse<PrivateDnsZoneGroup>,
+    OverrideErrorType = CloudError
+  >;
+
+  /**
+   * Creates or updates a private dns zone group in the specified private endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PrivateDnsZoneGroups")
+  @put
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}")
+  privateDnsZoneGroupsCreateOrUpdate is PrivateDnsZoneGroupOps.ActionAsync<
+    PrivateEndpoint,
+    PrivateDnsZoneGroup,
+    void,
+    Response = ArmResponse<PrivateDnsZoneGroup> | ArmResourceCreatedResponse<
+      PrivateDnsZoneGroup,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateDnsZoneGroup> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
+    OverrideErrorType = CloudError
+  >;
+
+  /**
+   * Gets all private dns zone groups in a private endpoint.
+   */
+  @tag("PrivateDnsZoneGroups")
+  @list
+  @get
+  @action("privateDnsZoneGroups")
+  @autoRoute
+  privateDnsZoneGroupsList is ArmResourceActionSync<
+    PrivateEndpoint,
+    void,
+    ArmResponse<PrivateDnsZoneGroupListResult>,
+    Error = CloudError
+  >;
+}
+
+@@doc(PrivateEndpoint.name, "The name of the private endpoint.");
+@@doc(PrivateEndpoint.properties, "Properties of the private endpoint.");
+@@doc(PrivateEndpoints.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update private endpoint operation."
+);
+@@doc(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.body,
+  "Parameters supplied to the create or update private dns zone group operation."
+);
