@@ -78,10 +78,10 @@ namespace CombineClient;
   "ApplicationGatewayFirewallExclusionRequireAll",
   "java"
 );
-@clientName("ApplicationGatewayFirewallExclusion", "java")
 /**
  * Allow to exclude some variable satisfy the condition for the WAF check.
  */
+@clientName("ApplicationGatewayFirewallExclusion", "java")
 model ApplicationGatewayFirewallExclusionRequireMatchVariable {
   /**
    * The variable to be excluded.
