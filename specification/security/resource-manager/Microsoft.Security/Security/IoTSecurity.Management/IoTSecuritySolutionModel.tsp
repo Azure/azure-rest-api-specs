@@ -14,13 +14,23 @@ namespace Microsoft.Security;
  * IoT Security solution configuration and resource information.
  */
 model IoTSecuritySolutionModel
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<IoTSecuritySolutionProperties> {
+  is Azure.ResourceManager.ProxyResource<IoTSecuritySolutionProperties> {
   ...ResourceNameParameter<
     Resource = IoTSecuritySolutionModel,
     KeyName = "solutionName",
     SegmentName = "iotSecuritySolutions",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 }
 
 @armResourceOperations(#{ omitTags: true })

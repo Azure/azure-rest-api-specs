@@ -13,15 +13,23 @@ namespace Microsoft.Security;
 /**
  * The security automation resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Automation
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<AutomationProperties> {
+model Automation is Azure.ResourceManager.ProxyResource<AutomationProperties> {
   ...ResourceNameParameter<
     Resource = Automation,
     KeyName = "automationName",
     SegmentName = "automations",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 
   /**
    * Kind of the resource
