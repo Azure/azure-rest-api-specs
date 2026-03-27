@@ -128,6 +128,30 @@ interface Organizations {
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
+
+  @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+  @doc("Create a new project under this organization.")
+  @autoRoute
+  @armResourceAction(OrganizationResource)
+  @post
+  @action("projects")
+  createProject(
+    ...ResourceInstanceParameters<OrganizationResource>,
+
+    @doc("Project creation request containing the project name.")
+    @body
+    body: CreateProjectRequest,
+  ): ArmResponse<Project> | ErrorResponse;
+}
+
+@doc("Request body for creating a new project.")
+@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
+model CreateProjectRequest {
+  @doc("Name for the new project in MongoDB Atlas.")
+  @pattern("^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$")
+  @minLength(1)
+  @maxLength(64)
+  projectName: string;
 }
 
 // =====================================================
@@ -155,11 +179,6 @@ union ClusterTier {
 @doc("Properties specific to a MongoDB Atlas Project.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model ProjectProperties {
-  @doc("Atlas project id. Required for all operations except project creation.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  @pattern("^[a-fA-F0-9]{24}$")
-  projectId?: string;
-
   @doc("Atlas organization id.")
   @visibility(Lifecycle.Read)
   @pattern("^[a-fA-F0-9]{24}$")
@@ -179,22 +198,18 @@ model ProjectProperties {
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 @parentResource(OrganizationResource)
 model Project is ProxyResource<ProjectProperties> {
-  @key("projectName")
-  @pattern("^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$")
+  @key("projectId")
   @segment("projects")
-  @minLength(1)
-  @maxLength(64)
-  @doc("Project name in MongoDB Atlas. For GET, DELETE, and POST actions, this parameter also accepts a project ID.")
+  @doc("Atlas project ID.")
   @path
   @visibility(Lifecycle.Read)
-  projectName: string;
+  projectId: string;
 }
 
 @armResourceOperations
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 interface Projects {
   get is ArmResourceRead<Project>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
   delete is ArmResourceDeleteWithoutOkAsync<Project>;
   list is ArmResourceListByParent<Project>;
 

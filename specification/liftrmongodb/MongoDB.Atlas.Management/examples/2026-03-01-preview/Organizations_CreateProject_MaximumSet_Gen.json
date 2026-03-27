@@ -1,12 +1,14 @@
 {
-  "title": "Projects_Get_MaximumSet",
-  "operationId": "Projects_Get",
+  "title": "Organizations_CreateProject_MaximumSet",
+  "operationId": "Organizations_CreateProject",
   "parameters": {
     "api-version": "2026-03-01-preview",
     "subscriptionId": "1E4BD993-6890-4E69-8966-81482D7502EF",
     "resourceGroupName": "rgopenapi",
     "organizationName": "myOrganization",
-    "projectId": "507f1f77bcf86cd799439011"
+    "body": {
+      "projectName": "myNewProject"
+    }
   },
   "responses": {
     "200": {
@@ -16,7 +18,7 @@
         "type": "MongoDB.Atlas/organizations/projects",
         "properties": {
           "organizationId": "507f1f77bcf86cd799439011",
-          "clusterCount": 3,
+          "clusterCount": 0,
           "provisioningState": "Succeeded"
         },
         "systemData": {
