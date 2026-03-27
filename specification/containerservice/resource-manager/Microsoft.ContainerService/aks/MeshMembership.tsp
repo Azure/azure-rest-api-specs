@@ -19,7 +19,7 @@ namespace Microsoft.ContainerService;
  * Mesh membership of a managed cluster.
  */
 @parentResource(ManagedCluster)
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model MeshMembership
   is Azure.ResourceManager.ProxyResource<MeshMembershipProperties> {
   ...ResourceNameParameter<
@@ -32,7 +32,7 @@ model MeshMembership
   /**
    * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This field is allowed at the top-level as per the ARM resource specification."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   managedBy?: string;
 
@@ -50,7 +50,7 @@ model MeshMembership
 );
 
 @armResourceOperations
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 interface MeshMemberships {
   /**
    * Gets the mesh membership of a managed cluster.
@@ -60,16 +60,16 @@ interface MeshMemberships {
   /**
    * Creates or updates the mesh membership of a managed cluster.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    MeshMembership,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MeshMembership> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<MeshMembership>;
 
   /**
    * Deletes the mesh membership of a managed cluster.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<MeshMembership>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    MeshMembership,
+    LroHeaders = ArmAsyncOperationHeaderWithLocation &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Lists mesh memberships in a managed cluster.
@@ -87,7 +87,8 @@ interface MeshMemberships {
 /**
  * The provisioning state of the last accepted operation.
  */
-@added(Versions.v2025_10_02_preview)
+@Azure.Core.lroStatus
+@added(Versions.v2026_01_02_preview)
 union MeshMembershipProvisioningState {
   string,
 
@@ -125,7 +126,7 @@ union MeshMembershipProvisioningState {
 /**
  * Mesh membership properties of a managed cluster.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model MeshMembershipProperties {
   /**
    * The current provisioning state of the Mesh Membership.
@@ -134,9 +135,14 @@ model MeshMembershipProperties {
   provisioningState?: MeshMembershipProvisioningState;
 
   /**
+   * Profile for configuring private connectivity between the mesh control plane and member clusters. When configured, communication between the mesh control plane and this member cluster occurs over private network instead of public networks. Visit https://aka.ms/applink for more information.
+   */
+  privateConnectProfile?: MeshMembershipPrivateConnectProfile;
+
+  /**
    * The ARM resource id for the managed mesh member. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppLink/applinks/{appLinkName}/appLinkMembers/{appLinkMemberName}'. Visit https://aka.ms/applink for more information.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   managedMeshID: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.AppLink/applinks";
@@ -145,9 +151,30 @@ model MeshMembershipProperties {
 }
 
 /**
+ * Private connect profile for mesh membership.
+ */
+@added(Versions.v2026_01_02_preview)
+model MeshMembershipPrivateConnectProfile {
+  /**
+   * The private IP address of the member cluster private FQDN. This is a read-only property populated by the service.
+   */
+  @visibility(Lifecycle.Read)
+  privateIpAddress?: string;
+
+  /**
+   * The delegated subnet resource ID. Customer can provide their own subnet, or AKS will allocate one if not specified. When providing your own subnet, the minimum required size is /28
+   */
+  subnetResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+}
+
+/**
  * The result of a request to list mesh memberships in a managed cluster.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model MeshMembershipsListResult {
   /**
    * The list of mesh memberships.

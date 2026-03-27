@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./StorageAccount.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Storage;
 /**
@@ -124,6 +126,21 @@ interface StorageTaskAssignments {
       $filter?: string;
     },
     Error = ErrorResponse
+  >;
+
+  /**
+   * Stops any active running storage action for the storage task assignment
+   */
+  @added(Versions.v2025_08_01)
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @action("stopAssignment")
+  stopAssignment is ArmResourceActionAsync<
+    StorageTaskAssignment,
+    void,
+    void,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
