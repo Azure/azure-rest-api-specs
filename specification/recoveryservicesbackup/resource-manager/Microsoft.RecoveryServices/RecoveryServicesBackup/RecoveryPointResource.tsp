@@ -14,22 +14,26 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup copies. Workload-specific backup copies are derived from this class.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "Backward compatibility with existing API structure."
 @parentResource(ProtectedItemResource)
-model RecoveryPointResource
-  is TrackedResourceWithOptionalLocation<RecoveryPoint> {
+model RecoveryPointResource is ProxyResource<RecoveryPoint> {
   ...ResourceNameParameter<
     Resource = RecoveryPointResource,
     KeyName = "recoveryPointId",
     SegmentName = "recoveryPoints",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
   eTag?: string;
 }
 
