@@ -584,24 +584,26 @@ using Microsoft.Network;
 
 @@clientName(BastionHosts.createOrUpdate::parameters.resource, "parameters");
 @@clientName(BastionHosts.updateTags::parameters.properties, "parameters");
-@@clientLocation(BastionHosts.putBastionShareableLink, "");
+@@clientLocation(BastionHosts.putBastionShareableLink, Microsoft.Network);
 @@clientName(BastionHosts.putBastionShareableLink::parameters.body,
   "bslRequest"
 );
-@@clientLocation(BastionHosts.deleteBastionShareableLink, "");
+@@clientLocation(BastionHosts.deleteBastionShareableLink, Microsoft.Network);
 @@clientName(BastionHosts.deleteBastionShareableLink::parameters.body,
   "bslRequest"
 );
-@@clientLocation(BastionHosts.deleteBastionShareableLinkByToken, "");
+@@clientLocation(BastionHosts.deleteBastionShareableLinkByToken,
+  Microsoft.Network
+);
 @@clientName(BastionHosts.deleteBastionShareableLinkByToken::parameters.body,
   "bslTokenRequest"
 );
-@@clientLocation(BastionHosts.getBastionShareableLink, "");
+@@clientLocation(BastionHosts.getBastionShareableLink, Microsoft.Network);
 @@clientName(BastionHosts.getBastionShareableLink::parameters.body,
   "bslRequest"
 );
-@@clientLocation(BastionHosts.getActiveSessions, "");
-@@clientLocation(BastionHosts.disconnectActiveSessions, "");
+@@clientLocation(BastionHosts.getActiveSessions, Microsoft.Network);
+@@clientLocation(BastionHosts.disconnectActiveSessions, Microsoft.Network);
 @@clientName(BastionHosts.disconnectActiveSessions::parameters.body,
   "sessionIds"
 );
@@ -751,7 +753,9 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRoutePortAuthorization.properties);
 
-@@clientLocation(ExpressRouteProviderPorts.expressRouteProviderPort, "");
+@@clientLocation(ExpressRouteProviderPorts.expressRouteProviderPort,
+  Microsoft.Network
+);
 @@clientLocation(ExpressRouteProviderPorts.list,
   "ExpressRouteProviderPortsLocation"
 );
@@ -850,11 +854,15 @@ using Microsoft.Network;
 
 @@clientName(NetworkManagers.createOrUpdate::parameters.resource, "parameters");
 @@clientName(NetworkManagers.patch::parameters.properties, "parameters");
-@@clientLocation(NetworkManagers.listActiveConnectivityConfigurations, "");
+@@clientLocation(NetworkManagers.listActiveConnectivityConfigurations,
+  Microsoft.Network
+);
 @@clientName(NetworkManagers.listActiveConnectivityConfigurations::parameters.body,
   "parameters"
 );
-@@clientLocation(NetworkManagers.listActiveSecurityAdminRules, "");
+@@clientLocation(NetworkManagers.listActiveSecurityAdminRules,
+  Microsoft.Network
+);
 @@clientName(NetworkManagers.listActiveSecurityAdminRules::parameters.body,
   "parameters"
 );
@@ -1218,13 +1226,13 @@ using Microsoft.Network;
 @@clientName(VirtualNetworks.createOrUpdate::parameters.resource, "parameters");
 @@clientName(VirtualNetworks.updateTags::parameters.properties, "parameters");
 @@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
-  ""
+  Microsoft.Network
 );
 @@clientName(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations::parameters.body,
   "parameters"
 );
 @@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
-  ""
+  Microsoft.Network
 );
 @@clientName(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules::parameters.body,
   "parameters"
