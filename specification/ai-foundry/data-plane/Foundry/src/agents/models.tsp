@@ -108,12 +108,6 @@ model UpdateAgentRequest {
   #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model PatchAgentRequest {
-  ...MetadataPropertyForRequest;
-
-  @doc("A human-readable description of the agent.")
-  @maxLength(512)
-  description?: string;
-
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpoint;
 
@@ -152,7 +146,7 @@ model AgentObject {
     }
   )
   @doc("The endpoint configuration for the agent")
-  endpoint?: AgentEndpoint;
+  agent_endpoint?: AgentEndpoint;
 
   @extension(
     "x-ms-foundry-meta",
