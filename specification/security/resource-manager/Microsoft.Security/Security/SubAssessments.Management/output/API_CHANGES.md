@@ -22,7 +22,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.SecuritySubAssessmentList.required__added` | added | `["value"]` |
 | `paths['/{scope}/providers/microsoft.Security/subAssessments'].get.parameters[0].required__added` | added | `true` |
 
 ### Changes for `type`
@@ -75,12 +74,6 @@
 | `definitions.SecuritySubAssessmentProperties.properties.additionalData.description__added` | added | `Details of the sub-assessment` |
 | `definitions.SecuritySubAssessmentProperties.properties.resourceDetails.description__added` | added | `Details of the resource that was assessed` |
 | `definitions.SecuritySubAssessmentProperties.properties.status.description__added` | added | `Status of the sub-assessment` |
-
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecuritySubAssessmentList.properties.value.readOnly__deleted` | deleted | `true` |
 
 ## Modified Values
 

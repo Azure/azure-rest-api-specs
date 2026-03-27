@@ -58,7 +58,7 @@
           {
             "name": "scope",
             "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "description": "The scope of the sub-assessment.",
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
@@ -73,7 +73,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SecuritySubAssessmentList"
             }
@@ -109,7 +109,7 @@
           {
             "name": "scope",
             "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "description": "The scope of the sub-assessment.",
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
@@ -430,20 +430,18 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SecuritySubAssessment items on this page",
+          "description": "List of security sub-assessments",
           "items": {
             "$ref": "#/definitions/SecuritySubAssessment"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URI to fetch the next page.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "SecuritySubAssessmentProperties": {
       "type": "object",

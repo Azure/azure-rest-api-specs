@@ -101,7 +101,17 @@ union AssessedResourceType {
 /**
  * List of security sub-assessments
  */
-model SecuritySubAssessmentList is Azure.Core.Page<SecuritySubAssessment>;
+model SecuritySubAssessmentList {
+  /** List of security sub-assessments */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SecuritySubAssessment[];
+
+  /** The URI to fetch the next page. */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Describes properties of an sub-assessment.

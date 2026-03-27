@@ -25,12 +25,65 @@ model SecuritySubAssessment
   >;
 }
 
-alias SecuritySubAssessmentLegacyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias SecuritySubAssessmentLegacyOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
-    ...Extension.ScopeParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
 
+    /**
+     * The scope of the sub-assessment.
+     */
+    @path(#{ allowReserved: true })
+    @key
+    scope: string;
+
+    /**
+     * The provider namespace.
+     */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+  },
+  {},
+  {
+    /**
+     * The security assessment key - unique key for the assessment type
+     */
+    @path
+    @segment("assessments")
+    @key
+    assessmentName: string;
+
+    /**
+     * The Sub-Assessment Key - Unique key for the sub-assessment type
+     */
+    @path
+    @segment("subAssessments")
+    @key
+    subAssessmentName: string;
+  }
+>;
+
+alias SecuritySubAssessmentsListOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /**
+     * The scope of the sub-assessment.
+     */
+    @path(#{ allowReserved: true })
+    @key
+    scope: string;
+
+    /**
+     * The provider namespace.
+     */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+  },
+  {
     /**
      * The security assessment key - unique key for the assessment type
      */
@@ -39,16 +92,7 @@ alias SecuritySubAssessmentLegacyOps = Azure.ResourceManager.Legacy.LegacyOperat
     @key
     assessmentName: string;
   },
-  {
-    /**
-     * The Sub-Assessment Key - Unique key for the sub-assessment type
-     */
-    @path
-    @segment("subAssessments")
-    @key
-    subAssessmentName: string;
-  },
-  CloudError
+  {}
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -57,15 +101,19 @@ interface SecuritySubAssessments {
    * Get a security sub-assessment on your scanned resource
    */
   @tag("SubAssessments")
-  get is SecuritySubAssessmentLegacyOps.Read<SecuritySubAssessment>;
+  get is SecuritySubAssessmentLegacyOps.Read<
+    SecuritySubAssessment,
+    ErrorType = CloudError
+  >;
 
   /**
    * Get security sub-assessments on all your scanned resources inside a scope
    */
   @tag("SubAssessments")
-  list is SecuritySubAssessmentLegacyOps.List<
+  list is SecuritySubAssessmentsListOps.List<
     SecuritySubAssessment,
-    Response = SecuritySubAssessmentList
+    Response = ArmResponse<SecuritySubAssessmentList>,
+    ErrorType = CloudError
   >;
 }
 
