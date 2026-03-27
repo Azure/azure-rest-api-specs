@@ -66,8 +66,13 @@ interface BlobServices {
   /**
    * Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.
    */
-  blobContainersList is ArmResourceListByParent<
-    BlobContainer,
+  @get
+  @list
+  @action("containers")
+  blobContainersList is ArmResourceActionSync<
+    BlobServiceProperties,
+    void,
+    ArmResponse<ListContainerItems>,
     Parameters = {
       /**
        * Optional. Specified maximum number of containers that can be included in the list.
