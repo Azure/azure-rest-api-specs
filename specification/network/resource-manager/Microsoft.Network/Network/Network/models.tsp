@@ -12719,7 +12719,7 @@ model IpamPoolProperties {
    * Provisioning states of a resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -13064,7 +13064,7 @@ model StaticCidrProperties {
    * Provisioning states of a resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -14568,7 +14568,7 @@ model SecurityAdminConfigurationPropertiesFormat {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /**
    * Unique identifier for this resource.
@@ -14598,7 +14598,7 @@ model AdminRuleCollectionPropertiesFormat {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /**
    * Unique identifier for this resource.
@@ -15478,7 +15478,7 @@ model ReachabilityAnalysisIntentProperties {
    * Provisioning states of a resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
@@ -15561,7 +15561,7 @@ model ReachabilityAnalysisRunProperties {
    * Provisioning states of a resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -15602,7 +15602,7 @@ model VerifierWorkspaceProperties {
    * Provisioning states of a resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -25126,7 +25126,7 @@ model AdminPropertiesFormat {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /**
    * Unique identifier for this resource.
@@ -25223,7 +25223,7 @@ model DefaultAdminPropertiesFormat {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /**
    * Unique identifier for this resource.
@@ -25661,7 +25661,7 @@ model ServiceGatewayPropertiesFormat {
    * The provisioning state of the service gateway resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /**

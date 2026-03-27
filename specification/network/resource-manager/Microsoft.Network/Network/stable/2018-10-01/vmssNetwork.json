@@ -3573,21 +3573,38 @@
     },
     "Microsoft.Network.ProvisioningState": {
       "type": "string",
-      "description": "The current provisioning state.",
+      "description": "Provisioning states of a resource.",
       "enum": [
+        "Failed",
         "Succeeded",
+        "Canceled",
+        "Creating",
         "Updating",
-        "Deleting",
-        "Failed"
+        "Deleting"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true,
         "values": [
           {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
             "name": "Succeeded",
             "value": "Succeeded",
             "description": "Succeeded"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
           },
           {
             "name": "Updating",
@@ -3598,11 +3615,6 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "Deleting"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed"
           }
         ]
       }
