@@ -989,6 +989,11 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 
+// Fix paged types to match prior GA (Azure.Pageable<T> in C#)
+@@alternateType(FileShareItems, Azure.Core.Page<FileShare>, "csharp");
+@@alternateType(ListQueueResource, Azure.Core.Page<StorageQueue>, "csharp");
+@@alternateType(ListContainerItems, Azure.Core.Page<BlobContainer>, "csharp");
+
 @@usage(StorageAccount,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "java"
