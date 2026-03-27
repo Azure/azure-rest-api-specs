@@ -112,12 +112,6 @@ model UpdateAgentRequest {
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 model PatchAgentRequest {
-  ...MetadataPropertyForRequest;
-
-  @doc("A human-readable description of the agent.")
-  @maxLength(512)
-  description?: string;
-
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpoint;
 
@@ -157,7 +151,7 @@ model AgentObject {
     }
   )
   @doc("The endpoint configuration for the agent")
-  endpoint?: AgentEndpoint;
+  agent_endpoint?: AgentEndpoint;
 
   @removed(Versions.v1)
   @extension(
