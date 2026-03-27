@@ -89,7 +89,7 @@ union ExtendedLocationTypes {
 /**
  * Provisioning states of a resource.
  */
-union ResourceProvisioningState {
+union ProvisioningState {
   string,
 
   /**
@@ -121,34 +121,6 @@ union ResourceProvisioningState {
    * Deleting
    */
   Deleting: "Deleting",
-}
-
-/**
- * The current provisioning state.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union ProvisioningState {
-  string,
-
-  /**
-   * Succeeded
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * Updating
-   */
-  Updating: "Updating",
-
-  /**
-   * Deleting
-   */
-  Deleting: "Deleting",
-
-  /**
-   * Failed
-   */
-  Failed: "Failed",
 }
 
 /**

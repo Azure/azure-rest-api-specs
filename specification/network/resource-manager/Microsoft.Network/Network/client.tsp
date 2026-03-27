@@ -1238,6 +1238,49 @@ union ProvisioningStateUnion {
   "java"
 );
 
+// Move operations back to top-level NetworkManagementClient for Java
+@@clientLocation(BastionHosts.putBastionShareableLink, CombineClient, "java");
+@@clientLocation(BastionHosts.deleteBastionShareableLink,
+  CombineClient,
+  "java"
+);
+@@clientLocation(BastionHosts.deleteBastionShareableLinkByToken,
+  CombineClient,
+  "java"
+);
+@@clientLocation(BastionHosts.getBastionShareableLink, CombineClient, "java");
+@@clientLocation(BastionHosts.getActiveSessions, CombineClient, "java");
+@@clientLocation(BastionHosts.disconnectActiveSessions, CombineClient, "java");
+@@clientLocation(CheckDnsNameAvailability.checkDnsNameAvailability,
+  CombineClient,
+  "java"
+);
+@@clientLocation(ExpressRouteProviderPorts.expressRouteProviderPort,
+  CombineClient,
+  "java"
+);
+@@clientLocation(NetworkManagers.listActiveConnectivityConfigurations,
+  CombineClient,
+  "java"
+);
+@@clientLocation(NetworkManagers.listActiveSecurityAdminRules,
+  CombineClient,
+  "java"
+);
+@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
+  CombineClient,
+  "java"
+);
+@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
+  CombineClient,
+  "java"
+);
+@@clientLocation(VirtualWans.supportedSecurityProviders, CombineClient, "java");
+@@clientLocation(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
+  CombineClient,
+  "java"
+);
+
 // Move VMSS listVirtualMachineScaleSetNetworkInterfaces to NetworkInterfaces client for Java
 @@clientLocation(Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
   Microsoft.Network.NetworkInterfaces,
@@ -2027,47 +2070,4 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "ArmResourceProvisioningState",
   "python,javascript"
-);
-
-// Move operations back to top-level NetworkManagementClient for Java
-@@clientLocation(BastionHosts.putBastionShareableLink, CombineClient, "java");
-@@clientLocation(BastionHosts.deleteBastionShareableLink,
-  CombineClient,
-  "java"
-);
-@@clientLocation(BastionHosts.deleteBastionShareableLinkByToken,
-  CombineClient,
-  "java"
-);
-@@clientLocation(BastionHosts.getBastionShareableLink, CombineClient, "java");
-@@clientLocation(BastionHosts.getActiveSessions, CombineClient, "java");
-@@clientLocation(BastionHosts.disconnectActiveSessions, CombineClient, "java");
-@@clientLocation(CheckDnsNameAvailability.checkDnsNameAvailability,
-  CombineClient,
-  "java"
-);
-@@clientLocation(ExpressRouteProviderPorts.expressRouteProviderPort,
-  CombineClient,
-  "java"
-);
-@@clientLocation(NetworkManagers.listActiveConnectivityConfigurations,
-  CombineClient,
-  "java"
-);
-@@clientLocation(NetworkManagers.listActiveSecurityAdminRules,
-  CombineClient,
-  "java"
-);
-@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
-  CombineClient,
-  "java"
-);
-@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
-  CombineClient,
-  "java"
-);
-@@clientLocation(VirtualWans.supportedSecurityProviders, CombineClient, "java");
-@@clientLocation(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
-  CombineClient,
-  "java"
 );
