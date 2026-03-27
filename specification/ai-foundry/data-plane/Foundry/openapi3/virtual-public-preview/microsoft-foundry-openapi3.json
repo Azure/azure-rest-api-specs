@@ -35134,6 +35134,7 @@
             "azure_function": "#/components/schemas/AzureFunctionTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
+            "work_iq_preview": "#/components/schemas/WorkIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
             "memory_search": "#/components/schemas/MemorySearchTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
@@ -35490,6 +35491,7 @@
               "fabric_dataagent_preview",
               "sharepoint_grounding_preview",
               "memory_search_preview",
+              "work_iq_preview",
               "azure_ai_search",
               "azure_function",
               "bing_grounding",
@@ -38317,6 +38319,49 @@
           }
         ],
         "description": "Weekly recurrence schedule."
+      },
+      "WorkIQPreviewTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "work_iq_preview"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "work_iq_preview"
+            ],
+            "description": "The object type, which is always 'work_iq_preview'."
+          },
+          "work_iq_preview": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WorkIQPreviewToolParameters"
+              }
+            ],
+            "description": "The WorkIQ tool parameters."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "A WorkIQ server-side tool."
+      },
+      "WorkIQPreviewToolParameters": {
+        "type": "object",
+        "required": [
+          "project_connection_id"
+        ],
+        "properties": {
+          "project_connection_id": {
+            "type": "string",
+            "description": "The ID of the WorkIQ project connection."
+          }
+        },
+        "description": "The WorkIQ tool parameters."
       },
       "WorkflowActionOutputItem": {
         "type": "object",

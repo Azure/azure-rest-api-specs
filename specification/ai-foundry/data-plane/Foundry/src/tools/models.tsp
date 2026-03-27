@@ -17,6 +17,7 @@ namespace Azure.AI.Projects {
     fabric_dataagent_preview: "fabric_dataagent_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
+    work_iq_preview: "work_iq_preview",
   }
 
   // General availability tools:
@@ -693,6 +694,31 @@ namespace Azure.AI.Projects {
      * The connection stores authentication and other connection details needed to connect to the A2A server.
      */
     project_connection_id?: string;
+  }
+
+  /**
+   * The WorkIQ tool parameters.
+   */
+  model WorkIQPreviewToolParameters {
+    /**
+     * The ID of the WorkIQ project connection.
+     */
+    project_connection_id: string;
+  }
+
+  /**
+   * A WorkIQ server-side tool.
+   */
+  model WorkIQPreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'work_iq_preview'.
+     */
+    type: "work_iq_preview";
+
+    /**
+     * The WorkIQ tool parameters.
+     */
+    work_iq_preview: WorkIQPreviewToolParameters;
   }
 
   /**
