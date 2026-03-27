@@ -2071,3 +2071,13 @@ op replaceprivateDnsZoneGroupsList(
   "ArmResourceProvisioningState",
   "python,javascript"
 );
+
+// Move Microsoft.Compute.PublicIPAddresses operations to Microsoft.Network.PublicIPAddresses for Java
+@@clientLocation(Microsoft.Compute.PublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
+  Microsoft.Network.PublicIPAddresses,
+  "java"
+);
+@@clientLocation(Microsoft.Compute.PublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
+  Microsoft.Network.PublicIPAddresses,
+  "java"
+);
