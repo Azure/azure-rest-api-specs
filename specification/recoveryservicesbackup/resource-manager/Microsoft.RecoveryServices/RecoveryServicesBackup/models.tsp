@@ -8714,7 +8714,7 @@ model CrossTenantVaultMapping {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed.
    */
-  resourceGuardOperationRequests?: string[];
+  resourceGuardOperationRequests?: armResourceIdentifier[];
 
   /**
    * Provisioning state of the resource.
@@ -8734,7 +8734,7 @@ model RemoveCrossTenantVaultMappingRequest {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed.
    */
-  resourceGuardOperationRequests?: string[];
+  resourceGuardOperationRequests?: armResourceIdentifier[];
 }
 
 /**
