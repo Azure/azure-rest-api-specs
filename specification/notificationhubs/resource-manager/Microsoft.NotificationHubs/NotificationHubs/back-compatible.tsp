@@ -100,9 +100,6 @@ using Microsoft.NotificationHubs;
 @@clientName(NamespacesOperationGroup.checkAvailability::parameters.body,
   "parameters"
 );
-// Removed: @@clientName(CheckAvailabilityParameters, "CheckAvailabilityContent", "csharp");
-// Replaced by csharp-scoped rename in client.tsp to "NotificationHubAvailabilityContent"
-@@clientName(Operation, "Info", "csharp");
 
 // @@clientLocation decorators for operations with @operationId
 @@clientLocation(NamespaceResources.get, Namespaces);
