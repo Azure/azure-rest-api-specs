@@ -47,7 +47,21 @@ union ApplicationConditionOperator {
 /**
  * Page of a security applications list
  */
-model ApplicationsList is Azure.Core.Page<Application>;
+model ApplicationsList {
+  /**
+   * Collection of applications in this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Application[];
+
+  /**
+   * The URI to fetch the next page
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Describes properties of an application

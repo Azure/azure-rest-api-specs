@@ -55,18 +55,6 @@
 |------|------------|-------|
 | `definitions.ApplicationProperties.properties.conditionSets.items.items__added` | added | `{"$ref":"#/definitions/ApplicationCondition"}` |
 
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationsList.required__added` | added | `["value"]` |
-
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationsList.properties.value.readOnly__deleted` | deleted | `true` |
-
 ## Modified Values
 
 | Path | Old Value | New Value |
