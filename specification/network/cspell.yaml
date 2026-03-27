@@ -56,6 +56,7 @@ words:
   - vpnsites
   - vxlan
   - wans
+  - Forvmss
 overrides:
   - filename: >-
       **/specification/network/resource-manager/Microsoft.Network/Network/stable/2018-02-01/networkWatcher.json
@@ -98,3 +99,36 @@ overrides:
       - reimages
       - privatenicipconfig
       - publicnicipconfig
+  - filename: >-
+      **/specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/applicationGateway.json
+    words:
+      - Conditon
+  - filename: >-
+      **/specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/virtualNetwork.json
+    words:
+      - reimage
+      - Reimage
+      - Reimages
+      - privatenicipconfig
+      - publicnicipconfig
+  - filename: >-
+      **/specification/network/resource-manager/Microsoft.Network/Network/Network/NetworkVirtualAppliance.tsp
+    words:
+      - reimage
+      - Reimage
+      - Reimages
+      - reimages
+  - filename: >-
+      **/specification/network/resource-manager/Microsoft.Network/Network/Network/back-compatible.tsp
+    words:
+      - reimage
+  - filename: >-
+      **/specification/network/resource-manager/Microsoft.Network/Network/Network/models.tsp
+    words:
+      - privatenicipconfig
+      - publicnicipconfig
+      - conditon
+  - filename: >-
+      **/specification/network/resource-manager/Microsoft.Network/Network/Network/ApplicationGatewayWafDynamicManifestResult.tsp
+    words:
+      - dafault
