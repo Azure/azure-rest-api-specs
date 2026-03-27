@@ -7,8 +7,8 @@ using MapsGeolocation;
 
 namespace Customizations;
 
-@@clientName(getIpToLocation, "getLocation");
-@@clientName(getIpToLocation, "getCountryCode", "python");
+@@clientName(Geolocation.getIpToLocation, "getLocation");
+@@clientName(Geolocation.getIpToLocation, "getCountryCode", "python");
 
 /** Client options */
 model MapsGeolocationClientOptions {
