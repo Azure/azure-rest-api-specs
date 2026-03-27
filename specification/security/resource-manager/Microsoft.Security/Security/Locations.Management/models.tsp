@@ -13,7 +13,17 @@ namespace Microsoft.Security;
 /**
  * List of locations where ASC saves your data
  */
-model AscLocationList is Azure.Core.Page<AscLocation>;
+model AscLocationList {
+  /** List of locations */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: AscLocation[];
+
+  /** The URI to fetch the next page. */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Describes an Azure resource.

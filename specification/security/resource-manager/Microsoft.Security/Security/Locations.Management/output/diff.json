@@ -5,7 +5,7 @@
       "description": "The ASC location of the subscription is in the \"name\" field",
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -18,17 +18,15 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AscLocation"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "CloudError": {
       "type": "object",
@@ -94,16 +92,6 @@
           "readOnly": true
         }
       }
-    }
-  },
-  "info": {
-    "title": {
-      "__old": "Microsoft Defender for Cloud",
-      "__new": "SecurityCenter"
-    },
-    "description": {
-      "__old": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-      "__new": "API spec for Microsoft.Security (Azure Security Center) resource provider"
     }
   },
   "paths": {

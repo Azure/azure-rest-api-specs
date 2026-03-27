@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Microsoft Defender for Cloud",
     "version": "2015-06-01-preview",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider"
   },
   "produces": [
     "application/json"
@@ -87,7 +87,7 @@
       "description": "The ASC location of the subscription is in the \"name\" field",
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -100,17 +100,15 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AscLocation"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "CloudError": {
       "type": "object",
