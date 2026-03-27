@@ -3061,6 +3061,15 @@ op protectionPolicyOperationStatusesGet(
 );
 @@alternateType(BackupResourceEncryptionConfig.keyUri, url, "csharp");
 @@clientName(ThreatInfo, "RecoveryPointThreatInformation", "csharp");
+@@clientName(DatabaseInRP, "BackupRecoveryPointDatabase", "csharp");
+@@clientName(VMWorkloadPolicyType, "VmWorkloadPolicyType", "csharp");
+@@clientName(ProtectionLevel, "BackupProtectionLevel", "csharp");
+@@clientName(ThreatSeverity, "RecoveryPointThreatSeverity", "csharp");
+@@clientName(ThreatState, "RecoveryPointThreatState", "csharp");
+@@clientName(ThreatStatus, "RecoveryPointThreatStatus", "csharp");
+@@clientName(SourceSideScanInfo, "BackupSourceSideScanInfo", "csharp");
+@@clientName(SourceSideScanStatus, "BackupSourceSideScanStatus", "csharp");
+@@clientName(SourceSideScanSummary, "BackupSourceSideScanSummary", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(BackupEngineBaseResource,
