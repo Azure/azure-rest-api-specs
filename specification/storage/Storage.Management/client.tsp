@@ -24,9 +24,11 @@ using Microsoft.Storage;
   "FilesIdentityBasedAuthentication",
   "csharp"
 );
+@@clientName(Connector, "StorageConnector", "csharp");
 @@clientName(CorsRule, "StorageCorsRule", "csharp");
 @@clientName(CorsRules, "StorageCorsRules", "csharp");
 @@clientName(CustomDomain, "StorageCustomDomain", "csharp");
+@@clientName(DataShare, "StorageDataShare", "csharp");
 @@clientName(DnsEndpointType, "StorageDnsEndpointType", "csharp");
 @@clientName(EnabledProtocols, "FileShareEnabledProtocol", "csharp");
 @@clientName(Encryption, "StorageAccountEncryption", "csharp");
@@ -153,6 +155,10 @@ using Microsoft.Storage;
 );
 @@clientName(BlobContainers.objectLevelWorm,
   "EnableVersionLevelImmutability",
+  "csharp"
+);
+@@clientName(StorageAccounts.hierarchicalNamespaceMigration,
+  "EnableHierarchicalNamespace",
   "csharp"
 );
 @@clientName(StorageAccounts.checkNameAvailability,
