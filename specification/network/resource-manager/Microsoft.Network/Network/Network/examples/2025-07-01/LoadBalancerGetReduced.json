@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-name",
+    "loadBalancerName": "lb-name",
+    "api-version": "2025-07-01",
+    "detailLevel": "reduced"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-name/providers/Microsoft.Network/loadBalancers/lb-name",
+        "name": "lb-name",
+        "type": "Microsoft.Network/loadBalancers",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
+          "frontendIPConfigurations": [
+            {
+              "name": "frontendConfig1",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-name/providers/Microsoft.Network/loadBalancers/lb-name/frontendIPConfigurations/frontendConfig1",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "provisioningState": "Succeeded"
+              }
+            }
+          ]
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Regional"
+        }
+      }
+    }
+  },
+  "operationId": "LoadBalancers_Get",
+  "title": "Get load balancer reduced"
+}

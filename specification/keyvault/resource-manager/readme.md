@@ -24,9 +24,27 @@ To see additional help and options, run:
 
 These are the global settings for the KeyVault API.
 
-``` yaml
+```yaml
 openapi-type: arm
-tag: package-2025-05-01
+tag: package-2026-02-01
+```
+
+### Tag: package-preview-2026-03
+
+These settings apply only when `--tag=package-preview-2026-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03'
+input-file:
+  - Microsoft.KeyVault/preview/2026-03-01-preview/openapi.json
+```
+
+### Tag: package-2026-02-01
+
+These settings apply only when `--tag=package-2026-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-01'
+input-file:
+  - Microsoft.KeyVault/stable/2026-02-01/openapi.json
 ```
 
 ### Tag: package-2025-05-01
@@ -97,11 +115,12 @@ input-file:
   - Microsoft.KeyVault/stable/2023-07-01/providers.json
   - Microsoft.KeyVault/stable/2023-07-01/secrets.json
 ```
+
 ### Tag: package-2023-02
 
 These settings apply only when `--tag=package-2023-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-02'
+```yaml $(tag) == 'package-2023-02'
 input-file:
   - Microsoft.KeyVault/stable/2023-02-01/common.json
   - Microsoft.KeyVault/stable/2023-02-01/keys.json
@@ -116,7 +135,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-11'
+```yaml $(tag) == 'package-2022-11'
 input-file:
   - Microsoft.KeyVault/stable/2022-11-01/common.json
   - Microsoft.KeyVault/stable/2022-11-01/keys.json
@@ -125,14 +144,13 @@ input-file:
   - Microsoft.KeyVault/stable/2022-11-01/keysManagedHsm.json
   - Microsoft.KeyVault/stable/2022-11-01/providers.json
   - Microsoft.KeyVault/stable/2022-11-01/secrets.json
-
 ```
 
 ### Tag: package-preview-2022-02
 
 These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-02'
+```yaml $(tag) == 'package-preview-2022-02'
 input-file:
   - Microsoft.KeyVault/preview/2022-02-01-preview/common.json
   - Microsoft.KeyVault/preview/2022-02-01-preview/keys.json
@@ -140,14 +158,13 @@ input-file:
   - Microsoft.KeyVault/preview/2022-02-01-preview/managedHsm.json
   - Microsoft.KeyVault/preview/2022-02-01-preview/providers.json
   - Microsoft.KeyVault/preview/2022-02-01-preview/secrets.json
-
 ```
 
 ### Tag: package-2022-07
 
 These settings apply only when `--tag=package-2022-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-07'
+```yaml $(tag) == 'package-2022-07'
 input-file:
   - Microsoft.KeyVault/stable/2022-07-01/common.json
   - Microsoft.KeyVault/stable/2022-07-01/keys.json
@@ -161,7 +178,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2021-11'
+```yaml $(tag) == 'package-preview-2021-11'
 input-file:
   - Microsoft.KeyVault/preview/2021-11-01-preview/common.json
   - Microsoft.KeyVault/preview/2021-11-01-preview/keys.json
@@ -175,7 +192,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-10'
+```yaml $(tag) == 'package-2021-10'
 input-file:
   - Microsoft.KeyVault/stable/2021-10-01/common.json
   - Microsoft.KeyVault/stable/2021-10-01/keys.json
@@ -189,7 +206,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2021-06'
+```yaml $(tag) == 'package-preview-2021-06'
 input-file:
   - Microsoft.KeyVault/preview/2021-06-01-preview/common.json
   - Microsoft.KeyVault/preview/2021-06-01-preview/keys.json
@@ -203,7 +220,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2021-04'
+```yaml $(tag) == 'package-preview-2021-04'
 input-file:
   - Microsoft.KeyVault/preview/2021-04-01-preview/common.json
   - Microsoft.KeyVault/preview/2021-04-01-preview/keyvault.json
@@ -215,7 +232,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2021-04-full'
+```yaml $(tag) == 'package-preview-2021-04-full'
 input-file:
   - Microsoft.KeyVault/preview/2021-04-01-preview/common.json
   - Microsoft.KeyVault/preview/2021-04-01-preview/keyvault.json
@@ -230,7 +247,7 @@ input-file:
 These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
 This tag is for the development of preview features related to managed HSM of Azure CLI and PowerShell.
 
-``` yaml $(tag) == 'package-preview-2020-04'
+```yaml $(tag) == 'package-preview-2020-04'
 input-file:
   - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
   - Microsoft.KeyVault/stable/2019-09-01/providers.json
@@ -241,7 +258,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2020-04-full` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2020-04-full'
+```yaml $(tag) == 'package-preview-2020-04-full'
 input-file:
   - Microsoft.KeyVault/preview/2020-04-01-preview/keys.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
@@ -254,50 +271,50 @@ input-file:
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-09'
+```yaml $(tag) == 'package-2019-09'
 input-file:
-- Microsoft.KeyVault/stable/2019-09-01/keyvault.json
-- Microsoft.KeyVault/stable/2019-09-01/providers.json
-- Microsoft.KeyVault/stable/2019-09-01/keys.json
+  - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
+  - Microsoft.KeyVault/stable/2019-09-01/providers.json
+  - Microsoft.KeyVault/stable/2019-09-01/keys.json
 ```
 
 ### Tag: package-2018-02-14-preview
 
 These settings apply only when `--tag=package-2018-02-14-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-02-14-preview'
+```yaml $(tag) == 'package-2018-02-14-preview'
 input-file:
-- Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
-- Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
+  - Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
 ```
 
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-02'
+```yaml $(tag) == 'package-2018-02'
 input-file:
-- Microsoft.KeyVault/stable/2018-02-14/keyvault.json
-- Microsoft.KeyVault/stable/2018-02-14/providers.json
+  - Microsoft.KeyVault/stable/2018-02-14/keyvault.json
+  - Microsoft.KeyVault/stable/2018-02-14/providers.json
 ```
 
 ### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-10'
+```yaml $(tag) == 'package-2016-10'
 input-file:
-- Microsoft.KeyVault/stable/2016-10-01/keyvault.json
-- Microsoft.KeyVault/stable/2016-10-01/providers.json
+  - Microsoft.KeyVault/stable/2016-10-01/keyvault.json
+  - Microsoft.KeyVault/stable/2016-10-01/providers.json
 ```
 
 ### Tag: package-2015-06
 
 These settings apply only when `--tag=package-2015-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-06'
+```yaml $(tag) == 'package-2015-06'
 input-file:
-- Microsoft.KeyVault/stable/2015-06-01/keyvault.json
+  - Microsoft.KeyVault/stable/2015-06-01/keyvault.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
@@ -305,41 +322,41 @@ input-file:
 These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
 Creating this tag to pick proper resources from the hybrid profile.
 
-``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+```yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-- Microsoft.KeyVault/stable/2019-09-01/keyvault.json
-- Microsoft.KeyVault/stable/2019-09-01/providers.json
-- Microsoft.KeyVault/stable/2019-09-01/secrets.json
+  - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
+  - Microsoft.KeyVault/stable/2019-09-01/providers.json
+  - Microsoft.KeyVault/stable/2019-09-01/secrets.json
 ```
 
 ### Suppression
 
-``` yaml
+```yaml
 directive:
-- suppress:
-    - R3026 # The 'PrivateEndpointConnection' and 'PrivateLinkResource' sub-resources don't define PATCH as per Network Team's specification.
-    - R3025 # The 'PrivateLinkResource' is only accessible via List operation; does not define GET as per Network Team's specification.
-    - R4015 # The 'MHSMPrivateEndpointConnection' sub-resource doesn't define List as per Network Team's specification.
-    - R2005 # The 'ManagedHsms_PurgeDeleted' operation should not return a mix of 202 and synchronous return types (200, 201, 204) as directed by SDK team.
-    - R4009 # Vault object is the only one that need to be tracked with SystemData
+  - suppress:
+      - R3026 # The 'PrivateEndpointConnection' and 'PrivateLinkResource' sub-resources don't define PATCH as per Network Team's specification.
+      - R3025 # The 'PrivateLinkResource' is only accessible via List operation; does not define GET as per Network Team's specification.
+      - R4015 # The 'MHSMPrivateEndpointConnection' sub-resource doesn't define List as per Network Team's specification.
+      - R2005 # The 'ManagedHsms_PurgeDeleted' operation should not return a mix of 202 and synchronous return types (200, 201, 204) as directed by SDK team.
+      - R4009 # Vault object is the only one that need to be tracked with SystemData
 
-- suppress: DefinitionsPropertiesNamesCamelCase
-  where: 
-    - $.definitions.ManagedHsmKeyProperties.properties.release_policy
-  from: keysManagedHsm.json
-  reason: This is to keep compatibility with existing data plane property. The 'release_policy' property for KeyCreateParameters does not support camelCase.
-- suppress: INVALID_REQUEST_PARAMETER
-  from: openapi.json
-  reason: The Vaults_List API endpoint only supports version 2015-11-01.
-- suppress: OBJECT_MISSING_REQUIRED_PROPERTY
-  from: openapi.json
-  reason: The Vaults_List API endpoint only supports version 2015-11-01.
-- suppress: INVALID_REQUEST_PARAMETER
-  from: keyvault.json
-  reason: The Vaults_List API endpoint only supports version 2015-11-01.
-- suppress: OBJECT_MISSING_REQUIRED_PROPERTY
-  from: keyvault.json
-  reason: The Vaults_List API endpoint only supports version 2015-11-01.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where:
+      - $.definitions.ManagedHsmKeyProperties.properties.release_policy
+    from: keysManagedHsm.json
+    reason: This is to keep compatibility with existing data plane property. The 'release_policy' property for KeyCreateParameters does not support camelCase.
+  - suppress: INVALID_REQUEST_PARAMETER
+    from: openapi.json
+    reason: The Vaults_List API endpoint only supports version 2015-11-01.
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: openapi.json
+    reason: The Vaults_List API endpoint only supports version 2015-11-01.
+  - suppress: INVALID_REQUEST_PARAMETER
+    from: keyvault.json
+    reason: The Vaults_List API endpoint only supports version 2015-11-01.
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: keyvault.json
+    reason: The Vaults_List API endpoint only supports version 2015-11-01.
 ```
 
 ---
@@ -351,7 +368,7 @@ directive:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
