@@ -1399,7 +1399,7 @@ op availablePrivateEndpointTypesOperationGroupListByResourceGroup(
 
 @@override(AvailablePrivateEndpointTypesOperationGroup.listByResourceGroup,
   availablePrivateEndpointTypesOperationGroupListByResourceGroup,
-  "go,python"
+  "go,python,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1423,7 +1423,7 @@ op availablePrivateEndpointTypesOperationGroupList(
 
 @@override(AvailablePrivateEndpointTypesOperationGroup.list,
   availablePrivateEndpointTypesOperationGroupList,
-  "go"
+  "go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1460,7 +1460,7 @@ op privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup(
 
 @@override(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup,
   privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup,
-  "go,python"
+  "go,python,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1490,7 +1490,7 @@ op privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourc
 
 @@override(PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServicesByResourceGroup,
   privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourceGroup,
-  "go,python"
+  "go,python,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1520,7 +1520,7 @@ op replaceAvailableResourceGroupDelegationsOperationGroupList(
 
 @@override(AvailableResourceGroupDelegationsOperationGroup.list,
   replaceAvailableResourceGroupDelegationsOperationGroupList,
-  "go,python"
+  "go,python,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1550,7 +1550,7 @@ op replaceprivateDnsZoneGroupsList(
 
 @@override(Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsList,
   replaceprivateDnsZoneGroupsList,
-  "go,python"
+  "go,python,java"
 );
 
 // Java: restore Ip casing for model names (TypeSpec uses uppercase IP)
@@ -2079,5 +2079,72 @@ op replaceprivateDnsZoneGroupsList(
 );
 @@clientLocation(Microsoft.Compute.PublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
   Microsoft.Network.PublicIPAddresses,
+  "java"
+);
+
+// Method renames to maintain backward compatibility for Java
+@@clientName(ExpressRoutePorts.generateLOA, "generateLoa", "java");
+@@clientName(P2SVpnGateways.getP2sVpnConnectionHealth,
+  "getP2SVpnConnectionHealth",
+  "java"
+);
+@@clientName(P2SVpnGateways.getP2sVpnConnectionHealthDetailed,
+  "getP2SVpnConnectionHealthDetailed",
+  "java"
+);
+@@clientName(P2SVpnGateways.disconnectP2sVpnConnections,
+  "disconnectP2SVpnConnections",
+  "java"
+);
+
+// PublicIPAddress → PublicIpAddress method renames for Java
+@@clientName(Microsoft.Network.PublicIPAddresses.getCloudServicePublicIPAddress,
+  "getCloudServicePublicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddresses.listCloudServiceRoleInstancePublicIPAddresses,
+  "listCloudServiceRoleInstancePublicIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressesOperationGroup.listCloudServicePublicIPAddresses,
+  "listCloudServicePublicIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.Compute.PublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
+  "getVirtualMachineScaleSetPublicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Compute.PublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
+  "listVirtualMachineScaleSetVMPublicIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.Compute.PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
+  "listVirtualMachineScaleSetPublicIpAddresses",
+  "java"
+);
+
+// Sub-client name fixes (override back-compatible.tsp for Java)
+@@clientLocation(FrontendIPConfigurations.get,
+  "LoadBalancerFrontendIpConfigurations",
+  "java"
+);
+@@clientLocation(FrontendIPConfigurations.list,
+  "LoadBalancerFrontendIpConfigurations",
+  "java"
+);
+@@clientLocation(VirtualHubs.virtualHubRouteTableV2sGet,
+  "VirtualHubRouteTableV2S",
+  "java"
+);
+@@clientLocation(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
+  "VirtualHubRouteTableV2S",
+  "java"
+);
+@@clientLocation(VirtualHubs.virtualHubRouteTableV2sDelete,
+  "VirtualHubRouteTableV2S",
+  "java"
+);
+@@clientLocation(VirtualHubs.virtualHubRouteTableV2sList,
+  "VirtualHubRouteTableV2S",
   "java"
 );

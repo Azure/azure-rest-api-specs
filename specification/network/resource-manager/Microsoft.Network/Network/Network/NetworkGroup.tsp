@@ -67,7 +67,10 @@ interface NetworkGroups {
       IfMatch?: string;
     },
     Response = (ArmResponse<NetworkGroup> &
-      NetworkGroupCreateOrUpdateEtagHeader) | (ArmCreatedResponse<NetworkGroup> &
+      NetworkGroupCreateOrUpdateEtagHeader) | (ArmCreatedResponse<
+      NetworkGroup,
+      {}
+    > &
       NetworkGroupCreateOrUpdateEtagHeader),
     Error = CloudError
   >;
