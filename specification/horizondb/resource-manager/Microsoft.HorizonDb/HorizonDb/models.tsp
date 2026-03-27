@@ -207,17 +207,6 @@ model HorizonDbPoolProperties {
   @visibility(Lifecycle.Read)
   replicaCount?: int32;
 
-  @doc("The administrator login for the pool.")
-  @visibility(Lifecycle.Read)
-  administratorLogin?: string;
-
-  @doc("The administrator login password for the pool")
-  @secret
-  @minLength(8)
-  @maxLength(128)
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  administratorLoginPassword?: string;
-
   @doc("The version of the HorizonDb pool.")
   @visibility(Lifecycle.Read)
   version?: string;
@@ -229,24 +218,6 @@ model HorizonDbPoolProperties {
   @doc("The provisioning state of the pool.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-}
-
-@doc("Properties of a HorizonDb pool for update operations.")
-model HorizonDbPoolPropertiesForPatchUpdate {
-  @doc("The administrator login password for the pool.")
-  @secret
-  @minLength(8)
-  @maxLength(128)
-  @visibility(Lifecycle.Update)
-  administratorLoginPassword?: string;
-}
-
-@doc("HorizonDb pool for update operations.")
-model HorizonDbPoolForPatchUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  @doc("The properties that can be updated for a HorizonDb pool.")
-  properties?: HorizonDbPoolPropertiesForPatchUpdate;
 }
 
 @doc("Network properties.")
