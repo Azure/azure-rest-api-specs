@@ -18,12 +18,6 @@
 |------|------------|-------|
 | `definitions.ErrorAdditionalInfo__added` | added | `{"type":"object","description":"The resource management error additional info.","properties":{"type"...` |
 
-### Changes for `properties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecurityOperator.properties.properties__added` | added | `{"type":"object","description":"The resource-specific properties for this resource."}` |
-
 ### Changes for `description`
 
 | Path | Change Type | Value |

@@ -15,9 +15,8 @@ namespace Microsoft.Security;
  * Security operator under a given subscription and pricing
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
-model SecurityOperator is Azure.ResourceManager.ProxyResource<{}> {
+model SecurityOperator is Azure.ResourceManager.ProxyResource<never> {
   ...ResourceNameParameter<
     Resource = SecurityOperator,
     KeyName = "securityOperatorName",
