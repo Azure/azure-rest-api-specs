@@ -541,6 +541,14 @@ using Microsoft.NetworkCloud;
   "csharp"
 );
 @@clientName(StorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(ClusterInspectParameters, "ClusterInspectContent", "csharp");
+@@clientName(ClusterManagerUpdateRelayPrivateEndpointConnectionParameters,
+  "ClusterManagerUpdateRelayPrivateEndpointConnectionContent",
+  "csharp"
+);
+@@clientName(FilterDevices, "NetworkCloudFilterDevices", "csharp");
+@@clientName(TransportProtocol.TCP, "Tcp", "csharp");
+@@clientName(TransportProtocol.UDP, "Udp", "csharp");
 
 // --- go ---
 @@clientName(HugepagesSize.`1G`, "OneG", "go");
