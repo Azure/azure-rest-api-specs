@@ -1,12 +1,14 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "./models.tsp";
+import "@typespec/versioning";
 
 namespace Storage.Blob;
 
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 alias ApiVersionHeader = {
   /** Specifies the version of the operation to use for this request. */
@@ -252,7 +254,7 @@ interface Container {
     {
       ...TimeoutParameter;
       ...MetadataHeaders;
-      ...BlobPublicAccess;
+      ...BlobPublicAccessParameter;
 
       /** Optional.  Version 2019-07-07 and later.  Specifies the default encryption scope to set on the container and use for all future writes. */
       @header("x-ms-default-encryption-scope")
@@ -284,7 +286,7 @@ interface Container {
       ...LeaseDurationResponseHeader;
       ...LeaseStateResponseHeader;
       ...LeaseStatusResponseHeader;
-      ...BlobPublicAccess;
+      ...BlobPublicAccessResponseHeader;
 
       /** Indicates whether the container has an immutability policy set on it. */
       @header("x-ms-has-immutability-policy")
@@ -355,7 +357,7 @@ interface Container {
       /** Signed identifiers */
       @body body: SignedIdentifiers;
 
-      ...BlobPublicAccess;
+      ...BlobPublicAccessResponseHeader;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
     }
@@ -380,7 +382,7 @@ interface Container {
 
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
-      ...BlobPublicAccess;
+      ...BlobPublicAccessParameter;
       ...IfModifiedSinceParameter;
       ...IfUnmodifiedSinceParameter;
     },
@@ -880,10 +882,15 @@ interface Blob {
       @header("x-ms-access-tier-change-time")
       accessTierChangeTime?: utcDateTime;
 
+      /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
+      @added(Versions.v2026_06_06)
+      @header("x-ms-smart-access-tier")
+      smartAccessTier?: string;
+
       ...VersionIdResponseHeader;
       ...IsCurrentVersionResponseHeader;
       ...TagCountResponseHeader;
-      ...ExpiryTimeHeader;
+      ...ExpiryTimeResponseHeader;
       ...IsSealedResponseHeader;
       ...RehydratePriorityHeader;
       ...LastAccessedResponseHeader;
@@ -950,7 +957,7 @@ interface Blob {
     {
       ...TimeoutParameter;
       ...BlobExpiryOptionsParameter;
-      ...ExpiryTimeHeader;
+      ...ExpiryTimeParameter;
     },
     {
       ...EtagResponseHeader;
