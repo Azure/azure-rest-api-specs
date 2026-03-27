@@ -1,0 +1,17 @@
+id: 001002-version-default-value
+name: "Versioning: Add default value from specific version"
+description: |
+  Test adding a default value to a property starting from a specific API version.
+  Based on benchmark case 001002-version-default-value.
+tags:
+  - versioning
+inputs:
+  prompt: "add a default value `21` for property age in model EmployeeProperties from a new api version 2025-11-01"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "API Version Evolution"

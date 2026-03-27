@@ -1118,9 +1118,27 @@ model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
   "SearchServiceNetworkSecurityPerimeterProvisioningIssueSeverity",
   "csharp"
 );
+@@clientName(DataIdentity, "SearchDataIdentity", "csharp");
+@@clientName(DataNoneIdentity, "SearchDataNoneIdentity", "csharp");
+@@clientName(KnowledgeRetrieval, "SearchKnowledgeRetrieval", "csharp");
+@@clientName(DataUserAssignedIdentity,
+  "SearchDataUserAssignedIdentity",
+  "csharp"
+);
+@@clientName(AzureActiveDirectoryApplicationCredentials,
+  "SearchAadApplicationCredentials",
+  "csharp"
+);
+@@clientName(FeatureOffering, "SearchFeatureOffering", "csharp");
+@@clientName(OfferingsByRegion, "SearchOfferingsByRegion", "csharp");
+@@clientName(SkuOffering, "SearchSkuOffering", "csharp");
+@@clientName(SkuLimits, "SearchSkuLimits", "csharp");
+@@clientName(Offerings.list, "GetOfferings", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(SearchServiceUpdate,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Marking as pageable for .Net SDK generation"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Offerings.list, "csharp");
