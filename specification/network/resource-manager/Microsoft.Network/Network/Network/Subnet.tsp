@@ -1,0 +1,124 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./VirtualNetwork.tsp";
+import "../Common/Subnet.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@armResourceOperations(#{ omitTags: true })
+interface Subnets {
+  /**
+   * Gets the specified subnet by virtual network and resource group.
+   */
+  @tag("Subnets")
+  get is ArmResourceRead<
+    Subnet,
+    Parameters = {
+      /**
+       * Expands referenced resources.
+       */
+      @query("$expand")
+      $expand?: string;
+    },
+    Error = CloudError
+  >;
+
+  /**
+   * Creates or updates a subnet in the specified virtual network.
+   */
+  @tag("Subnets")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Subnet, Error = CloudError>;
+
+  /**
+   * Deletes the specified subnet.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Subnets")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Subnet,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
+
+  /**
+   * Gets all subnets in a virtual network.
+   */
+  @tag("Subnets")
+  list is ArmResourceListByParent<Subnet, Error = CloudError>;
+
+  /**
+   * Prepares a subnet by applying network intent policies.
+   */
+  @action("PrepareNetworkPolicies")
+  prepareNetworkPolicies is ArmResourceActionAsync<
+    Subnet,
+    PrepareNetworkPoliciesRequest,
+    Response = {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>,
+    Error = CloudError
+  >;
+
+  /**
+   * Unprepares a subnet by removing network intent policies.
+   */
+  @action("UnprepareNetworkPolicies")
+  unprepareNetworkPolicies is ArmResourceActionAsync<
+    Subnet,
+    UnprepareNetworkPoliciesRequest,
+    Response = {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>,
+    Error = CloudError
+  >;
+
+  /**
+   * Gets a list of resource navigation links for a subnet.
+   */
+  @get
+  @action("ResourceNavigationLinks")
+  resourceNavigationLinksList is ArmResourceActionSync<
+    Subnet,
+    void,
+    ResourceNavigationLinksListResult,
+    Error = CloudError
+  >;
+
+  /**
+   * Gets a list of service association links for a subnet.
+   */
+  @get
+  @action("ServiceAssociationLinks")
+  serviceAssociationLinksList is ArmResourceActionSync<
+    Subnet,
+    void,
+    ServiceAssociationLinksListResult,
+    Error = CloudError
+  >;
+}
+
+@@doc(Subnet.name, "The name of the subnet.");
+@@doc(Subnet.properties, "Properties of the subnet.");
+@@doc(Subnets.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update subnet operation."
+);
+@@doc(Subnets.prepareNetworkPolicies::parameters.body,
+  "Parameters supplied to prepare subnet by applying network intent policies."
+);
+@@doc(Subnets.unprepareNetworkPolicies::parameters.body,
+  "Parameters supplied to unprepare subnet to remove network intent policies."
+);
