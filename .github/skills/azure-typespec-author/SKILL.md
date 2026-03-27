@@ -75,11 +75,11 @@ Check your classification from Step 1, then branch:
 - **API Version Evolution** → Follow [API version evolution reference — Step 3](references/api-version-evolution.md#step-3-retrieve-authoring-plan). **MUST NOT** call `azsdk_typespec_generate_authoring_plan`.
 - **General Authoring** → **MUST** invoke `azure-sdk-mcp:azsdk_typespec_generate_authoring_plan` with:
 
-  | Parameter                 | Value                                                                                                           |
-  | ------------------------- | --------------------------------------------------------------------------------------------------------------- |
-  | `request`                 | User request (verbatim)                                                                                         |
+  | Parameter                 | Value                                                                                                                                                                       |
+  | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `request`                 | User request (verbatim)                                                                                                                                                     |
   | `additionalInformation`   | All content gathered from Steps 1–2 (intake analysis, user answers, relevant `.tsp` code read from the project), **including any case-specific Defaults noted in Step 2.2** |
-  | `typeSpecProjectRootPath` | TypeSpec project root path                                                                                      |
+  | `typeSpecProjectRootPath` | TypeSpec project root path                                                                                                                                                  |
 
   Do not proceed without an authoring plan from this tool.
 
