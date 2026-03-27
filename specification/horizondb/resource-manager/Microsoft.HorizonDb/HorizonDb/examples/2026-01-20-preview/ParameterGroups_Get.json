@@ -1,0 +1,65 @@
+{
+  "operationId": "HorizonDbParameterGroups_Get",
+  "title": "Get a HorizonDb parameter group",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "parameterGroupName": "exampleparametergroup",
+    "api-version": "2026-01-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/exampleparametergroup",
+        "name": "exampleparametergroup",
+        "type": "Microsoft.HorizonDb/parameterGroups",
+        "location": "westus2",
+        "tags": {
+          "env": "dev",
+          "team": "data-platform"
+        },
+        "properties": {
+          "parameters": [
+            {
+              "name": "max_connections",
+              "description": "Sets the maximum number of concurrent connections",
+              "value": "200",
+              "dataType": "integer",
+              "allowedValues": "100,200,500,1000",
+              "isDynamic": true,
+              "isReadOnly": false,
+              "documentationLink": "https://docs.example.com/max_connections",
+              "unit": "connections"
+            },
+            {
+              "name": "log_min_error_statement",
+              "description": "Controls which statements are logged",
+              "value": "error",
+              "dataType": "string",
+              "allowedValues": "debug,info,notice,warning,error,log,fatal,panic",
+              "isDynamic": true,
+              "isReadOnly": false,
+              "documentationLink": "https://docs.example.com/log_min_error_statement"
+            },
+            {
+              "name": "shared_buffers",
+              "description": "Sets the amount of memory the database server uses for shared memory buffers",
+              "value": "2000",
+              "dataType": "integer",
+              "allowedValues": "1000,2000,4000,8000",
+              "isDynamic": false,
+              "isReadOnly": false,
+              "documentationLink": "https://docs.example.com/shared_buffers",
+              "unit": "MB"
+            }
+          ],
+          "description": "Parameter group for high-throughput workloads",
+          "pgVersion": 17,
+          "version": 22,
+          "applyImmediately": true,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

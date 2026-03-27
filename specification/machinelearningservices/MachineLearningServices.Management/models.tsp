@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -10,6 +11,7 @@ using TypeSpec.OpenAPI;
 using Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.MachineLearningServices;
@@ -2598,6 +2600,7 @@ union ServiceDataAccessAuthIdentity {
 /**
  * Enum to determine the type of fine tuning.
  */
+@usage(Azure.ClientGenerator.Core.Usage.output)
 union ModelProvider {
   string,
 
@@ -8503,6 +8506,7 @@ model ManagedNetworkProvisionStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Network access control list configuration"
+@usage(Azure.ClientGenerator.Core.Usage.input)
 model NetworkAcls {
   /**
    * The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
@@ -8519,6 +8523,8 @@ model NetworkAcls {
 /**
  * Contains an IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). Value could be 'Allow' or  'Deny'.
  */
+@added(Versions.v2024_10_01_preview)
+@usage(Azure.ClientGenerator.Core.Usage.output)
 model IPRule {
   /**
    * An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). Value could be 'Allow' or  'Deny'.
@@ -11982,8 +11988,8 @@ model AzureOpenAiHyperParameters {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Base class for model fine-tuning configurations"
-@removed(Versions.v2025_12_01)
 @discriminator("modelProvider")
+@usage(Azure.ClientGenerator.Core.Usage.output)
 model FineTuningVertical {
   /**
    * [Required] Input model for fine tuning.
@@ -12933,6 +12939,7 @@ model CustomMetricThreshold {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom model fine-tuning configuration"
+@usage(Azure.ClientGenerator.Core.Usage.output)
 model CustomModelFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning custom model.
@@ -13497,7 +13504,7 @@ model FeatureSubset extends MonitoringFeatureFilterBase {
 /**
  * FineTuning Job definition.
  */
-@removed(Versions.v2025_12_01)
+@usage(Azure.ClientGenerator.Core.Usage.output)
 model FineTuningJob extends JobBaseProperties {
   /**
    * [Required]
