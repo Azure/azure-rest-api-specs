@@ -10,6 +10,7 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
+import "./vmAttributes.tsp";
 import "./ComputeDiagnosticBase.tsp";
 import "./SkuMixPlacementBase.tsp";
 import "./back-compatible.tsp";

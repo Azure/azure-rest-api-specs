@@ -268,6 +268,84 @@
     }
   },
   "definitions": {
+    "AcceleratorManufacturer": {
+      "type": "string",
+      "description": "Accelerator manufacturer.",
+      "enum": [
+        "AMD",
+        "Nvidia",
+        "Xilinx"
+      ],
+      "x-ms-enum": {
+        "name": "AcceleratorManufacturer",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AMD",
+            "value": "AMD",
+            "description": "AMD accelerator."
+          },
+          {
+            "name": "Nvidia",
+            "value": "Nvidia",
+            "description": "Nvidia accelerator."
+          },
+          {
+            "name": "Xilinx",
+            "value": "Xilinx",
+            "description": "Xilinx accelerator."
+          }
+        ]
+      }
+    },
+    "AcceleratorType": {
+      "type": "string",
+      "description": "Accelerator type.",
+      "enum": [
+        "GPU",
+        "FPGA"
+      ],
+      "x-ms-enum": {
+        "name": "AcceleratorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GPU",
+            "value": "GPU",
+            "description": "GPU accelerator."
+          },
+          {
+            "name": "FPGA",
+            "value": "FPGA",
+            "description": "FPGA accelerator."
+          }
+        ]
+      }
+    },
+    "ArchitectureType": {
+      "type": "string",
+      "description": "Architecture type of the VM.",
+      "enum": [
+        "ARM64",
+        "X64"
+      ],
+      "x-ms-enum": {
+        "name": "ArchitectureType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ARM64",
+            "value": "ARM64",
+            "description": "ARM64 architecture."
+          },
+          {
+            "name": "X64",
+            "value": "X64",
+            "description": "x64 architecture."
+          }
+        ]
+      }
+    },
     "ComputeDiagnosticBase": {
       "type": "object",
       "description": "Contains metadata of a diagnostic type",
@@ -283,6 +361,42 @@
         }
       ]
     },
+    "CpuManufacturer": {
+      "type": "string",
+      "description": "CPU manufacturer.",
+      "enum": [
+        "Intel",
+        "AMD",
+        "Microsoft",
+        "Ampere"
+      ],
+      "x-ms-enum": {
+        "name": "CpuManufacturer",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Intel",
+            "value": "Intel",
+            "description": "Intel CPU."
+          },
+          {
+            "name": "AMD",
+            "value": "AMD",
+            "description": "AMD CPU."
+          },
+          {
+            "name": "Microsoft",
+            "value": "Microsoft",
+            "description": "Microsoft CPU."
+          },
+          {
+            "name": "Ampere",
+            "value": "Ampere",
+            "description": "Ampere CPU."
+          }
+        ]
+      }
+    },
     "DiagnosticProperties": {
       "type": "object",
       "description": "Contains additional properties of a diagnostic",
@@ -294,6 +408,54 @@
             "type": "string"
           }
         }
+      }
+    },
+    "HyperVGeneration": {
+      "type": "string",
+      "description": "Hyper-V generation.",
+      "enum": [
+        "Gen1",
+        "Gen2"
+      ],
+      "x-ms-enum": {
+        "name": "HyperVGeneration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Gen1",
+            "value": "Gen1",
+            "description": "Generation 1."
+          },
+          {
+            "name": "Gen2",
+            "value": "Gen2",
+            "description": "Generation 2."
+          }
+        ]
+      }
+    },
+    "LocalStorageDiskType": {
+      "type": "string",
+      "description": "Local storage disk type.",
+      "enum": [
+        "HDD",
+        "SSD"
+      ],
+      "x-ms-enum": {
+        "name": "LocalStorageDiskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HDD",
+            "value": "HDD",
+            "description": "HDD local storage."
+          },
+          {
+            "name": "SSD",
+            "value": "SSD",
+            "description": "SSD local storage."
+          }
+        ]
       }
     },
     "PlacementScore": {
@@ -945,7 +1107,7 @@
           "type": "array",
           "description": "Supported VM architectures. Required.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ArchitectureType"
           }
         },
         "memoryInGiBPerVCpu": {
@@ -976,7 +1138,7 @@
           "type": "array",
           "description": "Allowed local storage disk types.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/LocalStorageDiskType"
           }
         },
         "rdmaSupport": {
@@ -995,14 +1157,14 @@
           "type": "array",
           "description": "Allowed accelerator manufacturers.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/AcceleratorManufacturer"
           }
         },
         "acceleratorTypes": {
           "type": "array",
           "description": "Allowed accelerator types.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/AcceleratorType"
           }
         },
         "acceleratorCount": {
@@ -1013,14 +1175,14 @@
           "type": "array",
           "description": "Allowed VM categories.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/VmCategory"
           }
         },
         "cpuManufacturers": {
           "type": "array",
           "description": "Allowed CPU manufacturers.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/CpuManufacturer"
           }
         },
         "burstableSupport": {
@@ -1031,7 +1193,7 @@
           "type": "array",
           "description": "Allowed Hyper-V generations.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/HyperVGeneration"
           }
         },
         "excludedVMSizes": {
@@ -1054,6 +1216,60 @@
         "memoryInGiB",
         "architectureTypes"
       ]
+    },
+    "VmCategory": {
+      "type": "string",
+      "description": "VM category classification.",
+      "enum": [
+        "GeneralPurpose",
+        "ComputeOptimized",
+        "MemoryOptimized",
+        "StorageOptimized",
+        "GpuAccelerated",
+        "FpgaAccelerated",
+        "HighPerformanceCompute"
+      ],
+      "x-ms-enum": {
+        "name": "VmCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GeneralPurpose",
+            "value": "GeneralPurpose",
+            "description": "General purpose VMs."
+          },
+          {
+            "name": "ComputeOptimized",
+            "value": "ComputeOptimized",
+            "description": "Compute optimized VMs."
+          },
+          {
+            "name": "MemoryOptimized",
+            "value": "MemoryOptimized",
+            "description": "Memory optimized VMs."
+          },
+          {
+            "name": "StorageOptimized",
+            "value": "StorageOptimized",
+            "description": "Storage optimized VMs."
+          },
+          {
+            "name": "GpuAccelerated",
+            "value": "GpuAccelerated",
+            "description": "GPU accelerated VMs."
+          },
+          {
+            "name": "FpgaAccelerated",
+            "value": "FpgaAccelerated",
+            "description": "FPGA accelerated VMs."
+          },
+          {
+            "name": "HighPerformanceCompute",
+            "value": "HighPerformanceCompute",
+            "description": "High performance compute VMs."
+          }
+        ]
+      }
     }
   },
   "parameters": {}

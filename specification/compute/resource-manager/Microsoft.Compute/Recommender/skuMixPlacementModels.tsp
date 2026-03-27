@@ -103,21 +103,6 @@ union SkuMixPlacementPartialFulfillmentReason {
   InsufficientQuota: "InsufficientQuota",
 }
 
-/** Whether a VM capability should be excluded, included, or required. */
-@added(Versions.v2026_05_05_preview)
-union VmAttributeSupport {
-  string,
-
-  /** Exclude VM sizes that have the capability. */
-  Excluded: "Excluded",
-
-  /** Allow VM sizes with and without the capability. */
-  Included: "Included",
-
-  /** Only allow VM sizes that have the capability. */
-  Required: "Required",
-}
-
 // ===================== Request Models =====================
 
 /** Sku Mix Placement API request. */
@@ -211,100 +196,6 @@ model SkuMixPlacementVMSize {
 
   /** Rank of the VM size. Lower = higher priority (starting at 0). Only valid with Prioritized strategy. */
   rank?: int32;
-}
-
-/** VM attribute constraints for attribute-based VM selection. */
-@added(Versions.v2026_05_05_preview)
-model VmAttributes {
-  /** vCPU count range. Required. */
-  vCpuCount: VmAttributeMinMaxInteger;
-
-  /** Memory range in GiB. Required. */
-  memoryInGiB: VmAttributeMinMaxDouble;
-
-  /** Supported VM architectures. Required. */
-  architectureTypes: string[];
-
-  /** Memory-per-vCPU range in GiB. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "memoryInGiBPerVCpu matches the established Azure Compute API naming convention"
-  memoryInGiBPerVCpu?: VmAttributeMinMaxDouble;
-
-  /** Data disk count range. */
-  dataDiskCount?: VmAttributeMinMaxInteger;
-
-  /** NIC count range. */
-  networkInterfaceCount?: VmAttributeMinMaxInteger;
-
-  /** Network bandwidth range in Mbps. */
-  networkBandwidthInMbps?: VmAttributeMinMaxDouble;
-
-  /** Whether local storage support should be excluded, included, or required. */
-  localStorageSupport?: VmAttributeSupport;
-
-  /** Local storage capacity range in GiB. */
-  localStorageInGiB?: VmAttributeMinMaxDouble;
-
-  /** Allowed local storage disk types. */
-  localStorageDiskTypes?: string[];
-
-  /** Whether RDMA support should be excluded, included, or required. */
-  rdmaSupport?: VmAttributeSupport;
-
-  /** RDMA NIC count range. */
-  rdmaNetworkInterfaceCount?: VmAttributeMinMaxInteger;
-
-  /** Whether accelerator support should be excluded, included, or required. */
-  acceleratorSupport?: VmAttributeSupport;
-
-  /** Allowed accelerator manufacturers. */
-  acceleratorManufacturers?: string[];
-
-  /** Allowed accelerator types. */
-  acceleratorTypes?: string[];
-
-  /** Accelerator count range. */
-  acceleratorCount?: VmAttributeMinMaxInteger;
-
-  /** Allowed VM categories. */
-  vmCategories?: string[];
-
-  /** Allowed CPU manufacturers. */
-  cpuManufacturers?: string[];
-
-  /** Whether burstable SKUs should be excluded, included, or required. */
-  burstableSupport?: VmAttributeSupport;
-
-  /** Allowed Hyper-V generations. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "hyperVGenerations matches the established Azure Compute API naming convention"
-  hyperVGenerations?: string[];
-
-  /** VM sizes to explicitly exclude. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "excludedVMSizes matches the established Azure Compute API naming convention"
-  excludedVMSizes?: string[];
-
-  /** VM sizes to explicitly allow; attribute filtering applied only to this set. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "allowedVMSizes matches the established Azure Compute API naming convention"
-  allowedVMSizes?: string[];
-}
-
-/** Integer min/max range for VM attributes. */
-@added(Versions.v2026_05_05_preview)
-model VmAttributeMinMaxInteger {
-  /** Minimum value. */
-  min?: int32;
-
-  /** Maximum value. */
-  max?: int32;
-}
-
-/** Double min/max range for VM attributes. */
-@added(Versions.v2026_05_05_preview)
-model VmAttributeMinMaxDouble {
-  /** Minimum value. */
-  min?: float64;
-
-  /** Maximum value. */
-  max?: float64;
 }
 
 // ===================== Response Models =====================
