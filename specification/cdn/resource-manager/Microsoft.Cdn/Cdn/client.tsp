@@ -275,7 +275,7 @@ using Microsoft.Cdn;
   "csharp"
 );
 @@clientName(CompressionSettings, "RouteCacheCompressionSettings", "csharp");
-@@clientName(AfdPurgeParameters, "FrontDoorPurgeParameters", "csharp");
+@@clientName(AfdPurgeParameters, "FrontDoorPurgeContent", "csharp");
 @@clientName(AfdRouteCacheConfiguration,
   "FrontDoorRouteCacheConfiguration",
   "csharp"
@@ -402,10 +402,7 @@ using Microsoft.Cdn;
   "RequestSchemeOperator",
   "csharp"
 );
-@@clientName(ScrubbingRuleEntryMatchOperator.Equals,
-  "EqualsValue",
-  "csharp"
-);
+@@clientName(ScrubbingRuleEntryMatchOperator.Equals, "EqualsValue", "csharp");
 @@clientName(ManagedRuleExclusionSelectorMatchOperator.Equals,
   "EqualsValue",
   "csharp"
@@ -475,10 +472,7 @@ using Microsoft.Cdn;
 @@clientName(Status, "ValidationStatus", "csharp");
 @@clientName(ValidateSecretInput, "ValidateSecretContent", "csharp");
 @@clientName(MigrationParameters, "MigrationContent", "csharp");
-@@clientName(CdnMigrationToAfdParameters,
-  "CdnMigrationToAfdContent",
-  "csharp"
-);
+@@clientName(CdnMigrationToAfdParameters, "CdnMigrationToAfdContent", "csharp");
 @@access(DeepCreatedCustomDomain, Access.public, "csharp");
 @@usage(DeepCreatedCustomDomain,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
@@ -507,5 +501,197 @@ using Microsoft.Cdn;
 // Fix duplicate GetResourceUsage methods on ProfileResource
 @@clientName(Profiles.profilesListResourceUsage,
   "GetCdnProfileResourceUsages",
+  "csharp"
+);
+
+// C# backward-compatible renames: Action/Condition parameters (Properties -> Parameters rename)
+@@clientName(CacheExpirationActionParameters,
+  "CacheExpirationActionProperties",
+  "csharp"
+);
+@@clientName(CacheKeyQueryStringActionParameters,
+  "CacheKeyQueryStringActionProperties",
+  "csharp"
+);
+@@clientName(HeaderActionParameters, "HeaderActionProperties", "csharp");
+@@clientName(OriginGroupOverrideActionParameters,
+  "OriginGroupOverrideActionProperties",
+  "csharp"
+);
+@@clientName(RouteConfigurationOverrideActionParameters,
+  "RouteConfigurationOverrideActionProperties",
+  "csharp"
+);
+
+// C# backward-compatible renames: Url* -> Uri* prefix
+@@clientName(UrlRedirectAction, "UriRedirectAction", "csharp");
+@@clientName(UrlRewriteAction, "UriRewriteAction", "csharp");
+@@clientName(UrlSigningAction, "UriSigningAction", "csharp");
+@@clientName(UrlRedirectActionParameters,
+  "UriRedirectActionProperties",
+  "csharp"
+);
+@@clientName(UrlRewriteActionParameters,
+  "UriRewriteActionProperties",
+  "csharp"
+);
+@@clientName(UrlSigningActionParameters,
+  "UriSigningActionProperties",
+  "csharp"
+);
+
+// C# backward-compatible renames: *Parameters/*Input -> *Content
+@@clientName(CanMigrateParameters, "CanMigrateContent", "csharp");
+@@clientName(CustomDomainParameters,
+  "CdnCustomDomainCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(LoadParameters, "LoadContent", "csharp");
+@@clientName(ProfileUpgradeParameters, "ProfileUpgradeContent", "csharp");
+@@clientName(PurgeParameters, "PurgeContent", "csharp");
+@@clientName(ValidateProbeInput, "ValidateProbeContent", "csharp");
+
+// C# backward-compatible renames: MatchCondition parameters
+@@clientName(ClientPortMatchConditionParameters,
+  "ClientPortMatchCondition",
+  "csharp"
+);
+@@clientName(CookiesMatchConditionParameters,
+  "CookiesMatchCondition",
+  "csharp"
+);
+@@clientName(HostNameMatchConditionParameters,
+  "HostNameMatchCondition",
+  "csharp"
+);
+@@clientName(HttpVersionMatchConditionParameters,
+  "HttpVersionMatchCondition",
+  "csharp"
+);
+@@clientName(IsDeviceMatchConditionParameters,
+  "IsDeviceMatchCondition",
+  "csharp"
+);
+@@clientName(PostArgsMatchConditionParameters,
+  "PostArgsMatchCondition",
+  "csharp"
+);
+@@clientName(QueryStringMatchConditionParameters,
+  "QueryStringMatchCondition",
+  "csharp"
+);
+@@clientName(RemoteAddressMatchConditionParameters,
+  "RemoteAddressMatchCondition",
+  "csharp"
+);
+@@clientName(RequestBodyMatchConditionParameters,
+  "RequestBodyMatchCondition",
+  "csharp"
+);
+@@clientName(RequestHeaderMatchConditionParameters,
+  "RequestHeaderMatchCondition",
+  "csharp"
+);
+@@clientName(RequestMethodMatchConditionParameters,
+  "RequestMethodMatchCondition",
+  "csharp"
+);
+@@clientName(RequestSchemeMatchConditionParameters,
+  "RequestSchemeMatchCondition",
+  "csharp"
+);
+@@clientName(RequestUriMatchConditionParameters,
+  "RequestUriMatchCondition",
+  "csharp"
+);
+@@clientName(ServerPortMatchConditionParameters,
+  "ServerPortMatchCondition",
+  "csharp"
+);
+@@clientName(SslProtocolMatchConditionParameters,
+  "DeliveryRuleSslProtocolMatchCondition",
+  "csharp"
+);
+@@clientName(SocketAddrMatchConditionParameters,
+  "SocketAddressMatchCondition",
+  "csharp"
+);
+@@clientName(UrlFileExtensionMatchConditionParameters,
+  "UriFileExtensionMatchCondition",
+  "csharp"
+);
+@@clientName(UrlFileNameMatchConditionParameters,
+  "UriFileNameMatchCondition",
+  "csharp"
+);
+@@clientName(UrlPathMatchConditionParameters,
+  "UriPathMatchCondition",
+  "csharp"
+);
+
+// C# backward-compatible renames: DeliveryRule conditions
+@@clientName(DeliveryRuleSocketAddrCondition,
+  "DeliveryRuleSocketAddressCondition",
+  "csharp"
+);
+@@clientName(DeliveryRuleUrlFileExtensionCondition,
+  "DeliveryRuleUriFileExtensionCondition",
+  "csharp"
+);
+@@clientName(DeliveryRuleUrlFileNameCondition,
+  "DeliveryRuleUriFileNameCondition",
+  "csharp"
+);
+@@clientName(DeliveryRuleUrlPathCondition,
+  "DeliveryRuleUriPathCondition",
+  "csharp"
+);
+
+// C# backward-compatible renames: Other type renames
+@@clientName(CidrIpAddress, "CidrIPAddress", "csharp");
+@@clientName(GeoFilterActions, "GeoFilterAction", "csharp");
+@@clientName(Operator, "MatchOperator", "csharp");
+@@clientName(ResponseBasedDetectedErrorTypes,
+  "ResponseBasedDetectedErrorType",
+  "csharp"
+);
+@@clientName(CdnCertificateSourceParameters, "CdnCertificateSource", "csharp");
+@@clientName(KeyVaultCertificateSourceParameters,
+  "KeyVaultCertificateSource",
+  "csharp"
+);
+@@clientName(KeyVaultSigningKeyParametersType,
+  "KeyVaultSigningKeyType",
+  "csharp"
+);
+@@clientName(Sku, "CdnSku", "csharp");
+@@clientName(UrlSigningParamIdentifier, "UriSigningParamIdentifier", "csharp");
+
+// Make CdnSku public (was internal after rename)
+@@access(Sku, Access.public, "csharp");
+@@usage(Sku,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+// Make ManagedRuleSetDefinition and related types public
+@@access(ManagedRuleSetDefinition, Access.public, "csharp");
+@@usage(ManagedRuleSetDefinition,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@access(ManagedRuleSetDefinitionProperties, Access.public, "csharp");
+@@usage(ManagedRuleSetDefinitionProperties,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@access(ManagedRuleGroupDefinition, Access.public, "csharp");
+@@usage(ManagedRuleGroupDefinition,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@access(ManagedRuleDefinition, Access.public, "csharp");
+@@usage(ManagedRuleDefinition,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
