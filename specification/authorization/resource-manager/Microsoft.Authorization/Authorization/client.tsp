@@ -37,4 +37,4 @@ using Microsoft.RoleManagementAlerts;
   ],
   autoMergeService: true,
 })
-namespace Microsoft.Authorization;
+namespace Microsoft.AuthorizationCombinedClient;
