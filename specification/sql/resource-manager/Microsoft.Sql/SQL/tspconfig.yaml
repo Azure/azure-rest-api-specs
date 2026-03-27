@@ -16,7 +16,7 @@ options:
     namespace: "com.azure.resourcemanager.sql"
     flavor: "azure"
     service-name: "SQL"
-    remove-inner: SecurityAlert,HuntingBookmark,Entity
+    remove-inner: SQL,HuntingBookmark,Entity
     use-object-for-unknown: true
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
@@ -25,15 +25,15 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.SQL"
   "@azure-tools/typespec-python":
-    service-dir: "sdk/securityinsight"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-securityinsight"
-    namespace: "azure.mgmt.securityinsight"
+    service-dir: "sdk/sql"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-sql"
+    namespace: "azure.mgmt.sql"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-ts":
-    service-dir: "sdk/securityinsight"
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-securityinsight"
+    service-dir: "sdk/sql"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-sql"
     flavor: azure
     typespec-title-map:
       SQLClient: SQL
