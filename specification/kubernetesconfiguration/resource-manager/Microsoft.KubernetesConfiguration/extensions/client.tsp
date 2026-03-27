@@ -60,6 +60,14 @@ using Microsoft.KubernetesConfiguration;
   "KubernetesClusterExtensionScopeNamespace",
   "csharp"
 );
+@@clientName(AccessDetail, "KubernetesClusterAccessDetail", "csharp");
+@@clientName(AutoUpgradeMode, "KubernetesClusterAutoUpgradeMode", "csharp");
+@@clientName(AdditionalDetails, "KubernetesClusterAdditionalDetails", "csharp");
+@@clientName(ManagementDetails, "KubernetesClusterManagementDetails", "csharp");
+@@clientName(OperationStatusResult,
+  "KubernetesClusterOperationStatusResult",
+  "csharp"
+);
 
 // Backward compatibility: old SDK used ManagedServiceIdentity for AksAssignedIdentity
 @@alternateType(ExtensionProperties.aksAssignedIdentity,
