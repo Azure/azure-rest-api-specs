@@ -12,7 +12,7 @@ namespace Microsoft.ApiCenter;
 @@clientName(ApiSources, "ApiCenterApiSource", "csharp");
 @@clientName(ApiSourceLinkState, "ApiCenterApiSourceLinkState", "csharp");
 @@clientName(AzureApiManagementSource,
-  "ApiCenterApiAzureApiManagementSource",
+  "ApiCenterApiManagementSource",
   "csharp"
 );
 @@clientName(ImportSpecificationOptions,
@@ -20,7 +20,7 @@ namespace Microsoft.ApiCenter;
   "csharp"
 );
 @@clientName(Contact, "ApiContactInformation", "csharp");
-@@clientName(DeletedServices, "ApiCenterDeletedService", "csharp");
+@@clientName(DeletedService, "ApiCenterDeletedService", "csharp");
 @@clientName(DeletedServiceProperties,
   "ApiCenterDeletedServiceProperties",
   "csharp"
