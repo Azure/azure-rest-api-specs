@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "query": "Muir Woods",
+    "coordinates": "-113.301894,49.201888",
+    "resultTypeGroups": "Address",
+    "AzureKey": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/geo+json"
+      },
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+              "typeGroup": "Address",
+              "type": "Address",
+              "address": {
+                "streetName": "Muir Woods Rd",
+                "addressLine": " Muir Woods Rd",
+                "locality": "Sausalito",
+                "adminDistricts": [
+                  {
+                    "name": "California"
+                  },
+                  {
+                    "name": "Marin County"
+                  }
+                ],
+                "countryRegion": {
+                  "ISO": "US",
+                  "name": "United States"
+                },
+                "postalCode": "94965",
+                "formattedAddress": "Muir Woods Rd, Sausalito, California 94965, United States"
+              }
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+              "typeGroup": "Address",
+              "type": "RoadBlock",
+              "address": {
+                "streetName": "Muir St",
+                "addressLine": " Muir St",
+                "locality": "Grosse Pointe Farms",
+                "adminDistricts": [
+                  {
+                    "name": "Michigan"
+                  },
+                  {
+                    "name": "Wayne County"
+                  }
+                ],
+                "countryRegion": {
+                  "ISO": "US",
+                  "name": "United States"
+                },
+                "postalCode": "48236",
+                "formattedAddress": "Muir St, Grosse Pointe Farms, Michigan 48236, United States"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

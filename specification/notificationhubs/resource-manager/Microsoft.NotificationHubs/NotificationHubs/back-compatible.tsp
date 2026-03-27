@@ -100,9 +100,6 @@ using Microsoft.NotificationHubs;
 @@clientName(NamespacesOperationGroup.checkAvailability::parameters.body,
   "parameters"
 );
-@@clientName(CheckAvailabilityParameters, "CheckAvailabilityContent", "csharp");
-@@clientName(DebugSendResponse, "DebugSendResponseResult", "csharp");
-@@clientName(Operation, "Info", "csharp");
 
 // @@clientLocation decorators for operations with @operationId
 @@clientLocation(NamespaceResources.get, Namespaces);
@@ -118,27 +115,41 @@ using Microsoft.NotificationHubs;
 @@clientLocation(NamespaceResources.listAll, Namespaces);
 @@clientName(NamespaceResources.listAll, "ListAll");
 @@clientLocation(NamespaceResources.checkNotificationHubAvailability,
-  "NotificationHubs"
+  "NotificationHubs",
+  "!csharp"
 );
 @@clientName(NamespaceResources.checkNotificationHubAvailability,
   "CheckNotificationHubAvailability"
 );
 @@clientLocation(NamespaceResources.getPnsCredentials, Namespaces);
 @@clientName(NamespaceResources.getPnsCredentials, "GetPnsCredentials");
-@@clientLocation(NotificationHubResources.get, "NotificationHubs");
+@@clientLocation(NotificationHubResources.get, "NotificationHubs", "!csharp");
 @@clientName(NotificationHubResources.get, "Get");
-@@clientLocation(NotificationHubResources.createOrUpdate, "NotificationHubs");
+@@clientLocation(NotificationHubResources.createOrUpdate,
+  "NotificationHubs",
+  "!csharp"
+);
 @@clientName(NotificationHubResources.createOrUpdate, "CreateOrUpdate");
-@@clientLocation(NotificationHubResources.update, "NotificationHubs");
+@@clientLocation(NotificationHubResources.update,
+  "NotificationHubs",
+  "!csharp"
+);
 @@clientName(NotificationHubResources.update, "Update");
-@@clientLocation(NotificationHubResources.delete, "NotificationHubs");
+@@clientLocation(NotificationHubResources.delete,
+  "NotificationHubs",
+  "!csharp"
+);
 @@clientName(NotificationHubResources.delete, "Delete");
-@@clientLocation(NotificationHubResources.list, "NotificationHubs");
+@@clientLocation(NotificationHubResources.list, "NotificationHubs", "!csharp");
 @@clientName(NotificationHubResources.list, "List");
-@@clientLocation(NotificationHubResources.debugSend, "NotificationHubs");
+@@clientLocation(NotificationHubResources.debugSend,
+  "NotificationHubs",
+  "!csharp"
+);
 @@clientName(NotificationHubResources.debugSend, "DebugSend");
 @@clientLocation(NotificationHubResources.getPnsCredentials,
-  "NotificationHubs"
+  "NotificationHubs",
+  "!csharp"
 );
 @@clientName(NotificationHubResources.getPnsCredentials, "GetPnsCredentials");
 @@clientLocation(PrivateEndpointConnectionResources.get,
@@ -166,35 +177,41 @@ using Microsoft.NotificationHubs;
 @@clientLocation(NamespacesOperationGroup.checkAvailability, Namespaces);
 @@clientName(NamespacesOperationGroup.checkAvailability, "CheckAvailability");
 @@clientLocation(SharedAccessAuthorizationRuleResources.getAuthorizationRule,
-  "NotificationHubs"
+  "NotificationHubs",
+  "!csharp"
 );
 @@clientName(SharedAccessAuthorizationRuleResources.getAuthorizationRule,
   "GetAuthorizationRule"
 );
 @@clientLocation(SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule,
-  "NotificationHubs"
+  "NotificationHubs",
+  "!csharp"
 );
 @@clientName(SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule,
   "CreateOrUpdateAuthorizationRule"
 );
 @@clientLocation(SharedAccessAuthorizationRuleResources.deleteAuthorizationRule,
-  "NotificationHubs"
+  "NotificationHubs",
+  "!csharp"
 );
 @@clientName(SharedAccessAuthorizationRuleResources.deleteAuthorizationRule,
   "DeleteAuthorizationRule"
 );
 @@clientLocation(SharedAccessAuthorizationRuleResources.listAuthorizationRules,
-  "NotificationHubs"
+  "NotificationHubs",
+  "!csharp"
 );
 @@clientName(SharedAccessAuthorizationRuleResources.listAuthorizationRules,
   "ListAuthorizationRules"
 );
 @@clientLocation(SharedAccessAuthorizationRuleResources.listKeys,
-  "NotificationHubs"
+  "NotificationHubs",
+  "!csharp"
 );
 @@clientName(SharedAccessAuthorizationRuleResources.listKeys, "ListKeys");
 @@clientLocation(SharedAccessAuthorizationRuleResources.regenerateKeys,
-  "NotificationHubs"
+  "NotificationHubs",
+  "!csharp"
 );
 @@clientName(SharedAccessAuthorizationRuleResources.regenerateKeys,
   "RegenerateKeys"

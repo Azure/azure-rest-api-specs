@@ -10,6 +10,7 @@ import "./MarketplaceGalleryImages.tsp";
 import "./NetworkInterfaces.tsp";
 import "./NetworkSecurityGroups.tsp";
 import "./SecurityRules.tsp";
+import "./Snapshots.tsp";
 import "./StorageContainers.tsp";
 import "./VirtualHardDisks.tsp";
 import "./VirtualMachineInstance.tsp";
@@ -21,6 +22,7 @@ import "./VirtualNetworks.tsp";
 import "./VirtualNetworkSubnets.tsp";
 import "./PublicIPAddresses.tsp";
 import "./NatGateways.tsp";
+import "./InboundRules.tsp";
 import "./LoadBalancers.tsp";
 import "./Operations.tsp";
 
@@ -83,4 +85,14 @@ enum Versions {
    * The 2025-09-01-preview API version.
    */
   v2025_09_01_preview: "2025-09-01-preview",
+
+  /**
+   * The 2026-02-01-preview API version.
+   */
+  v2026_02_01_preview: "2026-02-01-preview",
+
+  /**
+   * The 2026-04-01-preview API version.
+   */
+  v2026_04_01_preview: "2026-04-01-preview",
 }
