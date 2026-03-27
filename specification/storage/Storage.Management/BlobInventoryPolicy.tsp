@@ -15,6 +15,7 @@ namespace Microsoft.Storage;
  * The storage account blob inventory policy.
  */
 @parentResource(StorageAccount)
+@singleton
 model BlobInventoryPolicy
   is Azure.ResourceManager.ProxyResource<BlobInventoryPolicyProperties> {
   ...ResourceNameParameter<

@@ -15,6 +15,7 @@ namespace Microsoft.Storage;
  * The Get Storage Account ManagementPolicies operation response.
  */
 @parentResource(StorageAccount)
+@singleton
 model ManagementPolicy
   is Azure.ResourceManager.ProxyResource<ManagementPolicyProperties> {
   ...ResourceNameParameter<
