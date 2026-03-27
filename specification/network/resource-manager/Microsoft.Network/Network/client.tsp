@@ -69,6 +69,36 @@ namespace CombineClient;
   "java,javascript"
 );
 
+// Fix definition error on required property. Only "matchVariable" property is required.
+@@alternateType(Microsoft.Network.ApplicationGatewayWebApplicationFirewallConfiguration.exclusions,
+  ApplicationGatewayFirewallExclusionRequireMatchVariable,
+  "java"
+);
+@@clientName(ApplicationGatewayFirewallExclusion,
+  "ApplicationGatewayFirewallExclusionRequireAll",
+  "java"
+);
+@clientName("ApplicationGatewayFirewallExclusion", "java")
+/**
+ * Allow to exclude some variable satisfy the condition for the WAF check.
+ */
+model ApplicationGatewayFirewallExclusionRequireMatchVariable {
+  /**
+   * The variable to be excluded.
+   */
+  matchVariable: string;
+
+  /**
+   * When matchVariable is a collection, operate on the selector to specify which elements in the collection this exclusion applies to.
+   */
+  selectorMatchOperator?: string;
+
+  /**
+   * When matchVariable is a collection, operator used to specify which elements in the collection this exclusion applies to.
+   */
+  selector?: string;
+}
+// Fix ProvisioningState
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by merging ProvisioningState values"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror union for backward compatibility"
 union ProvisioningStateUnion {
@@ -1997,4 +2027,47 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "ArmResourceProvisioningState",
   "python,javascript"
+);
+
+// Move operations back to top-level NetworkManagementClient for Java
+@@clientLocation(BastionHosts.putBastionShareableLink, CombineClient, "java");
+@@clientLocation(BastionHosts.deleteBastionShareableLink,
+  CombineClient,
+  "java"
+);
+@@clientLocation(BastionHosts.deleteBastionShareableLinkByToken,
+  CombineClient,
+  "java"
+);
+@@clientLocation(BastionHosts.getBastionShareableLink, CombineClient, "java");
+@@clientLocation(BastionHosts.getActiveSessions, CombineClient, "java");
+@@clientLocation(BastionHosts.disconnectActiveSessions, CombineClient, "java");
+@@clientLocation(CheckDnsNameAvailability.checkDnsNameAvailability,
+  CombineClient,
+  "java"
+);
+@@clientLocation(ExpressRouteProviderPorts.expressRouteProviderPort,
+  CombineClient,
+  "java"
+);
+@@clientLocation(NetworkManagers.listActiveConnectivityConfigurations,
+  CombineClient,
+  "java"
+);
+@@clientLocation(NetworkManagers.listActiveSecurityAdminRules,
+  CombineClient,
+  "java"
+);
+@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
+  CombineClient,
+  "java"
+);
+@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
+  CombineClient,
+  "java"
+);
+@@clientLocation(VirtualWans.supportedSecurityProviders, CombineClient, "java");
+@@clientLocation(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
+  CombineClient,
+  "java"
 );
