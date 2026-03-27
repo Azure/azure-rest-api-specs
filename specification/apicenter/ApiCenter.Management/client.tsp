@@ -10,7 +10,6 @@ namespace Microsoft.ApiCenter;
 
 // Rename mapping for C# client
 @@clientName(ApiSources, "ApiCenterApiSource", "csharp");
-@@clientName(ApiImportSuccess, "ApiCenterApiImportSuccess", "csharp");
 @@clientName(ApiSourceLinkState, "ApiCenterApiSourceLinkState", "csharp");
 @@clientName(AzureApiManagementSource,
   "ApiCenterApiAzureApiManagementSource",
