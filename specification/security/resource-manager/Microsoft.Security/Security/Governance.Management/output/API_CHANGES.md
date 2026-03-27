@@ -13,6 +13,7 @@
 | `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}'].get.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
 | `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}'].put.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
 | `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}/execute'].post.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
+| `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}'].get.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
 
 ### Changes for `schema`
 

@@ -44,7 +44,16 @@ alias GovernanceAssignmentsOps = Azure.ResourceManager.Legacy.ExtensionOperation
     @key
     providerNamespace: "Microsoft.Security";
   },
-  {},
+  {
+    /**
+     * The assessment key of the governance assignment.
+     */
+    @path
+    @segment("assessments")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    assessmentName: string;
+  },
   {
     /**
      * The assessment key of the governance assignment.
@@ -63,38 +72,6 @@ alias GovernanceAssignmentsOps = Azure.ResourceManager.Legacy.ExtensionOperation
     @key
     assignmentKey: string;
   }
->;
-
-alias GovernanceAssignmentsListOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-
-    /**
-     * The scope of the governance assignment.
-     */
-    @path(#{ allowReserved: true })
-    @key
-    scope: string;
-
-    /**
-     * The provider namespace.
-     */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Security";
-  },
-  {
-    /**
-     * The assessment key of the governance assignment.
-     */
-    @path
-    @segment("assessments")
-    @key
-    @pattern("^[-\\w\\._\\(\\)]+$")
-    assessmentName: string;
-  },
-  {}
 >;
 
 @armResourceOperations
@@ -126,7 +103,7 @@ interface GovernanceAssignments {
   /**
    * Get governance assignments on all of your resources inside a scope
    */
-  list is GovernanceAssignmentsListOps.List<
+  list is GovernanceAssignmentsOps.List<
     GovernanceAssignment,
     Response = ArmResponse<GovernanceAssignmentsList>,
     ErrorType = CloudError

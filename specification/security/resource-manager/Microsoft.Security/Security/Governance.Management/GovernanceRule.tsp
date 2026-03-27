@@ -25,14 +25,14 @@ model GovernanceRule
   >;
 }
 
-alias GovernanceRuleOperationResultsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias GovernanceRuleOperationResultsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
 
     /**
      * The scope of the governance rule.
      */
-    @path
+    @path(#{ allowReserved: true })
     @key
     scope: string;
 
@@ -43,7 +43,9 @@ alias GovernanceRuleOperationResultsOps = Azure.ResourceManager.Legacy.LegacyOpe
     @segment("providers")
     @key
     providerNamespace: "Microsoft.Security";
-
+  },
+  {},
+  {
     /**
      * The governance rule key.
      */
@@ -51,8 +53,7 @@ alias GovernanceRuleOperationResultsOps = Azure.ResourceManager.Legacy.LegacyOpe
     @segment("governanceRules")
     @key
     ruleId: string;
-  },
-  {
+
     /**
      * The governance rule long running operation unique key.
      */
@@ -60,8 +61,7 @@ alias GovernanceRuleOperationResultsOps = Azure.ResourceManager.Legacy.LegacyOpe
     @segment("operationResults")
     @key
     operationId: string;
-  },
-  CloudError
+  }
 >;
 
 @armResourceOperations
@@ -127,7 +127,8 @@ interface GovernanceRules {
       @doc("Location URL for the execution status")
       @header("Location")
       location: string;
-    })
+    }),
+    ErrorType = CloudError
   >;
 }
 
