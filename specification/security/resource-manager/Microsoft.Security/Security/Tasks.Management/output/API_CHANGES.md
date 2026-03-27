@@ -34,7 +34,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.SecurityTaskList.required__added` | added | `["value"]` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/tasks'].get.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/tasks'].get.parameters[0].required__added` | added | `true` |
 
@@ -72,12 +71,6 @@
 |------|------------|-------|
 | `definitions.SecurityTask.properties.properties.description__added` | added | `Describes properties of a task.` |
 | `definitions.SecurityTaskProperties.properties.securityTaskParameters.description__added` | added | `Changing set of properties, depending on the task type that is derived from the name field` |
-
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecurityTaskList.properties.value.readOnly__deleted` | deleted | `true` |
 
 ## Modified Values
 

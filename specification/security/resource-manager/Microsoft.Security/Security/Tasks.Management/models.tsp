@@ -43,7 +43,17 @@ union TaskUpdateActionType {
 /**
  * List of security task recommendations
  */
-model SecurityTaskList is Azure.Core.Page<SecurityTask>;
+model SecurityTaskList {
+  /** The SecurityTask items on this page */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SecurityTask[];
+
+  /** The URI to fetch the next page. */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Describes properties of a task.

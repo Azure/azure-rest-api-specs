@@ -70,7 +70,7 @@ alias SecurityTaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
     taskName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}",
+    route: "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}",
   }
 >;
 
@@ -106,7 +106,7 @@ interface SecurityTasks {
    * Recommended tasks that will help improve the security of the subscription proactively
    */
   @tag("Tasks")
-  @route("/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}")
   updateSubscriptionLevelTaskState is SecurityTaskBuildingOps.ActionSync<
     SecurityTask,
     void,
@@ -163,7 +163,7 @@ alias TaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
     taskName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}",
   }
 >;
 
@@ -196,7 +196,7 @@ interface Tasks {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}")
   updateResourceGroupLevelTaskState is TaskBuildingOps.ActionSync<
     SecurityTask,
     void,
