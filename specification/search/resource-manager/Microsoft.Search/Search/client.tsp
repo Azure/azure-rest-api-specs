@@ -61,7 +61,7 @@ op usagesListBySubscriptionCustomization(
   ...SubscriptionIdParameter,
   ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
-  ...LocationParameter,
+  ...LocationResourceParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   body: void,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -867,6 +867,10 @@ model AccessRulePropertiesSubscriptionsItem {
 
 @@clientName(SearchServiceProperties.eTag, "etag", "java");
 
+@@clientName(SearchResourceEncryptionKey.keyVaultKeyName, "keyName");
+@@clientName(SearchResourceEncryptionKey.keyVaultKeyVersion, "keyVersion");
+@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri");
+
 // C# settings
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flatten sku for backward compat with C# SDK"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchServiceUpdate.sku,
@@ -1114,9 +1118,27 @@ model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
   "SearchServiceNetworkSecurityPerimeterProvisioningIssueSeverity",
   "csharp"
 );
+@@clientName(DataIdentity, "SearchDataIdentity", "csharp");
+@@clientName(DataNoneIdentity, "SearchDataNoneIdentity", "csharp");
+@@clientName(KnowledgeRetrieval, "SearchKnowledgeRetrieval", "csharp");
+@@clientName(DataUserAssignedIdentity,
+  "SearchDataUserAssignedIdentity",
+  "csharp"
+);
+@@clientName(AzureActiveDirectoryApplicationCredentials,
+  "SearchAadApplicationCredentials",
+  "csharp"
+);
+@@clientName(FeatureOffering, "SearchFeatureOffering", "csharp");
+@@clientName(OfferingsByRegion, "SearchOfferingsByRegion", "csharp");
+@@clientName(SkuOffering, "SearchSkuOffering", "csharp");
+@@clientName(SkuLimits, "SearchSkuLimits", "csharp");
+@@clientName(Offerings.list, "GetOfferings", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(SearchServiceUpdate,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Marking as pageable for .Net SDK generation"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Offerings.list, "csharp");
