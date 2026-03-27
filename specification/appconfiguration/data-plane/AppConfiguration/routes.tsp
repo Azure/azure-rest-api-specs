@@ -250,7 +250,7 @@ op getFeatureFlags is Foundations.ResourceList<
   FeatureFlagsRequestParams,
   FeatureFlagListResult &
     AppConfigResponseHeaders &
-    ContentTypeHeader<"application/json;profile=\\\"https://azconfig.io/mime-profiles/feature-management/ffset\\\";charset=utf-8">,
+    ContentTypeHeader<"application/json;profile=\\\"https://azconfig.io/mime-profiles/ffset\\\";charset=utf-8">,
   {},
   Error
 >;
@@ -291,7 +291,7 @@ op getFeatureFlag is Foundations.ResourceOperation<
   Body<FeatureFlag> &
     RequestIdResponseHeader &
     AppConfigResponseHeaders &
-    ContentTypeHeader<"application/json;profile=\\\"https://azconfig.io/mime-profiles/feature-management/ff\\\"​;charset=utf-8">,
+    ContentTypeHeader<"application/json;profile=\\\"https://azconfig.io/mime-profiles/ff\\\"​;charset=utf-8">,
   {},
   Error
 >;
@@ -336,7 +336,7 @@ op putFeatureFlag is AppConfigOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    contentType: "application/json;profile=\\\"https://azconfig.io/mime-profiles/feature-management/ff\\\"​;charset=utf-8";
+    contentType: "application/json;profile=\\\"https://azconfig.io/mime-profiles/ff\\\"​;charset=utf-8";
 
     ...NamePathParam<"The name of the feature flag to create.">;
     ...LabelQueryParam<"The label of the feature flag to create.">;
@@ -350,7 +350,7 @@ op putFeatureFlag is AppConfigOperation<
   },
   Body<FeatureFlag> &
     AppConfigResponseHeaders &
-    ContentTypeHeader<"application/json;profile=\\\"https://azconfig.io/mime-profiles/feature-management/ff\\\"​;charset=utf-8">
+    ContentTypeHeader<"application/json;profile=\\\"https://azconfig.io/mime-profiles/ff\\\"​;charset=utf-8">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -368,7 +368,7 @@ op deleteFeatureFlag is AppConfigOperation<
   },
   (Body<FeatureFlag> &
     AppConfigResponseHeaders &
-    ContentTypeHeader<"application/json;profile=\\\"https://azconfig.io/mime-profiles/feature-management/ff\\\"​;charset=utf-8">) | {
+    ContentTypeHeader<"application/json;profile=\\\"https://azconfig.io/mime-profiles/ff\\\"​;charset=utf-8">) | {
     @statusCode
     statusCode: 204;
 
@@ -406,7 +406,7 @@ op getFeatureFlagRevisions is AppConfigOperation<
   },
   FeatureFlagListResult &
     AppConfigResponseHeaders &
-    ContentTypeHeader<"application/json;profile=\\\"https://azconfig.io/mime-profiles/feature-management/ffset\\\"​;charset=utf-8">
+    ContentTypeHeader<"application/json;profile=\\\"https://azconfig.io/mime-profiles/ffset\\\"​;charset=utf-8">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
