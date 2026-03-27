@@ -457,6 +457,7 @@ model Response500Cbor {
 @doc("Service unavailable error response")
 model Response503Cbor {
   @doc("Retry the same request after a suggested number of seconds")
+  @removed(Versions.`2026-03-26`)
   @header("Retry-After")
   retryAfter?: int32;
 
