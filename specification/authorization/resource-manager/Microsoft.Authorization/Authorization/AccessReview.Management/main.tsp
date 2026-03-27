@@ -28,12 +28,12 @@ using TypeSpec.Versioning;
 /**
  * Access reviews service provides the workflow for running access reviews on different kind of resources.
  */
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Authorization")
 @service(#{ title: "AuthorizationManagementClient" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Authorization;
+namespace Microsoft.AttributeNamespaces;
 
 /**
  * The available API versions.

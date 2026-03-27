@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Authorization;
+namespace Microsoft.RoleDefinitions;
 
 alias PermissionsForResourceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {

@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Authorization;
+namespace Microsoft.ProviderOperations;
 // FIXME: ProviderOperationsMetadata has no properties property
 /**
  * Provider Operations metadata

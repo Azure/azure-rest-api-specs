@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Authorization;
+namespace Microsoft.RoleDefinitions;
 
 /**
  * Permissions information.

@@ -3,7 +3,7 @@ import "@typespec/http";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
-using Microsoft.Authorization;
+using Microsoft.RoleManagementAlerts;
 
 @@clientName(Alerts.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

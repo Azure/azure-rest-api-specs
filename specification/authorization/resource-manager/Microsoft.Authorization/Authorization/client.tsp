@@ -12,5 +12,29 @@ import "./RoleManagementAlerts.Management/main.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
+using Microsoft.AccessReview;
+using Microsoft.AttributeNamespaces;
+using Microsoft.Authorization;
+using Microsoft.ClassicAdmin;
+using Microsoft.DenyAssignment;
+using Microsoft.ProviderOperations;
+using Microsoft.RoleAssignment;
+using Microsoft.RoleDefinitions;
+using Microsoft.RoleManagementAlerts;
 
+@client({
+  name: "CombineClient",
+  service: [
+    Microsoft.AccessReview,
+    Microsoft.AttributeNamespaces,
+    Microsoft.Authorization,
+    Microsoft.ClassicAdmin,
+    Microsoft.DenyAssignment,
+    Microsoft.ProviderOperations,
+    Microsoft.RoleAssignment,
+    Microsoft.RoleDefinitions,
+    Microsoft.RoleManagementAlerts
+  ],
+  autoMergeService: true,
+})
 namespace Microsoft.Authorization;

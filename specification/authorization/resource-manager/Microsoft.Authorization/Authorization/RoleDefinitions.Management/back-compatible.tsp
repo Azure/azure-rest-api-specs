@@ -1,7 +1,7 @@
 ﻿import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.Authorization;
+using Microsoft.RoleDefinitions;
 
 @@clientName(RoleDefinitionProperties.type, "roleType");
 

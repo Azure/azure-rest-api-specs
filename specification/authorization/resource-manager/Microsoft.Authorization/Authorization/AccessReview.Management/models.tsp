@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Authorization;
+namespace Microsoft.AttributeNamespaces;
 
 /**
  * Represents a reviewer's decision for a given review

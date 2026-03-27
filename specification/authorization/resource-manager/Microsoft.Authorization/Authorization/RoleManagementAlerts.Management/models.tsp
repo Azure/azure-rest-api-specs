@@ -10,7 +10,7 @@ using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Authorization;
+namespace Microsoft.RoleManagementAlerts;
 
 /**
  * Severity level of the alert.

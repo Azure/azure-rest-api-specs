@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Authorization;
+namespace Microsoft.RoleAssignment;
 /**
  * Role Assignments
  */

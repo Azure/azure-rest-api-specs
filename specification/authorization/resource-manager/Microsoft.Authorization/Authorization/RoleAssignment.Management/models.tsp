@@ -7,8 +7,9 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Microsoft.Common;
 
-namespace Microsoft.Authorization;
+namespace Microsoft.RoleAssignment;
 
 /**
  * Role assignment properties.

@@ -86,7 +86,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -138,7 +138,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -191,7 +191,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -232,7 +232,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -284,7 +284,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -333,7 +333,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -374,7 +374,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -426,7 +426,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -479,7 +479,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -528,7 +528,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -588,7 +588,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -642,7 +642,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -702,7 +702,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -758,7 +758,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
             }
           }
         },
@@ -1181,32 +1181,6 @@
       ],
       "x-ms-discriminator-value": "AzureRolesAssignedOutsidePimAlertIncident"
     },
-    "CloudError": {
-      "type": "object",
-      "description": "An error response from the service.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "An error response from the service."
-        }
-      },
-      "x-ms-external": true
-    },
-    "CloudErrorBody": {
-      "type": "object",
-      "description": "An error response from the service.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        }
-      },
-      "x-ms-external": true
-    },
     "DuplicateRoleCreatedAlertConfigurationProperties": {
       "type": "object",
       "description": "The duplicate role created alert configuration.",
@@ -1243,6 +1217,32 @@
         }
       ],
       "x-ms-discriminator-value": "DuplicateRoleCreatedAlertIncident"
+    },
+    "Microsoft.Common.CloudError": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Microsoft.Common.CloudErrorBody",
+          "description": "An error response from the service."
+        }
+      },
+      "x-ms-external": true
+    },
+    "Microsoft.Common.CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      },
+      "x-ms-external": true
     },
     "SeverityLevel": {
       "type": "string",
