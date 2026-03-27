@@ -1010,16 +1010,6 @@
           "$ref": "#/definitions/AIManagerNamespaceProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
-        },
-        "managedNamespaceId": {
-          "type": "string",
-          "description": "The underlying managed namespace ID in the Kubernetes cluster.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/AIManagerNamespaceStatus",
-          "description": "Status information for the AIManager.",
-          "readOnly": true
         }
       }
     },
@@ -1072,22 +1062,6 @@
       },
       "readOnly": true
     },
-    "AIManagerNamespaceStatus": {
-      "type": "object",
-      "description": "Status information for the AIManagerNamespace.",
-      "properties": {
-        "lastOperationId": {
-          "type": "string",
-          "description": "The last operation ID for the AIManagerNamespace.",
-          "readOnly": true
-        },
-        "lastOperationError": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "The last operation error for the AIManagerNamespace.",
-          "readOnly": true
-        }
-      }
-    },
     "AIManagerPatch": {
       "type": "object",
       "description": "The AI Manager resource patch model.",
@@ -1124,11 +1098,6 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/AIManagerStatus",
-          "description": "Status information for the AIManager.",
           "readOnly": true
         }
       }
@@ -1181,22 +1150,6 @@
         ]
       },
       "readOnly": true
-    },
-    "AIManagerStatus": {
-      "type": "object",
-      "description": "Status information for the AIManager.",
-      "properties": {
-        "lastOperationId": {
-          "type": "string",
-          "description": "The last operation ID for the AIManager.",
-          "readOnly": true
-        },
-        "lastOperationError": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "The last operation error for the AIManager.",
-          "readOnly": true
-        }
-      }
     },
     "Azure.ResourceManager.ManagedServiceIdentityProperty": {
       "type": "object",

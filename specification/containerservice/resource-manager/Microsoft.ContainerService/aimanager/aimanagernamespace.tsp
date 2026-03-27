@@ -42,26 +42,6 @@ model AIManagerNamespaceProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: AIManagerNamespaceProvisioningState;
-
-  @visibility(Lifecycle.Read)
-  @doc("The underlying managed namespace ID in the Kubernetes cluster.")
-  managedNamespaceId?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("Status information for the AIManager.")
-  status?: AIManagerNamespaceStatus;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
-@doc("Status information for the AIManagerNamespace.")
-model AIManagerNamespaceStatus {
-  @visibility(Lifecycle.Read)
-  @doc("The last operation ID for the AIManagerNamespace.")
-  lastOperationId?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The last operation error for the AIManagerNamespace.")
-  lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @doc("The provisioning state of the AI Manager namespace resource.")

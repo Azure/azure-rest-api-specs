@@ -45,22 +45,6 @@ model AIManagerProperties {
   @visibility(Lifecycle.Read)
   @doc("The underlying cluster IDs of the AI Manager.")
   clusterIds?: string[];
-
-  @visibility(Lifecycle.Read)
-  @doc("Status information for the AIManager.")
-  status?: AIManagerStatus;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
-@doc("Status information for the AIManager.")
-model AIManagerStatus {
-  @visibility(Lifecycle.Read)
-  @doc("The last operation ID for the AIManager.")
-  lastOperationId?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The last operation error for the AIManager.")
-  lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @doc("Delete options of the AI Manager.")
