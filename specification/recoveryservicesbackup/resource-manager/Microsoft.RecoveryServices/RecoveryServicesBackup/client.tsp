@@ -3056,7 +3056,7 @@ op protectionPolicyOperationStatusesGet(
   "csharp"
 );
 @@clientName(AzureVmWorkloadSAPHanaScaleoutProtectableItem,
-  "AzureVmWorkloadSapHanaHSRProtectableItem",
+  "VmWorkloadSapHanaScaleoutProtectableItem",
   "csharp"
 );
 @@alternateType(BackupResourceEncryptionConfig.keyUri, url, "csharp");
@@ -3070,6 +3070,14 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(SourceSideScanInfo, "BackupSourceSideScanInfo", "csharp");
 @@clientName(SourceSideScanStatus, "BackupSourceSideScanStatus", "csharp");
 @@clientName(SourceSideScanSummary, "BackupSourceSideScanSummary", "csharp");
+@@clientName(AzureVmWorkloadSQLInstanceProtectedItem,
+  "VmWorkloadSqlInstanceProtectedItem",
+  "csharp"
+);
+@@clientName(InstanceProtectionReadiness,
+  "BackupInstanceProtectionReadiness",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(BackupEngineBaseResource,
