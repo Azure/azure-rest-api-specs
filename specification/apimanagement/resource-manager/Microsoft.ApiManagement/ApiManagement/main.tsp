@@ -77,6 +77,7 @@ import "./AccessInformationContract.tsp";
 import "./UserContract.tsp";
 import "./ApiManagementWorkspaceLinksResource.tsp";
 import "./WorkspaceContract.tsp";
+import "./ConnectorGateway.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -103,6 +104,11 @@ enum Versions {
    * The 2025-03-01-preview API version.
    */
   v2025_03_01_preview: "2025-03-01-preview",
+
+  /**
+   * The 2026-03-01-preview API version.
+   */
+  v2026_03_01_preview: "2026-03-01-preview",
 }
 
 @armResourceOperations(#{ omitTags: true })
