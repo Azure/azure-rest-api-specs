@@ -59,13 +59,8 @@ interface QueueServices {
   /**
    * Gets a list of all the queues under the specified storage account
    */
-  @get
-  @list
-  @action("queues")
-  queueList is ArmResourceActionSync<
-    QueueServiceProperties,
-    void,
-    ArmResponse<ListQueueResource>,
+  queueList is ArmResourceListByParent<
+    StorageQueue,
     Parameters = {
       /**
        * Optional, a maximum number of queues that should be included in a list queue response

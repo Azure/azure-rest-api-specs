@@ -67,13 +67,8 @@ interface FileServices {
   /**
    * Lists all shares.
    */
-  @get
-  @list
-  @action("shares")
-  fileSharesList is ArmResourceActionSync<
-    FileServiceProperties,
-    void,
-    ArmResponse<FileShareItems>,
+  fileSharesList is ArmResourceListByParent<
+    FileShare,
     Parameters = {
       /**
        * Optional. Specified maximum number of shares that can be included in the list.

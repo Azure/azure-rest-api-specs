@@ -316,7 +316,6 @@ using Microsoft.Storage;
 );
 @@visibility(StorageTaskAssignmentsList.value, Lifecycle.Read);
 
-@@clientLocation(BlobServices.blobContainersList, BlobContainers, "!csharp");
 @@clientName(BlobServices.blobContainersList, "List");
 @@clientName(BlobContainers.lease::parameters.body, "parameters");
 @@clientLocation(ImmutabilityPolicies.getImmutabilityPolicy, BlobContainers);
@@ -332,14 +331,12 @@ using Microsoft.Storage;
 @@clientName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
   "parameters"
 );
-@@clientLocation(FileServices.fileSharesList, FileShares, "!csharp");
 @@clientName(FileServices.fileSharesList, "List");
 @@clientLocation(FileServiceUsageOperationGroup.getServiceUsage, FileServices);
 @@clientLocation(FileServiceUsageOperationGroup.listServiceUsages,
   FileServices
 );
 @@clientName(FileShares.lease::parameters.body, "parameters");
-@@clientLocation(QueueServices.queueList, "Queue", "!csharp");
 @@clientName(QueueServices.queueList, "List");
 @@clientLocation(StorageQueues.get, "Queue");
 @@clientLocation(StorageQueues.create, "Queue");
