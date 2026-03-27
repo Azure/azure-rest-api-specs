@@ -1574,7 +1574,6 @@ alias BlobPublicAccessResponseHeader = {
   access?: PublicAccessType;
 };
 
-
 /** Optional: Indicates the priority with which to rehydrate an archived blob. */
 alias RehydratePriorityHeader = {
   /** If an object is in rehydrate pending state then this header is returned with priority of rehydrate. Valid values are High and Standard. */
