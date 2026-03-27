@@ -449,6 +449,37 @@ union RankerVersionTypeExpandable {
   "java"
 );
 
+// SearchContextSize
+union SearchContextSizeExpandable {
+  string,
+  low: "low",
+  medium: "medium",
+  high: "high",
+}
+
+@@clientName(SearchContextSizeExpandable, "SearchContextSize", "java");
+@@alternateType(OpenAI.SearchContextSize,
+  SearchContextSizeExpandable,
+  "java"
+);
+
+// WebSearchToolSearchContextSize (inline union on WebSearchTool.search_context_size)
+union WebSearchToolSearchContextSizeExpandable {
+  string,
+  low: "low",
+  medium: "medium",
+  high: "high",
+}
+
+@@clientName(WebSearchToolSearchContextSizeExpandable,
+  "WebSearchToolSearchContextSize",
+  "java"
+);
+@@alternateType(OpenAI.WebSearchTool.search_context_size,
+  WebSearchToolSearchContextSizeExpandable,
+  "java"
+);
+
 // --------------------------------------------------------------------------------
 // Conversations: only expose listConversations (Foundry-specific), suppress the rest
 // --------------------------------------------------------------------------------
