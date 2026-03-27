@@ -97,7 +97,6 @@ op getCertificate is KeyVaultOperation<
   "uniformResourceIdentifiers",
   "java"
 );
-@@clientName(SubjectAlternativeNames.ipAddresses, "ipAddresses", "java");
 
 // Go configuration
 
