@@ -65,3 +65,19 @@ namespace ApplicationInsightsManagementClient;
   "sslCertRemainingLifetimeCheck",
   "java"
 );
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op replaceListByComponent(
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  componentName: string,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  body: void,
+): Microsoft.Insights.webTestListResult;
+
+@@override(WebTestsOperationGroup.listByComponent,
+  replaceListByComponent,
+  "go"
+);
