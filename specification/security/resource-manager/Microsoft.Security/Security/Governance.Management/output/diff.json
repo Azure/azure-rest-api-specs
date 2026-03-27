@@ -2,6 +2,17 @@
   "paths": {
     "/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments": {
       "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ],
+          [
+            " "
+          ]
+        ],
         "responses": {
           "default": {
             "schema": {
@@ -16,6 +27,20 @@
     },
     "/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}": {
       "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
         "responses": {
           "default": {
             "schema": {
@@ -28,6 +53,23 @@
         }
       },
       "put": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
         "responses": {
           "default": {
             "schema": {
@@ -40,6 +82,20 @@
         }
       },
       "delete": {
+        "parameters": [
+          [
+            "~",
+            {
+              "x-ms-skip-url-encoding__added": true
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
         "responses": {
           "default": {
             "schema__added": {
@@ -64,7 +120,7 @@
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -89,7 +145,7 @@
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -115,7 +171,7 @@
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -148,7 +204,7 @@
           },
           "default": {
             "schema__added": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -187,7 +243,7 @@
             "schema": {
               "$ref": {
                 "__old": "./common/v1/types.json#/definitions/CloudError",
-                "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -246,7 +302,8 @@
           "description": "The error object.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "x-ms-external": true
     },
     "CloudErrorBody__added": {
       "type": "object",
@@ -283,7 +340,8 @@
           },
           "readOnly": true
         }
-      }
+      },
+      "x-ms-external": true
     },
     "ErrorAdditionalInfo__added": {
       "type": "object",

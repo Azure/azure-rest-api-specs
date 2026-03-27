@@ -24,7 +24,8 @@
             "name": "scope",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "assessmentName",
@@ -70,7 +71,8 @@
             "name": "scope",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "assessmentName",
@@ -117,7 +119,8 @@
             "name": "scope",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "assessmentName",
@@ -178,7 +181,8 @@
             "name": "scope",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "assessmentName",
@@ -241,7 +245,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -293,7 +297,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -354,7 +358,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -410,7 +414,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -470,7 +474,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -562,7 +566,8 @@
           "description": "The error object.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "x-ms-external": true
     },
     "CloudErrorBody": {
       "type": "object",
@@ -599,7 +604,8 @@
           },
           "readOnly": true
         }
-      }
+      },
+      "x-ms-external": true
     },
     "Condition": {
       "type": "object",

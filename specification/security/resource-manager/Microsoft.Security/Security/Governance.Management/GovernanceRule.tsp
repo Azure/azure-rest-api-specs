@@ -69,14 +69,19 @@ interface GovernanceRules {
   /**
    * Get a specific governance rule for the requested scope by ruleId
    */
-  get is Extension.Read<Extension.ScopeParameter, GovernanceRule>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    GovernanceRule,
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates a governance rule over a given scope
    */
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
-    GovernanceRule
+    GovernanceRule,
+    Error = CloudError
   >;
 
   /**
@@ -86,7 +91,8 @@ interface GovernanceRules {
   delete is Extension.DeleteWithoutOkAsync<
     Extension.ScopeParameter,
     GovernanceRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -95,7 +101,8 @@ interface GovernanceRules {
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     GovernanceRule,
-    Response = ArmResponse<GovernanceRuleList>
+    Response = ArmResponse<GovernanceRuleList>,
+    Error = CloudError
   >;
 
   /**
@@ -106,7 +113,8 @@ interface GovernanceRules {
     GovernanceRule,
     ExecuteGovernanceRuleParams,
     ArmAcceptedLroResponse,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = CloudError
   >;
 
   /**

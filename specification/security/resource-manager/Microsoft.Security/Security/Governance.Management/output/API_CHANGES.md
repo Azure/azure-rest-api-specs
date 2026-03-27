@@ -1,21 +1,25 @@
 ## Swagger Changes
 
-### Changes for `schema`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}'].delete.responses.default.schema__added` | added | `{"$ref":"#/definitions/CloudError"}` |
-| `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}'].delete.responses.default.schema__added` | added | `{"$ref":"../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorRespo...` |
-
 ### Changes for `x-ms-skip-url-encoding`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments'].get.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
+| `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}'].delete.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
+| `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}'].get.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
+| `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}'].put.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
 | `paths['/{scope}/providers/microsoft.Security/governanceRules'].get.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
 | `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}'].delete.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
 | `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}'].get.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
 | `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}'].put.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
 | `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}/execute'].post.parameters[0]['x-ms-skip-url-encoding__added']` | added | `true` |
+
+### Changes for `schema`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}'].delete.responses.default.schema__added` | added | `{"$ref":"#/definitions/CloudError"}` |
+| `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}'].delete.responses.default.schema__added` | added | `{"$ref":"#/definitions/CloudError"}` |
 
 ### Changes for `location`
 
@@ -98,9 +102,9 @@
 | `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/{scope}/providers/microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/{scope}/providers/microsoft.Security/governanceRules'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}/execute'].post.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/{scope}/providers/microsoft.Security/governanceRules'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}'].put.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}/execute'].post.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/{scope}/providers/microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}'].get.responses.default.schema.$ref` | `./common/v1/types.json#/definitions/CloudError` | `#/definitions/CloudError` |
 
