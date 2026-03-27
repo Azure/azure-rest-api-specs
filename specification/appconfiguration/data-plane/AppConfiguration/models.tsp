@@ -243,7 +243,6 @@ model KeyValue {
 model FeatureFlagListResult {
   @doc("The collection value.")
   @pageItems
-  @added(Versions.v2026_05_01_preview)
   items?: FeatureFlag[];
 
   @doc("An identifier representing the returned state of the resource.")

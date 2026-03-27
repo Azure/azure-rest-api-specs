@@ -396,6 +396,7 @@ alias FeatureFlagRevisionsRequestParams = NameQueryParam<"""
 @doc("Gets a list of feature flag revisions.")
 @route("/ff-revisions")
 @get
+@list
 @added(Versions.v2026_05_01_preview)
 op getFeatureFlagRevisions is AppConfigOperation<
   {
