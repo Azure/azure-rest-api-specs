@@ -27,12 +27,25 @@ expected:
             contains:
               - "+@previewVersion"
               - "+v2025-05-04-preview: \"2025-05-04-preview\""
-#   - type: prompt
-#     name: setup_check
-#     config:
-#       prompt: |
-#         A new example folder and files should be created for the new preview version.
+    - type: action_sequence
+      name: mcp_workflow
+      config:
+        matching_mode: in_order_match
+        expected_actions:
+          - edit
+          - azsdk_run_typespec_validation
+    - type: tool_constraint
+      name: mcp_guardrails
+      config:
+        expect_tools:
+          - edit
+          - azsdk_run_typespec_validation
+    - type: prompt
+      name: setup_check
+      config:
+        prompt: |
+          A new preview version `2025-05-04-preview` has been added to the Versions enum in main.tsp. The new version is decorated with @previewVersion and has the correct version string.
 
-#         If all criteria are met, call set_waza_grade_pass.
-#         Otherwise, call set_waza_grade_fail with your reasoning.
-#       model: "gpt-4o-mini"
+          If all criteria are met, call set_waza_grade_pass.
+          Otherwise, call set_waza_grade_fail with your reasoning.
+        model: "gpt-4o-mini"
