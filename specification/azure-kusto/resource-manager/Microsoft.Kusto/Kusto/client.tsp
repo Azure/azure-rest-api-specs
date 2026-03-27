@@ -14,6 +14,8 @@ using Microsoft.Kusto;
   "publicIpType",
   "java"
 );
+@@access(CalloutPoliciesList, Access.public, "java");
+
 @@clientName(IotHubDataFormat.W3CLOGFILE, "W3_CLOGFILE", "python");
 @@clientName(EventHubDataFormat.W3CLOGFILE, "W3_CLOGFILE", "python");
 @@clientName(EventGridDataFormat.W3CLOGFILE, "W3_CLOGFILE", "python");
