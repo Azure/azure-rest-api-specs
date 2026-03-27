@@ -25,7 +25,7 @@ model SecuritySubAssessment
   >;
 }
 
-alias SecuritySubAssessmentLegacyOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+alias SecuritySubAssessmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
 
@@ -44,7 +44,15 @@ alias SecuritySubAssessmentLegacyOps = Azure.ResourceManager.Legacy.ExtensionOpe
     @key
     providerNamespace: "Microsoft.Security";
   },
-  {},
+  {
+    /**
+     * The security assessment key - unique key for the assessment type
+     */
+    @path
+    @segment("assessments")
+    @key
+    assessmentName: string;
+  },
   {
     /**
      * The security assessment key - unique key for the assessment type
@@ -64,44 +72,13 @@ alias SecuritySubAssessmentLegacyOps = Azure.ResourceManager.Legacy.ExtensionOpe
   }
 >;
 
-alias SecuritySubAssessmentsListOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-
-    /**
-     * The scope of the sub-assessment.
-     */
-    @path(#{ allowReserved: true })
-    @key
-    scope: string;
-
-    /**
-     * The provider namespace.
-     */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Security";
-  },
-  {
-    /**
-     * The security assessment key - unique key for the assessment type
-     */
-    @path
-    @segment("assessments")
-    @key
-    assessmentName: string;
-  },
-  {}
->;
-
 @armResourceOperations(#{ omitTags: true })
 interface SecuritySubAssessments {
   /**
    * Get a security sub-assessment on your scanned resource
    */
   @tag("SubAssessments")
-  get is SecuritySubAssessmentLegacyOps.Read<
+  get is SecuritySubAssessmentOps.Read<
     SecuritySubAssessment,
     ErrorType = CloudError
   >;
@@ -110,7 +87,7 @@ interface SecuritySubAssessments {
    * Get security sub-assessments on all your scanned resources inside a scope
    */
   @tag("SubAssessments")
-  list is SecuritySubAssessmentsListOps.List<
+  list is SecuritySubAssessmentOps.List<
     SecuritySubAssessment,
     Response = ArmResponse<SecuritySubAssessmentList>,
     ErrorType = CloudError
