@@ -75,7 +75,11 @@ interface BackupResourceStorageConfigsNonCRR {
   bmsPrepareDataMove is ArmResourceActionAsync<
     BackupResourceConfigResource,
     PrepareDataMoveRequest,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -87,7 +91,11 @@ interface BackupResourceStorageConfigsNonCRR {
   bmsTriggerDataMove is ArmResourceActionAsync<
     BackupResourceConfigResource,
     TriggerDataMoveRequest,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 

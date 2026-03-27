@@ -4916,7 +4916,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -4945,8 +4945,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -4987,7 +4986,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -5016,8 +5015,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -8126,7 +8124,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BackupResourceEncryptionConfigExtended",
-          "description": "BackupResourceEncryptionConfigExtendedResource properties"
+          "description": "The properties of the backup resource encryption config extended resource"
         },
         "tags": {
           "type": "object",
@@ -8160,7 +8158,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BackupResourceEncryptionConfig",
-          "description": "BackupResourceEncryptionConfigResource properties"
+          "description": "The properties of the backup resource encryption config"
         },
         "tags": {
           "type": "object",
@@ -8184,7 +8182,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -14418,10 +14416,6 @@
           }
         ]
       }
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
     },
     "UnlockDeleteRequest": {
       "type": "object",

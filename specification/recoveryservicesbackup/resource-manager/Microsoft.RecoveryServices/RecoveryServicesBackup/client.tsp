@@ -2174,6 +2174,11 @@ op protectionPolicyOperationStatusesGet(
   "csharp"
 );
 @@clientName(TriggerDataMoveRequest, "TriggerDataMoveContent", "csharp");
+@@alternateType(TriggerDataMoveRequest.sourceRegion, azureLocation, "csharp");
+@@alternateType(TriggerDataMoveRequest.sourceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(MoveRPAcrossTiersRequest, "MoveRPAcrossTiersContent", "csharp");
 @@clientName(ListRecoveryPointsRecommendedForMoveRequest,
   "RecoveryPointsRecommendedForMoveContent",
@@ -2411,7 +2416,12 @@ op protectionPolicyOperationStatusesGet(
   "csharp"
 );
 @@clientName(AzureFileShareRecoveryPoint, "FileShareRecoveryPoint", "csharp");
+@@alternateType(AzureFileShareRecoveryPoint.fileShareSnapshotUri,
+  url,
+  "csharp"
+);
 @@clientName(AzureWorkloadRecoveryPoint, "WorkloadRecoveryPoint", "csharp");
+@@clientName(AzureWorkloadRecoveryPoint.type, "RestorePointType", "csharp");
 @@clientName(AzureWorkloadPointInTimeRecoveryPoint,
   "WorkloadPointInTimeRecoveryPoint",
   "csharp"
@@ -2631,11 +2641,17 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(OperationType, "WorkloadOperationType", "csharp");
 @@clientName(ProtectionPolicy, "BackupGenericProtectionPolicy", "csharp");
 @@clientName(BEKDetails, "BekDetails", "csharp");
+@@alternateType(BEKDetails.secretUrl, url, "csharp");
+@@alternateType(BEKDetails.secretVaultId, armResourceIdentifier, "csharp");
 @@clientName(KEKDetails, "KekDetails", "csharp");
 @@alternateType(KEKDetails.keyUrl, url, "csharp");
 @@alternateType(KEKDetails.keyVaultId, armResourceIdentifier, "csharp");
 @@usage(KEKDetails, Usage.input | Usage.output, "csharp");
 @@clientName(TargetAFSRestoreInfo, "TargetAfsRestoreInfo", "csharp");
+@@alternateType(TargetAFSRestoreInfo.targetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(Settings.issqlcompression, "IsSqlCompression", "csharp");
 @@clientName(DataSourceType.AzureSqlDb, "AzureSqlDB", "csharp");
 @@clientName(DataSourceType.SAPAseDatabase, "SapAseDatabase", "csharp");
@@ -2904,6 +2920,16 @@ op protectionPolicyOperationStatusesGet(
 
 @@clientName(JobDetails, "BackupJob", "csharp");
 @@clientName(ProtectedItem, "BackupGenericProtectedItem", "csharp");
+@@clientName(ProtectedItem.deferredDeleteTimeInUTC,
+  "DeferredDeletedOn",
+  "csharp"
+);
+@@clientName(ProtectedItem.lastRecoveryPoint, "LastRecoverOn", "csharp");
+@@alternateType(ProtectedItem.policyId, armResourceIdentifier, "csharp");
+@@alternateType(ProtectedItem.sourceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(ContainerIdentityInfo.aadTenantId, uuid, "csharp");
 @@clientName(DPMProtectedItemExtendedInfo.oldestRecoveryPoint,
   "OldestRecoverOn",
@@ -2924,10 +2950,6 @@ op protectionPolicyOperationStatusesGet(
 );
 @@alternateType(RecoveryPointRehydrationInfo.rehydrationRetentionDuration,
   duration,
-  "csharp"
-);
-@@clientName(RecoveryPointTierStatus,
-  "BackupRecoveryPointTierStatus",
   "csharp"
 );
 @@alternateType(BackupEngineBaseResource.eTag, eTag, "csharp");
@@ -2991,6 +3013,54 @@ op protectionPolicyOperationStatusesGet(
   "RevokeItemLevelRecoveryConnection",
   "csharp"
 );
+@@clientName(BackupResourceEncryptionConfigResource,
+  "BackupResourceEncryptionConfigExtendedCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(Jobs.export, "ExportJob", "csharp");
+@@clientName(SecurityPINs.get, "GetSecurityPin", "csharp");
+@@clientName(BackupStatus.get, "GetBackupStatus", "csharp");
+@@clientName(BackupStatus.get::parameters.azureRegion, "location", "csharp");
+@@alternateType(BackupStatus.get::parameters.azureRegion,
+  azureLocation,
+  "csharp"
+);
+@@clientName(BackupProtectionContainers.list,
+  "GetBackupProtectionContainers",
+  "csharp"
+);
+@@clientName(FetchTieringCost.post, "PostFetchTieringCost", "csharp");
+@@clientName(ProtectionContainersOperationGroup.refresh,
+  "RefreshProtectionContainer",
+  "csharp"
+);
+@@clientName(FeatureSupport.validate, "ValidateFeatureSupport", "csharp");
+@@clientName(FeatureSupport.validate::parameters.azureRegion,
+  "location",
+  "csharp"
+);
+@@alternateType(FeatureSupport.validate::parameters.azureRegion,
+  azureLocation,
+  "csharp"
+);
+@@clientName(ProtectionIntentOperationGroup.validate,
+  "ValidateProtectionIntent",
+  "csharp"
+);
+@@clientName(ProtectionIntentOperationGroup.validate::parameters.azureRegion,
+  "location",
+  "csharp"
+);
+@@alternateType(ProtectionIntentOperationGroup.validate::parameters.azureRegion,
+  azureLocation,
+  "csharp"
+);
+@@clientName(AzureVmWorkloadSAPHanaScaleoutProtectableItem,
+  "AzureVmWorkloadSapHanaHSRProtectableItem",
+  "csharp"
+);
+@@alternateType(BackupResourceEncryptionConfig.keyUri, url, "csharp");
+@@clientName(ThreatInfo, "RecoveryPointThreatInformation", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(BackupEngineBaseResource,
@@ -3077,6 +3147,16 @@ op protectionPolicyOperationStatusesGet(
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ILRRequestResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(RestoreRequestResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 
 @@usage(BackupEngineExtendedInfo, Usage.input | Usage.output, "csharp");
 @@usage(BackupEngineBase, Usage.input | Usage.output, "csharp");
@@ -3133,11 +3213,15 @@ op protectionPolicyOperationStatusesGet(
 @@usage(BackupEngineBaseResource, Usage.input | Usage.output, "csharp");
 @@usage(JobResource, Usage.input | Usage.output, "csharp");
 @@usage(RecoveryPointResource, Usage.input | Usage.output, "csharp");
+@@usage(BackupResourceEncryptionConfigExtendedResource,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(WorkloadItemResource, Usage.input | Usage.output, "csharp");
+@@usage(WorkloadProtectableItemResource, Usage.input | Usage.output, "csharp");
 
-//@@scope(BackupResourceEncryptionConfigs.get, "!csharp");
-@@scope(BackupResourceEncryptionConfigs.update, "!csharp");
-
-@@scope(JobOperationResults.get, "!csharp");
+// Remove this operation for backward compatibility.
+@@scope(BackupResourceStorageConfigsNonCRR.patch, "!csharp");
 
 // Exclude operation status related operations as they are supported by core SDK.
 @@scope(PrivateEndpointOperationStatuses.getOperationStatus, "!csharp");
@@ -3154,3 +3238,7 @@ op protectionPolicyOperationStatusesGet(
 @@scope(ValidateOperationStatuses.get, "!csharp");
 @@scope(ExportJobsOperationResults.get, "!csharp");
 @@scope(ProtectionContainerOperationResults.get, "!csharp");
+@@scope(JobOperationResults.get, "!csharp");
+@@scope(ProtectionContainerRefreshOperationResults.get, "!csharp");
+@@scope(ValidateOperation.trigger, "!csharp");
+@@scope(OperationOperationGroup.validate, "!csharp");
