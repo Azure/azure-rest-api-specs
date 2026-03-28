@@ -1,0 +1,17 @@
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    # Suppress all SDK generator validations as this is REST-only spec
+    - options.@azure-tools/typespec-csharp.*
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+  reason: >
+    Rest-Only Specification: Does not generate SDKs by design.
+    Responsibility: No action required
+    Comment: This specification is REST-only and does not generate SDKs
