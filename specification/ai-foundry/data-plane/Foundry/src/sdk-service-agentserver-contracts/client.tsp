@@ -11,6 +11,7 @@ namespace OpenAI {
   alias ItemResourceType = OutputItemType;
 }
 
+
 // Map Azure.AI.Projects augmentation types into our SDK namespace
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" ""
 @clientNamespace("Azure.AI.AgentServer.Responses.Models")
@@ -71,11 +72,16 @@ namespace Azure.AI.Projects {
   @@withoutOmittedProperties(OpenAI.ItemMessage, "content");
   @@copyProperties(OpenAI.ItemMessage, { content: string | OpenAI.MessageContent[] });
 
-// Rename "Response" to "ResponseObject" to avoid conflict with Azure.Response
+  // Rename "Response" to "ResponseObject" to avoid conflict with Azure.Response
   @@clientName(OpenAI.Response, "ResponseObject");
 
   // Rename "ResponseError" to "ResponseErrorInfo" to avoid conflict with Azure.ResponseError
   @@clientName(OpenAI.ResponseError, "ResponseErrorInfo");
+
+  // Remove "object" from DeleteResponseResult to work around codegen bug
+  // (TypeSpec emitter generates `= "response"` string default for ResponseObjectType enum)
+  @@withoutOmittedProperties(Azure.AI.Projects.DeleteResponseResult, "object");
+  @@copyProperties(Azure.AI.Projects.DeleteResponseResult, { object: "response" });
 
   // ============================================================================
   // Public constructors: mark models as input+output so the C# emitter generates
