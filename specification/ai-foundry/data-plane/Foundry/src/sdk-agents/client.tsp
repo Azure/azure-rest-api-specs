@@ -34,6 +34,8 @@ using Azure.AI.Projects;
 @@clientName(CreateAgentRequest.name, "agentName");
 @@clientName(CreateAgentFromManifestRequest.name, "agentName");
 
+@@clientName(OpenApiTool.openapi, "openApi");
+
 // Rename request models to avoid collision with synthetic body types generated
 // by the Java codegen. The codegen names synthetic bodies as {OperationName}Request,
 // which clashes with the identically-named TypeSpec models, causing a "1" suffix.
@@ -246,6 +248,235 @@ model TimeZoneType {}
 @@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
 @@alternateType(OpenAI.WebSearchApproximateLocation.timezone,
   TimeZoneType,
+  "java"
+);
+
+// ---- Expandable enum overrides ------------------------------------------------
+// Convert fixed OpenAI enums / inline literal unions to expandable string enums
+// by defining open unions (with `string` base) and mapping via @@alternateType.
+
+// ComputerEnvironment
+union ComputerEnvironmentExpandable {
+  string,
+  windows: "windows",
+  mac: "mac",
+  linux: "linux",
+  ubuntu: "ubuntu",
+  browser: "browser",
+}
+
+@@clientName(ComputerEnvironmentExpandable, "ComputerEnvironment", "java");
+@@alternateType(OpenAI.ComputerEnvironment,
+  ComputerEnvironmentExpandable,
+  "java"
+);
+
+// ContainerMemoryLimit
+union ContainerMemoryLimitExpandable {
+  string,
+  memory_1g: "1g",
+  memory_4g: "4g",
+  memory_16g: "16g",
+  memory_64g: "64g",
+}
+
+@@clientName(ContainerMemoryLimitExpandable, "ContainerMemoryLimit", "java");
+@@clientName(ContainerMemoryLimitExpandable.memory_1g, "MEMORY_1GB", "java");
+@@clientName(ContainerMemoryLimitExpandable.memory_4g, "MEMORY_4GB", "java");
+@@clientName(ContainerMemoryLimitExpandable.memory_16g, "MEMORY_16GB", "java");
+@@clientName(ContainerMemoryLimitExpandable.memory_64g, "MEMORY_64GB", "java");
+@@alternateType(OpenAI.ContainerMemoryLimit,
+  ContainerMemoryLimitExpandable,
+  "java"
+);
+
+// GrammarSyntax (TSP name: GrammarSyntax1)
+union GrammarSyntaxExpandable {
+  string,
+  lark: "lark",
+  regex: "regex",
+}
+
+@@clientName(GrammarSyntaxExpandable, "GrammarSyntax", "java");
+@@alternateType(OpenAI.GrammarSyntax1, GrammarSyntaxExpandable, "java");
+
+// ImageGenActionEnum
+union ImageGenActionEnumExpandable {
+  string,
+  generate: "generate",
+  edit: "edit",
+  auto: "auto",
+}
+
+@@clientName(ImageGenActionEnumExpandable, "ImageGenActionEnum", "java");
+@@alternateType(OpenAI.ImageGenActionEnum,
+  ImageGenActionEnumExpandable,
+  "java"
+);
+
+// ImageGenToolBackground (inline union on ImageGenTool.background)
+union ImageGenToolBackgroundExpandable {
+  string,
+  transparent: "transparent",
+  opaque: "opaque",
+  auto: "auto",
+}
+
+@@clientName(ImageGenToolBackgroundExpandable, "ImageGenToolBackground", "java");
+@@alternateType(OpenAI.ImageGenTool.background,
+  ImageGenToolBackgroundExpandable,
+  "java"
+);
+
+// ImageGenToolModeration (inline union on ImageGenTool.moderation)
+union ImageGenToolModerationExpandable {
+  string,
+  auto: "auto",
+  low: "low",
+}
+
+@@clientName(ImageGenToolModerationExpandable,
+  "ImageGenToolModeration",
+  "java"
+);
+@@alternateType(OpenAI.ImageGenTool.moderation,
+  ImageGenToolModerationExpandable,
+  "java"
+);
+
+// ImageGenToolOutputFormat (inline union on ImageGenTool.output_format)
+union ImageGenToolOutputFormatExpandable {
+  string,
+  png: "png",
+  webp: "webp",
+  jpeg: "jpeg",
+}
+
+@@clientName(ImageGenToolOutputFormatExpandable,
+  "ImageGenToolOutputFormat",
+  "java"
+);
+@@alternateType(OpenAI.ImageGenTool.output_format,
+  ImageGenToolOutputFormatExpandable,
+  "java"
+);
+
+// ImageGenToolQuality (inline union on ImageGenTool.quality)
+union ImageGenToolQualityExpandable {
+  string,
+  low: "low",
+  medium: "medium",
+  high: "high",
+  auto: "auto",
+}
+
+@@clientName(ImageGenToolQualityExpandable, "ImageGenToolQuality", "java");
+@@alternateType(OpenAI.ImageGenTool.quality,
+  ImageGenToolQualityExpandable,
+  "java"
+);
+
+// ImageGenToolSize (inline union on ImageGenTool.size)
+union ImageGenToolSizeExpandable {
+  string,
+  size_1024x1024: "1024x1024",
+  size_1024x1536: "1024x1536",
+  size_1536x1024: "1536x1024",
+  auto: "auto",
+}
+
+@@clientName(ImageGenToolSizeExpandable, "ImageGenToolSize", "java");
+@@clientName(ImageGenToolSizeExpandable.size_1024x1024,
+  "RESOLUTION_1024_X_1024",
+  "java"
+);
+@@clientName(ImageGenToolSizeExpandable.size_1024x1536,
+  "RESOLUTION_1024_X_1536",
+  "java"
+);
+@@clientName(ImageGenToolSizeExpandable.size_1536x1024,
+  "RESOLUTION_1536_X_1024",
+  "java"
+);
+@@alternateType(OpenAI.ImageGenTool.size,
+  ImageGenToolSizeExpandable,
+  "java"
+);
+
+// InputFidelity
+union InputFidelityExpandable {
+  string,
+  high: "high",
+  low: "low",
+}
+
+@@clientName(InputFidelityExpandable, "InputFidelity", "java");
+@@alternateType(OpenAI.InputFidelity, InputFidelityExpandable, "java");
+
+// McpToolConnectorId (inline union on MCPTool.connector_id)
+union McpToolConnectorIdExpandable {
+  string,
+  connector_dropbox: "connector_dropbox",
+  connector_gmail: "connector_gmail",
+  connector_googlecalendar: "connector_googlecalendar",
+  connector_googledrive: "connector_googledrive",
+  connector_microsoftteams: "connector_microsoftteams",
+  connector_outlookcalendar: "connector_outlookcalendar",
+  connector_outlookemail: "connector_outlookemail",
+  connector_sharepoint: "connector_sharepoint",
+}
+
+@@clientName(McpToolConnectorIdExpandable, "McpToolConnectorId", "java");
+@@alternateType(OpenAI.MCPTool.connector_id,
+  McpToolConnectorIdExpandable,
+  "java"
+);
+
+// RankerVersionType
+union RankerVersionTypeExpandable {
+  string,
+  auto: "auto",
+  default_2024_11_15: "default-2024-11-15",
+}
+
+@@clientName(RankerVersionTypeExpandable, "RankerVersionType", "java");
+@@clientName(RankerVersionTypeExpandable.default_2024_11_15,
+  "DEFAULT_2024_11_15",
+  "java"
+);
+@@alternateType(OpenAI.RankerVersionType,
+  RankerVersionTypeExpandable,
+  "java"
+);
+
+// SearchContextSize
+union SearchContextSizeExpandable {
+  string,
+  low: "low",
+  medium: "medium",
+  high: "high",
+}
+
+@@clientName(SearchContextSizeExpandable, "SearchContextSize", "java");
+@@alternateType(OpenAI.SearchContextSize,
+  SearchContextSizeExpandable,
+  "java"
+);
+
+// WebSearchToolSearchContextSize (inline union on WebSearchTool.search_context_size)
+union WebSearchToolSearchContextSizeExpandable {
+  string,
+  low: "low",
+  medium: "medium",
+  high: "high",
+}
+
+@@clientName(WebSearchToolSearchContextSizeExpandable,
+  "WebSearchToolSearchContextSize",
+  "java"
+);
+@@alternateType(OpenAI.WebSearchTool.search_context_size,
+  WebSearchToolSearchContextSizeExpandable,
   "java"
 );
 

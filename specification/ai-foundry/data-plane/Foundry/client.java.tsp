@@ -145,8 +145,12 @@ namespace Azure.AI.Projects;
   "java"
 );
 
+// Singularize "credentials" -> "credential" for Connection property accessor
+@@clientName(Connection.credentials, "credential", "java");
+
 // Enums variants
 @@clientName(ConnectionType.APIKey, "API_KEY", "java");
+@@clientName(ConnectionType.RemoteTool, "REMOTE_TOOL_PREVIEW", "java");
 
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.
@@ -155,6 +159,9 @@ namespace Azure.AI.Projects;
 
 // The fix for ambiguous import of OperationState
 @@clientName(Azure.Core.Foundations.OperationState, "operationStatus", "java");
+
+// is_primary -> primary so accessors become isPrimary()/setPrimary()
+@@clientName(EvaluatorMetric.is_primary, "primary", "java");
 
 // --------------------------------------------------------------------------------
 // Type replacements / encodings
@@ -166,6 +173,9 @@ namespace Azure.AI.Projects;
   },
   "java"
 );
+
+// SasCredential (BlobReferenceSasCredential) type field should use the shared CredentialType enum
+@@alternateType(SasCredential.type, CredentialType, "java");
 
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "java");
