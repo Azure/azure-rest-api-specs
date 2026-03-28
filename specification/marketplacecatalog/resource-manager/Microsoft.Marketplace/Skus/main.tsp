@@ -212,7 +212,7 @@ interface SkuGet {
   getByTenant(
     ...ApiVersionParameter,
     ...SkuIdParameter,
-  ): ArmResponse<Sku> | DiscoveryErrorPayload;
+  ): ArmResponse<SkuSummary> | DiscoveryErrorPayload;
 
   /** Gets a single product by subscription. */
   @autoRoute
@@ -222,7 +222,7 @@ interface SkuGet {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...SkuIdParameter,
-  ): ArmResponse<Sku> | DiscoveryErrorPayload;
+  ): ArmResponse<SkuSummary> | DiscoveryErrorPayload;
 
   /** Gets a single product by billing account. */
   @autoRoute
@@ -232,7 +232,7 @@ interface SkuGet {
     ...ApiVersionParameter,
     ...BillingAccountIdParameter,
     ...SkuIdParameter,
-  ): ArmResponse<Sku> | DiscoveryErrorPayload;
+  ): ArmResponse<SkuSummary> | DiscoveryErrorPayload;
 
   /** Gets a single product by billing profile. */
   @autoRoute
@@ -243,7 +243,7 @@ interface SkuGet {
     ...BillingAccountIdParameter,
     ...BillingProfileIdParameter,
     ...SkuIdParameter,
-  ): ArmResponse<Sku> | DiscoveryErrorPayload;
+  ): ArmResponse<SkuSummary> | DiscoveryErrorPayload;
 }
 
 /** The operation to list SKUs by subscription. */
