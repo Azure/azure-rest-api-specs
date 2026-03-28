@@ -30,6 +30,10 @@ suppressions:
     from: openapi.json
     where: $.definitions.SkuSummaryListResult
     reason: SkuSummaryListResult is a paged collection model, not an ARM resource. It does not need id, name, or type properties.
+  - code: BodyTopLevelProperties
+    from: openapi.json
+    where: $.definitions.SkuSummary
+    reason: SkuSummary response is a proxy resource model
 ```
 
 ---

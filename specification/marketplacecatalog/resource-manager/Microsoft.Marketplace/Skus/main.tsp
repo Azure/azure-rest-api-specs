@@ -212,14 +212,6 @@ interface SkuGet {
   getByTenant(
     ...ApiVersionParameter,
     ...SkuIdParameter,
-
-    @doc(MarketSingleParameterDescription)
-    @query
-    market: string,
-
-    @doc(LanguageParameterDescription)
-    @query
-    language?: string,
   ): ArmResponse<Sku> | DiscoveryErrorPayload;
 
   /** Gets a single product by subscription. */
@@ -230,10 +222,6 @@ interface SkuGet {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...SkuIdParameter,
-
-    @doc(LanguageParameterDescription)
-    @query
-    language?: string,
   ): ArmResponse<Sku> | DiscoveryErrorPayload;
 
   /** Gets a single product by billing account. */
@@ -244,10 +232,6 @@ interface SkuGet {
     ...ApiVersionParameter,
     ...BillingAccountIdParameter,
     ...SkuIdParameter,
-
-    @doc(LanguageParameterDescription)
-    @query
-    language?: string,
   ): ArmResponse<Sku> | DiscoveryErrorPayload;
 
   /** Gets a single product by billing profile. */
@@ -259,10 +243,6 @@ interface SkuGet {
     ...BillingAccountIdParameter,
     ...BillingProfileIdParameter,
     ...SkuIdParameter,
-
-    @doc(LanguageParameterDescription)
-    @query
-    language?: string,
   ): ArmResponse<Sku> | DiscoveryErrorPayload;
 }
 
