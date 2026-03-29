@@ -30,6 +30,10 @@ suppressions:
     from: openapi.json
     where: $.definitions.SkuSummaryListResult
     reason: SkuSummaryListResult is a paged collection model, not an ARM resource. It does not need id, name, or type properties.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where: $.definitions.SkuSummary
+    reason: SkuSummary is a read-only catalog data model representing marketplace SKU metadata, not an tracked ARM resource.
   - code: BodyTopLevelProperties
     from: openapi.json
     where: $.definitions.SkuSummary

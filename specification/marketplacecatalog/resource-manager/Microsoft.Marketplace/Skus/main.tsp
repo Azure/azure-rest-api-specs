@@ -208,7 +208,7 @@ interface SkuGet {
   /** Gets a single product by tenant. */
   @autoRoute
   @get
-  @armResourceRead(SkuSummary)
+  @armResourceRead(Sku)
   getByTenant(
     ...ApiVersionParameter,
     ...SkuIdParameter,
@@ -217,7 +217,7 @@ interface SkuGet {
   /** Gets a single product by subscription. */
   @autoRoute
   @get
-  @armResourceRead(SkuSummary)
+  @armResourceRead(Sku)
   getBySubscription(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -227,7 +227,7 @@ interface SkuGet {
   /** Gets a single product by billing account. */
   @autoRoute
   @get
-  @armResourceRead(SkuSummary)
+  @armResourceRead(Sku)
   getByBillingAccount(
     ...ApiVersionParameter,
     ...BillingAccountIdParameter,
@@ -237,7 +237,7 @@ interface SkuGet {
   /** Gets a single product by billing profile. */
   @autoRoute
   @get
-  @armResourceRead(SkuSummary)
+  @armResourceRead(Sku)
   getByBillingProfile(
     ...ApiVersionParameter,
     ...BillingAccountIdParameter,
