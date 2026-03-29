@@ -1,0 +1,26 @@
+- tool: TypeSpecValidation
+  reason: >
+    TypeSpec Config Incomplete - Missing required emitter options in tspconfig.yaml.
+    Responsibility: Spec owner would update missing configurations.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-ts.*
+  paths:
+    - AzureAI.Assets/tspconfig.yaml
+    - data-plane/DatasetDataplane/tspconfig.yaml
+    - data-plane/RegistryDiscovery/tspconfig.yaml
+    - data-plane/RunHistory/tspconfig.yaml
+    - data-plane/WorkspaceDataplane/tspconfig.yaml
+    - data-plane/ModelDataplane/tspconfig.yaml
+- tool: TypeSpecValidation
+  reason: Python SDK for MachineLearningServices.Management intentionally targets azure-ai-ml package with custom namespace and no test/sample generation
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-python.emitter-output-dir
+    - options.@azure-tools/typespec-python.namespace
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+  paths:
+    - MachineLearningServices.Management/tspconfig.yaml
