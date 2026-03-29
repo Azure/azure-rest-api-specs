@@ -854,10 +854,12 @@ union JobType {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Model fine-tuning job"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   FineTuning: "FineTuning",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Model distillation job"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   Distillation: "Distillation",
 }
 
@@ -5145,6 +5147,7 @@ model EnvironmentVersionProperties extends AssetBase {
    * Environment image details.
    */
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   imageDetails?: ImageDetails;
 
   /**
@@ -5195,6 +5198,7 @@ model BuildContext {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Container image details and vulnerability findings"
 @removed(Versions.v2025_12_01)
+@removed(Versions.v2026_03_01)
 model ImageDetails {
   /**
    * Indicates if image exists
@@ -7117,6 +7121,7 @@ model JobBaseProperties extends ResourceBase {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   parentJobName?: string | null;
 
   /**
@@ -7672,6 +7677,7 @@ model ContentSafety {
    * Specifies the current safety level for content safety.
    */
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   contentSafetyLevel?: ContentSafetyLevel = ContentSafetyLevel.Blocking;
 
   /**
@@ -8093,6 +8099,7 @@ model WorkspaceProperties {
    * The URI of agents endpoint associated with this workspace.
    */
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   @visibility(Lifecycle.Read)
   agentsEndpointUri?: url;
 
@@ -8106,6 +8113,7 @@ model WorkspaceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   allowRoleAssignmentOnRG?: boolean;
 
   /**
@@ -8118,6 +8126,7 @@ model WorkspaceProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM IDs of container registries"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   containerRegistries?: string[];
 
   /**
@@ -8145,12 +8154,14 @@ model WorkspaceProperties {
    * Flag to tell if simplified CMK should be enabled for this workspace.
    */
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   enableSimplifiedCmk?: boolean;
 
   /**
    * Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace.
    */
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   enableSoftwareBillOfMaterials?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Customer-managed key encryption settings"
@@ -8158,6 +8169,7 @@ model WorkspaceProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM IDs of existing related workspaces"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   existingWorkspaces?: string[];
 
   /**
@@ -8187,6 +8199,7 @@ model WorkspaceProperties {
    * The list of IPv4  addresses that are allowed to access the workspace.
    */
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   ipAllowlist?: string[];
 
   /**
@@ -8196,6 +8209,7 @@ model WorkspaceProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM IDs of associated key vaults"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   keyVaults?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed virtual network configuration"
@@ -8211,6 +8225,7 @@ model WorkspaceProperties {
    * A set of rules governing the network accessibility of the workspace.
    */
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   networkAcls?: NetworkAcls;
 
   /**
@@ -8279,6 +8294,7 @@ model WorkspaceProperties {
    * Retention time in days after workspace get soft deleted.
    */
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   softDeleteRetentionInDays?: int32;
 
   /**
@@ -8288,6 +8304,7 @@ model WorkspaceProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM IDs of associated storage accounts"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   storageAccounts?: string[];
 
   /**
@@ -8719,6 +8736,7 @@ model WorkspacePropertiesUpdateParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Allow role assignments at resource group level"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   allowRoleAssignmentOnRG?: boolean;
 
   /**
@@ -8743,6 +8761,7 @@ model WorkspacePropertiesUpdateParameters {
    * Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace
    */
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   enableSoftwareBillOfMaterials?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption settings update configuration"
@@ -8768,6 +8787,7 @@ model WorkspacePropertiesUpdateParameters {
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "IPv4 addresses allowed to access workspace"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   ipAllowlist?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed virtual network configuration"
@@ -8777,6 +8797,7 @@ model WorkspacePropertiesUpdateParameters {
    * A set of rules governing the network accessibility of the workspace.
    */
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   networkAcls?: NetworkAcls;
 
   /**
@@ -8803,6 +8824,7 @@ model WorkspacePropertiesUpdateParameters {
    * Retention time in days after workspace get soft deleted.
    */
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   softDeleteRetentionInDays?: int32;
 
   /**
@@ -9390,6 +9412,7 @@ model EndpointResourceProperties {
    * Deployments info.
    */
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   deployments?: EndpointDeploymentResourcePropertiesBasicResource[];
 
   /**
@@ -10289,6 +10312,7 @@ model ComputeInstanceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   autologgerSettings?: ComputeInstanceAutologgerSettings | null;
 
   /**
@@ -10357,6 +10381,7 @@ model ComputeInstanceProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   @summary("Enable Auto OS Patching.")
   enableOSPatching?: boolean | null = false;
 
@@ -10365,6 +10390,7 @@ model ComputeInstanceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   @summary("Enable root access.")
   enableRootAccess?: boolean | null = true;
 
@@ -10381,6 +10407,7 @@ model ComputeInstanceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_03_01)
   @summary("Release quota if compute instance stopped.")
   releaseQuotaOnStop?: boolean | null = false;
 
@@ -10460,6 +10487,7 @@ model ComputeInstanceProperties {
  * Specifies settings for autologger.
  */
 @removed(Versions.v2025_12_01)
+@removed(Versions.v2026_03_01)
 model ComputeInstanceAutologgerSettings {
   /**
    * Indicates whether mlflow autologger is enabled for notebooks.
@@ -13174,6 +13202,7 @@ model FeatureImportanceSettings {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Base model for data generation task configuration"
 @removed(Versions.v2025_12_01)
+@removed(Versions.v2026_03_01)
 @discriminator("dataGenerationType")
 model DataGenerationVertical {
   /**
@@ -13329,6 +13358,7 @@ model DefaultScaleSettings extends OnlineScaleSettings {
  * Distillation Job definition.
  */
 @removed(Versions.v2025_12_01)
+@removed(Versions.v2026_03_01)
 model DistillationJob extends JobBaseProperties {
   /**
    * [Required]
@@ -13368,6 +13398,7 @@ model DistillationJob extends JobBaseProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Details for model fine-tuning configuration"
 @removed(Versions.v2025_12_01)
+@removed(Versions.v2026_03_01)
 model FinetuningDetails {
   /**
    * Finetuning Hyperparameters
