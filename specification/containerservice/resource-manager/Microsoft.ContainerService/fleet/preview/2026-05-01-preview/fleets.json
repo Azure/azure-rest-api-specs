@@ -3715,6 +3715,60 @@
         ]
       }
     },
+    "DayOfWeek": {
+      "type": "string",
+      "description": "Day of week used to schedule a Gate start",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "x-ms-enum": {
+        "name": "DayOfWeek",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Monday",
+            "value": "Monday",
+            "description": "Monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday",
+            "description": "Tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday",
+            "description": "Wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday",
+            "description": "Thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "Friday",
+            "description": "Friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday",
+            "description": "Saturday"
+          },
+          {
+            "name": "Sunday",
+            "value": "Sunday",
+            "description": "Sunday"
+          }
+        ]
+      }
+    },
     "DeletePolicy": {
       "type": "string",
       "description": "Delete options for the ARM managed namespace.",
@@ -4455,6 +4509,10 @@
         "type": {
           "$ref": "#/definitions/GateType",
           "description": "The type of the Gate determines how it is completed."
+        },
+        "scheduledStartConfiguration": {
+          "$ref": "#/definitions/ScheduledStartConfiguration",
+          "description": "Scheduled start configuration for gates of type ScheduledStart."
         }
       },
       "required": [
@@ -4524,6 +4582,14 @@
         "gateType": {
           "$ref": "#/definitions/GateType",
           "description": "The type of the Gate determines how it is completed.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "scheduledStartProperties": {
+          "$ref": "#/definitions/ScheduledStartProperties",
+          "description": "Details for ScheduledStart gate",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4655,7 +4721,8 @@
       "type": "string",
       "description": "The type of the Gate determines how it is completed.",
       "enum": [
-        "Approval"
+        "Approval",
+        "ScheduledStart"
       ],
       "x-ms-enum": {
         "name": "GateType",
@@ -4665,6 +4732,11 @@
             "name": "Approval",
             "value": "Approval",
             "description": "An approval gate is completed by setting its state to be Completed."
+          },
+          {
+            "name": "ScheduledStart",
+            "value": "ScheduledStart",
+            "description": "A scheduled start gate is automatically completed when the scheduled time is reached."
           }
         ]
       }
@@ -5432,6 +5504,80 @@
           "description": "The memory limit for the managed namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory"
         }
       }
+    },
+    "ScheduledStartConfiguration": {
+      "type": "object",
+      "description": "Configuration for ScheduledStart gate",
+      "properties": {
+        "startDay": {
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "The day of the week when the scheduled start occurs.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The local time of day when the scheduled start occurs in 24-hour (HH:mm) format.",
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "utcOffset": {
+          "type": "string",
+          "description": "The UTC offset for the scheduled time in HH:mm format, -14:00 to +14:00",
+          "pattern": "^[+-]((0[0-9]|1[0-3]):[0-5][0-9]|14:00)$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "startDay",
+        "startTime",
+        "utcOffset"
+      ]
+    },
+    "ScheduledStartProperties": {
+      "type": "object",
+      "description": "Properties for ScheduledStart gate",
+      "properties": {
+        "startDay": {
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "The day of the week when the scheduled start occurs.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The local time of day when the scheduled start occurs in 24-hour (HH:mm) format.",
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "utcOffset": {
+          "type": "string",
+          "description": "The UTC offset for the scheduled time in HH:mm format, -14:00 to +14:00",
+          "pattern": "^[+-]((0[0-9]|1[0-3]):[0-5][0-9]|14:00)$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "startDay",
+        "startTime",
+        "utcOffset"
+      ]
     },
     "SkipProperties": {
       "type": "object",
