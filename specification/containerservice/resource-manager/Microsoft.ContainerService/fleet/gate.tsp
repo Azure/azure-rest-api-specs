@@ -36,7 +36,7 @@ union GateType {
   Approval: "Approval",
 
   @doc("A scheduled start gate is automatically completed when the scheduled time is reached.")
-  @added(Versions.v2026_01_01_scheduledstart)
+  @added(Versions.v2026_05_01_preview)
   ScheduledStart: "ScheduledStart",
 }
 
@@ -77,7 +77,7 @@ model GateProperties {
   gateType: GateType;
 
   @doc("Details for ScheduledStart gate")
-  @added(Versions.v2026_01_01_scheduledstart)
+  @added(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   scheduledStartProperties?: ScheduledStartProperties;
 
@@ -100,7 +100,7 @@ union GateTargetType {
 }
 
 @doc("Properties for ScheduledStart gate")
-@added(Versions.v2026_01_01_scheduledstart)
+@added(Versions.v2026_05_01_preview)
 model ScheduledStartProperties {
   @doc("The day of the week when the scheduled start occurs.")
   @visibility(Lifecycle.Create, Lifecycle.Read)

@@ -93,7 +93,7 @@ model UpdateStage {
 }
 
 @doc("Day of week used to schedule a Gate start")
-@added(Versions.v2026_01_01_scheduledstart)
+@added(Versions.v2026_05_01_preview)
 union DayOfWeek {
   string,
 
@@ -120,7 +120,7 @@ union DayOfWeek {
 }
 
 @doc("Configuration for ScheduledStart gate")
-@added(Versions.v2026_01_01_scheduledstart)
+@added(Versions.v2026_05_01_preview)
 model ScheduledStartConfiguration {
   @doc("The day of the week when the scheduled start occurs.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -134,7 +134,7 @@ model ScheduledStartConfiguration {
   @doc("The UTC offset for the scheduled time in HH:mm format, -14:00 to +14:00")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @pattern("^[+-]((0[0-9]|1[0-3]):[0-5][0-9]|14:00)$")
-  UTCOffset: string;
+  utcOffset: string;
 }
 
 @doc("A group to be updated.")
@@ -206,6 +206,6 @@ model GateConfiguration {
   type: GateType;
 
   @doc("Scheduled start configuration for gates of type ScheduledStart.")
-  @added(Versions.v2026_01_01_scheduledstart)
+  @added(Versions.v2026_05_01_preview)
   scheduledStartConfiguration?: ScheduledStartConfiguration;
 }
