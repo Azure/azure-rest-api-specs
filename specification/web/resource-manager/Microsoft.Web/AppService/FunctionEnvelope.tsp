@@ -75,7 +75,7 @@ alias FunctionEnvelopesOps = Azure.ResourceManager.Legacy.RoutedOperations<
     functionName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions",
   }
 >;
 
@@ -199,7 +199,7 @@ interface FunctionEnvelopes {
    */
   @summary("Add or update a function secret.")
   @put
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
   createOrUpdateFunctionSecret is FunctionEnvelopesOps.ActionSync<
     FunctionEnvelope,
     KeyInfo,
@@ -217,7 +217,7 @@ interface FunctionEnvelopes {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a function secret.")
   @delete
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
   deleteFunctionSecret is FunctionEnvelopesOps.ActionSync<
     FunctionEnvelope,
     void,
