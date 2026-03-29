@@ -91,7 +91,7 @@ suppressions:
   from: openapi.json
   where: $.definitions.ProductDetails
   reason: The detailed response already returning existing API does not have these fields populated
-- code: XmsPageableForListCallsnpx tsv specification/marketplacecatalog/resource-manager/Microsoft.Marketplace/Skus
+- code: XmsPageableForListCalls
   from: openapi.json
   where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/products"].get
   reason: Doesn't generate in TypeSpec compiler version 1.3 - issue with nested Pageables
