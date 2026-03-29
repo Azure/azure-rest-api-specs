@@ -38,4 +38,20 @@ suppressions:
     from: openapi.json
     where: $.definitions.SkuSummary
     reason: SkuSummary response is a proxy resource model
+  - code: PathForTrackedResourceTypes 
+    from: openapi.json
+    where: $.paths["/providers/Microsoft.Marketplace/skus/{skuId}"]
+    reason: Sku is a proxy resource
+  - code: PathForTrackedResourceTypes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/skus/{skuId}"]
+    reason: Sku is a proxy resource
+  - code: PathForTrackedResourceTypes
+    from: openapi.json
+    where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/skus/{skuId}"]
+    reason: Sku is a proxy resource
+  - code: PathForTrackedResourceTypes
+    from: openapi.json
+    where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/skus/{skuId}"]
+    reason: Sku is a proxy resource
 ```
