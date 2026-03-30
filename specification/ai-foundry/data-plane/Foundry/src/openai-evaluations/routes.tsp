@@ -38,6 +38,17 @@ alias EvalListQueryParameters = {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @query(#{ explode: true })
   order_by?: "created_at" | "updated_at" = "created_at";
+
+  /**
+   * Filter evaluations by scenario type.
+   * - `evaluation`: Regular evaluations only (default).
+   * - `redteam`: Red team evaluations only.
+   * - `benchmark`: Benchmark evaluations only.
+   * - `default`: Regular evaluations and benchmarks (excludes red team).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  @query(#{ explode: true })
+  scenarioFilter?: "evaluation" | "redteam" | "benchmark" | "default" = "evaluation";
 };
 
 alias EvalRunOutputItemsQueryParameters = {
