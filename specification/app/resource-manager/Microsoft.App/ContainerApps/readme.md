@@ -87,7 +87,7 @@ input-file:
   - preview/2026-02-01-preview/ManagedEnvironmentsHttpRouteConfig.json
   - preview/2026-02-01-preview/ManagedEnvironmentsMaintenanceConfigurations.json
   - preview/2026-02-01-preview/ManagedEnvironmentsStorages.json
-  - preview/2026-02-01-preview/SandboxGroups.json
+  - preview/2026-02-01-preview/AgentComputes.json
   - preview/2026-02-01-preview/SessionPools.json
   - preview/2026-02-01-preview/SourceControls.json
   - preview/2026-02-01-preview/Subscriptions.json
