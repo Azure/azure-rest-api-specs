@@ -198,6 +198,8 @@ using Microsoft.Purview;
   "csharp"
 );
 
+// Solve the problem of incorrect sequence by using a custom union.
+
 /**
  * Gets or sets the public network access for managed resources.
  */
