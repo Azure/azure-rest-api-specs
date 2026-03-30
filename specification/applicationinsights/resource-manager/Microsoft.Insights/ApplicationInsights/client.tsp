@@ -79,6 +79,12 @@ namespace ApplicationInsightsManagementClient;
   "javascript"
 );
 @@clientName(Workbooks.revisionsList, "listRevisionsList", "javascript");
+
+@@clientLocation(webTestLocationsOperationGroup.list,
+  "WebTestLocations",
+  "python"
+);
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op replaceListByComponent(
@@ -92,5 +98,5 @@ op replaceListByComponent(
 
 @@override(WebTestsOperationGroup.listByComponent,
   replaceListByComponent,
-  "go"
+  "go,python"
 );
