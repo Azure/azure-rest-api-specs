@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Cache;
 
@@ -139,6 +141,26 @@ union ProvisioningState {
 
   /** An AAD configuration update operation is in progress. */
   ConfiguringAAD: "ConfiguringAAD",
+
+  /** A migration to Azure Managed Redis is in progress. */
+  @added(Versions.v2025_08_01_preview)
+  Migrating: "Migrating",
+
+  /** A migration to Azure Managed Redis failed. */
+  @added(Versions.v2025_08_01_preview)
+  MigrationFailed: "MigrationFailed",
+
+  /** A migration to Azure Managed Redis succeeded. */
+  @added(Versions.v2025_08_01_preview)
+  MigrationSucceeded: "MigrationSucceeded",
+
+  /** A cancellation (rollback) of a migration to Azure Managed Redis is in progress. */
+  @added(Versions.v2025_08_01_preview)
+  MigrationCancelling: "MigrationCancelling",
+
+  /** A cancellation (rollback) of a migration to Azure Managed Redis has failed. */
+  @added(Versions.v2025_08_01_preview)
+  MigrationCancellationFailed: "MigrationCancellationFailed",
 }
 
 /**
@@ -685,6 +707,17 @@ model RedisProperties extends RedisCreateProperties {
    */
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
+
+  /**
+   * The resource ID of the target Azure Managed Redis resource that this Azure Cache for Redis resource is being migrated to.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_08_01_preview)
+  targetAmrResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Cache/redisEnterprise";
+    }
+  ]>;
 }
 
 /**
