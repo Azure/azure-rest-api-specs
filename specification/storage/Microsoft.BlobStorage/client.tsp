@@ -390,6 +390,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 );
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
+@@clientOption(BlobItem, "omitSerdeMethods", "all", "go");
 
 @@clientName(QueryType, "QueryFormatType", "python");
 @@clientName(Storage.Blob.BlockBlob.uploadBlobFromUrl,
