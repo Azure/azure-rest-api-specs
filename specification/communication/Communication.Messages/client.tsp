@@ -76,3 +76,28 @@ interface ConversationThreadClient
   "mediaUrl",
   "java"
 );
+
+@@clientNamespace(Azure.Communication.MessagesService.WhatsAppMessageButtonSubType,
+  "Azure.Communication.Messages.Models.Channels",
+  "csharp"
+);
+
+@@clientNamespace(Azure.Communication.MessagesService.WhatsAppMessageTemplateBindings,
+  "Azure.Communication.Messages.Models.Channels",
+  "csharp"
+);
+
+@@clientNamespace(Azure.Communication.MessagesService.WhatsAppMessageTemplateBindingsButton,
+  "Azure.Communication.Messages.Models.Channels",
+  "csharp"
+);
+
+@@clientNamespace(Azure.Communication.MessagesService.WhatsAppMessageTemplateBindingsComponent,
+  "Azure.Communication.Messages.Models.Channels",
+  "csharp"
+);
+
+@@clientNamespace(Azure.Communication.MessagesService.WhatsAppMessageTemplateItem,
+  "Azure.Communication.Messages.Models.Channels",
+  "csharp"
+);
