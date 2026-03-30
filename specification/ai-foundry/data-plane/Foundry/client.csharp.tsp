@@ -138,8 +138,38 @@ namespace Azure.AI.Projects;
 @@access(AzureAIAgentTarget, Access.internal);
 @@access(AzureAIModelTarget, Access.internal);
 
+@@clientName(EvalResult.passed, "IsPassed", "csharp");
+@@clientName(EvalRunResultComparison.evaluator, "EvaluatorName", "csharp");
+@@clientName(EvalRunResultComparison.metric, "MetricName", "csharp");
+
+@@clientName(InsightSummary.method, "MethodName", "csharp");
+
+@@clientName(RedTeam.numTurns, "TurnCount", "csharp");
+@@clientName(RedTeam.simulationOnly, "IsSimulationOnly", "csharp");
+
+@@clientName(TaxonomySubCategory.enabled, "IsEnabled", "csharp");
+
+@@clientName(DeleteMemoryStoreResponse.deleted, "IsDeleted", "csharp");
+
+@@clientName(MemoryStoreDefaultOptions.chat_summary_enabled,
+  "IsChatSummaryEnabled",
+  "csharp"
+);
+@@clientName(MemoryStoreDefaultOptions.user_profile_enabled,
+  "IsUserProfileEnabled",
+  "csharp"
+);
+
+@@clientName(MemoryStoreDeleteScopeResponse.deleted, "IsDeleted", "csharp");
 // --------------------------------------------------------------------------------
 // Schedules sub‐client
 // --------------------------------------------------------------------------------
 
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
+
+@@alternateType(RecurrenceTrigger.startTime, utcDateTime, "csharp");
+@@alternateType(RecurrenceTrigger.endTime, utcDateTime, "csharp");
+@@alternateType(OneTimeTrigger.triggerAt, utcDateTime, "csharp");
+@@alternateType(CronTrigger.startTime, utcDateTime, "csharp");
+@@alternateType(CronTrigger.endTime, utcDateTime, "csharp");
+@@alternateType(ScheduleRun.triggerTime, utcDateTime, "csharp");
