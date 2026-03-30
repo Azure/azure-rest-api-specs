@@ -30,7 +30,7 @@ model Account is Azure.ResourceManager.ProxyResource<AccountProperties> {
   /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
+  location?: Azure.Core.azureLocation;
 
   /**
    * The Managed Identity of the resource

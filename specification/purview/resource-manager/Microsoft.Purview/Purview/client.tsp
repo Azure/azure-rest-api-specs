@@ -182,7 +182,6 @@ using Microsoft.Purview;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Account.location, Azure.Core.azureLocation, "csharp");
 
 // --- Legacy transforms ---
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
