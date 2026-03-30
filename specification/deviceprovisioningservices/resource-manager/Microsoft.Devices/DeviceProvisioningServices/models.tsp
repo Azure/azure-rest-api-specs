@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Devices;
 
@@ -134,6 +136,28 @@ union PrivateLinkServiceConnectionStatus {
  */
 union DeviceRegistryNamespaceAuthenticationType {
   string,
+
+  /**
+   * User assigned authentication type.
+   */
+  UserAssigned: "UserAssigned",
+
+  /**
+   * System assigned authentication type.
+   */
+  SystemAssigned: "SystemAssigned",
+}
+
+/**
+ * IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.
+ */
+union IotHubAuthenticationType {
+  string,
+
+  /**
+   * Key Based authentication type.
+   */
+  KeyBased: "KeyBased",
 
   /**
    * User assigned authentication type.
@@ -394,6 +418,12 @@ model IotDpsPropertiesDescription {
    * Portal endpoint to enable CORS for this provisioning service.
    */
   portalOperationsHostName?: string;
+
+  /**
+   * Disables all authentication methods other than Azure RBAC
+   */
+  @added(Versions.v2026_10_01)
+  disableLocalAuth?: boolean = false;
 }
 
 /**
@@ -489,9 +519,32 @@ model IotHubDefinitionDescription {
   name?: string;
 
   /**
+   * Host name of the IoT hub. This is required when connectionString is not provided.
+   */
+  @added(Versions.v2026_10_01)
+  hostName?: string;
+
+  /**
+   * IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.
+   */
+  @added(Versions.v2026_10_01)
+  authenticationType?: IotHubAuthenticationType;
+
+  /**
+   * The selected user-assigned identity resource Id associated with IoT hub. This is required when authenticationType is UserAssigned.
+   */
+  @added(Versions.v2026_10_01)
+  selectedUserAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
    * Connection string of the IoT hub.
    */
-  connectionString: string;
+  @madeOptional(Versions.v2026_10_01)
+  connectionString?: string;
 
   /**
    * ARM region of the IoT hub.
