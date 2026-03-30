@@ -569,6 +569,24 @@
     }
   },
   "definitions": {
+    "ApplicationInsightsCommonTypes.WorkbookSharedTypeKind": {
+      "type": "string",
+      "description": "The kind of workbook. Only valid value is shared.",
+      "enum": [
+        "shared"
+      ],
+      "x-ms-enum": {
+        "name": "WorkbookSharedTypeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "shared",
+            "value": "shared",
+            "description": "shared"
+          }
+        ]
+      }
+    },
     "Workbook": {
       "type": "object",
       "description": "A workbook definition.",
@@ -583,7 +601,7 @@
           "description": "Identity used for BYOS"
         },
         "kind": {
-          "$ref": "#/definitions/WorkbookSharedTypeKind",
+          "$ref": "#/definitions/ApplicationInsightsCommonTypes.WorkbookSharedTypeKind",
           "description": "The kind of workbook. Only valid value is shared."
         },
         "etag": {
@@ -751,24 +769,6 @@
           "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       ]
-    },
-    "WorkbookSharedTypeKind": {
-      "type": "string",
-      "description": "The kind of workbook. Only valid value is shared.",
-      "enum": [
-        "shared"
-      ],
-      "x-ms-enum": {
-        "name": "WorkbookSharedTypeKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "shared",
-            "value": "shared",
-            "description": "shared"
-          }
-        ]
-      }
     },
     "WorkbookUpdateParameters": {
       "type": "object",

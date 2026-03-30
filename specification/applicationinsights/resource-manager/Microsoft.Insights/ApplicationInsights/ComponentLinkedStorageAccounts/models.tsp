@@ -30,32 +30,6 @@ model LinkedStorageAccountsProperties {
   linkedStorageAccount?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@error
-model ErrorResponseLinkedStorage {
-  /**
-   * Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.
-   */
-  error?: ErrorResponseLinkedStorageError;
-}
-
-/**
- * Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.
- */
-model ErrorResponseLinkedStorageError {
-  /**
-   * Error code.
-   */
-  @visibility(Lifecycle.Read)
-  code?: string;
-
-  /**
-   * Error message indicating why the operation failed.
-   */
-  @visibility(Lifecycle.Read)
-  message?: string;
-}
-
 /**
  * An Application Insights component linked storage accounts patch
  */

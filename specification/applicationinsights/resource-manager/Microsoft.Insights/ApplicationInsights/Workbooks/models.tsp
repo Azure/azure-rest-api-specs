@@ -7,32 +7,9 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
+using ApplicationInsightsCommonTypes;
+
 namespace WorkbooksApi;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union CategoryType {
-  string,
-
-  /**
-   * workbook
-   */
-  workbook: "workbook",
-
-  /**
-   * TSG
-   */
-  TSG: "TSG",
-
-  /**
-   * performance
-   */
-  performance: "performance",
-
-  /**
-   * retention
-   */
-  retention: "retention",
-}
 
 /**
  * The type of identity that created the resource.
@@ -59,18 +36,6 @@ union CreatedByType {
    * Key
    */
   Key: "Key",
-}
-
-/**
- * The kind of workbook. Only valid value is shared.
- */
-union WorkbookSharedTypeKind {
-  string,
-
-  /**
-   * shared
-   */
-  shared: "shared",
 }
 
 /**

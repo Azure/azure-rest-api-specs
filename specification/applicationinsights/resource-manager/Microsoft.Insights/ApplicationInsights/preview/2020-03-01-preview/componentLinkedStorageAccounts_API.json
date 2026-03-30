@@ -93,7 +93,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseLinkedStorage"
+              "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage"
             }
           }
         },
@@ -164,7 +164,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseLinkedStorage"
+              "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage"
             }
           }
         },
@@ -235,7 +235,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseLinkedStorage"
+              "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage"
             }
           }
         },
@@ -297,7 +297,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseLinkedStorage"
+              "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage"
             }
           }
         },
@@ -310,6 +310,31 @@
     }
   },
   "definitions": {
+    "ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorageError",
+          "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message."
+        }
+      }
+    },
+    "ApplicationInsightsCommonTypes.ErrorResponseLinkedStorageError": {
+      "type": "object",
+      "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true
+        }
+      }
+    },
     "ComponentLinkedStorageAccounts": {
       "type": "object",
       "description": "An Application Insights component linked storage accounts",
@@ -334,31 +359,6 @@
           "$ref": "#/definitions/LinkedStorageAccountsProperties",
           "description": "The properties of the linked storage accounts.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ErrorResponseLinkedStorage": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponseLinkedStorageError",
-          "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message."
-        }
-      }
-    },
-    "ErrorResponseLinkedStorageError": {
-      "type": "object",
-      "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message indicating why the operation failed.",
-          "readOnly": true
         }
       }
     },

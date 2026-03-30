@@ -128,6 +128,24 @@
     }
   },
   "definitions": {
+    "ApplicationInsightsCommonTypes.WorkbookSharedTypeKind": {
+      "type": "string",
+      "description": "The kind of workbook. Only valid value is shared.",
+      "enum": [
+        "shared"
+      ],
+      "x-ms-enum": {
+        "name": "WorkbookSharedTypeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "shared",
+            "value": "shared",
+            "description": "shared"
+          }
+        ]
+      }
+    },
     "DeletedWorkbook": {
       "type": "object",
       "description": "A workbook definition.",
@@ -260,7 +278,7 @@
       "description": "An azure resource object",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/WorkbookSharedTypeKind",
+          "$ref": "#/definitions/ApplicationInsightsCommonTypes.WorkbookSharedTypeKind",
           "description": "The kind of workbook. Only valid value is shared."
         },
         "etag": {
@@ -291,24 +309,6 @@
           "format": "uri",
           "description": "The link to the next page of results."
         }
-      }
-    },
-    "WorkbookSharedTypeKind": {
-      "type": "string",
-      "description": "The kind of workbook. Only valid value is shared.",
-      "enum": [
-        "shared"
-      ],
-      "x-ms-enum": {
-        "name": "WorkbookSharedTypeKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "shared",
-            "value": "shared",
-            "description": "shared"
-          }
-        ]
       }
     }
   },

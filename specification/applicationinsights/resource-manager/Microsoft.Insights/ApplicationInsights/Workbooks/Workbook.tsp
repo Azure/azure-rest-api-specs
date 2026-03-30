@@ -7,6 +7,8 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
+using ApplicationInsightsCommonTypes;
+
 namespace WorkbooksApi;
 /**
  * A workbook definition.

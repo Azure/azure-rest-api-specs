@@ -69,7 +69,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseLinkedStorage"
+              "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage"
             }
           }
         },
@@ -82,16 +82,16 @@
     }
   },
   "definitions": {
-    "ErrorResponseLinkedStorage": {
+    "ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage": {
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorResponseLinkedStorageError",
+          "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorageError",
           "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message."
         }
       }
     },
-    "ErrorResponseLinkedStorageError": {
+    "ApplicationInsightsCommonTypes.ErrorResponseLinkedStorageError": {
       "type": "object",
       "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.",
       "properties": {

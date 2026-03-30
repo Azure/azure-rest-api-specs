@@ -9,6 +9,8 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+using ApplicationInsightsCommonTypes;
+
 namespace ComponentLinkedStorageAccountApi;
 /**
  * An Application Insights component linked storage accounts

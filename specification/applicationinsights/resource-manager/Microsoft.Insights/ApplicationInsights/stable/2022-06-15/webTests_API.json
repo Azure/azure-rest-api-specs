@@ -255,7 +255,7 @@
             "description": "Updated tag information to associate with the web test resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagsResource"
+              "$ref": "#/definitions/ApplicationInsightsCommonTypes.TagsResource"
             }
           }
         ],
@@ -311,6 +311,19 @@
     }
   },
   "definitions": {
+    "ApplicationInsightsCommonTypes.TagsResource": {
+      "type": "object",
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a WebTest instance.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "HeaderField": {
       "type": "object",
       "description": "A header to add to the WebTest.",
@@ -324,19 +337,6 @@
           "type": "string",
           "description": "The value of the header.",
           "x-ms-client-name": "headerFieldValue"
-        }
-      }
-    },
-    "TagsResource": {
-      "type": "object",
-      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a WebTest instance.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },

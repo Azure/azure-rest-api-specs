@@ -236,7 +236,7 @@
             "description": "Updated tag information to set into the component instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagsResource"
+              "$ref": "#/definitions/ApplicationInsightsCommonTypes.TagsResource"
             }
           }
         ],
@@ -406,6 +406,19 @@
     }
   },
   "definitions": {
+    "ApplicationInsightsCommonTypes.TagsResource": {
+      "type": "object",
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a WebTest instance.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ApplicationInsightsComponent": {
       "type": "object",
       "description": "An Application Insights component definition.",
@@ -887,19 +900,6 @@
             "description": "completed"
           }
         ]
-      }
-    },
-    "TagsResource": {
-      "type": "object",
-      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a WebTest instance.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
       }
     }
   },

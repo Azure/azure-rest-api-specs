@@ -291,16 +291,5 @@ model WebtestsResource {
   tags?: Record<string>;
 }
 
-/**
- * A container holding only the Tags for a resource, allowing the user to update the tags on a WebTest instance.
- */
-model TagsResource {
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-}
-
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model webTestListResult is Azure.Core.Page<WebTest>;
