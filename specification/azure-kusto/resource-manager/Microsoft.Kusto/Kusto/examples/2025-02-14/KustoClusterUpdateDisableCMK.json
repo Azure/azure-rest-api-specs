@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustoRgTest",
+    "clusterName": "kustoClusterCMK",
+    "api-version": "2025-02-14",
+    "If-Match": "*",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "keyVaultProperties": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.Kusto/Clusters/kustoClusterCMK",
+        "name": "kustoClusterCMK",
+        "type": "Microsoft.Kusto/Clusters",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "enableDiskEncryption": false,
+          "enableStreamingIngest": true,
+          "enablePurge": true,
+          "enableAutoStop": true,
+          "publicIPType": "IPv4",
+          "engineType": "V3",
+          "restrictOutboundNetworkAccess": "Disabled"
+        },
+        "sku": {
+          "name": "Standard_L16as_v3",
+          "tier": "Standard",
+          "capacity": 2
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/kustoClusterIdentity": {
+              "clientId": "11111111-2222-3333-4444-555555555555",
+              "principalId": "66666666-7777-8888-9999-000000000000"
+            }
+          }
+        },
+        "etag": "abcd1234"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f0f?api-version=2025-02-14"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.Kusto/Clusters/kustoClusterCMK",
+        "name": "kustoClusterCMK",
+        "type": "Microsoft.Kusto/Clusters",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Running",
+          "enableDiskEncryption": false,
+          "enableStreamingIngest": true,
+          "enablePurge": true,
+          "enableAutoStop": true,
+          "publicIPType": "IPv4",
+          "engineType": "V3",
+          "restrictOutboundNetworkAccess": "Disabled"
+        },
+        "sku": {
+          "name": "Standard_L16as_v3",
+          "tier": "Standard",
+          "capacity": 2
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/kustoClusterIdentity": {
+              "clientId": "11111111-2222-3333-4444-555555555555",
+              "principalId": "66666666-7777-8888-9999-000000000000"
+            }
+          }
+        },
+        "etag": "abcd1234"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f0f?api-version=2025-02-14"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.Kusto/Clusters/kustoClusterCMK",
+        "name": "kustoClusterCMK",
+        "type": "Microsoft.Kusto/Clusters",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Running",
+          "enableDiskEncryption": false,
+          "enableStreamingIngest": true,
+          "enablePurge": true,
+          "enableAutoStop": true,
+          "publicIPType": "IPv4",
+          "engineType": "V3",
+          "restrictOutboundNetworkAccess": "Disabled"
+        },
+        "sku": {
+          "name": "Standard_L16as_v3",
+          "tier": "Standard",
+          "capacity": 2
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/kustoClusterIdentity": {
+              "clientId": "11111111-2222-3333-4444-555555555555",
+              "principalId": "66666666-7777-8888-9999-000000000000"
+            }
+          }
+        },
+        "etag": "abcd1234"
+      }
+    }
+  },
+  "operationId": "Clusters_Update",
+  "title": "KustoClusterUpdateDisableCMK"
+}
