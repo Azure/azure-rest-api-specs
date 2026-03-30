@@ -193,7 +193,6 @@ using Microsoft.Purview;
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" ""
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Account,
   Azure.ResourceManager.CommonTypes.TrackedResource,
   "csharp"
