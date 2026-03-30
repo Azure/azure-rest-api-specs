@@ -2897,6 +2897,11 @@ op webAppsUpdateVnetConnectionSlotCustomized(
 );
 
 @@clientName(Microsoft.Web, "WebSiteManagementClient", "java");
+@@clientName(listBillingMeters, "list", "java");
+@@clientName(listSiteIdentifiersAssignedToHostName,
+  "listSiteIdentifiersAssignedToHostname",
+  "java"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Swagger bug. Function App on ACA is LRO."
 @@Azure.ClientGenerator.Core.Legacy.markAsLro(Sites.updateApplicationSettings,
   "java"

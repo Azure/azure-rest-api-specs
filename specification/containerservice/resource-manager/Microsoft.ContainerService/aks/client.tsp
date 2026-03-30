@@ -1186,20 +1186,8 @@ namespace Azure.ResourceManager.Models {
   "java"
 );
 // ManagedClusterLoadBalancerProfile
-@@clientName(ManagedClusterLoadBalancerProfile.managedOutboundIPs,
-  "managedOutboundIps",
-  "java"
-);
 @@clientName(ManagedClusterLoadBalancerProfile.outboundIPPrefixes,
   "outboundIpPrefixes",
-  "java"
-);
-@@clientName(ManagedClusterLoadBalancerProfile.outboundIPs,
-  "outboundIps",
-  "java"
-);
-@@clientName(ManagedClusterLoadBalancerProfile.effectiveOutboundIPs,
-  "effectiveOutboundIps",
   "java"
 );
 // ManagedClusterLoadBalancerProfileOutboundIPPrefixes
@@ -1207,18 +1195,9 @@ namespace Azure.ResourceManager.Models {
   "publicIpPrefixes",
   "java"
 );
-// ManagedClusterLoadBalancerProfileOutboundIPs
-@@clientName(ManagedClusterLoadBalancerProfileOutboundIPs.publicIPs,
-  "publicIps",
-  "java"
-);
 // ManagedClusterNATGatewayProfile
 @@clientName(ManagedClusterNATGatewayProfile.managedOutboundIPProfile,
   "managedOutboundIpProfile",
-  "java"
-);
-@@clientName(ManagedClusterNATGatewayProfile.effectiveOutboundIPs,
-  "effectiveOutboundIps",
   "java"
 );
 @@clientName(ManagedClusterNATGatewayProfile.outboundIPPrefixes,
@@ -1284,6 +1263,40 @@ namespace Azure.ResourceManager.Models {
 // listNodeImageVersions
 @@clientLocation(ContainerServiceOperationGroup.listNodeImageVersions,
   ManagedClusters,
+  "java"
+);
+// LocalDNSProfile
+@@clientName(LocalDNSProfile.vnetDNSOverrides, "vnetDnsOverrides", "java");
+@@clientName(LocalDNSProfile.kubeDNSOverrides, "kubeDnsOverrides", "java");
+// ManagedClusterAgentPoolProfileProperties
+@@clientName(ManagedClusterAgentPoolProfileProperties.eTag, "etag", "java");
+@@clientName(ManagedClusterAgentPoolProfileProperties.localDNSProfile,
+  "localDnsProfile",
+  "java"
+);
+// ManagedClusterStorageProfile
+@@clientName(ManagedClusterStorageProfile.diskCSIDriver,
+  "diskCsiDriver",
+  "java"
+);
+@@clientName(ManagedClusterStorageProfile.fileCSIDriver,
+  "fileCsiDriver",
+  "java"
+);
+@@clientName(ManagedClusterStorageProfile.blobCSIDriver,
+  "blobCsiDriver",
+  "java"
+);
+// ManagedClusterAPIServerAccessProfile
+@@clientName(ManagedClusterAPIServerAccessProfile.enablePrivateClusterPublicFQDN,
+  "enablePrivateClusterPublicFqdn",
+  "java"
+);
+// AgentPoolSecurityProfile
+@@clientName(AgentPoolSecurityProfile.enableVTPM, "enableVtpm", "java");
+// ManagedClusterWindowsProfile
+@@clientName(ManagedClusterWindowsProfile.enableCSIProxy,
+  "enableCsiProxy",
   "java"
 );
 // TODO: drop the type replacement upon next major breaking change
