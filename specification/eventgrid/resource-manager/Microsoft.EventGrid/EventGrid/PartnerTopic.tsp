@@ -53,7 +53,7 @@ interface PartnerTopics {
   update is ArmCustomPatchSync<
     PartnerTopic,
     PatchModel = PartnerTopicUpdateParameters,
-    Response = OkResponse | ArmResourceCreatedSyncResponse<PartnerTopic>
+    Response = ArmResponse<PartnerTopic> | ArmResourceCreatedSyncResponse<PartnerTopic>
   >;
 
   /**

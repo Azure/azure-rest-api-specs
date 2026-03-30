@@ -102,6 +102,10 @@ interface Clients {
   "ArmResourceProvisioningState",
   "python"
 );
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+  "ArmResourceProvisioningState",
+  "java"
+);
 
 // csharp configuration
 @@clientName(ResourceProvisioningState,
@@ -143,7 +147,7 @@ interface Clients {
 );
 @@clientName(Filter, "EventGridFilter", "csharp");
 @@clientName(PrivateEndpointConnection,
-  "EventGridPrivateEndpointConnectionData",
+  "EventGridPrivateEndpointConnection",
   "csharp"
 );
 @@clientName(ChannelProperties.expirationTimeIfNotActivatedUtc,

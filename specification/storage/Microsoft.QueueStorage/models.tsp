@@ -679,14 +679,6 @@ alias TimeNextVisibleResponseHeaderPrivate = {
   timeNextVisible: utcDateTime;
 };
 
-/** The metadata headers parameter (required). */
-alias MetadataHeadersParameter = {
-  /** The metadata headers. */
-  @alternateType(Record<string>, "rust")
-  @header("x-ms-meta")
-  metadata: string;
-};
-
 /** The metadata headers. */
 alias MetadataHeaders = {
   /** The metadata headers. */
