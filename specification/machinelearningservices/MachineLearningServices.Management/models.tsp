@@ -12018,6 +12018,7 @@ model AzureOpenAiHyperParameters {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Base class for model fine-tuning configurations"
 @discriminator("modelProvider")
 @usage(Azure.ClientGenerator.Core.Usage.output)
+@removed(Versions.v2026_03_01)
 model FineTuningVertical {
   /**
    * [Required] Input model for fine tuning.
@@ -13536,6 +13537,7 @@ model FeatureSubset extends MonitoringFeatureFilterBase {
  * FineTuning Job definition.
  */
 @usage(Azure.ClientGenerator.Core.Usage.output)
+@removed(Versions.v2026_03_01)
 model FineTuningJob extends JobBaseProperties {
   /**
    * [Required]
