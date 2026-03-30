@@ -1,7 +1,9 @@
 import "@typespec/versioning";
 import "@typespec/openapi";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Versioning;
+using Azure.Core;
 
 @versioned(LiftrBase.Versions)
 namespace LiftrBase;
@@ -19,6 +21,11 @@ enum Versions {
    * The 2025-03-21 API version.
    */
   v2025_03_21: "2025-03-21",
+
+  /**
+   * The 2026-03-01-preview API version.
+   */
+  v2026_03_01_preview: "2026-03-01-preview",
 }
 
 /**
