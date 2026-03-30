@@ -390,6 +390,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 );
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
+@@clientOption(BlobItem, "omitSerdeMethods", "all", "go");
 
 @@clientName(QueryType, "QueryFormatType", "python");
 @@clientName(Storage.Blob.BlockBlob.uploadBlobFromUrl,
@@ -548,7 +549,7 @@ model BlobServicePropertiesCsharp {
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "csharp");
 @@clientName(StorageErrorCode, "BlobErrorCode", "csharp");
 @@clientName(Blob, "BlobRestClient", "csharp");
-@@clientName(BlobItem, "BlobItemInternal", "csharp");
+@@clientName(BlobItem, "BlobItemInternal", "csharp,python");
 @@clientName(Container, "ContainerRestClient", "csharp");
 @@clientName(Container.listBlobs, "ListBlobFlatSegment", "csharp");
 @@clientName(Service, "ServiceRestClient", "csharp");
