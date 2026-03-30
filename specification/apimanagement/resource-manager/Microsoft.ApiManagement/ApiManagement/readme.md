@@ -1366,4 +1366,43 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: apimworkspacebackends.json
     reasons: This are the object fields which when updated require some data to be present.
+  - code: BodyTopLevelProperties
+    from: openapi.json
+    where:
+      - $.definitions.ReportCollection
+      - $.definitions.RequestReportCollection
+    reason: Report collection items (ReportRecordContract, RequestReportRecordContract) contain analytics/reporting data fields at the top level. These are reporting data models, not ARM resources, and this is a pre-existing established API contract that cannot be changed without breaking existing clients.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: openapi.json
+    where:
+      - $.definitions.AccessInformationContract
+      - $.definitions.NotificationContract
+      - $.definitions.PortalConfigContract
+      - $.definitions.PortalDelegationSettings
+      - $.definitions.PortalRevisionContract
+      - $.definitions.PortalSigninSettings
+      - $.definitions.PortalSignupSettings
+    reason: These resources represent singleton settings/configurations or immutable resources (portal settings, notification subscriptions, access information) that do not support deletion. This is a pre-existing API contract.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where:
+      - $.definitions.RequestReportCollection
+      - $.definitions.ResourceSkuResults
+      - $.definitions.TagResourceCollection
+      - $.definitions.UserIdentityCollection
+    reason: These are collection/list models for reporting data, SKU results, tag resources, and user identities. They are not ARM resources and do not require name/id/type properties. This is a pre-existing API design.
+  - code: RequiredReadOnlySystemData
+    from: openapi.json
+    where:
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}"].patch'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods/{quotaPeriodKey}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods/{quotaPeriodKey}"].patch'
+    reason: Quota counter resources are data-plane proxy resources that predate the systemData requirement and do not include systemData as part of their contract. This is a pre-existing API design.
+  - code: AllResourcesMustHaveGetOperation
+    from: openapi.json
+    where:
+      - $.definitions.RecipientEmailContract
+      - $.definitions.RecipientUserContract
+    reason: RecipientEmailContract and RecipientUserContract are collection item types for notification recipient lists. They are not individually addressable resources and do not have individual GET operations. This is a pre-existing API design.
 
