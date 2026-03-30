@@ -18930,15 +18930,18 @@
         },
         "maxWaitUntil": {
           "type": "string",
-          "description": "Specifies the exact UTC timestamp in ISO 8601 format till when the customer can delay the lifecycle hook event. The customer will not be allowed to delay the event to a timestamp beyond this."
+          "description": "Specifies the exact UTC timestamp in ISO 8601 format till when the customer can delay the lifecycle hook event. The customer will not be allowed to delay the event to a timestamp beyond this.",
+          "readOnly": true
         },
         "timeCreated": {
           "type": "string",
-          "description": "The UTC timestamp in ISO 8601 format at which the platform creates the virtual machine scale set lifecycle hook event entity."
+          "description": "The UTC timestamp in ISO 8601 format at which the platform creates the virtual machine scale set lifecycle hook event entity.",
+          "readOnly": true
         },
         "defaultAction": {
           "$ref": "#/definitions/LifecycleHookAction",
-          "description": "Specify the action that will be applied on the a target resource in the virtual machine scale set lifecycle hook event if the platform does not get a response from the customer for the target resource before waitUntil."
+          "description": "Specify the action that will be applied on the a target resource in the virtual machine scale set lifecycle hook event if the platform does not get a response from the customer for the target resource before waitUntil.",
+          "readOnly": true
         },
         "targetResources": {
           "type": "array",
@@ -18956,7 +18959,8 @@
         },
         "state": {
           "$ref": "#/definitions/VMScaleSetLifecycleHookEventState",
-          "description": "Specifies the state of the virtual machine scale set lifecycle hook event."
+          "description": "Specifies the state of the virtual machine scale set lifecycle hook event.",
+          "readOnly": true
         }
       }
     },
