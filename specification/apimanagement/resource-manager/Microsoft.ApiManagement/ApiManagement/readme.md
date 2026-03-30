@@ -26,7 +26,62 @@ To see additional help and options, run:
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2025-03-01-preview
+tag: package-preview-2025-09-01-preview
+```
+
+### Tag: package-preview-2025-09-01-preview
+
+These settings apply only when `--tag=package-preview-2025-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09-01-preview'
+input-file:
+  - preview/2025-09-01-preview/openapi.json
+```
+
+## Suppression for package-preview-2025-09-01-preview
+
+``` yaml $(tag) == 'package-preview-2025-09-01-preview'
+directive:
+  - suppress: PathForTrackedResourceTypes
+    from: openapi.json
+    where: "$.paths['/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/deletedservices/{serviceName}']"
+    reason: Soft-deleted API Management services are accessed at subscription+location scope, not subscription+resourceGroup. This is by design for the soft-delete recovery scenario.
+  - suppress: ParametersInPointGet
+    from: openapi.json
+    where: "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}']['get']"
+    reason: The expandCommentsAttachments query parameter is an existing API feature that allows callers to expand comments and attachments inline. Removing it would be a breaking change.
+  - suppress: ParametersInPointGet
+    from: openapi.json
+    where: "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}/policies/{policyId}']['get']"
+    reason: The format query parameter is part of the existing API contract allowing retrieval of policy content in different formats (xml, rawxml, etc.). Removing it would be a breaking change.
+  - suppress: ParametersInPointGet
+    from: openapi.json
+    where: "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}']['get']"
+    reason: The format query parameter is part of the existing API contract allowing retrieval of policy content in different formats (xml, rawxml, etc.). Removing it would be a breaking change.
+  - suppress: ParametersInPointGet
+    from: openapi.json
+    where: "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/resolvers/{resolverId}/policies/{policyId}']['get']"
+    reason: The format query parameter is part of the existing API contract allowing retrieval of policy content in different formats (xml, rawxml, etc.). Removing it would be a breaking change.
+  - suppress: RepeatedPathInfo
+    from: openapi.json
+    where: "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}']['put']"
+    reason: The apiId is part of the path and also present in the request body as part of the existing API contract. This is required for resource creation context. Changing this would be a breaking change.
+  - suppress: RepeatedPathInfo
+    from: openapi.json
+    where: "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/releases/{releaseId}']['put']"
+    reason: The apiId is part of the path and also present in the request body as part of the existing API contract. This is required for release association context. Changing this would be a breaking change.
+  - suppress: PutRequestResponseSchemeArm
+    from: openapi.json
+    where: "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}']['put']"
+    reason: The PUT request uses ApiCreateOrUpdateParameter which includes additional create/update properties (like importUrl) not present in the GET response ApiContract. This is by design for the create/import workflow.
+  - suppress: PutRequestResponseSchemeArm
+    from: openapi.json
+    where: "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tagDescriptions/{tagDescriptionId}']['put']"
+    reason: The PUT request uses TagDescriptionCreateParameters which contains properties for creating a tag description, while the response uses TagDescriptionContract. This is an established API design pattern.
+  - suppress: OperationIdNounVerb
+    from: openapi.json
+    where: "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationProviders/{authorizationProviderId}/authorizations']['get'].operationId"
+    reason: The operationId Authorization_ListByAuthorizationProvider follows the existing naming convention and is part of the published API. Changing it would break existing SDK compatibility.
 ```
 
 ### Tag: package-preview-2025-03-01-preview
