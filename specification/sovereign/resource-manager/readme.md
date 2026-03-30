@@ -79,7 +79,7 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: sovereign.json
-    where: $.definitions.SovereignViewPolicyInitiativeAssignment.properties.assignmentParameters
+    where: $.definitions.SovereignViewPolicyInitiativeDetail.properties.assignmentParameters
     reason: Parameters vary based on the selected policy initiatives.
   - code: XMSSecretInResponse
     from: sovereign.json
