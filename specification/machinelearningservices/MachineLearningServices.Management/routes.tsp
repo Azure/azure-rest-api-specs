@@ -80,6 +80,7 @@ interface QuotasOperationGroup {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 interface PTUQuotaOperationGroup {
   /**
    * List available MaaS PTU quota.
