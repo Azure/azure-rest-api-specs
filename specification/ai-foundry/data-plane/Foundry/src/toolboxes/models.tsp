@@ -1,5 +1,6 @@
 import "../common/service.tsp";
 import "../tools/models.tsp";
+import "../agents/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -15,6 +16,12 @@ union ToolboxObjectType {
   toolboxVersion: "toolbox.version",
   toolboxDeleted: "toolbox.deleted",
   toolboxVersionDeleted: "toolbox.version.deleted",
+}
+
+@doc("Policy configuration for a toolbox, including content safety and other governance settings.")
+model ToolboxPolicies {
+  @doc("Responsible AI content filtering configuration.")
+  rai_config?: RaiConfig;
 }
 
 @doc("A toolbox that stores reusable tool definitions for agents.")
@@ -63,6 +70,9 @@ model ToolboxVersionObject {
 
   @doc("The list of tools contained in this toolbox version.")
   tools: OpenAI.Tool[];
+
+  @doc("Policy configuration for the toolbox version.")
+  policies?: ToolboxPolicies;
 }
 
 @doc("Response returned when a toolbox is deleted.")
@@ -106,6 +116,9 @@ alias CreateToolboxRequest = {
 
   @doc("The list of tools to include in the toolbox.")
   tools: OpenAI.Tool[];
+
+  @doc("Policy configuration for the toolbox.")
+  policies?: ToolboxPolicies;
 };
 
 alias CreateToolboxVersionRequest = {
@@ -122,6 +135,9 @@ alias CreateToolboxVersionRequest = {
 
   @doc("The list of tools to include in this version.")
   tools: OpenAI.Tool[];
+
+  @doc("Policy configuration for this toolbox version.")
+  policies?: ToolboxPolicies;
 };
 
 alias GetToolboxRequest = {

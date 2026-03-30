@@ -9913,6 +9913,14 @@
                       "$ref": "#/components/schemas/OpenAI.Tool"
                     },
                     "description": "The list of tools to include in the toolbox."
+                  },
+                  "policies": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ToolboxPolicies"
+                      }
+                    ],
+                    "description": "Policy configuration for the toolbox."
                   }
                 },
                 "required": [
@@ -10279,6 +10287,14 @@
                       "$ref": "#/components/schemas/OpenAI.Tool"
                     },
                     "description": "The list of tools to include in this version."
+                  },
+                  "policies": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ToolboxPolicies"
+                      }
+                    ],
+                    "description": "Policy configuration for this toolbox version."
                   }
                 },
                 "required": [
@@ -40626,6 +40642,20 @@
         },
         "description": "A toolbox that stores reusable tool definitions for agents."
       },
+      "ToolboxPolicies": {
+        "type": "object",
+        "properties": {
+          "rai_config": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RaiConfig"
+              }
+            ],
+            "description": "Responsible AI content filtering configuration."
+          }
+        },
+        "description": "Policy configuration for a toolbox, including content safety and other governance settings."
+      },
       "ToolboxVersionObject": {
         "type": "object",
         "required": [
@@ -40683,6 +40713,14 @@
               "$ref": "#/components/schemas/OpenAI.Tool"
             },
             "description": "The list of tools contained in this toolbox version."
+          },
+          "policies": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolboxPolicies"
+              }
+            ],
+            "description": "Policy configuration for the toolbox version."
           }
         },
         "description": "A specific version of a toolbox."
