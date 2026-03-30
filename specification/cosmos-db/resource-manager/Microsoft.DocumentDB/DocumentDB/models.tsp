@@ -3358,8 +3358,6 @@ model GraphResource {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_04_01_preview)
 model GraphResourceGetPropertiesOptions extends OptionsResource {}
-@added(Versions.v2026_04_01_preview)
-
 /**
  * Cosmos DB options resource object
  */
@@ -3399,10 +3397,10 @@ model GraphResourceCreateUpdateParameters extends ARMResourceProperties {
  * Properties to create and update Azure Cosmos DB Graph resource.
  */
 model GraphResourceCreateUpdateProperties {
-  @added(Versions.v2026_04_01_preview)
   /**
    * The standard JSON format of a Graph resource
    */
+  @added(Versions.v2026_04_01_preview)
   resource: GraphResource;
 
   /**
@@ -4397,10 +4395,10 @@ model RetrieveThroughputParameters extends ARMResourceProperties {
  * Properties to retrieve throughput for Azure Cosmos DB resource.
  */
 model RetrieveThroughputProperties {
-  @added(Versions.v2026_04_01_preview)
   /**
    * The standard JSON format of a resource throughput
    */
+  @added(Versions.v2026_04_01_preview)
   resource: RetrieveThroughputPropertiesResource;
 }
 
@@ -4408,10 +4406,10 @@ model RetrieveThroughputProperties {
  * Resource to retrieve throughput information for Cosmos DB resource
  */
 model RetrieveThroughputPropertiesResource {
-  @added(Versions.v2026_04_01_preview)
   /**
    * Array of PhysicalPartitionId objects.
    */
+  @added(Versions.v2026_04_01_preview)
   physicalPartitionIds: PhysicalPartitionId[];
 }
 
@@ -4419,18 +4417,18 @@ model RetrieveThroughputPropertiesResource {
  * PhysicalPartitionId object
  */
 model PhysicalPartitionId {
-  @added(Versions.v2026_04_01_preview)
   /**
    * Id of a physical partition
    */
+  @added(Versions.v2026_04_01_preview)
   id: string;
 }
 
 /**
  * An Azure Cosmos DB PhysicalPartitionThroughputInfoResult object.
  */
-@added(Versions.v2026_04_01_preview)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model PhysicalPartitionThroughputInfoResult extends ARMResourceProperties {
   /**
    * The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoResult object
@@ -4442,10 +4440,10 @@ model PhysicalPartitionThroughputInfoResult extends ARMResourceProperties {
  * The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoResult object
  */
 model PhysicalPartitionThroughputInfoResultProperties {
-  @added(Versions.v2026_04_01_preview)
   /**
    * properties of physical partition throughput info
    */
+  @added(Versions.v2026_04_01_preview)
   resource?: PhysicalPartitionThroughputInfoResultPropertiesResource;
 }
 
@@ -4462,10 +4460,10 @@ model PhysicalPartitionThroughputInfoResultPropertiesResource
  * The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoProperties object
  */
 model PhysicalPartitionThroughputInfoProperties {
-  @added(Versions.v2026_04_01_preview)
   /**
    * Array of physical partition throughput info objects
    */
+  @added(Versions.v2026_04_01_preview)
   physicalPartitionThroughputInfo?: PhysicalPartitionThroughputInfoResource[];
 }
 
@@ -4473,10 +4471,10 @@ model PhysicalPartitionThroughputInfoProperties {
  * PhysicalPartitionThroughputInfo object
  */
 model PhysicalPartitionThroughputInfoResource {
-  @added(Versions.v2026_04_01_preview)
   /**
    * Id of a physical partition
    */
+  @added(Versions.v2026_04_01_preview)
   id: string;
 
   /**
@@ -4507,10 +4505,10 @@ model RedistributeThroughputParameters extends ARMResourceProperties {
  * Properties to redistribute throughput for Azure Cosmos DB resource.
  */
 model RedistributeThroughputProperties {
-  @added(Versions.v2026_04_01_preview)
   /**
    * The standard JSON format of a resource throughput
    */
+  @added(Versions.v2026_04_01_preview)
   resource: RedistributeThroughputPropertiesResource;
 }
 
@@ -4518,10 +4516,10 @@ model RedistributeThroughputProperties {
  * Resource to redistribute throughput for Azure Cosmos DB resource
  */
 model RedistributeThroughputPropertiesResource {
-  @added(Versions.v2026_04_01_preview)
   /**
    * ThroughputPolicy to apply for throughput redistribution
    */
+  @added(Versions.v2026_04_01_preview)
   throughputPolicy: ThroughputPolicyType;
 
   /**
@@ -5607,10 +5605,10 @@ model CassandraViewGetPropertiesResource extends CassandraViewResource {
  * Cosmos DB Cassandra view resource object
  */
 model CassandraViewResource {
-  @added(Versions.v2026_04_01_preview)
   /**
    * Name of the Cosmos DB Cassandra view
    */
+  @added(Versions.v2026_04_01_preview)
   id: string;
 
   /**
@@ -5624,17 +5622,16 @@ model CassandraViewResource {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_04_01_preview)
 model CassandraViewGetPropertiesOptions extends OptionsResource {}
-@added(Versions.v2026_04_01_preview)
-
 /**
  * Parameters to create and update Cosmos DB Cassandra view.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model CassandraViewCreateUpdateParameters extends ARMResourceProperties {
-  @added(Versions.v2026_04_01_preview)
   /**
    * Properties to create and update Azure Cosmos DB Cassandra view.
    */
+  @added(Versions.v2026_04_01_preview)
   properties: CassandraViewCreateUpdateProperties;
 }
 
@@ -5642,10 +5639,10 @@ model CassandraViewCreateUpdateParameters extends ARMResourceProperties {
  * Properties to create and update Azure Cosmos DB Cassandra view.
  */
 model CassandraViewCreateUpdateProperties {
-  @added(Versions.v2026_04_01_preview)
   /**
    * The standard JSON format of a Cassandra view
    */
+  @added(Versions.v2026_04_01_preview)
   resource: CassandraViewResource;
 
   /**

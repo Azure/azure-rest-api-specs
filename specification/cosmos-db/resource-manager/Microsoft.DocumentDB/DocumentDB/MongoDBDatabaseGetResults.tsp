@@ -76,8 +76,8 @@ interface MongoDBDatabaseGetResultsOperationGroup {
   /**
    * Merges the partitions of a MongoDB database
    */
-  @added(Versions.v2026_04_01_preview)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_04_01_preview)
   @action("partitionMerge")
   mongoDBDatabasePartitionMerge is ArmResourceActionAsyncBase<
     MongoDBDatabaseGetResults,
