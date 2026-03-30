@@ -37,10 +37,10 @@ using Microsoft.BillingBenefits;
   "python"
 );
 
-// python: client name mitigation (Section 4 - Client Naming Changes)
-@@clientName(Microsoft.BillingBenefits, "BillingBenefitsRP", "python");
+// python: client name mitigation
+@@clientName(Microsoft.BillingBenefits, "BillingBenefitsMgmtClient", "python");
 
-// python: enum value naming mitigations (Section 1 - Naming Changes with Numbers)
+// python: enum value naming mitigations
 @@clientName(BillingPlan.P1M, "P1_M", "python");
 @@clientName(Term.P1Y, "P1_Y", "python");
 @@clientName(Term.P3Y, "P3_Y", "python");

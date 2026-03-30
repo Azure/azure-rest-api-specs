@@ -1,48 +1,47 @@
+parameters:
+  "service-dir":
+    default: "sdk/billingbenefits"
 emit:
-- '@azure-tools/typespec-autorest'
-linter:
-  extends:
-  - '@azure-tools/typespec-azure-rulesets/resource-manager'
+  - "@azure-tools/typespec-autorest"
 options:
-  '@azure-tools/typespec-autorest':
-    azure-resource-provider-folder: resource-manager
-    emit-lro-options: all
-    emitter-output-dir: '{project-root}/..'
-    examples-dir: '{project-root}/examples'
+  "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
-    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/billingbenefits.json'
-  '@azure-tools/typespec-go':
-    emitter-output-dir: '{output-dir}/{service-dir}/armbillingbenefits'
-    factory-gather-all-params: false
-    fix-const-stuttering: true
-    flavor: azure
-    generate-fakes: true
-    generate-samples: true
-    head-as-boolean: true
-    inject-spans: true
-    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armbillingbenefits/v2
-    service-dir: sdk/resourcemanager/billingbenefits
-  '@azure-tools/typespec-java':
-    emitter-output-dir: '{output-dir}/{service-dir}/azure-resourcemanager-billingbenefits'
-    flavor: azure
-    namespace: com.azure.resourcemanager.billingbenefits
-    service-name: BillingBenefits
-  '@azure-tools/typespec-python':
-    api-version: 2025-12-01-preview
-    emitter-output-dir: '{output-dir}/{service-dir}/azure-mgmt-billingbenefits'
-    flavor: azure
-    generate-sample: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/billingbenefits.json"
+    examples-dir: "{project-root}/examples"
+    emit-lro-options: "all"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-billingbenefits"
+    namespace: "azure.mgmt.billingbenefits"
     generate-test: true
-    namespace: azure.mgmt.billingbenefits
-  '@azure-tools/typespec-ts':
-    emitter-output-dir: '{output-dir}/{service-dir}/arm-billingbenefits'
-    experimental-extensible-enums: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-billingbenefits"
+    namespace: "com.azure.resourcemanager.billingbenefits"
+    service-name: "BillingBenefits" # human-readable service name, whitespace allowed
     flavor: azure
-    is-modular-library: true
-    package-details:
-      name: '@azure/arm-billingbenefits'
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-billingbenefits"
     typespec-title-map:
       BillingBenefitsClient: BillingBenefitsRP
-parameters:
-  service-dir:
-    default: sdk/billingbenefits
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-billingbenefits"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/billingbenefits"
+    emitter-output-dir: "{output-dir}/{service-dir}/armbillingbenefits"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armbillingbenefits/v2"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    factory-gather-all-params: false
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
