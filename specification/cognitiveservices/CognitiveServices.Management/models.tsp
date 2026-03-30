@@ -198,6 +198,7 @@ union QuotaUsageStatus {
  */
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 union QuotaScopeType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Regional quota scope"
@@ -1643,6 +1644,7 @@ model AccountProperties {
    */
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   foundryAutoUpgrade?: FoundryAutoUpgrade;
 
   /**
@@ -1666,6 +1668,7 @@ model AccountProperties {
  */
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 union FoundryAutoUpgradeMode {
   string,
 
@@ -1686,6 +1689,7 @@ union FoundryAutoUpgradeMode {
  */
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 model FoundryAutoUpgrade {
   /**
    * Gets or sets the auto-upgrade mode.
@@ -2317,6 +2321,7 @@ model Usage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   scopeType?: QuotaScopeType | null;
 
   /**
@@ -2325,6 +2330,7 @@ model Usage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   scopeId?: string | null;
 }
 
@@ -2846,6 +2852,7 @@ model ModelSkuCapacityProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   scopeId?: string | null;
 
   /**
@@ -2854,6 +2861,7 @@ model ModelSkuCapacityProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   scopeType?: QuotaScopeType | null;
 }
 
