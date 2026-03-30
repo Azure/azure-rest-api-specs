@@ -1191,6 +1191,7 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-10'
 input-file:
+  - Microsoft.MachineLearningServices/preview/2024-10-01-preview/openapi.json
   - Microsoft.MachineLearningServices/preview/2024-10-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2024-10-01-preview/mfe.json
   - Microsoft.MachineLearningServices/preview/2024-10-01-preview/registries.json
