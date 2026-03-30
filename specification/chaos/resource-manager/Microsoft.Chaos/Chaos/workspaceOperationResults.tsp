@@ -16,10 +16,8 @@ namespace Microsoft.Chaos;
 
 /**
  * Chaos Studio workspace async operation result resource operations.
- * This is a shared LRO polling endpoint for all workspace async operations.
- * The response body type varies by operation:
- * - PUT/PATCH operations return the Workspace resource
- * - refreshRecommendations returns RefreshRecommendationsResult
+ * This is a shared LRO polling endpoint for workspace PUT/PATCH async operations.
+ * The response body is a Workspace resource when polling completes.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is an LRO polling endpoint, not a resource collection"
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
@@ -28,7 +26,6 @@ interface WorkspaceOperationResults {
   /**
    * Returns the result of a workspace async operation.
    * For workspace create/update operations, the response body is a Workspace resource.
-   * For refreshRecommendations, the response body is a RefreshRecommendationsResult.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "LRO polling endpoint"
   #suppress "@azure-tools/typespec-azure-core/polling-operation-no-status-monitor" "LRO uses final-state-via:location pattern, not status monitor"

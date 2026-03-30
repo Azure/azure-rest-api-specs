@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "workspaceName": "exampleWorkspace",
+    "evaluationName": "latest",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/evaluations/latest",
+        "name": "latest",
+        "type": "Microsoft.Chaos/workspaces/evaluations",
+        "properties": {
+          "status": "Succeeded",
+          "startTime": "2025-01-20T10:00:00.000Z",
+          "endTime": "2025-01-20T10:05:00.000Z",
+          "workspaceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+          "numScenariosToEvaluate": 3,
+          "numScenariosEvaluatedSucceeded": 2,
+          "numScenariosEvaluatedFailed": 1,
+          "numScenariosEvaluatedCancelled": 0,
+          "evaluationResult": "Recommended",
+          "results": [
+            {
+              "scenarioName": "zone-down",
+              "evaluationResult": "Recommended"
+            },
+            {
+              "scenarioName": "vm-shutdown",
+              "evaluationResult": "Recommended"
+            },
+            {
+              "scenarioName": "network-disconnect",
+              "evaluationResult": "NotApplicable"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2025-01-20T10:00:00.000Z",
+          "createdBy": "system",
+          "createdByType": "Application",
+          "lastModifiedAt": "2025-01-20T10:05:00.000Z",
+          "lastModifiedBy": "system",
+          "lastModifiedByType": "Application"
+        }
+      },
+      "headers": {}
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/evaluations/latest",
+        "name": "latest",
+        "type": "Microsoft.Chaos/workspaces/evaluations",
+        "properties": {
+          "status": "InProgress",
+          "startTime": "2025-01-20T10:00:00.000Z",
+          "workspaceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+          "numScenariosToEvaluate": 3,
+          "numScenariosEvaluatedSucceeded": 0,
+          "numScenariosEvaluatedFailed": 0,
+          "numScenariosEvaluatedCancelled": 0
+        },
+        "systemData": {
+          "createdAt": "2025-01-20T10:00:00.000Z",
+          "createdBy": "system",
+          "createdByType": "Application",
+          "lastModifiedAt": "2025-01-20T10:00:00.000Z",
+          "lastModifiedBy": "system",
+          "lastModifiedByType": "Application"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/evaluations/latest?api-version=2026-05-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "WorkspaceEvaluations_GetLatest",
+  "title": "Get the latest evaluation for the workspace."
+}

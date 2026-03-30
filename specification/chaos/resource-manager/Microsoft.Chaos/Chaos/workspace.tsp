@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./workspace.models.tsp";
+import "./workspaceEvaluation.models.tsp";
 import "./lro-helpers.tsp";
 
 using Azure.ResourceManager;
@@ -71,11 +72,12 @@ interface Workspaces {
   /**
    * Refreshes recommendation status for all scenarios in a given workspace.
    */
-  @pollingOperation(WorkspaceOperationResults.get)
-  refreshRecommendations is ArmResourceActionAsyncWithLocation<
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
+  @pollingOperation(WorkspaceEvaluations.getLatest)
+  refreshRecommendations is ArmResourceActionNoContentAsyncWithLocationResult<
     Workspace,
     void,
-    RefreshRecommendationsResult
+    WorkspaceEvaluation
   >;
 }
 

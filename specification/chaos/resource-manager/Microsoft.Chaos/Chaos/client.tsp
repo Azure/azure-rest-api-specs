@@ -49,7 +49,7 @@ using Microsoft.Chaos;
   "ChaosFixResourcePermissionsRequestContent",
   "csharp"
 );
-@@clientName(ScenarioParameter, "ChaosScenarioParameterContent", "csharp");
+@@clientName(ScenarioParameter, "ChaosScenarioParameterInfo", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "update base model for SDK backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExperimentExecutionDetails,

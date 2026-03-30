@@ -70,6 +70,9 @@
       "name": "OperationStatuses"
     },
     {
+      "name": "WorkspaceEvaluations"
+    },
+    {
       "name": "Workspaces"
     },
     {
@@ -83,6 +86,9 @@
     },
     {
       "name": "ScenarioConfigurations"
+    },
+    {
+      "name": "WorkspaceDiscoveries"
     }
   ],
   "paths": {
@@ -429,7 +435,7 @@
       "get": {
         "operationId": "WorkspaceOperationResults_Get",
         "summary": "Returns the result of a workspace async operation.",
-        "description": "Returns the result of a workspace async operation.\nFor workspace create/update operations, the response body is a Workspace resource.\nFor refreshRecommendations, the response body is a RefreshRecommendationsResult.",
+        "description": "Returns the result of a workspace async operation.\nFor workspace create/update operations, the response body is a Workspace resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2777,6 +2783,138 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries/latest": {
+      "get": {
+        "operationId": "WorkspaceDiscoveries_GetLatest",
+        "tags": [
+          "WorkspaceDiscoveries"
+        ],
+        "summary": "Get the latest discovery for the workspace.",
+        "description": "Get the latest resource discovery for the workspace, including status and any errors encountered.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceDiscovery"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceDiscovery"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the latest discovery for the workspace.": {
+            "$ref": "./examples/WorkspaceDiscoveries_GetLatest.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/evaluations/latest": {
+      "get": {
+        "operationId": "WorkspaceEvaluations_GetLatest",
+        "tags": [
+          "WorkspaceEvaluations"
+        ],
+        "summary": "Get the latest evaluation for the workspace.",
+        "description": "Get the latest evaluation for the workspace, including per-scenario results and status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceEvaluation"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceEvaluation"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the latest evaluation for the workspace.": {
+            "$ref": "./examples/WorkspaceEvaluations_GetLatest.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/refreshRecommendations": {
       "post": {
         "operationId": "Workspaces_RefreshRecommendations",
@@ -2805,12 +2943,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/RefreshRecommendationsResult"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -5191,6 +5323,24 @@
         "value"
       ]
     },
+    "OperationError": {
+      "type": "object",
+      "description": "Represents a system or infrastructure error encountered during an async operation.",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "The error code identifying the type of system error."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "A human-readable description of the system error."
+        }
+      },
+      "required": [
+        "errorCode",
+        "errorMessage"
+      ]
+    },
     "ParameterType": {
       "type": "string",
       "description": "Enum for parameter types.",
@@ -5830,107 +5980,6 @@
         ]
       }
     },
-    "RefreshRecommendationsResult": {
-      "type": "object",
-      "description": "The result of a refreshRecommendations long-running operation.\nContains the composite outcome of resource discovery and scenario evaluation tasks.",
-      "properties": {
-        "tasks": {
-          "type": "array",
-          "description": "The individual task results for each phase of the refresh operation.\nEach task has a `kind` discriminator (e.g., ResourceDiscovery, ScenarioEvaluation).",
-          "items": {
-            "$ref": "#/definitions/RefreshRecommendationsTask"
-          },
-          "x-ms-identifiers": [
-            "kind"
-          ]
-        },
-        "completedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the refresh operation completed."
-        }
-      },
-      "required": [
-        "tasks"
-      ]
-    },
-    "RefreshRecommendationsTask": {
-      "type": "object",
-      "description": "Represents the result of a single task (e.g., resource discovery or scenario evaluation)\nwithin the composite refreshRecommendations operation.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/RefreshRecommendationsTaskKind",
-          "description": "The kind of task (e.g., ResourceDiscovery, ScenarioEvaluation)."
-        },
-        "operationId": {
-          "type": "string",
-          "description": "The backend operation ID for this task."
-        },
-        "status": {
-          "type": "string",
-          "description": "The terminal status of this task (e.g., Succeeded, Failed, Cancelled)."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "When this task started."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "When this task completed."
-        },
-        "errors": {
-          "type": "array",
-          "description": "Errors from this task, if any.",
-          "items": {
-            "$ref": "#/definitions/RefreshRecommendationsTaskError"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "kind"
-      ]
-    },
-    "RefreshRecommendationsTaskError": {
-      "type": "object",
-      "description": "An error from a refreshRecommendations task.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      }
-    },
-    "RefreshRecommendationsTaskKind": {
-      "type": "string",
-      "description": "The kind of refresh recommendations task.",
-      "enum": [
-        "ResourceDiscovery",
-        "ScenarioEvaluation"
-      ],
-      "x-ms-enum": {
-        "name": "RefreshRecommendationsTaskKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ResourceDiscovery",
-            "value": "ResourceDiscovery",
-            "description": "Resource discovery task."
-          },
-          {
-            "name": "ScenarioEvaluation",
-            "value": "ScenarioEvaluation",
-            "description": "Scenario evaluation task."
-          }
-        ]
-      }
-    },
     "ResourceStateError": {
       "type": "object",
       "description": "Model that represents the resource state error.",
@@ -6318,6 +6367,24 @@
       "required": [
         "permission",
         "resource"
+      ]
+    },
+    "ScenarioEvaluationResultItem": {
+      "type": "object",
+      "description": "Model that represents a single scenario evaluation result.",
+      "properties": {
+        "scenarioName": {
+          "type": "string",
+          "description": "The name of the scenario that was evaluated."
+        },
+        "evaluationResult": {
+          "$ref": "#/definitions/RecommendationStatus",
+          "description": "The evaluation result for this scenario."
+        }
+      },
+      "required": [
+        "scenarioName",
+        "evaluationResult"
       ]
     },
     "ScenarioListResult": {
@@ -7090,6 +7157,244 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "WorkspaceDiscovery": {
+      "type": "object",
+      "description": "Model that represents the latest workspace discovery result.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceDiscoveryProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WorkspaceDiscoveryProperties": {
+      "type": "object",
+      "description": "Model that represents the properties of the workspace discovery.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/WorkspaceDiscoveryStatus",
+          "description": "The discovery status.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The discovery UTC start time.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The discovery UTC end time.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "System or infrastructure errors encountered during discovery.",
+          "items": {
+            "$ref": "#/definitions/OperationError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The workspace ID this discovery belongs to.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "workspaceId"
+      ]
+    },
+    "WorkspaceDiscoveryStatus": {
+      "type": "string",
+      "description": "Enum of the workspace discovery status.",
+      "enum": [
+        "Pending",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceDiscoveryStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The discovery is pending and has not started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The discovery is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The discovery completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The discovery failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The discovery was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "WorkspaceEvaluation": {
+      "type": "object",
+      "description": "Model that represents the latest workspace evaluation result.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceEvaluationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WorkspaceEvaluationProperties": {
+      "type": "object",
+      "description": "Model that represents the properties of the workspace evaluation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/WorkspaceEvaluationStatus",
+          "description": "The evaluation status.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The evaluation UTC start time.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The evaluation UTC end time.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "System or infrastructure errors encountered during evaluation.",
+          "items": {
+            "$ref": "#/definitions/OperationError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The workspace ID this evaluation belongs to.",
+          "readOnly": true
+        },
+        "numScenariosToEvaluate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of scenarios to evaluate.",
+          "readOnly": true
+        },
+        "numScenariosEvaluatedSucceeded": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of scenarios that evaluated successfully.",
+          "readOnly": true
+        },
+        "numScenariosEvaluatedFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of scenarios that failed evaluation.",
+          "readOnly": true
+        },
+        "numScenariosEvaluatedCancelled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of scenarios that were cancelled during evaluation.",
+          "readOnly": true
+        },
+        "evaluationResult": {
+          "$ref": "#/definitions/RecommendationStatus",
+          "description": "The overall evaluation result.",
+          "readOnly": true
+        },
+        "results": {
+          "type": "array",
+          "description": "Per-scenario evaluation results.",
+          "items": {
+            "$ref": "#/definitions/ScenarioEvaluationResultItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "scenarioName"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "workspaceId"
+      ]
+    },
+    "WorkspaceEvaluationStatus": {
+      "type": "string",
+      "description": "Enum of the workspace evaluation status.",
+      "enum": [
+        "Pending",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceEvaluationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The evaluation is pending and has not started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The evaluation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The evaluation completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The evaluation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The evaluation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "WorkspaceListResult": {
       "type": "object",

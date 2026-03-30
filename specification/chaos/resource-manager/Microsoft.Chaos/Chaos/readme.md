@@ -87,6 +87,26 @@ suppressions:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/runs/{runId}/cancel"].post
     reason: LRO POST returns 202 with Location header containing a polling URL. The final result is obtained by polling the Location URL, not from the initial POST response.
+  - code: NestedResourcesMustHaveListOperation
+    from: openapi.json
+    where: $.definitions.WorkspaceEvaluation
+    reason: WorkspaceEvaluation is a singleton resource (evaluations/latest). Singletons do not have list operations.
+  - code: NestedResourcesMustHaveListOperation
+    from: openapi.json
+    where: $.definitions.WorkspaceDiscovery
+    reason: WorkspaceDiscovery is a singleton resource (discoveries/latest). Singletons do not have list operations.
+  - code: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/evaluations/latest"]
+    reason: WorkspaceEvaluation is a singleton resource using @singleton("latest"). The hardcoded /latest segment is by design — there is no collection, only the single latest evaluation.
+  - code: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries/latest"]
+    reason: WorkspaceDiscovery is a singleton resource using @singleton("latest"). The hardcoded /latest segment is by design — there is no collection, only the single latest discovery.
+  - code: PostResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/refreshRecommendations"].post
+    reason: LRO POST returns 202 with Location header containing a polling URL. The final result is obtained by polling the Location URL, not from the initial POST response.
 ```
 
 ### Tag: package-2025-01

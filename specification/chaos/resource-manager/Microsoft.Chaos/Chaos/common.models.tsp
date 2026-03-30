@@ -117,3 +117,18 @@ model KeyValuePair {
   @minLength(1)
   value: string;
 }
+
+/**
+ * Represents a system or infrastructure error encountered during an async operation.
+ */
+model OperationError {
+  /**
+   * The error code identifying the type of system error.
+   */
+  errorCode: string;
+
+  /**
+   * A human-readable description of the system error.
+   */
+  errorMessage: string;
+}
