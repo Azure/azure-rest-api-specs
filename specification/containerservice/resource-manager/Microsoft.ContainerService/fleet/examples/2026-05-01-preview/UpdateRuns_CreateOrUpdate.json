@@ -53,6 +53,17 @@
               "memberSelector": {
                 "byLabel": "env=production"
               },
+              "beforeGates": [
+                {
+                  "displayName": "Wait until Friday evening",
+                  "type": "ScheduledStart",
+                  "scheduledStartConfiguration": {
+                    "startDay": "Friday",
+                    "startTime": "18:00",
+                    "utcOffset": "-05:00"
+                  }
+                }
+              ],
               "afterStageWaitInSeconds": 600
             }
           ]
@@ -129,6 +140,17 @@
                 "memberSelector": {
                   "byLabel": "env=production"
                 },
+                "beforeGates": [
+                  {
+                    "displayName": "Wait until Friday evening",
+                    "type": "ScheduledStart",
+                    "scheduledStartConfiguration": {
+                      "startDay": "Friday",
+                      "startTime": "18:00",
+                      "utcOffset": "-05:00"
+                    }
+                  }
+                ],
                 "afterStageWaitInSeconds": 600
               }
             ]
@@ -218,6 +240,20 @@
                 "name": "stage2",
                 "maxConcurrency": 50,
                 "groups": [],
+                "beforeGates": [
+                  {
+                    "displayName": "Wait until Friday evening",
+                    "type": "ScheduledStart",
+                    "scheduledStartConfiguration": {
+                      "startDay": "Friday",
+                      "startTime": "18:00",
+                      "utcOffset": "-05:00"
+                    },
+                    "status": {
+                      "state": "NotStarted"
+                    }
+                  }
+                ],
                 "afterStageWaitStatus": {
                   "status": {
                     "state": "NotStarted"
@@ -290,6 +326,17 @@
                 "memberSelector": {
                   "byLabel": "env=production"
                 },
+                "beforeGates": [
+                  {
+                    "displayName": "Wait until Friday evening",
+                    "type": "ScheduledStart",
+                    "scheduledStartConfiguration": {
+                      "startDay": "Friday",
+                      "startTime": "18:00",
+                      "utcOffset": "-05:00"
+                    }
+                  }
+                ],
                 "afterStageWaitInSeconds": 600
               }
             ]
@@ -379,6 +426,20 @@
                 "name": "stage2",
                 "maxConcurrency": 50,
                 "groups": [],
+                "beforeGates": [
+                  {
+                    "displayName": "Wait until Friday evening",
+                    "type": "ScheduledStart",
+                    "scheduledStartConfiguration": {
+                      "startDay": "Friday",
+                      "startTime": "18:00",
+                      "utcOffset": "-05:00"
+                    },
+                    "status": {
+                      "state": "NotStarted"
+                    }
+                  }
+                ],
                 "afterStageWaitStatus": {
                   "status": {
                     "state": "NotStarted"
