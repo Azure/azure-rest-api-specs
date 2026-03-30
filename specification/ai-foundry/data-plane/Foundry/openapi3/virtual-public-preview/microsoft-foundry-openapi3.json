@@ -164,26 +164,6 @@
             "explode": false
           },
           {
-            "name": "code_reference_id",
-            "in": "query",
-            "required": false,
-            "description": "Filter agents by code reference. Accepts a code artifact name (e.g., 'my-chatbot') to match any version, or a fully qualified reference (e.g., 'my-chatbot:2') to match a specific version. Useful for discovering which agents reference a code artifact before deleting it.",
-            "schema": {
-              "type": "string",
-              "x-ms-foundry-meta": {
-                "required_previews": [
-                  "CodeAgents=V1Preview"
-                ]
-              }
-            },
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "CodeAgents=V1Preview"
-              ]
-            },
-            "explode": false
-          },
-          {
             "name": "limit",
             "in": "query",
             "required": false,
@@ -1882,8 +1862,7 @@
     },
     "/agents/{agent_name}/versions": {
       "post": {
-        "operationId": "Agents_createAgentVersion",
-        "description": "Create a new agent version.",
+        "operationId": "Agents_createAgentVersion_Agents_createAgentVersionFromCode",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -1925,6 +1904,7 @@
             "explode": false
           }
         ],
+        "description": "Create a new agent version. Create a new agent version from code. Uploads the code zip and creates or updates\nthe agent in a single call. If an agent with the given name already exists, a new\nversion is added. If not, the agent is created with its first version.\nThe request is multipart/form-data with a JSON metadata part and a binary code part.\nMaximum upload size is 250 MB.",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -1947,6 +1927,11 @@
             }
           }
         },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "CodeAgents=V1Preview"
+          ]
+        },
         "tags": [
           "Agents"
         ],
@@ -1957,16 +1942,18 @@
               "schema": {
                 "$ref": "#/components/schemas/CreateAgentVersionRequest"
               }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAgentFromCodeContent"
+              },
+              "encoding": {
+                "metadata": {
+                  "contentType": "application/json"
+                }
+              }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "HostedAgents=V1Preview",
-            "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview",
-            "CodeAgents=V1Preview"
-          ]
         }
       },
       "get": {
@@ -1981,26 +1968,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "code_reference_id",
-            "in": "query",
-            "required": false,
-            "description": "Filter agent versions by code reference. Accepts a fully qualified reference (e.g., 'my-chatbot:2') or a code artifact name (e.g., 'my-chatbot') to match any version. Useful for discovering which agent versions reference a code artifact before deleting it.",
-            "schema": {
-              "type": "string",
-              "x-ms-foundry-meta": {
-                "required_previews": [
-                  "CodeAgents=V1Preview"
-                ]
-              }
-            },
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "CodeAgents=V1Preview"
-              ]
-            },
-            "explode": false
           },
           {
             "name": "limit",
@@ -3061,413 +3028,6 @@
               }
             }
           }
-        }
-      }
-    },
-    "/code": {
-      "get": {
-        "operationId": "Agents_listCode",
-        "description": "List uploaded code artifacts. Returns the latest version of each named artifact.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedCodeArtifact"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agents"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        }
-      }
-    },
-    "/code/{name}": {
-      "delete": {
-        "operationId": "Agents_deleteCode",
-        "description": "Delete all versions of a named code artifact.\n\n**Integrity check**: Before deletion, the service checks if any version of the artifact\nis referenced by an active agent version (via `code_configuration.code_reference_id`).\n\n**Success (204 No Content)**: All versions are permanently deleted. The artifact name\nbecomes available for reuse. Version numbering resets if the name is reused.\n\n**Conflict (409)**: One or more versions are referenced by active agent versions.\nNo versions are deleted (atomic operation). The error response includes:\n- `error.code`: `\"CodeArtifactInUse\"`\n- `error.message`: Human-readable description of the conflict\n- `error.details[]`: Array of errors, each identifying a referencing agent name and version\n\n**Not Found (404)**: No code artifact exists with the given name.\n\nTo resolve a 409 conflict, use `GET /agents?code_reference_id={name}` to find\nreferencing agents, then update or delete those agent versions before retrying.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
-            }
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the code artifact to delete.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agents"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        }
-      }
-    },
-    "/code/{name}/content": {
-      "post": {
-        "operationId": "Agents_uploadCode",
-        "description": "Upload a code zip file for code-based hosted agent deployment.\nThe zip is stored internally and a code_reference_id in format '{name}:{version}' is returned.\nRe-uploading with the same name auto-increments the version.\nThis ID is then passed into code_configuration.code_reference_id when creating an agent version.\nMaximum upload size is 250 MB.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
-            }
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "User-provided name for the code artifact. Re-uploading with the same name auto-increments the version.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CodeUploadResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agents"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/zip": {
-              "schema": {
-                "type": "string",
-                "format": "binary"
-              }
-            },
-            "application/octet-stream": {
-              "schema": {
-                "type": "string",
-                "format": "binary"
-              }
-            }
-          },
-          "description": "The code zip file to upload."
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        }
-      }
-    },
-    "/code/{name}/versions": {
-      "get": {
-        "operationId": "Agents_listCodeVersions",
-        "description": "List all versions of a named code artifact.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
-            }
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the code artifact.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedCodeArtifact"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agents"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        }
-      }
-    },
-    "/code/{name}/versions/{version}": {
-      "get": {
-        "operationId": "Agents_getCodeVersion",
-        "description": "Retrieve a specific version of a code artifact by name and version number.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
-            }
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the code artifact.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "description": "The version of the code artifact to retrieve.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CodeArtifact"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agents"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        }
-      },
-      "delete": {
-        "operationId": "Agents_deleteCodeVersion",
-        "description": "Delete a specific version of a code artifact.\n\n**Integrity check**: Before deletion, the service checks if the specified version is\nreferenced by an active agent version (via `code_configuration.code_reference_id`).\n\n**Success (204 No Content)**: The version is permanently deleted. Other versions of the\nsame artifact are unaffected. If this was the last version, the artifact name remains\nreserved (use `DELETE /code/{name}` to fully remove the artifact).\n\n**Conflict (409)**: The version is referenced by one or more active agent versions.\nThe version is not deleted. The error response includes:\n- `error.code`: `\"CodeArtifactInUse\"`\n- `error.message`: Human-readable description of the conflict\n- `error.details[]`: Array of errors, each identifying a referencing agent name and version\n\n**Not Found (404)**: No code artifact version exists with the given name and version.\n\nTo resolve a 409 conflict, use `GET /agents?code_reference_id={name}:{version}` to find\nreferencing agents, then update or delete those agent versions before retrying.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
-            }
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the code artifact.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "description": "The version of the code artifact to delete.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agents"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
         }
       }
     },
@@ -12698,9 +12258,9 @@
         "discriminator": {
           "propertyName": "kind",
           "mapping": {
+            "hosted": "#/components/schemas/HostedAgentDefinition",
             "prompt": "#/components/schemas/PromptAgentDefinition",
             "workflow": "#/components/schemas/WorkflowAgentDefinition",
-            "hosted": "#/components/schemas/HostedAgentDefinition",
             "container_app": "#/components/schemas/ContainerAppAgentDefinition"
           }
         },
@@ -15290,46 +14850,6 @@
         },
         "description": "Token usage for cluster analysis"
       },
-      "CodeArtifact": {
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "version",
-          "size_bytes",
-          "created_at"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Code reference identifier in format '{name}:{version}'."
-          },
-          "name": {
-            "type": "string",
-            "description": "The user-provided name for this code artifact."
-          },
-          "version": {
-            "type": "string",
-            "description": "The version number of this code artifact."
-          },
-          "size_bytes": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Size of the uploaded zip file in bytes."
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Timestamp of the upload."
-          }
-        },
-        "description": "A code artifact representing an uploaded code package.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        }
-      },
       "CodeBasedEvaluatorDefinition": {
         "type": "object",
         "required": [
@@ -15369,15 +14889,10 @@
       "CodeConfiguration": {
         "type": "object",
         "required": [
-          "code_reference_id",
           "runtime",
           "entry_point"
         ],
         "properties": {
-          "code_reference_id": {
-            "type": "string",
-            "description": "Code reference ID in format '{name}:{version}' or '{name}:latest' returned from POST /code/{name}/content. Use this to associate uploaded code with an agent version. Use ':latest' to always resolve to the most recent version."
-          },
           "runtime": {
             "type": "string",
             "description": "The runtime identifier for code execution (e.g., 'python_3_11', 'python_3_12', 'python_3_13')."
@@ -15391,46 +14906,6 @@
           }
         },
         "description": "Code-based deployment configuration for a hosted agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        }
-      },
-      "CodeUploadResponse": {
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "version",
-          "size_bytes",
-          "created_at"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Code reference identifier in format '{name}:{version}'. Pass as code_configuration.code_reference_id when creating an agent version, or use '{name}:latest' to always resolve to the most recent version."
-          },
-          "name": {
-            "type": "string",
-            "description": "The user-provided name for this code artifact."
-          },
-          "version": {
-            "type": "string",
-            "description": "Auto-incremented version number. Re-uploading with the same name creates a new version."
-          },
-          "size_bytes": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Size of the uploaded zip file in bytes."
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Timestamp of the upload."
-          }
-        },
-        "description": "Response from uploading a code artifact for code-based hosted agent deployment.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "CodeAgents=V1Preview"
@@ -15781,6 +15256,63 @@
           }
         ],
         "description": "CosmosDB Vector Store Index Definition"
+      },
+      "CreateAgentFromCodeContent": {
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CreateAgentFromCodeRequest"
+              }
+            ],
+            "description": "JSON metadata for the agent and its hosted definition."
+          },
+          "code": {
+            "type": "string",
+            "format": "binary",
+            "description": "The code zip file (max 250 MB)."
+          }
+        },
+        "required": [
+          "metadata",
+          "code"
+        ]
+      },
+      "CreateAgentFromCodeRequest": {
+        "type": "object",
+        "required": [
+          "definition"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "A human-readable description of the agent."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+            "x-oaiTypeLabel": "map"
+          },
+          "definition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HostedAgentDefinition"
+              }
+            ],
+            "description": "The hosted agent definition including code_configuration (runtime, entry_point), cpu, memory, and protocol_versions."
+          }
+        },
+        "description": "JSON metadata part of the create-agent-version-from-code request.\nFollows the same `definition` pattern as CreateAgentVersionRequest for consistency.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "CodeAgents=V1Preview"
+          ]
+        }
       },
       "CreateAgentFromManifestRequest": {
         "type": "object",
@@ -40512,27 +40044,6 @@
           "asc",
           "desc"
         ]
-      },
-      "PagedCodeArtifact": {
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CodeArtifact"
-            },
-            "description": "The CodeArtifact items on this page"
-          },
-          "nextLink": {
-            "type": "string",
-            "format": "uri",
-            "description": "The link to the next page of items"
-          }
-        },
-        "description": "Paged collection of CodeArtifact items"
       },
       "PagedConnection": {
         "type": "object",
