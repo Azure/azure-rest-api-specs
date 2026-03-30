@@ -12,10 +12,16 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sql-generated"
-    namespace: "com.azure.resourcemanager.sql.generated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sql"
+    namespace: "com.azure.resourcemanager.sql"
     flavor: "azure"
     service-name: "SQL"
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    use-object-for-unknown: true
+    uuid-as-string: false
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
