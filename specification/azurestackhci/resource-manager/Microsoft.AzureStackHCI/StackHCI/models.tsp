@@ -1535,6 +1535,44 @@ union RemoteSupportAccessLevel {
 }
 
 /**
+ * Provisioning state of remote support operations on the cluster.
+ */
+@added(Versions.v2026_03_15_preview)
+union RemoteSupportProvisioningState {
+  string,
+
+  /**
+   * No operation is in progress.
+   */
+  None: "None",
+
+  /**
+   * A grant (enable) operation is in progress.
+   */
+  GrantInProgress: "GrantInProgress",
+
+  /**
+   * A revoke operation is in progress.
+   */
+  RevokeInProgress: "RevokeInProgress",
+
+  /**
+   * The last operation completed successfully on all nodes.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The last operation succeeded on some nodes but failed on others.
+   */
+  PartiallySucceeded: "PartiallySucceeded",
+
+  /**
+   * The last operation failed on all nodes.
+   */
+  Failed: "Failed",
+}
+
+/**
  * Arc extension installation state.
  */
 union ArcExtensionState {
@@ -1999,6 +2037,13 @@ model ClusterProperties {
   billingModel?: string;
 
   /**
+   * Billing properties of the cluster, including upcoming billing model details.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @visibility(Lifecycle.Read)
+  billingProperties?: ClusterBillingProperties;
+
+  /**
    * First cluster sync timestamp.
    */
   @visibility(Lifecycle.Read)
@@ -2244,6 +2289,13 @@ model RemoteSupportProperties {
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   remoteSupportSessionDetails?: PerNodeRemoteSupportSession[];
+
+  /**
+   * Provisioning state of remote support operations.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @visibility(Lifecycle.Read)
+  remoteSupportProvisioningState?: RemoteSupportProvisioningState;
 }
 
 /**
@@ -2330,6 +2382,13 @@ model PerNodeRemoteSupportSession {
    */
   @visibility(Lifecycle.Read)
   accessLevel?: AccessLevel;
+
+  /**
+   * The location where the session transcript is stored.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @visibility(Lifecycle.Read)
+  transcriptLocation?: string;
 }
 
 /**
@@ -2629,6 +2688,32 @@ model ClusterPatchProperties {
    * Desired properties of the cluster.
    */
   desiredProperties?: ClusterDesiredProperties;
+}
+
+/**
+ * Billing properties of the cluster.
+ */
+@added(Versions.v2026_03_15_preview)
+model ClusterBillingProperties {
+  /**
+   * The next billing model to be applied to the cluster.
+   */
+  nextBillingModel?: NextBillingModel;
+}
+
+/**
+ * Details of the next billing model for the cluster.
+ */
+@added(Versions.v2026_03_15_preview)
+model NextBillingModel {
+  /** Type of billing model. */
+  billingModel?: string;
+
+  /** Capabilities enabled under this billing model. */
+  capabilitiesEnabled?: string[];
+
+  /** Number of days remaining in the trial period. */
+  trialDaysRemaining?: float32;
 }
 
 /**
@@ -6770,6 +6855,38 @@ model EdgeMachinePatch {
 }
 
 /**
+ * The validate request for Edge Machine.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineValidateRequest {
+  /**
+   * Machine Ids against which, current machine has to be validated.
+   */
+  edgeMachineIds: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/edgeMachines";
+    }
+  ]>[];
+
+  /**
+   * Additional info required for validation.
+   */
+  additionalInfo?: string;
+}
+
+/**
+ * The validate response for Edge Machine.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineValidateResponse {
+  /**
+   * Edge machine validation status.
+   */
+  @visibility(Lifecycle.Read)
+  status?: string;
+}
+
+/**
  * Details for device provisioning.
  */
 @added(Versions.v2026_03_15_preview)
@@ -9218,11 +9335,6 @@ model SyncConfigurationJobProperties extends EdgeMachineDiskJobProperties {
   /** The strategy to use for resolving the configuration drift. */
   @visibility(Lifecycle.Create)
   resolutionStrategy: ResolutionStrategy;
-
-  /** Details of the detected drift. */
-  @visibility(Lifecycle.Read)
-  @identifiers(#[])
-  driftDetails?: DriftDetail[];
 }
 
 /**
@@ -9353,6 +9465,18 @@ model NetworkAdapterConfiguration {
 
   /** List of DNS servers. */
   dnsServers?: string[];
+
+  /** IP configuration type (Dhcp or Static). */
+  ipInterfaceType?: IpInterfaceType;
+
+  /** VLAN identifier for network segmentation. */
+  vlanId?: int32;
+
+  /** Administrative state of the interface (up or down). */
+  interfaceState?: InterfaceState;
+
+  /** WiFi configuration desired properties. */
+  wifiConfiguration?: WifiConfigurationDesiredProperties;
 }
 
 /**
@@ -9360,7 +9484,20 @@ model NetworkAdapterConfiguration {
  */
 @added(Versions.v2026_03_15_preview)
 model NetworkAdapterReportedProperties {
-  ...NetworkAdapterConfiguration;
+  /** Adapter name. */
+  adapterName?: string;
+
+  /** IP address. */
+  ip4Address?: string;
+
+  /** Subnet mask. */
+  subnetMask?: string;
+
+  /** Default gateway. */
+  defaultGateway?: string;
+
+  /** List of DNS servers. */
+  dnsServers?: string[];
 
   /** Interface description of NIC. */
   @visibility(Lifecycle.Read)
@@ -9431,6 +9568,10 @@ model NetworkAdapterReportedProperties {
   /** The observed state of network adapter. */
   @visibility(Lifecycle.Read)
   networkAdapterStatus?: NetworkAdapterStatus;
+
+  /** WiFi configuration reported properties. */
+  @visibility(Lifecycle.Read)
+  wifiConfiguration?: WifiConfigurationReportedProperties;
 }
 
 /**
@@ -9507,6 +9648,160 @@ model NetworkAdapterProvisioningStatus {
   status?: NetworkAdapterOperationStatus;
 }
 
+// ==================== WiFi Types ====================
+
+/**
+ * WiFi configuration desired properties.
+ */
+@added(Versions.v2026_03_15_preview)
+model WifiConfigurationDesiredProperties {
+  /** WiFi SSID. */
+  ssid?: string;
+
+  /** WiFi authentication type. */
+  authenticationType?: AuthenticationType;
+
+  /** EAP method used for authentication. */
+  eapMethod?: EAPMethod;
+
+  /** Username for enterprise WiFi authentication. */
+  username?: string;
+
+  /** WiFi secret reference. */
+  wifiSecret?: WifiSecret;
+}
+
+/**
+ * WiFi secret reference for storing credentials.
+ */
+@added(Versions.v2026_03_15_preview)
+model WifiSecret {
+  /** Name of the secret. */
+  secretName?: string;
+
+  /** Location of the secret. */
+  secretLocation?: string;
+
+  /** Type of the WiFi secret. */
+  secretType?: WifiSecretType;
+}
+
+/**
+ * Type of WiFi secret.
+ */
+@added(Versions.v2026_03_15_preview)
+union WifiSecretType {
+  string,
+
+  /** WiFi password. */
+  WiFiPassword: "WiFiPassword",
+
+  /** WiFi certificate. */
+  WiFiCertificate: "WiFiCertificate",
+
+  /** WiFi CA certificate. */
+  WiFiCACertificate: "WiFiCACertificate",
+}
+
+/**
+ * WiFi configuration reported properties.
+ */
+@added(Versions.v2026_03_15_preview)
+model WifiConfigurationReportedProperties {
+  /** WiFi SSID. */
+  ssid?: string;
+
+  /** WiFi authentication type. */
+  authenticationType?: AuthenticationType;
+
+  /** EAP method used for authentication. */
+  eapMethod?: EAPMethod;
+
+  /** WiFi signal strength. */
+  @visibility(Lifecycle.Read)
+  signalStrength?: int32;
+
+  /** Last successful WiFi connection timestamp. */
+  @visibility(Lifecycle.Read)
+  lastSuccessfulConnectionTimestamp?: string;
+
+  /** Current WiFi connection state. */
+  @visibility(Lifecycle.Read)
+  connectionState?: ConnectionState;
+
+  /** Username for enterprise WiFi authentication. */
+  username?: string;
+}
+
+/**
+ * WiFi connection state.
+ */
+@added(Versions.v2026_03_15_preview)
+union ConnectionState {
+  string,
+
+  /** WiFi is not configured. */
+  NotConfigured: "NotConfigured",
+
+  /** WiFi is connected. */
+  Connected: "Connected",
+
+  /** WiFi is disconnected. */
+  Disconnected: "Disconnected",
+
+  /** WiFi is connecting. */
+  Connecting: "Connecting",
+
+  /** WiFi is disconnecting. */
+  Disconnecting: "Disconnecting",
+
+  /** WiFi authentication failed. */
+  AuthenticationFailed: "AuthenticationFailed",
+}
+
+/**
+ * WiFi authentication type.
+ */
+@added(Versions.v2026_03_15_preview)
+union AuthenticationType {
+  string,
+
+  /** WPA2 Personal. */
+  `WPA2-Personal`: "WPA2-Personal",
+
+  /** WPA2 Enterprise. */
+  `WPA2-Enterprise`: "WPA2-Enterprise",
+
+  /** WPA3 Personal. */
+  `WPA3-Personal`: "WPA3-Personal",
+
+  /** WPA3 Enterprise. */
+  `WPA3-Enterprise`: "WPA3-Enterprise",
+
+  /** Open network. */
+  Open: "Open",
+}
+
+/**
+ * EAP authentication method.
+ */
+@added(Versions.v2026_03_15_preview)
+union EAPMethod {
+  string,
+
+  /** PEAP authentication. */
+  PEAP: "PEAP",
+
+  /** EAP-TLS authentication. */
+  `EAP-TLS`: "EAP-TLS",
+
+  /** EAP-TTLS authentication. */
+  `EAP-TTLS`: "EAP-TTLS",
+
+  /** EAP-FAST authentication. */
+  `EAP-FAST`: "EAP-FAST",
+}
+
 /**
  * Status of network adapter operation.
  */
@@ -9528,13 +9823,11 @@ union NetworkAdapterOperationStatus {
  * Properties of the Network Adapter Job.
  */
 @added(Versions.v2026_03_15_preview)
+@discriminator("jobType")
 model EdgeMachineNetworkAdapterJobProperties {
   /** Type of operation. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   jobType: NetworkAdapterJobType;
-
-  /** The desired network configuration to apply. */
-  targetConfiguration: NetworkAdapterConfiguration;
 
   /** Deployment mode to trigger job. */
   deploymentMode?: DeploymentMode;
@@ -9580,6 +9873,46 @@ union NetworkAdapterJobType {
 
   /** Force push configuration to the network adapter. */
   ForcePush: "ForcePush",
+
+  /** Job to resolve configuration drift between desired and reported state. */
+  SyncConfiguration: "SyncConfiguration",
+}
+
+/**
+ * Properties for applying network adapter configuration.
+ */
+@added(Versions.v2026_03_15_preview)
+model ApplyConfigurationNetworkAdapterJobProperties
+  extends EdgeMachineNetworkAdapterJobProperties {
+  /** Job type. */
+  jobType: NetworkAdapterJobType.ApplyConfiguration;
+
+  /** The desired network configuration to apply. */
+  targetConfiguration: NetworkAdapterConfiguration;
+}
+
+/**
+ * Properties for force push of network adapter configuration.
+ */
+@added(Versions.v2026_03_15_preview)
+model ForcePushNetworkAdapterJobProperties
+  extends EdgeMachineNetworkAdapterJobProperties {
+  /** Job type. */
+  jobType: NetworkAdapterJobType.ForcePush;
+}
+
+/**
+ * Properties for resolving network adapter configuration drift.
+ */
+@added(Versions.v2026_03_15_preview)
+model SyncConfigurationNetworkAdapterJobProperties
+  extends EdgeMachineNetworkAdapterJobProperties {
+  /** Job type. */
+  jobType: NetworkAdapterJobType.SyncConfiguration;
+
+  /** The strategy to use for resolving the configuration drift. */
+  @visibility(Lifecycle.Create)
+  resolutionStrategy: ResolutionStrategy;
 }
 
 /**
@@ -9654,6 +9987,23 @@ model NetworkAdapterDeploymentStep {
   /** List of exceptions. */
   @visibility(Lifecycle.Read)
   exception?: string[];
+}
+
+/**
+ * Edge machine metadata properties.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineMetadataProperties {
+  /**
+   * Validated Recipe name or identifier.
+   */
+  validatedRecipe?: string;
+
+  /**
+   * Provisioning state of the metadata resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }
 
 ////////////////////////////////////////////////////////////////

@@ -28,6 +28,10 @@ enum Versions {
   @doc("Microsoft.ArcContainerStorage Resource Provider management API version 2024-10-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2024_10_01_preview: "2024-10-01-preview",
+
+  @doc("Microsoft.ArcContainerStorage Resource Provider management API version 2026-03-01-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_03_01_preview: "2026-03-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

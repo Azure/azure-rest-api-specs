@@ -10212,7 +10212,7 @@
         "description": {
           "type": "string",
           "description": "User-provided input for the action.",
-          "maxLength": 1024
+          "maxLength": 100
         }
       }
     },
@@ -11639,7 +11639,8 @@
       "enum": [
         "Unknown",
         "Protected",
-        "NotProtected"
+        "NotProtected",
+        "HighlyAvailable"
       ],
       "x-ms-enum": {
         "name": "ResourceProtectionStatus",
@@ -11659,6 +11660,11 @@
             "name": "NotProtected",
             "value": "NotProtected",
             "description": "A state indicating that the resource is not protected by any recovery solution."
+          },
+          {
+            "name": "HighlyAvailable",
+            "value": "HighlyAvailable",
+            "description": "A state indicating that the resource is protected by the highly available recovery solution."
           }
         ]
       }

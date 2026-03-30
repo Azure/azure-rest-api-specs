@@ -622,12 +622,12 @@ describe("commands.ts", () => {
       expect(result).toBe(true);
 
       const result2 = getRequiredSettingValue(false, true, "azure-sdk-for-js");
-      // Based on the constants in types.ts, JS SDK does not require check for data plane
+      // Based on the constants in types.ts, JS SDK requires check for data plane
       expect(result2).toBe(true);
 
       const result3 = getRequiredSettingValue(false, true, "azure-sdk-for-net");
-      // .NET SDK set (dataplane: false)
-      expect(result3).toBe(false);
+      // .NET SDK set (dataPlane: true)
+      expect(result3).toBe(true);
     });
 
     test("should return false for azure-sdk-for-net when hasTypeSpecProjects is false", () => {
