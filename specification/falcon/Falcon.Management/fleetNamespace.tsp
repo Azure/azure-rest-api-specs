@@ -60,6 +60,10 @@ model FleetNamespaceProperties {
    */
   adminGroup: string;
 
+  /** List of compliance frameworks applicable to this fleet namespace. */
+  @added(Versions.v2026_03_30_preview)
+  complianceFrameworks?: string[];
+
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: FleetNamespaceProvisioningState;
