@@ -5,7 +5,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 
 ``` yaml $(csharp)
 csharp:
-  azure-arm: true
+  azure-arm: false
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Devices
   output-folder: $(csharp-sdks-folder)/deviceprovisioningservices/dataplane/Microsoft.Devices/Generated
