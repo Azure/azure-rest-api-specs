@@ -15,13 +15,11 @@ namespace Microsoft.Automation;
 
 alias ReplaceContentRequest = {
   @header("Content-Type")
-  contentType: "text/powershell";
+  contentType: "text/plain";
 
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
   @doc("The runbook draft content.")
   @bodyRoot
-  @encode("bytes")
-  runbookContent: bytes;
+  runbookContent: string;
 };
 
 alias ReplaceContentResponse = {
@@ -126,12 +124,11 @@ interface Runbooks {
     void,
     {
       @header("Content-Type")
-      contentType: "text/powershell";
+      contentType: "text/plain";
 
       #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
       @bodyRoot
-      @encode("bytes")
-      body: bytes;
+      body: string;
     }
   >;
 
@@ -146,12 +143,20 @@ interface Runbooks {
   @action("draft/content")
   replaceContent is ArmResourceActionAsyncCustom<
     Runbook,
-    ReplaceContentRequest,
-    ReplaceContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ReplaceContentResponse> &
+    {
+      @header("Content-Type")
+      contentType: "text/plain";
+
+      @doc("The runbook draft content.")
+      @bodyRoot
+      runbookContent: string;
+    },
+    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader & {
         @header("Location")
         location: string;
-      }>
+      }>,
+    BaseParameters = Foundations.DefaultBaseParameters<Runbook>
   >;
 
   /**
@@ -207,12 +212,10 @@ interface Runbooks {
     void,
     {
       @header("Content-Type")
-      contentType: "text/powershell";
+      contentType: "text/plain";
 
-      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
       @bodyRoot
-      @encode("bytes")
-      body: bytes;
+      body: string;
     }
   >;
 

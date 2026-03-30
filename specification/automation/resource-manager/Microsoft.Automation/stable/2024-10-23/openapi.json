@@ -1327,7 +1327,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "file"
+              "type": "string"
             }
           },
           "default": {
@@ -6574,7 +6574,7 @@
           "url": "http://aka.ms/azureautomationsdk/runbookoperations"
         },
         "produces": [
-          "text/powershell",
+          "text/plain",
           "application/json"
         ],
         "parameters": [
@@ -6607,7 +6607,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "file"
+              "type": "string"
             }
           },
           "default": {
@@ -6692,7 +6692,7 @@
           "url": "http://aka.ms/azureautomationsdk/runbookdraftoperations"
         },
         "produces": [
-          "text/powershell",
+          "text/plain",
           "application/json"
         ],
         "parameters": [
@@ -6725,7 +6725,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "file"
+              "type": "string"
             }
           },
           "default": {
@@ -6750,12 +6750,8 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/runbookdraftoperations"
         },
-        "produces": [
-          "text/powershell",
-          "application/json"
-        ],
         "consumes": [
-          "text/powershell"
+          "text/plain"
         ],
         "parameters": [
           {
@@ -6788,18 +6784,11 @@
             "description": "The runbook draft content.",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "binary"
+              "type": "string"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "file"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
