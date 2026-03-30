@@ -88,82 +88,16 @@ model DatasetColumn {
   description?: string;
 }
 
-/** Additional Property column */
-model AdditionalProperty {
-  /** Name of the column. */
-  name: string;
-
-  /** Value of the column. */
-  value: string;
-}
-
 /** ARM resource dataset schema. */
 model ArmResourceDatasetSchema {
-  /** The full ARM resource ID. */
-  resourceId: string;
-
   /** The type of the ARM resource. */
-  resourceType: string;
-
-  /** The name of the ARM resource. */
-  resourceName: string;
-
-  /** The tenant ID where the resource resides. */
-  tenantId: string;
-
-  /** The subscription ID where the resource resides. */
-  subscriptionId: string;
-
-  /** The resource group where the resource resides. */
-  resourceGroup: string;
-
-  /** The kind of the ARM resource (optional). */
-  resourceKind?: string;
-
-  /** The Azure region where the resource is located (optional). */
-  resourceLocation?: string;
-
-  /** The tags associated with the ARM resource (optional). */
-  resourceTags?: AdditionalProperty[];
-
-  /** The resource properties of the ARM resource (optional). */
-  resourceProperties?: AdditionalProperty[];
-
-  /** The timestamp when the resource information was captured (optional). */
-  resourceTimestamp?: utcDateTime;
+  type: string;
 }
 
 /** ARM relationship dataset schema. */
 model ArmRelationshipDatasetSchema {
-  /** The full ARM resource ID. */
-  resourceId: string;
-
   /** The type of the ARM relationship. */
-  resourceType: string;
-
-  /** The tenant ID where the resource resides. */
-  tenantId: string;
-
-  /** The subscription ID where the resource resides. */
-  subscriptionId: string;
-
-  /** The Azure region where the resource is located. */
-  resourceLocation: string;
-
-  /** The full ARM resource ID of the target resource. */
-  targetId: string;
-
-  /** The type of the target ARM resource. */
-  targetType: string;
-
-  /** The type of the relationship. */
-  relationshipType: string;
-
-  /** The attributes of the relationship type (optional). */
-  relationshipTypeAttributes?: AdditionalProperty[];
-
-  /** The timestamp when the relationship was last seen (optional). */
-  lastSeenTime?: utcDateTime;
+  type: string;
 }
 
 /** Dataset column type */
