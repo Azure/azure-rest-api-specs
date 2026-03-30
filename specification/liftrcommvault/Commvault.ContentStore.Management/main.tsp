@@ -313,6 +313,23 @@ union BackUpType {
   string,
 }
 
+@doc("The level of backup")
+union BackupLevel {
+  @doc("Full backup level")
+  Full: "FULL",
+
+  @doc("Incremental backup level")
+  Incremental: "INCREMENTAL",
+
+  @doc("Differential backup level")
+  Differential: "DIFFERENTIAL",
+
+  @doc("Synthetic full backup level")
+  SyntheticFull: "SYNTHETIC_FULL",
+
+  string,
+}
+
 @doc("Schedule Details")
 model ScheduleDetails {
   @doc("Frequency of backups")
@@ -660,6 +677,10 @@ model BackupProtectionGroupRequest {
   @doc("The vm list details.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   vmList: VmList;
+
+  @doc("The backup options for the VM backup")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  backupOptions: BackupOptions;
 }
 
 @doc("Backup job response for a Protection Group")
@@ -679,10 +700,6 @@ model VmList {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @Azure.ResourceManager.identifiers(#[])
   vmGuid: VmGuid[];
-
-  @doc("The backup options for the VM backup")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  backupOptions: BackupOptions;
 }
 
 @doc("The VM GUID for backup")
@@ -696,7 +713,7 @@ model VmGuid {
 model BackupOptions {
   @doc("Indicates whether to stop backup or not for the VM")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  backupLevel: string;
+  backupLevel?: BackupLevel;
 
   @doc("The name of the backup job to be shown in Commvault")
   @visibility(Lifecycle.Read, Lifecycle.Create)
