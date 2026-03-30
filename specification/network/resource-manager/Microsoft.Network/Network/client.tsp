@@ -70,7 +70,7 @@ namespace CombineClient;
 );
 
 // Fix definition error on required property. Only "matchVariable" property is required.
-@@alternateType(Microsoft.Network.ApplicationGatewayWebApplicationFirewallConfiguration.exclusions,
+@@alternateType(ApplicationGatewayFirewallExclusion,
   ApplicationGatewayFirewallExclusionRequireMatchVariable,
   "java"
 );
