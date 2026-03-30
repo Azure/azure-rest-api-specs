@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "roleAssignmentId": "myRoleAssignmentId",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myResourceGroupName",
+    "accountName": "myAccountName",
+    "api-version": "2026-03-15",
+    "createUpdateSqlRoleAssignmentParameters": {
+      "properties": {
+        "roleDefinitionId": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/sqlRoleDefinitions/myRoleDefinitionId",
+        "scope": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases/colls/redmond-purchases",
+        "principalId": "myPrincipalId"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/sqlRoleAssignments/myRoleAssignmentId",
+        "name": "myRoleAssignmentId",
+        "type": "Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments",
+        "properties": {
+          "roleDefinitionId": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/sqlRoleDefinitions/myRoleDefinitionId",
+          "scope": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases/colls/redmond-purchases",
+          "principalId": "myPrincipalId"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "SqlResources_CreateUpdateSqlRoleAssignment",
+  "title": "CosmosDBSqlRoleAssignmentCreateUpdate"
+}

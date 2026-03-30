@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2026-03-15",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "tableName": "tableName",
+    "createUpdateTableParameters": {
+      "location": "West US",
+      "tags": {},
+      "properties": {
+        "resource": {
+          "id": "tableName"
+        },
+        "options": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/tables/tableName",
+        "name": "tableName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/tables",
+        "location": "West US",
+        "properties": {
+          "resource": {
+            "id": "tableName"
+          }
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "TableResources_CreateUpdateTable",
+  "title": "CosmosDBTableReplace"
+}

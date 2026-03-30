@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "mongoRoleDefinitionId": "myMongoRoleDefinitionId",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myResourceGroupName",
+    "accountName": "myAccountName",
+    "api-version": "2026-03-15",
+    "createUpdateMongoRoleDefinitionParameters": {
+      "properties": {
+        "roleName": "myRoleName",
+        "databaseName": "sales",
+        "privileges": [
+          {
+            "resource": {
+              "db": "sales",
+              "collection": "sales"
+            },
+            "actions": [
+              "insert",
+              "find"
+            ]
+          }
+        ],
+        "roles": [
+          {
+            "role": "myInheritedRole",
+            "db": "sales"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbRoleDefinitions/myMongoDbRoleDefinitionId",
+        "name": "myMongoDbRoleDefinitionId",
+        "type": "Microsoft.DocumentDB/databaseAccounts/mongoDbRoleDefinitionId",
+        "properties": {
+          "roleName": "myRoleName",
+          "type": "CustomRole",
+          "databaseName": "sales",
+          "privileges": [
+            {
+              "resource": {
+                "db": "sales",
+                "collection": "coll"
+              },
+              "actions": [
+                "find",
+                "insert"
+              ]
+            }
+          ],
+          "roles": [
+            {
+              "db": "sales",
+              "role": "myReadRole"
+            }
+          ]
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "MongoDBResources_CreateUpdateMongoRoleDefinition",
+  "title": "CosmosDBMongoDBRoleDefinitionCreateUpdate"
+}

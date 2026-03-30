@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2026-03-15",
+    "databaseRid": "databaseRid",
+    "collectionRid": "collectionRid",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "$filter": "$filter=name.value eq 'Storage'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "unit": "Bytes",
+            "quotaPeriod": "P1D",
+            "limit": 10737418240,
+            "currentValue": 0,
+            "name": {
+              "value": "Storage",
+              "localizedValue": "Storage"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Collection_ListUsages",
+  "title": "CosmosDBCollectionGetUsages"
+}
