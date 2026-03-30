@@ -207,6 +207,11 @@ using Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(NetworkBootstrapInterface.properties);
 
+@@clientName(NetworkMonitors.create::parameters.resource, "body");
+@@clientName(NetworkMonitors.update::parameters.properties, "body");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(NetworkMonitor.properties);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(NetworkMonitor.properties);
 

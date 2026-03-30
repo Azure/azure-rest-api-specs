@@ -8705,7 +8705,7 @@
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -8780,7 +8780,7 @@
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
@@ -18605,6 +18605,16 @@
     "NetworkMonitor": {
       "type": "object",
       "description": "The NetworkMonitor resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkMonitorProperties",
+          "description": "The NetworkMonitor properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"

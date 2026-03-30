@@ -24,7 +24,6 @@ model NetworkMonitor extends Azure.ResourceManager.Foundations.TrackedResource {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @doc("The NetworkMonitor properties.")
-  @added(Versions.v2025_07_15)
   properties: NetworkMonitorProperties;
 }
 
