@@ -67,7 +67,6 @@ model PeekedMessagesGo is Array<PeekedMessage>;
 /**
  * List wrapper for DequeuedMessageItem array
 */
-@clientName("Messages", "go")
 model ReceivedMessagesGo is Array<ReceivedMessage>;
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
@@ -96,6 +95,10 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "SignedDelegatedUserTID",
   "go"
 );
+@@clientOption(Queue.peekMessages, "monomorphicResponseFieldName", "Messages", "go");
+@@clientOption(Queue.receiveMessages, "monomorphicResponseFieldName", "Messages", "go");
+@@clientOption(Queue.sendMessage, "monomorphicResponseFieldName", "Messages", "go");
+
 
 // JavaScript SDK renames - based on azure-sdk-for-js storage-queue swagger README
 
