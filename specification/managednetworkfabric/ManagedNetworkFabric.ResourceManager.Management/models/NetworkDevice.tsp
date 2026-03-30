@@ -103,14 +103,6 @@ model NetworkDevicePatchableProperties {
 @doc("The Network Device Patch Parameters defines the patch parameters of the resource.")
 model NetworkDevicePatchParameters extends TagsUpdate {
   @doc("Network Device Patch properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: NetworkDevicePatchParametersProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("Network Device Patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkDevicePatchParametersProperties;
 
   @added(Versions.v2025_07_15)

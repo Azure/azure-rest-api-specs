@@ -73,14 +73,6 @@ model NetworkInterfaceProperties extends AnnotationResource {
 @doc("The NetworkInterfacePatch resource definition.")
 model NetworkInterfacePatch {
   @doc("Network Interface Patch properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: NetworkInterfacePatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("Network Interface Patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkInterfacePatchProperties;
 
   @added(Versions.v2025_07_15)

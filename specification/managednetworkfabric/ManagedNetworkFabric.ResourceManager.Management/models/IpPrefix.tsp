@@ -70,14 +70,6 @@ model IpPrefixRule {
 @doc("The IP Prefix patch resource definition.")
 model IpPrefixPatch extends TagsUpdate {
   @doc("IP Prefix patchable properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: IpPrefixPatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("IP Prefix patchable properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: IpPrefixPatchProperties;
 }
 

@@ -22,17 +22,8 @@ model ExternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** External Network Properties */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated: ExternalNetworkProperties;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("External Network Properties")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: ExternalNetworkProperties;
 }
 

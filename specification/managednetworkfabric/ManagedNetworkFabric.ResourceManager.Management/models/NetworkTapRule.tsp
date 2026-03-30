@@ -195,14 +195,6 @@ model NetworkTapRuleActionPatch is NetworkTapRuleAction;
 @doc("The NetworkTapRule resource definition.")
 model NetworkTapRulePatch extends TagsUpdate {
   @doc("Network Tap Rule Patch properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: NetworkTapRulePatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("Network Tap Rule Patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkTapRulePatchProperties;
 
   @added(Versions.v2025_07_15)

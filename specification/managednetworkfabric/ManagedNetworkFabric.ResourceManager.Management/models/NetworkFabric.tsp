@@ -292,14 +292,6 @@ model VpnConfigurationPatchableProperties {
 @doc("The Network Fabric resource definition.")
 model NetworkFabricPatch extends TagsUpdate {
   @doc("Network Fabric Patch properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: NetworkFabricPatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("Network Fabric Patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkFabricPatchProperties;
 
   @added(Versions.v2024_06_15_preview)

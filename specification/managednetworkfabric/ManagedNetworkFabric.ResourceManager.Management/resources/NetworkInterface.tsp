@@ -22,17 +22,8 @@ model NetworkInterface extends Azure.ResourceManager.Foundations.ProxyResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The NetworkInterface properties */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated: NetworkInterfaceProperties;
-
-  /** The NetworkInterface properties */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @doc("The NetworkInterface properties")
   properties: NetworkInterfaceProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"

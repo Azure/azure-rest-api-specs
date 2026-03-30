@@ -63,9 +63,7 @@ model NetworkBootstrapDeviceProperties {
 @doc("The Network Bootstrap Device Patch Parameters defines the patch parameters of the resource.")
 @added(Versions.v2025_07_15)
 model NetworkBootstrapDevicePatch extends TagsUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Network Bootstrap Device Patch properties.")
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkBootstrapDevicePatchProperties;
 
   @doc("The managed service identities assigned to this resource.")

@@ -8705,7 +8705,7 @@
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -8780,7 +8780,7 @@
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
@@ -10997,7 +10997,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AccessControlListProperties",
-          "description": "The Access ControlList properties"
+          "description": "The Access ControlList properties.",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -11273,7 +11274,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AccessControlListPatchProperties",
-          "description": "Access Control Lists patch properties."
+          "description": "Access Control Lists patch properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -13769,7 +13771,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExternalNetworkProperties",
-          "description": "External Network Properties"
+          "description": "External Network Properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -13861,7 +13864,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExternalNetworkPatchProperties",
-          "description": "External Network Patch properties."
+          "description": "External Network Patch properties.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -14765,7 +14769,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InternalNetworkProperties",
-          "description": "The Internal Network Properties"
+          "description": "The Internal Network Properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -14891,7 +14896,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InternalNetworkPatchProperties",
-          "description": "InternalNetwork Patch properties."
+          "description": "InternalNetwork Patch properties.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -15205,7 +15211,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InternetGatewayProperties",
-          "description": "The Internet Gateway Properties"
+          "description": "The Internet Gateway Properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -15223,7 +15230,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InternetGatewayPatchProperties",
-          "description": "Resource properties."
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -15322,7 +15330,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InternetGatewayRuleProperties",
-          "description": "The Internet Gateway Rule properties"
+          "description": "The Internet Gateway Rule properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -15452,7 +15461,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/IpCommunityProperties",
-          "description": "The IP Community Properties"
+          "description": "The IP Community Properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -15483,7 +15493,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/IpCommunityPatchableProperties",
-          "description": "IP Community patchable properties."
+          "description": "IP Community patchable properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -15603,7 +15614,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/IpExtendedCommunityProperties",
-          "description": "The IpExtendedCommunity properties"
+          "description": "The IpExtendedCommunity properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -15655,7 +15667,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/IpExtendedCommunityPatchProperties",
-          "description": "IP Extended Community patchable properties."
+          "description": "IP Extended Community patchable properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -15876,7 +15889,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/IpPrefixProperties",
-          "description": "The IP Prefix properties"
+          "description": "The IP Prefix properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -15894,7 +15908,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/IpPrefixPatchProperties",
-          "description": "IP Prefix patchable properties."
+          "description": "IP Prefix patchable properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -16112,7 +16127,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/L2IsolationDomainProperties",
-          "description": "The L2IsolationDomain properties"
+          "description": "The L2IsolationDomain properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -16130,7 +16146,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/L2IsolationDomainPatchProperties",
-          "description": "Resource properties."
+          "description": "L2 Isolation Domain resource patch properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -16359,7 +16376,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/L3IsolationDomainProperties",
-          "description": "The L3 Isolation Domain Properties"
+          "description": "The L3 Isolation Domain Properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -16377,7 +16395,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/L3IsolationDomainPatchProperties",
-          "description": "Resource properties."
+          "description": "L3 Isolation Domain resource patch properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -17086,7 +17105,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NeighborGroupProperties",
-          "description": "The NeighborGroup Properties"
+          "description": "The NeighborGroup Properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -17148,7 +17168,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NeighborGroupPatchProperties",
-          "description": "Neighbor Group Patch properties."
+          "description": "Neighbor Group Patch properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -17344,7 +17365,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkDeviceProperties",
-          "description": "The NetworkDevice properties"
+          "description": "The NetworkDevice properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -17362,7 +17384,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkDevicePatchParametersProperties",
-          "description": "Network Device Patch properties."
+          "description": "Network Device Patch properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -17562,7 +17585,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkDeviceSkuProperties",
-          "description": "The NetworkDeviceSku properties"
+          "description": "The Network Device SKU properties.",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -17693,7 +17717,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkFabricControllerProperties",
-          "description": "The NetworkFabricController Properties"
+          "description": "The NetworkFabricController Properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -17711,7 +17736,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkFabricControllerPatchProperties",
-          "description": "Network Fabric Controller patch properties."
+          "description": "Network Fabric Controller patch properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -17991,7 +18017,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkFabricPatchProperties",
-          "description": "Network Fabric Patch properties."
+          "description": "Network Fabric Patch properties.",
+          "x-ms-client-flatten": true
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentityPatch",
@@ -18328,7 +18355,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkFabricSkuProperties",
-          "description": "The Network Fabric Sku properties"
+          "description": "The Network Fabric SKU properties.",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -18451,7 +18479,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkInterfaceProperties",
-          "description": "The NetworkInterface properties"
+          "description": "The NetworkInterface properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -18469,7 +18498,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkInterfacePatchProperties",
-          "description": "Network Interface Patch properties."
+          "description": "Network Interface Patch properties.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -18575,15 +18605,6 @@
     "NetworkMonitor": {
       "type": "object",
       "description": "The NetworkMonitor resource definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkMonitorProperties",
-          "description": "The NetworkFabric Properties"
-        }
-      },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -18617,7 +18638,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkMonitorPatchProperties",
-          "description": "Network Monitor Patch properties."
+          "description": "Network Monitor Patch properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -18677,7 +18699,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkPacketBrokerProperties",
-          "description": "The NetworkPacketBroker properties"
+          "description": "The NetworkPacketBroker properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -18828,7 +18851,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkRackProperties",
-          "description": "The NetworkRack properties"
+          "description": "Network Rack Properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -18967,7 +18991,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkTapProperties",
-          "description": "The NetworkTap Properties"
+          "description": "The NetworkTap Properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -18985,7 +19010,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkTapPatchProperties",
-          "description": "Resource properties."
+          "description": "NetworkTap resource patch properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -19120,7 +19146,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkTapRuleProperties",
-          "description": "The NetworkTapRule Properties"
+          "description": "The NetworkTapRule Properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -19351,7 +19378,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkTapRulePatchProperties",
-          "description": "Network Tap Rule Patch properties."
+          "description": "Network Tap Rule Patch properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -19561,7 +19589,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkToNetworkInterconnectProperties",
-          "description": "The NetworkToNetworkInterconnect Properties"
+          "description": "The NetworkToNetworkInterconnect Properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -20582,7 +20611,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/RoutePolicyProperties",
-          "description": "The RoutePolicy properties"
+          "description": "The RoutePolicy properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -20654,7 +20684,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/RoutePolicyPatchableProperties",
-          "description": "The RoutePolicy patchable properties."
+          "description": "The RoutePolicy patchable properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [

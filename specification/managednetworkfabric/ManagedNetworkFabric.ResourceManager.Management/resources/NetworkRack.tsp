@@ -19,15 +19,7 @@ model NetworkRack extends Azure.ResourceManager.Foundations.TrackedResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The NetworkRack properties */
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated: NetworkRackProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Network Rack Properties")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: NetworkRackProperties;
 }
 

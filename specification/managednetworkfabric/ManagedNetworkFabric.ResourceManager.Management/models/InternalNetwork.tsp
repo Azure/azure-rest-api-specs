@@ -303,14 +303,6 @@ model ConnectedSubnetPatch is ConnectedSubnet;
 @doc("The InternalNetwork patch resource definition.")
 model InternalNetworkPatch {
   @doc("InternalNetwork Patch properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: InternalNetworkPatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("InternalNetwork Patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: InternalNetworkPatchProperties;
 }
 
