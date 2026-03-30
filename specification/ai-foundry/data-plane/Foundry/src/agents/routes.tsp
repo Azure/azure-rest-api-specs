@@ -107,6 +107,7 @@ interface Agents {
    */
   @post
   @route("/agents/{agent_name}/versions")
+  @sharedRoute
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgentVersion is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
@@ -191,183 +192,67 @@ interface Agents {
       /** The name of the agent to retrieve versions for. */
       @path agent_name: string;
 
-      @query
-      @doc("Filter agent versions by code reference. Accepts a fully qualified reference (e.g., 'my-chatbot:2') or a code artifact name (e.g., 'my-chatbot') to match any version. Useful for discovering which agent versions reference a code artifact before deleting it.")
-      @extension(
-        "x-ms-foundry-meta",
-        #{
-          required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview],
-        }
-      )
-      code_reference_id?: string;
-
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<AgentVersionObject>
   >;
 
   /**
-   * Upload a code zip file for code-based hosted agent deployment.
-   * The zip is stored internally and a code_reference_id in format '{name}:{version}' is returned.
-   * Re-uploading with the same name auto-increments the version.
-   * This ID is then passed into code_configuration.code_reference_id when creating an agent version.
-   * Maximum upload size is 250 MB.
+   * Updates an agent endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
-  #suppress "@azure-tools/typespec-azure-core/byos" "Code upload is stored internally by the service, not BYOS."
+  @patch(#{ implicitOptionality: true })
+  @route("/agents/{agent_name}/endpoint")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @removed(Versions.v1)
+  updateAgentEndpointObject is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
+    {
+      /** The name of the agent to retrieve. */
+      @path agent_name: string;
+
+      @header("Content-Type") contentType: "application/merge-patch+json";
+      ...UpdateAgentEndpointRequest;
+    },
+    AgentObject
+  >;
+
+  /**
+   * Create a new agent version from code. Uploads the code zip and creates or updates
+   * the agent in a single call. If an agent with the given name already exists, a new
+   * version is added. If not, the agent is created with its first version.
+   * The request is multipart/form-data with a JSON metadata part and a binary code part.
+   * Maximum upload size is 250 MB.
+   */
+  #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent creation, not BYOS."
   @post
-  @route("/code/{name}/content")
+  @route("/agents/{agent_name}/versions")
+  @sharedRoute
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
   )
-  uploadCode is FoundryDataPlanePreviewOperation<
+  createAgentVersionFromCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
-      @doc("User-provided name for the code artifact. Re-uploading with the same name auto-increments the version.")
+      /**
+       * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
+       * - Must start and end with alphanumeric characters,
+       * - Can contain hyphens in the middle
+       * - Must not exceed 63 characters.
+       */
+      @maxLength(63)
       @path
-      name: string;
+      agent_name: string;
 
-      @header contentType: "application/zip" | "application/octet-stream";
-
-      @doc("The code zip file to upload.")
-      @body
-      body: bytes;
+      @header contentType: "multipart/form-data";
+      @multipartBody body: CreateAgentFromCodeContent;
     },
-    CodeUploadResponse
-  >;
-
-  /**
-   * List uploaded code artifacts. Returns the latest version of each named artifact.
-   */
-  @get
-  @route("/code")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
-  listCode is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys,
-    {},
-    Azure.Core.Page<CodeArtifact>
-  >;
-
-  /**
-   * List all versions of a named code artifact.
-   */
-  @get
-  @route("/code/{name}/versions")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
-  listCodeVersions is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys,
-    {
-      @doc("The name of the code artifact.")
-      @path
-      name: string;
-    },
-    Azure.Core.Page<CodeArtifact>
-  >;
-
-  /**
-   * Retrieve a specific version of a code artifact by name and version number.
-   */
-  @get
-  @route("/code/{name}/versions/{version}")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
-  getCodeVersion is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys,
-    {
-      @doc("The name of the code artifact.")
-      @path
-      name: string;
-
-      @doc("The version of the code artifact to retrieve.")
-      @path
-      version: string;
-    },
-    CodeArtifact
-  >;
-
-  /**
-   * Delete all versions of a named code artifact.
-   *
-   * **Integrity check**: Before deletion, the service checks if any version of the artifact
-   * is referenced by an active agent version (via `code_configuration.code_reference_id`).
-   *
-   * **Success (204 No Content)**: All versions are permanently deleted. The artifact name
-   * becomes available for reuse. Version numbering resets if the name is reused.
-   *
-   * **Conflict (409)**: One or more versions are referenced by active agent versions.
-   * No versions are deleted (atomic operation). The error response includes:
-   * - `error.code`: `"CodeArtifactInUse"`
-   * - `error.message`: Human-readable description of the conflict
-   * - `error.details[]`: Array of errors, each identifying a referencing agent name and version
-   *
-   * **Not Found (404)**: No code artifact exists with the given name.
-   *
-   * To resolve a 409 conflict, use `GET /agents?code_reference_id={name}` to find
-   * referencing agents, then update or delete those agent versions before retrying.
-   */
-  @delete
-  @route("/code/{name}")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
-  deleteCode is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys,
-    {
-      @doc("The name of the code artifact to delete.")
-      @path
-      name: string;
-    },
-    void
-  >;
-
-  /**
-   * Delete a specific version of a code artifact.
-   *
-   * **Integrity check**: Before deletion, the service checks if the specified version is
-   * referenced by an active agent version (via `code_configuration.code_reference_id`).
-   *
-   * **Success (204 No Content)**: The version is permanently deleted. Other versions of the
-   * same artifact are unaffected. If this was the last version, the artifact name remains
-   * reserved (use `DELETE /code/{name}` to fully remove the artifact).
-   *
-   * **Conflict (409)**: The version is referenced by one or more active agent versions.
-   * The version is not deleted. The error response includes:
-   * - `error.code`: `"CodeArtifactInUse"`
-   * - `error.message`: Human-readable description of the conflict
-   * - `error.details[]`: Array of errors, each identifying a referencing agent name and version
-   *
-   * **Not Found (404)**: No code artifact version exists with the given name and version.
-   *
-   * To resolve a 409 conflict, use `GET /agents?code_reference_id={name}:{version}` to find
-   * referencing agents, then update or delete those agent versions before retrying.
-   */
-  @delete
-  @route("/code/{name}/versions/{version}")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
-  deleteCodeVersion is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys,
-    {
-      @doc("The name of the code artifact.")
-      @path
-      name: string;
-
-      @doc("The version of the code artifact to delete.")
-      @path
-      version: string;
-    },
-    void
+    AgentVersionObject
   >;
 }
