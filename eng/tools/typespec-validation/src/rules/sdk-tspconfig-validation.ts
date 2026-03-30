@@ -228,29 +228,11 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
         error: `The value of options.${this.emitterName}.emitter-output-dir "${actualValue}" must be a string`,
       };
     }
-    // Handle various path formats with different prefixes
-    // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
-    // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
-    // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
-    // Format 4: {output-dir}/sdk/dellstorage/{xxxx} where we need to validate "{xxxx}"
-
-    let extractedPath: string;
-    if (!actualValue.includes("/")) {
-      extractedPath = actualValue;
-    } else {
-      const pathParts = actualValue.split("/");
-      const filteredParts = pathParts.filter(
-        (part) => !(part === "{output-dir}" || part === "{service-dir}"),
-      );
-
-      // If the last part is a variable (e.g., {namespace}, {package-name}, {xxxx}), use it as extractedPath
-      const lastPart = pathParts[pathParts.length - 1];
-      if (lastPart.startsWith("{") && lastPart.endsWith("}")) {
-        extractedPath = lastPart;
-      } else {
-        extractedPath = filteredParts.join("/");
-      }
-    }
+    // The package name is always the last segment of the path.
+    // e.g. {output-dir}/{service-dir}/Azure.ResourceManager.X        → Azure.ResourceManager.X
+    //      {output-dir}/sdk/recoveryservices-backup/Azure.ResourceManager.X → Azure.ResourceManager.X
+    //      {output-dir}/sdk/dellstorage/{namespace}                   → {namespace} (resolved below)
+    const extractedPath = actualValue.includes("/") ? actualValue.split("/").at(-1)! : actualValue;
     // Resolve variables in the extracted path
     return this.resolveVariables(extractedPath, config);
   }

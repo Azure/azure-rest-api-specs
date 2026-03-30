@@ -726,6 +726,19 @@ options:
     success: false,
     subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
   },
+  {
+    description:
+      "Validate http-client-csharp-mgmt emitter-output-dir succeeds with inline sdk/<service-name> path (no {service-dir} variable)",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.RecoveryServicesBackup"
+    emitter-output-dir: "{output-dir}/sdk/recoveryservicesbackup/Azure.ResourceManager.RecoveryServicesBackup"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
+  },
 ];
 
 const optionalRulesWithoutEmitterConfigTestCases: Case[] = [
