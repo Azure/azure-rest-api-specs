@@ -65,7 +65,15 @@ namespace ApplicationInsightsManagementClient;
   "sslCertRemainingLifetimeCheck",
   "java"
 );
-
+@@clientName(Microsoft.Insights.WebTestPropertiesValidationRules.SSLCheck,
+  "sSLCheck",
+  "javascript"
+);
+@@clientName(Microsoft.Insights.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
+  "sSLCertRemainingLifetimeCheck",
+  "javascript"
+);
+@@clientName(Workbooks.revisionsList, "listRevisionsList", "javascript");
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op replaceListByComponent(
