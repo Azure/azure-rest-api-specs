@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 using Microsoft.PlanetaryComputer;
 
-@useDependency(Versions.v2025_04_30_Preview, Versions.v2026_04_15)
+@useDependency(Versions.v2026_04_15)
 @client({
   name: "PlanetaryComputerProClient",
   service: Microsoft.PlanetaryComputer,
