@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "bastionHostName": "bastionhosttenant",
+    "bslRequest": {
+      "vms": [
+        {
+          "vm": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgx/providers/Microsoft.Compute/virtualMachines/vm1"
+          }
+        },
+        {
+          "vm": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgx/providers/Microsoft.Compute/virtualMachines/vm2"
+          }
+        }
+      ]
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
+      }
+    }
+  },
+  "operationId": "DeleteBastionShareableLink",
+  "title": "Delete Bastion Shareable Links for the request VMs"
+}
