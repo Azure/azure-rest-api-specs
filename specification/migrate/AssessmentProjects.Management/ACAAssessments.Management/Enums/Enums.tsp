@@ -68,5 +68,20 @@ union ACAWorkloadProfileSku {
   @doc("Dedicated E32 — Memory optimized E-series.")
   DedicatedE32: "Dedicated-E32",
 
+  @doc("Consumption GPU NC8as T4 — GPU-accelerated T4.")
+  ConsumptionGpuNC8asT4: "Consumption-GPU-NC8as-T4",
+
+  @doc("Consumption GPU NC24 A100 — GPU-accelerated A100.")
+  ConsumptionGpuNC24A100: "Consumption-GPU-NC24-A100",
+
+  @doc("Dedicated NC24 A100 — GPU-accelerated A100.")
+  DedicatedNC24A100: "Dedicated-NC24-A100",
+
+  @doc("Dedicated NC48 A100 — GPU-accelerated A100.")
+  DedicatedNC48A100: "Dedicated-NC48-A100",
+
+  @doc("Dedicated NC96 A100 — GPU-accelerated A100.")
+  DedicatedNC96A100: "Dedicated-NC96-A100",
+
   string,
 }

@@ -1011,7 +1011,7 @@
           "type": "array",
           "description": "Gets or sets the Azure Locations.",
           "items": {
-            "$ref": "#/definitions/AzureLocation"
+            "$ref": "#/definitions/Azure.Core.azureLocation"
           }
         },
         "currencies": {
@@ -1313,11 +1313,13 @@
         },
         "createdTimestamp": {
           "type": "string",
+          "format": "date-time",
           "description": "Gets the created timestamp.",
           "readOnly": true
         },
         "updatedTimestamp": {
           "type": "string",
+          "format": "date-time",
           "description": "Gets the updated timestamp.",
           "readOnly": true
         },
@@ -1466,7 +1468,12 @@
         "Dedicated-E4",
         "Dedicated-E8",
         "Dedicated-E16",
-        "Dedicated-E32"
+        "Dedicated-E32",
+        "Consumption-GPU-NC8as-T4",
+        "Consumption-GPU-NC24-A100",
+        "Dedicated-NC24-A100",
+        "Dedicated-NC48-A100",
+        "Dedicated-NC96-A100"
       ],
       "x-ms-enum": {
         "name": "ACAWorkloadProfileSku",
@@ -1516,6 +1523,31 @@
             "name": "DedicatedE32",
             "value": "Dedicated-E32",
             "description": "Dedicated E32 — Memory optimized E-series."
+          },
+          {
+            "name": "ConsumptionGpuNC8asT4",
+            "value": "Consumption-GPU-NC8as-T4",
+            "description": "Consumption GPU NC8as T4 — GPU-accelerated T4."
+          },
+          {
+            "name": "ConsumptionGpuNC24A100",
+            "value": "Consumption-GPU-NC24-A100",
+            "description": "Consumption GPU NC24 A100 — GPU-accelerated A100."
+          },
+          {
+            "name": "DedicatedNC24A100",
+            "value": "Dedicated-NC24-A100",
+            "description": "Dedicated NC24 A100 — GPU-accelerated A100."
+          },
+          {
+            "name": "DedicatedNC48A100",
+            "value": "Dedicated-NC48-A100",
+            "description": "Dedicated NC48 A100 — GPU-accelerated A100."
+          },
+          {
+            "name": "DedicatedNC96A100",
+            "value": "Dedicated-NC96-A100",
+            "description": "Dedicated NC96 A100 — GPU-accelerated A100."
           }
         ]
       }
@@ -1894,7 +1926,7 @@
           "type": "array",
           "description": "Gets or sets the Azure Locations.",
           "items": {
-            "$ref": "#/definitions/AzureLocation"
+            "$ref": "#/definitions/Azure.Core.azureLocation"
           }
         },
         "currencies": {
@@ -2158,6 +2190,10 @@
           }
         ]
       }
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "AzureCurrency": {
       "type": "string",
@@ -2587,420 +2623,6 @@
             "name": "PremiumV2",
             "value": "PremiumV2",
             "description": "PremiumV2 - Azure Disk size"
-          }
-        ]
-      }
-    },
-    "AzureLocation": {
-      "type": "string",
-      "description": "Location for Azure.",
-      "enum": [
-        "Unknown",
-        "EastAsia",
-        "SoutheastAsia",
-        "AustraliaEast",
-        "AustraliaSoutheast",
-        "BrazilSouth",
-        "CanadaCentral",
-        "CanadaEast",
-        "WestEurope",
-        "NorthEurope",
-        "CentralIndia",
-        "SouthIndia",
-        "WestIndia",
-        "JapanEast",
-        "JapanWest",
-        "KoreaCentral",
-        "KoreaSouth",
-        "UkWest",
-        "UkSouth",
-        "NorthCentralUs",
-        "EastUs",
-        "WestUs2",
-        "SouthCentralUs",
-        "CentralUs",
-        "EastUs2",
-        "WestUs",
-        "WestCentralUs",
-        "GermanyCentral",
-        "GermanyNortheast",
-        "ChinaNorth",
-        "ChinaEast",
-        "USGovArizona",
-        "USGovTexas",
-        "USGovIowa",
-        "USGovVirginia",
-        "USDoDCentral",
-        "USDoDEast",
-        "FranceCentral",
-        "AustraliaCentral",
-        "SouthAfricaNorth",
-        "FranceSouth",
-        "AustraliaCentral2",
-        "SouthAfricaWest",
-        "GermanyNorth",
-        "GermanyWestCentral",
-        "NorwayEast",
-        "NorwayWest",
-        "ChinaEast2",
-        "ChinaNorth2",
-        "SwitzerlandNorth",
-        "SwitzerlandWest",
-        "UAENorth",
-        "UAECentral",
-        "UsNatEast",
-        "UsNatWest",
-        "UsSecEast",
-        "UsSecCentral",
-        "UsSecWest",
-        "SwedenCentral",
-        "QatarCentral",
-        "JioIndiaWest",
-        "ItalyNorth",
-        "PolandCentral",
-        "IsraelCentral",
-        "MexicoCentral",
-        "NewZealandNorth",
-        "SpainCentral"
-      ],
-      "x-ms-enum": {
-        "name": "AzureLocation",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Unknown Location for Azure"
-          },
-          {
-            "name": "EastAsia",
-            "value": "EastAsia",
-            "description": "EastAsia Location for Azure"
-          },
-          {
-            "name": "SoutheastAsia",
-            "value": "SoutheastAsia",
-            "description": "SoutheastAsia Location for Azure"
-          },
-          {
-            "name": "AustraliaEast",
-            "value": "AustraliaEast",
-            "description": "AustraliaEast Location for Azure"
-          },
-          {
-            "name": "AustraliaSoutheast",
-            "value": "AustraliaSoutheast",
-            "description": "AustraliaSoutheast Location for Azure"
-          },
-          {
-            "name": "BrazilSouth",
-            "value": "BrazilSouth",
-            "description": "BrazilSouth Location for Azure"
-          },
-          {
-            "name": "CanadaCentral",
-            "value": "CanadaCentral",
-            "description": "CanadaCentral Location for Azure"
-          },
-          {
-            "name": "CanadaEast",
-            "value": "CanadaEast",
-            "description": "CanadaEast Location for Azure"
-          },
-          {
-            "name": "WestEurope",
-            "value": "WestEurope",
-            "description": "WestEurope Location for Azure"
-          },
-          {
-            "name": "NorthEurope",
-            "value": "NorthEurope",
-            "description": "NorthEurope Location for Azure"
-          },
-          {
-            "name": "CentralIndia",
-            "value": "CentralIndia",
-            "description": "CentralIndia Location for Azure"
-          },
-          {
-            "name": "SouthIndia",
-            "value": "SouthIndia",
-            "description": "SouthIndia Location for Azure"
-          },
-          {
-            "name": "WestIndia",
-            "value": "WestIndia",
-            "description": "WestIndia Location for Azure"
-          },
-          {
-            "name": "JapanEast",
-            "value": "JapanEast",
-            "description": "JapanEast Location for Azure"
-          },
-          {
-            "name": "JapanWest",
-            "value": "JapanWest",
-            "description": "JapanWest Location for Azure"
-          },
-          {
-            "name": "KoreaCentral",
-            "value": "KoreaCentral",
-            "description": "KoreaCentral Location for Azure"
-          },
-          {
-            "name": "KoreaSouth",
-            "value": "KoreaSouth",
-            "description": "KoreaSouth Location for Azure"
-          },
-          {
-            "name": "UkWest",
-            "value": "UkWest",
-            "description": "UkWest Location for Azure"
-          },
-          {
-            "name": "UkSouth",
-            "value": "UkSouth",
-            "description": "UkSouth Location for Azure"
-          },
-          {
-            "name": "NorthCentralUs",
-            "value": "NorthCentralUs",
-            "description": "NorthCentralUs Location for Azure"
-          },
-          {
-            "name": "EastUs",
-            "value": "EastUs",
-            "description": "EastUs Location for Azure"
-          },
-          {
-            "name": "WestUs2",
-            "value": "WestUs2",
-            "description": "WestUs2 Location for Azure"
-          },
-          {
-            "name": "SouthCentralUs",
-            "value": "SouthCentralUs",
-            "description": "SouthCentralUs Location for Azure"
-          },
-          {
-            "name": "CentralUs",
-            "value": "CentralUs",
-            "description": "CentralUs Location for Azure"
-          },
-          {
-            "name": "EastUs2",
-            "value": "EastUs2",
-            "description": "EastUs2 Location for Azure"
-          },
-          {
-            "name": "WestUs",
-            "value": "WestUs",
-            "description": "WestUs Location for Azure"
-          },
-          {
-            "name": "WestCentralUs",
-            "value": "WestCentralUs",
-            "description": "WestCentralUs Location for Azure"
-          },
-          {
-            "name": "GermanyCentral",
-            "value": "GermanyCentral",
-            "description": "GermanyCentral Location for Azure"
-          },
-          {
-            "name": "GermanyNortheast",
-            "value": "GermanyNortheast",
-            "description": "GermanyNortheast Location for Azure"
-          },
-          {
-            "name": "ChinaNorth",
-            "value": "ChinaNorth",
-            "description": "ChinaNorth Location for Azure"
-          },
-          {
-            "name": "ChinaEast",
-            "value": "ChinaEast",
-            "description": "ChinaEast Location for Azure"
-          },
-          {
-            "name": "USGovArizona",
-            "value": "USGovArizona",
-            "description": "USGovArizona Location for Azure"
-          },
-          {
-            "name": "USGovTexas",
-            "value": "USGovTexas",
-            "description": "USGovTexas Location for Azure"
-          },
-          {
-            "name": "USGovIowa",
-            "value": "USGovIowa",
-            "description": "USGovIowa Location for Azure"
-          },
-          {
-            "name": "USGovVirginia",
-            "value": "USGovVirginia",
-            "description": "USGovVirginia Location for Azure"
-          },
-          {
-            "name": "USDoDCentral",
-            "value": "USDoDCentral",
-            "description": "USDoDCentral Location for Azure"
-          },
-          {
-            "name": "USDoDEast",
-            "value": "USDoDEast",
-            "description": "USDoDEast Location for Azure"
-          },
-          {
-            "name": "FranceCentral",
-            "value": "FranceCentral",
-            "description": "FranceCentral Location for Azure"
-          },
-          {
-            "name": "AustraliaCentral",
-            "value": "AustraliaCentral",
-            "description": "AustraliaCentral Location for Azure"
-          },
-          {
-            "name": "SouthAfricaNorth",
-            "value": "SouthAfricaNorth",
-            "description": "SouthAfricaNorth Location for Azure"
-          },
-          {
-            "name": "FranceSouth",
-            "value": "FranceSouth",
-            "description": "FranceSouth Location for Azure"
-          },
-          {
-            "name": "AustraliaCentral2",
-            "value": "AustraliaCentral2",
-            "description": "AustraliaCentral2 Location for Azure"
-          },
-          {
-            "name": "SouthAfricaWest",
-            "value": "SouthAfricaWest",
-            "description": "SouthAfricaWest Location for Azure"
-          },
-          {
-            "name": "GermanyNorth",
-            "value": "GermanyNorth",
-            "description": "GermanyNorth Location for Azure"
-          },
-          {
-            "name": "GermanyWestCentral",
-            "value": "GermanyWestCentral",
-            "description": "GermanyWestCentral Location for Azure"
-          },
-          {
-            "name": "NorwayEast",
-            "value": "NorwayEast",
-            "description": "NorwayEast Location for Azure"
-          },
-          {
-            "name": "NorwayWest",
-            "value": "NorwayWest",
-            "description": "NorwayWest Location for Azure"
-          },
-          {
-            "name": "ChinaEast2",
-            "value": "ChinaEast2",
-            "description": "ChinaEast2 Location for Azure"
-          },
-          {
-            "name": "ChinaNorth2",
-            "value": "ChinaNorth2",
-            "description": "ChinaNorth2 Location for Azure"
-          },
-          {
-            "name": "SwitzerlandNorth",
-            "value": "SwitzerlandNorth",
-            "description": "SwitzerlandNorth Location for Azure"
-          },
-          {
-            "name": "SwitzerlandWest",
-            "value": "SwitzerlandWest",
-            "description": "SwitzerlandWest Location for Azure"
-          },
-          {
-            "name": "UAENorth",
-            "value": "UAENorth",
-            "description": "UAENorth Location for Azure"
-          },
-          {
-            "name": "UAECentral",
-            "value": "UAECentral",
-            "description": "UAECentral Location for Azure"
-          },
-          {
-            "name": "UsNatEast",
-            "value": "UsNatEast",
-            "description": "UsNatEast Location for Azure"
-          },
-          {
-            "name": "UsNatWest",
-            "value": "UsNatWest",
-            "description": "UsNatWest Location for Azure"
-          },
-          {
-            "name": "UsSecEast",
-            "value": "UsSecEast",
-            "description": "UsSecEast Location for Azure"
-          },
-          {
-            "name": "UsSecCentral",
-            "value": "UsSecCentral",
-            "description": "UsSecCentral Location for Azure"
-          },
-          {
-            "name": "UsSecWest",
-            "value": "UsSecWest",
-            "description": "UsSecWest Location for Azure"
-          },
-          {
-            "name": "SwedenCentral",
-            "value": "SwedenCentral",
-            "description": "SwedenCentral Location for Azure"
-          },
-          {
-            "name": "QatarCentral",
-            "value": "QatarCentral",
-            "description": "QatarCentral Location for Azure"
-          },
-          {
-            "name": "JioIndiaWest",
-            "value": "JioIndiaWest",
-            "description": "JioIndiaWest Location for Azure"
-          },
-          {
-            "name": "ItalyNorth",
-            "value": "ItalyNorth",
-            "description": "ItalyNorth Location for Azure"
-          },
-          {
-            "name": "PolandCentral",
-            "value": "PolandCentral",
-            "description": "PolandCentral Location for Azure"
-          },
-          {
-            "name": "IsraelCentral",
-            "value": "IsraelCentral",
-            "description": "IsraelCentral Location for Azure"
-          },
-          {
-            "name": "MexicoCentral",
-            "value": "MexicoCentral",
-            "description": "MexicoCentral Location for Azure"
-          },
-          {
-            "name": "NewZealandNorth",
-            "value": "NewZealandNorth",
-            "description": "NewZealandNorth Location for Azure"
-          },
-          {
-            "name": "SpainCentral",
-            "value": "SpainCentral",
-            "description": "SpainCentral Location for Azure"
           }
         ]
       }
@@ -7014,11 +6636,13 @@
         },
         "createdTimestamp": {
           "type": "string",
+          "format": "date-time",
           "description": "Gets the created timestamp.",
           "readOnly": true
         },
         "updatedTimestamp": {
           "type": "string",
+          "format": "date-time",
           "description": "Gets the updated timestamp.",
           "readOnly": true
         },

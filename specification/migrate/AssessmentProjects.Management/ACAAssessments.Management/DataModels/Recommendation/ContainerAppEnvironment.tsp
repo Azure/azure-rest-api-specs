@@ -31,11 +31,11 @@ model ContainerAppEnvironment {
 
   @doc("Gets the created timestamp.")
   @visibility(Lifecycle.Read)
-  createdTimestamp?: string;
+  createdTimestamp?: utcDateTime;
 
   @doc("Gets the updated timestamp.")
   @visibility(Lifecycle.Read)
-  updatedTimestamp?: string;
+  updatedTimestamp?: utcDateTime;
 
   @doc("Gets list of container apps in this environment.")
   @visibility(Lifecycle.Read)

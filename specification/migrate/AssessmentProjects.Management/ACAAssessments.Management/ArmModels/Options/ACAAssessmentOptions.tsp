@@ -47,7 +47,7 @@ model ACAAssessmentOptionsOutboundEdgeGroup {
   tiers: PricingTier[];
 
   @doc("Gets or sets the Azure Locations.")
-  targetLocations: AzureLocation[];
+  targetLocations: azureLocation[];
 
   @doc("Gets or sets the Azure Currency.")
   currencies: AzureCurrency[];

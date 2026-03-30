@@ -259,7 +259,7 @@ model MoreInformation {
 @doc("The assessment options outbound edge group base.")
 model AssessmentOptionsOutboundEdgeGroupBase {
   @doc("Gets or sets the Azure Locations.")
-  targetLocations: AzureLocation[];
+  targetLocations: azureLocation[];
 
   @doc("Gets or sets the Azure Currency.")
   currencies: AzureCurrency[];
