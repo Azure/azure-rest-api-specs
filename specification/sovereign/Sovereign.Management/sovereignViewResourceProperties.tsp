@@ -112,7 +112,7 @@ model SovereignViewComplianceOverallSummary {
 }
 
 @added(Versions.Preview20260315)
-@doc("The compliance summary for a specific dimension (policy inititative) in the sovereign view compliance summary action.")
+@doc("The compliance summary for a specific dimension (policy initiative) in the sovereign view compliance summary action.")
 model SovereignViewComplianceDimensionSummary {
   @doc("The name of the policy initiative associated with this dimension.")
   policyInitiativeId: string;
