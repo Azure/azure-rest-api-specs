@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 using Azure.Core;
 using TypeSpec.OpenAPI;
 
-namespace SecurityCenter;
+namespace Microsoft.Security;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationResultsOperationGroup {

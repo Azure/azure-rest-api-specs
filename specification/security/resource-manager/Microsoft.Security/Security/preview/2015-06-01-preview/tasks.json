@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Defender for Cloud",
+    "version": "2015-06-01-preview",
     "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2015-06-01-preview"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,95 +30,66 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "Tasks"
+    }
+  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/tasks": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/tasks": {
       "get": {
-        "x-ms-examples": {
-          "Get security recommendations tasks": {
-            "$ref": "./examples/Tasks/GetTasksSubscription_example.json"
-          }
-        },
+        "operationId": "Tasks_ListByHomeRegion",
         "tags": [
           "Tasks"
         ],
         "description": "Recommended tasks that will help improve the security of the subscription proactively",
-        "operationId": "Tasks_List",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/ODataFilter"
+            "name": "ascLocation",
+            "in": "path",
+            "description": "The location where ASC stores the data of the subscription. can be retrieved from Get locations",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter. Optional.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SecurityTaskList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/tasks": {
-      "get": {
         "x-ms-examples": {
           "Get security recommendations tasks from security data location": {
             "$ref": "./examples/Tasks/GetTasksSubscriptionLocation_example.json"
-          }
-        },
-        "tags": [
-          "Tasks"
-        ],
-        "description": "Recommended tasks that will help improve the security of the subscription proactively",
-        "operationId": "Tasks_ListByHomeRegion",
-        "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "./common/v1/types.json#/parameters/AscLocation"
-          },
-          {
-            "$ref": "./common/v1/types.json#/parameters/ODataFilter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SecurityTaskList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
-            }
           }
         },
         "x-ms-pageable": {
@@ -123,129 +99,241 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/tasks/{taskName}": {
       "get": {
-        "x-ms-examples": {
-          "Get security recommendation task from security data location": {
-            "$ref": "./examples/Tasks/GetTaskSubscriptionLocation_example.json"
-          }
-        },
+        "operationId": "Tasks_GetSubscriptionLevelTask",
         "tags": [
           "Tasks"
         ],
         "description": "Recommended tasks that will help improve the security of the subscription proactively",
-        "operationId": "Tasks_GetSubscriptionLevelTask",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+            "name": "ascLocation",
+            "in": "path",
+            "description": "The location where ASC stores the data of the subscription. can be retrieved from Get locations",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/TaskName"
+            "name": "taskName",
+            "in": "path",
+            "description": "Name of the task object, will be a GUID",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SecurityTask"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get security recommendation task from security data location": {
+            "$ref": "./examples/Tasks/GetTaskSubscriptionLocation_example.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}": {
       "post": {
-        "x-ms-examples": {
-          "Change security recommendation task state": {
-            "$ref": "./examples/Tasks/UpdateTaskSubscriptionLocation_example.json"
-          }
-        },
+        "operationId": "Tasks_UpdateSubscriptionLevelTaskState",
         "tags": [
           "Tasks"
         ],
         "description": "Recommended tasks that will help improve the security of the subscription proactively",
-        "operationId": "Tasks_UpdateSubscriptionLevelTaskState",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+            "name": "ascLocation",
+            "in": "path",
+            "description": "The location where ASC stores the data of the subscription. can be retrieved from Get locations",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/TaskName"
+            "name": "taskName",
+            "in": "path",
+            "description": "Name of the task object, will be a GUID",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/TaskUpdateActionType"
+            "name": "taskUpdateActionType",
+            "in": "path",
+            "description": "Type of the action to do on the task",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Activate",
+              "Dismiss",
+              "Start",
+              "Resolve",
+              "Close"
+            ],
+            "x-ms-enum": {
+              "name": "TaskUpdateActionType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Activate",
+                  "value": "Activate",
+                  "description": "Activate"
+                },
+                {
+                  "name": "Dismiss",
+                  "value": "Dismiss",
+                  "description": "Dismiss"
+                },
+                {
+                  "name": "Start",
+                  "value": "Start",
+                  "description": "Start"
+                },
+                {
+                  "name": "Resolve",
+                  "value": "Resolve",
+                  "description": "Resolve"
+                },
+                {
+                  "name": "Close",
+                  "value": "Close",
+                  "description": "Close"
+                }
+              ]
+            }
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Change security recommendation task state": {
+            "$ref": "./examples/Tasks/UpdateTaskSubscriptionLocation_example.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/tasks": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/tasks": {
       "get": {
-        "x-ms-examples": {
-          "Get security recommendation tasks in a resource group": {
-            "$ref": "./examples/Tasks/GetTasksResourceGroupLocation_example.json"
-          }
-        },
+        "operationId": "Tasks_List",
         "tags": [
           "Tasks"
         ],
         "description": "Recommended tasks that will help improve the security of the subscription proactively",
-        "operationId": "Tasks_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "./common/v1/types.json#/parameters/AscLocation"
-          },
-          {
-            "$ref": "./common/v1/types.json#/parameters/ODataFilter"
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter. Optional.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SecurityTaskList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get security recommendations tasks": {
+            "$ref": "./examples/Tasks/GetTasksSubscription_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/tasks": {
+      "get": {
+        "operationId": "Tasks_ListByResourceGroup",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Recommended tasks that will help improve the security of the subscription proactively",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "ascLocation",
+            "in": "path",
+            "description": "The location where ASC stores the data of the subscription. can be retrieved from Get locations",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter. Optional.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityTaskList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get security recommendation tasks in a resource group": {
+            "$ref": "./examples/Tasks/GetTasksResourceGroupLocation_example.json"
           }
         },
         "x-ms-pageable": {
@@ -255,111 +343,216 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/tasks/{taskName}": {
       "get": {
-        "x-ms-examples": {
-          "Get security recommendation task in a resource group": {
-            "$ref": "./examples/Tasks/GetTaskResourceGroupLocation_example.json"
-          }
-        },
+        "operationId": "Tasks_GetResourceGroupLevelTask",
         "tags": [
           "Tasks"
         ],
         "description": "Recommended tasks that will help improve the security of the subscription proactively",
-        "operationId": "Tasks_GetResourceGroupLevelTask",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+            "name": "ascLocation",
+            "in": "path",
+            "description": "The location where ASC stores the data of the subscription. can be retrieved from Get locations",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/TaskName"
+            "name": "taskName",
+            "in": "path",
+            "description": "Name of the task object, will be a GUID",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SecurityTask"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get security recommendation task in a resource group": {
+            "$ref": "./examples/Tasks/GetTaskResourceGroupLocation_example.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}": {
       "post": {
-        "x-ms-examples": {
-          "Change security recommendation task state": {
-            "$ref": "./examples/Tasks/UpdateTaskResourceGroupLocation_example.json"
-          }
-        },
+        "operationId": "Tasks_UpdateResourceGroupLevelTaskState",
         "tags": [
           "Tasks"
         ],
         "description": "Recommended tasks that will help improve the security of the subscription proactively",
-        "operationId": "Tasks_UpdateResourceGroupLevelTaskState",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+            "name": "ascLocation",
+            "in": "path",
+            "description": "The location where ASC stores the data of the subscription. can be retrieved from Get locations",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/TaskName"
+            "name": "taskName",
+            "in": "path",
+            "description": "Name of the task object, will be a GUID",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/TaskUpdateActionType"
+            "name": "taskUpdateActionType",
+            "in": "path",
+            "description": "Type of the action to do on the task",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Activate",
+              "Dismiss",
+              "Start",
+              "Resolve",
+              "Close"
+            ],
+            "x-ms-enum": {
+              "name": "TaskUpdateActionType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Activate",
+                  "value": "Activate",
+                  "description": "Activate"
+                },
+                {
+                  "name": "Dismiss",
+                  "value": "Dismiss",
+                  "description": "Dismiss"
+                },
+                {
+                  "name": "Start",
+                  "value": "Start",
+                  "description": "Start"
+                },
+                {
+                  "name": "Resolve",
+                  "value": "Resolve",
+                  "description": "Resolve"
+                },
+                {
+                  "name": "Close",
+                  "value": "Close",
+                  "description": "Close"
+                }
+              ]
+            }
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Change security recommendation task state": {
+            "$ref": "./examples/Tasks/UpdateTaskResourceGroupLocation_example.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "SecurityTaskList": {
+    "CloudError": {
       "type": "object",
-      "description": "List of security task recommendations",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SecurityTask"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
           "type": "string",
-          "description": "The URI to fetch the next page."
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
         }
       }
     },
@@ -368,87 +561,80 @@
       "description": "Security task that we recommend to do in order to strengthen security",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SecurityTaskProperties"
+          "$ref": "#/definitions/SecurityTaskProperties",
+          "description": "Describes properties of a task.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "./common/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
-    "SecurityTaskProperties": {
+    "SecurityTaskList": {
       "type": "object",
-      "description": "Describes properties of a task.",
+      "description": "List of security task recommendations",
       "properties": {
-        "state": {
-          "readOnly": true,
-          "type": "string",
-          "description": "State of the task (Active, Resolved etc.)"
+        "value": {
+          "type": "array",
+          "description": "The SecurityTask items on this page",
+          "items": {
+            "$ref": "#/definitions/SecurityTask"
+          },
+          "readOnly": true
         },
-        "creationTimeUtc": {
-          "readOnly": true,
+        "nextLink": {
           "type": "string",
-          "format": "date-time",
-          "description": "The time this task was discovered in UTC"
-        },
-        "securityTaskParameters": {
-          "$ref": "#/definitions/SecurityTaskParameters"
-        },
-        "lastStateChangeTimeUtc": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The time this task's details were last changed in UTC"
-        },
-        "subState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Additional data on the state of the task"
+          "description": "The URI to fetch the next page.",
+          "readOnly": true
         }
       }
     },
     "SecurityTaskParameters": {
       "type": "object",
       "description": "Changing set of properties, depending on the task type that is derived from the name field",
-      "additionalProperties": true,
       "properties": {
         "name": {
-          "readOnly": true,
           "type": "string",
-          "description": "Name of the task type"
+          "description": "Name of the task type",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {}
+    },
+    "SecurityTaskProperties": {
+      "type": "object",
+      "description": "Describes properties of a task.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "State of the task (Active, Resolved etc.)",
+          "readOnly": true
+        },
+        "creationTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time this task was discovered in UTC",
+          "readOnly": true
+        },
+        "securityTaskParameters": {
+          "$ref": "#/definitions/SecurityTaskParameters",
+          "description": "Changing set of properties, depending on the task type that is derived from the name field"
+        },
+        "lastStateChangeTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time this task's details were last changed in UTC",
+          "readOnly": true
+        },
+        "subState": {
+          "type": "string",
+          "description": "Additional data on the state of the task",
+          "readOnly": true
         }
       }
     }
   },
-  "parameters": {
-    "TaskName": {
-      "name": "taskName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the task object, will be a GUID",
-      "x-ms-parameter-location": "method"
-    },
-    "TaskUpdateActionType": {
-      "name": "taskUpdateActionType",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "Activate",
-        "Dismiss",
-        "Start",
-        "Resolve",
-        "Close"
-      ],
-      "x-ms-enum": {
-        "name": "TaskUpdateActionType",
-        "modelAsString": true
-      },
-      "description": "Type of the action to do on the task",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

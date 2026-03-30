@@ -1,0 +1,50 @@
+import "./Alerts.Management/main.tsp";
+import "./AlertsSuppressionRules.Management/main.tsp";
+import "./ApiCollections.Management/main.tsp";
+import "./Applications.Management/main.tsp";
+import "./Assessment.Management/main.tsp";
+import "./ATPSettings.Management/main.tsp";
+import "./Automations.Management/main.tsp";
+import "./CompianceResults.Management/main.tsp";
+import "./DefenderForStorage.Management/main.tsp";
+import "./Governance.Management/main.tsp";
+import "./HealthReports.Management/main.tsp";
+import "./IoTSecurity.Management/main.tsp";
+import "./LegacySettings.management/main.tsp";
+import "./Locations.Management/main.tsp";
+import "./MdeOnboarding.Management/main.tsp";
+import "./Operations.Management/main.tsp";
+import "./Pricings.Management/main.tsp";
+import "./PrivateLinks.Management/main.tsp";
+import "./RegulatoryCompliance.Management/main.tsp";
+import "./SecureScore.Managment/main.tsp";
+import "./SecurityConnectors.Management/main.tsp";
+import "./SecurityConnectorsDevOps.Management/main.tsp";
+import "./SecurityOperators.Management/main.tsp";
+import "./SecuritySolutions.Management/main.tsp";
+import "./SecurityStandards.Management/main.tsp";
+import "./SensitivitySettings.Management/main.tsp";
+import "./ServerVulnerabilityAssessmentsSettings.Management/main.tsp";
+import "./Settings.management/main.tsp";
+import "./SqlVulnerabilityAssessments.Management/main.tsp";
+import "./Standards.Managment/main.tsp";
+import "./SubAssessments.Management/main.tsp";
+import "./Tasks.Management/main.tsp";
+import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
+
+using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.Core;
+using Microsoft.Security;
+using SecurityCenter;
+
+@client({
+  name: "CombineClient",
+  service: [Microsoft.Security, SecurityCenter],
+  autoMergeService: true,
+})
+namespace CombineClient;

@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Defender for Cloud",
+    "version": "2022-05-01",
     "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2022-05-01"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,47 +30,52 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "Settings"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/settings": {
       "get": {
-        "x-ms-examples": {
-          "Get settings of subscription": {
-            "$ref": "./examples/Settings/GetSettings_example.json"
-          }
-        },
+        "operationId": "Settings_List",
         "tags": [
           "Settings"
         ],
         "description": "Settings about different configurations in Microsoft Defender for Cloud",
-        "operationId": "Settings_List",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SettingsList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get settings of subscription": {
+            "$ref": "./examples/Settings/GetSettings_example.json"
           }
         },
         "x-ms-pageable": {
@@ -75,128 +85,196 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/settings/{settingName}": {
       "get": {
-        "x-ms-examples": {
-          "Get a setting on subscription": {
-            "$ref": "./examples/Settings/GetSetting_example.json"
-          }
-        },
+        "operationId": "Settings_Get",
         "tags": [
           "Settings"
         ],
         "description": "Settings of different configurations in Microsoft Defender for Cloud",
-        "operationId": "Settings_Get",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SettingName"
+            "name": "settingName",
+            "in": "path",
+            "description": "The name of the setting",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "MCAS",
+              "WDATP",
+              "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW",
+              "WDATP_UNIFIED_SOLUTION",
+              "Sentinel"
+            ],
+            "x-ms-enum": {
+              "name": "SettingName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "MCAS",
+                  "value": "MCAS",
+                  "description": "MCAS"
+                },
+                {
+                  "name": "WDATP",
+                  "value": "WDATP",
+                  "description": "WDATP"
+                },
+                {
+                  "name": "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW",
+                  "value": "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW",
+                  "description": "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW"
+                },
+                {
+                  "name": "WDATP_UNIFIED_SOLUTION",
+                  "value": "WDATP_UNIFIED_SOLUTION",
+                  "description": "WDATP_UNIFIED_SOLUTION"
+                },
+                {
+                  "name": "Sentinel",
+                  "value": "Sentinel",
+                  "description": "Sentinel"
+                }
+              ]
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Setting"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a setting on subscription": {
+            "$ref": "./examples/Settings/GetSetting_example.json"
           }
         }
       },
       "put": {
-        "x-ms-examples": {
-          "Update a setting for subscription": {
-            "$ref": "./examples/Settings/UpdateSetting_example.json"
-          }
-        },
+        "operationId": "Settings_Update",
         "tags": [
           "Settings"
         ],
         "description": "updating settings about different configurations in Microsoft Defender for Cloud",
-        "operationId": "Settings_Update",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SettingName"
+            "name": "settingName",
+            "in": "path",
+            "description": "The name of the setting",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "MCAS",
+              "WDATP",
+              "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW",
+              "WDATP_UNIFIED_SOLUTION",
+              "Sentinel"
+            ],
+            "x-ms-enum": {
+              "name": "SettingName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "MCAS",
+                  "value": "MCAS",
+                  "description": "MCAS"
+                },
+                {
+                  "name": "WDATP",
+                  "value": "WDATP",
+                  "description": "WDATP"
+                },
+                {
+                  "name": "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW",
+                  "value": "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW",
+                  "description": "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW"
+                },
+                {
+                  "name": "WDATP_UNIFIED_SOLUTION",
+                  "value": "WDATP_UNIFIED_SOLUTION",
+                  "description": "WDATP_UNIFIED_SOLUTION"
+                },
+                {
+                  "name": "Sentinel",
+                  "value": "Sentinel",
+                  "description": "Sentinel"
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/Setting"
+            "name": "setting",
+            "in": "body",
+            "description": "Setting object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Resource 'Setting' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Setting"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update a setting for subscription": {
+            "$ref": "./examples/Settings/UpdateSetting_example.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "SettingsList": {
+    "AlertSyncSettingProperties": {
       "type": "object",
-      "description": "Subscription settings list.",
+      "description": "The alert sync setting properties",
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "The settings list.",
-          "items": {
-            "$ref": "#/definitions/Setting"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page."
-        }
-      }
-    },
-    "DataExportSettings": {
-      "type": "object",
-      "description": "Represents a data export setting",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Data export setting data",
-          "$ref": "#/definitions/DataExportSettingProperties"
+        "enabled": {
+          "type": "boolean",
+          "description": "Is the alert sync setting enabled"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Setting"
-        }
-      ],
-      "x-ms-discriminator-value": "DataExportSettings"
+      "required": [
+        "enabled"
+      ]
     },
     "AlertSyncSettings": {
       "type": "object",
       "description": "Represents an alert sync setting",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertSyncSettingProperties",
           "description": "Alert sync setting data",
-          "$ref": "#/definitions/AlertSyncSettingProperties"
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -206,44 +284,55 @@
       ],
       "x-ms-discriminator-value": "AlertSyncSettings"
     },
-    "Setting": {
+    "CloudError": {
       "type": "object",
-      "description": "The kind of the security setting",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "the kind of the settings string",
-          "enum": [
-            "DataExportSettings",
-            "AlertSuppressionSetting",
-            "AlertSyncSettings"
-          ],
-          "x-ms-enum": {
-            "name": "SettingKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "DataExportSettings"
-              },
-              {
-                "value": "AlertSuppressionSetting"
-              },
-              {
-                "value": "AlertSyncSettings"
-              }
-            ]
-          }
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
         }
       },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "./common/v1/types.json#/definitions/Resource"
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
         }
-      ]
+      },
+      "x-ms-external": true
     },
     "DataExportSettingProperties": {
       "type": "object",
@@ -258,49 +347,108 @@
         "enabled"
       ]
     },
-    "AlertSyncSettingProperties": {
+    "DataExportSettings": {
       "type": "object",
-      "description": "The alert sync setting properties",
+      "description": "Represents a data export setting",
       "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Is the alert sync setting enabled"
+        "properties": {
+          "$ref": "#/definitions/DataExportSettingProperties",
+          "description": "Data export setting data",
+          "x-ms-client-flatten": true
         }
       },
-      "required": [
-        "enabled"
-      ]
-    }
-  },
-  "parameters": {
-    "SettingName": {
-      "name": "settingName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the setting",
-      "enum": [
-        "MCAS",
-        "WDATP",
-        "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW",
-        "WDATP_UNIFIED_SOLUTION",
-        "Sentinel"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Setting"
+        }
       ],
-      "x-ms-enum": {
-        "name": "SettingName",
-        "modelAsString": true
-      },
-      "x-ms-parameter-location": "method"
+      "x-ms-discriminator-value": "DataExportSettings"
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
     },
     "Setting": {
-      "name": "setting",
-      "in": "body",
-      "required": true,
-      "description": "Setting object",
-      "schema": {
-        "$ref": "#/definitions/Setting"
+      "type": "object",
+      "description": "The kind of the security setting",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/SettingKind",
+          "description": "the kind of the settings string"
+        }
       },
-      "x-ms-parameter-location": "method"
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SettingKind": {
+      "type": "string",
+      "description": "the kind of the settings string",
+      "enum": [
+        "DataExportSettings",
+        "AlertSuppressionSetting",
+        "AlertSyncSettings"
+      ],
+      "x-ms-enum": {
+        "name": "SettingKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataExportSettings",
+            "value": "DataExportSettings",
+            "description": "DataExportSettings"
+          },
+          {
+            "name": "AlertSuppressionSetting",
+            "value": "AlertSuppressionSetting",
+            "description": "AlertSuppressionSetting"
+          },
+          {
+            "name": "AlertSyncSettings",
+            "value": "AlertSyncSettings",
+            "description": "AlertSyncSettings"
+          }
+        ]
+      }
+    },
+    "SettingsList": {
+      "type": "object",
+      "description": "Subscription settings list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Setting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
     }
-  }
+  },
+  "parameters": {}
 }

@@ -1,22 +1,27 @@
 {
   "parameters": {
     "api-version": "2023-12-01-preview",
-    "subscriptionId": "a5caac9c-5c04-49af-b3d0-e204f40345d5",
-    "resourceGroupName": "exampleResourceGroup"
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "a5caac9c-5c04-49af-b3d0-e204f40345d5"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/e4272367-5645-4c4e-9c67-3b74b59a6982/resourceGroups/exampleResourceGroup/providers/Microsoft.Security/automations/exampleAutomation",
             "name": "exampleAutomation",
             "type": "Microsoft.Security/automations",
             "etag": "etag value",
+            "id": "/subscriptions/e4272367-5645-4c4e-9c67-3b74b59a6982/resourceGroups/exampleResourceGroup/providers/Microsoft.Security/automations/exampleAutomation",
             "location": "Central US",
-            "tags": {},
             "properties": {
               "description": "An example of a security automation that triggers one LogicApp resource (myTest1) on any security assessment of type customAssessment",
+              "actions": [
+                {
+                  "actionType": "LogicApp",
+                  "logicAppResourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest1"
+                }
+              ],
               "isEnabled": true,
               "scopes": [
                 {
@@ -31,26 +36,23 @@
                     {
                       "rules": [
                         {
-                          "propertyJPath": "$.Entity.AssessmentType",
-                          "propertyType": "String",
                           "expectedValue": "customAssessment",
-                          "operator": "Equals"
+                          "operator": "Equals",
+                          "propertyJPath": "$.Entity.AssessmentType",
+                          "propertyType": "String"
                         }
                       ]
                     }
                   ]
                 }
-              ],
-              "actions": [
-                {
-                  "logicAppResourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest1",
-                  "actionType": "LogicApp"
-                }
               ]
-            }
+            },
+            "tags": {}
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Automations_ListByResourceGroup",
+  "title": "List all security automations of a specified resource group"
 }

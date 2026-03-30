@@ -1,0 +1,44 @@
+parameters:
+  "service-dir":
+    default: "sdk/security"
+options:
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/security"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-security"
+    namespace: "azure.mgmt.security"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-security"
+    service-dir: "sdk/security"
+    namespace: "com.azure.resourcemanager.security"
+    service-name: "Security"
+    flavor: azure
+    use-object-for-unknown: true
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    float32-as-double: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-security"
+    service-dir: "sdk/security"
+    flavor: "azure"
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-security"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/security"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsecurity"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsecurity"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

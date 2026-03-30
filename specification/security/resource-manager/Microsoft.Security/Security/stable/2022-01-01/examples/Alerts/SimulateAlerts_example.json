@@ -1,11 +1,7 @@
 {
   "parameters": {
-    "api-version": "2022-01-01",
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-    "ascLocation": "centralus",
     "alertSimulatorRequestBody": {
       "properties": {
-        "kind": "Bundles",
         "bundles": [
           "AppServices",
           "DNS",
@@ -16,11 +12,17 @@
           "StorageAccounts",
           "VirtualMachines",
           "CosmosDbs"
-        ]
+        ],
+        "kind": "Bundles"
       }
-    }
+    },
+    "api-version": "2022-01-01",
+    "ascLocation": "centralus",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
   },
   "responses": {
     "202": {}
-  }
+  },
+  "operationId": "Alerts_Simulate",
+  "title": "Simulate security alerts on a subscription"
 }

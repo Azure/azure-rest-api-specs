@@ -8,176 +8,178 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup1/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorAws",
             "name": "exampleSecurityConnectorAws",
             "type": "Microsoft.Security/securityConnectors",
             "etag": "etag value",
+            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup1/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorAws",
             "kind": "",
             "location": "Central US",
-            "tags": {},
-            "systemData": {
-              "createdBy": "user@contoso.com",
-              "createdByType": "User",
-              "createdAt": "2021-08-31T13:47:50.328Z",
-              "lastModifiedBy": "user@contoso.com",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2021-08-31T13:47:50.328Z"
-            },
             "properties": {
-              "hierarchyIdentifier": "exampleHierarchyId",
               "environmentData": {
                 "environmentType": "AwsAccount",
                 "scanInterval": 4
               },
               "environmentName": "AWS",
+              "hierarchyIdentifier": "exampleHierarchyId",
               "offerings": [
                 {
-                  "offeringType": "CspmMonitorAws",
                   "nativeCloudConnection": {
                     "cloudRoleArn": "arn:aws:iam::00000000:role/ASCMonitor"
-                  }
+                  },
+                  "offeringType": "CspmMonitorAws"
                 }
               ]
-            }
+            },
+            "systemData": {
+              "createdAt": "2021-08-31T13:47:50.328Z",
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-31T13:47:50.328Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
           },
           {
-            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup2/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorAwsOrganization",
             "name": "exampleSecurityConnectorAwsOrganization",
             "type": "Microsoft.Security/securityConnectors",
             "etag": "etag value",
+            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup2/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorAwsOrganization",
             "kind": "",
             "location": "Central US",
-            "tags": {},
-            "systemData": {
-              "createdBy": "user@contoso.com",
-              "createdByType": "User",
-              "createdAt": "2021-12-15T13:47:50.328Z",
-              "lastModifiedBy": "user@contoso.com",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2021-12-15T13:47:50.328Z"
-            },
             "properties": {
-              "hierarchyIdentifier": "exampleHierarchyId",
               "environmentData": {
                 "environmentType": "AwsAccount",
-                "scanInterval": 4,
                 "organizationalData": {
-                  "organizationMembershipType": "Organization",
-                  "stacksetName": "myStackSetName",
                   "excludedAccountIds": [
                     "excludedAccountIdExample"
-                  ]
-                }
+                  ],
+                  "organizationMembershipType": "Organization",
+                  "stacksetName": "myStackSetName"
+                },
+                "scanInterval": 4
               },
               "environmentName": "AWS",
+              "hierarchyIdentifier": "exampleHierarchyId",
               "offerings": [
                 {
-                  "offeringType": "CspmMonitorAws",
                   "nativeCloudConnection": {
                     "cloudRoleArn": "arn:aws:iam::00000000:role/ASCMonitor"
-                  }
+                  },
+                  "offeringType": "CspmMonitorAws"
                 }
               ]
-            }
+            },
+            "systemData": {
+              "createdAt": "2021-12-15T13:47:50.328Z",
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-12-15T13:47:50.328Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
           },
           {
-            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorGithub",
             "name": "githubTest",
-            "etag": "etag value",
             "type": "Microsoft.Security/securityconnectors",
-            "location": "centralus",
+            "etag": "etag value",
+            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorGithub",
             "kind": "",
-            "tags": {},
-            "systemData": {
-              "createdBy": "user@contoso.com",
-              "createdByType": "User",
-              "createdAt": "2021-12-15T13:47:50.328Z",
-              "lastModifiedBy": "user@contoso.com",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2021-12-15T13:47:50.328Z"
-            },
+            "location": "centralus",
             "properties": {
+              "environmentData": {
+                "environmentType": "GithubScope"
+              },
+              "environmentName": "Github",
               "hierarchyIdentifier": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.SecurityDevops/githubConnectors/exampleGithubConnector",
-              "environmentName": "Github",
-              "environmentData": {
-                "environmentType": "GithubScope"
-              },
               "offerings": [
                 {
                   "offeringType": "CspmMonitorGithub"
                 }
               ]
-            }
-          },
-          {
-            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorAzureDevOpsConnectors",
-            "name": "AzureDevOpsTest",
-            "etag": "etag value",
-            "type": "Microsoft.Security/securityconnectors",
-            "location": "centralus",
-            "kind": "",
-            "tags": {},
+            },
             "systemData": {
+              "createdAt": "2021-12-15T13:47:50.328Z",
               "createdBy": "user@contoso.com",
               "createdByType": "User",
-              "createdAt": "2021-12-15T13:47:50.328Z",
+              "lastModifiedAt": "2021-12-15T13:47:50.328Z",
               "lastModifiedBy": "user@contoso.com",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2021-12-15T13:47:50.328Z"
+              "lastModifiedByType": "User"
             },
+            "tags": {}
+          },
+          {
+            "name": "AzureDevOpsTest",
+            "type": "Microsoft.Security/securityconnectors",
+            "etag": "etag value",
+            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorAzureDevOpsConnectors",
+            "kind": "",
+            "location": "centralus",
             "properties": {
-              "hierarchyIdentifier": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.SecurityDevops/azureDevOpsConnectors/exampleAzureDevOpsConnector",
-              "environmentName": "Github",
               "environmentData": {
                 "environmentType": "GithubScope"
               },
+              "environmentName": "Github",
+              "hierarchyIdentifier": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.SecurityDevops/azureDevOpsConnectors/exampleAzureDevOpsConnector",
               "offerings": [
                 {
                   "offeringType": "CspmMonitorGithub"
                 }
               ]
-            }
+            },
+            "systemData": {
+              "createdAt": "2021-12-15T13:47:50.328Z",
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-12-15T13:47:50.328Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
           },
           {
-            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorGcp",
             "name": "exampleSecurityConnectorGcp",
             "type": "Microsoft.Security/securityConnectors",
             "etag": "etag value",
+            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorGcp",
             "kind": "",
             "location": "Central US",
-            "tags": {},
-            "systemData": {
-              "createdBy": "user@contoso.com",
-              "createdByType": "User",
-              "createdAt": "2021-12-15T13:47:50.328Z",
-              "lastModifiedBy": "user@contoso.com",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2021-12-15T13:47:50.328Z"
-            },
             "properties": {
-              "hierarchyIdentifier": "exampleHierarchyId",
               "environmentData": {
                 "environmentType": "GcpProject",
                 "projectDetails": {
-                  "projectNumber": "exampleHierarchyId",
                   "projectId": "My-0GCP-Project",
+                  "projectNumber": "exampleHierarchyId",
                   "workloadIdentityPoolId": "6c78da41157548d3b1d8b3c72effdf8c"
                 }
               },
               "environmentName": "GCP",
+              "hierarchyIdentifier": "exampleHierarchyId",
               "offerings": [
                 {
-                  "offeringType": "CspmMonitorGcp",
                   "nativeCloudConnection": {
-                    "workloadIdentityProviderId": "My workload identity provider Id",
-                    "serviceAccountEmailAddress": "capm@projectName.com"
-                  }
+                    "serviceAccountEmailAddress": "capm@projectName.com",
+                    "workloadIdentityProviderId": "My workload identity provider Id"
+                  },
+                  "offeringType": "CspmMonitorGcp"
                 }
               ]
-            }
+            },
+            "systemData": {
+              "createdAt": "2021-12-15T13:47:50.328Z",
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-12-15T13:47:50.328Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "SecurityConnectors_List",
+  "title": "List all security connectors of a specified subscription"
 }

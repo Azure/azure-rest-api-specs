@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Defender for Cloud",
+    "version": "2017-08-01",
     "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2017-08-01"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,47 +30,57 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "Compliance Results"
+    }
+  ],
   "paths": {
     "/{scope}/providers/Microsoft.Security/complianceResults": {
       "get": {
-        "x-ms-examples": {
-          "Get compliance results on subscription": {
-            "$ref": "./examples/ComplianceResults/ListComplianceResults_example.json"
-          }
-        },
+        "operationId": "ComplianceResults_List",
         "tags": [
           "Compliance Results"
         ],
         "description": "Security compliance results in the subscription",
-        "operationId": "ComplianceResults_List",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/Scope"
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ComplianceResultList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get compliance results on subscription": {
+            "$ref": "./examples/ComplianceResults/ListComplianceResults_example.json"
           }
         },
         "x-ms-pageable": {
@@ -75,79 +90,139 @@
     },
     "/{resourceId}/providers/Microsoft.Security/complianceResults/{complianceResultName}": {
       "get": {
-        "x-ms-examples": {
-          "Get compliance results on subscription": {
-            "$ref": "./examples/ComplianceResults/GetComplianceResults_example.json"
-          }
-        },
+        "operationId": "ComplianceResults_Get",
         "tags": [
           "Compliance Results"
         ],
         "description": "Security Compliance Result",
-        "operationId": "ComplianceResults_Get",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ComplianceResultName"
+            "name": "complianceResultName",
+            "in": "path",
+            "description": "The compliance result key.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ComplianceResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get compliance results on subscription": {
+            "$ref": "./examples/ComplianceResults/GetComplianceResults_example.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "ComplianceResultList": {
-      "description": "List of compliance results response",
-      "required": [
-        "value"
-      ],
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of compliance results",
-          "items": {
-            "$ref": "#/definitions/ComplianceResult"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page."
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
         }
-      }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
     },
     "ComplianceResult": {
       "type": "object",
       "description": "a compliance result",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ComplianceResultProperties",
           "description": "Compliance result data",
-          "$ref": "#/definitions/ComplianceResultProperties"
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "./common/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "ComplianceResultList": {
+      "type": "object",
+      "description": "List of compliance results response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ComplianceResult items on this page",
+          "items": {
+            "$ref": "#/definitions/ComplianceResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "ComplianceResultProperties": {
@@ -155,49 +230,63 @@
       "description": "Compliance result data",
       "properties": {
         "resourceStatus": {
-          "type": "string",
-          "readOnly": true,
+          "$ref": "#/definitions/ResourceStatus",
           "description": "The status of the resource regarding a single assessment",
-          "enum": [
-            "Healthy",
-            "NotApplicable",
-            "OffByPolicy",
-            "NotHealthy"
-          ],
-          "x-ms-enum": {
-            "name": "resourceStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Healthy",
-                "description": "This assessment on the resource is healthy"
-              },
-              {
-                "value": "NotApplicable",
-                "description": "This assessment is not applicable to this resource"
-              },
-              {
-                "value": "OffByPolicy",
-                "description": "This assessment is turned off by policy on this subscription"
-              },
-              {
-                "value": "NotHealthy",
-                "description": "This assessment on the resource is not healthy"
-              }
-            ]
-          }
+          "readOnly": true
         }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceStatus": {
+      "type": "string",
+      "description": "The status of the resource regarding a single assessment",
+      "enum": [
+        "Healthy",
+        "NotApplicable",
+        "OffByPolicy",
+        "NotHealthy"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "This assessment on the resource is healthy"
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "This assessment is not applicable to this resource"
+          },
+          {
+            "name": "OffByPolicy",
+            "value": "OffByPolicy",
+            "description": "This assessment is turned off by policy on this subscription"
+          },
+          {
+            "name": "NotHealthy",
+            "value": "NotHealthy",
+            "description": "This assessment on the resource is not healthy"
+          }
+        ]
       }
     }
   },
-  "parameters": {
-    "ComplianceResultName": {
-      "name": "complianceResultName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "name of the desired assessment compliance result",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

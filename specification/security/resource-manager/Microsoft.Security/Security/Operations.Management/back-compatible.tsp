@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using SecurityCenter;
+using Microsoft.Security;
 
 @@clientLocation(OperationResultsOperationGroup.get, "OperationResults");
 

@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "Data Sensitivity Settings",
+    "version": "2023-02-15-preview",
     "description": "API spec for Microsoft.Security Data Sensitivity Settings",
-    "version": "2023-02-15-preview"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,108 +30,40 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "sensitivitySettings"
+    }
+  ],
   "paths": {
-    "/providers/Microsoft.Security/sensitivitySettings/current": {
-      "put": {
-        "tags": [
-          "sensitivitySettings"
-        ],
-        "description": "Create or update data sensitivity settings for sensitive data discovery",
-        "operationId": "SensitivitySettings_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "in": "body",
-            "name": "sensitivitySettings",
-            "description": "The data sensitivity settings to update",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateSensitivitySettingsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success of the sensitivity settings update",
-            "schema": {
-              "$ref": "#/definitions/GetSensitivitySettingsResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update sensitivity settings": {
-            "$ref": "./examples/SensitivitySettings/PutSensitivitySettings_example.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "sensitivitySettings"
-        ],
-        "description": "Gets data sensitivity settings for sensitive data discovery",
-        "operationId": "SensitivitySettings_Get",
-        "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success of the sensitivity settings get",
-            "schema": {
-              "$ref": "#/definitions/GetSensitivitySettingsResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get sensitivity settings": {
-            "$ref": "./examples/SensitivitySettings/GetSensitivitySettings_example.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Security/sensitivitySettings": {
       "get": {
-        "description": "Gets a list with a single sensitivity settings resource",
         "operationId": "SensitivitySettings_List",
+        "description": "Gets a list with a single sensitivity settings resource",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success of the sensitivity settings list get",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/GetSensitivitySettingsListResponse"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -136,99 +73,168 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Security/sensitivitySettings/current": {
+      "get": {
+        "operationId": "SensitivitySettings_Get",
+        "tags": [
+          "sensitivitySettings"
+        ],
+        "description": "Gets data sensitivity settings for sensitive data discovery",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetSensitivitySettingsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get sensitivity settings": {
+            "$ref": "./examples/SensitivitySettings/GetSensitivitySettings_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SensitivitySettings_CreateOrUpdate",
+        "tags": [
+          "sensitivitySettings"
+        ],
+        "description": "Create or update data sensitivity settings for sensitive data discovery",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "sensitivitySettings",
+            "in": "body",
+            "description": "The data sensitivity settings to update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSensitivitySettingsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GetSensitivitySettingsResponse' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GetSensitivitySettingsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update sensitivity settings": {
+            "$ref": "./examples/SensitivitySettings/PutSensitivitySettings_example.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "SensitiveInfoTypesIds": {
-      "description": "List of selected sensitive info types' IDs.",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "format": "uuid"
-      }
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
-    "Label": {
-      "description": "Microsoft information protection sensitivity label",
+    "BuiltInInfoType": {
       "type": "object",
+      "description": "Pre-configured sensitive information type",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The display name of the label"
+          "description": "Display name of the info type"
         },
         "id": {
           "type": "string",
-          "description": "The ID of the label",
-          "format": "uuid"
-        },
-        "order": {
-          "type": "number",
-          "description": "Labels are ordered by sensitivity level. The higher the order of the label, the more sensitive it is."
-        }
-      }
-    },
-    "GetSensitivitySettingsResponse": {
-      "x-ms-azure-resource": true,
-      "type": "object",
-      "description": "Data sensitivity settings for sensitive data discovery",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the sensitivity settings",
-          "readOnly": true
+          "format": "uuid",
+          "description": "Id of the info type"
         },
         "type": {
           "type": "string",
-          "description": "The type of the sensitivity settings",
-          "readOnly": true
-        },
-        "name": {
+          "description": "Category of the built-in info type"
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
           "type": "string",
-          "description": "The name of the sensitivity settings",
+          "description": "The error code.",
           "readOnly": true
         },
-        "properties": {
-          "type": "object",
-          "description": "The sensitivity settings properties",
-          "properties": {
-            "sensitiveInfoTypesIds": {
-              "$ref": "#/definitions/SensitiveInfoTypesIds"
-            },
-            "sensitivityThresholdLabelOrder": {
-              "type": "number",
-              "description": "The order of the sensitivity threshold label. Any label at or above this order will be considered sensitive. If set to -1, sensitivity by labels is turned off"
-            },
-            "sensitivityThresholdLabelId": {
-              "type": "string",
-              "description": "The id of the sensitivity threshold label. Any label at or above this rank will be considered sensitive.",
-              "format": "uuid"
-            },
-            "mipInformation": {
-              "description": "Microsoft information protection built-in and custom information types, labels, and integration status.",
-              "type": "object",
-              "properties": {
-                "mipIntegrationStatus": {
-                  "$ref": "#/definitions/MipIntegrationStatus"
-                },
-                "labels": {
-                  "$ref": "#/definitions/Labels"
-                },
-                "customInfoTypes": {
-                  "description": "List of custom user-defined information types",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/InfoType"
-                  }
-                },
-                "builtInInfoTypes": {
-                  "description": "List of pre-configured sensitive information types",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/BuiltInInfoType"
-                  }
-                }
-              }
-            }
-          }
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
         }
       }
     },
@@ -244,43 +250,76 @@
         }
       }
     },
-    "UpdateSensitivitySettingsRequest": {
-      "description": "Request to update data sensitivity settings for sensitive data discovery",
+    "GetSensitivitySettingsResponse": {
       "type": "object",
+      "description": "Data sensitivity settings for sensitive data discovery",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GetSensitivitySettingsResponseProperties",
+          "description": "The sensitivity settings properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GetSensitivitySettingsResponseProperties": {
+      "type": "object",
+      "description": "The sensitivity settings properties",
       "properties": {
         "sensitiveInfoTypesIds": {
-          "$ref": "#/definitions/SensitiveInfoTypesIds"
+          "type": "array",
+          "description": "List of selected sensitive info types' IDs.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.uuid"
+          }
         },
         "sensitivityThresholdLabelOrder": {
           "type": "number",
+          "format": "float",
           "description": "The order of the sensitivity threshold label. Any label at or above this order will be considered sensitive. If set to -1, sensitivity by labels is turned off"
         },
         "sensitivityThresholdLabelId": {
           "type": "string",
-          "description": "The id of the sensitivity threshold label. Any label at or above this rank will be considered sensitive.",
-          "format": "uuid"
+          "format": "uuid",
+          "description": "The id of the sensitivity threshold label. Any label at or above this rank will be considered sensitive."
+        },
+        "mipInformation": {
+          "$ref": "#/definitions/GetSensitivitySettingsResponsePropertiesMipInformation",
+          "description": "Microsoft information protection built-in and custom information types, labels, and integration status."
         }
-      },
-      "required": [
-        "sensitiveInfoTypesIds"
-      ]
+      }
     },
-    "BuiltInInfoType": {
-      "description": "Pre-configured sensitive information type",
+    "GetSensitivitySettingsResponsePropertiesMipInformation": {
       "type": "object",
+      "description": "Microsoft information protection built-in and custom information types, labels, and integration status.",
       "properties": {
-        "name": {
-          "description": "Display name of the info type",
-          "type": "string"
+        "mipIntegrationStatus": {
+          "$ref": "#/definitions/MipIntegrationStatus",
+          "description": "Microsoft information protection integration status"
         },
-        "id": {
-          "description": "Id of the info type",
-          "type": "string",
-          "format": "uuid"
+        "labels": {
+          "type": "array",
+          "description": "List of Microsoft information protection sensitivity labels",
+          "items": {
+            "$ref": "#/definitions/Label"
+          }
         },
-        "type": {
-          "description": "Category of the built-in info type",
-          "type": "string"
+        "customInfoTypes": {
+          "type": "array",
+          "description": "List of custom user-defined information types",
+          "items": {
+            "$ref": "#/definitions/InfoType"
+          }
+        },
+        "builtInInfoTypes": {
+          "type": "array",
+          "description": "List of pre-configured sensitive information types",
+          "items": {
+            "$ref": "#/definitions/BuiltInInfoType"
+          }
         }
       }
     },
@@ -289,17 +328,37 @@
       "description": "Custom user-defined information type",
       "properties": {
         "name": {
-          "description": "Display name of the info type",
-          "type": "string"
+          "type": "string",
+          "description": "Display name of the info type"
         },
         "id": {
-          "description": "Id of the info type",
           "type": "string",
-          "format": "uuid"
+          "format": "uuid",
+          "description": "Id of the info type"
         },
         "description": {
-          "description": "Description of the info type",
-          "type": "string"
+          "type": "string",
+          "description": "Description of the info type"
+        }
+      }
+    },
+    "Label": {
+      "type": "object",
+      "description": "Microsoft information protection sensitivity label",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The display name of the label"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The ID of the label"
+        },
+        "order": {
+          "type": "number",
+          "format": "float",
+          "description": "Labels are ordered by sensitivity level. The higher the order of the label, the more sensitive it is."
         }
       }
     },
@@ -314,15 +373,57 @@
       ],
       "x-ms-enum": {
         "name": "MipIntegrationStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ok",
+            "value": "Ok",
+            "description": "Ok"
+          },
+          {
+            "name": "noConsent",
+            "value": "noConsent",
+            "description": "noConsent"
+          },
+          {
+            "name": "noAutoLabelingRules",
+            "value": "noAutoLabelingRules",
+            "description": "noAutoLabelingRules"
+          },
+          {
+            "name": "noMipLabels",
+            "value": "noMipLabels",
+            "description": "noMipLabels"
+          }
+        ]
       }
     },
-    "Labels": {
-      "description": "List of Microsoft information protection sensitivity labels",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Label"
-      }
+    "UpdateSensitivitySettingsRequest": {
+      "type": "object",
+      "description": "Request to update data sensitivity settings for sensitive data discovery",
+      "properties": {
+        "sensitiveInfoTypesIds": {
+          "type": "array",
+          "description": "List of selected sensitive info types' IDs.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.uuid"
+          }
+        },
+        "sensitivityThresholdLabelOrder": {
+          "type": "number",
+          "format": "float",
+          "description": "The order of the sensitivity threshold label. Any label at or above this order will be considered sensitive. If set to -1, sensitivity by labels is turned off"
+        },
+        "sensitivityThresholdLabelId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The id of the sensitivity threshold label. Any label at or above this rank will be considered sensitive."
+        }
+      },
+      "required": [
+        "sensitiveInfoTypesIds"
+      ]
     }
-  }
+  },
+  "parameters": {}
 }

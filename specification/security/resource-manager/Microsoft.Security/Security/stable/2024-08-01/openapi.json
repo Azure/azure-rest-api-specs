@@ -1,0 +1,1354 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "version": "2024-08-01",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SecurityStandards"
+    },
+    {
+      "name": "StandardAssignments"
+    },
+    {
+      "name": "CustomRecommendations"
+    }
+  ],
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/customRecommendations": {
+      "get": {
+        "operationId": "CustomRecommendations_List",
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "description": "Get a list of all relevant custom recommendations over a scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendationsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List custom recommendations by management group scope": {
+            "$ref": "./examples/CustomRecommendations/ListByManagementGroupCustomRecommendations_example.json"
+          },
+          "List custom recommendations by security connector scope": {
+            "$ref": "./examples/CustomRecommendations/ListBySecurityConnectorCustomRecommendations_example.json"
+          },
+          "List custom recommendations by subscription scope": {
+            "$ref": "./examples/CustomRecommendations/ListBySubscriptionCustomRecommendations_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/customRecommendations/{customRecommendationName}": {
+      "get": {
+        "operationId": "CustomRecommendations_Get",
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "description": "Get a specific custom recommendation for the requested scope by customRecommendationName",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "customRecommendationName",
+            "in": "path",
+            "description": "Name of the Custom Recommendation.",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a custom recommendation over management group scope": {
+            "$ref": "./examples/CustomRecommendations/GetByManagementGroupCustomRecommendation_example.json"
+          },
+          "Get a custom recommendation over security connector scope": {
+            "$ref": "./examples/CustomRecommendations/GetBySecurityConnectorCustomRecommendation_example.json"
+          },
+          "Get a custom recommendation over subscription scope": {
+            "$ref": "./examples/CustomRecommendations/GetBySubscriptionCustomRecommendation_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CustomRecommendations_CreateOrUpdate",
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "description": "Creates or updates a custom recommendation over a given scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "customRecommendationName",
+            "in": "path",
+            "description": "Name of the Custom Recommendation.",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          },
+          {
+            "name": "customRecommendationBody",
+            "in": "body",
+            "description": "Custom Recommendation body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CustomRecommendation' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          },
+          "201": {
+            "description": "Resource 'CustomRecommendation' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update custom recommendation over management group scope": {
+            "$ref": "./examples/CustomRecommendations/PutByManagementGroupCustomRecommendation_example.json"
+          },
+          "Create or update custom recommendation over security connector scope": {
+            "$ref": "./examples/CustomRecommendations/PutBySecurityConnectorCustomRecommendation_example.json"
+          },
+          "Create or update custom recommendation over subscription scope": {
+            "$ref": "./examples/CustomRecommendations/PutBySubscriptionCustomRecommendation_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CustomRecommendations_Delete",
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "description": "Delete a custom recommendation over a given scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "customRecommendationName",
+            "in": "path",
+            "description": "Name of the Custom Recommendation.",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a custom recommendation over management group scope": {
+            "$ref": "./examples/CustomRecommendations/DeleteByManagementGroupCustomRecommendation_example.json"
+          },
+          "Delete a custom recommendation over security connector scope": {
+            "$ref": "./examples/CustomRecommendations/DeleteBySecurityConnectorCustomRecommendation_example.json"
+          },
+          "Delete a custom recommendation over subscription scope": {
+            "$ref": "./examples/CustomRecommendations/DeleteBySubscriptionCustomRecommendation_example.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/securityStandards": {
+      "get": {
+        "operationId": "SecurityStandards_List",
+        "tags": [
+          "SecurityStandards"
+        ],
+        "description": "Get a list of all relevant security standards over a scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityStandardList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List security standards by management group scope": {
+            "$ref": "./examples/SecurityStandards/ListByManagementGroupSecurityStandards_example.json"
+          },
+          "List security standards by security connector scope": {
+            "$ref": "./examples/SecurityStandards/ListBySecurityConnectorSecurityStandards_example.json"
+          },
+          "List security standards by subscription scope": {
+            "$ref": "./examples/SecurityStandards/ListBySubscriptionSecurityStandards_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/securityStandards/{standardId}": {
+      "get": {
+        "operationId": "SecurityStandards_Get",
+        "tags": [
+          "SecurityStandards"
+        ],
+        "description": "Get a specific security standard for the requested scope by standardId",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "standardId",
+            "in": "path",
+            "description": "The Security Standard key - unique key for the standard type",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityStandard"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a security standard over management group scope": {
+            "$ref": "./examples/SecurityStandards/GetByManagementGroupSecurityStandard_example.json"
+          },
+          "Get a security standard over security connector scope": {
+            "$ref": "./examples/SecurityStandards/GetBySecurityConnectorSecurityStandard_example.json"
+          },
+          "Get a security standard over subscription scope": {
+            "$ref": "./examples/SecurityStandards/GetBySubscriptionSecurityStandard_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SecurityStandards_CreateOrUpdate",
+        "tags": [
+          "SecurityStandards"
+        ],
+        "description": "Creates or updates a security standard over a given scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "standardId",
+            "in": "path",
+            "description": "The Security Standard key - unique key for the standard type",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          },
+          {
+            "name": "standard",
+            "in": "body",
+            "description": "Custom security standard over a pre-defined scope",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityStandard"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SecurityStandard' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityStandard"
+            }
+          },
+          "201": {
+            "description": "Resource 'SecurityStandard' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityStandard"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update security standard over management group scope": {
+            "$ref": "./examples/SecurityStandards/PutByManagementGroupSecurityStandard_example.json"
+          },
+          "Create or update security standard over security connector scope": {
+            "$ref": "./examples/SecurityStandards/PutBySecurityConnectorSecurityStandard_example.json"
+          },
+          "Create or update security standard over subscription scope": {
+            "$ref": "./examples/SecurityStandards/PutBySubscriptionSecurityStandard_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SecurityStandards_Delete",
+        "tags": [
+          "SecurityStandards"
+        ],
+        "description": "Delete a security standard over a given scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "standardId",
+            "in": "path",
+            "description": "The Security Standard key - unique key for the standard type",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a security standard over management group scope": {
+            "$ref": "./examples/SecurityStandards/DeleteByManagementGroupSecurityStandard_example.json"
+          },
+          "Delete a security standard over security connector scope": {
+            "$ref": "./examples/SecurityStandards/DeleteBySecurityConnectorSecurityStandard_example.json"
+          },
+          "Delete a security standard over subscription scope": {
+            "$ref": "./examples/SecurityStandards/DeleteBySubscriptionSecurityStandard_example.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/standardAssignments": {
+      "get": {
+        "operationId": "StandardAssignments_List",
+        "tags": [
+          "StandardAssignments"
+        ],
+        "description": "Get a list of all relevant standard assignments over a scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignmentsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List standard assignments": {
+            "$ref": "./examples/StandardAssignments/ListStandardAssignments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}": {
+      "get": {
+        "operationId": "StandardAssignments_Get",
+        "tags": [
+          "StandardAssignments"
+        ],
+        "summary": "Retrieves a standard assignment.",
+        "description": "This operation retrieves a single standard assignment, given its name and the scope it was created at.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "standardAssignmentName",
+            "in": "path",
+            "description": "The standard assignments assignment key - unique key for the standard assignment",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a standard assignment": {
+            "$ref": "./examples/StandardAssignments/GetStandardAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StandardAssignments_Create",
+        "tags": [
+          "StandardAssignments"
+        ],
+        "summary": "Creates or updates a standard assignment.",
+        "description": "This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "standardAssignmentName",
+            "in": "path",
+            "description": "The standard assignments assignment key - unique key for the standard assignment",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          },
+          {
+            "name": "standardAssignment",
+            "in": "body",
+            "description": "Custom standard assignment over a pre-defined scope",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StandardAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'StandardAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put an audit standard assignment": {
+            "$ref": "./examples/StandardAssignments/PutStandardAssignment.json"
+          },
+          "Put exemption standard assignment": {
+            "$ref": "./examples/StandardAssignments/PutExemptionStandardAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StandardAssignments_Delete",
+        "tags": [
+          "StandardAssignments"
+        ],
+        "summary": "Deletes a standard assignment.",
+        "description": "This operation deletes a standard assignment, given its name and the scope it was created in. The scope of a standard assignment is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "standardAssignmentName",
+            "in": "path",
+            "description": "The standard assignments assignment key - unique key for the standard assignment",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a standard assignment": {
+            "$ref": "./examples/StandardAssignments/DeleteStandardAssignment.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AssignedAssessmentItem": {
+      "type": "object",
+      "description": "Describe the properties of a security assessment object reference (by key)",
+      "properties": {
+        "assessmentKey": {
+          "type": "string",
+          "description": "Unique key to a security assessment object"
+        }
+      }
+    },
+    "AssignedStandardItem": {
+      "type": "object",
+      "description": "Describe the properties of a of a standard assignments object reference",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full resourceId of the Microsoft.Security/standard object"
+        }
+      }
+    },
+    "AttestationEvidence": {
+      "type": "object",
+      "description": "Describe the properties of a assignment attestation",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the evidence"
+        },
+        "sourceUrl": {
+          "type": "string",
+          "description": "The source url of the evidence"
+        }
+      }
+    },
+    "CustomRecommendation": {
+      "type": "object",
+      "description": "Custom Recommendation",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomRecommendationProperties",
+          "description": "describes Custom Recommendation properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CustomRecommendationProperties": {
+      "type": "object",
+      "description": "describes the Custom Recommendation properties",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "KQL query representing the Recommendation results required."
+        },
+        "cloudProviders": {
+          "type": "array",
+          "description": "List of all standard supported clouds.",
+          "items": {
+            "$ref": "#/definitions/RecommendationSupportedClouds"
+          }
+        },
+        "severity": {
+          "$ref": "#/definitions/SeverityEnum",
+          "description": "The severity to relate to the assessments generated by this Recommendation."
+        },
+        "securityIssue": {
+          "$ref": "#/definitions/SecurityIssue",
+          "description": "The severity to relate to the assessments generated by this Recommendation."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the assessments generated by this Recommendation."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description to relate to the assessments generated by this Recommendation."
+        },
+        "remediationDescription": {
+          "type": "string",
+          "description": "The remediation description to relate to the assessments generated by this Recommendation."
+        },
+        "assessmentKey": {
+          "type": "string",
+          "description": "The assessment metadata key used when an assessment is generated for this Recommendation.",
+          "readOnly": true
+        }
+      }
+    },
+    "CustomRecommendationsList": {
+      "type": "object",
+      "description": "A list of Custom Recommendations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of Custom Recommendations",
+          "items": {
+            "$ref": "#/definitions/CustomRecommendation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of operations."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Effect": {
+      "type": "string",
+      "description": "Expected effect of this assignment (Audit/Exempt/Attest)",
+      "enum": [
+        "Audit",
+        "Exempt",
+        "Attest"
+      ],
+      "x-ms-enum": {
+        "name": "Effect",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Audit",
+            "value": "Audit",
+            "description": "Audit"
+          },
+          {
+            "name": "Exempt",
+            "value": "Exempt",
+            "description": "Exempt"
+          },
+          {
+            "name": "Attest",
+            "value": "Attest",
+            "description": "Attest"
+          }
+        ]
+      }
+    },
+    "ExemptionCategory": {
+      "type": "string",
+      "description": "Exemption category of this assignment",
+      "enum": [
+        "waiver",
+        "mitigated"
+      ],
+      "x-ms-enum": {
+        "name": "ExemptionCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "waiver",
+            "value": "waiver",
+            "description": "waiver"
+          },
+          {
+            "name": "mitigated",
+            "value": "mitigated",
+            "description": "mitigated"
+          }
+        ]
+      }
+    },
+    "PartialAssessmentProperties": {
+      "type": "object",
+      "description": "Describes properties of an assessment as related to the standard",
+      "properties": {
+        "assessmentKey": {
+          "type": "string",
+          "description": "The assessment key"
+        }
+      }
+    },
+    "RecommendationSupportedClouds": {
+      "type": "string",
+      "description": "The cloud that the recommendation is supported on.",
+      "enum": [
+        "Azure",
+        "AWS",
+        "GCP"
+      ],
+      "x-ms-enum": {
+        "name": "RecommendationSupportedClouds",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Azure"
+          },
+          {
+            "name": "AWS",
+            "value": "AWS",
+            "description": "AWS"
+          },
+          {
+            "name": "GCP",
+            "value": "GCP",
+            "description": "GCP"
+          }
+        ]
+      }
+    },
+    "SecurityIssue": {
+      "type": "string",
+      "description": "The severity to relate to the assessments generated by this Recommendation.",
+      "enum": [
+        "Vulnerability",
+        "ExcessivePermissions",
+        "AnonymousAccess",
+        "NetworkExposure",
+        "TrafficEncryption",
+        "BestPractices"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityIssue",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Vulnerability",
+            "value": "Vulnerability",
+            "description": "Vulnerability"
+          },
+          {
+            "name": "ExcessivePermissions",
+            "value": "ExcessivePermissions",
+            "description": "ExcessivePermissions"
+          },
+          {
+            "name": "AnonymousAccess",
+            "value": "AnonymousAccess",
+            "description": "AnonymousAccess"
+          },
+          {
+            "name": "NetworkExposure",
+            "value": "NetworkExposure",
+            "description": "NetworkExposure"
+          },
+          {
+            "name": "TrafficEncryption",
+            "value": "TrafficEncryption",
+            "description": "TrafficEncryption"
+          },
+          {
+            "name": "BestPractices",
+            "value": "BestPractices",
+            "description": "BestPractices"
+          }
+        ]
+      }
+    },
+    "SecurityStandard": {
+      "type": "object",
+      "description": "Security Standard on a resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StandardProperties",
+          "description": "Properties of a security standard",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SecurityStandardList": {
+      "type": "object",
+      "description": "Page of a Standard list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of standards in this page",
+          "items": {
+            "$ref": "#/definitions/SecurityStandard"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SeverityEnum": {
+      "type": "string",
+      "description": "The severity to relate to the assessments generated by this Recommendation.",
+      "enum": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "x-ms-enum": {
+        "name": "SeverityEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium"
+          },
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low"
+          }
+        ]
+      }
+    },
+    "StandardAssignment": {
+      "type": "object",
+      "description": "Security Assignment on a resource group over a given scope",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StandardAssignmentProperties",
+          "description": "Properties of a standard assignments assignment",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "StandardAssignmentMetadata": {
+      "type": "object",
+      "description": "The standard assignment metadata",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "Standard assignment Created by object id (GUID)",
+          "readOnly": true
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Standard assignment creation date",
+          "readOnly": true
+        },
+        "lastUpdatedBy": {
+          "type": "string",
+          "description": "Standard assignment last updated by object id (GUID)",
+          "readOnly": true
+        },
+        "lastUpdatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Standard assignment last update date",
+          "readOnly": true
+        }
+      }
+    },
+    "StandardAssignmentProperties": {
+      "type": "object",
+      "description": "Describes the properties of a standardAssignment",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the standardAssignment"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the standardAssignment"
+        },
+        "assignedStandard": {
+          "$ref": "#/definitions/AssignedStandardItem",
+          "description": "Standard item with key as applied to this standard assignment over the given scope"
+        },
+        "effect": {
+          "$ref": "#/definitions/Effect",
+          "description": "Expected effect of this assignment (Audit/Exempt/Attest)"
+        },
+        "excludedScopes": {
+          "type": "array",
+          "description": "Excluded scopes, filter out the descendants of the scope (on management scopes)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expiresOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration date of this assignment as a full ISO date"
+        },
+        "exemptionData": {
+          "$ref": "#/definitions/StandardAssignmentPropertiesExemptionData",
+          "description": "Additional data about assignment that has Exempt effect"
+        },
+        "attestationData": {
+          "$ref": "#/definitions/StandardAssignmentPropertiesAttestationData",
+          "description": "Additional data about assignment that has Attest effect"
+        },
+        "metadata": {
+          "$ref": "#/definitions/StandardAssignmentMetadata",
+          "description": "The standard assignment metadata."
+        }
+      }
+    },
+    "StandardAssignmentPropertiesAttestationData": {
+      "type": "object",
+      "description": "Additional data about assignment that has Attest effect",
+      "properties": {
+        "complianceState": {
+          "$ref": "#/definitions/attestationComplianceState",
+          "description": "Attest category of this assignment"
+        },
+        "assignedAssessment": {
+          "$ref": "#/definitions/AssignedAssessmentItem",
+          "description": "Component item with key as applied to this standard assignment over the given scope"
+        },
+        "complianceDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Attestation compliance date",
+          "readOnly": true
+        },
+        "evidence": {
+          "type": "array",
+          "description": "Array of links to attestation evidence",
+          "items": {
+            "$ref": "#/definitions/AttestationEvidence"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "StandardAssignmentPropertiesExemptionData": {
+      "type": "object",
+      "description": "Additional data about assignment that has Exempt effect",
+      "properties": {
+        "exemptionCategory": {
+          "$ref": "#/definitions/ExemptionCategory",
+          "description": "Exemption category of this assignment"
+        },
+        "assignedAssessment": {
+          "$ref": "#/definitions/AssignedAssessmentItem",
+          "description": "Component item with key as applied to this standard assignment over the given scope"
+        }
+      }
+    },
+    "StandardAssignmentsList": {
+      "type": "object",
+      "description": "Page of a standard assignment list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of standardAssignments in this page",
+          "items": {
+            "$ref": "#/definitions/StandardAssignment"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StandardMetadata": {
+      "type": "object",
+      "description": "The standard metadata",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "Standard Created by object id (GUID)",
+          "readOnly": true
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Standard creation date",
+          "readOnly": true
+        },
+        "lastUpdatedBy": {
+          "type": "string",
+          "description": "Standard last updated by object id (GUID)",
+          "readOnly": true
+        },
+        "lastUpdatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Standard last update date",
+          "readOnly": true
+        }
+      }
+    },
+    "StandardProperties": {
+      "type": "object",
+      "description": "Describes properties of a standard.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the standard, equivalent to the standardId"
+        },
+        "standardType": {
+          "$ref": "#/definitions/StandardType",
+          "description": "Standard type (Custom or Default or Compliance only currently)",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the standard"
+        },
+        "assessments": {
+          "type": "array",
+          "description": "List of assessment keys to apply to standard scope.",
+          "items": {
+            "$ref": "#/definitions/PartialAssessmentProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "cloudProviders": {
+          "type": "array",
+          "description": "List of all standard supported clouds.",
+          "items": {
+            "$ref": "#/definitions/StandardSupportedCloud"
+          }
+        },
+        "policySetDefinitionId": {
+          "type": "string",
+          "description": "The policy set definition id associated with the standard."
+        },
+        "metadata": {
+          "$ref": "#/definitions/StandardMetadata",
+          "description": "The security standard metadata."
+        }
+      }
+    },
+    "StandardSupportedCloud": {
+      "type": "string",
+      "description": "The cloud that the standard is supported on.",
+      "enum": [
+        "Azure",
+        "AWS",
+        "GCP"
+      ],
+      "x-ms-enum": {
+        "name": "StandardSupportedCloud",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Azure"
+          },
+          {
+            "name": "AWS",
+            "value": "AWS",
+            "description": "AWS"
+          },
+          {
+            "name": "GCP",
+            "value": "GCP",
+            "description": "GCP"
+          }
+        ]
+      }
+    },
+    "StandardType": {
+      "type": "string",
+      "description": "Standard type (Custom or Default or Compliance only currently)",
+      "enum": [
+        "Custom",
+        "Default",
+        "Compliance"
+      ],
+      "x-ms-enum": {
+        "name": "StandardType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom"
+          },
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default"
+          },
+          {
+            "name": "Compliance",
+            "value": "Compliance",
+            "description": "Compliance"
+          }
+        ]
+      }
+    },
+    "attestationComplianceState": {
+      "type": "string",
+      "description": "Attest category of this assignment",
+      "enum": [
+        "unknown",
+        "compliant",
+        "nonCompliant"
+      ],
+      "x-ms-enum": {
+        "name": "attestationComplianceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "unknown",
+            "value": "unknown",
+            "description": "unknown"
+          },
+          {
+            "name": "compliant",
+            "value": "compliant",
+            "description": "compliant"
+          },
+          {
+            "name": "nonCompliant",
+            "value": "nonCompliant",
+            "description": "nonCompliant"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

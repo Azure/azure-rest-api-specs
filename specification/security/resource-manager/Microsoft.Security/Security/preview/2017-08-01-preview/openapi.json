@@ -1,0 +1,1164 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "version": "2017-08-01-preview",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AutoProvisioningSettings"
+    },
+    {
+      "name": "Compliances"
+    },
+    {
+      "name": "InformationProtectionPolicies"
+    },
+    {
+      "name": "Workspace Settings"
+    }
+  ],
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/compliances": {
+      "get": {
+        "operationId": "Compliances_List",
+        "tags": [
+          "Compliances"
+        ],
+        "description": "The Compliance scores of the specific management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComplianceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get security compliance data over time": {
+            "$ref": "./examples/Compliances/GetCompliances_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/compliances/{complianceName}": {
+      "get": {
+        "operationId": "Compliances_Get",
+        "tags": [
+          "Compliances"
+        ],
+        "description": "Details of a specific Compliance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "complianceName",
+            "in": "path",
+            "description": "name of the Compliance",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Compliance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get security compliance data for a day": {
+            "$ref": "./examples/Compliances/GetCompliance_example.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/informationProtectionPolicies": {
+      "get": {
+        "operationId": "InformationProtectionPolicies_List",
+        "tags": [
+          "InformationProtectionPolicies"
+        ],
+        "description": "Information protection policies of a specific management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InformationProtectionPolicyList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information protection policies": {
+            "$ref": "./examples/InformationProtectionPolicies/ListInformationProtectionPolicies_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/informationProtectionPolicies/{informationProtectionPolicyName}": {
+      "get": {
+        "operationId": "InformationProtectionPolicies_Get",
+        "tags": [
+          "InformationProtectionPolicies"
+        ],
+        "description": "Details of the information protection policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "informationProtectionPolicyName",
+            "in": "path",
+            "description": "Name of the information protection policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "effective",
+              "custom"
+            ],
+            "x-ms-enum": {
+              "name": "InformationProtectionPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "effective",
+                  "value": "effective",
+                  "description": "effective"
+                },
+                {
+                  "name": "custom",
+                  "value": "custom",
+                  "description": "custom"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InformationProtectionPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the customized information protection policy for a management group": {
+            "$ref": "./examples/InformationProtectionPolicies/GetCustomInformationProtectionPolicy_example.json"
+          },
+          "Get the effective information protection policy for a management group": {
+            "$ref": "./examples/InformationProtectionPolicies/GetEffectiveInformationProtectionPolicy_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "InformationProtectionPolicies_CreateOrUpdate",
+        "tags": [
+          "InformationProtectionPolicies"
+        ],
+        "description": "Details of the information protection policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "informationProtectionPolicyName",
+            "in": "path",
+            "description": "Name of the information protection policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "effective",
+              "custom"
+            ],
+            "x-ms-enum": {
+              "name": "InformationProtectionPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "effective",
+                  "value": "effective",
+                  "description": "effective"
+                },
+                {
+                  "name": "custom",
+                  "value": "custom",
+                  "description": "custom"
+                }
+              ]
+            }
+          },
+          {
+            "name": "informationProtectionPolicy",
+            "in": "body",
+            "description": "Information protection policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InformationProtectionPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'InformationProtectionPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InformationProtectionPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'InformationProtectionPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InformationProtectionPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update an information protection policy for a management group": {
+            "$ref": "./examples/InformationProtectionPolicies/CreateOrUpdateInformationProtectionPolicy_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoProvisioningSettings": {
+      "get": {
+        "operationId": "AutoProvisioningSettings_List",
+        "tags": [
+          "AutoProvisioningSettings"
+        ],
+        "description": "Exposes the auto provisioning settings of the subscriptions",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutoProvisioningSettingList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get auto provisioning settings for subscription": {
+            "$ref": "./examples/AutoProvisioningSettings/GetAutoProvisioningSettingsSubscription_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoProvisioningSettings/{settingName}": {
+      "get": {
+        "operationId": "AutoProvisioningSettings_Get",
+        "tags": [
+          "AutoProvisioningSettings"
+        ],
+        "description": "Details of a specific setting",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "settingName",
+            "in": "path",
+            "description": "Auto provisioning setting key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutoProvisioningSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an auto provisioning setting for subscription": {
+            "$ref": "./examples/AutoProvisioningSettings/GetAutoProvisioningSettingSubscription_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AutoProvisioningSettings_Create",
+        "tags": [
+          "AutoProvisioningSettings"
+        ],
+        "description": "Details of a specific setting",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "settingName",
+            "in": "path",
+            "description": "Auto provisioning setting key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "setting",
+            "in": "body",
+            "description": "Auto provisioning setting key",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoProvisioningSetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AutoProvisioningSetting' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AutoProvisioningSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create auto provisioning settings for subscription": {
+            "$ref": "./examples/AutoProvisioningSettings/CreateAutoProvisioningSettingsSubscription_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/workspaceSettings": {
+      "get": {
+        "operationId": "WorkspaceSettings_List",
+        "tags": [
+          "Workspace Settings"
+        ],
+        "description": "Settings about where we should store your security data and logs. If the result is empty, it means that no custom-workspace configuration was set",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceSettingList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get workspace settings on subscription": {
+            "$ref": "./examples/WorkspaceSettings/GetWorkspaceSettings_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/workspaceSettings/{workspaceSettingName}": {
+      "get": {
+        "operationId": "WorkspaceSettings_Get",
+        "tags": [
+          "Workspace Settings"
+        ],
+        "description": "Settings about where we should store your security data and logs. If the result is empty, it means that no custom-workspace configuration was set",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workspaceSettingName",
+            "in": "path",
+            "description": "Name of the security setting",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a workspace setting on subscription": {
+            "$ref": "./examples/WorkspaceSettings/GetWorkspaceSetting_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkspaceSettings_Create",
+        "tags": [
+          "Workspace Settings"
+        ],
+        "description": "creating settings about where we should store your security data and logs",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workspaceSettingName",
+            "in": "path",
+            "description": "Name of the security setting",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceSetting",
+            "in": "body",
+            "description": "Security data setting object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceSetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WorkspaceSetting' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a workspace setting data for subscription": {
+            "$ref": "./examples/WorkspaceSettings/CreateWorkspaceSetting_example.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "WorkspaceSettings_Update",
+        "tags": [
+          "Workspace Settings"
+        ],
+        "description": "Settings about where we should store your security data and logs",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workspaceSettingName",
+            "in": "path",
+            "description": "Name of the security setting",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceSetting",
+            "in": "body",
+            "description": "Security data setting object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceSetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a workspace setting data for subscription": {
+            "$ref": "./examples/WorkspaceSettings/UpdateWorkspaceSetting_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WorkspaceSettings_Delete",
+        "tags": [
+          "Workspace Settings"
+        ],
+        "description": "Deletes the custom workspace settings for this subscription. new VMs will report to the default workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workspaceSettingName",
+            "in": "path",
+            "description": "Name of the security setting",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a workspace setting data for resource group": {
+            "$ref": "./examples/WorkspaceSettings/DeleteWorkspaceSetting_example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutoProvision": {
+      "type": "string",
+      "description": "Describes what kind of security agent provisioning action to take",
+      "enum": [
+        "On",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "AutoProvision",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "On",
+            "value": "On",
+            "description": "Install missing security agent on VMs automatically"
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Do not install security agent on the VMs automatically"
+          }
+        ]
+      }
+    },
+    "AutoProvisioningSetting": {
+      "type": "object",
+      "description": "Auto provisioning setting",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutoProvisioningSettingProperties",
+          "description": "Auto provisioning setting data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AutoProvisioningSettingList": {
+      "type": "object",
+      "description": "List of all the auto provisioning settings response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of all the auto provisioning settings",
+          "items": {
+            "$ref": "#/definitions/AutoProvisioningSetting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page.",
+          "readOnly": true
+        }
+      }
+    },
+    "AutoProvisioningSettingProperties": {
+      "type": "object",
+      "description": "describes properties of an auto provisioning setting",
+      "properties": {
+        "autoProvision": {
+          "$ref": "#/definitions/AutoProvision",
+          "description": "Describes what kind of security agent provisioning action to take"
+        }
+      },
+      "required": [
+        "autoProvision"
+      ]
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "Compliance": {
+      "type": "object",
+      "description": "Compliance of a scope",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ComplianceProperties",
+          "description": "Compliance data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ComplianceList": {
+      "type": "object",
+      "description": "List of Compliance objects response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Compliance objects",
+          "items": {
+            "$ref": "#/definitions/Compliance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page.",
+          "readOnly": true
+        }
+      }
+    },
+    "ComplianceProperties": {
+      "type": "object",
+      "description": "The Compliance score (percentage) of a Subscription is a sum of all Resources' Compliances under the given Subscription. A Resource Compliance is defined as the compliant ('healthy') Policy Definitions out of all Policy Definitions applicable to a given resource.",
+      "properties": {
+        "assessmentTimestampUtcDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the Compliance calculation was conducted.",
+          "readOnly": true
+        },
+        "resourceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The resource count of the given subscription for which the Compliance calculation was conducted (needed for Management Group Compliance calculation).",
+          "readOnly": true
+        },
+        "assessmentResult": {
+          "type": "array",
+          "description": "An array of segment, which is the actually the compliance assessment.",
+          "items": {
+            "$ref": "#/definitions/ComplianceSegment"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ComplianceSegment": {
+      "type": "object",
+      "description": "A segment of a compliance assessment.",
+      "properties": {
+        "segmentType": {
+          "type": "string",
+          "description": "The segment type, e.g. compliant, non-compliance, insufficient coverage, N/A, etc.",
+          "readOnly": true
+        },
+        "percentage": {
+          "type": "number",
+          "format": "double",
+          "description": "The size (%) of the segment.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
+    "InformationProtectionKeyword": {
+      "type": "object",
+      "description": "The information type keyword.",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "The keyword pattern."
+        },
+        "custom": {
+          "type": "boolean",
+          "description": "Indicates whether the keyword is custom or not."
+        },
+        "canBeNumeric": {
+          "type": "boolean",
+          "description": "Indicates whether the keyword can be applied on numeric types or not."
+        },
+        "excluded": {
+          "type": "boolean",
+          "description": "Indicates whether the keyword is excluded or not."
+        }
+      }
+    },
+    "InformationProtectionPolicy": {
+      "type": "object",
+      "description": "Information protection policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InformationProtectionPolicyProperties",
+          "description": "Information protection policy data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "InformationProtectionPolicyList": {
+      "type": "object",
+      "description": "Information protection policies response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of information protection policies",
+          "items": {
+            "$ref": "#/definitions/InformationProtectionPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page.",
+          "readOnly": true
+        }
+      }
+    },
+    "InformationProtectionPolicyProperties": {
+      "type": "object",
+      "description": "describes properties of an information protection policy.",
+      "properties": {
+        "lastModifiedUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Describes the last UTC time the policy was modified.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Describes the version of the policy.",
+          "readOnly": true
+        },
+        "labels": {
+          "type": "object",
+          "description": "Dictionary of sensitivity labels.",
+          "additionalProperties": {
+            "$ref": "#/definitions/SensitivityLabel"
+          }
+        },
+        "informationTypes": {
+          "type": "object",
+          "description": "The sensitivity information types.",
+          "additionalProperties": {
+            "$ref": "#/definitions/InformationType"
+          }
+        }
+      }
+    },
+    "InformationType": {
+      "type": "object",
+      "description": "The information type.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The name of the information type."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the information type."
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The order of the information type."
+        },
+        "recommendedLabelId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The recommended label id to be associated with this information type."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether the information type is enabled or not."
+        },
+        "custom": {
+          "type": "boolean",
+          "description": "Indicates whether the information type is custom or not."
+        },
+        "keywords": {
+          "type": "array",
+          "description": "The information type keywords.",
+          "items": {
+            "$ref": "#/definitions/InformationProtectionKeyword"
+          }
+        }
+      }
+    },
+    "Rank": {
+      "type": "string",
+      "description": "The rank of the sensitivity label.",
+      "enum": [
+        "None",
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "x-ms-enum": {
+        "name": "Rank",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium"
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High"
+          },
+          {
+            "name": "Critical",
+            "value": "Critical",
+            "description": "Critical"
+          }
+        ]
+      }
+    },
+    "SensitivityLabel": {
+      "type": "object",
+      "description": "The sensitivity label.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The name of the sensitivity label."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the sensitivity label."
+        },
+        "rank": {
+          "$ref": "#/definitions/Rank",
+          "description": "The rank of the sensitivity label."
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The order of the sensitivity label."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether the label is enabled or not."
+        }
+      }
+    },
+    "WorkspaceSetting": {
+      "type": "object",
+      "description": "Configures where to store the OMS agent data for workspaces under a scope",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceSettingProperties",
+          "description": "Workspace setting data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WorkspaceSettingList": {
+      "type": "object",
+      "description": "List of workspace settings response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkspaceSetting items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkspaceSetting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WorkspaceSettingProperties": {
+      "type": "object",
+      "description": "Workspace setting data",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "The full Azure ID of the workspace to save the data in"
+        },
+        "scope": {
+          "type": "string",
+          "description": "All the VMs in this scope will send their security data to the mentioned workspace unless overridden by a setting with more specific scope"
+        }
+      },
+      "required": [
+        "workspaceId",
+        "scope"
+      ]
+    }
+  },
+  "parameters": {}
+}

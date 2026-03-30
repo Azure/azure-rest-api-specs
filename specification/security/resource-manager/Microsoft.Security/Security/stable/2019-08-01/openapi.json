@@ -1,0 +1,2372 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "version": "2019-08-01",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DeviceSecurityGroups"
+    },
+    {
+      "name": "IoT Security Solution Analytics"
+    },
+    {
+      "name": "IoT Security Solution"
+    },
+    {
+      "name": "Aggregated Alert"
+    },
+    {
+      "name": "Aggregated Recommendation"
+    }
+  ],
+  "paths": {
+    "/{resourceId}/providers/Microsoft.Security/deviceSecurityGroups": {
+      "get": {
+        "operationId": "DeviceSecurityGroups_List",
+        "tags": [
+          "DeviceSecurityGroups"
+        ],
+        "description": "Use this method get the list of device security groups for the specified IoT Hub resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceSecurityGroupList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all device security groups for the specified IoT Hub resource": {
+            "$ref": "./examples/DeviceSecurityGroups/ListDeviceSecurityGroups_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.Security/deviceSecurityGroups/{deviceSecurityGroupName}": {
+      "get": {
+        "operationId": "DeviceSecurityGroups_Get",
+        "tags": [
+          "DeviceSecurityGroups"
+        ],
+        "description": "Use this method to get the device security group for the specified IoT Hub resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "deviceSecurityGroupName",
+            "in": "path",
+            "description": "The name of the device security group. Note that the name of the device security group is case insensitive.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceSecurityGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a device security group for the specified IoT Hub resource": {
+            "$ref": "./examples/DeviceSecurityGroups/GetDeviceSecurityGroups_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceSecurityGroups_CreateOrUpdate",
+        "tags": [
+          "DeviceSecurityGroups"
+        ],
+        "description": "Use this method to creates or updates the device security group on a specified IoT Hub resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "deviceSecurityGroupName",
+            "in": "path",
+            "description": "The name of the device security group. Note that the name of the device security group is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceSecurityGroup",
+            "in": "body",
+            "description": "Security group object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceSecurityGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DeviceSecurityGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeviceSecurityGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'DeviceSecurityGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeviceSecurityGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a device security group for the specified IoT hub resource": {
+            "$ref": "./examples/DeviceSecurityGroups/PutDeviceSecurityGroups_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceSecurityGroups_Delete",
+        "tags": [
+          "DeviceSecurityGroups"
+        ],
+        "description": "User this method to deletes the device security group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "deviceSecurityGroupName",
+            "in": "path",
+            "description": "The name of the device security group. Note that the name of the device security group is case insensitive.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a device security group for the specified IoT Hub resource": {
+            "$ref": "./examples/DeviceSecurityGroups/DeleteDeviceSecurityGroups_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotSecuritySolutions": {
+      "get": {
+        "operationId": "IotSecuritySolution_ListBySubscription",
+        "tags": [
+          "IoT Security Solution"
+        ],
+        "description": "Use this method to get the list of IoT Security solutions by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the IoT Security solution with OData syntax. Supports filtering by iotHubs.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List IoT Security solutions by IoT Hub": {
+            "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByIotHub.json"
+          },
+          "List IoT Security solutions by subscription": {
+            "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions": {
+      "get": {
+        "operationId": "IotSecuritySolution_ListByResourceGroup",
+        "tags": [
+          "IoT Security Solution"
+        ],
+        "description": "Use this method to get the list IoT Security solutions organized by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the IoT Security solution with OData syntax. Supports filtering by iotHubs.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List IoT Security solutions by resource group": {
+            "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByRg.json"
+          },
+          "List IoT Security solutions by resource group and IoT Hub": {
+            "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByIotHubAndRg.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}": {
+      "get": {
+        "operationId": "IotSecuritySolution_Get",
+        "tags": [
+          "IoT Security Solution"
+        ],
+        "description": "User this method to get details of a specific IoT Security solution based on solution name",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionName",
+            "in": "path",
+            "description": "The name of the IoT Security solution.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a IoT security solution": {
+            "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolution.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "IotSecuritySolution_CreateOrUpdate",
+        "tags": [
+          "IoT Security Solution"
+        ],
+        "description": "Use this method to create or update yours IoT Security solution",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionName",
+            "in": "path",
+            "description": "The name of the IoT Security solution.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iotSecuritySolutionData",
+            "in": "body",
+            "description": "The security solution data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'IoTSecuritySolutionModel' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionModel"
+            }
+          },
+          "201": {
+            "description": "Resource 'IoTSecuritySolutionModel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a IoT security solution": {
+            "$ref": "./examples/IoTSecuritySolutions/CreateIoTSecuritySolution.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "IotSecuritySolution_Update",
+        "tags": [
+          "IoT Security Solution"
+        ],
+        "description": "Use this method to update existing IoT Security solution tags or user defined resources. To update other fields use the CreateOrUpdate method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionName",
+            "in": "path",
+            "description": "The name of the IoT Security solution.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateIotSecuritySolutionData",
+            "in": "body",
+            "description": "The security solution data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateIotSecuritySolutionData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Use this method to update existing IoT Security solution": {
+            "$ref": "./examples/IoTSecuritySolutions/UpdateIoTSecuritySolution.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "IotSecuritySolution_Delete",
+        "tags": [
+          "IoT Security Solution"
+        ],
+        "description": "Use this method to delete yours IoT Security solution",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionName",
+            "in": "path",
+            "description": "The name of the IoT Security solution.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an IoT security solution": {
+            "$ref": "./examples/IoTSecuritySolutions/DeleteIoTSecuritySolution.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels": {
+      "get": {
+        "operationId": "IotSecuritySolutionAnalytics_List",
+        "tags": [
+          "IoT Security Solution Analytics"
+        ],
+        "description": "Use this method to get IoT security Analytics metrics in an array.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionName",
+            "in": "path",
+            "description": "The name of the IoT Security solution.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionAnalyticsModelList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Security Solution Analytics": {
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTSecuritySolutionsSecurityAnalyticsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default": {
+      "get": {
+        "operationId": "IotSecuritySolutionAnalytics_Get",
+        "tags": [
+          "IoT Security Solution Analytics"
+        ],
+        "description": "Use this method to get IoT Security Analytics metrics.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionName",
+            "in": "path",
+            "description": "The name of the IoT Security solution.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionAnalyticsModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Security Solution Analytics": {
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTSecuritySolutionsSecurityAnalytics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/aggregatedAlerts": {
+      "get": {
+        "operationId": "IotSecuritySolutionsAnalyticsAggregatedAlert_List",
+        "tags": [
+          "Aggregated Alert"
+        ],
+        "description": "Use this method to get the aggregated alert list of yours IoT Security solution.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionName",
+            "in": "path",
+            "description": "The name of the IoT Security solution.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Number of results to retrieve.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IoTSecurityAggregatedAlertList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the aggregated alert list of yours IoT Security solution": {
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTSecuritySolutionsSecurityAggregatedAlertList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/aggregatedAlerts/{aggregatedAlertName}": {
+      "get": {
+        "operationId": "IotSecuritySolutionsAnalyticsAggregatedAlert_Get",
+        "tags": [
+          "Aggregated Alert"
+        ],
+        "description": "Use this method to get a single the aggregated alert of yours IoT Security solution. This aggregation is performed by alert name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionName",
+            "in": "path",
+            "description": "The name of the IoT Security solution.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "aggregatedAlertName",
+            "in": "path",
+            "description": "Identifier of the aggregated alert.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IoTSecurityAggregatedAlert"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the aggregated security analytics alert of yours IoT Security solution. This aggregation is performed by alert name": {
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTSecuritySolutionsSecurityAggregatedAlert.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/aggregatedAlerts/{aggregatedAlertName}/dismiss": {
+      "post": {
+        "operationId": "IotSecuritySolutionsAnalyticsAggregatedAlert_Dismiss",
+        "tags": [
+          "Aggregated Alert"
+        ],
+        "description": "Use this method to dismiss an aggregated IoT Security Solution Alert.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionName",
+            "in": "path",
+            "description": "The name of the IoT Security solution.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "aggregatedAlertName",
+            "in": "path",
+            "description": "Identifier of the aggregated alert.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Dismiss an aggregated IoT Security Solution Alert": {
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/PostIoTSecuritySolutionsSecurityAggregatedAlertDismiss.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/aggregatedRecommendations": {
+      "get": {
+        "operationId": "IotSecuritySolutionsAnalyticsRecommendation_List",
+        "tags": [
+          "Aggregated Recommendation"
+        ],
+        "description": "Use this method to get the list of aggregated security analytics recommendations of yours IoT Security solution.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionName",
+            "in": "path",
+            "description": "The name of the IoT Security solution.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Number of results to retrieve.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IoTSecurityAggregatedRecommendationList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the list of aggregated security analytics recommendations of yours IoT Security solution": {
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTSecuritySolutionsSecurityRecommendationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/aggregatedRecommendations/{aggregatedRecommendationName}": {
+      "get": {
+        "operationId": "IotSecuritySolutionsAnalyticsRecommendation_Get",
+        "tags": [
+          "Aggregated Recommendation"
+        ],
+        "description": "Use this method to get the aggregated security analytics recommendation of yours IoT Security solution. This aggregation is performed by recommendation name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionName",
+            "in": "path",
+            "description": "The name of the IoT Security solution.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "aggregatedRecommendationName",
+            "in": "path",
+            "description": "Name of the recommendation aggregated for this query.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IoTSecurityAggregatedRecommendation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the aggregated security analytics recommendation of yours IoT Security solution": {
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTSecuritySolutionsSecurityRecommendation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActiveConnectionsNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of active connections is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "ActiveConnectionsNotInAllowedRange"
+    },
+    "AdditionalWorkspaceDataType": {
+      "type": "string",
+      "description": "Data types sent to workspace.",
+      "enum": [
+        "Alerts",
+        "RawEvents"
+      ],
+      "x-ms-enum": {
+        "name": "AdditionalWorkspaceDataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Alerts",
+            "value": "Alerts",
+            "description": "Alerts"
+          },
+          {
+            "name": "RawEvents",
+            "value": "RawEvents",
+            "description": "RawEvents"
+          }
+        ]
+      }
+    },
+    "AdditionalWorkspacesProperties": {
+      "type": "object",
+      "description": "Properties of the additional workspaces.",
+      "properties": {
+        "workspace": {
+          "type": "string",
+          "description": "Workspace resource id"
+        },
+        "type": {
+          "type": "string",
+          "description": "Workspace type.",
+          "default": "Sentinel",
+          "enum": [
+            "Sentinel"
+          ],
+          "x-ms-enum": {
+            "name": "AdditionalWorkspaceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Sentinel",
+                "value": "Sentinel",
+                "description": "Sentinel"
+              }
+            ]
+          }
+        },
+        "dataTypes": {
+          "type": "array",
+          "description": "List of data types sent to workspace",
+          "items": {
+            "$ref": "#/definitions/AdditionalWorkspaceDataType"
+          }
+        }
+      }
+    },
+    "AllowlistCustomAlertRule": {
+      "type": "object",
+      "description": "A custom alert rule that checks if a value (depends on the custom alert type) is allowed.",
+      "properties": {
+        "allowlistValues": {
+          "type": "array",
+          "description": "The values to allow. The format of the values depends on the rule type.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "allowlistValues"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "ListCustomAlertRule"
+    },
+    "AmqpC2DMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of cloud to device messages (AMQP protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "AmqpC2DMessagesNotInAllowedRange"
+    },
+    "AmqpC2DRejectedMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of rejected cloud to device messages (AMQP protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "AmqpC2DRejectedMessagesNotInAllowedRange"
+    },
+    "AmqpD2CMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of device to cloud messages (AMQP protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "AmqpD2CMessagesNotInAllowedRange"
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ConnectionFromIpNotAllowed": {
+      "type": "object",
+      "description": "Inbound connection from an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AllowlistCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "ListCustomAlertRule"
+    },
+    "ConnectionToIpNotAllowed": {
+      "type": "object",
+      "description": "Outbound connection to an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AllowlistCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "ListCustomAlertRule"
+    },
+    "CustomAlertRule": {
+      "type": "object",
+      "description": "A custom alert rule.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the custom alert.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the custom alert.",
+          "readOnly": true
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Status of the custom alert."
+        },
+        "ruleType": {
+          "type": "string",
+          "description": "The type of the custom alert rule."
+        }
+      },
+      "discriminator": "ruleType",
+      "required": [
+        "isEnabled",
+        "ruleType"
+      ]
+    },
+    "DataSource": {
+      "type": "string",
+      "enum": [
+        "TwinData"
+      ],
+      "x-ms-enum": {
+        "name": "DataSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TwinData",
+            "value": "TwinData",
+            "description": "Devices twin data"
+          }
+        ]
+      }
+    },
+    "DenylistCustomAlertRule": {
+      "type": "object",
+      "description": "A custom alert rule that checks if a value (depends on the custom alert type) is denied.",
+      "properties": {
+        "denylistValues": {
+          "type": "array",
+          "description": "The values to deny. The format of the values depends on the rule type.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "denylistValues"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "ListCustomAlertRule"
+    },
+    "DeviceSecurityGroup": {
+      "type": "object",
+      "description": "The device security group resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceSecurityGroupProperties",
+          "description": "Device Security group data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceSecurityGroupList": {
+      "type": "object",
+      "description": "List of device security groups",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of device security group objects",
+          "items": {
+            "$ref": "#/definitions/DeviceSecurityGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI to fetch the next page.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceSecurityGroupProperties": {
+      "type": "object",
+      "description": "describes properties of a security group.",
+      "properties": {
+        "thresholdRules": {
+          "type": "array",
+          "description": "The list of custom alert threshold rules.",
+          "items": {
+            "$ref": "#/definitions/ThresholdCustomAlertRule"
+          }
+        },
+        "timeWindowRules": {
+          "type": "array",
+          "description": "The list of custom alert time-window rules.",
+          "items": {
+            "$ref": "#/definitions/TimeWindowCustomAlertRule"
+          }
+        },
+        "allowlistRules": {
+          "type": "array",
+          "description": "The allow-list custom alert rules.",
+          "items": {
+            "$ref": "#/definitions/AllowlistCustomAlertRule"
+          }
+        },
+        "denylistRules": {
+          "type": "array",
+          "description": "The deny-list custom alert rules.",
+          "items": {
+            "$ref": "#/definitions/DenylistCustomAlertRule"
+          }
+        }
+      }
+    },
+    "DirectMethodInvokesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of direct method invokes is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "DirectMethodInvokesNotInAllowedRange"
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
+    "ExportData": {
+      "type": "string",
+      "enum": [
+        "RawEvents"
+      ],
+      "x-ms-enum": {
+        "name": "ExportData",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RawEvents",
+            "value": "RawEvents",
+            "description": "Agent raw events"
+          }
+        ]
+      }
+    },
+    "FailedLocalLoginsNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of failed local logins is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "FailedLocalLoginsNotInAllowedRange"
+    },
+    "FileUploadsNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of file uploads is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "FileUploadsNotInAllowedRange"
+    },
+    "HttpC2DMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of cloud to device messages (HTTP protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "HttpC2DMessagesNotInAllowedRange"
+    },
+    "HttpC2DRejectedMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of rejected cloud to device messages (HTTP protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "HttpC2DRejectedMessagesNotInAllowedRange"
+    },
+    "HttpD2CMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of device to cloud messages (HTTP protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "HttpD2CMessagesNotInAllowedRange"
+    },
+    "IoTSecurityAggregatedAlert": {
+      "type": "object",
+      "description": "Security Solution Aggregated Alert information",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IoTSecurityAggregatedAlertProperties",
+          "description": "IoT Security solution aggregated alert details.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IoTSecurityAggregatedAlertList": {
+      "type": "object",
+      "description": "List of IoT Security solution aggregated alert data.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IoTSecurityAggregatedAlert items on this page",
+          "items": {
+            "$ref": "#/definitions/IoTSecurityAggregatedAlert"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IoTSecurityAggregatedAlertProperties": {
+      "type": "object",
+      "description": "IoT Security solution aggregated alert details.",
+      "properties": {
+        "alertType": {
+          "type": "string",
+          "description": "Name of the alert type.",
+          "readOnly": true
+        },
+        "alertDisplayName": {
+          "type": "string",
+          "description": "Display name of the alert type.",
+          "readOnly": true
+        },
+        "aggregatedDateUtc": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of detection.",
+          "readOnly": true
+        },
+        "vendorName": {
+          "type": "string",
+          "description": "Name of the organization that raised the alert.",
+          "readOnly": true
+        },
+        "reportedSeverity": {
+          "$ref": "#/definitions/ReportedSeverity",
+          "description": "Assessed alert severity.",
+          "readOnly": true
+        },
+        "remediationSteps": {
+          "type": "string",
+          "description": "Recommended steps for remediation.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the suspected vulnerability and meaning.",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of alerts occurrences within the aggregated time window.",
+          "readOnly": true
+        },
+        "effectedResourceType": {
+          "type": "string",
+          "description": "Azure resource ID of the resource that received the alerts.",
+          "readOnly": true
+        },
+        "systemSource": {
+          "type": "string",
+          "description": "The type of the alerted resource (Azure, Non-Azure).",
+          "readOnly": true
+        },
+        "actionTaken": {
+          "type": "string",
+          "description": "IoT Security solution alert response.",
+          "readOnly": true
+        },
+        "logAnalyticsQuery": {
+          "type": "string",
+          "description": "Log analytics query for getting the list of affected devices/alerts.",
+          "readOnly": true
+        },
+        "topDevicesList": {
+          "type": "array",
+          "description": "10 devices with the highest number of occurrences of this alert type, on this day.",
+          "items": {
+            "$ref": "#/definitions/IoTSecurityAggregatedAlertPropertiesTopDevicesListItem"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "IoTSecurityAggregatedAlertPropertiesTopDevicesListItem": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Name of the device.",
+          "readOnly": true
+        },
+        "alertsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of alerts raised for this device.",
+          "readOnly": true
+        },
+        "lastOccurrence": {
+          "type": "string",
+          "description": "Most recent time this alert was raised for this device, on this day.",
+          "readOnly": true
+        }
+      }
+    },
+    "IoTSecurityAggregatedRecommendation": {
+      "type": "object",
+      "description": "IoT Security solution recommendation information.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IoTSecurityAggregatedRecommendationProperties",
+          "description": "Security Solution data",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IoTSecurityAggregatedRecommendationList": {
+      "type": "object",
+      "description": "List of IoT Security solution aggregated recommendations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IoTSecurityAggregatedRecommendation items on this page",
+          "items": {
+            "$ref": "#/definitions/IoTSecurityAggregatedRecommendation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IoTSecurityAggregatedRecommendationProperties": {
+      "type": "object",
+      "description": "IoT Security solution aggregated recommendation information",
+      "properties": {
+        "recommendationName": {
+          "type": "string",
+          "description": "Name of the recommendation."
+        },
+        "recommendationDisplayName": {
+          "type": "string",
+          "description": "Display name of the recommendation type.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the suspected vulnerability and meaning.",
+          "readOnly": true
+        },
+        "recommendationTypeId": {
+          "type": "string",
+          "description": "Recommendation-type GUID.",
+          "readOnly": true
+        },
+        "detectedBy": {
+          "type": "string",
+          "description": "Name of the organization that made the recommendation.",
+          "readOnly": true
+        },
+        "remediationSteps": {
+          "type": "string",
+          "description": "Recommended steps for remediation",
+          "readOnly": true
+        },
+        "reportedSeverity": {
+          "$ref": "#/definitions/ReportedSeverity",
+          "description": "Assessed recommendation severity.",
+          "readOnly": true
+        },
+        "healthyDevices": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of healthy devices within the IoT Security solution.",
+          "readOnly": true
+        },
+        "unhealthyDeviceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of unhealthy devices within the IoT Security solution.",
+          "readOnly": true
+        },
+        "logAnalyticsQuery": {
+          "type": "string",
+          "description": "Log analytics query for getting the list of affected devices/alerts.",
+          "readOnly": true
+        }
+      }
+    },
+    "IoTSecurityAlertedDevice": {
+      "type": "object",
+      "description": "Statistical information about the number of alerts per device during last set number of days.",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device identifier.",
+          "readOnly": true
+        },
+        "alertsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of alerts raised for this device.",
+          "readOnly": true
+        }
+      }
+    },
+    "IoTSecurityDeviceAlert": {
+      "type": "object",
+      "description": "Statistical information about the number of alerts per alert type during last set number of days",
+      "properties": {
+        "alertDisplayName": {
+          "type": "string",
+          "description": "Display name of the alert",
+          "readOnly": true
+        },
+        "reportedSeverity": {
+          "$ref": "#/definitions/ReportedSeverity",
+          "description": "Assessed Alert severity.",
+          "readOnly": true
+        },
+        "alertsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of alerts raised for this alert type.",
+          "readOnly": true
+        }
+      }
+    },
+    "IoTSecurityDeviceRecommendation": {
+      "type": "object",
+      "description": "Statistical information about the number of recommendations per device, per recommendation type.",
+      "properties": {
+        "recommendationDisplayName": {
+          "type": "string",
+          "description": "Display name of the recommendation.",
+          "readOnly": true
+        },
+        "reportedSeverity": {
+          "$ref": "#/definitions/ReportedSeverity",
+          "description": "Assessed recommendation severity.",
+          "readOnly": true
+        },
+        "devicesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of devices with this recommendation.",
+          "readOnly": true
+        }
+      }
+    },
+    "IoTSecuritySolutionAnalyticsModel": {
+      "type": "object",
+      "description": "Security analytics of your IoT Security solution",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IoTSecuritySolutionAnalyticsModelProperties",
+          "description": "Security Solution  Aggregated Alert data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IoTSecuritySolutionAnalyticsModelList": {
+      "type": "object",
+      "description": "List of Security analytics of your IoT Security solution",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IoTSecuritySolutionAnalyticsModel items on this page",
+          "items": {
+            "$ref": "#/definitions/IoTSecuritySolutionAnalyticsModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IoTSecuritySolutionAnalyticsModelProperties": {
+      "type": "object",
+      "description": "Security analytics properties of your IoT Security solution",
+      "properties": {
+        "metrics": {
+          "$ref": "#/definitions/IoTSeverityMetrics",
+          "description": "Security analytics of your IoT Security solution.",
+          "readOnly": true
+        },
+        "unhealthyDeviceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of unhealthy devices within your IoT Security solution.",
+          "readOnly": true
+        },
+        "devicesMetrics": {
+          "type": "array",
+          "description": "List of device metrics by the aggregation date.",
+          "items": {
+            "$ref": "#/definitions/IoTSecuritySolutionAnalyticsModelPropertiesDevicesMetricsItem"
+          },
+          "readOnly": true
+        },
+        "topAlertedDevices": {
+          "type": "array",
+          "description": "List of the 3 devices with the most alerts.",
+          "items": {
+            "$ref": "#/definitions/IoTSecurityAlertedDevice"
+          }
+        },
+        "mostPrevalentDeviceAlerts": {
+          "type": "array",
+          "description": "List of the 3 most prevalent device alerts.",
+          "items": {
+            "$ref": "#/definitions/IoTSecurityDeviceAlert"
+          }
+        },
+        "mostPrevalentDeviceRecommendations": {
+          "type": "array",
+          "description": "List of the 3 most prevalent device recommendations.",
+          "items": {
+            "$ref": "#/definitions/IoTSecurityDeviceRecommendation"
+          }
+        }
+      }
+    },
+    "IoTSecuritySolutionAnalyticsModelPropertiesDevicesMetricsItem": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Aggregation of IoT Security solution device alert metrics by date."
+        },
+        "devicesMetrics": {
+          "$ref": "#/definitions/IoTSeverityMetrics",
+          "description": "Device alert count by severity."
+        }
+      }
+    },
+    "IoTSecuritySolutionModel": {
+      "type": "object",
+      "description": "IoT Security solution configuration and resource information.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IoTSecuritySolutionProperties",
+          "description": "Security Solution data",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IoTSecuritySolutionProperties": {
+      "type": "object",
+      "description": "Security Solution setting data",
+      "properties": {
+        "workspace": {
+          "type": "string",
+          "description": "Workspace resource ID"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Resource display name."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the IoT Security solution.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "SecuritySolutionStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        },
+        "export": {
+          "type": "array",
+          "description": "List of additional options for exporting to workspace data.",
+          "items": {
+            "$ref": "#/definitions/ExportData"
+          }
+        },
+        "disabledDataSources": {
+          "type": "array",
+          "description": "Disabled data sources. Disabling these data sources compromises the system.",
+          "items": {
+            "$ref": "#/definitions/DataSource"
+          }
+        },
+        "iotHubs": {
+          "type": "array",
+          "description": "IoT Hub resource IDs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userDefinedResources": {
+          "$ref": "#/definitions/UserDefinedResourcesProperties",
+          "description": "Properties of the IoT Security solution's user defined resources."
+        },
+        "autoDiscoveredResources": {
+          "type": "array",
+          "description": "List of resources that were automatically discovered as relevant to the security solution.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "recommendationsConfiguration": {
+          "type": "array",
+          "description": "List of the configuration status for each recommendation type.",
+          "items": {
+            "$ref": "#/definitions/RecommendationConfigurationProperties"
+          }
+        },
+        "unmaskedIpLoggingStatus": {
+          "type": "string",
+          "description": "Unmasked IP address logging status",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "UnmaskedIpLoggingStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Unmasked IP logging is disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Unmasked IP logging is enabled"
+              }
+            ]
+          }
+        },
+        "additionalWorkspaces": {
+          "type": "array",
+          "description": "List of additional workspaces",
+          "items": {
+            "$ref": "#/definitions/AdditionalWorkspacesProperties"
+          }
+        }
+      },
+      "required": [
+        "displayName",
+        "iotHubs"
+      ]
+    },
+    "IoTSecuritySolutionsList": {
+      "type": "object",
+      "description": "List of IoT Security solutions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IoTSecuritySolutionModel items on this page",
+          "items": {
+            "$ref": "#/definitions/IoTSecuritySolutionModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IoTSeverityMetrics": {
+      "type": "object",
+      "description": "IoT Security solution analytics severity metrics.",
+      "properties": {
+        "high": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of high severity alerts/recommendations."
+        },
+        "medium": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of medium severity alerts/recommendations."
+        },
+        "low": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of low severity alerts/recommendations."
+        }
+      }
+    },
+    "ListCustomAlertRule": {
+      "type": "object",
+      "description": "A List custom alert rule.",
+      "properties": {
+        "valueType": {
+          "$ref": "#/definitions/ValueType",
+          "description": "The value type of the items in the list.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "ListCustomAlertRule"
+    },
+    "LocalUserNotAllowed": {
+      "type": "object",
+      "description": "Login by a local user that isn't allowed. Allow list consists of login names to allow.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AllowlistCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "ListCustomAlertRule"
+    },
+    "MqttC2DMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of cloud to device messages (MQTT protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "MqttC2DMessagesNotInAllowedRange"
+    },
+    "MqttC2DRejectedMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of rejected cloud to device messages (MQTT protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "MqttC2DRejectedMessagesNotInAllowedRange"
+    },
+    "MqttD2CMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of device to cloud messages (MQTT protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "MqttD2CMessagesNotInAllowedRange"
+    },
+    "ProcessNotAllowed": {
+      "type": "object",
+      "description": "Execution of a process that isn't allowed. Allow list consists of process names to allow.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AllowlistCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "ListCustomAlertRule"
+    },
+    "QueuePurgesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of device queue purges is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "QueuePurgesNotInAllowedRange"
+    },
+    "RecommendationConfigurationProperties": {
+      "type": "object",
+      "description": "The type of IoT Security recommendation.",
+      "properties": {
+        "recommendationType": {
+          "$ref": "#/definitions/RecommendationType",
+          "description": "The type of IoT Security recommendation."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Recommendation status. When the recommendation status is disabled recommendations are not generated.",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "RecommendationConfigStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "recommendationType",
+        "status"
+      ]
+    },
+    "RecommendationType": {
+      "type": "string",
+      "description": "The type of IoT Security recommendation.",
+      "enum": [
+        "IoT_ACRAuthentication",
+        "IoT_AgentSendsUnutilizedMessages",
+        "IoT_Baseline",
+        "IoT_EdgeHubMemOptimize",
+        "IoT_EdgeLoggingOptions",
+        "IoT_InconsistentModuleSettings",
+        "IoT_InstallAgent",
+        "IoT_IPFilter_DenyAll",
+        "IoT_IPFilter_PermissiveRule",
+        "IoT_OpenPorts",
+        "IoT_PermissiveFirewallPolicy",
+        "IoT_PermissiveInputFirewallRules",
+        "IoT_PermissiveOutputFirewallRules",
+        "IoT_PrivilegedDockerOptions",
+        "IoT_SharedCredentials",
+        "IoT_VulnerableTLSCipherSuite"
+      ],
+      "x-ms-enum": {
+        "name": "RecommendationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IoT_ACRAuthentication",
+            "value": "IoT_ACRAuthentication",
+            "description": "Authentication schema used for pull an edge module from an ACR repository does not use Service Principal Authentication."
+          },
+          {
+            "name": "IoT_AgentSendsUnutilizedMessages",
+            "value": "IoT_AgentSendsUnutilizedMessages",
+            "description": "IoT agent message size capacity is currently underutilized, causing an increase in the number of sent messages. Adjust message intervals for better utilization."
+          },
+          {
+            "name": "IoT_Baseline",
+            "value": "IoT_Baseline",
+            "description": "Identified security related system configuration issues."
+          },
+          {
+            "name": "IoT_EdgeHubMemOptimize",
+            "value": "IoT_EdgeHubMemOptimize",
+            "description": "You can optimize Edge Hub memory usage by turning off protocol heads for any protocols not used by Edge modules in your solution."
+          },
+          {
+            "name": "IoT_EdgeLoggingOptions",
+            "value": "IoT_EdgeLoggingOptions",
+            "description": "Logging is disabled for this edge module."
+          },
+          {
+            "name": "IoT_InconsistentModuleSettings",
+            "value": "IoT_InconsistentModuleSettings",
+            "description": "A minority within a device security group has inconsistent Edge Module settings with the rest of their group."
+          },
+          {
+            "name": "IoT_InstallAgent",
+            "value": "IoT_InstallAgent",
+            "description": "Install the Azure Security of Things Agent."
+          },
+          {
+            "name": "IoT_IPFilter_DenyAll",
+            "value": "IoT_IPFilter_DenyAll",
+            "description": "IP Filter Configuration should have rules defined for allowed traffic and should deny all other traffic by default."
+          },
+          {
+            "name": "IoT_IPFilter_PermissiveRule",
+            "value": "IoT_IPFilter_PermissiveRule",
+            "description": "An Allow IP Filter rules source IP range is too large. Overly permissive rules might expose your IoT hub to malicious intenders."
+          },
+          {
+            "name": "IoT_OpenPorts",
+            "value": "IoT_OpenPorts",
+            "description": "A listening endpoint was found on the device."
+          },
+          {
+            "name": "IoT_PermissiveFirewallPolicy",
+            "value": "IoT_PermissiveFirewallPolicy",
+            "description": "An Allowed firewall policy was found (INPUT/OUTPUT). The policy should Deny all traffic by default and define rules to allow necessary communication to/from the device."
+          },
+          {
+            "name": "IoT_PermissiveInputFirewallRules",
+            "value": "IoT_PermissiveInputFirewallRules",
+            "description": "A rule in the firewall has been found that contains a permissive pattern for a wide range of IP addresses or Ports."
+          },
+          {
+            "name": "IoT_PermissiveOutputFirewallRules",
+            "value": "IoT_PermissiveOutputFirewallRules",
+            "description": "A rule in the firewall has been found that contains a permissive pattern for a wide range of IP addresses or Ports."
+          },
+          {
+            "name": "IoT_PrivilegedDockerOptions",
+            "value": "IoT_PrivilegedDockerOptions",
+            "description": "Edge module is configured to run in privileged mode, with extensive Linux capabilities or with host-level network access (send/receive data to host machine)."
+          },
+          {
+            "name": "IoT_SharedCredentials",
+            "value": "IoT_SharedCredentials",
+            "description": "Same authentication credentials to the IoT Hub used by multiple devices. This could indicate an illegitimate device impersonating a legitimate device. It also exposes the risk of device impersonation by an attacker."
+          },
+          {
+            "name": "IoT_VulnerableTLSCipherSuite",
+            "value": "IoT_VulnerableTLSCipherSuite",
+            "description": "Insecure TLS configurations detected. Immediate upgrade recommended."
+          }
+        ]
+      }
+    },
+    "ReportedSeverity": {
+      "type": "string",
+      "description": "Assessed alert severity.",
+      "enum": [
+        "Informational",
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "ReportedSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Informational",
+            "value": "Informational",
+            "description": "Informational"
+          },
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium"
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High"
+          }
+        ]
+      }
+    },
+    "TagsResource": {
+      "type": "object",
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ThresholdCustomAlertRule": {
+      "type": "object",
+      "description": "A custom alert rule that checks if a value (depends on the custom alert type) is within the given range.",
+      "properties": {
+        "ruleType": {
+          "type": "string",
+          "description": "Discriminator property for ThresholdCustomAlertRule."
+        },
+        "minThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum threshold."
+        },
+        "maxThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum threshold."
+        }
+      },
+      "discriminator": "ruleType",
+      "required": [
+        "ruleType",
+        "minThreshold",
+        "maxThreshold"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomAlertRule"
+        }
+      ]
+    },
+    "TimeWindowCustomAlertRule": {
+      "type": "object",
+      "description": "A custom alert rule that checks if the number of activities (depends on the custom alert type) in a time window is within the given range.",
+      "properties": {
+        "ruleType": {
+          "type": "string",
+          "description": "Discriminator property for TimeWindowCustomAlertRule."
+        },
+        "timeWindowSize": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time window size in iso8601 format."
+        }
+      },
+      "discriminator": "ruleType",
+      "required": [
+        "ruleType",
+        "timeWindowSize"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ThresholdCustomAlertRule"
+        }
+      ]
+    },
+    "TwinUpdatesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of twin updates is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "TwinUpdatesNotInAllowedRange"
+    },
+    "UnauthorizedOperationsNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of unauthorized operations is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "x-ms-discriminator-value": "UnauthorizedOperationsNotInAllowedRange"
+    },
+    "UpdateIoTSecuritySolutionProperties": {
+      "type": "object",
+      "description": "Update Security Solution setting data",
+      "properties": {
+        "userDefinedResources": {
+          "$ref": "#/definitions/UserDefinedResourcesProperties",
+          "description": "Properties of the IoT Security solution's user defined resources."
+        },
+        "recommendationsConfiguration": {
+          "type": "array",
+          "description": "List of the configuration status for each recommendation type.",
+          "items": {
+            "$ref": "#/definitions/RecommendationConfigurationProperties"
+          }
+        }
+      }
+    },
+    "UpdateIotSecuritySolutionData": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateIoTSecuritySolutionProperties",
+          "description": "Security Solution data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TagsResource"
+        }
+      ]
+    },
+    "UserDefinedResourcesProperties": {
+      "type": "object",
+      "description": "Properties of the IoT Security solution's user defined resources.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Azure Resource Graph query which represents the security solution's user defined resources. Required to start with \"where type != \"Microsoft.Devices/IotHubs\"\"",
+          "x-nullable": true
+        },
+        "querySubscriptions": {
+          "type": "array",
+          "description": "List of Azure subscription ids on which the user defined resources query should be executed.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/UserDefinedResourcesPropertiesConstrainedString"
+          }
+        }
+      },
+      "required": [
+        "query",
+        "querySubscriptions"
+      ]
+    },
+    "UserDefinedResourcesPropertiesConstrainedString": {
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+    },
+    "ValueType": {
+      "type": "string",
+      "description": "The value type of the items in the list.",
+      "enum": [
+        "IpCidr",
+        "String"
+      ],
+      "x-ms-enum": {
+        "name": "ValueType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IpCidr",
+            "value": "IpCidr",
+            "description": "An IP range in CIDR format (e.g. '192.168.0.1/8')."
+          },
+          {
+            "name": "String",
+            "value": "String",
+            "description": "Any string value."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

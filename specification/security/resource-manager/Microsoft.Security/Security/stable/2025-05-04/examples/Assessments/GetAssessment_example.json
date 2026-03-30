@@ -1,36 +1,31 @@
 {
   "parameters": {
     "api-version": "2025-05-04",
-    "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2",
-    "assessmentName": "21300918-b2e3-0346-785f-c77ff57d243b"
+    "assessmentName": "21300918-b2e3-0346-785f-c77ff57d243b",
+    "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2/providers/Microsoft.Security/assessments/21300918-b2e3-0346-785f-c77ff57d243b",
         "name": "21300918-b2e3-0346-785f-c77ff57d243b",
         "type": "Microsoft.Security/assessments",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2/providers/Microsoft.Security/assessments/21300918-b2e3-0346-785f-c77ff57d243b",
         "properties": {
-          "resourceDetails": {
-            "source": "Azure",
-            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2"
+          "additionalData": {
+            "linkedWorkspaceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myLaWorkspace"
           },
           "displayName": "Install endpoint protection solution on virtual machine scale sets",
-          "status": {
-            "code": "NotApplicable",
-            "cause": "OffByPolicy",
-            "description": "The effective policy for the assessment was evaluated to off - use Microsoft.Authorization/policyAssignments to turn this assessment on"
+          "resourceDetails": {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2",
+            "source": "Azure"
           },
           "risk": {
             "attackPathsReferences": [],
             "isContextualRisk": true,
-            "riskFactors": [
-              "Exposure to the Internet",
-              "Sensitive Data",
-              "Critical Resource"
-            ],
+            "level": "Critical",
             "paths": [
               {
+                "edges": [],
                 "id": "14caae95be8a4e6da0b049ecb53bc880",
                 "nodes": [
                   {
@@ -40,17 +35,24 @@
                       "containsSensitiveData"
                     ]
                   }
-                ],
-                "edges": []
+                ]
               }
             ],
-            "level": "Critical"
+            "riskFactors": [
+              "Exposure to the Internet",
+              "Sensitive Data",
+              "Critical Resource"
+            ]
           },
-          "additionalData": {
-            "linkedWorkspaceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myLaWorkspace"
+          "status": {
+            "description": "The effective policy for the assessment was evaluated to off - use Microsoft.Authorization/policyAssignments to turn this assessment on",
+            "cause": "OffByPolicy",
+            "code": "NotApplicable"
           }
         }
       }
     }
-  }
+  },
+  "operationId": "Assessments_Get",
+  "title": "Get security recommendation task from security data location"
 }

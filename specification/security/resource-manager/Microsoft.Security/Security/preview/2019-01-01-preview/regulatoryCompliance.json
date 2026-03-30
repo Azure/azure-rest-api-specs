@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Defender for Cloud",
+    "version": "2019-01-01-preview",
     "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2019-01-01-preview"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,50 +30,59 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "RegulatoryCompliance"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards": {
       "get": {
-        "x-ms-examples": {
-          "Get all supported regulatory compliance standards details and state": {
-            "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceStandardList_example.json"
-          }
-        },
+        "operationId": "RegulatoryComplianceStandards_List",
         "tags": [
           "RegulatoryCompliance"
         ],
         "description": "Supported regulatory compliance standards details and state",
-        "operationId": "RegulatoryComplianceStandards_List",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/ODataFilter"
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter. Optional.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RegulatoryComplianceStandardList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all supported regulatory compliance standards details and state": {
+            "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceStandardList_example.json"
           }
         },
         "x-ms-pageable": {
@@ -78,81 +92,93 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}": {
       "get": {
-        "x-ms-examples": {
-          "Get selected regulatory compliance standard details and state": {
-            "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceStandard_example.json"
-          }
-        },
+        "operationId": "RegulatoryComplianceStandards_Get",
         "tags": [
           "RegulatoryCompliance"
         ],
         "description": "Supported regulatory compliance details state for selected standard",
-        "operationId": "RegulatoryComplianceStandards_Get",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/RegulatoryComplianceStandardName"
+            "name": "regulatoryComplianceStandardName",
+            "in": "path",
+            "description": "Name of the regulatory compliance standard object",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RegulatoryComplianceStandard"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get selected regulatory compliance standard details and state": {
+            "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceStandard_example.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls": {
       "get": {
-        "x-ms-examples": {
-          "Get all regulatory compliance controls details and state for selected standard": {
-            "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceControlList_example.json"
-          }
-        },
+        "operationId": "RegulatoryComplianceControls_List",
         "tags": [
           "RegulatoryCompliance"
         ],
         "description": "All supported regulatory compliance controls details and state for selected standard",
-        "operationId": "RegulatoryComplianceControls_List",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/RegulatoryComplianceStandardName"
+            "name": "regulatoryComplianceStandardName",
+            "in": "path",
+            "description": "Name of the regulatory compliance standard object",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/ODataFilter"
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter. Optional.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RegulatoryComplianceControlList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all regulatory compliance controls details and state for selected standard": {
+            "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceControlList_example.json"
           }
         },
         "x-ms-pageable": {
@@ -162,87 +188,107 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}": {
       "get": {
-        "x-ms-examples": {
-          "Get selected regulatory compliance control details and state": {
-            "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceControl_example.json"
-          }
-        },
+        "operationId": "RegulatoryComplianceControls_Get",
         "tags": [
           "RegulatoryCompliance"
         ],
         "description": "Selected regulatory compliance control details and state",
-        "operationId": "RegulatoryComplianceControls_Get",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/RegulatoryComplianceStandardName"
+            "name": "regulatoryComplianceStandardName",
+            "in": "path",
+            "description": "Name of the regulatory compliance standard object",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/RegulatoryComplianceControlName"
+            "name": "regulatoryComplianceControlName",
+            "in": "path",
+            "description": "Name of the regulatory compliance control object",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RegulatoryComplianceControl"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get selected regulatory compliance control details and state": {
+            "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceControl_example.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}/regulatoryComplianceAssessments": {
       "get": {
-        "x-ms-examples": {
-          "Get all assessments mapped to selected regulatory compliance control": {
-            "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceAssessmentList_example.json"
-          }
-        },
+        "operationId": "RegulatoryComplianceAssessments_List",
         "tags": [
           "RegulatoryCompliance"
         ],
         "description": "Details and state of assessments mapped to selected regulatory compliance control",
-        "operationId": "RegulatoryComplianceAssessments_List",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/RegulatoryComplianceStandardName"
+            "name": "regulatoryComplianceStandardName",
+            "in": "path",
+            "description": "Name of the regulatory compliance standard object",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/RegulatoryComplianceControlName"
+            "name": "regulatoryComplianceControlName",
+            "in": "path",
+            "description": "Name of the regulatory compliance control object",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/ODataFilter"
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter. Optional.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RegulatoryComplianceAssessmentList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all assessments mapped to selected regulatory compliance control": {
+            "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceAssessmentList_example.json"
           }
         },
         "x-ms-pageable": {
@@ -252,254 +298,125 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}/regulatoryComplianceAssessments/{regulatoryComplianceAssessmentName}": {
       "get": {
-        "x-ms-examples": {
-          "Get selected regulatory compliance assessment details and state": {
-            "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceAssessment_example.json"
-          }
-        },
+        "operationId": "RegulatoryComplianceAssessments_Get",
         "tags": [
           "RegulatoryCompliance"
         ],
         "description": "Supported regulatory compliance details and state for selected assessment",
-        "operationId": "RegulatoryComplianceAssessments_Get",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/RegulatoryComplianceStandardName"
+            "name": "regulatoryComplianceStandardName",
+            "in": "path",
+            "description": "Name of the regulatory compliance standard object",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/RegulatoryComplianceControlName"
+            "name": "regulatoryComplianceControlName",
+            "in": "path",
+            "description": "Name of the regulatory compliance control object",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/RegulatoryComplianceAssessmentName"
+            "name": "regulatoryComplianceAssessmentName",
+            "in": "path",
+            "description": "Name of the regulatory compliance assessment object",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RegulatoryComplianceAssessment"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get selected regulatory compliance assessment details and state": {
+            "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceAssessment_example.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "RegulatoryComplianceStandardList": {
-      "description": "List of regulatory compliance standards response",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RegulatoryComplianceStandard"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page."
-        }
-      }
-    },
-    "RegulatoryComplianceStandard": {
+    "CloudError": {
       "type": "object",
-      "description": "Regulatory compliance standard details and state",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Regulatory compliance standard data",
-          "$ref": "#/definitions/RegulatoryComplianceStandardProperties"
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "./common/v1/types.json#/definitions/Resource"
-        }
-      ]
+      "x-ms-external": true
     },
-    "RegulatoryComplianceStandardProperties": {
+    "CloudErrorBody": {
       "type": "object",
-      "description": "Regulatory compliance standard data",
+      "description": "The error detail.",
       "properties": {
-        "state": {
+        "code": {
           "type": "string",
-          "description": "Aggregative state based on the standard's supported controls states",
-          "enum": [
-            "Passed",
-            "Failed",
-            "Skipped",
-            "Unsupported"
-          ],
-          "x-ms-enum": {
-            "name": "state",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Passed",
-                "description": "All supported regulatory compliance controls in the given standard have a passed state"
-              },
-              {
-                "value": "Failed",
-                "description": "At least one supported regulatory compliance control in the given standard has a state of failed"
-              },
-              {
-                "value": "Skipped",
-                "description": "All supported regulatory compliance controls in the given standard have a state of skipped"
-              },
-              {
-                "value": "Unsupported",
-                "description": "No supported regulatory compliance data for the given standard"
-              }
-            ]
-          }
+          "description": "The error code.",
+          "readOnly": true
         },
-        "passedControls": {
-          "readOnly": true,
-          "type": "integer",
-          "description": "The number of supported regulatory compliance controls of the given standard with a passed state"
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
         },
-        "failedControls": {
-          "readOnly": true,
-          "type": "integer",
-          "description": "The number of supported regulatory compliance controls of the given standard with a failed state"
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
         },
-        "skippedControls": {
-          "readOnly": true,
-          "type": "integer",
-          "description": "The number of supported regulatory compliance controls of the given standard with a skipped state"
-        },
-        "unsupportedControls": {
-          "readOnly": true,
-          "type": "integer",
-          "description": "The number of regulatory compliance controls of the given standard which are unsupported by automated assessments"
-        }
-      }
-    },
-    "RegulatoryComplianceControlList": {
-      "description": "List of regulatory compliance controls response",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
+        "details": {
           "type": "array",
-          "description": "List of regulatory compliance controls",
+          "description": "The error details.",
           "items": {
-            "$ref": "#/definitions/RegulatoryComplianceControl"
-          }
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
         },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page."
-        }
-      }
-    },
-    "RegulatoryComplianceControl": {
-      "type": "object",
-      "description": "Regulatory compliance control details and state",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Regulatory compliance control data",
-          "$ref": "#/definitions/RegulatoryComplianceControlProperties"
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "./common/v1/types.json#/definitions/Resource"
-        }
-      ]
+      "x-ms-external": true
     },
-    "RegulatoryComplianceControlProperties": {
+    "ErrorAdditionalInfo": {
       "type": "object",
-      "description": "Regulatory compliance control data",
+      "description": "The resource management error additional info.",
       "properties": {
-        "description": {
-          "readOnly": true,
+        "type": {
           "type": "string",
-          "description": "The description of the regulatory compliance control"
+          "description": "The additional info type.",
+          "readOnly": true
         },
-        "state": {
-          "type": "string",
-          "description": "Aggregative state based on the control's supported assessments states",
-          "enum": [
-            "Passed",
-            "Failed",
-            "Skipped",
-            "Unsupported"
-          ],
-          "x-ms-enum": {
-            "name": "state",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Passed",
-                "description": "All supported regulatory compliance assessments in the given control have a passed state"
-              },
-              {
-                "value": "Failed",
-                "description": "At least one supported regulatory compliance assessment in the given control has a state of failed"
-              },
-              {
-                "value": "Skipped",
-                "description": "All supported regulatory compliance assessments in the given control have a state of skipped"
-              },
-              {
-                "value": "Unsupported",
-                "description": "No supported regulatory assessment data for the given control"
-              }
-            ]
-          }
-        },
-        "passedAssessments": {
-          "readOnly": true,
-          "type": "integer",
-          "description": "The number of supported regulatory compliance assessments of the given control with a passed state"
-        },
-        "failedAssessments": {
-          "readOnly": true,
-          "type": "integer",
-          "description": "The number of supported regulatory compliance assessments of the given control with a failed state"
-        },
-        "skippedAssessments": {
-          "readOnly": true,
-          "type": "integer",
-          "description": "The number of supported regulatory compliance assessments of the given control with a skipped state"
-        }
-      }
-    },
-    "RegulatoryComplianceAssessmentList": {
-      "description": "List of regulatory compliance assessment response",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RegulatoryComplianceAssessment"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page."
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
         }
       }
     },
@@ -508,15 +425,36 @@
       "description": "Regulatory compliance assessment details and state",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RegulatoryComplianceAssessmentProperties",
           "description": "Regulatory compliance assessment data",
-          "$ref": "#/definitions/RegulatoryComplianceAssessmentProperties"
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "./common/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "RegulatoryComplianceAssessmentList": {
+      "type": "object",
+      "description": "List of regulatory compliance assessment response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RegulatoryComplianceAssessment items on this page",
+          "items": {
+            "$ref": "#/definitions/RegulatoryComplianceAssessment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "RegulatoryComplianceAssessmentProperties": {
@@ -524,99 +462,227 @@
       "description": "Regulatory compliance assessment data",
       "properties": {
         "description": {
-          "readOnly": true,
           "type": "string",
-          "description": "The description of the regulatory compliance assessment"
+          "description": "The description of the regulatory compliance assessment",
+          "readOnly": true
         },
         "assessmentType": {
-          "readOnly": true,
           "type": "string",
-          "description": "The expected type of assessment contained in the AssessmentDetailsLink"
+          "description": "The expected type of assessment contained in the AssessmentDetailsLink",
+          "readOnly": true
         },
         "assessmentDetailsLink": {
-          "readOnly": true,
           "type": "string",
-          "description": "Link to more detailed assessment results data. The response type will be according to the assessmentType field"
+          "description": "Link to more detailed assessment results data. The response type will be according to the assessmentType field",
+          "readOnly": true
         },
         "state": {
-          "type": "string",
-          "description": "Aggregative state based on the assessment's scanned resources states",
-          "enum": [
-            "Passed",
-            "Failed",
-            "Skipped",
-            "Unsupported"
-          ],
-          "x-ms-enum": {
-            "name": "state",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Passed",
-                "description": "All related resources passed the given assessment"
-              },
-              {
-                "value": "Failed",
-                "description": "The given assessment failed on at least one resource"
-              },
-              {
-                "value": "Skipped",
-                "description": "The given assessment skipped on all related resources"
-              },
-              {
-                "value": "Unsupported",
-                "description": "The given assessment has no supported resources"
-              }
-            ]
-          }
+          "$ref": "#/definitions/State",
+          "description": "Aggregative state based on the assessment's scanned resources states"
         },
         "passedResources": {
-          "readOnly": true,
           "type": "integer",
-          "description": "The given assessment's related resources count with passed state."
+          "format": "int32",
+          "description": "The given assessment's related resources count with passed state.",
+          "readOnly": true
         },
         "failedResources": {
-          "readOnly": true,
           "type": "integer",
-          "description": "The given assessment's related resources count with failed state."
+          "format": "int32",
+          "description": "The given assessment's related resources count with failed state.",
+          "readOnly": true
         },
         "skippedResources": {
-          "readOnly": true,
           "type": "integer",
-          "description": "The given assessment's related resources count with skipped state."
+          "format": "int32",
+          "description": "The given assessment's related resources count with skipped state.",
+          "readOnly": true
         },
         "unsupportedResources": {
-          "readOnly": true,
           "type": "integer",
-          "description": "The given assessment's related resources count with unsupported state."
+          "format": "int32",
+          "description": "The given assessment's related resources count with unsupported state.",
+          "readOnly": true
         }
+      }
+    },
+    "RegulatoryComplianceControl": {
+      "type": "object",
+      "description": "Regulatory compliance control details and state",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegulatoryComplianceControlProperties",
+          "description": "Regulatory compliance control data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RegulatoryComplianceControlList": {
+      "type": "object",
+      "description": "List of regulatory compliance controls response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RegulatoryComplianceControl items on this page",
+          "items": {
+            "$ref": "#/definitions/RegulatoryComplianceControl"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RegulatoryComplianceControlProperties": {
+      "type": "object",
+      "description": "Regulatory compliance control data",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the regulatory compliance control",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/State",
+          "description": "Aggregative state based on the control's supported assessments states"
+        },
+        "passedAssessments": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of supported regulatory compliance assessments of the given control with a passed state",
+          "readOnly": true
+        },
+        "failedAssessments": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of supported regulatory compliance assessments of the given control with a failed state",
+          "readOnly": true
+        },
+        "skippedAssessments": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of supported regulatory compliance assessments of the given control with a skipped state",
+          "readOnly": true
+        }
+      }
+    },
+    "RegulatoryComplianceStandard": {
+      "type": "object",
+      "description": "Regulatory compliance standard details and state",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegulatoryComplianceStandardProperties",
+          "description": "Regulatory compliance standard data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RegulatoryComplianceStandardList": {
+      "type": "object",
+      "description": "List of regulatory compliance standards response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RegulatoryComplianceStandard items on this page",
+          "items": {
+            "$ref": "#/definitions/RegulatoryComplianceStandard"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RegulatoryComplianceStandardProperties": {
+      "type": "object",
+      "description": "Regulatory compliance standard data",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/State",
+          "description": "Aggregative state based on the standard's supported controls states"
+        },
+        "passedControls": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of supported regulatory compliance controls of the given standard with a passed state",
+          "readOnly": true
+        },
+        "failedControls": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of supported regulatory compliance controls of the given standard with a failed state",
+          "readOnly": true
+        },
+        "skippedControls": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of supported regulatory compliance controls of the given standard with a skipped state",
+          "readOnly": true
+        },
+        "unsupportedControls": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of regulatory compliance controls of the given standard which are unsupported by automated assessments",
+          "readOnly": true
+        }
+      }
+    },
+    "State": {
+      "type": "string",
+      "description": "Aggregative state based on the standard's supported controls states",
+      "enum": [
+        "Passed",
+        "Failed",
+        "Skipped",
+        "Unsupported"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "All supported regulatory compliance controls in the given standard have a passed state"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "At least one supported regulatory compliance control in the given standard has a state of failed"
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "All supported regulatory compliance controls in the given standard have a state of skipped"
+          },
+          {
+            "name": "Unsupported",
+            "value": "Unsupported",
+            "description": "No supported regulatory compliance data for the given standard"
+          }
+        ]
       }
     }
   },
-  "parameters": {
-    "RegulatoryComplianceStandardName": {
-      "name": "regulatoryComplianceStandardName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the regulatory compliance standard object",
-      "x-ms-parameter-location": "method"
-    },
-    "RegulatoryComplianceControlName": {
-      "name": "regulatoryComplianceControlName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the regulatory compliance control object",
-      "x-ms-parameter-location": "method"
-    },
-    "RegulatoryComplianceAssessmentName": {
-      "name": "regulatoryComplianceAssessmentName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the regulatory compliance assessment object",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

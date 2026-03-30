@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Defender for Cloud",
+    "version": "2023-05-01-preview",
     "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2023-05-01-preview"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,47 +30,58 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "HealthReports"
+    }
+  ],
   "paths": {
     "/{scope}/providers/Microsoft.Security/healthReports": {
       "get": {
-        "x-ms-examples": {
-          "List health reports": {
-            "$ref": "./examples/HealthReports/ListHealthReports_example.json"
-          }
-        },
+        "operationId": "HealthReports_List",
         "tags": [
           "HealthReports"
         ],
         "description": "Get a list of all health reports inside a scope. Valid scopes are: subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'",
-        "operationId": "HealthReports_List",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ScopeParameter"
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HealthReportsList"
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List health reports": {
+            "$ref": "./examples/HealthReports/ListHealthReports_example.json"
           }
         },
         "x-ms-pageable": {
@@ -75,77 +91,68 @@
     },
     "/{resourceId}/providers/Microsoft.Security/healthReports/{healthReportName}": {
       "get": {
-        "x-ms-examples": {
-          "Get health report of resource": {
-            "$ref": "./examples/HealthReports/GetHealthReports_example.json"
-          }
-        },
+        "operationId": "HealthReports_Get",
         "tags": [
           "HealthReports"
         ],
         "description": "Get health report of resource",
-        "operationId": "HealthReports_Get",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/ResourceId"
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/HealthReportName"
+            "name": "healthReportName",
+            "in": "path",
+            "description": "The health report key.",
+            "required": true,
+            "type": "string",
+            "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HealthReport"
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get health report of resource": {
+            "$ref": "./examples/HealthReports/GetHealthReports_example.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "HealthReportsList": {
-      "type": "object",
-      "description": "Page of health reports list",
-      "properties": {
-        "value": {
-          "description": "Collection of health reports in this page",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthReport"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page"
-        }
-      }
-    },
     "HealthReport": {
       "type": "object",
       "description": "The health report resource",
       "properties": {
         "properties": {
+          "$ref": "#/definitions/HealthReportProperties",
           "description": "Properties of a health report",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/HealthReportProperties"
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "./common/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -154,40 +161,42 @@
       "description": "Describes properties of the health report",
       "properties": {
         "resourceDetails": {
-          "$ref": "#/definitions/resourceDetails"
+          "$ref": "#/definitions/resourceDetails",
+          "description": "The resource details of the health report"
         },
         "environmentDetails": {
-          "$ref": "#/definitions/environmentDetails"
+          "$ref": "#/definitions/environmentDetails",
+          "description": "The environment details of the resource"
         },
         "healthDataClassification": {
-          "$ref": "#/definitions/healthDataClassification"
+          "$ref": "#/definitions/healthDataClassification",
+          "description": "The classification of the health report"
         },
         "status": {
-          "$ref": "#/definitions/status"
+          "$ref": "#/definitions/status",
+          "description": "The status of the health report"
         },
         "affectedDefendersPlans": {
           "type": "array",
           "description": "The affected defenders plans by unhealthy report",
           "items": {
-            "type": "string",
-            "description": "plan name"
+            "type": "string"
           }
         },
         "affectedDefendersSubPlans": {
           "type": "array",
           "description": "The affected defenders sub plans by unhealthy report",
           "items": {
-            "type": "string",
-            "description": "sub plan name"
+            "type": "string"
           }
         },
         "reportAdditionalData": {
           "type": "object",
           "description": "Additional data for the given health report, this field can include more details on the resource and the health scenario.",
-          "readOnly": true,
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "issues": {
           "type": "array",
@@ -199,48 +208,83 @@
         }
       }
     },
-    "issue": {
+    "HealthReportsList": {
       "type": "object",
-      "description": "The issue that caused the resource to by unhealthy",
-      "required": [
-        "issueKey"
-      ],
+      "description": "Page of health reports list",
       "properties": {
-        "issueKey": {
-          "description": "The unique issue key",
-          "type": "string"
-        },
-        "issueName": {
-          "type": "string",
-          "description": "The issue name"
-        },
-        "securityValues": {
+        "value": {
           "type": "array",
-          "description": "The affected security values that MDC offers that will be affected by the issue, for example: recommendations, alerts, etc",
+          "description": "The HealthReport items on this page.",
           "items": {
-            "type": "string",
-            "description": "security values"
-          }
+            "$ref": "#/definitions/HealthReport"
+          },
+          "readOnly": true
         },
-        "issueDescription": {
+        "nextLink": {
           "type": "string",
-          "description": "The issue description"
-        },
-        "remediationSteps": {
-          "type": "string",
-          "description": "Human readable description of what you should do to mitigate this health issue"
-        },
-        "remediationScript": {
-          "type": "string",
-          "description": "The remediation script to solve this issue"
-        },
-        "issueAdditionalData": {
-          "type": "object",
-          "description": "Additional data for the given issue. The additional data depends on the issue type",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "format": "uri",
+          "description": "The link to the next page of items."
         }
+      }
+    },
+    "Source": {
+      "type": "string",
+      "description": "The status of the health report",
+      "enum": [
+        "Aws",
+        "Gcp",
+        "Azure"
+      ],
+      "x-ms-enum": {
+        "name": "Source",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Aws",
+            "value": "Aws",
+            "description": "Aws"
+          },
+          {
+            "name": "Gcp",
+            "value": "Gcp",
+            "description": "Gcp"
+          },
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Azure"
+          }
+        ]
+      }
+    },
+    "StatusName": {
+      "type": "string",
+      "description": "The status of the health report",
+      "enum": [
+        "Healthy",
+        "NotHealthy",
+        "NotApplicable"
+      ],
+      "x-ms-enum": {
+        "name": "StatusName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Healthy"
+          },
+          {
+            "name": "NotHealthy",
+            "value": "NotHealthy",
+            "description": "NotHealthy"
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "NotApplicable"
+          }
+        ]
       }
     },
     "environmentDetails": {
@@ -248,24 +292,24 @@
       "description": "The environment details of the resource",
       "properties": {
         "nativeResourceId": {
-          "description": "The native resource id of the resource (in case of Azure - the resource Id, in case of MC - the native resource id)",
-          "type": "string"
+          "type": "string",
+          "description": "The native resource id of the resource (in case of Azure - the resource Id, in case of MC - the native resource id)"
         },
         "environmentHierarchyId": {
-          "description": "The hierarchy id of the connector (in case of Azure - the subscription Id, in case of MC - the hierarchyId id)",
-          "type": "string"
+          "type": "string",
+          "description": "The hierarchy id of the connector (in case of Azure - the subscription Id, in case of MC - the hierarchyId id)"
         },
         "organizationalHierarchyId": {
-          "description": "The organizational hierarchy id of the connector (in case of Azure - the subscription Id, in case of MC - the organizational hierarchyId id)",
-          "type": "string"
+          "type": "string",
+          "description": "The organizational hierarchy id of the connector (in case of Azure - the subscription Id, in case of MC - the organizational hierarchyId id)"
         },
         "subscriptionId": {
-          "description": "The subscription Id",
-          "type": "string"
+          "type": "string",
+          "description": "The subscription Id"
         },
         "tenantId": {
-          "description": "The tenant Id",
-          "type": "string"
+          "type": "string",
+          "description": "The tenant Id"
         }
       }
     },
@@ -287,22 +331,76 @@
         }
       }
     },
+    "issue": {
+      "type": "object",
+      "description": "The issue that caused the resource to by unhealthy",
+      "properties": {
+        "issueKey": {
+          "type": "string",
+          "description": "The unique issue key"
+        },
+        "issueName": {
+          "type": "string",
+          "description": "The issue name"
+        },
+        "securityValues": {
+          "type": "array",
+          "description": "The affected security values that MDC offers that will be affected by the issue, for example: recommendations, alerts, etc",
+          "items": {
+            "type": "string"
+          }
+        },
+        "issueDescription": {
+          "type": "string",
+          "description": "The issue description"
+        },
+        "remediationSteps": {
+          "type": "string",
+          "description": "Human readable description of what you should do to mitigate this health issue"
+        },
+        "remediationScript": {
+          "type": "string",
+          "description": "The remediation script to solve this issue"
+        },
+        "issueAdditionalData": {
+          "type": "object",
+          "description": "Additional data for the given issue. The additional data depends on the issue type",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "issueKey"
+      ]
+    },
+    "resourceDetails": {
+      "type": "object",
+      "description": "The resource details of the health report",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/Source",
+          "description": "The status of the health report"
+        },
+        "id": {
+          "type": "string",
+          "description": "The azure id of the resource",
+          "readOnly": true
+        },
+        "connectorId": {
+          "type": "string",
+          "description": "The id of the connector",
+          "readOnly": true
+        }
+      }
+    },
     "status": {
       "type": "object",
       "description": "The status of the health report",
       "properties": {
         "code": {
-          "type": "string",
-          "description": "The status of the health report",
-          "enum": [
-            "Healthy",
-            "NotHealthy",
-            "NotApplicable"
-          ],
-          "x-ms-enum": {
-            "name": "statusName",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/StatusName",
+          "description": "The status of the health report"
         },
         "reason": {
           "type": "string",
@@ -312,62 +410,23 @@
         "lastScannedDate": {
           "type": "string",
           "format": "date-time",
-          "readOnly": true,
-          "description": "The date of when the resource was scanned in the last time"
+          "description": "The date of when the resource was scanned in the last time",
+          "readOnly": true
         },
         "statusChangeDate": {
           "type": "string",
           "format": "date-time",
-          "readOnly": true,
-          "description": "The date of when the status of the health report was changed in the last time"
+          "description": "The date of when the status of the health report was changed in the last time",
+          "readOnly": true
         },
         "firstEvaluationDate": {
-          "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The date of when the resource of the health report was scanned in the first time"
-        }
-      }
-    },
-    "resourceDetails": {
-      "type": "object",
-      "description": "The resource details of the health report",
-      "properties": {
-        "source": {
-          "type": "string",
-          "description": "The status of the health report",
-          "enum": [
-            "Aws",
-            "Gcp",
-            "Azure"
-          ],
-          "x-ms-enum": {
-            "name": "source",
-            "modelAsString": true
-          }
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The azure id of the resource"
-        },
-        "connectorId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The id of the connector"
+          "description": "The date of when the resource of the health report was scanned in the first time",
+          "readOnly": true
         }
       }
     }
   },
-  "parameters": {
-    "HealthReportName": {
-      "name": "healthReportName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
-      "description": "The health report Key - Unique key for the health report type",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

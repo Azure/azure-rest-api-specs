@@ -1,16 +1,14 @@
 {
   "parameters": {
     "api-version": "2025-06-01",
-    "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount",
-    "settingName": "current",
     "defenderForStorageSetting": {
       "properties": {
         "isEnabled": true,
         "malwareScanning": {
           "onUpload": {
-            "isEnabled": true,
             "capGBPerMonth": -1,
             "filters": {
+              "excludeBlobsLargerThan": 1024,
               "excludeBlobsWithPrefix": [
                 "unscanned-container",
                 "sample-container/logs"
@@ -18,32 +16,35 @@
               "excludeBlobsWithSuffix": [
                 ".log",
                 ".jpg"
-              ],
-              "excludeBlobsLargerThan": 1024
-            }
+              ]
+            },
+            "isEnabled": true
           },
           "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic"
         },
+        "overrideSubscriptionLevelSettings": true,
         "sensitiveDataDiscovery": {
           "isEnabled": true
-        },
-        "overrideSubscriptionLevelSettings": true
+        }
       }
-    }
+    },
+    "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount",
+    "settingName": "current"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current",
-        "type": "Microsoft.Security/defenderForStorageSettings",
         "name": "current",
+        "type": "Microsoft.Security/defenderForStorageSettings",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current",
         "properties": {
           "isEnabled": true,
           "malwareScanning": {
+            "blobScanResultsOptions": "blobIndexTags",
             "onUpload": {
-              "isEnabled": true,
               "capGBPerMonth": -1,
               "filters": {
+                "excludeBlobsLargerThan": 1024,
                 "excludeBlobsWithPrefix": [
                   "sample-container/logs",
                   "single-excluded-container/",
@@ -52,53 +53,54 @@
                 "excludeBlobsWithSuffix": [
                   ".log",
                   ".jpg"
-                ],
-                "excludeBlobsLargerThan": 1024
-              }
+                ]
+              },
+              "isEnabled": true
             },
-            "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic",
-            "blobScanResultsOptions": "blobIndexTags",
             "operationStatus": {
               "code": "Succeeded"
-            }
+            },
+            "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic"
           },
+          "overrideSubscriptionLevelSettings": true,
           "sensitiveDataDiscovery": {
             "isEnabled": true,
             "operationStatus": {
               "code": "Succeeded"
             }
-          },
-          "overrideSubscriptionLevelSettings": true
+          }
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current",
-        "type": "Microsoft.Security/defenderForStorageSettings",
         "name": "current",
+        "type": "Microsoft.Security/defenderForStorageSettings",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current",
         "properties": {
           "isEnabled": true,
           "malwareScanning": {
             "onUpload": {
-              "isEnabled": false,
-              "capGBPerMonth": -1
+              "capGBPerMonth": -1,
+              "isEnabled": false
             },
             "operationStatus": {
               "code": "UnknownError",
               "message": "Failed to setup data scanner."
             }
           },
+          "overrideSubscriptionLevelSettings": true,
           "sensitiveDataDiscovery": {
             "isEnabled": false,
             "operationStatus": {
               "code": "UnknownError",
               "message": "Failed to setup data scanner."
             }
-          },
-          "overrideSubscriptionLevelSettings": true
+          }
         }
       }
     }
-  }
+  },
+  "operationId": "DefenderForStorage_Create",
+  "title": "Creates or updates the Defender for Storage settings on a specified resource."
 }

@@ -8,31 +8,33 @@
       "body": {
         "value": [
           {
-            "properties": {
-              "securityFamily": "SaasWaf",
-              "protectionStatus": "Good",
-              "template": "microsoft/ApplicationGateway-ARM",
-              "provisioningState": "Succeeded"
-            },
-            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Security/locations/centralus/securitySolutions/SaasWaf",
             "name": "MySaasWaf",
             "type": "Microsoft.Security/locations/securitySolutions",
-            "location": "eastus"
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Security/locations/centralus/securitySolutions/SaasWaf",
+            "location": "eastus",
+            "properties": {
+              "protectionStatus": "Good",
+              "provisioningState": "Succeeded",
+              "securityFamily": "SaasWaf",
+              "template": "microsoft/ApplicationGateway-ARM"
+            }
           },
           {
-            "properties": {
-              "securityFamily": "Va",
-              "protectionStatus": "Good",
-              "template": "qualys.qualysAgent",
-              "provisioningState": "Succeeded"
-            },
-            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg2/providers/Microsoft.Security/locations/centralus/securitySolutions/MyVA",
             "name": "MyVA",
             "type": "Microsoft.Security/locations/securitySolutions",
-            "location": "eastus2"
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg2/providers/Microsoft.Security/locations/centralus/securitySolutions/MyVA",
+            "location": "eastus2",
+            "properties": {
+              "protectionStatus": "Good",
+              "provisioningState": "Succeeded",
+              "securityFamily": "Va",
+              "template": "qualys.qualysAgent"
+            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "SecuritySolutions_List",
+  "title": "Get security solutions"
 }

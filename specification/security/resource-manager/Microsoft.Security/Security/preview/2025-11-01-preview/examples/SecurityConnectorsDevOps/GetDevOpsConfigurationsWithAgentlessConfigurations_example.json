@@ -1,15 +1,32 @@
 {
   "parameters": {
-    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3",
+    "api-version": "2025-11-01-preview",
     "resourceGroupName": "myRg",
     "securityConnectorName": "mySecurityConnectorName",
-    "api-version": "2025-11-01-preview"
+    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "name": "default",
+        "type": "Microsoft.Security/securityConnectors/devops",
+        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default",
         "properties": {
+          "agentlessConfiguration": {
+            "agentlessAutoDiscovery": "Disabled",
+            "agentlessEnabled": "Enabled",
+            "inventoryList": [
+              {
+                "inventoryKind": "AzureDevOpsOrganization",
+                "value": "org1"
+              }
+            ],
+            "inventoryListType": "Inclusion",
+            "scanners": [
+              "scanner1",
+              "scanner2"
+            ]
+          },
           "autoDiscovery": "Enabled",
           "capabilities": [
             {
@@ -17,27 +34,12 @@
               "value": "true"
             }
           ],
-          "agentlessConfiguration": {
-            "agentlessEnabled": "Enabled",
-            "agentlessAutoDiscovery": "Disabled",
-            "scanners": [
-              "scanner1",
-              "scanner2"
-            ],
-            "inventoryListType": "Inclusion",
-            "inventoryList": [
-              {
-                "inventoryKind": "AzureDevOpsOrganization",
-                "value": "org1"
-              }
-            ]
-          },
           "provisioningState": "Succeeded"
-        },
-        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default",
-        "name": "default",
-        "type": "Microsoft.Security/securityConnectors/devops"
-      }
+        }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "DevOpsConfigurations_Get",
+  "title": "Get_DevOpsConfigurations_WithAgentlessConfigurations"
 }

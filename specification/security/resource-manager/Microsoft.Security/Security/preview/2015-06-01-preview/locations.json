@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Defender for Cloud",
+    "version": "2015-06-01-preview",
     "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2015-06-01-preview"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,47 +30,52 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "Locations"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations": {
       "get": {
-        "x-ms-examples": {
-          "Get security data locations": {
-            "$ref": "./examples/Locations/GetLocations_example.json"
-          }
-        },
+        "operationId": "Locations_List",
         "tags": [
           "Locations"
         ],
         "description": "The location of the responsible ASC of the specific subscription (home region). For each subscription there is only one responsible location. The location in the response should be used to read or write other resources in ASC according to their ID.",
-        "operationId": "Locations_List",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/AscLocationList"
+              "$ref": "#/definitions/AscLocationList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get security data locations": {
+            "$ref": "./examples/Locations/GetLocations_example.json"
           }
         },
         "x-ms-pageable": {
@@ -75,68 +85,142 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}": {
       "get": {
-        "x-ms-examples": {
-          "Get security data location": {
-            "$ref": "./examples/Locations/GetLocation_example.json"
-          }
-        },
+        "operationId": "Locations_Get",
         "tags": [
           "Locations"
         ],
         "description": "Details of a specific location",
-        "operationId": "Locations_Get",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+            "name": "ascLocation",
+            "in": "path",
+            "description": "The location where ASC stores the data of the subscription. can be retrieved from Get locations",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/AscLocation"
+              "$ref": "#/definitions/AscLocation"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get security data location": {
+            "$ref": "./examples/Locations/GetLocation_example.json"
           }
         }
       }
     }
   },
-  "parameters": {
-    "ExtendedResourceProvider": {
-      "name": "extendedResourceProvider",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Resource provider name of the base resource",
-      "x-ms-parameter-location": "method"
+  "definitions": {
+    "AscLocation": {
+      "type": "object",
+      "description": "The ASC location of the subscription is in the \"name\" field",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
-    "ExtendedResourceType": {
-      "name": "extendedResourceType",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Type of the base resource",
-      "x-ms-parameter-location": "method"
+    "AscLocationList": {
+      "type": "object",
+      "description": "List of locations where ASC saves your data",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of locations",
+          "items": {
+            "$ref": "#/definitions/AscLocation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page.",
+          "readOnly": true
+        }
+      }
     },
-    "ExtendedResourceName": {
-      "name": "extendedResourceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the base resource",
-      "x-ms-parameter-location": "method"
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
     }
-  }
+  },
+  "parameters": {}
 }

@@ -1,14 +1,16 @@
 {
   "parameters": {
-    "api-version": "2023-12-01-preview",
-    "subscriptionId": "a5caac9c-5c04-49af-b3d0-e204f40345d5",
-    "automationName": "exampleAutomation",
-    "resourceGroupName": "exampleResourceGroup",
     "Automation": {
       "location": "Central US",
-      "tags": {},
       "properties": {
         "description": "An example of a security automation that triggers one LogicApp resource (myTest1) on any security assessment of type customAssessment",
+        "actions": [
+          {
+            "actionType": "LogicApp",
+            "logicAppResourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest1",
+            "uri": "https://exampleTriggerUri1.com"
+          }
+        ],
         "isEnabled": true,
         "scopes": [
           {
@@ -23,25 +25,23 @@
               {
                 "rules": [
                   {
-                    "propertyJPath": "$.Entity.AssessmentType",
-                    "propertyType": "String",
                     "expectedValue": "customAssessment",
-                    "operator": "Equals"
+                    "operator": "Equals",
+                    "propertyJPath": "$.Entity.AssessmentType",
+                    "propertyType": "String"
                   }
                 ]
               }
             ]
           }
-        ],
-        "actions": [
-          {
-            "logicAppResourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest1",
-            "actionType": "LogicApp",
-            "uri": "https://exampleTriggerUri1.com"
-          }
         ]
-      }
-    }
+      },
+      "tags": {}
+    },
+    "api-version": "2023-12-01-preview",
+    "automationName": "exampleAutomation",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "a5caac9c-5c04-49af-b3d0-e204f40345d5"
   },
   "responses": {
     "200": {
@@ -50,5 +50,7 @@
         "message": "Validation Successful"
       }
     }
-  }
+  },
+  "operationId": "Automations_Validate",
+  "title": "Validate the security automation model before create or update"
 }

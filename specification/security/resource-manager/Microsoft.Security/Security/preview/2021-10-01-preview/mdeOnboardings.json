@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "Security Center",
+    "version": "2021-10-01-preview",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2021-10-01-preview"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,132 +30,204 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "MdeOnboarding"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboardings": {
       "get": {
-        "x-ms-examples": {
-          "The configuration or data needed to onboard the machine to MDE": {
-            "$ref": "./examples/MdeOnboardings/ListMdeOnboardings_example.json"
-          }
-        },
+        "operationId": "MdeOnboardings_List",
         "tags": [
           "MdeOnboarding"
         ],
         "description": "The configuration or data needed to onboard the machine to MDE",
-        "operationId": "MdeOnboardings_List",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MdeOnboardingDataList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "The configuration or data needed to onboard the machine to MDE": {
+            "$ref": "./examples/MdeOnboardings/ListMdeOnboardings_example.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboardings/default": {
       "get": {
-        "x-ms-examples": {
-          "The default configuration or data needed to onboard the machine to MDE": {
-            "$ref": "./examples/MdeOnboardings/GetMdeOnboardings_example.json"
-          }
-        },
+        "operationId": "MdeOnboardings_Get",
         "tags": [
           "MdeOnboarding"
         ],
         "description": "The default configuration or data needed to onboard the machine to MDE",
-        "operationId": "MdeOnboardings_Get",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MdeOnboardingData"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "The default configuration or data needed to onboard the machine to MDE": {
+            "$ref": "./examples/MdeOnboardings/GetMdeOnboardings_example.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "MdeOnboardingDataProperties": {
+    "CloudError": {
       "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
-        "onboardingPackageWindows": {
-          "format": "byte",
-          "type": "string",
-          "description": "The onboarding package used to onboard Windows machines to MDE, coded in base64. This can also be used for onboarding using the dedicated VM Extension"
-        },
-        "onboardingPackageLinux": {
-          "format": "byte",
-          "type": "string",
-          "description": "The onboarding package used to onboard Linux machines to MDE, coded in base64. This can also be used for onboarding using the dedicated VM Extension"
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "Properties of the MDE configuration or data parameter needed to onboard the machine to MDE"
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
     },
     "MdeOnboardingData": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "./common/v1/types.json#/definitions/Resource"
-        }
-      ],
+      "description": "The resource of the configuration or data needed to onboard the machine to MDE",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MdeOnboardingDataProperties"
+          "$ref": "#/definitions/MdeOnboardingDataProperties",
+          "description": "Properties of the MDE configuration or data parameter needed to onboard the machine to MDE",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "The resource of the configuration or data needed to onboard the machine to MDE"
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "MdeOnboardingDataList": {
       "type": "object",
       "description": "List of all MDE onboarding data resources",
       "properties": {
         "value": {
-          "description": "List of the resources of the configuration or data needed to onboard the machine to MDE",
           "type": "array",
+          "description": "List of the resources of the configuration or data needed to onboard the machine to MDE",
           "items": {
             "$ref": "#/definitions/MdeOnboardingData"
           }
         }
       }
+    },
+    "MdeOnboardingDataProperties": {
+      "type": "object",
+      "description": "Properties of the MDE configuration or data parameter needed to onboard the machine to MDE",
+      "properties": {
+        "onboardingPackageWindows": {
+          "type": "string",
+          "format": "byte",
+          "description": "The onboarding package used to onboard Windows machines to MDE, coded in base64. This can also be used for onboarding using the dedicated VM Extension"
+        },
+        "onboardingPackageLinux": {
+          "type": "string",
+          "format": "byte",
+          "description": "The onboarding package used to onboard Linux machines to MDE, coded in base64. This can also be used for onboarding using the dedicated VM Extension"
+        }
+      }
     }
-  }
+  },
+  "parameters": {}
 }

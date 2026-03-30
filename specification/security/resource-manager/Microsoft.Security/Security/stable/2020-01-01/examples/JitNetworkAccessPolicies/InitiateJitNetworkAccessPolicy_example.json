@@ -1,48 +1,50 @@
 {
   "parameters": {
     "api-version": "2020-01-01",
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
     "ascLocation": "westeurope",
-    "resourceGroupName": "myRg1",
-    "jitNetworkAccessPolicyName": "default",
-    "jitNetworkAccessPolicyInitiateType": "initiate",
     "body": {
+      "justification": "testing a new version of the product",
       "virtualMachines": [
         {
           "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1",
           "ports": [
             {
-              "number": 3389,
+              "allowedSourceAddressPrefix": "192.127.0.2",
               "duration": "PT1H",
-              "allowedSourceAddressPrefix": "192.127.0.2"
+              "number": 3389
             }
           ]
         }
-      ],
-      "justification": "testing a new version of the product"
-    }
+      ]
+    },
+    "jitNetworkAccessPolicyInitiateType": "initiate",
+    "jitNetworkAccessPolicyName": "default",
+    "resourceGroupName": "myRg1",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
   },
   "responses": {
     "202": {
       "body": {
+        "justification": "testing a new version of the product",
+        "requestor": "barbara@contoso.com",
+        "startTimeUtc": "2018-07-12T08:53:03.3658798Z",
         "virtualMachines": [
           {
             "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1",
             "ports": [
               {
-                "number": 3389,
                 "allowedSourceAddressPrefix": "192.127.0.2",
                 "endTimeUtc": "2018-07-12T09:53:03.3658798Z",
+                "number": 3389,
                 "status": "Initiating",
                 "statusReason": "UserRequested"
               }
             ]
           }
-        ],
-        "startTimeUtc": "2018-07-12T08:53:03.3658798Z",
-        "requestor": "barbara@contoso.com",
-        "justification": "testing a new version of the product"
+        ]
       }
     }
-  }
+  },
+  "operationId": "JitNetworkAccessPolicies_Initiate",
+  "title": "Initiate an action on a JIT network access policy"
 }
