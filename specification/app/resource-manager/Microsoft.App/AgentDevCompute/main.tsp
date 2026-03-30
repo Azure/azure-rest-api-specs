@@ -18,6 +18,5 @@ namespace Microsoft.App;
 enum Versions {
   /** 2026-02-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2026_02_01_preview: "2026-02-01-preview",
 }
