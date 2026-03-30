@@ -10670,11 +10670,17 @@
       }
     },
     "VwanExpressRouteGatewayFailoverAllTestsDetails": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/VwanExpressRouteGatewayFailoverTestDetails"
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VwanExpressRouteGatewayFailoverTestDetails"
+          },
+          "description": "Vwan Express Route Gateway Failover All Test Details"
+        }
       },
-      "description": "Vwan Express Route Gateway Failover All Test Details"
+      "description": "Vwan ExpressRoute Gateway failover all tests details object"
     },
     "VwanExpressRouteGatewayFailoverTestDetails": {
       "type": "object",
@@ -10796,11 +10802,17 @@
       }
     },
     "VwanExpressRouteGatewayFailoverSingleTestDetailsObject": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/VwanExpressRouteGatewayFailoverSingleTestDetails"
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VwanExpressRouteGatewayFailoverSingleTestDetails"
+          },
+          "description": "Vwan Express Route Gateway Failover Single Test Details"
+        }
       },
-      "description": "Vwan Express Route Gateway Failover Single Test Details Object"
+      "description": "Vwan ExpressRoute Gateway failover single test details object"
     },
     "VwanExpressRouteGatewayFailoverSingleTestDetails": {
       "type": "object",
@@ -11117,11 +11129,11 @@
           "description": "vwan Express Route gateway identifier"
         },
         "pri": {
-          "type": "string",
+          "type": "integer",
           "description": "Flag to indicate if the route learned from the primary device is active or passive"
         },
         "sec": {
-          "type": "string",
+          "type": "integer",
           "description": "Flag to indicate if the route learned from the secondary device is active or passive"
         }
       }
