@@ -194,7 +194,7 @@ model QueueSettings {
 }
 
 @doc("Metadata pertaining to creation and last modification of the resource.")
-model JobSystemData {
+model SystemData {
   @doc("The identity that created the resource.")
   @visibility(Lifecycle.Read)
   createdBy?: string;
@@ -319,7 +319,7 @@ model Job {
 
   @doc("Metadata pertaining to creation and last modification of the resource.")
   @visibility(Lifecycle.Read)
-  systemData?: JobSystemData;
+  systemData?: SystemData;
 }
 
 @doc("Response returned when a job delete operation is accepted asynchronously.")

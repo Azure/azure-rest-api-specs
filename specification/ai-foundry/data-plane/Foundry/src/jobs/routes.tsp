@@ -62,7 +62,7 @@ interface Jobs {
 
       @doc("The job to create or update.")
       @bodyRoot
-      body: Job;
+      job: Job;
     },
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<Job>
   >;
