@@ -14,17 +14,26 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB resource throughput.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @parentResource(SqlDatabaseGetResults)
 model ThroughputSettingsGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ThroughputSettingsGetProperties> {
+  is Azure.ResourceManager.ProxyResource<ThroughputSettingsGetProperties> {
   ...ResourceNameParameter<
     Resource = ThroughputSettingsGetResults,
     KeyName = "throughputSetting",
     SegmentName = "throughputSettings",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 
   /**
    * Identity for the resource.

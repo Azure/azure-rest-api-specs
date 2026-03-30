@@ -14,16 +14,26 @@ namespace Microsoft.ServiceFabric;
 /**
  * The service resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 @parentResource(ApplicationResource)
 model ServiceResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ServiceResourceProperties> {
+  is Azure.ResourceManager.ProxyResource<ServiceResourceProperties> {
   ...ResourceNameParameter<
     Resource = ServiceResource,
     KeyName = "serviceName",
     SegmentName = "services",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
   ...EntityTagProperty;
 }
 
@@ -231,15 +241,25 @@ model ServicePlacementPolicyDescription {
  * The service resource for patch operations.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 model ServiceResourceUpdate
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ServiceResourceUpdateProperties> {
+  is Azure.ResourceManager.ProxyResource<ServiceResourceUpdateProperties> {
   ...ResourceNameParameter<
     Resource = ServiceResource,
     KeyName = "serviceName",
     SegmentName = "services",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
   ...EntityTagProperty;
 }
 
