@@ -427,7 +427,7 @@ using Microsoft.NetworkCloud;
 // --- csharp: prepend-rp-prefix renames (types that need NetworkCloud prefix) ---
 @@clientName(ActionState, "NetworkCloudActionState", "csharp");
 @@clientName(ActionState.endTime, "EndOn", "csharp");
-@@clientName(ActionState.startTime, "StartOn", "csharp");
+// @@clientName(ActionState.startTime, "StartOn", "csharp");
 @@clientName(ActionStateStatus, "NetworkCloudActionStateStatus", "csharp");
 @@clientName(CertificateInfo, "NetworkCloudCertificateInfo", "csharp");
 @@clientName(StepState, "NetworkCloudStepState", "csharp");
@@ -435,7 +435,7 @@ using Microsoft.NetworkCloud;
 @@clientName(StepState.startTime, "StartOn", "csharp");
 @@clientName(StepStateStatus, "NetworkCloudStepStateStatus", "csharp");
 @@alternateType(ActionState.endTime, utcDateTime, "csharp");
-@@alternateType(ActionState.startTime, utcDateTime, "csharp");
+// @@alternateType(ActionState.startTime, utcDateTime, "csharp");
 @@alternateType(StepState.endTime, utcDateTime, "csharp");
 @@alternateType(StepState.startTime, utcDateTime, "csharp");
 
@@ -536,6 +536,11 @@ using Microsoft.NetworkCloud;
 @@clientName(NetworkAttachment.ipv4Address, "IPv4Address", "csharp");
 @@clientName(NetworkAttachment.ipv6Address, "IPv6Address", "csharp");
 @@clientName(NetworkConfiguration.dnsServiceIp, "DnsServiceIP", "csharp");
+@@clientName(L2ServiceLoadBalancerConfiguration.ipAddressPools,
+  "L2ServiceLoadBalancerIPAddressPools",
+  "csharp"
+);
+@@clientName(StorageApplianceStatus.caCertificate, "CACertificate", "csharp");
 @@clientName(StorageApplianceStatus.managementIpv4Address,
   "ManagementIPv4Address",
   "csharp"
