@@ -10,14 +10,14 @@
         "baseProfile": {
           "vmProperties": {
             "plan": {
-              "name": "ib",
-              "publisher": "c",
-              "product": "smpzyoijqrqyifwdeyqclpw",
-              "promotionCode": "khkurdlyzkhb",
-              "version": "zpvxzeltvpkzxjwugxpaysaqnmccxo"
+              "name": "windows2016",
+              "publisher": "microsoft-ads",
+              "product": "windows-data-science-vm",
+              "promotionCode": "samplePromoCode",
+              "version": "latest"
             },
             "zones": [
-              "swgjrscxxgyptikzkwrxjh"
+              "1"
             ],
             "identity": {
               "type": "SystemAssigned",
@@ -30,10 +30,11 @@
             "placement": {
               "zonePlacementPolicy": "Any",
               "includeZones": [
-                "okxcddmnjrbcuurywhdidjmgobcm"
+                "1",
+                "3"
               ],
               "excludeZones": [
-                "mwaeriaykrakbuvplzcmvhmjtj"
+                "2"
               ]
             },
             "tags": {},
@@ -57,10 +58,10 @@
               },
               "storageProfile": {
                 "imageReference": {
-                  "publisher": "plxrplzqqojscjaotivfqleeikv",
-                  "offer": "xrffxyrexeckgsj",
-                  "sku": "kxspqujjfmsxbxwiqztreqkxlsd",
-                  "version": "juhxtkdkx",
+                  "publisher": "microsoft-ads",
+                  "offer": "windows-data-science-vm",
+                  "sku": "windows2016",
+                  "version": "latest",
                   "sharedGalleryImageId": "evezwpyhwzledfrbzadewte",
                   "communityGalleryImageId": "gsckouxxjlbpyqxmjrmmymzxna",
                   "id": "rfhtgphslcqthsy"
@@ -154,10 +155,10 @@
                 "hibernationEnabled": true
               },
               "osProfile": {
-                "computerName": "hrctkgxcqxbu",
-                "adminUsername": "zdslmrywrsowzokro",
-                "adminPassword": "g",
-                "customData": "ltdswf",
+                "computerName": "myVM",
+                "adminUsername": "{your-username}",
+                "adminPassword": "<admin-password>",
+                "customData": "RXhwb3J0ZWQgY3VzdG9tIGRhdGE=",
                 "windowsConfiguration": {
                   "provisionVMAgent": true,
                   "enableAutomaticUpdates": true,
@@ -193,8 +194,8 @@
                   "ssh": {
                     "publicKeys": [
                       {
-                        "path": "sardlpkbsfhehnbtcvkylj",
-                        "keyData": "egjbyafaikolpvthynvpvv"
+                        "path": "/home/{your-username}/.ssh/authorized_keys",
+                        "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeClRAk2ipUs/l5voIsDC5q9RI+YSRd1Bvd/O+axgY4WiBzG+4FwJWZm/mLLe5DoOdHQwmU2FrKXZSW4w2sYE70KeWnrFViCOX5MTVvJgPE8ClugNl8RWth/tU849DvM9sT7vFgfVSHcAS2yDRyDlueii+8nF2ym8XWAPltFVCyLHRsyBp5YPqK8JFYIa1eybKsY3hEAxRCA+/7bq8et+Gj3coOsuRmrehav7rE6N12Pb80I6ofa6SM5XNYq4Xk0iYNx7R3kdz0Jj9XgZYWjAHjJmT0gTRoOnt6upOuxK7xI/ykWrllgpXrCPu3Ymz+c+ujaqcxDopnAl2lmf69/J1"
                       }
                     ]
                   },
@@ -413,14 +414,14 @@
           {
             "vmProperties": {
               "plan": {
-                "name": "ib",
-                "publisher": "c",
-                "product": "smpzyoijqrqyifwdeyqclpw",
-                "promotionCode": "khkurdlyzkhb",
-                "version": "zpvxzeltvpkzxjwugxpaysaqnmccxo"
+                "name": "windows2016",
+                "publisher": "microsoft-ads",
+                "product": "windows-data-science-vm",
+                "promotionCode": "samplePromoCode",
+                "version": "latest"
               },
               "zones": [
-                "swgjrscxxgyptikzkwrxjh"
+                "1"
               ],
               "identity": {
                 "type": "SystemAssigned",
@@ -433,10 +434,11 @@
               "placement": {
                 "zonePlacementPolicy": "Any",
                 "includeZones": [
-                  "okxcddmnjrbcuurywhdidjmgobcm"
+                  "1",
+                  "3"
                 ],
                 "excludeZones": [
-                  "mwaeriaykrakbuvplzcmvhmjtj"
+                  "2"
                 ]
               },
               "tags": {},
@@ -460,10 +462,10 @@
                 },
                 "storageProfile": {
                   "imageReference": {
-                    "publisher": "plxrplzqqojscjaotivfqleeikv",
-                    "offer": "xrffxyrexeckgsj",
-                    "sku": "kxspqujjfmsxbxwiqztreqkxlsd",
-                    "version": "juhxtkdkx",
+                    "publisher": "microsoft-ads",
+                    "offer": "windows-data-science-vm",
+                    "sku": "windows2016",
+                    "version": "latest",
                     "sharedGalleryImageId": "evezwpyhwzledfrbzadewte",
                     "communityGalleryImageId": "gsckouxxjlbpyqxmjrmmymzxna",
                     "id": "rfhtgphslcqthsy"
@@ -557,10 +559,10 @@
                   "hibernationEnabled": true
                 },
                 "osProfile": {
-                  "computerName": "hrctkgxcqxbu",
-                  "adminUsername": "zdslmrywrsowzokro",
-                  "adminPassword": "g",
-                  "customData": "ltdswf",
+                  "computerName": "myVM",
+                  "adminUsername": "{your-username}",
+                  "adminPassword": "<admin-password>",
+                  "customData": "RXhwb3J0ZWQgY3VzdG9tIGRhdGE=",
                   "windowsConfiguration": {
                     "provisionVMAgent": true,
                     "enableAutomaticUpdates": true,
@@ -596,8 +598,8 @@
                     "ssh": {
                       "publicKeys": [
                         {
-                          "path": "sardlpkbsfhehnbtcvkylj",
-                          "keyData": "egjbyafaikolpvthynvpvv"
+                          "path": "/home/{your-username}/.ssh/authorized_keys",
+                          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeClRAk2ipUs/l5voIsDC5q9RI+YSRd1Bvd/O+axgY4WiBzG+4FwJWZm/mLLe5DoOdHQwmU2FrKXZSW4w2sYE70KeWnrFViCOX5MTVvJgPE8ClugNl8RWth/tU849DvM9sT7vFgfVSHcAS2yDRyDlueii+8nF2ym8XWAPltFVCyLHRsyBp5YPqK8JFYIa1eybKsY3hEAxRCA+/7bq8et+Gj3coOsuRmrehav7rE6N12Pb80I6ofa6SM5XNYq4Xk0iYNx7R3kdz0Jj9XgZYWjAHjJmT0gTRoOnt6upOuxK7xI/ykWrllgpXrCPu3Ymz+c+ujaqcxDopnAl2lmf69/J1"
                         }
                       ]
                     },
