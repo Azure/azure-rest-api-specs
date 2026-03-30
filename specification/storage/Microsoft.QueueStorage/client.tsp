@@ -98,6 +98,12 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientOption(Queue.peekMessages, "monomorphicResponseFieldName", "Messages", "go");
 @@clientOption(Queue.receiveMessages, "monomorphicResponseFieldName", "Messages", "go");
 @@clientOption(Queue.sendMessage, "monomorphicResponseFieldName", "Messages", "go");
+@@clientOption(Queue.sendMessage, "responseEnvelopeName", "MessagesClientEnqueueResponse", "go");
+@@clientOption(Queue.receiveMessages, "responseEnvelopeName", "MessagesClientDequeueResponse", "go");
+@@clientOption(Queue.updateMessage, "responseEnvelopeName", "MessageIDClientUpdateResponse", "go");
+@@clientOption(Queue.deleteMessage, "responseEnvelopeName", "MessageIDClientDeleteResponse", "go");
+@@clientOption(Queue.peekMessages, "responseEnvelopeName", "MessagesClientPeekResponse", "go");
+@@clientOption(Queue.clear, "responseEnvelopeName", "MessagesClientClearResponse", "go");
 
 
 // JavaScript SDK renames - based on azure-sdk-for-js storage-queue swagger README
