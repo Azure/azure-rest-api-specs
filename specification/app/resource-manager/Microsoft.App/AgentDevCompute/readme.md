@@ -40,6 +40,5 @@ These settings apply only when `--tag=package-2026-02-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-02-01-preview'
 input-file:
-  - preview/2026-02-01-preview/agentdevcomputes.json
-  - preview/2026-02-01-preview/sandboxgroups.json
+  - preview/2026-02-01-preview/agentdevcompute.json
 ```
