@@ -26,7 +26,17 @@ These are the global settings for the DomainServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-06-01
+tag: package-preview-2025-10-01-preview
+```
+
+### Tag: package-preview-2025-10-01-preview
+
+These settings apply only when `--tag=package-preview-2025-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-10-01-preview'
+input-file:
+  - preview/2025-10-01-preview/domainservices.json
+  - preview/2025-10-01-preview/oucontainer.json
 ```
 
 ### Tag: package-preview-2025-06-01

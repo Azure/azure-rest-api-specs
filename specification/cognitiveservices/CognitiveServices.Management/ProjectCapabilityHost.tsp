@@ -50,7 +50,7 @@ interface ProjectCapabilityHosts {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
       @header("x-ms-async-operation-timeout")
       @format("duration")
       asyncOperationTimeout: string;
@@ -67,7 +67,7 @@ interface ProjectCapabilityHosts {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
       @header("x-ms-async-operation-timeout")
       @format("duration")
       asyncOperationTimeout: string;

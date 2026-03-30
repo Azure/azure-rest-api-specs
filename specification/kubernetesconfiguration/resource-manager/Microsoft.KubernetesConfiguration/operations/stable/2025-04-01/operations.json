@@ -154,20 +154,18 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The OperationStatusResult items on this page",
+          "description": "List of async operations in progress, in the cluster.",
           "items": {
             "$ref": "#/definitions/OperationStatusResult"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "URL to get the next set of Operation Result objects, if any.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "OperationStatusResult": {
       "type": "object",
@@ -196,6 +194,7 @@
         "error": {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
           "description": "If present, details of the operation error.",
+          "x-nullable": true,
           "readOnly": true
         }
       },
@@ -269,10 +268,7 @@
           "description": "URL to the next set of results, if any.",
           "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     }
   },
   "parameters": {}
