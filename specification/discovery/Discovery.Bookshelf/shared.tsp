@@ -208,6 +208,9 @@ alias resourceNamePattern = "^[a-zA-Z0-9-]{3,24}$";
 /** Regex for conversation names */
 alias conversationNamePattern = "^[a-zA-Z0-9-]{1,75}$";
 
+/** Regex for task names */
+alias taskNamePattern = "^[a-zA-Z0-9-]{1,75}$";
+
 // ============================================================================
 // ARM Resource ID Aliases for data plane cross-reference
 // ============================================================================

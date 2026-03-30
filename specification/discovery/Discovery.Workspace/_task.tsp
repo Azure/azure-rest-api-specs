@@ -136,7 +136,7 @@ model Task {
   @doc("The unique identifier of the task.")
   @visibility(Lifecycle.Read)
   @key("taskName")
-  @maxLength(38)
+  @pattern(taskNamePattern)
   name: string;
 
   @doc("The title of the task.")
@@ -273,7 +273,7 @@ interface Tasks {
 
       @doc("The task name.")
       @path
-      @pattern(resourceNamePattern)
+      @pattern(taskNamePattern)
       taskName: string;
 
       @doc("Start task request body.")
@@ -291,7 +291,7 @@ interface Tasks {
     {
       @doc("The task name.")
       @path
-      @pattern(resourceNamePattern)
+      @pattern(taskNamePattern)
       taskName: string;
 
       @doc("The project name.")
@@ -329,7 +329,7 @@ interface Tasks {
 
       @doc("The task name.")
       @path
-      @pattern(resourceNamePattern)
+      @pattern(taskNamePattern)
       taskName: string;
 
       @doc("Execution history entry to add.")
