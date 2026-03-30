@@ -1,0 +1,41 @@
+{
+  "operationId": "HorizonDbFirewallRules_List",
+  "title": "List HorizonDb firewall rules in a pool",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "poolName": "examplepool",
+    "api-version": "2026-01-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/examplepool/firewallRules/allowCorporateNetwork",
+            "name": "allowCorporateNetwork",
+            "type": "Microsoft.HorizonDb/clusters/pools/firewallRules",
+            "properties": {
+              "startIpAddress": "10.0.0.1",
+              "endIpAddress": "10.0.0.255",
+              "description": "Allow access from corporate network",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/examplepool/firewallRules/allowDeveloperAccess",
+            "name": "allowDeveloperAccess",
+            "type": "Microsoft.HorizonDb/clusters/pools/firewallRules",
+            "properties": {
+              "startIpAddress": "192.168.1.10",
+              "endIpAddress": "192.168.1.10",
+              "description": "Allow developer access",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
