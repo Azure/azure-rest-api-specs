@@ -26,6 +26,14 @@ using TypeSpec.Versioning;
     }
   ]>
 )
+@server(
+  "{endpoint}",
+  "The endpoint URL of the search service.",
+  {
+    @doc("The endpoint URL of the search service.")
+    endpoint: url,
+  }
+)
 @service(#{ title: "Azure AI Search" })
 @versioned(Versions)
 namespace Search;
