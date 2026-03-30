@@ -228,11 +228,34 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
         error: `The value of options.${this.emitterName}.emitter-output-dir "${actualValue}" must be a string`,
       };
     }
-    // The package name is always the last segment of the path.
-    // e.g. {output-dir}/{service-dir}/Azure.ResourceManager.X        → Azure.ResourceManager.X
-    //      {output-dir}/sdk/recoveryservices-backup/Azure.ResourceManager.X → Azure.ResourceManager.X
-    //      {output-dir}/sdk/dellstorage/{namespace}                   → {namespace} (resolved below)
-    const extractedPath = actualValue.includes("/") ? actualValue.split("/").at(-1)! : actualValue;
+    // Handle various path formats with different prefixes
+    // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor          → azure-mgmt-advisor
+    // Format 2: {service-dir}/azure-mgmt-advisor                       → azure-mgmt-advisor
+    // Format 3: {output-dir}/{service-dir}/azadmin/settings            → azadmin/settings
+    // Format 4: {output-dir}/sdk/dellstorage/{xxxx}                    → {xxxx} (resolved below)
+    // Format 5: {output-dir}/sdk/recoveryservices-backup/Azure.Foo     → Azure.Foo
+
+    let extractedPath: string;
+    if (!actualValue.includes("/")) {
+      extractedPath = actualValue;
+    } else {
+      const pathParts = actualValue.split("/");
+      const filteredParts = pathParts.filter(
+        (part) => !(part === "{output-dir}" || part === "{service-dir}"),
+      );
+
+      // If the last part is a variable (e.g., {namespace}, {package-name}), use just that (Format 4)
+      const lastPart = filteredParts[filteredParts.length - 1];
+      if (lastPart.startsWith("{") && lastPart.endsWith("}")) {
+        extractedPath = lastPart;
+      } else {
+        // Strip a leading sdk/<service-name>/ segment if present (Format 5)
+        if (filteredParts.length >= 3 && filteredParts[0] === "sdk") {
+          filteredParts.splice(0, 2);
+        }
+        extractedPath = filteredParts.join("/");
+      }
+    }
     // Resolve variables in the extracted path
     return this.resolveVariables(extractedPath, config);
   }

@@ -739,6 +739,20 @@ options:
     success: true,
     subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
   },
+  {
+    description:
+      "Validate Go DP emitter-output-dir succeeds with multi-segment package path (e.g. azadmin/backup)",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azadmin"
+    service-dir: "sdk/security/keyvault"
+    emitter-output-dir: "{output-dir}/{service-dir}/azadmin/backup"
+`,
+    success: true,
+    subRules: [new TspConfigGoDpEmitterOutputDirMatchPatternSubRule()],
+  },
 ];
 
 const optionalRulesWithoutEmitterConfigTestCases: Case[] = [
