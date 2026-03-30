@@ -8633,6 +8633,9 @@
           "description": "The properties of the Storage Connector."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -8862,6 +8865,9 @@
           "description": "The properties of the Storage DataShare."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -12901,28 +12907,6 @@
         ]
       }
     },
-    "Resource": {
-      "type": "object",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "ResourceAccessRule": {
       "type": "object",
       "description": "Resource Access Rule.",
@@ -15128,7 +15112,7 @@
         },
         "accessPolicies": {
           "type": "array",
-          "description": "List of access policies that specify the permission allowed to a managed identity.",
+          "description": "List of access policies that specify the permission allowed to a managed identity.\nFor Create - This property is required and cannot be null. If no access policies are provided at creation time, specify an empty array.\nFor Update - This property is optional. If set to null or not passed, the existing access policies are left unchanged.\nIf provided with a non-null value, the existing access policies are replaced with the specified list.",
           "items": {
             "$ref": "#/definitions/StorageDataShareAccessPolicy"
           },
@@ -15136,7 +15120,7 @@
         },
         "assets": {
           "type": "array",
-          "description": "List of assets that specify the properties of the shared resources.",
+          "description": "List of assets that specify the properties of the shared resources.\nFor Create - This property is required and cannot be null. If no assets are provided at creation time, specify an empty array.\nFor Update - This property is optional. If set to null or not passed, the existing assets are left unchanged.\nIf provided with a non-null value, the existing assets are replaced with the specified list.",
           "items": {
             "$ref": "#/definitions/StorageDataShareAsset"
           },
@@ -15164,7 +15148,7 @@
         },
         "accessPolicies": {
           "type": "array",
-          "description": "List of access policies that specify the permission allowed to a managed identity.",
+          "description": "List of access policies that specify the permission allowed to a managed identity.\nFor Create - This property is required and cannot be null. If no access policies are provided at creation time, specify an empty array.\nFor Update - This property is optional. If set to null or not passed, the existing access policies are left unchanged.\nIf provided with a non-null value, the existing access policies are replaced with the specified list.",
           "items": {
             "$ref": "#/definitions/StorageDataShareAccessPolicy"
           },
@@ -15172,7 +15156,7 @@
         },
         "assets": {
           "type": "array",
-          "description": "List of assets that specify the properties of the shared resources.",
+          "description": "List of assets that specify the properties of the shared resources.\nFor Create - This property is required and cannot be null. If no assets are provided at creation time, specify an empty array.\nFor Update - This property is optional. If set to null or not passed, the existing assets are left unchanged.\nIf provided with a non-null value, the existing assets are replaced with the specified list.",
           "items": {
             "$ref": "#/definitions/StorageDataShareAsset"
           },
@@ -15223,12 +15207,9 @@
           "description": "Properties of the storage task assignment."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
