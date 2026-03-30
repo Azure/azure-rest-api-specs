@@ -87,8 +87,17 @@ suppressions:
     reason: SkipToken is a pagination token. It is not a secret.
   - code: XMSSecretInResponse
     from: sovereign.json
-    where: $.definitions.SovereignViewComplianceDetailsResponse.properties.skipToken
-    reason: SkipToken is a pagination token. It is not a secret.
+    where: $.definitions.SovereignViewComplianceDetailsResponse.properties.nextToken
+    reason: NextToken is a pagination token. It is not a secret.
+  - code: LocationMustHaveXmsMutability
+    from: sovereign.json
+    where: $.definitions.SovereignViewComplianceDetailResource.properties.location
+    reason: This location is that of the ARM resource for which we are reporting compliance. We are not responsible for the location of this resource.
+  - code: EnumInsteadOfBoolean
+    from: sovereign.json
+    where: $.definitions.SovereignViewComplianceDetail.properties.isCompliant
+    reason: The property isCompliant clearly states the meaning of the boolean and is not ambiguous.
+
 ```
 ---
 
