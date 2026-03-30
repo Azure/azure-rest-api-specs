@@ -3588,6 +3588,40 @@
     },
     "SovereignViewComplianceDetail": {
       "type": "object",
+      "description": "A compliance detail item for a resource in the sovereign view compliance details action.",
+      "properties": {
+        "policyInitiativeId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified id of the policy initiative.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Authorization/policySetDefinitions"
+              }
+            ]
+          }
+        },
+        "isCompliant": {
+          "type": "boolean",
+          "description": "The compliance state of the resource for the policy initiative."
+        },
+        "reasons": {
+          "type": "array",
+          "description": "The reasons for the compliance state.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "policyInitiativeId",
+        "isCompliant",
+        "reasons"
+      ]
+    },
+    "SovereignViewComplianceDetailResource": {
+      "type": "object",
       "description": "A compliance detail item for a resource.",
       "properties": {
         "resourceId": {
@@ -3598,35 +3632,40 @@
             "allowedResources": []
           }
         },
-        "resourceType": {
+        "subscription": {
           "type": "string",
-          "description": "The resource type."
+          "description": "The subscription id of the resource."
         },
-        "dimension": {
+        "resourceGroup": {
           "type": "string",
-          "description": "The compliance dimension."
+          "description": "The resource group name of the resource."
         },
-        "state": {
+        "resourceName": {
           "type": "string",
-          "description": "The compliance state."
+          "description": "The name of the resource."
         },
-        "evaluatedAt": {
+        "location": {
           "type": "string",
-          "format": "date-time",
-          "description": "The time when the resource was evaluated."
+          "description": "The location of the resource."
         },
-        "reason": {
-          "type": "string",
-          "description": "The reason for the compliance state."
+        "complianceDetails": {
+          "type": "array",
+          "description": "The compliance details for the resource.",
+          "items": {
+            "$ref": "#/definitions/SovereignViewComplianceDetail"
+          },
+          "x-ms-identifiers": [
+            "policyInitiativeId"
+          ]
         }
       },
       "required": [
         "resourceId",
-        "resourceType",
-        "dimension",
-        "state",
-        "evaluatedAt",
-        "reason"
+        "subscription",
+        "resourceGroup",
+        "resourceName",
+        "location",
+        "complianceDetails"
       ]
     },
     "SovereignViewComplianceDetailsRequest": {
@@ -3641,39 +3680,114 @@
         "skipToken": {
           "type": "string",
           "description": "The skip token for pagination."
-        },
-        "dimension": {
-          "type": "string",
-          "description": "The dimension to filter compliance details by."
         }
       },
       "required": [
-        "top",
-        "dimension"
+        "top"
       ]
     },
     "SovereignViewComplianceDetailsResponse": {
       "type": "object",
       "description": "The response for the sovereign view compliance details action.",
       "properties": {
-        "skipToken": {
+        "nextToken": {
           "type": "string",
           "description": "The skip token for pagination."
+        },
+        "lastEvaluated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when compliance was last evaluated, in RFC3339 format."
         },
         "resources": {
           "type": "array",
           "description": "The list of compliance detail resources.",
           "items": {
-            "$ref": "#/definitions/SovereignViewComplianceDetail"
+            "$ref": "#/definitions/SovereignViewComplianceDetailResource"
           },
           "x-ms-identifiers": [
-            "resourceId",
-            "dimension"
+            "resourceId"
           ]
         }
       },
       "required": [
+        "lastEvaluated",
         "resources"
+      ]
+    },
+    "SovereignViewComplianceDimensionSummary": {
+      "type": "object",
+      "description": "The compliance summary for a specific dimension (policy inititative) in the sovereign view compliance summary action.",
+      "properties": {
+        "policyInitiativeId": {
+          "type": "string",
+          "description": "The name of the policy initiative associated with this dimension."
+        },
+        "totalResources": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of resources for the sovereign view."
+        },
+        "compliantCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of compliant resources for the sovereign view."
+        },
+        "nonCompliantCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of non-compliant resources for the sovereign view."
+        }
+      },
+      "required": [
+        "policyInitiativeId",
+        "totalResources",
+        "compliantCount",
+        "nonCompliantCount"
+      ]
+    },
+    "SovereignViewComplianceOverallSummary": {
+      "type": "object",
+      "description": "The response for the sovereign view compliance summary action.",
+      "properties": {
+        "totalManagementGroups": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of management groups for the sovereign view."
+        },
+        "totalSubscriptions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of subscriptions for the sovereign view."
+        },
+        "totalResourceGroups": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of resource groups for the sovereign view."
+        },
+        "totalResources": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of resources for the sovereign view."
+        },
+        "compliantCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of compliant resources for the sovereign view."
+        },
+        "nonCompliantCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of non-compliant resources for the sovereign view."
+        }
+      },
+      "required": [
+        "totalManagementGroups",
+        "totalSubscriptions",
+        "totalResourceGroups",
+        "totalResources",
+        "compliantCount",
+        "nonCompliantCount"
       ]
     },
     "SovereignViewComplianceSummaryRequest": {
@@ -3705,38 +3819,31 @@
             ]
           }
         },
-        "dimension": {
-          "type": "string",
-          "description": "The dimension summarized for compliance."
-        },
-        "totalResources": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of resources evaluated."
-        },
-        "compliantCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of compliant resources."
-        },
-        "nonCompliantCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of non-compliant resources."
-        },
         "lastEvaluated": {
           "type": "string",
           "format": "date-time",
           "description": "The time when compliance was last evaluated, in RFC3339 format."
+        },
+        "overallSummary": {
+          "$ref": "#/definitions/SovereignViewComplianceOverallSummary",
+          "description": "The overall summary of compliance across all resources in scope."
+        },
+        "dimensionSummaries": {
+          "type": "array",
+          "description": "The list of compliance summaries for each dimension (policy initiative) in scope.",
+          "items": {
+            "$ref": "#/definitions/SovereignViewComplianceDimensionSummary"
+          },
+          "x-ms-identifiers": [
+            "policyInitiativeId"
+          ]
         }
       },
       "required": [
         "resourceId",
-        "dimension",
-        "totalResources",
-        "compliantCount",
-        "nonCompliantCount",
-        "lastEvaluated"
+        "lastEvaluated",
+        "overallSummary",
+        "dimensionSummaries"
       ]
     },
     "SovereignViewConfigureScope": {
@@ -3772,9 +3879,9 @@
         "subscriptions"
       ]
     },
-    "SovereignViewPolicyInitiativeAssignment": {
+    "SovereignViewPolicyInitiativeDetail": {
       "type": "object",
-      "description": "The policy initiative assignment for the sovereign view configure action.",
+      "description": "The policy initiative details for the sovereign view.",
       "properties": {
         "policyInitiativeId": {
           "type": "string",
@@ -3788,6 +3895,17 @@
             ]
           }
         },
+        "policyAssignmentIds": {
+          "type": "array",
+          "description": "The policy assignment ids created for the policy initiative.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "policyVersion": {
+          "type": "string",
+          "description": "The version of the policy initiative."
+        },
         "assignmentParameters": {
           "type": "object",
           "description": "The parameters for the assignment of policy initiatives.",
@@ -3796,6 +3914,7 @@
       },
       "required": [
         "policyInitiativeId",
+        "policyVersion",
         "assignmentParameters"
       ]
     },
@@ -3839,6 +3958,17 @@
       "type": "object",
       "description": "The properties of the sovereign view resource type.",
       "properties": {
+        "enabledDimensions": {
+          "type": "array",
+          "description": "The dimensions enabled for the sovereign view.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "scope": {
           "$ref": "#/definitions/SovereignViewConfigureScope",
           "description": "The scope to apply for configuration.",
@@ -3849,9 +3979,9 @@
         },
         "policyInitiatives": {
           "type": "array",
-          "description": "The policy initiatives to assign.",
+          "description": "The policy initiatives selected for the sovereign view.",
           "items": {
-            "$ref": "#/definitions/SovereignViewPolicyInitiativeAssignment"
+            "$ref": "#/definitions/SovereignViewPolicyInitiativeDetail"
           },
           "x-ms-identifiers": [
             "policyInitiativeId"
@@ -3868,6 +3998,7 @@
         }
       },
       "required": [
+        "enabledDimensions",
         "scope",
         "policyInitiatives"
       ]
