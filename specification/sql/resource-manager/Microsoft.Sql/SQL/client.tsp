@@ -5,8 +5,12 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Sql;
 
 // TODO: remove this when breaking change is allowed
-@@alternateType(SecurityAlertPolicyProperties.state,
+@@alternateType(SecurityAlertsPolicyProperties.state,
   SecurityAlertPolicyState,
+  "java"
+);
+@@alternateType(ServerProperties.publicNetworkAccess,
+  ServerNetworkAccessFlag,
   "java"
 );
 
