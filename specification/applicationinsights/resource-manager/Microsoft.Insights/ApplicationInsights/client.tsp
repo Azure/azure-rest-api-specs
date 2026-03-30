@@ -57,6 +57,11 @@ namespace ApplicationInsightsManagementClient;
 @@clientLocation(ComponentAPIs.APIKeysOperationGroup.delete, "ApiKeys", "java");
 @@clientLocation(ComponentAPIs.APIKeysOperationGroup.get, "ApiKeys", "java");
 
+@@clientName(ComponentAPIs.APIKeysOperationGroup.create::parameters.body,
+  "apiKeyProperties",
+  "java"
+);
+
 @@clientName(Microsoft.Insights.WebTestPropertiesValidationRules.SSLCheck,
   "sslCheck",
   "java"
