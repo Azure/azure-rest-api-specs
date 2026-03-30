@@ -74,6 +74,7 @@ interface ConversationSuggestions {
     {
       @doc("The name of the conversation.")
       @path
+      @pattern(conversationNamePattern)
       conversationName: string;
     },
     ConversationSuggestionsResponse

@@ -205,6 +205,9 @@ model Paged<T extends {}> is Foundations.CustomPage<T>;
 /** Regex for resource names */
 alias resourceNamePattern = "^[a-zA-Z0-9-]{3,24}$";
 
+/** Regex for conversation names */
+alias conversationNamePattern = "^[a-zA-Z0-9-]{1,75}$";
+
 // ============================================================================
 // ARM Resource ID Aliases for data plane cross-reference
 // ============================================================================

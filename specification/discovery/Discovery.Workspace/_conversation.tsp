@@ -20,8 +20,7 @@ model Conversation {
   @doc("The conversation name.")
   @visibility(Lifecycle.Read)
   @key("conversationName")
-  @maxLength(24)
-  @pattern(resourceNamePattern)
+  @pattern(conversationNamePattern)
   name: string;
 
   ...DataPlaneResource;

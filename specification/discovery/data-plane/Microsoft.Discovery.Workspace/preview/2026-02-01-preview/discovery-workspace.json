@@ -177,8 +177,7 @@
             "description": "The conversation name.",
             "required": true,
             "type": "string",
-            "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,75}$"
           }
         ],
         "responses": {
@@ -223,8 +222,7 @@
             "description": "The conversation name.",
             "required": true,
             "type": "string",
-            "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,75}$"
           },
           {
             "name": "resource",
@@ -281,8 +279,7 @@
             "description": "The conversation name.",
             "required": true,
             "type": "string",
-            "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,75}$"
           }
         ],
         "responses": {
@@ -322,7 +319,8 @@
             "in": "path",
             "description": "The name of the conversation.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,75}$"
           }
         ],
         "responses": {
@@ -348,9 +346,6 @@
         "x-ms-examples": {
           "ConversationSuggestions_GetSuggestions_MaximumSet": {
             "$ref": "./examples/ConversationSuggestions_GetSuggestions_MaximumSet_Gen.json"
-          },
-          "ConversationSuggestions_GetSuggestions_MinimumSet": {
-            "$ref": "./examples/ConversationSuggestions_GetSuggestions_MinimumSet_Gen.json"
           }
         }
       }
@@ -1945,8 +1940,7 @@
         "name": {
           "type": "string",
           "description": "The conversation name.",
-          "maxLength": 24,
-          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "pattern": "^[a-zA-Z0-9-]{1,75}$",
           "readOnly": true
         },
         "createdAt": {

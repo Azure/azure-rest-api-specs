@@ -201,8 +201,7 @@ model ConversationMessage {
 
   @doc("The conversation name.")
   @visibility(Lifecycle.Read)
-  @maxLength(24)
-  @pattern(resourceNamePattern)
+  @pattern(conversationNamePattern)
   @removed(Versions.`2026-02-01-preview`)
   conversationName: string;
 
