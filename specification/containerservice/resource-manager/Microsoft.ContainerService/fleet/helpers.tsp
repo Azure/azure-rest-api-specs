@@ -3,6 +3,7 @@ import "@typespec/rest";
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -106,3 +107,30 @@ op FleetArmResourceDeleteAsync<
   | (ArmDeleteAcceptedResponse & ArmLroLocationHeader)
   | ArmDeletedNoContentResponse
   | ErrorResponse;
+
+@doc("The days of a week.")
+@added(Versions.v2026_05_01_preview)
+union DayOfWeek {
+  string,
+
+  @doc("Monday")
+  Monday: "Monday",
+
+  @doc("Tuesday")
+  Tuesday: "Tuesday",
+
+  @doc("Wednesday")
+  Wednesday: "Wednesday",
+
+  @doc("Thursday")
+  Thursday: "Thursday",
+
+  @doc("Friday")
+  Friday: "Friday",
+
+  @doc("Saturday")
+  Saturday: "Saturday",
+
+  @doc("Sunday")
+  Sunday: "Sunday",
+}

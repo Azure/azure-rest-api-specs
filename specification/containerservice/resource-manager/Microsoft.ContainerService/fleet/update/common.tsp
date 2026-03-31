@@ -92,33 +92,6 @@ model UpdateStage {
   afterGates?: GateConfiguration[];
 }
 
-@doc("Day of week used to schedule a Gate start")
-@added(Versions.v2026_05_01_preview)
-union DayOfWeek {
-  string,
-
-  @doc("Monday")
-  Monday: "Monday",
-
-  @doc("Tuesday")
-  Tuesday: "Tuesday",
-
-  @doc("Wednesday")
-  Wednesday: "Wednesday",
-
-  @doc("Thursday")
-  Thursday: "Thursday",
-
-  @doc("Friday")
-  Friday: "Friday",
-
-  @doc("Saturday")
-  Saturday: "Saturday",
-
-  @doc("Sunday")
-  Sunday: "Sunday",
-}
-
 @doc("Configuration for ScheduledStart gate")
 @added(Versions.v2026_05_01_preview)
 model ScheduledStartConfiguration {
