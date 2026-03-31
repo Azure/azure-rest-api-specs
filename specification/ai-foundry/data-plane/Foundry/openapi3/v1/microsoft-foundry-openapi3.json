@@ -1170,12 +1170,12 @@
             "explode": false
           },
           {
-            "name": "purpose",
+            "name": "scenario",
             "in": "query",
             "required": false,
-            "description": "Filter data generation jobs by their purpose.",
+            "description": "Filter data generation jobs by their scenario.",
             "schema": {
-              "$ref": "#/components/schemas/DataGenerationJobPurpose"
+              "$ref": "#/components/schemas/DataGenerationJobScenario"
             },
             "explode": false
           },
@@ -10702,7 +10702,7 @@
           "name",
           "sources",
           "options",
-          "purpose",
+          "scenario",
           "id",
           "status",
           "created_at"
@@ -10727,13 +10727,13 @@
             ],
             "description": "The options for the data generation job."
           },
-          "purpose": {
+          "scenario": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DataGenerationJobPurpose"
+                "$ref": "#/components/schemas/DataGenerationJobScenario"
               }
             ],
-            "description": "The purpose of the data generation job. Either for fine-tuning or evaluation."
+            "description": "The scenario of the data generation job. Either for fine-tuning or evaluation."
           },
           "id": {
             "type": "string",
@@ -10873,7 +10873,7 @@
         ],
         "description": "The supported output file types for a data generation job."
       },
-      "DataGenerationJobPurpose": {
+      "DataGenerationJobScenario": {
         "anyOf": [
           {
             "type": "string"
@@ -10887,7 +10887,7 @@
             ]
           }
         ],
-        "description": "The supported purposes for a data generation job."
+        "description": "The supported scenarios for a data generation job."
       },
       "DataGenerationJobSource": {
         "type": "object",
@@ -34938,7 +34938,7 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "The options for a data generation job with Prompt source used for Evaluation purpose, which includes the prompt or the agent name to fetch the prompt and other metadata for data generation."
+        "description": "The options for a data generation job with Prompt source used for Evaluation scenario, which includes the prompt or the agent name to fetch the prompt and other metadata for data generation."
       },
       "ProtocolVersionRecord": {
         "type": "object",
@@ -35765,7 +35765,7 @@
             "items": {
               "$ref": "#/components/schemas/SimpleQnAFineTuningQuestionType"
             },
-            "description": "The question types to generate. Used only for fine-tuning purposes."
+            "description": "The question types to generate. Used only for fine-tuning scenarios."
           }
         },
         "allOf": [
@@ -35788,7 +35788,7 @@
             ]
           }
         ],
-        "description": "The supported question types for SimpleQnA data generation jobs used for fine-tuning purposes."
+        "description": "The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios."
       },
       "Sku": {
         "type": "object",
@@ -36284,7 +36284,7 @@
             "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "The options for a data generation job with ToolUse type. Used only for fine-tuning purposes."
+        "description": "The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios."
       },
       "TracesDataGenerationJobSource": {
         "type": "object",
@@ -36337,7 +36337,7 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "The options for a data generation job with Traces source used for Evaluation and Fine-tuning purposes, which includes the agent name and the time window for fetching traces."
+        "description": "The options for a data generation job with Traces source used for Evaluation and Fine-tuning scenarios, which includes the agent name and the time window for fetching traces."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",

@@ -44,9 +44,9 @@ interface DataGenerationJobs {
     {
       ...CommonPageQueryParameters;
 
-      @doc("Filter data generation jobs by their purpose.")
+      @doc("Filter data generation jobs by their scenario.")
       @query
-      purpose?: DataGenerationJobPurpose;
+      scenario?: DataGenerationJobScenario;
 
       @doc("Filter data generation jobs by their type.")
       @query

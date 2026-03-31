@@ -53,8 +53,8 @@ model DataGenerationJob {
   @doc("The options for the data generation job.")
   options: DataGenerationJobOptions;
 
-  @doc("The purpose of the data generation job. Either for fine-tuning or evaluation.")
-  purpose: DataGenerationJobPurpose;
+  @doc("The scenario of the data generation job. Either for fine-tuning or evaluation.")
+  scenario: DataGenerationJobScenario;
 
   @doc("The job identifier.")
   @visibility(Lifecycle.Read)
@@ -156,17 +156,17 @@ model TokenUsage {
   total_tokens?: int32;
 }
 
-@doc("The supported purposes for a data generation job.")
-union DataGenerationJobPurpose {
+@doc("The supported scenarios for a data generation job.")
+union DataGenerationJobScenario {
   string,
 
-  @doc("Supervised Fine-tuning purpose.")
+  @doc("Supervised Fine-tuning scenario.")
   SupervisedFineTuning: "SupervisedFineTuning",
 
-  @doc("Reinforcement Fine-tuning purpose.")
+  @doc("Reinforcement Fine-tuning scenario.")
   ReinforcementFineTuning: "ReinforcementFineTuning",
 
-  @doc("Evaluation purpose.")
+  @doc("Evaluation scenario.")
   Evaluation: "Evaluation",
 }
 
@@ -177,7 +177,7 @@ union DataGenerationJobSourceType {
   @doc("Traces source type. Data is generated based on input traces such as conversations, tool calls, etc retrieved from the project connected Application Insights.")
   Traces: "Traces",
 
-  @doc("Prompt source type. Data is generated based on input prompts provided by the user or will be extracted from the given Agent. Applicable only for evaluation purpose.")
+  @doc("Prompt source type. Data is generated based on input prompts provided by the user or will be extracted from the given Agent. Applicable only for evaluation scenario.")
   Prompt: "Prompt",
 
   @doc("File source type. Data is generated based on Azure OpenAI file.")
@@ -205,11 +205,11 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is SimpleQnA for this model.")
   type: "SimpleQnA";
 
-  @doc("The question types to generate. Used only for fine-tuning purposes.")
+  @doc("The question types to generate. Used only for fine-tuning scenarios.")
   question_types?: Array<SimpleQnAFineTuningQuestionType>;
 }
 
-@doc("The options for a data generation job with ToolUse type. Used only for fine-tuning purposes.")
+@doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")
 model ToolUseFineTuningDataGenerationJobOptions
   extends DataGenerationJobOptions {
   @doc("The data generation job type, which is ToolUse for this model.")
@@ -229,7 +229,7 @@ model DataGenerationJobSource {
   type: DataGenerationJobSourceType;
 }
 
-@doc("The options for a data generation job with Traces source used for Evaluation and Fine-tuning purposes, which includes the agent name and the time window for fetching traces.")
+@doc("The options for a data generation job with Traces source used for Evaluation and Fine-tuning scenarios, which includes the agent name and the time window for fetching traces.")
 model TracesDataGenerationJobSource extends DataGenerationJobSource {
   @doc("The source type for this job, which is Traces.")
   type: "Traces";
@@ -256,7 +256,7 @@ model TracesDataGenerationJobSource extends DataGenerationJobSource {
   max_traces?: int32 = 1000;
 }
 
-@doc("The options for a data generation job with Prompt source used for Evaluation purpose, which includes the prompt or the agent name to fetch the prompt and other metadata for data generation.")
+@doc("The options for a data generation job with Prompt source used for Evaluation scenario, which includes the prompt or the agent name to fetch the prompt and other metadata for data generation.")
 model PromptDataGenerationJobSource extends DataGenerationJobSource {
   @doc("The source type for this job, which is Prompt.")
   type: "Prompt";
@@ -291,7 +291,7 @@ model DatasetDataGenerationJobSource extends DataGenerationJobSource {
   version?: string;
 }
 
-@doc("The supported question types for SimpleQnA data generation jobs used for fine-tuning purposes.")
+@doc("The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios.")
 union SimpleQnAFineTuningQuestionType {
   string,
 
