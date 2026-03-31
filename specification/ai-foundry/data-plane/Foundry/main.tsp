@@ -21,4 +21,5 @@ import "./src/openai-finetuning/routes.tsp";
 import "./src/openai-responses/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
+import "./src/skills/routes.tsp";
 import "./src/toolsets/routes.tsp";
