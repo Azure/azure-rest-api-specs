@@ -231,7 +231,7 @@ interface Agents {
    * via the Get Operation endpoint.
    */
   @post
-  @route("/agents/{agent_name}/sessions")
+  @route("/agents/{agent_name}/endpoint/sessions")
   @extension(
     "x-ms-foundry-meta",
     #{
@@ -258,7 +258,7 @@ interface Agents {
    * Retrieves a session by ID.
    */
   @get
-  @route("/agents/{agent_name}/sessions/{session_id}")
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
   @extension(
     "x-ms-foundry-meta",
     #{
@@ -286,7 +286,7 @@ interface Agents {
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
   @delete
-  @route("/agents/{agent_name}/sessions/{session_id}")
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
   @extension(
     "x-ms-foundry-meta",
     #{
@@ -314,7 +314,7 @@ interface Agents {
    * Returns a list of sessions for the specified agent.
    */
   @get
-  @route("/agents/{agent_name}/sessions")
+  @route("/agents/{agent_name}/endpoint/sessions")
   @list
   @extension(
     "x-ms-foundry-meta",
@@ -342,7 +342,7 @@ interface Agents {
    * The response includes the operation status and the current state of the associated session.
    */
   @get
-  @route("/agents/{agent_name}/sessions/{session_id}/operations/{operation_id}")
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/operations/{operation_id}")
   @extension(
     "x-ms-foundry-meta",
     #{
