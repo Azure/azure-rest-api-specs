@@ -1022,6 +1022,12 @@ interface File {
       /** Optional. Specifies the content length of the file. */
       @header("Content-Length") optionalContentLength?: int64;
 
+      /** Required if the request body is a structured message. Specifies the message schema version and properties. */
+      @header("x-ms-structured-body") structuredBodyType?: string;
+
+      /** Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length. */
+      @header("x-ms-structured-content-length") structuredContentLength?: int64;
+
       ...OptionalBody;
     },
     {
@@ -1038,6 +1044,9 @@ interface File {
 
       /** Content length of the file. */
       @header("Content-Length") contentLength?: int64;
+
+      /** Indicates the structured message body was accepted and mirrors back the message schema version and properties. */
+      @header("x-ms-structured-body") structuredBodyType?: string;
     }
   >;
 
