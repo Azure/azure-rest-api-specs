@@ -381,16 +381,16 @@ using Microsoft.Web;
 @@clientLocation(AppServiceEnvironmentResources.listUsages,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.listHistoryForHostingEnvironment,
+@@clientLocation(AppServiceEnvironmentRecommendations.listHistoryForHostingEnvironment,
   Recommendations
 );
-@@clientLocation(AppServiceEnvironmentResources.listRecommendedRulesForHostingEnvironment,
+@@clientLocation(AppServiceEnvironmentRecommendations.listRecommendedRulesForHostingEnvironment,
   Recommendations
 );
-@@clientLocation(AppServiceEnvironmentResources.disableAllForHostingEnvironment,
+@@clientLocation(AppServiceEnvironmentRecommendations.disableAllForHostingEnvironment,
   Recommendations
 );
-@@clientLocation(AppServiceEnvironmentResources.resetAllFiltersForHostingEnvironment,
+@@clientLocation(AppServiceEnvironmentRecommendations.resetAllFiltersForHostingEnvironment,
   Recommendations
 );
 
@@ -438,10 +438,12 @@ using Microsoft.Web;
 @@clientName(Sites.update::parameters.properties, "siteEnvelope");
 @@clientLocation(Sites.delete, WebApps);
 @@clientLocation(Sites.list, WebApps);
-@@clientLocation(Sites.listHistoryForWebApp, Recommendations);
-@@clientLocation(Sites.listRecommendedRulesForWebApp, Recommendations);
-@@clientLocation(Sites.disableAllForWebApp, Recommendations);
-@@clientLocation(Sites.resetAllFiltersForWebApp, Recommendations);
+@@clientLocation(SiteRecommendations.listHistoryForWebApp, Recommendations);
+@@clientLocation(SiteRecommendations.listRecommendedRulesForWebApp,
+  Recommendations
+);
+@@clientLocation(SiteRecommendations.disableAllForWebApp, Recommendations);
+@@clientLocation(SiteRecommendations.resetAllFiltersForWebApp, Recommendations);
 @@clientLocation(Sites.analyzeCustomHostname, WebApps);
 @@clientLocation(Sites.applySlotConfigToProduction, WebApps);
 @@clientName(Sites.applySlotConfigToProduction::parameters.body,
@@ -543,10 +545,10 @@ using Microsoft.Web;
   "workflowArtifacts"
 );
 @@clientLocation(Sites.listWorkflowsConnections, WebApps);
-@@clientLocation(Sites.regenerateAccessKey, "Workflows");
-@@clientName(Sites.regenerateAccessKey::parameters.body, "keyType");
-@@clientLocation(Sites.validate, "Workflows");
-@@clientName(Sites.validate::parameters.body, "validate");
+@@clientLocation(SiteWorkflows.regenerateAccessKey, "Workflows");
+@@clientName(SiteWorkflows.regenerateAccessKey::parameters.body, "keyType");
+@@clientLocation(SiteWorkflows.validate, "Workflows");
+@@clientName(SiteWorkflows.validate::parameters.body, "validate");
 
 @@clientName(WebApps.createOrUpdateSlot::parameters.resource, "siteEnvelope");
 @@clientName(WebApps.updateSlot::parameters.properties, "siteEnvelope");
@@ -857,7 +859,7 @@ using Microsoft.Web;
 
 @@clientLocation(DeletedSites.getDeletedWebAppByLocation, "DeletedWebApps");
 @@clientLocation(DeletedSites.listByLocation, "DeletedWebApps");
-@@clientLocation(Global.list, "DeletedWebApps");
+@@clientLocation(GlobalDeletedWebApps.list, "DeletedWebApps");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DeletedSite.properties);
