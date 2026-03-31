@@ -839,6 +839,7 @@
         },
         "streamingRuleLastUpdatedTimestamp": {
           "type": "string",
+          "format": "date-time",
           "description": "The streaming rule last updated timestamp associated with the Sli resource.",
           "readOnly": true
         },
@@ -884,7 +885,7 @@
     },
     "SpatialAggregationType": {
       "type": "string",
-      "description": "Defines the available aggregation types.",
+      "description": "Defines the available spatial aggregation types for aggregating measurements across multiple time series.",
       "enum": [
         "Average",
         "Min",
@@ -944,7 +945,7 @@
     },
     "TemporalAggregationType": {
       "type": "string",
-      "description": "Defines the available aggregation types.",
+      "description": "Defines the available temporal aggregation types for aggregating measurements over a specific time window within the same time series.",
       "enum": [
         "Average",
         "Min",

@@ -60,7 +60,7 @@ model SliResource {
 
   @visibility(Lifecycle.Read)
   @doc("The streaming rule last updated timestamp associated with the Sli resource.")
-  streamingRuleLastUpdatedTimestamp?: string;
+  streamingRuleLastUpdatedTimestamp?: utcDateTime;
 
   @doc("A flag to determine whether alert is enabled.")
   enableAlert: boolean;
@@ -99,10 +99,10 @@ model Metric {
 @doc("Defines the category of an SLI")
 union Category {
   @doc("Indicates availability-related metrics.")
-  "Availability",
+  Availability: "Availability",
 
   @doc("Indicates latency-related metrics.")
-  "Latency",
+  Latency: "Latency",
 
   string,
 }

@@ -167,7 +167,7 @@ model SpatialAggregation {
   dimensions: string[];
 }
 
-@doc("Defines the available aggregation types.")
+@doc("Defines the available temporal aggregation types for aggregating measurements over a specific time window within the same time series.")
 union TemporalAggregationType {
   @doc("Average value.")
   "Average",
@@ -199,7 +199,7 @@ union TemporalAggregationType {
   string,
 }
 
-@doc("Defines the available aggregation types.")
+@doc("Defines the available spatial aggregation types for aggregating measurements across multiple time series.")
 union SpatialAggregationType {
   @doc("Average value.")
   "Average",
