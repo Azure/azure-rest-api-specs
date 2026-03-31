@@ -83,3 +83,13 @@ using ComputeGallery;
   "csharp"
 );
 @@clientName(EndpointAccess, "ComputeGalleryEndpointAccess", "csharp");
+
+// Rename child identifier properties to avoid CS0108 hiding conflict with base class Identifier
+@@clientName(CommunityGalleryImageProperties.identifier,
+  "ImageIdentifier",
+  "csharp"
+);
+@@clientName(SharedGalleryImageProperties.identifier,
+  "ImageIdentifier",
+  "csharp"
+);
