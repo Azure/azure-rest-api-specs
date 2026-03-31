@@ -520,3 +520,40 @@ using Microsoft.NetworkCloud;
 @@clientName(FilterDevices, "NetworkCloudFilterDevices", "csharp");
 @@clientName(TransportProtocol.TCP, "Tcp", "csharp");
 @@clientName(TransportProtocol.UDP, "Udp", "csharp");
+
+// Using custom type for ExtendedLocation to avoid breaking change for .Net SDK.
+@@clientName(Azure.ResourceManager.Foundations.ExtendedLocation, "ArmExtendedLocation", "csharp");  // Avoid reporting duplicated type error when generating SDK.
+namespace Microsoft.NetworkCloud {
+  /** ExtendedLocation represents the Azure custom location where the resource will be created. */
+  model ExtendedLocation {
+    /** The resource ID of the extended location on which the resource will be created. */
+    name: string;
+
+    /** The extended location type, for example, CustomLocation. */
+    type: string;
+  }
+  @@alternateType(ClusterManagerProperties.managerExtendedLocation,
+    ExtendedLocation,
+    "csharp"
+  );
+  @@alternateType(ClusterStatus.clusterExtendedLocation,
+    ExtendedLocation,
+    "csharp"
+  );
+  @@alternateType(ClusterStatus.hybridAksExtendedLocation,
+    ExtendedLocation,
+    "csharp"
+  );
+  @@alternateType(RequiredExtendedLocationProperty.extendedLocation,
+    ExtendedLocation,
+    "csharp"
+  );
+  @@alternateType(Azure.ResourceManager.ExtendedLocationProperty.extendedLocation,
+    ExtendedLocation,
+    "csharp"
+  );
+  @@alternateType(VirtualMachineStatus.consoleExtendedLocation,
+    ExtendedLocation,
+    "csharp"
+  );
+}
