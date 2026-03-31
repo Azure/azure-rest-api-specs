@@ -33,6 +33,6 @@ namespace Storage.DataLake;
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Following standard typespec recommendation"
 @doc("The Azure Data Lake Storage service versions.")
 enum Versions {
-  @doc("The 2026-02-06 version of the Azure Data Lake Storage service.")
-  v2026_02_06: "2026-02-06",
+  @doc("The 2026-06-06 version of the Azure Data Lake Storage service.")
+  v2026_06_06: "2026-06-06",
 }
