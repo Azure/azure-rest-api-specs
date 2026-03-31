@@ -156,6 +156,21 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 - Any property that contains a secret in **any** operation (PUT, PATCH, GET, or POST) **MUST** be annotated with `"x-ms-secret": true` in the swagger definition.
 
+### 7.3 Proactive Secret Detection (SEC-SECRET-DETECT)
+
+- Reviewers **MUST** proactively inspect every `"type": "string"` property to determine whether it could contain a secret, credential, or sensitive token — even when `"x-ms-secret": true` is not present.
+- Infer secret usage from **any** of the following signals:
+  1. **Property name** contains or matches (case-insensitive): `key`, `token`, `secret`, `password`, `credential`, `connectionString`, `accessKey`, `sharedKey`, `masterKey`, `apiKey`, `sas`, `signature`, `cert`, `certificate`, `privateKey`, `passphrase`, `accountKey`, `ingestionKey`, `instrumentationKey`, `encryptionKey`, `symmetricKey`, `primaryKey`, `secondaryKey`, `clientSecret`.
+  2. **Description** mentions concepts such as: authentication, authorization, signing, bearer, opaque credential, API token, SaaS token, ingestion key, shared access signature, or connection string.
+  3. **Example values** in `x-ms-examples` or inline `example`/`default` contain patterns resembling tokens, base64-encoded blobs, or long random strings.
+  4. **Suppress directives** referencing `secret-prop` or similar secret-related lint rules that are being silenced rather than addressed.
+- If **any** of these signals are present and the property lacks `"x-ms-secret": true`, flag it as a **blocking security issue**:
+  - **Rule ID:** `SEC-SECRET-DETECT`
+  - **Severity:** Blocking
+  - **Fix (OpenAPI JSON):** Add `"x-ms-secret": true` to the property definition.
+  - **Fix (TypeSpec):** Add the `@secret` decorator to the property and remove any `#suppress` directive for `secret-prop`.
+- When flagging, explain which signal(s) triggered the detection (name match, description content, example pattern, or suppression).
+
 ---
 
 ## 8. Property Design Best Practices

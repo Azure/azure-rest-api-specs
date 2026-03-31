@@ -145,7 +145,7 @@ For each file type, read the corresponding instruction file(s) listed in "Author
 - If no previous version exists (new service), note this and skip the comparison.
 - **Record the previous version path** — it will be needed in Step 4a to classify issues as new vs. existing.
 
-**How to fetch previous versions:** Use GitHub MCP `get_file_contents` with `ref: "main"` (or the PR's base branch) to fetch files from the previous API version folder. To discover which prior version folders exist, use `get_file_contents` to list the directory (e.g., `specification/<service>/resource-manager/<RPNS>/stable/`) on the base branch.
+**How to fetch previous versions:** Use GitHub MCP `get_file_contents` with `ref: "main"` (or the PR's base branch) to fetch files from the previous API version folder. To discover which prior version folders exist, use `get_file_contents` to list the directory (e.g., `specification/<service>/resource-manager/<ResourceProviderNamespace>/stable/`) on the base branch.
 
 ### Step 4: Systematic Review
 
@@ -182,6 +182,8 @@ For each changed specification file, check **every item** in the review checklis
 - PATCH for tracked resources supports at least tag updates
 - DELETE defines 200, 204, and default responses (plus 202 if async)
 - No secrets in GET/PUT/PATCH responses; secrets annotated with `x-ms-secret: true`
+- Proactive secret detection (SEC-SECRET-DETECT): inspect every string property — flag if name, description, or examples suggest a secret but `x-ms-secret: true` is missing
+- `#suppress` directives silencing `secret-prop` lint rules treated as a strong signal of a missing secret annotation
 - Secret retrieval exposed via `list*` POST action, not GET
 - Resource references use fully qualified ARM resource IDs
 - No embedded child resources or child counts in parent GET response
@@ -196,7 +198,7 @@ For each changed specification file, check **every item** in the review checklis
 - POST actions used only for non-CRUD operations
 
 #### For TypeSpec files:
-- Correct directory placement (ARM under `resource-manager/<RPNS>/<Service>`, data-plane under `data-plane/<Service>`)
+- Correct directory placement (ARM under `resource-manager/<ResourceProviderNamespace>/<Service>`, data-plane under `data-plane/<Service>`)
 - Required files present: `main.tsp`, `tspconfig.yaml`, `readme.md`, `examples/`
 - No `package.json` in the TypeSpec project directory
 - `@service`, `@server`, `@useAuth` decorators present and correct
@@ -213,6 +215,8 @@ For each changed specification file, check **every item** in the review checklis
 - Client customizations only in `client.tsp`
 - `tspconfig.yaml` references correct linter ruleset
 - No unexplained suppressions
+- Proactive secret detection (SEC-SECRET-DETECT): inspect every string property — flag if name, doc comment, or examples suggest a secret but `@secret` is missing
+- `#suppress` directives silencing `secret-prop` lint rules treated as a strong signal of a missing `@secret` annotation
 - No breaking changes between API versions (check `@added`, `@removed`, `@typeChangedFrom`)
 - Generated OpenAPI files consistent with TypeSpec source
 - Example files present for all operations

@@ -123,6 +123,7 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - **MUST** use the same JSON schema for PUT request/response, PATCH response, GET response, and POST request/response on a given URL path.
 - PATCH request schema **SHOULD** have all the same fields as the resource schema but with no required fields (to support partial update).
 - **DO NOT** return secret/sensitive fields in GET responses (e.g. `administratorPassword`). Secrets **MAY** only be returned via POST if absolutely necessary.
+- Proactively check every `"type": "string"` property for secret indicators — see **SEC-SECRET-DETECT** below.
 - **DO NOT** include fields whose values are trivially computable from other fields.
 
 ### Null Values
@@ -336,5 +337,6 @@ When reviewing, systematically check:
 - ✅ No anonymous body parameter types; no request body on DELETE
 - ✅ Consistent resource schema across PUT/GET/PATCH responses
 - ✅ No `null` values in response schemas; no secrets in GET responses
+- ✅ Every string property inspected for secret indicators (SEC-SECRET-DETECT): flag if property name, description, or examples suggest a secret but `x-ms-secret: true` is missing
 
 Flag all violations clearly with JSON path references, the specific rule, and a concrete fix suggestion.

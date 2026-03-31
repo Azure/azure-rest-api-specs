@@ -238,9 +238,25 @@ A TypeSpec project **MUST NOT** contain:
 
 ---
 
-## 8. Suppressions
+## 8. Secret Detection in TypeSpec (SEC-SECRET-DETECT)
 
-### 8.1 Warning Suppression Policy
+- Reviewers **MUST** inspect every `string` property to determine whether it could contain a secret, credential, or sensitive token.
+- Infer secret usage from **any** of the following signals:
+  1. **Property name** contains or matches (case-insensitive): `key`, `token`, `secret`, `password`, `credential`, `connectionString`, `accessKey`, `sharedKey`, `masterKey`, `apiKey`, `sas`, `signature`, `cert`, `certificate`, `privateKey`, `passphrase`, `accountKey`, `ingestionKey`, `instrumentationKey`, `encryptionKey`, `symmetricKey`, `primaryKey`, `secondaryKey`, `clientSecret`.
+  2. **Doc comment or description** mentions authentication, authorization, signing, bearer, opaque credential, API token, SaaS token, ingestion key, shared access signature, or connection string.
+  3. **Example values** resemble tokens, base64-encoded blobs, or long random strings.
+  4. **`#suppress` directives** referencing `secret-prop` or similar secret-related lint rules that are being silenced rather than addressed.
+- If any signal is present and the property lacks `@secret`, flag it as a **blocking security issue**:
+  - **Rule ID:** `SEC-SECRET-DETECT`
+  - **Severity:** Blocking
+  - **Fix:** Add `@secret` to the property and remove any `#suppress` directive for `secret-prop`.
+- When flagging, explain which signal(s) triggered the detection.
+
+---
+
+## 9. Suppressions
+
+### 9.1 Warning Suppression Policy
 
 - **AVOID** suppressing warnings. Every suppression needs justification.
 - If a suppression is present, verify it has a clear reason documented:
@@ -252,7 +268,7 @@ A TypeSpec project **MUST NOT** contain:
 
 ---
 
-## 9. Common Anti-Patterns
+## 10. Common Anti-Patterns
 
 Flag these issues when found:
 
@@ -287,6 +303,8 @@ When reviewing TypeSpec files, verify:
 - ✅ Client customizations only in `client.tsp`
 - ✅ `tspconfig.yaml` references correct linter ruleset
 - ✅ No unexplained suppressions
+- ✅ Every string property inspected for secret indicators (SEC-SECRET-DETECT): flag if property name, doc comment, or examples suggest a secret but `@secret` is missing
+- ✅ No `#suppress` directives silencing `secret-prop` lint rules — apply `@secret` instead
 - ✅ No breaking changes between API versions
 - ✅ Generated OpenAPI files match `tsp compile .` output
 - ✅ Example files present for all operations
