@@ -60,7 +60,7 @@ model EvalGraderAzureAIEvaluator {
 }
 
 /** Grader inspect_ai definition for inspect_ai benchmark evaluators. */
-model GraderInspectAI {
+model EvalGraderInspectAI {
   /** The object type, which is always `inspect_ai`. */
   type: "inspect_ai";
 
@@ -69,11 +69,6 @@ model GraderInspectAI {
 
   /** The inspect_ai task module path (e.g., `inspect_evals/gpqa_diamond`). */
   task_name: string;
-}
-
-@summary("InspectAIGrader")
-model EvalGraderInspectAI {
-  ...GraderInspectAI;
 }
 
 /** Base class for run data sources with discriminator support. */
