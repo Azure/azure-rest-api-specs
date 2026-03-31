@@ -110,6 +110,9 @@
     },
     {
       "name": "DataShares"
+    },
+    {
+      "name": "AdvancedPlatformMetrics"
     }
   ],
   "paths": {
@@ -910,6 +913,285 @@
           },
           "StorageAccountGetMigrationInProgress": {
             "$ref": "./examples/StorageAccountGetMigrationInProgress.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/advancedPlatformMetrics": {
+      "get": {
+        "operationId": "AdvancedPlatformMetrics_List",
+        "tags": [
+          "AdvancedPlatformMetrics"
+        ],
+        "description": "List the advanced platform metrics rules associated with the storage account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AdvancedPlatformMetricsRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AdvancedPlatformMetricsRules_List - List advanced platform metrics rules": {
+            "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/advancedPlatformMetrics/{advancedPlatformMetricsRuleType}": {
+      "get": {
+        "operationId": "AdvancedPlatformMetrics_Get",
+        "tags": [
+          "AdvancedPlatformMetrics"
+        ],
+        "description": "Get the advanced platform metrics rule for the storage account by rule type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "advancedPlatformMetricsRuleType",
+            "in": "path",
+            "description": "The type of the advanced platform metrics rule.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ContainerLevelCapacityMetrics"
+            ],
+            "x-ms-enum": {
+              "name": "AdvancedPlatformMetricsRuleType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ContainerLevelCapacityMetrics",
+                  "value": "ContainerLevelCapacityMetrics",
+                  "description": "Container level capacity metrics rule type"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AdvancedPlatformMetricsRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AdvancedPlatformMetricsRules_Get - Get advanced platform metrics rule": {
+            "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AdvancedPlatformMetrics_CreateOrUpdate",
+        "tags": [
+          "AdvancedPlatformMetrics"
+        ],
+        "description": "Create or update the advanced platform metrics rule for the storage account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "advancedPlatformMetricsRuleType",
+            "in": "path",
+            "description": "The type of the advanced platform metrics rule.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ContainerLevelCapacityMetrics"
+            ],
+            "x-ms-enum": {
+              "name": "AdvancedPlatformMetricsRuleType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ContainerLevelCapacityMetrics",
+                  "value": "ContainerLevelCapacityMetrics",
+                  "description": "Container level capacity metrics rule type"
+                }
+              ]
+            }
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdvancedPlatformMetricsRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AdvancedPlatformMetricsRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AdvancedPlatformMetricsRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'AdvancedPlatformMetricsRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AdvancedPlatformMetricsRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AdvancedPlatformMetricsRules_CreateOrUpdate_AllContainers - Create advanced platform metrics rule with all containers filter": {
+            "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_CreateOrUpdate_AllContainers.json"
+          },
+          "AdvancedPlatformMetricsRules_CreateOrUpdate_ContainerList - Create advanced platform metrics rule with container list filter": {
+            "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_CreateOrUpdate_ContainerList.json"
+          },
+          "AdvancedPlatformMetricsRules_CreateOrUpdate_ContainerPrefix - Create advanced platform metrics rule with container prefix filter": {
+            "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_CreateOrUpdate_ContainerPrefix.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AdvancedPlatformMetrics_Delete",
+        "tags": [
+          "AdvancedPlatformMetrics"
+        ],
+        "description": "Delete the advanced platform metrics rule for the storage account by rule type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "advancedPlatformMetricsRuleType",
+            "in": "path",
+            "description": "The type of the advanced platform metrics rule.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ContainerLevelCapacityMetrics"
+            ],
+            "x-ms-enum": {
+              "name": "AdvancedPlatformMetricsRuleType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ContainerLevelCapacityMetrics",
+                  "value": "ContainerLevelCapacityMetrics",
+                  "description": "Container level capacity metrics rule type"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AdvancedPlatformMetricsRules_Delete - Delete advanced platform metrics rule": {
+            "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_Delete.json"
           }
         }
       }
@@ -7990,6 +8272,144 @@
         }
       }
     },
+    "AdvancedPlatformMetricsFilterType": {
+      "type": "string",
+      "description": "The type of filter applied to the advanced platform metrics rule.",
+      "enum": [
+        "AllContainersFilter",
+        "ContainerPrefixFilter",
+        "ContainerListFilter"
+      ],
+      "x-ms-enum": {
+        "name": "AdvancedPlatformMetricsFilterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AllContainersFilter",
+            "value": "AllContainersFilter",
+            "description": "Filter applies to all containers"
+          },
+          {
+            "name": "ContainerPrefixFilter",
+            "value": "ContainerPrefixFilter",
+            "description": "Filter applies to containers matching a prefix"
+          },
+          {
+            "name": "ContainerListFilter",
+            "value": "ContainerListFilter",
+            "description": "Filter applies to a specific list of containers"
+          }
+        ]
+      }
+    },
+    "AdvancedPlatformMetricsRule": {
+      "type": "object",
+      "description": "The advanced platform metrics rule for the storage account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdvancedPlatformMetricsRuleProperties",
+          "description": "Returns the advanced platform metrics rule."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AdvancedPlatformMetricsRuleConfig": {
+      "type": "object",
+      "description": "Configuration for the advanced platform metrics rule.",
+      "properties": {
+        "filterType": {
+          "$ref": "#/definitions/AdvancedPlatformMetricsFilterType",
+          "description": "The type of filter applied to the rule. Possible values include: AllContainersFilter, ContainerPrefixFilter, ContainerListFilter."
+        },
+        "filterValues": {
+          "type": "array",
+          "description": "The values for the filter applied to the rule. If filter type is AllContainersFilter, filter values should be empty. If filter type is ContainerPrefixFilter, filter values should contain a list of container prefixes. If filter type is ContainerListFilter, filter values should contain a list of container names.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AdvancedPlatformMetricsRuleListResult": {
+      "type": "object",
+      "description": "The response of a AdvancedPlatformMetricsRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AdvancedPlatformMetricsRule items on this page",
+          "items": {
+            "$ref": "#/definitions/AdvancedPlatformMetricsRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AdvancedPlatformMetricsRuleProperties": {
+      "type": "object",
+      "description": "An object that defines the advanced platform metrics rule.",
+      "properties": {
+        "ruleType": {
+          "$ref": "#/definitions/AdvancedPlatformMetricsRuleType",
+          "description": "Indicates the type of the advanced platform metrics rule. Possible values include: ContainerLevelCapacityMetrics.",
+          "readOnly": true
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "A boolean flag which enables the advanced platform metrics rule."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the last modification date and time of the advanced platform metrics rule in UTC.",
+          "readOnly": true
+        },
+        "metricsEmitted": {
+          "type": "array",
+          "description": "The metrics emitted by the rule. Metrics are mapped according to the rule type from RuleTypeProperty. Rule type to metrics mapping: ContainerLevelCapacityMetrics => {ContainerUsedSize, ContainerBlobCount}.",
+          "items": {
+            "$ref": "#/definitions/MetricsEmitted"
+          },
+          "readOnly": true
+        },
+        "ruleConfig": {
+          "$ref": "#/definitions/AdvancedPlatformMetricsRuleConfig",
+          "description": "Configuration for the advanced platform metrics rule."
+        }
+      },
+      "required": [
+        "enabled",
+        "ruleConfig"
+      ]
+    },
+    "AdvancedPlatformMetricsRuleType": {
+      "type": "string",
+      "description": "The type of the advanced platform metrics rule.",
+      "enum": [
+        "ContainerLevelCapacityMetrics"
+      ],
+      "x-ms-enum": {
+        "name": "AdvancedPlatformMetricsRuleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ContainerLevelCapacityMetrics",
+            "value": "ContainerLevelCapacityMetrics",
+            "description": "Container level capacity metrics rule type"
+          }
+        ]
+      }
+    },
     "AllowedCopyScope": {
       "type": "string",
       "description": "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet.",
@@ -11612,6 +12032,30 @@
           "type": "string",
           "description": "Account Resource Id."
         }
+      }
+    },
+    "MetricsEmitted": {
+      "type": "string",
+      "description": "The metrics emitted by the advanced platform metrics rule.",
+      "enum": [
+        "ContainerBlobCount",
+        "ContainerUsedSize"
+      ],
+      "x-ms-enum": {
+        "name": "MetricsEmitted",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ContainerBlobCount",
+            "value": "ContainerBlobCount",
+            "description": "Container blob count metric"
+          },
+          {
+            "name": "ContainerUsedSize",
+            "value": "ContainerUsedSize",
+            "description": "Container used size metric"
+          }
+        ]
       }
     },
     "MigrationState": {
