@@ -332,7 +332,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   EncryptionAlgorithmTypeGo,
   "go"
 );
-@@alternateType(ExpiryTimeParameter.expiryTime, string, "go");
+@@alternateType(ExpiryTimeParameter.expiresOn, string, "go");
 @@alternateType(ImmutabilityPolicyModeParameter.immutabilityPolicyMode,
   ImmutabilityPolicySetting,
   "go"
