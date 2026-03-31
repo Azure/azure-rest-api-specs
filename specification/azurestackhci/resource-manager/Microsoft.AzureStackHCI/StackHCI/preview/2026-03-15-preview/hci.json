@@ -9949,6 +9949,48 @@
       ],
       "x-ms-discriminator-value": "AssignPartition"
     },
+    "AuthenticationType": {
+      "type": "string",
+      "description": "WiFi authentication type.",
+      "enum": [
+        "WPA2-Personal",
+        "WPA2-Enterprise",
+        "WPA3-Personal",
+        "WPA3-Enterprise",
+        "Open"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WPA2-Personal",
+            "value": "WPA2-Personal",
+            "description": "WPA2 Personal."
+          },
+          {
+            "name": "WPA2-Enterprise",
+            "value": "WPA2-Enterprise",
+            "description": "WPA2 Enterprise."
+          },
+          {
+            "name": "WPA3-Personal",
+            "value": "WPA3-Personal",
+            "description": "WPA3 Personal."
+          },
+          {
+            "name": "WPA3-Enterprise",
+            "value": "WPA3-Enterprise",
+            "description": "WPA3 Enterprise."
+          },
+          {
+            "name": "Open",
+            "value": "Open",
+            "description": "Open network."
+          }
+        ]
+      }
+    },
     "AvailabilityType": {
       "type": "string",
       "description": "Indicates how the update content is made available for download. This determines whether the update is sourced locally, from an online repository, or requires user notification.",
@@ -11319,6 +11361,54 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "CVM support is disabled. None of the nodes in the cluster are CVM capable."
+          }
+        ]
+      }
+    },
+    "ConnectionState": {
+      "type": "string",
+      "description": "WiFi connection state.",
+      "enum": [
+        "NotConfigured",
+        "Connected",
+        "Disconnected",
+        "Connecting",
+        "Disconnecting",
+        "AuthenticationFailed"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotConfigured",
+            "value": "NotConfigured",
+            "description": "WiFi is not configured."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "WiFi is connected."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "WiFi is disconnected."
+          },
+          {
+            "name": "Connecting",
+            "value": "Connecting",
+            "description": "WiFi is connecting."
+          },
+          {
+            "name": "Disconnecting",
+            "value": "Disconnecting",
+            "description": "WiFi is disconnecting."
+          },
+          {
+            "name": "AuthenticationFailed",
+            "value": "AuthenticationFailed",
+            "description": "WiFi authentication failed."
           }
         ]
       }
@@ -13020,6 +13110,42 @@
             "name": "PropertyMismatch",
             "value": "PropertyMismatch",
             "description": "A property value differs between desired and reported state."
+          }
+        ]
+      }
+    },
+    "EAPMethod": {
+      "type": "string",
+      "description": "EAP authentication method.",
+      "enum": [
+        "PEAP",
+        "EAP-TLS",
+        "EAP-TTLS",
+        "EAP-FAST"
+      ],
+      "x-ms-enum": {
+        "name": "EAPMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PEAP",
+            "value": "PEAP",
+            "description": "PEAP authentication."
+          },
+          {
+            "name": "EAP-TLS",
+            "value": "EAP-TLS",
+            "description": "EAP-TLS authentication."
+          },
+          {
+            "name": "EAP-TTLS",
+            "value": "EAP-TTLS",
+            "description": "EAP-TTLS authentication."
+          },
+          {
+            "name": "EAP-FAST",
+            "value": "EAP-FAST",
+            "description": "EAP-FAST authentication."
           }
         ]
       }
@@ -17481,6 +17607,23 @@
           "items": {
             "type": "string"
           }
+        },
+        "ipInterfaceType": {
+          "$ref": "#/definitions/IpInterfaceType",
+          "description": "IP configuration type (Dhcp or Static)."
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "VLAN identifier for network segmentation."
+        },
+        "interfaceState": {
+          "$ref": "#/definitions/InterfaceState",
+          "description": "Administrative state of the interface (up or down)."
+        },
+        "wifiConfiguration": {
+          "$ref": "#/definitions/WifiConfigurationDesiredProperties",
+          "description": "WiFi configuration desired properties."
         }
       }
     },
@@ -17752,6 +17895,11 @@
         "networkAdapterStatus": {
           "$ref": "#/definitions/NetworkAdapterStatus",
           "description": "The observed state of network adapter.",
+          "readOnly": true
+        },
+        "wifiConfiguration": {
+          "$ref": "#/definitions/WifiConfigurationReportedProperties",
+          "description": "WiFi configuration reported properties.",
           "readOnly": true
         }
       }
@@ -19372,6 +19520,11 @@
         "accessLevel": {
           "$ref": "#/definitions/AccessLevel",
           "description": "Remote Support Access Level",
+          "readOnly": true
+        },
+        "transcriptLocation": {
+          "type": "string",
+          "description": "The location where the session transcript is stored.",
           "readOnly": true
         }
       }
@@ -22929,6 +23082,118 @@
             "format": "uri"
           }
         }
+      }
+    },
+    "WifiConfigurationDesiredProperties": {
+      "type": "object",
+      "description": "WiFi configuration desired properties.",
+      "properties": {
+        "ssid": {
+          "type": "string",
+          "description": "WiFi SSID."
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/AuthenticationType",
+          "description": "WiFi authentication type."
+        },
+        "eapMethod": {
+          "$ref": "#/definitions/EAPMethod",
+          "description": "EAP method used for authentication."
+        },
+        "username": {
+          "type": "string",
+          "description": "Username for enterprise WiFi authentication."
+        },
+        "wifiSecret": {
+          "$ref": "#/definitions/WifiSecret",
+          "description": "WiFi secret reference."
+        }
+      }
+    },
+    "WifiConfigurationReportedProperties": {
+      "type": "object",
+      "description": "WiFi configuration reported properties.",
+      "properties": {
+        "ssid": {
+          "type": "string",
+          "description": "WiFi SSID."
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/AuthenticationType",
+          "description": "WiFi authentication type."
+        },
+        "eapMethod": {
+          "$ref": "#/definitions/EAPMethod",
+          "description": "EAP method used for authentication."
+        },
+        "signalStrength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "WiFi signal strength.",
+          "readOnly": true
+        },
+        "lastSuccessfulConnectionTimestamp": {
+          "type": "string",
+          "description": "Last successful WiFi connection timestamp.",
+          "readOnly": true
+        },
+        "connectionState": {
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Current WiFi connection state.",
+          "readOnly": true
+        },
+        "username": {
+          "type": "string",
+          "description": "Username for enterprise WiFi authentication."
+        }
+      }
+    },
+    "WifiSecret": {
+      "type": "object",
+      "description": "WiFi secret reference for storing credentials.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "Name of the secret."
+        },
+        "secretLocation": {
+          "type": "string",
+          "description": "Location of the secret."
+        },
+        "secretType": {
+          "$ref": "#/definitions/WifiSecretType",
+          "description": "Type of the WiFi secret."
+        }
+      }
+    },
+    "WifiSecretType": {
+      "type": "string",
+      "description": "Type of WiFi secret.",
+      "enum": [
+        "WiFiPassword",
+        "WiFiCertificate",
+        "WiFiCACertificate"
+      ],
+      "x-ms-enum": {
+        "name": "WifiSecretType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WiFiPassword",
+            "value": "WiFiPassword",
+            "description": "WiFi password."
+          },
+          {
+            "name": "WiFiCertificate",
+            "value": "WiFiCertificate",
+            "description": "WiFi certificate."
+          },
+          {
+            "name": "WiFiCACertificate",
+            "value": "WiFiCACertificate",
+            "description": "WiFi CA certificate."
+          }
+        ]
       }
     },
     "WindowsServerSubscription": {

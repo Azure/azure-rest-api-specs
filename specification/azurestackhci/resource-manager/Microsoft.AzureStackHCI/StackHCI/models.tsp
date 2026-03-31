@@ -2388,6 +2388,13 @@ model PerNodeRemoteSupportSession {
    */
   @visibility(Lifecycle.Read)
   accessLevel?: AccessLevel;
+
+  /**
+   * The location where the session transcript is stored.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @visibility(Lifecycle.Read)
+  transcriptLocation?: string;
 }
 
 /**
@@ -9537,6 +9544,18 @@ model NetworkAdapterConfiguration {
 
   /** List of DNS servers. */
   dnsServers?: string[];
+
+  /** IP configuration type (Dhcp or Static). */
+  ipInterfaceType?: IpInterfaceType;
+
+  /** VLAN identifier for network segmentation. */
+  vlanId?: int32;
+
+  /** Administrative state of the interface (up or down). */
+  interfaceState?: InterfaceState;
+
+  /** WiFi configuration desired properties. */
+  wifiConfiguration?: WifiConfigurationDesiredProperties;
 }
 
 /**
@@ -9544,7 +9563,20 @@ model NetworkAdapterConfiguration {
  */
 @added(Versions.v2026_03_15_preview)
 model NetworkAdapterReportedProperties {
-  ...NetworkAdapterConfiguration;
+  /** Adapter name. */
+  adapterName?: string;
+
+  /** IP address. */
+  ip4Address?: string;
+
+  /** Subnet mask. */
+  subnetMask?: string;
+
+  /** Default gateway. */
+  defaultGateway?: string;
+
+  /** List of DNS servers. */
+  dnsServers?: string[];
 
   /** Interface description of NIC. */
   @visibility(Lifecycle.Read)
@@ -9615,6 +9647,10 @@ model NetworkAdapterReportedProperties {
   /** The observed state of network adapter. */
   @visibility(Lifecycle.Read)
   networkAdapterStatus?: NetworkAdapterStatus;
+
+  /** WiFi configuration reported properties. */
+  @visibility(Lifecycle.Read)
+  wifiConfiguration?: WifiConfigurationReportedProperties;
 }
 
 /**
@@ -9689,6 +9725,160 @@ model NetworkAdapterProvisioningStatus {
   /** The status of the operation performed on the network adapter. */
   @visibility(Lifecycle.Read)
   status?: NetworkAdapterOperationStatus;
+}
+
+// ==================== WiFi Types ====================
+
+/**
+ * WiFi configuration desired properties.
+ */
+@added(Versions.v2026_03_15_preview)
+model WifiConfigurationDesiredProperties {
+  /** WiFi SSID. */
+  ssid?: string;
+
+  /** WiFi authentication type. */
+  authenticationType?: AuthenticationType;
+
+  /** EAP method used for authentication. */
+  eapMethod?: EAPMethod;
+
+  /** Username for enterprise WiFi authentication. */
+  username?: string;
+
+  /** WiFi secret reference. */
+  wifiSecret?: WifiSecret;
+}
+
+/**
+ * WiFi secret reference for storing credentials.
+ */
+@added(Versions.v2026_03_15_preview)
+model WifiSecret {
+  /** Name of the secret. */
+  secretName?: string;
+
+  /** Location of the secret. */
+  secretLocation?: string;
+
+  /** Type of the WiFi secret. */
+  secretType?: WifiSecretType;
+}
+
+/**
+ * Type of WiFi secret.
+ */
+@added(Versions.v2026_03_15_preview)
+union WifiSecretType {
+  string,
+
+  /** WiFi password. */
+  WiFiPassword: "WiFiPassword",
+
+  /** WiFi certificate. */
+  WiFiCertificate: "WiFiCertificate",
+
+  /** WiFi CA certificate. */
+  WiFiCACertificate: "WiFiCACertificate",
+}
+
+/**
+ * WiFi configuration reported properties.
+ */
+@added(Versions.v2026_03_15_preview)
+model WifiConfigurationReportedProperties {
+  /** WiFi SSID. */
+  ssid?: string;
+
+  /** WiFi authentication type. */
+  authenticationType?: AuthenticationType;
+
+  /** EAP method used for authentication. */
+  eapMethod?: EAPMethod;
+
+  /** WiFi signal strength. */
+  @visibility(Lifecycle.Read)
+  signalStrength?: int32;
+
+  /** Last successful WiFi connection timestamp. */
+  @visibility(Lifecycle.Read)
+  lastSuccessfulConnectionTimestamp?: string;
+
+  /** Current WiFi connection state. */
+  @visibility(Lifecycle.Read)
+  connectionState?: ConnectionState;
+
+  /** Username for enterprise WiFi authentication. */
+  username?: string;
+}
+
+/**
+ * WiFi connection state.
+ */
+@added(Versions.v2026_03_15_preview)
+union ConnectionState {
+  string,
+
+  /** WiFi is not configured. */
+  NotConfigured: "NotConfigured",
+
+  /** WiFi is connected. */
+  Connected: "Connected",
+
+  /** WiFi is disconnected. */
+  Disconnected: "Disconnected",
+
+  /** WiFi is connecting. */
+  Connecting: "Connecting",
+
+  /** WiFi is disconnecting. */
+  Disconnecting: "Disconnecting",
+
+  /** WiFi authentication failed. */
+  AuthenticationFailed: "AuthenticationFailed",
+}
+
+/**
+ * WiFi authentication type.
+ */
+@added(Versions.v2026_03_15_preview)
+union AuthenticationType {
+  string,
+
+  /** WPA2 Personal. */
+  `WPA2-Personal`: "WPA2-Personal",
+
+  /** WPA2 Enterprise. */
+  `WPA2-Enterprise`: "WPA2-Enterprise",
+
+  /** WPA3 Personal. */
+  `WPA3-Personal`: "WPA3-Personal",
+
+  /** WPA3 Enterprise. */
+  `WPA3-Enterprise`: "WPA3-Enterprise",
+
+  /** Open network. */
+  Open: "Open",
+}
+
+/**
+ * EAP authentication method.
+ */
+@added(Versions.v2026_03_15_preview)
+union EAPMethod {
+  string,
+
+  /** PEAP authentication. */
+  PEAP: "PEAP",
+
+  /** EAP-TLS authentication. */
+  `EAP-TLS`: "EAP-TLS",
+
+  /** EAP-TTLS authentication. */
+  `EAP-TTLS`: "EAP-TTLS",
+
+  /** EAP-FAST authentication. */
+  `EAP-FAST`: "EAP-FAST",
 }
 
 /**

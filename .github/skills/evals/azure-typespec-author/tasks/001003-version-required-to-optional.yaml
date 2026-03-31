@@ -1,0 +1,17 @@
+id: 001003-version-required-to-optional
+name: "Versioning: Change required to optional"
+description: |
+  Test changing a property from required to optional in a new API version.
+  Based on benchmark case 001003-version-required-to-optional.
+tags:
+  - versioning
+inputs:
+  prompt: "change the property age of EmployeeProperties from required to optional for new api version 2025-05-04-preview"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "API Version Evolution"

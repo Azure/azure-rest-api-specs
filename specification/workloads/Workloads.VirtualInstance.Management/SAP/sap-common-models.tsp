@@ -1,8 +1,6 @@
 import "@typespec/http";
 
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
 
 namespace Microsoft.Workloads;
 
