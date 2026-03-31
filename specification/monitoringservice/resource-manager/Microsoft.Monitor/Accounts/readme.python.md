@@ -21,4 +21,9 @@ output-folder: $(python-sdks-folder)/monitoraccounts/azure-mgmt-monitoraccounts/
 ``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
+
+directive:
+  - from: swagger-document
+    transform: >
+        $.definitions.Origin["x-ms-client-name"] = 'EntityOrigin';
 ```
