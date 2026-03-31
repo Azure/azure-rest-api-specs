@@ -1,0 +1,3147 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft HorizonDb Management API",
+    "version": "2026-01-20-preview",
+    "description": "Azure Resource Provider API for managing HorizonDb clusters, pools, replicas, and firewall rules",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "HorizonDbClusters"
+    },
+    {
+      "name": "HorizonDbPools"
+    },
+    {
+      "name": "HorizonDbReplicas"
+    },
+    {
+      "name": "HorizonDbFirewallRules"
+    },
+    {
+      "name": "HorizonDbPrivateEndpointConnections"
+    },
+    {
+      "name": "HorizonDbPrivateLinkResources"
+    },
+    {
+      "name": "HorizonDbParameterGroups"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.HorizonDb/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List operations for Microsoft.HorizonDb": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/clusters": {
+      "get": {
+        "operationId": "HorizonDbClusters_ListBySubscription",
+        "tags": [
+          "HorizonDbClusters"
+        ],
+        "description": "Lists all HorizonDb clusters in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List HorizonDb clusters by subscription": {
+            "$ref": "./examples/Clusters_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/parameterGroups": {
+      "get": {
+        "operationId": "HorizonDbParameterGroups_ListBySubscription",
+        "tags": [
+          "HorizonDbParameterGroups"
+        ],
+        "description": "Lists all HorizonDb parameter groups in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbParameterGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List HorizonDb parameter groups in a subscription": {
+            "$ref": "./examples/ParameterGroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters": {
+      "get": {
+        "operationId": "HorizonDbClusters_ListByResourceGroup",
+        "tags": [
+          "HorizonDbClusters"
+        ],
+        "description": "Lists all HorizonDb clusters in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List HorizonDb clusters in a resource group": {
+            "$ref": "./examples/Clusters_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}": {
+      "get": {
+        "operationId": "HorizonDbClusters_Get",
+        "tags": [
+          "HorizonDbClusters"
+        ],
+        "description": "Gets information about a HorizonDb cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HorizonDb cluster": {
+            "$ref": "./examples/Clusters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HorizonDbClusters_CreateOrUpdate",
+        "tags": [
+          "HorizonDbClusters"
+        ],
+        "description": "Creates a new HorizonDb cluster or updates an existing cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HorizonDbCluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'HorizonDbCluster' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbCluster"
+            }
+          },
+          "201": {
+            "description": "Resource 'HorizonDbCluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbCluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a HorizonDb cluster": {
+            "$ref": "./examples/Clusters_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/HorizonDbCluster"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "HorizonDbClusters_Update",
+        "tags": [
+          "HorizonDbClusters"
+        ],
+        "description": "Updates an existing HorizonDb cluster (e.g., tags, virtual cores, replica count).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HorizonDbClusterForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbCluster"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a HorizonDb cluster": {
+            "$ref": "./examples/Clusters_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/HorizonDbCluster"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "HorizonDbClusters_Delete",
+        "tags": [
+          "HorizonDbClusters"
+        ],
+        "description": "Deletes a HorizonDb cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HorizonDb cluster": {
+            "$ref": "./examples/Clusters_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools": {
+      "get": {
+        "operationId": "HorizonDbPools_List",
+        "tags": [
+          "HorizonDbPools"
+        ],
+        "description": "Lists all HorizonDb pools in a cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbPoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List HorizonDb pools in a cluster": {
+            "$ref": "./examples/Pools_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}": {
+      "get": {
+        "operationId": "HorizonDbPools_Get",
+        "tags": [
+          "HorizonDbPools"
+        ],
+        "description": "Gets information about a HorizonDb pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDb pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbPool"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HorizonDb pool": {
+            "$ref": "./examples/Pools_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/firewallRules": {
+      "get": {
+        "operationId": "HorizonDbFirewallRules_List",
+        "tags": [
+          "HorizonDbFirewallRules"
+        ],
+        "description": "Lists all HorizonDb firewall rules in a pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDb pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbFirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List HorizonDb firewall rules in a pool": {
+            "$ref": "./examples/FirewallRules_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/firewallRules/{firewallRuleName}": {
+      "get": {
+        "operationId": "HorizonDbFirewallRules_Get",
+        "tags": [
+          "HorizonDbFirewallRules"
+        ],
+        "description": "Gets information about a HorizonDb firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDb pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the HorizonDb firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbFirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HorizonDb firewall rule": {
+            "$ref": "./examples/FirewallRules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HorizonDbFirewallRules_CreateOrUpdate",
+        "tags": [
+          "HorizonDbFirewallRules"
+        ],
+        "description": "Creates a new HorizonDb firewall rule or updates an existing rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDb pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the HorizonDb firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HorizonDbFirewallRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'HorizonDbFirewallRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbFirewallRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'HorizonDbFirewallRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbFirewallRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a HorizonDb firewall rule": {
+            "$ref": "./examples/FirewallRules_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/HorizonDbFirewallRule"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "HorizonDbFirewallRules_Delete",
+        "tags": [
+          "HorizonDbFirewallRules"
+        ],
+        "description": "Deletes a HorizonDb firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDb pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the HorizonDb firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HorizonDb firewall rule": {
+            "$ref": "./examples/FirewallRules_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/replicas": {
+      "get": {
+        "operationId": "HorizonDbReplicas_List",
+        "tags": [
+          "HorizonDbReplicas"
+        ],
+        "description": "Lists all HorizonDb replicas in a pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDb pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbReplicaListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List HorizonDb replicas in a pool": {
+            "$ref": "./examples/Replicas_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/replicas/{replicaName}": {
+      "get": {
+        "operationId": "HorizonDbReplicas_Get",
+        "tags": [
+          "HorizonDbReplicas"
+        ],
+        "description": "Gets information about a HorizonDb replica.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDb pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "replicaName",
+            "in": "path",
+            "description": "The name of the HorizonDb replica.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbReplica"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HorizonDb replica": {
+            "$ref": "./examples/Replicas_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HorizonDbReplicas_CreateOrUpdate",
+        "tags": [
+          "HorizonDbReplicas"
+        ],
+        "description": "Creates a new HorizonDb replica or updates an existing replica.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDb pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "replicaName",
+            "in": "path",
+            "description": "The name of the HorizonDb replica.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HorizonDbReplica"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'HorizonDbReplica' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbReplica"
+            }
+          },
+          "201": {
+            "description": "Resource 'HorizonDbReplica' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbReplica"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a HorizonDb replica": {
+            "$ref": "./examples/Replicas_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/HorizonDbReplica"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "HorizonDbReplicas_Update",
+        "tags": [
+          "HorizonDbReplicas"
+        ],
+        "description": "Updates an existing HorizonDb replica (e.g., role).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDb pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "replicaName",
+            "in": "path",
+            "description": "The name of the HorizonDb replica.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HorizonDbReplicaForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbReplica"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a HorizonDb replica": {
+            "$ref": "./examples/Replicas_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/HorizonDbReplica"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "HorizonDbReplicas_Delete",
+        "tags": [
+          "HorizonDbReplicas"
+        ],
+        "description": "Deletes a HorizonDb replica.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDb pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "replicaName",
+            "in": "path",
+            "description": "The name of the HorizonDb replica.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HorizonDb replica": {
+            "$ref": "./examples/Replicas_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "HorizonDbPrivateEndpointConnections_List",
+        "tags": [
+          "HorizonDbPrivateEndpointConnections"
+        ],
+        "description": "Lists private endpoint connections in a HorizonDb cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all private endpoint connections on a cluster": {
+            "$ref": "./examples/PrivateEndpointConnections_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "HorizonDbPrivateEndpointConnections_Get",
+        "tags": [
+          "HorizonDbPrivateEndpointConnections"
+        ],
+        "description": "Gets a private endpoint connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a private endpoint connection": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateLinkResources": {
+      "get": {
+        "operationId": "HorizonDbPrivateLinkResources_List",
+        "tags": [
+          "HorizonDbPrivateLinkResources"
+        ],
+        "description": "Lists private link resources in a HorizonDb cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbPrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private link resources for HorizonDb": {
+            "$ref": "./examples/PrivateLinkResources_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateLinkResources/{groupName}": {
+      "get": {
+        "operationId": "HorizonDbPrivateLinkResources_Get",
+        "tags": [
+          "HorizonDbPrivateLinkResources"
+        ],
+        "description": "Gets a private link resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The name of the private link resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^.*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a private link resource for HorizonDb": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups": {
+      "get": {
+        "operationId": "HorizonDbParameterGroups_ListByResourceGroup",
+        "tags": [
+          "HorizonDbParameterGroups"
+        ],
+        "description": "Lists all HorizonDb parameter groups in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbParameterGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List HorizonDb parameter groups in a resource group": {
+            "$ref": "./examples/ParameterGroups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}": {
+      "get": {
+        "operationId": "HorizonDbParameterGroups_Get",
+        "tags": [
+          "HorizonDbParameterGroups"
+        ],
+        "description": "Gets information about a HorizonDb parameter group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameterGroupName",
+            "in": "path",
+            "description": "The name of the HorizonDb parameter group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbParameterGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HorizonDb parameter group": {
+            "$ref": "./examples/ParameterGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HorizonDbParameterGroups_CreateOrUpdate",
+        "tags": [
+          "HorizonDbParameterGroups"
+        ],
+        "description": "Creates a new HorizonDb parameter group or updates an existing parameter group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameterGroupName",
+            "in": "path",
+            "description": "The name of the HorizonDb parameter group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HorizonDbParameterGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'HorizonDbParameterGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbParameterGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'HorizonDbParameterGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbParameterGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a HorizonDb parameter group": {
+            "$ref": "./examples/ParameterGroups_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/HorizonDbParameterGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "HorizonDbParameterGroups_Update",
+        "tags": [
+          "HorizonDbParameterGroups"
+        ],
+        "description": "Updates an existing HorizonDb parameter group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameterGroupName",
+            "in": "path",
+            "description": "The name of the HorizonDb parameter group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HorizonDbParameterGroupForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbParameterGroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a HorizonDb parameter group": {
+            "$ref": "./examples/ParameterGroups_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/HorizonDbParameterGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "HorizonDbParameterGroups_Delete",
+        "tags": [
+          "HorizonDbParameterGroups"
+        ],
+        "description": "Deletes a HorizonDb parameter group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameterGroupName",
+            "in": "path",
+            "description": "The name of the HorizonDb parameter group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HorizonDb parameter group": {
+            "$ref": "./examples/ParameterGroups_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}/connections": {
+      "get": {
+        "operationId": "HorizonDbParameterGroups_ListConnections",
+        "tags": [
+          "HorizonDbParameterGroups"
+        ],
+        "description": "Gets all connections to a parameter group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameterGroupName",
+            "in": "path",
+            "description": "The name of the HorizonDb parameter group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbParameterGroupConnectionPropertiesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List connections for a HorizonDb parameter group": {
+            "$ref": "./examples/ParameterGroups_ListConnections.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}/versions": {
+      "get": {
+        "operationId": "HorizonDbParameterGroups_ListVersions",
+        "tags": [
+          "HorizonDbParameterGroups"
+        ],
+        "description": "Lists parameter groups filtered by version number.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameterGroupName",
+            "in": "path",
+            "description": "The name of the HorizonDb parameter group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The version number to filter by.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbParameterGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List parameter groups filtered by version": {
+            "$ref": "./examples/ParameterGroups_ListVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "patch": {
+        "operationId": "HorizonDbPrivateEndpointConnections_Update",
+        "tags": [
+          "HorizonDbPrivateEndpointConnections"
+        ],
+        "description": "Updates a private endpoint connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnectionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection": {
+            "$ref": "./examples/PrivateEndpointConnections_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "HorizonDbPrivateEndpointConnections_Delete",
+        "tags": [
+          "HorizonDbPrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a private endpoint connection": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "Azure.ResourceManager.PrivateEndpointConnectionUpdate": {
+      "type": "object",
+      "description": "PATCH model for private endpoint connections",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The private endpoint connection properties",
+          "properties": {
+            "privateEndpoint": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpoint",
+              "description": "The private endpoint resource."
+            },
+            "privateLinkServiceConnectionState": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
+              "description": "A collection of information about the state of the connection between service consumer and provider."
+            }
+          }
+        }
+      }
+    },
+    "CreateModeCluster": {
+      "type": "string",
+      "description": "The mode to create a new HorizonDb cluster.",
+      "enum": [
+        "Create",
+        "Update",
+        "PointInTimeRestore"
+      ],
+      "x-ms-enum": {
+        "name": "CreateModeCluster",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "Create a new cluster"
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Update an existing cluster"
+          },
+          {
+            "name": "PointInTimeRestore",
+            "value": "PointInTimeRestore",
+            "description": "Create cluster from point-in-time restore"
+          }
+        ]
+      }
+    },
+    "CreateModePool": {
+      "type": "string",
+      "description": "The mode to create a new HorizonDb cluster.",
+      "enum": [
+        "Create",
+        "Update"
+      ],
+      "x-ms-enum": {
+        "name": "CreateModePool",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "Create a new pool"
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Update an existing pool"
+          }
+        ]
+      }
+    },
+    "HorizonDbCluster": {
+      "type": "object",
+      "description": "Represents the HorizonDb cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HorizonDbClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HorizonDbClusterForPatchUpdate": {
+      "type": "object",
+      "description": "HorizonDb cluster for update operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/HorizonDbClusterPropertiesForPatchUpdate",
+          "description": "The properties that can be updated for a HorizonDb cluster."
+        }
+      }
+    },
+    "HorizonDbClusterListResult": {
+      "type": "object",
+      "description": "The response of a HorizonDbCluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HorizonDbCluster items on this page",
+          "items": {
+            "$ref": "#/definitions/HorizonDbCluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HorizonDbClusterParameterGroupConnectionProperties": {
+      "type": "object",
+      "description": "Connection information for HorizonDb parameter group.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the connected parameter group.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "syncStatus": {
+          "type": "string",
+          "description": "Indication of if parameter group is applied on HorizonDb resource.",
+          "readOnly": true
+        },
+        "applyImmediately": {
+          "type": "boolean",
+          "description": "Indicates whether the parameters should be applied immediately.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      }
+    },
+    "HorizonDbClusterProperties": {
+      "type": "object",
+      "description": "Properties of a HorizonDb cluster.",
+      "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator login name.",
+          "minLength": 1,
+          "maxLength": 63,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "The administrator login password.",
+          "minLength": 8,
+          "maxLength": 128,
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the HorizonDb cluster."
+        },
+        "createMode": {
+          "$ref": "#/definitions/CreateModeCluster",
+          "description": "The mode to create a new HorizonDb cluster."
+        },
+        "pointInTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Restore point creation time specifying the time to restore from."
+        },
+        "sourceClusterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The source cluster resource ID for restore or replica creation."
+        },
+        "poolName": {
+          "type": "string",
+          "description": "The pool name for restore or replica operations."
+        },
+        "replicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of replicas.",
+          "minimum": 1,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of vCores.",
+          "minimum": 1,
+          "maximum": 96,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "processorType": {
+          "type": "string",
+          "description": "The processor type for the HorizonDb cluster."
+        },
+        "network": {
+          "$ref": "#/definitions/Network",
+          "description": "The network related info."
+        },
+        "state": {
+          "$ref": "#/definitions/State",
+          "description": "Current state of the cluster.",
+          "readOnly": true
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name of the cluster.",
+          "readOnly": true
+        },
+        "readonlyEndpoint": {
+          "type": "string",
+          "description": "The fully qualified domain name used for readonly endpoint for the cluster.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the cluster.",
+          "readOnly": true
+        },
+        "zonePlacementPolicy": {
+          "$ref": "#/definitions/ZonePlacementPolicy",
+          "description": "Defines how replicas are placed across availability zones.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "parameterGroup": {
+          "$ref": "#/definitions/HorizonDbClusterParameterGroupConnectionProperties",
+          "description": "Defines connection to a parameter group.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "administratorLogin"
+      ]
+    },
+    "HorizonDbClusterPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties of a HorizonDb cluster for update operations.",
+      "properties": {
+        "administratorLoginPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "The administrator login password.",
+          "minLength": 8,
+          "maxLength": 128,
+          "x-ms-mutability": [
+            "update"
+          ],
+          "x-ms-secret": true
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of vCores.",
+          "minimum": 1,
+          "maximum": 96,
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "parameterGroup": {
+          "$ref": "#/definitions/HorizonDbClusterParameterGroupConnectionProperties",
+          "description": "Defines connection to a parameter group."
+        }
+      }
+    },
+    "HorizonDbFirewallRule": {
+      "type": "object",
+      "description": "Represents the HorizonDb firewall rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HorizonDbFirewallRuleProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HorizonDbFirewallRuleListResult": {
+      "type": "object",
+      "description": "The response of a HorizonDbFirewallRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HorizonDbFirewallRule items on this page",
+          "items": {
+            "$ref": "#/definitions/HorizonDbFirewallRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HorizonDbFirewallRuleProperties": {
+      "type": "object",
+      "description": "Properties of a HorizonDb firewall rule.",
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address of the firewall rule (IPv4).",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address of the firewall rule (IPv4).",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the HorizonDb firewall rule.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the firewall rule.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ]
+    },
+    "HorizonDbParameterGroup": {
+      "type": "object",
+      "description": "Represents the HorizonDb parameter group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HorizonDbParameterGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HorizonDbParameterGroupConnectionProperties": {
+      "type": "object",
+      "description": "Connection information for HorizonDb parameter group.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the connected resource.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the connected resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "HorizonDbParameterGroupConnectionPropertiesListResult": {
+      "type": "object",
+      "description": "The response of a HorizonDbParameterGroupConnectionProperties list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HorizonDbParameterGroupConnectionProperties items on this page",
+          "items": {
+            "$ref": "#/definitions/HorizonDbParameterGroupConnectionProperties"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HorizonDbParameterGroupForPatchUpdate": {
+      "type": "object",
+      "description": "HorizonDb parameter group for update operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/HorizonDbParameterGroupPropertiesForPatchUpdate",
+          "description": "The properties that can be updated for a HorizonDb parameter group."
+        }
+      }
+    },
+    "HorizonDbParameterGroupListResult": {
+      "type": "object",
+      "description": "The response of a HorizonDbParameterGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HorizonDbParameterGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/HorizonDbParameterGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HorizonDbParameterGroupProperties": {
+      "type": "object",
+      "description": "Properties of a HorizonDb parameter group.",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "description": "Parameters in the parameter group.",
+          "items": {
+            "$ref": "#/definitions/ParameterProperties"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the parameter group.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "pgVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "PostgreSQL version for the parameter group.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current version of the parameter group.",
+          "readOnly": true
+        },
+        "applyImmediately": {
+          "type": "boolean",
+          "description": "Indicates whether the parameters should be applied immediately.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the parameter group.",
+          "readOnly": true
+        }
+      }
+    },
+    "HorizonDbParameterGroupPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties of a HorizonDb parameter group for update operations.",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "description": "Parameters in the parameter group.",
+          "items": {
+            "$ref": "#/definitions/ParameterProperties"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the parameter group.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "applyImmediately": {
+          "type": "boolean",
+          "description": "Indicates whether the parameters should be applied immediately.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "HorizonDbPool": {
+      "type": "object",
+      "description": "Represents the HorizonDb pool.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HorizonDbPoolProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HorizonDbPoolListResult": {
+      "type": "object",
+      "description": "The response of a HorizonDbPool list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HorizonDbPool items on this page",
+          "items": {
+            "$ref": "#/definitions/HorizonDbPool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HorizonDbPoolProperties": {
+      "type": "object",
+      "description": "Properties of a HorizonDb pool.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The location of the HorizonDb pool.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/State",
+          "description": "Current state of the pool.",
+          "readOnly": true
+        },
+        "replicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of replicas in the pool.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the HorizonDb pool.",
+          "readOnly": true
+        },
+        "createMode": {
+          "$ref": "#/definitions/CreateModePool",
+          "description": "The create mode for the pool.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the pool.",
+          "readOnly": true
+        }
+      }
+    },
+    "HorizonDbPrivateLinkResource": {
+      "type": "object",
+      "description": "Represents the HorizonDb private link resource.",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HorizonDbPrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a HorizonDbPrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HorizonDbPrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/HorizonDbPrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HorizonDbReplica": {
+      "type": "object",
+      "description": "Represents the HorizonDb replica.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HorizonDbReplicaProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HorizonDbReplicaForPatchUpdate": {
+      "type": "object",
+      "description": "HorizonDb replica for update operations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HorizonDbReplicaPropertiesForPatchUpdate",
+          "description": "Properties of a HorizonDb replica for update operations."
+        }
+      }
+    },
+    "HorizonDbReplicaListResult": {
+      "type": "object",
+      "description": "The response of a HorizonDbReplica list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HorizonDbReplica items on this page",
+          "items": {
+            "$ref": "#/definitions/HorizonDbReplica"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HorizonDbReplicaProperties": {
+      "type": "object",
+      "description": "Properties of a HorizonDb replica.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ReplicaRole",
+          "description": "Role of the replica.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/State",
+          "description": "Current status of the replica.",
+          "readOnly": true
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name of the replica.",
+          "readOnly": true
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The availability zone of the replica."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the replica.",
+          "readOnly": true
+        }
+      }
+    },
+    "HorizonDbReplicaPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties of a HorizonDb replica for update operations.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ReplicaRole",
+          "description": "Role of the replica.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "Network": {
+      "type": "object",
+      "description": "Network properties.",
+      "properties": {
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccessState",
+          "description": "The flag indicating whether public ip is requested.",
+          "readOnly": true
+        }
+      }
+    },
+    "ParameterProperties": {
+      "type": "object",
+      "description": "Properties of a HorizonDb parameters.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the parameter."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the parameter.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the configuration."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "The data type of the parameter.",
+          "readOnly": true
+        },
+        "allowedValues": {
+          "type": "string",
+          "description": "The allowed values for the parameter.",
+          "readOnly": true
+        },
+        "isDynamic": {
+          "type": "boolean",
+          "description": "Whether the parameter can be changed dynamically.",
+          "readOnly": true
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "description": "Whether the parameter is a read-only parameter.",
+          "readOnly": true
+        },
+        "documentationLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to parameter documentation.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of measurement for the parameter.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnectionResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnectionResource items on this page",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress",
+        "Provisioning"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Provisioning completed successfully"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Provisioning failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning was canceled"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Provisioning is in progress"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning is in progress"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "PublicNetworkAccessState": {
+      "type": "string",
+      "description": "Indicates if public network access is enabled or not.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Public network access is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Public network access is disabled"
+          }
+        ]
+      }
+    },
+    "ReplicaRole": {
+      "type": "string",
+      "description": "Role of the replica.",
+      "enum": [
+        "Read",
+        "ReadWrite"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicaRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Read",
+            "value": "Read",
+            "description": "Read-only replica"
+          },
+          {
+            "name": "ReadWrite",
+            "value": "ReadWrite",
+            "description": "ReadWrite replica"
+          }
+        ]
+      }
+    },
+    "State": {
+      "type": "string",
+      "description": "Current states.",
+      "enum": [
+        "Ready",
+        "Dropping",
+        "Disabled",
+        "Starting",
+        "Stopping",
+        "Stopped",
+        "Updating",
+        "Healthy"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Is ready and operational"
+          },
+          {
+            "name": "Dropping",
+            "value": "Dropping",
+            "description": "Is being dropped/deleted"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Is disabled"
+          },
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "Is starting up"
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "Is stopping"
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "Is stopped"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Is being updated"
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Is healthy"
+          }
+        ]
+      }
+    },
+    "ZonePlacementPolicy": {
+      "type": "string",
+      "description": "The zone redundancy option for the cluster.",
+      "enum": [
+        "Strict",
+        "BestEffort"
+      ],
+      "x-ms-enum": {
+        "name": "ZonePlacementPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Strict",
+            "value": "Strict",
+            "description": "Enforce zonal redundancy"
+          },
+          {
+            "name": "BestEffort",
+            "value": "BestEffort",
+            "description": "Best-effort placement (default)"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
