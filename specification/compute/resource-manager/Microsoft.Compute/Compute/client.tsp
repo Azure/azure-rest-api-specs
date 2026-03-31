@@ -5,6 +5,7 @@ import "./ComputeGallery/main.tsp";
 import "./ComputeSku/main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Common;
 using Compute;
 using ComputeGallery;
 using ComputeSku;
@@ -44,3 +45,9 @@ namespace ComputeCombine;
 // Property name changes: retain old Java names for ComputeGallery and ComputeSku models
 @@clientName(AccessControlRulesIdentity.userName, "username", "java");
 @@clientName(ResourceSkuCosts.meterID, "meterId", "java");
+
+// Rename model to match old Swagger-generated name
+@@clientName(UserAssignedIdentitiesValue,
+  "VirtualMachineIdentityUserAssignedIdentities",
+  "java"
+);
