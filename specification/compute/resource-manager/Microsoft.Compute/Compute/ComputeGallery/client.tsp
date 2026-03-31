@@ -12,6 +12,7 @@ using ComputeGallery;
 @@clientName(ValidationsProfile, "GalleryImageValidationsProfile", "csharp");
 @@clientName(PolicyViolation, "GalleryImageVersionPolicyViolation", "csharp");
 @@clientName(ReplicationMode, "GalleryReplicationMode", "csharp");
+@@clientName(StorageAccountType, "ImageStorageAccountType", "csharp");
 @@clientName(PlatformAttribute, "ComputeGalleryPlatformAttribute", "csharp");
 @@clientName(ExecutedValidation, "GalleryImageExecutedValidation", "csharp");
 @@clientName(ValidationStatus, "ComputeGalleryValidationStatus", "csharp");
