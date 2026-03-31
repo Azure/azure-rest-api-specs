@@ -13,7 +13,7 @@ namespace Microsoft.Monitor;
 @doc("Represents an SLI resource within the ProviderHub.")
 model Sli is ProxyResource<SliResource> {
   @doc("Name of the SLI that is given by the user.")
-  @pattern("^[a-zA-Z0-9-_()~]{3,64}$")
+  @pattern("^[a-zA-Z0-9_()~-]{3,64}$")
   @key("sliName")
   @segment("slis")
   @path
