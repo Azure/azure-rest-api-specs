@@ -15,16 +15,16 @@ namespace Microsoft.Monitor;
 @doc("Defines the available preview types for signal preview.")
 union PreviewType {
   @doc("Preview for good signal.")
-  GoodSignal: "goodsignal",
+  GoodSignal: "GoodSignal",
 
   @doc("Preview for total signal.")
-  TotalSignal: "totalsignal",
+  TotalSignal: "TotalSignal",
 
   @doc("Preview for signal.")
-  Signal: "signal",
+  Signal: "Signal",
 
   @doc("Preview for SLO evaluation.")
-  Slo: "slo",
+  Slo: "Slo",
 
   string,
 }
