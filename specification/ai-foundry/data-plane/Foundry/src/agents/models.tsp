@@ -733,8 +733,8 @@ model VersionSelector {
 model VersionSelectionRule {
   type: VersionSelectorType;
 
-  @doc("The version to rout traffic to")
-  agentVersion: string;
+  @doc("The agent version to route traffic to")
+  agent_version: string;
 }
 
 @removed(Versions.v1)
