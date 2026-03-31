@@ -64,10 +64,8 @@ using Microsoft.KubernetesConfiguration;
 @@clientName(AutoUpgradeMode, "KubernetesClusterAutoUpgradeMode", "csharp");
 @@clientName(AdditionalDetails, "KubernetesClusterAdditionalDetails", "csharp");
 @@clientName(ManagementDetails, "KubernetesClusterManagementDetails", "csharp");
-@@clientName(OperationStatusResult,
-  "KubernetesClusterOperationStatusResult",
-  "csharp"
-);
+// Exclude OperationStatus APIs from C# SDK - they are built into the core library
+@@scope(Extensions.operationStatusGet, "!csharp");
 
 // Backward compatibility: old SDK used ManagedServiceIdentity for AksAssignedIdentity
 @@alternateType(ExtensionProperties.aksAssignedIdentity,

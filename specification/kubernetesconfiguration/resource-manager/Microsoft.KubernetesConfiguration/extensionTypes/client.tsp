@@ -3,6 +3,12 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
+// C# type customizations for backward compatibility
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 @@clientName(Microsoft.KubernetesConfiguration,
   "KubernetesConfigurationExtensionTypesMgmtClient",
   "python"
@@ -40,3 +46,6 @@ using Azure.ClientGenerator.Core;
   "listClusterListVersions",
   "javascript"
 );
+
+// C# fixes: rename interface to avoid namespace conflict (§4.9)
+@@clientName(Microsoft.KubernetesConfiguration.ExtensionTypes, "ExtensionTypeInterface", "csharp");

@@ -3,6 +3,12 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
+// C# type customizations for backward compatibility
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 @@clientName(Microsoft.KubernetesConfiguration,
   "KubernetesConfigurationPrivateLinkScopesMgmtClient",
   "python"
@@ -60,3 +66,9 @@ using Azure.ClientGenerator.Core;
   "Resources",
   "java"
 );
+
+// C# fixes: mark single-page list operations as pageable for correct Collection generation
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for correct Collection generation in C#"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.KubernetesConfiguration.PrivateLinkResources.listByPrivateLinkScope, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for correct Collection generation in C#"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.KubernetesConfiguration.PrivateEndpointConnections.listByPrivateLinkScope, "csharp");
