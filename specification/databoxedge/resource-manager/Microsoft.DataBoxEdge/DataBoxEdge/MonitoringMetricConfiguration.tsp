@@ -133,7 +133,7 @@ interface MonitoringMetricConfigurationsNonListOps
         @segment("roles")
         roleName: string,
       },
-      {},
+      {}
     > {}
 
 @@doc(MonitoringMetricConfiguration.name, "");
