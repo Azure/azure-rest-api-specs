@@ -492,7 +492,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}": {
       "get": {
         "operationId": "Projects_Get",
         "tags": [
@@ -520,11 +520,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project ID.",
+            "description": "Name of the MongoDB Atlas Project resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           }
         ],
         "responses": {
@@ -574,11 +577,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project ID.",
+            "description": "Name of the MongoDB Atlas Project resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           }
         ],
         "responses": {
@@ -617,7 +623,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}/clusterTierRegions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/clusterTierRegions": {
       "post": {
         "operationId": "Projects_ListClusterTierRegions",
         "tags": [
@@ -645,11 +651,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project ID.",
+            "description": "Name of the MongoDB Atlas Project resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           }
         ],
         "responses": {
@@ -673,7 +682,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}/clusters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/clusters": {
       "get": {
         "operationId": "Clusters_List",
         "tags": [
@@ -701,11 +710,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project ID.",
+            "description": "Name of the MongoDB Atlas Project resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           }
         ],
         "responses": {
@@ -732,7 +744,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}/clusters/{clusterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/clusters/{clusterName}": {
       "get": {
         "operationId": "Clusters_Get",
         "tags": [
@@ -760,11 +772,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project ID.",
+            "description": "Name of the MongoDB Atlas Project resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           },
           {
             "name": "clusterName",
@@ -824,11 +839,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project ID.",
+            "description": "Name of the MongoDB Atlas Project resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           },
           {
             "name": "clusterName",
@@ -918,11 +936,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project ID.",
+            "description": "Name of the MongoDB Atlas Project resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           },
           {
             "name": "clusterName",
@@ -971,7 +992,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}/tierLimitReached": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/tierLimitReached": {
       "post": {
         "operationId": "Projects_TierLimitReached",
         "tags": [
@@ -999,11 +1020,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
           },
           {
-            "name": "projectId",
+            "name": "projectName",
             "in": "path",
-            "description": "Atlas project ID.",
+            "description": "Name of the MongoDB Atlas Project resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
           }
         ],
         "responses": {
@@ -1149,15 +1173,6 @@
       "type": "object",
       "description": "Properties specific to a MongoDB Atlas Cluster.",
       "properties": {
-        "projectId": {
-          "type": "string",
-          "description": "Atlas project id. The ID of the project this cluster belongs to.",
-          "pattern": "^[a-fA-F0-9]{24}$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "clusterTier": {
           "$ref": "#/definitions/ClusterTier",
           "description": "Cluster tier (FREE, FLEX, M10, M30).",
@@ -1542,7 +1557,7 @@
             "$ref": "#/definitions/Project"
           },
           "x-ms-identifiers": [
-            "projectId",
+            "projectName",
             "id"
           ]
         },

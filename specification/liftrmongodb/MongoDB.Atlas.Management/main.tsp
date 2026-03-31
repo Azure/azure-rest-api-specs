@@ -174,12 +174,15 @@ model ProjectProperties {
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 @parentResource(OrganizationResource)
 model Project is ProxyResource<ProjectProperties> {
-  @key("projectId")
+  @key("projectName")
+  @pattern("^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$")
   @segment("projects")
-  @doc("Atlas project ID.")
+  @minLength(1)
+  @maxLength(64)
+  @doc("Name of the MongoDB Atlas Project resource.")
   @path
   @visibility(Lifecycle.Read)
-  projectId: string;
+  projectName: string;
 }
 
 @armResourceOperations
@@ -264,11 +267,6 @@ model TierRegions {
 @doc("Properties specific to a MongoDB Atlas Cluster.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model ClusterProperties {
-  @doc("Atlas project id. The ID of the project this cluster belongs to.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  @pattern("^[a-fA-F0-9]{24}$")
-  projectId?: string;
-
   @doc("Cluster tier (FREE, FLEX, M10, M30).")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   clusterTier: ClusterTier;
