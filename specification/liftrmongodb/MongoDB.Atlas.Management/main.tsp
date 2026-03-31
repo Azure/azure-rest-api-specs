@@ -128,30 +128,6 @@ interface Organizations {
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
-
-  @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
-  @doc("Create a new project under this organization.")
-  @autoRoute
-  @armResourceAction(OrganizationResource)
-  @post
-  @action("projects")
-  createProject(
-    ...ResourceInstanceParameters<OrganizationResource>,
-
-    @doc("Project creation request containing the project name.")
-    @body
-    body: CreateProjectRequest,
-  ): ArmResponse<Project> | ErrorResponse;
-}
-
-@doc("Request body for creating a new project.")
-@added(MongoDB.Atlas.Versions.v2026_03_01_preview)
-model CreateProjectRequest {
-  @doc("Name for the new project in MongoDB Atlas.")
-  @pattern("^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$")
-  @minLength(1)
-  @maxLength(64)
-  projectName: string;
 }
 
 // =====================================================

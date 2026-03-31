@@ -490,62 +490,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-      "post": {
-        "operationId": "Organizations_CreateProject",
-        "tags": [
-          "Organizations"
-        ],
-        "description": "Create a new project under this organization.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Name of the Organization resource",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Project creation request containing the project name.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateProjectRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Project"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Organizations_CreateProject_MaximumSet": {
-            "$ref": "./examples/Organizations_CreateProject_MaximumSet_Gen.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}": {
@@ -1291,22 +1235,6 @@
           }
         ]
       }
-    },
-    "CreateProjectRequest": {
-      "type": "object",
-      "description": "Request body for creating a new project.",
-      "properties": {
-        "projectName": {
-          "type": "string",
-          "description": "Name for the new project in MongoDB Atlas.",
-          "minLength": 1,
-          "maxLength": 64,
-          "pattern": "^[ a-zA-Z0-9\\-_.(),:&@+']{1,64}$"
-        }
-      },
-      "required": [
-        "projectName"
-      ]
     },
     "LiftrBase.MarketplaceDetails": {
       "type": "object",
