@@ -1,0 +1,54 @@
+parameters:
+  "service-dir":
+    default: "sdk/databricks"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/openapi.json"
+    emit-lro-options: "all"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-databricks"
+    namespace: "com.azure.resourcemanager.databricks"
+    flavor: "azure"
+    service-name: "Azure Databricks"
+    remove-inner: SecurityAlert,HuntingBookmark,Entity
+    use-object-for-unknown: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.Databricks"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/databricks"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-databricks"
+    namespace: "azure.mgmt.databricks"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/databricks"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-databricks"
+    flavor: azure
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-databricks"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/databricks"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdatabricks"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdatabricks"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -109,11 +109,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@alternateType(BlobItem.name, string, "rust");
 @@alternateType(BlobPrefix.name, string, "rust");
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(BlobItem.name,
   "deserialize_with",
   "crate::models::blob_name::option::deserialize",
   "rust"
 );
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(BlobPrefix.name,
   "deserialize_with",
   "crate::models::blob_name::option::deserialize",

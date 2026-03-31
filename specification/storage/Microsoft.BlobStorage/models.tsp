@@ -828,11 +828,15 @@ enum LeaseStatus {
 /** Represents an access policy. */
 model AccessPolicy {
   /** The date-time the policy is active. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   @Xml.name("Start")
   @encode("rfc3339-fixed-width")
   start?: utcDateTime;
 
   /** The date-time the policy expires. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   @Xml.name("Expiry")
   @encode("rfc3339-fixed-width")
   expiry?: utcDateTime;
@@ -891,6 +895,10 @@ union AccessTier {
   /** The Cold access tier. */
   Cold: "Cold",
 
+  /** The Smart access tier. */
+  @added(Versions.v2026_06_06)
+  Smart: "Smart",
+
   /** Extensible */
   string,
 }
@@ -903,8 +911,12 @@ union ArchiveStatus {
   /** The archive status is rehydrating pending to cool. */
   RehydratePendingToCool: "rehydrate-pending-to-cool",
 
-  /** The archive status is rehydrating pending to archive. */
+  /** The archive status is rehydrating pending to cold. */
   RehydratePendingToCold: "rehydrate-pending-to-cold",
+
+  /** The archive status is rehydrating pending to smart. */
+  @added(Versions.v2026_06_06)
+  RehydratePendingToSmart: "rehydrate-pending-to-smart",
 
   /** Extensible */
   string,
@@ -1047,6 +1059,11 @@ model BlobProperties {
 
   /** The archive status of the blob. */
   @Xml.name("ArchiveStatus") archiveStatus?: ArchiveStatus;
+
+  /** The smart access tier of the blob. */
+  @added(Versions.v2026_06_06)
+  @Xml.name("SmartAccessTier")
+  smartAccessTier?: AccessTier;
 
   /** Customer provided key sha256 */
   @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;
@@ -1569,10 +1586,9 @@ alias RehydratePriorityHeader = {
 alias ExpiryTimeParameter = {
   /** The time this blob will expire. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @clientName("ExpiresOn")
   @encode("rfc7231")
   @header("x-ms-expiry-time")
-  expiryTime?: utcDateTime;
+  expiresOn?: utcDateTime;
 };
 
 /** The expires on response header. */

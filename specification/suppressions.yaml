@@ -2,6 +2,163 @@
 # Remove suppressions as specs are fixed
 
 - tool: TypeSpecValidation
+  rules: [FolderStructure]
+  sub-rules: [MustUseV2]
+  reason: Specs added as folder structure v1, not yet converted to v2
+  paths:
+    - agricultureplatform/AgriculturePlatform.Management
+    - ai/Azure.AI.Agents
+    - ai/Azure.AI.Projects
+    - ai/ContentUnderstanding
+    - ai/DocumentIntelligence
+    - ai/Face
+    - ai/HealthInsights/HealthInsights.OpenAPI
+    - ai/HealthInsights/HealthInsights.RadiologyInsights
+    - ai/ImageAnalysis
+    - ai/ModelInference
+    - ai/OpenAI.Assistants
+    - apicenter/ApiCenter.DataApi
+    - apicenter/ApiCenter.Management
+    - appcomplianceautomation/AppComplianceAutomation.Management
+    - applink/AppLink.Management
+    - awsconnector/**
+    - azuredatatransfer/AzureDataTransfer.Management
+    - azuredependencymap/DependencyMap.Management
+    - billingbenefits/BillingBenefits.Management
+    - carbon/Carbon.Management
+    - cloudhealth/CloudHealth.Management
+    - codesigning/CodeSigning.Management
+    - cognitiveservices/AnomalyDetector
+    - cognitiveservices/CognitiveServices.Management
+    - cognitiveservices/ContentSafety
+    - cognitiveservices/OpenAI.Inference
+    - cognitiveservices/Speech.VideoTranslation
+    - communication/Communication.JobRouter
+    - communication/Communication.Management
+    - communication/Communication.Messages
+    - communitytraining/Community.Management
+    - computebulkactions/ComputeBulkActions.Management
+    - computeschedule/ComputeSchedule.Management
+    - confidentialledger/Microsoft.CodeTransparency
+    - confluent/Confluent.Management
+    - connectedcache/ConnectedCache.Management
+    - dashboard/Dashboard.Management
+    - databasefleetmanager/DatabaseFleetManager.Management
+    - databasewatcher/DatabaseWatcher.Management
+    - datadog/Datadog.Management
+    - dell/Dell.Storage.Management
+    - devcenter/DevCenter
+    - devcenter/DevCenter.Management
+    - deviceregistry/DeviceRegistry.Management
+    - devopsinfrastructure/Microsoft.DevOpsInfrastructure.Management
+    - discovery/Discovery.Management
+    - discovery/Discovery.Bookshelf.Management
+    - discovery/Discovery.Management.Shared
+    - discovery/Discovery.Supercomputer.Management
+    - discovery/Discovery.Workspace.Management
+    - durabletask/DurableTask.Management
+    - dynatrace/Dynatrace.Management
+    - edge/Microsoft.Edge.ConfigurationManager.Management
+    - edge/Microsoft.Edge.Configurations.Management
+    - edge/Microsoft.Edge.DisconnectedOperations.Management
+    - edge/Microsoft.Edge.Management
+    - edge/Microsoft.Edge.Sites.Management
+    - edge/Microsoft.Edge.Shared
+    - edgemarketplace/Microsoft.EdgeMarketPlace.Management
+    - edgezones/EdgeZones.Management
+    - elastic/Elastic.Management
+    - ews/SecretSyncController.Management
+    - fist/IotFirmwareDefense.Management
+    - github-network/GitHub.Network.Management
+    - healthbot/HealthBot.Management
+    - healthdataaiservices/HealthDataAIServices.DeidServices
+    - healthdataaiservices/HealthDataAIServices.Management
+    - hybridconnectivity/HybridConnectivity.Management
+    - hybridkubernetes/HybridKubernetes.Management
+    - impact/Impact.Management
+    - informatica/Informatica.DataManagement.Management
+    - iotoperations/IoTOperations.Management
+    - iotoperationsdataprocessor/IoTOperationsDataProcessor.Management
+    - iotoperationsmq/IoTOperationsMQ.Management
+    - iotoperationsorchestrator/IoTOperationsOrchestrator.Management
+    - kubernetesruntime/KubernetesRuntime.Management
+    - liftrarize/ArizeAi.ObservabilityEval.Management
+    - liftrastronomer/Astronomer.Astro.Management
+    - liftrhyperexecute/LambdaTest.HyperExecute.Management
+    - liftrmongodb/MongoDB.Atlas.Management
+    - liftrpinecone/Pinecone.VectorDb.Management
+    - liftrqumulo/Qumulo.Storage.Management
+    - liftrweightsandbiases/Liftr.WeightsAndBiases.Management
+    - machinelearningservices/AzureAI.Assets
+    - machinelearningservices/MachineLearningServices.Management
+    - managednetworkfabric/ManagedNetworkFabric.ResourceManager.Management
+    - managedoperations/ManagedOps.Management
+    - manufacturingplatform/Manufacturingplatform.Management
+    - migrate/AssessmentProjects.Management/AKSAssessments.Management
+    - migrate/AssessmentProjects.Management/AssessmentProjects.Management
+    - migrate/AssessmentProjects.Management/AvsAssessments.Management
+    - migrate/AssessmentProjects.Management/BusinessCases.Management
+    - migrate/AssessmentProjects.Management/Collectors.Management
+    - migrate/AssessmentProjects.Management/HeterogeneousAssessments.Management
+    - migrate/AssessmentProjects.Management/MachineAssessments.Management
+    - migrate/AssessmentProjects.Management/SqlAssessments.Management
+    - migrate/AssessmentProjects.Management/WebAppAssessments.Management
+    - migrate/AssessmentProjects.Management/WebAppCompoundAssessments.Management
+    - migrate/Waves.Management
+    - mission/Mission.Management
+    - monitor/Microsoft.Monitor.Management
+    - monitor/Microsoft.Monitor.Operations.Management
+    - monitor/Microsoft.Monitor.PipelineGroups.Management
+    - monitor/Monitor.Ingestion
+    - monitor/Monitor.Query.Logs
+    - monitor/Monitor.Query.Metrics
+    - networkcloud/NetworkCloud.Management
+    - newrelic/NewRelicObservability.Management
+    - nginx/Nginx.Management
+    - onlineexperimentation/Azure.Analytics.OnlineExperimentation
+    - onlineexperimentation/OnlineExperimentation.Management
+    - oracle/Oracle.Database.Management
+    - orbital/Microsoft.PlanetaryComputer
+    - orbitalplanetarycomputer/Orbital.Management
+    - paloaltonetworks/PaloAltoNetworks.Management
+    - playwrighttesting/PlaywrightTesting.AuthManager
+    - playwrighttesting/PlaywrightTesting.Management
+    - playwrighttesting/PlaywrightTesting.Shared
+    - portal/Dashboard.Management
+    - portal/TenantConfiguration.Management
+    - portalservices/CopilotSettings.Management
+    - portalservices/Extension.Management
+    - postgresql/DBforPostgreSQL.Management
+    - programmableconnectivity/Azure.ProgrammableConnectivity
+    - programmableconnectivity/ProgrammableConnectivity.Management
+    - providerhub/ProviderHub.Management
+    - purestorage/PureStorage.Block.Management
+    - purviewdatagovernace/Azure.Analaytics.Purview.DataQuality
+    - purviewdatagovernance/Azure.Analytics.Purview.UnifiedCatalog
+    - quantum/Microsoft.Quantum.Management
+    - quantum/Quantum.Workspace
+    - relationships/Relationships.Management
+    - riskiq/Easm
+    - scvmm/ScVmm.Management
+    - sovereign/Sovereign.Management
+    - sphere/Sphere.Management
+    - splitio/SplitIO.Experimentation.Management
+    - standbypool/StandbyPool.Management
+    - storage/Microsoft.BlobStorage
+    - storage/Microsoft.QueueStorage
+    - storage/Storage.Management
+    - storageactions/StorageAction.Management
+    - storagediscovery/Microsoft.StorageDiscovery.Management
+    - storagemover/StorageMover.Management
+    - terraform/Microsoft.AzureTerraform.Management
+    - verifiedid/Microsoft.VerifiedId.Management
+    - voiceservices/VoiceServices.Provisioning
+    - workloads/Workloads.Operations.Management
+    - workloads/Workloads.SAPDiscoverySite.Management
+    - workloads/Workloads.SAPMonitor.Management
+    - workloads/Workloads.SAPVirtualInstance.Management
+
+- tool: TypeSpecValidation
   rules: [Compile]
   sub-rules: [ExtraSwagger]
   reason: Extra swaggers left behind when versions were removed from *.tsp files
@@ -34,14 +191,13 @@
     - iotoperations/resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/iotoperations.json
     - iotoperations/resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/iotoperations.json
     - iotoperations/resource-manager/Microsoft.IoTOperations/preview/2024-09-15-preview/iotoperations.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/backuprestore.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/backuprestore.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/certificates.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/keys.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/rbac.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/secrets.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/settings.json
-    - liftrneon/resource-manager/Neon.Postgres/preview/2024-08-01-preview/neon.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/backuprestore.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/backuprestore.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/certificates.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/keys.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/rbac.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/secrets.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/settings.json
     - liftrqumulo/resource-manager/Qumulo.Storage/preview/2022-06-27-preview/Qumulo.Storage.json
     - playwrighttesting/data-plane/Microsoft.PlaywrightTesting.AuthManager/preview/2023-10-01-preview/playwrighttesting.json
     - playwrighttesting/resource-manager/Microsoft.AzurePlaywrightService/preview/2024-02-01-preview/playwrighttesting.json
@@ -272,7 +428,7 @@
     - options.@azure-tools/typespec-ts.package-dir
     - options.@azure-tools/typespec-ts.emitter-output-dir
   paths:
-    - keyvault/Security.KeyVault.Administration/tspconfig.yaml
+    - keyvault/data-plane/Administration/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -282,9 +438,9 @@
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
   paths:
-    - keyvault/Security.KeyVault.BackupRestore/tspconfig.yaml
-    - keyvault/Security.KeyVault.RBAC/tspconfig.yaml
-    - keyvault/Security.KeyVault.Settings/tspconfig.yaml
+    - keyvault/data-plane/Administration/BackupRestore/tspconfig.yaml
+    - keyvault/data-plane/Administration/RBAC/tspconfig.yaml
+    - keyvault/data-plane/Administration/Settings/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -297,9 +453,9 @@
     - options.@azure-tools/typespec-ts.package-dir
     - options.@azure-tools/typespec-ts.emitter-output-dir
   paths:
-    - keyvault/Security.KeyVault.Certificates/tspconfig.yaml
-    - keyvault/Security.KeyVault.Keys/tspconfig.yaml
-    - keyvault/Security.KeyVault.Secrets/tspconfig.yaml
+    - keyvault/data-plane/Certificates/tspconfig.yaml
+    - keyvault/data-plane/Keys/tspconfig.yaml
+    - keyvault/data-plane/Secrets/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -310,7 +466,7 @@
     - options.@azure-tools/typespec-python.generate-test
     - options.@azure-tools/typespec-ts.*
   paths:
-    - keyvault/Security.KeyVault.SecurityDomain/tspconfig.yaml
+    - keyvault/data-plane/SecurityDomain/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -498,8 +654,8 @@
     - confidentialledger/Microsoft.ManagedCcf/tspconfig.yaml
     - devcenter/DevCenter/tspconfig.yaml
     - healthdataaiservices/HealthDataAIServices.DeidServices/tspconfig.yaml
-    - keyvault/Security.KeyVault.Administration/tspconfig.yaml
-    - keyvault/Security.KeyVault.SecurityDomain/tspconfig.yaml
+    - keyvault/data-plane/Administration/tspconfig.yaml
+    - keyvault/data-plane/SecurityDomain/tspconfig.yaml
     - loadtestservice/data-plane/loadtesting/tspconfig.yaml
     - loadtestservice/data-plane/playwright/tspconfig.yaml
     - machinelearning/Azure.AI.ChatProtocol/tspconfig.yaml

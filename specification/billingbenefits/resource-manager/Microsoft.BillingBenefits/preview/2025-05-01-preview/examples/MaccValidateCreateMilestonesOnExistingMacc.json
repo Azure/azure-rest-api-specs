@@ -6,32 +6,32 @@
         {
           "benefitType": "MACC",
           "properties": {
-            "entityType": "Primary",
             "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/benefits/myBenefit",
-            "systemId": "13810867107109237",
             "commitment": {
-              "grain": "FullTerm",
               "amount": 20000,
-              "currencyCode": "USD"
+              "currencyCode": "USD",
+              "grain": "FullTerm"
             },
             "endAt": "2026-07-31T23:59:59Z",
+            "entityType": "Primary",
             "milestones": [
               {
                 "commitment": {
-                  "currencyCode": "USD",
-                  "amount": 7000
+                  "amount": 7000,
+                  "currencyCode": "USD"
                 },
                 "endAt": "2024-10-31T23:59:59Z"
               },
               {
                 "commitment": {
-                  "currencyCode": "USD",
-                  "amount": 13000
+                  "amount": 13000,
+                  "currencyCode": "USD"
                 },
                 "endAt": "2025-01-31T23:59:59Z"
               }
-            ]
+            ],
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/benefits/myBenefit",
+            "systemId": "13810867107109237"
           }
         }
       ]
@@ -48,5 +48,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "Benefit_Validate",
+  "title": "MaccValidateCreateMilestonesOnExistingMacc"
 }
