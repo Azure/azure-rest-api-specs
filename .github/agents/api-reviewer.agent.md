@@ -327,6 +327,17 @@ After presenting the review findings to the human reviewer for approval:
 8. Report to the human reviewer which findings were skipped as duplicates and which were posted.
 9. Do NOT post comments without the human reviewer's approval.
 
+### Step 8: Update PR Labels
+
+After successfully posting review comments to the PR:
+1. **Propose label changes** to the human reviewer:
+   - **Add** the `ARMChangesRequested` label to signal that the PR author needs to address review feedback.
+   - **Remove** the `WaitForARMFeedback` label (if present) since ARM feedback has now been provided.
+2. **Wait for explicit confirmation** from the human reviewer before adding or removing any labels. Do NOT modify labels without approval.
+3. Once approved, apply the label changes using the GitHub tools.
+4. If the PR does not have the `WaitForARMFeedback` label, skip the removal step and only propose adding `ARMChangesRequested`.
+5. Report to the human reviewer which labels were added and removed.
+
 ## Local Review & Fix Workflow (Fix Mode)
 
 When the user asks you to review **and fix** local specification files (in a private branch, fork, or local workspace), follow this workflow instead of the PR-based workflow above.
