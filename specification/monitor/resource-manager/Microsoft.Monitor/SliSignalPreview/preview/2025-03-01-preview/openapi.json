@@ -52,12 +52,7 @@
         "description": "Returns preview data for the signal.",
         "parameters": [
           {
-            "name": "serviceGroupName",
-            "in": "path",
-            "description": "The name of the service group.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9._()~-]{1,250}$"
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -678,20 +673,6 @@
         ]
       }
     },
-    "ServiceGroupBaseParameters": {
-      "type": "object",
-      "description": "ServiceGroup as parameter",
-      "properties": {
-        "serviceGroupName": {
-          "type": "string",
-          "description": "The name of the service group.",
-          "pattern": "^[A-Za-z0-9._()~-]{1,250}$"
-        }
-      },
-      "required": [
-        "serviceGroupName"
-      ]
-    },
     "Signal": {
       "type": "object",
       "description": "Represents a signal model used in SLI calculations.",
@@ -1090,5 +1071,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ServiceGroupBaseParameters": {
+      "name": "serviceGroupName",
+      "in": "path",
+      "description": "The name of the service group.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._()~-]{1,250}$",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

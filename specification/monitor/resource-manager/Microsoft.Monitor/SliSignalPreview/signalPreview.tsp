@@ -89,10 +89,7 @@ interface SloView {
   @action("providers/Microsoft.Monitor/sliSignalPreview")
   @doc("Returns preview data for the signal.")
   sliSignalPreview(
-    @path
-    @pattern("^[A-Za-z0-9._()~-]{1,250}$")
-    @doc("The name of the service group.")
-    serviceGroupName: string,
+    ...ServiceGroupBaseParameters,
 
     ...Azure.ResourceManager.ApiVersionParameter,
 
