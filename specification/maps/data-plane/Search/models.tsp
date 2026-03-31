@@ -883,7 +883,8 @@ model AddressCountryRegion {
   /**
    * ISO of country/region
    */
-  iso?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract"
+  ISO?: string;
 
   /**
    * name of country/region
