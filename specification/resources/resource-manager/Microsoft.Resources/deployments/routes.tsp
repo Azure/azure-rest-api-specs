@@ -23,7 +23,7 @@ interface DeploymentsOperationGroup {
   @tag("Deployments")
   @autoRoute
   calculateTemplateHash is ArmProviderActionSync<
-    Request = {},
+    Request = unknown,
     Response = TemplateHashResult,
     Error = CloudError
   >;

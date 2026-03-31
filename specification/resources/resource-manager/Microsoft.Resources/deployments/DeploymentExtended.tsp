@@ -879,18 +879,7 @@ interface DeploymentExtendedOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CheckExistence")
   @tag("Deployments")
-  checkExistence is DeploymentExtendedResourceGroupOps.CheckExistence<
-    DeploymentExtended,
-    ErrorType = CloudError | {
-      ...Response<400>;
-
-      /**
-       * The template deployment validation detected failures.
-       */
-      @bodyRoot
-      body: DeploymentValidateResult;
-    }
-  >;
+  checkExistence is DeploymentExtendedResourceGroupOps.CheckExistence<DeploymentExtended>;
 
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
@@ -958,7 +947,16 @@ interface DeploymentExtendedOperationGroup {
   validate is DeploymentExtendedResourceGroupOps.ActionAsync<
     DeploymentExtended,
     Deployment,
-    DeploymentValidateResult
+    DeploymentValidateResult,
+    OverrideErrorType = CloudError | {
+      ...Response<400>;
+
+      /**
+       * The template deployment validation detected failures.
+       */
+      @bodyRoot
+      body: DeploymentValidateResult;
+    }
   >;
 
   /**

@@ -10,7 +10,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Resources;
 
-model DeploymentListResult is Azure.Core.Page<DeploymentListResult>;
+model DeploymentListResult is Azure.Core.Page<DeploymentExtended>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExtensionConfigPropertyType {
@@ -510,6 +510,7 @@ enum ProvisioningOperation {
  * An error response for a resource management request.
  */
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)

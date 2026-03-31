@@ -1287,9 +1287,7 @@
             "in": "body",
             "description": "The request body",
             "required": true,
-            "schema": {
-              "type": "object"
-            }
+            "schema": {}
           }
         ],
         "responses": {
@@ -1903,9 +1901,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeploymentExtendedListResult"
+              "$ref": "#/definitions/DeploymentListResult"
             }
           },
           "default": {
@@ -2607,9 +2605,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeploymentExtendedListResult"
+              "$ref": "#/definitions/DeploymentListResult"
             }
           },
           "default": {
@@ -3026,6 +3024,12 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
+            }
+          },
+          "400": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
             }
           },
           "default": {
@@ -3457,7 +3461,8 @@
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
           "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)"
         }
-      }
+      },
+      "x-ms-external": true
     },
     "DebugSetting": {
       "type": "object",
@@ -3596,27 +3601,6 @@
         }
       ]
     },
-    "DeploymentExtendedListResult": {
-      "type": "object",
-      "description": "The response of a DeploymentExtended list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DeploymentExtended items on this page",
-          "items": {
-            "$ref": "#/definitions/DeploymentExtended"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "DeploymentExtensionConfigItem": {
       "type": "object",
       "properties": {
@@ -3741,13 +3725,13 @@
     },
     "DeploymentListResult": {
       "type": "object",
-      "description": "Paged collection of DeploymentListResult items",
+      "description": "Paged collection of DeploymentExtended items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DeploymentListResult items on this page",
+          "description": "The DeploymentExtended items on this page",
           "items": {
-            "$ref": "#/definitions/DeploymentListResult"
+            "$ref": "#/definitions/DeploymentExtended"
           }
         },
         "nextLink": {
