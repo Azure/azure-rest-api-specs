@@ -16,10 +16,9 @@ const LocationsParameterDescription = "Return SKUs available in the selected loc
 const FilterOdataParameterDescription = "Filters the results, based on a Boolean condition. Example: $filter=serviceFamily eq 'Compute'. Fields that can be filtered by are:\n- `productId`\n- `serviceFamily`\n- `service`\n- `skuId`\n- `skuName`\n- `skuType`\n- `armRegionName`\n- `location`\n- `publisherId`\n- `productType`";
 const SelectOdataParameterDescription = "Selects which properties to include in the results. Example: $select=skuName,skuId";
 const ExpandOdataParameterDescription = "Expands related entities inline.";
-const OrderByOdataParameterDescription = "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request. Example: $orderby=skuName desc. This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `skuName`\n- `skuId`\n- `productId`\n- `serviceFamily`\n- `service`";
+const OrderByOdataParameterDescription = "Ordering expression for the results using OData notation. Avoid using orderBy unless essential as this may impact the latency of your request. Example: $orderBy=skuName desc. This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `skuName`\n- `skuId`\n- `productId`\n- `serviceFamily`\n- `service`";
 const MarketSingleParameterDescription = "Sku market value that will be used to fetch the product and affect the returning result.Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'";
 
-/** Sku
 /** Sku id path parameter */
 model SkuIdParameter {
   /** The ID of the SKU */

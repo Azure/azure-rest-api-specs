@@ -8,7 +8,7 @@ This is the AutoRest configuration file for Marketplace Catalog Skus.
 
 ### Basic Information
 
-This is a TypeSpec project so we only want the readme to default the default tag and point to the outputted swagger file.
+This is a TypeSpec project so we only want the readme to the default tag and point to the outputted swagger file.
 This is used for some tools such as doc generation and swagger apiview generation. It isn't used for SDK code gen as we
 use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
@@ -33,7 +33,7 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: openapi.json
     where: $.definitions.SkuSummary
-    reason: SkuSummary is a read-only catalog data model representing marketplace SKU metadata, not an tracked ARM resource.
+    reason: SkuSummary is a read-only catalog data model representing marketplace SKU metadata, not a tracked ARM resource.
   - code: BodyTopLevelProperties
     from: openapi.json
     where: $.definitions.SkuSummary
