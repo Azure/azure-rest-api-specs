@@ -1,5 +1,32 @@
 {
   "paths": {
+    "/{resourceId}/providers/microsoft.Security/defenderForStorageSettings": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "./common/v1/types.json#/parameters/ResourceId",
+              "name__added": "resourceId",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "x-ms-skip-url-encoding__added": true
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common/v1/types.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
     "/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}": {
       "get": {
         "parameters": [
@@ -261,11 +288,21 @@
           {
             "$ref": {
               "__old": "./common/v1/types.json#/definitions/Resource",
-              "__new": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+              "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
             }
           }
         ]
       ]
+    },
+    "DefenderForStorageSettingList": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
     },
     "DefenderForStorageSettingProperties": {
       "properties": {
@@ -304,6 +341,9 @@
     "ScanSummary": {
       "properties": {
         "blobs": {
+          "type__deleted": "object"
+        },
+        "files": {
           "type__deleted": "object"
         }
       }

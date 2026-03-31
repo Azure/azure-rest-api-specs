@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Security Center",
-    "version": "2025-06-01",
+    "version": "2025-09-01-preview",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
   },
   "produces": [
@@ -12,6 +12,46 @@
     "application/json"
   ],
   "paths": {
+    "/{resourceId}/providers/microsoft.Security/defenderForStorageSettings": {
+      "get": {
+        "operationId": "DefenderForStorage_List",
+        "tags": [
+          "DefenderForStorage"
+        ],
+        "description": "Lists the Defender for Storage settings for the specified storage account.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/DefenderForStorageSettingList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Defender for Storage settings for the specified storage account.": {
+            "$ref": "./examples/DefenderForStorage/ListDefenderForStorageSettings_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{resourceId}/providers/microsoft.Security/defenderForStorageSettings/{settingName}": {
       "get": {
         "operationId": "DefenderForStorage_Get",
@@ -254,7 +294,7 @@
           "Antimalware",
           "Scan"
         ],
-        "description": "Initiate a Defender for Storage malware scan for the specified storage account.",
+        "description": "Initiate a Defender for Storage malware scan for the specified storage account. Blobs and Files will be scanned for malware.",
         "parameters": [
           {
             "name": "resourceId",
@@ -393,8 +433,29 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "DefenderForStorageSettingList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/DefenderForStorageSetting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "DefenderForStorageSettingProperties": {
@@ -431,6 +492,37 @@
         "info": {
           "description": "The additional info.",
           "readOnly": true
+        }
+      }
+    },
+    "FilesScanSummary": {
+      "type": "object",
+      "description": "A summary of the scan results of the files that were scanned.",
+      "properties": {
+        "totalFilesScanned": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of files that were scanned."
+        },
+        "maliciousFilesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of malicious files that were detected during the scan."
+        },
+        "skippedFilesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of files that were skipped."
+        },
+        "failedFilesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of failed file scans."
+        },
+        "scannedFilesInGB": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of gigabytes of data that were scanned."
         }
       }
     },
@@ -482,17 +574,39 @@
         },
         "scanResultsEventGridTopicResourceId": {
           "type": "string",
-          "description": "Optional. Resource id of an Event Grid Topic to send scan results to."
+          "format": "arm-id",
+          "description": "Optional. Resource id of an Event Grid Topic to send scan results to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.EventGrid/topics"
+              }
+            ]
+          }
         },
         "blobScanResultsOptions": {
           "type": "string",
-          "description": "Optional. Write scan result on blobIndexTags by default.",
+          "description": "Optional. Write scan result on BlobIndexTags by default.",
+          "default": "BlobIndexTags",
           "enum": [
-            "blobIndexTags",
+            "BlobIndexTags",
             "None"
           ],
           "x-ms-enum": {
             "name": "BlobScanResultsOptions",
+            "modelAsString": true
+          }
+        },
+        "automatedResponse": {
+          "type": "string",
+          "description": "Optional. Specifies the automated response action to take when malware is detected.",
+          "default": "None",
+          "enum": [
+            "None",
+            "BlobSoftDelete"
+          ],
+          "x-ms-enum": {
+            "name": "AutomatedResponseType",
             "modelAsString": true
           }
         },
@@ -570,6 +684,10 @@
         "blobs": {
           "$ref": "#/definitions/BlobsScanSummary",
           "description": "A summary of the scan results of the blobs that were scanned."
+        },
+        "files": {
+          "$ref": "#/definitions/FilesScanSummary",
+          "description": "A summary of the scan results of the files that were scanned."
         },
         "estimatedScanCostUSD": {
           "type": "number",

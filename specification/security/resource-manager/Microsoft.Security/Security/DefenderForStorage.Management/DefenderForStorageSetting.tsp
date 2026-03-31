@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * The Defender for Storage resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model DefenderForStorageSetting
   is Azure.ResourceManager.ExtensionResource<DefenderForStorageSettingProperties> {
@@ -25,88 +26,132 @@ model DefenderForStorageSetting
   >;
 }
 
-@armResourceOperations
+alias DefenderForStorageSettingsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The fully qualified Azure Resource manager identifier of the resource. */
+    @path(#{ allowReserved: true })
+    @key
+    resourceId: string;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+
+    /** The defender for storage setting name. */
+    @path
+    @segment("defenderForStorageSettings")
+    @key
+    @pattern("^[a-z][a-z0-9]*$")
+    settingName: SettingName;
+  },
+  {},
+  {}
+>;
+
+alias DefenderForStorageMalwareScansOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The fully qualified Azure Resource manager identifier of the resource. */
+    @path(#{ allowReserved: true })
+    @key
+    resourceId: string;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+
+    /** The defender for storage setting name. */
+    @path
+    @segment("defenderForStorageSettings")
+    @key
+    @pattern("^[a-z][a-z0-9]*$")
+    settingName: SettingName;
+  },
+  {},
+  {
+    /** The identifier of the scan. Can be either 'latest' or a GUID. */
+    @pattern("^(latest|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$")
+    @path
+    @segment("malwareScans")
+    @key
+    scanId: string;
+  }
+>;
+
+@armResourceOperations(#{ omitTags: true })
 interface DefenderForStorageSettings {
   /**
    * Gets the Defender for Storage settings for the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DefenderForStorage_Get")
-  get is Extension.Read<Extension.ScopeParameter, DefenderForStorageSetting>;
-
+  @tag("DefenderForStorage")
+  get is DefenderForStorageSettingsOps.Read<
+    DefenderForStorageSetting,
+    ErrorType = CloudError
+  >;
   /**
    * Creates or updates the Defender for Storage settings on a specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DefenderForStorage_Create")
-  create is Extension.CreateOrReplaceSync<
-    Extension.ScopeParameter,
-    DefenderForStorageSetting
+  @tag("DefenderForStorage")
+  create is DefenderForStorageSettingsOps.CreateOrUpdateSync<
+    DefenderForStorageSetting,
+    ErrorType = CloudError
   >;
 
   /**
    * Lists the Defender for Storage settings for the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DefenderForStorage_List")
+  @tag("DefenderForStorage")
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     DefenderForStorageSetting,
-    Response = ArmResponse<DefenderForStorageSettingList>
+    Response = ArmResponse<DefenderForStorageSettingList>,
+    Error = CloudError
   >;
 
   /**
    * Initiate a Defender for Storage malware scan for the specified storage account. Blobs and Files will be scanned for malware.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DefenderForStorage_StartMalwareScan")
-  startMalwareScan is Extension.ActionSync<
-    Extension.ScopeParameter,
+  @tag("DefenderForStorage")
+  @tag("Antimalware")
+  @tag("Scan")
+  startMalwareScan is DefenderForStorageSettingsOps.ActionSync<
     DefenderForStorageSetting,
     void,
-    ArmResponse<MalwareScan>
+    ArmResponse<MalwareScan>,
+    ErrorType = CloudError
   >;
 
   /**
    * Cancels a Defender for Storage malware scan for the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DefenderForStorage_CancelMalwareScan")
-  cancelMalwareScan is Extension.ActionSync<
-    Extension.ScopeParameter,
+  @tag("DefenderForStorage")
+  @tag("Antimalware")
+  @tag("Scan")
+  @action("cancelMalwareScan")
+  cancelMalwareScan is DefenderForStorageMalwareScansOps.ActionSync<
     DefenderForStorageSetting,
     void,
     ArmResponse<MalwareScan>,
-    Parameters = {
-      /**
-       * The identifier of the scan. Can be either 'latest' or a GUID.
-       */
-      @pattern("^(latest|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$")
-      @path
-      scanId: string;
-    }
+    ErrorType = CloudError
   >;
 
   /**
    * Gets the Defender for Storage malware scan for the specified storage resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DefenderForStorage_GetMalwareScan")
+  @tag("DefenderForStorage")
+  @tag("Antimalware")
+  @tag("Scan")
   @get
-  @action("{scanId}")
-  getMalwareScan is Extension.ActionSync<
-    Extension.ScopeParameter,
-    DefenderForStorageSetting,
-    void,
-    ArmResponse<MalwareScan>,
-    Parameters = {
-      /**
-       * The identifier of the scan. Can be either 'latest' or a GUID.
-       */
-      @pattern("^(latest|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$")
-      @path
-      scanId: string;
-    }
+  getMalwareScan is DefenderForStorageMalwareScansOps.Read<
+    MalwareScan,
+    ErrorType = CloudError
   >;
 }
 
