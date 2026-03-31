@@ -19,7 +19,18 @@
             "defaultGateway": "192.168.200.1",
             "dnsServers": [
               "192.168.200.222"
-            ]
+            ],
+            "wifiConfiguration": {
+              "ssid": "CorpWiFi",
+              "authenticationType": "WPA2-Enterprise",
+              "eapMethod": "PEAP",
+              "username": "user@corp.contoso.com",
+              "wifiSecret": {
+                "secretName": "wifi-password",
+                "secretLocation": "https://myvault.vault.azure.net/secrets/wifi-password",
+                "secretType": "WiFiPassword"
+              }
+            }
           },
           "reportedProperties": {
             "adapterName": "vmanagement",
@@ -36,7 +47,32 @@
             "macAddress": "000000000041",
             "slot": "0",
             "switchName": "vmanagement",
-            "interfaceType": "Virtual"
+            "interfaceType": "wifi",
+            "interfaceSpeed": 866,
+            "interfaceState": "up",
+            "nicType": "physical",
+            "nicStatus": "up",
+            "ipInterfaceType": "Dhcp",
+            "vlanId": 0,
+            "managementInterface": true,
+            "rdmaCapability": "Disabled",
+            "networkAdapterStatus": {
+              "errorCode": "",
+              "errorMessage": "",
+              "provisioningStatus": {
+                "operationId": "op-001",
+                "status": "Succeeded"
+              }
+            },
+            "wifiConfiguration": {
+              "ssid": "CorpWiFi",
+              "authenticationType": "WPA2-Enterprise",
+              "eapMethod": "PEAP",
+              "signalStrength": 75,
+              "lastSuccessfulConnectionTimestamp": "2025-11-14T10:46:55.167Z",
+              "connectionState": "Connected",
+              "username": "user@corp.contoso.com"
+            }
           },
           "provisioningState": "Succeeded"
         },

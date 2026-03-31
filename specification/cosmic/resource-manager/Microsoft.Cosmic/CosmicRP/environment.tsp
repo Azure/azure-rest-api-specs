@@ -6,30 +6,41 @@ import "./models.tsp";
 import "./namespace.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Rest;
 
 namespace Microsoft.Cosmic;
 
+#suppress "@azure-tools/typespec-azure-core/friendly-name" "Using @friendlyName to avoid System.Environment naming conflict in generated C#"
 @doc("An Environment resource representing a per-ring deployment environment within a namespace.")
+@friendlyName("CosmicEnvironment")
 @parentResource(Namespace)
 model Environment is TrackedResource<EnvironmentProperties> {
-  ...ResourceNameParameter<Environment>;
+  @doc("The name of the environment.")
+  @key("environmentName")
+  @segment("environments")
+  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  @minLength(3)
+  @maxLength(63)
+  @path
+  name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/friendly-name" "Using @friendlyName to avoid System.Environment naming conflict in generated C#"
 @doc("Properties of an Environment resource.")
+@friendlyName("CosmicEnvironmentProperties")
 model EnvironmentProperties {
-  @doc("Topology configuration for the environment.")
-  @identifiers(#["partitionName"])
-  topology?: TopologyConfiguration[];
+  @doc("Platform ring classification (e.g. test, sdf, msit, prod).")
+  platformRing?: CosmicRing;
+
+  @doc("Topology configuration including per-location networking and partition declarations.")
+  topology?: Topology;
 
   @doc("Capacity configuration for the environment.")
-  capacity: CapacityConfiguration;
+  capacity: CapacityPolicy;
 
   @doc("Resource policy configuration for the environment.")
-  resourcePolicy?: ResourcePolicyConfiguration;
-
-  @doc("Networking configuration for the environment including BYOIP and SNAT settings.")
-  networking?: NetworkingConfiguration;
+  resourcePolicy?: ResourcePolicy;
 
   @doc("The status of the environment.")
   @visibility(Lifecycle.Read)

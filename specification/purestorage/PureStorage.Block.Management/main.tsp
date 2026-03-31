@@ -38,6 +38,11 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v2026_01_01_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2026_01_01_preview: "2026-01-01-preview",
+
+  @doc("Version 4 preview with ActivateSaas support.")
+  @useDependency(LiftrBase.Versions.v2026_03_01_preview)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v2026_03_01_preview: "2026-03-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -74,6 +79,26 @@ interface Reservations
   getBillingReport(
     ...ResourceInstanceParameters<Reservation>,
   ): ArmResponse<ReservationBillingUsageReport> | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Following Azure async operation pattern for long-running resource actions"
+  @added(Versions.v2026_03_01_preview)
+  @summary("Links a new SaaS to the reservation.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  linkSaaS is ArmResourceActionAsync<
+    Reservation,
+    LinkSaaSRequest,
+    ArmResponse<Reservation>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Reservation> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Returns the latest SaaS linked to the reservation.")
+  latestLinkedSaaS is ArmResourceActionSync<
+    Reservation,
+    void,
+    ArmResponse<LatestLinkedSaaSResponse>
+  >;
 }
 
 @added(Versions.v2_preview)
@@ -1122,4 +1147,58 @@ interface Volumes {
   delete is ArmResourceDeleteWithoutOkAsync<Volume>;
   @doc("List volumes by volume group")
   listByVolumeGroup is ArmResourceListByParent<Volume>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+@added(Versions.v2026_03_01_preview)
+@doc("SaaS guid for Activate SaaS Resource")
+model ActivateSaaSRequest {
+  @doc("SaaS guid for Activate SaaS Resource")
+  saasGuid: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Response model extending ProxyResource for consistency with Azure patterns"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+@added(Versions.v2026_03_01_preview)
+@doc("Marketplace SaaS resource details.")
+model SaaSResourceDetailsResponse
+  extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  @doc("Id of the Marketplace SaaS Resource")
+  saasId?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+@added(Versions.v2026_03_01_preview)
+@doc("SaaS details for linking to a reservation.")
+model LinkSaaSRequest {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+  @doc("SaaS resource id")
+  saaSResourceId: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+@added(Versions.v2026_03_01_preview)
+@doc("Response of get latest linked SaaS resource operation.")
+model LatestLinkedSaaSResponse {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+  @doc("SaaS resource id")
+  saaSResourceId?: string;
+
+  @doc("Flag indicating if the SaaS resource is hidden")
+  isHiddenSaaS?: boolean;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Subscription-scoped operation group for SaaS activation"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+@added(Versions.v2026_03_01_preview)
+interface SaaSOperationGroup {
+  @doc("Activate the SaaS resource")
+  @autoRoute
+  @action("activateSaaS")
+  activateResource is ArmProviderActionSync<
+    Request = ActivateSaaSRequest,
+    Response = SaaSResourceDetailsResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
 }

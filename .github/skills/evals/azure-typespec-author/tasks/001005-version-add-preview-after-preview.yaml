@@ -1,0 +1,17 @@
+id: 001005-version-add-preview-after-preview
+name: "Versioning: Add preview after preview"
+description: |
+  Test adding a new preview version when the latest version is already a preview.
+  Based on benchmark case 001005-version-add-preview-after-preview.
+tags:
+  - versioning
+inputs:
+  prompt: "Add a new preview version `2025-05-04-preview` to my service widget resource manager."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "API Version Evolution"

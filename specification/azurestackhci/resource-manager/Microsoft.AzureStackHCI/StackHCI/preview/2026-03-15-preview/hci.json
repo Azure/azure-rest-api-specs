@@ -3499,6 +3499,9 @@
           }
         },
         "x-ms-examples": {
+          "ClusterJobs_Get_AddServerJob": {
+            "$ref": "./examples/ClusterJobs_Get_AddServerJob.json"
+          },
           "ClusterJobs_Get_ConfigureArcGatewayJob": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureArcGatewayJob.json"
           },
@@ -3510,6 +3513,9 @@
           },
           "ClusterJobs_Get_GpuSwitchModeJob": {
             "$ref": "./examples/ClusterJobs_Get_GpuSwitchModeJob.json"
+          },
+          "ClusterJobs_Get_RepairServerJob": {
+            "$ref": "./examples/ClusterJobs_Get_RepairServerJob.json"
           },
           "ClusterJobs_Get_VmConnectProvisionJob": {
             "$ref": "./examples/ClusterJobs_Get_VmConnectProvisionJob.json"
@@ -3592,6 +3598,9 @@
           }
         },
         "x-ms-examples": {
+          "ClusterJobs_CreateOrUpdate_AddServerJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_AddServer.json"
+          },
           "ClusterJobs_CreateOrUpdate_ConfigureArcGatewayJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureArcGateway.json"
           },
@@ -3606,6 +3615,9 @@
           },
           "ClusterJobs_CreateOrUpdate_GpuSwitchModeJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_GpuSwitchMode.json"
+          },
+          "ClusterJobs_CreateOrUpdate_RepairServerJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_RepairServer.json"
           },
           "ClusterJobs_CreateOrUpdate_VmConnectProvisionJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_VmConnectProvision.json"
@@ -9450,6 +9462,34 @@
         ]
       }
     },
+    "AddServerJobServerDetails": {
+      "type": "object",
+      "description": "Details of servers to be added to the cluster",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Name of server to be added to cluster."
+        },
+        "hostIpv4Address": {
+          "type": "string",
+          "description": "Ip address of server to be added to cluster."
+        },
+        "localAvailabilityZoneName": {
+          "type": "string",
+          "description": "Local availability zone name of server to be added to rack aware cluster."
+        },
+        "serverResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource id of machine part of cluster for which job will be triggered."
+        }
+      },
+      "required": [
+        "serverName",
+        "hostIpv4Address",
+        "serverResourceId"
+      ]
+    },
     "ApplyConfigurationNetworkAdapterJobProperties": {
       "type": "object",
       "description": "Properties for applying network adapter configuration.",
@@ -9908,6 +9948,48 @@
         }
       ],
       "x-ms-discriminator-value": "AssignPartition"
+    },
+    "AuthenticationType": {
+      "type": "string",
+      "description": "WiFi authentication type.",
+      "enum": [
+        "WPA2-Personal",
+        "WPA2-Enterprise",
+        "WPA3-Personal",
+        "WPA3-Enterprise",
+        "Open"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WPA2-Personal",
+            "value": "WPA2-Personal",
+            "description": "WPA2 Personal."
+          },
+          {
+            "name": "WPA2-Enterprise",
+            "value": "WPA2-Enterprise",
+            "description": "WPA2 Enterprise."
+          },
+          {
+            "name": "WPA3-Personal",
+            "value": "WPA3-Personal",
+            "description": "WPA3 Personal."
+          },
+          {
+            "name": "WPA3-Enterprise",
+            "value": "WPA3-Enterprise",
+            "description": "WPA3 Enterprise."
+          },
+          {
+            "name": "Open",
+            "value": "Open",
+            "description": "Open network."
+          }
+        ]
+      }
     },
     "AvailabilityType": {
       "type": "string",
@@ -11279,6 +11361,54 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "CVM support is disabled. None of the nodes in the cluster are CVM capable."
+          }
+        ]
+      }
+    },
+    "ConnectionState": {
+      "type": "string",
+      "description": "WiFi connection state.",
+      "enum": [
+        "NotConfigured",
+        "Connected",
+        "Disconnected",
+        "Connecting",
+        "Disconnecting",
+        "AuthenticationFailed"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotConfigured",
+            "value": "NotConfigured",
+            "description": "WiFi is not configured."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "WiFi is connected."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "WiFi is disconnected."
+          },
+          {
+            "name": "Connecting",
+            "value": "Connecting",
+            "description": "WiFi is connecting."
+          },
+          {
+            "name": "Disconnecting",
+            "value": "Disconnecting",
+            "description": "WiFi is disconnecting."
+          },
+          {
+            "name": "AuthenticationFailed",
+            "value": "AuthenticationFailed",
+            "description": "WiFi authentication failed."
           }
         ]
       }
@@ -12980,6 +13110,42 @@
             "name": "PropertyMismatch",
             "value": "PropertyMismatch",
             "description": "A property value differs between desired and reported state."
+          }
+        ]
+      }
+    },
+    "EAPMethod": {
+      "type": "string",
+      "description": "EAP authentication method.",
+      "enum": [
+        "PEAP",
+        "EAP-TLS",
+        "EAP-TTLS",
+        "EAP-FAST"
+      ],
+      "x-ms-enum": {
+        "name": "EAPMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PEAP",
+            "value": "PEAP",
+            "description": "PEAP authentication."
+          },
+          {
+            "name": "EAP-TLS",
+            "value": "EAP-TLS",
+            "description": "EAP-TLS authentication."
+          },
+          {
+            "name": "EAP-TTLS",
+            "value": "EAP-TTLS",
+            "description": "EAP-TTLS authentication."
+          },
+          {
+            "name": "EAP-FAST",
+            "value": "EAP-FAST",
+            "description": "EAP-FAST authentication."
           }
         ]
       }
@@ -15638,6 +15804,51 @@
         }
       }
     },
+    "HciAddServerJobProperties": {
+      "type": "object",
+      "description": "Properties for adding a server in the cluster.",
+      "properties": {
+        "addServerJobServerDetails": {
+          "type": "array",
+          "description": "Details of servers to be added to the cluster",
+          "items": {
+            "$ref": "#/definitions/AddServerJobServerDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "secrets": {
+          "type": "array",
+          "description": "List of protected parameters to pass to trigger the job for the cluster.",
+          "items": {
+            "$ref": "#/definitions/EceDeploymentSecrets"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
+        },
+        "witnessType": {
+          "type": "string",
+          "description": "Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. Only allowed values are 'Cloud', 'FileShare'"
+        },
+        "witnessPath": {
+          "type": "string",
+          "description": "Specify the fileshare path for the local witness for your Azure Stack HCI cluster."
+        },
+        "cloudAccountName": {
+          "type": "string",
+          "description": "Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster."
+        }
+      },
+      "required": [
+        "addServerJobServerDetails"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AddServer"
+    },
     "HciCollectLogJobProperties": {
       "type": "object",
       "description": "Represents the properties of an HCI Collect Log job.",
@@ -16134,6 +16345,8 @@
       "type": "string",
       "description": "ClusterJob Type supported.",
       "enum": [
+        "AddServer",
+        "RepairServer",
         "ConfigureArcGateway",
         "GpuCreatePartition",
         "GpuSwitchMode",
@@ -16146,6 +16359,16 @@
         "name": "HciJobType",
         "modelAsString": true,
         "values": [
+          {
+            "name": "AddServer",
+            "value": "AddServer",
+            "description": "Job to add a server to the cluster."
+          },
+          {
+            "name": "RepairServer",
+            "value": "RepairServer",
+            "description": "Job to repair a server in the cluster."
+          },
           {
             "name": "ConfigureArcGateway",
             "value": "ConfigureArcGateway",
@@ -16382,6 +16605,39 @@
         }
       ],
       "x-ms-discriminator-value": "RemoteSupport"
+    },
+    "HciRepairServerJobProperties": {
+      "type": "object",
+      "description": "Properties for repairing a server in the cluster.",
+      "properties": {
+        "repairServerJobServerDetails": {
+          "type": "array",
+          "description": "Details of servers to be repaired in the cluster",
+          "items": {
+            "$ref": "#/definitions/RepairServerJobServerDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "secrets": {
+          "type": "array",
+          "description": "List of protected parameters to pass to trigger job for cluster.",
+          "items": {
+            "$ref": "#/definitions/EceDeploymentSecrets"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
+        }
+      },
+      "required": [
+        "repairServerJobServerDetails"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "RepairServer"
     },
     "HciReportedProperties": {
       "type": "object",
@@ -17351,6 +17607,23 @@
           "items": {
             "type": "string"
           }
+        },
+        "ipInterfaceType": {
+          "$ref": "#/definitions/IpInterfaceType",
+          "description": "IP configuration type (Dhcp or Static)."
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "VLAN identifier for network segmentation."
+        },
+        "interfaceState": {
+          "$ref": "#/definitions/InterfaceState",
+          "description": "Administrative state of the interface (up or down)."
+        },
+        "wifiConfiguration": {
+          "$ref": "#/definitions/WifiConfigurationDesiredProperties",
+          "description": "WiFi configuration desired properties."
         }
       }
     },
@@ -17622,6 +17895,11 @@
         "networkAdapterStatus": {
           "$ref": "#/definitions/NetworkAdapterStatus",
           "description": "The observed state of network adapter.",
+          "readOnly": true
+        },
+        "wifiConfiguration": {
+          "$ref": "#/definitions/WifiConfigurationReportedProperties",
+          "description": "WiFi configuration reported properties.",
           "readOnly": true
         }
       }
@@ -19243,6 +19521,11 @@
           "$ref": "#/definitions/AccessLevel",
           "description": "Remote Support Access Level",
           "readOnly": true
+        },
+        "transcriptLocation": {
+          "type": "string",
+          "description": "The location where the session transcript is stored.",
+          "readOnly": true
         }
       }
     },
@@ -20282,6 +20565,24 @@
         }
       ],
       "x-ms-discriminator-value": "RemovePartition"
+    },
+    "RepairServerJobServerDetails": {
+      "type": "object",
+      "description": "Details of servers to be repaired in the cluster",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Name of server to be repaired in cluster."
+        },
+        "serverResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource id of Arc machine part of cluster for which job will be triggered."
+        }
+      },
+      "required": [
+        "serverName"
+      ]
     },
     "ReportedProperties": {
       "type": "object",
@@ -22781,6 +23082,118 @@
             "format": "uri"
           }
         }
+      }
+    },
+    "WifiConfigurationDesiredProperties": {
+      "type": "object",
+      "description": "WiFi configuration desired properties.",
+      "properties": {
+        "ssid": {
+          "type": "string",
+          "description": "WiFi SSID."
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/AuthenticationType",
+          "description": "WiFi authentication type."
+        },
+        "eapMethod": {
+          "$ref": "#/definitions/EAPMethod",
+          "description": "EAP method used for authentication."
+        },
+        "username": {
+          "type": "string",
+          "description": "Username for enterprise WiFi authentication."
+        },
+        "wifiSecret": {
+          "$ref": "#/definitions/WifiSecret",
+          "description": "WiFi secret reference."
+        }
+      }
+    },
+    "WifiConfigurationReportedProperties": {
+      "type": "object",
+      "description": "WiFi configuration reported properties.",
+      "properties": {
+        "ssid": {
+          "type": "string",
+          "description": "WiFi SSID."
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/AuthenticationType",
+          "description": "WiFi authentication type."
+        },
+        "eapMethod": {
+          "$ref": "#/definitions/EAPMethod",
+          "description": "EAP method used for authentication."
+        },
+        "signalStrength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "WiFi signal strength.",
+          "readOnly": true
+        },
+        "lastSuccessfulConnectionTimestamp": {
+          "type": "string",
+          "description": "Last successful WiFi connection timestamp.",
+          "readOnly": true
+        },
+        "connectionState": {
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Current WiFi connection state.",
+          "readOnly": true
+        },
+        "username": {
+          "type": "string",
+          "description": "Username for enterprise WiFi authentication."
+        }
+      }
+    },
+    "WifiSecret": {
+      "type": "object",
+      "description": "WiFi secret reference for storing credentials.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "Name of the secret."
+        },
+        "secretLocation": {
+          "type": "string",
+          "description": "Location of the secret."
+        },
+        "secretType": {
+          "$ref": "#/definitions/WifiSecretType",
+          "description": "Type of the WiFi secret."
+        }
+      }
+    },
+    "WifiSecretType": {
+      "type": "string",
+      "description": "Type of WiFi secret.",
+      "enum": [
+        "WiFiPassword",
+        "WiFiCertificate",
+        "WiFiCACertificate"
+      ],
+      "x-ms-enum": {
+        "name": "WifiSecretType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WiFiPassword",
+            "value": "WiFiPassword",
+            "description": "WiFi password."
+          },
+          {
+            "name": "WiFiCertificate",
+            "value": "WiFiCertificate",
+            "description": "WiFi certificate."
+          },
+          {
+            "name": "WiFiCACertificate",
+            "value": "WiFiCACertificate",
+            "description": "WiFi CA certificate."
+          }
+        ]
       }
     },
     "WindowsServerSubscription": {

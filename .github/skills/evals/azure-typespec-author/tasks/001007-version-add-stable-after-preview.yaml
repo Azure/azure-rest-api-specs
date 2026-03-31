@@ -1,0 +1,17 @@
+id: 001007-version-add-stable-after-preview
+name: "Versioning: Add stable after preview"
+description: |
+  Test promoting a preview API to stable by adding a new stable version.
+  Based on benchmark case 001007-version-add-stable-after-preview.
+tags:
+  - versioning
+inputs:
+  prompt: "I want to add a new stable version `2025-01-01`."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "API Version Evolution"

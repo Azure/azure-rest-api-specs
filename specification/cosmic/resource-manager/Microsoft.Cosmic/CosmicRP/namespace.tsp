@@ -49,6 +49,9 @@ model NamespaceProperties {
   @doc("Indicates whether Nightwatch monitoring is enabled for the namespace.")
   nightwatchEnabled: boolean = false;
 
+  @doc("Legacy process metadata listing rollout readiness rings.")
+  deploymentReadiness?: CosmicRing[];
+
   @doc("The provisioning state of the namespace resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: CosmicProvisioningState;

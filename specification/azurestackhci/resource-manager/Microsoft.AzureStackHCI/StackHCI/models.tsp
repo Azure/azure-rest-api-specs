@@ -15,6 +15,12 @@ namespace Microsoft.AzureStackHCI;
 union HciJobType {
   string,
 
+  /** Job to add a server to the cluster. */
+  AddServer: "AddServer",
+
+  /** Job to repair a server in the cluster. */
+  RepairServer: "RepairServer",
+
   // PRIVATE PREVIEW - Arc Gateway and GPU job types
   /** Job to configure arc gateway for the cluster. */
   ConfigureArcGateway: "ConfigureArcGateway",
@@ -2382,6 +2388,13 @@ model PerNodeRemoteSupportSession {
    */
   @visibility(Lifecycle.Read)
   accessLevel?: AccessLevel;
+
+  /**
+   * The location where the session transcript is stored.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @visibility(Lifecycle.Read)
+  transcriptLocation?: string;
 }
 
 /**
@@ -6491,6 +6504,79 @@ model HciConfigureCvmJobProperties extends ClusterJobProperties {
 }
 
 ////////////////////////////////////////////////////////////////
+////////////////////// Add Server Job Models ///////////////////
+////////////////////////////////////////////////////////////////
+
+/** Details of servers to be added to the cluster */
+@added(Versions.v2026_03_15_preview)
+model AddServerJobServerDetails {
+  /** Name of server to be added to cluster. */
+  serverName: string;
+
+  /** Ip address of server to be added to cluster. */
+  hostIpv4Address: string;
+
+  /** Local availability zone name of server to be added to rack aware cluster. */
+  localAvailabilityZoneName?: string;
+
+  /** Azure resource id of machine part of cluster for which job will be triggered. */
+  serverResourceId: Azure.Core.armResourceIdentifier;
+}
+
+/** Properties for adding a server in the cluster. */
+@added(Versions.v2026_03_15_preview)
+model HciAddServerJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.AddServer;
+
+  /** Details of servers to be added to the cluster */
+  @Azure.ResourceManager.identifiers(#[])
+  addServerJobServerDetails: AddServerJobServerDetails[];
+
+  /** List of protected parameters to pass to trigger the job for the cluster. */
+  @Azure.ResourceManager.identifiers(#["secretName"])
+  secrets?: EceDeploymentSecrets[];
+
+  /** Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. Only allowed values are 'Cloud', 'FileShare' */
+  witnessType?: string;
+
+  /** Specify the fileshare path for the local witness for your Azure Stack HCI cluster. */
+  witnessPath?: string;
+
+  /** Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster. */
+  cloudAccountName?: string;
+}
+
+////////////////////////////////////////////////////////////////
+////////////////////// Repair Server Job Models ////////////////
+////////////////////////////////////////////////////////////////
+
+/** Details of servers to be repaired in the cluster */
+@added(Versions.v2026_03_15_preview)
+model RepairServerJobServerDetails {
+  /** Name of server to be repaired in cluster. */
+  serverName: string;
+
+  /** Azure resource id of Arc machine part of cluster for which job will be triggered. */
+  serverResourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/** Properties for repairing a server in the cluster. */
+@added(Versions.v2026_03_15_preview)
+model HciRepairServerJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.RepairServer;
+
+  /** Details of servers to be repaired in the cluster */
+  @Azure.ResourceManager.identifiers(#[])
+  repairServerJobServerDetails: RepairServerJobServerDetails[];
+
+  /** List of protected parameters to pass to trigger job for cluster. */
+  @Azure.ResourceManager.identifiers(#["secretName"])
+  secrets?: EceDeploymentSecrets[];
+}
+
+////////////////////////////////////////////////////////////////
 ////////// PRIVATE PREVIEW - Arc Gateway and GPU Job Models ////
 ////////////////////////////////////////////////////////////////
 
@@ -9458,6 +9544,18 @@ model NetworkAdapterConfiguration {
 
   /** List of DNS servers. */
   dnsServers?: string[];
+
+  /** IP configuration type (Dhcp or Static). */
+  ipInterfaceType?: IpInterfaceType;
+
+  /** VLAN identifier for network segmentation. */
+  vlanId?: int32;
+
+  /** Administrative state of the interface (up or down). */
+  interfaceState?: InterfaceState;
+
+  /** WiFi configuration desired properties. */
+  wifiConfiguration?: WifiConfigurationDesiredProperties;
 }
 
 /**
@@ -9465,7 +9563,20 @@ model NetworkAdapterConfiguration {
  */
 @added(Versions.v2026_03_15_preview)
 model NetworkAdapterReportedProperties {
-  ...NetworkAdapterConfiguration;
+  /** Adapter name. */
+  adapterName?: string;
+
+  /** IP address. */
+  ip4Address?: string;
+
+  /** Subnet mask. */
+  subnetMask?: string;
+
+  /** Default gateway. */
+  defaultGateway?: string;
+
+  /** List of DNS servers. */
+  dnsServers?: string[];
 
   /** Interface description of NIC. */
   @visibility(Lifecycle.Read)
@@ -9536,6 +9647,10 @@ model NetworkAdapterReportedProperties {
   /** The observed state of network adapter. */
   @visibility(Lifecycle.Read)
   networkAdapterStatus?: NetworkAdapterStatus;
+
+  /** WiFi configuration reported properties. */
+  @visibility(Lifecycle.Read)
+  wifiConfiguration?: WifiConfigurationReportedProperties;
 }
 
 /**
@@ -9610,6 +9725,160 @@ model NetworkAdapterProvisioningStatus {
   /** The status of the operation performed on the network adapter. */
   @visibility(Lifecycle.Read)
   status?: NetworkAdapterOperationStatus;
+}
+
+// ==================== WiFi Types ====================
+
+/**
+ * WiFi configuration desired properties.
+ */
+@added(Versions.v2026_03_15_preview)
+model WifiConfigurationDesiredProperties {
+  /** WiFi SSID. */
+  ssid?: string;
+
+  /** WiFi authentication type. */
+  authenticationType?: AuthenticationType;
+
+  /** EAP method used for authentication. */
+  eapMethod?: EAPMethod;
+
+  /** Username for enterprise WiFi authentication. */
+  username?: string;
+
+  /** WiFi secret reference. */
+  wifiSecret?: WifiSecret;
+}
+
+/**
+ * WiFi secret reference for storing credentials.
+ */
+@added(Versions.v2026_03_15_preview)
+model WifiSecret {
+  /** Name of the secret. */
+  secretName?: string;
+
+  /** Location of the secret. */
+  secretLocation?: string;
+
+  /** Type of the WiFi secret. */
+  secretType?: WifiSecretType;
+}
+
+/**
+ * Type of WiFi secret.
+ */
+@added(Versions.v2026_03_15_preview)
+union WifiSecretType {
+  string,
+
+  /** WiFi password. */
+  WiFiPassword: "WiFiPassword",
+
+  /** WiFi certificate. */
+  WiFiCertificate: "WiFiCertificate",
+
+  /** WiFi CA certificate. */
+  WiFiCACertificate: "WiFiCACertificate",
+}
+
+/**
+ * WiFi configuration reported properties.
+ */
+@added(Versions.v2026_03_15_preview)
+model WifiConfigurationReportedProperties {
+  /** WiFi SSID. */
+  ssid?: string;
+
+  /** WiFi authentication type. */
+  authenticationType?: AuthenticationType;
+
+  /** EAP method used for authentication. */
+  eapMethod?: EAPMethod;
+
+  /** WiFi signal strength. */
+  @visibility(Lifecycle.Read)
+  signalStrength?: int32;
+
+  /** Last successful WiFi connection timestamp. */
+  @visibility(Lifecycle.Read)
+  lastSuccessfulConnectionTimestamp?: string;
+
+  /** Current WiFi connection state. */
+  @visibility(Lifecycle.Read)
+  connectionState?: ConnectionState;
+
+  /** Username for enterprise WiFi authentication. */
+  username?: string;
+}
+
+/**
+ * WiFi connection state.
+ */
+@added(Versions.v2026_03_15_preview)
+union ConnectionState {
+  string,
+
+  /** WiFi is not configured. */
+  NotConfigured: "NotConfigured",
+
+  /** WiFi is connected. */
+  Connected: "Connected",
+
+  /** WiFi is disconnected. */
+  Disconnected: "Disconnected",
+
+  /** WiFi is connecting. */
+  Connecting: "Connecting",
+
+  /** WiFi is disconnecting. */
+  Disconnecting: "Disconnecting",
+
+  /** WiFi authentication failed. */
+  AuthenticationFailed: "AuthenticationFailed",
+}
+
+/**
+ * WiFi authentication type.
+ */
+@added(Versions.v2026_03_15_preview)
+union AuthenticationType {
+  string,
+
+  /** WPA2 Personal. */
+  `WPA2-Personal`: "WPA2-Personal",
+
+  /** WPA2 Enterprise. */
+  `WPA2-Enterprise`: "WPA2-Enterprise",
+
+  /** WPA3 Personal. */
+  `WPA3-Personal`: "WPA3-Personal",
+
+  /** WPA3 Enterprise. */
+  `WPA3-Enterprise`: "WPA3-Enterprise",
+
+  /** Open network. */
+  Open: "Open",
+}
+
+/**
+ * EAP authentication method.
+ */
+@added(Versions.v2026_03_15_preview)
+union EAPMethod {
+  string,
+
+  /** PEAP authentication. */
+  PEAP: "PEAP",
+
+  /** EAP-TLS authentication. */
+  `EAP-TLS`: "EAP-TLS",
+
+  /** EAP-TTLS authentication. */
+  `EAP-TTLS`: "EAP-TTLS",
+
+  /** EAP-FAST authentication. */
+  `EAP-FAST`: "EAP-FAST",
 }
 
 /**
