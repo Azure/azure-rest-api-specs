@@ -189,6 +189,7 @@ model Project is ProxyResource<ProjectProperties> {
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 interface Projects {
   get is ArmResourceRead<Project>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
   delete is ArmResourceDeleteWithoutOkAsync<Project>;
   list is ArmResourceListByParent<Project>;
 
