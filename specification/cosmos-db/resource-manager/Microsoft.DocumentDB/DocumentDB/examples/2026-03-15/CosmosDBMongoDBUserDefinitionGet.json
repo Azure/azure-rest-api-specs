@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "mongoUserDefinitionId": "myMongoUserDefinitionId",
+    "databaseName": "sales",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myResourceGroupName",
+    "accountName": "myAccountName",
+    "api-version": "2026-03-15"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbUserDefinitions/myUserId",
+        "name": "myUserId",
+        "type": "Microsoft.DocumentDB/databaseAccounts/mongodbUserDefinitions",
+        "properties": {
+          "userName": "myUserName",
+          "databaseName": "sales",
+          "customData": "My custom data",
+          "roles": [
+            {
+              "db": "sales",
+              "role": "myReadRole"
+            }
+          ],
+          "mechanisms": "SCRAM-SHA-256"
+        }
+      }
+    }
+  },
+  "operationId": "MongoDBResources_GetMongoUserDefinition",
+  "title": "CosmosDBMongoDBUserDefinitionGet"
+}
