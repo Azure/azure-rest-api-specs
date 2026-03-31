@@ -1343,7 +1343,7 @@ model ScaleInPolicy {
 }
 
 /**
- * Specifies ProxyAgent settings for the virtual machine or virtual machine scale set. Minimum api-version: 2023-09-01.
+ * Specifies ProxyAgent settings for the virtual machine or virtual machine scale set.
  */
 model ProxyAgentSettings {
   /**
@@ -1357,12 +1357,12 @@ model ProxyAgentSettings {
   keyIncarnationId?: int32;
 
   /**
-   * Specifies the Wire Server endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01.
+   * Specifies the Wire Server endpoint settings while creating the virtual machine or virtual machine scale set.
    */
   wireServer?: HostEndpointSettings;
 
   /**
-   * Specifies the IMDS endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01.
+   * Specifies the IMDS endpoint settings while creating the virtual machine or virtual machine scale set.
    */
   imds?: HostEndpointSettings;
 
