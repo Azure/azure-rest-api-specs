@@ -85,11 +85,6 @@ namespace Microsoft.DocumentDB;
  */
 enum Versions {
   /**
-   * The 2025-11-01-preview API version.
-   */
-  v2025_11_01_preview: "2025-11-01-preview",
-
-  /**
    * The 2026-03-15 API version.
    */
   v2026_03_15: "2026-03-15",
@@ -97,6 +92,7 @@ enum Versions {
   /**
    * The 2026-04-01-preview API version.
    */
+  @Azure.Core.previewVersion
   v2026_04_01_preview: "2026-04-01-preview",
 }
 

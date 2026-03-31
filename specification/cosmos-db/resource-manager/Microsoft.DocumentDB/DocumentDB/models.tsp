@@ -3335,6 +3335,7 @@ model GraphResourcesListResult {
  * The properties of an Azure Cosmos DB SQL database
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model GraphResourceGetProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: GraphResourceGetPropertiesResource;
@@ -3345,11 +3346,13 @@ model GraphResourceGetProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model GraphResourceGetPropertiesResource extends GraphResource {}
 
 /**
  * Cosmos DB Graph resource object
  */
+@added(Versions.v2026_04_01_preview)
 model GraphResource {
   /**
    * Name of the Cosmos DB Graph
@@ -3359,8 +3362,8 @@ model GraphResource {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model GraphResourceGetPropertiesOptions extends OptionsResource {}
-
 /**
  * Cosmos DB options resource object
  */
@@ -3388,6 +3391,7 @@ model AutoscaleSettings {
  * Parameters to create and update Cosmos DB Graph resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model GraphResourceCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB Graph resource.
@@ -3402,6 +3406,7 @@ model GraphResourceCreateUpdateProperties {
   /**
    * The standard JSON format of a Graph resource
    */
+  @added(Versions.v2026_04_01_preview)
   resource: GraphResource;
 
   /**
@@ -4384,6 +4389,7 @@ model physicalPartitionStorageInfo {
  * Cosmos DB retrieve throughput parameters object
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model RetrieveThroughputParameters extends ARMResourceProperties {
   /**
    * Properties to retrieve throughput parameters object
@@ -4398,6 +4404,7 @@ model RetrieveThroughputProperties {
   /**
    * The standard JSON format of a resource throughput
    */
+  @added(Versions.v2026_04_01_preview)
   resource: RetrieveThroughputPropertiesResource;
 }
 
@@ -4408,6 +4415,7 @@ model RetrieveThroughputPropertiesResource {
   /**
    * Array of PhysicalPartitionId objects.
    */
+  @added(Versions.v2026_04_01_preview)
   physicalPartitionIds: PhysicalPartitionId[];
 }
 
@@ -4418,6 +4426,7 @@ model PhysicalPartitionId {
   /**
    * Id of a physical partition
    */
+  @added(Versions.v2026_04_01_preview)
   id: string;
 }
 
@@ -4425,6 +4434,7 @@ model PhysicalPartitionId {
  * An Azure Cosmos DB PhysicalPartitionThroughputInfoResult object.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model PhysicalPartitionThroughputInfoResult extends ARMResourceProperties {
   /**
    * The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoResult object
@@ -4439,6 +4449,7 @@ model PhysicalPartitionThroughputInfoResultProperties {
   /**
    * properties of physical partition throughput info
    */
+  @added(Versions.v2026_04_01_preview)
   resource?: PhysicalPartitionThroughputInfoResultPropertiesResource;
 }
 
@@ -4447,6 +4458,7 @@ model PhysicalPartitionThroughputInfoResultProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model PhysicalPartitionThroughputInfoResultPropertiesResource
   extends PhysicalPartitionThroughputInfoProperties {}
 
@@ -4457,6 +4469,7 @@ model PhysicalPartitionThroughputInfoProperties {
   /**
    * Array of physical partition throughput info objects
    */
+  @added(Versions.v2026_04_01_preview)
   physicalPartitionThroughputInfo?: PhysicalPartitionThroughputInfoResource[];
 }
 
@@ -4467,6 +4480,7 @@ model PhysicalPartitionThroughputInfoResource {
   /**
    * Id of a physical partition
    */
+  @added(Versions.v2026_04_01_preview)
   id: string;
 
   /**
@@ -4482,8 +4496,10 @@ model PhysicalPartitionThroughputInfoResource {
 
 /**
  * Cosmos DB redistribute throughput parameters object
+ @added(Versions.v2026_04_01_preview)
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model RedistributeThroughputParameters extends ARMResourceProperties {
   /**
    * Properties to redistribute throughput parameters object
@@ -4498,6 +4514,7 @@ model RedistributeThroughputProperties {
   /**
    * The standard JSON format of a resource throughput
    */
+  @added(Versions.v2026_04_01_preview)
   resource: RedistributeThroughputPropertiesResource;
 }
 
@@ -4508,6 +4525,7 @@ model RedistributeThroughputPropertiesResource {
   /**
    * ThroughputPolicy to apply for throughput redistribution
    */
+  @added(Versions.v2026_04_01_preview)
   throughputPolicy: ThroughputPolicyType;
 
   /**
@@ -5574,6 +5592,7 @@ model CassandraViewListResult {
  * The properties of an Azure Cosmos DB Cassandra view
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model CassandraViewGetProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: CassandraViewGetPropertiesResource;
@@ -5583,6 +5602,7 @@ model CassandraViewGetProperties {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model CassandraViewGetPropertiesResource extends CassandraViewResource {
   ...ExtendedResourceProperties;
 }
@@ -5594,6 +5614,7 @@ model CassandraViewResource {
   /**
    * Name of the Cosmos DB Cassandra view
    */
+  @added(Versions.v2026_04_01_preview)
   id: string;
 
   /**
@@ -5605,16 +5626,18 @@ model CassandraViewResource {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model CassandraViewGetPropertiesOptions extends OptionsResource {}
-
 /**
  * Parameters to create and update Cosmos DB Cassandra view.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model CassandraViewCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB Cassandra view.
    */
+  @added(Versions.v2026_04_01_preview)
   properties: CassandraViewCreateUpdateProperties;
 }
 
@@ -5625,6 +5648,7 @@ model CassandraViewCreateUpdateProperties {
   /**
    * The standard JSON format of a Cassandra view
    */
+  @added(Versions.v2026_04_01_preview)
   resource: CassandraViewResource;
 
   /**
@@ -5637,6 +5661,7 @@ model CassandraViewCreateUpdateProperties {
  * Parameters to create Data Transfer Job
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model CreateJobRequest extends ARMProxyResource {
   /**
    * Data Transfer Create Job Properties
@@ -5648,6 +5673,7 @@ model CreateJobRequest extends ARMProxyResource {
  * The properties of a DataTransfer Job
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model DataTransferJobProperties {
   /**
    * Job Name
@@ -5722,6 +5748,7 @@ model DataTransferJobProperties {
 @discriminator("component")
 model DataTransferDataSourceSink {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_04_01_preview)
   component: DataTransferComponent = DataTransferComponent.CosmosDBCassandra;
 }
 
@@ -5877,6 +5904,7 @@ model ClusterResourceProperties {
   /**
    * Type of the cluster. If set to Production, some operations might not be permitted on cluster.
    */
+  @added(Versions.v2026_04_01_preview)
   clusterType?: ClusterType;
 
   /**
