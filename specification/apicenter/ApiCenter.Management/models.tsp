@@ -223,7 +223,7 @@ union EnvironmentServerType {
   `Kong API Gateway`: "Kong API Gateway",
 
   /** Kubernetes server */
-  `Kubernetes`: "Kubernetes",
+  Kubernetes: "Kubernetes",
 
   /** Mulesoft Api Management server */
   `MuleSoft API Management`: "MuleSoft API Management",
