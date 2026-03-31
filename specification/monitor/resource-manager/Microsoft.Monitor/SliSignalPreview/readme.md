@@ -6,7 +6,7 @@ This is the AutoRest configuration file for SliSignalPreview (Signal Preview).
 
 ## Getting Started
 
-To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+To build the SDKs for the SliSignalPreview (signal preview) API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
 
