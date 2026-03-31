@@ -122,6 +122,10 @@ union EndpointType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_07_01)
   AzureStorageNfsFileShare: "AzureStorageNfsFileShare",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_12_01)
+  S3WithHmac: "S3WithHMAC",
 }
 
 /**
@@ -134,6 +138,45 @@ union JobType {
   OnPremToCloud: "OnPremToCloud",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CloudToCloud: "CloudToCloud",
+}
+
+/**
+ * The type of the endpoint source/target.
+ */
+@added(Versions.v2025_12_01)
+union EndpointKind {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Source: "Source",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Target: "Target",
+}
+
+/**
+ * The type of Job run trigger Manual or Scheduled.
+ */
+@added(Versions.v2025_12_01)
+union TriggerType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Manual: "Manual",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Scheduled: "Scheduled",
+}
+/**
+ * Type of schedule — Monthly, Weekly, or Daily
+ */
+@added(Versions.v2025_12_01)
+union Frequency {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Monthly: "Monthly",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Weekly: "Weekly",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Daily: "Daily",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Onetime: "Onetime",
 }
 
 /**
@@ -205,6 +248,9 @@ union CredentialType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureKeyVaultSmb: "AzureKeyVaultSmb",
+
+  @added(Versions.v2025_12_01)
+  AzureKeyVaultS3WithHMAC: "AzureKeyVaultS3WithHMAC",
 }
 
 /**
@@ -523,6 +569,13 @@ model EndpointBaseProperties {
   description?: string;
 
   /**
+   * The Endpoint resource kind source or target.
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  endpointKind?: EndpointKind;
+
+  /**
    * The provisioning state of this resource.
    */
   @visibility(Lifecycle.Read)
@@ -721,10 +774,52 @@ model JobDefinitionProperties {
   connections?: Azure.Core.armResourceIdentifier[];
 
   /**
+   * Schedule information for the Job Definition.
+   */
+  @added(Versions.v2025_12_01)
+  schedule?: ScheduleInfo;
+
+  /**
    * The checksum validation mode for the job definition.
    */
   @added(Versions.v2025_08_01)
   dataIntegrityValidation?: DataIntegrityValidation = DataIntegrityValidation.None;
+
+  /**
+   * Boolean to preserve permissions or not.
+   */
+  @added(Versions.v2025_12_01)
+  preservePermissions?: boolean = true;
+}
+
+/**
+ * Schedule information for the Job Definition.
+ */
+@added(Versions.v2025_12_01)
+model ScheduleInfo {
+  /** Type of schedule — Monthly, Weekly, or Daily */
+  frequency: Frequency;
+
+  /** Whether the schedule is currently active */
+  isActive: boolean;
+
+  /** Time of day to execute (hours and minutes) */
+  executionTime?: Time;
+
+  /** Specific one-time execution date and time */
+  startDate?: utcDateTime;
+
+  /** Days of the week for weekly schedules */
+  daysOfWeek?: string[]; // e.g., ["Monday", "Wednesday"]
+
+  /** Days of the month for monthly schedules */
+  daysOfMonth?: int32[]; // e.g., [1, 15, 30]
+
+  /** Optional CRON expression for advanced scheduling */
+  cronExpression?: string;
+
+  /** End time of the schedule (in UTC) */
+  endDate?: utcDateTime;
 }
 
 /**
@@ -947,6 +1042,20 @@ model JobRunProperties {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   executionEndTime?: utcDateTime;
+
+  /**
+   * Trigger type for the job run. Default is manual.
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  triggerType?: TriggerType = TriggerType.Manual;
+
+  /**
+   * Scheduled execution time. Null if Trigger type is manual.
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  scheduledExecutionTime?: utcDateTime;
 
   /**
    * The last updated time of the Job Run.
@@ -1197,6 +1306,75 @@ model NfsMountEndpointProperties extends EndpointBaseProperties {
   endpointType: "NfsMount";
 }
 
+/**
+ * The properties of S3WithHmac share endpoint.
+ */
+@added(Versions.v2025_12_01)
+model S3WithHmacEndpointProperties extends EndpointBaseProperties {
+  /**
+   * The Azure Key Vault credentials which stores the access key and secret key. Use empty string to clean-up existing value.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  credentials?: AzureKeyVaultS3WithHmacCredentials;
+
+  /**
+   * The  URI which points to the source.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  sourceUri?: string;
+
+  /**
+   * The source type of S3WithHmac endpoint.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  sourceType?: S3WithHmacSourceType;
+
+  /**
+   * The description for other source type of S3WithHmac endpoint.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  otherSourceTypeDescription?: string;
+
+  /**
+   * The Endpoint resource type.
+   */
+  endpointType: "S3WithHMAC";
+}
+
+/**
+ * The source type of S3WithHmac endpoint.
+ */
+@added(Versions.v2025_12_01)
+union S3WithHmacSourceType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  MINIO: "MINIO",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  IBM: "IBM",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  GCS: "GCS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ALIBABA: "ALIBABA",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  DELL_EMC: "DELL_EMC",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  OTHER: "OTHER",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_12_01)
+model S3WithHmacEndpointUpdateProperties extends EndpointBaseUpdateProperties {
+  /**
+   * The Azure Key Vault secret URIs which store the required credentials to access the S3.
+   */
+  credentials?: AzureKeyVaultS3WithHmacCredentials;
+
+  /**
+   * The Endpoint resource type.
+   */
+  endpointType: "S3WithHMAC";
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NfsMountEndpointUpdateProperties extends EndpointBaseUpdateProperties {
   /**
@@ -1400,6 +1578,27 @@ model SmbMountEndpointUpdateProperties extends EndpointBaseUpdateProperties {
    * The Endpoint resource type.
    */
   endpointType: "SmbMount";
+}
+
+/**
+ * The Azure Key Vault secret URIs which store the credentials.
+ */
+@added(Versions.v2025_12_01)
+model AzureKeyVaultS3WithHmacCredentials extends Credentials {
+  /**
+   * The Azure Key Vault secret URI which stores the username. Use empty string to clean-up existing value.
+   */
+  accessKeyUri?: string;
+
+  /**
+   * The Azure Key Vault secret URI which stores the password. Use empty string to clean-up existing value.
+   */
+  secretKeyUri?: string;
+
+  /**
+   * The Credentials type.
+   */
+  type: "AzureKeyVaultS3WithHMAC";
 }
 
 /**

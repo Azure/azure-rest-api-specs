@@ -131,12 +131,6 @@ union ApplicationType {
   `SAP-HANA`: "SAP-HANA",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ORACLE: "ORACLE",
-
-  /**
-   * Custom application type allows min 2 and max 12 data volumes in a volume group.
-   */
-  @added(Versions.v2025_12_15_preview)
-  CUSTOM: "CUSTOM",
 }
 
 /**
