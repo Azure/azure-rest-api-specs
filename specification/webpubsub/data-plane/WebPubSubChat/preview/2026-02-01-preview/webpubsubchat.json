@@ -113,6 +113,88 @@
         }
       }
     },
+    "/api/hubs/{hub}/chat/conversations/{conversationId}/messages": {
+      "get": {
+        "operationId": "Chat_QueryMessages",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Query messages in a conversation.",
+        "description": "Query messages in a conversation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "Conversation identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "lastMessageId",
+            "in": "query",
+            "description": "Last message ID for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "firstMessageId",
+            "in": "query",
+            "description": "First message ID for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Maximum number of messages to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryChatMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_QueryMessages": {
+            "$ref": "./examples/Chat_QueryMessages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "messages"
+        }
+      }
+    },
     "/api/hubs/{hub}/chat/conversations/{conversationId}/messages/{messageId}": {
       "patch": {
         "operationId": "Chat_UpdateMessage",
@@ -245,84 +327,6 @@
         }
       }
     },
-    "/api/hubs/{hub}/chat/conversations/{conversationId}/messages/:query": {
-      "post": {
-        "operationId": "Chat_QueryMessages",
-        "tags": [
-          "chat"
-        ],
-        "summary": "Query messages in a conversation.",
-        "description": "Query messages in a conversation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "hub",
-            "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "name": "conversationId",
-            "in": "path",
-            "description": "Conversation identifier.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "lastMessageId",
-            "in": "query",
-            "description": "Last message ID for pagination.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "firstMessageId",
-            "in": "query",
-            "description": "First message ID for pagination.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "maxCount",
-            "in": "query",
-            "description": "Maximum number of messages to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryChatMessageResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Chat_QueryMessages": {
-            "$ref": "./examples/Chat_QueryMessages.json"
-          }
-        }
-      }
-    },
     "/api/hubs/{hub}/chat/roles": {
       "get": {
         "operationId": "Chat_QueryRoles",
@@ -383,6 +387,10 @@
           "Chat_QueryRoles": {
             "$ref": "./examples/Chat_QueryRoles.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "roles"
         }
       }
     },
@@ -1395,10 +1403,6 @@
       "type": "object",
       "description": "Response for querying messages.",
       "properties": {
-        "conversation": {
-          "$ref": "#/definitions/ChatConversation",
-          "description": "Conversation context."
-        },
         "messages": {
           "type": "array",
           "description": "List of messages.",
@@ -1406,14 +1410,12 @@
             "$ref": "#/definitions/ChatMessageInfo"
           }
         },
-        "nextUrl": {
+        "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "URL to fetch the next page of messages."
         }
-      },
-      "required": [
-        "conversation"
-      ]
+      }
     },
     "QueryChatRolesResponse": {
       "type": "object",
@@ -1426,8 +1428,9 @@
             "$ref": "#/definitions/ChatRoleInfo"
           }
         },
-        "nextUrl": {
+        "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "URL to fetch the next page of roles."
         }
       },

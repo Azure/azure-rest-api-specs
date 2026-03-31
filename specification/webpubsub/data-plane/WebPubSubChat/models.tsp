@@ -116,23 +116,24 @@ model CreateOrUpdateChatRoleInfoRequest {
 
 /** Response for querying messages. */
 model QueryChatMessageResponse {
-  /** Conversation context. */
-  conversation: ChatConversation;
-
   /** List of messages. */
+  @pageItems
   messages?: ChatMessageInfo[];
 
   /** URL to fetch the next page of messages. */
-  nextUrl?: string;
+  @nextLink
+  nextLink?: url;
 }
 
 /** Response for querying roles. */
 model QueryChatRolesResponse {
   /** List of roles. */
+  @pageItems
   roles: ChatRoleInfo[];
 
   /** URL to fetch the next page of roles. */
-  nextUrl?: string;
+  @nextLink
+  nextLink?: url;
 }
 
 /**

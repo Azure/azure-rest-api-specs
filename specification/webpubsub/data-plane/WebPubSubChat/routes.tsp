@@ -47,8 +47,9 @@ interface Chat {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
   @summary("Query messages in a conversation.")
-  @route("/api/hubs/{hub}/chat/conversations/{conversationId}/messages/:query")
-  @post
+  @route("/api/hubs/{hub}/chat/conversations/{conversationId}/messages")
+  @get
+  @list
   queryMessages is Azure.Core.Foundations.Operation<
     {
       /**
@@ -82,7 +83,8 @@ interface Chat {
        * Maximum number of messages to return.
        */
       @query
-      maxCount?: int32;
+      @pageSize
+      pageSize?: int32;
     },
     QueryChatMessageResponse
   >;
@@ -177,6 +179,7 @@ interface Chat {
   @summary("Query roles in a hub.")
   @route("/api/hubs/{hub}/chat/roles")
   @get
+  @list
   queryRoles is Azure.Core.Foundations.Operation<
     {
       /**
@@ -191,6 +194,7 @@ interface Chat {
        * Continuation token for pagination.
        */
       @query
+      @continuationToken
       continuationToken?: string;
 
       /**
