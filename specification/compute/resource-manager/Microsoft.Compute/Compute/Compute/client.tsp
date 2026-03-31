@@ -184,3 +184,10 @@ using Compute;
   Azure.ClientGenerator.Core.Usage.input,
   "java"
 );
+
+// AvailabilitySetSkuTypes needs public access and input+output usage for premium layer
+@@access(AvailabilitySetSkuTypes, Access.public, "java");
+@@usage(AvailabilitySetSkuTypes,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "java"
+);
