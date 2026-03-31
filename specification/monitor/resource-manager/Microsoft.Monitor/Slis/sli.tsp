@@ -60,7 +60,7 @@ model SliResource {
 
   @visibility(Lifecycle.Read)
   @doc("The streaming rule last updated timestamp associated with the Sli resource.")
-  streamingRuleLastUpdatedTimestamp?: utcDateTime;
+  streamingRuleLastUpdatedTimestamp?: string;
 
   @doc("A flag to determine whether alert is enabled.")
   enableAlert: boolean;
