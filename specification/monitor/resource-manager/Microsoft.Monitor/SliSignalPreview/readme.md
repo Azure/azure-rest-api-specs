@@ -1,8 +1,8 @@
-# Slis
+# SliSignalPreview
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Slis.
+This is the AutoRest configuration file for SliSignalPreview (Signal Preview).
 
 ## Getting Started
 
