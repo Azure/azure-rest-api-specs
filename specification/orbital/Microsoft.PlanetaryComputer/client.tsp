@@ -36,39 +36,11 @@ namespace Customizations;
 @@alternateType(WmtsCapabilitiesXmlResponse.body, string, "javascript");
 
 // === Python external type mappings ===
-// NOTE: GeoJSON Geometry types (Geometry, Point, Polygon, MultiPolygon, MultiPoint,
-// LineString, MultiLineString) and discriminated STAC types (StacItem, StacItemCollection)
-// are excluded due to a pygen bug where ExternalType on @discriminator models crashes
-// SDK generation (AttributeError: 'ExternalType' has no attribute 'name').
-// These will be added once the emitter fix is in place.
-
-// GeoJSON Feature → geojson (https://pypi.org/project/geojson/)
-@@alternateType(Feature,
-  {
-    identity: "geojson.Feature",
-    package: "geojson",
-    minVersion: "2.0.0",
-  },
-  "python"
-);
-@@alternateType(FeatureCollection,
-  {
-    identity: "geojson.FeatureCollection",
-    package: "geojson",
-    minVersion: "2.0.0",
-  },
-  "python"
-);
-
-// STAC types → pystac (https://pystac.readthedocs.io/)
-@@alternateType(StacCollection,
-  {
-    identity: "pystac.Collection",
-    package: "pystac",
-    minVersion: "1.11.0",
-  },
-  "python"
-);
+// NOTE: @@alternateType with ExternalType is currently broken for ALL models used
+// in our API — not just @discriminator hierarchies. See:
+// https://github.com/Azure/azure-sdk-for-python/issues/46020
+// Feature, FeatureCollection, StacCollection, and all Geometry/STAC discriminated
+// types are excluded until the pygen fix is released.
 
 // Address naming convention violations for C# SDK
 @@clientName(TilerMosaicSearchRegistrationResponse,
