@@ -56,7 +56,7 @@ interface ManagedUnsupportedVMSizes {
     ...SubscriptionIdParameter,
 
     /**
-     * The location for the vm size. This is different from cluster location.
+     * The location for the unsupported VM sizes. This is different from cluster location.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
     @OpenAPI.extension("x-ms-parameter-location", "method")
@@ -87,7 +87,7 @@ interface ManagedUnsupportedVMSizes {
     ...SubscriptionIdParameter,
 
     /**
-     * The location for the vm size. This is different from cluster location.
+     * The location for the unsupported VM sizes. This is different from cluster location.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
     @OpenAPI.extension("x-ms-parameter-location", "method")

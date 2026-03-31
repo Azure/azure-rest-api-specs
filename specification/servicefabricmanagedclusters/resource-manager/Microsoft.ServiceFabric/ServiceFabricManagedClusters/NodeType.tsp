@@ -1316,12 +1316,12 @@ union ScaleInPolicyMode {
   Default: "Default",
 
   /**
-   * OldestNode scale in policy mode where the oldest node in the node type will be removed first when scaling in.
+   * OldestNodeFirst scale in policy mode where the oldest node in the node type will be removed first when scaling in.
    */
-  OldestNode: "OldestNode",
+  OldestNodeFirst: "OldestNodeFirst",
 
   /**
-   * NewestNode scale in policy mode where the newest node in the node type will be removed first when scaling in.
+   * NewestNodeFirst scale in policy mode where the newest node in the node type will be removed first when scaling in.
    */
   NewestNodeFirst: "NewestNodeFirst",
 }

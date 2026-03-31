@@ -485,7 +485,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The location for the vm size. This is different from cluster location.",
+            "description": "The location for the unsupported VM sizes. This is different from cluster location.",
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -532,7 +532,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The location for the vm size. This is different from cluster location.",
+            "description": "The location for the unsupported VM sizes. This is different from cluster location.",
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -7918,7 +7918,7 @@
       "description": "Specifies the scale in policy mode for a node type.",
       "enum": [
         "Default",
-        "OldestNode",
+        "OldestNodeFirst",
         "NewestNodeFirst"
       ],
       "x-ms-enum": {
@@ -7931,14 +7931,14 @@
             "description": "Default scale in policy mode where the system will choose which nodes to remove when scaling in."
           },
           {
-            "name": "OldestNode",
-            "value": "OldestNode",
-            "description": "OldestNode scale in policy mode where the oldest node in the node type will be removed first when scaling in."
+            "name": "OldestNodeFirst",
+            "value": "OldestNodeFirst",
+            "description": "OldestNodeFirst scale in policy mode where the oldest node in the node type will be removed first when scaling in."
           },
           {
             "name": "NewestNodeFirst",
             "value": "NewestNodeFirst",
-            "description": "NewestNode scale in policy mode where the newest node in the node type will be removed first when scaling in."
+            "description": "NewestNodeFirst scale in policy mode where the newest node in the node type will be removed first when scaling in."
           }
         ]
       }
