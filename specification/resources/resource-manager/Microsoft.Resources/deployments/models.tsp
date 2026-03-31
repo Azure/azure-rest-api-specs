@@ -12,6 +12,33 @@ namespace Microsoft.Resources;
 
 model DeploymentListResult is Azure.Core.Page<DeploymentExtended>;
 
+/**
+ * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
+ */
+model ErrorResponse {
+  /** The error code. */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /** The error message. */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /** The error target. */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /** The error details. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["message", "target"])
+  details?: ErrorResponse[];
+
+  /** The error additional info. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  additionalInfo?: ErrorAdditionalInfo[];
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExtensionConfigPropertyType {
   string,
@@ -516,7 +543,7 @@ model CloudError {
   /**
    * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
    */
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
+  error?: ErrorResponse;
 }
 
 /**
@@ -925,7 +952,7 @@ model DeploymentPropertiesExtended {
    * The deployment error.
    */
   @visibility(Lifecycle.Read)
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
+  error?: ErrorResponse;
 
   /**
    * Contains diagnostic information collected during validation process.
@@ -1362,7 +1389,7 @@ model DeploymentValidateResult {
    * The deployment validation error.
    */
   @visibility(Lifecycle.Read)
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
+  error?: ErrorResponse;
 
   /**
    * The ID of the deployment.
@@ -1473,7 +1500,7 @@ model WhatIfOperationResult {
   /**
    * Error when What-If operation fails.
    */
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
+  error?: ErrorResponse;
 }
 
 /**
@@ -1707,7 +1734,7 @@ model StatusMessage {
   /**
    * The error reported by the operation.
    */
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
+  error?: ErrorResponse;
 }
 
 /**

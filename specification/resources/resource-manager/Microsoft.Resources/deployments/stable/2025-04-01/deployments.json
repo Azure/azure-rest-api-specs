@@ -3473,7 +3473,7 @@
       "description": "An error response for a resource management request.",
       "properties": {
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "$ref": "#/definitions/ErrorResponse",
           "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)"
         }
       },
@@ -4085,7 +4085,7 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "$ref": "#/definitions/ErrorResponse",
           "description": "The deployment error.",
           "readOnly": true
         },
@@ -4108,7 +4108,7 @@
       "description": "Information from validate template deployment response.",
       "properties": {
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "$ref": "#/definitions/ErrorResponse",
           "description": "The deployment validation error.",
           "readOnly": true
         },
@@ -4172,6 +4172,48 @@
         "resultFormat": {
           "$ref": "#/definitions/WhatIfResultFormat",
           "description": "The format of the What-If results"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4875,7 +4917,7 @@
           "description": "Status of the deployment operation."
         },
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "$ref": "#/definitions/ErrorResponse",
           "description": "The error reported by the operation."
         }
       }
@@ -5077,7 +5119,7 @@
           "x-ms-client-flatten": true
         },
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "$ref": "#/definitions/ErrorResponse",
           "description": "Error when What-If operation fails."
         }
       }
