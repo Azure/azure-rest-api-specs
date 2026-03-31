@@ -79,6 +79,17 @@ interface Toolboxes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Update a toolbox's properties, such as its default version or description.")
+  @operationId("updateToolbox")
+  @patch
+  @route("/toolboxes/{toolbox_name}")
+  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
+  updateToolbox is FoundryDataPlaneOperation<
+    UpdateToolboxRequest & ToolboxesPreviewHeader,
+    ToolboxObject
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("Delete a toolbox and all its versions.")
   @operationId("deleteToolbox")
   @delete

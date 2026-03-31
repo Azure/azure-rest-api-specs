@@ -36,6 +36,13 @@ model ToolboxObject {
   @maxLength(256)
   name: string;
 
+  @doc("A human-readable description of the toolbox.")
+  @maxLength(512)
+  description?: string;
+
+  @doc("The version identifier that the toolbox MCP endpoint resolves to. When not set, the endpoint serves the latest version.")
+  default_version?: string;
+
   @doc("The versions of the toolbox.")
   versions: {
     @doc("The latest version of the toolbox.")
@@ -166,6 +173,22 @@ alias ListToolboxVersionsRequest = {
   toolbox_name: string;
 
   ...CommonPageQueryParameters;
+};
+
+alias UpdateToolboxRequest = {
+  @doc("The name of the toolbox to update.")
+  @path
+  toolbox_name: string;
+
+  @doc("A human-readable description of the toolbox.")
+  @maxLength(512)
+  description?: string;
+
+  @doc("The version identifier that the toolbox MCP endpoint resolves to. Set to a specific version to pin traffic, or omit/null to serve the latest version.")
+  default_version?: string | null;
+
+  @doc("Arbitrary key-value metadata to associate with the toolbox.")
+  metadata?: Record<string>;
 };
 
 alias DeleteToolboxRequest = {
