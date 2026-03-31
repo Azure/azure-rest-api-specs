@@ -12,7 +12,7 @@ namespace WebPubSub {
   @summary("Get service health status.")
   @route("/api/health")
   @head
-  op getServiceStatus is Azure.Core.Foundations.Operation<{}, void>;
+  op getServiceStatus is Azure.Core.Foundations.Operation<{}, OkResponse>;
 
   /**
    * Add filtered connections to multiple groups.
@@ -37,7 +37,7 @@ namespace WebPubSub {
       @bodyRoot
       groupsToAdd: AddToGroupsRequest;
     },
-    void
+    {}
   >;
 
   /**
@@ -60,7 +60,7 @@ namespace WebPubSub {
       /**
        * Exclude these connectionIds when closing the connections in the hub.
        */
-      @query
+      @query(#{ explode: true })
       excluded?: string[];
 
       /**
@@ -98,8 +98,8 @@ namespace WebPubSub {
       /**
        * Roles that the connection with the generated token will have.
        */
-      @query
-      roles?: string[];
+      @query(#{ explode: true })
+      role?: string[];
 
       /**
        * The expire time of the generated token.
@@ -111,8 +111,8 @@ namespace WebPubSub {
       /**
        * Groups that the connection will join when it connects.
        */
-      @query
-      groups?: string[];
+      @query(#{ explode: true })
+      group?: string[];
 
       /**
        * The type of client. Case-insensitive. If not set, it's "Default". For Web
@@ -120,7 +120,7 @@ namespace WebPubSub {
        * valid values are 'Default' and 'MQTT'.
        */
       @query
-      clientProtocol?: WebPubSubClientType = WebPubSubClientType.Default;
+      clientType?: WebPubSubClientType = WebPubSubClientType.Default;
     },
     ClientTokenResponse & {
       @header("content-type")
@@ -151,7 +151,7 @@ namespace WebPubSub {
       @bodyRoot
       groupsToRemove: RemoveFromGroupsRequest;
     },
-    void
+    {}
   >;
 
   /**
@@ -175,7 +175,7 @@ namespace WebPubSub {
       /**
        * Excluded connection Ids.
        */
-      @query
+      @query(#{ explode: true })
       excluded?: string[];
 
       /**
@@ -192,6 +192,7 @@ namespace WebPubSub {
        * client within the specified TTL will be dropped by the service. This parameter
        * can help when the client's bandwidth is limited.
        */
+      @minValue(0)
       @maxValue(300)
       @query
       messageTtlSeconds?: int32;
@@ -208,7 +209,7 @@ namespace WebPubSub {
       @bodyRoot
       message: bytes;
     },
-    void
+    AcceptedResponse
   >;
 
   /**
@@ -304,6 +305,7 @@ namespace WebPubSub {
        * client within the specified TTL will be dropped by the service. This parameter
        * can help when the client's bandwidth is limited.
        */
+      @minValue(0)
       @maxValue(300)
       @query
       messageTtlSeconds?: int32;
@@ -320,7 +322,7 @@ namespace WebPubSub {
       @bodyRoot
       message: bytes;
     },
-    void
+    AcceptedResponse
   >;
 
   /**
@@ -409,7 +411,7 @@ namespace WebPubSub {
       /**
        * Exclude these connectionIds when closing the connections in the group.
        */
-      @query
+      @query(#{ explode: true })
       excluded?: string[];
 
       /**
@@ -451,7 +453,7 @@ namespace WebPubSub {
       /**
        * Excluded connection Ids
        */
-      @query
+      @query(#{ explode: true })
       excluded?: string[];
 
       /**
@@ -468,6 +470,7 @@ namespace WebPubSub {
        * client within the specified TTL will be dropped by the service. This parameter
        * can help when the client's bandwidth is limited.
        */
+      @minValue(0)
       @maxValue(300)
       @query
       messageTtlSeconds?: int32;
@@ -484,7 +487,7 @@ namespace WebPubSub {
       @bodyRoot
       message: bytes;
     },
-    void
+    AcceptedResponse
   >;
 
   /**
@@ -802,7 +805,7 @@ namespace WebPubSub {
       /**
        * Exclude these connectionIds when closing the connections for the user.
        */
-      @query
+      @query(#{ explode: true })
       excluded?: string[];
 
       /**
@@ -853,6 +856,7 @@ namespace WebPubSub {
        * client within the specified TTL will be dropped by the service. This parameter
        * can help when the client's bandwidth is limited.
        */
+      @minValue(0)
       @maxValue(300)
       @query
       messageTtlSeconds?: int32;
@@ -869,7 +873,7 @@ namespace WebPubSub {
       @bodyRoot
       message: bytes;
     },
-    void
+    AcceptedResponse
   >;
 
   /**
