@@ -5,6 +5,13 @@ using Azure.ClientGenerator.Core;
 using Common;
 using Compute;
 
+// CommonTypes v3 defines Resource.id as string, but the .NET SDK base classes
+// (ResourceData/TrackedResourceData) expect ResourceIdentifier. Override for csharp.
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 @@clientName(NetworkApiVersion.`2020-11-01`, "TwoThousandTwenty1101", "go");
 @@clientName(NetworkApiVersion.`2022-11-01`, "TwoThousandTwentyTwo1101", "go");
 

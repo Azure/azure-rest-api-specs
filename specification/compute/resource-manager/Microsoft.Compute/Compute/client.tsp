@@ -5,6 +5,7 @@ import "./ComputeGallery/client.tsp";
 import "./ComputeSku/main.tsp";
 
 using Azure.ClientGenerator.Core;
+
 /**
  * Compute Client
  */
