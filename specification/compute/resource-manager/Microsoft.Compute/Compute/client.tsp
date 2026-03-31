@@ -38,6 +38,9 @@ namespace ComputeCombine;
   "java"
 );
 
+// PurchasePlan needs input usage for premium layer constructor and setters
+@@usage(PurchasePlan, Azure.ClientGenerator.Core.Usage.input, "java");
+
 // Property name changes: retain old Java names for ComputeGallery and ComputeSku models
 @@clientName(AccessControlRulesIdentity.userName, "username", "java");
 @@clientName(ResourceSkuCosts.meterID, "meterId", "java");
