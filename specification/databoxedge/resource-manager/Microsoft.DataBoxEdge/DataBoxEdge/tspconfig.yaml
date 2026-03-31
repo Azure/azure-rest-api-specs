@@ -6,6 +6,7 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
+    azure-resource-provider-folder: "."
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/databoxedge.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
@@ -28,6 +29,9 @@ options:
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-databoxedge"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.DataBoxEdge"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/databoxedge"
     emitter-output-dir: "{output-dir}/{service-dir}/armdataboxedge"
