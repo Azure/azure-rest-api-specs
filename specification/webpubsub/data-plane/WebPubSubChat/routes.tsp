@@ -50,7 +50,7 @@ interface Chat {
   @route("/api/hubs/{hub}/chat/conversations/{conversationId}/messages")
   @get
   @list
-  queryMessages is Azure.Core.Foundations.Operation<
+  listMessages is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -175,12 +175,11 @@ interface Chat {
    * Query roles in a hub.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Name matches original API design - Chat_QueryRoles"
   @summary("Query roles in a hub.")
   @route("/api/hubs/{hub}/chat/roles")
   @get
   @list
-  queryRoles is Azure.Core.Foundations.Operation<
+  listRoles is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
