@@ -733,7 +733,7 @@ model VersionSelector {
 model VersionSelectionRule {
   type: VersionSelectorType;
 
-  @doc("The agent version to rout traffic to")
+  @doc("The agent version to route traffic to")
   agent_version: string;
 }
 
