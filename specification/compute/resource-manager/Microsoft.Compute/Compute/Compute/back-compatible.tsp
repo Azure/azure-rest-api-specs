@@ -586,5 +586,11 @@ using Common;
 );
 
 // Keep legacy Python enum member names for NetworkApiVersion
-@@clientName(NetworkApiVersion.`2020-11-01`, "TWO_THOUSAND_TWENTY11_01", "python");
-@@clientName(NetworkApiVersion.`2022-11-01`, "TWO_THOUSAND_TWENTY_TWO11_01", "python");
+@@clientName(NetworkApiVersion.`2020-11-01`,
+  "TWO_THOUSAND_TWENTY11_01",
+  "python"
+);
+@@clientName(NetworkApiVersion.`2022-11-01`,
+  "TWO_THOUSAND_TWENTY_TWO11_01",
+  "python"
+);
