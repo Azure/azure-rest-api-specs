@@ -430,6 +430,9 @@ model CodeConfiguration {
 
   @doc("The entry point command and arguments for the code execution.")
   entry_point: string[];
+
+  @doc("SHA-256 hex digest of the uploaded code zip. Used for change detection — if the hash matches the latest version, the server returns the existing version without re-uploading.")
+  content_hash?: string;
 }
 
 @doc("The hosted agent definition.")
@@ -1202,23 +1205,9 @@ model SessionListResult {
   pagination_token?: string;
 }
 
-/** Multipart request body for deploying a code-based agent. */
-@extension(
-  "x-ms-foundry-meta",
-  #{
-    required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview],
-  }
-)
-model CreateAgentFromCodeContent {
-  /** JSON metadata for the agent and its hosted definition. */
-  metadata: HttpPart<CreateAgentFromCodeRequest>;
-
-  /** The code zip file (max 250 MB). */
-  code: HttpPart<bytes>;
-}
-
 /**
- * JSON metadata part of the create-agent-version-from-code request.
+ * JSON metadata for code-based agent version operations (update agent, create version).
+ * The agent name comes from the URL path parameter, so it is not included here.
  * Follows the same `definition` pattern as CreateAgentVersionRequest for consistency.
  */
 @extension(
@@ -1227,13 +1216,67 @@ model CreateAgentFromCodeContent {
     required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview],
   }
 )
-model CreateAgentFromCodeRequest {
+model CreateAgentVersionFromCodeRequest {
   @doc("A human-readable description of the agent.")
   @maxLength(512)
   description?: string;
 
   ...MetadataPropertyForRequest;
 
-  @doc("The hosted agent definition including code_configuration (runtime, entry_point), cpu, memory, and protocol_versions.")
+  @doc("The hosted agent definition including code_configuration (runtime, entry_point, content_hash), cpu, memory, and protocol_versions.")
   definition: HostedAgentDefinition;
+}
+
+/**
+ * JSON metadata for creating a new code-based agent.
+ * Extends CreateAgentVersionFromCodeRequest with a required `name` field since
+ * `POST /agents` does not have `agent_name` in the URL path.
+ */
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview],
+  }
+)
+model CreateAgentFromCodeRequest {
+  @doc("""
+    The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
+    - Must start and end with alphanumeric characters,
+    - Can contain hyphens in the middle
+    - Must not exceed 63 characters.
+    """)
+  @maxLength(63)
+  name: string;
+
+  ...CreateAgentVersionFromCodeRequest;
+}
+
+/** Multipart request body for creating a new code-based agent (POST /agents). */
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview],
+  }
+)
+model CreateAgentFromCodeContent {
+  /** JSON metadata including the agent name, description, and hosted definition. */
+  metadata: HttpPart<CreateAgentFromCodeRequest>;
+
+  /** The code zip file (max 250 MB). */
+  code: HttpPart<bytes>;
+}
+
+/** Multipart request body for updating or versioning a code-based agent (POST /agents/{name} and POST /agents/{name}/versions). */
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview],
+  }
+)
+model CreateAgentVersionFromCodeContent {
+  /** JSON metadata including description and hosted definition. */
+  metadata: HttpPart<CreateAgentVersionFromCodeRequest>;
+
+  /** The code zip file (max 250 MB). */
+  code: HttpPart<bytes>;
 }

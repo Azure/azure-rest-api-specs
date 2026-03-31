@@ -63,8 +63,7 @@
   "paths": {
     "/agents": {
       "post": {
-        "operationId": "Agents_createAgent",
-        "description": "Creates the agent.",
+        "operationId": "Agents_createAgent_Agents_createAgentFromCode",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -96,6 +95,7 @@
             "explode": false
           }
         ],
+        "description": "Creates the agent. Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.\nThe request is multipart/form-data with a JSON metadata part (including agent name) and a binary code part.\nMaximum upload size is 250 MB.",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -118,6 +118,11 @@
             }
           }
         },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "CodeAgents=V1Preview"
+          ]
+        },
         "tags": [
           "Agents"
         ],
@@ -128,16 +133,18 @@
               "schema": {
                 "$ref": "#/components/schemas/CreateAgentRequest"
               }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAgentFromCodeContent"
+              },
+              "encoding": {
+                "metadata": {
+                  "contentType": "application/json"
+                }
+              }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "HostedAgents=V1Preview",
-            "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview",
-            "CodeAgents=V1Preview"
-          ]
         }
       },
       "get": {
@@ -312,8 +319,7 @@
         ]
       },
       "post": {
-        "operationId": "Agents_updateAgent",
-        "description": "Updates the agent by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version.",
+        "operationId": "Agents_updateAgent_Agents_updateAgentFromCode",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -344,6 +350,7 @@
             "explode": false
           }
         ],
+        "description": "Updates the agent by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version. Updates a code-based agent by uploading new code and creating a new version.\nIf the code and definition are unchanged (matched by content_hash), returns the existing version.\nThe request is multipart/form-data with a JSON metadata part and a binary code part.\nMaximum upload size is 250 MB.",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -366,6 +373,11 @@
             }
           }
         },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "CodeAgents=V1Preview"
+          ]
+        },
         "tags": [
           "Agents"
         ],
@@ -375,6 +387,16 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateAgentRequest"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAgentVersionFromCodeContent"
+              },
+              "encoding": {
+                "metadata": {
+                  "contentType": "application/json"
+                }
               }
             }
           }
@@ -578,7 +600,7 @@
             },
             "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/CreateAgentFromCodeContent"
+                "$ref": "#/components/schemas/CreateAgentVersionFromCodeContent"
               },
               "encoding": {
                 "metadata": {
@@ -11174,6 +11196,10 @@
               "type": "string"
             },
             "description": "The entry point command and arguments for the code execution."
+          },
+          "content_hash": {
+            "type": "string",
+            "description": "SHA-256 hex digest of the uploaded code zip. Used for change detection — if the hash matches the latest version, the server returns the existing version without re-uploading."
           }
         },
         "description": "Code-based deployment configuration for a hosted agent.",
@@ -11396,7 +11422,7 @@
                 "$ref": "#/components/schemas/CreateAgentFromCodeRequest"
               }
             ],
-            "description": "JSON metadata for the agent and its hosted definition."
+            "description": "JSON metadata including the agent name, description, and hosted definition."
           },
           "code": {
             "type": "string",
@@ -11412,9 +11438,15 @@
       "CreateAgentFromCodeRequest": {
         "type": "object",
         "required": [
+          "name",
           "definition"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 63,
+            "description": "The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters."
+          },
           "description": {
             "type": "string",
             "maxLength": 512,
@@ -11434,10 +11466,10 @@
                 "$ref": "#/components/schemas/HostedAgentDefinition"
               }
             ],
-            "description": "The hosted agent definition including code_configuration (runtime, entry_point), cpu, memory, and protocol_versions."
+            "description": "The hosted agent definition including code_configuration (runtime, entry_point, content_hash), cpu, memory, and protocol_versions."
           }
         },
-        "description": "JSON metadata part of the create-agent-version-from-code request.\nFollows the same `definition` pattern as CreateAgentVersionRequest for consistency.",
+        "description": "JSON metadata for creating a new code-based agent.\nExtends CreateAgentVersionFromCodeRequest with a required `name` field since\n`POST /agents` does not have `agent_name` in the URL path.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "CodeAgents=V1Preview"
@@ -11528,6 +11560,63 @@
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
             "WorkflowAgents=V1Preview",
+            "CodeAgents=V1Preview"
+          ]
+        }
+      },
+      "CreateAgentVersionFromCodeContent": {
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CreateAgentVersionFromCodeRequest"
+              }
+            ],
+            "description": "JSON metadata including description and hosted definition."
+          },
+          "code": {
+            "type": "string",
+            "format": "binary",
+            "description": "The code zip file (max 250 MB)."
+          }
+        },
+        "required": [
+          "metadata",
+          "code"
+        ]
+      },
+      "CreateAgentVersionFromCodeRequest": {
+        "type": "object",
+        "required": [
+          "definition"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "A human-readable description of the agent."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+            "x-oaiTypeLabel": "map"
+          },
+          "definition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HostedAgentDefinition"
+              }
+            ],
+            "description": "The hosted agent definition including code_configuration (runtime, entry_point, content_hash), cpu, memory, and protocol_versions."
+          }
+        },
+        "description": "JSON metadata for code-based agent version operations (update agent, create version).\nThe agent name comes from the URL path parameter, so it is not included here.\nFollows the same `definition` pattern as CreateAgentVersionRequest for consistency.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
             "CodeAgents=V1Preview"
           ]
         }
