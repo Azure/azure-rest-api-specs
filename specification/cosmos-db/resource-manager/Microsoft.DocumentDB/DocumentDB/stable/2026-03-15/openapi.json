@@ -3435,6 +3435,516 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraRoleAssignments": {
+      "get": {
+        "operationId": "CassandraResources_ListCassandraRoleAssignments",
+        "description": "Retrieves the list of all Azure Cosmos DB Cassandra Role Assignments.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBCassandraRoleAssignmentList": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleAssignmentList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraRoleAssignments/{roleAssignmentId}": {
+      "get": {
+        "operationId": "CassandraResources_GetCassandraRoleAssignment",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Cassandra Role Assignment with the given Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The GUID for the Role Assignment.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraRoleAssignmentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBCassandraRoleAssignmentGet": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleAssignmentGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CassandraResources_CreateUpdateCassandraRoleAssignment",
+        "description": "Creates or updates an Azure Cosmos DB Cassandra Role Assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The GUID for the Role Assignment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createUpdateCassandraRoleAssignmentParameters",
+            "in": "body",
+            "description": "The properties required to create or update a Role Assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CassandraRoleAssignmentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CassandraRoleAssignmentResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CassandraRoleAssignmentResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBCassandraRoleAssignmentCreateUpdate": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleAssignmentCreateUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/CassandraRoleAssignmentResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CassandraResources_DeleteCassandraRoleAssignment",
+        "description": "Deletes an existing Azure Cosmos DB Cassandra Role Assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The GUID for the Role Assignment.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBCassandraRoleAssignmentDelete": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleAssignmentDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraRoleDefinitions": {
+      "get": {
+        "operationId": "CassandraResources_ListCassandraRoleDefinitions",
+        "description": "Retrieves the list of all Azure Cosmos DB Cassandra Role Definitions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraRoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBCassandraRoleDefinitionList": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleDefinitionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraRoleDefinitions/{roleDefinitionId}": {
+      "get": {
+        "operationId": "CassandraResources_GetCassandraRoleDefinition",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Cassandra Role Definition with the given Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The GUID for the Role Definition.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraRoleDefinitionResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBCassandraRoleDefinitionGet": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleDefinitionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CassandraResources_CreateUpdateCassandraRoleDefinition",
+        "description": "Creates or updates an Azure Cosmos DB Cassandra Role Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The GUID for the Role Definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createUpdateCassandraRoleDefinitionParameters",
+            "in": "body",
+            "description": "The properties required to create or update a Role Definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CassandraRoleDefinitionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CassandraRoleDefinitionResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CassandraRoleDefinitionResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBCassandraRoleDefinitionCreateUpdate": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleDefinitionCreateUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/CassandraRoleDefinitionResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CassandraResources_DeleteCassandraRoleDefinition",
+        "description": "Deletes an existing Azure Cosmos DB Cassandra Role Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The GUID for the Role Definition.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBCassandraRoleDefinitionDelete": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleDefinitionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metricDefinitions": {
       "get": {
         "operationId": "Collection_ListMetricDefinitions",
@@ -5342,6 +5852,516 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinRoleAssignments": {
+      "get": {
+        "operationId": "GremlinResources_ListGremlinRoleAssignments",
+        "description": "Retrieves the list of all Azure Cosmos DB Gremlin Role Assignments.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleAssignmentList": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleAssignmentList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinRoleAssignments/{roleAssignmentId}": {
+      "get": {
+        "operationId": "GremlinResources_GetGremlinRoleAssignment",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Gremlin Role Assignment with the given Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The GUID for the Role Assignment.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleAssignmentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleAssignmentGet": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleAssignmentGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GremlinResources_CreateUpdateGremlinRoleAssignment",
+        "description": "Creates or updates an Azure Cosmos DB Gremlin Role Assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The GUID for the Role Assignment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createUpdateGremlinRoleAssignmentParameters",
+            "in": "body",
+            "description": "The properties required to create or update a Role Assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleAssignmentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GremlinRoleAssignmentResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleAssignmentResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleAssignmentCreateUpdate": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleAssignmentCreateUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GremlinRoleAssignmentResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GremlinResources_DeleteGremlinRoleAssignment",
+        "description": "Deletes an existing Azure Cosmos DB Gremlin Role Assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The GUID for the Role Assignment.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleAssignmentDelete": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleAssignmentDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinRoleDefinitions": {
+      "get": {
+        "operationId": "GremlinResources_ListGremlinRoleDefinitions",
+        "description": "Retrieves the list of all Azure Cosmos DB Gremlin Role Definitions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleDefinitionList": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleDefinitionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinRoleDefinitions/{roleDefinitionId}": {
+      "get": {
+        "operationId": "GremlinResources_GetGremlinRoleDefinition",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Gremlin Role Definition with the given Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The GUID for the Role Definition.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleDefinitionResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleDefinitionGet": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleDefinitionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GremlinResources_CreateUpdateGremlinRoleDefinition",
+        "description": "Creates or updates an Azure Cosmos DB Gremlin Role Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The GUID for the Role Definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createUpdateGremlinRoleDefinitionParameters",
+            "in": "body",
+            "description": "The properties required to create or update a Role Definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleDefinitionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GremlinRoleDefinitionResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleDefinitionResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleDefinitionCreateUpdate": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleDefinitionCreateUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GremlinRoleDefinitionResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GremlinResources_DeleteGremlinRoleDefinition",
+        "description": "Deletes an existing Azure Cosmos DB Gremlin Role Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The GUID for the Role Definition.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleDefinitionDelete": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleDefinitionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listConnectionStrings": {
       "post": {
         "operationId": "DatabaseAccounts_ListConnectionStrings",
@@ -5540,6 +6560,516 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongoMIRoleAssignments": {
+      "get": {
+        "operationId": "MongoMIResources_ListMongoMIRoleAssignments",
+        "description": "Retrieves the list of all Azure Cosmos DB MongoMI Role Assignments.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoMIRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBMongoMIRoleAssignmentList": {
+            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleAssignmentList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongoMIRoleAssignments/{roleAssignmentId}": {
+      "get": {
+        "operationId": "MongoMIResources_GetMongoMIRoleAssignment",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB MongoMI Role Assignment with the given Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The GUID for the Role Assignment.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoMIRoleAssignmentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBMongoMIRoleAssignmentGet": {
+            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleAssignmentGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MongoMIResources_CreateUpdateMongoMIRoleAssignment",
+        "description": "Creates or updates an Azure Cosmos DB MongoMI Role Assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The GUID for the Role Assignment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createUpdateMongoMIRoleAssignmentParameters",
+            "in": "body",
+            "description": "The properties required to create or update a Role Assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MongoMIRoleAssignmentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MongoMIRoleAssignmentResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MongoMIRoleAssignmentResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBMongoMIRoleAssignmentCreateUpdate": {
+            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleAssignmentCreateUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MongoMIRoleAssignmentResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "MongoMIResources_DeleteMongoMIRoleAssignment",
+        "description": "Deletes an existing Azure Cosmos DB MongoMI Role Assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The GUID for the Role Assignment.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBMongoMIRoleAssignmentDelete": {
+            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleAssignmentDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongoMIRoleDefinitions": {
+      "get": {
+        "operationId": "MongoMIResources_ListMongoMIRoleDefinitions",
+        "description": "Retrieves the list of all Azure Cosmos DB MongoMI Role Definitions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoMIRoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBMongoMIRoleDefinitionList": {
+            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleDefinitionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongoMIRoleDefinitions/{roleDefinitionId}": {
+      "get": {
+        "operationId": "MongoMIResources_GetMongoMIRoleDefinition",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB MongoMI Role Definition with the given Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The GUID for the Role Definition.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoMIRoleDefinitionResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBMongoMIRoleDefinitionGet": {
+            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleDefinitionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MongoMIResources_CreateUpdateMongoMIRoleDefinition",
+        "description": "Creates or updates an Azure Cosmos DB MongoMI Role Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The GUID for the Role Definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createUpdateMongoMIRoleDefinitionParameters",
+            "in": "body",
+            "description": "The properties required to create or update a Role Definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MongoMIRoleDefinitionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MongoMIRoleDefinitionResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MongoMIRoleDefinitionResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBMongoMIRoleDefinitionCreateUpdate": {
+            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleDefinitionCreateUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MongoMIRoleDefinitionResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "MongoMIResources_DeleteMongoMIRoleDefinition",
+        "description": "Deletes an existing Azure Cosmos DB MongoMI Role Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The GUID for the Role Definition.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBMongoMIRoleDefinitionDelete": {
+            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleDefinitionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases": {
@@ -12060,6 +13590,511 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tableRoleAssignments": {
+      "get": {
+        "operationId": "TableResources_ListTableRoleAssignments",
+        "description": "Retrieves the list of all Azure Cosmos DB Table Role Assignments.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TableRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBTableRoleAssignmentList": {
+            "$ref": "./examples/tablerbac/CosmosDBTableRoleAssignmentList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tableRoleAssignments/{roleAssignmentId}": {
+      "get": {
+        "operationId": "TableResources_GetTableRoleAssignment",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Table Role Assignment with the given Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The GUID for the Role Assignment.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TableRoleAssignmentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBTableRoleAssignmentGet": {
+            "$ref": "./examples/tablerbac/CosmosDBTableRoleAssignmentGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TableResources_CreateUpdateTableRoleAssignment",
+        "description": "Creates or updates an Azure Cosmos DB Table Role Assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The GUID for the Role Assignment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createUpdateTableRoleAssignmentParameters",
+            "in": "body",
+            "description": "The properties required to create or update a Role Assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TableRoleAssignmentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TableRoleAssignmentResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TableRoleAssignmentResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBTableRoleAssignmentCreateUpdate": {
+            "$ref": "./examples/tablerbac/CosmosDBTableRoleAssignmentCreateUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TableRoleAssignmentResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "TableResources_DeleteTableRoleAssignment",
+        "description": "Deletes an existing Azure Cosmos DB Table Role Assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "description": "The GUID for the Role Assignment.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBTableRoleAssignmentDelete": {
+            "$ref": "./examples/tablerbac/CosmosDBTableRoleAssignmentDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tableRoleDefinitions": {
+      "get": {
+        "operationId": "TableResources_ListTableRoleDefinitions",
+        "description": "Retrieves the list of all Azure Cosmos DB Table Role Definitions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TableRoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBTableRoleDefinitionList": {
+            "$ref": "./examples/tablerbac/CosmosDBTableRoleDefinitionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tableRoleDefinitions/{roleDefinitionId}": {
+      "get": {
+        "operationId": "TableResources_GetTableRoleDefinition",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Table Role Definition with the given Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The GUID for the Role Definition.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TableRoleDefinitionResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBTableRoleDefinitionGet": {
+            "$ref": "./examples/tablerbac/CosmosDBTableRoleDefinitionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TableResources_CreateUpdateTableRoleDefinition",
+        "description": "Creates or updates an Azure Cosmos DB Table Role Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The GUID for the Role Definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createUpdateTableRoleDefinitionParameters",
+            "in": "body",
+            "description": "The properties required to create or update a Role Definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TableRoleDefinitionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TableRoleDefinitionResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TableRoleDefinitionResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBTableRoleDefinitionCreateUpdate": {
+            "$ref": "./examples/tablerbac/CosmosDBTableRoleDefinitionCreateUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TableRoleDefinitionResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "TableResources_DeleteTableRoleDefinition",
+        "description": "Deletes an existing Azure Cosmos DB Table Role Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The GUID for the Role Definition.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBTableRoleDefinitionDelete": {
+            "$ref": "./examples/tablerbac/CosmosDBTableRoleDefinitionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables": {
       "get": {
         "operationId": "TableResources_ListTables",
@@ -14541,6 +16576,135 @@
         "name": {
           "type": "string",
           "description": "Name of the Cosmos DB Cassandra table partition key"
+        }
+      }
+    },
+    "CassandraRoleAssignmentListResult": {
+      "type": "object",
+      "description": "The response of a CassandraRoleAssignmentResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CassandraRoleAssignmentResource items on this page",
+          "items": {
+            "$ref": "#/definitions/CassandraRoleAssignmentResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CassandraRoleAssignmentResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB Cassandra Role Assignment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CassandraRoleAssignmentResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB Cassandra Role Assignment.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CassandraRoleAssignmentResourceProperties": {
+      "type": "object",
+      "description": "Azure Cosmos DB Cassandra Role Assignment resource object.",
+      "properties": {
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The unique identifier for the associated Role Definition."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The data plane resource path for which access is being granted through this Cassandra Role Assignment."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The unique identifier for the associated AAD principal in the AAD graph to which access is being granted through this Cassandra Role Assignment. Tenant ID for the principal is inferred using the tenant associated with the subscription."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "CassandraRoleDefinitionListResult": {
+      "type": "object",
+      "description": "The response of a CassandraRoleDefinitionResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CassandraRoleDefinitionResource items on this page",
+          "items": {
+            "$ref": "#/definitions/CassandraRoleDefinitionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CassandraRoleDefinitionResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB Cassandra Role Definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CassandraRoleDefinitionResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB Cassandra Role Definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CassandraRoleDefinitionResourceProperties": {
+      "type": "object",
+      "description": "Azure Cosmos DB Cassandra Role Definition resource object.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The path id for the Role Definition."
+        },
+        "roleName": {
+          "type": "string",
+          "description": "A user-friendly name for the Role Definition. Must be unique for the database account."
+        },
+        "type": {
+          "$ref": "#/definitions/RoleDefinitionType",
+          "description": "Indicates whether the Role Definition was built-in or user created."
+        },
+        "assignableScopes": {
+          "type": "array",
+          "description": "A set of fully qualified Scopes at or below which Cassandra Role Assignments may be created using this Role Definition. This will allow application of this Role Definition on the entire database account or any underlying Database / Collection. Must have at least one element. Scopes higher than Database account are not enforceable as assignable Scopes. Note that resources referenced in assignable Scopes need not exist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "permissions": {
+          "type": "array",
+          "description": "The set of operations allowed through this Role Definition.",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          }
         }
       }
     },
@@ -17732,6 +19896,135 @@
         "id"
       ]
     },
+    "GremlinRoleAssignmentListResult": {
+      "type": "object",
+      "description": "The response of a GremlinRoleAssignmentResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GremlinRoleAssignmentResource items on this page",
+          "items": {
+            "$ref": "#/definitions/GremlinRoleAssignmentResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GremlinRoleAssignmentResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB Gremlin Role Assignment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GremlinRoleAssignmentResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB Gremlin Role Assignment.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GremlinRoleAssignmentResourceProperties": {
+      "type": "object",
+      "description": "Azure Cosmos DB Gremlin Role Assignment resource object.",
+      "properties": {
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The unique identifier for the associated Role Definition."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The data plane resource path for which access is being granted through this Gremlin Role Assignment."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The unique identifier for the associated AAD principal in the AAD graph to which access is being granted through this Gremlin Role Assignment. Tenant ID for the principal is inferred using the tenant associated with the subscription."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "GremlinRoleDefinitionListResult": {
+      "type": "object",
+      "description": "The response of a GremlinRoleDefinitionResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GremlinRoleDefinitionResource items on this page",
+          "items": {
+            "$ref": "#/definitions/GremlinRoleDefinitionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GremlinRoleDefinitionResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB Gremlin Role Definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GremlinRoleDefinitionResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB Gremlin Role Definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GremlinRoleDefinitionResourceProperties": {
+      "type": "object",
+      "description": "Azure Cosmos DB Gremlin Role Definition resource object.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The path id for the Role Definition."
+        },
+        "roleName": {
+          "type": "string",
+          "description": "A user-friendly name for the Role Definition. Must be unique for the database account."
+        },
+        "type": {
+          "$ref": "#/definitions/RoleDefinitionType",
+          "description": "Indicates whether the Role Definition was built-in or user created."
+        },
+        "assignableScopes": {
+          "type": "array",
+          "description": "A set of fully qualified Scopes at or below which Gremlin Role Assignments may be created using this Role Definition. This will allow application of this Role Definition on the entire database account or any underlying Database / Collection. Must have at least one element. Scopes higher than Database account are not enforceable as assignable Scopes. Note that resources referenced in assignable Scopes need not exist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "permissions": {
+          "type": "array",
+          "description": "The set of operations allowed through this Role Definition.",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          }
+        }
+      }
+    },
     "IncludedPath": {
       "type": "object",
       "description": "The paths that are included in indexing",
@@ -19017,6 +21310,135 @@
         "unique": {
           "type": "boolean",
           "description": "Is unique or not"
+        }
+      }
+    },
+    "MongoMIRoleAssignmentListResult": {
+      "type": "object",
+      "description": "The response of a MongoMIRoleAssignmentResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MongoMIRoleAssignmentResource items on this page",
+          "items": {
+            "$ref": "#/definitions/MongoMIRoleAssignmentResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MongoMIRoleAssignmentResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB MongoMI Role Assignment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MongoMIRoleAssignmentResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB MongoMI Role Assignment.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MongoMIRoleAssignmentResourceProperties": {
+      "type": "object",
+      "description": "Azure Cosmos DB MongoMI Role Assignment resource object.",
+      "properties": {
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The unique identifier for the associated Role Definition."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The data plane resource path for which access is being granted through this MongoMI Role Assignment."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The unique identifier for the associated AAD principal in the AAD graph to which access is being granted through this MongoMI Role Assignment. Tenant ID for the principal is inferred using the tenant associated with the subscription."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "MongoMIRoleDefinitionListResult": {
+      "type": "object",
+      "description": "The response of a MongoMIRoleDefinitionResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MongoMIRoleDefinitionResource items on this page",
+          "items": {
+            "$ref": "#/definitions/MongoMIRoleDefinitionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MongoMIRoleDefinitionResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB MongoMI Role Definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MongoMIRoleDefinitionResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB MongoMI Role Definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MongoMIRoleDefinitionResourceProperties": {
+      "type": "object",
+      "description": "Azure Cosmos DB MongoMI Role Definition resource object.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The path id for the Role Definition."
+        },
+        "roleName": {
+          "type": "string",
+          "description": "A user-friendly name for the Role Definition. Must be unique for the database account."
+        },
+        "type": {
+          "$ref": "#/definitions/RoleDefinitionType",
+          "description": "Indicates whether the Role Definition was built-in or user created."
+        },
+        "assignableScopes": {
+          "type": "array",
+          "description": "A set of fully qualified Scopes at or below which MongoMI Role Assignments may be created using this Role Definition. This will allow application of this Role Definition on the entire database account or any underlying Database / Collection. Must have at least one element. Scopes higher than Database account are not enforceable as assignable Scopes. Note that resources referenced in assignable Scopes need not exist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "permissions": {
+          "type": "array",
+          "description": "The set of operations allowed through this Role Definition.",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          }
         }
       }
     },
@@ -22745,6 +25167,135 @@
       "required": [
         "id"
       ]
+    },
+    "TableRoleAssignmentListResult": {
+      "type": "object",
+      "description": "The response of a TableRoleAssignmentResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TableRoleAssignmentResource items on this page",
+          "items": {
+            "$ref": "#/definitions/TableRoleAssignmentResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TableRoleAssignmentResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB Table Role Assignment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TableRoleAssignmentResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB Table Role Assignment.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TableRoleAssignmentResourceProperties": {
+      "type": "object",
+      "description": "Azure Cosmos DB Table Role Assignment resource object.",
+      "properties": {
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The unique identifier for the associated Role Definition."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The data plane resource path for which access is being granted through this Table Role Assignment."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The unique identifier for the associated AAD principal in the AAD graph to which access is being granted through this Table Role Assignment. Tenant ID for the principal is inferred using the tenant associated with the subscription."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "TableRoleDefinitionListResult": {
+      "type": "object",
+      "description": "The response of a TableRoleDefinitionResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TableRoleDefinitionResource items on this page",
+          "items": {
+            "$ref": "#/definitions/TableRoleDefinitionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TableRoleDefinitionResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB Table Role Definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TableRoleDefinitionResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB Table Role Definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TableRoleDefinitionResourceProperties": {
+      "type": "object",
+      "description": "Azure Cosmos DB Table Role Definition resource object.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The path id for the Role Definition."
+        },
+        "roleName": {
+          "type": "string",
+          "description": "A user-friendly name for the Role Definition. Must be unique for the database account."
+        },
+        "type": {
+          "$ref": "#/definitions/RoleDefinitionType",
+          "description": "Indicates whether the Role Definition was built-in or user created."
+        },
+        "assignableScopes": {
+          "type": "array",
+          "description": "A set of fully qualified Scopes at or below which Table Role Assignments may be created using this Role Definition. This will allow application of this Role Definition on the entire database account or any underlying Database / Collection. Must have at least one element. Scopes higher than Database account are not enforceable as assignable Scopes. Note that resources referenced in assignable Scopes need not exist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "permissions": {
+          "type": "array",
+          "description": "The set of operations allowed through this Role Definition.",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          }
+        }
+      }
     },
     "ThroughputBucketResource": {
       "type": "object",
