@@ -54,7 +54,8 @@ interface BackupItemOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface BackupItems {
   /**
    * Description for Gets a backup of an app by its ID.
@@ -143,7 +144,8 @@ interface BackupItemOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface BackupItemOperationGroup {
   /**
    * Description for Gets a backup of an app by its ID.
