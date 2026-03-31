@@ -3499,6 +3499,9 @@
           }
         },
         "x-ms-examples": {
+          "ClusterJobs_Get_AddServerJob": {
+            "$ref": "./examples/ClusterJobs_Get_AddServerJob.json"
+          },
           "ClusterJobs_Get_ConfigureArcGatewayJob": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureArcGatewayJob.json"
           },
@@ -3510,6 +3513,9 @@
           },
           "ClusterJobs_Get_GpuSwitchModeJob": {
             "$ref": "./examples/ClusterJobs_Get_GpuSwitchModeJob.json"
+          },
+          "ClusterJobs_Get_RepairServerJob": {
+            "$ref": "./examples/ClusterJobs_Get_RepairServerJob.json"
           },
           "ClusterJobs_Get_VmConnectProvisionJob": {
             "$ref": "./examples/ClusterJobs_Get_VmConnectProvisionJob.json"
@@ -3592,6 +3598,9 @@
           }
         },
         "x-ms-examples": {
+          "ClusterJobs_CreateOrUpdate_AddServerJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_AddServer.json"
+          },
           "ClusterJobs_CreateOrUpdate_ConfigureArcGatewayJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureArcGateway.json"
           },
@@ -3606,6 +3615,9 @@
           },
           "ClusterJobs_CreateOrUpdate_GpuSwitchModeJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_GpuSwitchMode.json"
+          },
+          "ClusterJobs_CreateOrUpdate_RepairServerJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_RepairServer.json"
           },
           "ClusterJobs_CreateOrUpdate_VmConnectProvisionJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_VmConnectProvision.json"
@@ -9449,6 +9461,34 @@
           }
         ]
       }
+    },
+    "AddServerJobServerDetails": {
+      "type": "object",
+      "description": "Details of servers to be added to the cluster",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Name of server to be added to cluster."
+        },
+        "hostIpv4Address": {
+          "type": "string",
+          "description": "Ip address of server to be added to cluster."
+        },
+        "localAvailabilityZoneName": {
+          "type": "string",
+          "description": "Local availability zone name of server to be added to rack aware cluster."
+        },
+        "serverResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource id of machine part of cluster for which job will be triggered."
+        }
+      },
+      "required": [
+        "serverName",
+        "hostIpv4Address",
+        "serverResourceId"
+      ]
     },
     "ApplyConfigurationNetworkAdapterJobProperties": {
       "type": "object",
@@ -15764,6 +15804,51 @@
         }
       }
     },
+    "HciAddServerJobProperties": {
+      "type": "object",
+      "description": "Properties for adding a server in the cluster.",
+      "properties": {
+        "addServerJobServerDetails": {
+          "type": "array",
+          "description": "Details of servers to be added to the cluster",
+          "items": {
+            "$ref": "#/definitions/AddServerJobServerDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "secrets": {
+          "type": "array",
+          "description": "List of protected parameters to pass to trigger the job for the cluster.",
+          "items": {
+            "$ref": "#/definitions/EceDeploymentSecrets"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
+        },
+        "witnessType": {
+          "type": "string",
+          "description": "Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. Only allowed values are 'Cloud', 'FileShare'"
+        },
+        "witnessPath": {
+          "type": "string",
+          "description": "Specify the fileshare path for the local witness for your Azure Stack HCI cluster."
+        },
+        "cloudAccountName": {
+          "type": "string",
+          "description": "Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster."
+        }
+      },
+      "required": [
+        "addServerJobServerDetails"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AddServer"
+    },
     "HciCollectLogJobProperties": {
       "type": "object",
       "description": "Represents the properties of an HCI Collect Log job.",
@@ -16260,6 +16345,8 @@
       "type": "string",
       "description": "ClusterJob Type supported.",
       "enum": [
+        "AddServer",
+        "RepairServer",
         "ConfigureArcGateway",
         "GpuCreatePartition",
         "GpuSwitchMode",
@@ -16272,6 +16359,16 @@
         "name": "HciJobType",
         "modelAsString": true,
         "values": [
+          {
+            "name": "AddServer",
+            "value": "AddServer",
+            "description": "Job to add a server to the cluster."
+          },
+          {
+            "name": "RepairServer",
+            "value": "RepairServer",
+            "description": "Job to repair a server in the cluster."
+          },
           {
             "name": "ConfigureArcGateway",
             "value": "ConfigureArcGateway",
@@ -16508,6 +16605,39 @@
         }
       ],
       "x-ms-discriminator-value": "RemoteSupport"
+    },
+    "HciRepairServerJobProperties": {
+      "type": "object",
+      "description": "Properties for repairing a server in the cluster.",
+      "properties": {
+        "repairServerJobServerDetails": {
+          "type": "array",
+          "description": "Details of servers to be repaired in the cluster",
+          "items": {
+            "$ref": "#/definitions/RepairServerJobServerDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "secrets": {
+          "type": "array",
+          "description": "List of protected parameters to pass to trigger job for cluster.",
+          "items": {
+            "$ref": "#/definitions/EceDeploymentSecrets"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
+        }
+      },
+      "required": [
+        "repairServerJobServerDetails"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "RepairServer"
     },
     "HciReportedProperties": {
       "type": "object",
@@ -20435,6 +20565,24 @@
         }
       ],
       "x-ms-discriminator-value": "RemovePartition"
+    },
+    "RepairServerJobServerDetails": {
+      "type": "object",
+      "description": "Details of servers to be repaired in the cluster",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Name of server to be repaired in cluster."
+        },
+        "serverResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource id of Arc machine part of cluster for which job will be triggered."
+        }
+      },
+      "required": [
+        "serverName"
+      ]
     },
     "ReportedProperties": {
       "type": "object",
