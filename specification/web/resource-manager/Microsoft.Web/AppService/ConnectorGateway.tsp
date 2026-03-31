@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.Web;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Matching AiGateway pattern - no provisioning state"
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_05_01_preview)
 @doc("The properties of a connector gateway.")
 model ConnectorGatewayProperties {
   @doc("The description of the resource.")
@@ -22,7 +22,7 @@ model ConnectorGatewayProperties {
   gatewayId?: string;
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_05_01_preview)
 @doc("A connector gateway resource.")
 model ConnectorGateway
   is Azure.ResourceManager.TrackedResource<ConnectorGatewayProperties> {
@@ -34,7 +34,7 @@ model ConnectorGateway
   name: string;
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_05_01_preview)
 @armResourceOperations
 @doc("The operations of connector gateways.")
 interface ConnectorGateways {
