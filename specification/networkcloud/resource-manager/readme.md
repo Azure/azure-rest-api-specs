@@ -134,8 +134,120 @@ input-file:
 suppressions:
   - code: PatchBodyParametersSchema
     from: networkcloud.json
-    reason: Nested objects that share a structure with PUT have required fields. The required field is present in the patch structure as well, because it reuses types. The nested structure needs to be updated in full by the user.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}"].patch.parameters[4].schema.properties.properties
+    reason: Patch schema reuses shared definitions with required or defaulted properties. Legacy API elements.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}"].patch.parameters[6].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    from: networkcloud.json
+    reason: Patch schema reuses shared definitions with required or defaulted properties. Legacy API elements.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}"].patch.parameters[6].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    from: networkcloud.json
+    reason: Patch schema reuses shared definitions with required or defaulted properties. Legacy API elements.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/consoles/{consoleName}"].patch.parameters[7].schema.properties.properties
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/cordon"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/powerOff"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/reimage"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/replace"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/restart"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/runCommand"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/runDataExtracts"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/runDataExtractsRestricted"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/runReadCommands"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/start"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/uncordon"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusterManagers/{clusterManagerName}/updateRelayPrivateEndpointConnection"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/continueUpdateVersion"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/deploy"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/inspect"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/scanRuntime"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/updateVersion"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/kubernetesClusters/{kubernetesClusterName}/restartNode"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/storageAppliances/{storageApplianceName}/disableRemoteVendorManagement"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/storageAppliances/{storageApplianceName}/enableRemoteVendorManagement"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/storageAppliances/{storageApplianceName}/runReadCommands"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/assignRelay"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/powerOff"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/reimage"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/restart"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/start"].post
 ```
 
 ### Tag: package-2026-01-01-preview
@@ -148,17 +260,122 @@ input-file:
 suppressions:
   - code: PatchBodyParametersSchema
     from: networkcloud.json
-    reason: Nested objects that share a structure with PUT have required fields. The required field is present in the patch structure as well, because it reuses types. The nested structure needs to be updated in full by the user.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}"].patch.parameters[4].schema.properties.properties
+    reason: Patch schema reuses shared definitions with required or defaulted properties. Legacy API elements.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}"].patch.parameters[6].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    from: networkcloud.json
+    reason: Patch schema reuses shared definitions with required or defaulted properties. Legacy API elements.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}"].patch.parameters[6].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    from: networkcloud.json
+    reason: Patch schema reuses shared definitions with required or defaulted properties. Legacy API elements.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/consoles/{consoleName}"].patch.parameters[7].schema.properties.properties
   - code: PostResponseCodes
     from: networkcloud.json
-    reason: Long-running POST operation that returns 202 without a schema. This is a valid response code for this operation. Spec previously reviewed and approved in private repo; public spec must match for consistency.
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/cordon"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/powerOff"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/reimage"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/replace"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/restart"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/runCommand"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/runDataExtracts"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/runDataExtractsRestricted"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/runReadCommands"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/start"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/uncordon"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusterManagers/{clusterManagerName}/updateRelayPrivateEndpointConnection"].post
   - code: PostResponseCodes
     from: networkcloud.json
-    reason: Long-running POST operation that returns 202 without a schema. This is a valid response code for this operation. Spec previously reviewed and approved in private repo; public spec must match for consistency.
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/continueUpdateVersion"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/deploy"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/inspect"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/scanRuntime"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/updateVersion"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/kubernetesClusters/{kubernetesClusterName}/restartNode"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/storageAppliances/{storageApplianceName}/disableRemoteVendorManagement"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/storageAppliances/{storageApplianceName}/enableRemoteVendorManagement"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/storageAppliances/{storageApplianceName}/runReadCommands"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/assignRelay"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/powerOff"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/reimage"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/restart"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: False positive - properly using final-state-schema. Pending lintdiff fix.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/start"].post
 ```
+
 ---
 
 # Code Generation

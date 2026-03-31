@@ -1,0 +1,15 @@
+# Suppressions for Machine Learning Services data-plane specs
+# These are internal data-plane APIs that were migrated from hand-written Swagger to TypeSpec.
+# The generated OpenAPI specs do not contain x-ms-examples since the TypeSpec examples/ folders are empty.
+
+- tool: Swagger ModelValidation
+  paths:
+    - DatasetDataplane/stable/1.5.0/dataset-dataplane.json
+    - ModelDataplane/stable/1.0.0/model-dataplane.json
+    - RegistryDiscovery/stable/v1.0/registry-discovery.json
+    - RunHistory/stable/v1.0/run-history.json
+    - WorkspaceDataplane/preview/2023-06-01-preview/workspace-dataplane.json
+  reason: >
+    These internal data-plane APIs were migrated from hand-written Swagger to TypeSpec.
+    The TypeSpec-generated OpenAPI specs do not yet contain x-ms-examples.
+    Examples will be added in a follow-up iteration.

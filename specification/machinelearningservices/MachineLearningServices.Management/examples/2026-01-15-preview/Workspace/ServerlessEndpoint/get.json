@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2026-01-15-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "UserAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "authMode": "Key",
+          "contentSafety": {
+            "contentSafetyLevel": "Blocking",
+            "contentSafetyStatus": "Enabled"
+          },
+          "endpointState": "Suspending",
+          "inferenceEndpoint": {
+            "headers": {
+              "string": "string"
+            },
+            "uri": "https://www.contoso.com/example"
+          },
+          "marketplaceSubscriptionId": "string",
+          "modelSettings": {
+            "modelId": "string"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Premium"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:13",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:13",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ServerlessEndpoints_Get",
+  "title": "Get Workspace Serverless Endpoint."
+}

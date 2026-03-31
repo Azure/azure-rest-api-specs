@@ -11,7 +11,7 @@ options:
     emit-lro-options: "all"
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.RecoveryServicesBackup"
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.RecoveryServicesBackup"
+    emitter-output-dir: "{output-dir}/sdk/recoveryservices-backup/Azure.ResourceManager.RecoveryServicesBackup"
   "@azure-tools/typespec-python":
     service-dir: "sdk/recoveryservices"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-recoveryservicesbackup"
@@ -26,6 +26,7 @@ options:
     flavor: azure
     use-object-for-unknown: true
   "@azure-tools/typespec-ts":
+    compatibility-lro: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-recoveryservicesbackup"
     flavor: azure
     experimental-extensible-enums: true

@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/specs-shared",
-  "private": "true",
+  "private": true,
   "type": "module",
   "exports": {
     "./array": "./src/array.js",
@@ -49,7 +49,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.0.0",
     "@types/semver": "^7.7.1",
-    "@vitest/coverage-v8": "^4.0.15",
+    "@vitest/coverage-v8": "^4.1.0",
     "cross-env": "^10.1.0",
     "eslint": "^10.0.0",
     "globals": "^17.0.0",
@@ -59,10 +59,10 @@
     "tinybench": "^6.0.0",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.56.0",
-    "vitest": "^4.0.15"
+    "vitest": "^4.1.0"
   },
   "scripts": {
-    "check": "npm run lint && npm run format:check && npm run test:ci",
+    "check": "npm run test:ci && npm run lint && npm run format:check",
     "lint": "npm run lint:eslint && npm run lint:tsc",
     "lint:eslint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
     "lint:tsc": "tsc --build --verbose",
