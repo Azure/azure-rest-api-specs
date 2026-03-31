@@ -90,7 +90,6 @@ interface SloView {
   @doc("Returns preview data for the signal.")
   sliSignalPreview(
     ...ServiceGroupBaseParameters,
-
     ...Azure.ResourceManager.ApiVersionParameter,
 
     @body
